@@ -1,0 +1,43 @@
+<div class="list-group-item list-group-item-info rounded-0">
+        <div class="d-flex flex-row">
+            <h5>Source Type</h5>
+            <div class="ml-auto">
+                    <dexih-button-edit class="mr-1" *ngIf="datalinkForm.controls.sourceDatalinkTable.value.sourceType == eSourceType.Table && datalinkForm.controls.sourceDatalinkTable.value.sourceTableKey" [routerLink]="['table-edit', datalinkForm.controls.sourceDatalinkTable.value.sourceTableKey]"> Table</dexih-button-edit>
+                    <dexih-button-edit class="mr-1" *ngIf="datalinkForm.controls.sourceDatalinkTable.value.sourceType == eSourceType.Datalink && datalinkForm.controls.sourceDatalinkTable.value.sourceDatalinkKey" [routerLink]="['../../edit', datalinkForm.controls.sourceDatalinkTable.value.sourceDatalinkKey]"> Datalink</dexih-button-edit>
+                    <dexih-button-preview (click)="previewData()"></dexih-button-preview>
+                </div>
+            </div>
+    </div>
+    
+    
+<div class="container  mt-3 mb-3">
+<datalink-table *ngIf="datalinkForm" [datalinkTableForm]="datalinkForm.controls.sourceDatalinkTable"></datalink-table>
+</div>
+
+<div class="list-group-item list-group-item-info">
+        <div class="d-flex flex-row">
+            <h5>Columns</h5>
+    </div>
+</div>  
+
+<dexih-table     
+    [enableMultiSelect]="true"
+    [enableManualSort]="true"
+    (onSortChanged)="columnSortChange($event)"
+    [columns]="columns"
+    [dataObservable]="tableData"
+    (rowClick)="editColumn($event)">
+
+    <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+        <dexih-button-delete (click)="deleteSelected(items)" title="Delete selected columns"></dexih-button-delete>
+    </ng-template>
+
+    <ng-template #actions select="actionsTemplate" let-items="items">
+        <dexih-button-new (click)="newColumn()" title="Create a new column"></dexih-button-new>
+    </ng-template>
+
+    <ng-template #selectedItemAction select="selectedItemAction" let-item="item">
+        <dexih-button-edit (click)="editColumn(item)" title="Edit selected column"></dexih-button-edit>
+    </ng-template>
+    
+</dexih-table>

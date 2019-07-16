@@ -1,0 +1,75 @@
+<div *ngIf="selectQuery">
+    <div class="d-flex flex-wrap" *ngIf="selectColumns || sortColumns">
+        <div class="flex-fill" *ngIf="selectColumns">
+            <form-tags-dropdown labelLeft="Display Columns" [(ngModel)]="selectQuery.columns" [items]="selectColumns"
+                itemKey="column.name" itemName="column.logicalName" textEntryNote="Specify the columns to select."
+                [enableAddAll]="true">
+            </form-tags-dropdown>
+        </div>
+    
+        <div class="flex-fill ml-1" *ngIf="sortColumns">
+            <form-tags-dropdown labelLeft="Sort Columns" [(ngModel)]="selectQuery.sorts" [items]="sortColumns" itemKey="column.name" 
+                itemName="details" textEntryNote="Specify the columns to sort." [enableAddAll]="false">
+            </form-tags-dropdown>
+        </div>
+    </div>
+
+    <div class="d-flex flex-wrap pt-1" *ngIf="inputColumns && inputColumns.length > 0" >
+        <div class="input-group-text">
+            Default Input Values
+        </div>
+
+        <span *ngFor="let column of inputColumns; let i = index" class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    {{column.logicalName}}
+                </div>
+            </div>
+            <form-input name="column{{i}}" class="form-control p-0" [placeholder]="column.logicalName" [(ngModel)]="column.value"></form-input>
+        </span>
+    </div>
+
+    <div class="d-flex flex-wrap pt-1">
+        <div class="input-group-prepend">
+            <div class="input-group-text">
+                Filters
+            </div>
+        </div>
+
+        <form-checkbox class="flex-fill pl-1" label="All Rows" [(ngModel)]="allRows" (click)="selectAllRows()" [border]="true"></form-checkbox>
+        <form-input class="flex-fill pl-1" *ngIf="!allRows" labelLeft="Max Rows" placeholder="Maximum rows..." title="Specify the maximum rows to return" [(ngModel)]="selectQuery.rows"></form-input>
+        <dexih-button class="flex-fill pl-1" buttonClass="btn-outline-primary" (click)="addFilter(0)">Add Filter</dexih-button>
+    </div>
+
+    <div class="d-flex flex-wrap pt-1" *ngFor="let filter of selectQuery.filters; let i = index">
+        <div class="input-group">
+            <form-select [(ngModel)]="filter.compareDataType" [border]="false" class="form-control p-0" [items]="typeCodes" itemName="name" itemKey="key"
+                [enableTextEntry]="false">
+            </form-select>
+
+            <form-select [(ngModel)]="filter.column1" [border]="false" class="form-control p-0" [items]="columns" itemName="logicalName"
+                [(textValue)]="filter.value1" [enableTextEntry]="true" [enableTextEntryMatch]="false" textEntryNote="Enter a static value or select a column.">
+            </form-select>
+
+            <form-select [(ngModel)]="filter.operator" [items]="compare" itemKey="key" itemName="name" [border]="false" class="form-control p-0">
+            </form-select>
+
+            <form-select [(ngModel)]="filter.column2" [border]="false" class="form-control p-0" [items]="columns" itemName="logicalName"
+                [(textValue)]="filter.value2" [enableTextEntry]="true" [enableTextEntryMatch]="false" textEntryNote="Enter a static value or select a column.">
+            </form-select>
+
+            <div class="input-group-append">
+                <div class="input-group-text p-0">
+                    <button type="button" (click)="addFilter(i)" class="btn btn-sm border-0 rounded-0 bg-transparent" value="Add">
+                        <i class="fa fa-plus-square-o"></i>
+                    </button>
+                </div>
+                <div class="input-group-text p-0">
+                    <button type="button" (click)="removeFilter(i)" class="btn btn-sm border-0 rounded-0 bg-transparent" value="Remove">
+                        <i class="fa fa-minus-square-o"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

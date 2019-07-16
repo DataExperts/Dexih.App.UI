@@ -1,0 +1,372 @@
+﻿using System;
+using System.IO.Compression;
+using dexih.api.Hubs;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using dexih.api.Services;
+using dexih.repository;
+using Microsoft.AspNetCore.Antiforgery;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using dexih.api.Services.Remote;
+using dexih.api.Services.Message;
+using dexih.api.Services.Operations;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.Net.Http.Headers;
+using Newtonsoft.Json;
+using StackExchange.Redis;
+
+namespace dexih.api
+{
+    public class Startup
+    {
+	    
+	    private readonly ILogger _logger;
+
+	    public Startup(IConfiguration configuration, ILogger<Startup> logger)
+	    {
+		    Configuration = configuration;
+		    _logger = logger;
+	    }
+
+	    public IConfiguration Configuration { get; }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+//	        services.AddLogging(lb =>
+//	        {
+//		        lb.AddConfiguration(Configuration.GetSection("Logging"));
+//		        lb.AddDebug();
+//		        lb.AddAzureWebAppDiagnostics();
+//	        });
+//
+//	        services.Configure<AzureFileLoggerOptions>(options =>
+//	        {
+//		        options.FileName = "azure-diagnostics-";
+//		        options.FileSizeLimit = 50 * 1024;
+//		        options.RetainedFileCountLimit = 5;
+//	        }).Configure<AzureBlobLoggerOptions>(options =>
+//	        {
+//		        options.BlobName = "log.txt";
+//	        });
+
+	        var appSettings = Configuration.GetSection("AppSettings").Get<ApplicationSettings>();
+	        
+	        
+            // Add framework services.
+            //services.AddApplicationInsightsTelemetry(Configuration);
+
+			switch(appSettings.RepositoryType.ToLower())
+			{
+				case "sqlite":
+					services.AddDbContext<DexihRepositoryContext>(options =>
+						options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+					break;
+			    case "mysql":
+			        services.AddDbContext<DexihRepositoryContext>(options =>
+			            options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+			        break;
+				case "sqlserver":
+					services.AddDbContext<DexihRepositoryContext>(options =>
+                      options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+					break;
+				case "npgsql":
+				case "postgre":
+				case "postgresql":
+					services.AddEntityFrameworkNpgsql().AddDbContext<DexihRepositoryContext>(options =>
+  						options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+					break;
+				default:
+					throw new Exception("The repository type " + appSettings.RepositoryType + " was not recognised.  Use SqlServer, MySql, Npgsql or Sqlite");
+			}
+
+			services.AddScoped<DexihSignInManager, DexihSignInManager>();
+			services.AddScoped<ErrorLogger, ErrorLogger>();
+			
+			services.AddMemoryCache();
+
+			if (!string.IsNullOrEmpty(appSettings.RedisCacheConnectionString))
+			{
+				services.AddStackExchangeRedisCache(options =>
+				{
+					options.InstanceName = "dexih-cache";
+					options.Configuration = appSettings.RedisCacheConnectionString;
+				});
+				
+				var redis = ConnectionMultiplexer.Connect(appSettings.RedisCacheConnectionString);
+				services.AddDataProtection()
+					.PersistKeysToStackExchangeRedis(redis, "dexih-keys");
+
+			}
+			else
+			{
+				services.AddDistributedMemoryCache();
+			}
+			
+            services.Configure<RemoteAuthenticationProviderOptions>(options =>
+            {
+                options.TokenLifespan = TimeSpan.FromDays(10000);
+            });
+
+            // Angular's default header name for sending the XSRF token.
+            services.AddAntiforgery(options =>
+            {
+	            options.HeaderName = "X-XSRF-TOKEN";
+            });
+
+			// Add Identity services to the services container
+			services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+			{
+				//options.Cookies.ApplicationCookie.AccessDeniedPath = "/Home/AccessDenied";
+				options.Password.RequireNonAlphanumeric = false;
+				options.Password.RequireUppercase = false;
+			})
+			.AddEntityFrameworkStores<DexihRepositoryContext>()
+			.AddDefaultTokenProviders()
+			.AddTokenProvider<RemoteAuthenticationProvider<ApplicationUser>>("dexih-remote");
+
+	        // Not required as authentication handled by angular pages.
+	        services.AddAuthentication().AddCookie();
+
+
+	        if (appSettings.UseResponseCompression)
+	        {
+		        services.Configure<GzipCompressionProviderOptions>(options =>
+		        {
+			        options.Level = CompressionLevel.Optimal;
+		        });
+
+		        services.AddResponseCompression(options =>
+		        {
+			        options.EnableForHttps = true;
+			        options.Providers.Add<BrotliCompressionProvider>();
+		        });
+	        }
+
+	        services.AddResponseCaching();
+
+	        
+            // Add framework services.
+            services.AddMvc()
+	            .AddJsonOptions(options =>
+		            {
+			            // nulls ignored to ensure json fields such as createDate,updateDate get
+			            // default value rather than exception if not included in the api call.
+			            options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+		            });
+	        
+           
+            // Add message services.
+	        services.AddSingleton<IEmailSender, AuthMessageSender>();
+
+	        // add applications settings
+            services.AddSingleton(appSettings);
+
+            // Add remote agent connectivity service.
+            services.AddSingleton<IRemoteAgents, DexihRemoteAgents>();
+
+			// Add data reader service which is used to transmit data from remoteAgents
+//			services.AddSingleton<IDataReader, DexihDataReader>();
+
+	        // Add operations which allow controllers to interact with the repository.
+	        services.AddTransient<IDexihOperations, DexihOperations>();
+
+	        // use the signalr service if specified.
+	        var builder = services.AddSignalR();
+	        if (!string.IsNullOrEmpty(appSettings.SignalRConnectionString))
+	        {
+		        builder.AddAzureSignalR(appSettings.SignalRConnectionString);
+	        }
+	        else
+	        {
+		        if (!string.IsNullOrEmpty(appSettings.RedisCacheConnectionString))
+		        {
+			        builder.AddStackExchangeRedis(appSettings.RedisCacheConnectionString);
+		        }
+	        }
+        }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IAntiforgery antiforgery)
+		{
+//			var ll = Configuration.GetSection("Logging:LogLevel").GetValue<LogLevel>("Default");
+//            // loggerFactory.AddConsole();
+//            
+//			loggerFactory.AddDebug(ll);
+//
+//			loggerFactory.AddAzureWebAppDiagnostics(
+//              new AzureAppServicesDiagnosticsSettings
+//              { 
+//                  OutputTemplate = "{Timestamp:yyyy-MM-dd HH:mm:ss zzz} [{Level}] {RequestId}-{SourceContext}: {Message}{NewLine}{Exception}"
+//              }
+//            );
+
+			var appSettings = Configuration.GetSection("AppSettings").Get<ApplicationSettings>();
+			
+			_logger.LogInformation("Starting application at " + DateTime.Now + " with environment configuration: " + env.EnvironmentName);
+
+			if (appSettings.UseResponseCompression)
+			{
+				app.UseResponseCompression();
+			}
+
+			app.UseStaticFiles(new StaticFileOptions
+			{
+				OnPrepareResponse = ctx =>
+				{
+					var headers = ctx.Context.Response.GetTypedHeaders();
+					headers.CacheControl = new CacheControlHeaderValue
+					{
+						Public = true,
+						MaxAge = TimeSpan.FromDays(365)
+					};
+				}
+			});
+			
+			app.UseResponseCaching();
+			
+            if (env.IsDevelopment())
+            {
+                _logger.LogInformation("Application is running in development configuration, detailed exceptions and errors will be displayed.");
+
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                _logger.LogInformation("Application is running in release configuration mode.");
+
+                if (!string.IsNullOrEmpty(appSettings.ExceptionsDirectory))
+                {
+	                _logger.LogInformation($"Exceptions will be logged to {appSettings.ExceptionsDirectory}.");
+	                app.UseExceptionHandler(appSettings.ExceptionsDirectory);    
+                }
+            }
+            
+            // these headers pass the client ipAddress from proxy servers (such as nginx)
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+	            ForwardedHeaders = ForwardedHeaders.XForwardedFor |
+	                               ForwardedHeaders.XForwardedProto,
+            }); 
+            
+
+            // enable the telemetry data.
+            app.UseAuthentication();
+
+			if (!string.IsNullOrEmpty(appSettings.SignalRConnectionString))
+			{
+				app.UseAzureSignalR(routes =>
+				{
+					routes.MapHub<RemoteAgentHub>("/remoteagent");
+					routes.MapHub<BrowserHub>("/browser");
+				});
+
+				_logger.LogInformation($"SignalR using azure service at {appSettings.SignalRConnectionString}.");
+			}
+			else
+			{
+				app.UseSignalR(routes =>
+				{
+					routes.MapHub<RemoteAgentHub>("/remoteagent", options =>
+					{
+						options.LongPolling.PollTimeout = TimeSpan.FromSeconds(60);
+					});
+				
+					routes.MapHub<BrowserHub>("/browser", options =>
+					{
+						options.LongPolling.PollTimeout = TimeSpan.FromSeconds(60);
+					});
+				});
+
+				_logger.LogInformation($"SignalR using current server.");
+			}
+
+            app.Use(async (context, next) =>
+            {
+                    //force ssl connections for non-development environments.
+	            if (context.Request.IsHttps || env.IsDevelopment())
+	            {
+		            _logger.LogInformation($"Request from path {context.Request.Path}");
+		            
+					// We can send the request token as a JavaScript-readable cookie, and Angular will use it by default.
+					var tokens = antiforgery.GetAndStoreTokens(context);
+					context.Response.Cookies.Append("XSRF-TOKEN", tokens.RequestToken, new CookieOptions() { HttpOnly = false });
+		            
+		            await next();
+
+		            if (context.Response.StatusCode == 404)
+		            {
+			            _logger.LogTrace("passing to client");
+			            context.Request.Path = "/";
+			            await next();
+		            }
+	            }
+	            else
+	            {
+		            var withHttps = "https://" + context.Request.Host + context.Request.Path;
+		            context.Response.Redirect(withHttps);
+	            }
+            });
+
+			app.UseFileServer(false);
+
+            app.UseMvc(routes =>
+            {
+	            routes.MapRoute(
+				  name: "api",
+				  template: "api/{controller=Version}/{action=Index}/{id?}");
+	            
+				routes.MapRoute(
+				  name: "remote",
+				  template: "{controller=Version}/{action=Index}/{id?}");
+				
+            });
+
+            if (appSettings.CreateRepository)
+            {
+	            //creates the seed data which is loaded into the initial database.
+	            var repoDbContext = app.ApplicationServices.GetService<DexihRepositoryContext>();
+
+	            switch (appSettings.RepositoryType.ToLower())
+	            {
+		            case "sqlite":
+			            repoDbContext.DatabaseType = DexihRepositoryContext.EDatabaseType.Sqlite;
+			            break;
+		            case "mysql":
+			            repoDbContext.DatabaseType = DexihRepositoryContext.EDatabaseType.MySql;
+			            break;
+		            case "sqlserver":
+			            repoDbContext.DatabaseType = DexihRepositoryContext.EDatabaseType.SqlServer;
+			            break;
+		            case "npgsql":
+		            case "postgre":
+		            case "postgresql":
+			            repoDbContext.DatabaseType = DexihRepositoryContext.EDatabaseType.Npgsql;
+			            break;
+		            default:
+			            throw new Exception("The repository type " + appSettings.RepositoryType +
+			                                " was not recognised.  Use SqlServer, MySql, Npgsql or Sqlite");
+	            }
+
+	            _logger.LogInformation($"Updating repository database (if necessary).");
+
+	            var userManager = app.ApplicationServices.GetService<UserManager<ApplicationUser>>();
+	            var roleManager = app.ApplicationServices.GetService<RoleManager<IdentityRole>>();
+	            repoDbContext.Database.EnsureCreated();
+	            repoDbContext.Database.Migrate();
+	            var seedData = new SeedData();
+	            seedData.UpdateReferenceData(repoDbContext, roleManager, userManager).Wait();
+            }
+
+            _logger.LogInformation("Startup has completed.");
+
+        }
+    }
+}

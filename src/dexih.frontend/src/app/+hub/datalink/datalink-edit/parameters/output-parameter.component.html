@@ -1,0 +1,72 @@
+<form [formGroup]="outputParameterForm" class="mb-1">
+    <section>
+        <div class="input-group">
+
+            <div *ngIf="allowDataTypeSelect == false && allowNameSelect == false" class="input-group-prepend" >
+                <div class="input-group-text">
+                    {{outputParameterForm.value.runTime?.functionParameter?.name + "(" + type.dataType + ")"}} {{rank > 0 ? "[]" : ""}}
+                </div>
+            </div>
+
+            <div *ngIf="allowDataTypeSelect == true && allowNameSelect == false" class="input-group-prepend">
+                <div class="input-group-text">
+                    {{outputParameterForm.value.runTime?.functionParameter?.name }}
+                </div>
+            </div>
+
+            <div *ngIf="allowNameSelect" class="form-control p-0" >
+                <form-input
+                    formControlName="name"  
+                    [border]="false"
+                    type="text"  
+                    name="name" 
+                    placeholder="Enter a name for the parameter">
+                </form-input>
+                <span class="input-group-btn" style="width:0px;"></span>
+            </div>
+
+            <div *ngIf="allowDataTypeSelect == false && allowNameSelect == true" class="input-group-text" >
+                {{"(" + type.dataType + ")"}}
+            </div>
+
+            <div class="form-control p-0" >
+                <form-select
+                    [border]="false"
+                    formControlName="datalinkColumn" 
+                    [items]="outputColumns" 
+                    itemName="logicalName"
+                    [enableTextEntry]="true"
+                    textEntryNote="Enter new column name, or select existing"
+                    (textValueChange)="updateNewColumn($event)"
+                    >
+                </form-select>
+            </div>
+
+                <div *ngIf="allowDataTypeSelect == true" class="form-control p-0" >
+                        <form-select
+                            formControlName="dataType" 
+                            [border]="false"
+                            [items]="typeCodes" 
+                            itemKey="key" 
+                            itemName="name"
+                            >
+                        </form-select>
+                    </div>
+            
+            <div class="input-group-append">
+                <button class="btn btn-light" type="button" (click)="add()" [disabled]="!allowAdd" value="Add">
+                    <i class="fa fa-plus-square-o"></i>
+                </button>
+                <button class="btn btn-light" type="button" (click)="remove()" [disabled]="!allowRemove" value="Remove">
+                    <i class="fa fa-minus-square-o"></i>
+                </button>
+            </div>
+        </div>
+
+        <small *ngIf="outputParameterForm.value.runTime?.functionParameter?.description" class="form-text text-muted">
+            <markdown [data]="outputParameterForm.value.runTime.functionParameter.description"></markdown>
+        </small>
+
+    </section>
+</form>
+

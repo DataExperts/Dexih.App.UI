@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <div id="logo-group">
+    <span id="logo">
+      <img [src]='logoUrl' alt="Data Experts Group"> </span>
+  </div>
+
+  <div class="collapse navbar-collapse mr-sm-2">
+  </div>
+  <form class="form-inline">
+    <span class="d-none d-md-inline text-white m-1">Need an account?</span>
+    <a routerLink="/auth/register" class="btn btn-success">Create account</a>
+  </form>
+</nav>
+
+<div class="login-container">
+
+      <div class="card">
+        <div class="card-header">
+          Access will be provided shortly...
+        </div>
+
+        <div class="card-body">
+          <p>Your email "{{email}}"" does not have an invite to the Information Hub.</p>
+          <p class="no-margin margin-top-5">
+            Login as someone else? <a routerLink="/auth/login"> Click here</a>
+          </p>
+
+          <div class="pb-3">
+            This platform currently is invite only.  Your email has been registered and an invite will be sent when available.  Please contact support with any queries at <a href="mailto:support@dataexpertsgroup.com">support@dataexpertsgroup.com</a>.
+          </div>
+
+
+          <div class="pb-3">
+            <a href="https://dataexpertsgroup.com" class="btn btn-primary mr-1">Data Experts Group</a>
+            <a href="http://dataexpertsgroup.com/integration_hub" class="btn btn-primary ">Find out more</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<
+

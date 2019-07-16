@@ -1,0 +1,10 @@
+<div class="float-right">
+    <actions-table-button [tables]="[table]" [pullRight]="true"></actions-table-button>
+</div>
+<div>
+    <h5>{{table.name}}</h5>
+    <div *ngIf="table.description">
+        <markdown [data]="table.description"></markdown>
+    </div>
+    <div class="note">Connection: {{connection.name}} / Updated: {{connection.updateDate | date : 'short' }} </div>
+</div>

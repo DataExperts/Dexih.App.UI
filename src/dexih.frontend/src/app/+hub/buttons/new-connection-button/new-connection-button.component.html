@@ -1,0 +1,11 @@
+<dexih-button-dropdown buttonClass="btn-primary" iconClass="fa fa-file-o" text="New" [pullRight]="pullRight">
+        <li>
+            <a class="dropdown-item" [routerLink]="['connection-new', 'Source']">Source Database/Service</a>
+        </li>
+        <li>
+            <a class="dropdown-item"  [routerLink]="['connection-new', 'Managed']">Managed Database</a>
+        </li>
+        <li>
+            <a class="dropdown-item" [routerLink]="['connection-new', 'Target']">Target Connection</a>
+        </li>
+</dexih-button-dropdown>

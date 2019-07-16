@@ -1,0 +1,43 @@
+<dexih-message class="p-3" #DexihMessage></dexih-message>
+
+<div class="container-fluid">
+	<dexih-widget-vertical>
+	<dexih-widget title="Invite Users" iconClass="fa fa-lg fa-fw fa-birthday-cake" [padding]="true">
+		
+		<ng-template #subHeader>
+			<dexih-button-save [disabled]="emails.length == 0" (click)="addUsers()" text="Add User(s)"></dexih-button-save>
+		</ng-template>
+
+		<form >
+			<fieldset>
+				<section>
+					<form-select label="Permission" [(ngModel)]="permission" name="permission" [items]="Permissions" itemKey="key" itemName="name" note='Permission level to grant to emails' [enableFilter]="false">
+					</form-select>
+				</section>
+
+				<section>
+					<form-tags label="Email Addresses" [(ngModel)]="emails" name="emails" note="Provide a list of email addresses for users to invite.">
+					</form-tags>
+				</section>
+				<section>
+					<form-checkbox label="Send invites" [(ngModel)]="sendInvites" name="sendInvites" note="Emails which are not registered to use the information hub will be sent an invite to join.">
+					</form-checkbox>
+				</section>
+			</fieldset>
+		</form>
+	</dexih-widget>
+
+	<dexih-widget title="Current Users" iconClass="fa fa-lg fa-fw fa-group">
+		<dexih-table [enableMultiSelect]="true" [columns]="columns"
+		 [dataObservable]="tableData">
+			<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+				<dexih-button-delete class="mr-1" (click)="deleteUsers(items)"></dexih-button-delete>
+				<dexih-button-dropdown buttonClass="btn-primary" iconClass="fa fa-lock" text="Set Permission">
+					<a *ngFor="let permission of Permissions" class="dropdown-item" (click)="setPermission(permission.key, items)">{{permission.name}}</a>
+				</dexih-button-dropdown>
+			</ng-template>
+		</dexih-table>
+
+	</dexih-widget>
+	</dexih-widget-vertical>
+</div>

@@ -1,0 +1,44 @@
+<dexih-message #DexihMessage></dexih-message>
+
+<div class="container">
+    <dexih-widget *ngIf="mainForm"
+		title="Edit Hub" 
+		subTitle="Complete the details to create/edit a new hub"
+        iconClass="fa fa-lg fa-fw fa-life-saver" 
+		[showCloseButton]="true"
+		[padding]="true"
+		(close)="cancel()"
+    >
+        <ng-template #header>
+			<dexih-button-save class="mr-1" (click)="!savingHub && !mainForm.pristine && saveHub()" [disabled]="savingHub || mainForm.pristine" [busy]="savingHub"></dexih-button-save>
+			<dexih-button-cancel (click)="!savingHub && cancel()" [disabled]="savingHub"></dexih-button-cancel>
+        </ng-template>
+
+		<form  id="hub-edit-form" [formGroup]="mainForm" >
+			<fieldset>
+				<section>
+					<form-input label="Hub Name" formControlName="name" placeholder="Enter a name for the hub" [autocapitalize]="on" iconClass="fa fa-life-ring" [errors]="formErrors.name">
+					</form-input>
+				</section>
+
+				<section>
+					<form-textarea label="Description" formControlName="description" placeholder="Enter a description for the hub">
+					</form-textarea>
+				</section>
+
+				<section>
+					<form-input label="Encryption Key" formControlName="encryptionKey" placeholder="Enter an encryption key" iconClass="fa fa-key" [errors]="formErrors.encryptionKey" note="The encryption key will be used to encrypt table columns flagged as secure.  Ensure this key is kept securely as without it encrypted data will be lost.">
+						(<dexih-button buttonClass="btn btn-link mb-1 p-0" iconClass="fa fa-refresh" [busy]="generatingKey" (click)="generateKey()">Generate a new key</dexih-button>)
+					</form-input>
+				</section>
+
+				<section>
+					<form-select label="Shared Data Access" formControlName="sharedAccess" [items]="sharedAccess" itemKey="key" itemName="name"
+						iconClass="fa fa-lock" [errors]="formErrors.sharedAccess"  note='The level of access required for users to access shared data in this hub.' [enableFilter]="false">
+					</form-select>
+				</section>
+
+			</fieldset>
+		</form>
+    </dexih-widget>
+</div>

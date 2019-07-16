@@ -1,0 +1,97 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <div id="logo-group">
+    <span id="logo">
+      <img [src]='logoUrl' alt="Data Experts Group"> </span>
+  </div>
+
+  <div class="collapse navbar-collapse mr-sm-2">
+  </div>
+  <form class="form-inline">
+    <span class="d-none d-md-inline text-white m-1">Need an account?</span>
+    <a routerLink="/auth/register" class="btn btn-success">Create account</a>
+  </form>
+</nav>
+
+<div class="login-container">
+  <div class="card">
+    <form *ngIf="formsService.currentForm" [formGroup]="formsService.currentForm">
+      <div class="card-header">
+        Information Hub - Forgot Password
+      </div>
+
+      <div class="card-body">
+        <section>
+          <div class="alert alert-info ">
+            Enter your email to request a verification code before resetting your password.
+          </div>
+        </section>
+
+        <fieldset>
+
+          <section>
+            <form-input label="Email" formControlName="email" iconClass="fa fa-envelope">
+            </form-input>
+            <div class="note">
+              <a routerLink="/auth/login">I remembered my password!</a>
+            </div>
+          </section>
+
+        </fieldset>
+      </div>
+      <div class="card-footer">
+        <button (click)="submitCodeRequest()" class="btn btn-primary">
+          <i class="fa fa-refresh"></i> Request Reset Code
+        </button>
+      </div>
+
+      <div class="card-body">
+        <section *ngIf="codeSent">
+          <div class="alert alert-success ">
+            A verification code has been sent to your email. Cut/paste the code below and enter your new password.
+          </div>
+        </section>
+
+        <section *ngIf="!codeSent">
+          <div class="alert alert-info ">
+            If you have received already received your verification code, cut/paste the code below and enter your new password.
+          </div>
+        </section>
+
+        <section *ngIf="message">
+          <div class="alert alert-danger ">
+            {{message}}
+          </div>
+        </section>
+      </div>
+
+      <div class="card-header">
+        New Password
+      </div>
+
+      <div class="card-body">
+        <fieldset>
+          <section>
+            <form-input label="Verification Code" formControlName="verificationCode" iconClass="fa fa-lock">
+            </form-input>
+          </section>
+
+          <section>
+            <form-input label="Password" formControlName="password" type="password" placeholder="Password" iconClass="fa fa-lock" [errors]="formsService.formErrors.password">
+            </form-input>
+          </section>
+
+          <section>
+            <form-input label="Confirm Password" formControlName="passwordConfirm" type="password" placeholder="Confirm Password" iconClass="fa fa-lock"
+              [errors]="formsService.formErrors.passwordConfirm">
+            </form-input>
+          </section>
+        </fieldset>
+      </div>
+      <div class="card-footer">
+        <button (click)="submitPasswordReset()" class="btn btn-primary">
+          <i class="fa fa-refresh"></i> Reset Password
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

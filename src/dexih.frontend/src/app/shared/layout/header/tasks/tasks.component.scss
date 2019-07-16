@@ -1,0 +1,7 @@
+.tasks {
+    z-index: 1000;
+    width: 400px;
+    max-height: 600px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */    
+}

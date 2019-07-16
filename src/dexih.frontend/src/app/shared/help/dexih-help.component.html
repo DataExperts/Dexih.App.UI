@@ -1,0 +1,4 @@
+
+    <dexih-widget *ngIf="displayHelp || display" [title]="title" iconClass="fa fa-lg fa-fw fa-question" [showCloseButton]="true" [padding]="true" (close)="close()">
+        <markdown [data]="data" (click)="getRoute($event)"></markdown>
+    </dexih-widget>

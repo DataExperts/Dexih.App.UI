@@ -1,0 +1,12 @@
+<div *ngIf="waitMessages?.length > 0" class="loading">
+    <div class="list-group">
+        <li class="list-group-item">
+            <div class="dexih-loader"></div> &nbsp; &nbsp; Please wait ...
+        </li>
+        <li class="list-group-item" *ngFor="let waitMessage of waitMessages">
+            {{waitMessage}}
+        </li>
+    </div>
+</div>
+<dexih-modal #modal></dexih-modal>
+<router-outlet></router-outlet>

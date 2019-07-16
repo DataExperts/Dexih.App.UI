@@ -1,0 +1,143 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+    <AssemblyName>dexih.api</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <PackageId>dexih.api</PackageId>
+    <UserSecretsId>aspnet-dexih.api-20161103030146</UserSecretsId>
+    <RuntimeIdentifiers>win-x64;linux-x64,osx-x64</RuntimeIdentifiers>
+    <VersionPrefix>0.4.0-beta</VersionPrefix>
+    <VersionSuffix>00001</VersionSuffix>
+    <AssemblyVersion>0.0.1.1</AssemblyVersion>
+    <Authors>Data Experts Group</Authors>
+    <Company>Data Experts Group</Company>
+    <Product>Information Hub</Product>
+    <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Dexih.App.Remote\src\dexih.remote.operations\dexih.remote.operations.csproj">
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\dexih.transforms\src\dexih.connections.azure\dexih.connections.azure.csproj" />
+    <ProjectReference Include="..\..\..\dexih.transforms\src\dexih.connections.dexih\dexih.connections.dexih.csproj" />
+    <ProjectReference Include="..\..\..\dexih.transforms\src\dexih.connections.excel\dexih.connections.excel.csproj" />
+    <ProjectReference Include="..\..\..\dexih.transforms\src\dexih.connections.flatfile\dexih.connections.flatfile.csproj" />
+    <ProjectReference Include="..\..\..\dexih.transforms\src\dexih.connections.ftp\dexih.connections.ftp.csproj" />
+    <ProjectReference Include="..\..\..\dexih.transforms\src\dexih.connections.mysql\dexih.connections.mysql.csproj" />
+    <ProjectReference Include="..\..\..\dexih.transforms\src\dexih.connections.oracle\dexih.connections.oracle.csproj" />
+    <ProjectReference Include="..\..\..\dexih.transforms\src\dexih.connections.postgressql\dexih.connections.postgressql.csproj" />
+    <ProjectReference Include="..\..\..\dexih.transforms\src\dexih.connections.sftp\dexih.connections.sftp.csproj" />
+    <ProjectReference Include="..\..\..\dexih.transforms\src\dexih.connections.sqlite\dexih.connections.sqlite.csproj" />
+    <ProjectReference Include="..\..\..\dexih.transforms\src\dexih.connections.sqlserver\dexih.connections.sqlserver.csproj" />
+    <ProjectReference Include="..\..\..\dexih.transforms\src\dexih.connections.webservice.restful\dexih.connections.webservice.restful.csproj" />
+    <ProjectReference Include="..\..\..\dexih.transforms\src\dexih.functions.builtIn\dexih.functions.builtIn.csproj" />
+    <ProjectReference Include="..\..\..\dexih.transforms\src\dexih.functions.external\dexih.functions.external.csproj" />
+    <ProjectReference Include="..\..\..\dexih.transforms\src\dexih.functions.financial\dexih.functions.financial.csproj" />
+    <ProjectReference Include="..\..\..\dexih.transforms\src\dexih.functions.maths\dexih.functions.maths.csproj" />
+    <ProjectReference Include="..\..\..\dexih.transforms\src\dexih.functions\dexih.functions.csproj" />
+    <ProjectReference Include="..\..\..\Dexih.App.Operations\src\dexih.operations\dexih.operations.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="2.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="2.2.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.ResponseCaching" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" Version="1.1.5" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="2.2.5" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="2.2.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.2.0" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
+    <PackageReference Include="Sendgrid" Version="9.11.0" />
+    <PackageReference Include="Certes" Version="2.3.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Azure.SignalR" Version="1.0.10" />
+    <PackageReference Include="Microsoft.Extensions.Logging.AzureAppServices" Version="2.2.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.WebSockets" Version="2.2.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="2.2.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.4" />
+    <PackageReference Include="Amazon.Lambda.AspNetCoreServer" Version="3.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+    <Folder Include="Hubs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Resources\RemoteAgents\dexih.remote.run.linux.sh">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\RemoteAgents\dexih.remote.run.alpine.sh">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\RemoteAgents\dexih.remote.run.osx.sh">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\RemoteAgents\dexih.remote.run.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\EmailTemplates\confirmEmail.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\EmailTemplates\forgotPassword.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\EmailTemplates\invite.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\EmailTemplates\hubAccess.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\EmailTemplates\hubAccessRemove.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\EmailTemplates\inviteRequired.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\EmailTemplates\userReady.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\EmailTemplates\supportEmail.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="serverless.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Account\MicrosoftRedirect.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.ResponseCompression, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60">
+      <HintPath>..\..\..\..\..\..\usr\local\share\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.responsecompression\2.2.0\lib\netcoreapp2.1\Microsoft.AspNetCore.ResponseCompression.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60">
+      <HintPath>..\..\..\..\.nuget\packages\microsoft.extensions.logging.abstractions\2.2.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="aws-lambda-tools-defaults.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>

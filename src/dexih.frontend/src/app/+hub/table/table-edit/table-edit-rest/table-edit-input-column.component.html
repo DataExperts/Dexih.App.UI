@@ -1,0 +1,10 @@
+<form [formGroup]="columnForm" class="">
+    <section>
+        <form-input 
+        [label]="columnForm.value.name" 
+        formControlName="defaultValue" 
+        placeholder="Enter default value for the input column" 
+        iconClass="fa fa-dollar">
+        </form-input>
+    </section>
+</form>

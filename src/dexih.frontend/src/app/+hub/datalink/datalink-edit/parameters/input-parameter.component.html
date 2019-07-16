@@ -1,0 +1,65 @@
+    <section>
+        <div class="input-group d-flex">
+            <form *ngFor="let inputParameterForm of inputParameterForms; let i = index;" [formGroup]="inputParameterForm" class="flex-fill">
+                <div class="input-group">
+                    <div *ngIf="!allowNameSelect" class="input-group-prepend">
+                        <div class="input-group-text">
+                            {{inputParameterForm.value.runTime?.functionParameter?.name + "(" + type.dataType + ")"}} {{rank > 0 ? "[]" : ""}}
+                        </div>
+                    </div>
+
+                    <div *ngIf="allowNameSelect == true" class="form-control p-0">
+                        <form-input [border]="false" formControlName="name" type="text"
+                            placeholder="Enter a name for the parameter">
+                        </form-input>
+                    </div>
+
+                    <div *ngIf="!inputParameterForm.value.runTime?.functionParameter?.isLabel" class="form-control p-0">
+                        <form-select formControlName="datalinkColumn" [border]="false"
+                            [items]="inputColumns" itemName="logicalName" [(textValue)]="inputs[i].staticValue"
+                            [enableTextEntry]="true" [enableTextEntryMatch]="false"
+                            (textValueChange)="updateStatic($event, i)"
+                            textEntryNote="Enter a static value or select a column." [textEntryItems]="inputs[i].textItems">
+                        </form-select>
+                    </div>
+
+                    <div *ngIf="inputParameterForm.value.runTime?.functionParameter?.isLabel" class="form-control p-0">
+                        <form-input [border]="false" [(ngModel)]="inputs[i].staticValue" [ngModelOptions]="{standalone: true}"
+                            type="text" placeholder="Enter a static value.">
+                        </form-input>
+                    </div>
+
+                    <div *ngIf="allowDataTypeSelect == false && allowNameSelect == true" class="input-group-text">
+                        {{"(" + type.dataType + ")"}}
+                    </div>
+
+                    <div *ngIf="allowDataTypeSelect == true" class="form-control p-0">
+                        <form-select [border]="false" formControlName="dataType" [items]="typeCodes" itemKey="key"
+                            itemName="name">
+                        </form-select>
+                    </div>
+
+                </div>
+            </form>
+
+            <form *ngFor="let outputParameterForm of outputParameterForms; let i = index;" [formGroup]="outputParameterForm" class="ml-1  flex-fill">
+                <form-select class="flex-grow-1" [border]="false" class="form-control p-0"
+                    formControlName="datalinkColumn" [items]="outputColumns" itemName="logicalName"
+                    [enableTextEntry]="true" textEntryNote="Enter a value to add a new column"
+                    (textValueChange)="updateNewColumn($event, i)">
+                </form-select>
+            </form>
+
+            <div *ngIf="allowAdd && allowRemove" class="input-group-append flex-shrink-1 ml-1 ">
+                <button *ngIf="allowAdd" class="btn btn-light" type="button" (click)="add()" [disabled]="!allowAdd" value="Add">
+                    <i class="fa fa-plus-square-o"></i>
+                </button>
+                <button *ngIf="allowRemove" class="btn btn-light" type="button" (click)="remove()" [disabled]="!allowRemove" value="Remove">
+                    <i class="fa fa-minus-square-o"></i>
+                </button>
+            </div>
+        </div>
+        <small *ngIf="inputParameterForms[0].value.runTime?.functionParameter?.description" class="form-text text-muted">
+            <markdown [data]="inputParameterForms[0].value.runTime.functionParameter.description"></markdown>
+        </small>
+    </section>

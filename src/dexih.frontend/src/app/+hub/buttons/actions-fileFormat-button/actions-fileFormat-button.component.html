@@ -1,0 +1,6 @@
+<dexih-button-edit class="mr-1" [routerLink]="['fileFormat-edit', fileFormat.key]" queryParamsHandling="merge"></dexih-button-edit>
+<dexih-button-dropdown *ngIf="tables.length > 0 || tables.length > 0" buttonClass="btn-primary" iconClass="fa fa-info-circle" text="Used In" [pullRight]="pullRight">
+    <li *ngFor="let tab of tables">
+        <a class="dropdown-item" (click)="navigateToTable(tab)">{{tab.name}}</a>
+    </li>
+</dexih-button-dropdown>

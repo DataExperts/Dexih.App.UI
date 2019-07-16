@@ -1,0 +1,83 @@
+<div class="container-fluid">
+    <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-primary rounded">
+        <img class="mr-3" [src]='logoSmallUrl' alt="" width="48" height="48">
+        <div class="lh-100">
+            <h3 class="mb-0 text-white lh-100">Data Experts Information Hub</h3>
+        </div>
+    </div>
+        
+    <div *ngIf="(hubs | async)?.length == 0" class="alert alert-warning">
+        <div class="float-right">
+            <dexih-button-new routerLink="hub-new" title="Create a new Hub" text="New Hub"></dexih-button-new>
+        </div>
+        <h3>Let's get started.</h3>
+        <h5>You do not have any hubs currently available to you.</h5>
+        <h5>To get started, either create a new hub, or request a user provide your with access.</h5>
+    </div>
+
+    <div class="card-deck">
+        <div class="card mb-3" style="min-width: 18rem;">
+            <div class="card-header text-white bg-success"><i class="fa fa-lg fa-fw fa-life-saver"></i>Hub Management</div>
+            <div class="card-body">
+                <p class="card-text">Hub's are used to store definitions for tables and data processing rules, and are
+                    used to run, schedule and publish data.</p>
+            </div>
+            <div class="card-footer">
+                <a routerLink="hubs-view" class="btn btn-primary">Manage</a>
+            </div>
+        </div>
+        <div class="card mb-3" style="min-width: 18rem;">
+            <div class="card-header text-white bg-primary"><i class="fa fa-lg fa-fw fa-user"></i>Account Management</div>
+            <div class="card-body">
+                <p class="card-text">Edit your account details, password, and login providers.</p>
+            </div>
+            <div class="card-footer">
+                <a routerLink="manage" class="btn btn-primary">Account</a>
+            </div>
+        </div>
+        <div class="card mb-3" style="min-width: 18rem;">
+            <div class="card-header text-white bg-warning"><i class="fa fa-lg fa-fw fa-wifi"></i>Remote Agents</div>
+            <div class="card-body">
+                <p class="card-text">Remote agents provide connectivity to data sources and are used run and publish
+                    data.</p>
+            </div>
+            <div class="card-footer">
+                <a routerLink="agents" class="btn btn-primary mr-1">Agents</a>
+                <a routerLink="tasks" class="btn btn-primary">Tasks</a>
+            </div>
+        </div>
+        <div class="card mb-3" style="min-width: 18rem;">
+            <div class="card-header text-white bg-danger"><i class="fa fa-lg fa-fw fa-newspaper-o"></i>Shared Data</div>
+            <div class="card-body">
+                <p class="card-text">View all datasets which have been shared.</p>
+            </div>
+            <div class="card-footer">
+                <a routerLink="sharedData" class="btn btn-primary">View</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-3" *ngIf="(hubs | async)?.length > 0">
+        <div class="card-header text-white bg-secondary"><i class="fa fa-lg fa-fw fa-life-saver"></i>Hubs</div>
+        <div class="card-body">
+                <div class="card-columns">
+                        <div *ngFor="let hub of hubs | async" class="card">
+                                <div class="card-header">
+                                    <div class="d-flex flex-row p-0">
+                                        {{hub.name}}
+                                        <div class="d-flex ml-auto">
+                                            <a routerLink="/hub/{{hub.hubKey}}/summary"
+                                                class="btn btn-primary mr-1 ">Open</a>
+                                            <a routerLink="hub-edit/{{hub.hubKey}}" class="btn btn-primary ">Edit</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div *ngIf="hub.description" class="card-body">
+                                    <p class="card-text">{{hub.description}}</p>
+                                </div>
+                            </div>                    
+                </div>
+        </div>
+    </div>
+</div>

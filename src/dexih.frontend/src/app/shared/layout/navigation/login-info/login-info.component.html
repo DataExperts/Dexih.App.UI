@@ -1,0 +1,16 @@
+<dexih-button-dropdown *ngIf="user" 
+    iconClass="fa fa-lg fa-fw fa-user" 
+    buttonClass="nav-button text-success" 
+    [text]="user.userName"
+    [autoCompact]="false"
+    >
+    <a class="dropdown-item" (click)="manageUser()"><i class="fa fa-user"></i> Update Details</a>
+    <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a>
+</dexih-button-dropdown>
+<dexih-button *ngIf="!user"
+    (click)="login()"
+    iconClass="fa fa-lg fa-fw fa-user" 
+    buttonClass="nav-button text-danger" 
+>
+Login
+</dexih-button>

@@ -1,0 +1,19 @@
+<li class="nav-item" [ngClass]="{'active open' : expanded}">
+    <a class="nav-link d-flex justify-content-between" [title]="title" (click)="toggle()">
+        <span class="menu-item-parent {{textClass}}" >
+            <ng-template [ngTemplateOutlet]="itemTemplate">
+            </ng-template>
+        
+            <i [class]="iconClass"></i>
+            {{name}}
+        </span>
+        <b class="ml_auto">
+            <em *ngIf="expanded" class='fa fa-minus-square-o'></em>
+            <em *ngIf="!expanded" class='fa fa-plus-square-o'></em>
+        </b>
+
+    </a>
+    <ul class="nav-item" [@slideDown]='state' style="overflow: hidden; display: block">
+        <ng-content></ng-content>
+    </ul>
+</li>

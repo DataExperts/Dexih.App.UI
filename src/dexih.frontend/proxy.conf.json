@@ -1,0 +1,38 @@
+﻿{
+  "/api": {
+    "target": "http://localhost:5000",
+    "secure": false
+  },
+  "/.well_known": {
+    "target": "http://localhost:5000",
+    "secure": false
+  },
+    "/manage": {
+    "target": "http://localhost:5000",
+    "secure": false
+  },
+  "/Remote": {
+    "target": "http://localhost:5000",
+    "secure": false
+  },
+  "/Reader": {
+    "target": "http://localhost:5000",
+    "secure": false
+  },
+    "/realtime": {
+    "target": "ws://localhost:5000",
+    "secure": false,
+    "ws" : true
+  },
+  "/browser": {
+    "target": "ws://localhost:5000",
+    "secure": false,
+    "ws" : true
+  },
+  "/remoteagent": {
+    "target": "ws://localhost:5000",
+    "secure": false,
+    "ws" : true
+  }
+ 
+}

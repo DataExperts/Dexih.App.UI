@@ -1,0 +1,27 @@
+<form [formGroup]="customFunctionParameterForm" class="mb-1">
+        <div class="input-group">
+            <input type="text" class="form-control" formControlName="name" placeholder="Enter a name for the parameter">
+
+            <!-- <form-input [border]="false" class="form-control p-0" formControlName="name" type="text" placeholder="Enter a name for the parameter"></form-input> -->
+
+            <form-select [border]="false" class="form-control p-0" formControlName="dataType" [items]="typeCodes" itemKey="key" itemName="name">
+            </form-select>
+
+            <div class="input-group-append">
+                <div class="input-group-text p-0">
+                    <span class="p-1">Array Dimensions (0-non array)</span>
+                    <input class=" mx-1" type="number" formControlName="rank">
+                </div>
+                <div class="input-group-text p-0">
+                    <button type="button" (click)="add()" class="btn btn-sm border-0 bg-transparent" value="Add">
+                        <i class="fa fa-plus-square-o"></i>
+                    </button>
+                </div>
+                <div class="input-group-text p-0">
+                    <button type="button" (click)="remove()" class="btn btn-sm border-0 bg-transparent" value="Remove">
+                        <i class="fa fa-minus-square-o"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+</form>

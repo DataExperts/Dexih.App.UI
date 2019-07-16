@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="RIDER_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.1/build/netcoreapp1.0/xunit.runner.reporters.netcoreapp10.dll" />
+    <content url="file://$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.1/build/netcoreapp1.0/xunit.runner.utility.netcoreapp10.dll" />
+    <content url="file://$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.1/build/netcoreapp1.0/xunit.runner.visualstudio.dotnetcore.testadapter.dll" />
+    <content url="file://$MODULE_DIR$/../../../Dexih.App.Operations/src/dexih.operations" />
+    <content url="file://$MODULE_DIR$/../../../Dexih.App.Operations/src/dexih.repository" />
+    <content url="file://$MODULE_DIR$/../../../Dexih.App.Proxy/src/dexih.proxy" />
+    <content url="file://$MODULE_DIR$/../../../Dexih.App.Remote/src/dexih.remote" />
+    <content url="file://$MODULE_DIR$/../../../Dexih.App.Remote/src/dexih.remote.operations" />
+    <content url="file://$MODULE_DIR$/../../../Dexih.Utils.CopyProperties/src/Dexih.Utils.CopyProperties" />
+    <content url="file://$MODULE_DIR$/../../../Dexih.Utils.ManagedTasks/src/Dexih.Utils.ManagedTasks" />
+    <content url="file://$MODULE_DIR$/../.." />
+    <content url="file://$MODULE_DIR$/../../../dexih.transforms/src/dexih.connections.azure" />
+    <content url="file://$MODULE_DIR$/../../../dexih.transforms/src/dexih.connections.dexih" />
+    <content url="file://$MODULE_DIR$/../../../dexih.transforms/src/dexih.connections.excel" />
+    <content url="file://$MODULE_DIR$/../../../dexih.transforms/src/dexih.connections.flatfile" />
+    <content url="file://$MODULE_DIR$/../../../dexih.transforms/src/dexih.connections.ftp" />
+    <content url="file://$MODULE_DIR$/../../../dexih.transforms/src/dexih.connections.mysql" />
+    <content url="file://$MODULE_DIR$/../../../dexih.transforms/src/dexih.connections.oracle" />
+    <content url="file://$MODULE_DIR$/../../../dexih.transforms/src/dexih.connections.postgressql" />
+    <content url="file://$MODULE_DIR$/../../../dexih.transforms/src/dexih.connections.sftp" />
+    <content url="file://$MODULE_DIR$/../../../dexih.transforms/src/dexih.connections.sqlite" />
+    <content url="file://$MODULE_DIR$/../../../dexih.transforms/src/dexih.connections.sqlserver" />
+    <content url="file://$MODULE_DIR$/../../../dexih.transforms/src/dexih.connections.webservice.restful" />
+    <content url="file://$MODULE_DIR$/../../../dexih.transforms/src/dexih.functions" />
+    <content url="file://$MODULE_DIR$/../../../dexih.transforms/src/dexih.functions.builtIn" />
+    <content url="file://$MODULE_DIR$/../../../dexih.transforms/src/dexih.functions.external" />
+    <content url="file://$MODULE_DIR$/../../../dexih.transforms/src/dexih.functions.financial" />
+    <content url="file://$MODULE_DIR$/../../../dexih.transforms/src/dexih.functions.maths" />
+    <content url="file://$MODULE_DIR$/../../../dexih.transforms/src/dexih.functions.ml" />
+    <content url="file://$MODULE_DIR$/../../../dexih.transforms/src/dexih.transforms" />
+    <content url="file://$MODULE_DIR$/../../../dexih.utils.datatype/src/Dexih.Utils.DataType" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

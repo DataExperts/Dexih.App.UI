@@ -1,0 +1,59 @@
+<div class="container-fluid">
+    <dexih-widget title="Execution Results" 
+        iconClass="fa fa-lg fa-fw fa-exchange" 
+    >
+		<dexih-table 
+			[enableMultiSelect]="true"
+			[columns]="columns"
+			[dataObservable]="tableData"
+			[enableSaveCsv]="true" 
+			(rowClick)="showResult($event)"
+			>
+				<ng-template #actions let-items="items">
+						<div class="d-flex flex-wrap">
+							<div class="input-group">
+								<dexih-button-refresh class="input-group-prepend"  (click)="refresh()" text="Reload"></dexih-button-refresh>
+								<input class="form-control" placeholder="Maximum rows..." title="Specify the maximum rows to return" [(ngModel)]="rows" style="width: 100%; max-width: 100px">
+							</div>
+							
+							<div class="flex-fill ml-1">
+								<form-select labelLeft="Type" [(ngModel)]="auditType" [border]="false" class="form-control p-0" [items]="auditTypes" [enableTextEntry]="false" [allowNullSelect]="true" selectNullMessage="All types">
+								</form-select>
+							</div>
+						</div>
+
+				</ng-template>
+
+				<ng-template #tableHeader>
+						<div class="d-flex flex-wrap pt-1" *ngIf="auditType === 'Datalink'">
+								<form-tags-dropdown labelLeft="Datalinks" [(ngModel)]="datalinks" [items]="hubCache.hub.dexihDatalinks" itemKey="key" 
+									itemName="name" [enableAddAll]="true">
+								</form-tags-dropdown>
+							</div>
+							<div class="d-flex flex-wrap pt-1" *ngIf="auditType === 'Datajob'">
+								<form-tags-dropdown labelLeft="Datajobs" [(ngModel)]="datajobs" [items]="hubCache.hub.dexihDatajobs"
+									itemKey="key" itemName="name" [enableAddAll]="true">
+								</form-tags-dropdown>
+							</div>
+							<div class="d-flex flex-wrap pt-1" *ngIf="auditType === 'DatalinkTest'">
+								<form-tags-dropdown labelLeft="DatalinkTests" [(ngModel)]="datalinkTests" [items]="hubCache.hub.dexihDatalinkTests"
+									itemKey="key" itemName="name" [enableAddAll]="true">
+								</form-tags-dropdown>
+							</div>
+	
+				</ng-template>
+
+				<ng-template #selectedItemAction select="selectedItemAction" let-result="item">
+					<dexih-button-edit class="mr-1" [routerLink]="[hubPath, 'datalink-edit', 'edit', result.referenceKey]" text='Edit Datalink'></dexih-button-edit>
+					<dexih-button-view [routerLink]="['result-view', result.auditConnectionKey, result.auditKey]" queryParamsHandling="merge"></dexih-button-view>
+				</ng-template>
+
+				<ng-template #rowStatus select="rowStatus" let-result="item">
+					<datalink-status [writerResult]="result"></datalink-status>
+				</ng-template>
+
+		</dexih-table>
+    </dexih-widget>
+</div>
+
+

@@ -1,0 +1,59 @@
+
+
+.transform-row {
+    display: table-row;
+}
+
+.transform-columns {
+    height: 500px;
+    min-height: 500px;
+    overflow-y: scroll
+}
+
+// allow transform list to scroll horizontal
+.transform-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.transform {
+    display: table;     
+    table-layout: fixed;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    overflow-x: auto;
+}
+
+/*
+Sets a straight line between the transforms
+*/
+.transform-step:after {
+    top: 33px;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #ccc;
+    z-index: -1;
+}
+
+.transform-step {  
+    padding-top: 14px;  
+    display: table-cell;
+    text-align: center;
+    position: relative;
+    width:220px;
+    z-index: 1;
+}
+
+.transform-step.active {    
+    color: white;
+    background: #457fa0
+}
+
+.transform-step p {
+    margin-top: 10px;    
+}

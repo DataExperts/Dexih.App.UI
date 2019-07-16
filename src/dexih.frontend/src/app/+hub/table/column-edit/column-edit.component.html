@@ -1,0 +1,21 @@
+<div class="list-group-item list-group-item-info rounded-0">
+    <div class="d-flex flex-row">
+        <h5>Edit Column</h5>
+        <div class="ml-auto">
+            <dexih-invalid-form-details class="mr-1" (click)="columnFormService.showErrors()" [control]="columnFormService.currentForm"></dexih-invalid-form-details>
+            <dexih-button-dropdown class="mr-1" buttonClass="btn-primary" text="Column">
+                <li *ngFor="let col of columns">
+                    <a class="dropdown-item" (click)="navigateToColumn(col)">{{col.columnGroup ? col.columnGroup + "." : ""}}{{col.name}}</a>
+                </li>
+            </dexih-button-dropdown>
+            <dexih-button-apply class="mr-1" [disabled]="!columnFormService?.hasChanged" (click)="applyExit()"></dexih-button-apply>
+            <dexih-button-cancel (click)="cancel()"></dexih-button-cancel>
+        </div>
+    </div>
+</div>
+
+<div class="container  mt-3 mb-3">
+    <column-edit-base [columnFormService]="columnFormService" [detailedView]="detailedView"></column-edit-base>
+</div>
+
+<table-edit-columns *ngIf="columnFormService?.currentForm.controls.dataType.value === eTypeCode.Node" [tableForm]='tableForm' [parentColumnForm]="columnFormService.currentForm"></table-edit-columns>

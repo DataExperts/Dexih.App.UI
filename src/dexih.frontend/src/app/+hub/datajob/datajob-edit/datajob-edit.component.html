@@ -1,0 +1,15 @@
+<div class="container">
+    <dexih-widget title="Edit Data Job" iconClass="fa fa-lg fa-fw fa-cog">
+
+    <ng-template #header>
+            <dexih-invalid-form-details class="mr-1" [control]="formsService.currentForm" (click)="formsService.showErrors()"></dexih-invalid-form-details>
+            <save-button *ngIf="hubCache.canWrite"  class="mr-1" [formsService]="formsService"></save-button>
+            <cancel-button  class="mr-1" [formsService]="formsService"></cancel-button>
+        </ng-template>
+
+
+        <router-outlet></router-outlet>
+    </dexih-widget>
+</div>  
+
+

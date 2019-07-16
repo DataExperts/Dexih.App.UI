@@ -1,0 +1,179 @@
+<div class="container">
+	<dexih-widget 
+		title="Edit Connection" 
+		iconClass="fa fa-lg fa-fw fa-database" 
+		[showCloseButton]="true"
+		(close)="close()"
+		[padding]="true"
+		>
+        <ng-template #header>
+			<dexih-invalid-form-details class="mr-1" [control]="formsService.currentForm" (click)="formsService.showErrors()"></dexih-invalid-form-details>
+			<dexih-button class="mr-1" *ngIf="hubCache.canWrite" buttonClass="btn btn-success" [busy]="refreshingConnection" iconClass="fa fa-thumbs-o-up" (click)="!refreshingConnection && refreshConnection()" title="Test the connection against the source.">Test</dexih-button>
+			<save-button class="mr-1" *ngIf="hubCache.canWrite" [formsService]="formsService"></save-button>
+			<dexih-button-save-local class="mr-1" (click)="export()" [disabled]="formsService.hasChanged"></dexih-button-save-local>
+
+			<ng-template [ngIf]="connectionReference">
+				<ng-template [ngIf]="connectionReference.connectionCategory == eConnectionCategory.SqlDatabase || connectionReference.connectionCategory == eConnectionCategory.DatabaseFile || connectionReference.connectionCategory == eConnectionCategory.NoSqlDatabase || connectionReference.connectionCategory == eConnectionCategory.Hub">
+					<dexih-button class="mr-1" *ngIf="formsService.currentForm.controls.key.value" [routerLink]="['../../connection-import', formsService.currentForm.controls.key.value]" iconClass="fa fa-plus">Import Tables</dexih-button>
+				</ng-template>
+				<ng-template [ngIf]="connectionReference.connectionCategory == eConnectionCategory.File">
+					<dexih-button class="mr-1" *ngIf="formsService.currentForm.controls.key.value" [routerLink]="['../../../tables', 'table-new', formsService.currentForm.controls.key.value]" iconClass="fa fa-plus">New File</dexih-button>
+				</ng-template>
+				<ng-template [ngIf]="connectionReference.connectionCategory == eConnectionCategory.WebService">
+					<dexih-button class="mr-1" *ngIf="formsService.currentForm.controls.key.value" [routerLink]="['../../../tables', 'table-new', formsService.currentForm.controls.key.value]"  iconClass="fa fa-plus">New WebService</dexih-button>
+				</ng-template>
+			</ng-template>
+
+			<cancel-button [formsService]="formsService"></cancel-button>
+        </ng-template>
+
+		<form *ngIf="formsService.currentForm"  [formGroup]="formsService.currentForm">
+			<!--dummy hidden password to stop chrome/firefox/safari autocompletion password.-->
+			<input id="fake_user_name" name="fake_user[name]" style="position:absolute; top:-5000px;" type="text" value="Fake Auto-fill">
+			<input id="fake_password" type="password" name="fake_password[password]" style="position:absolute; top:-5000px;" type="text" value="Fake Auto-fill">
+
+			<fieldset>
+					<section>
+						<form-select label="Purpose" formControlName="purpose" placeholder="Connection purpose" iconClass="fa fa-database"
+							[items]="connectionPurposes" itemName="name" itemKey="key" [enableFilter]="false"
+							[errors]="formsService.formErrors.purpose">
+						</form-select>
+					</section>
+	
+
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-input label="Name" formControlName="name" placeholder="Enter a name for the connection" [autocapitalize]="true" iconClass="fa fa-database"
+							[errors]="formsService.formErrors.name">
+						</form-input>
+					</section>
+					<section class="form-group col-md-6">
+						<form-select label="Database Type" [(ngModel)]="connectionReference" [ngModelOptions]="{standalone: true}" (ngModelChange)="selectDatabaseType($event)" 
+							[items]="connectionTypes" itemName="name"
+							iconClass="fa fa-database" [sortItems]="true">
+						</form-select>
+					</section>
+				</div>
+
+				<section>
+                    <form-textarea label="Description" formControlName="description" [showMarkdown]="true" placeholder="Enter the description."  [errors]="formsService.formErrors.description">
+                    </form-textarea>
+                </section>
+
+				<span *ngIf="connectionReference">
+
+				<span *ngIf="connectionReference.allowsConnectionString == true">
+					<section >
+						<form-checkbox label="Use a connection string" formControlName="useConnectionString" >
+						</form-checkbox>
+					</section>
+
+					<section *ngIf="formsService.currentForm.controls.useConnectionString.value == true">
+						<form-input *ngIf="!formsService.currentForm.controls.useConnectionStringVariable.value"
+							label="Connection String" (keydown)="connectionStringChanged()" formControlName="connectionStringDisplay" placeholder="Enter a the connection string" iconClass="fa fa-database" [errors]="formsService.formErrors.connectionStringDisplay">
+							<span *ngIf="!formsService.formErrors.connectionStringRaw"> (<a href="javascript:void(0)" *ngIf="revealingConnectionString == false" (click)="revealConnectionString()"> <i class="fa fa-refresh"></i> Reveal </a>
+							<span *ngIf="revealingConnectionString == true" > <i class="fa fa-spin fa-refresh"></i> Revealing... please wait </span>)</span>
+						</form-input>
+
+						<form-select *ngIf="formsService.currentForm.controls.useConnectionStringVariable.value"
+							label="Connection String" 
+							formControlName="connectionString" 
+							[items]="variables" 
+							iconClass="fa fa-at" 
+							[sortItems]="true" 
+							[enableTextEntry]="true"
+							textEntryNote="Enter the variable name surrounded by {}">
+						</form-select>
+
+						<form-checkbox label="Use a variable for connection string" formControlName="useConnectionStringVariable" (click)="clearConnectionString()" >
+						</form-checkbox>
+				</section>
+				</span>
+
+				<span *ngIf="formsService.currentForm.controls.useConnectionString.value == false">
+					<section>
+						<form-select 
+							[enableTextEntry]="true" 
+							[label]="connectionReference.serverDescription" 
+							formControlName="server" 
+							placeholder="Enter the details." 
+							iconClass="fa fa-server" 
+							[errors]="formsService.formErrors.server"
+							[items]="variables" 
+							[enableFilter]="true"
+							[note]="connectionReference.serverHelp"
+						></form-select> 
+					</section>
+
+					<section *ngIf="connectionReference.allowsWindowsAuth == true">
+						<form-checkbox label="Use windows authentication" formControlName="useWindowsAuth">
+						</form-checkbox>
+					</section>
+
+					<div *ngIf="connectionReference.allowsUserPassword && (formsService.currentForm.controls.useWindowsAuth.value == false || connectionReference.allowsWindowsAuth == false)" class="form-row">
+						<section class="form-group col-md-6">
+							<form-select 
+								[enableTextEntry]="true" 
+								label="User Name" 
+								formControlName="username" 
+								placeholder="Enter user name" 
+								iconClass="fa fa-user" 
+								[errors]="formsService.formErrors.username"
+								[items]="variables" 
+								[enableFilter]="true"
+							></form-select> 
+						</section>
+						<section class="form-group col-md-6">
+							<form-input *ngIf="formsService.currentForm.controls.usePasswordVariable.value == false" label="Password" (keydown)="passwordChanged()" formControlName="passwordDisplay" type="password" placeholder="Enter a password"  iconClass="fa fa-lock" [errors]="formsService.formErrors.password">
+							</form-input>
+
+							<form-select *ngIf="formsService.currentForm.controls.usePasswordVariable.value"
+								label="Password" 
+								formControlName="password" 
+								[items]="variables" 
+								iconClass="fa fa-at" 
+								[sortItems]="true" 
+								[enableTextEntry]="true"
+								textEntryNote="Enter the variable name surrounded by {}">
+							</form-select>
+
+							<form-checkbox label="Use a variable for password" formControlName="usePasswordVariable" (click)="clearPassword()" >
+							</form-checkbox>
+						</section>
+					</div>
+
+					<section *ngIf="connectionReference.requiresDatabase" ng-disabled="refreshingConnection || creatingDatabase" >
+						<form-select 
+							[label]="connectionReference.databaseDescription" 
+							formControlName="defaultDatabase" 
+							[items]="databases" 
+							[defaultItem]="formsService.currentForm.value.defaultDatabase" 
+							iconClass="fa fa-database" 
+							[sortItems]="true" 
+							[enableTextEntry]="true"
+							textEntryNote="Enter the database name"
+							(textValueChange)="newDatabaseName($event)"
+						>
+								(<a href="javascript:void(0)" *ngIf="refreshingConnection == false" (click)="refreshConnection()"> <i class="fa fa-refresh"></i> Refresh </a>
+						<span *ngIf="refreshingConnection == true" > <i class="fa fa-spin fa-refresh"></i> Refreshing... please wait </span>) (
+							<a href="javascript:void(0)" *ngIf="creatingDatabase == false" (click)="createDatabase()"> <i class="fa fa-edit"></i> New Database </a>
+							<span *ngIf="creatingDatabase == true"> <i class="fa fa-spin fa-refresh"></i> Creating database... please wait </span>)
+						</form-select>
+					</section>
+				</span>
+
+				<section *ngIf="formsService.currentForm.controls.purpose.value == 'Managed'">
+					<form-checkbox label="Multi-use Managed Database (table keys will be added to table names to allow multiple hubs to use same database)"
+						formControlName="embedTableKey" [errors]="formsService.formErrors.embedTableKey">
+					</form-checkbox>
+				</section>
+
+				</span>
+			</fieldset>
+
+		</form>
+	</dexih-widget>
+	
+	<dexih-help class="m-3" title="Connections" path="/assets/help/reference/connection.md"></dexih-help>
+
+</div>

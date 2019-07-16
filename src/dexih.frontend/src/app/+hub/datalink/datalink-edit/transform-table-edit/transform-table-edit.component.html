@@ -1,0 +1,34 @@
+<div>
+	<div class="widget-body-toolbar">
+		<div class="form-row">
+			<div class="col-sm-6">
+				<h5>Transform Output Columns</h5>
+			</div>
+			<div class="col-sm-6 text-right">
+                <dexih-button-close (click)="close()"></dexih-button-close>
+			</div>
+		</div>
+	</div>
+
+    <dexih-table 
+        [enableMultiSelect]="true"
+        [enableManualSort]="true"
+        (onSortChanged)="columnSortChange($event)"
+        sortColumn="position"
+        [columns]="columns"
+        [dataObservable]="columnData"
+        >
+            <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+                <dexih-button-delete (click)="deleteSelected(items)" title="Delete selected columns"></dexih-button-delete>
+            </ng-template>
+
+            <ng-template #selectedItemAction select="selectedItemAction" let-column="item">
+                <dexih-button-edit (click)="editColumn(column)" title="Edit the column"></dexih-button-edit>
+            </ng-template>
+
+            <ng-template #actions select="actionsTemplate" let-items="items">
+                <dexih-button-new (click)="deleteSelected(items)" title="Create a new column"></dexih-button-new>
+            </ng-template>
+
+    </dexih-table>
+</div>

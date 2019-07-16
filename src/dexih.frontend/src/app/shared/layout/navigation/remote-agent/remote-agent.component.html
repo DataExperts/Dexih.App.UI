@@ -1,0 +1,26 @@
+<menu-parent [name]="selectedRemoteAgent ? selectedRemoteAgent.name : 'No Active Agent'">
+    <ng-template #item>
+        <encryption-status-icon *ngIf="selectedRemoteAgent" class="ml-1" [isEncrypted]="selectedRemoteAgent?.isEncrypted"></encryption-status-icon>
+        <span *ngIf='!selectedRemoteAgent' class="text-danger">
+            <i class="fa fa-lg fa-exclamation-circle" title="No remote agent is available for this hub."></i>
+        </span>
+    </ng-template>
+    <ng-template [ngIf]="activeHubAgents">
+        <li class="nav-item" *ngFor="let activeAgent of activeHubAgents">
+            <a class="nav-link" (click)="setRemoteAgent(activeAgent)">
+                <encryption-status-icon class="mr-1" [isEncrypted]="activeAgent.isEncrypted"></encryption-status-icon>
+                {{activeAgent.name}}
+                <a (click)="editRemoteAgent(activeAgent)" class="btn btn-xs btn-primary float-right text-white"><i class="fa fa-edit"></i></a>
+            </a>
+        </li>
+        <div class="dropdown-divider"></div>
+        <li *ngIf="hubCache.canWrite" class="nav-item">
+            <a class="nav-link" routerLink="/hub/{{hubKey}}/agents">
+                <i class="fa fa-wrench"></i> Manage Agents</a>
+        </li>
+        <li *ngIf="hubCache.canWrite" class="nav-item">
+            <a class="nav-link" (click)="refresh()">
+                <i class="fa fa-refresh"></i> Refresh Agents</a>
+        </li>
+    </ng-template>
+</menu-parent>

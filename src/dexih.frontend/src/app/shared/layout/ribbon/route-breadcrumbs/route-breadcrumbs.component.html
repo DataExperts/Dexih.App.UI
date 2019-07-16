@@ -1,0 +1,13 @@
+<nav class="py-0" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a routerLink="/home" >
+                <i class="fa-fw fa fa-home"></i>Home</a>
+            </li>
+
+            <li *ngFor="let breadcrumb of breadcrumbs; let last = last" class="breadcrumb-item" [ngClass]="{active: last}">
+                <a *ngIf="!last"  [routerLink]="breadcrumb.url" queryParamsHandling="merge">{{breadcrumb.pageTitle}}</a>
+                <span *ngIf="last">{{breadcrumb.pageTitle}} (current)</span>
+            </li>
+    </ol>
+</nav>

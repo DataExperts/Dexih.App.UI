@@ -1,0 +1,121 @@
+<ul class="list-group">
+    <li class="list-group-item list-group-item-danger" *ngIf="fail">
+        <h5>Error encountered!</h5>
+    </li>
+    <li class="list-group-item list-group-item-success" *ngIf="success">
+        <h5>Finished Successfully</h5>
+    </li>
+    <li class="list-group-item" *ngIf="auditResult?.message">
+        <div class="d-flex mb-2">
+            {{auditResult.message}}
+            <div class="ml-auto">
+                <dexih-button *ngIf="auditResult.exceptionDetails" (click)='exceptionHidden = !exceptionHidden'>Details</dexih-button>
+            </div>
+        </div>
+        <div>
+            <pre *ngIf="!exceptionHidden && auditResult.exceptionDetails">{{auditResult.exceptionDetails}}</pre>
+        </div>
+    </li>
+    <li class="list-group-item list-group-item-info rounded-0">
+        <h5>Running Time</h5>
+    </li>
+    <li class="list-group-item ">
+            <div class="container">
+                <div class="row rounded text-white bg-secondary">
+                    <ng-template [ngIf]="auditResult.targetTableName">
+                            <div class="col border border-white">Target Table</div>
+                            <div class="col border border-white">{{auditResult.targetTableName}}</div>
+                            <div class="w-100"></div>
+                    </ng-template>                    
+                    <div class="col border border-white">Run Status</div>
+                    <div class="col border border-white">{{auditResult.runStatus}}</div>
+                    <div class="w-100"></div>                    
+                    <div class="col border border-white">Start Date</div>
+                    <div class="col border border-white">{{auditResult.initializeTime | date : 'short'}}</div>
+                    <div class="w-100"></div>
+                    <ng-template [ngIf]="auditResult.scheduledTime">
+                        <div class="col border border-white">Scheduled Time</div>
+                        <div class="col border border-white">{{auditResult.scheduledTime | date : 'mediumTime'}}</div>
+                        <div class="w-100"></div>
+                    </ng-template>
+
+                    <div class="col border border-white">Initialized</div>
+                    <div class="col border border-white">{{auditResult.initializeTime | date : 'mediumTime'}}</div>
+                    <div class="w-100"></div>
+                    <div class="col border border-white">Started</div>
+                    <div class="col border border-white">{{auditResult.startTime | date : 'mediumTime'}}</div>
+                    <div class="w-100"></div>
+                    <div class="col border border-white">Finished</div>
+                    <div class="col border border-white">{{auditResult.endTime | date : 'mediumTime'}}</div>
+                    <div class="w-100"></div>
+                    <div class="col border border-white">Run Time</div>
+                    <div class="col border border-white">{{runTime | number: '1.2-2'}} seconds</div>
+                    <div class="w-100"></div>
+                    <div class="col border border-white">Triggered By</div>
+                    <div class="col border border-white">{{auditResult.triggerMethod}}</div>
+                </div>
+            </div>
+    </li>
+    <li *ngIf="auditResult.childResults?.length > 0" class="list-group-item list-group-item-info">
+        <h5>Child Results</h5>
+    </li>
+    <li *ngIf="auditResult.childResults?.length > 0" class="list-group-item ">
+        <div *ngFor="let result of auditResult.childResults">
+            <result-progress *ngIf="result.auditType ==='Table'" (click)="openResult(result.auditKey)" 
+                [value]="result.rowsTotal"
+                [total]="result.rowsTotal" [caption]="result.targetTableName" color="bg-color-blueDark"></result-progress>
+            <result-progress *ngIf="result.auditType ==='DatalinkStep'" (click)="openResults(result.auditKey)" 
+                [value]="result.rowsTotal"
+                [total]="result.rowsTotal" [caption]="result.referenceName" color="bg-color-blueDark"></result-progress>
+        </div>
+    </li>
+    <li class="list-group-item list-group-item-info">
+        <h5>Row Distribution</h5>
+    </li>
+    <li class="list-group-item ">
+            <result-progress *ngIf="auditResult.rowsReadPrimary > 0" [value]="auditResult.rowsReadPrimary" [total]="auditResult.rowsReadPrimary + auditResult.rowsReadReference"
+                caption="Source Rows" color="bg-color-blueDark"></result-progress>
+            <result-progress *ngIf="auditResult.rowsReadReference > 0" [value]="auditResult.rowsReadReference" [total]="auditResult.rowsReadPrimary + auditResult.rowsReadReference"
+                caption="Joined Rows" color="bg-color-blueLight"></result-progress>
+            <result-progress *ngIf="auditResult.rowsCreated > 0" [value]="auditResult.rowsCreated" [total]="auditResult.rowsTotal" caption="Created"
+                color="bg-color-greenDark"></result-progress>
+            <result-progress *ngIf="auditResult.rowsUpdated > 0" [value]="auditResult.rowsUpdated" [total]="auditResult.rowsTotal" caption="Updated"
+                color="bg-color-blueDark"></result-progress>
+            <result-progress *ngIf="auditResult.rowsDeleted > 0" [value]="auditResult.rowsDeleted" [total]="auditResult.rowsTotal" caption="Deleted"
+                color="bg-color-magenta"></result-progress>
+            <result-progress *ngIf="auditResult.rowsRejected > 0" [value]="auditResult.rowsRejected" [total]="auditResult.rowsTotal"
+                caption="Rejected" color="bg-color-red"></result-progress>
+            <result-progress *ngIf="auditResult.rowsPreserved > 0" [value]="auditResult.rowsPreserved" [total]="auditResult.rowsTotal"
+                caption="Preserved" color="bg-color-pinkDark"></result-progress>
+            <result-progress *ngIf="auditResult.rowsIgnored > 0" [value]="auditResult.rowsIgnored" [total]="auditResult.rowsTotal" caption="Ignored"
+                color="bg-color-grayDark"></result-progress>
+    </li>
+    <li class="list-group-item list-group-item-info">
+        <h5>Performance Estimates (rows/second)</h5>
+    </li>
+    <li class="list-group-item ">
+            <div class="row rounded text-white bg-secondary">
+                <ng-template ngFor let-item [ngForOf]="auditResult.performanceSummary">
+                        <div class="col border border-white">{{item.transformName}}</div>
+                        <div class="col border border-white">{{item.action}}</div>
+                        <div class="col border border-white">{{item.seconds == 0 ? 'N/A' : ((item.rows / item.seconds) | number: '1.2-2')}} rows/second</div>
+                        <div class="w-100"></div>
+                </ng-template>                    
+            </div>
+        <div style="display: grid">
+            <ngx-charts-bar-vertical
+                scheme="natural"
+                [results]="barChartData" 
+                [gradient]="true" 
+                [xAxis]="true" 
+                [yAxis]="true"
+                [legend]="false" 
+                [showGridLines]="true" 
+                [showXAxisLabel]="true"
+                [showYAxisLabel]="true" 
+                yAxisLabel="rows/second" 
+                xAxisLabel="operation">
+            </ngx-charts-bar-vertical>
+        </div>
+    </li>
+</ul>

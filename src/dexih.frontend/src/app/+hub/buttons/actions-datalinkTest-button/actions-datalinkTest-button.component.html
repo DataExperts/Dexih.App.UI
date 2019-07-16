@@ -1,0 +1,35 @@
+<ng-template [ngIf]="datalinkTests">
+    <dexih-button-dropdown buttonClass="btn-primary" iconClass="fa fa-table" [text]="datalinkTests.length > 1 ? 'Datalink Test' : 'Datalink Test'" [pullRight]="pullRight">
+        <li class="list-group-item list-group-item-heading list-group-item-info">Metadata</li>
+        <li *ngIf="hubCache.canWrite"><a class="dropdown-item" [routerLink]="['datalinkTest-new']" title="Create a new datalink test."><i class="fa fa-file-o"></i> New</a></li>
+        <ng-template [ngIf]="datalinkTests.length > 0">
+            <li *ngIf="showEdit && datalinkTests.length == 1">
+                <a class="dropdown-item" [routerLink]="['datalinkTest-edit', 'edit', datalinkTests[0].key]" queryParamsHandling="merge"><i class="fa fa-edit"></i> Edit</a>
+            </li>
+            <li *ngIf="hubCache.canWrite">
+                <a class="dropdown-item" [routerLink]="['datalinkTest-edit', 'copy', datalinkTests[0].key]" queryParamsHandling="merge" title="Copy the datalink test.">
+                        <i class="fa fa-copy"></i> Copy
+                </a>
+            </li>
+
+            <li><a class="dropdown-item" (click)="export()" title="Export the metadata for the selected datalink tests to a local file."><i class="fa fa-save"></i> Save Locally</a></li>
+            <li *ngIf="hubCache.canWrite"><a class="dropdown-item" (click)="delete()" title="Delete the metadata for the selected datalink tests."><span class="text-danger"><i class="fa fa-trash-o text-danger"></i> Delete</span></a></li>
+    
+            <li class="list-group-item list-group-item-heading list-group-item-info">Operations</li>
+            <li><a class="dropdown-item" *ngIf="datalinkTests.length == 1" [routerLink]="['results']" [queryParams]="{datalinkTestKeys: [datalinkTests[0].key]}" title="Show the execution history "><i class="fa fa-history"></i> Test History</a></li>
+
+            <ng-template [ngIf]="hubCache.canWrite">
+                <li><a class="dropdown-item" (click)="cancel()" title="Cancel selected running datalinks."><span class="text-danger"><i class="fa fa-ban"></i> Cancel Tests</span> </a></li>
+                <li><a class="dropdown-item"  (click)="snapshot()" title="Snapshot the selected datalinks now."><i class="fa fa-bolt"></i> Run Snapshot</a></li>
+                <li><a class="dropdown-item"  (click)="run()" title="Run selected datalinks now."><i class="fa fa-bolt"></i> Run Test</a></li>
+            </ng-template>
+
+            <ng-template [ngIf]="datalinkTests.length == 1">
+                <li class="list-group-item list-group-item-heading list-group-item-info">Related</li>
+                <li *ngFor="let datalink of relatedDatalinks">
+                    <a class="dropdown-item" (click)="navigateToDatalink(datalink)">(Datalink) {{datalink.name}}</a>
+                </li>
+            </ng-template>
+        </ng-template>
+    </dexih-button-dropdown>
+</ng-template>

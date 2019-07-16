@@ -1,0 +1,25 @@
+<div class="container-fluid">
+	<dexih-widget title="Data Jobs" iconClass="fa fa-lg fa-fw fa-calendar"
+	[showCloseButton]="true"
+	(close)="close()"
+	>
+
+
+		<dexih-table [enableMultiSelect]="true" [columns]="columns" [dataObservable]="tableData" (rowClick)="editDatajob($event)">
+			<ng-template #selectedItemAction select="selectedItemAction" let-datajob="item">
+			</ng-template>
+
+			<ng-template #rowStatus select="rowStatus" let-datajob="item">
+				<datalink-status [datajobKey]='datajob.key'></datalink-status>
+			</ng-template>
+
+			<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+			</ng-template>
+
+			<ng-template #actions let-items="items">
+				<actions-datajob-button [datajobs]="items"></actions-datajob-button>
+			</ng-template>
+		</dexih-table>
+
+	</dexih-widget>
+</div>

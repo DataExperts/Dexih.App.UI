@@ -1,0 +1,7 @@
+<div [routerLink]="['connection-edit', connection.key]" queryParamsHandling="merge">
+    <h5>{{connection.name}}</h5>
+    <div *ngIf="connection.description">
+        <markdown [data]="connection.description"></markdown>
+    </div>
+    <div class="note">{{connectionReference?.name}} / {{connection.purpose}} / Updated: {{connection.updateDate | date : 'short' }} </div>
+</div>

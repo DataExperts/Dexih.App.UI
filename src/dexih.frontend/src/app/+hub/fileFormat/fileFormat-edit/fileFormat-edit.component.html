@@ -1,0 +1,137 @@
+<div class="container">
+	<dexih-widget 
+		title="Edit File Format" 
+		iconClass="fa fa-lg fa-fw fa-file-text-o" 
+		[showCloseButton]="true"
+		[padding]="true"
+		(close)="close()"
+		>
+        <ng-template #header>
+			<dexih-invalid-form-details [control]="formsService.currentForm" (click)="formsService.showErrors()" class="mr-1"></dexih-invalid-form-details>
+            <save-button *ngIf="hubCache.canWrite" [formsService]="formsService"  class="mr-1"></save-button>
+            <cancel-button [formsService]="formsService"></cancel-button>
+        </ng-template>
+
+		<form *ngIf="formsService.currentForm"  [formGroup]="formsService.currentForm">
+			<fieldset>
+				<section>
+					<form-input label="File Format Name" formControlName="name" placeholder="Enter the file format name." iconClass="fa fa-list" [errors]="formsService.formErrors['name']" [autocapitalize]="true">
+					</form-input>
+				</section>
+				<section>
+					<form-textarea label="Description" [showMarkdown]="true" formControlName="description" placeholder="Enter the description." >
+					</form-textarea>
+				</section>
+
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-input label="Delimiter" formControlName="delimiter" placeholder="Enter the delimiter" iconClass="fa fa-list"
+						 [errors]="formsService.formErrors['delimiter']" note="The field delimiter (use \t=tab, \n=new line, \r=carriage return).">
+						</form-input>
+					</section>
+					<section class="form-group col-md-6">
+					</section>
+				</div>
+
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-input label="Buffer Size" formControlName="bufferSize" placeholder="Enter buffer size" iconClass="fa fa-list" [errors]="formsService.formErrors['bufferSize']" note="The size of the internal buffer that is used when reader or writing data." >
+						</form-input>
+					</section>
+					<section class="form-group col-md-6">
+						<form-input label="Skip Header Rows Count" formControlName="skipHeaderRows" placeholder="Enter row count" iconClass="fa fa-list" [errors]="formsService.formErrors['skipHeaderRows']" note="The number of rows at the start of the file that will be ignored." >
+						</form-input>
+					</section>
+				</div>
+
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-checkbox label="Has Header Record" formControlName="hasHeaderRecord" note="Tells the reader/writer if there is a header row in the CSV file." >
+						</form-checkbox>
+					</section>
+					<section class="form-group col-md-6">
+						<form-checkbox label="Ignore Header White Space" formControlName="ignoreHeaderWhiteSpace" note="Tells the reader to ignore white space in the headers when matching the columns to the properties by name." >
+						</form-checkbox>
+					</section>
+				</div>
+
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-checkbox label="Match to Column to Header" formControlName="matchHeaderRecord" note="Tells the reader to use the column heading name to load the data.  If unchecked, columns will be read into fields in the order specified in the table columns." >
+						</form-checkbox>
+					</section>
+					<section class="form-group col-md-6">
+						<form-checkbox label="Set White Space Cells to Null " formControlName="setWhiteSpaceCellsToNull" note="Set empty cells or cells containing only white spaces to null." >
+						</form-checkbox>
+					</section>
+				</div>
+
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-checkbox label="Allow Comments" formControlName="allowComments">
+						</form-checkbox>
+						<div *ngIf="formsService.currentForm.controls.allowComments.value">
+							<form-input label="Comment" formControlName="comment" placeholder="Enter comment character" iconClass="fa fa-list"
+							 note="The value used to denote a line that is commented out." [errors]="formsService.formErrors['comment']">
+							</form-input>
+						</div>
+					</section>
+					<section class="form-group col-md-6">
+						<form-checkbox label="Ignore Quotes" formControlName="ignoreQuotes">
+						</form-checkbox>
+						<div *ngIf="!formsService.currentForm.controls.ignoreQuotes.value">
+							<form-input label="Quote" formControlName="quote" placeholder="Enter the quote" [maxlength]="1" iconClass="fa fa-list"
+							 [errors]="formsService.formErrors['quote']" note="The value used to escape fields that contain a delimiter, quote, or line ending.">
+							</form-input>
+						</div>				
+					</section>
+				</div>
+
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-checkbox label="Quote All Fields" formControlName="quoteAllFields" note="Tells the writer whether all fields written should have quotes around them; regardless if the field contains anything that should be escaped." >
+						</form-checkbox>
+					</section>
+					<section class="form-group col-md-6">
+						<form-checkbox label="Quote No Fields" formControlName="quoteNoFields" note="Tells the writer whether all fields written should not have quotes around them; regardless if the field contains anything that should be escaped." >
+						</form-checkbox>
+					</section>
+				</div>
+
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-checkbox label="Trim Fields" formControlName="trimFields" note="Tells the reader to trim whitespace from the beginning and ending of the field value when reading." >
+						</form-checkbox>
+					</section>
+					<section class="form-group col-md-6">
+						<form-checkbox label="Trim Headers" formControlName="trimHeaders" note="Tells the reader to ignore white space from the beginning and ending of the headers when matching the columns to the properties by name." >
+						</form-checkbox>
+					</section>
+				</div>
+
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-checkbox label="Detect Column Count Changes" formControlName="detectColumnCountChanges" note="Check for changes in the number of column from row to row.  If true, the job will abend." >
+						</form-checkbox>
+					</section>
+					<section class="form-group col-md-6">
+						<form-checkbox label="Ignore Reading Exceptions" formControlName="ignoreReadingExceptions" note="Tells the reader to ignore any issues when parsing the file.  Issues mean the file is bad in some way, and the parser isn't able to recover." >
+						</form-checkbox>
+					</section>
+				</div>
+				
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-checkbox label="Will Abend On Missing Field" formControlName="willThrowOnMissingField" note="Indicates if the job should be abended if reading and an expected field is missing." >
+						</form-checkbox>
+					</section>
+					<section class="form-group col-md-6">
+						<form-checkbox label="Skip Empty Records" formControlName="skipEmptyRecords" note="Tells the reader a record should be skipped when reading if it's empty. A record is considered empty if all fields are empty.">
+						</form-checkbox>
+					</section>
+				</div>
+
+			</fieldset>
+		</form>
+ 
+    </dexih-widget>

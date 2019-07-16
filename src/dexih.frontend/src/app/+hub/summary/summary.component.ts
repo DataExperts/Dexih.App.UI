@@ -1,0 +1,83 @@
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { HubCache, eConnectionPurpose, eCacheStatus, sharedObjectProperties } from '../hub.models';
+import { HubService } from '../hub.service';
+import { Subscription, combineLatest} from 'rxjs';
+import { DexihActiveAgent, logoSmallUrl } from '../../+auth/auth.models';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+
+@Component({
+  selector: 'dexih-summary',
+  templateUrl: './summary.component.html',
+  animations: [
+    // trigger name for attaching this animation to an element using the [@triggerName] syntax
+    trigger('slideDown', [
+        state('hide', style({ height: 0, overflow: 'hidden' })),
+        state('show', style({ height: '*', overflow: 'unset' })),
+        transition('hide <=> show', animate('200ms ease-in')),
+    ])
+    ]
+})
+export class SummaryComponent implements OnInit, OnDestroy {
+  private _subscription: Subscription;
+  public hubCache: HubCache;
+
+  public datalinkFilterString;
+  public connectionFilterString;
+  public columnValidationFilterString;
+  public fileFormatFilterString;
+  public datajobFilterString;
+  public tableFilterString;
+
+  public remoteAgent: DexihActiveAgent;
+
+  logoSmallUrl = logoSmallUrl;
+  sharedObjectProperties = sharedObjectProperties;
+
+  public noManagedConnection = false;
+  constructor(public hubService: HubService) { }
+
+  ngOnInit() {
+    try {
+      this._subscription = combineLatest(
+        this.hubService.getHubCacheObservable(),
+        this.hubService.getRemoteAgentObservable(),
+      ).subscribe(result => {
+        this.hubCache = result[0];
+        this.remoteAgent = result[1];
+
+        if (this.hubCache.isLoaded()) {
+          if (this.hubCache.hub.dexihConnections.findIndex(c => c.purpose === eConnectionPurpose.Managed) >= 0) {
+            this.noManagedConnection = false;
+          } else {
+            this.noManagedConnection = true;
+          }
+        }
+      });
+    } catch (e) {
+      this.hubService.addHubClientErrorMessage(e, 'Summary');
+    }
+  }
+
+  ngOnDestroy() {
+    if (this._subscription) { this._subscription.unsubscribe(); }
+  }
+
+  onDatalinkFilterString(filterString: string) {
+    this.datalinkFilterString = filterString;
+  }
+  onConnectionFilterString(filterString: string) {
+    this.connectionFilterString = filterString;
+  }
+  onColumnValidationFilterString(filterString: string) {
+    this.columnValidationFilterString = filterString;
+  }
+  onFileFormatFilterString(filterString: string) {
+    this.fileFormatFilterString = filterString;
+  }
+  onDatajobFilterString(filterString: string) {
+    this.datajobFilterString = filterString;
+  }
+  onTableFilterString(filterString: string) {
+    this.tableFilterString = filterString;
+  }
+}

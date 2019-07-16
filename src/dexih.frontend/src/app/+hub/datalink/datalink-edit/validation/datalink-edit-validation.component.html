@@ -1,0 +1,64 @@
+<div class="list-group-item list-group-item-info rounded-0">
+    <div class="d-flex flex-row">
+        <h5>Validation</h5>
+        <div class="ml-auto">
+        </div>
+    </div>
+</div>
+
+
+<div class="list-group-item" *ngIf="!datalinkTransformForm">
+    <h4>Target column validation is not currently enabled. </h4>
+    <dexih-button *ngIf="!datalinkTransformForm" (click)="enableValidation()" buttonClass="btn btn-success" iconClass="fa fa-check"
+        title="Enable the validation on the target table.">Enable Validation</dexih-button>
+</div>
+
+<div class="list-group-item" *ngIf="datalinkTransformForm">
+
+    <form *ngIf="datalinkTransformForm" [formGroup]="datalinkTransformForm">
+        <fieldset>
+            <section>
+                <dexih-button (click)="disableValidation()" buttonClass="btn btn-success" iconClass="fa fa-check"
+                    title="Enable the validation on the target table.">Disable Validation</dexih-button>
+            </section>
+            <section>
+                <form-textarea label="Description" formControlName="description" placeholder="Enter the description.">
+                </form-textarea>
+            </section>
+        </fieldset>
+    </form>
+</div>
+
+<div class="list-group-item p-1">
+
+    <div *ngIf="datalinkTransformForm" class="d-flex">
+        <div class="mr-1 d-none d-md-inline">
+            <div>
+                <div class="alert alert-primary mb-1">
+                    <h4>Inputs</h4>
+                </div>
+                <div>
+                    <input-columns [datalinkTransformForm]='datalinkTransformForm'></input-columns>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-100">
+            <mapping [datalinkTransformForm]="datalinkTransformForm" [allowCondition]="true" [allowOutput]="true"
+               [allowStandard]="true" [allowValidation]="true" title="Validation">
+            </mapping>
+        </div>
+
+        <div class="ml-1 d-none d-md-inline">
+            <div class="alert alert-primary mb-1">
+                <h4>Outputs
+                    <div class="float-right">
+                    </div>
+                </h4>
+            </div>
+            <output-columns [datalinkTransformForm]='datalinkTransformForm' [allowMappingOutputs]="allowMappingOutputs"
+                (inputOutputDrop)="newDragDropMapping(eDatalinkTransformItemType.ColumnPair, $event)"></output-columns>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="float-right">
+    <dexih-button-edit class="mr-1" [routerLink]="['table-edit', table.key]" queryParamsHandling="merge" text="Edit Table" title="Edit table" ></dexih-button-edit>
+    <dexih-button-edit [routerLink]="['table-edit', table.key, 'column', column.key]" queryParamsHandling="merge" text="Edit Column" title="Edit column" ></dexih-button-edit>
+</div>
+<div>
+    <h5>{{column.name}}</h5>
+    <div *ngIf="column.description">
+        <markdown [data]="column.description"></markdown>
+    </div>
+    <div class="note">Table: {{table.name}}, Updated: {{column.updateDate | date : 'short' }} </div>
+</div>

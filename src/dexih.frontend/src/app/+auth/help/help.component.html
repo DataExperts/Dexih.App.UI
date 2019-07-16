@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+	<div id="logo-group">
+		<span id="logo">
+			<img [src]='logoUrl' alt="Data Experts Group"> </span>
+	</div>
+
+	<div class="collapse navbar-collapse mr-sm-2">
+	</div>
+	<form class="form-inline">
+    <a routerLink="/auth/login" class="btn btn-primary mr-1">Sign In</a>		
+    <a routerLink="/auth/register" class="btn btn-success">Create account</a>
+	</form>
+</nav>
+
+<div id="print-section" class="container p-3">
+  <dexih-widget title="Data Experts Information Hub" iconClass="fa fa-lg fa-fw fa-question" [padding]="true">
+    <ng-template #header>
+      <button (click)="printTerms()" type="button" class="btn btn-danger" id="print">
+        <i class="fa fa-print"></i> Print
+      </button>
+    </ng-template>
+
+    <div class="container-fluid" id="help-body">
+      <markdown [data]="data" (click)="getRoute($event)"></markdown>
+    </div>
+  </dexih-widget>
+</div>

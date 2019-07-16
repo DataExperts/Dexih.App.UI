@@ -1,0 +1,107 @@
+
+<div class="list-group-item list-group-item-info  rounded-0">
+        <div class="d-flex flex-row">
+            <h5>Properties</h5>
+    </div>
+</div>  
+<div class="list-group-item p-3">
+
+            <form *ngIf="mainForm"  [formGroup]="mainForm" >
+            <fieldset>
+                <section>
+                    <form-input label="Data Job Name" formControlName="name" placeholder="Enter the job name." [autocapitalize]="true" iconClass="fa fa-list" [errors]="formService.formErrors.name" >
+                    </form-input>
+                </section>
+
+                <section>
+                    <form-textarea label="Description" [showMarkdown]="true" formControlName="description" placeholder="Enter the description."  [errors]="formService.formErrors.description">
+                    </form-textarea>
+                </section>
+
+                <section>
+                    <form-select label="Datalink Fail Action" formControlName="failAction" [items]="failActions" itemKey="key" itemName="name"
+                            iconClass="fa fa-database" [errors]="formService.formErrors.failAction" note="Action to take when a datalink execution fails." [enableFilter]="false">
+                    </form-select>
+                </section>
+
+                <section >
+                    <form-select label="Audit Connection" formControlName="auditConnectionKey" [items]="this.hubCache?.getManagedConnections()" itemKey="key" itemName="name"
+                            iconClass="fa fa-database" [errors]="formService.formErrors.auditConnectionKey" note='Specify the connection where audit data (such as job results) should be written to.'
+                            [errors]="formService.formErrors.auditConnectionKey">
+                    </form-select>
+                </section>
+
+                <section class="col col-12">
+                    <form-checkbox label="Trigger datajob when new files arrive" formControlName="fileWatch">
+                    </form-checkbox>
+                </section>
+
+                <section class="col col-12">
+                    <form-checkbox label="Auto Start" formControlName="autoStart"
+                        note="Re-activate the datajob when the remote agent is restarted.">
+                    </form-checkbox>                
+                </section>
+            </fieldset>
+        </form>
+</div>
+
+<div class="list-group-item list-group-item-info  rounded-0">
+        <div class="d-flex flex-row">
+            <h5>Triggers</h5>
+    </div>
+</div>  
+<div class="list-group-item p-0">
+
+            <dexih-table 
+                [enableMultiSelect]="true"
+                [enableManualSort]="true"
+                sortColumn="position"
+                [columns]="triggerColumns"
+                [dataObservable]="triggerTableData"
+                (rowClick)='editTrigger($event)'
+                >
+                    <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+                        <dexih-button-delete (click)="deleteTriggers(items)"></dexih-button-delete>
+                    </ng-template>
+
+                    <ng-template #selectedItemAction select="selectedItemAction" let-trigger="item">
+                        <dexih-button-edit (click)="editTrigger(trigger)"></dexih-button-edit>
+                    </ng-template>
+
+                    <ng-template #actions select="actionsTemplate" let-items="items">
+                        <dexih-button-new (click)="newTrigger()" title="New Trigger"></dexih-button-new>
+                    </ng-template>
+                    
+            </dexih-table>
+</div>
+
+<div class="list-group-item list-group-item-info  rounded-0">
+        <div class="d-flex flex-row">
+            <h5>Steps</h5>
+    </div>
+</div>  
+<div class="list-group-item p-0">
+
+            <dexih-table 
+                [enableMultiSelect]="true"
+                [enableManualSort]="true"
+                sortColumn="position"
+                [columns]="stepColumns"
+                [dataObservable]="stepTableData"
+                (rowClick)='editDatalinkStep($event)'
+                >
+                    <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+                        <dexih-button-delete (click)="deleteDatalinkSteps(items)"></dexih-button-delete>
+                    </ng-template>
+
+                    <ng-template #selectedItemAction select="selectedItemAction" let-item="item">
+                        <dexih-button-edit (click)="editDatalinkStep(item)"></dexih-button-edit>
+                    </ng-template>
+
+                    <ng-template #actions select="actionsTemplate" let-items="items">
+                        <dexih-button-new class="mr-1" (click)="newDatalinkStep()" title="Create a new step"></dexih-button-new>
+                        <dexih-button (click)="addDatalinkSteps()" iconClass="fa fa-plus-square" buttonClass="btn-primary" title="Select multiple datalinks to add as steps">Add</dexih-button>
+                    </ng-template>                    
+            </dexih-table>
+</div>
+

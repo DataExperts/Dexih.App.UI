@@ -1,0 +1,11 @@
+<dexih-header class="header"></dexih-header>
+
+<div class="mobile" style="padding-bottom: 50;">
+    <dexih-navigation class="sidebar"  [@sidebar]='sidebarState' ></dexih-navigation>
+    <div class="main" [@main]='mainState'>
+      <dexih-ribbon></dexih-ribbon>
+      <router-outlet></router-outlet>
+    </div>
+</div>
+
+<dexih-footer class="footer"></dexih-footer>

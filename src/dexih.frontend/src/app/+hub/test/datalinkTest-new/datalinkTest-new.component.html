@@ -1,0 +1,66 @@
+<div class="container">
+	<dexih-widget title="New Datalink Test(s)"    iconClass="fa fa-lg fa-fw fa-exchange" [showCloseButton]="true" (close)="!saving && cancel()"
+	 [padding]="true">
+		<ng-template #header>
+			<dexih-button-save class="mr-1" (click)="!saving && save()" [busy]="saving"></dexih-button-save>
+			<dexih-button-cancel (click)="!saving && cancel()" [busy]="saving"></dexih-button-cancel>
+		</ng-template>
+
+		<ng-template #subHeader>
+			<label class="label">Create automatic tests for the following datalink(s):</label>
+			<div>
+				<div class="list-group d-inline-block">
+					<span class="list-group-item" *ngFor="let datalink of sourceDatalinks">
+						{{datalink.name}}
+					</span>
+				</div>
+			</div>
+		</ng-template>
+
+		<form *ngIf="sourceDatalinkKeys" [formGroup]="mainForm">
+
+			<fieldset>
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-input *ngIf="sourceDatalinks.length == 1" label="Test Name" formControlName="name" placeholder="Test name (leave blank for auto naming)"
+						 iconClass="fa fa-comment" [errors]="formErrors.name"></form-input>
+						<form-input *ngIf="sourceDatalinks.length > 1" disabled label="Test Name" placeholder="Test name can not be specified when creating multiple tests."
+						 iconClass="fa fa-comment"></form-input>
+					</section>
+					<section class="form-group col-md-6">
+						<form-select label="Audit Connection" formControlName="auditConnectionKey" [items]="hubCache.hub.dexihConnections"
+							itemKey="key" itemName="name" [errors]="formErrors.auditConnectionKey" iconClass="fa fa-database"
+							note="Connection where test results are stored.">
+						</form-select>
+					</section>
+				</div>
+
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-select formControlName="sourceConnectionKey" label="Input Connection" [items]="managedConnections" itemKey="key"
+						 itemName="name" note="Specify the connection to use for any datalink source data." [errors]="formErrors.sourceConnectionKey"
+						 [allowNullSelect]="true" selectNullMessage="No source table"></form-select>
+					</section>
+					<section class="form-group col-md-6">
+						<form-select formControlName="targetConnectionKey" label="Target Connection" [items]="managedConnections" itemKey="key"
+						 itemName="name" note="Specify the connection for target data." [errors]="formErrors.targetConnectionKey"
+						 [allowNullSelect]="true" selectNullMessage="No target table"></form-select>
+					</section>
+
+				</div>
+			</fieldset>
+
+			<fieldset>
+				<section>
+					<div class="form-row">
+						<section class="col col-11">
+							<form-checkbox label="Snapshot and copy current source/target data into the test connections." formControlName="snapshotData"
+							 name="snapshotData"></form-checkbox>
+						</section>
+					</div>
+				</section>
+			</fieldset>
+		</form>
+
+	</dexih-widget>
+</div>

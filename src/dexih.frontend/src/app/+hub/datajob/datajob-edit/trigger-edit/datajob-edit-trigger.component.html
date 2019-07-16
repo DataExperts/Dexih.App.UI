@@ -1,0 +1,49 @@
+<div class="list-group-item list-group-item-info rounded-0">
+	<div class="d-flex flex-form-row">
+		<h5>Edit Trigger</h5>
+		<div class="ml-auto">
+			<dexih-button-apply [disabled]="!triggerFormService.hasChanged" class="mr-1" (click)="applyExit()"></dexih-button-apply>
+			<dexih-button-cancel (click)="cancel()"></dexih-button-cancel>
+		</div>
+	</div>
+</div>
+
+
+<div class="list-group-item" *ngIf="triggerFormService.currentForm">
+	<form  [formGroup]="triggerFormService.currentForm">
+		<fieldset>
+			<div class="form-row">
+				<section class="form-group col-md-6">
+					<form-date label="Start Date" formControlName="startDate" [errors]="triggerFormService.formErrors.startDate" note="This is the date that the trigger will start.  Leave blank for immediate start.">
+					</form-date>
+				</section>
+			</div>
+			<div class="form-row">
+				<section class="form-group col-md-6">
+					<form-time label="Recurring Interval" formControlName="intervalTime" [errors]="triggerFormService.formErrors.intervalTime"
+					 note="The intra-day interval which the trigger restarts.  Leave blank for once a day jobs.">
+					</form-time>
+				</section>
+				<section class="form-group col-md-6">
+					<form-input type="number" label="Maximum Recurrences" formControlName="maxRecurs" placeholder="Enter the max recurrences"
+					 iconClass="fa fa-refresh" [errors]="triggerFormService.formErrors.maxRecurs" note=" The maximum number of times job can recur in one day.">
+					</form-input>
+				</section>
+			</div>
+			<section>
+				<form-daysofweek label="Days of the week" formControlName="daysOfWeek" note=" The days of the week the trigger is valid.">
+				</form-daysofweek>
+			</section>
+			<div class="form-row">
+			<section class="form-group col-md-6">
+				<form-time label="Start Time" formControlName="startTime" [errors]="triggerFormService.formErrors.startTime" note="Time of the day the job will activate.">
+				</form-time>
+			</section>
+			<section class="form-group col-md-6">
+				<form-time label="End Time" formControlName="endTime" [errors]="triggerFormService.formErrors.endTime" note="Time of the day the triggers will deactivate.">
+				</form-time>
+			</section>
+		</div>
+		</fieldset>
+	</form>
+</div>

@@ -1,0 +1,45 @@
+<div class="container-fluid">
+    <dexih-widget title="Connected Remote Agents" 
+        iconClass="fa fa-lg fa-fw fa-life-saver" 
+		[showCloseButton]="true"
+		(close)="close()"
+    >
+		<dexih-table 
+			[enableMultiSelect]="true"
+			[columns]="columns"
+			[dataObservable]="tableData"
+			rowStatusHeading="Direct Data Connections"
+			>
+				<ng-template #selectedItemAction select="selectedItemAction" let-item="item">
+					<dexih-button-edit class="mr-1"  (click)="edit(item)"></dexih-button-edit>
+					<dexih-button-edit (click)="refreshUserToken(item)" text='Refresh Token'></dexih-button-edit>
+				</ng-template>
+
+				<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+					<dexih-button class="mr-1"  buttonClass="btn btn-success" [busy]="testing" iconClass="fa fa-thumbs-o-up" (click)="!testing && test(items)" title="Test the connectivity of the remote agents.">Test</dexih-button>	
+					<dexih-button-refresh class="mr-1" (click)="restartAgents(items)" text="Restart Agent(s)"></dexih-button-refresh>
+					<dexih-button-delete (click)="removeUserTokens(items)" text="Revoke Tokens"></dexih-button-delete>			
+				</ng-template>
+
+				<ng-template #actions let-items="items">
+					<dexih-button-download class="mr-1" [routerLink]="['download']" iconClass="fa fa-download" text="Download Agent"></dexih-button-download>
+					<dexih-button-new class="mr-1" (click)="createToken()" text="New Token" title="Create a new remote agent id/token combination."></dexih-button-new>
+					<dexih-button-refresh (click)="refresh()" text="Refresh Agents" title="Refresh the active agents"></dexih-button-refresh>
+				</ng-template>
+
+				<ng-template #rowStatus select="rowStatus" let-item="item">
+						<button *ngIf="item.downloadUrls?.length > 0" class="btn btn-primary btn-sm" (click)="test([item])">test</button>
+						<div class="list-group mt-1">
+								<div class="list-group-item" *ngFor="let url of item.downloadUrls">
+									{{url.downloadUrlType}}: <a [href]="url.url + '/ping'" target="_blank">{{url.url}}</a>
+										<br>
+
+									<button *ngIf="url.testStatus == 'error'" class="btn btn-danger btn-sm float-right" [title]="url.testMessage">Failed</button>
+									<button *ngIf="url.testStatus == 'success'" class="btn btn-success btn-sm float-right" [title]="url.testMessage">Success</button>
+								</div>
+							</div>	
+				</ng-template>
+		</dexih-table>
+    </dexih-widget>
+</div>
+

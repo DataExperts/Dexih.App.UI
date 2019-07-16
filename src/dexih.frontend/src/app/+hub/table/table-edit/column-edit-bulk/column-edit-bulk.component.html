@@ -1,0 +1,97 @@
+<dexih-widget title="Bulk update selected columns" headerClass="text-white bg-primary">
+<form [formGroup]="bulkColumn">
+    <section class="form-group col-md-4">
+        <form-select label="Property" [(ngModel)]="property" [ngModelOptions]="{standalone: true}" [items]="properties" itemKey="property"
+            itemName="name">
+        </form-select>
+    </section>
+    <div *ngIf="property=='dataType'">
+        <section class="form-group col-md-4">
+            <form-select label="Data Type" formControlName="dataType" [items]="typeCodes" itemKey="key"
+                itemName="name">
+            </form-select>
+        </section>
+        <section class="form-group col-md-2">
+            <form-input type="number" label="Array Dimensions" formControlName="rank">
+            </form-input>
+        </section>
+        <section *ngIf="bulkColumn.value.isString" class="form-group col-md-6">
+            <form-input label="Max Length" formControlName="maxLength" placeholder="Max Length"
+                type="number" note="Maximum string length (blank for unlimited)">
+            </form-input>
+        </section>
+        <section *ngIf="bulkColumn.value.isNumber" class="form-group col-md-3">
+            <form-input label="Precision" formControlName="precision" placeholder="Precision"
+                type="number">
+            </form-input>
+        </section>
+        <section *ngIf="bulkColumn.value.isNumber" class="form-group col-md-3">
+            <form-input label="Scale" formControlName="scale" placeholder="Scale" type="number">
+            </form-input>
+        </section>
+    </div>
+
+    <div *ngIf="property=='group'" >
+            <section class="form-group col-md-6">
+        <form-input label="Group" formControlName="columnGroup" placeholder="Enter a column group name"
+            iconClass="fa fa-list"
+            note="The group column grouping, used to distinguish duplicate column names when applying to structured data (such as json).">
+        </form-input>
+            </section>
+    </div>
+    <div *ngIf="property=='securityFlag'" >
+        <section class="form-group col-md-6">
+            <form-select label="Security Flag" formControlName="securityFlag" [items]="securityFlags"
+                itemKey="key" itemName="name" note="How to secure this column when reading data.">
+            </form-select>
+        </section>
+    </div>
+    <div *ngIf="property=='deltaType'" >
+        <section class="form-group col-md-6">
+            <form-select label="Delta Type" formControlName="deltaType" [items]="deltaTypes"
+                itemKey="key" itemName="name"
+                note="How to treat the column when used to update target table.">
+            </form-select>
+        </section>
+    </div>
+    <div *ngIf="property=='defaultValue'" >
+        <section class="form-group col-md-6">
+            <form-input label="Default Value" formControlName="defaultValue" placeholder="Default Value"
+                note="Default value if unmapped or null.">
+            </form-input>
+        </section>
+    </div>
+    <div *ngIf="property=='validationRule'" >
+        <section class="form-group col-md-6">
+            <form-select label="Validation Rule" formControlName="columnValidationKey"
+                [allowNullSelect]="true" [items]="hubCache?.hub.dexihColumnValidations" itemKey="key"
+                itemName="name" note="Validation rule to apply.">
+            </form-select>
+        </section>
+    </div>
+    <div *ngIf="property=='allowDbNull'">
+        <section class="form-group col-md-6">
+            <form-checkbox label="Allow Nulls" formControlName="allowDbNull"></form-checkbox>
+        </section>
+    </div>
+    <div *ngIf="property=='isInput'">
+        <section class="form-group col-md-6">
+            <form-checkbox label="Is an Input Column" formControlName="isInput"></form-checkbox>
+        </section>
+    </div>
+    <div *ngIf="property=='isUnicode'">
+        <section class="form-group col-md-6">
+            <form-checkbox label="Is Unicode" formControlName="isUnicode"></form-checkbox>
+        </section>
+    </div>
+</form>
+    <ng-template #footer>
+        <dexih-button-apply class="mr-1" (click)="applyBulkEdit(items)"></dexih-button-apply>
+        <dexih-button-cancel class="mr-1" (click)="bulkEdit=''"></dexih-button-cancel>
+    </ng-template>
+</dexih-widget>
+
+
+
+
+

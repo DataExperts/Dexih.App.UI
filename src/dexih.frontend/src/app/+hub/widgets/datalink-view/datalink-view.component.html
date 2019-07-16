@@ -1,0 +1,8 @@
+<div [routerLink]="['datalink-edit', 'edit', datalink.key]" queryParamsHandling="merge">
+    <h5>{{datalink.name}}</h5>
+    <div *ngIf="datalink.description">
+        <markdown [data]="datalink.description"></markdown>
+    </div>
+    <div class="note">{{datalink.datalinkType}} / Updated: {{datalink.updateDate | date : 'short' }} </div>
+    <datalink-status [datalinkKey]="datalink.key"></datalink-status>
+</div>

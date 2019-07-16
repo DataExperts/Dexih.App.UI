@@ -1,0 +1,45 @@
+<div class="container-fluid">
+	<dexih-widget title="Search Results" iconClass="fa fa-lg fa-fw fa-search" [showCloseButton]="true" [padding]="true" (close)="close()">
+		<form *ngIf="searchForm" [formGroup]="searchForm">
+			<fieldset>
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-input label="Search Term" formControlName="searchString" placeholder="Search..." iconClass="fa fa-search">
+						</form-input>
+					</section>
+					<section class="form-group col-md-6">
+						<form-select label="Restrict to" formControlName="searchObject" [items]="objectTypes" itemKey="key" itemName="name">
+						</form-select>
+					</section>
+				</div>
+			</fieldset>
+		</form>
+
+		<div role="content">
+			<div class="well" *ngIf="!searchResults || searchResults?.length == 0">
+				<h5>No search results available.</h5>
+			</div>
+
+			<div class="well">
+				<ul class="list-group ">
+					<li *ngFor="let searchResult of searchResults" class="list-group-item">
+						<div>
+							<h5>{{searchResult.objectType | objectTypeName }}</h5>
+							<h6>Last updated: {{searchResult.object.updateDate | date : 'short'}}</h6>
+						</div>
+						<div class="col-xs-9" [ngSwitch]="searchResult.objectType">
+							<datajob-view *ngSwitchCase="eObjectType.Datajob" [datajob]="searchResult.object"></datajob-view>
+							<datalink-view *ngSwitchCase="eObjectType.Datalink" [datalink]="searchResult.object"></datalink-view>
+							<connection-view *ngSwitchCase="eObjectType.Connection" [connection]="searchResult.object"></connection-view>
+							<table-view *ngSwitchCase="eObjectType.Table" [connection]="searchResult.objectParent" [table]="searchResult.object"></table-view>
+							<table-column-view *ngSwitchCase="eObjectType.TableColumn" [table]="searchResult.objectParent" [column]="searchResult.object"></table-column-view>
+							<columnValidation-view *ngSwitchCase="eObjectType.ColumnValidation" [columnValidation]="searchResult.object"></columnValidation-view>
+							<fileFormat-view *ngSwitchCase="eObjectType.FileFormat" [fileFormat]="searchResult.object"></fileFormat-view>
+							<view-view *ngSwitchCase="eObjectType.View" [view]="searchResult.object"></view-view>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</dexih-widget>
+</div>

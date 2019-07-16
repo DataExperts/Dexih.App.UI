@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <dexih-widget title="Available Hubs" 
+        iconClass="fa fa-lg fa-fw fa-life-saver" 
+		[showCloseButton]="true"
+		(close)="close()"
+    >
+
+		<dexih-table 
+			[enableMultiSelect]="true"
+			[columns]="columns"
+			[dataObservable]="tableData"
+			(rowClick)="edit($event)"
+			>
+				<ng-template #selectedItemAction select="selectedItemAction" let-hub="item">
+					<dexih-button-edit class="mr-1" [routerLink]="['hub-edit', hub.hubKey]" queryParamsHandling preserveFragment class="mr-1"></dexih-button-edit>
+					<dexih-button-open class="mr-1" [routerLink]="['/hub', hub.hubKey]" queryParamsHandling preserveFragment></dexih-button-open>
+					<dexih-button [routerLink]="['/hub', hub.hubKey, 'manage', 'manage-users']" queryParamsHandling preserveFragment text="Permissions"></dexih-button>
+				</ng-template>
+
+				<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+					<dexih-button-delete (click)="deleteHubs(items)"></dexih-button-delete>
+				</ng-template>
+
+				<ng-template #actions let-items="items">
+					<dexih-button-new [routerLink]="['hub-new']"></dexih-button-new>
+				</ng-template>
+		</dexih-table>
+    </dexih-widget>
+</div>
+

@@ -1,0 +1,35 @@
+    <div class="list-group-item list-group-item-info rounded-0">
+            <div class="d-flex flex-row">
+                <h5>Profile Rules</h5>
+                <div class="ml-auto">
+                </div>
+            </div>
+        </div>
+
+        <div class="container  mt-3 mb-3">
+        <form *ngIf="datalinkForm"  [formGroup]="datalinkForm" >
+    <fieldset>
+        <section>
+            <form-input label="Profile Table Name" formControlName="profileTableName" placeholder="Enter the profile table name." [autocapitalize]="true" iconClass="fa fa-list" 
+            note="Specify the table name in the 'Audit Connection' to send the profile results to.  If this table does not exist, it will be created on first run.">
+            </form-input>
+        </section>
+    </fieldset>
+</form>
+</div>
+
+<dexih-table 
+    [enableMultiSelect]="true" 
+    [enableManualSort]="false"
+    [enableFilter]="false"
+    [columns]="columns" 
+    [dataObservable]="tableData" 
+    [(selectedItems)]="selectedProfileRules" 
+    (onSelectedChange)="hasChanged($event)"
+    keyColumn="functionMethodName">
+
+    <ng-template #rowAction select="rowAction" let-item="item">
+        <form-checkbox label="Capture Detailed Distribution" [(ngModel)]="item.detailedResults" name="detailedResults" (change)="updateProfileRule(item)" ></form-checkbox>
+    </ng-template>
+</dexih-table>
+

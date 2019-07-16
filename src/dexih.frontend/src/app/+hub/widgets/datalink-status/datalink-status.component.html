@@ -1,0 +1,27 @@
+<div *ngIf="previousStatus?.writerResult" style="width:100%" >
+    <dexih-progressbar [animate]="true" [showCancel]="false" [value]="previousStatus.percentage" [type]="previousStatus.statusType" [routerLink]="['result-view', previousStatus.writerResult?.auditConnectionKey, previousStatus.writerResult?.auditKey]" queryParamsHandling="merge" >
+        {{previousStatus.message}}
+    </dexih-progressbar>
+</div>
+
+<div *ngIf="currentStatus?.writerResult" style="width:100%"  >
+    <span *ngIf="currentStatus.writerResult.runStatus == eTaskStatus.Scheduled" >
+        <i class="fa fa-clock-o"></i>
+        Starts in <countdown [end]="currentStatus.writerResult.scheduledTime" ></countdown>         
+
+        <a class="btn btn-sm btn-warning float-right" title="Cancel the execution" (click)="cancelled()">
+            <i class="fa fa-ban"></i>
+        </a>
+    </span>
+        
+    <dexih-progressbar *ngIf="currentStatus.writerResult.runStatus != eTaskStatus.Scheduled"  
+        [animate]="true" 
+        [showCancel]="showCancel" 
+        (cancelled)="cancelled()" 
+        (progressClick)="onProgressClick()"
+        [routerLink]="['result-view', currentStatus.writerResult?.auditConnectionKey, currentStatus.writerResult?.auditKey]" queryParamsHandling="merge" 
+        [value]="currentStatus.percentage" 
+        [type]="currentStatus.statusType">
+        {{currentStatus.message}}
+    </dexih-progressbar>    
+</div>

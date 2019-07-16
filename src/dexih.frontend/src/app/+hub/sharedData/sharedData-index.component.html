@@ -1,0 +1,39 @@
+<div class="container-fluid">
+    <dexih-widget title="Shared Data" 
+		iconClass="fa fa-lg fa-fw fa-newspaper-o" 
+		[showCloseButton]="true"
+		[padding]="false"
+		(close)="close()"
+	>
+
+		<ng-template #header>
+			<dexih-button-dropdown buttonClass="btn-sm btn-outline-primary" iconClass="fa fa-filter" [text]="typeFilter" title="Filter by a purpose" [pullRight]="true">
+				<a class="dropdown-item" [class.active]="typeFilter=='All'" routerLink='.' [queryParams]="{typeFilter: 'All'}" title="All Items">All</a>
+				<a class="dropdown-item" [class.active]="typeFilter=='Datalink'" routerLink='.' [queryParams]="{typeFilter: 'Datalink'}" title="Datalinks">Datalinks</a>
+				<a class="dropdown-item" [class.active]="typeFilter=='Table'" routerLink='.' [queryParams]="{typeFilter: 'Table'}" title="Tables">Tables</a>
+			</dexih-button-dropdown>
+		</ng-template>
+
+	<dexih-table 
+		[enableMultiSelect]="true"
+		[columns]="columns"
+		[dataObservable]="tableData"
+		(rowClick)="preview($event)"
+		>
+
+			<ng-template #selectedItemAction select="selectedItemAction" let-item="item">
+				<dexih-button-preview (click)="preview(item)"></dexih-button-preview>
+			</ng-template>
+
+			<ng-template #rowStatus select="rowStatus" let-item="item">
+			</ng-template>
+
+			<ng-template #selectedItemsAction select="selectedItemsAction" let-objects="items">
+				<dexih-button-download class="mr-1" (click)="downloadData(objects)"></dexih-button-download>
+				<dexih-button-private *ngIf="hubCache.canWrite"  (click)="unshareSelectedTables(objects)"></dexih-button-private>
+			</ng-template>
+	</dexih-table>
+
+    </dexih-widget>
+</div>
+

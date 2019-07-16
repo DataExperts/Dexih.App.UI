@@ -1,0 +1,33 @@
+<div class="container-fluid">
+    <dexih-widget title="Datalinks" 
+		iconClass="fa fa-lg fa-fw fa-exchange" 
+		[showCloseButton]="true"
+		(close)="close()"
+	>
+		<ng-template #header>
+			<dexih-button-dropdown buttonClass="btn-sm btn-outline-secondary" iconClass="fa fa-filter" [text]="typeFilter" title="Filter by a purpose" [pullRight]="true">
+				<a class="dropdown-item" [class.active]="typeFilter=='All'" routerLink='.' [queryParams]="{typeFilter: 'All'}" title="All Datalinks">All</a>
+				<a *ngFor="let datalinkType of datalinkTypes" [class.active]="typeFilter==datalinkType.key" class="dropdown-item" routerLink='.' [queryParams]="{typeFilter: datalinkType.key}" [title]="datalinkType.name">{{datalinkType.key}}</a>
+			</dexih-button-dropdown>
+		</ng-template>
+
+		<dexih-table 
+			tableClass="table table-striped table-hover m-0"
+			[enableMultiSelect]="true"
+			[columns]="columns"
+			[dataObservable]="tableData"
+			(rowClick)="editDatalink($event)"
+			>
+				<ng-template #actions let-items="items">
+					<actions-datalink-button [datalinks]="items" ></actions-datalink-button>
+				</ng-template>
+
+				<ng-template #rowStatus select="rowStatus" let-item="item">
+					<datalink-status [datalinkKey]='item.key'></datalink-status>
+				</ng-template>
+
+		</dexih-table>
+
+    </dexih-widget>
+</div>
+

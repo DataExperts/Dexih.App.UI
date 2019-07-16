@@ -1,0 +1,34 @@
+<div class="list-group-item list-group-item-info rounded-0">
+    <div class="d-flex flex-row">
+        <h5>Properties</h5>
+    </div>
+</div>
+
+<div class="container  mt-3 mb-3">
+    <form *ngIf="datalinkForm" [formGroup]="datalinkForm">
+        <fieldset>
+            <section>
+                <form-select label="Datalink Type" formControlName="datalinkType" [items]="datalinkTypes" itemKey="key" itemName="name" iconClass="fa fa-database"
+                    note='Categorize the type of function this datalink is performing.' [enableFilter]="false">
+                </form-select>
+            </section>
+
+            <section>
+                <form-input label="Datalink Name" formControlName="name" placeholder="Enter the datalink name." iconClass="fa fa-list" [autocapitalize]="true" [errors]="editDatalinkService.hubFormsService.formErrors.name">
+                </form-input>
+            </section>
+
+            <section>
+                <form-textarea [hideToggle]="true" label="Description" [showMarkdown]="true" formControlName="description" placeholder="Enter the description."
+                    [errors]="editDatalinkService.hubFormsService.formErrors.description">
+                </form-textarea>
+            </section>
+
+            <section>
+                <form-checkbox label="Datalink is shared in the catalog to users with read access." formControlName="isShared">
+                </form-checkbox>
+            </section>
+
+        </fieldset>
+    </form>
+</div>

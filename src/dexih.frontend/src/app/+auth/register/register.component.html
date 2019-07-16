@@ -1,0 +1,133 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <div id="logo-group">
+    <span id="logo">
+      <img [src]='logoUrl' alt="Data Experts Group"> </span>
+  </div>
+
+  <div class="collapse navbar-collapse mr-sm-2">
+  </div>
+  <form class="form-inline">
+    <span class="d-none d-md-inline text-white m-1">Already registered?</span>
+    <a routerLink="/auth/login" class="btn btn-primary mr-1">Sign In</a>
+    <a routerLink="/auth/verifyemail" class="btn btn-primary">Verify Email</a>
+		<a routerLink="/auth/help" class="btn btn-secondary ml-1">Help</a>
+  </form>
+
+</nav>
+
+
+<div class="login-container">
+  <div class="card">
+    <form *ngIf="formsService.currentForm" [formGroup]="formsService.currentForm" (ngSubmit)="onSubmit()">
+      <div class="card-header">
+        Information Hub - Complete your Registration
+      </div>
+      <div class="card-body">
+
+        <fieldset>
+
+            <section>
+              <form-input label="Login Provider" formControlName="provider">
+              </form-input>
+            </section>
+
+          <section>
+            <form-input label="Email Address" formControlName="email" placeholder="Email address" iconClass="fa fa-envelope" [errors]="formsService.formErrors.email">
+            </form-input>
+          </section>
+
+          <section *ngIf="loginType == eLoginType.Password">
+            <form-input label="Password" formControlName="password" type="password" placeholder="Password" iconClass="fa fa-lock" [errors]="formsService.formErrors.password">
+            </form-input>
+          </section>
+
+          <section>
+            <form-input *ngIf="loginType == eLoginType.Password" label="Confirm Password" formControlName="passwordConfirm" type="password" placeholder="Confirm Password"
+              iconClass="fa fa-lock" [errors]="formsService.formErrors.passwordConfirm">
+            </form-input>
+          </section>
+        </fieldset>
+
+        <fieldset>
+          <div class="form-row">
+            <section class="form-group col-md-6">
+              <form-input label="First name" formControlName="firstName" placeholder="First name" [errors]="formsService.formErrors.firstName" [autocapitalize]="true">
+              </form-input>
+            </section>
+            <section class="form-group col-md-6">
+              <form-input label="Last name" formControlName="lastName" placeholder="Last name" [errors]="formsService.formErrors.lastName" [autocapitalize]="true">
+              </form-input>
+            </section>
+          </div>
+
+          <section>
+            <form-checkbox label="I want to receive news and special offers" formControlName="subscription"></form-checkbox>
+            <form-checkbox formControlName="terms" [errors]="formsService.formErrors.terms">
+              I agree with the
+              <a href="javascript:void(0)" (click)="showTerms()"> Terms and Conditions </a> & <a routerLink="/auth/help" [queryParams]="{ 'path':  'policies/privacy.md'}"> Privacy Policy </a>
+            </form-checkbox>
+            
+          </section>
+
+          <section *ngIf="message">
+            <div class="alert alert-danger">
+              {{message}}
+            </div>
+          </section>
+
+          <section *ngIf="loginType != eLoginType.Google && googleMessage">
+            <div class="alert alert-danger">
+              Google could not automatically sign-in due to "{{googleMessage}}".  
+              Click login button to open new window to login to your google account.
+              <dexih-button buttonClass="btn btn-danger" iconClass="fa fa-google" text="Google Login" (click)="googleLogin(true)"></dexih-button>
+            </div>
+          </section>
+
+          <section *ngIf="loginType != eLoginType.Microsoft && microsoftMessage">
+              <div class="alert alert-danger">
+                Microsoft could not automatically sign-in due to "{{microsoftMessage}}".  
+                Click login button to open new window to login to your microsoft account.
+                <dexih-button buttonClass="btn btn-primary" iconClass="fa fa-microsoft" text="Microsoft Login" (click)="microsoftLogin(true)"></dexih-button>
+              </div>
+            </section>
+        </fieldset>
+
+      </div>
+      <div class="card-footer">
+
+        <button type="submit" class="btn btn-primary">
+          Register
+        </button>
+
+        <button *ngIf="loginType == eLoginType.Google" (click)="googleLogin(true)" class="btn btn-danger ml-1">Change User &nbsp;
+            <i class="fa fa-google"></i>
+        </button>
+
+        <button *ngIf="loginType == eLoginType.Microsoft" (click)="microsoftLogin(true)" class="btn btn-primary ml-1">Change User &nbsp;
+          <i class="fa fa-windows"></i>
+        </button>
+
+      </div>
+    </form>
+  </div>
+  <div class="card mt-2">
+      <div class="card-header">
+        Other Sign-in Options
+      </div>
+      <div class="card-body">
+        <div *ngIf="loginType != eLoginType.Password" class="mt-2">
+          <button  style="width: 100%" (click)="enablePassword()" class="btn btn-success">
+            <i class="fa fa-sign-in"></i>&nbsp;&nbsp;Sign in with User/Password</button>
+        </div>
+      
+        <div *ngIf="loginType != eLoginType.Google" class="mt-2">
+          <button style="width: 100%" (click)="enableGoogle()" class="btn btn-danger">
+            <i class="fa fa-google"></i>&nbsp;&nbsp;Sign in with Google</button>
+        </div>
+        <div *ngIf="loginType != eLoginType.Microsoft" class="mt-2">
+          <button style="width: 100%" (click)="enableMicrosoft()" class="btn btn-primary">
+            <i class="fa fa-windows"></i>&nbsp;&nbsp;Sign in with Microsoft</button>
+        </div>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,3 @@
+<dexih-button-dropdown buttonClass="btn-primary" iconClass="'fa fa-cloud-download'" text="Download data">
+    <a *ngFor="let downloadFormat of downloadFormats" class="dropdown-item" (click)="doDownload(downloadFormat.key)">{{downloadFormat.name}}</a>
+</dexih-button-dropdown>

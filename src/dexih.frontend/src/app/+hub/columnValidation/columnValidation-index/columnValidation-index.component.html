@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <dexih-widget title="Column Validation Rules" 
+		iconClass="fa fa-lg fa-fw fa-check-square-o" 
+		[showCloseButton]="true"
+		(close)="close()"
+	>
+		<dexih-table 
+			[enableMultiSelect]="true"
+			[columns]="columns"
+			[dataObservable]="tableData"
+			(rowClick)="edit($event)"
+			>
+				<ng-template #selectedItemAction select="selectedItemAction" let-validation="item">
+					<actions-columnValidation-button [columnValidation]="validation"></actions-columnValidation-button>
+				</ng-template>
+
+				<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+					<dexih-button-save-local class="mr-1" (click)="export(items)"></dexih-button-save-local>
+					<dexih-button-delete *ngIf="hubCache.canWrite" (click)="deleteValidations(items)"></dexih-button-delete>
+				</ng-template>
+
+				<ng-template #actions let-items="items">
+					<dexih-button-new *ngIf="hubCache.canWrite" [routerLink]="['columnValidation-new']"></dexih-button-new>
+				</ng-template>
+		</dexih-table>
+
+    </dexih-widget>
+</div>
+
+

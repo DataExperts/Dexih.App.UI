@@ -1,0 +1,111 @@
+<div class="container">
+	<dexih-widget title="Edit API" iconClass="fa fa-lg fa-fw fa-feed" [showCloseButton]="true" [padding]="true"
+		(close)="close()">
+		<ng-template #header>
+			<dexih-invalid-form-details [control]="formsService.currentForm" (click)="formsService.showErrors()"
+				class="mr-1"></dexih-invalid-form-details>
+			<download-button class="mr-1" (download)="download($event)"></download-button>
+			<save-button *ngIf="hubCache.canWrite" [formsService]="formsService" class="mr-1"></save-button>
+			<cancel-button [formsService]="formsService"></cancel-button>
+		</ng-template>
+
+		<form *ngIf="formsService.currentForm" [formGroup]="formsService.currentForm">
+			<fieldset>
+				<section>
+					<form-input label="Api Name" formControlName="name" placeholder="Enter the api name." [autocapitalize]="true"
+						iconClass="fa fa-list" [errors]="formsService.formErrors['name']">
+					</form-input>
+				</section>
+				<section>
+					<form-textarea label="Description" [showMarkdown]="true" formControlName="description"
+						placeholder="Enter the description.">
+					</form-textarea>
+				</section>
+				<section>
+					<div class="form-row">
+						<section class="form-group col-md-6">
+							<form-checkbox label="Auto Start" formControlName="autoStart"
+								note="Re-start the API when the remote agent is restarted.">
+							</form-checkbox>
+						</section>
+						<section class="form-group col-md-6">
+							<form-input label="Log Directory" formControlName="logDirectory"
+								placeholder="Enter a directory to log api updates." iconClass="fa fa-list"
+								[errors]="formsService.formErrors['logDirectory']"
+								note="Directory to create detailed logs of API calls.  Leave blank to exclude file logging.">
+							</form-input>
+						</section>
+					</div>
+				</section>
+				<section>
+					<div class="form-row">
+						<section class="form-group col-md-6">
+							<form-checkbox label="Cache Queries" formControlName="cacheQueries"
+								note="Cache API called to improve performance">
+							</form-checkbox>
+						</section>
+						<section class="form-group col-md-6">
+							<form-time label="Reset Cache Interval" formControlName="cacheResetInterval"
+								[errors]="formsService.formErrors['resetCacheInterval']"
+								note="The interval to reset the cache (forcing a reload of new data).">
+							</form-time>
+						</section>
+					</div>
+				</section>
+
+				<section>
+					<div class="form-row">
+						<section class="form-group col-md-6">
+							<form-select label="Data Source Type" formControlName="sourceType" [items]="sourceTypes"
+								itemKey="key" itemName="name" iconClass="fa fa-database"
+								note='Specify the source type for this view' [enableFilter]="false">
+							</form-select>
+						</section>
+						<section class="form-group col-md-6"
+							*ngIf="formsService.currentForm.value.sourceType == eSourceType.Table">
+							<form-select label="Source Table" formControlName="sourceTableKey"
+								[errors]="errors?.sourceTableKey" [items]="connectionTables" parentName="name"
+								childItems="dexihTables" itemKey="key" itemName="logicalName"
+								note="Select the source table">
+							</form-select>
+						</section>
+						<section class="form-group col-md-6"
+							*ngIf="formsService.currentForm.value.sourceType == eSourceType.Datalink">
+							<form-select label="Source Datalink" formControlName="sourceDatalinkKey"
+								[errors]="errors?.sourceDatalinkKey" [items]="datalinks" itemKey="key"
+								itemName="name" note='Select the source datalink'>
+							</form-select>
+						</section>
+					</div>
+				</section>
+			</fieldset>
+		</form>
+
+		<div class="d-flex flex-wrap pt-1" *ngIf="inputColumns && inputColumns.length > 0">
+			<span *ngFor="let column of inputColumns; let i = index" class="input-group">
+				<div class="input-group-prepend">
+					<div class="input-group-text">
+						{{column.logicalName}}
+					</div>
+				</div>
+				<form-input name="column{{i}}" class="form-control p-0" [placeholder]="'Enter ' + column.logicalName"
+					[(ngModel)]="column.value"></form-input>
+			</span>
+		</div>
+
+		<section>
+			<h5>Data Configuration</h5>
+			<query-builder [selectQuery]="selectQuery" [columns]="tableColumns" [inputColumns]="inputColumns">
+			</query-builder>
+		</section>
+
+		<dexih-table [enableMultiSelect]="false" [enableSaveCsv]="true" [columns]="columns" [data]="data">
+			<ng-template #actions let-items="items">
+				<dexih-button-refresh class="mr-1" (click)="refresh()" text="Reload"></dexih-button-refresh>
+			</ng-template>
+		</dexih-table>
+
+	</dexih-widget>
+
+	<dexih-help class="m-3"  title="Connections" path="/assets/help/reference/api.md"></dexih-help>
+</div>

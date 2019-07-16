@@ -1,0 +1,62 @@
+$sidebar-width: 250px;
+$header-height: 50px;
+$footer-height: 30px;
+
+.header {
+    position: fixed;
+    top: 0;
+    height: $header-height;
+    left: 0px;
+    right: 0px;
+    z-index: 1000;
+}
+
+.content {
+    margin-top: $header-height;
+    margin-bottom: $footer-height;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.footer {
+    position: fixed;
+    height: $footer-height;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin: 0px;
+    z-index: 1000;
+}
+
+.sidebar {
+    position: absolute;
+    margin-top: 0px;
+    width: $sidebar-width;
+    margin: 0;
+    padding-bottom: $footer-height;
+}
+
+.collapsed > .sidebar {
+    width: 0px;
+}
+
+.mobile > .sidebar {
+    position: absolute;
+    // float: left;
+     z-index: 500;
+}
+
+.main {
+    left: $sidebar-width;
+    margin-top: $header-height;
+    margin-bottom: $footer-height;
+    right: 0px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */   
+    -webkit-overflow-scrolling: touch; 
+    height: calc(100vh - 48px);
+}
+
+.collapsed > .main {
+    margin-left: 0px;
+}

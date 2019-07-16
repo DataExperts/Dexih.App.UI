@@ -1,0 +1,38 @@
+<div class="container-fluid">
+    <dexih-widget [title]="title" 
+		iconClass="fa fa-lg fa-fw fa-table" 
+		[showCloseButton]="true"
+		(close)="close()"
+		[showIf]="hubCache?.hub"
+	>
+
+		<ng-template #header>
+			<dexih-button-dropdown *ngIf="hubCache?.hub" class="mr-1" buttonClass="btn-sm btn-outline-primary" iconClass="fa fa-database" [text]="connectionName" title="Filter by a connection" [pullRight]="true">
+				<a *ngFor="let connection of (hubCache.hub.dexihConnections | booleanFilter :'isValid':true )" class="dropdown-item" routerLink="." [queryParams]="{connectionKey: connection.key}">{{connection.name}}</a>
+			</dexih-button-dropdown>
+
+			<dexih-button-dropdown buttonClass="btn-sm btn-outline-primary" iconClass="fa fa-filter" [text]="purposeFilter" title="Filter by a purpose" [pullRight]="true">
+				<a class="dropdown-item" [class.active]="purposeFilter=='All'" routerLink='.' [queryParams]="{purposeFilter: 'All'}" title="All Connections">All</a>
+				<a *ngFor="let purpose of connectionPurposes" [class.active]="purposeFilter==purpose.key" class="dropdown-item" routerLink='.' [queryParams]="{purposeFilter: purpose.key}" [title]="purpose.name">{{purpose.key}}</a>
+			</dexih-button-dropdown>
+
+		</ng-template>
+
+		<dexih-table 
+			[enableMultiSelect]="true"
+			[columns]="columns"
+			[dataObservable]="tableData"
+			(rowClick)="editTable($event)"
+			>
+				<ng-template #actions let-items="items">
+					<actions-table-button [tables]="items" [refreshTables]="true" ></actions-table-button>
+				</ng-template>
+
+				<ng-template #rowStatus select="rowStatus" let-table="item">
+					<datalink-status [tableKey]='table.key'></datalink-status>
+				</ng-template>
+		</dexih-table>
+
+    </dexih-widget>
+</div>
+

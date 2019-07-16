@@ -1,0 +1,83 @@
+<div class="container">
+	<dexih-widget title="New Datalink(s)"  
+		iconClass="fa fa-lg fa-fw fa-exchange" 
+		[showCloseButton]="true"
+		(close)="!savingDatalink && cancel()"
+		[padding]="true"
+		>
+		<ng-template #header>
+			<dexih-button-save class="mr-1" (click)="!savingDatalink && saveDatalink()" [busy]="savingDatalink"></dexih-button-save>
+			<dexih-button-cancel (click)="!savingDatalink && cancel()" [busy]="savingDatalink"></dexih-button-cancel>
+		</ng-template>
+
+		<ng-template #subHeader>
+			<label class="label">Create datalinks for the following source table(s):</label>
+			<div>
+				<div class="row">
+					<span class="col alert alert-primary m-1" *ngFor="let sourceTable of sourceTables | fieldSort: 'name'">
+						{{sourceTable.name}}
+					</span>
+				</div>
+			</div>
+		</ng-template>
+
+		<form *ngIf="sourceTableKeys"  [formGroup]="mainForm">
+
+			<fieldset>
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-input *ngIf="sourceTables.length == 1" label="Datalink Name" formControlName="name" placeholder="Datalink name (leave blank for auto naming)" [autocapitalize]="true"
+						 iconClass="fa fa-comment" [errors]="formErrors.name"></form-input>
+						<form-input *ngIf="sourceTables.length > 1" disabled label="Datalink Name" placeholder="Datalink name can not be specified when creating multiple datalinks."
+						 iconClass="fa fa-comment"></form-input>
+					</section>
+
+					<section class="form-group col-md-6">
+						<form-select formControlName="datalinkType" label="Type" [items]="datalinkTypes" name="datalinkType" [errors]="formErrors.datalinkType"></form-select>
+					</section>
+				</div>
+
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-select formControlName="targetConnectionKey" label="Target Connection" [items]="managedConnections" itemKey="key"
+						 itemName="name" note="Specify the connection for the target table." [errors]="formErrors.targetConnectionKey" [allowNullSelect]="true" selectNullMessage="No target table"></form-select>
+					</section>
+
+					<section class="form-group col-md-6">
+						<form-select formControlName="auditConnectionKey" label="Audit Connection" [items]="managedConnections" itemKey="key"
+						 itemName="name" note="Specify the connection to store execution results." [errors]="formErrors.auditConnectionKey"
+						 [allowNullSelect]="true" selectNullMessage="No datalink auditing"></form-select>
+					</section>
+				</div>
+			</fieldset>
+		</form>
+
+		<form *ngIf="sourceTableKeys" >
+			<fieldset>
+				<section>
+
+					<div class="form-row">
+						<section class="col col-11">
+							<form-checkbox label="Include source columns in target table" [ngModel]="addSourceColumns" name="addSourceColumns"></form-checkbox>
+						</section>
+					</div>
+
+					<div class="form-row">
+						<section class="col col-11">
+							<label class="label">
+								Specify the audit columns (in addition to source columns) to be included in the target table.
+							</label>
+							<form-checkbox label="Select All/None" (ngModelChange)="selectAllAuditColumns()" [ngModel]="allAuditColumns" name="selectAllAuditColumns"></form-checkbox>
+						</section>
+					</div>
+
+					<div class="form-row">
+						<section *ngFor="let auditColumnType of auditColumnTypes" class="form-group col-md-6">
+							<form-checkbox [label]="auditColumnType.name" [(ngModel)]="auditColumnType.value" [ngModelOptions]="{standalone: true}"></form-checkbox>
+						</section>
+					</div>
+				</section>
+			</fieldset>
+		</form>
+	</dexih-widget>
+</div>

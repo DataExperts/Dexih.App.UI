@@ -1,0 +1,82 @@
+<div class="list-group-item list-group-item-info rounded-0">
+    <div class="d-flex flex-row">
+        <h5>Target Properties</h5>
+    </div>
+</div>
+
+<div class="container  mt-3 mb-3">
+    <form *ngIf="datalinkForm" [formGroup]="datalinkForm">
+        <fieldset>
+            <form-checkbox label="Enable datalink to populate target tables"
+                formControlName="isQuery" [errors]="editDatalinkService.hubFormsService.formErrors.isQuery">
+            </form-checkbox>
+
+            <span *ngIf="!datalinkForm?.controls.isQuery.value">
+                <section>
+                    <form-select label="Load Strategy" formControlName="loadStrategy" [items]="loadStrategies" itemKey="key"
+                        itemName="description" iconClass="fa fa-database" note='Specify processing method for target table(s).'
+                        [errors]="editDatalinkService.hubFormsService.formErrors.loadStrategy">
+                    </form-select>
+                </section>
+                    <section>
+                    <form-select label="Update Strategy" formControlName="updateStrategy" [items]="updateStrategies"
+                        itemKey="key" itemName="description" iconClass="fa fa-database" note='Specify how records should be inserted/updated in the target table.'
+                        [errors]="editDatalinkService.hubFormsService.formErrors.updateStrategy">
+                    </form-select>
+                </section>
+
+                <section>
+                    <form-select label="Audit Connection" formControlName="auditConnectionKey" [items]="this.managedConnections"
+                        itemKey="key" itemName="name" iconClass="fa fa-database" [errors]="editDatalinkService.hubFormsService.formErrors.auditConnectionKey"
+                        note='Specify the connection where audit data (such as job results) should be written to.'>
+                    </form-select>
+                </section>
+
+                <div class="form-row">
+                    <section class="form-group col-md-6">
+                        <form-input label="Maximum Rows Per Commit" type="number" formControlName="rowsPerCommit"
+                            placeholder="Enter maximum rows per commit" iconClass="fa fa-list" [errors]="editDatalinkService.hubFormsService.formErrors.rowsPerCommit">
+                        </form-input>
+                    </section>
+                    <section class="form-group col-md-6">
+                        <form-input label="Maximum Rows Per Progress Update" type="number" formControlName="rowsPerProgress"
+                            placeholder="Enter maximum rows per progress update" iconClass="fa fa-list" [errors]="editDatalinkService.hubFormsService.formErrors.rowsPerProgress">
+                        </form-input>
+                    </section>
+                </div>
+
+                <div class="form-row mb-2">
+                    <form-checkbox label="Add a default row to the target table.  Edit the 'Default Value' of the target columns determine the value to populate."
+                        formControlName="addDefaultRow" [errors]="editDatalinkService.hubFormsService.formErrors.addDefaultRow">
+                    </form-checkbox>
+                </div>
+            </span>
+        </fieldset>
+    </form>
+</div>
+
+<div class="list-group-item list-group-item-info">
+    <div class="d-flex flex-row">
+        <h5>Tables</h5>
+    </div>
+</div>
+
+<dexih-table [enableMultiSelect]="true" [enableManualSort]="true" [enableSort]="false"
+    [enableFilter]="false" (onSortChanged)="targetSortChange($event)" [columns]="targetTableColumns" [data]="targets"
+    (rowClick)="editTable($event)">
+
+    <ng-template #actions let-items="items">
+        <dexih-button-new (click)="addTable()"></dexih-button-new>
+    </ng-template>
+
+    <ng-template #selectedItemAction select="selectedItemAction" let-item="item">
+        <dexih-button-edit (click)="editTable(item)"></dexih-button-edit>
+    </ng-template>
+
+    <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+        <dexih-button-delete (click)="deleteTables(items)"></dexih-button-delete>
+    </ng-template>
+
+</dexih-table>
+
+<router-outlet></router-outlet>

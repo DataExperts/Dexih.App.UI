@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a class="btn btn-outline-secondary text-white ml-1" (click)="onMenuToggle()" title="Collapse Menu">
+        <i class="fa fa-reorder"></i>
+    </a>
+
+    <img src="assets/img/dexih/dex_logo_wide_raw.png" height="30" class="d-none d-lg-inline-block align-top pl-1" alt="Data Experts Group">
+
+    <!-- <messages></messages> -->
+
+    <div class="ml-auto"></div>
+
+    <!-- input: search field -->
+    <form #searchForm="ngForm" (ngSubmit)="onSubmit()" class="d-none d-md-inline form-inline">
+        <div class="input-group">
+            <input [(ngModel)]="searchString" class="form-control" type="text" name="param" required placeholder="Search...">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary text-white" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+    <!-- end input: search field -->
+
+    <a *ngIf="displayHelp" class="btn btn-outline-danger text-white ml-1" (click)="onHelpToggle()" title="Toggle help off" data-toggle="button">
+        <i class="fa fa-question"></i>
+    </a>
+
+    <a *ngIf="!displayHelp" class="btn btn-outline-success text-white ml-1" (click)="onHelpToggle()" title="Toggle help on" data-toggle="button">
+        <i class="fa fa-question"></i>
+    </a>
+
+    <a class="btn btn-outline-secondary text-white ml-1" (click)="onFullScreenToggle()" title="Full Screen">
+        <i class="fa fa-arrows-alt"></i>
+    </a>
+
+    <a class="btn btn-outline-secondary text-white ml-1" (click)="logOut()" title="Sign Out" data-action="userLogout" data-logout-msg="You can improve your security further after logging out by closing this opened browser">
+        <i class="fa fa-sign-out"></i>
+    </a>
+
+    <dexih-tasks class="pl-1"></dexih-tasks>
+
+    <dexih-toast #toasts></dexih-toast>
+</nav>

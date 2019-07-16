@@ -1,0 +1,29 @@
+<dexih-button-dropdown buttonClass="btn btn-outline-secondary text-white" iconClass="fa fa-tasks" [pullRight]="true" [badge]="count" badgeClass="badge-light" [hideCarrot]="true">
+    <div *ngIf="count==0">
+        <h5 class="p-3">No tasks</h5>
+    </div>
+    <div class="m-0 list-group" class="tasks">
+        <ng-template ngFor let-item [ngForOf]="tasks | async | fieldSortDesc : 'lastUpdate'">
+            <a (click)="showTask(item)" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{item.name}}</h5>
+                    <small>{{item.status}} {{item.percentage}}%</small>
+                </div>
+                <small *ngIf="item.stepName && !item.isCompleted">Step: {{item.stepName}}</small>
+                <div class="mb-1">
+                    <div class="progress" style="width: 100%">
+                        <div class="progress-bar " [ngClass]="{'bg-success': item.status == eTaskStatus.Completed, 'bg-info': item.status == eTaskStatus.Created || item.status == eTaskStatus.Running || item.status == eTaskStatus.Scheduled, 'bg-danger':  item.status == eTaskStatus.Error || item.status == eTaskStatus.Cancelled }"
+                            role="progressbar" [style.width]="item.percentage + '%'" [attr.aria-valuenow]="item.percentage" aria-valuemin="0"
+                            aria-valuemax="100">
+                            &nbsp;
+                        </div>
+                    </div>
+                </div>
+                <dexih-button-cancel *ngIf="!item.isCompleted" [compact]="true" (click)="cancel(item)"></dexih-button-cancel>
+                <small>Updated at {{item.lastUpdate | date : 'long' }}</small>
+            </a>
+
+        </ng-template>
+    </div>
+
+</dexih-button-dropdown>

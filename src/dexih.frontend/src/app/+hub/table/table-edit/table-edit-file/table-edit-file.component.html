@@ -1,0 +1,101 @@
+<div class="list-group-item list-group-item-info  rounded-0">
+    <div class="d-flex flex-row">
+        <h5>File Properties</h5>
+    </div>
+</div>
+<div class="container mt-3 mb-3">
+
+    <form *ngIf="formService?.currentForm" [formGroup]="formService.currentForm">
+        <section>
+            <form-input label="Files Subdirectory" formControlName="fileRootPath" placeholder="Enter the file path name." iconClass="fa fa-file"
+                [errors]="formService.formErrors.fileRootPath" [note]="'Specify the subdirectory.  This will be the connection directory (' + connection.server + ') plus the path specified.'">
+            </form-input>
+        </section>
+
+        <section>
+            <form-input label="File Match Pattern" formControlName="fileMatchPattern" placeholder="Enter the file path." iconClass="fa fa-file"
+                [errors]="formService.formErrors.fileMatchPattern" note="Specify the file pattern to use to match files when bulk uploading.  Patterns can include wildcards */?, leave blank for all files.">
+            </form-input>
+        </section>
+
+        <section>
+            <form-checkbox label="Auto manage files" formControlName="autoManageFiles" note="Files loaded from the incoming directory, and moved to the processed or rejected directories when they are loaded by a datalink.  If not checked source files will be left untouched after a load.">
+            </form-checkbox>
+        </section>
+
+        <div *ngIf="formService.currentForm.value.autoManageFiles ">
+
+            <section>
+                <form-checkbox label="Specify custom file paths for auto-managed files" formControlName="useCustomFilePaths" [note]="'If custom paths are not specified files will be read/written to the directory: ' + connection.server + '/' + formService.currentForm.value.name + '/'">
+                </form-checkbox>
+            </section>
+
+            <div *ngIf="formService.currentForm.value.useCustomFilePaths">
+
+                <section>
+                    <form-input label="Incoming subdirectory" formControlName="fileIncomingPath" placeholder="Enter the file path." iconClass="fa fa-file"
+                        [errors]="formService.formErrors.fileIncomingPath" note="Specify the sub-directory for incoming files">
+                    </form-input>
+                </section>
+
+                <section>
+                    <form-input label="Outgoing subdirectory" formControlName="fileOutgoingPath" placeholder="Enter the file path." iconClass="fa fa-file"
+                        [errors]="formService.formErrors.fileOutgoingPath" note="Specify the sub-directory for outgoing (written) files">
+                    </form-input>
+                </section>
+
+                <section>
+                    <form-input label="Processed subdirectory" formControlName="fileProcessedPath" placeholder="Enter the file path." iconClass="fa fa-file"
+                        [errors]="formService.formErrors.fileProcessedPath" note="Specify the sub-directory for processed files">
+                    </form-input>
+                </section>
+                <section>
+                    <form-input label="Rejected subdirectory" formControlName="fileRejectedPath" placeholder="Enter the file path." iconClass="fa fa-file"
+                        [errors]="formService.formErrors.fileRejectedPath" note="Specify the sub-directory for rejected files">
+                    </form-input>
+                </section>
+
+            </div>
+        </div>
+
+        <section>
+            <form-select label="Format Type" formControlName="formatType" [items]="formatTypes" itemKey="key" itemName="name" iconClass="fa fa-database"
+                note='The format of data.'>
+            </form-select>
+        </section>
+
+        <section *ngIf="formService.currentForm.value.formatType == eTypeCode.Text">    
+            <form-select label="File Format" formControlName="fileFormatKey" placeholder="File Format" [errors]="formService.formErrors.fileFormatKey"
+                [items]="hubCache.hub.dexihFileFormats" itemKey="key" itemName="name" [enableFilter]="false" note="Specify the file format to use, if not specified, a csv (command separated) format will be used."
+                [allowNullSelect]="true" selectNullMessage="Use default (csv) format">
+                <a routerLink="fileFormat-new">(<i class="fa fa-sticky-note-o"></i> Create New Format )</a>
+            </form-select>
+        </section>
+
+        <section *ngIf="formService.currentForm.value.formatType == eTypeCode.Json || formService.currentForm.value.formatType == eTypeCode.Xml">
+            <form-input label="Optional: Web Service Row Path" formControlName="rowPath" placeholder="Enter the row path." iconClass="fa fa-feed"
+                [errors]="formService.formErrors.rowPath" note="Optional Json Path indicating where a row should be read from.">
+            </form-input>
+        </section>
+
+        <section>
+            <label class="label">Add a sample file which will be used to determine column names.</label>
+
+            <div class="well my-drop-zone" dropZone [requireFiles]="true" (dropFiles)="filesDrop($event)" dropAllowedClass="nv-file-over">
+                Drop Sample File Here
+                <div class="custom-file w-25 float-right">
+                    <input type="file" class="custom-file-input" (change)="uploadFile($event)" onclick="this.value=null">
+                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                </div>
+            </div>
+
+            <br/>
+            <dexih-button-refresh *ngIf="uploader?.queue?.length == 1" (click)="importTable()" text='Import Table Columns' [busy]="updatingTable"></dexih-button-refresh>
+            <section>
+                <form-input label="Max Import Levels" formControlName="maxImportLevels" placeholder="Enter the maximum node levels to query the json structure." iconClass="fa fa-file"
+                    [errors]="formService.formErrors.maxImportLevels" note="Enter the maximum levels to query the json file.">
+                </form-input>
+            </section>
+        </section>
+    </form>
+</div>

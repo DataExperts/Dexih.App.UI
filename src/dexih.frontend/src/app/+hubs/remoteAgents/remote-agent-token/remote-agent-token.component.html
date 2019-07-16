@@ -1,0 +1,41 @@
+<dexih-message #DexihMessage></dexih-message>
+
+<div *ngIf="remoteToken" class="container">
+    <dexih-widget 
+		title="New Remote Agent Token" 
+        iconClass="fa fa-lg fa-fw fa-wifi" 
+        [padding]="true"
+        [showCloseButton]="true"
+        (close)="close()"
+    >
+
+
+<ng-template #subHeader>
+    <label *ngIf="action == 'New'" class="label">A new remote agent token has been generated.  </label>
+    <label *ngIf="action == 'ReNew'" class="label">The token for this user/remote id has been renewed.  </label>
+    <div class="alert alert-info">
+        Ensure this token is kept safe and secure.  It cannot be viewed again.  If it is lost or compromised, a new token should be created.
+    </div>
+
+</ng-template>
+
+        <section >
+            <form-textarea [showCopy]="true" [showPreview]="false" [hideToggle]="true" [disabled]="true" rows="1" label="User" [(ngModel)]="remoteToken.user"></form-textarea>
+        </section>
+
+        <section >
+            <form-textarea [showCopy]="true" [showPreview]="false" [hideToggle]="true" [disabled]="true" rows="1" label="RemoteAgentId" [(ngModel)]="remoteToken.remoteAgentId"></form-textarea>
+        </section>
+
+        <section >
+            <form-textarea [showCopy]="true" [showPreview]="false" [hideToggle]="true" [disabled]="true" rows="4" label="UserToken" [(ngModel)]="remoteToken.userToken"></form-textarea>
+        </section>
+
+        <section >
+            <form-textarea [showCopy]="true" [showPreview]="false" [hideToggle]="true" [disabled]="true" rows="4" label="AppSettings Content" [(ngModel)]="appSettings"
+            note='Copy this section over the existing items in the AppSettings section of the appsettings.json configuration file for your remote agent.'></form-textarea>
+        </section>
+        
+
+    </dexih-widget>
+</div>

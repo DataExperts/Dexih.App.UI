@@ -1,0 +1,8 @@
+<div class="">
+    <span class="text">  {{caption}}
+        <span class="float-right">{{value}}/{{total}}</span> 
+    </span>
+    <div class="progress" style="width:100%">
+        <div [ngClass]="['progress-bar', color]" [ngStyle]="{width: percent}">&nbsp;</div>
+    </div>
+</div>

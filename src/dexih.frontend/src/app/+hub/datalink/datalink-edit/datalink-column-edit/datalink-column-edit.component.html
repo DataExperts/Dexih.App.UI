@@ -1,0 +1,17 @@
+<div class="list-group-item list-group-item-info rounded-0">
+    <div class="d-flex flex-row">
+        <h5>Edit Column </h5>
+        <div class="ml-auto">
+            <dexih-invalid-form-details (click)="columnFormService.showErrors()" [control]="columnFormService.currentForm" class="mr-1"></dexih-invalid-form-details>
+            <dexih-button-apply [disabled]="columnFormService.currentForm.pristine"  (click)="!columnFormService.currentForm.pristine && applyExit()" class="mr-1"></dexih-button-apply>
+            <dexih-button-cancel (click)="cancel()"></dexih-button-cancel>
+        </div>
+    </div>
+</div>
+
+
+<div class="container  mt-3 mb-3">
+    <column-edit-base [columnFormService]="columnFormService" [detailedView]="true"></column-edit-base>
+</div>
+
+<table-edit-columns *ngIf="columnFormService?.currentForm.controls.dataType.value === eTypeCode.Node" [parentColumnForm]="columnFormService.currentForm"></table-edit-columns>

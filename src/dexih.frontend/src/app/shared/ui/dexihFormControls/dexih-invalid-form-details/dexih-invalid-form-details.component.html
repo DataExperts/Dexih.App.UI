@@ -1,0 +1,27 @@
+<dexih-button-dropdown 
+[iconClass]="valid ? 'fa fa-check' : 'fa fa-ban'"
+[buttonClass]="valid ? 'btn btn-success' : 'btn btn-danger'"
+    [text]= "valid ? 'Valid' : 'Errors'"
+>
+<ng-template [ngIf]="valid">
+    <h5 class="dropdown-header">The current form is valid.</h5>
+</ng-template>
+
+<!-- Recurs through the errors -->
+<ng-template #recursiveList let-list>
+    <li *ngFor="let item of list">
+        <a  *ngFor="let error of item.errors" class="dropdown-item">{{item.field}} - {{error}}</a>
+        <span *ngIf="item.childControlErrors.length > 0">
+            <h5 class="dropdown-header">{{item.field}} {{item.name}} (position {{item.position}})</h5>
+            <ul>
+                <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: item.childControlErrors }"></ng-container>
+            </ul>
+    </span>
+    </li>
+</ng-template>
+
+<!-- Recurs through the errors -->
+<ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: controlErrors }">
+</ng-container>
+
+</dexih-button-dropdown>

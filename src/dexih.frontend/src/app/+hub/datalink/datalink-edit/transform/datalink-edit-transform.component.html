@@ -1,0 +1,186 @@
+<div class="list-group-item list-group-item-info  rounded-0">
+        <div class="d-flex flex-row">
+            <h5>Properties</h5>
+    </div>
+</div>  
+
+<div class="container  mt-3 mb-3">
+<form *ngIf="datalinkTransformForm"  [formGroup]="datalinkTransformForm">
+        <fieldset>
+            <section>
+                <form-input label="Transform Name" formControlName="name" placeholder="Enter a name for the transform" [autocapitalize]="true" iconClass="fa fa-list"
+                    [errors]="formErrors.name">
+                </form-input>
+            </section>
+            <section>
+                <form-textarea  label="Description" formControlName="description" placeholder="Enter the description."
+                    [errors]="formErrors.description">
+                </form-textarea>
+            </section>
+            <div *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Aggregate || this.datalinkTransformForm.value.transformType == eTransformType.Series || this.datalinkTransformForm.value.transformType == eTransformType.Rows || this.datalinkTransformForm.value.transformType == eTransformType.Mapping">
+                <section>
+                    <form-checkbox label="Allow unmapped input columns to pass through to the next transform." formControlName="passThroughColumns">
+                    </form-checkbox>
+                </section>
+            </div>
+            
+            <section *ngIf="nodes?.length > 0">
+                <form-select label="Node level" formControlName="nodeDatalinkColumn" [items]="nodes" itemName="name" node='Specify the node where the transform should be applied to.' [allowNullSelect]="true" selectNullMessage='Use top level'>
+                </form-select>
+            </section>
+
+            <div class="form-row">
+                <section class="form-group col-md-6">
+                    <form-input type="number" formControlName="maxInputRows" label="Maximum number of rows to input into the transform (0 = unlimited)"></form-input>
+                </section>
+                <section class="form-group col-md-6">
+                    <form-input type="number" formControlName="maxOutputRows" label="Maximum number of rows to output into the transform (0 = unlimited)"></form-input>
+                </section>
+            </div>
+
+            <div *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Concatenate">
+                <datalink-table [datalinkTableForm]="datalinkTransformForm.controls.joinDatalinkTable"></datalink-table>
+            </div>
+            
+            <div *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Join || this.datalinkTransformForm.value.transformType == eTransformType.Lookup" >
+                <datalink-table [datalinkTableForm]="datalinkTransformForm.controls.joinDatalinkTable"></datalink-table>
+                    
+                <section>
+                    <form-select [label]="'Strategy when ' + this.datalinkTransformForm.value.transformType + ' produces duplicate matches'" formControlName="joinDuplicateStrategy" [items]="duplicateStrategies"
+                        itemKey="key" itemName="name">
+                    </form-select>
+                </section>
+            </div>
+        </fieldset>
+    </form>
+
+    <form *ngIf="datalinkTransformForm && this.datalinkTransformForm.value.transformType == eTransformType.Series" [formGroup]="seriesForm">
+        <fieldset>
+            <div class="form-row">
+                <section class="form-group col-md-6">
+                    <form-select label="Series Grain" formControlName="seriesGrain" [items]="seriesGrains" itemKey="key" itemName="name">
+                    </form-select>
+                </section>
+                <section class="form-group col-md-6">
+                    <form-select label="Input Column" formControlName="sourceDatalinkColumn" [items]="inputColumns" [(textValue)]="sourceValue"
+                        (textValueChange)="updateSourceValue($event)" [enableTextEntry]="true" [enableTextEntryMatch]="false"
+                        itemName="name" [errors]="sourceErrors">
+                    </form-select>
+                </section>
+            </div>
+
+            <form-checkbox label="Fill empty series values" formControlName="seriesFill"></form-checkbox>
+
+            <div class="form-row" *ngIf="seriesForm.controls.seriesFill.value">
+                <section class="form-group col-md-6">
+                    <form-input type="date" formControlName="seriesStart" label="Series Start Date (empty to use first value)"></form-input>
+                </section>
+                <section class="form-group col-md-6">
+                    <form-input type="date" formControlName="seriesFinish" label="Series Finish Date (empty to use first value)"></form-input>
+                </section>
+            </div>
+        </fieldset>
+    </form>
+
+    <form *ngIf="datalinkTransformForm && this.nodeType">
+        <fieldset>
+            <form-checkbox label="Group rows under a node" [ngModelOptions]="{standalone: true}" [(ngModel)]="allowNode" (ngModelChange)="toggleNode($event)"></form-checkbox>
+            <section *ngIf="allowNode" class="form-group col-md-6">
+                <form-input [ngModelOptions]="{standalone: true}" [(ngModel)]="nodeName" (ngModelChange)="updateNode($event)" label="Name of the node"></form-input>
+            </section>
+        </fieldset>
+    </form>
+</div>
+
+<div class="list-group-item p-1">
+
+<div *ngIf="datalinkTransformForm" class="d-flex" cdkDropListGroup>
+        <div class="mr-1 d-none d-md-inline">
+            <div>
+                <div class="alert alert-primary mb-1">
+                    <h4>Inputs</h4>
+                </div>
+                <div>
+                    <input-columns [datalinkTransformForm]='datalinkTransformForm'></input-columns>
+                </div>
+            </div>
+
+            <div class="mt-1"  *ngIf="datalinkTransformForm.controls.joinDatalinkTable.value">
+                <!-- <div class="alert alert-secondary mb-1 mt-1">
+                    <h4>
+                        {{this.datalinkTransformForm.value.transformType}}
+                    </h4>
+                </div> -->
+                <join-columns [datalinkTransformForm]='datalinkTransformForm' (inputJoinDrop)="newDragDropJoin($event)"></join-columns>
+            </div>
+        </div>
+
+        <div class="w-100">
+            <div *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Join || this.datalinkTransformForm.value.transformType == eTransformType.Lookup">
+                <mapping [datalinkTransformForm]="datalinkTransformForm" [allowJoin]="true" title="{{this.datalinkTransformForm.value.transformType}} Table"  >
+                </mapping>
+            </div>
+
+            <div *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Mapping">
+                <mapping [datalinkTransformForm]="datalinkTransformForm" [allowStandard]="true" [allowMapping]="true" [allowOutput]="true" title="Mapping Functions" (onColumnDrop)="newDragDropMapping(eDatalinkTransformItemType.ColumnPair, $event)">
+                </mapping>
+            </div>
+
+            <div *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Sort">
+                <mapping [datalinkTransformForm]="datalinkTransformForm" [allowSort]="true" title="Sort Columns" (onColumnDrop)="newDragDropMapping(eDatalinkTransformItemType.Sort, $event)">
+                </mapping>
+            </div>
+
+            <div *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Group || this.datalinkTransformForm.value.transformType == eTransformType.Aggregate  || this.datalinkTransformForm.value.transformType == eTransformType.Series  || this.datalinkTransformForm.value.transformType == eTransformType.Rows">
+                <mapping [datalinkTransformForm]="datalinkTransformForm" title="Group Columns"  [allowGroup]="true" [allowSeries]="this.datalinkTransformForm.value.transformType == eTransformType.Series"
+                    (onColumnDrop)="newDragDropMapping(eDatalinkTransformItemType.Column, $event)">
+                </mapping>
+            </div>
+
+            <div *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Group">
+                <mapping [datalinkTransformForm]="datalinkTransformForm" [allowStandard]="true" [allowAggregate]="true" [allowOutput]="true" title="Aggregate Functions" (onColumnDrop)="newDragDropMapping(eDatalinkTransformItemType.AggregatePair, $event)">
+                </mapping>
+            </div>
+
+            <div *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Series">
+                <mapping [datalinkTransformForm]="datalinkTransformForm" [allowStandard]="true" [allowAggregate]="true" [allowSeries]="true" [allowOutput]="true" title="Series/Aggregate Functions" (onColumnDrop)="newDragDropMapping(eDatalinkTransformItemType.AggregatePair, $event)">
+                </mapping>
+
+                <mapping [datalinkTransformForm]="datalinkTransformForm" [allowMapping]="true" [allowOutput]="true" title="Mappings" (onColumnDrop)="newDragDropMapping(eDatalinkTransformItemType.ColumnPair, $event)">
+                </mapping>
+            </div>
+
+            <div *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Aggregate">
+                <mapping [datalinkTransformForm]="datalinkTransformForm" [allowStandard]="true" [allowAggregate]="true" [allowOutput]="true" title="Aggregate Functions" (onColumnDrop)="newDragDropMapping(eDatalinkTransformItemType.AggregatePair, $event)">
+                </mapping>
+
+                <mapping [datalinkTransformForm]="datalinkTransformForm" [allowMapping]="true" [allowOutput]="true" title="Mappings" (onColumnDrop)="newDragDropMapping(eDatalinkTransformItemType.ColumnPair, $event)">
+                </mapping>
+
+            </div>
+
+            <div *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Filter">
+                <mapping [datalinkTransformForm]="datalinkTransformForm" [allowStandard]="true" [allowCondition]="true" [allowOutput]="false" title="Filters" >
+                </mapping>
+            </div>
+
+            <div *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Rows">
+                <mapping [datalinkTransformForm]="datalinkTransformForm" [allowRow]="true" [allowStandard]="true" [allowJoinNode]="true" [allowOutput]="true" title="Row Functions">
+                </mapping>
+            </div>
+        </div>
+
+        <div class="ml-1 d-none d-md-inline">
+            <div class="alert alert-primary mb-1">
+                <h4>Outputs
+                    <span *ngIf="datalinkTransformForm.controls.nodeDatalinkColumn?.value">
+                        (@{{datalinkTransformForm.controls.nodeDatalinkColumn.value.name}})
+                    </span>
+                    <div class="float-right">
+                    </div>
+                </h4>
+            </div>
+            <output-columns [datalinkTransformForm]='datalinkTransformForm' [allowMappingOutputs]="allowMappingOutputs" (inputOutputDrop)="newDragDropMapping(eDatalinkTransformItemType.ColumnPair, $event)"></output-columns>
+        </div>
+    </div>
+</div>

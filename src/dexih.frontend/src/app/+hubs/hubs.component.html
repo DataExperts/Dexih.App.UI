@@ -1,0 +1,14 @@
+<div id="content">
+
+    <section *ngIf="openDelay && webSocketStatus != 'Connected'">
+        <div class="alert alert-danger m-3">
+            {{webSocketStatus}}
+        </div>
+    </section>
+
+    <div class="m-3">
+        <dexih-message #DexihMessage></dexih-message>
+    </div>
+
+    <router-outlet></router-outlet>
+</div>

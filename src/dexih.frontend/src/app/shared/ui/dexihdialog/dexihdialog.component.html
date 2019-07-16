@@ -1,0 +1,29 @@
+<style>
+.modal {
+  background: rgba(0,0,0,0.6);
+}
+</style>
+
+<!-- Modal -->
+<div class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}" 
+    [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal-dialog" >
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" (click)="buttonClick(eButton.Cancel)">&times;</button>
+                <h4 class="modal-title">{{title}}</h4>
+            </div>
+            <div class="modal-body">
+                <ng-content></ng-content>
+            </div>
+            <div class="modal-footer">
+                <button *ngIf="showSave" type="button" class="btn btn-default" [ngClass]="{disabled : disableSave}" (click)="buttonClick(eButton.Save)">Save</button>
+                <button *ngIf="showOk" type="button" class="btn btn-default" [ngClass]="{disabled : disableOk}" (click)="buttonClick(eButton.Ok)">Ok</button>
+                <button *ngIf="showClose" type="button" class="btn btn-default" (click)="buttonClick(eButton.Close)">Close</button>
+                <button *ngIf="showCancel" type="button" class="btn btn-warning" (click)="buttonClick(eButton.Cancel)">Cancel</button>
+            </div>
+        </div>
+
+    </div>
+</div>

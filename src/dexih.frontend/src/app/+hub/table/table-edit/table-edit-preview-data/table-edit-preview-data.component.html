@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <dexih-widget title="Preview Table" iconClass="fa fa-lg fa-fw fa-table" [showCloseButton]="true" (close)="close()">
+        <dexih-table *ngIf="table"  [enableMultiSelect]="false" [enableSaveCsv]="true" [columns]="columns" [data]="data" [hideTable]="showChart">
+
+            <ng-template #actions let-items="items">
+                <dexih-button-refresh class="input-group-append" (click)="refresh()" text="Reload"></dexih-button-refresh>
+                <download-button class="ml-1" (download)="download($event)"></download-button>
+                <dexih-button  class="ml-1" iconClass="fa fa-line-chart" (click)="showChart=!showChart" [text]="showChart ? 'Data' : 'Chart'" ></dexih-button>
+            </ng-template>
+            <ng-template #tableHeader>
+                <h5>Data Configuration</h5>
+                <query-builder [selectQuery]="selectQuery" [columns]="table.dexihTableColumns" [inputColumns]="inputColumns"></query-builder>
+
+                <div [ngStyle]="{'display': showChart ? 'block' : 'none' }" class="mt-1">
+                    <h5>Chart Configuration</h5>
+                    <chart-builder [config]="chartConfig" [columns]="columns" [data]="data"></chart-builder>
+                </div>
+                
+            </ng-template>
+        </dexih-table>
+
+    </dexih-widget>
+</div>

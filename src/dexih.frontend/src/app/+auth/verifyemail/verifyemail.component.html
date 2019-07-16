@@ -1,0 +1,68 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <div id="logo-group">
+    <span id="logo">
+      <img [src]='logoUrl' alt="Data Experts Group"> </span>
+  </div>
+
+  <div class="collapse navbar-collapse mr-sm-2">
+  </div>
+  <form class="form-inline">
+    <span class="d-none d-md-inline text-white m-1">Need an account?</span>
+    <a routerLink="/auth/register" class="btn btn-success">Create account</a>
+  </form>
+
+</nav>
+
+<div class="login-container">
+  <div class="card">
+  <form>
+    <div class="card-header">
+      Information Hub - Verify email address
+    </div>
+    <div class="card-body">
+
+      <section>
+        <div class="alert alert-info">
+          Please enter the email address and code that was emailed to you when you registered.
+        </div>
+      </section>
+
+      <fieldset>
+
+        <section>
+          <form-input label="E-mail" [(ngModel)]="email" name="email" iconClass="fa fa-user txt-color-teal" title="Please enter your email address"
+            placeholder="E-mail...">
+          </form-input>
+        </section>
+
+        <section>
+          <form-textarea label="Verification Code" [(ngModel)]="verificationCode" name="verificationCode" iconClass="fa fa-lock" title="Please the verification code."
+            placeholder="Paste Verification Code" [hideToggle]="true" [showPreview]="false">
+          </form-textarea>
+        </section>
+
+
+        <section *ngIf="message">
+          <div class="alert alert-danger ">
+            {{message}}
+          </div>
+        </section>
+
+        <section *ngIf="successMessage">
+          <div class="alert alert-success ">
+            {{successMessage}}
+          </div>
+        </section>
+
+      </fieldset>
+    </div>
+    <div class="card-footer">
+      <button type="button" class="btn btn-success mr-1" [ngClass]="{disabled : resendingCode}" (click)="!resendingCode && resendVerification()">
+        <i *ngIf="resendingCode" class="fa fa-spin fa-refresh"></i>Re-send code</button>
+      <button class="btn btn-primary" (click)="submitVerification()">
+        <i *ngIf="!submittingVerification" class="fa fa-refresh"></i>
+        <i *ngIf="submittingVerification" class="fa fa-spin fa-refresh"></i> Verify </button>
+    </div>
+  </form>
+</div>
+</div>

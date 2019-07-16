@@ -1,0 +1,9 @@
+<div [routerLink]="['api-edit', api.key]" queryParamsHandling="merge">
+    <h5>{{api.name}}</h5>
+    <div *ngIf="api.description">
+        <markdown [data]="api.description"></markdown>
+    </div>
+    <div class="note">{{api.sourceType}} / Updated: {{api.updateDate | date : 'short' }} </div>
+</div>
+
+<api-status [apiKey]='api.key'></api-status>

@@ -1,0 +1,33 @@
+<div class="container-fluid">
+    <dexih-widget title="Api's" 
+		iconClass="fa fa-lg fa-fw fa-feed" 
+		[showCloseButton]="true"
+		(close)="close()"
+	>
+			<dexih-table 
+				[enableMultiSelect]="true"
+				[columns]="columns"
+				[dataObservable]="tableData"
+				(rowClick)="editApi($event)"
+				>
+					<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+					</ng-template>
+
+					<ng-template #selectedItemAction select="selectedItemAction" let-api="item">
+					</ng-template>
+
+					<ng-template #actions let-items="items">
+						<actions-api-button [apis]="items"></actions-api-button>
+					</ng-template>
+
+					<ng-template #rowStatus select="rowStatus" let-item="item">
+						<api-status [apiKey]='item.key'></api-status>
+					</ng-template>
+			</dexih-table>
+
+		</dexih-widget>
+		
+		<dexih-help class="m-3"  title="Connections" path="/assets/help/reference/api.md"></dexih-help>
+</div>
+
+

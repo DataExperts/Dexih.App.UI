@@ -1,0 +1,9 @@
+<menu-parent [name]="hubStatusMessage" title="Available Hubs" iconClass="fa fa-lg fa-fw fa-life-saver" [textClass]="textClass">
+    <li *ngFor="let hub of hubs | async" class="nav-item" >
+        <a class="nav-link" (click)="openHub(hub)">{{hub.name}}</a>
+    </li>
+    <div class="dropdown-divider"></div>
+    <li class="nav-item" >
+        <a class="nav-link" (click)="manageHubs()"><i class="fa fa-power-off"></i> Manage Hubs</a>
+    </li>
+</menu-parent>

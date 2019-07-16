@@ -1,0 +1,34 @@
+<dexih-message #DexihMessage></dexih-message>
+
+<div class="container-fluid">
+    <dexih-widget title="Users" 
+		iconClass="fa fa-lg fa-fw fa-group" 
+		
+	>
+		<dexih-table 
+			[enableMultiSelect]="true"
+			[columns]="columns"
+			[dataObservable]="tableData"
+			(rowClick)="editUser($event)"
+			>
+				<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+					<dexih-button class="mr-1" (click)="reinviteUsers(items)" iconClass="fa fa-envelope" buttonClass="btn-primary" title="invite or resend invite to selected users.">Resend Invite</dexih-button>
+					<dexih-button-delete class="mr-1" title="Delete selected users" (click)="deleteUsers(items)"></dexih-button-delete>
+					<dexih-button class="mr-1" (click)="revokeUsers(items)" iconClass="fa fa-lock" buttonClass="btn-danger" title="Revoke selected users access.">Revoke</dexih-button>
+					<dexih-button (click)="enableUsers(items)" iconClass="fa fa-unlock" buttonClass="btn-success" title="Re-enable selected users access">Enable</dexih-button>
+				</ng-template>
+
+				<ng-template #selectedItemAction select="selectedItemAction" let-user="item">
+					<dexih-button-edit title="Edit User" [routerLink]="['edit-user', user.email]"></dexih-button-edit>
+				</ng-template>
+
+				<ng-template #actions let-items="items">
+					<dexih-button-new class="mr-1" title="Create a new user" [routerLink]="['new-user']"></dexih-button-new>
+					<dexih-button [routerLink]="['invite-users']" iconClass="fa fa-envelope" buttonClass="btn-primary" title="Invite users">Invite</dexih-button>
+				</ng-template>
+		</dexih-table>
+
+    </dexih-widget>
+</div>
+
+

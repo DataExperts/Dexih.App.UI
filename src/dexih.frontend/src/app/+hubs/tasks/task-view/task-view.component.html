@@ -1,0 +1,36 @@
+<div class="container-fluid">
+	<dexih-widget *ngIf="task" [title]="'Task - ' + task?.name" iconClass="fa fa-lg fa-fw fa-trophy" [showCloseButton]="true" (close)="close()">
+		<div class="content" [ngSwitch]="view">
+			<ul class="list-group">
+				<li class="list-group-item list-group-item-danger" *ngIf="task?.status == eTaskStatus.Error">
+					<h5>Error encountered!</h5>
+					<h6>{{task.message}}
+					<div class="float-right">
+						<dexih-button *ngIf="task.exceptionDetails" (click)='exceptionHidden = !exceptionHidden'>Toggle Details</dexih-button>
+					</div>
+					</h6>
+					<div>
+					<pre *ngIf="!exceptionHidden && task.exceptionDetails" >{{task.exceptionDetails}}</pre>
+					</div>
+				</li>
+				<li class="list-group-item list-group-item-info">
+					<h5>Details</h5>
+				</li>
+				<li class="list-group-item ">
+					<h6>Last updated: {{task.lastUpdate | date : 'long'}}</h6>
+					<h6>Reference: {{task.reference }}</h6>
+					<h6>Name: {{task.name }}</h6>
+					<h6>Category: {{task.category }}</h6>
+					<h6>Description: {{task.description }}</h6>
+					<h6>Status: {{task.status }}</h6>
+					<h6 *ngIf="task.category === 'Datalink'">
+						<dexih-button-view [routerLink]="['/hub', task.referenceKey, 'summary', 'datalinks', 'result-view', task.data.auditConnectionKey, task.data.auditKey]" text="Datalink Result"></dexih-button-view>
+					</h6>
+					<h6 *ngIf="task.category === 'Datajob'">
+						<dexih-button-view [routerLink]="['/hub', task.referenceKey, 'summary', 'datalinks', 'result-view', task.data.auditConnectionKey, task.data.auditKey]" text="Datajob Result"></dexih-button-view>
+					</h6>
+				</li>
+			</ul>
+		</div>
+	</dexih-widget>
+</div>

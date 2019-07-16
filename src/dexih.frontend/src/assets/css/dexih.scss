@@ -1,0 +1,338 @@
+@import "_variables";
+
+.btn-group-xs > .btn, .btn-xs {
+    padding  : .25rem .4rem;
+    font-size  : .875rem;
+    line-height  : .5;
+    border-radius : .2rem;
+}
+
+.dexih-loader-container {
+    margin: 30px;
+  }
+  .dexih-loader {
+    display: inline-flex;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid $primary;
+    border-right: 16px solid $danger;
+    border-bottom: 16px solid $success;
+    border-left: 16px solid $warning;
+    width: 40px;
+    height: 40px;
+    -webkit-animation: dexih-loader-spin 2s linear infinite;
+    animation: dexih-loader-spin 2s linear infinite;
+  }
+
+  .dexih-loader-text {
+    margin-left: 20px;
+    display: inline-flex;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+
+  @-webkit-keyframes dexih-loader-spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+
+  @keyframes dexih-loader-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  // pointer cursor on dropdown
+  .dropdown-menu li:hover {
+    cursor: pointer;
+}
+
+#dexih-sidebar {
+    background: $light;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    height: calc(100vh - 48px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    
+    &.collapsed {
+        width: 0px;
+    }
+
+    &.expanded {
+        width: 100%;
+    }
+
+    .nav-link:hover {
+        background: $gray-300;
+    }
+
+    li.open ul {
+        list-style-type: disc;
+        margin: .5rem;
+    }
+
+    li.open li {
+        padding: 0;
+        margin: 0;
+    }
+      
+    .nav-link {
+        font-weight: 500;
+        color: $dark;
+      }
+      
+      .nav-link.active {
+        color: $primary;
+        background: $gray-300;
+      }
+      
+      .sidebar-heading {
+        font-size: .75rem;
+        text-transform: uppercase;
+      }
+
+      .nav-button {
+        background: transparent;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: left;
+        width: 250px;
+        margin-right: 4px;
+    }
+}
+
+#logo {
+	img { width: 137px; }
+}	
+
+#logo-group > span {
+	display: inline-block;
+	height: 39;
+}
+
+  #main {
+	  padding-top: 20px;
+  }
+
+
+
+  #auth-page-header-space {
+	float: right;
+	text-align: right;
+	display: block;
+    line-height: 71px;
+}	
+
+
+
+body.dexih-modal-open {
+    overflow: hidden;
+    position: fixed;
+}
+
+/*
+ Used for file drop areas
+*/
+.my-drop-zone { border: dotted 3px lightgray; padding: 30px }
+.nv-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
+.another-file-over-class { border: dotted 3px green; }
+.drop-zone-green { border: green; background: lightgreen; }
+// /*
+// Allowed dropdown menus inside tables to overflow and be visible outside table.
+// */
+// @media (max-width: 767px) {
+//     .table-responsive{
+//         overflow-x: auto;
+//         overflow-y: auto;
+//     }
+// }
+// @media (min-width: 767px) {
+//     .table-responsive{
+//         overflow: inherit !important; /* Sometimes needs !important */
+//     }
+// }
+
+/*
+    Put this on the parent element to stop overlapping dropdown.
+*/
+.dexih-stack-top
+{
+    z-index:10000;
+    position: relative;
+}
+
+.dexih-stack-bottom
+{
+    z-index:-10000;
+    position: relative;
+}
+
+.dialog-stack-top
+{
+    z-index:1000000;
+    position: relative;
+}
+
+/*
+Used to add a scrollable menu to dropdown menus
+*/
+.scrollable-menu {
+  height: auto;
+  max-height: 200px;
+  overflow-x: hidden;
+}
+.scrollable-menu .active {
+    -webkit-text-fill-color: #FFFFFF;
+ }
+
+ .scrollable-menu .scrollable-item :hover {
+    -webkit-text-fill-color: #FFFFFF;
+ }
+.scrollable-menu-fixed {
+  overflow-x: visible
+}
+
+/*
+Used to add a scrollable menu to dropdown menus
+*/
+.scrollable-list {
+  height: auto;
+  max-height: 400px;
+  overflow-x: hidden
+}
+
+.dexih-state-error
+ {
+  background: #fff0f0;
+  border-color: $danger;
+  color: $warning;
+}
+
+// error text is red
+.dexih-error-text
+{
+    display: flex;
+    color: $danger;
+}
+
+// place a ! icon just before text.
+.dexih-error-text::before
+{
+    font-family: FontAwesome;
+    content: "\f06A ";
+}
+
+/* match progress bar heights to button heights */
+.progress {
+    height: $line-height-base;
+    border-radius: $border-radius;
+    font-size: 12px;
+    display: inline-block;
+    width: 100px;
+    margin: 0;
+    position: relative;
+    
+}
+.progress-bar {
+    font-size: 12px;
+    line-height: 31px;
+}
+
+.progress span {
+    vertical-align: middle;
+}
+
+.equal-height {
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+}
+
+#ribbon .breadcrumb .dropdown-menu , .dropdown-menu {
+    background: $gray-300;
+}
+
+#ribbon .breadcrumb .dropdown-menu a, .dropdown-menu a {
+    color: #000000 !important;
+}
+
+#ribbon .breadcrumb .dropdown-menu a:hover, .dropdown-menu a:hover {
+    color: #FFFFFF !important;
+    background: $info!important;
+}
+
+.overflow-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dexih-horizontal-btn a {
+    display: inline-block;
+}
+
+.dexih-horizontal {
+    margin: 0px;
+    display: inline-flex;
+    flex-wrap: nowrap;
+    
+}
+
+
+
+/* Override the foreground color in Safari which slightly lightens text in disabled inputs. */
+.dropdown-toggle input {
+    -webkit-text-fill-color: #404040;
+}
+
+pre {
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+//    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+    word-break: keep-all;
+}
+
+.dexih-header-message {
+    // display: inline-block;
+    padding: 16px 13px 0;
+    vertical-align: bottom;
+    // position:relative;
+    color: $danger;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}   
+
+markdown {
+    blockquote {
+        background: #f9f9f9;
+        border-left: 10px solid #ff9800;
+        padding: 0.5em 10px;
+    }
+
+    table {
+        td, th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+            
+        tr:nth-child(even){background-color: #f2f2f2;}
+            
+        tr:hover {background-color: #ddd;}
+            
+        th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: $primary;
+            color: white;
+        }
+    }
+}

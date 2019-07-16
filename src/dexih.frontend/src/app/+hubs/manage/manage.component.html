@@ -1,0 +1,98 @@
+
+<div class="container-fluid">
+	<dexih-message #DexihMessage></dexih-message>
+
+	<dexih-widget-vertical>
+    <dexih-widget title="User Registration Details" iconClass="fa fa-lg fa-fw fa-user" [padding]="true">
+        <ng-template #header>
+				<dexih-button-save class="mr-1" (click)="save()" [busy]="formsService.formSaving" [disabled]="formsService.formSaving || !formsService.hasChanged"></dexih-button-save>			
+				<dexih-button-cancel (click)="cancel()"></dexih-button-cancel>			
+        </ng-template>
+
+		<form *ngIf="formsService.currentForm"  [formGroup]="formsService.currentForm">
+			<fieldset>
+				<section>
+					<form-input label="Email Address" formControlName="email" placeholder="Enter the email." iconClass="fa fa-list" >
+					</form-input>
+				</section>
+
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-input label="First Name" formControlName="firstName" placeholder="First Name">
+						</form-input>
+					</section>
+					<section class="form-group col-md-6">
+						<form-input label="Last Name" formControlName="lastName" placeholder="Last Name">
+						</form-input>
+					</section>
+				</div>
+
+				<section>
+					<form-checkbox label="I want to receive news and special offers" formControlName="subscription" >
+					</form-checkbox>
+				</section>
+
+			</fieldset>
+		</form>
+ 
+    </dexih-widget>
+    <dexih-widget title="Reset Password" iconClass="fa fa-lg fa-fw fa-lock" [padding]="true" >
+        <ng-template #header>
+			<dexih-button btnClass="btn btn-primary" [disabled]="!passwordForm.valid" (click)="updatePassword()" [busy]="updatingPassword">Update Password</dexih-button>
+        </ng-template>
+
+		<form *ngIf="passwordForm"  [formGroup]="passwordForm">
+			<fieldset>
+				<section>
+					<form-input label="Current Password" formControlName="password" type="password">
+					</form-input>
+				</section>
+
+				<section>
+					<form-input label="New Password" formControlName="newPassword" type="password">
+					</form-input>
+				</section>
+
+				<section>
+					<form-input label="Confirm New Password" formControlName="confirmPassword" type="password" [errors]="passwordMatchError" >
+					</form-input>
+				</section>
+
+			</fieldset>
+		</form>
+ 
+	</dexih-widget>
+	
+	<dexih-widget title="Logins" subTitle="The following login providers are available" iconClass="fa fa-lg fa-fw fa-life-saver"  [padding]="true">
+		<ng-template #subHeader>
+				<dexih-button class="mr-1" (click)="microsoftLogin(true)" buttonClass="btn btn-primary" iconClass="fa fa-windows">Add Microsoft</dexih-button>
+				<dexih-button (click)="googleLogin(true)" buttonClass="btn btn-danger" iconClass="fa fa-google">Add Google</dexih-button>
+		</ng-template>
+
+		<ul class="list-group">
+			<li *ngFor="let login of logins" class="list-group-item">
+				<div class="float-right">
+					<dexih-button-delete (click)="deleteLogin(login)" title="Remove the following login"></dexih-button-delete>
+				</div>
+				<h3>{{login.providerDisplayName}}</h3>
+			</li>
+		</ul>
+
+		<section *ngIf="googleMessage">
+            <div class="alert alert-danger">
+              Google could not automatically sign-in due to "{{googleMessage}}".  
+              Click login button to open new window to login to your google account.
+              <dexih-button buttonClass="btn btn-danger" iconClass="fa fa-google" text="Google Login" (click)="googleLogin(true)"></dexih-button>
+            </div>
+          </section>
+
+          <section *ngIf="microsoftMessage">
+              <div class="alert alert-danger">
+                Microsoft could not automatically sign-in due to "{{microsoftMessage}}".  
+                Click login button to open new window to login to your microsoft account.
+                <dexih-button buttonClass="btn btn-primary" iconClass="fa fa-microsoft" text="Microsoft Login" (click)="microsoftLogin(true)"></dexih-button>
+              </div>
+		</section>
+	</dexih-widget>
+</dexih-widget-vertical>
+</div>

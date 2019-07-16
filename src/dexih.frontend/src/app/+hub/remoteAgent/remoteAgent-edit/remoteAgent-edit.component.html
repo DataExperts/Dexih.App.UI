@@ -1,0 +1,43 @@
+<dexih-message #DexihMessage></dexih-message>
+
+<div class="container">
+    <dexih-widget 
+		title="Edit Hub Remote Agent" 
+        iconClass="fa fa-lg fa-fw fa-database" 
+        [padding]="true"
+        [showCloseButton]="true"
+        (close)="close()"
+    >
+        <ng-template #header>
+            <dexih-button-edit [routerLink]="['/hubs', 'index', 'agents', 'edit', remoteAgentKey]"></dexih-button-edit>
+            <save-button [formsService]="formsService" class="pl-1"></save-button>
+            <cancel-button [formsService]="formsService" class="pl-1"></cancel-button>
+        </ng-template>
+
+        <ng-template #header>
+
+        </ng-template>
+
+        <div *ngIf="isNew" class="alert alert-primary">
+            Creating a new hub -> remote agent authorization
+        </div>
+
+        <form *ngIf="formsService.currentForm"  [formGroup]="formsService.currentForm">
+            <fieldset>
+                <section >
+                    <form-input label="Agent name" [disabled]="true" note="This can be changed in the agents appsettings.json config file." [(ngModel)]="name" [ngModelOptions]="{standalone: true}" iconClass="fa fa-comment"></form-input>
+                </section>
+
+                <section>
+					<form-checkbox label="Is default agent for this Hub" formControlName="isDefault" >
+					</form-checkbox>
+                </section>
+
+                <section>
+					<form-checkbox label="Is Authorized for this Hub." formControlName="isAuthorized" >
+					</form-checkbox>
+                </section>
+            </fieldset>
+        </form>
+    </dexih-widget>
+</div>

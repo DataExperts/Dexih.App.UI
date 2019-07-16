@@ -1,0 +1,50 @@
+<div class="container">
+	<dexih-widget 
+	title="Edit Hub Variable" 
+	iconClass="fa fa-lg fa-fw fa-at" 
+	[showCloseButton]="true"
+	[padding]="true"
+	(close)="close()"
+	>
+        <ng-template #header>
+            <save-button *ngIf="hubCache.canWrite" class="mr-1" [formsService]="formsService"></save-button>
+            <cancel-button [formsService]="formsService"></cancel-button>
+        </ng-template>
+
+		<form *ngIf="formsService.currentForm"  [formGroup]="formsService.currentForm" >
+			<!--dummy hidden password to stop chrome/firefox autocompletion password.-->
+			<input id="fake_user_name" name="fake_user[name]" style="position:absolute; top:-5000px;" type="text" value="Fake Auto-fill">
+			<input id="fake_password" type="password" name="fake_password[password]" style="position:absolute; top:-5000px;" type="text" value="Fake Auto-fill">
+
+			<fieldset>
+
+						
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-input label="Hub Variable Name" formControlName="name" placeholder="Enter the name." [autocapitalize]="true" iconClass="fa fa-list" [errors]="formsService.formErrors['name']" >
+						</form-input>
+					</section>
+					<section class="form-group col-md-6">
+						<form-input [label]="formsService.currentForm.controls.isEnvironmentVariable.value ? 'Environment Variable Name' : 'Hub Variable Value'" [type]="formsService.currentForm.controls.isEncrypted.value ? 'password' : 'text'" formControlName="valueRaw" placeholder="Enter the value." iconClass="fa fa-list" [errors]="formsService.formErrors['value']" autocomplete="off">
+						</form-input>
+					</section>
+				</div>
+
+				<section >
+					<form-checkbox label="Encrypt value" formControlName="isEncrypted" >
+					</form-checkbox>
+				</section>
+
+				<section >
+					<form-checkbox label="Use an environment variable on the remote agent" formControlName="isEnvironmentVariable" >
+					</form-checkbox>
+				</section>
+
+			</fieldset>
+		</form>
+ 
+	</dexih-widget>
+
+	<dexih-help class="m-3"  title="Hub Variables" path="/assets/help/reference/hub_variable.md"></dexih-help>
+
+</div>

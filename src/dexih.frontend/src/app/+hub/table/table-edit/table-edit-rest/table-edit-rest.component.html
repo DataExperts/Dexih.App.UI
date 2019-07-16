@@ -1,0 +1,55 @@
+<div class="list-group-item list-group-item-info  rounded-0">
+    <div class="d-flex flex-row">
+        <h5>Web Service Properties</h5>
+    </div>
+</div>
+<div class="container mt-3 mb-3">
+    <form *ngIf="formService?.currentForm" [formGroup]="formService.currentForm">
+
+        <section>
+            <form-input label="Web Service Uri String" formControlName="restfulUri" placeholder="Enter the uri." iconClass="fa fa-feed"
+                [errors]="formService.formErrors.restfulUri" [note]="'Specify the uri following the base path ' + connection.server +'.  To include input columns use {} in the uri definition (eg. GetWeather?City={CityName})'">
+            </form-input>
+        </section>
+        <section>
+        </section>
+
+        <section>
+            <div *ngFor="let columnForm of inputColumns | isValidFilter">
+                <table-edit-input-column [columnForm]="columnForm"></table-edit-input-column>
+            </div>
+        </section>
+
+        <section>
+            <form-select label="Format Type" formControlName="formatType" [items]="formatTypes" itemKey="key" itemName="name" iconClass="fa fa-database"
+                note='The format of data.'>
+            </form-select>
+        </section>
+
+
+        <section *ngIf="formService.currentForm.value.formatType == eTypeCode.Text">
+            <form-select label="File Format" formControlName="fileFormatKey" placeholder="File Format" [errors]="formService.formErrors.fileFormatKey"
+                [items]="hubCache.hub.dexihFileFormats" itemKey="key" itemName="name" [enableFilter]="false" note="Specify the file format to use, if not specified, defaults will be used.">
+            </form-select>
+        </section>
+
+        <section *ngIf="formService.currentForm.value.formatType == eTypeCode.Json || formService.currentForm.value.formatType == eTypeCode.Xml">
+            <form-input label="Optional: Web Service Row Path" formControlName="rowPath" placeholder="Enter the row path." iconClass="fa fa-feed"
+                [errors]="formService.formErrors.rowPath" note="Optional Json Path indicating where a row should be read from.">
+            </form-input>
+        </section>
+
+        <section class="btn-toolbar">
+            <dexih-button [busy]="formService.formSaving" (click)="!formService.formSaving && importTable()">Import </dexih-button>
+
+            <div *ngIf="formService.currentForm.value.formatType == eTypeCode.Json || formService.currentForm.value.formatType == eTypeCode.Xml" class="input-group pl-1">
+                <div  class="input-group-prepend">
+                    <div class="input-group-text">Max Import Levels</div>
+                </div>
+                <input class="form-control" placeholder="Maximum levels..." title="Maximum import levels" formControlName="maxImportLevels"
+                    style="width: 100%; max-width: 100px">
+            </div>
+        </section>
+
+    </form>
+</div>

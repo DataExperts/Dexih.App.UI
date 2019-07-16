@@ -1,0 +1,101 @@
+<form *ngIf="columnFormService.currentForm" [formGroup]="columnFormService.currentForm">
+    <fieldset>
+        <div class="form-row">
+            <section class="form-group col-md-6">
+                <form-input label="Group" formControlName="columnGroup" placeholder="Enter a column group name" iconClass="fa fa-list"
+                    [errors]="columnFormService.formErrors.columnGroup" note="The group column grouping, used to distinguish duplicate column names when applying to structured data (such as json).">
+                </form-input>
+            </section>
+            <section class="form-group col-md-6">
+                    <form-input label="Column Name" formControlName="name" placeholder="Enter the column name." iconClass="fa fa-list"
+                        [errors]="columnFormService.formErrors.name" note="The physical column name in the underlying table">
+                    </form-input>
+                </section>
+            </div>
+
+        <section>
+            <form-checkbox label="Specify a logical name" formControlName="useLogical">
+            </form-checkbox>
+        </section>
+        <section *ngIf="columnFormService.currentForm.value.useLogical">
+            <form-input label="Logical Name" formControlName="logicalName" placeholder="Enter the logical name." iconClass="fa fa-list"
+                [errors]="columnFormService.formErrors.logicalName" note="The logical name is a short term to represent the column">
+            </form-input>
+        </section>
+
+        <section *ngIf="detailedView">
+            <form-textarea label="Description" formControlName="description" [showMarkdown]="true" placeholder="Enter the description."
+                [errors]="columnFormService.formErrors.description">
+            </form-textarea>
+        </section>
+
+        <div class="form-row">
+            <section class="form-group col-md-4">
+                <form-select label="Data Type" formControlName="dataType" [errors]="columnFormService.formErrors.dataType" [items]="typeCodes"
+                    itemKey="key" itemName="name">
+                </form-select>
+            </section>
+            <section class="form-group col-md-2">
+                <form-input type="number" label="Array Dimensions" formControlName="rank" [errors]="columnFormService.formErrors.rank">
+                </form-input>
+            </section>
+            <section *ngIf="columnFormService.currentForm.value.isString" class="form-group col-md-6">
+                <form-input label="Max Length" formControlName="maxLength" placeholder="Max Length" type="number" [errors]="columnFormService.formErrors.maxLength"
+                    note="Maximum string length (blank for unlimited)">
+                </form-input>
+            </section>
+            <section *ngIf="columnFormService.currentForm.value.isNumber" class="form-group col-md-3">
+                <form-input label="Precision" formControlName="precision" placeholder="Precision" type="number" [errors]="columnFormService.formErrors.precision">
+                </form-input>
+            </section>
+            <section *ngIf="columnFormService.currentForm.value.isNumber" class="form-group col-md-3">
+                <form-input label="Scale" formControlName="scale" placeholder="Scale" type="number" [errors]="columnFormService.formErrors.scale">
+                </form-input>
+            </section>
+        </div>
+
+        <div *ngIf="detailedView">
+
+            <section>
+                <form-checkbox label="Allow Nulls" formControlName="allowDbNull"></form-checkbox>
+            </section>
+
+            <section>
+                <form-checkbox label="Is Unicode" formControlName="isUnicode"></form-checkbox>
+            </section>
+
+            <section>
+                <form-checkbox label="Is an Input Column" formControlName="isInput"></form-checkbox>
+            </section>
+            <section>
+                <form-checkbox label="Is always incrementing column that can be used for change detection" formControlName="isIncrementalUpdate"></form-checkbox>
+            </section>
+
+            <div class="form-row">
+                <section class="form-group col-md-6">
+                    <form-select label="Delta Type" formControlName="deltaType" [errors]="columnFormService.formErrors.deltaType" [items]="deltaTypes"
+                        itemKey="key" itemName="name" note="How to treat the column when used to update target table.">
+                    </form-select>
+                </section>
+                <section class="form-group col-md-6">
+                    <form-select label="Security Flag" formControlName="securityFlag" [errors]="columnFormService.formErrors.securityFlag" [items]="securityFlags"
+                        itemKey="key" itemName="name" note="How to secure this column when reading data.">
+                    </form-select>
+                </section>
+            </div>
+
+            <div class="form-row">
+                <section class="form-group col-md-6">
+                    <form-input label="Default Value" formControlName="defaultValue" placeholder="Default Value" [errors]="columnFormService.formErrors.defaultValue"
+                        note="Default value if unmapped or null.">
+                    </form-input>
+                </section>
+                <section class="form-group col-md-6" *ngIf="columnFormService.currentForm.controls.columnValidationKey">
+                    <form-select label="Validation Rule" formControlName="columnValidationKey" [allowNullSelect]="true" [items]="hubCache?.hub.dexihColumnValidations"
+                        itemKey="key" itemName="name" note="Validation rule to apply.">
+                    </form-select>
+                </section>
+            </div>
+        </div>
+    </fieldset>
+</form>

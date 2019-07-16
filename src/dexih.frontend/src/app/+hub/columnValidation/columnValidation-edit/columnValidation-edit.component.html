@@ -1,0 +1,150 @@
+	<div class="container">
+	<dexih-widget 
+	title="Edit Column Validation" 
+	iconClass="fa fa-lg fa-fw fa-check-square-o" 
+	[showCloseButton]="true"
+	(close)="close()"
+	[padding]="true"
+	>
+        <ng-template #header>
+			<div class="d-inline-flex">
+				<ng-template [ngIf]="hubCache && hubCache.status !== eCacheStatus.Loaded">
+					<dexih-invalid-form-details class="mr-1" [control]="formsService.currentForm" (click)="formsService.showErrors()"></dexih-invalid-form-details>
+					<div *ngIf="hubCache.canWrite" >
+						<div class="input-group mr-1">
+							<div class="input-group-prepend">
+								<button class="btn btn-outline-secondary" type="button" (click)="test()"><i	class="fa fa-check-circle-o"></i></button>
+							</div>
+							<input type="text" class="form-control" placeholder="Test value" [(ngModel)]="testValue" style="max-width: 100px" aria-label="" aria-describedby="basic-addon1">
+						</div>
+					</div>
+					<save-button class="mr-1" *ngIf="hubCache.canWrite" [formsService]="formsService"></save-button>
+				</ng-template>
+				<cancel-button class="mr-1" [formsService]="formsService"></cancel-button>
+			</div>
+        </ng-template>
+
+		<form *ngIf="formsService.currentForm"  [formGroup]="formsService.currentForm">
+			<fieldset>
+				<section *ngIf="testResult">
+					<div class="alert " [class.alert-danger]="testResult.success == false" [class.alert-success]="testResult.success == true">
+						Test Result = {{testResult.success}} 
+						<div *ngIf="testResult.cleanedValue">Cleaned Value = {{testResult.cleanedValue}} </div>
+						<div *ngIf="testResult.rejectReason">Reject Reason = {{testResult.rejectReason}} </div>
+					</div>
+				</section>
+
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-input label="Column Validation Name" formControlName="name" placeholder="Enter the name." iconClass="fa fa-list" [autocapitalize]="true" [errors]="formsService.formErrors['name']" >
+						</form-input>
+					</section>
+					<section class="form-group col-md-6">
+						<form-select label="Data Type" formControlName="dataType" [items]="typeCodes" itemKey="key" itemName="name">
+						</form-select>
+					</section>
+				</div>
+
+			<section>
+				<form-textarea label="Description" [showMarkdown]="true"  formControlName="description" placeholder="Enter the description." >
+				</form-textarea>
+			</section>
+
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-select label="Validation Fail Action" formControlName="invalidAction" [items]="InvalidActions" itemKey="key" itemName="name"
+							note='Action to take when the validation fails.'>
+						</form-select>
+					</section>
+					<section *ngIf="formsService.currentForm.value.invalidAction==eInvalidAction.Clean || formsService.currentForm.value.invalidAction==eInvalidAction.RejectClean" class="form-group col-md-6">
+						<form-select label="Clean Action" formControlName="cleanAction" [items]="cleanActions" itemKey="key" itemName="name"
+							note='Clean Action to apply'>
+						</form-select>
+					</section>
+				</div>
+
+				<section *ngIf="(formsService.currentForm.value.invalidAction == eInvalidAction.RejectClean || formsService.currentForm.value.invalidAction == eInvalidAction.Clean) && formsService.currentForm.value.cleanAction == eCleanAction.CleanValue" >
+					<form-input label="Clean Value" formControlName="cleanValue" placeholder="Enter the clean value." iconClass="fa fa-list" >
+					</form-input>
+				</section>
+
+				<section >
+					<form-checkbox label="Ignore null values." formControlName="allowDbNull" >
+					</form-checkbox>
+				</section>
+
+				<div class="form-row" *ngIf="formsService.currentForm.value.dataType==eTypeCode.String || formsService.currentForm.value.dataType==eTypeCode.Char">
+					<section class="form-group col-md-6">
+						<form-input label="Minimum String Length" formControlName="minLength" placeholder="Enter the minimum string length" type="number" iconClass="fa fa-list" >
+						</form-input>
+					</section>
+					<section class="form-group col-md-6">
+						<form-input label="Maximum String Length" formControlName="maxLength" placeholder="Enter the maximum string length" type="number" iconClass="fa fa-list" >
+						</form-input>
+					</section>
+				</div>
+
+				<section *ngIf="formsService.currentForm.value.dataType==eTypeCode.String || formsService.currentForm.value.dataType==eTypeCode.Char" >
+						<form-input label="Simple Pattern Match" formControlName="patternMatch" placeholder="Provide a match string" iconClass="fa fa-list"
+						note="Simple pattern match, use the format - A=Upper, a=Lower, Z=Any Character, 9=numeric.  (For example: AA999 matches AS123)" >
+						</form-input>
+				</section>
+				<section *ngIf="formsService.currentForm.value.dataType==eTypeCode.String || formsService.currentForm.value.dataType==eTypeCode.Char" >
+						<form-input label="Regular Expression Match" formControlName="regexMatch" placeholder="Provide a regular expression" iconClass="fa fa-list"
+						note="Use a standard regular expression to validate.  For example [A-Za-z0-9] will ensure string only contains characters and numbers." >
+						</form-input>
+				</section>
+
+
+				<div class="form-row" *ngIf="formsService.currentForm.value.dataType!=eTypeCode.String && formsService.currentForm.value.dataType!=eTypeCode.Char">
+					<section class="form-group col-md-6">
+						<form-input label="Minimum Value" formControlName="minValue" placeholder="Enter the minimum value" type="number" iconClass="fa fa-list" >
+						</form-input>
+					</section>
+					<section class="form-group col-md-6">
+						<form-input label="Maximum Value" formControlName="maxValue" placeholder="Enter the maximum value" type="number" iconClass="fa fa-list" >
+						</form-input>
+					</section>
+				</div>
+
+				<section>
+					<form-tags label="Restrict to list of values" formControlName="listOfValues" placeholder="Provide a list of values which are valid." >
+					</form-tags>
+				</section>
+
+				<section>
+					<form-tags label="Excluded list of values" formControlName="listOfNotValues" placeholder="Provide a list of values which are valid." >
+					</form-tags>
+				</section>
+
+				<section>
+					<form-select label="Restrict to values that exist in a lookup table column" 
+						formControlName="lookupColumnKey" 
+						[items]="connections" 
+						grandParentName="name"
+						parentName="name"
+						itemKey="key"
+						itemName="name"
+						childItems="dexihTables"
+						grandChildItems="dexihTableColumns"
+						[allowNullSelect]="true"
+						note='Checks the selected table column, and ensures the value contains at least one match.'>
+					</form-select>
+				</section>
+
+				<section >
+					<form-checkbox label="Only lookup values where the 'is valid' column is true." formControlName="lookupIsValid" >
+					</form-checkbox>
+				</section>
+
+				<section >
+					<form-checkbox label="Allow valid when lookup returns multiple rows." formControlName="lookupMultipleRecords" >
+					</form-checkbox>
+				</section>
+				
+			</fieldset>
+		</form>
+ 
+    </dexih-widget>
+
+</div>

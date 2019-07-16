@@ -1,0 +1,132 @@
+<div class="container-fluid" *ngIf="hubCache?.hub">
+    <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-primary rounded">
+        <img class="mr-3" [src]="logoSmallUrl" alt="" width="48" height="48">
+        <div class="lh-100">
+            <h3 class="mb-0 text-white lh-100">{{hubCache.hub.name}}</h3>
+        </div>
+    </div>
+
+    <div class="alert alert-warning" *ngIf="noManagedConnection && hubCache.canWrite">
+        Warning: <b>No Managed connection!</b> A managed connection points to a database used to store auditing data and
+        staging tables. To run any datalink you must
+        have a least one managed connection. Note, if you do not have access to a database use the Sqlite connection to
+        create
+        a local database file.
+        <hr>
+        <dexih-button-new buttonClass="btn btn-sm btn-primary text-white" [routerLink]="['connection-new', 'Managed']"
+            text="New Managed Connection"></dexih-button-new>
+    </div>
+
+    <div class="card-deck">
+        <div class="card mb-3" style="min-width: 18rem;">
+            <div class="card-header text-white bg-success"><i class="fa fa-lg fa-fw fa-life-saver"></i>Common Actions
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                        <li routerLink="search" class="list-group-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fa fa-lg fa-fw fa-search"></i>
+                                    Search
+                                </div>
+                            </div>
+                            <div class="small">Search for objects within the hub.</div>
+                        </li>
+                        <li routerLink="sharedData" class="list-group-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fa fa-lg fa-fw fa-newspaper-o"></i>
+                                    Shared Data
+                                </div>
+                            </div>
+                            <div class="small">Tables and datalinks in the hub which have been shared.</div>
+                        </li>
+                        <li routerLink="datalinks/results" class="list-group-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fa fa-lg fa-fw fa-tasks"></i>
+                                    Datalink/Datajob results
+                                </div>
+                            </div>
+                            <div class="small">Recent execution summaries from datalink and datajobs.</div>
+                        </li>
+                        <li *ngIf="hubCache.canAdministrate" routerLink="manage/manage-users" class="list-group-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fa fa-lg fa-fw fa-birthday-cake"></i>
+                                    Manage Hub Users
+                                </div>
+                            </div>
+                            <div class="small">Invite users and manage user permissions for this hub.</div>
+                        </li>
+                        <li *ngIf="hubCache.canAdministrate" routerLink="agents" class="list-group-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fa fa-lg fa-fw fa-wifi"></i>
+                                    Manage Remote Agents
+                                </div>
+                            </div>
+                            <div class="small">Add and remove remote agents access to this hub.</div>
+                        </li>
+                    <li routerLink="files/manage" class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <i class="fa fa-lg fa-fw fa-upload"></i>
+                                Manage Files
+                            </div>
+                        </div>
+                        <div class="small">Upload and download files</div>
+                    </li>
+                    <li routerLink="import" class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <i class="fa fa-lg fa-fw fa-level-down"></i>
+                                Import
+                            </div>
+                        </div>
+                        <div class="small">Import items into the current hub from an export file.</div>
+                    </li>
+                    <li routerLink="export" class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <i class="fa fa-lg fa-fw fa-level-up"></i>
+                                Export
+                            </div>
+                        </div>
+                        <div class="small">Export items from the current hub to an external file.</div>
+                    </li>
+                    <li routerLink="agents" class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <i class="fa fa-lg fa-fw fa-wrench"></i>
+                                Remote Agents
+                            </div>
+                        </div>
+                        <div class="small">Manage which remote agents are authorized to access the hub.</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="card mb-3" style="min-width: 18rem;">
+            <div class="card-header text-white bg-danger"><i class="fa fa-lg fa-fw fa-user"></i>Hub Objects</div>
+            <div class="card-body">
+                <ul class="list-group">
+                    <li *ngFor="let sharedObject of sharedObjectProperties" [routerLink]="sharedObject.routerLink" class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <i class="fa fa-lg fa-fw {{sharedObject.icon}}"></i>
+                                {{sharedObject.displayName}}
+                            </div>
+                            <span
+                                class="badge badge-primary badge-pill">{{(hubCache.hub[sharedObject.cacheProperty] | booleanFilter :'isValid':true ).length}}
+                            </span>
+                        </div>
+                        <div class="small">{{sharedObject.description}}</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+ 
+
+</div>

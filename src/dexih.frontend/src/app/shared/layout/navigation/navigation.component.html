@@ -1,0 +1,133 @@
+
+<nav #sidebar id="dexih-sidebar" >            
+        <ul class="nav flex-column">
+            <dexih-login-info></dexih-login-info>
+
+            <menu-parent name="Configure" title="Management functions" iconClass="fa fa-lg fa-fw fa-wrench">
+                    <li class="nav-item" *ngIf="user?.isAdmin">
+                        <a (click)="hideMenu()" class="nav-link"  routerLinkActive="active"  routerLink="/admin/users">{{'Users' }}</a>
+                    </li>
+                    <li class="nav-item" >
+                        <a (click)="hideMenu()" class="nav-link"  routerLinkActive="active" routerLink="/hubs/index/hubs-view">{{'Hubs'}}</a>
+                    </li>
+    
+                    <li class="nav-item"  *ngIf="hubCacheLoaded && hubCache.canAdministrate">
+                        <a (click)="hideMenu()" class="nav-link"  routerLinkActive="active" routerLink="/hub/{{hubCache.hub.hubKey}}/summary/manage/manage-users" title="Manage Hub User Permissions">
+                            <i class="fa fa-lg fa-fw fa-user-plus"></i> <span class="menu-item-parent">{{'Hub Users'}}</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a (click)="hideMenu()" class="nav-link"  routerLinkActive="active" routerLink="/hubs/agents" title="Manage Remote Agents">
+                            <i class="fa fa-lg fa-fw fa-wifi"></i> <span class="menu-item-parent">{{'Remote Agents'}}</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item"  *ngIf="hubCacheLoaded && hubCache.canAdministrate">
+                        <a (click)="hideMenu()" class="nav-link"  routerLinkActive="active" routerLink="/hub/{{hubCache.hub.hubKey}}/summary/agents" title="Manage Remote Agents">
+                            <i class="fa fa-lg fa-fw fa-wrench"></i> <span class="menu-item-parent">{{'Hub Agents'}}</span>
+                        </a>
+                    </li>
+        
+            </menu-parent>
+            
+            <div class="dropdown-divider"></div>
+
+            <li class="nav-item">
+                <a (click)="hideMenu()" class="nav-link"  routerLinkActive="active"  [routerLinkActiveOptions]="{exact: true}" routerLink="/hubs/index"  title="Home">
+                    <span data-feather="Hubs"><i class="fa fa-lg fa-fw fa-home"></i></span>
+                     {{'Overview'}}
+                </a>
+            </li>
+
+            <li class="nav-item" >
+                <a (click)="hideMenu()" class="nav-link text-primary"  routerLinkActive="active" routerLink="/hubs/index/help">
+                    <span data-feather="Getting Started"><i class="fa fa-lg fa-fw fa-question-circle"></i></span>
+                    {{'Getting Started' }}
+                </a>
+            </li>
+   
+            <li class="nav-item" >
+                 <a (click)="hideMenu()" class="nav-link"  routerLinkActive="active" routerLink="/hubs/index/sharedData">
+                    <span data-feather="Shared Data"><i class="fa fa-lg fa-fw fa-newspaper-o"></i></span>
+                    {{'Shared Data' }}
+                </a>
+            </li>
+
+            <li class="nav-item" >
+                <a (click)="hideMenu()" class="nav-link"  routerLinkActive="active" routerLink="/hubs/index/notifications">
+                    <span data-feather="Notifications"><i class="fa fa-lg fa-fw fa-envelope-o"></i></span>
+                    {{'Notifications'}}
+                </a>
+            </li>
+
+            <li class="nav-item" >
+                <a (click)="hideMenu()" class="nav-link"  routerLinkActive="active" routerLink="/hubs/index/tasks">
+                    <span data-feather="Notifications"><i class="fa fa-lg fa-fw fa-tasks"></i></span>
+                    {{'Remote Tasks'}}
+                </a>
+            </li>
+
+
+            <div class="dropdown-divider"></div>
+            <dexih-hubs></dexih-hubs>
+
+            <ng-template [ngIf]="hubCacheLoaded">
+                <dexih-remote-agent></dexih-remote-agent>
+                
+                <li class="nav-item"  >
+                    <a (click)="hideMenu()" class="nav-link" (click)="hideMenu()"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/hub/{{hubCache.hub.hubKey}}/summary"  title="Hub Summary">
+                        <i class="fa fa-lg fa-fw fa-dashboard"></i> <span class="menu-item-parent">{{'Summary'}}</span>
+                    </a>
+                </li>
+
+                <li class="nav-item" >
+                    <a (click)="hideMenu()" class="nav-link"  routerLinkActive="active" routerLink="/hub/{{hubCache.hub.hubKey}}/search" title="Search">
+                        <i class="fa fa-lg fa-fw fa-search"></i> <span class="menu-item-parent">{{'Search'}}</span>
+                    </a>
+                </li>
+    
+                <li *ngFor="let sharedObject of sharedObjectProperties" class="nav-item">
+                    <a class="nav-link"  routerLinkActive="active" routerLink="/hub/{{hubCache.hub.hubKey}}/summary/{{sharedObject.routerLink}}" title="{{sharedObject.description}}">
+                        <i class="fa fa-lg fa-fw {{sharedObject.icon}}"></i> <span class="menu-item-parent">{{sharedObject.displayName}}</span>
+                        <span class="badge badge-primary float-right">{{objectCounts[sharedObject.type]}}</span>
+                    </a>
+                </li>
+
+                <li class="nav-item" >
+                    <a (click)="hideMenu()" class="nav-link"  routerLinkActive="active" routerLink="sharedData">
+                       <span data-feather="Shared Data"><i class="fa fa-lg fa-fw fa-newspaper-o"></i></span>
+                       {{'Shared Data' }}
+                   </a>
+               </li>
+
+                <li class="nav-item">
+                    <a (click)="hideMenu()" class="nav-link"  routerLinkActive="active" routerLink="/hub/{{hubCache.hub.hubKey}}/summary/files/manage" title="Manage Flat Files">
+                        <i class="fa fa-lg fa-fw fa-upload"></i> <span class="menu-item-parent">{{'Files'}}</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a (click)="hideMenu()" class="nav-link"  routerLinkActive="active" routerLink="/hub/{{hubCache.hub.hubKey}}/summary/datalinks/results" title="Recent execution summaries from datalink and datajobs.">
+                        <i class="fa fa-lg fa-fw fa-tasks"></i> <span class="menu-item-parent">{{'Job Results'}}</span>
+                    </a>
+                </li>
+
+                <li class="nav-item" *ngIf="hubCache.canWrite">
+                    <a (click)="hideMenu()" class="nav-link"  routerLinkActive="active" routerLink="/hub/{{hubCache.hub.hubKey}}/summary/import" title="Import Objects">
+                        <i class="fa fa-lg fa-fw fa-level-down"></i> <span class="menu-item-parent">{{'Import'}}</span><span class="badge badge-primary float-right"></span>
+                    </a>
+                </li>
+
+                <li class="nav-item" *ngIf="hubCache.canWrite">
+                    <a (click)="hideMenu()" class="nav-link"  routerLinkActive="active" routerLink="/hub/{{hubCache.hub.hubKey}}/summary/export" title="Export Objects">
+                        <i class="fa fa-lg fa-fw fa-level-up"></i> <span class="menu-item-parent">{{'Export'}}</span><span class="badge badge-primary float-right"></span>
+                    </a>
+                </li>
+            </ng-template>
+
+        </ul>
+    </nav>
+
+
+

@@ -1,0 +1,47 @@
+<dexih-message #DexihMessage></dexih-message>
+
+<div class="container">
+    <dexih-widget 
+		title="Edit Remote Agent" 
+        iconClass="fa fa-lg fa-fw fa-database" 
+        [padding]="true"
+        [showCloseButton]="true"
+        (close)="close()"
+    >
+        <ng-template #header>
+            <dexih-button-save class="mr-1" (click)="save()"></dexih-button-save>
+            <dexih-button-cancel (click)="close()"></dexih-button-cancel>
+        </ng-template>
+
+        <form *ngIf="formsService.currentForm"  [formGroup]="formsService.currentForm">
+            <fieldset>
+                    <section >
+                        <form-input label="Agent name" note="This can only be changed on the remote agent settings file." formControlName="name" iconClass="fa fa-comment"></form-input>
+                    </section>
+                    <section >
+                        <form-input label="Remote Agent Id" note="This can only be changed on the remote agent settings file." formControlName="remoteAgentId" iconClass="fa fa-comment"></form-input>
+                    </section>
+    
+                <section>
+					<form-checkbox label="Allow data sharing through the agent via other hubs or through the API." formControlName="allowExternalConnect" >
+					</form-checkbox>
+                </section>
+
+                <section>
+					<form-checkbox label="Restrict remote agent ip addresses." formControlName="restrictIp" >
+					</form-checkbox>
+                </section>
+
+                <section *ngIf="formsService.currentForm.controls.restrictIp.value">
+                    <form-tags label="Restricted IP Addresses" formControlName="ipAddresses" placeholder="Enter the IP Address."
+                        note="List of Ip Addresses.  The remote agent only be authorized for this hub if originating from one of the listed ip addresses.">
+                        <span *ngIf="ipAddress">
+                        ( <a href="javascript:void(0)" (click)="addCurrentIp()"> <i class="fa fa-refresh"></i> Add Current ({{ipAddress}}) </a>)
+                    </span>
+				    </form-tags>
+                </section>
+            </fieldset>
+        </form>
+
+    </dexih-widget>
+</div>

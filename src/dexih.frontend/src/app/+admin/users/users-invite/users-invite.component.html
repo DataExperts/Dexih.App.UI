@@ -1,0 +1,42 @@
+<dexih-message #DexihMessage></dexih-message>
+
+<div class="container-fluid">
+    <dexih-widget title="Invite Users" iconClass="fa fa-lg fa-fw fa-user" [padding]="true">
+        <ng-template #tools>
+				<button 
+					class="btn btn-primary mr-1" 
+					[ngClass]="{disabled : formsService.formSaving || !formsService.hasChanged }" 
+					(click)="save()">
+					<i *ngIf="formsService.formSaving" class="fa fa-spin fa-cog"></i> Send Invites
+				</button>				
+				<dexih-button-cancel (click)="cancel()"></dexih-button-cancel>
+        </ng-template>
+
+		<form *ngIf="formsService.currentForm"  [formGroup]="formsService.currentForm">
+			<fieldset>
+				<section>
+					<form-tags label="Email Addresses" formControlName="emails" placeholder="Provide emails to invite." note="Enter email addresses of users to invite to join the integration hub." >
+					</form-tags>
+				</section>
+
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-input type="number" label="Maximum Personal Hubs" formControlName="hubQuota" placeholder="Enter the number of hubs." iconClass="fa fa-list" >
+						</form-input>
+					</section>
+					<section class="form-group col-md-6">
+						<form-input type="number" label="Number of invites" formControlName="inviteQuota" placeholder="Enter the number of invites." >
+						</form-input>
+					</section>
+				</div>
+
+				<section>
+					<form-select label="Default Role" formControlName="role" [items]="roles" itemName="name" itemKey="key" [enableFilter]="false"
+					note="Enter the role provided to the invited users." >
+					</form-select>
+				</section>
+
+			</fieldset>
+		</form>
+ 
+    </dexih-widget>

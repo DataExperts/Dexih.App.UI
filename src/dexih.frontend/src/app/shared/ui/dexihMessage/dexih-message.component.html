@@ -1,0 +1,16 @@
+<section *ngIf="message">
+    <div class="alert alert-dismissible" [class.alert-danger]="message.success == false" [class.alert-success]="message.success == true">
+        <div style="white-space: pre-wrap;">{{message.message}}</div>
+        <button type="button" class="close" (click)="reset()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <div *ngIf="message.exceptionDetails && message.message != message.exceptionDetails">
+            <hr>
+            <a class="btn btn-sm btn-primary text-white" (click)='isHidden = !isHidden'>Details</a>
+            <div *ngIf="!isHidden && message.exceptionDetails && message.message != message.exceptionDetails">
+                <hr>
+                <pre>{{message.exceptionDetails}}</pre>
+            </div>
+        </div>
+    </div>
+</section>

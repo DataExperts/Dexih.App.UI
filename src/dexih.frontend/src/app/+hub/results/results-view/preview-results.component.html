@@ -1,0 +1,10 @@
+<dexih-table [enableMultiSelect]="false" [columns]="columns" [data]="data">
+
+    <ng-template #actions let-items="items">
+        <dexih-button-refresh class="input-group-append" (click)="refresh()" text="Reload"></dexih-button-refresh>
+        <dexih-button-download class="ml-1" (click)="download()"></dexih-button-download>
+    </ng-template>
+    <ng-template #tableHeader>
+        <query-builder [selectQuery]="selectQuery" [columns]="targetTable.dexihTableColumns" [inputColumns]="inputColumns" ></query-builder>
+    </ng-template>
+</dexih-table>

@@ -1,0 +1,8 @@
+<div class="float-right">
+    <actions-columnValidation-button [columnValidation]="columnValidation" [pullRight]="true"></actions-columnValidation-button>
+</div>
+<h5>{{columnValidation.name}}</h5>
+<div *ngIf="columnValidation.description">
+    <markdown [data]="columnValidation.description"></markdown>
+</div>
+<div class="note">Updated: {{columnValidation.updateDate | date : 'short' }} </div>

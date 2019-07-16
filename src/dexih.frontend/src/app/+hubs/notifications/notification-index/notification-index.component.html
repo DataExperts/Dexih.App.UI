@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <dexih-widget title="Notifications" 
+        iconClass="fa fa-lg fa-fw fa-exchange" 
+		[showCloseButton]="true"
+		(close)="close()"
+
+    >
+
+		<dexih-table 
+			[enableMultiSelect]="true"
+			[columns]="columns"
+			[data]="notifications"
+			(rowClick)="showMessage($event)"
+			>
+				<ng-template #selectedItemAction select="selectedItemAction" let-task="item">
+					<dexih-button-view (click)="showMessage(task)"></dexih-button-view>
+				</ng-template>
+				
+		</dexih-table>
+    </dexih-widget>
+</div>
+
+

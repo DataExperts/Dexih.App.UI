@@ -1,0 +1,44 @@
+<div *ngIf="newDatalinkTransformItemForm && inputColumns && outputColumns">
+
+	<div class="list-group-item list-group-item-info rounded-0">
+		<div class="d-flex flex-row">
+			<h5>Un-Group Column Node</h5>
+			<div class="ml-auto">
+				<dexih-button-apply [disabled]="newDatalinkTransformItemForm.pristine" (click)="!newDatalinkTransformItemForm.pristine && applyExit()"
+				 class="mr-1"></dexih-button-apply>
+				<dexih-button-cancel (click)="cancel()"></dexih-button-cancel>
+			</div>
+		</div>
+	</div>
+
+	<div class="container  mt-3 mb-3" *ngIf="datalinkTransformForm">
+
+		<form [formGroup]="newDatalinkTransformItemForm">
+			<fieldset>
+				<section class="col col-xs-12">
+					<form-select label="Column Node" 
+						formControlName="sourceDatalinkColumn" 
+						[items]="inputColumns" 
+						[(textValue)]="sourceValue"
+						[enableTextEntry]="true"
+						[enableTextEntryMatch]="false"
+						itemName="logicalName"
+						[errors]="sourceErrors"
+						>
+					</form-select>
+				</section>
+
+				<div class="mt-1">
+					<div class="d-flex flex-row mb-1">
+						Un-Group Columns
+					</div>
+					<div *ngFor="let parameter of newDatalinkTransformItemForm.controls.dexihFunctionParameters.controls; let i = index" [ngStyle]="{'z-index': 300-i, 'position': 'relative'}">
+							<output-parameter [outputParameterForm]="parameter" [outputColumns]="outputColumns"
+							[allowAdd]="false" [allowRemove]="false">
+						   </output-parameter>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</div>

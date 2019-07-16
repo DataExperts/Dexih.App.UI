@@ -1,0 +1,97 @@
+<div class="list-group-item list-group-item-info  rounded-0">
+    <div class="d-flex flex-row">
+        <h5>Table Properties</h5>
+    </div>
+</div>
+<div >
+    <div class="container  mt-3 mb-3">
+        <form *ngIf="mainForm" [formGroup]="mainForm">
+            <fieldset>
+                <section>
+                    <form-select label="Connection" formControlName="connectionKey" [items]="connections" itemKey="key" itemName="name"
+                        [errors]="formsService.formErrors.connectionKey" iconClass="fa fa-database" note='The connection for this table.'>
+                    </form-select>
+                </section>
+
+                <section>
+                    <form-input [label]="entityType + ' Name'" formControlName="name" placeholder="Enter the physical name." iconClass="fa fa-list"
+                        [errors]="formsService.formErrors.name" note="The physical name of the underlying entity">
+                    </form-input>
+                </section>
+
+                <section *ngIf="connectionReference?.connectionCategory == eConnectionCategory.SqlDatabase">
+                    <form-input [label]="entityType + ' Schema'" formControlName="schema" placeholder="Enter the (database) schema name" iconClass="fa fa-list"
+                        [errors]="formsService.formErrors.schema" note="The physical name of the database schema (if applicable).">
+                    </form-input>
+                </section>
+
+                <section>
+                    <form-checkbox label="Specify a logical name" formControlName="useLogical">
+                    </form-checkbox>
+                </section>
+
+                <section *ngIf="formsService.currentForm.value.useLogical">
+                    <form-input label="Logical Name" formControlName="logicalName" placeholder="Enter the logical name." iconClass="fa fa-list"
+                        [errors]="formsService.formErrors.logicalName" note="The logical name is a short term to represent the table">
+                    </form-input>
+                </section>
+
+                <section>
+                    <form-textarea label="Description" formControlName="description" [showMarkdown]="true" placeholder="Enter the description."
+                        [errors]="formsService.formErrors.description">
+                    </form-textarea>
+                </section>
+
+                <div *ngIf="connection?.purpose == eConnectionPurpose.Managed" class="form-row">
+                    <section class="form-group col-md-6">
+                        <form-input label="Reject Table Name" formControlName="rejectedTableName" placeholder="Enter the rejected table name." iconClass="fa fa-list"
+                            [errors]="formsService.formErrors.rejectedTableName" note="The name of the table to send any records that could not be written to the primary table.">
+                        </form-input>
+                    </section>
+                </div>
+
+                <section *ngIf="connectionReference?.connectionCategory == eConnectionCategory.SqlDatabase">
+                    <form-select label="Table Type" formControlName="tableType" [errors]="formsService.formErrors.tableType" [items]="tableTypes">
+                    </form-select>
+                </section>
+
+                <section *ngIf="connectionReference?.connectionCategory == eConnectionCategory.SqlDatabase">
+                    <form-checkbox label="Use Sql to pull data from the database" formControlName="useQuery">
+                    </form-checkbox>
+                </section>
+
+                <section *ngIf="formsService.currentForm.controls.useQuery.value">
+                    <form-textarea label="Specify the sql query" rows="15" formControlName="queryString" [hideToggle]="true" placeholder="Sql Query"
+                        [showPreview]="false">
+                        <a *ngIf="runningSql == false" href="javascript:void(0)" (click)="test()"> (
+                            <i class="fa fa-check-circle-o"></i> Test) </a>
+                        <a *ngIf="runningSql == false" href="javascript:void(0)" (click)="reloadColumns()"> (
+                            <i class="fa fa-refresh"></i> Reload Columns) </a>
+                        <span *ngIf="runningSql == true">
+                            <i class="fa fa-spin fa-refresh"></i> (Busy... please wait) </span>
+                    </form-textarea>
+                </section>
+
+                <section *ngIf="connectionReference?.connectionCategory == eConnectionCategory.Hub">
+                    <form-input label="Source Connection Name" formControlName="sourceConnectionName" placeholder="Name of the source connection."
+                        iconClass="fa fa-list" note="The name of the connection for this table in the source hub.">
+                    </form-input>
+                </section>
+
+                <section>
+                    <form-checkbox label="Table is shared in the catalog to users with read access." formControlName="isShared">
+                    </form-checkbox>
+                </section>
+
+            </fieldset>
+        </form>
+    </div>
+
+    <div *ngIf="connectionReference?.connectionCategory == eConnectionCategory.WebService">
+        <dexih-table-edit-rest [formService]='formsService' [connection]='connection' (onTableChanged)="onTableChanged($event)"></dexih-table-edit-rest>
+    </div>
+
+    <div *ngIf="connectionReference?.connectionCategory == eConnectionCategory.File">
+        <dexih-table-edit-file [formService]='formsService' [connection]='connection' (onTableChanged)="onTableChanged($event)"></dexih-table-edit-file>
+    </div>
+</div>

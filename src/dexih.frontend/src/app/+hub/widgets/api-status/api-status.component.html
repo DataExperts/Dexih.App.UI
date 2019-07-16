@@ -1,0 +1,27 @@
+<div class="list-group">
+        <div class="list-group-item list-group-item-{{statusClass}}" *ngIf="apiData" >
+                <i class="fa fa-{{statusIcon}}"></i>
+            <div class="d-inline">{{apiData.apiStatus}} endpoint:</div>
+            <div class="d-inline">{{apiData.successCount}} success, {{apiData.errorCount}} errors.</div>
+            <a *ngIf="apiData.apiStatus === eApiStatus.Activated" class="btn btn-sm btn-warning float-right" title="Deactivate the Api" (click)="deactivate()">
+                <i class="fa fa-ban"></i>
+            </a>
+            <a  *ngIf="apiData.apiStatus !== eApiStatus.Activated" class="btn btn-sm btn-success float-right" title="Activate the Api" (click)="activate()">
+                <i class="fa fa-check"></i>
+            </a>
+        </div>
+        <div class="list-group-item list-group-item-danger" *ngIf="!apiData" >
+            <i class="fa fa-chain-broken"></i>
+            <div class="d-inline">Deactivated </div>
+            <a class="btn btn-sm btn-success float-right" title="Activate the Api" (click)="activate()">
+                <i class="fa fa-check"></i>
+            </a>
+        </div>
+            
+    <div class="list-group-item" *ngFor="let url of urls">
+        <form-textarea [label]="url.downloadType + ' endpoint'" [showCopy]="true" [isHidden]="true" [showPreview]="false" [disabled]="true" [rows]="3" [value]="url.downloadUrl" >
+            <a class="btn btn-sm btn-outline-primary float-right ml-1" [href]="url.testUrl" target="_blank">test</a>
+        </form-textarea>
+        
+    </div>
+</div>

@@ -1,0 +1,124 @@
+<dexih-message #DexihMessage></dexih-message>
+
+<div class="container">
+	<dexih-widget-vertical>
+    <dexih-widget title="User Registration Details" iconClass="fa fa-lg fa-fw fa-user"  [padding]="true">
+        <ng-template #header>
+			<dexih-button-save class="mr-1" [busy]="formsService.formSaving" (click)="save()"></dexih-button-save>
+			<dexih-button-cancel (click)="cancel()"></dexih-button-cancel>
+        </ng-template>
+
+		<form *ngIf="formsService.currentForm"  [formGroup]="formsService.currentForm">
+			<fieldset>
+				<section>
+					<form-input label="Email Address" formControlName="email" placeholder="Enter the email." iconClass="fa fa-list" >
+					</form-input>
+				</section>
+
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-input label="First Name" formControlName="firstName" placeholder="First Name" [autocapitalize]="true">
+						</form-input>
+					</section>
+					<section class="form-group col-md-6">
+						<form-input label="Last Name" formControlName="lastName" placeholder="Last Name" [autocapitalize]="true">
+						</form-input>
+					</section>
+				</div>
+
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-checkbox label="Agreed Terms" formControlName="terms" >
+						</form-checkbox>
+					</section>
+					<section class="form-group col-md-6">
+						<form-checkbox label="Agreed Subscription" formControlName="subscription" >
+						</form-checkbox>
+					</section>
+				</div>
+
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-input label="Maximum Personal Hubs" formControlName="hubQuota" placeholder="Enter the number of hubs" iconClass="fa fa-list" >
+						</form-input>
+					</section>
+					<section class="form-group col-md-6">
+						<form-input type="number" label="Number of invites" formControlName="inviteQuota" >
+						</form-input>
+					</section>
+				</div>
+
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-checkbox label="Is Invited" formControlName="isInvited" >
+						</form-checkbox>
+					</section>
+					<section class="form-group col-md-6">
+						<form-checkbox label="IsRegistered" formControlName="isRegistered" >
+						</form-checkbox>
+					</section>
+				</div>
+
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-checkbox label="Is Enabled" formControlName="isEnabled" >
+						</form-checkbox>
+					</section>
+					<section class="form-group col-md-6">
+						<form-checkbox label="Email is confirmed" formControlName="emailConfirmed" >
+						</form-checkbox>
+					</section>
+				</div>
+
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-checkbox label="Lockout Enabled" formControlName="lockoutEnabled" >
+						</form-checkbox>
+					</section>
+					<section class="form-group col-md-6">
+						<form-input type="date" label="Lockout End" formControlName="lockoutEnd" >
+						</form-input>
+					</section>
+				</div>
+
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-input label="Phone Number" formControlName="phoneNumber" >
+						</form-input>
+					</section>
+					<section class="form-group col-md-6">
+						<form-checkbox label="Phone Number Confirmed" formControlName="phoneNumberConfirmed" >
+						</form-checkbox>
+					</section>
+				</div>
+
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-checkbox label="Two Factor Enabled" formControlName="twoFactorEnabled" >
+						</form-checkbox>
+					</section>
+				</div>
+
+			</fieldset>
+		</form>
+ 
+    </dexih-widget>
+
+	<dexih-widget title="Logins" subTitle="The following login providers are available for this login" iconClass="fa fa-lg fa-fw fa-life-saver"  [padding]="true">
+		<ng-template #tools>
+
+		</ng-template>
+
+		<ul class="list-group">
+
+			<li *ngFor="let login of logins" class="list-group-item">
+				<h3>Provider: {{login.loginProvider}}</h3>
+				<hr>
+				<div>
+					<a class="btn btn-danger text-white" (click)="deleteLogin(login)" title="Remove the following login">Delete</a>
+				</div>
+			</li>
+		</ul>
+	</dexih-widget>
+</dexih-widget-vertical>
+</div>

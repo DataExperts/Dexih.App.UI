@@ -1,0 +1,121 @@
+<div *ngIf="!showColumn">
+<div class="list-group-item list-group-item-info rounded-0">
+    <div class="d-flex flex-row">
+        <h5>Edit Target Table</h5>
+        <div class="ml-auto">
+                <dexih-button-preview class="mr-1" (click)="previewData()"></dexih-button-preview>
+                <dexih-button class="mr-1" (click)="importTable()" buttonClass="btn-primary" iconClass="fa fa-refresh" title="Re-import table from connection.">
+                    Re-Import
+                </dexih-button>
+                <dexih-button (click)="createTable()" class="mr-1" buttonClass="btn-primary" iconClass="fa fa-bullseye" title="Drop & re-create the table on the connection.  Warning: This remove all data from the table!">
+                    Drop & Create
+                </dexih-button>
+
+                <dexih-button *ngIf="!newTable" class="mr-1" (click)="showTableProperties = !showTableProperties">
+                    <span *ngIf="!showTableProperties">(Show Details) </span>
+                    <span *ngIf="showTableProperties">(Hide Details) </span>
+                </dexih-button>
+
+                <dexih-button-apply class="mr-1" (click)="apply()" [disabled]="!this.targetTableForm?.dirty"></dexih-button-apply>
+                <cancel-button [formsService]="tableFormService"></cancel-button>
+        
+            </div>
+        </div>
+</div>
+
+<div class="container mt-3 mb-3">
+    <form *ngIf="targetTableForm"  [formGroup]="targetTableForm">
+        <fieldset>
+            <section>
+                    <form-checkbox label="Create a new table" [ngModelOptions]="{standalone: true}" [(ngModel)]="newTable" (ngModelChange)="toggleNewTable($event)"></form-checkbox>
+            </section>
+            <section *ngIf="!newTable">
+                <form-select label="Target Table" formControlName="tableKey" [items]="connectionTables" parentName="name" childItems="dexihTables"
+                    itemKey="key" itemName="logicalName" note='Select the target table'>
+                </form-select>
+            </section>
+            <section *ngIf="nodes?.length > 0">
+                <form-select label="Node level" formControlName="nodeDatalinkColumn" [items]="nodes" itemName="name" node='Specify the node where the transform should be applied to.' [allowNullSelect]="true" selectNullMessage='Use top level'>
+                </form-select>
+            </section>
+        </fieldset>
+    </form>
+</div>
+
+<dexih-table-edit-properties *ngIf="newTable || showTableProperties" [formsService]="tableFormService"></dexih-table-edit-properties>
+
+<ng-template [ngIf]="targetTableForm?.controls.table.value">
+        <div class="list-group-item list-group-item-info">
+                <div class="d-flex flex-row">
+                    <h5>Columns</h5>
+            </div>
+        </div>  
+        <dexih-table [enableMultiSelect]="true"
+            [enableManualSort]="true" [enableSort]="false" [enableFilter]="false" (onSortChanged)="columnSortChange($event)" [columns]="columns"
+            [dataObservable]="tableData" (rowClick)="editColumn($event)">
+    
+            <ng-template #actions let-items="items">
+                <dexih-button-splitdropdown text="Add Column" title="Create a new column" iconClass="fa fa-plus-o" buttonClass="btn-primary"
+                    (buttonClick)="newColumn(null)">
+                    <li>
+                        <a class="dropdown-item" (click)="newColumn(eDeltaType.AutoIncrement)">Add Auto Incrementing Key Column</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" (click)="newColumn(eDeltaType.ValidFromDate)">Add Valid from Date</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" (click)="newColumn(eDeltaType.ValidToDate)">Add Valid to Date</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" (click)="newColumn(eDeltaType.IsCurrentField)">Add Is Valid Column</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" (click)="newColumn(eDeltaType.CreateAuditKey)">Add Create Audit Key</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" (click)="newColumn(eDeltaType.UpdateAuditKey)">Add Update Audit Key</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" (click)="newColumn(eDeltaType.CreateDate)">Add Create Date</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" (click)="newColumn(eDeltaType.UpdateDate)">Add Update Date</a>
+                    </li>
+                </dexih-button-splitdropdown>
+            </ng-template>
+    
+            <ng-template #tableHeader let-items="items">
+                <column-edit-bulk *ngIf="   showBulkEdit && items.length > 0" [columns]="items" [columnsFormArray]="targetTableForm.controls.table.controls.dexihTableColumns" ></column-edit-bulk>
+            </ng-template>
+
+            <ng-template #selectedItemAction select="selectedItemAction" let-column="item">
+                <dexih-button-edit (click)="editColumn(column)"></dexih-button-edit>
+            </ng-template>
+    
+            <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+                <dexih-button-delete (click)="deleteColumns(items)"></dexih-button-delete>
+                <dexih-button class="ml-1" (click)="showBulkEdit=!showBulkEdit">{{showBulkEdit ? 'Hide Bulk Edit' : 'Show Bulk Edit'}} </dexih-button>
+            </ng-template>
+    
+    
+        </dexih-table>
+    
+        <div class="list-group-item list-group-item-info">
+                <div class="d-flex flex-row">
+                    <h5>Unused Columns</h5>
+            </div>
+        </div>  
+
+        <dexih-table [enableMultiSelect]="true"
+            sortColumn="position" [enableFilter]="false" [columns]="columns" [dataObservable]="missingColumnsData">
+            <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+                <dexih-button (click)="addMissing(items)" buttonClass="btn-primary" iconClass="fa fa-plus-square" title="Add selected outputs to the target table">Add To Table</dexih-button>
+            </ng-template>
+    
+        </dexih-table>
+    </ng-template>
+</div>
+
+<div *ngIf="showColumn">
+    <column-edit [columnKey]="columnKey" [tableForm]="this.targetTableForm.controls.table" [deltaType]='deltaType' (isUpdated)="columnUpdated()"></column-edit>
+</div>
