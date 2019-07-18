@@ -1,9 +1,9 @@
 import { Component, OnInit, OnChanges, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HubService } from '../../hub.service';
-import { HubCache, DexihHub, DexihTable, DexihDatalink, DexihConnection, eDatalinkType, eCacheStatus} from '../../hub.models';
+import { HubCache, DexihHub, DexihTable, DexihDatalink, DexihConnection, eViewSource} from '../../hub.models';
 import { Subscription ,  Observable, combineLatest} from 'rxjs';
-import { DownloadObject, eObjectType, eDownloadFormat } from '../../hub.query.models';
+import { DownloadObject, eDownloadFormat } from '../../hub.query.models';
 import { DatalinkColumnEditComponent } from '../../datalink/datalink-edit/datalink-column-edit';
 import { ConnectionReference, RemoteLibraries, eConnectionCategory } from '../../hub.remote.models';
 
@@ -162,7 +162,7 @@ export class ActionsTableButtonComponent implements OnInit, OnChanges, OnDestroy
         this.getTables().forEach(c => {
             let downloadObject = new DownloadObject();
             downloadObject.objectKey = c.key;
-            downloadObject.objectType = eObjectType.Table;
+            downloadObject.objectType = eViewSource.Table;
             downloadItems.push(downloadObject);
         });
         this.hubService.downloadData(downloadItems, true, eDownloadFormat.Csv)

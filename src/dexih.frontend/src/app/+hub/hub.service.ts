@@ -40,7 +40,9 @@ import {
     InputColumn,
     DexihView,
     DexihApi,
-    ApiData
+    ApiData,
+    TransformProperties,
+    PreviewResults
 } from './hub.models';
 import { DownloadObject, eDownloadFormat, SelectQuery } from './hub.query.models';
 import { RemoteLibraries, RemoteAgentStatus, eTypeCode } from './hub.remote.models';
@@ -1685,7 +1687,7 @@ export class HubService implements OnInit, OnDestroy {
     }
 
     previewTableData(table: DexihTable, showRejectedData, selectQuery: SelectQuery, inputColumns: InputColumn[]):
-    Promise<{ columns: Array<any>, data: Array<any> }> {
+    Promise<PreviewResults> {
         let hub = new DexihHub(this._hubCache.value.hub.hubKey, 'cache');
         this._hubCache.value.cacheAddConnection(table.connectionKey, hub);
 
@@ -1729,8 +1731,8 @@ export class HubService implements OnInit, OnDestroy {
     }
 
     previewTableDataQuery(table: DexihTable, showRejectedData, selectQuery: SelectQuery, inputColumns: InputColumn[]):
-        Promise<{ columns: Array<any>, data: Array<any> }> {
-        return new Promise<{ columns: Array<any>, data: Array<any> }>((resolve, reject) => {
+        Promise<PreviewResults> {
+        return new Promise<PreviewResults>((resolve, reject) => {
             let hub = new DexihHub(this._hubCache.value.hub.hubKey, 'cache');
             this._hubCache.value.cacheAddConnection(table.connectionKey, hub);
 
@@ -1761,7 +1763,13 @@ export class HubService implements OnInit, OnDestroy {
                             } else {
 
                                 let columns = this.constructDataTableColumns(data.columns);
-                                resolve({columns: columns, data: data.data});
+                                resolve(
+                                    {
+                                        name: data.name,
+                                        columns: columns,
+                                        data: data.data,
+                                        transformProperties: data.transformProperties,
+                                        status: data.status});
                                 return result;
                             }
                         }).catch(reason => {
@@ -1782,8 +1790,8 @@ export class HubService implements OnInit, OnDestroy {
     }
 
     previewTableKeyData(tableKey: number, showRejectedData, selectQuery: SelectQuery, inputColumns: InputColumn[]):
-        Promise<{ columns: Array<any>, data: Array<any> }> {
-        return new Promise<{ columns: Array<any>, data: Array<any> }>((resolve, reject) => {
+        Promise<PreviewResults> {
+        return new Promise<PreviewResults>((resolve, reject) => {
 
             if (!this._remoteAgent.value) {
                 let message = new Message(false, 'No active remote agent.', null, null);
@@ -1812,7 +1820,13 @@ export class HubService implements OnInit, OnDestroy {
                             } else {
 
                                 let columns = this.constructDataTableColumns(data.columns);
-                                resolve({columns: columns, data: data.data});
+                                resolve(
+                                    {
+                                        name: data.name,
+                                        columns: columns,
+                                        data: data.data,
+                                        transformProperties: data.transformProperties,
+                                        status: data.status});
                                 return result;
                             }
                         }).catch(reason => {
@@ -1832,8 +1846,8 @@ export class HubService implements OnInit, OnDestroy {
     }
 
     previewDatalinkKeyData(datalinkKey: number, selectQuery: SelectQuery, inputColumns: InputColumn[]):
-        Promise<{ columns: Array<any>, data: Array<any> }> {
-        return new Promise<{ columns: Array<any>, data: Array<any> }>((resolve, reject) => {
+        Promise<PreviewResults> {
+        return new Promise<PreviewResults>((resolve, reject) => {
 
             if (!this._remoteAgent.value) {
                 let message = new Message(false, 'No active remote agent.', null, null);
@@ -1858,7 +1872,13 @@ export class HubService implements OnInit, OnDestroy {
                             reject(data['message']);
                         } else {
                             let columns = this.constructDataTableColumns(data.columns);
-                            resolve({columns: columns, data: data.data});
+                            resolve(
+                                {
+                                    name: data.name,
+                                    columns: columns,
+                                    data: data.data,
+                                    transformProperties: data.transformProperties,
+                                    status: data.status});
                             return result;
                         }
                     }).catch(reason => {
@@ -1871,6 +1891,100 @@ export class HubService implements OnInit, OnDestroy {
                     reject(reason);
                 });
             }).catch(reason => {
+                this.addHubMessage(reason);
+                reject(reason);
+            });
+        });
+    }
+
+    previewTransformData(datalink: DexihDatalink, datalinkTransformKey: number, selectQuery: SelectQuery, inputColumns: InputColumn[]):
+        Promise<PreviewResults> {
+        return new Promise<PreviewResults>((resolve, reject) => {
+            // remove status as they will not parse into json.
+            datalink.currentStatus = null;
+            datalink.entityStatus = null;
+            datalink.previousStatus = null;
+
+            const cache = this._hubCache.value;
+            const hub = new DexihHub(cache.hub.hubKey, '');
+            cache.getDatalinkCache(datalink, hub);
+
+            if (!this._remoteAgent.value) {
+                let message = new Message(false, 'No active remote agent.', null, null);
+                this.addHubMessage(message);
+                reject(message);
+                return;
+            }
+
+            this.authService.getDownloadUrl(this._remoteAgent.value).then(downloadUrl => {
+                this.authService.post('/api/Hub/PreviewTransform', {
+                    hubKey: cache.hub.hubKey,
+                    remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
+                    datalink: datalink,
+                    selectQuery,
+                    inputColumns,
+                    datalinkTransformKey: datalinkTransformKey,
+                    downloadUrl: downloadUrl
+                }, 'Getting download location...').then(result => {
+
+                    // console.debug(result.value);
+                    this.authService.get(result.value, null, false).then(data => {
+                        if (data['success'] === false) {
+                            this.addHubMessage(data);
+                            reject(data['message']);
+                        } else {
+                            let columns = this.constructDataTableColumns(data.columns);
+                            resolve(
+                                {
+                                    name: data.name,
+                                    columns: columns,
+                                    data: data.data,
+                                    transformProperties: data.transformProperties,
+                                    status: data.status});
+                            return result;
+                        }
+                    }).catch(reason => {
+                        this.addHubMessage(reason);
+                        reject(reason);
+                    });
+                }).catch(reason => {
+                    this.addHubMessage(reason);
+                    reject(reason);
+                });
+            }).catch(reason => {
+                this.addHubMessage(reason);
+                reject(reason);
+            });
+        });
+    }
+
+    datalinkProperties(datalinkKey: number, selectQuery: SelectQuery, inputColumns: InputColumn[]):
+    Promise<TransformProperties> {
+        return new Promise<TransformProperties>((resolve, reject) => {
+
+            if (!this._remoteAgent.value) {
+                let message = new Message(false, 'No active remote agent.', null, null);
+                this.addHubMessage(message);
+                reject(message);
+                return;
+            }
+
+            this.authService.post('/api/Hub/DatalinkProperties', {
+                hubKey: this._hubCache.value.hub.hubKey,
+                remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
+                datalinkKey: datalinkKey,
+                selectQuery: selectQuery,
+                inputColumns: inputColumns,
+            }, 'Getting datalinks properties...').then(result => {
+
+                if (result.success) {
+                    resolve(result.value);
+                } else {
+                    this.addHubMessage(result);
+                    reject(result.message);
+                }
+            }).catch(reason => {
+                this.logger.LogC(() => `previewDatalinkKeyData, error: ${reason.message}.`, eLogLevel.Error);
                 this.addHubMessage(reason);
                 reject(reason);
             });

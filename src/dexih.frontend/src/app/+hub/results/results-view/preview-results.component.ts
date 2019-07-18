@@ -1,9 +1,9 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../../+auth/auth.service';
-import { TransformWriterResult, Table, TableColumn, eDeltaType, HubCache, DexihTable, DexihDatalink } from '../../hub.models';
-import { SelectQuery, Filter, eCompare, eAndOr, DownloadObject, eObjectType, eDownloadFormat } from '../../hub.query.models';
+import { TransformWriterResult, eDeltaType, HubCache, DexihTable, DexihDatalink, eViewSource } from '../../hub.models';
+import { SelectQuery, Filter, eCompare, eAndOr, DownloadObject, eDownloadFormat } from '../../hub.query.models';
 import { HubService } from '../../hub.service';
-import { Subscription, BehaviorSubject, Observable, combineLatest} from 'rxjs';
+import { Subscription} from 'rxjs';
 import { eTypeCode } from '../../hub.remote.models';
 
 @Component({
@@ -25,7 +25,6 @@ export class PreviewResultsComponent implements OnInit, OnDestroy {
     public selectQuery = new SelectQuery();
 
     constructor(
-        private authService: AuthService,
         private hubService: HubService
     ) {
     }
@@ -111,7 +110,7 @@ export class PreviewResultsComponent implements OnInit, OnDestroy {
         this.hubService.previewTableDataQuery(this.targetTable, false, selectQuery, null).then(result => {
             this.columns = result.columns;
             this.data = result.data;
-        }).catch(reason => {
+        }).catch(() => {
             // this.hubService.addHubErrorMessage(reason);
         });
 
@@ -121,7 +120,7 @@ export class PreviewResultsComponent implements OnInit, OnDestroy {
         let selectQuery = this.createSelectQuery();
         let downloadObject = new DownloadObject();
         downloadObject.objectKey = this.targetTable.key;
-        downloadObject.objectType = eObjectType.Table;
+        downloadObject.objectType = eViewSource.Table;
         downloadObject.query = selectQuery;
         this.hubService.downloadData([downloadObject], false, eDownloadFormat.Csv)
     }

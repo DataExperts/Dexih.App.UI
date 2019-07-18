@@ -1,15 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { DatalinkEditService } from '../datalink-edit.service';
-import { FormGroup, FormArray } from '@angular/forms';
-import { AuthService } from '../../../../+auth/auth.service';
-import { DexihTable, HubCache, eLoadStrategy, DexihDatalinkTarget, eUpdateStrategy } from '../../../hub.models';
-import { HubService } from '../../../hub.service';
-
-import { Observable, BehaviorSubject, Subscription, combineLatest} from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DownloadObject, eObjectType, eDownloadFormat } from '../../../hub.query.models';
-import { DexihButtonSaveComponent } from 'dexih-ngx-components';
-import { async } from 'q';
+import { FormGroup, FormArray } from '@angular/forms';
+import { DatalinkEditService } from '../datalink-edit.service';
+import { AuthService } from '../../../../+auth/auth.service';
+import { HubCache, eUpdateStrategy, eSourceType, eViewSource } from '../../../hub.models';
+import { HubService } from '../../../hub.service';
+import { BehaviorSubject, Subscription, combineLatest} from 'rxjs';
+import { DownloadObject, eDownloadFormat } from '../../../hub.query.models';
 
 @Component({
     selector: 'datalink-save-button',
@@ -132,7 +129,7 @@ export class DatalinkEditSaveButtonComponent implements OnInit, OnDestroy {
         let downloadItems = new Array<DownloadObject>();
         let downloadObject = new DownloadObject();
         downloadObject.objectKey = this.datalinkForm.controls.key.value;
-        downloadObject.objectType = eObjectType.Datalink;
+        downloadObject.objectType = eViewSource.Datalink;
         downloadItems.push(downloadObject);
         this.hubService.downloadData(downloadItems, true, eDownloadFormat.Csv)
     }

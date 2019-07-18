@@ -1,5 +1,5 @@
 import { BehaviorSubject} from 'rxjs';
-import { ManagedTask, ePermission } from '../+auth/auth.models';
+import { ManagedTask, ePermission, Message } from '../+auth/auth.models';
 import { eCompare, eAggregate, SelectQuery } from './hub.query.models';
 import { eTypeCode, eFunctionType, eTransformType, FunctionParameter } from './hub.remote.models';
 import { EntityBase } from '../+auth/global.models';
@@ -695,10 +695,10 @@ export class HubCache {
                     .find(c => c.key === viewKey && c.isValid);
                 if (view) {
                     hub.dexihViews.push(view);
-                    if (view.sourceType === eSourceType.Table) {
+                    if (view.sourceType === eViewSource.Table) {
                         this.cacheAddTable(view.sourceTableKey, hub);
                     }
-                    if (view.sourceType === eSourceType.Datalink) {
+                    if (view.sourceType === eViewSource.Datalink) {
                         this.cacheAddDatalink(view.sourceDatalinkKey, hub);
                     }
                     return view;
@@ -994,7 +994,7 @@ export class SharedData {
     public hubKey: number;
     public hubName: string;
 
-    public objectType: eObjectType;
+    public objectType: eViewSource;
     public objectKey: number;
     public name: string;
     public logicalName: string;
@@ -1652,7 +1652,7 @@ export class DexihView extends EntityBase {
     public name: string = null;
     public description: string = null;
     public viewType: eViewType = eViewType.Table;
-    public sourceType: eSourceType = eSourceType.Table;
+    public sourceType: eViewSource = eViewSource.Table;
     public sourceTableKey = 0;
     public sourceDatalinkKey = 0;
     public inputValues: InputColumn[] = null;
@@ -1691,6 +1691,11 @@ export class ChartConfig {
     // pie charts only
     public explodeSlices = false;
     public doughnut = false;
+}
+
+export enum eViewSource {
+    Table = <any>'Table',
+    Datalink = <any>'Datalink'
 }
 
 export enum eViewType {
@@ -2433,4 +2438,24 @@ export const impactMappingStatuses: MappingStatusInfo[] = [
 
 export class ConnectionTables extends DexihConnection {
     public dexihTables: DexihTable[];
+}
+
+export class TransformProperties {
+    public name: string;
+    public transformName: string;
+    public transformType: eTransformType;
+    public selectQuery: SelectQuery;
+    public properties: {[key: string]: number};
+    public primaryProperties: TransformProperties;
+    public referenceProperties: TransformProperties;
+    public rows: number;
+    public seconds: number;
+}
+
+export class PreviewResults {
+    public name: string;
+    public columns: Array<any>;
+    public data: Array<any>;
+    public transformProperties: TransformProperties;
+    public status: Message;
 }

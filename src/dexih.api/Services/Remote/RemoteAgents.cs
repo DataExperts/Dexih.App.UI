@@ -15,6 +15,7 @@ using dexih.operations;
 using Dexih.Utils.Crypto;
 using dexih.functions.Query;
 using dexih.remote.operations;
+using dexih.transforms;
 using Dexih.Utils.ManagedTasks;
 using Dexih.Utils.MessageHelpers;
 using static dexih.operations.DownloadData;
@@ -955,6 +956,34 @@ namespace dexih.api.Services.Remote
             {
                 throw new RemoteAgentException($"Error previewing datalink.\n{ex.Message}", ex);
             }
+        }
+        
+        public async Task<TransformProperties> DatalinkProperties(string id, long hubKey, long datalinkKey, SelectQuery selectQuery, InputColumn[] inputColumns, RepositoryManager database)
+        {
+	        try
+	        {
+		        _remoteLogger.LogTrace(LoggingEvents.DatalinkProperties, "Preview Datalink - Id: {Id}, HubKey: {hubKey}, DatalinkKey: {datalinkKey}.", id, hubKey, datalinkKey);
+
+		        var hub = await database.GetHub(hubKey);
+
+		        var cache = new CacheManager(hubKey, hub.EncryptionKey);
+		        cache.AddDatalinks(new[] { datalinkKey }, hub);
+
+		        var value = new
+		        {
+			        cache,
+			        datalinkKey,
+			        selectQuery,
+			        inputColumns
+		        };
+
+		        var result = await SendRemoteMessage<TransformProperties>(hubKey, id, nameof(RemoteOperations.DatalinkProperties), value, null, database, CancellationToken.None);
+		        return result;
+	        }
+	        catch (Exception ex)
+	        {
+		        throw new RemoteAgentException($"Error previewing datalink.\n{ex.Message}", ex);
+	        }
         }
 	    
 	    public async Task<string> PreviewTransform(string id, long hubKey, DexihDatalink hubDatalink, long datalinkTransformKey, SelectQuery selectQuery, InputColumn[] inputColumns, DownloadUrl downloadUrl, RepositoryManager database)

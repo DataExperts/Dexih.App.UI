@@ -20,6 +20,7 @@ using Dexih.Utils.ManagedTasks;
 using dexih.api.Services.Remote;
 using dexih.functions.Parameter;
 using dexih.remote.operations;
+using dexih.transforms;
 using Dexih.Utils.DataType;
 using Newtonsoft.Json;
 
@@ -576,6 +577,16 @@ namespace dexih.api.Controllers
 		    _logger.LogTrace(LoggingEvents.HubPreviewDatalink, "HubController.PreviewDatalink: HubKey: {updateBrowserHub}, DatalinkKey: {DatalinkKey}", previewDatalink.HubKey, previewDatalink.DatalinkKey);
 		    var repositoryManager = _operations.RepositoryManager;
 		    var remoteServerResult = _remoteAgents.PreviewDatalink(previewDatalink.RemoteAgentId, previewDatalink.HubKey, previewDatalink.DatalinkKey, previewDatalink.SelectQuery, previewDatalink.InputColumns, previewDatalink.DownloadUrl, repositoryManager);
+		    return remoteServerResult;
+	    }
+	    
+	    [HttpPost("[action]")]
+	    [ValidateHub(DexihHubUser.EPermission.PublishReader)]
+	    public Task<TransformProperties> DatalinkProperties([FromBody] PreviewDatalink previewDatalink)
+	    {
+		    _logger.LogTrace(LoggingEvents.HubPreviewDatalink, "HubController.PreviewDatalink: HubKey: {updateBrowserHub}, DatalinkKey: {DatalinkKey}", previewDatalink.HubKey, previewDatalink.DatalinkKey);
+		    var repositoryManager = _operations.RepositoryManager;
+		    var remoteServerResult = _remoteAgents.DatalinkProperties(previewDatalink.RemoteAgentId, previewDatalink.HubKey, previewDatalink.DatalinkKey, previewDatalink.SelectQuery, previewDatalink.InputColumns, repositoryManager);
 		    return remoteServerResult;
 	    }
 	    

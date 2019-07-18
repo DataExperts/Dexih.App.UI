@@ -1091,6 +1091,7 @@
       <e p="TransformNode.cs" t="Include" />
       <e p="TransformPerformance.cs" t="Include" />
       <e p="TransformProfile.cs" t="Include" />
+      <e p="TransformProperties.cs" t="Include" />
       <e p="TransformQuery.cs" t="Include" />
       <e p="TransformRows.cs" t="Include" />
       <e p="Transforms" t="Include">

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using dexih.api.Services.Operations;
+using dexih.transforms;
 using static dexih.operations.DownloadData;
 using Newtonsoft.Json.Linq;
 
@@ -44,6 +45,9 @@ namespace dexih.api.Services.Remote
 	    Task<string> PreviewTable(string instanceId, long hubKey, long tableKey, SelectQuery selectQuery, InputColumn[] inputColumns, bool showRejectedData, DownloadUrl downloadUrl, RepositoryManager database);
 	    Task<string> PreviewTable(string instanceId, long hubKey, DexihTable hubTable, SelectQuery selectQuery, InputColumn[] inputColumns, bool showRejectedData, DownloadUrl downloadUrl, RepositoryManager database);
 	    Task<string> PreviewDatalink(string instanceId, long hubKey, long datalinkKey, SelectQuery selectQuery, InputColumn[] inputColumns, DownloadUrl downloadUrl, RepositoryManager database);
+
+	    Task<TransformProperties> DatalinkProperties(string id, long hubKey, long datalinkKey, SelectQuery selectQuery,
+		    InputColumn[] inputColumns, RepositoryManager database);
 
 	    Task<string> CallApi(string id, string apiKey, string action, string parameters, string ipAddress);
 

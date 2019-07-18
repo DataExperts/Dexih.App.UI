@@ -1,11 +1,11 @@
 import { Component, Input, OnDestroy, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription, combineLatest} from 'rxjs';
+import { Subscription} from 'rxjs';
 
 import { AuthService } from '../../../+auth/auth.service';
-import { DexihConnection, DexihDatajob, DexihDatalink, HubCache, DexihHub, DexihTable } from '../../hub.models';
+import { DexihDatajob, DexihDatalink, HubCache, DexihHub, DexihTable, eSourceType, eViewSource } from '../../hub.models';
 import { HubService } from '../../hub.service';
-import { DownloadObject, eDownloadFormat, eObjectType } from '../../hub.query.models';
+import { DownloadObject, eDownloadFormat } from '../../hub.query.models';
 
 @Component({
     selector: 'actions-datalink-button',
@@ -144,7 +144,7 @@ export class ActionsDatalinkButtonComponent implements OnInit, OnChanges, OnDest
         this.datalinks.forEach(c => {
             let downloadObject = new DownloadObject();
             downloadObject.objectKey = c.key;
-            downloadObject.objectType = eObjectType.Datalink;
+            downloadObject.objectType = eViewSource.Datalink;
             downloadItems.push(downloadObject);
         });
         this.hubService.downloadData(downloadItems, true, eDownloadFormat.Csv)

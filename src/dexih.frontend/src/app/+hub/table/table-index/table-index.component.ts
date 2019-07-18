@@ -3,7 +3,6 @@ import { HubService } from '../../hub.service';
 import { DexihHub, DexihTable, HubCache, eSharedObjectType, DexihDatalinkTable, eCacheStatus, connectionPurposes } from '../../hub.models';
 import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DownloadObject, eObjectType, eDownloadFormat } from '../../hub.query.models';
 import { AuthService } from '../../../+auth/auth.service';
 import { RemoteLibraries, eConnectionCategory } from '../../hub.remote.models';
 

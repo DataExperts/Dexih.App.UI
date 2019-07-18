@@ -36,6 +36,7 @@
 		public const int SnapshotDatalinkTests = 1031;
 		public const int ActivateApis = 1032;
 		public const int DeactivateApis = 1033;
+		public const int DatalinkProperties = 1034;
 
         public const int SocketRemoteAgentNew = 2000;
 		public const int SocketRemoteAgentStart = 2001;

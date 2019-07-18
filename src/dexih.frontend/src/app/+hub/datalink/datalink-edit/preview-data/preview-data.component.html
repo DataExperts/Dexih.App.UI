@@ -1,32 +1,10 @@
 <div class="list-group-item list-group-item-info rounded-0">
-        <div class="d-flex flex-row">
-            <h5>Preview Transform Data</h5>
-            <div class="ml-auto">
-                    <button class="btn btn-warning" (click)="close()"><i class="fa fa-close"></i><span class="xs-hidden sm-hidden"> Close</span></button>
-                </div>
+    <div class="d-flex flex-row">
+        <h5>Preview Transform Data</h5>
+        <div class="ml-auto">
+                <button class="btn btn-warning" (click)="close()"><i class="fa fa-close"></i><span class="xs-hidden sm-hidden"> Close</span></button>
             </div>
-    </div>
-
-
-<dexih-table 
-    [enableMultiSelect]="false"
-    [enableSaveCsv]="true"
-    [columns]="columns"
-    [data]="data"
-    [error]="error"
-    [hideTable]="showChart"
->
-
-    <ng-template #actions let-items="items">
-            <dexih-button-refresh class="input-group-append" (click)="refresh()" text="Reload"></dexih-button-refresh>
-            <download-button class="ml-1" (download)="download($event)"></download-button>
-            <dexih-button  class="ml-1" iconClass="fa fa-line-chart" (click)="showChart=!showChart" [text]="showChart ? 'Data' : 'Chart'" ></dexih-button>
-    </ng-template>
-    <ng-template #tableHeader>
-        <query-builder [selectQuery]="selectQuery" [columns]="tableColumns" [inputColumns]="inputColumns" ></query-builder>
-        <div [ngStyle]="{'display': showChart ? 'block' : 'none' }" class="mt-1">
-            <chart-builder [columns]="columns" [data]="data"></chart-builder>
         </div>
-    </ng-template>
+</div>
 
-</dexih-table>
+<preview-data [datalink]='datalinkForm?.value' [datalinkTransformKey]="datalinkTransformKey" viewSource='Datalink'></preview-data>

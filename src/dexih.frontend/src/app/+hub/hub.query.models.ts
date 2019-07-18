@@ -1,4 +1,4 @@
-import { TableColumn, eFlatFilePath } from './hub.models';
+import { TableColumn, eFlatFilePath, eSourceType, eViewSource } from './hub.models';
 import { eTypeCode } from './hub.remote.models';
 
 export class UpdateQueries {
@@ -74,14 +74,9 @@ export class Sort {
 }
 
 export class DownloadObject {
-    public objectType: eObjectType;
+    public objectType: eViewSource;
     public objectKey: number;
     public query: SelectQuery;
-}
-
-export enum eObjectType {
-    Table = <any>'Table',
-    Datalink = <any>'Datalink',
 }
 
 export enum eDownloadFormat {

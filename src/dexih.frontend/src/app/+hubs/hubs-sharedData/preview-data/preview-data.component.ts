@@ -2,8 +2,8 @@ import { LogFactory } from '../../../../logging';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { SharedData, DexihColumnBase, InputColumn } from '../../../+hub/hub.models';
-import { eObjectType, eDownloadFormat, SelectQuery } from '../../../+hub/hub.query.models';
+import { SharedData, DexihColumnBase, InputColumn, eViewSource } from '../../../+hub/hub.models';
+import { eDownloadFormat, SelectQuery } from '../../../+hub/hub.query.models';
 import { AuthService } from '../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { DexihMessageComponent } from '../../../shared/ui/dexihMessage/index';
@@ -31,7 +31,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
 
 
     objectKey: number;
-    objectType: eObjectType;
+    objectType: eViewSource;
     hubKey: number;
 
     columns: Array<any>;
@@ -86,9 +86,9 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
     refresh() {
         this.hubsService.previewDataUrl(this.hubKey, this.objectKey, this.objectType, this.inputColumns, this.selectQuery).then((url) => {
             this.hubsService.previewData(url).then((result) => {
-            this.columns = result.columns;
-            this.data = result.data;
-            this.name = result.name;
+                this.columns = result.columns;
+                this.data = result.data;
+                this.name = result.name;
             }).catch(reason => {
                 this.dexihMessage.addMessage(reason);
                 this.data = [];

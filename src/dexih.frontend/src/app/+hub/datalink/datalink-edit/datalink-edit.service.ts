@@ -344,64 +344,6 @@ export class DatalinkEditService implements OnInit, OnDestroy {
         });
     }
 
-    previewTransformData(datalinkTransformKey: number, selectQuery: SelectQuery, inputColumns: InputColumn[]):
-        Promise<{ columns: Array<any>, data: Array<any> }> {
-        return new Promise<{ columns: Array<any>, data: Array<any> }>((resolve, reject) => {
-            let datalink = this.hubFormsService.getDatalinkValue();
-
-            // remove status as they will not parse into json.
-            datalink.currentStatus = null;
-            datalink.entityStatus = null;
-            datalink.previousStatus = null;
-
-            const cache = this._hubCache;
-            const hub = new DexihHub(cache.hub.hubKey, '');
-            cache.getDatalinkCache(datalink, hub);
-
-            let remoteAgent = this.hubService.getRemoteAgentCurrent();
-
-            if (!remoteAgent) {
-                let message = new Message(false, 'No active remote agent.', null, null);
-                this.hubService.addHubMessage(message);
-                reject(message);
-                return;
-            }
-            this.authService.getDownloadUrl(remoteAgent).then(downloadUrl => {
-                this.authService.post('/api/Hub/PreviewTransform', {
-                    hubKey: cache.hub.hubKey,
-                    remoteAgentId: this.hubService.getCurrentRemoteAgentInstanceId(),
-                    datalink: datalink,
-                    selectQuery,
-                    inputColumns,
-                    datalinkTransformKey: datalinkTransformKey,
-                    downloadUrl: downloadUrl
-                }, 'Getting download location...').then(result => {
-
-                    // console.debug(result.value);
-                    this.authService.get(result.value, null, false).then(data => {
-                        if (data['success'] === false) {
-                            this.hubService.addHubMessage(data);
-                            reject(data['message']);
-                        } else {
-                            let columns = this.hubService.constructDataTableColumns(data.columns);
-                            resolve({ columns: columns, data: data.data });
-                            return result;
-                        }
-                    }).catch(reason => {
-                        this.hubService.addHubMessage(reason);
-                        reject(reason);
-                    });
-                }).catch(reason => {
-                    this.hubService.addHubMessage(reason);
-                    reject(reason);
-                });
-            }).catch(reason => {
-                this.hubService.addHubMessage(reason);
-                reject(reason);
-            });
-        });
-    }
-
     importFunctionMappings(datalinkTransformKey: number, item: DexihDatalinkTransformItem):
         Promise<string[]> {
         return new Promise<string[]>((resolve, reject) => {

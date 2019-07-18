@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HubCache, eCacheStatus, DexihView, eSourceType, DexihDatalink,
-  DexihConnection, ChartConfig, InputColumn, DexihColumnBase, eViewType, DexihDatalinkTransform, ConnectionTables } from '../../hub.models';
+  ChartConfig, InputColumn, DexihColumnBase, eViewType, ConnectionTables, eViewSource } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { Subscription, combineLatest, merge} from 'rxjs';
 import { HubFormsService } from '../../hub.forms.service';
 import { AuthService } from '../../../+auth/auth.service';
-import { DownloadObject, eObjectType, eDownloadFormat, SelectQuery } from '../../hub.query.models';
+import { DownloadObject, SelectQuery } from '../../hub.query.models';
 import { InputOutputColumns } from '../../hub.lineage.models';
 
 @Component({
@@ -143,7 +143,7 @@ export class ViewEditComponent implements OnInit, OnDestroy {
     this._changesSubscription = merge(
       this.formsService.currentForm.controls.sourceDatalinkKey.valueChanges,
       this.formsService.currentForm.controls.sourceTableKey.valueChanges
-    ).subscribe(result1 => {
+    ).subscribe(() => {
       this.reset();
       this.selectQuery = new SelectQuery();
       this.getColumns();
@@ -171,11 +171,8 @@ export class ViewEditComponent implements OnInit, OnDestroy {
       if (table) {
         this.inputColumns = table.dexihTableColumns.filter(c => c.isInput).map(c => {
           let input = viewInputs.find(i => i.name === c.name);
-          let value = null;
           if (input) {
-            value = input.value;
           } else {
-            value = c.defaultValue;
           }
           return {datalinkKey: 0, datalinkName: '',
             name: c.name, logicalName: c.logicalName, dataType: c.dataType, rank: c.rank, value: c.defaultValue };
@@ -247,13 +244,13 @@ export class ViewEditComponent implements OnInit, OnDestroy {
   download(format) {
     let view = <DexihView>this.formsService.currentForm.value;
     let downloadObject = new DownloadObject();
-    if (view.sourceType === eSourceType.Table) {
+    if (view.sourceType === eViewSource.Table) {
       downloadObject.objectKey = view.sourceDatalinkKey;
-      downloadObject.objectType = eObjectType.Datalink;
+      downloadObject.objectType = eViewSource.Datalink;
     }
-    if (view.sourceType === eSourceType.Table) {
+    if (view.sourceType === eViewSource.Table) {
       downloadObject.objectKey = view.sourceTableKey;
-      downloadObject.objectType = eObjectType.Table;
+      downloadObject.objectType = eViewSource.Table;
     }
 
     downloadObject.query = this.selectQuery;
@@ -266,10 +263,10 @@ export class ViewEditComponent implements OnInit, OnDestroy {
 
       this.authService.confirmDialog('There are errors!',
         'There are errors in the current form.  Confirm that would like to save the changes anyhow?')
-        .then(confirm => {
+        .then(() => {
           this.hubService.addHubErrorMessage(this.formsService.getFormErrors());
           this.doSave();
-        }).catch(reason => {
+        }).catch(() => {
 
         });
     } else {

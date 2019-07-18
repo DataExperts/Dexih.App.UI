@@ -5,7 +5,6 @@ import { Subscription, combineLatest} from 'rxjs';
 import { AuthService } from '../../../+auth/auth.service';
 import { HubCache, DexihHub, DexihDatalinkTest, DexihDatalink } from '../../hub.models';
 import { HubService } from '../../hub.service';
-import { DownloadObject, eDownloadFormat, eObjectType } from '../../hub.query.models';
 
 @Component({
     selector: 'actions-datalinkTest-button',
