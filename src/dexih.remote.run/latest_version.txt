@@ -1,0 +1,2 @@
+v0.4.0-beta-00022
+https://github.com/DataExperts/Dexih.App.Remote/releases/download/v0.4.0-beta-00022/dexih.remote.windows_0.4.0-beta-00022.zip
