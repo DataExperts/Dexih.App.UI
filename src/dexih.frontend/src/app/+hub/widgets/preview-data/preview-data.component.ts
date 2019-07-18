@@ -35,6 +35,8 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
     public tableColumns: DexihColumnBase[];
     selectQuery: SelectQuery = new SelectQuery();
 
+    public title: string;
+
     public csvFileName: string;
 
     columns: Array<any>;
@@ -74,6 +76,8 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
 
                             if (!datalink) { return; }
 
+                            this.title = 'Datalink - ' + datalink.name;
+
                             // get the outputs from the last transform in the datalink
                             const ioColumns = new InputOutputColumns();
                             ioColumns.buildInputOutput(this.hubCache, datalink);
@@ -94,6 +98,8 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
                             }
 
                             if (!table) { return; }
+
+                            this.title = 'Table - ' + table.name;
 
                             this.tableColumns = table.dexihTableColumns;
                             this.inputColumns = table.dexihTableColumns.filter(c => c.isInput).map(c => {

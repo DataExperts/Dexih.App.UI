@@ -30,7 +30,7 @@ export class TransformPropertiesItemComponent implements OnInit, OnChanges {
     refresh() {
         this.icon = null;
         this.propertyKeys = null;
-        
+
         if (!this.transformProperties) { return; }
         let transform = this.transformTypes.find(c => c.key === this.transformProperties.transformType);
         if (transform) {
