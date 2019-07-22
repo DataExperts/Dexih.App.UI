@@ -46,6 +46,17 @@
       <e p="Properties" t="Include">
         <e p="AssemblyInfo.cs" t="Include" />
       </e>
+      <e p="releases" t="Include">
+        <e p="dexih.functions.dll" t="Include" />
+        <e p="dexih.functions.pdb" t="Include" />
+        <e p="dexih.operations.deps.json" t="Include" />
+        <e p="dexih.operations.dll" t="Include" />
+        <e p="dexih.operations.pdb" t="Include" />
+        <e p="dexih.repository.dll" t="Include" />
+        <e p="dexih.repository.pdb" t="Include" />
+        <e p="dexih.transforms.dll" t="Include" />
+        <e p="dexih.transforms.pdb" t="Include" />
+      </e>
       <e p="RemoteDataSender.cs" t="Include" />
       <e p="RemoteLibraries.cs" t="Include" />
       <e p="RemoteMessage.cs" t="Include" />
@@ -114,6 +125,15 @@
       </e>
       <e p="Properties" t="Include">
         <e p="AssemblyInfo.cs" t="Include" />
+      </e>
+      <e p="releases" t="Include">
+        <e p="dexih.functions.dll" t="Include" />
+        <e p="dexih.functions.pdb" t="Include" />
+        <e p="dexih.repository.deps.json" t="Include" />
+        <e p="dexih.repository.dll" t="Include" />
+        <e p="dexih.repository.pdb" t="Include" />
+        <e p="dexih.transforms.dll" t="Include" />
+        <e p="dexih.transforms.pdb" t="Include" />
       </e>
       <e p="RemoteSettings.cs" t="Include" />
       <e p="RepositoryExceptions.cs" t="Include" />
@@ -200,9 +220,7 @@
       </e>
       <e p="ConfigUserInput.cs" t="Include" />
       <e p="deploy_release.sh" t="Include" />
-      <e p="dexih.pfx" t="Include" />
       <e p="dexih.remote.csproj" t="IncludeRecursive" />
-      <e p="dexih.remote.userprefs" t="Include" />
       <e p="dexih_start.sh" t="Include" />
       <e p="dexih_unblock.ps1" t="Include" />
       <e p="docker_readme.md" t="Include" />
@@ -408,6 +426,19 @@
             <e p="dexih.remote.operations.AssemblyInfo.cs" t="Include" />
           </e>
         </e>
+      </e>
+      <e p="releases" t="Include">
+        <e p="dexih.functions.dll" t="Include" />
+        <e p="dexih.functions.pdb" t="Include" />
+        <e p="dexih.operations.dll" t="Include" />
+        <e p="dexih.operations.pdb" t="Include" />
+        <e p="dexih.remote.operations.deps.json" t="Include" />
+        <e p="dexih.remote.operations.dll" t="Include" />
+        <e p="dexih.remote.operations.pdb" t="Include" />
+        <e p="dexih.repository.dll" t="Include" />
+        <e p="dexih.repository.pdb" t="Include" />
+        <e p="dexih.transforms.dll" t="Include" />
+        <e p="dexih.transforms.pdb" t="Include" />
       </e>
       <e p="RemoteAgentStatus.cs" t="Include" />
       <e p="RemoteExceptions.cs" t="Include" />
@@ -687,6 +718,15 @@
       <e p="Properties" t="Include">
         <e p="AssemblyInfo.cs" t="Include" />
       </e>
+      <e p="releases" t="Include">
+        <e p="dexih.connections.azure.deps.json" t="Include" />
+        <e p="dexih.connections.azure.dll" t="Include" />
+        <e p="dexih.connections.azure.pdb" t="Include" />
+        <e p="dexih.functions.dll" t="Include" />
+        <e p="dexih.functions.pdb" t="Include" />
+        <e p="dexih.transforms.dll" t="Include" />
+        <e p="dexih.transforms.pdb" t="Include" />
+      </e>
     </e>
     <e p="$PROJECT_DIR$/../dexih.transforms/src/dexih.connections.dexih" t="IncludeRecursive">
       <e p="bin" t="ExcludeRecursive" />
@@ -700,6 +740,15 @@
           </e>
         </e>
       </e>
+      <e p="releases" t="Include">
+        <e p="dexih.connections.dexih.deps.json" t="Include" />
+        <e p="dexih.connections.dexih.dll" t="Include" />
+        <e p="dexih.connections.dexih.pdb" t="Include" />
+        <e p="dexih.functions.dll" t="Include" />
+        <e p="dexih.functions.pdb" t="Include" />
+        <e p="dexih.transforms.dll" t="Include" />
+        <e p="dexih.transforms.pdb" t="Include" />
+      </e>
     </e>
     <e p="$PROJECT_DIR$/../dexih.transforms/src/dexih.connections.excel" t="IncludeRecursive">
       <e p="bin" t="ExcludeRecursive" />
@@ -712,6 +761,15 @@
             <e p="dexih.connections.excel.AssemblyInfo.cs" t="Include" />
           </e>
         </e>
+      </e>
+      <e p="releases" t="Include">
+        <e p="dexih.connections.excel.deps.json" t="Include" />
+        <e p="dexih.connections.excel.dll" t="Include" />
+        <e p="dexih.connections.excel.pdb" t="Include" />
+        <e p="dexih.functions.dll" t="Include" />
+        <e p="dexih.functions.pdb" t="Include" />
+        <e p="dexih.transforms.dll" t="Include" />
+        <e p="dexih.transforms.pdb" t="Include" />
       </e>
     </e>
     <e p="$PROJECT_DIR$/../dexih.transforms/src/dexih.connections.flatfile" t="IncludeRecursive">
@@ -729,6 +787,15 @@
       <e p="Properties" t="Include">
         <e p="AssemblyInfo.cs" t="Include" />
       </e>
+      <e p="releases" t="Include">
+        <e p="dexih.connections.flatfile.deps.json" t="Include" />
+        <e p="dexih.connections.flatfile.dll" t="Include" />
+        <e p="dexih.connections.flatfile.pdb" t="Include" />
+        <e p="dexih.functions.dll" t="Include" />
+        <e p="dexih.functions.pdb" t="Include" />
+        <e p="dexih.transforms.dll" t="Include" />
+        <e p="dexih.transforms.pdb" t="Include" />
+      </e>
     </e>
     <e p="$PROJECT_DIR$/../dexih.transforms/src/dexih.connections.ftp" t="IncludeRecursive">
       <e p="bin" t="ExcludeRecursive" />
@@ -742,6 +809,15 @@
           </e>
         </e>
       </e>
+      <e p="releases" t="Include">
+        <e p="dexih.connections.ftp.deps.json" t="Include" />
+        <e p="dexih.connections.ftp.dll" t="Include" />
+        <e p="dexih.connections.ftp.pdb" t="Include" />
+        <e p="dexih.functions.dll" t="Include" />
+        <e p="dexih.functions.pdb" t="Include" />
+        <e p="dexih.transforms.dll" t="Include" />
+        <e p="dexih.transforms.pdb" t="Include" />
+      </e>
     </e>
     <e p="$PROJECT_DIR$/../dexih.transforms/src/dexih.connections.mysql" t="IncludeRecursive">
       <e p="bin" t="ExcludeRecursive" />
@@ -753,6 +829,15 @@
             <e p="dexih.connections.mysql.AssemblyInfo.cs" t="Include" />
           </e>
         </e>
+      </e>
+      <e p="releases" t="Include">
+        <e p="dexih.connections.mysql.deps.json" t="Include" />
+        <e p="dexih.connections.mysql.dll" t="Include" />
+        <e p="dexih.connections.mysql.pdb" t="Include" />
+        <e p="dexih.functions.dll" t="Include" />
+        <e p="dexih.functions.pdb" t="Include" />
+        <e p="dexih.transforms.dll" t="Include" />
+        <e p="dexih.transforms.pdb" t="Include" />
       </e>
     </e>
     <e p="$PROJECT_DIR$/../dexih.transforms/src/dexih.connections.oracle" t="IncludeRecursive">
@@ -766,6 +851,15 @@
           </e>
         </e>
       </e>
+      <e p="releases" t="Include">
+        <e p="dexih.connections.oracle.deps.json" t="Include" />
+        <e p="dexih.connections.oracle.dll" t="Include" />
+        <e p="dexih.connections.oracle.pdb" t="Include" />
+        <e p="dexih.functions.dll" t="Include" />
+        <e p="dexih.functions.pdb" t="Include" />
+        <e p="dexih.transforms.dll" t="Include" />
+        <e p="dexih.transforms.pdb" t="Include" />
+      </e>
     </e>
     <e p="$PROJECT_DIR$/../dexih.transforms/src/dexih.connections.postgressql" t="IncludeRecursive">
       <e p="bin" t="ExcludeRecursive" />
@@ -778,6 +872,15 @@
           </e>
         </e>
       </e>
+      <e p="releases" t="Include">
+        <e p="dexih.connections.postgressql.deps.json" t="Include" />
+        <e p="dexih.connections.postgressql.dll" t="Include" />
+        <e p="dexih.connections.postgressql.pdb" t="Include" />
+        <e p="dexih.functions.dll" t="Include" />
+        <e p="dexih.functions.pdb" t="Include" />
+        <e p="dexih.transforms.dll" t="Include" />
+        <e p="dexih.transforms.pdb" t="Include" />
+      </e>
     </e>
     <e p="$PROJECT_DIR$/../dexih.transforms/src/dexih.connections.sftp" t="IncludeRecursive">
       <e p="bin" t="ExcludeRecursive" />
@@ -789,6 +892,15 @@
             <e p="dexih.connections.sftp.AssemblyInfo.cs" t="Include" />
           </e>
         </e>
+      </e>
+      <e p="releases" t="Include">
+        <e p="dexih.connections.sftp.deps.json" t="Include" />
+        <e p="dexih.connections.sftp.dll" t="Include" />
+        <e p="dexih.connections.sftp.pdb" t="Include" />
+        <e p="dexih.functions.dll" t="Include" />
+        <e p="dexih.functions.pdb" t="Include" />
+        <e p="dexih.transforms.dll" t="Include" />
+        <e p="dexih.transforms.pdb" t="Include" />
       </e>
       <e p="SftpClientWrapper.cs" t="Include" />
       <e p="SftpStream.cs" t="Include" />
@@ -804,6 +916,15 @@
           </e>
         </e>
       </e>
+      <e p="releases" t="Include">
+        <e p="dexih.connections.sqlite.deps.json" t="Include" />
+        <e p="dexih.connections.sqlite.dll" t="Include" />
+        <e p="dexih.connections.sqlite.pdb" t="Include" />
+        <e p="dexih.functions.dll" t="Include" />
+        <e p="dexih.functions.pdb" t="Include" />
+        <e p="dexih.transforms.dll" t="Include" />
+        <e p="dexih.transforms.pdb" t="Include" />
+      </e>
     </e>
     <e p="$PROJECT_DIR$/../dexih.transforms/src/dexih.connections.sqlserver" t="IncludeRecursive">
       <e p="bin" t="ExcludeRecursive" />
@@ -815,6 +936,15 @@
             <e p="dexih.connections.sqlserver.AssemblyInfo.cs" t="Include" />
           </e>
         </e>
+      </e>
+      <e p="releases" t="Include">
+        <e p="dexih.connections.sqlserver.deps.json" t="Include" />
+        <e p="dexih.connections.sqlserver.dll" t="Include" />
+        <e p="dexih.connections.sqlserver.pdb" t="Include" />
+        <e p="dexih.functions.dll" t="Include" />
+        <e p="dexih.functions.pdb" t="Include" />
+        <e p="dexih.transforms.dll" t="Include" />
+        <e p="dexih.transforms.pdb" t="Include" />
       </e>
     </e>
     <e p="$PROJECT_DIR$/../dexih.transforms/src/dexih.connections.webservice.restful" t="IncludeRecursive">
@@ -831,6 +961,15 @@
       </e>
       <e p="Properties" t="Include">
         <e p="AssemblyInfo.cs" t="Include" />
+      </e>
+      <e p="releases" t="Include">
+        <e p="dexih.connections.webservice.restful.deps.json" t="Include" />
+        <e p="dexih.connections.webservice.restful.dll" t="Include" />
+        <e p="dexih.connections.webservice.restful.pdb" t="Include" />
+        <e p="dexih.functions.dll" t="Include" />
+        <e p="dexih.functions.pdb" t="Include" />
+        <e p="dexih.transforms.dll" t="Include" />
+        <e p="dexih.transforms.pdb" t="Include" />
       </e>
     </e>
     <e p="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions" t="IncludeRecursive">
@@ -883,6 +1022,11 @@
         <e p="Sorts.cs" t="Include" />
         <e p="UpdateQuery.cs" t="Include" />
       </e>
+      <e p="releases" t="Include">
+        <e p="dexih.functions.deps.json" t="Include" />
+        <e p="dexih.functions.dll" t="Include" />
+        <e p="dexih.functions.pdb" t="Include" />
+      </e>
       <e p="Retry.cs" t="Include" />
       <e p="SeriesValue.cs" t="Include" />
       <e p="ShortGuid.cs" t="Include" />
@@ -924,6 +1068,13 @@
         </e>
       </e>
       <e p="ProfileFunctions.cs" t="Include" />
+      <e p="releases" t="Include">
+        <e p="dexih.functions.builtIn.deps.json" t="Include" />
+        <e p="dexih.functions.builtIn.dll" t="Include" />
+        <e p="dexih.functions.builtIn.pdb" t="Include" />
+        <e p="dexih.functions.dll" t="Include" />
+        <e p="dexih.functions.pdb" t="Include" />
+      </e>
       <e p="RowFunctions.cs" t="Include" />
       <e p="SeriesFunctions.cs" t="Include" />
       <e p="ThrottleFunctions.cs" t="Include" />
@@ -936,12 +1087,21 @@
       <e p="dexih.functions.external.csproj.DotSettings" t="Include" />
       <e p="obj" t="ExcludeRecursive">
         <e p="Debug" t="Include">
-          <e p="netstandard2.0" t="Include">
+          <e p="netcoreapp2.1" t="Include">
             <e p="dexih.functions.external.AssemblyInfo.cs" t="Include" />
           </e>
         </e>
       </e>
       <e p="OpenWeatherMap.cs" t="Include" />
+      <e p="releases" t="Include">
+        <e p="dexih.functions.dll" t="Include" />
+        <e p="dexih.functions.external.deps.json" t="Include" />
+        <e p="dexih.functions.external.dll" t="Include" />
+        <e p="dexih.functions.external.pdb" t="Include" />
+        <e p="dexih.functions.pdb" t="Include" />
+        <e p="dexih.transforms.dll" t="Include" />
+        <e p="dexih.transforms.pdb" t="Include" />
+      </e>
       <e p="Stocks.cs" t="Include" />
     </e>
     <e p="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.financial" t="IncludeRecursive">
@@ -955,6 +1115,13 @@
             <e p="dexih.functions.financial.AssemblyInfo.cs" t="Include" />
           </e>
         </e>
+      </e>
+      <e p="releases" t="Include">
+        <e p="dexih.functions.dll" t="Include" />
+        <e p="dexih.functions.financial.deps.json" t="Include" />
+        <e p="dexih.functions.financial.dll" t="Include" />
+        <e p="dexih.functions.financial.pdb" t="Include" />
+        <e p="dexih.functions.pdb" t="Include" />
       </e>
     </e>
     <e p="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.maths" t="IncludeRecursive">
@@ -971,6 +1138,13 @@
         </e>
       </e>
       <e p="ProbabilityDistributionFunctions.cs" t="Include" />
+      <e p="releases" t="Include">
+        <e p="dexih.functions.dll" t="Include" />
+        <e p="dexih.functions.maths.deps.json" t="Include" />
+        <e p="dexih.functions.maths.dll" t="Include" />
+        <e p="dexih.functions.maths.pdb" t="Include" />
+        <e p="dexih.functions.pdb" t="Include" />
+      </e>
       <e p="SpecialFunctions.cs" t="Include" />
     </e>
     <e p="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.ml" t="IncludeRecursive">
@@ -983,7 +1157,7 @@
       <e p="Helpers.cs" t="Include" />
       <e p="obj" t="ExcludeRecursive">
         <e p="Debug" t="Include">
-          <e p="netcoreapp2.2" t="Include">
+          <e p="netcoreapp2.1" t="Include">
             <e p="dexih.functions.ml.AssemblyInfo.cs" t="Include" />
           </e>
         </e>
@@ -1076,6 +1250,13 @@
       <e p="ReaderMemory.cs" t="Include" />
       <e p="ReaderRowCreator.cs" t="Include" />
       <e p="ReaderSql.cs" t="Include" />
+      <e p="releases" t="Include">
+        <e p="dexih.functions.dll" t="Include" />
+        <e p="dexih.functions.pdb" t="Include" />
+        <e p="dexih.transforms.deps.json" t="Include" />
+        <e p="dexih.transforms.dll" t="Include" />
+        <e p="dexih.transforms.pdb" t="Include" />
+      </e>
       <e p="StreamCsv.cs" t="Include" />
       <e p="StreamJson.cs" t="Include" />
       <e p="StreamJsonCompact.cs" t="Include" />
