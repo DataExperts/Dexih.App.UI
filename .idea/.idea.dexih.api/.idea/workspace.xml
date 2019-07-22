@@ -5,10 +5,7 @@
     <bookmark url="file://$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/RemoteOperations/RemoteOperations.cs" line="1409" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1be1a9df-0647-4351-ace4-9bafd064437b" name="Default" comment="added proxy project">
-      <change beforePath="$PROJECT_DIR$/dexih.api.sln" beforeDir="false" afterPath="$PROJECT_DIR$/dexih.api.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.proxy/Scripts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.proxy/Scripts" afterDir="false" />
-    </list>
+    <list default="true" id="1be1a9df-0647-4351-ace4-9bafd064437b" name="Default" comment="added proxy project" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +117,7 @@
         <entry file="file://$PROJECT_DIR$/../Dexih.App.Proxy/src/dexih.proxy/dexih.proxy.csproj">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="225">
-              <caret line="15" column="10" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
+              <caret line="15" column="10" lean-forward="true" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -1002,7 +999,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>PreviewTrans</find>
       <find>showRecord</find>
       <find>Contains</find>
       <find>ECompare.IsEqual</find>
@@ -1032,6 +1028,7 @@
       <find>response</find>
       <find>CreateNode</find>
       <find>ResponseCompression</find>
+      <find>Increem</find>
     </findStrings>
     <replaceStrings>
       <replace>Financial.</replace>
@@ -1597,7 +1594,6 @@
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Mapping/MapJoin.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/TransformJoin.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/TransformConcatinate.cs" />
-        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/TransformDelta.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/StreamJsonCompact.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/TransformProperties.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/ReaderSql.cs" />
@@ -1621,6 +1617,7 @@
         <option value="$PROJECT_DIR$/src/dexih.api/Controllers/HubController.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Transform.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/dexih.api.csproj" />
+        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/TransformDelta.cs" />
       </list>
     </option>
   </component>
@@ -2348,7 +2345,7 @@
       <workItem from="1563269565949" duration="654000" />
       <workItem from="1563318607811" duration="17328000" />
       <workItem from="1563409014725" duration="6468000" />
-      <workItem from="1563777004940" duration="1337000" />
+      <workItem from="1563777004940" duration="1499000" />
     </task>
     <task id="LOCAL-00001" summary="Connections to remote agents working.">
       <created>1509234944099</created>
@@ -2431,7 +2428,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4195025000" />
+    <option name="totallyTimeSpent" value="4195187000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -2444,6 +2441,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1680" y="-650" width="3840" height="2160" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.61538464" visible="true" weight="0.122696154" />
       <window_info id="Structure" order="1" sideWeight="0.3846154" side_tool="true" visible="true" weight="0.122696154" />
@@ -4460,27 +4458,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="11" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <marker date="1563343164458" expanded="false" signature="6:216" ph="..." />
-            <marker date="1563343164458" expanded="true" signature="244:3875" ph="{...}" />
-            <marker date="1563343164458" expanded="true" signature="252:402" ph="/// Generates a sequence of rows starting at &quot;StartAt&quot;, ending at &quot;EndAt&quot;, with increment of &quot;Increment&quot; ... " />
-            <marker date="1563343164458" expanded="true" signature="448:3873" ph="{...}" />
-            <marker date="1563343164458" expanded="true" signature="842:1171" ph="{...}" />
-            <marker date="1563343164458" expanded="true" signature="888:1135" ph="{...}" />
-            <marker date="1563343164458" expanded="true" signature="975:1120" ph="{...}" />
-            <marker date="1563343164458" expanded="true" signature="1212:1456" ph="{...}" />
-            <marker date="1563343164458" expanded="true" signature="1545:1904" ph="{...}" />
-            <marker date="1563343164458" expanded="true" signature="1721:1823" ph="{...}" />
-            <marker date="1563343164458" expanded="true" signature="2058:2750" ph="{...}" />
-            <marker date="1563343164458" expanded="true" signature="2095:2435" ph="{...}" />
-            <marker date="1563343164458" expanded="true" signature="2229:2421" ph="{...}" />
-            <marker date="1563343164458" expanded="true" signature="2556:2640" ph="{...}" />
-            <marker date="1563343164458" expanded="true" signature="2797:2874" ph="{...}" />
-            <marker date="1563343164458" expanded="true" signature="2931:2976" ph="{...}" />
-            <marker date="1563343164458" expanded="true" signature="3042:3087" ph="{...}" />
-            <marker date="1563343164458" expanded="true" signature="3161:3312" ph="{...}" />
-            <marker date="1563343164458" expanded="true" signature="3447:3866" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4488,47 +4465,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="698">
           <caret line="200" column="99" lean-forward="true" selection-start-line="200" selection-start-column="99" selection-end-line="201" selection-end-column="25" />
-          <folding>
-            <marker date="1563346537905" expanded="false" signature="6:225" ph="..." />
-            <marker date="1563346537905" expanded="true" signature="253:8633" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="260:543" ph="/// Applies the maximum &quot;Rows&quot;, &quot;Filters&quot;, and &quot;Sort&quot; components of a SelectQuery object. ... " />
-            <marker date="1563346537905" expanded="true" signature="587:8631" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="781:879" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="1133:1178" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="1327:5948" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="1517:1833" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="1874:3175" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="2137:2245" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="2327:2423" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="2444:2539" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="2623:2721" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="2742:2839" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="2941:3041" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="3062:3161" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="3321:3570" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="3443:3505" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="3749:4693" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="3834:4026" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="4136:4227" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="4320:4462" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="4564:4627" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="4889:5539" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="5089:5525" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="5297:5458" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="5556:5777" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="6055:8304" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="6364:7816" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="6610:7629" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="7023:7206" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="7274:7426" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="7455:7607" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="7833:7896" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="7955:8218" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="8090:8204" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="8351:8396" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="8454:8513" ph="{...}" />
-            <marker date="1563346537905" expanded="true" signature="8579:8624" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4730,7 +4666,6 @@
           <caret line="347" column="71" selection-start-line="347" selection-start-column="57" selection-end-line="347" selection-end-column="71" />
           <folding>
             <marker date="1563417224750" expanded="false" signature="6:480" ph="..." />
-            <marker date="1563417224750" expanded="true" signature="524:18199" ph="{...}" />
             <marker date="1563417224750" expanded="true" signature="563:18190" ph="{...}" />
             <marker date="1563417224750" expanded="true" signature="689:809" ph="/// Dictionary grouped by HubKeys, then ApiKeys pointing to the securityKey ... " />
             <marker date="1563417224750" expanded="true" signature="1312:1716" ph="{...}" />
@@ -6021,7 +5956,7 @@
     <entry file="file://$PROJECT_DIR$/../Dexih.App.Proxy/src/dexih.proxy/dexih.proxy.csproj">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
-          <caret line="15" column="10" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
+          <caret line="15" column="10" lean-forward="true" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
         </state>
       </provider>
     </entry>
