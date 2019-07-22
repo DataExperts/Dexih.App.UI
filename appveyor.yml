@@ -51,24 +51,24 @@ for:
       secure: lEaZ/om1UTRS6Xa947/5WxZVbBW6A+ZHmPu7aXRRDqkjX1+LYTfh9xL1CueonyuC
     artifact: /.*\.zip/
     prerelease: true,
-    tag: $(APPVEYOR_REPO_TAG_NAME)
+    tag: ${APPVEYOR_REPO_TAG_NAME}
 
 # master and dev branch/dev publishes with prerelease:true
--
-  branches:
-    only:
-      - master
-      - /dev-.*/
+# -
+#   branches:
+#     only:
+#       - master
+#       - /dev-.*/
 
-  configuration: Debug
-  deploy:
-  - provider: GitHub
-    release: dexih-api-v${APPVEYOR_BUILD_VERSION}
-    description: 'Dexih Api Agent - ${CONFIGURATION} release, version - ${APPVEYOR_BUILD_VERSION}'
-    auth_token:
-      secure: lEaZ/om1UTRS6Xa947/5WxZVbBW6A+ZHmPu7aXRRDqkjX1+LYTfh9xL1CueonyuC
-    artifact: /.*\.zip/
-    prerelease: false,
-    tag: $(APPVEYOR_REPO_TAG_NAME)
+#   configuration: Debug
+#   deploy:
+#   - provider: GitHub
+#     release: dexih-api-v${APPVEYOR_BUILD_VERSION}
+#     description: 'Dexih Api Agent - ${CONFIGURATION} release, version - ${APPVEYOR_BUILD_VERSION}'
+#     auth_token:
+#       secure: lEaZ/om1UTRS6Xa947/5WxZVbBW6A+ZHmPu7aXRRDqkjX1+LYTfh9xL1CueonyuC
+#     artifact: /.*\.zip/
+#     prerelease: false,
+#     tag: ${APPVEYOR_REPO_TAG_NAME}
 
   
