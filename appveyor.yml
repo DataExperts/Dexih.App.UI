@@ -23,6 +23,7 @@ artifacts:
 
 build_script:
   - cd ${APPVEYOR_BUILD_FOLDER}/src/dexih.frontend
+  - npm install
   - ng build --aot --output-hashing=all --output-path ${APPVEYOR_BUILD_FOLDER}/src/dexih.api/wwwroot
   - cd ${APPVEYOR_BUILD_FOLDER}
   - dotnet restore -v Minimal
