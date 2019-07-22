@@ -11,6 +11,7 @@ branches:
   - /dev-.*/
 platform: Any CPU
 clone_depth: 1
+
 before_build:
   - git clone --depth 1 --single-branch --branch %APPVEYOR_REPO_BRANCH% https://github.com/DataExperts/dexih.transforms ../dexih.transforms
   - git clone --depth 1 --single-branch --branch %APPVEYOR_REPO_BRANCH% https://github.com/DataExperts/Dexih.App.Operations ../Dexih.App.Operations
