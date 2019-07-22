@@ -634,27 +634,6 @@
             <e p="Dexih.Utils.Crypto.dll" t="Include" />
             <e p="Dexih.Utils.MessageHelpers.dll" t="Include" />
             <e p="install_nginx_proxy.sh" t="Include" />
-            <e p="Scripts" t="Include">
-              <e p="appsettings.Development.json" t="Include" />
-              <e p="appsettings.json" t="Include" />
-              <e p="dexih.proxy.deps.json" t="Include" />
-              <e p="dexih.proxy.runtimeconfig.json" t="Include" />
-              <e p="Scripts" t="Include">
-                <e p="appsettings.Development.json" t="Include" />
-                <e p="appsettings.json" t="Include" />
-                <e p="dexih.proxy.deps.json" t="Include" />
-                <e p="dexih.proxy.runtimeconfig.json" t="Include" />
-                <e p="Scripts" t="Include">
-                  <e p="appsettings.Development.json" t="Include" />
-                  <e p="appsettings.json" t="Include" />
-                  <e p="dexih.proxy.deps.json" t="Include" />
-                  <e p="dexih.proxy.runtimeconfig.json" t="Include" />
-                  <e p="web.config" t="Include" />
-                </e>
-                <e p="web.config" t="Include" />
-              </e>
-              <e p="web.config" t="Include" />
-            </e>
             <e p="update_aws_site.sh" t="Include" />
             <e p="update_azure_site.sh" t="Include" />
             <e p="version.txt" t="Include" />
