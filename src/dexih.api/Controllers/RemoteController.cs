@@ -84,7 +84,7 @@ namespace dexih.api.Controllers
                         return Json(new { Success = false, Message = "Invalid login attempt." });
                     }
 
-                    if (remoteSettings.Runtime.Version.Substring(0, 5) != "0.4.0")
+                    if (remoteSettings.Runtime.Version.Substring(0, 4) != "0.5.")
                     {
                         _logger.LogWarning(LoggingEvents.RemoteLogin, "Login - Invalid remote login attempt incorrect version: " + remoteSettings.Runtime.Version + " from login: " + User);
                         return Json(new { Success = false, Message = "The remote agent version number is not compatible with the current integration hub web site.  Please update." });
