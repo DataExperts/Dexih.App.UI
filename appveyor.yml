@@ -11,19 +11,19 @@ branches:
   - /dev-.*/
 platform: Any CPU
 clone_depth: 1
-
+install:
+  - nvm install node # latest version of node
+  - npm install -g @angular/cli
 before_build:
   - git clone --depth 1 --single-branch --branch ${APPVEYOR_REPO_BRANCH} https://github.com/DataExperts/dexih.transforms ../dexih.transforms
   - git clone --depth 1 --single-branch --branch ${APPVEYOR_REPO_BRANCH} https://github.com/DataExperts/Dexih.App.Operations ../Dexih.App.Operations
   - git clone --depth 1 --single-branch --branch ${APPVEYOR_REPO_BRANCH} https://github.com/DataExperts/Dexih.App.Remote ../Dexih.App.Remote
-  - dotnet restore
 
 artifacts:
 - path: dexih*.zip
 
 build_script:
   - cd ${APPVEYOR_BUILD_FOLDER}/src/dexih.frontend
-  - npm install -g @angular/cli
   - npm install
   - ng build --aot --output-hashing=all --output-path ${APPVEYOR_BUILD_FOLDER}/src/dexih.api/wwwroot
   - cd ${APPVEYOR_BUILD_FOLDER}

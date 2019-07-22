@@ -2345,7 +2345,7 @@
       <workItem from="1563269565949" duration="654000" />
       <workItem from="1563318607811" duration="17328000" />
       <workItem from="1563409014725" duration="6468000" />
-      <workItem from="1563777004940" duration="1499000" />
+      <workItem from="1563777004940" duration="1595000" />
     </task>
     <task id="LOCAL-00001" summary="Connections to remote agents working.">
       <created>1509234944099</created>
@@ -2428,7 +2428,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4195187000" />
+    <option name="totallyTimeSpent" value="4195283000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
