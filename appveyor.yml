@@ -1,0 +1,69 @@
+version: 0.5.{build}
+# image: Visual Studio 2019
+image: Ubuntu
+configuration:
+- Debug
+- Release
+branches:
+  only:
+  - master
+  - release
+  - /dev-.*/
+platform: Any CPU
+clone_depth: 1
+before_build:
+  - git clone --depth 1 --single-branch --branch %APPVEYOR_REPO_BRANCH% https://github.com/DataExperts/dexih.transforms ../dexih.transforms
+  - git clone --depth 1 --single-branch --branch %APPVEYOR_REPO_BRANCH% https://github.com/DataExperts/Dexih.App.Operations ../Dexih.App.Operations
+  - git clone --depth 1 --single-branch --branch %APPVEYOR_REPO_BRANCH% https://github.com/DataExperts/Dexih.App.Remote ../Dexih.App.Remote
+  - dotnet restore
+
+artifacts:
+- path: dexih*.zip
+
+build_script:
+  - cd %APPVEYOR_BUILD_FOLDER%/src/dexih.frontend
+  - ng build --aot --output-hashing=all --output-path %APPVEYOR_BUILD_FOLDER%/src/dexih.api/wwwroot
+  - cd %APPVEYOR_BUILD_FOLDER%
+  - appveyor-retry dotnet restore -v Minimal
+  - dotnet build -c %CONFIGURATION%
+
+  - dotnet publish src/dexih.api/dexih.api.csproj -c %CONFIGURATION% -p:Version=%APPVEYOR_BUILD_VERSION% -o %APPVEYOR_BUILD_FOLDER%/dotnet
+  - 7z a dexih.api.%APPVEYOR_BUILD_VERSION%-.zip %APPVEYOR_BUILD_FOLDER%/dotnet
+
+
+for:
+
+# The release branch publishes without the version suffix, making an official release.
+-
+  branches:
+    only:
+      - release
+
+  configuration: Release
+  deploy:
+  - provider: GitHub
+    release: dexih-api-v$(appveyor_build_version)
+    description: 'Dexih Api - %CONFIGURATION% release, version - $(appveyor_build_version)'
+    auth_token:
+      secure: lEaZ/om1UTRS6Xa947/5WxZVbBW6A+ZHmPu7aXRRDqkjX1+LYTfh9xL1CueonyuC
+    artifact: /.*\.zip/
+    prerelease: true
+
+# master and dev branch/dev publishes with prerelease:true
+-
+  branches:
+    only:
+      - master
+      - /dev-.*/
+
+  configuration: Debug
+  deploy:
+  - provider: GitHub
+    release: dexih-api-v$(appveyor_build_version)
+    description: 'Dexih Api Agent - %CONFIGURATION% release, version - $(appveyor_build_version)'
+    auth_token:
+      secure: lEaZ/om1UTRS6Xa947/5WxZVbBW6A+ZHmPu7aXRRDqkjX1+LYTfh9xL1CueonyuC
+    artifact: /.*\.zip/
+    prerelease: false
+
+  
