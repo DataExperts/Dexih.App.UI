@@ -574,6 +574,7 @@
           <e p="source-list-map" t="IncludeRecursive" />
         </e>
         <e p="dexih.frontend/node_modules/codelyzer" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/core-js" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/dexih-ngx-components" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/dexih-ngx-table" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/expose-loader" t="IncludeRecursive" />
