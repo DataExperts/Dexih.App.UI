@@ -25,7 +25,7 @@ build_script:
   - cd ${APPVEYOR_BUILD_FOLDER}/src/dexih.frontend
   - ng build --aot --output-hashing=all --output-path ${APPVEYOR_BUILD_FOLDER}/src/dexih.api/wwwroot
   - cd ${APPVEYOR_BUILD_FOLDER}
-  - appveyor-retry dotnet restore -v Minimal
+  - dotnet restore -v Minimal
   - dotnet build -c ${CONFIGURATION}
 
   - dotnet publish src/dexih.api/dexih.api.csproj -c ${CONFIGURATION} -p:Version=${APPVEYOR_BUILD_VERSION} -o ${APPVEYOR_BUILD_FOLDER}/dotnet
