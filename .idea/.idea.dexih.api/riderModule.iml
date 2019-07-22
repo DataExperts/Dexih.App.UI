@@ -7,12 +7,9 @@
     <content url="file://$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.1/build/netcoreapp1.0/xunit.runner.visualstudio.dotnetcore.testadapter.dll" />
     <content url="file://$MODULE_DIR$/../../../Dexih.App.Operations/src/dexih.operations" />
     <content url="file://$MODULE_DIR$/../../../Dexih.App.Operations/src/dexih.repository" />
-    <content url="file://$MODULE_DIR$/../../../Dexih.App.Proxy/src/dexih.proxy" />
     <content url="file://$MODULE_DIR$/../../../Dexih.App.Remote/src/dexih.remote" />
     <content url="file://$MODULE_DIR$/../../../Dexih.App.Remote/src/dexih.remote.operations" />
     <content url="file://$MODULE_DIR$/../.." />
-    <content url="file://$MODULE_DIR$/../../../Dexih.Utils.CopyProperties/src/Dexih.Utils.CopyProperties" />
-    <content url="file://$MODULE_DIR$/../../../Dexih.Utils.ManagedTasks/src/Dexih.Utils.ManagedTasks" />
     <content url="file://$MODULE_DIR$/../../../dexih.transforms/src/dexih.connections.azure" />
     <content url="file://$MODULE_DIR$/../../../dexih.transforms/src/dexih.connections.dexih" />
     <content url="file://$MODULE_DIR$/../../../dexih.transforms/src/dexih.connections.excel" />
@@ -32,7 +29,6 @@
     <content url="file://$MODULE_DIR$/../../../dexih.transforms/src/dexih.functions.maths" />
     <content url="file://$MODULE_DIR$/../../../dexih.transforms/src/dexih.functions.ml" />
     <content url="file://$MODULE_DIR$/../../../dexih.transforms/src/dexih.transforms" />
-    <content url="file://$MODULE_DIR$/../../../dexih.utils.datatype/src/Dexih.Utils.DataType" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

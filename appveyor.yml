@@ -16,7 +16,6 @@ before_build:
   - git clone --depth 1 --single-branch --branch ${APPVEYOR_REPO_BRANCH} https://github.com/DataExperts/dexih.transforms ../dexih.transforms
   - git clone --depth 1 --single-branch --branch ${APPVEYOR_REPO_BRANCH} https://github.com/DataExperts/Dexih.App.Operations ../Dexih.App.Operations
   - git clone --depth 1 --single-branch --branch ${APPVEYOR_REPO_BRANCH} https://github.com/DataExperts/Dexih.App.Remote ../Dexih.App.Remote
-  - git clone --depth 1 --single-branch --branch ${APPVEYOR_REPO_BRANCH} https://github.com/DataExperts/Dexih.App.Proxy ../Dexih.App.Proxy
   - dotnet restore
 
 artifacts:
@@ -30,7 +29,7 @@ build_script:
   - dotnet build -c ${CONFIGURATION}
 
   - dotnet publish src/dexih.api/dexih.api.csproj -c ${CONFIGURATION} -p:Version=${APPVEYOR_BUILD_VERSION} -o ${APPVEYOR_BUILD_FOLDER}/dotnet
-  - 7z a dexih.api.${APPVEYOR_BUILD_VERSION}-.zip ${APPVEYOR_BUILD_FOLDER}/dotnet
+  - 7z a dexih.api.${APPVEYOR_BUILD_VERSION}.zip ${APPVEYOR_BUILD_FOLDER}/dotnet
 
 
 for:
@@ -44,8 +43,8 @@ for:
   configuration: Release
   deploy:
   - provider: GitHub
-    release: dexih-api-v$(APPVEYOR_BUILD_VERSION)
-    description: 'Dexih Api - ${CONFIGURATION} release, version - $(APPVEYOR_BUILD_VERSION)'
+    release: dexih-api-v${APPVEYOR_BUILD_VERSION}
+    description: 'Dexih Api - ${CONFIGURATION} release, version - ${APPVEYOR_BUILD_VERSION}'
     auth_token:
       secure: lEaZ/om1UTRS6Xa947/5WxZVbBW6A+ZHmPu7aXRRDqkjX1+LYTfh9xL1CueonyuC
     artifact: /.*\.zip/
@@ -61,8 +60,8 @@ for:
   configuration: Debug
   deploy:
   - provider: GitHub
-    release: dexih-api-v$(APPVEYOR_BUILD_VERSION)
-    description: 'Dexih Api Agent - ${CONFIGURATION} release, version - $(APPVEYOR_BUILD_VERSION)'
+    release: dexih-api-v${APPVEYOR_BUILD_VERSION}
+    description: 'Dexih Api Agent - ${CONFIGURATION} release, version - ${APPVEYOR_BUILD_VERSION}'
     auth_token:
       secure: lEaZ/om1UTRS6Xa947/5WxZVbBW6A+ZHmPu7aXRRDqkjX1+LYTfh9xL1CueonyuC
     artifact: /.*\.zip/
