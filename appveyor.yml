@@ -36,7 +36,7 @@ build_script:
   - dotnet build -c ${CONFIGURATION}
 
   - dotnet publish src/dexih.api/dexih.api.csproj -c ${CONFIGURATION} -p:Version=${APPVEYOR_BUILD_VERSION} -o ${APPVEYOR_BUILD_FOLDER}/dotnet
-  - 7z a dexih.api.${APPVEYOR_BUILD_VERSION}.zip ${APPVEYOR_BUILD_FOLDER}/dotnet
+  - 7z a dexih.api.${APPVEYOR_BUILD_VERSION}.zip ./${APPVEYOR_BUILD_FOLDER}/dotnet
 
 
 for:
