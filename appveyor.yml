@@ -1,14 +1,19 @@
 version: 0.5.{build}
 # image: Visual Studio 2019
 image: Ubuntu
+
 configuration:
 - Debug
 - Release
+
 branches:
   only:
   - master
   - release
   - /dev-.*/
+
+skip_tags: true
+
 platform: Any CPU
 clone_depth: 1
 install:
@@ -51,24 +56,9 @@ for:
       secure: lEaZ/om1UTRS6Xa947/5WxZVbBW6A+ZHmPu7aXRRDqkjX1+LYTfh9xL1CueonyuC
     artifact: /.*\.zip/
     prerelease: true,
-    tag: ${APPVEYOR_REPO_TAG_NAME}
+    tag: ${APPVEYOR_BUILD_VERSION}
 
-# master and dev branch/dev publishes with prerelease:true
-# -
-#   branches:
-#     only:
-#       - master
-#       - /dev-.*/
-
-#   configuration: Debug
-#   deploy:
-#   - provider: GitHub
-#     release: dexih-api-v${APPVEYOR_BUILD_VERSION}
-#     description: 'Dexih Api Agent - ${CONFIGURATION} release, version - ${APPVEYOR_BUILD_VERSION}'
-#     auth_token:
-#       secure: lEaZ/om1UTRS6Xa947/5WxZVbBW6A+ZHmPu7aXRRDqkjX1+LYTfh9xL1CueonyuC
-#     artifact: /.*\.zip/
-#     prerelease: false,
-#     tag: ${APPVEYOR_REPO_TAG_NAME}
-
+# fallback for non-release branches.
+-
+  configuration: Debug
   
