@@ -51,6 +51,13 @@ namespace dexih.api.Services.Operations
         
         public async Task<VersionInfo> RemoteAgentVersion(string os, bool preRelease)
         {
+            await RefreshRemoteAgentVersions();
+            
+            return _latestVersions[(os, preRelease)];
+        }
+
+        private async Task RefreshRemoteAgentVersions()
+        {
             // limit the api calls to the github api to 10 minute to avoid rate limits
             if (DateTime.Now > _lastApiCall.AddMinutes(10))
             {
@@ -77,8 +84,7 @@ namespace dexih.api.Services.Operations
                     _lastApiCall = DateTime.Now;
                 }
             }
-
-            return _latestVersions[(os, preRelease)];
+           
         }
         
         private void UpdateRemoteVersionInfo(JToken version, bool preRelease)
@@ -94,26 +100,48 @@ namespace dexih.api.Services.Operations
                 
                 if (name.Contains("windows"))
                 {
+                    versionInfo.OS = "windows";
                     _latestVersions[("windows", preRelease)] = versionInfo;
                 } 
                 else if (name.Contains("osx"))
                 {
+                    versionInfo.OS = "osx";
                     _latestVersions[("osx", preRelease)] = versionInfo;
                 }
                 else if (name.Contains("linux"))
                 {
+                    versionInfo.OS = "linux";
                     _latestVersions[("linux", preRelease)] = versionInfo;
                 }
                 else if (name.Contains("alpine"))
                 {
+                    versionInfo.OS = "alpine";
                     _latestVersions[("alpine", preRelease)] = versionInfo;
                 }
             }
+        }
+
+        public async Task<IEnumerable<VersionInfo>> RemoteAgentVersions(bool preRelease)
+        {
+            await RefreshRemoteAgentVersions();
+
+            var versionInfo = new List<VersionInfo>();
+
+            foreach (var key in _latestVersions.Keys)
+            {
+                if (key.preRelease == preRelease)
+                {
+                    versionInfo.Add(_latestVersions[key]);
+                }
+            }
+
+            return versionInfo;
         }
 }
 
 public class VersionInfo {
     public string Version { get; set; }
+    public string OS { get; set; }
     public string Url { get; set; }
     public string FileName { get; set; }
 }
