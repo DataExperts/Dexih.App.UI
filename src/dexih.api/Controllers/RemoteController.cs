@@ -571,7 +571,7 @@ namespace dexih.api.Controllers
                 // Load the saved account key
                 if (System.IO.File.Exists("letsencrypt.pem"))
                 {
-                    _logger.LogDebug($"Using existing letencrypt account.");
+                    _logger.LogDebug($"Using existing letsencrypt account.");
                     var pemKey = System.IO.File.ReadAllText("letsencrypt.pem");
                     var accountKey = KeyFactory.FromPem(pemKey);
                     acme = new AcmeContext(server, accountKey);
@@ -600,7 +600,7 @@ namespace dexih.api.Controllers
                 var dnxText = acme.AccountKey.DnsTxt(dnsChallenge.Token);
                 var pair = new KeyValuePair<string, string>(txtName, dnxText);
                 
-                // get current items
+                // update the distributed cache with the new record.
                 var txtItemsJson = await _distributedCache.GetStringAsync("txtRecords");
                 List<KeyValuePair<string, string>> txtItems;
                 
@@ -614,11 +614,10 @@ namespace dexih.api.Controllers
                 }
 
                 txtItems.Add(pair);
-
                 txtItemsJson = JsonConvert.SerializeObject(txtItems);
                 var txtItemsByte = Encoding.ASCII.GetBytes(txtItemsJson);
-                var options = new DistributedCacheEntryOptions() {SlidingExpiration = TimeSpan.FromSeconds(600)};
-                await _distributedCache.SetAsync(txtName, txtItemsByte, options);
+                var options = new DistributedCacheEntryOptions() {SlidingExpiration = TimeSpan.FromSeconds(60)};
+                await _distributedCache.SetAsync("txtRecords", txtItemsByte, options);
 
                 try
                 {
@@ -682,7 +681,35 @@ namespace dexih.api.Controllers
             return File(pfx, "application/octet-stream", "dexih.pfx");
         }
 
+        /// <summary>
+        /// Provides a list of Txt values that the Dexih.Dns can provide to validate the domain ownership.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("[action]")]
+        [AllowAnonymous]
+        public async Task<IActionResult> AddTxtRecord()
+        {
+            // update the distributed cache with the new record.
+            var txtItemsJson = await _distributedCache.GetStringAsync("txtRecords");
+            List<KeyValuePair<string, string>> txtItems;
+                
+            if (txtItemsJson == null)
+            {
+                txtItems = new List<KeyValuePair<string, string>>();
+            }
+            else
+            {
+                txtItems = JsonConvert.DeserializeObject<List<KeyValuePair<string, string>>>(txtItemsJson);
+            }
 
+            txtItems.Add(new KeyValuePair<string, string>("test" + txtItems.Count.ToString(), "sample value"));
+            txtItemsJson = JsonConvert.SerializeObject(txtItems);
+            var txtItemsByte = Encoding.ASCII.GetBytes(txtItemsJson);
+            var options = new DistributedCacheEntryOptions() {SlidingExpiration = TimeSpan.FromSeconds(60)};
+            await _distributedCache.SetAsync("txtRecords", txtItemsByte, options);
+
+            return Content(txtItems.Count.ToString());
+        }
 
 
         /// <summary>
@@ -694,7 +721,14 @@ namespace dexih.api.Controllers
         public async Task<IActionResult> GetTxtRecords()
         {
             var txtItemsJson = await _distributedCache.GetStringAsync("txtRecords");
-            return Content(txtItemsJson);
+            if (txtItemsJson == null)
+            {
+                return Content("[]");
+            }
+            else
+            {
+                return Content(txtItemsJson);
+            }
         }
 
         /// <summary>

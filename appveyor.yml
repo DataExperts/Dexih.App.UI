@@ -8,9 +8,9 @@ configuration:
 
 branches:
   only:
-  - master
+  # - master
   - release
-  - /dev-.*/
+  # - /dev-.*/
 
 skip_tags: true
 

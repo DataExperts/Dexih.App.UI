@@ -58,7 +58,7 @@ fi
 if [ ! -f "create_service.sh" ]; then
         cat <<EOF >create_service.sh
 sudo cp dexih.remote.plist /Library/LaunchDaemons/dexih.remote.plist
-sudo sudo launchctl load /Library/LaunchDaemons/dexih.remote.plist
+sudo launchctl load /Library/LaunchDaemons/dexih.remote.plist
 EOF
     chmod a+x create_service.sh
     echo "***** Use create_service.sh to add a systemctl service that will rerun on reboot or failure. *****"
@@ -89,13 +89,13 @@ EOF
 fi
 
 if [ ! -f "start_service.sh" ]; then
-    echo "sudo sudo launchctl load /Library/LaunchDaemons/dexih.remote.plist" > start_service.sh
+    echo "sudo launchctl load /Library/LaunchDaemons/dexih.remote.plist" > start_service.sh
     chmod a+x start_service.sh
     echo "***** Use start_service.sh to start the systemctl service. *****"
 fi
 
 if [ ! -f "stop_service.sh" ]; then
-    echo "sudo sudo launchctl unload /Library/LaunchDaemons/dexih.remote.plist" > stop_service.sh
+    echo "sudo launchctl unload /Library/LaunchDaemons/dexih.remote.plist" > stop_service.sh
     chmod a+x stop_service.sh
     echo "***** Use stop_service.sh to stop the systemctl service. *****"
 fi

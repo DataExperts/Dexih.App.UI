@@ -58,7 +58,7 @@ do
     # if there is an update directory, then copy it over the existing files.
     if [ -d "${DIRECTORY}/update" ]; then
         echo Updating the binaries...
-        TEMP_DIRECTORY=`mktemp -d -t dexih.remote`
+        TEMP_DIRECTORY=`mktemp -d -t dexih.remote.XXXXX`
         BACKUP_DIRECTORY="dexih_remote_`date +"%Y%m%d%H%M%S"`"
         mv ${DIRECTORY}/update ${TEMP_DIRECTORY} || error_exit "Could not move files from ${DIRECTORY}/update to ${TEMP_DIRECTORY}"
         mv ${DIRECTORY} ${BACKUP_DIRECTORY} || error_exit "Could not move files from ${DIRECTORY} to ${BACKUP_DIRECTORY}"
@@ -99,7 +99,7 @@ do
                 exit
             fi
     
-            TEMP_DIRECTORY=`mktemp -d -t dexih.remote`
+            TEMP_DIRECTORY=`mktemp -d -t dexih.remote.XXXXX`
             BACKUP_DIRECTORY="dexih_remote_`date +"%Y%m%d%H%M%S"`"
             
             unzip -q ${LATEST_BINARY} -d ${TEMP_DIRECTORY} || error_exit "Could not unzip the ${LATEST_BINARY}, check the file is a valid zip file."
