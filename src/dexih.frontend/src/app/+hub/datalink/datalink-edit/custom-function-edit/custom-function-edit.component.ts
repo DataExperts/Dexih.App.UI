@@ -135,6 +135,7 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
 
             if (!this.newDatalinkTransformItemForm) {
                 this.authService.navigateUp();
+                return;
             }
           } else {
 

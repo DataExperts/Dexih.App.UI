@@ -81,6 +81,7 @@ export class ColumnEditComponent implements OnInit, OnChanges, OnDestroy {
                 this.originalColumn = columns.find(c => c.key === this.columnKey);
                 if (!this.originalColumn) {
                     this.authService.navigateUp();
+                    return;
                 }
                 columnForm = this.columnFormService.tableColumn(columns, this.originalColumn);
             }

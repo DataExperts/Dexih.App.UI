@@ -1531,6 +1531,7 @@ namespace dexih.api.Services.Remote
 						{
 							await _remoteAgentContext.Clients.Groups(remoteAgentIdentity(remoteAgent.RemoteAgentKey))
 								.SendAsync("Restart");
+							return;
 						}
 
 						exceptions.Enqueue(new RemoteAgentException(

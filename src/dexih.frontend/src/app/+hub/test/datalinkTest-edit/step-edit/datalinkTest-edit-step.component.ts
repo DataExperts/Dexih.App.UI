@@ -74,6 +74,7 @@ export class DatalinkTestEditStepComponent implements OnInit, OnDestroy {
 
                         if (!step) {
                             this.authService.navigateUp();
+                            return;
                         }
                     } else {
                         step = new DexihDatalinkTestStep();

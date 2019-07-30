@@ -144,6 +144,7 @@ export class DatalinkColumnEditComponent implements OnInit, OnChanges, OnDestroy
             this.originalColumnForm = this.findColumn();
             if (!this.originalColumnForm) {
                 this.authService.navigateUp();
+                return;
             }
             columnForm = this.columnFormService.datalinkTableColumn(null, this.originalColumnForm.value);
         } else {

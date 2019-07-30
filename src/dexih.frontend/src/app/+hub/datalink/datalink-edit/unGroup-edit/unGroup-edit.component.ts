@@ -105,6 +105,7 @@ export class UnGroupEditComponent implements OnInit, OnDestroy {
 
             if (!this.datalinkTransformItemForm) {
               this.authService.navigateUp();
+              return;
             }
 
             // create a copy of the form item to allow for cancel.

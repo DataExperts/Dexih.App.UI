@@ -145,10 +145,21 @@ export class MappingItemComponent implements OnInit {
         }
     }
 
+        // concatenates the arrays together.
+    // node: .concat will append null arrays, where this ignores null arrays.
+    private concat<T>(...args: T[][]): T[] {
+        let array: T[] = [];
+        args.forEach(arg => {
+            if ( arg ) {
+                array = array.concat(arg);
+            }
+        });
+        return array;
+    }
+
     private addBuiltInFunctionParameters(func: FunctionReference) {
-        let functionInputs = func.inputParameters.concat(func.resultInputParameters);
-        let functionOutputs =
-            func.outputParameters.concat(func.returnParameters).concat(func.resultOutputParameters).concat(func.resultReturnParameters);
+        let functionInputs = this.concat(func.inputParameters, func.resultInputParameters);
+        let functionOutputs = this.concat(func.returnParameters, func.resultOutputParameters, func.resultReturnParameters);
 
         let inputParams = this.transformItem.dexihFunctionParameters
             .filter(c =>
@@ -199,7 +210,7 @@ export class MappingItemComponent implements OnInit {
             }
         });
 
-        let linkedNames = Array.from(new Set(functionInputs.concat(functionOutputs).map(c => c &&  c.linkedName).filter(c => c)));
+        let linkedNames = Array.from(new Set(this.concat(functionInputs, functionOutputs).map(c => c &&  c.linkedName).filter(c => c)));
         this.mapParameters = linkedNames.map(name => {
             let parameters: ValidParameter[] = functionInputs.filter(c => c.linkedName === name).map(param => {
                 let p = inputParams.find(c => c.name === param.name);
@@ -217,7 +228,7 @@ export class MappingItemComponent implements OnInit {
                 return {name: param.name, values: values};
             });
 
-            return {name: name, parameters: parameters.concat(parameters2)};
+            return {name: name, parameters: this.concat(parameters, parameters2)};
         });
     }
 

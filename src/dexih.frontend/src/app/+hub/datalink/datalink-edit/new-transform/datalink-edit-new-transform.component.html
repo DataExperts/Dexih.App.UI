@@ -1,15 +1,22 @@
 <div class="list-group-item list-group-item-info rounded-0">
-        <div class="d-flex flex-row">
-            <h5>Transform Type</h5>
-            <div class="ml-auto">
-                    <button class="btn btn-warning" (click)="close()"><i class="fa fa-close"></i><span class="xs-hidden sm-hidden"> Close</span></button>
-                </div>
-            </div>
+    <div class="d-flex flex-row">
+        <h5>Transform Type</h5>
+        <div class="ml-auto">
+            <button class="btn btn-warning" (click)="close()"><i class="fa fa-close"></i><span
+                    class="xs-hidden sm-hidden"> Close</span></button>
+        </div>
     </div>
+</div>
 
-<div *ngIf="transforms" class="list-group">
-    <a class="list-group-item list-group-item-action" *ngFor="let transform of transforms" (click)="insert(transform.transformReference)">
-        <h3><i [ngClass]="transform.icon"></i> {{transform.transformReference.name}}</h3>
-        <p>{{transform.transformReference.description}}</p>
-    </a>
+<div class="card-columns">
+    <div class="card m-3" *ngFor="let transform of transforms" (click)="insert(transform.transformReference)">
+        <div class="card-header">
+            <i [ngClass]="transform.icon"></i>
+            {{transform.transformReference.name}}
+        </div>
+        <div class="card-body">
+            <p class="card-text">{{transform.transformReference.description}}</p>
+            <button class="btn btn-primary" (click)="insert(transform.transformReference)">Create</button>
+        </div>
+    </div>
 </div>

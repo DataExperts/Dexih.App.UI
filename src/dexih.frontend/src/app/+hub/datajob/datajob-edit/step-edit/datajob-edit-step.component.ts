@@ -73,6 +73,7 @@ export class DatajobEditStepComponent implements OnInit, OnDestroy {
 
                         if (!step) {
                             this.authService.navigateUp();
+                            return;
                         }
                     } else {
                         step = new DexihDatalinkStep();

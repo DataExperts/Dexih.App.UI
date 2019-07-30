@@ -64,6 +64,7 @@ export class DatajobEditTriggerComponent implements OnInit, OnDestroy {
           this.originalTrigger = this.mainForm.value.dexihTriggers.find(c => c.key === this.triggerKey);
           if (!this.originalTrigger) {
             this.authService.navigateUp();
+            return;
           }
           triggerForm = this.triggerFormService.triggerFormGroup(this.originalTrigger);
         } else {

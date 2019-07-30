@@ -807,11 +807,6 @@
         <e p="Sorts.cs" t="Include" />
         <e p="UpdateQuery.cs" t="Include" />
       </e>
-      <e p="releases" t="Include">
-        <e p="dexih.functions.deps.json" t="Include" />
-        <e p="dexih.functions.dll" t="Include" />
-        <e p="dexih.functions.pdb" t="Include" />
-      </e>
       <e p="Retry.cs" t="Include" />
       <e p="SeriesValue.cs" t="Include" />
       <e p="ShortGuid.cs" t="Include" />
@@ -923,16 +918,10 @@
         </e>
       </e>
       <e p="ProbabilityDistributionFunctions.cs" t="Include" />
-      <e p="releases" t="Include">
-        <e p="dexih.functions.dll" t="Include" />
-        <e p="dexih.functions.maths.deps.json" t="Include" />
-        <e p="dexih.functions.maths.dll" t="Include" />
-        <e p="dexih.functions.maths.pdb" t="Include" />
-        <e p="dexih.functions.pdb" t="Include" />
-      </e>
       <e p="SpecialFunctions.cs" t="Include" />
     </e>
     <e p="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.ml" t="IncludeRecursive">
+      <e p="AnomalyDetection.cs" t="Include" />
       <e p="bin" t="ExcludeRecursive" />
       <e p="Clustering.cs" t="Include" />
       <e p="dexih.functions.ml.csproj" t="IncludeRecursive" />
@@ -1035,13 +1024,6 @@
       <e p="ReaderMemory.cs" t="Include" />
       <e p="ReaderRowCreator.cs" t="Include" />
       <e p="ReaderSql.cs" t="Include" />
-      <e p="releases" t="Include">
-        <e p="dexih.functions.dll" t="Include" />
-        <e p="dexih.functions.pdb" t="Include" />
-        <e p="dexih.transforms.deps.json" t="Include" />
-        <e p="dexih.transforms.dll" t="Include" />
-        <e p="dexih.transforms.pdb" t="Include" />
-      </e>
       <e p="StreamCsv.cs" t="Include" />
       <e p="StreamJson.cs" t="Include" />
       <e p="StreamJsonCompact.cs" t="Include" />

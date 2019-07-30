@@ -4,6 +4,7 @@ import { RemoteToken } from '../../../+auth/auth.models';
 import { FormsService } from '../../../shared/forms/forms.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription, combineLatest } from 'rxjs';
+import { HubsService } from '../../hubs.service';
 
 @Component({
     selector: 'remote-agent-token',
@@ -19,6 +20,7 @@ export class RemoteAgentTokenComponent implements OnInit, OnDestroy {
 
     constructor(
         private route: ActivatedRoute,
+        private hubsService: HubsService,
         private authService: AuthService) {
     }
 
@@ -31,14 +33,23 @@ export class RemoteAgentTokenComponent implements OnInit, OnDestroy {
             let params = result[1];
             this.action = data.action;
 
+            let promise: Promise<RemoteToken>;
+
             if (data.action === 'New') {
-                this.remoteToken = await this.authService.createRemoteAgent();
-                this.updateAppSettings();
+                promise = this.authService.createRemoteAgent();
             } else {
                 const remoteAgentKey = +params['remoteAgentKey'];
-                this.remoteToken = await this.authService.refreshRemoteAgentToken(remoteAgentKey);
-                this.updateAppSettings();
+                promise = this.authService.refreshRemoteAgentToken(remoteAgentKey);
             }
+
+            promise.then(remoteToken => {
+                this.remoteToken = remoteToken;
+                this.updateAppSettings();
+            }).catch(reason => {
+                this.hubsService.addHubMessage(reason);
+                this.authService.navigateUp();
+            });
+
           });
     }
 

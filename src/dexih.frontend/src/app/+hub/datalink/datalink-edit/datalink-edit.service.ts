@@ -377,7 +377,8 @@ export class DatalinkEditService implements OnInit, OnDestroy {
                 }
             }).catch(reason => {
                 this.hubService.addHubMessage(reason);
-                reject(reason);
+                resolve(null);
+                // reject(reason);
             });
         });
     }

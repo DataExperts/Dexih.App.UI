@@ -77,7 +77,14 @@ export class FilesManageComponent implements OnInit, OnDestroy {
                 if (this.hubCache.status !== eCacheStatus.Loaded) { return; }
 
                 this.fileConnections = this.hubCache.hub.dexihConnections
-                    .filter(c => this.remoteLibraries.GetConnectionReference(c).connectionCategory === eConnectionCategory.File);
+                    .filter(c => {
+                        const ref = this.remoteLibraries.GetConnectionReference(c);
+                        if (ref) {
+                            return ref.connectionCategory === eConnectionCategory.File;
+                        } else {
+                            return false;
+                        }
+                    });
 
                 let connectionTables = this.hubCache.getConnectionTables();
 

@@ -1928,7 +1928,7 @@ export class HubService implements OnInit, OnDestroy {
                 }, 'Getting download location...').then(result => {
 
                     // console.debug(result.value);
-                    this.authService.get(result.value, null, false).then(data => {
+                    this.authService.get(result.value, 'Getting preview data...', false).then(data => {
                         if (data['success'] === false) {
                             this.addHubMessage(data);
                             reject(data['message']);

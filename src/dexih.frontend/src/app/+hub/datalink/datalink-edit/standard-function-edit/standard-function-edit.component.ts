@@ -165,6 +165,7 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
             if (!table) {
               this.hubService.addHubErrorMessage('The join table could not be found.');
               this.authService.navigateUp();
+              return;
             }
 
             this.inputColumns = table.dexihDatalinkColumns;
@@ -189,6 +190,7 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
 
             if (!this.datalinkTransformItemForm) {
               this.authService.navigateUp();
+              return;
             }
 
             // create a copy of the form item to allow for cancel.
@@ -474,11 +476,11 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
   private newParameter(existingParameters: DexihFunctionParameter[],
     param: any, index: number, direction: eParameterDirection, genericTypeDefault: eTypeCode): FormGroup {
 
-    let existingValue = existingParameters.find(c => c.name === param.name)
+    let existingValue = existingParameters.find(c => c.name === param.parameterName)
 
     let newParameter = new DexihFunctionParameter();
     // newParameter.datalinkTransformItemKey = this.datalinkTransformItemKey;
-    newParameter.name = param.name;
+    newParameter.name = param.parameterName;
     newParameter.rank = param.rank;
     newParameter.direction = direction;
     newParameter.isGeneric = param.isGeneric;
@@ -727,6 +729,8 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
   async importInputOutputMappings(arrayParameter: ArrayParameter) {
     let result = await this.editDatalinkService
       .importFunctionMappings(this.datalinkTransformKey, this.newDatalinkTransformItemForm.value);
+
+      if (result === null) { return; }
 
       let inputArrayForm = <FormArray>arrayParameter.inputParameterForms[0].controls.arrayParameters;
 
