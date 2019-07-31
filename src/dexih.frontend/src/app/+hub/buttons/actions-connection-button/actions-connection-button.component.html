@@ -62,8 +62,12 @@
                                 <i class="fa fa-folder"></i> View Imported Files</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" *ngIf="hubCache.canWrite" [routerLink]="['tables', 'table-new', connections[0].connectkeyionKey]" title="Import a new file for this connection.">
-                                <i class="fa fa-plus-square"></i> New File</a>
+                            <a class="dropdown-item" *ngIf="hubCache.canWrite" [routerLink]="[hubPath, 'files', 'bulk-load', connections[0].key]" title="Import a new file for this connection.">
+                                <i class="fa fa-plus-square"></i> Bulk Create new Files</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" *ngIf="hubCache.canWrite" [routerLink]="['tables', 'table-new', connections[0].key]" title="Import a new file for this connection.">
+                                <i class="fa fa-plus-square"></i> Add File(s)</a>
                         </li>
                     </ng-template>
 

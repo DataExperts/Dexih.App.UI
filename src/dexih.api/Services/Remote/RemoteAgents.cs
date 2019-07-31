@@ -762,6 +762,39 @@ namespace dexih.api.Services.Remote
 			    throw new RemoteAgentException($"Error saving file.\n{ex.Message}", ex);
 		    }
 	    }
+	    
+	    public async Task<(string url, string reference)> BulkUploadFiles(string id, long hubKey, string connectionId, long connectionKey, string fileName, DownloadUrl downloadUrl, RepositoryManager database)
+	    {
+		    try
+		    {
+			    _remoteLogger.LogTrace(LoggingEvents.RemoteSaveFile, "BulkUploadFiles - Id: {Id}, HubKey: {hubKey}, TableKey: {connectionKey}.", id, hubKey, connectionKey);
+
+			    var hub = await database.GetHub(hubKey);
+
+			    var cache = new CacheManager(hubKey, hub.EncryptionKey);
+			    cache.AddConnections(new[] { connectionKey }, false, hub);
+
+			    var value = new
+			    {
+				    cache,
+				    downloadUrl,
+				    connectionId
+			    };
+
+			    var parameters = new[]
+			    {
+				    new operations.KeyValuePair("FileName", fileName)
+			    };
+
+			    var result = await SendRemoteMessage<(string url, string reference)>(hubKey, id, nameof(RemoteOperations.BulkUploadFiles), value, parameters, database, CancellationToken.None);
+			    return result;
+		    }
+		    catch(Exception ex)
+		    {
+			    throw new RemoteAgentException($"Error saving file.\n{ex.Message}", ex);
+		    }
+	    }
+
 
 	    public async Task<DexihTable[]> ImportTables(string instanceId, long hubKey, DexihTable[] hubTables, RepositoryManager repositoryManager)
 	    {

@@ -524,6 +524,40 @@ namespace dexih.api.Controllers
                 return new ReturnValue(false, "Error occurred in SetFileStream: " + ex.Message, ex);
             }
         }
+        
+        public class FlatFilesReadyModel
+        {
+            public long HubKey { get; set; }
+            public string InstanceId { get; set; }
+            public string SecurityToken { get; set; }
+            public string ConnectionId { get; set; }
+            public string Reference { get; set; }
+            public DexihTable[] tables { get; set; }
+        }
+
+        [HttpPost("[action]")]
+        public async Task<ReturnValue> FlatFilesReady([FromBody] FlatFilesReadyModel flatFilesReady)
+        {
+            try
+            {
+                var content = new
+                {
+                    hubKey = flatFilesReady.HubKey,
+                    reference = flatFilesReady.Reference,
+                    tables = flatFilesReady.tables
+                };
+
+                //broadcast the new file to the client
+                await _operations.BroadcastClientMessageAsync(flatFilesReady.ConnectionId, "flatFiles-ready", content);
+                
+                return new ReturnValue(true);
+            }
+            catch (Exception ex)
+            {
+                return new ReturnValue(false, "Error occurred in SetFileStream: " + ex.Message, ex);
+            }
+        }
+        
 
         public class GenerateCertificateModel
         {

@@ -110,6 +110,8 @@
 		public const int HubActivateApis = 4051;
 		public const int HubDeactivateApis = 4052;
 		public const int HubRestartAgent = 4053;
+		public const int HubBulkUploadFiles = 4054;
+
 
 		
 

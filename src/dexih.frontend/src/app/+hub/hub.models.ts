@@ -2459,3 +2459,9 @@ export class PreviewResults {
     public transformProperties: TransformProperties;
     public status: Message;
 }
+
+export class FlatFilesReady {
+    public hubKey: number;
+    public reference: string;
+    public tables: DexihTable[];
+}

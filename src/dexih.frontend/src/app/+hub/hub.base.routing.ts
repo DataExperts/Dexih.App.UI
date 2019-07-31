@@ -10,7 +10,7 @@ import { DatalinkIndexComponent } from './datalink/datalink-index';
 import { DatalinkNewComponent } from './datalink/datalink-new';
 import { DatalinkPreviewDataComponent } from './datalink/datalink-preview-data';
 import { FileFormatEditComponent, FileFormatIndexComponent } from './fileFormat';
-import { FilesManageComponent } from './files';
+import { FilesManageComponent, FilesBulkLoadComponent } from './files';
 import { HubVariableEditComponent, HubVariableIndexComponent } from './hubVariable';
 import { ManageUsersIndexComponent } from './manage/manage-users-index/manage-users-index.component';
 import { RemoteAgentEditComponent, RemoteAgentIndexComponent } from './remoteAgent';
@@ -210,7 +210,11 @@ const filesRoutes: Routes = [
             { path: '', component: FilesManageComponent, data: { action: 'edit', pageTitle: 'Manage Files'}},
             { path: 'file-preview/:path/:fileName', component: TablePreviewDataComponent, data: { pageTitle: 'Preview File' } }
         ])}
-    ])}
+    ])},
+    { path: 'bulk-load', children: (<Routes> [
+       {path: '', component: FilesBulkLoadComponent, data: { action: 'new', pageTitle: 'Bulk Load Files'}},
+       {path: ':connectionKey', component: FilesBulkLoadComponent, data: { action: 'new', pageTitle: 'Bulk Load Files'}},
+    ])},
 ];
 
 const filesRoute: Route = { path: 'files', data: { pageTitle: 'Files' }, children: (<Routes>[

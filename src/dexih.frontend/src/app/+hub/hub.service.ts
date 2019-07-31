@@ -42,7 +42,8 @@ import {
     DexihApi,
     ApiData,
     TransformProperties,
-    PreviewResults
+    PreviewResults,
+    FlatFilesReady
 } from './hub.models';
 import { DownloadObject, eDownloadFormat, SelectQuery } from './hub.query.models';
 import { RemoteLibraries, RemoteAgentStatus, eTypeCode } from './hub.remote.models';
@@ -56,9 +57,13 @@ export class HubService implements OnInit, OnDestroy {
     private _hubCache = new BehaviorSubject<HubCache>(new HubCache(eCacheStatus.NoHub, null));
     private _hubMessages = new BehaviorSubject<Array<Message>>([]);
 
+    // updates whenever the local hub cache changes
     private _hubCacheChange = new Subject<HubCacheChange>();
 
     private _remoteLibraries = new BehaviorSubject<RemoteLibraries>(null);
+
+    // updates whenever a bulk file upload is completed.
+    private _flatFiles = new Subject<FlatFilesReady>();
 
     private _globalCache: GlobalCache;
 
@@ -158,6 +163,10 @@ export class HubService implements OnInit, OnDestroy {
     // hubCacheChange detects specific changes to objects and is used to monitor object changes from other sessions when editing forms.
     getHubCacheChangeObservable(): Observable<HubCacheChange> {
         return this._hubCacheChange.asObservable();
+    }
+
+    getFlatFilesObservable(): Observable<FlatFilesReady> {
+        return this._flatFiles.asObservable();
     }
 
     getHubMessagesObservable(): Observable<Array<Message>> {
@@ -446,6 +455,10 @@ export class HubService implements OnInit, OnDestroy {
                     this.addApiStatus(apiData);
                 }
                 break;
+                case 'flatFiles-ready':
+                    let flatFiles: FlatFilesReady = data.value;
+                    this._flatFiles.next(flatFiles);
+
             }
             this.logger.LogC(() => `processWebSocketMessage completed, method: ${data.method}.`, eLogLevel.Debug);
     }
@@ -602,7 +615,6 @@ export class HubService implements OnInit, OnDestroy {
             }
         }
     }
-
 
       // updates the datalink progress observables.
     private addDatajobProgress(task: ManagedTask) {
@@ -2841,4 +2853,39 @@ export class HubService implements OnInit, OnDestroy {
 
         });
     }
+
+    bulkUploadFiles(connection: DexihConnection, fileName: string):
+    Promise<{url: string, reference: string}> {
+        return new Promise<{url: string, reference: string}>((resolve, reject) => {
+            if (!this._remoteAgent.value) {
+                let message = new Message(false, 'No active remote agent.', null, null);
+                this.addHubMessage(message);
+                reject(message);
+                return;
+            }
+            this.authService.getDownloadUrl(this._remoteAgent.value).then(downloadUrl => {
+                    this.authService.post('/api/Hub/BulkUploadFiles', {
+                    hubKey: this._hubCache.value.hub.hubKey,
+                    connectionId: this.authService.getWebSocketConnectionId(),
+                    connectionKey: connection.key,
+                    fileName: fileName,
+                    remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
+                    downloadUrl: downloadUrl
+                }, 'Uploading file...')
+                    .then(result => {
+                        resolve(result.value);
+                    return result;
+                }).catch(reason => {
+                    this.logger.LogC(() => `uploadFile, error: ${reason.message}.`, eLogLevel.Error);
+                    this.addHubMessage(reason);
+                    reject(reason);
+                });
+            }).catch(reason => {
+                this.addHubMessage(reason);
+                reject(reason);
+            });
+
+        });
+    }
+
 }

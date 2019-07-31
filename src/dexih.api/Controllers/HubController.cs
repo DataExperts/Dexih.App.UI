@@ -896,6 +896,18 @@ namespace dexih.api.Controllers
 		    return await _remoteAgents.UploadFile(uploadFiles.RemoteAgentId, uploadFiles.HubKey, uploadFiles.TableKey, uploadFiles.FileName, uploadFiles.DownloadUrl, _operations.RepositoryManager);
 	    }
 	    
+	    [HttpPost("[action]")]
+	    [ValidateHub(DexihHubUser.EPermission.User)]
+	    public async Task<BulkUploadFilesReturn> BulkUploadFiles([FromBody] BulkUploadFiles bulkUploadFiles)
+	    {
+		    _logger.LogTrace(LoggingEvents.HubBulkUploadFiles, "HubController.HubBulkUploadFiles: HubKey: {updateBrowserHub}, ConnectionKey: {ConnectionKey}.", bulkUploadFiles.HubKey, bulkUploadFiles.ConnectionKey);
+
+		    var repositoryManager = _operations.RepositoryManager;
+	    
+		    var result = await _remoteAgents.BulkUploadFiles(bulkUploadFiles.RemoteAgentId, bulkUploadFiles.HubKey, bulkUploadFiles.ConnectionId, bulkUploadFiles.ConnectionKey, bulkUploadFiles.FileName, bulkUploadFiles.DownloadUrl, _operations.RepositoryManager);
+		    return new BulkUploadFilesReturn() {Reference = result.reference, Url = result.url};
+	    }
+	    
         [HttpPost("[action]")]
         [ValidateHub(DexihHubUser.EPermission.User)]
         public Task<ManagedTask> DownloadFiles([FromBody] DownloadFiles downloadFiles)

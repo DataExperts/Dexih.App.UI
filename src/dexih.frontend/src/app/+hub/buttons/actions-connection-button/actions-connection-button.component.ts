@@ -25,6 +25,8 @@ export class ActionsConnectionButtonComponent implements OnInit, OnDestroy, OnCh
     public hubCache: HubCache;
     public remoteLibrary: RemoteLibraries;
 
+    public hubPath: string;
+
     datalinks = [];
     datajobs = [];
 
@@ -45,6 +47,8 @@ export class ActionsConnectionButtonComponent implements OnInit, OnDestroy, OnCh
             if (!this.hubCache.isLoaded() || !this.remoteLibrary ) {
                 return;
             }
+
+            this.hubPath = this.hubCache.getHubUrl();
 
             this.datalinks = [];
             this.datajobs = [];

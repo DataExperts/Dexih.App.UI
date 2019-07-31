@@ -9,7 +9,7 @@ import { DatajobIndexComponent } from './datajob';
 import { DatalinkIndexComponent, DatalinkNewComponent } from './datalink';
 import { DatalinkPreviewDataComponent } from './datalink/datalink-preview-data';
 import { FileFormatIndexComponent } from './fileFormat';
-import { FilesManageComponent } from './files';
+import { FilesManageComponent, FilesBulkLoadComponent } from './files';
 import { BaseRouting } from './hub.base.routing';
 import { HubService } from './hub.service';
 import { HubSharedModule } from './hub.shared.module';
@@ -53,7 +53,7 @@ import { SearchModule} from './search';
         ResultsIndexComponent,
         DatajobIndexComponent,
         ColumnValidationIndexComponent, ColumnValidationEditComponent,
-        FileFormatIndexComponent,
+        FileFormatIndexComponent, FilesBulkLoadComponent,
         ViewIndexComponent, ViewEditComponent,
         ApiIndexComponent, ApiEditComponent,
         HubVariableEditComponent, HubVariableIndexComponent,

@@ -161,6 +161,22 @@ namespace dexih.api.Models
 	    public DownloadUrl DownloadUrl { get; set; }
 	}
 
+    public class BulkUploadFiles
+    {
+        public long HubKey { get; set; }
+        public string RemoteAgentId { get; set; }
+        public long ConnectionKey { get; set; }
+        public string FileName { get; set; }
+        public DownloadUrl DownloadUrl { get; set; }
+        public string ConnectionId { get; set; }
+    }
+
+    public class BulkUploadFilesReturn
+    {
+        public string Url;
+        public string Reference;
+    }
+
     public class DownloadFiles
     {
         public long HubKey { get; set; }
