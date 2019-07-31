@@ -1,0 +1,89 @@
+<section *ngIf="hubCache?.hub && (!fileConnections || fileConnections.length === 0)">
+    <div class="alert alert-danger m-3">
+        There are no files configured.  Create a file based connection, and add at least one file definition.
+        <hr>
+        <div>
+            <a class="btn btn-sm btn-primary text-white" routerLink="/hub/{{hubCache.hub.hubKey}}/connections/connection-new/Source" [title]="">New Connection</a>
+            <a *ngFor="let connection of fileConnections" class="ml-1 btn btn-sm btn-primary text-white" routerLink="/hub/{{hubCache.hub.hubKey}}/connections/tables/table-new/{{connection.key}}" [title]="">New File ({{connection.name}})</a>
+        </div>
+    </div>
+</section>
+
+<div *ngIf="fileConnections && fileConnections.length > 0" class="container">
+    <dexih-widget [title]="'Bulk load files for: ' + connection?.name" iconClass="fa fa-lg fa-fw fa-table" [showCloseButton]="true" (close)="close()">
+        <ng-template #header>
+            <dexih-button-dropdown buttonClass="btn-sm btn-outline-primary mr-1" iconClass="fa fa-notepad" text="New File">
+                    <a *ngFor="let connection of fileConnections" class="dropdown-item" routerLink="/hub/{{hubCache.hub.hubKey}}/files/files-bulk-load/{{connection.key}}" [title]="">{{connection.name}}</a>
+            </dexih-button-dropdown>
+        </ng-template>
+
+        <!-- <section>
+            <form-select label="Format Type" formControlName="formatType" [items]="formatTypes" itemKey="key" itemName="name" iconClass="fa fa-database"
+                note='The format of data.'>
+            </form-select>
+        </section>
+
+        <section *ngIf="formService.currentForm.value.formatType == eTypeCode.Text">    
+            <form-select label="File Format" formControlName="fileFormatKey" placeholder="File Format" [errors]="formService.formErrors.fileFormatKey"
+                [items]="hubCache.hub.dexihFileFormats" itemKey="key" itemName="name" [enableFilter]="false" note="Specify the file format to use, if not specified, a csv (command separated) format will be used."
+                [allowNullSelect]="true" selectNullMessage="Use default (csv) format">
+                <a routerLink="fileFormat-new">(<i class="fa fa-sticky-note-o"></i> Create New Format )</a>
+            </form-select>
+        </section> -->
+
+        <ul *ngIf="connection" class="list-group">
+            <li class="list-group-item list-group-item-info rounded-0">
+                <h5>Drop Files to Load</h5>
+            </li>
+            <li class="list-group-item ">
+                <div class="well my-drop-zone" dropZone [requireFiles]="true" (dropFiles)="filesDrop($event)" dropAllowedClass="nv-file-over">
+                    Drop Files to Load Here
+                    <div class="custom-file w-25 float-right">
+                        <input type="file" class="custom-file-input" onclick="this.value=null" (change)="uploadFile($event)">
+                        <label class="custom-file-label" for="inputGroupFile01">Choose files</label>
+                    </div>
+                </div>
+            </li>
+            <li class="list-group-item list-group-item-info  rounded-0">
+                <h5>Upload Queue</h5>
+            </li>
+            <li class="list-group-item p-0">
+                <dexih-table [enableMultiSelect]="true" [columns]="uploadColumns" [data]="uploadedFiles">
+
+                    <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+                        <dexih-button class="mr-1" iconClass="fa fa-upload" buttonClass='btn-primary' (click)="uploadSelected(items)">Upload</dexih-button>
+                        <dexih-button-cancel class="mr-1" (click)="cancelSelected(items)"></dexih-button-cancel>
+                        <dexih-button-delete (click)="removeSelected(items)" text="Remove"></dexih-button-delete>
+                    </ng-template>
+
+                    <ng-template #actions let-items="items">
+                        <form-checkbox [(ngModel)]="automaticUpload" label="Automatically upload files when added to the queue."></form-checkbox>
+                    </ng-template>
+
+                    <ng-template #rowStatus select="rowStatus" let-item="item">
+                        <div *ngIf="item.isRunning()" class="progress" style="margin-bottom: 0;">
+                            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                        </div>
+                        <span >
+                            <i class='fa' [ngClass]="{
+                                'fa-check': item.status === eFileStatus.Complete, 
+                                'fa-exclamation-circle': item.status === eFileStatus.Error,
+                                'fa-ban': item.status === eFileStatus.Cancelled}"></i>{{item.status}}</span>
+                    </ng-template>
+                </dexih-table>
+            </li>
+            <li class="list-group-item list-group-item-info  rounded-0">
+                <h5>Tables Created</h5>
+            </li>
+            <li class="list-group-item p-0">
+                <dexih-table [enableMultiSelect]="true" [columns]="tableColumns" [data]="tables">
+
+                    <ng-template #actions let-items="items">
+                        <dexih-button-save (click)="saveTables(items)"></dexih-button-save>
+                    </ng-template>
+    
+                </dexih-table>
+            </li>
+        </ul>
+    </dexih-widget>
+</div>
