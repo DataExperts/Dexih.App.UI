@@ -9,7 +9,7 @@
             <a class="btn btn-sm btn-primary text-white" (click)='isHidden = !isHidden'>Details</a>
             <div *ngIf="!isHidden && message.exceptionDetails && message.message != message.exceptionDetails">
                 <hr>
-                <pre>{{message.exceptionDetails}}</pre>
+                <pre style="word-wrap: break-word;">{{message.exceptionDetails}}</pre>
             </div>
         </div>
     </div>

@@ -89,7 +89,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   toastClick(message: Message) {
     this.authService.informationDialog('Error Notification',
-      message.message + '<br><br>' + message.exceptionDetails);
+      message.message + '<br><br> <pre>' + message.exceptionDetails + '</pre>');
   }
 
   onFullScreenToggle() {

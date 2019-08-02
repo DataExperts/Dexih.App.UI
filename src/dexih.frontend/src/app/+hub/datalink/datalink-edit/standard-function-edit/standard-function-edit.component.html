@@ -1,20 +1,13 @@
 <div *ngIf="newDatalinkTransformItemForm && inputColumns && outputColumns">
 
-	<div class="list-group-item list-group-item-info rounded-0">
-		<div class="d-flex flex-row">
-			<h5>Edit Standard Function</h5>
-			<div class="ml-auto">
-				<dexih-button-apply [disabled]="newDatalinkTransformItemForm.pristine" (click)="!newDatalinkTransformItemForm.pristine && applyExit()"
-				 class="mr-1"></dexih-button-apply>
-				<dexih-button-cancel (click)="cancel()"></dexih-button-cancel>
-			</div>
-		</div>
-	</div>
+	<dexih-widget-section  title="Edit Function" [showExpandButton]="false">
+		<ng-template #header>
+			<dexih-button-apply [disabled]="newDatalinkTransformItemForm.pristine" (click)="!newDatalinkTransformItemForm.pristine && applyExit()"
+			class="mr-1"></dexih-button-apply>
+			<dexih-button-cancel (click)="cancel()"></dexih-button-cancel>
+		</ng-template>
 
-
-	<div class="container  mt-3 mb-3" *ngIf="datalinkTransformForm">
-
-		<form [formGroup]="newDatalinkTransformItemForm">
+		<form *ngIf="datalinkTransformForm" [formGroup]="newDatalinkTransformItemForm">
 			<fieldset>
 
 				<section *ngIf="hubCache?.hub.dexihCustomFunctions.length > 0">
@@ -188,5 +181,5 @@
 				</div>
 			</fieldset>
 		</form>
-	</div>
+	</dexih-widget-section>
 </div>

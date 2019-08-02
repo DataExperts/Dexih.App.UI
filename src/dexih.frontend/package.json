@@ -30,7 +30,7 @@
     "@aspnet/signalr": "^1.1.4",
     "@swimlane/ngx-charts": "^12.0.1",
     "@types/file-saver": "2.0.1",
-    "dexih-ngx-components": "^0.3.6",
+    "dexih-ngx-components": "^0.3.14",
     "dexih-ngx-table": "^0.5.11",
     "file-saver": "^2.0.2",
     "html2canvas": "^1.0.0-rc.3",

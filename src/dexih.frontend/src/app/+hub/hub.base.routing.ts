@@ -34,7 +34,7 @@ const tableRoutes: Routes = [
     { path: 'table-new',  data: {  pageTitle: 'New Table', action: 'new'},
         loadChildren: () => import('./table/table-edit/table-edit.module').then(m => m.TableEditModule)},
     { path: 'table-new/:connectionKey',  data: {  pageTitle: 'New Table', action: 'new'},
-            loadChildren: () => import('./table/table-edit/table-edit.module').then(m => m.TableEditModule)},
+        loadChildren: () => import('./table/table-edit/table-edit.module').then(m => m.TableEditModule)},
     { path: 'datalink-new/:sourceTableKeys/:targetConnectionKey',
         component: DatalinkNewComponent, data: { action: 'new', pageTitle: 'New Datalink' } },
     { path: 'table-preview/:tableKey', component: TablePreviewDataComponent, data: { pageTitle: 'Preview Table' } },
@@ -212,8 +212,10 @@ const filesRoutes: Routes = [
         ])}
     ])},
     { path: 'bulk-load', children: (<Routes> [
-       {path: '', component: FilesBulkLoadComponent, data: { action: 'new', pageTitle: 'Bulk Load Files'}},
-       {path: ':connectionKey', component: FilesBulkLoadComponent, data: { action: 'new', pageTitle: 'Bulk Load Files'}},
+       {path: '', data: { action: 'new', pageTitle: 'Bulk Load Files'},
+        loadChildren: () => import('./files/files-bulk-load/files-bulk-load.module').then(m => m.FilesBulkLoadModule)},
+       {path: ':connectionKey', data: { action: 'new', pageTitle: 'Bulk Load Files'},
+        loadChildren: () => import('./files/files-bulk-load/files-bulk-load.module').then(m => m.FilesBulkLoadModule)},
     ])},
 ];
 

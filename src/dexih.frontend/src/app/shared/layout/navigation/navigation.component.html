@@ -5,10 +5,17 @@
 
             <menu-parent name="Configure" title="Management functions" iconClass="fa fa-lg fa-fw fa-wrench">
                     <li class="nav-item" *ngIf="user?.isAdmin">
-                        <a (click)="hideMenu()" class="nav-link"  routerLinkActive="active"  routerLink="/admin/users">{{'Users' }}</a>
+                        <a (click)="hideMenu()" class="nav-link"  routerLinkActive="active"  routerLink="/admin/users">
+                            <i class="fa fa-lg fa-fw fa-users"></i>
+                            
+                            <span class="menu-item-parent">{{'Users' }}</span>
+                        </a>
                     </li>
                     <li class="nav-item" >
-                        <a (click)="hideMenu()" class="nav-link"  routerLinkActive="active" routerLink="/hubs/index/hubs-view">{{'Hubs'}}</a>
+                        <a (click)="hideMenu()" class="nav-link"  routerLinkActive="active" routerLink="/hubs/index/hubs-view">
+                            <i class="fa fa-lg fa-fw fa-life-saver"></i>
+                            <span class="menu-item-parent">{{'Hubs'}}</span>
+                        </a>
                     </li>
     
                     <li class="nav-item"  *ngIf="hubCacheLoaded && hubCache.canAdministrate">
@@ -102,11 +109,17 @@
                </li>
 
                 <li class="nav-item">
-                    <a (click)="hideMenu()" class="nav-link"  routerLinkActive="active" routerLink="/hub/{{hubCache.hub.hubKey}}/summary/files/manage" title="Manage Flat Files">
-                        <i class="fa fa-lg fa-fw fa-upload"></i> <span class="menu-item-parent">{{'Files'}}</span>
+                    <a (click)="hideMenu()" class="nav-link"  routerLinkActive="active" routerLink="/hub/{{hubCache.hub.hubKey}}/summary/files/manage" title="Manage Flat Files within an existing table definition">
+                        <i class="fa fa-lg fa-fw fa-upload"></i> <span class="menu-item-parent">{{'Manage Files'}}</span>
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a (click)="hideMenu()" class="nav-link"  routerLinkActive="active" routerLink="/hub/{{hubCache.hub.hubKey}}/summary/files/bulk-load" title="Bulk upload files to create auto create table definitions.">
+                        <i class="fa fa-lg fa-fw fa-files-o"></i> <span class="menu-item-parent">{{'Bulk Load Files'}}</span>
+                    </a>
+                </li>
+    
                 <li class="nav-item">
                     <a (click)="hideMenu()" class="nav-link"  routerLinkActive="active" routerLink="/hub/{{hubCache.hub.hubKey}}/summary/datalinks/results" title="Recent execution summaries from datalink and datajobs.">
                         <i class="fa fa-lg fa-fw fa-tasks"></i> <span class="menu-item-parent">{{'Job Results'}}</span>

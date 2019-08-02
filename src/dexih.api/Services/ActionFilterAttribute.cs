@@ -77,6 +77,11 @@ namespace dexih.api.Services
                 }
                 base.OnActionExecuted(context);
             }
+            else
+            {
+                context.HttpContext.Response.StatusCode = 400;
+                base.OnActionExecuted(context);
+            }
         }
 
     }

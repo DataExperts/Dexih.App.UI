@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-primary rounded">
+    <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-info rounded">
         <img class="mr-3" [src]='logoSmallUrl' alt="" width="48" height="48">
         <div class="lh-100">
             <h3 class="mb-0 text-white lh-100">Data Experts Information Hub</h3>
@@ -23,7 +23,7 @@
                     used to run, schedule and publish data.</p>
             </div>
             <div class="card-footer">
-                <a routerLink="hubs-view" class="btn btn-primary">Manage</a>
+                <dexih-button class="ml-1" iconClass="fa fa-life-saver" routerLink="hubs-view">Manage</dexih-button>
             </div>
         </div>
         <div class="card mb-3" style="min-width: 18rem;">
@@ -32,7 +32,7 @@
                 <p class="card-text">Edit your account details, password, and login providers.</p>
             </div>
             <div class="card-footer">
-                <a routerLink="manage" class="btn btn-primary">Account</a>
+                <dexih-button class="ml-1" iconClass="fa fa-user" routerLink="manage">Account</dexih-button>
             </div>
         </div>
         <div class="card mb-3" style="min-width: 18rem;">
@@ -42,8 +42,8 @@
                     data.</p>
             </div>
             <div class="card-footer">
-                <a routerLink="agents" class="btn btn-primary mr-1">Agents</a>
-                <a routerLink="tasks" class="btn btn-primary">Tasks</a>
+                <dexih-button class="mr-1" iconClass="fa fa-wifi" routerLink="agents">Agents</dexih-button>
+                <dexih-button iconClass="fa fa-tasks" routerLink="tasks">Tasks</dexih-button>
             </div>
         </div>
         <div class="card mb-3" style="min-width: 18rem;">
@@ -52,7 +52,7 @@
                 <p class="card-text">View all datasets which have been shared.</p>
             </div>
             <div class="card-footer">
-                <a routerLink="sharedData" class="btn btn-primary">View</a>
+                <dexih-button-view routerLink="sharedData"></dexih-button-view>
             </div>
         </div>
     </div>
@@ -66,8 +66,8 @@
                                     <div class="d-flex flex-row p-0">
                                         {{hub.name}}
                                         <div class="d-flex ml-auto">
-                                            <a routerLink="/hub/{{hub.hubKey}}/summary" class="btn btn-primary mr-1 ">Open</a>
-                                            <a routerLink="hub-edit/{{hub.hubKey}}" class="btn btn-primary ">Edit</a>
+                                            <dexih-button-open routerLink="/hub/{{hub.hubKey}}/summary"></dexih-button-open>
+                                            <dexih-button-edit class="ml-1" routerLink="hub-edit/{{hub.hubKey}}"></dexih-button-edit>
                                         </div>
                                     </div>
 

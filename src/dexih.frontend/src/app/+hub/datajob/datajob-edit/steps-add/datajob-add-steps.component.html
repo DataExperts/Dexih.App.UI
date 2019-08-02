@@ -1,20 +1,12 @@
-
-<div class="list-group-item list-group-item-info rounded-0">
-	<div class="d-flex flex-row">
-		<h5>Add Datalinks to Job</h5>
-		<div class="ml-auto">
-			<dexih-button-close (click)="close()"></dexih-button-close>
-		</div>
-	</div>
-</div>
-
-<dexih-table 
-	[enableMultiSelect]="true"
-	[columns]="columns"
-	[dataObservable]="tableData"
-	>
-	<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-		<dexih-button (click)="addSelected(items)" iconClass="fa fa-plus" buttonClass="btn-primary" title="Add selected datalinks to the job">Add</dexih-button>
+<dexih-widget-section title="Add Datalinks to Job" [showExpandButton]="false" [padding]="false">
+	<ng-template #header>
+		<dexih-button-close (click)="close()"></dexih-button-close>
 	</ng-template>
+	<dexih-table [enableMultiSelect]="true" [columns]="columns" [dataObservable]="tableData">
+		<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+			<dexih-button (click)="addSelected(items)" iconClass="fa fa-plus" buttonClass="btn-primary"
+				title="Add selected datalinks to the job">Add</dexih-button>
+		</ng-template>
 
-</dexih-table>
+	</dexih-table>
+</dexih-widget-section>

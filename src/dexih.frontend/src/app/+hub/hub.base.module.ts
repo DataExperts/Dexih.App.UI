@@ -53,7 +53,7 @@ import { SearchModule} from './search';
         ResultsIndexComponent,
         DatajobIndexComponent,
         ColumnValidationIndexComponent, ColumnValidationEditComponent,
-        FileFormatIndexComponent, FilesBulkLoadComponent,
+        FileFormatIndexComponent,
         ViewIndexComponent, ViewEditComponent,
         ApiIndexComponent, ApiEditComponent,
         HubVariableEditComponent, HubVariableIndexComponent,

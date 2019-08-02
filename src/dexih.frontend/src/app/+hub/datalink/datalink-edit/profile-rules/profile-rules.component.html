@@ -1,12 +1,4 @@
-    <div class="list-group-item list-group-item-info rounded-0">
-            <div class="d-flex flex-row">
-                <h5>Profile Rules</h5>
-                <div class="ml-auto">
-                </div>
-            </div>
-        </div>
-
-        <div class="container  mt-3 mb-3">
+<dexih-widget-section title="Profile Rules" [showExpandButton]="true">
         <form *ngIf="datalinkForm"  [formGroup]="datalinkForm" >
     <fieldset>
         <section>
@@ -16,7 +8,6 @@
         </section>
     </fieldset>
 </form>
-</div>
 
 <dexih-table 
     [enableMultiSelect]="true" 
@@ -32,4 +23,4 @@
         <form-checkbox label="Capture Detailed Distribution" [(ngModel)]="item.detailedResults" name="detailedResults" (change)="updateProfileRule(item)" ></form-checkbox>
     </ng-template>
 </dexih-table>
-
+</dexih-widget-section>

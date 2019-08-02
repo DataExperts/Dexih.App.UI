@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import {
   DexihTable, HubCache, DexihConnection,
-  eDatalinkType, eConnectionPurpose, eDeltaType, eDatalinkTransformItemType, eCacheStatus
+  eDatalinkType, eConnectionPurpose, eDeltaType, eDatalinkTransformItemType, eCacheStatus, eSharedObjectType
 } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { Observable, Subscription, combineLatest} from 'rxjs';
@@ -18,6 +18,7 @@ export class DatalinkNewComponent implements OnInit, OnDestroy {
 
   private _subscription: Subscription;
   private _valueChangesSubscription: Subscription;
+  private _hubCacheChangeSubscription: Subscription;
 
   private hubCache: HubCache;
 
@@ -25,6 +26,8 @@ export class DatalinkNewComponent implements OnInit, OnDestroy {
 
   hasChanged = false;
   showAllErrors = false;
+
+  private tableKeys: Array<number>;
 
   private hubCacheObserve: Subscription;
   public sourceTableKeys: Array<number>;
@@ -110,20 +113,11 @@ export class DatalinkNewComponent implements OnInit, OnDestroy {
         this.managedConnections = this.hubCache.hub.dexihConnections
           .filter(c => c.purpose === eConnectionPurpose.Managed)
 
-        if (this.hubCache.status = eCacheStatus.Loaded) {
-          let tableKeys: string = params['sourceTableKeys'];
-          this.sourceTableKeys = new Array<number>();
-          this.sourceTables = new Array<DexihTable>();
+        let tableKeys: string = params['sourceTableKeys'];
+        this.tableKeys = tableKeys.split('|').map(c => +c);
 
-          if (tableKeys && this.hubCache.hub.dexihConnections) {
-            let tableKeyArray = tableKeys.split('|');
-            this.hubCache.hub.dexihTables.forEach(table => {
-              if (tableKeyArray.findIndex(t => t === table.key.toString()) >= 0) {
-                this.sourceTableKeys.push(table.key);
-                this.sourceTables.push(table);
-              }
-            });
-          }
+        if (this.hubCache.status = eCacheStatus.Loaded) {
+          this.updateTables();
 
           this.targetConnectionKey = +params['targetConnectionKey'];
 
@@ -137,6 +131,8 @@ export class DatalinkNewComponent implements OnInit, OnDestroy {
           this.datalinkType = eDatalinkType.General;
 
           this.buildForm();
+
+          this.watchChanges();
         }
 
       });
@@ -150,6 +146,22 @@ export class DatalinkNewComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this._subscription) { this._subscription.unsubscribe(); }
     if (this._valueChangesSubscription) { this._valueChangesSubscription.unsubscribe(); }
+    if (this._hubCacheChangeSubscription) { this._hubCacheChangeSubscription.unsubscribe(); }
+  }
+
+  updateTables() {
+
+    this.sourceTableKeys = new Array<number>();
+    this.sourceTables = new Array<DexihTable>();
+
+    if (this.tableKeys && this.hubCache.hub.dexihConnections) {
+      this.hubCache.hub.dexihTables.forEach(table => {
+        if (this.tableKeys.findIndex(t => t === table.key) >= 0) {
+          this.sourceTableKeys.push(table.key);
+          this.sourceTables.push(table);
+        }
+      });
+    }
   }
 
   buildForm(): void {
@@ -235,4 +247,13 @@ export class DatalinkNewComponent implements OnInit, OnDestroy {
   cancel() {
     this.location.back();
   }
+
+  watchChanges() {
+    // watch the current connection in case it is changed in another session.
+    this._hubCacheChangeSubscription = this.hubService.getHubCacheChangeObservable().subscribe(hubCacheChange => {
+        if (hubCacheChange.changeClass === eSharedObjectType.Table) {
+            this.updateTables();
+        }
+    });
+}
 }

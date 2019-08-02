@@ -1,99 +1,61 @@
 <div *ngIf="newDatalinkTransformItemForm && inputColumns && outputColumns">
 
-		<div class="list-group-item list-group-item-info rounded-0">
-				<div class="d-flex flex-row">
-					<h5>{{pageTitle}}</h5>
-					<div class="ml-auto">
-						<dexih-button-apply [disabled]="newDatalinkTransformItemForm.pristine" (click)="!newDatalinkTransformItemForm.pristine && applyExit()" class="mr-1"></dexih-button-apply>
-						<dexih-button-cancel (click)="cancel()"></dexih-button-cancel>
-					</div>
-				</div>
-			</div>
-	
-
-			<div class="container  mt-3 mb-3" *ngIf="datalinkTransformForm">
-
-	<form  [formGroup]="newDatalinkTransformItemForm">
-		<fieldset>
-				<section *ngIf="transformItemType == eDatalinkTransformItemType.AggregatePair" class="col col-xs-12">
-					<form-select label="Aggregate" 
-						formControlName="aggregate" 
-						[items]="aggregates" 
-						itemKey = "key"
-						itemName="name"
-						>
-					</form-select>
-				</section>
-				
-				<section *ngIf="showInput" class="col col-xs-12">
-					<form-select label="Input Column" 
-						formControlName="sourceDatalinkColumn" 
-						[items]="inputColumns" 
-						[(textValue)]="sourceValue"
-						(textValueChange)="updateSourceValue($event)"
-						[enableTextEntry]="true"
-						[enableTextEntryMatch]="false"
-						itemName="logicalName"
-						[errors]="sourceErrors"
-						>
-					</form-select>
-				</section>
-				<section *ngIf="transformItemType == eDatalinkTransformItemType.FilterPair" class="col col-xs-12">
-					<form-select label="Compare" 
-						formControlName="filterCompare" 
-						[items]="compare" 
-						itemKey="key" 
-						itemName="name"
-						>
-					</form-select>
-					<form-select *ngIf="newDatalinkTransformItemForm.controls.filterCompare.value != eCompare.IsNotNull && newDatalinkTransformItemForm.controls.filterCompare.value != eCompare.IsNull"
-						label="Compare Column/Value" 
-						formControlName="filterDatalinkColumn" 
-						[items]="inputColumns" 
-						[enableTextEntry]="true"
-						[(textValue)]="filterValue"
-						(textValueChange)="updateFilterValue($event)"
-						[enableTextEntryMatch]="false"
-						itemName="logicalName"
-						[errors]="filterValueErrors"
-						note="Note: For static date values use format YYYY-MM-DD (e.g. 2018-01-30)"
-						>
-					</form-select>
-				</section>
-				<section *ngIf="showOutput" class="col col-xs-12">
-					<form-select label="Output Column" 
-						formControlName="targetDatalinkColumn" 
-						[items]="outputColumns" 
-						itemName="logicalName"
-						note="Enter new column, or select existing"
-						(textValueChange)="updateNewColumn($event)"
-						[enableTextEntry]="true"
-						textEntryNote="Enter new column name, or select existing"
-						[errors]="targetErrors"
-						>
-					</form-select>
-				</section>
-				<section *ngIf="transformItemType == eDatalinkTransformItemType.Sort" class="col col-xs-12">
-					<form-select label="Direction" 
-						formControlName="sortDirection" 
-						[items]="sortDirections" 
-						itemKey="key" 
-						itemName="name"
-						>
-					</form-select>
-				</section>
-				<section *ngIf="transformItemType == eDatalinkTransformItemType.JoinPair" class="col col-xs-12">
-						<form-select label="Join Column" 
-							formControlName="joinDatalinkColumn" 
-							[items]="joinColumns" 
-							itemName="logicalName"
-							note="Select a join column"
-							textEntryNote="Enter a value to add a new column"
-							[errors]="joinErrors"
-							>
+	<dexih-widget-section [title]="pageTitle" [showExpandButton]="false">
+		<ng-template #header>
+			<dexih-button-apply [disabled]="newDatalinkTransformItemForm.pristine"
+				(click)="!newDatalinkTransformItemForm.pristine && applyExit()" class="mr-1"></dexih-button-apply>
+			<dexih-button-cancel (click)="cancel()"></dexih-button-cancel>
+		</ng-template>
+		<form [formGroup]="newDatalinkTransformItemForm">
+			<fieldset>
+				<div class="form-row">
+					<section *ngIf="transformItemType == eDatalinkTransformItemType.AggregatePair" class="form-group col-md-4">
+						<form-select label="Aggregate" formControlName="aggregate" [items]="aggregates" itemKey="key"
+							itemName="name">
 						</form-select>
-				</section>
-		</fieldset>
-	</form>
-</div>
+					</section>
+
+					<section *ngIf="showInput" class="form-group col-md-4">
+						<form-select label="Input Column" formControlName="sourceDatalinkColumn" [items]="inputColumns"
+							[(textValue)]="sourceValue" (textValueChange)="updateSourceValue($event)"
+							[enableTextEntry]="true" [enableTextEntryMatch]="false" itemName="logicalName"
+							[errors]="sourceErrors">
+						</form-select>
+					</section>
+					<section *ngIf="transformItemType == eDatalinkTransformItemType.FilterPair" class="form-group col-md-4">
+						<form-select label="Compare" formControlName="filterCompare" [items]="compare" itemKey="key"
+							itemName="name">
+						</form-select>
+					</section>
+					<section *ngIf="transformItemType == eDatalinkTransformItemType.FilterPair && newDatalinkTransformItemForm.controls.filterCompare.value != eCompare.IsNotNull && newDatalinkTransformItemForm.controls.filterCompare.value != eCompare.IsNull" class="form-group col-md-4">
+						<form-select
+							label="Compare Column/Value" formControlName="filterDatalinkColumn" [items]="inputColumns"
+							[enableTextEntry]="true" [(textValue)]="filterValue"
+							(textValueChange)="updateFilterValue($event)" [enableTextEntryMatch]="false"
+							itemName="logicalName" [errors]="filterValueErrors"
+							note="Note: For static date values use format YYYY-MM-DD (e.g. 2018-01-30)">
+						</form-select>
+					</section>
+					<section *ngIf="showOutput" class="form-group col-md-4">
+						<form-select label="Output Column" formControlName="targetDatalinkColumn" [items]="outputColumns"
+							itemName="logicalName" note="Enter new column, or select existing"
+							(textValueChange)="updateNewColumn($event)" [enableTextEntry]="true"
+							textEntryNote="Enter new column name, or select existing" [errors]="targetErrors">
+						</form-select>
+					</section>
+					<section *ngIf="transformItemType == eDatalinkTransformItemType.Sort" class="form-group col-md-4">
+						<form-select label="Direction" formControlName="sortDirection" [items]="sortDirections"
+							itemKey="key" itemName="name">
+						</form-select>
+					</section>
+					<section *ngIf="transformItemType == eDatalinkTransformItemType.JoinPair" class="form-group col-md-4">
+						<form-select label="Join Column" formControlName="joinDatalinkColumn" [items]="joinColumns"
+							itemName="logicalName" note="Select a join column"
+							textEntryNote="Enter a value to add a new column" [errors]="joinErrors">
+						</form-select>
+					</section>
+				</div>
+			</fieldset>
+		</form>
+	</dexih-widget-section>
 </div>

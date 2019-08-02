@@ -3,7 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {
   DexihDatalinkStep, DexihDatalinkDependency, DexihTrigger, HubCache,
   eFailAction,
-  DexihDatalinkStepColumn} from '../../../hub.models';
+  DexihDatalinkStepColumn,
+  DexihConnection} from '../../../hub.models';
 import { HubService } from '../../../hub.service';
 import { HubFormsService } from '../../../hub.forms.service';
 import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
@@ -22,6 +23,8 @@ export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
   private _subscription: Subscription;
 
   hasChangedObserve: Observable<boolean>;
+
+  public managedConnections: DexihConnection[];
 
   hasChanged = false;
   showAllErrors = false;
@@ -73,6 +76,9 @@ export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
         this.hubCache = result[2];
         this.mainForm = result[3];
 
+        if (!this.hubCache.isLoaded()) { return; }
+
+        this.managedConnections = this.hubCache.getManagedConnections();
         this.updateTriggers();
         this.updateSteps();
 

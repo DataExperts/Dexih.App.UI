@@ -3,8 +3,8 @@
 <dexih-invalid-form-details class="mr-1" [control]="datalinkForm" (click)="editDatalinkService.hubFormsService.showErrors()"></dexih-invalid-form-details>
 <dexih-button-save class="mr-1" *ngIf="hubCache.canWrite" (click)="saveDatalink()" [disabled]="!editDatalinkService.hubFormsService.hasChanged" [busy]="editDatalinkService.hubFormsService.formSaving"></dexih-button-save>
 <dexih-button-save-local class="mr-1" (click)="editDatalinkService.saveFile()"></dexih-button-save-local>
-<dexih-button class="mr-1" (click)="fixMappings()">Fix</dexih-button>
 <dexih-button-dropdown class="mr-1" *ngIf="hubCache.canWrite && datalinkForm?.controls.dexihDatalinkTargets.value.length > 0" text="Actions" iconClass="fa fa-bolt" buttonClass="btn-primary" [pullRight]="true">
+    <a class="dropdown-item" (click)="fixMappings()" title="Attempt to fix mappings broken when removing/inserting transforms.">Fix Mappings</a>
     <a class="dropdown-item" (click)="runDatalink(false, false)" title="Run datalink, truncating the target table for each.">Run</a>
     <a class="dropdown-item" (click)="runDatalink(true, true)" title="Run datalink, truncating the target table for each.">Run (with truncate)</a>
     <a class="dropdown-item" (click)="runDatalink(false, true)" title="Run datalink, resetting the incremental (i.e. reload all source data rows) ">Run (reset incremental)</a>

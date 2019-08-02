@@ -1,11 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FileHandler } from '../../../+auth/auth.models';
-import { Subscription, BehaviorSubject, Observable, combineLatest } from 'rxjs';
-import { HubCache, FileProperties, DexihConnection, eCacheStatus, Table, DexihTable } from '../../hub.models';
-import { RemoteLibraries, eConnectionCategory } from '../../hub.remote.models';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { FileHandler, eFileStatus } from '../../../+auth/auth.models';
+import { Subscription, combineLatest } from 'rxjs';
+import { HubCache, DexihConnection, eCacheStatus, DexihTable, formatTypes } from '../../hub.models';
+import { RemoteLibraries, eConnectionCategory, eTypeCode } from '../../hub.remote.models';
 import { AuthService } from '../../../+auth/auth.service';
 import { HubService } from '../..';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HubFormsService } from '../../hub.forms.service';
 
 @Component({
     selector: 'files-bulk-load',
@@ -22,6 +23,13 @@ export class FilesBulkLoadComponent implements OnInit, OnDestroy {
     public connectionKey: number;
     public connection: DexihConnection;
 
+    public formatTypes = formatTypes;
+    public eTypeCode = eTypeCode;
+    public formatType = eTypeCode.Text;
+    public fileFormatKey: number;
+
+    public eFileStatus = eFileStatus;
+
     public hubCache: HubCache;
     private remoteLibraries: RemoteLibraries;
 
@@ -32,6 +40,7 @@ export class FilesBulkLoadComponent implements OnInit, OnDestroy {
     private reference: string = null;
     public tables: DexihTable[] = []
 
+    public currentTable: DexihTable = null;
 
     pageTitle = 'Manage Files';
     showPage = false;
@@ -53,7 +62,8 @@ export class FilesBulkLoadComponent implements OnInit, OnDestroy {
         private authService: AuthService,
         private hubService: HubService,
         private route: ActivatedRoute,
-        private router: Router) { }
+        private router: Router,
+        public formsService: HubFormsService) { }
 
     ngOnInit() {
         try {
@@ -127,7 +137,7 @@ export class FilesBulkLoadComponent implements OnInit, OnDestroy {
 
     public doUpload(files) {
         Array.prototype.forEach.call(files, file => {
-            this.hubService.bulkUploadFiles(this.connection, file.name).then(result => {
+            this.hubService.bulkUploadFiles(this.connectionKey, this.fileFormatKey, this.formatType, file.name).then(result => {
                 let url = result.url;
                 this.reference = result.reference;
 
@@ -146,9 +156,97 @@ export class FilesBulkLoadComponent implements OnInit, OnDestroy {
         });
     }
 
-    public saveTables(items: DexihTable[]) {
-        items.forEach(async table => {
-            await this.hubService.saveTable(table);
+    public editTable(table: DexihTable) {
+        this.currentTable = table;
+        this.formsService.table(table);
+        this.router.navigate(['table-edit'], { relativeTo: this.route });
+    }
+
+    public applyChanges() {
+        if (this.formsService.hasChanged) {
+            let table = this.formsService.currentForm.value;
+            Object.assign(this.currentTable, table);
+        }
+        this.currentTable = null;
+        this.authService.navigateUp();
+    }
+
+    public cancel() {
+        this.currentTable = null;
+        this.authService.navigateUp();
+    }
+
+    public async saveTables(items: DexihTable[]): Promise<number[]> {
+        let newTables = Object.assign([], this.tables);
+        let keys: number[] = [];
+        for (let i = 0; i < items.length; i++ ) {
+            let table = items[i];
+            let savedTable = await this.hubService.saveTable(table);
+
+            keys.push(savedTable.key);
+
+            // after table is saved, remove from unsaved list.
+            let index = this.tables.findIndex(t => table.key === t.key);
+            newTables.splice(index, 1);
+        };
+
+        this.tables = newTables;
+        return keys;
+    }
+
+    public async createDatalinks(items: DexihTable[]) {
+        let keys = await this.saveTables(items);
+        let tableKeys = keys.join('|');
+        this.router.navigate(['/hub', this.hubCache.hub.hubKey, 'tables', 'datalink-new', tableKeys, 0],
+            { relativeTo: this.route.root });
+    }
+
+
+    public uploadSelected(items: Array<FileHandler>) {
+        items.forEach(item => {
+            this.authService.upload(item).then(status => {
+                this.hubService.addHubMessage(status);
+            }).catch(reason => {
+                this.hubService.addHubMessage(reason);
+            });
         });
     }
+
+    public removeSelected(items: Array<FileHandler>) {
+        items.forEach(item => {
+            let index = this.uploadedFiles.findIndex(c => c.id === item.id);
+            if (index >= 0) {
+                this.uploadedFiles.splice(index, 1);
+            }
+        });
+    }
+
+    public cancelSelected(items: Array<FileHandler>) {
+        items.forEach(item => item.cancel());
+    }
+
+    public canDeactivate(): Promise<boolean> {
+        return new Promise<boolean>((resolve) => {
+            if (this.tables.length > 0) {
+                this.authService.confirmDialog('Unsaved tables!',
+              'Table(s) have not been saved, this action will discard unsaved tables.  Do you want to discard the changes and exit?')
+              .then(() => {
+                  resolve(true);
+                }).catch(() => {
+                  resolve(false);
+                });
+          } else {
+            resolve(true);
+          }
+        });
+      }
+
+      // @HostListener allows is to guard against browser refresh, close, etc.
+      @HostListener('window:beforeunload', ['$event'])
+      unloadNotification($event: any) {
+        if (this.tables.length > 0) {
+          $event.returnValue =
+            'Table(s) have not been saved, this action will discard unsaved tables.  Do you want to discard the changes and exit?';
+        }
+      }
 }

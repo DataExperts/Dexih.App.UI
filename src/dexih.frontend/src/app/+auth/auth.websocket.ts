@@ -13,6 +13,7 @@ export class AuthWebSocket implements OnDestroy {
     public _webSocketMessages = new BehaviorSubject<RemoteMessage>(null);
     private _connectionId: string;
 
+    private startingWebSocket = false;
 
     private logger = new LogFactory('Auth.Websocket');
 
@@ -75,29 +76,41 @@ export class AuthWebSocket implements OnDestroy {
     }
 
     private startWebSocket(): Promise<void> {
-        return new Promise<void>(async (resolve, reject) => {
-            if (this.hubConnection.state === HubConnectionState.Connected) {
-                resolve();
-                return;
-            }
+        if (!this.startingWebSocket) {
+            this.startingWebSocket = true;
 
-            this.hubConnection.start().then(() => {
-                this._webSocketStatus.next('Connected');
-                this.hubConnected.next(true);
-                this.sendConnect().then(() => {
+            return new Promise<void>(async (resolve, reject) => {
+                if (this.hubConnection.state === HubConnectionState.Connected) {
                     resolve();
-                    this.logger.LogC(() => `startWebSocket: Hub started.`, eLogLevel.Debug);
-                }).catch(reason => reject(reason));
-            })
-                .catch(err => {
-                    this._webSocketStatus.next(`${err}.  Check your network connection.`);
-                    this.sendDisconnect();
-                    this.hubConnected.next(false);
-                    this.logger.LogC(() => `startWebSocket: Hub start failed ${err}.`, eLogLevel.Debug);
-                    setTimeout(() => this.startWebSocket(), 5000);
-                    resolve();
-                });
-        });
+                    this.startingWebSocket = false;
+                    return;
+                }
+
+                this.hubConnection.start().then(() => {
+                    this._webSocketStatus.next('Connected');
+                    this.hubConnected.next(true);
+                    this.sendConnect().then(() => {
+                        resolve();
+                        this.logger.LogC(() => `startWebSocket: Hub started.`, eLogLevel.Debug);
+                        this.startingWebSocket = false;
+                    }).catch(reason => {
+                        reject(reason);
+                        this.startingWebSocket = false;
+                    });
+                })
+                    .catch(err => {
+                        this._webSocketStatus.next(`${err}.  Check your network connection.`);
+                        this.sendDisconnect();
+                        this.hubConnected.next(false);
+                        this.logger.LogC(() => `startWebSocket: Hub start failed ${err}.`, eLogLevel.Debug);
+                        setTimeout(() => {
+                            this.startingWebSocket = false;
+                            this.startWebSocket();
+                        }, 5000);
+                        resolve();
+                    });
+            });
+        }
     }
 
     private sendDisconnect() {

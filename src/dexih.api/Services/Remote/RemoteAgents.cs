@@ -16,6 +16,7 @@ using Dexih.Utils.Crypto;
 using dexih.functions.Query;
 using dexih.remote.operations;
 using dexih.transforms;
+using Dexih.Utils.DataType;
 using Dexih.Utils.ManagedTasks;
 using Dexih.Utils.MessageHelpers;
 using static dexih.operations.DownloadData;
@@ -763,7 +764,16 @@ namespace dexih.api.Services.Remote
 		    }
 	    }
 	    
-	    public async Task<(string url, string reference)> BulkUploadFiles(string id, long hubKey, string connectionId, long connectionKey, string fileName, DownloadUrl downloadUrl, RepositoryManager database)
+	    public async Task<(string url, string reference)> BulkUploadFiles(
+		    string id, 
+		    long hubKey, 
+		    string connectionId, 
+		    long connectionKey, 
+		    long fileFormatKey, 
+		    DataType.ETypeCode formatType, 
+		    string fileName, 
+		    DownloadUrl downloadUrl, 
+		    RepositoryManager database)
 	    {
 		    try
 		    {
@@ -773,12 +783,16 @@ namespace dexih.api.Services.Remote
 
 			    var cache = new CacheManager(hubKey, hub.EncryptionKey);
 			    cache.AddConnections(new[] { connectionKey }, false, hub);
+			    cache.AddFileFormats(new[] {fileFormatKey}, hub);
 
 			    var value = new
 			    {
 				    cache,
 				    downloadUrl,
-				    connectionId
+				    connectionId,
+				    connectionKey,
+				    fileFormatKey,
+				    formatType
 			    };
 
 			    var parameters = new[]

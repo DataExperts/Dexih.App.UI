@@ -1,19 +1,11 @@
-<div class="list-group-item list-group-item-info rounded-0">
-    <div class="d-flex flex-row">
-        <h5>Validation</h5>
-        <div class="ml-auto">
-        </div>
-    </div>
-</div>
-
-
-<div class="list-group-item" *ngIf="!datalinkTransformForm">
+<dexih-widget-section title='Validation' [showExpandButton]="true">
+<div *ngIf="!datalinkTransformForm">
     <h4>Target column validation is not currently enabled. </h4>
     <dexih-button *ngIf="!datalinkTransformForm" (click)="enableValidation()" buttonClass="btn btn-success" iconClass="fa fa-check"
         title="Enable the validation on the target table.">Enable Validation</dexih-button>
 </div>
 
-<div class="list-group-item" *ngIf="datalinkTransformForm">
+<div *ngIf="datalinkTransformForm">
 
     <form *ngIf="datalinkTransformForm" [formGroup]="datalinkTransformForm">
         <fieldset>
@@ -28,6 +20,7 @@
         </fieldset>
     </form>
 </div>
+</dexih-widget-section>
 
 <div class="list-group-item p-1">
 

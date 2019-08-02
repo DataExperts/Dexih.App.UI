@@ -5,15 +5,15 @@ export const logoUrl = 'assets/img/dexih/dex_logo_wide_raw.png';
 export const logoSmallUrl = 'assets/img/dexih/dexih_small.png';
 
 export class User {
-        public email: string;
-        public userName: string;
-        public password: string;
-        public rememberMe: boolean;
-        public firstName: string;
-        public lastName: string;
-        public terms: boolean;
-        public subscription: boolean;
-        public code: string;
+        public email: string = null;
+        public userName: string = null;
+        public password: string = null;
+        public rememberMe = false;
+        public firstName: string = null;
+        public lastName: string = null;
+        public terms = false;
+        public subscription = false;
+        public code: string = null;
         public emailConfirmed = false;
         public isInvited = false;
         public inviteQuota = 0;

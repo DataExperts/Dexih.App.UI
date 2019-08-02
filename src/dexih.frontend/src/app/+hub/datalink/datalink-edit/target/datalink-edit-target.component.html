@@ -1,10 +1,5 @@
-<div class="list-group-item list-group-item-info rounded-0">
-    <div class="d-flex flex-row">
-        <h5>Target Properties</h5>
-    </div>
-</div>
 
-<div class="container  mt-3 mb-3">
+<dexih-widget-section title="Target Load Rules" [showExpandButton]="true">
     <form *ngIf="datalinkForm" [formGroup]="datalinkForm">
         <fieldset>
             <form-checkbox label="Enable datalink to populate target tables"
@@ -53,14 +48,10 @@
             </span>
         </fieldset>
     </form>
-</div>
+</dexih-widget-section>
 
-<div class="list-group-item list-group-item-info">
-    <div class="d-flex flex-row">
-        <h5>Tables</h5>
-    </div>
-</div>
 
+<dexih-widget-section title="Tables" [showExpandButton]="true" [padding]="false">
 <dexih-table [enableMultiSelect]="true" [enableManualSort]="true" [enableSort]="false"
     [enableFilter]="false" (onSortChanged)="targetSortChange($event)" [columns]="targetTableColumns" [data]="targets"
     (rowClick)="editTable($event)">
@@ -78,5 +69,6 @@
     </ng-template>
 
 </dexih-table>
+</dexih-widget-section>
 
 <router-outlet></router-outlet>

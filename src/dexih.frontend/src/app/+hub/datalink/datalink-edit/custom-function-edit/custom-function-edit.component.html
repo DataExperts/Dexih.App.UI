@@ -1,43 +1,37 @@
 <div *ngIf="newDatalinkTransformItemForm && inputColumns && outputColumns">
 
-
-	<div class="list-group-item list-group-item-info rounded-0">
-		<div class="d-flex flex-row">
-			<h5>Edit Custom Function</h5>
-			<div class="ml-auto">
-				<dexih-button-validate class="mr-1" (click)="test()" text="Syntax Check"></dexih-button-validate>
-				<dexih-button-download class="mr-1" (click)="downloadCode()" text="Download Code"></dexih-button-download>
-				<dexih-button-apply [disabled]="newDatalinkTransformItemForm.pristine" (click)="!newDatalinkTransformItemForm.pristine && applyExit()"
-				 class="mr-1"></dexih-button-apply>
-				<dexih-button-cancel (click)="cancel()"></dexih-button-cancel>
-			</div>
-		</div>
-	</div>
-
-
-	<div class="container  mt-3 mb-3" *ngIf="datalinkTransformForm">
+	<dexih-widget-section *ngIf="datalinkTransformForm" title="Edit Custom Function" [showExpandButton]="true">
+		<ng-template #header>
+			<dexih-button-validate class="mr-1" (click)="test()" text="Syntax Check"></dexih-button-validate>
+			<dexih-button-download class="mr-1" (click)="downloadCode()" text="Download Code"></dexih-button-download>
+			<dexih-button-apply [disabled]="newDatalinkTransformItemForm.pristine"
+				(click)="!newDatalinkTransformItemForm.pristine && applyExit()" class="mr-1"></dexih-button-apply>
+			<dexih-button-cancel (click)="cancel()"></dexih-button-cancel>
+		</ng-template>
 
 		<form *ngIf="newDatalinkTransformItemForm" [formGroup]="newDatalinkTransformItemForm">
 			<fieldset>
 				<div class="form-row">
-					<section *ngIf="functionType != eFunctionType.validation && functionType != eFunctionType.condition" class="col col-xs-4"
-					 [ngStyle]="{'z-index': 305, 'position': 'relative'}">
-						<form-select label="Action when null" formControlName="onNull" [items]="onNullActions" itemKey="key" itemName="name" iconClass="fa fa-database"
-						 [enableFilter]="false">
+					<section *ngIf="functionType != eFunctionType.validation && functionType != eFunctionType.condition"
+						class="col col-xs-4" [ngStyle]="{'z-index': 305, 'position': 'relative'}">
+						<form-select label="Action when null" formControlName="onNull" [items]="onNullActions"
+							itemKey="key" itemName="name" iconClass="fa fa-database" [enableFilter]="false">
 						</form-select>
 					</section>
 					<section class="col col-xs-4" [ngStyle]="{'z-index': 304, 'position': 'relative'}">
-						<form-select label="Action when error" formControlName="onError" [items]="onErrorActions" itemKey="key" itemName="name" iconClass="fa fa-database"
-						 [enableFilter]="false">
+						<form-select label="Action when error" formControlName="onError" [items]="onErrorActions"
+							itemKey="key" itemName="name" iconClass="fa fa-database" [enableFilter]="false">
 						</form-select>
 					</section>
-					<section *ngIf="selectedFunction && selectedFunction?.returnType == 'Boolean'" class="col col-xs-4" [ngStyle]="{'z-index': 303, 'position': 'relative'}">
+					<section *ngIf="selectedFunction && selectedFunction?.returnType == 'Boolean'" class="col col-xs-4"
+						[ngStyle]="{'z-index': 303, 'position': 'relative'}">
 						<form-checkbox label="Return 'NOT' result" formControlName="notCondition">
 						</form-checkbox>
 					</section>
-					<div *ngIf="functionType == eFunctionType.Validation" class="col col-xs-4" [ngStyle]="{'z-index': 302, 'position': 'relative'}">
-						<form-select label="Action when false" formControlName="invalidAction" [items]="invalidActions" itemKey="key" itemName="name"
-						 iconClass="fa fa-database" [enableFilter]="false">
+					<div *ngIf="functionType == eFunctionType.Validation" class="col col-xs-4"
+						[ngStyle]="{'z-index': 302, 'position': 'relative'}">
+						<form-select label="Action when false" formControlName="invalidAction" [items]="invalidActions"
+							itemKey="key" itemName="name" iconClass="fa fa-database" [enableFilter]="false">
 						</form-select>
 					</div>
 				</div>
@@ -46,13 +40,19 @@
 						Input Parameters
 					</div>
 					<div *ngIf="inputParameters.length === 0" class="mb-1">
-						<dexih-button (click)="addParameter(null, eParameterDirection.Input)" iconClass="fa fa-plus-square-o" title="Click to add a parameter">Add Parameter
+						<dexih-button (click)="addParameter(null, eParameterDirection.Input)"
+							iconClass="fa fa-plus-square-o" title="Click to add a parameter">Add Parameter
 						</dexih-button>
 					</div>
-					<div *ngFor="let inputParameter of inputParameters; let i = index" class="pl-2" [ngStyle]="{'z-index': 200-i, 'position': 'relative'}">
-						<input-parameter [allowNameSelect]="true" [allowDataTypeSelect]="true" [inputParameterForms]="[inputParameter]" [inputColumns]="inputColumns" [nodeDatalinkColumnKey]="datalinkTransformForm.controls.nodeDatalinkColumn.value?.key"
-						 (hasChanged)="parameterHasChanged($event)" [updateParameterName]="true" (addParameter)="addParameter($event, eParameterDirection.Input)"
-						 (removeParameter)="removeParameter($event)" [allowAdd]="true" [allowRemove]="true"></input-parameter>
+					<div *ngFor="let inputParameter of inputParameters; let i = index" class="pl-2"
+						[ngStyle]="{'z-index': 200-i, 'position': 'relative'}">
+						<input-parameter [allowNameSelect]="true" [allowDataTypeSelect]="true"
+							[inputParameterForms]="[inputParameter]" [inputColumns]="inputColumns"
+							[nodeDatalinkColumnKey]="datalinkTransformForm.controls.nodeDatalinkColumn.value?.key"
+							(hasChanged)="parameterHasChanged($event)" [updateParameterName]="true"
+							(addParameter)="addParameter($event, eParameterDirection.Input)"
+							(removeParameter)="removeParameter($event)" [allowAdd]="true" [allowRemove]="true">
+						</input-parameter>
 					</div>
 				</div>
 				<div *ngIf="functionType != eFunctionType.Condition && functionType != eFunctionType.JoinCondition">
@@ -60,54 +60,63 @@
 						Output Parameters
 					</div>
 					<div [ngStyle]="{'z-index': 101, 'position': 'relative'}">
-						<output-parameter [allowNameSelect]="false" [allowDataTypeSelect]="true" [outputParameterForm]="returnParameterForm" [outputColumns]="outputColumns"
-						 (addParameter)="addParameter($event, eParameterDirection.Output)"></output-parameter>
+						<output-parameter [allowNameSelect]="false" [allowDataTypeSelect]="true"
+							[outputParameterForm]="returnParameterForm" [outputColumns]="outputColumns"
+							(addParameter)="addParameter($event, eParameterDirection.Output)"></output-parameter>
 					</div>
 					<div *ngIf="outputParameters.length === 0">
-						<dexih-button (click)="addParameter(null, eParameterDirection.Output)" iconClass="fa fa-plus-square-o" title="Click to add a parameter">Add Parameter</dexih-button>
+						<dexih-button (click)="addParameter(null, eParameterDirection.Output)"
+							iconClass="fa fa-plus-square-o" title="Click to add a parameter">Add Parameter
+						</dexih-button>
 					</div>
-					<div *ngFor="let parameter of outputParameters; let i = index" [ngStyle]="{'z-index': 100-i, 'position': 'relative'}">
-						<output-parameter [allowNameSelect]="true" [allowDataTypeSelect]="true" [outputParameterForm]="parameter" [outputColumns]="outputColumns"
-						 [updateParameterName]="true" (addParameter)="addParameter($event, eParameterDirection.Output)" (removeParameter)="removeParameter($event)"
-						 [allowAdd]="true" [allowRemove]="true"></output-parameter>
+					<div *ngFor="let parameter of outputParameters; let i = index"
+						[ngStyle]="{'z-index': 100-i, 'position': 'relative'}">
+						<output-parameter [allowNameSelect]="true" [allowDataTypeSelect]="true"
+							[outputParameterForm]="parameter" [outputColumns]="outputColumns"
+							[updateParameterName]="true"
+							(addParameter)="addParameter($event, eParameterDirection.Output)"
+							(removeParameter)="removeParameter($event)" [allowAdd]="true" [allowRemove]="true">
+						</output-parameter>
 					</div>
 				</div>
 				Function Code
-				<textarea class='form-control' rows="20" width="100%" spellcheck="false" formControlName="functionCode"></textarea>
+				<textarea class='form-control' rows="20" width="100%" spellcheck="false"
+					formControlName="functionCode"></textarea>
 			</fieldset>
 		</form>
+	</dexih-widget-section>
 
 
-	</div>
 
-	<div class="list-group-item list-group-item-info rounded-0">
-		<div class="d-flex flex-row">
-			<h5>Test Function</h5>
-			<div class="ml-auto">
-				<button class="btn btn-success mr-1" (click)="test()">Syntax Check</button>
-				<button class="btn btn-success mr-1" (click)="test(inputParameterValues)">Run</button>
-				<button class="btn btn-success" (click)="downloadCode(inputParameterValues)">Download Code</button>
-			</div>
-		</div>
-	</div>
-	
-	<div class="container  mt-3 mb-3" *ngIf="newDatalinkTransformItemForm" >
+	<dexih-widget-section *ngIf="datalinkTransformForm && newDatalinkTransformItemForm" title="Test Function"
+		[showExpandButton]="true">
+		<ng-template #header>
+			<button class="btn btn-success mr-1" (click)="test()">Syntax Check</button>
+			<button class="btn btn-success mr-1" (click)="test(inputParameterValues)">Run</button>
+			<button class="btn btn-success" (click)="downloadCode(inputParameterValues)">Download Code</button>
+		</ng-template>
+
 		<form>
-					<div class="label">
-						Input Parameters
-					</div>
-					<div *ngFor="let inputParameter of inputParameters; let i = index" [ngStyle]="{'z-index': 200-i, 'position': 'relative'}">
-						<form-input [label]="inputParameter.controls.name.value" [(ngModel)]="inputParameterValues[i]" [name]="'inputParameterValues' + i"
-						 type="text" placeholder="Enter a test value for the parameter"></form-input>
-					</div>
-					<form-input label="Return Value" [disabled]="true" [(ngModel)]="returnParameterValue" name="returnParameterValue" type="text"></form-input>
-					<div class="label" *ngIf="outputParameters.length > 0">
-						Outputs Parameters
-					</div>
-					<div *ngFor="let outputParameter of outputParameters; let i = index" [ngStyle]="{'z-index': 200-i, 'position': 'relative'}">
-						<form-input [disabled]="true" [label]="outputParameter.controls.name.value" [(ngModel)]="outputParameterValues[i]"
-						 [name]="'outputParameterValues' + i" type="text"></form-input>
-					</div>
+			<div class="label">
+				Input Parameters
+			</div>
+			<div *ngFor="let inputParameter of inputParameters; let i = index"
+				[ngStyle]="{'z-index': 200-i, 'position': 'relative'}">
+				<form-input [label]="inputParameter.controls.name.value" [(ngModel)]="inputParameterValues[i]"
+					[name]="'inputParameterValues' + i" type="text" placeholder="Enter a test value for the parameter">
+				</form-input>
+			</div>
+			<form-input label="Return Value" [disabled]="true" [(ngModel)]="returnParameterValue"
+				name="returnParameterValue" type="text"></form-input>
+			<div class="label" *ngIf="outputParameters.length > 0">
+				Outputs Parameters
+			</div>
+			<div *ngFor="let outputParameter of outputParameters; let i = index"
+				[ngStyle]="{'z-index': 200-i, 'position': 'relative'}">
+				<form-input [disabled]="true" [label]="outputParameter.controls.name.value"
+					[(ngModel)]="outputParameterValues[i]" [name]="'outputParameterValues' + i" type="text">
+				</form-input>
+			</div>
 		</form>
-	</div>
+	</dexih-widget-section>
 </div>

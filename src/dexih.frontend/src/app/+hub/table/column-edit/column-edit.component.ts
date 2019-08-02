@@ -54,6 +54,8 @@ export class ColumnEditComponent implements OnInit, OnChanges, OnDestroy {
             if (hubCache.status === eCacheStatus.Loaded) {
                 this.hubCache = hubCache;
 
+                if (!this.hubCache.isLoaded() || !this.tableForm) { return; }
+
                 this.initializeForm();
 
                 this.updateColumns();

@@ -95,7 +95,7 @@ export class AuthService implements OnDestroy {
                                 break;
                             case 'connect':
                                 this.refreshGlobalCache();
-                                this.refreshUser();
+                                // this.refreshUser();
                                 this.pingRemoteAgents();
                                 break;
                             case 'remoteAgent-update': {
@@ -650,7 +650,16 @@ export class AuthService implements OnDestroy {
                     resolve(true);
                 }, error => {
                     this.logger.LogC(() => `downloadFile error:${error.message}`, eLogLevel.Error);
-                    reject(error);
+                    if (error.error) {
+                        let reader = new FileReader();
+                        reader.readAsText(error.error);
+                        reader.onload = function() {
+                            let message = JSON.parse(reader.result.toString());
+                            reject(message);
+                          }
+                    } else {
+                        reject(error);
+                    }
                 });
         });
     }
@@ -662,7 +671,16 @@ export class AuthService implements OnDestroy {
         return new Promise<User>((resolve) => {
             this.post('/api/Account/GetUser', null, 'Refreshing user details...').then(result => {
                 let previousUser = this._currentUser.value;
-                if (!previousUser || result.value.email !== previousUser.email) {
+                if (!previousUser || (
+                     result.value.email !== previousUser.email &&
+                     result.value.email !== previousUser.firstName &&
+                     result.value.email !== previousUser.lastName &&
+                     result.value.email !== previousUser.isAdmin &&
+                     result.value.email !== previousUser.isInvited &&
+                     result.value.email !== previousUser.rememberMe &&
+                     result.value.email !== previousUser.subscription &&
+                     result.value.email !== previousUser.terms
+                     )) {
                     this._currentUser.next(result.value);
                 }
                 resolve(result.value);

@@ -1,15 +1,8 @@
-<div class="list-group-item list-group-item-info rounded-0">
-	<div class="d-flex flex-form-row">
-		<h5>Edit Trigger</h5>
-		<div class="ml-auto">
+<dexih-widget-section *ngIf="triggerFormService.currentForm" title="Edit Trigger" [showExpandButton]="false" >
+	<ng-template #header>
 			<dexih-button-apply [disabled]="!triggerFormService.hasChanged" class="mr-1" (click)="applyExit()"></dexih-button-apply>
 			<dexih-button-cancel (click)="cancel()"></dexih-button-cancel>
-		</div>
-	</div>
-</div>
-
-
-<div class="list-group-item" *ngIf="triggerFormService.currentForm">
+	</ng-template>
 	<form  [formGroup]="triggerFormService.currentForm">
 		<fieldset>
 			<div class="form-row">
@@ -46,4 +39,4 @@
 		</div>
 		</fieldset>
 	</form>
-</div>
+</dexih-widget-section>

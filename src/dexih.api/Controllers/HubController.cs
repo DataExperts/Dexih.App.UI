@@ -904,7 +904,7 @@ namespace dexih.api.Controllers
 
 		    var repositoryManager = _operations.RepositoryManager;
 	    
-		    var result = await _remoteAgents.BulkUploadFiles(bulkUploadFiles.RemoteAgentId, bulkUploadFiles.HubKey, bulkUploadFiles.ConnectionId, bulkUploadFiles.ConnectionKey, bulkUploadFiles.FileName, bulkUploadFiles.DownloadUrl, _operations.RepositoryManager);
+		    var result = await _remoteAgents.BulkUploadFiles(bulkUploadFiles.RemoteAgentId, bulkUploadFiles.HubKey, bulkUploadFiles.ConnectionId, bulkUploadFiles.ConnectionKey, bulkUploadFiles.FileFormatKey, bulkUploadFiles.FormatType, bulkUploadFiles.FileName, bulkUploadFiles.DownloadUrl, _operations.RepositoryManager);
 		    return new BulkUploadFilesReturn() {Reference = result.reference, Url = result.url};
 	    }
 	    
@@ -1131,9 +1131,10 @@ namespace dexih.api.Controllers
 		    if (downloadFunctionCode.TestValues != null)
 		    {
 			    // inputs = new Parameter[downloadFunctionCode.TestValues.Length];
-			    foreach (var functionParam in downloadFunctionCode.DatalinkTransformItem.DexihFunctionParameters.Where(
-				    c =>
-					    c.Direction == DexihParameterBase.EParameterDirection.Input).OrderBy(c => c.Position))
+			    foreach (var functionParam in downloadFunctionCode.DatalinkTransformItem.DexihFunctionParameters
+				    .Where(
+					    c =>
+						    c.Direction == DexihParameterBase.EParameterDirection.Input).OrderBy(c => c.Position))
 			    {
 				    if (index > downloadFunctionCode.TestValues.Length)
 				    {
@@ -1149,11 +1150,12 @@ namespace dexih.api.Controllers
 
 				    index++;
 			    }
-			    
+
 			    //TODO Download function code needs more functionality around arrays and output parameters.
 
-			    var returnParam = downloadFunctionCode.DatalinkTransformItem.DexihFunctionParameters.SingleOrDefault(c =>
-				    c.Direction == DexihParameterBase.EParameterDirection.ReturnValue);
+			    var returnParam =
+				    downloadFunctionCode.DatalinkTransformItem.DexihFunctionParameters.SingleOrDefault(c =>
+					    c.Direction == DexihParameterBase.EParameterDirection.ReturnValue);
 
 			    if (returnParam != null)
 			    {

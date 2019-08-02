@@ -1,9 +1,4 @@
-<div class="list-group-item list-group-item-info  rounded-0">
-    <div class="d-flex flex-row">
-        <h5>File Properties</h5>
-    </div>
-</div>
-<div class="container mt-3 mb-3">
+<dexih-widget-section title='File Properties' [showExpandButton]="true" [padding]="false">
 
     <form *ngIf="formService?.currentForm" [formGroup]="formService.currentForm">
         <section>
@@ -98,4 +93,4 @@
             </section>
         </section>
     </form>
-</div>
+</dexih-widget-section>

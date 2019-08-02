@@ -4,38 +4,43 @@
         <hr>
         <div>
             <a class="btn btn-sm btn-primary text-white" routerLink="/hub/{{hubCache.hub.hubKey}}/connections/connection-new/Source" [title]="">New Connection</a>
-            <a *ngFor="let connection of fileConnections" class="ml-1 btn btn-sm btn-primary text-white" routerLink="/hub/{{hubCache.hub.hubKey}}/connections/tables/table-new/{{connection.key}}" [title]="">New File ({{connection.name}})</a>
         </div>
     </div>
 </section>
 
 <div *ngIf="fileConnections && fileConnections.length > 0" class="container">
-    <dexih-widget [title]="'Bulk load files for: ' + connection?.name" iconClass="fa fa-lg fa-fw fa-table" [showCloseButton]="true" (close)="close()">
+    <dexih-widget *ngIf="!currentTable" [title]="'Bulk load files for: ' + connection?.name" iconClass="fa fa-lg fa-fw fa-files-o" [showCloseButton]="true" (close)="close()">
         <ng-template #header>
-            <dexih-button-dropdown buttonClass="btn-sm btn-outline-primary mr-1" iconClass="fa fa-notepad" text="New File">
-                    <a *ngFor="let connection of fileConnections" class="dropdown-item" routerLink="/hub/{{hubCache.hub.hubKey}}/files/files-bulk-load/{{connection.key}}" [title]="">{{connection.name}}</a>
-            </dexih-button-dropdown>
+            <a class="btn btn-sm btn-primary mr-1" routerLink="/hub/{{hubCache.hub.hubKey}}/connections/connection-new/Source" [title]="">New Connection</a>
         </ng-template>
 
-        <!-- <section>
-            <form-select label="Format Type" formControlName="formatType" [items]="formatTypes" itemKey="key" itemName="name" iconClass="fa fa-database"
-                note='The format of data.'>
-            </form-select>
-        </section>
+        <div class="m-3">
+            <section>
+                <form-select label="File Connection" [(ngModel)]="connectionKey" [items]="fileConnections" itemKey="key"
+                    itemName="name" iconClass="fa fa-database" note='The connection to use.'>
+                </form-select>
+            </section>
 
-        <section *ngIf="formService.currentForm.value.formatType == eTypeCode.Text">    
-            <form-select label="File Format" formControlName="fileFormatKey" placeholder="File Format" [errors]="formService.formErrors.fileFormatKey"
-                [items]="hubCache.hub.dexihFileFormats" itemKey="key" itemName="name" [enableFilter]="false" note="Specify the file format to use, if not specified, a csv (command separated) format will be used."
-                [allowNullSelect]="true" selectNullMessage="Use default (csv) format">
-                <a routerLink="fileFormat-new">(<i class="fa fa-sticky-note-o"></i> Create New Format )</a>
-            </form-select>
-        </section> -->
+            <div class="form-row">
+                <section class="col-md-6">
+                    <form-select label="Format Type" [(ngModel)]="formatType" [items]="formatTypes" itemKey="key"
+                        itemName="name" iconClass="fa fa-text" note='The format of data.'>
+                    </form-select>
+                </section>
+
+                <section class="col-md-6" *ngIf="formatType == eTypeCode.Text">
+                    <form-select label="File Format" [(ngModel)]="fileFormatKey" placeholder="File Format"
+                        [items]="hubCache.hub.dexihFileFormats" itemKey="key" itemName="name" [enableFilter]="false"
+                        note="Specify the file format to use, if not specified, a csv (command separated) format will be used."
+                        [allowNullSelect]="true" selectNullMessage="Use default (csv) format">
+                        <a routerLink="/hub/{{hubCache.hub.hubKey}}/fileFormats/fileFormat-new">(<i class="fa fa-sticky-note-o"></i> Create New Format )</a>
+                    </form-select>
+                </section>
+            </div>
+        </div>
 
         <ul *ngIf="connection" class="list-group">
-            <li class="list-group-item list-group-item-info rounded-0">
-                <h5>Drop Files to Load</h5>
-            </li>
-            <li class="list-group-item ">
+            <dexih-widget-section title='Drop Files to Load' [showExpandButton]="true">
                 <div class="well my-drop-zone" dropZone [requireFiles]="true" (dropFiles)="filesDrop($event)" dropAllowedClass="nv-file-over">
                     Drop Files to Load Here
                     <div class="custom-file w-25 float-right">
@@ -43,11 +48,9 @@
                         <label class="custom-file-label" for="inputGroupFile01">Choose files</label>
                     </div>
                 </div>
-            </li>
-            <li class="list-group-item list-group-item-info  rounded-0">
-                <h5>Upload Queue</h5>
-            </li>
-            <li class="list-group-item p-0">
+            </dexih-widget-section>
+
+            <dexih-widget-section title='Upload Queues' [showExpandButton]="true" [padding]="false">
                 <dexih-table [enableMultiSelect]="true" [columns]="uploadColumns" [data]="uploadedFiles">
 
                     <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
@@ -64,26 +67,34 @@
                         <div *ngIf="item.isRunning()" class="progress" style="margin-bottom: 0;">
                             <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
                         </div>
-                        <span >
+                        <span>
                             <i class='fa' [ngClass]="{
                                 'fa-check': item.status === eFileStatus.Complete, 
                                 'fa-exclamation-circle': item.status === eFileStatus.Error,
                                 'fa-ban': item.status === eFileStatus.Cancelled}"></i>{{item.status}}</span>
                     </ng-template>
-                </dexih-table>
-            </li>
-            <li class="list-group-item list-group-item-info  rounded-0">
-                <h5>Tables Created</h5>
-            </li>
-            <li class="list-group-item p-0">
-                <dexih-table [enableMultiSelect]="true" [columns]="tableColumns" [data]="tables">
+                </dexih-table>            
+            </dexih-widget-section>
+    
+            <dexih-widget-section title='Tables Created' [showExpandButton]="true" [padding]="false">
+                <dexih-table [enableMultiSelect]="true" [columns]="tableColumns" [data]="tables" (rowClick)="editTable($event)">
 
-                    <ng-template #actions let-items="items">
-                        <dexih-button-save (click)="saveTables(items)"></dexih-button-save>
+                    <ng-template select="selectedItemsAction" #selectedItemsAction let-items="items">
+                        <dexih-button-save class="ml-1"  (click)="saveTables(items)" title="Save the selected tables."></dexih-button-save>
+                        <dexih-button-delete class="ml-1"  (click)="discardTables(items)" title="Discard the selected tables." text="Discard"></dexih-button-delete>
+                        <dexih-button class="ml-1" (click)="createDatalinks(items)" title="Save the selected tables, and create datalinks to load them into a staging area.">Create Datalinks</dexih-button>
                     </ng-template>
     
                 </dexih-table>
-            </li>
+            </dexih-widget-section>
         </ul>
+    </dexih-widget>
+
+    <dexih-widget *ngIf="currentTable" [title]="'Edit table: ' + formsService.currentForm.controls.name.value" [showCloseButton]="true" (close)="closeTable()">
+        <ng-template #header>
+            <a class="btn btn-sm btn-outline-primary mr-1" (click)="applyChanges()">Apply Changes</a>
+            <a class="btn btn-sm btn-outline-danger mr-1" (click)="cancel()">Cancel</a>
+        </ng-template>
+        <router-outlet></router-outlet>
     </dexih-widget>
 </div>

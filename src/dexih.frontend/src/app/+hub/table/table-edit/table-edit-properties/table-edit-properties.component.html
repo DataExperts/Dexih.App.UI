@@ -1,10 +1,4 @@
-<div class="list-group-item list-group-item-info  rounded-0">
-    <div class="d-flex flex-row">
-        <h5>Table Properties</h5>
-    </div>
-</div>
-<div >
-    <div class="container  mt-3 mb-3">
+<dexih-widget-section title='Properties' [showExpandButton]="true" >
         <form *ngIf="mainForm" [formGroup]="mainForm">
             <fieldset>
                 <section>
@@ -85,13 +79,12 @@
 
             </fieldset>
         </form>
-    </div>
+</dexih-widget-section>
 
-    <div *ngIf="connectionReference?.connectionCategory == eConnectionCategory.WebService">
-        <dexih-table-edit-rest [formService]='formsService' [connection]='connection' (onTableChanged)="onTableChanged($event)"></dexih-table-edit-rest>
-    </div>
+<div *ngIf="connectionReference?.connectionCategory == eConnectionCategory.WebService">
+    <dexih-table-edit-rest [formService]='formsService' [connection]='connection' (onTableChanged)="onTableChanged($event)"></dexih-table-edit-rest>
+</div>
 
-    <div *ngIf="connectionReference?.connectionCategory == eConnectionCategory.File">
-        <dexih-table-edit-file [formService]='formsService' [connection]='connection' (onTableChanged)="onTableChanged($event)"></dexih-table-edit-file>
-    </div>
+<div *ngIf="connectionReference?.connectionCategory == eConnectionCategory.File">
+    <dexih-table-edit-file [formService]='formsService' [connection]='connection' (onTableChanged)="onTableChanged($event)"></dexih-table-edit-file>
 </div>

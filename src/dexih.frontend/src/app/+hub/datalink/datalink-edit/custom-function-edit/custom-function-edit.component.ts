@@ -303,7 +303,7 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
   }
 
   downloadCode(parameters = null) {
-    this.hubService.downloadCustomFunction(this.newDatalinkTransformItemForm.value, parameters);
+    this.hubService.downloadCustomFunction(this.newDatalinkTransformItemForm.value, parameters).catch(reason => {});
   }
 
   test(parameters = null) {

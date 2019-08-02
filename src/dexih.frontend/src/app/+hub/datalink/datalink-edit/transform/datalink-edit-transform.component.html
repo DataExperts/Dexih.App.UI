@@ -1,10 +1,5 @@
-<div class="list-group-item list-group-item-info  rounded-0">
-        <div class="d-flex flex-row">
-            <h5>Properties</h5>
-    </div>
-</div>  
 
-<div class="container  mt-3 mb-3">
+<dexih-widget-section title="Properties" [showExpandButton]="true">
 <form *ngIf="datalinkTransformForm"  [formGroup]="datalinkTransformForm">
         <fieldset>
             <section>
@@ -90,7 +85,7 @@
             </section>
         </fieldset>
     </form>
-</div>
+</dexih-widget-section>
 
 <div class="list-group-item p-1">
 

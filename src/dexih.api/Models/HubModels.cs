@@ -3,6 +3,7 @@ using dexih.repository;
 using dexih.functions;
 using dexih.functions.Query;
 using Dexih.Utils.Crypto;
+using Dexih.Utils.DataType;
 using static dexih.operations.DownloadData;
 
 namespace dexih.api.Models
@@ -166,6 +167,8 @@ namespace dexih.api.Models
         public long HubKey { get; set; }
         public string RemoteAgentId { get; set; }
         public long ConnectionKey { get; set; }
+        public long FileFormatKey { get; set; }
+        public DataType.ETypeCode FormatType { get; set; }
         public string FileName { get; set; }
         public DownloadUrl DownloadUrl { get; set; }
         public string ConnectionId { get; set; }

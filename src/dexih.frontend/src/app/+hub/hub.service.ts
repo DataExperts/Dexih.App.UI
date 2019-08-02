@@ -2854,7 +2854,7 @@ export class HubService implements OnInit, OnDestroy {
         });
     }
 
-    bulkUploadFiles(connection: DexihConnection, fileName: string):
+    bulkUploadFiles(connectionKey: number, fileFormatKey: number, formatType: eTypeCode , fileName: string):
     Promise<{url: string, reference: string}> {
         return new Promise<{url: string, reference: string}>((resolve, reject) => {
             if (!this._remoteAgent.value) {
@@ -2864,10 +2864,12 @@ export class HubService implements OnInit, OnDestroy {
                 return;
             }
             this.authService.getDownloadUrl(this._remoteAgent.value).then(downloadUrl => {
-                    this.authService.post('/api/Hub/BulkUploadFiles', {
+                this.authService.post('/api/Hub/BulkUploadFiles', {
                     hubKey: this._hubCache.value.hub.hubKey,
                     connectionId: this.authService.getWebSocketConnectionId(),
-                    connectionKey: connection.key,
+                    connectionKey: connectionKey,
+                    fileFormatKey: fileFormatKey,
+                    formatType: formatType,
                     fileName: fileName,
                     remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
                     downloadUrl: downloadUrl

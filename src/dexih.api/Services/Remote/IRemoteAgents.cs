@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using dexih.api.Services.Operations;
 using dexih.transforms;
+using Dexih.Utils.DataType;
 using static dexih.operations.DownloadData;
 using Newtonsoft.Json.Linq;
 
@@ -34,7 +35,7 @@ namespace dexih.api.Services.Remote
 		Task<string> Decrypt(string instanceId, long hubKey, string value, RepositoryManager database);
 	    Task<string> UploadFile(string instanceId, long hubKey, long tableKey, string fileName, DownloadUrl downloadUrl, RepositoryManager database);
 
-	    Task<(string url, string reference)> BulkUploadFiles(string id, long hubKey, string connectionId, long connectionKey, string fileName,
+	    Task<(string url, string reference)> BulkUploadFiles(string id, long hubKey, string connectionId, long connectionKey, long fileFormatKey, DataType.ETypeCode formatType, string fileName,
 		    DownloadUrl downloadUrl, RepositoryManager database);
 	    Task<DexihTable[]> ImportTables(string instanceId, long hubKey, DexihTable[] hubTables,
 		    RepositoryManager repositoryManager);

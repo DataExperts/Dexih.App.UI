@@ -1,11 +1,4 @@
-
-<div class="list-group-item list-group-item-info  rounded-0">
-        <div class="d-flex flex-row">
-            <h5>Properties</h5>
-    </div>
-</div>  
-<div class="list-group-item p-3">
-
+<dexih-widget-section title="Properties" [showExpandButton]="true">
             <form *ngIf="mainForm"  [formGroup]="mainForm" >
             <fieldset>
                 <section>
@@ -25,7 +18,7 @@
                 </section>
 
                 <section >
-                    <form-select label="Audit Connection" formControlName="auditConnectionKey" [items]="this.hubCache?.getManagedConnections()" itemKey="key" itemName="name"
+                    <form-select label="Audit Connection" formControlName="auditConnectionKey" [items]="managedConnections" itemKey="key" itemName="name"
                             iconClass="fa fa-database" [errors]="formService.formErrors.auditConnectionKey" note='Specify the connection where audit data (such as job results) should be written to.'
                             [errors]="formService.formErrors.auditConnectionKey">
                     </form-select>
@@ -43,16 +36,10 @@
                 </section>
             </fieldset>
         </form>
-</div>
+</dexih-widget-section>
 
-<div class="list-group-item list-group-item-info  rounded-0">
-        <div class="d-flex flex-row">
-            <h5>Triggers</h5>
-    </div>
-</div>  
-<div class="list-group-item p-0">
-
-            <dexih-table 
+<dexih-widget-section title="Triggers" [showExpandButton]="true" [padding]="false">
+                <dexih-table 
                 [enableMultiSelect]="true"
                 [enableManualSort]="true"
                 sortColumn="position"
@@ -73,15 +60,9 @@
                     </ng-template>
                     
             </dexih-table>
-</div>
+</dexih-widget-section>
 
-<div class="list-group-item list-group-item-info  rounded-0">
-        <div class="d-flex flex-row">
-            <h5>Steps</h5>
-    </div>
-</div>  
-<div class="list-group-item p-0">
-
+<dexih-widget-section title="Steps" [showExpandButton]="true" [padding]="false">
             <dexih-table 
                 [enableMultiSelect]="true"
                 [enableManualSort]="true"
@@ -103,5 +84,5 @@
                         <dexih-button (click)="addDatalinkSteps()" iconClass="fa fa-plus-square" buttonClass="btn-primary" title="Select multiple datalinks to add as steps">Add</dexih-button>
                     </ng-template>                    
             </dexih-table>
-</div>
+</dexih-widget-section>
 
