@@ -93,9 +93,6 @@
     <None Update="Resources\RemoteAgents\dexih.remote.run.osx.sh">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\RemoteAgents\dexih.remote.run.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Resources\EmailTemplates\confirmEmail.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -36,8 +36,8 @@ Example (this will use prerelease versions of the remote agents):
 Welcome to Dexih - The Data Experts Information Hub
 ");
                 Console.WriteLine("This will launch an instance of a remote agent.");
-                var server = args.Length >= 1 ? args[0] : "https://dexih.dataexpertsgroup.com";
-                const string directory = "remote.binaries";
+                var server = args.Length >= 1 ? args[0] : "https://dexih.com";
+                const string directory = "dexih.remote";
                 const string os = "windows";
                 var pre = args.Length >=2 ? args[1] : "stable";
 
@@ -47,7 +47,6 @@ Welcome to Dexih - The Data Experts Information Hub
                 }
 
                 var previousVersion = "";
-
 
                 var upgrade = 20;
                 while (upgrade == 20)
@@ -80,7 +79,7 @@ Welcome to Dexih - The Data Experts Information Hub
                         latestUrl = versionInfo[2];
                     }
 
-                    var localVersionPath = Path.Combine(directory, "local_version.txt");
+                    var localVersionPath = Path.Combine(directory, "dexih.remote.version");
                     if (File.Exists(localVersionPath))
                     {
                         localVersion = File.ReadAllText(localVersionPath);
@@ -146,42 +145,27 @@ Welcome to Dexih - The Data Experts Information Hub
                             }
                         }
 
+                        var tempDirectory = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+                        var backupDirectory = "dexih_remote_" + DateTime.Now.ToString("yyyyMMddHHmmssmi");
+
                         Console.WriteLine();
-                        Console.WriteLine("Extracting latest binaries...");
+                        Console.WriteLine("Extracting files to temp directory at " + tempDirectory);
 
-                        // backup the appsettings.
-                        if(File.Exists((Path.Combine(directory, "appsettings.json"))))
-                        {
-                            File.Move(Path.Combine(directory, "appsettings.json"), "appsettings.json");
-                        }
-
-                        // backup the pfx files.
-                        var pfxFiles = Directory.GetFiles(directory, "*.pfx");
-                        foreach(var pfxFile in pfxFiles)
-                        {
-                            File.Move(Path.Combine(directory, pfxFile), pfxFile);
-                        }
+                        Directory.CreateDirectory(tempDirectory);
+                        ZipFile.ExtractToDirectory(latestBinary, tempDirectory);
 
                         // remove the old directory
                         if (Directory.Exists(directory))
                         {
-                            Directory.Delete(directory, true);
+                            Directory.Move(directory, backupDirectory);
+                            Console.WriteLine();
+                            Console.WriteLine("Previous version backed up to " + backupDirectory);
                         }
 
-                        ZipFile.ExtractToDirectory(latestBinary, directory);
+                        Directory.Move(tempDirectory, directory);
                         File.Delete(latestBinary);
 
-                        File.WriteAllText(Path.Combine(directory, "local_version.txt"), latestVersion);
-
-                        if (File.Exists("appsettings.json"))
-                        {
-                            File.Copy("appsettings.json", Path.Combine(directory, "appsettings.json"), true);
-                        }
-
-                        foreach(var pfxFile in pfxFiles)
-                        {
-                            File.Copy(pfxFile, Path.Combine(directory, pfxFile));
-                        }
+                        File.WriteAllText(Path.Combine(directory, "dexih.remote.version"), latestVersion);
 
                         previousVersion = latestVersion;
                     }
