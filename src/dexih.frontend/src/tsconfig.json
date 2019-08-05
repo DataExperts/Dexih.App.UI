@@ -16,7 +16,7 @@
     ]
   },
   "angularCompilerOptions": {
-    "enableIvy": false
+    "enableIvy": true
   },
   "exclude": [ "node_modules", "platforms" ]
 

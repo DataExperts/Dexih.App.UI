@@ -419,13 +419,19 @@ export class AuthService implements OnDestroy {
                     }
                 }, error => {
                     this.removeWaitMessage(messageKey);
-                    this.logger.LogC(() =>
-                        `post warning error:${error}`, eLogLevel.Error);
-                    if (error.status === 504) {
-                        reject(new Message(false, 'The Information Hub API could not be reached.', null, null));
+
+                    if (error.error) {
+                        reject(error.error);
+                    } else {
+                        this.removeWaitMessage(messageKey);
+                        this.logger.LogC(() =>
+                            `post warning error:${error}`, eLogLevel.Error);
+                        if (error.status === 504) {
+                            reject(new Message(false, 'The Information Hub API could not be reached.', null, null));
+                        }
+                        let result = new Message(false, error.message, null, null);
+                        reject(result);
                     }
-                    let result = new Message(false, error.message, null, null);
-                    reject(result);
                 }, () => {
                     this.removeWaitMessage(messageKey);
                 });
@@ -453,10 +459,18 @@ export class AuthService implements OnDestroy {
                 resolve(result);
             }, error => {
                 this.removeWaitMessage(messageKey);
-                this.logger.LogC(() =>
-                    `get error:${error.message}`, eLogLevel.Error);
-                let result = new Message(false, error.message, null, null);
-                reject(result);
+                if (error.error) {
+                    reject(error.error);
+                } else {
+                    this.removeWaitMessage(messageKey);
+                    this.logger.LogC(() =>
+                        `post warning error:${error}`, eLogLevel.Error);
+                    if (error.status === 504) {
+                        reject(new Message(false, 'The Information Hub API could not be reached.', null, null));
+                    }
+                    let result = new Message(false, error.message, null, null);
+                    reject(result);
+                }
             });
         });
     }
@@ -936,9 +950,18 @@ export class AuthService implements OnDestroy {
                     }
                 }
 
-                tokenPromise.then(authResponse => {
+                tokenPromise.then(async authResponse => {
                     this.removeWaitMessage(messageKey);
                     if (authResponse) {
+                        if ( !authResponse.accessToken) {
+                            let request = {
+                                scopes: ['user.read'],
+                                // authority: 'https://login.microsoftonline.com/common/',
+                            }
+
+                            authResponse = await userAgentApplication.acquireTokenSilent(request);
+                        }
+
                         let user = authResponse.account;
 
                         let login = new ExternalLogin();

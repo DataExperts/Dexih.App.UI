@@ -1,6 +1,6 @@
-<dexih-message #DexihMessage></dexih-message>
-
 <div class="container">
+	<dexih-message #DexihMessage></dexih-message>
+
     <dexih-widget *ngIf="mainForm"
 		title="Edit Hub" 
 		subTitle="Complete the details to create/edit a new hub"
@@ -27,7 +27,7 @@
 				</section>
 
 				<section>
-					<form-input label="Encryption Key" formControlName="encryptionKey" placeholder="Enter an encryption key" iconClass="fa fa-key" [errors]="formErrors.encryptionKey" note="The encryption key will be used to encrypt table columns flagged as secure.  Ensure this key is kept securely as without it encrypted data will be lost.">
+					<form-input label="Encryption Key" formControlName="encryptionKey" placeholder="Enter an encryption key" iconClass="fa fa-key" [errors]="formErrors.encryptionKey" note="The encryption key will be used to encrypt table columns flagged as secure.  Ensure this key is kept securely as without it encrypted data will be lost." style="z-index: 10000">
 						(<dexih-button buttonClass="btn btn-link mb-1 p-0" iconClass="fa fa-refresh" [busy]="generatingKey" (click)="generateKey()">Generate a new key</dexih-button>)
 					</form-input>
 				</section>

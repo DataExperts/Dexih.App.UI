@@ -258,7 +258,9 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
         switch (itemType) {
             case eDatalinkTransformItemType.ColumnPair:
                 if (!outputColumn) {
-                    outputColumn = io.copyDatalinkColumn(inputColumn, 0, 'mappings');
+                    outputColumn = io.copyDatalinkColumn(inputColumn, 0, 'mapping');
+                } else {
+                    outputColumn.columnGroup = 'mapping'
                 }
                 outputColumn.key = this.hubService.getHubCache().getNextSequence();
                 if (outputColumn.childColumns) {
@@ -273,7 +275,9 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
                 break;
             case eDatalinkTransformItemType.AggregatePair:
                 if (!outputColumn) {
-                    outputColumn = io.copyDatalinkColumn(inputColumn, 0, 'mappings');
+                    outputColumn = io.copyDatalinkColumn(inputColumn, 0, 'mapping');
+                } else {
+                    outputColumn.columnGroup = 'mapping'
                 }
                 outputColumn.key = this.hubService.getHubCache().getNextSequence();
                 if (outputColumn.childColumns) {

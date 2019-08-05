@@ -1,17 +1,15 @@
 import { Component, Input, Output, ViewChild, OnInit, OnChanges, OnDestroy, EventEmitter, ElementRef } from '@angular/core';
 import {
-    HubCache, DexihTableColumn, DexihDatalinkTransformItem,
-    eDatalinkTransformItemType, eParameterDirection, eTransformFunctionType,
-    DexihDatalinkColumn, DexihDatalinkTransform, DexihFunctionParameter, sortDirections
-} from '../../../hub.models';
+    DexihDatalinkTransformItem,
+    eDatalinkTransformItemType, eTransformFunctionType,
+    DexihDatalinkColumn, DexihDatalinkTransform} from '../../../hub.models';
 import { Observable, BehaviorSubject, Subscription, combineLatest } from 'rxjs';
 import { HubService } from '../../../hub.service';
 import { DatalinkEditService } from '../datalink-edit.service';
 import { AuthService } from '../../../../+auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormArray } from '@angular/forms';
-import { compare } from '../../../hub.query.models';
-import { RemoteLibraries, eTransformType, eTypeCode } from '../../../hub.remote.models';
+import { eTransformType, eTypeCode } from '../../../hub.remote.models';
 import { InputOutputColumns } from '../../../hub.lineage.models';
 
 @Component({
@@ -46,8 +44,6 @@ export class MappingComponent implements OnInit, OnDestroy, OnChanges {
     private _subscription: Subscription;
     private _changesSubscription: Subscription;
 
-    private hubCache: HubCache;
-    private remoteLibraries: RemoteLibraries;
 
     columns: Array<any>;
 
@@ -98,9 +94,7 @@ export class MappingComponent implements OnInit, OnDestroy, OnChanges {
             this._subscription = combineLatest(
                 this.hubService.getHubCacheObservable(),
                 this.hubService.getRemoteLibrariesObservable()
-            ).subscribe(result => {
-                this.hubCache = result[0];
-                this.remoteLibraries = result[1];
+            ).subscribe(() => {
 
                 this.functionType = this.getFunctionType(this.datalinkTransformForm.value);
                 this.transformType = this.datalinkTransformForm.value.transformType;

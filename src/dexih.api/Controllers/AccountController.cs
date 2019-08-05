@@ -179,6 +179,10 @@ namespace dexih.api.Controllers
         {
             if (ModelState.IsValid)
             {
+	            if (string.IsNullOrEmpty(externalProvider.AuthenticationToken))
+	            {
+		            throw new AccountControllerException("There was no authentication token provided when attempting to authenticate through Microsoft.");
+	            }
 	            var externalLoginResult =
 		            await GetExternalLogin(externalProvider.Provider, externalProvider.AuthenticationToken);
 	            

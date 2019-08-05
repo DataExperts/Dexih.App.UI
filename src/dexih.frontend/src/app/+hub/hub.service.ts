@@ -662,14 +662,14 @@ export class HubService implements OnInit, OnDestroy {
     saveRemoteAgent(remoteAgentHub: DexihRemoteAgentHub): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             let remoteAgent = this.authService.getRemoteAgent(remoteAgentHub.remoteAgentKey);
-            if (!remoteAgent.activeAgents || remoteAgent.activeAgents.length === 0 ) {
-                let message = new Message(false, 'The agent must be connected.', '', null);
-                this.addHubMessage(message);
-                reject(message);
-                return;
-            }
+            // if (!remoteAgent.activeAgents || remoteAgent.activeAgents.length === 0 ) {
+            //     let message = new Message(false, 'The agent must be connected.', '', null);
+            //     this.addHubMessage(message);
+            //     reject(message);
+            //     return;
+            // }
 
-            let instanceId = remoteAgent.activeAgents[0].instanceId;
+            let instanceId = remoteAgent ? remoteAgent.activeAgents[0].instanceId : null;
 
             this.authService.post('/api/Hub/SaveRemoteAgent', {
                     hubKey: this._hubCache.value.hub.hubKey,

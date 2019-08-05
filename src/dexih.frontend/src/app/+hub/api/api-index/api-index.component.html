@@ -21,7 +21,7 @@
 					</ng-template>
 
 					<ng-template #rowStatus select="rowStatus" let-item="item">
-						<api-status [apiKey]='item.key'></api-status>
+						<api-status [apiKey]='item?.key'></api-status>
 					</ng-template>
 			</dexih-table>
 

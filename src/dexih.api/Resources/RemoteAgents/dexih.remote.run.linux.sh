@@ -11,8 +11,8 @@ error_exit()
 install() 
 {
         if ! [ -x "$(command -v $1)" ]; then
-                apt-get update || error_exit "Cannot run 'apt-get update'.  Try rerunning script with sudo."
-                apt-get -q -y install $1 || error_exit "Cannot install the application $1.  Try installing manually."
+            sudo apt-get update || error_exit "Cannot run 'apt-get update'."
+            sudo apt-get -q -y install $1 || error_exit "Cannot install the application $1.  Try installing manually."
         fi
 }
 

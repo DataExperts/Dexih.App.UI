@@ -23,7 +23,7 @@
 				</ng-template>
 
 				<ng-template #rowStatus select="rowStatus" let-item="item">
-					<datalink-status [datalinkKey]='item.key'></datalink-status>
+					<datalink-status [datalinkKey]='item?.key'></datalink-status>
 				</ng-template>
 
 		</dexih-table>

@@ -10,7 +10,7 @@
 			</ng-template>
 
 			<ng-template #rowStatus select="rowStatus" let-datajob="item">
-				<datalink-status [datajobKey]='datajob.key'></datalink-status>
+				<datalink-status [datajobKey]='datajob?.key'></datalink-status>
 			</ng-template>
 
 			<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">

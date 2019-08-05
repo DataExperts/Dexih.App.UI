@@ -11,7 +11,7 @@ error_exit()
 install() 
 {
         if ! [ -x "$(command -v $1)" ]; then
-                apk --no-cache add $1  || error_exit "Cannot run 'apt-get $1'.  Try rerunning script with sudo."
+            apk --no-cache add $1  || error_exit "Cannot run 'apt-get $1'.  Try rerunning script with sudo."
         fi
 }
 
@@ -112,7 +112,7 @@ do
 
             rm ${LATEST_BINARY}
     
-            echo ${LATEST_VERSION} > dexih.remote.version || error_exit "Could not update the file local_version.txt, check the file permissions."
+            echo ${LATEST_VERSION} > dexih.remote.version || error_exit "Could not update the file dexih.remote.version, check the file permissions."
     
             chmod a+x ./${DIRECTORY}/dexih.remote || error_exit "Could not update the permissions on the ${DIRECTORY}/dexih.remote file."
     
