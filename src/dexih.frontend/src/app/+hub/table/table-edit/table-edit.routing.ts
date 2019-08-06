@@ -7,7 +7,8 @@ import { TableEditMainComponent } from './table-edit-main.component';
 import { FileFormatEditComponent } from '../../fileFormat';
 
 export const tableEditRoutes = [
-        { path: '', component: TableEditMainComponent,  data: { navigateSkip: true} },
+        { path: '', redirectTo: 'properties'},
+        { path: 'properties', component: TableEditMainComponent,  data: { navigateSkip: true} },
         { path: 'column', component: TableColumnEditComponent, data: { pageTitle: 'Edit Column' } },
         { path: 'column/:columnKey', component: TableColumnEditComponent, data: { pageTitle: 'Edit Column' } },
         { path: 'table-preview/:tableKey', component: TableEditPreviewDataComponent, data: { pageTitle: 'Preview' } },

@@ -105,7 +105,6 @@ export class TableEditComponent implements OnInit, OnDestroy {
               }
             });
           }
-
         }
 
       });

@@ -46,17 +46,6 @@
       <e p="Properties" t="Include">
         <e p="AssemblyInfo.cs" t="Include" />
       </e>
-      <e p="releases" t="Include">
-        <e p="dexih.functions.dll" t="Include" />
-        <e p="dexih.functions.pdb" t="Include" />
-        <e p="dexih.operations.deps.json" t="Include" />
-        <e p="dexih.operations.dll" t="Include" />
-        <e p="dexih.operations.pdb" t="Include" />
-        <e p="dexih.repository.dll" t="Include" />
-        <e p="dexih.repository.pdb" t="Include" />
-        <e p="dexih.transforms.dll" t="Include" />
-        <e p="dexih.transforms.pdb" t="Include" />
-      </e>
       <e p="RemoteDataSender.cs" t="Include" />
       <e p="RemoteLibraries.cs" t="Include" />
       <e p="RemoteMessage.cs" t="Include" />

@@ -141,6 +141,7 @@ export class FunctionReference {
 
 export class FunctionParameter {
     public name: string;
+    public parameterName: string;
     public description: string;
     public isGeneric: boolean;
     public dataType: eTypeCode;

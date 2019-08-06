@@ -1,5 +1,5 @@
 
-<dexih-widget-section title="Properties" [showExpandButton]="true">
+<dexih-widget-section title="Properties" [showExpandButton]="false">
 <form *ngIf="datalinkTransformForm"  [formGroup]="datalinkTransformForm">
         <fieldset>
             <section>
@@ -48,8 +48,10 @@
             </div>
         </fieldset>
     </form>
+</dexih-widget-section>
 
-    <form *ngIf="datalinkTransformForm && this.datalinkTransformForm.value.transformType == eTransformType.Series" [formGroup]="seriesForm">
+<dexih-widget-section *ngIf="datalinkTransformForm && this.datalinkTransformForm.value.transformType == eTransformType.Series" title="Series Settings" [showExpandButton]="true">
+    <form [formGroup]="seriesForm">
         <fieldset>
             <div class="form-row">
                 <section class="form-group col-md-6">
@@ -58,7 +60,6 @@
                 </section>
                 <section class="form-group col-md-6">
                     <form-select label="Input Column" formControlName="sourceDatalinkColumn" [items]="inputColumns" [(textValue)]="sourceValue"
-                        (textValueChange)="updateSourceValue($event)" [enableTextEntry]="true" [enableTextEntryMatch]="false"
                         itemName="name" [errors]="sourceErrors">
                     </form-select>
                 </section>
@@ -76,8 +77,10 @@
             </div>
         </fieldset>
     </form>
+</dexih-widget-section>
 
-    <form *ngIf="datalinkTransformForm && this.nodeType">
+<dexih-widget-section *ngIf="datalinkTransformForm && this.nodeType" title="Group Node" [showExpandButton]="true">
+    <form>
         <fieldset>
             <form-checkbox label="Group rows under a node" [ngModelOptions]="{standalone: true}" [(ngModel)]="allowNode" (ngModelChange)="toggleNode($event)"></form-checkbox>
             <section *ngIf="allowNode" class="form-group col-md-6">

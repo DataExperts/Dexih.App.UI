@@ -168,7 +168,7 @@ export class MappingItemComponent implements OnInit {
                 c.direction === eParameterDirection.Join);
 
         this.inputParameters = functionInputs.filter(c => c && !c.linkedName).map<ValidParameter>(param => {
-            let p = inputParams.find(c => c.name === param.name);
+            let p = inputParams.find(c => c.name === param.parameterName);
             if (p) {
                 if (p.rank === 0) {
                     let value = this.columnOrValue(p.datalinkColumn, p.value);
@@ -193,7 +193,7 @@ export class MappingItemComponent implements OnInit {
                 c.direction === eParameterDirection.ReturnValue );
 
         this.outputParameters = functionOutputs.filter(c => c &&  !c.linkedName).map<ValidParameter>(param => {
-            let p = outputParams.find(c => c.name === param.name);
+            let p = outputParams.find(c => c.name === param.parameterName);
             if (p) {
                 if (p.rank === 0) {
                     let value = this.describeDatalinkColumn(p.datalinkColumn);
@@ -213,7 +213,7 @@ export class MappingItemComponent implements OnInit {
         let linkedNames = Array.from(new Set(this.concat(functionInputs, functionOutputs).map(c => c &&  c.linkedName).filter(c => c)));
         this.mapParameters = linkedNames.map(name => {
             let parameters: ValidParameter[] = functionInputs.filter(c => c.linkedName === name).map(param => {
-                let p = inputParams.find(c => c.name === param.name);
+                let p = inputParams.find(c => c.name === param.parameterName);
                 let values = p.arrayParameters.sort( (a, b) => a.position - b.position).map(ap => {
                     return this.columnOrValue(ap.datalinkColumn, ap.value);
                 });
@@ -221,7 +221,7 @@ export class MappingItemComponent implements OnInit {
             });
 
             let parameters2: ValidParameter[] = functionOutputs.filter(c => c.linkedName === name).map(param => {
-                let p = outputParams.find(c => c.name === param.name);
+                let p = outputParams.find(c => c.name === param.parameterName);
                 let values = p.arrayParameters.sort( (a, b) => a.position - b.position).map(ap => {
                     return this.describeDatalinkColumn(ap.datalinkColumn);
                 });

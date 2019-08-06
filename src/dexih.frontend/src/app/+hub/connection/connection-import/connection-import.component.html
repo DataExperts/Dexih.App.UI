@@ -2,7 +2,7 @@
     <dexih-widget [title]="'Import Tables for ' + connection?.name" 
 		iconClass="fa fa-lg fa-fw fa-database" 
 		[showIf]="showPage"
-		loadingMessage="Querying source database tables.  Please wait..."
+		[loadingMessage]="showPageMessage"
 		[showCloseButton] = "true"
 		(close)="close()"
 		[padding]="false"
