@@ -53,6 +53,8 @@ export class ConnectionImportComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.showPageMessage = 'Querying source database tables.  Please wait...';
+
         try {
             this._subscription = combineLatest(
                 this.route.data,
@@ -69,21 +71,23 @@ export class ConnectionImportComponent implements OnInit, OnDestroy {
 
                 if (!this.connectionKey) {
                     this.hubService.addHubErrorMessage('There was no connection specified to import tables.');
+                    this.close();
                 } else {
                     if (this.hubCache.isLoaded()) {
                         this.connection = this.hubCache.hub.dexihConnections
                             .find(connection => connection.key === this.connectionKey);
 
                         this.showPage = false;
-                        this.showPageMessage = 'Waiting for an active remote agent...';
 
                         if (remoteAgent) {
                             if (this.connection) {
                                 this.getTables(this.connection);
                             } else {
                                 this.hubService.addHubErrorMessage('The connection could not be found.');
-                                this.showPageMessage = '';
+                                this.close();
                             }
+                        } else {
+                            this.showPageMessage = 'Waiting for an active remote agent...';
                         }
                     }
                 }

@@ -1,1 +1,6 @@
-<preview-data [table]='table' viewSource='Table'></preview-data>
+<dexih-widget-section title="Preview Table" [showExpandButton]="false">
+    <ng-template #header>
+        <dexih-button-close (click)="close()"></dexih-button-close>
+    </ng-template>
+        <preview-data [table]='table' viewSource='Table'></preview-data>
+</dexih-widget-section>

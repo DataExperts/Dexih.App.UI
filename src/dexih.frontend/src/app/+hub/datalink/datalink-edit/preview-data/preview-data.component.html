@@ -1,10 +1,6 @@
-<div class="list-group-item list-group-item-info rounded-0">
-    <div class="d-flex flex-row">
-        <h5>Preview Transform Data</h5>
-        <div class="ml-auto">
-                <button class="btn btn-warning" (click)="close()"><i class="fa fa-close"></i><span class="xs-hidden sm-hidden"> Close</span></button>
-            </div>
-        </div>
-</div>
-
-<preview-data [datalink]='datalinkForm?.value' [datalinkTransformKey]="datalinkTransformKey" viewSource='Datalink'></preview-data>
+<dexih-widget-section title="Preview Transform Data" [showExpandButton]="true" [padding]="false">
+    <ng-template #header>
+        <dexih-button-close (click)="close()"></dexih-button-close>
+    </ng-template>
+    <preview-data [datalink]='datalinkForm?.value' [datalinkTransformKey]="datalinkTransformKey" viewSource='Datalink'></preview-data>
+</dexih-widget-section>

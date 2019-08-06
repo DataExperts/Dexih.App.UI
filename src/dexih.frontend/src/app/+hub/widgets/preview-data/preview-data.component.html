@@ -1,40 +1,38 @@
-<div class="container-fluid">
-    <dexih-widget [title]="title" iconClass="fa fa-lg fa-fw fa-table" [showCloseButton]="true" (close)="close()">
-        <dexih-table [enableMultiSelect]="false" [enableSaveCsv]="true" [csvFileName]="csvFileName" [columns]="columns" [data]="data" [hideTable]="view !== 'table'">
+<dexih-table [enableMultiSelect]="false" [enableSaveCsv]="true" [csvFileName]="csvFileName" [columns]="columns"
+    [data]="data" [hideTable]="view !== 'table'">
 
-            <ng-template #actions let-items="items">
-                <dexih-button-refresh class="mr-1" (click)="refresh()" text="Reload"></dexih-button-refresh>
-                <download-button class="ml-1" (download)="download($event)"></download-button>
+    <ng-template #actions let-items="items">
+        <dexih-button-refresh class="mr-1" (click)="refresh()" text="Reload"></dexih-button-refresh>
+        <download-button class="ml-1" (download)="download($event)"></download-button>
 
-                <div class="btn-group btn-group-toggle ml-1" data-toggle="buttons">
-                    <label class="btn btn-primary" [ngClass]="{active: view==='table'}">
-                        <input type="radio" name="options" value="table" autocomplete="off" [(ngModel)]="view"> Table
-                    </label>
-                    <label class="btn btn-primary" [ngClass]="{active: view==='chart'}">
-                        <input type="radio" name="options" value="chart" autocomplete="off" [(ngModel)]="view"> Chart
-                    </label>
-                    <label class="btn btn-primary" [ngClass]="{active: view==='properties'}">
-                        <input type="radio" name="options" value="properties" autocomplete="off" [(ngModel)]="view"> Query Plan
-                    </label>
-                </div>
+        <div class="btn-group btn-group-toggle ml-1" data-toggle="buttons">
+            <label class="btn btn-primary" [ngClass]="{active: view==='table'}">
+                <input type="radio" name="options" value="table" autocomplete="off" [(ngModel)]="view"> Table
+            </label>
+            <label class="btn btn-primary" [ngClass]="{active: view==='chart'}">
+                <input type="radio" name="options" value="chart" autocomplete="off" [(ngModel)]="view"> Chart
+            </label>
+            <label class="btn btn-primary" [ngClass]="{active: view==='properties'}">
+                <input type="radio" name="options" value="properties" autocomplete="off" [(ngModel)]="view">
+                Query Plan
+            </label>
+        </div>
 
-                <dexih-button-save *ngIf="key" class="ml-1"  (click)="save()"></dexih-button-save>
-            </ng-template>
+        <dexih-button-save *ngIf="key" class="ml-1" (click)="save()"></dexih-button-save>
+    </ng-template>
 
-            <ng-template #tableHeader>
-                <h5>Data Configuration</h5>
-                <query-builder [selectQuery]="selectQuery" [columns]="tableColumns" [inputColumns]="inputColumns"></query-builder>
-                <div [ngStyle]="{'display': view === 'chart' ? 'block' : 'none' }" class="mt-1">
-                    <h5>Chart Configuration</h5>
-                    <chart-builder [columns]="columns" [data]="data" [config]="chartConfig"></chart-builder>
-                </div>
-                <div [ngStyle]="{'display': view === 'properties' ? 'block' : 'none' }" class="mt-1">
-                    <h5>Query Plan</h5>
-                    <transform-properties [transformProperties]='transformProperties'></transform-properties>
-                </div>
-            </ng-template>
+    <ng-template #tableHeader>
+        <h5>Data Configuration</h5>
+        <query-builder [selectQuery]="selectQuery" [columns]="tableColumns" [inputColumns]="inputColumns">
+        </query-builder>
+        <div [ngStyle]="{'display': view === 'chart' ? 'block' : 'none' }" class="mt-1">
+            <h5>Chart Configuration</h5>
+            <chart-builder [columns]="columns" [data]="data" [config]="chartConfig"></chart-builder>
+        </div>
+        <div [ngStyle]="{'display': view === 'properties' ? 'block' : 'none' }" class="mt-1">
+            <h5>Query Plan</h5>
+            <transform-properties [transformProperties]='transformProperties'></transform-properties>
+        </div>
+    </ng-template>
 
-        </dexih-table>
-
-    </dexih-widget>
-</div>
+</dexih-table>
