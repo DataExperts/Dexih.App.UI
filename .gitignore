@@ -252,3 +252,7 @@ src/dexih.application/wwwroot/*
 src/dexih.api/letsencrypt.pem
 
 **/Build/*
+
+.idea/*
+.idea/
+.vscode/
