@@ -222,11 +222,16 @@ export class ConnectionImportComponent implements OnInit, OnDestroy {
             }
         });
 
-        this._tableData.next(this.tables);
+        this.updateFilter();
     }
 
     deleteSelected(selected: Array<DexihTable>) {
-        let selectedTables = selected.filter(t => !t.entityStatus.isBusy);
+        let selectedTables = selected.filter(t => !t.entityStatus.isBusy && t.key > 0);
+
+        if (selectedTables.length === 0) {
+            this.authService.informationDialog(
+                'Can not delete', 'None of the selected tables can be deleted, as they are either busy, or have not been imported.');
+        }
         selectedTables.forEach(t => t.entityStatus.isBusy = true);
         this.hubService.deleteTables(selectedTables).then(result => {
             selectedTables.forEach(t => t.entityStatus.isBusy = false);
@@ -267,7 +272,7 @@ export class ConnectionImportComponent implements OnInit, OnDestroy {
                         let index = this.tables.findIndex(t => t.name === table.name && t.schema === table.schema);
                         if (index >= 0) {
                             this.tables[index] = table;
-                            this._tableData.next(this.tables);
+                            this.updateFilter();
                         }
                     }
                 }
@@ -281,7 +286,7 @@ export class ConnectionImportComponent implements OnInit, OnDestroy {
                             previousTable.entityStatus.isBusy = false;
                             previousTable.updateDate = null;
                             previousTable.createDate = null;
-                            this._tableData.next(this.tables);
+                            this.updateFilter();
                         }
                     }
                 }
