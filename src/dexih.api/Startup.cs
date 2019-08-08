@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Identity;
 using dexih.api.Services.Remote;
 using dexih.api.Services.Message;
 using dexih.api.Services.Operations;
+using dexih.operations;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -109,6 +110,8 @@ namespace dexih.api
 			{
 				services.AddDistributedMemoryCache();
 			}
+
+			services.AddSingleton<ICacheService, CacheService>();
 			
             services.Configure<RemoteAuthenticationProviderOptions>(options =>
             {

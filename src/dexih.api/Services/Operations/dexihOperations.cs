@@ -20,13 +20,12 @@ namespace dexih.api.Services.Operations
 			UserManager<ApplicationUser> userManager,
 			ApplicationSettings config,
 			ILoggerFactory loggerFactory,
-			IDistributedCache distributedCache,
-            IMemoryCache memoryCache,
+			ICacheService cacheService,
 			IHubContext<BrowserHub> browserContext
 			)
         {
             Config = config;
-            RepositoryManager = new RepositoryManager(config.EncryptionKey, dbContext, userManager, memoryCache, distributedCache, loggerFactory, SendHubChange );
+            RepositoryManager = new RepositoryManager(dbContext, userManager, cacheService, loggerFactory, SendHubChange );
             _browserContext = browserContext;
             _logger = loggerFactory.CreateLogger("DexihOperations");
             

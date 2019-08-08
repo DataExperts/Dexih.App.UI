@@ -110,7 +110,7 @@ namespace dexih.api.Controllers
 		{
 			var database = _operations.RepositoryManager;
 			var userIds = new List<ApplicationUser>();
-			var appUser = await database.GetUser(User);;
+			var appUser = await database.GetUser(User);
 
 			var updateUsers = new List<ApplicationUser>();
 			var newUsers = new List<ApplicationUser>();
