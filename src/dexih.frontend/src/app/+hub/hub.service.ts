@@ -463,7 +463,7 @@ export class HubService implements OnInit, OnDestroy {
             this.logger.LogC(() => `processWebSocketMessage completed, method: ${data.method}.`, eLogLevel.Debug);
     }
 
-    private updateHubChange(hubChange: Import) {
+    public updateHubChange(hubChange: Import) {
         let hubCache = this.getHubCache();
 
         this.mergeChange(hubChange.hubVariables, hubCache.hub.dexihHubVariables, 'key', eSharedObjectType.HubVariable);
@@ -481,7 +481,7 @@ export class HubService implements OnInit, OnDestroy {
         this.mergeChange(hubChange.apis, hubCache.hub.dexihApis, 'key', eSharedObjectType.Api);
         this.mergeChange(hubChange.tables, hubCache.hub.dexihTables, 'key', eSharedObjectType.Table);
 
-        if (hubChange.remoteAgentHubs.length > 0) {
+        if (hubChange.remoteAgentHubs && hubChange.remoteAgentHubs.length > 0) {
             this.resetRemoteAgent(hubCache);
         }
     }
@@ -490,6 +490,10 @@ export class HubService implements OnInit, OnDestroy {
         if (source && source.length > 0) {
             source.forEach(item => {
                 let current = target.find(c => c[keyField] === item.item[keyField]);
+
+                if (current && current.updateDate === item.item.updateDate) {
+                    return;
+                }
 
                 // if the change is a datalink or datajob, preserve the current/previous status.
                 if (changeClass === eSharedObjectType.Datalink || changeClass === eSharedObjectType.Datajob ||
@@ -863,6 +867,7 @@ export class HubService implements OnInit, OnDestroy {
 
 
     importPackage(importPackage: Import): Promise<any> {
+        importPackage.hubKey = this._hubCache.value.hub.hubKey;
         return new Promise<DexihConnection>((resolve, reject) => {
             this.authService.post('/api/Hub/ImportPackage', importPackage, 'Importing package...' ).then(result => {
                 resolve(result.value);
@@ -1768,7 +1773,7 @@ export class HubService implements OnInit, OnDestroy {
                      }, 'Previewing table...').then(result => {
                         let url = result.value;
 
-                        this.authService.get(url, null, false).then(data => {
+                        this.authService.get(url, 'Getting preview results...', false).then(data => {
                             if (data['success'] === false) {
                                 this.addHubMessage(data);
                                 reject(data['message']);
@@ -1824,7 +1829,7 @@ export class HubService implements OnInit, OnDestroy {
 
                     }, 'Previewing table...').then(result => {
                         // console.debug(result.value);
-                       this.authService.get(result.value, null, false).then(data => {
+                       this.authService.get(result.value, 'Getting preview results...', false).then(data => {
                             if (data['success'] === false) {
                                 this.addHubMessage(data);
                                 reject(data['message']);
@@ -1878,7 +1883,7 @@ export class HubService implements OnInit, OnDestroy {
                 }, 'Previewing datalink...').then(result => {
 
                     // console.debug(result.value);
-                    this.authService.get(result.value, null, false).then(data => {
+                    this.authService.get(result.value, 'Getting preview results...', false).then(data => {
                         if (data['success'] === false) {
                             this.addHubErrorMessage(data['message']);
                             reject(data['message']);
@@ -2030,11 +2035,11 @@ export class HubService implements OnInit, OnDestroy {
                     downloadUrl: downloadUrl
                 };
 
-                this.authService.post('/api/Hub/RunRemoteCommand', remoteMessage, 'Retrieving the download location...')
+                this.authService.post('/api/Hub/RunRemoteCommand', remoteMessage, 'Retrieving profile data...')
                     .then(result => {
                         let url = result.value;
 
-                        this.authService.get(url, null, false).then(data => {
+                        this.authService.get(url, 'Getting profile results...', false).then(data => {
                             if (data['success'] === false) {
                                 this.addHubMessage(data);
                                 reject(data['message']);

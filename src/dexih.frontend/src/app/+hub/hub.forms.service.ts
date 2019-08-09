@@ -39,6 +39,11 @@ import {
   DexihDatalinkTarget,
   DexihDatalinkStepColumn,
   DexihApi,
+  Import,
+  sharedObjectProperties,
+  SharedObjectProperty,
+  ImportAction,
+  ImportObject,
 } from './hub.models';
 import { HubService } from './hub.service';
 import { eTypeCode } from './hub.remote.models';
@@ -79,6 +84,7 @@ export class HubFormsService implements OnDestroy {
   private updateDate: string;
 
   private saveMethod: string;
+  private property: SharedObjectProperty;
   private formGroupFunc: (item) => void
   private valueMethod: string;
 
@@ -411,6 +417,16 @@ export class HubFormsService implements OnDestroy {
         remoteAgentId: this.hubService.getCurrentRemoteAgentInstanceId(false),
         value: valueCopy
       }, 'Saving...').then(result => {
+
+        if (!result.success) {
+          this.hubService.addHubMessage(result);
+        }
+
+        let import1 = new Import();
+        import1[this.property.property] =
+          [{ImportAction: {importAction: eImportAction.New, objectType: this.property.type}, item: result.value}];
+        this.hubService.updateHubChange(import1);
+
         this.formSaving = false;
         this.hasChanged = false;
 
@@ -499,6 +515,7 @@ export class HubFormsService implements OnDestroy {
     }, { Validators: [this.requiredConnectionFields()] }
     );
 
+    this.property = sharedObjectProperties.find(c => c.type === eSharedObjectType.Connection);
     this.saveMethod = 'SaveConnection';
     this.formGroupFunc = this.connection;
     this.addMissing(connection, connectionForm, new DexihConnection(''));
@@ -568,6 +585,7 @@ export class HubFormsService implements OnDestroy {
     const tableForm = this.tableForm(table);
 
     this.formGroupFunc = this.table;
+    this.property = sharedObjectProperties.find(c => c.type === eSharedObjectType.Table);
     this.saveMethod = 'SaveTable';
     this.watchChanges(eSharedObjectType.Table, 'tableKey', 'table', this.table);
     this.startForm(tableForm);
@@ -819,6 +837,7 @@ export class HubFormsService implements OnDestroy {
     );
 
     this.formGroupFunc = this.fileFormat;
+    this.property = sharedObjectProperties.find(c => c.type === eSharedObjectType.FileFormat);
     this.saveMethod = 'SaveFileFormat';
     this.addMissing(fileFormat, fileFormatForm, new DexihFileFormat());
     this.clearFormSubscriptions();
@@ -851,6 +870,7 @@ export class HubFormsService implements OnDestroy {
     );
 
     this.formGroupFunc = this.view;
+    this.property = sharedObjectProperties.find(c => c.type === eSharedObjectType.View);
     this.saveMethod = 'SaveView';
     this.addMissing(view, viewForm, new DexihView());
     this.clearFormSubscriptions();
@@ -883,6 +903,7 @@ export class HubFormsService implements OnDestroy {
 
     this.formGroupFunc = this.api;
     this.saveMethod = 'SaveApi';
+    this.property = sharedObjectProperties.find(c => c.type === eSharedObjectType.Api);
     this.addMissing(api, apiForm, new DexihApi());
     this.clearFormSubscriptions();
     this.watchChanges(eSharedObjectType.Api, 'apiKey', 'api', this.api);
@@ -901,6 +922,7 @@ export class HubFormsService implements OnDestroy {
     );
 
     this.formGroupFunc = this.validation;
+    this.property = sharedObjectProperties.find(c => c.type === eSharedObjectType.ColumnValidation);
     this.saveMethod = 'SaveColumnValidation';
     this.addMissing(validation, validationForm, new DexihColumnValidation());
     this.watchChanges(eSharedObjectType.ColumnValidation, 'key', 'column validation', this.validation);
@@ -936,6 +958,7 @@ export class HubFormsService implements OnDestroy {
 
     this.formGroupFunc = this.customFunction;
     this.saveMethod = 'SaveCustomFunction';
+    this.property = sharedObjectProperties.find(c => c.type === eSharedObjectType.CustomFunction);
     this.addMissing(customFunction, customFunctionForm, new DexihCustomFunction());
     this.watchChanges(eSharedObjectType.CustomFunction, 'customFunctionKey', 'custom function', this.customFunction);
     this.startForm(customFunctionForm);
@@ -978,6 +1001,7 @@ export class HubFormsService implements OnDestroy {
 
     this.formGroupFunc = this.hubVariable;
     this.saveMethod = 'SaveHubVariable';
+    this.property = sharedObjectProperties.find(c => c.type === eSharedObjectType.HubVariable);
     this.addMissing(hubVariable, hubVariableForm, new DexihHubVariable());
     this.watchChanges(eSharedObjectType.HubVariable, 'hubVariable', 'hub variable', this.hubVariable);
     this.startForm(hubVariableForm);
@@ -1014,6 +1038,7 @@ export class HubFormsService implements OnDestroy {
 
     this.formGroupFunc = this.datalinkTest;
     this.saveMethod = 'SaveDatalinkTest';
+    this.property = sharedObjectProperties.find(c => c.type === eSharedObjectType.DatalinkTest);
     this.addMissing(datalinkTest, form, new DexihDatalinkTest());
     this.watchChanges(eSharedObjectType.DatalinkTest, 'datalinkTest', 'datalink test', this.datalinkTest);
     this.startForm(form);
@@ -1072,32 +1097,6 @@ export class HubFormsService implements OnDestroy {
     return form;
   }
 
-  // public hubUser(hubVariable: DexihHubVariable) {
-  //   const hubVariableForm = this.fb.group({
-  //     'name': [hubVariable.name, [
-  //       Validators.required,
-  //       Validators.minLength(3),
-  //       Validators.maxLength(50),
-  //       this.duplicateHubVariableNameValidator()
-  //     ]],
-  //     'valueRaw': [hubVariable.isEncrypted ? null : hubVariable.value]
-  //   }
-  //   );
-
-  //   this.saveMethod = 'SaveHubVariable';
-  //   this.addMissing(hubVariable, hubVariableForm);
-  //   this.watchChanges(eChangeClass.HubVariable, 'hubVariable', 'column validation', this.validation);
-  //   this.startForm(hubVariableForm);
-  // }
-
-  // public importOptions(importOptions: ImportOptions) {
-  //   const importOptionsForm = this.fb.group({
-  //   });
-
-  //   this.addMissing(importOptions, importOptionsForm, new ImportOptions());
-  //   this.clearFormSubscriptions();
-  //   this.startForm(importOptionsForm);
-  // }
 
 
   /// ***********
@@ -1185,6 +1184,7 @@ export class HubFormsService implements OnDestroy {
 
     this.formGroupFunc = this.datajob;
     this.saveMethod = 'SaveDatajob';
+    this.property = sharedObjectProperties.find(c => c.type === eSharedObjectType.Datajob);
     this.addMissing(datajob, datajobForm, new DexihDatajob());
     this.clearFormSubscriptions();
     this.watchChanges(eSharedObjectType.Datajob, 'key', 'data job', this.datajob);
@@ -1224,6 +1224,7 @@ export class HubFormsService implements OnDestroy {
 
     // this.formGroupFunc = this.remoteAgentSettings;
     this.saveMethod = 'SaveRemoteAgent';
+    this.property = sharedObjectProperties.find(c => c.type === eSharedObjectType.RemoteAgent);
     this.clearFormSubscriptions();
     this.addMissing(remoteAgent, remoteAgentForm, new DexihRemoteAgentHub());
     this.startForm(remoteAgentForm);
@@ -1596,6 +1597,7 @@ export class HubFormsService implements OnDestroy {
 
     this.formGroupFunc = this.datalink;
     this.saveMethod = 'SaveDatalink';
+    this.property = sharedObjectProperties.find(c => c.type === eSharedObjectType.Datalink);
     this.valueMethod = 'getDatalinkValue';
 
     // whenever the datalink changes, update any transforms input/output columns.
