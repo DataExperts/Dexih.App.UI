@@ -111,7 +111,8 @@ export class ImportComponent implements OnInit, OnDestroy {
                 objects.push({
                     objectType: o.property,
                     name: item.item.name,
-                    importAction: item.importAction
+                    importAction: item.importAction,
+                    item: item
                 })
             });
         });
@@ -119,8 +120,19 @@ export class ImportComponent implements OnInit, OnDestroy {
         this._tableData.next(objects);
     }
 
-    public importSelected() {
+    public importSelected(items) {
+        let newImport = new Import();
 
+        items.forEach(item => {
+            if (!newImport[item.objectType]) {
+                newImport[item.objectType] = [];
+            }
+            newImport[item.objectType].push(item.item);
+        });
+
+        this.hubService.importPackage(newImport).then(() => {
+            this.authService.navigateUp();
+        }).catch();
     }
 
     public importAll() {

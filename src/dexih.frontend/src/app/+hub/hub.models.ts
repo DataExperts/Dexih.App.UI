@@ -2264,6 +2264,7 @@ export class ImportAction {
 }
 
 export class Import {
+    public hubKey: number;
     public hubVariables: ImportObject<DexihHubVariable>[];
     public datajobs: ImportObject<DexihDatajob>[];
     public datalinks: ImportObject<DexihDatalink>[];

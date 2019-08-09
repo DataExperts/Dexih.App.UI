@@ -164,7 +164,7 @@ export class HubsService implements OnDestroy {
         Promise<{name: string, columns: Array<any>, data: Array<any> }> {
             return new Promise<{name: string, columns: Array<any>, data: Array<any> }>((resolve, reject) => {
 
-                this.authService.get(url, null, false).then(data => {
+                this.authService.get(url, 'Getting preview results...', false).then(data => {
                     if (data['success'] === false) {
                         // this.addHubErrorMessage(data['message']);
                         reject(data);
