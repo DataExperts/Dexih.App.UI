@@ -405,6 +405,7 @@ export class HubFormsService implements OnDestroy {
       }
 
       let valueCopy = Object.assign({}, value);
+
       // remove status as they will not parse into json.
       valueCopy.currentStatus = null;
       valueCopy.entityStatus = null;
@@ -423,8 +424,7 @@ export class HubFormsService implements OnDestroy {
         }
 
         let import1 = new Import();
-        import1[this.property.property] =
-          [{ImportAction: {importAction: eImportAction.New, objectType: this.property.type}, item: result.value}];
+        import1[this.property.property] = [{importAction: eImportAction.New, item: result.value}];
         this.hubService.updateHubChange(import1);
 
         this.formSaving = false;
@@ -864,9 +864,12 @@ export class HubFormsService implements OnDestroy {
         Validators.maxLength(50),
         this.duplicateViewNameValidator()
       ]],
+      'sourceType': [view.sourceType, [
+        Validators.required,
+      ]],
       'sourceDatalinkKey': [view.sourceDatalinkKey],
       'sourceTableKey': [view.sourceTableKey],
-    }
+    }, { validator: this.validateDatalinkTable() }
     );
 
     this.formGroupFunc = this.view;
@@ -896,9 +899,12 @@ export class HubFormsService implements OnDestroy {
         Validators.minLength(3),
         Validators.maxLength(50),
       ]],
+      'sourceType': [api.sourceType, [
+        Validators.required,
+      ]],
       'sourceDatalinkKey': [api.sourceDatalinkKey],
       'sourceTableKey': [api.sourceTableKey],
-    }
+    }, { validator: this.validateDatalinkTable() }
     );
 
     this.formGroupFunc = this.api;
@@ -1543,7 +1549,7 @@ export class HubFormsService implements OnDestroy {
         if (!sourceTableKey.value) {
           return sourceTableKey.setErrors({ required: true });
         }
-      } else if (sourceType.value === eSourceType.Datalink) {
+      } else if (sourceType === eSourceType.Datalink) {
         if (!sourceDatalinkKey.value) {
           return sourceDatalinkKey.setErrors({ required: true });
         }
