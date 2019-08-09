@@ -246,13 +246,12 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
-src/dexih.application/wwwroot/*
 
-.DS_Store
-src/dexih.api/letsencrypt.pem
 
 **/Build/*
 
-.idea/*
+src/dexih.application/wwwroot/*
+src/dexih.api/letsencrypt.pem
+.DS_Store
 .idea/
 .vscode/

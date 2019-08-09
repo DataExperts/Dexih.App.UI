@@ -540,7 +540,7 @@ export class HubService implements OnInit, OnDestroy {
                 }
 
                 this._hubCacheChange.next(new HubCacheChange(changeClass, item.importAction, current));
-            })
+            });
         }
     }
 
