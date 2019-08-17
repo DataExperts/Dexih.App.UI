@@ -17,6 +17,8 @@ import { RemoteAgentViewComponent } from './remoteAgent-view/remoteAgent-view.co
 import { TransformPropertiesComponent } from './transform-properties/transform-properties.component';
 import { TransformPropertiesItemComponent } from './transform-properties/transform-properties-item.component';
 import { PreviewDataComponent } from './preview-data/preview-data.component';
+import { PreviewViewComponent } from './preview-view/preview-view.component';
+import { InputParametersComponent } from './input-parameters/input-parameters.component'
 @NgModule({
     imports: [
         SharedModule,
@@ -39,7 +41,9 @@ import { PreviewDataComponent } from './preview-data/preview-data.component';
         ApiStatusComponent,
         RemoteAgentViewComponent,
         TransformPropertiesComponent, TransformPropertiesItemComponent,
-        PreviewDataComponent
+        PreviewDataComponent,
+        PreviewViewComponent,
+        InputParametersComponent
     ],
     declarations: [
         DatalinkStatusComponent,
@@ -55,7 +59,9 @@ import { PreviewDataComponent } from './preview-data/preview-data.component';
         ApiStatusComponent,
         RemoteAgentViewComponent,
         TransformPropertiesComponent, TransformPropertiesItemComponent,
-        PreviewDataComponent
+        PreviewDataComponent,
+        PreviewViewComponent,
+        InputParametersComponent
     ],
     providers: [],
 })

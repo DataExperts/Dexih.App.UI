@@ -19,6 +19,7 @@ import { DexihIconsModule } from './ui/icons'
 import { QueryBuilderModule } from './ui/queryBuilder/query-builder.module';
 import { ChartBuilderModule } from './ui/chartBuilder/chart-builder.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { GridsterModule} from 'angular-gridster2';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     QueryBuilderModule,
     ChartBuilderModule,
     NgxChartsModule,
+    GridsterModule
   ],
   declarations: [
   ],
@@ -59,6 +61,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     QueryBuilderModule,
     ChartBuilderModule,
     NgxChartsModule,
+    GridsterModule
   ],
   providers: [
     LayoutService

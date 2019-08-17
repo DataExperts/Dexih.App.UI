@@ -39,6 +39,8 @@ export class MappingEditComponent implements OnInit, OnDestroy {
   transformItemType: eDatalinkTransformItemType;
   eDatalinkTransformItemType = eDatalinkTransformItemType;
 
+  variables: string[];
+
   newDatalinkTransformItemForm: FormGroup;
   newColumn: DexihDatalinkColumn;
   filterValue: any;
@@ -91,6 +93,8 @@ export class MappingEditComponent implements OnInit, OnDestroy {
         if (!this.hubCache.isLoaded()) { return; }
 
         this.datalinkForm = datalinkForm;
+
+        this.variables = this.hubCache.hub.dexihHubVariables.map(c => '{' + c.name + '}');
 
         this.datalinkTransformItemKey = +params['datalinkTransformItemKey'];
         this.datalinkTransformKey = +params['datalinkTransformKey'];
@@ -246,7 +250,7 @@ export class MappingEditComponent implements OnInit, OnDestroy {
   }
 
   updateFilterValue(value: string) {
-    this.newDatalinkTransformItemForm.controls.filterValue.setValue(value);
+      this.newDatalinkTransformItemForm.controls.filterValue.setValue(value);
   }
 
   updateSourceValue(value: string) {

@@ -1,9 +1,8 @@
-<div *ngIf="columns">
-    <ng-template [ngIf]="showEdit">
+<dexih-widget-section *ngIf="columns && showEdit" title="Chart Properties" [showExpandButton]="true">
         <div class="d-flex flex-wrap">
             <div class="flex-fill">
-                <form-select [(ngModel)]="chartType" (ngModelChange)="updateChart($event)" labelLeft="Chart" [items]="chartTypes"
-                    parentName='name' childItems='charts' itemName='name'>
+                <form-select [(ngModel)]="config.chartType" (ngModelChange)="updateChart($event)" labelLeft="Chart" [items]="chartTypes"
+                    parentName='name' childItems='charts' itemKey='key' itemName='name'>
                 </form-select>
             </div>
     
@@ -19,41 +18,41 @@
     
         <div class="d-flex flex-wrap pt-1" *ngIf="chartType.inputFormat === eInputFormat.SingleSeries || chartType.inputFormat === eInputFormat.GeoCoordinates">
             <div class="flex-fill">
-                <form-select [(ngModel)]="labelColumnIndex" (ngModelChange)="updateChart($event)" labelLeft="Labels" 
-                    [items]="columns" itemKey="name" itemName="title">
+                <form-select [(ngModel)]="config.labelColumn" (ngModelChange)="updateChart($event)" labelLeft="Labels" 
+                    [items]="columns" itemKey="title" itemName="title">
                 </form-select>
             </div>
 
             <div class="flex-fill pl-1">
-                <form-select [(ngModel)]="seriesColumnIndex" (ngModelChange)="updateChart($event)" labelLeft="Series Column"
-                    [items]="columns" itemKey="name" itemName="title">
+                <form-select [(ngModel)]="config.seriesColumn" (ngModelChange)="updateChart($event)" labelLeft="Series Column"
+                    [items]="columns" itemKey="title" itemName="title">
                 </form-select>
             </div>
         </div>
     
         <div class="d-flex flex-wrap pt-1" *ngIf="chartType.inputFormat === eInputFormat.GeoCoordinates">
             <div class="flex-fill">
-                <form-select [(ngModel)]="latitudeColumnIndex" (ngModelChange)="updateChart($event)" labelLeft="Latitude" 
-                    [items]="columns" itemKey="name" itemName="title">
+                <form-select [(ngModel)]="config.latitudeColumn" (ngModelChange)="updateChart($event)" labelLeft="Latitude" 
+                    [items]="columns" itemKey="title" itemName="title">
                 </form-select>
             </div>
 
             <div class="flex-fill pl-1">
-                <form-select [(ngModel)]="longitudeColumnIndex" (ngModelChange)="updateChart($event)" labelLeft="Longitude"
-                    [items]="columns" itemKey="name" itemName="title">
+                <form-select [(ngModel)]="config.longitudeColumn" (ngModelChange)="updateChart($event)" labelLeft="Longitude"
+                    [items]="columns" itemKey="title" itemName="title">
                 </form-select>
             </div>
         </div>
     
         <div class="d-flex flex-wrap pt-1" *ngIf="chartType.inputFormat === eInputFormat.MultiSeries || chartType.inputFormat === eInputFormat.InverseSeries">
             <div class="flex-fill">
-                <form-select [(ngModel)]="labelColumnIndex" (ngModelChange)="updateChart($event)" labelLeft="Labels" 
-                    [items]="columns" itemKey="name" itemName="title">
+                <form-select [(ngModel)]="config.labelColumn" (ngModelChange)="updateChart($event)" labelLeft="Labels" 
+                    [items]="columns" itemKey="title" itemName="title">
                 </form-select>
             </div>
             <div class="flex-fill pl-1">
-                <form-tags-dropdown [(ngModel)]="seriesColumnsIndex" (ngModelChange)="updateChart($event)" labelLeft="Series Columns"
-                    [items]="columns" itemKey="name" itemName="title" [enableAddAll]="true">
+                <form-tags-dropdown [(ngModel)]="config.seriesColumns" (ngModelChange)="updateChart($event)" labelLeft="Series Columns"
+                    [items]="columns" itemKey="title" itemName="title" [enableAddAll]="true">
                 </form-tags-dropdown>
             </div>
         </div>
@@ -61,41 +60,41 @@
         <div class="d-flex flex-wrap pt-1" *ngIf=" chartType.inputFormat===eInputFormat.Xy || chartType.inputFormat===eInputFormat.XyMinMax
             || chartType.inputFormat===eInputFormat.XyBubble">
             <div class="flex-fill">
-                <form-select [(ngModel)]="labelColumnIndex" (ngModelChange)="updateChart($event)" labelLeft="Labels" 
-                    [items]="columns" itemKey="name" itemName="title">
+                <form-select [(ngModel)]="config.labelColumn" (ngModelChange)="updateChart($event)" labelLeft="Labels" 
+                    [items]="columns" itemKey="title" itemName="title">
                 </form-select>
             </div>
     
             <div class="flex-fill pl-1">
-                <form-select [(ngModel)]="xColumnIndex" (ngModelChange)="updateChart($event)" labelLeft="X-Column" 
-                    [items]="columns" itemKey="name" itemName="title">
+                <form-select [(ngModel)]="config.xColumn" (ngModelChange)="updateChart($event)" labelLeft="X-Column" 
+                    [items]="columns" itemKey="title" itemName="title">
                 </form-select>
             </div>
     
             <div class="flex-fill pl-1">
-                <form-select [(ngModel)]="yColumnIndex" (ngModelChange)="updateChart($event)" labelLeft="Y-Column" 
-                    [items]="columns" itemKey="name" itemName="title">
+                <form-select [(ngModel)]="config.yColumn" (ngModelChange)="updateChart($event)" labelLeft="Y-Column" 
+                    [items]="columns" itemKey="title" itemName="title">
                 </form-select>
             </div>
     
             <ng-template [ngIf]="chartType.inputFormat === eInputFormat.XyMinMax">
                 <div class="flex-fill pl-1">
-                    <form-select [(ngModel)]="minColumnIndex" (ngModelChange)="updateChart($event)" labelLeft="Error Min Column"
-                        [items]="columns" itemKey="name" itemName="title">
+                    <form-select [(ngModel)]="config.minColumn" (ngModelChange)="updateChart($event)" labelLeft="Error Min Column"
+                        [items]="columns" itemKey="title" itemName="title">
                     </form-select>
                 </div>
     
                 <div class="flex-fill pl-1">
-                    <form-select [(ngModel)]="maxColumnIndex" (ngModelChange)="updateChart($event)" labelLeft="Error Max Column"
-                        [items]="columns" itemKey="name" itemName="title">
+                    <form-select [(ngModel)]="config.maxColumn" (ngModelChange)="updateChart($event)" labelLeft="Error Max Column"
+                        [items]="columns" itemKey="title" itemName="title">
                     </form-select>
                 </div>
             </ng-template>
     
             <ng-template [ngIf]="chartType.inputFormat === eInputFormat.XyBubble">
                 <div class="flex-fill pl-1">
-                    <form-select [(ngModel)]="radiusColumnIndex" (ngModelChange)="updateChart($event)" labelLeft="Bubble Radius"
-                        [items]="columns" itemKey="name" itemName="title">
+                    <form-select [(ngModel)]="config.radiusColumn" (ngModelChange)="updateChart($event)" labelLeft="Bubble Radius"
+                        [items]="columns" itemKey="title" itemName="title">
                     </form-select>
                 </div>
             </ng-template>
@@ -160,142 +159,13 @@
         
         </div>
 
-    </ng-template>
+</dexih-widget-section>
     
-    <div class="mt-1" *ngIf="!results || !chartType">
-        <div class="alert alert-warning">
-            Chart not displayed.  Check the chart type, labels and series have been set.
-        </div>
-    </div>
+    <dexih-widget-section [title]="title" [showExpandButton]="true" [padding]="false">
+        <ng-template #header>
+            <dexih-button buttonClass="btn-sm btn-outline-primary m-1" (click)="export()" text="export"></dexih-button>
+        </ng-template>
 
-    <div class="mt-1" *ngIf="results && chartType">
-        <dexih-button buttonClass="btn-sm btn-outline-primary m-1" (click)="export()" text="export"></dexih-button>
+        <chart-view [config]="config" [columns]="columns" [data]="data"></chart-view>
 
-        <div id="chart" style="height: 650px">
-            <h2 style="text-align: center">{{title}}</h2>
-            <ngx-charts-bar-vertical *ngIf="chartType.key === eChartType.BarVertical" [scheme]="config.colorScheme" [results]="results"
-                [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis" [legend]="config.showLegend"
-                [showGridLines]="config.showGridLines" [showXAxisLabel]="config.showXAxisLabel" [showYAxisLabel]="config.showYAxisLabel"
-                [xAxisLabel]="config.xAxisLabel" [yScaleMin]="config.yScaleMin" [yScaleMax]="config.yScaleMax" [yAxisLabel]="config.yAxisLabel">
-            </ngx-charts-bar-vertical>
-        
-            <ngx-charts-bar-horizontal *ngIf="chartType.key === eChartType.BarHorizontal" [scheme]="config.colorScheme"
-                [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"
-                [legend]="config.showLegend" [showGridLines]="config.showGridLines" [showXAxisLabel]="config.showXAxisLabel"
-                [showYAxisLabel]="config.showYAxisLabel" [xAxisLabel]="config.xAxisLabel" [xScaleMin]="config.xScaleMin"
-                [xScaleMax]="config.xScaleMax" [yAxisLabel]="config.yAxisLabel">
-            </ngx-charts-bar-horizontal>
-        
-            <ngx-charts-bar-vertical-2d *ngIf="chartType.key === eChartType.BarVertical2D" [scheme]="config.colorScheme"
-                [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"
-                [legend]="config.showLegend" [showGridLines]="config.showGridLines" [showXAxisLabel]="config.showXAxisLabel"
-                [showYAxisLabel]="config.showYAxisLabel" [xAxisLabel]="config.xAxisLabel" [yScaleMax]="config.yScaleMax"
-                [yAxisLabel]="config.yAxisLabel">
-            </ngx-charts-bar-vertical-2d>
-        
-            <ngx-charts-bar-horizontal-2d *ngIf="chartType.key === eChartType.BarHorizontal2D" [scheme]="config.colorScheme"
-                [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"
-                [legend]="config.showLegend" [showGridLines]="config.showGridLines" [showXAxisLabel]="config.showXAxisLabel"
-                [showYAxisLabel]="config.showYAxisLabel" [xAxisLabel]="config.xAxisLabel" [xScaleMax]="config.xScaleMax"
-                [yAxisLabel]="config.yAxisLabel">
-            </ngx-charts-bar-horizontal-2d>
-        
-            <ngx-charts-bar-vertical-stacked *ngIf="chartType.key === eChartType.BarVerticalStacked" [scheme]="config.colorScheme"
-                [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"
-                [legend]="config.showLegend" [showGridLines]="config.showGridLines" [showXAxisLabel]="config.showXAxisLabel"
-                [showYAxisLabel]="config.showYAxisLabel" [xAxisLabel]="config.xAxisLabel" [yScaleMax]="config.yScaleMax"
-                [yAxisLabel]="config.yAxisLabel">
-            </ngx-charts-bar-vertical-stacked>
-        
-            <ngx-charts-bar-horizontal-stacked *ngIf="chartType.key === eChartType.BarHorizontalStacked" [scheme]="config.colorScheme"
-                [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"
-                [legend]="config.showLegend" [showGridLines]="config.showGridLines" [showXAxisLabel]="config.showXAxisLabel"
-                [showYAxisLabel]="config.showYAxisLabel" [xAxisLabel]="config.xAxisLabel" [xScaleMax]="config.xScaleMax"
-                [yAxisLabel]="config.yAxisLabel">
-            </ngx-charts-bar-horizontal-stacked>
-        
-            <ngx-charts-bar-vertical-normalized *ngIf="chartType.key === eChartType.BarVerticalNormalized" [scheme]="config.colorScheme"
-                [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"
-                [legend]="config.showLegend" [showGridLines]="config.showGridLines" [showXAxisLabel]="config.showXAxisLabel"
-                [showYAxisLabel]="config.showYAxisLabel" [xAxisLabel]="config.xAxisLabel" [yAxisLabel]="config.yAxisLabel">
-            </ngx-charts-bar-vertical-normalized>
-        
-            <ngx-charts-bar-horizontal-normalized *ngIf="chartType.key === eChartType.BarHorizontalNormalized" [scheme]="config.colorScheme"
-                [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"
-                [legend]="config.showLegend" [showGridLines]="config.showGridLines" [showXAxisLabel]="config.showXAxisLabel"
-                [showYAxisLabel]="config.showYAxisLabel" [xAxisLabel]="config.xAxisLabel" [yAxisLabel]="config.yAxisLabel">
-            </ngx-charts-bar-horizontal-normalized>
-        
-            <ngx-charts-pie-chart *ngIf="chartType.key === eChartType.Pie" [scheme]="config.colorScheme" [results]="results"
-                [legend]="config.showLegend" [labels]="config.showXAxis" [explodeSlices]="config.explodeSlices" [doughnut]="config.doughnut"
-                [gradient]="config.showGradient" [legend]="false" [labels]="true">
-            </ngx-charts-pie-chart>
-        
-            <ngx-charts-advanced-pie-chart *ngIf="chartType.key === eChartType.PieAdvanced" [scheme]="config.colorScheme"
-                [results]="results" [gradient]="config.showGradient">
-            </ngx-charts-advanced-pie-chart>
-        
-            <ngx-charts-pie-grid *ngIf="chartType.key === eChartType.PieGrid" [scheme]="config.colorScheme" [results]="results">
-            </ngx-charts-pie-grid>
-        
-            <ngx-charts-line-chart *ngIf="chartType.key === eChartType.Line" [scheme]="config.colorScheme" [results]="results"
-                [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis" [legend]="config.showLegend"
-                [showGridLines]="config.showGridLines" [showXAxisLabel]="config.showXAxisLabel" [showYAxisLabel]="config.showYAxisLabel"
-                [xAxisLabel]="config.xAxisLabel" [yScaleMin]="config.yScaleMin" [yScaleMax]="config.yScaleMax" [yAxisLabel]="config.yAxisLabel">
-            </ngx-charts-line-chart>
-        
-            <ngx-charts-polar-chart *ngIf="chartType.key === eChartType.Polar" [scheme]="config.colorScheme" [results]="results"
-                [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis" [legend]="config.showLegend"
-                [showGridLines]="config.showGridLines" [showXAxisLabel]="config.showXAxisLabel" [showYAxisLabel]="config.showYAxisLabel"
-                [xAxisLabel]="config.xAxisLabel" [yAxisLabel]="config.yAxisLabel">
-            </ngx-charts-polar-chart>
-        
-            <ngx-charts-area-chart *ngIf="chartType.key === eChartType.Area" [scheme]="config.colorScheme" [results]="results"
-                [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis" [legend]="config.showLegend"
-                [showGridLines]="config.showGridLines" [showXAxisLabel]="config.showXAxisLabel" [showYAxisLabel]="config.showYAxisLabel"
-                [xAxisLabel]="config.xAxisLabel" [yScaleMax]="config.yScaleMax" [yAxisLabel]="config.yAxisLabel">
-            </ngx-charts-area-chart>
-        
-            <ngx-charts-area-chart-stacked *ngIf="chartType.key === eChartType.AreaStacked" [scheme]="config.colorScheme"
-                [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"
-                [legend]="config.showLegend" [showGridLines]="config.showGridLines" [showXAxisLabel]="config.showXAxisLabel"
-                [showYAxisLabel]="config.showYAxisLabel" [xAxisLabel]="config.xAxisLabel" [yScaleMin]="config.yScaleMin"
-                [yScaleMax]="config.yScaleMax" [yAxisLabel]="config.yAxisLabel">
-            </ngx-charts-area-chart-stacked>
-        
-            <ngx-charts-area-chart-normalized *ngIf="chartType.key === eChartType.AreaNormalized" [scheme]="config.colorScheme"
-                [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"
-                [legend]="config.showLegend" [showGridLines]="config.showGridLines" [showXAxisLabel]="config.showXAxisLabel"
-                [showYAxisLabel]="config.showYAxisLabel" [xAxisLabel]="config.xAxisLabel" [yAxisLabel]="config.yAxisLabel">
-            </ngx-charts-area-chart-normalized>
-        
-            <ngx-charts-bubble-chart *ngIf="chartType.key === eChartType.Bubble || chartType.key === eChartType.Error || chartType.key === eChartType.Scatter"
-                [scheme]="config.colorScheme" [results]="results" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"
-                [legend]="config.showLegend" [showGridLines]="config.showGridLines" [showXAxisLabel]="config.showXAxisLabel"
-                [showYAxisLabel]="config.showYAxisLabel" [xAxisLabel]="config.xAxisLabel" [xScaleMin]="config.xScaleMin"
-                [xScaleMax]="config.xScaleMax" [yScaleMin]="config.yScaleMin"
-                [yScaleMax]="config.yScaleMax" [yAxisLabel]="config.yAxisLabel">
-            </ngx-charts-bubble-chart>
-        
-            <ngx-charts-heat-map *ngIf="chartType.key === eChartType.HeatMap" [scheme]="config.colorScheme" [gradient]="config.showGradient"
-                [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"
-                [legend]="config.showLegend" [showXAxisLabel]="config.showXAxisLabel" [showYAxisLabel]="config.showYAxisLabel"
-                [xAxisLabel]="config.xAxisLabel" [max]="config.xScaleMax" [min]="config.xScaleMin" [yAxisLabel]="config.yAxisLabel">
-            </ngx-charts-heat-map>
-        
-            <ngx-charts-tree-map *ngIf="chartType.key === eChartType.TreeMap" [scheme]="config.colorScheme" [gradient]="config.showGradient"
-                [results]="results" [gradient]="config.showGradient">
-            </ngx-charts-tree-map>
-        
-            <ngx-charts-number-card *ngIf="chartType.key === eChartType.Cards" [scheme]="config.colorScheme" [results]="results">
-            </ngx-charts-number-card>
-        
-            <ngx-charts-gauge *ngIf="chartType.key === eChartType.Gauge" [scheme]="config.colorScheme" [results]="results"
-                [showAxis]="config.showXAxis" [legend]="config.showLegend" [showAxis]="config.showXAxisLabel" [textValue]="config.xAxisLabel"
-                [min]="config.xScaleMin" [max]="config.xScaleMax" [units]="config.yAxisLabel">
-            </ngx-charts-gauge>
-        
-            <google-map *ngIf="chartType.key === eChartType.Map" [results]="results"></google-map>
-        </div>
-    </div>
-</div>
+    </dexih-widget-section>

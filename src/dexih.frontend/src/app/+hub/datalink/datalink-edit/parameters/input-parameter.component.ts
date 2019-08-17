@@ -74,13 +74,19 @@ export class InputParameterComponent implements OnInit, OnDestroy {
             } else {
                 this.inputs[i].staticValue = inputParameter.value;
             }
-            if (inputParameter.runTime.functionParameter) {
-                this.inputs[i].textItems = this.variables.concat(inputParameter.runTime.functionParameter.listOfValues);
-            }
+
+            this.inputs[i].textItems = [];
+
             if (inputParameter.dataType === eTypeCode.Boolean) {
                 this.inputs[i].textItems = this.inputs[i].textItems.concat(['true', 'false' ]);
                 this.inputs[i].staticValue = this.inputs[i].staticValue.toString();
             }
+
+            if (inputParameter.runTime.functionParameter.listOfValues) {
+                this.inputs[i].textItems = this.inputs[i].textItems.concat(inputParameter.runTime.functionParameter.listOfValues);
+            }
+
+            this.inputs[i].textItems = this.inputs[i].textItems.concat(this.variables);
         }
 
         this.updateItems();

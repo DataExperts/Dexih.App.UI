@@ -13,7 +13,7 @@ import { CustomFunctionEditComponent }  from './custom-function-edit';
 import { MappingEditComponent } from './mapping-edit';
 import { DatalinkEditGuard } from './datalink-edit-guard';
 import { PreviewDataComponent } from './preview-data';
-import { TablePreviewDataComponent} from '../../table/table-preview-data';
+import { PreviewTableComponent} from './preview-table';
 import { TransformTableEditComponent } from './transform-table-edit/transform-table-edit.component';
 import { DatalinkEditTransformsComponent } from './transforms/datalink-edit-transforms.component';
 import { DatalinkEditNewTransformComponent } from './new-transform/datalink-edit-new-transform.component';
@@ -49,7 +49,7 @@ export const datalinkEditRoutes: Routes = [
 
     { path: 'source-table', data: { pageTitle: 'Source Table' }, children: [
         { path: '', pathMatch: 'full', component: DatalinkEditSourceTableComponent},
-        { path: 'preview-table-data/:tableKey', component: TablePreviewDataComponent,
+        { path: 'preview-table-data/:tableKey', component: PreviewTableComponent,
             data: { pageTitle: 'Preview Table', action: 'preview'} },
         { path: 'column/:datalinkColumnKey', component: DatalinkColumnEditComponent,
             data: { pageTitle: 'Edit Column', action: 'edit'} },
@@ -63,12 +63,12 @@ export const datalinkEditRoutes: Routes = [
         { path: '', pathMatch: 'full', component: DatalinkEditTargetComponent},
         { path: 'table-edit/:targetKey', data: { pageTitle: 'Edit Target Table', action: 'edit'}, children: [
             { path: '', pathMatch: 'full', component: DatalinkEditTargetTableComponent },
-            { path: 'preview-table-data/:tableKey', component: TablePreviewDataComponent,
+            { path: 'preview-table-data/:tableKey', component: PreviewTableComponent,
                 data: { pageTitle: 'Preview Table', action: 'preview'} },
             ]},
         { path: 'table-new', data: { pageTitle: 'New Target Table', action: 'new'}, children: [
             { path: '', pathMatch: 'full', component: DatalinkEditTargetTableComponent },
-            { path: 'preview-table-data/:tableKey', component: TablePreviewDataComponent,
+            { path: 'preview-table-data/:tableKey', component: PreviewTableComponent,
                 data: { pageTitle: 'Preview Table', action: 'preview'} },
             ]},
     ] },

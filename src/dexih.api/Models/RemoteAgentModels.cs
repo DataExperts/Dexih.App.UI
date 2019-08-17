@@ -21,11 +21,11 @@ namespace dexih.api.Models
 
     public class RemoteAgentSettingsSubset
     {
+        public long[] AllowedHubs { get; set; }
+        public string[] AllowedPaths { get; set; }
         public bool AllowAllHubs { get; set; }
         public bool AllowAllPaths { get; set; }
         public bool AllowDownload { get; set; }
-        public int[] AllowedHubs { get; set; }
-        public string[] AllowedPaths { get; set; }
         public bool AllowExternalAccess { get; set; }
         public bool AllowLanAccess { get; set; }
         public bool AllowLocalFiles { get; set; }

@@ -50,7 +50,7 @@ export class HubsSharedDataComponent implements OnInit {
                 this.searchForm = this.fb.group({
                     'searchString': ['', [
                     ]],
-                    'hubs': [[], [
+                    'hubKeys': [[], [
                     ]],
                 });
 
@@ -69,26 +69,13 @@ export class HubsSharedDataComponent implements OnInit {
     }
 
     updateSearch() {
-        let hubs = <DexihHubAuth[]>this.searchForm.value.hubs;
-        let hubKeys = hubs.map( c => c.hubKey);
+        let hubKeys = <number[]>this.searchForm.value.hubKeys;
         this.hubsService.getSharedDataIndex(this.searchForm.value.searchString, hubKeys, 50, true).then(result => {
 
             this.dataIndex = result;
 
-            //     if (history.pushState) {
-            //       let newurl = this.hubService.getHubUrl() + '/search';
-            //       let searchString = this.searchForm.value.searchString;
-            //       let searchObject = this.searchForm.value.searchObject;
-            //       if (searchString) {
-            //           newurl += '/' + searchObject + '/' + searchString;
-            //       }
-            //       window.history.replaceState({path: newurl}, '', newurl);
-            //   }
-
         }).catch(reason => this.dexihMessage.addMessage(reason));
     }
-
-
 
     previewData(item: SharedData) {
         this.router.navigate(['preview', item.hubKey, item.objectType, item.objectKey], { relativeTo: this.route.parent });

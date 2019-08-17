@@ -1,0 +1,27 @@
+<div *ngIf="parameters" class="w-100">
+    <dexih-button-new *ngIf="parameters.controls.length === 0" (click)="add()" text="Add Parameter"></dexih-button-new>
+    <span *ngFor="let parameter of parameters.controls; let i = index" class="input-group">
+        <form [formGroup]="parameter">
+            <div class="input-group">
+                <form-input [disabled]="!showEdit" labelLeft="Name" [border]="false" class="form-control p-0" formControlName="name">
+                </form-input>
+                <form-select labelLeft="Value" [border]="false" class="form-control p-0" formControlName="value" [items]="selectItems" [enableTextEntry]="true">
+                </form-select>
+
+                <div *ngIf="showEdit" class="input-group-append">
+                    <div class="input-group-text p-0">
+                        <button type="button" (click)="add(i)" class="btn btn-sm border-0 rounded-0 bg-transparent"
+                            value="Add">
+                            <i class="fa fa-plus-square-o"></i>
+                        </button>
+                    </div>
+                    <div class="input-group-text p-0">
+                        <button type="button" (click)="delete(i)" class="btn btn-sm border-0 rounded-0 bg-transparent"
+                            value="Remove">
+                            <i class="fa fa-minus-square-o"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </span>

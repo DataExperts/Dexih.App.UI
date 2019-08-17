@@ -18,12 +18,12 @@
             </label>
         </div>
 
-        <dexih-button-save *ngIf="key" class="ml-1" (click)="save()"></dexih-button-save>
+        <dexih-button-save *ngIf="allowViewSave" class="ml-1" (click)="save()"></dexih-button-save>
     </ng-template>
 
     <ng-template #tableHeader>
         <h5>Data Configuration</h5>
-        <query-builder [selectQuery]="selectQuery" [columns]="tableColumns" [inputColumns]="inputColumns">
+        <query-builder [selectQuery]="selectQuery" [columns]="tableColumns" [inputColumns]="inputColumns" [parameters]="parameters">
         </query-builder>
         <div [ngStyle]="{'display': view === 'chart' ? 'block' : 'none' }" class="mt-1">
             <h5>Chart Configuration</h5>

@@ -34,14 +34,14 @@ export class ResultsIndexComponent implements OnInit, OnDestroy {
         { name: 'message', title: 'Message', format: '' },
     ];
 
-    auditTypes = [ 'Datalink', 'Datajob', 'DatalinkTest', 'Table' ];
+    auditTypes = [ 'Datalink', 'Datajob', 'DatalinkTest' ];
 
     private _tableData = new BehaviorSubject<Array<TransformWriterResult>>(null);
     tableData: Observable<Array<TransformWriterResult>> = this._tableData.asObservable();
 
-    datalinks: Array<DexihDatalink> = [];
-    datajobs: Array<DexihDatajob> = [];
-    datalinkTests: Array<DexihDatalinkTest> = [];
+    datalinks: Array<number> = [];
+    datajobs: Array<number> = [];
+    datalinkTests: Array<number> = [];
 
     auditType: string = null;
 
@@ -74,19 +74,15 @@ export class ResultsIndexComponent implements OnInit, OnDestroy {
                     let datalinkTestsKeysString = queryParams['datalinkTestKeys'];
 
                     if (datalinkKeysString) {
-                        let datalinkKeys = (datalinkKeysString + '').split(',').map(c => +c);
-                        this.datalinks = datalinkKeys.map(key => this.hubCache.hub.dexihDatalinks.find(c => c.key === key)).filter(d => d);
+                        this.datalinks = (datalinkKeysString + '').split(',').map(c => +c);
                         this.auditType = 'Datalink';
                     }
                     if (datajobKeysString) {
-                        let datajobKeys = (datajobKeysString + '').split(',').map(c => +c);
-                        this.datajobs = datajobKeys.map(key => this.hubCache.hub.dexihDatajobs.find(c => c.key === key)).filter(d => d);
+                        this.datajobs = (datajobKeysString + '').split(',').map(c => +c);
                         this.auditType = 'Datajob';
                     }
                     if (datalinkTestsKeysString) {
-                        let datalinkTestKeys = (datalinkTestsKeysString + '').split(',').map(c => +c);
-                        this.datalinkTests = datalinkTestKeys.map(key => this.hubCache.hub.dexihDatalinkTests.find(c => c.key === key))
-                            .filter(d => d);
+                        this.datalinkTests = (datalinkTestsKeysString + '').split(',').map(c => +c);
                         this.auditType = 'DatalinkTest';
                     }
 
@@ -116,20 +112,21 @@ export class ResultsIndexComponent implements OnInit, OnDestroy {
         let data = [];
 
         let keys: number[];
-        let connectionKeys: number[];
+        let connectionKeys: number[] = [];
 
         switch (this.auditType) {
             case 'Datalink':
-                keys = this.datalinks.map(c => c.key);
-                connectionKeys = this.datalinks.map(c => c.auditConnectionKey);
+                keys = this.datalinks;
+                connectionKeys = this.datalinks.map(c => this.hubCache.hub.dexihDatalinks.find(d => d.key === c).auditConnectionKey);
                 break;
             case 'Datajob':
-                keys = this.datajobs.map(c => c.key);
-                connectionKeys = this.datajobs.map(c => c.auditConnectionKey);
+                keys = this.datajobs;
+                connectionKeys = this.datajobs.map(c => this.hubCache.hub.dexihDatajobs.find(d => d.key === c).auditConnectionKey);
                 break;
             case 'DatalinkTest':
-                keys = this.datalinkTests.map(c => c.key);
-                connectionKeys = this.datalinkTests.map(c => c.auditConnectionKey);
+                keys = this.datalinkTests;
+                connectionKeys = this.datalinkTests.map(c => this.hubCache.hub.dexihDatalinkTests
+                    .find(d => d.key === c).auditConnectionKey);
                 break;
             default:
                 keys = null;
@@ -153,7 +150,7 @@ export class ResultsIndexComponent implements OnInit, OnDestroy {
             if (hubCacheChange.changeClass === eSharedObjectType.TransformWriterResult) {
                 let writerResult: TransformWriterResult = hubCacheChange.data;
                 let results: TransformWriterResult[] = this._tableData.value;
-                if (this.datalinks && this.datalinks.findIndex(c => c.key === writerResult.referenceKey) >= 0) {
+                if (this.datalinks && this.datalinks.findIndex(c => c === writerResult.referenceKey) >= 0) {
                     let existingResult = results.find(c => c.auditKey === writerResult.auditKey);
                     if (existingResult) {
                         Object.assign(existingResult, writerResult);
@@ -162,7 +159,7 @@ export class ResultsIndexComponent implements OnInit, OnDestroy {
                         this._tableData.next([writerResult].concat(results));
                     }
                 }
-                if (this.datajobs && this.datajobs.findIndex(c => c.key === writerResult.referenceKey) >= 0) {
+                if (this.datajobs && this.datajobs.findIndex(c => c === writerResult.referenceKey) >= 0) {
                     let existingResult = results.find(c => c.auditKey === writerResult.auditKey);
                     if (existingResult) {
                         Object.assign(existingResult, writerResult);
@@ -172,7 +169,7 @@ export class ResultsIndexComponent implements OnInit, OnDestroy {
                     }
                 }
 
-                if (this.datalinkTests && this.datalinkTests.findIndex(c => c.key === writerResult.referenceKey) >= 0) {
+                if (this.datalinkTests && this.datalinkTests.findIndex(c => c === writerResult.referenceKey) >= 0) {
                     let existingResult = results.find(c => c.auditKey === writerResult.auditKey);
                     if (existingResult) {
                         Object.assign(existingResult, writerResult);

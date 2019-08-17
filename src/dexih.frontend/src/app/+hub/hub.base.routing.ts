@@ -27,6 +27,7 @@ import { ApiEditComponent } from './api/api-edit';
 import { ApiIndexComponent } from './api/api-index';
 import { DatalinkRunComponent } from './datalink/datalink-run/datalink-run.component';
 import { SearchComponent } from './search';
+import { DashboardEditComponent, DashboardIndexComponent } from './dashboard';
 
 const tableRoutes: Routes = [
     { path: 'table-edit/:tableKey', data: { pageTitle: 'Edit Table', action: 'edit'},
@@ -163,6 +164,19 @@ const viewRoute: Route = { path: 'views', data: { pageTitle: 'Views' }, children
     ])
 };
 
+const dashboardRoutes: Routes = [
+    { path: 'dashboard-edit/:dashboardKey', data: { pageTitle: 'Edit Dashboard', action: 'edit'},
+        loadChildren: () => import('./dashboard/dashboard-edit/dashboard-edit.module').then(m => m.DashboardEditModule)},
+    { path: 'dashboard-new',  data: {  pageTitle: 'New Dashboard', action: 'new'},
+        loadChildren: () => import('./dashboard/dashboard-edit/dashboard-edit.module').then(m => m.DashboardEditModule)},
+];
+
+const dashboardRoute: Route = { path: 'dashboards', data: { pageTitle: 'Dashboards' }, children: (<Routes>[
+    {path: '', pathMatch: 'full', component: DashboardIndexComponent},
+    {path: '', children: (<Routes>dashboardRoutes)}
+    ])
+};
+
 const apiRoutes: Routes = [
     { path: 'api-edit/:apiKey', component: ApiEditComponent, canDeactivate: [ItemEditGuard],
         data: { action: 'edit', pageTitle: 'Edit Api'}},
@@ -276,6 +290,7 @@ const routes: Routes = (<Routes>[
     customFunctionRoute,
     fileFormatsRoute,
     viewRoute,
+    dashboardRoute,
     apiRoute,
     hubVariablesRoute,
     manageRoute,
@@ -294,6 +309,7 @@ const routes: Routes = (<Routes>[
     { path: '', children : columnValidationRoutes},
     { path: '', children : fileFormatRoutes},
     { path: '', children : viewRoutes},
+    { path: '', children : dashboardRoutes},
     { path: '', children : apiRoutes},
     { path: '', children : hubVariableRoutes},
     { path: '', children : filesRoutes},

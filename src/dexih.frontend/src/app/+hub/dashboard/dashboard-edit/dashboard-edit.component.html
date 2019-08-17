@@ -1,0 +1,16 @@
+<div class="container-fluid" >
+	<dexih-widget title="Dashboard - {{formService?.currentForm?.controls.name.value}}" iconClass="fa fa-lg fa-fw fa-pie-chart" [showCloseButton]="true" [padding]="false"
+	 (close)="close()">
+		<ng-template #header>
+			<dexih-invalid-form-details [control]="formsService.currentForm" (click)="formsService.showErrors()" class="mr-1"></dexih-invalid-form-details>
+			<dexih-button-edit class="mr-1" (click)="toggleEdit()" [text]="formsService.currentForm?.controls.runTime.value.showEdit ? 'Hide Edit' : 'Edit'"></dexih-button-edit>
+			<dexih-button-refresh class="mr-1"  (click)="refresh()"></dexih-button-refresh>
+			<download-button class="mr-1" (download)="download($event)"></download-button>
+			<save-button *ngIf="hubCache.canWrite" [formsService]="formsService" class="mr-1"></save-button>
+			<cancel-button [formsService]="formsService"></cancel-button>
+		</ng-template>
+
+		<router-outlet></router-outlet>
+
+	</dexih-widget>
+</div>

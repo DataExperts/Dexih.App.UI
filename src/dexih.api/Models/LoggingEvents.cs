@@ -111,6 +111,9 @@
 		public const int HubDeactivateApis = 4052;
 		public const int HubRestartAgent = 4053;
 		public const int HubBulkUploadFiles = 4054;
+		public const int HubDeleteDashboards = 4055;
+		public const int HubSaveDashboards = 4056;
+		public const int HubImportFunctionMappings = 4057;
 
 
 		

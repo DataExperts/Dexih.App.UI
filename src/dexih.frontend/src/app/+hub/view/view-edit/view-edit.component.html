@@ -1,17 +1,18 @@
-<div class="container">
-	<dexih-widget title="Edit View" iconClass="fa fa-lg fa-fw fa-bar-chart" [showCloseButton]="true" [padding]="true"
+<div class="container" *ngIf="formsService">
+	<dexih-widget title="Edit View" iconClass="fa fa-lg fa-fw fa-bar-chart" [showCloseButton]="true" [padding]="false"
 	 (close)="close()">
 		<ng-template #header>
 			<dexih-invalid-form-details [control]="formsService.currentForm" (click)="formsService.showErrors()" class="mr-1"></dexih-invalid-form-details>
 			<dexih-button-refresh class="mr-1" (click)="refresh()" text="Reload"></dexih-button-refresh>
 			<download-button class="mr-1" (download)="download($event)"></download-button>
 			<dexih-button class="mr-1" iconClass="fa fa-line-chart" (click)="showChart = !showChart" [text]="showChart ? 'Show Data' : 'Show Chart'"></dexih-button>
-			<dexih-button-save class="mr-1" (click)="save()"></dexih-button-save>
+			<save-button *ngIf="hubCache.canWrite" [formsService]="formsService" class="mr-1"></save-button>
 			<dexih-button-edit class="mr-1" (click)="showEdit = !showEdit" [text]="showEdit ? 'Hide Edit' : 'Edit'"></dexih-button-edit>
 			<cancel-button [formsService]="formsService"></cancel-button>
 		</ng-template>
 
-		<form *ngIf="formsService.currentForm && showEdit" [formGroup]="formsService.currentForm">
+		<dexih-widget-section *ngIf="formsService.currentForm && (showEdit || formsService.currentForm?.controls.parameters.length > 0)" title="Properties" [showExpandButton]="true">
+		<form *ngIf="showEdit" [formGroup]="formsService.currentForm">
 			<fieldset>
 				<section>
 					<form-input label="View Name" formControlName="name" placeholder="Enter the view name." [autocapitalize]="on" iconClass="fa fa-list"
@@ -41,12 +42,18 @@
 						</section>
 					</div>
 
+					<form-checkbox formControlName="autoRefresh" label="Automatically refresh data when view is opened"></form-checkbox>
+
 				</section>
 
 			</fieldset>
 		</form>
 
-		<div class="d-flex flex-wrap pt-1" *ngIf="inputColumns && inputColumns.length > 0" >
+		<input-parameters [showEdit]="showEdit" [parameters]="formsService.currentForm?.controls.parameters" [formsService]="formsService"></input-parameters>
+
+		</dexih-widget-section>
+
+		<dexih-widget-section  *ngIf="inputColumns && inputColumns.length > 0" title="InputColumns" [showExpandButton]="true">
 			<span *ngFor="let column of inputColumns; let i = index" class="input-group">
 				<div class="input-group-prepend">
 					<div class="input-group-text">
@@ -55,12 +62,12 @@
 				</div>
 				<form-input name="column{{i}}" class="form-control p-0" [placeholder]="'Enter ' + column.logicalName" [(ngModel)]="column.value"></form-input>
 			</span>
-		</div>
+		</dexih-widget-section>
 
-		<section *ngIf="showEdit">
-			<h5>Data Configuration</h5>
-			<query-builder  [selectQuery]="selectQuery" [columns]="tableColumns" [inputColumns]="inputColumns"></query-builder>
-		</section>
+
+		<dexih-widget-section  *ngIf="showEdit" title="Query Configuration" [showExpandButton]="true">
+			<query-builder  [selectQuery]="selectQuery" [columns]="tableColumns" [inputColumns]="inputColumns" [parameters]="formsService.currentForm.controls.parameters.value" ></query-builder>
+		</dexih-widget-section>
 
 		<ng-template [ngIf]="columns?.length > 0 && data?.length > 0">
 			<dexih-table [enableMultiSelect]="false" [enableSaveCsv]="true" [columns]="columns" [data]="data" [hideTable]="showChart">
@@ -69,11 +76,11 @@
 				</ng-template> -->
 			</dexih-table>
 
-			<section *ngIf="showChart" [ngStyle]="{'display': showChart ? 'block' : 'none' }" class="mt-1">
-				<h5 *ngIf="showEdit">Chart Configuration</h5>
-				<chart-builder [title]="formsService.currentForm.controls.name.value" [columns]="columns" [data]="data" [config]="chartConfig"
-				 [showEdit]="showEdit"></chart-builder>
-			</section>
+			<chart-builder *ngIf="showChart" [ngStyle]="{'display': showChart ? 'block' : 'none' }" style="height: 600px" [title]="formsService.currentForm.controls.name.value" [columns]="columns" [data]="data" [config]="chartConfig"
+				[showEdit]="showEdit">
+			</chart-builder>
+
 		</ng-template>
 
 	</dexih-widget>
+</div>

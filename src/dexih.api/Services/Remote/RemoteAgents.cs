@@ -860,7 +860,7 @@ namespace dexih.api.Services.Remote
 		    return result;
 	    }
 	    
-	    public async Task<string> PreviewTable(string id, long hubKey, DexihTable table, SelectQuery selectQuery, InputColumn[] inputColumns, bool showRejectedData, DownloadUrl downloadUrl, RepositoryManager database)
+	    public async Task<string> PreviewTable(string id, long hubKey, DexihTable table, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters parameters, bool showRejectedData, DownloadUrl downloadUrl, RepositoryManager database)
 	    {
 		    try
 		    {
@@ -878,7 +878,8 @@ namespace dexih.api.Services.Remote
 				    showRejectedData,
 				    selectQuery,
 				    downloadUrl,
-				    inputColumns
+				    inputColumns,
+				    parameters
 			    };
 
 			    var result = await SendRemoteMessage<string>(hubKey, id, nameof(RemoteOperations.PreviewTable), value, null, database, CancellationToken.None);
@@ -890,14 +891,14 @@ namespace dexih.api.Services.Remote
 		    }
 	    }
 	    
-		public async Task<string> PreviewTable(string id, long hubKey, long tableKey, SelectQuery selectQuery, InputColumn[] inputColumns, bool showRejectedData, DownloadUrl downloadUrl, RepositoryManager database)
+		public async Task<string> PreviewTable(string id, long hubKey, long tableKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters parameters, bool showRejectedData, DownloadUrl downloadUrl, RepositoryManager database)
 		{
 			var table = await database.GetTable(hubKey, tableKey, true);
-			return await PreviewTable(id, hubKey, table, selectQuery, inputColumns, showRejectedData, downloadUrl, database);
+			return await PreviewTable(id, hubKey, table, selectQuery, inputColumns, parameters, showRejectedData, downloadUrl, database);
         }
 
 	    
-	    public async Task<ManagedTask> DownloadTableData(string id, long hubKey, string connectionId, DexihTable hubTable, SelectQuery selectQuery, InputColumn[] inputColumns, bool showRejectedData, EDownloadFormat downloadFormat, bool zipFiles, DownloadUrl downloadUrl, RepositoryManager database)
+	    public async Task<ManagedTask> DownloadTableData(string id, long hubKey, string connectionId, DexihTable hubTable, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters parameters,  bool showRejectedData, EDownloadFormat downloadFormat, bool zipFiles, DownloadUrl downloadUrl, RepositoryManager database)
 	    {
 		    try
 		    {
@@ -910,6 +911,7 @@ namespace dexih.api.Services.Remote
 			    var downloadObject = new DownloadObject()
 			    {
 				    InputColumns = inputColumns,
+				    Parameters = parameters,
 				    ObjectKey = hubTable.Key,
 				    ObjectType = SharedData.EObjectType.Table,
 				    Query = selectQuery
@@ -936,7 +938,7 @@ namespace dexih.api.Services.Remote
 		    }
 	    }
 	    
-	    public async Task<ManagedTask> DownloadDatalinkData(string id, long hubKey, string connectionId, DexihDatalink hubDatalink, long datalinkTransformKey, SelectQuery selectQuery, InputColumn[] inputColumns, EDownloadFormat downloadFormat, bool zipFiles, DownloadUrl downloadUrl, RepositoryManager database)
+	    public async Task<ManagedTask> DownloadDatalinkData(string id, long hubKey, string connectionId, DexihDatalink hubDatalink, long datalinkTransformKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters parameters, EDownloadFormat downloadFormat, bool zipFiles, DownloadUrl downloadUrl, RepositoryManager database)
 	    {
 		    try
 		    {
@@ -949,6 +951,7 @@ namespace dexih.api.Services.Remote
 			    var downloadObject = new DownloadObject()
 			    {
 				    InputColumns = inputColumns,
+				    Parameters = parameters,
 				    ObjectKey = hubDatalink.Key,
 				    DatalinkTransformKey = datalinkTransformKey,
 				    ObjectType = SharedData.EObjectType.Datalink,
@@ -976,7 +979,7 @@ namespace dexih.api.Services.Remote
 		    }
 	    }
 	    
-        public async Task<string> PreviewDatalink(string id, long hubKey, long datalinkKey, SelectQuery selectQuery, InputColumn[] inputColumns, DownloadUrl downloadUrl, RepositoryManager database)
+        public async Task<string> PreviewDatalink(string id, long hubKey, long datalinkKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters parameters, DownloadUrl downloadUrl, RepositoryManager database)
         {
             try
             {
@@ -993,7 +996,8 @@ namespace dexih.api.Services.Remote
 	                datalinkKey,
 	                selectQuery,
 	                downloadUrl,
-	                inputColumns
+	                inputColumns,
+	                parameters
                 };
 
                 var result = await SendRemoteMessage<string>(hubKey, id, nameof(RemoteOperations.PreviewDatalink), value, null, database, CancellationToken.None);
@@ -1005,7 +1009,7 @@ namespace dexih.api.Services.Remote
             }
         }
         
-        public async Task<TransformProperties> DatalinkProperties(string id, long hubKey, long datalinkKey, SelectQuery selectQuery, InputColumn[] inputColumns, RepositoryManager database)
+        public async Task<TransformProperties> DatalinkProperties(string id, long hubKey, long datalinkKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters parameters, RepositoryManager database)
         {
 	        try
 	        {
@@ -1021,7 +1025,8 @@ namespace dexih.api.Services.Remote
 			        cache,
 			        datalinkKey,
 			        selectQuery,
-			        inputColumns
+			        inputColumns,
+			        parameters
 		        };
 
 		        var result = await SendRemoteMessage<TransformProperties>(hubKey, id, nameof(RemoteOperations.DatalinkProperties), value, null, database, CancellationToken.None);
@@ -1033,7 +1038,7 @@ namespace dexih.api.Services.Remote
 	        }
         }
 	    
-	    public async Task<string> PreviewTransform(string id, long hubKey, DexihDatalink hubDatalink, long datalinkTransformKey, SelectQuery selectQuery, InputColumn[] inputColumns, DownloadUrl downloadUrl, RepositoryManager database)
+	    public async Task<string> PreviewTransform(string id, long hubKey, DexihDatalink hubDatalink, long datalinkTransformKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters parameters, DownloadUrl downloadUrl, RepositoryManager database)
 	    {
 		    try
 		    {
@@ -1052,6 +1057,7 @@ namespace dexih.api.Services.Remote
 				    datalinkTransformKey,
 				    selectQuery,
 				    inputColumns,
+				    parameters,
 				    downloadUrl
 			    };
 
@@ -1206,7 +1212,7 @@ namespace dexih.api.Services.Remote
 	    
 		
 	    
-		public async Task RunDatalinks(string id, long hubKey, string connectionId, long[] datalinkKeys, bool truncateTarget, bool resetIncremental, string resetIncrementalValue, InputColumn[] inputColumns, RepositoryManager database)
+		public async Task RunDatalinks(string id, long hubKey, string connectionId, long[] datalinkKeys, bool truncateTarget, bool resetIncremental, string resetIncrementalValue, InputColumn[] inputColumns, InputParameters parameters, RepositoryManager database)
         {
             try
             {
@@ -1226,7 +1232,8 @@ namespace dexih.api.Services.Remote
 	                truncateTarget,
 	                resetIncremental,
 	                resetIncrementalValue,
-	                inputColumns
+	                inputColumns,
+	                parameters
                 };
                 
                 await SendRemoteMessage<JToken>(hubKey, id, nameof(RemoteOperations.RunDatalinks), value, null, database, CancellationToken.None);

@@ -46,6 +46,9 @@ export class ViewEditComponent implements OnInit, OnDestroy {
   selectQuery: SelectQuery = new SelectQuery();
   private isLoaded = false;
 
+  private firstLoad = true;
+  private dialogOpen = false;
+
   columns: Array<any>;
   public data: Array<any>;
 
@@ -64,10 +67,12 @@ export class ViewEditComponent implements OnInit, OnDestroy {
         this.route.data,
         this.route.params,
         this.hubService.getHubCacheObservable(),
+        this.hubService.getRemoteAgentObservable()
       ).subscribe(result => {
         let data = result[0];
         let params = result[1];
         this.hubCache = result[2];
+        let remoteAgent = result[3];
 
         this.action = data['action'];
         this.pageTitle = data['pageTitle'];
@@ -105,7 +110,6 @@ export class ViewEditComponent implements OnInit, OnDestroy {
                 this.watchChanges();
 
                 this.getColumns();
-                this.refresh();
               }
             }
           }
@@ -128,8 +132,27 @@ export class ViewEditComponent implements OnInit, OnDestroy {
               }
             });
           }
-        }
 
+          if (remoteAgent) {
+            if (!this.firstLoad) {
+                if (!this.dialogOpen) {
+                    this.dialogOpen = true;
+                    this.authService.confirmDialog('Remote Agent Available',
+                        'A remote agent is available, would you like to refresh the data?').then(confirm => {
+                            if (confirm) {
+                                this.refresh();
+                            }
+                            this.dialogOpen = false;
+                        });
+                }
+            } else {
+              if (this.formsService.currentForm.controls.autoRefresh.value) {
+                this.refresh();
+              }
+
+            }
+        }
+      }
 
 
       });
@@ -222,18 +245,20 @@ export class ViewEditComponent implements OnInit, OnDestroy {
 
   refresh() {
     let viewForm = this.formsService.currentForm;
-    if (viewForm.controls.sourceType.value === eSourceType.Datalink) {
+    let parameters = this.formsService.currentForm.controls.parameters.value;
+
+    if (viewForm.controls.sourceType.value === eSourceType.Datalink && viewForm.controls.sourceDatalinkKey.value) {
       this.hubService.previewDatalinkKeyData(viewForm.controls.sourceDatalinkKey.value,
-        this.selectQuery, this.inputColumns).then((result) => {
+        this.selectQuery, this.inputColumns, parameters).then((result) => {
         this.columns = result.columns;
         this.data = result.data;
       }).catch(() => {
       });
 
     }
-    if (viewForm.controls.sourceType.value === eSourceType.Table) {
+    if (viewForm.controls.sourceType.value === eSourceType.Table && viewForm.controls.sourceTableKey.value) {
       this.hubService.previewTableKeyData(viewForm.controls.sourceTableKey.value,
-          false, this.selectQuery, this.inputColumns).then((result) => {
+          false, this.selectQuery, this.inputColumns, parameters).then((result) => {
         this.columns = result.columns;
         this.data = result.data;
       }).catch(() => {
@@ -257,36 +282,36 @@ export class ViewEditComponent implements OnInit, OnDestroy {
     this.hubService.downloadData([downloadObject], false, format)
   }
 
-  save() {
-    if (!this.formsService.currentForm.valid) {
-      this.formsService.showAllErrors = true;
+  // save() {
+  //   if (!this.formsService.currentForm.valid) {
+  //     this.formsService.showAllErrors = true;
 
-      this.authService.confirmDialog('There are errors!',
-        'There are errors in the current form.  Confirm that would like to save the changes anyhow?')
-        .then(() => {
-          this.hubService.addHubErrorMessage(this.formsService.getFormErrors());
-          this.doSave();
-        }).catch(() => {
+  //     this.authService.confirmDialog('There are errors!',
+  //       'There are errors in the current form.  Confirm that would like to save the changes anyhow?')
+  //       .then(() => {
+  //         this.hubService.addHubErrorMessage(this.formsService.getFormErrors());
+  //         this.doSave();
+  //       }).catch(() => {
 
-        });
-    } else {
-      this.doSave();
-    }
-  }
+  //       });
+  //   } else {
+  //     this.doSave();
+  //   }
+  // }
 
-  doSave() {
-      let view = <DexihView>this.formsService.currentForm.value;
-      view.viewType = this.showChart ? eViewType.Chart : eViewType.Table;
-      view.selectQuery = this.selectQuery;
-      view.chartConfig = this.chartConfig;
-      view.inputValues = this.inputColumns;
+  // doSave() {
+  //     let view = <DexihView>this.formsService.currentForm.value;
+  //     view.viewType = this.showChart ? eViewType.Chart : eViewType.Table;
+  //     view.selectQuery = this.selectQuery;
+  //     view.chartConfig = this.chartConfig;
+  //     view.inputValues = this.inputColumns;
 
-      this.hubService.saveView(view).then(() => {
-        this.hubService.addHubSuccessMessage('The view was saved.');
-      }).catch(() => {
-        this.data = null;
-      });
-  }
+  //     this.hubService.saveView(view).then(() => {
+  //       this.hubService.addHubSuccessMessage('The view was saved.');
+  //     }).catch(() => {
+  //       this.data = null;
+  //     });
+  // }
 
   public canDeactivate(): Promise<boolean> {
     return new Promise<boolean>((resolve) => {

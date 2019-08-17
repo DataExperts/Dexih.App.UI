@@ -1,5 +1,5 @@
 
-<dexih-widget-section title="Properties" [showExpandButton]="false">
+<dexih-widget-section title="Properties" [showExpandButton]="true">
 <form *ngIf="datalinkTransformForm"  [formGroup]="datalinkTransformForm">
         <fieldset>
             <section>
@@ -32,20 +32,28 @@
                     <form-input type="number" formControlName="maxOutputRows" label="Maximum number of rows to output into the transform (0 = unlimited)"></form-input>
                 </section>
             </div>
+        </fieldset>
+    </form>
+</dexih-widget-section>
 
-            <div *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Concatenate">
-                <datalink-table [datalinkTableForm]="datalinkTransformForm.controls.joinDatalinkTable"></datalink-table>
-            </div>
-            
-            <div *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Join || this.datalinkTransformForm.value.transformType == eTransformType.Lookup" >
-                <datalink-table [datalinkTableForm]="datalinkTransformForm.controls.joinDatalinkTable"></datalink-table>
-                    
-                <section>
-                    <form-select [label]="'Strategy when ' + this.datalinkTransformForm.value.transformType + ' produces duplicate matches'" formControlName="joinDuplicateStrategy" [items]="duplicateStrategies"
-                        itemKey="key" itemName="name">
-                    </form-select>
-                </section>
-            </div>
+<dexih-widget-section *ngIf="datalinkTransformForm && (this.datalinkTransformForm.value.transformType == eTransformType.Join || this.datalinkTransformForm.value.transformType == eTransformType.Lookup)" title="Join Settings" [showExpandButton]="true">
+    <form [formGroup]="datalinkTransformForm">
+        <fieldset>
+            <datalink-table [datalinkTableForm]="datalinkTransformForm.controls.joinDatalinkTable"></datalink-table>
+                
+            <section>
+                <form-select [label]="'Strategy when ' + this.datalinkTransformForm.value.transformType + ' produces duplicate matches'" formControlName="joinDuplicateStrategy" [items]="duplicateStrategies"
+                    itemKey="key" itemName="name">
+                </form-select>
+            </section>
+        </fieldset>
+    </form>
+</dexih-widget-section>
+
+<dexih-widget-section *ngIf="datalinkTransformForm && this.datalinkTransformForm.value.transformType == eTransformType.Concatenate" title="Concatenate Settings" [showExpandButton]="true">
+    <form [formGroup]="datalinkTransformForm">
+        <fieldset>
+            <datalink-table [datalinkTableForm]="datalinkTransformForm.controls.joinDatalinkTable"></datalink-table>
         </fieldset>
     </form>
 </dexih-widget-section>

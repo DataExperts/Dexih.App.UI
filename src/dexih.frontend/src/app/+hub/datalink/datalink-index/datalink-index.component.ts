@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy, ViewChildren } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HubService } from '../../hub.service';
-import { DexihHub, HubCache, eDatalinkType, datalinkTypes,
-    DexihDatalink, eSharedObjectType, TransformWriterResult, eSourceType, eLoadStrategy } from '../../hub.models';
+import { HubCache, eDatalinkType, datalinkTypes,
+    DexihDatalink, eSharedObjectType, eSourceType } from '../../hub.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, BehaviorSubject, Subscription, combineLatest} from 'rxjs';
 import { AuthService } from '../../../+auth/auth.service';
@@ -46,8 +46,6 @@ export class DatalinkIndexComponent implements OnInit, OnDestroy {
                 this.route.queryParams,
                 this.hubService.getHubCacheObservable(),
             ).subscribe(result => {
-                let data = result[0];
-                let params = result[1];
                 let queryParams = result[2];
                 this.hubCache = result[3];
 

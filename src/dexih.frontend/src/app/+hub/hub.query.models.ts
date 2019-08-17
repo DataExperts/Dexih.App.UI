@@ -1,5 +1,6 @@
-import { TableColumn, eFlatFilePath, eSourceType, eViewSource } from './hub.models';
+import { TableColumn, eFlatFilePath, eSourceType, eViewSource, InputColumn, DexihInputParameter } from './hub.models';
 import { eTypeCode } from './hub.remote.models';
+import { Input } from '@angular/compiler/src/core';
 
 export class UpdateQueries {
     public baseUpdateQuery: UpdateQuery;
@@ -77,6 +78,8 @@ export class DownloadObject {
     public objectType: eViewSource;
     public objectKey: number;
     public query: SelectQuery;
+    public inputColumns: InputColumn[];
+    public parameters: DexihInputParameter[];
 }
 
 export enum eDownloadFormat {

@@ -76,6 +76,13 @@ namespace dexih.api.Models
         public DexihView Value { get; set; }
     }
 
+    public class SaveDashboard
+    {
+        public long HubKey { get; set; }
+        public string RemoteAgentId { get; set; }
+        public DexihDashboard Value { get; set; }
+    }
+
     public class SaveApi
     {
         public long HubKey { get; set; }
@@ -225,6 +232,7 @@ namespace dexih.api.Models
 		public bool ShowRejectedData { get; set; }
 	    public DownloadUrl DownloadUrl { get; set; }
 	    public InputColumn[] InputColumns { get; set; }
+        public InputParameters Parameters { get; set; }
 	}
     
     public class PreviewTableQuery
@@ -236,6 +244,7 @@ namespace dexih.api.Models
         public bool ShowRejectedData { get; set; }
         public DownloadUrl DownloadUrl { get; set; }
         public InputColumn[] InputColumns { get; set; }
+        public InputParameters Parameters { get; set; }
     }
     
     public class PreviewDatalink
@@ -246,6 +255,22 @@ namespace dexih.api.Models
         public SelectQuery SelectQuery { get; set; }
         public DownloadUrl DownloadUrl { get; set; }
         public InputColumn[] InputColumns { get; set; }
+        public InputParameters Parameters { get; set; }
+    }
+
+    public class PreviewDashboard
+    {
+        public long HubKey { get; set; }
+        public string RemoteAgentId { get; set; }
+        public DexihDashboard Dashboard { get; set; }
+        public DownloadUrl DownloadUrl { get; set; }
+        public InputParameters Parameters { get; set; }
+    }
+
+    public class DashboardUrls
+    {
+        public long DashboardItemKey { get; set; }
+        public string DownloadUrl { get; set; }
     }
 
     public class PreviewView
@@ -254,6 +279,9 @@ namespace dexih.api.Models
         public string RemoteAgentId { get; set; }
         public DexihView HubView { get; set; }
         public DownloadUrl DownloadUrl { get; set; }
+        public InputColumn[] InputColumns { get; set; }
+        public InputParameters Parameters { get; set; }
+
     }
 
     public class PreviewTransform
@@ -265,6 +293,8 @@ namespace dexih.api.Models
         public SelectQuery SelectQuery { get; set; }
         public DownloadUrl DownloadUrl { get; set; }
         public InputColumn[] InputColumns { get; set; }
+        public InputParameters Parameters { get; set; }
+
     }
 
     public class ImportFunctionMappings
@@ -313,6 +343,7 @@ namespace dexih.api.Models
         public DexihTable Table { get; set; }
         public InputColumn[] InputTableColumns { get; set; }
         public SelectQuery SelectQuery { get; set; }
+        public InputParameters Parameters { get; set; }
         public bool RejectedTable { get; set; }
         public DownloadUrl DownloadUrl { get; set; }
     }
@@ -327,6 +358,7 @@ namespace dexih.api.Models
         public DexihDatalink Datalink { get; set; }
         public long DatalinkTransformKey { get; set; }
         public InputColumn[] InputTableColumns { get; set; }
+        public InputParameters Parameters { get; set; }
         public SelectQuery SelectQuery { get; set; }
         public DownloadUrl DownloadUrl { get; set; }
     }
@@ -361,6 +393,7 @@ namespace dexih.api.Models
         public bool ResetIncremental { get; set; }
         public string ResetIncrementalValue { get; set; }
         public InputColumn[] InputColumns { get; set; }
+        public InputParameters Parameters { get; set; }
     }
 
     public class RunDatalinkTests

@@ -19,7 +19,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/assets/css/font-awesome.css",
+              "src/assets/css/font-awesome.min.css",
               "src/assets/css/app.scss"
             ],
             "scripts": [],
@@ -69,7 +69,7 @@
             "karmaConfig": "./karma.conf.js",
             "scripts": [],
             "styles": [
-              "src/assets/css/font-awesome.css",
+              "src/assets/css/font-awesome.min.css",
               "src/assets/css/app.scss"
             ],
             "assets": [

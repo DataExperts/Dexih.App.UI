@@ -67,11 +67,11 @@ namespace dexih.api.Controllers
 
             if (previewData.ObjectType == SharedData.EObjectType.Table)
             {
-                data = await _remoteAgents.PreviewTable(previewData.RemoteAgentId, previewData.HubKey, previewData.ObjectKey, previewData.SelectQuery, previewData.InputColumns, false, previewData.DownloadUrl, repositoryManager);
+                data = await _remoteAgents.PreviewTable(previewData.RemoteAgentId, previewData.HubKey, previewData.ObjectKey, previewData.SelectQuery, previewData.InputColumns, previewData.Parameters, false, previewData.DownloadUrl, repositoryManager);
             }
             else
             {
-                data = await _remoteAgents.PreviewDatalink(previewData.RemoteAgentId, previewData.HubKey, previewData.ObjectKey, previewData.SelectQuery, previewData.InputColumns, previewData.DownloadUrl, repositoryManager);
+                data = await _remoteAgents.PreviewDatalink(previewData.RemoteAgentId, previewData.HubKey, previewData.ObjectKey, previewData.SelectQuery, previewData.InputColumns, previewData.Parameters, previewData.DownloadUrl, repositoryManager);
             }
 
             _logger.LogTrace(LoggingEvents.HubPreviewTable, "SharedDataController.PreviewData: HubKey: {updateBrowserHub}, ObjectKey: {objectKey}", previewData.HubKey, previewData.ObjectKey);

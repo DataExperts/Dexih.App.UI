@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy, OnInit } from '@angular/core';
+import { Injectable, OnDestroy, OnInit, EventEmitter } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { BehaviorSubject, Observable, Subscription, combineLatest} from 'rxjs';
 
@@ -44,6 +44,9 @@ import {
   SharedObjectProperty,
   ImportAction,
   ImportObject,
+  DexihDashboard,
+  DexihDashboardItem,
+  DexihInputParameter,
 } from './hub.models';
 import { HubService } from './hub.service';
 import { eTypeCode } from './hub.remote.models';
@@ -498,6 +501,20 @@ export class HubFormsService implements OnDestroy {
     return value1.trim().toLowerCase() === value2.trim().toLowerCase();
   }
 
+  public parameter(parameter: DexihInputParameter): FormGroup {
+    const form = this.fb.group({
+      'name': [parameter.name, [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(50),
+      ]],
+    }
+    );
+
+    this.addMissing(parameter, form, new DexihInputParameter());
+    return form;
+  }
+
   public connection(connection: DexihConnection) {
     this.logger.LogC(() => `connection`, eLogLevel.Trace);
 
@@ -857,6 +874,11 @@ export class HubFormsService implements OnDestroy {
   }
 
   public view(view: DexihView) {
+
+    let parameters = view.parameters.filter(c => c.isValid).map(parameter => {
+      return this.parameter(parameter);
+    });
+
     const viewForm = this.fb.group({
       'name': [view.name, [
         Validators.required,
@@ -869,6 +891,7 @@ export class HubFormsService implements OnDestroy {
       ]],
       'sourceDatalinkKey': [view.sourceDatalinkKey],
       'sourceTableKey': [view.sourceTableKey],
+      'parameters': this.fb.array(parameters),
     }, { validator: this.validateDatalinkTable() }
     );
 
@@ -892,7 +915,78 @@ export class HubFormsService implements OnDestroy {
     };
   }
 
+
+  public dashboard(dashboard: DexihDashboard) {
+
+    let parameters = dashboard.parameters.filter(c => c.isValid).map(parameter => {
+      return this.parameter(parameter);
+    });
+
+
+    const form = this.fb.group({
+      'name': [dashboard.name, [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+        this.duplicateDashboardNameValidator()
+      ]],
+      'dexihDashboardItems': this.fb.array([]),
+      'parameters': this.fb.array(parameters),
+      'runTime': {showEdit: false},
+    }, { }
+    );
+
+    let dashboardItemsForm = <FormArray>form.controls.dexihDashboardItems;
+    dashboard.dexihDashboardItems.filter(c => c.isValid).forEach(item => {
+      dashboardItemsForm.push(this.dashboardItem(item));
+    });
+
+    this.formGroupFunc = this.dashboard;
+    this.property = sharedObjectProperties.find(c => c.type === eSharedObjectType.Dashboard);
+    this.saveMethod = 'SaveDashboard';
+    this.addMissing(dashboard, form, new DexihDashboard());
+    this.clearFormSubscriptions();
+    this.watchChanges(eSharedObjectType.Dashboard, 'dashboardKey', 'dashboard', this.dashboard);
+    this.startForm(form);
+  }
+
+  duplicateDashboardNameValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } => {
+      if (this.currentForm) {
+        const name = control.value;
+        const no = this.hubCache.hub.dexihDashboards.findIndex(c =>
+          c.key !== this.currentForm.controls.key.value && c.isValid && this.stringCompare(c.name, name)) >= 0;
+        return no ? { 'duplicateName': { name } } : null;
+      }
+    };
+  }
+
+  public dashboardItem(dashboardItem: DexihDashboardItem): FormGroup {
+    let parameters = dashboardItem.parameters.filter(c => c.isValid).map(parameter => {
+      return this.parameter(parameter);
+    });
+
+    const form = this.fb.group({
+      'name': [dashboardItem.name, [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+      ]],
+      'parameters': this.fb.array(parameters),
+      'runTime': {resizeEvent: new EventEmitter<any[]>(), refreshData: new EventEmitter<string>()},
+    }
+    );
+
+    this.addMissing(dashboardItem, form, new DexihDashboardItem());
+
+    return form;
+  }
+
   public api(api: DexihApi) {
+    let parameters = api.parameters.filter(c => c.isValid).map(parameter => {
+      return this.parameter(parameter);
+    });
+
     const apiForm = this.fb.group({
       'name': [api.name, [
         Validators.required,
@@ -904,6 +998,7 @@ export class HubFormsService implements OnDestroy {
       ]],
       'sourceDatalinkKey': [api.sourceDatalinkKey],
       'sourceTableKey': [api.sourceTableKey],
+      'parameters': this.fb.array(parameters),
     }, { validator: this.validateDatalinkTable() }
     );
 
@@ -1578,6 +1673,11 @@ export class HubFormsService implements OnDestroy {
       return this.datalinkTransformFormGroup(transform);
     });
 
+    let parameters = datalink.parameters.filter(c => c.isValid).map(parameter => {
+      return this.parameter(parameter);
+    });
+
+
     const datalinkForm = this.fb.group({
       'name': [datalink.name, [
         Validators.required,
@@ -1595,6 +1695,7 @@ export class HubFormsService implements OnDestroy {
       'dexihDatalinkTransforms': this.fb.array(transforms),
       'dexihDatalinkProfiles': this.fb.array(profiles),
       'dexihDatalinkTargets': this.fb.array(targets),
+      'parameters': this.fb.array(parameters),
       'isValid': true
     });
 

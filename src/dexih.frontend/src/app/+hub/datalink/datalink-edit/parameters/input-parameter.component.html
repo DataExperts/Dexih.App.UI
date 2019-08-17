@@ -19,7 +19,7 @@
                             [items]="inputColumns" itemName="logicalName" [(textValue)]="inputs[i].staticValue"
                             [enableTextEntry]="true" [enableTextEntryMatch]="false"
                             (textValueChange)="updateStatic($event, i)"
-                            textEntryNote="Enter a static value or select a column." [textEntryItems]="inputs[i].textItems">
+                            textEntryNote="Enter a static value or select a column." [textEntryItems]="inputs[i].textItems" textEntryItemsTitle="Variables">
                         </form-select>
                     </div>
 

@@ -27,6 +27,7 @@ import { InputColumnsComponent, InputColumnComponent } from './input-columns';
 import { MappingEditComponent } from './mapping-edit';
 import { MappingComponent, MappingItemComponent } from './mapping';
 import { PreviewDataComponent } from './preview-data';
+import { PreviewTableComponent} from './preview-table';
 import { DatalinkEditGuard } from './datalink-edit-guard';
 import { TransformTableEditComponent } from './transform-table-edit/transform-table-edit.component';
 import { DatalinkEditTransformsComponent } from './transforms/datalink-edit-transforms.component';
@@ -67,6 +68,7 @@ import { InputParameterComponent, OutputParameterComponent} from './parameters'
         MappingEditComponent,
         MappingComponent, MappingItemComponent,
         PreviewDataComponent,
+        PreviewTableComponent,
         TransformTableEditComponent,
         DatalinkEditTransformsComponent,
         DatalinkEditSaveButtonComponent,

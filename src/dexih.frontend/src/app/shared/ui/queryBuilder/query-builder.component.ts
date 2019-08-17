@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { SelectQuery, SelectColumn, Sort, eAggregate, eDirection, eCompare, compare, Filter } from '../../../+hub/hub.query.models';
-import { DexihTableColumn, TableColumn, DexihColumnBase, InputColumn } from '../../../+hub/hub.models';
+import { DexihTableColumn, TableColumn, DexihColumnBase, InputColumn, DexihInputParameter } from '../../../+hub/hub.models';
 import { eTypeCode, TypeCodes } from '../../../+hub/hub.remote.models';
 
 @Component({
@@ -12,6 +12,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
     @Input() selectQuery: SelectQuery;
     @Input() columns: DexihTableColumn[];
     @Input() inputColumns: InputColumn[];
+    @Input() parameters: DexihInputParameter[];
 
     tableColumns: TableColumn[];
     selectColumns: SelectColumn[];
@@ -22,6 +23,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
     allRows = false;
     savedRowCount: number;
     typeCodes = TypeCodes;
+
+    variables: string[];
 
     constructor() { }
 
@@ -34,6 +37,9 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges() {
+        if (this.parameters) {
+            this.variables = this.parameters.map(c => '{' + c.name + '}');
+        }
         if (this.columns) {
             this.tableColumns = new Array(this.columns.length);
             this.selectColumns = new Array(this.columns.length);

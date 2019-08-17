@@ -45,26 +45,26 @@ namespace dexih.api.Services.Remote
 
 	    Task<JToken> ClearTables(string instanceId, long hubKey, DexihTable[] tables,
 		    RepositoryManager repositoryManager);
-	    Task<string> PreviewTable(string instanceId, long hubKey, long tableKey, SelectQuery selectQuery, InputColumn[] inputColumns, bool showRejectedData, DownloadUrl downloadUrl, RepositoryManager database);
-	    Task<string> PreviewTable(string instanceId, long hubKey, DexihTable hubTable, SelectQuery selectQuery, InputColumn[] inputColumns, bool showRejectedData, DownloadUrl downloadUrl, RepositoryManager database);
-	    Task<string> PreviewDatalink(string instanceId, long hubKey, long datalinkKey, SelectQuery selectQuery, InputColumn[] inputColumns, DownloadUrl downloadUrl, RepositoryManager database);
+	    Task<string> PreviewTable(string instanceId, long hubKey, long tableKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters parameters, bool showRejectedData, DownloadUrl downloadUrl, RepositoryManager database);
+	    Task<string> PreviewTable(string instanceId, long hubKey, DexihTable hubTable, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters parameters, bool showRejectedData, DownloadUrl downloadUrl, RepositoryManager database);
+	    Task<string> PreviewDatalink(string instanceId, long hubKey, long datalinkKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters parameters, DownloadUrl downloadUrl, RepositoryManager database);
 
 	    Task<TransformProperties> DatalinkProperties(string id, long hubKey, long datalinkKey, SelectQuery selectQuery,
-		    InputColumn[] inputColumns, RepositoryManager database);
+		    InputColumn[] inputColumns, InputParameters parameters, RepositoryManager database);
 
 	    Task<string> CallApi(string id, string apiKey, string action, string parameters, string ipAddress);
 
-	    Task<string> PreviewTransform(string instanceId, long hubKey, DexihDatalink hubDatalink, long datalinkTransformKey, SelectQuery selectQuery, InputColumn[] inputColumns, DownloadUrl downloadUrl, RepositoryManager database);
+	    Task<string> PreviewTransform(string instanceId, long hubKey, DexihDatalink hubDatalink, long datalinkTransformKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters parameters, DownloadUrl downloadUrl, RepositoryManager database);
 	    Task<string[]> ImportFunctionMappings(string instanceId, long hubKey, DexihDatalink hubDatalink, long datalinkTransformKey, DexihDatalinkTransformItem datalinkTransformItem, RepositoryManager database);
         
 	    Task<ManagedTask> DownloadFiles(string instanceId, long hubKey, string connectionId, long tableKey, EFlatFilePath path, string[] files, DownloadUrl downloadUrl, RepositoryManager database);
         Task<ManagedTask> DownloadData(string instanceId, long hubKey, string connectionId, DownloadObject[] downloadObjects, EDownloadFormat downloadFormat, bool zipFiles, DownloadUrl downloadUrl, RepositoryManager database);
 
-	    Task<ManagedTask> DownloadTableData(string id, long hubKey, string connectionId, DexihTable hubTable, SelectQuery selectQuery, InputColumn[] inputColumns, bool showRejectedData,EDownloadFormat downloadFormat, bool zipFiles, DownloadUrl downloadUrl, RepositoryManager database);
-	    Task<ManagedTask> DownloadDatalinkData(string id, long hubKey, string connectionId, DexihDatalink table, long datalinkTransformKey, SelectQuery selectQuery, InputColumn[] inputColumns, EDownloadFormat downloadFormat, bool zipFiles, DownloadUrl downloadUrl, RepositoryManager database);
+	    Task<ManagedTask> DownloadTableData(string id, long hubKey, string connectionId, DexihTable hubTable, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters parameters, bool showRejectedData,EDownloadFormat downloadFormat, bool zipFiles, DownloadUrl downloadUrl, RepositoryManager database);
+	    Task<ManagedTask> DownloadDatalinkData(string id, long hubKey, string connectionId, DexihDatalink table, long datalinkTransformKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters parameters, EDownloadFormat downloadFormat, bool zipFiles, DownloadUrl downloadUrl, RepositoryManager database);
 	    
 	    Task RunDatalinks(string instanceId, long hubKey, string connectionId, long[] datalinkKeys, bool truncateTarget,
-		    bool resetIncremental, string resetIncrementalValue, InputColumn[] inputColumns, RepositoryManager database);
+		    bool resetIncremental, string resetIncrementalValue, InputColumn[] inputColumns, InputParameters parameters, RepositoryManager database);
 
 	    Task RunDatalinkTests(string id, long hubKey, string connectionId, long[] datalinkTestKeys,
 		    RepositoryManager database);

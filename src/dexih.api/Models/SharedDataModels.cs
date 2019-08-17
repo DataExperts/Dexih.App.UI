@@ -26,6 +26,7 @@ namespace dexih.api.Models
         public string RemoteAgentId { get; set; }
         public DownloadUrl DownloadUrl { get; set; }
         public InputColumn[] InputColumns { get; set; }
+        public InputParameters Parameters { get; set; }
     }
     
     public class DownloadSharedData

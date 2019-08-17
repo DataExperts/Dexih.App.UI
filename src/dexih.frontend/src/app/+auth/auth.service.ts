@@ -60,6 +60,9 @@ export class AuthService implements OnDestroy {
     private updateRemoteAgentsFlag = false;
     private globalCacheRefreshing = false;
 
+    // unique session id, used to refresh global cache when page refresh occurs.
+    private sessionId = this.newGuid();
+
     constructor(
         private http: HttpClient,
         private router: Router,
@@ -440,7 +443,12 @@ export class AuthService implements OnDestroy {
 
     public get(url, waitMessage = 'Please wait while the operation completes.', updateUrl = true): Promise<any> {
         return new Promise<any>((resolve, reject) => {
-            let messageKey = this.addWaitMessage(waitMessage);
+
+            let messageKey: string = null;
+
+            if (waitMessage) {
+                messageKey = this.addWaitMessage(waitMessage);
+            }
 
             let baseUrl: string;
             if (updateUrl) {
@@ -1745,7 +1753,7 @@ export class AuthService implements OnDestroy {
         if (!this.globalCacheRefreshing) {
             this.globalCacheRefreshing = true;
             return new Promise<boolean>((resolve, reject) => {
-                this.get('/api/Account/GetGlobalCache', 'Getting global cache...').then(result => {
+                this.get('/api/Account/GetGlobalCache?cache=' + this.sessionId, 'Getting global cache...').then(result => {
                     let globalCache: GlobalCache = result.value;
                     this._globalCache.next(globalCache);
                     resolve(true);

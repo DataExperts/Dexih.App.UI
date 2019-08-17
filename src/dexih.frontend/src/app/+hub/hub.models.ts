@@ -707,6 +707,22 @@ export class HubCache {
         }
     }
 
+    public cacheAddDashboard(dashboardKey: number, hub: DexihHub): DexihDashboard {
+        if (dashboardKey > 0) {
+            const dup = hub.dexihDashboards.find(c => c.key === dashboardKey);
+            if (!dup) {
+                let dashboard = this.hub.dexihDashboards
+                    .find(c => c.key === dashboardKey && c.isValid);
+                if (dashboard) {
+                    dashboard.dexihDashboardItems.filter(c => c.viewKey > 0).forEach(item => {
+                        this.cacheAddView(item.viewKey, hub);
+                    });
+                    return dashboard;
+                }
+            }
+        }
+    }
+
     public cacheAddApi(apiKey: number, hub: DexihHub): DexihApi {
         if (apiKey > 0) {
             const dup = hub.dexihApis.find(c => c.key === apiKey);
@@ -854,6 +870,7 @@ export enum eSharedObjectType {
     DatalinkTest = <any>'DatalinkTest',
     View = <any>'View',
     Api = <any>'Api',
+    Dashboard = <any>'Dashboard',
     ApiStatus = <any>'ApiStatus',
 }
 
@@ -898,6 +915,11 @@ export const sharedObjectProperties: SharedObjectProperty[] = [
         type: eSharedObjectType.View, name: 'View', cacheProperty: 'dexihViews', property: 'views',
         parentKey: '', parentType: null, cacheAddMethod: 'cacheAddView', icon: 'fa-bar-chart', routerLink: 'views',
         displayName: 'Views', description: 'Charts and tabular views of table or datalinks outputs.'
+    },
+    {
+        type: eSharedObjectType.Dashboard, name: 'Dashboard', cacheProperty: 'dexihDashboards', property: 'dashboards',
+        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddDashboard', icon: 'fa-pie-chart', routerLink: 'dashboards',
+        displayName: 'Dashboards', description: 'A collection of views gathered into a single dashboard.'
     },
     {
         type: eSharedObjectType.Api, name: 'Api', cacheProperty: 'dexihApis', property: 'apis',
@@ -1033,6 +1055,8 @@ export class DexihApi extends EntityBase {
     public logDirectory = '';
     public autoStart = false;
 
+    public parameters: DexihInputParameter[] = [];
+
     public currentStatus: BehaviorSubject<ApiData>;
 }
 
@@ -1077,6 +1101,15 @@ export class DexihColumnBase extends EntityBase {
         this.dataType = eTypeCode.String;
         this.deltaType = eDeltaType.NaturalKey;
     }
+}
+
+export class DexihInputParameter extends EntityBase {
+    public key = 0;
+
+    public name: string = null;
+    public description: string = null;
+
+    public value = null;
 }
 
 export class DexihConnection extends EntityBase {
@@ -1158,6 +1191,34 @@ export class DexihColumnValidation extends EntityBase {
     public cleanValue: string = null;
 }
 
+export class DexihDashboard extends EntityBase {
+    public key = 0;
+    public name = '';
+    public description: string = null;
+    public isShared = false;
+    public minCols = 1;
+    public maxCols = 100;
+    public minRows = 1;
+    public maxRows = 100;
+    public autoRefresh = true;
+
+    public dexihDashboardItems: Array<DexihDashboardItem> = [];
+    public parameters: Array<DexihInputParameter> = [];
+}
+
+export class DexihDashboardItem extends EntityBase {
+    public key = 0;
+    public name = '';
+    public description: string = null;
+    public cols = 1;
+    public rows = 1;
+    public x = 0;
+    public y = 0;
+
+    public parameters: Array<DexihInputParameter> = [];
+    public viewKey = 0;
+}
+
 export class DexihDatajob extends EntityBase {
     public key = 0;
     public name: string = null;
@@ -1220,6 +1281,7 @@ export class DexihDatalink extends EntityBase {
     public dexihDatalinkTransforms: Array<DexihDatalinkTransform> = [];
     public dexihDatalinkProfiles: Array<DexihDatalinkProfile> = [];
     public dexihDatalinkTargets: Array<DexihDatalinkTarget> = [];
+    public parameters: Array<DexihInputParameter> = [];
 
     public targetTable: DexihTable;
 
@@ -1512,6 +1574,7 @@ export class DexihHub extends EntityBase {
     public dexihDatalinkTests: Array<DexihDatalinkTest>;
     public dexihViews: Array<DexihView>;
     public dexihApis: Array<DexihApi>;
+    public dexihDashboards: Array<DexihDashboard>;
 
     constructor(hubKey: number, name: string) {
         super();
@@ -1530,6 +1593,7 @@ export class DexihHub extends EntityBase {
         this.dexihDatalinkTests = new Array<DexihDatalinkTest>();
         this.dexihViews = new Array<DexihView>();
         this.dexihApis = new Array<DexihApi>();
+        this.dexihDashboards = new Array<DexihDashboard>();
     }
 }
 
@@ -1658,6 +1722,9 @@ export class DexihView extends EntityBase {
     public inputValues: InputColumn[] = null;
     public selectQuery = new SelectQuery();
     public chartConfig = new ChartConfig();
+    public autoRefresh = true;
+
+    public parameters: Array<DexihInputParameter> = [];
 }
 
 export class ChartConfig {
@@ -1812,6 +1879,7 @@ export enum eChartType {
     TreeMap = <any>'TreeMap',
     Cards = <any>'Cards',
     Gauge = <any>'Gauge',
+    LinearGauge = <any>'LinearGauge',
     Map = <any>'Map'
 }
 
@@ -2278,6 +2346,7 @@ export class Import {
     public views: ImportObject<DexihView>[];
     public apis: ImportObject<DexihApi>[];
     public warnings: string[] = [];
+    public dashboards: ImportObject<DexihDashboard>[];
 }
 
 export class ImportObject<T> {
@@ -2465,4 +2534,9 @@ export class FlatFilesReady {
     public hubKey: number;
     public reference: string;
     public tables: DexihTable[];
+}
+
+export class DashboardUrl {
+    public dashboardItemKey: number;
+    public downloadUrl: string;
 }

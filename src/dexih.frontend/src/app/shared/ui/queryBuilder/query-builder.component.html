@@ -2,13 +2,13 @@
     <div class="d-flex flex-wrap" *ngIf="selectColumns || sortColumns">
         <div class="flex-fill" *ngIf="selectColumns">
             <form-tags-dropdown labelLeft="Display Columns" [(ngModel)]="selectQuery.columns" [items]="selectColumns"
-                itemKey="column.name" itemName="column.logicalName" textEntryNote="Specify the columns to select."
+                itemName="column.logicalName" textEntryNote="Specify the columns to select."
                 [enableAddAll]="true">
             </form-tags-dropdown>
         </div>
     
         <div class="flex-fill ml-1" *ngIf="sortColumns">
-            <form-tags-dropdown labelLeft="Sort Columns" [(ngModel)]="selectQuery.sorts" [items]="sortColumns" itemKey="column.name" 
+            <form-tags-dropdown labelLeft="Sort Columns" [(ngModel)]="selectQuery.sorts" [items]="sortColumns" 
                 itemName="details" textEntryNote="Specify the columns to sort." [enableAddAll]="false">
             </form-tags-dropdown>
         </div>
@@ -55,7 +55,9 @@
             </form-select>
 
             <form-select [(ngModel)]="filter.column2" [border]="false" class="form-control p-0" [items]="columns" itemName="logicalName"
-                [(textValue)]="filter.value2" [enableTextEntry]="true" [enableTextEntryMatch]="false" textEntryNote="Enter a static value or select a column.">
+                [(textValue)]="filter.value2" [enableTextEntry]="true" [enableTextEntryMatch]="false" textEntryNote="Enter a static value or select a column."
+                [textEntryItems]="variables" textEntryItemsTitle="Variables"
+                >
             </form-select>
 
             <div class="input-group-append">

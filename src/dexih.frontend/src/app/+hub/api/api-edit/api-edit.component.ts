@@ -84,7 +84,7 @@ export class ApiEditComponent implements OnInit, OnDestroy {
             if (!this.apiKey) {
               this.hubService.addHubErrorMessage('There was no api specified to edit.');
             } else {
-              if (!this.hubCache.hub || !this.hubCache.hub.dexihColumnValidations) {
+              if (!this.hubCache.hub || !this.hubCache.hub.dexihApis) {
                 this.hubService.addHubErrorMessage('The hub cache is not loaded.');
               } else {
 
@@ -200,7 +200,7 @@ export class ApiEditComponent implements OnInit, OnDestroy {
     let apiForm = this.formsService.currentForm;
     if (apiForm.controls.sourceType.value === eSourceType.Datalink) {
       this.hubService.previewDatalinkKeyData(apiForm.controls.sourceDatalinkKey.value,
-        this.selectQuery, this.inputColumns).then((result) => {
+        this.selectQuery, this.inputColumns, apiForm.controls.parameters.value).then((result) => {
         this.columns = result.columns;
         this.data = result.data;
       }).catch(() => {
@@ -209,7 +209,7 @@ export class ApiEditComponent implements OnInit, OnDestroy {
     }
     if (apiForm.controls.sourceType.value === eSourceType.Table) {
       this.hubService.previewTableKeyData(apiForm.controls.sourceTableKey.value,
-          false, this.selectQuery, this.inputColumns).then((result) => {
+          false, this.selectQuery, this.inputColumns, apiForm.controls.parameters.value).then((result) => {
         this.columns = result.columns;
         this.data = result.data;
       }).catch(() => {

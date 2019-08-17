@@ -71,7 +71,12 @@ export class NavigationComponent implements OnInit, OnDestroy {
         this.remoteAgents = this.hubCache.hub.dexihRemoteAgentHubs;
 
         this.sharedObjectProperties.forEach(c => {
-          this.objectCounts[c.type] = this.hubCache.hub[c.cacheProperty].filter(d => d.isValid).length;
+          if (!this.hubCache.hub[c.cacheProperty]) {
+            this.objectCounts[c.type] = 0;
+          } else {
+            this.objectCounts[c.type] = this.hubCache.hub[c.cacheProperty].filter(d => d.isValid).length;
+          }
+
         });
 
         this.hubCacheLoaded = true;

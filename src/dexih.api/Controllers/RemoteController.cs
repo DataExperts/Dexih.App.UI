@@ -879,6 +879,9 @@ chmod a+x dexih.remote.run.{os}.sh
 	        settings.RemoteApplicationSettings.CopyProperties(remoteSettings.AppSettings);
 	        settings.RemoteApplicationSettings.CopyProperties(remoteSettings.Network);
 	        settings.RemoteApplicationSettings.CopyProperties(remoteSettings.Permissions);
+            //TODO these should be copied by the copyproperties.  
+            remoteSettings.Permissions.AllowedHubs = settings.RemoteApplicationSettings.AllowedHubs;
+            remoteSettings.Permissions.AllowedPaths = settings.RemoteApplicationSettings.AllowedPaths;
 	        settings.RemoteApplicationSettings.CopyProperties(remoteSettings.Privacy);
 	        remoteSettings.NamingStandards.LoadDefault();
 

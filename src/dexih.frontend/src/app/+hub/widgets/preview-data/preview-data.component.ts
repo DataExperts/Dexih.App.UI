@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { eViewType, InputColumn, DexihColumnBase, ChartConfig,
-    HubCache, DexihView, eViewSource, PreviewResults, DexihTable, DexihDatalink } from '../../hub.models';
+    HubCache, DexihView, eViewSource, PreviewResults, DexihTable, DexihDatalink, DexihInputParameter } from '../../hub.models';
 import { combineLatest, Subscription } from 'rxjs';
 import { AuthService } from '../../../+auth/auth.service';
 import { HubService } from '../../hub.service';
@@ -32,6 +32,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
     public transformProperties = null;
 
     public inputColumns: InputColumn[];
+    public parameters: DexihInputParameter[];
     public tableColumns: DexihColumnBase[];
     selectQuery: SelectQuery = new SelectQuery();
 
@@ -45,6 +46,8 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
     public isRefreshing = false;
     private firstLoad = true;
     private dialogOpen = false;
+
+    public allowViewSave = false;
 
     constructor(
         private hubService: HubService,
@@ -75,6 +78,10 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
                             }
 
                             if (!datalink) { return; }
+                            // this.key = datalink.key;
+
+                            // only allows view creation on saved datalink
+                            this.allowViewSave = datalink.key && !this.datalinkTransformKey ? true : false;
 
                             this.title = 'Datalink - ' + datalink.name;
 
@@ -87,6 +94,8 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
                                 return  {datalinkKey: this.key, datalinkName: datalink.name,
                                     name: c.name, logicalName: c.logicalName, dataType: c.dataType, rank: c.rank, value: c.defaultValue};
                             });
+
+                            this.parameters = datalink.parameters;
                             break;
 
                         case eViewSource.Table:
@@ -98,6 +107,10 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
                             }
 
                             if (!table) { return; }
+                            // this.key = table.key;
+
+                            // only allows view creation on saved table
+                            this.allowViewSave = table.key ? true : false;
 
                             this.title = 'Table - ' + table.name;
 
@@ -107,6 +120,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
                                     name: c.name, logicalName: c.logicalName, dataType: c.dataType, rank: c.rank, value: c.defaultValue};
                                 }
                             );
+                            this.parameters = datalink.parameters;
                     }
                 }
 
@@ -150,20 +164,23 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
             switch (this.viewSource) {
                 case eViewSource.Datalink:
                     if (this.key) {
-                        previewQuery = this.hubService.previewDatalinkKeyData(this.key, this.selectQuery, this.inputColumns);
+                        previewQuery = this.hubService.previewDatalinkKeyData(this.key, this.selectQuery,
+                            this.inputColumns, this.parameters);
                     } else {
                         if (this.datalink) {
                             previewQuery = this.hubService.previewTransformData(this.datalink, this.datalinkTransformKey,
-                                this.selectQuery, this.inputColumns);
+                                this.selectQuery, this.inputColumns, this.parameters);
                         }
                     }
                     break;
                 case eViewSource.Table:
                     if (this.key) {
-                        previewQuery = this.hubService.previewTableKeyData(this.key, false, this.selectQuery, this.inputColumns);
+                        previewQuery = this.hubService.previewTableKeyData(this.key, false, this.selectQuery,
+                            this.inputColumns, this.parameters);
                     } else {
                         if (this.table) {
-                            previewQuery = this.hubService.previewTableData(this.table, false, this.selectQuery, this.inputColumns);
+                            previewQuery = this.hubService.previewTableData(this.table, false, this.selectQuery,
+                                this.inputColumns, this.parameters);
                         }
                     }
                     break;
@@ -216,8 +233,11 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
             switch (this.viewSource) {
                 case eViewSource.Datalink:
                     view.sourceDatalinkKey = this.key;
+                    break;
+                case eViewSource.Table:
+                    view.sourceTableKey = this.key;
+                    break;
             }
-            view.sourceDatalinkKey = this.key;
             view.viewType = this.view === 'chart' ? eViewType.Chart : eViewType.Table;
             view.selectQuery = this.selectQuery;
             view.chartConfig = this.chartConfig;

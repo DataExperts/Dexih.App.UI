@@ -1,0 +1,29 @@
+<dexih-widget-section *ngIf="inputColumns && inputColumns.length > 0" title="InputColumns" [showExpandButton]="true">
+    <span *ngFor="let column of inputColumns; let i = index" class="input-group">
+        <div class="input-group-prepend">
+            <div class="input-group-text">
+                {{column.logicalName}}
+            </div>
+        </div>
+        <form-input name="column{{i}}" class="form-control p-0" [placeholder]="'Enter ' + column.logicalName"
+            [(ngModel)]="column.value"></form-input>
+    </span>
+</dexih-widget-section>
+
+<div *ngIf="refreshing">
+        <div class="dexih-loader"></div> Refreshing, please wait...
+</div>
+
+<div *ngIf="!refreshing && columns?.length > 0 && data?.length > 0; else elseBlock">
+    <dexih-table *ngIf="view.viewType == eViewType.Table" [enableMultiSelect]="false" [enableSaveCsv]="false" [enableFilter]="false" [columns]="columns" [data]="data">
+    </dexih-table>
+
+    <chart-view *ngIf="view.viewType == eViewType.Chart" [columns]="columns" [height]="height" [width]="width" [data]="data" [config]="view.chartConfig">
+    </chart-view>
+</div>
+<ng-template #elseBlock>
+    <div class="alert alert-info">
+        <i class="fa fa-warning"></i>
+        Select refresh to display the view.
+    </div>
+</ng-template>

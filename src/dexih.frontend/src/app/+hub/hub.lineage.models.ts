@@ -400,7 +400,7 @@ export class InputOutputColumns {
                     }
                 }
                 columns.forEach(column => {
-                    if (transformColumns.findIndex(c => c.name === column.name  ) < 0) {
+                    if (transformColumns.findIndex(c => c.name === column.name && c.columnGroup === column.columnGroup  ) < 0) {
                         let newColumn = this.copyDatalinkColumn(column, pos++, column.columnGroup)
                         transformColumns.push(newColumn);
                     }

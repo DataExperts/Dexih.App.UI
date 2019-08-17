@@ -7,8 +7,8 @@
     <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.1/build/netcoreapp1.0/xunit.runner.reporters.netcoreapp10.dll" t="Include" />
     <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.1/build/netcoreapp1.0/xunit.runner.utility.netcoreapp10.dll" t="Include" />
     <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.1/build/netcoreapp1.0/xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
-    <e p="$USER_HOME$/Library/Caches/Rider2019.1/extResources" t="IncludeRecursive" />
-    <e p="$USER_HOME$/Library/Caches/Rider2019.1/resharper-host/local/Transient/ReSharperHost/v191/SolutionCaches/_dexih.api.-991202076.00" t="ExcludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/Rider2019.2/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/Rider2019.2/resharper-host/local/Transient/ReSharperHost/v192/SolutionCaches/_dexih.api.-991202076.00" t="ExcludeRecursive" />
     <e p="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.operations" t="IncludeRecursive">
       <e p="AssemblyLoader.cs" t="Include" />
       <e p="bin" t="ExcludeRecursive" />
@@ -66,16 +66,22 @@
       <e p="dexih.repository.csproj" t="IncludeRecursive" />
       <e p="dexih_repositoryContext.cs" t="Include" />
       <e p="DexihApi.cs" t="Include" />
+      <e p="DexihApiParameter.cs" t="Include" />
       <e p="DexihBaseEntity.cs" t="Include" />
       <e p="DexihColumnBase.cs" t="Include" />
       <e p="DexihColumnValidation.cs" t="Include" />
       <e p="DexihConnection.cs" t="Include" />
       <e p="DexihCustomFunction.cs" t="Include" />
       <e p="DexihCustomFunctionParameter.cs" t="Include" />
+      <e p="DexihDashboard.cs" t="Include" />
+      <e p="DexihDashboardItem.cs" t="Include" />
+      <e p="DexihDashboardItemParameter.cs" t="Include" />
+      <e p="DexihDashboardParameter.cs" t="Include" />
       <e p="DexihDatajob.cs" t="Include" />
       <e p="DexihDatalink.cs" t="Include" />
       <e p="DexihDatalinkColumn.cs" t="Include" />
       <e p="DexihDatalinkDependency.cs" t="Include" />
+      <e p="DexihDatalinkParameter.cs" t="Include" />
       <e p="DexihDatalinkProfile.cs" t="Include" />
       <e p="DexihDatalinkStep.cs" t="Include" />
       <e p="DexihDatalinkStepColumn.cs" t="Include" />
@@ -101,6 +107,7 @@
       <e p="DexihTableColumn.cs" t="Include" />
       <e p="DexihTrigger.cs" t="Include" />
       <e p="DexihView.cs" t="Include" />
+      <e p="DexihViewParameter.cs" t="Include" />
       <e p="EntityStatus.cs" t="Include" />
       <e p="Enums.cs" t="Include" />
       <e p="InputColumn.cs" t="Include" />
@@ -307,6 +314,8 @@
               <e p="dexih.remote.osx.zip" t="Include" />
               <e p="dexih.remote.run.alpine.sh" t="Include" />
               <e p="dexih.remote.run.exe" t="Include" />
+              <e p="dexih.remote.run.exe.config" t="Include" />
+              <e p="dexih.remote.run.exe.manifest" t="Include" />
               <e p="dexih.remote.run.linux.sh" t="Include" />
               <e p="dexih.remote.run.osx.sh" t="Include" />
               <e p="dexih.remote.windows.zip" t="Include" />
@@ -390,8 +399,14 @@
         <e p="dexih.frontend/node_modules/@angular/platform-browser" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/@angular/platform-browser-dynamic" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/@angular/router" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/@angular-devkit/architect" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/@angular-devkit/build-angular" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/@angular-devkit/build-optimizer" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/@angular-devkit/build-webpack" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/@angular-devkit/core" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/@angular-devkit/schematics" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/@aspnet/signalr" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/@ngtools/webpack" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/@swimlane/ngx-charts" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/@types" t="IncludeRecursive">
           <e p="events" t="IncludeRecursive" />
@@ -401,12 +416,26 @@
           <e p="node" t="IncludeRecursive" />
           <e p="source-list-map" t="IncludeRecursive" />
         </e>
+        <e p="dexih.frontend/node_modules/ajv" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/angular-gridster2" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/arg" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/blocking-proxy" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/canonical-path" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/chalk" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/chokidar" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/codelyzer" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/commander" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/core-js" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/css-line-break" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/dependency-graph" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/dexih-ngx-components" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/dexih-ngx-table" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/es6-promise" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/expose-loader" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/fast-deep-equal" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/file-saver" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/flatted" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/handlebars" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/html2canvas" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/imports-loader" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/jasmine-core" t="IncludeRecursive" />
@@ -419,18 +448,32 @@
         <e p="dexih.frontend/node_modules/karma-remap-istanbul" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/karma-typescript" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/karma-typescript-es6-transform" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/license-webpack-plugin" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/log4js" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/magic-string" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/msal" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/ngx-bootstrap" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/ngx-md" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/node-sass" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/npm" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/npm-check-updates" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/pad" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/portfinder" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/postcss" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/protractor" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/reflect-metadata" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/rxjs" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/script-loader" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/source-map" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/sourcemap-codec" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/symbol-observable" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/tree-kill" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/ts-node" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/tslib" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/tslint" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/upath" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/uri-js" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/webdriver-js-extender" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/zone.js" t="IncludeRecursive" />
       </e>
       <e p="test" t="Include">
@@ -776,6 +819,8 @@
         <e p="DeleteQuery.cs" t="Include" />
         <e p="Filter.cs" t="Include" />
         <e p="Filters.cs" t="Include" />
+        <e p="InputParameter.cs" t="Include" />
+        <e p="InputParameters.cs" t="Include" />
         <e p="InsertQuery.cs" t="Include" />
         <e p="QueryColumn.cs" t="Include" />
         <e p="QueryColumns.cs" t="Include" />

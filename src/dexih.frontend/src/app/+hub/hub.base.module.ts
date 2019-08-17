@@ -25,6 +25,7 @@ import { CustomFunctionIndexComponent, CustomFunctionEditComponent, CustomFuncti
 import { DatalinkTestIndexComponent, DatalinkTestNewComponent } from './test'
 import { ViewIndexComponent } from './view/view-index';
 import { ViewEditComponent } from './view/view-edit';
+import { DashboardIndexComponent } from './dashboard';
 import { ApiIndexComponent } from './api/api-index';
 import { ApiEditComponent } from './api/api-edit';
 import { DatalinkRunComponent } from './datalink/datalink-run/datalink-run.component';
@@ -63,6 +64,7 @@ import { SearchModule} from './search';
         SharedDataIndexComponent,
         CustomFunctionIndexComponent, CustomFunctionEditComponent, CustomFunctionParameterComponent,
         DatalinkTestIndexComponent, DatalinkTestNewComponent,
+        DashboardIndexComponent
     ],
     providers: [ ItemEditGuard ],
     exports: [ ]

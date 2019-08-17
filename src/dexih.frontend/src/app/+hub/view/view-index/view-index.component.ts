@@ -22,7 +22,8 @@ export class ViewIndexComponent implements OnInit, OnDestroy {
 
     columns = [
         { name: 'name', title: 'Name', footer: 'description', format: 'Md' },
-        { name: 'viewType', title: 'View Type' },
+        { name: 'viewType', title: 'Chart/Table' },
+        { name: 'sourceType', title: 'Source Type'},
         { name: 'updateDate', title: 'Last Updated', format: 'Date' },
     ];
 
@@ -88,8 +89,8 @@ export class ViewIndexComponent implements OnInit, OnDestroy {
 
     export(items: Array<DexihView>) {
         const cache = this.hubCache;
-        const hub = new DexihHub(this.hubCache.hub.hubKey, '');
-        items.forEach(item => { this.hubCache.cacheAddView(item.key, hub); });
+        const hub = new DexihHub(cache.hub.hubKey, '');
+        items.forEach(item => { cache.cacheAddView(item.key, hub); });
 
         let filename = items.length === 1 ? 'View - ' + items[0].name + '.json' : 'views.json';
 

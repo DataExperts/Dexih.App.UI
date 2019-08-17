@@ -33,6 +33,7 @@
 							[enableTextEntry]="true" [(textValue)]="filterValue"
 							(textValueChange)="updateFilterValue($event)" [enableTextEntryMatch]="false"
 							itemName="logicalName" [errors]="filterValueErrors"
+							[textEntryItems]="variables" textEntryItemsTitle="Variables"
 							note="Note: For static date values use format YYYY-MM-DD (e.g. 2018-01-30)">
 						</form-select>
 					</section>
