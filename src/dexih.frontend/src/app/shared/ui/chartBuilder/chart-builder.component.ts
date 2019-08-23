@@ -38,7 +38,7 @@ export class ChartBuilderComponent implements OnInit, OnChanges {
     chartType: any;
     colorSets = colorSets;
 
-    private updateChartSubject: Subject<void> = new Subject<void>();
+    public updateChartSubject: Subject<void> = new Subject<void>();
 
     constructor() { }
 

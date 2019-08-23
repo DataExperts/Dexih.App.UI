@@ -36,6 +36,7 @@ export class DashboardPropertiesComponent implements OnInit, OnDestroy {
 
     currentForm: FormGroup;
     dashboardItemControls: FormArray;
+    parameters: FormArray;
 
     hubCache: HubCache;
 
@@ -118,6 +119,7 @@ export class DashboardPropertiesComponent implements OnInit, OnDestroy {
           this.currentForm = currentForm;
           if (currentForm) {
             this.dashboardItemControls = <FormArray> currentForm.controls.dexihDashboardItems;
+            this.parameters = <FormArray> currentForm.controls.parameters;
 
             this.options.minCols = currentForm.controls.minCols.value;
             this.options.maxCols = currentForm.controls.maxCols.value;

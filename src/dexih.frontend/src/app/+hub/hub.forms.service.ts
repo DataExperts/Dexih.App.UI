@@ -486,6 +486,26 @@ export class HubFormsService implements OnDestroy {
     }
   }
 
+  public saveLocal() {
+    let value;
+    if (this.valueMethod) {
+      value = this[this.valueMethod]()
+    } else {
+      value = this.currentForm.getRawValue();
+    }
+
+    const cache = this.hubCache;
+    const hub = new DexihHub(this.hubCache.hub.hubKey, '');
+
+    if (this.property.cacheGetMethod) {
+      cache[this.property.cacheGetMethod](value, hub);
+    }
+
+    hub[this.property.cacheProperty].push(value);
+    let filename = this.property.displayName + '-' + value.name + '.json';
+    this.hubService.exportHub(hub, filename);
+  }
+
   cancel() {
     if (!this.formSaving) {
       this.authService.navigateUp();

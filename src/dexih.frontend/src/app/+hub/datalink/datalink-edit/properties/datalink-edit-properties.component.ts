@@ -26,7 +26,7 @@ export class DatalinkEditPropertiesComponent implements OnInit, OnDestroy {
     constructor(
         private hubService: HubService,
         private authService: AuthService,
-        private editDatalinkService: DatalinkEditService,
+        public editDatalinkService: DatalinkEditService,
         private route: ActivatedRoute,
         private router: Router) {
     }

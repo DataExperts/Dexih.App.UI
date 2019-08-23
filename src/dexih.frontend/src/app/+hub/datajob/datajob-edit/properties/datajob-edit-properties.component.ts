@@ -60,7 +60,7 @@ export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
   stepTableData: Observable<Array<any>> = this._stepTableData.asObservable();
 
   constructor(private hubService: HubService,
-    private formService: HubFormsService,
+    public formService: HubFormsService,
     private route: ActivatedRoute,
     private router: Router) {
   }

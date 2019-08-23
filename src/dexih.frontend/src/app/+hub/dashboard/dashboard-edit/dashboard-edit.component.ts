@@ -27,6 +27,9 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
   private _formChangeSubscription: Subscription;
   private isLoaded = false;
 
+  public isRefreshing = false;
+  private refreshComplete = false;
+
   views: DexihView[];
 
   constructor(
@@ -44,15 +47,19 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
         this.route.data,
         this.route.params,
         this.hubService.getHubCacheObservable(),
+        this.hubService.getRemoteAgentObservable()
       ).subscribe(result => {
         let data = result[0];
         let params = result[1];
         this.hubCache = result[2];
+        let remoteAgent = result[3];
 
         this.action = data['action'];
         this.pageTitle = data['pageTitle'];
 
-          if (!this.hubCache || this.hubCache.status !== eCacheStatus.Loaded || this.isLoaded) { return; }
+        if (!this.hubCache || this.hubCache.status !== eCacheStatus.Loaded) { return; }
+
+        if (!this.isLoaded) {
           this.isLoaded = true;
 
           this.views = this.hubCache.hub.dexihViews;
@@ -74,13 +81,10 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
                 this.formsService.dashboard(dashboard);
               }
             }
-
-            if (this.formsService.currentForm.controls.autoRefresh.value) {
-              this.refresh();
-            }
           }
 
           if (this.action === 'new') {
+            this.refreshComplete = true;
             let dashboard = new DexihDashboard();
             this.formsService.dashboard(dashboard);
             let runTime = this.formsService.currentForm.controls.runTime.value;
@@ -100,6 +104,13 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
               }
             });
           }
+        }
+
+        if (this.formsService.currentForm.controls.autoRefresh.value && remoteAgent && !this.refreshComplete) {
+            this.refreshComplete = true;
+            this.refresh();
+        }
+
       });
     } catch (e) {
       this.hubService.addHubClientErrorMessage(e, 'Dashboard Edit');

@@ -10,11 +10,11 @@
     </span>
 </dexih-widget-section>
 
-<div *ngIf="dataResult?.refreshing">
+<div *ngIf="data?.isRefreshing; else notRefreshing">
         <div class="dexih-loader"></div> Refreshing, please wait...
 </div>
-
-<div class="h-100" *ngIf="!dataResult?.refreshing && dataResult?.columns?.length > 0 && dataResult?.data?.length > 0; else elseBlock">
+<ng-template #notRefreshing>
+<div class="h-100" *ngIf="!data?.isRefreshing && dataResult?.columns?.length > 0 && dataResult?.data?.length > 0; else elseBlock">
     <dexih-table *ngIf="view.viewType == eViewType.Table" [enableMultiSelect]="false" [enableSaveCsv]="false" [enableFilter]="false" [columns]="dataResult.columns" [data]="dataResult.data">
     </dexih-table>
 
@@ -26,4 +26,5 @@
         <i class="fa fa-warning"></i>
         Select refresh to display the view.
     </div>
+</ng-template>
 </ng-template>

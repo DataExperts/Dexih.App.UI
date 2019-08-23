@@ -1,5 +1,5 @@
 <div class="container-fluid" >
-	<dexih-widget title="Dashboard - {{formService?.currentForm?.controls.name.value}}" iconClass="fa fa-lg fa-fw fa-pie-chart" [showCloseButton]="true" [padding]="false"
+	<dexih-widget title="Dashboard - {{formsService?.currentForm?.controls.name.value}}" iconClass="fa fa-lg fa-fw fa-pie-chart" [showCloseButton]="true" [padding]="false"
 	 (close)="close()">
 		<ng-template #header>
 			<dexih-invalid-form-details [control]="formsService.currentForm" (click)="formsService.showErrors()" class="mr-1"></dexih-invalid-form-details>
