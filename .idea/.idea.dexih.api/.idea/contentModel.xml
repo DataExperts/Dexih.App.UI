@@ -78,6 +78,7 @@
       <e p="DexihDashboardItemParameter.cs" t="Include" />
       <e p="DexihDashboardParameter.cs" t="Include" />
       <e p="DexihDatajob.cs" t="Include" />
+      <e p="DexihDatajobParameter.cs" t="Include" />
       <e p="DexihDatalink.cs" t="Include" />
       <e p="DexihDatalinkColumn.cs" t="Include" />
       <e p="DexihDatalinkDependency.cs" t="Include" />
@@ -85,6 +86,7 @@
       <e p="DexihDatalinkProfile.cs" t="Include" />
       <e p="DexihDatalinkStep.cs" t="Include" />
       <e p="DexihDatalinkStepColumn.cs" t="Include" />
+      <e p="DexihDatalinkStepParameter.cs" t="Include" />
       <e p="DexihDatalinkTable.cs" t="Include" />
       <e p="DexihDatalinkTarget.cs" t="Include" />
       <e p="DexihDatalinkTest.cs" t="Include" />
@@ -100,6 +102,7 @@
       <e p="DexihHubs.cs" t="Include" />
       <e p="DexihHubUser.cs" t="Include" />
       <e p="DexihHubVariable.cs" t="Include" />
+      <e p="DexihInputParameterBase.cs" t="Include" />
       <e p="DexihParameterBase.cs" t="Include" />
       <e p="DexihRemoteAgent.cs" t="Include" />
       <e p="DexihRemoteAgentHub.cs" t="Include" />
@@ -418,6 +421,7 @@
         </e>
         <e p="dexih.frontend/node_modules/ajv" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/angular-gridster2" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/angular-resize-event" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/arg" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/blocking-proxy" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/canonical-path" t="IncludeRecursive" />
@@ -426,6 +430,7 @@
         <e p="dexih.frontend/node_modules/codelyzer" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/commander" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/core-js" t="IncludeRecursive" />
+        <e p="dexih.frontend/node_modules/css-element-queries" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/css-line-break" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/dependency-graph" t="IncludeRecursive" />
         <e p="dexih.frontend/node_modules/dexih-ngx-components" t="IncludeRecursive" />
@@ -796,7 +801,7 @@
         <e p="FunctionReference.cs" t="Include" />
         <e p="Functions.cs" t="Include" />
         <e p="FunctionVariables.cs" t="Include" />
-        <e p="GlobalVariables.cs" t="Include" />
+        <e p="GlobalSettings.cs" t="Include" />
         <e p="TransformFunction.cs" t="Include" />
       </e>
       <e p="obj" t="ExcludeRecursive">

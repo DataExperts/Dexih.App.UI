@@ -3,7 +3,7 @@ import { Injectable, OnDestroy, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as FileSaver from 'file-saver';
 import { BehaviorSubject, Observable, Subscription, Subject } from 'rxjs';
-import { timeout, filter } from 'rxjs/operators'
+import { timeout, filter, first } from 'rxjs/operators'
 import { eLogLevel, LogFactory } from '../../logging';
 import {
     DexihHubAuth, ExternalLoginResult, Message, ManagedTask,
@@ -298,6 +298,22 @@ export class AuthService implements OnDestroy {
         return this._remoteAgents.asObservable();
     }
 
+    getRemoteAgentsPromise(): Promise<DexihRemoteAgent[]> {
+        // return new Promise<DexihRemoteAgent[]>((resolve, reject) => {
+        //   let subscription = this._remoteAgents.subscribe(
+        //     result => {
+        //         resolve(result);
+        //         subscription.unsubscribe();
+        //     },
+        //     error => {
+        //         reject(error);
+        //     }
+        //     );
+        // });
+
+        return this._remoteAgents.asObservable().pipe(first()).toPromise();
+    }
+
     // gets an instance of a remote agent.
     getRemoteAgent(remoteAgentKey: number): DexihRemoteAgent {
         let remoteAgents = this._remoteAgents.value;
@@ -561,8 +577,8 @@ export class AuthService implements OnDestroy {
         return this.modalComponent.confirm(title, body, 'Confirm', 'Cancel');
     }
 
-    promptDialog(title: string, body: string): Promise<string> {
-        return this.modalComponent.prompt(title, body);
+    promptDialog(title: string, body: string, inputPrompt = '', inputValue = ''): Promise<string> {
+        return this.modalComponent.prompt(title, body, inputPrompt, inputValue);
     }
 
     informationDialog(title: string, body: any): Promise<boolean> {
@@ -1099,7 +1115,8 @@ export class AuthService implements OnDestroy {
         return new Promise<boolean>((resolve, reject) => {
             this.confirmDialog('Remove Login?', 'Are you sure you want to remove the login ' +
                 provider + ' from your available logins.  When removed you will not be able to login via ' +
-                provider + ' provider.').then(() => {
+                provider + ' provider.').then((confirm) => {
+                    if (confirm) {
                     this.post('/api/Account/RemoveExternalLogin', {
                         provider: provider,
                         providerKey: providerKey
@@ -1111,6 +1128,7 @@ export class AuthService implements OnDestroy {
                         // this.logger.LogC(() => `externalLogin error:${reason.message}`, eLogLevel.Error);
                         // window.location.href = '/api/Account/ExternalLogin?provider=' + provider + '&returnUrl=' + returnUrl;
                     });
+                }
                 }).catch(reason => {
                     reject(reason)
                 });
@@ -1270,8 +1288,8 @@ export class AuthService implements OnDestroy {
     logout(): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             this.confirmDialog('Logout?', 'You can improve your security further after logging out by closing this opened browser')
-                .then(result => {
-                    if (result) {
+                .then(confirm => {
+                    if (confirm) {
                         this.post('/api/Account/Logout', null, 'Logging out current user...').then(result2 => {
                             if (result2) {
                                 this._currentUser.next(null);

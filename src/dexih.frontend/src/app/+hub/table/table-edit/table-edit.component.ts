@@ -142,8 +142,8 @@ export class TableEditComponent implements OnInit, OnDestroy {
       if (this.formsService.hasChanged) {
         this.authService.confirmDialog('The table has not been saved',
           'The table changes have not been saved.  Do you want to discard the changes and exit?')
-          .then(() => {
-              resolve(true);
+          .then((confirm) => {
+              resolve(confirm);
             }).catch(() => {
               resolve(false);
             });

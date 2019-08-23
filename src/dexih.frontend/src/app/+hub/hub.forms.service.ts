@@ -47,6 +47,9 @@ import {
   DexihDashboard,
   DexihDashboardItem,
   DexihInputParameter,
+  PreviewResults,
+  DataCache,
+  DexihHub,
 } from './hub.models';
 import { HubService } from './hub.service';
 import { eTypeCode } from './hub.remote.models';
@@ -205,6 +208,13 @@ export class HubFormsService implements OnDestroy {
     }
   }
 
+  public markAsChanged() {
+    if (!this.currentForm || !this.currentForm.value) { return; }
+
+    this.hasChanged = true;
+    this.currentForm.markAsDirty();
+  }
+
   public showErrors() {
     this.showAllErrors = true;
     this.onValueChanged();
@@ -323,9 +333,11 @@ export class HubFormsService implements OnDestroy {
                   'Another session has updated this ' +
                   description + ', would you like to discard any changes in this session and update with the new version?')
                   .then(confirm => {
-                    let item = Object.assign({}, hubCacheChange.data);
-                    this.ngOnDestroy() // clear old subscriptions
-                    formGroupFunc.call(this, item);
+                    if (confirm) {
+                      let item = Object.assign({}, hubCacheChange.data);
+                      this.ngOnDestroy() // clear old subscriptions
+                      formGroupFunc.call(this, item);
+                    }
                   }).catch(reason => {
 
                   });
@@ -335,7 +347,9 @@ export class HubFormsService implements OnDestroy {
               this.authService.confirmDialog('The ' + description + ' has been deleted',
                 'Another session has deleted this ' + description + ', would you like to discard current changes?')
                 .then(confirm => {
-                  this.authService.navigateUp();
+                  if (confirm) {
+                    this.authService.navigateUp();
+                  }
                 }).catch(reason => {
 
               });
@@ -360,9 +374,11 @@ export class HubFormsService implements OnDestroy {
             description + ' whilst this session was disconnected.  ' +
             'Would you like to discard the changes and reload the newer version from the server (otherwise this will be created a a copy)?')
             .then(confirm => {
-              let newItem = Object.assign({}, item);
-              this.ngOnDestroy() // clear old subscriptions
-              formGroupFunc.call(this, newItem);
+              if (confirm) {
+                let newItem = Object.assign({}, item);
+                this.ngOnDestroy() // clear old subscriptions
+                formGroupFunc.call(this, newItem);
+              }
             }).catch(reason => {
               this.currentForm.controls[keyField].setValue(0);
             });
@@ -371,34 +387,24 @@ export class HubFormsService implements OnDestroy {
     });
   }
 
-  public save(navigateUp = false) {
-    if (this.formSaving) {
-      return;
-    }
+  public async save(navigateUp = false, saveAs = false) {
+    try {
+      if (!saveAs && (this.formSaving || !this.hasChanged)) {
+        return;
+      }
 
-    if (!this.currentForm.valid) {
-      this.showAllErrors = true;
-      this.onValueChanged();
+      if (!this.currentForm.valid) {
+        this.showAllErrors = true;
+        this.onValueChanged();
 
-      this.authService.confirmDialog('There are errors!',
-        'There are errors in the current form.  Confirm that would like to save the changes anyhow?')
-        .then(confirm => {
-          this.hubService.addHubErrorMessage(this.getFormErrors());
-          this.doSave(navigateUp);
-        }).catch(reason => {
+        let confirm = await this.authService.confirmDialog('There are errors!',
+          'There are errors in the current form.  Confirm that would like to save the changes anyhow?');
+        if (!confirm) {
+          return;
+        }
+      }
 
-        });
-    } else {
-      this.doSave(navigateUp);
-    }
-
-
-  }
-
-  private doSave(navigateUp = true) {
-    if (this.hasChanged) {
       this.formSaving = true;
-      this.currentForm.markAsPristine();
 
       let value;
       if (this.valueMethod) {
@@ -407,48 +413,76 @@ export class HubFormsService implements OnDestroy {
         value = this.currentForm.getRawValue();
       }
 
-      let valueCopy = Object.assign({}, value);
+      if (saveAs) {
+        let name = value.name;
+        while (this.hubCache.hub[this.property.cacheProperty].find(c => c.name === name)) {
+          name = await this.authService.promptDialog('Specify a new name',
+            // tslint:disable-next-line:max-line-length
+            `The name ${name} already exists.  Specify a new name for the ${this.property.displayName} and then select ok to save this as a copy.`,
+            '', name + ' 2');
+
+          if (!name) {
+            return;
+          }
+        }
+
+        value.name = name;
+        value.key = 0;
+      }
+
+      this.ignoreHubCacheChange = true;
+
+      const currentStatus =  value.currentStatus;
+      const entityStatus = value.entityStatus;
+      const previousStatus = value.previousStatus;
+      const runTime = value.runTime;
 
       // remove status as they will not parse into json.
-      valueCopy.currentStatus = null;
-      valueCopy.entityStatus = null;
-      valueCopy.previousStatus = null;
+      value.currentStatus = null;
+      value.entityStatus = null;
+      value.previousStatus = null;
+      value.runTime = null;
 
-
-      // saves the current connection.
-      this.authService.post('/api/Hub/' + this.saveMethod, {
+      let result = await this.authService.post('/api/Hub/' + this.saveMethod, {
         hubKey: this.hubCache.hub.hubKey,
         remoteAgentId: this.hubService.getCurrentRemoteAgentInstanceId(false),
-        value: valueCopy
-      }, 'Saving...').then(result => {
+        value: value
+      }, 'Saving...');
 
-        if (!result.success) {
-          this.hubService.addHubMessage(result);
-        }
+      if (!result.success) {
+        this.hubService.addHubMessage(result);
+      }
 
-        let import1 = new Import();
-        import1[this.property.property] = [{importAction: eImportAction.New, item: result.value}];
-        this.hubService.updateHubChange(import1);
+      let import1 = new Import();
+      import1[this.property.property] = [{ importAction: eImportAction.New, item: result.value }];
+      this.hubService.updateHubChange(import1);
 
-        this.formSaving = false;
-        this.hasChanged = false;
+      if (this.formGroupFunc) {
+        // this.ignoreHubCacheChange = true;
+        this.formGroupFunc(result.value);
 
-        if (this.formGroupFunc) {
-          this.ignoreHubCacheChange = true;
-          this.formGroupFunc(result.value);
-          this.ignoreHubCacheChange = false;
-        }
+        if (this.currentForm.controls.currentStatus) { this.currentForm.controls.currentStatus.setValue(currentStatus); }
+        if (this.currentForm.controls.entityStatus) { this.currentForm.controls.entityStatus.setValue(entityStatus); }
+        if (this.currentForm.controls.previousStatus) { this.currentForm.controls.previousStatus.setValue(previousStatus); }
+        if (this.currentForm.controls.runTime) { this.currentForm.controls.runTime.setValue(runTime); }
+        this.ignoreHubCacheChange = false;
+      }
 
-        if (navigateUp) {
-          this.authService.navigateUp();
-        } else {
-          this.hubService.addHubSuccessMessage('The save operation completed.');
-        }
-      }).catch(reason => {
-        this.hubService.addHubMessage(reason);
+      this.formSaving = false;
+      this.hasChanged = false;
+
+      if (navigateUp) {
+        this.authService.navigateUp();
+      } else {
+        this.hubService.addHubSuccessMessage('The save operation completed.');
+      }
+    } catch (error) {
+      if (error) {
+        this.hubService.addHubMessage(error);
         this.currentForm.markAsDirty();
-        this.formSaving = false;
-      });
+      }
+    } finally {
+      this.formSaving = false;
     }
   }
 
@@ -932,7 +966,7 @@ export class HubFormsService implements OnDestroy {
       ]],
       'dexihDashboardItems': this.fb.array([]),
       'parameters': this.fb.array(parameters),
-      'runTime': {showEdit: false},
+      'runTime': {showEdit: false, lock: true},
     }, { }
     );
 
@@ -973,7 +1007,7 @@ export class HubFormsService implements OnDestroy {
         Validators.maxLength(50),
       ]],
       'parameters': this.fb.array(parameters),
-      'runTime': {resizeEvent: new EventEmitter<any[]>(), refreshData: new EventEmitter<string>()},
+      'runTime': {resizeEvent: new EventEmitter<any[]>(), data: new DataCache()},
     }
     );
 
@@ -1213,6 +1247,11 @@ export class HubFormsService implements OnDestroy {
   }
 
   public datalinkStepFormGroup(datajobForm: FormGroup, step: DexihDatalinkStep): FormGroup {
+
+    let parameters = step.parameters.filter(c => c.isValid).map(parameter => {
+      return this.parameter(parameter);
+    });
+
     let stepForm = this.fb.group({
       'key': [step.key, [
       ]],
@@ -1230,7 +1269,8 @@ export class HubFormsService implements OnDestroy {
       })),
       'dexihDatalinkStepColumns': this.fb.array(step.dexihDatalinkStepColumns.filter(c => c.isValid).map(col => {
         return this.datalinkStepColumnFormGroup(col);
-      }))
+      })),
+      'parameters': this.fb.array(parameters)
     });
 
     this.addMissing(step, stepForm, new DexihDatalinkStep());
@@ -1258,6 +1298,10 @@ export class HubFormsService implements OnDestroy {
       return this.triggerFormGroup(trigger);
     });
 
+    let parameters = datajob.parameters.filter(c => c.isValid).map(parameter => {
+      return this.parameter(parameter);
+    });
+
     const stepsArray = this.fb.array([]);
 
     const datajobForm = this.fb.group({
@@ -1277,6 +1321,7 @@ export class HubFormsService implements OnDestroy {
       ]],
       'dexihDatalinkSteps': stepsArray,
       'dexihTriggers': this.fb.array(triggers),
+      'parameters': this.fb.array(parameters)
     });
 
     datajob.dexihDatalinkSteps.filter(c => c.isValid).forEach(step => {

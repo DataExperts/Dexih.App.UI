@@ -66,20 +66,26 @@
 
 
 		<dexih-widget-section  *ngIf="showEdit" title="Query Configuration" [showExpandButton]="true">
-			<query-builder  [selectQuery]="selectQuery" [columns]="tableColumns" [inputColumns]="inputColumns" [parameters]="formsService.currentForm.controls.parameters.value" ></query-builder>
+			<query-builder  [selectQuery]="formsService.currentForm.controls.selectQuery.value" [columns]="tableColumns" [inputColumns]="inputColumns" [parameters]="formsService.currentForm.controls.parameters.value" (hasChanged)="hasChanged()"></query-builder>
 		</dexih-widget-section>
 
 		<ng-template [ngIf]="columns?.length > 0 && data?.length > 0">
-			<dexih-table [enableMultiSelect]="false" [enableSaveCsv]="true" [columns]="columns" [data]="data" [hideTable]="showChart">
+			<dexih-table *ngIf="!showChart" [enableMultiSelect]="false" [enableSaveCsv]="true" [columns]="columns" [data]="data" [hideTable]="showChart">
 				<!-- <ng-template #actions let-items="items">
 					<dexih-button-refresh class="mr-1" (click)="refresh()" text="Reload"></dexih-button-refresh>
 				</ng-template> -->
 			</dexih-table>
 
-			<chart-builder *ngIf="showChart" [ngStyle]="{'display': showChart ? 'block' : 'none' }" style="height: 600px" [title]="formsService.currentForm.controls.name.value" [columns]="columns" [data]="data" [config]="chartConfig"
-				[showEdit]="showEdit">
+			<div *ngIf="showChart" class="view-height">
+			<chart-builder 
+				[title]="formsService.currentForm.controls.name.value" 
+				[columns]="columns" 
+				[data]="data" 
+				[config]="formsService.currentForm.controls.chartConfig.value"
+				[showEdit]="showEdit"
+				(hasChanged)="hasChanged()">
 			</chart-builder>
-
+		</div>
 		</ng-template>
 
 	</dexih-widget>

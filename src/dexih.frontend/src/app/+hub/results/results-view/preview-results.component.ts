@@ -107,7 +107,7 @@ export class PreviewResultsComponent implements OnInit, OnDestroy {
     refresh() {
         let selectQuery = this.createSelectQuery();
 
-        this.hubService.previewTableDataQuery(this.targetTable, false, selectQuery, null).then(result => {
+        this.hubService.previewTableDataQuery(this.targetTable, false, selectQuery, null, null).then(result => {
             this.columns = result.columns;
             this.data = result.data;
         }).catch(() => {

@@ -94,7 +94,7 @@ export class MappingEditComponent implements OnInit, OnDestroy {
 
         this.datalinkForm = datalinkForm;
 
-        this.variables = this.hubCache.hub.dexihHubVariables.map(c => '{' + c.name + '}');
+        this.variables = this.editDatalinkService.getVariables();
 
         this.datalinkTransformItemKey = +params['datalinkTransformItemKey'];
         this.datalinkTransformKey = +params['datalinkTransformKey'];

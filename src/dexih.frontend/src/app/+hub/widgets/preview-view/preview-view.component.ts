@@ -1,12 +1,11 @@
 import { Component, OnInit, Input, OnDestroy, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
-import { eViewType, InputColumn, DexihColumnBase, ChartConfig,
-    HubCache, DexihView, eViewSource, PreviewResults, DexihTable, DexihDatalink, eSourceType, DexihInputParameter } from '../../hub.models';
+import { eViewType, InputColumn, DexihColumnBase, HubCache, DexihView,
+    eViewSource, PreviewResults, DexihInputParameter, DataCache } from '../../hub.models';
 import { combineLatest, Subscription } from 'rxjs';
 import { AuthService } from '../../../+auth/auth.service';
 import { HubService } from '../../hub.service';
-import { SelectQuery, eDownloadFormat, DownloadObject } from '../../hub.query.models';
-import { InputOutputColumns } from '../../hub.lineage.models';
-import { DexihRemoteAgent, DexihActiveAgent } from '../../../+auth/auth.models';
+import { eDownloadFormat, DownloadObject } from '../../hub.query.models';
+import { DexihActiveAgent } from '../../../+auth/auth.models';
 
 @Component({
     selector: 'preview-view',
@@ -16,10 +15,8 @@ import { DexihRemoteAgent, DexihActiveAgent } from '../../../+auth/auth.models';
 export class PreviewViewComponent implements OnInit, OnChanges, OnDestroy {
     @Input() parameters: DexihInputParameter[];
     @Input() viewKey: number
-    @Input() resizeEvent: EventEmitter<any[]>;
-    @Input() refreshData: EventEmitter<string> = null;
-
-    public resizeEvent2 = new EventEmitter<any[]>();
+    @Input() data: DataCache;
+    @Output() dataChange = new EventEmitter<DataCache>();
 
     private _subscription: Subscription;
     private _resizeSubscription: Subscription;
@@ -32,17 +29,11 @@ export class PreviewViewComponent implements OnInit, OnChanges, OnDestroy {
     public pageTitle: string;
     public message: string;
 
-    public transformProperties = null;
-
     public inputColumns: InputColumn[];
     public tableColumns: DexihColumnBase[];
 
     public title: string;
 
-    columns: Array<any>;
-    public data: Array<any>;
-
-    public isRefreshing = false;
     private firstLoad = true;
     private dialogOpen = false;
 
@@ -53,6 +44,8 @@ export class PreviewViewComponent implements OnInit, OnChanges, OnDestroy {
 
     public width: number;
     public height: number;
+
+    public dataResult: PreviewResults;
 
     constructor(
         private hubService: HubService,
@@ -77,15 +70,13 @@ export class PreviewViewComponent implements OnInit, OnChanges, OnDestroy {
                         this.view = this.hubCache.hub.dexihViews.find(c => c.key === this.viewKey);
 
                         if (!this.view) {
-                            throw('The view with the key ' + this.viewKey + 'was not found.');
+                            this.hubService.addHubErrorMessage('The view with the key ' + this.viewKey + 'was not found.');
                             this.authService.navigateUp();
                         }
 
-                        if (this.refreshData) {
-                            this._refreshDataSubscription = this.refreshData.subscribe(url => {
-                                if (url) {
-                                    this.refresh(url);
-                                }
+                        if (this.data) {
+                            this._refreshDataSubscription = this.data.data.subscribe(dataResult => {
+                                this.dataResult = dataResult;
                             });
                         } else if (this.remoteAgent) {
                             if (!this.firstLoad) {
@@ -110,17 +101,28 @@ export class PreviewViewComponent implements OnInit, OnChanges, OnDestroy {
         } catch (e) {
             this.hubService.addHubClientErrorMessage(e, 'Datalink Preview');
         }
-
-        this._resizeSubscription = this.resizeEvent.subscribe((value: any[]) => {
-            if (value && value.length > 1) {
-                this.width = value[0];
-                this.height = value[1];
-            }
-        });
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        // this.update();
+        if (!this.hubCache || !this.hubCache.isLoaded()) {
+            return;
+        }
+
+        if (changes.data) {
+            if (this._refreshDataSubscription) { this._refreshDataSubscription.unsubscribe(); }
+            this._refreshDataSubscription = this.data.data.subscribe(dataResult => {
+                this.dataResult = dataResult;
+            });
+        }
+
+        if (changes.viewKey) {
+            this.view = this.hubCache.hub.dexihViews.find(c => c.key === this.viewKey);
+
+            if (!this.view) {
+                this.hubService.addHubErrorMessage('The view with the key ' + this.viewKey + 'was not found.');
+                this.authService.navigateUp();
+            }
+        }
     }
 
     ngOnDestroy(): void {
@@ -134,37 +136,28 @@ export class PreviewViewComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     public refresh(url: string = null) {
-        if (!this.isRefreshing) {
-            this.isRefreshing = true;
+        if (!this.data) {
+            this.data = new DataCache();
+            this.dataChange.emit(this.data);
+
+            if (this._refreshDataSubscription) { this._refreshDataSubscription.unsubscribe(); }
+            this._refreshDataSubscription = this.data.data.subscribe(dataResult => {
+                this.dataResult = dataResult;
+            });
+        }
+
+        if (!this.data.isRefreshing) {
 
             let previewQuery: Promise<PreviewResults>;
 
             if (url) {
                 previewQuery = this.hubService.downloadUrlData(url);
             } else {
-                switch (this.view.sourceType) {
-                    case eViewSource.Datalink:
-                        previewQuery = this.hubService.previewDatalinkKeyData(this.view.sourceDatalinkKey,
-                            this.view.selectQuery, this.inputColumns, this.parameters);
-                        break;
-                    case eViewSource.Table:
-                        previewQuery = this.hubService.previewTableKeyData(this.view.sourceTableKey,
-                            false, this.view.selectQuery, this.inputColumns, this.parameters)
-                        break;
-                }
+                previewQuery = this.hubService.previewView(this.view, this.inputColumns, this.parameters)
             }
 
-
             if (previewQuery) {
-                previewQuery.then((result) => {
-                    this.columns = result.columns;
-                    this.data = result.data;
-                    this.transformProperties = result.transformProperties;
-                    this.isRefreshing = false;
-                }).catch(() => {
-                    this.data = [];
-                    this.isRefreshing = false;
-                });
+                this.data.refresh(previewQuery);
             }
         }
     }

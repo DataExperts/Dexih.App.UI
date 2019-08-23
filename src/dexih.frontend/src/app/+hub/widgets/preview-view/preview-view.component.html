@@ -10,15 +10,15 @@
     </span>
 </dexih-widget-section>
 
-<div *ngIf="refreshing">
+<div *ngIf="dataResult?.refreshing">
         <div class="dexih-loader"></div> Refreshing, please wait...
 </div>
 
-<div *ngIf="!refreshing && columns?.length > 0 && data?.length > 0; else elseBlock">
-    <dexih-table *ngIf="view.viewType == eViewType.Table" [enableMultiSelect]="false" [enableSaveCsv]="false" [enableFilter]="false" [columns]="columns" [data]="data">
+<div class="h-100" *ngIf="!dataResult?.refreshing && dataResult?.columns?.length > 0 && dataResult?.data?.length > 0; else elseBlock">
+    <dexih-table *ngIf="view.viewType == eViewType.Table" [enableMultiSelect]="false" [enableSaveCsv]="false" [enableFilter]="false" [columns]="dataResult.columns" [data]="dataResult.data">
     </dexih-table>
 
-    <chart-view *ngIf="view.viewType == eViewType.Chart" [columns]="columns" [height]="height" [width]="width" [data]="data" [config]="view.chartConfig">
+    <chart-view *ngIf="view.viewType == eViewType.Chart" [columns]="dataResult.columns" [data]="dataResult.data" [config]="view.chartConfig">
     </chart-view>
 </div>
 <ng-template #elseBlock>

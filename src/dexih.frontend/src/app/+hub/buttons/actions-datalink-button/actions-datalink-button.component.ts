@@ -105,7 +105,7 @@ export class ActionsDatalinkButtonComponent implements OnInit, OnChanges, OnDest
     }
 
     async runDatalinks(truncateTarget: boolean, resetIncremental: boolean) {
-        await this.hubService.runDatalinks(this.datalinks.map(c => c.key), truncateTarget, resetIncremental, null, null);
+        await this.hubService.runDatalinks(this.datalinks.map(c => c.key), truncateTarget, resetIncremental, null, null, null);
     }
 
     runDatalinksOptions() {

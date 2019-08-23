@@ -120,7 +120,6 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
                                     name: c.name, logicalName: c.logicalName, dataType: c.dataType, rank: c.rank, value: c.defaultValue};
                                 }
                             );
-                            this.parameters = datalink.parameters;
                     }
                 }
 

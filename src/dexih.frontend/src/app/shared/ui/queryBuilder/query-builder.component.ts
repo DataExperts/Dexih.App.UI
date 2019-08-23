@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { SelectQuery, SelectColumn, Sort, eAggregate, eDirection, eCompare, compare, Filter } from '../../../+hub/hub.query.models';
 import { DexihTableColumn, TableColumn, DexihColumnBase, InputColumn, DexihInputParameter } from '../../../+hub/hub.models';
 import { eTypeCode, TypeCodes } from '../../../+hub/hub.remote.models';
@@ -13,6 +13,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
     @Input() columns: DexihTableColumn[];
     @Input() inputColumns: InputColumn[];
     @Input() parameters: DexihInputParameter[];
+    @Output() hasChanged = new EventEmitter();
 
     tableColumns: TableColumn[];
     selectColumns: SelectColumn[];
@@ -73,5 +74,9 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
             this.savedRowCount = this.selectQuery.rows;
             this.selectQuery.rows = -1;
         }
+    }
+
+    onChanged() {
+        this.hasChanged.emit();
     }
 }

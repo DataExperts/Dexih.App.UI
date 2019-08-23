@@ -1,16 +1,17 @@
 <div class="container">
-    <dexih-widget title="Run Datalink Options" iconClass="fa fa-lg fa-fw fa-exchange"  [showCloseButton]="true" (close)="close()" [padding]="true">
+    <dexih-widget title="Run Datajob Options" iconClass="fa fa-lg fa-fw fa-exchange"  [showCloseButton]="true" (close)="close()" [padding]="true">
             <ng-template #header>
-                <dexih-button-refresh class="mr-1" (click)="runDatalinks()" text="Run Now"></dexih-button-refresh>
+                <dexih-button-refresh class="mr-1" (click)="run()" text="Run Now"></dexih-button-refresh>
+                <dexih-button-refresh class="mr-1" (click)="activate()" text="Activate Triggers"></dexih-button-refresh>
                 <dexih-button-cancel (click)="cancel()"></dexih-button-cancel>
             </ng-template>
 
         <ng-template #subHeader>
-            <label class="label">Run the following datalink(s):</label>
+            <label class="label">Run the following datajobs(s):</label>
             <div>
                 <div class="row">
-                    <span class="col alert alert-primary m-1" *ngFor="let datalink of datalinks | fieldSort: 'name'">
-                        {{datalink.name}}
+                    <span class="col alert alert-primary m-1" *ngFor="let datajob of datajobs | fieldSort: 'name'">
+                        {{datajob.name}}
                     </span>
                 </div>
             </div>
@@ -39,24 +40,9 @@
                     </div>
     
     
-                    <div class="d-flex flex-wrap pt-1" *ngIf="inputColumns && inputColumns.length > 0" >
-                        <div class="input-group-text">
-                            Input Values
-                        </div>
-                
-                        <span *ngFor="let column of inputColumns; let i = index" class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    {{column.logicalName}}
-                                </div>
-                            </div>
-                            <form-input name="column{{i}}" class="form-control p-0" [placeholder]="column.logicalName" [(ngModel)]="column.value"></form-input>
-                        </span>
-                    </div>
-
                     <div class="d-flex flex-wrap pt-1" *ngIf="parameters && parameters.length > 0" >
                         <div class="input-group-text">
-                            Parameters
+                            Input Parameters
                         </div>
                 
                         <span *ngFor="let parameter of parameters; let i = index" class="input-group">

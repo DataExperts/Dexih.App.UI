@@ -336,3 +336,21 @@ markdown {
         }
     }
 }
+
+.floating-toolbar {
+    position: fixed;
+    right: 8px;
+    padding: 8px;
+    opacity: .1;
+    transition: 0.3s;
+    z-index: 99999;
+}
+
+.floating-toolbar:hover {
+    opacity: 1;
+}
+
+.view-height {
+    height: calc(100vh - 200px);
+    box-sizing: border-box;
+}

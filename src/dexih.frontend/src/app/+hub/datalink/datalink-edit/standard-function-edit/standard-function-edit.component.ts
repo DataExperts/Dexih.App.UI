@@ -151,7 +151,7 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
             this.datalinkTransformForm = this.editDatalinkService.getDatalinkTransform(this.datalinkTransformKey);
           }
 
-          this.variables = this.hubCache.hub.dexihHubVariables.map(c => '{' + c.name + '}');
+          this.variables = this.editDatalinkService.getVariables();
 
           this.useCustomFunction = this.datalinkTransformForm.controls.customFunctionKey ? true : false;
           this.datalinkTransformItemKey = +params['datalinkTransformItemKey'];
@@ -301,8 +301,8 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
       if (this.newDatalinkTransformItemForm && !this.newDatalinkTransformItemForm.pristine) {
         this.authService.confirmDialog('The function has changed',
           'The function has changed.  Do you want to discard the changes and continue?')
-          .then(() => {
-              resolve(true);
+          .then((confirm) => {
+              resolve(confirm);
             }).catch(() => {
               resolve(false);
             });

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HubCache, eCacheStatus, InputColumn, DexihDatalink, DexihInputParameter, InputParameter } from '../../hub.models';
+import { HubCache, DexihDatajob, InputParameter } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { AuthService } from '../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
@@ -7,25 +7,25 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
 
-    selector: 'datalink-run',
-    templateUrl: './datalink-run.component.html'
+    selector: 'datajob-run',
+    templateUrl: './datajob-run.component.html'
 })
-export class DatalinkRunComponent implements OnInit, OnDestroy {
+export class DatajobRunComponent implements OnInit, OnDestroy {
     private _subscription: Subscription;
 
-    private datalinks: DexihDatalink[];
+    private datajobs: DexihDatajob[];
     private hubCache: HubCache;
 
     public action: string; // new or edit
     public pageTitle: string;
     public message: string;
 
-    public inputColumns: InputColumn[];
-    public parameters: InputParameter[];
 
     public truncateTable = false;
     public resetIncremental = false;
     public resetValue = '';
+
+    parameters: InputParameter[];
 
     isRefreshing = false;
 
@@ -52,23 +52,17 @@ export class DatalinkRunComponent implements OnInit, OnDestroy {
                 this.pageTitle = data['pageTitle'];
 
                 if (this.hubCache.isLoaded()) {
-                    let datalinkKeys: string = params['datalinkKeys'];
-                    this.datalinks = new Array<DexihDatalink>();
+                    let datajobKeys: string = params['datajobKeys'];
+                    this.datajobs = new Array<DexihDatajob>();
 
-                    if (datalinkKeys) {
-                        this.inputColumns = [];
+                    if (datajobKeys) {
                         this.parameters = [];
-                        let datalinkKeyArray = datalinkKeys.split('|').map(c => +c);
-                        datalinkKeyArray.forEach(datalinkKey => {
-                            let datalink = this.hubCache.hub.dexihDatalinks.find(c => c.key === datalinkKey);
-                            this.datalinks.push(datalink);
-                            datalink.sourceDatalinkTable.dexihDatalinkColumns.filter(c => c.isInput).forEach(c => {
-                                this.inputColumns.push({datalinkKey: datalinkKey, datalinkName: datalink.name,
-                                    name: c.name, logicalName: c.logicalName,
-                                    dataType: c.dataType, rank: c.rank, value: c.defaultValue });
-                            });
-                            datalink.parameters.forEach( c => {
-                                if (this.parameters.findIndex( p => p.name === c.name ) < 0) {
+                        let datajobKeyArray = datajobKeys.split('|').map(c => +c);
+                        datajobKeyArray.forEach(datajobKey => {
+                            let datajob = this.hubCache.hub.dexihDatajobs.find(c => c.key === datajobKey);
+                            this.datajobs.push(datajob);
+                            datajob.parameters.forEach(c => {
+                                if (this.parameters.findIndex(p => c.name === p.name) < 0) {
                                     this.parameters.push({name: c.name, value: c.value});
                                 }
                             });
@@ -77,7 +71,7 @@ export class DatalinkRunComponent implements OnInit, OnDestroy {
                 }
             });
         } catch (e) {
-            this.hubService.addHubClientErrorMessage(e, 'Datalink Preview');
+            this.hubService.addHubClientErrorMessage(e, 'Datajob Run');
         }
     }
 
@@ -89,9 +83,15 @@ export class DatalinkRunComponent implements OnInit, OnDestroy {
         this.authService.navigateUp();
     }
 
-    runDatalinks() {
-        this.hubService.runDatalinks(this.datalinks.map(c => c.key), this.truncateTable,
-            this.resetIncremental, this.resetValue, this.inputColumns, this.parameters);
+    run() {
+        this.hubService.runDatajobs(this.datajobs, this.truncateTable,
+            this.resetIncremental, this.resetValue, this.parameters);
         this.authService.navigateUp();
     }
+
+    activate() {
+        this.hubService.activateDatajobs(this.datajobs, this.parameters);
+        this.authService.navigateUp();
+    }
+
 }

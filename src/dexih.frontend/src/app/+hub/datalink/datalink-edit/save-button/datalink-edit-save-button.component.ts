@@ -87,8 +87,10 @@ export class DatalinkEditSaveButtonComponent implements OnInit, OnDestroy {
                 ${tableNames} have changed.
                 This is a shared object, and may impact other dependencies if changed.
                 Note, this will only save the metadata, use the 'Create Table' function to overwrite the physical table.`)
-                .then(async () => {
-                    await doSave();
+                .then(async (confirm) => {
+                    if (confirm) {
+                        await doSave();
+                    }
                 }).catch(() => this.savingDatalink.next(false))
             }
         } else {
@@ -148,13 +150,13 @@ export class DatalinkEditSaveButtonComponent implements OnInit, OnDestroy {
                             if (value) {
                                 this.hubService
                                     .runDatalinks([this.datalinkForm.controls.key.value], truncateTarget, resetIncremental
-                                        , null, null);
+                                        , null, null, null);
                             }
                         })
                     }
                 });
         } else {
-            this.hubService.runDatalinks([this.datalinkForm.controls.key.value], truncateTarget, resetIncremental, null, null);
+            this.hubService.runDatalinks([this.datalinkForm.controls.key.value], truncateTarget, resetIncremental, null, null, null);
         }
     }
 

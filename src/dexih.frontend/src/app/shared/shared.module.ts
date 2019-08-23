@@ -20,6 +20,7 @@ import { QueryBuilderModule } from './ui/queryBuilder/query-builder.module';
 import { ChartBuilderModule } from './ui/chartBuilder/chart-builder.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { GridsterModule} from 'angular-gridster2';
+import { AngularResizedEventModule } from 'angular-resize-event';
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import { GridsterModule} from 'angular-gridster2';
     QueryBuilderModule,
     ChartBuilderModule,
     NgxChartsModule,
-    GridsterModule
+    GridsterModule,
+    AngularResizedEventModule
   ],
   declarations: [
   ],
@@ -61,7 +63,8 @@ import { GridsterModule} from 'angular-gridster2';
     QueryBuilderModule,
     ChartBuilderModule,
     NgxChartsModule,
-    GridsterModule
+    GridsterModule,
+    AngularResizedEventModule
   ],
   providers: [
     LayoutService

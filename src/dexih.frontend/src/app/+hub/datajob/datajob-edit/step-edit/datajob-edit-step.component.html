@@ -41,6 +41,11 @@
 	</form>
 </dexih-widget-section>
 
+<dexih-widget-section *ngIf="stepFormService.currentForm" title="Parameters" [showExpandButton]="true" [padding]="false" [padding]="true">
+	<input-parameters [showEdit]="true" [parameters]="stepFormService.currentForm.controls.parameters" [formsService]="formService" [parentParameters]="formService.currentForm.controls.parameters.value">
+	</input-parameters>
+</dexih-widget-section>
+
 <dexih-widget-section *ngIf="stepFormService.currentForm" title="Dependent Steps" [showExpandButton]="false"
 	[padding]="false">
 	<dexih-table *ngIf="stepFormService.currentForm" [enableMultiSelect]="true" [columns]="stepColumns"

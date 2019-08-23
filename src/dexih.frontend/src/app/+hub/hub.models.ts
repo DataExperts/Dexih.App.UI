@@ -3,7 +3,6 @@ import { ManagedTask, ePermission, Message } from '../+auth/auth.models';
 import { eCompare, eAggregate, SelectQuery } from './hub.query.models';
 import { eTypeCode, eFunctionType, eTransformType, FunctionParameter } from './hub.remote.models';
 import { EntityBase } from '../+auth/global.models';
-import { DateInput } from 'ngx-bootstrap/chronos/test/chain';
 
 export class RemoteMessage {
     public messageId: string;
@@ -47,9 +46,6 @@ export class Parameter {
     public value;
 }
 
-// used for populating dropdowns.  Contains connections with their underlying tables.
-
-
 export class HubCache {
 
     public hub: DexihHub;
@@ -64,7 +60,6 @@ export class HubCache {
         || p.direction === eParameterDirection.ResultReturnValue
         || p.direction === eParameterDirection.ReturnValue
     }
-
 
     public static parameterIsInput(p: DexihFunctionParameter): boolean {
         return p.direction === eParameterDirection.Input
@@ -476,6 +471,11 @@ export class HubCache {
         return hub;
     }
 
+    public getTableCache(table: DexihTable, hub: DexihHub): DexihHub {
+        this.cacheAddConnection(table.connectionKey, hub);
+        return hub;
+    }
+
     public getDatajobCache(datajob: DexihDatajob, hub: DexihHub): DexihHub {
         this.cacheAddConnection(datajob.auditConnectionKey, hub);
         datajob.dexihDatalinkSteps.forEach(step => {
@@ -492,13 +492,35 @@ export class HubCache {
         return hub;
     }
 
-    public getColumnValidationCache(columnValidation: DexihColumnValidation, hub: DexihHub): DexihColumnValidation {
+    public getColumnValidationCache(columnValidation: DexihColumnValidation, hub: DexihHub): DexihHub {
         if (columnValidation.lookupColumnKey > 0) {
             let lookupColumn = this.getColumn(columnValidation.lookupColumnKey);
             this.cacheAddTable(lookupColumn.tableKey, hub);
         }
 
-        return columnValidation;
+        return hub;
+    }
+
+    public getViewCache(view: DexihView, hub: DexihHub): DexihHub {
+        this.cacheAddDatalink(view.sourceDatalinkKey, hub);
+        this.cacheAddTable(view.sourceTableKey, hub);
+
+        return hub;
+    }
+
+    public getDashboardCache(dashboard: DexihDashboard, hub: DexihHub): DexihHub {
+        dashboard.dexihDashboardItems.forEach(item => {
+            this.cacheAddView(item.viewKey, hub);
+        });
+
+        return hub;
+    }
+
+    public getApiCache(api: DexihApi, hub: DexihHub): DexihHub {
+        this.cacheAddDatalink(api.sourceDatalinkKey, hub);
+        this.cacheAddTable(api.sourceTableKey, hub);
+
+        return hub;
     }
 
     public getSharedObjects(): SharedObject[] {
@@ -853,6 +875,22 @@ export class HubCache {
     }
 }
 
+export class DataCache {
+    public data = new BehaviorSubject<PreviewResults>(null);
+    public isRefreshing = false;
+
+    public refresh(previewQuery: Promise<PreviewResults>) {
+        this.isRefreshing = true;
+        previewQuery.then((result) => {
+            this.data.next(result);
+            this.isRefreshing = false;
+        }).catch(() => {
+            this.data.next(null);
+            this.isRefreshing = false;
+        });
+    }
+}
+
 export enum eSharedObjectType {
     None = <any>'None',
     Connection = <any>'Connection',
@@ -882,6 +920,7 @@ export class SharedObjectProperty {
     public property: string;
     public cacheProperty: string;
     public cacheAddMethod: string;
+    public cacheGetMethod: string;
     public icon: string;
     public routerLink: string;
     public displayName: string;
@@ -891,66 +930,77 @@ export class SharedObjectProperty {
 export const sharedObjectProperties: SharedObjectProperty[] = [
     {
         type: eSharedObjectType.Connection, name: 'Connection', cacheProperty: 'dexihConnections', property: 'connections',
-        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddConnection', icon: 'fa-database', routerLink: 'connections',
+        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddConnection', cacheGetMethod: '',
+        icon: 'fa-database', routerLink: 'connections',
         displayName: 'Connections', description: 'Connections to data sources such as databases, flat files and web services.'
     },
     {
         type: eSharedObjectType.Table, name: 'Table', cacheProperty: 'dexihTables', property: 'tables',
         parentKey: 'connectionKey', parentType: eSharedObjectType.Connection, cacheAddMethod: 'cacheAddTable',
-        icon: 'fa-table', routerLink: 'tables',
+        cacheGetMethod: 'getTableCache', icon: 'fa-table', routerLink: 'tables',
         displayName: 'Tables', description: 'References to structured and unstructured datasets.'
     },
     {
         type: eSharedObjectType.Datalink, name: 'Datalink', cacheProperty: 'dexihDatalinks', property: 'datalinks',
-        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddDatalink', icon: 'fa-exchange', routerLink: 'datalinks',
+        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddDatalink', cacheGetMethod: 'getDatalinkCache',
+        icon: 'fa-exchange', routerLink: 'datalinks',
         displayName: 'Datalinks', description: 'Runnable or queryable data sets of data transformations.'
     },
     {
         type: eSharedObjectType.Datajob, name: 'Datajob', cacheProperty: 'dexihDatajobs', property: 'datajobs',
-        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddDatajob', icon: 'fa-calendar', routerLink: 'datajobs',
+        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddDatajob',
+        cacheGetMethod: 'getDatajobCache', icon: 'fa-calendar', routerLink: 'datajobs',
         displayName: 'Jobs and Schedules',
         description: 'Job which can be scheduled or run on demand, which contains a sequence of datalinks'
     },
     {
         type: eSharedObjectType.View, name: 'View', cacheProperty: 'dexihViews', property: 'views',
-        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddView', icon: 'fa-bar-chart', routerLink: 'views',
+        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddView',
+        cacheGetMethod: 'getViewCache', icon: 'fa-bar-chart', routerLink: 'views',
         displayName: 'Views', description: 'Charts and tabular views of table or datalinks outputs.'
     },
     {
         type: eSharedObjectType.Dashboard, name: 'Dashboard', cacheProperty: 'dexihDashboards', property: 'dashboards',
-        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddDashboard', icon: 'fa-pie-chart', routerLink: 'dashboards',
+        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddDashboard',
+        cacheGetMethod: 'getDashboardCache', icon: 'fa-pie-chart', routerLink: 'dashboards',
         displayName: 'Dashboards', description: 'A collection of views gathered into a single dashboard.'
     },
     {
         type: eSharedObjectType.Api, name: 'Api', cacheProperty: 'dexihApis', property: 'apis',
-        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddApi', icon: 'fa-feed', routerLink: 'apis',
+        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddApi',
+        cacheGetMethod: 'getApiCache', icon: 'fa-feed', routerLink: 'apis',
         displayName: 'Api\'s', description: 'Published Rest based Api\'s which can be used to access data using third party tools'
     },
     {
         type: eSharedObjectType.FileFormat, name: 'FileFormat', cacheProperty: 'dexihFileFormats', property: 'fileFormats',
-        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddFileFormat', icon: 'fa-file-text-o', routerLink: 'fileFormats',
+        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddFileFormat',
+        cacheGetMethod: '', icon: 'fa-file-text-o', routerLink: 'fileFormats',
         displayName: 'File Formats', description: 'Definitions for delimited flat files'
     },
     {
         type: eSharedObjectType.ColumnValidation, name: 'ColumnValidation', cacheProperty: 'dexihColumnValidations',
         property: 'columnValidations',
-        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddColumnValidation', icon: 'fa-check-square-o',
+        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddColumnValidation',
+        cacheGetMethod: 'getColumnValidationCache', icon: 'fa-check-square-o',
         routerLink: 'columnValidations',
         displayName: 'Column Validations', description: 'Validation rule that can be applied to columns within a table.'
     },
     {
         type: eSharedObjectType.HubVariable, name: 'HubVariable', cacheProperty: 'dexihHubVariables', property: 'hubVariables',
-        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddHubVariable', icon: 'fa-fw fa-at', routerLink: 'hubVariables',
+        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddHubVariable',
+        cacheGetMethod: '', icon: 'fa-fw fa-at', routerLink: 'hubVariables',
         displayName: 'Variables', description: 'Variables which can be used as global configuration throughout the hub.'
     },
     {
         type: eSharedObjectType.CustomFunction, name: 'CustomFunction', cacheProperty: 'dexihCustomFunctions', property: 'customFunctions',
-        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddCustomFunction', icon: 'fa-code', routerLink: 'customFunctions',
+        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddCustomFunction',
+        cacheGetMethod: '', icon: 'fa-code', routerLink: 'customFunctions',
         displayName: 'Functions', description: 'Custom c# functions which can be used in datalinks.'
     },
     {
         type: eSharedObjectType.DatalinkTest, name: 'DatalinkTest', cacheProperty: 'dexihDatalinkTests', property: 'datalinkTests',
-        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddDatalinkTest', icon: 'fa-flag-checkered', routerLink: 'datalinkTests',
+        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddDatalinkTest',
+        cacheGetMethod: 'getDatalinkTestCache', icon: 'fa-flag-checkered', routerLink: 'datalinkTests',
         displayName: 'Datalink Tests',
         description: 'Regression tests which can be used to ensure datalinks function after upgrades or modification.'
     },
@@ -1196,9 +1246,9 @@ export class DexihDashboard extends EntityBase {
     public name = '';
     public description: string = null;
     public isShared = false;
-    public minCols = 1;
+    public minCols = 4;
     public maxCols = 100;
-    public minRows = 1;
+    public minRows = 4;
     public maxRows = 100;
     public autoRefresh = true;
 
@@ -1214,6 +1264,8 @@ export class DexihDashboardItem extends EntityBase {
     public rows = 1;
     public x = 0;
     public y = 0;
+    public header = true;
+    public scrollable = false;
 
     public parameters: Array<DexihInputParameter> = [];
     public viewKey = 0;
@@ -1231,6 +1283,8 @@ export class DexihDatajob extends EntityBase {
 
     public dexihDatalinkSteps: Array<DexihDatalinkStep> = null;
     public dexihTriggers: Array<DexihTrigger> = null;
+
+    public parameters: Array<DexihInputParameter> = [];
 
     public previousStatus: BehaviorSubject<TransformWriterResult>;
     public currentStatus: BehaviorSubject<TransformWriterResult>;
@@ -1323,6 +1377,7 @@ export class DexihDatalinkStep extends EntityBase {
 
     public dexihDatalinkDependencies: Array<DexihDatalinkDependency> = [];
     public dexihDatalinkStepColumns: Array<DexihDatalinkStepColumn> = [];
+    public parameters: Array<DexihInputParameter> = [];
 }
 
 export class DexihDatalinkStepColumn extends DexihColumnBase {
@@ -1745,6 +1800,7 @@ export class ChartConfig {
     public showXAxis = true;
     public showYAxis = true;
     public showLegend = false;
+    public legendPosition: 'right' | 'below'  = 'below';
     public showXAxisLabel = true;
     public showYAxisLabel = true;
     public showGridLines = false;
@@ -1754,6 +1810,7 @@ export class ChartConfig {
     public xScaleMin = null;
     public yScaleMax = null;
     public yScaleMin = null;
+    public autoScale = true;
 
     // pie charts only
     public explodeSlices = false;
@@ -2540,3 +2597,9 @@ export class DashboardUrl {
     public dashboardItemKey: number;
     public downloadUrl: string;
 }
+
+export class InputParameter {
+    public name: string = null;
+    public value = null;
+}
+

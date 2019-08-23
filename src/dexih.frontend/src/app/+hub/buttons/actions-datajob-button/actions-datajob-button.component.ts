@@ -33,7 +33,13 @@ export class ActionsDatajobButtonComponent implements OnInit {
     }
 
     runDatajobs(truncate: boolean, resetIncremental: boolean) {
-        this.hubService.runDatajobs(this.datajobs, truncate, resetIncremental, null);
+        this.hubService.runDatajobs(this.datajobs, truncate, resetIncremental, null, null);
+    }
+
+    runDatajobsOptions() {
+        let datajobs = this.datajobs.map(c => c.key);
+        let datajobsString = datajobs.join('|');
+        this.router.navigate(['datajobs', 'datajob-run', datajobsString], { relativeTo: this.route.parent.parent });
     }
 
     export() {
@@ -47,7 +53,7 @@ export class ActionsDatajobButtonComponent implements OnInit {
     }
 
     activateDatajobs() {
-        this.hubService.activateDatajobs(this.datajobs);
+        this.hubService.activateDatajobs(this.datajobs, null);
     }
 
     cancelDatajobs() {

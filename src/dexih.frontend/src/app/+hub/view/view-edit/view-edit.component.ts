@@ -39,8 +39,6 @@ export class ViewEditComponent implements OnInit, OnDestroy {
   public datalinks: DexihDatalink[] = [];
 
   public showChart = false;
-  public chartConfig = new ChartConfig();
-
   public inputColumns: InputColumn[];
   public tableColumns: DexihColumnBase[];
   selectQuery: SelectQuery = new SelectQuery();
@@ -103,7 +101,6 @@ export class ViewEditComponent implements OnInit, OnDestroy {
                 view = JSON.parse(JSON.stringify(view));
                 this.selectQuery = view.selectQuery;
                 this.inputColumns = view.inputValues;
-                this.chartConfig = view.chartConfig;
                 this.showChart = view.viewType === eViewType.Chart;
 
                 this.formsService.view(view);
@@ -282,44 +279,17 @@ export class ViewEditComponent implements OnInit, OnDestroy {
     this.hubService.downloadData([downloadObject], false, format)
   }
 
-  // save() {
-  //   if (!this.formsService.currentForm.valid) {
-  //     this.formsService.showAllErrors = true;
-
-  //     this.authService.confirmDialog('There are errors!',
-  //       'There are errors in the current form.  Confirm that would like to save the changes anyhow?')
-  //       .then(() => {
-  //         this.hubService.addHubErrorMessage(this.formsService.getFormErrors());
-  //         this.doSave();
-  //       }).catch(() => {
-
-  //       });
-  //   } else {
-  //     this.doSave();
-  //   }
-  // }
-
-  // doSave() {
-  //     let view = <DexihView>this.formsService.currentForm.value;
-  //     view.viewType = this.showChart ? eViewType.Chart : eViewType.Table;
-  //     view.selectQuery = this.selectQuery;
-  //     view.chartConfig = this.chartConfig;
-  //     view.inputValues = this.inputColumns;
-
-  //     this.hubService.saveView(view).then(() => {
-  //       this.hubService.addHubSuccessMessage('The view was saved.');
-  //     }).catch(() => {
-  //       this.data = null;
-  //     });
-  // }
+  hasChanged() {
+    this.formsService.markAsChanged();
+  }
 
   public canDeactivate(): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
       if (this.formsService.hasChanged) {
         this.authService.confirmDialog('The view has not been saved',
           'The view changes have not been saved.  Do you want to discard the changes and exit?')
-          .then(() => {
-              resolve(true);
+          .then((confirm) => {
+              resolve(confirm);
             }).catch(() => {
               resolve(false);
             });

@@ -1,13 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-    DexihDatalinkStep, DexihDatalinkDependency, HubCache, InputColumn, DexihColumnBase, DexihDatalinkStepColumn} from '../../../hub.models';
+import { DexihDatalinkStep, DexihDatalinkDependency, HubCache, InputColumn,
+        DexihDatalinkStepColumn, DexihInputParameter} from '../../../hub.models';
 import { HubService } from '../../../hub.service';
 import { Observable, BehaviorSubject, Subscription, combineLatest} from 'rxjs';
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { AuthService } from '../../../../+auth/auth.service';
 import { HubFormsService } from '../../../hub.forms.service';
-import { withLatestFrom } from 'rxjs/operators';
 
 @Component({
     selector: 'datajob-edit-step',
@@ -44,7 +43,7 @@ export class DatajobEditStepComponent implements OnInit, OnDestroy {
         private authService: AuthService,
         private formService: HubFormsService,
         private route: ActivatedRoute,
-        private fb: FormBuilder) {
+        fb: FormBuilder) {
         // create a separate formService instance to manage the copied form
         this.stepFormService = new HubFormsService(fb, hubService, authService);
     }
@@ -129,7 +128,30 @@ export class DatajobEditStepComponent implements OnInit, OnDestroy {
     }
 
     updateDatalinkStepColumns(datalinkKey: number) {
+
+        let datalink = this.hubCache.hub.dexihDatalinks.find(c => c.key === datalinkKey);
         let stepForm = <FormGroup>this.stepFormService.currentForm;
+        let stepParameters = <FormArray>stepForm.controls.parameters;
+
+        let currentParameters = <DexihInputParameter[]> stepParameters.value;
+        stepParameters.clear();
+
+        datalink.parameters.forEach(parameter => {
+            let currentParameter = currentParameters.find( c => c.name === parameter.name);
+            let newParameter = new DexihInputParameter();
+            if (currentParameter) {
+                newParameter.name = currentParameter.name;
+                newParameter.value = currentParameter.value;
+            } else {
+                newParameter.name = parameter.name;
+                newParameter.value = parameter.value;
+            }
+            let newFormParameter = this.formService.parameter(newParameter);
+            stepParameters.push(newFormParameter);
+        });
+
+
+
         let stepColumnsForm = <FormArray>stepForm.controls.dexihDatalinkStepColumns;
         let stepColumns = <DexihDatalinkStepColumn[]> stepColumnsForm.value;
 
@@ -137,8 +159,6 @@ export class DatajobEditStepComponent implements OnInit, OnDestroy {
             stepColumnsForm.removeAt(0)
         }
 
-        // let datalinkKey = stepForm.controls.datalinkKey.value
-        let datalink = this.hubCache.hub.dexihDatalinks.find(c => c.key === datalinkKey);
         let inputColumns = datalink.sourceDatalinkTable.dexihDatalinkColumns.filter(c => c.isInput);
 
         inputColumns.forEach(col => {

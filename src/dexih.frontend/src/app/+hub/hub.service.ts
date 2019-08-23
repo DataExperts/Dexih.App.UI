@@ -27,15 +27,11 @@ import {
     HubCacheChange,
     Import,
     RemoteMessage,
-    Table,
     TransformWriterResult,
-    TableColumn,
     DexihCustomFunction,
     eCacheStatus,
     ImportObject,
     eImportAction,
-    DexihTableColumn,
-    DexihColumnBase,
     DexihDatalinkTest,
     InputColumn,
     DexihView,
@@ -46,7 +42,8 @@ import {
     FlatFilesReady,
     DexihDashboard,
     DexihInputParameter,
-    DashboardUrl
+    DashboardUrl,
+    InputParameter
 } from './hub.models';
 import { DownloadObject, eDownloadFormat, SelectQuery } from './hub.query.models';
 import { RemoteLibraries, RemoteAgentStatus, eTypeCode } from './hub.remote.models';
@@ -102,7 +99,6 @@ export class HubService implements OnInit, OnDestroy {
             let globalCache = result[0];
             let hubs = result[1];
             let hubCache = result[2];
-            let remoteAgents = result[3];
 
             this._globalCache = globalCache;
 
@@ -297,14 +293,25 @@ export class HubService implements OnInit, OnDestroy {
 
     // sets the remote agent to the appropriate default agent when a status changes.
     resetRemoteAgent(hubCache: HubCache) {
+        if (!hubCache || !hubCache.hub || !hubCache.hub.dexihRemoteAgentHubs) {
+            this.setNoRemoteAgent(hubCache);
+            return;
+        }
+
         let activeAgent = this._remoteAgent.value;
 
-        if (hubCache && hubCache.hub && hubCache.hub.dexihRemoteAgentHubs) {
+        this.authService.getRemoteAgentsPromise().then(remoteAgents => {
+
+            if (!remoteAgents) {
+                this.setNoRemoteAgent(hubCache);
+                return;
+            }
+
             // check if currently selected agent is still valid for this hub.
             if (activeAgent) {
                 if (hubCache.hub.dexihRemoteAgentHubs
                     .find(c => c.isAuthorized && c.isValid && c.remoteAgentKey === activeAgent.remoteAgentKey)) {
-                    let remoteAgent = this.authService.getRemoteAgent(activeAgent.remoteAgentKey);
+                    let remoteAgent = remoteAgents.find(c => c.remoteAgentKey === activeAgent.remoteAgentKey);
                     if (remoteAgent && remoteAgent.activeAgents &&
                         remoteAgent.activeAgents.find(c => c.instanceId === activeAgent.instanceId)) {
                         return;
@@ -314,7 +321,7 @@ export class HubService implements OnInit, OnDestroy {
 
             let defaultAgents = hubCache.hub.dexihRemoteAgentHubs.filter(c => c.isDefault && c.isAuthorized && c.isValid);
             for (let i = 0; i < defaultAgents.length; i++) {
-                let remoteAgent = this.authService.getRemoteAgent(defaultAgents[i].remoteAgentKey);
+                let remoteAgent = remoteAgents.find(c => c.remoteAgentKey === defaultAgents[i].remoteAgentKey);
                 if (remoteAgent && remoteAgent.activeAgents && remoteAgent.activeAgents.length > 0) {
                     this._remoteAgent.next(remoteAgent.activeAgents[0]);
                     this.getRemoteAgentStatus(hubCache);
@@ -323,7 +330,7 @@ export class HubService implements OnInit, OnDestroy {
             }
             let otherAgents = hubCache.hub.dexihRemoteAgentHubs.filter(c => !c.isDefault && c.isAuthorized && c.isValid);
             for (let i = 0; i < otherAgents.length; i++) {
-                let remoteAgent = this.authService.getRemoteAgent(otherAgents[i].remoteAgentKey);
+                let remoteAgent = remoteAgents.find(c => c.remoteAgentKey === otherAgents[i].remoteAgentKey);
                 if (remoteAgent && remoteAgent.activeAgents && remoteAgent.activeAgents.length > 0) {
                     this._remoteAgent.next(remoteAgent.activeAgents[0]);
                     this.getRemoteAgentStatus(hubCache);
@@ -332,9 +339,8 @@ export class HubService implements OnInit, OnDestroy {
             }
 
             this.setNoRemoteAgent(hubCache);
-        } else {
-            this.setNoRemoteAgent(hubCache);
-        }
+        })
+
     }
 
     setCurrentRemoteAgent(activeAgent: DexihActiveAgent) {
@@ -408,16 +414,16 @@ export class HubService implements OnInit, OnDestroy {
                     // otherwise, it will be loaded by the hubComponent.
                     if (cache && cache.status === eCacheStatus.Loaded) {
                         this.refreshHubCache(cache.hub.hubKey, cache.hub.name);
-                        this.resetRemoteAgent(this._hubCache.value);
+                        // this.resetRemoteAgent(this._hubCache.value);
                     }
                     break;
-                case 'remoteAgent-update':
-                case 'remoteAgent-delete':
-                case 'remoteAgent-deleteKey':
-                case 'disconnect': {
-                    this.resetRemoteAgent(this._hubCache.value);
-                    break;
-                }
+                // case 'remoteAgent-update':
+                // case 'remoteAgent-delete':
+                // case 'remoteAgent-deleteKey':
+                // case 'disconnect': {
+                //     this.resetRemoteAgent(this._hubCache.value);
+                //     break;
+                // }
                 case 'hub-change': {
                     let hubChange: Import = data.value;
                     this.updateHubChange(hubChange);
@@ -646,7 +652,7 @@ export class HubService implements OnInit, OnDestroy {
      deleteRemoteAgent(remoteAgent: DexihRemoteAgentHub): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             this.authService.confirmDialog('Delete remote agent?', 'This action will delete the selected ' +
-                 ' remote agent from this hub.  <p></p>Are you sure?').then(confirm => {
+                 ' remote agent from this hub.  <p></p>Are you sure?').then(() => {
                     // call the delete.
                     this.authService.post('/api/Hub/DeleteRemoteAgent', {
                             hubKey: this._hubCache.value.hub.hubKey,
@@ -660,7 +666,7 @@ export class HubService implements OnInit, OnDestroy {
                         reject(reason);
                         return false;
                     });
-                }).catch(reason => {
+                }).catch(() => {
                     resolve(false);
                     return false;
                 });
@@ -889,7 +895,7 @@ export class HubService implements OnInit, OnDestroy {
         let connectionNames = connections.map(c => c.name).join('<br>');
 
         this.authService.confirmDialog('Delete the selected connection(s)',
-            'This action will delete the following connections:<p></p>' + connectionNames + '<p></p> Are you sure?').then(confirmed => {
+            'This action will delete the following connections:<p></p>' + connectionNames + '<p></p> Are you sure?').then(() => {
                 // call the delete.
                 this.authService.post('/api/Hub/DeleteConnections', {
                     hubKey: this._hubCache.value.hub.hubKey,
@@ -903,7 +909,7 @@ export class HubService implements OnInit, OnDestroy {
                     reject(reason);
                     return false;
                 });
-            }).catch(reason => {
+            }).catch(() => {
                 resolve(false);
                 return false;
             });
@@ -1026,9 +1032,9 @@ export class HubService implements OnInit, OnDestroy {
                 'This action will re-import the following tables, which will reset column customizations ' +
                 ' (such as descriptions, column validations, delta types etc.) and may invalidate some datalink mappings. <p></p>' +
                         importedTables.map(c => c.name).join(',') +
-                        '  <p></p><p></p>Are you sure you want to continue?').then(confirm => {
+                        '  <p></p><p></p>Are you sure you want to continue?').then(() => {
                             this.doImport(tables, save).then(result => resolve(result)).catch(reason => reject(reason));
-                        }).catch(reason => {
+                        }).catch(() => {
                             resolve(null);
                         });
             } else {
@@ -1062,7 +1068,6 @@ export class HubService implements OnInit, OnDestroy {
             const cache = this._hubCache.value;
 
             let tables: Array<DexihTable> = [];
-            let connections: Array<DexihConnection> = [];
             tableKeys.forEach(tableKey => {
                 const table = cache.getTable(tableKey);
                 if (!table) {
@@ -1078,7 +1083,7 @@ export class HubService implements OnInit, OnDestroy {
             'This action will re-import the following tables, which will reset column customizations ' +
             ' (such as descriptions, column validations, delta types etc.) and may invalidate some datalink mappings. <p></p>' +
                     tables.map(c => c.name).join(',') +
-                    '  <p></p><p></p>Are you sure you want to continue?').then(confirm => {
+                    '  <p></p><p></p>Are you sure you want to continue?').then(() => {
 
                         this.doImport(tables, save)
                             .then(result => {
@@ -1086,7 +1091,7 @@ export class HubService implements OnInit, OnDestroy {
                             }).catch(reason => {
                                 reject(reason);
                             });
-                    }).catch(reason => {
+                    }).catch(() => {
                         resolve(null);
                     });
         });
@@ -1097,7 +1102,6 @@ export class HubService implements OnInit, OnDestroy {
             const cache = this._hubCache.value;
 
             let tables: Array<DexihTable> = [];
-            let connections: Array<DexihConnection> = [];
             tableKeys.forEach(tableKey => {
                 const table = cache.getTable(tableKey);
                 if (!table) {
@@ -1112,7 +1116,7 @@ export class HubService implements OnInit, OnDestroy {
             this.authService.confirmDialog('Clear Tables',
             'This action will remove <b>ALL DATA</b> from the following tables.  This action cannot be reversed.' +
                     tables.map(c => c.name).join(',') +
-                    '  <p></p><p></p>Are you sure you want to continue?').then(confirm => {
+                    '  <p></p><p></p>Are you sure you want to continue?').then(() => {
 
                         this.authService.post('/api/Hub/ClearTables', {
                             hubKey: this._hubCache.value.hub.hubKey,
@@ -1127,7 +1131,7 @@ export class HubService implements OnInit, OnDestroy {
                             this.addHubMessage(reason);
                             reject(reason);
                         });
-                    }).catch(reason => {
+                    }).catch(() => {
                         resolve(null);
                     });
         });
@@ -1135,13 +1139,12 @@ export class HubService implements OnInit, OnDestroy {
 
     createTables(tables: Array<DexihTable>): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
-            const cache = this._hubCache.value;
 
             this.authService.confirmDialog('Re-Create Tables',
             // tslint:disable-next-line:max-line-length
             'This action will drop and re-create the following tables, removing <b>ALL DATA</b>.  This action cannot be reversed.<p></p><p></p>' +
                     tables.map(c => c.name).join(',') +
-                    '  <p></p><p></p>Are you sure you want to continue?').then(confirm => {
+                    '  <p></p><p></p>Are you sure you want to continue?').then(() => {
 
                         this.authService.post('/api/Hub/CreateTables', {
                             hubKey: this._hubCache.value.hub.hubKey,
@@ -1157,7 +1160,7 @@ export class HubService implements OnInit, OnDestroy {
                             this.addHubMessage(reason);
                             reject(reason);
                         });
-                    }).catch(reason => {
+                    }).catch(() => {
                         resolve(null);
                     });
         });
@@ -1172,7 +1175,7 @@ export class HubService implements OnInit, OnDestroy {
             '(note, this action \"does not\" delete tables from the underlying database).<p></p>' +
             names +
             ' <p></p><p></p>Are you sure you want to continue?'
-            ).then(confirm => {
+            ).then(() => {
                 // call the delete.
                 this.authService.post('/api/Hub/DeleteTables', {
                     hubKey: this._hubCache.value.hub.hubKey,
@@ -1186,7 +1189,7 @@ export class HubService implements OnInit, OnDestroy {
                     this.addHubMessage(reason);
                     reject(reason);
                 });
-            }).catch(reason => {
+            }).catch(() => {
                 resolve(false);
                 return false;
             });
@@ -1267,7 +1270,7 @@ export class HubService implements OnInit, OnDestroy {
             'This action will delete the following datalinks and underlying transforms from the repository metadata.<p></p>' +
             datalinkNames +
             '<p></p><p></p>Are you sure you want to continue?'
-            ).then(confirm => {
+            ).then(() => {
                 // call the delete.
                 this.authService.post('/api/Hub/DeleteDatalinks', {
                     hubKey: this._hubCache.value.hub.hubKey,
@@ -1281,7 +1284,7 @@ export class HubService implements OnInit, OnDestroy {
                     this.addHubMessage(reason);
                     reject(reason);
                 });
-            }).catch(reason => {
+            }).catch(() => {
                   resolve(false);
                 return false;
             });
@@ -1307,39 +1310,30 @@ export class HubService implements OnInit, OnDestroy {
         });
     }
 
-    // copies the object excluding listed keys.
-    private omitKeys(obj, keys: Array<string>) {
-        let dup = {};
-        Object.keys(obj).forEach(key => {
-            if (keys.indexOf(key) === -1) {
-                dup[key] = obj[key];
-            }
-        });
-
-        return dup;
-    }
 
     runDatalinks(datalinksKeys: Array<number>, truncateTarget: boolean,
-        resetIncremental: boolean, resetIncrementalValue: string, inputColumns: InputColumn[]): Promise<boolean> {
+        resetIncremental: boolean, resetIncrementalValue: string, inputColumns: InputColumn[],
+        inputParameters: InputParameter[]): Promise<boolean> {
 
-        return new Promise<boolean>((resolve, reject) => {
+        return new Promise<boolean>((resolve) => {
             if (truncateTarget) {
                 this.authService.confirmDialog('Truncate Target Tables',
                 'This action will truncate all data in the target tables in the selected datalinks and reload from source.  ' +
                 '<p></p><p></p>Are you sure you want to continue?'
-                ).then(confirm => {
-                    this.doRunDatalinks(datalinksKeys, truncateTarget, resetIncremental, resetIncrementalValue, inputColumns);
-                }).catch(reason => {
+                ).then(() => {
+                    this.doRunDatalinks(datalinksKeys, truncateTarget, resetIncremental, resetIncrementalValue, inputColumns,
+                        inputParameters);
+                }).catch(() => {
                     resolve(false);
                 });
             } else {
-                this.doRunDatalinks(datalinksKeys, truncateTarget, resetIncremental, resetIncrementalValue, inputColumns);
+                this.doRunDatalinks(datalinksKeys, truncateTarget, resetIncremental, resetIncrementalValue, inputColumns, inputParameters);
             }
         });
     }
 
     private doRunDatalinks(datalinkKeys: Array<number>, truncateTarget: boolean,
-        resetIncremental: boolean, resetIncrementalValue: string, inputColumns: InputColumn[]) {
+        resetIncremental: boolean, resetIncrementalValue: string, inputColumns: InputColumn[], inputParameters: InputParameter[]) {
 
         return new Promise<boolean>((resolve, reject) => {
             this.authService.post('/api/Hub/RunDatalinks', {
@@ -1350,7 +1344,8 @@ export class HubService implements OnInit, OnDestroy {
                 truncateTarget: truncateTarget,
                 resetIncremental: resetIncremental,
                 resetIncrementalValue: resetIncrementalValue,
-                inputColumns: inputColumns
+                inputColumns: inputColumns,
+                inputParameters: inputParameters
             }, 'Running datalinks...').then(result => {
                 resolve(result.value);
                 return result;
@@ -1470,7 +1465,6 @@ export class HubService implements OnInit, OnDestroy {
                 childItems: true
             };
 
-            let overallResult = true;
             this.authService.post('/api/Hub/RunRemoteCommand', remoteMessage, 'Retrieving audit result...')
                 .then(result => {
                     resolve(result.value[0]);
@@ -1478,7 +1472,6 @@ export class HubService implements OnInit, OnDestroy {
                 this.logger.LogC(() => `getResultDetail, error: ${reason.message}.`, eLogLevel.Error);
                 this.addHubMessage(reason);
                 reject(reason);
-                overallResult = false;
             });
         });
     }
@@ -1490,7 +1483,7 @@ export class HubService implements OnInit, OnDestroy {
         this.authService.confirmDialog('Delete Data Jobs',
         'This action will delete the following data jobs, and any schedules and dependencies ' +
             '(Note, this will NOT delete the datalinks): <p></p> ' + names  + '<p></p>  Are you sure?')
-        .then(confirm => {
+        .then(() => {
                 // call the delete.
                 this.authService.post('/api/Hub/DeleteDatajobs', {
                     hubKey: this._hubCache.value.hub.hubKey,
@@ -1503,7 +1496,7 @@ export class HubService implements OnInit, OnDestroy {
                     this.addHubMessage(reason);
                     reject(reason);
                 });
-        }).catch(reason => {
+        }).catch(() => {
                 resolve(false);
                     return false;
         });
@@ -1512,7 +1505,7 @@ export class HubService implements OnInit, OnDestroy {
 
 
     runDatajobs(datajobs: Array<DexihDatajob>, truncateTarget: boolean,
-        resetIncremental: boolean, resetIncrementalValue: string): Promise<boolean> {
+        resetIncremental: boolean, resetIncrementalValue: string, inputParameters: InputParameter[]): Promise<boolean> {
 
             return new Promise<boolean>((resolve, reject) => {
 
@@ -1523,7 +1516,8 @@ export class HubService implements OnInit, OnDestroy {
                 datajobKeys: datajobs.map(d => d.key),
                 truncateTarget: truncateTarget,
                 resetIncremental: resetIncremental,
-                resetIncrementalValue: resetIncrementalValue
+                resetIncrementalValue: resetIncrementalValue,
+                inputParameters: inputParameters
             }, 'Running datajob(s)...').then(result => {
                 resolve(result.value);
                 return result;
@@ -1555,13 +1549,14 @@ export class HubService implements OnInit, OnDestroy {
     }
 
 
-    activateDatajobs(datajobs: Array<DexihDatajob>): Promise<boolean> {
+    activateDatajobs(datajobs: Array<DexihDatajob>, inputParameters: InputParameter[]): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             this.authService.post('/api/Hub/ActivateDatajobs', {
                 hubKey: this._hubCache.value.hub.hubKey,
                 remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
                 connectionId: this.authService.getWebSocketConnectionId(),
                 datajobKeys: datajobs.map(d => d.key),
+                inputParameters: inputParameters
             }, 'Activating datajob(s)...').then(result => {
                 resolve(result.value);
                 return result;
@@ -1612,7 +1607,7 @@ export class HubService implements OnInit, OnDestroy {
             this.authService.confirmDialog('Delete Views(s)',
             'This action will delete the following views, from the hub and cannot be reversed.<p></p>' +
                 viewNames + '<p></p>Are you sure?'
-            ).then(confirm => {
+            ).then(() => {
                     // call the delete.
                     this.authService.post('/api/Hub/DeleteViews', {
                         hubKey: this._hubCache.value.hub.hubKey,
@@ -1626,7 +1621,7 @@ export class HubService implements OnInit, OnDestroy {
                         reject(reason);
                         return false;
                     });
-            }).catch(reason => {
+            }).catch(() => {
                     resolve(false);
                     return false;
             });
@@ -1656,7 +1651,7 @@ export class HubService implements OnInit, OnDestroy {
             this.authService.confirmDialog('Delete Dashboard(s)',
             'This action will delete the following dashboards, from the hub and cannot be reversed.<p></p>' +
                 names + '<p></p>Are you sure?'
-            ).then(confirm => {
+            ).then(() => {
                     // call the delete.
                     this.authService.post('/api/Hub/DeleteDashboards', {
                         hubKey: this._hubCache.value.hub.hubKey,
@@ -1670,7 +1665,7 @@ export class HubService implements OnInit, OnDestroy {
                         reject(reason);
                         return false;
                     });
-            }).catch(reason => {
+            }).catch(() => {
                     resolve(false);
                     return false;
             });
@@ -1702,7 +1697,7 @@ export class HubService implements OnInit, OnDestroy {
             // tslint:disable-next-line:max-line-length
             'This action will delete the following apis, from the hub and cannot be reversed.  Note, this action will NOT deactivate currently active Api\'s.<p></p>.' +
                 apiNames + '<p></p>Are you sure?'
-            ).then(confirm => {
+            ).then(() => {
                     // call the delete.
                     this.authService.post('/api/Hub/DeleteApis', {
                         hubKey: this._hubCache.value.hub.hubKey,
@@ -1716,7 +1711,7 @@ export class HubService implements OnInit, OnDestroy {
                         reject(reason);
                         return false;
                     });
-            }).catch(reason => {
+            }).catch(() => {
                     resolve(false);
                     return false;
             });
@@ -1805,7 +1800,7 @@ export class HubService implements OnInit, OnDestroy {
     }
 
     previewTableDataQuery(table: DexihTable, showRejectedData, selectQuery: SelectQuery, inputColumns: InputColumn[],
-        parameters: DexihInputParameter[]):
+        inputParameters: DexihInputParameter[]):
         Promise<PreviewResults> {
         return new Promise<PreviewResults>((resolve, reject) => {
             let hub = new DexihHub(this._hubCache.value.hub.hubKey, 'cache');
@@ -1827,7 +1822,7 @@ export class HubService implements OnInit, OnDestroy {
                     showRejectedData: showRejectedData,
                     selectQuery: selectQuery,
                     inputColumns: inputColumns,
-                    parameters: parameters,
+                    inputParameters: inputParameters,
                     downloadUrl: downloadUrl,
                      }, 'Previewing table...').then(result => {
                         let url = result.value;
@@ -1866,7 +1861,7 @@ export class HubService implements OnInit, OnDestroy {
     }
 
     previewTableKeyData(tableKey: number, showRejectedData, selectQuery: SelectQuery, inputColumns: InputColumn[],
-        parameters: DexihInputParameter[]):
+        inputParameters: DexihInputParameter[]):
         Promise<PreviewResults> {
         return new Promise<PreviewResults>((resolve, reject) => {
 
@@ -1885,7 +1880,7 @@ export class HubService implements OnInit, OnDestroy {
                     showRejectedData: showRejectedData,
                     selectQuery: selectQuery,
                     inputColumns: inputColumns,
-                    parameters: parameters,
+                    inputParameters: inputParameters,
                     downloadUrl: downloadUrl
 
                     }, 'Previewing table...').then(result => {
@@ -1906,7 +1901,8 @@ export class HubService implements OnInit, OnDestroy {
         });
     }
 
-    previewDatalinkKeyData(datalinkKey: number, selectQuery: SelectQuery, inputColumns: InputColumn[], parameters: DexihInputParameter[]):
+    previewDatalinkKeyData(datalinkKey: number, selectQuery: SelectQuery, inputColumns: InputColumn[],
+        inputParameters: DexihInputParameter[]):
         Promise<PreviewResults> {
         return new Promise<PreviewResults>((resolve, reject) => {
 
@@ -1923,7 +1919,7 @@ export class HubService implements OnInit, OnDestroy {
                     datalinkKey: datalinkKey,
                     selectQuery: selectQuery,
                     inputColumns: inputColumns,
-                    parameters: parameters,
+                    inputParameters: inputParameters,
                     downloadUrl: downloadUrl
                 }, 'Previewing datalink...').then(result => {
 
@@ -1944,7 +1940,7 @@ export class HubService implements OnInit, OnDestroy {
     }
 
     previewTransformData(datalink: DexihDatalink, datalinkTransformKey: number, selectQuery: SelectQuery, inputColumns: InputColumn[],
-        parameters: DexihInputParameter[]):
+        inputParameters: DexihInputParameter[]):
         Promise<PreviewResults> {
         return new Promise<PreviewResults>((resolve, reject) => {
             // remove status as they will not parse into json.
@@ -1953,8 +1949,6 @@ export class HubService implements OnInit, OnDestroy {
             datalink.previousStatus = null;
 
             const cache = this._hubCache.value;
-            const hub = new DexihHub(cache.hub.hubKey, '');
-            cache.getDatalinkCache(datalink, hub);
 
             if (!this._remoteAgent.value) {
                 let message = new Message(false, 'No active remote agent.', null, null);
@@ -1970,7 +1964,7 @@ export class HubService implements OnInit, OnDestroy {
                     datalink: datalink,
                     selectQuery,
                     inputColumns,
-                    parameters: parameters,
+                    inputParameters: inputParameters,
                     datalinkTransformKey: datalinkTransformKey,
                     downloadUrl: downloadUrl
                 }, 'Getting download location...').then(result => {
@@ -1990,9 +1984,43 @@ export class HubService implements OnInit, OnDestroy {
         });
     }
 
+    previewView(view: DexihView, inputColumns: InputColumn[],
+            inputParameters: DexihInputParameter[]): Promise<PreviewResults> {
+        return new Promise<PreviewResults>((resolve, reject) => {
 
-    previewDashboard(dashboard: DexihDashboard, parameters: DexihInputParameter[]):
-        Promise<DashboardUrl[]> {
+            if (!this._remoteAgent.value) {
+                let message = new Message(false, 'No active remote agent.', null, null);
+                this.addHubMessage(message);
+                reject(message);
+                return;
+            }
+
+            this.authService.getDownloadUrl(this._remoteAgent.value).then(downloadUrl => {
+                this.authService.post('/api/Hub/PreviewView', {
+                    hubKey: this._hubCache.value.hub.hubKey,
+                    remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
+                    view: view,
+                    inputColumns: inputColumns,
+                    inputParameters: inputParameters,
+                    downloadUrl: downloadUrl
+                }, 'Getting dashboard download locations...').then((result: Message) => {
+
+                    this.downloadUrlData(result.value)
+                    .then(data => resolve(data))
+                    .catch(reason => reject(reason));
+
+                }).catch(reason => {
+                    this.addHubMessage(reason);
+                    reject(reason);
+                });
+            }).catch(reason => {
+                this.addHubMessage(reason);
+                reject(reason);
+            });
+        });
+    }
+
+    previewDashboard(dashboard: DexihDashboard, inputParameters: DexihInputParameter[]): Promise<DashboardUrl[]> {
         return new Promise<DashboardUrl[]>((resolve, reject) => {
 
             if (!this._remoteAgent.value) {
@@ -2007,7 +2035,7 @@ export class HubService implements OnInit, OnDestroy {
                     hubKey: this._hubCache.value.hub.hubKey,
                     remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
                     dashboard: dashboard,
-                    parameters: parameters,
+                    inputParameters: inputParameters,
                     downloadUrl: downloadUrl
                 }, 'Getting dashboard download locations...').then((result: Message) => {
                     resolve(result.value);
@@ -2176,11 +2204,8 @@ export class HubService implements OnInit, OnDestroy {
                     downloadUrl: downloadUrl
                 }, 'Downloading shared data...')
                     .then(result => {
-                        let title: string;
                         if (downloadObjects.length === 1) {
-                            title = `Download data task`;
                         } else {
-                            title = `Download data task for ${downloadObjects.length} items.`;
                         }
                         let task = <ManagedTask>result.value;
                         this.authService.addUpdateTask(task);
@@ -2285,7 +2310,7 @@ export class HubService implements OnInit, OnDestroy {
 
     }
 
-    downloadProfileData(writerResult: TransformWriterResult, summaryOnly: boolean): Promise<boolean> {
+    downloadProfileData(writerResult: TransformWriterResult): Promise<boolean> {
         let table = this._hubCache.value.getProfileTable(writerResult.profileTableName, writerResult.auditConnectionKey);
         return this.downloadTableData(table, false, null, null, false, eDownloadFormat.Csv);
     }
@@ -2297,7 +2322,7 @@ export class HubService implements OnInit, OnDestroy {
         this.authService.confirmDialog('Delete Column Validation(s)',
         'This action will delete the following validations, from the hub and cannot be reversed.<p></p>'
             + validationNames + '<p></p> Are you sure?'
-        ).then(confirm => {
+        ).then(() => {
                 // call the delete.
                 this.authService.post('/api/Hub/DeleteColumnValidations', {
                     hubKey: this._hubCache.value.hub.hubKey,
@@ -2344,7 +2369,7 @@ export class HubService implements OnInit, OnDestroy {
             this.authService.confirmDialog('Delete Custom Functions(s)',
             'This action will delete the following custom functions, from the hub and cannot be reversed.<p></p>'
                 + functionNames + '<p></p> Are you sure?'
-            ).then(confirm => {
+            ).then(() => {
                     // call the delete.
                     this.authService.post('/api/Hub/DeleteCustomFunctions', {
                         hubKey: this._hubCache.value.hub.hubKey,
@@ -2417,7 +2442,7 @@ export class HubService implements OnInit, OnDestroy {
             const cache = this._hubCache.value;
 
             this.authService.downloadFile('/api/Hub/DownloadFunctionCode',
-                { hubKey: cache.hub.hubKey, datalinkTransformItem, testValues}, 'CustomFunction.zip', 'application/zip').then(result => {
+                { hubKey: cache.hub.hubKey, datalinkTransformItem, testValues}, 'CustomFunction.zip', 'application/zip').then(() => {
                     this.addHubSuccessMessage('The custom function code has been downloaded.');
                 }).catch(reason => {
                     this.addHubMessage(reason);
@@ -2434,7 +2459,7 @@ export class HubService implements OnInit, OnDestroy {
         this.authService.confirmDialog('Delete File Format(s)',
         'This action will delete the following file formats, from the hub and cannot be reversed.<p></p>' +
             fileFormatNames + '<p></p>Are you sure?'
-        ).then(confirm => {
+        ).then(() => {
                 // call the delete.
                 this.authService.post('/api/Hub/DeleteFileFormats', {
                     hubKey: this._hubCache.value.hub.hubKey,
@@ -2448,7 +2473,7 @@ export class HubService implements OnInit, OnDestroy {
                     reject(reason);
                     return false;
                 });
-        }).catch(reason => {
+        }).catch(() => {
                 resolve(false);
                 return false;
         });
@@ -2514,7 +2539,7 @@ export class HubService implements OnInit, OnDestroy {
             this.authService.confirmDialog('Delete Hub Variable(s)',
             'This action will delete the following variables, from the hub and cannot be reversed.<p></p>' +
             variableNames + '<p></p>Are you sure?'
-            ).then(confirm => {
+            ).then(() => {
                     // call the delete.
                     this.authService.post('/api/Hub/DeleteHubVariables', {
                         hubKey: this._hubCache.value.hub.hubKey,
@@ -2528,7 +2553,7 @@ export class HubService implements OnInit, OnDestroy {
                         reject(reason);
                         return false;
                     });
-            }).catch(reason => {
+            }).catch(() => {
                     resolve(false);
                     return false;
             });
@@ -2560,7 +2585,7 @@ export class HubService implements OnInit, OnDestroy {
                 this.authService.confirmDialog('Delete Datalink Test(s)',
                 'This action will delete the following datalink tests, from the hub and cannot be reversed.<p></p>' +
                 itemNames + '<p></p>Are you sure?'
-                ).then(confirm => {
+                ).then(() => {
                         // call the delete.
                         this.authService.post('/api/Hub/DeleteDatalinkTests', {
                             hubKey: this._hubCache.value.hub.hubKey,
@@ -2574,7 +2599,7 @@ export class HubService implements OnInit, OnDestroy {
                             reject(reason);
                             return false;
                         });
-                }).catch(reason => {
+                }).catch(() => {
                         resolve(false);
                         return false;
                 });
@@ -2632,7 +2657,7 @@ export class HubService implements OnInit, OnDestroy {
                 // tslint:disable-next-line:max-line-length
                 'This action will delete all data in the test tables, and refresh them with the actual data in the datalink source/target tables.  This cannot be reversed.<p></p>' +
                 itemNames + '<p></p>Are you sure?'
-                ).then(confirm => {
+                ).then(() => {
                         // call the delete.
                         this.authService.post('/api/Hub/RunDatalinkTestSnapshot', {
                             hubKey: this._hubCache.value.hub.hubKey,
@@ -2648,7 +2673,7 @@ export class HubService implements OnInit, OnDestroy {
                             reject(reason);
                             return false;
                         });
-                }).catch(reason => {
+                }).catch(() => {
                         resolve(false);
                         return false;
                 });
@@ -2790,7 +2815,7 @@ export class HubService implements OnInit, OnDestroy {
             this.authService.confirmDialog('Delete File (s)',
             'This action will delete the following files, from the connection and cannot be reversed.<p></p>' +
             fileNames + '<p></p>Are you sure?'
-            ).then(confirm => {
+            ).then(() => {
                 let hub = new DexihHub(this._hubCache.value.hub.hubKey, 'cache');
                 this._hubCache.value.cacheAddConnection(table.connectionKey, hub);
 
@@ -2816,7 +2841,7 @@ export class HubService implements OnInit, OnDestroy {
                     this.addHubMessage(reason);
                     reject(reason);
                 });
-            }).catch(reason => resolve(null));
+            }).catch(() => resolve(null));
         });
     }
 

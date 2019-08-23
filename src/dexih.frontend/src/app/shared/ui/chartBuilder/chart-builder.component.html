@@ -1,171 +1,198 @@
 <dexih-widget-section *ngIf="columns && showEdit" title="Chart Properties" [showExpandButton]="true">
-        <div class="d-flex flex-wrap">
-            <div class="flex-fill">
-                <form-select [(ngModel)]="config.chartType" (ngModelChange)="updateChart($event)" labelLeft="Chart" [items]="chartTypes"
-                    parentName='name' childItems='charts' itemKey='key' itemName='name'>
-                </form-select>
-            </div>
-    
-            <div class="flex-fill pl-1">
-                <form-select [(ngModel)]="config.colorScheme" labelLeft="Color" [items]="colorSets" itemName='name' itemKey='name'>
-                </form-select>
-            </div>
-    
-            <div class="flex-fill pl-1" *ngIf="chartType.allowGradient">
-                <form-checkbox label="Color Gradient" [(ngModel)]="config.showGradient" [border]="true"></form-checkbox>
-            </div>
-        </div>
-    
-        <div class="d-flex flex-wrap pt-1" *ngIf="chartType.inputFormat === eInputFormat.SingleSeries || chartType.inputFormat === eInputFormat.GeoCoordinates">
-            <div class="flex-fill">
-                <form-select [(ngModel)]="config.labelColumn" (ngModelChange)="updateChart($event)" labelLeft="Labels" 
-                    [items]="columns" itemKey="title" itemName="title">
-                </form-select>
-            </div>
-
-            <div class="flex-fill pl-1">
-                <form-select [(ngModel)]="config.seriesColumn" (ngModelChange)="updateChart($event)" labelLeft="Series Column"
-                    [items]="columns" itemKey="title" itemName="title">
-                </form-select>
-            </div>
-        </div>
-    
-        <div class="d-flex flex-wrap pt-1" *ngIf="chartType.inputFormat === eInputFormat.GeoCoordinates">
-            <div class="flex-fill">
-                <form-select [(ngModel)]="config.latitudeColumn" (ngModelChange)="updateChart($event)" labelLeft="Latitude" 
-                    [items]="columns" itemKey="title" itemName="title">
-                </form-select>
-            </div>
-
-            <div class="flex-fill pl-1">
-                <form-select [(ngModel)]="config.longitudeColumn" (ngModelChange)="updateChart($event)" labelLeft="Longitude"
-                    [items]="columns" itemKey="title" itemName="title">
-                </form-select>
-            </div>
-        </div>
-    
-        <div class="d-flex flex-wrap pt-1" *ngIf="chartType.inputFormat === eInputFormat.MultiSeries || chartType.inputFormat === eInputFormat.InverseSeries">
-            <div class="flex-fill">
-                <form-select [(ngModel)]="config.labelColumn" (ngModelChange)="updateChart($event)" labelLeft="Labels" 
-                    [items]="columns" itemKey="title" itemName="title">
-                </form-select>
-            </div>
-            <div class="flex-fill pl-1">
-                <form-tags-dropdown [(ngModel)]="config.seriesColumns" (ngModelChange)="updateChart($event)" labelLeft="Series Columns"
-                    [items]="columns" itemKey="title" itemName="title" [enableAddAll]="true">
-                </form-tags-dropdown>
-            </div>
+    <div class="d-flex flex-wrap">
+        <div class="flex-fill">
+            <form-select [(ngModel)]="config.chartType" (ngModelChange)="changeChart($event)" labelLeft="Chart"
+                [items]="chartTypes" parentName='name' childItems='charts' itemKey='key' itemName='name'>
+            </form-select>
         </div>
 
-        <div class="d-flex flex-wrap pt-1" *ngIf=" chartType.inputFormat===eInputFormat.Xy || chartType.inputFormat===eInputFormat.XyMinMax
+        <div class="flex-fill pl-1">
+            <form-select [(ngModel)]="config.colorScheme" labelLeft="Color" [items]="colorSets" itemName='name'
+                itemKey='name'>
+            </form-select>
+        </div>
+
+        <div class="flex-fill pl-1" *ngIf="chartType.allowGradient">
+            <form-checkbox label="Color Gradient" [(ngModel)]="config.showGradient" (ngModelChange)="onChanged()"
+                [border]="true"></form-checkbox>
+        </div>
+    </div>
+
+    <div class="d-flex flex-wrap pt-1"
+        *ngIf="chartType.inputFormat === eInputFormat.SingleSeries || chartType.inputFormat === eInputFormat.GeoCoordinates">
+        <div class="flex-fill">
+            <form-select [(ngModel)]="config.labelColumn" (ngModelChange)="updateChart($event)" labelLeft="Labels"
+                [items]="columns" itemKey="title" itemName="title">
+            </form-select>
+        </div>
+
+        <div class="flex-fill pl-1">
+            <form-select [(ngModel)]="config.seriesColumn" (ngModelChange)="updateChart($event)"
+                labelLeft="Series Column" [items]="columns" itemKey="title" itemName="title">
+            </form-select>
+        </div>
+    </div>
+
+    <div class="d-flex flex-wrap pt-1" *ngIf="chartType.inputFormat === eInputFormat.GeoCoordinates">
+        <div class="flex-fill">
+            <form-select [(ngModel)]="config.latitudeColumn" (ngModelChange)="updateChart($event)" labelLeft="Latitude"
+                [items]="columns" itemKey="title" itemName="title">
+            </form-select>
+        </div>
+
+        <div class="flex-fill pl-1">
+            <form-select [(ngModel)]="config.longitudeColumn" (ngModelChange)="updateChart($event)"
+                labelLeft="Longitude" [items]="columns" itemKey="title" itemName="title">
+            </form-select>
+        </div>
+    </div>
+
+    <div class="d-flex flex-wrap pt-1"
+        *ngIf="chartType.inputFormat === eInputFormat.MultiSeries || chartType.inputFormat === eInputFormat.InverseSeries">
+        <div class="flex-fill">
+            <form-select [(ngModel)]="config.labelColumn" (ngModelChange)="updateChart($event)" labelLeft="Labels"
+                [items]="columns" itemKey="title" itemName="title">
+            </form-select>
+        </div>
+        <div class="flex-fill pl-1">
+            <form-tags-dropdown [(ngModel)]="config.seriesColumns" (ngModelChange)="updateChart($event)"
+                labelLeft="Series Columns" [items]="columns" itemKey="title" itemName="title" [enableAddAll]="true">
+            </form-tags-dropdown>
+        </div>
+    </div>
+
+    <div class="d-flex flex-wrap pt-1" *ngIf=" chartType.inputFormat===eInputFormat.Xy || chartType.inputFormat===eInputFormat.XyMinMax
             || chartType.inputFormat===eInputFormat.XyBubble">
-            <div class="flex-fill">
-                <form-select [(ngModel)]="config.labelColumn" (ngModelChange)="updateChart($event)" labelLeft="Labels" 
-                    [items]="columns" itemKey="title" itemName="title">
-                </form-select>
-            </div>
-    
-            <div class="flex-fill pl-1">
-                <form-select [(ngModel)]="config.xColumn" (ngModelChange)="updateChart($event)" labelLeft="X-Column" 
-                    [items]="columns" itemKey="title" itemName="title">
-                </form-select>
-            </div>
-    
-            <div class="flex-fill pl-1">
-                <form-select [(ngModel)]="config.yColumn" (ngModelChange)="updateChart($event)" labelLeft="Y-Column" 
-                    [items]="columns" itemKey="title" itemName="title">
-                </form-select>
-            </div>
-    
-            <ng-template [ngIf]="chartType.inputFormat === eInputFormat.XyMinMax">
-                <div class="flex-fill pl-1">
-                    <form-select [(ngModel)]="config.minColumn" (ngModelChange)="updateChart($event)" labelLeft="Error Min Column"
-                        [items]="columns" itemKey="title" itemName="title">
-                    </form-select>
-                </div>
-    
-                <div class="flex-fill pl-1">
-                    <form-select [(ngModel)]="config.maxColumn" (ngModelChange)="updateChart($event)" labelLeft="Error Max Column"
-                        [items]="columns" itemKey="title" itemName="title">
-                    </form-select>
-                </div>
-            </ng-template>
-    
-            <ng-template [ngIf]="chartType.inputFormat === eInputFormat.XyBubble">
-                <div class="flex-fill pl-1">
-                    <form-select [(ngModel)]="config.radiusColumn" (ngModelChange)="updateChart($event)" labelLeft="Bubble Radius"
-                        [items]="columns" itemKey="title" itemName="title">
-                    </form-select>
-                </div>
-            </ng-template>
-    
-        </div>
-    
-        <div class="d-flex flex-wrap pt-1">
-            <div class="flex-fill ">
-                <div class="input-group-text">
-                    Formatting
-                </div>
-            </div>
-
-            <div class="flex-fill pl-1" *ngIf="chartType.allowLabels">
-                <form-checkbox label="Labels" [(ngModel)]="config.showXAxis" [border]="true"></form-checkbox>
-            </div>
-            <div class="flex-fill pl-1" *ngIf="chartType.allowXAxis">
-                <form-checkbox label="X-Axis Title" [(ngModel)]="config.showXAxisLabel" [border]="true"></form-checkbox>
-            </div>
-            <div class="flex-fill pl-1" *ngIf="chartType.allowXAxis">
-                <form-checkbox label="X-Axis Labels" [(ngModel)]="config.showXAxis" [border]="true"></form-checkbox>
-            </div>
-            <div class="flex-fill pl-1" *ngIf="chartType.allowYAxis">
-                <form-checkbox label="Y-Axis Title" [(ngModel)]="config.showYAxisLabel" [border]="true"></form-checkbox>
-            </div>
-            <div class="flex-fill pl-1" *ngIf="chartType.allowYAxis">
-                <form-checkbox label="Y-Axis Labels" [(ngModel)]="config.showYAxis" [border]="true"></form-checkbox>
-            </div>
-            <div class="flex-fill pl-1" *ngIf="chartType.allowGridLines">
-                <form-checkbox label="Grid Lines" [(ngModel)]="config.showGridLines" [border]="true"></form-checkbox>
-            </div>
-            <div class="flex-fill pl-1" *ngIf="chartType.allowLegend">
-                <form-checkbox label="Legend" [(ngModel)]="config.showLegend" [border]="true"></form-checkbox>
-            </div>
-            <div class="flex-fill pl-1" *ngIf="chartType.allowExplodeSlices">
-                <form-checkbox label="Explode Slices" [(ngModel)]="config.explodeSlices" [border]="true"></form-checkbox>
-            </div>
-            <div class="flex-fill pl-1" *ngIf="chartType.allowDoughnut">
-                <form-checkbox label="Doughnut" [(ngModel)]="config.doughnut" [border]="true"></form-checkbox>
-            </div>
-        </div>
-        
-        <div class="d-flex flex-wrap pt-1" *ngIf="chartType.allowYScaleMin || chartType.allowYScaleMax ||chartType.allowXScaleMin ||chartType.allowXScaleMax">
-            <div class="flex-fill ">
-                <div class="input-group-text">
-                    Axis Scales
-                </div>
-            </div>
-            
-            <div class="flex-fill  pl-1" *ngIf="chartType.allowXScaleMin">
-                <form-input labelLeft="X-Min" [(ngModel)]="config.xScaleMin"></form-input>
-            </div>
-            <div class="flex-fill  pl-1" *ngIf="chartType.allowXScaleMax">
-                <form-input labelLeft="X-Max" [(ngModel)]="config.xScaleMax"></form-input>
-            </div>
-            <div class="flex-fill  pl-1" *ngIf="chartType.allowYScaleMin">
-                <form-input labelLeft="Y-Min" [(ngModel)]="config.yScaleMin"></form-input>
-            </div>
-            <div class="flex-fill  pl-1" *ngIf="chartType.allowYScaleMax">
-                <form-input labelLeft="Y-Max" [(ngModel)]="config.yScaleMax"></form-input>
-            </div>
-        
+        <div class="flex-fill">
+            <form-select [(ngModel)]="config.labelColumn" (ngModelChange)="updateChart($event)" labelLeft="Labels"
+                [items]="columns" itemKey="title" itemName="title">
+            </form-select>
         </div>
 
-</dexih-widget-section>
-    
-    <dexih-widget-section [title]="title" [showExpandButton]="true" [padding]="false">
-        <ng-template #header>
-            <dexih-button buttonClass="btn-sm btn-outline-primary m-1" (click)="export()" text="export"></dexih-button>
+        <div class="flex-fill pl-1">
+            <form-select [(ngModel)]="config.xColumn" (ngModelChange)="updateChart($event)" labelLeft="X-Column"
+                [items]="columns" itemKey="title" itemName="title">
+            </form-select>
+        </div>
+
+        <div class="flex-fill pl-1">
+            <form-select [(ngModel)]="config.yColumn" (ngModelChange)="updateChart($event)" labelLeft="Y-Column"
+                [items]="columns" itemKey="title" itemName="title">
+            </form-select>
+        </div>
+
+        <ng-template [ngIf]="chartType.inputFormat === eInputFormat.XyMinMax">
+            <div class="flex-fill pl-1">
+                <form-select [(ngModel)]="config.minColumn" (ngModelChange)="updateChart($event)"
+                    labelLeft="Error Min Column" [items]="columns" itemKey="title" itemName="title">
+                </form-select>
+            </div>
+
+            <div class="flex-fill pl-1">
+                <form-select [(ngModel)]="config.maxColumn" (ngModelChange)="updateChart($event)"
+                    labelLeft="Error Max Column" [items]="columns" itemKey="title" itemName="title">
+                </form-select>
+            </div>
         </ng-template>
 
-        <chart-view [config]="config" [columns]="columns" [data]="data"></chart-view>
+        <ng-template [ngIf]="chartType.inputFormat === eInputFormat.XyBubble">
+            <div class="flex-fill pl-1">
+                <form-select [(ngModel)]="config.radiusColumn" (ngModelChange)="updateChart($event)"
+                    labelLeft="Bubble Radius" [items]="columns" itemKey="title" itemName="title">
+                </form-select>
+            </div>
+        </ng-template>
 
-    </dexih-widget-section>
+    </div>
+
+    <div class="d-flex flex-wrap pt-1">
+        <div class="flex-fill ">
+            <div class="input-group-text">
+                Formatting
+            </div>
+        </div>
+
+        <div class="flex-fill pl-1" *ngIf="chartType.allowLabels">
+            <form-checkbox label="Labels" [(ngModel)]="config.showXAxis" (ngModelChange)="onChanged()" [border]="true">
+            </form-checkbox>
+        </div>
+        <div class="flex-fill pl-1" *ngIf="chartType.allowXAxis">
+            <form-checkbox label="X-Axis Title" [(ngModel)]="config.showXAxisLabel" (ngModelChange)="onChanged()"
+                [border]="true"></form-checkbox>
+        </div>
+        <div class="flex-fill pl-1" *ngIf="chartType.allowXAxis">
+            <form-checkbox label="X-Axis Labels" [(ngModel)]="config.showXAxis" (ngModelChange)="onChanged()"
+                [border]="true"></form-checkbox>
+        </div>
+        <div class="flex-fill pl-1" *ngIf="chartType.allowYAxis">
+            <form-checkbox label="Y-Axis Title" [(ngModel)]="config.showYAxisLabel" (ngModelChange)="onChanged()"
+                [border]="true"></form-checkbox>
+        </div>
+        <div class="flex-fill pl-1" *ngIf="chartType.allowYAxis">
+            <form-checkbox label="Y-Axis Labels" [(ngModel)]="config.showYAxis" (ngModelChange)="onChanged()"
+                [border]="true"></form-checkbox>
+        </div>
+        <div class="flex-fill pl-1" *ngIf="chartType.allowGridLines">
+            <form-checkbox label="Grid Lines" [(ngModel)]="config.showGridLines" (ngModelChange)="onChanged()"
+                [border]="true"></form-checkbox>
+        </div>
+        <div class="flex-fill pl-1" *ngIf="chartType.allowLegend">
+            <form-checkbox label="Legend" [(ngModel)]="config.showLegend" (ngModelChange)="onChanged()" [border]="true">
+            </form-checkbox>
+        </div>
+        <div class="flex-fill pl-1" *ngIf="chartType.allowLegend && config.showLegend">
+            <form-select [(ngModel)]="config.legendPosition" (ngModelChange)="onChanged()" labelLeft="Legend Position"
+                [items]="['right', 'below']">
+            </form-select>
+        </div>
+
+        <div class="flex-fill pl-1" *ngIf="chartType.allowExplodeSlices">
+            <form-checkbox label="Explode Slices" [(ngModel)]="config.explodeSlices" (ngModelChange)="onChanged()"
+                [border]="true"></form-checkbox>
+        </div>
+        <div class="flex-fill pl-1" *ngIf="chartType.allowDoughnut">
+            <form-checkbox label="Doughnut" [(ngModel)]="config.doughnut" (ngModelChange)="onChanged()" [border]="true">
+            </form-checkbox>
+        </div>
+    </div>
+
+    <div class="d-flex flex-wrap pt-1"
+        *ngIf="chartType.allowYScaleMin || chartType.allowYScaleMax ||chartType.allowXScaleMin ||chartType.allowXScaleMax">
+        <div class="flex-fill ">
+            <div class="input-group-text">
+                Axis Scales
+            </div>
+        </div>
+
+        <div class="flex-fill  pl-1">
+            <form-checkbox label="Auto scale" [(ngModel)]="config.autoScale" (ngModelChange)="onChanged()"
+                [border]="true"></form-checkbox>
+        </div>
+
+        <ng-template [ngIf]="!config.autoScale">
+            <div class="flex-fill  pl-1" *ngIf="chartType.allowXScaleMin">
+                <form-input labelLeft="X-Min" [(ngModel)]="config.xScaleMin" (ngModelChange)="onChanged()"></form-input>
+            </div>
+            <div class="flex-fill  pl-1" *ngIf="chartType.allowXScaleMax">
+                <form-input labelLeft="X-Max" [(ngModel)]="config.xScaleMax" (ngModelChange)="onChanged()"></form-input>
+            </div>
+            <div class="flex-fill  pl-1" *ngIf="chartType.allowYScaleMin">
+                <form-input labelLeft="Y-Min" [(ngModel)]="config.yScaleMin" (ngModelChange)="onChanged()"></form-input>
+            </div>
+            <div class="flex-fill  pl-1" *ngIf="chartType.allowYScaleMax">
+                <form-input labelLeft="Y-Max" [(ngModel)]="config.yScaleMax" (ngModelChange)="onChanged()"></form-input>
+            </div>
+        </ng-template>
+    </div>
+
+</dexih-widget-section>
+
+<dexih-widget-section [title]="title" [showExpandButton]="true" [padding]="false">
+    <ng-template #header>
+        <dexih-button buttonClass="btn-sm btn-outline-primary m-1" (click)="export()" text="export"></dexih-button>
+    </ng-template>
+
+    <chart-view #chartView [config]="config" [columns]="columns" [data]="data" [updateChartEvent]="updateChartSubject">
+    </chart-view>
+
+</dexih-widget-section>

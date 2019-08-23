@@ -283,17 +283,6 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
     });
   }
 
-  export() {
-    const cache = this.hubCache;
-    const hub = new DexihHub(this.hubCache.hub.hubKey, '');
-
-    let connectionKey = this.formsService.currentForm.controls.key.value;
-    let name = this.formsService.currentForm.controls.name.value;
-    this.hubCache.cacheAddConnection(connectionKey, hub);
-    let filename = 'Connection - ' + name + '.json';
-    this.hubService.exportHub(hub, filename);
-  }
-
   close() {
     this.authService.navigateUp();
   }
@@ -303,8 +292,8 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
       if (this.formsService.hasChanged) {
         this.authService.confirmDialog('The connection has not been saved',
           'The connection changes have not been saved.  Do you want to discard the changes and exit?')
-          .then(() => {
-              resolve(true);
+          .then((confirm) => {
+              resolve(confirm);
             }).catch(() => {
               resolve(false);
             });

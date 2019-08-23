@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, OnChanges, ElementRef, AfterContentInit, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, OnDestroy } from '@angular/core';
 import { ChartConfig, eChartType } from '../../../+hub/hub.models';
 import { eInputFormat, ChartTypes } from './chart-groups';
 import { colorSets } from '@swimlane/ngx-charts/release/utils';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+import { ResizedEvent } from 'angular-resize-event';
 
 @Component({
     selector: 'chart-view',
@@ -13,8 +14,9 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
     @Input() config: ChartConfig;
     @Input() columns: any[];
     @Input() data: Array<any>;
-    @Input() width: number;
-    @Input() height: number;
+    @Input() updateChartEvent: Observable<void>;
+
+    private _updateChartSubscription: Subscription;
 
     public labelColumnIndex: any = null;
     public seriesColumnIndex: any = null;
@@ -39,7 +41,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
 
     view: any;
 
-    constructor(private ref: ElementRef) {
+    constructor() {
     }
 
     ngOnInit() {
@@ -47,9 +49,16 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
             this.config = new ChartConfig();
         }
         this.getChartType();
+
+        if (this.updateChartEvent) {
+            this._updateChartSubscription = this.updateChartEvent.subscribe(() => {
+                this.ngOnChanges();
+            });
+        }
     }
 
     ngOnDestroy(): void {
+        if (this._updateChartSubscription) { this._updateChartSubscription.unsubscribe(); }
     }
 
     ngOnChanges() {
@@ -80,24 +89,32 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
         }
     }
 
-    onResize() {
-        this.createView();
-    }
+    // onResize() {
+    //     this.createView();
+    // }
+
+    onResized(event: ResizedEvent) {
+        if (this.config.showLegend && this.config.legendPosition === 'below') {
+            this.view = [event.newWidth, event.newHeight - 60];
+        } else {
+            this.view = [event.newWidth, event.newHeight];
+        }
+      }
 
     createView() {
-        let width = this.width;
-        if (!width) {
-            width = this.ref.nativeElement.parentElement.clientWidth - (this.ref.nativeElement.offsetLeft * 2);
-        }
+        // let width = this.width;
+        // if (!width) {
+        //     width = this.ref.nativeElement.parentElement.clientWidth - (this.ref.nativeElement.offsetLeft * 2);
+        // }
 
-        let height = this.height;
-        if (!height) {
-            if (this.ref.nativeElement.offsetParent) {
-                height = this.ref.nativeElement.offsetParent.clientHeight / 1.3
-            }
-        }
+        // let height = this.height;
+        // if (!height) {
+        //     if (this.ref.nativeElement.offsetParent) {
+        //         height = this.ref.nativeElement.offsetParent.clientHeight / 1.3
+        //     }
+        // }
 
-        this.view = [width, height];
+        // this.view = [width, height];
     }
 
     getChartType() {
@@ -149,23 +166,15 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
 
             this.getChartType();
 
-            this.config.labelColumn = this.getColumnTitle(this.labelColumnIndex);
-            this.config.seriesColumn = this.getColumnTitle(this.seriesColumnIndex);
-            this.config.xColumn = this.getColumnTitle(this.xColumnIndex);
-            this.config.yColumn = this.getColumnTitle(this.yColumnIndex);
-            this.config.minColumn = this.getColumnTitle(this.minColumnIndex);
-            this.config.maxColumn = this.getColumnTitle(this.maxColumnIndex);
-            this.config.radiusColumn = this.getColumnTitle(this.radiusColumnIndex);
-            this.config.latitudeColumn = this.getColumnTitle(this.latitudeColumnIndex);
-            this.config.longitudeColumn = this.getColumnTitle(this.longitudeColumnIndex);
-
-            this.config.showXAxisLabel = this.chartType.defaultShowXAxisLabel;
-            this.config.showYAxisLabel = this.chartType.defaultShowYAxisLabel;
-            this.config.showXAxis = this.chartType.defaultShowXAxis;
-            this.config.showYAxis = this.chartType.defaultShowYAxis;
-            this.config.showGridLines = this.chartType.defaultShowGridLines;
-            this.config.colorScheme = this.chartType.defaultColorScheme;
-            this.config.showLegend = this.chartType.defaultShowLegend;
+            // this.config.labelColumn = this.getColumnTitle(this.labelColumnIndex);
+            // this.config.seriesColumn = this.getColumnTitle(this.seriesColumnIndex);
+            // this.config.xColumn = this.getColumnTitle(this.xColumnIndex);
+            // this.config.yColumn = this.getColumnTitle(this.yColumnIndex);
+            // this.config.minColumn = this.getColumnTitle(this.minColumnIndex);
+            // this.config.maxColumn = this.getColumnTitle(this.maxColumnIndex);
+            // this.config.radiusColumn = this.getColumnTitle(this.radiusColumnIndex);
+            // this.config.latitudeColumn = this.getColumnTitle(this.latitudeColumnIndex);
+            // this.config.longitudeColumn = this.getColumnTitle(this.longitudeColumnIndex);
 
             if (this.seriesColumnsIndex) {
                 this.config.seriesColumns = new Array(this.seriesColumnsIndex.length);

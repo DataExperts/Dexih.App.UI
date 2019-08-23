@@ -51,7 +51,13 @@ The input column values can be specified as a simple json document.  The format 
 i={ "column1": value1, "column2": value1 }
 ```
 
-Where the input column1 will be set to the value1 and so on.
+#### Input Parameters
+
+Input parameters can be specified as a json document.  The format is as follows:
+```
+p={ "name1": value1, "name2": value1 }
+```
+
 
 #### Query/Filter Columns
 

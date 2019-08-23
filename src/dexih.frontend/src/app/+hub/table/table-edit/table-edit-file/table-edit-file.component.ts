@@ -133,17 +133,4 @@ export class TableEditFileComponent implements OnInit, OnDestroy {
             }
         });
     }
-
-    // importTable() {
-    //     let tableColumnsForm = <FormArray>this.formService.currentForm.controls.dexihTableColumns;
-    //     if (tableColumnsForm.length > 0) {
-    //         this.authService.confirmDialog('Warning: Reloading Columns',
-    //             'The following action will review the provided file and will remove and reload all columns.  Do you want to continue?')
-    //             .then((result) => {
-    //                 this.uploader.uploadAll();
-    //             }).catch();
-    //     } else {
-    //         this.uploader.uploadAll();
-    //     }
-    // }
 }

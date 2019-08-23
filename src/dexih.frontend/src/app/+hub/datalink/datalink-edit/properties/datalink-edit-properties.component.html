@@ -25,4 +25,11 @@
 
         </fieldset>
     </form>
+
+    
+
 </dexih-widget-section> 
+
+<dexih-widget-section title='Input Parameters' [showExpandButton]="true">
+    <input-parameters [showEdit]="true" [parameters]="datalinkForm.controls.parameters" [formsService]="editDatalinkService.hubFormsService"></input-parameters>
+</dexih-widget-section>

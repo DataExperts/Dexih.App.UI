@@ -30,6 +30,7 @@ import { ApiIndexComponent } from './api/api-index';
 import { ApiEditComponent } from './api/api-edit';
 import { DatalinkRunComponent } from './datalink/datalink-run/datalink-run.component';
 import { SearchModule} from './search';
+import { DatajobRunComponent } from './datajob/datajob-run/datajob-run.component';
 
 @NgModule({
     imports: [
@@ -47,6 +48,7 @@ import { SearchModule} from './search';
         DatalinkIndexComponent,
         DatalinkPreviewDataComponent,
         DatalinkRunComponent,
+        DatajobRunComponent,
         TableIndexComponent,
         DatalinkNewComponent,
         RemoteAgentIndexComponent,

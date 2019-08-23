@@ -39,6 +39,6 @@ export class ProfileResultsComponent implements OnInit {
     }
 
     download() {
-        this.hubService.downloadProfileData(this.auditResult, true);
+        this.hubService.downloadProfileData(this.auditResult);
     }
 }

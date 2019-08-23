@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, HostListener, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HubCache, eCacheStatus, DexihDashboard, DexihDashboardItem } from '../../hub.models';
+import { HubCache, eCacheStatus, DexihDashboard, DexihDashboardItem, DataCache, DexihView } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { HubFormsService } from '../../hub.forms.service';
@@ -27,6 +27,8 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
   private _formChangeSubscription: Subscription;
   private isLoaded = false;
 
+  views: DexihView[];
+
   constructor(
     private hubService: HubService,
     private authService: AuthService,
@@ -50,10 +52,10 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
         this.action = data['action'];
         this.pageTitle = data['pageTitle'];
 
-        if (this.hubCache.isLoaded()) {
           if (!this.hubCache || this.hubCache.status !== eCacheStatus.Loaded || this.isLoaded) { return; }
           this.isLoaded = true;
 
+          this.views = this.hubCache.hub.dexihViews;
 
           if (this.action === 'edit') {
             // get the hub key from the route data, and update the service.
@@ -72,6 +74,10 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
                 this.formsService.dashboard(dashboard);
               }
             }
+
+            if (this.formsService.currentForm.controls.autoRefresh.value) {
+              this.refresh();
+            }
           }
 
           if (this.action === 'new') {
@@ -80,7 +86,7 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
             let runTime = this.formsService.currentForm.controls.runTime.value;
             runTime.showEdit = true;
             this.formsService.currentForm.controls.runTime.setValue(runTime);
-            this.add();
+            // this.add();
 
             // update the url with the saved key
             this._formChangeSubscription = this.formsService.getCurrentFormObservable().subscribe(form => {
@@ -94,11 +100,6 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
               }
             });
           }
-
-          if (this.formsService.currentForm.controls.autoRefresh.value) {
-            this.refresh();
-          }
-        }
       });
     } catch (e) {
       this.hubService.addHubClientErrorMessage(e, 'Dashboard Edit');
@@ -115,17 +116,17 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
   }
 
 
-  add() {
-    let form = this.formsService.currentForm;
-    let items = <FormArray> form.controls.dexihDashboardItems;
-    let item = new DexihDashboardItem();
-    item.cols = 1;
-    item.rows = 1;
-    item.x = 0;
-    item.y = 0;
-    let control = this.formsService.dashboardItem(item);
-    items.push(control);
-  }
+  // add() {
+  //   let form = this.formsService.currentForm;
+  //   let items = <FormArray> form.controls.dexihDashboardItems;
+  //   let item = new DexihDashboardItem();
+  //   item.cols = 1;
+  //   item.rows = 1;
+  //   item.x = 0;
+  //   item.y = 0;
+  //   let control = this.formsService.dashboardItem(item);
+  //   items.push(control);
+  // }
 
   refresh() {
     this.hubService.previewDashboard(this.formsService.currentForm.value, this.formsService.currentForm.value.parameters).then(urls => {
@@ -134,8 +135,8 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
       urls.forEach(url => {
         let item = <FormGroup> items.controls.find((form: FormGroup) => form.controls.key.value === url.dashboardItemKey);
         if (item) {
-          let refresh = <EventEmitter> item.controls.runTime.value.refreshData;
-          refresh.emit(url.downloadUrl);
+          let data = <DataCache> item.controls.runTime.value.data;
+          data.refresh(this.hubService.downloadUrlData(url.downloadUrl));
         }
       });
     });
@@ -147,13 +148,60 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
     this.formsService.currentForm.controls.runTime.setValue(runTime);
   }
 
+  public toggleLock() {
+    let runTime = this.formsService.currentForm.controls.runTime.value;
+    runTime.lock = !runTime.lock;
+    this.formsService.currentForm.controls.runTime.setValue(runTime);
+  }
+
+  add(viewKey) {
+    let view = this.hubCache.hub.dexihViews.find(c => c.key === viewKey);
+    if (!view) { return; }
+    let form = this.formsService.currentForm;
+    let items = <FormArray> form.controls.dexihDashboardItems;
+    let item = new DexihDashboardItem();
+    item.key = this.hubCache.getNextSequence();
+
+    item.cols = 1;
+    item.rows = 1;
+    item.x = -1;
+    item.y = -1;
+
+    // look for an empty cell
+    found:
+    for (let col = 0; col < form.controls.maxCols.value; col++) {
+      for (let row = 0; row < form.controls.maxRows.value; row++) {
+        let occupied = false;
+        for (let i = 0; i < items.controls.length; i++) {
+          let currentItem = <DexihDashboardItem> items.controls[i].value;
+          if (currentItem.x <= col && (currentItem.x + currentItem.cols) > col &&
+            currentItem.y <= row && (currentItem.y + currentItem.rows) > row) {
+              occupied = true;
+              break;
+          }
+        }
+
+        if (!occupied) {
+          item.x = col;
+          item.y = row;
+
+          break found;
+        }
+      }
+    }
+    item.viewKey = viewKey;
+    item.name = view.name;
+    let control = this.formsService.dashboardItem(item);
+    items.push(control);
+  }
+
   public canDeactivate(): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
       if (this.formsService.hasChanged) {
         this.authService.confirmDialog('The dashboard has not been saved',
           'The dashboard changes have not been saved.  Do you want to discard the changes and exit?')
-          .then(() => {
-              resolve(true);
+          .then((confirm) => {
+              resolve(confirm);
             }).catch(() => {
               resolve(false);
             });

@@ -10,7 +10,6 @@
 			<dexih-invalid-form-details class="mr-1" [control]="formsService.currentForm" (click)="formsService.showErrors()"></dexih-invalid-form-details>
 			<dexih-button class="mr-1" *ngIf="hubCache.canWrite" buttonClass="btn btn-success" [busy]="refreshingConnection" iconClass="fa fa-thumbs-o-up" (click)="!refreshingConnection && refreshConnection()" title="Test the connection against the source.">Test</dexih-button>
 			<save-button class="mr-1" *ngIf="hubCache.canWrite" [formsService]="formsService"></save-button>
-			<dexih-button-save-local class="mr-1" (click)="export()" [disabled]="formsService.hasChanged"></dexih-button-save-local>
 
 			<ng-template [ngIf]="connectionReference">
 				<ng-template [ngIf]="connectionReference.connectionCategory == eConnectionCategory.SqlDatabase || connectionReference.connectionCategory == eConnectionCategory.DatabaseFile || connectionReference.connectionCategory == eConnectionCategory.NoSqlDatabase || connectionReference.connectionCategory == eConnectionCategory.Hub">

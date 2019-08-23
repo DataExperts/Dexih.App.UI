@@ -224,7 +224,7 @@ export class DatalinkEditComponent implements OnInit, OnDestroy {
                 this.authService.confirmDialog('Datalink changes have not been saved',
                     'The datalink changes have not been saved.  Do you want to discard the changes and exit?')
                     .then(confirm => {
-                        resolve(true);
+                        resolve(confirm);
                     }).catch(reason => {
                         resolve(false);
                     });

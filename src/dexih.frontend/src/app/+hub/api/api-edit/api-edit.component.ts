@@ -233,41 +233,13 @@ export class ApiEditComponent implements OnInit, OnDestroy {
     this.hubService.downloadData([downloadObject], false, format)
   }
 
-  save() {
-    if (!this.formsService.currentForm.valid) {
-      this.formsService.showAllErrors = true;
-
-      this.authService.confirmDialog('There are errors!',
-        'There are errors in the current form.  Confirm that would like to save the changes anyhow?')
-        .then(() => {
-          this.hubService.addHubErrorMessage(this.formsService.getFormErrors());
-          this.doSave();
-        }).catch(() => {
-
-        });
-    } else {
-      this.doSave();
-    }
-  }
-
-  doSave() {
-      let api = <DexihApi>this.formsService.currentForm.value;
-      api.selectQuery = this.selectQuery;
-
-      this.hubService.saveApi(api).then(() => {
-        this.hubService.addHubSuccessMessage('The api was saved.');
-      }).catch(() => {
-        this.data = null;
-      });
-  }
-
   public canDeactivate(): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
       if (this.formsService.hasChanged) {
         this.authService.confirmDialog('The api has not been saved',
           'The api changes have not been saved.  Do you want to discard the changes and exit?')
-          .then(() => {
-              resolve(true);
+          .then((confirm) => {
+              resolve(confirm);
             }).catch(() => {
               resolve(false);
             });

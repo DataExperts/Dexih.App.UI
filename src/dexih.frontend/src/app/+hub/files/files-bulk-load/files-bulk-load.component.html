@@ -92,8 +92,8 @@
 
     <dexih-widget *ngIf="currentTable" [title]="'Edit table: ' + formsService.currentForm.controls.name.value" [showCloseButton]="true" (close)="closeTable()">
         <ng-template #header>
-            <a class="btn btn-sm btn-outline-primary mr-1" (click)="applyChanges()">Apply Changes</a>
-            <a class="btn btn-sm btn-outline-danger mr-1" (click)="cancel()">Cancel</a>
+            <a class="btn btn-sm btn-primary mr-1" (click)="applyChanges()">Apply Changes</a>
+            <a class="btn btn-sm btn-danger mr-1" (click)="cancel()">Cancel</a>
         </ng-template>
         <router-outlet></router-outlet>
     </dexih-widget>

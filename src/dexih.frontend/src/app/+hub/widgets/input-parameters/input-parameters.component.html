@@ -1,11 +1,13 @@
-<div *ngIf="parameters" class="w-100">
+<div *ngIf="parameters">
     <dexih-button-new *ngIf="parameters.controls.length === 0" (click)="add()" text="Add Parameter"></dexih-button-new>
     <span *ngFor="let parameter of parameters.controls; let i = index" class="input-group">
         <form [formGroup]="parameter">
             <div class="input-group">
-                <form-input [disabled]="!showEdit" labelLeft="Name" [border]="false" class="form-control p-0" formControlName="name">
+                <form-input [disabled]="!showEdit" labelLeft="Name" [border]="false" class="form-control p-0"
+                    formControlName="name">
                 </form-input>
-                <form-select labelLeft="Value" [border]="false" class="form-control p-0" formControlName="value" [items]="selectItems" [enableTextEntry]="true">
+                <form-select labelLeft="Value" [border]="false" class="form-control p-0" formControlName="value"
+                    [items]="selectItems" [enableTextEntry]="true">
                 </form-select>
 
                 <div *ngIf="showEdit" class="input-group-append">
@@ -25,3 +27,4 @@
             </div>
         </form>
     </span>
+</div>

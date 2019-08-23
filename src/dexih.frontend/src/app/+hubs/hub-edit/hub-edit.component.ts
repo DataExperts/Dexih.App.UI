@@ -125,8 +125,10 @@ export class HubEditComponent implements OnInit, OnDestroy {
           'Warning: Encryption Key Changed',
           // tslint:disable-next-line:max-line-length
           'The encryption key has changed.  This will require all connection password & connection strings in the hub to be updated.  Would you like to continue?'
-        ).then(result => {
-          this.doSaveHub();
+        ).then(confirm => {
+          if (confirm) {
+            this.doSaveHub();
+          }
         });
       } else {
         this.doSaveHub();

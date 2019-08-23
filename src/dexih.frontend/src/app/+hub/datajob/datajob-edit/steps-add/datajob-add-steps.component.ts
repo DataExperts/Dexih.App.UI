@@ -120,8 +120,10 @@ export class DatajobAddStepsComponent implements OnInit, OnDestroy {
             let names = existingDatalinks.join(', ');
             this.authService.confirmDialog('Warning duplicate datalinks',
             'The following datalinks already exist as steps within the job.  ' + names +
-            '.<br />Are you sure you want these datalinks added to the job').then( result => {
+            '.<br />Are you sure you want these datalinks added to the job').then( confirm => {
+                if (confirm) {
                 this.addSelectedConfirmed(items);
+                }
             }).catch(reason => {});
         } else {
             this.addSelectedConfirmed(items);

@@ -2,7 +2,7 @@
 <dexih-widget-section title="Target Load Rules" [showExpandButton]="true">
     <form *ngIf="datalinkForm" [formGroup]="datalinkForm">
         <fieldset>
-            <form-checkbox label="Enable datalink to populate target tables"
+            <form-checkbox label="Datalink is a query and does not populate target tables."
                 formControlName="isQuery" [errors]="editDatalinkService.hubFormsService.formErrors.isQuery">
             </form-checkbox>
 

@@ -45,8 +45,8 @@ namespace dexih.api.Services.Remote
 
 	    Task<JToken> ClearTables(string instanceId, long hubKey, DexihTable[] tables,
 		    RepositoryManager repositoryManager);
-	    Task<string> PreviewTable(string instanceId, long hubKey, long tableKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters parameters, bool showRejectedData, DownloadUrl downloadUrl, RepositoryManager database);
-	    Task<string> PreviewTable(string instanceId, long hubKey, DexihTable hubTable, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters parameters, bool showRejectedData, DownloadUrl downloadUrl, RepositoryManager database);
+	    Task<string> PreviewTable(string instanceId, long hubKey, long tableKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, DownloadUrl downloadUrl, RepositoryManager database);
+	    Task<string> PreviewTable(string instanceId, long hubKey, DexihTable hubTable, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, DownloadUrl downloadUrl, RepositoryManager database);
 	    Task<string> PreviewDatalink(string instanceId, long hubKey, long datalinkKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters parameters, DownloadUrl downloadUrl, RepositoryManager database);
 
 	    Task<TransformProperties> DatalinkProperties(string id, long hubKey, long datalinkKey, SelectQuery selectQuery,
@@ -60,7 +60,7 @@ namespace dexih.api.Services.Remote
 	    Task<ManagedTask> DownloadFiles(string instanceId, long hubKey, string connectionId, long tableKey, EFlatFilePath path, string[] files, DownloadUrl downloadUrl, RepositoryManager database);
         Task<ManagedTask> DownloadData(string instanceId, long hubKey, string connectionId, DownloadObject[] downloadObjects, EDownloadFormat downloadFormat, bool zipFiles, DownloadUrl downloadUrl, RepositoryManager database);
 
-	    Task<ManagedTask> DownloadTableData(string id, long hubKey, string connectionId, DexihTable hubTable, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters parameters, bool showRejectedData,EDownloadFormat downloadFormat, bool zipFiles, DownloadUrl downloadUrl, RepositoryManager database);
+	    Task<ManagedTask> DownloadTableData(string id, long hubKey, string connectionId, DexihTable hubTable, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData,EDownloadFormat downloadFormat, bool zipFiles, DownloadUrl downloadUrl, RepositoryManager database);
 	    Task<ManagedTask> DownloadDatalinkData(string id, long hubKey, string connectionId, DexihDatalink table, long datalinkTransformKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters parameters, EDownloadFormat downloadFormat, bool zipFiles, DownloadUrl downloadUrl, RepositoryManager database);
 	    
 	    Task RunDatalinks(string instanceId, long hubKey, string connectionId, long[] datalinkKeys, bool truncateTarget,
@@ -76,12 +76,12 @@ namespace dexih.api.Services.Remote
 	    Task CancelDatalinkTests(string instanceId, long hubKey, long[] datalinkTestKeys, RepositoryManager database);
 
         Task RunDatajobs(string instanceId, long hubKey, string connectionId, long[] datajobKeys, bool truncateTarget,
-		    bool resetIncremental, string resetIncrementalValue, RepositoryManager database);
+		    bool resetIncremental, string resetIncrementalValue, InputParameters inputParameters, RepositoryManager database);
         
 		Task CancelTasks(ManagedTask[] tasks, RepositoryManager database);
-		Task ActivateDatajobs(string instanceId, long hubKey, string connectionId, long[] datajobKeys, RepositoryManager database);
+		Task ActivateDatajobs(string instanceId, long hubKey, string connectionId, long[] datajobKeys, InputParameters inputParameters, RepositoryManager database);
 	    Task DeactivateDatajobs(string instanceId, long hubKey, long[] datajobKeys, RepositoryManager database);
-	    Task ActivateApis(string instanceId, long hubKey, string connectionId, long[] apiKeys, RepositoryManager database);
+	    Task ActivateApis(string instanceId, long hubKey, string connectionId, long[] apiKeys, InputParameters inputParameters, RepositoryManager database);
 	    Task DeactivateApis(string instanceId, long hubKey, long[] apiKeys, RepositoryManager database);
 	    
 	    Task RestartAgents(string userId, IEnumerable<string> instanceIds, bool force, RepositoryManager database);

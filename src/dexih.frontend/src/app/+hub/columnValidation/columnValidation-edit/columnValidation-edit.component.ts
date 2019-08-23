@@ -158,8 +158,8 @@ export class ColumnValidationEditComponent implements OnInit, OnDestroy {
       if (this.formsService.hasChanged) {
         this.authService.confirmDialog('The view has not been saved',
           'The column validation changes have not been saved.  Do you want to discard the changes and exit?')
-          .then(() => {
-              resolve(true);
+          .then((confirm) => {
+              resolve(confirm);
             }).catch(() => {
               resolve(false);
             });

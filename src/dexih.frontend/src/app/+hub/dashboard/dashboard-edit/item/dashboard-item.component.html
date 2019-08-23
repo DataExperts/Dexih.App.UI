@@ -1,35 +1,57 @@
-<dexih-widget #widget [title]="item.controls.name.value" [padding]="false" class="dashboard-item">
+<dexih-widget #widget [title]="item.controls.name.value" [padding]="false" [showHeader]="item.controls.header.value" [ngClass]="{'dashboard-item': item.controls.scrollable.value}">
     <ng-template #header>
-        <dexih-button-delete *ngIf="showEdit"  (click)="removeItem($event)" [compact]="true"></dexih-button-delete>
-        <dexih-button buttonClass="btn btn-outline" iconClass="fa fa-window-maximize text-white" (click)="maximise()"></dexih-button>
+        <dexih-button-refresh class="ml-1" [compact]="true" (click)="refresh()"></dexih-button-refresh>
+        <dexih-button-edit class="ml-1" [compact]="true" (click)="toggleEdit()"></dexih-button-edit>
+        <dexih-button *ngIf="!isMaximized" class="ml-1" buttonClass="btn btn-primary" iconClass="fa fa-window-maximize text-white" (click)="maximise()" tooltip="Maximize window"></dexih-button>
+        <dexih-button *ngIf="isMaximized" class="ml-1" buttonClass="btn btn-primary" iconClass="fa fa-window-minimize text-white" (click)="maximise()" tooltip="Minimize window"></dexih-button>
+        <dexih-button-delete  class="ml-1" (click)="removeItem($event)" [compact]="true"></dexih-button-delete>
     </ng-template>
+    <div *ngIf="!item.controls.header.value" class="floating-toolbar">
+        <dexih-button-refresh class="ml-1" [compact]="true" (click)="refresh()"></dexih-button-refresh>
+        <dexih-button-edit class="ml-1" [compact]="true" (click)="toggleEdit()"></dexih-button-edit>
+        <dexih-button *ngIf="!isMaximized" class="ml-1" buttonClass="btn btn-primary" iconClass="fa fa-window-maximize text-white" (click)="maximise()" tooltip="Maximize window"></dexih-button>
+        <dexih-button *ngIf="isMaximized" class="ml-1" buttonClass="btn btn-primary" iconClass="fa fa-window-minimize text-white" (click)="maximise()" tooltip="Minimize window"></dexih-button>
+        <dexih-button-delete class="ml-1"  (click)="removeItem($event)" [compact]="true"></dexih-button-delete>
+    </div>
     <div *ngIf="showEdit" class="p-3 gridster-item-content">
         <form [formGroup]="item">
             <section>
-                <form-input label="Item Name" formControlName="name" placeholder="Enter the dashboard item name." 
-                    [autocapitalize]="on" iconClass="fa fa-list">
+                <form-input label="Item Name" formControlName="name" placeholder="Enter the dashboard item name." [autocapitalize]="on" iconClass="fa fa-list">
                 </form-input>
             </section>
             <section>
-                <form-textarea label="Description" [showMarkdown]="true" formControlName="description"
-                    placeholder="Enter the description.">
+                <form-textarea label="Description" [showMarkdown]="true" formControlName="description" placeholder="Enter the description.">
                 </form-textarea>
             </section>
             <section>
-                <form-select label="Select View" formControlName="viewKey" [items]="views" itemKey="key"
-                    itemName="name">
-                    <dexih-button-new (click)="newView()"></dexih-button-new>
+                <form-select label="Select View" formControlName="viewKey" [items]="views" itemKey="key" itemName="name">
                 </form-select>
+            </section>
+            <section>
+                <form-checkbox label="Show Header" formControlName="header">
+                </form-checkbox>
+                <form-checkbox label="Allow Scrolling" formControlName="scrollable">
+                </form-checkbox>
             </section>
         </form>
 
-        <input-parameters [showEdit]="showEdit" [parameters]="item.controls.parameters" [formsService]="formsService" [parentParameters]="formsService.currentForm.controls.parameters.value"></input-parameters>
+        <input-parameters 
+            [showEdit]="showEdit" 
+            [parameters]="item.controls.parameters" 
+            [formsService]="formsService" 
+            [parentParameters]="formsService.currentForm.controls.parameters.value"
+            >
+        </input-parameters>
     </div>
 
-    <div class="gridster-item-content" style="width: 100%; height: 100%;">
+    <div *ngIf="!showEdit" class="gridster-item-content w-100 h-100">
         <div *ngIf="item.controls.description.value" class="p-3">
-                <ngx-md [data]="item.controls.description.value"></ngx-md>
+            <ngx-md [data]="item.controls.description.value"></ngx-md>
         </div>
-        <preview-view *ngIf="!showPreview && item.controls.viewKey.value" #view [viewKey]="item.controls.viewKey.value" [refreshData]="refreshData" [resizeEvent]="resizeEvent2"></preview-view>
+        <preview-view 
+            *ngIf="!showPreview && item.controls.viewKey.value" #view 
+            [viewKey]="item.controls.viewKey.value" 
+            [data]="item.controls.runTime.value.data"
+            ></preview-view>
     </div>
 </dexih-widget>

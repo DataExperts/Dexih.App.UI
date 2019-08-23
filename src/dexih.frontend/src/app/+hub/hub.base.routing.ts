@@ -28,6 +28,7 @@ import { ApiIndexComponent } from './api/api-index';
 import { DatalinkRunComponent } from './datalink/datalink-run/datalink-run.component';
 import { SearchComponent } from './search';
 import { DashboardEditComponent, DashboardIndexComponent } from './dashboard';
+import { DatajobRunComponent } from './datajob/datajob-run/datajob-run.component';
 
 const tableRoutes: Routes = [
     { path: 'table-edit/:tableKey', data: { pageTitle: 'Edit Table', action: 'edit'},
@@ -259,7 +260,9 @@ const datajobRoutes: Routes = [
     { path: 'datajob-edit/:datajobKey', data: { pageTitle: 'Edit Data Job', action: 'edit'},
             loadChildren: () => import('./datajob/datajob-edit/datajob-edit.module').then(m => m.DatajobEditModule)},
     { path: 'datajob-new',  data: {  pageTitle: 'New Data Job', action: 'new'},
-            loadChildren: () => import('./datajob/datajob-edit/datajob-edit.module').then(m => m.DatajobEditModule)}
+            loadChildren: () => import('./datajob/datajob-edit/datajob-edit.module').then(m => m.DatajobEditModule)},
+    { path: 'datajob-run/:datajobKeys', component: DatajobRunComponent, data: { pageTitle: 'Run datajobs' } },
+
 ];
 
 const datajobsRoute: Route = { path: 'datajobs', data: { pageTitle: 'Data Jobs' }, children: (<Routes>[

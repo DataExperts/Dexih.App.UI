@@ -230,8 +230,8 @@ export class FilesBulkLoadComponent implements OnInit, OnDestroy {
             if (this.tables.length > 0) {
                 this.authService.confirmDialog('Unsaved tables!',
               'Table(s) have not been saved, this action will discard unsaved tables.  Do you want to discard the changes and exit?')
-              .then(() => {
-                  resolve(true);
+              .then((confirm) => {
+                  resolve(confirm);
                 }).catch(() => {
                   resolve(false);
                 });

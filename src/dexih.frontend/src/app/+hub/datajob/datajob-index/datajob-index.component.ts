@@ -66,14 +66,14 @@ export class DatajobIndexComponent implements OnInit, OnDestroy {
         this.authService.navigateUp();
     }
 
-    deleteDatajob(datajob: DexihDatajob) {
-        this.hubService.deleteDatajobs([datajob]).catch(reason => {
-        });
-    }
+    // deleteDatajob(datajob: DexihDatajob) {
+    //     this.hubService.deleteDatajobs([datajob]).catch(reason => {
+    //     });
+    // }
 
-    deleteDatajobs(datajobs: Array<DexihDatajob>) {
-        this.hubService.deleteDatajobs(datajobs);
-    }
+    // deleteDatajobs(datajobs: Array<DexihDatajob>) {
+    //     this.hubService.deleteDatajobs(datajobs);
+    // }
 
     updateDatajobs() {
         if (this.hubCache && this.hubCache.isLoaded()) {
@@ -83,31 +83,31 @@ export class DatajobIndexComponent implements OnInit, OnDestroy {
         }
     }
 
-    runDatajobs(datajobs, truncateTarget, resetIncremental) {
-        this.hubService.runDatajobs(datajobs, truncateTarget, resetIncremental, null);
-    }
+    // runDatajobs(datajobs, truncateTarget, resetIncremental) {
+    //     this.hubService.runDatajobs(datajobs, truncateTarget, resetIncremental, null);
+    // }
 
-    activateDatajobs(datajobs) {
-        this.hubService.activateDatajobs(datajobs);
-    }
+    // activateDatajobs(datajobs) {
+    //     this.hubService.activateDatajobs(datajobs);
+    // }
 
-    cancelDatajobs(datajobs: Array<DexihDatajob>) {
-        this.hubService.deactivateDatajobs(datajobs.map(c => c.key));
-    }
+    // cancelDatajobs(datajobs: Array<DexihDatajob>) {
+    //     this.hubService.deactivateDatajobs(datajobs.map(c => c.key));
+    // }
 
     editDatajob(datajob: DexihDatajob) {
         this.router.navigate(['datajob-edit', datajob.key], { relativeTo: this.route });
     }
 
-    exportDatajobs(datajobs: Array<DexihDatajob>) {
-        const cache = this.hubCache;
-        const hub = new DexihHub(this.hubCache.hub.hubKey, '');
-        datajobs.forEach(datajob => { this.hubCache.cacheAddDatajob(datajob.key, hub); });
+    // exportDatajobs(datajobs: Array<DexihDatajob>) {
+    //     const cache = this.hubCache;
+    //     const hub = new DexihHub(this.hubCache.hub.hubKey, '');
+    //     datajobs.forEach(datajob => { this.hubCache.cacheAddDatajob(datajob.key, hub); });
 
-        let filename = datajobs.length === 1 ? 'Datajob - ' + datajobs[0].name + '.json' : 'datajobs.json';
+    //     let filename = datajobs.length === 1 ? 'Datajob - ' + datajobs[0].name + '.json' : 'datajobs.json';
 
-        this.hubService.exportHub(hub, filename);
-    }
+    //     this.hubService.exportHub(hub, filename);
+    // }
 
     watchChanges() {
         // watch the current datajob in case it is changed in another session.

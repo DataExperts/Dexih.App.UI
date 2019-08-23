@@ -110,8 +110,8 @@ export class DatalinkTestEditComponent implements OnInit, OnDestroy {
       if (this.formsService.hasChanged) {
         this.authService.confirmDialog('The data job has not been saved',
           'The datalink test changes have not been saved.  Do you want to discard the changes and exit?')
-          .then(() => {
-              resolve(true);
+          .then((confirm) => {
+              resolve(confirm);
             }).catch(() => {
               resolve(false);
             });

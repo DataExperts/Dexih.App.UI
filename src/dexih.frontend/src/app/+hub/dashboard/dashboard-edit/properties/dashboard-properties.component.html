@@ -1,81 +1,86 @@
-<dexih-widget-section *ngIf="showEdit" title="Properties" [showExpandButton]="true">
-    <ng-template #header>
-        <dexih-button class="mr-1" (click)="add()">Add</dexih-button>
+<div [ngClass]="{ 'd-none': maximizedItem}">
 
-        <dexih-button-refresh class="mr-1" (click)="refresh()" text="Reload"></dexih-button-refresh>
-    </ng-template>
+    <dexih-widget-section *ngIf="showEdit" title="Properties" [showExpandButton]="true">
+        <form *ngIf="formsService.currentForm " [formGroup]="formsService.currentForm">
+            <fieldset>
+                <section>
+                    <form-input label="Dashboard Name" formControlName="name" placeholder="Enter the view name."
+                        [autocapitalize]="on" iconClass="fa fa-list" [errors]="formsService.formErrors['name']">
+                    </form-input>
+                </section>
+                <section>
+                    <form-textarea label="Description" [showMarkdown]="true" formControlName="description"
+                        placeholder="Enter the description.">
+                    </form-textarea>
+                </section>
+                <section>
+                    <div class="form-row">
+                        <section class="form-group col-md-3">
+                            <form-input type="number" label="Minimum Columns" formControlName="minCols">
+                            </form-input>
+                        </section>
+                        <section class="form-group col-md-3">
+                            <form-input type="number" label="Maximum Columns" formControlName="maxCols">
+                            </form-input>
+                        </section>
+                        <section class="form-group col-md-3">
+                            <form-input type="number" label="Minimum Rows" formControlName="minRows">
+                            </form-input>
+                        </section>
+                        <section class="form-group col-md-3">
+                            <form-input type="number" label="Maximum Rows" formControlName="maxRows">
+                            </form-input>
+                        </section>
+                        <dexih-button-refresh (click)="updateGrid()" text="Update Grid"></dexih-button-refresh>
+                    </div>
 
-    <form *ngIf="formsService.currentForm " [formGroup]="formsService.currentForm">
-        <fieldset>
-            <section>
-                <form-input label="Dashboard Name" formControlName="name" placeholder="Enter the view name."
-                    [autocapitalize]="on" iconClass="fa fa-list" [errors]="formsService.formErrors['name']">
-                </form-input>
-            </section>
-            <section>
-                <form-textarea label="Description" [showMarkdown]="true" formControlName="description"
-                    placeholder="Enter the description.">
-                </form-textarea>
-            </section>
-            <section>
-                <div class="form-row">
-                    <section class="form-group col-md-3">
-                        <form-input type="number" label="Minimum Columns" formControlName="minCols">
-                        </form-input>
-                    </section>
-                    <section class="form-group col-md-3">
-                        <form-input type="number" label="Maximum Columns" formControlName="maxCols">
-                        </form-input>
-                    </section>
-                    <section class="form-group col-md-3">
-                        <form-input type="number" label="Minimum Rows" formControlName="minRows">
-                        </form-input>
-                    </section>
-                    <section class="form-group col-md-3">
-                        <form-input type="number" label="Maximum Rows" formControlName="maxRows">
-                        </form-input>
-                    </section>
-                    <dexih-button-refresh (click)="updateGrid()" text="Update Grid"></dexih-button-refresh>
+                </section>
+
+                <section>
+                    <form-checkbox formControlName="autoRefresh" label="Automatically refresh data when view is opened">
+                    </form-checkbox>
+                </section>
+
+            </fieldset>
+        </form>
+    </dexih-widget-section>
+
+    <dexih-widget-section *ngIf="formsService?.currentForm?.controls.parameters.controls.length > 0" title="Parameters"
+        [showExpandButton]="true">
+        <input-parameters [showEdit]="showEdit" [parameters]="formsService.currentForm?.controls.parameters"
+            [formsService]="formsService"></input-parameters>
+    </dexih-widget-section>
+
+    <dexih-widget-section *ngIf="inputColumns && inputColumns.length > 0" title="InputColumns"
+        [showExpandButton]="true">
+        <span *ngFor="let column of inputColumns; let i = index" class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    {{column.logicalName}}
                 </div>
-
-            </section>
-
-            <section>
-                <form-checkbox formControlName="autoRefresh" label="Automatically refresh data when view is opened"></form-checkbox>
-            </section>
-
-        </fieldset>
-    </form>
-</dexih-widget-section>
-
-<dexih-widget-section *ngIf="formsService?.currentForm?.controls.parameters.controls.length > 0" title="Parameters" [showExpandButton]="true">
-    <input-parameters [showEdit]="showEdit" [parameters]="formsService.currentForm?.controls.parameters" [formsService]="formsService"></input-parameters>
-</dexih-widget-section>
-
-<dexih-widget-section *ngIf="inputColumns && inputColumns.length > 0" title="InputColumns" [showExpandButton]="true">
-    <span *ngFor="let column of inputColumns; let i = index" class="input-group">
-        <div class="input-group-prepend">
-            <div class="input-group-text">
-                {{column.logicalName}}
             </div>
-        </div>
-        <form-input name="column{{i}}" class="form-control p-0" [placeholder]="'Enter ' + column.logicalName"
-            [(ngModel)]="column.value"></form-input>
-    </span>
-</dexih-widget-section>
+            <form-input name="column{{i}}" class="form-control p-0" [placeholder]="'Enter ' + column.logicalName"
+                [(ngModel)]="column.value"></form-input>
+        </span>
+    </dexih-widget-section>
 
-<div style="height: 800px">
-    <gridster [options]="options" #gridster>
-        <ng-template [ngIf]="dashboardItemControls">
-            <gridster-item #gridsterItem
-                [item]="{x: item.controls.x.value, y: item.controls.y.value, cols: item.controls.cols.value, rows: item.controls.rows.value, control: item}"
-                *ngFor="let item of dashboardItemControls.controls; let i = index;">
-                <dashboard-item #dashboardItem [item]="item" [showEdit]="showEdit" (onRemove)="removeItem(i)"
-                    [resizeEvent]="item.controls.runTime.value.resizeEvent" [refreshData]="item.controls.runTime.value.refreshData">
-                </dashboard-item>
-            </gridster-item>
-        </ng-template>
-    </gridster>
+    <div style="height:800px">
+        <gridster [options]="options" #gridster>
+            <ng-template [ngIf]="dashboardItemControls">
+                <gridster-item
+                    [item]="{x: item.controls.x.value, y: item.controls.y.value, cols: item.controls.cols.value, rows: item.controls.rows.value, control: item}"
+                    *ngFor="let item of dashboardItemControls.controls; let i = index;">
+                    <dashboard-item [item]="item" [showEdit]="showEdit" (onRemove)="removeItem(i)"
+                        (onMaximize)="maximize($event)" [refreshData]="item.controls.runTime.value.refreshData">
+                    </dashboard-item>
+                </gridster-item>
+            </ng-template>
+        </gridster>
+    </div>
 </div>
-
-
+<div *ngIf="maximizedItem" style="height:800px;">
+    <dashboard-item [item]="maximizedItem" [showEdit]="showEdit" (onRemove)="removeItem(i)"
+        (onMaximize)="maximize($event)" [refreshData]="maximizedItem.controls.runTime.value.refreshData"
+        [isMaximized]="true">
+    </dashboard-item>
+</div>

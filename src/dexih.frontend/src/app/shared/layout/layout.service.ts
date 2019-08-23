@@ -77,18 +77,4 @@ export class LayoutService {
 
     this.trigger();
   }
-
-  factoryReset() {
-    this.authService.confirmDialog('Clear Local Storage',
-    'Would you like to RESET all your local settings?'
-    ).then(confirm => {
-
-    }).catch(reason => {
-      if (localStorage) {
-        localStorage.clear();
-        location.reload();
-      }
-    });
-  }
-
 }

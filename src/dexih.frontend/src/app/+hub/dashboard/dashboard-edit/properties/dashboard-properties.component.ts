@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChildren, QueryList, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, ViewChild } from '@angular/core';
 import { HubService } from '../../..';
 import { HubFormsService } from '../../../hub.forms.service';
 import { FormArray, FormGroup, AbstractControl } from '@angular/forms';
-import { DexihDashboardItem, eViewType, eSourceType, InputColumn } from '../../../hub.models';
+import { eViewType, eSourceType, InputColumn, HubCache } from '../../../hub.models';
 import { Subscription } from 'rxjs';
-import { GridsterConfig, GridType, CompactType, DisplayGrid, GridsterItem, GridsterItemComponentInterface } from 'angular-gridster2';
-import { DashboardItemComponent } from '../item/dashboard-item.component';
+import { GridsterConfig, GridType, CompactType, DisplayGrid, GridsterItem, GridsterItemComponentInterface,
+  GridsterComponent} from 'angular-gridster2';
 
 @Component({
     selector: 'dashboard-properties',
@@ -14,17 +14,20 @@ import { DashboardItemComponent } from '../item/dashboard-item.component';
 
 export class DashboardPropertiesComponent implements OnInit, OnDestroy {
   @Input() showEdit = false;
+  @Input() lock = true;
 
-  @ViewChildren('dashboardItems') dashboardItems: QueryList<DashboardItemComponent>;
-  @ViewChildren('gridsterItem') gridsterItems: any;
+  @ViewChild('gridster', {static: true}) public gridster: GridsterComponent
 
     private _formChangeSubscription: Subscription;
     private _runTimeSubscription: Subscription;
+    private _hubCacheSubscription: Subscription;
 
     eViewType = eViewType;
     eSourceType = eSourceType;
 
     public inputColumns: InputColumn[];
+
+    public maximizedItem: FormGroup;
 
     columns: Array<any>;
     public data: Array<any>;
@@ -34,7 +37,10 @@ export class DashboardPropertiesComponent implements OnInit, OnDestroy {
     currentForm: FormGroup;
     dashboardItemControls: FormArray;
 
+    hubCache: HubCache;
+
     constructor(
+        private hubService: HubService,
         public formsService: HubFormsService) { }
 
     ngOnInit() {
@@ -102,6 +108,12 @@ export class DashboardPropertiesComponent implements OnInit, OnDestroy {
         },
       };
 
+      this._hubCacheSubscription = this.hubService.getHubCacheObservable().subscribe(hubCache => {
+          if (hubCache.isLoaded()) {
+            this.hubCache = hubCache;
+          }
+      });
+
       this._formChangeSubscription = this.formsService.getCurrentFormObservable().subscribe(currentForm => {
           this.currentForm = currentForm;
           if (currentForm) {
@@ -112,19 +124,12 @@ export class DashboardPropertiesComponent implements OnInit, OnDestroy {
             this.options.minRows = currentForm.controls.minRows.value;
             this.options.maxRows = currentForm.controls.maxRows.value;
 
+            this.showEdit = currentForm.controls.runTime.value.showEdit;
+
             if (this._runTimeSubscription) { this._runTimeSubscription.unsubscribe(); }
             this._runTimeSubscription = currentForm.controls.runTime.valueChanges.subscribe(runTime => {
               this.showEdit = runTime.showEdit;
-
-              if (this.showEdit) {
-                this.options.displayGrid = DisplayGrid.Always;
-                this.options.draggable.enabled = true;
-                this.options.resizable.enabled = true;
-              } else {
-                this.options.displayGrid = DisplayGrid.None;
-                this.options.draggable.enabled = false;
-                this.options.resizable.enabled = false;
-              }
+              this.lock = runTime.lock;
 
               this.updateShowEdit();
             });
@@ -137,19 +142,25 @@ export class DashboardPropertiesComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
       if (this._formChangeSubscription) { this._formChangeSubscription.unsubscribe(); }
       if (this._runTimeSubscription) { this._runTimeSubscription.unsubscribe(); }
+      if (this._hubCacheSubscription) { this._hubCacheSubscription.unsubscribe(); }
+    }
+
+    public getNextPossiblePosition(): GridsterItem {
+      let gridItem = {x: 0, y: 0, cols: 1, rows: 1, control: null};
+      let newItem = this.gridster.getFirstPossiblePosition(gridItem);
+      return newItem;
     }
 
     public updateShowEdit() {
-      if (this.showEdit) {
+      if (this.showEdit || !this.lock ) {
         this.options.displayGrid = DisplayGrid.Always;
         this.options.draggable.enabled = true;
         this.options.resizable.enabled = true;
       } else {
         this.options.displayGrid = DisplayGrid.None;
-        this.options.draggable.enabled = false;
-        this.options.resizable.enabled = false;
+          this.options.draggable.enabled = false;
+          this.options.resizable.enabled = false;
       }
-
       this.options = Object.assign({}, this.options);
     }
 
@@ -179,12 +190,6 @@ export class DashboardPropertiesComponent implements OnInit, OnDestroy {
         items.removeAt(index);
       }
 
-      refresh() {
-        this.dashboardItems.forEach(item => {
-          item.refresh();
-        });
-      }
-
       updateGrid() {
         let currentForm = this.formsService.currentForm;
         this.options.minCols = currentForm.controls.minCols.value;
@@ -194,15 +199,11 @@ export class DashboardPropertiesComponent implements OnInit, OnDestroy {
         this.options = Object.assign({}, this.options);
       }
 
-      add() {
-        let form = this.formsService.currentForm;
-        let items = <FormArray> form.controls.dexihDashboardItems;
-        let item = new DexihDashboardItem();
-        item.cols = 1;
-        item.rows = 1;
-        item.x = 0;
-        item.y = 0;
-        let control = this.formsService.dashboardItem(item);
-        items.push(control);
+      maximize(item) {
+        if (this.maximizedItem) {
+          this.maximizedItem = null;
+        } else {
+          this.maximizedItem = item;
+        }
       }
 }

@@ -188,6 +188,13 @@ export class DatalinkEditService implements OnInit, OnDestroy {
         }
     }
 
+    public getVariables(): string[] {
+        let variables = this.hubFormsService.currentForm.controls.parameters.value.map(c => '{' + c.name + '}')
+        .concat(this._hubCache.hub.dexihHubVariables.map(c => '{' + c.name + '}'));
+
+        return variables;
+    }
+
     insertDatalinkTransformItem(datalinkTransformForm: FormGroup, datalinkTransformItemForm: FormGroup): DexihDatalinkTransformItem {
         this.logger.LogC(() => `insertDatalinkTransformItem`, eLogLevel.Trace);
 
@@ -309,13 +316,15 @@ export class DatalinkEditService implements OnInit, OnDestroy {
             this.authService.confirmDialog('Delete Transform',
                 `Are you sure you would like to remove the transform ${datalinkTransform.name}?`)
                 .then(confirm => {
-                    let datalinkForm = this.hubFormsService.currentForm;
-                    let datalinkTransforms = <FormArray>datalinkForm.controls['dexihDatalinkTransforms'];
-                    let index = datalinkTransforms.controls
-                        .findIndex(c => c.value.key === datalinkTransform.key);
-                    datalinkTransforms.removeAt(index);
-                    this.resetDatalinkTransformPositions();
-                    resolve(true);
+                    if (confirm) {
+                        let datalinkForm = this.hubFormsService.currentForm;
+                        let datalinkTransforms = <FormArray>datalinkForm.controls['dexihDatalinkTransforms'];
+                        let index = datalinkTransforms.controls
+                            .findIndex(c => c.value.key === datalinkTransform.key);
+                        datalinkTransforms.removeAt(index);
+                        this.resetDatalinkTransformPositions();
+                    }
+                    resolve(confirm);
                 }).catch(reason => {
                     resolve(false);
                 });
@@ -350,9 +359,6 @@ export class DatalinkEditService implements OnInit, OnDestroy {
             let datalink = this.hubFormsService.getDatalinkValue();
 
             const cache = this._hubCache;
-            const hub = new DexihHub(cache.hub.hubKey, '');
-            cache.getDatalinkCache(datalink, hub);
-
             let remoteAgent = this.hubService.getRemoteAgentCurrent();
 
             if (!remoteAgent) {
@@ -383,29 +389,15 @@ export class DatalinkEditService implements OnInit, OnDestroy {
         });
     }
 
-    saveFile() {
-        let datalink = this.hubFormsService.getDatalinkValue();
-        const cache = this._hubCache;
-        const hub = new DexihHub(cache.hub.hubKey, '');
-        cache.getDatalinkCache(datalink, hub);
-
-        let datalinkCopy = Object.assign({}, datalink);
-        datalinkCopy.currentStatus = null;
-        datalinkCopy.entityStatus = null;
-        datalinkCopy.previousStatus = null;
-
-        hub.dexihDatalinks.push(datalinkCopy);
-
-        let filename = `datalink - ${datalink.name}.json`;
-
-        this.hubService.exportHub(hub, filename);
-    }
-
     reBuildDatalinkTable(datalinkTable: DexihDatalinkTable, confirm = false) {
         if (confirm) {
             // tslint:disable-next-line:max-line-length
-            this.authService.promptDialog('Rebuild Columns?', `This action will load the selected table columns, and replace or delete any existing columns.  This may require fixing some mappings.  Do you want to proceed?`)
-                .then(() => this.doRebuildDatalinkTable(datalinkTable)).catch();
+            this.authService.confirmDialog('Rebuild Columns?', `This action will load the selected table columns, and replace or delete any existing columns.  This may require fixing some mappings.  Do you want to proceed?`)
+                .then((confirm2) => {
+                    if (confirm2) {
+                    this.doRebuildDatalinkTable(datalinkTable)
+                    }
+                }).catch();
         } else {
             this.doRebuildDatalinkTable(datalinkTable);
         }

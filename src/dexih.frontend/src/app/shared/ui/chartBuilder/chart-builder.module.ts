@@ -6,6 +6,7 @@ import { DexihComponentsModule } from 'dexih-ngx-components';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { GoogleMapComponent } from './google-map.component';
 import { ChartViewComponent } from './chart-view.component';
+import { AngularResizedEventModule } from 'angular-resize-event';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { ChartViewComponent } from './chart-view.component';
     FormsModule,
     DexihComponentsModule,
     NgxChartsModule,
+    AngularResizedEventModule
   ],
   declarations: [
     ChartBuilderComponent,
