@@ -3,8 +3,8 @@
         Chart not displayed.  Check the chart type, labels and series have been set.
     </div>
 </div>
-
-<div (resized)="onResized($event)" class="h-100 w-100" *ngIf="results && chartType" style="position: absolute; " id="chart">
+<div class="chart-parent" >
+<div (resized)="onResized($event)" *ngIf="results && chartType" id="chart" [ngClass]="{'responsive-chart' : responsive, 'fixed-chart': !responsive}" >
     <ngx-charts-bar-vertical *ngIf="chartType.key === eChartType.BarVertical" [view]="view" [scheme]="config.colorScheme"
         [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"
         [legend]="config.showLegend" [legendPosition]="config.legendPosition" [showGridLines]="config.showGridLines" [showXAxisLabel]="config.showXAxisLabel"
@@ -140,4 +140,5 @@
     </ngx-charts-linear-gauge>
 
     <google-map *ngIf="chartType.key === eChartType.Map" [results]="results"></google-map>
+</div>
 </div>

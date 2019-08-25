@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO.Compression;
+using Ben.Diagnostics;
 using dexih.api.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -240,6 +241,7 @@ namespace dexih.api
                 _logger.LogInformation("Application is running in development configuration, detailed exceptions and errors will be displayed.");
 
                 app.UseDeveloperExceptionPage();
+                app.UseBlockingDetection();
             }
             else
             {

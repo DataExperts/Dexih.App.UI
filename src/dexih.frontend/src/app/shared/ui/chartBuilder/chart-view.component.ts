@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, OnDestroy, AfterViewInit } from '@angular/core';
 import { ChartConfig, eChartType } from '../../../+hub/hub.models';
 import { eInputFormat, ChartTypes } from './chart-groups';
 import { colorSets } from '@swimlane/ngx-charts/release/utils';
@@ -8,6 +8,7 @@ import { ResizedEvent } from 'angular-resize-event';
 @Component({
     selector: 'chart-view',
     templateUrl: 'chart-view.component.html',
+    styleUrls: ['./chart-view.component.scss']
 })
 
 export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
@@ -15,6 +16,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
     @Input() columns: any[];
     @Input() data: Array<any>;
     @Input() updateChartEvent: Observable<void>;
+    @Input() responsive = false;
 
     private _updateChartSubscription: Subscription;
 
@@ -85,7 +87,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
 
             this.getChartType();
             this.updateChart();
-            this.createView();
+            // this.view = [this.width, this.height];
         }
     }
 
@@ -94,28 +96,14 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
     // }
 
     onResized(event: ResizedEvent) {
+        // legend needs to be padded as ngx-charts not calculating size correctly.
+        // https://github.com/swimlane/ngx-charts/issues/1248
         if (this.config.showLegend && this.config.legendPosition === 'below') {
             this.view = [event.newWidth, event.newHeight - 60];
         } else {
             this.view = [event.newWidth, event.newHeight];
         }
       }
-
-    createView() {
-        // let width = this.width;
-        // if (!width) {
-        //     width = this.ref.nativeElement.parentElement.clientWidth - (this.ref.nativeElement.offsetLeft * 2);
-        // }
-
-        // let height = this.height;
-        // if (!height) {
-        //     if (this.ref.nativeElement.offsetParent) {
-        //         height = this.ref.nativeElement.offsetParent.clientHeight / 1.3
-        //     }
-        // }
-
-        // this.view = [width, height];
-    }
 
     getChartType() {
         this.chartType = null;

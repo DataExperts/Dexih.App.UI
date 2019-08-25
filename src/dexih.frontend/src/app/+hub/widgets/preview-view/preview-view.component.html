@@ -18,7 +18,7 @@
     <dexih-table *ngIf="view.viewType == eViewType.Table" [enableMultiSelect]="false" [enableSaveCsv]="false" [enableFilter]="false" [columns]="dataResult.columns" [data]="dataResult.data">
     </dexih-table>
 
-    <chart-view *ngIf="view.viewType == eViewType.Chart" [columns]="dataResult.columns" [data]="dataResult.data" [config]="view.chartConfig">
+    <chart-view [responsive]="true" *ngIf="view.viewType == eViewType.Chart" [columns]="dataResult.columns" [data]="dataResult.data" [config]="view.chartConfig">
     </chart-view>
 </div>
 <ng-template #elseBlock>

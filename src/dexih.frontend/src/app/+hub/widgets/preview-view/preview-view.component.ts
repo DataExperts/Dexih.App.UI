@@ -16,6 +16,7 @@ export class PreviewViewComponent implements OnInit, OnChanges, OnDestroy {
     @Input() parameters: DexihInputParameter[];
     @Input() viewKey: number
     @Input() data: DataCache;
+
     @Output() dataChange = new EventEmitter<DataCache>();
 
     private _subscription: Subscription;
@@ -42,8 +43,6 @@ export class PreviewViewComponent implements OnInit, OnChanges, OnDestroy {
     public view: DexihView;
     public eViewType = eViewType
 
-    public width: number;
-    public height: number;
 
     public dataResult: PreviewResults;
 

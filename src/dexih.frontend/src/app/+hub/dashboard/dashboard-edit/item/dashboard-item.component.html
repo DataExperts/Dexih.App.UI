@@ -1,12 +1,8 @@
 <dexih-widget #widget [title]="item.controls.name.value" [padding]="false" [showHeader]="item.controls.header.value" [ngClass]="{'dashboard-item': item.controls.scrollable.value}">
     <ng-template #header>
-        <dexih-button-refresh class="ml-1" [compact]="true" (click)="refresh()"></dexih-button-refresh>
-        <dexih-button-edit class="ml-1" [compact]="true" (click)="toggleEdit()"></dexih-button-edit>
-        <dexih-button *ngIf="!isMaximized" class="ml-1" buttonClass="btn btn-primary" iconClass="fa fa-window-maximize text-white" (click)="maximise()" tooltip="Maximize window"></dexih-button>
-        <dexih-button *ngIf="isMaximized" class="ml-1" buttonClass="btn btn-primary" iconClass="fa fa-window-minimize text-white" (click)="maximise()" tooltip="Minimize window"></dexih-button>
-        <dexih-button-delete  class="ml-1" (click)="removeItem($event)" [compact]="true"></dexih-button-delete>
+
     </ng-template>
-    <div *ngIf="!item.controls.header.value" class="floating-toolbar">
+    <div class="floating-toolbar">
         <dexih-button-refresh class="ml-1" [compact]="true" (click)="refresh()"></dexih-button-refresh>
         <dexih-button-edit class="ml-1" [compact]="true" (click)="toggleEdit()"></dexih-button-edit>
         <dexih-button *ngIf="!isMaximized" class="ml-1" buttonClass="btn btn-primary" iconClass="fa fa-window-maximize text-white" (click)="maximise()" tooltip="Maximize window"></dexih-button>
@@ -44,7 +40,7 @@
         </input-parameters>
     </div>
 
-    <div *ngIf="!showEdit" class="gridster-item-content w-100 h-100">
+    <ng-template [ngIf]="!showEdit">
         <div *ngIf="item.controls.description.value" class="p-3">
             <ngx-md [data]="item.controls.description.value"></ngx-md>
         </div>
@@ -53,5 +49,5 @@
             [viewKey]="item.controls.viewKey.value" 
             [data]="item.controls.runTime.value.data"
             ></preview-view>
-    </div>
+    </ng-template>
 </dexih-widget>

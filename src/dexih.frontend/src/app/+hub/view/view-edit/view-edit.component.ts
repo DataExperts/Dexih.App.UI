@@ -1,9 +1,11 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HubCache, eCacheStatus, DexihView, eSourceType, DexihDatalink,
-  ChartConfig, InputColumn, DexihColumnBase, eViewType, ConnectionTables, eViewSource } from '../../hub.models';
+import {
+  HubCache, eCacheStatus, DexihView, eSourceType, DexihDatalink,
+  ChartConfig, InputColumn, DexihColumnBase, eViewType, ConnectionTables, eViewSource
+} from '../../hub.models';
 import { HubService } from '../../hub.service';
-import { Subscription, combineLatest, merge} from 'rxjs';
+import { Subscription, combineLatest, merge } from 'rxjs';
 import { HubFormsService } from '../../hub.forms.service';
 import { AuthService } from '../../../+auth/auth.service';
 import { DownloadObject, SelectQuery } from '../../hub.query.models';
@@ -76,80 +78,83 @@ export class ViewEditComponent implements OnInit, OnDestroy {
         this.pageTitle = data['pageTitle'];
 
         if (this.hubCache.isLoaded()) {
-          if (!this.hubCache || this.hubCache.status !== eCacheStatus.Loaded || this.isLoaded) { return; }
-          this.isLoaded = true;
+          if (!this.hubCache || this.hubCache.status !== eCacheStatus.Loaded) { return; }
 
-          if (this.hubCache && this.hubCache.isLoaded()) {
-            this.connectionTables = this.hubCache.getConnectionTables();
-            this.datalinks = this.hubCache.hub.dexihDatalinks;
-          }
+          if (!this.isLoaded) {
+            this.isLoaded = true;
 
-          if (this.action === 'edit') {
-            // get the hub key from the route data, and update the service.
-            this.viewKey = + params['viewKey'];
-
-            if (!this.viewKey) {
-              this.hubService.addHubErrorMessage('There was no view specified to edit.');
-            } else {
-              if (!this.hubCache.hub || !this.hubCache.hub.dexihColumnValidations) {
-                this.hubService.addHubErrorMessage('The hub cache is not loaded.');
-              } else {
-
-                let view = this.hubCache.hub.dexihViews.find(c => c.key === this.viewKey);
-
-                // create a copy of the view to avoid changes to the hub cache.
-                view = JSON.parse(JSON.stringify(view));
-                this.selectQuery = view.selectQuery;
-                this.inputColumns = view.inputValues;
-                this.showChart = view.viewType === eViewType.Chart;
-
-                this.formsService.view(view);
-                this.watchChanges();
-
-                this.getColumns();
-              }
+            if (this.hubCache && this.hubCache.isLoaded()) {
+              this.connectionTables = this.hubCache.getConnectionTables();
+              this.datalinks = this.hubCache.hub.dexihDatalinks;
             }
-          }
 
-          if (this.action === 'new') {
-            let view = new DexihView();
-            this.formsService.view(view);
-            this.watchChanges();
-            this.showEdit = true;
+            if (this.action === 'edit') {
+              // get the hub key from the route data, and update the service.
+              this.viewKey = + params['viewKey'];
 
-            // update the url with the saved key
-            this._formChangeSubscription = this.formsService.getCurrentFormObservable().subscribe(form => {
-              let key = form.controls.key.value;
-              if (key) {
-                if (history.pushState) {
-                  let newUrl = window.location.pathname.replace('/view-new', `/view-edit/${key}`)
-                  this.router.navigateByUrl(newUrl);
-                  this._formChangeSubscription.unsubscribe();
+              if (!this.viewKey) {
+                this.hubService.addHubErrorMessage('There was no view specified to edit.');
+              } else {
+                if (!this.hubCache.hub || !this.hubCache.hub.dexihColumnValidations) {
+                  this.hubService.addHubErrorMessage('The hub cache is not loaded.');
+                } else {
+
+                  let view = this.hubCache.hub.dexihViews.find(c => c.key === this.viewKey);
+
+                  // create a copy of the view to avoid changes to the hub cache.
+                  view = JSON.parse(JSON.stringify(view));
+                  this.selectQuery = view.selectQuery;
+                  this.inputColumns = view.inputValues;
+                  this.showChart = view.viewType === eViewType.Chart;
+
+                  this.formsService.view(view);
+                  this.watchChanges();
+
+                  this.getColumns();
                 }
               }
-            });
+            }
+
+            if (this.action === 'new') {
+              let view = new DexihView();
+              this.formsService.view(view);
+              this.watchChanges();
+              this.showEdit = true;
+
+              // update the url with the saved key
+              this._formChangeSubscription = this.formsService.getCurrentFormObservable().subscribe(form => {
+                let key = form.controls.key.value;
+                if (key) {
+                  if (history.pushState) {
+                    let newUrl = window.location.pathname.replace('/view-new', `/view-edit/${key}`)
+                    this.router.navigateByUrl(newUrl);
+                    this._formChangeSubscription.unsubscribe();
+                  }
+                }
+              });
+            }
           }
 
           if (remoteAgent) {
             if (!this.firstLoad) {
-                if (!this.dialogOpen) {
-                    this.dialogOpen = true;
-                    this.authService.confirmDialog('Remote Agent Available',
-                        'A remote agent is available, would you like to refresh the data?').then(confirm => {
-                            if (confirm) {
-                                this.refresh();
-                            }
-                            this.dialogOpen = false;
-                        });
-                }
+              if (!this.dialogOpen) {
+                this.dialogOpen = true;
+                this.authService.confirmDialog('Remote Agent Available',
+                  'A remote agent is available, would you like to refresh the data?').then(confirm => {
+                    if (confirm) {
+                      this.refresh();
+                    }
+                    this.dialogOpen = false;
+                  });
+              }
             } else {
               if (this.formsService.currentForm.controls.autoRefresh.value) {
                 this.refresh();
               }
 
             }
+          }
         }
-      }
 
 
       });
@@ -168,7 +173,7 @@ export class ViewEditComponent implements OnInit, OnDestroy {
       this.selectQuery = new SelectQuery();
       this.getColumns();
       this.refresh();
-  });
+    });
   }
 
   ngOnDestroy() {
@@ -184,7 +189,7 @@ export class ViewEditComponent implements OnInit, OnDestroy {
   getColumns() {
 
     let viewForm = this.formsService.currentForm;
-    let viewInputs = <InputColumn[]> viewForm.controls.inputValues.value;
+    let viewInputs = <InputColumn[]>viewForm.controls.inputValues.value;
 
     if (viewForm.controls.sourceType.value === eSourceType.Table && viewForm.controls.sourceTableKey.value > 0) {
       let table = this.hubCache.getTable(viewForm.controls.sourceTableKey.value);
@@ -194,8 +199,10 @@ export class ViewEditComponent implements OnInit, OnDestroy {
           if (input) {
           } else {
           }
-          return {datalinkKey: 0, datalinkName: '',
-            name: c.name, logicalName: c.logicalName, dataType: c.dataType, rank: c.rank, value: c.defaultValue };
+          return {
+            datalinkKey: 0, datalinkName: '',
+            name: c.name, logicalName: c.logicalName, dataType: c.dataType, rank: c.rank, value: c.defaultValue
+          };
         }
         );
         this.tableColumns = table.dexihTableColumns;
@@ -222,8 +229,10 @@ export class ViewEditComponent implements OnInit, OnDestroy {
           } else {
             value = c.defaultValue;
           }
-          return { datalinkKey: datalink.key, datalinkName: datalink.name,
-            name: c.name, logicalName: c.logicalName, dataType: c.dataType, rank: c.rank, value: value };
+          return {
+            datalinkKey: datalink.key, datalinkName: datalink.name,
+            name: c.name, logicalName: c.logicalName, dataType: c.dataType, rank: c.rank, value: value
+          };
         });
       } else {
         this.reset();
@@ -244,23 +253,32 @@ export class ViewEditComponent implements OnInit, OnDestroy {
     let viewForm = this.formsService.currentForm;
     let parameters = this.formsService.currentForm.controls.parameters.value;
 
-    if (viewForm.controls.sourceType.value === eSourceType.Datalink && viewForm.controls.sourceDatalinkKey.value) {
-      this.hubService.previewDatalinkKeyData(viewForm.controls.sourceDatalinkKey.value,
-        this.selectQuery, this.inputColumns, parameters).then((result) => {
-        this.columns = result.columns;
-        this.data = result.data;
-      }).catch(() => {
-      });
+    let view = viewForm.value;
+    view.selectQuery = this.selectQuery;
 
-    }
-    if (viewForm.controls.sourceType.value === eSourceType.Table && viewForm.controls.sourceTableKey.value) {
-      this.hubService.previewTableKeyData(viewForm.controls.sourceTableKey.value,
-          false, this.selectQuery, this.inputColumns, parameters).then((result) => {
-        this.columns = result.columns;
-        this.data = result.data;
-      }).catch(() => {
-      });
-    }
+    this.hubService.previewView(viewForm.value, this.inputColumns, parameters).then((result) => {
+      this.columns = result.columns;
+      this.data = result.data;
+    }).catch(() => {
+    });
+
+    // if (viewForm.controls.sourceType.value === eSourceType.Datalink && viewForm.controls.sourceDatalinkKey.value) {
+    //   this.hubService.previewDatalinkKeyData(viewForm.controls.sourceDatalinkKey.value,
+    //     this.selectQuery, this.inputColumns, parameters).then((result) => {
+    //     this.columns = result.columns;
+    //     this.data = result.data;
+    //   }).catch(() => {
+    //   });
+
+    // }
+    // if (viewForm.controls.sourceType.value === eSourceType.Table && viewForm.controls.sourceTableKey.value) {
+    //   this.hubService.previewTableKeyData(viewForm.controls.sourceTableKey.value,
+    //       false, this.selectQuery, this.inputColumns, parameters).then((result) => {
+    //     this.columns = result.columns;
+    //     this.data = result.data;
+    //   }).catch(() => {
+    //   });
+    // }
   }
 
   download(format) {
@@ -289,10 +307,10 @@ export class ViewEditComponent implements OnInit, OnDestroy {
         this.authService.confirmDialog('The view has not been saved',
           'The view changes have not been saved.  Do you want to discard the changes and exit?')
           .then((confirm) => {
-              resolve(confirm);
-            }).catch(() => {
-              resolve(false);
-            });
+            resolve(confirm);
+          }).catch(() => {
+            resolve(false);
+          });
       } else {
         resolve(true);
       }

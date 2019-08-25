@@ -114,8 +114,21 @@ export class AuthService implements OnDestroy {
                                         } else {
                                             remoteAgent.activeAgents.push(activeAgent);
                                         }
-                                    }
+                                    } else {
+                                        remoteAgent = new DexihRemoteAgent();
+                                        remoteAgent.remoteAgentKey = activeAgent.remoteAgentKey;
+                                        remoteAgent.name = activeAgent.name;
+                                        remoteAgent.activeAgents = [activeAgent];
+                                        remoteAgents.push(remoteAgent);
+                                        }
                                     this._remoteAgents.next(remoteAgents);
+                                } else {
+                                    let activeAgent = <DexihActiveAgent> data.value;
+                                    let remoteAgent = new DexihRemoteAgent();
+                                    remoteAgent.remoteAgentKey = activeAgent.remoteAgentKey;
+                                    remoteAgent.name = activeAgent.name;
+                                    remoteAgent.activeAgents = [activeAgent];
+                                    this._remoteAgents.next([remoteAgent]);
                                 }
                                 break;
                             }
@@ -1322,15 +1335,41 @@ export class AuthService implements OnDestroy {
                 return;
             }
 
-            this.post('/api/Account/PingRemoteAgents', {connectionId: connectionId}, 'Pinging active remote agents...')
+            this.post('/api/Account/PingRemoteAgents', { connectionId: connectionId }, 'Pinging active remote agents...')
                 .then(result => {
-                let agents: Array<DexihRemoteAgent> = result.value;
-                agents.forEach(c => c.activeAgents = []);
-                this._remoteAgents.next(agents);
-            }).catch(reason => {
-                this.logger.LogC(() => `updateRemoteAgents, error: ${reason.message}.`, eLogLevel.Error);
-                this._remoteAgents.next(null);
-            }).then(() => this.updateRemoteAgentsFlag = false);
+                    let currentAgents = this._remoteAgents.getValue();
+
+                    let newAgents = <DexihRemoteAgent[]>result.value;
+
+                    if (currentAgents == null) {
+                        currentAgents = newAgents;
+                        newAgents.map(c => c.activeAgents = []);
+                    } else {
+
+                        newAgents.forEach(newAgent => {
+                            let currentAgent = currentAgents.find(c => c.remoteAgentKey === newAgent.remoteAgentKey);
+                            if (currentAgent) {
+                                let activeAgents = currentAgent.activeAgents;
+                                Object.assign(currentAgent, newAgent);
+                                currentAgent.activeAgents = activeAgents;
+                            } else {
+                                newAgent.activeAgents = [];
+                                currentAgents.push(newAgent);
+                            }
+                        });
+
+                        for (let i = currentAgents.length - 1; i >= 0; i--) {
+                            if (newAgents.findIndex(c => c.remoteAgentKey === currentAgents[i].remoteAgentKey) < 0) {
+                                currentAgents.splice(i, 1);
+                            }
+                        }
+                    }
+                    this._remoteAgents.next(currentAgents);
+
+                }).catch(reason => {
+                    this.logger.LogC(() => `updateRemoteAgents, error: ${reason.message}.`, eLogLevel.Error);
+                    this._remoteAgents.next(null);
+                }).then(() => this.updateRemoteAgentsFlag = false);
         }
     }
 

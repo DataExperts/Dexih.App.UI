@@ -192,7 +192,7 @@
         <dexih-button buttonClass="btn-sm btn-outline-primary m-1" (click)="export()" text="export"></dexih-button>
     </ng-template>
 
-    <chart-view #chartView [config]="config" [columns]="columns" [data]="data" [updateChartEvent]="updateChartSubject">
+    <chart-view [responsive]="false" #chartView [config]="config" [columns]="columns" [data]="data" [updateChartEvent]="updateChartSubject">
     </chart-view>
 
 </dexih-widget-section>

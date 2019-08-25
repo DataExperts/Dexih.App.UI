@@ -1,0 +1,18 @@
+/* Sets the chart to 200px less than the view height */
+.fixed-chart {
+    height: calc(100vh - 200px);
+}
+
+/* chart-parent relative, and child with absolute used to make the ngx-charts fix properly in the block */
+.chart-parent {
+    display: block;
+    position: relative;
+    height:100%
+}
+.responsive-chart {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0
+}

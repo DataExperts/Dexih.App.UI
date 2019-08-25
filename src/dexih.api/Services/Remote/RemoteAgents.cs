@@ -1627,7 +1627,7 @@ namespace dexih.api.Services.Remote
 						exceptions.Enqueue(ex);
 					}
 
-				}).ToArray());
+				}));
 
 			if (exceptions.Count > 0)
 			{

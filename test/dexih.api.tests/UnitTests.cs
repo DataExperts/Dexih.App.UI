@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Net.Http;
-using System.Net;
 using dexih.repository;
 using Newtonsoft.Json;
 using Xunit;
@@ -16,10 +14,7 @@ namespace dexih.api.tests
         private readonly string _email;
         private readonly string _password;
 
-        public static string _hubName = "hub-" + Guid.NewGuid().ToString();
-
-        public static HttpClient _httpClient;
-        public static CookieContainer _CookieContainer;
+        public static string _hubName = "hub-" + Guid.NewGuid();
 
         private readonly ITestOutputHelper _output;
 

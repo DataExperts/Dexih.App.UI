@@ -289,6 +289,7 @@ export class DatalinkEditService implements OnInit, OnDestroy {
         if (transform.transformType === eTransformType.Join
             || transform.transformType === eTransformType.Lookup || transform.transformType === eTransformType.Concatenate) {
             newDatalinkTransform.joinDatalinkTable = new DexihDatalinkTable();
+            newDatalinkTransform.joinDatalinkTable.key = this._hubCache.getNextSequence();
         }
 
         if (transform.transformType === eTransformType.Series) {
