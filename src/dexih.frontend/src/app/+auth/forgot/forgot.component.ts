@@ -104,7 +104,7 @@ export class ForgotComponent implements OnInit, OnDestroy {
               if (!this.userService.redirectUrl) {
                   this.router.navigate(['/']);
               } else {
-                  this.router.navigate([this.userService.redirectUrl]);
+                this.router.navigateByUrl(this.userService.redirectUrl);
               }
           } else {
             this.message = 'Reset password failed.  Please contact support to proceed.';

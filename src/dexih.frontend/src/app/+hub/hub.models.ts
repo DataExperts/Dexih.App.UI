@@ -350,7 +350,16 @@ export class HubCache {
                 this.searchItem(search, view, null, eObjectType.View, results);
             });
         }
-
+        if (searchAll || searchObject === eObjectType.Api) {
+            this.hub.dexihApis.forEach(api => {
+                this.searchItem(search, api, null, eObjectType.Api, results);
+            });
+        }
+        if (searchAll || searchObject === eObjectType.Dashboard) {
+            this.hub.dexihDashboards.forEach(d => {
+                this.searchItem(search, d, null, eObjectType.Dashboard, results);
+            });
+        }
         return results;
     }
 
@@ -1035,7 +1044,9 @@ export enum eObjectType {
     Datalink = <any>'Datalink',
     Datajob = <any>'Datajob',
     ColumnValidation = <any>'ColumnValidation',
-    View = <any>'View'
+    View = <any>'View',
+    Api = <any>'Api',
+    Dashboard = <any>'Dashboard',
 }
 
 export const ObjectTypes = [
@@ -1048,6 +1059,8 @@ export const ObjectTypes = [
     {key: eObjectType.Datajob, name: 'Data Job'},
     {key: eObjectType.ColumnValidation, name: 'Column Validation'},
     {key: eObjectType.View, name: 'View'},
+    {key: eObjectType.Api, name: 'Api'},
+    {key: eObjectType.Dashboard, name: 'Dashboard'},
 ];
 
 export class SearchResult {
@@ -1062,17 +1075,26 @@ export class SearchResult {
     }
 }
 
+export enum eSharedDataObjectType {
+    Table = <any>'Table',
+    Datalink = <any>'Datalink',
+    View = <any>'View',
+    Dashboard = <any>'Dashboard',
+    Api = <any>'Api'
+}
+
 export class SharedData {
     public hubKey: number;
     public hubName: string;
 
-    public objectType: eViewSource;
+    public objectType: eSharedDataObjectType;
     public objectKey: number;
     public name: string;
     public logicalName: string;
     public description: string;
     public updateDate: Date;
 
+    public parameters: DexihInputParameter[];
     public inputColumns: InputColumn[];
     public query: SelectQuery;
     public outputColumns: DexihColumnBase[];
@@ -1104,6 +1126,7 @@ export class DexihApi extends EntityBase {
     public cacheResetInterval: string = null;
     public logDirectory = '';
     public autoStart = false;
+    public isShared = false;
 
     public parameters: DexihInputParameter[] = [];
 
@@ -1778,6 +1801,7 @@ export class DexihView extends EntityBase {
     public selectQuery = new SelectQuery();
     public chartConfig = new ChartConfig();
     public autoRefresh = true;
+    public isShared = false;
 
     public parameters: Array<DexihInputParameter> = [];
 }
@@ -2602,4 +2626,3 @@ export class InputParameter {
     public name: string = null;
     public value = null;
 }
-

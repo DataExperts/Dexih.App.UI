@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription} from 'rxjs';
 
 import { AuthService } from '../../../+auth/auth.service';
-import { DexihDatajob, DexihDatalink, HubCache, DexihHub, DexihTable, eSourceType, eViewSource } from '../../hub.models';
+import { DexihDatajob, DexihDatalink, HubCache, DexihHub, DexihTable, eViewSource, eSharedDataObjectType } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { DownloadObject, eDownloadFormat } from '../../hub.query.models';
 
@@ -28,7 +28,6 @@ export class ActionsDatalinkButtonComponent implements OnInit, OnChanges, OnDest
     private _hubCacheSubscription: Subscription;
 
     constructor(
-        private authService: AuthService,
         private hubService: HubService,
         private router: Router,
         private route: ActivatedRoute) { }
@@ -100,8 +99,8 @@ export class ActionsDatalinkButtonComponent implements OnInit, OnChanges, OnDest
         this.hubService.deleteDatalinks(this.datalinks);
     }
 
-    shareSelectedDatalinks(isShared: boolean) {
-        this.hubService.shareDatalinks(this.datalinks.map(c => c.key), isShared);
+    shareItems(isShared: boolean) {
+        this.hubService.shareItems(this.datalinks.map(c => c.key), eSharedDataObjectType.Datalink, isShared);
     }
 
     async runDatalinks(truncateTarget: boolean, resetIncremental: boolean) {
@@ -129,7 +128,6 @@ export class ActionsDatalinkButtonComponent implements OnInit, OnChanges, OnDest
     }
 
     export() {
-        const cache = this.hubCache;
         const hub = new DexihHub(this.hubCache.hub.hubKey, '');
         this.datalinks.forEach(datalink => { this.hubCache.cacheAddDatalink(datalink.key, hub); });
 

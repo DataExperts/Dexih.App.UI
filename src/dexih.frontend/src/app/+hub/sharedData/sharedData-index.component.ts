@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HubService } from '../hub.service';
-import { HubCache, DexihDatalink, eSharedObjectType, eSourceType, eViewSource } from '../hub.models';
+import { HubCache, DexihDatalink, eSharedObjectType, eSourceType, eViewSource, eSharedDataObjectType } from '../hub.models';
 import { DownloadObject, eDownloadFormat } from '../hub.query.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, BehaviorSubject, Subscription, combineLatest} from 'rxjs';
@@ -126,12 +126,12 @@ export class SharedDataIndexComponent implements OnInit, OnDestroy {
     public unshareSelectedTables(dataObjects: Array<DownloadObject>) {
         let datalinkKeys = dataObjects.filter(c => c.objectType === eViewSource.Datalink).map(c => c.objectKey);
         if (datalinkKeys.length > 0) {
-            this.hubService.shareDatalinks(datalinkKeys, false);
+            this.hubService.shareItems(datalinkKeys, eSharedDataObjectType.Datalink, false);
         }
 
         let tableKeys = dataObjects.filter(c => c.objectType === eViewSource.Table).map(c => c.objectKey);
         if (tableKeys.length > 0) {
-            this.hubService.shareTables(tableKeys, false);
+            this.hubService.shareItems(tableKeys, eSharedDataObjectType.Table, false);
         }
     }
 

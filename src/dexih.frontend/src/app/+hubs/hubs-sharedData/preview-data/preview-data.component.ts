@@ -2,7 +2,7 @@ import { LogFactory } from '../../../../logging';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { SharedData, DexihColumnBase, InputColumn, eViewSource } from '../../../+hub/hub.models';
+import { SharedData, DexihColumnBase, InputColumn, eViewSource, eSharedDataObjectType } from '../../../+hub/hub.models';
 import { eDownloadFormat, SelectQuery } from '../../../+hub/hub.query.models';
 import { AuthService } from '../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
@@ -31,7 +31,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
 
 
     objectKey: number;
-    objectType: eViewSource;
+    objectType: eSharedDataObjectType;
     hubKey: number;
 
     columns: Array<any>;
@@ -55,7 +55,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
                 let items = result[1];
 
                 this.hubKey = + params['hubKey'];
-                this.objectType = + params['objectType'];
+                this.objectType = params['objectType'];
                 this.objectKey = + params['objectKey'];
 
                 this.selectQuery.rows = 100;

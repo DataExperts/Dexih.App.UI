@@ -235,7 +235,7 @@ setExternalLogin(externalLogin: ExternalLogin) {
                 if (!this.authService.redirectUrl) {
                   this.router.navigate(['/']);
                 } else {
-                  this.router.navigate([this.authService.redirectUrl]);
+                  this.router.navigateByUrl(this.authService.redirectUrl);
                 }
               } else {
                 this.router.navigate(['notInvited'], { queryParams: { email: user.email }, relativeTo: this.route.parent });

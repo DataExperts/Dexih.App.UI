@@ -1,4 +1,6 @@
-﻿using dexih.operations;
+﻿using System.Collections.Generic;
+using dexih.operations;
+using dexih.repository;
 
 namespace dexih.api.Models
 {
@@ -159,6 +161,53 @@ namespace dexih.api.Models
         public string message { get; set; }
         public string details { get; set; }
         public string context { get; set; }
+    }
+
+    public class RestartAgentsParameter
+    {
+        public IEnumerable<string> InstanceIds { get; set; }
+        public bool Force { get; set; }
+    }
+    
+    public class RemoteAgentUserToken
+    {
+        public string User { get; set; }
+        public string RemoteAgentId { get; set; }
+        public string UserToken { get; set; }
+    }
+
+    public class ReturnUser
+    {
+        public ReturnUser(ApplicationUser user)
+        {
+            Email = user.Email;
+            Subscription = user.Subscription;
+            Terms = user.Terms;
+            FirstName = user.FirstName;
+            HubQuota = user.HubQuota;
+            InviteQuota = user.InviteQuota;
+            IsAdmin = user.IsAdmin;
+            Id = user.Id;
+            IsRegistered = user.IsRegistered;
+            LastName = user.LastName;
+            UserRole = user.UserRole;
+            EmailConfirmed = user.EmailConfirmed;
+            UserName = user.UserName;
+
+        }
+        public string Email { get; set; }
+        public bool Subscription { get; set; }
+        public bool Terms { get; set; }
+        public string FirstName { get; set; }
+        public int HubQuota { get; set; }
+        public int InviteQuota { get; set; }
+        public bool IsAdmin { get; set; }
+        public string Id { get; set; }
+        public bool IsRegistered { get; set; }
+        public string LastName { get; set; }
+        public ApplicationUser.EUserRole UserRole { get; set; }
+        public bool EmailConfirmed { get; set; }
+        public string UserName { get; set; }
     }
 
 

@@ -60,7 +60,7 @@ namespace dexih.api.Controllers
 
 		[HttpPost("[action]")]
 		[ValidateHub(DexihHubUser.EPermission.FullReader)]
-		public async Task<GetHubCacheResult> GetHubCache([FromBody] HubKeyValue hubKey)
+		public async Task<GetHubCacheResult> GetHubCache([FromBody] HubModelBase hubKey)
 		{
 			_logger.LogTrace(LoggingEvents.HubGetHubCache, "HubController.GetHubCache: HubKey: {updateBrowserHub}",
 				hubKey.HubKey);
@@ -70,43 +70,38 @@ namespace dexih.api.Controllers
 
 		[HttpPost("[action]")]
 		[ValidateHub(DexihHubUser.EPermission.Owner)]
-		public Task<string> Decrypt([FromBody] DecryptValue decryptValue)
+		public Task<string> Decrypt([FromBody] HubValue<string> decryptValue)
 		{
-			_logger.LogTrace(LoggingEvents.HubDecrypt,
-				"HubController.Decrypt: HubKey: {updateBrowserHub}, Value: {value}.", decryptValue.HubKey,
-				decryptValue.Value);
+			_logger.LogTrace(LoggingEvents.HubDecrypt, "HubController.Decrypt: HubKey: {updateBrowserHub}, Value: {value}.", decryptValue.HubKey, decryptValue.Value);
 			var repositoryManager = _operations.RepositoryManager;
-			var result = _remoteAgents.Decrypt(decryptValue.RemoteAgentId, decryptValue.HubKey, decryptValue.Value,
-				repositoryManager);
+			var result = _remoteAgents.Decrypt(decryptValue.RemoteAgentId, decryptValue.HubKey, decryptValue.Value, repositoryManager);
 			return result;
 		}
 
-		[HttpPost("[action]")]
-		[ValidateHub(DexihHubUser.EPermission.Owner)]
-		public async Task<object> RunRemoteCommand([FromBody] RemoteMessage remoteMessage)
-		{
-			_logger.LogTrace(LoggingEvents.HubRunRemoteCommand,
-				"HubController.RunRemoteCommand: HubKey: {updateBrowserHub}, Method: {method}, Parameters: {parameters}.",
-				remoteMessage.HubKey, remoteMessage.Method, remoteMessage.GetParametersDetails());
-			var repositoryManager = _operations.RepositoryManager;
-			var result = await _remoteAgents.SendRemoteMessage<object>(remoteMessage.HubKey,
-				remoteMessage.RemoteAgentId, remoteMessage.Method, remoteMessage.Value, remoteMessage.Parameters,
-				repositoryManager);
-			return result;
-		}
-
-
+//		[HttpPost("[action]")]
+//		[ValidateHub(DexihHubUser.EPermission.Owner)]
+//		public async Task<object> RunRemoteCommand([FromBody] RemoteMessage remoteMessage)
+//		{
+//			_logger.LogTrace(LoggingEvents.HubRunRemoteCommand,
+//				"HubController.RunRemoteCommand: HubKey: {updateBrowserHub}, Method: {method}",
+//				remoteMessage.HubKey, remoteMessage.Method);
+//			var repositoryManager = _operations.RepositoryManager;
+//			var result = await _remoteAgents.SendRemoteMessage<object>(remoteMessage.HubKey,
+//				remoteMessage.RemoteAgentId, remoteMessage.Method, remoteMessage.Value, 
+//				repositoryManager);
+//			return result;
+//		}
+		
 		private Task<List<RepositoryManager.HubUser>> GetHubUsers(long hubKey)
 		{
 			var operations = _operations.RepositoryManager;
 			var result = operations.GetHubUsers(hubKey);
 			return result;
-
 		}
 
 		[HttpPost("[action]")]
 		[ValidateHub(DexihHubUser.EPermission.Owner)]
-		public Task<List<RepositoryManager.HubUser>> HubUsers([FromBody] HubKeyValue hubKeyValue)
+		public Task<List<RepositoryManager.HubUser>> HubUsers([FromBody] HubModelBase hubKeyValue)
 		{
 			return GetHubUsers(hubKeyValue.HubKey);
 		}
@@ -295,7 +290,7 @@ namespace dexih.api.Controllers
 		{
 			var database = _operations.RepositoryManager;
 			var result = await _remoteAgents.SendRemoteMessage<RemoteAgentStatus>(remoteAgentStatus.HubKey,
-				remoteAgentStatus.InstanceId, nameof(RemoteOperations.GetRemoteAgentStatus), null, null, database);
+				remoteAgentStatus.InstanceId, nameof(RemoteOperations.GetRemoteAgentStatus), null, database);
 			return result;
 		}
 
@@ -343,7 +338,7 @@ namespace dexih.api.Controllers
 
 		[HttpPost("[action]")]
 		[ValidateHub(DexihHubUser.EPermission.User)]
-		public async Task<DexihConnection> SaveConnection([FromBody] SaveConnection saveConnection)
+		public async Task<DexihConnection> SaveConnection([FromBody] HubValue<DexihConnection> saveConnection)
 		{
 			_logger.LogTrace(LoggingEvents.HubSaveConnection,
 				"HubController.SaveConnection: HubKey: {updateBrowserHub}.", saveConnection.HubKey);
@@ -411,6 +406,27 @@ namespace dexih.api.Controllers
 			var deleteResult =
 				_operations.RepositoryManager.DeleteConnections(hubKeyConnections.HubKey, hubKeyConnections.ItemKeys);
 			return deleteResult;
+		}
+		
+		[HttpPost("[action]")]
+		[ValidateHub(DexihHubUser.EPermission.Owner)]
+		public Task<string[]> RefreshConnection([FromBody] HubValue<DexihConnection> connection)
+		{
+			return _remoteAgents.Run<DexihConnection, string[]>(connection, nameof(RemoteOperations.RefreshConnection), _operations.RepositoryManager);
+		}
+		
+		[HttpPost("[action]")]
+		[ValidateHub(DexihHubUser.EPermission.Owner)]
+		public Task<DexihTable[]> DatabaseTableNames([FromBody] HubValue<DexihConnection> connection)
+		{
+			return _remoteAgents.Run<DexihConnection, DexihTable[]>(connection, nameof(RemoteOperations.DatabaseTableNames), _operations.RepositoryManager);
+		}
+		
+		[HttpPost("[action]")]
+		[ValidateHub(DexihHubUser.EPermission.Owner)]
+		public Task<bool> CreateDatabase([FromBody] HubValue<DexihConnection> connection)
+		{
+			return _remoteAgents.Run<DexihConnection,bool>(connection, nameof(RemoteOperations.CreateDatabase), _operations.RepositoryManager);
 		}
 
 		[HttpPost("[action]")]
@@ -555,7 +571,7 @@ namespace dexih.api.Controllers
 
 		[HttpPost("[action]")]
 		[ValidateHub(DexihHubUser.EPermission.User)]
-		public async Task<DexihTable> SaveTable([FromBody] SaveTable saveTable)
+		public async Task<DexihTable> SaveTable([FromBody] HubValue<DexihTable> saveTable)
 		{
 			_logger.LogTrace(LoggingEvents.HubSaveTable, "HubController.SaveTable: HubKey: {updateBrowserHub}",
 				saveTable.HubKey);
@@ -568,23 +584,13 @@ namespace dexih.api.Controllers
 
 		[HttpPost("[action]")]
 		[ValidateHub(DexihHubUser.EPermission.User)]
-		public Task DeleteTables([FromBody] DeleteTables deleteTables)
+		public Task DeleteTables([FromBody] HubKeyItems deleteTables)
 		{
 			_logger.LogTrace(LoggingEvents.HubDeleteTables, "HubController.DeleteTables: HubKey: {updateBrowserHub}",
 				deleteTables.HubKey);
 
 			var repositoryManager = _operations.RepositoryManager;
-			return repositoryManager.DeleteTables(deleteTables.HubKey, deleteTables.TableKeys);
-		}
-
-		[HttpPost("[action]")]
-		[ValidateHub(DexihHubUser.EPermission.User)]
-		public Task ShareTables([FromBody] ShareTables shareTables)
-		{
-			_logger.LogTrace(LoggingEvents.HubShareTables, "HubController.HubShareTables: HubKey: {updateBrowserHub}",
-				shareTables.HubKey);
-			var repositoryManager = _operations.RepositoryManager;
-			return repositoryManager.ShareTables(shareTables.HubKey, shareTables.TableKeys, shareTables.IsShared);
+			return repositoryManager.DeleteTables(deleteTables.HubKey, deleteTables.ItemKeys);
 		}
 
 		[HttpPost("[action]")]
@@ -629,6 +635,14 @@ namespace dexih.api.Controllers
 				previewDatalink.InputColumns, previewDatalink.InputParameters, previewDatalink.DownloadUrl,
 				repositoryManager);
 			return remoteServerResult;
+		}
+		
+		[HttpPost("[action]")]
+		[ValidateHub(DexihHubUser.EPermission.PublishReader)]
+		public Task<string> PreviewProfile([FromBody] PreviewProfile previewProfile)
+		{
+			return _remoteAgents.SendRemoteMessage<string>(previewProfile.HubKey, previewProfile.RemoteAgentId,
+				nameof(RemoteOperations.PreviewProfile), previewProfile, _operations.RepositoryManager);
 		}
 
 		[HttpPost("[action]")]
@@ -722,6 +736,16 @@ namespace dexih.api.Controllers
 	    }
 	    
 	    [HttpPost("[action]")]
+	    [ValidateHub(DexihHubUser.EPermission.FullReader)]
+	    public Task<string> PreviewAuditResults([FromBody] AuditResults auditResults)
+	    {
+		    _logger.LogTrace(LoggingEvents.HubPreviewView, "HubController.PreviewAuditResults: HubKey: {updateBrowserHub}", auditResults.HubKey);
+		    var repositoryManager = _operations.RepositoryManager;
+
+		    return _remoteAgents.PreviewAuditResults(auditResults, repositoryManager);
+	    }
+	    
+	    [HttpPost("[action]")]
 	    [ValidateHub(DexihHubUser.EPermission.User)]
 	    public Task<string[]> ImportFunctionMappings([FromBody] ImportFunctionMappings importFunctionMappings)
 	    {
@@ -769,17 +793,17 @@ namespace dexih.api.Controllers
 
         [HttpPost("[action]")]
         [ValidateHub(DexihHubUser.EPermission.User)]
-        public Task ShareDatalinks([FromBody] ShareDatalinks shareDatalinks)
+        public Task ShareItems([FromBody] ShareItems items)
         {
-            _logger.LogTrace(LoggingEvents.HubShareDatalinks, "HubController.HubShareDatalinks: HubKey: {updateBrowserHub}", shareDatalinks.HubKey);
+	        _logger.LogTrace(LoggingEvents.HubShareItems, "HubController.HubShareItems: HubKey: {updateBrowserHub}", items.HubKey);
 
-            var repositoryManager = _operations.RepositoryManager;
-            return repositoryManager.ShareDatalinks(shareDatalinks.HubKey, shareDatalinks.DatalinkKeys, shareDatalinks.IsShared);
+	        var repositoryManager = _operations.RepositoryManager;
+	        return repositoryManager.ShareItems(items.HubKey, items.Keys, items.ObjectType, items.IsShared);
         }
-
+        
         [HttpPost("[action]")]
         [ValidateHub(DexihHubUser.EPermission.User)]
-        public async Task<DexihDatalink> SaveDatalink([FromBody] SaveDatalink saveDatalink)
+        public async Task<DexihDatalink> SaveDatalink([FromBody] HubValue<DexihDatalink> saveDatalink)
         {
             var datalink = saveDatalink.Value;
 
@@ -802,7 +826,7 @@ namespace dexih.api.Controllers
 
         [HttpPost("[action]")]
         [ValidateHub(DexihHubUser.EPermission.User)]
-        public async Task<DexihDatajob> SaveDatajob([FromBody] SaveDatajob saveDatajob)
+        public async Task<DexihDatajob> SaveDatajob([FromBody] HubValue<DexihDatajob> saveDatajob)
         {
 			_logger.LogTrace(LoggingEvents.HubSaveDatajob, "HubController.SaveDatajobs: HubKey: {updateBrowserHub}", saveDatajob.HubKey);
 
@@ -823,7 +847,7 @@ namespace dexih.api.Controllers
 
         [HttpPost("[action]")]
         [ValidateHub(DexihHubUser.EPermission.User)]
-        public Task<DexihColumnValidation> SaveColumnValidation([FromBody] SaveValidation saveValidation)
+        public Task<DexihColumnValidation> SaveColumnValidation([FromBody] HubValue<DexihColumnValidation> saveValidation)
         {
 			_logger.LogTrace(LoggingEvents.HubSaveValidation, "HubController.SaveValidation: HubKey: {updateBrowserHub}, ColumnValidationKey {columnValidationName}.", saveValidation.HubKey, saveValidation.Value.Name);
 
@@ -832,6 +856,18 @@ namespace dexih.api.Controllers
 
             //send an update of the connection to any connected clients.
             return saveResult;
+        }
+        
+        [HttpPost("[action]")]
+        [ValidateHub(DexihHubUser.EPermission.Owner)]
+        public async Task<RemoteOperations.TestColumnValidationResult> TestColumnValidation([FromBody] ColumnValidationTest validation)
+        {
+	        var hub = await _operations.RepositoryManager.GetHub(validation.HubKey);
+	        var cache = new CacheManager(validation.HubKey, hub.EncryptionKey);
+	        await cache.LoadColumnValidationDependencies(validation.Value, _operations.RepositoryManager.DbContext);
+	        
+	        return await _remoteAgents.SendRemoteMessage<RemoteOperations.TestColumnValidationResult>(validation.HubKey, validation.RemoteAgentId, nameof(RemoteOperations.TestColumnValidation),
+	        new {cache, columnValidation = validation.Value, testValue = validation.TestValue}, _operations.RepositoryManager);
         }
 	    
 	    [HttpPost("[action]")]
@@ -846,7 +882,7 @@ namespace dexih.api.Controllers
 
 	    [HttpPost("[action]")]
 	    [ValidateHub(DexihHubUser.EPermission.User)]
-	    public Task<DexihCustomFunction> SaveCustomFunction([FromBody] SaveCustomFunction saveCustomFunction)
+	    public Task<DexihCustomFunction> SaveCustomFunction([FromBody] HubValue<DexihCustomFunction> saveCustomFunction)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubSaveCustomFunctions, "HubController.HubSaveCustomFunctions: HubKey: {updateBrowserHub}, CustomFunction {customFunctionName}.", saveCustomFunction.HubKey, saveCustomFunction.Value.Name);
 
@@ -855,6 +891,16 @@ namespace dexih.api.Controllers
 
 		    //send an update of the connection to any connected clients.
 		    return saveResult;
+	    }
+	    
+	    [HttpPost("[action]")]
+	    [ValidateHub(DexihHubUser.EPermission.Owner)]
+	    public async Task<IEnumerable<object>> TestCustomFunction([FromBody] CustomFunctionTest customFunction)
+	    {
+		    var hub = await _operations.RepositoryManager.GetHub(customFunction.HubKey);
+	        
+		    return await _remoteAgents.SendRemoteMessage<IEnumerable<object>>(customFunction.HubKey, customFunction.RemoteAgentId, nameof(RemoteOperations.TestCustomFunction),
+			    new {datalinkTransformItem = customFunction.Value, testValues = customFunction.TestValues}, _operations.RepositoryManager);
 	    }
 
         [HttpPost("[action]")]
@@ -869,7 +915,7 @@ namespace dexih.api.Controllers
 
         [HttpPost("[action]")]
         [ValidateHub(DexihHubUser.EPermission.User)]
-        public Task<DexihFileFormat> SaveFileFormat([FromBody] SaveFileFormat saveFileFormat)
+        public Task<DexihFileFormat> SaveFileFormat([FromBody] HubValue<DexihFileFormat> saveFileFormat)
         {
 			_logger.LogTrace(LoggingEvents.HubSaveFileformat, "HubController.SaveFileFormat: HubKey: {updateBrowserHub}", saveFileFormat.HubKey);
 
@@ -890,7 +936,7 @@ namespace dexih.api.Controllers
 
         [HttpPost("[action]")]
         [ValidateHub(DexihHubUser.EPermission.User)]
-        public async Task<DexihHubVariable> SaveHubVariable([FromBody] SaveHubVariable saveHubVariable)
+        public async Task<DexihHubVariable> SaveHubVariable([FromBody] HubValue<DexihHubVariable> saveHubVariable)
         {
             _logger.LogTrace(LoggingEvents.HubSaveHubVariable, "HubController.SaveHubVariable: HubKey: {updateBrowserHub}", saveHubVariable.HubKey);
 
@@ -926,7 +972,7 @@ namespace dexih.api.Controllers
 
 	    [HttpPost("[action]")]
 	    [ValidateHub(DexihHubUser.EPermission.User)]
-	    public Task<DexihView> SaveView([FromBody] SaveView saveView)
+	    public Task<DexihView> SaveView([FromBody] HubValue<DexihView> saveView)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubSaveViews, "HubController.SAveView: HubKey: {updateBrowserHub}", saveView.HubKey);
 
@@ -947,7 +993,7 @@ namespace dexih.api.Controllers
 
 	    [HttpPost("[action]")]
 	    [ValidateHub(DexihHubUser.EPermission.User)]
-	    public Task<DexihDashboard> SaveDashboard([FromBody] SaveDashboard saveDashboard)
+	    public Task<DexihDashboard> SaveDashboard([FromBody] HubValue<DexihDashboard> saveDashboard)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubSaveDashboards, "HubController.HubSaveDashboards: HubKey: {updateBrowserHub}", saveDashboard.HubKey);
 
@@ -968,7 +1014,7 @@ namespace dexih.api.Controllers
 
 	    [HttpPost("[action]")]
 	    [ValidateHub(DexihHubUser.EPermission.User)]
-	    public Task<DexihApi> SaveApi([FromBody] SaveApi saveApi)
+	    public Task<DexihApi> SaveApi([FromBody] HubValue<DexihApi> saveApi)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubSaveApis, "HubController.SaveApis: HubKey: {updateBrowserHub}", saveApi.HubKey);
 
@@ -997,7 +1043,7 @@ namespace dexih.api.Controllers
 		    return _remoteAgents.DeactivateApis(apis.RemoteAgentId, apis.HubKey, apis.ApiKeys, repositoryManager);
 	    }
 	    
-
+	    
 	    [HttpPost("[action]")]
 	    [ValidateHub(DexihHubUser.EPermission.User)]
 	    public async Task<string> UploadFile([FromBody] UploadFiles uploadFiles)
@@ -1012,8 +1058,57 @@ namespace dexih.api.Controllers
 			    throw new HubControllerException($"The table with the key {uploadFiles.TableKey} could not be found.");
 		    }
 		    
-		    return await _remoteAgents.UploadFile(uploadFiles.RemoteAgentId, uploadFiles.HubKey, uploadFiles.TableKey, uploadFiles.FileName, uploadFiles.DownloadUrl, _operations.RepositoryManager);
+		    return await _remoteAgents.UploadFile(uploadFiles.RemoteAgentId, uploadFiles.HubKey, uploadFiles.TableKey, uploadFiles.Path, uploadFiles.FileName, uploadFiles.DownloadUrl, _operations.RepositoryManager);
 	    }
+	    
+	    [HttpPost("[action]")]
+	    [ValidateHub(DexihHubUser.EPermission.Owner)]
+	    public async Task<bool> CreateFilePaths([FromBody] HubValue<DexihTable> table)
+	    {
+		    var hub = await _operations.RepositoryManager.GetHub(table.HubKey);
+		    var cache = new CacheManager(table.HubKey, hub.EncryptionKey);
+		    await cache.LoadTableDependencies(table.Value, _operations.RepositoryManager.DbContext);
+	        
+		    return await _remoteAgents.SendRemoteMessage<bool>(table.HubKey, table.RemoteAgentId, nameof(RemoteOperations.CreateFilePaths),
+			    new {cache, table = table.Value}, _operations.RepositoryManager);
+	    }
+	    
+	    [HttpPost("[action]")]
+	    [ValidateHub(DexihHubUser.EPermission.Owner)]
+	    public async Task<bool> MoveFiles([FromBody] MoveFiles table)
+	    {
+		    var hub = await _operations.RepositoryManager.GetHub(table.HubKey);
+		    var cache = new CacheManager(table.HubKey, hub.EncryptionKey);
+		    await cache.LoadTableDependencies(table.Value, _operations.RepositoryManager.DbContext);
+	        
+		    return await _remoteAgents.SendRemoteMessage<bool>(table.HubKey, table.RemoteAgentId, nameof(RemoteOperations.MoveFiles),
+			    new {cache, table = table.Value, fromPath = table.FromPath, toPath = table.ToPath, files = table.Files}, _operations.RepositoryManager);
+	    }
+	    
+	    [HttpPost("[action]")]
+	    [ValidateHub(DexihHubUser.EPermission.Owner)]
+	    public async Task<bool> DeleteFiles([FromBody] DeleteFiles table)
+	    {
+		    var hub = await _operations.RepositoryManager.GetHub(table.HubKey);
+		    var cache = new CacheManager(table.HubKey, hub.EncryptionKey);
+		    await cache.LoadTableDependencies(table.Value, _operations.RepositoryManager.DbContext);
+	        
+		    return await _remoteAgents.SendRemoteMessage<bool>(table.HubKey, table.RemoteAgentId, nameof(RemoteOperations.DeleteFiles),
+			    new {cache, table = table.Value, path = table.Path, files = table.Files}, _operations.RepositoryManager);
+	    }
+
+	    [HttpPost("[action]")]
+	    [ValidateHub(DexihHubUser.EPermission.Owner)]
+	    public async Task<List<DexihFileProperties>> GetFileList([FromBody] GetFileList table)
+	    {
+		    var hub = await _operations.RepositoryManager.GetHub(table.HubKey);
+		    var cache = new CacheManager(table.HubKey, hub.EncryptionKey);
+		    await cache.LoadTableDependencies(table.Value, _operations.RepositoryManager.DbContext);
+	        
+		    return await _remoteAgents.SendRemoteMessage<List<DexihFileProperties>>(table.HubKey, table.RemoteAgentId, nameof(RemoteOperations.GetFileList),
+			    new {cache, table = table.Value, path = table.Path}, _operations.RepositoryManager);
+	    }
+
 	    
 	    [HttpPost("[action]")]
 	    [ValidateHub(DexihHubUser.EPermission.User)]
@@ -1094,7 +1189,7 @@ namespace dexih.api.Controllers
 
 	    [HttpPost("[action]")]
 	    [ValidateHub(DexihHubUser.EPermission.User)]
-	    public async Task<DexihDatalinkTest> SaveDatalinkTest([FromBody] SaveDatalinkTest saveDatalinkTest)
+	    public async Task<DexihDatalinkTest> SaveDatalinkTest([FromBody] HubValue<DexihDatalinkTest> saveDatalinkTest)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubSaveHubVariable, "HubController.SaveDatalinkTest: HubKey: {updateBrowserHub}", saveDatalinkTest.HubKey);
 
@@ -1136,12 +1231,12 @@ namespace dexih.api.Controllers
 	    /// <returns></returns>
 	    [HttpPost("[action]")]
 	    [ValidateHub(DexihHubUser.EPermission.User)]
-	    public Task CancelDatalinkTests([FromBody] CancelDatalinkTests cancelDatalinkTests)
+	    public Task CancelDatalinkTests([FromBody] HubKeyItems cancelDatalinkTests)
 	    {
-		    _logger.LogTrace(LoggingEvents.HubCancelDatalinkTests, "HubController.CancelDatalinkTests: HubKey: {hubKey}, AuditKeys: {auditKeys}", cancelDatalinkTests.HubKey, string.Join(",", cancelDatalinkTests.DatalinkTestKeys));
+		    _logger.LogTrace(LoggingEvents.HubCancelDatalinkTests, "HubController.CancelDatalinkTests: HubKey: {hubKey}, AuditKeys: {auditKeys}", cancelDatalinkTests.HubKey, string.Join(",", cancelDatalinkTests.ItemKeys));
 
 		    var repositoryManager = _operations.RepositoryManager;
-		    return _remoteAgents.CancelDatalinkTests(cancelDatalinkTests.RemoteAgentId, cancelDatalinkTests.HubKey, cancelDatalinkTests.DatalinkTestKeys, repositoryManager);
+		    return _remoteAgents.CancelDatalinkTests(cancelDatalinkTests.RemoteAgentId, cancelDatalinkTests.HubKey, cancelDatalinkTests.ItemKeys, repositoryManager);
 	    }
 
 	    [HttpPost("[action]")]
@@ -1170,12 +1265,12 @@ namespace dexih.api.Controllers
         /// <returns></returns>
         [HttpPost("[action]")]
         [ValidateHub(DexihHubUser.EPermission.User)]
-        public Task CancelDatalinks([FromBody] CancelDatalinks cancelDatalinkKeys)
+        public Task CancelDatalinks([FromBody] HubKeyItems cancelDatalinkKeys)
         {
-            _logger.LogTrace(LoggingEvents.HubRunDatalinks, "HubController.CancelDatalinks: HubKey: {hubKey}, AuditKeys: {auditKeys}", cancelDatalinkKeys.HubKey, string.Join(",", cancelDatalinkKeys.DatalinkKeys));
+            _logger.LogTrace(LoggingEvents.HubRunDatalinks, "HubController.CancelDatalinks: HubKey: {hubKey}, AuditKeys: {auditKeys}", cancelDatalinkKeys.HubKey, string.Join(",", cancelDatalinkKeys.ItemKeys));
 
             var repositoryManager = _operations.RepositoryManager;
-            return _remoteAgents.CancelDatalinks(cancelDatalinkKeys.RemoteAgentId, cancelDatalinkKeys.HubKey, cancelDatalinkKeys.DatalinkKeys, repositoryManager);
+            return _remoteAgents.CancelDatalinks(cancelDatalinkKeys.RemoteAgentId, cancelDatalinkKeys.HubKey, cancelDatalinkKeys.ItemKeys, repositoryManager);
         }
 
         [HttpPost("[action]")]

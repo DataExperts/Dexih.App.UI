@@ -218,6 +218,7 @@
       <e p="RemoteOperations" t="Include">
         <e p="DownloadDataTask.cs" t="Include" />
         <e p="DownloadFilesTask.cs" t="Include" />
+        <e p="ERemoteCommands.cs" t="Include" />
         <e p="IRemoteOperations.cs" t="Include" />
         <e p="PostDataTask.cs" t="Include" />
         <e p="RemoteOperationException.cs" t="Include" />
@@ -276,7 +277,6 @@
           <e p="Models" t="Include">
             <e p="AccountModels.cs" t="Include" />
             <e p="AdminModels.cs" t="Include" />
-            <e p="FileCallBack.cs" t="Include" />
             <e p="HubModels.cs" t="Include" />
             <e p="LoggingEvents.cs" t="Include" />
             <e p="RemoteAgentModels.cs" t="Include" />
@@ -373,7 +373,6 @@
                 <e p="SocketRemoteAgentExceptions.cs" t="Include" />
               </e>
               <e p="IRemoteAgents.cs" t="Include" />
-              <e p="RemoteAgent.cs" t="Include" />
               <e p="RemoteAgentProperties.cs" t="Include" />
               <e p="RemoteAgents.cs" t="Include" />
               <e p="RemoteAuthenticationProvider.cs" t="Include" />
@@ -1329,6 +1328,8 @@
       <e p="ReaderMemory.cs" t="Include" />
       <e p="ReaderRowCreator.cs" t="Include" />
       <e p="ReaderSql.cs" t="Include" />
+      <e p="StreamAction.cs" t="Include" />
+      <e p="StreamAsyncAction.cs" t="Include" />
       <e p="StreamCsv.cs" t="Include" />
       <e p="StreamJson.cs" t="Include" />
       <e p="StreamJsonCompact.cs" t="Include" />

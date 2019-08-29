@@ -6,6 +6,7 @@ using Dexih.Utils.ManagedTasks;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using dexih.api.Models;
 using dexih.api.Services.Operations;
 using dexih.transforms;
 using Dexih.Utils.DataType;
@@ -17,9 +18,15 @@ namespace dexih.api.Services.Remote
     public interface IRemoteAgents
     {
 	    Task<T> SendRemoteMessage<T>(long hubKey, string instanceId, string method, object value,
-		    operations.KeyValuePair[] parameters, RepositoryManager repositoryManager,
+		    RepositoryManager repositoryManager,
 		    CancellationToken cancellationToken = default, bool awaitResponse = true);
 	    Task SetResponseMessage(string messageToken, RemoteMessage remoteMessage, CancellationToken cancellationToken);
+
+	    Task<Out> Run<In, Out>(HubValue<In> hubValue, string method, RepositoryManager repositoryManager,
+		    CancellationToken cancellationToken = default, bool awaitResponse = true);
+	    
+	    Task<string> SendRemoteCommand(long hubKey, string instanceId, string method, object value,
+		    RepositoryManager repositoryManager, CancellationToken cancellationToken = default);
 
 	    Task<(string instanceId, string securityToken)> AuthorizeRemoteAgent(string name, long remoteAgentKey,
 		    string encryptionKey, string ipAddress, string userId);
@@ -33,10 +40,13 @@ namespace dexih.api.Services.Remote
 	    Task DisconnectRemoteAgent(string instanceId, IDexihOperations operations);
 	    Task<string> Encrypt(string instanceId, long hubKey, string value, RepositoryManager database);
 		Task<string> Decrypt(string instanceId, long hubKey, string value, RepositoryManager database);
-	    Task<string> UploadFile(string instanceId, long hubKey, long tableKey, string fileName, DownloadUrl downloadUrl, RepositoryManager database);
+
+		Task<string> UploadFile(string id, long hubKey, long tableKey, EFlatFilePath path, string fileName,
+			DownloadUrl downloadUrl, RepositoryManager database);
 
 	    Task<(string url, string reference)> BulkUploadFiles(string id, long hubKey, string connectionId, long connectionKey, long fileFormatKey, DataType.ETypeCode formatType, string fileName,
 		    DownloadUrl downloadUrl, RepositoryManager database);
+
 	    Task<DexihTable[]> ImportTables(string instanceId, long hubKey, DexihTable[] hubTables,
 		    RepositoryManager repositoryManager);
 
@@ -48,6 +58,7 @@ namespace dexih.api.Services.Remote
 	    Task<string> PreviewTable(string instanceId, long hubKey, long tableKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, DownloadUrl downloadUrl, RepositoryManager database);
 	    Task<string> PreviewTable(string instanceId, long hubKey, DexihTable hubTable, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, DownloadUrl downloadUrl, RepositoryManager database);
 	    Task<string> PreviewDatalink(string instanceId, long hubKey, long datalinkKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters parameters, DownloadUrl downloadUrl, RepositoryManager database);
+	    Task<string> PreviewAuditResults(AuditResults auditResults, RepositoryManager database);
 
 	    Task<TransformProperties> DatalinkProperties(string id, long hubKey, long datalinkKey, SelectQuery selectQuery,
 		    InputColumn[] inputColumns, InputParameters parameters, RepositoryManager database);

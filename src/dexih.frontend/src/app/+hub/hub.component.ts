@@ -1,12 +1,11 @@
-import { Component, OnDestroy, OnInit, ViewChild, HostListener } from '@angular/core';
+import { Component, OnDestroy, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subscription, combineLatest} from 'rxjs';
+import { Subscription, combineLatest} from 'rxjs';
 
 import { AuthService } from '../+auth/auth.service';
-import { DexihMessageComponent } from '../shared/ui/dexihMessage';
-import { DexihHub, HubCache, eCacheStatus, DexihRemoteAgentHub } from './hub.models';
+import { DexihHub, HubCache, eCacheStatus } from './hub.models';
 import { HubService } from './hub.service';
-import { DexihActiveAgent } from '../+auth/auth.models';
+import { DexihActiveAgent, ePermission } from '../+auth/auth.models';
 
 @Component({
     selector: 'dexih-hub',
@@ -24,6 +23,7 @@ export class HubComponent implements OnInit, OnDestroy {
     remoteAgent: DexihActiveAgent;
 
     eCacheStatus = eCacheStatus;
+    ePermission = ePermission;
 
     webSocketStatus: string;
     openDelay = false; // used to pause the websocket error message displaying whilst a connect attempt occurs.
@@ -49,7 +49,6 @@ export class HubComponent implements OnInit, OnDestroy {
                 this.route.data,
                 this.route.params,
             ).subscribe(result => {
-                let data = result[0];
                 let params = result[1];
 
                 this.hubKey = + params['hubKey'];
@@ -86,7 +85,7 @@ export class HubComponent implements OnInit, OnDestroy {
     }
 
     @HostListener('window:focus', ['$event'])
-    onFocus(event: any): void {
+    onFocus(): void {
         this.openDelay = false;
         setTimeout(() => {
             this.openDelay = true;

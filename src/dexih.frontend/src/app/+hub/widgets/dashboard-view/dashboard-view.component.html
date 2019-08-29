@@ -1,0 +1,7 @@
+<div [routerLink]="['dashboard-edit', dashboard.key]" queryParamsHandling="merge">
+    <h5>{{dashboard.name}}</h5>
+    <div *ngIf="dashboard.description">
+        <markdown [data]="dashboard.description"></markdown>
+    </div>
+    <div class="note">Updated: {{dashboard.updateDate | date : 'short' }} </div>
+</div>

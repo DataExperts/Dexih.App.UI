@@ -1133,14 +1133,16 @@ export class HubFormsService implements OnDestroy {
 
   public customFunctionParametersFormGroup(parameter: DexihCustomFunctionParameter): FormGroup {
     const parameterForm = this.fb.group({
-      'name': [, [ // used for adding new columns
+      'name': [parameter.name, [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
       ]],
     });
 
     this.addMissing(parameter, parameterForm, new DexihCustomFunctionParameter());
     return parameterForm;
   }
-
 
   public hubVariable(hubVariable: DexihHubVariable) {
     const hubVariableForm = this.fb.group({

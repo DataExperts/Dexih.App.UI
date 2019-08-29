@@ -21,6 +21,7 @@ export class DashboardIndexComponent implements OnInit, OnDestroy {
     dashboards: Array<DexihDashboard>;
 
     columns = [
+        { iconClass: 'sharedIcon', tooltip: 'sharedToolTip', width: '1%', align: 'center' },
         { name: 'name', title: 'Name', footer: 'description', format: 'Md' },
         { name: 'updateDate', title: 'Last Updated', format: 'Date' },
     ];
@@ -74,7 +75,16 @@ export class DashboardIndexComponent implements OnInit, OnDestroy {
         if (this.hubCache && this.hubCache.isLoaded()) {
             let dashboards: Array<DexihDashboard>;
             dashboards = this.hubCache.hub.dexihDashboards.filter(c => c.isValid);
-            this._tableData.next(dashboards);
+            let tableData = dashboards.map(dashboard => {
+                return {
+                    key: dashboard.key,
+                    name: dashboard.name,
+                    updateDate: dashboard.updateDate,
+                    sharedIcon: dashboard.isShared ? 'fa fa-group' : 'fa fa-user-secret',
+                    sharedToolTip: dashboard.isShared ? 'Table is shared' : 'Table is private'
+                };
+            });
+            this._tableData.next(tableData);
         } else {
             this._tableData.next(null);
         }

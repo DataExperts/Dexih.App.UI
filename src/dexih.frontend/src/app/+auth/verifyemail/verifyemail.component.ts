@@ -54,7 +54,7 @@ export class VerifyEmailComponent implements OnInit, OnDestroy {
                     if (!this.userService.redirectUrl) {
                         this.router.navigate(['/']);
                     } else {
-                        this.router.navigate([this.userService.redirectUrl]);
+                      this.router.navigateByUrl(this.userService.redirectUrl);
                     }
                 } else {
                     this.router.navigate(['notInvited'], { queryParams: { email: user.email}, relativeTo: this.route.parent });

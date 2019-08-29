@@ -37,6 +37,7 @@
 		public const int ActivateApis = 1032;
 		public const int DeactivateApis = 1033;
 		public const int DatalinkProperties = 1034;
+		public const int PreviewAuditResults = 1035;
 
         public const int SocketRemoteAgentNew = 2000;
 		public const int SocketRemoteAgentStart = 2001;
@@ -85,8 +86,7 @@
 		public const int HubDeactivateDatajobs = 4026;
 		public const int HubClearTables = 4027;
 		public const int HubPreviewDatalink = 4028;
-        public const int HubShareTables = 4029;
-        public const int HubShareDatalinks = 4030;
+        public const int HubShareItems = 4030;
         public const int HubCreateTables = 4031;
         public const int HubSaveHubVariable = 4032;
         public const int HubDeleteHubVariables = 4033;

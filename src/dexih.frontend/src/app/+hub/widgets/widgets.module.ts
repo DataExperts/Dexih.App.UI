@@ -19,6 +19,8 @@ import { TransformPropertiesItemComponent } from './transform-properties/transfo
 import { PreviewDataComponent } from './preview-data/preview-data.component';
 import { PreviewViewComponent } from './preview-view/preview-view.component';
 import { InputParametersComponent } from './input-parameters/input-parameters.component'
+import { DashboardViewComponent } from './dashboard-view/dashboard-view.component';
+
 @NgModule({
     imports: [
         SharedModule,
@@ -39,6 +41,7 @@ import { InputParametersComponent } from './input-parameters/input-parameters.co
         ViewViewComponent,
         ApiViewComponent,
         ApiStatusComponent,
+        DashboardViewComponent,
         RemoteAgentViewComponent,
         TransformPropertiesComponent, TransformPropertiesItemComponent,
         PreviewDataComponent,
@@ -57,6 +60,7 @@ import { InputParametersComponent } from './input-parameters/input-parameters.co
         ViewViewComponent,
         ApiViewComponent,
         ApiStatusComponent,
+        DashboardViewComponent,
         RemoteAgentViewComponent,
         TransformPropertiesComponent, TransformPropertiesItemComponent,
         PreviewDataComponent,

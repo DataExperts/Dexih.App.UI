@@ -11,8 +11,8 @@
                         <i class="fa fa-copy"></i> Copy
                 </a>
             </li>
-            <li *ngIf="hubCache.canWrite && showEdit"><a class="dropdown-item" (click)="shareSelectedDatalinks(true)" title="Select the selected datalinks as shared."><i class="fa fa-group"></i> Share</a></li>
-            <li *ngIf="hubCache.canWrite && showEdit"><a class="dropdown-item" (click)="shareSelectedDatalinks(false)" title="Select the selected datalinks as private."><i class="fa fa-user-secret"></i> Private</a></li>
+            <li *ngIf="hubCache.canWrite && showEdit"><a class="dropdown-item" (click)="shareItems(true)" title="Select the selected datalinks as shared."><i class="fa fa-group"></i> Share</a></li>
+            <li *ngIf="hubCache.canWrite && showEdit"><a class="dropdown-item" (click)="shareItems(false)" title="Select the selected datalinks as private."><i class="fa fa-user-secret"></i> Private</a></li>
             <li *ngIf="hubCache.canWrite"><a class="dropdown-item" (click)="createDatajob()" title="Create data job from selected datalinks"><i class="fa fa-calendar"></i> New Datajob</a></li>
             <li *ngIf="hubCache.canWrite"><a class="dropdown-item" (click)="createDatalinkTests()" title="Create test from the selected datalinks"><i class="fa fa-calendar"></i> New Datalink Tests</a></li>
 

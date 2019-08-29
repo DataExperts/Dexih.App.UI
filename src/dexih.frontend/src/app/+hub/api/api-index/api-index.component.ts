@@ -21,6 +21,7 @@ export class ApiIndexComponent implements OnInit, OnDestroy {
     views: Array<DexihApi>;
 
     columns = [
+        { iconClass: 'sharedIcon', tooltip: 'sharedToolTip', width: '1%', align: 'center' },
         { name: 'name', title: 'Name', footer: 'description', format: 'Md' },
         { name: 'apiSource', title: 'Api Source' },
         { name: 'updateDate', title: 'Last Updated', format: 'Date' },
@@ -83,6 +84,8 @@ export class ApiIndexComponent implements OnInit, OnDestroy {
                     name: api.name,
                     apiSource: this.getSourceDetails(api),
                     updateDate: api.updateDate,
+                    sharedIcon: api.isShared ? 'fa fa-group' : 'fa fa-user-secret',
+                    sharedToolTip: api.isShared ? 'Table is shared' : 'Table is private'
                 };
             });
             this._tableData.next(tableData);

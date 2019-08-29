@@ -72,9 +72,13 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
         this.action = data['action'];
         this.pageTitle = data['pageTitle'];
 
+        if (!this.hubCache.isLoaded()) {
+          return;
+        }
+
         this.variables = this.hubCache.hub.dexihHubVariables.map(c => '{' + c.name + '}');
 
-        if (this.hubCache.isLoaded() && this.remoteLibraries) {
+        if (this.remoteLibraries) {
           if (!this.hubCache || this.hubCache.status !== eCacheStatus.Loaded || this.isLoaded) { return; }
           this.isLoaded = true;
 

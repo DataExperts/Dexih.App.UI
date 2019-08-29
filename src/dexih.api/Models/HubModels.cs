@@ -1,9 +1,12 @@
-﻿using dexih.operations;
+﻿using System;
+using dexih.operations;
 using dexih.repository;
 using dexih.functions;
 using dexih.functions.Query;
+using dexih.transforms;
 using Dexih.Utils.Crypto;
 using Dexih.Utils.DataType;
+using Microsoft.AspNetCore.SignalR;
 using static dexih.operations.DownloadData;
 
 namespace dexih.api.Models
@@ -21,12 +24,13 @@ namespace dexih.api.Models
         public string[] Emails { get; set; }
         public bool SendInvites { get; set; }
     }
-    
-    public class HubKeyValue
+
+    public class HubModelBase
     {
         public long HubKey { get; set; }
-        public string Value { get; set; }
+        public string RemoteAgentId { get; set; }
     }
+    
 
     public class GetHubCacheResult
     {
@@ -34,76 +38,41 @@ namespace dexih.api.Models
         public DexihHub Hub { get; set; }
     }
 
-    public class SaveConnection
-    {
-        public long HubKey { get; set; }
-        public string RemoteAgentId { get; set; }
-        public DexihConnection Value { get; set; }
-    }
-
-	public class DecryptValue
-	{
-		public long HubKey { get; set; }
-		public string RemoteAgentId { get; set; }
-		public string Value { get; set; }
-	}
-
-    public class SaveValidation
-    {
-        public long HubKey { get; set; }
-        public string RemoteAgentId { get; set; }
-        public DexihColumnValidation Value { get; set; }
-    }
-
-    public class SaveCustomFunction
-    {
-        public long HubKey { get; set; }
-        public string RemoteAgentId { get; set; }
-        public DexihCustomFunction Value { get; set; }
-    }
-
-    public class SaveFileFormat
-    {
-        public long HubKey { get; set; }
-        public string RemoteAgentId { get; set; }
-        public DexihFileFormat Value { get; set; }
-    }
-
-    public class SaveView
-    {
-        public long HubKey { get; set; }
-        public string RemoteAgentId { get; set; }
-        public DexihView Value { get; set; }
-    }
-
-    public class SaveDashboard
-    {
-        public long HubKey { get; set; }
-        public string RemoteAgentId { get; set; }
-        public DexihDashboard Value { get; set; }
-    }
-
-    public class SaveApi
-    {
-        public long HubKey { get; set; }
-        public string RemoteAgentId { get; set; }
-        public DexihApi Value { get; set; }
-    }
-
-    public class SaveHubVariable
-    {
-        public long HubKey { get; set; }
-        public string RemoteAgentId { get; set; }
-        public DexihHubVariable Value { get; set; }
-    }
     
-    public class SaveDatalinkTest
+    public class HubValue<T> : HubModelBase
     {
-        public long HubKey { get; set; }
-        public string RemoteAgentId { get; set; }
-        public DexihDatalinkTest Value { get; set; }
+        public T Value { get; set; }    
     }
 
+    public class ColumnValidationTest : HubValue<DexihColumnValidation>
+    {
+        public object TestValue;
+    }
+
+    public class CustomFunctionTest : HubValue<DexihDatalinkTransformItem>
+    {
+        public object[] TestValues;
+    }
+
+    public class MoveFiles : HubValue<DexihTable>
+    {
+        public EFlatFilePath FromPath { get; set; }
+        public EFlatFilePath ToPath { get; set; }
+        public string[] Files { get; set; }
+    }
+
+    public class DeleteFiles : HubValue<DexihTable>
+    {
+        public EFlatFilePath Path { get; set; }
+        public string[] Files { get; set; }
+    }
+
+    public class GetFileList : HubValue<DexihTable>
+    {
+        public EFlatFilePath Path { get; set; }
+    }
+
+    
     public class NewDatalinkTest
     {
         public long HubKey { get; set; }
@@ -117,62 +86,44 @@ namespace dexih.api.Models
         public bool SnapshotData { get; set; }
     }
 
-    public class HubKeyItems
+    public class HubKeyItems: HubModelBase
     {
-        public long HubKey {get; set;}
-        public string RemoteAgentId { get; set; }
         public long[] ItemKeys {get;set;}
     }
 
-    public class ShareDatalinks
+
+    public class ShareItems: HubModelBase
     {
-        public long HubKey { get; set; }
-        public string RemoteAgentId { get; set; }
-        public long[] DatalinkKeys { get; set; }
+        public long[] Keys { get; set; }
+        public SharedData.EObjectType ObjectType { get; set; }
         public bool IsShared { get; set; }
     }
 
-    public class ImportTables
+    
+    public class ImportTables: HubModelBase
     {
-        public long HubKey { get; set; }
-        public string RemoteAgentId { get; set; }
         public DexihTable[] Tables { get; set; }
         public bool Save { get; set; }
     }
 
-    public class CreateTables
+    public class CreateTables: HubModelBase
     {
-        public long HubKey { get; set; }
-        public string RemoteAgentId { get; set; }
         public DexihTable[] Tables { get; set; }
         public bool dropTables { get; set; }
     }
 
-    public class ImportFileFormat
-    {
-        public long HubKey { get; set; }
-        public string RemoteAgentId { get; set; }
-        public string Table { get; set; }
-        public DexihTable TableObj {
-            get { return string.IsNullOrEmpty(Table) ? null : Json.DeserializeObject<DexihTable>(Table, null); }
-        }
-        public bool Save { get; set; }
-    }
 
-	public class UploadFiles
+	public class UploadFiles: HubModelBase
 	{
-		public long HubKey { get; set; }
-		public string RemoteAgentId { get; set; }
 		public long ConnectionKey { get; set; }
 		public long TableKey { get; set; }
 	    public string FileName { get; set; }
+        public EFlatFilePath Path { get; set; }
 	    public DownloadUrl DownloadUrl { get; set; }
 	}
 
-    public class BulkUploadFiles
+    public class BulkUploadFiles: HubModelBase
     {
-        public long HubKey { get; set; }
-        public string RemoteAgentId { get; set; }
         public long ConnectionKey { get; set; }
         public long FileFormatKey { get; set; }
         public DataType.ETypeCode FormatType { get; set; }
@@ -187,84 +138,65 @@ namespace dexih.api.Models
         public string Reference;
     }
 
-    public class DownloadFiles
+    public class DownloadFiles: HubModelBase
     {
-        public long HubKey { get; set; }
         public string ConnectionId { get; set; }
-        public string RemoteAgentId { get; set; }
         public long TableKey { get; set; }
         public EFlatFilePath Path { get; set; }
         public string[] Files { get; set; }
         public DownloadUrl DownloadUrl { get; set; }
     }
 
-    public class DeleteTables
+    public class ImportFileFormat
     {
         public long HubKey { get; set; }
-        public long[] TableKeys { get; set; }
+        public string RemoteAgentId { get; set; }
+        public string Table { get; set; }
+        public DexihTable TableObj {
+            get { return string.IsNullOrEmpty(Table) ? null : Json.DeserializeObject<DexihTable>(Table, null); }
+        }
+        public bool Save { get; set; }
     }
-
-    public class ShareTables
+    
+    public class PreviewProfile: HubModelBase
     {
-        public long HubKey { get; set; }
-        public long[] TableKeys { get; set; }
-        public bool IsShared { get; set; }
+        public long AuditKey { get; set; }
+        public string ProfileTableName { get; set; }
+        public DexihConnection Connection { get; set; }
+        public bool SummaryOnly { get; set; }
+        public DownloadUrl DownloadUrl { get; set; }
+        
     }
 
-    public class SaveTable
+    
+    public class PreviewBase: HubModelBase
     {
-        public long HubKey { get; set; }
-        public DexihTable Value { get; set; }
-    }
-
-    public class SaveDatalink
-    {
-        public long HubKey { get; set; }
-        public DexihDatalink Value { get; set; }
-    }
-
-    public class PreviewTable
-	{
-		public long HubKey { get; set; }
-		public string RemoteAgentId { get; set; }
-		public long TableKey { get; set; }
-		public SelectQuery SelectQuery { get; set; }
-		public bool ShowRejectedData { get; set; }
-	    public DownloadUrl DownloadUrl { get; set; }
-	    public InputColumn[] InputColumns { get; set; }
+        public SelectQuery SelectQuery { get; set; }
+        public DownloadUrl DownloadUrl { get; set; }
+        public InputColumn[] InputColumns { get; set; }
         public InputParameters InputParameters { get; set; }
+    }
+    
+    public class PreviewTable: PreviewBase
+	{
+		public long TableKey { get; set; }
+		public bool ShowRejectedData { get; set; }
 	}
     
-    public class PreviewTableQuery
+    public class PreviewTableQuery: PreviewBase
     {
-        public long HubKey { get; set; }
-        public string RemoteAgentId { get; set; }
         public DexihTable Table { get; set; }
-        public SelectQuery SelectQuery { get; set; }
         public bool ShowRejectedData { get; set; }
-        public DownloadUrl DownloadUrl { get; set; }
-        public InputColumn[] InputColumns { get; set; }
-        public InputParameters InputParameters { get; set; }
     }
     
-    public class PreviewDatalink
+    public class PreviewDatalink: PreviewBase
     {
-        public long HubKey { get; set; }
-        public string RemoteAgentId { get; set; }
         public long DatalinkKey { get; set; }
-        public SelectQuery SelectQuery { get; set; }
-        public DownloadUrl DownloadUrl { get; set; }
-        public InputColumn[] InputColumns { get; set; }
-        public InputParameters InputParameters { get; set; }
     }
 
-    public class PreviewDashboard
+    public class PreviewDashboard: PreviewBase
     {
-        public long HubKey { get; set; }
-        public string RemoteAgentId { get; set; }
         public DexihDashboard Dashboard { get; set; }
-        public DownloadUrl DownloadUrl { get; set; }
-        public InputParameters InputParameters { get; set; }
     }
 
     public class DashboardUrls
@@ -273,43 +205,47 @@ namespace dexih.api.Models
         public string DownloadUrl { get; set; }
     }
 
-    public class PreviewView
+    public class PreviewView: PreviewBase
     {
-        public long HubKey { get; set; }
-        public string RemoteAgentId { get; set; }
         public DexihView View { get; set; }
-        public DownloadUrl DownloadUrl { get; set; }
-        public InputColumn[] InputColumns { get; set; }
-        public InputParameters InputParameters { get; set; }
 
     }
-
-    public class PreviewTransform
+    
+    public class AuditResults: HubModelBase
     {
-        public long HubKey { get; set; }
-        public string RemoteAgentId { get; set; }
+
+        public long[] ConnectionKeys { get; set; }
+        public long[] ReferenceKeys { get; set; }
+        public string AuditType { get; set; }
+        public long? AuditKey { get; set; }
+        public TransformWriterResult.ERunStatus? RunStatus { get; set; }
+        public bool? PreviousResult { get; set; }
+        public bool? PreviousSuccessResult { get; set; }
+        public bool? CurrentResult { get; set; }
+        public DateTime? StartTime { get; set; }
+        public int? Rows { get; set; }
+        public long? ParentAuditKey { get; set; }
+        public bool? ChildItems { get; set; }
+        public DownloadUrl DownloadUrl { get; set; }
+    }
+
+
+    public class PreviewTransform: PreviewBase
+    {
         public DexihDatalink Datalink { get; set; }
         public long DatalinkTransformKey { get; set; }
-        public SelectQuery SelectQuery { get; set; }
-        public DownloadUrl DownloadUrl { get; set; }
-        public InputColumn[] InputColumns { get; set; }
-        public InputParameters InputParameters { get; set; }
 
     }
 
-    public class ImportFunctionMappings
+    public class ImportFunctionMappings: HubModelBase
     {
-        public long HubKey { get; set; }
-        public string RemoteAgentId { get; set; }
         public DexihDatalink Datalink { get; set; }
         public long DatalinkTransformKey { get; set; }
         public DexihDatalinkTransformItem DatalinkTransformItem { get; set; }
     }
 
-    public class NewDatalinks
+    public class NewDatalinks: HubModelBase
     {
-        public long HubKey { get; set; }
-        public string RemoteAgentId { get; set; }
         public long[] SourceTableKeys { get; set; }
         public string DatalinkName { get; set; }
         public DexihDatalink.EDatalinkType DatalinkType { get; set; }
@@ -320,74 +256,40 @@ namespace dexih.api.Models
         public bool AddSourceColumns { get; set; }
         public TableColumn.EDeltaType[] AuditColumns { get; set; }
     }
-
-    public class DeleteDatalinks
+    
+    public class DownloadTableDataModel: PreviewBase
     {
-        public long HubKey { get; set; }
-        public long[] DatalinkKeys { get; set; }
-    }
-
-    public class SaveDatajob
-    {
-        public long HubKey { get; set; }
-        public DexihDatajob Value { get; set; }
-    }
-
-    public class DownloadTableDataModel
-    {
-        public long HubKey { get; set; }
-        public string RemoteAgentId { get; set; }
         public string ConnectionId { get; set; }
         public EDownloadFormat DownloadFormat { get; set; }
         public bool ZipFiles { get; set; }
         public DexihTable Table { get; set; }
         public InputColumn[] InputTableColumns { get; set; }
-        public SelectQuery SelectQuery { get; set; }
-        public InputParameters InputParameters { get; set; }
         public bool RejectedTable { get; set; }
-        public DownloadUrl DownloadUrl { get; set; }
     }
 
-    public class DownloadDatalinkDataModel
+    public class DownloadDatalinkDataModel: PreviewBase
     {
-        public long HubKey { get; set; }
-        public string RemoteAgentId { get; set; }
         public string ConnectionId { get; set; }
         public EDownloadFormat DownloadFormat { get; set; }
         public bool ZipFiles { get; set; }
         public DexihDatalink Datalink { get; set; }
         public long DatalinkTransformKey { get; set; }
         public InputColumn[] InputTableColumns { get; set; }
-        public InputParameters InputParameters { get; set; }
-        public SelectQuery SelectQuery { get; set; }
-        public DownloadUrl DownloadUrl { get; set; }
     }
 
-    public class DownloadDataModel
+    public class DownloadDataModel: HubModelBase
     {
-        public long HubKey { get; set; }
-        public string RemoteAgentId { get; set; }
         public string ConnectionId { get; set; }
         public EDownloadFormat DownloadFormat { get; set; }
         public bool ZipFiles { get; set; }
         public DownloadObject[] DownloadObjects { get; set; }
         public DownloadUrl DownloadUrl { get; set; }
     }
-
-    public class FileStreamModel
-    {
-        public long HubKey { get; set; }
-        public string SecurityToken { get; set; }
-        public string FileReference { get; set; }
-        public EDownloadFormat DownloadFormat { get; set; } = EDownloadFormat.Json;
-        public DownloadUrl DownloadUrl { get; set; }
-    }
     
-    public class RunDatalinks
+    
+    public class RunDatalinks: HubModelBase
     {
-        public long HubKey {get; set;}
         public string ConnectionId { get; set; }
-        public string RemoteAgentId { get; set; }
         public long[] DatalinkKeys {get;set;}
         public bool TruncateTarget { get; set; }
         public bool ResetIncremental { get; set; }
@@ -396,26 +298,15 @@ namespace dexih.api.Models
         public InputParameters InputParameters { get; set; }
     }
 
-    public class RunDatalinkTests
+    public class RunDatalinkTests: HubModelBase
     {
-        public long HubKey {get; set;}
         public string ConnectionId { get; set; }
-        public string RemoteAgentId { get; set; }
         public long[] DatalinkTestKeys {get;set;}
     }
     
-    public class CancelDatalinkTests
+    public class RunDatajobs: HubModelBase
     {
-        public long HubKey { get; set; }
-        public string RemoteAgentId { get; set; }
-        public long[] DatalinkTestKeys { get; set; }
-    }
-
-    public class RunDatajobs
-    {
-        public long HubKey {get; set;}
         public string ConnectionId { get; set; }
-        public string RemoteAgentId { get; set; }
         public long[] DatajobKeys {get;set;}
         public bool TruncateTarget { get; set; }
         public bool ResetIncremental { get; set; }
@@ -423,26 +314,16 @@ namespace dexih.api.Models
         public InputParameters InputParameters { get; set; }
     }
 
-    public class CancelDatalinks
+   
+    public class ActivateDatajobs: HubModelBase
     {
-        public long HubKey { get; set; }
-        public string RemoteAgentId { get; set; }
-        public long[] DatalinkKeys { get; set; }
-    }
-    
-    public class ActivateDatajobs
-    {
-        public long HubKey {get; set;}
-        public string RemoteAgentId { get; set; }
         public string ConnectionId { get; set; }
         public long[] DatajobKeys {get;set;}
         public InputParameters InputParameters { get; set; }
     }
 
-    public class ActivateApis
+    public class ActivateApis: HubModelBase
     {
-        public long HubKey {get; set;}
-        public string RemoteAgentId { get; set; }
         public string ConnectionId { get; set; }
         public long[] ApiKeys {get;set;}
         public InputParameters InputParameters { get; set; }

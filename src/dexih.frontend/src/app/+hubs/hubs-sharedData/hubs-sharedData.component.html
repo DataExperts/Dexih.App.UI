@@ -3,58 +3,50 @@
 </div>
 
 <div class="container-fluid">
-    <div class="alert alert-info ">
-        <h3>Welcome to the Information Hub.</h3>
-        <h5>Select from the following shared data sets</h5>
-    </div>
+    <dexih-widget title="Shared Data Index" iconClass="fa fa-lg fa-fw fa-life-saver">
+        <form [formGroup]="searchForm" class="p-3">
+            <fieldset>
+                <div class="form-row">
+                    <section class="col">
+                        <form-input label="Search Term" formControlName="searchString" placeholder="Search..."
+                            iconClass="fa fa-search">
+                        </form-input>
+                    </section>
+                    <section class="col">
+                        <form-tags-dropdown label="Hubs to filter by" formControlName="hubKeys" [items]="hubs"
+                            itemKey="hubKey" itemName="name" [enableAddAll]="true">
+                        </form-tags-dropdown>
+                    </section>
+                </div>
+            </fieldset>
+        </form>
 
+        <dexih-table [enableMultiSelect]="true" [enableFilter]="false" [columns]="columns" [data]="dataIndex">
+            <ng-template #selectedItemAction select="selectedItemAction" let-item="item">
+                <dexih-button-preview [routerLink]="['preview', item.hubKey, item.objectType, item.objectKey]">
+                </dexih-button-preview>
+            </ng-template>
 
-    <div>
-        <dexih-widget title="Shared Data Index" iconClass="fa fa-lg fa-fw fa-life-saver">
-            <form [formGroup]="searchForm" class="p-3">
-                <fieldset>
-                    <div class="form-row">
-                        <section class="col">
-                            <form-input label="Search Term" formControlName="searchString" placeholder="Search..."
-                                iconClass="fa fa-search">
-                            </form-input>
-                        </section>
-                        <section class="col">
-                            <form-tags-dropdown label="Hubs to filter by" formControlName="hubKeys" [items]="hubs"
-                                itemKey="hubKey" itemName="name" [enableAddAll]="true">
-                            </form-tags-dropdown>
-                        </section>
-                    </div>
-                </fieldset>
-            </form>
+            <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+                <download-button class="ml-1" (download)="downloadData(items, true, $event)"></download-button>
+            </ng-template>
 
-            <dexih-table [enableMultiSelect]="true" [enableFilter]="false" [columns]="columns" [data]="dataIndex">
-                <ng-template #selectedItemAction select="selectedItemAction" let-item="item">
-                    <dexih-button-preview [routerLink]="['preview', item.hubKey, item.objectType, item.objectKey]">
-                    </dexih-button-preview>
-                </ng-template>
-
-                <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-                    <download-button class="ml-1" (download)="downloadData(items, true, $event)"></download-button>
-                </ng-template>
-
-                <ng-template #rowAction let-item="item">
-                    <div *ngFor="let column of item.inputColumns; let i = index" class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                {{column.logicalName}}
-                            </div>
+            <ng-template #rowAction let-item="item">
+                <div *ngFor="let column of item.inputColumns; let i = index" class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            {{column.logicalName}}
                         </div>
-                        <form-input name="column{{i}}" class="form-control p-0" [placeholder]="column.logicalName"
-                            [(ngModel)]="column.defaultValue" [border]="false"></form-input>
                     </div>
-                    <div class="input-group mt-1 pull-right">
-                        <dexih-button-preview (click)="previewData(item)"></dexih-button-preview>
-                        <download-button class="ml-1" (download)="downloadData([item], true, $event)"></download-button>
-                    </div>
-                </ng-template>
+                    <form-input name="column{{i}}" class="form-control p-0" [placeholder]="column.logicalName"
+                        [(ngModel)]="column.defaultValue" [border]="false"></form-input>
+                </div>
+                <div class="input-group mt-1 pull-right">
+                    <dexih-button-preview (click)="previewData(item)"></dexih-button-preview>
+                    <download-button class="ml-1" (download)="downloadData([item], true, $event)"></download-button>
+                </div>
+            </ng-template>
 
-            </dexih-table>
-        </dexih-widget>
-    </div>
+        </dexih-table>
+    </dexih-widget>
 </div>

@@ -7,6 +7,9 @@
                 <a class="dropdown-item" [routerLink]="['api-edit', apis[0].key]" queryParamsHandling="merge"><i class="fa fa-edit"></i> Edit</a>
             </li>
 
+            <li *ngIf="hubCache.canWrite && showEdit"><a class="dropdown-item" (click)="shareItems(true)" title="Select the selected items as shared."><i class="fa fa-group"></i> Share</a></li>
+            <li *ngIf="hubCache.canWrite && showEdit"><a class="dropdown-item" (click)="shareItems(false)" title="Select the selected items as private."><i class="fa fa-user-secret"></i> Private</a></li>
+
             <li><a class="dropdown-item" (click)="export()" title="Export the metadata for the selected apis to a local file."><i class="fa fa-save"></i> Save Locally</a></li>
             <li *ngIf="hubCache.canWrite"><a class="dropdown-item" (click)="delete()" title="Delete the metadata for the selected apis."><span class="text-danger"><i class="fa fa-trash-o text-danger"></i> Delete</span></a></li>
     

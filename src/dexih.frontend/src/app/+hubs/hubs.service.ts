@@ -1,6 +1,6 @@
 import { ManagedTask, Message, DexihActiveAgent, DexihRemoteAgent } from '../+auth/auth.models';
 import { eLogLevel, LogFactory } from '../../logging';
-import { DexihHub, eObjectType, SharedData, Table, DexihTableColumn, DexihColumnBase, InputColumn, eViewSource } from '../+hub/hub.models';
+import { DexihHub, eObjectType, SharedData, Table, DexihTableColumn, DexihColumnBase, InputColumn, eViewSource, eSharedDataObjectType } from '../+hub/hub.models';
 import { SelectQuery } from '../+hub/hub.query.models';
 import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../+auth/auth.service';
@@ -127,7 +127,8 @@ export class HubsService implements OnDestroy {
     }
 
     // starts a preview, and returns the url to get the download stream.
-    previewDataUrl(hubKey: number, objectKey: number, objectType: eViewSource, inputColumns: InputColumn[], selectQuery: SelectQuery):
+    previewDataUrl(hubKey: number, objectKey: number, objectType: eSharedDataObjectType,
+        inputColumns: InputColumn[], selectQuery: SelectQuery):
         Promise<string> {
         return new Promise<string>((resolve, reject) => {
             this.authService.post('/api/SharedData/GetActiveAgent', { hubKey: hubKey }, 'Getting active remote agent...')

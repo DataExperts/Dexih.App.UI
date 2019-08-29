@@ -25,7 +25,7 @@
 					<li *ngFor="let searchResult of searchResults" class="list-group-item">
 						<div>
 							<h5>{{searchResult.objectType | objectTypeName }}</h5>
-							<h6>Last updated: {{searchResult.object.updateDate | date : 'short'}}</h6>
+							<!-- <h6>Last updated: {{searchResult.object.updateDate | date : 'short'}}</h6> -->
 						</div>
 						<div class="col-xs-9" [ngSwitch]="searchResult.objectType">
 							<datajob-view *ngSwitchCase="eObjectType.Datajob" [datajob]="searchResult.object"></datajob-view>
@@ -36,6 +36,8 @@
 							<columnValidation-view *ngSwitchCase="eObjectType.ColumnValidation" [columnValidation]="searchResult.object"></columnValidation-view>
 							<fileFormat-view *ngSwitchCase="eObjectType.FileFormat" [fileFormat]="searchResult.object"></fileFormat-view>
 							<view-view *ngSwitchCase="eObjectType.View" [view]="searchResult.object"></view-view>
+							<api-view *ngSwitchCase="eObjectType.Api" [api]="searchResult.object"></api-view>
+							<dashboard-view *ngSwitchCase="eObjectType.Dashboard" [dashboard]="searchResult.object"></dashboard-view>
 						</div>
 					</li>
 				</ul>

@@ -7,6 +7,18 @@
     </section> -->
 
     <div [hidden]="!hubCache">
+        <section *ngIf="hubCache.hub.hubPermission === ePermission.FullReader">
+            <div class="alert alert-info m-3">
+                The current user has readonly access to this hub.
+            </div>
+        </section>
+
+        <section *ngIf="hubCache.hub.hubPermission === ePermission.PublishReader">
+            <div class="alert alert-info m-3">
+                The current user only has access to shared items in this hub.
+            </div>
+        </section>
+    
         <section *ngIf="openDelay && webSocketStatus != 'Connected'">
             <div class="alert alert-danger m-3">
                 {{webSocketStatus}}.

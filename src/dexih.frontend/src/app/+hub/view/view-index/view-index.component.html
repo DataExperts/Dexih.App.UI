@@ -11,16 +11,13 @@
 				(rowClick)="editView($event)"
 				>
 					<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-						<dexih-button-save-local class="mr-1" (click)="export(items)"></dexih-button-save-local>
-						<dexih-button-delete *ngIf="hubCache.canWrite" (click)="deleteViews(items)" title="Delete selected views"></dexih-button-delete>
 					</ng-template>
 
 					<ng-template #selectedItemAction select="selectedItemAction" let-view="item">
-						<actions-view-button [view]="view"></actions-view-button>
 					</ng-template>
 
 					<ng-template #actions let-items="items">
-						<dexih-button-new *ngIf="hubCache.canWrite" [routerLink]="['view-new']" title="Create a new view"></dexih-button-new>
+						<actions-view-button [views]="items"></actions-view-button>
 					</ng-template>
 			</dexih-table>
 

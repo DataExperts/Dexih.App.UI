@@ -43,7 +43,8 @@ import {
     DexihDashboard,
     DexihInputParameter,
     DashboardUrl,
-    InputParameter
+    InputParameter,
+    eSharedDataObjectType
 } from './hub.models';
 import { DownloadObject, eDownloadFormat, SelectQuery } from './hub.query.models';
 import { RemoteLibraries, RemoteAgentStatus, eTypeCode } from './hub.remote.models';
@@ -69,6 +70,7 @@ export class HubService implements OnInit, OnDestroy {
 
     // private _activeAgents: DexihActiveAgent[];
     private _remoteAgent = new BehaviorSubject<DexihActiveAgent>(null);
+    private isResettingRemoteAgent = false;
 
     public newDatajob: DexihDatajob;
     public newTable: DexihTable;
@@ -298,6 +300,9 @@ export class HubService implements OnInit, OnDestroy {
             return;
         }
 
+        if (this.isResettingRemoteAgent) { return; }
+        this.isResettingRemoteAgent = true;
+
         let activeAgent = this._remoteAgent.value;
 
         this.authService.getRemoteAgentsPromise().then(remoteAgents => {
@@ -339,7 +344,11 @@ export class HubService implements OnInit, OnDestroy {
             }
 
             this.setNoRemoteAgent(hubCache);
-        })
+        }).catch(reason => {
+            this.addHubMessage(reason);
+        }).finally(() => {
+            this.isResettingRemoteAgent = false;
+        });
 
     }
 
@@ -507,7 +516,7 @@ export class HubService implements OnInit, OnDestroy {
 
                 // if the change is a datalink or datajob, preserve the current/previous status.
                 if (changeClass === eSharedObjectType.Datalink || changeClass === eSharedObjectType.Datajob ||
-                    changeClass === eSharedObjectType.Table) {
+                    changeClass === eSharedObjectType.Table || changeClass === eSharedObjectType.DatalinkTest) {
                     if (current) {
                         item.item.currentStatus = current.currentStatus;
                         item.item.previousStatus = current.previousStatus;
@@ -918,62 +927,48 @@ export class HubService implements OnInit, OnDestroy {
 
     // tests the connection and refreshes the databases.
     refreshConnection(connection: DexihConnection): Promise<Array<string>> {
-        return new Promise<Array<string>>((resolve, reject) => {
-            let remoteMessage = new RemoteMessage();
-            remoteMessage.remoteAgentId = this.getCurrentRemoteAgentInstanceId();
-            remoteMessage.hubVariables = this._hubCache.value.hub.dexihHubVariables;
-            remoteMessage.method = 'RefreshConnection';
-            remoteMessage.hubKey = this._hubCache.value.hub.hubKey,
-            remoteMessage.value = connection;
-
-            this.authService.post('/api/Hub/RunRemoteCommand', remoteMessage, 'Refreshing connection...')
-                .then(result => {
-                connection.databases = result.value;
-                resolve(result.value);
-                return result;
-            }).catch(reason => {
-                this.logger.LogC(() => `refreshConnection, error: ${reason.message}.`, eLogLevel.Error);
-                this.addHubMessage(reason);
-                reject(reason);
-            });
-        });
+        return this.remoteRunSync<Array<string>>('RefreshConnection', {value: connection}, 'Refreshing connection...');
     }
 
     // tests the connection and refreshes the databases.
     createDatabase(connection: DexihConnection): Promise<any> {
-        return new Promise<DexihConnection>((resolve, reject) => {
-            let remoteMessage = new RemoteMessage();
-            remoteMessage.remoteAgentId = this.getCurrentRemoteAgentInstanceId();
-            remoteMessage.hubVariables = this._hubCache.value.hub.dexihHubVariables;
-            remoteMessage.method = 'CreateDatabase';
-            remoteMessage.hubKey = this._hubCache.value.hub.hubKey;
-            remoteMessage.value = connection;
+        return this.remoteRunSync<Array<string>>('CreateDatabase', {value: connection}, 'Creating new database...');
+    }
 
-            this.authService.post('/api/Hub/RunRemoteCommand', remoteMessage, 'Creating new database...')
-            .then(result => {
-                connection.databases = result.value;
-                resolve(result.value);
-                return result;
+
+    remoteRunAsync<T>(uri: string, data: any, waitMessage?: string) {
+        return new Promise<T>((resolve, reject) => {
+
+            data.hubKey = this._hubCache.value.hub.hubKey;
+            data.remoteAgentId = this.getCurrentRemoteAgentInstanceId();
+
+            this.authService.post('/api/Hub/' + uri, data, waitMessage).then(messageId => {
+                this.authService.getDownloadUrl(this._remoteAgent.value).then(downloadUrl => {
+                    let url = downloadUrl.url + '/message/' + messageId.value;
+                    this.authService.get(url, waitMessage, false).then((result: T) => {
+                        resolve(result);
+                    }).catch(reason => {
+                        this.addHubMessage(reason);
+                        reject(reason);
+                    });
+                }).catch(reason => {
+                    reject(reason);
+                });
             }).catch(reason => {
-                this.logger.LogC(() => `createDatabase, error: ${reason.message}.`, eLogLevel.Error);
-               this.addHubMessage(reason);
                 reject(reason);
             });
         });
     }
 
-    // saves the current connection.
-    saveConnection(connection: DexihConnection): Promise<any> {
-        return new Promise<DexihConnection>((resolve, reject) => {
-            this.authService.post('/api/Hub/SaveConnection', {
-                hubKey: this._hubCache.value.hub.hubKey,
-                remoteAgentId: this.getCurrentRemoteAgentInstanceId(false),
-                connection: connection
-            }, 'Saving connection...').then(result => {
+    remoteRunSync<T>(uri: string, data: any, waitMessage?: string) {
+        return new Promise<T>((resolve, reject) => {
+
+            data.hubKey = this._hubCache.value.hub.hubKey;
+            data.remoteAgentId = this.getCurrentRemoteAgentInstanceId();
+
+            this.authService.post('/api/Hub/' + uri, data, waitMessage).then((result) => {
                 resolve(result.value);
-                return result;
             }).catch(reason => {
-                this.logger.LogC(() => `saveConnection, error: ${reason.message}.`, eLogLevel.Error);
                 this.addHubMessage(reason);
                 reject(reason);
             });
@@ -982,42 +977,12 @@ export class HubService implements OnInit, OnDestroy {
 
     // decrypted a value in the hub.
     decrypt(value: string): Promise<string> {
-        return new Promise<string>((resolve, reject) => {
-            this.authService.post('/api/Hub/Decrypt', {
-                hubKey: this._hubCache.value.hub.hubKey,
-                remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
-                value: value
-            }, 'Decrypting...').then(result => {
-                resolve(result.value);
-                return result;
-            }).catch(reason => {
-                this.logger.LogC(() => `decrypt, error: ${reason.message}.`, eLogLevel.Error);
-                this.addHubMessage(reason);
-                reject(reason);
-            });
-        });
+        return this.remoteRunAsync<string>('Decrypt', {value: value}, 'Decrypting...');
     }
 
     // gets a list of table names in a remote database
     getDatabaseTableNames(connection: DexihConnection): Promise<Array<DexihTable>> {
-        return new Promise<Array<DexihTable>>((resolve, reject) => {
-            let remoteMessage = new RemoteMessage();
-            remoteMessage.remoteAgentId = this.getCurrentRemoteAgentInstanceId();
-            remoteMessage.hubVariables = this._hubCache.value.hub.dexihHubVariables;
-            remoteMessage.method = 'DatabaseTableNames';
-            remoteMessage.hubKey = this._hubCache.value.hub.hubKey;
-            remoteMessage.value = connection;
-
-            this.authService.post('/api/Hub/RunRemoteCommand', remoteMessage, 'Getting database table names...')
-            .then(result => {
-                resolve(result.value);
-                return result;
-            }).catch(reason => {
-                this.logger.LogC(() => `getDatabaseTableNames, error: ${reason.message}.`, eLogLevel.Error);
-                this.addHubMessage(reason);
-                reject(reason);
-            });
-        });
+        return this.remoteRunSync<Array<DexihTable>>('DatabaseTableNames', {value: connection}, 'Getting database table names...');
     }
 
     // import a list of specified tables in a remote database
@@ -1180,7 +1145,7 @@ export class HubService implements OnInit, OnDestroy {
                 this.authService.post('/api/Hub/DeleteTables', {
                     hubKey: this._hubCache.value.hub.hubKey,
                     remoteAgentId: this.getCurrentRemoteAgentInstanceId(false),
-                    tableKeys: tables.map(t => t.key)
+                    itemKeys: tables.map(t => t.key)
                 }, 'Deleting tables...').then(result => {
                     resolve(result.value);
                     return result;
@@ -1192,24 +1157,6 @@ export class HubService implements OnInit, OnDestroy {
             }).catch(() => {
                 resolve(false);
                 return false;
-            });
-        });
-    }
-
-    shareTables(tableKeys: Array<number>, isShared: boolean): Promise<boolean> {
-        return new Promise<boolean>((resolve, reject) => {
-            // call the delete.
-            this.authService.post('/api/Hub/ShareTables', {
-                hubKey: this._hubCache.value.hub.hubKey,
-                tableKeys: tableKeys,
-                isShared: isShared
-            }, 'Sharing tables...').then(result => {
-                resolve(result.value);
-                return result;
-            }).catch(reason => {
-                this.logger.LogC(() => `shareTables, error: ${reason.message}.`, eLogLevel.Error);
-                this.addHubMessage(reason);
-                reject(reason);
             });
         });
     }
@@ -1291,25 +1238,25 @@ export class HubService implements OnInit, OnDestroy {
         });
     }
 
-    shareDatalinks(datalinkKeys: Array<number>, isShared: boolean): Promise<boolean> {
+    shareItems(keys: Array<number>, objectType: eSharedDataObjectType, isShared: boolean): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             // call the delete.
-            this.authService.post('/api/Hub/ShareDatalinks', {
+            this.authService.post('/api/Hub/ShareItems', {
                 hubKey: this._hubCache.value.hub.hubKey,
                 remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
-                datalinkKeys: datalinkKeys,
+                keys: keys,
+                objectType: objectType,
                 isShared: isShared
-            }, 'Sharing datalinks...').then(result => {
+            }, 'Sharing items...').then(result => {
                 resolve(result.value);
                 return result;
             }).catch(reason => {
-                this.logger.LogC(() => `shareDatalinks, error: ${reason.message}.`, eLogLevel.Error);
+                this.logger.LogC(() => `shareItems, error: ${reason.message}.`, eLogLevel.Error);
                 this.addHubMessage(reason);
                 reject(reason);
             });
         });
     }
-
 
     runDatalinks(datalinksKeys: Array<number>, truncateTarget: boolean,
         resetIncremental: boolean, resetIncrementalValue: string, inputColumns: InputColumn[],
@@ -1381,7 +1328,7 @@ export class HubService implements OnInit, OnDestroy {
             this.authService.post('/api/Hub/CancelDatalinkTests', {
                 hubKey: this._hubCache.value.hub.hubKey,
                 remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
-                datalinkTestKeys: datalinkTestKeys
+                itemKeys: datalinkTestKeys
             }, 'Cancelling datalink tests...').then(result => {
                 resolve(result.value);
                 return result;
@@ -1398,7 +1345,7 @@ export class HubService implements OnInit, OnDestroy {
             this.authService.post('/api/Hub/CancelDatalinks', {
                 hubKey: this._hubCache.value.hub.hubKey,
                 remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
-                datalinkKeys: datalinkKeys
+                itemKeys: datalinkKeys
             }, 'Cancelling datalinks...').then(result => {
                 resolve(result.value);
                 return result;
@@ -1410,70 +1357,102 @@ export class HubService implements OnInit, OnDestroy {
         });
     }
 
-    getAuditResults(auditType: string, connectionKeys: Array<number>, referenceKeys: Array<number>, childItems: boolean, rows: number):
-         Promise<Array<TransformWriterResult>> {
+    // downloads a dataset from the provided url
+    downloadAuditResultsData(url: string): Promise<Array<TransformWriterResult>> {
         return new Promise<Array<TransformWriterResult>>((resolve, reject) => {
-            let hub = this._hubCache.value;
-
-            let connections: DexihConnection[];
-            if (connectionKeys && connectionKeys.length > 0) {
-                connections = hub.hub.dexihConnections
-                    .filter(c => c.purpose === eConnectionPurpose.Managed && connectionKeys.indexOf(c.key) >= 0);
-            } else {
-                connections = hub.hub.dexihConnections
-                    .filter(c => c.purpose === eConnectionPurpose.Managed);
-            }
-
-            let remoteMessage = new RemoteMessage();
-            remoteMessage.remoteAgentId = this.getCurrentRemoteAgentInstanceId();
-            remoteMessage.method = 'GetResults';
-            remoteMessage.hubVariables = this._hubCache.value.hub.dexihHubVariables;
-            remoteMessage.hubKey = this._hubCache.value.hub.hubKey;
-            remoteMessage.value = {
-                connections: connections,
-                auditType: auditType,
-                referenceKeys: referenceKeys,
-                childItems: childItems,
-                rows: rows
-            };
-
-            this.authService.post('/api/Hub/RunRemoteCommand', remoteMessage, 'Retrieving audit results...')
-                .then(result => {
-                    resolve(result.value);
-                }).catch(reason => {
-                    this.logger.LogC(() => `getResults, error: ${reason.message}.`, eLogLevel.Error);
-                    this.addHubMessage(reason);
-                    reject(reason);
-                });
-        });
-    }
-
-    getResultDetail(auditConnectionKey: number, auditKey: number): Promise<TransformWriterResult> {
-        return new Promise<TransformWriterResult>((resolve, reject) => {
-            let hub = this._hubCache.value;
-            let connections = hub.hub.dexihConnections.filter(c => c.purpose === eConnectionPurpose.Managed
-                && auditConnectionKey === c.key);
-
-            let remoteMessage = new RemoteMessage();
-            remoteMessage.remoteAgentId = this.getCurrentRemoteAgentInstanceId();
-            remoteMessage.method = 'GetResults';
-            remoteMessage.hubVariables = this._hubCache.value.hub.dexihHubVariables;
-            remoteMessage.hubKey = this._hubCache.value.hub.hubKey;
-            remoteMessage.value = {
-                connections: connections,
-                auditKey: auditKey,
-                childItems: true
-            };
-
-            this.authService.post('/api/Hub/RunRemoteCommand', remoteMessage, 'Retrieving audit result...')
-                .then(result => {
-                    resolve(result.value[0]);
+            this.authService.get(url, null, false).then(data => {
+                if (data['success'] === false) {
+                    this.addHubMessage(data);
+                    reject(data['message']);
+                } else {
+                    resolve(data);
+                    return;
+                }
             }).catch(reason => {
-                this.logger.LogC(() => `getResultDetail, error: ${reason.message}.`, eLogLevel.Error);
                 this.addHubMessage(reason);
                 reject(reason);
             });
         });
+    }
+
+
+    getAuditResults(auditType: string, connectionKeys: Array<number>, referenceKeys: Array<number>, childItems: boolean, rows: number):
+         Promise<Array<TransformWriterResult>> {
+            return new Promise<Array<TransformWriterResult>>((resolve, reject) => {
+
+                if (!this._remoteAgent.value) {
+                    let message = new Message(false, 'No active remote agent.', null, null);
+                    this.addHubMessage(message);
+                    reject(message);
+                    return;
+                }
+                this.authService.getDownloadUrl(this._remoteAgent.value).then(downloadUrl => {
+
+                    this.authService.post('/api/Hub/PreviewAuditResults', {
+                        hubKey: this._hubCache.value.hub.hubKey,
+                        remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
+                        connectionKeys,
+                        referenceKeys: referenceKeys,
+                        auditType: auditType,
+                        childItems: childItems,
+                        rows: rows,
+                        downloadUrl: downloadUrl
+
+                        }, 'Previewing audit results...').then(result => {
+
+                            this.downloadAuditResultsData(result.value)
+                            .then(data => resolve(data))
+                            .catch(reason => reject(reason));
+
+                        }).catch(reason => {
+                        this.logger.LogC(() => `getAuditResults, error: ${reason.message}.`, eLogLevel.Error);
+                        this.addHubMessage(reason);
+                        reject(reason);
+                    });
+                }).catch(reason => {
+                    this.addHubMessage(reason);
+                    reject(reason);
+                });
+            });
+    }
+
+    getResultDetail(auditConnectionKey: number, auditKey: number): Promise<TransformWriterResult> {
+        return new Promise<TransformWriterResult>((resolve, reject) => {
+
+            if (!this._remoteAgent.value) {
+                let message = new Message(false, 'No active remote agent.', null, null);
+                this.addHubMessage(message);
+                reject(message);
+                return;
+            }
+            this.authService.getDownloadUrl(this._remoteAgent.value).then(downloadUrl => {
+
+                this.authService.post('/api/Hub/PreviewAuditResults', {
+                    hubKey: this._hubCache.value.hub.hubKey,
+                    remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
+                    connectionKeys: [auditConnectionKey],
+                    auditKey: auditKey,
+                    childItems: true,
+                    downloadUrl: downloadUrl,
+                    rows: 1
+
+                    }, 'Previewing audit results...').then(result => {
+
+                        this.downloadAuditResultsData(result.value)
+                        .then(data => resolve(data[0]))
+                        .catch(reason => reject(reason));
+
+                    }).catch(reason => {
+                    this.logger.LogC(() => `getResultDetail, error: ${reason.message}.`, eLogLevel.Error);
+                    this.addHubMessage(reason);
+                    reject(reason);
+                });
+            }).catch(reason => {
+                this.addHubMessage(reason);
+                reject(reason);
+            });
+        });
+
     }
 
     deleteDatajobs(datajobs: Array<DexihDatajob>): Promise<boolean> {
@@ -1568,21 +1547,6 @@ export class HubService implements OnInit, OnDestroy {
         });
     }
 
-    saveDatajob(datajob: DexihDatajob) {
-        return new Promise<Array<DexihDatajob>>((resolve, reject) => {
-            this.authService.post('/api/Hub/SaveDatajobs', {
-                hubKey: this._hubCache.value.hub.hubKey,
-                value: datajob
-            }, 'Saving datajob(s)...').then(result => {
-                resolve(result.value);
-                return result;
-            }).catch(reason => {
-                this.logger.LogC(() => `saveDatajob, error: ${reason.message}.`, eLogLevel.Error);
-                this.addHubMessage(reason);
-                reject(reason);
-            });
-        });
-    }
 
     saveView(view: DexihView) {
         return new Promise<Array<DexihView>>((resolve, reject) => {
@@ -2121,60 +2085,28 @@ export class HubService implements OnInit, OnDestroy {
             }
 
             this.authService.getDownloadUrl(this._remoteAgent.value).then(downloadUrl => {
-
                 const hub = this._hubCache.value.hub;
                 let connection = hub.dexihConnections.find(c => c.key === writerResult.auditConnectionKey);
-                let remoteMessage = new RemoteMessage();
-                remoteMessage.remoteAgentId = this.getCurrentRemoteAgentInstanceId();
-                remoteMessage.method = 'PreviewProfile';
-                remoteMessage.hubVariables = this._hubCache.value.hub.dexihHubVariables;
-                remoteMessage.hubKey = hub.hubKey,
-                remoteMessage.value = {
+
+                this.authService.post('/api/Hub/PreviewProfile', {
+                    hubKey: this._hubCache.value.hub.hubKey,
+                    remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
                     auditKey: writerResult.auditKey,
                     profileTableName: writerResult.profileTableName,
                     connection: connection,
                     summaryOnly: summaryOnly,
                     downloadUrl: downloadUrl
-                };
+                }, 'Retrieving profile data...').then((result: Message) => {
 
-                this.authService.post('/api/Hub/RunRemoteCommand', remoteMessage, 'Retrieving profile data...')
-                    .then(result => {
-                        let url = result.value;
+                    this.downloadUrlData(result.value)
+                    .then(data => resolve(data))
+                    .catch(reason => reject(reason));
 
-                        this.authService.get(url, 'Getting profile results...', false).then(data => {
-                            if (data['success'] === false) {
-                                this.addHubMessage(data);
-                                reject(data['message']);
-                            } else {
-
-                                let columns = this.constructDataTableColumns(data.columns);
-                                resolve({columns: columns, data: data.data});
-                                return result;
-                            }
-                        }).catch(reason => {
-                            this.addHubMessage(reason);
-                            reject(reason);
-                        });
-
-                    // let tableResult: Table = result.value;
-                    // let columns = [];
-
-                    // tableResult.columns.forEach((c, index) => {
-                    //     switch (c.dataType) {
-                    //         case eTypeCode.DateTime:
-                    //             columns.push({ name: index, title: c.name, format: 'Date'});
-                    //             break;
-                    //         default:
-                    //             columns.push({ name: index, title: c.name, format: ''});
-                    //     }
-                    // });
-                    // resolve({columns: columns, data: tableResult.data});
-                    // return result;
                 }).catch(reason => {
-                    this.logger.LogC(() => `previewProfileData, error: ${reason.message}.`, eLogLevel.Error);
                     this.addHubMessage(reason);
                     reject(reason);
                 });
+
             }).catch(reason => {
                 this.logger.LogC(() => `previewProfileData, error: ${reason.message}.`, eLogLevel.Error);
                 this.addHubMessage(reason);
@@ -2390,50 +2322,10 @@ export class HubService implements OnInit, OnDestroy {
         });
     }
 
-        // saves the current function.
-        saveCustomFunction(customFunction: DexihCustomFunction): Promise<any> {
-            return new Promise<DexihCustomFunction>((resolve, reject) => {
-                this.authService.post('/api/Hub/SaveCustomFunction', {
-                    hubKey: this._hubCache.value.hub.hubKey,
-                    remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
-                    customFunction: customFunction
-                }, 'Saving custom functions...').then(result => {
-                    resolve(result.value);
-                    return result;
-                }).catch(reason => {
-                    this.logger.LogC(() => `saveCustomFunction, error: ${reason.message}.`, eLogLevel.Error);
-                    this.addHubMessage(reason);
-                    reject(reason);
-                });
-            });
-        }
-
             // tests the connection and refreshes the databases.
     testCustomFunction(datalinkTransformItem: DexihDatalinkTransformItem, testValues: Array<any>): Promise<Array<any>> {
-        return new Promise<Array<any>>((resolve, reject) => {
-            const cache = this._hubCache.value;
-            const hub = new DexihHub(cache.hub.hubKey, '');
-
-            let remoteMessage = new RemoteMessage();
-            remoteMessage.remoteAgentId = this.getCurrentRemoteAgentInstanceId();
-            remoteMessage.method = 'TestCustomFunction';
-            remoteMessage.hubKey = cache.hub.hubKey;
-            remoteMessage.hubVariables = cache.hub.dexihHubVariables
-            remoteMessage.value = {
-                datalinkTransformItem: datalinkTransformItem,
-                hub: hub,
-                testValues: testValues
-            };
-
-            this.authService.post('/api/Hub/RunRemoteCommand', remoteMessage, 'Testing custom function...')
-                .then(result => {
-                resolve(result.value);
-                return result;
-            }).catch(reason => {
-                this.addHubMessage(reason);
-                reject(reason);
-            });
-        });
+        return this.remoteRunSync<Array<any>>('TestCustomFunction',
+                {value: datalinkTransformItem, testValues: testValues}, 'Testing custom function...');
     }
 
         // tests the connection and refreshes the databases.
@@ -2453,13 +2345,13 @@ export class HubService implements OnInit, OnDestroy {
     }
 
     deleteFileFormats(validations: Array<DexihFileFormat>): Promise<boolean> {
-    return new Promise<boolean>((resolve, reject) => {
-        let fileFormatNames = validations.map(c => c.name).join('<br>>');
+        return new Promise<boolean>((resolve, reject) => {
+            let fileFormatNames = validations.map(c => c.name).join('<br>>');
 
-        this.authService.confirmDialog('Delete File Format(s)',
-        'This action will delete the following file formats, from the hub and cannot be reversed.<p></p>' +
-            fileFormatNames + '<p></p>Are you sure?'
-        ).then(() => {
+            this.authService.confirmDialog('Delete File Format(s)',
+                'This action will delete the following file formats, from the hub and cannot be reversed.<p></p>' +
+                fileFormatNames + '<p></p>Are you sure?'
+            ).then(() => {
                 // call the delete.
                 this.authService.post('/api/Hub/DeleteFileFormats', {
                     hubKey: this._hubCache.value.hub.hubKey,
@@ -2473,62 +2365,19 @@ export class HubService implements OnInit, OnDestroy {
                     reject(reason);
                     return false;
                 });
-        }).catch(() => {
+            }).catch(() => {
                 resolve(false);
                 return false;
-        });
-    });
-}
-
-    // saves the current connection.
-    saveFileFormat(fileFormat: DexihFileFormat): Promise<any> {
-        return new Promise<DexihFileFormat>((resolve, reject) => {
-            this.authService.post('/api/Hub/SaveFileFormat', {
-                hubKey: this._hubCache.value.hub.hubKey,
-                remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
-                fileFormat: fileFormat
-            }, 'Saving file format(s)...').then(result => {
-                resolve(result.value);
-                return result;
-            }).catch(reason => {
-                this.logger.LogC(() => `saveFileFormat, error: ${reason.message}.`, eLogLevel.Error);
-                this.addHubMessage(reason);
-                reject(reason);
             });
         });
     }
 
+
             // tests the connection and refreshes the databases.
     testColumnValidation(columnValidation: DexihColumnValidation, testValue: string):
         Promise<{success: boolean, cleanedValue: string, rejectReason: string}> {
-        return new Promise<{success: boolean, cleanedValue: string, rejectReason: string}>((resolve, reject) => {
-
-            // add dependencies to the cache.
-            let hub = new DexihHub(this._hubCache.value.hub.hubKey, 'cache');
-            this._hubCache.value.getColumnValidationCache(columnValidation, hub);
-            hub.dexihColumnValidations.push(columnValidation);
-
-            let remoteMessage = new RemoteMessage();
-            remoteMessage.remoteAgentId = this.getCurrentRemoteAgentInstanceId();
-            remoteMessage.method = 'TestColumnValidation';
-            remoteMessage.hubVariables = this._hubCache.value.hub.dexihHubVariables;
-            remoteMessage.hubKey = hub.hubKey;
-            remoteMessage.value = {
-                columnValidation: columnValidation,
-                hub: hub,
-                testValue: testValue
-            };
-
-            this.authService.post('/api/Hub/RunRemoteCommand', remoteMessage, 'Testing column validation...')
-                .then(result => {
-                resolve(result.value);
-                return result;
-            }).catch(reason => {
-                this.logger.LogC(() => `testColumnValidation, error: ${reason.message}.`, eLogLevel.Error);
-                this.addHubMessage(reason);
-                reject(reason);
-            });
-        });
+            return this.remoteRunSync<{success: boolean, cleanedValue: string, rejectReason: string}>('TestColumnValidation',
+                {value: columnValidation, testValue: testValue}, 'Testing column validation...');
     }
 
 
@@ -2560,24 +2409,6 @@ export class HubService implements OnInit, OnDestroy {
         });
     }
 
-        // saves the current connection.
-        saveHubVariable(hubVariable: DexihHubVariable): Promise<any> {
-            return new Promise<DexihHubVariable>((resolve, reject) => {
-                this.authService.post('/api/Hub/HubVariable', {
-                    hubKey: this._hubCache.value.hub.hubKey,
-                    remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
-                    hubVariable: hubVariable
-                }, 'Saving hub variable...').then(result => {
-                    resolve(result.value);
-                    return result;
-                }).catch(reason => {
-                    this.logger.LogC(() => `saveHubVariable, error: ${reason.message}.`, eLogLevel.Error);
-                    this.addHubMessage(reason);
-                    reject(reason);
-                });
-            });
-        }
-
         deleteDatalinkTests(items: Array<DexihDatalinkTest>): Promise<boolean> {
             return new Promise<boolean>((resolve, reject) => {
                 let itemNames = items.map(c => c.name).join('<br>');
@@ -2606,25 +2437,6 @@ export class HubService implements OnInit, OnDestroy {
             });
         }
 
-        // saves the current connection.
-        saveDatalinkTest(item: DexihDatalinkTest): Promise<any> {
-            return new Promise<DexihDatalinkTest>((resolve, reject) => {
-                this.authService.post('/api/Hub/SaveDatalinkTest', {
-                    hubKey: this._hubCache.value.hub.hubKey,
-                    remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
-                    value: item
-                }, 'Saving datalink test...').then(result => {
-                    resolve(result.value);
-                    return result;
-                }).catch(reason => {
-                    this.logger.LogC(() => `saveDatalinkTest, error: ${reason.message}.`, eLogLevel.Error);
-                    this.addHubMessage(reason);
-                    reject(reason);
-                });
-            });
-        }
-
-        // saves the current connection.
         newDatalinkTest(name: string, datalinkKeys: Array<number>, auditConnectionKey: number, targetConnectionKey: number,
             sourceConnectionKey: number, snapshotData: boolean): Promise<any> {
             return new Promise<DexihDatalinkTest>((resolve, reject) => {
@@ -2751,130 +2563,31 @@ export class HubService implements OnInit, OnDestroy {
         }
     }
 
-    createPaths(table: DexihTable): Promise<Array<FileProperties>> {
-        return new Promise<Array<FileProperties>>((resolve, reject) => {
-            let hub = new DexihHub(this._hubCache.value.hub.hubKey, 'cache');
-            this._hubCache.value.cacheAddConnection(table.connectionKey, hub);
-
-            let remoteMessage = new RemoteMessage();
-            remoteMessage.remoteAgentId = this.getCurrentRemoteAgentInstanceId();
-            remoteMessage.method = 'CreateFilePaths';
-            remoteMessage.hubKey = hub.hubKey;
-            remoteMessage.hubVariables = this._hubCache.value.hub.dexihHubVariables;
-            remoteMessage.value = {
-                table: table,
-                hub: hub,
-            };
-
-            this.authService.post('/api/Hub/RunRemoteCommand', remoteMessage, 'Creating file paths...')
-                .then(result => {
-
-                resolve(result.value);
-                return result;
-            }).catch(reason => {
-                this.logger.LogC(() => `createPaths, error: ${reason.message}.`, eLogLevel.Error);
-                this.addHubMessage(reason);
-                reject(reason);
-            });
-        });
+    createPaths(table: DexihTable): Promise<boolean> {
+        return this.remoteRunSync<boolean>('CreateFilePaths', {value: table}, 'Creating files paths..');
     }
 
     getFileList(table: DexihTable, flatFilePath: eFlatFilePath): Promise<Array<FileProperties>> {
-        return new Promise<Array<FileProperties>>((resolve, reject) => {
-            let hub = new DexihHub(this._hubCache.value.hub.hubKey, 'cache');
-            this._hubCache.value.cacheAddConnection(table.connectionKey, hub);
-
-            let remoteMessage = new RemoteMessage();
-            remoteMessage.remoteAgentId = this.getCurrentRemoteAgentInstanceId();
-            remoteMessage.method = 'GetFileList';
-            remoteMessage.hubKey = hub.hubKey;
-            remoteMessage.hubVariables = this._hubCache.value.hub.dexihHubVariables;
-            remoteMessage.value = {
-                table: table,
-                hub: hub,
-                path: flatFilePath,
-            };
-
-            this.authService.post('/api/Hub/RunRemoteCommand', remoteMessage, 'Getting file list...')
-                .then(result => {
-
-                resolve(result.value);
-                return result;
-            }).catch(reason => {
-                this.logger.LogC(() => `getFileList, error: ${reason.message}.`, eLogLevel.Error);
-                this.addHubMessage(reason);
-                reject(reason);
-            });
-        });
+        return this.remoteRunSync<Array<FileProperties>>('GetFileList', {value: table, path: flatFilePath}, 'Getting files list...');
     }
 
-    deleteFiles(table: DexihTable, flatFilePath: eFlatFilePath, files: Array<string>):
-    Promise<Array<FileProperties>> {
-        return new Promise<Array<FileProperties>>((resolve, reject) => {
+    deleteFiles(table: DexihTable, flatFilePath: eFlatFilePath, files: Array<string>): Promise<boolean> {
+        return new Promise<boolean>((resolve, reject) => {
         let fileNames = '<p>' + files.map(c => c).join('</p><p>') + '</p>';
             this.authService.confirmDialog('Delete File (s)',
             'This action will delete the following files, from the connection and cannot be reversed.<p></p>' +
             fileNames + '<p></p>Are you sure?'
             ).then(() => {
-                let hub = new DexihHub(this._hubCache.value.hub.hubKey, 'cache');
-                this._hubCache.value.cacheAddConnection(table.connectionKey, hub);
-
-                let remoteMessage = new RemoteMessage();
-                remoteMessage.remoteAgentId = this.getCurrentRemoteAgentInstanceId();
-                remoteMessage.method = 'DeleteFiles';
-                remoteMessage.hubKey = hub.hubKey;
-                remoteMessage.hubVariables = this._hubCache.value.hub.dexihHubVariables;
-                remoteMessage.value = {
-                    table: table,
-                    hub: hub,
-                    path: flatFilePath,
-                    files: files
-                };
-
-                this.authService.post('/api/Hub/RunRemoteCommand', remoteMessage, 'Deleting files...')
-                    .then(result => {
-
-                    resolve(result.value);
-                    return result;
-                }).catch(reason => {
-                    this.logger.LogC(() => `deleteFiles, error: ${reason.message}.`, eLogLevel.Error);
-                    this.addHubMessage(reason);
-                    reject(reason);
-                });
+                return this.remoteRunSync<boolean>('DeleteFiles', {value: table, path: flatFilePath, files: files}, 'Deleting files...');
             }).catch(() => resolve(null));
         });
     }
 
-    moveFiles(table: DexihTable, fromFilePath: eFlatFilePath, toFilePath: eFlatFilePath, files: Array<string>):
-    Promise<Array<FileProperties>> {
-        return new Promise<Array<FileProperties>>((resolve, reject) => {
-            let hub = new DexihHub(this._hubCache.value.hub.hubKey, 'cache');
-            this._hubCache.value.cacheAddConnection(table.connectionKey, hub);
-
-            let remoteMessage = new RemoteMessage();
-            remoteMessage.remoteAgentId = this.getCurrentRemoteAgentInstanceId();
-            remoteMessage.method = 'MoveFiles';
-            remoteMessage.hubKey = hub.hubKey;
-            remoteMessage.hubVariables = this._hubCache.value.hub.dexihHubVariables;
-            remoteMessage.value = {
-                table: table,
-                hub: hub,
-                fromPath: fromFilePath,
-                toPath: toFilePath,
-                files: files
-            };
-
-            this.authService.post('/api/Hub/RunRemoteCommand', remoteMessage, 'Moving files...')
-                .then(result => {
-
-                resolve(result.value);
-                return result;
-            }).catch(reason => {
-                this.logger.LogC(() => `moveFiles, error: ${reason.message}.`, eLogLevel.Error);
-                this.addHubMessage(reason);
-                reject(reason);
-            });
-        }).catch();
+    moveFiles(table: DexihTable, fromFilePath: eFlatFilePath, toFilePath: eFlatFilePath, files: Array<string>): Promise<boolean> {
+        return this.remoteRunSync<boolean>('MoveFiles', {
+            value: table, fromPath: fromFilePath,
+            toPath: toFilePath,
+            files: files}, 'Moving files...');
     }
 
     downloadFiles(table: DexihTable, flatFilePath: eFlatFilePath, files: Array<string>):

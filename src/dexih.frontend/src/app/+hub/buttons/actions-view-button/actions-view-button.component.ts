@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, combineLatest} from 'rxjs';
 
 import { AuthService } from '../../../+auth/auth.service';
-import { DexihView } from '../../hub.models';
+import { DexihView, eSharedDataObjectType } from '../../hub.models';
 import { HubService } from '../../hub.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { HubService } from '../../hub.service';
 })
 
 export class ActionsViewButtonComponent implements OnInit, OnDestroy {
-    @Input() public view: DexihView;
+    @Input() public views: DexihView[];
     @Input() public pullRight = false;
 
     private _hubCacheSubscription: Subscription;
@@ -34,5 +34,14 @@ export class ActionsViewButtonComponent implements OnInit, OnDestroy {
         ngOnDestroy() {
             if (this._hubCacheSubscription) { this._hubCacheSubscription.unsubscribe(); }
          }
+
+         delete() {
+            this.hubService.deleteViews(this.views);
+        }
+
+        shareItems(isShared: boolean) {
+            this.hubService.shareItems(this.views.map(c => c.key), eSharedDataObjectType.View, isShared);
+        }
+
 
 }

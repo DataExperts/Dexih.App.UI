@@ -216,22 +216,12 @@ namespace dexih.api.Controllers
                         
                         
                         // create a security key, which is not sent the the browser client, and used to ensure the instance id hasn't been hijacked by another remote agent.
-                        var instance = await _remoteServers.AuthorizeRemoteAgent(remoteSettings.AppSettings.Name, dbRemoteAgent.RemoteAgentKey, remoteSettings.AppSettings.EncryptionKey, remoteIp, user.Id);
-
-//                        remoteSettings.Runtime.ExternalIpAddress = remoteIp;
-//                        remoteSettings.Runtime.User = user;
-//                        remoteSettings.Runtime.UserHash = userHash;
-//
-//                        // as security precaution remove references to password/usertoken now that authentication is completed.
-//                        remoteSettings.Runtime.Password = null;
-//                        remoteSettings.AppSettings.UserToken = null;
-
-                        // var agent = _remoteServers.AuthorizeRemoteAgent(dbRemoteAgent.RemoteAgentKey, remoteSettings, remoteIp, user);
-
+                        var (instanceId, securityToken) = await _remoteServers.AuthorizeRemoteAgent(remoteSettings.AppSettings.Name, dbRemoteAgent.RemoteAgentKey, remoteSettings.AppSettings.EncryptionKey, remoteIp, user.Id);
+                        
                         return Json(new {
                             Success = true,
-                            instance.instanceId,
-                            instance.securityToken,
+                            instanceId,
+                            securityToken,
                             UserToken = newUserToken,
                             IpAddress = remoteIp,
                             Message = "Login success",
@@ -255,13 +245,7 @@ namespace dexih.api.Controllers
             }
         }
         
-        public class DatalinkProgress
-        {
-            public string InstanceId { get; set; }
-            public string SecurityToken { get; set; }
-            public string Command { get; set; }
-            public IEnumerable<ManagedTask> Results { get; set; } 
-        }
+
 
         /// <summary>
         /// This tracks task progress
@@ -305,14 +289,7 @@ namespace dexih.api.Controllers
                 return new ReturnValue(false, "Error occurred in UpdateTasks. " + ex.Message, ex);
             }
         }
-
-        public class PostApiStatus
-        {
-            public string SecurityToken { get; set; }
-            public IEnumerable<ApiData> ApiData { get; set; } 
         
-        }
-
         /// <summary>
         /// This tracks task progress
         /// </summary>
@@ -341,14 +318,7 @@ namespace dexih.api.Controllers
                 return new ReturnValue(false, "Error occurred in UpdateTasks. " + ex.Message, ex);
             }
         }
-                
-        public class PostApiQuery
-        {
-            public string SecurityToken { get; set; }
-            public IEnumerable<ApiQuery> ApiQueries { get; set; } 
-
-        }
-          
+        
         /// <summary>
         /// This tracks task progress
         /// </summary>
@@ -378,13 +348,13 @@ namespace dexih.api.Controllers
         }
         
         [HttpPost("[action]")]
-        public ReturnValue UpdateResponseMessage([FromBody] RemoteMessage[] returnMessages)
+        public async Task<ReturnValue> UpdateResponseMessage([FromBody] RemoteMessage[] returnMessages)
         {
             try
             {
                 foreach (var returnMessage in returnMessages)
                 {
-                    _remoteServers.SetResponseMessage(returnMessage.MessageId, returnMessage, CancellationToken.None);
+                    await _remoteServers.SetResponseMessage(returnMessage.MessageId, returnMessage, CancellationToken.None);
                 }
                 
                 return new ReturnValue(true);
@@ -395,113 +365,7 @@ namespace dexih.api.Controllers
                 return new ReturnValue(false, "Error occurred in UpdateResponseMessage. " + ex.Message, ex);
             }
         }
-
-//        [HttpGet("[action]")]
-//        public FileStreamResult GetFileStream(string instanceId, string securityToken, string fileReference)
-//        {
-//            try
-//            {
-//                var streamResult = _remoteServers.GetFileStream(fileReference);
-//
-//                return File(streamResult.ContentStream, streamResult.ContentType, streamResult.FileName);
-//
-//            }
-//            catch (Exception ex)
-//            {
-//                var bf = new BinaryFormatter();
-//                using (var ms = new MemoryStream())
-//                {
-//                    bf.Serialize(ms, ex);
-//                    ms.Seek(0, SeekOrigin.Begin);
-//                    return File(ms, "application/json", "download_errors.json");
-//                }
-//            }
-//        }
-//        
-//        [HttpPost("[action]")]
-//        [ValidateHub(DexihHubUser.EPermission.None)]
-//        public FileStreamResult GetFileStream([FromBody] FileStreamModel fileStreamModel)
-//        {
-//            try
-//            {
-//                var remoteServer = _remoteServers.GetRemoteAgentFromSecurityToken(fileStreamModel.SecurityToken);
-//                if (remoteServer == null)
-//                    return null;
-//
-//                var streamResult = remoteServer.GetFileStream(fileStreamModel.FileReference);
-//                streamResult.ContentStream.Position = 0;
-//                return File(streamResult.ContentStream, "application/csv", streamResult.FileName);
-//
-//            }
-//            catch (Exception)
-//            {
-//                return null;
-//            }
-//        }
-//
-//        public class SetFileStreamModel
-//        {
-//            public long hubKey { get; set; }
-//            public string instanceId { get; set; }
-//            public string clientId { get; set; }
-//            public string reference { get; set; }
-//            public string contentType { get; set; }
-//        }
-//
-//        [HttpPost("[action]")]
-//         public async Task<ReturnValue> SetFileStream(SetFileStreamModel setFileStreamModel, IFormFile file)
-//        {
-//            try
-//            {
-//                var remoteServer = _remoteServers.GetRemoteAgentFromSecurityToken(setFileStreamModel.instanceId);
-//                if (remoteServer == null)
-//                {
-//                    return new ReturnValue(false, "Security token invalid.", null);
-//                }
-//
-//                //copy the filestream, as IFormFile will dispose after the action finishes.
-//                var stream = new MemoryStream();
-//                await file.CopyToAsync(stream);
-//                stream.Position = 0;
-//
-//                var fileStream = new RemoteAgent.FileStream(file.FileName, setFileStreamModel.contentType, stream);
-//                
-//                remoteServer.SetFileStream(setFileStreamModel.reference, fileStream);
-//
-//                //broadcast the new file to the client
-//                if (!string.IsNullOrEmpty(setFileStreamModel.clientId))
-//                {
-//
-//                    var content = new
-//                    {
-//                        setFileStreamModel.hubKey,
-//                        setFileStreamModel.instanceId,
-//                        setFileStreamModel.reference,
-//                        contentType = file.ContentType,
-//                        fileName = file.FileName
-//                    };
-//
-//                    await _operations.BroadcastClientMessageAsync(setFileStreamModel.clientId, "file-download", content);
-//                }
-//                
-//                return new ReturnValue(true);
-//            }
-//            catch (Exception ex)
-//            {
-//                return new ReturnValue(false, "Error occurred in SetFileStream: " + ex.Message, ex);
-//            }
-//        }
-
-        public class DownloadReadyModel
-        {
-            public long HubKey { get; set; }
-            public string InstanceId { get; set; }
-            public string SecurityToken { get; set; }
-            public string ConnectionId { get; set; }
-            public string Reference { get; set; }
-            public string Url { get; set; }
-        }
-
+        
         [HttpPost("[action]")]
         public async Task<ReturnValue> DownloadReady([FromBody] DownloadReadyModel downloadReady)
         {
@@ -525,16 +389,6 @@ namespace dexih.api.Controllers
             }
         }
         
-        public class FlatFilesReadyModel
-        {
-            public long HubKey { get; set; }
-            public string InstanceId { get; set; }
-            public string SecurityToken { get; set; }
-            public string ConnectionId { get; set; }
-            public string Reference { get; set; }
-            public DexihTable[] tables { get; set; }
-        }
-
         [HttpPost("[action]")]
         public async Task<ReturnValue> FlatFilesReady([FromBody] FlatFilesReadyModel flatFilesReady)
         {
@@ -559,11 +413,7 @@ namespace dexih.api.Controllers
         }
         
 
-        public class GenerateCertificateModel
-        {
-            public string domain { get; set; }
-            public string password { get; set; }
-        }
+
 
         /// <summary>
         /// Generates a new Pfx Certificate for a dynamic domain.

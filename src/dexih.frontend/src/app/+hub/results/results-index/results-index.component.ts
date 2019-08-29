@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HubService } from '../../hub.service';
 import { HubCache, eDatalinkType, DexihDatalink, eSharedObjectType,
-    TransformWriterResult, DexihDatajob, DexihDatalinkTest } from '../../hub.models';
+    TransformWriterResult, DexihDatajob, DexihDatalinkTest, eConnectionPurpose } from '../../hub.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, BehaviorSubject, Subscription, combineLatest} from 'rxjs';
 
@@ -134,6 +134,10 @@ export class ResultsIndexComponent implements OnInit, OnDestroy {
         }
 
         let uniqueKeys = connectionKeys.filter(function(item, i, ar) { return ar.indexOf(item) === i; });
+
+        if (uniqueKeys.length === 0) {
+            uniqueKeys = this.hubCache.hub.dexihConnections.filter(c => c.purpose === eConnectionPurpose.Managed).map(c => c.key);
+        }
 
         this.hubService.getAuditResults(this.auditType, uniqueKeys, keys, true, this.rows)
         .then(results => {

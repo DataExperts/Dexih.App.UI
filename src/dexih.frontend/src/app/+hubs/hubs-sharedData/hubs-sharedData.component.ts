@@ -27,6 +27,7 @@ export class HubsSharedDataComponent implements OnInit {
 
     columns = [
         { name: 'logicalName', title: 'Details', header: 'hubName', footer: 'description', format: 'Md' },
+        { name: 'objectType', title: 'Type'},
         { name: 'updateDate', title: 'Last Updated', format: 'Date' },
     ];
 

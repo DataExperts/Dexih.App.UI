@@ -1,7 +1,7 @@
 import { Component, OnInit, OnChanges, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HubService } from '../../hub.service';
-import { HubCache, DexihHub, DexihTable, DexihDatalink, DexihConnection, eViewSource} from '../../hub.models';
+import { HubCache, DexihHub, DexihTable, DexihDatalink, DexihConnection, eViewSource, eSharedDataObjectType} from '../../hub.models';
 import { Subscription ,  Observable, combineLatest} from 'rxjs';
 import { DownloadObject, eDownloadFormat } from '../../hub.query.models';
 import { DatalinkColumnEditComponent } from '../../datalink/datalink-edit/datalink-column-edit';
@@ -140,8 +140,8 @@ export class ActionsTableButtonComponent implements OnInit, OnChanges, OnDestroy
         this.hubService.deleteTables(this.getTables());
     }
 
-    shareSelectedTables(isShared: boolean) {
-        this.hubService.shareTables(this.getTableKeys(), isShared);
+    shareItems(isShared: boolean) {
+        this.hubService.shareItems(this.getTableKeys(), eSharedDataObjectType.Table, isShared);
     }
 
     newDatalinks() {

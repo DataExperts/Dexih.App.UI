@@ -21,6 +21,7 @@ export class ViewIndexComponent implements OnInit, OnDestroy {
     views: Array<DexihView>;
 
     columns = [
+        { iconClass: 'sharedIcon', tooltip: 'sharedToolTip', width: '1%', align: 'center' },
         { name: 'name', title: 'Name', footer: 'description', format: 'Md' },
         { name: 'viewType', title: 'Chart/Table' },
         { name: 'sourceType', title: 'Source Type'},
@@ -77,7 +78,18 @@ export class ViewIndexComponent implements OnInit, OnDestroy {
         if (this.hubCache && this.hubCache.isLoaded()) {
             let views: Array<DexihView>;
             views = this.hubCache.hub.dexihViews.filter(c => c.isValid);
-            this._tableData.next(views);
+            let tableData = views.map(view => {
+                return {
+                    key: view.key,
+                    name: view.name,
+                    viewType: view.viewType,
+                    sourceType: view.sourceType,
+                    updateDate: view.updateDate,
+                    sharedIcon: view.isShared ? 'fa fa-group' : 'fa fa-user-secret',
+                    sharedToolTip: view.isShared ? 'Table is shared' : 'Table is private'
+                };
+            });
+            this._tableData.next(tableData);
         } else {
             this._tableData.next(null);
         }

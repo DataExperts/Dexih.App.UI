@@ -85,7 +85,7 @@ namespace dexih.api.Controllers
         // POST: /Account/Login
         [HttpPost("[action]")]
         [AllowAnonymous]
-        public async Task<ApplicationUser> Login([FromBody] LoginModel login)
+        public async Task<ReturnUser> Login([FromBody] LoginModel login)
         {
             if (ModelState.IsValid)
             {
@@ -115,7 +115,7 @@ namespace dexih.api.Controllers
 	                    Response.Cookies.Delete("XSRF-TOKEN");
 	                    Response.Cookies.Append("XSRF-TOKEN", tokens.RequestToken, new CookieOptions() {HttpOnly = false});
 
-	                    return user;
+	                    return new ReturnUser(user);
                     }
                     //if (result.RequiresTwoFactor)
                     //{
@@ -175,7 +175,7 @@ namespace dexih.api.Controllers
         // POST: /Account/Login
         [HttpPost("[action]")]
         [AllowAnonymous]
-        public async Task<ApplicationUser> ExternalLogin([FromBody] ExternalLoginProviderModel externalProvider)
+        public async Task<ReturnUser> ExternalLogin([FromBody] ExternalLoginProviderModel externalProvider)
         {
             if (ModelState.IsValid)
             {
@@ -199,7 +199,7 @@ namespace dexih.api.Controllers
                     var result = await _signInManager.ExternalLoginSignInAsync(externalLoginResult.Provider.ToString(), externalLoginResult.ProviderKey, false);
                     if (result.Succeeded)
                     {
-                        return user;
+                        return new ReturnUser(user);
                     }
                     //if (result.RequiresTwoFactor)
                     //{
@@ -246,7 +246,7 @@ namespace dexih.api.Controllers
         // POST: /Account/Register
         [HttpPost("[action]")]
         [AllowAnonymous]
-        public async Task<ApplicationUser> Register([FromBody] RegisterModel register)
+        public async Task<ReturnUser> Register([FromBody] RegisterModel register)
         {
             if (ModelState.IsValid)
             {
@@ -307,7 +307,7 @@ namespace dexih.api.Controllers
 							await _operations.RepositoryManager.AddLoginAsync(user, register.Provider, externalLoginResult.ProviderKey);
 							await _signInManager.SignInAsync(user, false);
 							SendRegisteredEmail(user);
-							return user;
+							return new ReturnUser(user);
 						}
 						else
 						{
@@ -325,7 +325,7 @@ namespace dexih.api.Controllers
 							await SendSupportMessage($"User registration succeeded for {user.Email}.",
 								$"The user user {user.Email} is not registered.  Invitation status is {user.IsInvited}.");
 
-							return user;
+							return new ReturnUser(user);
 						}
 					}
 					catch (Exception ex)
@@ -377,7 +377,7 @@ namespace dexih.api.Controllers
 						await _operations.RepositoryManager.UpdateUserAsync(existingUser);
 						await SendSupportMessage($"User registration completed for {existingUser.Email}.", $"The user user {existingUser.Email} is has registered.  Invitation status is {existingUser.IsInvited}.");
 
-						return existingUser;
+						return new ReturnUser(existingUser);
 					}
                 }
 
@@ -458,7 +458,7 @@ namespace dexih.api.Controllers
         // GET: /Account/ConfirmEmail
         [HttpPost("[action]")]
         [AllowAnonymous]
-        public async Task<ApplicationUser> ConfirmEmail([FromBody] ConfirmEmailModel email)
+        public async Task<ReturnUser> ConfirmEmail([FromBody] ConfirmEmailModel email)
         {
             if (email.Email == null || email.Code == null)
             {
@@ -474,7 +474,7 @@ namespace dexih.api.Controllers
 
 	        await _operations.RepositoryManager.ConfirmEmailAsync(user, email.Code);
 	        SendRegisteredEmail(user);
-	        return user;
+	        return new ReturnUser(user);
         }
 
         //
@@ -482,7 +482,7 @@ namespace dexih.api.Controllers
         [HttpPost("[action]")]
         [AllowAnonymous]
         //[ValidateAntiForgeryToken]
-        public async Task<object> GetUser()
+        public async Task<ReturnUser> GetUser()
         {
             if(!_signInManager.IsSignedIn(User)) 
             {
@@ -493,23 +493,7 @@ namespace dexih.api.Controllers
             {
 	            var user = await  _operations.RepositoryManager.GetUser(User);
 	            
-	            // just return the non sensitive user components.
-	            return new
-	            {
-		            user.Email,
-		            user.Subscription,
-		            user.Terms,
-		            user.FirstName,
-		            user.HubQuota,
-		            user.InviteQuota,
-		            user.IsAdmin,
-		            user.Id,
-		            user.IsRegistered,
-		            user.LastName,
-		            user.UserRole,
-		            user.EmailConfirmed,
-		            user.UserName,
-	            };
+	            return new ReturnUser(user);
             }
         }
 	    
@@ -647,7 +631,7 @@ namespace dexih.api.Controllers
         [HttpPost("[action]")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ApplicationUser> AddExternalLogin([FromBody] ExternalLoginModel externalLoginModel)
+        public async Task<ReturnUser> AddExternalLogin([FromBody] ExternalLoginModel externalLoginModel)
         {
           	if (ModelState.IsValid)
             {
@@ -672,7 +656,7 @@ namespace dexih.api.Controllers
 
 		            await _operations.RepositoryManager.AddLoginAsync(user, info.Provider, info.ProviderKey);
 		            await _signInManager.SignInAsync(user, isPersistent: false);
-		            return user;
+		            return new ReturnUser(user);
 	            }
 		          
 	            throw new AccountControllerException("External login provider not current.");
@@ -924,21 +908,15 @@ namespace dexih.api.Controllers
             return key;
         }
 
-	    public class RemoteAgentUserToken
-	    {
-		    public string User { get; set; }
-		    public string RemoteAgentId { get; set; }
-		    public string UserToken { get; set; }
-	    }
 
-	    public class RemoteAgentLogin
-	    {
-		    public string RemoteAgentId { get; set; }
-		    public string AuthorizedHubs { get; set; }
-		    public DateTime? LastLoginDateTime { get; set; }
-		    public string Name { get; set; }
-		    public IEnumerable<DexihRemoteAgentHub> AuthorizedRemoteAgents { get; set; }
-	    }
+//	    public class RemoteAgentLogin
+//	    {
+//		    public string RemoteAgentId { get; set; }
+//		    public string AuthorizedHubs { get; set; }
+//		    public DateTime? LastLoginDateTime { get; set; }
+//		    public string Name { get; set; }
+//		    public IEnumerable<DexihRemoteAgentHub> AuthorizedRemoteAgents { get; set; }
+//	    }
 
 	    
 	    // POST: /Account/GetUserRemoteAgents
@@ -1081,11 +1059,11 @@ namespace dexih.api.Controllers
         [HttpGet("[action]")]
 	    [AllowAnonymous]
         [ResponseCache(Duration = 3600)]
-        public async Task<CacheManager> GetGlobalCache()
+        public CacheManager GetGlobalCache()
         {
             try
             {
-                return await _cache.GetOrCreateAsync($"GLOBAL_CACHE", entry =>
+                return _cache.GetOrCreate($"GLOBAL_CACHE", entry =>
                 {
 	                _logger.LogInformation("Loading global cache.");
 	                
@@ -1102,7 +1080,7 @@ namespace dexih.api.Controllers
 
                     if (returnValue)
                     {
-                        return Task.FromResult(cache);
+	                    return cache;
                     }
 
                     throw new AccountControllerException("Could not get the global cache");
@@ -1135,11 +1113,7 @@ namespace dexih.api.Controllers
 		    await _remoteAgents.CancelTasks(tasks, repositoryManager);
 	    }
 
-	    public class RestartAgentsParameter
-	    {
-		    public IEnumerable<string> InstanceIds;
-		    public bool Force;
-	    }
+
 	    
 	    /// <summary>
 	    /// Cancels any running tasks 

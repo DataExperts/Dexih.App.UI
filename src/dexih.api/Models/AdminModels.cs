@@ -79,5 +79,7 @@ namespace dexih.api.Models
 		public string Provider;
 		public string ProviderKey;
 	}
+	
+
 
 }

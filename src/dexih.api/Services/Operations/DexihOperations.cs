@@ -35,7 +35,7 @@ namespace dexih.api.Services.Operations
         {
             try
             {
-                var sendMessage = new RemoteMessage("", "", "hub-change", null, Json.JTokenFromObject(import, ""));
+                var sendMessage = new RemoteMessage("", "", "hub-change", Json.JTokenFromObject(import, ""));
                 var users = await RepositoryManager.GetHubUserIds(import.HubKey);
                 await _browserContext.Clients.Users(users).SendAsync("Command", sendMessage);
             }
@@ -67,7 +67,7 @@ namespace dexih.api.Services.Operations
         /// <param name="content">Content.</param>
         public async Task BroadcastHubMessageAsync(long hubKey, string command, object content)
         {
-            var sendMessage = new RemoteMessage("", "", command, null, Json.JTokenFromObject(content, "none"));
+            var sendMessage = new RemoteMessage("", "", command, Json.JTokenFromObject(content, "none"));
             await _browserContext.Clients.Group(hubKey.ToString()).SendAsync("Command", sendMessage);
         }
 
@@ -80,7 +80,7 @@ namespace dexih.api.Services.Operations
         /// <param name="content">Content.</param>
         public async Task BroadcastUsersMessageAsync(IEnumerable<string> userIds, string command, object content)
         {
-            var sendMessage = new RemoteMessage("", "", command, null, Json.JTokenFromObject(content, "none"));
+            var sendMessage = new RemoteMessage("", "", command, Json.JTokenFromObject(content, "none"));
 			
             foreach (var userId in userIds)
             {
@@ -103,7 +103,7 @@ namespace dexih.api.Services.Operations
                 return;
             }
 
-            var sendMessage = new RemoteMessage("", "", command, null, Json.JTokenFromObject(content, "none"));
+            var sendMessage = new RemoteMessage("", "", command, Json.JTokenFromObject(content, "none"));
             await _browserContext.Clients.Client(connectionId).SendAsync("Command", sendMessage);
         }
 	    

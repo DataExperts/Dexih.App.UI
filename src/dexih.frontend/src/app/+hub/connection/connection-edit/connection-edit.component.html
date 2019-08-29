@@ -11,7 +11,7 @@
 			<dexih-button class="mr-1" *ngIf="hubCache.canWrite" buttonClass="btn btn-success" [busy]="refreshingConnection" iconClass="fa fa-thumbs-o-up" (click)="!refreshingConnection && refreshConnection()" title="Test the connection against the source.">Test</dexih-button>
 			<save-button class="mr-1" *ngIf="hubCache.canWrite" [formsService]="formsService"></save-button>
 
-			<ng-template [ngIf]="connectionReference">
+			<ng-template [ngIf]="hubCache.canWrite && connectionReference">
 				<ng-template [ngIf]="connectionReference.connectionCategory == eConnectionCategory.SqlDatabase || connectionReference.connectionCategory == eConnectionCategory.DatabaseFile || connectionReference.connectionCategory == eConnectionCategory.NoSqlDatabase || connectionReference.connectionCategory == eConnectionCategory.Hub">
 					<dexih-button class="mr-1" *ngIf="formsService.currentForm.controls.key.value" [routerLink]="['../../connection-import', formsService.currentForm.controls.key.value]" iconClass="fa fa-plus">Import Tables</dexih-button>
 				</ng-template>

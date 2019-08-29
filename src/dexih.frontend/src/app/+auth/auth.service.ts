@@ -769,6 +769,7 @@ export class AuthService implements OnDestroy {
 
     googleLoadScript(): Promise<boolean> {
         // node: safari seems to require script local
+        // original script at https://apis.google.com/js/api.js
         return this.loadScript('GOOGLE', '/assets/js/google-api.js');
     }
 

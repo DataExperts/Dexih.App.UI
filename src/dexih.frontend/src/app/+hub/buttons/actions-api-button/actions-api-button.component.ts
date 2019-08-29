@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, combineLatest} from 'rxjs';
 
 import { AuthService } from '../../../+auth/auth.service';
-import { DexihApi, HubCache, DexihHub } from '../../hub.models';
+import { DexihApi, HubCache, DexihHub, eSharedDataObjectType } from '../../hub.models';
 import { HubService } from '../../hub.service';
 
 @Component({
@@ -51,6 +51,10 @@ export class ActionsApiButtonComponent implements OnInit, OnDestroy {
         let filename = this.apis.length === 1 ? 'Api - ' + this.apis[0].name + '.json' : 'apis.json';
 
         this.hubService.exportHub(hub, filename);
+    }
+
+    shareItems(isShared: boolean) {
+        this.hubService.shareItems(this.apis.map(c => c.key), eSharedDataObjectType.Datalink, isShared);
     }
 
     activateApis() {
