@@ -25,8 +25,8 @@ namespace dexih.api.Services.Remote
 	    Task<Out> Run<In, Out>(HubValue<In> hubValue, string method, RepositoryManager repositoryManager,
 		    CancellationToken cancellationToken = default, bool awaitResponse = true);
 	    
-	    Task<string> SendRemoteCommand(long hubKey, string instanceId, string method, object value,
-		    RepositoryManager repositoryManager, CancellationToken cancellationToken = default);
+//	    Task<string> SendRemoteCommand(long hubKey, string instanceId, string method, object value,
+//		    RepositoryManager repositoryManager, CancellationToken cancellationToken = default);
 
 	    Task<(string instanceId, string securityToken)> AuthorizeRemoteAgent(string name, long remoteAgentKey,
 		    string encryptionKey, string ipAddress, string userId);

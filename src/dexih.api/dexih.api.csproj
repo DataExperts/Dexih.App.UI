@@ -119,6 +119,9 @@
     <None Update="serverless.template">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Resources\RemoteAgents\dexih.remote.run.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\Account\MicrosoftRedirect.cshtml" />

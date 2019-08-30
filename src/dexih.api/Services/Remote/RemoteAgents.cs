@@ -295,48 +295,48 @@ namespace dexih.api.Services.Remote
 		    }
 	    }
 	    
-	    public async Task<string> SendRemoteCommand(long hubKey, string instanceId, string method, object value, RepositoryManager repositoryManager, CancellationToken cancellationToken = default)
-        {
-	        var remoteAgentProperties = await GetRemoteAgentProperties(instanceId, cancellationToken);
-            try
-            {
-	            if (hubKey > 0)
-	            {
-		            var remoteAgentHub = await repositoryManager.AuthorizedRemoteAgentHub(hubKey, remoteAgentProperties.RemoteAgentKey);
-		            if (remoteAgentHub == null)
-		            {
-			            _remoteLogger.LogWarning(LoggingEvents.GetRemoteAgent,
-				            "GetRemoteAgent - remote agent not authorized for hub, id {id}, HubKey {hubKey}.",
-				            instanceId, hubKey);
-			            throw new RemoteAgentGetRemoteAgentException(
-				            $"The selected remote agent is not authorized for this hub.  Instance {instanceId}, HubKey: {hubKey}, Name: {remoteAgentProperties.Name}",
-				            null, instanceId, hubKey);
-		            }
-	            }
-
-	            var messageId = Guid.NewGuid().ToString();
-	            
-	            var remoteMessage = new RemoteMessage()
-	            {
-		            MessageId = messageId,
-		            SecurityToken = remoteAgentProperties.SecurityToken,
-		            Value = Json.JTokenFromObject(value, remoteAgentProperties.EncryptionKey),
-		            Method = method,
-		            HubKey = hubKey,
-		            HubVariables = await repositoryManager.GetHubVariables(hubKey),
-		            TimeOut = int.MaxValue
-	            };
-	            
-                var client = _remoteAgentContext.Clients.Clients(remoteAgentProperties.ConnectionId);
-                await client.SendAsync("Command2", remoteMessage, cancellationToken);
-
-                return messageId;
-            }
-            catch (Exception ex)
-            {
-				throw new RemoteAgentException($"From remote agent \"{remoteAgentProperties.Name}\":\n{ex.Message}", ex);
-            }
-        }
+//	    public async Task<string> SendRemoteCommand(long hubKey, string instanceId, string method, object value, RepositoryManager repositoryManager, CancellationToken cancellationToken = default)
+//        {
+//	        var remoteAgentProperties = await GetRemoteAgentProperties(instanceId, cancellationToken);
+//            try
+//            {
+//	            if (hubKey > 0)
+//	            {
+//		            var remoteAgentHub = await repositoryManager.AuthorizedRemoteAgentHub(hubKey, remoteAgentProperties.RemoteAgentKey);
+//		            if (remoteAgentHub == null)
+//		            {
+//			            _remoteLogger.LogWarning(LoggingEvents.GetRemoteAgent,
+//				            "GetRemoteAgent - remote agent not authorized for hub, id {id}, HubKey {hubKey}.",
+//				            instanceId, hubKey);
+//			            throw new RemoteAgentGetRemoteAgentException(
+//				            $"The selected remote agent is not authorized for this hub.  Instance {instanceId}, HubKey: {hubKey}, Name: {remoteAgentProperties.Name}",
+//				            null, instanceId, hubKey);
+//		            }
+//	            }
+//
+//	            var messageId = Guid.NewGuid().ToString();
+//	            
+//	            var remoteMessage = new RemoteMessage()
+//	            {
+//		            MessageId = messageId,
+//		            SecurityToken = remoteAgentProperties.SecurityToken,
+//		            Value = Json.JTokenFromObject(value, remoteAgentProperties.EncryptionKey),
+//		            Method = method,
+//		            HubKey = hubKey,
+//		            HubVariables = await repositoryManager.GetHubVariables(hubKey),
+//		            TimeOut = int.MaxValue
+//	            };
+//	            
+//                var client = _remoteAgentContext.Clients.Clients(remoteAgentProperties.ConnectionId);
+//                await client.SendAsync("Command2", remoteMessage, cancellationToken);
+//
+//                return messageId;
+//            }
+//            catch (Exception ex)
+//            {
+//				throw new RemoteAgentException($"From remote agent \"{remoteAgentProperties.Name}\":\n{ex.Message}", ex);
+//            }
+//        }
 
 
 		/// <summary>
@@ -476,7 +476,7 @@ namespace dexih.api.Services.Remote
             try
             {
                 _remoteLogger.LogTrace(LoggingEvents.RemoteDecrypt, "Decrypt - Id: {Id}, HubKey: {hubKey}.", id, hubKey);
-                var result = await SendRemoteCommand(hubKey, id, nameof(RemoteOperations.Decrypt), value, database, CancellationToken.None);
+                var result = await SendRemoteMessage<string>(hubKey, id, nameof(RemoteOperations.Decrypt), value, database, CancellationToken.None);
                 return result;
             }
             catch (Exception ex)

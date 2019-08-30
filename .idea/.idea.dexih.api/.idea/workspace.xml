@@ -3,17 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="1be1a9df-0647-4351-ace4-9bafd064437b" name="Default" comment="minor">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Controllers/AccountController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Controllers/AccountController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Controllers/RemoteController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Controllers/RemoteController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Models/AccountModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Models/AccountModels.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Resources/RemoteAgents/dexih.remote.run.alpine.sh" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Resources/RemoteAgents/dexih.remote.run.alpine.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Resources/RemoteAgents/dexih.remote.run.osx.sh" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Resources/RemoteAgents/dexih.remote.run.osx.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/auth.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/login/login.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/hub.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/hub.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/remoteAgents/remoteAgent-download/remoteAgent-download.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/remoteAgents/remoteAgent-download/remoteAgent-download.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/remoteAgents/remoteAgent-download/remoteAgent-download.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/remoteAgents/remoteAgent-download/remoteAgent-download.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Services/Remote/IRemoteAgents.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Services/Remote/IRemoteAgents.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Services/Remote/RemoteAgents.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Services/Remote/RemoteAgents.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/dexih.api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/dexih.api.csproj" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -621,7 +613,6 @@
         <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/HttpService.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/Cache/StreamCache.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Models/RemoteModels.cs" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/ListenerService.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/RemoteOperations/RemoteOperationEnum.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/RemoteOperations/ERemoteCommands.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Services/Operations/dexihOperations.cs" />
@@ -629,7 +620,6 @@
         <option value="$PROJECT_DIR$/src/dexih.api/Controllers/ReaderController.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/ColumnValidationRun.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.operations/CacheManager.cs" />
-        <option value="$PROJECT_DIR$/src/dexih.api/Services/Remote/IRemoteAgents.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/Streams/StreamSecurityKeys.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/Streams/IStreams.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/Startup.cs" />
@@ -639,13 +629,15 @@
         <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/RemoteOperations/RemoteOperations.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Controllers/HubController.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Models/HubModels.cs" />
-        <option value="$PROJECT_DIR$/src/dexih.api/Services/Remote/RemoteAgents.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Controllers/AccountController.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Models/AccountModels.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Controllers/RemoteController.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Resources/RemoteAgents/dexih.remote.run.osx.sh" />
         <option value="$PROJECT_DIR$/src/dexih.api/Resources/RemoteAgents/dexih.remote.run.alpine.sh" />
         <option value="$PROJECT_DIR$/src/dexih.api/Startup.cs" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/ListenerService.cs" />
+        <option value="$PROJECT_DIR$/src/dexih.api/Services/Remote/IRemoteAgents.cs" />
+        <option value="$PROJECT_DIR$/src/dexih.api/Services/Remote/RemoteAgents.cs" />
       </list>
     </option>
   </component>
@@ -838,7 +830,7 @@
             <path>
               <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
               <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@33a484e3" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@30a02e02" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@cfdf3326" type="7427dc5b:ServiceModel$ServiceGroupNode" />
             </path>
           </expand>
           <select />
@@ -1392,7 +1384,7 @@
       <workItem from="1566864467323" duration="1742000" />
       <workItem from="1566869542013" duration="40249000" />
       <workItem from="1567038831887" duration="7758000" />
-      <workItem from="1567053037671" duration="9699000" />
+      <workItem from="1567053037671" duration="11507000" />
     </task>
     <task id="LOCAL-00001" summary="Connections to remote agents working.">
       <created>1509234944099</created>
@@ -1534,66 +1526,66 @@
     <state width="1969" height="705" key="DebuggerActiveHint/3840.2160/3360.2100" />
     <state x="3354" y="208" key="EnvironmentVariablesDialog" />
     <state x="3354" y="208" key="EnvironmentVariablesDialog/3840.2160/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.0.bottom" />
+    <state width="1442" height="498" key="GridCell.Tab.0.bottom" />
     <state width="675" height="337" key="GridCell.Tab.0.bottom/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.0.bottom/3840.2160/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.0.center" />
+    <state width="1442" height="498" key="GridCell.Tab.0.bottom/3840.2160/3360.2100" />
+    <state width="1442" height="498" key="GridCell.Tab.0.center" />
     <state width="675" height="337" key="GridCell.Tab.0.center/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.0.center/3840.2160/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.0.left" />
+    <state width="1442" height="498" key="GridCell.Tab.0.center/3840.2160/3360.2100" />
+    <state width="1442" height="498" key="GridCell.Tab.0.left" />
     <state width="675" height="337" key="GridCell.Tab.0.left/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.0.left/3840.2160/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.0.right" />
+    <state width="1442" height="498" key="GridCell.Tab.0.left/3840.2160/3360.2100" />
+    <state width="1442" height="498" key="GridCell.Tab.0.right" />
     <state width="675" height="337" key="GridCell.Tab.0.right/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.0.right/3840.2160/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.1.bottom" />
+    <state width="1442" height="498" key="GridCell.Tab.0.right/3840.2160/3360.2100" />
+    <state width="1442" height="498" key="GridCell.Tab.1.bottom" />
     <state width="675" height="337" key="GridCell.Tab.1.bottom/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.1.bottom/3840.2160/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.1.center" />
+    <state width="1442" height="498" key="GridCell.Tab.1.bottom/3840.2160/3360.2100" />
+    <state width="1442" height="498" key="GridCell.Tab.1.center" />
     <state width="675" height="337" key="GridCell.Tab.1.center/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.1.center/3840.2160/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.1.left" />
+    <state width="1442" height="498" key="GridCell.Tab.1.center/3840.2160/3360.2100" />
+    <state width="1442" height="498" key="GridCell.Tab.1.left" />
     <state width="675" height="337" key="GridCell.Tab.1.left/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.1.left/3840.2160/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.1.right" />
+    <state width="1442" height="498" key="GridCell.Tab.1.left/3840.2160/3360.2100" />
+    <state width="1442" height="498" key="GridCell.Tab.1.right" />
     <state width="675" height="337" key="GridCell.Tab.1.right/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.1.right/3840.2160/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.2.bottom" />
+    <state width="1442" height="498" key="GridCell.Tab.1.right/3840.2160/3360.2100" />
+    <state width="1442" height="498" key="GridCell.Tab.2.bottom" />
     <state width="675" height="337" key="GridCell.Tab.2.bottom/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.2.bottom/3840.2160/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.2.center" />
+    <state width="1442" height="498" key="GridCell.Tab.2.bottom/3840.2160/3360.2100" />
+    <state width="1442" height="498" key="GridCell.Tab.2.center" />
     <state width="675" height="337" key="GridCell.Tab.2.center/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.2.center/3840.2160/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.2.left" />
+    <state width="1442" height="498" key="GridCell.Tab.2.center/3840.2160/3360.2100" />
+    <state width="1442" height="498" key="GridCell.Tab.2.left" />
     <state width="675" height="337" key="GridCell.Tab.2.left/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.2.left/3840.2160/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.2.right" />
+    <state width="1442" height="498" key="GridCell.Tab.2.left/3840.2160/3360.2100" />
+    <state width="1442" height="498" key="GridCell.Tab.2.right" />
     <state width="675" height="337" key="GridCell.Tab.2.right/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.2.right/3840.2160/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.3.bottom" />
+    <state width="1442" height="498" key="GridCell.Tab.2.right/3840.2160/3360.2100" />
+    <state width="1442" height="498" key="GridCell.Tab.3.bottom" />
     <state width="675" height="337" key="GridCell.Tab.3.bottom/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.3.bottom/3840.2160/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.3.center" />
+    <state width="1442" height="498" key="GridCell.Tab.3.bottom/3840.2160/3360.2100" />
+    <state width="1442" height="498" key="GridCell.Tab.3.center" />
     <state width="675" height="337" key="GridCell.Tab.3.center/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.3.center/3840.2160/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.3.left" />
+    <state width="1442" height="498" key="GridCell.Tab.3.center/3840.2160/3360.2100" />
+    <state width="1442" height="498" key="GridCell.Tab.3.left" />
     <state width="675" height="337" key="GridCell.Tab.3.left/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.3.left/3840.2160/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.3.right" />
+    <state width="1442" height="498" key="GridCell.Tab.3.left/3840.2160/3360.2100" />
+    <state width="1442" height="498" key="GridCell.Tab.3.right" />
     <state width="675" height="337" key="GridCell.Tab.3.right/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.3.right/3840.2160/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.4.bottom" />
+    <state width="1442" height="498" key="GridCell.Tab.3.right/3840.2160/3360.2100" />
+    <state width="1442" height="498" key="GridCell.Tab.4.bottom" />
     <state width="675" height="337" key="GridCell.Tab.4.bottom/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.4.bottom/3840.2160/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.4.center" />
+    <state width="1442" height="498" key="GridCell.Tab.4.bottom/3840.2160/3360.2100" />
+    <state width="1442" height="498" key="GridCell.Tab.4.center" />
     <state width="675" height="337" key="GridCell.Tab.4.center/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.4.center/3840.2160/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.4.left" />
+    <state width="1442" height="498" key="GridCell.Tab.4.center/3840.2160/3360.2100" />
+    <state width="1442" height="498" key="GridCell.Tab.4.left" />
     <state width="675" height="337" key="GridCell.Tab.4.left/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.4.left/3840.2160/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.4.right" />
+    <state width="1442" height="498" key="GridCell.Tab.4.left/3840.2160/3360.2100" />
+    <state width="1442" height="498" key="GridCell.Tab.4.right" />
     <state width="675" height="337" key="GridCell.Tab.4.right/3360.2100" />
-    <state width="1444" height="498" key="GridCell.Tab.4.right/3840.2160/3360.2100" />
+    <state width="1442" height="498" key="GridCell.Tab.4.right/3840.2160/3360.2100" />
     <state x="3417" y="141" key="RiderGenerateDialog" />
     <state x="3417" y="141" key="RiderGenerateDialog/3840.2160/3360.2100" />
     <state width="840" height="525" key="XDebugger.FullValuePopup" />
