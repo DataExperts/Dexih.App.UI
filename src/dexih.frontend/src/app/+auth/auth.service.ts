@@ -771,6 +771,7 @@ export class AuthService implements OnDestroy {
         // node: safari seems to require script local
         // original script at https://apis.google.com/js/api.js
         return this.loadScript('GOOGLE', '/assets/js/google-api.js');
+        // return this.loadScript('GOOGLE', 'https://apis.google.com/js/platform.js', true);
     }
 
     googleLogin(clientId: string, forceLogin: boolean): Promise<User> {
@@ -854,6 +855,8 @@ export class AuthService implements OnDestroy {
                         }
                     });
                 });
+                }).catch(reason => {
+                    reject(reason);
                 });
             } catch (e) {
                 this.logger.LogC(() => `login error:${e.message}`, eLogLevel.Error);
@@ -888,13 +891,13 @@ export class AuthService implements OnDestroy {
         const config = {
             auth: {
                 clientId: clientId,
-                // authority: 'https://login.microsoftonline.com/common/',
+                authority: 'https://login.microsoftonline.com/common/',
                 redirectUri: location.origin + '/api/Account/MicrosoftRedirect'
             },
-            // cache: {
-            //     cacheLocation: <CacheLocation> 'sessionStorage',
-            //     storeAuthStateInCookie: false
-            // }
+            cache: {
+                cacheLocation: <CacheLocation> 'sessionStorage',
+                storeAuthStateInCookie: false
+            }
         };
 
         let userAgentApplication = new UserAgentApplication(config);
@@ -1068,21 +1071,23 @@ export class AuthService implements OnDestroy {
         });
     }
 
-    loadScript(id: string, src: string): Promise<boolean> {
+    loadScript(id: string, src: string, isExternal = false): Promise<boolean> {
         return new Promise<boolean>((resolve) => {
             // if script already loaded, do nothing
             let script = document.getElementById(id)
             if (script) {
                 resolve(true);
+                return;
             }
 
             // add the script to the page.
             let newScript = document.createElement('script');
             newScript.id = id;
+            newScript.type = 'text/javascript';
             newScript.async = true;
-            newScript.src = this.location.prepareExternalUrl(src);
+            newScript.src = isExternal ? src : this.location.prepareExternalUrl(src);
             newScript.onload = (() => { resolve(true); });
-            document.body.appendChild(newScript);
+            document.head.appendChild(newScript);
         });
     }
 

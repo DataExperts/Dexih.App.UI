@@ -697,13 +697,14 @@ chmod a+x dexih.remote.run.{os}.sh
         {
             var host = Request.Scheme + "://" + Request.Host;
             var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "RemoteAgents");
+            var osName = os.ToLower();
 
-            switch (os.ToLower())
+            switch (osName)
             {
                 case "osx":
                 case "linux":
                 case "alpine":
-                    var file = await System.IO.File.ReadAllLinesAsync(Path.Combine(path, $"dexih.remote.run.{os}.sh"));
+                    var file = await System.IO.File.ReadAllLinesAsync(Path.Combine(path, $"dexih.remote.run.{osName}.sh"));
 
                     for(var i =0; i < file.Length; i++)
                     {
@@ -712,7 +713,7 @@ chmod a+x dexih.remote.run.{os}.sh
                     }
                 
                     var memoryStream = new MemoryStream(Encoding.ASCII.GetBytes(string.Join('\n', file)));
-                    return (memoryStream, "text/plain", $"dexih.remote.run.{os.ToLower()}.sh");
+                    return (memoryStream, "text/plain", $"dexih.remote.run.{osName}.sh");
                 case "windows":
                     var file2 = System.IO.File.OpenRead(Path.Combine(path, $"dexih.remote.run.exe"));
                     return (file2, "application/octet-stream", $"dexih.remote.run.exe");
@@ -729,12 +730,13 @@ chmod a+x dexih.remote.run.{os}.sh
 	        settings.RemoteApplicationSettings.CopyProperties(remoteSettings.AppSettings);
 	        settings.RemoteApplicationSettings.CopyProperties(remoteSettings.Network);
 	        settings.RemoteApplicationSettings.CopyProperties(remoteSettings.Permissions);
-            //TODO these should be copied by the copyproperties.  
+            //TODO these should be copied by the copy properties.  
             remoteSettings.Permissions.AllowedHubs = settings.RemoteApplicationSettings.AllowedHubs;
             remoteSettings.Permissions.AllowedPaths = settings.RemoteApplicationSettings.AllowedPaths;
 	        settings.RemoteApplicationSettings.CopyProperties(remoteSettings.Privacy);
 	        remoteSettings.NamingStandards.LoadDefault();
 
+            remoteSettings.AppSettings.UserPrompt = false;
 	        remoteSettings.AppSettings.WebServer = (HttpContext.Request.IsHttps ? "https://" : "http://") +
 	                                               HttpContext.Request.Host + HttpContext.Request.PathBase.Value;
 	        remoteSettings.AppSettings.RemoteAgentId = Guid.NewGuid().ToString();

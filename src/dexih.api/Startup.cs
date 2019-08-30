@@ -156,7 +156,6 @@ namespace dexih.api
 
 	        services.AddResponseCaching();
 
-	        
             // Add framework services.
             services.AddMvc()
 	            .AddJsonOptions(options =>
@@ -295,7 +294,7 @@ namespace dexih.api
 
             app.Use(async (context, next) =>
             {
-                    //force ssl connections for non-development environments.
+                //force ssl connections for non-development environments.
 	            if (context.Request.IsHttps || env.IsDevelopment())
 	            {
 		            _logger.LogInformation($"Request from path {context.Request.Path}");

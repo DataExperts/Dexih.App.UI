@@ -134,6 +134,8 @@ export class LoginComponent implements OnInit, OnDestroy {
                 reason => {
                     this.message = reason.message;
                 });
+        }).catch(reason => {
+            this.message = reason.message;
         });
     }
 

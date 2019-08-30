@@ -193,6 +193,7 @@ namespace dexih.api.Models
             UserRole = user.UserRole;
             EmailConfirmed = user.EmailConfirmed;
             UserName = user.UserName;
+            IsInvited = user.IsInvited;
 
         }
         public string Email { get; set; }
@@ -208,6 +209,7 @@ namespace dexih.api.Models
         public ApplicationUser.EUserRole UserRole { get; set; }
         public bool EmailConfirmed { get; set; }
         public string UserName { get; set; }
+        public bool IsInvited { get; set; }
     }
 
 

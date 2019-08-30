@@ -24,7 +24,7 @@
 	
 				<section>
 					<form-input label="Encryption Key" formControlName="encryptionKey" placeholder="Enter an encryption key" [autocapitalize]="on" iconClass="fa fa-key" [errors]="formsService.formErrors.encryptionKey" 
-						note="Encryption key is used to encrypt secure fields.  Note: this key is not retained by the information hub, and if lost encrypted data can not be restored.">
+						note="Encryption key is used to encrypt secure fields and connection passwords.  Note: this key is not retained by the information hub, and if lost encrypted data can not be restored.">
 						( <a href="javascript:void(0)" *ngIf="refreshingEncryptionKey == false" (click)="generateEncryptionKey()"> <i class="fa fa-refresh"></i> Generate Random Key </a>
 							<span *ngIf="refreshingEncryptionKey == true" > <i class="fa fa-spin fa-refresh"></i> Refreshing... please wait </span>
 						)
@@ -42,7 +42,7 @@
 						</form-checkbox>
 					</section>
 					<section class="form-group col-md-6">
-						<form-checkbox label="Allow beta and pre-releases/" formControlName="preRelease" >
+						<form-checkbox label="Allow beta and pre-releases." formControlName="preRelease" >
 						</form-checkbox>
 					</section>
 				</div>
@@ -66,12 +66,12 @@
 
 				<div class="form-row">
 					<section class="form-group col-md-6">
-						<form-input label="Local Upload/Download Port" formControlName="downloadPort" placeholder="Enter the upload/download port" note='The local port for the remote agent to use for upload/download operations'>
+						<form-input label="Local Upload/Download Port" formControlName="downloadPort" placeholder="Enter the upload/download port" note='The local port for the remote agent to use for upload/download operations.'>
 						</form-input>
 					</section>
 					<section class="form-group col-md-6">
 						<form-input label="External Upload/Download Url" formControlName="externalDownloadUrl" 
-							note='The url which can be used to access the upload/download operations on the remote agent.  E.g. https://10.10.10.10:33944'>
+							note='The url which can be used to access the upload/download operations on the remote agent.  e.g. https://10.10.10.10:33944.'>
 						</form-input>
 					</section>
 				</div>
@@ -79,57 +79,57 @@
 
 					<div class="form-row">
 						<section class="form-group col-md-6">
-							<form-checkbox label="Allow data access through the Local Area Network (LAN)?" formControlName="allowLanAccess" >
+							<form-checkbox label="Allow data access through the Local Area Network (LAN)." formControlName="allowLanAccess" >
 							</form-checkbox>
 						</section>
 						<section class="form-group col-md-6">
-							<form-checkbox label="Allow data access through the Internet?" formControlName="allowExternalAccess" >
-							</form-checkbox>
-						</section>
-					</div>
-
-					<div class="form-row">
-						<section class="form-group col-md-6">
-							<form-checkbox label="Allow data access through an internet based Proxy Server?" formControlName="allowProxy" >
+							<form-checkbox label="Allow data access through the Internet." formControlName="allowExternalAccess" >
 							</form-checkbox>
 						</section>
 					</div>
 
 					<div class="form-row">
 						<section class="form-group col-md-6">
-								<form-checkbox label="Enforce Https (SSL encrypted connections)?" formControlName="enforceHttps" >
+							<form-checkbox label="Allow data access through an internet based Proxy Server." formControlName="allowProxy" >
+							</form-checkbox>
+						</section>
+					</div>
+
+					<div class="form-row">
+						<section class="form-group col-md-6">
+								<form-checkbox label="Enforce Https (SSL encrypted connections)." formControlName="enforceHttps" >
 									</form-checkbox>
 						</section>
 						<section class="form-group col-md-6">
-								<form-checkbox label="Automatically attempt to create an SSL certificate (used for encryption)?" formControlName="autoGenerateCertificate" >
+								<form-checkbox label="Automatically attempt to create an SSL certificate (used for encryption)." formControlName="autoGenerateCertificate" >
 									</form-checkbox>
 								</section>
 					</div>
 
 					<div class="form-row">
 							<section class="form-group col-md-6">
-								<form-checkbox label="Allow files to be managed on local file system" formControlName="allowLocalFiles" >
+								<form-checkbox label="Allow files to be managed on local file system." formControlName="allowLocalFiles" >
 								</form-checkbox>
 							</section>
 							<section class="form-group col-md-6">
-									<form-checkbox *ngIf="formsService.currentForm.controls.allowLocalFiles.value" label="Allow all remote agent paths to be available" formControlName="allowAllPaths" >
+									<form-checkbox *ngIf="formsService.currentForm.controls.allowLocalFiles.value" label="Allow all remote agent paths to be available." formControlName="allowAllPaths" >
 										</form-checkbox>
 													</section>
 								</div>
 		
 				<section *ngIf="formsService.currentForm.controls.allowLocalFiles.value && !formsService.currentForm.controls.allowAllPaths.value">
-					<form-tags label="Allowed root paths for local file management" formControlName="allowedPaths" iconClass="fa fa-list" [errors]="formsService.formErrors.allowedPaths"
+					<form-tags label="Allowed root paths for local file management." formControlName="allowedPaths" iconClass="fa fa-list" [errors]="formsService.formErrors.allowedPaths"
 					note="The root directories which can be accessed when managing flat files.   All directories below the specified root directories will be available." >
 					</form-tags>
 				</section>
 
 				<section >
-					<form-checkbox label="Allow all hubs to be available" formControlName="allowAllHubs" >
+					<form-checkbox label="Allow all hubs to be available." formControlName="allowAllHubs" >
 					</form-checkbox>
 				</section>
 
 				<section *ngIf="!formsService.currentForm.controls.allowAllHubs.value" >
-					<form-tags-dropdown label="Hubs allowed by the remote agent" formControlName="allowedHubs" [items]="hubs" itemKey="hubKey" itemName="name" iconClass="fa fa-list" [errors]="formsService.formErrors.allowedHubs" [returnKeys]="true">
+					<form-tags-dropdown label="Hubs allowed by the remote agent." formControlName="allowedHubs" [items]="hubs" itemKey="hubKey" itemName="name" iconClass="fa fa-list" [errors]="formsService.formErrors.allowedHubs" [returnKeys]="true">
 					</form-tags-dropdown>
 				</section>
 

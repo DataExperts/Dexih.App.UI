@@ -349,7 +349,6 @@ export class HubService implements OnInit, OnDestroy {
         }).finally(() => {
             this.isResettingRemoteAgent = false;
         });
-
     }
 
     setCurrentRemoteAgent(activeAgent: DexihActiveAgent) {

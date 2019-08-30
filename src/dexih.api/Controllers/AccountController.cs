@@ -343,6 +343,7 @@ namespace dexih.api.Controllers
 					else 
 					{
 						existingUser.UserName = register.Email;
+						existingUser.Email = register.Email;
 						existingUser.FirstName = register.Firstname;
 						existingUser.LastName = register.Lastname;
 						existingUser.Terms = register.Terms;

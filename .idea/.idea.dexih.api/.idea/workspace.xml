@@ -2,55 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1be1a9df-0647-4351-ace4-9bafd064437b" name="Default" comment="minor">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dexih.api/Controllers/AccountController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Controllers/AccountController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Controllers/HubController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Controllers/HubController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Controllers/ReaderController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Controllers/ReaderController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dexih.api/Controllers/RemoteController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Controllers/RemoteController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dexih.api/Models/AccountModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Models/AccountModels.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Models/AdminModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Models/AdminModels.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Models/FileCallBack.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Models/HubModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Models/HubModels.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Models/LoggingEvents.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Models/LoggingEvents.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Models/RemoteModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Models/RemoteModels.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Services/Operations/dexihOperations.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Services/Operations/DexihOperations.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Services/Remote/IRemoteAgents.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Services/Remote/IRemoteAgents.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Services/Remote/RemoteAgent.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Services/Remote/RemoteAgents.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Services/Remote/RemoteAgents.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Resources/RemoteAgents/dexih.remote.run.alpine.sh" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Resources/RemoteAgents/dexih.remote.run.alpine.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Resources/RemoteAgents/dexih.remote.run.osx.sh" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Resources/RemoteAgents/dexih.remote.run.osx.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Startup.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/auth.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/forgot/forgot.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/forgot/forgot.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/login/login.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/register/register.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/register/register.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/verifyemail/verifyemail.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/verifyemail/verifyemail.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/api/api-index/api-index.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/api/api-index/api-index.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/buttons/actions-api-button/actions-api-button.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/buttons/actions-api-button/actions-api-button.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/buttons/actions-api-button/actions-api-button.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/buttons/actions-api-button/actions-api-button.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/buttons/actions-datalink-button/actions-datalink-button.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/buttons/actions-datalink-button/actions-datalink-button.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/buttons/actions-datalink-button/actions-datalink-button.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/buttons/actions-datalink-button/actions-datalink-button.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/buttons/actions-table-button/actions-table-button.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/buttons/actions-table-button/actions-table-button.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/buttons/actions-table-button/actions-table-button.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/buttons/actions-table-button/actions-table-button.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/buttons/actions-view-button/actions-view-button.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/buttons/actions-view-button/actions-view-button.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/buttons/actions-view-button/actions-view-button.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/buttons/actions-view-button/actions-view-button.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/connection/connection-edit/connection-edit.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/connection/connection-edit/connection-edit.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/connection/connection-edit/connection-edit.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/connection/connection-edit/connection-edit.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/dashboard/dashboard-index/dashboard-index.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/dashboard/dashboard-index/dashboard-index.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/hub.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/hub.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/hub.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/hub.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/hub.forms.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/hub.forms.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/hub.models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/hub.models.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/hub.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/hub.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/results/results-index/results-index.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/results/results-index/results-index.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/search/search.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/search/search.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/sharedData/sharedData-index.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/sharedData/sharedData-index.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/view/view-index/view-index.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/view/view-index/view-index.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/view/view-index/view-index.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/view/view-index/view-index.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/widgets/widgets.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/widgets/widgets.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs-sharedData/hubs-sharedData.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs-sharedData/hubs-sharedData.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs-sharedData/hubs-sharedData.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs-sharedData/hubs-sharedData.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs-sharedData/preview-data/preview-data.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs-sharedData/preview-data/preview-data.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/assets/js/google-api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/assets/js/google-api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/remoteAgents/remoteAgent-download/remoteAgent-download.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/remoteAgents/remoteAgent-download/remoteAgent-download.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/remoteAgents/remoteAgent-download/remoteAgent-download.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/remoteAgents/remoteAgent-download/remoteAgent-download.component.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -632,8 +595,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihDatalinkTest.cs" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihHubs.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/ChartConfig.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihDashboardItem.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/Table/Table.cs" />
@@ -641,7 +602,6 @@
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.ml/AnomalyDetection.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/TransformJoin.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Mapping/Mappings.cs" />
-        <option value="$PROJECT_DIR$/src/dexih.api/Startup.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/ReaderConvertDataTypes.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/StreamAuditResults.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/RemoteOperations/IRemoteOperations.cs" />
@@ -656,14 +616,11 @@
         <option value="$PROJECT_DIR$/src/dexih.api/Models/LoggingEvents.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.operations/RepositoryManager.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Models/AdminModels.cs" />
-        <option value="$PROJECT_DIR$/src/dexih.api/Models/AccountModels.cs" />
-        <option value="$PROJECT_DIR$/src/dexih.api/Controllers/AccountController.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/StreamAction.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote/Program.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/HttpService.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/Cache/StreamCache.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Models/RemoteModels.cs" />
-        <option value="$PROJECT_DIR$/src/dexih.api/Controllers/RemoteController.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/ListenerService.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/RemoteOperations/RemoteOperationEnum.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/RemoteOperations/ERemoteCommands.cs" />
@@ -683,6 +640,12 @@
         <option value="$PROJECT_DIR$/src/dexih.api/Controllers/HubController.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Models/HubModels.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Services/Remote/RemoteAgents.cs" />
+        <option value="$PROJECT_DIR$/src/dexih.api/Controllers/AccountController.cs" />
+        <option value="$PROJECT_DIR$/src/dexih.api/Models/AccountModels.cs" />
+        <option value="$PROJECT_DIR$/src/dexih.api/Controllers/RemoteController.cs" />
+        <option value="$PROJECT_DIR$/src/dexih.api/Resources/RemoteAgents/dexih.remote.run.osx.sh" />
+        <option value="$PROJECT_DIR$/src/dexih.api/Resources/RemoteAgents/dexih.remote.run.alpine.sh" />
+        <option value="$PROJECT_DIR$/src/dexih.api/Startup.cs" />
       </list>
     </option>
   </component>
@@ -875,7 +838,7 @@
             <path>
               <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
               <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@33a484e3" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@cfdf3326" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@30a02e02" type="7427dc5b:ServiceModel$ServiceGroupNode" />
             </path>
           </expand>
           <select />
@@ -1429,7 +1392,7 @@
       <workItem from="1566864467323" duration="1742000" />
       <workItem from="1566869542013" duration="40249000" />
       <workItem from="1567038831887" duration="7758000" />
-      <workItem from="1567053037671" duration="2221000" />
+      <workItem from="1567053037671" duration="9699000" />
     </task>
     <task id="LOCAL-00001" summary="Connections to remote agents working.">
       <created>1509234944099</created>
@@ -1571,66 +1534,66 @@
     <state width="1969" height="705" key="DebuggerActiveHint/3840.2160/3360.2100" />
     <state x="3354" y="208" key="EnvironmentVariablesDialog" />
     <state x="3354" y="208" key="EnvironmentVariablesDialog/3840.2160/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.0.bottom" />
+    <state width="1444" height="498" key="GridCell.Tab.0.bottom" />
     <state width="675" height="337" key="GridCell.Tab.0.bottom/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.0.bottom/3840.2160/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.0.center" />
+    <state width="1444" height="498" key="GridCell.Tab.0.bottom/3840.2160/3360.2100" />
+    <state width="1444" height="498" key="GridCell.Tab.0.center" />
     <state width="675" height="337" key="GridCell.Tab.0.center/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.0.center/3840.2160/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.0.left" />
+    <state width="1444" height="498" key="GridCell.Tab.0.center/3840.2160/3360.2100" />
+    <state width="1444" height="498" key="GridCell.Tab.0.left" />
     <state width="675" height="337" key="GridCell.Tab.0.left/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.0.left/3840.2160/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.0.right" />
+    <state width="1444" height="498" key="GridCell.Tab.0.left/3840.2160/3360.2100" />
+    <state width="1444" height="498" key="GridCell.Tab.0.right" />
     <state width="675" height="337" key="GridCell.Tab.0.right/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.0.right/3840.2160/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.1.bottom" />
+    <state width="1444" height="498" key="GridCell.Tab.0.right/3840.2160/3360.2100" />
+    <state width="1444" height="498" key="GridCell.Tab.1.bottom" />
     <state width="675" height="337" key="GridCell.Tab.1.bottom/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.1.bottom/3840.2160/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.1.center" />
+    <state width="1444" height="498" key="GridCell.Tab.1.bottom/3840.2160/3360.2100" />
+    <state width="1444" height="498" key="GridCell.Tab.1.center" />
     <state width="675" height="337" key="GridCell.Tab.1.center/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.1.center/3840.2160/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.1.left" />
+    <state width="1444" height="498" key="GridCell.Tab.1.center/3840.2160/3360.2100" />
+    <state width="1444" height="498" key="GridCell.Tab.1.left" />
     <state width="675" height="337" key="GridCell.Tab.1.left/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.1.left/3840.2160/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.1.right" />
+    <state width="1444" height="498" key="GridCell.Tab.1.left/3840.2160/3360.2100" />
+    <state width="1444" height="498" key="GridCell.Tab.1.right" />
     <state width="675" height="337" key="GridCell.Tab.1.right/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.1.right/3840.2160/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.2.bottom" />
+    <state width="1444" height="498" key="GridCell.Tab.1.right/3840.2160/3360.2100" />
+    <state width="1444" height="498" key="GridCell.Tab.2.bottom" />
     <state width="675" height="337" key="GridCell.Tab.2.bottom/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.2.bottom/3840.2160/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.2.center" />
+    <state width="1444" height="498" key="GridCell.Tab.2.bottom/3840.2160/3360.2100" />
+    <state width="1444" height="498" key="GridCell.Tab.2.center" />
     <state width="675" height="337" key="GridCell.Tab.2.center/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.2.center/3840.2160/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.2.left" />
+    <state width="1444" height="498" key="GridCell.Tab.2.center/3840.2160/3360.2100" />
+    <state width="1444" height="498" key="GridCell.Tab.2.left" />
     <state width="675" height="337" key="GridCell.Tab.2.left/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.2.left/3840.2160/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.2.right" />
+    <state width="1444" height="498" key="GridCell.Tab.2.left/3840.2160/3360.2100" />
+    <state width="1444" height="498" key="GridCell.Tab.2.right" />
     <state width="675" height="337" key="GridCell.Tab.2.right/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.2.right/3840.2160/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.3.bottom" />
+    <state width="1444" height="498" key="GridCell.Tab.2.right/3840.2160/3360.2100" />
+    <state width="1444" height="498" key="GridCell.Tab.3.bottom" />
     <state width="675" height="337" key="GridCell.Tab.3.bottom/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.3.bottom/3840.2160/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.3.center" />
+    <state width="1444" height="498" key="GridCell.Tab.3.bottom/3840.2160/3360.2100" />
+    <state width="1444" height="498" key="GridCell.Tab.3.center" />
     <state width="675" height="337" key="GridCell.Tab.3.center/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.3.center/3840.2160/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.3.left" />
+    <state width="1444" height="498" key="GridCell.Tab.3.center/3840.2160/3360.2100" />
+    <state width="1444" height="498" key="GridCell.Tab.3.left" />
     <state width="675" height="337" key="GridCell.Tab.3.left/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.3.left/3840.2160/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.3.right" />
+    <state width="1444" height="498" key="GridCell.Tab.3.left/3840.2160/3360.2100" />
+    <state width="1444" height="498" key="GridCell.Tab.3.right" />
     <state width="675" height="337" key="GridCell.Tab.3.right/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.3.right/3840.2160/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.4.bottom" />
+    <state width="1444" height="498" key="GridCell.Tab.3.right/3840.2160/3360.2100" />
+    <state width="1444" height="498" key="GridCell.Tab.4.bottom" />
     <state width="675" height="337" key="GridCell.Tab.4.bottom/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.4.bottom/3840.2160/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.4.center" />
+    <state width="1444" height="498" key="GridCell.Tab.4.bottom/3840.2160/3360.2100" />
+    <state width="1444" height="498" key="GridCell.Tab.4.center" />
     <state width="675" height="337" key="GridCell.Tab.4.center/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.4.center/3840.2160/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.4.left" />
+    <state width="1444" height="498" key="GridCell.Tab.4.center/3840.2160/3360.2100" />
+    <state width="1444" height="498" key="GridCell.Tab.4.left" />
     <state width="675" height="337" key="GridCell.Tab.4.left/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.4.left/3840.2160/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.4.right" />
+    <state width="1444" height="498" key="GridCell.Tab.4.left/3840.2160/3360.2100" />
+    <state width="1444" height="498" key="GridCell.Tab.4.right" />
     <state width="675" height="337" key="GridCell.Tab.4.right/3360.2100" />
-    <state width="1455" height="676" key="GridCell.Tab.4.right/3840.2160/3360.2100" />
+    <state width="1444" height="498" key="GridCell.Tab.4.right/3840.2160/3360.2100" />
     <state x="3417" y="141" key="RiderGenerateDialog" />
     <state x="3417" y="141" key="RiderGenerateDialog/3840.2160/3360.2100" />
     <state width="840" height="525" key="XDebugger.FullValuePopup" />

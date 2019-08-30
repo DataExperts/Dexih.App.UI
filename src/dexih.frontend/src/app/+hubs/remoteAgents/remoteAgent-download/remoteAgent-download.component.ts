@@ -113,7 +113,7 @@ export class RemoteAgentDownloadComponent implements OnInit, OnDestroy {
     const remoteAgentForm = this.fb.group({
       'name': [remoteAgent.name, [
         Validators.required,
-        Validators.minLength(4),
+        Validators.minLength(3),
         Validators.maxLength(50),
       ]],
       'encryptionKey': [remoteAgent.encryptionKey, [

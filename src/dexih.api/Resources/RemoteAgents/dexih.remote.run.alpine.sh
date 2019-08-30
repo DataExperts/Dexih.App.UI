@@ -72,8 +72,8 @@ do
         LATEST_BINARY=$(echo "${VERSION_INFO}" | head -2 | tail -1)
         LATEST_URL=$(echo "${VERSION_INFO}" | head -3 | tail -1)
     
-        if [ -f "local_version.txt" ]; then
-            LOCAL_VERSION=`cat local_version.txt`
+        if [ -f "dexih.remote.version" ]; then
+            LOCAL_VERSION=`cat dexih.remote.version`
         fi
     
         echo LOCAL_VERSION ${LOCAL_VERSION}
