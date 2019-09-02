@@ -38,6 +38,7 @@ import { DatalinkTableComponent } from './datalink-table/datalink-table.componen
 import { DatalinkColumnEditComponent } from './datalink-column-edit/datalink-column-edit.component'
 import { ResultsViewModule } from '../../results/results-view/results-view.module';
 import { InputParameterComponent, OutputParameterComponent} from './parameters'
+import { TargetColumnsComponent, TargetColumnComponent} from './target-columns';
 
 @NgModule({
     imports: [
@@ -65,6 +66,7 @@ import { InputParameterComponent, OutputParameterComponent} from './parameters'
         OutputColumnComponent, OutputColumnsComponent,
         JoinColumnComponent, JoinColumnsComponent,
         InputColumnsComponent, InputColumnComponent,
+        TargetColumnsComponent, TargetColumnComponent,
         MappingEditComponent,
         MappingComponent, MappingItemComponent,
         PreviewDataComponent,

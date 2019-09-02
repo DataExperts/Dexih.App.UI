@@ -23,7 +23,7 @@
                 <li class="nav-item" ><a class="nav-link" routerLink="properties" routerLinkActive="active"><i class="fa fa-cog"></i>Properties</a></li>
 				<li class="nav-item" ><a class="nav-link" routerLink="source-table" routerLinkActive="active"><i class="fa fa-arrow-circle-o-right"></i> Source</a></li>
 				<ng-template [ngIf]="datalinkForm?.controls.sourceDatalinkTable.value">
-					<li class="nav-item"><a class="nav-link" routerLink="transforms" ><i class="fa fa-share-alt"></i> Transforms<dexih-invalid-form-icon [control]="datalinkForm.controls.dexihDatalinkTransforms"></dexih-invalid-form-icon></a></li>
+					<li class="nav-item"><a class="nav-link" routerLink="transforms" routerLinkActive="active" ><i class="fa fa-share-alt"></i> Transforms<dexih-invalid-form-icon [control]="datalinkForm.controls.dexihDatalinkTransforms"></dexih-invalid-form-icon></a></li>
 					<li *ngIf="!datalinkForm.controls.isQuery.value" class="nav-item" ><a class="nav-link" routerLink="validation" routerLinkActive="active"><i class="fa fa-check-square-o"></i> Validation</a></li>
 					<li *ngIf="!datalinkForm.controls.isQuery.value" class="nav-item" ><a class="nav-link" routerLink="profile-rules" routerLinkActive="active"><i class="fa fa-bug"></i> Profiling</a></li>
 					<li class="nav-item"><a class="nav-link"  routerLink="target" routerLinkActive="active"><i class="fa fa-arrow-circle-right"></i> Target</a></li>

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, combineLatest} from 'rxjs';
 
 import { AuthService } from '../../../+auth/auth.service';
-import { DexihView, eSharedDataObjectType } from '../../hub.models';
+import { DexihView, eSharedDataObjectType, HubCache } from '../../hub.models';
 import { HubService } from '../../hub.service';
 
 @Component({
@@ -16,6 +16,7 @@ export class ActionsViewButtonComponent implements OnInit, OnDestroy {
     @Input() public pullRight = false;
 
     private _hubCacheSubscription: Subscription;
+    public hubCache: HubCache;
 
         tables = [];
 
@@ -27,6 +28,7 @@ export class ActionsViewButtonComponent implements OnInit, OnDestroy {
 
         ngOnInit() {
             this._hubCacheSubscription = this.hubService.getHubCacheObservable().subscribe(cache => {
+                this.hubCache = cache;
             });
 
         }

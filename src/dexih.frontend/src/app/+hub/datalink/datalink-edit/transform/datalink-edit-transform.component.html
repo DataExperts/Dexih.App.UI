@@ -1,5 +1,5 @@
 
-<dexih-widget-section title="Properties" [showExpandButton]="true">
+<dexih-widget-section title="Properties" [showExpandButton]="true" >
 <form *ngIf="datalinkTransformForm"  [formGroup]="datalinkTransformForm">
         <fieldset>
             <section>
@@ -101,27 +101,15 @@
 <div class="list-group-item p-1">
 
 <div *ngIf="datalinkTransformForm" class="d-flex" cdkDropListGroup>
-        <div class="mr-1 d-none d-md-inline">
-            <div>
-                <div class="alert alert-primary mb-1">
-                    <h4>Inputs</h4>
-                </div>
-                <div>
-                    <input-columns [datalinkTransformForm]='datalinkTransformForm'></input-columns>
-                </div>
-            </div>
+        <dexih-widget class="d-none d-md-inline" title="Inputs" height="80vh" style="width:300px">
+            <input-columns [datalinkTransformForm]='datalinkTransformForm'></input-columns>
 
             <div class="mt-1"  *ngIf="datalinkTransformForm.controls.joinDatalinkTable.value">
-                <!-- <div class="alert alert-secondary mb-1 mt-1">
-                    <h4>
-                        {{this.datalinkTransformForm.value.transformType}}
-                    </h4>
-                </div> -->
                 <join-columns [datalinkTransformForm]='datalinkTransformForm' (inputJoinDrop)="newDragDropJoin($event)"></join-columns>
             </div>
-        </div>
+        </dexih-widget>
 
-        <div class="w-100">
+        <div class="w-100 mr-1 ml-1">
             <div *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Join || this.datalinkTransformForm.value.transformType == eTransformType.Lookup">
                 <mapping [datalinkTransformForm]="datalinkTransformForm" [allowJoin]="true" title="{{this.datalinkTransformForm.value.transformType}} Table"  >
                 </mapping>
@@ -176,17 +164,9 @@
             </div>
         </div>
 
-        <div class="ml-1 d-none d-md-inline">
-            <div class="alert alert-primary mb-1">
-                <h4>Outputs
-                    <span *ngIf="datalinkTransformForm.controls.nodeDatalinkColumn?.value">
-                        (@{{datalinkTransformForm.controls.nodeDatalinkColumn.value.name}})
-                    </span>
-                    <div class="float-right">
-                    </div>
-                </h4>
-            </div>
+        <dexih-widget class="d-none d-md-inline" [title]="'Outputs' + (datalinkTransformForm.controls.nodeDatalinkColumn?.value ? '(@' + datalinkTransformForm.controls.nodeDatalinkColumn.value.name + ')' : '')"  height="80vh" style="width:300px">
             <output-columns [datalinkTransformForm]='datalinkTransformForm' [allowMappingOutputs]="allowMappingOutputs" (inputOutputDrop)="newDragDropMapping(eDatalinkTransformItemType.ColumnPair, $event)"></output-columns>
-        </div>
+            <target-columns [datalinkTransformForm]='datalinkTransformForm' [targets]="datalinkForm.controls.dexihDatalinkTargets.value" [allowMappingOutputs]="allowMappingOutputs" (inputOutputDrop)="newDragDropMapping(eDatalinkTransformItemType.ColumnPair, $event)"></target-columns>
+        </dexih-widget>
     </div>
 </div>
