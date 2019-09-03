@@ -691,7 +691,8 @@ export class HubService implements OnInit, OnDestroy {
             //     return;
             // }
 
-            let instanceId = remoteAgent ? remoteAgent.activeAgents[0].instanceId : null;
+            let instanceId = remoteAgent && remoteAgent.activeAgents  && remoteAgent.activeAgents.length > 0 ?
+                remoteAgent.activeAgents[0].instanceId : null;
 
             this.authService.post('/api/Hub/SaveRemoteAgent', {
                     hubKey: this._hubCache.value.hub.hubKey,

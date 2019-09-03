@@ -1,9 +1,8 @@
-<div *ngIf="joinColumns" >
-    <ul class="list-group dexih-container">
-        <li class="list-group-item list-group-item-heading list-group-item-info" >{{joinTable?.name}} ({{this.datalinkTransformForm.value.transformType}})</li>
-
-        <join-column *ngFor="let column of joinColumns | fieldSort : 'position' | isValidFilter" 
-        [datalinkForm]='datalinkForm' [datalinkTransformForm]='datalinkTransformForm' [column]='column'  
-        dropZone (dropData)="newInputJoinDrop($event, column)" zone="input-column" dropAllowedClass="drop-zone-green"></join-column>
-    </ul>
+<div *ngIf="joinColumns">
+    <dexih-widget-section [title]="joinTable?.name + '(' + this.datalinkTransformForm.value.transformType + ')'" [padding]="false" [showExpandButton]="true">
+        <join-column *ngFor="let column of joinColumns | fieldSort : 'position' | isValidFilter"
+            [datalinkForm]='datalinkForm' [datalinkTransformForm]='datalinkTransformForm' [column]='column' dropZone
+            (dropData)="newInputJoinDrop($event, column)" zone="input-column" dropAllowedClass="drop-zone-green">
+        </join-column>
+    </dexih-widget-section>
 </div>

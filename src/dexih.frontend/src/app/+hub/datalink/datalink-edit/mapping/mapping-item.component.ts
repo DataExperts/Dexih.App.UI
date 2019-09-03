@@ -48,6 +48,7 @@ export class MappingItemComponent implements OnInit {
     public compare: string;
     public inputParameters: ValidParameter[];
     public outputParameters: ValidParameter[];
+
     public mapParameters: ValidMapping[];
 
     constructor(

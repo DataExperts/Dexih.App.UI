@@ -79,20 +79,11 @@ export class TargetColumnComponent implements OnInit, OnDestroy, OnChanges {
 
     refreshStatus() {
         if (this.datalinkForm) {
-            let columnUsage = new ColumnUsageNode(
-                eObjectType.Transform,
-                eObjectUse.Target,
-                this.datalinkForm.value,
-                null,
-                this.column,
-                this.datalinkTransformForm.value,
-                null,
-                eMappingStatus.NotMapped,
-                this.hubCache
-                );
-
-                this.mappingStatusLineage = columnUsage.createDatalinkLineage(false);
-                this.mappingStatusInfoLineage = lineageMappingStatuses.find(c => c.key === this.mappingStatusLineage);
+            let columnUsage: ColumnUsageNode = new ColumnUsageNode(
+            eObjectType.TargetTable, eObjectUse.Target,
+            this.datalinkForm.value, null, this.column, null, null, eMappingStatus.NotMapped, this.hubCache);
+            this.mappingStatusLineage = columnUsage.createDatalinkLineage(true);
+            this.mappingStatusInfoLineage = lineageMappingStatuses.find(c => c.key === this.mappingStatusLineage);
         }
     }
 

@@ -101,7 +101,7 @@
 <div class="list-group-item p-1">
 
 <div *ngIf="datalinkTransformForm" class="d-flex" cdkDropListGroup>
-        <dexih-widget class="d-none d-md-inline" title="Inputs" height="80vh" style="width:300px">
+        <dexih-widget class="d-none d-md-inline" title="Inputs" height="80vh" style="width:300px" [scrollable]="true">
             <input-columns [datalinkTransformForm]='datalinkTransformForm'></input-columns>
 
             <div class="mt-1"  *ngIf="datalinkTransformForm.controls.joinDatalinkTable.value">
@@ -164,7 +164,7 @@
             </div>
         </div>
 
-        <dexih-widget class="d-none d-md-inline" [title]="'Outputs' + (datalinkTransformForm.controls.nodeDatalinkColumn?.value ? '(@' + datalinkTransformForm.controls.nodeDatalinkColumn.value.name + ')' : '')"  height="80vh" style="width:300px">
+        <dexih-widget class="d-none d-md-inline" [title]="'Outputs' + (datalinkTransformForm.controls.nodeDatalinkColumn?.value ? '(@' + datalinkTransformForm.controls.nodeDatalinkColumn.value.name + ')' : '')"  height="80vh" style="width:300px"  [scrollable]="true">
             <output-columns [datalinkTransformForm]='datalinkTransformForm' [allowMappingOutputs]="allowMappingOutputs" (inputOutputDrop)="newDragDropMapping(eDatalinkTransformItemType.ColumnPair, $event)"></output-columns>
             <target-columns [datalinkTransformForm]='datalinkTransformForm' [targets]="datalinkForm.controls.dexihDatalinkTargets.value" [allowMappingOutputs]="allowMappingOutputs" (inputOutputDrop)="newDragDropMapping(eDatalinkTransformItemType.ColumnPair, $event)"></target-columns>
         </dexih-widget>

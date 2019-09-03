@@ -136,8 +136,8 @@ export class FunctionReference {
     public resultReturnParameters: FunctionParameter[];
     public resultInputParameters: FunctionParameter[];
     public resultOutputParameters: FunctionParameter[];
-
 }
+
 
 export class FunctionParameter {
     public name: string;
