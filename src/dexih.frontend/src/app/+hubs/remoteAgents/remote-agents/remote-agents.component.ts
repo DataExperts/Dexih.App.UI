@@ -3,7 +3,7 @@ import { HubsService } from '../../hubs.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
 import { AuthService } from '../../../+auth/auth.service';
-import { DexihHubAuth, DexihActiveAgent, DexihRemoteAgent } from '../../../+auth/auth.models';
+import { DexihHubAuth, DexihActiveAgent, DexihRemoteAgent, CancelToken } from '../../../+auth/auth.models';
 
 @Component({
   selector: 'remoteAgents',
@@ -107,13 +107,13 @@ export class RemoteAgentsComponent implements OnInit, OnDestroy {
         this._tableData.next(data);
     }
 
-    test(items: DexihActiveAgent[]) {
+    test(items: DexihActiveAgent[], cancelToken: CancelToken) {
         items.forEach(item => {
             let agent = <DexihActiveAgent>item;
             agent.downloadUrls.forEach((downloadUrl, index) => {
                 let url = downloadUrl.url + '/ping';
 
-                this.authService.get(url, 'Testing remote agent connectivity...', false).then(result => {
+                this.authService.get(url, 'Testing remote agent connectivity...', false, cancelToken).then(result => {
                     if (result && result.Status === 'Alive') {
                         downloadUrl.testStatus = 'success';
                     } else {

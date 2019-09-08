@@ -7,6 +7,7 @@ import { HubCache, DexihView, DexihInputParameter, DataCache } from '../../../hu
 import { PreviewViewComponent } from '../../../widgets/preview-view/preview-view.component';
 import { HubFormsService } from '../../../hub.forms.service';
 import { DexihWidgetComponent } from 'dexih-ngx-components';
+import { CancelToken } from '../../../../+auth/auth.models';
 
 @Component({
     selector: 'dashboard-item',
@@ -35,6 +36,8 @@ export class DashboardItemComponent implements OnInit, OnChanges, OnDestroy {
     hubCache: HubCache;
     views: DexihView[];
 
+    private cancelToken = new CancelToken();
+
     constructor(private hubService: HubService, public formsService: HubFormsService) {
 
     }
@@ -61,6 +64,7 @@ export class DashboardItemComponent implements OnInit, OnChanges, OnDestroy {
         if (this._subscription) { this._subscription.unsubscribe(); }
         if (this._resizeSubscription) { this._resizeSubscription.unsubscribe(); }
         if (this._viewKeySubscription) { this._viewKeySubscription.unsubscribe(); }
+        this.cancelToken.cancel();
     }
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -108,7 +112,7 @@ export class DashboardItemComponent implements OnInit, OnChanges, OnDestroy {
         view.parameters = this.item.controls.parameters.value;
         if (view) {
             let preview = this.hubService.previewView(view, view.inputValues,
-                    this.formsService.currentForm.controls.parameters.value);
+                    this.formsService.currentForm.controls.parameters.value, this.cancelToken);
             data.refresh(preview);
         }
     }

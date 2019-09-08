@@ -6,6 +6,7 @@ import { AuthService } from '../../../+auth/auth.service';
 import { HubService } from '../../hub.service';
 import { SelectQuery, eDownloadFormat, DownloadObject } from '../../hub.query.models';
 import { InputOutputColumns } from '../../hub.lineage.models';
+import { PromiseWithCancel, CancelToken } from '../../../+auth/auth.models';
 
 @Component({
     selector: 'preview-data',
@@ -48,6 +49,9 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
     private dialogOpen = false;
 
     public allowViewSave = false;
+
+    public previewQuery: PromiseWithCancel<PreviewResults>;
+    public cancelToken: CancelToken = new CancelToken();
 
     constructor(
         private hubService: HubService,
@@ -148,6 +152,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         if (this._subscription) { this._subscription.unsubscribe(); }
+        this.cancelToken.cancel();
     }
 
     close() {
@@ -158,28 +163,31 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
         if (!this.isRefreshing) {
             this.isRefreshing = true;
 
-            let previewQuery: Promise<PreviewResults>;
+            // cancel any existing query.
+            if (this.previewQuery) { this.previewQuery.cancel(); }
+
+            let previewQuery: PromiseWithCancel<PreviewResults>;
 
             switch (this.viewSource) {
                 case eViewSource.Datalink:
                     if (this.key) {
                         previewQuery = this.hubService.previewDatalinkKeyData(this.key, this.selectQuery,
-                            this.inputColumns, this.parameters);
+                            this.inputColumns, this.parameters, this.cancelToken);
                     } else {
                         if (this.datalink) {
                             previewQuery = this.hubService.previewTransformData(this.datalink, this.datalinkTransformKey,
-                                this.selectQuery, this.inputColumns, this.parameters);
+                                this.selectQuery, this.inputColumns, this.parameters, this.cancelToken);
                         }
                     }
                     break;
                 case eViewSource.Table:
                     if (this.key) {
                         previewQuery = this.hubService.previewTableKeyData(this.key, false, this.selectQuery,
-                            this.inputColumns, this.parameters);
+                            this.inputColumns, this.parameters, this.cancelToken);
                     } else {
                         if (this.table) {
                             previewQuery = this.hubService.previewTableData(this.table, false, this.selectQuery,
-                                this.inputColumns, this.parameters);
+                                this.inputColumns, this.parameters, this.cancelToken);
                         }
                     }
                     break;

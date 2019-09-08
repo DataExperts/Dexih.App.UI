@@ -18,7 +18,8 @@
 					<section *ngIf="showInput" class="form-group col-md-4">
 						<form-select label="Input Column" formControlName="sourceDatalinkColumn" [items]="inputColumns"
 							[(textValue)]="sourceValue" (textValueChange)="updateSourceValue($event)"
-							[enableTextEntry]="true" [enableTextEntryMatch]="false" itemName="logicalName"
+							[enableKeySelect]="false"
+							[enableTextEntry]="true" [enableTextEntryMatch]="false" itemName="logicalName" itemKey="key"
 							[errors]="sourceErrors">
 						</form-select>
 					</section>
@@ -31,16 +32,16 @@
 						<form-select
 							label="Compare Column/Value" formControlName="filterDatalinkColumn" [items]="inputColumns"
 							[enableTextEntry]="true" [(textValue)]="filterValue"
-							(textValueChange)="updateFilterValue($event)" [enableTextEntryMatch]="false"
-							itemName="logicalName" [errors]="filterValueErrors"
+							(textValueChange)="updateFilterValue($event)" [enableTextEntryMatch]="false" [enableKeySelect]="false"
+							itemKey="key" itemName="logicalName" [errors]="filterValueErrors"
 							[textEntryItems]="variables" textEntryItemsTitle="Variables"
 							note="Note: For static date values use format YYYY-MM-DD (e.g. 2018-01-30)">
 						</form-select>
 					</section>
 					<section *ngIf="showOutput" class="form-group col-md-4">
 						<form-select label="Output Column" formControlName="targetDatalinkColumn" [items]="outputColumns"
-							itemName="logicalName" note="Enter new column, or select existing"
-							(textValueChange)="updateNewColumn($event)" [enableTextEntry]="true"
+							itemKey="key" itemName="logicalName" note="Enter new column, or select existing"
+							[enableKeySelect]="false" (textValueChange)="updateNewColumn($event)" [enableTextEntry]="true"
 							textEntryNote="Enter new column name, or select existing" [errors]="targetErrors">
 						</form-select>
 					</section>
@@ -51,7 +52,7 @@
 					</section>
 					<section *ngIf="transformItemType == eDatalinkTransformItemType.JoinPair" class="form-group col-md-4">
 						<form-select label="Join Column" formControlName="joinDatalinkColumn" [items]="joinColumns"
-							itemName="logicalName" note="Select a join column"
+							[enableKeySelect]="false" itemKey="key" itemName="logicalName" note="Select a join column"
 							textEntryNote="Enter a value to add a new column" [errors]="joinErrors">
 						</form-select>
 					</section>

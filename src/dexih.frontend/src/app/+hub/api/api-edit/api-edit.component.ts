@@ -10,6 +10,7 @@ import { HubFormsService } from '../../hub.forms.service';
 import { AuthService } from '../../../+auth/auth.service';
 import { DownloadObject, SelectQuery } from '../../hub.query.models';
 import { InputOutputColumns } from '../../hub.lineage.models';
+import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
   selector: 'dexih-api-edit-form',
@@ -44,6 +45,8 @@ export class ApiEditComponent implements OnInit, OnDestroy {
   columns: Array<any>;
   public data: Array<any> = [];
   private isLoaded = false;
+
+  private cancelToken = new CancelToken();
 
   constructor(
     private hubService: HubService,
@@ -143,6 +146,7 @@ export class ApiEditComponent implements OnInit, OnDestroy {
     if (this._subscription) { this._subscription.unsubscribe(); }
     if (this._formChangeSubscription) { this._formChangeSubscription.unsubscribe(); }
     if (this._changesSubscription) { this._changesSubscription.unsubscribe(); }
+    this.cancelToken.cancel();
   }
 
   close() {
@@ -200,7 +204,7 @@ export class ApiEditComponent implements OnInit, OnDestroy {
     let apiForm = this.formsService.currentForm;
     if (apiForm.controls.sourceType.value === eSourceType.Datalink) {
       this.hubService.previewDatalinkKeyData(apiForm.controls.sourceDatalinkKey.value,
-        this.selectQuery, this.inputColumns, apiForm.controls.parameters.value).then((result) => {
+        this.selectQuery, this.inputColumns, apiForm.controls.parameters.value, this.cancelToken).then((result) => {
         this.columns = result.columns;
         this.data = result.data;
       }).catch(() => {
@@ -209,7 +213,7 @@ export class ApiEditComponent implements OnInit, OnDestroy {
     }
     if (apiForm.controls.sourceType.value === eSourceType.Table) {
       this.hubService.previewTableKeyData(apiForm.controls.sourceTableKey.value,
-          false, this.selectQuery, this.inputColumns, apiForm.controls.parameters.value).then((result) => {
+          false, this.selectQuery, this.inputColumns, apiForm.controls.parameters.value, this.cancelToken).then((result) => {
         this.columns = result.columns;
         this.data = result.data;
       }).catch(() => {

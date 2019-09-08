@@ -1,10 +1,11 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../../+auth/auth.service';
-import { TransformWriterResult, eDeltaType, HubCache, DexihTable, DexihDatalink, eViewSource } from '../../hub.models';
+import { TransformWriterResult, eDeltaType, HubCache, DexihTable, DexihDatalink, eViewSource, PreviewResults } from '../../hub.models';
 import { SelectQuery, Filter, eCompare, eAndOr, DownloadObject, eDownloadFormat } from '../../hub.query.models';
 import { HubService } from '../../hub.service';
 import { Subscription} from 'rxjs';
 import { eTypeCode } from '../../hub.remote.models';
+import { PromiseWithCancel, CancelToken } from '../../../+auth/auth.models';
 
 @Component({
     selector: 'preview-results',
@@ -24,6 +25,9 @@ export class PreviewResultsComponent implements OnInit, OnDestroy {
     public data: Array<any>;
     public selectQuery = new SelectQuery();
 
+    private runningQuery: PromiseWithCancel<PreviewResults>;
+    private cancelToken = new CancelToken();
+    
     constructor(
         private hubService: HubService
     ) {
@@ -65,6 +69,8 @@ export class PreviewResultsComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         if (this._hubCacheSubscription ) { this._hubCacheSubscription.unsubscribe(); }
+        if (this.runningQuery) { this.runningQuery.cancel(); }
+        this.cancelToken.cancel();
     }
 
     createSelectQuery(): SelectQuery {
@@ -107,13 +113,16 @@ export class PreviewResultsComponent implements OnInit, OnDestroy {
     refresh() {
         let selectQuery = this.createSelectQuery();
 
-        this.hubService.previewTableDataQuery(this.targetTable, false, selectQuery, null, null).then(result => {
+        let query = this.hubService.previewTableDataQuery(this.targetTable, false, selectQuery, null, null, this.cancelToken);
+        
+        query.then(result => {
             this.columns = result.columns;
             this.data = result.data;
         }).catch(() => {
             // this.hubService.addHubErrorMessage(reason);
         });
 
+        this.runningQuery = query;
     }
 
     download() {

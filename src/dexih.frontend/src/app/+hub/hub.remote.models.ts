@@ -247,7 +247,8 @@ export enum eTypeCode {
     Guid = <any>'Guid',
     Json = <any>'Json',
     Xml = <any>'Xml',
-    Node = <any>'Node'
+    Node = <any>'Node',
+    Geometry = <any>'Geometry'
 }
 export const TypeCodes = [
     {key: eTypeCode.String, name: 'String', isNumeric: false, isString: true},
@@ -270,7 +271,9 @@ export const TypeCodes = [
     {key: eTypeCode.Guid, name: 'Guid', isNumeric: false, isString: false},
     {key: eTypeCode.Xml, name: 'Xml', isNumeric: false, isString: false},
     {key: eTypeCode.Json, name: 'Json', isNumeric: false, isString: false},
+    {key: eTypeCode.Geometry, name: 'Geometry (spacial data)', isNumeric: false, isString: false},
     {key: eTypeCode.Node, name: 'Node (contains child nodes)', isNumeric: false, isString: false},
+
 ];
 
 export enum eBasicType {

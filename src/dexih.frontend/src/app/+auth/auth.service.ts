@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpRequest, HttpEventType, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest, HttpEventType, HttpResponse, HttpProgressEvent } from '@angular/common/http';
 import { Injectable, OnDestroy, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as FileSaver from 'file-saver';
@@ -7,7 +7,7 @@ import { timeout, filter, first } from 'rxjs/operators'
 import { eLogLevel, LogFactory } from '../../logging';
 import {
     DexihHubAuth, ExternalLoginResult, Message, ManagedTask,
-    User, UserLoginInfo, ExternalLogin, DexihActiveAgent, DownloadUrl, DexihRemoteAgent, FileHandler, eFileStatus, RemoteToken
+    User, UserLoginInfo, ExternalLogin, DexihActiveAgent, DownloadUrl, DexihRemoteAgent, FileHandler, eFileStatus, RemoteToken, PromiseWithCancel, CancelToken, eTaskStatus
 } from './auth.models';
 import { AuthWebSocket } from './auth.websocket';
 import { GlobalCache } from './global.models';
@@ -74,7 +74,7 @@ export class AuthService implements OnDestroy {
 
         // bootstrap4Mode();
 
-        this.refreshGlobalCache();
+        // this.refreshGlobalCache();
         this.refreshUser();
 
         this._webSocket = new AuthWebSocket(this.location);
@@ -470,25 +470,27 @@ export class AuthService implements OnDestroy {
         });
     }
 
-    public get(url, waitMessage = 'Please wait while the operation completes.', updateUrl = true): Promise<any> {
-        return new Promise<any>((resolve, reject) => {
+    public get(url, waitMessage = 'Please wait while the operation completes.', updateUrl = true, cancelToken: CancelToken): PromiseWithCancel<any> {
+        let messageKey: string = null;
+        if (waitMessage) {
+            messageKey = this.addWaitMessage(waitMessage);
+        }
+        let baseUrl: string;
+        if (updateUrl) {
+            baseUrl = this.location.prepareExternalUrl(url);
+        }
+        else {
+            baseUrl = url;
+        }
 
-            let messageKey: string = null;
+        if(!cancelToken) {
+            cancelToken = new CancelToken();
+        }
 
-            if (waitMessage) {
-                messageKey = this.addWaitMessage(waitMessage);
-            }
-
-            let baseUrl: string;
-            if (updateUrl) {
-                baseUrl = this.location.prepareExternalUrl(url);
-            } else {
-                baseUrl = url;
-            }
-
-            this.http.get(baseUrl).subscribe(result => {
+        let promise = new PromiseWithCancel<any>((resolve, reject) => {
+            let subscription = this.http.get(baseUrl).subscribe(result => {
                 this.removeWaitMessage(messageKey);
-                let json = <any> result;
+                let json = (<any>result);
                 if (json.status) {
                     reject(json.status);
                     return;
@@ -498,10 +500,10 @@ export class AuthService implements OnDestroy {
                 this.removeWaitMessage(messageKey);
                 if (error.error) {
                     reject(error.error);
-                } else {
+                }
+                else {
                     this.removeWaitMessage(messageKey);
-                    this.logger.LogC(() =>
-                        `post warning error:${error}`, eLogLevel.Error);
+                    this.logger.LogC(() => `post warning error:${error}`, eLogLevel.Error);
                     if (error.status === 504) {
                         reject(new Message(false, 'The Information Hub API could not be reached.', null, null));
                     }
@@ -509,7 +511,13 @@ export class AuthService implements OnDestroy {
                     reject(result);
                 }
             });
-        });
+
+            cancelToken.cancelMethod = () => {
+                subscription.unsubscribe();
+            }
+        },cancelToken);
+
+        return promise;
     }
 
 
@@ -1736,6 +1744,12 @@ export class AuthService implements OnDestroy {
     }
 
     addUpdateTask(task: ManagedTask) {
+        if (task.status === eTaskStatus.Error) {
+            const message = new Message(false, `The task ${task.name} failed.  Message: ${task.message}`,
+            task.exceptionDetails, null);
+            this.addUpdateNotification(message, false);
+        }
+        
         const tasks = this._tasks.value;
         const originalTask = tasks.find(c => c.reference === task.reference);
         if (originalTask) {
@@ -1816,7 +1830,7 @@ export class AuthService implements OnDestroy {
         if (!this.globalCacheRefreshing) {
             this.globalCacheRefreshing = true;
             return new Promise<boolean>((resolve, reject) => {
-                this.get('/api/Account/GetGlobalCache?cache=' + this.sessionId, 'Getting global cache...').then(result => {
+                this.get('/api/Account/GetGlobalCache?cache=' + this.sessionId, 'Getting global cache...', true, null).then(result => {
                     let globalCache: GlobalCache = result.value;
                     this._globalCache.next(globalCache);
                     resolve(true);

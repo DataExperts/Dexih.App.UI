@@ -10,6 +10,7 @@ import { HubFormsService } from '../../hub.forms.service';
 import { AuthService } from '../../../+auth/auth.service';
 import { DownloadObject, SelectQuery } from '../../hub.query.models';
 import { InputOutputColumns } from '../../hub.lineage.models';
+import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
   selector: 'dexih-view-edit-form',
@@ -51,6 +52,8 @@ export class ViewEditComponent implements OnInit, OnDestroy {
 
   columns: Array<any>;
   public data: Array<any>;
+
+  private cancelToken = new CancelToken();
 
   constructor(
     private hubService: HubService,
@@ -180,6 +183,7 @@ export class ViewEditComponent implements OnInit, OnDestroy {
     if (this._subscription) { this._subscription.unsubscribe(); }
     if (this._formChangeSubscription) { this._formChangeSubscription.unsubscribe(); }
     if (this._changesSubscription) { this._changesSubscription.unsubscribe(); }
+    this.cancelToken.cancel();
   }
 
   close() {
@@ -256,7 +260,7 @@ export class ViewEditComponent implements OnInit, OnDestroy {
     let view = viewForm.value;
     view.selectQuery = this.selectQuery;
 
-    this.hubService.previewView(viewForm.value, this.inputColumns, parameters).then((result) => {
+    this.hubService.previewView(viewForm.value, this.inputColumns, parameters, this.cancelToken).then((result) => {
       this.columns = result.columns;
       this.data = result.data;
     }).catch(() => {

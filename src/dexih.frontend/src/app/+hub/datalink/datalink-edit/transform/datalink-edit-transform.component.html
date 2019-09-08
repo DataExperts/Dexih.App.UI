@@ -20,7 +20,7 @@
             </div>
             
             <section *ngIf="nodes?.length > 0">
-                <form-select label="Node level" formControlName="nodeDatalinkColumn" [items]="nodes" itemName="name" node='Specify the node where the transform should be applied to.' [allowNullSelect]="true" selectNullMessage='Use top level'>
+                <form-select label="Node level" formControlName="nodeDatalinkColumn" [items]="nodes" [enableKeySelect]="false" itemKey="key" itemName="name" node='Specify the node where the transform should be applied to.' [allowNullSelect]="true" selectNullMessage='Use top level'>
                 </form-select>
             </section>
 
@@ -68,7 +68,7 @@
                 </section>
                 <section class="form-group col-md-6">
                     <form-select label="Input Column" formControlName="sourceDatalinkColumn" [items]="inputColumns" [(textValue)]="sourceValue"
-                        itemName="name" [errors]="sourceErrors">
+                    [enableKeySelect]="false" itemKey="key" itemName="name" [errors]="sourceErrors">
                     </form-select>
                 </section>
             </div>

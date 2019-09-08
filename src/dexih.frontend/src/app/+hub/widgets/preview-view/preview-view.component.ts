@@ -5,7 +5,7 @@ import { combineLatest, Subscription } from 'rxjs';
 import { AuthService } from '../../../+auth/auth.service';
 import { HubService } from '../../hub.service';
 import { eDownloadFormat, DownloadObject } from '../../hub.query.models';
-import { DexihActiveAgent } from '../../../+auth/auth.models';
+import { DexihActiveAgent, CancelToken } from '../../../+auth/auth.models';
 
 @Component({
     selector: 'preview-view',
@@ -45,6 +45,7 @@ export class PreviewViewComponent implements OnInit, OnChanges, OnDestroy {
 
 
     public dataResult: PreviewResults;
+    private cancelToken = new CancelToken();
 
     constructor(
         private hubService: HubService,
@@ -128,6 +129,7 @@ export class PreviewViewComponent implements OnInit, OnChanges, OnDestroy {
         if (this._subscription) { this._subscription.unsubscribe(); }
         if (this._resizeSubscription) { this._resizeSubscription.unsubscribe(); }
         if (this._refreshDataSubscription) { this._refreshDataSubscription.unsubscribe(); }
+        this.cancelToken.cancel();
     }
 
     close() {
@@ -150,9 +152,9 @@ export class PreviewViewComponent implements OnInit, OnChanges, OnDestroy {
             let previewQuery: Promise<PreviewResults>;
 
             if (url) {
-                previewQuery = this.hubService.downloadUrlData(url);
+                previewQuery = this.hubService.downloadUrlData(url, this.cancelToken);
             } else {
-                previewQuery = this.hubService.previewView(this.view, this.inputColumns, this.parameters)
+                previewQuery = this.hubService.previewView(this.view, this.inputColumns, this.parameters, this.cancelToken)
             }
 
             if (previewQuery) {

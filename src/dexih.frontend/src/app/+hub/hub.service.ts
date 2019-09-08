@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription, combineLatest, Subject} from 'rxjs';
 
-import { Message, ManagedTask, ePermission, DexihActiveAgent } from '../+auth/auth.models';
+import { Message, ManagedTask, ePermission, DexihActiveAgent, PromiseWithCancel, CancelToken } from '../+auth/auth.models';
 import { AuthService } from '../+auth/auth.service';
 import { eLogLevel, LogFactory } from '../../logging';
 import {
@@ -945,7 +945,7 @@ export class HubService implements OnInit, OnDestroy {
             this.authService.post('/api/Hub/' + uri, data, waitMessage).then(messageId => {
                 this.authService.getDownloadUrl(this._remoteAgent.value).then(downloadUrl => {
                     let url = downloadUrl.url + '/message/' + messageId.value;
-                    this.authService.get(url, waitMessage, false).then((result: T) => {
+                    this.authService.get(url, waitMessage, false, null).then((result: T) => {
                         resolve(result);
                     }).catch(reason => {
                         this.addHubMessage(reason);
@@ -1358,9 +1358,9 @@ export class HubService implements OnInit, OnDestroy {
     }
 
     // downloads a dataset from the provided url
-    downloadAuditResultsData(url: string): Promise<Array<TransformWriterResult>> {
+    downloadAuditResultsData(url: string, cancelToken: CancelToken): Promise<Array<TransformWriterResult>> {
         return new Promise<Array<TransformWriterResult>>((resolve, reject) => {
-            this.authService.get(url, null, false).then(data => {
+            this.authService.get(url, null, false, cancelToken).then(data => {
                 if (data['success'] === false) {
                     this.addHubMessage(data);
                     reject(data['message']);
@@ -1376,7 +1376,7 @@ export class HubService implements OnInit, OnDestroy {
     }
 
 
-    getAuditResults(auditType: string, connectionKeys: Array<number>, referenceKeys: Array<number>, childItems: boolean, rows: number):
+    getAuditResults(auditType: string, connectionKeys: Array<number>, referenceKeys: Array<number>, childItems: boolean, rows: number, cancelToken: CancelToken):
          Promise<Array<TransformWriterResult>> {
             return new Promise<Array<TransformWriterResult>>((resolve, reject) => {
 
@@ -1400,7 +1400,7 @@ export class HubService implements OnInit, OnDestroy {
 
                         }, 'Previewing audit results...').then(result => {
 
-                            this.downloadAuditResultsData(result.value)
+                            this.downloadAuditResultsData(result.value, cancelToken)
                             .then(data => resolve(data))
                             .catch(reason => reject(reason));
 
@@ -1416,7 +1416,7 @@ export class HubService implements OnInit, OnDestroy {
             });
     }
 
-    getResultDetail(auditConnectionKey: number, auditKey: number): Promise<TransformWriterResult> {
+    getResultDetail(auditConnectionKey: number, auditKey: number, cancelToken: CancelToken): Promise<TransformWriterResult> {
         return new Promise<TransformWriterResult>((resolve, reject) => {
 
             if (!this._remoteAgent.value) {
@@ -1438,7 +1438,7 @@ export class HubService implements OnInit, OnDestroy {
 
                     }, 'Previewing audit results...').then(result => {
 
-                        this.downloadAuditResultsData(result.value)
+                        this.downloadAuditResultsData(result.value, cancelToken)
                         .then(data => resolve(data[0]))
                         .catch(reason => reject(reason));
 
@@ -1719,12 +1719,11 @@ export class HubService implements OnInit, OnDestroy {
     }
 
     previewTableData(table: DexihTable, showRejectedData, selectQuery: SelectQuery, inputColumns: InputColumn[],
-        parameters: DexihInputParameter[]):
-    Promise<PreviewResults> {
+        parameters: DexihInputParameter[], cancelToken: CancelToken): PromiseWithCancel<PreviewResults> {
         let hub = new DexihHub(this._hubCache.value.hub.hubKey, 'cache');
         this._hubCache.value.cacheAddConnection(table.connectionKey, hub);
 
-        return this.previewTableDataQuery(table, showRejectedData, selectQuery, inputColumns, parameters);
+        return this.previewTableDataQuery(table, showRejectedData, selectQuery, inputColumns, parameters, cancelToken);
     }
 
     public constructDataTableColumns(columns: Array<any>): Array<any> {
@@ -1764,47 +1763,45 @@ export class HubService implements OnInit, OnDestroy {
     }
 
     previewTableDataQuery(table: DexihTable, showRejectedData, selectQuery: SelectQuery, inputColumns: InputColumn[],
-        inputParameters: DexihInputParameter[]):
-        Promise<PreviewResults> {
-        return new Promise<PreviewResults>((resolve, reject) => {
-            let hub = new DexihHub(this._hubCache.value.hub.hubKey, 'cache');
-            this._hubCache.value.cacheAddConnection(table.connectionKey, hub);
-
-            if (!this._remoteAgent.value) {
-                let message = new Message(false, 'No selected remote agent.', null, null);
-                this.addHubMessage(message);
-                reject(message);
-                return;
-            }
-
-            this.authService.getDownloadUrl(this._remoteAgent.value).then(downloadUrl => {
-
-                this.authService.post('/api/Hub/PreviewTableQuery', {
-                    hubKey: this._hubCache.value.hub.hubKey,
-                    remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
-                    table: table,
-                    showRejectedData: showRejectedData,
-                    selectQuery: selectQuery,
-                    inputColumns: inputColumns,
-                    inputParameters: inputParameters,
-                    downloadUrl: downloadUrl,
-                     }, 'Previewing table...').then(result => {
+        inputParameters: DexihInputParameter[], cancelToken: CancelToken):
+        PromiseWithCancel<PreviewResults> {
+        let promise = new PromiseWithCancel<PreviewResults>((resolve, reject) => {
+                let hub = new DexihHub(this._hubCache.value.hub.hubKey, 'cache');
+                this._hubCache.value.cacheAddConnection(table.connectionKey, hub);
+                if (!this._remoteAgent.value) {
+                    let message = new Message(false, 'No selected remote agent.', null, null);
+                    this.addHubMessage(message);
+                    reject(message);
+                    return;
+                }
+                this.authService.getDownloadUrl(this._remoteAgent.value).then(downloadUrl => {
+                    this.authService.post('/api/Hub/PreviewTableQuery', {
+                        hubKey: this._hubCache.value.hub.hubKey,
+                        remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
+                        table: table,
+                        showRejectedData: showRejectedData,
+                        selectQuery: selectQuery,
+                        inputColumns: inputColumns,
+                        inputParameters: inputParameters,
+                        downloadUrl: downloadUrl,
+                    }, 'Previewing table...').then(result => {
                         let url = result.value;
-
-                        this.authService.get(url, 'Getting preview results...', false).then(data => {
+                        let httpPromise = this.authService.get(url, 'Getting preview results...', false, cancelToken);
+                        promise.cancel = httpPromise.cancel;
+                        httpPromise.then(data => {
                             if (data['success'] === false) {
                                 this.addHubMessage(data);
                                 reject(data['message']);
-                            } else {
-
+                            }
+                            else {
                                 let columns = this.constructDataTableColumns(data.columns);
-                                resolve(
-                                    {
-                                        name: data.name,
-                                        columns: columns,
-                                        data: data.data,
-                                        transformProperties: data.transformProperties,
-                                        status: data.status});
+                                resolve({
+                                    name: data.name,
+                                    columns: columns,
+                                    data: data.data,
+                                    transformProperties: data.transformProperties,
+                                    status: data.status
+                                });
                                 return result;
                             }
                         }).catch(reason => {
@@ -1812,176 +1809,174 @@ export class HubService implements OnInit, OnDestroy {
                             reject(reason);
                         });
                     }).catch(reason => {
-                    this.logger.LogC(() => `PreviewTableKeyData, error: ${reason.message}.`, eLogLevel.Error);
+                        this.logger.LogC(() => `PreviewTableKeyData, error: ${reason.message}.`, eLogLevel.Error);
+                        this.addHubMessage(reason);
+                        reject(reason);
+                    });
+                }).catch(reason => {
                     this.addHubMessage(reason);
                     reject(reason);
                 });
-            }).catch(reason => {
-                this.addHubMessage(reason);
-                reject(reason);
             });
-        });
 
+        return promise;
     }
 
     previewTableKeyData(tableKey: number, showRejectedData, selectQuery: SelectQuery, inputColumns: InputColumn[],
-        inputParameters: DexihInputParameter[]):
-        Promise<PreviewResults> {
-        return new Promise<PreviewResults>((resolve, reject) => {
-
-            if (!this._remoteAgent.value) {
-                let message = new Message(false, 'No active remote agent.', null, null);
-                this.addHubMessage(message);
-                reject(message);
-                return;
-            }
-            this.authService.getDownloadUrl(this._remoteAgent.value).then(downloadUrl => {
-
-                this.authService.post('/api/Hub/PreviewTable', {
-                    hubKey: this._hubCache.value.hub.hubKey,
-                    remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
-                    tableKey: tableKey,
-                    showRejectedData: showRejectedData,
-                    selectQuery: selectQuery,
-                    inputColumns: inputColumns,
-                    inputParameters: inputParameters,
-                    downloadUrl: downloadUrl
-
+        inputParameters: DexihInputParameter[], cancelToken: CancelToken):
+        PromiseWithCancel<PreviewResults> {
+        
+        let promise = new PromiseWithCancel<PreviewResults>((resolve, reject) => {
+                if (!this._remoteAgent.value) {
+                    let message = new Message(false, 'No active remote agent.', null, null);
+                    this.addHubMessage(message);
+                    reject(message);
+                    return;
+                }
+                this.authService.getDownloadUrl(this._remoteAgent.value).then(downloadUrl => {
+                    this.authService.post('/api/Hub/PreviewTable', {
+                        hubKey: this._hubCache.value.hub.hubKey,
+                        remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
+                        tableKey: tableKey,
+                        showRejectedData: showRejectedData,
+                        selectQuery: selectQuery,
+                        inputColumns: inputColumns,
+                        inputParameters: inputParameters,
+                        downloadUrl: downloadUrl
                     }, 'Previewing table...').then(result => {
-
-                        this.downloadUrlData(result.value)
-                        .then(data => resolve(data))
-                        .catch(reason => reject(reason));
-
+                        let httpPromise = this.downloadUrlData(result.value, cancelToken);
+                        promise.cancel = httpPromise.cancel;
+                        httpPromise.then(data => resolve(data))
+                            .catch(reason => reject(reason));
                     }).catch(reason => {
-                    this.logger.LogC(() => `PreviewTableKeyData, error: ${reason.message}.`, eLogLevel.Error);
+                        this.logger.LogC(() => `PreviewTableKeyData, error: ${reason.message}.`, eLogLevel.Error);
+                        this.addHubMessage(reason);
+                        reject(reason);
+                    });
+                }).catch(reason => {
                     this.addHubMessage(reason);
                     reject(reason);
                 });
-            }).catch(reason => {
-                this.addHubMessage(reason);
-                reject(reason);
             });
-        });
+
+        return promise;
     }
 
     previewDatalinkKeyData(datalinkKey: number, selectQuery: SelectQuery, inputColumns: InputColumn[],
-        inputParameters: DexihInputParameter[]):
-        Promise<PreviewResults> {
-        return new Promise<PreviewResults>((resolve, reject) => {
-
-            if (!this._remoteAgent.value) {
-                let message = new Message(false, 'No active remote agent.', null, null);
-                this.addHubMessage(message);
-                reject(message);
-                return;
-            }
-            this.authService.getDownloadUrl(this._remoteAgent.value).then(downloadUrl => {
-                this.authService.post('/api/Hub/PreviewDatalink', {
-                    hubKey: this._hubCache.value.hub.hubKey,
-                    remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
-                    datalinkKey: datalinkKey,
-                    selectQuery: selectQuery,
-                    inputColumns: inputColumns,
-                    inputParameters: inputParameters,
-                    downloadUrl: downloadUrl
-                }, 'Previewing datalink...').then(result => {
-
-                    this.downloadUrlData(result.value)
-                    .then(data => resolve(data))
-                    .catch(reason => reject(reason));
-
+        inputParameters: DexihInputParameter[], cancelToken: CancelToken):
+    PromiseWithCancel<PreviewResults> {
+        
+        let promise = new PromiseWithCancel<PreviewResults>((resolve, reject) => {
+                if (!this._remoteAgent.value) {
+                    let message = new Message(false, 'No active remote agent.', null, null);
+                    this.addHubMessage(message);
+                    reject(message);
+                    return;
+                }
+                this.authService.getDownloadUrl(this._remoteAgent.value).then(downloadUrl => {
+                    this.authService.post('/api/Hub/PreviewDatalink', {
+                        hubKey: this._hubCache.value.hub.hubKey,
+                        remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
+                        datalinkKey: datalinkKey,
+                        selectQuery: selectQuery,
+                        inputColumns: inputColumns,
+                        inputParameters: inputParameters,
+                        downloadUrl: downloadUrl
+                    }, 'Previewing datalink...').then(result => {
+                        let httpPromise = this.downloadUrlData(result.value, cancelToken);
+                        promise.cancel = httpPromise.cancel;
+                        httpPromise.then(data => resolve(data))
+                            .catch(reason => reject(reason));
+                    }).catch(reason => {
+                        this.logger.LogC(() => `previewDatalinkKeyData, error: ${reason.message}.`, eLogLevel.Error);
+                        this.addHubMessage(reason);
+                        reject(reason);
+                    });
                 }).catch(reason => {
-                    this.logger.LogC(() => `previewDatalinkKeyData, error: ${reason.message}.`, eLogLevel.Error);
                     this.addHubMessage(reason);
                     reject(reason);
                 });
-            }).catch(reason => {
-                this.addHubMessage(reason);
-                reject(reason);
             });
-        });
+
+        return promise;
     }
 
     previewTransformData(datalink: DexihDatalink, datalinkTransformKey: number, selectQuery: SelectQuery, inputColumns: InputColumn[],
-        inputParameters: DexihInputParameter[]):
-        Promise<PreviewResults> {
-        return new Promise<PreviewResults>((resolve, reject) => {
-            // remove status as they will not parse into json.
-            datalink.currentStatus = null;
-            datalink.entityStatus = null;
-            datalink.previousStatus = null;
-
-            const cache = this._hubCache.value;
-
-            if (!this._remoteAgent.value) {
-                let message = new Message(false, 'No active remote agent.', null, null);
-                this.addHubMessage(message);
-                reject(message);
-                return;
-            }
-
-            this.authService.getDownloadUrl(this._remoteAgent.value).then(downloadUrl => {
-                this.authService.post('/api/Hub/PreviewTransform', {
-                    hubKey: cache.hub.hubKey,
-                    remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
-                    datalink: datalink,
-                    selectQuery,
-                    inputColumns,
-                    inputParameters: inputParameters,
-                    datalinkTransformKey: datalinkTransformKey,
-                    downloadUrl: downloadUrl
-                }, 'Getting download location...').then(result => {
-
-                    this.downloadUrlData(result.value)
-                        .then(data => resolve(data))
-                        .catch(reason => reject(reason));
-
+        inputParameters: DexihInputParameter[], cancelToken: CancelToken):
+        PromiseWithCancel<PreviewResults> {
+        let promise = new PromiseWithCancel<PreviewResults>((resolve, reject) => {
+                // remove status as they will not parse into json.
+                datalink.currentStatus = null;
+                datalink.entityStatus = null;
+                datalink.previousStatus = null;
+                const cache = this._hubCache.value;
+                if (!this._remoteAgent.value) {
+                    let message = new Message(false, 'No active remote agent.', null, null);
+                    this.addHubMessage(message);
+                    reject(message);
+                    return;
+                }
+                this.authService.getDownloadUrl(this._remoteAgent.value).then(downloadUrl => {
+                    this.authService.post('/api/Hub/PreviewTransform', {
+                        hubKey: cache.hub.hubKey,
+                        remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
+                        datalink: datalink,
+                        selectQuery,
+                        inputColumns,
+                        inputParameters: inputParameters,
+                        datalinkTransformKey: datalinkTransformKey,
+                        downloadUrl: downloadUrl
+                    }, 'Getting download location...').then(result => {
+                        let httpPromise = this.downloadUrlData(result.value, cancelToken);
+                        promise.cancel = httpPromise.cancel;
+                        httpPromise.then(data => resolve(data))
+                            .catch(reason => reject(reason));
+                    }).catch(reason => {
+                        this.addHubMessage(reason);
+                        reject(reason);
+                    });
                 }).catch(reason => {
                     this.addHubMessage(reason);
                     reject(reason);
                 });
-            }).catch(reason => {
-                this.addHubMessage(reason);
-                reject(reason);
             });
-        });
+        return promise;
     }
 
     previewView(view: DexihView, inputColumns: InputColumn[],
-            inputParameters: DexihInputParameter[]): Promise<PreviewResults> {
-        return new Promise<PreviewResults>((resolve, reject) => {
-
-            if (!this._remoteAgent.value) {
-                let message = new Message(false, 'No active remote agent.', null, null);
-                this.addHubMessage(message);
-                reject(message);
-                return;
-            }
-
-            this.authService.getDownloadUrl(this._remoteAgent.value).then(downloadUrl => {
-                this.authService.post('/api/Hub/PreviewView', {
-                    hubKey: this._hubCache.value.hub.hubKey,
-                    remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
-                    view: view,
-                    inputColumns: inputColumns,
-                    inputParameters: inputParameters,
-                    downloadUrl: downloadUrl
-                }, 'Getting dashboard download locations...').then((result: Message) => {
-
-                    this.downloadUrlData(result.value)
-                    .then(data => resolve(data))
-                    .catch(reason => reject(reason));
-
-                }).catch(reason => {
-                    this.addHubMessage(reason);
-                    reject(reason);
+            inputParameters: DexihInputParameter[], cancelToken: CancelToken): PromiseWithCancel<PreviewResults> {
+            
+            let promise = new PromiseWithCancel<PreviewResults>((resolve, reject) => {
+                    if (!this._remoteAgent.value) {
+                        let message = new Message(false, 'No active remote agent.', null, null);
+                        this.addHubMessage(message);
+                        reject(message);
+                        return;
+                    }
+                    this.authService.getDownloadUrl(this._remoteAgent.value).then(downloadUrl => {
+                        this.authService.post('/api/Hub/PreviewView', {
+                            hubKey: this._hubCache.value.hub.hubKey,
+                            remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
+                            view: view,
+                            inputColumns: inputColumns,
+                            inputParameters: inputParameters,
+                            downloadUrl: downloadUrl
+                        }, 'Getting dashboard download locations...').then((result: Message) => {
+                            let httpPromise = this.downloadUrlData(result.value, cancelToken);
+                            promise.cancel = httpPromise.cancel;
+                            httpPromise.then(data => resolve(data))
+                                .catch(reason => reject(reason));
+                        }).catch(reason => {
+                            this.addHubMessage(reason);
+                            reject(reason);
+                        });
+                    }).catch(reason => {
+                        this.addHubMessage(reason);
+                        reject(reason);
+                    });
                 });
-            }).catch(reason => {
-                this.addHubMessage(reason);
-                reject(reason);
-            });
-        });
+
+        return promise;
     }
 
     previewDashboard(dashboard: DexihDashboard, inputParameters: DexihInputParameter[]): Promise<DashboardUrl[]> {
@@ -2016,29 +2011,32 @@ export class HubService implements OnInit, OnDestroy {
     }
 
     // downloads a dataset from the provided url
-    downloadUrlData(url: string): Promise<PreviewResults> {
-        return new Promise<PreviewResults>((resolve, reject) => {
-            this.authService.get(url, null, false).then(data => {
-                if (data['success'] === false) {
-                    this.addHubMessage(data);
-                    reject(data['message']);
-                } else {
-                    let columns = this.constructDataTableColumns(data.columns);
-                    resolve(
-                        {
+    downloadUrlData(url: string, cancelToken: CancelToken): PromiseWithCancel<PreviewResults> {
+        let promise = new PromiseWithCancel<PreviewResults>((resolve, reject) => {
+                let httpPromise = this.authService.get(url, null, false, cancelToken);
+                httpPromise.then(data => {
+                    if (data['success'] === false) {
+                        this.addHubMessage(data);
+                        reject(data['message']);
+                    }
+                    else {
+                        let columns = this.constructDataTableColumns(data.columns);
+                        resolve({
                             name: data.name,
                             columns: columns,
                             data: data.data,
                             transformProperties: data.transformProperties,
                             status: data.status
                         });
-                    return;
-                }
-            }).catch(reason => {
-                this.addHubMessage(reason);
-                reject(reason);
-            });
-        });
+                        return;
+                    }
+                }).catch(reason => {
+                    this.addHubMessage(reason.error);
+                    reject(reason.error);
+                });
+            }, cancelToken);
+
+        return promise;
     }
 
     datalinkProperties(datalinkKey: number, selectQuery: SelectQuery, inputColumns: InputColumn[]):
@@ -2074,45 +2072,42 @@ export class HubService implements OnInit, OnDestroy {
         });
     }
 
-    previewProfileData(writerResult: TransformWriterResult, summaryOnly: boolean):
-            Promise<{ columns: Array<any>, data: Array<any> }> {
-        return new Promise<{ columns: Array<any>, data: Array<any> }>((resolve, reject) => {
-
-            if (!writerResult.profileTableName) {
-                let reason = 'This result does not contain profile data.';
-                this.addHubMessage(reason);
-                reject(reason);
-            }
-
-            this.authService.getDownloadUrl(this._remoteAgent.value).then(downloadUrl => {
-                const hub = this._hubCache.value.hub;
-                let connection = hub.dexihConnections.find(c => c.key === writerResult.auditConnectionKey);
-
-                this.authService.post('/api/Hub/PreviewProfile', {
-                    hubKey: this._hubCache.value.hub.hubKey,
-                    remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
-                    auditKey: writerResult.auditKey,
-                    profileTableName: writerResult.profileTableName,
-                    connection: connection,
-                    summaryOnly: summaryOnly,
-                    downloadUrl: downloadUrl
-                }, 'Retrieving profile data...').then((result: Message) => {
-
-                    this.downloadUrlData(result.value)
-                    .then(data => resolve(data))
-                    .catch(reason => reject(reason));
-
+    previewProfileData(writerResult: TransformWriterResult, summaryOnly: boolean, cancelToken: CancelToken):
+            PromiseWithCancel<{ columns: Array<any>, data: Array<any> }> {
+        let promise = new PromiseWithCancel<{ columns: Array<any>, data: Array<any> }>((resolve, reject) => {
+                if (!writerResult.profileTableName) {
+                    let reason = 'This result does not contain profile data.';
+                    this.addHubMessage(reason);
+                    reject(reason);
+                }
+                this.authService.getDownloadUrl(this._remoteAgent.value).then(downloadUrl => {
+                    const hub = this._hubCache.value.hub;
+                    let connection = hub.dexihConnections.find(c => c.key === writerResult.auditConnectionKey);
+                    this.authService.post('/api/Hub/PreviewProfile', {
+                        hubKey: this._hubCache.value.hub.hubKey,
+                        remoteAgentId: this.getCurrentRemoteAgentInstanceId(),
+                        auditKey: writerResult.auditKey,
+                        profileTableName: writerResult.profileTableName,
+                        connection: connection,
+                        summaryOnly: summaryOnly,
+                        downloadUrl: downloadUrl
+                    }, 'Retrieving profile data...').then((result: Message) => {
+                        let httpPromise = this.downloadUrlData(result.value, cancelToken);
+                        promise.cancel = httpPromise.cancel;
+                        httpPromise.then(data => resolve(data))
+                            .catch(reason => reject(reason));
+                    }).catch(reason => {
+                        this.addHubMessage(reason);
+                        reject(reason);
+                    });
                 }).catch(reason => {
+                    this.logger.LogC(() => `previewProfileData, error: ${reason.message}.`, eLogLevel.Error);
                     this.addHubMessage(reason);
                     reject(reason);
                 });
-
-            }).catch(reason => {
-                this.logger.LogC(() => `previewProfileData, error: ${reason.message}.`, eLogLevel.Error);
-                this.addHubMessage(reason);
-                reject(reason);
             });
-        });
+
+        return promise;
     }
 
     downloadData(downloadObjects: Array<DownloadObject>, zipFiles: boolean, downloadFormat: eDownloadFormat):

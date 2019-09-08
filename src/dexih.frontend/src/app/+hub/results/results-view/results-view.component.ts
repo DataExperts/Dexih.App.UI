@@ -4,6 +4,7 @@ import { HubService } from '../../hub.service';
 import { HubCache, TransformWriterResult, eSharedObjectType } from '../../hub.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Subscription, combineLatest} from 'rxjs';
+import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
     selector: 'results-view',
@@ -25,6 +26,8 @@ export class ResultsViewComponent implements OnInit, OnDestroy {
 
     resultChartData: Array<any>;
 
+    private cancelToken = new CancelToken();
+    
     constructor(
         private hubService: HubService,
         private authService: AuthService,
@@ -61,7 +64,7 @@ export class ResultsViewComponent implements OnInit, OnDestroy {
                 if (remoteAgent) {
                     this.showPage = true;
                     this.showPageMessage = '';
-                    this.hubService.getResultDetail(auditConnectionKey, auditKey).then(r => {
+                    this.hubService.getResultDetail(auditConnectionKey, auditKey, this.cancelToken).then(r => {
                         this.auditResult = r;
                     });
                 }
@@ -75,6 +78,7 @@ export class ResultsViewComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         if (this._subscription) { this._subscription.unsubscribe(); }
         if (this._hubCacheChangeSubscription) { this._hubCacheChangeSubscription.unsubscribe(); }
+        this.cancelToken.cancel();
     }
 
     close() {

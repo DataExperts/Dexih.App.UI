@@ -16,8 +16,8 @@
 
                     <div *ngIf="!inputParameterForm.value.runTime?.functionParameter?.isLabel" class="form-control p-0">
                         <form-select formControlName="datalinkColumn" [border]="false"
-                            [items]="inputColumns" itemName="logicalName" [(textValue)]="inputs[i].staticValue"
-                            [enableTextEntry]="true" [enableTextEntryMatch]="false"
+                            [items]="inputColumns" itemKey="key" itemName="logicalName" [(textValue)]="inputs[i].staticValue"
+                            [enableKeySelect]="false" [enableTextEntry]="true" [enableTextEntryMatch]="false"
                             (textValueChange)="updateStatic($event, i)"
                             textEntryNote="Enter a static value or select a column." [textEntryItems]="inputs[i].textItems" textEntryItemsTitle="Variables">
                         </form-select>
@@ -44,8 +44,8 @@
 
             <form *ngFor="let outputParameterForm of outputParameterForms; let i = index;" [formGroup]="outputParameterForm" class="ml-1  flex-fill">
                 <form-select class="flex-grow-1" [border]="false" class="form-control p-0"
-                    formControlName="datalinkColumn" [items]="outputColumns" itemName="logicalName"
-                    [enableTextEntry]="true" textEntryNote="Enter a value to add a new column"
+                    formControlName="datalinkColumn" [items]="outputColumns" itemName="logicalName" itemKey="key"
+                    [enableKeySelect]="false" [enableTextEntry]="true" textEntryNote="Enter a value to add a new column"
                     (textValueChange)="updateNewColumn($event, i)">
                 </form-select>
             </form>

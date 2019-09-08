@@ -4,6 +4,7 @@ import { HubCache, eDatalinkType, DexihDatalink, eSharedObjectType,
     TransformWriterResult, DexihDatajob, DexihDatalinkTest, eConnectionPurpose } from '../../hub.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, BehaviorSubject, Subscription, combineLatest} from 'rxjs';
+import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
     selector: 'results-index',
@@ -20,6 +21,8 @@ export class ResultsIndexComponent implements OnInit, OnDestroy {
     public rows = 20;
     private datalinkStatus: Map<number, TransformWriterResult>;
 
+    private cancelToken = new CancelToken();
+    
     showPage = false;
     showPageMessage = 'Loading...';
 
@@ -102,6 +105,7 @@ export class ResultsIndexComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         if (this._subscription) { this._subscription.unsubscribe(); }
         if (this._hubCacheChangeSubscription) { this._hubCacheChangeSubscription.unsubscribe(); }
+        this.cancelToken.cancel();
     }
 
     showResult(result: TransformWriterResult) {
@@ -139,7 +143,7 @@ export class ResultsIndexComponent implements OnInit, OnDestroy {
             uniqueKeys = this.hubCache.hub.dexihConnections.filter(c => c.purpose === eConnectionPurpose.Managed).map(c => c.key);
         }
 
-        this.hubService.getAuditResults(this.auditType, uniqueKeys, keys, true, this.rows)
+        this.hubService.getAuditResults(this.auditType, uniqueKeys, keys, true, this.rows, this.cancelToken)
         .then(results => {
             this._tableData.next(results);
             this.watchChanges();

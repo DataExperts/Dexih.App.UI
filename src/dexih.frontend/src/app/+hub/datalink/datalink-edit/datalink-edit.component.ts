@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { DexihDatalink, DexihDatalinkTransform, HubCache, eSourceType, eDatalinkType, eCacheStatus, eLoadStrategy } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { DatalinkEditService } from './datalink-edit.service';
-import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
+import { Subscription, Observable, BehaviorSubject, combineLatest } from 'rxjs';
 import { AuthService } from '../../../+auth/auth.service';
 import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import { LogFactory, eLogLevel } from '../../../../logging';

@@ -47,14 +47,14 @@
                 [enableTextEntry]="false">
             </form-select>
 
-            <form-select [(ngModel)]="filter.column1" (ngModelChange)="onChanged()" [border]="false" class="form-control p-0" [items]="columns" itemName="logicalName"
+            <form-select [(ngModel)]="filter.column1" (ngModelChange)="onChanged()" [border]="false" class="form-control p-0" [items]="columns" itemKey="key" itemName="logicalName" [enableKeySelect]="false"
                 [(textValue)]="filter.value1" [enableTextEntry]="true" [enableTextEntryMatch]="false" textEntryNote="Enter a static value or select a column.">
             </form-select>
 
             <form-select [(ngModel)]="filter.operator" (ngModelChange)="onChanged()" [items]="compare" itemKey="key" itemName="name" [border]="false" class="form-control p-0">
             </form-select>
 
-            <form-select [(ngModel)]="filter.column2" (ngModelChange)="onChanged()" [border]="false" class="form-control p-0" [items]="columns" itemName="logicalName"
+            <form-select [(ngModel)]="filter.column2" (ngModelChange)="onChanged()" [border]="false" class="form-control p-0" [items]="columns" itemKey="key" itemName="logicalName" [enableKeySelect]="false"
                 [(textValue)]="filter.value2" [enableTextEntry]="true" [enableTextEntryMatch]="false" textEntryNote="Enter a static value or select a column."
                 [textEntryItems]="variables" textEntryItemsTitle="Variables"
                 >

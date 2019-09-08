@@ -8,6 +8,7 @@ import { AuthService } from '../../../+auth/auth.service';
 import { FormArray, FormGroup } from '@angular/forms';
 import { DashboardItemComponent } from './item/dashboard-item.component';
 import { EventEmitter } from 'selenium-webdriver';
+import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
   selector: 'dexih-dashboard-edit-form',
@@ -29,6 +30,7 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
 
   public isRefreshing = false;
   private refreshComplete = false;
+  private cancelToken = new CancelToken();
 
   views: DexihView[];
 
@@ -120,6 +122,7 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this._subscription) { this._subscription.unsubscribe(); }
     if (this._formChangeSubscription) { this._formChangeSubscription.unsubscribe(); }
+    this.cancelToken.cancel();
   }
 
   close() {
@@ -147,7 +150,7 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
         let item = <FormGroup> items.controls.find((form: FormGroup) => form.controls.key.value === url.dashboardItemKey);
         if (item) {
           let data = <DataCache> item.controls.runTime.value.data;
-          data.refresh(this.hubService.downloadUrlData(url.downloadUrl));
+          data.refresh(this.hubService.downloadUrlData(url.downloadUrl, this.cancelToken));
         }
       });
     });

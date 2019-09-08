@@ -45,7 +45,7 @@ export class DatalinkTableComponent implements OnInit, OnDestroy {
 
                 this.subscribeDatalinkChanges();
 
-                if (this.hubCache && this.hubCache.isLoaded()) {
+                if (this.hubCache && this.hubCache.isLoaded() && this.datalinkTableForm) {
                     this.connectionTables = this.hubCache.getConnectionTables();
                     this.datalinks = this.hubCache.hub.dexihDatalinks;
                 }

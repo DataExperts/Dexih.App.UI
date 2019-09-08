@@ -1,4 +1,4 @@
-import { ManagedTask, Message, DexihActiveAgent, DexihRemoteAgent } from '../+auth/auth.models';
+import { ManagedTask, Message, DexihActiveAgent, DexihRemoteAgent, CancelToken } from '../+auth/auth.models';
 import { eLogLevel, LogFactory } from '../../logging';
 import { DexihHub, eObjectType, SharedData, Table, DexihTableColumn, DexihColumnBase, InputColumn, eViewSource, eSharedDataObjectType } from '../+hub/hub.models';
 import { SelectQuery } from '../+hub/hub.query.models';
@@ -161,11 +161,11 @@ export class HubsService implements OnDestroy {
     }
 
     // gets preview data from a download stream.
-    previewData(url: string):
+    previewData(url: string, cancelToken: CancelToken):
         Promise<{name: string, columns: Array<any>, data: Array<any> }> {
             return new Promise<{name: string, columns: Array<any>, data: Array<any> }>((resolve, reject) => {
 
-                this.authService.get(url, 'Getting preview results...', false).then(data => {
+                this.authService.get(url, 'Getting preview results...', false, cancelToken).then(data => {
                     if (data['success'] === false) {
                         // this.addHubErrorMessage(data['message']);
                         reject(data);

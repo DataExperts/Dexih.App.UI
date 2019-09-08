@@ -1,5 +1,7 @@
 import { Subscription } from 'rxjs';
 import { EntityBase } from './global.models';
+import { resolve } from 'dns';
+import { reject } from 'q';
 
 export const logoUrl = 'assets/img/dexih/dex_logo_wide_raw.png';
 export const logoSmallUrl = 'assets/img/dexih/dexih_small.png';
@@ -284,4 +286,65 @@ export class RemoteToken {
     public userToken: string;
 }
 
+// export class PromiseWithCancel<T> implements Promise<T> {
+//     then<TResult1 = T, TResult2 = never>(onfulfilled?: (value: T) => TResult1 | PromiseLike<TResult1>, onrejected?: (reason: any) => TResult2 | PromiseLike<TResult2>): Promise<TResult1 | TResult2> {
+//         return this._promise.then(onfulfilled);
+//     }
+    
+//     catch<TResult = never>(onrejected?: (reason: any) => TResult | PromiseLike<TResult>): Promise<T | TResult> {
+//         return this._promise.catch(onrejected);
+//     }
+    
+//     [Symbol.toStringTag]: string;
+//     finally(onfinally?: () => void): Promise<T> {
+//         return this._promise.finally(onfinally);
+//     }
+
+//     public constructor(executor: (
+//         resolve: (value?: T | PromiseLike<T>) => void, 
+//         reject: (reason?: any) => void) => void, cancel: () => void) {
+        
+//         this._promise = new Promise<T>((resolve, reject) => {executor(resolve, reject)});
+//       }
+
+//     private _promise: Promise<T>;
+//     private _cancel?: () => void;
+
+//     onCancel(cancel?: () => void) {
+//         this._cancel = cancel;
+//     }
+
+//     cancel() {
+//         this._cancel();
+//     }
+// }
+
+export class PromiseWithCancel<T> extends Promise<T>{
+
+    constructor(executor: (resolve: (value?: T | PromiseLike<T>) => void, reject: (reason?: any) => void) => void, 
+        cancel: CancelToken = new CancelToken()) {
+        super(executor);
+        this._cancel = cancel;
+    }
+
+    private _cancel: CancelToken;
+
+    public cancel() {
+        if(this._cancel) {
+            this._cancel.cancel();
+        }
+    }
+}
+
+export class CancelToken {
+    public cancelMethod: () => void;
+
+    //cancel the operation
+    public cancel() {
+        if (this.cancelMethod) {
+            this.cancelMethod();
+        }
+    }
+   
+}
 

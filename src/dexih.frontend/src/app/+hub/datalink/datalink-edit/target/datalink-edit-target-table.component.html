@@ -30,7 +30,7 @@
                 </form-select>
             </section>
             <section *ngIf="nodes?.length > 0">
-                <form-select label="Node level" formControlName="nodeDatalinkColumn" [items]="nodes" itemName="name" node='Specify the node where the transform should be applied to.' [allowNullSelect]="true" selectNullMessage='Use top level'>
+                <form-select label="Node level" formControlName="nodeDatalinkColumn" [items]="nodes" [enableKeySelect]="false" itemKey="key" itemName="name" node='Specify the node where the transform should be applied to.' [allowNullSelect]="true" selectNullMessage='Use top level'>
                 </form-select>
             </section>
         </fieldset>

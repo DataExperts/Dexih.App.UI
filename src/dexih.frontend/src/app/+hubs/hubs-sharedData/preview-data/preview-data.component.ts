@@ -8,6 +8,7 @@ import { AuthService } from '../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { DexihMessageComponent } from '../../../shared/ui/dexihMessage/index';
 import { HubsService} from '../../hubs.service';
+import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
 
@@ -38,6 +39,8 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
     selectQuery: SelectQuery = new SelectQuery();
 
     public data: Array<any>;
+
+    private cancelToken = new CancelToken();
 
     constructor(
         private authService: AuthService,
@@ -77,6 +80,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         if (this._subscription) { this._subscription.unsubscribe(); }
+        this.cancelToken.cancel();
     }
 
     close() {
@@ -85,7 +89,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
 
     refresh() {
         this.hubsService.previewDataUrl(this.hubKey, this.objectKey, this.objectType, this.inputColumns, this.selectQuery).then((url) => {
-            this.hubsService.previewData(url).then((result) => {
+            this.hubsService.previewData(url, this.cancelToken).then((result) => {
                 this.columns = result.columns;
                 this.data = result.data;
                 this.name = result.name;
