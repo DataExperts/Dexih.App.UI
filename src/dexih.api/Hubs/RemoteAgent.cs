@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using dexih.api.Services.Operations;
 using dexih.api.Services.Remote;
@@ -31,7 +32,7 @@ namespace dexih.api.Hubs
 			
 			var remoteAgents = (IRemoteAgents)_serviceProvider.GetService(typeof(IRemoteAgents));
 			var operations = (IDexihOperations)_serviceProvider.GetService(typeof(IDexihOperations));
-			await remoteAgents.DisconnectRemoteAgent((string)Context.Items["InstanceId"], operations);
+			await remoteAgents.DisconnectRemoteAgent((string)Context.Items["InstanceId"], operations, CancellationToken.None);
 			await base.OnDisconnectedAsync(exception);
 		}
 		
@@ -45,7 +46,7 @@ namespace dexih.api.Hubs
 				Context.Items.Add("SecurityToken", securityToken);
 				var remoteAgents = (IRemoteAgents) _serviceProvider.GetService(typeof(IRemoteAgents));
 				var operations = (IDexihOperations)_serviceProvider.GetService(typeof(IDexihOperations));
-				await remoteAgents.ConnectRemoteAgent(Context.ConnectionId, activeAgent, operations);
+				await remoteAgents.ConnectRemoteAgent(Context.ConnectionId, activeAgent, operations, CancellationToken.None);
 			}
 			catch (Exception e)
 			{
@@ -59,7 +60,7 @@ namespace dexih.api.Hubs
 			_logger.LogTrace($"Ping from {Context.UserIdentifier}");
 
 			var operations = (IDexihOperations)_serviceProvider.GetService(typeof(IDexihOperations));
-			await operations.BroadcastClientMessageAsync(connectionId, "remoteAgent-update", activeAgent);
+			await operations.BroadcastClientMessageAsync(connectionId, "remoteAgent-update", activeAgent, CancellationToken.None);
 		}
 		
 		public async Task PingServer(DexihActiveAgent activeAgent, string pingKey)

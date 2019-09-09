@@ -7,7 +7,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using System.Collections.Concurrent;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using dexih.api.Hubs;
 using dexih.api.Models;
@@ -25,7 +24,6 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using KeyValuePair = System.Collections.Generic.KeyValuePair;
 using SharedData = dexih.operations.SharedData;
 
 namespace dexih.api.Services.Remote
@@ -35,7 +33,7 @@ namespace dexih.api.Services.Remote
     {
 	    public const int MaxResponseWait = 30000;
 
-	    public string remoteAgentIdentity(long remoteAgentKey) => $"RemoteAgentKey-{remoteAgentKey}";
+	    public string RemoteAgentIdentity(long remoteAgentKey) => $"RemoteAgentKey-{remoteAgentKey}";
 	    
         public DexihRemoteAgents(
 
@@ -65,7 +63,7 @@ namespace dexih.api.Services.Remote
 
 	    #region Remote Agent Messaging
 
-	    public async Task<(string instanceId, string securityToken)> AuthorizeRemoteAgent(string name, long remoteAgentKey, string encryptionKey, string ipAddress, string userId)
+	    public async Task<(string instanceId, string securityToken)> AuthorizeRemoteAgent(string name, long remoteAgentKey, string encryptionKey, string ipAddress, string userId, CancellationToken cancellationToken)
 	    {
 		    var remoteAgentProperties = new RemoteAgentProperties()
 		    {
@@ -78,37 +76,37 @@ namespace dexih.api.Services.Remote
 		    };
 		    
 		    var instanceId = Guid.NewGuid().ToString();
-		    await SetRemoteAgentProperties(instanceId, remoteAgentProperties);
+		    await SetRemoteAgentProperties(instanceId, remoteAgentProperties, cancellationToken);
 
 		    return (instanceId, remoteAgentProperties.SecurityToken);
 	    }
 	    
-	    public async Task ConnectRemoteAgent(string connectionId, DexihActiveAgent activeAgent, IDexihOperations operations)
+	    public async Task ConnectRemoteAgent(string connectionId, DexihActiveAgent activeAgent, IDexihOperations operations, CancellationToken cancellationToken)
 	    {
-		    var remoteAgentProperties = await GetRemoteAgentProperties(activeAgent.InstanceId);
+		    var remoteAgentProperties = await GetRemoteAgentProperties(activeAgent.InstanceId, cancellationToken);
 		    remoteAgentProperties.ConnectionId = connectionId;
-		    await SetRemoteAgentProperties(activeAgent.InstanceId, remoteAgentProperties);
+		    await SetRemoteAgentProperties(activeAgent.InstanceId, remoteAgentProperties, cancellationToken);
 		    
-		    await _remoteAgentContext.Groups.AddToGroupAsync(connectionId, remoteAgentIdentity(remoteAgentProperties.RemoteAgentKey));
+		    await _remoteAgentContext.Groups.AddToGroupAsync(connectionId, RemoteAgentIdentity(remoteAgentProperties.RemoteAgentKey), cancellationToken);
 		    activeAgent.RemoteAgentKey = remoteAgentProperties.RemoteAgentKey;
 		    
-		    var hubs = await operations.RepositoryManager.AuthorizedRemoteAgentHubs(remoteAgentProperties.RemoteAgentKey);
+		    var hubs = await operations.RepositoryManager.AuthorizedRemoteAgentHubs(remoteAgentProperties.RemoteAgentKey, cancellationToken);
 		    foreach (var hub in hubs)
 		    {
-			    await operations.BroadcastHubMessageAsync(hub.HubKey, "remoteAgent-update", activeAgent);
+			    await operations.BroadcastHubMessageAsync(hub.HubKey, "remoteAgent-update", activeAgent, cancellationToken);
 		    }
 	    }
 
-	    public async Task DisconnectRemoteAgent(string instanceId, IDexihOperations operations)
+	    public async Task DisconnectRemoteAgent(string instanceId, IDexihOperations operation, CancellationToken cancellationToken)
 	    {
-		    var remoteAgentProperties = await GetRemoteAgentProperties(instanceId);
-		    await _distributedCache.RemoveAsync(instanceId);
+		    var remoteAgentProperties = await GetRemoteAgentProperties(instanceId, cancellationToken);
+		    await _distributedCache.RemoveAsync(instanceId, cancellationToken);
 		    
-		    var hubs = await operations.RepositoryManager.AuthorizedRemoteAgentHubs(remoteAgentProperties.RemoteAgentKey);
+		    var hubs = await operation.RepositoryManager.AuthorizedRemoteAgentHubs(remoteAgentProperties.RemoteAgentKey, cancellationToken);
 
 		    foreach (var hub in hubs)
 		    {
-			    await operations.BroadcastHubMessageAsync(hub.HubKey, "remoteAgent-delete", instanceId);
+			    await operation.BroadcastHubMessageAsync(hub.HubKey, "remoteAgent-delete", instanceId, cancellationToken);
 		    }
 	    }
 
@@ -152,7 +150,7 @@ namespace dexih.api.Services.Remote
 		        if (hubKey > 0)
 		        {
 			        var remoteAgentHub =
-				        await repositoryManager.AuthorizedRemoteAgentHub(hubKey, remoteAgentProperties.RemoteAgentKey);
+				        await repositoryManager.AuthorizedRemoteAgentHub(hubKey, remoteAgentProperties.RemoteAgentKey, cancellationToken);
 			        if (remoteAgentHub == null)
 			        {
 				        _remoteLogger.LogWarning(LoggingEvents.GetRemoteAgent,
@@ -171,7 +169,7 @@ namespace dexih.api.Services.Remote
 			        Value = Json.JTokenFromObject(value, remoteAgentProperties.EncryptionKey),
 			        Method = method,
 			        HubKey = hubKey,
-			        HubVariables = await repositoryManager.GetHubVariables(hubKey),
+			        HubVariables = await repositoryManager.GetHubVariables(hubKey, cancellationToken),
 			        TimeOut = int.MaxValue
 		        };
 
@@ -344,7 +342,7 @@ namespace dexih.api.Services.Remote
 		/// </summary>
 		/// <param name="remoteAgentKeys"></param>
 		/// <returns></returns>
-	    public async Task<DexihActiveAgent> GetActiveAgent(long[] remoteAgentKeys)
+	    public async Task<DexihActiveAgent> GetActiveAgent(long[] remoteAgentKeys, CancellationToken cancellationToken)
 	    {
 		    var pingKey = Guid.NewGuid().ToString();
 		    var exceptions = new ConcurrentQueue<Exception>();
@@ -355,7 +353,7 @@ namespace dexih.api.Services.Remote
 			    {
 				    try
 				    {
-					    await _remoteAgentContext.Clients.Groups(remoteAgentIdentity(remoteAgentKey))
+					    await _remoteAgentContext.Clients.Groups(RemoteAgentIdentity(remoteAgentKey))
 						    .SendAsync("PingServer", pingKey);
 				    }
 				    catch (Exception ex)
@@ -394,11 +392,11 @@ namespace dexih.api.Services.Remote
 		/// <returns>The hub reader remote agent.</returns>
 		/// <param name="hubKey">Hub key.</param>
 		/// <param name="database">Database.</param>
-        public async Task<DexihActiveAgent> GetHubReaderRemoteAgent(long hubKey, RepositoryManager database)
+        public async Task<DexihActiveAgent> GetHubReaderRemoteAgent(long hubKey, RepositoryManager database, CancellationToken cancellationToken)
         {
 			_remoteLogger.LogTrace(LoggingEvents.GetHubReaderRemoteAgent, "GetHubReaderRemoteAgent - HubKey {hubKey}.", hubKey);
 
-			var hubCache = await database.GetHub(hubKey);
+			var hubCache = await database.GetHub(hubKey, cancellationToken);
 	        var hubAgents = hubCache.DexihRemoteAgentHubs.Where(c=> c.IsAuthorized && c.IsValid).ToArray();
 	        
 	        // attempt to get the agent set as the default first.
@@ -407,7 +405,7 @@ namespace dexih.api.Services.Remote
 	        DexihActiveAgent activeAgent = null;
 	        if (defaultAgentKeys.Any())
 	        {
-		        activeAgent = await GetActiveAgent(defaultAgentKeys);
+		        activeAgent = await GetActiveAgent(defaultAgentKeys, cancellationToken);
 	        }
 
 	        if (activeAgent == null)
@@ -415,7 +413,7 @@ namespace dexih.api.Services.Remote
 		        var otherAgents = hubAgents.Where(c => !c.IsDefault).Select(c => c.RemoteAgentKey).ToArray();
 		        if (otherAgents.Any())
 		        {
-			        activeAgent = await GetActiveAgent(otherAgents);
+			        activeAgent = await GetActiveAgent(otherAgents, cancellationToken);
 		        }
 	        }
 
@@ -425,7 +423,7 @@ namespace dexih.api.Services.Remote
 		        throw new RemoteAgentGetHubReaderRemoteAgentException("There is no active remote agent for this hub", null, hubKey);
 	        }
 	        
-	        var remoteAgent = await GetRemoteAgentProperties(activeAgent.InstanceId);
+	        var remoteAgent = await GetRemoteAgentProperties(activeAgent.InstanceId, cancellationToken);
 
 //			var authorizedRemoteAgent = await database.RemoteAgentAuthorize(hubKey, remoteAgent.RemoteSettings.Runtime.UserId, remoteAgent.IpAddress, remoteAgent.RemoteSettings);
 //			if (authorizedRemoteAgent == null)
@@ -434,7 +432,7 @@ namespace dexih.api.Services.Remote
 //				throw new RemoteAgentGetHubReaderRemoteAgentException("The remote agent is not authorized.  This could be due to a change in the remote agents ip agress or unique identifier.", null, hubKey);
 //			}
 
-	        var user = await database.GetUser(remoteAgent.UserId);
+	        var user = await database.GetUser(remoteAgent.UserId, cancellationToken);
 	
 			if (user.IsAdmin)
 			{
@@ -442,7 +440,7 @@ namespace dexih.api.Services.Remote
 				return activeAgent;
 			}
 
-			if ((await database.GetUserHub(hubKey, user)) != null)
+			if ((await database.GetUserHub(hubKey, user, cancellationToken)) != null)
 			{
 				_remoteLogger.LogDebug(LoggingEvents.GetHubReaderRemoteAgent, "GetHubReaderRemoteAgent - remote agent is authorized user {user}, HubKey {hubKey}, remoteAgentname: {name}.", user.Email, hubKey, activeAgent.Name);
 				return activeAgent;
@@ -457,12 +455,12 @@ namespace dexih.api.Services.Remote
 	    #region Remote Operations
 
     
-        public async Task<string> Encrypt(string id, long hubKey, string value, RepositoryManager database)
+        public async Task<string> Encrypt(string id, long hubKey, string value, RepositoryManager database, CancellationToken cancellationToken)
         {
             try
             {
                 _remoteLogger.LogTrace(LoggingEvents.RemoteEncrypt, "Encrypt - Id: {Id}, HubKey: {hubKey}.", id, hubKey);
-                var result = await SendRemoteMessage<string>(hubKey, id, nameof(RemoteOperations.Encrypt), value, database, CancellationToken.None);
+                var result = await SendRemoteMessage<string>(hubKey, id, nameof(RemoteOperations.Encrypt), value, database, cancellationToken);
 	            return result;
             }
             catch(Exception ex)
@@ -471,12 +469,12 @@ namespace dexih.api.Services.Remote
             }
         }
 
-		public async Task<string> Decrypt(string id, long hubKey, string value, RepositoryManager database)
+		public async Task<string> Decrypt(string id, long hubKey, string value, RepositoryManager database, CancellationToken cancellationToken)
 		{
             try
             {
                 _remoteLogger.LogTrace(LoggingEvents.RemoteDecrypt, "Decrypt - Id: {Id}, HubKey: {hubKey}.", id, hubKey);
-                var result = await SendRemoteMessage<string>(hubKey, id, nameof(RemoteOperations.Decrypt), value, database, CancellationToken.None);
+                var result = await SendRemoteMessage<string>(hubKey, id, nameof(RemoteOperations.Decrypt), value, database, cancellationToken);
                 return result;
             }
             catch (Exception ex)
@@ -495,13 +493,13 @@ namespace dexih.api.Services.Remote
 	    /// <param name="database"></param>
 	    /// <returns>Reference Url for the upload</returns>
 	    /// <exception cref="RemoteAgentException"></exception>
-	    public async Task<string> UploadFile(string id, long hubKey, long tableKey, EFlatFilePath path, string fileName, DownloadUrl downloadUrl, RepositoryManager database)
+	    public async Task<string> UploadFile(string id, long hubKey, long tableKey, EFlatFilePath path, string fileName, DownloadUrl downloadUrl, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    try
 		    {
 			    _remoteLogger.LogTrace(LoggingEvents.RemoteSaveFile, "UploadFile - Id: {Id}, HubKey: {hubKey}, TableKey: {tableKey}.", id, hubKey, tableKey);
 
-			    var hub = await database.GetHub(hubKey);
+			    var hub = await database.GetHub(hubKey, cancellationToken);
 
 			    var cache = new CacheManager(hubKey, hub.EncryptionKey);
 			    cache.AddTables(new[] { tableKey }, hub);
@@ -514,7 +512,7 @@ namespace dexih.api.Services.Remote
 				    fileName
 			    };
 
-			    var result = await SendRemoteMessage<string>(hubKey, id, nameof(RemoteOperations.UploadFile), value, database, CancellationToken.None);
+			    var result = await SendRemoteMessage<string>(hubKey, id, nameof(RemoteOperations.UploadFile), value, database, cancellationToken);
 			    return result;
 		    }
 		    catch(Exception ex)
@@ -532,13 +530,13 @@ namespace dexih.api.Services.Remote
 		    DataType.ETypeCode formatType, 
 		    string fileName, 
 		    DownloadUrl downloadUrl, 
-		    RepositoryManager database)
+		    RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    try
 		    {
 			    _remoteLogger.LogTrace(LoggingEvents.RemoteSaveFile, "BulkUploadFiles - Id: {Id}, HubKey: {hubKey}, TableKey: {connectionKey}.", id, hubKey, connectionKey);
 
-			    var hub = await database.GetHub(hubKey);
+			    var hub = await database.GetHub(hubKey, cancellationToken);
 
 			    var cache = new CacheManager(hubKey, hub.EncryptionKey);
 			    cache.AddConnections(new[] { connectionKey }, false, hub);
@@ -555,7 +553,7 @@ namespace dexih.api.Services.Remote
 				    fileName 
 			    };
 
-			    var result = await SendRemoteMessage<(string url, string reference)>(hubKey, id, nameof(RemoteOperations.BulkUploadFiles), value, database, CancellationToken.None);
+			    var result = await SendRemoteMessage<(string url, string reference)>(hubKey, id, nameof(RemoteOperations.BulkUploadFiles), value, database, cancellationToken);
 			    return result;
 		    }
 		    catch(Exception ex)
@@ -565,9 +563,9 @@ namespace dexih.api.Services.Remote
 	    }
 
 
-	    public async Task<DexihTable[]> ImportTables(string instanceId, long hubKey, DexihTable[] hubTables, RepositoryManager repositoryManager)
+	    public async Task<DexihTable[]> ImportTables(string instanceId, long hubKey, DexihTable[] hubTables, RepositoryManager repositoryManager, CancellationToken cancellationToken)
 	    {
-		    var hub = await repositoryManager.GetHub(hubKey);
+		    var hub = await repositoryManager.GetHub(hubKey, cancellationToken);
 		    var cache = new CacheManager(hubKey, hub.EncryptionKey);
 		    cache.AddConnections(hubTables.Select(c => c.ConnectionKey).Distinct(), false, hub);
 
@@ -577,14 +575,14 @@ namespace dexih.api.Services.Remote
 			    tables = hubTables
 		    };
 	        
-		    var importedTables = await SendRemoteMessage<DexihTable[]>(hubKey, instanceId, nameof(RemoteOperations.ImportDatabaseTables), value, repositoryManager, CancellationToken.None);
+		    var importedTables = await SendRemoteMessage<DexihTable[]>(hubKey, instanceId, nameof(RemoteOperations.ImportDatabaseTables), value, repositoryManager, cancellationToken);
 		    return importedTables;
 
 	    }
 	    
-	    public async Task<JToken> CreateTables(string instanceId, long hubKey, DexihTable[] tables, bool dropTables, RepositoryManager repositoryManager)
+	    public async Task<JToken> CreateTables(string instanceId, long hubKey, DexihTable[] tables, bool dropTables, RepositoryManager repositoryManager, CancellationToken cancellationToken)
 	    {
-		    var hub = await repositoryManager.GetHub(hubKey);
+		    var hub = await repositoryManager.GetHub(hubKey, cancellationToken);
 		    var cache = new CacheManager(hubKey, hub.EncryptionKey);
 		    cache.AddConnections(tables.Select(c => c.ConnectionKey).Distinct(), false, hub);
 
@@ -595,13 +593,13 @@ namespace dexih.api.Services.Remote
 			    dropTables = dropTables
 		    };
 	        
-		    var result = await SendRemoteMessage<JToken>(hubKey, instanceId, nameof(RemoteOperations.CreateDatabaseTables), value, repositoryManager, CancellationToken.None);
+		    var result = await SendRemoteMessage<JToken>(hubKey, instanceId, nameof(RemoteOperations.CreateDatabaseTables), value, repositoryManager, cancellationToken);
 		    return result;
 	    }
 	    
-	    public async Task<JToken> ClearTables(string instanceId, long hubKey, DexihTable[] tables, RepositoryManager repositoryManager)
+	    public async Task<JToken> ClearTables(string instanceId, long hubKey, DexihTable[] tables, RepositoryManager repositoryManager, CancellationToken cancellationToken)
 	    {
-		    var hub = await repositoryManager.GetHub(hubKey);
+		    var hub = await repositoryManager.GetHub(hubKey, cancellationToken);
 		    var cache = new CacheManager(hubKey, hub.EncryptionKey);
 		    cache.AddConnections(tables.Select(c => c.ConnectionKey).Distinct(), false, hub);
 
@@ -611,17 +609,17 @@ namespace dexih.api.Services.Remote
 			    tables = tables
 		    };
 	        
-		    var result = await SendRemoteMessage<JToken>(hubKey, instanceId, nameof(RemoteOperations.ClearDatabaseTables), value, repositoryManager, CancellationToken.None);
+		    var result = await SendRemoteMessage<JToken>(hubKey, instanceId, nameof(RemoteOperations.ClearDatabaseTables), value, repositoryManager, cancellationToken);
 		    return result;
 	    }
 	    
-	    public async Task<string> PreviewTable(string id, long hubKey, DexihTable table, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, DownloadUrl downloadUrl, RepositoryManager database)
+	    public async Task<string> PreviewTable(string id, long hubKey, DexihTable table, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, DownloadUrl downloadUrl, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    try
 		    {
 			    _remoteLogger.LogTrace(LoggingEvents.PreviewTable, "Preview Table - Id: {Id}, HubKey: {hubKey}, TableKey: {tableKey}.", id, hubKey, table.Key);
 
-			    var hub = await database.GetHub(hubKey);
+			    var hub = await database.GetHub(hubKey, cancellationToken);
 			    var cache = new CacheManager(hubKey, hub.EncryptionKey);
 			    cache.AddConnections(new[] { table.ConnectionKey }, false, hub);
 			    cache.AddTable(table, hub);
@@ -637,7 +635,7 @@ namespace dexih.api.Services.Remote
 				    inputParameters
 			    };
 
-			    var result = await SendRemoteMessage<string>(hubKey, id, nameof(RemoteOperations.PreviewTable), value, database, CancellationToken.None);
+			    var result = await SendRemoteMessage<string>(hubKey, id, nameof(RemoteOperations.PreviewTable), value, database, cancellationToken);
 			    return result;
 		    }
 		    catch (Exception ex)
@@ -646,20 +644,20 @@ namespace dexih.api.Services.Remote
 		    }
 	    }
 	    
-		public async Task<string> PreviewTable(string id, long hubKey, long tableKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, DownloadUrl downloadUrl, RepositoryManager database)
+		public async Task<string> PreviewTable(string id, long hubKey, long tableKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, DownloadUrl downloadUrl, RepositoryManager database, CancellationToken cancellationToken)
 		{
-			var table = await database.GetTable(hubKey, tableKey, true);
-			return await PreviewTable(id, hubKey, table, selectQuery, inputColumns, inputParameters, showRejectedData, downloadUrl, database);
+			var table = await database.GetTable(hubKey, tableKey, true, cancellationToken);
+			return await PreviewTable(id, hubKey, table, selectQuery, inputColumns, inputParameters, showRejectedData, downloadUrl, database, cancellationToken);
         }
 
 	    
-	    public async Task<ManagedTask> DownloadTableData(string id, long hubKey, string connectionId, DexihTable hubTable, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters,  bool showRejectedData, EDownloadFormat downloadFormat, bool zipFiles, DownloadUrl downloadUrl, RepositoryManager database)
+	    public async Task<ManagedTask> DownloadTableData(string id, long hubKey, string connectionId, DexihTable hubTable, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters,  bool showRejectedData, EDownloadFormat downloadFormat, bool zipFiles, DownloadUrl downloadUrl, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    try
 		    {
 			    _remoteLogger.LogTrace(LoggingEvents.PreviewTable, "Preview Table - Id: {Id}, HubKey: {hubKey}, TableKey: {tableKey}.", id, hubKey, hubTable.Key);
 
-			    var hub = await database.GetHub(hubKey);
+			    var hub = await database.GetHub(hubKey, cancellationToken);
 			    var cache = new CacheManager(hubKey, hub.EncryptionKey);
 			    cache.AddTable(hubTable, hub);
 
@@ -684,7 +682,7 @@ namespace dexih.api.Services.Remote
 				    downloadUrl
 			    };
 
-			    var result = await SendRemoteMessage<ManagedTask>(hubKey, id, nameof(RemoteOperations.DownloadData), value, database, CancellationToken.None);
+			    var result = await SendRemoteMessage<ManagedTask>(hubKey, id, nameof(RemoteOperations.DownloadData), value, database, cancellationToken);
 			    return result;
 		    }
 		    catch (Exception ex)
@@ -693,13 +691,13 @@ namespace dexih.api.Services.Remote
 		    }
 	    }
 	    
-	    public async Task<ManagedTask> DownloadDatalinkData(string id, long hubKey, string connectionId, DexihDatalink hubDatalink, long datalinkTransformKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, EDownloadFormat downloadFormat, bool zipFiles, DownloadUrl downloadUrl, RepositoryManager database)
+	    public async Task<ManagedTask> DownloadDatalinkData(string id, long hubKey, string connectionId, DexihDatalink hubDatalink, long datalinkTransformKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, EDownloadFormat downloadFormat, bool zipFiles, DownloadUrl downloadUrl, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    try
 		    {
 			    _remoteLogger.LogTrace(LoggingEvents.PreviewTable, "Preview Datalink - Id: {Id}, HubKey: {hubKey}, Name: {name}.", id, hubKey, hubDatalink.Name);
 
-			    var hub = await database.GetHub(hubKey);
+			    var hub = await database.GetHub(hubKey, cancellationToken);
 			    var cache = new CacheManager(hubKey, hub.EncryptionKey);
 			    cache.AddDatalink(hubDatalink, hub);
 
@@ -725,7 +723,7 @@ namespace dexih.api.Services.Remote
 				    downloadUrl
 			    };
 			    
-			    var result = await SendRemoteMessage<ManagedTask>(hubKey, id, nameof(RemoteOperations.DownloadData), value,  database, CancellationToken.None);
+			    var result = await SendRemoteMessage<ManagedTask>(hubKey, id, nameof(RemoteOperations.DownloadData), value,  database, cancellationToken);
 			    return result;
 		    }
 		    catch (Exception ex)
@@ -734,13 +732,13 @@ namespace dexih.api.Services.Remote
 		    }
 	    }
 	    
-        public async Task<string> PreviewDatalink(string id, long hubKey, long datalinkKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, DownloadUrl downloadUrl, RepositoryManager database)
+        public async Task<string> PreviewDatalink(string id, long hubKey, long datalinkKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, DownloadUrl downloadUrl, RepositoryManager database, CancellationToken cancellationToken)
         {
             try
             {
                 _remoteLogger.LogTrace(LoggingEvents.PreviewDatalink, "Preview Datalink - Id: {Id}, HubKey: {hubKey}, DatalinkKey: {datalinkKey}.", id, hubKey, datalinkKey);
 
-                var hub = await database.GetHub(hubKey);
+                var hub = await database.GetHub(hubKey, cancellationToken);
 
                 var cache = new CacheManager(hubKey, hub.EncryptionKey);
                 cache.AddDatalinks(new[] { datalinkKey }, hub);
@@ -755,7 +753,7 @@ namespace dexih.api.Services.Remote
 	                inputParameters
                 };
 
-                var result = await SendRemoteMessage<string>(hubKey, id, nameof(RemoteOperations.PreviewDatalink), value,  database, CancellationToken.None);
+                var result = await SendRemoteMessage<string>(hubKey, id, nameof(RemoteOperations.PreviewDatalink), value,  database, cancellationToken);
 	            return result;
             }
             catch (Exception ex)
@@ -764,13 +762,13 @@ namespace dexih.api.Services.Remote
             }
         }
         
-        public async Task<TransformProperties> DatalinkProperties(string id, long hubKey, long datalinkKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, RepositoryManager database)
+        public async Task<TransformProperties> DatalinkProperties(string id, long hubKey, long datalinkKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken)
         {
 	        try
 	        {
 		        _remoteLogger.LogTrace(LoggingEvents.DatalinkProperties, "Preview Datalink - Id: {Id}, HubKey: {hubKey}, DatalinkKey: {datalinkKey}.", id, hubKey, datalinkKey);
 
-		        var hub = await database.GetHub(hubKey);
+		        var hub = await database.GetHub(hubKey, cancellationToken);
 
 		        var cache = new CacheManager(hubKey, hub.EncryptionKey);
 		        cache.AddDatalinks(new[] { datalinkKey }, hub);
@@ -784,7 +782,7 @@ namespace dexih.api.Services.Remote
 			        inputParameters
 		        };
 
-		        var result = await SendRemoteMessage<TransformProperties>(hubKey, id, nameof(RemoteOperations.DatalinkProperties), value,  database, CancellationToken.None);
+		        var result = await SendRemoteMessage<TransformProperties>(hubKey, id, nameof(RemoteOperations.DatalinkProperties), value,  database, cancellationToken);
 		        return result;
 	        }
 	        catch (Exception ex)
@@ -793,13 +791,13 @@ namespace dexih.api.Services.Remote
 	        }
         }
 	    
-	    public async Task<string> PreviewTransform(string id, long hubKey, DexihDatalink hubDatalink, long datalinkTransformKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, DownloadUrl downloadUrl, RepositoryManager database)
+	    public async Task<string> PreviewTransform(string id, long hubKey, DexihDatalink hubDatalink, long datalinkTransformKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, DownloadUrl downloadUrl, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    try
 		    {
 			    _remoteLogger.LogTrace(LoggingEvents.PreviewDatalink, "Preview Datalink - Id: {Id}, HubKey: {hubKey}, DatalinkKey: {datalinkKey}.", id, hubKey, hubDatalink.Key);
 
-			    var hub = await database.GetHub(hubKey);
+			    var hub = await database.GetHub(hubKey, cancellationToken);
 
 
 			    var cache = new CacheManager(hubKey, hub.EncryptionKey);
@@ -816,7 +814,7 @@ namespace dexih.api.Services.Remote
 				    downloadUrl
 			    };
 
-			    var result = await SendRemoteMessage<string>(hubKey, id, nameof(RemoteOperations.PreviewTransform), value, database, CancellationToken.None);
+			    var result = await SendRemoteMessage<string>(hubKey, id, nameof(RemoteOperations.PreviewTransform), value, database, cancellationToken);
 			    return result;
 		    }
 		    catch (Exception ex)
@@ -825,13 +823,13 @@ namespace dexih.api.Services.Remote
 		    }
 	    }
 	    
-	    public async Task<string> PreviewAuditResults(AuditResults auditResults, RepositoryManager database)
+	    public async Task<string> PreviewAuditResults(AuditResults auditResults, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    try
 		    {
 			    _remoteLogger.LogTrace(LoggingEvents.PreviewAuditResults, "Preview Audit Results - {hubKey}", auditResults.HubKey);
 
-			    var hub = await database.GetHub(auditResults.HubKey);
+			    var hub = await database.GetHub(auditResults.HubKey, cancellationToken);
 
 
 			    var cache = new CacheManager(auditResults.HubKey, hub.EncryptionKey);
@@ -854,7 +852,7 @@ namespace dexih.api.Services.Remote
 				    auditResults.DownloadUrl
 			    };
 
-			    var result = await SendRemoteMessage<string>(auditResults.HubKey, auditResults.RemoteAgentId, nameof(RemoteOperations.GetAuditResults), value, database, CancellationToken.None);
+			    var result = await SendRemoteMessage<string>(auditResults.HubKey, auditResults.RemoteAgentId, nameof(RemoteOperations.GetAuditResults), value, database, cancellationToken);
 			    return result;
 		    }
 		    catch (Exception ex)
@@ -863,13 +861,13 @@ namespace dexih.api.Services.Remote
 		    }
 	    }
 	    
-		public async Task<string[]> ImportFunctionMappings(string id, long hubKey, DexihDatalink hubDatalink, long datalinkTransformKey, DexihDatalinkTransformItem datalinkTransformItem, RepositoryManager database)
+		public async Task<string[]> ImportFunctionMappings(string id, long hubKey, DexihDatalink hubDatalink, long datalinkTransformKey, DexihDatalinkTransformItem datalinkTransformItem, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    try
 		    {
 			    _remoteLogger.LogTrace(LoggingEvents.PreviewDatalink, "ImportFunctionMappings - Id: {Id}, HubKey: {hubKey}, DatalinkKey: {datalinkKey}.", id, hubKey, hubDatalink.Key);
 
-			    var hub = await database.GetHub(hubKey);
+			    var hub = await database.GetHub(hubKey, cancellationToken);
 
 			    var cache = new CacheManager(hubKey, hub.EncryptionKey);
 			    if (hubDatalink.SourceDatalinkTable.SourceType == ESourceType.Table && hubDatalink.SourceDatalinkTable.SourceTableKey != null)
@@ -922,7 +920,7 @@ namespace dexih.api.Services.Remote
 				    datalinkTransformItem = datalinkTransformItem
 			    };
 
-			    var result = await SendRemoteMessage<string[]>(hubKey, id, nameof(RemoteOperations.ImportFunctionMappings), value, database, CancellationToken.None);
+			    var result = await SendRemoteMessage<string[]>(hubKey, id, nameof(RemoteOperations.ImportFunctionMappings), value, database, cancellationToken);
 			    return result;
 		    }
 		    catch (Exception ex)
@@ -931,17 +929,17 @@ namespace dexih.api.Services.Remote
 		    }
 	    }
 	    
-        public async Task<ManagedTask> DownloadFiles(string id, long hubKey, string connectionId, long tableKey, EFlatFilePath path, string[] files, DownloadUrl downloadUrl, RepositoryManager database)
+        public async Task<ManagedTask> DownloadFiles(string id, long hubKey, string connectionId, long tableKey, EFlatFilePath path, string[] files, DownloadUrl downloadUrl, RepositoryManager database, CancellationToken cancellationToken)
         {
             try
             {
                 _remoteLogger.LogTrace(LoggingEvents.DownloadFiles, "DownloadFiles - Id: {Id}, HubKey: {hubKey}, TableKey: {tableKey}.", id, hubKey);
 
-                var hub = await database.GetHub(hubKey);
+                var hub = await database.GetHub(hubKey, cancellationToken);
 
                 // populate the table/datalink cache to be send to the remote agent.
                 var cache = new CacheManager(hubKey, hub.EncryptionKey);
-                var table = await database.GetTable(hubKey, tableKey, true);
+                var table = await database.GetTable(hubKey, tableKey, true, cancellationToken);
 
                 cache.AddConnections(new[] { table.ConnectionKey }, false, hub);
                 
@@ -955,7 +953,7 @@ namespace dexih.api.Services.Remote
 	                downloadUrl
                 };
 
-                var result = await SendRemoteMessage<ManagedTask>(hubKey, id, nameof(RemoteOperations.DownloadFiles), value, database, CancellationToken.None);
+                var result = await SendRemoteMessage<ManagedTask>(hubKey, id, nameof(RemoteOperations.DownloadFiles), value, database, cancellationToken);
                 return result;
             }
             catch (Exception ex)
@@ -964,7 +962,7 @@ namespace dexih.api.Services.Remote
             }
         }
 
-        public async Task<ManagedTask> DownloadData(string id, long hubKey, string connectionId, DownloadObject[] downloadObjects, EDownloadFormat downloadFormat, bool zipFiles, DownloadUrl downloadUrl, RepositoryManager database)
+        public async Task<ManagedTask> DownloadData(string id, long hubKey, string connectionId, DownloadObject[] downloadObjects, EDownloadFormat downloadFormat, bool zipFiles, DownloadUrl downloadUrl, RepositoryManager database, CancellationToken cancellationToken)
         {
             try
             {
@@ -975,7 +973,7 @@ namespace dexih.api.Services.Remote
 		            throw new RemoteAgentAddException("The client id for the download task was not found.", null);
 	            }
 
-                var hub = await database.GetHub(hubKey);
+                var hub = await database.GetHub(hubKey, cancellationToken);
 
                 // populate the table/datalink cache to be send to the remote agent.
                 var cache = new CacheManager(hubKey, hub.EncryptionKey);
@@ -994,7 +992,7 @@ namespace dexih.api.Services.Remote
 	                downloadUrl
                 };
 
-                var result = await SendRemoteMessage<ManagedTask>(hubKey, id, nameof(RemoteOperations.DownloadData), value,  database, CancellationToken.None);
+                var result = await SendRemoteMessage<ManagedTask>(hubKey, id, nameof(RemoteOperations.DownloadData), value,  database, cancellationToken);
                 return result;
             }
             catch (Exception ex)
@@ -1005,13 +1003,13 @@ namespace dexih.api.Services.Remote
 	    
 		
 	    
-		public async Task RunDatalinks(string id, long hubKey, string connectionId, long[] datalinkKeys, bool truncateTarget, bool resetIncremental, string resetIncrementalValue, InputColumn[] inputColumns, InputParameters inputParameters, RepositoryManager database)
+		public async Task RunDatalinks(string id, long hubKey, string connectionId, long[] datalinkKeys, bool truncateTarget, bool resetIncremental, string resetIncrementalValue, InputColumn[] inputColumns, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken)
         {
             try
             {
                 _remoteLogger.LogTrace(LoggingEvents.RunDatalinks, "RunDatalinks - Id: {Id}, HubKey: {hubKey}, ConnectionId: {connectionId}, DatalinkKeys: {datalinkKeys}.", id, hubKey, connectionId, string.Join(",", datalinkKeys));
 
-                var hub = await database.GetHub(hubKey);
+                var hub = await database.GetHub(hubKey, cancellationToken);
 
                 // populate the table/datalink cache to be send to the remote agent.
                 var cache = new CacheManager(hubKey, hub.EncryptionKey);
@@ -1029,7 +1027,7 @@ namespace dexih.api.Services.Remote
 	                inputParameters
                 };
                 
-                await SendRemoteMessage<JToken>(hubKey, id, nameof(RemoteOperations.RunDatalinks), value, database, CancellationToken.None);
+                await SendRemoteMessage<JToken>(hubKey, id, nameof(RemoteOperations.RunDatalinks), value, database, cancellationToken);
             }
             catch (Exception ex)
             {
@@ -1037,7 +1035,7 @@ namespace dexih.api.Services.Remote
             }
         }
 	    
-	    public async Task RunDatalinkTests(string id, long hubKey, string connectionId, long[] datalinkTestKeys, RepositoryManager database)
+	    public async Task RunDatalinkTests(string id, long hubKey, string connectionId, long[] datalinkTestKeys, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    try
 		    {
@@ -1045,7 +1043,7 @@ namespace dexih.api.Services.Remote
 
 			    var timer = Stopwatch.StartNew();
 	            
-			    var hub = await database.GetHub(hubKey);
+			    var hub = await database.GetHub(hubKey, cancellationToken);
 
 			    // populate the table/datalink cache to be send to the remote agent.
 			    var cache = new CacheManager(hubKey, hub.EncryptionKey);
@@ -1061,7 +1059,7 @@ namespace dexih.api.Services.Remote
 				    connectionId,
 			    };
 
-			    var result = await SendRemoteMessage<JToken>(hubKey, id, nameof(RemoteOperations.RunDatalinkTests), value,  database, CancellationToken.None);
+			    var result = await SendRemoteMessage<JToken>(hubKey, id, nameof(RemoteOperations.RunDatalinkTests), value,  database, cancellationToken);
 		    }
 		    catch (Exception ex)
 		    {
@@ -1069,7 +1067,7 @@ namespace dexih.api.Services.Remote
 		    }
 	    }
 	    
-	    public async Task RunDatalinkTestSnapshot(string id, long hubKey, string connectionId, long[] datalinkTestKeys, RepositoryManager database)
+	    public async Task RunDatalinkTestSnapshot(string id, long hubKey, string connectionId, long[] datalinkTestKeys, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    try
 		    {
@@ -1077,7 +1075,7 @@ namespace dexih.api.Services.Remote
 
 			    var timer = Stopwatch.StartNew();
 	            
-			    var hub = await database.GetHub(hubKey);
+			    var hub = await database.GetHub(hubKey, cancellationToken);
 
 			    // populate the table/datalink cache to be send to the remote agent.
 			    var cache = new CacheManager(hubKey, hub.EncryptionKey);
@@ -1093,7 +1091,7 @@ namespace dexih.api.Services.Remote
 				    connectionId,
 			    };
 
-			    var result = await SendRemoteMessage<JToken>(hubKey, id, nameof(RemoteOperations.RunDatalinkTestSnapshots), value, database, CancellationToken.None);
+			    var result = await SendRemoteMessage<JToken>(hubKey, id, nameof(RemoteOperations.RunDatalinkTestSnapshots), value, database, cancellationToken);
 		    }
 		    catch (Exception ex)
 		    {
@@ -1101,13 +1099,13 @@ namespace dexih.api.Services.Remote
 		    }
 	    }
 	    
-		public async Task RunDatajobs(string id, long hubKey, string connectionId, long[] datajobKeys, bool truncateTarget, bool resetIncremental, string resetIncrementalValue, InputParameters inputParameters, RepositoryManager database)
+		public async Task RunDatajobs(string id, long hubKey, string connectionId, long[] datajobKeys, bool truncateTarget, bool resetIncremental, string resetIncrementalValue, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken)
         {
             try
             {
                 _remoteLogger.LogTrace(LoggingEvents.RunDatajobs, "RunDatajobs - Id: {Id}, HubKey: {hubKey}, DatalinkKeys: {datalinkKeys}.", id, hubKey, string.Join(",", datajobKeys));
 
-                var hub = await database.GetHub(hubKey);
+                var hub = await database.GetHub(hubKey, cancellationToken);
 
                 // populate the table/datalink cache to be send to the remote agent.
                 var cache = new CacheManager(hubKey, hub.EncryptionKey);
@@ -1124,7 +1122,7 @@ namespace dexih.api.Services.Remote
 	                inputParameters
                 };
 
-                var result = await SendRemoteMessage<JToken>(hubKey, id, nameof(RemoteOperations.RunDatajobs), value, database, CancellationToken.None);
+                var result = await SendRemoteMessage<JToken>(hubKey, id, nameof(RemoteOperations.RunDatajobs), value, database, cancellationToken);
             }
             catch (Exception ex)
             {
@@ -1132,7 +1130,7 @@ namespace dexih.api.Services.Remote
             }
         }
 
-        public async Task CancelDatalinks(string id, long hubKey, long[] datalinkKeys, RepositoryManager database)
+        public async Task CancelDatalinks(string id, long hubKey, long[] datalinkKeys, RepositoryManager database, CancellationToken cancellationToken)
         {
             try
             {
@@ -1144,7 +1142,7 @@ namespace dexih.api.Services.Remote
 	                datalinkKeys
                 };
 
-                var result = await SendRemoteMessage<JToken>(hubKey, id, nameof(RemoteOperations.CancelDatalinks), value,  database, CancellationToken.None);
+                var result = await SendRemoteMessage<JToken>(hubKey, id, nameof(RemoteOperations.CancelDatalinks), value,  database, cancellationToken);
             }
             catch (Exception ex)
             {
@@ -1152,7 +1150,7 @@ namespace dexih.api.Services.Remote
             }
         }
 	    
-	    public async Task CancelDatalinkTests(string id, long hubKey, long[] datalinkTestKeys, RepositoryManager database)
+	    public async Task CancelDatalinkTests(string id, long hubKey, long[] datalinkTestKeys, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    try
 		    {
@@ -1164,7 +1162,7 @@ namespace dexih.api.Services.Remote
 				    datalinkTestKeys
 			    };
 
-			    var result = await SendRemoteMessage<JToken>(hubKey, id, nameof(RemoteOperations.CancelDatalinkTests), value, database, CancellationToken.None);
+			    var result = await SendRemoteMessage<JToken>(hubKey, id, nameof(RemoteOperations.CancelDatalinkTests), value, database, cancellationToken);
 		    }
 		    catch (Exception ex)
 		    {
@@ -1172,13 +1170,13 @@ namespace dexih.api.Services.Remote
 		    }
 	    }
 
-        public async Task ActivateDatajobs(string id, long hubKey, string connectionId, long[] datajobKeys, InputParameters inputParameters, RepositoryManager database)
+        public async Task ActivateDatajobs(string id, long hubKey, string connectionId, long[] datajobKeys, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken)
         {
             try
             {
                 _remoteLogger.LogTrace(LoggingEvents.ActivateDatajobs, "ActivateDatajobs - Id: {Id}, HubKey: {hubKey}, DatalinkKeys: {datalinkKeys}.", id, hubKey, string.Join(",", datajobKeys));
 
-                var hub = await database.GetHub(hubKey);
+                var hub = await database.GetHub(hubKey, cancellationToken);
 
                 // populate the table/datalink cache to be send to the remote agent.
                 var cache = new CacheManager(hubKey, hub.EncryptionKey);
@@ -1191,7 +1189,7 @@ namespace dexih.api.Services.Remote
 	                datajobKeys,
 	                inputParameters
                 };
-                var result = await SendRemoteMessage<JToken>(hubKey, id, nameof(RemoteOperations.ActivateDatajobs), value, database, CancellationToken.None);
+                var result = await SendRemoteMessage<JToken>(hubKey, id, nameof(RemoteOperations.ActivateDatajobs), value, database, cancellationToken);
             }
             catch (Exception ex)
             {
@@ -1199,7 +1197,7 @@ namespace dexih.api.Services.Remote
             }
         }
 	    
-		public async Task DeactivateDatajobs(string id, long hubKey, long[] datajobKeys, RepositoryManager database)
+		public async Task DeactivateDatajobs(string id, long hubKey, long[] datajobKeys, RepositoryManager database, CancellationToken cancellationToken)
         {
             try
             {
@@ -1211,7 +1209,7 @@ namespace dexih.api.Services.Remote
 	                datajobKeys,
                 };
 
-                var result = await SendRemoteMessage<JToken>(hubKey, id, nameof(RemoteOperations.DeactivateDatajobs), value, database, CancellationToken.None);
+                var result = await SendRemoteMessage<JToken>(hubKey, id, nameof(RemoteOperations.DeactivateDatajobs), value, database, cancellationToken);
             }
             catch (Exception ex)
             {
@@ -1219,13 +1217,13 @@ namespace dexih.api.Services.Remote
             }
         }
 		
-		public async Task ActivateApis(string id, long hubKey, string connectionId, long[] apiKeys, InputParameters inputParameters, RepositoryManager database)
+		public async Task ActivateApis(string id, long hubKey, string connectionId, long[] apiKeys, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken)
         {
             try
             {
                 _remoteLogger.LogTrace(LoggingEvents.ActivateApis, "ActivateApis - Id: {Id}, HubKey: {hubKey}, ApiKeys: {apiKeys}.", id, hubKey, string.Join(",", apiKeys));
 
-                var hub = await database.GetHub(hubKey);
+                var hub = await database.GetHub(hubKey, cancellationToken);
 
                 // populate the table/datalink cache to be send to the remote agent.
                 var cache = new CacheManager(hubKey, hub.EncryptionKey);
@@ -1239,7 +1237,7 @@ namespace dexih.api.Services.Remote
 	                inputParameters
                 };
 
-                var result = await SendRemoteMessage<JToken>(hubKey, id, nameof(RemoteOperations.ActivateApis), value, database, CancellationToken.None);
+                var result = await SendRemoteMessage<JToken>(hubKey, id, nameof(RemoteOperations.ActivateApis), value, database, cancellationToken);
             }
             catch (Exception ex)
             {
@@ -1247,7 +1245,7 @@ namespace dexih.api.Services.Remote
             }
         }
 	    
-		public async Task DeactivateApis(string id, long hubKey, long[] apiKeys, RepositoryManager database)
+		public async Task DeactivateApis(string id, long hubKey, long[] apiKeys, RepositoryManager database, CancellationToken cancellationToken)
         {
             try
             {
@@ -1259,7 +1257,7 @@ namespace dexih.api.Services.Remote
 	                apiKeys = apiKeys,
                 };
 
-                var result = await SendRemoteMessage<JToken>(hubKey, id, nameof(RemoteOperations.DeactivateApis), value, database, CancellationToken.None);
+                var result = await SendRemoteMessage<JToken>(hubKey, id, nameof(RemoteOperations.DeactivateApis), value, database, cancellationToken);
             }
             catch (Exception ex)
             {
@@ -1267,7 +1265,7 @@ namespace dexih.api.Services.Remote
             }
         }
 
-		public Task<string> CallApi(string id, string apiKey, string action, string parameters, string ipAddress)
+		public Task<string> CallApi(string id, string apiKey, string action, string parameters, string ipAddress, CancellationToken cancellationToken)
 		{
 			try
 			{
@@ -1282,7 +1280,7 @@ namespace dexih.api.Services.Remote
 					proxyUrl = _defaultProxyUrl
 				};
 				
-				var result = SendRemoteMessage<string>(0, id, nameof(RemoteOperations.CallApi), value,  null, CancellationToken.None);
+				var result = SendRemoteMessage<string>(0, id, nameof(RemoteOperations.CallApi), value,  null, cancellationToken);
 				return result;
 			}
 			catch (Exception ex)
@@ -1291,7 +1289,7 @@ namespace dexih.api.Services.Remote
 			}
 		}
 
-		public async Task  CancelTasks(ManagedTask[] tasks, RepositoryManager database)
+		public async Task  CancelTasks(ManagedTask[] tasks, RepositoryManager database, CancellationToken cancellationToken)
 		{
             try
             {
@@ -1315,7 +1313,7 @@ namespace dexih.api.Services.Remote
 		            };
 
 		            //TODO Cancel Tasks need to get the instance id somehow.  Not working.
-		            var result = await SendRemoteMessage<ManagedTask>(remoteAgentId.HubKey, remoteAgentId.RemoteAgentId, nameof(RemoteOperations.CancelTasks), references, database, CancellationToken.None);
+		            var result = await SendRemoteMessage<ManagedTask>(remoteAgentId.HubKey, remoteAgentId.RemoteAgentId, nameof(RemoteOperations.CancelTasks), references, database, cancellationToken);
 	            }
             }
             catch (Exception ex)
@@ -1324,7 +1322,7 @@ namespace dexih.api.Services.Remote
             }
         }
 
-		public async Task RestartAgents(string userId, IEnumerable<string> instanceIds, bool force, RepositoryManager database)
+		public async Task RestartAgents(string userId, IEnumerable<string> instanceIds, bool force, RepositoryManager database, CancellationToken cancellationToken)
 		{
 			var value = new
 			{
@@ -1337,13 +1335,13 @@ namespace dexih.api.Services.Remote
 			{
 				try
 				{
-					var remoteAgentProperties = await GetRemoteAgentProperties(instanceId, CancellationToken.None);
+					var remoteAgentProperties = await GetRemoteAgentProperties(instanceId, cancellationToken);
 
 					if (remoteAgentProperties != null)
 					{
 						if (remoteAgentProperties.UserId == userId)
 						{
-							await SendRemoteMessage<bool>(0, instanceId, nameof(RemoteOperations.ReStart), value, database, CancellationToken.None);	
+							await SendRemoteMessage<bool>(0, instanceId, nameof(RemoteOperations.ReStart), value, database, cancellationToken);	
 						}
 						else
 						{
@@ -1364,7 +1362,7 @@ namespace dexih.api.Services.Remote
 			}
 		}
 		
-		public async Task RestartAgents(string userId, IEnumerable<long> remoteAgentKeys, bool force, RepositoryManager database)
+		public async Task RestartAgents(string userId, IEnumerable<long> remoteAgentKeys, bool force, RepositoryManager database, CancellationToken cancellationToken)
 		{
 			var exceptions = new ConcurrentQueue<Exception>();
 			
@@ -1373,14 +1371,14 @@ namespace dexih.api.Services.Remote
 			{
 				try
 				{
-					var remoteAgent = await database.GetRemoteAgent(remoteAgentKey);
+					var remoteAgent = await database.GetRemoteAgent(remoteAgentKey, cancellationToken);
 
 					if (remoteAgent != null)
 					{
 						if (remoteAgent.UserId == userId)
 						{
-							await _remoteAgentContext.Clients.Groups(remoteAgentIdentity(remoteAgent.RemoteAgentKey))
-								.SendAsync("Restart");
+							await _remoteAgentContext.Clients.Groups(RemoteAgentIdentity(remoteAgent.RemoteAgentKey))
+								.SendAsync("Restart", cancellationToken: cancellationToken);
 							return;
 						}
 
@@ -1401,9 +1399,9 @@ namespace dexih.api.Services.Remote
 			}
 		}
 
-		public async Task<DexihRemoteAgent[]> PingAgents(ApplicationUser user, string connectionId, RepositoryManager repositoryManager)
+		public async Task<DexihRemoteAgent[]> PingAgents(ApplicationUser user, string connectionId, RepositoryManager repositoryManager, CancellationToken cancellationToken)
 		{
-			var remoteAgents = await repositoryManager.GetRemoteAgents(user);
+			var remoteAgents = await repositoryManager.GetRemoteAgents(user, cancellationToken);
 
 			var exceptions = new ConcurrentQueue<Exception>();
 			
@@ -1412,8 +1410,8 @@ namespace dexih.api.Services.Remote
 				{
 					try
 					{
-						await _remoteAgentContext.Clients.Groups(remoteAgentIdentity(remoteAgent.RemoteAgentKey))
-							.SendAsync("Ping", connectionId);
+						await _remoteAgentContext.Clients.Groups(RemoteAgentIdentity(remoteAgent.RemoteAgentKey))
+							.SendAsync("Ping", connectionId, cancellationToken: cancellationToken);
 					}
 					catch (Exception ex)
 					{
@@ -1430,9 +1428,9 @@ namespace dexih.api.Services.Remote
 			return remoteAgents;
 		}
 		
-		public async Task<NamingStandards> NamingStandards(string instanceId, long hubKey, RepositoryManager repositoryManager)
+		public async Task<NamingStandards> NamingStandards(string instanceId, long hubKey, RepositoryManager repositoryManager, CancellationToken cancellationToken)
 		{
-			var result = await SendRemoteMessage<NamingStandards>(hubKey, instanceId, nameof(RemoteOperations.NamingStandards), null, repositoryManager, CancellationToken.None);
+			var result = await SendRemoteMessage<NamingStandards>(hubKey, instanceId, nameof(RemoteOperations.NamingStandards), null, repositoryManager, cancellationToken);
 			return result;
 		}
 

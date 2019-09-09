@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using dexih.api.Services.Operations;
 using Microsoft.AspNetCore.Authorization;
@@ -28,12 +29,12 @@ namespace dexih.api
 		public async Task<string> Connect()
 		{
 			var operations = (IDexihOperations)_serviceProvider.GetService(typeof(IDexihOperations));
-			var applicationUser = await operations.RepositoryManager.GetUser(Context.User);
-			var hubs = await operations.RepositoryManager.GetUserHubs(applicationUser);
+			var applicationUser = await operations.RepositoryManager.GetUser(Context.User, CancellationToken.None);
+			var hubs = await operations.RepositoryManager.GetUserHubs(applicationUser, CancellationToken.None);
 
 			foreach (var hub in hubs)
 			{
-				await Groups.AddToGroupAsync(Context.ConnectionId, hub.HubKey.ToString());
+				await Groups.AddToGroupAsync(Context.ConnectionId, hub.HubKey.ToString(), CancellationToken.None);
 			}
 
 			_logger.LogDebug($"Connected from {Context.UserIdentifier}");

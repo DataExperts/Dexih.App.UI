@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using dexih.api.Services.Operations;
 using dexih.repository;
@@ -36,7 +37,7 @@ namespace dexih.api.Services
             DexihHubUser.EPermission hubPermission;
             var operations = (IDexihOperations)context.HttpContext.RequestServices.GetService(typeof(IDexihOperations));
             var repositoryManager = operations.RepositoryManager;
-            var applicationUser = await repositoryManager.GetUser(context.HttpContext.User);
+            var applicationUser = await repositoryManager.GetUser(context.HttpContext.User, CancellationToken.None);
             var loggerFactory = (ILoggerFactory)context.HttpContext.RequestServices.GetService(typeof(ILoggerFactory));
             var logger = loggerFactory.CreateLogger(controllerName);
 
@@ -52,7 +53,7 @@ namespace dexih.api.Services
                 {
                     try
                     {
-                        hubPermission = await repositoryManager.ValidateHub(applicationUser, hubKey);
+                        hubPermission = await repositoryManager.ValidateHub(applicationUser, hubKey, CancellationToken.None);
                         logger.LogInformation(LoggingEvents.HubOnaction,
                             controllerName + ": Hub accessed. HubKey: {HubKey}, User: {user}, Permission Level:{permission}, Action: {Action}.",
                             hubKey, applicationUser.UserName, hubPermission, context.ActionDescriptor.DisplayName);

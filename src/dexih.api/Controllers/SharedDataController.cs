@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using dexih.api.Models;
 using dexih.api.Services;
@@ -36,28 +37,28 @@ namespace dexih.api.Controllers
 
 
         [HttpPost("[action]")]
-        public async Task<DexihActiveAgent> GetActiveAgent([FromBody] HubKeyOnly hubKey)
+        public async Task<DexihActiveAgent> GetActiveAgent([FromBody] HubKeyOnly hubKey, CancellationToken cancellationToken)
         {
-            var remoteAgent = await _remoteAgents.GetHubReaderRemoteAgent(hubKey.HubKey, _operations.RepositoryManager);
+            var remoteAgent = await _remoteAgents.GetHubReaderRemoteAgent(hubKey.HubKey, _operations.RepositoryManager, cancellationToken);
             return remoteAgent;
         }
 
         [HttpPost("[action]")]
-        public async Task<IEnumerable<SharedData>> SharedDataIndex([FromBody] SharedDataIndex sharedDataIndex)
+        public async Task<IEnumerable<SharedData>> SharedDataIndex([FromBody] SharedDataIndex sharedDataIndex, CancellationToken cancellationToken)
         {
-            var user = await _operations.RepositoryManager.GetUser(User);
-            var sharedData = await _operations.RepositoryManager.GetSharedDataIndex(user, sharedDataIndex.SearchString, sharedDataIndex.HubKeys, sharedDataIndex.MaxResults);
+            var user = await _operations.RepositoryManager.GetUser(User, cancellationToken);
+            var sharedData = await _operations.RepositoryManager.GetSharedDataIndex(user, sharedDataIndex.SearchString, sharedDataIndex.HubKeys, sharedDataIndex.MaxResults, cancellationToken);
             return sharedData;
         }
         
         [HttpPost("[action]")]
-        public async Task<string> PreviewData([FromBody] PreviewData previewData)
+        public async Task<string> PreviewData([FromBody] PreviewData previewData, CancellationToken cancellationToken)
         {
-            var user = await _operations.RepositoryManager.GetUser(User);
+            var user = await _operations.RepositoryManager.GetUser(User, cancellationToken);
             var repositoryManager = _operations.RepositoryManager;
 
             //check user can access the hub.
-            var canAccess = await repositoryManager.CanAccessSharedObjects(user, previewData.HubKey);
+            var canAccess = await repositoryManager.CanAccessSharedObjects(user, previewData.HubKey, cancellationToken);
             if (!canAccess)
             {
                 throw new Exception($"Can not access shared objects in the hub with the key ${previewData.HubKey}.");
@@ -67,11 +68,11 @@ namespace dexih.api.Controllers
 
             if (previewData.ObjectType == SharedData.EObjectType.Table)
             {
-                data = await _remoteAgents.PreviewTable(previewData.RemoteAgentId, previewData.HubKey, previewData.ObjectKey, previewData.SelectQuery, previewData.InputColumns, previewData.Parameters, false, previewData.DownloadUrl, repositoryManager);
+                data = await _remoteAgents.PreviewTable(previewData.RemoteAgentId, previewData.HubKey, previewData.ObjectKey, previewData.SelectQuery, previewData.InputColumns, previewData.Parameters, false, previewData.DownloadUrl, repositoryManager, cancellationToken);
             }
             else
             {
-                data = await _remoteAgents.PreviewDatalink(previewData.RemoteAgentId, previewData.HubKey, previewData.ObjectKey, previewData.SelectQuery, previewData.InputColumns, previewData.Parameters, previewData.DownloadUrl, repositoryManager);
+                data = await _remoteAgents.PreviewDatalink(previewData.RemoteAgentId, previewData.HubKey, previewData.ObjectKey, previewData.SelectQuery, previewData.InputColumns, previewData.Parameters, previewData.DownloadUrl, repositoryManager, cancellationToken);
             }
 
             _logger.LogTrace(LoggingEvents.HubPreviewTable, "SharedDataController.PreviewData: HubKey: {updateBrowserHub}, ObjectKey: {objectKey}", previewData.HubKey, previewData.ObjectKey);
@@ -79,7 +80,7 @@ namespace dexih.api.Controllers
         }
         
         [HttpPost("[action]")]
-        public async Task<IEnumerable<ManagedTask>> DownloadData([FromBody] DownloadSharedData downloadSharedData)
+        public async Task<IEnumerable<ManagedTask>> DownloadData([FromBody] DownloadSharedData downloadSharedData, CancellationToken cancellationToken)
         {
             _logger.LogTrace(LoggingEvents.HubUploadFiles, "SharedDataController.DownloadData");
             
@@ -112,7 +113,7 @@ namespace dexih.api.Controllers
 
             foreach (var item in downloadData)
             {
-                var managedTask = await _remoteAgents.DownloadData(downloadSharedData.RemoteAgentId, item.Key, downloadSharedData.ClientId, item.Value.ToArray(), downloadSharedData.DownloadFormat, downloadSharedData.ZipFiles, downloadSharedData.DownloadUrl, repositoryManager);
+                var managedTask = await _remoteAgents.DownloadData(downloadSharedData.RemoteAgentId, item.Key, downloadSharedData.ClientId, item.Value.ToArray(), downloadSharedData.DownloadFormat, downloadSharedData.ZipFiles, downloadSharedData.DownloadUrl, repositoryManager, cancellationToken);
                 managedTasks.Add(managedTask);
             }
             

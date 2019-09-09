@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using dexih.operations;
 using dexih.repository;
@@ -25,19 +26,21 @@ namespace dexih.api.Services.Operations
 			)
         {
             Config = config;
-            RepositoryManager = new RepositoryManager(dbContext, userManager, cacheService, loggerFactory, SendHubChange );
+            RepositoryManager = new RepositoryManager(dbContext, userManager, cacheService, loggerFactory );
+            RepositoryManager.OnHubChange += SendHubChange;
+
             _browserContext = browserContext;
             _logger = loggerFactory.CreateLogger("DexihOperations");
             
         }
 
-        private async Task SendHubChange(Import import)
+        private async void SendHubChange(Import import)
         {
             try
             {
                 var sendMessage = new RemoteMessage("", "", "hub-change", Json.JTokenFromObject(import, ""));
-                var users = await RepositoryManager.GetHubUserIds(import.HubKey);
-                await _browserContext.Clients.Users(users).SendAsync("Command", sendMessage);
+                var users = await RepositoryManager.GetHubUserIds(import.HubKey, CancellationToken.None);
+                await _browserContext.Clients.Users(users).SendAsync("Command", sendMessage, CancellationToken.None);
             }
             catch (Exception e)
             {
@@ -65,10 +68,11 @@ namespace dexih.api.Services.Operations
         /// <param name="hubKey">Hub key.</param>
         /// <param name="command">Command.</param>
         /// <param name="content">Content.</param>
-        public async Task BroadcastHubMessageAsync(long hubKey, string command, object content)
+        /// <param name="cancellationToken"></param>
+        public async Task BroadcastHubMessageAsync(long hubKey, string command, object content, CancellationToken cancellationToken)
         {
             var sendMessage = new RemoteMessage("", "", command, Json.JTokenFromObject(content, "none"));
-            await _browserContext.Clients.Group(hubKey.ToString()).SendAsync("Command", sendMessage);
+            await _browserContext.Clients.Group(hubKey.ToString()).SendAsync("Command", sendMessage, cancellationToken: cancellationToken);
         }
 
         /// <summary>
@@ -78,13 +82,14 @@ namespace dexih.api.Services.Operations
         /// <param name="userIds">User identifiers.</param>
         /// <param name="command">Command.</param>
         /// <param name="content">Content.</param>
-        public async Task BroadcastUsersMessageAsync(IEnumerable<string> userIds, string command, object content)
+        /// <param name="cancellationToken"></param>
+        public async Task BroadcastUsersMessageAsync(IEnumerable<string> userIds, string command, object content, CancellationToken cancellationToken)
         {
             var sendMessage = new RemoteMessage("", "", command, Json.JTokenFromObject(content, "none"));
 			
             foreach (var userId in userIds)
             {
-                await _browserContext.Clients.User(userId).SendAsync("Command", sendMessage);
+                await _browserContext.Clients.User(userId).SendAsync("Command", sendMessage, cancellationToken: cancellationToken);
             }
         }
 
@@ -95,7 +100,7 @@ namespace dexih.api.Services.Operations
         /// <param name="command"></param>
         /// <param name="content"></param>
         /// <returns></returns>
-        public async Task BroadcastClientMessageAsync(string connectionId, string command, object content)
+        public async Task BroadcastClientMessageAsync(string connectionId, string command, object content, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(connectionId))
             {
@@ -104,7 +109,7 @@ namespace dexih.api.Services.Operations
             }
 
             var sendMessage = new RemoteMessage("", "", command, Json.JTokenFromObject(content, "none"));
-            await _browserContext.Clients.Client(connectionId).SendAsync("Command", sendMessage);
+            await _browserContext.Clients.Client(connectionId).SendAsync("Command", sendMessage, cancellationToken: cancellationToken);
         }
 	    
         #endregion

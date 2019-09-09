@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using dexih.api.Controllers;
 using dexih.api.Models;
@@ -77,15 +78,15 @@ namespace dexih.api
 		}
 
 		[HttpPost("[action]")]
-		public async Task<UserModel> GetUser([FromBody] ApplicationUser getUser)
+		public async Task<UserModel> GetUser([FromBody] ApplicationUser getUser, CancellationToken cancellationToken)
 		{
 			try
 			{
-				var applicationUser = await _operations.RepositoryManager.GetUserFromEmail(getUser.Email);
+				var applicationUser = await _operations.RepositoryManager.GetUserFromEmail(getUser.Email, cancellationToken);
 				var user = new UserModel();
 				applicationUser.CopyProperties(user, true);
 
-				user.Logins = await _operations.RepositoryManager.GetLoginsAsync(applicationUser);
+				user.Logins = await _operations.RepositoryManager.GetLoginsAsync(applicationUser, cancellationToken);
                 return user;
 			}
 			catch (Exception ex)
@@ -95,7 +96,7 @@ namespace dexih.api
         }
 
 		[HttpPost("[action]")]
-		public async Task InviteUsers([FromBody] InviteUsers inviteUsers)
+		public async Task InviteUsers([FromBody] InviteUsers inviteUsers, CancellationToken cancellationToken)
 		{
 			try 
 			{
@@ -105,7 +106,7 @@ namespace dexih.api
 
 				foreach (var email in inviteUsers.Emails)
 				{
-					var user = await _operations.RepositoryManager.GetUserFromEmail(email);
+					var user = await _operations.RepositoryManager.GetUserFromEmail(email, cancellationToken);
 
 					if(user != null && user.IsInvited) {
 						emailsNotInvited.Add(email);
@@ -116,7 +117,7 @@ namespace dexih.api
 						user.HubQuota = inviteUsers.HubQuota;
 						user.InviteQuota = inviteUsers.InviteQuota;
 						user.UserRole = inviteUsers.Role;
-                        await _operations.RepositoryManager.UpdateUserAsync(user);
+                        await _operations.RepositoryManager.UpdateUserAsync(user, cancellationToken);
 						invitedUsers.Add(user);
 					}
 					else 
@@ -130,11 +131,11 @@ namespace dexih.api
 							InviteQuota = inviteUsers.InviteQuota,
 							IsEnabled = true
 						};
-                        await _operations.RepositoryManager.CreateUserAsync(user);
+                        await _operations.RepositoryManager.CreateUserAsync(user, null, cancellationToken);
 						invitedUsers.Add(user);
 					}
 				}
-				await SendInvites(invitedUsers);
+				await SendInvites(invitedUsers, cancellationToken);
 
 				if (emailsNotInvited.Count > 0)
 				{
@@ -147,7 +148,7 @@ namespace dexih.api
 			}
 		}
 
-		private async Task SendInvites(IEnumerable<ApplicationUser> users) 
+		private async Task SendInvites(IEnumerable<ApplicationUser> users, CancellationToken cancellationToken) 
 		{
 			var url = (Request.IsHttps ? "https://" : "http://") + Request.Host.ToUriComponent();
 
@@ -166,7 +167,7 @@ namespace dexih.api
 				else
 				{
 					template = "invite.html";
-					code = await _operations.RepositoryManager.GenerateEmailConfirmationTokenAsync(user);
+					code = await _operations.RepositoryManager.GenerateEmailConfirmationTokenAsync(user, cancellationToken);
 					subject = "Information Hub Invitation!";
 				}
 
@@ -184,7 +185,7 @@ namespace dexih.api
 		}
 
 		[HttpPost("[action]")]
-		public async Task AddUsers([FromBody] AddUsers addUsers)
+		public async Task AddUsers([FromBody] AddUsers addUsers, CancellationToken cancellationToken)
 		{
 			try
 			{
@@ -192,7 +193,7 @@ namespace dexih.api
 
 				foreach (var user in addUsers.Users)
 				{
-					var appUser = await _operations.RepositoryManager.GetUserFromEmail(user.Email);
+					var appUser = await _operations.RepositoryManager.GetUserFromEmail(user.Email, cancellationToken);
 					if (appUser != null)
 					{
                         throw new AdminControllerException($"The email address {user.Email} already exists and cannot be added.", null);
@@ -201,14 +202,14 @@ namespace dexih.api
 					{
 						user.UserName = user.Email;
 					}
-					await _operations.RepositoryManager.CreateUserAsync(user);
+					await _operations.RepositoryManager.CreateUserAsync(user, null, cancellationToken);
 					if (user.IsInvited && !user.IsRegistered)
 					{
 						inviteUsers.Add(user);
 					}
 				}
 
-				await SendInvites(inviteUsers);
+				await SendInvites(inviteUsers, cancellationToken);
 
 				
 			}
@@ -219,13 +220,13 @@ namespace dexih.api
         }
 
 		[HttpPost("[action]")]
-		public async Task UpdateUsers([FromBody] SaveUsers saveUsers)
+		public async Task UpdateUsers([FromBody] SaveUsers saveUsers, CancellationToken cancellationToken)
 		{
 			try
 			{
 				foreach (var user in saveUsers.Users)
 				{
-					var appUser = await _operations.RepositoryManager.GetUserFromEmail(user.Email);
+					var appUser = await _operations.RepositoryManager.GetUserFromEmail(user.Email, cancellationToken);
 					if (appUser == null)
 					{
                         throw new AdminControllerException($"The email address {user.Email} does not exist and cannot be updated.", null);
@@ -246,7 +247,7 @@ namespace dexih.api
 					appUser.PhoneNumber = user.PhoneNumber;
 					appUser.PhoneNumberConfirmed = user.PhoneNumberConfirmed;
 					appUser.TwoFactorEnabled = user.TwoFactorEnabled;
-					await _operations.RepositoryManager.UpdateUserAsync(appUser);
+					await _operations.RepositoryManager.UpdateUserAsync(appUser, cancellationToken);
 				}
 			}
 			catch (Exception ex)
@@ -257,20 +258,20 @@ namespace dexih.api
 
 
 		[HttpPost("[action]")]
-		public async Task RevokeUsers([FromBody] EmailsModel users)
+		public async Task RevokeUsers([FromBody] EmailsModel users, CancellationToken cancellationToken)
 		{
 			try
 			{
 				foreach (var email in users.Emails)
 				{
-					var appUser = await _operations.RepositoryManager.GetUserFromEmail(email);
+					var appUser = await _operations.RepositoryManager.GetUserFromEmail(email, cancellationToken);
 					if (appUser == null)
 					{
                         throw new AdminControllerException($"The email address {email} does not exist and cannot be revoked.", null);
 					}
 					appUser.IsEnabled = false;
 
-					await _operations.RepositoryManager.UpdateUserAsync(appUser);
+					await _operations.RepositoryManager.UpdateUserAsync(appUser, cancellationToken);
 				}
 			}
 			catch (Exception ex)
@@ -283,18 +284,18 @@ namespace dexih.api
 		[HttpPost("[action]")]
 		[AllowAnonymous]
 		[ValidateAntiForgeryToken]
-		public async Task RemoveExternalLogin([FromBody] RemoveExternalLoginModel externalProvider)
+		public async Task RemoveExternalLogin([FromBody] RemoveExternalLoginModel externalProvider, CancellationToken cancellationToken)
 		{
             try
             {
-	            var user = await _operations.RepositoryManager.GetUserFromEmail(externalProvider.Email);
+	            var user = await _operations.RepositoryManager.GetUserFromEmail(externalProvider.Email, cancellationToken);
 
                 if (user == null)
                 {
                     throw new AdminControllerException($"The user with the email {externalProvider.Email} could not be found.", null);
                 }
 
-                await _operations.RepositoryManager.RemoveLoginAsync(user, externalProvider.Provider, externalProvider.ProviderKey);
+                await _operations.RepositoryManager.RemoveLoginAsync(user, externalProvider.Provider, externalProvider.ProviderKey, cancellationToken);
             }
             catch (Exception ex)
             {
@@ -303,13 +304,13 @@ namespace dexih.api
         }
 
 		[HttpPost("[action]")]
-		public async Task EnableUsers([FromBody] EmailsModel users)
+		public async Task EnableUsers([FromBody] EmailsModel users, CancellationToken cancellationToken)
 		{
 			try
 			{
 				foreach (var email in users.Emails)
 				{
-					var appUser = await _operations.RepositoryManager.GetUserFromEmail(email);
+					var appUser = await _operations.RepositoryManager.GetUserFromEmail(email, cancellationToken);
 					if (appUser == null)
 					{
                         throw new AdminControllerException($"The email address {email} does not exist and cannot be enabled.", null);
@@ -319,7 +320,7 @@ namespace dexih.api
 					appUser.LockoutEnd = null;
 					appUser.AccessFailedCount = 0;
 					
-					await _operations.RepositoryManager.UpdateUserAsync(appUser);
+					await _operations.RepositoryManager.UpdateUserAsync(appUser, cancellationToken);
 				}
 			}
 			catch (Exception ex)
@@ -329,16 +330,16 @@ namespace dexih.api
         }
 
 		[HttpPost("[action]")]
-		public async Task DeleteUsers([FromBody] EmailsModel users)
+		public async Task DeleteUsers([FromBody] EmailsModel users, CancellationToken cancellationToken)
 		{
 			try
 			{
 				foreach (var email in users.Emails)
 				{
-					var user = await _operations.RepositoryManager.GetUserFromEmail(email);
+					var user = await _operations.RepositoryManager.GetUserFromEmail(email, cancellationToken);
 					if(user != null)
 					{
-						await _operations.RepositoryManager.DeleteUserAsync(user);
+						await _operations.RepositoryManager.DeleteUserAsync(user, cancellationToken);
 					}
 				}
 			}
@@ -349,7 +350,7 @@ namespace dexih.api
         }
 
 		[HttpPost("[action]")]
-		public async Task ReInviteUsers([FromBody] EmailsModel users)
+		public async Task ReInviteUsers([FromBody] EmailsModel users, CancellationToken cancellationToken)
 		{
 			try
 			{
@@ -357,7 +358,7 @@ namespace dexih.api
 
 				foreach (var email in users.Emails)
 				{
-					var dbUser = await _operations.RepositoryManager.GetUserFromEmail(email);
+					var dbUser = await _operations.RepositoryManager.GetUserFromEmail(email, cancellationToken);
 					if (dbUser == null)
 					{
                         throw new AdminControllerException($"The email address {email} has not been created.", null);
@@ -370,11 +371,11 @@ namespace dexih.api
 					if (!dbUser.IsInvited)
 					{
 						dbUser.IsInvited = true;
-						await _operations.RepositoryManager.UpdateUserAsync(dbUser);
+						await _operations.RepositoryManager.UpdateUserAsync(dbUser, cancellationToken);
 					}
 				}
 
-				await SendInvites(emails);
+				await SendInvites(emails, cancellationToken);
 				
 			}
 			catch (Exception ex)

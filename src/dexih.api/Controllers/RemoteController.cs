@@ -69,7 +69,7 @@ namespace dexih.api.Controllers
         // Used by the job server to retrieve a Remote Communication guid.
         [HttpPost("[action]")]
         [AllowAnonymous]
-        public async Task<JsonResult> Login([FromBody] RemoteSettings remoteSettings)
+        public async Task<JsonResult> Login([FromBody] RemoteSettings remoteSettings, CancellationToken cancellationToken)
         {
             try
             {
@@ -77,7 +77,7 @@ namespace dexih.api.Controllers
                 {
 					_logger.LogInformation(LoggingEvents.RemoteLogin, "Login - Remote Agent Login {user}, {servername}, remoteAgentId {remoteAgentId}, version {version}", User, remoteSettings.AppSettings.User, remoteSettings.AppSettings.Name, remoteSettings.Runtime.Version);
 
-					var user = await _operations.RepositoryManager.GetUserFromEmail(remoteSettings.AppSettings.User);
+					var user = await _operations.RepositoryManager.GetUserFromEmail(remoteSettings.AppSettings.User, cancellationToken);
                     if (user == null)
                     {
                         _logger.LogWarning(LoggingEvents.RemoteLogin, "Login - Invalid remote login attempt using Email: " + User);
@@ -98,7 +98,7 @@ namespace dexih.api.Controllers
 
                     _logger.LogInformation(LoggingEvents.RemoteLogin, "Login - Remote Agent Login {user}, {servername}, remoteAgentId {remoteAgentId}, version {version}, ipAddress {ipAddress}", User, remoteSettings.AppSettings.User, remoteSettings.AppSettings.Name, remoteSettings.Runtime.Version, remoteIp);
 
-                    var dbRemoteAgent = await _operations.RepositoryManager.RemoteAgentLogin(remoteIp, remoteSettings.AppSettings.RemoteAgentId);
+                    var dbRemoteAgent = await _operations.RepositoryManager.RemoteAgentLogin(remoteIp, remoteSettings.AppSettings.RemoteAgentId, cancellationToken);
 
                     bool authenticated;
                     if(!string.IsNullOrEmpty(remoteSettings.AppSettings.UserToken))
@@ -108,7 +108,7 @@ namespace dexih.api.Controllers
                             return Json(new { Success = false, Message = $"The specified remoteAgentId does not exist, cannot be used from this ip address ({remoteIp}) or has been revoked." });
                         }
 
-                        authenticated = await _operations.RepositoryManager.VerifyUserTokenAsync(user, remoteSettings.AppSettings.RemoteAgentId, remoteSettings.AppSettings.UserToken);
+                        authenticated = await _operations.RepositoryManager.VerifyUserTokenAsync(user, remoteSettings.AppSettings.RemoteAgentId, remoteSettings.AppSettings.UserToken, cancellationToken);
                         if (!authenticated)
                         {
                             return Json(new { Success = false, Message = "The authentication token provided is invalid." });
@@ -176,14 +176,14 @@ namespace dexih.api.Controllers
                             }
                         }
                         
-                        newUserToken = await _operations.RepositoryManager.GenerateRemoteUserToken(user, remoteSettings.AppSettings.RemoteAgentId);
+                        newUserToken = await _operations.RepositoryManager.GenerateRemoteUserToken(user, remoteSettings.AppSettings.RemoteAgentId, cancellationToken);
                         
                         // hash the token so that it's not stored in plain text.
                         var hashedToken = HashString.CreateHash(newUserToken);
 
                         dbRemoteAgent.HashedToken = hashedToken;
 
-                        dbRemoteAgent = await _operations.RepositoryManager.SaveRemoteAgent(user.Id, dbRemoteAgent);
+                        dbRemoteAgent = await _operations.RepositoryManager.SaveRemoteAgent(user.Id, dbRemoteAgent, cancellationToken);
                     }
 
                     if (authenticated)
@@ -206,7 +206,7 @@ namespace dexih.api.Controllers
                         if (dbRemoteAgent.Name != remoteSettings.AppSettings.Name)
                         {
                             dbRemoteAgent.Name = remoteSettings.AppSettings.Name;
-                            await _operations.RepositoryManager.SaveRemoteAgent(dbRemoteAgent.UserId, dbRemoteAgent);
+                            await _operations.RepositoryManager.SaveRemoteAgent(dbRemoteAgent.UserId, dbRemoteAgent, cancellationToken);
                         }
                         
                         await _signInManager.RefreshSignInAsync(user);
@@ -216,7 +216,7 @@ namespace dexih.api.Controllers
                         
                         
                         // create a security key, which is not sent the the browser client, and used to ensure the instance id hasn't been hijacked by another remote agent.
-                        var (instanceId, securityToken) = await _remoteServers.AuthorizeRemoteAgent(remoteSettings.AppSettings.Name, dbRemoteAgent.RemoteAgentKey, remoteSettings.AppSettings.EncryptionKey, remoteIp, user.Id);
+                        var (instanceId, securityToken) = await _remoteServers.AuthorizeRemoteAgent(remoteSettings.AppSettings.Name, dbRemoteAgent.RemoteAgentKey, remoteSettings.AppSettings.EncryptionKey, remoteIp, user.Id, cancellationToken);
                         
                         return Json(new {
                             Success = true,
@@ -252,7 +252,7 @@ namespace dexih.api.Controllers
         /// </summary>
         /// <param name="datalinkProgress"></param>
         [HttpPost("[action]")]
-        public async Task<ReturnValue> UpdateTasks([FromBody] DatalinkProgress datalinkProgress)
+        public async Task<ReturnValue> UpdateTasks([FromBody] DatalinkProgress datalinkProgress, CancellationToken cancellationToken)
         {
             try
             {
@@ -263,22 +263,22 @@ namespace dexih.api.Controllers
                 {
                     managedTask.ReferenceId = datalinkProgress.InstanceId;
                     
-                    await _operations.BroadcastClientMessageAsync(managedTask.OriginatorId, datalinkProgress.Command, managedTask);
+                    await _operations.BroadcastClientMessageAsync(managedTask.OriginatorId, datalinkProgress.Command, managedTask, cancellationToken);
 
                     switch (managedTask.Category)
                     {
                         case "Datalink":
-                            await _operations.BroadcastHubMessageAsync(managedTask.ReferenceKey, "datalink-progress", managedTask);
+                            await _operations.BroadcastHubMessageAsync(managedTask.ReferenceKey, "datalink-progress", managedTask, cancellationToken);
                             break;
                         case "Datajob":
-                            await _operations.BroadcastHubMessageAsync(managedTask.ReferenceKey, "datajob-progress", managedTask);
+                            await _operations.BroadcastHubMessageAsync(managedTask.ReferenceKey, "datajob-progress", managedTask, cancellationToken);
                             break;
                         case "DatalinkTest":
                         case "DatalinkTestSnapshot":
-                            await _operations.BroadcastHubMessageAsync(managedTask.ReferenceKey, "datalinkTest-progress", managedTask);
+                            await _operations.BroadcastHubMessageAsync(managedTask.ReferenceKey, "datalinkTest-progress", managedTask, cancellationToken);
                             break;
                         case "Table":
-                            await _operations.BroadcastHubMessageAsync(managedTask.ReferenceKey, "table-progress", managedTask);
+                            await _operations.BroadcastHubMessageAsync(managedTask.ReferenceKey, "table-progress", managedTask, cancellationToken);
                             break;
                     }
                 }
@@ -296,7 +296,7 @@ namespace dexih.api.Controllers
         /// <param name="datalinkProgress"></param>
         /// <param name="apiData"></param>
         [HttpPost("[action]")]
-        public async Task<ReturnValue> UpdateApi([FromBody] PostApiStatus apiData)
+        public async Task<ReturnValue> UpdateApi([FromBody] PostApiStatus apiData, CancellationToken cancellationToken)
         {
             try
             {
@@ -308,7 +308,7 @@ namespace dexih.api.Controllers
                 //send any update to results to the clients
                 foreach (var item in apiData.ApiData)
                 {
-                    await _operations.BroadcastHubMessageAsync(item.HubKey, "api-status", item);
+                    await _operations.BroadcastHubMessageAsync(item.HubKey, "api-status", item, cancellationToken);
                 }
 
                 return new ReturnValue(true);
@@ -318,13 +318,14 @@ namespace dexih.api.Controllers
                 return new ReturnValue(false, "Error occurred in UpdateTasks. " + ex.Message, ex);
             }
         }
-        
+
         /// <summary>
         /// This tracks task progress
         /// </summary>
         /// <param name="datalinkProgress"></param>
+        /// <param name="cancellationToken"></param>
         [HttpPost("[action]")]
-        public async Task<ReturnValue> ApiQuery([FromBody] PostApiQuery apiQuery)
+        public async Task<ReturnValue> ApiQuery([FromBody] PostApiQuery apiQuery, CancellationToken cancellationToken)
         {
             try
             {
@@ -336,7 +337,7 @@ namespace dexih.api.Controllers
                 //send any update to results to the clients
                 foreach (var item in apiQuery.ApiQueries)
                 {
-                    await _operations.BroadcastHubMessageAsync(item.HubKey, "api-query", item);
+                    await _operations.BroadcastHubMessageAsync(item.HubKey, "api-query", item, cancellationToken);
                 }
 
                 return new ReturnValue(true);
@@ -348,7 +349,7 @@ namespace dexih.api.Controllers
         }
         
         [HttpPost("[action]")]
-        public async Task<ReturnValue> UpdateResponseMessage([FromBody] RemoteMessage[] returnMessages)
+        public async Task<ReturnValue> UpdateResponseMessage([FromBody] RemoteMessage[] returnMessages, CancellationToken cancellationToken)
         {
             try
             {
@@ -367,7 +368,7 @@ namespace dexih.api.Controllers
         }
         
         [HttpPost("[action]")]
-        public async Task<ReturnValue> DownloadReady([FromBody] DownloadReadyModel downloadReady)
+        public async Task<ReturnValue> DownloadReady([FromBody] DownloadReadyModel downloadReady, CancellationToken cancellationToken)
         {
             try
             {
@@ -379,7 +380,7 @@ namespace dexih.api.Controllers
                 };
 
                 //broadcast the new file to the client
-                await _operations.BroadcastClientMessageAsync(downloadReady.ConnectionId, "download-ready", content);
+                await _operations.BroadcastClientMessageAsync(downloadReady.ConnectionId, "download-ready", content, cancellationToken);
                 
                 return new ReturnValue(true);
             }
@@ -390,7 +391,7 @@ namespace dexih.api.Controllers
         }
         
         [HttpPost("[action]")]
-        public async Task<ReturnValue> FlatFilesReady([FromBody] FlatFilesReadyModel flatFilesReady)
+        public async Task<ReturnValue> FlatFilesReady([FromBody] FlatFilesReadyModel flatFilesReady, CancellationToken cancellationToken)
         {
             try
             {
@@ -402,7 +403,7 @@ namespace dexih.api.Controllers
                 };
 
                 //broadcast the new file to the client
-                await _operations.BroadcastClientMessageAsync(flatFilesReady.ConnectionId, "flatFiles-ready", content);
+                await _operations.BroadcastClientMessageAsync(flatFilesReady.ConnectionId, "flatFiles-ready", content, cancellationToken);
                 
                 return new ReturnValue(true);
             }
@@ -422,9 +423,9 @@ namespace dexih.api.Controllers
         /// <param name="data"></param>
         /// <returns></returns>
         [HttpPost("[action]")]
-        public async Task<ActionResult> GenerateCertificate([FromBody] GenerateCertificateModel data)
+        public async Task<ActionResult> GenerateCertificate([FromBody] GenerateCertificateModel data, CancellationToken cancellationToken)
         {
-            var appUser = await _operations.RepositoryManager.GetUser(User);
+            var appUser = await _operations.RepositoryManager.GetUser(User, cancellationToken);
             _logger.LogInformation($"Generating ssl certificate for user {appUser.Email}, stored certificate expires: {appUser.CertificateExpiry}.");
 
             CertificateChain cert;
@@ -485,7 +486,7 @@ namespace dexih.api.Controllers
                 var pair = new KeyValuePair<string, string>(txtName, dnxText);
                 
                 // update the distributed cache with the new record.
-                var txtItemsJson = await _distributedCache.GetStringAsync("txtRecords");
+                var txtItemsJson = await _distributedCache.GetStringAsync("txtRecords", token: cancellationToken);
                 List<KeyValuePair<string, string>> txtItems;
                 
                 if (txtItemsJson == null)
@@ -501,7 +502,7 @@ namespace dexih.api.Controllers
                 txtItemsJson = JsonConvert.SerializeObject(txtItems);
                 var txtItemsByte = Encoding.ASCII.GetBytes(txtItemsJson);
                 var options = new DistributedCacheEntryOptions() {SlidingExpiration = TimeSpan.FromSeconds(60)};
-                await _distributedCache.SetAsync("txtRecords", txtItemsByte, options);
+                await _distributedCache.SetAsync("txtRecords", txtItemsByte, options, cancellationToken);
 
                 try
                 {
@@ -517,7 +518,7 @@ namespace dexih.api.Controllers
 
                     while (true)
                     {
-                        await Task.Delay(100);
+                        await Task.Delay(100, cancellationToken);
                         var a = await authz.Resource();
                         if (AuthorizationStatus.Invalid == a.Status)
                         {
@@ -535,7 +536,7 @@ namespace dexih.api.Controllers
                     }
                 } finally
                 {
-                    await _distributedCache.RemoveAsync(txtName);
+                    await _distributedCache.RemoveAsync(txtName, cancellationToken);
                 }
 
                 // download certificate once validation is complete
@@ -555,7 +556,7 @@ namespace dexih.api.Controllers
                 appUser.PrivateKey = privateKey.ToPem();
                 appUser.CertificateChain = cert.ToPem();
                 appUser.CertificateExpiry = DateTime.Now.AddDays(90); // let's encrypt default expiry date.
-                await _operations.RepositoryManager.UpdateUserAsync(appUser);
+                await _operations.RepositoryManager.UpdateUserAsync(appUser, cancellationToken);
             }
 
             // build the pfx file
@@ -571,10 +572,10 @@ namespace dexih.api.Controllers
         /// <returns></returns>
         [HttpGet("[action]")]
         [AllowAnonymous]
-        public async Task<IActionResult> AddTxtRecord()
+        public async Task<IActionResult> AddTxtRecord(CancellationToken cancellationToken)
         {
             // update the distributed cache with the new record.
-            var txtItemsJson = await _distributedCache.GetStringAsync("txtRecords");
+            var txtItemsJson = await _distributedCache.GetStringAsync("txtRecords", token: cancellationToken);
             List<KeyValuePair<string, string>> txtItems;
                 
             if (txtItemsJson == null)
@@ -590,7 +591,7 @@ namespace dexih.api.Controllers
             txtItemsJson = JsonConvert.SerializeObject(txtItems);
             var txtItemsByte = Encoding.ASCII.GetBytes(txtItemsJson);
             var options = new DistributedCacheEntryOptions() {SlidingExpiration = TimeSpan.FromSeconds(60)};
-            await _distributedCache.SetAsync("txtRecords", txtItemsByte, options);
+            await _distributedCache.SetAsync("txtRecords", txtItemsByte, options, cancellationToken);
 
             return Content(txtItems.Count.ToString());
         }
@@ -602,9 +603,9 @@ namespace dexih.api.Controllers
         /// <returns></returns>
         [HttpGet("[action]")]
         [AllowAnonymous]
-        public async Task<IActionResult> GetTxtRecords()
+        public async Task<IActionResult> GetTxtRecords(CancellationToken cancellationToken)
         {
-            var txtItemsJson = await _distributedCache.GetStringAsync("txtRecords");
+            var txtItemsJson = await _distributedCache.GetStringAsync("txtRecords", token: cancellationToken);
             if (txtItemsJson == null)
             {
                 return Content("[]");
@@ -621,7 +622,7 @@ namespace dexih.api.Controllers
         /// <returns></returns>
         [HttpGet("[action]/{os}")]
         [AllowAnonymous]
-        public async Task<IActionResult> Install(string os)
+        public async Task<IActionResult> Install(string os, CancellationToken cancellationToken)
         {
             var host = Request.Scheme + "://" + Request.Host;
             var command = "";
@@ -637,7 +638,7 @@ chmod a+x dexih.remote.run.{os}.sh
 ./dexih.remote.run.{os}.sh";
                     break;
                 case "windows":
-                    return await DownloadRemoteRun(os, "stable");
+                    return await DownloadRemoteRun(os, "stable", cancellationToken);
             }
 
             var memoryStream = new MemoryStream(Encoding.ASCII.GetBytes(command));
@@ -646,9 +647,9 @@ chmod a+x dexih.remote.run.{os}.sh
 
         [HttpGet("[action]/{os}/{pre}")]
         [AllowAnonymous]
-        public async Task<IActionResult> DownloadRemoteRun(string os, string pre)
+        public async Task<IActionResult> DownloadRemoteRun(string os, string pre, CancellationToken cancellationToken)
         {
-            var download = await GetRemoteRun(os, pre);
+            var download = await GetRemoteRun(os, pre, cancellationToken);
             return File(download.stream, download.contentType, download.fileName);
         }
 
@@ -693,7 +694,7 @@ chmod a+x dexih.remote.run.{os}.sh
             throw new Exception("Remote download agent not found");
         }
 
-        private async Task<(Stream stream, string contentType, string fileName)> GetRemoteRun(string os, string pre)
+        private async Task<(Stream stream, string contentType, string fileName)> GetRemoteRun(string os, string pre, CancellationToken cancellationToken)
         {
             var host = Request.Scheme + "://" + Request.Host;
             var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "RemoteAgents");
@@ -704,7 +705,7 @@ chmod a+x dexih.remote.run.{os}.sh
                 case "osx":
                 case "linux":
                 case "alpine":
-                    var file = await System.IO.File.ReadAllLinesAsync(Path.Combine(path, $"dexih.remote.run.{osName}.sh"));
+                    var file = await System.IO.File.ReadAllLinesAsync(Path.Combine(path, $"dexih.remote.run.{osName}.sh"), cancellationToken);
 
                     for(var i =0; i < file.Length; i++)
                     {
@@ -722,7 +723,7 @@ chmod a+x dexih.remote.run.{os}.sh
             throw new RemoteAgentControllerException($"The operating system {os} is not supported.");
         }
         
-        private async Task<MemoryStream> CreateAppSettingsFile(RemoteAgentSettings settings)
+        private async Task<MemoryStream> CreateAppSettingsFile(RemoteAgentSettings settings, CancellationToken cancellationToken)
         {
 	        var remoteSettings = new RemoteSettings();
 	        
@@ -741,7 +742,7 @@ chmod a+x dexih.remote.run.{os}.sh
 	                                               HttpContext.Request.Host + HttpContext.Request.PathBase.Value;
 	        remoteSettings.AppSettings.RemoteAgentId = Guid.NewGuid().ToString();
 
-            var user = await _operations.RepositoryManager.GetUser(User);
+            var user = await _operations.RepositoryManager.GetUser(User, cancellationToken);
             
             var dbRemoteAgent = new DexihRemoteAgent()
             {
@@ -753,7 +754,7 @@ chmod a+x dexih.remote.run.{os}.sh
 
 	        if (settings.EmbedUserName)
 	        {
-		        remoteSettings.AppSettings.UserToken = await _operations.RepositoryManager.GenerateRemoteUserToken(user, remoteSettings.AppSettings.RemoteAgentId);
+		        remoteSettings.AppSettings.UserToken = await _operations.RepositoryManager.GenerateRemoteUserToken(user, remoteSettings.AppSettings.RemoteAgentId, cancellationToken);
 		        
 		        var hashedToken = HashString.CreateHash(remoteSettings.AppSettings.UserToken);
 	            dbRemoteAgent.HashedToken = hashedToken;	        
@@ -770,7 +771,7 @@ chmod a+x dexih.remote.run.{os}.sh
 	        remoteSettings.Logging.LogLevel.System = settings.LogLevel;
 	        remoteSettings.Logging.LogLevel.Microsoft = settings.LogLevel;
 
-            await _operations.RepositoryManager.SaveRemoteAgent(user.Id, dbRemoteAgent);
+            await _operations.RepositoryManager.SaveRemoteAgent(user.Id, dbRemoteAgent, cancellationToken);
 	        var json = JsonConvert.SerializeObject(remoteSettings, Formatting.Indented);
 	        var appSettingsStream = new MemoryStream(Encoding.ASCII.GetBytes(json));
             return appSettingsStream;
@@ -778,19 +779,19 @@ chmod a+x dexih.remote.run.{os}.sh
 
         [HttpPost("[action]")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DownloadAppSettings([FromBody] RemoteAgentSettings settings)
+        public async Task<IActionResult> DownloadAppSettings([FromBody] RemoteAgentSettings settings, CancellationToken cancellationToken)
         {
-            var appsettingsStream = await CreateAppSettingsFile(settings);
+            var appsettingsStream = await CreateAppSettingsFile(settings, cancellationToken);
             return File(appsettingsStream, "application/json", "appsettings.json");
         }
 
         [HttpPost("[action]")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DownloadZip([FromBody] RemoteAgentSettings settings)
+        public async Task<IActionResult> DownloadZip([FromBody] RemoteAgentSettings settings, CancellationToken cancellationToken)
         {
-            var appSettingsStream = await CreateAppSettingsFile(settings);
+            var appSettingsStream = await CreateAppSettingsFile(settings, cancellationToken);
             var remoteRunStream = await GetRemoteRun(settings.Environment.ToString(),
-                settings.RemoteApplicationSettings.PreRelease ? "prerelease" : "stable");
+                settings.RemoteApplicationSettings.PreRelease ? "prerelease" : "stable", cancellationToken);
             
             var memoryStream = new MemoryStream();
 
@@ -799,13 +800,13 @@ chmod a+x dexih.remote.run.{os}.sh
                 var appSettingsEntry = archive.CreateEntry("appsettings.json");
                 using (var appSettings = appSettingsEntry.Open())
                 {
-                    appSettingsStream.CopyTo(appSettings);
+                    await appSettingsStream.CopyToAsync(appSettings, cancellationToken);
                 }
 
                 var remoteRunEntry = archive.CreateEntry(remoteRunStream.fileName);
                 using (var remoteRunSettings = remoteRunEntry.Open())
                 {
-                    remoteRunStream.stream.CopyTo(remoteRunSettings);
+                    await remoteRunStream.stream.CopyToAsync(remoteRunSettings, cancellationToken);
                 }
             }
 
@@ -815,12 +816,12 @@ chmod a+x dexih.remote.run.{os}.sh
 
         [AllowAnonymous]
         [HttpGet("[action]/{remoteAgentId}/{key}/{queryAction}")]
-        public async Task<IActionResult> Api(string remoteAgentId, string key, string queryAction)
+        public async Task<IActionResult> Api(string remoteAgentId, string key, string queryAction, CancellationToken cancellationToken)
         {
             var parameters =Request.QueryString.Value;
             var ipAddress = Request.HttpContext.Connection.RemoteIpAddress;
 
-            var url = await _remoteServers.CallApi(remoteAgentId, key, queryAction, parameters, ipAddress.ToString());
+            var url = await _remoteServers.CallApi(remoteAgentId, key, queryAction, parameters, ipAddress.ToString(), cancellationToken);
 
             return Redirect(url);
         }

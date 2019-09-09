@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using dexih.api.Services;
 using dexih.functions;
@@ -50,11 +51,11 @@ namespace dexih.api.Controllers
         private readonly ILogger _logger;
 		private readonly SignInManager<ApplicationUser> _signInManager;
 
-		private async Task<DexihHub> IsAuthorizedHub(string hubName, ApplicationUser applicationUser = null)
+		private async Task<DexihHub> IsAuthorizedHub(string hubName, ApplicationUser applicationUser, CancellationToken cancellationToken)
 		{
 			if (applicationUser == null)
 			{
-				applicationUser = await _operations.RepositoryManager.GetUser(HttpContext.User);
+				applicationUser = await _operations.RepositoryManager.GetUser(HttpContext.User, cancellationToken);
 			}
 
 			if (applicationUser == null)
@@ -62,7 +63,7 @@ namespace dexih.api.Controllers
                 throw new ReaderControllerException("Authentication Error");
             }
 
-            var hub = await DbContext.DexihHubs.SingleOrDefaultAsync(h => h.Name == hubName && h.IsValid);
+            var hub = await DbContext.DexihHubs.SingleOrDefaultAsync(h => h.Name == hubName && h.IsValid, cancellationToken: cancellationToken);
 			if (hub == null)
 			{
                 throw new ReaderControllerException($"The hub {hubName} could not be found.");
@@ -91,13 +92,13 @@ namespace dexih.api.Controllers
 		// POST: /Reader/Login
 		///[HttpPost]
 		[AllowAnonymous]
-		public async Task<DexihActiveAgent> Login(string user, string password, string hubName)
+		public async Task<DexihActiveAgent> Login(string user, string password, string hubName, CancellationToken cancellationToken)
 		{
 			try
 			{
 				if (ModelState.IsValid)
 				{
-					var applicationUser = await _operations.RepositoryManager.GetUserFromEmail(user);
+					var applicationUser = await _operations.RepositoryManager.GetUserFromEmail(user, cancellationToken);
 					if (applicationUser == null)
 					{
 						_logger.LogWarning("Invalid remote login attempt using Email: " + User);
@@ -116,9 +117,9 @@ namespace dexih.api.Controllers
 						}
 						else
 						{
-							var hub = await IsAuthorizedHub(hubName, applicationUser);
+							var hub = await IsAuthorizedHub(hubName, applicationUser, cancellationToken);
 							var remoteAgent =
-								await _remoteAgents.GetHubReaderRemoteAgent(hub.HubKey, _operations.RepositoryManager);
+								await _remoteAgents.GetHubReaderRemoteAgent(hub.HubKey, _operations.RepositoryManager, cancellationToken);
 							return remoteAgent;
 						}
 					}
@@ -142,11 +143,11 @@ namespace dexih.api.Controllers
         }
 
 		//[HttpPost("[action]")]
-		public async Task<string[]> GetHubs()
+		public async Task<string[]> GetHubs(CancellationToken cancellationToken)
 		{
 			try
 			{
-				var applicationUser = await _operations.RepositoryManager.GetUser(User);
+				var applicationUser = await _operations.RepositoryManager.GetUser(User, cancellationToken);
 
                 if (applicationUser == null)
                 {
@@ -156,12 +157,12 @@ namespace dexih.api.Controllers
 				string[] hubNames;
 				if (applicationUser.IsAdmin)
 				{
-					hubNames = await DbContext.DexihHubs.Where(c => c.IsValid).Select(c=> c.Name).ToArrayAsync();
+					hubNames = await DbContext.DexihHubs.Where(c => c.IsValid).Select(c=> c.Name).ToArrayAsync(cancellationToken: cancellationToken);
 				}
 				else
 				{
-					var hubKeys = await DbContext.DexihHubUser.Where(c => c.UserId == applicationUser.Id && c.IsValid).Select(c => c.HubKey).ToArrayAsync();
-					hubNames = await DbContext.DexihHubs.Include(c => c.DexihHubUsers).Where(c => hubKeys.Contains(c.HubKey) && c.IsValid).Select(c=>c.Name).ToArrayAsync();
+					var hubKeys = await DbContext.DexihHubUser.Where(c => c.UserId == applicationUser.Id && c.IsValid).Select(c => c.HubKey).ToArrayAsync(cancellationToken: cancellationToken);
+					hubNames = await DbContext.DexihHubs.Include(c => c.DexihHubUsers).Where(c => hubKeys.Contains(c.HubKey) && c.IsValid).Select(c=>c.Name).ToArrayAsync(cancellationToken: cancellationToken);
 				}
 
                 return hubNames;
@@ -173,16 +174,16 @@ namespace dexih.api.Controllers
         }
 
 		//[HttpPost("[action]")]
-		public async Task<IEnumerable<Table>> GetTables(string hubName)
+		public async Task<IEnumerable<Table>> GetTables(string hubName, CancellationToken cancellationToken)
 		{
 			try
 			{
-				var hub = await IsAuthorizedHub(hubName);
+				var hub = await IsAuthorizedHub(hubName, null, cancellationToken);
 
 				var dbTables = await DbContext.DexihTables
                     .Include(c=>c.Connection)
                     .Include(c => c.FileFormat)
-                    .Where(c => c.IsValid && c.HubKey == hub.HubKey && c.IsShared).ToArrayAsync();
+                    .Where(c => c.IsValid && c.HubKey == hub.HubKey && c.IsShared).ToArrayAsync(cancellationToken: cancellationToken);
 
                 foreach(var dbTable in dbTables)
                 {
@@ -192,7 +193,7 @@ namespace dexih.api.Controllers
 				var tables = dbTables.Select(t => t.GetTable(hub, null, new TransformSettings())).ToArray();
 
                 var dbDatalinks = await DbContext.DexihDatalinks
-                    .Where(c => c.IsValid && c.HubKey == hub.HubKey && c.IsShared).ToArrayAsync();
+                    .Where(c => c.IsValid && c.HubKey == hub.HubKey && c.IsShared).ToArrayAsync(cancellationToken: cancellationToken);
 
                 var datalinks = dbDatalinks.Select(d => new Table(d.Name, DatalinkSchema)).ToArray();
 
@@ -205,11 +206,11 @@ namespace dexih.api.Controllers
         }
 
 		//[HttpPost("[action]")]
-		public async Task<Table> GetTableInfo(string hubName, string tableSchema, string sourceConnectionName, string tableName)
+		public async Task<Table> GetTableInfo(string hubName, string tableSchema, string sourceConnectionName, string tableName, CancellationToken cancellationToken)
 		{
 			try
 			{
-				var hub = await IsAuthorizedHub(hubName);
+				var hub = await IsAuthorizedHub(hubName, null, cancellationToken);
 
                 // if the source is a datalink, then scan the transforms to contruct the output columns.
                 if (tableSchema == DatalinkSchema)
@@ -220,7 +221,7 @@ namespace dexih.api.Controllers
                             c.IsValid &&
                             c.HubKey == hub.HubKey &&
                             c.IsShared &&
-                            c.Name == tableName);
+                            c.Name == tableName, cancellationToken: cancellationToken);
 
 	                var dbCache = new CacheManager(hub.HubKey, "");
                     var dbDatalink2 = await dbCache.GetDatalink(dbDatalink.Key, DbContext);
@@ -247,7 +248,7 @@ namespace dexih.api.Controllers
                             c.Name == tableName &&
 	                        c.Schema == tableSchema &&
                             c.Connection.Name == sourceConnectionName &&
-                            c.Connection.IsValid );
+                            c.Connection.IsValid, cancellationToken: cancellationToken);
 
 	                var table =dbTable.GetTable(hub, null, new TransformSettings());
 	                table.SourceConnectionName = sourceConnectionName;
@@ -272,11 +273,11 @@ namespace dexih.api.Controllers
         }
 
         // [HttpPost("[action]")]
-        public async Task<string> OpenTableQuery([FromBody] OpenTableQueryModel parameters)
+        public async Task<string> OpenTableQuery([FromBody] OpenTableQueryModel parameters, CancellationToken cancellationToken)
         {
             try
             {
-                var hub = await IsAuthorizedHub(parameters.HubName);
+                var hub = await IsAuthorizedHub(parameters.HubName, null, cancellationToken);
 	            var repositoryManager = _operations.RepositoryManager;
 
                 // var remoteAgent = await _remoteAgents.GetRemoteAgent(parameters.InstanceId, hub.HubKey, _operations.RepositoryManager);
@@ -292,8 +293,7 @@ namespace dexih.api.Controllers
                         c.IsValid
                         && c.HubKey == hub.HubKey
                         && c.Name == parameters.TableName
-                        && c.IsShared
-                        );
+                        && c.IsShared, cancellationToken: cancellationToken);
 
                     dbDatalink = await cache.GetDatalink(dbDatalinkObject.Key, DbContext);
                     await cache.LoadDatalinkDependencies(dbDatalink, true, DbContext);
@@ -304,8 +304,7 @@ namespace dexih.api.Controllers
                     var dbSourceConnection = await DbContext.DexihConnections.SingleOrDefaultAsync(c =>
                         c.IsValid &&
                         c.Name == parameters.SourceConnectionName &&
-                        c.HubKey == hub.HubKey
-                    );
+                        c.HubKey == hub.HubKey, cancellationToken: cancellationToken);
 	                
                     var dbTable = await DbContext.DexihTables.SingleOrDefaultAsync(c =>
                         c.IsValid
@@ -313,11 +312,10 @@ namespace dexih.api.Controllers
                         && c.Name == parameters.TableName
 	                	&& c.Schema == parameters.TableSchema
                         && c.ConnectionKey == dbSourceConnection.Key
-                        && c.IsShared
-                    );
+                        && c.IsShared, cancellationToken: cancellationToken);
 
 	                var dbColumns = await DbContext.DexihTableColumns
-		                .Where(c => c.TableKey == dbTable.Key && c.IsValid).ToArrayAsync();
+		                .Where(c => c.TableKey == dbTable.Key && c.IsValid).ToArrayAsync(cancellationToken: cancellationToken);
 
                     // create a temporary datalink that pulls data from the source table.
 	                dbDatalink = new DexihDatalink
@@ -351,7 +349,7 @@ namespace dexih.api.Controllers
 		            parameters.DownloadUrl
 	            };
 
-	            var result = await _remoteAgents.SendRemoteMessage<string>(hub.HubKey, parameters.InstanceId, nameof(RemoteOperations.GetReaderData), value, repositoryManager);
+	            var result = await _remoteAgents.SendRemoteMessage<string>(hub.HubKey, parameters.InstanceId, nameof(RemoteOperations.GetReaderData), value, repositoryManager, cancellationToken);
 
 	            // returns a pointer to the download url.
 	            return result;

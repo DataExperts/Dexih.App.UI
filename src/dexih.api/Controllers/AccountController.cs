@@ -18,6 +18,7 @@ using System.Collections.Concurrent;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
+using System.Threading;
 using System.Web;
 using dexih.api.Services.Message;
 using dexih.api.Services.Operations;
@@ -68,7 +69,7 @@ namespace dexih.api.Controllers
             _errorLogger = errorLogger;
         }
 
-        private Task<ApplicationUser> GetApplicationUser()
+        private Task<ApplicationUser> GetApplicationUser(CancellationToken cancellationToken)
         {
 	        if (!_signInManager.IsSignedIn(User))
 	        {
@@ -77,7 +78,7 @@ namespace dexih.api.Controllers
 	        }
 	        else
 	        {
-		        return _operations.RepositoryManager.GetUser(User);
+		        return _operations.RepositoryManager.GetUser(User, cancellationToken);
 	        }
         }
 
@@ -85,11 +86,11 @@ namespace dexih.api.Controllers
         // POST: /Account/Login
         [HttpPost("[action]")]
         [AllowAnonymous]
-        public async Task<ReturnUser> Login([FromBody] LoginModel login)
+        public async Task<ReturnUser> Login([FromBody] LoginModel login, CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
             {
-	            var user = await _operations.RepositoryManager.GetUserFromEmail(login.Email);
+	            var user = await _operations.RepositoryManager.GetUserFromEmail(login.Email, cancellationToken);
 
                 if (user == null)
                 {
@@ -175,7 +176,7 @@ namespace dexih.api.Controllers
         // POST: /Account/Login
         [HttpPost("[action]")]
         [AllowAnonymous]
-        public async Task<ReturnUser> ExternalLogin([FromBody] ExternalLoginProviderModel externalProvider)
+        public async Task<ReturnUser> ExternalLogin([FromBody] ExternalLoginProviderModel externalProvider, CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
             {
@@ -186,7 +187,7 @@ namespace dexih.api.Controllers
 	            var externalLoginResult =
 		            await GetExternalLogin(externalProvider.Provider, externalProvider.AuthenticationToken);
 	            
-	            var user = await _operations.RepositoryManager.GetUserFromLogin(externalLoginResult.Provider.ToString(), externalLoginResult.ProviderKey);
+	            var user = await _operations.RepositoryManager.GetUserFromLogin(externalLoginResult.Provider.ToString(), externalLoginResult.ProviderKey, cancellationToken);
                 
 	            if (user == null)
                 {
@@ -246,7 +247,7 @@ namespace dexih.api.Controllers
         // POST: /Account/Register
         [HttpPost("[action]")]
         [AllowAnonymous]
-        public async Task<ReturnUser> Register([FromBody] RegisterModel register)
+        public async Task<ReturnUser> Register([FromBody] RegisterModel register, CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
             {
@@ -268,7 +269,7 @@ namespace dexih.api.Controllers
 
 	            }
 	            
-	            var existingUser = await _operations.RepositoryManager.GetUserFromEmail(register.Email);
+	            var existingUser = await _operations.RepositoryManager.GetUserFromEmail(register.Email, cancellationToken);
 
                 if(existingUser == null)
 				{
@@ -292,19 +293,19 @@ namespace dexih.api.Controllers
 
 						if (register.Provider == RepositoryManager.ELoginProvider.Dexih)
 						{
-							await _operations.RepositoryManager.CreateUserAsync(user, register.Password);
+							await _operations.RepositoryManager.CreateUserAsync(user, register.Password, cancellationToken);
 						}
 						else
 						{
 							user.Email = externalLoginResult.Email;
 							user.EmailConfirmed = true;
 
-							await _operations.RepositoryManager.CreateUserAsync(user);
+							await _operations.RepositoryManager.CreateUserAsync(user, null, cancellationToken);
 						}
 
 						if (register.Provider != RepositoryManager.ELoginProvider.Dexih)
 						{
-							await _operations.RepositoryManager.AddLoginAsync(user, register.Provider, externalLoginResult.ProviderKey);
+							await _operations.RepositoryManager.AddLoginAsync(user, register.Provider, externalLoginResult.ProviderKey, cancellationToken);
 							await _signInManager.SignInAsync(user, false);
 							SendRegisteredEmail(user);
 							return new ReturnUser(user);
@@ -313,13 +314,13 @@ namespace dexih.api.Controllers
 						{
 							if (register.Code != null)
 							{
-								await _operations.RepositoryManager.ConfirmEmailAsync(user, register.Code);
+								await _operations.RepositoryManager.ConfirmEmailAsync(user, register.Code, cancellationToken);
 								await _signInManager.SignInAsync(user, false);
 								SendRegisteredEmail(user);
 							}
 							else
 							{
-								await SendConfirmationEmail(user);
+								await SendConfirmationEmail(user, cancellationToken);
 							}
 
 							await SendSupportMessage($"User registration succeeded for {user.Email}.",
@@ -352,7 +353,7 @@ namespace dexih.api.Controllers
 
 						if (register.Provider != RepositoryManager.ELoginProvider.Dexih)
 						{
-							await _operations.RepositoryManager.AddLoginAsync(existingUser, register.Provider, externalLoginResult.ProviderKey);
+							await _operations.RepositoryManager.AddLoginAsync(existingUser, register.Provider, externalLoginResult.ProviderKey, cancellationToken);
 							await _signInManager.SignInAsync(existingUser, false);
 							SendRegisteredEmail(existingUser);
 						}
@@ -360,11 +361,11 @@ namespace dexih.api.Controllers
 						{
 							if (string.IsNullOrEmpty(register.Code))
 							{
-								await SendConfirmationEmail(existingUser);
+								await SendConfirmationEmail(existingUser, cancellationToken);
 							}
 							else
 							{
-								await _operations.RepositoryManager.ConfirmEmailAsync(existingUser, register.Code);
+								await _operations.RepositoryManager.ConfirmEmailAsync(existingUser, register.Code, cancellationToken);
 								await _signInManager.SignInAsync(existingUser, false);
 								SendRegisteredEmail(existingUser);
 							}
@@ -372,10 +373,10 @@ namespace dexih.api.Controllers
 
 						if (register.Provider == RepositoryManager.ELoginProvider.Dexih)
 						{
-							await _operations.RepositoryManager.AddPasswordAsync(existingUser, register.Password);
+							await _operations.RepositoryManager.AddPasswordAsync(existingUser, register.Password, cancellationToken);
 						}
 
-						await _operations.RepositoryManager.UpdateUserAsync(existingUser);
+						await _operations.RepositoryManager.UpdateUserAsync(existingUser, cancellationToken);
 						await SendSupportMessage($"User registration completed for {existingUser.Email}.", $"The user user {existingUser.Email} is has registered.  Invitation status is {existingUser.IsInvited}.");
 
 						return new ReturnUser(existingUser);
@@ -389,11 +390,11 @@ namespace dexih.api.Controllers
             throw new AccountControllerException("Registration failed.");
         }
 	    
-	  	public async Task SendConfirmationEmail([FromBody] ApplicationUser user)
+	  	public async Task SendConfirmationEmail([FromBody] ApplicationUser user, CancellationToken cancellationToken)
         {
             // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
             // Send an email with this link
-	        var code = await _operations.RepositoryManager.GenerateEmailConfirmationTokenAsync(user);
+	        var code = await _operations.RepositoryManager.GenerateEmailConfirmationTokenAsync(user, cancellationToken);
 			var url = (Request.IsHttps ? "https://" : "http://") + Request.Host.ToUriComponent();
 
 	        var verifyUrl = $"{url}/auth/verifyemail?email={user.Email}&code={HttpUtility.UrlEncode(code)}";
@@ -459,21 +460,21 @@ namespace dexih.api.Controllers
         // GET: /Account/ConfirmEmail
         [HttpPost("[action]")]
         [AllowAnonymous]
-        public async Task<ReturnUser> ConfirmEmail([FromBody] ConfirmEmailModel email)
+        public async Task<ReturnUser> ConfirmEmail([FromBody] ConfirmEmailModel email, CancellationToken cancellationToken)
         {
             if (email.Email == null || email.Code == null)
             {
                 throw new AccountControllerException("The email and verification code were not completed.");
             }
 
-	        var user = await _operations.RepositoryManager.GetUserFromEmail(email.Email);
+	        var user = await _operations.RepositoryManager.GetUserFromEmail(email.Email, cancellationToken);
 
 	        if (user == null)
             {
-                throw new AccountControllerException("There was an error verifying.  Check the email and verification code are entered correcly.");
+                throw new AccountControllerException("There was an error verifying.  Check the email and verification code are entered correctly.");
             }
 
-	        await _operations.RepositoryManager.ConfirmEmailAsync(user, email.Code);
+	        await _operations.RepositoryManager.ConfirmEmailAsync(user, email.Code, cancellationToken);
 	        SendRegisteredEmail(user);
 	        return new ReturnUser(user);
         }
@@ -483,7 +484,7 @@ namespace dexih.api.Controllers
         [HttpPost("[action]")]
         [AllowAnonymous]
         //[ValidateAntiForgeryToken]
-        public async Task<ReturnUser> GetUser()
+        public async Task<ReturnUser> GetUser(CancellationToken cancellationToken)
         {
             if(!_signInManager.IsSignedIn(User)) 
             {
@@ -492,7 +493,7 @@ namespace dexih.api.Controllers
             }
             else
             {
-	            var user = await  _operations.RepositoryManager.GetUser(User);
+	            var user = await  _operations.RepositoryManager.GetUser(User, cancellationToken);
 	            
 	            return new ReturnUser(user);
             }
@@ -500,31 +501,31 @@ namespace dexih.api.Controllers
 	    
 	    ///Sends out a ping request to all remote agents to indicate they are active.
 	    [HttpPost("[action]")]
-	    public async Task<DexihRemoteAgent[]> PingRemoteAgents([FromBody] ConnectionIdModel connectionId)
+	    public async Task<DexihRemoteAgent[]> PingRemoteAgents([FromBody] ConnectionIdModel connectionId, CancellationToken cancellationToken)
 	    {
-		    var user = await GetApplicationUser();
-		    return await _remoteAgents.PingAgents(user, connectionId.ConnectionId, _operations.RepositoryManager);
+		    var user = await GetApplicationUser(cancellationToken);
+		    return await _remoteAgents.PingAgents(user, connectionId.ConnectionId, _operations.RepositoryManager, cancellationToken);
 	    }
 
         //
         // POST: /Account/GetAuthorizedHubs
         [HttpPost("[action]")]
         [AllowAnonymous]
-        public async Task<IEnumerable<DexihHub>> GetAuthorizedHubs()
+        public async Task<IEnumerable<DexihHub>> GetAuthorizedHubs(CancellationToken cancellationToken)
         {
             if(!_signInManager.IsSignedIn(User)) 
             {
                 throw new AccountControllerException("Cannot get authorized hubs as there is no user logged in.");
             }
 
-	        var applicationUser = await _operations.RepositoryManager.GetUser(User);
+	        var applicationUser = await _operations.RepositoryManager.GetUser(User, cancellationToken);
 
             if (applicationUser == null)
             {
                 throw new AccountControllerException("User not logged in.");
             }
 
-            var hubs = await _operations.RepositoryManager.GetUserHubs(applicationUser);
+            var hubs = await _operations.RepositoryManager.GetUserHubs(applicationUser, cancellationToken);
 
             return hubs;
         }
@@ -632,7 +633,7 @@ namespace dexih.api.Controllers
         [HttpPost("[action]")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ReturnUser> AddExternalLogin([FromBody] ExternalLoginModel externalLoginModel)
+        public async Task<ReturnUser> AddExternalLogin([FromBody] ExternalLoginModel externalLoginModel, CancellationToken cancellationToken)
         {
           	if (ModelState.IsValid)
             {
@@ -648,14 +649,14 @@ namespace dexih.api.Controllers
 	            // if the provider is the same as the one being added, then continue.
 	            if (info.Provider == externalLoginModel.Provider)
 	            {
-		            var user = await _operations.RepositoryManager.GetUser(User);
+		            var user = await _operations.RepositoryManager.GetUser(User, cancellationToken);
 
 		            if (user == null || !user.IsRegistered)
 		            {
 			            throw new AccountControllerException("There is no user currently logged in.");
 		            }
 
-		            await _operations.RepositoryManager.AddLoginAsync(user, info.Provider, info.ProviderKey);
+		            await _operations.RepositoryManager.AddLoginAsync(user, info.Provider, info.ProviderKey, cancellationToken);
 		            await _signInManager.SignInAsync(user, isPersistent: false);
 		            return new ReturnUser(user);
 	            }
@@ -671,21 +672,21 @@ namespace dexih.api.Controllers
         [HttpPost("[action]")]
 		[AllowAnonymous]
 		[ValidateAntiForgeryToken]
-		public async Task<IEnumerable<UserLoginInfo>> ExternalLogins()
+		public async Task<IEnumerable<UserLoginInfo>> ExternalLogins(CancellationToken cancellationToken)
 		{
 			if (!ModelState.IsValid)
 			{
                 throw new AccountControllerException("The update details failed.");
             }
 
-            var currentUser = await GetApplicationUser();
+            var currentUser = await GetApplicationUser(cancellationToken);
 			if (currentUser == null)
 			{
 				// Don't reveal that the user does not exist
                 throw new AccountControllerException("The update details failed as the user could not be found.");
             }
 
-			var result = await _operations.RepositoryManager.GetLoginsAsync(currentUser);
+			var result = await _operations.RepositoryManager.GetLoginsAsync(currentUser, cancellationToken);
 			return result;
 		}
 	    
@@ -695,14 +696,14 @@ namespace dexih.api.Controllers
 		[HttpPost("[action]")]
 		[AllowAnonymous]
 		[ValidateAntiForgeryToken]
-		public async Task RemoveExternalLogin([FromBody] RemoveExternalLoginModel externalProvider)
+		public async Task RemoveExternalLogin([FromBody] RemoveExternalLoginModel externalProvider, CancellationToken cancellationToken)
 		{
 			if (!ModelState.IsValid)
 			{
                 throw new AccountControllerException("The update details failed.");
             }
 			
-            var currentUser = await GetApplicationUser();
+            var currentUser = await GetApplicationUser(cancellationToken);
 
 			if (currentUser == null)
 			{
@@ -711,7 +712,7 @@ namespace dexih.api.Controllers
             }
 
 			await _operations.RepositoryManager.RemoveLoginAsync(currentUser, externalProvider.Provider,
-				externalProvider.ProviderKey);
+				externalProvider.ProviderKey, cancellationToken);
 			await _signInManager.SignInAsync(currentUser, isPersistent: false);
 		}
 
@@ -719,10 +720,10 @@ namespace dexih.api.Controllers
         // GET: /Account/ResendConfirmationEmail
         [HttpPost("[action]")]
         [AllowAnonymous]
-        public async Task ResendConfirmationEmail([FromBody] EmailModel email)
+        public async Task ResendConfirmationEmail([FromBody] EmailModel email, CancellationToken cancellationToken)
         {
-	        var user = await _operations.RepositoryManager.GetUserFromEmail(email.Email);
-            await SendConfirmationEmail(user);
+	        var user = await _operations.RepositoryManager.GetUserFromEmail(email.Email, cancellationToken);
+            await SendConfirmationEmail(user, cancellationToken);
         }
 
         //
@@ -730,11 +731,11 @@ namespace dexih.api.Controllers
         [HttpPost("[action]")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task ForgotPassword([FromBody] LoginModel login)
+        public async Task ForgotPassword([FromBody] LoginModel login, CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
             {
-	            var user = await _operations.RepositoryManager.GetUserFromEmail(login.Email);
+	            var user = await _operations.RepositoryManager.GetUserFromEmail(login.Email, cancellationToken);
 	            
                 if (user == null || !user.EmailConfirmed)
                 {
@@ -744,7 +745,7 @@ namespace dexih.api.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.    crosoft.com/fwlink/?LinkID=532713
                 // Send an email with this link
-                var code = await _operations.RepositoryManager.GeneratePasswordResetTokenAsync(user);
+                var code = await _operations.RepositoryManager.GeneratePasswordResetTokenAsync(user, cancellationToken);
 				var url = (Request.IsHttps ? "https://" : "http://") + Request.Host.ToUriComponent();
 	            var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates", "forgotPassword.html");
 				var body = new StringBuilder(System.IO.File.ReadAllText(path));
@@ -766,29 +767,29 @@ namespace dexih.api.Controllers
         [HttpPost("[action]")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task ResetPassword([FromBody] ResetPasswordModel resetPassword)
+        public async Task ResetPassword([FromBody] ResetPasswordModel resetPassword, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
             {
                 throw new AccountControllerException("The reset password failed.");
             }
             
-	        var user = await _operations.RepositoryManager.GetUserFromEmail(resetPassword.Email);
-            await _operations.RepositoryManager.ResetPasswordAsync(user, resetPassword.Code, resetPassword.Password);
+	        var user = await _operations.RepositoryManager.GetUserFromEmail(resetPassword.Email, cancellationToken);
+            await _operations.RepositoryManager.ResetPasswordAsync(user, resetPassword.Code, resetPassword.Password, cancellationToken);
         }
 
         // POST: /Account/UpdateDetails
         [HttpPost("[action]")]
 		[AllowAnonymous]
 		[ValidateAntiForgeryToken]
-		public async Task UpdateDetails([FromBody] UpdateDetails updateDetails)
+		public async Task UpdateDetails([FromBody] UpdateDetails updateDetails, CancellationToken cancellationToken)
 		{
 			if (!ModelState.IsValid)
 			{
                 throw new AccountControllerException("The update details failed.");
             }
 
-            var currentUser = await GetApplicationUser();
+            var currentUser = await GetApplicationUser(cancellationToken);
 
 			if (currentUser == null)
 			{
@@ -800,41 +801,41 @@ namespace dexih.api.Controllers
 			currentUser.LastName = updateDetails.LastName;
 			currentUser.Subscription = updateDetails.Subscription;
 
-			await _operations.RepositoryManager.UpdateUserAsync(currentUser);
+			await _operations.RepositoryManager.UpdateUserAsync(currentUser, cancellationToken);
         }
 
 	    //
 	    // POST: /Account/ChangePassword
 	    [HttpPost("[action]")]
 	    [ValidateAntiForgeryToken]
-	    public async Task ChangePassword([FromBody] ChangePasswordModel changePassword)
+	    public async Task ChangePassword([FromBody] ChangePasswordModel changePassword, CancellationToken cancellationToken)
 	    {
 		    if (!ModelState.IsValid)
 		    {
 			    throw new AccountControllerException("The reset password failed.");
 		    }
-		    var user = await GetApplicationUser();
+		    var user = await GetApplicationUser(cancellationToken);
 		    if (user == null)
 		    {
 			    // Don't reveal that the user does not exist
 			    throw new AccountControllerException("The reset password failed.");
 		    }
 		    
-		    await _operations.RepositoryManager.ChangePasswordAsync(user, changePassword.Password, changePassword.NewPassword);
+		    await _operations.RepositoryManager.ChangePasswordAsync(user, changePassword.Password, changePassword.NewPassword, cancellationToken);
 	    }
 
 
         // POST: /Account/SaveHub
         [HttpPost("[action]")]
         [ValidateAntiForgeryToken]
-        public async Task<DexihHub> SaveHub([FromBody] DexihHub hub)
+        public async Task<DexihHub> SaveHub([FromBody] DexihHub hub, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
             {
                 throw new AccountControllerException("The save hub failed.");
             }
 
-	        var user = await GetApplicationUser();
+	        var user = await GetApplicationUser(cancellationToken);
 	        if (user == null)
 	        {
 		        throw new AccountControllerException("The save hub failed.");
@@ -845,13 +846,13 @@ namespace dexih.api.Controllers
             if(user.IsAdmin || user.HubQuota > 0 || existingHub)
             {
                 var repositoryManager = _operations.RepositoryManager;
-                var result = await repositoryManager.SaveHub(hub, user);
+                var result = await repositoryManager.SaveHub(hub, user, cancellationToken);
 
 		        // broadcast the update so any connected browsers will see the new hub.
-		        var userIds = await repositoryManager.GetHubUserIds(hub.HubKey);
+		        var userIds = await repositoryManager.GetHubUserIds(hub.HubKey, cancellationToken);
                 if (userIds != null)
                 {
-                    await _operations.BroadcastUsersMessageAsync(userIds, "hub-update", result);
+                    await _operations.BroadcastUsersMessageAsync(userIds, "hub-update", result, cancellationToken);
                 }
 
                 return result;
@@ -866,14 +867,14 @@ namespace dexih.api.Controllers
 		// POST: /Account/DeleteHubs
 		[HttpPost("[action]")]
 		[ValidateAntiForgeryToken]
-		public async Task DeleteHubs([FromBody] DeleteHubs deleteHubs)
+		public async Task DeleteHubs([FromBody] DeleteHubs deleteHubs, CancellationToken cancellationToken)
 		{
 			if (!ModelState.IsValid)
 			{
                 throw new AccountControllerException("The delete hubs failed.");
             }
 
-			var user = await GetApplicationUser();
+			var user = await GetApplicationUser(cancellationToken);
 
 			if (user == null)
 			{
@@ -882,7 +883,7 @@ namespace dexih.api.Controllers
 
 			var repositoryManager = _operations.RepositoryManager;
 
-			var hubs = await repositoryManager.DeleteHubs(user, deleteHubs.HubKeys);
+			var hubs = await repositoryManager.DeleteHubs(user, deleteHubs.HubKeys, cancellationToken);
 			
 			if (!user.IsAdmin)
 			{
@@ -891,10 +892,10 @@ namespace dexih.api.Controllers
 
 			foreach(var hubKey in deleteHubs.HubKeys)
 			{
-				var userIds = await repositoryManager.GetHubUserIds(hubKey);
+				var userIds = await repositoryManager.GetHubUserIds(hubKey, cancellationToken);
                 if (userIds != null)
                 {
-                    await _operations.BroadcastUsersMessageAsync(userIds, "hubs-delete", new[] { hubKey });
+                    await _operations.BroadcastUsersMessageAsync(userIds, "hubs-delete", new[] { hubKey }, cancellationToken);
                 }
 			}
 		}
@@ -923,39 +924,39 @@ namespace dexih.api.Controllers
 	    // POST: /Account/GetUserRemoteAgents
 	    [HttpPost("[action]")]
 	    [ValidateAntiForgeryToken]
-	    public async Task<IEnumerable<DexihRemoteAgent>> GetUserRemoteAgents()
+	    public async Task<IEnumerable<DexihRemoteAgent>> GetUserRemoteAgents(CancellationToken cancellationToken)
 	    {
-		    var user = await GetApplicationUser();
+		    var user = await GetApplicationUser(cancellationToken);
 
 		    if (user == null)
 		    {
 			    throw new AccountControllerException("Current user not found.");
 		    }
 
-		    var remoteAgents = await _operations.RepositoryManager.GetRemoteAgents(user);
+		    var remoteAgents = await _operations.RepositoryManager.GetRemoteAgents(user, cancellationToken);
 		    return remoteAgents;
 	    }
 	    
 	    // POST: /Account/RevokeUserToken
 	    [HttpPost("[action]")]
 	    [ValidateAntiForgeryToken]
-	    public async Task SaveRemoteAgent([FromBody] DexihRemoteAgent hubRemoteAgent)
-	    {   var user = await GetApplicationUser();
+	    public async Task SaveRemoteAgent([FromBody] DexihRemoteAgent hubRemoteAgent, CancellationToken cancellationToken)
+	    {   var user = await GetApplicationUser(cancellationToken);
 
 		    if (user == null)
 		    {
 			    throw new AccountControllerException("The save remote agent failed.");
 		    }
-		    await _operations.RepositoryManager.SaveRemoteAgent(user.Id, hubRemoteAgent);
+		    await _operations.RepositoryManager.SaveRemoteAgent(user.Id, hubRemoteAgent, cancellationToken);
 	    }
 
 
 	    // POST: /Account/GetUserToken
 	    [HttpPost("[action]")]
 	    [ValidateAntiForgeryToken]
-	    public async Task<RemoteAgentUserToken> CreateRemoteAgent()
+	    public async Task<RemoteAgentUserToken> CreateRemoteAgent(CancellationToken cancellationToken)
 	    {
-		    var user = await GetApplicationUser();
+		    var user = await GetApplicationUser(cancellationToken);
 
 		    if (user == null)
 		    {
@@ -963,7 +964,7 @@ namespace dexih.api.Controllers
 		    }
 
 		    var remoteAgentId = Guid.NewGuid().ToString();
-		    var token = await _operations.RepositoryManager.GenerateRemoteUserToken(user, remoteAgentId);
+		    var token = await _operations.RepositoryManager.GenerateRemoteUserToken(user, remoteAgentId, cancellationToken);
 
 		    var dbRemoteAgent = new DexihRemoteAgent()
 		    {
@@ -974,9 +975,9 @@ namespace dexih.api.Controllers
 			    HashedToken = HashString.CreateHash(token)
 		    };
 		    
-		    await _operations.RepositoryManager.SaveRemoteAgent(user.Id, dbRemoteAgent);
+		    await _operations.RepositoryManager.SaveRemoteAgent(user.Id, dbRemoteAgent, cancellationToken);
 
-		    await _operations.BroadcastUsersMessageAsync(new [] { user.Id}, "remoteAgent-update", dbRemoteAgent);
+		    await _operations.BroadcastUsersMessageAsync(new [] { user.Id}, "remoteAgent-update", dbRemoteAgent, cancellationToken);
 
 		    return new RemoteAgentUserToken
 		    {
@@ -989,28 +990,28 @@ namespace dexih.api.Controllers
 	    // POST: /Account/GetUserToken
 	    [HttpPost("[action]")]
 	    [ValidateAntiForgeryToken]
-	    public async Task<RemoteAgentUserToken> RefreshRemoteAgentToken([FromBody] long remoteAgentKey)
+	    public async Task<RemoteAgentUserToken> RefreshRemoteAgentToken([FromBody] long remoteAgentKey, CancellationToken cancellationToken)
 	    {
-		    var user = await GetApplicationUser();
+		    var user = await GetApplicationUser(cancellationToken);
 
 		    if (user == null)
 		    {
 			    throw new AccountControllerException("The create user token failed.");
 		    }
 
-		    var dbRemoteAgent = await _operations.RepositoryManager.GetRemoteAgent(remoteAgentKey);
+		    var dbRemoteAgent = await _operations.RepositoryManager.GetRemoteAgent(remoteAgentKey, cancellationToken);
 
-		    var userToken = await _operations.RepositoryManager.GenerateRemoteUserToken(user, dbRemoteAgent.RemoteAgentId);
+		    var userToken = await _operations.RepositoryManager.GenerateRemoteUserToken(user, dbRemoteAgent.RemoteAgentId, cancellationToken);
 			
 		    // hash the token so that it's not stored in plain text.
 		    var hashedToken = HashString.CreateHash(userToken);
 
 		    dbRemoteAgent.HashedToken = hashedToken;
-		    await _operations.RepositoryManager.SaveRemoteAgent(user.Id, dbRemoteAgent);
+		    await _operations.RepositoryManager.SaveRemoteAgent(user.Id, dbRemoteAgent, cancellationToken);
 		    
 	    
 		    // disconnect any running agents with this id
-		    await _remoteAgents.RestartAgents(user.Id, new [] {remoteAgentKey}, true, _operations.RepositoryManager);
+		    await _remoteAgents.RestartAgents(user.Id, new [] {remoteAgentKey}, true, _operations.RepositoryManager, cancellationToken);
 
 		    return new RemoteAgentUserToken
 		    {
@@ -1023,9 +1024,9 @@ namespace dexih.api.Controllers
 	    // POST: /Account/RevokeUserToken
 	    [HttpPost("[action]")]
 	    [ValidateAntiForgeryToken]
-	    public async Task RemoveRemoteAgents([FromBody] IEnumerable<long> remoteAgentKeys)
+	    public async Task RemoveRemoteAgents([FromBody] IEnumerable<long> remoteAgentKeys, CancellationToken cancellationToken)
 	    {
-		    var user = await GetApplicationUser();
+		    var user = await GetApplicationUser(cancellationToken);
 		    if (user == null)
 		    {
 			    throw new AccountControllerException("The remove user token failed.");
@@ -1037,11 +1038,11 @@ namespace dexih.api.Controllers
 		    {
 			    try
 			    {
-				    await _operations.RepositoryManager.DeleteRemoteAgent(user, remoteAgentKey);
+				    await _operations.RepositoryManager.DeleteRemoteAgent(user, remoteAgentKey, cancellationToken);
 		    
 				    // disconnect any running agents.
-				    await _remoteAgents.RestartAgents(user.Id, new [] {remoteAgentKey}, true, _operations.RepositoryManager);
-				    await _operations.BroadcastUsersMessageAsync(new [] { user.Id}, "remoteAgent-deleteKey", remoteAgentKey);
+				    await _remoteAgents.RestartAgents(user.Id, new [] {remoteAgentKey}, true, _operations.RepositoryManager, cancellationToken);
+				    await _operations.BroadcastUsersMessageAsync(new [] { user.Id}, "remoteAgent-deleteKey", remoteAgentKey, cancellationToken);
 			    }
 			    catch (Exception ex)
 			    {
@@ -1094,9 +1095,9 @@ namespace dexih.api.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task LogError([FromBody] LogError logError)
+        public async Task LogError([FromBody] LogError logError, CancellationToken cancellationToken)
         {
-	        var user = await GetApplicationUser();
+	        var user = await GetApplicationUser(cancellationToken);
 	        _errorLogger.Log(logError.message, logError.details, logError.context, logError.url, user?.Email??"Unknown");
         }
 	    
@@ -1106,12 +1107,12 @@ namespace dexih.api.Controllers
 	    /// <returns></returns>
 	    [HttpPost("[action]")]
 	    //[ValidateHub(DexihHubUser.EPermission.User)]
-	    public async Task CancelTasks([FromBody] ManagedTask[] tasks)
+	    public async Task CancelTasks([FromBody] ManagedTask[] tasks, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubRunDatalinks, "HubController.CancelTasks {references}", string.Join(",", tasks.Select(c=>c.Reference)));
 
 		    var repositoryManager = _operations.RepositoryManager;
-		    await _remoteAgents.CancelTasks(tasks, repositoryManager);
+		    await _remoteAgents.CancelTasks(tasks, repositoryManager, cancellationToken);
 	    }
 
 
@@ -1122,9 +1123,9 @@ namespace dexih.api.Controllers
 	    /// <returns></returns>
 	    [HttpPost("[action]")]
 	    //[ValidateHub(DexihHubUser.EPermission.User)]
-	    public async Task RestartAgents([FromBody] RestartAgentsParameter restartAgents)
+	    public async Task RestartAgents([FromBody] RestartAgentsParameter restartAgents, CancellationToken cancellationToken)
 	    {
-		    var user = await GetApplicationUser();
+		    var user = await GetApplicationUser(cancellationToken);
 		    if (user == null)
 		    {
 			    throw new AccountControllerException("The remove user token failed.");
@@ -1133,7 +1134,7 @@ namespace dexih.api.Controllers
 		    _logger.LogTrace(LoggingEvents.HubRestartAgent, "HubController.HubRestartAgent {references}", string.Join(",", restartAgents.InstanceIds));
 
 		    var repositoryManager = _operations.RepositoryManager;
-		    await _remoteAgents.RestartAgents(user.Id, restartAgents.InstanceIds, restartAgents.Force, repositoryManager);
+		    await _remoteAgents.RestartAgents(user.Id, restartAgents.InstanceIds, restartAgents.Force, repositoryManager, cancellationToken);
 	    }
 	    
     }
