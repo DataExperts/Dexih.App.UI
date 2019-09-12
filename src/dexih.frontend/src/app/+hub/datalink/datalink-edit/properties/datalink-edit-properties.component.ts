@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DexihDatalink, HubCache, eConnectionPurpose, datalinkTypes } from '../../../hub.models';
 import { HubService } from '../../../hub.service';
 import { AuthService } from '../../../../+auth/auth.service';
 import { DatalinkEditService } from '../datalink-edit.service';
-import { Observable, Subscription, combineLatest} from 'rxjs';
+import { Subscription, combineLatest} from 'rxjs';
 import { FormGroup } from '@angular/forms';
+import { eConnectionPurpose, eDatalinkTypeItems } from '../../../../shared/shared.models';
 
 @Component({
     selector: 'dexih-datalink-edit-properties-form',
@@ -14,21 +14,18 @@ import { FormGroup } from '@angular/forms';
 export class DatalinkEditPropertiesComponent implements OnInit, OnDestroy {
     public datalinkForm: FormGroup;
 
-    private hubCache: HubCache;
     public pageTitle: string;
     public message: string;
 
     private _subscription: Subscription;
 
     public eConnectionPurpose = eConnectionPurpose;
-    datalinkTypes = datalinkTypes;
+    eDatalinkTypeItems = eDatalinkTypeItems;
 
     constructor(
         private hubService: HubService,
-        private authService: AuthService,
         public editDatalinkService: DatalinkEditService,
-        private route: ActivatedRoute,
-        private router: Router) {
+        private route: ActivatedRoute) {
     }
 
     ngOnInit() {
@@ -40,7 +37,6 @@ export class DatalinkEditPropertiesComponent implements OnInit, OnDestroy {
                 this.editDatalinkService.hubFormsService.getCurrentFormObservable()
             ).subscribe(result => {
                 this.pageTitle = result[0]['pageTitle'];
-                this.hubCache = result[2];
                 this.datalinkForm = result[3];
             });
         } catch (e) {

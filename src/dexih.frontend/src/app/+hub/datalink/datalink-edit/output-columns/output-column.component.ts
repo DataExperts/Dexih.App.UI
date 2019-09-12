@@ -1,14 +1,14 @@
 import { Component, Input, Output, OnInit, OnChanges, EventEmitter, OnDestroy } from '@angular/core';
 import { HubService } from '../../../hub.service';
 import { DatalinkEditService } from '../datalink-edit.service';
-import { HubCache, DexihDatalinkColumn, DexihTable, eMappingStatus,
-    MappingStatusInfo, lineageMappingStatuses, impactMappingStatuses } from '../../../hub.models';
-import { eObjectType, eObjectUse, ColumnUsageNode } from '../../../hub.lineage.models';
+import { HubCache, eMappingStatus, MappingStatusInfo, lineageMappingStatuses, impactMappingStatuses } from '../../../hub.models';
+import { eObjectUse, ColumnUsageNode, eDatalinkObjectType } from '../../../hub.lineage.models';
 import { Subscription, combineLatest} from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { LogFactory, eLogLevel } from '../../../../../logging';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../../+auth/auth.service';
+import { DexihDatalinkColumn, DexihTable } from '../../../../shared/shared.models';
 
 
 @Component({
@@ -80,7 +80,7 @@ export class OutputColumnComponent implements OnInit, OnDestroy, OnChanges {
     refreshStatus() {
         if (this.datalinkForm) {
             let columnUsage = new ColumnUsageNode(
-                eObjectType.Transform,
+                eDatalinkObjectType.Transform,
                 eObjectUse.Target,
                 this.datalinkForm.value,
                 this.column,

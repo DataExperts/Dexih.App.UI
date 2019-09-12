@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { TransformProperties } from '../../hub.models';
 import { transformTypes } from '../../hub.remote.models';
+import { TransformProperties } from '../../../shared/shared.models';
 
 @Component({
     selector: 'transform-properties-item',

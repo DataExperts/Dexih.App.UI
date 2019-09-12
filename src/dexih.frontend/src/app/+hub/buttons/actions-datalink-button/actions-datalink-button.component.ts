@@ -1,11 +1,9 @@
 import { Component, Input, OnDestroy, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription} from 'rxjs';
-
-import { AuthService } from '../../../+auth/auth.service';
-import { DexihDatajob, DexihDatalink, HubCache, DexihHub, DexihTable, eViewSource, eSharedDataObjectType } from '../../hub.models';
+import { HubCache } from '../../hub.models';
 import { HubService } from '../../hub.service';
-import { DownloadObject, eDownloadFormat } from '../../hub.query.models';
+import { DexihDatalink, DexihTable, DexihDatajob, DexihHub, DownloadObject, eSourceType, eDownloadFormat, eDataObjectType } from '../../../shared/shared.models';
 
 @Component({
     selector: 'actions-datalink-button',
@@ -100,7 +98,7 @@ export class ActionsDatalinkButtonComponent implements OnInit, OnChanges, OnDest
     }
 
     shareItems(isShared: boolean) {
-        this.hubService.shareItems(this.datalinks.map(c => c.key), eSharedDataObjectType.Datalink, isShared);
+        this.hubService.shareItems(this.datalinks.map(c => c.key), eDataObjectType.Datalink, isShared);
     }
 
     async runDatalinks(truncateTarget: boolean, resetIncremental: boolean) {
@@ -128,7 +126,7 @@ export class ActionsDatalinkButtonComponent implements OnInit, OnChanges, OnDest
     }
 
     export() {
-        const hub = new DexihHub(this.hubCache.hub.hubKey, '');
+        const hub = this.hubService.createHub(this.hubCache.hub.hubKey, '');
         this.datalinks.forEach(datalink => { this.hubCache.cacheAddDatalink(datalink.key, hub); });
 
         let filename = this.datalinks.length === 1 ? 'Datalink - ' + this.datalinks[0].name + '.json' : 'datalinks.json';
@@ -142,7 +140,7 @@ export class ActionsDatalinkButtonComponent implements OnInit, OnChanges, OnDest
         this.datalinks.forEach(c => {
             let downloadObject = new DownloadObject();
             downloadObject.objectKey = c.key;
-            downloadObject.objectType = eViewSource.Datalink;
+            downloadObject.objectType = eDataObjectType.Datalink;
             downloadItems.push(downloadObject);
         });
         this.hubService.downloadData(downloadItems, true, eDownloadFormat.Csv)

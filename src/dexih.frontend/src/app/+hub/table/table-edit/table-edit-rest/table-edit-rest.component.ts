@@ -1,18 +1,13 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import {
-    DexihConnection, DexihTable, DexihTableColumn, HubCache, formatTypes,
-    eDeltaType,
-    eCacheStatus,
-    ConnectionTables
-} from '../../../hub.models';
 import { HubService } from '../../../hub.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Location } from '@angular/common';
 import { FormControl, FormGroup, FormArray } from '@angular/forms';
 import { HubFormsService } from '../../../hub.forms.service';
-import { eTypeCode } from '../../../hub.remote.models';
+import { DexihConnection, DexihTable, eTypeCode, DexihTableColumn, eDeltaType } from '../../../../shared/shared.models';
+import { HubCache, ConnectionTables, formatTypes, eCacheStatus } from '../../../hub.models';
 
 @Component({
     selector: 'dexih-table-edit-rest',

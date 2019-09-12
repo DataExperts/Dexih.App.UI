@@ -1,17 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import {
-    DexihDatalink, DexihDatalinkTransform, DexihDatalinkTransformItem, DexihTable, DexihTableColumn, HubCache,
-    eDatalinkTransformItemType,
-    eCacheStatus
-}
-    from '../../../hub.models';
 import { HubService } from '../../../hub.service';
 import { DatalinkEditService } from '../datalink-edit.service';
 import { Observable, Subscription, combineLatest} from 'rxjs';
 import { AuthService } from '../../../../+auth/auth.service';
 import { FormGroup, FormArray } from '@angular/forms';
-import { RemoteLibraries, eTransformType } from '../../../hub.remote.models';
+import { HubCache } from '../../../hub.models';
+import { DexihTable, DexihTableColumn, eTransformType, RemoteLibraries } from '../../../../shared/shared.models';
 
 @Component({
 

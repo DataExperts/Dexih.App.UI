@@ -1,11 +1,12 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { HubService } from '../../../hub.service';
 import { DatalinkEditService } from '../datalink-edit.service';
-import { HubCache, DexihDatalinkColumn, eMappingStatus,
+import { HubCache, eMappingStatus,
     MappingStatusInfo, impactMappingStatuses, lineageMappingStatuses } from '../../../hub.models';
-import { eObjectType, eObjectUse, ColumnUsageNode, InputOutputColumns } from '../../../hub.lineage.models';
+import { eObjectUse, ColumnUsageNode, InputOutputColumns, eDatalinkObjectType } from '../../../hub.lineage.models';
 import { Subscription, combineLatest} from 'rxjs';
 import { FormGroup } from '@angular/forms';
+import { DexihDatalinkColumn } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -45,7 +46,7 @@ export class InputColumnComponent implements OnInit, OnDestroy {
                 let datalinkTransform = this.datalinkTransformForm.value;
 
                 let columnUsage: ColumnUsageNode = new ColumnUsageNode(
-                    eObjectType.Transform,
+                    eDatalinkObjectType.Transform,
                     eObjectUse.Target,
                     this.datalinkForm.value,
                     this.column,

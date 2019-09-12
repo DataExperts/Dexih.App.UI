@@ -3,8 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, combineLatest} from 'rxjs';
 
 import { AuthService } from '../../../+auth/auth.service';
-import { DexihView, eSharedDataObjectType, HubCache } from '../../hub.models';
+import { HubCache } from '../../hub.models';
 import { HubService } from '../../hub.service';
+import { DexihView, eDataObjectType } from '../../../shared/shared.models';
 
 @Component({
     selector: 'actions-view-button',
@@ -42,7 +43,7 @@ export class ActionsViewButtonComponent implements OnInit, OnDestroy {
         }
 
         shareItems(isShared: boolean) {
-            this.hubService.shareItems(this.views.map(c => c.key), eSharedDataObjectType.View, isShared);
+            this.hubService.shareItems(this.views.map(c => c.key), eDataObjectType.View, isShared);
         }
 
 

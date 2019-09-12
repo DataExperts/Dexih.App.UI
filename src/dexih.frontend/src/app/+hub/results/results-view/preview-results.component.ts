@@ -1,11 +1,9 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { AuthService } from '../../../+auth/auth.service';
-import { TransformWriterResult, eDeltaType, HubCache, DexihTable, DexihDatalink, eViewSource, PreviewResults } from '../../hub.models';
-import { SelectQuery, Filter, eCompare, eAndOr, DownloadObject, eDownloadFormat } from '../../hub.query.models';
+import { PreviewResults, HubCache } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { Subscription} from 'rxjs';
-import { eTypeCode } from '../../hub.remote.models';
 import { PromiseWithCancel, CancelToken } from '../../../+auth/auth.models';
+import { TransformWriterResult, DexihDatalink, DexihTable, SelectQuery, eDeltaType, Filter, eCompare, eAndOr, eTypeCode, DownloadObject, eSourceType, eDownloadFormat, DexihDatalinkColumn, TableColumn, eDataObjectType, DexihTableColumn } from '../../../shared/shared.models';
 
 @Component({
     selector: 'preview-results',
@@ -89,7 +87,8 @@ export class PreviewResultsComponent implements OnInit, OnDestroy {
 
         if (createAuditColumn) {
             let filter = new Filter();
-            filter.column1 = createAuditColumn;
+            filter.column1 = new TableColumn();
+            Object.assign(filter.column1, createAuditColumn);
             filter.operator = eCompare.IsEqual;
             filter.value2 = this.auditResult.auditKey;
             filter.andOr = eAndOr.Or
@@ -99,7 +98,8 @@ export class PreviewResultsComponent implements OnInit, OnDestroy {
 
         if (updateAuditColumn) {
             let filter = new Filter();
-            filter.column1 = updateAuditColumn;
+            filter.column1 = new TableColumn();
+            Object.assign(filter.column1, updateAuditColumn);
             filter.operator = eCompare.IsEqual;
             filter.value2 = this.auditResult.auditKey;
             filter.andOr = eAndOr.Or
@@ -129,7 +129,7 @@ export class PreviewResultsComponent implements OnInit, OnDestroy {
         let selectQuery = this.createSelectQuery();
         let downloadObject = new DownloadObject();
         downloadObject.objectKey = this.targetTable.key;
-        downloadObject.objectType = eViewSource.Table;
+        downloadObject.objectType = eDataObjectType.Table;
         downloadObject.query = selectQuery;
         this.hubService.downloadData([downloadObject], false, eDownloadFormat.Csv)
     }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DexihFileFormat } from '../../hub.models';
+import { DexihFileFormat } from '../../../shared/shared.models';
 
 @Component({
     selector: 'fileFormat-view',

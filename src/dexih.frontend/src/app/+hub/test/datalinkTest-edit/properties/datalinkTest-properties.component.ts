@@ -1,13 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  DexihHubVariable, HubCache, eCacheStatus, DexihDatalinkTest, DexihDatalinkTestStep
-} from '../../../hub.models';
 import { HubService } from '../../../hub.service';
 import { AuthService } from '../../../../+auth/auth.service';
 import { Subscription, combineLatest, BehaviorSubject, Observable} from 'rxjs';
 import { HubFormsService } from '../../../hub.forms.service';
 import { FormGroup, FormArray } from '@angular/forms';
+import { HubCache } from '../../../hub.models';
+import { DexihDatalinkTestStep } from '../../../../shared/shared.models';
 
 @Component({
 

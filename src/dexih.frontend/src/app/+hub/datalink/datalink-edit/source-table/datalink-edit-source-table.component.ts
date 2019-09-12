@@ -1,15 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import {
-    DexihDatalinkTable, DexihDatalinkColumn, HubCache,
-    eSourceType, sourceTypes, eMappingStatus, impactMappingStatuses, DexihDatalink
-} from '../../../hub.models';
+import { HubCache, sourceTypes, eMappingStatus, impactMappingStatuses } from '../../../hub.models';
 import { HubService } from '../../../hub.service';
 import { Observable, Subscription, BehaviorSubject , combineLatest} from 'rxjs';
 import { DatalinkEditService } from '../datalink-edit.service';
-import { eObjectType, eObjectUse, ColumnUsageNode } from '../../../hub.lineage.models';
-import { AuthService } from '../../../../+auth/auth.service';
+import { eObjectUse, ColumnUsageNode, eDatalinkObjectType } from '../../../hub.lineage.models';
 import { FormGroup, FormArray } from '@angular/forms';
+import { DexihDatalinkTable, eSourceType, DexihDatalinkColumn } from '../../../../shared/shared.models';
 
 @Component({
     selector: 'dexih-datalink-edit-source-table-form',
@@ -96,7 +93,7 @@ export class DatalinkEditSourceTableComponent implements OnInit, OnDestroy {
 
     columnStatus(column: DexihDatalinkColumn): string {
         let columnUsage: ColumnUsageNode = new ColumnUsageNode(
-            eObjectType.SourceTable,
+            eDatalinkObjectType.SourceTable,
             eObjectUse.Source,
             this.datalinkForm.value,
             column,

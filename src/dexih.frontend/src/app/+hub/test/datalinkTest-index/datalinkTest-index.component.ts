@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { HubService } from '../../hub.service';
-import { DexihHubVariable, HubCache, eSharedObjectType, DexihHub, eCacheStatus, DexihDatalinkTest } from '../../hub.models';
 import { AuthService } from '../../../+auth/auth.service';
 import { Observable, Subscription, BehaviorSubject, combineLatest} from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
+import { HubCache } from '../../hub.models';
+import { DexihDatalinkTest, DexihHub, eSharedObjectType } from '../../../shared/shared.models';
 
 @Component({
   selector: 'datalink-test',
@@ -88,7 +89,7 @@ export class DatalinkTestIndexComponent implements OnInit, OnDestroy {
 
     export(tests: Array<DexihDatalinkTest>) {
         const cache = this.hubCache;
-        const hub = new DexihHub(this.hubCache.hub.hubKey, '');
+        const hub = this.hubService.createHub(this.hubCache.hub.hubKey, '');
         hub.dexihDatalinkTests = tests;
         let filename = 'datalink_tests.json';
 

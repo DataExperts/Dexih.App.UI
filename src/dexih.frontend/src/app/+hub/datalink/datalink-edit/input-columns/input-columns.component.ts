@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnDestroy, OnChanges } from '@angular/core';
-import { DexihDatalinkColumn } from '../../../hub.models';
 import { Subscription} from 'rxjs';
 import { FormGroup } from '@angular/forms';
+import { DexihDatalinkColumn } from '../../../../shared/shared.models';
 
 @Component({
 

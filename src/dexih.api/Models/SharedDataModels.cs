@@ -21,7 +21,7 @@ namespace dexih.api.Models
     {
         public long HubKey { get; set; }
         public long ObjectKey { get; set; }
-        public SharedData.EObjectType ObjectType { get; set; }
+        public EDataObjectType ObjectType { get; set; }
         public SelectQuery SelectQuery { get; set; }
         public string RemoteAgentId { get; set; }
         public DownloadUrl DownloadUrl { get; set; }

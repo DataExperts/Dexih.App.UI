@@ -1,15 +1,11 @@
 import { HostListener, Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  DexihDatalinkTest, HubCache,
-  eCacheStatus,
-  eImportAction,
-  eSharedObjectType
-} from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { AuthService } from '../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { HubFormsService } from '../../hub.forms.service';
+import { HubCache, eCacheStatus } from '../../hub.models';
+import { DexihDatalinkTest } from '../../../shared/shared.models';
 
 @Component({
   selector: 'dexih-datalinkTest-edit-form',

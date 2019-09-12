@@ -20,7 +20,7 @@ namespace dexih.api.Models
     public class UserPermissions
     {
         public long HubKey { get; set; }
-        public DexihHubUser.EPermission Permission { get; set; }
+        public EPermission Permission { get; set; }
         public string[] Emails { get; set; }
         public bool SendInvites { get; set; }
     }
@@ -34,7 +34,7 @@ namespace dexih.api.Models
 
     public class GetHubCacheResult
     {
-        public DexihHubUser.EPermission Permission { get; set; }
+        public EPermission Permission { get; set; }
         public DexihHub Hub { get; set; }
     }
 
@@ -95,7 +95,7 @@ namespace dexih.api.Models
     public class ShareItems: HubModelBase
     {
         public long[] Keys { get; set; }
-        public SharedData.EObjectType ObjectType { get; set; }
+        public EDataObjectType ObjectType { get; set; }
         public bool IsShared { get; set; }
     }
 
@@ -248,7 +248,7 @@ namespace dexih.api.Models
     {
         public long[] SourceTableKeys { get; set; }
         public string DatalinkName { get; set; }
-        public DexihDatalink.EDatalinkType DatalinkType { get; set; }
+        public EDatalinkType DatalinkType { get; set; }
         public long? TargetConnectionKey { get; set; }
         public long? TargetTableKey { get; set; }
         public string TargetTableName { get; set; }

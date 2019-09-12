@@ -1,8 +1,7 @@
 import { Component, Input, Output, OnInit, OnChanges, OnDestroy, EventEmitter } from '@angular/core';
-import { DexihDatalinkColumn } from '../../../hub.models';
 import { Subscription } from 'rxjs';
 import { FormGroup } from '@angular/forms';
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { DexihDatalinkColumn } from '../../../../shared/shared.models';
 
 @Component({
 

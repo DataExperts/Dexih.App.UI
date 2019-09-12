@@ -27,6 +27,7 @@ using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Caching.Memory;
+using ProtoBuf;
 
 namespace dexih.api.Controllers
 {
@@ -1058,21 +1059,57 @@ namespace dexih.api.Controllers
 		    
 	    }
 	    
+     //   [HttpGet("[action]")]
+	    //[AllowAnonymous]
+     //   [ResponseCache(Duration = 3600)]
+     //   public CacheManager GetGlobalCache()
+     //   {
+     //       try
+     //       {
+     //           return _cache.GetOrCreate($"GLOBAL_CACHE", entry =>
+     //           {
+	    //            _logger.LogInformation("Loading global cache.");
+	                
+	    //            var version = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
+	    //            var buildDate = System.IO.File.GetLastWriteTime(Assembly.GetExecutingAssembly().Location);
+
+	                
+     //               var cache = new CacheManager(0, "");
+     //               var repositoryManager = _operations.RepositoryManager;
+     //               var returnValue = cache.LoadGlobal(version, buildDate, repositoryManager.DbContext);
+     //               cache.GoogleClientId = _operations.Config.GoogleClientId;
+     //               cache.MicrosoftClientId = _operations.Config.MicrosoftClientId;
+     //               cache.GoogleMapsAPIKey = _operations.Config.GoogleMapsAPIKey;
+
+     //               if (returnValue)
+     //               {
+	    //                return cache;
+     //               }
+
+     //               throw new AccountControllerException("Could not get the global cache");
+     //           });
+     //       }
+     //       catch (Exception ex)
+     //       {
+     //           throw new AccountControllerException($"Could not get the global cache. {ex.Message}", ex);
+     //       }
+     //   }
+
         [HttpGet("[action]")]
-	    [AllowAnonymous]
-        [ResponseCache(Duration = 3600)]
-        public CacheManager GetGlobalCache()
+        [AllowAnonymous]
+        // [ResponseCache(Duration = 3600)]
+        public ActionResult GetGlobalCache()
         {
             try
             {
                 return _cache.GetOrCreate($"GLOBAL_CACHE", entry =>
                 {
-	                _logger.LogInformation("Loading global cache.");
-	                
-	                var version = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
-	                var buildDate = System.IO.File.GetLastWriteTime(Assembly.GetExecutingAssembly().Location);
+                    _logger.LogInformation("Loading global cache.");
 
-	                
+                    var version = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
+                    var buildDate = System.IO.File.GetLastWriteTime(Assembly.GetExecutingAssembly().Location);
+
+
                     var cache = new CacheManager(0, "");
                     var repositoryManager = _operations.RepositoryManager;
                     var returnValue = cache.LoadGlobal(version, buildDate, repositoryManager.DbContext);
@@ -1080,12 +1117,10 @@ namespace dexih.api.Controllers
                     cache.MicrosoftClientId = _operations.Config.MicrosoftClientId;
                     cache.GoogleMapsAPIKey = _operations.Config.GoogleMapsAPIKey;
 
-                    if (returnValue)
-                    {
-	                    return cache;
-                    }
-
-                    throw new AccountControllerException("Could not get the global cache");
+                    var ms = new MemoryStream();
+                    Serializer.Serialize<CacheManager>(ms, cache);
+                    ms.Position = 0;
+                    return File(ms.ToArray(), "application/octet-stream", "globalCache");
                 });
             }
             catch (Exception ex)
@@ -1106,7 +1141,7 @@ namespace dexih.api.Controllers
 	    /// </summary>
 	    /// <returns></returns>
 	    [HttpPost("[action]")]
-	    //[ValidateHub(DexihHubUser.EPermission.User)]
+	    //[ValidateHub(EPermission.User)]
 	    public async Task CancelTasks([FromBody] ManagedTask[] tasks, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubRunDatalinks, "HubController.CancelTasks {references}", string.Join(",", tasks.Select(c=>c.Reference)));
@@ -1122,7 +1157,7 @@ namespace dexih.api.Controllers
 	    /// </summary>
 	    /// <returns></returns>
 	    [HttpPost("[action]")]
-	    //[ValidateHub(DexihHubUser.EPermission.User)]
+	    //[ValidateHub(EPermission.User)]
 	    public async Task RestartAgents([FromBody] RestartAgentsParameter restartAgents, CancellationToken cancellationToken)
 	    {
 		    var user = await GetApplicationUser(cancellationToken);

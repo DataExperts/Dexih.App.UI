@@ -1,12 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  DexihHubVariable, HubCache, eCacheStatus
-} from '../../hub.models';
+import { HubCache, eCacheStatus } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { AuthService } from '../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { HubFormsService } from '../../hub.forms.service';
+import { DexihHubVariable } from '../../../shared/shared.models';
 
 @Component({
 

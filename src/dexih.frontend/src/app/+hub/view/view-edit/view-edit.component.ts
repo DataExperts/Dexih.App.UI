@@ -1,16 +1,13 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  HubCache, eCacheStatus, DexihView, eSourceType, DexihDatalink,
-  ChartConfig, InputColumn, DexihColumnBase, eViewType, ConnectionTables, eViewSource
-} from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { Subscription, combineLatest, merge } from 'rxjs';
 import { HubFormsService } from '../../hub.forms.service';
 import { AuthService } from '../../../+auth/auth.service';
-import { DownloadObject, SelectQuery } from '../../hub.query.models';
 import { InputOutputColumns } from '../../hub.lineage.models';
 import { CancelToken } from '../../../+auth/auth.models';
+import { HubCache, ConnectionTables, eCacheStatus } from '../../hub.models';
+import { eSourceType, eViewType, DexihDatalink, InputColumn, DexihColumnBase, SelectQuery, DexihView, DownloadObject, eDataObjectType } from '../../../shared/shared.models';
 
 @Component({
   selector: 'dexih-view-edit-form',
@@ -205,7 +202,7 @@ export class ViewEditComponent implements OnInit, OnDestroy {
           }
           return {
             datalinkKey: 0, datalinkName: '',
-            name: c.name, logicalName: c.logicalName, dataType: c.dataType, rank: c.rank, value: c.defaultValue
+            name: c.name, logicalName: c.logicalName, dataType: c.dataType, rank: c.rank, value: c.defaultValue, defaultValue: c.defaultValue
           };
         }
         );
@@ -235,7 +232,7 @@ export class ViewEditComponent implements OnInit, OnDestroy {
           }
           return {
             datalinkKey: datalink.key, datalinkName: datalink.name,
-            name: c.name, logicalName: c.logicalName, dataType: c.dataType, rank: c.rank, value: value
+            name: c.name, logicalName: c.logicalName, dataType: c.dataType, rank: c.rank, value: value, defaultValue: c.defaultValue
           };
         });
       } else {
@@ -288,13 +285,13 @@ export class ViewEditComponent implements OnInit, OnDestroy {
   download(format) {
     let view = <DexihView>this.formsService.currentForm.value;
     let downloadObject = new DownloadObject();
-    if (view.sourceType === eViewSource.Table) {
+    if (view.sourceType === eDataObjectType.Table) {
       downloadObject.objectKey = view.sourceDatalinkKey;
-      downloadObject.objectType = eViewSource.Datalink;
+      downloadObject.objectType = eDataObjectType.Datalink;
     }
-    if (view.sourceType === eViewSource.Table) {
+    if (view.sourceType === eDataObjectType.Table) {
       downloadObject.objectKey = view.sourceTableKey;
-      downloadObject.objectType = eViewSource.Table;
+      downloadObject.objectType = eDataObjectType.Table;
     }
 
     downloadObject.query = this.selectQuery;

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HubService } from '../hub.service';
 import { AuthService } from '../../+auth/auth.service';
-import { HubCache, SearchResult, eObjectType, ObjectTypes } from '../hub.models';
+import { HubCache, SearchResult, eSearchObjectType, SearchObjectTypes } from '../hub.models';
 import { Observable, Subscription, combineLatest} from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
@@ -20,8 +20,8 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     public searchForm: FormGroup;
 
-    objectTypes = ObjectTypes;
-    eObjectType = eObjectType;
+    searchObjectTypes = SearchObjectTypes;
+    eSearchObjectType = eSearchObjectType;
 
     searchResults: Array<SearchResult>;
 

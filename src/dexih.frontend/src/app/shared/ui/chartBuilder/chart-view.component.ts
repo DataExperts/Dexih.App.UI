@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, OnChanges, OnDestroy, AfterViewInit } from '@angular/core';
-import { ChartConfig, eChartType } from '../../../+hub/hub.models';
 import { eInputFormat, ChartTypes } from './chart-groups';
 import { colorSets } from '@swimlane/ngx-charts/release/utils';
 import { Subscription, Observable } from 'rxjs';
 import { ResizedEvent } from 'angular-resize-event';
+import { ChartConfig, eChartType } from '../../shared.models';
 
 @Component({
     selector: 'chart-view',

@@ -1,4 +1,4 @@
-import { eChartType } from '../../../+hub/hub.models';
+import { eChartType } from "../../shared.models"
 
 export enum eInputFormat {
     SingleSeries,

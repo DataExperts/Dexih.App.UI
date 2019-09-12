@@ -1,16 +1,12 @@
 import { Component, Input, Output, ViewChild, OnInit, OnChanges, OnDestroy, EventEmitter, ElementRef } from '@angular/core';
-import {
-    DexihDatalinkTransformItem,
-    eDatalinkTransformItemType, eTransformFunctionType,
-    DexihDatalinkColumn, DexihDatalinkTransform} from '../../../hub.models';
 import { Observable, BehaviorSubject, Subscription, combineLatest } from 'rxjs';
 import { HubService } from '../../../hub.service';
 import { DatalinkEditService } from '../datalink-edit.service';
 import { AuthService } from '../../../../+auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormArray } from '@angular/forms';
-import { eTransformType, eTypeCode } from '../../../hub.remote.models';
 import { InputOutputColumns } from '../../../hub.lineage.models';
+import { eFunctionType, eTransformType, eTransformItemType, DexihDatalinkTransformItem, DexihDatalinkTransform, DexihDatalinkColumn, eTypeCode } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -50,7 +46,7 @@ export class MappingComponent implements OnInit, OnDestroy, OnChanges {
     private _tableData = new BehaviorSubject<Array<any>>(null);
     tableData: Observable<Array<any>> = this._tableData.asObservable();
 
-    public functionType: eTransformFunctionType;
+    public functionType: eFunctionType;
     public transformType: eTransformType;
     public eTransformType = eTransformType;
 
@@ -118,48 +114,48 @@ export class MappingComponent implements OnInit, OnDestroy, OnChanges {
 
                 if (this.allowJoinNode) {
                     filteredItems = filteredItems.concat(items.controls
-                        .filter(d => d.value.transformItemType === eDatalinkTransformItemType.JoinNode));
+                        .filter(d => d.value.transformItemType === eTransformItemType.JoinNode));
                 }
 
                 if (this.allowGroup) {
                     filteredItems = filteredItems.concat(items.controls
-                        .filter(d => d.value.transformItemType === eDatalinkTransformItemType.Column));
+                        .filter(d => d.value.transformItemType === eTransformItemType.Column));
                 }
 
                 if (this.allowStandard || this.allowJoin) {
                     filteredItems = filteredItems.concat(items.controls
-                        .filter(d => d.value.transformItemType === eDatalinkTransformItemType.BuiltInFunction
-                            || d.value.transformItemType === eDatalinkTransformItemType.CustomFunction));
+                        .filter(d => d.value.transformItemType === eTransformItemType.BuiltInFunction
+                            || d.value.transformItemType === eTransformItemType.CustomFunction));
                 }
 
                 if (this.allowAggregate) {
                     filteredItems = filteredItems.concat(items.controls
-                        .filter(d => d.value.transformItemType === eDatalinkTransformItemType.AggregatePair));
+                        .filter(d => d.value.transformItemType === eTransformItemType.AggregatePair));
                 }
 
                 if (this.allowMapping) {
                     filteredItems = filteredItems.concat(items.controls
-                        .filter(d => d.value.transformItemType === eDatalinkTransformItemType.ColumnPair));
+                        .filter(d => d.value.transformItemType === eTransformItemType.ColumnPair));
                 }
 
                 if (this.allowCondition) {
                     filteredItems = filteredItems.concat(items.controls
-                        .filter(d => d.value.transformItemType === eDatalinkTransformItemType.FilterPair));
+                        .filter(d => d.value.transformItemType === eTransformItemType.FilterPair));
                 }
 
                 if (this.allowJoin) {
                     filteredItems = filteredItems.concat(items.controls
-                        .filter(d => d.value.transformItemType === eDatalinkTransformItemType.JoinPair));
+                        .filter(d => d.value.transformItemType === eTransformItemType.JoinPair));
                 }
 
                 if (this.allowRow) {
                     filteredItems = filteredItems.concat(items.controls
-                        .filter(d => d.value.transformItemType === eDatalinkTransformItemType.UnGroup));
+                        .filter(d => d.value.transformItemType === eTransformItemType.UnGroup));
                 }
 
                 if (this.allowSort) {
                     filteredItems = filteredItems.concat(items.controls
-                        .filter(d => d.value.transformItemType === eDatalinkTransformItemType.Sort));
+                        .filter(d => d.value.transformItemType === eTransformItemType.Sort));
                 }
 
                 filteredItems.sort((a, b) => a.value.position - b.value.position).forEach(item => {
@@ -192,29 +188,29 @@ export class MappingComponent implements OnInit, OnDestroy, OnChanges {
         let transformItemType = itemForm.value.transformItemType;
 
         switch (transformItemType) {
-            case eDatalinkTransformItemType.BuiltInFunction:
+            case eTransformItemType.BuiltInFunction:
                 this.router.navigate(
                     ['standard-function-edit', this.functionType, key],
                     { relativeTo: this.route.parent });
                 break;
-            case eDatalinkTransformItemType.CustomFunction:
+            case eTransformItemType.CustomFunction:
                 this.router.navigate(
                     ['custom-function-edit', this.functionType, key],
                     { relativeTo: this.route.parent });
                 break;
-            case eDatalinkTransformItemType.Column:
-            case eDatalinkTransformItemType.JoinNode:
-            case eDatalinkTransformItemType.GroupNode:
-            case eDatalinkTransformItemType.ColumnPair:
-            case eDatalinkTransformItemType.Sort:
-            case eDatalinkTransformItemType.JoinPair:
-            case eDatalinkTransformItemType.FilterPair:
-            case eDatalinkTransformItemType.AggregatePair:
-            case eDatalinkTransformItemType.Series:
+            case eTransformItemType.Column:
+            case eTransformItemType.JoinNode:
+            case eTransformItemType.GroupNode:
+            case eTransformItemType.ColumnPair:
+            case eTransformItemType.Sort:
+            case eTransformItemType.JoinPair:
+            case eTransformItemType.FilterPair:
+            case eTransformItemType.AggregatePair:
+            case eTransformItemType.Series:
                 this.router.navigate(['mapping-edit', transformItemType, key],
                     { relativeTo: this.route.parent });
                 break;
-            case eDatalinkTransformItemType.UnGroup:
+            case eTransformItemType.UnGroup:
                 this.router.navigate(['unGroup-edit', key], { relativeTo: this.route.parent });
                 break;
 }
@@ -232,36 +228,36 @@ export class MappingComponent implements OnInit, OnDestroy, OnChanges {
         });
     }
 
-    private getFunctionType(datalinkTransform: DexihDatalinkTransform): eTransformFunctionType {
-        let functionType: eTransformFunctionType;
+    private getFunctionType(datalinkTransform: DexihDatalinkTransform): eFunctionType {
+        let functionType: eFunctionType;
         switch (datalinkTransform.transformType) {
             case eTransformType.Filter:
-                functionType = eTransformFunctionType.Condition;
+                functionType = eFunctionType.Condition;
                 break;
             case eTransformType.Mapping:
-                functionType = eTransformFunctionType.Mapping;
+                functionType = eFunctionType.Map;
                 break;
             case eTransformType.Join:
-                functionType = eTransformFunctionType.JoinCondition;
+                functionType = eFunctionType.JoinCondition;
                 break;
             case eTransformType.Group:
             case eTransformType.Aggregate:
-                functionType = eTransformFunctionType.Aggregate;
+                functionType = eFunctionType.Aggregate;
                 break;
             case eTransformType.Series:
-                functionType = eTransformFunctionType.Series;
+                functionType = eFunctionType.Series;
                 break;
             case eTransformType.Sort:
-                functionType = eTransformFunctionType.Sort;
+                functionType = eFunctionType.Sort;
                 break;
             case eTransformType.Validation:
-                functionType = eTransformFunctionType.Validation;
+                functionType = eFunctionType.Validate;
                 break;
             case eTransformType.Rows:
-                functionType = eTransformFunctionType.Rows;
+                functionType = eFunctionType.Rows;
                 break;
             case eTransformType.Lookup:
-                functionType = eTransformFunctionType.JoinCondition;
+                functionType = eFunctionType.JoinCondition;
                 break;
             case eTransformType.Delta:
                 break;
@@ -292,7 +288,7 @@ export class MappingComponent implements OnInit, OnDestroy, OnChanges {
 
     createJoinNode() {
         let items = <FormArray>this.datalinkTransformForm.controls.dexihDatalinkTransformItems;
-        if (items.controls.find(d => d.value.transformItemType === eDatalinkTransformItemType.JoinNode)) {
+        if (items.controls.find(d => d.value.transformItemType === eTransformItemType.JoinNode)) {
             this.authService.informationDialog('Can not add node',  'Only one join node can be added.');
             return;
         }
@@ -319,7 +315,7 @@ export class MappingComponent implements OnInit, OnDestroy, OnChanges {
         item.datalinkTransformKey = this.datalinkTransformForm.value.key;
         item.targetDatalinkColumn = outputColumn;
         item.isValid = true;
-        item.transformItemType = eDatalinkTransformItemType.JoinNode;
+        item.transformItemType = eTransformItemType.JoinNode;
 
         let itemForm = this.editDatalinkService.hubFormsService.datalinkDatalinkTransformItemFormGroup(this.datalinkTransformForm, item);
         this.editDatalinkService.insertDatalinkTransformItem(this.datalinkTransformForm, itemForm);
@@ -327,7 +323,7 @@ export class MappingComponent implements OnInit, OnDestroy, OnChanges {
 
     createGroupNode() {
         let items = <FormArray>this.datalinkTransformForm.controls.dexihDatalinkTransformItems;
-        if (items.controls.find(d => d.value.transformItemType === eDatalinkTransformItemType.GroupNode)) {
+        if (items.controls.find(d => d.value.transformItemType === eTransformItemType.GroupNode)) {
             this.authService.informationDialog('Can not add node',  'Only one group node can be added.');
             return;
         }
@@ -344,7 +340,7 @@ export class MappingComponent implements OnInit, OnDestroy, OnChanges {
         item.datalinkTransformKey = this.datalinkTransformForm.value.key;
         item.targetDatalinkColumn = outputColumn;
         item.isValid = true;
-        item.transformItemType = eDatalinkTransformItemType.GroupNode;
+        item.transformItemType = eTransformItemType.GroupNode;
 
         let itemForm = this.editDatalinkService.hubFormsService.datalinkDatalinkTransformItemFormGroup(this.datalinkTransformForm, item);
         this.editDatalinkService.insertDatalinkTransformItem(this.datalinkTransformForm, itemForm);

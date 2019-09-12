@@ -1,13 +1,12 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DexihHub, DexihConnection, HubCache, eConnectionPurpose, connectionPurposes, eCacheStatus } from '../../hub.models';
+import { HubCache, connectionPurposes, eCacheStatus } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { AuthService } from '../../../+auth/auth.service';
-import { Observable ,  Subscription, combineLatest} from 'rxjs';
-import { Location } from '@angular/common';
+import { Subscription, combineLatest} from 'rxjs';
 import { HubFormsService } from '../../hub.forms.service';
 import { LogFactory, eLogLevel } from '../../../../logging';
-import { ConnectionReference, RemoteLibraries, eConnectionCategory } from '../../hub.remote.models';
+import { eConnectionPurpose, eConnectionCategory, ConnectionReference, DexihConnection } from '../../../shared/shared.models';
 
 @Component({
 
@@ -18,9 +17,7 @@ import { ConnectionReference, RemoteLibraries, eConnectionCategory } from '../..
 export class ConnectionEditComponent implements OnInit, OnDestroy {
 
   public connectionKey: number;
-  private connectionTypes: Array<ConnectionReference>;
   private hubCache: HubCache;
-  private remoteLibraries: RemoteLibraries;
   public action: string; // new or edit
   public pageTitle: string;
 
@@ -62,12 +59,10 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
         this.route.data,
         this.route.params,
         this.hubService.getHubCacheObservable(),
-        this.hubService.getRemoteLibrariesObservable()
       ).subscribe(result => {
         let data = result[0];
         let params = result[1];
         this.hubCache = result[2];
-        this.remoteLibraries = result[3];
 
         this.action = data['action'];
         this.pageTitle = data['pageTitle'];
@@ -78,7 +73,6 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
 
         this.variables = this.hubCache.hub.dexihHubVariables.map(c => '{' + c.name + '}');
 
-        if (this.remoteLibraries) {
           if (!this.hubCache || this.hubCache.status !== eCacheStatus.Loaded || this.isLoaded) { return; }
           this.isLoaded = true;
 
@@ -101,7 +95,7 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
                   this.logger.LogC(() => `edit connection with key ${this.connectionKey} not found.`, eLogLevel.Warning);
                 } else {
                   this.updateDatabaseTypes(connection.purpose);
-                  this.connectionReference = this.remoteLibraries.GetConnectionReference(connection);
+                  this.connectionReference = this.hubService.GetConnectionReference(connection);
                   this.formsService.connection(connection);
                   this.logger.LogC(() => `edit connection, form loaded.`, eLogLevel.Trace);
                 }
@@ -110,7 +104,7 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
           }
 
           if (this.action === 'new') {
-            let connection = new DexihConnection('');
+            let connection = new DexihConnection();
             connection.purpose = params['purpose'];
 
             this.logger.LogC(() => `new connection, purpose ${connection.purpose}.`, eLogLevel.Trace);
@@ -125,14 +119,14 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
 
           if (this.action === 'copy') {
 
-            let connection = new DexihConnection('');
+            let connection = new DexihConnection();
 
             let previousConnectionKey = + params['connectionKey'];
             let previousConnection = this.hubCache.hub.dexihConnections.find(c => c.key === previousConnectionKey);
             Object.assign(connection, previousConnection);
             connection.name += ' (copy)';
             connection.key = null;
-            this.connectionReference = this.remoteLibraries.GetConnectionReference(connection);
+            this.connectionReference = this.hubService.GetConnectionReference(connection);
 
             this.logger.LogC(() => `copy connection, connectionKey ${previousConnectionKey}.`, eLogLevel.Trace);
             this.updateDatabaseTypes(connection.purpose);
@@ -145,9 +139,7 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
 
           this._purposeSubscription = this.formsService.currentForm.controls.purpose.valueChanges.subscribe(purpose => {
               this.updateDatabaseTypes(purpose);
-          })
-
-        }
+          });
       });
     } catch (e) {
       this.hubService.addHubClientErrorMessage(e, 'Connection Edit');
@@ -179,10 +171,6 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
   }
 
   private updateDatabaseTypes(purpose: eConnectionPurpose) {
-    this.connectionTypes = this.remoteLibraries.connections.filter(d =>
-      (purpose === eConnectionPurpose.Source && d.allowsSourceConnection) ||
-      (purpose === eConnectionPurpose.Managed && d.allowsManagedConnection) ||
-      (purpose === eConnectionPurpose.Target && d.allowsTargetConnection));
   }
 
   selectDatabaseType(connectionReference: ConnectionReference) {
@@ -225,7 +213,7 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
       .then(result => {
         this.formsService.currentForm.controls.connectionStringDisplay.setValue(result);
         this.revealingConnectionString = false;
-      }).catch(reason => {
+      }).catch(() => {
         this.revealingConnectionString = false;
       });
   }
@@ -253,7 +241,7 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
         this.hubService.addHubSuccessMessage('The connection was successful.');
         this.databases = result;
         this.refreshingConnection = false;
-      }).catch(reason => {
+      }).catch(() => {
         this.refreshingConnection = false;
       });
   }
@@ -271,18 +259,18 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
         connection.defaultDatabase = result;
 
         this.hubService.createDatabase(connection)
-          .then(result2 => {
+          .then(() => {
             this.hubService.addHubSuccessMessage('The database was created successfully.');
             this.databases = [result];
             this.formsService.currentForm.controls.defaultDatabase.setValue(result);
             this.creatingDatabase = false;
-          }).catch(reason => {
+          }).catch(() => {
             this.creatingDatabase = false;
           });
       } else {
         this.creatingDatabase = false;
       }
-    }).catch(reason => {
+    }).catch(() => {
       this.creatingDatabase = false;
     });
   }

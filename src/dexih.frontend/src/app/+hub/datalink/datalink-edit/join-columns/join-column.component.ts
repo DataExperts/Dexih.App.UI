@@ -1,10 +1,10 @@
 import { Component, Input, Output, OnInit, OnDestroy, EventEmitter } from '@angular/core';
-import { HubCache, DexihDatalinkColumn, DexihTable,
-    eCacheStatus, eMappingStatus, MappingStatusInfo, lineageMappingStatuses, impactMappingStatuses } from '../../../hub.models';
+import { HubCache, eMappingStatus, MappingStatusInfo, lineageMappingStatuses, impactMappingStatuses } from '../../../hub.models';
 import { HubService } from '../../../hub.service';
-import { eObjectType, eObjectUse, ColumnUsageNode } from '../../../hub.lineage.models';
+import { eObjectUse, ColumnUsageNode, eDatalinkObjectType } from '../../../hub.lineage.models';
 import { Subscription, combineLatest} from 'rxjs';
 import { FormGroup } from '@angular/forms';
+import { DexihDatalinkColumn, DexihTable } from '../../../../shared/shared.models';
 
 
 @Component({
@@ -41,7 +41,7 @@ export class JoinColumnComponent implements OnInit, OnDestroy {
                 this.hubCache = hubCache;
 
                 let columnUsage = new ColumnUsageNode(
-                    eObjectType.Transform,
+                    eDatalinkObjectType.Transform,
                     eObjectUse.Target,
                     this.datalinkForm.value,
                     this.column,

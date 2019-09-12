@@ -1,6 +1,5 @@
-import { eCompare } from './hub.query.models';
 import { ManagedTask } from '../+auth/auth.models';
-import { DexihConnection, DexihDatalinkTransform, DexihDatalinkTransformItem, ApiData } from './hub.models';
+import { eTypeCode, eFunctionType, eTransformType, ApiData, RemoteLibraries } from '../shared/shared.models';
 
 
 export class RemoteAgentStatus {
@@ -20,66 +19,66 @@ export class RemoteAgentStatus {
     }
 }
 
-export class RemoteLibraries {
-    public functions: FunctionReference[];
-    public connections: ConnectionReference[];
-    public transforms: TransformReference[];
+// export class RemoteLibraries {
+//     public functions: FunctionReference[];
+//     public connections: ConnectionReference[];
+//     public transforms: TransformReference[];
 
-    public GetConnectionReference(connection: DexihConnection): ConnectionReference {
-        if (connection && this.connections) {
-            let ref = this.connections.find(c =>
-                c.connectionAssemblyName === connection.connectionAssemblyName
-                && c.connectionClassName === connection.connectionClassName);
+//     public GetConnectionReference(connection: DexihConnection): ConnectionReference {
+//         if (connection && this.connections) {
+//             let ref = this.connections.find(c =>
+//                 c.connectionAssemblyName === connection.connectionAssemblyName
+//                 && c.connectionClassName === connection.connectionClassName);
 
-            return ref;
-        } else {
-            return null;
-        }
-    }
+//             return ref;
+//         } else {
+//             return null;
+//         }
+//     }
 
-    public GetTransformReference(transform: DexihDatalinkTransform): TransformReference {
-        if (transform && this.transforms) {
-            let ref = this.transforms.find(c =>
-                c.transformAssemblyName === transform.transformAssemblyName
-                && c.transformClassName === transform.transformClassName);
+//     public GetTransformReference(transform: DexihDatalinkTransform): TransformReference {
+//         if (transform && this.transforms) {
+//             let ref = this.transforms.find(c =>
+//                 c.transformAssemblyName === transform.transformAssemblyName
+//                 && c.transformClassName === transform.transformClassName);
 
-            return ref;
-        } else {
-            return null;
-        }
-    }
+//             return ref;
+//         } else {
+//             return null;
+//         }
+//     }
 
-    // transforms that can be added/removed within a datalink
-    public GetUserConfigTransformReference(): TransformReference[] {
-        if (!this.transforms) {
-            return [];
-        }
-        let userConfig = transformTypes.filter(c => c.allowUserConfig);
-        return this.transforms.filter(c => userConfig.findIndex(u => u.key === c.transformType ) >= 0 );
-    }
+//     // transforms that can be added/removed within a datalink
+//     public GetUserConfigTransformReference(): TransformReference[] {
+//         if (!this.transforms) {
+//             return [];
+//         }
+//         let userConfig = transformTypes.filter(c => c.allowUserConfig);
+//         return this.transforms.filter(c => userConfig.findIndex(u => u.key === c.transformType ) >= 0 );
+//     }
 
-    public GetFunctionReference(item: DexihDatalinkTransformItem): FunctionReference {
-        if (this.functions && item && item.functionClassName) {
-            let ref = this.functions.find(c =>
-                c.functionAssemblyName === item.functionAssemblyName
-                && c.functionClassName === item.functionClassName);
+//     public GetFunctionReference(item: DexihDatalinkTransformItem): FunctionReference {
+//         if (this.functions && item && item.functionClassName) {
+//             let ref = this.functions.find(c =>
+//                 c.functionAssemblyName === item.functionAssemblyName
+//                 && c.functionClassName === item.functionClassName);
 
-            return ref;
-        } else {
-            return null;
-        }
-    }
-}
+//             return ref;
+//         } else {
+//             return null;
+//         }
+//     }
+// }
 
-export enum eFunctionType {
-    Map = <any>'Map',
-    Condition = <any>'Condition',
-    Aggregate = <any>'Aggregate',
-    Series = <any>'Series',
-    Rows = <any>'Rows',
-    Validate = <any>'Validate',
-    Profile = <any>'Profile',
-}
+// export enum eFunctionType {
+//     Map = <any>'Map',
+//     Condition = <any>'Condition',
+//     Aggregate = <any>'Aggregate',
+//     Series = <any>'Series',
+//     Rows = <any>'Rows',
+//     Validate = <any>'Validate',
+//     Profile = <any>'Profile',
+// }
 
 export const functionTypes = [
     {key: eFunctionType.Condition, name: 'Condition Function'},
@@ -90,114 +89,114 @@ export const functionTypes = [
     {key: eFunctionType.Validate, name: 'Validation Function'},
 ]
 
-export enum eGenericType {
-    None = <any>'None',
-    Numeric = <any>'Numeric',
-    All = <any>'All',
-    String = <any>'String',
-}
+// export enum eGenericType {
+//     None = <any>'None',
+//     Numeric = <any>'Numeric',
+//     All = <any>'All',
+//     String = <any>'String',
+// }
 
 
-export class FunctionReference {
-    public functionType: eFunctionType;
-    public category: string;
-    public name: string;
-    public description: string;
+// export class FunctionReference {
+//     public functionType: eFunctionType;
+//     public category: string;
+//     public name: string;
+//     public description: string;
 
 
-    public functionClassName: string;
-    public functionMethodName: string;
-    public functionAssemblyName: string;
-    public resultMethodName: string;
-    public resetMethodName: string;
-    public importMethodName: string;
+//     public functionClassName: string;
+//     public functionMethodName: string;
+//     public functionAssemblyName: string;
+//     public resultMethodName: string;
+//     public resetMethodName: string;
+//     public importMethodName: string;
 
-    public isGeneric: boolean;
-    public genericTypeDefault: eTypeCode;
-    public genericType: eGenericType;
+//     public isGeneric: boolean;
+//     public genericTypeDefault: eTypeCode;
+//     public genericType: eGenericType;
 
-    /// <summary>
-    /// Used for profiling functions, indicates the property use to switch detailed results on/off.
-    /// </summary>
-    public detailedFlagName: string;
+//     /// <summary>
+//     /// Used for profiling functions, indicates the property use to switch detailed results on/off.
+//     /// </summary>
+//     public detailedFlagName: string;
 
-    /// <summary>
-    /// Used to map a filter equivalent operator
-    /// </summary>
-    public compare: eCompare;
+//     /// <summary>
+//     /// Used to map a filter equivalent operator
+//     /// </summary>
+//     public compare: eCompare;
 
-    public IsStandardFunction: boolean;
+//     public IsStandardFunction: boolean;
 
-    public returnParameters: FunctionParameter[];
-    public returnRank: number;
-    public inputParameters: FunctionParameter[];
-    public outputParameters: FunctionParameter[];
+//     public returnParameters: FunctionParameter[];
+//     public returnRank: number;
+//     public inputParameters: FunctionParameter[];
+//     public outputParameters: FunctionParameter[];
 
-    public resultReturnParameters: FunctionParameter[];
-    public resultInputParameters: FunctionParameter[];
-    public resultOutputParameters: FunctionParameter[];
-}
-
-
-export class FunctionParameter {
-    public name: string;
-    public parameterName: string;
-    public description: string;
-    public isGeneric: boolean;
-    public dataType: eTypeCode;
-    public rank = 0;
-    public isIndex: boolean;
-    public linkedName: string;
-    public linkedDescription: string;
-    public isLabel: boolean;
-    public listOfValues: string[];
-    public defaultValue: any;
-}
-
-export enum eConnectionCategory {
-    SqlDatabase = <any>'SqlDatabase',
-    NoSqlDatabase = <any>'NoSqlDatabase',
-    DatabaseFile = <any>'DatabaseFile',
-    File = <any>'File',
-    WebService = <any>'WebService',
-    Hub = <any>'Hub',
-}
+//     public resultReturnParameters: FunctionParameter[];
+//     public resultInputParameters: FunctionParameter[];
+//     public resultOutputParameters: FunctionParameter[];
+// }
 
 
-export class ConnectionReference {
-    public connectionCategory: eConnectionCategory;
-    public name: string;
-    public description: string;
-    public databaseDescription: string;
-    public serverDescription: string;
-    public allowsConnectionString: boolean;
-    public allowsSql: boolean;
-    public allowsFlatFiles: boolean;
-    public allowsManagedConnection: boolean;
-    public allowsSourceConnection: boolean;
-    public allowsTargetConnection: boolean;
-    public allowsUserPassword: boolean;
-    public allowsWindowsAuth: boolean;
-    public requiresDatabase: boolean;
-    public connectionClassName: string;
-    public connectionAssemblyName: string;
-}
+// export class FunctionParameter {
+//     public name: string;
+//     public parameterName: string;
+//     public description: string;
+//     public isGeneric: boolean;
+//     public dataType: eTypeCode;
+//     public rank = 0;
+//     public isIndex: boolean;
+//     public linkedName: string;
+//     public linkedDescription: string;
+//     public isLabel: boolean;
+//     public listOfValues: string[];
+//     public defaultValue: any;
+// }
 
-export enum eTransformType {
-    Mapping = <any>'Mapping',
-    Filter = <any>'Filter',
-    Sort = <any>'Sort',
-    Group = <any>'Group',
-    Aggregate = <any>'Aggregate',
-    Series = <any>'Series',
-    Join = <any>'Join',
-    Rows = <any>'Rows',
-    Lookup = <any>'Lookup',
-    Validation = <any>'Validation',
-    Delta = <any>'Delta',
-    Concatenate = <any>'Concatenate',
-    Profile = <any>'Profile'
-}
+// export enum eConnectionCategory {
+//     SqlDatabase = <any>'SqlDatabase',
+//     NoSqlDatabase = <any>'NoSqlDatabase',
+//     DatabaseFile = <any>'DatabaseFile',
+//     File = <any>'File',
+//     WebService = <any>'WebService',
+//     Hub = <any>'Hub',
+// }
+
+
+// export class ConnectionReference {
+//     public connectionCategory: eConnectionCategory;
+//     public name: string;
+//     public description: string;
+//     public databaseDescription: string;
+//     public serverDescription: string;
+//     public allowsConnectionString: boolean;
+//     public allowsSql: boolean;
+//     public allowsFlatFiles: boolean;
+//     public allowsManagedConnection: boolean;
+//     public allowsSourceConnection: boolean;
+//     public allowsTargetConnection: boolean;
+//     public allowsUserPassword: boolean;
+//     public allowsWindowsAuth: boolean;
+//     public requiresDatabase: boolean;
+//     public connectionClassName: string;
+//     public connectionAssemblyName: string;
+// }
+
+// export enum eTransformType {
+//     Mapping = <any>'Mapping',
+//     Filter = <any>'Filter',
+//     Sort = <any>'Sort',
+//     Group = <any>'Group',
+//     Aggregate = <any>'Aggregate',
+//     Series = <any>'Series',
+//     Join = <any>'Join',
+//     Rows = <any>'Rows',
+//     Lookup = <any>'Lookup',
+//     Validation = <any>'Validation',
+//     Delta = <any>'Delta',
+//     Concatenate = <any>'Concatenate',
+//     Profile = <any>'Profile'
+// }
 
 export const transformTypes  = [
     {key: eTransformType.Mapping, icon: 'fa fa-random', allowUserConfig: true},
@@ -225,31 +224,32 @@ export class TransformReference {
     public description: string;
 }
 
-export enum eTypeCode {
-    Binary = <any>'Binary',
-    Byte = <any>'Byte',
-    CharArray = <any>'CharArray',
-    SByte = <any>'SByte',
-    UInt16 = <any>'UInt16',
-    UInt32 = <any>'UInt32',
-    UInt64 = <any>'UInt64',
-    Int16 = <any>'Int16',
-    Int32 = <any>'Int32',
-    Int64 = <any>'Int64',
-    Decimal = <any>'Decimal',
-    Double = <any>'Double',
-    Single = <any>'Single',
-    String = <any>'String',
-    Text = <any>'Text',
-    Boolean = <any>'Boolean',
-    DateTime = <any>'DateTime',
-    Time = <any>'Time',
-    Guid = <any>'Guid',
-    Json = <any>'Json',
-    Xml = <any>'Xml',
-    Node = <any>'Node',
-    Geometry = <any>'Geometry'
-}
+// export enum eTypeCode {
+//     Binary = <any>'Binary',
+//     Byte = <any>'Byte',
+//     CharArray = <any>'CharArray',
+//     SByte = <any>'SByte',
+//     UInt16 = <any>'UInt16',
+//     UInt32 = <any>'UInt32',
+//     UInt64 = <any>'UInt64',
+//     Int16 = <any>'Int16',
+//     Int32 = <any>'Int32',
+//     Int64 = <any>'Int64',
+//     Decimal = <any>'Decimal',
+//     Double = <any>'Double',
+//     Single = <any>'Single',
+//     String = <any>'String',
+//     Text = <any>'Text',
+//     Boolean = <any>'Boolean',
+//     DateTime = <any>'DateTime',
+//     Time = <any>'Time',
+//     Guid = <any>'Guid',
+//     Json = <any>'Json',
+//     Xml = <any>'Xml',
+//     Node = <any>'Node',
+//     Geometry = <any>'Geometry'
+// }
+
 export const TypeCodes = [
     {key: eTypeCode.String, name: 'String', isNumeric: false, isString: true},
     {key: eTypeCode.CharArray, name: 'Char[fixed length string]', isNumeric: false, isString: true},

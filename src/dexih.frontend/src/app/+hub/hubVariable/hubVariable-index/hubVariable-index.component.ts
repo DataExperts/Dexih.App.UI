@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { HubService } from '../../hub.service';
-import { DexihHubVariable, HubCache, eSharedObjectType, DexihHub, eCacheStatus } from '../../hub.models';
+import { HubCache } from '../../hub.models';
 import { AuthService } from '../../../+auth/auth.service';
 import { Observable, Subscription, BehaviorSubject, combineLatest} from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
+import { DexihHubVariable, DexihHub, eSharedObjectType } from '../../../shared/shared.models';
 
 @Component({
   selector: 'hubVariable',
@@ -80,7 +81,7 @@ export class HubVariableIndexComponent implements OnInit, OnDestroy {
 
     export(variables: Array<DexihHubVariable>) {
         const cache = this.hubCache;
-        const hub = new DexihHub(this.hubCache.hub.hubKey, '');
+        const hub = this.hubService.createHub(this.hubCache.hub.hubKey, '');
         hub.dexihHubVariables = variables;
         let filename = 'hub_variables.json';
 

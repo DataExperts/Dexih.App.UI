@@ -4,8 +4,7 @@ import { HubService } from '../../../hub.service';
 import { AuthService } from '../../../../+auth/auth.service';
 import { DatalinkEditService } from '../datalink-edit.service';
 import { Subscription, combineLatest} from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 
 @Component({

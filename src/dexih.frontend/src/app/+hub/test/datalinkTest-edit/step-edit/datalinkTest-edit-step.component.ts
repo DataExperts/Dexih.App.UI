@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-    DexihDatalinkTestStep, HubCache, DexihDatalinkTable, DexihDatalinkTestTable} from '../../../hub.models';
 import { HubService } from '../../../hub.service';
 import { Observable, BehaviorSubject, Subscription, combineLatest} from 'rxjs';
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { AuthService } from '../../../../+auth/auth.service';
 import { HubFormsService } from '../../../hub.forms.service';
+import { HubCache } from '../../../hub.models';
+import { DexihDatalinkTestStep } from '../../../../shared/shared.models';
 
 @Component({
     selector: 'datalinkTest-edit-step',

@@ -1,44 +1,21 @@
 import { Injectable, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription, combineLatest } from 'rxjs';
-
+import { FormArray, FormGroup } from '@angular/forms';
 import { AuthService } from '../../../+auth/auth.service';
 import { eLogLevel, LogFactory } from '../../../../logging';
 import { HubFormsService } from '../../hub.forms.service';
 import { InputOutputColumns } from '../../hub.lineage.models';
-import {
-    DexihDatalink,
-    DexihDatalinkColumn,
-    DexihDatalinkTable,
-    DexihDatalinkTransform,
-    DexihDatalinkTransformItem,
-    DexihHub,
-    eSourceType,
-    HubCache,
-    RemoteMessage,
-    Table,
-    DexihColumnBase,
-    eDatalinkTransformItemType,
-    InputColumn,
-    DexihDatalinkTarget,
-    eParameterDirection
-} from '../../hub.models';
 import { HubService } from '../../hub.service';
-import { TransformReference, RemoteLibraries, eTransformType, eTypeCode } from '../../hub.remote.models';
+import { TransformReference } from '../../hub.remote.models';
 import { Message } from '../../../+auth/auth.models';
-import { SelectQuery } from '../../hub.query.models';
-import { group } from '@angular/animations';
+import { HubCache } from '../../hub.models';
+import { eTransformType, DexihDatalinkColumn, eParameterDirection, eTypeCode, DexihDatalinkTransformItem, DexihDatalinkTransform, DexihDatalinkTable, eTransformItemType, eSourceType } from '../../../shared/shared.models';
 
 // contains shared objects used to edit the datalink.
 
 @Injectable()
 export class DatalinkEditService implements OnInit, OnDestroy {
 
-    private _librarySubscription: Subscription;
-
     private _hubCache: HubCache;
-    private _remoteLibraries: RemoteLibraries;
 
     public showAllErrors = false;
 
@@ -53,9 +30,6 @@ export class DatalinkEditService implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this._librarySubscription = this.hubService.getRemoteLibrariesObservable().subscribe(lib => {
-            this._remoteLibraries = lib;
-        });
     }
 
     public init(hubCache: HubCache) {
@@ -63,8 +37,6 @@ export class DatalinkEditService implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        if (this._librarySubscription) { this._librarySubscription.unsubscribe(); }
-
         this.hubFormsService.ngOnDestroy();
     }
 
@@ -294,7 +266,7 @@ export class DatalinkEditService implements OnInit, OnDestroy {
 
         if (transform.transformType === eTransformType.Series) {
             let seriesItem = new DexihDatalinkTransformItem();
-            seriesItem.transformItemType = eDatalinkTransformItemType.Series;
+            seriesItem.transformItemType = eTransformItemType.Series;
             seriesItem.position = 0;
             seriesItem.isValid = true;
             newDatalinkTransform.dexihDatalinkTransformItems.push(seriesItem);
@@ -313,7 +285,7 @@ export class DatalinkEditService implements OnInit, OnDestroy {
     }
 
     deleteDatalinkTransform(datalinkTransform: DexihDatalinkTransform): Promise<boolean> {
-        return new Promise<boolean>((resolve, reject) => {
+        return new Promise<boolean>((resolve) => {
             this.authService.confirmDialog('Delete Transform',
                 `Are you sure you would like to remove the transform ${datalinkTransform.name}?`)
                 .then(confirm => {
@@ -326,7 +298,7 @@ export class DatalinkEditService implements OnInit, OnDestroy {
                         this.resetDatalinkTransformPositions();
                     }
                     resolve(confirm);
-                }).catch(reason => {
+                }).catch(() => {
                     resolve(false);
                 });
         });
@@ -336,7 +308,7 @@ export class DatalinkEditService implements OnInit, OnDestroy {
         const datalinkForm = this.hubFormsService.currentForm;
         const datalinkTransforms = <FormArray>datalinkForm.controls.dexihDatalinkTransforms;
 
-        let userConfigTransforms = this._remoteLibraries.GetUserConfigTransformReference();
+        let userConfigTransforms = this.hubService.GetUserConfigTransformReference();
 
         let position = 10;
         datalinkTransforms.controls.sort((a, b) => a.value.position - b.value.position).forEach(datalinkTransform => {
@@ -436,7 +408,7 @@ export class DatalinkEditService implements OnInit, OnDestroy {
                     } else {
                         let transforms = datalink.dexihDatalinkTransforms.sort((a, b) => a.position - b.position);
                         let transform = transforms[transforms.length - 1];
-                        datalinkColumns = transform.runTime.outputColumns;
+                        datalinkColumns = transform['runTime'].outputColumns;
                     }
 
                     datalinkTable.dexihDatalinkColumns = this.mergeDatalinkColumns(

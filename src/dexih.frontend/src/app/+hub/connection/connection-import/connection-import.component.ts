@@ -1,12 +1,10 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { HubService } from '../../hub.service';
-import {
-    DexihConnection, HubCache, DexihTable, EntityStatus,
-    eStatus, eSharedObjectType, eCacheStatus, eImportAction, eTableType,
-} from '../../hub.models';
+import { HubCache, EntityStatus } from '../../hub.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, BehaviorSubject, Subscription, combineLatest} from 'rxjs';
 import { AuthService } from '../../../+auth/auth.service';
+import { DexihConnection, DexihTable, eTableType, eStatus, eImportAction, eSharedObjectType } from '../../../shared/shared.models';
 
 @Component({
     selector: 'connections',

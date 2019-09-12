@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { HubService } from '../../hub.service';
-import { DexihHub, DexihConnection, HubCache, eConnectionPurpose, eSharedObjectType, connectionPurposes } from '../../hub.models';
+import { HubCache, connectionPurposes } from '../../hub.models';
 import { AuthService } from '../../../+auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
-import { RemoteLibraries } from '../../hub.remote.models';
+import { DexihConnection, eConnectionPurpose, DexihHub, eSharedObjectType } from '../../../shared/shared.models';
 
 @Component({
     selector: 'connections',
@@ -20,7 +20,6 @@ export class ConnectionIndexComponent implements OnInit, OnDestroy {
     pageTitle: string;
 
     hubCache: HubCache;
-    remoteLibraries: RemoteLibraries;
     purposeFilter: string;
     connectionPurposes = connectionPurposes;
 
@@ -53,13 +52,11 @@ export class ConnectionIndexComponent implements OnInit, OnDestroy {
                 this.route.params,
                 this.route.queryParams,
                 this.hubService.getHubCacheObservable(),
-                this.hubService.getRemoteLibrariesObservable()
             ).subscribe(result => {
                 let data = result[0];
                 let params = result[1];
                 let queryParams = result[2];
                 this.hubCache = result[3];
-                this.remoteLibraries = result[4];
 
                 this.purposeFilter = queryParams['purposeFilter'];
                 if (!this.purposeFilter) { this.purposeFilter = 'All'; }
@@ -109,7 +106,7 @@ export class ConnectionIndexComponent implements OnInit, OnDestroy {
 
             let tableData = []
             connections.forEach(connection =>  {
-                let connectionReference = this.remoteLibraries ? this.remoteLibraries.GetConnectionReference(connection) : null;
+                let connectionReference = this.hubService.GetConnectionReference(connection);
                 tableData.push({
                     key: connection.key,
                     connectionAssemblyName: connection.connectionAssemblyName,
@@ -129,7 +126,7 @@ export class ConnectionIndexComponent implements OnInit, OnDestroy {
 
     export(connections: Array<DexihConnection>) {
         const cache = this.hubCache;
-        const hub = new DexihHub(this.hubCache.hub.hubKey, '');
+        const hub = this.hubService.createHub(this.hubCache.hub.hubKey, '');
         connections.forEach(connection => { this.hubCache.cacheAddConnection(connection.key, hub); });
 
         let filename = connections.length === 1 ? 'Connection - ' + connections[0].name + '.json' : 'connections.json';

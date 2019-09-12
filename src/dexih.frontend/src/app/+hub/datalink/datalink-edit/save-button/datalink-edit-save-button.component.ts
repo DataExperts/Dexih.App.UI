@@ -3,10 +3,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormArray } from '@angular/forms';
 import { DatalinkEditService } from '../datalink-edit.service';
 import { AuthService } from '../../../../+auth/auth.service';
-import { HubCache, eUpdateStrategy, eSourceType, eViewSource } from '../../../hub.models';
+import { HubCache } from '../../../hub.models';
 import { HubService } from '../../../hub.service';
 import { BehaviorSubject, Subscription, combineLatest} from 'rxjs';
-import { DownloadObject, eDownloadFormat } from '../../../hub.query.models';
+import { eUpdateStrategy, DownloadObject, eSourceType, eDownloadFormat, eDataObjectType } from '../../../../shared/shared.models';
 
 @Component({
     selector: 'datalink-save-button',
@@ -131,7 +131,7 @@ export class DatalinkEditSaveButtonComponent implements OnInit, OnDestroy {
         let downloadItems = new Array<DownloadObject>();
         let downloadObject = new DownloadObject();
         downloadObject.objectKey = this.datalinkForm.controls.key.value;
-        downloadObject.objectType = eViewSource.Datalink;
+        downloadObject.objectType = eDataObjectType.Datalink;
         downloadItems.push(downloadObject);
         this.hubService.downloadData(downloadItems, true, eDownloadFormat.Csv)
     }

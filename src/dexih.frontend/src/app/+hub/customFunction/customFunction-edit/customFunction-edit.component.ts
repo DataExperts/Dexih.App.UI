@@ -1,17 +1,15 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { HubCache, eTransformFunctionType, DexihCustomFunction,
-  eParameterDirection, DexihCustomFunctionParameter, eCacheStatus, DexihDatalinkTransformItem,
-  DexihFunctionParameter,
-  eDatalinkTransformItemType} from '../../hub.models';
+import { HubCache} from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { AuthService } from '../../../+auth/auth.service';
 import { Observable ,  Subscription, combineLatest} from 'rxjs';
 import { Location } from '@angular/common';
 import { HubFormsService } from '../../hub.forms.service';
-import { TypeCodes, eTypeCode, eFunctionType, functionTypes } from '../../hub.remote.models';
+import { TypeCodes, functionTypes } from '../../hub.remote.models';
 import { FormGroup, FormArray } from '@angular/forms';
 import { Message } from '../../../+auth/auth.models';
+import { eParameterDirection, eFunctionType, DexihCustomFunction, eTypeCode, DexihCustomFunctionParameter, DexihDatalinkTransformItem, eTransformItemType, DexihFunctionParameter } from '../../../shared/shared.models';
 
 @Component({
 
@@ -37,7 +35,7 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
   inputParameterValues = [];
   returnParameterValue;
 
-  functionType: eTransformFunctionType;
+  functionType: eFunctionType;
   functionTypes = functionTypes;
   eFunctionType = eFunctionType;
 
@@ -120,8 +118,8 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
 
           this._functionTypeSubscription = this.formsService.currentForm.controls.functionType.valueChanges.subscribe(functionType => {
             this.functionType = functionType;
-            if (this.functionType === eTransformFunctionType.Condition
-              || this.functionType === eTransformFunctionType.JoinCondition || this.functionType === eTransformFunctionType.Validation) {
+            if (this.functionType === eFunctionType.Condition
+              || this.functionType === eFunctionType.JoinCondition || this.functionType === eFunctionType.Validate) {
               this.formsService.currentForm.controls.returnType.setValue(eTypeCode.Boolean);
               this.updateParameters();
             }
@@ -274,7 +272,7 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
     let item = new DexihDatalinkTransformItem();
     item.functionCode = selectedCustomFunction.methodCode;
     item.functionResultCode = selectedCustomFunction.resultCode;
-    item.transformItemType = eDatalinkTransformItemType.CustomFunction;
+    item.transformItemType = eTransformItemType.CustomFunction;
 
     let parameters: DexihFunctionParameter[] = [];
 
@@ -306,7 +304,7 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
       returnParam.isValid = true;
       parameters.push(returnParam);
 
-      item.returnType = selectedCustomFunction.returnType;
+      // item.returnType = selectedCustomFunction.returnType;
       item.dexihFunctionParameters = parameters;
 
       return item;

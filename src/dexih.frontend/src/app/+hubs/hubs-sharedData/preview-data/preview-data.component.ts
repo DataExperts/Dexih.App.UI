@@ -1,14 +1,11 @@
-import { LogFactory } from '../../../../logging';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
-import { SharedData, DexihColumnBase, InputColumn, eViewSource, eSharedDataObjectType } from '../../../+hub/hub.models';
-import { eDownloadFormat, SelectQuery } from '../../../+hub/hub.query.models';
+import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { DexihMessageComponent } from '../../../shared/ui/dexihMessage/index';
 import { HubsService} from '../../hubs.service';
 import { CancelToken } from '../../../+auth/auth.models';
+import { InputColumn, DexihColumnBase, SelectQuery, eDownloadFormat, SharedData, eDataObjectType } from '../../../shared/shared.models';
 
 @Component({
 
@@ -32,7 +29,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
 
 
     objectKey: number;
-    objectType: eSharedDataObjectType;
+    objectType: eDataObjectType;
     hubKey: number;
 
     columns: Array<any>;

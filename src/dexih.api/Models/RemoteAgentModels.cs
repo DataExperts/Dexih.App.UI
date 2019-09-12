@@ -7,7 +7,7 @@ namespace dexih.api.Models
     {
         public enum EEnvironment
         {
-            Windows,
+            Windows = 1,
             Osx,
             Linux
         }

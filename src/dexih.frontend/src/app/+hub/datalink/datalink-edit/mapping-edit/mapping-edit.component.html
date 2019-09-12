@@ -9,7 +9,7 @@
 		<form [formGroup]="newDatalinkTransformItemForm">
 			<fieldset>
 				<div class="form-row">
-					<section *ngIf="transformItemType == eDatalinkTransformItemType.AggregatePair" class="form-group col-md-4">
+					<section *ngIf="transformItemType == eTransformItemType.AggregatePair" class="form-group col-md-4">
 						<form-select label="Aggregate" formControlName="aggregate" [items]="aggregates" itemKey="key"
 							itemName="name">
 						</form-select>
@@ -23,12 +23,12 @@
 							[errors]="sourceErrors">
 						</form-select>
 					</section>
-					<section *ngIf="transformItemType == eDatalinkTransformItemType.FilterPair" class="form-group col-md-4">
+					<section *ngIf="transformItemType == eTransformItemType.FilterPair" class="form-group col-md-4">
 						<form-select label="Compare" formControlName="filterCompare" [items]="compare" itemKey="key"
 							itemName="name">
 						</form-select>
 					</section>
-					<section *ngIf="transformItemType == eDatalinkTransformItemType.FilterPair && newDatalinkTransformItemForm.controls.filterCompare.value != eCompare.IsNotNull && newDatalinkTransformItemForm.controls.filterCompare.value != eCompare.IsNull" class="form-group col-md-4">
+					<section *ngIf="transformItemType == eTransformItemType.FilterPair && newDatalinkTransformItemForm.controls.filterCompare.value != eCompare.IsNotNull && newDatalinkTransformItemForm.controls.filterCompare.value != eCompare.IsNull" class="form-group col-md-4">
 						<form-select
 							label="Compare Column/Value" formControlName="filterDatalinkColumn" [items]="inputColumns"
 							[enableTextEntry]="true" [(textValue)]="filterValue"
@@ -45,12 +45,12 @@
 							textEntryNote="Enter new column name, or select existing" [errors]="targetErrors">
 						</form-select>
 					</section>
-					<section *ngIf="transformItemType == eDatalinkTransformItemType.Sort" class="form-group col-md-4">
+					<section *ngIf="transformItemType == eTransformItemType.Sort" class="form-group col-md-4">
 						<form-select label="Direction" formControlName="sortDirection" [items]="sortDirections"
 							itemKey="key" itemName="name">
 						</form-select>
 					</section>
-					<section *ngIf="transformItemType == eDatalinkTransformItemType.JoinPair" class="form-group col-md-4">
+					<section *ngIf="transformItemType == eTransformItemType.JoinPair" class="form-group col-md-4">
 						<form-select label="Join Column" formControlName="joinDatalinkColumn" [items]="joinColumns"
 							[enableKeySelect]="false" itemKey="key" itemName="logicalName" note="Select a join column"
 							textEntryNote="Enter a value to add a new column" [errors]="joinErrors">

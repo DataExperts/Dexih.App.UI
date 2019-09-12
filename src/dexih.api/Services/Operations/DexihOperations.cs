@@ -34,12 +34,11 @@ namespace dexih.api.Services.Operations
             
         }
 
-        private async void SendHubChange(Import import)
+        private async void SendHubChange(Import import, string[] users)
         {
             try
             {
                 var sendMessage = new RemoteMessage("", "", "hub-change", Json.JTokenFromObject(import, ""));
-                var users = await RepositoryManager.GetHubUserIds(import.HubKey, CancellationToken.None);
                 await _browserContext.Clients.Users(users).SendAsync("Command", sendMessage, CancellationToken.None);
             }
             catch (Exception e)

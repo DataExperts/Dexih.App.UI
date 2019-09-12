@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
-import { DexihTableColumn, deltaTypes, securityFlags } from '../../../hub.models';
+import {  deltaTypes, securityFlags } from '../../../hub.models';
 import { FormsService } from '../../../../shared/forms/forms.service';
 import { HubFormsService } from '../../../hub.forms.service';
 import { TypeCodes } from '../../../hub.remote.models';
+import { DexihTableColumn } from '../../../../shared/shared.models';
 
 @Component({
     selector: 'column-edit-bulk',

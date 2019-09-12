@@ -1,18 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import {
-    DexihDatalink, DexihDatalinkTransform, DexihDatalinkTransformItem, DexihTable, DexihTableColumn, HubCache,
-    eDatalinkTransformItemType,
-    eCacheStatus
-}
-    from '../../../hub.models';
+
 import { HubService } from '../../../hub.service';
 import { DatalinkEditService } from '../datalink-edit.service';
 import { Observable, Subscription, combineLatest} from 'rxjs';
 import { AuthService } from '../../../../+auth/auth.service';
 import { FormGroup, FormArray, AbstractControl } from '@angular/forms';
 import { LogFactory, eLogLevel } from '../../../../../logging';
-import { RemoteLibraries, transformTypes, eTransformType } from '../../../hub.remote.models';
+import { transformTypes } from '../../../hub.remote.models';
+import { HubCache } from '../../../hub.models';
+import { DexihDatalinkTransform, eTransformType } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -27,7 +24,6 @@ export class DatalinkEditTransformsComponent implements OnInit, OnDestroy {
     private _transformsChange: Subscription;
 
     private hubCache: HubCache;
-    private remoteLibraries: RemoteLibraries;
     public action: string; // new or edit
     public pageTitle = 'Transform';
     public message: string;
@@ -61,9 +57,8 @@ export class DatalinkEditTransformsComponent implements OnInit, OnDestroy {
                 let params = result[1];
                 this.hubCache = result[2];
                 this.datalinkForm = result[3];
-                this.remoteLibraries = result[4];
 
-                if (this.hubCache.isLoaded() && this.datalinkForm && this.remoteLibraries) {
+                if (this.hubCache.isLoaded() && this.datalinkForm) {
                     let datalinkTransformKey = + params['datalinkTransformKey'];
 
                     this.logger.LogC(() => `loading transform with key ${datalinkTransformKey}`, eLogLevel.Trace);

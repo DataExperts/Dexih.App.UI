@@ -1,20 +1,14 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import {
-    DexihConnection, DexihDatalink, HubCache, DexihDatalinkTable, DexihDatalinkColumn,
-    DexihTableColumn, DexihTable, eSourceType, deltaTypes, eDeltaType, updateStrategies,
-    eUpdateStrategy, eCacheStatus, eMappingStatus, lineageMappingStatuses, eLoadStrategy, loadStrategies, DexihDatalinkTarget,
-    ConnectionTables
-} from '../../../hub.models';
-import { InputOutputColumns, eObjectUse, eObjectType, ColumnUsageNode } from '../../../hub.lineage.models';
 import { AuthService } from '../../../../+auth/auth.service';
 import { HubService } from '../../../hub.service';
 import { DatalinkEditService } from '../datalink-edit.service';
-import { Observable, Subscription, BehaviorSubject , combineLatest} from 'rxjs';
-import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
+import { Subscription, combineLatest} from 'rxjs';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { HubFormsService } from '../../../hub.forms.service';
 import { LogFactory, eLogLevel } from '../../../../../logging';
-import { RemoteLibraries } from '../../../hub.remote.models';
+import { HubCache, eMappingStatus, updateStrategies, loadStrategies, ConnectionTables } from '../../../hub.models';
+import { eDeltaType, eUpdateStrategy, eTransformWriterMethod, DexihConnection, DexihDatalinkTarget } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -24,7 +18,6 @@ import { RemoteLibraries } from '../../../hub.remote.models';
 export class DatalinkEditTargetComponent implements OnInit, OnDestroy {
     public datalinkForm: FormGroup;
     private hubCache: HubCache;
-    private remoteLibraries: RemoteLibraries;
     public action: string; // new or edit
     public pageTitle: string;
     public message: string;
@@ -40,7 +33,7 @@ export class DatalinkEditTargetComponent implements OnInit, OnDestroy {
     public eUpdateStrategy = eUpdateStrategy;
     public updateStrategies = updateStrategies;
 
-    public eLoadStrategy = eLoadStrategy;
+    public eTransformWriterMethod = eTransformWriterMethod;
     public loadStrategies = loadStrategies;
 
     public managedConnections: DexihConnection[];
@@ -60,11 +53,11 @@ export class DatalinkEditTargetComponent implements OnInit, OnDestroy {
 
     constructor(
         private hubService: HubService,
-        private authService: AuthService,
+        authService: AuthService,
         private editDatalinkService: DatalinkEditService,
         private route: ActivatedRoute,
         private router: Router,
-        private fb: FormBuilder) {
+        fb: FormBuilder) {
 
         this.tableFormService = new HubFormsService(fb, hubService, authService);
     }
@@ -81,10 +74,8 @@ export class DatalinkEditTargetComponent implements OnInit, OnDestroy {
                 this.hubService.getRemoteLibrariesObservable()
             ).subscribe(result => {
                 let data = result[0];
-                let params = result[1];
                 this.hubCache = result[2];
                 this.datalinkForm = result[3];
-                this.remoteLibraries = result[4];
 
                 this.action = data['action'];
                 this.pageTitle = data['pageTitle'];

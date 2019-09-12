@@ -1,12 +1,10 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DexihTable, DexihTableColumn, HubCache, deltaTypes, securityFlags, DexihColumnValidation,
-     } from '../../../hub.models';
 import { AuthService } from '../../../../+auth/auth.service';
 import { HubService } from '../../../hub.service';
 import { Location } from '@angular/common';
-import { FormBuilder, FormGroup, FormArray, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
-import { Observable, Subscription, combineLatest} from 'rxjs';
+import { FormGroup } from '@angular/forms';
+import { Subscription, combineLatest} from 'rxjs';
 import { HubFormsService } from '../../../hub.forms.service';
 
 @Component({
@@ -29,9 +27,7 @@ export class TableColumnEditComponent implements OnInit, OnDestroy {
         private hubService: HubService,
         public formService: HubFormsService,
         private route: ActivatedRoute,
-        private router: Router,
-        private location: Location
-        ) {
+        private router: Router        ) {
     }
 
     ngOnInit() {

@@ -1,9 +1,10 @@
-import { Component, Input, Output, ViewChild, OnInit, OnChanges, OnDestroy, EventEmitter } from '@angular/core';
-import { HubCache, DexihDatalink, DexihDatalinkColumn, DexihDatalinkTransform } from '../../../hub.models';
+import { Component, Input, Output, OnInit, OnChanges, OnDestroy, EventEmitter } from '@angular/core';
+import { HubCache } from '../../../hub.models';
 import { HubService } from '../../../hub.service';
 import { DatalinkEditService } from '../datalink-edit.service';
-import { Observable, BehaviorSubject, Subscription, combineLatest} from 'rxjs';
+import { Subscription, combineLatest} from 'rxjs';
 import { FormGroup } from '@angular/forms';
+import { DexihDatalinkColumn } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -19,7 +20,6 @@ export class JoinColumnsComponent implements OnInit, OnChanges, OnDestroy {
     private _subscription: Subscription;
     private _changesSubscription: Subscription;
 
-    private hubCache: HubCache;
 
     public joinTable;
 
@@ -40,7 +40,6 @@ export class JoinColumnsComponent implements OnInit, OnChanges, OnDestroy {
                 this.hubService.getHubCacheObservable(),
                 this.editDatalinkService.hubFormsService.getCurrentFormObservable()
             ).subscribe(result => {
-                this.hubCache = result[0];
                 this.datalinkForm = result[1];
 
                 if (this.datalinkForm) {
@@ -56,7 +55,7 @@ export class JoinColumnsComponent implements OnInit, OnChanges, OnDestroy {
     ngOnChanges() {
         this.updateTableData();
         if (this._changesSubscription) { this._changesSubscription.unsubscribe(); }
-        this._changesSubscription = this.datalinkTransformForm.controls.joinDatalinkTable.valueChanges.subscribe(data => {
+        this._changesSubscription = this.datalinkTransformForm.controls.joinDatalinkTable.valueChanges.subscribe(() => {
             this.updateTableData();
         });
     }

@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, combineLatest} from 'rxjs';
 
 import { AuthService } from '../../../+auth/auth.service';
-import { DexihColumnValidation } from '../../hub.models';
 import { HubService } from '../../hub.service';
+import { DexihColumnValidation } from '../../../shared/shared.models';
 
 
 @Component({

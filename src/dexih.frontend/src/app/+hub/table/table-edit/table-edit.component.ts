@@ -1,14 +1,11 @@
 import { HostListener, Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  DexihConnection, DexihTable, HubCache,
-  eCacheStatus
-} from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { AuthService } from '../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { HubFormsService } from '../../hub.forms.service';
-import { eConnectionCategory } from '../../hub.remote.models';
+import { DexihConnection, eConnectionCategory, DexihTable } from '../../../shared/shared.models';
+import { HubCache, eCacheStatus } from '../../hub.models';
 
 @Component({
   selector: 'dexih-table-edit-form',

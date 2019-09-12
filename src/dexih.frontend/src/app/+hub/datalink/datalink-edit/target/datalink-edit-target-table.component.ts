@@ -1,12 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import {
-    DexihConnection, DexihDatalink, HubCache, DexihDatalinkTable, DexihDatalinkColumn,
-    DexihTableColumn, DexihTable, eSourceType, deltaTypes, eDeltaType, updateStrategies,
-    eUpdateStrategy, eCacheStatus, eMappingStatus, lineageMappingStatuses, eLoadStrategy, loadStrategies, DexihDatalinkTarget,
-    ConnectionTables
-} from '../../../hub.models';
-import { InputOutputColumns, eObjectUse, eObjectType, ColumnUsageNode } from '../../../hub.lineage.models';
+import { InputOutputColumns, eObjectUse, ColumnUsageNode, eDatalinkObjectType } from '../../../hub.lineage.models';
 import { AuthService } from '../../../../+auth/auth.service';
 import { HubService } from '../../../hub.service';
 import { DatalinkEditService } from '../datalink-edit.service';
@@ -14,7 +8,8 @@ import { Observable, Subscription, BehaviorSubject , combineLatest} from 'rxjs';
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { HubFormsService } from '../../../hub.forms.service';
 import { LogFactory, eLogLevel } from '../../../../../logging';
-import { RemoteLibraries, eTypeCode } from '../../../hub.remote.models';
+import { HubCache, eMappingStatus, updateStrategies, loadStrategies, ConnectionTables, lineageMappingStatuses, deltaTypes } from '../../../hub.models';
+import { eDeltaType, eUpdateStrategy, eTransformWriterMethod, DexihConnection, DexihDatalinkColumn, DexihDatalinkTarget, DexihTable, DexihTableColumn, DexihDatalinkTable, eTypeCode } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -24,7 +19,6 @@ import { RemoteLibraries, eTypeCode } from '../../../hub.remote.models';
 export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
     public datalinkForm: FormGroup;
     private hubCache: HubCache;
-    private remoteLibraries: RemoteLibraries;
     public action: string; // new or edit
     public pageTitle: string;
     public message: string;
@@ -41,7 +35,7 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
     public eUpdateStrategy = eUpdateStrategy;
     public updateStrategies = updateStrategies;
 
-    public eLoadStrategy = eLoadStrategy;
+    public eTransformWriterMethod = eTransformWriterMethod;
     public loadStrategies = loadStrategies;
 
     public managedConnections: DexihConnection[];
@@ -107,13 +101,11 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
                 this.route.params,
                 this.hubService.getHubCacheObservable(),
                 this.editDatalinkService.hubFormsService.getCurrentFormObservable(),
-                this.hubService.getRemoteLibrariesObservable()
             ).subscribe(result => {
                 let data = result[0];
                 let params = result[1];
                 this.hubCache = result[2];
                 this.datalinkForm = result[3];
-                this.remoteLibraries = result[4];
 
                 this.action = data['action'];
                 this.pageTitle = data['pageTitle'];
@@ -185,7 +177,7 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
 
     columnStatus(table: DexihTable, column: DexihTableColumn): string {
         let columnUsage: ColumnUsageNode = new ColumnUsageNode(
-            eObjectType.TargetTable, eObjectUse.Target,
+            eDatalinkObjectType.TargetTable, eObjectUse.Target,
             this.datalinkForm.value, null, column, null, null, eMappingStatus.NotMapped, this.hubCache);
         const lineage = columnUsage.createDatalinkLineage(true);
         const mappingStatus = lineageMappingStatuses.find(c => c.key === lineage);
@@ -196,7 +188,7 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
 
     datalinkColumnStatus(table: DexihDatalinkTable, column: DexihDatalinkColumn): string {
         let columnUsage: ColumnUsageNode = new ColumnUsageNode(
-            eObjectType.TargetTable, eObjectUse.Target,
+            eDatalinkObjectType.TargetTable, eObjectUse.Target,
             this.datalinkForm.value, column, null, null, null, eMappingStatus.NotMapped, this.hubCache);
         const lineage = columnUsage.createDatalinkLineage(true);
         const mappingStatus = lineageMappingStatuses.find(c => c.key === lineage);

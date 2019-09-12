@@ -1,12 +1,12 @@
 import { Component, OnInit, OnChanges, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
-import { DexihTableColumn, HubCache, eDeltaType, eCacheStatus,
+import { HubCache, eCacheStatus,
      } from '../../hub.models';
 import { AuthService } from '../../../+auth/auth.service';
 import { HubService } from '../../hub.service';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { Subscription} from 'rxjs';
 import { HubFormsService } from '../../hub.forms.service';
-import { eTypeCode } from '../../hub.remote.models';
+import { eDeltaType, DexihTableColumn, eTypeCode } from '../../../shared/shared.models';
 
 @Component({
     selector: 'column-edit',

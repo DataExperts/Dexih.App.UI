@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HubCache, eCacheStatus, InputColumn, DexihDatalink, DexihInputParameter, InputParameter } from '../../hub.models';
+import { HubCache } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { AuthService } from '../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { DexihDatalink, InputColumn, InputParameter } from '../../../shared/shared.models';
 
 @Component({
 
@@ -65,7 +66,7 @@ export class DatalinkRunComponent implements OnInit, OnDestroy {
                             datalink.sourceDatalinkTable.dexihDatalinkColumns.filter(c => c.isInput).forEach(c => {
                                 this.inputColumns.push({datalinkKey: datalinkKey, datalinkName: datalink.name,
                                     name: c.name, logicalName: c.logicalName,
-                                    dataType: c.dataType, rank: c.rank, value: c.defaultValue });
+                                    dataType: c.dataType, rank: c.rank, value: c.defaultValue, defaultValue: c.defaultValue });
                             });
                             datalink.parameters.forEach( c => {
                                 if (this.parameters.findIndex( p => p.name === c.name ) < 0) {

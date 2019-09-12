@@ -1,8 +1,8 @@
 import { Component, Input, Output, OnInit, OnChanges, OnDestroy, EventEmitter } from '@angular/core';
-import { DexihDatalinkColumn, DexihTable, DexihTableColumn } from '../../../hub.models';
 import { Subscription } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { DexihTable, DexihDatalinkColumn } from '../../../../shared/shared.models';
 
 @Component({
 

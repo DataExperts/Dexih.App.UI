@@ -1,13 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
-import {
-  DexihTable, HubCache, DexihConnection,
-  eDatalinkType, eConnectionPurpose, eDeltaType, eDatalinkTransformItemType, eCacheStatus, eSharedObjectType
-} from '../../hub.models';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HubService } from '../../hub.service';
-import { Observable, Subscription, combineLatest} from 'rxjs';
+import { Subscription, combineLatest} from 'rxjs';
 import { Location } from '@angular/common';
+import { HubCache, eCacheStatus } from '../../hub.models';
+import { eDatalinkType, DexihConnection, DexihTable, eConnectionPurpose, eDeltaType, eSharedObjectType, eDatalinkTypeItems } from '../../../shared/shared.models';
 
 @Component({
 
@@ -29,7 +27,6 @@ export class DatalinkNewComponent implements OnInit, OnDestroy {
 
   private tableKeys: Array<number>;
 
-  private hubCacheObserve: Subscription;
   public sourceTableKeys: Array<number>;
   public name: string;
   public datalinkType: eDatalinkType;
@@ -58,8 +55,7 @@ export class DatalinkNewComponent implements OnInit, OnDestroy {
 
   public allAuditColumns = true;
 
-  private typeCodes = eDatalinkType;
-  datalinkTypes = Object.keys(this.typeCodes).filter(String);
+  eDatalinkTypeItems = eDatalinkTypeItems;
 
   public savingDatalink = false;
 
@@ -103,7 +99,6 @@ export class DatalinkNewComponent implements OnInit, OnDestroy {
         this.route.params,
         this.hubService.getHubCacheObservable(),
       ).subscribe(result => {
-        let data = result[0];
         let params = result[1];
         this.hubCache = result[2];
 
@@ -180,14 +175,14 @@ export class DatalinkNewComponent implements OnInit, OnDestroy {
     });
 
     if (this._valueChangesSubscription) { this._valueChangesSubscription.unsubscribe(); }
-    this._valueChangesSubscription = this.mainForm.valueChanges.subscribe(data => this.onValueChanged(data));
+    this._valueChangesSubscription = this.mainForm.valueChanges.subscribe(data => this.onValueChanged());
     this.onValueChanged(); // (re)set validation messages now
 
 
     this.hasChanged = false;
   }
 
-  onValueChanged(data?: any) {
+  onValueChanged() {
     if (!this.mainForm) { return; }
     const form = this.mainForm;
 
@@ -235,7 +230,7 @@ export class DatalinkNewComponent implements OnInit, OnDestroy {
           } else {
             this.router.navigate(['/hub', this.hubCache.hub.hubKey, 'datalinks'], { relativeTo: this.route.root });
           }
-        }).catch(reason => {
+        }).catch(() => {
           this.savingDatalink = false;
         });
     } else {

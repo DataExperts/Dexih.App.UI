@@ -116,39 +116,39 @@
             </div>
 
             <div *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Mapping">
-                <mapping [datalinkTransformForm]="datalinkTransformForm" [allowStandard]="true" [allowMapping]="true" [allowOutput]="true" title="Mapping Functions" (onColumnDrop)="newDragDropMapping(eDatalinkTransformItemType.ColumnPair, $event)">
+                <mapping [datalinkTransformForm]="datalinkTransformForm" [allowStandard]="true" [allowMapping]="true" [allowOutput]="true" title="Mapping Functions" (onColumnDrop)="newDragDropMapping(eTransformItemType.ColumnPair, $event)">
                 </mapping>
             </div>
 
             <div *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Sort">
-                <mapping [datalinkTransformForm]="datalinkTransformForm" [allowSort]="true" title="Sort Columns" (onColumnDrop)="newDragDropMapping(eDatalinkTransformItemType.Sort, $event)">
+                <mapping [datalinkTransformForm]="datalinkTransformForm" [allowSort]="true" title="Sort Columns" (onColumnDrop)="newDragDropMapping(eTransformItemType.Sort, $event)">
                 </mapping>
             </div>
 
             <div *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Group || this.datalinkTransformForm.value.transformType == eTransformType.Aggregate  || this.datalinkTransformForm.value.transformType == eTransformType.Series  || this.datalinkTransformForm.value.transformType == eTransformType.Rows">
                 <mapping [datalinkTransformForm]="datalinkTransformForm" title="Group Columns"  [allowGroup]="true" [allowSeries]="this.datalinkTransformForm.value.transformType == eTransformType.Series"
-                    (onColumnDrop)="newDragDropMapping(eDatalinkTransformItemType.Column, $event)">
+                    (onColumnDrop)="newDragDropMapping(eTransformItemType.Column, $event)">
                 </mapping>
             </div>
 
             <div *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Group">
-                <mapping [datalinkTransformForm]="datalinkTransformForm" [allowStandard]="true" [allowAggregate]="true" [allowOutput]="true" title="Aggregate Functions" (onColumnDrop)="newDragDropMapping(eDatalinkTransformItemType.AggregatePair, $event)">
+                <mapping [datalinkTransformForm]="datalinkTransformForm" [allowStandard]="true" [allowAggregate]="true" [allowOutput]="true" title="Aggregate Functions" (onColumnDrop)="newDragDropMapping(eTransformItemType.AggregatePair, $event)">
                 </mapping>
             </div>
 
             <div *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Series">
-                <mapping [datalinkTransformForm]="datalinkTransformForm" [allowStandard]="true" [allowAggregate]="true" [allowSeries]="true" [allowOutput]="true" title="Series/Aggregate Functions" (onColumnDrop)="newDragDropMapping(eDatalinkTransformItemType.AggregatePair, $event)">
+                <mapping [datalinkTransformForm]="datalinkTransformForm" [allowStandard]="true" [allowAggregate]="true" [allowSeries]="true" [allowOutput]="true" title="Series/Aggregate Functions" (onColumnDrop)="newDragDropMapping(eTransformItemType.AggregatePair, $event)">
                 </mapping>
 
-                <mapping [datalinkTransformForm]="datalinkTransformForm" [allowMapping]="true" [allowOutput]="true" title="Mappings" (onColumnDrop)="newDragDropMapping(eDatalinkTransformItemType.ColumnPair, $event)">
+                <mapping [datalinkTransformForm]="datalinkTransformForm" [allowMapping]="true" [allowOutput]="true" title="Mappings" (onColumnDrop)="newDragDropMapping(eTransformItemType.ColumnPair, $event)">
                 </mapping>
             </div>
 
             <div *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Aggregate">
-                <mapping [datalinkTransformForm]="datalinkTransformForm" [allowStandard]="true" [allowAggregate]="true" [allowOutput]="true" title="Aggregate Functions" (onColumnDrop)="newDragDropMapping(eDatalinkTransformItemType.AggregatePair, $event)">
+                <mapping [datalinkTransformForm]="datalinkTransformForm" [allowStandard]="true" [allowAggregate]="true" [allowOutput]="true" title="Aggregate Functions" (onColumnDrop)="newDragDropMapping(eTransformItemType.AggregatePair, $event)">
                 </mapping>
 
-                <mapping [datalinkTransformForm]="datalinkTransformForm" [allowMapping]="true" [allowOutput]="true" title="Mappings" (onColumnDrop)="newDragDropMapping(eDatalinkTransformItemType.ColumnPair, $event)">
+                <mapping [datalinkTransformForm]="datalinkTransformForm" [allowMapping]="true" [allowOutput]="true" title="Mappings" (onColumnDrop)="newDragDropMapping(eTransformItemType.ColumnPair, $event)">
                 </mapping>
 
             </div>
@@ -165,8 +165,8 @@
         </div>
 
         <dexih-widget class="d-none d-md-inline" [title]="'Outputs' + (datalinkTransformForm.controls.nodeDatalinkColumn?.value ? '(@' + datalinkTransformForm.controls.nodeDatalinkColumn.value.name + ')' : '')"  height="80vh" style="width:300px"  [scrollable]="true">
-            <output-columns [datalinkTransformForm]='datalinkTransformForm' [allowMappingOutputs]="allowMappingOutputs" (inputOutputDrop)="newDragDropMapping(eDatalinkTransformItemType.ColumnPair, $event)"></output-columns>
-            <target-columns [datalinkTransformForm]='datalinkTransformForm' [targets]="datalinkForm.controls.dexihDatalinkTargets.value" [allowMappingOutputs]="allowMappingOutputs" (inputOutputDrop)="newDragDropMapping(eDatalinkTransformItemType.ColumnPair, $event)"></target-columns>
+            <output-columns [datalinkTransformForm]='datalinkTransformForm' [allowMappingOutputs]="allowMappingOutputs" (inputOutputDrop)="newDragDropMapping(eTransformItemType.ColumnPair, $event)"></output-columns>
+            <target-columns [datalinkTransformForm]='datalinkTransformForm' [targets]="datalinkForm.controls.dexihDatalinkTargets.value" [allowMappingOutputs]="allowMappingOutputs" (inputOutputDrop)="newDragDropMapping(eTransformItemType.ColumnPair, $event)"></target-columns>
         </dexih-widget>
     </div>
 </div>

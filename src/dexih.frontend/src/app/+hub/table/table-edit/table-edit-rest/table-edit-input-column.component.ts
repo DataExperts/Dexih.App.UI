@@ -1,5 +1,4 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
-import { DexihTable } from '../../../hub.models';
 import { FormGroup } from '@angular/forms';
 
 @Component({

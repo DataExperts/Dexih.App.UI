@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { HubService } from '../../hub.service';
-import { DexihHub, HubCache, eSharedObjectType, eCacheStatus, DexihView, DexihDashboard } from '../../hub.models';
 import { AuthService } from '../../../+auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
+import { HubCache } from '../../hub.models';
+import { DexihDashboard, DexihHub, eSharedObjectType } from '../../../shared/shared.models';
 
 @Component({
     selector: 'dashboards',
@@ -97,7 +98,7 @@ export class DashboardIndexComponent implements OnInit, OnDestroy {
     // TBD
     export(items: Array<DexihDashboard>) {
         const cache = this.hubCache;
-        const hub = new DexihHub(cache.hub.hubKey, '');
+        const hub = this.hubService.createHub(cache.hub.hubKey, '');
         items.forEach(item => { cache.cacheAddDashboard(item.key, hub); });
 
         let filename = items.length === 1 ? 'Dashboard - ' + items[0].name + '.json' : 'dashboards.json';

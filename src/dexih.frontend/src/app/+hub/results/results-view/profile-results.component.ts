@@ -1,10 +1,8 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../../+auth/auth.service';
-import { TransformWriterResult } from '../../hub.models';
 import { HubService } from '../../hub.service';
-import { Subscription, BehaviorSubject, Observable, combineLatest} from 'rxjs';
-import { SelectQuery, DownloadObject } from '../../hub.query.models';
 import { CancelToken } from '../../../+auth/auth.models';
+import { TransformWriterResult } from '../../../shared/shared.models';
 
 @Component({
     selector: 'profile-results',

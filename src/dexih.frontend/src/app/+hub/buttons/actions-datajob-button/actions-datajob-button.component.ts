@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HubService } from '../../hub.service';
-import { DexihDatajob, HubCache, DexihHub} from '../../hub.models';
-import { Subscription, combineLatest} from 'rxjs';
+import { HubCache } from '../../hub.models';
+import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
+import { DexihDatajob, DexihHub } from '../../../shared/shared.models';
 
 @Component({
     selector: 'actions-datajob-button',
@@ -44,7 +45,7 @@ export class ActionsDatajobButtonComponent implements OnInit {
 
     export() {
         const cache = this.hubCache;
-        const hub = new DexihHub(this.hubCache.hub.hubKey, '');
+        const hub = this.hubService.createHub(this.hubCache.hub.hubKey, '');
         this.datajobs.forEach(datajob => { this.hubCache.cacheAddDatajob(datajob.key, hub); });
 
         let filename = this.datajobs.length === 1 ? 'Datajob - ' + this.datajobs[0].name + '.json' : 'datajobs.json';

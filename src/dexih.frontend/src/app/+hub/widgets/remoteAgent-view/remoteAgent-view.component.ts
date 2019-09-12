@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { DexihRemoteAgentHub } from '../../hub.models';
 import { AuthService } from '../../../+auth/auth.service';
 import { Subscription, combineLatest } from 'rxjs';
 import { HubService } from '../../hub.service';
+import { DexihRemoteAgentHub } from '../../../shared/shared.models';
 
 
 @Component({

@@ -1,11 +1,9 @@
 import { Component, OnInit, OnChanges, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HubService } from '../../hub.service';
-import { HubCache, DexihHub, DexihTable, DexihDatalink, DexihConnection, eViewSource, eSharedDataObjectType} from '../../hub.models';
-import { Subscription ,  Observable, combineLatest} from 'rxjs';
-import { DownloadObject, eDownloadFormat } from '../../hub.query.models';
-import { DatalinkColumnEditComponent } from '../../datalink/datalink-edit/datalink-column-edit';
-import { ConnectionReference, RemoteLibraries, eConnectionCategory } from '../../hub.remote.models';
+import { HubCache } from '../../hub.models';
+import { Subscription, combineLatest} from 'rxjs';
+import { DexihTable, eConnectionCategory, DexihConnection, ConnectionReference, DexihDatalink, DownloadObject, eSourceType, eDownloadFormat, DexihHub, eDataObjectType } from '../../../shared/shared.models';
 
 @Component({
     selector: 'actions-table-button',
@@ -22,7 +20,6 @@ export class ActionsTableButtonComponent implements OnInit, OnChanges, OnDestroy
 
     private _subscription: Subscription;
     private hubCache: HubCache;
-    private remoteLibraries: RemoteLibraries;
     eConnectionCategory = eConnectionCategory;
 
     public connection: DexihConnection;
@@ -42,20 +39,16 @@ export class ActionsTableButtonComponent implements OnInit, OnChanges, OnDestroy
     ngOnInit() {
         this._subscription = combineLatest(
             this.hubService.getHubCacheObservable(),
-            this.hubService.getRemoteLibrariesObservable()
         ).subscribe(result => {
             this.hubCache = result[0];
-            this.remoteLibraries = result[1];
 
-            if (this.hubCache.isLoaded() && this.remoteLibraries) {
+            if (this.hubCache.isLoaded()) {
                 this.hubPath = this.hubCache.getHubUrl();
 
                 this.canWrite = this.hubCache.canWrite;
                 if (this.tables && this.tables.length === 1) {
                     this.connection = this.hubCache.getConnection(this.tables[0].connectionKey);
-                    if (this.remoteLibraries) {
-                        this.connectionReference = this.remoteLibraries.GetConnectionReference(this.connection);
-                    }
+                    this.connectionReference = this.hubService.GetConnectionReference(this.connection);
                 }
             }
         });
@@ -73,10 +66,8 @@ export class ActionsTableButtonComponent implements OnInit, OnChanges, OnDestroy
             });
 
             if (this.tables.length === 1) {
-                if (this.hubCache && this.remoteLibraries) {
-                    this.connection = this.hubCache.getConnection(this.tables[0].connectionKey);
-                    this.connectionReference = this.remoteLibraries.GetConnectionReference(this.connection);
-                }
+                this.connection = this.hubCache.getConnection(this.tables[0].connectionKey);
+                this.connectionReference = this.hubService.GetConnectionReference(this.connection);
             }
         }
      }
@@ -141,7 +132,7 @@ export class ActionsTableButtonComponent implements OnInit, OnChanges, OnDestroy
     }
 
     shareItems(isShared: boolean) {
-        this.hubService.shareItems(this.getTableKeys(), eSharedDataObjectType.Table, isShared);
+        this.hubService.shareItems(this.getTableKeys(), eDataObjectType.Table, isShared);
     }
 
     newDatalinks() {
@@ -162,7 +153,7 @@ export class ActionsTableButtonComponent implements OnInit, OnChanges, OnDestroy
         this.getTables().forEach(c => {
             let downloadObject = new DownloadObject();
             downloadObject.objectKey = c.key;
-            downloadObject.objectType = eViewSource.Table;
+            downloadObject.objectType = eDataObjectType.Table;
             downloadItems.push(downloadObject);
         });
         this.hubService.downloadData(downloadItems, true, eDownloadFormat.Csv)
@@ -170,7 +161,7 @@ export class ActionsTableButtonComponent implements OnInit, OnChanges, OnDestroy
 
     export() {
         const cache = this.hubCache;
-        const hub = new DexihHub(this.hubCache.hub.hubKey, '');
+        const hub = this.hubService.createHub(this.hubCache.hub.hubKey, '');
         let tables = this.getTables();
         tables.forEach(table => { this.hubCache.cacheAddTable(table.key, hub); });
 

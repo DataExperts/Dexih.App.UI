@@ -1,11 +1,10 @@
 import { Component, OnInit, Input, OnDestroy, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
-import { eViewType, InputColumn, DexihColumnBase, HubCache, DexihView,
-    eViewSource, PreviewResults, DexihInputParameter, DataCache } from '../../hub.models';
 import { combineLatest, Subscription } from 'rxjs';
 import { AuthService } from '../../../+auth/auth.service';
 import { HubService } from '../../hub.service';
-import { eDownloadFormat, DownloadObject } from '../../hub.query.models';
-import { DexihActiveAgent, CancelToken } from '../../../+auth/auth.models';
+import { DexihInputParameter, DataCache, HubCache, PreviewResults } from '../../hub.models';
+import { DexihActiveAgent, InputColumn, DexihColumnBase, DexihView, eViewType, eDownloadFormat, DownloadObject, eSourceType, eDataObjectType } from '../../../shared/shared.models';
+import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
     selector: 'preview-view',
@@ -166,7 +165,7 @@ export class PreviewViewComponent implements OnInit, OnChanges, OnDestroy {
     download(format: eDownloadFormat = eDownloadFormat.Csv) {
         if (this.view) {
             let downloadObject = new DownloadObject();
-            downloadObject.objectKey = this.view.sourceType === eViewSource.Datalink ?
+            downloadObject.objectKey = this.view.sourceType === eDataObjectType.Datalink ?
                 this.view.sourceDatalinkKey : this.view.sourceTableKey;
             downloadObject.objectType = this.view.sourceType;
             this.hubService.downloadData([downloadObject], false, format)

@@ -1,14 +1,13 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DexihConnection, DexihTable, DexihFileFormat, HubCache, eStatus, formatTypes } from '../../../hub.models';
 import { AuthService } from '../../../../+auth/auth.service';
 import { HubService } from '../../../hub.service';
-import { Subscription ,  Observable, combineLatest} from 'rxjs';
+import { Subscription} from 'rxjs';
 import { Location } from '@angular/common';
-import { Message, FileHandler } from '../../../../+auth/auth.models';
-import { FormGroup, FormArray } from '@angular/forms';
+import { FormArray } from '@angular/forms';
 import { HubFormsService } from '../../../hub.forms.service';
-import { eTypeCode } from '../../../hub.remote.models';
+import { DexihConnection, DexihFileFormat, eTypeCode, DexihTable } from '../../../../shared/shared.models';
+import { HubCache, formatTypes } from '../../../hub.models';
 
 @Component({
 
@@ -33,10 +32,7 @@ export class TableEditFileComponent implements OnInit, OnDestroy {
     eTypeCode = eTypeCode;
 
     constructor(private authService: AuthService,
-        private hubService: HubService,
-        private route: ActivatedRoute,
-        private router: Router,
-        private location: Location) {
+        private hubService: HubService) {
 
     }
 
@@ -105,7 +101,7 @@ export class TableEditFileComponent implements OnInit, OnDestroy {
                     this.hubService.addHubErrorMessage(importedTable.entityStatus.message);
                 }
 
-                importedTable.fileFormat = this.hubCache.getFileFormat(importedTable.fileFormatKey);
+                // importedTable.fileFormat = this.hubCache.getFileFormat(importedTable.fileFormatKey);
 
                 let tableColumnsForm = <FormArray>this.formService.currentForm.controls.dexihTableColumns;
 

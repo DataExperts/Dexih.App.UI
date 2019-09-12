@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { HubService } from '../../hub.service';
-import { DexihHub, DexihFileFormat, HubCache, eSharedObjectType, eCacheStatus, DexihView, DexihApi, eSourceType } from '../../hub.models';
+import { HubCache } from '../../hub.models';
 import { AuthService } from '../../../+auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
+import { DexihApi, eSourceType, eSharedObjectType } from '../../../shared/shared.models';
 
 @Component({
     selector: 'apis',

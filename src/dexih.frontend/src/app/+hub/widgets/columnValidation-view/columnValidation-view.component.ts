@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DexihColumnValidation } from '../../hub.models';
+import { DexihColumnValidation } from '../../../shared/shared.models';
 
 @Component({
     selector: 'columnValidation-view',

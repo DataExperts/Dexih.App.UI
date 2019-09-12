@@ -1,54 +1,22 @@
 import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription, combineLatest, Subject} from 'rxjs';
-
-import { Message, ManagedTask, ePermission, DexihActiveAgent, PromiseWithCancel, CancelToken } from '../+auth/auth.models';
+import { Message, ManagedTask, PromiseWithCancel, CancelToken } from '../+auth/auth.models';
 import { AuthService } from '../+auth/auth.service';
 import { eLogLevel, LogFactory } from '../../logging';
 import {
-    DexihColumnValidation,
-    DexihConnection,
-    DexihDatajob,
-    DexihDatalink,
-    DexihDatalinkStep,
-    DexihDatalinkTransformItem,
-    DexihFileFormat,
-    DexihHub,
-    DexihHubVariable,
-    DexihRemoteAgentHub,
-    DexihTable,
-    eSharedObjectType,
-    eConnectionPurpose,
-    eDatalinkType,
-    eDeltaType,
-    eFlatFilePath,
-    eRunStatus,
     FileProperties,
     HubCache,
     HubCacheChange,
-    Import,
     RemoteMessage,
-    TransformWriterResult,
-    DexihCustomFunction,
     eCacheStatus,
-    ImportObject,
-    eImportAction,
-    DexihDatalinkTest,
-    InputColumn,
-    DexihView,
-    DexihApi,
-    ApiData,
-    TransformProperties,
     PreviewResults,
     FlatFilesReady,
-    DexihDashboard,
-    DexihInputParameter,
     DashboardUrl,
-    InputParameter,
-    eSharedDataObjectType
+    DexihInputParameter
 } from './hub.models';
-import { DownloadObject, eDownloadFormat, SelectQuery } from './hub.query.models';
-import { RemoteLibraries, RemoteAgentStatus, eTypeCode } from './hub.remote.models';
+import { RemoteAgentStatus, transformTypes } from './hub.remote.models';
 import { GlobalCache } from '../+auth/global.models';
+import { DexihDatajob, DexihTable, DexihHub, DexihRemoteAgentHub, DexihConnection, DexihDatalink, InputColumn, InputParameter, DexihView, DexihDashboard, DexihApi, SelectQuery, DexihColumnValidation, DexihCustomFunction, DexihDatalinkTransformItem, DexihFileFormat, DexihHubVariable, DexihDatalinkTest, DexihDatalinkStep, TransformWriterResult, TransformProperties, Import, eImportAction, eRunStatus, eDatalinkType, eDeltaType, eConnectionPurpose, eFlatFilePath, ApiData, DownloadObject, eDownloadFormat, DexihActiveAgent, ImportObject, ePermission, eTypeCode, eDataObjectType, eSharedObjectType, RemoteLibraries, ConnectionReference, DexihDatalinkTransform, TransformReference, FunctionReference, eFunctionType } from '../shared/shared.models';
 
 @Injectable()
 export class HubService implements OnInit, OnDestroy {
@@ -60,6 +28,12 @@ export class HubService implements OnInit, OnDestroy {
 
     // updates whenever the local hub cache changes
     private _hubCacheChange = new Subject<HubCacheChange>();
+
+    // updates whenever a new transformwriter result is updated
+    private _transformWriterResultChange = new Subject<TransformWriterResult>();
+
+    // updates whenever an api is started/stopped
+    private _apiStatusChange = new Subject<DexihApi>();
 
     private _remoteLibraries = new BehaviorSubject<RemoteLibraries>(null);
 
@@ -147,6 +121,14 @@ export class HubService implements OnInit, OnDestroy {
         if (this._hubCache) { this._hubCache.unsubscribe(); }
     }
 
+    public createHub(key: number, name: string): DexihHub {
+        let hub = new DexihHub();
+        hub.hubKey = key;
+        hub.name = name;
+
+        return hub;
+    }
+
     public isHubCacheLoaded(): boolean {
         return this.getHubCache().status === eCacheStatus.Loaded;
     }
@@ -164,6 +146,14 @@ export class HubService implements OnInit, OnDestroy {
     // hubCacheChange detects specific changes to objects and is used to monitor object changes from other sessions when editing forms.
     getHubCacheChangeObservable(): Observable<HubCacheChange> {
         return this._hubCacheChange.asObservable();
+    }
+
+    getTransformWriterResultChangeObservable(): Observable<TransformWriterResult> {
+        return this._transformWriterResultChange.asObservable();
+    }
+
+    geApiStatusChangeObservable(): Observable<DexihApi> {
+        return this._apiStatusChange.asObservable();
     }
 
     getFlatFilesObservable(): Observable<FlatFilesReady> {
@@ -214,7 +204,7 @@ export class HubService implements OnInit, OnDestroy {
         this._hubMessages.next([]);
 
         if (!hubKey || hubKey === 0) {
-            let hubCache = new HubCache(eCacheStatus.NoHub, new DexihHub(0, name));
+            let hubCache = new HubCache(eCacheStatus.NoHub, this.createHub(0, name));
             this._hubCache.next(hubCache);
         } else if (!this._hubCache.getValue().hub || this._hubCache.getValue().hub.hubKey !== hubKey) {
             this.refreshHubCache(hubKey, name);
@@ -228,40 +218,41 @@ export class HubService implements OnInit, OnDestroy {
 
             this.logger.LogC(() => `refreshHubCache, hubKey: ${hubKey}, name: ${name}.`, eLogLevel.Debug);
 
-            this._hubCache.next(new HubCache(eCacheStatus.Loading, new DexihHub(hubKey, name)));
+            this._hubCache.next(new HubCache(eCacheStatus.Loading, this.createHub(hubKey, name)));
 
             this.authService.post('/api/Hub/GetHubCache', { hubKey: hubKey }, 'Loading the hub cache...').then(result => {
                 let hub: DexihHub = result.value.hub;
-                hub.hubPermission = result.value.permission;
+                let permisson = result.value.permission;
 
                 this.logger.LogC(() => `refreshHubCache, hub loaded ${hub.name}.`, eLogLevel.Debug);
 
                 // update the status for datalink and datajobs.  These are use to monitor execution status.
                 hub.dexihDatalinks.forEach(datalink => {
-                    datalink.currentStatus = new BehaviorSubject<TransformWriterResult>(null);
-                    datalink.previousStatus = new BehaviorSubject<TransformWriterResult>(null);
+                    datalink['currentStatus']= new BehaviorSubject<TransformWriterResult>(null);
+                    datalink['previousStatus'] = new BehaviorSubject<TransformWriterResult>(null);
                 });
 
                 hub.dexihDatajobs.forEach(datajob => {
-                    datajob.currentStatus = new BehaviorSubject<TransformWriterResult>(null);
-                    datajob.previousStatus = new BehaviorSubject<TransformWriterResult>(null);
+                    datajob['currentStatus'] = new BehaviorSubject<TransformWriterResult>(null);
+                    datajob['previousStatus'] = new BehaviorSubject<TransformWriterResult>(null);
                 });
 
                 hub.dexihDatalinkTests.forEach(datalinkTest => {
-                    datalinkTest.currentStatus = new BehaviorSubject<TransformWriterResult>(null);
-                    datalinkTest.previousStatus = new BehaviorSubject<TransformWriterResult>(null);
+                    datalinkTest['currentStatus'] = new BehaviorSubject<TransformWriterResult>(null);
+                    datalinkTest['previousStatus'] = new BehaviorSubject<TransformWriterResult>(null);
                 });
 
                 hub.dexihTables.forEach(table => {
-                    table.currentStatus = new BehaviorSubject<TransformWriterResult>(null);
-                    table.previousStatus = new BehaviorSubject<TransformWriterResult>(null);
+                    table['currentStatus'] = new BehaviorSubject<TransformWriterResult>(null);
+                    table['previousStatus'] = new BehaviorSubject<TransformWriterResult>(null);
                 });
 
                 hub.dexihApis.forEach(api => {
-                    api.currentStatus = new BehaviorSubject<ApiData>(null);
+                    api['currentStatus'] = new BehaviorSubject<ApiData>(null);
                 });
 
                 let hubCache: HubCache = new HubCache(eCacheStatus.Loaded, hub);
+                hubCache.hubPermission = permisson;
                 this.resetRemoteAgent(hubCache);
                 this._hubCache.next(hubCache);
 
@@ -370,28 +361,28 @@ export class HubService implements OnInit, OnDestroy {
         if (!hub) { return; }
 
         hub.dexihApis.forEach(api => {
-            api.currentStatus.next(null);
+            api['currentStatus'].next(null);
         });
 
         // merge the datalink/datajob status into the cached objects.
         hub.dexihDatalinks.forEach(datalink => {
-            datalink.currentStatus.next(null);
-            datalink.previousStatus.next(null);
+            datalink['currentStatus'].next(null);
+            datalink['previousStatus'].next(null);
         });
 
         hub.dexihTables.forEach(table => {
-            table.currentStatus.next(null);
-            table.previousStatus.next(null);
+            table['currentStatus'].next(null);
+            table['previousStatus'].next(null);
         });
 
         hub.dexihDatajobs.forEach(datajob => {
-            datajob.currentStatus.next(null);
-            datajob.previousStatus.next(null);
+            datajob['currentStatus'].next(null);
+            datajob['previousStatus'].next(null);
         });
 
         hub.dexihDatalinkTests.forEach(test => {
-            test.currentStatus.next(null);
-            test.previousStatus.next(null);
+            test['currentStatus'].next(null);
+            test['previousStatus'].next(null);
         });
     }
 
@@ -409,6 +400,75 @@ export class HubService implements OnInit, OnDestroy {
         } else {
             return agent.instanceId;
         }
+    }
+
+    public GetConnectionReference(connection: DexihConnection): ConnectionReference {
+        let remoteLibraries = this._remoteLibraries.value;
+        if(!remoteLibraries) { return null; }
+
+        if (connection && remoteLibraries.connections) {
+            let ref = remoteLibraries.connections.find(c =>
+                c.connectionAssemblyName === connection.connectionAssemblyName
+                && c.connectionClassName === connection.connectionClassName);
+
+            return ref;
+        } else {
+            return null;
+        }
+    }
+
+    public GetTransformReference(transform: DexihDatalinkTransform): TransformReference {
+        let remoteLibraries = this._remoteLibraries.value;
+        if(!remoteLibraries) { return null; }
+
+        if (transform && remoteLibraries.transforms) {
+            let ref = remoteLibraries.transforms.find(c =>
+                c.transformAssemblyName === transform.transformAssemblyName
+                && c.transformClassName === transform.transformClassName);
+
+            return ref;
+        } else {
+            return null;
+        }
+    }
+
+    // transforms that can be added/removed within a datalink
+    public GetUserConfigTransformReference(): TransformReference[] {
+        let remoteLibraries = this._remoteLibraries.value;
+        if(!remoteLibraries) { return null; }
+
+        if (!remoteLibraries.transforms) {
+            return [];
+        }
+        let userConfig = transformTypes.filter(c => c.allowUserConfig);
+        return remoteLibraries.transforms.filter(c => userConfig.findIndex(u => u.key === c.transformType ) >= 0 );
+    }
+
+    public GetFunctionReference(item: DexihDatalinkTransformItem): FunctionReference {
+        let remoteLibraries = this._remoteLibraries.value;
+        if(!remoteLibraries) { return null; }
+
+        if (remoteLibraries.functions && item && item.functionClassName) {
+            let ref = remoteLibraries.functions.find(c =>
+                c.functionAssemblyName === item.functionAssemblyName
+                && c.functionClassName === item.functionClassName
+                && c.functionMethodName === item.functionMethodName);
+
+            return ref;
+        } else {
+            return null;
+        }
+    }
+
+    public GetFunctionsByType(functionType: eFunctionType): FunctionReference[] {
+        let remoteLibraries = this._remoteLibraries.value;
+        if(!remoteLibraries) { return null; }
+
+        if (!remoteLibraries.functions) {
+            return [];
+        }
+        return remoteLibraries.functions.filter(c => c.functionType === functionType);
+
     }
 
     private processWebSocketMessage(data: RemoteMessage) {
@@ -517,21 +577,21 @@ export class HubService implements OnInit, OnDestroy {
                 if (changeClass === eSharedObjectType.Datalink || changeClass === eSharedObjectType.Datajob ||
                     changeClass === eSharedObjectType.Table || changeClass === eSharedObjectType.DatalinkTest) {
                     if (current) {
-                        item.item.currentStatus = current.currentStatus;
-                        item.item.previousStatus = current.previousStatus;
+                        item.item['currentStatus'] = current['currentStatus'];
+                        item.item['previousStatus'] = current['previousStatus'];
                     } else {
-                        item.item.currentStatus = new BehaviorSubject<TransformWriterResult>(null);
-                        item.item.previousStatus = new BehaviorSubject<TransformWriterResult>(null);
+                        item.item['currentStatus'] = new BehaviorSubject<TransformWriterResult>(null);
+                        item.item['previousStatus'] = new BehaviorSubject<TransformWriterResult>(null);
                     }
                 }
 
                 if ( changeClass === eSharedObjectType.Api) {
                     if (current) {
-                        item.item.currentStatus = current.currentStatus;
-                        item.item.previousStatus = current.previousStatus;
+                        item.item['currentStatus'] = current['currentStatus'];
+                        item.item['previousStatus'] = current['previousStatus'];
                     } else {
-                        item.item.currentStatus = new BehaviorSubject<ApiData>(null);
-                        item.item.previousStatus = new BehaviorSubject<ApiData>(null);
+                        item.item['currentStatus'] = new BehaviorSubject<ApiData>(null);
+                        item.item['previousStatus'] = new BehaviorSubject<ApiData>(null);
                     }
                 }
 
@@ -565,8 +625,8 @@ export class HubService implements OnInit, OnDestroy {
     private addApiStatus(apiData: ApiData) {
         const api = this._hubCache.value.hub.dexihApis.find(c => c.key === apiData.apiKey);
         if (api) {
-            api.currentStatus.next(apiData);
-            this._hubCacheChange.next(new HubCacheChange(eSharedObjectType.ApiStatus, eImportAction.Replace, api));
+            api['currentStatus'].next(apiData);
+            this._apiStatusChange.next(api);
         }
     }
 
@@ -580,10 +640,10 @@ export class HubService implements OnInit, OnDestroy {
             if (writerResult.runStatus === eRunStatus.Abended ||
                 writerResult.runStatus === eRunStatus.Finished ||
                 writerResult.runStatus === eRunStatus.FinishedErrors ) {
-                    datalink.previousStatus.next(writerResult);
-                    datalink.currentStatus.next(null);
+                    datalink['previousStatus'].next(writerResult);
+                    datalink['currentStatus'].next(null);
             } else {
-                datalink.currentStatus.next(writerResult);
+                datalink['currentStatus'].next(writerResult);
             }
 
             if (writerResult.targetTableKey > 0) {
@@ -595,7 +655,8 @@ export class HubService implements OnInit, OnDestroy {
                     this.addTableProgress(c);
                 });
             }
-            this._hubCacheChange.next(new HubCacheChange(eSharedObjectType.TransformWriterResult, eImportAction.Replace, writerResult));
+
+            this._transformWriterResultChange.next(writerResult);
         }
     }
 
@@ -607,12 +668,12 @@ export class HubService implements OnInit, OnDestroy {
             if (writerResult.runStatus === eRunStatus.Abended ||
                 writerResult.runStatus === eRunStatus.Finished ||
                 writerResult.runStatus === eRunStatus.FinishedErrors ) {
-                    datalinkTest.previousStatus.next(writerResult);
-                    datalinkTest.currentStatus.next(null);
+                    datalinkTest['previousStatus'].next(writerResult);
+                    datalinkTest['currentStatus'].next(null);
             } else {
-                datalinkTest.currentStatus.next(writerResult);
+                datalinkTest['currentStatus'].next(writerResult);
             }
-            this._hubCacheChange.next(new HubCacheChange(eSharedObjectType.TransformWriterResult, eImportAction.Replace, writerResult));
+            this._transformWriterResultChange.next(writerResult);
         }
     }
 
@@ -623,12 +684,12 @@ export class HubService implements OnInit, OnDestroy {
             if (writerResult.runStatus === eRunStatus.Abended ||
                 writerResult.runStatus === eRunStatus.Finished ||
                 writerResult.runStatus === eRunStatus.FinishedErrors ) {
-                    table.previousStatus.next(writerResult);
-                    table.currentStatus.next(null);
+                    table['previousStatus'].next(writerResult);
+                    table['currentStatus'].next(null);
             } else {
-                table.currentStatus.next(writerResult);
+                table['currentStatus'].next(writerResult);
             }
-            this._hubCacheChange.next(new HubCacheChange(eSharedObjectType.TransformWriterResult, eImportAction.Replace, writerResult));
+            this._transformWriterResultChange.next(writerResult);
 
             if (writerResult.childResults) {
                 writerResult.childResults.forEach(c => {
@@ -648,12 +709,12 @@ export class HubService implements OnInit, OnDestroy {
             if (writerResult.runStatus === eRunStatus.Abended ||
                 writerResult.runStatus === eRunStatus.Finished ||
                 writerResult.runStatus === eRunStatus.FinishedErrors ) {
-                    datajob.previousStatus.next(writerResult);
-                    datajob.currentStatus.next(null);
+                    datajob['previousStatus'].next(writerResult);
+                    datajob['currentStatus'].next(null);
             } else {
-                datajob.currentStatus.next(writerResult);
+                datajob['currentStatus'].next(writerResult);
             }
-            this._hubCacheChange.next(new HubCacheChange(eSharedObjectType.TransformWriterResult, eImportAction.Replace, writerResult));
+            this._transformWriterResultChange.next(writerResult);
         }
     }
 
@@ -734,29 +795,29 @@ export class HubService implements OnInit, OnDestroy {
                         this._remoteLibraries.next(remoteLibraries);
 
                         hub.dexihApis.forEach(api => {
-                            api.currentStatus.next(agentStatus.activeApis.find(c => c.apiKey === api.key));
+                            api['currentStatus'].next(agentStatus.activeApis.find(c => c.apiKey === api.key));
                         });
 
                         // merge the datalink/datajob status into the cached objects.
                         hub.dexihDatalinks.forEach(datalink => {
-                            datalink.currentStatus.next(this.getTransformWriterResult(datalink.key,  agentStatus.activeDatalinks));
-                            datalink.previousStatus.next(
+                            datalink['currentStatus'].next(this.getTransformWriterResult(datalink.key,  agentStatus.activeDatalinks));
+                            datalink['previousStatus'].next(
                                 this.getTransformWriterResult(datalink.key,  agentStatus.previousDatalinks));
                         });
 
                         hub.dexihTables.forEach(table => {
-                            table.currentStatus.next(this.getTransformWriterTable(table.key, agentStatus.activeDatalinks));
-                            table.previousStatus.next(this.getTransformWriterTable(table.key, agentStatus.previousDatalinks));
+                            table['currentStatus'].next(this.getTransformWriterTable(table.key, agentStatus.activeDatalinks));
+                            table['previousStatus'].next(this.getTransformWriterTable(table.key, agentStatus.previousDatalinks));
                         });
 
                         hub.dexihDatajobs.forEach(datajob => {
-                            datajob.currentStatus.next(this.getTransformWriterResult(datajob.key,  agentStatus.activeDatajobs));
-                            datajob.previousStatus.next(this.getTransformWriterResult(datajob.key,  agentStatus.previousDatajobs));
+                            datajob['currentStatus'].next(this.getTransformWriterResult(datajob.key,  agentStatus.activeDatajobs));
+                            datajob['previousStatus'].next(this.getTransformWriterResult(datajob.key,  agentStatus.previousDatajobs));
                         });
 
                         hub.dexihDatalinkTests.forEach(test => {
-                            test.currentStatus.next(this.getTransformWriterResult(test.key,  agentStatus.activeDatalinkTests));
-                            test.previousStatus.next(
+                            test['currentStatus'].next(this.getTransformWriterResult(test.key,  agentStatus.activeDatalinkTests));
+                            test['previousStatus'].next(
                                 this.getTransformWriterResult(test.key,  agentStatus.previousDatalinkTests));
                         });
 
@@ -1238,7 +1299,7 @@ export class HubService implements OnInit, OnDestroy {
         });
     }
 
-    shareItems(keys: Array<number>, objectType: eSharedDataObjectType, isShared: boolean): Promise<boolean> {
+    shareItems(keys: Array<number>, objectType: eDataObjectType, isShared: boolean): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             // call the delete.
             this.authService.post('/api/Hub/ShareItems', {
@@ -1720,7 +1781,7 @@ export class HubService implements OnInit, OnDestroy {
 
     previewTableData(table: DexihTable, showRejectedData, selectQuery: SelectQuery, inputColumns: InputColumn[],
         parameters: DexihInputParameter[], cancelToken: CancelToken): PromiseWithCancel<PreviewResults> {
-        let hub = new DexihHub(this._hubCache.value.hub.hubKey, 'cache');
+        let hub = this.createHub(this._hubCache.value.hub.hubKey, 'cache');
         this._hubCache.value.cacheAddConnection(table.connectionKey, hub);
 
         return this.previewTableDataQuery(table, showRejectedData, selectQuery, inputColumns, parameters, cancelToken);
@@ -1766,7 +1827,7 @@ export class HubService implements OnInit, OnDestroy {
         inputParameters: DexihInputParameter[], cancelToken: CancelToken):
         PromiseWithCancel<PreviewResults> {
         let promise = new PromiseWithCancel<PreviewResults>((resolve, reject) => {
-                let hub = new DexihHub(this._hubCache.value.hub.hubKey, 'cache');
+                let hub = this.createHub(this._hubCache.value.hub.hubKey, 'cache');
                 this._hubCache.value.cacheAddConnection(table.connectionKey, hub);
                 if (!this._remoteAgent.value) {
                     let message = new Message(false, 'No selected remote agent.', null, null);
@@ -1906,9 +1967,9 @@ export class HubService implements OnInit, OnDestroy {
         PromiseWithCancel<PreviewResults> {
         let promise = new PromiseWithCancel<PreviewResults>((resolve, reject) => {
                 // remove status as they will not parse into json.
-                datalink.currentStatus = null;
+                datalink['currentStatus'] = null;
                 datalink.entityStatus = null;
-                datalink.previousStatus = null;
+                datalink['previousStatus'] = null;
                 const cache = this._hubCache.value;
                 if (!this._remoteAgent.value) {
                     let message = new Message(false, 'No active remote agent.', null, null);

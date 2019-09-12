@@ -1,12 +1,9 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { HubService } from '../../hub.service';
-import { DexihHub, HubCache, eSharedObjectType, DexihView, DexihApi, eSourceType, sharedObjectProperties,
-    SharedObject } from '../../hub.models';
+import { HubCache, SharedObject } from '../../hub.models';
 import { AuthService } from '../../../+auth/auth.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
-import { share } from 'rxjs/operators';
+import { Subscription, combineLatest} from 'rxjs';
+import { DexihApi, DexihHub } from '../../../shared/shared.models';
 
 @Component({
     selector: 'export',
@@ -33,9 +30,7 @@ export class ExportComponent implements OnInit, OnDestroy {
 
     constructor(
         private hubService: HubService,
-        private authService: AuthService,
-        private router: Router,
-        private route: ActivatedRoute) {
+        private authService: AuthService) {
     }
 
     ngOnInit() {
@@ -47,7 +42,6 @@ export class ExportComponent implements OnInit, OnDestroy {
 
                 if (!this.hubCache.isLoaded()) { return; }
 
-                let hub = this.hubCache.hub;
 
                 let data: SharedObject[] = this.hubCache.getSharedObjects();
                 this.data = data;
@@ -62,8 +56,7 @@ export class ExportComponent implements OnInit, OnDestroy {
     }
 
     export(items: Array<SharedObject>) {
-        const cache = this.hubCache;
-        const hub = new DexihHub(this.hubCache.hub.hubKey, '');
+        const hub = this.hubService.createHub(this.hubCache.hub.hubKey, '');
         items.forEach(item => {
             this.hubCache.cacheAddObject(item.type, item.item, hub);
         });

@@ -1,20 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import {
-  DexihDatalink, DexihDatalinkTransform, DexihDatalinkTransformItem, eDatalinkTransformItemType, HubCache,
-  DexihTable, DexihTableColumn, DexihDatalinkTable, DexihDatalinkColumn,
-  eTransformFunctionType, eParameterDirection, DexihFunctionParameter,  eOnNull, eOnError, eInvalidAction,
-  onErrorActions, onNullActions, InvalidActions
-}
-  from '../../../hub.models';
+import { HubCache, InvalidActions } from '../../../hub.models';
 import { HubService } from '../../../hub.service';
 import { DatalinkEditService } from '../datalink-edit.service';
 import { Subscription ,  Observable, combineLatest} from 'rxjs';
 import { Location } from '@angular/common';
 import { AuthService } from '../../../../+auth/auth.service';
 import { FormGroup, FormArray, AbstractControl } from '@angular/forms';
-import { RemoteLibraries, eTransformType, eTypeCode } from '../../../hub.remote.models';
 import { InputOutputColumns } from '../../../hub.lineage.models';
+import { eFunctionType, eParameterDirection, DexihDatalinkColumn, DexihDatalinkTransformItem, eTransformItemType, eTypeCode, DexihFunctionParameter } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -23,7 +17,6 @@ import { InputOutputColumns } from '../../../hub.lineage.models';
 })
 export class CustomFunctionEditComponent implements OnInit, OnDestroy {
   public hubCache: HubCache;
-  private remoteLibraries: RemoteLibraries;
 
   public pageTitle: string;
 
@@ -31,12 +24,10 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
   private _returnParameterSubscription: Subscription;
   private _parametersSubscription: Subscription;
 
-  eFunctionType = eTransformFunctionType;
+  eFunctionType = eFunctionType;
   eParameterDirection = eParameterDirection;
-  functionType: eTransformFunctionType;
+  functionType: eFunctionType;
 
-  onErrorActions = onErrorActions;
-  onNullActions = onNullActions;
   invalidActions = InvalidActions;
 
   datalinkTransformItemKey: number;
@@ -83,10 +74,9 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
         this.pageTitle = result[0]['pageTitle'];
         this.hubCache = result[2];
         this.datalinkForm = result[3];
-        this.remoteLibraries = result[4];
 
         this.functionType = result[1]['functionType'];
-        if (this.functionType === eTransformFunctionType.Validation) {
+        if (this.functionType === eFunctionType.Validate) {
           this.datalinkTransformForm = this.editDatalinkService.getValidationTransform();
           this.datalinkTransformKey = this.datalinkTransformForm.value.key;
         } else {
@@ -141,16 +131,16 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
 
             let newItem = new DexihDatalinkTransformItem();
             newItem.datalinkTransformKey = this.datalinkTransformKey;
-            newItem.transformItemType = eDatalinkTransformItemType.CustomFunction;
-            if (this.functionType === eTransformFunctionType.Condition
-              || this.functionType === eTransformFunctionType.JoinCondition || this.functionType === eTransformFunctionType.Validation) {
-              newItem.returnType = eTypeCode.Boolean;
-            } else {
-              newItem.returnType = eTypeCode.String;
-            }
+            newItem.transformItemType = eTransformItemType.CustomFunction;
 
             let returnParameter = new DexihFunctionParameter();
-            returnParameter.dataType = eTypeCode.String;
+
+            if (this.functionType === eFunctionType.Condition
+              || this.functionType === eFunctionType.JoinCondition || this.functionType === eFunctionType.Validate) {
+                returnParameter.dataType = eTypeCode.Boolean;
+            } else {
+              returnParameter.dataType = eTypeCode.String;
+            }
             returnParameter.name = 'Return';
             returnParameter.direction = eParameterDirection.ReturnValue;
             returnParameter.rank = 0;

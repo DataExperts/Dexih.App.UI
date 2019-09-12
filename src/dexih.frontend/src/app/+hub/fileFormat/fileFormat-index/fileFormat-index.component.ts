@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { HubService } from '../../hub.service';
-import { DexihHub, DexihFileFormat, HubCache, eSharedObjectType, eCacheStatus } from '../../hub.models';
 import { AuthService } from '../../../+auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
+import { HubCache } from '../../hub.models';
+import { DexihFileFormat, DexihHub, eSharedObjectType } from '../../../shared/shared.models';
 
 @Component({
     selector: 'fileFormats',
@@ -87,7 +88,7 @@ export class FileFormatIndexComponent implements OnInit, OnDestroy {
 
     export(items: Array<DexihFileFormat>) {
         const cache = this.hubCache;
-        const hub = new DexihHub(this.hubCache.hub.hubKey, '');
+        const hub = this.hubService.createHub(this.hubCache.hub.hubKey, '');
         items.forEach(item => { this.hubCache.cacheAddFileFormat(item.key, hub); });
 
         let filename = items.length === 1 ? 'FileFormat - ' + items[0].name + '.json' : 'fileFormats.json';

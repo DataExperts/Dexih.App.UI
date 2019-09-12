@@ -3,9 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, combineLatest} from 'rxjs';
 
 import { AuthService } from '../+auth/auth.service';
-import { DexihHub, HubCache, eCacheStatus } from './hub.models';
+import { HubCache, eCacheStatus } from './hub.models';
 import { HubService } from './hub.service';
-import { DexihActiveAgent, ePermission } from '../+auth/auth.models';
+import { DexihHub, DexihActiveAgent, ePermission } from '../shared/shared.models';
 
 @Component({
     selector: 'dexih-hub',

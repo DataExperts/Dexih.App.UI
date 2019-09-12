@@ -1,10 +1,11 @@
-import { HubCache, eSharedObjectType, DexihRemoteAgentHub, sharedObjectProperties } from '../../../+hub/hub.models';
 import { Subscription, combineLatest} from 'rxjs';
 import { Component, OnDestroy, OnInit, HostListener, ViewChild } from '@angular/core';
 import { HubService } from '../../../+hub/hub.service';
 import { AuthService, } from '../../../+auth/auth.service';
-import { DexihHubAuth, User, ePermission } from '../../../+auth/auth.models';
+import { DexihHubAuth, User } from '../../../+auth/auth.models';
 import { LayoutService } from '../layout.service';
+import { HubCache, sharedObjectProperties } from '../../../+hub/hub.models';
+import { DexihRemoteAgentHub, ePermission } from '../../shared.models';
 
 @Component({
 

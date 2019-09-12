@@ -13,9 +13,9 @@ namespace dexih.api.Services
 {
     internal class ValidateHubAttribute : ActionFilterAttribute
     {
-        private readonly DexihHubUser.EPermission _minimumPermission;
+        private readonly EPermission _minimumPermission;
 
-        public ValidateHubAttribute(DexihHubUser.EPermission minimumPermission)
+        public ValidateHubAttribute(EPermission minimumPermission)
         {
             _minimumPermission = minimumPermission;
         }
@@ -34,7 +34,7 @@ namespace dexih.api.Services
         {
             var controllerName = context.Controller.GetType().Name;
 
-            DexihHubUser.EPermission hubPermission;
+            EPermission hubPermission;
             var operations = (IDexihOperations)context.HttpContext.RequestServices.GetService(typeof(IDexihOperations));
             var repositoryManager = operations.RepositoryManager;
             var applicationUser = await repositoryManager.GetUser(context.HttpContext.User, CancellationToken.None);
@@ -60,7 +60,7 @@ namespace dexih.api.Services
                     }
                     catch (Exception ex)
                     {
-                        hubPermission = DexihHubUser.EPermission.None;
+                        hubPermission = EPermission.None;
                         logger.LogWarning(LoggingEvents.HubOnaction,
                             controllerName + ": Hub can not be accessed. HubKey: {HubKey}, User: {user}, Action: {Action}.  Error: {Error}", hubKey,
                             applicationUser.UserName, context.ActionDescriptor.DisplayName, ex.Message);
@@ -68,12 +68,12 @@ namespace dexih.api.Services
                 }
                 else
                 {
-                    hubPermission = DexihHubUser.EPermission.None;
+                    hubPermission = EPermission.None;
                 }
             }
             else
             {
-                hubPermission = DexihHubUser.EPermission.None;
+                hubPermission = EPermission.None;
                 var result = new ReturnValue(false, "No hub has been specified, please select a hub from the menu or contact support for assistance.", null);
                 context.Result = new JsonResult(result);
             }

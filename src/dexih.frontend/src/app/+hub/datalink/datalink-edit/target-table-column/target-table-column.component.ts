@@ -3,8 +3,8 @@ import { FormGroup, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HubFormsService } from '../../../hub.forms.service';
 import { AuthService } from '../../../../+auth/auth.service';
-import { eDeltaType } from '../../../hub.models'
 import { Subscription, combineLatest} from 'rxjs';
+import { eDeltaType } from '../../../../shared/shared.models';
 
 @Component({
     selector: 'target-table-column',

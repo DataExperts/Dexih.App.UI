@@ -1,11 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { DexihTable, InputColumn, ChartConfig } from '../../../hub.models';
 import { HubService } from '../../../hub.service';
 import { AuthService } from '../../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { HubFormsService } from '../../../hub.forms.service';
-import { SelectQuery } from '../../../hub.query.models';
+import { DexihTable } from '../../../../shared/shared.models';
 
 @Component({
 

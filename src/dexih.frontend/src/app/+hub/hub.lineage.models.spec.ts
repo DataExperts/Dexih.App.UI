@@ -1,10 +1,6 @@
-import { ColumnUsageNode, eObjectType, eObjectUse, InputOutputColumns } from './hub.lineage.models';
-
-import { HubCache, DexihHub, DexihConnection, DexihDatalink, DexihDatalinkTransform, DexihDatalinkTransformItem, eDatalinkTransformItemType,
-    DexihTable, DexihTableColumn,
-    DexihDatalinkTable, DexihDatalinkColumn, eCacheStatus, eMappingStatus, eLoadStrategy } from './hub.models';
-
-import { RemoteLibraries, eTransformType } from './hub.remote.models';
+import { ColumnUsageNode, eDatalinkObjectType, eObjectUse, InputOutputColumns } from './hub.lineage.models';
+import { HubCache, eCacheStatus, eMappingStatus } from './hub.models';
+import { DexihHub, DexihDatalinkTable, DexihDatalinkColumn, DexihConnection, DexihTable, DexihTableColumn, DexihDatalink, eTransformWriterMethod, eTransformType, DexihDatalinkTransform, DexihDatalinkTransformItem, eTransformItemType, RemoteLibraries } from '../shared/shared.models';
 
 class LineageTests {
 
@@ -12,7 +8,9 @@ class LineageTests {
     public remoteLibraries: RemoteLibraries;
 
     constructor() {
-        let hub = new DexihHub(1, 'test hub');
+        let hub = new DexihHub();
+        hub.hubKey = 1;
+        hub.name = 'test hub';
         this.hubCache = new HubCache(eCacheStatus.Loaded, hub);
         this.remoteLibraries = new RemoteLibraries();
 
@@ -69,7 +67,8 @@ class LineageTests {
     };
 
     getConnection(): DexihConnection {
-        let connection = new DexihConnection('test');
+        let connection = new DexihConnection();
+        connection.name = 'test';
 
         return connection;
     }
@@ -99,6 +98,7 @@ class LineageTests {
 
     getDatalinkWithSource(): DexihDatalink {
         let datalink = new DexihDatalink();
+        datalink.sourceDatalinkTable = new DexihDatalinkTable();
         datalink.name = 'test';
 
         datalink.sourceDatalinkTable = this.getDatalinkTable1();
@@ -109,7 +109,7 @@ class LineageTests {
     getDatalinkWithSourceTarget(): DexihDatalink {
         let datalink = this.getDatalinkWithSource();
 
-        datalink.loadStrategy = eLoadStrategy.Bulk;
+        datalink.loadStrategy = eTransformWriterMethod.Bulk;
         // datalink.targetTableKey = 100;
         return datalink;
     }
@@ -127,7 +127,7 @@ class LineageTests {
         // add a mapping
         let mapping = new DexihDatalinkTransformItem();
         mapping.sourceDatalinkColumn = inputColumn;
-        mapping.transformItemType = eDatalinkTransformItemType.ColumnPair;
+        mapping.transformItemType = eTransformItemType.ColumnPair;
         let targetColumn = new DexihDatalinkColumn();
         Object.assign(targetColumn, mapping.sourceDatalinkColumn);
         mapping.targetDatalinkColumn = targetColumn;
@@ -139,7 +139,7 @@ class LineageTests {
         // add a mapping
         let join = new DexihDatalinkTransformItem();
         join.sourceDatalinkColumn = inputColumn;
-        join.transformItemType = eDatalinkTransformItemType.JoinPair;
+        join.transformItemType = eTransformItemType.JoinPair;
         join.joinDatalinkColumn = joinColumn;
 
         return join;
@@ -164,7 +164,7 @@ class LineageTests {
 //         let inputs = io.getInputColumns(lineageTest.hubCache,  datalink, null, []);
 //         expect(3).toBe(inputs[0].dexihDatalinkColumns.length, 'expected 3 source columns.');
 
-//         let columnUsage = new ColumnUsageNode(eObjectType.SourceTable, eObjectUse.Source,
+//         let columnUsage = new ColumnUsageNode(eDatalinkObjectType.SourceTable, eObjectUse.Source,
 //             datalink, datalink.sourceDatalinkTable.dexihDatalinkColumns[0], null, null, null, null, lineageTest.hubCache);
 //         let mappingStatus = columnUsage.createDatalinkImpact(false);
 //         expect(eMappingStatus.PassThroughToVirtual).toBe(mappingStatus, 'impact should be passThroughToVirtual');
@@ -183,7 +183,7 @@ class LineageTests {
 //         let inputs = io.getInputColumns(lineageTest.hubCache,  datalink, null, []);
 //         expect(3).toBe(inputs[0].dexihDatalinkColumns.length, 'expected 3 source columns.');
 
-//         let columnUsage = new ColumnUsageNode(eObjectType.SourceTable, eObjectUse.Source,
+//         let columnUsage = new ColumnUsageNode(eDatalinkObjectType.SourceTable, eObjectUse.Source,
 //             datalink, datalink.sourceDatalinkTable.dexihDatalinkColumns[0], null, null, null, null, lineageTest.hubCache);
 //         let mappingStatus = columnUsage.createDatalinkImpact(false);
 //         expect(eMappingStatus.PassThroughMap).toBe(mappingStatus, 'impact should be PassThrough');
@@ -210,7 +210,7 @@ class LineageTests {
 //         expect(3).toBe(inputs[1].dexihDatalinkColumns.length);
 
 //         // get impact information from source column
-//         let columnUsage = new ColumnUsageNode(eObjectType.SourceTable, eObjectUse.Source,
+//         let columnUsage = new ColumnUsageNode(eDatalinkObjectType.SourceTable, eObjectUse.Source,
 //             datalink, datalink.sourceDatalinkTable.dexihDatalinkColumns[0], null, null, null, null, lineageTest.hubCache);
 //         let mappingStatus = columnUsage.createDatalinkImpact(false);
 //         expect(eMappingStatus.PassThroughToVirtual).toBe(mappingStatus, 'impact should be passThroughToVirtual');
@@ -243,13 +243,13 @@ class LineageTests {
 //         let targetTable = lineageTest.getTable1();
 
 //         // get lineage information from target column
-//         let columnUsage = new ColumnUsageNode(eObjectType.TargetTable, eObjectUse.Target,
+//         let columnUsage = new ColumnUsageNode(eDatalinkObjectType.TargetTable, eObjectUse.Target,
 //             datalink, null, targetTable.dexihTableColumns[0], null, null, null, lineageTest.hubCache);
 //         let mappingStatus = columnUsage.createDatalinkLineage(false);
 //         expect(eMappingStatus.NotMapped).toBe(mappingStatus, 'target columns are not not mapped');
 
 //         // get lineage information from target column
-//         columnUsage = new ColumnUsageNode(eObjectType.TargetTable, eObjectUse.Target,
+//         columnUsage = new ColumnUsageNode(eDatalinkObjectType.TargetTable, eObjectUse.Target,
 //             datalink, datalink.sourceDatalinkTable.dexihDatalinkColumns[0], null, null, null, null, lineageTest.hubCache);
 //         mappingStatus = columnUsage.createDatalinkImpact(false);
 //         expect(eMappingStatus.NotMapped).toBe(mappingStatus, 'source columns are passThrough to nothing');
@@ -284,7 +284,7 @@ class LineageTests {
 //         expect(3).toBe(inputs[0].dexihDatalinkColumns.length);
 
 //         // get lineage information from target column
-//         let columnUsage = new ColumnUsageNode(eObjectType.TargetTable, eObjectUse.Target,
+//         let columnUsage = new ColumnUsageNode(eDatalinkObjectType.TargetTable, eObjectUse.Target,
 //             datalink, datalink.sourceDatalinkTable.dexihDatalinkColumns[0], null, null, null, null, lineageTest.hubCache);
 //         let mappingStatus = columnUsage.createDatalinkImpact(false);
 //         expect(eMappingStatus.MappedToVirtual).toBe(mappingStatus, '1st source column is mapped');
@@ -321,19 +321,19 @@ class LineageTests {
 //         expect(3).toBe(inputs[0].dexihDatalinkColumns.length);
 
 //         // get impact information from target column
-//         let columnUsage = new ColumnUsageNode(eObjectType.TargetTable, eObjectUse.Target,
+//         let columnUsage = new ColumnUsageNode(eDatalinkObjectType.TargetTable, eObjectUse.Target,
 //             datalink, datalink.sourceDatalinkTable.dexihDatalinkColumns[0], null, null, null, null, lineageTest.hubCache);
 //         let mappingStatus = columnUsage.createDatalinkImpact(false);
 //         expect(eMappingStatus.PassThroughToVirtual).toBe(mappingStatus, '1st source column is used for join');
 
 //         // get impact information for join column
-//         columnUsage = new ColumnUsageNode(eObjectType.TargetTable, eObjectUse.Target,
+//         columnUsage = new ColumnUsageNode(eDatalinkObjectType.TargetTable, eObjectUse.Target,
 //             datalink, joinTable.dexihDatalinkColumns[1], null, null, null, null, lineageTest.hubCache);
 //         mappingStatus = columnUsage.createDatalinkImpact(false);
 //         expect(eMappingStatus.PassThroughToVirtual).toBe(mappingStatus, 'join columns should passThrough');
 
 //         // get lineage information for join column
-//         columnUsage = new ColumnUsageNode(eObjectType.TargetTable, eObjectUse.Target,
+//         columnUsage = new ColumnUsageNode(eDatalinkObjectType.TargetTable, eObjectUse.Target,
 //             datalink, joinTable.dexihDatalinkColumns[1], null, null, null, null, lineageTest.hubCache);
 //         mappingStatus = columnUsage.createDatalinkLineage(false);
 //         expect(eMappingStatus.PassThroughMap).toBe(mappingStatus, 'join columns should passThrough');

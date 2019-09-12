@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { HubService } from '../../hub.service';
-import { DexihHub, DexihTable, HubCache, eSharedObjectType, DexihDatalinkTable, eCacheStatus, connectionPurposes } from '../../hub.models';
 import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../+auth/auth.service';
-import { RemoteLibraries, eConnectionCategory } from '../../hub.remote.models';
+import { HubCache, connectionPurposes } from '../../hub.models';
+import { DexihTable, eConnectionCategory, eSharedObjectType } from '../../../shared/shared.models';
 
 @Component({
     selector: 'table-index',
@@ -16,7 +16,6 @@ export class TableIndexComponent implements OnInit, OnDestroy {
     private _subscription: Subscription;
 
     hubCache: HubCache;
-    remoteLibraries: RemoteLibraries;
     purposeFilter: string;
     connectionKey: number;
     connectionName: string;
@@ -47,13 +46,11 @@ export class TableIndexComponent implements OnInit, OnDestroy {
                 this.route.params,
                 this.route.queryParams,
                 this.hubService.getHubCacheObservable(),
-                this.hubService.getRemoteLibrariesObservable()
             ).subscribe(result => {
                 let data = result[0];
                 let params = result[1];
                 let queryParams = result[2];
                 this.hubCache = result[3];
-                this.remoteLibraries = result[4];
 
                 if (!this.hubCache.isLoaded()) { return; }
                 this.purposeFilter = queryParams['purposeFilter'];
@@ -100,8 +97,7 @@ export class TableIndexComponent implements OnInit, OnDestroy {
             let tableData = [];
             this.hubCache.hub.dexihTables.forEach(table => {
                 let connection = this.hubCache.hub.dexihConnections.find(c => c.key === table.connectionKey);
-                let connectionReference = this.remoteLibraries && connection ?
-                    this.remoteLibraries.GetConnectionReference(connection) : null;
+                let connectionReference = this.hubService.GetConnectionReference(connection);
 
                 if (
                     ((this.purposeFilter === 'All' || !this.purposeFilter) ||

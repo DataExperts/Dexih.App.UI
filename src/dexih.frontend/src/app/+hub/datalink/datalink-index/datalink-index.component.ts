@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HubService } from '../../hub.service';
-import { HubCache, eDatalinkType, datalinkTypes,
-    DexihDatalink, eSharedObjectType, eSourceType } from '../../hub.models';
+import { HubCache } from '../../hub.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, BehaviorSubject, Subscription, combineLatest} from 'rxjs';
 import { AuthService } from '../../../+auth/auth.service';
+import { eDatalinkType, DexihDatalink, eSourceType, eSharedObjectType, eDatalinkTypeItems } from '../../../shared/shared.models';
 
 @Component({
     selector: 'datalink-index',
@@ -19,7 +19,7 @@ export class DatalinkIndexComponent implements OnInit, OnDestroy {
     private _hubCacheChangeSubscription: Subscription;
 
     public eDatalinkType = eDatalinkType;
-    public datalinkTypes = datalinkTypes;
+    public eDatalinkTypeItems = eDatalinkTypeItems;
 
     columns = [
         { iconClass: 'sharedIcon', tooltip: 'sharedToolTip', width: '1%', align: 'center' },
@@ -117,7 +117,7 @@ export class DatalinkIndexComponent implements OnInit, OnDestroy {
 
                     datalinkData.push({
                         key: d.key,
-                        datalinkType: d.datalinkType,
+                        datalinkType: this.eDatalinkTypeItems[d.datalinkType].name,
                         name: d.name,
                         description: d.description,
                         sourceName: sourceName,

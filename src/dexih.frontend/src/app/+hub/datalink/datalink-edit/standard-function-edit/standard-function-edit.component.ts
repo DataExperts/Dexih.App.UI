@@ -1,10 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
-  DexihDatalinkTransformItem, eDatalinkTransformItemType, HubCache,
-  DexihFunctionParameter, DexihDatalinkTable,
-  eParameterDirection, onErrorActions, onNullActions, InvalidActions, eTransformFunctionType,
-  DexihCustomFunction, DexihCustomFunctionParameter, DexihFunctionArrayParameter, FunctionCache, DexihDatalinkColumn}
+  HubCache,InvalidActions, FunctionCache}
   from '../../../hub.models';
 import { HubService } from '../../../hub.service';
 import { DatalinkEditService } from '../datalink-edit.service';
@@ -12,9 +9,9 @@ import { Subscription, combineLatest } from 'rxjs';
 import { AuthService } from '../../../../+auth/auth.service';
 import { FormGroup, FormArray } from '@angular/forms';
 import { LogFactory, eLogLevel } from '../../../../../logging';
-import { eFunctionType, FunctionReference, RemoteLibraries,
-  FunctionParameter, eTransformType, eTypeCode, TypeCodes, eGenericType } from '../../../hub.remote.models';
+import { TypeCodes } from '../../../hub.remote.models';
 import { InputOutputColumns } from '../../../hub.lineage.models';
+import { FunctionParameter, eFunctionType, eParameterDirection, eGenericType, DexihDatalinkColumn, FunctionReference, DexihCustomFunction, eTransformType, DexihDatalinkTable, DexihDatalinkTransformItem, eTransformItemType, DexihFunctionParameter, eTypeCode, DexihCustomFunctionParameter, DexihFunctionArrayParameter, RemoteLibraries } from '../../../../shared/shared.models';
 
 export class ArrayParameter {
   public name: string;
@@ -59,7 +56,6 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
   public remoteLibraries: RemoteLibraries;
 
   eFunctionType = eFunctionType;
-  eTransformFunctionType = eTransformFunctionType;
   eParameterDirection = eParameterDirection;
   typeCodes = TypeCodes;
 
@@ -69,7 +65,7 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
   private _returnParameterSubscription: Subscription;
   private _functionSubscription: Subscription;
 
-  transformFunctionType: eTransformFunctionType;
+  transformFunctionType: eFunctionType;
   datalinkTransformItemKey: number;
   datalinkKey: number;
   datalinkTransformKey: number;
@@ -82,8 +78,6 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
 
   useCustomFunction: boolean;
 
-  onErrorActions = onErrorActions;
-  onNullActions = onNullActions;
   invalidActions = InvalidActions;
   functionCache = FunctionCache;
   eGenericType = eGenericType;
@@ -143,7 +137,7 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
           && this.remoteLibraries && this.remoteLibraries.functions.length > 0) {
 
           this.transformFunctionType = params['functionType'];
-          if (this.transformFunctionType === eTransformFunctionType.Validation) {
+          if (this.transformFunctionType === eFunctionType.Validate) {
             this.datalinkTransformForm = this.editDatalinkService.getValidationTransform();
             this.datalinkTransformKey = this.datalinkTransformForm.value.key;
           } else {
@@ -214,24 +208,24 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
           } else {
             let newItem = new DexihDatalinkTransformItem();
             newItem.datalinkTransformKey = this.datalinkTransformKey;
-            newItem.transformItemType = eDatalinkTransformItemType.BuiltInFunction;
+            newItem.transformItemType = eTransformItemType.BuiltInFunction;
 
             this.newDatalinkTransformItemForm = this.editDatalinkService.hubFormsService
               .datalinkDatalinkTransformItemFormGroup(this.datalinkTransformForm, newItem);
           }
 
           switch (this.transformFunctionType) {
-            case eTransformFunctionType.Condition:
-            case eTransformFunctionType.JoinCondition:
+            case eFunctionType.Condition:
+            case eFunctionType.JoinCondition:
               this.functions = this.remoteLibraries.functions.filter(c => c.functionType === eFunctionType.Condition);
               this.allowOutput = false;
               break;
-            case eTransformFunctionType.Validation:
+            case eFunctionType.Validate:
               this.functions = this.remoteLibraries.functions
                 .filter(c => c.functionType === eFunctionType.Condition || c.functionType === eFunctionType.Validate);
               this.allowOutput = true;
               break;
-            case eTransformFunctionType.Mapping:
+            case eFunctionType.Map:
               this.functions = this.remoteLibraries.functions
                 .filter(c => c.functionType === eFunctionType.Condition ||
                   c.functionType === eFunctionType.Validate ||
@@ -239,21 +233,21 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
 
               this.allowOutput = true;
               break;
-            case eTransformFunctionType.Aggregate:
+            case eFunctionType.Aggregate:
               this.functions = this.remoteLibraries.functions.filter(c => c.functionType === eFunctionType.Aggregate);
               this.allowOutput = true;
               break;
-            case eTransformFunctionType.Series:
+            case eFunctionType.Series:
               this.functions = this.remoteLibraries.functions.filter(c => c.functionType === eFunctionType.Series ||
                 c.functionType === eFunctionType.Aggregate);
               this.allowOutput = true;
               break;
-            case eTransformFunctionType.Rows:
+            case eFunctionType.Rows:
               this.functions = this.remoteLibraries.functions.filter(c => c.functionType === eFunctionType.Rows);
               this.allowOutput = true;
               this.allowReturn = false;
               break;
-            case eTransformFunctionType.Profile:
+            case eFunctionType.Profile:
               this.functions = this.remoteLibraries.functions.filter(c => c.functionType === eFunctionType.Profile);
               this.allowOutput = false;
               break;
@@ -331,7 +325,7 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
       .filter(c => !c.value.runTime.functionParameter.linkedName && HubCache.parameterIsOutput(c.value));
 
     // don't include return value (which will determine pass/fail) for validation transforms.
-    if (this.transformFunctionType === eTransformFunctionType.Validation) {
+    if (this.transformFunctionType === eFunctionType.Validate) {
       this.outputParameterControls = this.outputParameterControls.filter(c => c.value.direction !== eParameterDirection.ReturnValue);
     }
 
@@ -486,7 +480,7 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
     newParameter.isGeneric = param.isGeneric;
     newParameter.position = index;
     newParameter.key = this.hubCache.getNextSequence();
-    newParameter.runTime = {functionParameter: param};
+    newParameter['runTime'] = {functionParameter: param};
 
     if (existingValue) {
       newParameter.key = existingValue.key;
@@ -494,7 +488,7 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
       newParameter.value = existingValue.value;
       newParameter.dataType = param.isGeneric ? existingValue.dataType : param.dataType;
       existingValue.arrayParameters.forEach(p => {
-        p.runTime = {functionParameter: param};
+        p['runTime'] = {functionParameter: param};
       });
       newParameter.arrayParameters = existingValue.arrayParameters;
     } else {
@@ -561,7 +555,7 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
   private createArrayParameter(parentParameter: DexihFunctionArrayParameter,
     direction: eParameterDirection, position: number = null, genericTypeDefault: eTypeCode):
     DexihFunctionArrayParameter {
-    let param = parentParameter.runTime.functionParameter;
+    let param = parentParameter['runTime'].functionParameter;
     let newParameter = new DexihFunctionArrayParameter();
     newParameter.isGeneric = param.isGeneric;
     newParameter.dataType = param.isGeneric ? genericTypeDefault : parentParameter.dataType;
@@ -572,7 +566,7 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
     newParameter.key = this.hubCache.getNextSequence();
     newParameter.datalinkColumn = null;
     newParameter.isValid = true;
-    newParameter.runTime = {functionParameter: param};
+    newParameter['runTime'] = {functionParameter: param};
 
     return newParameter;
   }
@@ -779,8 +773,8 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
 
       newColumn.dataType = paramValue.dataType;
       newColumn.allowDbNull = true;
-      newColumn.name = paramValue.runTime.functionParameter.name;
-      newColumn.logicalName = paramValue.runTime.functionParameter.name;
+      newColumn.name = paramValue['runTime'].functionParameter.name;
+      newColumn.logicalName = paramValue['runTime'].functionParameter.name;
       newColumn.rank = paramValue.rank;
 
       param.controls.datalinkColumn.setValue(newColumn);

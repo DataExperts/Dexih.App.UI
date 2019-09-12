@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DexihView, DexihApi } from '../../hub.models';
+import { DexihApi } from '../../../shared/shared.models';
 
 @Component({
     selector: 'api-view',

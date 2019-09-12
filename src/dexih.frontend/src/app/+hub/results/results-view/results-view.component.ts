@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../../+auth/auth.service';
 import { HubService } from '../../hub.service';
-import { HubCache, TransformWriterResult, eSharedObjectType } from '../../hub.models';
+import { HubCache } from '../../hub.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Subscription, combineLatest} from 'rxjs';
 import { CancelToken } from '../../../+auth/auth.models';
+import { TransformWriterResult, eSharedObjectType } from '../../../shared/shared.models';
 
 @Component({
     selector: 'results-view',
@@ -16,7 +17,7 @@ export class ResultsViewComponent implements OnInit, OnDestroy {
     referenceKeys: Array<number>;
 
     private _subscription: Subscription;
-    private _hubCacheChangeSubscription: Subscription;
+    private _transformWriterResultChangeSubscription: Subscription;
 
     public auditResult: TransformWriterResult;
 
@@ -77,7 +78,7 @@ export class ResultsViewComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         if (this._subscription) { this._subscription.unsubscribe(); }
-        if (this._hubCacheChangeSubscription) { this._hubCacheChangeSubscription.unsubscribe(); }
+        if (this._transformWriterResultChangeSubscription) { this._transformWriterResultChangeSubscription.unsubscribe(); }
         this.cancelToken.cancel();
     }
 
@@ -87,15 +88,11 @@ export class ResultsViewComponent implements OnInit, OnDestroy {
 
     watchChanges() {
         // watch the current connection in case it is changed in another session.
-        if (this._hubCacheChangeSubscription) { this._hubCacheChangeSubscription.unsubscribe(); }
-        this._hubCacheChangeSubscription = this.hubService.getHubCacheChangeObservable().subscribe(hubCacheChange => {
-            if (hubCacheChange.changeClass === eSharedObjectType.TransformWriterResult) {
-                let writerResult: TransformWriterResult = hubCacheChange.data;
-
-                if (writerResult.auditConnectionKey === this.auditResult.auditConnectionKey &&
-                     writerResult.auditKey === this.auditResult.auditKey) {
-                    this.auditResult = writerResult;
-                }
+        if (this._transformWriterResultChangeSubscription) { this._transformWriterResultChangeSubscription.unsubscribe(); }
+        this._transformWriterResultChangeSubscription = this.hubService.getTransformWriterResultChangeObservable().subscribe(writerResult => {
+            if (writerResult.auditConnectionKey === this.auditResult.auditConnectionKey &&
+                    writerResult.auditKey === this.auditResult.auditKey) {
+                this.auditResult = writerResult;
             }
         });
     }

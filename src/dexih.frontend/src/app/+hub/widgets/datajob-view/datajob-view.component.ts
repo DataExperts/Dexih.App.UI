@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DexihDatajob } from '../../hub.models';
+import { DexihDatajob } from '../../../shared/shared.models';
 
 @Component({
     selector: 'datajob-view',

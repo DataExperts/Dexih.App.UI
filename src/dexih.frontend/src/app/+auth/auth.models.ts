@@ -2,6 +2,7 @@ import { Subscription } from 'rxjs';
 import { EntityBase } from './global.models';
 import { resolve } from 'dns';
 import { reject } from 'q';
+import { DexihHubUser, ePermission } from '../shared/shared.models';
 
 export const logoUrl = 'assets/img/dexih/dex_logo_wide_raw.png';
 export const logoSmallUrl = 'assets/img/dexih/dexih_small.png';
@@ -74,21 +75,22 @@ export const SharedAccess = [
     {key: eSharedAccess.Reader, name: 'Shared data can be accessed only by users with "PublishReader" permission.'},
 ];
 
-export class DexihHubUser extends EntityBase {
-    public userId: string;
-    public hubKey: number;
-    public hubName: string;
-    public permission: ePermission;
-}
+// export class DexihHubUser extends EntityBase {
+//     public userId: string;
+//     public hubKey: number;
+//     public hubName: string;
+//     public permission: ePermission;
+// }
 
-export enum ePermission {
-    Owner = <any>'Owner',
-    User = <any>'User',
-    FullReader = <any>'FullReader',
-    PublishReader = <any>'PublishReader',
-    Suspended = <any>'Suspended',
-    None = <any>'None',
-}
+// export enum ePermission {
+//     Owner = <any>'Owner',
+//     User = <any>'User',
+//     FullReader = <any>'FullReader',
+//     PublishReader = <any>'PublishReader',
+//     Suspended = <any>'Suspended',
+//     None = <any>'None',
+// }
+
 export const Permissions = [
     {key: ePermission.Owner, name: 'Owner (full permissions)'},
     {key: ePermission.User, name: 'User (add/modify permission)'},
@@ -183,60 +185,60 @@ export enum eTaskStatus {
     FileWatching = <any>'FileWatching'
 }
 
-export class DexihRemoteAgent extends EntityBase {
-    public remoteAgentKey = 0;
-    public name: string = null;
-    public restrictIp: boolean = null;
-    public ipAddresses: string[] = null;
-    public remoteAgentId: string = null;
-    public userId: string = null;
-    public hashedToken: string = null;
-    public allowExternalConnect: boolean = null;
-    public lastLoginIpAddress: string = null;
-    public lastLoginDateTime: Date = null;
+// export class DexihRemoteAgent extends EntityBase {
+//     public remoteAgentKey = 0;
+//     public name: string = null;
+//     public restrictIp: boolean = null;
+//     public ipAddresses: string[] = null;
+//     public remoteAgentId: string = null;
+//     public userId: string = null;
+//     public hashedToken: string = null;
+//     public allowExternalConnect: boolean = null;
+//     public lastLoginIpAddress: string = null;
+//     public lastLoginDateTime: Date = null;
 
-    public activeAgents: DexihActiveAgent[];
-}
+//     public activeAgents: DexihActiveAgent[];
+// }
 
-export class DexihActiveAgent {
-    public remoteAgentKey: number;
-    public user: string;
-    public name: string;
-    public isRunning: boolean;
-    public ipAddress: string;
-    public instanceId: string;
-    public isEncrypted: boolean;
-    public dataPrivacyStatus: eDataPrivacyStatus;
-    public downloadUrls: DownloadUrl[];
-    public currentDownloadUrl: DownloadUrl;
-    public downloadUrlSummary: string;
+// export class DexihActiveAgent {
+//     public remoteAgentKey: number;
+//     public user: string;
+//     public name: string;
+//     public isRunning: boolean;
+//     public ipAddress: string;
+//     public instanceId: string;
+//     public isEncrypted: boolean;
+//     public dataPrivacyStatus: eDataPrivacyStatus;
+//     public downloadUrls: DownloadUrl[];
+//     public currentDownloadUrl: DownloadUrl;
+//     public downloadUrlSummary: string;
 
-    public upgradeAvailable: boolean;
-    public version: string;
-    public latestVersion: string;
-    public latestDownloadUrl: string;
-}
+//     public upgradeAvailable: boolean;
+//     public version: string;
+//     public latestVersion: string;
+//     public latestDownloadUrl: string;
+// }
 
-export enum eDataPrivacyStatus {
-    NotAllowed = <any>'NotAllowed',
-    Proxy = <any>'Proxy',
-    Lan = <any>'Lan',
-    Internet = <any>'Internet',
-    CustomUrl = <any>'CustomUrl',
-}
+// export enum eDataPrivacyStatus {
+//     NotAllowed = <any>'NotAllowed',
+//     Proxy = <any>'Proxy',
+//     Lan = <any>'Lan',
+//     Internet = <any>'Internet',
+//     CustomUrl = <any>'CustomUrl',
+// }
 
-export enum EDownloadUrlType {
-    Proxy = <any>'Proxy',
-    Direct = <any>'Direct',
-}
+// export enum EDownloadUrlType {
+//     Proxy = <any>'Proxy',
+//     Direct = <any>'Direct',
+// }
 
-export class DownloadUrl {
-    public url: string;
-    public downloadUrlType: EDownloadUrlType;
-    public isEncrypted: boolean;
-    public testStatus: string;
-    public testMessage: string;
-}
+// export class DownloadUrl {
+//     public url: string;
+//     public downloadUrlType: EDownloadUrlType;
+//     public isEncrypted: boolean;
+//     public testStatus: string;
+//     public testMessage: string;
+// }
 
 export class FileHandler {
     public id = Math.random().toString(36).substr(2, 9);

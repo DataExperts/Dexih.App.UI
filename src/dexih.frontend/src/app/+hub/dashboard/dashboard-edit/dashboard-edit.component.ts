@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy, HostListener, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HubCache, eCacheStatus, DexihDashboard, DexihDashboardItem, DataCache, DexihView } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { HubFormsService } from '../../hub.forms.service';
@@ -9,6 +8,8 @@ import { FormArray, FormGroup } from '@angular/forms';
 import { DashboardItemComponent } from './item/dashboard-item.component';
 import { EventEmitter } from 'selenium-webdriver';
 import { CancelToken } from '../../../+auth/auth.models';
+import { HubCache, eCacheStatus, DataCache } from '../../hub.models';
+import { DexihView, DexihDashboard, DexihDashboardItem } from '../../../shared/shared.models';
 
 @Component({
   selector: 'dexih-dashboard-edit-form',

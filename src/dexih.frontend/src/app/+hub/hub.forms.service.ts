@@ -6,53 +6,15 @@ import { AuthService } from '../+auth/auth.service';
 import { eLogLevel, LogFactory } from '../../logging';
 import { InputOutputColumns } from './hub.lineage.models';
 import {
-  DexihColumnValidation,
-  DexihConnection,
-  DexihDatajob,
-  DexihDatalink,
-  DexihDatalinkColumn,
-  DexihDatalinkDependency,
-  DexihDatalinkProfile,
-  DexihDatalinkStep,
-  DexihDatalinkTable,
-  DexihDatalinkTransform,
-  DexihDatalinkTransformItem,
-  DexihFileFormat,
-  DexihFunctionParameter,
-  DexihHubVariable,
-  DexihRemoteAgentHub,
-  DexihTable,
-  DexihTableColumn,
-  DexihTrigger,
-  eSharedObjectType,
-  eSourceType,
   HubCache,
-  DexihCustomFunction,
-  DexihCustomFunctionParameter,
-  eImportAction,
-  DexihFunctionArrayParameter,
-  DexihDatalinkTest,
-  DexihDatalinkTestStep,
-  DexihDatalinkTestTable,
-  DexihView,
   eMappingStatus,
-  DexihDatalinkTarget,
-  DexihDatalinkStepColumn,
-  DexihApi,
-  Import,
   sharedObjectProperties,
   SharedObjectProperty,
-  ImportAction,
-  ImportObject,
-  DexihDashboard,
-  DexihDashboardItem,
   DexihInputParameter,
-  PreviewResults,
   DataCache,
-  DexihHub,
 } from './hub.models';
 import { HubService } from './hub.service';
-import { eTypeCode } from './hub.remote.models';
+import { eImportAction, Import, DexihHub, DexihConnection, DexihTable, DexihTableColumn, eTypeCode, DexihFileFormat, DexihView, DexihDashboard, DexihDashboardItem, DexihApi, DexihColumnValidation, DexihCustomFunction, DexihCustomFunctionParameter, DexihHubVariable, DexihDatalinkTest, DexihDatalinkTestStep, DexihDatalinkTestTable, DexihTrigger, DexihDatalinkStep, DexihDatalinkDependency, DexihDatalinkStepColumn, DexihDatajob, DexihRemoteAgentHub, DexihDatalink, DexihDatalinkColumn, DexihDatalinkTransform, DexihDatalinkTransformItem, DexihFunctionParameter, DexihFunctionArrayParameter, DexihDatalinkProfile, DexihDatalinkTarget, DexihDatalinkTable, eSourceType, eSharedObjectType } from '../shared/shared.models';
 
 @Injectable()
 export class HubFormsService implements OnDestroy {
@@ -87,7 +49,7 @@ export class HubFormsService implements OnDestroy {
   private ignoreHubCacheChange = false; // used to avoid recursive loop in the hubCacheChange subscription.
   private formChangeCount = 0;
 
-  private updateDate: string;
+  private updateDate: Date;
 
   private saveMethod: string;
   private property: SharedObjectProperty;
@@ -495,7 +457,7 @@ export class HubFormsService implements OnDestroy {
     }
 
     const cache = this.hubCache;
-    const hub = new DexihHub(this.hubCache.hub.hubKey, '');
+    const hub = this.hubService.createHub(this.hubCache.hub.hubKey, '');
 
     if (this.property.cacheGetMethod) {
       cache[this.property.cacheGetMethod](value, hub);
@@ -589,7 +551,7 @@ export class HubFormsService implements OnDestroy {
     this.property = sharedObjectProperties.find(c => c.type === eSharedObjectType.Connection);
     this.saveMethod = 'SaveConnection';
     this.formGroupFunc = this.connection;
-    this.addMissing(connection, connectionForm, new DexihConnection(''));
+    this.addMissing(connection, connectionForm, new DexihConnection());
 
     this.clearFormSubscriptions();
     // whenever the passwordDisplay or connectionStringDisplay changes, write the value to the raw
@@ -1766,7 +1728,9 @@ export class HubFormsService implements OnDestroy {
       'isValid': true
     });
 
-    this.addMissing(datalink, datalinkForm, new DexihDatalink());
+    let templateDatalink = new DexihDatalink();
+    templateDatalink.sourceDatalinkTable = new DexihDatalinkTable();
+    this.addMissing(datalink, datalinkForm, templateDatalink);
     this.clearFormSubscriptions();
 
     this.formGroupFunc = this.datalink;
@@ -1814,7 +1778,7 @@ export class HubFormsService implements OnDestroy {
 
         const transform = datalink.dexihDatalinkTransforms.find(c => c.key === datalinkTransform.datalinkTransformKey);
 
-        datalinkTransformForm.controls.runTime.setValue(transform.runTime);
+        datalinkTransformForm.controls.runTime.setValue(transform['runTime']);
 
         const items = <FormArray>datalinkTransformForm.controls.dexihDatalinkTransformItems;
         items.controls.forEach(item => {
@@ -1840,7 +1804,7 @@ export class HubFormsService implements OnDestroy {
       targetsArray.controls.forEach((targetForm: FormGroup) => {
         let target = datalink.dexihDatalinkTargets.find(c => c.key === targetForm.controls.key.value);
         if (target) {
-          targetForm.controls.runTime.setValue(target.runTime);
+          targetForm.controls.runTime.setValue(target['runTime']);
         }
       });
 

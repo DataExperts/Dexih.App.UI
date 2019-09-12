@@ -41,7 +41,8 @@
     "ngx-md": "^8.0.0",
     "npm": "^6.11.3",
     "rxjs": "^6.5.3",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+    "protobufjs": "^6.8.8"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.803.3",

@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { HubService } from '../../hub.service';
-import { DexihRemoteAgentHub, HubCache, eSharedObjectType } from '../../hub.models';
+import { HubCache } from '../../hub.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
 import { HubFormsService } from '../../hub.forms.service';
 import { AuthService } from '../../../+auth/auth.service';
-import { DexihActiveAgent, DexihRemoteAgent } from '../../../+auth/auth.models';
+import { DexihRemoteAgentHub, DexihRemoteAgent } from '../../../shared/shared.models';
 
 @Component({
     selector: 'remote-agents',
@@ -74,11 +74,11 @@ export class RemoteAgentEditComponent implements OnInit, OnDestroy {
                             isAuthorized: true,
                             isValid: true,
                             createDate: null,
-                            allowExternalConnect: true,
                             isDefault: false,
-                            isSelected: false,
                             updateDate: null
                         }
+                        this.remoteAgentHub['allowExternalConnect'] = true;
+                        this.remoteAgentHub['isSelected'] = false;
                         this.isNew = true;
                     }
 

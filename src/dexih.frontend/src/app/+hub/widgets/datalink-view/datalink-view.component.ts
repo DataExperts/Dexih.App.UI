@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DexihDatalink } from '../../hub.models';
+import { DexihDatalink } from '../../../shared/shared.models';
 
 @Component({
     selector: 'datalink-view',

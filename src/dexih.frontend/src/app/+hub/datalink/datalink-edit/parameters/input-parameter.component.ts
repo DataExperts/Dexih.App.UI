@@ -1,10 +1,10 @@
 import { Component, Input, Output, OnInit, OnDestroy, EventEmitter } from '@angular/core';
-import { DexihFunctionParameter, DexihTableColumn, DexihDatalinkColumn, DexihDatalinkTable } from '../../../hub.models';
 import { FormGroup } from '@angular/forms';
 import { Subscription} from 'rxjs';
-import { TypeCodes, eBasicType, TypeFunctions, eTypeCode } from '../../../hub.remote.models';
+import { TypeCodes, eBasicType, TypeFunctions } from '../../../hub.remote.models';
 import { HubService } from '../../../hub.service';
 import { InputOutputColumns } from '../../../hub.lineage.models';
+import { DexihDatalinkColumn, DexihTableColumn, DexihFunctionParameter, eTypeCode } from '../../../../shared/shared.models';
 
 export class InputValues {
     public staticValue: string;
@@ -82,8 +82,8 @@ export class InputParameterComponent implements OnInit, OnDestroy {
                 this.inputs[i].staticValue = this.inputs[i].staticValue.toString();
             }
 
-            if (inputParameter.runTime.functionParameter.listOfValues) {
-                this.inputs[i].textItems = this.inputs[i].textItems.concat(inputParameter.runTime.functionParameter.listOfValues);
+            if (inputParameter['runTime'].functionParameter.listOfValues) {
+                this.inputs[i].textItems = this.inputs[i].textItems.concat(inputParameter['runTime'].functionParameter.listOfValues);
             }
 
             this.inputs[i].textItems = this.inputs[i].textItems.concat(this.variables);

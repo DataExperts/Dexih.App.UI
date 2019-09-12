@@ -1,10 +1,11 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription, combineLatest} from 'rxjs';
+import { Subscription} from 'rxjs';
 
 import { AuthService } from '../../../+auth/auth.service';
-import { DexihApi, HubCache, DexihHub, eSharedDataObjectType } from '../../hub.models';
+import { HubCache } from '../../hub.models';
 import { HubService } from '../../hub.service';
+import { DexihApi, DexihHub, eDataObjectType } from '../../../shared/shared.models';
 
 @Component({
     selector: 'actions-api-button',
@@ -45,7 +46,7 @@ export class ActionsApiButtonComponent implements OnInit, OnDestroy {
 
     export() {
         const cache = this.hubCache;
-        const hub = new DexihHub(this.hubCache.hub.hubKey, '');
+        const hub = this.hubService.createHub(this.hubCache.hub.hubKey, '');
         this.apis.forEach(item => { this.hubCache.cacheAddApi(item.key, hub); });
 
         let filename = this.apis.length === 1 ? 'Api - ' + this.apis[0].name + '.json' : 'apis.json';
@@ -54,7 +55,7 @@ export class ActionsApiButtonComponent implements OnInit, OnDestroy {
     }
 
     shareItems(isShared: boolean) {
-        this.hubService.shareItems(this.apis.map(c => c.key), eSharedDataObjectType.Datalink, isShared);
+        this.hubService.shareItems(this.apis.map(c => c.key), eDataObjectType.Datalink, isShared);
     }
 
     activateApis() {

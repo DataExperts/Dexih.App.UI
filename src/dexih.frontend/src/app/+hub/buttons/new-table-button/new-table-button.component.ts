@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { HubService } from '../../hub.service';
-import { DexihConnection, eCacheStatus } from '../../hub.models';
-import { Subscription, combineLatest} from 'rxjs';
+import { Subscription } from 'rxjs';
+import { DexihConnection } from '../../../shared/shared.models';
 
 @Component({
     selector: 'new-table-button',

@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy, Input, ViewChild } from '@angular/core';
 import { AuthService } from '../../../+auth/auth.service';
-import { ePermission, Permissions } from '../../../+auth/auth.models';
+import { Permissions } from '../../../+auth/auth.models';
 import { HubService } from '../../hub.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
 import { DexihMessageComponent } from  '../../../shared/ui/dexihMessage/dexih-message.component';
 import { UserAuthorization } from '../../../+admin/admin.models';
+import { ePermission } from '../../../shared/shared.models';
 
 @Component({
   selector: 'users',

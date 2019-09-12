@@ -71,9 +71,9 @@ namespace dexih.api.Services
                 {
                     if (context.Result is ObjectResult result)
                     {
-                        context.Result = new JsonResult(new { Success = true, result.Value });    
+                        context.Result = new JsonResult(new { Success = true, result.Value });
                     }
-                    
+
                 }
                 base.OnActionExecuted(context);
             }

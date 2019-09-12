@@ -1,8 +1,7 @@
 import { Component, Input, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { ApiData, DexihApi, eApiStatus } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { Subscription, combineLatest } from 'rxjs';
-import { EDownloadUrlType } from '../../../+auth/auth.models';
+import { DexihApi, ApiData, eApiStatus, eDownloadUrlType } from '../../../shared/shared.models';
 
 @Component({
     selector: 'api-status',
@@ -42,14 +41,14 @@ export class ApiStatusComponent implements OnInit, OnDestroy {
             if (this.apiKey) {
                 this.api = cache.hub.dexihApis.find(c => c.key === this.apiKey);
                 if (this.api) {
-                    this._currentStatusSubscription = this.api.currentStatus.subscribe(apiData => {
+                    this._currentStatusSubscription = this.api['currentStatus'].subscribe(apiData => {
 
                         this.apiData = apiData;
 
                         if (apiData) {
 
                             if (apiData.apiStatus === eApiStatus.Activated && remoteAgent) {
-                                this.urls = remoteAgent.downloadUrls.filter(c => c.downloadUrlType !== EDownloadUrlType.Proxy).map(url => {
+                                this.urls = remoteAgent.downloadUrls.filter(c => c.downloadUrlType !== eDownloadUrlType.Proxy).map(url => {
                                     return {
                                         downloadType: url.downloadUrlType,
                                         downloadUrl: url.url + '/api/' + apiData.securityKey,
@@ -57,7 +56,7 @@ export class ApiStatusComponent implements OnInit, OnDestroy {
                                     };
                                 });
 
-                                let proxy = remoteAgent.downloadUrls.find(c => c.downloadUrlType === EDownloadUrlType.Proxy);
+                                let proxy = remoteAgent.downloadUrls.find(c => c.downloadUrlType === eDownloadUrlType.Proxy);
                                 if (proxy) {
                                     this.urls.push({
                                         downloadType: 'Proxy',

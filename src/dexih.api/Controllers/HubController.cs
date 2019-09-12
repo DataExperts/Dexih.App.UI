@@ -36,7 +36,7 @@ namespace dexih.api.Controllers
 	[ApiFilter]
 	public class HubController : Controller
 	{
-		public HubController(DexihRepositoryContext dbContext,
+		public HubController(
 			IDexihOperations operations,
 			IRemoteAgents remoteServers,
 			ILoggerFactory loggerFactory,
@@ -52,7 +52,7 @@ namespace dexih.api.Controllers
 		/// <summary>
 		/// Note, this is set from the ValidateHub
 		/// </summary>
-		public DexihHubUser.EPermission HubPermission { get; set; }
+		public EPermission HubPermission { get; set; }
 
 		private readonly IEmailSender _emailSender;
 		private readonly IRemoteAgents _remoteAgents;
@@ -60,7 +60,7 @@ namespace dexih.api.Controllers
 		private readonly ILogger _logger;
 
 		[HttpPost("[action]")]
-		[ValidateHub(DexihHubUser.EPermission.FullReader)]
+		[ValidateHub(EPermission.FullReader)]
 		public async Task<GetHubCacheResult> GetHubCache([FromBody] HubModelBase hubKey, CancellationToken cancellationToken)
 		{
 			_logger.LogTrace(LoggingEvents.HubGetHubCache, "HubController.GetHubCache: HubKey: {updateBrowserHub}",
@@ -70,7 +70,7 @@ namespace dexih.api.Controllers
 		}
 
 		[HttpPost("[action]")]
-		[ValidateHub(DexihHubUser.EPermission.Owner)]
+		[ValidateHub(EPermission.Owner)]
 		public Task<string> Decrypt([FromBody] HubValue<string> decryptValue, CancellationToken cancellationToken)
 		{
 			_logger.LogTrace(LoggingEvents.HubDecrypt, "HubController.Decrypt: HubKey: {updateBrowserHub}, Value: {value}.", decryptValue.HubKey, decryptValue.Value);
@@ -80,7 +80,7 @@ namespace dexih.api.Controllers
 		}
 
 //		[HttpPost("[action]")]
-//		[ValidateHub(DexihHubUser.EPermission.Owner)]
+//		[ValidateHub(EPermission.Owner)]
 //		public async Task<object> RunRemoteCommand([FromBody] RemoteMessage remoteMessage)
 //		{
 //			_logger.LogTrace(LoggingEvents.HubRunRemoteCommand,
@@ -101,14 +101,14 @@ namespace dexih.api.Controllers
 		}
 
 		[HttpPost("[action]")]
-		[ValidateHub(DexihHubUser.EPermission.Owner)]
+		[ValidateHub(EPermission.Owner)]
 		public Task<List<RepositoryManager.HubUser>> HubUsers([FromBody] HubModelBase hubKeyValue, CancellationToken cancellationToken)
 		{
 			return GetHubUsers(hubKeyValue.HubKey, cancellationToken);
 		}
 
 		[HttpPost("[action]")]
-		[ValidateHub(DexihHubUser.EPermission.Owner)]
+		[ValidateHub(EPermission.Owner)]
 		public async Task SetUsersPermission([FromBody] UserPermissions userPermissions, CancellationToken cancellationToken)
 		{
 			var database = _operations.RepositoryManager;
@@ -245,7 +245,7 @@ namespace dexih.api.Controllers
 
 
 		[HttpPost("[action]")]
-		[ValidateHub(DexihHubUser.EPermission.Owner)]
+		[ValidateHub(EPermission.Owner)]
 		public async Task RemoveUsers([FromBody] UserPermissions userPermissions, CancellationToken cancellationToken)
 		{
 			var database = _operations.RepositoryManager;
@@ -286,7 +286,7 @@ namespace dexih.api.Controllers
 
 		[HttpPost("[action]")]
 		[ValidateAntiForgeryToken]
-		[ValidateHub(DexihHubUser.EPermission.PublishReader)]
+		[ValidateHub(EPermission.PublishReader)]
 		public async Task<RemoteAgentStatus> GetRemoteAgentStatus([FromBody] GetRemoteAgentStatus remoteAgentStatus, CancellationToken cancellationToken)
 		{
 			var database = _operations.RepositoryManager;
@@ -298,7 +298,7 @@ namespace dexih.api.Controllers
 
 
 		[HttpPost("[action]")]
-		[ValidateHub(DexihHubUser.EPermission.Owner)]
+		[ValidateHub(EPermission.Owner)]
 		public async Task<DexihRemoteAgentHub> SaveRemoteAgent([FromBody] RemoteAgentUpdate remoteAgentUpdate, CancellationToken cancellationToken)
 		{
 			var operations = _operations.RepositoryManager;
@@ -321,7 +321,7 @@ namespace dexih.api.Controllers
 
 		[HttpPost("[action]")]
 		[ValidateAntiForgeryToken]
-		[ValidateHub(DexihHubUser.EPermission.Owner)]
+		[ValidateHub(EPermission.Owner)]
 		public Task DeleteRemoteAgent([FromBody] RemoteAgentDelete remoteAgentDelete, CancellationToken cancellationToken)
 		{
 			var database = _operations.RepositoryManager;
@@ -338,7 +338,7 @@ namespace dexih.api.Controllers
 		}
 
 		[HttpPost("[action]")]
-		[ValidateHub(DexihHubUser.EPermission.User)]
+		[ValidateHub(EPermission.User)]
 		public async Task<DexihConnection> SaveConnection([FromBody] HubValue<DexihConnection> saveConnection, CancellationToken cancellationToken)
 		{
 			_logger.LogTrace(LoggingEvents.HubSaveConnection,
@@ -348,7 +348,7 @@ namespace dexih.api.Controllers
 			var connection = saveConnection.Value;
 
 			// if the user is not an owner, then passwords and connection strings must be re-entered each time.
-			if (HubPermission != DexihHubUser.EPermission.Owner)
+			if (HubPermission != EPermission.Owner)
 			{
 				if (!string.IsNullOrEmpty(connection.Password) && string.IsNullOrEmpty(connection.PasswordRaw))
 				{
@@ -399,7 +399,7 @@ namespace dexih.api.Controllers
 		}
 
 		[HttpPost("[action]")]
-		[ValidateHub(DexihHubUser.EPermission.User)]
+		[ValidateHub(EPermission.User)]
 		public Task<DexihConnection[]> DeleteConnections([FromBody] HubKeyItems hubKeyConnections, CancellationToken cancellationToken)
 		{
 			_logger.LogTrace(LoggingEvents.HubDeleteConnections,
@@ -410,28 +410,28 @@ namespace dexih.api.Controllers
 		}
 		
 		[HttpPost("[action]")]
-		[ValidateHub(DexihHubUser.EPermission.Owner)]
+		[ValidateHub(EPermission.Owner)]
 		public Task<string[]> RefreshConnection([FromBody] HubValue<DexihConnection> connection, CancellationToken cancellationToken)
 		{
 			return _remoteAgents.Run<DexihConnection, string[]>(connection, nameof(RemoteOperations.RefreshConnection), _operations.RepositoryManager);
 		}
 		
 		[HttpPost("[action]")]
-		[ValidateHub(DexihHubUser.EPermission.Owner)]
+		[ValidateHub(EPermission.Owner)]
 		public Task<DexihTable[]> DatabaseTableNames([FromBody] HubValue<DexihConnection> connection, CancellationToken cancellationToken)
 		{
 			return _remoteAgents.Run<DexihConnection, DexihTable[]>(connection, nameof(RemoteOperations.DatabaseTableNames), _operations.RepositoryManager);
 		}
 		
 		[HttpPost("[action]")]
-		[ValidateHub(DexihHubUser.EPermission.Owner)]
+		[ValidateHub(EPermission.Owner)]
 		public Task<bool> CreateDatabase([FromBody] HubValue<DexihConnection> connection, CancellationToken cancellationToken)
 		{
 			return _remoteAgents.Run<DexihConnection,bool>(connection, nameof(RemoteOperations.CreateDatabase), _operations.RepositoryManager);
 		}
 
 		[HttpPost("[action]")]
-		[ValidateHub(DexihHubUser.EPermission.User)]
+		[ValidateHub(EPermission.User)]
 		public async Task<DexihTable> ImportFileFormat([FromForm] ImportFileFormat importFileFormat, IFormFile file, CancellationToken cancellationToken)
 		{
 			_logger.LogTrace(LoggingEvents.HubImportFileFormat,
@@ -475,7 +475,7 @@ namespace dexih.api.Controllers
 		}
 
 		[HttpPost("[action]")]
-		[ValidateHub(DexihHubUser.EPermission.User)]
+		[ValidateHub(EPermission.User)]
 		public Task<DexihTable[]> ImportTables([FromBody] ImportTables importTables, CancellationToken cancellationToken)
 		{
 			_logger.LogTrace(LoggingEvents.HubImportTables, "HubController.ImportTables: HubKey: {updateBrowserHub}.",
@@ -500,7 +500,7 @@ namespace dexih.api.Controllers
 
 			foreach (var importedTable in importedTables)
 			{
-				if (importedTable.EntityStatus.LastStatus != EntityStatus.EStatus.Error)
+				if (importedTable.EntityStatus.LastStatus != EStatus.Error)
 				{
 					importedTable.HubKey = hubKey;
 					//importedTable.EntityStatus.IsBusy = true;
@@ -543,7 +543,7 @@ namespace dexih.api.Controllers
 
 
 		[HttpPost("[action]")]
-		[ValidateHub(DexihHubUser.EPermission.User)]
+		[ValidateHub(EPermission.User)]
 		public async Task<JToken> CreateTables([FromBody] CreateTables createTables, CancellationToken cancellationToken)
 		{
 			_logger.LogTrace(LoggingEvents.HubCreateTables, "HubController.CreateTables: HubKey: {updateBrowserHub}.",
@@ -556,7 +556,7 @@ namespace dexih.api.Controllers
 		}
 
 		[HttpPost("[action]")]
-		[ValidateHub(DexihHubUser.EPermission.User)]
+		[ValidateHub(EPermission.User)]
 		public async Task<JToken> ClearTables([FromBody] ImportTables clearTables, CancellationToken cancellationToken)
 		{
 			_logger.LogTrace(LoggingEvents.HubClearTables, "HubController.ClearTables: HubKey: {updateBrowserHub}.",
@@ -571,7 +571,7 @@ namespace dexih.api.Controllers
 
 
 		[HttpPost("[action]")]
-		[ValidateHub(DexihHubUser.EPermission.User)]
+		[ValidateHub(EPermission.User)]
 		public async Task<DexihTable> SaveTable([FromBody] HubValue<DexihTable> saveTable, CancellationToken cancellationToken)
 		{
 			_logger.LogTrace(LoggingEvents.HubSaveTable, "HubController.SaveTable: HubKey: {updateBrowserHub}",
@@ -584,7 +584,7 @@ namespace dexih.api.Controllers
 		}
 
 		[HttpPost("[action]")]
-		[ValidateHub(DexihHubUser.EPermission.User)]
+		[ValidateHub(EPermission.User)]
 		public Task DeleteTables([FromBody] HubKeyItems deleteTables, CancellationToken cancellationToken)
 		{
 			_logger.LogTrace(LoggingEvents.HubDeleteTables, "HubController.DeleteTables: HubKey: {updateBrowserHub}",
@@ -595,7 +595,7 @@ namespace dexih.api.Controllers
 		}
 
 		[HttpPost("[action]")]
-		[ValidateHub(DexihHubUser.EPermission.PublishReader)]
+		[ValidateHub(EPermission.PublishReader)]
 		public Task<string> PreviewTable([FromBody] PreviewTable previewTable, CancellationToken cancellationToken)
 		{
 			_logger.LogTrace(LoggingEvents.HubPreviewTable,
@@ -609,7 +609,7 @@ namespace dexih.api.Controllers
 		}
 
 		[HttpPost("[action]")]
-		[ValidateHub(DexihHubUser.EPermission.PublishReader)]
+		[ValidateHub(EPermission.PublishReader)]
 		public Task<string> PreviewTableQuery([FromBody] PreviewTableQuery previewTableQuery, CancellationToken cancellationToken)
 		{
 			_logger.LogTrace(LoggingEvents.HubPreviewTable,
@@ -624,7 +624,7 @@ namespace dexih.api.Controllers
 		}
 
 		[HttpPost("[action]")]
-		[ValidateHub(DexihHubUser.EPermission.PublishReader)]
+		[ValidateHub(EPermission.PublishReader)]
 		public Task<string> PreviewDatalink([FromBody] PreviewDatalink previewDatalink, CancellationToken cancellationToken)
 		{
 			_logger.LogTrace(LoggingEvents.HubPreviewDatalink,
@@ -639,7 +639,7 @@ namespace dexih.api.Controllers
 		}
 		
 		[HttpPost("[action]")]
-		[ValidateHub(DexihHubUser.EPermission.PublishReader)]
+		[ValidateHub(EPermission.PublishReader)]
 		public Task<string> PreviewProfile([FromBody] PreviewProfile previewProfile, CancellationToken cancellationToken)
 		{
 			return _remoteAgents.SendRemoteMessage<string>(previewProfile.HubKey, previewProfile.RemoteAgentId,
@@ -647,7 +647,7 @@ namespace dexih.api.Controllers
 		}
 
 		[HttpPost("[action]")]
-		[ValidateHub(DexihHubUser.EPermission.PublishReader)]
+		[ValidateHub(EPermission.PublishReader)]
 		public async Task<List<DashboardUrls>> PreviewDashboard([FromBody] PreviewDashboard previewDashboard, CancellationToken cancellationToken)
 		{
 			var repositoryManager = _operations.RepositoryManager;
@@ -670,10 +670,10 @@ namespace dexih.api.Controllers
 				
 				switch(view.SourceType)
 				{
-					case ESourceType.Table:
+					case EDataObjectType.Table:
 						url = await _remoteAgents.PreviewTable(previewDashboard.RemoteAgentId, previewDashboard.HubKey, view.SourceTableKey.Value, view.SelectQuery, view.InputValues, itemParameters, false, previewDashboard.DownloadUrl, repositoryManager, cancellationToken);
 						break;
-					case ESourceType.Datalink:
+					case EDataObjectType.Datalink:
 						url = await _remoteAgents.PreviewDatalink(previewDashboard.RemoteAgentId, previewDashboard.HubKey, view.SourceDatalinkKey.Value, view.SelectQuery, view.InputValues, itemParameters, previewDashboard.DownloadUrl, repositoryManager, cancellationToken);
 						break;
 					default:
@@ -688,7 +688,7 @@ namespace dexih.api.Controllers
 
 	
 	[HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.PublishReader)]
+	    [ValidateHub(EPermission.PublishReader)]
 	    public Task<TransformProperties> DatalinkProperties([FromBody] PreviewDatalink previewDatalink, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubPreviewDatalink, "HubController.PreviewDatalink: HubKey: {updateBrowserHub}, DatalinkKey: {DatalinkKey}", previewDatalink.HubKey, previewDatalink.DatalinkKey);
@@ -698,7 +698,7 @@ namespace dexih.api.Controllers
 	    }
 	    
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.PublishReader)]
+	    [ValidateHub(EPermission.PublishReader)]
 	    public Task<string> PreviewTransform([FromBody] PreviewTransform previewTransform, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubPreviewDatalink, "HubController.PreviewTransform: HubKey: {updateBrowserHub}, DatalinkKey: {DatalinkKey}", previewTransform.HubKey, previewTransform.Datalink.Key);
@@ -708,7 +708,7 @@ namespace dexih.api.Controllers
 	    } 
 	    
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.PublishReader)]
+	    [ValidateHub(EPermission.PublishReader)]
 	    public Task<string> PreviewView([FromBody] PreviewView previewView, CancellationToken cancellationToken)
 	    {
 		    if (previewView.View == null)
@@ -727,9 +727,9 @@ namespace dexih.api.Controllers
 		    
 		    switch(previewView.View.SourceType)
 		    {
-			    case ESourceType.Table:
+			    case EDataObjectType.Table:
 				    return _remoteAgents.PreviewTable(previewView.RemoteAgentId, previewView.HubKey, previewView.View.SourceTableKey.Value, previewView.View.SelectQuery, previewView.InputColumns, itemParameters, false, previewView.DownloadUrl, repositoryManager, cancellationToken);
-			    case ESourceType.Datalink:
+			    case EDataObjectType.Datalink:
 				    return _remoteAgents.PreviewDatalink(previewView.RemoteAgentId, previewView.HubKey, previewView.View.SourceDatalinkKey.Value, previewView.View.SelectQuery, previewView.InputColumns, itemParameters, previewView.DownloadUrl, repositoryManager, cancellationToken);
 			    default:
 				    throw new ArgumentOutOfRangeException();
@@ -737,7 +737,7 @@ namespace dexih.api.Controllers
 	    }
 	    
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.FullReader)]
+	    [ValidateHub(EPermission.FullReader)]
 	    public Task<string> PreviewAuditResults([FromBody] AuditResults auditResults, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubPreviewView, "HubController.PreviewAuditResults: HubKey: {updateBrowserHub}", auditResults.HubKey);
@@ -747,7 +747,7 @@ namespace dexih.api.Controllers
 	    }
 	    
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.User)]
+	    [ValidateHub(EPermission.User)]
 	    public Task<string[]> ImportFunctionMappings([FromBody] ImportFunctionMappings importFunctionMappings, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubImportFunctionMappings, "HubController.ImportFunctionMappings: HubKey: {updateBrowserHub}, DatalinkKey: {DatalinkKey}", importFunctionMappings.HubKey, importFunctionMappings.Datalink.Key);
@@ -757,7 +757,7 @@ namespace dexih.api.Controllers
 	    }
 	    
         [HttpPost("[action]")]
-        [ValidateHub(DexihHubUser.EPermission.User)]
+        [ValidateHub(EPermission.User)]
         public async Task<DexihDatalink[]> CreateDatalinks([FromBody] NewDatalinks datalink, CancellationToken cancellationToken)
         {
 			_logger.LogTrace(LoggingEvents.HubCreateDatalinks, "HubController.CreateDatalinks: HubKey: {updateBrowserHub}, SourceTableKeys {sourceTableKeys}.", datalink.HubKey, string.Join(",", datalink.SourceTableKeys.Select(c=>c.ToString())));
@@ -782,7 +782,7 @@ namespace dexih.api.Controllers
         }
 
         [HttpPost("[action]")]
-        [ValidateHub(DexihHubUser.EPermission.User)]
+        [ValidateHub(EPermission.User)]
         public Task<DexihDatalink[]> DeleteDatalinks([FromBody] HubKeyItems hubKeyDatalinks, CancellationToken cancellationToken)
         {
 			_logger.LogTrace(LoggingEvents.HubDeleteDatalinks, "HubController.DeleteDatalinks: HubKey: {updateBrowserHub}, DatalinkKeys {DatalinkKeys}.", hubKeyDatalinks.HubKey, string.Join(",", hubKeyDatalinks.ItemKeys.Select(c => c.ToString())));
@@ -793,7 +793,7 @@ namespace dexih.api.Controllers
         }
 
         [HttpPost("[action]")]
-        [ValidateHub(DexihHubUser.EPermission.User)]
+        [ValidateHub(EPermission.User)]
         public Task ShareItems([FromBody] ShareItems items, CancellationToken cancellationToken)
         {
 	        _logger.LogTrace(LoggingEvents.HubShareItems, "HubController.HubShareItems: HubKey: {updateBrowserHub}", items.HubKey);
@@ -803,7 +803,7 @@ namespace dexih.api.Controllers
         }
         
         [HttpPost("[action]")]
-        [ValidateHub(DexihHubUser.EPermission.User)]
+        [ValidateHub(EPermission.User)]
         public async Task<DexihDatalink> SaveDatalink([FromBody] HubValue<DexihDatalink> saveDatalink, CancellationToken cancellationToken)
         {
             var datalink = saveDatalink.Value;
@@ -816,7 +816,7 @@ namespace dexih.api.Controllers
         }
 
         [HttpPost("[action]")]
-        [ValidateHub(DexihHubUser.EPermission.User)]
+        [ValidateHub(EPermission.User)]
         public Task DeleteDatajobs([FromBody] HubKeyItems hubKeyDatajobs, CancellationToken cancellationToken)
         {
 			_logger.LogTrace(LoggingEvents.HubDeleteDatajobs, "HubController.DeleteDatajobs: HubKey: {updateBrowserHub}, DatajobKeys {DatajobKeys}.", hubKeyDatajobs.HubKey, string.Join(",", hubKeyDatajobs.ItemKeys.Select(c => c.ToString())));
@@ -826,7 +826,7 @@ namespace dexih.api.Controllers
         }
 
         [HttpPost("[action]")]
-        [ValidateHub(DexihHubUser.EPermission.User)]
+        [ValidateHub(EPermission.User)]
         public async Task<DexihDatajob> SaveDatajob([FromBody] HubValue<DexihDatajob> saveDatajob, CancellationToken cancellationToken)
         {
 			_logger.LogTrace(LoggingEvents.HubSaveDatajob, "HubController.SaveDatajobs: HubKey: {updateBrowserHub}", saveDatajob.HubKey);
@@ -837,7 +837,7 @@ namespace dexih.api.Controllers
         }
 
         [HttpPost("[action]")]
-        [ValidateHub(DexihHubUser.EPermission.User)]
+        [ValidateHub(EPermission.User)]
         public Task<DexihColumnValidation[]> DeleteColumnValidations([FromBody] HubKeyItems hubKeyValidations, CancellationToken cancellationToken)
         {
 			_logger.LogTrace(LoggingEvents.HubDeleteValidations, "HubController.DeleteValidations: HubKey: {updateBrowserHub}, DatajobKeys {DatajobKeys}.", hubKeyValidations.HubKey, string.Join(",", hubKeyValidations.ItemKeys.Select(c => c.ToString())));
@@ -847,7 +847,7 @@ namespace dexih.api.Controllers
         }
 
         [HttpPost("[action]")]
-        [ValidateHub(DexihHubUser.EPermission.User)]
+        [ValidateHub(EPermission.User)]
         public Task<DexihColumnValidation> SaveColumnValidation([FromBody] HubValue<DexihColumnValidation> saveValidation, CancellationToken cancellationToken)
         {
 			_logger.LogTrace(LoggingEvents.HubSaveValidation, "HubController.SaveValidation: HubKey: {updateBrowserHub}, ColumnValidationKey {columnValidationName}.", saveValidation.HubKey, saveValidation.Value.Name);
@@ -860,7 +860,7 @@ namespace dexih.api.Controllers
         }
         
         [HttpPost("[action]")]
-        [ValidateHub(DexihHubUser.EPermission.Owner)]
+        [ValidateHub(EPermission.Owner)]
         public async Task<RemoteOperations.TestColumnValidationResult> TestColumnValidation([FromBody] ColumnValidationTest validation, CancellationToken cancellationToken)
         {
 	        var hub = await _operations.RepositoryManager.GetHub(validation.HubKey, cancellationToken);
@@ -872,7 +872,7 @@ namespace dexih.api.Controllers
         }
 	    
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.User)]
+	    [ValidateHub(EPermission.User)]
 	    public Task<DexihCustomFunction[]> DeleteCustomFunctions([FromBody] HubKeyItems hubKeyValidations, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubDeleteCustomFunctions, "HubController.DeleteValidations: HubKey: {updateBrowserHub}, DatajobKeys {DatajobKeys}.", hubKeyValidations.HubKey, string.Join(",", hubKeyValidations.ItemKeys.Select(c => c.ToString())));
@@ -882,7 +882,7 @@ namespace dexih.api.Controllers
 	    }
 
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.User)]
+	    [ValidateHub(EPermission.User)]
 	    public Task<DexihCustomFunction> SaveCustomFunction([FromBody] HubValue<DexihCustomFunction> saveCustomFunction, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubSaveCustomFunctions, "HubController.HubSaveCustomFunctions: HubKey: {updateBrowserHub}, CustomFunction {customFunctionName}.", saveCustomFunction.HubKey, saveCustomFunction.Value.Name);
@@ -895,7 +895,7 @@ namespace dexih.api.Controllers
 	    }
 	    
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.Owner)]
+	    [ValidateHub(EPermission.Owner)]
 	    public async Task<IEnumerable<object>> TestCustomFunction([FromBody] CustomFunctionTest customFunction, CancellationToken cancellationToken)
 	    {
 		    var hub = await _operations.RepositoryManager.GetHub(customFunction.HubKey, cancellationToken);
@@ -905,7 +905,7 @@ namespace dexih.api.Controllers
 	    }
 
         [HttpPost("[action]")]
-        [ValidateHub(DexihHubUser.EPermission.User)]
+        [ValidateHub(EPermission.User)]
         public Task<DexihFileFormat[]> DeleteFileFormats([FromBody] HubKeyItems hubKeyFileFormats, CancellationToken cancellationToken)
         {
 			_logger.LogTrace(LoggingEvents.HubDeleteFileformats, "HubController.DeleteFileFormats: HubKey: {updateBrowserHub}, DataValidationKeys {dataValidationKeys}.", hubKeyFileFormats.HubKey, string.Join(",", hubKeyFileFormats.ItemKeys.Select(c => c.ToString())));
@@ -915,7 +915,7 @@ namespace dexih.api.Controllers
         }
 
         [HttpPost("[action]")]
-        [ValidateHub(DexihHubUser.EPermission.User)]
+        [ValidateHub(EPermission.User)]
         public Task<DexihFileFormat> SaveFileFormat([FromBody] HubValue<DexihFileFormat> saveFileFormat, CancellationToken cancellationToken)
         {
 			_logger.LogTrace(LoggingEvents.HubSaveFileformat, "HubController.SaveFileFormat: HubKey: {updateBrowserHub}", saveFileFormat.HubKey);
@@ -926,7 +926,7 @@ namespace dexih.api.Controllers
         }
 
         [HttpPost("[action]")]
-        [ValidateHub(DexihHubUser.EPermission.User)]
+        [ValidateHub(EPermission.User)]
         public Task<DexihHubVariable[]> DeleteHubVariables([FromBody] HubKeyItems hubKeyVariables, CancellationToken cancellationToken)
         {
             _logger.LogTrace(LoggingEvents.HubDeleteHubVariables, "HubController.DeleteHubVariables: HubKey: {updateBrowserHub}, VariableKeys {variableKeys}.", hubKeyVariables.HubKey, string.Join(",", hubKeyVariables.ItemKeys.Select(c => c.ToString())));
@@ -936,7 +936,7 @@ namespace dexih.api.Controllers
         }
 
         [HttpPost("[action]")]
-        [ValidateHub(DexihHubUser.EPermission.User)]
+        [ValidateHub(EPermission.User)]
         public async Task<DexihHubVariable> SaveHubVariable([FromBody] HubValue<DexihHubVariable> saveHubVariable, CancellationToken cancellationToken)
         {
             _logger.LogTrace(LoggingEvents.HubSaveHubVariable, "HubController.SaveHubVariable: HubKey: {updateBrowserHub}", saveHubVariable.HubKey);
@@ -962,7 +962,7 @@ namespace dexih.api.Controllers
         }
 	    
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.User)]
+	    [ValidateHub(EPermission.User)]
 	    public Task<DexihView[]> DeleteViews([FromBody] HubKeyItems views, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubDeleteViews, "HubController.DeleteViews: HubKey: {updateBrowserHub}, ViewKeys {dataValidationKeys}.", views.HubKey, string.Join(",", views.ItemKeys.Select(c => c.ToString())));
@@ -972,7 +972,7 @@ namespace dexih.api.Controllers
 	    }
 
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.User)]
+	    [ValidateHub(EPermission.User)]
 	    public Task<DexihView> SaveView([FromBody] HubValue<DexihView> saveView, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubSaveViews, "HubController.SAveView: HubKey: {updateBrowserHub}", saveView.HubKey);
@@ -983,7 +983,7 @@ namespace dexih.api.Controllers
 	    }
 	    
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.User)]
+	    [ValidateHub(EPermission.User)]
 	    public Task<DexihDashboard[]> DeleteDashboards([FromBody] HubKeyItems dashboards, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubDeleteViews, "HubController.DeleteDashboards: HubKey: {updateBrowserHub}, ViewKeys {dataValidationKeys}.", dashboards.HubKey, string.Join(",", dashboards.ItemKeys.Select(c => c.ToString())));
@@ -993,7 +993,7 @@ namespace dexih.api.Controllers
 	    }
 
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.User)]
+	    [ValidateHub(EPermission.User)]
 	    public Task<DexihDashboard> SaveDashboard([FromBody] HubValue<DexihDashboard> saveDashboard, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubSaveDashboards, "HubController.HubSaveDashboards: HubKey: {updateBrowserHub}", saveDashboard.HubKey);
@@ -1004,7 +1004,7 @@ namespace dexih.api.Controllers
 	    }
 	    
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.User)]
+	    [ValidateHub(EPermission.User)]
 	    public Task<DexihApi[]> DeleteAPIs([FromBody] HubKeyItems apis, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubDeleteApis, "HubController.DeleteApis: HubKey: {updateBrowserHub}, APIKeys {dataValidationKeys}.", apis.HubKey, string.Join(",", apis.ItemKeys.Select(c => c.ToString())));
@@ -1014,7 +1014,7 @@ namespace dexih.api.Controllers
 	    }
 
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.User)]
+	    [ValidateHub(EPermission.User)]
 	    public Task<DexihApi> SaveApi([FromBody] HubValue<DexihApi> saveApi, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubSaveApis, "HubController.SaveApis: HubKey: {updateBrowserHub}", saveApi.HubKey);
@@ -1025,7 +1025,7 @@ namespace dexih.api.Controllers
 	    }
 	    
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.User)]
+	    [ValidateHub(EPermission.User)]
 	    public Task ActivateApis([FromBody] ActivateApis apis, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubActivateApis, "HubController.HubActivateApis: HubKey: {hubKey}, ApiKeys: {apiKeys}", apis.HubKey, string.Join(",", apis.ApiKeys));
@@ -1035,7 +1035,7 @@ namespace dexih.api.Controllers
 	    }
 	    
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.User)]
+	    [ValidateHub(EPermission.User)]
 	    public Task DeactivateApis([FromBody] ActivateApis apis, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubDeactivateApis, "HubController.DeactivateApis: HubKey: {hubKey}, ApiKeys: {apiKeys}", apis.HubKey, string.Join(",", apis.ApiKeys));
@@ -1046,7 +1046,7 @@ namespace dexih.api.Controllers
 	    
 	    
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.User)]
+	    [ValidateHub(EPermission.User)]
 	    public async Task<string> UploadFile([FromBody] UploadFiles uploadFiles, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubUploadFiles, "HubController.UploadFile: HubKey: {updateBrowserHub}, TableKey: {TableKey}.", uploadFiles.HubKey, uploadFiles.TableKey);
@@ -1063,7 +1063,7 @@ namespace dexih.api.Controllers
 	    }
 	    
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.Owner)]
+	    [ValidateHub(EPermission.Owner)]
 	    public async Task<bool> CreateFilePaths([FromBody] HubValue<DexihTable> table, CancellationToken cancellationToken)
 	    {
 		    var hub = await _operations.RepositoryManager.GetHub(table.HubKey, cancellationToken);
@@ -1075,7 +1075,7 @@ namespace dexih.api.Controllers
 	    }
 	    
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.Owner)]
+	    [ValidateHub(EPermission.Owner)]
 	    public async Task<bool> MoveFiles([FromBody] MoveFiles table, CancellationToken cancellationToken)
 	    {
 		    var hub = await _operations.RepositoryManager.GetHub(table.HubKey, cancellationToken);
@@ -1087,7 +1087,7 @@ namespace dexih.api.Controllers
 	    }
 	    
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.Owner)]
+	    [ValidateHub(EPermission.Owner)]
 	    public async Task<bool> DeleteFiles([FromBody] DeleteFiles table, CancellationToken cancellationToken)
 	    {
 		    var hub = await _operations.RepositoryManager.GetHub(table.HubKey, cancellationToken);
@@ -1099,7 +1099,7 @@ namespace dexih.api.Controllers
 	    }
 
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.Owner)]
+	    [ValidateHub(EPermission.Owner)]
 	    public async Task<List<DexihFileProperties>> GetFileList([FromBody] GetFileList table, CancellationToken cancellationToken)
 	    {
 		    var hub = await _operations.RepositoryManager.GetHub(table.HubKey, cancellationToken);
@@ -1112,7 +1112,7 @@ namespace dexih.api.Controllers
 
 	    
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.User)]
+	    [ValidateHub(EPermission.User)]
 	    public async Task<BulkUploadFilesReturn> BulkUploadFiles([FromBody] BulkUploadFiles bulkUploadFiles, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubBulkUploadFiles, "HubController.HubBulkUploadFiles: HubKey: {updateBrowserHub}, ConnectionKey: {ConnectionKey}.", bulkUploadFiles.HubKey, bulkUploadFiles.ConnectionKey);
@@ -1124,7 +1124,7 @@ namespace dexih.api.Controllers
 	    }
 	    
         [HttpPost("[action]")]
-        [ValidateHub(DexihHubUser.EPermission.User)]
+        [ValidateHub(EPermission.User)]
         public Task<ManagedTask> DownloadFiles([FromBody] DownloadFiles downloadFiles, CancellationToken cancellationToken)
         {
             _logger.LogTrace(LoggingEvents.HubUploadFiles, "HubController.DownloadFiles: HubKey: {updateBrowserHub}, TableKey: {TableKey}.", downloadFiles.HubKey, downloadFiles.TableKey);
@@ -1136,7 +1136,7 @@ namespace dexih.api.Controllers
         }
 
         [HttpPost("[action]")]
-        [ValidateHub(DexihHubUser.EPermission.FullReader)]
+        [ValidateHub(EPermission.FullReader)]
         public Task<ManagedTask> DownloadSharedData([FromBody] DownloadDataModel downloadData, CancellationToken cancellationToken)
         {
             _logger.LogTrace(LoggingEvents.HubUploadFiles, "HubController.DownloadData: HubKey: {updateBrowserHub}", downloadData.HubKey);
@@ -1147,7 +1147,7 @@ namespace dexih.api.Controllers
         }
 
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.FullReader)]
+	    [ValidateHub(EPermission.FullReader)]
 	    public Task<ManagedTask> DownloadTableData([FromBody] DownloadTableDataModel downloadData, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubUploadFiles, "HubController.DownloadData: HubKey: {updateBrowserHub}", downloadData.HubKey);
@@ -1158,7 +1158,7 @@ namespace dexih.api.Controllers
 	    }
 	    
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.FullReader)]
+	    [ValidateHub(EPermission.FullReader)]
 	    public Task<ManagedTask> DownloadDatalinkData([FromBody] DownloadDatalinkDataModel downloadData, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubUploadFiles, "HubController.DownloadData: HubKey: {updateBrowserHub}", downloadData.HubKey);
@@ -1169,7 +1169,7 @@ namespace dexih.api.Controllers
 	    }
 	    
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.User)]
+	    [ValidateHub(EPermission.User)]
 	    public Task RunDatalinks([FromBody] RunDatalinks datalinks, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubRunDatalinks, "HubController.RunDatalinks: HubKey: {hubKey}, DatalinkKeys: {datalinkKeys}", datalinks.HubKey, string.Join(",", datalinks.DatalinkKeys));
@@ -1179,7 +1179,7 @@ namespace dexih.api.Controllers
 	    }
 	    
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.User)]
+	    [ValidateHub(EPermission.User)]
 	    public Task<DexihDatalinkTest[]> DeleteDatalinkTests([FromBody] HubKeyItems items, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubDeleteHubVariables, "HubController.DeleteDatalinkTests: HubKey: {updateBrowserHub}, VariableKeys {variableKeys}.", items.HubKey, string.Join(",", items.ItemKeys.Select(c => c.ToString())));
@@ -1189,7 +1189,7 @@ namespace dexih.api.Controllers
 	    }
 
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.User)]
+	    [ValidateHub(EPermission.User)]
 	    public async Task<DexihDatalinkTest> SaveDatalinkTest([FromBody] HubValue<DexihDatalinkTest> saveDatalinkTest, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubSaveHubVariable, "HubController.SaveDatalinkTest: HubKey: {updateBrowserHub}", saveDatalinkTest.HubKey);
@@ -1200,7 +1200,7 @@ namespace dexih.api.Controllers
 	    }
 	    
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.User)]
+	    [ValidateHub(EPermission.User)]
 	    public async Task<DexihDatalinkTest> NewDatalinkTest([FromBody] NewDatalinkTest newDatalinkTest, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubSaveHubVariable, "HubController.NewDatalinkTest: HubKey: {updateBrowserHub}", newDatalinkTest.HubKey);
@@ -1217,7 +1217,7 @@ namespace dexih.api.Controllers
 	    }
 	    
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.User)]
+	    [ValidateHub(EPermission.User)]
 	    public Task RunDatalinkTests([FromBody] RunDatalinkTests datalinkTests, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubRunDatalinks, "HubController.RunDatalinks: HubKey: {hubKey}, DatalinkKeys: {datalinkKeys}", datalinkTests.HubKey, string.Join(",", datalinkTests.DatalinkTestKeys));
@@ -1231,7 +1231,7 @@ namespace dexih.api.Controllers
 	    /// </summary>
 	    /// <returns></returns>
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.User)]
+	    [ValidateHub(EPermission.User)]
 	    public Task CancelDatalinkTests([FromBody] HubKeyItems cancelDatalinkTests, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubCancelDatalinkTests, "HubController.CancelDatalinkTests: HubKey: {hubKey}, AuditKeys: {auditKeys}", cancelDatalinkTests.HubKey, string.Join(",", cancelDatalinkTests.ItemKeys));
@@ -1241,7 +1241,7 @@ namespace dexih.api.Controllers
 	    }
 
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.User)]
+	    [ValidateHub(EPermission.User)]
 	    public Task RunDatalinkTestSnapshot([FromBody] RunDatalinkTests datalinkTests, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubSnapshotDatalinkTests, "HubController.SnapshotDatalinkTests: HubKey: {hubKey}, DatalinkKeys: {datalinkKeys}", datalinkTests.HubKey, string.Join(",", datalinkTests.DatalinkTestKeys));
@@ -1251,7 +1251,7 @@ namespace dexih.api.Controllers
 	    }
 
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.User)]
+	    [ValidateHub(EPermission.User)]
 	    public Task RunDatajobs([FromBody] RunDatajobs datajobs, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubRunDatajobs, "HubController.RunDatajobs: HubKey: {hubKey}, DatalinkKeys: {datajobKeys}", datajobs.HubKey, string.Join(",", datajobs.DatajobKeys));
@@ -1265,7 +1265,7 @@ namespace dexih.api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost("[action]")]
-        [ValidateHub(DexihHubUser.EPermission.User)]
+        [ValidateHub(EPermission.User)]
         public Task CancelDatalinks([FromBody] HubKeyItems cancelDatalinkKeys, CancellationToken cancellationToken)
         {
             _logger.LogTrace(LoggingEvents.HubRunDatalinks, "HubController.CancelDatalinks: HubKey: {hubKey}, AuditKeys: {auditKeys}", cancelDatalinkKeys.HubKey, string.Join(",", cancelDatalinkKeys.ItemKeys));
@@ -1275,7 +1275,7 @@ namespace dexih.api.Controllers
         }
 
         [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.User)]
+	    [ValidateHub(EPermission.User)]
 	    public Task ActivateDatajobs([FromBody] ActivateDatajobs datajobs, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubActivateDatajobs, "HubController.ActivateDatajobs: HubKey: {hubKey}, DatalinkKeys: {datajobKeys}", datajobs.HubKey, string.Join(",", datajobs.DatajobKeys));
@@ -1285,7 +1285,7 @@ namespace dexih.api.Controllers
 	    }
 	    
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.User)]
+	    [ValidateHub(EPermission.User)]
 	    public Task DeactivateDatajobs([FromBody] ActivateDatajobs datajobs, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubDeactivateDatajobs, "HubController.DeactivateDatajobs: HubKey: {hubKey}, DatalinkKeys: {datajobKeys}", datajobs.HubKey, string.Join(",", datajobs.DatajobKeys));
@@ -1295,7 +1295,7 @@ namespace dexih.api.Controllers
 	    }
 	    
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.Owner)]
+	    [ValidateHub(EPermission.Owner)]
 	    public Task<Import> ImportPlan([FromForm] ImportOptions importOptions, IFormFile file, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubImportPlan, "HubController.HubImportPlan");
@@ -1317,7 +1317,7 @@ namespace dexih.api.Controllers
 	    }
 	    
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.Owner)]
+	    [ValidateHub(EPermission.Owner)]
 	    public Task ImportPackage([FromBody] Import import, CancellationToken cancellationToken)
 	    {
 		    _logger.LogTrace(LoggingEvents.HubImportPackage, "HubController.HubImportPackage");
@@ -1325,13 +1325,13 @@ namespace dexih.api.Controllers
 		    var repositoryManager = _operations.RepositoryManager;
 		    
 		    // only owners can import passwords/connection strings
-		    var allowPasswordImport = HubPermission == DexihHubUser.EPermission.Owner;
+		    var allowPasswordImport = HubPermission == EPermission.Owner;
 		    
 		    return repositoryManager.ImportPackage(import, allowPasswordImport, cancellationToken);
 	    }
 
 	    [HttpPost("[action]")]
-	    [ValidateHub(DexihHubUser.EPermission.User)]
+	    [ValidateHub(EPermission.User)]
 	    public IActionResult DownloadFunctionCode([FromBody] DownloadFunctionCode downloadFunctionCode, CancellationToken cancellationToken)
 	    {
 		    var index = 0;
@@ -1349,7 +1349,7 @@ namespace dexih.api.Controllers
 			    foreach (var functionParam in downloadFunctionCode.DatalinkTransformItem.DexihFunctionParameters
 				    .Where(
 					    c =>
-						    c.Direction == DexihParameterBase.EParameterDirection.Input).OrderBy(c => c.Position))
+						    c.Direction == EParameterDirection.Input).OrderBy(c => c.Position))
 			    {
 				    if (index > downloadFunctionCode.TestValues.Length)
 				    {
@@ -1370,7 +1370,7 @@ namespace dexih.api.Controllers
 
 			    var returnParam =
 				    downloadFunctionCode.DatalinkTransformItem.DexihFunctionParameters.SingleOrDefault(c =>
-					    c.Direction == DexihParameterBase.EParameterDirection.ReturnValue);
+					    c.Direction == EParameterDirection.ReturnValue);
 
 			    if (returnParam != null)
 			    {

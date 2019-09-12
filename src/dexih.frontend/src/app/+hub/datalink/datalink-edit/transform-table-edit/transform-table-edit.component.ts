@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DexihTableColumn, eConnectionPurpose, deltaTypes, securityFlags, HubCache } from '../../../hub.models';
+import { deltaTypes, securityFlags, HubCache } from '../../../hub.models';
 import { HubService } from '../../../hub.service';
 import { AuthService} from '../../../../+auth/auth.service';
 import { Observable, Subscription, BehaviorSubject, combineLatest} from 'rxjs';
 import { FormGroup, FormArray } from '@angular/forms';
 import { DatalinkEditService } from '../datalink-edit.service';
 import { TypeCodes } from '../../../hub.remote.models';
+import { DexihTableColumn, eConnectionPurpose } from '../../../../shared/shared.models';
 
 @Component({
 

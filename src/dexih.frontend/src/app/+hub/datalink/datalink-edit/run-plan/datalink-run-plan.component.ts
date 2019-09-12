@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DexihDatalink, HubCache } from '../../../hub.models';
+import { HubCache } from '../../../hub.models';
 import { HubService } from '../../../hub.service';
 import { AuthService } from '../../../../+auth/auth.service';
 import { DatalinkEditService } from '../datalink-edit.service';
-import { Observable, Subscription, combineLatest} from 'rxjs';
+import { Subscription, combineLatest} from 'rxjs';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -14,7 +14,6 @@ import { FormGroup } from '@angular/forms';
 export class DatalinkRunPlanComponent implements OnInit, OnDestroy {
     public datalinkForm: FormGroup;
 
-    private hubCache: HubCache;
     public pageTitle: string;
     public message: string;
 
@@ -24,10 +23,8 @@ export class DatalinkRunPlanComponent implements OnInit, OnDestroy {
 
     constructor(
         private hubService: HubService,
-        private authService: AuthService,
         private editDatalinkService: DatalinkEditService,
-        private route: ActivatedRoute,
-        private router: Router) {
+        private route: ActivatedRoute) {
     }
 
     ngOnInit() {
@@ -39,7 +36,6 @@ export class DatalinkRunPlanComponent implements OnInit, OnDestroy {
                 this.editDatalinkService.hubFormsService.getCurrentFormObservable()
             ).subscribe(result => {
                 this.pageTitle = result[0]['pageTitle'];
-                this.hubCache = result[2];
                 this.datalinkForm = result[3];
             });
         } catch (e) {

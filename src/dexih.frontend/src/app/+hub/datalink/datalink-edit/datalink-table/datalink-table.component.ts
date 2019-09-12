@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy, ViewChild, Input } from '@angular/core';
-import { DexihConnection, DexihDatalink, DexihDatalinkTable, DexihTable, DexihDatalinkColumn, HubCache,
-    eSourceType, sourceTypes, eCacheStatus, ConnectionTables } from '../../../hub.models';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { HubCache, sourceTypes, ConnectionTables } from '../../../hub.models';
 import { HubService } from '../../../hub.service';
-import { Subscription, Observable, BehaviorSubject, combineLatest, merge} from 'rxjs';
+import { Subscription, combineLatest, merge} from 'rxjs';
 import { AuthService } from '../../../../+auth/auth.service';
-import { FormGroup, FormArray, FormControl } from '@angular/forms';
+import { FormGroup, FormArray } from '@angular/forms';
 import { DatalinkEditService } from '../datalink-edit.service';
+import { eSourceType, DexihDatalink, DexihDatalinkTable } from '../../../../shared/shared.models';
 
 @Component({
     selector: 'datalink-table',
@@ -30,7 +30,6 @@ export class DatalinkTableComponent implements OnInit, OnDestroy {
 
     constructor(
         private hubService: HubService,
-        private authService: AuthService,
         public datalinkEditService: DatalinkEditService) {
         }
 
@@ -62,7 +61,7 @@ export class DatalinkTableComponent implements OnInit, OnDestroy {
             this.datalinkTableForm.controls.sourceType.valueChanges,
             this.datalinkTableForm.controls.sourceTableKey.valueChanges,
             this.datalinkTableForm.controls.sourceDatalinkKey.valueChanges,
-        ).subscribe(value => {
+        ).subscribe(() => {
             this.errors = this.datalinkEditService.hubFormsService.getFormErrorMessages(this.datalinkTableForm);
             this.refreshColumns();
         });

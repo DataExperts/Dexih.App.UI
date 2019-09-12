@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit, EventEmitter, Output } from '@angular/core';
-import { eDownloadFormat, downloadFormats } from '../../../../+hub/hub.query.models';
+import { downloadFormats } from '../../../../+hub/hub.query.models';
+import { eDownloadFormat } from '../../../shared.models';
 
 @Component({
     selector: 'download-button',

@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HubService } from '../hub.service';
-import { HubCache, DexihDatalink, eSharedObjectType, eSourceType, eViewSource, eSharedDataObjectType } from '../hub.models';
-import { DownloadObject, eDownloadFormat } from '../hub.query.models';
+import { HubCache } from '../hub.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, BehaviorSubject, Subscription, combineLatest} from 'rxjs';
 import { AuthService } from '../../+auth/auth.service';
+import { DexihDatalink, eSourceType, eDownloadFormat, DownloadObject, eDataObjectType, eSharedObjectType } from '../../shared/shared.models';
 
 @Component({
     selector: 'sharedData-index',
@@ -115,23 +115,23 @@ export class SharedDataIndexComponent implements OnInit, OnDestroy {
     }
 
     public preview(dataObject: DownloadObject) {
-        if (dataObject.objectType === eViewSource.Table) {
+        if (dataObject.objectType === eDataObjectType.Table) {
             this.router.navigate(['table-preview', dataObject.objectKey], { relativeTo: this.route });
         }
-        if (dataObject.objectType === eViewSource.Datalink) {
+        if (dataObject.objectType === eDataObjectType.Datalink) {
             this.router.navigate(['datalink-preview', dataObject.objectKey], { relativeTo: this.route });
         }
     }
 
     public unshareSelectedTables(dataObjects: Array<DownloadObject>) {
-        let datalinkKeys = dataObjects.filter(c => c.objectType === eViewSource.Datalink).map(c => c.objectKey);
+        let datalinkKeys = dataObjects.filter(c => c.objectType === eDataObjectType.Datalink).map(c => c.objectKey);
         if (datalinkKeys.length > 0) {
-            this.hubService.shareItems(datalinkKeys, eSharedDataObjectType.Datalink, false);
+            this.hubService.shareItems(datalinkKeys, eDataObjectType.Datalink, false);
         }
 
-        let tableKeys = dataObjects.filter(c => c.objectType === eViewSource.Table).map(c => c.objectKey);
+        let tableKeys = dataObjects.filter(c => c.objectType === eDataObjectType.Table).map(c => c.objectKey);
         if (tableKeys.length > 0) {
-            this.hubService.shareItems(tableKeys, eSharedDataObjectType.Table, false);
+            this.hubService.shareItems(tableKeys, eDataObjectType.Table, false);
         }
     }
 

@@ -1,14 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DexihDatalinkTransformItem, eDatalinkTransformItemType, HubCache,
-    transformItemTypes, DexihDatalinkColumn, DexihDatalinkTransform, eParameterDirection } from '../../../hub.models';
+import {HubCache, transformItemTypes } from '../../../hub.models';
 import { AuthService } from '../../../../+auth/auth.service';
 import { HubService } from '../../..';
 import { DatalinkEditService } from '../datalink-edit.service';
 import { Subscription, combineLatest } from 'rxjs';
-import { RemoteLibraries, FunctionReference } from '../../../hub.remote.models';
 import { InputOutputColumns } from '../../../hub.lineage.models';
-import { eDirection, compare, eCompare } from '../../../hub.query.models';
+import { compare } from '../../../hub.query.models';
 import { filter } from 'rxjs/operators';
+import { DexihDatalinkTransform, DexihDatalinkTransformItem, eTransformItemType, eCompare, DexihDatalinkColumn, FunctionReference, eParameterDirection } from '../../../../shared/shared.models';
 
 export class ValidValue {
     public valid: boolean;
@@ -38,7 +37,6 @@ export class MappingItemComponent implements OnInit {
     private _subscription: Subscription;
 
     private hubCache: HubCache;
-    private remoteLibraries: RemoteLibraries;
 
     public label: string;
     public error: string;
@@ -65,10 +63,7 @@ export class MappingItemComponent implements OnInit {
                 this.hubService.getRemoteLibrariesObservable()
             ).subscribe(result => {
                 this.hubCache = result[0];
-                this.remoteLibraries = result[1];
-
                 this.updateMapping();
-
             });
         } catch (e) {
             this.hubService.addHubClientErrorMessage(e, 'Mappings');
@@ -80,22 +75,14 @@ export class MappingItemComponent implements OnInit {
         let itemType = transformItemTypes.find(c => c.key === item.transformItemType);
 
         switch (item.transformItemType) {
-            case eDatalinkTransformItemType.BuiltInFunction:
+            case eTransformItemType.BuiltInFunction:
                 if (item.functionClassName) {
-                    if (this.remoteLibraries) {
-                        let func = this.remoteLibraries.functions.find(c =>
-                            c.functionClassName === item.functionClassName &&
-                            c.functionMethodName === item.functionMethodName &&
-                            c.functionAssemblyName === item.functionAssemblyName);
-
-                        if (func) {
-                            this.label = func.name;
-                            this.addBuiltInFunctionParameters(func);
-                        } else {
-                            this.error = `Error, function ${item.functionMethodName} not found.`;
-                        }
+                    let func = this.hubService.GetFunctionReference(item);
+                    if (func) {
+                        this.label = func.name;
+                        this.addBuiltInFunctionParameters(func);
                     } else {
-                        this.label = item.functionMethodName;
+                        this.error = `Error, function ${item.functionMethodName} not found.`;
                     }
                 } else if (item.customFunctionKey) {
                     let func = this.hubCache.hub.dexihCustomFunctions.find(c => c.key === item.customFunctionKey);
@@ -110,13 +97,13 @@ export class MappingItemComponent implements OnInit {
                     this.error = 'Error, function not found';
                 }
                 break;
-            case eDatalinkTransformItemType.CustomFunction:
+            case eTransformItemType.CustomFunction:
                 this.addCustomFunctionParameters();
                 break;
-            case eDatalinkTransformItemType.AggregatePair:
+            case eTransformItemType.AggregatePair:
                 this.label = item.aggregate.toString();
                 break;
-            case eDatalinkTransformItemType.Sort:
+            case eTransformItemType.Sort:
                 this.label = item.sortDirection.toString();
                 break;
             default:
@@ -280,7 +267,7 @@ export class MappingItemComponent implements OnInit {
             return { text: '(not mapped)', valid: false };
         }
 
-        let runTime = this.transform.runTime;
+        let runTime = this.transform['runTime'];
         let inputColumns = runTime.inputColumns;
         let nodeDatalinkColumn = this.transform.nodeDatalinkColumn ? this.transform.nodeDatalinkColumn : null;
         let nodeDatalinkColumnKey = nodeDatalinkColumn ? nodeDatalinkColumn.key : null;

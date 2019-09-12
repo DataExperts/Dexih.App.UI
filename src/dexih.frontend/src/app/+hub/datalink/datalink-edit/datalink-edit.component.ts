@@ -1,13 +1,13 @@
 import { HostListener, Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { DexihDatalink, DexihDatalinkTransform, HubCache, eSourceType, eDatalinkType, eCacheStatus, eLoadStrategy } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { DatalinkEditService } from './datalink-edit.service';
 import { Subscription, Observable, BehaviorSubject, combineLatest } from 'rxjs';
 import { AuthService } from '../../../+auth/auth.service';
 import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import { LogFactory, eLogLevel } from '../../../../logging';
-import { RemoteLibraries, eTransformType } from '../../hub.remote.models';
+import { HubCache, eCacheStatus } from '../../hub.models';
+import { DexihDatalinkTransform, eTransformWriterMethod, DexihDatalink, eDatalinkType, eSourceType, eTransformType, DexihDatalinkTable } from '../../../shared/shared.models';
 
 @Component({
     selector: 'dexih-datalink-edit-form',
@@ -21,7 +21,6 @@ export class DatalinkEditComponent implements OnInit, OnDestroy {
     private _datalinkTransformsSubscription: Subscription;
 
     private hubCache: HubCache;
-    private remoteLibraries: RemoteLibraries
 
     public savingDatalink = false;
 
@@ -37,7 +36,7 @@ export class DatalinkEditComponent implements OnInit, OnDestroy {
     datalinkTransforms: Observable<Array<DexihDatalinkTransform>> = this._datalinkTransforms.asObservable();
     updatingTransforms = false;
 
-    eLoadStrategy = eLoadStrategy;
+    eTransformWriterMethod = eTransformWriterMethod;
 
     private isLoaded = false;
 
@@ -112,6 +111,7 @@ export class DatalinkEditComponent implements OnInit, OnDestroy {
                     }
                 } else if (!this.isLoaded && this.action === 'new') {
                     let datalink = new DexihDatalink();
+                    datalink.sourceDatalinkTable = new DexihDatalinkTable();
                     this.editDatalinkService.hubFormsService.datalink(datalink);
                     this.logger.LogC(() => `new datalink set.`, eLogLevel.Warning);
                 } else if (!this.isLoaded && this.action === 'copy') {
@@ -142,6 +142,7 @@ export class DatalinkEditComponent implements OnInit, OnDestroy {
                 } else if (this.action === 'sourceTable') {
                     let datalink = new DexihDatalink();
                     datalink.datalinkType = eDatalinkType.Query;
+                    datalink.sourceDatalinkTable = new DexihDatalinkTable();
                     datalink.sourceDatalinkTable.sourceType = eSourceType.Table;
                     datalink.sourceDatalinkTable.sourceTableKey = +params['sourceTableKey'];
                     this.editDatalinkService.reBuildDatalinkTable(datalink.sourceDatalinkTable);

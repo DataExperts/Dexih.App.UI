@@ -1,14 +1,14 @@
 import { Component, Input, Output, OnInit, OnChanges, EventEmitter, OnDestroy } from '@angular/core';
 import { HubService } from '../../../hub.service';
 import { DatalinkEditService } from '../datalink-edit.service';
-import { HubCache, DexihDatalinkColumn, DexihTable, eMappingStatus,
-    MappingStatusInfo, lineageMappingStatuses, impactMappingStatuses, DexihTableColumn } from '../../../hub.models';
-import { eObjectType, eObjectUse, ColumnUsageNode } from '../../../hub.lineage.models';
+import { HubCache, eMappingStatus, MappingStatusInfo, lineageMappingStatuses } from '../../../hub.models';
+import { eObjectUse, ColumnUsageNode, eDatalinkObjectType } from '../../../hub.lineage.models';
 import { Subscription, combineLatest} from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { LogFactory, eLogLevel } from '../../../../../logging';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../../+auth/auth.service';
+import { DexihTableColumn, DexihTable, DexihDatalinkColumn } from '../../../../shared/shared.models';
 
 
 @Component({
@@ -80,7 +80,7 @@ export class TargetColumnComponent implements OnInit, OnDestroy, OnChanges {
     refreshStatus() {
         if (this.datalinkForm) {
             let columnUsage: ColumnUsageNode = new ColumnUsageNode(
-            eObjectType.TargetTable, eObjectUse.Target,
+            eDatalinkObjectType.TargetTable, eObjectUse.Target,
             this.datalinkForm.value, null, this.column, null, null, eMappingStatus.NotMapped, this.hubCache);
             this.mappingStatusLineage = columnUsage.createDatalinkLineage(true);
             this.mappingStatusInfoLineage = lineageMappingStatuses.find(c => c.key === this.mappingStatusLineage);

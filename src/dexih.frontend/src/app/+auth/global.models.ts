@@ -1,4 +1,4 @@
-import { RemoteLibraries } from '../+hub/hub.remote.models';
+import { RemoteLibraries } from "../shared/shared.models";
 
 export class EntityBase {
     public createDate: string;

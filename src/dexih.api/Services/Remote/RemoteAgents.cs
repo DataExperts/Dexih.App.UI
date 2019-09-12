@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using System.Collections.Concurrent;
 using System.Diagnostics;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using dexih.api.Hubs;
 using dexih.api.Models;
 using dexih.api.Services.Operations;
@@ -24,6 +26,7 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ProtoBuf;
 using SharedData = dexih.operations.SharedData;
 
 namespace dexih.api.Services.Remote
@@ -112,17 +115,24 @@ namespace dexih.api.Services.Remote
 
 	    public async Task<RemoteAgentProperties> GetRemoteAgentProperties(string instanceId, CancellationToken cancellationToken =  default)
 	    {
-		    var properties = await _distributedCache.GetStringAsync(instanceId, cancellationToken);
+		    var properties = await _distributedCache.GetAsync(instanceId, cancellationToken);
 		    if (properties == null) return null;
-		    
-		    var remoteAgentProperties = JsonConvert.DeserializeObject<RemoteAgentProperties>(properties);
-		    return remoteAgentProperties;
-	    }
+
+            // var remoteAgentProperties = JsonConvert.DeserializeObject<RemoteAgentProperties>(properties);
+
+            using (var stream = new MemoryStream(properties))
+            {
+                return Serializer.Deserialize<RemoteAgentProperties>(stream);
+            }
+        }
 
 	    public async Task SetRemoteAgentProperties(string instanceId, RemoteAgentProperties remoteAgentProperties, CancellationToken cancellationToken =  default)
 	    {
-		    var propertiesString = JsonConvert.SerializeObject(remoteAgentProperties);
-		    await _distributedCache.SetStringAsync(instanceId, propertiesString, cancellationToken);
+            using (var stream = new MemoryStream())
+            {
+                Serializer.Serialize(stream, remoteAgentProperties);
+                await _distributedCache.SetAsync(instanceId, stream.ToArray(), cancellationToken);
+            }
 	    }
 
 	    public Task<Out> Run<In,Out>(HubValue<In> hubValue, string method, RepositoryManager repositoryManager, CancellationToken cancellationToken = default, bool awaitResponse = true)
@@ -666,7 +676,7 @@ namespace dexih.api.Services.Remote
 				    InputColumns = inputColumns,
 				    InputParameters = inputParameters,
 				    ObjectKey = hubTable.Key,
-				    ObjectType = SharedData.EObjectType.Table,
+				    ObjectType = EDataObjectType.Table,
 				    Query = selectQuery
 			    };
 
@@ -707,7 +717,7 @@ namespace dexih.api.Services.Remote
 				    InputParameters = inputParameters,
 				    ObjectKey = hubDatalink.Key,
 				    DatalinkTransformKey = datalinkTransformKey,
-				    ObjectType = SharedData.EObjectType.Datalink,
+				    ObjectType = EDataObjectType.Datalink,
 				    Query = selectQuery
 			    };
 
@@ -977,9 +987,9 @@ namespace dexih.api.Services.Remote
 
                 // populate the table/datalink cache to be send to the remote agent.
                 var cache = new CacheManager(hubKey, hub.EncryptionKey);
-                var tableKeys = downloadObjects.Where(c => c.ObjectType == SharedData.EObjectType.Table).Select(c => c.ObjectKey).ToArray();
+                var tableKeys = downloadObjects.Where(c => c.ObjectType == EDataObjectType.Table).Select(c => c.ObjectKey).ToArray();
                 cache.AddTables(tableKeys, hub);
-                var datalinkKeys = downloadObjects.Where(c => c.ObjectType == SharedData.EObjectType.Datalink).Select(c => c.ObjectKey).ToArray();
+                var datalinkKeys = downloadObjects.Where(c => c.ObjectType == EDataObjectType.Datalink).Select(c => c.ObjectKey).ToArray();
                 cache.AddDatalinks(datalinkKeys, hub);
 
                 var value = new

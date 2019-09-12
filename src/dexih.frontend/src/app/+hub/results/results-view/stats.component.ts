@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AuthService } from '../../../+auth/auth.service';
-import { TransformWriterResult, eRunStatus } from '../../hub.models';
-import { HubService } from '../../hub.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TransformWriterResult, eRunStatus } from '../../../shared/shared.models';
 
 @Component({
     selector: 'stats',

@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { FileHandler, eFileStatus } from '../../../+auth/auth.models';
 import { Subscription, combineLatest } from 'rxjs';
-import { HubCache, DexihConnection, eCacheStatus, DexihTable, formatTypes } from '../../hub.models';
-import { RemoteLibraries, eConnectionCategory, eTypeCode } from '../../hub.remote.models';
+import { HubCache, eCacheStatus, formatTypes } from '../../hub.models';
 import { AuthService } from '../../../+auth/auth.service';
 import { HubService } from '../..';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HubFormsService } from '../../hub.forms.service';
+import { DexihConnection, eTypeCode, DexihTable, eConnectionCategory } from '../../../shared/shared.models';
 
 @Component({
     selector: 'files-bulk-load',
@@ -31,7 +31,6 @@ export class FilesBulkLoadComponent implements OnInit, OnDestroy {
     public eFileStatus = eFileStatus;
 
     public hubCache: HubCache;
-    private remoteLibraries: RemoteLibraries;
 
     public automaticUpload = true;
 
@@ -74,13 +73,12 @@ export class FilesBulkLoadComponent implements OnInit, OnDestroy {
             ).subscribe(result => {
                 let queryParams = result[0];
                 this.hubCache = result[1];
-                this.remoteLibraries = result[2];
 
                 if (this.hubCache.status !== eCacheStatus.Loaded) { return; }
 
                 this.fileConnections = this.hubCache.hub.dexihConnections
                     .filter(c => {
-                        const ref = this.remoteLibraries.GetConnectionReference(c);
+                        const ref = this.hubService.GetConnectionReference(c);
                         if (ref) {
                             return ref.connectionCategory === eConnectionCategory.File;
                         } else {

@@ -1,5 +1,5 @@
-import { HttpClient, HttpHeaders, HttpRequest, HttpEventType, HttpResponse, HttpProgressEvent } from '@angular/common/http';
-import { Injectable, OnDestroy, ViewContainerRef } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpRequest, HttpEventType, HttpResponse } from '@angular/common/http';
+import { Injectable, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as FileSaver from 'file-saver';
 import { BehaviorSubject, Observable, Subscription, Subject } from 'rxjs';
@@ -7,13 +7,15 @@ import { timeout, filter, first } from 'rxjs/operators'
 import { eLogLevel, LogFactory } from '../../logging';
 import {
     DexihHubAuth, ExternalLoginResult, Message, ManagedTask,
-    User, UserLoginInfo, ExternalLogin, DexihActiveAgent, DownloadUrl, DexihRemoteAgent, FileHandler, eFileStatus, RemoteToken, PromiseWithCancel, CancelToken, eTaskStatus
+    User, UserLoginInfo, ExternalLogin, FileHandler, eFileStatus, RemoteToken, PromiseWithCancel, CancelToken, eTaskStatus
 } from './auth.models';
 import { AuthWebSocket } from './auth.websocket';
 import { GlobalCache } from './global.models';
 import { UserAgentApplication, AuthResponse, CacheLocation } from 'msal';
 import { DexihModalComponent } from 'dexih-ngx-components';
 import { Location } from '@angular/common';
+import { Root, Type, load } from 'protobufjs';
+import { DexihRemoteAgent, DexihActiveAgent, DownloadUrl } from '../shared/shared.models';
 
 declare var gapi: any;
 
@@ -51,7 +53,6 @@ export class AuthService implements OnDestroy {
     private _webSocketSubscribe: Subscription;
     private _logErrorsSubscribe: Subscription;
 
-    private waitOperationCount = 0;
 
     private modalComponent: DexihModalComponent;
 
@@ -59,6 +60,8 @@ export class AuthService implements OnDestroy {
 
     private updateRemoteAgentsFlag = false;
     private globalCacheRefreshing = false;
+
+    private cacheManagerType: Type;
 
     // unique session id, used to refresh global cache when page refresh occurs.
     private sessionId = this.newGuid();
@@ -71,6 +74,19 @@ export class AuthService implements OnDestroy {
         // private modal: Modal,
     ) {
         this.logger.LogC(() => 'Initializing AuthService', eLogLevel.Information);
+
+        let root = new Root({ keepCase: true });
+        root.load('/assets/proto/CacheManager.proto').then(value => {
+            value.nestedArray.forEach((type: Type) => {
+                this.addCamelCase(type);
+            });
+            this.cacheManagerType = value.lookupType('CacheManager');
+            this.refreshGlobalCache();
+        }).catch(reason => {
+            this.logger.LogC(() =>
+                `load cachemanager.proto: ${reason}`, eLogLevel.Error);
+            this._hubErrors.next(reason);
+        });
 
         // bootstrap4Mode();
 
@@ -102,9 +118,9 @@ export class AuthService implements OnDestroy {
                                 this.pingRemoteAgents();
                                 break;
                             case 'remoteAgent-update': {
-                                let remoteAgents = <DexihRemoteAgent[]> this._remoteAgents.value;
+                                let remoteAgents = <DexihRemoteAgent[]>this._remoteAgents.value;
                                 if (remoteAgents) {
-                                    let activeAgent = <DexihActiveAgent> data.value;
+                                    let activeAgent = <DexihActiveAgent>data.value;
                                     let remoteAgent = remoteAgents.find(c => c.remoteAgentKey === activeAgent.remoteAgentKey);
                                     if (remoteAgent) {
                                         let existingIndex = remoteAgent.activeAgents
@@ -120,10 +136,10 @@ export class AuthService implements OnDestroy {
                                         remoteAgent.name = activeAgent.name;
                                         remoteAgent.activeAgents = [activeAgent];
                                         remoteAgents.push(remoteAgent);
-                                        }
+                                    }
                                     this._remoteAgents.next(remoteAgents);
                                 } else {
-                                    let activeAgent = <DexihActiveAgent> data.value;
+                                    let activeAgent = <DexihActiveAgent>data.value;
                                     let remoteAgent = new DexihRemoteAgent();
                                     remoteAgent.remoteAgentKey = activeAgent.remoteAgentKey;
                                     remoteAgent.name = activeAgent.name;
@@ -133,7 +149,7 @@ export class AuthService implements OnDestroy {
                                 break;
                             }
                             case 'remoteAgent-delete': {
-                                let remoteAgents = <DexihRemoteAgent[]> this._remoteAgents.value;
+                                let remoteAgents = <DexihRemoteAgent[]>this._remoteAgents.value;
                                 if (remoteAgents) {
                                     let instanceId = data.value;
                                     remoteAgents.forEach(remoteAgent => {
@@ -148,7 +164,7 @@ export class AuthService implements OnDestroy {
                             }
 
                             case 'remoteAgent-deleteKey': {
-                                let remoteAgents = <DexihRemoteAgent[]> this._remoteAgents.value;
+                                let remoteAgents = <DexihRemoteAgent[]>this._remoteAgents.value;
                                 let index = remoteAgents.findIndex(c => c.remoteAgentKey === data.value);
                                 if (index >= 0) {
                                     remoteAgents.splice(index, 1);
@@ -236,7 +252,7 @@ export class AuthService implements OnDestroy {
                                         'Download Now',
                                         'Discard'
                                     ).then((result) => {
-                                        if ( result) {
+                                        if (result) {
                                             window.open(data.value.url);
                                         }
                                     }).catch(reason => {
@@ -252,7 +268,7 @@ export class AuthService implements OnDestroy {
                                             'Download Now',
                                             'Discard'
                                         ).then((result) => {
-                                            if ( result) {
+                                            if (result) {
                                                 window.open(data.value.url);
                                             }
                                         }).catch(reason => {
@@ -261,7 +277,7 @@ export class AuthService implements OnDestroy {
                                     }
                                 }
                             }
-                            break;
+                                break;
                         }
                     }
                 });
@@ -272,7 +288,7 @@ export class AuthService implements OnDestroy {
         this._logErrorsSubscribe = this._logErrors.asObservable().subscribe((logMessage: Message) => {
             if (!logMessage) { return; }
 
-            let headers = new HttpHeaders({'Content-Type': 'application/json'});
+            let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
             const m = {
                 message: logMessage.message,
@@ -291,7 +307,7 @@ export class AuthService implements OnDestroy {
             const body = JSON.stringify(m);
 
             const baseUrl = this.location.prepareExternalUrl('/api/Account/LogError');
-            this.http.post<Message>(baseUrl, body, { withCredentials: true, headers: headers }).subscribe(result => {
+            this.http.post<Message>(baseUrl, body, { withCredentials: true, headers: headers }).subscribe(() => {
                 // doesn't matter what is returned.
             });
         });
@@ -304,6 +320,28 @@ export class AuthService implements OnDestroy {
         if (this._webSocketSubscribe) { this._webSocketSubscribe.unsubscribe(); }
         if (this._remoteAgents) { this._remoteAgents.unsubscribe(); }
         if (this._logErrorsSubscribe) { this._logErrorsSubscribe.unsubscribe(); }
+    }
+
+    // converts a string from underscore notation to camel case
+    toCamelCase(str): string {
+        return str.substring(0, 1).toLowerCase() + str.substring(1).replace(/_([a-z])(?=[a-z]|$)/g, function ($0, $1) { return $1.toUpperCase(); });
+    }
+
+    // this function adds alternative getters and setters for the camel cased counterparts
+    // to the runtime message's prototype (i.e. without having to register a custom class):
+    addCamelCase(type) {
+        // type.name = this.toCamelCase(type.name);
+        if (type.fieldsArray) {
+            type.fieldsArray.forEach(field => {
+                field.name = this.toCamelCase(field.name);
+            });
+        }
+        if (type.oneofsArray) {
+            type.oneofsArray.forEach(oneof => {
+                oneof.name = this.toCamelCase(oneof.name);
+            });
+        }
+        return type;
     }
 
     // set available remoteAgents
@@ -388,7 +426,7 @@ export class AuthService implements OnDestroy {
     }
 
     // post form data
-    public postForm(url, data, waitMessage = 'Please wait while the operation completes.'): Promise<Message> {
+    public postForm(url, data, waitMessage = 'Please wait while the operation completes.'): Promise<any> {
         let headers = new HttpHeaders({
             // 'Authorization': `Bearer ${authToken}`,
             // 'Content-Type': 'multipart/form-data'
@@ -428,7 +466,7 @@ export class AuthService implements OnDestroy {
     }
 
     // posts data to the api.
-    private postBody(url, body, headers, waitMessage = 'Please wait while the operation completes.'): Promise<Message> {
+    private postBody(url, body, headers, waitMessage = 'Please wait while the operation completes.'): Promise<any> {
         return new Promise<Message>((resolve, reject) => {
             let messageKey = this.addWaitMessage(waitMessage);
             this.logger.LogC(() => `post url: ${url}, data: ${body}.`, eLogLevel.Debug);
@@ -483,7 +521,7 @@ export class AuthService implements OnDestroy {
             baseUrl = url;
         }
 
-        if(!cancelToken) {
+        if (!cancelToken) {
             cancelToken = new CancelToken();
         }
 
@@ -515,11 +553,60 @@ export class AuthService implements OnDestroy {
             cancelToken.cancelMethod = () => {
                 subscription.unsubscribe();
             }
-        },cancelToken);
+        }, cancelToken);
 
         return promise;
     }
 
+    public getProtobuf(url, type: Type, waitMessage = 'Please wait while the operation completes.', updateUrl = true, cancelToken: CancelToken): PromiseWithCancel<any> {
+        let messageKey: string = null;
+        if (waitMessage) {
+            messageKey = this.addWaitMessage(waitMessage);
+        }
+        let baseUrl: string;
+        if (updateUrl) {
+            baseUrl = this.location.prepareExternalUrl(url);
+        }
+        else {
+            baseUrl = url;
+        }
+
+        if (!cancelToken) {
+            cancelToken = new CancelToken();
+        }
+
+        let promise = new PromiseWithCancel<any>((resolve, reject) => {
+            let subscription = this.http.get(baseUrl, {
+                responseType: "arraybuffer"
+            }).subscribe(result => {
+                let data = new Uint8Array(result);
+                var message = type.decode(data);
+                var object = type.toObject(message);
+                resolve(object);
+                this.removeWaitMessage(messageKey);
+            }, error => {
+                this.removeWaitMessage(messageKey);
+                if (error.error) {
+                    reject(error.error);
+                }
+                else {
+                    this.removeWaitMessage(messageKey);
+                    this.logger.LogC(() => `post warning error:${error}`, eLogLevel.Error);
+                    if (error.status === 504) {
+                        reject(new Message(false, 'The Information Hub API could not be reached.', null, null));
+                    }
+                    let result = new Message(false, error.message, null, null);
+                    reject(result);
+                }
+            });
+
+            cancelToken.cancelMethod = () => {
+                subscription.unsubscribe();
+            }
+        }, cancelToken);
+
+        return promise;
+    }
 
     public upload(file: FileHandler): Promise<Message> {
         return new Promise<Message>((resolve, reject) => {
@@ -570,11 +657,11 @@ export class AuthService implements OnDestroy {
                             reject(result);
                         }
                     } else {
-                            // Close the progress-stream if we get an answer form the API
-                            // The upload is complete
-                            file.status = eFileStatus.Complete;
-                            file.progress = 100;
-                            resolve(new Message(true, 'File upload successful.', '', ''));
+                        // Close the progress-stream if we get an answer form the API
+                        // The upload is complete
+                        file.status = eFileStatus.Complete;
+                        file.progress = 100;
+                        resolve(new Message(true, 'File upload successful.', '', ''));
                     }
                 }
             }, error => {
@@ -712,10 +799,10 @@ export class AuthService implements OnDestroy {
                     if (error.error) {
                         let reader = new FileReader();
                         reader.readAsText(error.error);
-                        reader.onload = function() {
+                        reader.onload = function () {
                             let message = JSON.parse(reader.result.toString());
                             reject(message);
-                          }
+                        }
                     } else {
                         reject(error);
                     }
@@ -731,15 +818,15 @@ export class AuthService implements OnDestroy {
             this.post('/api/Account/GetUser', null, 'Refreshing user details...').then(result => {
                 let previousUser = this._currentUser.value;
                 if (!previousUser || (
-                     result.value.email !== previousUser.email &&
-                     result.value.email !== previousUser.firstName &&
-                     result.value.email !== previousUser.lastName &&
-                     result.value.email !== previousUser.isAdmin &&
-                     result.value.email !== previousUser.isInvited &&
-                     result.value.email !== previousUser.rememberMe &&
-                     result.value.email !== previousUser.subscription &&
-                     result.value.email !== previousUser.terms
-                     )) {
+                    result.value.email !== previousUser.email &&
+                    result.value.email !== previousUser.firstName &&
+                    result.value.email !== previousUser.lastName &&
+                    result.value.email !== previousUser.isAdmin &&
+                    result.value.email !== previousUser.isInvited &&
+                    result.value.email !== previousUser.rememberMe &&
+                    result.value.email !== previousUser.subscription &&
+                    result.value.email !== previousUser.terms
+                )) {
                     this._currentUser.next(result.value);
                 }
                 resolve(result.value);
@@ -835,34 +922,34 @@ export class AuthService implements OnDestroy {
             try {
                 this.googleLoadScript().then(() => {
                     gapi.load('auth2', () => {
-                    gapi.auth2.init({
-                        ...{ scope: 'email', prompt: 'select_account' },
-                        client_id: clientId
-                    }).then((auth2) => {
-                        function getLoginDetails(): ExternalLogin {
-                            let login = new ExternalLogin();
-                            let profile = auth2.currentUser.get().getBasicProfile();
-                            let idToken = auth2.currentUser.get().getAuthResponse(true).id_token;
-                            login.email = profile.getEmail();
-                            login.firstName = profile.getGivenName();
-                            login.lastName = profile.getFamilyName();
-                            login.authenticationToken = idToken;
-                            login.providerKey = profile.Eea;
-                            return login;
-                        }
-                        if (!forceLogin && auth2.isSignedIn.get()) {
-                            let result = getLoginDetails();
-                            resolve(result);
-                        } else {
-                            auth2.signIn().then(() => {
+                        gapi.auth2.init({
+                            ...{ scope: 'email', prompt: 'select_account' },
+                            client_id: clientId
+                        }).then((auth2) => {
+                            function getLoginDetails(): ExternalLogin {
+                                let login = new ExternalLogin();
+                                let profile = auth2.currentUser.get().getBasicProfile();
+                                let idToken = auth2.currentUser.get().getAuthResponse(true).id_token;
+                                login.email = profile.getEmail();
+                                login.firstName = profile.getGivenName();
+                                login.lastName = profile.getFamilyName();
+                                login.authenticationToken = idToken;
+                                login.providerKey = profile.Eea;
+                                return login;
+                            }
+                            if (!forceLogin && auth2.isSignedIn.get()) {
                                 let result = getLoginDetails();
                                 resolve(result);
-                            }).catch(reason => {
-                                reject(reason.error);
-                            });
-                        }
+                            } else {
+                                auth2.signIn().then(() => {
+                                    let result = getLoginDetails();
+                                    resolve(result);
+                                }).catch(reason => {
+                                    reject(reason.error);
+                                });
+                            }
+                        });
                     });
-                });
                 }).catch(reason => {
                     reject(reason);
                 });
@@ -903,7 +990,7 @@ export class AuthService implements OnDestroy {
                 redirectUri: location.origin + '/api/Account/MicrosoftRedirect'
             },
             cache: {
-                cacheLocation: <CacheLocation> 'sessionStorage',
+                cacheLocation: <CacheLocation>'sessionStorage',
                 storeAuthStateInCookie: false
             }
         };
@@ -1002,7 +1089,7 @@ export class AuthService implements OnDestroy {
                 tokenPromise.then(async authResponse => {
                     this.removeWaitMessage(messageKey);
                     if (authResponse) {
-                        if ( !authResponse.accessToken) {
+                        if (!authResponse.accessToken) {
                             let request = {
                                 scopes: ['user.read'],
                                 // authority: 'https://login.microsoftonline.com/common/',
@@ -1144,18 +1231,18 @@ export class AuthService implements OnDestroy {
                 provider + ' from your available logins.  When removed you will not be able to login via ' +
                 provider + ' provider.').then((confirm) => {
                     if (confirm) {
-                    this.post('/api/Account/RemoveExternalLogin', {
-                        provider: provider,
-                        providerKey: providerKey
-                    }, 'Adding an external login...').then((r) => {
-                        resolve(r.value);
-                    }).catch(reason => {
-                        reject(reason);
-                        // this.logger.LogC(() => `AddExternalLogin error:${reason.message}`, eLogLevel.Error);
-                        // this.logger.LogC(() => `externalLogin error:${reason.message}`, eLogLevel.Error);
-                        // window.location.href = '/api/Account/ExternalLogin?provider=' + provider + '&returnUrl=' + returnUrl;
-                    });
-                }
+                        this.post('/api/Account/RemoveExternalLogin', {
+                            provider: provider,
+                            providerKey: providerKey
+                        }, 'Adding an external login...').then((r) => {
+                            resolve(r.value);
+                        }).catch(reason => {
+                            reject(reason);
+                            // this.logger.LogC(() => `AddExternalLogin error:${reason.message}`, eLogLevel.Error);
+                            // this.logger.LogC(() => `externalLogin error:${reason.message}`, eLogLevel.Error);
+                            // window.location.href = '/api/Account/ExternalLogin?provider=' + provider + '&returnUrl=' + returnUrl;
+                        });
+                    }
                 }).catch(reason => {
                     reject(reason)
                 });
@@ -1408,8 +1495,8 @@ export class AuthService implements OnDestroy {
                 let message = new Message(false, 'The data cannot be downloaded as there is no current remote agent.', null, null);
                 reject(message);
             } else {
-                if (activeAgent.currentDownloadUrl) {
-                    resolve(activeAgent.currentDownloadUrl);
+                if (activeAgent['currentDownloadUrl']) {
+                    resolve(activeAgent['currentDownloadUrl']);
                 } else {
                     if (activeAgent.downloadUrls.length === 0) {
                         let message = new Message(false, 'Current remote agent does not have data download/upload available.', null, null);
@@ -1440,9 +1527,9 @@ export class AuthService implements OnDestroy {
             let messageKey = this.addWaitMessage('Testing remote agent connectivity...');
 
             this.http.get(url).pipe(timeout(5000)).subscribe(() => {
-                activeAgent.currentDownloadUrl = activeAgent.downloadUrls[position];
+                activeAgent['currentDownloadUrl'] = activeAgent.downloadUrls[position];
                 this.removeWaitMessage(messageKey);
-                resolve(activeAgent.currentDownloadUrl);
+                resolve(activeAgent['currentDownloadUrl']);
             }, () => {
                 this.removeWaitMessage(messageKey);
                 this.getBestDownloadUrl(activeAgent, position + 1).then(result => {
@@ -1563,20 +1650,20 @@ export class AuthService implements OnDestroy {
                         this.post('/api/Account/RefreshRemoteAgentToken', remoteAgentKey,
                             'Refreshing remote agent token...').then(result2 => {
 
-                        //     let template = `A new remote agent id and token has been generated for:
-                        // <textarea style="width:100%" type="text" disabled=disabled rows="1">${result2.value.remoteAgentId}</textarea>
-                        // This token will only be displayed once, and cannot be retrieved again, so ensure this is stored safely.<p></p>
-                        // To use this authorization token, copy the token data below and paste into the
-                        // <b>UserToken</b> setting on the remote agent.
-                        // <p></p>
-                        // <b>UserToken</b></p>
-                        // <textarea style="width:100%" type="text" disabled=disabled rows="4">${result2.value.userToken}</textarea>
-                        // `
+                                //     let template = `A new remote agent id and token has been generated for:
+                                // <textarea style="width:100%" type="text" disabled=disabled rows="1">${result2.value.remoteAgentId}</textarea>
+                                // This token will only be displayed once, and cannot be retrieved again, so ensure this is stored safely.<p></p>
+                                // To use this authorization token, copy the token data below and paste into the
+                                // <b>UserToken</b> setting on the remote agent.
+                                // <p></p>
+                                // <b>UserToken</b></p>
+                                // <textarea style="width:100%" type="text" disabled=disabled rows="4">${result2.value.userToken}</textarea>
+                                // `
 
-                        //     let html = this.sanitizer.bypassSecurityTrustHtml(template);
+                                //     let html = this.sanitizer.bypassSecurityTrustHtml(template);
 
-                        //     // tslint:disable-next-line:max-line-length
-                        //     this.informationDialog('New Token', html)
+                                //     // tslint:disable-next-line:max-line-length
+                                //     this.informationDialog('New Token', html)
 
                                 resolve(result2.value);
                                 return result2;
@@ -1746,10 +1833,10 @@ export class AuthService implements OnDestroy {
     addUpdateTask(task: ManagedTask) {
         if (task.status === eTaskStatus.Error) {
             const message = new Message(false, `The task ${task.name} failed.  Message: ${task.message}`,
-            task.exceptionDetails, null);
+                task.exceptionDetails, null);
             this.addUpdateNotification(message, false);
         }
-        
+
         const tasks = this._tasks.value;
         const originalTask = tasks.find(c => c.reference === task.reference);
         if (originalTask) {
@@ -1827,11 +1914,11 @@ export class AuthService implements OnDestroy {
 
     // refresh the hubCache.
     refreshGlobalCache(): Promise<boolean> {
-        if (!this.globalCacheRefreshing) {
+        if (!this.globalCacheRefreshing && this.cacheManagerType) {
             this.globalCacheRefreshing = true;
             return new Promise<boolean>((resolve, reject) => {
-                this.get('/api/Account/GetGlobalCache?cache=' + this.sessionId, 'Getting global cache...', true, null).then(result => {
-                    let globalCache: GlobalCache = result.value;
+                this.getProtobuf('/api/Account/GetGlobalCache?cache=' + this.sessionId, this.cacheManagerType, 'Getting global cache...', false, null).then(result => {
+                    let globalCache: GlobalCache = result;
                     this._globalCache.next(globalCache);
                     resolve(true);
                     this.globalCacheRefreshing = false;
@@ -1845,7 +1932,7 @@ export class AuthService implements OnDestroy {
         }
     }
 
-    logErrorMessage(message: Message) {
+    logErrorMessage() {
 
     }
 

@@ -1,15 +1,14 @@
 import { Component, OnInit, OnChanges, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-    DexihDatalinkColumn, HubCache, deltaTypes, securityFlags, eParameterDirection,
-} from '../../../hub.models';
+import { HubCache, deltaTypes, securityFlags, } from '../../../hub.models';
 import { AuthService } from '../../../../+auth/auth.service';
 import { HubService } from '../../../hub.service';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { Subscription ,  combineLatest} from 'rxjs';
 import { HubFormsService } from '../../../hub.forms.service';
 import { DatalinkEditService } from '../datalink-edit.service';
-import { TypeCodes, eTypeCode } from '../../../hub.remote.models';
+import { TypeCodes } from '../../../hub.remote.models';
+import { eTypeCode, eParameterDirection, DexihDatalinkColumn } from '../../../../shared/shared.models';
 
 @Component({
     selector: 'datalink-column-edit',

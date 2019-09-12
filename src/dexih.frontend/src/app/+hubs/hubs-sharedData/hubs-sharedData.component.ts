@@ -1,14 +1,13 @@
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { DexihMessageComponent } from '../../shared/ui/dexihMessage';
-import { SharedData } from '../../+hub/hub.models';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../../+auth/auth.service';
 import { Subscription, combineLatest } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { DexihHubAuth } from '../../+auth/auth.models';
 import { ActivatedRoute, Router } from '@angular/router';
-import { eDownloadFormat } from '../../+hub/hub.query.models';
 import { HubsService } from '../hubs.service';
+import { eDownloadFormat, SharedData } from '../../shared/shared.models';
 
 @Component({
     selector: 'hubs-sharedData',

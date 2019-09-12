@@ -1,10 +1,7 @@
-import {HubCache, DexihDatalink, DexihTable, DexihTableColumn, DexihDatalinkColumn, DexihDatalinkTable,
-    DexihDatalinkTransform, DexihDatalinkTransformItem, eDeltaType, eDatalinkTransformItemType, DexihFunctionParameter,
-    eMappingStatus, eLoadStrategy
-} from './hub.models'
-import { eTransformType, eTypeCode } from './hub.remote.models';
+import {HubCache, eMappingStatus } from './hub.models'
+import { DexihDatalinkColumn, eTypeCode, DexihDatalink, DexihDatalinkTable, eTransformItemType, eTransformType, DexihTableColumn, DexihDatalinkTransform, DexihDatalinkTransformItem, DexihFunctionParameter, eDeltaType } from '../shared/shared.models';
 
-export enum eObjectType {
+export enum eDatalinkObjectType {
     SourceTable,
     TargetTable,
     Transform
@@ -21,7 +18,7 @@ export enum eObjectUse {
 }
 
 export class ImpactLineage {
-    public objectType: eObjectType;
+    public objectType: eDatalinkObjectType;
     public objectUse: eObjectUse;
 
     public column: DexihDatalinkColumn;
@@ -196,7 +193,7 @@ export class InputOutputColumns {
       public getDatalinkOutputColumns(datalink: DexihDatalink): DexihDatalinkColumn[] {
         if (datalink.dexihDatalinkTransforms.length > 0) {
             let transforms = datalink.dexihDatalinkTransforms.sort((a, b) => b.position - a.position);
-            return transforms[0].runTime.outputColumns;
+            return transforms[0]['runTime'].outputColumns;
         } else {
             return datalink.sourceDatalinkTable.dexihDatalinkColumns;
         }
@@ -263,11 +260,11 @@ export class InputOutputColumns {
 
                 // initialize all input columns to not mapped.
                 inputColumns.forEach(c => {
-                    c.runTime = {impact: eMappingStatus.NotMapped, lineage: eMappingStatus.NotMapped}
+                    c['runTime'] = {impact: eMappingStatus.NotMapped, lineage: eMappingStatus.NotMapped}
                 });
             } else {
                 // get outputs from the previous transform
-                inputColumns = transforms[index - 1].runTime.outputColumns
+                inputColumns = transforms[index - 1]['runTime'].outputColumns
                     .sort((a, b) => a.position - b.position)
                     .map((c, i) => this.copyDatalinkColumn(c, i, c.columnGroup));
             }
@@ -305,15 +302,15 @@ export class InputOutputColumns {
 
             // add group columns
             transformItems
-                .filter(c => (c.transformItemType === eDatalinkTransformItemType.Series
-                    || c.transformItemType === eDatalinkTransformItemType.Column) &&
+                .filter(c => (c.transformItemType === eTransformItemType.Series
+                    || c.transformItemType === eTransformItemType.Column) &&
                     c.sourceDatalinkColumn )
                 .forEach(item => {
                 transformColumns.push(this.copyDatalinkColumn(item.sourceDatalinkColumn, pos++, 'Group'));
             });
 
             // if there is group node, all non-group columns should be child columns.
-            let groupNode = transformItems.find(c => c.transformItemType === eDatalinkTransformItemType.GroupNode)
+            let groupNode = transformItems.find(c => c.transformItemType === eTransformItemType.GroupNode)
             if (groupNode) {
                 let groupColumn = this.copyDatalinkColumn(groupNode.targetDatalinkColumn, pos++, 'Group Node');
                 transformColumns.push(groupColumn);
@@ -326,7 +323,7 @@ export class InputOutputColumns {
             if ((transform.transformType === eTransformType.Join || transform.transformType === eTransformType.Lookup)
                 && transform.joinDatalinkTable) {
                 let joinColumns: DexihDatalinkColumn[];
-                let joinNode = transform.dexihDatalinkTransformItems.find(c => c.transformItemType === eDatalinkTransformItemType.JoinNode)
+                let joinNode = transform.dexihDatalinkTransformItems.find(c => c.transformItemType === eTransformItemType.JoinNode)
 
                 if (joinNode) {
                     let joinColumn = joinNode.targetDatalinkColumn;
@@ -367,10 +364,10 @@ export class InputOutputColumns {
             transformItems.forEach(item => {
                 // if the item type of a column (used for group transform), then the source column is pushed to the output.
                 switch (item.transformItemType) {
-                    case eDatalinkTransformItemType.AggregatePair:
-                    case eDatalinkTransformItemType.BuiltInFunction:
-                    case eDatalinkTransformItemType.ColumnPair:
-                    case eDatalinkTransformItemType.CustomFunction:
+                    case eTransformItemType.AggregatePair:
+                    case eTransformItemType.BuiltInFunction:
+                    case eTransformItemType.ColumnPair:
+                    case eTransformItemType.CustomFunction:
                         if (item.targetDatalinkColumn) {
                             transformColumns.push(item.targetDatalinkColumn);
                         }
@@ -407,13 +404,13 @@ export class InputOutputColumns {
                 });
             }
 
-            transform.runTime = {inputColumns: inputColumns, outputColumns: outputColumns, transformColumns: transformColumns }
+            transform['runTime'] = {inputColumns: inputColumns, outputColumns: outputColumns, transformColumns: transformColumns }
         });
 
         // set the columns for the targets
         let targetColumns: DexihDatalinkColumn[];
         if (transforms.length > 0) {
-            targetColumns = transforms[0].runTime.outputColumns;
+            targetColumns = transforms[0]['runTime'].outputColumns;
         } else {
             targetColumns = datalink.sourceDatalinkTable.dexihDatalinkColumns;
         }
@@ -421,9 +418,9 @@ export class InputOutputColumns {
         datalink.dexihDatalinkTargets.forEach(target => {
             if (target.nodeDatalinkColumn) {
                 let validColumns =  this.validColumns(target.nodeDatalinkColumn.key, targetColumns);
-                target.runTime = {inputColumns: validColumns }
+                target['runTime'] = {inputColumns: validColumns }
             } else {
-                target.runTime = {inputColumns: targetColumns};
+                target['runTime'] = {inputColumns: targetColumns};
             }
 
         });
@@ -436,7 +433,7 @@ export class ColumnUsageNode {
     public lineageTree: Array<ColumnUsageNode>;
 
     public constructor(
-        public objectType: eObjectType,
+        public objectType: eDatalinkObjectType,
         public objectUse: eObjectUse,
         public datalink: DexihDatalink,
         // public table: DexihTable,
@@ -467,12 +464,12 @@ export class ColumnUsageNode {
         let nextTransform: DexihDatalinkTransform = null;
        if (useNextTransform) {
             switch (this.objectType) {
-                case  eObjectType.SourceTable:
+                case  eDatalinkObjectType.SourceTable:
                     if (this.datalink.dexihDatalinkTransforms.length > 0 ) {
                         nextTransform = this.datalink.dexihDatalinkTransforms.sort((a, b) => a.position - b.position)[0];
                     }
                     break;
-                case eObjectType.Transform:
+                case eDatalinkObjectType.Transform:
                     let transforms = this.datalink.dexihDatalinkTransforms
                         .filter(c => c.position > this.datalinkTransform.position).sort((a, b) => a.position - b.position);
                     if (transforms.length > 0 ) {
@@ -481,7 +478,7 @@ export class ColumnUsageNode {
                         this.mappingStatus = eMappingStatus.Mapped;
                     }
                     break;
-                case eObjectType.TargetTable:
+                case eDatalinkObjectType.TargetTable:
                     return;
             }
        } else {
@@ -500,14 +497,14 @@ export class ColumnUsageNode {
             let columnIsMapped = false;
             nextTransform.dexihDatalinkTransformItems.forEach(item => {
                 switch (item.transformItemType) {
-                    case eDatalinkTransformItemType.Column:
+                    case eTransformItemType.Column:
                         // if this column is mapped, then add it to the impact tree.
                         if (item.sourceDatalinkColumn &&
                                 item.sourceDatalinkColumn.key === this.datalinkColumn.key ) {
                             let column = item.sourceDatalinkColumn;
                             if (column) {
                                 let newImpactTree =
-                                    new ColumnUsageNode(eObjectType.Transform, eObjectUse.Mapping, this.datalink,
+                                    new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Mapping, this.datalink,
                                         column, null, nextTransform, null, eMappingStatus.Mapped, this.hubCache);
                                 let newStatus = newImpactTree.createDatalinkImpact(true);
                                 if (newStatus < newMappingStatus) {
@@ -523,7 +520,7 @@ export class ColumnUsageNode {
                             }
                         }
                         break;
-                    case eDatalinkTransformItemType.ColumnPair:
+                    case eTransformItemType.ColumnPair:
                         // if this column is mapped, then add it to the impact tree.
                         if (item.sourceDatalinkColumn &&
                                 item.sourceDatalinkColumn.key === this.datalinkColumn.key &&
@@ -531,7 +528,7 @@ export class ColumnUsageNode {
                             let column = item.targetDatalinkColumn;
                             if (column) {
                                 let newImpactTree =
-                                    new ColumnUsageNode(eObjectType.Transform, eObjectUse.Mapping, this.datalink,
+                                    new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Mapping, this.datalink,
                                         column, null, nextTransform, null, eMappingStatus.Mapped, this.hubCache);
                                 let newStatus = newImpactTree.createDatalinkImpact(true);
                                 if (newStatus < newMappingStatus) {
@@ -547,8 +544,8 @@ export class ColumnUsageNode {
                             }
                         }
                         break;
-                    case eDatalinkTransformItemType.BuiltInFunction:
-                    case eDatalinkTransformItemType.CustomFunction:
+                    case eTransformItemType.BuiltInFunction:
+                    case eTransformItemType.CustomFunction:
                         // if the column is part of a function parameter, then add it to the tree.
 
                         let inputParams = this.flattenParameters(item.dexihFunctionParameters
@@ -562,7 +559,7 @@ export class ColumnUsageNode {
                                     if (item.targetDatalinkColumn) {
                                         let column = item.targetDatalinkColumn;
                                         if (column) {
-                                            let newImpactTree = new ColumnUsageNode(eObjectType.Transform, eObjectUse.Function,
+                                            let newImpactTree = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Function,
                                                 this.datalink, column, null, nextTransform, item, eMappingStatus.Mapped, this.hubCache);
                                             let newStatus = newImpactTree.createDatalinkImpact(true);
                                             if (newStatus < newMappingStatus) {
@@ -586,7 +583,7 @@ export class ColumnUsageNode {
                                         if (outParam.datalinkColumn) {
                                             let column = outParam.datalinkColumn;
                                             if (column) {
-                                                let newImpactTree = new ColumnUsageNode(eObjectType.Transform, eObjectUse.Function,
+                                                let newImpactTree = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Function,
                                                     this.datalink, column, null, nextTransform,
                                                     item, eMappingStatus.Mapped, this.hubCache);
                                                 let newStatus = newImpactTree.createDatalinkImpact(true);
@@ -606,7 +603,7 @@ export class ColumnUsageNode {
                                 }
                             });
                         break;
-                    case eDatalinkTransformItemType.JoinPair:
+                    case eTransformItemType.JoinPair:
                         // if this column part of a join add it.
                         if (item.sourceDatalinkColumn && item.sourceDatalinkColumn.key
                                 === this.datalinkColumn.key) {
@@ -615,7 +612,7 @@ export class ColumnUsageNode {
                                 let column = item.joinDatalinkColumn;
 
                                 if (column) {
-                                    let newImpactTree = new ColumnUsageNode(eObjectType.Transform, eObjectUse.Join,
+                                    let newImpactTree = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Join,
                                         this.datalink, column, null, nextTransform, item, eMappingStatus.Joined, this.hubCache);
                                     this.impactTree.push(newImpactTree);
                                 } else {
@@ -627,11 +624,11 @@ export class ColumnUsageNode {
                             }
                         }
                         break;
-                    case eDatalinkTransformItemType.Sort:
+                    case eTransformItemType.Sort:
                         // if this column part of a sort, add it.
                         if (item.sourceDatalinkColumn &&
                                 item.sourceDatalinkColumn.key === this.datalinkColumn.key) {
-                            let newImpactTree = new ColumnUsageNode(eObjectType.Transform, eObjectUse.Sort,
+                            let newImpactTree = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Sort,
                                     this.datalink, this.datalinkColumn, null, nextTransform, item, eMappingStatus.Sorted, this.hubCache);
                             this.impactTree.push(newImpactTree);
                         }
@@ -647,7 +644,7 @@ export class ColumnUsageNode {
                 } else {
                     newMappingStatus = eMappingStatus.NotMapped;
                 }
-                let newImpactTree = new ColumnUsageNode(eObjectType.Transform, eObjectUse.PassThrough,
+                let newImpactTree = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.PassThrough,
                         this.datalink, this.datalinkColumn, null, nextTransform, null, this.mappingStatus, this.hubCache);
                 let newStatus = newImpactTree.createDatalinkImpact(true);
                 if (newStatus < newMappingStatus) {
@@ -690,7 +687,7 @@ export class ColumnUsageNode {
                             }
                     }
                     }
-                    let newImpactTree = new ColumnUsageNode(eObjectType.Transform, eObjectUse.Target,
+                    let newImpactTree = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Target,
                             this.datalink, null, column, null, null, newMappingStatus, this.hubCache);
                     this.impactTree.push(newImpactTree);
                 } else {
@@ -729,16 +726,16 @@ export class ColumnUsageNode {
         let previousTransform: DexihDatalinkTransform = null;
         if (usePreviousTransform) {
             switch (this.objectType) {
-                case  eObjectType.SourceTable:
+                case  eDatalinkObjectType.SourceTable:
                     return;
-                case eObjectType.Transform:
+                case eDatalinkObjectType.Transform:
                     let transforms = this.datalink.dexihDatalinkTransforms
                         .filter(c => c.position < this.datalinkTransform.position).sort((a, b) => a.position - b.position); // sort asc
                     if (transforms.length > 0 ) {
                         previousTransform = transforms[transforms.length - 1];
                     }
                     break;
-                case eObjectType.TargetTable:
+                case eDatalinkObjectType.TargetTable:
                     // check for column types which will populate without mappings (i.e. auto-generate)
                     if (this.tableColumn && this.isAutoGenerateColumn(this.tableColumn.deltaType)) {
                         newMappingStatus = eMappingStatus.AutoGenerate;
@@ -753,7 +750,7 @@ export class ColumnUsageNode {
 
                         // map the column name to the transform.
                         if (this.tableColumn) {
-                            let column = previousTransform.runTime.outputColumns.find(c => c.name === this.tableColumn.name);
+                            let column = previousTransform['runTime'].outputColumns.find(c => c.name === this.tableColumn.name);
                             if (column) {
                                 currentColumn = column;
                             }
@@ -794,11 +791,11 @@ export class ColumnUsageNode {
             let columnIsMapped = false;
             previousTransform.dexihDatalinkTransformItems.forEach(item => {
                 switch (item.transformItemType) {
-                    case eDatalinkTransformItemType.Column:
+                    case eTransformItemType.Column:
                     // if this column is mapped, then add it to the impact tree.
                     if (item.sourceDatalinkColumn &&
                         item.sourceDatalinkColumn.key) {
-                        let newLineageTree = new ColumnUsageNode(eObjectType.Transform, eObjectUse.Mapping,
+                        let newLineageTree = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Mapping,
                             this.datalink, item.sourceDatalinkColumn, null, previousTransform, null,
                             eMappingStatus.Mapped, this.hubCache);
                         let newStatus = newLineageTree.createDatalinkLineage(true);
@@ -811,12 +808,12 @@ export class ColumnUsageNode {
                         // }
                     }
                     break;
-                    case eDatalinkTransformItemType.ColumnPair:
+                    case eTransformItemType.ColumnPair:
                         // if this column is mapped, then add it to the impact tree.
                         if (item.targetDatalinkColumn &&
                             item.targetDatalinkColumn.key === currentColumn.key
                             && item.sourceDatalinkColumn) {
-                            let newLineageTree = new ColumnUsageNode(eObjectType.Transform, eObjectUse.Mapping,
+                            let newLineageTree = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Mapping,
                                 this.datalink, item.sourceDatalinkColumn, null, previousTransform, null,
                                 eMappingStatus.Mapped, this.hubCache);
                             let newStatus = newLineageTree.createDatalinkLineage(true);
@@ -829,8 +826,8 @@ export class ColumnUsageNode {
                             // }
                         }
                         break;
-                    case eDatalinkTransformItemType.BuiltInFunction:
-                    case eDatalinkTransformItemType.CustomFunction:
+                    case eTransformItemType.BuiltInFunction:
+                    case eTransformItemType.CustomFunction:
 
                         // if this column is mapped, then add it to the impact tree.
                         if (item.targetDatalinkColumn &&
@@ -841,7 +838,7 @@ export class ColumnUsageNode {
                                 .filter(p => HubCache.parameterIsOutput(p)));
                             inputParams.filter(c => c.datalinkColumn).forEach(inParam => {
                                 if (inParam.datalinkColumn) {
-                                    let newLineageTree = new ColumnUsageNode(eObjectType.Transform, eObjectUse.Function,
+                                    let newLineageTree = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Function,
                                             this.datalink, inParam.datalinkColumn, null, previousTransform, item,
                                             eMappingStatus.Mapped, this.hubCache);
                                     let newStatus = newLineageTree.createDatalinkLineage(true);
@@ -865,7 +862,7 @@ export class ColumnUsageNode {
                                     item.dexihFunctionParameters
                                         .filter(p => HubCache.parameterIsOutput(p) && p.datalinkColumn).forEach(inParam => {
                                     if (inParam.datalinkColumn) {
-                                        let newLineageTree = new ColumnUsageNode(eObjectType.Transform, eObjectUse.Function,
+                                        let newLineageTree = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Function,
                                             this.datalink, inParam.datalinkColumn, null, previousTransform, item,
                                             eMappingStatus.Mapped, this.hubCache);
                                         let newStatus = newLineageTree.createDatalinkLineage(true);
@@ -884,13 +881,13 @@ export class ColumnUsageNode {
 
 
                         break;
-                    case eDatalinkTransformItemType.JoinPair:
+                    case eTransformItemType.JoinPair:
                         // if this column part of a join add it.
                         if (item.sourceDatalinkColumn && item.sourceDatalinkColumn.key === currentColumn.key) {
                             let table = previousTransform.joinDatalinkTable;
                             let column = item.joinDatalinkColumn;
                             if (table && column) {
-                                let newLineageTree = new ColumnUsageNode(eObjectType.Transform, eObjectUse.Join,
+                                let newLineageTree = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Join,
                                         this.datalink, column, null, previousTransform, item, eMappingStatus.Joined, this.hubCache);
                                 this.lineageTree.push(newLineageTree);
                             } else {
@@ -899,10 +896,10 @@ export class ColumnUsageNode {
                         }
 
                         break;
-                    case eDatalinkTransformItemType.Sort:
+                    case eTransformItemType.Sort:
                         // if this column part of a sort, add it.
                         if (item.sourceDatalinkColumn && item.sourceDatalinkColumn.key === currentColumn.key) {
-                            let newLineageTree = new ColumnUsageNode( eObjectType.Transform, eObjectUse.Sort,
+                            let newLineageTree = new ColumnUsageNode( eDatalinkObjectType.Transform, eObjectUse.Sort,
                                 this.datalink, currentColumn, null, previousTransform, item, eMappingStatus.Sorted, this.hubCache);
                             this.lineageTree.push(newLineageTree);
                         }
@@ -916,11 +913,11 @@ export class ColumnUsageNode {
             if (!columnIsMapped && previousTransform.passThroughColumns) {
                 if (this.mappingStatus === eMappingStatus.Mapped) {
                     newMappingStatus = eMappingStatus.Mapped;
-                } else if (this.objectType === eObjectType.TargetTable && this.tableColumn &&
+                } else if (this.objectType === eDatalinkObjectType.TargetTable && this.tableColumn &&
                     this.isAutoGenerateColumn(this.tableColumn.deltaType)) {
                     newMappingStatus = eMappingStatus.AutoGenerate;
                 }
-                let newLineageTree = new ColumnUsageNode(eObjectType.Transform, eObjectUse.PassThrough,
+                let newLineageTree = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.PassThrough,
                         this.datalink, currentColumn, null, previousTransform, null, this.mappingStatus, this.hubCache);
                 let newStatus = newLineageTree.createDatalinkLineage(true);
                 if (newStatus < newMappingStatus) {
@@ -937,7 +934,7 @@ export class ColumnUsageNode {
                     } else if (newMappingStatus === eMappingStatus.NotMapped) {
                         newMappingStatus = eMappingStatus.PassThroughMap;
                     }
-                    let newLineageTree = new ColumnUsageNode(eObjectType.Transform, eObjectUse.Join, this.datalink,
+                    let newLineageTree = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Join, this.datalink,
                         column, null, null, null, newMappingStatus, this.hubCache);
                     this.lineageTree.push(newLineageTree);
                 }
@@ -965,7 +962,7 @@ export class ColumnUsageNode {
                     newMappingStatus = eMappingStatus.PassThroughToNothing;
                 }
             }
-            let newLineageTree = new ColumnUsageNode(eObjectType.Transform, eObjectUse.Source, this.datalink,
+            let newLineageTree = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Source, this.datalink,
                     column, null, null, null, newMappingStatus, this.hubCache);
             this.lineageTree.push(newLineageTree);
 

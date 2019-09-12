@@ -3,9 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../+auth/auth.service';
 import { HubService } from '../../hub.service';
 import { Observable, BehaviorSubject, Subscription, combineLatest} from 'rxjs';
-import { DexihConnection, DexihTable, HubCache, FileProperties, eFlatFilePath, eCacheStatus, ConnectionTables } from '../../hub.models';
+import { HubCache, FileProperties, eCacheStatus, ConnectionTables } from '../../hub.models';
 import { Message, FileHandler, eFileStatus } from '../../../+auth/auth.models';
-import { RemoteLibraries, eConnectionCategory } from '../../hub.remote.models';
+import { DexihTable, eFlatFilePath, DexihConnection, eConnectionCategory } from '../../../shared/shared.models';
 
 
 @Component({
@@ -29,7 +29,6 @@ export class FilesManageComponent implements OnInit, OnDestroy {
     public connectionTables: ConnectionTables[];
 
     public hubCache: HubCache;
-    private remoteLibraries: RemoteLibraries;
 
     public automaticUpload = true;
 
@@ -67,18 +66,16 @@ export class FilesManageComponent implements OnInit, OnDestroy {
                 this.route.params,
                 this.route.queryParams,
                 this.hubService.getHubCacheObservable(),
-                this.hubService.getRemoteLibrariesObservable()
             ).subscribe(result => {
                 let params = result[0];
                 let queryParams = result[1];
                 this.hubCache = result[2];
-                this.remoteLibraries = result[3];
 
                 if (this.hubCache.status !== eCacheStatus.Loaded) { return; }
 
                 this.fileConnections = this.hubCache.hub.dexihConnections
                     .filter(c => {
-                        const ref = this.remoteLibraries.GetConnectionReference(c);
+                        const ref = this.hubService.GetConnectionReference(c);
                         if (ref) {
                             return ref.connectionCategory === eConnectionCategory.File;
                         } else {
@@ -90,7 +87,7 @@ export class FilesManageComponent implements OnInit, OnDestroy {
 
                 this.connectionTables = connectionTables.filter(c => {
                     if (c.dexihTables.length > 0) {
-                        let connectionReference = this.remoteLibraries.GetConnectionReference(c);
+                        let connectionReference = this.hubService.GetConnectionReference(c);
                         return connectionReference ? connectionReference.connectionCategory === eConnectionCategory.File : false;
                     }
                 });

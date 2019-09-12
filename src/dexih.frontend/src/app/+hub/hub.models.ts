@@ -1,8 +1,6 @@
-import { BehaviorSubject, Subscription} from 'rxjs';
-import { ManagedTask, ePermission, Message } from '../+auth/auth.models';
-import { eCompare, eAggregate, SelectQuery } from './hub.query.models';
-import { eTypeCode, eFunctionType, eTransformType, FunctionParameter } from './hub.remote.models';
-import { EntityBase } from '../+auth/global.models';
+import { BehaviorSubject} from 'rxjs';
+import { Message } from '../+auth/auth.models';
+import { DexihHubVariable, DexihHub, DexihFunctionParameter, DexihConnection, DexihTable, DexihTableColumn, DexihDatalinkTransform, DexihColumnValidation, DexihFileFormat, DexihDatalink, DexihDatalinkTest, DexihDatajob, DexihView, DexihDashboard, DexihApi, DexihCustomFunction, DexihTrigger, TransformProperties, eStatus, eParameterDirection, eConnectionPurpose, eDeltaType, eSourceType, eImportAction, eSecurityFlag, eDatalinkType, eUpdateStrategy, eFailAction, eInvalidAction, eFunctionCaching, eCleanAction, eDuplicateStrategy, eRunStatus, ePermission, eTypeCode, eTransformWriterMethod, eTransformItemType, eFunctionType, InputColumn, SelectQuery, DexihColumnBase, eDataObjectType, eSharedObjectType, eDirection, eSeriesGrain } from '../shared/shared.models';
 
 export class RemoteMessage {
     public messageId: string;
@@ -50,6 +48,8 @@ export class HubCache {
 
     public hub: DexihHub;
 
+    public hubPermission: ePermission;
+
     public status: eCacheStatus;
 
     private _sequenceGenerator = 0;
@@ -75,7 +75,7 @@ export class HubCache {
 
     get canAdministrate(): boolean {
         if (this.hub) {
-            return this.hub.hubPermission === ePermission.Owner;
+            return this.hubPermission === ePermission.Owner;
         }
 
         return false;
@@ -83,9 +83,9 @@ export class HubCache {
 
     get canRead(): boolean {
         if (this.hub) {
-            return this.hub.hubPermission === ePermission.Owner ||
-                this.hub.hubPermission === ePermission.FullReader ||
-                this.hub.hubPermission === ePermission.User;
+            return this.hubPermission === ePermission.Owner ||
+                this.hubPermission === ePermission.FullReader ||
+                this.hubPermission === ePermission.User;
         }
 
         return false;
@@ -93,8 +93,8 @@ export class HubCache {
 
     get canWrite(): boolean {
         if (this.hub) {
-            return this.hub.hubPermission === ePermission.Owner ||
-                this.hub.hubPermission === ePermission.User;
+            return this.hubPermission === ePermission.Owner ||
+                this.hubPermission === ePermission.User;
         }
 
         return false;
@@ -192,7 +192,7 @@ export class HubCache {
         column.key = minKey;
         column.position = maxPos;
 
-        if (deltaType) {
+        if (deltaType != null) {
             column.deltaType = deltaType;
 
             let deltaTypeDetail = deltaTypes.find(c => c.key === deltaType);
@@ -204,7 +204,7 @@ export class HubCache {
                 }
             }
 
-            if (deltaType && deltaTypeDetail.defaultName) {
+            if (deltaTypeDetail.defaultName) {
                 column.name = deltaTypeDetail.defaultName;
                 column.logicalName = deltaTypeDetail.defaultName;
                 column.dataType = deltaTypeDetail.dataType;
@@ -296,74 +296,74 @@ export class HubCache {
         return fileFormat;
     }
 
-    public search(search: string, searchObject: eObjectType): Array<SearchResult> {
+    public search(search: string, searchObject: eSearchObjectType): Array<SearchResult> {
         const results = Array<SearchResult>();
 
         if (!search) {
             return results;
         }
 
-        let searchAll = searchObject === eObjectType.All;
+        let searchAll = searchObject === eSearchObjectType.All;
 
         this.hub.dexihConnections.forEach(connection => {
-            if (searchAll || searchObject === eObjectType.Connection) {
-                this.searchItem(search, connection, null, eObjectType.Connection, results);
+            if (searchAll || searchObject === eSearchObjectType.Connection) {
+                this.searchItem(search, connection, null, eSearchObjectType.Connection, results);
             }
         });
 
 
         this.hub.dexihTables.forEach(table => {
-            if (searchAll || searchObject === eObjectType.Table) {
+            if (searchAll || searchObject === eSearchObjectType.Table) {
                 let connection = this.hub.dexihConnections.find(c => c.key === table.connectionKey);
-                this.searchItem(search, table, connection, eObjectType.Table, results);
+                this.searchItem(search, table, connection, eSearchObjectType.Table, results);
             }
 
-            if (searchAll || searchObject === eObjectType.TableColumn) {
+            if (searchAll || searchObject === eSearchObjectType.TableColumn) {
                 table.dexihTableColumns.forEach(column => {
-                    this.searchItem(search, column, table, eObjectType.TableColumn, results);
+                    this.searchItem(search, column, table, eSearchObjectType.TableColumn, results);
                 })
             }
         });
 
-        if (searchAll || searchObject === eObjectType.Datalink) {
+        if (searchAll || searchObject === eSearchObjectType.Datalink) {
             this.hub.dexihDatalinks.forEach(datalink => {
-                this.searchItem(search, datalink, null, eObjectType.Datalink, results);
+                this.searchItem(search, datalink, null, eSearchObjectType.Datalink, results);
             });
         }
-        if (searchAll || searchObject === eObjectType.Datajob) {
+        if (searchAll || searchObject === eSearchObjectType.Datajob) {
             this.hub.dexihDatajobs.forEach(datajob => {
-                this.searchItem(search, datajob, null, eObjectType.Datajob, results);
+                this.searchItem(search, datajob, null, eSearchObjectType.Datajob, results);
             });
         }
-        if (searchAll || searchObject === eObjectType.ColumnValidation) {
+        if (searchAll || searchObject === eSearchObjectType.ColumnValidation) {
             this.hub.dexihColumnValidations.forEach(columnValidation => {
-                this.searchItem(search, columnValidation, null, eObjectType.ColumnValidation, results);
+                this.searchItem(search, columnValidation, null, eSearchObjectType.ColumnValidation, results);
             });
         }
-        if (searchAll || searchObject === eObjectType.FileFormat) {
+        if (searchAll || searchObject === eSearchObjectType.FileFormat) {
             this.hub.dexihFileFormats.forEach(fileFormat => {
-                this.searchItem(search, fileFormat, null, eObjectType.FileFormat, results);
+                this.searchItem(search, fileFormat, null, eSearchObjectType.FileFormat, results);
             });
         }
-        if (searchAll || searchObject === eObjectType.View) {
+        if (searchAll || searchObject === eSearchObjectType.View) {
             this.hub.dexihViews.forEach(view => {
-                this.searchItem(search, view, null, eObjectType.View, results);
+                this.searchItem(search, view, null, eSearchObjectType.View, results);
             });
         }
-        if (searchAll || searchObject === eObjectType.Api) {
+        if (searchAll || searchObject === eSearchObjectType.Api) {
             this.hub.dexihApis.forEach(api => {
-                this.searchItem(search, api, null, eObjectType.Api, results);
+                this.searchItem(search, api, null, eSearchObjectType.Api, results);
             });
         }
-        if (searchAll || searchObject === eObjectType.Dashboard) {
+        if (searchAll || searchObject === eSearchObjectType.Dashboard) {
             this.hub.dexihDashboards.forEach(d => {
-                this.searchItem(search, d, null, eObjectType.Dashboard, results);
+                this.searchItem(search, d, null, eSearchObjectType.Dashboard, results);
             });
         }
         return results;
     }
 
-    public searchItem(search: string, item: any, itemParent: any, objectType: eObjectType, results: Array<SearchResult>) {
+    public searchItem(search: string, item: any, itemParent: any, objectType: eSearchObjectType, results: Array<SearchResult>) {
         const keys = Object.keys(item);
         let found = false;
         keys.forEach(key => {
@@ -583,8 +583,8 @@ export class HubCache {
                 this.getDatajobCache(datajob, hub);
 
                 let datajobCopy = Object.assign({}, datajob);
-                datajobCopy.currentStatus = null;
-                datajobCopy.previousStatus = null;
+                datajobCopy['currentStatus'] = null;
+                datajobCopy['previousStatus'] = null;
 
                 hub.dexihDatajobs.push(datajobCopy);
             }
@@ -603,9 +603,9 @@ export class HubCache {
                 this.getDatalinkCache(datalink, hub);
 
                 let datalinkCopy = Object.assign({}, datalink);
-                datalinkCopy.currentStatus = null;
-                datalinkCopy.entityStatus = null;
-                datalinkCopy.previousStatus = null;
+                datalinkCopy['currentStatus'] = null;
+                datalinkCopy['entityStatus'] = null;
+                datalinkCopy['previousStatus'] = null;
 
                 hub.dexihDatalinks.push(datalinkCopy);
             }
@@ -624,9 +624,9 @@ export class HubCache {
                 this.getDatalinkTestCache(datalinkTest, hub);
 
                 let datalinkTestCopy = Object.assign({}, datalinkTest);
-                datalinkTestCopy.currentStatus = null;
-                datalinkTestCopy.entityStatus = null;
-                datalinkTestCopy.previousStatus = null;
+                datalinkTestCopy['currentStatus'] = null;
+                datalinkTestCopy['entityStatus'] = null;
+                datalinkTestCopy['previousStatus'] = null;
 
                 hub.dexihDatalinkTests.push(datalinkTestCopy);
             }
@@ -726,10 +726,10 @@ export class HubCache {
                     .find(c => c.key === viewKey && c.isValid);
                 if (view) {
                     hub.dexihViews.push(view);
-                    if (view.sourceType === eViewSource.Table) {
+                    if (view.sourceType === eDataObjectType.Table) {
                         this.cacheAddTable(view.sourceTableKey, hub);
                     }
-                    if (view.sourceType === eViewSource.Datalink) {
+                    if (view.sourceType === eDataObjectType.Datalink) {
                         this.cacheAddDatalink(view.sourceDatalinkKey, hub);
                     }
                     return view;
@@ -900,26 +900,26 @@ export class DataCache {
     }
 }
 
-export enum eSharedObjectType {
-    None = <any>'None',
-    Connection = <any>'Connection',
-    Table = <any>'Table',
-    FileFormat = <any>'FileFormat',
-    Datalink = <any>'Datalink',
-    Datajob = <any>'Datajob',
-    DatalinkTransform = <any>'DatalinkTransform',
-    DatalinkTransformItem = <any>'DatalinkTransformItem',
-    RemoteAgent = <any>'RemoteAgent',
-    ColumnValidation = <any>'ColumnValidation',
-    TransformWriterResult = <any>'TransformWriterResult',
-    HubVariable = <any>'HubVariable',
-    CustomFunction = <any>'CustomFunction',
-    DatalinkTest = <any>'DatalinkTest',
-    View = <any>'View',
-    Api = <any>'Api',
-    Dashboard = <any>'Dashboard',
-    ApiStatus = <any>'ApiStatus',
-}
+// export enum eSharedObjectType {
+//     None = <any>'None',
+//     Connection = <any>'Connection',
+//     Table = <any>'Table',
+//     FileFormat = <any>'FileFormat',
+//     Datalink = <any>'Datalink',
+//     Datajob = <any>'Datajob',
+//     DatalinkTransform = <any>'DatalinkTransform',
+//     DatalinkTransformItem = <any>'DatalinkTransformItem',
+//     RemoteAgent = <any>'RemoteAgent',
+//     ColumnValidation = <any>'ColumnValidation',
+//     TransformWriterResult = <any>'TransformWriterResult',
+//     HubVariable = <any>'HubVariable',
+//     CustomFunction = <any>'CustomFunction',
+//     DatalinkTest = <any>'DatalinkTest',
+//     View = <any>'View',
+//     Api = <any>'Api',
+//     Dashboard = <any>'Dashboard',
+//     ApiStatus = <any>'ApiStatus',
+// }
 
 export class SharedObjectProperty {
     public type: eSharedObjectType;
@@ -1035,7 +1035,7 @@ export class HubCacheChange {
     ) {}
 }
 
-export enum eObjectType {
+export enum eSearchObjectType {
     All = <any>'All',
     Connection = <any>'Connection',
     Table = <any>'Table',
@@ -1049,134 +1049,134 @@ export enum eObjectType {
     Dashboard = <any>'Dashboard',
 }
 
-export const ObjectTypes = [
-    {key: eObjectType.All, name: 'All'},
-    {key: eObjectType.Connection, name: 'Connection'},
-    {key: eObjectType.Table, name: 'Table'},
-    {key: eObjectType.TableColumn, name: 'Table Column'},
-    {key: eObjectType.FileFormat, name: 'File Format'},
-    {key: eObjectType.Datalink, name: 'Data Link'},
-    {key: eObjectType.Datajob, name: 'Data Job'},
-    {key: eObjectType.ColumnValidation, name: 'Column Validation'},
-    {key: eObjectType.View, name: 'View'},
-    {key: eObjectType.Api, name: 'Api'},
-    {key: eObjectType.Dashboard, name: 'Dashboard'},
+export const SearchObjectTypes = [
+    {key: eSearchObjectType.All, name: 'All'},
+    {key: eSearchObjectType.Connection, name: 'Connection'},
+    {key: eSearchObjectType.Table, name: 'Table'},
+    {key: eSearchObjectType.TableColumn, name: 'Table Column'},
+    {key: eSearchObjectType.FileFormat, name: 'File Format'},
+    {key: eSearchObjectType.Datalink, name: 'Data Link'},
+    {key: eSearchObjectType.Datajob, name: 'Data Job'},
+    {key: eSearchObjectType.ColumnValidation, name: 'Column Validation'},
+    {key: eSearchObjectType.View, name: 'View'},
+    {key: eSearchObjectType.Api, name: 'Api'},
+    {key: eSearchObjectType.Dashboard, name: 'Dashboard'},
 ];
 
 export class SearchResult {
     public object: any;
     public objectParent: any;
-    public objectType: eObjectType;
+    public objectType: eSearchObjectType;
 
-    constructor(object: any, objectParent, objectType: eObjectType) {
+    constructor(object: any, objectParent, objectType: eSearchObjectType) {
         this.object = object;
         this.objectType = objectType;
         this.objectParent = objectParent;
     }
 }
 
-export enum eSharedDataObjectType {
-    Table = <any>'Table',
-    Datalink = <any>'Datalink',
-    View = <any>'View',
-    Dashboard = <any>'Dashboard',
-    Api = <any>'Api'
-}
+// export enum eSharedDataObjectType {
+//     Table = <any>'Table',
+//     Datalink = <any>'Datalink',
+//     View = <any>'View',
+//     Dashboard = <any>'Dashboard',
+//     Api = <any>'Api'
+// }
 
-export class SharedData {
-    public hubKey: number;
-    public hubName: string;
+// export class SharedData {
+//     public hubKey: number;
+//     public hubName: string;
 
-    public objectType: eSharedDataObjectType;
-    public objectKey: number;
-    public name: string;
-    public logicalName: string;
-    public description: string;
-    public updateDate: Date;
+//     public objectType: eSharedDataObjectType;
+//     public objectKey: number;
+//     public name: string;
+//     public logicalName: string;
+//     public description: string;
+//     public updateDate: Date;
 
-    public parameters: DexihInputParameter[];
-    public inputColumns: InputColumn[];
-    public query: SelectQuery;
-    public outputColumns: DexihColumnBase[];
+//     public parameters: any[];
+//     public inputColumns: InputColumn[];
+//     public query: SelectQuery;
+//     public outputColumns: DexihColumnBase[];
 
-}
+// }
 
-export enum eApiStatus {
-    Activated = <any>'Activated',
-    Deactivated = <any>'Deactivated',
-}
-export class ApiData {
-    public apiStatus: eApiStatus;
-    public hubKey: number;
-    public apiKey: number;
-    public securityKey = '';
-    public successCount = 0;
-    public errorCount = 0;
-}
+// export enum eApiStatus {
+//     Activated = <any>'Activated',
+//     Deactivated = <any>'Deactivated',
+// }
+// export class ApiData {
+//     public apiStatus: eApiStatus;
+//     public hubKey: number;
+//     public apiKey: number;
+//     public securityKey = '';
+//     public successCount = 0;
+//     public errorCount = 0;
+// }
 
-export class DexihApi extends EntityBase {
-    public key = 0;
-    public name: string = null;
-    public description: string = null;
-    public sourceType: eSourceType = eSourceType.Table;
-    public sourceTableKey = 0;
-    public sourceDatalinkKey = 0;
-    public selectQuery = new SelectQuery();
-    public cacheQueries = true;
-    public cacheResetInterval: string = null;
-    public logDirectory = '';
-    public autoStart = false;
-    public isShared = false;
+// export class DexihApi extends EntityBase {
+//     public key = 0;
+//     public name: string = null;
+//     public description: string = null;
+//     public sourceType: eSourceType = eSourceType.Table;
+//     public sourceTableKey = 0;
+//     public sourceDatalinkKey = 0;
+//     public selectQuery = new SelectQuery();
+//     public cacheQueries = true;
+//     public cacheResetInterval: string = null;
+//     public logDirectory = '';
+//     public autoStart = false;
+//     public isShared = false;
 
-    public parameters: DexihInputParameter[] = [];
+//     public parameters: DexihInputParameter[] = [];
 
-    public currentStatus: BehaviorSubject<ApiData>;
-}
+//     public currentStatus: BehaviorSubject<ApiData>;
+// }
 
-export class DexihColumnBase extends EntityBase {
-    public position = 0;
-    public name: string = null;
-    public logicalName: string = null;
-    public columnGroup: string = null;
-    public description: string = null;
-    public dataType: eTypeCode;
-    public maxLength: number = null;
-    public precision: number = null;
-    public scale: number = null;
-    public allowDbNull = true;
-    public isUnicode = true;
-    public deltaType: eDeltaType = eDeltaType.TrackingField;
-    public defaultValue: string = null;
-    public isUnique = false;
-    public isMandatory = false;
-    public isIncrementalUpdate = false;
-    public isInput = false;
-    public rank = 0;
-    public securityFlag: eSecurityFlag = eSecurityFlag.None;
+// export class DexihColumnBase extends EntityBase {
+//     public position = 0;
+//     public name: string = null;
+//     public logicalName: string = null;
+//     public columnGroup: string = null;
+//     public description: string = null;
+//     public dataType: eTypeCode;
+//     public maxLength: number = null;
+//     public precision: number = null;
+//     public scale: number = null;
+//     public allowDbNull = true;
+//     public isUnicode = true;
+//     public deltaType: eDeltaType = eDeltaType.TrackingField;
+//     public defaultValue: string = null;
+//     public isUnique = false;
+//     public isMandatory = false;
+//     public isIncrementalUpdate = false;
+//     public isInput = false;
+//     public rank = 0;
+//     public securityFlag: eSecurityFlag = eSecurityFlag.None;
 
-    public isSourceColumn = false;
-    public isGeneratedColumn = false;
+//     public isSourceColumn = false;
+//     public isGeneratedColumn = false;
 
-    public mappingStatus: eMappingStatus;
+//     public mappingStatus: eMappingStatus;
 
-    public entityStatus: EntityStatus;
+//     public entityStatus: EntityStatus;
 
-    public runTime: {lineage: eMappingStatus, impact: eMappingStatus}
+//     public runTime: {lineage: eMappingStatus, impact: eMappingStatus}
 
-    constructor() {
-        super();
-        this.securityFlag = eSecurityFlag.None;
-        this.isUnique = false;
-        this.isMandatory = false;
-        this.isIncrementalUpdate = false;
-        this.allowDbNull = false;
-        this.isUnicode = false;
-        this.dataType = eTypeCode.String;
-        this.deltaType = eDeltaType.NaturalKey;
-    }
-}
+//     constructor() {
+//         super();
+//         this.securityFlag = eSecurityFlag.None;
+//         this.isUnique = false;
+//         this.isMandatory = false;
+//         this.isIncrementalUpdate = false;
+//         this.allowDbNull = false;
+//         this.isUnicode = false;
+//         this.dataType = eTypeCode.String;
+//         this.deltaType = eDeltaType.NaturalKey;
+//     }
+// }
 
-export class DexihInputParameter extends EntityBase {
+export class DexihInputParameter {
     public key = 0;
 
     public name: string = null;
@@ -1185,715 +1185,716 @@ export class DexihInputParameter extends EntityBase {
     public value = null;
 }
 
-export class DexihConnection extends EntityBase {
-    public key = 0;
-    public purpose: eConnectionPurpose = eConnectionPurpose.Source;
-    public name: string = null;
-    public description: string = null;
-    public server: string = null;
-    public useWindowsAuth = false;
-    public username = '';
-    public password = '';
-    public usePasswordVariable = false;
-    public defaultDatabase: string = null;
-    public filename: string = null;
-    public useConnectionString = false;
-    public useConnectionStringVariable = false;
-    public connectionString: string = null;
-    public embedTableKey = false;
-    public passwordRaw: string = null;
-    public connectionStringRaw: string = null;
-
-    // public dexihTables: Array<DexihTable> = null;
-
-    public databases: Array<string> = null;
-
-    public connectionAssemblyName = '';
-    public connectionClassName = '';
-
-    constructor( name: string) {
-        super();
-        this.name = name;
-        // this.dexihTables = new Array<DexihTable>();
-    }
-}
-
-export class DexihCustomFunction extends EntityBase {
-    public key = 0;
-    public functionType: eFunctionType = eFunctionType.Map;
-    public methodCode = '';
-    public resultCode = '';
-    public name = '';
-    public description = '';
-    public returnType: eTypeCode = eTypeCode.String;
-    public isGeneric = false;
-    public genericTypeDefault: eTypeCode = eTypeCode.String;
-
-    public dexihCustomFunctionParameters: DexihCustomFunctionParameter[] = [];
-}
-
-export class DexihCustomFunctionParameter extends EntityBase {
-    public key = 0;
-    public name: string = null;
-    public position = 0;
-    public direction: eParameterDirection = null;
-    public isGeneric = false;
-    public dataType: eTypeCode = eTypeCode.String
-    public rank = 0;
-}
-
-export class DexihColumnValidation extends EntityBase {
-    public key = 0;
-    public name = '';
-    public description: string = null;
-    public dataType: eTypeCode = eTypeCode.String;
-    public minLength: number = null;
-    public maxLength: number = null;
-    public allowDbNull = false;
-    public minValue: number = null;
-    public maxValue: number = null;
-    public patternMatch: string = null;
-    public regexMatch: string = null;
-    public listOfValues: string[] = [];
-    public listOfNotValues: string[] = [];
-    public lookupColumnKey: number = null;
-    public lookupIsValid = true;
-    public lookupMultipleRecords = false;
-    public invalidAction: eInvalidAction = eInvalidAction.Abend;
-    public cleanAction: eCleanAction = eCleanAction.Null;
-    public cleanValue: string = null;
-}
-
-export class DexihDashboard extends EntityBase {
-    public key = 0;
-    public name = '';
-    public description: string = null;
-    public isShared = false;
-    public minCols = 4;
-    public maxCols = 100;
-    public minRows = 4;
-    public maxRows = 100;
-    public autoRefresh = true;
-
-    public dexihDashboardItems: Array<DexihDashboardItem> = [];
-    public parameters: Array<DexihInputParameter> = [];
-}
-
-export class DexihDashboardItem extends EntityBase {
-    public key = 0;
-    public name = '';
-    public description: string = null;
-    public cols = 1;
-    public rows = 1;
-    public x = 0;
-    public y = 0;
-    public header = true;
-    public scrollable = false;
-
-    public parameters: Array<DexihInputParameter> = [];
-    public viewKey = 0;
-}
-
-export class DexihDatajob extends EntityBase {
-    public key = 0;
-    public name: string = null;
-    public description: string = null;
-    public failAction = eFailAction.Abend;
-    public auditConnectionKey = 0;
-    public fileWatch = false;
-    public autoStart = false;
-//    public externalTrigger = false;
-
-    public dexihDatalinkSteps: Array<DexihDatalinkStep> = null;
-    public dexihTriggers: Array<DexihTrigger> = null;
-
-    public parameters: Array<DexihInputParameter> = [];
-
-    public previousStatus: BehaviorSubject<TransformWriterResult>;
-    public currentStatus: BehaviorSubject<TransformWriterResult>;
-
-    constructor() {
-        super();
-        this.dexihDatalinkSteps = [];
-        this.dexihTriggers = [];
-    }
-}
-export class DexihDatalinkDependency extends EntityBase {
-    public key = 0;
-    public datalinkStepKey = 0;
-    public dependentDatalinkStepKey = 0;
-}
-export class DexihDatalinkProfile extends EntityBase {
-    public key = 0;
-    public datalinkKey = 0;
-
-    public functionClassName: string = null;
-    public functionAssemblyName: string = null;
-    public functionMethodName: string = null;
-    public detailedResults = false;
-
-// properties used by components
-    public name: string;
-    public description: string;
-}
-export class DexihDatalink extends EntityBase {
-    public key = 0;
-    public name: string = null;
-    public description: string = null;
-    // public targetTableKey = null;
-    public auditConnectionKey = null;
-    public updateStrategy: eUpdateStrategy = eUpdateStrategy.Reload;
-    public datalinkType: eDatalinkType = eDatalinkType.General;
-    public loadStrategy: eLoadStrategy = eLoadStrategy.Bulk;
-    public rowsPerCommit = 1000;
-    public rowsPerProgress = 1000;
-    public rollbackOnFail = false;
-    public isQuery = false;
-    public maxRows = 0;
-    public addDefaultRow = false;
-    public isShared = false;
-    public profileTableName: string = null;
-
-    public sourceDatalinkTable = new DexihDatalinkTable();
-    public dexihDatalinkTransforms: Array<DexihDatalinkTransform> = [];
-    public dexihDatalinkProfiles: Array<DexihDatalinkProfile> = [];
-    public dexihDatalinkTargets: Array<DexihDatalinkTarget> = [];
-    public parameters: Array<DexihInputParameter> = [];
-
-    public targetTable: DexihTable;
-
-// properties used by components.
-    public sourceTableName: string;
-    public targetTableName: string;
-
-    public entityStatus: EntityStatus;
-    public previousStatus: BehaviorSubject<TransformWriterResult>;
-    public currentStatus: BehaviorSubject<TransformWriterResult>;
-}
-
-export class DexihDatalinkTable extends EntityBase {
-    public key = 0;
-    public sourceTableKey = null;
-    public sourceDatalinkKey = null;
-    public name: string = null;
-    public sourceType = eSourceType.Table;
-
-    public rowsStartAt = null;
-    public rowsEndAt = null;
-    public rowsIncrement = null;
-
-    public dexihDatalinkColumns: Array<DexihDatalinkColumn> = [];
-}
-
-export class DexihDatalinkColumn extends DexihColumnBase {
-    public key = 0;
-    public datalinkTableKey = null;
-
-    public childColumns: Array<DexihDatalinkColumn> = [];
-}
-
-export class DexihDatalinkStep extends EntityBase {
-    public key = 0;
-    public name: string = null;
-    public datajobKey = 0;
-    public datalinkKey = 0;
-
-    public dexihDatalinkDependencies: Array<DexihDatalinkDependency> = [];
-    public dexihDatalinkStepColumns: Array<DexihDatalinkStepColumn> = [];
-    public parameters: Array<DexihInputParameter> = [];
-}
-
-export class DexihDatalinkStepColumn extends DexihColumnBase {
-    public key = 0;
-    public datalinkStepKey = null;
-}
-
-export class DexihDatalinkTarget extends EntityBase {
-    public key = 0;
-    public datalinkKey: number = null;
-    public nodeDatalinkColumn: DexihDatalinkColumn = null;
-    public tableKey: number = null;
-    public position: number = null;
-
-    public runTime: {
-        inputColumns: DexihDatalinkColumn[];
-    }
-}
-
-export class DexihDatalinkTest extends EntityBase {
-    public key = 0;
-    public name: string = null;
-    public auditConnectionKey = 0;
-    public description: string = null;
-
-    public dexihDatalinkTestSteps: Array<DexihDatalinkTestStep> = [];
-
-    public entityStatus: EntityStatus;
-    public previousStatus: BehaviorSubject<TransformWriterResult>;
-    public currentStatus: BehaviorSubject<TransformWriterResult>;
-}
-
-export class DexihDatalinkTestStep extends EntityBase {
-    public key = 0;
-    public datalinkTestKey = 0;
-    public position = 0;
-    public targetConnectionKey = 0;
-    public targetTableName: string = null;
-    public targetSchema: string = null;
-    public expectedConnectionKey = 0;
-    public expectedTableName: string = null;
-    public expectedSchema: string = null;
-
-    public datalinkKey = 0;
-
-    public name: string = null;
-    public description: string = null;
-
-    public dexihDatalinkTestTables: Array<DexihDatalinkTestTable> = [];
-
-}
-
-export class DexihDatalinkTestTable extends EntityBase {
-    public key = 0;
-    public datalinkTestStepKey = 0;
-    public tableKey = 0;
-    public sourceConnectionKey = 0;
-    public sourceTableName: string = null;
-    public sourceSchema: string = null;
-    public testConnectionKey = 0;
-    public testTableName: string = null;
-    public testSchema: string = null;
-}
-
-export class DexihDatalinkTransformItem extends EntityBase {
-    public key = 0;
-    public datalinkTransformKey = 0;
-    public position = 0;
-    public transformItemType: eDatalinkTransformItemType = null;
-    public sourceValue: string = null;
-    public joinValue: string = null;
-    public sortDirection: eSortDirection = null;
-    public seriesGrain: eSeriesGrain = null;
-    public seriesFill = false;
-    public seriesStart: string = null;
-    public seriesFinish: string = null;
-    public filterCompare: eCompare = null;
-    public filterValue: string = null;
-    public aggregate: eAggregate = null;
-    public returnType: eTypeCode = eTypeCode.String;
-    public functionCode: string = null;
-    public functionResultCode: string = null;
-    public onError: eOnError = null;
-    public onNull: eOnNull = null;
-    public notCondition = false;
-    public invalidAction: eInvalidAction = null;
-    public customFunctionKey: number = null;
-
-    public entityStatus: EntityStatus;
-
-    public dexihFunctionParameters: Array<DexihFunctionParameter>;
-
-    public functionClassName: string = null;
-    public functionAssemblyName: string = null;
-    public functionMethodName: string = null;
-
-    public genericTypeCode: eTypeCode = null;
-    public functionCaching = eFunctionCaching.NoCache;
-
-    public targetDatalinkColumn: DexihDatalinkColumn = null;
-    public sourceDatalinkColumn: DexihDatalinkColumn = null;
-    public joinDatalinkColumn: DexihDatalinkColumn = null;
-    public filterDatalinkColumn: DexihDatalinkColumn = null;
-
-    constructor() {
-        super();
-        this.onError = eOnError.Abend;
-        this.onNull = eOnNull.Execute;
-        this.invalidAction = eInvalidAction.Abend;
-
-        this.dexihFunctionParameters = [];
-    }
-
-}
-export class DexihDatalinkTransform extends EntityBase {
-    public key = 0;
-    public datalinkKey = 0;
-    public position = 0;
-    public name: string = null;
-    public description: string = null;
-    public passThroughColumns: boolean = null;
-    public joinTableAlias: string = null;
-    public joinDuplicateStrategy = eDuplicateStrategy.All;
-
-    public entityStatus: EntityStatus;
-
-    public dexihDatalinkTransformItems: Array<DexihDatalinkTransformItem>;
-
-    public transformType: eTransformType = null;
-    public transformClassName: string = null;
-    public transformAssemblyName: string = null ;
-
-    public maxInputRows = 0;
-    public maxOutputRows = 0;
-
-    public joinDatalinkTable: DexihDatalinkTable = null;
-
-    // TODO Implement joinSortDatalinkColumn
-    public joinSortDatalinkColumn: DexihDatalinkColumn = null;
-
-    public nodeDatalinkColumn: DexihDatalinkColumn = null;
-
-    public runTime: {
-        inputColumns: DexihDatalinkColumn[];
-        outputColumns: DexihDatalinkColumn[];
-        transformColumns: DexihDatalinkColumn[];
-    }
-
-    constructor() {
-        super();
-        this.dexihDatalinkTransformItems = new Array<DexihDatalinkTransformItem>();
-    }
-}
-
-export class DexihFileFormat extends EntityBase {
-    public key = 0;
-    public name: string = null;
-    public description: string = null;
-    public isDefault = false;
-    public allowComments = false;
-    public bufferSize: number;
-    public comment: string;
-    public delimiter: string;
-    public detectColumnCountChanges = false;
-    public hasHeaderRecord = true;
-    public ignoreHeaderWhiteSpace = false;
-    public ignoreReadingExceptions = false;
-    public ignoreQuotes = false;
-    public quote: string;
-    public quoteAllFields = false;
-    public quoteNoFields = false;
-    public skipEmptyRecords = false;
-    public skipHeaderRows = 0;
-    public trimFields = false;
-    public trimHeaders = false;
-    public willThrowOnMissingField = false;
-    public setWhiteSpaceCellsToNull = false;
-
-    public matchHeaderRecord = true;
-
-    public isModified: boolean;
-
-    constructor() {
-        super();
-        this.bufferSize = 2048;
-        this.delimiter = ',';
-        this.quote = '"';
-        this.comment = '#';
-    }
-}
-export class DexihFunctionParameter extends EntityBase {
-    public key = 0;
-    public datalinkTransformItemKey = 0;
-    public name: string = null;
-    public position = 0;
-    public direction: eParameterDirection = null;
-    public isGeneric = false;
-    public dataType: eTypeCode = eTypeCode.String
-    public rank = 0;
-    public arrayParameters: DexihFunctionArrayParameter[] = [];
-    public value: string = null;
-
-    public datalinkColumn: DexihDatalinkColumn;
-    public entityStatus: EntityStatus;
-
-    // runtime structures are not exported when saving.
-    public runTime: {functionParameter: FunctionParameter} = {functionParameter: null};
-}
-
-export class DexihFunctionArrayParameter extends EntityBase {
-    public key = 0;
-    public name: string = null;
-    public position = 0;
-    public direction: eParameterDirection = null;
-    public isGeneric = false;
-    public dataType: eTypeCode = eTypeCode.String;
-    public rank = 0;
-    public value: string = null;
-    public datalinkColumn: DexihDatalinkColumn = null;
-
-    // runtime structures are not exported when saving.
-    public runTime: {functionParameter: FunctionParameter} = {functionParameter: null};
-}
-
-export class DexihHub extends EntityBase {
-    public hubKey = 0;
-    public name: string;
-    public description: string;
-    public encryptionKey: string;
-    public maxOwners: number;
-    public maxUsers: number;
-    public maxReaders: number;
-    public maxDatalinks: number;
-    public maxDatajobs: number;
-    public dailyTransactionQuota: number;
-    public expiryDate: Date;
-
-    public hubPermission: ePermission;
-
-    public dexihHubVariables: Array<DexihHubVariable>;
-    public dexihConnections: Array<DexihConnection>;
-    public dexihTables: Array<DexihTable>;
-    public dexihDatajobs: Array<DexihDatajob>;
-    public dexihDatalinks: Array<DexihDatalink>;
-    public dexihColumnValidations: Array<DexihColumnValidation>;
-    public dexihFileFormats: Array<DexihFileFormat>;
-    public dexihCustomFunctions: Array<DexihCustomFunction>;
-    public dexihRemoteAgentHubs: Array<DexihRemoteAgentHub>;
-    public dexihDatalinkTests: Array<DexihDatalinkTest>;
-    public dexihViews: Array<DexihView>;
-    public dexihApis: Array<DexihApi>;
-    public dexihDashboards: Array<DexihDashboard>;
-
-    constructor(hubKey: number, name: string) {
-        super();
-        this.hubKey = hubKey;
-        this.name = name;
-        this.isValid = true;
-
-        this.dexihHubVariables = new Array<DexihHubVariable>();
-        this.dexihConnections = new Array<DexihConnection>();
-        this.dexihTables = new Array<DexihTable>();
-        this.dexihDatajobs = new Array<DexihDatajob>();
-        this.dexihDatalinks = new Array<DexihDatalink>();
-        this.dexihColumnValidations = new Array<DexihColumnValidation>();
-        this.dexihFileFormats = new Array<DexihFileFormat>();
-        this.dexihCustomFunctions = new Array<DexihCustomFunction>();
-        this.dexihDatalinkTests = new Array<DexihDatalinkTest>();
-        this.dexihViews = new Array<DexihView>();
-        this.dexihApis = new Array<DexihApi>();
-        this.dexihDashboards = new Array<DexihDashboard>();
-    }
-}
-
-export class DexihHubVariable extends EntityBase {
-    public key = 0;
-    public name: string = null;
-    public value: string = null;
-    public valueRaw: string = null;
-    public isEncrypted = false;
-    public isEnvironmentVariable = false;
-}
-
-export class DexihRemoteAgentHub extends EntityBase {
-    public remoteAgentHubKey = 0;
-    public remoteAgentKey = 0;
-    public hubKey = 0;
-    public isAuthorized = false;
-    public isDefault = false;
-    public allowExternalConnect = false;
-
-    public isSelected = false;
-}
-
-export class DexihTableColumn extends DexihColumnBase {
-    public key = 0;
-    public tableKey = 0;
-    public columnValidationKey: number = null;
-
-    public parentColumnKey: number = null;
-    public childColumns: DexihTableColumn[] = null;
-
-
-    public mappingStatus: eMappingStatus;
-    public entityStatus: EntityStatus;
-
-    super() {
-        this.securityFlag = eSecurityFlag.None;
-        this.isUnique = false;
-        this.isMandatory = false;
-        this.isIncrementalUpdate = false;
-        this.allowDbNull = false;
-        this.dataType = eTypeCode.String;
-        this.deltaType = eDeltaType.NaturalKey;
-    }
-}
-
-export class DexihTable extends EntityBase {
-    public key = 0;
-    public connectionKey = 0;
-    public name = '';
-    public schema: string = null;
-    public sourceConnectionName: string = null;
-    public baseTableName: string = null;
-    public logicalName = '';
-    public tableType: eTableType = eTableType.Table;
-    public description: string = null;
-    public useQuery = false;
-    public queryString = null;
-    public fileFormatKey: number = null;
-    public rejectedTableName: string = null;
-    public sortColumnKeys: Array<number> = [];
-    public autoManageFiles = true;
-    public useCustomFilePaths = false;
-    public fileRootPath: string = null;
-    public fileIncomingPath: string = null;
-    public fileOutgoingPath: string = null;
-    public fileProcessedPath: string = null;
-    public fileRejectedPath: string = null;
-    public fileMatchPattern: string = null;
-    public restfulUri: string = null;
-    public formatType: eFormatType = eFormatType.Text;
-    public maxImportLevels = 1;
-    public rowPath: string = null;
-    public isVersioned = false;
-    public isShared = false;
-    public fileSample: string = null;
-
-    public fileFormat: DexihFileFormat = null;
-
-    public entityStatus: EntityStatus;
-
-    public dexihTableColumns: Array<DexihTableColumn>;
-
-    public previousStatus: BehaviorSubject<TransformWriterResult>;
-    public currentStatus: BehaviorSubject<TransformWriterResult>;
-
-    constructor() {
-        super();
-        this.entityStatus = new EntityStatus();
-        this.entityStatus.isBusy = false;
-        this.entityStatus.lastStatus = eStatus.None;
-
-        this.key = 0;
-        this.dexihTableColumns = new Array<DexihTableColumn>();
-    }
-}
-
-export class DexihTrigger extends EntityBase {
-    public key = 0;
-    public datajobKey = 0;
-    public startDate: string = null;
-    public intervalTime: string = null;
-    public daysOfWeek: Array<eDayOfWeek> = [
-        eDayOfWeek.Sunday,
-        eDayOfWeek.Monday,
-        eDayOfWeek.Tuesday,
-        eDayOfWeek.Wednesday,
-        eDayOfWeek.Thursday,
-        eDayOfWeek.Friday,
-        eDayOfWeek.Saturday,
-    ];
-    public startTime: string = null;
-    public endTime: string = null;
-    public cronExpression: string = null;
-    public maxRecurs: number = null;
-}
-
-export class DexihView extends EntityBase {
-    public key = 0;
-    public name: string = null;
-    public description: string = null;
-    public viewType: eViewType = eViewType.Table;
-    public sourceType: eViewSource = eViewSource.Table;
-    public sourceTableKey = 0;
-    public sourceDatalinkKey = 0;
-    public inputValues: InputColumn[] = null;
-    public selectQuery = new SelectQuery();
-    public chartConfig = new ChartConfig();
-    public autoRefresh = true;
-    public isShared = false;
-
-    public parameters: Array<DexihInputParameter> = [];
-}
-
-export class ChartConfig {
-    public labelColumn: string = null;
-    public seriesColumn: string = null;
-    public seriesColumns = [];
-    public xColumn: string = null;
-    public yColumn: string = null;
-    public minColumn: string = null;
-    public maxColumn: string = null;
-    public radiusColumn: string = null;
-    public longitudeColumn: string = null;
-    public latitudeColumn: string = null;
-
-    public chartType = eChartType.BarVertical;
-    public colorScheme = 'natural';
-    public showGradient = false;
-    public showXAxis = true;
-    public showYAxis = true;
-    public showLegend = false;
-    public legendPosition: 'right' | 'below'  = 'below';
-    public showXAxisLabel = true;
-    public showYAxisLabel = true;
-    public showGridLines = false;
-    public xAxisLabel: string = null;
-    public yAxisLabel: string = null;
-    public xScaleMax = null;
-    public xScaleMin = null;
-    public yScaleMax = null;
-    public yScaleMin = null;
-    public autoScale = true;
-
-    // pie charts only
-    public explodeSlices = false;
-    public doughnut = false;
-}
-
-export enum eViewSource {
-    Table = <any>'Table',
-    Datalink = <any>'Datalink'
-}
-
-export enum eViewType {
-    Table = <any>'Table',
-    Chart = <any>'Chart'
-}
-
-export enum eTableType {
-    Table = <any>'Table',
-    View = <any>'View',
-    Query = <any>'Query',
-}
-
-export enum eTestTableAction {
-    None = <any>'None',
-    Truncate = <any>'Truncate',
-    DropCreate = <any>'DropCreate',
-    TruncateCopy = <any>'TruncateCopy',
-    DropCreateCopy = <any>'DropCreateCop',
-}
-
-export enum eStatus {
-    None = <any>'None',
-    Pending = <any>'Pending',
-    Error = <any>'Error',
-    Imported = <any>'Imported',
-    Added = <any>'Added',
-    Updated = <any>'Updated',
-    Deleted = <any>'Deleted',
-}
-
-export enum eSortDirection {
-    Ascending = <any>'Ascending',
-    Descending = <any>'Descending',
-}
+// export class DexihConnection extends EntityBase {
+//     public key = 0;
+//     public purpose: eConnectionPurpose = eConnectionPurpose.Source;
+//     public name: string = null;
+//     public description: string = null;
+//     public server: string = null;
+//     public useWindowsAuth = false;
+//     public username = '';
+//     public password = '';
+//     public usePasswordVariable = false;
+//     public defaultDatabase: string = null;
+//     public filename: string = null;
+//     public useConnectionString = false;
+//     public useConnectionStringVariable = false;
+//     public connectionString: string = null;
+//     public embedTableKey = false;
+//     public passwordRaw: string = null;
+//     public connectionStringRaw: string = null;
+
+//     // public dexihTables: Array<DexihTable> = null;
+
+//     public databases: Array<string> = null;
+
+//     public connectionAssemblyName = '';
+//     public connectionClassName = '';
+
+//     constructor( name: string) {
+//         super();
+//         this.name = name;
+//         // this.dexihTables = new Array<DexihTable>();
+//     }
+// }
+
+// export class DexihCustomFunction extends EntityBase {
+//     public key = 0;
+//     public functionType: eFunctionType = eFunctionType.Map;
+//     public methodCode = '';
+//     public resultCode = '';
+//     public name = '';
+//     public description = '';
+//     public returnType: eTypeCode = eTypeCode.String;
+//     public isGeneric = false;
+//     public genericTypeDefault: eTypeCode = eTypeCode.String;
+
+//     public dexihCustomFunctionParameters: DexihCustomFunctionParameter[] = [];
+// }
+
+// export class DexihCustomFunctionParameter extends EntityBase {
+//     public key = 0;
+//     public name: string = null;
+//     public position = 0;
+//     public direction: eParameterDirection = null;
+//     public isGeneric = false;
+//     public dataType: eTypeCode = eTypeCode.String
+//     public rank = 0;
+// }
+
+// export class DexihColumnValidation extends EntityBase {
+//     public key = 0;
+//     public name = '';
+//     public description: string = null;
+//     public dataType: eTypeCode = eTypeCode.String;
+//     public minLength: number = null;
+//     public maxLength: number = null;
+//     public allowDbNull = false;
+//     public minValue: number = null;
+//     public maxValue: number = null;
+//     public patternMatch: string = null;
+//     public regexMatch: string = null;
+//     public listOfValues: string[] = [];
+//     public listOfNotValues: string[] = [];
+//     public lookupColumnKey: number = null;
+//     public lookupIsValid = true;
+//     public lookupMultipleRecords = false;
+//     public invalidAction: eInvalidAction = eInvalidAction.Abend;
+//     public cleanAction: eCleanAction = eCleanAction.Null;
+//     public cleanValue: string = null;
+// }
+
+// export class DexihDashboard extends EntityBase {
+//     public key = 0;
+//     public name = '';
+//     public description: string = null;
+//     public isShared = false;
+//     public minCols = 4;
+//     public maxCols = 100;
+//     public minRows = 4;
+//     public maxRows = 100;
+//     public autoRefresh = true;
+
+//     public dexihDashboardItems: Array<DexihDashboardItem> = [];
+//     public parameters: Array<DexihInputParameter> = [];
+// }
+
+// export class DexihDashboardItem extends EntityBase {
+//     public key = 0;
+//     public name = '';
+//     public description: string = null;
+//     public cols = 1;
+//     public rows = 1;
+//     public x = 0;
+//     public y = 0;
+//     public header = true;
+//     public scrollable = false;
+
+//     public parameters: Array<DexihInputParameter> = [];
+//     public viewKey = 0;
+// }
+
+// export class DexihDatajob extends EntityBase {
+//     public key = 0;
+//     public name: string = null;
+//     public description: string = null;
+//     public failAction = eFailAction.Abend;
+//     public auditConnectionKey = 0;
+//     public fileWatch = false;
+//     public autoStart = false;
+// //    public externalTrigger = false;
+
+//     public dexihDatalinkSteps: Array<DexihDatalinkStep> = null;
+//     public dexihTriggers: Array<DexihTrigger> = null;
+
+//     public parameters: Array<DexihInputParameter> = [];
+
+//     public previousStatus: BehaviorSubject<TransformWriterResult>;
+//     public currentStatus: BehaviorSubject<TransformWriterResult>;
+
+//     constructor() {
+//         super();
+//         this.dexihDatalinkSteps = [];
+//         this.dexihTriggers = [];
+//     }
+// }
+// export class DexihDatalinkDependency extends EntityBase {
+//     public key = 0;
+//     public datalinkStepKey = 0;
+//     public dependentDatalinkStepKey = 0;
+// }
+// export class DexihDatalinkProfile extends EntityBase {
+//     public key = 0;
+//     public datalinkKey = 0;
+
+//     public functionClassName: string = null;
+//     public functionAssemblyName: string = null;
+//     public functionMethodName: string = null;
+//     public detailedResults = false;
+
+// // properties used by components
+//     public name: string;
+//     public description: string;
+// }
+// export class DexihDatalink extends EntityBase {
+//     public key = 0;
+//     public name: string = null;
+//     public description: string = null;
+//     // public targetTableKey = null;
+//     public auditConnectionKey = null;
+//     public updateStrategy: eUpdateStrategy = eUpdateStrategy.Reload;
+//     public datalinkType: eDatalinkType = eDatalinkType.General;
+//     public loadStrategy: eTransformWriterMethod = eTransformWriterMethod.Bulk;
+//     public rowsPerCommit = 1000;
+//     public rowsPerProgress = 1000;
+//     public rollbackOnFail = false;
+//     public isQuery = false;
+//     public maxRows = 0;
+//     public addDefaultRow = false;
+//     public isShared = false;
+//     public profileTableName: string = null;
+
+//     public sourceDatalinkTable = new DexihDatalinkTable();
+//     public dexihDatalinkTransforms: Array<DexihDatalinkTransform> = [];
+//     public dexihDatalinkProfiles: Array<DexihDatalinkProfile> = [];
+//     public dexihDatalinkTargets: Array<DexihDatalinkTarget> = [];
+//     public parameters: Array<DexihInputParameter> = [];
+
+//     public targetTable: DexihTable;
+
+// // properties used by components.
+//     public sourceTableName: string;
+//     public targetTableName: string;
+
+//     public entityStatus: EntityStatus;
+//     public previousStatus: BehaviorSubject<TransformWriterResult>;
+//     public currentStatus: BehaviorSubject<TransformWriterResult>;
+// }
+
+// export class DexihDatalinkTable extends EntityBase {
+//     public key = 0;
+//     public sourceTableKey = null;
+//     public sourceDatalinkKey = null;
+//     public name: string = null;
+//     public sourceType = eSourceType.Table;
+
+//     public rowsStartAt = null;
+//     public rowsEndAt = null;
+//     public rowsIncrement = null;
+
+//     public dexihDatalinkColumns: Array<DexihDatalinkColumn> = [];
+// }
+
+// export class DexihDatalinkColumn extends DexihColumnBase {
+//     public key = 0;
+//     public datalinkTableKey = null;
+
+//     public childColumns: Array<DexihDatalinkColumn> = [];
+// }
+
+// export class DexihDatalinkStep extends EntityBase {
+//     public key = 0;
+//     public name: string = null;
+//     public datajobKey = 0;
+//     public datalinkKey = 0;
+
+//     public dexihDatalinkDependencies: Array<DexihDatalinkDependency> = [];
+//     public dexihDatalinkStepColumns: Array<DexihDatalinkStepColumn> = [];
+//     public parameters: Array<DexihInputParameter> = [];
+// }
+
+// export class DexihDatalinkStepColumn extends DexihColumnBase {
+//     public key = 0;
+//     public datalinkStepKey = null;
+// }
+
+// export class DexihDatalinkTarget extends EntityBase {
+//     public key = 0;
+//     public datalinkKey: number = null;
+//     public nodeDatalinkColumn: DexihDatalinkColumn = null;
+//     public tableKey: number = null;
+//     public position: number = null;
+
+//     public runTime: {
+//         inputColumns: DexihDatalinkColumn[];
+//     }
+// }
+
+// export class DexihDatalinkTest extends EntityBase {
+//     public key = 0;
+//     public name: string = null;
+//     public auditConnectionKey = 0;
+//     public description: string = null;
+
+//     public dexihDatalinkTestSteps: Array<DexihDatalinkTestStep> = [];
+
+//     public entityStatus: EntityStatus;
+//     public previousStatus: BehaviorSubject<TransformWriterResult>;
+//     public currentStatus: BehaviorSubject<TransformWriterResult>;
+// }
+
+// export class DexihDatalinkTestStep extends EntityBase {
+//     public key = 0;
+//     public datalinkTestKey = 0;
+//     public position = 0;
+//     public targetConnectionKey = 0;
+//     public targetTableName: string = null;
+//     public targetSchema: string = null;
+//     public expectedConnectionKey = 0;
+//     public expectedTableName: string = null;
+//     public expectedSchema: string = null;
+
+//     public datalinkKey = 0;
+
+//     public name: string = null;
+//     public description: string = null;
+
+//     public dexihDatalinkTestTables: Array<DexihDatalinkTestTable> = [];
+
+// }
+
+// export class DexihDatalinkTestTable extends EntityBase {
+//     public key = 0;
+//     public datalinkTestStepKey = 0;
+//     public tableKey = 0;
+//     public sourceConnectionKey = 0;
+//     public sourceTableName: string = null;
+//     public sourceSchema: string = null;
+//     public testConnectionKey = 0;
+//     public testTableName: string = null;
+//     public testSchema: string = null;
+// }
+
+// export class DexihDatalinkTransformItem extends EntityBase {
+//     public key = 0;
+//     public datalinkTransformKey = 0;
+//     public position = 0;
+//     public transformItemType: eTransformItemType = null;
+//     public sourceValue: string = null;
+//     public joinValue: string = null;
+//     public sortDirection: eSortDirection = null;
+//     public seriesGrain: eSeriesGrain = null;
+//     public seriesFill = false;
+//     public seriesStart: string = null;
+//     public seriesFinish: string = null;
+//     public filterCompare: eCompare = null;
+//     public filterValue: string = null;
+//     public aggregate: eAggregate = null;
+//     public returnType: eTypeCode = eTypeCode.String;
+//     public functionCode: string = null;
+//     public functionResultCode: string = null;
+//     public onError: eOnError = null;
+//     public onNull: eOnNull = null;
+//     public notCondition = false;
+//     public invalidAction: eInvalidAction = null;
+//     public customFunctionKey: number = null;
+
+//     public entityStatus: EntityStatus;
+
+//     public dexihFunctionParameters: Array<DexihFunctionParameter>;
+
+//     public functionClassName: string = null;
+//     public functionAssemblyName: string = null;
+//     public functionMethodName: string = null;
+
+//     public genericTypeCode: eTypeCode = null;
+//     public functionCaching = eFunctionCaching.NoCache;
+
+//     public targetDatalinkColumn: DexihDatalinkColumn = null;
+//     public sourceDatalinkColumn: DexihDatalinkColumn = null;
+//     public joinDatalinkColumn: DexihDatalinkColumn = null;
+//     public filterDatalinkColumn: DexihDatalinkColumn = null;
+
+//     constructor() {
+//         super();
+//         this.onError = eOnError.Abend;
+//         this.onNull = eOnNull.Execute;
+//         this.invalidAction = eInvalidAction.Abend;
+
+//         this.dexihFunctionParameters = [];
+//     }
+
+// }
+// export class DexihDatalinkTransform extends EntityBase {
+//     public key = 0;
+//     public datalinkKey = 0;
+//     public position = 0;
+//     public name: string = null;
+//     public description: string = null;
+//     public passThroughColumns: boolean = null;
+//     public joinTableAlias: string = null;
+//     public joinDuplicateStrategy = eDuplicateStrategy.All;
+
+//     public entityStatus: EntityStatus;
+
+//     public dexihDatalinkTransformItems: Array<DexihDatalinkTransformItem>;
+
+//     public transformType: eTransformType = null;
+//     public transformClassName: string = null;
+//     public transformAssemblyName: string = null ;
+
+//     public maxInputRows = 0;
+//     public maxOutputRows = 0;
+
+//     public joinDatalinkTable: DexihDatalinkTable = null;
+
+//     // TODO Implement joinSortDatalinkColumn
+//     public joinSortDatalinkColumn: DexihDatalinkColumn = null;
+
+//     public nodeDatalinkColumn: DexihDatalinkColumn = null;
+
+//     public runTime: {
+//         inputColumns: DexihDatalinkColumn[];
+//         outputColumns: DexihDatalinkColumn[];
+//         transformColumns: DexihDatalinkColumn[];
+//     }
+
+//     constructor() {
+//         super();
+//         this.dexihDatalinkTransformItems = new Array<DexihDatalinkTransformItem>();
+//     }
+// }
+
+// export class DexihFileFormat extends EntityBase {
+//     public key = 0;
+//     public name: string = null;
+//     public description: string = null;
+//     public isDefault = false;
+//     public allowComments = false;
+//     public bufferSize: number;
+//     public comment: string;
+//     public delimiter: string;
+//     public detectColumnCountChanges = false;
+//     public hasHeaderRecord = true;
+//     public ignoreHeaderWhiteSpace = false;
+//     public ignoreReadingExceptions = false;
+//     public ignoreQuotes = false;
+//     public quote: string;
+//     public quoteAllFields = false;
+//     public quoteNoFields = false;
+//     public skipEmptyRecords = false;
+//     public skipHeaderRows = 0;
+//     public trimFields = false;
+//     public trimHeaders = false;
+//     public willThrowOnMissingField = false;
+//     public setWhiteSpaceCellsToNull = false;
+
+//     public matchHeaderRecord = true;
+
+//     public isModified: boolean;
+
+//     constructor() {
+//         super();
+//         this.bufferSize = 2048;
+//         this.delimiter = ',';
+//         this.quote = '"';
+//         this.comment = '#';
+//     }
+// }
+// export class DexihFunctionParameter extends EntityBase {
+//     public key = 0;
+//     public datalinkTransformItemKey = 0;
+//     public name: string = null;
+//     public position = 0;
+//     public direction: eParameterDirection = null;
+//     public isGeneric = false;
+//     public dataType: eTypeCode = eTypeCode.String
+//     public rank = 0;
+//     public arrayParameters: DexihFunctionArrayParameter[] = [];
+//     public value: string = null;
+
+//     public datalinkColumn: DexihDatalinkColumn;
+//     public entityStatus: EntityStatus;
+
+//     // runtime structures are not exported when saving.
+//     public runTime: {functionParameter: FunctionParameter} = {functionParameter: null};
+// }
+
+// export class DexihFunctionArrayParameter extends EntityBase {
+//     public key = 0;
+//     public name: string = null;
+//     public position = 0;
+//     public direction: eParameterDirection = null;
+//     public isGeneric = false;
+//     public dataType: eTypeCode = eTypeCode.String;
+//     public rank = 0;
+//     public value: string = null;
+//     public datalinkColumn: DexihDatalinkColumn = null;
+
+//     // runtime structures are not exported when saving.
+//     public runTime: {functionParameter: FunctionParameter} = {functionParameter: null};
+// }
+
+// export class DexihHub extends EntityBase {
+//     public hubKey = 0;
+//     public name: string;
+//     public description: string;
+//     public encryptionKey: string;
+//     public maxOwners: number;
+//     public maxUsers: number;
+//     public maxReaders: number;
+//     public maxDatalinks: number;
+//     public maxDatajobs: number;
+//     public dailyTransactionQuota: number;
+//     public expiryDate: Date;
+
+//     public hubPermission: ePermission;
+
+//     public dexihHubVariables: Array<DexihHubVariable>;
+//     public dexihConnections: Array<DexihConnection>;
+//     public dexihTables: Array<DexihTable>;
+//     public dexihDatajobs: Array<DexihDatajob>;
+//     public dexihDatalinks: Array<DexihDatalink>;
+//     public dexihColumnValidations: Array<DexihColumnValidation>;
+//     public dexihFileFormats: Array<DexihFileFormat>;
+//     public dexihCustomFunctions: Array<DexihCustomFunction>;
+//     public dexihRemoteAgentHubs: Array<DexihRemoteAgentHub>;
+//     public dexihDatalinkTests: Array<DexihDatalinkTest>;
+//     public dexihViews: Array<DexihView>;
+//     public dexihApis: Array<DexihApi>;
+//     public dexihDashboards: Array<DexihDashboard>;
+
+//     constructor(hubKey: number, name: string) {
+//         super();
+//         this.hubKey = hubKey;
+//         this.name = name;
+//         this.isValid = true;
+
+//         this.dexihHubVariables = new Array<DexihHubVariable>();
+//         this.dexihConnections = new Array<DexihConnection>();
+//         this.dexihTables = new Array<DexihTable>();
+//         this.dexihDatajobs = new Array<DexihDatajob>();
+//         this.dexihDatalinks = new Array<DexihDatalink>();
+//         this.dexihColumnValidations = new Array<DexihColumnValidation>();
+//         this.dexihFileFormats = new Array<DexihFileFormat>();
+//         this.dexihCustomFunctions = new Array<DexihCustomFunction>();
+//         this.dexihDatalinkTests = new Array<DexihDatalinkTest>();
+//         this.dexihViews = new Array<DexihView>();
+//         this.dexihApis = new Array<DexihApi>();
+//         this.dexihDashboards = new Array<DexihDashboard>();
+//     }
+// }
+
+// export class DexihHubVariable extends EntityBase {
+//     public key = 0;
+//     public name: string = null;
+//     public value: string = null;
+//     public valueRaw: string = null;
+//     public isEncrypted = false;
+//     public isEnvironmentVariable = false;
+// }
+
+// export class DexihRemoteAgentHub extends EntityBase {
+//     public remoteAgentHubKey = 0;
+//     public remoteAgentKey = 0;
+//     public hubKey = 0;
+//     public isAuthorized = false;
+//     public isDefault = false;
+//     public allowExternalConnect = false;
+
+//     public isSelected = false;
+// }
+
+// export class DexihTableColumn extends DexihColumnBase {
+//     public key = 0;
+//     public tableKey = 0;
+//     public columnValidationKey: number = null;
+
+//     public parentColumnKey: number = null;
+//     public childColumns: DexihTableColumn[] = null;
+
+
+//     public mappingStatus: eMappingStatus;
+//     public entityStatus: EntityStatus;
+
+//     super() {
+//         this.securityFlag = eSecurityFlag.None;
+//         this.isUnique = false;
+//         this.isMandatory = false;
+//         this.isIncrementalUpdate = false;
+//         this.allowDbNull = false;
+//         this.dataType = eTypeCode.String;
+//         this.deltaType = eDeltaType.NaturalKey;
+//     }
+// }
+
+// export class DexihTable extends EntityBase {
+//     public key = 0;
+//     public connectionKey = 0;
+//     public name = '';
+//     public schema: string = null;
+//     public sourceConnectionName: string = null;
+//     public baseTableName: string = null;
+//     public logicalName = '';
+//     public tableType: eTableType = eTableType.Table;
+//     public description: string = null;
+//     public useQuery = false;
+//     public queryString = null;
+//     public fileFormatKey: number = null;
+//     public rejectedTableName: string = null;
+//     public sortColumnKeys: Array<number> = [];
+//     public autoManageFiles = true;
+//     public useCustomFilePaths = false;
+//     public fileRootPath: string = null;
+//     public fileIncomingPath: string = null;
+//     public fileOutgoingPath: string = null;
+//     public fileProcessedPath: string = null;
+//     public fileRejectedPath: string = null;
+//     public fileMatchPattern: string = null;
+//     public restfulUri: string = null;
+//     public formatType: eFormatType = eFormatType.Text;
+//     public maxImportLevels = 1;
+//     public rowPath: string = null;
+//     public isVersioned = false;
+//     public isShared = false;
+//     public fileSample: string = null;
+
+//     public fileFormat: DexihFileFormat = null;
+
+//     public entityStatus: EntityStatus;
+
+//     public dexihTableColumns: Array<DexihTableColumn>;
+
+//     public previousStatus: BehaviorSubject<TransformWriterResult>;
+//     public currentStatus: BehaviorSubject<TransformWriterResult>;
+
+//     constructor() {
+//         super();
+//         this['entityStatus'] = new EntityStatus();
+//         this['entityStatus'].isBusy = false;
+//         this['entityStatus'].lastStatus = eStatus.None;
+
+//         this.key = 0;
+//         this.dexihTableColumns = new Array<DexihTableColumn>();
+//     }
+// }
+
+// export class DexihTrigger extends EntityBase {
+//     public key = 0;
+//     public datajobKey = 0;
+//     public startDate: string = null;
+//     public intervalTime: string = null;
+//     public daysOfWeek: Array<eDayOfWeek> = [
+//         eDayOfWeek.Sunday,
+//         eDayOfWeek.Monday,
+//         eDayOfWeek.Tuesday,
+//         eDayOfWeek.Wednesday,
+//         eDayOfWeek.Thursday,
+//         eDayOfWeek.Friday,
+//         eDayOfWeek.Saturday,
+//     ];
+//     public startTime: string = null;
+//     public endTime: string = null;
+//     public cronExpression: string = null;
+//     public maxRecurs: number = null;
+// }
+
+// export class DexihView extends EntityBase {
+//     public key = 0;
+//     public name: string = null;
+//     public description: string = null;
+//     public viewType: eViewType = eViewType.Table;
+//     public sourceType: eSourceType = eSourceType.Table;
+//     public sourceTableKey = 0;
+//     public sourceDatalinkKey = 0;
+//     public inputValues: InputColumn[] = null;
+//     public selectQuery = new SelectQuery();
+//     public chartConfig = new ChartConfig();
+//     public autoRefresh = true;
+//     public isShared = false;
+
+//     public parameters: Array<DexihInputParameter> = [];
+// }
+
+// export class ChartConfig {
+//     public labelColumn: string = null;
+//     public seriesColumn: string = null;
+//     public seriesColumns = [];
+//     public xColumn: string = null;
+//     public yColumn: string = null;
+//     public minColumn: string = null;
+//     public maxColumn: string = null;
+//     public radiusColumn: string = null;
+//     public longitudeColumn: string = null;
+//     public latitudeColumn: string = null;
+
+//     public chartType = eChartType.BarVertical;
+//     public colorScheme = 'natural';
+//     public showGradient = false;
+//     public showXAxis = true;
+//     public showYAxis = true;
+//     public showLegend = false;
+//     public legendPosition: 'right' | 'below'  = 'below';
+//     public showXAxisLabel = true;
+//     public showYAxisLabel = true;
+//     public showGridLines = false;
+//     public xAxisLabel: string = null;
+//     public yAxisLabel: string = null;
+//     public xScaleMax = null;
+//     public xScaleMin = null;
+//     public yScaleMax = null;
+//     public yScaleMin = null;
+//     public autoScale = true;
+
+//     // pie charts only
+//     public explodeSlices = false;
+//     public doughnut = false;
+// }
+
+// export enum eSourceType {
+//     Table = <any>'Table',
+//     Datalink = <any>'Datalink'
+// }
+
+// export enum eViewType {
+//     Table = <any>'Table',
+//     Chart = <any>'Chart'
+// }
+
+// export enum eTableType {
+//     Table = <any>'Table',
+//     View = <any>'View',
+//     Query = <any>'Query',
+// }
+
+// export enum eTestTableAction {
+//     None = <any>'None',
+//     Truncate = <any>'Truncate',
+//     DropCreate = <any>'DropCreate',
+//     TruncateCopy = <any>'TruncateCopy',
+//     DropCreateCopy = <any>'DropCreateCop',
+// }
+
+// export enum eStatus {
+//     None = <any>'None',
+//     Pending = <any>'Pending',
+//     Error = <any>'Error',
+//     Imported = <any>'Imported',
+//     Added = <any>'Added',
+//     Updated = <any>'Updated',
+//     Deleted = <any>'Deleted',
+// }
+
+// export enum eSortDirection {
+//     Ascending = <any>'Ascending',
+//     Descending = <any>'Descending',
+// }
+
 export const sortDirections = [
-    {key: eSortDirection.Ascending, name: 'Ascending'},
-    {key: eSortDirection.Descending, name: 'Descending'},
+    {key: eDirection.Ascending, name: 'Ascending'},
+    {key: eDirection.Descending, name: 'Descending'},
 ];
 
-export enum eSeriesGrain {
-    Second = <any>'Second',
-    Minute = <any>'Minute',
-    Hour = <any>'Hour',
-    Day = <any>'Day',
-    Week = <any>'Week',
-    Month = <any>'Month',
-    Year = <any>'Year',
-    Number = <any>'Number',
-}
+// export enum eSeriesGrain {
+//     Second = <any>'Second',
+//     Minute = <any>'Minute',
+//     Hour = <any>'Hour',
+//     Day = <any>'Day',
+//     Week = <any>'Week',
+//     Month = <any>'Month',
+//     Year = <any>'Year',
+//     Number = <any>'Number',
+// }
 export const seriesGrains = [
     {key: eSeriesGrain.Second, name: 'Second'},
     {key: eSeriesGrain.Minute, name: 'Minute'},
@@ -1904,65 +1905,66 @@ export const seriesGrains = [
     {key: eSeriesGrain.Year, name: 'Year'},
     {key: eSeriesGrain.Number, name: 'Number'},
 ];
-export enum eDeltaType {
-    SourceSurrogateKey = <any>'SourceSurrogateKey',
-    ValidFromDate = <any>'ValidFromDate',
-    ValidToDate = <any>'ValidToDate',
-    CreateDate = <any>'CreateDate',
-    UpdateDate = <any>'UpdateDate',
-    CreateAuditKey = <any>'CreateAuditKey',
-    UpdateAuditKey = <any>'UpdateAuditKey',
-    IsCurrentField = <any>'IsCurrentField',
-    Version = <any>'Version',
-    NaturalKey = <any>'NaturalKey',
-    TrackingField = <any>'TrackingField',
-    NonTrackingField = <any>'NonTrackingField',
-    IgnoreField = <any>'IgnoreField',
-    ValidationStatus = <any>'ValidationStatus',
-    RejectedReason = <any>'RejectedReason',
-    FileName = <any>'FileName',
-    FileRowNumber = <any>'FileRowNumber',
-    AzureRowKey = <any>'AzureRowKey', // special column type for Azure Storage Tables.
-    AzurePartitionKey = <any>'AzurePartitionKey', // special column type for Azure Storage Tables.
-    TimeStamp = <any>'TimeStamp', // column that is generated by the database.
-    DbAutoIncrement = <any>'DbAutoIncement',
-    AutoIncrement = <any>'AutoIncrement', // column is auto incremented by the information hub function.
-    ResponseSuccess = <any>'ResponseSuccess', // webservice/function response aws successful
-    ResponseData = <any>'ResponseData',  // raw data from a webservice/function response
-    ResponseStatus = <any>'ResponseStatus',  // status code from a webservice/function call
-    ResponseSegment = <any>'ResponseSegment',  // status code from a webservice/function call
-    Error = <any>'Error',  // status code from a webservice/function call
-    Url = <any>'Url',  // status code from a webservice/function call
-}
 
-export enum eChartType {
-    BarVertical = <any>'BarVertical',
-    BarHorizontal = <any>'BarHorizontal',
-    BarVertical2D = <any>'BarVertical2D',
-    BarHorizontal2D = <any>'BarHorizontal2D',
-    BarVerticalStacked = <any>'BarVerticalStacked',
-    BarHorizontalStacked = <any>'BarHorizontalStacked',
-    BarVerticalNormalized = <any>'BarVerticalNormalized',
-    BarHorizontalNormalized = <any>'BarHorizontalNormalized',
-    Pie = <any>'Pie',
-    PieAdvanced = <any>'PieAdvanced',
-    PieGrid = <any>'PieGrid',
-    Line = <any>'Line',
-    Area = <any>'Area',
-    Polar = <any>'Polar',
-    AreaStacked = <any>'AreaStacked',
-    AreaNormalized = <any>'AreaNormalized',
-    Scatter = <any>'Scatter',
-    Error = <any>'Error',
-    Bubble = <any>'Bubble',
-    ForceDirected = <any>'ForceDirected',
-    HeatMap = <any>'HeatMap',
-    TreeMap = <any>'TreeMap',
-    Cards = <any>'Cards',
-    Gauge = <any>'Gauge',
-    LinearGauge = <any>'LinearGauge',
-    Map = <any>'Map'
-}
+// export enum eDeltaType {
+//     SourceSurrogateKey = <any>'SourceSurrogateKey',
+//     ValidFromDate = <any>'ValidFromDate',
+//     ValidToDate = <any>'ValidToDate',
+//     CreateDate = <any>'CreateDate',
+//     UpdateDate = <any>'UpdateDate',
+//     CreateAuditKey = <any>'CreateAuditKey',
+//     UpdateAuditKey = <any>'UpdateAuditKey',
+//     IsCurrentField = <any>'IsCurrentField',
+//     Version = <any>'Version',
+//     NaturalKey = <any>'NaturalKey',
+//     TrackingField = <any>'TrackingField',
+//     NonTrackingField = <any>'NonTrackingField',
+//     IgnoreField = <any>'IgnoreField',
+//     ValidationStatus = <any>'ValidationStatus',
+//     RejectedReason = <any>'RejectedReason',
+//     FileName = <any>'FileName',
+//     FileRowNumber = <any>'FileRowNumber',
+//     AzureRowKey = <any>'AzureRowKey', // special column type for Azure Storage Tables.
+//     AzurePartitionKey = <any>'AzurePartitionKey', // special column type for Azure Storage Tables.
+//     TimeStamp = <any>'TimeStamp', // column that is generated by the database.
+//     DbAutoIncrement = <any>'DbAutoIncement',
+//     AutoIncrement = <any>'AutoIncrement', // column is auto incremented by the information hub function.
+//     ResponseSuccess = <any>'ResponseSuccess', // webservice/function response aws successful
+//     ResponseData = <any>'ResponseData',  // raw data from a webservice/function response
+//     ResponseStatus = <any>'ResponseStatus',  // status code from a webservice/function call
+//     ResponseSegment = <any>'ResponseSegment',  // status code from a webservice/function call
+//     Error = <any>'Error',  // status code from a webservice/function call
+//     Url = <any>'Url',  // status code from a webservice/function call
+// }
+
+// export enum eChartType {
+//     BarVertical = <any>'BarVertical',
+//     BarHorizontal = <any>'BarHorizontal',
+//     BarVertical2D = <any>'BarVertical2D',
+//     BarHorizontal2D = <any>'BarHorizontal2D',
+//     BarVerticalStacked = <any>'BarVerticalStacked',
+//     BarHorizontalStacked = <any>'BarHorizontalStacked',
+//     BarVerticalNormalized = <any>'BarVerticalNormalized',
+//     BarHorizontalNormalized = <any>'BarHorizontalNormalized',
+//     Pie = <any>'Pie',
+//     PieAdvanced = <any>'PieAdvanced',
+//     PieGrid = <any>'PieGrid',
+//     Line = <any>'Line',
+//     Area = <any>'Area',
+//     Polar = <any>'Polar',
+//     AreaStacked = <any>'AreaStacked',
+//     AreaNormalized = <any>'AreaNormalized',
+//     Scatter = <any>'Scatter',
+//     Error = <any>'Error',
+//     Bubble = <any>'Bubble',
+//     ForceDirected = <any>'ForceDirected',
+//     HeatMap = <any>'HeatMap',
+//     TreeMap = <any>'TreeMap',
+//     Cards = <any>'Cards',
+//     Gauge = <any>'Gauge',
+//     LinearGauge = <any>'LinearGauge',
+//     Map = <any>'Map'
+// }
 
 export const deltaTypes = [
     {key: eDeltaType.SourceSurrogateKey, name: 'Source Surrogate Key', dataType: eTypeCode.Int64, defaultName: 'SourceSk', unique: true},
@@ -1996,18 +1998,18 @@ export const deltaTypes = [
         dataType: eTypeCode.String, defaultName: 'ValidationStatus', unique: true},
 ]
 
-export enum eSecurityFlag {
-    None = <any>'None',
-    FastEncrypt = <any>'FastEncrypt',
-    FastDecrypt = <any>'FastDecrypt',
-    FastEncrypted = <any>'FastEncrypted',
-    StrongEncrypt = <any>'StrongEncrypt',
-    StrongDecrypt = <any>'StrongDecrypt',
-    StrongEncrypted = <any>'StrongEncrypted',
-    OneWayHash = <any>'OneWayHash',
-    OneWayHashed = <any>'OneWayHashed',
-    Hide = <any>'Hide'
-}
+// export enum eSecurityFlag {
+//     None = <any>'None',
+//     FastEncrypt = <any>'FastEncrypt',
+//     FastDecrypt = <any>'FastDecrypt',
+//     FastEncrypted = <any>'FastEncrypted',
+//     StrongEncrypt = <any>'StrongEncrypt',
+//     StrongDecrypt = <any>'StrongDecrypt',
+//     StrongEncrypted = <any>'StrongEncrypted',
+//     OneWayHash = <any>'OneWayHash',
+//     OneWayHashed = <any>'OneWayHashed',
+//     Hide = <any>'Hide'
+// }
 
 export const securityFlags = [
     {key: eSecurityFlag.None, name: 'Not Secured'},
@@ -2022,46 +2024,46 @@ export const securityFlags = [
     {key: eSecurityFlag.Hide, name: 'Hide the field'},
 ]
 
-export enum eDatalinkType {
-    General = <any>'General',
-    Stage = <any>'Stage',
-    Validate = <any>'Validate',
-    Transform = <any>'Transform',
-    Deliver = <any>'Deliver',
-    Publish = <any>'Publish',
-    Share = <any>'Share',
-    Query = <any>'Query'
-}
+// export enum eDatalinkType {
+//     General = <any>'General',
+//     Stage = <any>'Stage',
+//     Validate = <any>'Validate',
+//     Transform = <any>'Transform',
+//     Deliver = <any>'Deliver',
+//     Publish = <any>'Publish',
+//     Share = <any>'Share',
+//     Query = <any>'Query'
+// }
 
-export const datalinkTypes = [
-    {key: eDatalinkType.General, name: 'Non-categorized general purpose datalink'},
-    {key: eDatalinkType.Stage, name: 'Staging - loads data into a central/interim database'},
-    {key: eDatalinkType.Validate, name: 'Validate - performs data validation and cleaning'},
-    {key: eDatalinkType.Transform, name: 'Transform - reshapes, aggregates data'},
-    {key: eDatalinkType.Deliver, name: 'Deliver - prepares data for delivering to a system/database'},
-    {key: eDatalinkType.Publish, name: 'Publish - sends data to a target system/database'},
-    {key: eDatalinkType.Share, name: 'Share - datalink designed to be shared with other users'},
-    {key: eDatalinkType.Query, name: 'Query - datalink query used for data extracts or as a source for other datalinks'},
-]
+// export const datalinkTypes = [
+//     {key: eDatalinkType.General, name: 'General', description: 'Non-categorized general purpose datalink'},
+//     {key: eDatalinkType.Stage, name: 'Staging', description: 'Staging - loads data into a central/interim database'},
+//     {key: eDatalinkType.Validate, name: 'Validate', description: 'Validate - performs data validation and cleaning'},
+//     {key: eDatalinkType.Transform, name: 'Transform', description: 'Transform - reshapes, aggregates data'},
+//     {key: eDatalinkType.Deliver, name: 'Deliver', description: 'Deliver - prepares data for delivering to a system/database'},
+//     {key: eDatalinkType.Publish, name: 'Publish', description: 'Publish - sends data to a target system/database'},
+//     {key: eDatalinkType.Share, name: 'Share', description: 'Share - datalink designed to be shared with other users'},
+//     {key: eDatalinkType.Query, name: 'Query', description: 'Query - datalink query used for data extracts or as a source for other datalinks'},
+// ]
 
-export enum eLoadStrategy {
-    Bulk = <any>'Bulk',
-    Transaction = <any>'Transaction',
-}
+// export enum eTransformWriterMethod {
+//     Bulk = <any>'Bulk',
+//     Transaction = <any>'Transaction',
+// }
 
 export const loadStrategies = [
-    {key: eLoadStrategy.Bulk, description: 'Bulk load - target tables loaded in parallel as fast as possible'},
-    {key: eLoadStrategy.Transaction, description: 'Transaction - Target tables loaded in transactions to ensure data integrity'},
+    {key: eTransformWriterMethod.Bulk, description: 'Bulk load - target tables loaded in parallel as fast as possible'},
+    {key: eTransformWriterMethod.Transaction, description: 'Transaction - Target tables loaded in transactions to ensure data integrity'},
 ]
 
-export enum eUpdateStrategy {
-    Reload = <any>'Reload',
-    Append = <any>'Append',
-    AppendUpdate = <any>'AppendUpdate',
-    AppendUpdateDelete = <any>'AppendUpdateDelete',
-    AppendUpdatePreserve = <any>'AppendUpdatePreserve',
-    AppendUpdateDeletePreserve = <any>'AppendUpdateDeletePreserve',
-}
+// export enum eUpdateStrategy {
+//     Reload = <any>'Reload',
+//     Append = <any>'Append',
+//     AppendUpdate = <any>'AppendUpdate',
+//     AppendUpdateDelete = <any>'AppendUpdateDelete',
+//     AppendUpdatePreserve = <any>'AppendUpdatePreserve',
+//     AppendUpdateDeletePreserve = <any>'AppendUpdateDeletePreserve',
+// }
 
 export const updateStrategies = [
     {key: eUpdateStrategy.Reload, description: 'Truncate target table and reload'},
@@ -2072,12 +2074,12 @@ export const updateStrategies = [
     {key: eUpdateStrategy.AppendUpdateDeletePreserve, description: 'Append new rows, check for updates and deletes, and preserve changes'},
 ]
 
-export enum eConnectionPurpose {
-    Source = <any>'Source',
-    Managed = <any>'Managed',
-    Target = <any>'Target',
-    Internal = <any>'Internal'
-}
+// export enum eConnectionPurpose {
+//     Source = <any>'Source',
+//     Managed = <any>'Managed',
+//     Target = <any>'Target',
+//     Internal = <any>'Internal'
+// }
 
 export const connectionPurposes = [
     {key: eConnectionPurpose.Source, name: 'Source Database/Service'},
@@ -2085,151 +2087,157 @@ export const connectionPurposes = [
     {key: eConnectionPurpose.Target, name: 'Target Database'},
 ]
 
-export enum eParameterDirection {
-    Input = <any>'Input',
-    Output = <any>'Output',
-    Join = <any>'Join',
-    ResultInput = <any>'ResultInput',
-    ResultOutput = <any>'ResultOutput',
-    ReturnValue = <any>'ReturnValue',
-    ResultReturnValue = <any>'ResultReturnValue',
-};
+// export enum eParameterDirection {
+//     Input = <any>'Input',
+//     Output = <any>'Output',
+//     Join = <any>'Join',
+//     ResultInput = <any>'ResultInput',
+//     ResultOutput = <any>'ResultOutput',
+//     ReturnValue = <any>'ReturnValue',
+//     ResultReturnValue = <any>'ResultReturnValue',
+// };
 
-export enum eDatalinkTransformItemType {
-    BuiltInFunction = <any>'BuiltInFunction',
-    CustomFunction = <any>'CustomFunction',
-    ColumnPair = <any>'ColumnPair',
-    JoinPair = <any>'JoinPair',
-    FilterPair = <any>'FilterPair',
-    AggregatePair = <any>'AggregatePair',
-    Series = <any>'Series',
-    Sort = <any>'Sort',
-    Column = <any>'Column',
-    JoinNode = <any>'JoinNode',
-    GroupNode = <any>'GroupNode',
-    Node = <any>'Node',
-    UnGroup = <any>'UnGroup'
-}
+// export enum eTransformItemType {
+//     BuiltInFunction = <any>'BuiltInFunction',
+//     CustomFunction = <any>'CustomFunction',
+//     ColumnPair = <any>'ColumnPair',
+//     JoinPair = <any>'JoinPair',
+//     FilterPair = <any>'FilterPair',
+//     AggregatePair = <any>'AggregatePair',
+//     Series = <any>'Series',
+//     Sort = <any>'Sort',
+//     Column = <any>'Column',
+//     JoinNode = <any>'JoinNode',
+//     GroupNode = <any>'GroupNode',
+//     Node = <any>'Node',
+//     UnGroup = <any>'UnGroup'
+// }
 
 export const transformItemTypes = [
     // tslint:disable-next-line:max-line-length
-    {key: eDatalinkTransformItemType.BuiltInFunction, name: 'Built in Function', useSource: false, useTarget: false, useJoin: false, useFilter: false},
+    {key: eTransformItemType.BuiltInFunction, name: 'Built in Function', useSource: false, useTarget: false, useJoin: false, useFilter: false},
     // tslint:disable-next-line:max-line-length
-    {key: eDatalinkTransformItemType.CustomFunction, name: 'Custom Function', useSource: false, useTarget: false, useJoin: false, useFilter: false},
-    {key: eDatalinkTransformItemType.ColumnPair, name: 'Mapping', useSource: true, useTarget: true, useJoin: false, useFilter: false},
-    {key: eDatalinkTransformItemType.JoinPair, name: 'Join', useSource: true, useTarget: false, useJoin: true, useFilter: false},
-    {key: eDatalinkTransformItemType.FilterPair, name: 'Filter', useSource: true, useTarget: true, useJoin: false, useFilter: true},
-    {key: eDatalinkTransformItemType.AggregatePair, name: 'Aggregate', useSource: true, useTarget: true, useJoin: false, useFilter: false},
-    {key: eDatalinkTransformItemType.Series, name: 'Series', useSource: true, useTarget: false, useJoin: false, useFilter: false},
-    {key: eDatalinkTransformItemType.Sort, name: 'Sort By', useSource: true, useTarget: false, useJoin: false, useFilter: false},
-    {key: eDatalinkTransformItemType.Column, name: 'Group By', useSource: true, useTarget: false, useJoin: false, useFilter: false},
-    {key: eDatalinkTransformItemType.JoinNode, name: 'Join Node', useSource: true, useTarget: false, useJoin: true, useFilter: false},
-    {key: eDatalinkTransformItemType.GroupNode, name: 'Group Node', useSource: true, useTarget: false, useJoin: false, useFilter: false},
-    {key: eDatalinkTransformItemType.Node, name: 'Node', useSource: true, useTarget: false, useJoin: false, useFilter: false},
-    {key: eDatalinkTransformItemType.UnGroup, name: 'Un-Group', useSource: true, useTarget: false, useJoin: false, useFilter: false},
+    {key: eTransformItemType.CustomFunction, name: 'Custom Function', useSource: false, useTarget: false, useJoin: false, useFilter: false},
+    {key: eTransformItemType.ColumnPair, name: 'Mapping', useSource: true, useTarget: true, useJoin: false, useFilter: false},
+    {key: eTransformItemType.JoinPair, name: 'Join', useSource: true, useTarget: false, useJoin: true, useFilter: false},
+    {key: eTransformItemType.FilterPair, name: 'Filter', useSource: true, useTarget: true, useJoin: false, useFilter: true},
+    {key: eTransformItemType.AggregatePair, name: 'Aggregate', useSource: true, useTarget: true, useJoin: false, useFilter: false},
+    {key: eTransformItemType.Series, name: 'Series', useSource: true, useTarget: false, useJoin: false, useFilter: false},
+    {key: eTransformItemType.Sort, name: 'Sort By', useSource: true, useTarget: false, useJoin: false, useFilter: false},
+    {key: eTransformItemType.Column, name: 'Group By', useSource: true, useTarget: false, useJoin: false, useFilter: false},
+    {key: eTransformItemType.JoinNode, name: 'Join Node', useSource: true, useTarget: false, useJoin: true, useFilter: false},
+    {key: eTransformItemType.GroupNode, name: 'Group Node', useSource: true, useTarget: false, useJoin: false, useFilter: false},
+    {key: eTransformItemType.Node, name: 'Node', useSource: true, useTarget: false, useJoin: false, useFilter: false},
+    {key: eTransformItemType.UnGroup, name: 'Un-Group', useSource: true, useTarget: false, useJoin: false, useFilter: false},
 ]
 
-export enum eTransformFunctionType {
-    Condition = <any>'Condition',
-    Mapping = <any>'Mapping',
-    Aggregate = <any>'Aggregate',
-    Series = <any>'Series',
-    Rows = <any>'Rows',
-    Profile = <any>'Profile',
-    Validation = <any>'Validation',
-    JoinCondition = <any>'JoinCondition',
-    Sort = <any>'Sort'
-}
+// export enum eTransformFunctionType {
+//     Condition = <any>'Condition',
+//     Mapping = <any>'Mapping',
+//     Aggregate = <any>'Aggregate',
+//     Series = <any>'Series',
+//     Rows = <any>'Rows',
+//     Profile = <any>'Profile',
+//     Validation = <any>'Validation',
+//     JoinCondition = <any>'JoinCondition',
+//     Sort = <any>'Sort'
+// }
 
 export const transformFunctionTypes = [
-    {key: eTransformFunctionType.Condition, name: 'Condition Function'},
-    {key: eTransformFunctionType.Mapping, name: 'Mapping Function'},
-    {key: eTransformFunctionType.Aggregate, name: 'Aggregate Function'},
-    {key: eTransformFunctionType.Rows, name: 'Row Generating Function'},
-    {key: eTransformFunctionType.Profile, name: 'Profile Function'},
-    {key: eTransformFunctionType.Validation, name: 'Validation Function'},
-    {key: eTransformFunctionType.JoinCondition, name: 'Join Condition'},
-    {key: eTransformFunctionType.Sort, name: 'Sort Function'},
+    {key: eFunctionType.Condition, name: 'Condition Function'},
+    {key: eFunctionType.Map, name: 'Mapping Function'},
+    {key: eFunctionType.Aggregate, name: 'Aggregate Function'},
+    {key: eFunctionType.Rows, name: 'Row Generating Function'},
+    {key: eFunctionType.Profile, name: 'Profile Function'},
+    {key: eFunctionType.Validate, name: 'Validation Function'},
+    {key: eFunctionType.JoinCondition, name: 'Join Condition'},
+    {key: eFunctionType.Sort, name: 'Sort Function'},
 ]
 
-export enum eOnError {
-    Abend = <any>'Abend',
-    Null = <any>'Null',
-    Ignore = <any>'Ignore'
-}
-export const onErrorActions = [
-    {key: eOnError.Abend, name: 'Abend Datalink'},
-    {key: eOnError.Null, name: 'Return Null'},
-    {key: eOnError.Ignore, name: 'Discard the row'},
-];
+// export enum eOnError {
+//     Abend = <any>'Abend',
+//     Null = <any>'Null',
+//     Ignore = <any>'Ignore'
+// }
+// export const onErrorActions = [
+//     {key: eOnError.Abend, name: 'Abend Datalink'},
+//     {key: eOnError.Null, name: 'Return Null'},
+//     {key: eOnError.Ignore, name: 'Discard the row'},
+// ];
 
-export enum eOnNull {
-    Execute = <any>'Execute',
-    Abend = <any>'Abend',
-    Null = <any>'Null',
-    Ignore = <any>'Ignore'
-}
-export const onNullActions = [
-    {key: eOnNull.Execute, name: 'Execute Function'},
-    {key: eOnNull.Abend, name: 'Abend Datalink'},
-    {key: eOnNull.Null, name: 'Return Null'},
-    {key: eOnNull.Ignore, name: 'Discard the row'},
-];
+// export enum eOnNull {
+//     Execute = <any>'Execute',
+//     Abend = <any>'Abend',
+//     Null = <any>'Null',
+//     Ignore = <any>'Ignore'
+// }
 
-export enum eParseErrorAction {
-    RaiseEvent = <any>'RaiseEvent',
-    AdvanceToNextLine = <any>'AdvanceToNextLine',
-    ThrowException = <any>'ThrowException',
-}
-export const ParseErrorActions = [
-    {key: eParseErrorAction.ThrowException, name: 'Abend Datalink'},
-    {key: eParseErrorAction.RaiseEvent, name: 'Reject Record'},
-    {key: eParseErrorAction.AdvanceToNextLine, name: 'Continue next line'},
-];
+// export const onNullActions = [
+//     {key: eOnNull.Execute, name: 'Execute Function'},
+//     {key: eOnNull.Abend, name: 'Abend Datalink'},
+//     {key: eOnNull.Null, name: 'Return Null'},
+//     {key: eOnNull.Ignore, name: 'Discard the row'},
+// ];
 
-export enum eMissingFieldAction {
-    ParseError = <any>'ParseError',
-    ReplaceByEmpty = <any>'ReplaceByEmpty',
-    ReplaceByNull = <any>'ReplaceByNull',
-};
-export const  MissingFieldActions = [
-    {key: eMissingFieldAction.ParseError, name: 'Raise parse error'},
-    {key: eParseErrorAction.RaiseEvent, name: 'Reject Record'},
-    {key: eParseErrorAction.AdvanceToNextLine, name: 'Continue next line'},
-];
+// export enum eParseErrorAction {
+//     RaiseEvent = <any>'RaiseEvent',
+//     AdvanceToNextLine = <any>'AdvanceToNextLine',
+//     ThrowException = <any>'ThrowException',
+// }
 
-export enum eValueTrimmingOptions {
-    None = <any>'None',
-    UnquotedOnly = <any>'UnquotedOnly',
-    QuotedOnly = <any>'QuotedOnly',
-    All = <any>'All',
-};
-export const  ValueTrimmingOptions = [
-    {key: eValueTrimmingOptions.All, name: 'All'},
-    {key: eValueTrimmingOptions.None, name: 'None'},
-    {key: eValueTrimmingOptions.QuotedOnly, name: 'Quoted Fields Only'},
-    {key: eValueTrimmingOptions.UnquotedOnly, name: 'Unquoted Fields Only'},
-];
+// export const ParseErrorActions = [
+//     {key: eParseErrorAction.ThrowException, name: 'Abend Datalink'},
+//     {key: eParseErrorAction.RaiseEvent, name: 'Reject Record'},
+//     {key: eParseErrorAction.AdvanceToNextLine, name: 'Continue next line'},
+// ];
 
-export enum eFailAction {
-    Continue = <any>'Continue',
-    ContinueNonDependent = <any>'ContinueNonDependent',
-    Abend = <any>'Abend',
-}
+// export enum eMissingFieldAction {
+//     ParseError = <any>'ParseError',
+//     ReplaceByEmpty = <any>'ReplaceByEmpty',
+//     ReplaceByNull = <any>'ReplaceByNull',
+// };
+
+// export const  MissingFieldActions = [
+//     {key: eMissingFieldAction.ParseError, name: 'Raise parse error'},
+//     {key: eParseErrorAction.RaiseEvent, name: 'Reject Record'},
+//     {key: eParseErrorAction.AdvanceToNextLine, name: 'Continue next line'},
+// ];
+
+// export enum eValueTrimmingOptions {
+//     None = <any>'None',
+//     UnquotedOnly = <any>'UnquotedOnly',
+//     QuotedOnly = <any>'QuotedOnly',
+//     All = <any>'All',
+// };
+
+// export const  ValueTrimmingOptions = [
+//     {key: eValueTrimmingOptions.All, name: 'All'},
+//     {key: eValueTrimmingOptions.None, name: 'None'},
+//     {key: eValueTrimmingOptions.QuotedOnly, name: 'Quoted Fields Only'},
+//     {key: eValueTrimmingOptions.UnquotedOnly, name: 'Unquoted Fields Only'},
+// ];
+
+// export enum eFailAction {
+//     Continue = <any>'Continue',
+//     ContinueNonDependent = <any>'ContinueNonDependent',
+//     Abend = <any>'Abend',
+// }
+
 export const FailActions = [
     {key: eFailAction.Abend, name: 'Abend the job'},
     {key: eFailAction.Continue, name: 'Continue to next datalink'},
     {key: eFailAction.ContinueNonDependent, name: 'Continue with non-dependent datalinks'},
 ];
 
-export enum eInvalidAction {
-    Pass= <any>'Pass',
-    Clean = <any>'Clean',
-    RejectClean= <any>'RejectClean',
-    Reject = <any>'Reject',
-    Discard= <any>'Discard',
-    Abend= <any>'Abend',
-}
+// export enum eInvalidAction {
+//     Pass= <any>'Pass',
+//     Clean = <any>'Clean',
+//     RejectClean= <any>'RejectClean',
+//     Reject = <any>'Reject',
+//     Discard= <any>'Discard',
+//     Abend= <any>'Abend',
+// }
+
 export const InvalidActions = [
     {key: eInvalidAction.Pass, name: 'Pass Record'},
     {key: eInvalidAction.Clean, name: 'Clean Record'},
@@ -2239,11 +2247,11 @@ export const InvalidActions = [
     {key: eInvalidAction.Abend, name: 'Abend Datalink'},
 ];
 
-export enum eFunctionCaching {
-    NoCache= <any>'NoCache',
-    EnableCache= <any>'EnableCache',
-    CallOnce= <any>'CallOnce',
-}
+// export enum eFunctionCaching {
+//     NoCache= <any>'NoCache',
+//     EnableCache= <any>'EnableCache',
+//     CallOnce= <any>'CallOnce',
+// }
 
 export const FunctionCache = [
     {key: eFunctionCaching.NoCache, name: 'No cache (function called for each row)'},
@@ -2251,14 +2259,15 @@ export const FunctionCache = [
     {key: eFunctionCaching.CallOnce, name: 'Call Once (function called for first row only)'},
 ]
 
-export enum eCleanAction {
-    DefaultValue = <any>'DefaultValue',
-    Truncate = <any>'Truncate',
-    Blank = <any>'Blank',
-    Null = <any>'Null',
-    OriginalValue = <any>'OriginalValue',
-    CleanValue = <any>'CleanValue',
-}
+// export enum eCleanAction {
+//     DefaultValue = <any>'DefaultValue',
+//     Truncate = <any>'Truncate',
+//     Blank = <any>'Blank',
+//     Null = <any>'Null',
+//     OriginalValue = <any>'OriginalValue',
+//     CleanValue = <any>'CleanValue',
+// }
+
 export const CleanActions = [
     {key: eCleanAction.DefaultValue, name: 'Use columns default value'},
     {key: eCleanAction.Truncate, name: 'Truncate (if string) to the maximum allowed length'},
@@ -2267,12 +2276,14 @@ export const CleanActions = [
     {key: eCleanAction.OriginalValue, name: 'Use the original value'},
     {key: eCleanAction.CleanValue, name: 'Use the specified clean value'},
 ];
-export enum eDuplicateStrategy {
-    Abend = <any>'Abend',
-    First = <any>'First',
-    Last = <any>'Last',
-    All = <any>'All',
-}
+
+// export enum eDuplicateStrategy {
+//     Abend = <any>'Abend',
+//     First = <any>'First',
+//     Last = <any>'Last',
+//     All = <any>'All',
+// }
+
 export const duplicateStrategies = [
     {key: eDuplicateStrategy.Abend, name: 'Abend Datalink'},
     {key: eDuplicateStrategy.First, name: 'First Match'},
@@ -2280,110 +2291,111 @@ export const duplicateStrategies = [
     {key: eDuplicateStrategy.All, name: 'All matches (duplicate rows)'},
 ];
 
-export enum eSourceType {
-    Datalink = <any>'Datalink',
-    Table = <any>'Table',
-    Rows = <any>'Rows',
-}
+// export enum eSourceType {
+//     Datalink = <any>'Datalink',
+//     Table = <any>'Table',
+//     Rows = <any>'Rows',
+// }
+
 export const sourceTypes = [
     {key: eSourceType.Datalink, name: 'Datalink'},
     {key: eSourceType.Table, name: 'Table'},
     {key: eSourceType.Rows, name: 'Static Row Set'},
 ];
 
-export class Table {
-    public name: string;
-    public baseTableName: string;
-    public logicalName: string;
-    public description: string;
-    public sourceConnectionName: string;
+// export class Table {
+//     public name: string;
+//     public baseTableName: string;
+//     public logicalName: string;
+//     public description: string;
+//     public sourceConnectionName: string;
 
-    public columns: Array<TableColumn>;
+//     public columns: Array<TableColumn>;
 
-    public data: Array<Array<any>>;
-}
+//     public data: Array<Array<any>>;
+// }
 
-export class TableColumn {
-    public name: string;
-    public logicalName: string;
-    public columnGroup: string;
-    public description: string;
-    public dataType: eTypeCode;
-    public maxLength: number;
-    public isUnicode: boolean;
-    public precision: number;
-    public scale: number;
-    public allowDbNull: boolean;
-    public deltaType: eDeltaType;
-    public defaultValue: string;
-    public isUnique: boolean;
-    public isMandatory: boolean;
-    public isIncrementalUpdate: boolean;
-    public securityFlag: eSecurityFlag;
-}
+// export class TableColumn {
+//     public name: string;
+//     public logicalName: string;
+//     public columnGroup: string;
+//     public description: string;
+//     public dataType: eTypeCode;
+//     public maxLength: number;
+//     public isUnicode: boolean;
+//     public precision: number;
+//     public scale: number;
+//     public allowDbNull: boolean;
+//     public deltaType: eDeltaType;
+//     public defaultValue: string;
+//     public isUnique: boolean;
+//     public isMandatory: boolean;
+//     public isIncrementalUpdate: boolean;
+//     public securityFlag: eSecurityFlag;
+// }
 
-export class TransformPerformance {
-    public transformName: string;
-    public action: string;
-    public rows: number;
-    public seconds: number;
-    public children: TransformPerformance[];
-}
+// export class TransformPerformance {
+//     public transformName: string;
+//     public action: string;
+//     public rows: number;
+//     public seconds: number;
+//     public children: TransformPerformance[];
+// }
 
-export class TransformWriterResult {
-        public auditKey: number;
-        public auditType: string;
-        public referenceKey: number;
-        public parentAuditKey: number;
-        public referenceName: string;
-        public sourceTableKey: number;
-        public sourceTableName: string;
-        public targetTableKey: number;
-        public targetTableName: string;
+// export class TransformWriterResult {
+//         public auditKey: number;
+//         public auditType: string;
+//         public referenceKey: number;
+//         public parentAuditKey: number;
+//         public referenceName: string;
+//         public sourceTableKey: number;
+//         public sourceTableName: string;
+//         public targetTableKey: number;
+//         public targetTableName: string;
 
-        public hubKey: string;
-        public auditConnectionKey: number;
+//         public hubKey: string;
+//         public auditConnectionKey: number;
 
-        public lastRowTotal: number;
-        public lastMaxIncrementalValue: any;
+//         public lastRowTotal: number;
+//         public lastMaxIncrementalValue: any;
 
-        public rowsTotal: number;
-        public rowsCreated: number;
-        public rowsUpdated: number;
-        public rowsDeleted: number;
-        public rowsPreserved: number;
-        public rowsIgnored: number;
-        public rowsRejected: number;
-        public rowsFiltered: number;
-        public rowsSorted: number;
-        public rowsReadPrimary: number;
-        public rowsReadReference: number;
+//         public rowsTotal: number;
+//         public rowsCreated: number;
+//         public rowsUpdated: number;
+//         public rowsDeleted: number;
+//         public rowsPreserved: number;
+//         public rowsIgnored: number;
+//         public rowsRejected: number;
+//         public rowsFiltered: number;
+//         public rowsSorted: number;
+//         public rowsReadPrimary: number;
+//         public rowsReadReference: number;
 
-        public readTicks: number;
-        public writeTicks: number;
-        public processingTicks: number;
+//         public readTicks: number;
+//         public writeTicks: number;
+//         public processingTicks: number;
 
-        public maxIncrementalValue: any;
-        public maxSurrogateKey: number;
+//         public maxIncrementalValue: any;
+//         public maxSurrogateKey: number;
 
-        public message: string;
-        public exceptionDetails: string;
-        public initializeTime: string;
-        public scheduledTime: string;
-        public startTime: string;
-        public endTime: string;
-        public lastUpdateTime: string;
-        public triggerMethod: eTriggerMethod;
-        public triggerInfo: string;
-        public performanceSummary: TransformPerformance[];
+//         public message: string;
+//         public exceptionDetails: string;
+//         public initializeTime: string;
+//         public scheduledTime: string;
+//         public startTime: string;
+//         public endTime: string;
+//         public lastUpdateTime: string;
+//         public triggerMethod: eTriggerMethod;
+//         public triggerInfo: string;
+//         public performanceSummary: TransformPerformance[];
 
-        public runStatus: eRunStatus;
+//         public runStatus: eRunStatus;
 
-        public profileTableName: string;
-        public rejectTableName: string;
+//         public profileTableName: string;
+//         public rejectTableName: string;
 
-        public childResults: TransformWriterResult[];
-}
+//         public childResults: TransformWriterResult[];
+// }
 
 
 export class FileProperties {
@@ -2407,48 +2419,48 @@ export class FileProperties {
 //     public apis = eImportAction.Replace;
 // }
 
-export class ImportAction {
-    public objectType: eSharedObjectType;
-    public action: eImportAction;
-}
+// export class ImportAction {
+//     public objectType: eSharedObjectType;
+//     public action: eImportAction;
+// }
 
-export class Import {
-    public hubKey: number;
-    public hubVariables: ImportObject<DexihHubVariable>[];
-    public datajobs: ImportObject<DexihDatajob>[];
-    public datalinks: ImportObject<DexihDatalink>[];
-    public connections: ImportObject<DexihConnection>[];
-    public tables: ImportObject<DexihTable>[];
-    public fileFormats: ImportObject<DexihFileFormat>[];
-    public columnValidations: ImportObject<DexihColumnValidation>[];
-    public customFunctions: ImportObject<DexihCustomFunction>[];
-    public remoteAgentHubs: ImportObject<DexihRemoteAgentHub>[];
-    public datalinkTests: ImportObject<DexihDatalinkTest>[];
-    public views: ImportObject<DexihView>[];
-    public apis: ImportObject<DexihApi>[];
-    public warnings: string[] = [];
-    public dashboards: ImportObject<DexihDashboard>[];
-}
+// export class Import {
+//     public hubKey: number;
+//     public hubVariables: ImportObject<DexihHubVariable>[];
+//     public datajobs: ImportObject<DexihDatajob>[];
+//     public datalinks: ImportObject<DexihDatalink>[];
+//     public connections: ImportObject<DexihConnection>[];
+//     public tables: ImportObject<DexihTable>[];
+//     public fileFormats: ImportObject<DexihFileFormat>[];
+//     public columnValidations: ImportObject<DexihColumnValidation>[];
+//     public customFunctions: ImportObject<DexihCustomFunction>[];
+//     public remoteAgentHubs: ImportObject<DexihRemoteAgentHub>[];
+//     public datalinkTests: ImportObject<DexihDatalinkTest>[];
+//     public views: ImportObject<DexihView>[];
+//     public apis: ImportObject<DexihApi>[];
+//     public warnings: string[] = [];
+//     public dashboards: ImportObject<DexihDashboard>[];
+// }
 
-export class ImportObject<T> {
-    public item: T;
-    public importAction: eImportAction;
-}
+// export class ImportObject<T> {
+//     public item: T;
+//     public importAction: eImportAction;
+// }
 
-export enum eRunStatus {
-    Initialised = <any>'Initialised',
-    Scheduled = <any>'Scheduled',
-    Started = <any>'Started',
-    Running = <any>'Running',
-    RunningErrors = <any>'RunningErrors',
-    Finished = <any>'Finished',
-    FinishedErrors = <any>'FinishedErrors',
-    Abended = <any>'Abended',
-    Cancelled = <any>'Cancelled',
-    NotRunning = <any>'NotRunning',
-    Passed = <any>'Passed',
-    Failed= <any>'Failed'
-}
+// export enum eRunStatus {
+//     Initialised = <any>'Initialised',
+//     Scheduled = <any>'Scheduled',
+//     Started = <any>'Started',
+//     Running = <any>'Running',
+//     RunningErrors = <any>'RunningErrors',
+//     Finished = <any>'Finished',
+//     FinishedErrors = <any>'FinishedErrors',
+//     Abended = <any>'Abended',
+//     Cancelled = <any>'Cancelled',
+//     NotRunning = <any>'NotRunning',
+//     Passed = <any>'Passed',
+//     Failed= <any>'Failed'
+// }
 
 export const runStatus = [
     {key: eRunStatus.Initialised, name: 'Initialized'},
@@ -2466,54 +2478,54 @@ export const runStatus = [
 ];
 
 
-export enum eTriggerMethod {
-    NotTriggered = <any>'NotTriggered',
-    Manual = <any>'Manual',
-    Schedule = <any>'Schedule',
-    FileWatcher = <any>'FileWatcher',
-    External = <any>'External',
-    Datajob = <any>'Datajob',
-}
+// export enum eTriggerMethod {
+//     NotTriggered = <any>'NotTriggered',
+//     Manual = <any>'Manual',
+//     Schedule = <any>'Schedule',
+//     FileWatcher = <any>'FileWatcher',
+//     External = <any>'External',
+//     Datajob = <any>'Datajob',
+// }
 
-// Summary:
-//     Specifies the day of the week.
-export enum eDayOfWeek {
-    Sunday = <any>'Sunday',
-    Monday = <any>'Monday',
-    Tuesday  = <any>'Tuesday',
-    Wednesday = <any>'Wednesday',
-    Thursday  = <any>'Thursday',
-    Friday = <any>'Friday',
-    Saturday  = <any>'Saturday'
-}
+// // Summary:
+// //     Specifies the day of the week.
+// export enum eDayOfWeek {
+//     Sunday = <any>'Sunday',
+//     Monday = <any>'Monday',
+//     Tuesday  = <any>'Tuesday',
+//     Wednesday = <any>'Wednesday',
+//     Thursday  = <any>'Thursday',
+//     Friday = <any>'Friday',
+//     Saturday  = <any>'Saturday'
+// }
 
-export enum eFlatFilePath {
-    Incoming = <any>'incoming',
-    Processed = <any>'processed',
-    Rejected = <any>'rejected',
-    Outgoing = <any>'outgoing',
-    None = <any>'none',
-}
+// export enum eFlatFilePath {
+//     Incoming = <any>'incoming',
+//     Processed = <any>'processed',
+//     Rejected = <any>'rejected',
+//     Outgoing = <any>'outgoing',
+//     None = <any>'none',
+// }
 
-export enum eFormatType {
-    Xml = <any>'Xml',
-    Json = <any>'Json',
-    Text = <any>'Text',
-}
+// export enum eFormatType {
+//     Xml = <any>'Xml',
+//     Json = <any>'Json',
+//     Text = <any>'Text',
+// }
 
 export const formatTypes  = [
-    {key: eFormatType.Xml, name: 'Xml'},
-    {key: eFormatType.Json, name: 'Json'},
-    {key: eFormatType.Text, name: 'Text'},
+    {key: eTypeCode.Xml, name: 'Xml'},
+    {key: eTypeCode.Json, name: 'Json'},
+    {key: eTypeCode.Text, name: 'Text'},
 ];
 
-export enum eImportAction {
-    Replace = <any>'Replace',
-    New = <any>'New',
-    Leave = <any>'Leave',
-    Skip = <any>'Skip',
-    Delete =  <any>'Delete'
-}
+// export enum eImportAction {
+//     Replace = <any>'Replace',
+//     New = <any>'New',
+//     Leave = <any>'Leave',
+//     Skip = <any>'Skip',
+//     Delete =  <any>'Delete'
+// }
 
 export const importActions  = [
     {key: eImportAction.Replace, name: 'Replace existing'},
@@ -2522,21 +2534,21 @@ export const importActions  = [
     {key: eImportAction.Skip, name: 'Skip item(s)'},
 ];
 
-export class InputColumn {
-    public datalinkKey = 0;
-    public datalinkName: string = null;
-    public name: string = null;
-    public logicalName: string = null;
-    public dataType: eTypeCode;
-    public value: string = null;
-    public rank = 0;
+// export class InputColumn {
+//     public datalinkKey = 0;
+//     public datalinkName: string = null;
+//     public name: string = null;
+//     public logicalName: string = null;
+//     public dataType: eTypeCode;
+//     public value: string = null;
+//     public rank = 0;
 
-    constructor() {
-        this.dataType = eTypeCode.String;
-    }
-}
+//     constructor() {
+//         this.dataType = eTypeCode.String;
+//     }
+// }
 
-// mapping status enum.  Note, order is important.
+// // mapping status enum.  Note, order is important.
 export enum eMappingStatus {
     MappedToNothing, // indicates a column has been mapped but is not in the target.
     Mapped, // indicates a column has been mapped from source-target
@@ -2591,17 +2603,17 @@ export class ConnectionTables extends DexihConnection {
     public dexihTables: DexihTable[];
 }
 
-export class TransformProperties {
-    public name: string;
-    public transformName: string;
-    public transformType: eTransformType;
-    public selectQuery: SelectQuery;
-    public properties: {[key: string]: number};
-    public primaryProperties: TransformProperties;
-    public referenceProperties: TransformProperties;
-    public rows: number;
-    public seconds: number;
-}
+// export class TransformProperties {
+//     public name: string;
+//     public transformName: string;
+//     public transformType: eTransformType;
+//     public selectQuery: SelectQuery;
+//     public properties: {[key: string]: number};
+//     public primaryProperties: TransformProperties;
+//     public referenceProperties: TransformProperties;
+//     public rows: number;
+//     public seconds: number;
+// }
 
 export class PreviewResults {
     public name: string;
@@ -2622,7 +2634,7 @@ export class DashboardUrl {
     public downloadUrl: string;
 }
 
-export class InputParameter {
-    public name: string = null;
-    public value = null;
-}
+// export class InputParameter {
+//     public name: string = null;
+//     public value = null;
+// }

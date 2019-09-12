@@ -1,9 +1,9 @@
 import { Component, Input, Output, ViewChild, OnInit, OnDestroy, EventEmitter } from '@angular/core';
-import { DexihFunctionParameter, DexihTable, DexihTableColumn, DexihDatalinkColumn } from '../../../hub.models';
 import { FormGroup } from '@angular/forms';
 import { HubService } from '../../../hub.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { TypeFunctions, TypeCodes, eBasicType } from '../../../hub.remote.models';
+import { DexihTableColumn, DexihDatalinkColumn } from '../../../../shared/shared.models';
 
 @Component({
 

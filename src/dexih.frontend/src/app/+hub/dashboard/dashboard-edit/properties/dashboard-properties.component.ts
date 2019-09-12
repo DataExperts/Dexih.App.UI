@@ -2,10 +2,11 @@ import { Component, OnInit, OnDestroy, Input, ViewChild } from '@angular/core';
 import { HubService } from '../../..';
 import { HubFormsService } from '../../../hub.forms.service';
 import { FormArray, FormGroup, AbstractControl } from '@angular/forms';
-import { eViewType, eSourceType, InputColumn, HubCache } from '../../../hub.models';
+import { HubCache } from '../../../hub.models';
 import { Subscription } from 'rxjs';
 import { GridsterConfig, GridType, CompactType, DisplayGrid, GridsterItem, GridsterItemComponentInterface,
   GridsterComponent} from 'angular-gridster2';
+import { eViewType, eSourceType, InputColumn } from '../../../../shared/shared.models';
 
 @Component({
     selector: 'dashboard-properties',

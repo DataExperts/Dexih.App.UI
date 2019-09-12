@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HubCache, eConnectionPurpose, eCacheStatus, sharedObjectProperties } from '../hub.models';
+import { HubCache, sharedObjectProperties } from '../hub.models';
 import { HubService } from '../hub.service';
 import { Subscription, combineLatest} from 'rxjs';
-import { DexihActiveAgent, logoSmallUrl } from '../../+auth/auth.models';
+import { logoSmallUrl } from '../../+auth/auth.models';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { DexihActiveAgent, eConnectionPurpose } from '../../shared/shared.models';
 
 @Component({
   selector: 'dexih-summary',

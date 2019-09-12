@@ -3,9 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription ,  Observable, combineLatest} from 'rxjs';
 
 import { AuthService } from '../../../+auth/auth.service';
-import { DexihConnection, DexihDatajob, DexihDatalink, HubCache, DexihHub } from '../../hub.models';
+import {HubCache } from '../../hub.models';
 import { HubService } from '../../hub.service';
-import { RemoteLibraries, ConnectionReference, eConnectionCategory } from '../../hub.remote.models';
+import { DexihConnection, ConnectionReference, eConnectionCategory, DexihHub, DexihDatalink, DexihDatajob, RemoteLibraries } from '../../../shared/shared.models';
 
 @Component({
     selector: 'actions-connection-button',
@@ -23,7 +23,6 @@ export class ActionsConnectionButtonComponent implements OnInit, OnDestroy, OnCh
     private _subscription: Subscription;
 
     public hubCache: HubCache;
-    public remoteLibrary: RemoteLibraries;
 
     public hubPath: string;
 
@@ -39,12 +38,10 @@ export class ActionsConnectionButtonComponent implements OnInit, OnDestroy, OnCh
     ngOnInit() {
         this._subscription = combineLatest(
             this.hubService.getHubCacheObservable(),
-            this.hubService.getRemoteLibrariesObservable()
         ).subscribe(result => {
             this.hubCache = result[0];
-            this.remoteLibrary = result[1];
 
-            if (!this.hubCache.isLoaded() || !this.remoteLibrary ) {
+            if (!this.hubCache.isLoaded()) {
                 return;
             }
 
@@ -56,7 +53,7 @@ export class ActionsConnectionButtonComponent implements OnInit, OnDestroy, OnCh
             let cache = this.hubCache;
 
             if (this.connections && this.connections.length === 1) {
-                this.connectionReference = this.remoteLibrary.GetConnectionReference(this.connections[0]);
+                this.connectionReference = this.hubService.GetConnectionReference(this.connections[0]);
 
                 // search any columns for an occurrence of the columnValidation.
                 cache.hub.dexihDatajobs.forEach(datajob => {
@@ -117,14 +114,14 @@ export class ActionsConnectionButtonComponent implements OnInit, OnDestroy, OnCh
     }
 
     ngOnChanges() {
-        if (this.connections && this.connections.length === 1 && this.remoteLibrary ) {
-            this.connectionReference = this.remoteLibrary.GetConnectionReference(this.connections[0]);
+        if (this.connections && this.connections.length === 1 ) {
+            this.connectionReference = this.hubService.GetConnectionReference(this.connections[0]);
         }
     }
 
     export() {
         const cache = this.hubCache;
-        const hub = new DexihHub(this.hubCache.hub.hubKey, '');
+        const hub = this.hubService.createHub(this.hubCache.hub.hubKey, '');
         this.connections.forEach(connection => { this.hubCache.cacheAddConnection(connection.key, hub); });
 
         let filename = this.datalinks.length === 1 ? 'Connection - ' + this.connections[0].name + '.json' : 'connections.json';

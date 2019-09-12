@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DexihDashboard } from '../../hub.models';
+import { DexihDashboard } from '../../../shared/shared.models';
 
 @Component({
     selector: 'dashboard-view',

@@ -1,15 +1,13 @@
 import { Component, OnInit, OnDestroy, ViewChild, HostListener } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import {
-  DexihColumnValidation, HubCache, DexihConnection,
-  eInvalidAction, eCleanAction, InvalidActions, CleanActions, eCacheStatus
-} from '../../hub.models';
+import { HubCache, InvalidActions, CleanActions, eCacheStatus } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { AuthService } from '../../../+auth/auth.service';
 import { Observable ,  Subscription, combineLatest} from 'rxjs';
 import { Location } from '@angular/common';
 import { HubFormsService } from '../../hub.forms.service';
-import { TypeCodes, eTypeCode } from '../../hub.remote.models';
+import { TypeCodes } from '../../hub.remote.models';
+import { eInvalidAction, eCleanAction, eTypeCode, DexihConnection, DexihColumnValidation } from '../../../shared/shared.models';
 
 @Component({
 

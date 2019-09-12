@@ -1,7 +1,5 @@
 import { Component, Input, Output, ViewChild, OnInit, OnDestroy, EventEmitter } from '@angular/core';
-import { DexihCustomFunctionParameter } from '../../hub.models';
 import { FormGroup } from '@angular/forms';
-import { Subscription, combineLatest} from 'rxjs';
 import { TypeFunctions, TypeCodes, eBasicType } from '../../hub.remote.models';
 
 @Component({

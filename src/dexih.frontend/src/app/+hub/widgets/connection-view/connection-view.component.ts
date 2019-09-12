@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DexihConnection } from '../../hub.models';
 import { HubService } from '../../hub.service';
-import { ConnectionReference } from '../../hub.remote.models';
+import { DexihConnection, ConnectionReference } from '../../../shared/shared.models';
 
 @Component({
     selector: 'connection-view',
@@ -20,7 +19,7 @@ export class ConnectionViewComponent implements OnInit {
     ngOnInit() {
         this.hubService.getRemoteLibrariesObservable().subscribe(remoteLibraries => {
             if ( remoteLibraries ) {
-                this.connectionReference = remoteLibraries.GetConnectionReference(this.connection);
+                this.connectionReference = this.hubService.GetConnectionReference(this.connection);
             }
         })
     }

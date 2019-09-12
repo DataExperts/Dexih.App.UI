@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TransformProperties } from '../../hub.models';
+import { TransformProperties } from '../../../shared/shared.models';
 
 @Component({
     selector: 'transform-properties',

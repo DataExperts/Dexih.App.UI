@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DexihConnection, DexihTable } from '../../hub.models';
+import { DexihConnection, DexihTable } from '../../../shared/shared.models';
 
 @Component({
     selector: 'table-view',

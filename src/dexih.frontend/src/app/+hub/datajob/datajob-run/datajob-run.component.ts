@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HubCache, DexihDatajob, InputParameter } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { AuthService } from '../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { DexihDatajob, InputParameter } from '../../../shared/shared.models';
+import { HubCache } from '../../hub.models';
 
 @Component({
 

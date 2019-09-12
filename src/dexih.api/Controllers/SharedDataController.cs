@@ -8,7 +8,9 @@ using dexih.api.Services.Operations;
 using dexih.api.Services.Remote;
 using dexih.functions;
 using dexih.operations;
+using dexih.repository;
 using Dexih.Utils.ManagedTasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -66,7 +68,7 @@ namespace dexih.api.Controllers
             
             string data;
 
-            if (previewData.ObjectType == SharedData.EObjectType.Table)
+            if (previewData.ObjectType == EDataObjectType.Table)
             {
                 data = await _remoteAgents.PreviewTable(previewData.RemoteAgentId, previewData.HubKey, previewData.ObjectKey, previewData.SelectQuery, previewData.InputColumns, previewData.Parameters, false, previewData.DownloadUrl, repositoryManager, cancellationToken);
             }
@@ -119,6 +121,8 @@ namespace dexih.api.Controllers
             
             return managedTasks;
         }
+
+
 
     }
 }

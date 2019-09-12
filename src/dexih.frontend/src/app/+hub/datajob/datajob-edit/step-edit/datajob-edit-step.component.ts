@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DexihDatalinkStep, DexihDatalinkDependency, HubCache, InputColumn,
-        DexihDatalinkStepColumn, DexihInputParameter} from '../../../hub.models';
 import { HubService } from '../../../hub.service';
 import { Observable, BehaviorSubject, Subscription, combineLatest} from 'rxjs';
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { AuthService } from '../../../../+auth/auth.service';
 import { HubFormsService } from '../../../hub.forms.service';
+import { HubCache, DexihInputParameter } from '../../../hub.models';
+import { InputColumn, DexihDatalinkStep, DexihDatalinkStepColumn, DexihDatalinkDependency } from '../../../../shared/shared.models';
 
 @Component({
     selector: 'datajob-edit-step',

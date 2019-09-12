@@ -1,13 +1,11 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  DexihFileFormat, HubCache,
-  ParseErrorActions, MissingFieldActions, ValueTrimmingOptions, eCacheStatus
-} from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { Observable, Subscription, combineLatest} from 'rxjs';
 import { HubFormsService } from '../../hub.forms.service';
 import { AuthService } from '../../../+auth/auth.service';
+import { HubCache, eCacheStatus } from '../../hub.models';
+import { DexihFileFormat } from '../../../shared/shared.models';
 
 @Component({
   selector: 'dexih-fileFormat-edit-form',
@@ -21,9 +19,9 @@ export class FileFormatEditComponent implements OnInit, OnDestroy {
   public action: string; // new or edit
   public pageTitle: string;
 
-  public parseErrorActions = ParseErrorActions;
-  public missingFieldActions = MissingFieldActions;
-  public valueTrimmingOptions = ValueTrimmingOptions;
+  // public parseErrorActions = ParseErrorActions;
+  // public missingFieldActions = MissingFieldActions;
+  // public valueTrimmingOptions = ValueTrimmingOptions;
 
   private _subscription: Subscription;
   private _formChangeSubscription: Subscription;

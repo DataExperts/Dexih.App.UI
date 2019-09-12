@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DexihDatalink, DexihDatalinkStep, HubCache, eSharedObjectType } from '../../../hub.models';
 import { HubService } from '../../../hub.service';
 import { Observable, BehaviorSubject, Subscription, combineLatest} from 'rxjs';
 import { AuthService } from '../../../../+auth/auth.service';
 import { HubFormsService } from '../../../hub.forms.service';
 import { FormGroup, FormArray } from '@angular/forms';
+import { HubCache } from '../../../hub.models';
+import { DexihDatalink, eSharedObjectType, DexihDatalinkStep } from '../../../../shared/shared.models';
 
 @Component({
     selector: 'datajob-add-steps',
@@ -78,8 +79,8 @@ export class DatajobAddStepsComponent implements OnInit, OnDestroy {
                 newDatalinks = this.hubCache.hub.dexihDatalinks;
                 newDatalinks.forEach(d => {
                     let sourceTable = this.hubCache.getTable(d.sourceDatalinkTable.sourceTableKey);
-                    d.sourceTableName = sourceTable ? sourceTable.name : 'Error, not found';
-                    d.targetTableName = d.dexihDatalinkTargets.map(target => {
+                    d['sourceTableName'] = sourceTable ? sourceTable.name : 'Error, not found';
+                    d['targetTableName'] = d.dexihDatalinkTargets.map(target => {
                         let table = this.hubCache.getTable(target.tableKey);
                         if (table) {
                             return table.name;

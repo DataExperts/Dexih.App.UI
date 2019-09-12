@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
-import { SelectQuery, SelectColumn, Sort, eAggregate, eDirection, eCompare, compare, Filter } from '../../../+hub/hub.query.models';
-import { DexihTableColumn, TableColumn, DexihColumnBase, InputColumn, DexihInputParameter } from '../../../+hub/hub.models';
-import { eTypeCode, TypeCodes } from '../../../+hub/hub.remote.models';
+import { SelectQuery, DexihTableColumn, InputColumn, TableColumn, SelectColumn, Sort, eDirection, Filter, eTypeCode } from '../../shared.models';
+import { DexihInputParameter } from '../../../+hub/hub.models';
+import { compare } from '../../../+hub/hub.query.models';
+import { TypeCodes } from '../../../+hub/hub.remote.models';
 
 @Component({
     selector: 'query-builder',
@@ -10,14 +11,14 @@ import { eTypeCode, TypeCodes } from '../../../+hub/hub.remote.models';
 
 export class QueryBuilderComponent implements OnInit, OnChanges {
     @Input() selectQuery: SelectQuery;
-    @Input() columns: DexihTableColumn[];
+    @Input() columns: TableColumn[];
     @Input() inputColumns: InputColumn[];
     @Input() parameters: DexihInputParameter[];
     @Output() hasChanged = new EventEmitter();
 
     tableColumns: TableColumn[];
     selectColumns: SelectColumn[];
-    sortColumns: Sort[];
+    sortColumns: any[];
 
     compare = compare;
 

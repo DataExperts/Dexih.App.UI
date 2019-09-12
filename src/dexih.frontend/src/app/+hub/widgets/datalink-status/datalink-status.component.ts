@@ -1,12 +1,11 @@
 import { Component, Input, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { HubCache, DexihDatalink, TransformWriterResult, eRunStatus, runStatus } from '../../hub.models';
 import { HubService } from '../../hub.service';
-import { Observable, BehaviorSubject, Subscription, combineLatest} from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ManagedTask, eTaskStatus } from '../../../+auth/auth.models';
+import { Subscription} from 'rxjs';
+import { eTaskStatus } from '../../../+auth/auth.models';
 import { Functions } from '../../../shared/utils/functions';
-import { HubsService } from '../../../+hubs/hubs.service';
 import { AuthService } from '../../../+auth/auth.service';
+import { TransformWriterResult, eRunStatus } from '../../../shared/shared.models';
+import { runStatus } from '../../hub.models';
 
 @Component({
     selector: 'datalink-status',

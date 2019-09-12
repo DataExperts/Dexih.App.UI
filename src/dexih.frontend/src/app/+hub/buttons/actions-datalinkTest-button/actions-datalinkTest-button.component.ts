@@ -1,10 +1,11 @@
 import { Component, Input, OnDestroy, OnInit, OnChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription, combineLatest} from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import { AuthService } from '../../../+auth/auth.service';
-import { HubCache, DexihHub, DexihDatalinkTest, DexihDatalink } from '../../hub.models';
+import { HubCache } from '../../hub.models';
 import { HubService } from '../../hub.service';
+import { DexihDatalinkTest, DexihDatalink } from '../../../shared/shared.models';
 
 @Component({
     selector: 'actions-datalinkTest-button',
@@ -76,7 +77,7 @@ export class ActionsDatalinkTestButtonComponent implements OnInit, OnDestroy, On
 
     export() {
         const cache = this.hubCache;
-        const hub = new DexihHub(this.hubCache.hub.hubKey, '');
+        const hub = this.hubService.createHub(this.hubCache.hub.hubKey, '');
         this.datalinkTests.forEach(datalinkTest => { this.hubCache.cacheAddDatalink(datalinkTest.key, hub); });
 
         let filename = this.datalinkTests.length === 1 ? 'DatalinkTest - ' + this.datalinkTests[0].name + '.json' : 'datalinkTests.json';

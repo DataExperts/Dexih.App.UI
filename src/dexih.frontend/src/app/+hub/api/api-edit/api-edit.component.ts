@@ -1,16 +1,13 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HubCache, eCacheStatus, eSourceType, DexihDatalink,
-  InputColumn, DexihColumnBase, DexihApi,
-  ConnectionTables,
-  eViewSource} from '../../hub.models';
+import { HubCache, eCacheStatus, ConnectionTables } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { Subscription, combineLatest, merge} from 'rxjs';
 import { HubFormsService } from '../../hub.forms.service';
 import { AuthService } from '../../../+auth/auth.service';
-import { DownloadObject, SelectQuery } from '../../hub.query.models';
 import { InputOutputColumns } from '../../hub.lineage.models';
 import { CancelToken } from '../../../+auth/auth.models';
+import { eSourceType, DexihDatalink, InputColumn, DexihColumnBase, SelectQuery, DexihApi, DownloadObject, eDataObjectType } from '../../../shared/shared.models';
 
 @Component({
   selector: 'dexih-api-edit-form',
@@ -226,11 +223,11 @@ export class ApiEditComponent implements OnInit, OnDestroy {
     let downloadObject = new DownloadObject();
     if (api.sourceType === eSourceType.Table) {
       downloadObject.objectKey = api.sourceDatalinkKey;
-      downloadObject.objectType = eViewSource.Datalink;
+      downloadObject.objectType = eDataObjectType.Datalink;
     }
     if (api.sourceType === eSourceType.Table) {
       downloadObject.objectKey = api.sourceTableKey;
-      downloadObject.objectType = eViewSource.Table;
+      downloadObject.objectType = eDataObjectType.Table;
     }
 
     downloadObject.query = this.selectQuery;

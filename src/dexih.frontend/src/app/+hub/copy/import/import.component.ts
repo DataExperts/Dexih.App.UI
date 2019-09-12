@@ -2,8 +2,9 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/co
 import { AuthService } from '../../../+auth/auth.service';
 import { HubService } from '../../hub.service';
 import { Observable, BehaviorSubject, Subscription} from 'rxjs';
-import { eImportAction, importActions, HubCache, Import, sharedObjectProperties, ImportAction } from '../../hub.models';
+import { importActions, HubCache, sharedObjectProperties } from '../../hub.models';
 import { HubFormsService } from '../../hub.forms.service';
+import { Import, eImportAction, ImportAction } from '../../../shared/shared.models';
 
 @Component({
     selector: 'import',

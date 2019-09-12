@@ -3,7 +3,8 @@ import { HubsService } from '../../hubs.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
 import { AuthService } from '../../../+auth/auth.service';
-import { DexihHubAuth, DexihActiveAgent, DexihRemoteAgent, CancelToken } from '../../../+auth/auth.models';
+import { DexihActiveAgent, DexihRemoteAgent } from '../../../shared/shared.models';
+import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
   selector: 'remoteAgents',
@@ -115,14 +116,14 @@ export class RemoteAgentsComponent implements OnInit, OnDestroy {
 
                 this.authService.get(url, 'Testing remote agent connectivity...', false, cancelToken).then(result => {
                     if (result && result.Status === 'Alive') {
-                        downloadUrl.testStatus = 'success';
+                        downloadUrl['testStatus'] = 'success';
                     } else {
-                        downloadUrl.testStatus = 'error';
-                        downloadUrl.testMessage = 'Server returned invalid message.';
+                        downloadUrl['testStatus'] = 'error';
+                        downloadUrl['testMessage'] = 'Server returned invalid message.';
                     }
                 }).catch(reason => {
-                    downloadUrl.testStatus = 'error';
-                    downloadUrl.testMessage = reason.message;
+                    downloadUrl['testStatus'] = 'error';
+                    downloadUrl['testMessage'] = reason.message;
                 });
             })
         });

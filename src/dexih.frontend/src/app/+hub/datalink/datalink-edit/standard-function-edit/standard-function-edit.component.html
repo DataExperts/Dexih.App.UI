@@ -39,7 +39,7 @@
 					</section>
 				</ng-template>
 				<div *ngIf="selectedFunction || selectedCustomFunction" class="form-row">
-					<section *ngIf="transformFunctionType != eTransformFunctionType.validation && transformFunctionType != eTransformFunctionType.condition"
+					<section *ngIf="transformFunctionType != eFunctionType.Validate && transformFunctionType != eFunctionType.condition"
 					 class="col col-xs-4" [ngStyle]="{'z-index': 405, 'position': 'relative'}">
 						<form-select label="Action when null" formControlName="onNull" [items]="onNullActions" itemKey="key" itemName="name"
 						 iconClass="fa fa-database" [enableFilter]="false">
@@ -51,7 +51,7 @@
 						</form-select>
 					</section>
 					
-					<div *ngIf="transformFunctionType == eTransformFunctionType.Validation" class="col col-xs-4" [ngStyle]="{'z-index': 402, 'position': 'relative'}">
+					<div *ngIf="transformFunctionType == eFunctionType.Validate" class="col col-xs-4" [ngStyle]="{'z-index': 402, 'position': 'relative'}">
 						<form-select label="Action when false" formControlName="invalidAction" [items]="invalidActions" itemKey="key"
 						 itemName="name" [enableFilter]="false" iconClass="fa fa-database">
 						</form-select>

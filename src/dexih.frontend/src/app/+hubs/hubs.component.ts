@@ -1,9 +1,6 @@
 import { Component, OnInit, ViewChild, OnDestroy, HostListener } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 import { HubsService } from './hubs.service';
-import { HubService } from '../+hub/hub.service';
-import { Subscription, combineLatest} from 'rxjs';
-import { Message } from '../+auth/auth.models';
+import { Subscription} from 'rxjs';
 import { DexihMessageComponent } from '../shared/ui/dexihMessage';
 import { AuthService } from '../+auth/auth.service';
 
@@ -19,8 +16,7 @@ export class HubsComponent implements OnInit, OnDestroy {
     webSocketStatus: string;
     openDelay = false; // used to pause the websocket error message displaying whilst a connect attempt occurs.
 
-    constructor(private authService: AuthService, private hubsService: HubsService,
-        private hubService: HubService, private router: Router, private route: ActivatedRoute) {
+    constructor(private authService: AuthService, private hubsService: HubsService) {
         // this.hubService.updateHub(0, 'unknown');
     }
 
@@ -50,7 +46,7 @@ export class HubsComponent implements OnInit, OnDestroy {
     }
 
     @HostListener('window:focus', ['$event'])
-    onFocus(event: any): void {
+    onFocus(): void {
         this.openDelay = false;
         setTimeout(() => {
             this.openDelay = true;

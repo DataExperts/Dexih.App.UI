@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HubService } from '../../hub.service';
-import { HubCache, eDatalinkType, DexihDatalink, eSharedObjectType,
-    TransformWriterResult, DexihDatajob, DexihDatalinkTest, eConnectionPurpose } from '../../hub.models';
+import { HubCache } from '../../hub.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, BehaviorSubject, Subscription, combineLatest} from 'rxjs';
 import { CancelToken } from '../../../+auth/auth.models';
+import { TransformWriterResult, eConnectionPurpose } from '../../../shared/shared.models';
 
 @Component({
     selector: 'results-index',
@@ -15,7 +15,7 @@ export class ResultsIndexComponent implements OnInit, OnDestroy {
     hubCache: HubCache;
 
     private _subscription: Subscription;
-    private _hubCacheChangeSubscription: Subscription;
+    private _transformWriterResultChangeSubscription: Subscription;
 
     public hubPath;
     public rows = 20;
@@ -104,7 +104,7 @@ export class ResultsIndexComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         if (this._subscription) { this._subscription.unsubscribe(); }
-        if (this._hubCacheChangeSubscription) { this._hubCacheChangeSubscription.unsubscribe(); }
+        if (this._transformWriterResultChangeSubscription) { this._transformWriterResultChangeSubscription.unsubscribe(); }
         this.cancelToken.cancel();
     }
 
@@ -153,11 +153,10 @@ export class ResultsIndexComponent implements OnInit, OnDestroy {
 
     watchChanges() {
         // watch the current connection in case it is changed in another session.
-        if (this._hubCacheChangeSubscription) { this._hubCacheChangeSubscription.unsubscribe(); }
-        this._hubCacheChangeSubscription = this.hubService.getHubCacheChangeObservable().subscribe(hubCacheChange => {
-            if (hubCacheChange.changeClass === eSharedObjectType.TransformWriterResult) {
-                let writerResult: TransformWriterResult = hubCacheChange.data;
+        if (this._transformWriterResultChangeSubscription) { this._transformWriterResultChangeSubscription.unsubscribe(); }
+        this._transformWriterResultChangeSubscription = this.hubService.getTransformWriterResultChangeObservable().subscribe(writerResult => {
                 let results: TransformWriterResult[] = this._tableData.value;
+
                 if (this.datalinks && this.datalinks.findIndex(c => c === writerResult.referenceKey) >= 0) {
                     let existingResult = results.find(c => c.auditKey === writerResult.auditKey);
                     if (existingResult) {
@@ -186,8 +185,6 @@ export class ResultsIndexComponent implements OnInit, OnDestroy {
                         this._tableData.next([writerResult].concat(results));
                     }
                 }
-
-            }
         });
     }
 }

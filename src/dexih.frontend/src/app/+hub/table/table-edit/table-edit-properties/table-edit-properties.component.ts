@@ -1,15 +1,12 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-    DexihConnection, DexihTable, DexihTableColumn, HubCache, eConnectionPurpose, deltaTypes, securityFlags,
-    eCacheStatus,
-    eTableType
-} from '../../../hub.models';
 import { HubService } from '../../../hub.service';
 import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
 import { FormGroup, FormArray } from '@angular/forms';
 import { HubFormsService } from '../../../hub.forms.service';
-import { ConnectionReference, RemoteLibraries, eConnectionCategory, TypeCodes } from '../../../hub.remote.models';
+import { HubCache, deltaTypes, securityFlags } from '../../../hub.models';
+import { RemoteLibraries, eTableType, DexihConnection, ConnectionReference, eConnectionCategory, DexihTableColumn, eConnectionPurpose, DexihTable } from '../../../../shared/shared.models';
+import { TypeCodes } from '../../../hub.remote.models';
 
 @Component({
 
@@ -68,12 +65,10 @@ export class TableEditPropertiesComponent implements OnInit, OnDestroy {
                 this.route.params,
                 this.hubService.getHubCacheObservable(),
                 this.formsService.getCurrentFormObservable(),
-                this.hubService.getRemoteLibrariesObservable()
             ).subscribe(result => {
                 let data = result[0];
                 this.hubCache = result[2];
                 this.mainForm = result[3];
-                this.remoteLibraries = result[4];
 
                 this.action = data['action'];
                 this.pageTitle = data['pageTitle'];
@@ -81,12 +76,12 @@ export class TableEditPropertiesComponent implements OnInit, OnDestroy {
                 if (this.hubCache && this.hubCache.isLoaded() && this.mainForm  && this.remoteLibraries) {
                     this.connections = this.hubCache.hub.dexihConnections;
                     this.connection = this.connections.find(c => c.key === this.mainForm.controls.connectionKey.value);
-                    this.connectionReference = this.remoteLibraries.GetConnectionReference(this.connection);
+                    this.connectionReference = this.hubService.GetConnectionReference(this.connection);
 
                     if (this._connectionSubscription) { this._connectionSubscription.unsubscribe(); }
                     this._connectionSubscription = this.mainForm.controls.connectionKey.valueChanges.subscribe((connectionKey) => {
                         this.connection = this.connections.find(c => c.key === connectionKey);
-                        this.connectionReference = this.remoteLibraries.GetConnectionReference(this.connection);
+                        this.connectionReference = this.hubService.GetConnectionReference(this.connection);
                     });
                 }
 

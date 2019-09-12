@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HubService } from '../../../hub.service';
 import { DatalinkEditService } from '../datalink-edit.service';
-import { Observable, Subscription, combineLatest} from 'rxjs';
+import { Subscription, combineLatest} from 'rxjs';
 import { AuthService } from '../../../../+auth/auth.service';
-import { TransformReference, RemoteLibraries, transformTypes } from '../../../hub.remote.models';
+import { TransformReference, transformTypes } from '../../../hub.remote.models';
 
 
 @Component({
@@ -35,12 +35,9 @@ export class DatalinkEditNewTransformComponent implements OnInit, OnDestroy {
                 this.route.data,
                 this.route.params,
                 this.editDatalinkService.hubFormsService.getCurrentFormObservable(),
-                this.hubService.getRemoteLibrariesObservable(),
             ).subscribe(result => {
-                let remoteLibraries = result[3];
-
                 this.transforms = [];
-                let userConfigTransforms = remoteLibraries.GetUserConfigTransformReference();
+                let userConfigTransforms = this.hubService.GetUserConfigTransformReference();
 
                 userConfigTransforms.forEach(transform => {
                     let transformType = transformTypes.find(c => c.key === transform.transformType);

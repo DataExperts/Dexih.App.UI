@@ -2,7 +2,7 @@
     <form *ngIf="datalinkForm" [formGroup]="datalinkForm">
         <fieldset>
             <section>
-                <form-select label="Datalink Type" formControlName="datalinkType" [items]="datalinkTypes" itemKey="key" itemName="name" iconClass="fa fa-database"
+                <form-select label="Datalink Type" formControlName="datalinkType" [items]="eDatalinkTypeItems" itemKey="key" itemName="description" iconClass="fa fa-database"
                     note='Categorize the type of function this datalink is performing.' [enableFilter]="false">
                 </form-select>
             </section>

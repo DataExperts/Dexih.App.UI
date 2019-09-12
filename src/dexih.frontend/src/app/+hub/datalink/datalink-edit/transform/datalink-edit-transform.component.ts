@@ -1,19 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import {
-    DexihDatalink, DexihDatalinkTransform, DexihDatalinkColumn, DexihDatalinkTransformItem, DexihTable, DexihTableColumn, HubCache,
-    eDatalinkTransformItemType, duplicateStrategies, eSortDirection, eCacheStatus, DexihDatalinkTable, seriesGrains
-}
-    from '../../../hub.models';
+import { HubCache, duplicateStrategies, seriesGrains } from '../../../hub.models';
 import { HubService } from '../../../hub.service';
 import { DatalinkEditService } from '../datalink-edit.service';
 import { Observable, Subscription, combineLatest } from 'rxjs';
 import { AuthService } from '../../../../+auth/auth.service';
 import { FormGroup, FormArray } from '@angular/forms';
 import { LogFactory, eLogLevel } from '../../../../../logging';
-import { RemoteLibraries, eTransformType, eTypeCode } from '../../../hub.remote.models';
-import { eAggregate } from '../../../hub.query.models';
 import { InputOutputColumns } from '../../../hub.lineage.models';
+import { eTransformType, eTransformItemType, DexihDatalinkColumn, DexihDatalinkTransform, eTypeCode, DexihDatalinkTransformItem, eAggregate, eDirection } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -29,8 +24,6 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
     private _datalinkFormSubscription: Subscription;
     private _transformsArraySubscription: Subscription;
 
-    private hubCache: HubCache;
-    private remoteLibraries: RemoteLibraries
     public action: string; // new or edit
     public pageTitle = 'Transform';
     public message: string;
@@ -40,7 +33,7 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
     public showDescription = false;
 
     eTransformType = eTransformType;
-    eDatalinkTransformItemType = eDatalinkTransformItemType;
+    eTransformItemType = eTransformItemType;
     duplicateStrategies = duplicateStrategies;
 
     public allowMappingOutputs: boolean;
@@ -49,7 +42,7 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
 
     public allowNode = false;
     public nodeName = '';
-    public nodeType: eDatalinkTransformItemType;
+    public nodeType: eTransformItemType;
 
     public logger = new LogFactory('datalink-edit-transform');
 
@@ -72,17 +65,13 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
             this._subscription = combineLatest(
                 this.route.data,
                 this.route.params,
-                this.hubService.getHubCacheObservable(),
                 this.editDatalinkService.hubFormsService.getCurrentFormObservable(),
-                this.hubService.getRemoteLibrariesObservable()
             ).subscribe(result => {
 
                 this.action = result[0]['action'];
                 this.pageTitle = result[0]['pageTitle'];
                 this.datalinkTransformKey = + result[1]['datalinkTransformKey'];
-                this.hubCache = result[2];
-                this.datalinkForm = result[3];
-                this.remoteLibraries = result[4];
+                this.datalinkForm = result[2];
 
                 if (this.datalinkForm) {
 
@@ -114,16 +103,16 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
 
                     if (datalinkTransform.transformType === eTransformType.Series) {
                         this.seriesForm = <FormGroup>items.controls
-                            .filter(d => d.value.transformItemType === eDatalinkTransformItemType.Series)[0];
+                            .filter(d => d.value.transformItemType === eTransformItemType.Series)[0];
                     }
 
                     if (datalinkTransform.transformType === eTransformType.Aggregate) {
-                        this.nodeType = eDatalinkTransformItemType.GroupNode;
+                        this.nodeType = eTransformItemType.GroupNode;
                     }
 
                     if (datalinkTransform.transformType === eTransformType.Lookup
                         || datalinkTransform.transformType === eTransformType.Join) {
-                        this.nodeType = eDatalinkTransformItemType.JoinNode;
+                        this.nodeType = eTransformItemType.JoinNode;
                     }
 
                     if (this.nodeType) {
@@ -138,7 +127,7 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
                         }
                     }
 
-                    this.inputColumns = datalinkTransform.runTime.inputColumns;
+                    this.inputColumns = datalinkTransform['runTime'].inputColumns;
 
                     this.nodes = [];
                     this.addNodeColumns(this.inputColumns, '');
@@ -248,7 +237,7 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
         }
     }
 
-    newDragDropMapping(itemType: eDatalinkTransformItemType, $event) {
+    newDragDropMapping(itemType: eTransformItemType, $event) {
         let item = new DexihDatalinkTransformItem();
         let outputColumn: DexihDatalinkColumn = $event.outputColumn;
         let inputColumn: DexihDatalinkColumn = $event.inputColumn;
@@ -256,7 +245,7 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
 
 
         switch (itemType) {
-            case eDatalinkTransformItemType.ColumnPair:
+            case eTransformItemType.ColumnPair:
                 if (!outputColumn) {
                     outputColumn = io.copyDatalinkColumn(inputColumn, 0, 'mapping');
                 }
@@ -269,10 +258,10 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
                 }
                 outputColumn.datalinkTableKey = null;
                 break;
-            case eDatalinkTransformItemType.Sort:
-                item.sortDirection = eSortDirection.Ascending;
+            case eTransformItemType.Sort:
+                item.sortDirection = eDirection.Ascending;
                 break;
-            case eDatalinkTransformItemType.AggregatePair:
+            case eTransformItemType.AggregatePair:
                 if (!outputColumn) {
                     outputColumn = io.copyDatalinkColumn(inputColumn, 0, 'mapping');
                 }
@@ -311,7 +300,7 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
             let joinColumn: DexihDatalinkColumn = $event.joinColumn;
             let inputColumn: DexihDatalinkColumn = $event.inputColumn;
             let item = new DexihDatalinkTransformItem();
-            item.transformItemType = eDatalinkTransformItemType.JoinPair;
+            item.transformItemType = eTransformItemType.JoinPair;
             item.datalinkTransformKey = this.datalinkTransformForm.value.key;
             item.sourceDatalinkColumn = inputColumn;
             item.joinDatalinkColumn = joinColumn;

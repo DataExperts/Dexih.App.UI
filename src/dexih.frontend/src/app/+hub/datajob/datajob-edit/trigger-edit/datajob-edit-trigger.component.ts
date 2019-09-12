@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DexihTrigger } from '../../../hub.models';
 import { Observable ,  Subscription, combineLatest} from 'rxjs';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { AuthService } from '../../../../+auth/auth.service';
 import { HubFormsService } from '../../../hub.forms.service';
 import { HubService } from '../../../hub.service';
+import { DexihTrigger } from '../../../../shared/shared.models';
 
 @Component({
   selector: 'datajob-edit-trigger',

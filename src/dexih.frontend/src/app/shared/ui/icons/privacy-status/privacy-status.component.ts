@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { eDataPrivacyStatus } from '../../../../+auth/auth.models';
+import { eDataPrivacyStatus } from '../../../shared.models';
 
 @Component({
     selector: 'privacy-status-icon',

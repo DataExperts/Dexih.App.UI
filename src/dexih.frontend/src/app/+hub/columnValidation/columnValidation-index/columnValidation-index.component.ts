@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { HubService } from '../../hub.service';
-import { DexihHub, DexihColumnValidation, HubCache, eSharedObjectType, eCacheStatus } from '../../hub.models';
+import { HubCache } from '../../hub.models';
 import { AuthService } from '../../../+auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
+import { DexihColumnValidation, DexihHub, eSharedObjectType } from '../../../shared/shared.models';
 
 @Component({
   selector: 'columnValidations',
@@ -80,7 +81,7 @@ export class ColumnValidationIndexComponent implements OnInit, OnDestroy {
 
     export(items: Array<DexihColumnValidation>) {
         const cache = this.hubCache;
-        const hub = new DexihHub(this.hubCache.hub.hubKey, '');
+        const hub = this.hubService.createHub(this.hubCache.hub.hubKey, '');
         items.forEach(item => { this.hubCache.cacheAddColumnValidation(item.key, hub); });
 
         let filename = items.length === 1 ? 'ColumnValidation - ' + items[0].name + '.json' : 'columnValidations.json';

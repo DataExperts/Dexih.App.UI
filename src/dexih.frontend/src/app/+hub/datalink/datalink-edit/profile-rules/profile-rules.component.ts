@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DexihDatalink, DexihDatalinkProfile, HubCache, eCacheStatus } from '../../../hub.models';
+import {HubCache } from '../../../hub.models';
 import { HubService } from '../../../hub.service';
 import { DatalinkEditService } from '../datalink-edit.service';
 import { AuthService } from '../../../../+auth/auth.service';
 import { Observable, BehaviorSubject, Subscription, combineLatest} from 'rxjs';
 import { FormGroup, FormArray } from '@angular/forms';
-import { FunctionReference, RemoteLibraries, eFunctionType } from '../../../hub.remote.models';
+import { DexihDatalinkProfile, eFunctionType } from '../../../../shared/shared.models';
 
 @Component({
     selector: 'profile-rules',
@@ -18,7 +18,6 @@ export class DatalinkEditProfileRulesComponent implements OnInit, OnDestroy {
     public datalinkForm: FormGroup;
 
     private hubCache: HubCache;
-    private remoteLibraries: RemoteLibraries;
 
     private _subscription: Subscription;
 
@@ -45,17 +44,15 @@ export class DatalinkEditProfileRulesComponent implements OnInit, OnDestroy {
             this._subscription = combineLatest(
                 this.hubService.getHubCacheObservable(),
                 this.editDatalinkService.hubFormsService.getCurrentFormObservable(),
-                this.hubService.getRemoteLibrariesObservable()
             ).subscribe(result => {
                 this.hubCache = result[0];
                 this.datalinkForm = result[1];
-                this.remoteLibraries = result[2];
 
                 if (this.datalinkForm) {
                     // load the cache first
                     if (this.hubCache.isLoaded()) {
                         this.selectedProfileRules = this.datalinkForm.value.dexihDatalinkProfiles;
-                        let profileRules = this.remoteLibraries.functions.filter(c => c.functionType === eFunctionType.Profile)
+                        let profileRules = this.hubService.GetFunctionsByType(eFunctionType.Profile)
                             .map(profile => {
 
                                 let profileRuleForm = this.selectedProfileRules.find(c =>

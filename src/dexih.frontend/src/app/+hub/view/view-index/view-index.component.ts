@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { HubService } from '../../hub.service';
-import { DexihHub, HubCache, eSharedObjectType, eCacheStatus, DexihView } from '../../hub.models';
 import { AuthService } from '../../../+auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
+import { HubCache } from '../../hub.models';
+import { DexihView, DexihHub, eSharedObjectType } from '../../../shared/shared.models';
 
 @Component({
     selector: 'views',
@@ -101,7 +102,7 @@ export class ViewIndexComponent implements OnInit, OnDestroy {
 
     export(items: Array<DexihView>) {
         const cache = this.hubCache;
-        const hub = new DexihHub(cache.hub.hubKey, '');
+        const hub = this.hubService.createHub(cache.hub.hubKey, '');
         items.forEach(item => { cache.cacheAddView(item.key, hub); });
 
         let filename = items.length === 1 ? 'View - ' + items[0].name + '.json' : 'views.json';

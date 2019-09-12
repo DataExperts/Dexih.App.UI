@@ -1,20 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  DexihDatalinkTransformItem, eDatalinkTransformItemType, HubCache,
-  DexihTableColumn, DexihDatalinkTable,
-  eParameterDirection, onErrorActions, onNullActions, InvalidActions, eTransformFunctionType,
-  eCacheStatus, DexihCustomFunction, FunctionCache, DexihDatalinkColumn, DexihFunctionParameter
-} from '../../../hub.models';
+import { HubCache } from '../../../hub.models';
 import { HubService } from '../../../hub.service';
 import { DatalinkEditService } from '../datalink-edit.service';
 import { Subscription, combineLatest } from 'rxjs';
 import { AuthService } from '../../../../+auth/auth.service';
 import { FormGroup, FormArray } from '@angular/forms';
 import { LogFactory, eLogLevel } from '../../../../../logging';
-import { eFunctionType, FunctionReference, RemoteLibraries,
-  TypeCodes, eGenericType, FunctionParameter } from '../../../hub.remote.models';
+import { TypeCodes } from '../../../hub.remote.models';
 import { InputOutputColumns } from '../../../hub.lineage.models';
+import { eFunctionType, eParameterDirection, DexihDatalinkColumn, DexihDatalinkTransformItem, eTransformItemType, DexihFunctionParameter, FunctionParameter } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -23,10 +18,8 @@ import { InputOutputColumns } from '../../../hub.lineage.models';
 })
 export class UnGroupEditComponent implements OnInit, OnDestroy {
   public hubCache: HubCache;
-  public remoteLibraries: RemoteLibraries;
 
   eFunctionType = eFunctionType;
-  eTransformFunctionType = eTransformFunctionType;
   eParameterDirection = eParameterDirection;
   typeCodes = TypeCodes;
 
@@ -35,7 +28,7 @@ export class UnGroupEditComponent implements OnInit, OnDestroy {
   private _subscription: Subscription;
   private _nodeSubscription: Subscription;
 
-  transformFunctionType: eTransformFunctionType;
+  transformFunctionType: eFunctionType;
   datalinkTransformItemKey: number;
   datalinkKey: number;
   datalinkTransformKey: number;
@@ -69,18 +62,16 @@ export class UnGroupEditComponent implements OnInit, OnDestroy {
         this.route.data,
         this.route.params,
         this.hubService.getHubCacheObservable(),
-        this.hubService.getRemoteLibrariesObservable(),
         this.editDatalinkService.hubFormsService.getCurrentFormObservable()
       ).subscribe(result => {
         this.pageTitle = result[0]['pageTitle'];
         let params = result[1];
         this.hubCache = result[2];
-        this.remoteLibraries = result[3]
-        this.datalinkForm = result[4];
+        this.datalinkForm = result[3];
 
         this.logger.LogC(() => `OnInit`, eLogLevel.Trace);
 
-        if (this.hubCache && this.hubCache.isLoaded() && this.datalinkForm && this.remoteLibraries) {
+        if (this.hubCache && this.hubCache.isLoaded() && this.datalinkForm) {
             this.datalinkTransformKey = +params['datalinkTransformKey'];
             this.datalinkTransformItemKey = +params['datalinkTransformItemKey'];
             this.datalinkTransformForm = this.editDatalinkService.getDatalinkTransform(this.datalinkTransformKey);
@@ -115,7 +106,7 @@ export class UnGroupEditComponent implements OnInit, OnDestroy {
           } else {
             let newItem = new DexihDatalinkTransformItem();
             newItem.datalinkTransformKey = this.datalinkTransformKey;
-            newItem.transformItemType = eDatalinkTransformItemType.UnGroup;
+            newItem.transformItemType = eTransformItemType.UnGroup;
 
             this.newDatalinkTransformItemForm = this.editDatalinkService.hubFormsService
               .datalinkDatalinkTransformItemFormGroup(this.datalinkTransformForm, newItem);
@@ -144,8 +135,8 @@ export class UnGroupEditComponent implements OnInit, OnDestroy {
                   newParameter.key = this.hubCache.getNextSequence();
                   newParameter.datalinkColumn = outputColumn
                   newParameter.isValid = true;
-                  newParameter.runTime.functionParameter = new FunctionParameter();
-                  newParameter.runTime.functionParameter.name = childColumn.name;
+                  newParameter['runTime'].functionParameter = new FunctionParameter();
+                  newParameter['runTime'].functionParameter.name = childColumn.name;
 
                   let newParameterForm = this.editDatalinkService.hubFormsService.datalinkFunctionParametersFormGroup(newParameter);
                   parameters.push(newParameterForm);

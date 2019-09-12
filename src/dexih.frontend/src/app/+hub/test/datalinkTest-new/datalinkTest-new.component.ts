@@ -1,13 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
-import {
-  DexihTable, HubCache, DexihConnection,
-  eDatalinkType, eConnectionPurpose, eDeltaType, eDatalinkTransformItemType, eCacheStatus, DexihDatalink
-} from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { Observable, Subscription, combineLatest } from 'rxjs';
 import { Location } from '@angular/common';
+import { HubCache, eCacheStatus } from '../../hub.models';
+import { DexihConnection, DexihDatalink, eConnectionPurpose } from '../../../shared/shared.models';
 
 @Component({
 

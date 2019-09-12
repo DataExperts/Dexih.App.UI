@@ -1,19 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import {
-  DexihDatalinkTransformItem, eDatalinkTransformItemType, HubCache,
-  DexihTable, DexihTableColumn, sortDirections, DexihDatalinkTable, DexihDatalinkColumn, eSeriesGrain, seriesGrains
-}
-  from '../../../hub.models';
+import { ActivatedRoute } from '@angular/router';
+import { HubCache, sortDirections } from '../../../hub.models';
 import { HubService } from '../../../hub.service';
 import { DatalinkEditService } from '../datalink-edit.service';
-import { Observable, Subscription, combineLatest} from 'rxjs';
-import { Location } from '@angular/common';
+import { Subscription, combineLatest} from 'rxjs';
 import { AuthService } from '../../../../+auth/auth.service';
 import { FormGroup } from '@angular/forms';
-import { eCompare, compare, eAggregate, aggregates } from '../../../hub.query.models';
-import { eTransformType, eTypeCode } from '../../../hub.remote.models';
+import { compare, aggregates } from '../../../hub.query.models';
 import { InputOutputColumns } from '../../../hub.lineage.models';
+import { eTransformItemType, DexihDatalinkColumn, eAggregate, eCompare, DexihDatalinkTransformItem, eTypeCode } from '../../../../shared/shared.models';
 
 @Component({
   selector: 'mapping-edit',
@@ -36,8 +31,8 @@ export class MappingEditComponent implements OnInit, OnDestroy {
   datalinkForm: FormGroup;
   datalinkTransformForm: FormGroup;
   datalinkTransformItemForm: FormGroup;
-  transformItemType: eDatalinkTransformItemType;
-  eDatalinkTransformItemType = eDatalinkTransformItemType;
+  transformItemType: eTransformItemType;
+  eTransformItemType = eTransformItemType;
 
   variables: string[];
 
@@ -68,9 +63,7 @@ export class MappingEditComponent implements OnInit, OnDestroy {
     private hubService: HubService,
     private authService: AuthService,
     private editDatalinkService: DatalinkEditService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private location: Location) {
+    private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -84,11 +77,9 @@ export class MappingEditComponent implements OnInit, OnDestroy {
         this.hubService.getRemoteLibrariesObservable()
       ).subscribe(result => {
         this.pageTitle = result[0]['pageTitle'];
-        let data = result[0];
         let params = result[1];
         this.hubCache = result[2];
         let datalinkForm = result[3];
-        let remoteLibraries = result[4];
 
         if (!this.hubCache.isLoaded()) { return; }
 
@@ -104,37 +95,37 @@ export class MappingEditComponent implements OnInit, OnDestroy {
           this.datalinkTransformForm = this.editDatalinkService.getDatalinkTransform(this.datalinkTransformKey);
 
           switch (this.transformItemType) {
-              case eDatalinkTransformItemType.JoinPair:
+              case eTransformItemType.JoinPair:
                 this.showInput = true;
                 this.showOutput = false;
                 this.pageTitle = 'Edit Join';
                 break;
-              case eDatalinkTransformItemType.Column:
+              case eTransformItemType.Column:
               this.showInput = true;
               this.showOutput = false;
               this.pageTitle = 'Edit Group';
                 break;
-              case eDatalinkTransformItemType.JoinNode:
+              case eTransformItemType.JoinNode:
               this.showInput = false;
               this.showOutput = true;
                 this.pageTitle = 'Edit Join Node';
                 break;
-              case eDatalinkTransformItemType.GroupNode:
+              case eTransformItemType.GroupNode:
               this.showInput = false;
               this.showOutput = true;
                 this.pageTitle = 'Edit Group Node';
                 break;
-              case eDatalinkTransformItemType.Sort:
+              case eTransformItemType.Sort:
               this.showInput = true;
               this.showOutput = false;
                 this.pageTitle = 'Edit Sort';
                 break;
-              case eDatalinkTransformItemType.FilterPair:
+              case eTransformItemType.FilterPair:
               this.showInput = true;
               this.showOutput = false;
                 this.pageTitle = 'Edit Condition';
                 break;
-              case eDatalinkTransformItemType.AggregatePair:
+              case eTransformItemType.AggregatePair:
                 this.pageTitle = 'Edit Aggregate';
                 this.showInput = true;
                 this.showOutput = true;
@@ -232,7 +223,7 @@ export class MappingEditComponent implements OnInit, OnDestroy {
         this.newColumn = new DexihDatalinkColumn();
         this.newColumn.position = 1000 - key;
 
-        if (this.transformItemType === eDatalinkTransformItemType.JoinNode) {
+        if (this.transformItemType === eTransformItemType.JoinNode) {
           this.newColumn.dataType = eTypeCode.Node;
           this.newColumn.childColumns = this.joinColumns;
         } else {

@@ -1,12 +1,11 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { eViewType, InputColumn, DexihColumnBase, ChartConfig,
-    HubCache, DexihView, eViewSource, PreviewResults, DexihTable, DexihDatalink, DexihInputParameter } from '../../hub.models';
+import { HubCache, PreviewResults, DexihInputParameter } from '../../hub.models';
 import { combineLatest, Subscription } from 'rxjs';
 import { AuthService } from '../../../+auth/auth.service';
 import { HubService } from '../../hub.service';
-import { SelectQuery, eDownloadFormat, DownloadObject } from '../../hub.query.models';
 import { InputOutputColumns } from '../../hub.lineage.models';
 import { PromiseWithCancel, CancelToken } from '../../../+auth/auth.models';
+import { eSourceType, DexihTable, DexihDatalink, ChartConfig, InputColumn, DexihColumnBase, SelectQuery, eDownloadFormat, DownloadObject, DexihView, eViewType, eDataObjectType } from '../../../shared/shared.models';
 
 @Component({
     selector: 'preview-data',
@@ -14,7 +13,7 @@ import { PromiseWithCancel, CancelToken } from '../../../+auth/auth.models';
 })
 
 export class PreviewDataComponent implements OnInit, OnDestroy {
-    @Input() viewSource: eViewSource;
+    @Input() viewSource: eDataObjectType;
     @Input() key: number;
     @Input() table: DexihTable;
     @Input() datalink: DexihDatalink;
@@ -73,7 +72,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
                     // get the hub key from the route data, and update the service.
 
                     switch (this.viewSource) {
-                        case eViewSource.Datalink:
+                        case eDataObjectType.Datalink:
                             let datalink: DexihDatalink;
                             if ( this.key ) {
                                 datalink = this.hubCache.hub.dexihDatalinks.find(c => c.key === this.key);
@@ -96,13 +95,13 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
 
                             this.inputColumns = datalink.sourceDatalinkTable.dexihDatalinkColumns.filter(c => c.isInput).map(c => {
                                 return  {datalinkKey: this.key, datalinkName: datalink.name,
-                                    name: c.name, logicalName: c.logicalName, dataType: c.dataType, rank: c.rank, value: c.defaultValue};
+                                    name: c.name, logicalName: c.logicalName, dataType: c.dataType, rank: c.rank, value: c.defaultValue, defaultValue: c.defaultValue};
                             });
 
                             this.parameters = datalink.parameters;
                             break;
 
-                        case eViewSource.Table:
+                        case eDataObjectType.Table:
                             let table: DexihTable;
                             if ( this.key ) {
                                 table = this.hubCache.getTable(this.key);
@@ -121,7 +120,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
                             this.tableColumns = table.dexihTableColumns;
                             this.inputColumns = table.dexihTableColumns.filter(c => c.isInput).map(c => {
                                 return  {datalinkKey: 0, datalinkName: null,
-                                    name: c.name, logicalName: c.logicalName, dataType: c.dataType, rank: c.rank, value: c.defaultValue};
+                                    name: c.name, logicalName: c.logicalName, dataType: c.dataType, rank: c.rank, value: c.defaultValue, defaultValue: c.defaultValue};
                                 }
                             );
                     }
@@ -169,7 +168,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
             let previewQuery: PromiseWithCancel<PreviewResults>;
 
             switch (this.viewSource) {
-                case eViewSource.Datalink:
+                case eDataObjectType.Datalink:
                     if (this.key) {
                         previewQuery = this.hubService.previewDatalinkKeyData(this.key, this.selectQuery,
                             this.inputColumns, this.parameters, this.cancelToken);
@@ -180,7 +179,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
                         }
                     }
                     break;
-                case eViewSource.Table:
+                case eDataObjectType.Table:
                     if (this.key) {
                         previewQuery = this.hubService.previewTableKeyData(this.key, false, this.selectQuery,
                             this.inputColumns, this.parameters, this.cancelToken);
@@ -216,11 +215,11 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
             this.hubService.downloadData([downloadObject], false, format)
         } else {
             switch (this.viewSource) {
-                case eViewSource.Datalink:
+                case eDataObjectType.Datalink:
                     this.hubService.downloadDatalinkData(this.datalink, this.datalinkTransformKey,
                         this.selectQuery, this.inputColumns, false, format);
                     break;
-                case eViewSource.Table:
+                case eDataObjectType.Table:
                     this.hubService.downloadTableData(this.table, false, this.selectQuery, this.inputColumns, false, format);
                     break;
             }
@@ -238,10 +237,10 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
             view.name = name;
             view.sourceType = this.viewSource;
             switch (this.viewSource) {
-                case eViewSource.Datalink:
+                case eDataObjectType.Datalink:
                     view.sourceDatalinkKey = this.key;
                     break;
-                case eViewSource.Table:
+                case eDataObjectType.Table:
                     view.sourceTableKey = this.key;
                     break;
             }

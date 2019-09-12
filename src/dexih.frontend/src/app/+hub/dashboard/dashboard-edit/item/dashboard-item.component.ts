@@ -3,11 +3,12 @@ import { Component, OnInit, Input, OnDestroy, Output, EventEmitter,
 import { FormGroup, FormArray } from '@angular/forms';
 import { HubService } from '../../..';
 import { Subscription, combineLatest } from 'rxjs';
-import { HubCache, DexihView, DexihInputParameter, DataCache } from '../../../hub.models';
+import { HubCache, DexihInputParameter, DataCache } from '../../../hub.models';
 import { PreviewViewComponent } from '../../../widgets/preview-view/preview-view.component';
 import { HubFormsService } from '../../../hub.forms.service';
 import { DexihWidgetComponent } from 'dexih-ngx-components';
 import { CancelToken } from '../../../../+auth/auth.models';
+import { DexihView } from '../../../../shared/shared.models';
 
 @Component({
     selector: 'dashboard-item',

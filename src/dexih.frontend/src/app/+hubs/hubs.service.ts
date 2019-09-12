@@ -1,14 +1,10 @@
-import { ManagedTask, Message, DexihActiveAgent, DexihRemoteAgent, CancelToken } from '../+auth/auth.models';
+import { ManagedTask, Message, CancelToken } from '../+auth/auth.models';
 import { eLogLevel, LogFactory } from '../../logging';
-import { DexihHub, eObjectType, SharedData, Table, DexihTableColumn, DexihColumnBase, InputColumn, eViewSource, eSharedDataObjectType } from '../+hub/hub.models';
-import { SelectQuery } from '../+hub/hub.query.models';
-import { Injectable, OnDestroy, OnInit } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { AuthService } from '../+auth/auth.service';
-import { eDownloadFormat } from '../+hub/hub.query.models';
-import { eTypeCode } from '../+hub/hub.remote.models';
-import { BehaviorSubject, Observable, combineLatest, Subscription} from 'rxjs';
-import { TaskStatusComponent } from './tasks/task-status';
+import { BehaviorSubject, Observable, Subscription} from 'rxjs';
 import { eEnvironment, RemoteApplicationSettings } from './remoteAgents/remoteAgent-download/remoteAgent-download.models';
+import { eDownloadFormat, DexihActiveAgent, InputColumn, SelectQuery, Table, eTypeCode, DexihRemoteAgent, SharedData, eDataObjectType } from '../shared/shared.models';
 
 @Injectable()
 export class HubsService implements OnDestroy {
@@ -16,7 +12,6 @@ export class HubsService implements OnDestroy {
     private logger = new LogFactory('hubs.service');
     private _hubMessages = new BehaviorSubject<Array<Message>>([]);
 
-    private _webSocketSubscription: Subscription;
 
     private sharedItemsIndex: SharedData[];
 
@@ -106,11 +101,8 @@ export class HubsService implements OnDestroy {
                             .then(result => {
                             let tasks = <ManagedTask[]>result.value;
                             tasks.forEach(task => {
-                                let title: string;
                                 if (sharedItems.length === 1) {
-                                    title = `Download data task`;
                                 } else {
-                                    title = `Download data task for ${sharedItems.length} items.`;
                                 }
                                 this.authService.addUpdateTask(task);
                             })
@@ -127,7 +119,7 @@ export class HubsService implements OnDestroy {
     }
 
     // starts a preview, and returns the url to get the download stream.
-    previewDataUrl(hubKey: number, objectKey: number, objectType: eSharedDataObjectType,
+    previewDataUrl(hubKey: number, objectKey: number, objectType: eDataObjectType,
         inputColumns: InputColumn[], selectQuery: SelectQuery):
         Promise<string> {
         return new Promise<string>((resolve, reject) => {
@@ -246,7 +238,7 @@ export class HubsService implements OnDestroy {
                 environment,
                 logLevel,
                 RemoteApplicationSettings: settings
-            }, 'dexih.remote.zip', 'application/zip').then(result => {
+            }, 'dexih.remote.zip', 'application/zip').then(() => {
                 resolve(true);
             }).catch(reason => {
                 this.logger.LogC(() => `downloadRemoteAgent, error: ${reason.message}.`, eLogLevel.Error);
@@ -264,7 +256,7 @@ export class HubsService implements OnDestroy {
                 environment,
                 logLevel,
                 RemoteApplicationSettings: settings
-            }, 'appsettings.json', 'application/json').then(result => {
+            }, 'appsettings.json', 'application/json').then(() => {
                     resolve(true);
             }).catch(reason => {
                 this.logger.LogC(() => `downloadRemoteSettings, error: ${reason.message}.`, eLogLevel.Error);

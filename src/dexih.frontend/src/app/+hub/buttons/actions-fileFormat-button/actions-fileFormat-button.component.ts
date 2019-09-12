@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, combineLatest} from 'rxjs';
 
 import { AuthService } from '../../../+auth/auth.service';
-import { DexihFileFormat } from '../../hub.models';
 import { HubService } from '../../hub.service';
+import { DexihFileFormat } from '../../../shared/shared.models';
 
 @Component({
     selector: 'actions-fileFormat-button',

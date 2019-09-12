@@ -8,7 +8,7 @@
 						</form-input>
 					</section>
 					<section class="form-group col-md-6">
-						<form-select label="Restrict to" formControlName="searchObject" [items]="objectTypes" itemKey="key" itemName="name">
+						<form-select label="Restrict to" formControlName="searchObject" [items]="searchObjectTypes" itemKey="key" itemName="name">
 						</form-select>
 					</section>
 				</div>
@@ -28,16 +28,16 @@
 							<!-- <h6>Last updated: {{searchResult.object.updateDate | date : 'short'}}</h6> -->
 						</div>
 						<div class="col-xs-9" [ngSwitch]="searchResult.objectType">
-							<datajob-view *ngSwitchCase="eObjectType.Datajob" [datajob]="searchResult.object"></datajob-view>
-							<datalink-view *ngSwitchCase="eObjectType.Datalink" [datalink]="searchResult.object"></datalink-view>
-							<connection-view *ngSwitchCase="eObjectType.Connection" [connection]="searchResult.object"></connection-view>
-							<table-view *ngSwitchCase="eObjectType.Table" [connection]="searchResult.objectParent" [table]="searchResult.object"></table-view>
-							<table-column-view *ngSwitchCase="eObjectType.TableColumn" [table]="searchResult.objectParent" [column]="searchResult.object"></table-column-view>
-							<columnValidation-view *ngSwitchCase="eObjectType.ColumnValidation" [columnValidation]="searchResult.object"></columnValidation-view>
-							<fileFormat-view *ngSwitchCase="eObjectType.FileFormat" [fileFormat]="searchResult.object"></fileFormat-view>
-							<view-view *ngSwitchCase="eObjectType.View" [view]="searchResult.object"></view-view>
-							<api-view *ngSwitchCase="eObjectType.Api" [api]="searchResult.object"></api-view>
-							<dashboard-view *ngSwitchCase="eObjectType.Dashboard" [dashboard]="searchResult.object"></dashboard-view>
+							<datajob-view *ngSwitchCase="eSearchObjectType.Datajob" [datajob]="searchResult.object"></datajob-view>
+							<datalink-view *ngSwitchCase="eSearchObjectType.Datalink" [datalink]="searchResult.object"></datalink-view>
+							<connection-view *ngSwitchCase="eSearchObjectType.Connection" [connection]="searchResult.object"></connection-view>
+							<table-view *ngSwitchCase="eSearchObjectType.Table" [connection]="searchResult.objectParent" [table]="searchResult.object"></table-view>
+							<table-column-view *ngSwitchCase="eSearchObjectType.TableColumn" [table]="searchResult.objectParent" [column]="searchResult.object"></table-column-view>
+							<columnValidation-view *ngSwitchCase="eSearchObjectType.ColumnValidation" [columnValidation]="searchResult.object"></columnValidation-view>
+							<fileFormat-view *ngSwitchCase="eSearchObjectType.FileFormat" [fileFormat]="searchResult.object"></fileFormat-view>
+							<view-view *ngSwitchCase="eSearchObjectType.View" [view]="searchResult.object"></view-view>
+							<api-view *ngSwitchCase="eSearchObjectType.Api" [api]="searchResult.object"></api-view>
+							<dashboard-view *ngSwitchCase="eSearchObjectType.Dashboard" [dashboard]="searchResult.object"></dashboard-view>
 						</div>
 					</li>
 				</ul>

@@ -2,10 +2,10 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
 import { AuthService } from '../../../+auth/auth.service';
-import { DexihActiveAgent, DexihRemoteAgent } from '../../../+auth/auth.models';
 import { FormsService } from '../../../shared/forms/forms.service';
 import { HubsService } from '../../hubs.service';
 import { FormBuilder } from '@angular/forms';
+import { DexihRemoteAgent } from '../../../shared/shared.models';
 
 @Component({
     selector: 'remote-agents',

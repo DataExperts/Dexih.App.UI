@@ -341,18 +341,18 @@ namespace dexih.api
 	            switch (appSettings.RepositoryType.ToLower())
 	            {
 		            case "sqlite":
-			            repoDbContext.DatabaseType = DexihRepositoryContext.EDatabaseType.Sqlite;
+			            repoDbContext.DatabaseType = EDatabaseType.Sqlite;
 			            break;
 		            case "mysql":
-			            repoDbContext.DatabaseType = DexihRepositoryContext.EDatabaseType.MySql;
+			            repoDbContext.DatabaseType = EDatabaseType.MySql;
 			            break;
 		            case "sqlserver":
-			            repoDbContext.DatabaseType = DexihRepositoryContext.EDatabaseType.SqlServer;
+			            repoDbContext.DatabaseType = EDatabaseType.SqlServer;
 			            break;
 		            case "npgsql":
 		            case "postgre":
 		            case "postgresql":
-			            repoDbContext.DatabaseType = DexihRepositoryContext.EDatabaseType.Npgsql;
+			            repoDbContext.DatabaseType = EDatabaseType.Npgsql;
 			            break;
 		            default:
 			            throw new Exception("The repository type " + appSettings.RepositoryType +

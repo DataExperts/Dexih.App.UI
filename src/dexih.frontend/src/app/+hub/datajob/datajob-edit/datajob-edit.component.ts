@@ -1,13 +1,11 @@
 import { HostListener, Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
-import {
-  DexihDatajob, HubCache,
-  eCacheStatus
-} from '../../hub.models';
+import { HubCache } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { AuthService } from '../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { HubFormsService } from '../../hub.forms.service';
+import { DexihDatajob } from '../../../shared/shared.models';
 
 @Component({
   selector: 'dexih-datajob-edit-form',

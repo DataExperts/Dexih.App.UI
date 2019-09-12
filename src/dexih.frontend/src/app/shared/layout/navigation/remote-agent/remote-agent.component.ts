@@ -1,10 +1,10 @@
-import { DexihRemoteAgentHub, HubCache, eCacheStatus } from '../../../../+hub/hub.models';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription, combineLatest} from 'rxjs';
 import { HubService } from '../../../../+hub/hub.service';
 import { AuthService } from '../../../../+auth/auth.service';
-import { DexihActiveAgent, eDataPrivacyStatus } from '../../../../+auth/auth.models';
+import { HubCache } from '../../../../+hub/hub.models';
+import { DexihActiveAgent, eDataPrivacyStatus } from '../../../shared.models';
 
 @Component({
 
