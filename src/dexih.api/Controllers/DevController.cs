@@ -13,14 +13,23 @@ using System.Text;
 namespace dexih.api.Controllers
 {
     [Route("api/[controller]")]
-    public class ProtoController : Controller
+    public class DevController : Controller
     {
-        [HttpGet("[action]")]
-        public ActionResult CacheManager()
-        {
-            var proto = ProtoBuf.Serializer.GetProto<CacheManager>();
-            return Content(proto);
-        }
+//        public ProtoController(ISerializer serializer)
+//        {
+//            _serializer = serializer;
+//        }
+//
+//        private ISerializer _serializer;
+//        
+//        [HttpGet("[action]")]
+//        public ActionResult CacheManager()
+//        {
+//
+//            MessagePack.MessagePackSerializer.
+//            var proto = _serializer.GetSchema<CacheManager>();
+//            return Content(proto);
+//        }
 
         [HttpGet("[action]")]
         public ActionResult JSModels()
@@ -52,7 +61,7 @@ namespace dexih.api.Controllers
 
                 foreach (var type in types)
                 {
-                    var attribute = type.GetCustomAttribute<ProtoBuf.ProtoContractAttribute>();
+                    var attribute = type.GetCustomAttribute<MessagePack.MessagePackObjectAttribute>();
 
                     if (attribute != null && !type.IsAbstract)
                     {
@@ -95,7 +104,7 @@ namespace dexih.api.Controllers
                     js.AppendLine($"export class {typeName}{generic}{{");
                     foreach (var property in type.GetProperties())
                     {
-                        var propAttribute = property.GetCustomAttribute<ProtoBuf.ProtoMemberAttribute>();
+                        var propAttribute = property.GetCustomAttribute<MessagePack.KeyAttribute>();
                         if (propAttribute != null)
                         {
                             var propertyType = property.PropertyType;
@@ -144,6 +153,11 @@ namespace dexih.api.Controllers
                 js.AppendLine();
 
                 js.AppendLine("export const " + LowerFirst(type.Name) + "Items = [");
+                if ( Convert.ToInt32(type.GetEnumValues().GetValue(0)) == 1)
+                {
+                    js.AppendLine($"\t{{key: 0, name: 'Unknown', description: 'Unknown'}},");
+                   
+                }
                 foreach (var field in type.GetFields(BindingFlags.Public | BindingFlags.Static))
                 {
                     var desc = field.GetCustomAttribute<DescriptionAttribute>();
