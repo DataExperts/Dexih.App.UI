@@ -4,6 +4,10 @@
     <e p="$USER_HOME$/.nuget/packages/microsoft.net.test.sdk/16.2.0/build/netcoreapp1.0" t="Include">
       <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
     </e>
+    <e p="$USER_HOME$/.nuget/packages/microsoft.visualstudio.threading.analyzers/16.3.52/build/AdditionalFiles/vs-threading.LegacyThreadSwitchingMembers.txt" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/microsoft.visualstudio.threading.analyzers/16.3.52/build/AdditionalFiles/vs-threading.MainThreadAssertingMethods.txt" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/microsoft.visualstudio.threading.analyzers/16.3.52/build/AdditionalFiles/vs-threading.MainThreadSwitchingMethods.txt" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/microsoft.visualstudio.threading.analyzers/16.3.52/build/AdditionalFiles/vs-threading.MembersRequiringMainThread.txt" t="Include" />
     <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.1/build/netcoreapp1.0/xunit.runner.reporters.netcoreapp10.dll" t="Include" />
     <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.1/build/netcoreapp1.0/xunit.runner.utility.netcoreapp10.dll" t="Include" />
     <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.1/build/netcoreapp1.0/xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
@@ -99,6 +103,7 @@
       <e p="DexihFunctionParameter.cs" t="Include" />
       <e p="DexihFunctionParameterBase.cs" t="Include" />
       <e p="DexihHubEntity.cs" t="Include" />
+      <e p="DexihHubNamedEntity.cs" t="Include" />
       <e p="DexihHubs.cs" t="Include" />
       <e p="DexihHubUser.cs" t="Include" />
       <e p="DexihHubVariable.cs" t="Include" />
@@ -132,7 +137,6 @@
     <e p="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote" t="IncludeRecursive">
       <e p="7za.exe" t="Include" />
       <e p="appsettings.json" t="Include" />
-      <e p="autoStart" t="Include" />
       <e p="bin" t="ExcludeRecursive" />
       <e p="build_release.sh" t="Include" />
       <e p="certificates" t="Include">
@@ -252,6 +256,7 @@
           <e p="Controllers" t="Include">
             <e p="AccountController.cs" t="Include" />
             <e p="AdminController.cs" t="Include" />
+            <e p="DevController.cs" t="Include" />
             <e p="Exceptions" t="Include">
               <e p="AccountControllerExceptions.cs" t="Include" />
               <e p="AdminControllerExceptions.cs" t="Include" />
@@ -260,7 +265,6 @@
               <e p="RemoteAgentControllerExceptions.cs" t="Include" />
             </e>
             <e p="HubController.cs" t="Include" />
-            <e p="LetsEncryptController.cs" t="Include" />
             <e p="ReaderController.cs" t="Include" />
             <e p="RemoteController.cs" t="Include" />
             <e p="SharedDataController.cs" t="Include" />
@@ -345,6 +349,11 @@
           </e>
           <e p="Services" t="Include">
             <e p="ActionFilterAttribute.cs" t="Include" />
+            <e p="BackgroundTaskQueue" t="Include">
+              <e p="BackgroundTaskQueue.cs" t="Include" />
+              <e p="IBackgroundTaskQueue.cs" t="Include" />
+              <e p="QueueHostedService.cs" t="Include" />
+            </e>
             <e p="DataReader" t="Include">
               <e p="DataReader.cs" t="Include" />
               <e p="DataReaderExceptions.cs" t="Include" />
@@ -389,10 +398,10 @@
           </e>
           <e p="web.config" t="Include" />
           <e p="wwwroot" t="Include">
-            <e p="admin-admin-module-ngfactory-es2015.js" t="Include" />
-            <e p="admin-admin-module-ngfactory-es2015.js.map" t="Include" />
-            <e p="admin-admin-module-ngfactory-es5.js" t="Include" />
-            <e p="admin-admin-module-ngfactory-es5.js.map" t="Include" />
+            <e p="admin-admin-module-es2015.js" t="Include" />
+            <e p="admin-admin-module-es2015.js.map" t="Include" />
+            <e p="admin-admin-module-es5.js" t="Include" />
+            <e p="admin-admin-module-es5.js.map" t="Include" />
             <e p="assets" t="Include">
               <e p="css" t="Include">
                 <e p="_custom.scss" t="Include" />
@@ -577,69 +586,57 @@
               </e>
               <e p="js" t="Include">
                 <e p="google-api.js" t="Include" />
-                <e p="google-api.js.map" t="Include" />
                 <e p="msal.min.js" t="Include" />
-                <e p="msal.min.js.map" t="Include" />
               </e>
             </e>
-            <e p="auth-auth-module-ngfactory-es2015.js" t="Include" />
-            <e p="auth-auth-module-ngfactory-es2015.js.map" t="Include" />
-            <e p="auth-auth-module-ngfactory-es5.js" t="Include" />
-            <e p="auth-auth-module-ngfactory-es5.js.map" t="Include" />
             <e p="common-es2015.js" t="Include" />
             <e p="common-es2015.js.map" t="Include" />
             <e p="common-es5.js" t="Include" />
             <e p="common-es5.js.map" t="Include" />
-            <e p="dashboard-dashboard-edit-dashboard-edit-module-ngfactory-es2015.js" t="Include" />
-            <e p="dashboard-dashboard-edit-dashboard-edit-module-ngfactory-es2015.js.map" t="Include" />
-            <e p="dashboard-dashboard-edit-dashboard-edit-module-ngfactory-es5.js" t="Include" />
-            <e p="dashboard-dashboard-edit-dashboard-edit-module-ngfactory-es5.js.map" t="Include" />
-            <e p="datajob-datajob-edit-datajob-edit-module-ngfactory-es2015.js" t="Include" />
-            <e p="datajob-datajob-edit-datajob-edit-module-ngfactory-es2015.js.map" t="Include" />
-            <e p="datajob-datajob-edit-datajob-edit-module-ngfactory-es5.js" t="Include" />
-            <e p="datajob-datajob-edit-datajob-edit-module-ngfactory-es5.js.map" t="Include" />
-            <e p="datalink-datalink-edit-datalink-edit-module-ngfactory-es2015.js" t="Include" />
-            <e p="datalink-datalink-edit-datalink-edit-module-ngfactory-es2015.js.map" t="Include" />
-            <e p="datalink-datalink-edit-datalink-edit-module-ngfactory-es5.js" t="Include" />
-            <e p="datalink-datalink-edit-datalink-edit-module-ngfactory-es5.js.map" t="Include" />
-            <e p="default~admin-admin-module-ngfactory~hub-base-module-ngfactory~hubs-hubs-module-ngfactory-es2015.js" t="Include" />
-            <e p="default~admin-admin-module-ngfactory~hub-base-module-ngfactory~hubs-hubs-module-ngfactory-es2015.js.map" t="Include" />
-            <e p="default~admin-admin-module-ngfactory~hub-base-module-ngfactory~hubs-hubs-module-ngfactory-es5.js" t="Include" />
-            <e p="default~admin-admin-module-ngfactory~hub-base-module-ngfactory~hubs-hubs-module-ngfactory-es5.js.map" t="Include" />
-            <e p="default~datalink-datalink-edit-datalink-edit-module-ngfactory~files-files-bulk-load-files-bulk-load-~5bcab2c9-es2015.js" t="Include" />
-            <e p="default~datalink-datalink-edit-datalink-edit-module-ngfactory~files-files-bulk-load-files-bulk-load-~5bcab2c9-es2015.js.map" t="Include" />
-            <e p="default~datalink-datalink-edit-datalink-edit-module-ngfactory~files-files-bulk-load-files-bulk-load-~5bcab2c9-es5.js" t="Include" />
-            <e p="default~datalink-datalink-edit-datalink-edit-module-ngfactory~files-files-bulk-load-files-bulk-load-~5bcab2c9-es5.js.map" t="Include" />
-            <e p="default~hub-base-module-ngfactory~hubs-hubs-module-ngfactory-es2015.js" t="Include" />
-            <e p="default~hub-base-module-ngfactory~hubs-hubs-module-ngfactory-es2015.js.map" t="Include" />
-            <e p="default~hub-base-module-ngfactory~hubs-hubs-module-ngfactory-es5.js" t="Include" />
-            <e p="default~hub-base-module-ngfactory~hubs-hubs-module-ngfactory-es5.js.map" t="Include" />
-            <e p="files-files-bulk-load-files-bulk-load-module-ngfactory-es2015.js" t="Include" />
-            <e p="files-files-bulk-load-files-bulk-load-module-ngfactory-es2015.js.map" t="Include" />
-            <e p="files-files-bulk-load-files-bulk-load-module-ngfactory-es5.js" t="Include" />
-            <e p="files-files-bulk-load-files-bulk-load-module-ngfactory-es5.js.map" t="Include" />
+            <e p="dashboard-dashboard-edit-dashboard-edit-module-es2015.js" t="Include" />
+            <e p="dashboard-dashboard-edit-dashboard-edit-module-es2015.js.map" t="Include" />
+            <e p="dashboard-dashboard-edit-dashboard-edit-module-es5.js" t="Include" />
+            <e p="dashboard-dashboard-edit-dashboard-edit-module-es5.js.map" t="Include" />
+            <e p="datajob-datajob-edit-datajob-edit-module-es2015.js" t="Include" />
+            <e p="datajob-datajob-edit-datajob-edit-module-es2015.js.map" t="Include" />
+            <e p="datajob-datajob-edit-datajob-edit-module-es5.js" t="Include" />
+            <e p="datajob-datajob-edit-datajob-edit-module-es5.js.map" t="Include" />
+            <e p="datalink-datalink-edit-datalink-edit-module-es2015.js" t="Include" />
+            <e p="datalink-datalink-edit-datalink-edit-module-es2015.js.map" t="Include" />
+            <e p="datalink-datalink-edit-datalink-edit-module-es5.js" t="Include" />
+            <e p="datalink-datalink-edit-datalink-edit-module-es5.js.map" t="Include" />
+            <e p="default~datalink-datalink-edit-datalink-edit-module~files-files-bulk-load-files-bulk-load-module~tab~ec9ca56b-es2015.js" t="Include" />
+            <e p="default~datalink-datalink-edit-datalink-edit-module~files-files-bulk-load-files-bulk-load-module~tab~ec9ca56b-es2015.js.map" t="Include" />
+            <e p="default~datalink-datalink-edit-datalink-edit-module~files-files-bulk-load-files-bulk-load-module~tab~ec9ca56b-es5.js" t="Include" />
+            <e p="default~datalink-datalink-edit-datalink-edit-module~files-files-bulk-load-files-bulk-load-module~tab~ec9ca56b-es5.js.map" t="Include" />
+            <e p="default~hub-hub-module~hubs-hubs-module-es2015.js" t="Include" />
+            <e p="default~hub-hub-module~hubs-hubs-module-es2015.js.map" t="Include" />
+            <e p="default~hub-hub-module~hubs-hubs-module-es5.js" t="Include" />
+            <e p="default~hub-hub-module~hubs-hubs-module-es5.js.map" t="Include" />
+            <e p="files-files-bulk-load-files-bulk-load-module-es2015.js" t="Include" />
+            <e p="files-files-bulk-load-files-bulk-load-module-es2015.js.map" t="Include" />
+            <e p="files-files-bulk-load-files-bulk-load-module-es5.js" t="Include" />
+            <e p="files-files-bulk-load-files-bulk-load-module-es5.js.map" t="Include" />
             <e p="fontawesome-webfont.eot" t="Include" />
             <e p="fontawesome-webfont.svg" t="Include" />
             <e p="fontawesome-webfont.ttf" t="Include" />
             <e p="fontawesome-webfont.woff" t="Include" />
             <e p="fontawesome-webfont.woff2" t="Include" />
-            <e p="hub-base-module-ngfactory-es2015.js" t="Include" />
-            <e p="hub-base-module-ngfactory-es2015.js.map" t="Include" />
-            <e p="hub-base-module-ngfactory-es5.js" t="Include" />
-            <e p="hub-base-module-ngfactory-es5.js.map" t="Include" />
-            <e p="hub-hub-module-ngfactory-es2015.js" t="Include" />
-            <e p="hub-hub-module-ngfactory-es2015.js.map" t="Include" />
-            <e p="hub-hub-module-ngfactory-es5.js" t="Include" />
-            <e p="hub-hub-module-ngfactory-es5.js.map" t="Include" />
-            <e p="hubs-hubs-module-ngfactory-es2015.js" t="Include" />
-            <e p="hubs-hubs-module-ngfactory-es2015.js.map" t="Include" />
-            <e p="hubs-hubs-module-ngfactory-es5.js" t="Include" />
-            <e p="hubs-hubs-module-ngfactory-es5.js.map" t="Include" />
+            <e p="hub-base-module-es2015.js" t="Include" />
+            <e p="hub-base-module-es2015.js.map" t="Include" />
+            <e p="hub-base-module-es5.js" t="Include" />
+            <e p="hub-base-module-es5.js.map" t="Include" />
+            <e p="hubs-hubs-module-es2015.js" t="Include" />
+            <e p="hubs-hubs-module-es2015.js.map" t="Include" />
+            <e p="hubs-hubs-module-es5.js" t="Include" />
+            <e p="hubs-hubs-module-es5.js.map" t="Include" />
             <e p="index.html" t="Include" />
             <e p="main-es2015.js" t="Include" />
             <e p="main-es2015.js.map" t="Include" />
             <e p="main-es5.js" t="Include" />
             <e p="main-es5.js.map" t="Include" />
+            <e p="polyfills-es2015.js" t="Include" />
+            <e p="polyfills-es2015.js.map" t="Include" />
             <e p="polyfills-es5.js" t="Include" />
             <e p="polyfills-es5.js.map" t="Include" />
             <e p="runtime-es2015.js" t="Include" />
@@ -650,14 +647,14 @@
             <e p="styles-es2015.js.map" t="Include" />
             <e p="styles-es5.js" t="Include" />
             <e p="styles-es5.js.map" t="Include" />
-            <e p="table-table-edit-table-edit-module-ngfactory-es2015.js" t="Include" />
-            <e p="table-table-edit-table-edit-module-ngfactory-es2015.js.map" t="Include" />
-            <e p="table-table-edit-table-edit-module-ngfactory-es5.js" t="Include" />
-            <e p="table-table-edit-table-edit-module-ngfactory-es5.js.map" t="Include" />
-            <e p="test-datalinkTest-edit-datalinkTest-edit-module-ngfactory-es2015.js" t="Include" />
-            <e p="test-datalinkTest-edit-datalinkTest-edit-module-ngfactory-es2015.js.map" t="Include" />
-            <e p="test-datalinkTest-edit-datalinkTest-edit-module-ngfactory-es5.js" t="Include" />
-            <e p="test-datalinkTest-edit-datalinkTest-edit-module-ngfactory-es5.js.map" t="Include" />
+            <e p="table-table-edit-table-edit-module-es2015.js" t="Include" />
+            <e p="table-table-edit-table-edit-module-es2015.js.map" t="Include" />
+            <e p="table-table-edit-table-edit-module-es5.js" t="Include" />
+            <e p="table-table-edit-table-edit-module-es5.js.map" t="Include" />
+            <e p="test-datalinkTest-edit-datalinkTest-edit-module-es2015.js" t="Include" />
+            <e p="test-datalinkTest-edit-datalinkTest-edit-module-es2015.js.map" t="Include" />
+            <e p="test-datalinkTest-edit-datalinkTest-edit-module-es5.js" t="Include" />
+            <e p="test-datalinkTest-edit-datalinkTest-edit-module-es5.js.map" t="Include" />
             <e p="vendor-es2015.js" t="Include" />
             <e p="vendor-es2015.js.map" t="Include" />
             <e p="vendor-es5.js" t="Include" />
@@ -1095,6 +1092,7 @@
         <e p="Parameters.cs" t="Include" />
         <e p="ParameterValue.cs" t="Include" />
       </e>
+      <e p="ProtoInheritAttribute.cs" t="Include" />
       <e p="Query" t="Include">
         <e p="DeleteQuery.cs" t="Include" />
         <e p="Filter.cs" t="Include" />
@@ -1140,6 +1138,7 @@
       <e p="ConditionFunctions.cs" t="Include" />
       <e p="ConversionFunctions.cs" t="Include" />
       <e p="dexih.functions.builtIn.csproj" t="IncludeRecursive" />
+      <e p="GeometryFunctions.cs" t="Include" />
       <e p="HierarchyFunctions.cs" t="Include" />
       <e p="IOFunctions.cs" t="Include" />
       <e p="MapFunctions.cs" t="Include" />
@@ -1255,14 +1254,20 @@
       <e p="ConnectionMemory.cs" t="Include" />
       <e p="Connections" t="Include">
         <e p="ConnectionAttribute.cs" t="Include" />
+        <e p="ConnectionBase.cs" t="Include" />
         <e p="ConnectionReference.cs" t="Include" />
         <e p="Connections.cs" t="Include" />
         <e p="ConnectionsExceptions.cs" t="Include" />
       </e>
       <e p="ConnectionSql.cs" t="Include" />
+      <e p="DataPack" t="Include">
+        <e p="DataPack.cs" t="Include" />
+        <e p="DataPackColumn.cs" t="Include" />
+      </e>
       <e p="DeltaValues.cs" t="Include" />
       <e p="dexih.transforms.csproj" t="IncludeRecursive" />
       <e p="EncryptedObject.cs" t="Include" />
+      <e p="Enums.cs" t="Include" />
       <e p="Exceptions" t="Include">
         <e p="ConnectionExceptions.cs" t="Include" />
         <e p="DuplicateJoinKeyException.cs" t="Include" />
@@ -1333,6 +1338,7 @@
       <e p="StreamCsv.cs" t="Include" />
       <e p="StreamJson.cs" t="Include" />
       <e p="StreamJsonCompact.cs" t="Include" />
+      <e p="StreamMessagePack.cs" t="Include" />
       <e p="Transform.cs" t="Include" />
       <e p="TransformAggregate.cs" t="Include" />
       <e p="TransformCache.cs" t="Include" />

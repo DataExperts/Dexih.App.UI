@@ -10,6 +10,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
+#if DEBUG
 namespace dexih.api.Controllers
 {
     [Route("api/[controller]")]
@@ -336,5 +337,5 @@ namespace dexih.api.Controllers
 
     }
 
-
+#endif
 }

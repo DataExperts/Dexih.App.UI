@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO.Compression;
-using Ben.Diagnostics;
 using dexih.api.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using dexih.api.Services;
+using dexih.api.Services.BackgroundTasks;
 using dexih.repository;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Http;
@@ -180,9 +180,14 @@ namespace dexih.api
 
 	        // Add operations which allow controllers to interact with the repository.
 	        services.AddTransient<IDexihOperations, DexihOperations>();
+	        
+	        // A service that queue and processes background tasks.
+	        services.AddHostedService<QueuedHostedService>();
+	        services.AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>();
 
 	        // use the signalr service if specified.
 	        var builder = services.AddSignalR();
+	        
 	        if (!string.IsNullOrEmpty(appSettings.SignalRConnectionString))
 	        {
 		        builder.AddAzureSignalR(appSettings.SignalRConnectionString);
@@ -240,7 +245,6 @@ namespace dexih.api
                 _logger.LogInformation("Application is running in development configuration, detailed exceptions and errors will be displayed.");
 
                 app.UseDeveloperExceptionPage();
-                app.UseBlockingDetection();
             }
             else
             {
@@ -356,7 +360,7 @@ namespace dexih.api
 			            break;
 		            default:
 			            throw new Exception("The repository type " + appSettings.RepositoryType +
-			                                " was not recognised.  Use SqlServer, MySql, Npgsql or Sqlite");
+			                                " was not recognised.  Supported repositories are SqlServer, MySql, PostgreSql or Sqlite");
 	            }
 
 	            _logger.LogInformation($"Updating repository database (if necessary).");

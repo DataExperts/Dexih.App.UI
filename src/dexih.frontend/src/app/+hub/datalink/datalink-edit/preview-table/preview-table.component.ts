@@ -7,6 +7,7 @@ import { Subscription, combineLatest} from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormGroup } from '@angular/forms';
+import { eDataObjectType } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -24,6 +25,7 @@ export class PreviewTableComponent implements OnInit, OnDestroy {
     public pageTitle: string;
     public message: string;
 
+    public eDataObjectType = eDataObjectType;
 
     public error: string;
 

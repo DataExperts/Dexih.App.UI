@@ -117,7 +117,7 @@ export class DatalinkIndexComponent implements OnInit, OnDestroy {
 
                     datalinkData.push({
                         key: d.key,
-                        datalinkType: this.eDatalinkTypeItems[d.datalinkType].name,
+                        datalinkType: this.eDatalinkType[d.datalinkType],
                         name: d.name,
                         description: d.description,
                         sourceName: sourceName,

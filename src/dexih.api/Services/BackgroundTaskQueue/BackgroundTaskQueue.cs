@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
@@ -5,23 +6,29 @@ using Microsoft.Extensions.Hosting;
 
 namespace dexih.api.Services.BackgroundTasks
 {
-    public class BackgroundTasks: IHostedService
+    // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/hosted-services?view=aspnetcore-2.2&tabs=visual-studio#queued-background-tasks
+    public class BackgroundTaskQueue : IBackgroundTaskQueue
     {
-        private ConcurrentQueue<Task> _tasks = new ConcurrentQueue<Task>();
-        private 
-        public Task StartAsync(CancellationToken cancellationToken)
+        private readonly ConcurrentQueue<Func<CancellationToken, Task>> _workItems = new ConcurrentQueue<Func<CancellationToken, Task>>();
+        private readonly SemaphoreSlim _signal = new SemaphoreSlim(0);
+
+        public void QueueBackgroundWorkItem(Func<CancellationToken, Task> workItem)
         {
-            throw new System.NotImplementedException();
+            if (workItem == null)
+            {
+                throw new ArgumentNullException(nameof(workItem));
+            }
+
+            _workItems.Enqueue(workItem);
+            _signal.Release();
         }
 
-        private ProcessTasks()
+        public async Task<Func<CancellationToken, Task>> DequeueAsync(CancellationToken cancellationToken)
         {
-            _tasks.
-        }
+            await _signal.WaitAsync(cancellationToken);
+            _workItems.TryDequeue(out var workItem);
 
-        public Task StopAsync(CancellationToken cancellationToken)
-        {
-            throw new System.NotImplementedException();
+            return workItem;
         }
     }
 }

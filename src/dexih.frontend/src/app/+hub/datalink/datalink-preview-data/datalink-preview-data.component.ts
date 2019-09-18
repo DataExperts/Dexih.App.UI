@@ -3,6 +3,7 @@ import { HubService } from '../../hub.service';
 import { AuthService } from '../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { eDataObjectType } from '../../../shared/shared.models';
 
 @Component({
 
@@ -17,6 +18,8 @@ export class DatalinkPreviewDataComponent implements OnInit, OnDestroy {
     public action: string; // new or edit
     public pageTitle: string;
     public message: string;
+
+    public eDataObjectType = eDataObjectType;
 
     constructor(
         private hubService: HubService,

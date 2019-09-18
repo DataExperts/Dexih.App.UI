@@ -4,7 +4,7 @@ import { AuthService } from '../../../+auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
 import { HubCache } from '../../hub.models';
-import { DexihView, DexihHub, eSharedObjectType } from '../../../shared/shared.models';
+import { DexihView, DexihHub, eSharedObjectType, eViewTypeItems, eDataObjectType, eViewType } from '../../../shared/shared.models';
 
 @Component({
     selector: 'views',
@@ -83,8 +83,8 @@ export class ViewIndexComponent implements OnInit, OnDestroy {
                 return {
                     key: view.key,
                     name: view.name,
-                    viewType: view.viewType,
-                    sourceType: view.sourceType,
+                    viewType: eViewType[view.viewType],
+                    sourceType: eDataObjectType[view.sourceType],
                     updateDate: view.updateDate,
                     sharedIcon: view.isShared ? 'fa fa-group' : 'fa fa-user-secret',
                     sharedToolTip: view.isShared ? 'Table is shared' : 'Table is private'

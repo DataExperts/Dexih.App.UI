@@ -6,6 +6,7 @@ import { AuthService } from '../../../+auth/auth.service';
 import {HubCache } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { DexihConnection, ConnectionReference, eConnectionCategory, DexihHub, DexihDatalink, DexihDatajob, RemoteLibraries } from '../../../shared/shared.models';
+import { async } from 'q';
 
 @Component({
     selector: 'actions-connection-button',
@@ -38,7 +39,7 @@ export class ActionsConnectionButtonComponent implements OnInit, OnDestroy, OnCh
     ngOnInit() {
         this._subscription = combineLatest(
             this.hubService.getHubCacheObservable(),
-        ).subscribe(result => {
+        ).subscribe(async result => {
             this.hubCache = result[0];
 
             if (!this.hubCache.isLoaded()) {
@@ -53,7 +54,7 @@ export class ActionsConnectionButtonComponent implements OnInit, OnDestroy, OnCh
             let cache = this.hubCache;
 
             if (this.connections && this.connections.length === 1) {
-                this.connectionReference = this.hubService.GetConnectionReference(this.connections[0]);
+                this.connectionReference = await this.hubService.GetConnectionReference(this.connections[0]);
 
                 // search any columns for an occurrence of the columnValidation.
                 cache.hub.dexihDatajobs.forEach(datajob => {
@@ -113,9 +114,9 @@ export class ActionsConnectionButtonComponent implements OnInit, OnDestroy, OnCh
         if (this._subscription) { this._subscription.unsubscribe(); }
     }
 
-    ngOnChanges() {
+    async ngOnChanges() {
         if (this.connections && this.connections.length === 1 ) {
-            this.connectionReference = this.hubService.GetConnectionReference(this.connections[0]);
+            this.connectionReference = await this.hubService.GetConnectionReference(this.connections[0]);
         }
     }
 

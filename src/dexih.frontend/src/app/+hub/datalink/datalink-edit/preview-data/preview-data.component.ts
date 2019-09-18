@@ -6,6 +6,7 @@ import { DatalinkEditService } from '../datalink-edit.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup } from '@angular/forms';
+import { eDataObjectType } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -23,6 +24,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
     public pageTitle: string;
     public message: string;
 
+    public eDataObjectType = eDataObjectType;
 
     public error: string;
 

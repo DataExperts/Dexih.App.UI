@@ -8,7 +8,8 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { HubFormsService } from '../../../hub.forms.service';
 import { LogFactory, eLogLevel } from '../../../../../logging';
 import { HubCache, eMappingStatus, updateStrategies, loadStrategies, ConnectionTables } from '../../../hub.models';
-import { eDeltaType, eUpdateStrategy, eTransformWriterMethod, DexihConnection, DexihDatalinkTarget } from '../../../../shared/shared.models';
+import { eDeltaType, eUpdateStrategy, eTransformWriterMethod,
+    DexihConnection, DexihDatalinkTarget } from '../../../../shared/shared.models';
 
 @Component({
 

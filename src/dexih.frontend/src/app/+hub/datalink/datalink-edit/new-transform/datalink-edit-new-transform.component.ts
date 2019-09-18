@@ -35,9 +35,9 @@ export class DatalinkEditNewTransformComponent implements OnInit, OnDestroy {
                 this.route.data,
                 this.route.params,
                 this.editDatalinkService.hubFormsService.getCurrentFormObservable(),
-            ).subscribe(result => {
+            ).subscribe(async result => {
                 this.transforms = [];
-                let userConfigTransforms = this.hubService.GetUserConfigTransformReference();
+                let userConfigTransforms = await this.hubService.GetUserConfigTransformReference();
 
                 userConfigTransforms.forEach(transform => {
                     let transformType = transformTypes.find(c => c.key === transform.transformType);

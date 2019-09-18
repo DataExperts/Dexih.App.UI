@@ -38,18 +38,13 @@ export class HubComponent implements OnInit, OnDestroy {
             this._subscription = combineLatest(
                 this.hubService.getHubCacheObservable(),
                 this.authService.getWebSocketStatusObservable(),
-                this.hubService.getRemoteAgentObservable()
+                this.hubService.getRemoteAgentObservable(),
+                this.route.params,
             ).subscribe(result => {
                 this.hubCache = result[0];
                 this.webSocketStatus = result[1];
                 this.remoteAgent = result[2];
-            });
-
-            this._routeSubscription = combineLatest(
-                this.route.data,
-                this.route.params,
-            ).subscribe(result => {
-                let params = result[1];
+                let params = result[3];
 
                 this.hubKey = + params['hubKey'];
                 if (this.hubKey > 0) {
@@ -62,7 +57,9 @@ export class HubComponent implements OnInit, OnDestroy {
                     this.hubKey = this.hubCache.hub.hubKey;
                     this.hub = this.hubCache.hub;
                 }
+
             });
+
 
         } catch (e) {
             this.hubService.addHubClientErrorMessage(e, 'Hub Component');

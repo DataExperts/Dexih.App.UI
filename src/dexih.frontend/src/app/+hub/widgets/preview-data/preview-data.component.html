@@ -22,17 +22,15 @@
     </ng-template>
 
     <ng-template #tableHeader>
-        <h5>Data Configuration</h5>
         <query-builder [selectQuery]="selectQuery" [columns]="tableColumns" [inputColumns]="inputColumns" [parameters]="parameters">
         </query-builder>
-        <div [ngStyle]="{'display': view === 'chart' ? 'block' : 'none' }" class="mt-1">
-            <h5>Chart Configuration</h5>
-            <chart-builder [columns]="columns" [data]="data" [config]="chartConfig"></chart-builder>
-        </div>
-        <div [ngStyle]="{'display': view === 'properties' ? 'block' : 'none' }" class="mt-1">
-            <h5>Query Plan</h5>
-            <transform-properties [transformProperties]='transformProperties'></transform-properties>
-        </div>
     </ng-template>
 
 </dexih-table>
+
+<div [ngStyle]="{'display': view === 'chart' ? 'block' : 'none' }" class="mt-1">
+    <chart-builder [columns]="columns" [data]="data" [config]="chartConfig"></chart-builder>
+</div>
+<div [ngStyle]="{'display': view === 'properties' ? 'block' : 'none' }" class="mt-1">
+    <transform-properties [transformProperties]='transformProperties'></transform-properties>
+</div>

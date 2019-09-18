@@ -3,7 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HubService } from '../../hub.service';
 import { HubCache } from '../../hub.models';
 import { Subscription, combineLatest} from 'rxjs';
-import { DexihTable, eConnectionCategory, DexihConnection, ConnectionReference, DexihDatalink, DownloadObject, eSourceType, eDownloadFormat, DexihHub, eDataObjectType } from '../../../shared/shared.models';
+import { DexihTable, eConnectionCategory, DexihConnection, ConnectionReference, DexihDatalink,
+    DownloadObject, eSourceType, eDownloadFormat, DexihHub, eDataObjectType } from '../../../shared/shared.models';
 
 @Component({
     selector: 'actions-table-button',
@@ -39,7 +40,7 @@ export class ActionsTableButtonComponent implements OnInit, OnChanges, OnDestroy
     ngOnInit() {
         this._subscription = combineLatest(
             this.hubService.getHubCacheObservable(),
-        ).subscribe(result => {
+        ).subscribe(async result => {
             this.hubCache = result[0];
 
             if (this.hubCache.isLoaded()) {
@@ -48,13 +49,13 @@ export class ActionsTableButtonComponent implements OnInit, OnChanges, OnDestroy
                 this.canWrite = this.hubCache.canWrite;
                 if (this.tables && this.tables.length === 1) {
                     this.connection = this.hubCache.getConnection(this.tables[0].connectionKey);
-                    this.connectionReference = this.hubService.GetConnectionReference(this.connection);
+                    this.connectionReference = await this.hubService.GetConnectionReference(this.connection);
                 }
             }
         });
      }
 
-     ngOnChanges() {
+     async ngOnChanges() {
         if (this.tables && this.hubCache) {
             this.datalinksSource = this.hubCache.hub.dexihDatalinks
                 .filter(c => this.tables.find(t => t.key === c.sourceDatalinkTable.sourceTableKey));
@@ -67,7 +68,7 @@ export class ActionsTableButtonComponent implements OnInit, OnChanges, OnDestroy
 
             if (this.tables.length === 1) {
                 this.connection = this.hubCache.getConnection(this.tables[0].connectionKey);
-                this.connectionReference = this.hubService.GetConnectionReference(this.connection);
+                this.connectionReference = await this.hubService.GetConnectionReference(this.connection);
             }
         }
      }

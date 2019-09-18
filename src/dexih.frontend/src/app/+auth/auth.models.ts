@@ -1,7 +1,4 @@
 import { Subscription } from 'rxjs';
-import { EntityBase } from './global.models';
-import { resolve } from 'dns';
-import { reject } from 'q';
 import { DexihHubUser, ePermission } from '../shared/shared.models';
 
 export const logoUrl = 'assets/img/dexih/dex_logo_wide_raw.png';
@@ -52,7 +49,7 @@ export enum eLoginType {
     Microsoft = <any>'Microsoft',
 }
 
-export class DexihHubAuth extends EntityBase {
+export class DexihHubAuth {
     public hubKey: number;
     public name: string;
     public description: string;
@@ -61,6 +58,11 @@ export class DexihHubAuth extends EntityBase {
     public expiryDate: Date;
 
     public dexihHubUser: Array<DexihHubUser>;
+
+    public createDate: string;
+    public updateDate: string;
+    public isValid = true;
+
 }
 
 export enum eSharedAccess {
@@ -289,23 +291,24 @@ export class RemoteToken {
 }
 
 // export class PromiseWithCancel<T> implements Promise<T> {
-//     then<TResult1 = T, TResult2 = never>(onfulfilled?: (value: T) => TResult1 | PromiseLike<TResult1>, onrejected?: (reason: any) => TResult2 | PromiseLike<TResult2>): Promise<TResult1 | TResult2> {
+//     then<TResult1 = T, TResult2 = never>(onfulfilled?: (value: T) => TResult1 | PromiseLike<TResult1>, onrejected?:
+//    (reason: any) => TResult2 | PromiseLike<TResult2>): Promise<TResult1 | TResult2> {
 //         return this._promise.then(onfulfilled);
 //     }
-    
+
 //     catch<TResult = never>(onrejected?: (reason: any) => TResult | PromiseLike<TResult>): Promise<T | TResult> {
 //         return this._promise.catch(onrejected);
 //     }
-    
+
 //     [Symbol.toStringTag]: string;
 //     finally(onfinally?: () => void): Promise<T> {
 //         return this._promise.finally(onfinally);
 //     }
 
 //     public constructor(executor: (
-//         resolve: (value?: T | PromiseLike<T>) => void, 
+//         resolve: (value?: T | PromiseLike<T>) => void,
 //         reject: (reason?: any) => void) => void, cancel: () => void) {
-        
+
 //         this._promise = new Promise<T>((resolve, reject) => {executor(resolve, reject)});
 //       }
 
@@ -321,18 +324,18 @@ export class RemoteToken {
 //     }
 // }
 
-export class PromiseWithCancel<T> extends Promise<T>{
+export class PromiseWithCancel<T> extends Promise<T> {
 
-    constructor(executor: (resolve: (value?: T | PromiseLike<T>) => void, reject: (reason?: any) => void) => void, 
+    private _cancel: CancelToken;
+
+    constructor(executor: (resolve: (value?: T | PromiseLike<T>) => void, reject: (reason?: any) => void) => void,
         cancel: CancelToken = new CancelToken()) {
         super(executor);
         this._cancel = cancel;
     }
 
-    private _cancel: CancelToken;
-
     public cancel() {
-        if(this._cancel) {
+        if (this._cancel) {
             this._cancel.cancel();
         }
     }
@@ -341,12 +344,11 @@ export class PromiseWithCancel<T> extends Promise<T>{
 export class CancelToken {
     public cancelMethod: () => void;
 
-    //cancel the operation
+    // cancel the operation
     public cancel() {
         if (this.cancelMethod) {
             this.cancelMethod();
         }
     }
-   
 }
 

@@ -5,7 +5,8 @@ import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
 import { FormGroup, FormArray } from '@angular/forms';
 import { HubFormsService } from '../../../hub.forms.service';
 import { HubCache, deltaTypes, securityFlags } from '../../../hub.models';
-import { RemoteLibraries, eTableType, DexihConnection, ConnectionReference, eConnectionCategory, DexihTableColumn, eConnectionPurpose, DexihTable } from '../../../../shared/shared.models';
+import { eTableType, DexihConnection, ConnectionReference,
+    eConnectionCategory, DexihTableColumn, eConnectionPurpose, DexihTable } from '../../../../shared/shared.models';
 import { TypeCodes } from '../../../hub.remote.models';
 
 @Component({
@@ -27,7 +28,6 @@ export class TableEditPropertiesComponent implements OnInit, OnDestroy {
     public tableKey: number;
 
     private hubCache: HubCache;
-    private remoteLibraries: RemoteLibraries;
     public action: string; // new or edit
     public pageTitle: string;
 
@@ -65,7 +65,7 @@ export class TableEditPropertiesComponent implements OnInit, OnDestroy {
                 this.route.params,
                 this.hubService.getHubCacheObservable(),
                 this.formsService.getCurrentFormObservable(),
-            ).subscribe(result => {
+            ).subscribe(async result => {
                 let data = result[0];
                 this.hubCache = result[2];
                 this.mainForm = result[3];
@@ -73,15 +73,15 @@ export class TableEditPropertiesComponent implements OnInit, OnDestroy {
                 this.action = data['action'];
                 this.pageTitle = data['pageTitle'];
 
-                if (this.hubCache && this.hubCache.isLoaded() && this.mainForm  && this.remoteLibraries) {
+                if (this.hubCache && this.hubCache.isLoaded() && this.mainForm ) {
                     this.connections = this.hubCache.hub.dexihConnections;
                     this.connection = this.connections.find(c => c.key === this.mainForm.controls.connectionKey.value);
-                    this.connectionReference = this.hubService.GetConnectionReference(this.connection);
+                    this.connectionReference = await this.hubService.GetConnectionReference(this.connection);
 
                     if (this._connectionSubscription) { this._connectionSubscription.unsubscribe(); }
-                    this._connectionSubscription = this.mainForm.controls.connectionKey.valueChanges.subscribe((connectionKey) => {
+                    this._connectionSubscription = this.mainForm.controls.connectionKey.valueChanges.subscribe(async (connectionKey) => {
                         this.connection = this.connections.find(c => c.key === connectionKey);
-                        this.connectionReference = this.hubService.GetConnectionReference(this.connection);
+                        this.connectionReference = await this.hubService.GetConnectionReference(this.connection);
                     });
                 }
 

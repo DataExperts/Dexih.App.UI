@@ -48,7 +48,7 @@
 					</section>
 					<section class="form-group col-md-6">
 						<form-select label="Database Type" [(ngModel)]="connectionReference" [ngModelOptions]="{standalone: true}" (ngModelChange)="selectDatabaseType($event)" 
-							[items]="connectionTypes" itemName="name" itemKey="key" [enableKeySelect]="false"
+							[items]="connectionTypes" itemName="name" itemKey="name" [enableKeySelect]="false"
 							iconClass="fa fa-database" [sortItems]="true">
 						</form-select>
 					</section>

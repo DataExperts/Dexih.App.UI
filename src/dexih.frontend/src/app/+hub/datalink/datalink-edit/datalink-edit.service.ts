@@ -8,7 +8,8 @@ import { HubService } from '../../hub.service';
 import { TransformReference } from '../../hub.remote.models';
 import { Message } from '../../../+auth/auth.models';
 import { HubCache } from '../../hub.models';
-import { eTransformType, DexihDatalinkColumn, eParameterDirection, eTypeCode, DexihDatalinkTransformItem, DexihDatalinkTransform, DexihDatalinkTable, eTransformItemType, eSourceType } from '../../../shared/shared.models';
+import { eTransformType, DexihDatalinkColumn, eParameterDirection, eTypeCode, DexihDatalinkTransformItem,
+    DexihDatalinkTransform, DexihDatalinkTable, eTransformItemType, eSourceType } from '../../../shared/shared.models';
 
 // contains shared objects used to edit the datalink.
 
@@ -304,11 +305,11 @@ export class DatalinkEditService implements OnInit, OnDestroy {
         });
     }
 
-    resetDatalinkTransformPositions() {
+    async resetDatalinkTransformPositions() {
         const datalinkForm = this.hubFormsService.currentForm;
         const datalinkTransforms = <FormArray>datalinkForm.controls.dexihDatalinkTransforms;
 
-        let userConfigTransforms = this.hubService.GetUserConfigTransformReference();
+        let userConfigTransforms = await this.hubService.GetUserConfigTransformReference();
 
         let position = 10;
         datalinkTransforms.controls.sort((a, b) => a.value.position - b.value.position).forEach(datalinkTransform => {

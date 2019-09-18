@@ -6,7 +6,8 @@ import { AuthService } from '../../../../+auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormArray } from '@angular/forms';
 import { InputOutputColumns } from '../../../hub.lineage.models';
-import { eFunctionType, eTransformType, eTransformItemType, DexihDatalinkTransformItem, DexihDatalinkTransform, DexihDatalinkColumn, eTypeCode } from '../../../../shared/shared.models';
+import { eFunctionType, eTransformType, eTransformItemType, DexihDatalinkTransformItem,
+    DexihDatalinkTransform, DexihDatalinkColumn, eTypeCode } from '../../../../shared/shared.models';
 
 @Component({
 

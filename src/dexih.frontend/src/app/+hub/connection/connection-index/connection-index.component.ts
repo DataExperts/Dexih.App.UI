@@ -4,7 +4,7 @@ import { HubCache, connectionPurposes } from '../../hub.models';
 import { AuthService } from '../../../+auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
-import { DexihConnection, eConnectionPurpose, DexihHub, eSharedObjectType } from '../../../shared/shared.models';
+import { DexihConnection, eConnectionPurpose, DexihHub, eSharedObjectType, eConnectionPurposeItems } from '../../../shared/shared.models';
 
 @Component({
     selector: 'connections',
@@ -105,13 +105,13 @@ export class ConnectionIndexComponent implements OnInit, OnDestroy {
             }
 
             let tableData = []
-            connections.forEach(connection =>  {
-                let connectionReference = this.hubService.GetConnectionReference(connection);
+            connections.forEach(async connection =>  {
+                let connectionReference = await this.hubService.GetConnectionReference(connection);
                 tableData.push({
                     key: connection.key,
                     connectionAssemblyName: connection.connectionAssemblyName,
                     connectionClassName: connection.connectionClassName,
-                    purpose: connection.purpose,
+                    purpose: eConnectionPurpose[connection.purpose],
                     type: connectionReference ? connectionReference.name : 'Unknown (' + connection.connectionClassName + ')',
                     name: connection.name,
                     description: connection.description,

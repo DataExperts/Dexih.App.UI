@@ -4,7 +4,7 @@ import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../+auth/auth.service';
 import { HubCache, connectionPurposes } from '../../hub.models';
-import { DexihTable, eConnectionCategory, eSharedObjectType } from '../../../shared/shared.models';
+import { DexihTable, eConnectionCategory, eSharedObjectType, eConnectionPurposeItems, eConnectionPurpose } from '../../../shared/shared.models';
 
 @Component({
     selector: 'table-index',
@@ -95,9 +95,9 @@ export class TableIndexComponent implements OnInit, OnDestroy {
         }
         if (this.hubCache && this.hubCache.isLoaded()) {
             let tableData = [];
-            this.hubCache.hub.dexihTables.forEach(table => {
+            this.hubCache.hub.dexihTables.forEach(async table => {
                 let connection = this.hubCache.hub.dexihConnections.find(c => c.key === table.connectionKey);
-                let connectionReference = this.hubService.GetConnectionReference(connection);
+                let connectionReference = await this.hubService.GetConnectionReference(connection);
 
                 if (
                     ((this.purposeFilter === 'All' || !this.purposeFilter) ||
@@ -117,7 +117,7 @@ export class TableIndexComponent implements OnInit, OnDestroy {
 
                     tableData.push({
                         key: table.key,
-                        tableType: connection ? connection.purpose : 'undefined',
+                        tableType: connection ? eConnectionPurpose[connection.purpose] : 'undefined',
                         connectionName: connection ? connection.name : 'undefined',
                         description: table.description,
                         name: name,

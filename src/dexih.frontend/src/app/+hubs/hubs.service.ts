@@ -4,7 +4,8 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { AuthService } from '../+auth/auth.service';
 import { BehaviorSubject, Observable, Subscription} from 'rxjs';
 import { eEnvironment, RemoteApplicationSettings } from './remoteAgents/remoteAgent-download/remoteAgent-download.models';
-import { eDownloadFormat, DexihActiveAgent, InputColumn, SelectQuery, Table, eTypeCode, DexihRemoteAgent, SharedData, eDataObjectType } from '../shared/shared.models';
+import { eDownloadFormat, DexihActiveAgent, InputColumn, SelectQuery,
+    eTypeCode, DexihRemoteAgent, SharedData, eDataObjectType, DataPack } from '../shared/shared.models';
 
 @Injectable()
 export class HubsService implements OnDestroy {
@@ -162,7 +163,7 @@ export class HubsService implements OnDestroy {
                         // this.addHubErrorMessage(data['message']);
                         reject(data);
                     } else {
-                        let tableResult: Table = data;
+                        let tableResult: DataPack = data;
                         let columns = [];
 
                         tableResult.columns.forEach((c, index) => {

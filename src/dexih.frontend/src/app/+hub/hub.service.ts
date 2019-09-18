@@ -15,8 +15,15 @@ import {
     DexihInputParameter
 } from './hub.models';
 import { RemoteAgentStatus, transformTypes } from './hub.remote.models';
-import { GlobalCache } from '../+auth/global.models';
-import { DexihDatajob, DexihTable, DexihHub, DexihRemoteAgentHub, DexihConnection, DexihDatalink, InputColumn, InputParameter, DexihView, DexihDashboard, DexihApi, SelectQuery, DexihColumnValidation, DexihCustomFunction, DexihDatalinkTransformItem, DexihFileFormat, DexihHubVariable, DexihDatalinkTest, DexihDatalinkStep, TransformWriterResult, TransformProperties, Import, eImportAction, eRunStatus, eDatalinkType, eDeltaType, eConnectionPurpose, eFlatFilePath, ApiData, DownloadObject, eDownloadFormat, DexihActiveAgent, ImportObject, ePermission, eTypeCode, eDataObjectType, eSharedObjectType, RemoteLibraries, ConnectionReference, DexihDatalinkTransform, TransformReference, FunctionReference, eFunctionType } from '../shared/shared.models';
+import { DexihDatajob, DexihTable, DexihHub, DexihRemoteAgentHub, DexihConnection, DexihDatalink, InputColumn,
+    InputParameter, DexihView, DexihDashboard, DexihApi, SelectQuery, DexihColumnValidation, DexihCustomFunction,
+    DexihDatalinkTransformItem, DexihFileFormat, DexihHubVariable, DexihDatalinkTest, DexihDatalinkStep, TransformWriterResult,
+    TransformProperties, Import, eImportAction, eRunStatus, eDatalinkType, eDeltaType, eConnectionPurpose, eFlatFilePath,
+    ApiData, DownloadObject, eDownloadFormat, DexihActiveAgent, ImportObject, ePermission, eTypeCode, eDataObjectType,
+    eSharedObjectType, RemoteLibraries, ConnectionReference, DexihDatalinkTransform, TransformReference,
+    FunctionReference, eFunctionType, CacheManager } from '../shared/shared.models';
+import { debounce, filter, first } from 'rxjs/operators';
+import { fileURLToPath } from 'url';
 
 @Injectable()
 export class HubService implements OnInit, OnDestroy {
@@ -39,8 +46,6 @@ export class HubService implements OnInit, OnDestroy {
 
     // updates whenever a bulk file upload is completed.
     private _flatFiles = new Subject<FlatFilesReady>();
-
-    private _globalCache: GlobalCache;
 
     // private _activeAgents: DexihActiveAgent[];
     private _remoteAgent = new BehaviorSubject<DexihActiveAgent>(null);
@@ -76,9 +81,7 @@ export class HubService implements OnInit, OnDestroy {
             let hubs = result[1];
             let hubCache = result[2];
 
-            this._globalCache = globalCache;
-
-            if (hubCache && hubCache.hub) {
+            if (hubCache && hubCache.hub && globalCache) {
 
                 // if remote libraries are not loaded (from remoteAgent) then use the default.
                 if (!this._remoteLibraries.value) {
@@ -135,7 +138,7 @@ export class HubService implements OnInit, OnDestroy {
 
     // gets the hub cache
     getHubCacheObservable(): Observable<HubCache> {
-        return this._hubCache.asObservable();
+        return this._hubCache.asObservable(); // .pipe(filter(c => c !== null && c.isLoaded() === true) );
     }
 
     // gets the hub cache
@@ -222,13 +225,13 @@ export class HubService implements OnInit, OnDestroy {
 
             this.authService.post('/api/Hub/GetHubCache', { hubKey: hubKey }, 'Loading the hub cache...').then(result => {
                 let hub: DexihHub = result.value.hub;
-                let permisson = result.value.permission;
+                let permission = result.value.permission;
 
                 this.logger.LogC(() => `refreshHubCache, hub loaded ${hub.name}.`, eLogLevel.Debug);
 
                 // update the status for datalink and datajobs.  These are use to monitor execution status.
                 hub.dexihDatalinks.forEach(datalink => {
-                    datalink['currentStatus']= new BehaviorSubject<TransformWriterResult>(null);
+                    datalink['currentStatus'] = new BehaviorSubject<TransformWriterResult>(null);
                     datalink['previousStatus'] = new BehaviorSubject<TransformWriterResult>(null);
                 });
 
@@ -252,7 +255,7 @@ export class HubService implements OnInit, OnDestroy {
                 });
 
                 let hubCache: HubCache = new HubCache(eCacheStatus.Loaded, hub);
-                hubCache.hubPermission = permisson;
+                hubCache.hubPermission = permission;
                 this.resetRemoteAgent(hubCache);
                 this._hubCache.next(hubCache);
 
@@ -282,6 +285,10 @@ export class HubService implements OnInit, OnDestroy {
 
     getRemoteLibrariesObservable(): Observable<RemoteLibraries> {
         return this._remoteLibraries.asObservable();
+    }
+
+    getRemoteLibrariesPromise(): Promise<RemoteLibraries> {
+        return this._remoteLibraries.asObservable().pipe(filter(c => c !== null), first()).toPromise();
     }
 
     // sets the remote agent to the appropriate default agent when a status changes.
@@ -402,73 +409,75 @@ export class HubService implements OnInit, OnDestroy {
         }
     }
 
-    public GetConnectionReference(connection: DexihConnection): ConnectionReference {
-        let remoteLibraries = this._remoteLibraries.value;
-        if(!remoteLibraries) { return null; }
+    public GetConnectionReference(connection: DexihConnection): Promise<ConnectionReference> {
+        return new Promise<ConnectionReference>((resolve, reject) => {
+            this.getRemoteLibrariesPromise().then(remoteLibraries => {
+                if (connection) {
+                    let ref = remoteLibraries.connections.find(c =>
+                        c.connectionAssemblyName === connection.connectionAssemblyName
+                        && c.connectionClassName === connection.connectionClassName);
 
-        if (connection && remoteLibraries.connections) {
-            let ref = remoteLibraries.connections.find(c =>
-                c.connectionAssemblyName === connection.connectionAssemblyName
-                && c.connectionClassName === connection.connectionClassName);
+                    resolve(ref);
 
-            return ref;
-        } else {
-            return null;
-        }
+                } else {
+                    resolve(null);
+                }
+            }).catch(reason => reject(reason));
+        });
     }
 
-    public GetTransformReference(transform: DexihDatalinkTransform): TransformReference {
-        let remoteLibraries = this._remoteLibraries.value;
-        if(!remoteLibraries) { return null; }
+    // public GetTransformReference(transform: DexihDatalinkTransform): Promise<TransformReference> {
+    //     return new Promise<TransformReference>((resolve, reject) => {
+    //         this.getRemoteLibrariesObservable().toPromise().then(remoteLibraries => {
+    //             if (transform) {
+    //                 let ref = remoteLibraries.transforms.find(c =>
+    //                     c.transformAssemblyName === transform.transformAssemblyName
+    //                     && c.transformClassName === transform.transformClassName);
 
-        if (transform && remoteLibraries.transforms) {
-            let ref = remoteLibraries.transforms.find(c =>
-                c.transformAssemblyName === transform.transformAssemblyName
-                && c.transformClassName === transform.transformClassName);
+    //                 resolve(ref);
 
-            return ref;
-        } else {
-            return null;
-        }
-    }
+    //             } else {
+    //                 resolve(null);
+    //             }
+    //         }).catch(reason => reject(reason));
+    //     });
+    // }
 
     // transforms that can be added/removed within a datalink
-    public GetUserConfigTransformReference(): TransformReference[] {
-        let remoteLibraries = this._remoteLibraries.value;
-        if(!remoteLibraries) { return null; }
-
-        if (!remoteLibraries.transforms) {
-            return [];
-        }
-        let userConfig = transformTypes.filter(c => c.allowUserConfig);
-        return remoteLibraries.transforms.filter(c => userConfig.findIndex(u => u.key === c.transformType ) >= 0 );
+    public GetUserConfigTransformReference(): Promise<TransformReference[]> {
+        return new Promise<TransformReference[]>((resolve, reject) => {
+            this.getRemoteLibrariesPromise().then(remoteLibraries => {
+                let userConfig = transformTypes.filter(c => c.allowUserConfig);
+                resolve(remoteLibraries.transforms.filter(c => userConfig.findIndex(u => u.key === c.transformType ) >= 0 ));
+            }).catch(reason => reject(reason));
+        });
     }
 
-    public GetFunctionReference(item: DexihDatalinkTransformItem): FunctionReference {
-        let remoteLibraries = this._remoteLibraries.value;
-        if(!remoteLibraries) { return null; }
+    public GetFunctionReference(item: DexihDatalinkTransformItem): Promise<FunctionReference> {
+        return new Promise<FunctionReference>((resolve, reject) => {
+            this.getRemoteLibrariesPromise().then(remoteLibraries => {
+                if (item) {
+                    let ref = remoteLibraries.functions.find(c =>
+                        c.functionAssemblyName === item.functionAssemblyName
+                        && c.functionClassName === item.functionClassName
+                        && c.functionMethodName === item.functionMethodName);
 
-        if (remoteLibraries.functions && item && item.functionClassName) {
-            let ref = remoteLibraries.functions.find(c =>
-                c.functionAssemblyName === item.functionAssemblyName
-                && c.functionClassName === item.functionClassName
-                && c.functionMethodName === item.functionMethodName);
+                    resolve(ref);
 
-            return ref;
-        } else {
-            return null;
-        }
+                } else {
+                    resolve(null);
+                }
+            }).catch(reason => reject(reason));
+        });
     }
 
-    public GetFunctionsByType(functionType: eFunctionType): FunctionReference[] {
-        let remoteLibraries = this._remoteLibraries.value;
-        if(!remoteLibraries) { return null; }
-
-        if (!remoteLibraries.functions) {
-            return [];
-        }
-        return remoteLibraries.functions.filter(c => c.functionType === functionType);
-
+    public GetFunctionsByType(functionType: eFunctionType): Promise<FunctionReference[]> {
+        return new Promise<FunctionReference[]>((resolve, reject) => {
+            this.getRemoteLibrariesPromise().then(remoteLibraries => {
+                let userConfig = transformTypes.filter(c => c.allowUserConfig);
+                resolve(remoteLibraries.functions.filter(c => c.functionType === functionType));
+            }).catch(reason => reject(reason));
+        });
     }
 
     private processWebSocketMessage(data: RemoteMessage) {
@@ -778,19 +787,21 @@ export class HubService implements OnInit, OnDestroy {
                 this.authService.post('/api/Hub/GetRemoteAgentStatus', {
                     hubKey: hubCache.hub.hubKey,
                     instanceId: instanceId
-                    }, 'Getting the remote agent status...').then(result => {
+                    }, 'Getting the remote agent status...').then(async result => {
                     if (result.success) {
                         const agentStatus: RemoteAgentStatus = result.value;
                         const hub = this._hubCache.value.hub;
 
+                        let globalCache = await this.authService.getGlobalCachePromise();
+
                         // combine any functions in the libraries on the remote agent with the standard global remote libraries.
                         let remoteLibraries = new RemoteLibraries();
                         remoteLibraries.connections =
-                            this._globalCache.defaultRemoteLibraries.connections.concat(agentStatus.remoteLibraries.connections);
+                            globalCache.defaultRemoteLibraries.connections.concat(agentStatus.remoteLibraries.connections);
                         remoteLibraries.transforms =
-                            this._globalCache.defaultRemoteLibraries.transforms.concat(agentStatus.remoteLibraries.transforms);
+                            globalCache.defaultRemoteLibraries.transforms.concat(agentStatus.remoteLibraries.transforms);
                         remoteLibraries.functions =
-                        this._globalCache.defaultRemoteLibraries.functions.concat(agentStatus.remoteLibraries.functions);
+                            globalCache.defaultRemoteLibraries.functions.concat(agentStatus.remoteLibraries.functions);
 
                         this._remoteLibraries.next(remoteLibraries);
 
@@ -1437,7 +1448,8 @@ export class HubService implements OnInit, OnDestroy {
     }
 
 
-    getAuditResults(auditType: string, connectionKeys: Array<number>, referenceKeys: Array<number>, childItems: boolean, rows: number, cancelToken: CancelToken):
+    getAuditResults(auditType: string, connectionKeys: Array<number>, referenceKeys: Array<number>,
+        childItems: boolean, rows: number, cancelToken: CancelToken):
          Promise<Array<TransformWriterResult>> {
             return new Promise<Array<TransformWriterResult>>((resolve, reject) => {
 
@@ -1853,8 +1865,7 @@ export class HubService implements OnInit, OnDestroy {
                             if (data['success'] === false) {
                                 this.addHubMessage(data);
                                 reject(data['message']);
-                            }
-                            else {
+                            } else {
                                 let columns = this.constructDataTableColumns(data.columns);
                                 resolve({
                                     name: data.name,
@@ -1886,7 +1897,7 @@ export class HubService implements OnInit, OnDestroy {
     previewTableKeyData(tableKey: number, showRejectedData, selectQuery: SelectQuery, inputColumns: InputColumn[],
         inputParameters: DexihInputParameter[], cancelToken: CancelToken):
         PromiseWithCancel<PreviewResults> {
-        
+
         let promise = new PromiseWithCancel<PreviewResults>((resolve, reject) => {
                 if (!this._remoteAgent.value) {
                     let message = new Message(false, 'No active remote agent.', null, null);
@@ -1926,7 +1937,7 @@ export class HubService implements OnInit, OnDestroy {
     previewDatalinkKeyData(datalinkKey: number, selectQuery: SelectQuery, inputColumns: InputColumn[],
         inputParameters: DexihInputParameter[], cancelToken: CancelToken):
     PromiseWithCancel<PreviewResults> {
-        
+
         let promise = new PromiseWithCancel<PreviewResults>((resolve, reject) => {
                 if (!this._remoteAgent.value) {
                     let message = new Message(false, 'No active remote agent.', null, null);
@@ -2006,7 +2017,7 @@ export class HubService implements OnInit, OnDestroy {
 
     previewView(view: DexihView, inputColumns: InputColumn[],
             inputParameters: DexihInputParameter[], cancelToken: CancelToken): PromiseWithCancel<PreviewResults> {
-            
+
             let promise = new PromiseWithCancel<PreviewResults>((resolve, reject) => {
                     if (!this._remoteAgent.value) {
                         let message = new Message(false, 'No active remote agent.', null, null);
@@ -2079,8 +2090,7 @@ export class HubService implements OnInit, OnDestroy {
                     if (data['success'] === false) {
                         this.addHubMessage(data);
                         reject(data['message']);
-                    }
-                    else {
+                    } else {
                         let columns = this.constructDataTableColumns(data.columns);
                         resolve({
                             name: data.name,

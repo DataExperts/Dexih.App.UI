@@ -7,7 +7,8 @@ import { Subscription, combineLatest } from 'rxjs';
 import { InputOutputColumns } from '../../../hub.lineage.models';
 import { compare } from '../../../hub.query.models';
 import { filter } from 'rxjs/operators';
-import { DexihDatalinkTransform, DexihDatalinkTransformItem, eTransformItemType, eCompare, DexihDatalinkColumn, FunctionReference, eParameterDirection } from '../../../../shared/shared.models';
+import { DexihDatalinkTransform, DexihDatalinkTransformItem, eTransformItemType, eCompare,
+    DexihDatalinkColumn, FunctionReference, eParameterDirection } from '../../../../shared/shared.models';
 
 export class ValidValue {
     public valid: boolean;
@@ -70,14 +71,14 @@ export class MappingItemComponent implements OnInit {
         }
     }
 
-    updateMapping() {
+    async updateMapping() {
         let item = this.transformItem;
         let itemType = transformItemTypes.find(c => c.key === item.transformItemType);
 
         switch (item.transformItemType) {
             case eTransformItemType.BuiltInFunction:
                 if (item.functionClassName) {
-                    let func = this.hubService.GetFunctionReference(item);
+                    let func = await this.hubService.GetFunctionReference(item);
                     if (func) {
                         this.label = func.name;
                         this.addBuiltInFunctionParameters(func);

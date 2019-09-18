@@ -89,6 +89,12 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
           if (this.action === 'new') {
             this.refreshComplete = true;
             let dashboard = new DexihDashboard();
+            dashboard.minCols = 4;
+            dashboard.maxCols = 100;
+            dashboard.minRows = 4;
+            dashboard.maxRows = 100;
+            dashboard.autoRefresh = true;
+
             this.formsService.dashboard(dashboard);
             let runTime = this.formsService.currentForm.controls.runTime.value;
             runTime.showEdit = true;

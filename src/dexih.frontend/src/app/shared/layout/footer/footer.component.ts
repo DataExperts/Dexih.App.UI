@@ -16,8 +16,7 @@ export class FooterComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService) {
      this._globalCacheSubscription = authService.getGlobalCacheObservable().subscribe(cache => {
        if (cache) {
-         let date = new Date(cache.buildDate);
-         this.year = date.getFullYear();
+        let date = new Date(cache.buildDate);
         this.buildDate = date.toLocaleDateString(); // cache.buildDate;
         this.buildVersion = cache.buildVersion;
        }

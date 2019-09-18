@@ -7,7 +7,8 @@ import { AuthService } from '../../../+auth/auth.service';
 import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import { LogFactory, eLogLevel } from '../../../../logging';
 import { HubCache, eCacheStatus } from '../../hub.models';
-import { DexihDatalinkTransform, eTransformWriterMethod, DexihDatalink, eDatalinkType, eSourceType, eTransformType, DexihDatalinkTable } from '../../../shared/shared.models';
+import { DexihDatalinkTransform, eTransformWriterMethod, DexihDatalink, eDatalinkType,
+    eSourceType, eTransformType, DexihDatalinkTable } from '../../../shared/shared.models';
 
 @Component({
     selector: 'dexih-datalink-edit-form',

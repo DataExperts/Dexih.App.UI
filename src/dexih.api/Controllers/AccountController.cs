@@ -23,11 +23,11 @@ using System.Web;
 using dexih.api.Services.Message;
 using dexih.api.Services.Operations;
 using Dexih.Utils.ManagedTasks;
+using MessagePack;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Caching.Memory;
-using ProtoBuf;
 
 namespace dexih.api.Controllers
 {
@@ -1098,7 +1098,7 @@ namespace dexih.api.Controllers
         [HttpGet("[action]")]
         [AllowAnonymous]
         // [ResponseCache(Duration = 3600)]
-        public ActionResult GetGlobalCache()
+        public CacheManager GetGlobalCache()
         {
             try
             {
@@ -1116,11 +1116,10 @@ namespace dexih.api.Controllers
                     cache.GoogleClientId = _operations.Config.GoogleClientId;
                     cache.MicrosoftClientId = _operations.Config.MicrosoftClientId;
                     cache.GoogleMapsAPIKey = _operations.Config.GoogleMapsAPIKey;
+                    // var bytes = MessagePackSerializer.Serialize(cache);
+                    // return File(bytes, "application/octet-stream", "globalCache");
 
-                    var ms = new MemoryStream();
-                    Serializer.Serialize<CacheManager>(ms, cache);
-                    ms.Position = 0;
-                    return File(ms.ToArray(), "application/octet-stream", "globalCache");
+                    return cache;
                 });
             }
             catch (Exception ex)

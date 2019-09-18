@@ -74,8 +74,8 @@ export class FilesManageComponent implements OnInit, OnDestroy {
                 if (this.hubCache.status !== eCacheStatus.Loaded) { return; }
 
                 this.fileConnections = this.hubCache.hub.dexihConnections
-                    .filter(c => {
-                        const ref = this.hubService.GetConnectionReference(c);
+                    .filter(async c => {
+                        const ref = await this.hubService.GetConnectionReference(c);
                         if (ref) {
                             return ref.connectionCategory === eConnectionCategory.File;
                         } else {
@@ -85,9 +85,9 @@ export class FilesManageComponent implements OnInit, OnDestroy {
 
                 let connectionTables = this.hubCache.getConnectionTables();
 
-                this.connectionTables = connectionTables.filter(c => {
+                this.connectionTables = connectionTables.filter(async c => {
                     if (c.dexihTables.length > 0) {
-                        let connectionReference = this.hubService.GetConnectionReference(c);
+                        let connectionReference = await this.hubService.GetConnectionReference(c);
                         return connectionReference ? connectionReference.connectionCategory === eConnectionCategory.File : false;
                     }
                 });

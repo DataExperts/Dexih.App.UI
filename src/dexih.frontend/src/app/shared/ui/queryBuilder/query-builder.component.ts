@@ -33,6 +33,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
     ngOnInit() {
         if (!this.selectQuery) {
             this.selectQuery = new SelectQuery();
+            this.selectQuery.rows = 100;
         }
 
         this.allRows = this.selectQuery.rows < 0 ? true : false;

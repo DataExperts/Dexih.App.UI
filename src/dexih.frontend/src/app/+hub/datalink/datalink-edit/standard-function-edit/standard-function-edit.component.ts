@@ -1,8 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  HubCache,InvalidActions, FunctionCache}
-  from '../../../hub.models';
+import { HubCache, InvalidActions, FunctionCache} from '../../../hub.models';
 import { HubService } from '../../../hub.service';
 import { DatalinkEditService } from '../datalink-edit.service';
 import { Subscription, combineLatest } from 'rxjs';
@@ -11,7 +9,9 @@ import { FormGroup, FormArray } from '@angular/forms';
 import { LogFactory, eLogLevel } from '../../../../../logging';
 import { TypeCodes } from '../../../hub.remote.models';
 import { InputOutputColumns } from '../../../hub.lineage.models';
-import { FunctionParameter, eFunctionType, eParameterDirection, eGenericType, DexihDatalinkColumn, FunctionReference, DexihCustomFunction, eTransformType, DexihDatalinkTable, DexihDatalinkTransformItem, eTransformItemType, DexihFunctionParameter, eTypeCode, DexihCustomFunctionParameter, DexihFunctionArrayParameter, RemoteLibraries } from '../../../../shared/shared.models';
+import { FunctionParameter, eFunctionType, eParameterDirection, eGenericType, DexihDatalinkColumn, FunctionReference,
+  DexihCustomFunction, eTransformType, DexihDatalinkTable, DexihDatalinkTransformItem, eTransformItemType,
+  DexihFunctionParameter, eTypeCode, DexihCustomFunctionParameter, DexihFunctionArrayParameter, RemoteLibraries } from '../../../../shared/shared.models';
 
 export class ArrayParameter {
   public name: string;

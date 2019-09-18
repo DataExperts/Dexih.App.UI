@@ -26,7 +26,7 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using ProtoBuf;
+using MessagePack;
 using SharedData = dexih.operations.SharedData;
 
 namespace dexih.api.Services.Remote
@@ -122,7 +122,7 @@ namespace dexih.api.Services.Remote
 
             using (var stream = new MemoryStream(properties))
             {
-                return Serializer.Deserialize<RemoteAgentProperties>(stream);
+                return await MessagePackSerializer.DeserializeAsync<RemoteAgentProperties>(stream);
             }
         }
 
@@ -130,7 +130,7 @@ namespace dexih.api.Services.Remote
 	    {
             using (var stream = new MemoryStream())
             {
-                Serializer.Serialize(stream, remoteAgentProperties);
+	            MessagePackSerializer.Serialize(stream, remoteAgentProperties);
                 await _distributedCache.SetAsync(instanceId, stream.ToArray(), cancellationToken);
             }
 	    }
@@ -243,7 +243,7 @@ namespace dexih.api.Services.Remote
 
 			    if (responseMessageTask.IsCompleted)
 			    {
-				    message = responseMessageTask.Result;
+				    message = await responseMessageTask;
 			    }
 			    else
 			    {

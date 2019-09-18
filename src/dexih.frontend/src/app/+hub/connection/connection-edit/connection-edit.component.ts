@@ -6,7 +6,7 @@ import { AuthService } from '../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { HubFormsService } from '../../hub.forms.service';
 import { LogFactory, eLogLevel } from '../../../../logging';
-import { eConnectionPurpose, eConnectionCategory, ConnectionReference, DexihConnection } from '../../../shared/shared.models';
+import { eConnectionPurpose, eConnectionCategory, ConnectionReference, DexihConnection, RemoteLibraries } from '../../../shared/shared.models';
 
 @Component({
 
@@ -17,7 +17,9 @@ import { eConnectionPurpose, eConnectionCategory, ConnectionReference, DexihConn
 export class ConnectionEditComponent implements OnInit, OnDestroy {
 
   public connectionKey: number;
+  private connectionTypes: Array<ConnectionReference>;
   private hubCache: HubCache;
+  private remoteLibraries: RemoteLibraries;
   public action: string; // new or edit
   public pageTitle: string;
 
@@ -59,10 +61,12 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
         this.route.data,
         this.route.params,
         this.hubService.getHubCacheObservable(),
-      ).subscribe(result => {
+        this.hubService.getRemoteLibrariesObservable()
+      ).subscribe(async result => {
         let data = result[0];
         let params = result[1];
         this.hubCache = result[2];
+        this.remoteLibraries = result[3];
 
         this.action = data['action'];
         this.pageTitle = data['pageTitle'];
@@ -73,7 +77,7 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
 
         this.variables = this.hubCache.hub.dexihHubVariables.map(c => '{' + c.name + '}');
 
-          if (!this.hubCache || this.hubCache.status !== eCacheStatus.Loaded || this.isLoaded) { return; }
+          if (!this.remoteLibraries || !this.hubCache || this.hubCache.status !== eCacheStatus.Loaded || this.isLoaded) { return; }
           this.isLoaded = true;
 
           if (this.action === 'edit') {
@@ -95,7 +99,7 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
                   this.logger.LogC(() => `edit connection with key ${this.connectionKey} not found.`, eLogLevel.Warning);
                 } else {
                   this.updateDatabaseTypes(connection.purpose);
-                  this.connectionReference = this.hubService.GetConnectionReference(connection);
+                  this.connectionReference = await this.hubService.GetConnectionReference(connection);
                   this.formsService.connection(connection);
                   this.logger.LogC(() => `edit connection, form loaded.`, eLogLevel.Trace);
                 }
@@ -126,7 +130,7 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
             Object.assign(connection, previousConnection);
             connection.name += ' (copy)';
             connection.key = null;
-            this.connectionReference = this.hubService.GetConnectionReference(connection);
+            this.connectionReference = await this.hubService.GetConnectionReference(connection);
 
             this.logger.LogC(() => `copy connection, connectionKey ${previousConnectionKey}.`, eLogLevel.Trace);
             this.updateDatabaseTypes(connection.purpose);
@@ -171,9 +175,13 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
   }
 
   private updateDatabaseTypes(purpose: eConnectionPurpose) {
+    this.connectionTypes = this.remoteLibraries.connections.filter(d =>
+      (purpose === eConnectionPurpose.Source && d.allowsSourceConnection) ||
+      (purpose === eConnectionPurpose.Managed && d.allowsManagedConnection) ||
+      (purpose === eConnectionPurpose.Target && d.allowsTargetConnection));
   }
 
-  selectDatabaseType(connectionReference: ConnectionReference) {
+  async selectDatabaseType(connectionReference: ConnectionReference) {
     this.formsService.currentForm.controls.connectionClassName.setValue(connectionReference.connectionClassName);
     this.formsService.currentForm.controls.connectionAssemblyName.setValue(connectionReference.connectionAssemblyName);
 

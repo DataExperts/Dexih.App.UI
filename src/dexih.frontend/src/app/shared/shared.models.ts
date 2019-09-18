@@ -50,6 +50,8 @@ export class CacheManager{
 	public microsoftClientId: string = null;
 	public googleMapsAPIKey: string = null;
 	public defaultRemoteLibraries: RemoteLibraries = null;
+	public hubKey: number = 0;
+	public cacheEncryptionKey: string = null;
 }
 
 export class ChartConfig{
@@ -63,15 +65,15 @@ export class ChartConfig{
 	public radiusColumn: string = null;
 	public latitudeColumn: string = null;
 	public longitudeColumn: string = null;
-	public chartType: eChartType = null;
-	public colorScheme: string = null;
+	public chartType: eChartType = eChartType.BarVertical;
+	public colorScheme: string = "natural";
 	public showGradient: boolean = false;
-	public showXAxis: boolean = false;
-	public showYAxis: boolean = false;
+	public showXAxis: boolean = true;
+	public showYAxis: boolean = true;
 	public showLegend: boolean = false;
 	public legendPosition: string = null;
-	public showXAxisLabel: boolean = false;
-	public showYAxisLabel: boolean = false;
+	public showXAxisLabel: boolean = true;
+	public showYAxisLabel: boolean = true;
 	public showGridLines: boolean = false;
 	public xAxisLabel: string = null;
 	public yAxisLabel: string = null;
@@ -79,7 +81,7 @@ export class ChartConfig{
 	public xScaleMin: number = null;
 	public yScaleMax: number = null;
 	public yScaleMin: number = null;
-	public autoScale: boolean = false;
+	public autoScale: boolean = true;
 	public explodeSlices: boolean = false;
 	public doughnut: boolean = false;
 }
@@ -120,6 +122,18 @@ export class ConnectionReference{
 	public allowsWindowsAuth: boolean = false;
 	public requiresDatabase: boolean = false;
 	public requiresLocalStorage: boolean = false;
+}
+
+export class DataPack{
+	public name: string = null;
+	public columns: DataPackColumn[] = [];
+	public data: any[] = [];
+}
+
+export class DataPackColumn{
+	public name: string = null;
+	public logicalName: string = null;
+	public dataType: eTypeCode = eTypeCode.Unknown;
 }
 
 export class DeleteQuery{
@@ -1054,8 +1068,36 @@ export class Filter{
 	public compareDataType: eTypeCode = eTypeCode.Unknown;
 	public column2: TableColumn = null;
 	public value2: any = null;
-	public operator: eCompare = null;
+	public operator: eCompare = eCompare.IsEqual;
 	public andOr: eAndOr = null;
+}
+
+export class FlatFile{
+	public autoManageFiles: boolean = false;
+	public useCustomFilePaths: boolean = false;
+	public fileRootPath: string = null;
+	public fileIncomingPath: string = "";
+	public fileOutgoingPath: string = "";
+	public fileProcessedPath: string = "";
+	public fileRejectedPath: string = "";
+	public fileMatchPattern: string = null;
+	public formatType: eTypeCode = eTypeCode.Unknown;
+	public fileConfiguration: FileConfiguration = new FileConfiguration();
+	public fileSample: string = null;
+	public rowPath: string = null;
+	public name: string = null;
+	public schema: string = null;
+	public sourceConnectionName: string = null;
+	public logicalName: string = null;
+	public description: string = null;
+	public baseTableName: string = null;
+	public tableType: eTableType = null;
+	public isVersioned: boolean = false;
+	public useQuery: boolean = false;
+	public queryString: string = null;
+	public outputSortFields: Sort[] = [];
+	public columns: TableColumn[] = [];
+	public maxImportLevels: number = 10;
 }
 
 export class FunctionParameter{
@@ -1087,7 +1129,7 @@ export class FunctionReference{
 	public importMethodName: string = null;
 	public genericType: eGenericType = null;
 	public genericTypeDefault: eTypeCode = eTypeCode.Unknown;
-	public compare: eCompare = null;
+	public compare: eCompare = eCompare.IsEqual;
 	public isStandardFunction: boolean = false;
 	public returnParameters: FunctionParameter[] = [];
 	public inputParameters: FunctionParameter[] = [];
@@ -1352,6 +1394,9 @@ export class Sort{
 	public direction: eDirection = null;
 }
 
+export class Sorts{
+}
+
 export class SystemSettingsSection{
 	public maxAcknowledgeWait: number = 5000;
 	public responseTimeout: number = 1000000;
@@ -1375,12 +1420,8 @@ export class Table{
 	public useQuery: boolean = false;
 	public queryString: string = null;
 	public outputSortFields: Sort[] = [];
-	public data: any[] = [];
 	public columns: TableColumn[] = [];
 	public maxImportLevels: number = 10;
-}
-
-export class TableCache{
 }
 
 export class TableColumn{
@@ -1526,7 +1567,6 @@ export class WebService{
 	public useQuery: boolean = false;
 	public queryString: string = null;
 	public outputSortFields: Sort[] = [];
-	public data: any[] = [];
 	public columns: TableColumn[] = [];
 	public maxImportLevels: number = 10;
 }
@@ -1544,6 +1584,7 @@ export enum eAggregate{
 }
 
 export const eAggregateItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eAggregate.Sum, name: 'Sum', description: ''},
 	{key: eAggregate.Average, name: 'Average', description: ''},
 	{key: eAggregate.Min, name: 'Min', description: ''},
@@ -1559,6 +1600,7 @@ export enum eAndOr{
 }
 
 export const eAndOrItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eAndOr.And, name: 'And', description: ''},
 	{key: eAndOr.Or, name: 'Or', description: ''},
 ]
@@ -1569,6 +1611,7 @@ export enum eApiStatus{
 }
 
 export const eApiStatusItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eApiStatus.Activated, name: 'Activated', description: ''},
 	{key: eApiStatus.Deactivated, name: 'Deactivated', description: ''},
 ]
@@ -1603,6 +1646,7 @@ export enum eChartType{
 }
 
 export const eChartTypeItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eChartType.BarVertical, name: 'BarVertical', description: ''},
 	{key: eChartType.BarHorizontal, name: 'BarHorizontal', description: ''},
 	{key: eChartType.BarVertical2D, name: 'BarVertical2D', description: ''},
@@ -1641,6 +1685,7 @@ export enum eCleanAction{
 }
 
 export const eCleanActionItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eCleanAction.DefaultValue, name: 'DefaultValue', description: ''},
 	{key: eCleanAction.Truncate, name: 'Truncate', description: ''},
 	{key: eCleanAction.Blank, name: 'Blank', description: ''},
@@ -1650,16 +1695,16 @@ export const eCleanActionItems = [
 ]
 
 export enum eCompare{
-	IsEqual = 1,
-	GreaterThan = 2,
-	GreaterThanEqual = 3,
-	LessThan = 4,
-	LessThanEqual = 5,
-	NotEqual = 6,
-	IsIn = 7,
-	IsNull = 8,
-	IsNotNull = 9,
-	Like = 10,
+	IsEqual = 0,
+	GreaterThan = 1,
+	GreaterThanEqual = 2,
+	LessThan = 3,
+	LessThanEqual = 4,
+	NotEqual = 5,
+	IsIn = 6,
+	IsNull = 7,
+	IsNotNull = 8,
+	Like = 9,
 }
 
 export const eCompareItems = [
@@ -1685,6 +1730,7 @@ export enum eConnectionCategory{
 }
 
 export const eConnectionCategoryItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eConnectionCategory.SqlDatabase, name: 'SqlDatabase', description: ''},
 	{key: eConnectionCategory.NoSqlDatabase, name: 'NoSqlDatabase', description: ''},
 	{key: eConnectionCategory.DatabaseFile, name: 'DatabaseFile', description: ''},
@@ -1701,6 +1747,7 @@ export enum eConnectionPurpose{
 }
 
 export const eConnectionPurposeItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eConnectionPurpose.Source, name: 'Source', description: ''},
 	{key: eConnectionPurpose.Managed, name: 'Managed', description: ''},
 	{key: eConnectionPurpose.Target, name: 'Target', description: ''},
@@ -1719,6 +1766,7 @@ export enum eDatalinkType{
 }
 
 export const eDatalinkTypeItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eDatalinkType.General, name: 'General', description: 'Non-categorized general purpose datalink'},
 	{key: eDatalinkType.Stage, name: 'Stage', description: 'Staging - loads data into a central/interim database'},
 	{key: eDatalinkType.Validate, name: 'Validate', description: 'Validate - performs data validation and cleaning'},
@@ -1738,6 +1786,7 @@ export enum eDataObjectType{
 }
 
 export const eDataObjectTypeItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eDataObjectType.Table, name: 'Table', description: ''},
 	{key: eDataObjectType.Datalink, name: 'Datalink', description: ''},
 	{key: eDataObjectType.View, name: 'View', description: ''},
@@ -1753,6 +1802,7 @@ export enum eDataPrivacyStatus{
 }
 
 export const eDataPrivacyStatusItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eDataPrivacyStatus.NotAllowed, name: 'NotAllowed', description: ''},
 	{key: eDataPrivacyStatus.Proxy, name: 'Proxy', description: ''},
 	{key: eDataPrivacyStatus.Lan, name: 'Lan', description: ''},
@@ -1770,6 +1820,7 @@ export enum eDayOfWeek{
 }
 
 export const eDayOfWeekItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eDayOfWeek.Sunday, name: 'Sunday', description: ''},
 	{key: eDayOfWeek.Monday, name: 'Monday', description: ''},
 	{key: eDayOfWeek.Tuesday, name: 'Tuesday', description: ''},
@@ -1812,6 +1863,7 @@ export enum eDeltaType{
 }
 
 export const eDeltaTypeItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eDeltaType.AutoIncrement, name: 'AutoIncrement', description: ''},
 	{key: eDeltaType.DbAutoIncrement, name: 'DbAutoIncrement', description: ''},
 	{key: eDeltaType.SourceSurrogateKey, name: 'SourceSurrogateKey', description: ''},
@@ -1849,6 +1901,7 @@ export enum eDirection{
 }
 
 export const eDirectionItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eDirection.Ascending, name: 'Ascending', description: ''},
 	{key: eDirection.Descending, name: 'Descending', description: ''},
 ]
@@ -1860,6 +1913,7 @@ export enum eDownloadFormat{
 }
 
 export const eDownloadFormatItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eDownloadFormat.Csv, name: 'Csv', description: ''},
 	{key: eDownloadFormat.Json, name: 'Json', description: ''},
 	{key: eDownloadFormat.JsonCompact, name: 'JsonCompact', description: ''},
@@ -1871,6 +1925,7 @@ export enum eDownloadUrlType{
 }
 
 export const eDownloadUrlTypeItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eDownloadUrlType.Proxy, name: 'Proxy', description: ''},
 	{key: eDownloadUrlType.Direct, name: 'Direct', description: ''},
 ]
@@ -1883,6 +1938,7 @@ export enum eDuplicateStrategy{
 }
 
 export const eDuplicateStrategyItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eDuplicateStrategy.Abend, name: 'Abend', description: ''},
 	{key: eDuplicateStrategy.First, name: 'First', description: ''},
 	{key: eDuplicateStrategy.Last, name: 'Last', description: ''},
@@ -1897,6 +1953,7 @@ export enum eErrorAction{
 }
 
 export const eErrorActionItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eErrorAction.Abend, name: 'Abend', description: ''},
 	{key: eErrorAction.Null, name: 'Null', description: ''},
 	{key: eErrorAction.Ignore, name: 'Ignore', description: ''},
@@ -1910,6 +1967,7 @@ export enum eFailAction{
 }
 
 export const eFailActionItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eFailAction.Continue, name: 'Continue', description: ''},
 	{key: eFailAction.ContinueNonDependent, name: 'ContinueNonDependent', description: ''},
 	{key: eFailAction.Abend, name: 'Abend', description: ''},
@@ -1924,6 +1982,7 @@ export enum eFlatFilePath{
 }
 
 export const eFlatFilePathItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eFlatFilePath.Incoming, name: 'Incoming', description: ''},
 	{key: eFlatFilePath.Outgoing, name: 'Outgoing', description: ''},
 	{key: eFlatFilePath.Processed, name: 'Processed', description: ''},
@@ -1938,6 +1997,7 @@ export enum eFunctionCaching{
 }
 
 export const eFunctionCachingItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eFunctionCaching.NoCache, name: 'NoCache', description: ''},
 	{key: eFunctionCaching.EnableCache, name: 'EnableCache', description: ''},
 	{key: eFunctionCaching.CallOnce, name: 'CallOnce', description: ''},
@@ -1956,6 +2016,7 @@ export enum eFunctionType{
 }
 
 export const eFunctionTypeItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eFunctionType.Map, name: 'Map', description: ''},
 	{key: eFunctionType.Condition, name: 'Condition', description: ''},
 	{key: eFunctionType.Aggregate, name: 'Aggregate', description: ''},
@@ -1975,6 +2036,7 @@ export enum eGenericType{
 }
 
 export const eGenericTypeItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eGenericType.None, name: 'None', description: ''},
 	{key: eGenericType.Numeric, name: 'Numeric', description: ''},
 	{key: eGenericType.All, name: 'All', description: ''},
@@ -1990,6 +2052,7 @@ export enum eImportAction{
 }
 
 export const eImportActionItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eImportAction.Replace, name: 'Replace', description: ''},
 	{key: eImportAction.New, name: 'New', description: ''},
 	{key: eImportAction.Leave, name: 'Leave', description: ''},
@@ -2007,6 +2070,7 @@ export enum eInvalidAction{
 }
 
 export const eInvalidActionItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eInvalidAction.Pass, name: 'Pass', description: ''},
 	{key: eInvalidAction.Clean, name: 'Clean', description: ''},
 	{key: eInvalidAction.RejectClean, name: 'RejectClean', description: ''},
@@ -2026,6 +2090,7 @@ export enum eParameterDirection{
 }
 
 export const eParameterDirectionItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eParameterDirection.Input, name: 'Input', description: ''},
 	{key: eParameterDirection.Output, name: 'Output', description: ''},
 	{key: eParameterDirection.ResultInput, name: 'ResultInput', description: ''},
@@ -2045,6 +2110,7 @@ export enum ePermission{
 }
 
 export const ePermissionItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: ePermission.Owner, name: 'Owner', description: ''},
 	{key: ePermission.User, name: 'User', description: ''},
 	{key: ePermission.FullReader, name: 'FullReader', description: ''},
@@ -2069,6 +2135,7 @@ export enum eRunStatus{
 }
 
 export const eRunStatusItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eRunStatus.Initialised, name: 'Initialised', description: ''},
 	{key: eRunStatus.Scheduled, name: 'Scheduled', description: ''},
 	{key: eRunStatus.Started, name: 'Started', description: ''},
@@ -2097,6 +2164,7 @@ export enum eSecurityFlag{
 }
 
 export const eSecurityFlagItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eSecurityFlag.None, name: 'None', description: ''},
 	{key: eSecurityFlag.FastEncrypt, name: 'FastEncrypt', description: ''},
 	{key: eSecurityFlag.FastDecrypt, name: 'FastDecrypt', description: ''},
@@ -2121,6 +2189,7 @@ export enum eSeriesGrain{
 }
 
 export const eSeriesGrainItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eSeriesGrain.Second, name: 'Second', description: ''},
 	{key: eSeriesGrain.Minute, name: 'Minute', description: ''},
 	{key: eSeriesGrain.Hour, name: 'Hour', description: ''},
@@ -2138,6 +2207,7 @@ export enum eSharedAccess{
 }
 
 export const eSharedAccessItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eSharedAccess.Public, name: 'Public', description: ''},
 	{key: eSharedAccess.Registered, name: 'Registered', description: ''},
 	{key: eSharedAccess.Reader, name: 'Reader', description: ''},
@@ -2160,6 +2230,7 @@ export enum eSharedObjectType{
 }
 
 export const eSharedObjectTypeItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eSharedObjectType.Connection, name: 'Connection', description: ''},
 	{key: eSharedObjectType.Table, name: 'Table', description: ''},
 	{key: eSharedObjectType.FileFormat, name: 'FileFormat', description: ''},
@@ -2183,6 +2254,7 @@ export enum eSourceType{
 }
 
 export const eSourceTypeItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eSourceType.Datalink, name: 'Datalink', description: ''},
 	{key: eSourceType.Table, name: 'Table', description: ''},
 	{key: eSourceType.Rows, name: 'Rows', description: ''},
@@ -2199,6 +2271,7 @@ export enum eStatus{
 }
 
 export const eStatusItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eStatus.None, name: 'None', description: ''},
 	{key: eStatus.Ready, name: 'Ready', description: ''},
 	{key: eStatus.Imported, name: 'Imported', description: ''},
@@ -2214,6 +2287,7 @@ export enum eTableType{
 }
 
 export const eTableTypeItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eTableType.Table, name: 'Table', description: ''},
 	{key: eTableType.View, name: 'View', description: ''},
 	{key: eTableType.Query, name: 'Query', description: ''},
@@ -2228,6 +2302,7 @@ export enum eTestTableAction{
 }
 
 export const eTestTableActionItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eTestTableAction.None, name: 'None', description: ''},
 	{key: eTestTableAction.Truncate, name: 'Truncate', description: ''},
 	{key: eTestTableAction.DropCreate, name: 'DropCreate', description: ''},
@@ -2252,6 +2327,7 @@ export enum eTransformItemType{
 }
 
 export const eTransformItemTypeItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eTransformItemType.BuiltInFunction, name: 'BuiltInFunction', description: ''},
 	{key: eTransformItemType.CustomFunction, name: 'CustomFunction', description: ''},
 	{key: eTransformItemType.ColumnPair, name: 'ColumnPair', description: ''},
@@ -2285,6 +2361,7 @@ export enum eTransformType{
 }
 
 export const eTransformTypeItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eTransformType.Mapping, name: 'Mapping', description: ''},
 	{key: eTransformType.Filter, name: 'Filter', description: ''},
 	{key: eTransformType.Sort, name: 'Sort', description: ''},
@@ -2307,6 +2384,7 @@ export enum eTransformWriterMethod{
 }
 
 export const eTransformWriterMethodItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eTransformWriterMethod.Bulk, name: 'Bulk', description: ''},
 	{key: eTransformWriterMethod.Transaction, name: 'Transaction', description: ''},
 ]
@@ -2321,6 +2399,7 @@ export enum eTriggerMethod{
 }
 
 export const eTriggerMethodItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eTriggerMethod.NotTriggered, name: 'NotTriggered', description: ''},
 	{key: eTriggerMethod.Manual, name: 'Manual', description: ''},
 	{key: eTriggerMethod.Schedule, name: 'Schedule', description: ''},
@@ -2399,6 +2478,7 @@ export enum eUpdateStrategy{
 }
 
 export const eUpdateStrategyItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eUpdateStrategy.Reload, name: 'Reload', description: ''},
 	{key: eUpdateStrategy.Append, name: 'Append', description: ''},
 	{key: eUpdateStrategy.AppendUpdate, name: 'AppendUpdate', description: ''},
@@ -2413,6 +2493,7 @@ export enum eViewType{
 }
 
 export const eViewTypeItems = [
+	{key: 0, name: 'Unknown', description: 'Unknown'},
 	{key: eViewType.Table, name: 'Table', description: ''},
 	{key: eViewType.Chart, name: 'Chart', description: ''},
 ]
@@ -2436,4 +2517,3 @@ export const logLevelItems = [
 	{key: logLevel.Critical, name: 'Critical', description: ''},
 	{key: logLevel.None, name: 'None', description: ''},
 ]
-

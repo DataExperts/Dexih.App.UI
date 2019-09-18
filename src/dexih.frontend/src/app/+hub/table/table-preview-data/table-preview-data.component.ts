@@ -3,6 +3,7 @@ import { HubService } from '../../hub.service';
 import { AuthService } from '../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { eDataObjectType } from '../../../shared/shared.models';
 
 @Component({
     selector: 'table-preview-data',
@@ -16,6 +17,8 @@ export class TablePreviewDataComponent implements OnInit, OnDestroy {
     public action: string; // new or edit
     public pageTitle: string;
     public message: string;
+
+    public eDataObjectType = eDataObjectType;
 
     public title = 'Preview Table';
 

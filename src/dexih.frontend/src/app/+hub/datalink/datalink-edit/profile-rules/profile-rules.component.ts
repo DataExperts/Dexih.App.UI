@@ -44,7 +44,7 @@ export class DatalinkEditProfileRulesComponent implements OnInit, OnDestroy {
             this._subscription = combineLatest(
                 this.hubService.getHubCacheObservable(),
                 this.editDatalinkService.hubFormsService.getCurrentFormObservable(),
-            ).subscribe(result => {
+            ).subscribe(async result => {
                 this.hubCache = result[0];
                 this.datalinkForm = result[1];
 
@@ -52,7 +52,7 @@ export class DatalinkEditProfileRulesComponent implements OnInit, OnDestroy {
                     // load the cache first
                     if (this.hubCache.isLoaded()) {
                         this.selectedProfileRules = this.datalinkForm.value.dexihDatalinkProfiles;
-                        let profileRules = this.hubService.GetFunctionsByType(eFunctionType.Profile)
+                        let profileRules = (await this.hubService.GetFunctionsByType(eFunctionType.Profile))
                             .map(profile => {
 
                                 let profileRuleForm = this.selectedProfileRules.find(c =>

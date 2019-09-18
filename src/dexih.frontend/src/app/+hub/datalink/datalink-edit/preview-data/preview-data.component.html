@@ -2,5 +2,5 @@
     <ng-template #header>
         <dexih-button-close (click)="close()"></dexih-button-close>
     </ng-template>
-    <preview-data [datalink]='datalinkForm?.value' [datalinkTransformKey]="datalinkTransformKey" viewSource='Datalink'></preview-data>
+    <preview-data [datalink]='datalinkForm?.value' [datalinkTransformKey]="datalinkTransformKey" [viewSource]='eDataObjectType.Datalink'></preview-data>
 </dexih-widget-section>

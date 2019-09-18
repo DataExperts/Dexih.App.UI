@@ -1,3 +1,5 @@
-<ul *ngIf="transformProperties" class="list-group">
+<dexih-widget-section *ngIf="transformProperties" title="Query Details" [showExpandButton]="true">
+<ul  class="list-group">
     <transform-properties-item [transformProperties]="transformProperties" ></transform-properties-item>
 </ul>
+</dexih-widget-section>

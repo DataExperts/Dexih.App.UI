@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.user = new User('', '', '', false);
 
-        this.authService.refreshGlobalCache();
+        // this.authService.refreshGlobalCache();
 
         let loginType =  eLoginType[this.authService.getCookie('LoginType')];
         switch (loginType) {

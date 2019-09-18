@@ -4,7 +4,8 @@ import { HubCache } from '../hub.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, BehaviorSubject, Subscription, combineLatest} from 'rxjs';
 import { AuthService } from '../../+auth/auth.service';
-import { DexihDatalink, eSourceType, eDownloadFormat, DownloadObject, eDataObjectType, eSharedObjectType } from '../../shared/shared.models';
+import { DexihDatalink, eSourceType, eDownloadFormat, DownloadObject,
+    eDataObjectType, eSharedObjectType } from '../../shared/shared.models';
 
 @Component({
     selector: 'sharedData-index',
@@ -72,7 +73,7 @@ export class SharedDataIndexComponent implements OnInit, OnDestroy {
 
     private updateSharedData() {
         let objects = new Array<any>();
-        if (this.hubCache) {
+        if (this.hubCache && this.hubCache.isLoaded()) {
             if (!this.hubCache.hub.dexihDatalinks && !this.hubCache.hub.dexihConnections) {
                 this._tableData.next(new Array<DexihDatalink>());
             } else {
@@ -80,7 +81,7 @@ export class SharedDataIndexComponent implements OnInit, OnDestroy {
                     this.hubCache.hub.dexihDatalinks.filter(d => d.isShared).forEach(datalink => {
                         objects.push({
                             objectKey: datalink.key,
-                            objectType: eSourceType.Datalink,
+                            objectType: eSourceType[eSourceType.Datalink],
                             name: datalink.name,
                             description: datalink.description,
                             updateDate: datalink.updateDate
@@ -92,7 +93,7 @@ export class SharedDataIndexComponent implements OnInit, OnDestroy {
                     this.hubCache.hub.dexihTables.filter(c => c.isShared).forEach(table => {
                         objects.push({
                             objectKey: table.key,
-                            objectType: eSourceType.Table,
+                            objectType: eSourceType[eSourceType.Table],
                             name: table.logicalName + ' (' + table.name + ')',
                             description: table.description,
                             updateDate: table.updateDate

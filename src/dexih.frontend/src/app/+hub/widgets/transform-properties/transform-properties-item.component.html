@@ -1,4 +1,4 @@
-<li class="list-group-item">
+<li class="list-group-item p-1">
     <div class="d-flex justify-content-between align-items-center">
         <div>
             <i [class]="icon"></i>
@@ -18,7 +18,7 @@
 
     <ul *ngIf="propertyKeys?.length > 0" class="list-group mt-3">
         <li class="list-group-item list-group-item-primary">Properties</li>
-        <li *ngFor="let key of propertyKeys" class="list-group-item"><b>{{key}}: </b> {{transformProperties.properties[key]}}</li>
+        <li *ngFor="let key of propertyKeys" class="list-group-item"><b>{{key}}:</b> {{transformProperties.properties[key]}}</li>
     </ul>
     
 

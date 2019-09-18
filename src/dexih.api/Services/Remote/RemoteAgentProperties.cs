@@ -1,31 +1,31 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using ProtoBuf;
+using MessagePack;
 
 namespace dexih.api.Services.Remote
 {
-    [ProtoContract]
+    [MessagePackObject]
     public class RemoteAgentProperties
     {
-        [ProtoMember(1)]
+        [Key(1)]
         public string Name { get; set; }
 
-        [ProtoMember(2)]
+        [Key(2)]
         public string IpAddress { get; set; }
 
-        [ProtoMember(3)]
+        [Key(3)]
         public string SecurityToken { get; set; }
 
-        [ProtoMember(4)]
+        [Key(4)]
         public long RemoteAgentKey { get; set; }
 
-        [ProtoMember(5)]
+        [Key(5)]
         public string EncryptionKey { get; set; }
 
-        [ProtoMember(6)]
+        [Key(6)]
         public string UserId { get; set; }
 
-        [ProtoMember(7)]
+        [Key(7)]
         public string ConnectionId { get; set; }
     }
 }

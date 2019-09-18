@@ -2,20 +2,18 @@ import { HttpClient, HttpHeaders, HttpRequest, HttpEventType, HttpResponse } fro
 import { Injectable, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as FileSaver from 'file-saver';
-import { BehaviorSubject, Observable, Subscription, Subject } from 'rxjs';
-import { timeout, filter, first } from 'rxjs/operators'
+import { BehaviorSubject, Observable, Subscription, Subject, from } from 'rxjs';
+import { timeout, filter, first, shareReplay } from 'rxjs/operators'
 import { eLogLevel, LogFactory } from '../../logging';
 import {
     DexihHubAuth, ExternalLoginResult, Message, ManagedTask,
     User, UserLoginInfo, ExternalLogin, FileHandler, eFileStatus, RemoteToken, PromiseWithCancel, CancelToken, eTaskStatus
 } from './auth.models';
 import { AuthWebSocket } from './auth.websocket';
-import { GlobalCache } from './global.models';
 import { UserAgentApplication, AuthResponse, CacheLocation } from 'msal';
 import { DexihModalComponent } from 'dexih-ngx-components';
 import { Location } from '@angular/common';
-import { Root, Type, load } from 'protobufjs';
-import { DexihRemoteAgent, DexihActiveAgent, DownloadUrl } from '../shared/shared.models';
+import { DexihRemoteAgent, DexihActiveAgent, DownloadUrl, CacheManager } from '../shared/shared.models';
 
 declare var gapi: any;
 
@@ -31,8 +29,6 @@ export class AuthService implements OnDestroy {
 
     private _webSocket: AuthWebSocket;
 
-    // private _waitDialogReference: DialogRef<OneButtonPreset>;
-
     private _tasks = new BehaviorSubject<Array<ManagedTask>>([]);
 
     private _notification = new Subject<Message>();
@@ -43,7 +39,8 @@ export class AuthService implements OnDestroy {
     private _waitMessages = new Map<string, string>();
     private _waitMessagesObserve = new BehaviorSubject<Map<string, string>>(this._waitMessages);
 
-    private _globalCache = new BehaviorSubject<GlobalCache>(null);
+    private _globalCache: Observable<CacheManager>;
+
     private _remoteAgents = new BehaviorSubject<Array<DexihRemoteAgent>>(null);
 
     // store the URL so we can redirect after logging in
@@ -59,9 +56,7 @@ export class AuthService implements OnDestroy {
     private logger = new LogFactory('auth.service');
 
     private updateRemoteAgentsFlag = false;
-    private globalCacheRefreshing = false;
 
-    private cacheManagerType: Type;
 
     // unique session id, used to refresh global cache when page refresh occurs.
     private sessionId = this.newGuid();
@@ -74,21 +69,6 @@ export class AuthService implements OnDestroy {
         // private modal: Modal,
     ) {
         this.logger.LogC(() => 'Initializing AuthService', eLogLevel.Information);
-
-        let root = new Root({ keepCase: true });
-        root.load('/assets/proto/CacheManager.proto').then(value => {
-            value.nestedArray.forEach((type: Type) => {
-                this.addCamelCase(type);
-            });
-            this.cacheManagerType = value.lookupType('CacheManager');
-            this.refreshGlobalCache();
-        }).catch(reason => {
-            this.logger.LogC(() =>
-                `load cachemanager.proto: ${reason}`, eLogLevel.Error);
-            this._hubErrors.next(reason);
-        });
-
-        // bootstrap4Mode();
 
         // this.refreshGlobalCache();
         this.refreshUser();
@@ -113,7 +93,7 @@ export class AuthService implements OnDestroy {
                             }
                                 break;
                             case 'connect':
-                                this.refreshGlobalCache();
+                                // this.refreshGlobalCache();
                                 // this.refreshUser();
                                 this.pingRemoteAgents();
                                 break;
@@ -322,27 +302,30 @@ export class AuthService implements OnDestroy {
         if (this._logErrorsSubscribe) { this._logErrorsSubscribe.unsubscribe(); }
     }
 
-    // converts a string from underscore notation to camel case
-    toCamelCase(str): string {
-        return str.substring(0, 1).toLowerCase() + str.substring(1).replace(/_([a-z])(?=[a-z]|$)/g, function ($0, $1) { return $1.toUpperCase(); });
-    }
+    // // converts a string from underscore notation to camel case
+    // toCamelCase(str): string {
+    //     return str.substring(0, 1).toLowerCase() +
+    //         str.substring(1).replace(/_([a-z])(?=[a-z]|$)/g, function ($0, $1) { return $1.toUpperCase(); });
+    // }
 
-    // this function adds alternative getters and setters for the camel cased counterparts
-    // to the runtime message's prototype (i.e. without having to register a custom class):
-    addCamelCase(type) {
-        // type.name = this.toCamelCase(type.name);
-        if (type.fieldsArray) {
-            type.fieldsArray.forEach(field => {
-                field.name = this.toCamelCase(field.name);
-            });
-        }
-        if (type.oneofsArray) {
-            type.oneofsArray.forEach(oneof => {
-                oneof.name = this.toCamelCase(oneof.name);
-            });
-        }
-        return type;
-    }
+    // // this function adds alternative getters and setters for the camel cased counterparts
+    // // to the runtime message's prototype (i.e. without having to register a custom class):
+    // addCamelCase(type) {
+    //     // type.name = this.toCamelCase(type.name);
+    //     if (type.fieldsArray) {
+    //         type.fieldsArray.forEach(field => {
+    //             field.name = this.toCamelCase(field.name);
+    //         });
+    //     }
+
+    //     // flatten oneofs array
+    //     if (type.oneofsArray) {
+    //         type.oneofsArray.forEach(oneof => {
+    //             oneof.name = this.toCamelCase(oneof.name);
+    //         });
+    //     }
+    //     return type;
+    // }
 
     // set available remoteAgents
     getRemoteAgentsObservable(): Observable<DexihRemoteAgent[]> {
@@ -508,7 +491,8 @@ export class AuthService implements OnDestroy {
         });
     }
 
-    public get(url, waitMessage = 'Please wait while the operation completes.', updateUrl = true, cancelToken: CancelToken): PromiseWithCancel<any> {
+    public get(url, waitMessage = 'Please wait while the operation completes.', updateUrl = true, cancelToken: CancelToken):
+        PromiseWithCancel<any> {
         let messageKey: string = null;
         if (waitMessage) {
             messageKey = this.addWaitMessage(waitMessage);
@@ -516,8 +500,7 @@ export class AuthService implements OnDestroy {
         let baseUrl: string;
         if (updateUrl) {
             baseUrl = this.location.prepareExternalUrl(url);
-        }
-        else {
+        } else {
             baseUrl = url;
         }
 
@@ -538,8 +521,7 @@ export class AuthService implements OnDestroy {
                 this.removeWaitMessage(messageKey);
                 if (error.error) {
                     reject(error.error);
-                }
-                else {
+                } else {
                     this.removeWaitMessage(messageKey);
                     this.logger.LogC(() => `post warning error:${error}`, eLogLevel.Error);
                     if (error.status === 504) {
@@ -558,55 +540,53 @@ export class AuthService implements OnDestroy {
         return promise;
     }
 
-    public getProtobuf(url, type: Type, waitMessage = 'Please wait while the operation completes.', updateUrl = true, cancelToken: CancelToken): PromiseWithCancel<any> {
-        let messageKey: string = null;
-        if (waitMessage) {
-            messageKey = this.addWaitMessage(waitMessage);
-        }
-        let baseUrl: string;
-        if (updateUrl) {
-            baseUrl = this.location.prepareExternalUrl(url);
-        }
-        else {
-            baseUrl = url;
-        }
+    // public getMessagePack(url, waitMessage = 'Please wait while the operation completes.',
+    //     updateUrl = true, cancelToken: CancelToken): PromiseWithCancel<any> {
+    //     let messageKey: string = null;
+    //     if (waitMessage) {
+    //         messageKey = this.addWaitMessage(waitMessage);
+    //     }
+    //     let baseUrl: string;
+    //     if (updateUrl) {
+    //         baseUrl = this.location.prepareExternalUrl(url);
+    //     } else {
+    //         baseUrl = url;
+    //     }
 
-        if (!cancelToken) {
-            cancelToken = new CancelToken();
-        }
+    //     if (!cancelToken) {
+    //         cancelToken = new CancelToken();
+    //     }
 
-        let promise = new PromiseWithCancel<any>((resolve, reject) => {
-            let subscription = this.http.get(baseUrl, {
-                responseType: "arraybuffer"
-            }).subscribe(result => {
-                let data = new Uint8Array(result);
-                var message = type.decode(data);
-                var object = type.toObject(message);
-                resolve(object);
-                this.removeWaitMessage(messageKey);
-            }, error => {
-                this.removeWaitMessage(messageKey);
-                if (error.error) {
-                    reject(error.error);
-                }
-                else {
-                    this.removeWaitMessage(messageKey);
-                    this.logger.LogC(() => `post warning error:${error}`, eLogLevel.Error);
-                    if (error.status === 504) {
-                        reject(new Message(false, 'The Information Hub API could not be reached.', null, null));
-                    }
-                    let result = new Message(false, error.message, null, null);
-                    reject(result);
-                }
-            });
+    //     let promise = new PromiseWithCancel<any>((resolve, reject) => {
+    //         let subscription = this.http.get(baseUrl, {
+    //             responseType: 'arraybuffer'
+    //         }).subscribe(result => {
+    //             // let data = new Uint8Array(result);
+    //             let object = decode(result);
+    //             resolve(object);
+    //             this.removeWaitMessage(messageKey);
+    //         }, error => {
+    //             this.removeWaitMessage(messageKey);
+    //             if (error.error) {
+    //                 reject(error.error);
+    //             } else {
+    //                 this.removeWaitMessage(messageKey);
+    //                 this.logger.LogC(() => `post warning error:${error}`, eLogLevel.Error);
+    //                 if (error.status === 504) {
+    //                     reject(new Message(false, 'The Information Hub API could not be reached.', null, null));
+    //                 }
+    //                 let result = new Message(false, error.message, null, null);
+    //                 reject(result);
+    //             }
+    //         });
 
-            cancelToken.cancelMethod = () => {
-                subscription.unsubscribe();
-            }
-        }, cancelToken);
+    //         cancelToken.cancelMethod = () => {
+    //             subscription.unsubscribe();
+    //         }
+    //     }, cancelToken);
 
-        return promise;
-    }
+    //     return promise;
+    // }
 
     public upload(file: FileHandler): Promise<Message> {
         return new Promise<Message>((resolve, reject) => {
@@ -1650,20 +1630,20 @@ export class AuthService implements OnDestroy {
                         this.post('/api/Account/RefreshRemoteAgentToken', remoteAgentKey,
                             'Refreshing remote agent token...').then(result2 => {
 
-                                //     let template = `A new remote agent id and token has been generated for:
-                                // <textarea style="width:100%" type="text" disabled=disabled rows="1">${result2.value.remoteAgentId}</textarea>
-                                // This token will only be displayed once, and cannot be retrieved again, so ensure this is stored safely.<p></p>
-                                // To use this authorization token, copy the token data below and paste into the
-                                // <b>UserToken</b> setting on the remote agent.
-                                // <p></p>
-                                // <b>UserToken</b></p>
-                                // <textarea style="width:100%" type="text" disabled=disabled rows="4">${result2.value.userToken}</textarea>
-                                // `
+                        //     let template = `A new remote agent id and token has been generated for:
+                        // <textarea style="width:100%" type="text" disabled=disabled rows="1">${result2.value.remoteAgentId}</textarea>
+                        // This token will only be displayed once, and cannot be retrieved again, so ensure this is stored safely.<p></p>
+                        // To use this authorization token, copy the token data below and paste into the
+                        // <b>UserToken</b> setting on the remote agent.
+                        // <p></p>
+                        // <b>UserToken</b></p>
+                        // <textarea style="width:100%" type="text" disabled=disabled rows="4">${result2.value.userToken}</textarea>
+                        // `
 
-                                //     let html = this.sanitizer.bypassSecurityTrustHtml(template);
+                        //     let html = this.sanitizer.bypassSecurityTrustHtml(template);
 
-                                //     // tslint:disable-next-line:max-line-length
-                                //     this.informationDialog('New Token', html)
+                        //     // tslint:disable-next-line:max-line-length
+                        //     this.informationDialog('New Token', html)
 
                                 resolve(result2.value);
                                 return result2;
@@ -1881,13 +1861,13 @@ export class AuthService implements OnDestroy {
         return message;
     }
 
-    public isHubCacheLoaded(): boolean {
-        if (!this._globalCache.value) {
-            return false;
-        } else {
-            return true;
-        }
-    }
+    // public isHubCacheLoaded(): boolean {
+    //     if (!this._globalCache.value) {
+    //         return false;
+    //     } else {
+    //         return true;
+    //     }
+    // }
 
     /**
      * Generates a new GUID.
@@ -1900,42 +1880,50 @@ export class AuthService implements OnDestroy {
         });
     }
 
-    public getGlobalCacheObservable(): Observable<GlobalCache> {
-        return this._globalCache.asObservable();
-    }
-
-    public getGlobalCachePromise(): Promise<GlobalCache> {
-        return new Promise<GlobalCache>((resolve) => {
-            this._globalCache.asObservable().pipe(filter(a => a !== null)).subscribe(c => {
-                resolve(c);
-            });
-        });
-    }
-
-    // refresh the hubCache.
-    refreshGlobalCache(): Promise<boolean> {
-        if (!this.globalCacheRefreshing && this.cacheManagerType) {
-            this.globalCacheRefreshing = true;
-            return new Promise<boolean>((resolve, reject) => {
-                this.getProtobuf('/api/Account/GetGlobalCache?cache=' + this.sessionId, this.cacheManagerType, 'Getting global cache...', false, null).then(result => {
-                    let globalCache: GlobalCache = result;
-                    this._globalCache.next(globalCache);
-                    resolve(true);
-                    this.globalCacheRefreshing = false;
+    public getGlobalCacheObservable(): Observable<CacheManager> {
+        if (!this._globalCache) {
+            let promise = new Promise<CacheManager>((resolve, reject) => {
+                this.get('/api/Account/GetGlobalCache?cache=' + this.sessionId,
+                 'Getting global cache...', false, null).then(result => {
+                    resolve(result.value);
                 }).catch(reason => {
-                    // this._globalCache.error(reason);
-                    this._globalCache.next(null);
                     reject(reason);
-                    this.globalCacheRefreshing = false;
                 });
             });
+            this._globalCache = from(promise).pipe(shareReplay(1));
         }
+        return this._globalCache;
     }
 
-    logErrorMessage() {
-
+    public getGlobalCachePromise(): Promise<CacheManager> {
+        return this.getGlobalCacheObservable().toPromise();
+        // return new Promise<CacheManager>((resolve) => {
+        //     this._globalCache.asObservable().pipe(filter(a => a !== null)).subscribe(c => {
+        //         resolve(c);
+        //     });
+        // });
     }
 
+    // // refresh the hubCache.
+    // refreshGlobalCache(): Promise<boolean> {
+    //     if (!this.globalCacheRefreshing ) {
+    //         this.globalCacheRefreshing = true;
+    //         return new Promise<boolean>((resolve, reject) => {
+    //             this.get('/api/Account/GetGlobalCache?cache=' + this.sessionId,
+    //              'Getting global cache...', false, null).then(result => {
+    //                 let globalCache: CacheManager = result.value;
+    //                 this._globalCache.next(globalCache);
+    //                 resolve(true);
+    //                 this.globalCacheRefreshing = false;
+    //             }).catch(reason => {
+    //                 // this._globalCache.error(reason);
+    //                 this._globalCache.next(null);
+    //                 reject(reason);
+    //                 this.globalCacheRefreshing = false;
+    //             });
+    //         });
+    //     }
+    // }
 }
 
 

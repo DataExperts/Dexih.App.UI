@@ -5,7 +5,8 @@ import { AuthService } from '../../../+auth/auth.service';
 import { HubService } from '../../hub.service';
 import { InputOutputColumns } from '../../hub.lineage.models';
 import { PromiseWithCancel, CancelToken } from '../../../+auth/auth.models';
-import { eSourceType, DexihTable, DexihDatalink, ChartConfig, InputColumn, DexihColumnBase, SelectQuery, eDownloadFormat, DownloadObject, DexihView, eViewType, eDataObjectType } from '../../../shared/shared.models';
+import { eSourceType, DexihTable, DexihDatalink, ChartConfig, InputColumn, DexihColumnBase, SelectQuery,
+    eDownloadFormat, DownloadObject, DexihView, eViewType, eDataObjectType } from '../../../shared/shared.models';
 
 @Component({
     selector: 'preview-data',
@@ -56,7 +57,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
         private hubService: HubService,
         private authService: AuthService,
         ) {
-
+            this.selectQuery.rows = 100;
     }
 
     ngOnInit() {
@@ -95,7 +96,8 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
 
                             this.inputColumns = datalink.sourceDatalinkTable.dexihDatalinkColumns.filter(c => c.isInput).map(c => {
                                 return  {datalinkKey: this.key, datalinkName: datalink.name,
-                                    name: c.name, logicalName: c.logicalName, dataType: c.dataType, rank: c.rank, value: c.defaultValue, defaultValue: c.defaultValue};
+                                    name: c.name, logicalName: c.logicalName, dataType: c.dataType,
+                                    rank: c.rank, value: c.defaultValue, defaultValue: c.defaultValue};
                             });
 
                             this.parameters = datalink.parameters;
@@ -120,7 +122,8 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
                             this.tableColumns = table.dexihTableColumns;
                             this.inputColumns = table.dexihTableColumns.filter(c => c.isInput).map(c => {
                                 return  {datalinkKey: 0, datalinkName: null,
-                                    name: c.name, logicalName: c.logicalName, dataType: c.dataType, rank: c.rank, value: c.defaultValue, defaultValue: c.defaultValue};
+                                    name: c.name, logicalName: c.logicalName, dataType: c.dataType,
+                                    rank: c.rank, value: c.defaultValue, defaultValue: c.defaultValue};
                                 }
                             );
                     }

@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using dexih.api.Services.BackgroundTasks;
 using dexih.operations;
 using dexih.repository;
 using Dexih.Utils.Crypto;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 
 namespace dexih.api.Services.Operations
@@ -22,7 +21,8 @@ namespace dexih.api.Services.Operations
 			ApplicationSettings config,
 			ILoggerFactory loggerFactory,
 			ICacheService cacheService,
-			IHubContext<BrowserHub> browserContext
+			IHubContext<BrowserHub> browserContext,
+            IBackgroundTaskQueue backgroundTaskQueue
 			)
         {
             Config = config;
@@ -30,16 +30,20 @@ namespace dexih.api.Services.Operations
             RepositoryManager.OnHubChange += SendHubChange;
 
             _browserContext = browserContext;
+            _backgroundTaskQueue = backgroundTaskQueue;
             _logger = loggerFactory.CreateLogger("DexihOperations");
             
         }
 
-        private async void SendHubChange(Import import, string[] users)
+        private void SendHubChange(Import import, string[] users)
         {
             try
             {
                 var sendMessage = new RemoteMessage("", "", "hub-change", Json.JTokenFromObject(import, ""));
-                await _browserContext.Clients.Users(users).SendAsync("Command", sendMessage, CancellationToken.None);
+                _backgroundTaskQueue.QueueBackgroundWorkItem(async token =>
+                {
+                    await _browserContext.Clients.Users(users).SendAsync("Command", sendMessage, CancellationToken.None);    
+                });
             }
             catch (Exception e)
             {
@@ -48,11 +52,13 @@ namespace dexih.api.Services.Operations
         }
 
         private readonly ILogger _logger;
+
+        private readonly IBackgroundTaskQueue _backgroundTaskQueue;
         
         private readonly IHubContext<BrowserHub> _browserContext;
         public RepositoryManager RepositoryManager { get; }
         public ApplicationSettings Config { get; }
-
+        
         public void Dispose()
         {
             RepositoryManager.Dispose();

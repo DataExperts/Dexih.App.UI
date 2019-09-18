@@ -1,12 +1,12 @@
 <div id="content">
-    <!-- <section *ngIf="!hubCache || (hubCache.status != eCacheStatus.Loaded && hubCache.status != eCacheStatus.Error)">
+    <section *ngIf="!hubCache || (hubCache.status != eCacheStatus.Loaded && hubCache.status != eCacheStatus.Error)">
         <div *ngIf="!showIf" class="dexih-loader-container">
             <div class="dexih-loader"></div>
             <div class="dexih-loader-text">Loading the hub ...</div>
         </div>
-    </section> -->
+    </section>
 
-    <div [hidden]="!hubCache">
+    <div *ngIf="hubCache && hubCache.status == eCacheStatus.Loaded">
         <section *ngIf="hubCache.hubPermission === ePermission.FullReader">
             <div class="alert alert-info m-3">
                 The current user has readonly access to this hub.

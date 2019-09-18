@@ -1,6 +1,13 @@
 import { BehaviorSubject} from 'rxjs';
 import { Message } from '../+auth/auth.models';
-import { DexihHubVariable, DexihHub, DexihFunctionParameter, DexihConnection, DexihTable, DexihTableColumn, DexihDatalinkTransform, DexihColumnValidation, DexihFileFormat, DexihDatalink, DexihDatalinkTest, DexihDatajob, DexihView, DexihDashboard, DexihApi, DexihCustomFunction, DexihTrigger, TransformProperties, eStatus, eParameterDirection, eConnectionPurpose, eDeltaType, eSourceType, eImportAction, eSecurityFlag, eDatalinkType, eUpdateStrategy, eFailAction, eInvalidAction, eFunctionCaching, eCleanAction, eDuplicateStrategy, eRunStatus, ePermission, eTypeCode, eTransformWriterMethod, eTransformItemType, eFunctionType, InputColumn, SelectQuery, DexihColumnBase, eDataObjectType, eSharedObjectType, eDirection, eSeriesGrain } from '../shared/shared.models';
+import { DexihHubVariable, DexihHub, DexihFunctionParameter, DexihConnection, DexihTable,
+    DexihTableColumn, DexihDatalinkTransform, DexihColumnValidation, DexihFileFormat, DexihDatalink,
+    DexihDatalinkTest, DexihDatajob, DexihView, DexihDashboard, DexihApi, DexihCustomFunction,
+    DexihTrigger, TransformProperties, eStatus, eParameterDirection, eConnectionPurpose, eDeltaType,
+    eSourceType, eImportAction, eSecurityFlag, eDatalinkType, eUpdateStrategy, eFailAction, eInvalidAction,
+    eFunctionCaching, eCleanAction, eDuplicateStrategy, eRunStatus, ePermission, eTypeCode,
+    eTransformWriterMethod, eTransformItemType, eFunctionType, InputColumn, SelectQuery, DexihColumnBase,
+    eDataObjectType, eSharedObjectType, eDirection, eSeriesGrain } from '../shared/shared.models';
 
 export class RemoteMessage {
     public messageId: string;
@@ -2043,7 +2050,8 @@ export const securityFlags = [
 //     {key: eDatalinkType.Deliver, name: 'Deliver', description: 'Deliver - prepares data for delivering to a system/database'},
 //     {key: eDatalinkType.Publish, name: 'Publish', description: 'Publish - sends data to a target system/database'},
 //     {key: eDatalinkType.Share, name: 'Share', description: 'Share - datalink designed to be shared with other users'},
-//     {key: eDatalinkType.Query, name: 'Query', description: 'Query - datalink query used for data extracts or as a source for other datalinks'},
+//     {key: eDatalinkType.Query, name: 'Query',
+//              description: 'Query - datalink query used for data extracts or as a source for other datalinks'},
 // ]
 
 // export enum eTransformWriterMethod {

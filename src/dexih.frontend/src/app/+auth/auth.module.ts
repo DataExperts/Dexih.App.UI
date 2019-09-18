@@ -18,7 +18,6 @@ import { AuthComponent } from './auth.component';
 import { AuthService } from './auth.service';
 import { HelpComponent} from './help/help.component'
 import { NgxMdModule } from 'ngx-md';
-import {  } from 'protobufjs';
 
 @NgModule({
   imports: [

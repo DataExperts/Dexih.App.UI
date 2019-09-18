@@ -4,7 +4,7 @@ import { AuthService } from '../../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { HubFormsService } from '../../../hub.forms.service';
-import { DexihTable } from '../../../../shared/shared.models';
+import { DexihTable, eDataObjectType } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -18,6 +18,8 @@ export class TableEditPreviewDataComponent implements OnInit, OnDestroy {
     public action: string; // new or edit
     public pageTitle: string;
     public message: string;
+
+    public eDataObjectType = eDataObjectType;
 
     constructor(
         public formsService: HubFormsService,
