@@ -5,7 +5,7 @@ import { Subscription ,  Observable, combineLatest} from 'rxjs';
 import { AuthService } from '../../../+auth/auth.service';
 import {HubCache } from '../../hub.models';
 import { HubService } from '../../hub.service';
-import { DexihConnection, ConnectionReference, eConnectionCategory, DexihHub, DexihDatalink, DexihDatajob, RemoteLibraries } from '../../../shared/shared.models';
+import { DexihConnection, ConnectionReference, eConnectionCategory, DexihDatalink, DexihDatajob, eConnectionPurpose } from '../../../shared/shared.models';
 import { async } from 'q';
 
 @Component({
@@ -24,6 +24,7 @@ export class ActionsConnectionButtonComponent implements OnInit, OnDestroy, OnCh
     private _subscription: Subscription;
 
     public hubCache: HubCache;
+    public eConnectionPurpose = eConnectionPurpose;
 
     public hubPath: string;
 

@@ -6,6 +6,7 @@ import { Observable, BehaviorSubject, Subscription, combineLatest} from 'rxjs';
 import { AuthService } from '../../+auth/auth.service';
 import { DexihDatalink, eSourceType, eDownloadFormat, DownloadObject,
     eDataObjectType, eSharedObjectType } from '../../shared/shared.models';
+import { CancelToken } from '../../+auth/auth.models';
 
 @Component({
     selector: 'sharedData-index',
@@ -17,6 +18,7 @@ export class SharedDataIndexComponent implements OnInit, OnDestroy {
 
     private _subscription: Subscription;
     private _hubCacheChangeSubscription: Subscription;
+    private cancelToken: CancelToken = new CancelToken();
 
     columns = [
         { name: 'objectType', title: 'Type', format: '' },
@@ -65,6 +67,7 @@ export class SharedDataIndexComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         if (this._subscription) { this._subscription.unsubscribe(); }
         if (this._hubCacheChangeSubscription) { this._hubCacheChangeSubscription.unsubscribe(); }
+        this.cancelToken.cancel();
     }
 
     close() {
@@ -108,7 +111,7 @@ export class SharedDataIndexComponent implements OnInit, OnDestroy {
     }
 
     public downloadData(dataObjects: Array<any>) {
-        this.hubService.downloadData(dataObjects, true, eDownloadFormat.Csv).then(() => {
+        this.hubService.downloadData(dataObjects, true, eDownloadFormat.Csv, this.cancelToken).then(() => {
             this.hubService.addHubSuccessMessage('The specified data is being downloaded.');
         }).catch(() => {
             //            this.hubService.addHubErrorMessage(reason);

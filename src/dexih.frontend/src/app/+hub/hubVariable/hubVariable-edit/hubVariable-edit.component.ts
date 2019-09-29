@@ -6,6 +6,7 @@ import { AuthService } from '../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { HubFormsService } from '../../hub.forms.service';
 import { DexihHubVariable } from '../../../shared/shared.models';
+import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
 
@@ -25,6 +26,8 @@ export class HubVariableEditComponent implements OnInit, OnDestroy {
   private _formChangeSubscription: Subscription;
   private _isEncryptedSubscription: Subscription;
   private isLoaded = false;
+
+  private cancelToken = new CancelToken();
 
   constructor(private hubService: HubService,
     private authService: AuthService,
@@ -106,6 +109,23 @@ export class HubVariableEditComponent implements OnInit, OnDestroy {
     if (this._subscription) { this._subscription.unsubscribe(); }
     if (this._formChangeSubscription) { this._formChangeSubscription.unsubscribe(); }
     if (this._isEncryptedSubscription) { this._isEncryptedSubscription.unsubscribe(); }
+    this.cancelToken.cancel();
+  }
+
+  async save() {
+    let form = this.formsService.currentForm;
+
+    let isEncrypted = form.controls.isEncrypted.value;
+    if (isEncrypted) {
+      let valueRaw = form.controls.valueRaw.value;
+        if (valueRaw) {
+          let value = await this.hubService.encrypt(valueRaw, this.cancelToken);
+          form.controls.value.setValue(value);
+          form.controls.valueRaw.setValue(null);
+        }
+      }
+
+    await this.formsService.save();
   }
 
   close() {

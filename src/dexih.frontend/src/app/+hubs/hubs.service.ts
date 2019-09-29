@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable, Subscription} from 'rxjs';
 import { eEnvironment, RemoteApplicationSettings } from './remoteAgents/remoteAgent-download/remoteAgent-download.models';
 import { eDownloadFormat, DexihActiveAgent, InputColumn, SelectQuery,
     eTypeCode, DexihRemoteAgent, SharedData, eDataObjectType, DataPack } from '../shared/shared.models';
+import { PreviewResults } from '../+hub/hub.models';
 
 @Injectable()
 export class HubsService implements OnDestroy {
@@ -57,23 +58,16 @@ export class HubsService implements OnDestroy {
 
     // gets all shared data items
     getSharedDataIndex(searchString: string, hubKeys: number[], maxResults: number, reload: boolean): Promise<SharedData[]> {
-        return new Promise<SharedData[]>((resolve, reject) => {
-            if (reload || !this.sharedItemsIndex) {
-                this.authService.post('/api/SharedData/SharedDataIndex', {
-                    searchString, hubKeys, maxResults
-                }, 'Getting shared data index...').then(result => {
-                    resolve(result.value);
-                }).catch(reason => {
-                    this.logger.LogC(() => `SharedDataIndex, error: ${reason.message}.`, eLogLevel.Error);
-                    reject(reason);
-                });
-            } else {
-                resolve(this.sharedItemsIndex);
-            }
-        });
+        if (reload || !this.sharedItemsIndex) {
+            return this.authService.post<SharedData[]>('/api/SharedData/SharedDataIndex', {
+                searchString, hubKeys, maxResults
+            }, 'Getting shared data index...');
+        } else {
+            Promise.resolve(this.sharedItemsIndex);
+        }
     }
 
-    downloadData(sharedItems: Array<SharedData>, zipFiles: boolean, downloadFormat: eDownloadFormat):
+    downloadData(sharedItems: Array<SharedData>, zipFiles: boolean, downloadFormat: eDownloadFormat, cancelToken: CancelToken):
         Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
 
@@ -86,33 +80,24 @@ export class HubsService implements OnDestroy {
             }
 
             hubKeys.forEach(hubKey => {
-                this.authService.post('/api/SharedData/GetActiveAgent', { hubKey: hubKey}, 'Getting active remote agent...')
-                .then(agent => {
-                    let activeAgent: DexihActiveAgent = agent.value;
+                this.authService.post<DexihActiveAgent>('/api/SharedData/GetActiveAgent', { hubKey: hubKey}, 'Getting active remote agent...')
+                .then(activeAgent => {
 
-                    this.authService.getDownloadUrl(activeAgent).then(downloadUrl => {
-                        this.authService.post('/api/SharedData/DownloadData', {
-                            connectionId: this.authService.getWebSocketConnectionId(),
-                            downloadFormat: downloadFormat,
-                            zipFiles: zipFiles,
-                            sharedItems: sharedItems.filter(c => c.hubKey === hubKey),
-                            remoteAgentId: activeAgent.instanceId,
-                            downloadUrl: downloadUrl
-                        }, 'Downloading data...')
-                            .then(result => {
-                            let tasks = <ManagedTask[]>result.value;
-                            tasks.forEach(task => {
-                                if (sharedItems.length === 1) {
-                                } else {
-                                }
-                                this.authService.addUpdateTask(task);
-                            })
-                                resolve(true);
-                            return result;
-                        }).catch(reason => {
-                            this.logger.LogC(() => `downloadData, error: ${reason.message}.`, eLogLevel.Error);
-                            reject(reason);
-                        });
+                    this.authService.postRemote<ManagedTask[]>('/api/SharedData/DownloadData', {
+                        clientId: this.authService.getWebSocketConnectionId(),
+                        downloadFormat: downloadFormat,
+                        zipFiles: zipFiles,
+                        sharedItems: sharedItems.filter(c => c.hubKey === hubKey),
+                        remoteAgentId: activeAgent.instanceId,
+                    }, activeAgent, 'Downloading data...', cancelToken)
+                        .then(tasks => {
+                        tasks.forEach(task => {
+                            this.authService.addUpdateTask(task);
+                        })
+                        resolve(true);
+                    }).catch(reason => {
+                        this.logger.LogC(() => `downloadData, error: ${reason.message}.`, eLogLevel.Error);
+                        reject(reason);
                     });
                 });
             });
@@ -121,35 +106,22 @@ export class HubsService implements OnDestroy {
 
     // starts a preview, and returns the url to get the download stream.
     previewDataUrl(hubKey: number, objectKey: number, objectType: eDataObjectType,
-        inputColumns: InputColumn[], selectQuery: SelectQuery):
+        inputColumns: InputColumn[], selectQuery: SelectQuery, cancelToken: CancelToken):
         Promise<string> {
         return new Promise<string>((resolve, reject) => {
-            this.authService.post('/api/SharedData/GetActiveAgent', { hubKey: hubKey }, 'Getting active remote agent...')
-                .then(agent => {
-                    let activeAgent: DexihActiveAgent = agent.value;
-
-                    this.authService.getDownloadUrl(activeAgent).then(downloadUrl => {
-                        this.authService.post('/api/SharedData/PreviewData', {
-                            hubKey: hubKey,
-                            objectType: objectType,
-                            objectKey: objectKey,
-                            selectQuery: selectQuery,
-                            remoteAgentId: activeAgent.instanceId,
-                            downloadUrl: downloadUrl,
-                            inputColumns: inputColumns
-                        }, 'Previewing data...').then(result => {
-                            resolve(result.value);
-                        }).catch(reason => {
-                            this.logger.LogC(() => `previewData, error: ${reason.message}.`, eLogLevel.Error);
-                            reject(reason);
-                        });
-                    }).catch(reason => {
-                        // this.addHubMessage(reason);
-                        reject(reason);
-                    });
-                }).catch(reason => {
-                    reject(reason);
-                });
+            this.authService.post<DexihActiveAgent>('/api/SharedData/GetActiveAgent', { hubKey: hubKey }, 'Getting active remote agent...')
+            .then(activeAgent => {
+                this.authService.postRemote('/api/SharedData/PreviewData', {
+                    hubKey: hubKey,
+                    objectType: objectType,
+                    objectKey: objectKey,
+                    selectQuery: selectQuery,
+                    remoteAgentId: activeAgent.instanceId,
+                    inputColumns: inputColumns
+                }, activeAgent, 'Previewing data...', cancelToken);
+            }).catch(reason => {
+                reject(reason);
+            });
         });
     }
 
@@ -158,30 +130,25 @@ export class HubsService implements OnDestroy {
         Promise<{name: string, columns: Array<any>, data: Array<any> }> {
             return new Promise<{name: string, columns: Array<any>, data: Array<any> }>((resolve, reject) => {
 
-                this.authService.get(url, 'Getting preview results...', false, cancelToken).then(data => {
-                    if (data['success'] === false) {
-                        // this.addHubErrorMessage(data['message']);
-                        reject(data);
-                    } else {
-                        let tableResult: DataPack = data;
-                        let columns = [];
+                this.authService.get<PreviewResults>(url, 'Getting preview results...', false, cancelToken).then(data => {
+                    let tableResult: DataPack = data;
+                    let columns = [];
 
-                        tableResult.columns.forEach((c, index) => {
-                            let name = c.logicalName ? c.logicalName : c.name;
-                            switch (c.dataType) {
-                                case eTypeCode.DateTime:
-                                    columns.push({ name: index, title: name, format: 'Date'});
-                                    break;
-                                    case eTypeCode.Json:
-                                    case eTypeCode.Xml:
-                                    columns.push({ name: index, title: name, format: 'Code'});
-                                    break;
-                                default:
-                                    columns.push({ name: index, title: name, format: ''});
-                            }
-                        });
-                        resolve({name: tableResult.name, columns: columns, data: tableResult.data});
-                    }
+                    tableResult.columns.forEach((c, index) => {
+                        let name = c.logicalName ? c.logicalName : c.name;
+                        switch (c.dataType) {
+                            case eTypeCode.DateTime:
+                                columns.push({ name: index, title: name, format: 'Date'});
+                                break;
+                                case eTypeCode.Json:
+                                case eTypeCode.Xml:
+                                columns.push({ name: index, title: name, format: 'Code'});
+                                break;
+                            default:
+                                columns.push({ name: index, title: name, format: ''});
+                        }
+                    });
+                    resolve({name: tableResult.name, columns: columns, data: tableResult.data});
                 }).catch(reason => {
                     // this.addHubMessage(reason);
                     reject(reason);
@@ -190,45 +157,15 @@ export class HubsService implements OnDestroy {
     }
 
     remoteAgents(): Promise<Array<DexihRemoteAgent>> {
-        return new Promise<Array<DexihRemoteAgent>>((resolve, reject) => {
-            this.authService.post('/api/Account/GetUserRemoteAgents', { }, 'Getting user remote agents...').then(result => {
-                resolve(result.value);
-                return result;
-            }).catch(reason => {
-                this.logger.LogC(() => `remoteAgents, error: ${reason.message}.`, eLogLevel.Error);
-                reject(reason);
-            });
-        });
+        return this.authService.post<Array<DexihRemoteAgent>>('/api/Account/GetUserRemoteAgents', { }, 'Getting user remote agents...');
     }
 
     cancelTasks(tasks: Array<ManagedTask>): Promise<boolean> {
-
-        return new Promise<boolean>((resolve, reject) => {
-
-            this.authService.post('/api/Account/CancelTasks', tasks, 'Cancelling task(s)...').then(result => {
-                resolve(result.value);
-                return result;
-            }).catch(reason => {
-                this.logger.LogC(() => `CancelTasks, error: ${reason.message}.`, eLogLevel.Error);
-                this.addHubMessage(reason);
-                reject(reason);
-            });
-        });
+        return this.authService.post<boolean>('/api/Account/CancelTasks', tasks, 'Cancelling task(s)...');
     }
 
     restartAgents(instanceIds: string[], force: boolean): Promise<boolean> {
-
-        return new Promise<boolean>((resolve, reject) => {
-
-            this.authService.post('/api/Account/RestartAgents', { instanceIds, force}, 'Restarting agent(s)...').then(result => {
-                resolve(result.value);
-                return result;
-            }).catch(reason => {
-                this.logger.LogC(() => `Restarting agent, error: ${reason.message}.`, eLogLevel.Error);
-                this.addHubMessage(reason);
-                reject(reason);
-            });
-        });
+        return this.authService.post<boolean>('/api/Account/RestartAgents', { instanceIds, force}, 'Restarting agent(s)...');
     }
 
     public downloadRemoteAgent(embedUserName: boolean, environment: eEnvironment, logLevel: eLogLevel, settings: RemoteApplicationSettings):

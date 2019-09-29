@@ -8,8 +8,9 @@ import { Location } from '@angular/common';
 import { HubFormsService } from '../../hub.forms.service';
 import { TypeCodes, functionTypes } from '../../hub.remote.models';
 import { FormGroup, FormArray } from '@angular/forms';
-import { Message } from '../../../+auth/auth.models';
-import { eParameterDirection, eFunctionType, DexihCustomFunction, eTypeCode, DexihCustomFunctionParameter, DexihDatalinkTransformItem, eTransformItemType, DexihFunctionParameter } from '../../../shared/shared.models';
+import { Message, CancelToken } from '../../../+auth/auth.models';
+import { eParameterDirection, eFunctionType, DexihCustomFunction, eTypeCode,
+  DexihCustomFunctionParameter, DexihDatalinkTransformItem, eTransformItemType, DexihFunctionParameter } from '../../../shared/shared.models';
 
 @Component({
 
@@ -46,6 +47,8 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
 
   public lookupColumnValue = '';
   private isLoaded = false;
+
+  public cancelToken: CancelToken = new CancelToken();
 
   private _subscription: Subscription;
   private _formChangeSubscription: Subscription;
@@ -138,6 +141,7 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
     if (this._subscription) { this._subscription.unsubscribe(); }
     if (this._formChangeSubscription) { this._formChangeSubscription.unsubscribe(); }
     if (this._functionTypeSubscription) { this._functionTypeSubscription.unsubscribe(); }
+    this.cancelToken.cancel();
   }
 
   canDeactivate(): Promise<boolean> {
@@ -240,7 +244,7 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
   test(parameters = null) {
     let tmpTransform = this.createDataTransformItem();
 
-    this.hubService.testCustomFunction(tmpTransform, parameters).then(result => {
+    this.hubService.testCustomFunction(tmpTransform, parameters, this.cancelToken).then(result => {
       this.syntaxMessage = new Message(true, 'The function has successfully compiled.', null, null);
 
       if (result && result.length > 0) {

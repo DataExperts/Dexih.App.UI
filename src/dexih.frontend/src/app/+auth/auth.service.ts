@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpRequest, HttpEventType, HttpResponse } fro
 import { Injectable, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as FileSaver from 'file-saver';
-import { BehaviorSubject, Observable, Subscription, Subject, from } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, Subject, from, forkJoin } from 'rxjs';
 import { timeout, filter, first, shareReplay } from 'rxjs/operators'
 import { eLogLevel, LogFactory } from '../../logging';
 import {
@@ -13,7 +13,7 @@ import { AuthWebSocket } from './auth.websocket';
 import { UserAgentApplication, AuthResponse, CacheLocation } from 'msal';
 import { DexihModalComponent } from 'dexih-ngx-components';
 import { Location } from '@angular/common';
-import { DexihRemoteAgent, DexihActiveAgent, DownloadUrl, CacheManager } from '../shared/shared.models';
+import { DexihRemoteAgent, DexihActiveAgent, DownloadUrl, CacheManager, eMessageCommand, eClientCommand } from '../shared/shared.models';
 
 declare var gapi: any;
 
@@ -57,6 +57,8 @@ export class AuthService implements OnDestroy {
 
     private updateRemoteAgentsFlag = false;
 
+    // Used to track the response message from a remote agent.
+    private messageNumber = 1;
 
     // unique session id, used to refresh global cache when page refresh occurs.
     private sessionId = this.newGuid();
@@ -87,34 +89,34 @@ export class AuthService implements OnDestroy {
                 if (this._webSocketSubscribe) { this._webSocketSubscribe.unsubscribe(); }
                 this._webSocketSubscribe = this._webSocket.getWebSocketObservable().subscribe(data => {
                     if (data) {
-                        switch (data.method) {
-                            case 'disconnect': {
+                        switch (data.command) {
+                            case eClientCommand.Disconnect: {
                                 this._remoteAgents.next(null);
                             }
                                 break;
-                            case 'connect':
+                            case eClientCommand.Connect:
                                 // this.refreshGlobalCache();
                                 // this.refreshUser();
                                 this.pingRemoteAgents();
                                 break;
-                            case 'remoteAgent-update': {
+                            case eClientCommand.RemoteAgentUpdate: {
                                 let remoteAgents = <DexihRemoteAgent[]>this._remoteAgents.value;
                                 if (remoteAgents) {
                                     let activeAgent = <DexihActiveAgent>data.value;
                                     let remoteAgent = remoteAgents.find(c => c.remoteAgentKey === activeAgent.remoteAgentKey);
                                     if (remoteAgent) {
-                                        let existingIndex = remoteAgent.activeAgents
+                                        let existingIndex = remoteAgent['activeAgents']
                                             .findIndex(c => c.instanceId === activeAgent.instanceId);
                                         if (existingIndex >= 0) {
-                                            remoteAgent.activeAgents[existingIndex] = activeAgent;
+                                            remoteAgent['activeAgents'][existingIndex] = activeAgent;
                                         } else {
-                                            remoteAgent.activeAgents.push(activeAgent);
+                                            remoteAgent['activeAgents'].push(activeAgent);
                                         }
                                     } else {
                                         remoteAgent = new DexihRemoteAgent();
                                         remoteAgent.remoteAgentKey = activeAgent.remoteAgentKey;
                                         remoteAgent.name = activeAgent.name;
-                                        remoteAgent.activeAgents = [activeAgent];
+                                        remoteAgent['activeAgents'] = [activeAgent];
                                         remoteAgents.push(remoteAgent);
                                     }
                                     this._remoteAgents.next(remoteAgents);
@@ -123,19 +125,19 @@ export class AuthService implements OnDestroy {
                                     let remoteAgent = new DexihRemoteAgent();
                                     remoteAgent.remoteAgentKey = activeAgent.remoteAgentKey;
                                     remoteAgent.name = activeAgent.name;
-                                    remoteAgent.activeAgents = [activeAgent];
+                                    remoteAgent['activeAgents'] = [activeAgent];
                                     this._remoteAgents.next([remoteAgent]);
                                 }
                                 break;
                             }
-                            case 'remoteAgent-delete': {
+                            case eClientCommand.RemoteAgentDelete: {
                                 let remoteAgents = <DexihRemoteAgent[]>this._remoteAgents.value;
                                 if (remoteAgents) {
                                     let instanceId = data.value;
                                     remoteAgents.forEach(remoteAgent => {
-                                        let existingIndex = remoteAgent.activeAgents.findIndex(c => c.instanceId === instanceId);
+                                        let existingIndex = remoteAgent['activeAgents'].findIndex(c => c.instanceId === instanceId);
                                         if (existingIndex >= 0) {
-                                            remoteAgent.activeAgents.splice(existingIndex, 1);
+                                            remoteAgent['activeAgents'].splice(existingIndex, 1);
                                         }
                                     });
                                     this._remoteAgents.next(remoteAgents);
@@ -143,7 +145,7 @@ export class AuthService implements OnDestroy {
                                 break;
                             }
 
-                            case 'remoteAgent-deleteKey': {
+                            case eClientCommand.RemoteAgentDeleteKey: {
                                 let remoteAgents = <DexihRemoteAgent[]>this._remoteAgents.value;
                                 let index = remoteAgents.findIndex(c => c.remoteAgentKey === data.value);
                                 if (index >= 0) {
@@ -153,7 +155,7 @@ export class AuthService implements OnDestroy {
                                 break;
                             }
 
-                            case 'hub-update': {
+                            case eClientCommand.HubUpdate: {
                                 this.logger.LogC(() => `hub-update: ${data.value}`, eLogLevel.Debug);
 
                                 let hub: DexihHubAuth = data.value;
@@ -170,7 +172,7 @@ export class AuthService implements OnDestroy {
                                 }
                             }
                                 break;
-                            case 'hubs-delete': {
+                            case eClientCommand.HubDelete: {
                                 this.logger.LogC(() => `hubs-delete: ${data.value}`, eLogLevel.Debug);
 
                                 let hubKeys: Array<number> = data.value;
@@ -188,13 +190,13 @@ export class AuthService implements OnDestroy {
                                 }
                             }
                                 break;
-                            case 'task':
+                            case eClientCommand.Task:
                                 this.logger.LogC(() => `task: ${data.value}`, eLogLevel.Debug);
 
                                 const task = data.value;
                                 this.addUpdateTask(task);
                                 break;
-                            case 'file-download': {
+                            case eClientCommand.FileDownload: {
                                 this.logger.LogC(() => `file-download: ${data.value}`, eLogLevel.Debug);
 
                                 const downloadData = data.value;
@@ -221,7 +223,7 @@ export class AuthService implements OnDestroy {
                                     });
                             }
                                 break;
-                            case 'download-ready': {
+                            case eClientCommand.DownloadReady: {
                                 this.logger.LogC(() => `download-ready ${data.value.url}`, eLogLevel.Debug);
 
                                 if (data.value.url.startsWith('http://')) {
@@ -418,8 +420,75 @@ export class AuthService implements OnDestroy {
         return this.postBody(url, data, headers, waitMessage);
     }
 
+    public postRemote<T>(url: string, data, remoteAgent: DexihActiveAgent,
+        waitMessage = 'Please wait while the operation completes.', cancelToken: CancelToken): PromiseWithCancel<T> {
+        let messageKey = this.addWaitMessage(waitMessage);
+        if (!cancelToken) {
+            cancelToken = new CancelToken();
+        }
+
+        let headers = new HttpHeaders({
+            // 'Authorization': `Bearer ${authToken}`,
+            'Content-Type': 'application/json'
+        });
+
+        data.remoteAgentId = remoteAgent.instanceId;
+
+        let promise = new PromiseWithCancel<any>((resolve, reject) => {
+        this.http.post(url, JSON.stringify(data), { withCredentials: true, headers: headers, responseType: 'text' })
+            .toPromise().then(key => {
+                this.getRemoteData<T>(remoteAgent, key, cancelToken, false).then(result => {
+                    this.removeWaitMessage(messageKey);
+                    resolve(result);
+                }).catch(reason => {
+                    this.removeWaitMessage(messageKey);
+                    reject(reason);
+                });
+            }).catch(reason => {
+                this.removeWaitMessage(messageKey);
+                reject(this.httpError(url, reason));
+            });
+        })
+
+        return promise;
+    }
+
+    // gets the url to execute a remote command
+    public async getRemoteUrl(activeAgent: DexihActiveAgent, key: string, isUpload = false):
+        Promise<string> {
+        let baseUrl: string;
+
+        if (!activeAgent) {
+            let message = new Message(false, 'The data cannot be downloaded as there is no current remote agent.', null, null);
+            return Promise.reject(message);
+        } else if (activeAgent['currentDownloadUrl']) {
+            baseUrl = activeAgent['currentDownloadUrl'].url;
+        } else if (activeAgent.downloadUrls.length === 0) {
+            let message = new Message(false, 'Current remote agent does not have data download/upload available.', null, null);
+            return Promise.reject(message);
+        } else {
+            let download = await this.getBestDownloadUrl(activeAgent, 0);
+            baseUrl = download.url;
+        }
+
+        let downloadUrl: string;
+        if (isUpload) {
+            downloadUrl = baseUrl + '/upload/' + key;
+        } else {
+            downloadUrl = baseUrl + '/download/' + key;
+        }
+
+        return Promise.resolve(downloadUrl);
+    }
+
+    // gets the url to execute a remote command
+    public async getRemoteData<T>(activeAgent: DexihActiveAgent, key: string, cancelToken: CancelToken, isUpload = false): Promise<T> {
+        let downloadUrl = await this.getRemoteUrl(activeAgent, key, isUpload);
+        return this.get<T>(downloadUrl, null, false, cancelToken);
+    }
+
     // post an object which is converted to json.
-    public post(url, data, waitMessage = 'Please wait while the operation completes.'): Promise<Message> {
+    public post<T>(url, data, waitMessage = 'Please wait while the operation completes.'): Promise<T> {
         let headers = new HttpHeaders({
             // 'Authorization': `Bearer ${authToken}`,
             'Content-Type': 'application/json'
@@ -427,6 +496,7 @@ export class AuthService implements OnDestroy {
 
         let body: string;
         if (data) {
+            data.clientConnectionId = this.getWebSocketConnectionId()
             body = JSON.stringify(data, (key, value) => {
                 // don't bother saving the null values.
                 if (value === null) { return undefined; }
@@ -449,50 +519,28 @@ export class AuthService implements OnDestroy {
     }
 
     // posts data to the api.
-    private postBody(url, body, headers, waitMessage = 'Please wait while the operation completes.'): Promise<any> {
-        return new Promise<Message>((resolve, reject) => {
+    private postBody<T>(url, body, headers, waitMessage = 'Please wait while the operation completes.'): Promise<any> {
+        return new Promise<T>((resolve, reject) => {
             let messageKey = this.addWaitMessage(waitMessage);
             this.logger.LogC(() => `post url: ${url}, data: ${body}.`, eLogLevel.Debug);
 
             const baseUrl = this.location.prepareExternalUrl(url);
 
-            this.http.post<Message>(baseUrl, body, { withCredentials: true, headers: headers }).subscribe(
+            this.http.post<T>(baseUrl, body, { withCredentials: true, headers: headers }).subscribe(
                 result => {
                     this.removeWaitMessage(messageKey);
-
-                    // let result: Message = jsonResult.json();
-                    if (result.success) {
-                        resolve(result);
-                        return true;
-                    } else {
-                        this.logger.LogC(() =>
-                            `post warning message:${result.message}, details: ${result.exceptionDetails}`, eLogLevel.Warning);
-                        reject(result);
-                        return false;
-                    }
+                    resolve(result);
                 }, error => {
                     this.removeWaitMessage(messageKey);
-
-                    if (error.error) {
-                        reject(error.error);
-                    } else {
-                        this.removeWaitMessage(messageKey);
-                        this.logger.LogC(() =>
-                            `post warning error:${error}`, eLogLevel.Error);
-                        if (error.status === 504) {
-                            reject(new Message(false, 'The Information Hub API could not be reached.', null, null));
-                        }
-                        let result = new Message(false, error.message, null, null);
-                        reject(result);
-                    }
+                    reject(this.httpError(url, error));
                 }, () => {
                     this.removeWaitMessage(messageKey);
                 });
         });
     }
 
-    public get(url, waitMessage = 'Please wait while the operation completes.', updateUrl = true, cancelToken: CancelToken):
-        PromiseWithCancel<any> {
+    public get<T>(url, waitMessage = 'Please wait while the operation completes.', updateUrl = true, cancelToken: CancelToken):
+        PromiseWithCancel<T> {
         let messageKey: string = null;
         if (waitMessage) {
             messageKey = this.addWaitMessage(waitMessage);
@@ -508,28 +556,13 @@ export class AuthService implements OnDestroy {
             cancelToken = new CancelToken();
         }
 
-        let promise = new PromiseWithCancel<any>((resolve, reject) => {
-            let subscription = this.http.get(baseUrl).subscribe(result => {
+        let promise = new PromiseWithCancel<T>((resolve, reject) => {
+            let subscription = this.http.get<T>(baseUrl).subscribe(result => {
                 this.removeWaitMessage(messageKey);
-                let json = (<any>result);
-                if (json.status) {
-                    reject(json.status);
-                    return;
-                }
                 resolve(result);
             }, error => {
                 this.removeWaitMessage(messageKey);
-                if (error.error) {
-                    reject(error.error);
-                } else {
-                    this.removeWaitMessage(messageKey);
-                    this.logger.LogC(() => `post warning error:${error}`, eLogLevel.Error);
-                    if (error.status === 504) {
-                        reject(new Message(false, 'The Information Hub API could not be reached.', null, null));
-                    }
-                    let result = new Message(false, error.message, null, null);
-                    reject(result);
-                }
+                reject(this.httpError(url, error));
             });
 
             cancelToken.cancelMethod = () => {
@@ -540,53 +573,48 @@ export class AuthService implements OnDestroy {
         return promise;
     }
 
-    // public getMessagePack(url, waitMessage = 'Please wait while the operation completes.',
-    //     updateUrl = true, cancelToken: CancelToken): PromiseWithCancel<any> {
-    //     let messageKey: string = null;
-    //     if (waitMessage) {
-    //         messageKey = this.addWaitMessage(waitMessage);
-    //     }
-    //     let baseUrl: string;
-    //     if (updateUrl) {
-    //         baseUrl = this.location.prepareExternalUrl(url);
-    //     } else {
-    //         baseUrl = url;
-    //     }
+    private httpError(url: string, error: any): Message {
+        let message = new Message(false, 'Http Error', `Error calling ${url}.`, null);
+        if (error.error) {
+            if (error.error.error) {
+                message.message = error.error.error.message;
+                message.exceptionDetails += error.error.error.stack;
+            } else {
+                if (error.status === 400) {
+                    if (typeof(error.error) === 'string') {
+                        message = JSON.parse(error.error);
+                    } else {
+                        message = error.error;
+                    }
+                } else {
+                    message.message = error.error;
+                }
+            }
+        } else {
+            this.logger.LogC(() =>
+                `post warning error:${error}`, eLogLevel.Error);
+            if (error.status === 504) {
+                message.message = 'The Information Hub API could not be reached.';
+            }
+            message.message = error.message;
+        }
 
-    //     if (!cancelToken) {
-    //         cancelToken = new CancelToken();
-    //     }
+        return message
+    }
 
-    //     let promise = new PromiseWithCancel<any>((resolve, reject) => {
-    //         let subscription = this.http.get(baseUrl, {
-    //             responseType: 'arraybuffer'
-    //         }).subscribe(result => {
-    //             // let data = new Uint8Array(result);
-    //             let object = decode(result);
-    //             resolve(object);
-    //             this.removeWaitMessage(messageKey);
-    //         }, error => {
-    //             this.removeWaitMessage(messageKey);
-    //             if (error.error) {
-    //                 reject(error.error);
-    //             } else {
-    //                 this.removeWaitMessage(messageKey);
-    //                 this.logger.LogC(() => `post warning error:${error}`, eLogLevel.Error);
-    //                 if (error.status === 504) {
-    //                     reject(new Message(false, 'The Information Hub API could not be reached.', null, null));
-    //                 }
-    //                 let result = new Message(false, error.message, null, null);
-    //                 reject(result);
-    //             }
-    //         });
-
-    //         cancelToken.cancelMethod = () => {
-    //             subscription.unsubscribe();
-    //         }
-    //     }, cancelToken);
-
-    //     return promise;
-    // }
+    public postConfirm<T>(url, data, waitMessage = 'Please wait while the operation completes.',
+        confirmMessage = 'Please confirm action?'): Promise<T> {
+        return new Promise<T>((resolve, reject) => {
+            this.confirmDialog('Please confirm?', confirmMessage)
+            .then(result => {
+                if (result) {
+                    resolve(this.post<T>(url, data, waitMessage));
+                } else {
+                    reject();
+                }
+            }).catch(reason => { reject(); });
+        });
+    }
 
     public upload(file: FileHandler): Promise<Message> {
         return new Promise<Message>((resolve, reject) => {
@@ -750,15 +778,7 @@ export class AuthService implements OnDestroy {
     }
 
     public getLoginProviders(): Promise<Array<UserLoginInfo>> {
-        return new Promise<Array<UserLoginInfo>>((resolve, reject) => {
-            this.post('/api/Account/ExternalLogins', null, 'Getting external login information.').then(result => {
-                resolve(result.value);
-            }).catch(reason => {
-                this.logger.LogC(() => `getLoginProviders error:${reason.message}`, eLogLevel.Error);
-                reject(reason);
-            });
-        });
-
+        return this.post<Array<UserLoginInfo>>('/api/Account/ExternalLogins', null, 'Getting external login information.')
     }
 
     // download a file from the api.
@@ -776,40 +796,40 @@ export class AuthService implements OnDestroy {
                     resolve(true);
                 }, error => {
                     this.logger.LogC(() => `downloadFile error:${error.message}`, eLogLevel.Error);
-                    if (error.error) {
-                        let reader = new FileReader();
-                        reader.readAsText(error.error);
-                        reader.onload = function () {
-                            let message = JSON.parse(reader.result.toString());
-                            reject(message);
-                        }
-                    } else {
-                        reject(error);
-                    }
+                    reject(this.httpError(url, error));
+                    // if (error.error) {
+                    //     let reader = new FileReader();
+                    //     reader.readAsText(error.error);
+                    //     reader.onload = function () {
+                    //         let message = JSON.parse(reader.result.toString());
+                    //         reject(message);
+                    //     }
+                    // } else {
+                    //     reject(error);
+                    // }
                 });
         });
     }
 
 
-
     refreshUser(): Promise<User> {
         this._refreshUserAttempted = true;
         return new Promise<User>((resolve) => {
-            this.post('/api/Account/GetUser', null, 'Refreshing user details...').then(result => {
+            this.post<User>('/api/Account/GetUser', null, 'Refreshing user details...').then(result => {
                 let previousUser = this._currentUser.value;
                 if (!previousUser || (
-                    result.value.email !== previousUser.email &&
-                    result.value.email !== previousUser.firstName &&
-                    result.value.email !== previousUser.lastName &&
-                    result.value.email !== previousUser.isAdmin &&
-                    result.value.email !== previousUser.isInvited &&
-                    result.value.email !== previousUser.rememberMe &&
-                    result.value.email !== previousUser.subscription &&
-                    result.value.email !== previousUser.terms
+                    result.email !== previousUser.email &&
+                    result.firstName !== previousUser.firstName &&
+                    result.lastName !== previousUser.lastName &&
+                    result.isAdmin !== previousUser.isAdmin &&
+                    result.isInvited !== previousUser.isInvited &&
+                    result.rememberMe !== previousUser.rememberMe &&
+                    result.subscription !== previousUser.subscription &&
+                    result.terms !== previousUser.terms
                 )) {
-                    this._currentUser.next(result.value);
+                    this._currentUser.next(result);
                 }
-                resolve(result.value);
+                resolve(result);
                 this._refreshUserAttempted = false;
             }).catch(reason => {
                 this.logger.LogC(() => `refreshUser error:${reason.message}`, eLogLevel.Error);
@@ -822,7 +842,6 @@ export class AuthService implements OnDestroy {
             });
         });
     }
-
 
     login(user: User): Promise<User> {
         return new Promise<User>((resolve, reject) => {
@@ -1188,139 +1207,54 @@ export class AuthService implements OnDestroy {
 
     // redirects browser to the requested login provider.
     addExternalLogin(provider: string, providerKey: string, authenticationToken: string): Promise<ExternalLoginResult> {
-        return new Promise<ExternalLoginResult>((resolve, reject) => {
-            this.post('/api/Account/AddExternalLogin', {
-                provider: provider,
-                providerKey: providerKey,
-                authenticationToken: authenticationToken
-            }, 'Adding an external login...').then(result => {
-                resolve(result.value);
-            }).catch(reason => {
-                reject(reason);
-                // this.logger.LogC(() => `AddExternalLogin error:${reason.message}`, eLogLevel.Error);
-                // this.logger.LogC(() => `externalLogin error:${reason.message}`, eLogLevel.Error);
-                // window.location.href = '/api/Account/ExternalLogin?provider=' + provider + '&returnUrl=' + returnUrl;
-            });
-        });
+        return this.post<ExternalLoginResult>('/api/Account/AddExternalLogin', {
+            provider: provider,
+            providerKey: providerKey,
+            authenticationToken: authenticationToken
+        }, 'Adding an external login...')
     }
 
     // redirects browser to the requested login provider.
     removeExternalLogin(provider: string, providerKey: string, ): Promise<boolean> {
-        return new Promise<boolean>((resolve, reject) => {
-            this.confirmDialog('Remove Login?', 'Are you sure you want to remove the login ' +
-                provider + ' from your available logins.  When removed you will not be able to login via ' +
-                provider + ' provider.').then((confirm) => {
-                    if (confirm) {
-                        this.post('/api/Account/RemoveExternalLogin', {
-                            provider: provider,
-                            providerKey: providerKey
-                        }, 'Adding an external login...').then((r) => {
-                            resolve(r.value);
-                        }).catch(reason => {
-                            reject(reason);
-                            // this.logger.LogC(() => `AddExternalLogin error:${reason.message}`, eLogLevel.Error);
-                            // this.logger.LogC(() => `externalLogin error:${reason.message}`, eLogLevel.Error);
-                            // window.location.href = '/api/Account/ExternalLogin?provider=' + provider + '&returnUrl=' + returnUrl;
-                        });
-                    }
-                }).catch(reason => {
-                    reject(reason)
-                });
-        });
+        return this.postConfirm<boolean>('/api/Account/RemoveExternalLogin', {
+            provider: provider,
+            providerKey: providerKey
+        }, 'Removing external login...',
+        'Are you sure you want to remove the login ' +
+        provider + ' from your available logins.  When removed you will not be able to login via ' +
+        provider + ' provider.');
     }
 
     // called when provider is redirected back.
     externalLoginCallback(): Promise<ExternalLoginResult> {
-        return new Promise<ExternalLoginResult>((resolve, reject) => {
-            // call the callback api.
-            this.post('/api/Account/ExternalLoginCallback', null, 'Completing external login...').then(result => {
-                resolve(result.value);
-            }).catch(reason => {
-                this.logger.LogC(() => `externalLoginCallBack error:${reason.message}`, eLogLevel.Error);
-                this._hubErrors.next(reason);
-                reject(reason);
-            });
-        });
+        return this.post<ExternalLoginResult>('/api/Account/ExternalLoginCallback', null, 'Completing external login...')
     }
 
     // register an external login
     externalLoginConfirmation(user: User): Promise<User> {
-        return new Promise<User>((resolve, reject) => {
-            // call the registration service to register details.
-            this.post('/api/Account/ExternalLoginConfirmation', user, 'Confirming external login...').then(result => {
-                resolve(result.value);
-            }).catch(reason => {
-                this.logger.LogC(() => `externalLoginConfirmation error:${reason.message}`, eLogLevel.Error);
-
-                this._hubErrors.next(reason);
-                reject(reason);
-            });
-        });
+        return this.post<User>('/api/Account/ExternalLoginConfirmation', user, 'Confirming external login...');
     }
 
 
     register(user: User): Promise<User> {
-        return new Promise<User>((resolve, reject) => {
-            // call the registration service to register details.
-            this.post('/api/Account/Register', user, 'Registering user...').then(result => {
-                resolve(result.value);
-            }).catch(reason => {
-                this.logger.LogC(() => `register error:${reason.message}`, eLogLevel.Error);
-
-                this._hubErrors.next(reason);
-                reject(reason);
-            });
-        });
+        return this.post<User>('/api/Account/Register', user, 'Registering user...');
     }
 
     confirmEmail(email: string, verificationCode: string): Promise<User> {
         let user = new User(email, null, null, false);
         user.code = verificationCode;
 
-        return new Promise<User>((resolve, reject) => {
-            // call the login service, followed by getuser.
-            // The second call is to ensure the anti-forgery headers are updated when the user credentials have changed.
-            this.post('/api/Account/ConfirmEmail', user, 'Confirming email...').then(result => {
-                resolve(result.value);
-            }).catch(reason => {
-                this.logger.LogC(() => `confirmEmail error:${reason.message}`, eLogLevel.Error);
-
-                this._hubErrors.next(reason);
-                reject(reason);
-            });
-        });
+        return this.post<User>('/api/Account/ConfirmEmail', user, 'Confirming email...');
     }
 
     resendConfirmationEmail(email: string): Promise<boolean> {
         let user = new User(email, null, null, false);
-
-        return new Promise<boolean>((resolve, reject) => {
-            // call the api to resend the confirmation email to the specified address.
-            this.post('/api/Account/ResendConfirmationEmail', user, 'Resending confirmation email...').then(() => {
-                resolve(true);
-            }).catch(reason => {
-                this.logger.LogC(() => `resentConfirmationEmail error:${reason.message}`, eLogLevel.Error);
-
-                this._hubErrors.next(reason);
-                reject(reason);
-            });
-        });
+        return this.post<boolean>('/api/Account/ResendConfirmationEmail', user, 'Resending confirmation email...');
     }
 
     forgotPassword(email: string): Promise<boolean> {
         let user = new User(email, null, null, false);
-
-        return new Promise<boolean>((resolve, reject) => {
-            // call the api to initiate the forgotten password and send a verification email.
-            this.post('/api/Account/ForgotPassword', user, 'Sending forgotten password email...').then(() => {
-                resolve(true);
-            }).catch(reason => {
-                this.logger.LogC(() => `forgotPassword error:${reason.message}`, eLogLevel.Error);
-
-                this._hubErrors.next(reason);
-                reject(reason);
-            });
-        });
+        return this.post<boolean>('/api/Account/ForgotPassword', user, 'Sending forgotten password email...')
     }
 
     resetPassword(email: string, verificationCode: string, password: string): Promise<boolean> {
@@ -1381,27 +1315,19 @@ export class AuthService implements OnDestroy {
 
     logout(): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
-            this.confirmDialog('Logout?', 'You can improve your security further after logging out by closing this opened browser')
-                .then(confirm => {
-                    if (confirm) {
-                        this.post('/api/Account/Logout', null, 'Logging out current user...').then(result2 => {
-                            if (result2) {
-                                this._currentUser.next(null);
-                                this._hubs.next(null);
-                                this.router.navigate(['/auth/login']);
-                            }
-                            resolve(result2.value);
-                        }).catch(reason => {
-                            this.logger.LogC(() => `logout error:${reason.message}`, eLogLevel.Error);
-
-                            this._hubErrors.next(reason);
-                            reject(reason);
-                        });
-                    } else {
-                        resolve(false);
+            this.postConfirm<boolean>('/api/Account/Logout', null, 'Logging out current user...',
+            'Proceed to logout?  You can improve your security further after logging out by closing this opened browser').then(result => {
+                    if (result) {
+                        this._currentUser.next(null);
+                        this._hubs.next(null);
+                        this.router.navigate(['/auth/login']);
                     }
-                }).catch(() => {
-                    resolve(false);
+                    resolve(result);
+                }).catch(reason => {
+                    this.logger.LogC(() => `logout error:${reason.message}`, eLogLevel.Error);
+
+                    this._hubErrors.next(reason);
+                    reject(reason);
                 });
         });
     }
@@ -1420,21 +1346,21 @@ export class AuthService implements OnDestroy {
                 .then(result => {
                     let currentAgents = this._remoteAgents.getValue();
 
-                    let newAgents = <DexihRemoteAgent[]>result.value;
+                    let newAgents = <DexihRemoteAgent[]>result;
 
                     if (currentAgents == null) {
                         currentAgents = newAgents;
-                        newAgents.map(c => c.activeAgents = []);
+                        newAgents.map(c => c['activeAgents'] = []);
                     } else {
 
                         newAgents.forEach(newAgent => {
                             let currentAgent = currentAgents.find(c => c.remoteAgentKey === newAgent.remoteAgentKey);
                             if (currentAgent) {
-                                let activeAgents = currentAgent.activeAgents;
+                                let activeAgents = currentAgent['activeAgents'];
                                 Object.assign(currentAgent, newAgent);
-                                currentAgent.activeAgents = activeAgents;
+                                currentAgent['activeAgents'] = activeAgents;
                             } else {
-                                newAgent.activeAgents = [];
+                                newAgent['activeAgents'] = [];
                                 currentAgents.push(newAgent);
                             }
                         });
@@ -1455,42 +1381,9 @@ export class AuthService implements OnDestroy {
     }
 
     saveRemoteAgent(remoteAgent: DexihRemoteAgent): Promise<boolean> {
-        return new Promise<boolean>((resolve, reject) => {
-            this.post('/api/Account/SaveRemoteAgent', {
-                remoteAgent
-            }, 'Saving remote agent details...').then(result => {
-                resolve(result.value);
-                return result;
-            }).catch(reason => {
-                this.logger.LogC(() => `SaveRemoteAgent, error: ${reason.message}.`, eLogLevel.Error);
-                // this.addHubMessage(reason);
-                reject(reason);
-            });
-        });
-    }
-
-    public getDownloadUrl(activeAgent: DexihActiveAgent): Promise<DownloadUrl> {
-        return new Promise<DownloadUrl>((resolve, reject) => {
-            if (!activeAgent) {
-                let message = new Message(false, 'The data cannot be downloaded as there is no current remote agent.', null, null);
-                reject(message);
-            } else {
-                if (activeAgent['currentDownloadUrl']) {
-                    resolve(activeAgent['currentDownloadUrl']);
-                } else {
-                    if (activeAgent.downloadUrls.length === 0) {
-                        let message = new Message(false, 'Current remote agent does not have data download/upload available.', null, null);
-                        reject(message);
-                    }
-
-                    this.getBestDownloadUrl(activeAgent, 0).then(result => {
-                        resolve(result);
-                    }).catch(reason => {
-                        reject(reason);
-                    });
-                }
-            }
-        });
+        return this.post<boolean>('/api/Account/SaveRemoteAgent', {
+            remoteAgent
+        }, 'Saving remote agent details...');
     }
 
     // scans each available download url in order, to find one this client can access.
@@ -1522,8 +1415,8 @@ export class AuthService implements OnDestroy {
     }
 
     refreshHubs(): void {
-        this.post('/api/Account/GetAuthorizedHubs', null, 'Getting authorized hubs...').then(result => {
-            this._hubs.next(result.value);
+        this.post<DexihHubAuth[]>('/api/Account/GetAuthorizedHubs', null, 'Getting authorized hubs...').then(result => {
+            this._hubs.next(result);
         }).catch(reason => {
             this.logger.LogC(() => `refreshHubs error:${reason.message}`, eLogLevel.Error);
 
@@ -1541,16 +1434,7 @@ export class AuthService implements OnDestroy {
     }
 
     saveHub(hub: DexihHubAuth): Promise<DexihHubAuth> {
-        return new Promise<DexihHubAuth>((resolve, reject) => {
-            this.post('/api/Account/SaveHub', hub, 'Saving hub details...').then(result => {
-                resolve(result.value);
-            }).catch(reason => {
-                this.logger.LogC(() => `saveHub error:${reason.message}`, eLogLevel.Error);
-
-                this._hubErrors.next(reason);
-                reject(reason);
-            });
-        });
+        return this.post<DexihHubAuth>('/api/Account/SaveHub', hub, 'Saving hub details...');
     }
 
     hubNameExists(hubKey: number, hubName: string): boolean {
@@ -1562,165 +1446,40 @@ export class AuthService implements OnDestroy {
     }
 
     deleteHubs(hubs: Array<DexihHubAuth>): Promise<boolean> {
-        return new Promise<boolean>((resolve, reject) => {
-            let hubNames = hubs.map(c => c.name).join(', ');
-
-            this.confirmDialog('Delete Hubs?',
-                'This action will delete the following hubs, and any related metadata.<p></p>' + hubNames + '<p></p>Are you sure?')
-                .then(result => {
-                    if (result) {
-                        // call the delete.
-                        this.post('/api/Account/DeleteHubs', {
-                            hubKeys: hubs.map(c => c.hubKey)
-                        }, 'Deleting hubs...').then(result2 => {
-                            resolve(result2.value);
-                            return result2;
-                        }).catch(reason => {
-                            this.logger.LogC(() => `deleteHubs error:${reason.message}`, eLogLevel.Error);
-
-                            reject(reason);
-                            return false;
-                        });
-                    } else {
-                        resolve(false);
-                    }
-                }).catch(() => {
-                    resolve(false);
-                });
-        });
+        let hubNames = hubs.map(c => c.name).join(', ');
+        return this.postConfirm<boolean>('/api/Account/DeleteHubs', {
+            hubKeys: hubs.map(c => c.hubKey)
+        }, 'Deleting hubs...',
+        'This action will delete the following hubs, and any related metadata.<p></p>' + hubNames + '<p></p>Are you sure?');
     }
 
     removeUserTokens(remoteAgentKeys: Array<number>): Promise<boolean> {
-        return new Promise<boolean>((resolve, reject) => {
-
-            this.confirmDialog('Revoke User Tokens?',
-                'This action will revoke the selected tokens.  Remote Agents using these tokens will be immediately logged off.<p></p>' +
-                '<p></p>Are you sure?')
-                .then(result => {
-                    if (result) {
-                        // call the delete.
-                        this.post('/api/Account/RemoveRemoteAgents', remoteAgentKeys, 'Removing remote agents...').then(result2 => {
-                            resolve(result2.value);
-                            return result2;
-                        }).catch(reason => {
-                            this.logger.LogC(() => `removeUserTokens error:${reason.message}`, eLogLevel.Error);
-
-                            reject(reason);
-                            return false;
-                        });
-                    } else {
-                        resolve(false);
-                    }
-                }).catch((reason) => {
-                    reject(reason);
-                });
-        });
+        return this.postConfirm<boolean>('/api/Account/RemoveRemoteAgents', remoteAgentKeys, 'Removing remote agents...',
+        'This action will revoke the selected tokens.  Remote Agents using these tokens will be immediately logged off.<p></p>' +
+                '<p></p>Are you sure?');
     }
 
     refreshRemoteAgentToken(remoteAgentKey: number): Promise<RemoteToken> {
-        return new Promise<RemoteToken>((resolve, reject) => {
-
-            this.confirmDialog('Revoke User Tokens?',
-                // tslint:disable-next-line:max-line-length
-                'This action will revoke the selected token, and create a new one.  Remote agents using these tokens will be immediately logged off.<p></p>' +
-                '<p></p>Are you sure?')
-                .then(result => {
-                    if (result) {
-                        // call the delete.
-                        this.post('/api/Account/RefreshRemoteAgentToken', remoteAgentKey,
-                            'Refreshing remote agent token...').then(result2 => {
-
-                        //     let template = `A new remote agent id and token has been generated for:
-                        // <textarea style="width:100%" type="text" disabled=disabled rows="1">${result2.value.remoteAgentId}</textarea>
-                        // This token will only be displayed once, and cannot be retrieved again, so ensure this is stored safely.<p></p>
-                        // To use this authorization token, copy the token data below and paste into the
-                        // <b>UserToken</b> setting on the remote agent.
-                        // <p></p>
-                        // <b>UserToken</b></p>
-                        // <textarea style="width:100%" type="text" disabled=disabled rows="4">${result2.value.userToken}</textarea>
-                        // `
-
-                        //     let html = this.sanitizer.bypassSecurityTrustHtml(template);
-
-                        //     // tslint:disable-next-line:max-line-length
-                        //     this.informationDialog('New Token', html)
-
-                                resolve(result2.value);
-                                return result2;
-                            }).catch(reason => {
-                                this.logger.LogC(() => `refreshUserToken error:${reason.message}`, eLogLevel.Error);
-
-                                reject(reason);
-                                return false;
-                            });
-                    } else {
-                        reject('Cancelled');
-                    }
-                }).catch(reason => {
-                    reject(reason);
-                });
-        });
+        return this.postConfirm<RemoteToken>('/api/Account/RefreshRemoteAgentToken', remoteAgentKey,
+        'Refreshing remote agent token...',
+         // tslint:disable-next-line:max-line-length
+         'This action will revoke the selected token, and create a new one.  Remote agents using these tokens will be immediately logged off.<p></p>' +
+         '<p></p>Are you sure?');
     }
 
     createRemoteAgent(): Promise<RemoteToken> {
-        return new Promise<RemoteToken>((resolve, reject) => {
-
-            this.post('/api/Account/CreateRemoteAgent', {
-            }, 'Creating remote agent...').then(result2 => {
-
-                // let template = `A new remote agent id and token has been generated.
-                //     This token will only be displayed once, and cannot be retrieved again, so ensure this is stored safely.<p></p>
-                //     To use this authorization token, copy the token data below and paste into the
-                //     <b>UserToken</b> setting on the remote agent.
-                //     <p></p>
-                //     <p><b>RemoteAgentId</b></p>
-                //     <textarea style="width:100%" type="text" disabled=disabled rows="1">${result2.value.remoteAgentId}</textarea>
-                //     <b>UserToken</b></p>
-                //     <textarea style="width:100%" type="text" disabled=disabled rows="4">${result2.value.userToken}</textarea>
-                //     `
-
-                // let html = this.sanitizer.bypassSecurityTrustHtml(template);
-
-                // // tslint:disable-next-line:max-line-length
-                // this.informationDialog('New RemoteAgentId & Token', html);
-
-                resolve(result2.value);
-                return result2;
-            }).catch(reason => {
-                this.logger.LogC(() => `refreshUserToken error:${reason.message}`, eLogLevel.Error);
-
-                reject(reason);
-                return false;
-            });
-        });
+        return this.post<RemoteToken>('/api/Account/CreateRemoteAgent', {
+        }, 'Creating remote agent...');
     }
 
 
     getRandomEncryptionKey(): Promise<string> {
-        return new Promise<string>((resolve, reject) => {
-            this.post('/api/Account/GetRandomEncryptionKey', null, 'Getting random key...').then(result => {
-                resolve(result.value);
-            }).catch(reason => {
-                this.logger.LogC(() => `getRandomEncryptionKey error:${reason.message}`, eLogLevel.Error);
-
-                this._hubErrors.next(reason);
-                reject(reason);
-            });
-        });
+        return this.post<string>('/api/Account/GetRandomEncryptionKey', null, 'Getting random key...')
     }
 
 
     getUserToken(): Promise<{ remoteAgentId: string, userToken: string }> {
-        return new Promise<{ remoteAgentId: string, userToken: string }>((resolve, reject) => {
-            this.post('/api/Account/CreateRemoteAgent', {}, 'Creating remote agent...').then(result => {
-                resolve(result.value);
-            }).catch(reason => {
-                this.logger.LogC(() => `getUserToken error:${reason.message}`, eLogLevel.Error);
-
-                this._hubErrors.next(reason);
-                reject(reason);
-            });
-        });
+        return this.post<{ remoteAgentId: string, userToken: string }>('/api/Account/CreateRemoteAgent', {}, 'Creating remote agent...')
     }
 
     parentRoute(route: ActivatedRoute): ActivatedRoute {
@@ -1882,14 +1641,8 @@ export class AuthService implements OnDestroy {
 
     public getGlobalCacheObservable(): Observable<CacheManager> {
         if (!this._globalCache) {
-            let promise = new Promise<CacheManager>((resolve, reject) => {
-                this.get('/api/Account/GetGlobalCache?cache=' + this.sessionId,
-                 'Getting global cache...', false, null).then(result => {
-                    resolve(result.value);
-                }).catch(reason => {
-                    reject(reason);
-                });
-            });
+            let promise = this.get<CacheManager>('/api/Account/GetGlobalCache?cache=' + this.sessionId,
+                 'Getting global cache...', false, null);
             this._globalCache = from(promise).pipe(shareReplay(1));
         }
         return this._globalCache;
@@ -1897,33 +1650,7 @@ export class AuthService implements OnDestroy {
 
     public getGlobalCachePromise(): Promise<CacheManager> {
         return this.getGlobalCacheObservable().toPromise();
-        // return new Promise<CacheManager>((resolve) => {
-        //     this._globalCache.asObservable().pipe(filter(a => a !== null)).subscribe(c => {
-        //         resolve(c);
-        //     });
-        // });
     }
-
-    // // refresh the hubCache.
-    // refreshGlobalCache(): Promise<boolean> {
-    //     if (!this.globalCacheRefreshing ) {
-    //         this.globalCacheRefreshing = true;
-    //         return new Promise<boolean>((resolve, reject) => {
-    //             this.get('/api/Account/GetGlobalCache?cache=' + this.sessionId,
-    //              'Getting global cache...', false, null).then(result => {
-    //                 let globalCache: CacheManager = result.value;
-    //                 this._globalCache.next(globalCache);
-    //                 resolve(true);
-    //                 this.globalCacheRefreshing = false;
-    //             }).catch(reason => {
-    //                 // this._globalCache.error(reason);
-    //                 this._globalCache.next(null);
-    //                 reject(reason);
-    //                 this.globalCacheRefreshing = false;
-    //             });
-    //         });
-    //     }
-    // }
 }
 
 

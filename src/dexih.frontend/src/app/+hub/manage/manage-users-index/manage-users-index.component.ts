@@ -49,7 +49,7 @@ export class ManageUsersIndexComponent implements OnInit, OnDestroy {
 
     refreshUsers() {
         this.hubService.getHubUsers().then(result => {
-            this._tableData.next(result.value);
+            this._tableData.next(result);
         });
     }
 

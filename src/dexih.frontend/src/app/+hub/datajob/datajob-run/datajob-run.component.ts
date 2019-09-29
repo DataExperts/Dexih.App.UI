@@ -5,6 +5,7 @@ import { Subscription, combineLatest} from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { DexihDatajob, InputParameter } from '../../../shared/shared.models';
 import { HubCache } from '../../hub.models';
+import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
 
@@ -13,6 +14,7 @@ import { HubCache } from '../../hub.models';
 })
 export class DatajobRunComponent implements OnInit, OnDestroy {
     private _subscription: Subscription;
+    private cancelToken: CancelToken = new CancelToken();
 
     private datajobs: DexihDatajob[];
     private hubCache: HubCache;
@@ -78,6 +80,7 @@ export class DatajobRunComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         if (this._subscription) { this._subscription.unsubscribe(); }
+        this.cancelToken.cancel();
     }
 
     close() {
@@ -86,12 +89,12 @@ export class DatajobRunComponent implements OnInit, OnDestroy {
 
     run() {
         this.hubService.runDatajobs(this.datajobs, this.truncateTable,
-            this.resetIncremental, this.resetValue, this.parameters);
+            this.resetIncremental, this.resetValue, this.parameters, this.cancelToken);
         this.authService.navigateUp();
     }
 
     activate() {
-        this.hubService.activateDatajobs(this.datajobs, this.parameters);
+        this.hubService.activateDatajobs(this.datajobs, this.parameters, this.cancelToken);
         this.authService.navigateUp();
     }
 

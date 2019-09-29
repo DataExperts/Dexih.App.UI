@@ -24,8 +24,9 @@ using dexih.api.Models;
 using dexih.api.Services.Operations;
 using dexih.api.Services.Remote.Exceptions;
 using dexih.functions;
-using dexih.remote.Operations.Services;
+using dexih.remote.operations;
 using Dexih.Utils.CopyProperties;
+using MessagePack;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
@@ -73,6 +74,7 @@ namespace dexih.api.Controllers
         {
             try
             {
+
                 if (ModelState.IsValid)
                 {
 					_logger.LogInformation(LoggingEvents.RemoteLogin, "Login - Remote Agent Login {user}, {servername}, remoteAgentId {remoteAgentId}, version {version}", User, remoteSettings.AppSettings.User, remoteSettings.AppSettings.Name, remoteSettings.Runtime.Version);
@@ -214,7 +216,6 @@ namespace dexih.api.Controllers
                         // create a hash of the userid, which is used as part of the dynamic url.
                         var userHash = user.Id.CreateSHA1();
                         
-                        
                         // create a security key, which is not sent the the browser client, and used to ensure the instance id hasn't been hijacked by another remote agent.
                         var (instanceId, securityToken) = await _remoteServers.AuthorizeRemoteAgent(remoteSettings.AppSettings.Name, dbRemoteAgent.RemoteAgentKey, remoteSettings.AppSettings.EncryptionKey, remoteIp, user.Id, cancellationToken);
                         
@@ -263,22 +264,22 @@ namespace dexih.api.Controllers
                 {
                     managedTask.ReferenceId = datalinkProgress.InstanceId;
                     
-                    await _operations.BroadcastClientMessageAsync(managedTask.OriginatorId, datalinkProgress.Command, managedTask, cancellationToken);
+                    await _operations.BroadcastClientMessageAsync(managedTask.OriginatorId, EClientCommand.Command, managedTask, cancellationToken);
 
                     switch (managedTask.Category)
                     {
                         case "Datalink":
-                            await _operations.BroadcastHubMessageAsync(managedTask.ReferenceKey, "datalink-progress", managedTask, cancellationToken);
+                            await _operations.BroadcastHubMessageAsync(managedTask.ReferenceKey, EClientCommand.DatalinkProgress, managedTask, cancellationToken);
                             break;
                         case "Datajob":
-                            await _operations.BroadcastHubMessageAsync(managedTask.ReferenceKey, "datajob-progress", managedTask, cancellationToken);
+                            await _operations.BroadcastHubMessageAsync(managedTask.ReferenceKey, EClientCommand.DatajobProgress, managedTask, cancellationToken);
                             break;
                         case "DatalinkTest":
                         case "DatalinkTestSnapshot":
-                            await _operations.BroadcastHubMessageAsync(managedTask.ReferenceKey, "datalinkTest-progress", managedTask, cancellationToken);
+                            await _operations.BroadcastHubMessageAsync(managedTask.ReferenceKey, EClientCommand.DatalinkTestProgress, managedTask, cancellationToken);
                             break;
                         case "Table":
-                            await _operations.BroadcastHubMessageAsync(managedTask.ReferenceKey, "table-progress", managedTask, cancellationToken);
+                            await _operations.BroadcastHubMessageAsync(managedTask.ReferenceKey, EClientCommand.TableProgress, managedTask, cancellationToken);
                             break;
                     }
                 }
@@ -308,7 +309,7 @@ namespace dexih.api.Controllers
                 //send any update to results to the clients
                 foreach (var item in apiData.ApiData)
                 {
-                    await _operations.BroadcastHubMessageAsync(item.HubKey, "api-status", item, cancellationToken);
+                    await _operations.BroadcastHubMessageAsync(item.HubKey, EClientCommand.ApiStatus, item, cancellationToken);
                 }
 
                 return new ReturnValue(true);
@@ -337,7 +338,7 @@ namespace dexih.api.Controllers
                 //send any update to results to the clients
                 foreach (var item in apiQuery.ApiQueries)
                 {
-                    await _operations.BroadcastHubMessageAsync(item.HubKey, "api-query", item, cancellationToken);
+                    await _operations.BroadcastHubMessageAsync(item.HubKey, EClientCommand.ApiQuery, item, cancellationToken);
                 }
 
                 return new ReturnValue(true);
@@ -348,27 +349,27 @@ namespace dexih.api.Controllers
             }
         }
         
-        [HttpPost("[action]")]
-        public async Task<ReturnValue> UpdateResponseMessage([FromBody] RemoteMessage[] returnMessages, CancellationToken cancellationToken)
-        {
-            try
-            {
-                foreach (var returnMessage in returnMessages)
-                {
-                    await _remoteServers.SetResponseMessage(returnMessage.MessageId, returnMessage, CancellationToken.None);
-                }
-                
-                return new ReturnValue(true);
-
-            }
-            catch (Exception ex)
-            {
-                return new ReturnValue(false, "Error occurred in UpdateResponseMessage. " + ex.Message, ex);
-            }
-        }
+//        [HttpPost("[action]")]
+//        public async Task<ReturnValue> UpdateResponseMessage([FromBody] ResponseMessage[] returnMessages, CancellationToken cancellationToken)
+//        {
+//            try
+//            {
+//                foreach (var returnMessage in returnMessages)
+//                {
+//                    await _remoteServers.SetResponseMessage(returnMessage.MessageId, returnMessage, CancellationToken.None);
+//                }
+//                
+//                return new ReturnValue(true);
+//
+//            }
+//            catch (Exception ex)
+//            {
+//                return new ReturnValue(false, "Error occurred in UpdateResponseMessage. " + ex.Message, ex);
+//            }
+//        }
         
         [HttpPost("[action]")]
-        public async Task<ReturnValue> DownloadReady([FromBody] DownloadReadyModel downloadReady, CancellationToken cancellationToken)
+        public async Task<ReturnValue> DownloadReady([FromBody] DownloadReadyMessage downloadReady, CancellationToken cancellationToken)
         {
             try
             {
@@ -380,7 +381,7 @@ namespace dexih.api.Controllers
                 };
 
                 //broadcast the new file to the client
-                await _operations.BroadcastClientMessageAsync(downloadReady.ConnectionId, "download-ready", content, cancellationToken);
+                await _operations.BroadcastClientMessageAsync(downloadReady.ConnectionId, EClientCommand.DownloadReady, content, cancellationToken);
                 
                 return new ReturnValue(true);
             }
@@ -391,7 +392,7 @@ namespace dexih.api.Controllers
         }
         
         [HttpPost("[action]")]
-        public async Task<ReturnValue> FlatFilesReady([FromBody] FlatFilesReadyModel flatFilesReady, CancellationToken cancellationToken)
+        public async Task<ReturnValue> FlatFilesReady([FromBody] FlatFilesReadyMessage flatFilesReady, CancellationToken cancellationToken)
         {
             try
             {
@@ -399,11 +400,11 @@ namespace dexih.api.Controllers
                 {
                     hubKey = flatFilesReady.HubKey,
                     reference = flatFilesReady.Reference,
-                    tables = flatFilesReady.tables
+                    tables = flatFilesReady.Tables
                 };
 
                 //broadcast the new file to the client
-                await _operations.BroadcastClientMessageAsync(flatFilesReady.ConnectionId, "flatFiles-ready", content, cancellationToken);
+                await _operations.BroadcastClientMessageAsync(flatFilesReady.ConnectionId, EClientCommand.FlatFilesReady, content, cancellationToken);
                 
                 return new ReturnValue(true);
             }

@@ -6,7 +6,7 @@ import { HubFormsService } from '../../hub.forms.service';
 import { InputOutputColumns } from '../../hub.lineage.models';
 import { HubService } from '../../hub.service';
 import { TransformReference } from '../../hub.remote.models';
-import { Message } from '../../../+auth/auth.models';
+import { Message, CancelToken } from '../../../+auth/auth.models';
 import { HubCache } from '../../hub.models';
 import { eTransformType, DexihDatalinkColumn, eParameterDirection, eTypeCode, DexihDatalinkTransformItem,
     DexihDatalinkTransform, DexihDatalinkTable, eTransformItemType, eSourceType } from '../../../shared/shared.models';
@@ -327,40 +327,19 @@ export class DatalinkEditService implements OnInit, OnDestroy {
         });
     }
 
-    importFunctionMappings(datalinkTransformKey: number, item: DexihDatalinkTransformItem):
+    importFunctionMappings(datalinkTransformKey: number, item: DexihDatalinkTransformItem, cancelToken: CancelToken):
         Promise<string[]> {
-        return new Promise<string[]>((resolve, reject) => {
-            let datalink = this.hubFormsService.getDatalinkValue();
 
-            const cache = this._hubCache;
-            let remoteAgent = this.hubService.getRemoteAgentCurrent();
+        let datalink = this.hubFormsService.getDatalinkValue();
+        const cache = this._hubCache;
 
-            if (!remoteAgent) {
-                let message = new Message(false, 'No active remote agent.', null, null);
-                this.hubService.addHubMessage(message);
-                reject(message);
-                return;
-            }
-
-            this.authService.post('/api/Hub/ImportFunctionMappings', {
-                hubKey: cache.hub.hubKey,
-                remoteAgentId: this.hubService.getCurrentRemoteAgentInstanceId(),
-                datalink: datalink,
-                datalinkTransformKey: datalinkTransformKey,
-                datalinkTransformItem: item
-            }, 'Importing function mappings...').then(result => {
-                if (result.success) {
-                    resolve(result.value);
-                } else {
-                    this.hubService.addHubMessage(result);
-                    reject(result['message']);
-                }
-            }).catch(reason => {
-                this.hubService.addHubMessage(reason);
-                resolve(null);
-                // reject(reason);
-            });
-        });
+        return this.hubService.hubPostRemote<string[]>('/api/Hub/ImportFunctionMappings', {
+            hubKey: cache.hub.hubKey,
+            remoteAgentId: this.hubService.getCurrentRemoteAgentId(),
+            datalink: datalink,
+            datalinkTransformKey: datalinkTransformKey,
+            datalinkTransformItem: item
+        }, 'Importing function mappings...', cancelToken);
     }
 
     reBuildDatalinkTable(datalinkTable: DexihDatalinkTable, confirm = false) {

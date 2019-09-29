@@ -41,6 +41,7 @@ export class InputParameterComponent implements OnInit, OnDestroy {
     private type: TypeFunctions;
     eBasicType = eBasicType;
     typeCodes = TypeCodes;
+    eTypeCode = eTypeCode;
 
     public columns: Array<DexihTableColumn>;
 

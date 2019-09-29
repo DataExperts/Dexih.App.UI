@@ -7,6 +7,7 @@ import { Subscription, combineLatest} from 'rxjs';
 import { HubFormsService } from '../../hub.forms.service';
 import { LogFactory, eLogLevel } from '../../../../logging';
 import { eConnectionPurpose, eConnectionCategory, ConnectionReference, DexihConnection, RemoteLibraries } from '../../../shared/shared.models';
+import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
 
@@ -37,6 +38,8 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
   public connectionPurposes = connectionPurposes;
   public eConnectionPurpose = eConnectionPurpose;
   public eConnectionCategory = eConnectionCategory;
+
+  public cancelToken: CancelToken = new CancelToken();
 
   public connectionReference: ConnectionReference;
   private isLoaded = false;
@@ -109,7 +112,7 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
 
           if (this.action === 'new') {
             let connection = new DexihConnection();
-            connection.purpose = params['purpose'];
+            connection.purpose = +params['purpose'];
 
             this.logger.LogC(() => `new connection, purpose ${connection.purpose}.`, eLogLevel.Trace);
 
@@ -154,6 +157,7 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
     if (this._subscription) { this._subscription.unsubscribe(); }
     if (this._formChangeSubscription) { this._formChangeSubscription.unsubscribe(); }
     if (this._purposeSubscription) { this._purposeSubscription.unsubscribe(); }
+    this.cancelToken.cancel();
   }
 
   private updateUrl() {
@@ -217,7 +221,7 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
     this.logger.LogC(() => `revealConnectionString.`, eLogLevel.Trace);
     this.revealingConnectionString = true;
 
-    this.hubService.decrypt(this.formsService.currentForm.controls.connectionString.value)
+    this.hubService.decrypt(this.formsService.currentForm.controls.connectionString.value, this.cancelToken)
       .then(result => {
         this.formsService.currentForm.controls.connectionStringDisplay.setValue(result);
         this.revealingConnectionString = false;
@@ -244,7 +248,7 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
     this.logger.LogC(() => `refreshConnection.`, eLogLevel.Trace);
 
     this.refreshingConnection = true;
-    this.hubService.refreshConnection(this.formsService.currentForm.value)
+    this.hubService.refreshConnection(this.formsService.currentForm.value, this.cancelToken)
       .then(result => {
         this.hubService.addHubSuccessMessage('The connection was successful.');
         this.databases = result;
@@ -266,7 +270,7 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
         let connection = Object.assign({}, this.formsService.currentForm.value);
         connection.defaultDatabase = result;
 
-        this.hubService.createDatabase(connection)
+        this.hubService.createDatabase(connection, this.cancelToken)
           .then(() => {
             this.hubService.addHubSuccessMessage('The database was created successfully.');
             this.databases = [result];
@@ -281,6 +285,26 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
     }).catch(() => {
       this.creatingDatabase = false;
     });
+  }
+
+  async save() {
+    let form = this.formsService.currentForm;
+
+    let passwordRaw = form.controls.passwordRaw.value;
+    if (passwordRaw) {
+      let password = await this.hubService.encrypt(passwordRaw, this.cancelToken);
+      form.controls.password.setValue(password);
+      form.controls.passwordRaw.setValue(null);
+    }
+
+    let connectionStringRaw = form.controls.connectionStringRaw.value;
+    if (connectionStringRaw) {
+      let connectionString = await this.hubService.encrypt(connectionStringRaw, this.cancelToken);
+      form.controls.connectionString.setValue(connectionString);
+      form.controls.connectionStringRaw.setValue(null);
+    }
+
+    await this.formsService.save();
   }
 
   close() {

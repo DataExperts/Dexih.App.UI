@@ -91,7 +91,7 @@ export class TableEditFileComponent implements OnInit, OnDestroy {
         form.append('hubKey', this.hubCache.hub.hubKey.toString());
         form.append('table', JSON.stringify(this.formService.currentForm.value));
         form.append('connectionKey', this.connection.key.toString());
-        form.append('remoteAgentId', this.hubService.getCurrentRemoteAgentInstanceId());
+        form.append('remoteAgentId', this.hubService.getCurrentRemoteAgentId());
         form.append('save', 'false');
 
         this.authService.postForm('/api/Hub/ImportFileFormat', form).then(result => {

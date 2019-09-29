@@ -11,8 +11,8 @@ namespace dexih.api.Services.Operations
         ApplicationSettings Config { get; }
         RepositoryManager RepositoryManager { get; }
         
-        Task BroadcastClientMessageAsync(string connectionId, string command, object content, CancellationToken cancellationToken);
-        Task BroadcastHubMessageAsync(long hubKey, string command, object content, CancellationToken cancellationToken);
-        Task BroadcastUsersMessageAsync(IEnumerable<string> userIds, string command, object content, CancellationToken cancellationToken);
+        Task BroadcastClientMessageAsync(string connectionId, EClientCommand command, object content, CancellationToken cancellationToken);
+        Task BroadcastHubMessageAsync(long hubKey, EClientCommand command, object content, CancellationToken cancellationToken);
+        Task BroadcastUsersMessageAsync(IEnumerable<string> userIds, EClientCommand command, object content, CancellationToken cancellationToken);
     }
 }

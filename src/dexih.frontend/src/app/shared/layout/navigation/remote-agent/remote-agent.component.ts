@@ -53,7 +53,7 @@ export class RemoteAgentComponent implements OnInit, OnDestroy {
                  remoteAgentHubs.forEach(r => {
                     let remoteAgent = remoteAgents.find(c => c.remoteAgentKey === r.remoteAgentKey);
                     if (remoteAgent) {
-                        this.activeHubAgents = this.activeHubAgents.concat(remoteAgent.activeAgents);
+                        this.activeHubAgents = this.activeHubAgents.concat(remoteAgent['activeAgents']);
                     }
                  });
 

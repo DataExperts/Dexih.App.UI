@@ -7,6 +7,7 @@ import { HubCache } from '../../../hub.models';
 import { HubService } from '../../../hub.service';
 import { BehaviorSubject, Subscription, combineLatest} from 'rxjs';
 import { eUpdateStrategy, DownloadObject, eSourceType, eDownloadFormat, eDataObjectType } from '../../../../shared/shared.models';
+import { CancelToken } from '../../../../+auth/auth.models';
 
 @Component({
     selector: 'datalink-save-button',
@@ -15,6 +16,7 @@ import { eUpdateStrategy, DownloadObject, eSourceType, eDownloadFormat, eDataObj
 
 export class DatalinkEditSaveButtonComponent implements OnInit, OnDestroy {
     private _subscription: Subscription;
+    private cancelToken: CancelToken = new CancelToken();
 
     datalinkForm: FormGroup;
     savingDatalink = new BehaviorSubject(false);
@@ -47,6 +49,7 @@ export class DatalinkEditSaveButtonComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         if (this._subscription) { this._subscription.unsubscribe(); }
+        this.cancelToken.cancel();
     }
 
     async saveDatalink() {
@@ -68,9 +71,9 @@ export class DatalinkEditSaveButtonComponent implements OnInit, OnDestroy {
                 for (let t of targets.controls) {
                     if (t.dirty) {
                         let target = <FormGroup>t;
-                        let savedTable = await this.hubService.saveTable(target.controls.table.value);
-                        target.setControl('table', this.editDatalinkService.hubFormsService.tableForm(savedTable));
-                        target.controls.tableKey.setValue(savedTable.key);
+                        let savedTable = await this.hubService.saveTables([target.controls.table.value]);
+                        target.setControl('table', this.editDatalinkService.hubFormsService.tableForm(savedTable[0]));
+                        target.controls.tableKey.setValue(savedTable[0].key);
                     }
                 }
 
@@ -133,7 +136,7 @@ export class DatalinkEditSaveButtonComponent implements OnInit, OnDestroy {
         downloadObject.objectKey = this.datalinkForm.controls.key.value;
         downloadObject.objectType = eDataObjectType.Datalink;
         downloadItems.push(downloadObject);
-        this.hubService.downloadData(downloadItems, true, eDownloadFormat.Csv)
+        this.hubService.downloadData(downloadItems, true, eDownloadFormat.Csv, this.cancelToken)
     }
 
     cancel() {
@@ -150,13 +153,14 @@ export class DatalinkEditSaveButtonComponent implements OnInit, OnDestroy {
                             if (value) {
                                 this.hubService
                                     .runDatalinks([this.datalinkForm.controls.key.value], truncateTarget, resetIncremental
-                                        , null, null, null);
+                                        , null, null, null, this.cancelToken);
                             }
                         })
                     }
                 });
         } else {
-            this.hubService.runDatalinks([this.datalinkForm.controls.key.value], truncateTarget, resetIncremental, null, null, null);
+            this.hubService.runDatalinks([this.datalinkForm.controls.key.value], truncateTarget, resetIncremental,
+                null, null, null, this.cancelToken);
         }
     }
 

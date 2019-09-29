@@ -1,4 +1,5 @@
 import { environment } from './environments/environment';
+import { Message } from './app/+auth/auth.models';
 
 export enum eLogLevel {
     Trace,
@@ -45,6 +46,14 @@ export class LogFactory {
     public LogC(message: () => string, logLevel: eLogLevel) {
         if (!environment.production) {
             this.Log(message(), logLevel);
+        }
+    }
+
+    public LogMessage(message: Message) {
+        if (message.success) {
+            this.Log(message.message, eLogLevel.Information);
+        } else {
+            this.Log(message.message + '/n' + message.exceptionDetails, eLogLevel.Error);
         }
     }
 

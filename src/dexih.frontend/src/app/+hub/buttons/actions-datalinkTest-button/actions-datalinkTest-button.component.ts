@@ -6,6 +6,7 @@ import { AuthService } from '../../../+auth/auth.service';
 import { HubCache } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { DexihDatalinkTest, DexihDatalink } from '../../../shared/shared.models';
+import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
     selector: 'actions-datalinkTest-button',
@@ -18,6 +19,8 @@ export class ActionsDatalinkTestButtonComponent implements OnInit, OnDestroy, On
     @Input() public pullRight = false;
 
     public hubCache: HubCache;
+
+    private cancelToken: CancelToken = new CancelToken();
 
     relatedDatalinks = [];
 
@@ -53,6 +56,7 @@ export class ActionsDatalinkTestButtonComponent implements OnInit, OnDestroy, On
 
     ngOnDestroy() {
         if (this._hubCacheSubscription) { this._hubCacheSubscription.unsubscribe(); }
+        this.cancelToken.cancel();
     }
 
     navigateToDatalink(datalink: DexihDatalink) {
@@ -64,15 +68,15 @@ export class ActionsDatalinkTestButtonComponent implements OnInit, OnDestroy, On
     }
 
     run() {
-        this.hubService.runDatalinkTests(this.datalinkTests.map(c => c.key)).catch();
+        this.hubService.runDatalinkTests(this.datalinkTests.map(c => c.key), this.cancelToken).catch();
     }
 
     snapshot() {
-        this.hubService.runDatalinkTestSnapshot(this.datalinkTests).catch();
+        this.hubService.runDatalinkTestSnapshot(this.datalinkTests, this.cancelToken).catch();
     }
 
     cancel() {
-        this.hubService.cancelDatalinks(this.datalinkTests.map(c => c.key)).catch();
+        this.hubService.cancelDatalinks(this.datalinkTests.map(c => c.key), this.cancelToken).catch();
     }
 
     export() {

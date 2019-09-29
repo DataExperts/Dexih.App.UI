@@ -5,6 +5,7 @@ import { HubCache } from '../../hub.models';
 import { Subscription, combineLatest} from 'rxjs';
 import { DexihTable, eConnectionCategory, DexihConnection, ConnectionReference, DexihDatalink,
     DownloadObject, eSourceType, eDownloadFormat, DexihHub, eDataObjectType } from '../../../shared/shared.models';
+import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
     selector: 'actions-table-button',
@@ -20,6 +21,7 @@ export class ActionsTableButtonComponent implements OnInit, OnChanges, OnDestroy
     @Output() public changedTables: EventEmitter<Array<DexihTable>> = new EventEmitter<Array<DexihTable>>();
 
     private _subscription: Subscription;
+    private cancelToken: CancelToken = new CancelToken()
     private hubCache: HubCache;
     eConnectionCategory = eConnectionCategory;
 
@@ -75,6 +77,7 @@ export class ActionsTableButtonComponent implements OnInit, OnChanges, OnDestroy
 
      ngOnDestroy() {
         if (this._subscription) { this._subscription.unsubscribe(); }
+        this.cancelToken.cancel();
      }
 
      getTables(): DexihTable[] {
@@ -97,7 +100,7 @@ export class ActionsTableButtonComponent implements OnInit, OnChanges, OnDestroy
     }
 
     reImport() {
-        this.hubService.reImportTables(this.getTableKeys(), true).then(tables => {
+        this.hubService.reImportTables(this.getTableKeys(), true, this.cancelToken).then(tables => {
             if (tables) {
                 let tableNames = tables.map(c => c.name).join(', ');
                 this.hubService.addHubSuccessMessage(`Tables ${tableNames} imported successfully.`);
@@ -108,7 +111,7 @@ export class ActionsTableButtonComponent implements OnInit, OnChanges, OnDestroy
 
     clear() {
         if (this.canWrite) {
-            this.hubService.clearTables(this.getTableKeys()).then(tables => {
+            this.hubService.clearTables(this.getTableKeys(), this.cancelToken).then(tables => {
                 if (tables) {
                     let tableNames = this.tables.map(c => c.name).join(', ');
                     this.hubService.addHubSuccessMessage(`Tables ${tableNames} have been truncated.`);
@@ -119,7 +122,7 @@ export class ActionsTableButtonComponent implements OnInit, OnChanges, OnDestroy
 
     rebuild() {
         if (this.canWrite) {
-            this.hubService.createTables(this.getTables()).then(tables => {
+            this.hubService.createTables(this.getTables(), this.cancelToken).then(tables => {
                 if (tables) {
                     let tableNames = this.tables.map(c => c.name).join(', ');
                     this.hubService.addHubSuccessMessage(`Tables ${tableNames} have been dropped & recreated.`);
@@ -157,7 +160,7 @@ export class ActionsTableButtonComponent implements OnInit, OnChanges, OnDestroy
             downloadObject.objectType = eDataObjectType.Table;
             downloadItems.push(downloadObject);
         });
-        this.hubService.downloadData(downloadItems, true, eDownloadFormat.Csv)
+        this.hubService.downloadData(downloadItems, true, eDownloadFormat.Csv, this.cancelToken)
     }
 
     export() {

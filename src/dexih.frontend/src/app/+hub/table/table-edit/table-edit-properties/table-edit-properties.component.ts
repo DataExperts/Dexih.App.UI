@@ -8,6 +8,7 @@ import { HubCache, deltaTypes, securityFlags } from '../../../hub.models';
 import { eTableType, DexihConnection, ConnectionReference,
     eConnectionCategory, DexihTableColumn, eConnectionPurpose, DexihTable } from '../../../../shared/shared.models';
 import { TypeCodes } from '../../../hub.remote.models';
+import { CancelToken } from '../../../../+auth/auth.models';
 
 @Component({
 
@@ -21,6 +22,7 @@ export class TableEditPropertiesComponent implements OnInit, OnDestroy {
 
     private _subscription: Subscription;
     private _connectionSubscription: Subscription;
+    private cancelToken: CancelToken = new CancelToken();
 
     public entityType = 'Table';
 
@@ -94,11 +96,12 @@ export class TableEditPropertiesComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         if (this._subscription) { this._subscription.unsubscribe(); }
         if (this._connectionSubscription) { this._connectionSubscription.unsubscribe(); }
+        this.cancelToken.cancel();
     }
 
     reloadColumns() {
         this.runningSql = true;
-        this.hubService.importTables([this.mainForm.value], false).then(tables => {
+        this.hubService.importTables([this.mainForm.value], false, this.cancelToken).then(tables => {
             const table: DexihTable = tables[0];
             const tableColumnsForm = <FormArray>this.formsService.currentForm.controls.dexihTableColumns;
             while (tableColumnsForm.controls.length > 0) {
@@ -113,7 +116,7 @@ export class TableEditPropertiesComponent implements OnInit, OnDestroy {
 
     test() {
         this.runningSql = true;
-        this.hubService.doImport([this.mainForm.value], false).then(tables => {
+        this.hubService.doImport([this.mainForm.value], false, this.cancelToken).then(tables => {
             let columns = tables[0].dexihTableColumns.map(c => c.name);
             this.hubService.addHubSuccessMessage('The query was successful, and returned the following columns.  ' + columns.join(', '));
             this.runningSql = false;

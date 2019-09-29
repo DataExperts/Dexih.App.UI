@@ -37,7 +37,7 @@
         </div>
 
         <form-checkbox class="flex-fill pl-1" label="All Rows" [(ngModel)]="allRows" (ngModelChange)="onChanged()" (click)="selectAllRows()" [border]="true"></form-checkbox>
-        <form-input class="flex-fill pl-1" *ngIf="!allRows" labelLeft="Max Rows" placeholder="Maximum rows..." title="Specify the maximum rows to return" [(ngModel)]="selectQuery.rows" (ngModelChange)="hasChanged()"></form-input>
+        <form-input class="flex-fill pl-1" *ngIf="!allRows" labelLeft="Max Rows" placeholder="Maximum rows..." title="Specify the maximum rows to return" [(ngModel)]="selectQuery.rows" (ngModelChange)="onChanged()"></form-input>
         <dexih-button class="flex-fill pl-1" buttonClass="btn-outline-primary" (ngModelChange)="onChanged()" (click)="addFilter(0)">Add Filter</dexih-button>
     </div>
 

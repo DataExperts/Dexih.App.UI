@@ -86,6 +86,14 @@ export class ChartConfig{
 	public doughnut: boolean = false;
 }
 
+export class ClientMessage{
+	public command: eClientCommand = eClientCommand.Connect;
+	public value: any = null;
+	public success: boolean = false;
+	public message: string = null;
+	public exceptionDetails: string = null;
+}
+
 export class ConnectionAttribute{
 	public connectionCategory: eConnectionCategory = null;
 	public name: string = null;
@@ -124,10 +132,18 @@ export class ConnectionReference{
 	public requiresLocalStorage: boolean = false;
 }
 
+export class DatalinkProgress{
+	public instanceId: string = null;
+	public securityToken: string = null;
+	public command: eMessageCommand = eMessageCommand.Connect;
+	public results: any[] = [];
+}
+
 export class DataPack{
 	public name: string = null;
 	public columns: DataPackColumn[] = [];
 	public data: any[] = [];
+	public transformProperties: TransformProperties = null;
 }
 
 export class DataPackColumn{
@@ -155,6 +171,7 @@ export class DexihActiveAgent{
 	public version: string = null;
 	public latestVersion: string = null;
 	public latestDownloadUrl: string = null;
+	public namingStandards: string[] = [];
 }
 
 export class DexihApi{
@@ -890,7 +907,6 @@ export class DexihRemoteAgent{
 	public hashedToken: string = null;
 	public lastLoginIpAddress: string = null;
 	public lastLoginDateTime: Date = null;
-	public activeAgents: DexihActiveAgent[] = [];
 	public dexihRemoteAgentHubs: DexihRemoteAgentHub[] = [];
 	public createDate: Date = null;
 	public updateDate: Date = null;
@@ -1044,6 +1060,23 @@ export class DownloadObject{
 	public datalinkTransformKey: number = null;
 }
 
+export class DownloadReadyBase{
+	public instanceId: string = null;
+	public securityToken: string = null;
+	public connectionId: string = null;
+	public reference: string = null;
+	public hubKey: number = 0;
+}
+
+export class DownloadReadyMessage{
+	public url: string = null;
+	public instanceId: string = null;
+	public securityToken: string = null;
+	public connectionId: string = null;
+	public reference: string = null;
+	public hubKey: number = 0;
+}
+
 export class DownloadUrl{
 	public url: string = null;
 	public downloadUrlType: eDownloadUrlType = null;
@@ -1069,7 +1102,7 @@ export class Filter{
 	public column2: TableColumn = null;
 	public value2: any = null;
 	public operator: eCompare = eCompare.IsEqual;
-	public andOr: eAndOr = null;
+	public andOr: eAndOr = eAndOr.And;
 }
 
 export class FlatFile{
@@ -1098,6 +1131,15 @@ export class FlatFile{
 	public outputSortFields: Sort[] = [];
 	public columns: TableColumn[] = [];
 	public maxImportLevels: number = 10;
+}
+
+export class FlatFilesReadyMessage{
+	public tables: DexihTable[] = [];
+	public instanceId: string = null;
+	public securityToken: string = null;
+	public connectionId: string = null;
+	public reference: string = null;
+	public hubKey: number = 0;
 }
 
 export class FunctionParameter{
@@ -1137,6 +1179,14 @@ export class FunctionReference{
 	public resultReturnParameters: FunctionParameter[] = [];
 	public resultInputParameters: FunctionParameter[] = [];
 	public resultOutputParameters: FunctionParameter[] = [];
+}
+
+export class HubUser{
+	public firstName: string = null;
+	public lastName: string = null;
+	public email: string = null;
+	public id: string = null;
+	public permission: ePermission = null;
 }
 
 export class Import{
@@ -1211,11 +1261,6 @@ export class LogLevelSection{
 	public default: logLevel = logLevel.Information;
 	public system: logLevel = logLevel.Information;
 	public microsoft: logLevel = logLevel.Information;
-}
-
-export class NamingStandard{
-	public name: string = null;
-	public value: string = null;
 }
 
 export class NamingStandards{
@@ -1302,6 +1347,19 @@ export class RemoteAgentProperties{
 	public encryptionKey: string = null;
 	public userId: string = null;
 	public connectionId: string = null;
+	public namingStandards: string[] = [];
+}
+
+export class RemoteAgentStatus{
+	public activeApis: ApiData[] = [];
+	public activeDatajobs: any[] = [];
+	public activeDatalinks: any[] = [];
+	public activeDatalinkTests: any[] = [];
+	public previousDatajobs: any[] = [];
+	public previousDatalinks: any[] = [];
+	public previousDatalinkTests: any[] = [];
+	public remoteLibraries: RemoteLibraries = null;
+	public requiresUpgrade: boolean = false;
 }
 
 export class RemoteLibraries{
@@ -1317,6 +1375,11 @@ export class RemoteMessage{
 	public hubKey: number = 0;
 	public timeOut: number = null;
 	public hubVariables: DexihHubVariable[] = [];
+	public clientConnectionId: string = null;
+	public value: any = null;
+	public success: boolean = true;
+	public message: string = null;
+	public exceptionDetails: string = null;
 }
 
 export class RemoteSettings{
@@ -1327,16 +1390,19 @@ export class RemoteSettings{
 	public network: NetworkSection = new NetworkSection();
 	public privacy: PrivacySection = new PrivacySection();
 	public permissions: PermissionsSection = new PermissionsSection();
-	public namingStandards: NamingStandard[] = [];
+}
+
+export class RenewSslCertificateModel{
+	public domain: string = null;
+	public password: string = null;
 }
 
 export class ResponseMessage{
 	public messageId: string = null;
 	public securityToken: string = null;
-	public method: string = null;
-	public hubKey: number = 0;
-	public timeOut: number = null;
-	public hubVariables: DexihHubVariable[] = [];
+	public success: boolean = false;
+	public message: string = null;
+	public exceptionDetails: string = null;
 }
 
 export class RuntimeSection{
@@ -1347,7 +1413,6 @@ export class RuntimeSection{
 	public externalIpAddress: string = null;
 	public defaultProxyUrl: string = null;
 	public remoteAgentKey: number = 0;
-	public user: ApplicationUser = null;
 	public userHash: string = null;
 	public version: string = null;
 	public latestVersion: string = null;
@@ -1534,7 +1599,7 @@ export class TransformWriterResult{
 	public startTime: Date = null;
 	public endTime: Date = null;
 	public lastUpdateTime: Date = null;
-	public triggerMethod: eTriggerMethod = null;
+	public triggerMethod: eTriggerMethod = eTriggerMethod.Manual;
 	public triggerInfo: string = null;
 	public performanceSummary: TransformPerformance[] = [];
 	public profileTableName: string = null;
@@ -1549,6 +1614,31 @@ export class TransformWriterResult{
 export class UpdateQuery{
 	public updateColumns: QueryColumn[] = [];
 	public filters: Filter[] = [];
+}
+
+export class UserModel{
+	public email: string = null;
+	public userName: string = null;
+	public emailConfirmed: boolean = false;
+	public accessFailedCount: number = 0;
+	public id: string = null;
+	public lockoutEnabled: boolean = false;
+	public lockoutEnd: any = null;
+	public logins: any[] = [];
+	public roles: string[] = [];
+	public claims: any[] = [];
+	public twoFactorEnabled: boolean = false;
+	public phoneNumber: string = null;
+	public phoneNumberConfirmed: boolean = false;
+	public firstName: string = null;
+	public lastName: string = null;
+	public terms: boolean = false;
+	public subscription: boolean = false;
+	public inviteQuota: number = 0;
+	public hubQuota: number = 0;
+	public isRegistered: boolean = false;
+	public isInvited: boolean = false;
+	public isEnabled: boolean = false;
 }
 
 export class WebService{
@@ -1692,6 +1782,58 @@ export const eCleanActionItems = [
 	{key: eCleanAction.Null, name: 'Null', description: ''},
 	{key: eCleanAction.OriginalValue, name: 'OriginalValue', description: ''},
 	{key: eCleanAction.CleanValue, name: 'CleanValue', description: ''},
+]
+
+export enum eClientCommand{
+	Connect = 0,
+	Disconnect = 1,
+	Message = 2,
+	RemoteAgentUpdate = 3,
+	RemoteAgentDelete = 4,
+	RemoteAgentDeleteKey = 5,
+	HubUpdate = 6,
+	HubDelete = 7,
+	Task = 8,
+	FileDownload = 9,
+	DownloadReady = 10,
+	HubChange = 11,
+	HubError = 12,
+	DatalinkProgress = 13,
+	DatalinkStatus = 14,
+	DatajobProgress = 15,
+	DatajobStatus = 16,
+	DatalinkTestProgress = 17,
+	TableProgress = 18,
+	ApiStatus = 19,
+	ApiQuery = 20,
+	FlatFilesReady = 21,
+	Command = 22,
+}
+
+export const eClientCommandItems = [
+	{key: eClientCommand.Connect, name: 'Connect', description: ''},
+	{key: eClientCommand.Disconnect, name: 'Disconnect', description: ''},
+	{key: eClientCommand.Message, name: 'Message', description: ''},
+	{key: eClientCommand.RemoteAgentUpdate, name: 'RemoteAgentUpdate', description: ''},
+	{key: eClientCommand.RemoteAgentDelete, name: 'RemoteAgentDelete', description: ''},
+	{key: eClientCommand.RemoteAgentDeleteKey, name: 'RemoteAgentDeleteKey', description: ''},
+	{key: eClientCommand.HubUpdate, name: 'HubUpdate', description: ''},
+	{key: eClientCommand.HubDelete, name: 'HubDelete', description: ''},
+	{key: eClientCommand.Task, name: 'Task', description: ''},
+	{key: eClientCommand.FileDownload, name: 'FileDownload', description: ''},
+	{key: eClientCommand.DownloadReady, name: 'DownloadReady', description: ''},
+	{key: eClientCommand.HubChange, name: 'HubChange', description: ''},
+	{key: eClientCommand.HubError, name: 'HubError', description: ''},
+	{key: eClientCommand.DatalinkProgress, name: 'DatalinkProgress', description: ''},
+	{key: eClientCommand.DatalinkStatus, name: 'DatalinkStatus', description: ''},
+	{key: eClientCommand.DatajobProgress, name: 'DatajobProgress', description: ''},
+	{key: eClientCommand.DatajobStatus, name: 'DatajobStatus', description: ''},
+	{key: eClientCommand.DatalinkTestProgress, name: 'DatalinkTestProgress', description: ''},
+	{key: eClientCommand.TableProgress, name: 'TableProgress', description: ''},
+	{key: eClientCommand.ApiStatus, name: 'ApiStatus', description: ''},
+	{key: eClientCommand.ApiQuery, name: 'ApiQuery', description: ''},
+	{key: eClientCommand.FlatFilesReady, name: 'FlatFilesReady', description: ''},
+	{key: eClientCommand.Command, name: 'Command', description: ''},
 ]
 
 export enum eCompare{
@@ -2077,6 +2219,58 @@ export const eInvalidActionItems = [
 	{key: eInvalidAction.Reject, name: 'Reject', description: ''},
 	{key: eInvalidAction.Discard, name: 'Discard', description: ''},
 	{key: eInvalidAction.Abend, name: 'Abend', description: ''},
+]
+
+export enum eMessageCommand{
+	Connect = 0,
+	Disconnect = 1,
+	MessageResponse = 2,
+	RemoteAgentUpdate = 3,
+	RemoteAgentDelete = 4,
+	RemoteAgentDeleteKey = 5,
+	HubUpdate = 6,
+	HubDelete = 7,
+	Task = 8,
+	FileDownload = 9,
+	DownloadReady = 10,
+	HubChange = 11,
+	HubError = 12,
+	DatalinkProgress = 13,
+	DatalinkStatus = 14,
+	DatajobProgress = 15,
+	DatajobStatus = 16,
+	DatalinkTestProgress = 17,
+	TableProgress = 18,
+	ApiStatus = 19,
+	ApiQuery = 20,
+	FlatFilesReady = 21,
+	RemoteMethod = 22,
+}
+
+export const eMessageCommandItems = [
+	{key: eMessageCommand.Connect, name: 'Connect', description: ''},
+	{key: eMessageCommand.Disconnect, name: 'Disconnect', description: ''},
+	{key: eMessageCommand.MessageResponse, name: 'MessageResponse', description: ''},
+	{key: eMessageCommand.RemoteAgentUpdate, name: 'RemoteAgentUpdate', description: ''},
+	{key: eMessageCommand.RemoteAgentDelete, name: 'RemoteAgentDelete', description: ''},
+	{key: eMessageCommand.RemoteAgentDeleteKey, name: 'RemoteAgentDeleteKey', description: ''},
+	{key: eMessageCommand.HubUpdate, name: 'HubUpdate', description: ''},
+	{key: eMessageCommand.HubDelete, name: 'HubDelete', description: ''},
+	{key: eMessageCommand.Task, name: 'Task', description: ''},
+	{key: eMessageCommand.FileDownload, name: 'FileDownload', description: ''},
+	{key: eMessageCommand.DownloadReady, name: 'DownloadReady', description: ''},
+	{key: eMessageCommand.HubChange, name: 'HubChange', description: ''},
+	{key: eMessageCommand.HubError, name: 'HubError', description: ''},
+	{key: eMessageCommand.DatalinkProgress, name: 'DatalinkProgress', description: ''},
+	{key: eMessageCommand.DatalinkStatus, name: 'DatalinkStatus', description: ''},
+	{key: eMessageCommand.DatajobProgress, name: 'DatajobProgress', description: ''},
+	{key: eMessageCommand.DatajobStatus, name: 'DatajobStatus', description: ''},
+	{key: eMessageCommand.DatalinkTestProgress, name: 'DatalinkTestProgress', description: ''},
+	{key: eMessageCommand.TableProgress, name: 'TableProgress', description: ''},
+	{key: eMessageCommand.ApiStatus, name: 'ApiStatus', description: ''},
+	{key: eMessageCommand.ApiQuery, name: 'ApiQuery', description: ''},
+	{key: eMessageCommand.FlatFilesReady, name: 'FlatFilesReady', description: ''},
+	{key: eMessageCommand.RemoteMethod, name: 'RemoteMethod', description: ''},
 ]
 
 export enum eParameterDirection{

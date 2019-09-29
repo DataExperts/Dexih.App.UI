@@ -4,6 +4,7 @@ import { Subscription} from 'rxjs';
 import { HubCache } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { DexihDatalink, DexihTable, DexihDatajob, DexihHub, DownloadObject, eSourceType, eDownloadFormat, eDataObjectType } from '../../../shared/shared.models';
+import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
     selector: 'actions-datalink-button',
@@ -22,6 +23,7 @@ export class ActionsDatalinkButtonComponent implements OnInit, OnChanges, OnDest
 
     datalink: DexihDatalink;
     targetTables: DexihTable[] = [];
+    private cancelToken: CancelToken = new CancelToken();
 
     private _hubCacheSubscription: Subscription;
 
@@ -38,6 +40,7 @@ export class ActionsDatalinkButtonComponent implements OnInit, OnChanges, OnDest
 
     ngOnDestroy() {
         if (this._hubCacheSubscription) { this._hubCacheSubscription.unsubscribe(); }
+        this.cancelToken.cancel();
     }
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -102,7 +105,8 @@ export class ActionsDatalinkButtonComponent implements OnInit, OnChanges, OnDest
     }
 
     async runDatalinks(truncateTarget: boolean, resetIncremental: boolean) {
-        await this.hubService.runDatalinks(this.datalinks.map(c => c.key), truncateTarget, resetIncremental, null, null, null);
+        await this.hubService.runDatalinks(this.datalinks.map(c => c.key), truncateTarget, resetIncremental, null, null, null,
+            this.cancelToken);
     }
 
     runDatalinksOptions() {
@@ -112,7 +116,7 @@ export class ActionsDatalinkButtonComponent implements OnInit, OnChanges, OnDest
     }
 
     cancelDatalinks() {
-        this.hubService.cancelDatalinks(this.datalinks.map(c => c.key)).catch();
+        this.hubService.cancelDatalinks(this.datalinks.map(c => c.key), this.cancelToken).catch();
     }
 
     createDatajob() {
@@ -143,7 +147,7 @@ export class ActionsDatalinkButtonComponent implements OnInit, OnChanges, OnDest
             downloadObject.objectType = eDataObjectType.Datalink;
             downloadItems.push(downloadObject);
         });
-        this.hubService.downloadData(downloadItems, true, eDownloadFormat.Csv)
+        this.hubService.downloadData(downloadItems, true, eDownloadFormat.Csv, this.cancelToken)
     }
 
 }

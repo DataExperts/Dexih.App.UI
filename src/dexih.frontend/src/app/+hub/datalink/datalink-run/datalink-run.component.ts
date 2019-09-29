@@ -5,6 +5,7 @@ import { AuthService } from '../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { DexihDatalink, InputColumn, InputParameter } from '../../../shared/shared.models';
+import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
 
@@ -13,6 +14,7 @@ import { DexihDatalink, InputColumn, InputParameter } from '../../../shared/shar
 })
 export class DatalinkRunComponent implements OnInit, OnDestroy {
     private _subscription: Subscription;
+    private cancelToken: CancelToken = new CancelToken();
 
     private datalinks: DexihDatalink[];
     private hubCache: HubCache;
@@ -84,6 +86,7 @@ export class DatalinkRunComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         if (this._subscription) { this._subscription.unsubscribe(); }
+        this.cancelToken.cancel();
     }
 
     close() {
@@ -92,7 +95,7 @@ export class DatalinkRunComponent implements OnInit, OnDestroy {
 
     runDatalinks() {
         this.hubService.runDatalinks(this.datalinks.map(c => c.key), this.truncateTable,
-            this.resetIncremental, this.resetValue, this.inputColumns, this.parameters);
+            this.resetIncremental, this.resetValue, this.inputColumns, this.parameters, this.cancelToken);
         this.authService.navigateUp();
     }
 }

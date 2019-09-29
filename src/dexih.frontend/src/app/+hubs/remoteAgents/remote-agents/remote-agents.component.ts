@@ -3,7 +3,7 @@ import { HubsService } from '../../hubs.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
 import { AuthService } from '../../../+auth/auth.service';
-import { DexihActiveAgent, DexihRemoteAgent } from '../../../shared/shared.models';
+import { DexihActiveAgent, DexihRemoteAgent, eDownloadUrlType } from '../../../shared/shared.models';
 import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
@@ -28,6 +28,7 @@ export class RemoteAgentsComponent implements OnInit, OnDestroy {
 
     private _tableData = new BehaviorSubject<Array<any>>(null);
     tableData: Observable<Array<any>> = this._tableData.asObservable();
+    eDownloadUrlType = eDownloadUrlType;
 
     remoteAgents: DexihRemoteAgent[];
 
@@ -61,7 +62,7 @@ export class RemoteAgentsComponent implements OnInit, OnDestroy {
     refreshData() {
         let data = [];
         this.remoteAgents.forEach(remoteAgent => {
-            let activeAgent = remoteAgent.activeAgents && remoteAgent.activeAgents.length > 0 ? remoteAgent.activeAgents[0] : null;
+            let activeAgent = remoteAgent['activeAgents'] && remoteAgent['activeAgents'].length > 0 ? remoteAgent['activeAgents'][0] : null;
 
             if (activeAgent) {
                 data.push({
@@ -114,7 +115,7 @@ export class RemoteAgentsComponent implements OnInit, OnDestroy {
             agent.downloadUrls.forEach((downloadUrl, index) => {
                 let url = downloadUrl.url + '/ping';
 
-                this.authService.get(url, 'Testing remote agent connectivity...', false, cancelToken).then(result => {
+                this.authService.get<any>(url, 'Testing remote agent connectivity...', false, cancelToken).then(result => {
                     if (result && result.Status === 'Alive') {
                         downloadUrl['testStatus'] = 'success';
                     } else {

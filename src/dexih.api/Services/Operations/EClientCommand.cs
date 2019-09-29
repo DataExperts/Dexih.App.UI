@@ -1,0 +1,29 @@
+namespace dexih.api.Services.Operations
+{
+    public enum EClientCommand
+    {
+        Connect,
+        Disconnect,
+        Message,
+        RemoteAgentUpdate,
+        RemoteAgentDelete,
+        RemoteAgentDeleteKey,
+        HubUpdate,
+        HubDelete,
+        Task,
+        FileDownload,
+        DownloadReady,
+        HubChange,
+        HubError,
+        DatalinkProgress,
+        DatalinkStatus,
+        DatajobProgress,
+        DatajobStatus,
+        DatalinkTestProgress,
+        TableProgress,
+        ApiStatus,
+        ApiQuery,
+        FlatFilesReady,
+        Command
+    }
+}

@@ -1,6 +1,7 @@
 ﻿using dexih.functions;
 using dexih.functions.Query;
 using dexih.operations;
+using dexih.remote.operations;
 using dexih.repository;
 
 namespace dexih.api.Models
@@ -24,6 +25,7 @@ namespace dexih.api.Models
         public EDataObjectType ObjectType { get; set; }
         public SelectQuery SelectQuery { get; set; }
         public string RemoteAgentId { get; set; }
+        public string ClientConnectionId { get; set; }
         public DownloadUrl DownloadUrl { get; set; }
         public InputColumn[] InputColumns { get; set; }
         public InputParameters Parameters { get; set; }

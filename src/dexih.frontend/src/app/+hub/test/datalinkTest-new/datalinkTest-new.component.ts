@@ -6,6 +6,7 @@ import { Observable, Subscription, combineLatest } from 'rxjs';
 import { Location } from '@angular/common';
 import { HubCache, eCacheStatus } from '../../hub.models';
 import { DexihConnection, DexihDatalink, eConnectionPurpose } from '../../../shared/shared.models';
+import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
 
@@ -16,6 +17,7 @@ export class DatalinkTestNewComponent implements OnInit, OnDestroy {
 
   private _subscription: Subscription;
   private _valueChangesSubscription: Subscription;
+  private cancelToken: CancelToken = new CancelToken();
 
   private hubCache: HubCache;
 
@@ -121,6 +123,7 @@ export class DatalinkTestNewComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this._subscription) { this._subscription.unsubscribe(); }
     if (this._valueChangesSubscription) { this._valueChangesSubscription.unsubscribe(); }
+    this.cancelToken.cancel();
   }
 
   buildForm(): void {
@@ -176,9 +179,11 @@ export class DatalinkTestNewComponent implements OnInit, OnDestroy {
         this.sourceDatalinkKeys,
         value.auditConnectionKey,
         value.targetConnectionKey,
-        value.sourceConnectionKey,
-        value.snapshotData
-      ).then(result => {
+        value.sourceConnectionKey
+      ).then(async result => {
+        if (value.snapshotData) {
+          await this.hubService.runDatalinkTestSnapshot([result], this.cancelToken);
+        }
           this.router.navigate(['/hub', this.hubCache.hub.hubKey, 'datalinkTests', 'datalinkTest-edit', result.key],
             { relativeTo: this.route.root });
       }).catch(reason => {

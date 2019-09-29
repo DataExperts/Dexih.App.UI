@@ -18,13 +18,13 @@
             </dexih-button-dropdown>
             <dexih-button-dropdown *ngIf="table?.autoManageFiles" buttonClass="btn-sm btn-outline-primary" iconClass="fa fa-filter" [text]="path"
                 title="Select the file location" [pullRight]="true">
-                <a class="dropdown-item" [class.active]="path=='Incoming'" routerLinkActive="active" data-toggle="tab" routerLink="." [queryParams]="{path: 'Incoming'}">
+                <a class="dropdown-item" [class.active]="path==eFlatFilePath.Incoming" routerLinkActive="active" data-toggle="tab" routerLink="." [queryParams]="{path: eFlatFilePath.Incoming}">
                     <i class="fa fa-ellipsis-h"></i>Incoming</a>
-                <a class="dropdown-item" [class.active]="path=='Outgoing'" routerLinkActive="active" data-toggle="tab" routerLink="." [queryParams]="{path: 'Outgoing'}">
+                <a class="dropdown-item" [class.active]="path==eFlatFilePath.Outgoing" routerLinkActive="active" data-toggle="tab" routerLink="." [queryParams]="{path: eFlatFilePath.Outgoing}">
                     <i class="fa fa-ellipsis-h"></i>Outgoing</a>
-                <a class="dropdown-item" [class.active]="path=='Processed'" routerLinkActive="active" data-toggle="tab" routerLink="." [queryParams]="{path: 'Processed'}">
+                <a class="dropdown-item" [class.active]="path==eFlatFilePath.Processed" routerLinkActive="active" data-toggle="tab" routerLink="." [queryParams]="{path: eFlatFilePath.Processed}">
                     <i class="fa fa-ellipsis-h"></i>Processed</a>
-                <a class="dropdown-item" [class.active]="path=='Rejected'" routerLinkActive="active" data-toggle="tab" routerLink="." [queryParams]="{path: 'Rejected'}">
+                <a class="dropdown-item" [class.active]="path==eFlatFilePath.Rejected" routerLinkActive="active" data-toggle="tab" routerLink="." [queryParams]="{path: eFlatFilePath.Rejected}">
                     <i class="fa fa-ellipsis-h"></i>Rejected</a>
             </dexih-button-dropdown>
         </ng-template>
@@ -101,13 +101,13 @@
                     <ng-template #actions let-items="items">
                         <dexih-button-dropdown *ngIf="table?.autoManageFiles" class="mr-1" buttonClass="btn-primary" iconClass="fa fa-filter" [text]="path"
                             title="Select the file location" [pullRight]="true">
-                            <a class="dropdown-item" [class.active]="path=='Incoming'" routerLinkActive="active" data-toggle="tab" routerLink="." [queryParams]="{path: 'Incoming'}">
+                            <a class="dropdown-item" [class.active]="path=='Incoming'" routerLinkActive="active" data-toggle="tab" routerLink="." [queryParams]="{path: eFlatFilePath.Incoming}">
                                 <i class="fa fa-elipsis-h"></i>Incoming</a>
-                            <a class="dropdown-item" [class.active]="path=='Outgoing'" routerLinkActive="active" data-toggle="tab" routerLink="." [queryParams]="{path: 'Outgoing'}">
+                            <a class="dropdown-item" [class.active]="path=='Outgoing'" routerLinkActive="active" data-toggle="tab" routerLink="." [queryParams]="{path: eFlatFilePath.Outgoing}">
                                 <i class="fa fa-elipsis-h"></i>Outgoing</a>
-                            <a class="dropdown-item" [class.active]="path=='Processed'" routerLinkActive="active" data-toggle="tab" routerLink="." [queryParams]="{path: 'Processed'}">
+                            <a class="dropdown-item" [class.active]="path=='Processed'" routerLinkActive="active" data-toggle="tab" routerLink="." [queryParams]="{path: eFlatFilePath.Processed}">
                                 <i class="fa fa-elipsis-h"></i>Processed</a>
-                            <a class="dropdown-item" [class.active]="path=='Rejected'" routerLinkActive="active" data-toggle="tab" routerLink="." [queryParams]="{path: 'Rejected'}">
+                            <a class="dropdown-item" [class.active]="path=='Rejected'" routerLinkActive="active" data-toggle="tab" routerLink="." [queryParams]="{path: eFlatFilePath.Rejected}">
                                 <i class="fa fa-elipsis-h"></i>Rejected</a>
                         </dexih-button-dropdown>
                         <dexih-button-refresh (click)="refreshFiles()"></dexih-button-refresh>

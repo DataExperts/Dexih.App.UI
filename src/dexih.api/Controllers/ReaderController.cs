@@ -349,7 +349,7 @@ namespace dexih.api.Controllers
 		            parameters.DownloadUrl
 	            };
 
-	            var result = await _remoteAgents.SendRemoteMessage<string>(hub.HubKey, parameters.InstanceId, nameof(RemoteOperations.GetReaderData), value, repositoryManager, cancellationToken);
+	            var result = await _remoteAgents.SendRemoteCommand(hub.HubKey, parameters.InstanceId, nameof(RemoteOperations.GetReaderData), value, repositoryManager, cancellationToken);
 
 	            // returns a pointer to the download url.
 	            return result;

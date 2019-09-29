@@ -11,6 +11,7 @@
     <content url="file://$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.1/build/netcoreapp1.0/xunit.runner.visualstudio.dotnetcore.testadapter.dll" />
     <content url="file://$MODULE_DIR$/../../../Dexih.App.Operations/src/dexih.operations" />
     <content url="file://$MODULE_DIR$/../../../Dexih.App.Operations/src/dexih.repository" />
+    <content url="file://$MODULE_DIR$/../../../Dexih.App.Proxy/src/dexih.proxy" />
     <content url="file://$MODULE_DIR$/../../../Dexih.App.Remote/src/dexih.remote" />
     <content url="file://$MODULE_DIR$/../../../Dexih.App.Remote/src/dexih.remote.operations" />
     <content url="file://$MODULE_DIR$/../.." />

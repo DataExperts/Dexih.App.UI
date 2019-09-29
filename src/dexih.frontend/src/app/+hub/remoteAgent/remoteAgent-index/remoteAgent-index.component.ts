@@ -83,8 +83,8 @@ export class RemoteAgentIndexComponent implements OnInit, OnDestroy {
 
         let data: any[] = this.hubCache.hub.dexihRemoteAgentHubs.map(a => {
             let remoteAgent = this.remoteAgents ? this.remoteAgents.find(c => c.remoteAgentKey === a.remoteAgentKey) : null;
-            let activeAgent = remoteAgent && remoteAgent.activeAgents && remoteAgent.activeAgents.length > 0
-                ? remoteAgent.activeAgents[0] : null;
+            let activeAgent = remoteAgent && remoteAgent['activeAgents'] && remoteAgent['activeAgents'].length > 0
+                ? remoteAgent['activeAgents'][0] : null;
 
             return {
                 remoteAgentHubKey: a.remoteAgentHubKey,
@@ -104,7 +104,7 @@ export class RemoteAgentIndexComponent implements OnInit, OnDestroy {
 
         if (this.remoteAgents) {
             this.remoteAgents.forEach(a => {
-                let activeAgent = a.activeAgents && a.activeAgents.length > 0 ? a.activeAgents[0] : null;
+                let activeAgent = a['activeAgents'] && a['activeAgents'].length > 0 ? a['activeAgents'][0] : null;
 
                 if (activeAgent && data.findIndex(d => d.remoteAgentKey === a.remoteAgentKey) < 0) {
                     data.push({
@@ -134,8 +134,8 @@ export class RemoteAgentIndexComponent implements OnInit, OnDestroy {
         });
     }
 
-    authorize(remoteAgents: Array<any>) {
-        remoteAgents.forEach(async remoteAgent => {
+    async authorize(remoteAgents: Array<any>) {
+        for await (const remoteAgent of remoteAgents) {
             if (!remoteAgent.isAuthorized) {
                 let agentHub: DexihRemoteAgentHub;
                 if (remoteAgent.remoteAgentHubKey) {
@@ -157,7 +157,7 @@ export class RemoteAgentIndexComponent implements OnInit, OnDestroy {
                 }
                 await this.hubService.saveRemoteAgent(agentHub);
             }
-        });
+        };
     }
 
     deAuthorize(remoteAgents: Array<DexihRemoteAgentHub>) {

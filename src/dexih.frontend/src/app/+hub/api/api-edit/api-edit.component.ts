@@ -231,7 +231,7 @@ export class ApiEditComponent implements OnInit, OnDestroy {
     }
 
     downloadObject.query = this.selectQuery;
-    this.hubService.downloadData([downloadObject], false, format)
+    this.hubService.downloadData([downloadObject], false, format, this.cancelToken)
   }
 
   public canDeactivate(): Promise<boolean> {

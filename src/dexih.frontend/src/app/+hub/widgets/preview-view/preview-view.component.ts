@@ -3,7 +3,8 @@ import { combineLatest, Subscription } from 'rxjs';
 import { AuthService } from '../../../+auth/auth.service';
 import { HubService } from '../../hub.service';
 import { DexihInputParameter, DataCache, HubCache, PreviewResults } from '../../hub.models';
-import { DexihActiveAgent, InputColumn, DexihColumnBase, DexihView, eViewType, eDownloadFormat, DownloadObject, eSourceType, eDataObjectType } from '../../../shared/shared.models';
+import { DexihActiveAgent, InputColumn, DexihColumnBase, DexihView, eViewType,
+    eDownloadFormat, DownloadObject, eSourceType, eDataObjectType } from '../../../shared/shared.models';
 import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
@@ -168,7 +169,7 @@ export class PreviewViewComponent implements OnInit, OnChanges, OnDestroy {
             downloadObject.objectKey = this.view.sourceType === eDataObjectType.Datalink ?
                 this.view.sourceDatalinkKey : this.view.sourceTableKey;
             downloadObject.objectType = this.view.sourceType;
-            this.hubService.downloadData([downloadObject], false, format)
+            this.hubService.downloadData([downloadObject], false, format, this.cancelToken)
         }
     }
 }

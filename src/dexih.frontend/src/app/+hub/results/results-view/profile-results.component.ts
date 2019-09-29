@@ -44,6 +44,6 @@ export class ProfileResultsComponent implements OnInit, OnDestroy {
     }
 
     download() {
-        this.hubService.downloadProfileData(this.auditResult);
+        this.hubService.downloadProfileData(this.auditResult, this.cancelToken);
     }
 }

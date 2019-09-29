@@ -25,6 +25,7 @@
       <e p="dexih.operations.csproj" t="IncludeRecursive" />
       <e p="dexih.operations.userprefs" t="Include" />
       <e p="DownloadData.cs" t="Include" />
+      <e p="Enums.cs" t="Include" />
       <e p="Exceptions" t="Include">
         <e p="CacheManagerExceptions.cs" t="Include" />
         <e p="DatajobRunExceptions.cs" t="Include" />
@@ -40,6 +41,8 @@
       </e>
       <e p="Import.cs" t="Include" />
       <e p="Message.cs" t="Include" />
+      <e p="MessageValues.cs" t="Include" />
+      <e p="Models.cs" t="Include" />
       <e p="obj" t="ExcludeRecursive">
         <e p="Debug" t="Include">
           <e p="netcoreapp2.1" t="Include">
@@ -69,6 +72,7 @@
       <e p="ColumnValidationRun.cs" t="Include" />
       <e p="dexih.repository.csproj" t="IncludeRecursive" />
       <e p="dexih_repositoryContext.cs" t="Include" />
+      <e p="DexihActiveAgent.cs" t="Include" />
       <e p="DexihApi.cs" t="Include" />
       <e p="DexihApiParameter.cs" t="Include" />
       <e p="DexihBaseEntity.cs" t="Include" />
@@ -116,6 +120,7 @@
       <e p="DexihTrigger.cs" t="Include" />
       <e p="DexihView.cs" t="Include" />
       <e p="DexihViewParameter.cs" t="Include" />
+      <e p="DownloadUrl.cs" t="Include" />
       <e p="EntityStatus.cs" t="Include" />
       <e p="Enums.cs" t="Include" />
       <e p="InputColumn.cs" t="Include" />
@@ -133,6 +138,71 @@
       <e p="RepositoryExceptions.cs" t="Include" />
       <e p="SeedData.cs" t="Include" />
       <e p="TransformSettings.cs" t="Include" />
+    </e>
+    <e p="$PROJECT_DIR$/../Dexih.App.Proxy/src/dexih.proxy" t="IncludeRecursive">
+      <e p="appsettings.Development.json" t="Include" />
+      <e p="appsettings.json" t="Include" />
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="Controllers" t="Include" />
+      <e p="dexih.proxy.csproj" t="IncludeRecursive" />
+      <e p="Models" t="Include">
+        <e p="DownloadObject.cs" t="Include" />
+      </e>
+      <e p="obj" t="ExcludeRecursive">
+        <e p="Debug" t="Include">
+          <e p="netcoreapp2.1" t="Include">
+            <e p="dexih.proxy.AssemblyInfo.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="Program.cs" t="Include" />
+      <e p="Properties" t="Include">
+        <e p="launchSettings.json" t="Include" />
+      </e>
+      <e p="Scripts" t="Include">
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="create_azure_site.sh" t="Include" />
+        <e p="dexih.proxy.deps.json" t="Include" />
+        <e p="dexih.proxy.dll" t="Include" />
+        <e p="dexih.proxy.pdb" t="Include" />
+        <e p="dexih.proxy.runtimeconfig.json" t="Include" />
+        <e p="Dexih.Utils.Crypto.dll" t="Include" />
+        <e p="Dexih.Utils.MessageHelpers.dll" t="Include" />
+        <e p="install_nginx_proxy.sh" t="Include" />
+        <e p="Scripts" t="Include">
+          <e p="appsettings.Development.json" t="Include" />
+          <e p="appsettings.json" t="Include" />
+          <e p="dexih.proxy.deps.json" t="Include" />
+          <e p="dexih.proxy.runtimeconfig.json" t="Include" />
+          <e p="Scripts" t="Include">
+            <e p="appsettings.Development.json" t="Include" />
+            <e p="appsettings.json" t="Include" />
+            <e p="dexih.proxy.deps.json" t="Include" />
+            <e p="dexih.proxy.runtimeconfig.json" t="Include" />
+            <e p="Scripts" t="Include">
+              <e p="appsettings.Development.json" t="Include" />
+              <e p="appsettings.json" t="Include" />
+              <e p="dexih.proxy.deps.json" t="Include" />
+              <e p="dexih.proxy.runtimeconfig.json" t="Include" />
+              <e p="web.config" t="Include" />
+            </e>
+            <e p="web.config" t="Include" />
+          </e>
+          <e p="web.config" t="Include" />
+        </e>
+        <e p="update_aws_site.sh" t="Include" />
+        <e p="update_azure_site.sh" t="Include" />
+        <e p="version.txt" t="Include" />
+        <e p="web.config" t="Include" />
+      </e>
+      <e p="Services" t="Include">
+        <e p="IStreams.cs" t="Include" />
+        <e p="Streams.cs" t="Include" />
+      </e>
+      <e p="Startup.cs" t="Include" />
+      <e p="version.txt" t="Include" />
+      <e p="wwwroot" t="Include" />
     </e>
     <e p="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote" t="IncludeRecursive">
       <e p="7za.exe" t="Include" />
@@ -196,6 +266,7 @@
       <e p="AutoStartService.cs" t="Include" />
       <e p="bin" t="ExcludeRecursive" />
       <e p="dexih.remote.operations.csproj" t="IncludeRecursive" />
+      <e p="DownloadStream.cs" t="Include" />
       <e p="Enums.cs" t="Include" />
       <e p="HTTPService.cs" t="Include" />
       <e p="ListenerService.cs" t="Include" />
@@ -210,6 +281,7 @@
         <e p="MessageQueue.cs" t="Include" />
         <e p="MessageService.cs" t="Include" />
       </e>
+      <e p="Models.cs" t="Include" />
       <e p="obj" t="ExcludeRecursive">
         <e p="Debug" t="Include">
           <e p="netcoreapp2.1" t="Include">
@@ -371,8 +443,10 @@
             </e>
             <e p="Operations" t="Include">
               <e p="ApplicationSettings.cs" t="Include" />
+              <e p="ClientMessage.cs" t="Include" />
               <e p="dexihOperations.cs" t="Include" />
               <e p="DexihOperationsConfig.cs" t="Include" />
+              <e p="EClientCommand.cs" t="Include" />
               <e p="IDexihOperations.cs" t="Include" />
             </e>
             <e p="Remote" t="Include">
@@ -1059,8 +1133,6 @@
     <e p="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions" t="IncludeRecursive">
       <e p="bin" t="ExcludeRecursive" />
       <e p="dexih.functions.csproj" t="IncludeRecursive" />
-      <e p="DexihActiveAgent.cs" t="Include" />
-      <e p="DownloadUrl.cs" t="Include" />
       <e p="Exceptions" t="Include">
         <e p="FunctionException.cs" t="Include" />
       </e>
@@ -1247,6 +1319,7 @@
       <e p="SentimentAnalysis.cs" t="Include" />
     </e>
     <e p="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms" t="IncludeRecursive">
+      <e p="AsyncHelper.cs" t="Include" />
       <e p="bin" t="ExcludeRecursive" />
       <e p="Connection.cs" t="Include" />
       <e p="ConnectionConvertString.cs" t="Include" />

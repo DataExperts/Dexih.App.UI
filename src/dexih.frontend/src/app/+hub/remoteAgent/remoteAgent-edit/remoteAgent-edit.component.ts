@@ -61,7 +61,8 @@ export class RemoteAgentEditComponent implements OnInit, OnDestroy {
                     // this.errorMessage = 'There was no validation specified to edit.';
                 } else {
                     let remoteAgent = this.remoteAgents.find(c => c.remoteAgentKey === this.remoteAgentKey);
-                    let activeAgent = remoteAgent.activeAgents && remoteAgent.activeAgents.length > 0 ? remoteAgent.activeAgents[0] : null;
+                    let activeAgent = remoteAgent['activeAgents'] &&
+                        remoteAgent['activeAgents'].length > 0 ? remoteAgent['activeAgents'][0] : null;
                     this.name = activeAgent ? activeAgent.name : '';
                     this.ipAddress = activeAgent ? activeAgent.ipAddress : null;
                     this.remoteAgentHub = this.hubCache.hub.dexihRemoteAgentHubs.find(c => c.remoteAgentHubKey === this.remoteAgentHubKey);

@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { HubService } from '../../../hub.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { TypeFunctions, TypeCodes, eBasicType } from '../../../hub.remote.models';
-import { DexihTableColumn, DexihDatalinkColumn } from '../../../../shared/shared.models';
+import { DexihTableColumn, DexihDatalinkColumn, eTypeCode } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -33,6 +33,7 @@ export class OutputParameterComponent implements OnInit, OnDestroy {
 
     type: TypeFunctions;
     eBasicType = eBasicType;
+    eTypeCode = eTypeCode;
 
     typeCodes = TypeCodes;
 

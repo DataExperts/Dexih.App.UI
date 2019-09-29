@@ -118,21 +118,21 @@ export class ExternalLogin {
     public authenticationToken: string;
 }
 
-export class RemoteMessage {
-    public messageId: string;
-    public securityToken: string;
-    public remoteAgentId: string;
-    public method: string;
-    public hubKey = 0;
-    public success: boolean;
-    public message: string;
-    public exceptionDetails: string;
-    public parameters: Array<Parameter>;
-    public value;
+// export class RemoteMessage {
+//     public messageId: string;
+//     public securityToken: string;
+//     public remoteAgentId: string;
+//     public method: string;
+//     public hubKey = 0;
+//     public success: boolean;
+//     public message: string;
+//     public exceptionDetails: string;
+//     public parameters: Array<Parameter>;
+//     public value;
 
-    constructor () {
-    }
-}
+//     constructor () {
+//     }
+// }
 
 export class Parameter {
     public key: string;

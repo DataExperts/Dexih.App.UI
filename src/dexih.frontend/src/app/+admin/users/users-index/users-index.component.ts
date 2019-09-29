@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription, Observable, BehaviorSubject, combineLatest } from 'rxjs';
 import { UserAuthorization } from '../../admin.models';
 import { DexihMessageComponent } from '../../../shared/ui/dexihMessage';
+import { ApplicationUser } from '../../../shared/shared.models';
 
 @Component({
     selector: 'users',
@@ -45,11 +46,11 @@ export class UsersIndexComponent implements OnInit, OnDestroy {
     }
 
     refreshUsers() {
-        this.authService.post('/api/Admin/GetUsers', {
+        this.authService.post<ApplicationUser[]>('/api/Admin/GetUsers', {
             searchString: '',
             maxResults: 100,
         }, 'Getting user details...').then(result => {
-            this._tableData.next(result.value);
+            this._tableData.next(result);
         }).catch(reason => {
             this.dexihMessage.addMessage(reason);
         });

@@ -1,16 +1,17 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { HubService } from '../../hub.service';
 import { HubCache } from '../../hub.models';
 import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DexihDatajob, DexihHub } from '../../../shared/shared.models';
+import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
     selector: 'actions-datajob-button',
     templateUrl: './actions-datajob-button.component.html'
 })
 
-export class ActionsDatajobButtonComponent implements OnInit {
+export class ActionsDatajobButtonComponent implements OnInit, OnDestroy {
     @Input() public datajobs: DexihDatajob[];
     @Input() public showEdit = true;
     @Input() public pullRight = false;
@@ -18,6 +19,8 @@ export class ActionsDatajobButtonComponent implements OnInit {
     public hubCache: HubCache;
 
     private _hubCacheSubscription: Subscription;
+    private cancelToken: CancelToken = new CancelToken();
+
 
     constructor(private hubService: HubService,
         private router: Router,
@@ -29,12 +32,17 @@ export class ActionsDatajobButtonComponent implements OnInit {
         });
     }
 
+    ngOnDestroy() {
+        if (this._hubCacheSubscription) { this._hubCacheSubscription.unsubscribe(); }
+        this.cancelToken.cancel();
+    }
+
     delete() {
         this.hubService.deleteDatajobs(this.datajobs);
     }
 
     runDatajobs(truncate: boolean, resetIncremental: boolean) {
-        this.hubService.runDatajobs(this.datajobs, truncate, resetIncremental, null, null);
+        this.hubService.runDatajobs(this.datajobs, truncate, resetIncremental, null, null, this.cancelToken);
     }
 
     runDatajobsOptions() {
@@ -54,11 +62,11 @@ export class ActionsDatajobButtonComponent implements OnInit {
     }
 
     activateDatajobs() {
-        this.hubService.activateDatajobs(this.datajobs, null);
+        this.hubService.activateDatajobs(this.datajobs, null, this.cancelToken);
     }
 
     cancelDatajobs() {
-        this.hubService.deactivateDatajobs(this.datajobs.map(c => c.key));
+        this.hubService.deactivateDatajobs(this.datajobs.map(c => c.key), this.cancelToken);
     }
 
     editDatajob(datajob: DexihDatajob) {

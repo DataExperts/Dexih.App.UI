@@ -3,6 +3,7 @@ using dexih.operations;
 using dexih.repository;
 using dexih.functions;
 using dexih.functions.Query;
+using dexih.remote.operations;
 using dexih.transforms;
 using Dexih.Utils.Crypto;
 using Dexih.Utils.DataType;
@@ -83,7 +84,6 @@ namespace dexih.api.Models
         public long AuditConnectionKey { get; set; }
         public long SourceConnectionKey { get; set; }
         public long TargetConnectionKey { get; set; }
-        public bool SnapshotData { get; set; }
     }
 
     public class HubKeyItems: HubModelBase
@@ -103,7 +103,6 @@ namespace dexih.api.Models
     public class ImportTables: HubModelBase
     {
         public DexihTable[] Tables { get; set; }
-        public bool Save { get; set; }
     }
 
     public class CreateTables: HubModelBase
@@ -199,10 +198,10 @@ namespace dexih.api.Models
         public DexihDashboard Dashboard { get; set; }
     }
 
-    public class DashboardUrls
+    public class DashboardDataKeys
     {
         public long DashboardItemKey { get; set; }
-        public string DownloadUrl { get; set; }
+        public string DataKey { get; set; }
     }
 
     public class PreviewView: PreviewBase

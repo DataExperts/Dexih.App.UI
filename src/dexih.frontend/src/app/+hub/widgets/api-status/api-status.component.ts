@@ -2,6 +2,7 @@ import { Component, Input, OnInit, OnDestroy, Output, EventEmitter } from '@angu
 import { HubService } from '../../hub.service';
 import { Subscription, combineLatest } from 'rxjs';
 import { DexihApi, ApiData, eApiStatus, eDownloadUrlType } from '../../../shared/shared.models';
+import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
     selector: 'api-status',
@@ -13,6 +14,7 @@ export class ApiStatusComponent implements OnInit, OnDestroy {
 
     private _subscription: Subscription;
     private _currentStatusSubscription: Subscription;
+    public cancelToken: CancelToken = new CancelToken();
 
     private api: DexihApi;
     public apiData: ApiData;
@@ -91,17 +93,18 @@ export class ApiStatusComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         if (this._subscription) { this._subscription.unsubscribe(); }
         if (this._currentStatusSubscription) { this._currentStatusSubscription.unsubscribe(); }
+        this.cancelToken.cancel();
     }
 
     deactivate() {
         if (this.apiKey) {
-            this.hubService.deactivateApis([this.apiKey]);
+            this.hubService.deactivateApis([this.apiKey], this.cancelToken);
         }
     }
 
     activate() {
         if (this.apiKey) {
-            this.hubService.activateApis([this.api]);
+            this.hubService.activateApis([this.api], this.cancelToken);
         }
     }
 

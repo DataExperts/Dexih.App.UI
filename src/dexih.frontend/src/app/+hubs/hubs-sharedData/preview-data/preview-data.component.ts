@@ -85,7 +85,8 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
     }
 
     refresh() {
-        this.hubsService.previewDataUrl(this.hubKey, this.objectKey, this.objectType, this.inputColumns, this.selectQuery).then((url) => {
+        this.hubsService.previewDataUrl(this.hubKey, this.objectKey, this.objectType, this.inputColumns, this.selectQuery,
+            this.cancelToken).then((url) => {
             this.hubsService.previewData(url, this.cancelToken).then((result) => {
                 this.columns = result.columns;
                 this.data = result.data;
@@ -110,7 +111,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
         sharedData.inputColumns = this.inputColumns;
         sharedData.query = this.selectQuery;
 
-        this.hubsService.downloadData([sharedData], true, format).then(() => {
+        this.hubsService.downloadData([sharedData], true, format, this.cancelToken).then(() => {
             this.dexihMessage.addSuccessMessage('The download task has started.');
         }).catch(reason => {
             this.dexihMessage.addMessage(reason);

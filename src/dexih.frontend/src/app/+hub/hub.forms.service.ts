@@ -14,7 +14,13 @@ import {
   DataCache,
 } from './hub.models';
 import { HubService } from './hub.service';
-import { eImportAction, Import, DexihHub, DexihConnection, DexihTable, DexihTableColumn, eTypeCode, DexihFileFormat, DexihView, DexihDashboard, DexihDashboardItem, DexihApi, DexihColumnValidation, DexihCustomFunction, DexihCustomFunctionParameter, DexihHubVariable, DexihDatalinkTest, DexihDatalinkTestStep, DexihDatalinkTestTable, DexihTrigger, DexihDatalinkStep, DexihDatalinkDependency, DexihDatalinkStepColumn, DexihDatajob, DexihRemoteAgentHub, DexihDatalink, DexihDatalinkColumn, DexihDatalinkTransform, DexihDatalinkTransformItem, DexihFunctionParameter, DexihFunctionArrayParameter, DexihDatalinkProfile, DexihDatalinkTarget, DexihDatalinkTable, eSourceType, eSharedObjectType } from '../shared/shared.models';
+import { eImportAction, Import, DexihConnection, DexihTable, DexihTableColumn, eTypeCode,
+   DexihFileFormat, DexihView, DexihDashboard, DexihDashboardItem, DexihApi, DexihColumnValidation,
+   DexihCustomFunction, DexihCustomFunctionParameter, DexihHubVariable, DexihDatalinkTest,
+   DexihDatalinkTestStep, DexihDatalinkTestTable, DexihTrigger, DexihDatalinkStep, DexihDatalinkDependency,
+   DexihDatalinkStepColumn, DexihDatajob, DexihRemoteAgentHub, DexihDatalink, DexihDatalinkColumn,
+   DexihDatalinkTransform, DexihDatalinkTransformItem, DexihFunctionParameter, DexihFunctionArrayParameter,
+   DexihDatalinkProfile, DexihDatalinkTarget, DexihDatalinkTable, eSourceType, eSharedObjectType } from '../shared/shared.models';
 
 @Injectable()
 export class HubFormsService implements OnDestroy {
@@ -407,21 +413,16 @@ export class HubFormsService implements OnDestroy {
 
       let result = await this.authService.post('/api/Hub/' + this.saveMethod, {
         hubKey: this.hubCache.hub.hubKey,
-        remoteAgentId: this.hubService.getCurrentRemoteAgentInstanceId(false),
         value: value
       }, 'Saving...');
 
-      if (!result.success) {
-        this.hubService.addHubMessage(result);
-      }
-
       let import1 = new Import();
-      import1[this.property.property] = [{ importAction: eImportAction.New, item: result.value }];
+      import1[this.property.property] = [{ importAction: eImportAction.New, item: result }];
       this.hubService.updateHubChange(import1);
 
       if (this.formGroupFunc) {
         // this.ignoreHubCacheChange = true;
-        this.formGroupFunc(result.value);
+        this.formGroupFunc(result);
 
         if (this.currentForm.controls.currentStatus) { this.currentForm.controls.currentStatus.setValue(currentStatus); }
         if (this.currentForm.controls.entityStatus) { this.currentForm.controls.entityStatus.setValue(entityStatus); }
@@ -554,6 +555,7 @@ export class HubFormsService implements OnDestroy {
     this.addMissing(connection, connectionForm, new DexihConnection());
 
     this.clearFormSubscriptions();
+
     // whenever the passwordDisplay or connectionStringDisplay changes, write the value to the raw
     // this allows encrypted values to be loaded, then overwritten when use changes.
     if (this._connectionChangesSubscription1) { this._connectionChangesSubscription1.unsubscribe(); }
@@ -1577,6 +1579,7 @@ export class HubFormsService implements OnDestroy {
       // 'name': [, [ // used for adding new columns
       // ]],
       'datalinkColumn': parameter.datalinkColumn,
+      'runTime': parameter['runTime'],
       'arrayParameters': this.fb.array(parameter.arrayParameters.filter(c => c.isValid).map(p => {
         return this.datalinkFunctionArrayParametersFormGroup(p);
       })),

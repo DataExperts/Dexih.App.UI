@@ -46,7 +46,7 @@ export class TableIndexComponent implements OnInit, OnDestroy {
                 this.route.params,
                 this.route.queryParams,
                 this.hubService.getHubCacheObservable(),
-            ).subscribe(result => {
+            ).subscribe(async result => {
                 let data = result[0];
                 let params = result[1];
                 let queryParams = result[2];
@@ -66,7 +66,7 @@ export class TableIndexComponent implements OnInit, OnDestroy {
                     this.connectionName = 'All';
                 }
 
-                this.updateTableData();
+                await this.updateTableData();
 
             });
         } catch (e) {
@@ -86,7 +86,7 @@ export class TableIndexComponent implements OnInit, OnDestroy {
         this.authService.navigateUp();
     }
 
-    updateTableData() {
+    async updateTableData() {
         this.title = 'Tables ';
         this.connectionName = 'All';
 
@@ -95,7 +95,7 @@ export class TableIndexComponent implements OnInit, OnDestroy {
         }
         if (this.hubCache && this.hubCache.isLoaded()) {
             let tableData = [];
-            this.hubCache.hub.dexihTables.forEach(async table => {
+            for await (const table of this.hubCache.hub.dexihTables) {
                 let connection = this.hubCache.hub.dexihConnections.find(c => c.key === table.connectionKey);
                 let connectionReference = await this.hubService.GetConnectionReference(connection);
 
@@ -129,7 +129,7 @@ export class TableIndexComponent implements OnInit, OnDestroy {
                         sharedToolTip: table.isShared ? 'Table is shared' : 'Table is private'
                     });
                 }
-            });
+            };
 
             if (this.connectionKey) {
                 let connection = this.hubCache.hub.dexihConnections.find(c => c.key === this.connectionKey);

@@ -853,7 +853,7 @@ namespace dexih.api.Controllers
 		        var userIds = await repositoryManager.GetHubUserIds(hub.HubKey, cancellationToken);
                 if (userIds != null)
                 {
-                    await _operations.BroadcastUsersMessageAsync(userIds, "hub-update", result, cancellationToken);
+                    await _operations.BroadcastUsersMessageAsync(userIds, EClientCommand.HubUpdate, result, cancellationToken);
                 }
 
                 return result;
@@ -896,7 +896,7 @@ namespace dexih.api.Controllers
 				var userIds = await repositoryManager.GetHubUserIds(hubKey, cancellationToken);
                 if (userIds != null)
                 {
-                    await _operations.BroadcastUsersMessageAsync(userIds, "hubs-delete", new[] { hubKey }, cancellationToken);
+                    await _operations.BroadcastUsersMessageAsync(userIds, EClientCommand.HubDelete, new[] { hubKey }, cancellationToken);
                 }
 			}
 		}
@@ -978,7 +978,7 @@ namespace dexih.api.Controllers
 		    
 		    await _operations.RepositoryManager.SaveRemoteAgent(user.Id, dbRemoteAgent, cancellationToken);
 
-		    await _operations.BroadcastUsersMessageAsync(new [] { user.Id}, "remoteAgent-update", dbRemoteAgent, cancellationToken);
+		    await _operations.BroadcastUsersMessageAsync(new [] { user.Id}, EClientCommand.RemoteAgentUpdate, dbRemoteAgent, cancellationToken);
 
 		    return new RemoteAgentUserToken
 		    {
@@ -1043,7 +1043,7 @@ namespace dexih.api.Controllers
 		    
 				    // disconnect any running agents.
 				    await _remoteAgents.RestartAgents(user.Id, new [] {remoteAgentKey}, true, _operations.RepositoryManager, cancellationToken);
-				    await _operations.BroadcastUsersMessageAsync(new [] { user.Id}, "remoteAgent-deleteKey", remoteAgentKey, cancellationToken);
+				    await _operations.BroadcastUsersMessageAsync(new [] { user.Id}, EClientCommand.RemoteAgentDeleteKey, remoteAgentKey, cancellationToken);
 			    }
 			    catch (Exception ex)
 			    {

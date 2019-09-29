@@ -6,6 +6,7 @@ import { Subscription, combineLatest} from 'rxjs';
 import { HubFormsService } from '../../hub.forms.service';
 import { DexihConnection, eConnectionCategory, DexihTable } from '../../../shared/shared.models';
 import { HubCache, eCacheStatus } from '../../hub.models';
+import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
   selector: 'dexih-table-edit-form',
@@ -21,6 +22,8 @@ export class TableEditComponent implements OnInit, OnDestroy {
   private hubCache: HubCache;
   public action: string; // new or edit
   public pageTitle: string;
+
+  public cancelToken: CancelToken = new CancelToken();
 
   private _subscription: Subscription;
   private _hubCacheChangeSubscription: Subscription;
@@ -114,6 +117,7 @@ export class TableEditComponent implements OnInit, OnDestroy {
     if (this._hubCacheChangeSubscription) { this._hubCacheChangeSubscription.unsubscribe(); }
     if (this._formChangeSubscription) { this._formChangeSubscription.unsubscribe(); }
     if (this._subscription) { this._subscription.unsubscribe(); }
+    this.cancelToken.cancel();
 
     // shut down service
     this.formsService.ngOnDestroy();
@@ -128,7 +132,7 @@ export class TableEditComponent implements OnInit, OnDestroy {
   }
 
   createPaths() {
-    this.hubService.createPaths(this.formsService.currentForm.value).then(() => {
+    this.hubService.createPaths(this.formsService.currentForm.value, this.cancelToken).then(() => {
       this.hubService.addHubSuccessMessage('The paths have been created.');
     }).catch();
   }

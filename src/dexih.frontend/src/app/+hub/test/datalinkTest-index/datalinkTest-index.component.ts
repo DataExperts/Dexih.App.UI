@@ -5,6 +5,7 @@ import { Observable, Subscription, BehaviorSubject, combineLatest} from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HubCache } from '../../hub.models';
 import { DexihDatalinkTest, DexihHub, eSharedObjectType } from '../../../shared/shared.models';
+import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
   selector: 'datalink-test',
@@ -16,6 +17,7 @@ export class DatalinkTestIndexComponent implements OnInit, OnDestroy {
   private _hubCacheChangeSubscription: Subscription;
 
     hubCache: HubCache;
+    private cancelToken: CancelToken = new CancelToken();
 
     datalinkTests: Array<DexihDatalinkTest>;
 
@@ -54,6 +56,7 @@ export class DatalinkTestIndexComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         if (this._hubCacheChangeSubscription) { this._hubCacheChangeSubscription.unsubscribe(); }
         if (this._subscription) { this._subscription.unsubscribe(); }
+        this.cancelToken.cancel();
     }
 
     close() {
@@ -65,12 +68,12 @@ export class DatalinkTestIndexComponent implements OnInit, OnDestroy {
     }
 
     snapshot(items: Array<DexihDatalinkTest>) {
-        this.hubService.runDatalinkTestSnapshot(items);
+        this.hubService.runDatalinkTestSnapshot(items, this.cancelToken);
     }
 
     run(items: Array<DexihDatalinkTest>) {
         let keys = items.map(c => c.key);
-        this.hubService.runDatalinkTests(keys);
+        this.hubService.runDatalinkTests(keys, this.cancelToken);
     }
 
     update() {

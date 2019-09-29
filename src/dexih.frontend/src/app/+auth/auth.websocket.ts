@@ -1,16 +1,16 @@
 import {  OnDestroy } from '@angular/core';
-import { RemoteMessage} from '../+hub/hub.models';
 import { Observable, Subscription, BehaviorSubject} from 'rxjs';
 import { LogFactory, eLogLevel } from '../../logging';
 import { HubConnection, HubConnectionBuilder, LogLevel, HubConnectionState } from '@aspnet/signalr';
 import { Location } from '@angular/common';
+import { ClientMessage, RemoteMessage, eClientCommand } from '../shared/shared.models';
 
 export class AuthWebSocket implements OnDestroy {
     // private webSocket: WebSocket;
     private _webSocketStatus = new BehaviorSubject<string>('Disconnected');
     private _connectHubSubscription: Subscription;
 
-    public _webSocketMessages = new BehaviorSubject<RemoteMessage>(null);
+    public _webSocketMessages = new BehaviorSubject<ClientMessage>(null);
     private _connectionId: string;
 
     private startingWebSocket = false;
@@ -44,8 +44,8 @@ export class AuthWebSocket implements OnDestroy {
             .withUrl(this.location.prepareExternalUrl('/browser'))
             .build();
 
-        this.hubConnection.on('Command', (remoteMessage: RemoteMessage) => {
-            this.logger.LogC(() => `startWebSocket: receive new message: ${remoteMessage.method}.`, eLogLevel.Debug);
+        this.hubConnection.on('Command', (remoteMessage: ClientMessage) => {
+            this.logger.LogC(() => `startWebSocket: receive new message: ${remoteMessage.command}.`, eLogLevel.Debug);
             this._webSocketMessages.next(remoteMessage);
         });
 
@@ -63,7 +63,7 @@ export class AuthWebSocket implements OnDestroy {
         await this.startWebSocket();
     }
 
-    public getWebSocketObservable(): Observable<RemoteMessage> {
+    public getWebSocketObservable(): Observable<ClientMessage> {
         return this._webSocketMessages.asObservable();
     }
 
@@ -114,17 +114,17 @@ export class AuthWebSocket implements OnDestroy {
     }
 
     private sendDisconnect() {
-        const disconnectMessage = new RemoteMessage();
-        disconnectMessage.method = 'disconnect';
+        const disconnectMessage = new ClientMessage();
+        disconnectMessage.command = eClientCommand.Disconnect;
         this._webSocketMessages.next(disconnectMessage);
     }
 
     private sendConnect(): Promise<void> {
         return new Promise<void>((resolve, reject) => {
-            const message = new RemoteMessage();
+            const message = new ClientMessage();
             return this.hubConnection.invoke('Connect').then(value => {
                 this._connectionId = value;
-                message.method = 'connect';
+                message.command = eClientCommand.Connect;
                 this._webSocketMessages.next(message);
                 resolve();
             }).catch(reason => {

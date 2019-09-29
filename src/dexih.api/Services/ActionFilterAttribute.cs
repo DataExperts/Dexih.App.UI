@@ -42,6 +42,7 @@ namespace dexih.api.Services
                     _logger.LogWarning(LoggingEvents.HubOnaction, exception, message);
                     var result = new ReturnValue(false, message, exception);
                     context.Result = new JsonResult(result);
+                    context.HttpContext.Response.StatusCode = 400;
                     return Task.CompletedTask;
                 }
                 else
@@ -55,34 +56,35 @@ namespace dexih.api.Services
                 _logger.LogError(LoggingEvents.HubOnaction, ex, message);
                 var result = new ReturnValue(false, message, ex);
                 context.Result = new JsonResult(result);
+                context.HttpContext.Response.StatusCode = 400;
                 return Task.CompletedTask;
             }
         }
 
-        public override void OnActionExecuted(ActionExecutedContext context)
-        {
-            if (context.Exception == null)
-            {
-                if (context.Result == null || context.Result is EmptyResult)
-                {
-                    context.Result = new JsonResult(new { Success = true });
-                }
-                else
-                {
-                    if (context.Result is ObjectResult result)
-                    {
-                        context.Result = new JsonResult(new { Success = true, result.Value });
-                    }
-
-                }
-                base.OnActionExecuted(context);
-            }
-            else
-            {
-                context.HttpContext.Response.StatusCode = 400;
-                base.OnActionExecuted(context);
-            }
-        }
+//        public override void OnActionExecuted(ActionExecutedContext context)
+//        {
+//            if (context.Exception == null)
+//            {
+//                if (context.Result == null || context.Result is EmptyResult)
+//                {
+//                    context.Result = new JsonResult(new { Success = true });
+//                }
+//                else
+//                {
+//                    if (context.Result is ObjectResult result)
+//                    {
+//                        context.Result = new JsonResult(new { Success = true, result.Value });
+//                    }
+//
+//                }
+//                base.OnActionExecuted(context);
+//            }
+//            else
+//            {
+//                context.HttpContext.Response.StatusCode = 400;
+//                base.OnActionExecuted(context);
+//            }
+//        }
 
     }
 }

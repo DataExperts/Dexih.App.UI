@@ -114,9 +114,8 @@
 		public const int HubDeleteDashboards = 4055;
 		public const int HubSaveDashboards = 4056;
 		public const int HubImportFunctionMappings = 4057;
-
-
-		
+		public const int HubEncrypt = 4058;
+	
 
         public const int RemoteLogin = 5000;
 

@@ -1,10 +1,10 @@
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { DexihMessageComponent } from '../../shared/ui/dexihMessage';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { AuthService } from '../../+auth/auth.service';
 import { Subscription, combineLatest } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { DexihHubAuth } from '../../+auth/auth.models';
+import { DexihHubAuth, CancelToken } from '../../+auth/auth.models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HubsService } from '../hubs.service';
 import { eDownloadFormat, SharedData } from '../../shared/shared.models';
@@ -13,12 +13,13 @@ import { eDownloadFormat, SharedData } from '../../shared/shared.models';
     selector: 'hubs-sharedData',
     templateUrl: './hubs-sharedData.component.html',
 })
-export class HubsSharedDataComponent implements OnInit {
+export class HubsSharedDataComponent implements OnInit, OnDestroy {
     @ViewChild('DexihMessage', { static: true }) public dexihMessage: DexihMessageComponent;
 
     public _subscription: Subscription;
     public _searchSubscription: Subscription;
     public searchForm: FormGroup;
+    private cancelToken = new CancelToken();
 
     eDownloadFormat = eDownloadFormat;
 
@@ -68,6 +69,11 @@ export class HubsSharedDataComponent implements OnInit {
         }
     }
 
+    ngOnDestroy() {
+        if (this._subscription) { this._subscription.unsubscribe(); }
+        this.cancelToken.cancel();
+    }
+
     updateSearch() {
         let hubKeys = <number[]>this.searchForm.value.hubKeys;
         this.hubsService.getSharedDataIndex(this.searchForm.value.searchString, hubKeys, 50, true).then(result => {
@@ -82,7 +88,7 @@ export class HubsSharedDataComponent implements OnInit {
     }
 
     downloadData(sharedItems: Array<SharedData>, zipFiles: boolean, downloadFormat: eDownloadFormat) {
-        this.hubsService.downloadData(sharedItems, zipFiles, downloadFormat).then(() => {
+        this.hubsService.downloadData(sharedItems, zipFiles, downloadFormat, this.cancelToken).then(() => {
             this.dexihMessage.addSuccessMessage('The download task has started.');
         }).catch(reason => {
             this.dexihMessage.addMessage(reason);

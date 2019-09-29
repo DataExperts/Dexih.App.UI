@@ -39,6 +39,7 @@
     <ProjectReference Include="..\..\..\Dexih.App.Operations\src\dexih.operations\dexih.operations.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="MessagePack.AspNetCoreMvcFormatter" Version="1.7.3.7" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="2.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="2.2.0" />
@@ -366,6 +367,52 @@
     <_ContentIncludedByDefault Remove="wwwroot\vendor-es2015.js.map" />
     <_ContentIncludedByDefault Remove="wwwroot\vendor-es5.js" />
     <_ContentIncludedByDefault Remove="wwwroot\vendor-es5.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\admin-admin-module-es2015.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\admin-admin-module-es2015.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\admin-admin-module-es5.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\admin-admin-module-es5.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dashboard-dashboard-edit-dashboard-edit-module-es2015.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dashboard-dashboard-edit-dashboard-edit-module-es2015.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dashboard-dashboard-edit-dashboard-edit-module-es5.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dashboard-dashboard-edit-dashboard-edit-module-es5.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\datajob-datajob-edit-datajob-edit-module-es2015.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\datajob-datajob-edit-datajob-edit-module-es2015.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\datajob-datajob-edit-datajob-edit-module-es5.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\datajob-datajob-edit-datajob-edit-module-es5.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\datalink-datalink-edit-datalink-edit-module-es2015.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\datalink-datalink-edit-datalink-edit-module-es2015.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\datalink-datalink-edit-datalink-edit-module-es5.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\datalink-datalink-edit-datalink-edit-module-es5.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\default~datalink-datalink-edit-datalink-edit-module~files-files-bulk-load-files-bulk-load-module~tab~ec9ca56b-es2015.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\default~datalink-datalink-edit-datalink-edit-module~files-files-bulk-load-files-bulk-load-module~tab~ec9ca56b-es2015.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\default~datalink-datalink-edit-datalink-edit-module~files-files-bulk-load-files-bulk-load-module~tab~ec9ca56b-es5.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\default~datalink-datalink-edit-datalink-edit-module~files-files-bulk-load-files-bulk-load-module~tab~ec9ca56b-es5.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\default~hub-hub-module~hubs-hubs-module-es2015.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\default~hub-hub-module~hubs-hubs-module-es2015.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\default~hub-hub-module~hubs-hubs-module-es5.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\default~hub-hub-module~hubs-hubs-module-es5.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\files-files-bulk-load-files-bulk-load-module-es2015.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\files-files-bulk-load-files-bulk-load-module-es2015.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\files-files-bulk-load-files-bulk-load-module-es5.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\files-files-bulk-load-files-bulk-load-module-es5.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\hub-base-module-es2015.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\hub-base-module-es2015.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\hub-base-module-es5.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\hub-base-module-es5.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\hubs-hubs-module-es2015.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\hubs-hubs-module-es2015.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\hubs-hubs-module-es5.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\hubs-hubs-module-es5.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\polyfills-es2015.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\polyfills-es2015.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\table-table-edit-table-edit-module-es2015.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\table-table-edit-table-edit-module-es2015.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\table-table-edit-table-edit-module-es5.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\table-table-edit-table-edit-module-es5.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\test-datalinkTest-edit-datalinkTest-edit-module-es2015.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\test-datalinkTest-edit-datalinkTest-edit-module-es2015.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\test-datalinkTest-edit-datalinkTest-edit-module-es5.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\test-datalinkTest-edit-datalinkTest-edit-module-es5.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="aws-lambda-tools-defaults.json">

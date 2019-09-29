@@ -9,7 +9,9 @@ import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { HubFormsService } from '../../../hub.forms.service';
 import { LogFactory, eLogLevel } from '../../../../../logging';
 import { HubCache, eMappingStatus, updateStrategies, loadStrategies, ConnectionTables, lineageMappingStatuses, deltaTypes } from '../../../hub.models';
-import { eDeltaType, eUpdateStrategy, eTransformWriterMethod, DexihConnection, DexihDatalinkColumn, DexihDatalinkTarget, DexihTable, DexihTableColumn, DexihDatalinkTable, eTypeCode } from '../../../../shared/shared.models';
+import { eDeltaType, eUpdateStrategy, eTransformWriterMethod, DexihConnection,
+    DexihDatalinkColumn, DexihDatalinkTarget, DexihTable, DexihTableColumn, DexihDatalinkTable, eTypeCode } from '../../../../shared/shared.models';
+import { CancelToken } from '../../../../+auth/auth.models';
 
 @Component({
 
@@ -26,6 +28,7 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
     private _subscription: Subscription;
     private _loadStrategySubscription: Subscription;
     private _tableFormSubscription: Subscription;
+    private cancelToken: CancelToken = new CancelToken();
 
     public eMappingStatus = eMappingStatus;
     public eDeltaType = eDeltaType;
@@ -405,7 +408,7 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
     importTable() {
         const table: DexihTable = this.targetTableForm.controls.table.value;
         const connection = this.hubCache.getConnection(table.connectionKey)
-        this.hubService.importTables([table], false)
+        this.hubService.importTables([table], false, this.cancelToken)
             .then(tables => {
                 const returnTable: any = tables[0];
                 returnTable.useLogical =
@@ -421,7 +424,7 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
     createTable() {
         const table: DexihTable = this.targetTableForm.controls.table.value;
         const connection = this.hubCache.getConnection(table.connectionKey)
-        this.hubService.createTables([table])
+        this.hubService.createTables([table], this.cancelToken)
             .then(tables => {
                 this.hubService.addHubSuccessMessage('The table was created successfully.');
                 // this.targetTableForm.controls.table.setValue(returnTable);
@@ -457,7 +460,8 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
 
     saveTable() {
         const table: DexihTable = this.targetTableForm.controls.table.value;
-        this.hubService.saveTable(table).then(savedTable => {
+        this.hubService.saveTables([table]).then(savedTables => {
+            let savedTable = savedTables[0];
             this.targetTableForm.setControl('table', this.editDatalinkService.hubFormsService.tableForm(savedTable));
             this.targetTableForm.controls.tableKey.setValue(savedTable.key);
             this.resetSubscription();

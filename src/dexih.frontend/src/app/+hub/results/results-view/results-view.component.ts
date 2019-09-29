@@ -28,7 +28,7 @@ export class ResultsViewComponent implements OnInit, OnDestroy {
     resultChartData: Array<any>;
 
     private cancelToken = new CancelToken();
-    
+
     constructor(
         private hubService: HubService,
         private authService: AuthService,
@@ -89,7 +89,8 @@ export class ResultsViewComponent implements OnInit, OnDestroy {
     watchChanges() {
         // watch the current connection in case it is changed in another session.
         if (this._transformWriterResultChangeSubscription) { this._transformWriterResultChangeSubscription.unsubscribe(); }
-        this._transformWriterResultChangeSubscription = this.hubService.getTransformWriterResultChangeObservable().subscribe(writerResult => {
+        this._transformWriterResultChangeSubscription = this.hubService.getTransformWriterResultChangeObservable()
+        .subscribe(writerResult => {
             if (writerResult.auditConnectionKey === this.auditResult.auditConnectionKey &&
                     writerResult.auditKey === this.auditResult.auditKey) {
                 this.auditResult = writerResult;

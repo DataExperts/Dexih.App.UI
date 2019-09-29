@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
-import { FileHandler, eFileStatus } from '../../../+auth/auth.models';
+import { FileHandler, eFileStatus, CancelToken } from '../../../+auth/auth.models';
 import { Subscription, combineLatest } from 'rxjs';
 import { HubCache, eCacheStatus, formatTypes } from '../../hub.models';
 import { AuthService } from '../../../+auth/auth.service';
@@ -40,6 +40,8 @@ export class FilesBulkLoadComponent implements OnInit, OnDestroy {
     public tables: DexihTable[] = []
 
     public currentTable: DexihTable = null;
+
+    private cancelToken = new CancelToken();
 
     pageTitle = 'Manage Files';
     showPage = false;
@@ -117,6 +119,7 @@ export class FilesBulkLoadComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         if (this._subscription) { this._subscription.unsubscribe(); }
         if (this._flatFilesSubscription) { this._flatFilesSubscription.unsubscribe(); }
+        this.cancelToken.cancel();
     }
 
     public close() {
@@ -135,7 +138,8 @@ export class FilesBulkLoadComponent implements OnInit, OnDestroy {
 
     public doUpload(files) {
         Array.prototype.forEach.call(files, file => {
-            this.hubService.bulkUploadFiles(this.connectionKey, this.fileFormatKey, this.formatType, file.name).then(result => {
+            this.hubService.bulkUploadFiles(this.connectionKey, this.fileFormatKey, this.formatType, file.name,
+                this.cancelToken).then(result => {
                 let url = result.url;
                 this.reference = result.reference;
 
@@ -179,9 +183,9 @@ export class FilesBulkLoadComponent implements OnInit, OnDestroy {
         let keys: number[] = [];
         for (let i = 0; i < items.length; i++ ) {
             let table = items[i];
-            let savedTable = await this.hubService.saveTable(table);
+            let savedTable = await this.hubService.saveTables([table]);
 
-            keys.push(savedTable.key);
+            keys.push(savedTable[0].key);
 
             // after table is saved, remove from unsaved list.
             let index = this.tables.findIndex(t => table.key === t.key);

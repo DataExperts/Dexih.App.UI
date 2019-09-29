@@ -8,7 +8,10 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 #if DEBUG
 namespace dexih.api.Controllers
@@ -63,10 +66,19 @@ namespace dexih.api.Controllers
                 foreach (var type in types)
                 {
                     var attribute = type.GetCustomAttribute<MessagePack.MessagePackObjectAttribute>();
+                    var attribute2 = type.GetCustomAttribute<DataContractAttribute>();
 
-                    if (attribute != null && !type.IsAbstract)
+                    if ((attribute != null || attribute2 != null)  && !type.IsAbstract)
                     {
-                        typeLookup.Add(type.Name, type);
+                        try
+                        {
+                            typeLookup.Add(type.Name, type);
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new AggregateException("Failed to add " + type.Name, ex);
+                        }
+                        
                     }
                 }
             }
@@ -106,7 +118,8 @@ namespace dexih.api.Controllers
                     foreach (var property in type.GetProperties())
                     {
                         var propAttribute = property.GetCustomAttribute<MessagePack.KeyAttribute>();
-                        if (propAttribute != null)
+                        var propAttribute2 = property.GetCustomAttribute<DataMemberAttribute>();
+                        if (propAttribute != null || propAttribute2 != null)
                         {
                             var propertyType = property.PropertyType;
                             object value;
@@ -183,9 +196,10 @@ namespace dexih.api.Controllers
             {
                 propertyType = Nullable.GetUnderlyingType(propertyType);
             }
-
+            
             if (propertyType.GetInterface(nameof(System.Collections.IEnumerable)) != null
                 && propertyType != typeof(Object)
+                && propertyType != typeof(JToken)
                 && propertyType != typeof(string)
                 )
             {

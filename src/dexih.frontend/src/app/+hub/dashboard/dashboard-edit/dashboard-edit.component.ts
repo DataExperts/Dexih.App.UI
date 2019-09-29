@@ -8,7 +8,7 @@ import { FormArray, FormGroup } from '@angular/forms';
 import { DashboardItemComponent } from './item/dashboard-item.component';
 import { EventEmitter } from 'selenium-webdriver';
 import { CancelToken } from '../../../+auth/auth.models';
-import { HubCache, eCacheStatus, DataCache } from '../../hub.models';
+import { HubCache, eCacheStatus, DataCache, PreviewResults } from '../../hub.models';
 import { DexihView, DexihDashboard, DexihDashboardItem } from '../../../shared/shared.models';
 
 @Component({
@@ -150,14 +150,18 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
   // }
 
   refresh() {
-    this.hubService.previewDashboard(this.formsService.currentForm.value, this.formsService.currentForm.value.parameters).then(urls => {
+    this.hubService.previewDashboard(this.formsService.currentForm.value, this.formsService.currentForm.value.parameters,
+        this.cancelToken).then(keys => {
       let items = <FormArray> this.formsService.currentForm.controls.dexihDashboardItems;
 
-      urls.forEach(url => {
+      keys.forEach(url => {
         let item = <FormGroup> items.controls.find((form: FormGroup) => form.controls.key.value === url.dashboardItemKey);
         if (item) {
           let data = <DataCache> item.controls.runTime.value.data;
-          data.refresh(this.hubService.downloadUrlData(url.downloadUrl, this.cancelToken));
+          this.hubService.getRemoteResponse<PreviewResults>(url.dataKey, this.cancelToken).then(result => {
+            result.columns = this.hubService.constructDataTableColumns(result.columns);
+            data.data.next(result);
+          }).catch();
         }
       });
     });

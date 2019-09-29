@@ -8,7 +8,8 @@ import { AuthService } from '../../../../+auth/auth.service';
 import { FormGroup, FormArray } from '@angular/forms';
 import { LogFactory, eLogLevel } from '../../../../../logging';
 import { InputOutputColumns } from '../../../hub.lineage.models';
-import { eTransformType, eTransformItemType, DexihDatalinkColumn, DexihDatalinkTransform, eTypeCode, DexihDatalinkTransformItem, eAggregate, eDirection } from '../../../../shared/shared.models';
+import { eTransformType, eTransformItemType, DexihDatalinkColumn, DexihDatalinkTransform,
+    eTypeCode, DexihDatalinkTransformItem, eAggregate, eDirection } from '../../../../shared/shared.models';
 
 @Component({
 

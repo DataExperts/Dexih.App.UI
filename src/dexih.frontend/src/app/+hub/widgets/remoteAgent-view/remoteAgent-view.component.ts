@@ -35,8 +35,8 @@ export class RemoteAgentViewComponent implements OnInit, OnDestroy {
             if (!remoteAgents) { return; }
 
             let remoteAgent = remoteAgents.find(c => c.remoteAgentKey === this.remoteAgent.remoteAgentKey);
-            let activeAgent = remoteAgent && remoteAgent.activeAgents && remoteAgent.activeAgents.length > 0
-                ? remoteAgent.activeAgents[0] : null;
+            let activeAgent = remoteAgent && remoteAgent['activeAgents'] && remoteAgent['activeAgents'].length > 0
+                ? remoteAgent['activeAgents'][0] : null;
 
             this.isAuthorized = this.remoteAgent.isAuthorized;
             this.isConnected = activeAgent ? true : false;

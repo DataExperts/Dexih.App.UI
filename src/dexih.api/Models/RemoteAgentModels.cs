@@ -57,7 +57,6 @@ namespace dexih.api.Models
     public class RemoteAgentUpdate
     {
         public long HubKey { get; set; }
-        public string RemoteAgentInstanceId { get; set; }
         public DexihRemoteAgentHub Value { get; set; }
     }
 
@@ -73,9 +72,11 @@ namespace dexih.api.Models
         public string InstanceId { get; set; } 
     }
 
-    public class RemoteAgentStatusReturn
+    public class RemoteAgentBase
     {
-        
+        public long HubKey { get; set; }
+        public string RemoteAgentId { get; set; }
+        public string ClientConnectionId { get; set; }
     }
 
 

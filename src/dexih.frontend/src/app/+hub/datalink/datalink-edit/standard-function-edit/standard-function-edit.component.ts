@@ -12,6 +12,7 @@ import { InputOutputColumns } from '../../../hub.lineage.models';
 import { FunctionParameter, eFunctionType, eParameterDirection, eGenericType, DexihDatalinkColumn, FunctionReference,
   DexihCustomFunction, eTransformType, DexihDatalinkTable, DexihDatalinkTransformItem, eTransformItemType,
   DexihFunctionParameter, eTypeCode, DexihCustomFunctionParameter, DexihFunctionArrayParameter, RemoteLibraries } from '../../../../shared/shared.models';
+import { CancelToken } from '../../../../+auth/auth.models';
 
 export class ArrayParameter {
   public name: string;
@@ -64,6 +65,7 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
   private _subscription: Subscription;
   private _returnParameterSubscription: Subscription;
   private _functionSubscription: Subscription;
+  private cancelToken: CancelToken = new CancelToken();
 
   transformFunctionType: eFunctionType;
   datalinkTransformItemKey: number;
@@ -136,7 +138,7 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
         if (this.hubCache && this.hubCache.isLoaded() && this.datalinkForm
           && this.remoteLibraries && this.remoteLibraries.functions.length > 0) {
 
-          this.transformFunctionType = params['functionType'];
+          this.transformFunctionType = +params['functionType'];
           if (this.transformFunctionType === eFunctionType.Validate) {
             this.datalinkTransformForm = this.editDatalinkService.getValidationTransform();
             this.datalinkTransformKey = this.datalinkTransformForm.value.key;
@@ -280,6 +282,7 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
     if (this._subscription) { this._subscription.unsubscribe(); }
     if (this._returnParameterSubscription) { this._returnParameterSubscription.unsubscribe(); }
     if (this._functionSubscription) { this._functionSubscription.unsubscribe(); }
+    this.cancelToken.cancel();
   }
 
   updateCategory(value) {
@@ -722,7 +725,7 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
 
   async importInputOutputMappings(arrayParameter: ArrayParameter) {
     let result = await this.editDatalinkService
-      .importFunctionMappings(this.datalinkTransformKey, this.newDatalinkTransformItemForm.value);
+      .importFunctionMappings(this.datalinkTransformKey, this.newDatalinkTransformItemForm.value, this.cancelToken);
 
       if (result === null) { return; }
 

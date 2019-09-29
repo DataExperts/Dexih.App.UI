@@ -18,6 +18,8 @@ namespace dexih.api.Services
 #endif
 
             // always return a JSON result
+            context.HttpContext.Response.ContentType = "application/json";
+            context.HttpContext.Response.StatusCode = 400;
             context.Result = new JsonResult(returnValue);
 
             base.OnException(context);

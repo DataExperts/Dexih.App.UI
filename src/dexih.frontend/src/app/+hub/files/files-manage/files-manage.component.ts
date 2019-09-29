@@ -4,7 +4,7 @@ import { AuthService } from '../../../+auth/auth.service';
 import { HubService } from '../../hub.service';
 import { Observable, BehaviorSubject, Subscription, combineLatest} from 'rxjs';
 import { HubCache, FileProperties, eCacheStatus, ConnectionTables } from '../../hub.models';
-import { Message, FileHandler, eFileStatus } from '../../../+auth/auth.models';
+import { Message, FileHandler, eFileStatus, CancelToken } from '../../../+auth/auth.models';
 import { DexihTable, eFlatFilePath, DexihConnection, eConnectionCategory } from '../../../shared/shared.models';
 
 
@@ -33,6 +33,7 @@ export class FilesManageComponent implements OnInit, OnDestroy {
     public automaticUpload = true;
 
     public uploadedFiles: FileHandler[] = [];
+    public cancelToken: CancelToken = new CancelToken();
 
     pageTitle = 'Manage Files';
     showPage = false;
@@ -136,6 +137,7 @@ export class FilesManageComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         if (this._subscription) { this._subscription.unsubscribe(); }
+        this.cancelToken.cancel();
     }
 
     updateTable(tableKey: number) {
@@ -149,7 +151,7 @@ export class FilesManageComponent implements OnInit, OnDestroy {
     }
 
     refreshFiles() {
-        this.hubService.getFileList(this.table, this.path).then(result => {
+        this.hubService.getFileList(this.table, this.path, this.cancelToken).then(result => {
             this._tableData.next(result);
         }).catch(reason => {
             this._tableData.next([]);
@@ -185,7 +187,7 @@ export class FilesManageComponent implements OnInit, OnDestroy {
 
     public deleteSelected(items: Array<FileProperties>) {
         let files = items.map(c => c.fileName);
-        this.hubService.deleteFiles(this.table, this.path, files).then(c => {
+        this.hubService.deleteFiles(this.table, this.path, files, this.cancelToken).then(c => {
             if (c) {
                 this.refreshFiles();
             }
@@ -194,7 +196,7 @@ export class FilesManageComponent implements OnInit, OnDestroy {
 
     public moveSelected(items: Array<FileProperties>, toPath: eFlatFilePath) {
         let files = items.map(c => c.fileName);
-        this.hubService.moveFiles(this.table, this.path, toPath, files).then(c => {
+        this.hubService.moveFiles(this.table, this.path, toPath, files, this.cancelToken).then(c => {
             if (c) {
                 this.refreshFiles();
             }
@@ -205,7 +207,7 @@ export class FilesManageComponent implements OnInit, OnDestroy {
 
     public downloadSelected(items: Array<FileProperties>) {
         let files = items.map(c => c.fileName);
-        this.hubService.downloadFiles(this.table, this.path, files).then(c => {
+        this.hubService.downloadFiles(this.table, this.path, files, this.cancelToken).then(c => {
             if (c) {
                 this.refreshFiles();
             }
@@ -228,7 +230,7 @@ export class FilesManageComponent implements OnInit, OnDestroy {
 
     public doUpload(files) {
         Array.prototype.forEach.call(files, file => {
-            this.hubService.uploadFile(this.table, this.path, file.name).then(url => {
+            this.hubService.uploadFile(this.table, this.path, file.name, this.cancelToken).then(url => {
                 let fileHandler = new FileHandler(file, url);
                 if (this.automaticUpload) {
                     this.authService.upload(fileHandler).then(status => {

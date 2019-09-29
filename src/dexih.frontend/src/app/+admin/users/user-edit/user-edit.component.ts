@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../+auth/auth.service';
-import { UserLoginInfo } from '../../../+auth/auth.models';
+import { UserLoginInfo, User } from '../../../+auth/auth.models';
 import { Subscription,  Observable, combineLatest} from 'rxjs';
 import { Location } from '@angular/common';
 import { FormsService } from '../../../shared/forms/forms.service';
 import { UserAuthorization, UserLogin } from '../../admin.models';
 import { DexihMessageComponent } from '../../../shared/ui/dexihMessage';
+import { UserModel } from '../../../shared/shared.models';
 
 @Component({
 
@@ -66,11 +67,11 @@ export class UserEditComponent implements OnInit, OnDestroy {
   }
 
   refreshForm() {
-    this.authService.post('/api/Admin/GetUser', {
+    this.authService.post<UserModel>('/api/Admin/GetUser', {
       email: this.email,
     }, 'Getting user details...').then(result => {
-      this.logins = result.value.logins;
-      this.formsService.createDefault(result.value, new UserAuthorization());
+      this.logins = result.logins;
+      this.formsService.createDefault(result, new UserAuthorization());
     }).catch(reason => {
       this.dexihMessage.addMessage(reason);
     });

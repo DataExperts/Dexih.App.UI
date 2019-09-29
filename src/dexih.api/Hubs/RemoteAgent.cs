@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using dexih.api.Services.Operations;
 using dexih.api.Services.Remote;
 using dexih.functions;
+using dexih.operations;
+using dexih.repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Caching.Distributed;
@@ -60,7 +62,7 @@ namespace dexih.api.Hubs
 			_logger.LogTrace($"Ping from {Context.UserIdentifier}");
 
 			var operations = (IDexihOperations)_serviceProvider.GetService(typeof(IDexihOperations));
-			await operations.BroadcastClientMessageAsync(connectionId, "remoteAgent-update", activeAgent, CancellationToken.None);
+			await operations.BroadcastClientMessageAsync(connectionId, EClientCommand.RemoteAgentUpdate, activeAgent, CancellationToken.None);
 		}
 		
 		public async Task PingServer(DexihActiveAgent activeAgent, string pingKey)

@@ -9,23 +9,23 @@ import { DexihHubVariable, DexihHub, DexihFunctionParameter, DexihConnection, De
     eTransformWriterMethod, eTransformItemType, eFunctionType, InputColumn, SelectQuery, DexihColumnBase,
     eDataObjectType, eSharedObjectType, eDirection, eSeriesGrain } from '../shared/shared.models';
 
-export class RemoteMessage {
-    public messageId: string;
-    public securityToken: string;
-    public remoteAgentId: string;
-    public method: string;
-    public hubKey: number;
-    public success: boolean;
-    public message: string;
-    public exceptionDetails: string;
-    public cache: HubCache;
-    public parameters: Array<Parameter>;
-    public hubVariables: Array<DexihHubVariable>;
-    public value;
+// export class RemoteMessage {
+//     public messageId: string;
+//     public securityToken: string;
+//     public remoteAgentId: string;
+//     public method: string;
+//     public hubKey: number;
+//     public success: boolean;
+//     public message: string;
+//     public exceptionDetails: string;
+//     public cache: HubCache;
+//     public parameters: Array<Parameter>;
+//     public hubVariables: Array<DexihHubVariable>;
+//     public value;
 
-    constructor () {
-    }
-}
+//     constructor () {
+//     }
+// }
 
 export enum eCacheStatus {
     NoHub,

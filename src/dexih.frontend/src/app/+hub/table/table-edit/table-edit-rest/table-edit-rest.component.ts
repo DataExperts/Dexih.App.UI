@@ -8,6 +8,7 @@ import { FormControl, FormGroup, FormArray } from '@angular/forms';
 import { HubFormsService } from '../../../hub.forms.service';
 import { DexihConnection, DexihTable, eTypeCode, DexihTableColumn, eDeltaType } from '../../../../shared/shared.models';
 import { HubCache, ConnectionTables, formatTypes, eCacheStatus } from '../../../hub.models';
+import { CancelToken } from '../../../../+auth/auth.models';
 
 @Component({
     selector: 'dexih-table-edit-rest',
@@ -20,6 +21,7 @@ export class TableEditRestComponent implements OnInit, OnDestroy {
     private _hubCacheSubscription: Subscription;
     private _currentFormSubscription: Subscription;
     private _restfulUrlSubscription: Subscription;
+    private cancelToken: CancelToken = new CancelToken();
 
     private hubCache: HubCache;
 
@@ -64,6 +66,7 @@ export class TableEditRestComponent implements OnInit, OnDestroy {
         if (this._hubCacheSubscription) { this._hubCacheSubscription.unsubscribe(); }
         if (this._restfulUrlSubscription) { this._restfulUrlSubscription.unsubscribe(); }
         if (this._currentFormSubscription) { this._currentFormSubscription.unsubscribe(); }
+        this.cancelToken.cancel();
     }
 
     hasChanged($event) {
@@ -87,7 +90,7 @@ export class TableEditRestComponent implements OnInit, OnDestroy {
             });
         }
 
-        this.hubService.importTables([importTable], false)
+        this.hubService.importTables([importTable], false, this.cancelToken)
             .then(result => {
                 const columns = <FormArray>this.formService.currentForm.controls.dexihTableColumns;
                 while (columns.controls.length > 0) {

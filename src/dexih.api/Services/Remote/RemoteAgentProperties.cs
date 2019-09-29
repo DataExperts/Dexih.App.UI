@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using dexih.repository;
 using MessagePack;
 
 namespace dexih.api.Services.Remote
@@ -27,5 +28,8 @@ namespace dexih.api.Services.Remote
 
         [Key(7)]
         public string ConnectionId { get; set; }
+        
+        [Key(8)]
+        public NamingStandards NamingStandards { get; set; }
     }
 }

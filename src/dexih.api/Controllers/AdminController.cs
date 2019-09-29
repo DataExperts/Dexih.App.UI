@@ -10,6 +10,7 @@ using dexih.api.Models;
 using dexih.api.Services;
 using dexih.api.Services.Message;
 using dexih.api.Services.Operations;
+using dexih.operations;
 using dexih.repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -82,12 +83,7 @@ namespace dexih.api
 		{
 			try
 			{
-				var applicationUser = await _operations.RepositoryManager.GetUserFromEmail(getUser.Email, cancellationToken);
-				var user = new UserModel();
-				applicationUser.CopyProperties(user, true);
-
-				user.Logins = await _operations.RepositoryManager.GetLoginsAsync(applicationUser, cancellationToken);
-                return user;
+				return await _operations.RepositoryManager.GetUserModel(getUser.Email, cancellationToken);
 			}
 			catch (Exception ex)
 			{

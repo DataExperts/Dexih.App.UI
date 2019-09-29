@@ -94,7 +94,7 @@ export class ConnectionIndexComponent implements OnInit, OnDestroy {
         this.router.navigate(['connection-edit', connection.key], { relativeTo: this.route });
     }
 
-    updateConnections() {
+    async updateConnections() {
         if (this.hubCache && this.hubCache.isLoaded()) {
             let connections: Array<DexihConnection>;
             if (this.purposeFilter === 'All' || !this.purposeFilter) {
@@ -105,7 +105,7 @@ export class ConnectionIndexComponent implements OnInit, OnDestroy {
             }
 
             let tableData = []
-            connections.forEach(async connection =>  {
+            for await (const connection of connections)  {
                 let connectionReference = await this.hubService.GetConnectionReference(connection);
                 tableData.push({
                     key: connection.key,
@@ -117,7 +117,7 @@ export class ConnectionIndexComponent implements OnInit, OnDestroy {
                     description: connection.description,
                     updateDate: connection.updateDate
                 });
-            });
+            };
             this._tableData.next(tableData);
         } else {
             this._tableData.next(null);

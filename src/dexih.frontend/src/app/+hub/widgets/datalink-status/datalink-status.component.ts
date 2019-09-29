@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { HubService } from '../../hub.service';
 import { Subscription} from 'rxjs';
-import { eTaskStatus } from '../../../+auth/auth.models';
+import { eTaskStatus, CancelToken } from '../../../+auth/auth.models';
 import { Functions } from '../../../shared/utils/functions';
 import { AuthService } from '../../../+auth/auth.service';
 import { TransformWriterResult, eRunStatus } from '../../../shared/shared.models';
@@ -23,6 +23,7 @@ export class DatalinkStatusComponent implements OnInit, OnDestroy {
     private _hubCacheSubscription: Subscription;
     private _currentStatusSubscription: Subscription;
     private _previousStatusSubscription: Subscription;
+    private cancelToken: CancelToken = new CancelToken();
 
     private dataObject: any;
 
@@ -83,6 +84,7 @@ export class DatalinkStatusComponent implements OnInit, OnDestroy {
         if (this._hubCacheSubscription) { this._hubCacheSubscription.unsubscribe(); }
         if (this._currentStatusSubscription) { this._currentStatusSubscription.unsubscribe(); }
         if (this._previousStatusSubscription) { this._previousStatusSubscription.unsubscribe(); }
+        this.cancelToken.cancel();
     }
 
     getStatus(writerResult: TransformWriterResult): StatusInfo {
@@ -203,9 +205,9 @@ export class DatalinkStatusComponent implements OnInit, OnDestroy {
 
     cancelled() {
         if (this.datalinkKey) {
-            this.hubService.cancelDatalinks([this.datalinkKey]);
+            this.hubService.cancelDatalinks([this.datalinkKey], this.cancelToken);
         } else if (this.datajobKey) {
-            this.hubService.deactivateDatajobs([this.datajobKey]);
+            this.hubService.deactivateDatajobs([this.datajobKey], this.cancelToken);
         }
 }
 

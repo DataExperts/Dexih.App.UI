@@ -82,7 +82,7 @@ namespace dexih.api.Controllers
         }
         
         [HttpPost("[action]")]
-        public async Task<IEnumerable<ManagedTask>> DownloadData([FromBody] DownloadSharedData downloadSharedData, CancellationToken cancellationToken)
+        public async Task<IEnumerable<string>> DownloadData([FromBody] DownloadSharedData downloadSharedData, CancellationToken cancellationToken)
         {
             _logger.LogTrace(LoggingEvents.HubUploadFiles, "SharedDataController.DownloadData");
             
@@ -110,7 +110,7 @@ namespace dexih.api.Controllers
                 }
             }
 
-            var managedTasks = new List<ManagedTask>();
+            var managedTasks = new List<string>();
             var repositoryManager = _operations.RepositoryManager;
 
             foreach (var item in downloadData)

@@ -9,6 +9,7 @@ using Dexih.Utils.Crypto;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace dexih.api.Services.Operations
 {
@@ -39,7 +40,7 @@ namespace dexih.api.Services.Operations
         {
             try
             {
-                var sendMessage = new RemoteMessage("", "", "hub-change", Json.JTokenFromObject(import, ""));
+                var sendMessage = new ClientMessage(EClientCommand.HubChange, import);
                 _backgroundTaskQueue.QueueBackgroundWorkItem(async token =>
                 {
                     await _browserContext.Clients.Users(users).SendAsync("Command", sendMessage, CancellationToken.None);    
@@ -74,9 +75,9 @@ namespace dexih.api.Services.Operations
         /// <param name="command">Command.</param>
         /// <param name="content">Content.</param>
         /// <param name="cancellationToken"></param>
-        public async Task BroadcastHubMessageAsync(long hubKey, string command, object content, CancellationToken cancellationToken)
+        public async Task BroadcastHubMessageAsync(long hubKey, EClientCommand command, object content, CancellationToken cancellationToken)
         {
-            var sendMessage = new RemoteMessage("", "", command, Json.JTokenFromObject(content, "none"));
+            var sendMessage = new ClientMessage(command, content);
             await _browserContext.Clients.Group(hubKey.ToString()).SendAsync("Command", sendMessage, cancellationToken: cancellationToken);
         }
 
@@ -88,9 +89,9 @@ namespace dexih.api.Services.Operations
         /// <param name="command">Command.</param>
         /// <param name="content">Content.</param>
         /// <param name="cancellationToken"></param>
-        public async Task BroadcastUsersMessageAsync(IEnumerable<string> userIds, string command, object content, CancellationToken cancellationToken)
+        public async Task BroadcastUsersMessageAsync(IEnumerable<string> userIds, EClientCommand command, object content, CancellationToken cancellationToken)
         {
-            var sendMessage = new RemoteMessage("", "", command, Json.JTokenFromObject(content, "none"));
+            var sendMessage = new ClientMessage(command, content);
 			
             foreach (var userId in userIds)
             {
@@ -105,16 +106,16 @@ namespace dexih.api.Services.Operations
         /// <param name="command"></param>
         /// <param name="content"></param>
         /// <returns></returns>
-        public async Task BroadcastClientMessageAsync(string connectionId, string command, object content, CancellationToken cancellationToken)
+        public Task BroadcastClientMessageAsync(string connectionId, EClientCommand command, object content, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(connectionId))
             {
                 _logger.LogWarning($"BroadcastClientMessage failed due to empty client id.  The command was: {command}.");
-                return;
+                return Task.CompletedTask;
             }
 
-            var sendMessage = new RemoteMessage("", "", command, Json.JTokenFromObject(content, "none"));
-            await _browserContext.Clients.Client(connectionId).SendAsync("Command", sendMessage, cancellationToken: cancellationToken);
+            var sendMessage = new ClientMessage(command, content);
+            return _browserContext.Clients.Client(connectionId).SendAsync("Command", sendMessage, cancellationToken: cancellationToken);
         }
 	    
         #endregion

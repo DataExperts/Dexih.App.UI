@@ -6,6 +6,7 @@ import { AuthService } from '../../../+auth/auth.service';
 import { HubCache } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { DexihApi, DexihHub, eDataObjectType } from '../../../shared/shared.models';
+import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
     selector: 'actions-api-button',
@@ -19,6 +20,9 @@ export class ActionsApiButtonComponent implements OnInit, OnDestroy {
     public hubCache: HubCache;
 
     private _hubCacheSubscription: Subscription;
+
+    private cancelToken: CancelToken = new CancelToken();
+
 
     constructor(
         private authService: AuthService,
@@ -34,7 +38,8 @@ export class ActionsApiButtonComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         if (this._hubCacheSubscription) { this._hubCacheSubscription.unsubscribe(); }
-        }
+        this.cancelToken.cancel();
+    }
 
     delete() {
         this.hubService.deleteApis(this.apis);
@@ -59,10 +64,10 @@ export class ActionsApiButtonComponent implements OnInit, OnDestroy {
     }
 
     activateApis() {
-        this.hubService.activateApis(this.apis);
+        this.hubService.activateApis(this.apis, this.cancelToken);
     }
 
     cancelApis() {
-        this.hubService.deactivateApis(this.apis.map(c => c.key));
+        this.hubService.deactivateApis(this.apis.map(c => c.key), this.cancelToken);
     }
 }

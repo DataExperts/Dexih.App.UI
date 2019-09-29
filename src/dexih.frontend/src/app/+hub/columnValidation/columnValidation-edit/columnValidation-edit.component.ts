@@ -8,6 +8,7 @@ import { Location } from '@angular/common';
 import { HubFormsService } from '../../hub.forms.service';
 import { TypeCodes } from '../../hub.remote.models';
 import { eInvalidAction, eCleanAction, eTypeCode, DexihConnection, DexihColumnValidation } from '../../../shared/shared.models';
+import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
 
@@ -42,6 +43,7 @@ export class ColumnValidationEditComponent implements OnInit, OnDestroy {
   private isLoaded = false;
 
   public eCacheStatus = eCacheStatus;
+  public cancelToken: CancelToken = new CancelToken();
 
   private _subscription: Subscription;
   private _formChangeSubscription: Subscription;
@@ -124,6 +126,7 @@ export class ColumnValidationEditComponent implements OnInit, OnDestroy {
     if (this._hubCacheChangeSubscription) { this._hubCacheChangeSubscription.unsubscribe(); }
     if (this._subscription) { this._subscription.unsubscribe(); }
     if (this._formChangeSubscription) { this._formChangeSubscription.unsubscribe(); }
+    this.cancelToken.cancel();
   }
 
   getValidationLookupColumn() {
@@ -142,7 +145,7 @@ export class ColumnValidationEditComponent implements OnInit, OnDestroy {
   }
 
   test() {
-    this.hubService.testColumnValidation(this.formsService.currentForm.value, this.testValue).then(result => {
+    this.hubService.testColumnValidation(this.formsService.currentForm.value, this.testValue, this.cancelToken).then(result => {
       this.testResult = result;
     });
   }

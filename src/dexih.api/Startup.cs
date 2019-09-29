@@ -17,12 +17,15 @@ using dexih.api.Services.Remote;
 using dexih.api.Services.Message;
 using dexih.api.Services.Operations;
 using dexih.operations;
+using MessagePack.AspNetCoreMvcFormatter;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
 using StackExchange.Redis;
+using MessagePack.Formatters;
+using MessagePack.Resolvers;
 
 namespace dexih.api
 {
@@ -159,12 +162,19 @@ namespace dexih.api
             // Add framework services.
             services.AddMvc()
 	            .AddJsonOptions(options =>
-		            {
-			            // nulls ignored to ensure json fields such as createDate,updateDate get
-			            // default value rather than exception if not included in the api call.
-			            options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-		            });
-	        
+	            {
+		            // nulls ignored to ensure json fields such as createDate,updateDate get
+		            // default value rather than exception if not included in the api call.
+		            options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+	            })
+	            .AddMvcOptions(option =>
+	            {
+		            // option.OutputFormatters.Clear();
+		            option.OutputFormatters.Add(new MessagePackOutputFormatter(ContractlessStandardResolver.Instance));
+		            // option.InputFormatters.Clear();
+		            option.InputFormatters.Add(new MessagePackInputFormatter(ContractlessStandardResolver.Instance));
+	            });
+
            
             // Add message services.
 	        services.AddSingleton<IEmailSender, AuthMessageSender>();
@@ -370,7 +380,7 @@ namespace dexih.api
 	            repoDbContext.Database.EnsureCreated();
 	            repoDbContext.Database.Migrate();
 	            var seedData = new SeedData();
-	            seedData.UpdateReferenceData(repoDbContext, roleManager, userManager).Wait();
+	            seedData.UpdateReferenceData(repoDbContext, roleManager, userManager).GetAwaiter().GetResult();
             }
 
             _logger.LogInformation("Startup has completed.");

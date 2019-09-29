@@ -202,7 +202,8 @@ export class ViewEditComponent implements OnInit, OnDestroy {
           }
           return {
             datalinkKey: 0, datalinkName: '',
-            name: c.name, logicalName: c.logicalName, dataType: c.dataType, rank: c.rank, value: c.defaultValue, defaultValue: c.defaultValue
+            name: c.name, logicalName: c.logicalName, dataType: c.dataType, rank: c.rank,
+            value: c.defaultValue, defaultValue: c.defaultValue
           };
         }
         );
@@ -295,7 +296,7 @@ export class ViewEditComponent implements OnInit, OnDestroy {
     }
 
     downloadObject.query = this.selectQuery;
-    this.hubService.downloadData([downloadObject], false, format)
+    this.hubService.downloadData([downloadObject], false, format, this.cancelToken)
   }
 
   hasChanged() {

@@ -10,6 +10,7 @@ import { FormGroup, FormArray, AbstractControl } from '@angular/forms';
 import { InputOutputColumns } from '../../../hub.lineage.models';
 import { eFunctionType, eParameterDirection, DexihDatalinkColumn, DexihDatalinkTransformItem,
   eTransformItemType, eTypeCode, DexihFunctionParameter } from '../../../../shared/shared.models';
+import { CancelToken } from '../../../../+auth/auth.models';
 
 @Component({
 
@@ -20,6 +21,8 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
   public hubCache: HubCache;
 
   public pageTitle: string;
+
+  public cancelToken: CancelToken = new CancelToken();
 
   private _subscription: Subscription;
   private _returnParameterSubscription: Subscription;
@@ -184,6 +187,7 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
     if (this._subscription) { this._subscription.unsubscribe(); }
     if (this._returnParameterSubscription) { this._returnParameterSubscription.unsubscribe(); }
     if (this._parametersSubscription) { this._parametersSubscription.unsubscribe(); }
+    this.cancelToken.cancel();
   }
 
   canDeactivate(): Promise<boolean> {
@@ -298,7 +302,7 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
   }
 
   test(parameters = null) {
-    this.hubService.testCustomFunction(this.newDatalinkTransformItemForm.value, parameters).then(result => {
+    this.hubService.testCustomFunction(this.newDatalinkTransformItemForm.value, parameters, this.cancelToken).then(result => {
       this.hubService.addHubSuccessMessage('The function has successfully compiled.');
 
       if (result && result.length > 0) {

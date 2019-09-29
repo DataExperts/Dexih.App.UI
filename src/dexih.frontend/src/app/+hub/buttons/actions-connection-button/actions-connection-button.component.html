@@ -2,15 +2,15 @@
     <dexih-button-dropdown buttonClass="btn-primary" iconClass="fa fa-database" [text]="connections.length > 1 ? 'Connections' : 'Connection'" [pullRight]="pullRight">
         <li class="list-group-item list-group-item-heading list-group-item-info">Metadata</li>
         <li *ngIf="hubCache.canWrite">
-            <a class="dropdown-item" [routerLink]="['connection-new', 'Source']" title="Create a new datalink.">
+            <a class="dropdown-item" [routerLink]="['connection-new', eConnectionPurpose.Source]" title="Create a new datalink.">
                 <i class="fa fa-file-o"></i> New (Source)</a>
         </li>
         <li *ngIf="hubCache.canWrite">
-            <a class="dropdown-item" [routerLink]="['connection-new', 'Managed']" title="Create a new datalink.">
+            <a class="dropdown-item" [routerLink]="['connection-new', eConnectionPurposeManaged]" title="Create a new datalink.">
                 <i class="fa fa-file-o"></i> New (Managed)</a>
         </li>
         <li *ngIf="hubCache.canWrite">
-            <a class="dropdown-item" [routerLink]="['connection-new', 'Target']" title="Create a new datalink.">
+            <a class="dropdown-item" [routerLink]="['connection-new', eConnectionPurpose.Target]" title="Create a new datalink.">
                 <i class="fa fa-file-o"></i> New (Target)</a>
         </li>
         <ng-template [ngIf]="connections.length > 0">

@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, BehaviorSubject, Subscription, combineLatest} from 'rxjs';
 import { AuthService } from '../../../+auth/auth.service';
 import { DexihConnection, DexihTable, eTableType, eStatus, eImportAction, eSharedObjectType } from '../../../shared/shared.models';
+import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
     selector: 'connections',
@@ -28,6 +29,8 @@ export class ConnectionImportComponent implements OnInit, OnDestroy {
 
     tableFilter: string;
     viewFilter: string;
+
+    private cancelToken = new CancelToken();
 
     columns = [
         { name: 'schema', title: 'Schema', format: '' },
@@ -111,6 +114,7 @@ export class ConnectionImportComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         if (this._subscription) { this._subscription.unsubscribe(); }
         if (this._hubCacheChangeSubscription) { this._hubCacheChangeSubscription.unsubscribe(); }
+        this.cancelToken.cancel();
     }
 
     updateFilter() {
@@ -143,7 +147,7 @@ export class ConnectionImportComponent implements OnInit, OnDestroy {
         this.showPage = false;
         this.showPageMessage = 'Importing tables from remote database...';
 
-        this.hubService.getDatabaseTableNames(connection)
+        this.hubService.getDatabaseTableNames(connection, this.cancelToken)
             .then(tables => {
                 this.tables = tables;
 
@@ -178,7 +182,7 @@ export class ConnectionImportComponent implements OnInit, OnDestroy {
 
 
     import(table: DexihTable) {
-        this.hubService.importTables([table], true).then(importResult => {
+        this.hubService.importTables([table], true, this.cancelToken).then(importResult => {
             this.mergeTables(importResult);
             // if (importResult) {
             //     importResult[0].entityStatus.isBusy = false;
@@ -203,7 +207,7 @@ export class ConnectionImportComponent implements OnInit, OnDestroy {
     importSelected(selected: Array<DexihTable>) {
         let selectedTables = selected.filter(t => !t.entityStatus.isBusy);
         selectedTables.forEach(t => t.entityStatus.isBusy = true);
-        this.hubService.importTables(selectedTables, true).then(result => {
+        this.hubService.importTables(selectedTables, true, this.cancelToken).then(result => {
             this.mergeTables(result);
             // selectedTables.forEach(t => t.entityStatus.isBusy = false);
         }).catch(reason => {
@@ -247,7 +251,7 @@ export class ConnectionImportComponent implements OnInit, OnDestroy {
     newDatalinks(items: Array<DexihTable>) {
         let selectedTables = items.filter(t => !t.entityStatus.isBusy);
         selectedTables.forEach(t => t.entityStatus.isBusy = true);
-        this.hubService.importTables(selectedTables, true).then(result => {
+        this.hubService.importTables(selectedTables, true, this.cancelToken).then(result => {
             this.mergeTables(result);
 
             let tableKeys = result.map(c => c.key).join('|');

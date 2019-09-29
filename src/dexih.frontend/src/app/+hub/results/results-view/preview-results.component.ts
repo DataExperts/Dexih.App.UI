@@ -3,7 +3,9 @@ import { PreviewResults, HubCache } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { Subscription} from 'rxjs';
 import { PromiseWithCancel, CancelToken } from '../../../+auth/auth.models';
-import { TransformWriterResult, DexihDatalink, DexihTable, SelectQuery, eDeltaType, Filter, eCompare, eAndOr, eTypeCode, DownloadObject, eSourceType, eDownloadFormat, DexihDatalinkColumn, TableColumn, eDataObjectType, DexihTableColumn } from '../../../shared/shared.models';
+import { TransformWriterResult, DexihDatalink, DexihTable, SelectQuery, eDeltaType, Filter, eCompare,
+    eAndOr, eTypeCode, DownloadObject, eSourceType, eDownloadFormat, DexihDatalinkColumn,
+    TableColumn, eDataObjectType, DexihTableColumn } from '../../../shared/shared.models';
 
 @Component({
     selector: 'preview-results',
@@ -25,7 +27,7 @@ export class PreviewResultsComponent implements OnInit, OnDestroy {
 
     private runningQuery: PromiseWithCancel<PreviewResults>;
     private cancelToken = new CancelToken();
-    
+
     constructor(
         private hubService: HubService
     ) {
@@ -114,7 +116,7 @@ export class PreviewResultsComponent implements OnInit, OnDestroy {
         let selectQuery = this.createSelectQuery();
 
         let query = this.hubService.previewTableDataQuery(this.targetTable, false, selectQuery, null, null, this.cancelToken);
-        
+
         query.then(result => {
             this.columns = result.columns;
             this.data = result.data;
@@ -131,6 +133,6 @@ export class PreviewResultsComponent implements OnInit, OnDestroy {
         downloadObject.objectKey = this.targetTable.key;
         downloadObject.objectType = eDataObjectType.Table;
         downloadObject.query = selectQuery;
-        this.hubService.downloadData([downloadObject], false, eDownloadFormat.Csv)
+        this.hubService.downloadData([downloadObject], false, eDownloadFormat.Csv, this.cancelToken)
     }
 }
