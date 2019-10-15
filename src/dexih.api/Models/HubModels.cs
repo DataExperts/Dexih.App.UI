@@ -126,7 +126,7 @@ namespace dexih.api.Models
     {
         public long ConnectionKey { get; set; }
         public long FileFormatKey { get; set; }
-        public DataType.ETypeCode FormatType { get; set; }
+        public ETypeCode FormatType { get; set; }
         public string FileName { get; set; }
         public DownloadUrl DownloadUrl { get; set; }
         public string ConnectionId { get; set; }

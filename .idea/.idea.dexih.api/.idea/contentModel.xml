@@ -1135,15 +1135,16 @@
     <e p="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions" t="IncludeRecursive">
       <e p="bin" t="ExcludeRecursive" />
       <e p="dexih.functions.csproj" t="IncludeRecursive" />
+      <e p="Enums.cs" t="Include" />
       <e p="Exceptions" t="Include">
         <e p="FunctionException.cs" t="Include" />
       </e>
       <e p="Extensions" t="Include">
         <e p="Extensions.cs" t="Include" />
         <e p="JsonExtensions.cs" t="Include" />
+        <e p="SymbolExtensions.cs" t="Include" />
       </e>
       <e p="FilePermissions.cs" t="Include" />
-      <e p="Flatfile.cs" t="Include" />
       <e p="Functions" t="Include">
         <e p="FunctionAttribute.cs" t="Include" />
         <e p="FunctionParameter.cs" t="Include" />
@@ -1170,7 +1171,6 @@
         <e p="Parameters.cs" t="Include" />
         <e p="ParameterValue.cs" t="Include" />
       </e>
-      <e p="ProtoInheritAttribute.cs" t="Include" />
       <e p="Query" t="Include">
         <e p="DeleteQuery.cs" t="Include" />
         <e p="Filter.cs" t="Include" />
@@ -1187,11 +1187,9 @@
         <e p="Sorts.cs" t="Include" />
         <e p="UpdateQuery.cs" t="Include" />
       </e>
-      <e p="Retry.cs" t="Include" />
       <e p="SeriesValue.cs" t="Include" />
       <e p="ShortGuid.cs" t="Include" />
       <e p="SortedRowsDictionary.cs" t="Include" />
-      <e p="SymbolExtensions.cs" t="Include" />
       <e p="Table" t="Include">
         <e p="FileConfiguration.cs" t="Include" />
         <e p="Flatfile.cs" t="Include" />
@@ -1203,7 +1201,6 @@
         <e p="TableIndex.cs" t="Include" />
         <e p="WebService.cs" t="Include" />
       </e>
-      <e p="TaskSequencer.cs" t="Include" />
       <e p="TaskTimer.cs" t="Include" />
     </e>
     <e p="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.builtIn" t="IncludeRecursive">
@@ -1450,6 +1447,23 @@
       <e p="TransformWriterTask.cs" t="Include" />
       <e p="TransformWriterTaskBulk.cs" t="Include" />
       <e p="TransformWriterTaskTransaction.cs" t="Include" />
+    </e>
+    <e p="$PROJECT_DIR$/../dexih.utils.datatype/src/dexih.utils.datatype" t="IncludeRecursive">
+      <e p="AvailableDataTypes.cs" t="Include" />
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="DataObject.cs" t="Include" />
+      <e p="DataType.cs" t="Include" />
+      <e p="DataTypeExceptions.cs" t="Include" />
+      <e p="Dexih.Utils.DataType.csproj" t="IncludeRecursive" />
+      <e p="Enums.cs" t="Include" />
+      <e p="obj" t="ExcludeRecursive">
+        <e p="Debug" t="Include">
+          <e p="netstandard2.0" t="Include">
+            <e p="Dexih.Utils.DataType.AssemblyInfo.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="Operations.cs" t="Include" />
     </e>
   </component>
 </project>

@@ -555,7 +555,7 @@ namespace dexih.api.Services.Remote
 		    string connectionId, 
 		    long connectionKey, 
 		    long fileFormatKey, 
-		    DataType.ETypeCode formatType, 
+		    ETypeCode formatType, 
 		    string fileName, 
 		    
 		    RepositoryManager database, CancellationToken cancellationToken)

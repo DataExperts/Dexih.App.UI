@@ -449,7 +449,7 @@ namespace dexih.api.Controllers
 				var table = importFileFormat.TableObj;
 				var fileSample = new StringBuilder();
 
-				if (table.FormatType == DataType.ETypeCode.Text)
+				if (table.FormatType == ETypeCode.Text)
 				{
 					//get the first 20 lines of the file as a sample.
 					var reader = new StreamReader(file.OpenReadStream());
