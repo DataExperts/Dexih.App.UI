@@ -12,10 +12,24 @@ export class GlobalErrorHandler implements ErrorHandler {
         this.logger = new LogFactory('Global');
     }
 
-    handleError(error: TypeError) {
+    handleError(error: any) {
         const authService = this.injector.get(AuthService);
-        let message = new Message(false, `Error: ${error.message}`,
-            error.stack, null);
+        let message: Message;
+        if (error.rejection ) {
+            message = error.rejection;
+        } else {
+            let details = ''
+            if (error.stack) {
+                details = 'Client debug information: ' + error.stack
+            }
+
+            if (error.exceptionDetails) {
+                details = 'Server debug information: ' + error.exceptionDetails;
+            }
+
+            message = new Message(false, `Error: ${error.message}`,
+            details, null);
+        }
         authService.addUpdateNotification(message, true);
     }
 }

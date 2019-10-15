@@ -27,8 +27,8 @@
                     <fieldset>
                         <div class="form-row">
                             <section *ngFor="let action of importOptions" class="form-group col-md-6">
-                                <form-select label="{{action.objectType}} Action" [(ngModel)]="action.action" [items]="importActions" itemKey="key" itemName="name"
-                                    note='Action when importing {{action.objectType}}'>
+                                <form-select label="{{eSharedObjectType[action.objectType]}} Action" [(ngModel)]="action.action" [items]="importActions" itemKey="key" itemName="name"
+                                    note='Action when importing {{eSharedObjectType[action.objectType]}}'>
                                 </form-select>
                             </section>
                         </div>

@@ -5,7 +5,7 @@
 			<dexih-invalid-form-details [control]="formsService.currentForm" (click)="formsService.showErrors()" class="mr-1"></dexih-invalid-form-details>
 			<dexih-button-refresh class="mr-1" (click)="refresh()" text="Reload"></dexih-button-refresh>
 			<download-button class="mr-1" (download)="download($event)"></download-button>
-			<dexih-button class="mr-1" iconClass="fa fa-line-chart" (click)="showChart = !showChart" [text]="showChart ? 'Show Data' : 'Show Chart'"></dexih-button>
+			<dexih-button class="mr-1" iconClass="fa fa-line-chart" (click)="toggleChart()" [text]="showChart ? 'Show Data' : 'Show Chart'"></dexih-button>
 			<save-button *ngIf="hubCache.canWrite" [formsService]="formsService" class="mr-1"></save-button>
 			<dexih-button-edit class="mr-1" (click)="showEdit = !showEdit" [text]="showEdit ? 'Hide Edit' : 'Edit'"></dexih-button-edit>
 			<cancel-button [formsService]="formsService"></cancel-button>
@@ -30,12 +30,12 @@
 							 iconClass="fa fa-database" note='Specify the source type for this view' [enableFilter]="false">
 							</form-select>
 						</section>
-						<section class="form-group col-md-6" *ngIf="formsService.currentForm.value.sourceType == eSourceType.Table">
+						<section class="form-group col-md-6" *ngIf="formsService.currentForm.value.sourceType == eDataObjectType.Table">
 							<form-select label="Source Table" formControlName="sourceTableKey" [errors]="errors?.sourceTableKey" [items]="connectionTables"
 							 parentName="name" childItems="dexihTables" itemKey="key" itemName="logicalName" note="Select the source table">
 							</form-select>
 						</section>
-						<section class="form-group col-md-6" *ngIf="formsService.currentForm.value.sourceType == eSourceType.Datalink">
+						<section class="form-group col-md-6" *ngIf="formsService.currentForm.value.sourceType == eDataObjectType.Datalink">
 							<form-select label="Source Datalink" formControlName="sourceDatalinkKey" [errors]="errors?.sourceDatalinkKey"
 							 [items]="datalinks" itemKey="key" itemName="name" note='Select the source datalink'>
 							</form-select>

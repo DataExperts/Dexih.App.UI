@@ -30,6 +30,7 @@ namespace dexih.api.Models
     {
         public long HubKey { get; set; }
         public string RemoteAgentId { get; set; }
+        public string ResponseUrl { get; set; }
     }
     
 
@@ -47,12 +48,12 @@ namespace dexih.api.Models
 
     public class ColumnValidationTest : HubValue<DexihColumnValidation>
     {
-        public object TestValue;
+        public object TestValue { get; set; }
     }
 
     public class CustomFunctionTest : HubValue<DexihDatalinkTransformItem>
     {
-        public object[] TestValues;
+        public object[] TestValues { get; set; }
     }
 
     public class MoveFiles : HubValue<DexihTable>
@@ -121,7 +122,7 @@ namespace dexih.api.Models
 	    public DownloadUrl DownloadUrl { get; set; }
 	}
 
-    public class BulkUploadFiles: HubModelBase
+    public class BulkUploadFile: HubModelBase
     {
         public long ConnectionKey { get; set; }
         public long FileFormatKey { get; set; }
@@ -129,12 +130,6 @@ namespace dexih.api.Models
         public string FileName { get; set; }
         public DownloadUrl DownloadUrl { get; set; }
         public string ConnectionId { get; set; }
-    }
-
-    public class BulkUploadFilesReturn
-    {
-        public string Url;
-        public string Reference;
     }
 
     public class DownloadFiles: HubModelBase
@@ -146,14 +141,10 @@ namespace dexih.api.Models
         public DownloadUrl DownloadUrl { get; set; }
     }
 
-    public class ImportFileFormat
+    public class ImportFileFormat: HubModelBase
     {
-        public long HubKey { get; set; }
-        public string RemoteAgentId { get; set; }
         public string Table { get; set; }
-        public DexihTable TableObj {
-            get { return string.IsNullOrEmpty(Table) ? null : Json.DeserializeObject<DexihTable>(Table, null); }
-        }
+        public DexihTable TableObj => string.IsNullOrEmpty(Table) ? null : JsonExtensions.Deserialize<DexihTable>(Table);
         public bool Save { get; set; }
     }
     
@@ -225,7 +216,6 @@ namespace dexih.api.Models
         public int? Rows { get; set; }
         public long? ParentAuditKey { get; set; }
         public bool? ChildItems { get; set; }
-        public DownloadUrl DownloadUrl { get; set; }
     }
 
 

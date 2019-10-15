@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { User, logoUrl, eLoginType, ExternalLogin } from '../auth.models';
+import { User, logoUrl, ExternalLogin } from '../auth.models';
 import { AuthService } from '../auth.service';
 import { LogFactory, eLogLevel } from '../../../logging';
 import { async } from 'q';
+import { eLoginProvider } from '../../shared/shared.models';
 
 @Component({
     selector: 'app-login',
@@ -18,9 +19,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     message: string;
 
 
-    public loginType = eLoginType.Password;
-    eLoginType = eLoginType;
-
+    public loginType = eLoginProvider.Dexih;
+    public eLoginProvider = eLoginProvider;
     public logger = new LogFactory('login.component');
 
     constructor(
@@ -34,12 +34,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 
         // this.authService.refreshGlobalCache();
 
-        let loginType =  eLoginType[this.authService.getCookie('LoginType')];
+        let loginType =  +this.authService.getCookie('LoginType');
         switch (loginType) {
-            case eLoginType.Google:
+            case eLoginProvider.Google:
                 this.enableGoogle();
                 break;
-            case eLoginType.Microsoft:
+            case eLoginProvider.Microsoft:
                 this.enableMicrosoft();
                 break;
             default:
@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     login(event) {
         switch (this.loginType) {
-            case eLoginType.Password:
+            case eLoginProvider.Dexih:
                 this.authService.login(this.user).then(
                     result => {
                         this.doLogin(result);
@@ -63,27 +63,27 @@ export class LoginComponent implements OnInit, OnDestroy {
                     }
                 );
                 break;
-            case eLoginType.Google:
+            case eLoginProvider.Google:
                 this.googleLogin(false);
                 break;
-            case eLoginType.Microsoft:
+            case eLoginProvider.Microsoft:
                 this.microsoftLogin(false);
                 break;
         }
     }
 
     enablePassword() {
-        this.authService.setCookie('LoginType', eLoginType.Password.toString());
+        this.authService.setCookie('LoginType', eLoginProvider.Dexih.toString());
         this.user.email = '';
         this.message = '';
-        this.loginType = eLoginType.Password;
+        this.loginType = eLoginProvider.Dexih;
     }
 
     enableGoogle() {
         this.user.email = '';
         this.message = '';
-        this.authService.setCookie('LoginType', eLoginType.Google.toString());
-        this.loginType = eLoginType.Google;
+        this.authService.setCookie('LoginType', eLoginProvider.Google.toString());
+        this.loginType = eLoginProvider.Google;
         this.authService.getGlobalCachePromise().then(cache => {
             let clientId = cache.googleClientId;
             this.authService.googleEnable(clientId).then(
@@ -104,8 +104,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     enableMicrosoft() {
         this.user.email = '';
         this.message = '';
-        this.loginType = eLoginType.Microsoft;
-        this.authService.setCookie('LoginType', eLoginType.Microsoft.toString());
+        this.loginType = eLoginProvider.Microsoft;
+        this.authService.setCookie('LoginType', eLoginProvider.Microsoft.toString());
         this.authService.getGlobalCachePromise().then(cache => {
             let clientId = cache.microsoftClientId;
             this.logger.LogC(() => `microsoft clientId: ${clientId} `, eLogLevel.Information);

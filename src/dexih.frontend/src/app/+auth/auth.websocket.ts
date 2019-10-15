@@ -1,7 +1,7 @@
 import {  OnDestroy } from '@angular/core';
 import { Observable, Subscription, BehaviorSubject} from 'rxjs';
 import { LogFactory, eLogLevel } from '../../logging';
-import { HubConnection, HubConnectionBuilder, LogLevel, HubConnectionState } from '@aspnet/signalr';
+import { HubConnection, HubConnectionBuilder, LogLevel, HubConnectionState } from '@microsoft/signalr';
 import { Location } from '@angular/common';
 import { ClientMessage, RemoteMessage, eClientCommand } from '../shared/shared.models';
 
@@ -49,7 +49,7 @@ export class AuthWebSocket implements OnDestroy {
             this._webSocketMessages.next(remoteMessage);
         });
 
-        this.hubConnection.onclose(async (err: any) => {
+        this.hubConnection.onclose((err: any) => {
             this.logger.LogC(() => `startWebSocket disconnected. ${err}.`, eLogLevel.Error);
             this._webSocketStatus.next(`${err}.  Check your network connection.`);
             this.hubConnected.next(false);
@@ -79,7 +79,7 @@ export class AuthWebSocket implements OnDestroy {
         if (!this.startingWebSocket) {
             this.startingWebSocket = true;
 
-            return new Promise<void>(async (resolve, reject) => {
+            return new Promise<void>((resolve, reject) => {
                 if (this.hubConnection.state === HubConnectionState.Connected) {
                     resolve();
                     this.startingWebSocket = false;

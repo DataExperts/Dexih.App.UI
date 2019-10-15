@@ -20,7 +20,7 @@ import { eImportAction, Import, DexihConnection, DexihTable, DexihTableColumn, e
    DexihDatalinkTestStep, DexihDatalinkTestTable, DexihTrigger, DexihDatalinkStep, DexihDatalinkDependency,
    DexihDatalinkStepColumn, DexihDatajob, DexihRemoteAgentHub, DexihDatalink, DexihDatalinkColumn,
    DexihDatalinkTransform, DexihDatalinkTransformItem, DexihFunctionParameter, DexihFunctionArrayParameter,
-   DexihDatalinkProfile, DexihDatalinkTarget, DexihDatalinkTable, eSourceType, eSharedObjectType } from '../shared/shared.models';
+   DexihDatalinkProfile, DexihDatalinkTarget, DexihDatalinkTable, eSourceType, eSharedObjectType, eDataObjectType } from '../shared/shared.models';
 
 @Injectable()
 export class HubFormsService implements OnDestroy {
@@ -545,6 +545,10 @@ export class HubFormsService implements OnDestroy {
       'connectionStringDisplay': [connection.connectionString ? '(Connection string hidden)' : '', [
       ]],
       'passwordDisplay': [connection.password ? '**************************' : '', [
+      ]],
+      'connectionStringRaw': ['', [
+      ]],
+      'passwordRaw': ['', [
       ]],
     }, { Validators: [this.requiredConnectionFields()] }
     );
@@ -1672,7 +1676,7 @@ export class HubFormsService implements OnDestroy {
       sourceTableKey.setErrors(null);
       sourceDatalinkKey.setErrors(null);
 
-      if (sourceType === eSourceType.Table) {
+      if (sourceType === eDataObjectType.Table) {
         if (!sourceTableKey.value) {
           return sourceTableKey.setErrors({ required: true });
         }

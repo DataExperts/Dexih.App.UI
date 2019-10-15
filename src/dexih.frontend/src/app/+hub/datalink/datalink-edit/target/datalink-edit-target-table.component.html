@@ -26,7 +26,7 @@
             </section>
             <section *ngIf="!newTable">
                 <form-select label="Target Table" formControlName="tableKey" [items]="connectionTables" parentName="name" childItems="dexihTables"
-                    itemKey="key" itemName="logicalName" note='Select the target table'>
+                    itemKey="key" itemName="name" note='Select the target table'>
                 </form-select>
             </section>
             <section *ngIf="nodes?.length > 0">

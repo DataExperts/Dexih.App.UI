@@ -4,10 +4,11 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using dexih.functions;
 using dexih.repository;
 using Dexih.Utils.MessageHelpers;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
+
 using Xunit;
 
 namespace dexih.api.tests
@@ -75,12 +76,12 @@ namespace dexih.api.tests
             }
             
             var result = await Post("/api/Account/Login", user);
-            var message = JsonConvert.DeserializeObject<ReturnValue>(result);
+            var message = JsonExtensions.Deserialize<ReturnValue>(result);
             Assert.True(message.Success);
             
             // Get user required to refresh the antiforgerytoken
             result = await Post("/api/Account/GetUser", null);
-            var user2 = JsonConvert.DeserializeObject<ReturnValue<ApplicationUser>>(result);
+            var user2 = JsonExtensions.Deserialize<ReturnValue<ApplicationUser>>(result);
             
             Assert.True(user2.Success);
             
@@ -89,7 +90,7 @@ namespace dexih.api.tests
         
         public static async Task<string> Post(string uri, object data)
         {
-            var messagesString = JsonConvert.SerializeObject(data);
+            var messagesString = JsonExtensions.Serialize(data);
             var content = new StringContent(messagesString, Encoding.UTF8, "application/json");
 
             var cookies = _CookieContainer.GetCookies(new Uri(_url));

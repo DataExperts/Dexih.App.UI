@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { User, logoUrl, eLoginType, ExternalLogin } from '../auth.models';
+import { User, logoUrl, ExternalLogin } from '../auth.models';
 import { AuthService } from '../auth.service';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { FormsService } from '../../shared/forms/forms.service';
 import { TermsComponent } from '../terms/terms.component';
 import { Subscription, combineLatest } from 'rxjs';
+import { eLoginProvider } from '../../shared/shared.models';
 
 @Component({
   selector: 'app-register',
@@ -22,8 +23,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   googleMessage: string;
   verificationCode: string;
 
-  public loginType = eLoginType.Password;
-  eLoginType = eLoginType;
+  public loginType = eLoginProvider.Dexih;
+  eLoginProvider = eLoginProvider;
 
   passwordValidators = [
     Validators.required,
@@ -70,12 +71,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
       this.formsService.startForm(registerForm);
 
-      let loginType =  eLoginType[this.authService.getCookie('LoginType')];
+      let loginType =  +this.authService.getCookie('LoginType');
       switch (loginType) {
-          case eLoginType.Google:
+          case eLoginProvider.Google:
               this.enableGoogle();
               break;
-          case eLoginType.Microsoft:
+          case eLoginProvider.Microsoft:
               this.enableMicrosoft();
               break;
           default:
@@ -117,10 +118,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   enablePassword() {
     this.formsService.currentForm.controls.email.enable();
-    this.formsService.currentForm.controls.provider.setValue('Dexih');
-    this.authService.setCookie('LoginType', eLoginType.Password.toString());
+    this.formsService.currentForm.controls.provider.setValue(eLoginProvider.Dexih);
+    this.authService.setCookie('LoginType', eLoginProvider.Dexih.toString());
     this.message = '';
-    this.loginType = eLoginType.Password;
+    this.loginType = eLoginProvider.Dexih;
     this.formsService.currentForm.controls.providerKey.setValue(null);
     this.formsService.currentForm.controls.authenticationToken.setValue(null);
     this.formsService.currentForm.controls.password.setValidators(this.passwordValidators);
@@ -128,11 +129,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
 enableGoogle() {
     this.formsService.currentForm.controls.email.setValue('');
-    this.formsService.currentForm.controls.provider.setValue('Google');
+    this.formsService.currentForm.controls.provider.setValue(eLoginProvider.Google);
     // this.formsService.currentForm.controls.email.disable();
     this.message = '';
-    this.authService.setCookie('LoginType', eLoginType.Google.toString());
-    this.loginType = eLoginType.Google;
+    this.authService.setCookie('LoginType', eLoginProvider.Google.toString());
+    this.loginType = eLoginProvider.Google;
     this.authService.getGlobalCachePromise().then(cache => {
         let clientId = cache.googleClientId;
         this.authService.googleEnable(clientId).then(
@@ -147,11 +148,11 @@ enableGoogle() {
 
 enableMicrosoft() {
   this.formsService.currentForm.controls.email.setValue('');
-  this.formsService.currentForm.controls.provider.setValue('Microsoft');
+  this.formsService.currentForm.controls.provider.setValue(eLoginProvider.Microsoft);
   // this.formsService.currentForm.controls.email.disable();
   this.message = '';
-    this.loginType = eLoginType.Microsoft;
-    this.authService.setCookie('LoginType', eLoginType.Microsoft.toString());
+    this.loginType = eLoginProvider.Microsoft;
+    this.authService.setCookie('LoginType', eLoginProvider.Microsoft.toString());
     this.authService.getGlobalCachePromise().then(cache => {
         let clientId = cache.microsoftClientId;
         this.authService.microsoftEnable(clientId).then(
@@ -187,7 +188,7 @@ setExternalLogin(externalLogin: ExternalLogin) {
 
   passwordsMatch(): ValidatorFn {
     return (group: FormGroup): { [key: string]: any } => {
-      if (this.formsService.currentForm && this.loginType === eLoginType.Password) {
+      if (this.formsService.currentForm && this.loginType === eLoginProvider.Dexih) {
         const password = this.formsService.currentForm.controls['password'];
         const passwordConfirm = this.formsService.currentForm.controls['passwordConfirm'];
 
@@ -201,16 +202,16 @@ setExternalLogin(externalLogin: ExternalLogin) {
 
   async refreshLogin() {
     switch (this.loginType) {
-      case eLoginType.Google:
-        await this.googleLogin(false);
+      case eLoginProvider.Google:
+        this.googleLogin(false);
         break;
-      case eLoginType.Microsoft:
+      case eLoginProvider.Microsoft:
         await this.microsoftLogin(false);
         break;
       }
   }
 
-  async onSubmit() {
+  async register() {
     await this.refreshLogin();
 
     this.formsService.currentForm.updateValueAndValidity();
@@ -224,10 +225,10 @@ setExternalLogin(externalLogin: ExternalLogin) {
               if (user.isInvited) {
                 let cache = await this.authService.getGlobalCachePromise();
                 switch (this.loginType) {
-                  case eLoginType.Google:
+                  case eLoginProvider.Google:
                     await this.authService.googleLogin(cache.googleClientId, false);
                     break;
-                  case eLoginType.Microsoft:
+                  case eLoginProvider.Microsoft:
                     await this.authService.microsoftLogin(cache.microsoftClientId, false);
                     break;
                   }
@@ -256,44 +257,33 @@ setExternalLogin(externalLogin: ExternalLogin) {
     }
   }
 
-  googleLogin(forceLogin: boolean): Promise<boolean> {
-    return new Promise<boolean>((resolve, reject) => {
+  googleLogin(forceLogin: boolean) {
       this.authService.getGlobalCachePromise().then(cache => {
         let clientId = cache.googleClientId;
         this.authService.googleSignIn(clientId, forceLogin).then(
           result => {
             this.setExternalLogin(result);
-            resolve(true);
           }).catch(
             reason => {
               this.message = reason.message;
-              reject(reason);
             });
       }).catch(reason => {
         this.message = reason.message;
-        reject(reason);
       });
-    });
   }
 
-  microsoftLogin(forceLogin: boolean): Promise<boolean> {
-    return new Promise<boolean>((resolve, reject) => {
+  microsoftLogin(forceLogin: boolean) {
       this.authService.getGlobalCachePromise().then(cache => {
         let clientId = cache.microsoftClientId;
-        this.authService.microsoftSignIn(clientId, forceLogin).then(
-          result => {
-            this.setExternalLogin(result);
-            resolve(true);
+        this.authService.microsoftSignIn(clientId, forceLogin).then(externalLogin => {
+            this.setExternalLogin(externalLogin);
           }).catch(
             reason => {
               this.message = reason.message;
-              reject(reason);
             });
       }).catch(reason => {
         this.message = reason.message;
-        reject(reason);
       });
-    });
   }
 
   termsAccepted(termsAccepted: boolean) {

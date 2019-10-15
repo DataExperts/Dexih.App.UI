@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, ViewChild } from '@angular/core';
 import { AuthService } from '../../../+auth/auth.service';
-import { Permissions } from '../../../+auth/auth.models';
 import { HubService } from '../../hub.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';

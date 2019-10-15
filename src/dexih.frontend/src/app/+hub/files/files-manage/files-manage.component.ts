@@ -5,7 +5,7 @@ import { HubService } from '../../hub.service';
 import { Observable, BehaviorSubject, Subscription, combineLatest} from 'rxjs';
 import { HubCache, FileProperties, eCacheStatus, ConnectionTables } from '../../hub.models';
 import { Message, FileHandler, eFileStatus, CancelToken } from '../../../+auth/auth.models';
-import { DexihTable, eFlatFilePath, DexihConnection, eConnectionCategory } from '../../../shared/shared.models';
+import { DexihTable, eFlatFilePath, DexihConnection, eConnectionCategory, eFlatFilePathItems } from '../../../shared/shared.models';
 
 
 @Component({
@@ -21,9 +21,10 @@ export class FilesManageComponent implements OnInit, OnDestroy {
     public tableKey: number;
     public table: DexihTable;
 
-    public path: eFlatFilePath;
+    public path = eFlatFilePath.None;
     public localPath: string;
     public eFlatFilePath = eFlatFilePath;
+    public eFlatFilePathItems = eFlatFilePathItems.filter(c => c.key > 0);
     public eFileStatus = eFileStatus;
 
     public connectionTables: ConnectionTables[];
@@ -66,17 +67,22 @@ export class FilesManageComponent implements OnInit, OnDestroy {
             this._subscription = combineLatest(
                 this.route.params,
                 this.route.queryParams,
-                this.hubService.getHubCacheObservable(),
+                this.hubService.getHubCacheObservable(true),
+                this.hubService.getRemoteLibrariesPromise(),
+                this.hubService.getRemoteAgentObservable(true)
             ).subscribe(result => {
                 let params = result[0];
                 let queryParams = result[1];
                 this.hubCache = result[2];
+                let remoteLibraries = result[3]
 
-                if (this.hubCache.status !== eCacheStatus.Loaded) { return; }
+                // if (this.hubCache.status !== eCacheStatus.Loaded) { return; }
 
                 this.fileConnections = this.hubCache.hub.dexihConnections
-                    .filter(async c => {
-                        const ref = await this.hubService.GetConnectionReference(c);
+                    .filter(c => {
+                        let ref = remoteLibraries.connections.find(con =>
+                            c.connectionAssemblyName === con.connectionAssemblyName
+                            && c.connectionClassName === con.connectionClassName);
                         if (ref) {
                             return ref.connectionCategory === eConnectionCategory.File;
                         } else {
@@ -86,10 +92,9 @@ export class FilesManageComponent implements OnInit, OnDestroy {
 
                 let connectionTables = this.hubCache.getConnectionTables();
 
-                this.connectionTables = connectionTables.filter(async c => {
+                this.connectionTables = connectionTables.filter(c => {
                     if (c.dexihTables.length > 0) {
-                        let connectionReference = await this.hubService.GetConnectionReference(c);
-                        return connectionReference ? connectionReference.connectionCategory === eConnectionCategory.File : false;
+                        return this.fileConnections.find(fc => c.key === fc.key) == null ? false : true;
                     }
                 });
 
@@ -102,7 +107,7 @@ export class FilesManageComponent implements OnInit, OnDestroy {
                     }
                 }
 
-                this.path = queryParams['path'];
+                this.path = +queryParams['path'];
                 if (!this.path) {
                     this.path = eFlatFilePath.Incoming;
                     hasChanged = true;

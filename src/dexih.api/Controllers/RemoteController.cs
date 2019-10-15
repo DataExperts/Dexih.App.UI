@@ -14,6 +14,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Dexih.Utils.Crypto;
@@ -29,7 +30,7 @@ using Dexih.Utils.CopyProperties;
 using MessagePack;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Caching.Distributed;
-using Newtonsoft.Json;
+using Microsoft.Extensions.Hosting;
 using Directory = System.IO.Directory;
 
 namespace dexih.api.Controllers
@@ -43,28 +44,27 @@ namespace dexih.api.Controllers
         public RemoteController(IDexihOperations operations,
             SignInManager<ApplicationUser> signInManager,
             IDistributedCache distributedCache,
+            IWebHostEnvironment webHostEnvironment,
             IRemoteAgents remoteServers,
-            IHostingEnvironment hostingEnvironment,
             ILoggerFactory loggerFactory,
             ApplicationSettings applicationSettings)
         {
             _operations = operations;
             _signInManager = signInManager;
             _remoteServers = remoteServers;
-            _hostingEnvironment = hostingEnvironment;
             _logger = loggerFactory.CreateLogger<RemoteController>();
             _distributedCache = distributedCache;
             _applicationSettings = applicationSettings;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         private readonly IDexihOperations _operations;
         private readonly IRemoteAgents _remoteServers;
-        private readonly IHostingEnvironment _hostingEnvironment;
         private readonly ILogger _logger;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IDistributedCache _distributedCache;
         private readonly ApplicationSettings _applicationSettings;
-
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
         // POST: /Account/RemoteLogin
         // Used by the job server to retrieve a Remote Communication guid.
@@ -450,7 +450,7 @@ namespace dexih.api.Controllers
                 var txtName = $"_acme-challenge.{domain}";
 
                 AcmeContext acme;
-                var server = _hostingEnvironment.IsDevelopment()
+                var server = _webHostEnvironment.IsDevelopment()
                     ? WellKnownServers.LetsEncryptStagingV2
                     : WellKnownServers.LetsEncryptV2;
 
@@ -496,11 +496,11 @@ namespace dexih.api.Controllers
                 }
                 else
                 {
-                    txtItems = JsonConvert.DeserializeObject<List<KeyValuePair<string, string>>>(txtItemsJson);
+                    txtItems = JsonExtensions.Deserialize<List<KeyValuePair<string, string>>>(txtItemsJson);
                 }
 
                 txtItems.Add(pair);
-                txtItemsJson = JsonConvert.SerializeObject(txtItems);
+                txtItemsJson = JsonExtensions.Serialize(txtItems);
                 var txtItemsByte = Encoding.ASCII.GetBytes(txtItemsJson);
                 var options = new DistributedCacheEntryOptions() {SlidingExpiration = TimeSpan.FromSeconds(60)};
                 await _distributedCache.SetAsync("txtRecords", txtItemsByte, options, cancellationToken);
@@ -585,11 +585,11 @@ namespace dexih.api.Controllers
             }
             else
             {
-                txtItems = JsonConvert.DeserializeObject<List<KeyValuePair<string, string>>>(txtItemsJson);
+                txtItems = txtItemsJson.Deserialize<List<KeyValuePair<string, string>>>();
             }
 
             txtItems.Add(new KeyValuePair<string, string>("test" + txtItems.Count.ToString(), "sample value"));
-            txtItemsJson = JsonConvert.SerializeObject(txtItems);
+            txtItemsJson = txtItems.Serialize();
             var txtItemsByte = Encoding.ASCII.GetBytes(txtItemsJson);
             var options = new DistributedCacheEntryOptions() {SlidingExpiration = TimeSpan.FromSeconds(60)};
             await _distributedCache.SetAsync("txtRecords", txtItemsByte, options, cancellationToken);
@@ -773,7 +773,7 @@ chmod a+x dexih.remote.run.{os}.sh
 	        remoteSettings.Logging.LogLevel.Microsoft = settings.LogLevel;
 
             await _operations.RepositoryManager.SaveRemoteAgent(user.Id, dbRemoteAgent, cancellationToken);
-	        var json = JsonConvert.SerializeObject(remoteSettings, Formatting.Indented);
+	        var json = JsonSerializer.Serialize(remoteSettings, new JsonSerializerOptions() { WriteIndented = true});
 	        var appSettingsStream = new MemoryStream(Encoding.ASCII.GetBytes(json));
             return appSettingsStream;
         }
@@ -816,13 +816,15 @@ chmod a+x dexih.remote.run.{os}.sh
         }
 
         [AllowAnonymous]
-        [HttpGet("[action]/{remoteAgentId}/{key}/{queryAction}")]
+        [HttpGet("[action]/{remoteAgentId}/{key}/{queryAction?}")]
         public async Task<IActionResult> Api(string remoteAgentId, string key, string queryAction, CancellationToken cancellationToken)
         {
             var parameters =Request.QueryString.Value;
             var ipAddress = Request.HttpContext.Connection.RemoteIpAddress;
 
-            var url = await _remoteServers.CallApi(remoteAgentId, key, queryAction, parameters, ipAddress.ToString(), cancellationToken);
+            var repositoryManager = _operations.RepositoryManager;
+            
+            var url = await _remoteServers.CallApi(remoteAgentId, key, queryAction, parameters, ipAddress.ToString(), repositoryManager, cancellationToken);
 
             return Redirect(url);
         }

@@ -35,7 +35,7 @@ export class ConnectionImportComponent implements OnInit, OnDestroy {
     columns = [
         { name: 'schema', title: 'Schema', format: '' },
         { name: 'name', title: 'Name', format: '' },
-        { name: 'tableType', title: 'Type', format: '' },
+        { name: 'tableType', title: 'Type', enum: eTableType, format: 'Enum' },
         { name: 'entityStatus.message', title: 'Latest Status' },
         { name: 'updateDate', title: 'Last Updated', format: 'Date' },
     ];
@@ -165,6 +165,7 @@ export class ConnectionImportComponent implements OnInit, OnDestroy {
                         this.tables[i] = cacheTable;
                     } else {
                         table.connectionKey = connection.key;
+                        table.tableType = <eTableType>table.tableType;
                         table.entityStatus = new EntityStatus();
                     }
                 }

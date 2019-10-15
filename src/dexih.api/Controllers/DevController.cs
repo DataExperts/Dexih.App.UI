@@ -10,8 +10,8 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Text.Json;
+
 
 #if DEBUG
 namespace dexih.api.Controllers
@@ -41,7 +41,7 @@ namespace dexih.api.Controllers
             var js = new StringBuilder();
 
             js.AppendLine("// Auto generated shared classes.");
-            js.AppendLine("// Regenerate at http://localhost:5000/Proto/JSModels.");
+            js.AppendLine("// Regenerate at http://localhost:5000/api/Dev/JSModels.");
             js.AppendLine();
             js.AppendLine();
 
@@ -49,37 +49,43 @@ namespace dexih.api.Controllers
 
             var typeLookup = new Dictionary<string, Type>();
 
-            foreach (var file in Directory.GetFiles(currentDirectory, "*.dll"))
+            foreach (var file in Directory.GetFiles(currentDirectory, "dexih*.dll"))
             {
-                var assembly = Assembly.LoadFrom(file);
-                var types = assembly.GetTypes();
-                // var types = AppDomain.CurrentDomain.GetAssemblies().Where(c=>c.FullName.StartsWith("dexih.functions")).SelectMany(s => s.GetTypes());
-
-                var assemblyName = Path.GetFileName(file);
-                if (assemblyName == Path.GetFileName(Assembly.GetExecutingAssembly().Location))
+                try
                 {
-                    assemblyName = null;
-                }
+                    var assembly = Assembly.LoadFrom(file);
+                    var types = assembly.GetTypes();
+                    // var types = AppDomain.CurrentDomain.GetAssemblies().Where(c=>c.FullName.StartsWith("dexih.functions")).SelectMany(s => s.GetTypes());
 
-
-
-                foreach (var type in types)
-                {
-                    var attribute = type.GetCustomAttribute<MessagePack.MessagePackObjectAttribute>();
-                    var attribute2 = type.GetCustomAttribute<DataContractAttribute>();
-
-                    if ((attribute != null || attribute2 != null)  && !type.IsAbstract)
+                    var assemblyName = Path.GetFileName(file);
+                    if (assemblyName == Path.GetFileName(Assembly.GetExecutingAssembly().Location))
                     {
-                        try
-                        {
-                            typeLookup.Add(type.Name, type);
-                        }
-                        catch (Exception ex)
-                        {
-                            throw new AggregateException("Failed to add " + type.Name, ex);
-                        }
-                        
+                        assemblyName = null;
                     }
+
+
+
+                    foreach (var type in types)
+                    {
+                        var attribute = type.GetCustomAttribute<MessagePack.MessagePackObjectAttribute>();
+                        var attribute2 = type.GetCustomAttribute<DataContractAttribute>();
+
+                        if ((attribute != null || attribute2 != null) && !type.IsAbstract)
+                        {
+                            try
+                            {
+                                typeLookup.Add(type.Name, type);
+                            }
+                            catch (Exception ex)
+                            {
+                                throw new AggregateException("Failed to add " + type.Name, ex);
+                            }
+
+                        }
+                    }
+                }
+                catch
+                {
                 }
             }
 
@@ -90,64 +96,75 @@ namespace dexih.api.Controllers
 
             foreach (var type in typeLookup.Values.OrderBy(c => c.Name))
             {
-                if (!type.IsEnum)
+                try
                 {
-                    object typeInstance;
-                    var generic = "";
-                    var genericTypes = new List<string>();
-                    Type genericType = null;
-                    string typeName = null;
-                    if(type.ContainsGenericParameters)
+                    if (!type.IsEnum)
                     {
-                        genericTypes.AddRange(type.GetGenericArguments().Select(c => c.Name));
-                        generic = "<" + string.Join(",", genericTypes) + ">";
-
-                        var genericArgs = type.GetGenericArguments().Select(c => typeof(object)).ToArray();
-                        genericType = type.MakeGenericType(genericArgs);
-                        typeInstance = Activator.CreateInstance(genericType);
-                        typeName = type.GetGenericTypeDefinition().Name;
-                        typeName = typeName.Substring(0, typeName.IndexOf('`'));
-                    } else
-                    {
-                        // create instance to get defaults
-                        typeInstance = Activator.CreateInstance(type);
-                        typeName = type.Name;
-                    }
-
-                    js.AppendLine($"export class {typeName}{generic}{{");
-                    foreach (var property in type.GetProperties())
-                    {
-                        var propAttribute = property.GetCustomAttribute<MessagePack.KeyAttribute>();
-                        var propAttribute2 = property.GetCustomAttribute<DataMemberAttribute>();
-                        if (propAttribute != null || propAttribute2 != null)
+                        object typeInstance;
+                        var generic = "";
+                        var genericTypes = new List<string>();
+                        Type genericType = null;
+                        string typeName = null;
+                        if (type.ContainsGenericParameters)
                         {
-                            var propertyType = property.PropertyType;
-                            object value;
-                            if (genericType != null)
+                            genericTypes.AddRange(type.GetGenericArguments().Select(c => c.Name));
+                            generic = "<" + string.Join(",", genericTypes) + ">";
+
+                            var genericArgs = type.GetGenericArguments().Select(c => typeof(object)).ToArray();
+                            genericType = type.MakeGenericType(genericArgs);
+                            typeInstance = Activator.CreateInstance(genericType);
+                            typeName = type.GetGenericTypeDefinition().Name;
+                            typeName = typeName.Substring(0, typeName.IndexOf('`'));
+                        }
+                        else
+                        {
+                            // create instance to get defaults
+                            typeInstance = Activator.CreateInstance(type);
+                            typeName = type.Name;
+                        }
+
+                        js.AppendLine($"export class {typeName}{generic}{{");
+                        foreach (var property in type.GetProperties())
+                        {
+                            var propAttribute = property.GetCustomAttribute<MessagePack.KeyAttribute>();
+                            var propAttribute2 = property.GetCustomAttribute<DataMemberAttribute>();
+                            if (propAttribute != null || propAttribute2 != null)
                             {
-                                if (propertyType.IsGenericParameter)
+                                var propertyType = property.PropertyType;
+                                object value;
+                                if (genericType != null)
                                 {
-                                    value = null;
+                                    if (propertyType.IsGenericParameter)
+                                    {
+                                        value = null;
+                                    }
+                                    else
+                                    {
+                                        var genericProperty = genericType.GetProperties()
+                                            .Single(c => c.Name == property.Name);
+                                        value = genericProperty.GetValue(typeInstance);
+                                    }
+
                                 }
                                 else
                                 {
-                                    var genericProperty = genericType.GetProperties().Single(c => c.Name == property.Name);
-                                    value = genericProperty.GetValue(typeInstance);
+                                    value = propertyType.IsGenericParameter ? null : property.GetValue(typeInstance);
                                 }
 
-                            }
-                            else
-                            {
-                                value = propertyType.IsGenericParameter ? null : property.GetValue(typeInstance);
-                            }
+                                var propertyDetails = getPropertyDetails(property.PropertyType, value, genericType,
+                                    typeLookup, enums);
 
-                            var propertyDetails = getPropertyDetails(property.PropertyType, value, genericType, typeLookup, enums);
-
-                            js.AppendLine($"\tpublic {LowerFirst(property.Name)}: {propertyDetails.type} = {propertyDetails.defaultValue};");
+                                js.AppendLine(
+                                    $"  public {LowerFirst(property.Name)}: {propertyDetails.type} = {propertyDetails.defaultValue};");
+                            }
                         }
+
+                        js.AppendLine("}");
+                        js.AppendLine();
                     }
-                    js.AppendLine("}");
-                    js.AppendLine();
+                }
+                catch
+                {
                 }
             }
 
@@ -199,7 +216,7 @@ namespace dexih.api.Controllers
             
             if (propertyType.GetInterface(nameof(System.Collections.IEnumerable)) != null
                 && propertyType != typeof(Object)
-                && propertyType != typeof(JToken)
+                && propertyType != typeof(JsonDocument)
                 && propertyType != typeof(string)
                 )
             {
@@ -313,11 +330,15 @@ namespace dexih.api.Controllers
                         if (value != null)
                         {
                             var stringValue = value.ToString();
-                            if (stringValue.Contains("\""))
+                            if (stringValue.Contains("'"))
                             {
-                                stringValue = stringValue.Replace("\"", "\\\"");
+                                stringValue = stringValue.Replace("'", "\'");
                             }
-                            defaultValue = $"\"{stringValue}\"";
+                            if (stringValue.Contains("\n"))
+                            {
+                                stringValue = stringValue.Replace("\n", "\\n");
+                            }
+                            defaultValue = $"'{stringValue}'";
                         }
 
                         break;

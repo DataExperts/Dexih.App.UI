@@ -7,6 +7,7 @@ import { Location } from '@angular/common';
 import { FormsService } from '../../shared/forms/forms.service';
 import { User, UserLoginInfo } from '../../+auth/auth.models';
 import { DexihMessageComponent } from '../../shared/ui/dexihMessage';
+import { eLoginProvider } from '../../shared/shared.models';
 
 @Component({
   selector: 'manage-form',
@@ -128,7 +129,7 @@ export class ManageComponent implements OnInit, OnDestroy {
       }
 
       this.authService.googleSignIn(clientId, forceLogin).then(result => {
-          this.authService.addExternalLogin('google', result.providerKey, result.authenticationToken).then(
+          this.authService.addExternalLogin(eLoginProvider.Google, result.providerKey, result.authenticationToken).then(
             loginResult => {
               this.updateLogins();
             }).catch(
@@ -155,7 +156,7 @@ export class ManageComponent implements OnInit, OnDestroy {
       }
 
       this.authService.microsoftSignIn(clientId, forceLogin).then(result => {
-          this.authService.addExternalLogin('microsoft', result.providerKey, result.authenticationToken).then(
+          this.authService.addExternalLogin(eLoginProvider.Microsoft, result.providerKey, result.authenticationToken).then(
             loginResult => {
               this.updateLogins();
             }).catch(

@@ -4,7 +4,7 @@ import { HubService } from '../../hub.service';
 import { Observable, BehaviorSubject, Subscription} from 'rxjs';
 import { importActions, HubCache, sharedObjectProperties } from '../../hub.models';
 import { HubFormsService } from '../../hub.forms.service';
-import { Import, eImportAction, ImportAction } from '../../../shared/shared.models';
+import { Import, eImportAction, ImportAction, eSharedObjectType } from '../../../shared/shared.models';
 
 @Component({
     selector: 'import',
@@ -31,11 +31,12 @@ export class ImportComponent implements OnInit, OnDestroy {
 
     public import: Import;
     public importOptions: ImportAction[];
+    eSharedObjectType = eSharedObjectType;
 
     columns = [
         { name: 'objectType', title: 'Type', format: '' },
         { name: 'name', title: 'Name', format: '' },
-        { name: 'importAction', title: 'Action', format: '' },
+        { name: 'importAction', title: 'Action', format: 'Enum', enum: eImportAction },
     ];
 
     private _tableData = new BehaviorSubject<Array<any>>(null);
@@ -77,12 +78,8 @@ export class ImportComponent implements OnInit, OnDestroy {
         }
 
         this.authService.postForm('/api/Hub/ImportPlan', form).then(result => {
-            if (result.success) {
-                this.import = result.value;
-                this.refreshImport();
-            } else {
-                this.hubService.addHubMessage(result);
-            }
+            this.import = result;
+            this.refreshImport();
         }).catch(reason => {
             if (reason) {
                 this.hubService.addHubMessage(reason);

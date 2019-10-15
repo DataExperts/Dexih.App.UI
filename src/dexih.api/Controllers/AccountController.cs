@@ -22,11 +22,10 @@ using System.Threading;
 using System.Web;
 using dexih.api.Services.Message;
 using dexih.api.Services.Operations;
+using dexih.functions;
 using Dexih.Utils.ManagedTasks;
-using MessagePack;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace dexih.api.Controllers
@@ -44,7 +43,7 @@ namespace dexih.api.Controllers
         private readonly IRemoteAgents _remoteAgents;
 	    private readonly IAntiforgery _antiforgery;
 	    private readonly IUserClaimsPrincipalFactory<ApplicationUser> _principalFactory;
-        private readonly IMemoryCache _cache;
+        private readonly ICacheService _cache;
         private readonly ErrorLogger _errorLogger;
 
         public AccountController(
@@ -55,7 +54,7 @@ namespace dexih.api.Controllers
             IDexihOperations operations,
             IRemoteAgents remoteAgents,
             IUserClaimsPrincipalFactory<ApplicationUser> principalFactory,
-            IMemoryCache cache,
+            ICacheService cache,
             ErrorLogger errorLogger
             )
         {
@@ -89,82 +88,73 @@ namespace dexih.api.Controllers
         [AllowAnonymous]
         public async Task<ReturnUser> Login([FromBody] LoginModel login, CancellationToken cancellationToken)
         {
-            if (ModelState.IsValid)
+            var user = await _operations.RepositoryManager.GetUserFromEmail(login.Email, cancellationToken);
+
+            if (user == null)
             {
-	            var user = await _operations.RepositoryManager.GetUserFromEmail(login.Email, cancellationToken);
-
-                if (user == null)
-                {
-                    throw new AccountControllerException("Login failed, check username and password.");
-                }
-                else
-                {
-                    // This doesn't count login failures towards account lockout
-                    // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                    var result = await _signInManager.PasswordSignInAsync(user, login.Password, login.RememberMe, lockoutOnFailure: true);
-                    if (result.Succeeded)
-                    {
-	                    // Must manually set the HttpContext user claims to those of the logged
-	                    // in user. Otherwise MVC will still include a XSRF token for the "null"
-	                    // user and token validation will fail. (MVC appends the correct token for
-	                    // all subsequent responses but this isn't good enough for a single page
-	                    // app.)
-	                    var principal = await _principalFactory.CreateAsync(user);
-	                    HttpContext.User = principal;
-
-	                    // Update the anti-forgery token following the authentication.
-	                    var tokens = _antiforgery.GetAndStoreTokens(HttpContext);
-	                    Response.Cookies.Delete("XSRF-TOKEN");
-	                    Response.Cookies.Append("XSRF-TOKEN", tokens.RequestToken, new CookieOptions() {HttpOnly = false});
-
-	                    return new ReturnUser(user);
-                    }
-                    //if (result.RequiresTwoFactor)
-                    //{
-                    //    return RedirectToAction(nameof(SendCode), new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                    //}
-                    if (result.IsLockedOut)
-                    {
-                        throw new AccountControllerException("The account is locked out.");
-                    }
-					if(_signInManager.IsNotEnabled)
-					{
-                        throw new AccountControllerException("The account has been disabled.");
-					}
-	                if (_signInManager.IsNotRegistered)
-	                {
-		                throw new AccountControllerException("The account has not completed registration.");
-	                }
-					if (_signInManager.IsNotInvited)
-					{
-                        throw new AccountControllerException("The account has not been invited to use platform.");
-					}
-				}
+                throw new AccountControllerException("Login failed, check username and password.");
             }
             else
             {
-                var message = string.Join("; ", ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage));
-                throw new AccountControllerException("Invalid login attempt: " + message);
-            }
+                // This doesn't count login failures towards account lockout
+                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+                var result = await _signInManager.PasswordSignInAsync(user, login.Password, login.RememberMe, lockoutOnFailure: true);
+                if (result.Succeeded)
+                {
+                    // Must manually set the HttpContext user claims to those of the logged
+                    // in user. Otherwise MVC will still include a XSRF token for the "null"
+                    // user and token validation will fail. (MVC appends the correct token for
+                    // all subsequent responses but this isn't good enough for a single page
+                    // app.)
+                    var principal = await _principalFactory.CreateAsync(user);
+                    HttpContext.User = principal;
 
-            // If we got this far, something failed in the model.
-            throw new AccountControllerException("Login failed.");
+                    // Update the anti-forgery token following the authentication.
+                    var tokens = _antiforgery.GetAndStoreTokens(HttpContext);
+                    Response.Cookies.Delete("XSRF-TOKEN");
+                    Response.Cookies.Append("XSRF-TOKEN", tokens.RequestToken, new CookieOptions() {HttpOnly = false});
+
+                    return new ReturnUser(user);
+                }
+                //if (result.RequiresTwoFactor)
+                //{
+                //    return RedirectToAction(nameof(SendCode), new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                //}
+                if (result.IsLockedOut)
+                {
+                    throw new AccountControllerException("The account is locked out.");
+                }
+				if(_signInManager.IsNotEnabled)
+				{
+                    throw new AccountControllerException("The account has been disabled.");
+				}
+                if (_signInManager.IsNotRegistered)
+                {
+	                throw new AccountControllerException("The account has not completed registration.");
+                }
+				if (_signInManager.IsNotInvited)
+				{
+                    throw new AccountControllerException("The account has not been invited to use platform.");
+				}
+			}
+
+            throw new AccountControllerException("Unkonwn error logging in.");
         }
 
-	    private async  Task<ExternalLoginResult> GetExternalLogin(RepositoryManager.ELoginProvider provider, string authenticationToken)
+	    private async  Task<ExternalLoginResult> GetExternalLogin(ELoginProvider provider, string authenticationToken)
 	    {
 		    ExternalLoginResult externalLoginResult;
 		    
 		    switch (provider)
 		    {
-			    case RepositoryManager.ELoginProvider.Dexih:
+			    case ELoginProvider.Dexih:
 				    externalLoginResult = null;
 				    break;
 
-			    case RepositoryManager.ELoginProvider.Google:
+			    case ELoginProvider.Google:
 				    externalLoginResult = await GoogleTokenVerification(authenticationToken);
 				    break;
-			    case RepositoryManager.ELoginProvider.Microsoft:
+			    case ELoginProvider.Microsoft:
 				    externalLoginResult = await MicrosoftTokenVerification(authenticationToken);
 				    break;
 			    default:
@@ -254,7 +244,7 @@ namespace dexih.api.Controllers
             {
 	            var externalLoginResult = await GetExternalLogin(register.Provider, register.AuthenticationToken);
 
-	            if (register.Provider != RepositoryManager.ELoginProvider.Dexih)
+	            if (register.Provider != ELoginProvider.Dexih)
 	            {
 		            register.Password = "";
 
@@ -292,7 +282,7 @@ namespace dexih.api.Controllers
 					try
 					{
 
-						if (register.Provider == RepositoryManager.ELoginProvider.Dexih)
+						if (register.Provider == ELoginProvider.Dexih)
 						{
 							await _operations.RepositoryManager.CreateUserAsync(user, register.Password, cancellationToken);
 						}
@@ -304,7 +294,7 @@ namespace dexih.api.Controllers
 							await _operations.RepositoryManager.CreateUserAsync(user, null, cancellationToken);
 						}
 
-						if (register.Provider != RepositoryManager.ELoginProvider.Dexih)
+						if (register.Provider != ELoginProvider.Dexih)
 						{
 							await _operations.RepositoryManager.AddLoginAsync(user, register.Provider, externalLoginResult.ProviderKey, cancellationToken);
 							await _signInManager.SignInAsync(user, false);
@@ -352,7 +342,7 @@ namespace dexih.api.Controllers
 						existingUser.Subscription = register.Subscription;
 						existingUser.IsRegistered = true;
 
-						if (register.Provider != RepositoryManager.ELoginProvider.Dexih)
+						if (register.Provider != ELoginProvider.Dexih)
 						{
 							await _operations.RepositoryManager.AddLoginAsync(existingUser, register.Provider, externalLoginResult.ProviderKey, cancellationToken);
 							await _signInManager.SignInAsync(existingUser, false);
@@ -372,7 +362,7 @@ namespace dexih.api.Controllers
 							}
 						}
 
-						if (register.Provider == RepositoryManager.ELoginProvider.Dexih)
+						if (register.Provider == ELoginProvider.Dexih)
 						{
 							await _operations.RepositoryManager.AddPasswordAsync(existingUser, register.Password, cancellationToken);
 						}
@@ -544,7 +534,8 @@ namespace dexih.api.Controllers
 		    GoogleAuthModel googleAuthModel;
 		    try
 		    {
-			    googleAuthModel = JsonConvert.DeserializeObject<GoogleAuthModel>(await apiResult.Content.ReadAsStringAsync());
+			    var response = await apiResult.Content.ReadAsStringAsync();
+			    googleAuthModel = response.Deserialize<GoogleAuthModel>();
 
 		    }
 		    catch (Exception ex)
@@ -557,7 +548,7 @@ namespace dexih.api.Controllers
 			    throw new AccountControllerException($"The google authentication returned the error {googleAuthModel.error_description}.");
 		    }
 
-		    if (googleAuthModel.email_verified != null && !googleAuthModel.email_verified.Value)
+		    if (string.IsNullOrEmpty(googleAuthModel.email_verified) || googleAuthModel.email_verified != "true")
 		    {
 			    throw new AccountControllerException("The google account used as not had email verification.");
 		    }
@@ -573,7 +564,7 @@ namespace dexih.api.Controllers
 			    FirstName =  googleAuthModel.given_name,
 			    LastName = googleAuthModel.family_name,
 			    ProviderKey = googleAuthModel.aud,
-			    Provider = RepositoryManager.ELoginProvider.Google
+			    Provider = ELoginProvider.Google
 		    };
 
 		    return result;
@@ -592,7 +583,7 @@ namespace dexih.api.Controllers
 		    MicrosoftAuthModel microsoftAuthModel;
 		    try
 		    {
-			    microsoftAuthModel = JsonConvert.DeserializeObject<MicrosoftAuthModel>(await apiResult.Content.ReadAsStringAsync());
+			    microsoftAuthModel = (await apiResult.Content.ReadAsStringAsync()).Deserialize<MicrosoftAuthModel>();
 
 		    }
 		    catch (Exception ex)
@@ -611,7 +602,7 @@ namespace dexih.api.Controllers
 			    FirstName =  microsoftAuthModel.givenName,
 			    LastName = microsoftAuthModel.surname,
 			    ProviderKey = microsoftAuthModel.id,
-			    Provider = RepositoryManager.ELoginProvider.Microsoft
+			    Provider = ELoginProvider.Microsoft
 		    };
 
 		    return result;
@@ -910,19 +901,8 @@ namespace dexih.api.Controllers
             var key = EncryptString.GenerateRandomKey();
             return key;
         }
-
-
-//	    public class RemoteAgentLogin
-//	    {
-//		    public string RemoteAgentId { get; set; }
-//		    public string AuthorizedHubs { get; set; }
-//		    public DateTime? LastLoginDateTime { get; set; }
-//		    public string Name { get; set; }
-//		    public IEnumerable<DexihRemoteAgentHub> AuthorizedRemoteAgents { get; set; }
-//	    }
-
-	    
-	    // POST: /Account/GetUserRemoteAgents
+        
+        // POST: /Account/GetUserRemoteAgents
 	    [HttpPost("[action]")]
 	    [ValidateAntiForgeryToken]
 	    public async Task<IEnumerable<DexihRemoteAgent>> GetUserRemoteAgents(CancellationToken cancellationToken)
@@ -1098,28 +1078,25 @@ namespace dexih.api.Controllers
         [HttpGet("[action]")]
         [AllowAnonymous]
         // [ResponseCache(Duration = 3600)]
-        public CacheManager GetGlobalCache()
+        public Task<CacheManager> GetGlobalCache()
         {
             try
             {
-                return _cache.GetOrCreate($"GLOBAL_CACHE", entry =>
+	            return _cache.MemoryCache.GetOrCreateAsync<CacheManager>($"GLOBAL_CACHE", entry =>
                 {
                     _logger.LogInformation("Loading global cache.");
 
                     var version = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
                     var buildDate = System.IO.File.GetLastWriteTime(Assembly.GetExecutingAssembly().Location);
-
-
+                    
                     var cache = new CacheManager(0, "");
                     var repositoryManager = _operations.RepositoryManager;
-                    var returnValue = cache.LoadGlobal(version, buildDate, repositoryManager.DbContext);
+                    cache.LoadGlobal(version, buildDate);
                     cache.GoogleClientId = _operations.Config.GoogleClientId;
                     cache.MicrosoftClientId = _operations.Config.MicrosoftClientId;
                     cache.GoogleMapsAPIKey = _operations.Config.GoogleMapsAPIKey;
-                    // var bytes = MessagePackSerializer.Serialize(cache);
-                    // return File(bytes, "application/octet-stream", "globalCache");
 
-                    return cache;
+                    return Task.FromResult(cache);
                 });
             }
             catch (Exception ex)

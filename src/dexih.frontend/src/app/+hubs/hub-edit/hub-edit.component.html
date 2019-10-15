@@ -33,7 +33,7 @@
 				</section>
 
 				<section>
-					<form-select label="Shared Data Access" formControlName="sharedAccess" [items]="sharedAccess" itemKey="key" itemName="name"
+					<form-select label="Shared Data Access" formControlName="sharedAccess" [items]="SharedAccessItems" itemKey="key" itemName="description"
 						iconClass="fa fa-lock" [errors]="formErrors.sharedAccess"  note='The level of access required for users to access shared data in this hub.' [enableFilter]="false">
 					</form-select>
 				</section>

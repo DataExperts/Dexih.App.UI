@@ -12,7 +12,7 @@ using dexih.remote.operations;
 using dexih.transforms;
 using Dexih.Utils.DataType;
 using static dexih.operations.DownloadData;
-using Newtonsoft.Json.Linq;
+
 
 namespace dexih.api.Services.Remote
 {
@@ -25,7 +25,8 @@ namespace dexih.api.Services.Remote
 //
 	    Task<string> Run<In>(HubValue<In> hubValue, string method, RepositoryManager repositoryManager,
 		    CancellationToken cancellationToken = default);
-	    Task<string> SendRemoteCommand(long hubKey, string instanceId, string method, object value,
+	    
+	    Task<string> SendRemoteCommand(string instanceId, long hubKey, string responseUrl, string method, object value,
 		    RepositoryManager repositoryManager, CancellationToken cancellationToken = default);
 
 	    Task<(string instanceId, string securityToken)> AuthorizeRemoteAgent(string name, long remoteAgentKey,
@@ -38,67 +39,67 @@ namespace dexih.api.Services.Remote
 	    
 	    Task ConnectRemoteAgent(string connectionId, DexihActiveAgent activeAgent, IDexihOperations operations, CancellationToken cancellationToken);
 	    Task DisconnectRemoteAgent(string instanceId, IDexihOperations operations, CancellationToken cancellationToken);
-	    Task<string> Encrypt(string instanceId, long hubKey, string value, RepositoryManager database, CancellationToken cancellationToken);
-		Task<string> Decrypt(string instanceId, long hubKey, string value, RepositoryManager database, CancellationToken cancellationToken);
+	    Task<string> Encrypt(string instanceId, long hubKey, string responseUrl, string value, RepositoryManager database, CancellationToken cancellationToken);
+		Task<string> Decrypt(string instanceId, long hubKey, string responseUrl, string value, RepositoryManager database, CancellationToken cancellationToken);
 
-		Task<string> UploadFile(string id, long hubKey, long tableKey, EFlatFilePath path, string fileName,
-			DownloadUrl downloadUrl, RepositoryManager database, CancellationToken cancellationToken);
+		Task<string> UploadFile(string instanceId, long hubKey, string responseUrl, long tableKey, EFlatFilePath path, string fileName,
+			RepositoryManager database, CancellationToken cancellationToken);
 
-	    Task<string> BulkUploadFiles(string id, long hubKey, string connectionId, long connectionKey, long fileFormatKey, DataType.ETypeCode formatType, string fileName,
-		    DownloadUrl downloadUrl, RepositoryManager database, CancellationToken cancellationToken);
+	    Task<string> BulkUploadFiles(string instanceId, long hubKey, string responseUrl, string connectionId, long connectionKey, long fileFormatKey, DataType.ETypeCode formatType, string fileName,
+		    RepositoryManager database, CancellationToken cancellationToken);
 
-	    Task<string> ImportTables(string instanceId, long hubKey, DexihTable[] hubTables,
+	    Task<string> ImportTables(string instanceId, long hubKey, string responseUrl, DexihTable[] hubTables,
 		    RepositoryManager repositoryManager, CancellationToken cancellationToken);
 
-	    Task<string> CreateTables(string instanceId, long hubKey, DexihTable[] tables, bool dropTables,
+	    Task<string> CreateTables(string instanceId, long hubKey, string responseUrl, DexihTable[] tables, bool dropTables,
 		    RepositoryManager repositoryManager, CancellationToken cancellationToken);
 
-	    Task<string> ClearTables(string instanceId, long hubKey, DexihTable[] tables,
+	    Task<string> ClearTables(string instanceId, long hubKey, string responseUrl, DexihTable[] tables,
 		    RepositoryManager repositoryManager, CancellationToken cancellationToken);
-	    Task<string> PreviewTable(string instanceId, long hubKey, long tableKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, DownloadUrl downloadUrl, RepositoryManager database, CancellationToken cancellationToken);
-	    Task<string> PreviewTable(string instanceId, long hubKey, DexihTable hubTable, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, DownloadUrl downloadUrl, RepositoryManager database, CancellationToken cancellationToken);
-	    Task<string> PreviewDatalink(string instanceId, long hubKey, long datalinkKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters parameters, DownloadUrl downloadUrl, RepositoryManager database, CancellationToken cancellationToken);
+	    Task<string> PreviewTable(string instanceId, long hubKey, string responseUrl, long tableKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, RepositoryManager database, CancellationToken cancellationToken);
+	    Task<string> PreviewTable(string instanceId, long hubKey, string responseUrl, DexihTable hubTable, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, RepositoryManager database, CancellationToken cancellationToken);
+	    Task<string> PreviewDatalink(string instanceId, long hubKey, string responseUrl, long datalinkKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters parameters, RepositoryManager database, CancellationToken cancellationToken);
 	    Task<string> PreviewAuditResults(AuditResults auditResults, RepositoryManager database, CancellationToken cancellationToken);
 
-	    Task<string> DatalinkProperties(string id, long hubKey, long datalinkKey, SelectQuery selectQuery,
+	    Task<string> DatalinkProperties(string instanceId, long hubKey, string responseUrl, long datalinkKey, SelectQuery selectQuery,
 		    InputColumn[] inputColumns, InputParameters parameters, RepositoryManager database, CancellationToken cancellationToken);
 
-	    Task<string> CallApi(string id, string apiKey, string action, string parameters, string ipAddress, CancellationToken cancellationToken);
+	    Task<string> CallApi(string id, string apiKey, string action, string parameters, string ipAddress, RepositoryManager database, CancellationToken cancellationToken);
 
-	    Task<string> PreviewTransform(string instanceId, long hubKey, DexihDatalink hubDatalink, long datalinkTransformKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters parameters, DownloadUrl downloadUrl, RepositoryManager database, CancellationToken cancellationToken);
-	    Task<string> ImportFunctionMappings(string instanceId, long hubKey, DexihDatalink hubDatalink, long datalinkTransformKey, DexihDatalinkTransformItem datalinkTransformItem, RepositoryManager database, CancellationToken cancellationToken);
+	    Task<string> PreviewTransform(string instanceId, long hubKey, string responseUrl, DexihDatalink hubDatalink, long datalinkTransformKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters parameters, RepositoryManager database, CancellationToken cancellationToken);
+	    Task<string> ImportFunctionMappings(string instanceId, long hubKey, string responseUrl, DexihDatalink hubDatalink, long datalinkTransformKey, DexihDatalinkTransformItem datalinkTransformItem, RepositoryManager database, CancellationToken cancellationToken);
         
-	    Task<string> DownloadFiles(string instanceId, long hubKey, string connectionId, long tableKey, EFlatFilePath path, string[] files, DownloadUrl downloadUrl, RepositoryManager database, CancellationToken cancellationToken);
-        Task<string> DownloadData(string instanceId, long hubKey, string connectionId, DownloadData.DownloadObject[] downloadObjects, EDownloadFormat downloadFormat, bool zipFiles, DownloadUrl downloadUrl, RepositoryManager database, CancellationToken cancellationToken);
+	    Task<string> DownloadFiles(string instanceId, long hubKey, string responseUrl, string connectionId, long tableKey, EFlatFilePath path, string[] files, RepositoryManager database, CancellationToken cancellationToken);
+        Task<string> DownloadData(string instanceId, long hubKey, string responseUrl, string connectionId, DownloadData.DownloadObject[] downloadObjects, EDownloadFormat downloadFormat, bool zipFiles, RepositoryManager database, CancellationToken cancellationToken);
 
-	    Task<string> DownloadTableData(string id, long hubKey, string connectionId, DexihTable hubTable, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData,EDownloadFormat downloadFormat, bool zipFiles, DownloadUrl downloadUrl, RepositoryManager database, CancellationToken cancellationToken);
-	    Task<string> DownloadDatalinkData(string id, long hubKey, string connectionId, DexihDatalink table, long datalinkTransformKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters parameters, EDownloadFormat downloadFormat, bool zipFiles, DownloadUrl downloadUrl, RepositoryManager database, CancellationToken cancellationToken);
+	    Task<string> DownloadTableData(string instanceId, long hubKey, string responseUrl, string connectionId, DexihTable hubTable, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData,EDownloadFormat downloadFormat, bool zipFiles, RepositoryManager database, CancellationToken cancellationToken);
+	    Task<string> DownloadDatalinkData(string instanceId, long hubKey, string responseUrl, string connectionId, DexihDatalink table, long datalinkTransformKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters parameters, EDownloadFormat downloadFormat, bool zipFiles, RepositoryManager database, CancellationToken cancellationToken);
 	    
-	    Task<string> RunDatalinks(string instanceId, long hubKey, string connectionId, long[] datalinkKeys, bool truncateTarget,
+	    Task<string> RunDatalinks(string instanceId, long hubKey, string responseUrl, string connectionId, long[] datalinkKeys, bool truncateTarget,
 		    bool resetIncremental, string resetIncrementalValue, InputColumn[] inputColumns, InputParameters parameters, RepositoryManager database, CancellationToken cancellationToken);
 
-	    Task<string> RunDatalinkTests(string id, long hubKey, string connectionId, long[] datalinkTestKeys,
+	    Task<string> RunDatalinkTests(string instanceId, long hubKey, string responseUrl, string connectionId, long[] datalinkTestKeys,
 		    RepositoryManager database, CancellationToken cancellationToken);
 
-	    Task<string> RunDatalinkTestSnapshot(string id, long hubKey, string connectionId, long[] datalinkTestKeys,
+	    Task<string> RunDatalinkTestSnapshot(string instanceId, long hubKey, string responseUrl, string connectionId, long[] datalinkTestKeys,
 		    RepositoryManager database, CancellationToken cancellationToken);
 	    
-        Task<string> CancelDatalinks(string instanceId, long hubKey, long[] datalinkKeys, RepositoryManager database, CancellationToken cancellationToken);
-	    Task<string> CancelDatalinkTests(string instanceId, long hubKey, long[] datalinkTestKeys, RepositoryManager database, CancellationToken cancellationToken);
+        Task<string> CancelDatalinks(string instanceId, long hubKey, string responseUrl, long[] datalinkKeys, RepositoryManager database, CancellationToken cancellationToken);
+	    Task<string> CancelDatalinkTests(string instanceId, long hubKey, string responseUrl, long[] datalinkTestKeys, RepositoryManager database, CancellationToken cancellationToken);
 
-        Task<string> RunDatajobs(string instanceId, long hubKey, string connectionId, long[] datajobKeys, bool truncateTarget,
+        Task<string> RunDatajobs(string instanceId, long hubKey, string responseUrl, string connectionId, long[] datajobKeys, bool truncateTarget,
 		    bool resetIncremental, string resetIncrementalValue, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken);
         
 		Task CancelTasks(ManagedTask[] tasks, RepositoryManager database, CancellationToken cancellationToken);
-		Task<string> ActivateDatajobs(string instanceId, long hubKey, string connectionId, long[] datajobKeys, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken);
-	    Task<string> DeactivateDatajobs(string instanceId, long hubKey, long[] datajobKeys, RepositoryManager database, CancellationToken cancellationToken);
-	    Task<string> ActivateApis(string instanceId, long hubKey, string connectionId, long[] apiKeys, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken);
-	    Task<string> DeactivateApis(string instanceId, long hubKey, long[] apiKeys, RepositoryManager database, CancellationToken cancellationToken);
+		Task<string> ActivateDatajobs(string instanceId, long hubKey, string responseUrl, string connectionId, long[] datajobKeys, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken);
+	    Task<string> DeactivateDatajobs(string instanceId, long hubKey, string responseUrl, long[] datajobKeys, RepositoryManager database, CancellationToken cancellationToken);
+	    Task<string> ActivateApis(string instanceId, long hubKey, string responseUrl, string connectionId, long[] apiKeys, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken);
+	    Task<string> DeactivateApis(string instanceId, long hubKey, string responseUrl, long[] apiKeys, RepositoryManager database, CancellationToken cancellationToken);
 	    
 	    Task RestartAgents(string userId, IEnumerable<string> instanceIds, bool force, RepositoryManager database, CancellationToken cancellationToken);
 	    Task RestartAgents(string userId, IEnumerable<long> remoteAgentKeys, bool force, RepositoryManager database, CancellationToken cancellationToken);
 	    Task<DexihRemoteAgent[]> PingAgents(ApplicationUser user, string connectionId, RepositoryManager repositoryManager, CancellationToken cancellationToken);
-	    Task<NamingStandards> NamingStandards(string instanceId, long hubKey, RepositoryManager repositoryManager, CancellationToken cancellationToken);
+	    Task<NamingStandards> NamingStandards(string instanceId, CancellationToken cancellationToken);
 
     }
 }

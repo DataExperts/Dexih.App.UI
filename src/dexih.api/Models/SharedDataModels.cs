@@ -18,27 +18,21 @@ namespace dexih.api.Models
         public long HubKey { get; set; }
     }
 
-    public class PreviewData
+    public class PreviewData : HubModelBase
     {
-        public long HubKey { get; set; }
         public long ObjectKey { get; set; }
         public EDataObjectType ObjectType { get; set; }
         public SelectQuery SelectQuery { get; set; }
-        public string RemoteAgentId { get; set; }
-        public string ClientConnectionId { get; set; }
-        public DownloadUrl DownloadUrl { get; set; }
         public InputColumn[] InputColumns { get; set; }
         public InputParameters Parameters { get; set; }
     }
     
-    public class DownloadSharedData
+    public class DownloadSharedData : HubModelBase
     {
         public string ClientId { get; set; }
         public DownloadData.EDownloadFormat DownloadFormat { get; set; }
         public bool ZipFiles { get; set; }
         public SharedData[] SharedItems { get; set; }
-        public string RemoteAgentId { get; set; }
-        public DownloadUrl DownloadUrl { get; set; }
     }
             
 }

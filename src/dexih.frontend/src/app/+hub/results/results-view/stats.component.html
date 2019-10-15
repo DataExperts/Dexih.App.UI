@@ -28,7 +28,7 @@
                             <div class="w-100"></div>
                     </ng-template>                    
                     <div class="col border border-white">Run Status</div>
-                    <div class="col border border-white">{{auditResult.runStatus}}</div>
+                    <div class="col border border-white">{{eRunStatus[auditResult.runStatus]}}</div>
                     <div class="w-100"></div>                    
                     <div class="col border border-white">Start Date</div>
                     <div class="col border border-white">{{auditResult.initializeTime | date : 'short'}}</div>
@@ -52,7 +52,7 @@
                     <div class="col border border-white">{{runTime | number: '1.2-2'}} seconds</div>
                     <div class="w-100"></div>
                     <div class="col border border-white">Triggered By</div>
-                    <div class="col border border-white">{{auditResult.triggerMethod}}</div>
+                    <div class="col border border-white">{{eTriggerMethod[auditResult.triggerMethod]}}</div>
                 </div>
             </div>
     </li>

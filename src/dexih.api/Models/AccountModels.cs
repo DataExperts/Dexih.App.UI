@@ -1,80 +1,88 @@
 ﻿using System.Collections.Generic;
 using dexih.operations;
 using dexih.repository;
+using MessagePack;
 
 namespace dexih.api.Models
 {
 
-    
+    [MessagePackObject]
     public class LoginModel { 
-        public string Email; 
-        public string Password; 
-        public bool RememberMe; 
-    };
+        public string Email { get; set; }
+        public string Password { get; set; } 
+        public bool RememberMe { get; set; }
+    }
 
     public class EmailModel { 
-        public string Email;
+        public string Email{get; set; }
     }
 
+    [MessagePackObject]
     public class RegisterModel
     {
-        public RepositoryManager.ELoginProvider Provider;
-        public string Email;
-		public string Code;
-        public string Password;
-        public string Firstname;
-        public string Lastname;
-        public bool Subscription;
-        public bool Terms;
+        [Key(0)]
+        public ELoginProvider Provider { get; set; } = ELoginProvider.Dexih;
+
+        [Key(1)]
+        public string Email{get; set; }
+		
+        [Key(2)]
+        public string Code{get; set; }
         
-        public string AuthenticationToken { get; set; }
+        [Key(3)]
+        public string Password{get; set; }
+        
+        [Key(4)]
+        public string Firstname{get; set; }
+        
+        [Key(5)]
+        public string Lastname{get; set; }
+        
+        [Key(6)]
+        public bool Subscription{get; set; }
+        
+        [Key(7)]
+        public bool Terms{get; set; }
+        
+        [Key(8)]
+        public string AuthenticationToken {get; set; }
 
-    };
-
-    public class ExternalRegisterModel
-    {
-        public string Firstname;
-        public string Lastname;
-        public bool Subscription;
-        public bool Terms;
-
-        public RepositoryManager.ELoginProvider Provider;
-        public string ProviderKey;
-        public string AuthenticationToken;
     }
 
+
+
     public class ConfirmEmailModel {
-        public string Email;
-        public string Code;
-        public string Url;
+        public string Email{get; set; }
+        public string Code{get; set; }
+        public string Url{get; set; }
     }
 
     public class ResetPasswordModel {
-        public string Email;
-        public string Code;
-        public string Url;
-        public string Password;
+        public string Email{get; set; }
+        public string Code{get; set; }
+        public string Url{get; set; }
+        public string Password{get; set; }
     }
 
     public class ChangePasswordModel {
-        public string Password;
-        public string NewPassword;
+        public string Password{get; set; }
+        public string NewPassword{get; set; }
     }
     
 	public class UpdateDetails {
-		public string FirstName;
-		public string LastName;
-		public bool Subscription;
+		public string FirstName{get; set; }
+		public string LastName{get; set; }
+		public bool Subscription{get; set; }
 	}
 
     public class ExternalLoginModel {
-        public RepositoryManager.ELoginProvider Provider;
-        public string ProviderKey;
-        public string AuthenticationToken;
+        public ELoginProvider Provider{get; set; }
+        public string ProviderKey{get; set; }
+        public string AuthenticationToken{get; set; }
     }
 
     public class ExternalLoginResult {
-        public RepositoryManager.ELoginProvider Provider {get; set;}
+        public ELoginProvider Provider {get; set;}
         public string ProviderKey { get; set; }
         public string Email {get; set; }
         public bool IsSignedIn {get;set;} = false;
@@ -88,28 +96,15 @@ namespace dexih.api.Models
 
 	public class ExternalLoginProviderModel
 	{
-		public RepositoryManager.ELoginProvider Provider { get; set; }
+		public ELoginProvider Provider { get; set; }
 	    public string AuthenticationToken { get; set; }
     }
-
-    public class RemoteExternalLoginProviderModel
-    {
-        public RepositoryManager.ELoginProvider Provider { get; set; }
-        public string ProviderKey { get; set; }
-    }
-
+    
     public class ConnectionIdModel
     {
         public string ConnectionId { get; set; }
     }
-
     
-    public class GoogleLoginModel
-    {
-        public string IdToken { get; set; }
-        public string ProviderKey { get; set; }
-    }
-
     public class GoogleAuthModel
     {
         public string error_description { get; set; }
@@ -117,11 +112,11 @@ namespace dexih.api.Models
         public string aud { get; set; }
         public string sub { get; set; }
         public string email { get; set; }
-        public bool? email_verified { get; set; }
-        public long? exp { get; set; }
+        public string email_verified { get; set; }
+        public string exp { get; set; }
         public string iss { get; set; }
         public string jti { get; set; }
-        public long? iat { get; set; }
+        public string iat { get; set; }
         public string name { get; set; }
         public string picture { get; set; }
         public string given_name { get; set; }
@@ -206,7 +201,7 @@ namespace dexih.api.Models
         public string Id { get; set; }
         public bool IsRegistered { get; set; }
         public string LastName { get; set; }
-        public ApplicationUser.EUserRole UserRole { get; set; }
+        public EUserRole UserRole { get; set; }
         public bool EmailConfirmed { get; set; }
         public string UserName { get; set; }
         public bool IsInvited { get; set; }

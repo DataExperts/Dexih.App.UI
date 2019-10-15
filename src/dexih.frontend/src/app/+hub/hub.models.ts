@@ -226,11 +226,12 @@ export class HubCache {
        return column;
     }
 
-    private addColumn(table: DexihTable, deltaType: eDeltaType, name: string, allowDbNull: boolean) {
+    private addColumn(table: DexihTable, deltaType: eDeltaType, name: string, dataType: eTypeCode, allowDbNull: boolean) {
         let column = this.newColumn(table, deltaType);
         column.name = name;
         column.logicalName = name;
         column.allowDbNull = allowDbNull;
+        column.dataType = dataType;
         table.dexihTableColumns.push(column);
     }
 
@@ -241,12 +242,12 @@ export class HubCache {
         table.logicalName = name;
         table.key = this.getNextSequence();
 
-        this.addColumn(table, eDeltaType.TrackingField, 'AuditKey', false);
-        this.addColumn(table, eDeltaType.TrackingField, 'Profile', false);
-        this.addColumn(table, eDeltaType.TrackingField, 'ColumnName', false);
-        this.addColumn(table, eDeltaType.TrackingField, 'IsSummary', false);
-        this.addColumn(table, eDeltaType.TrackingField, 'Value', true);
-        this.addColumn(table, eDeltaType.TrackingField, 'Count', true);
+        this.addColumn(table, eDeltaType.TrackingField, 'AuditKey', eTypeCode.Int64, false);
+        this.addColumn(table, eDeltaType.TrackingField, 'Profile', eTypeCode.String, false);
+        this.addColumn(table, eDeltaType.TrackingField, 'ColumnName', eTypeCode.String, false);
+        this.addColumn(table, eDeltaType.TrackingField, 'IsSummary', eTypeCode.Boolean, false);
+        this.addColumn(table, eDeltaType.TrackingField, 'Value', eTypeCode.String, true);
+        this.addColumn(table, eDeltaType.TrackingField, 'Count', eTypeCode.Int32, true);
 
         return table;
     }
@@ -386,7 +387,7 @@ export class HubCache {
     }
 
     public dataTypeToString(column: any): string {
-        let value = column.dataType.toString();
+        let value = eTypeCode[column.dataType];
 
         if (this.dataTypeIsString(column.dataType) && column.maxLength) {
             value = value + '(' + column.maxLength + ')';

@@ -54,9 +54,9 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
                 let params = result[0];
                 let items = result[1];
 
-                this.hubKey = + params['hubKey'];
-                this.objectType = params['objectType'];
-                this.objectKey = + params['objectKey'];
+                this.hubKey = +params['hubKey'];
+                this.objectType = +params['objectType'];
+                this.objectKey = +params['objectKey'];
 
                 this.selectQuery.rows = 100;
 
@@ -85,9 +85,8 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
     }
 
     refresh() {
-        this.hubsService.previewDataUrl(this.hubKey, this.objectKey, this.objectType, this.inputColumns, this.selectQuery,
-            this.cancelToken).then((url) => {
-            this.hubsService.previewData(url, this.cancelToken).then((result) => {
+        this.hubsService.previewData(this.hubKey, this.objectKey, this.objectType, this.inputColumns, this.selectQuery,
+            this.cancelToken).then((result) => {
                 this.columns = result.columns;
                 this.data = result.data;
                 this.name = result.name;
@@ -96,11 +95,6 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
                 this.data = [];
                 this.name = 'failed';
             });
-        }).catch(reason => {
-            this.dexihMessage.addMessage(reason);
-            this.data = [];
-            this.name = 'failed';
-        });
     }
 
     downloadData(format: eDownloadFormat) {

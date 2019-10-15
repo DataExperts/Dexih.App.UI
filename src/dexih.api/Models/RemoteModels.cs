@@ -6,21 +6,7 @@ using MessagePack;
 
 namespace dexih.api.Models
 {
-    [MessagePackObject]
-    public class DatalinkProgress
-    {
-        [Key(0)]
-        public string InstanceId { get; set; }
 
-        [Key(2)]
-        public string SecurityToken { get; set; }
-        
-        [Key(3)]
-        public EMessageCommand Command { get; set; }
-        
-        [Key(4)]
-        public IEnumerable<ManagedTask> Results { get; set; } 
-    }
     
     public class PostApiStatus
     {

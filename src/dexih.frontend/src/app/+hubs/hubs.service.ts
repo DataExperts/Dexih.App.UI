@@ -105,56 +105,61 @@ export class HubsService implements OnDestroy {
     }
 
     // starts a preview, and returns the url to get the download stream.
-    previewDataUrl(hubKey: number, objectKey: number, objectType: eDataObjectType,
+    previewData(hubKey: number, objectKey: number, objectType: eDataObjectType,
         inputColumns: InputColumn[], selectQuery: SelectQuery, cancelToken: CancelToken):
-        Promise<string> {
-        return new Promise<string>((resolve, reject) => {
+        Promise<PreviewResults> {
+        return new Promise<PreviewResults>((resolve, reject) => {
             this.authService.post<DexihActiveAgent>('/api/SharedData/GetActiveAgent', { hubKey: hubKey }, 'Getting active remote agent...')
             .then(activeAgent => {
-                this.authService.postRemote('/api/SharedData/PreviewData', {
+                this.authService.postRemote<PreviewResults>('/api/SharedData/PreviewData', {
                     hubKey: hubKey,
                     objectType: objectType,
                     objectKey: objectKey,
                     selectQuery: selectQuery,
                     remoteAgentId: activeAgent.instanceId,
                     inputColumns: inputColumns
-                }, activeAgent, 'Previewing data...', cancelToken);
+                }, activeAgent, 'Previewing data...', cancelToken).then(result => {
+                    result.columns = this.authService.constructDataTableColumns(result.columns);
+                    resolve(result);
+                }).catch(reason => {
+                    reject(reason);
+                })
             }).catch(reason => {
                 reject(reason);
             });
         });
     }
 
-    // gets preview data from a download stream.
-    previewData(url: string, cancelToken: CancelToken):
-        Promise<{name: string, columns: Array<any>, data: Array<any> }> {
-            return new Promise<{name: string, columns: Array<any>, data: Array<any> }>((resolve, reject) => {
+    // // gets preview data from a download stream.
+    // previewData(url: string, cancelToken: CancelToken):
+    //     Promise<{name: string, columns: Array<any>, data: Array<any> }> {
+    //         return new Promise<{name: string, columns: Array<any>, data: Array<any> }>((resolve, reject) => {
 
-                this.authService.get<PreviewResults>(url, 'Getting preview results...', false, cancelToken).then(data => {
-                    let tableResult: DataPack = data;
-                    let columns = [];
+    //             this.authService.get<PreviewResults>(url, 'Getting preview results...', false, cancelToken).then(data => {
+    //                 let tableResult: DataPack = data;
+    //                 let columns = [];
 
-                    tableResult.columns.forEach((c, index) => {
-                        let name = c.logicalName ? c.logicalName : c.name;
-                        switch (c.dataType) {
-                            case eTypeCode.DateTime:
-                                columns.push({ name: index, title: name, format: 'Date'});
-                                break;
-                                case eTypeCode.Json:
-                                case eTypeCode.Xml:
-                                columns.push({ name: index, title: name, format: 'Code'});
-                                break;
-                            default:
-                                columns.push({ name: index, title: name, format: ''});
-                        }
-                    });
-                    resolve({name: tableResult.name, columns: columns, data: tableResult.data});
-                }).catch(reason => {
-                    // this.addHubMessage(reason);
-                    reject(reason);
-                });
-        });
-    }
+    //                 tableResult.columns.forEach((c, index) => {
+    //                     let name = c.logicalName ? c.logicalName : c.name;
+    //                     switch (c.dataType) {
+    //                         case eTypeCode.DateTime:
+    //                             columns.push({ name: index, title: name, format: 'Date'});
+    //                             break;
+    //                             case eTypeCode.Json:
+    //                             case eTypeCode.Xml:
+    //                             columns.push({ name: index, title: name, format: 'Code'});
+    //                             break;
+    //                         default:
+    //                             columns.push({ name: index, title: name, format: ''});
+    //                     }
+    //                 });
+    //                 resolve({name: tableResult.name, columns: columns, data: tableResult.data});
+    //             }).catch(reason => {
+    //                 // this.addHubMessage(reason);
+    //                 reject(reason);
+    //             });
+    //     });
+    // }
 
     remoteAgents(): Promise<Array<DexihRemoteAgent>> {
         return this.authService.post<Array<DexihRemoteAgent>>('/api/Account/GetUserRemoteAgents', { }, 'Getting user remote agents...');

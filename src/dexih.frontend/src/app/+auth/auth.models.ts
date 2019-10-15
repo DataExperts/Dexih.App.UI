@@ -1,5 +1,5 @@
 import { Subscription } from 'rxjs';
-import { DexihHubUser, ePermission } from '../shared/shared.models';
+import { DexihHubUser, eSharedAccess, eLoginProvider } from '../shared/shared.models';
 
 export const logoUrl = 'assets/img/dexih/dex_logo_wide_raw.png';
 export const logoSmallUrl = 'assets/img/dexih/dexih_small.png';
@@ -38,15 +38,9 @@ export class User {
 }
 
 export class UserLoginInfo {
-    public loginProvider: string = null;
+    public loginProvider: eLoginProvider = null;
     public providerDisplayName: string = null;
     public providerKey: string = null;
-}
-
-export enum eLoginType {
-    Password = <any>'Password',
-    Google = <any>'Google',
-    Microsoft = <any>'Microsoft',
 }
 
 export class DexihHubAuth {
@@ -65,42 +59,6 @@ export class DexihHubAuth {
 
 }
 
-export enum eSharedAccess {
-    Public = <any>'Public', // shared objects can be accessed by public
-    Registered = <any>'Registered', // shared objects can be accessed by registred users only
-    Reader = <any>'Reader' // shared objects can be access only by users with PublishReader permission
-}
-
-export const SharedAccess = [
-    {key: eSharedAccess.Public, name: 'Shared data can be accessed by the public.'},
-    {key: eSharedAccess.Registered, name: 'Shared data can be accessed any registered user.'},
-    {key: eSharedAccess.Reader, name: 'Shared data can be accessed only by users with "PublishReader" permission.'},
-];
-
-// export class DexihHubUser extends EntityBase {
-//     public userId: string;
-//     public hubKey: number;
-//     public hubName: string;
-//     public permission: ePermission;
-// }
-
-// export enum ePermission {
-//     Owner = <any>'Owner',
-//     User = <any>'User',
-//     FullReader = <any>'FullReader',
-//     PublishReader = <any>'PublishReader',
-//     Suspended = <any>'Suspended',
-//     None = <any>'None',
-// }
-
-export const Permissions = [
-    {key: ePermission.Owner, name: 'Owner (full permissions)'},
-    {key: ePermission.User, name: 'User (add/modify permission)'},
-    {key: ePermission.FullReader, name: 'Reader (read only access)'},
-    {key: ePermission.PublishReader, name: 'Publish Reader (only access shared)'},
-    {key: ePermission.Suspended, name: 'Suspended (banned from hub)'},
-];
-
 export class ExternalLoginResult {
     public provider: string;
     public email: string;
@@ -117,22 +75,6 @@ export class ExternalLogin {
     public providerKey: string;
     public authenticationToken: string;
 }
-
-// export class RemoteMessage {
-//     public messageId: string;
-//     public securityToken: string;
-//     public remoteAgentId: string;
-//     public method: string;
-//     public hubKey = 0;
-//     public success: boolean;
-//     public message: string;
-//     public exceptionDetails: string;
-//     public parameters: Array<Parameter>;
-//     public value;
-
-//     constructor () {
-//     }
-// }
 
 export class Parameter {
     public key: string;

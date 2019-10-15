@@ -20,9 +20,9 @@ import { DexihDatajob, DexihTable, DexihHub, DexihRemoteAgentHub, DexihConnectio
     DexihDatalinkTransformItem, DexihFileFormat, DexihHubVariable, DexihDatalinkTest, DexihDatalinkStep, TransformWriterResult,
     TransformProperties, Import, eImportAction, eRunStatus, eDatalinkType, eDeltaType, eConnectionPurpose, eFlatFilePath,
     ApiData, DownloadObject, eDownloadFormat, DexihActiveAgent, ImportObject, ePermission, eTypeCode, eDataObjectType,
-    eSharedObjectType, RemoteLibraries, ConnectionReference, DexihDatalinkTransform, TransformReference,
-    FunctionReference, eFunctionType, CacheManager, RemoteMessage, eMessageCommand, ClientMessage, eClientCommand, HubUser } from '../shared/shared.models';
-import { debounce, filter, first } from 'rxjs/operators';
+    eSharedObjectType, RemoteLibraries, ConnectionReference, TransformReference,
+    FunctionReference, eFunctionType, ClientMessage, eClientCommand, HubUser, eDownloadUrlType } from '../shared/shared.models';
+import { debounce, filter, first, take } from 'rxjs/operators';
 import { fileURLToPath } from 'url';
 
 @Injectable()
@@ -36,7 +36,7 @@ export class HubService implements OnInit, OnDestroy {
     // updates whenever the local hub cache changes
     private _hubCacheChange = new Subject<HubCacheChange>();
 
-    // updates whenever a new transformwriter result is updated
+    // updates whenever a new transformWriter result is updated
     private _transformWriterResultChange = new Subject<TransformWriterResult>();
 
     // updates whenever an api is started/stopped
@@ -137,8 +137,18 @@ export class HubService implements OnInit, OnDestroy {
     }
 
     // gets the hub cache
-    getHubCacheObservable(): Observable<HubCache> {
-        return this._hubCache.asObservable(); // .pipe(filter(c => c !== null && c.isLoaded() === true) );
+    getHubCacheObservable(filterLoaded = false): Observable<HubCache> {
+        let observable = this._hubCache.asObservable();
+
+        if (filterLoaded) {
+            observable = observable.pipe(filter(c => c !== null && c.isLoaded() === true) );
+        }
+
+        return observable;
+    }
+
+    getHubCachePromise(): Promise<HubCache> {
+        return this._hubCache.pipe(filter(c => c !== null && c.status === eCacheStatus.Loaded), take(1)).toPromise();
     }
 
     // gets the hub cache
@@ -277,8 +287,13 @@ export class HubService implements OnInit, OnDestroy {
     }
 
     // set current remoteAgent
-    getRemoteAgentObservable(): Observable<DexihActiveAgent> {
-        return this._remoteAgent.asObservable();
+    getRemoteAgentObservable(filterActive = false): Observable<DexihActiveAgent> {
+        let observable = this._remoteAgent.asObservable();
+        if (filterActive) {
+            observable = observable.pipe(filter(c => c !== null && c.isRunning) );
+        }
+
+        return observable;
     }
 
     getRemoteAgentCurrent(): DexihActiveAgent {
@@ -290,7 +305,7 @@ export class HubService implements OnInit, OnDestroy {
     }
 
     getRemoteLibrariesPromise(): Promise<RemoteLibraries> {
-        return this._remoteLibraries.asObservable().pipe(filter(c => c !== null), first()).toPromise();
+        return this._remoteLibraries.asObservable().pipe(filter(c => c !== null), take(1)).toPromise();
     }
 
     // sets the remote agent to the appropriate default agent when a status changes.
@@ -429,23 +444,6 @@ export class HubService implements OnInit, OnDestroy {
             }).catch(reason => reject(reason));
         });
     }
-
-    // public GetTransformReference(transform: DexihDatalinkTransform): Promise<TransformReference> {
-    //     return new Promise<TransformReference>((resolve, reject) => {
-    //         this.getRemoteLibrariesObservable().toPromise().then(remoteLibraries => {
-    //             if (transform) {
-    //                 let ref = remoteLibraries.transforms.find(c =>
-    //                     c.transformAssemblyName === transform.transformAssemblyName
-    //                     && c.transformClassName === transform.transformClassName);
-
-    //                 resolve(ref);
-
-    //             } else {
-    //                 resolve(null);
-    //             }
-    //         }).catch(reason => reject(reason));
-    //     });
-    // }
 
     // transforms that can be added/removed within a datalink
     public GetUserConfigTransformReference(): Promise<TransformReference[]> {
@@ -737,6 +735,7 @@ export class HubService implements OnInit, OnDestroy {
                 resolve(result);
             }).catch(reason => {
                 this.logger.LogMessage(reason);
+                this.addHubMessage(reason);
                 reject(reason);
             });
         });
@@ -749,6 +748,7 @@ export class HubService implements OnInit, OnDestroy {
                 resolve(result);
             }).catch(reason => {
                 this.logger.LogMessage(reason);
+                this.addHubMessage(reason);
                 reject(reason);
             });
         });
@@ -761,6 +761,7 @@ export class HubService implements OnInit, OnDestroy {
                 resolve(result);
             }).catch(reason => {
                 this.logger.LogMessage(reason);
+                this.addHubMessage(reason);
                 reject(reason);
             });
         });
@@ -780,9 +781,10 @@ export class HubService implements OnInit, OnDestroy {
         });
     }
 
-    public getRemoteResponse<T>(key: string, cancelToken: CancelToken, isUpload = false): Promise<T> {
+    public getRemoteResponse<T>(key: string, cancelToken: CancelToken, command: 'upload' | 'download' | 'setRaw' = 'download',
+        extra = ''): Promise<T> {
         let remoteAgent = this.getRemoteAgentCurrent();
-        return this.authService.getRemoteData<T>(remoteAgent, key, cancelToken, isUpload);
+        return this.authService.getRemoteData<T>(remoteAgent, key, cancelToken, command, extra);
     }
 
      deleteRemoteAgent(remoteAgent: DexihRemoteAgentHub): Promise<boolean> {
@@ -797,6 +799,7 @@ export class HubService implements OnInit, OnDestroy {
     saveRemoteAgent(remoteAgentHub: DexihRemoteAgentHub): Promise<boolean> {
         return this.hubPost('/api/Hub/SaveRemoteAgent', {
             hubKey: this._hubCache.value.hub.hubKey,
+            value: remoteAgentHub
         }, 'Saving the hub remote agent...')
     }
 
@@ -809,7 +812,7 @@ export class HubService implements OnInit, OnDestroy {
                     hubKey: hubCache.hub.hubKey,
                     }, 'Getting the remote agent status...', null);
                 let globalCachePromise = this.authService.getGlobalCachePromise();
-                let hubPromise = this.getHubCacheObservable().toPromise();
+                let hubPromise = this.getHubCachePromise();
 
                 Promise.all([remoteAgentPromise, globalCachePromise, hubPromise]).then(values => {
                     let agentStatus = values[0];
@@ -965,8 +968,12 @@ export class HubService implements OnInit, OnDestroy {
     }
 
     // decrypted a value in the hub.
-    encrypt(value: string, cancelToken: CancelToken): PromiseWithCancel<string> {
-        return this.hubPostRemote<string>('/api/Hub/Encrypt', {value: value}, 'Encrypting...', cancelToken);
+    async encrypt(value: string, cancelToken: CancelToken): Promise<string> {
+        let key = await this.authService.postRemoteGetKey('/api/Hub/Encrypt', {hubKey: this._hubCache.value.hub.hubKey},
+            this.getRemoteAgentCurrent(), cancelToken);
+        await this.getRemoteResponse<string>(key, cancelToken, 'setRaw', value);
+        let result = await this.getRemoteResponse<string>(key, cancelToken, 'download');
+        return result;
     }
 
     // decrypted a value in the hub.
@@ -982,8 +989,6 @@ export class HubService implements OnInit, OnDestroy {
 
     // import a list of specified tables in a remote database
     importTables(tables: Array<DexihTable>, save: boolean, cancelToken: CancelToken): Promise<Array<DexihTable>> {
-        return new Promise<Array<DexihTable>>((resolve, reject) => {
-
             // if there are any table that are already imported, then warn the over of an overwrite.
             let importedTables = tables.filter(c => c.key > 0);
 
@@ -993,14 +998,13 @@ export class HubService implements OnInit, OnDestroy {
                 ' (such as descriptions, column validations, delta types etc.) and may invalidate some datalink mappings. <p></p>' +
                         importedTables.map(c => c.name).join(',') +
                         '  <p></p><p></p>Are you sure you want to continue?').then(() => {
-                            this.doImport(tables, save, cancelToken).then(result => resolve(result)).catch(reason => reject(reason));
+                            return this.doImport(tables, save, cancelToken);
                         }).catch(() => {
-                            resolve(null);
+                            return Promise.resolve(null);
                         });
             } else {
-                this.doImport(tables, save, cancelToken).then(result => resolve(result)).catch(reason => reject(reason));
+                return this.doImport(tables, save, cancelToken);
             }
-        });
     }
 
     public doImport(tables: Array<DexihTable>, save: boolean, cancelToken: CancelToken): Promise<Array<DexihTable>> {
@@ -1137,8 +1141,6 @@ export class HubService implements OnInit, OnDestroy {
 
     shareItems(keys: Array<number>, objectType: eDataObjectType, isShared: boolean): Promise<boolean> {
         return this.hubPost<boolean>('/api/Hub/ShareItems', {
-            hubKey: this._hubCache.value.hub.hubKey,
-            remoteAgentId: this.getCurrentRemoteAgentId(),
             keys: keys,
             objectType: objectType,
             isShared: isShared
@@ -1150,8 +1152,6 @@ export class HubService implements OnInit, OnDestroy {
         inputParameters: InputParameter[], cancelToken: CancelToken): Promise<boolean> {
 
         let data = {
-            hubKey: this._hubCache.value.hub.hubKey,
-            remoteAgentId: this.getCurrentRemoteAgentId(),
             connectionId: this.authService.getWebSocketConnectionId(),
             datalinkKeys: datalinkKeys,
             truncateTarget: truncateTarget,
@@ -1203,9 +1203,10 @@ export class HubService implements OnInit, OnDestroy {
                 }, 'Previewing audit results...', cancelToken);
     }
 
-    getResultDetail(auditConnectionKey: number, auditKey: number, cancelToken: CancelToken): Promise<TransformWriterResult> {
-        return this.hubPostRemote<TransformWriterResult>('/api/Hub/PreviewAuditResults', {
+    getResultDetail(auditConnectionKey: number, auditKey: number, cancelToken: CancelToken): Promise<TransformWriterResult[]> {
+        return this.hubPostRemote<TransformWriterResult[]>('/api/Hub/PreviewAuditResults', {
             connectionKeys: [auditConnectionKey],
+            referenceKeys: [],
             auditKey: auditKey,
             childItems: true,
             rows: 1
@@ -1330,46 +1331,12 @@ export class HubService implements OnInit, OnDestroy {
         return this.previewTableDataQuery(table, showRejectedData, selectQuery, inputColumns, parameters, cancelToken);
     }
 
-    public constructDataTableColumns(columns: Array<any>): Array<any> {
-        let dtColumns = [];
 
-        if (columns) {
-            columns.forEach((c, index) => {
-                let name = c.logicalName ? c.logicalName : c.name;
-
-                switch (c.dataType) {
-                    case eTypeCode.DateTime:
-                        dtColumns.push({ name: index, title: name, format: 'DateTime'});
-                        break;
-                    case eTypeCode.Boolean:
-                        dtColumns.push({ name: index, title: name, format: 'Boolean'});
-                        break;
-                    case eTypeCode.Json:
-                        dtColumns.push({ name: index, title: name, format: 'Json'});
-                        break;
-                    case eTypeCode.Xml:
-                        dtColumns.push({ name: index, title: name, format: 'Code'});
-                        break;
-                    case eTypeCode.CharArray:
-                        dtColumns.push({name: index, title: name, format: 'CharArray'});
-                        break;
-                    case eTypeCode.Node:
-                        dtColumns.push({name: index, title: name, format: 'Node',
-                            childColumns: this.constructDataTableColumns(c.childColumns) });
-                        break;
-                    default:
-                        dtColumns.push({ name: index, title: name, format: ''});
-                }
-            });
-        }
-
-        return dtColumns;
-    }
 
     getData(url: string, data: any, waitMessage: string, cancelToken): PromiseWithCancel<PreviewResults> {
         return new PromiseWithCancel<PreviewResults>((resolve, reject) => {
             this.hubPostRemote<PreviewResults>(url, data, waitMessage, cancelToken).then(previewData => {
-                let columns = this.constructDataTableColumns(previewData.columns);
+                let columns = this.authService.constructDataTableColumns(previewData.columns);
                 resolve({
                     name: previewData.name,
                     columns: columns,
@@ -1453,19 +1420,29 @@ export class HubService implements OnInit, OnDestroy {
     }
 
     previewDashboard(dashboard: DexihDashboard, inputParameters: DexihInputParameter[], cancelToken: CancelToken):
-        Promise<{dashboardItemKey: string, dataKey: string}[]> {
-        if (!this._remoteAgent.value) {
+    Promise<{dashboardItemKey: string, dataKey: string}[]> {
+
+        let remoteAgent = this.getRemoteAgentCurrent();
+
+        if (!remoteAgent) {
             let message = new Message(false, 'No active remote agent.', null, null);
             this.addHubMessage(message);
             return Promise.reject(message);
         }
 
-        return this.hubPost<{dashboardItemKey: string, dataKey: string}[]>('/api/Hub/PreviewDashboard', {
-            hubKey: this._hubCache.value.hub.hubKey,
-            remoteAgentId: this.getCurrentRemoteAgentId(),
-            dashboard: dashboard,
-            inputParameters: inputParameters,
-        }, 'Getting dashboard download locations...');
+        return new PromiseWithCancel<{dashboardItemKey: string, dataKey: string}[]>((resolve, reject) => {
+            this.authService.getBestDownloadUrl(remoteAgent, 0).then(url => {
+                this.hubPost<{dashboardItemKey: string, dataKey: string}[]>('/api/Hub/PreviewDashboard', {
+                    hubKey: this._hubCache.value.hub.hubKey,
+                    remoteAgentId: this.getCurrentRemoteAgentId(),
+                    responseUrl: url.downloadUrlType === eDownloadUrlType.Proxy ? url.url : '',
+                    dashboard: dashboard,
+                    inputParameters: inputParameters,
+                }, 'Getting dashboard download locations...').then(urls => {
+                    resolve(urls);
+                }).catch(reason => reject(reason));
+            }).catch(reason => reject(reason));
+        });
     }
 
     // downloads a dataset from the provided url
@@ -1477,7 +1454,7 @@ export class HubService implements OnInit, OnDestroy {
                         this.addHubMessage(data);
                         reject(data['message']);
                     } else {
-                        let columns = this.constructDataTableColumns(data.columns);
+                        let columns = this.authService.constructDataTableColumns(data.columns);
                         resolve({
                             name: data.name,
                             columns: columns,
@@ -1542,7 +1519,7 @@ export class HubService implements OnInit, OnDestroy {
             }, 'Downloading shared data...', cancelToken).then(task => {
                 this.authService.addUpdateTask(task);
                 resolve(true);
-            }).catch(reason => reject(reason));
+            });
         });
     }
 
@@ -1563,7 +1540,7 @@ export class HubService implements OnInit, OnDestroy {
                 }, 'Downloading table data...', cancelToken).then(task => {
                     this.authService.addUpdateTask(task);
                     resolve(true);
-                }).catch(reason => reject(reason));
+                });
             });
     }
 
@@ -1584,7 +1561,7 @@ export class HubService implements OnInit, OnDestroy {
                 }, 'Downloading table data...', cancelToken).then(task => {
                     this.authService.addUpdateTask(task);
                     resolve(true);
-                }).catch(reason => reject(reason));
+                });
             });
     }
 
@@ -1793,7 +1770,7 @@ export class HubService implements OnInit, OnDestroy {
     }
 
     getFileList(table: DexihTable, flatFilePath: eFlatFilePath, cancelToken: CancelToken): PromiseWithCancel<Array<FileProperties>> {
-        return this.hubPostRemote<Array<FileProperties>>('GetFileList', {value: table, path: flatFilePath}, 'Getting files list...'
+        return this.hubPostRemote<Array<FileProperties>>('/api/Hub/GetFileList', {value: table, path: flatFilePath}, 'Getting files list...'
         , cancelToken);
     }
 
@@ -1837,13 +1814,16 @@ export class HubService implements OnInit, OnDestroy {
     uploadFile(table: DexihTable, filePath: eFlatFilePath, fileName: string, cancelToken: CancelToken):
     Promise<string> {
         return new Promise<string>((resolve, reject) => {
-            this.hubPostRemote<string>('/api/Hub/UploadFile', {
+            let remoteAgent = this.getRemoteAgentCurrent();
+            this.authService.postRemoteUpload('/api/Hub/UploadFile', {
+                hubKey: this._hubCache.value.hub.hubKey,
+                remoteAgentId: remoteAgent.instanceId,
                 connectionId: this.authService.getWebSocketConnectionId(),
                 tableKey: table.key,
                 path: filePath,
                 fileName: fileName,
-            }, 'Uploading file...', cancelToken).then(key => {
-                resolve(this.authService.getRemoteUrl(this.getRemoteAgentCurrent(), key, true ));
+            }, remoteAgent, 'Uploading file...', cancelToken).then(url => {
+                resolve(url.url + '/file/' + fileName);
             });
         });
     }
@@ -1851,15 +1831,17 @@ export class HubService implements OnInit, OnDestroy {
     bulkUploadFiles(connectionKey: number, fileFormatKey: number, formatType: eTypeCode , fileName: string, cancelToken: CancelToken):
     Promise<{url: string, reference: string}> {
         return new Promise<{url: string, reference: string}>((resolve, reject) => {
-            this.hubPostRemote<string>('/api/Hub/BulkUploadFiles', {
+            let remoteAgent = this.getRemoteAgentCurrent();
+            this.authService.postRemoteUpload('/api/Hub/BulkUploadFile', {
+                hubKey: this._hubCache.value.hub.hubKey,
+                remoteAgentId: remoteAgent.instanceId,
                 connectionId: this.authService.getWebSocketConnectionId(),
                 connectionKey: connectionKey,
                 fileFormatKey: fileFormatKey,
                 formatType: formatType,
                 fileName: fileName,
-            }, 'Uploading file...', cancelToken).then(async key => {
-                let url = await this.authService.getRemoteUrl(this.getRemoteAgentCurrent(), key, true );
-                resolve({reference: key, url: url});
+            }, remoteAgent, 'Uploading file...', cancelToken).then(url => {
+                resolve({reference: url.key, url: url.url + '/file/' + fileName});
             }).catch(reason => reject(reason));
         });
     }

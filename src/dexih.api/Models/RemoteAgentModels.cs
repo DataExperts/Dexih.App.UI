@@ -66,18 +66,4 @@ namespace dexih.api.Models
         public long RemoteAgentHubKey { get; set; } 
     }
 
-    public class GetRemoteAgentStatus
-    {
-        public long HubKey { get; set; } 
-        public string InstanceId { get; set; } 
-    }
-
-    public class RemoteAgentBase
-    {
-        public long HubKey { get; set; }
-        public string RemoteAgentId { get; set; }
-        public string ClientConnectionId { get; set; }
-    }
-
-
 }

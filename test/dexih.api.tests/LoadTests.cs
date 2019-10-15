@@ -3,9 +3,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using dexih.functions;
 using dexih.repository;
 using Dexih.Utils.MessageHelpers;
-using Newtonsoft.Json;
+
 using Xunit;
 using Xunit.Abstractions;
 
@@ -93,7 +94,7 @@ namespace dexih.api.tests
                     var hubKey = new {HubKey = 2};
                     var response = await Configuration.Post("/api/Hub/GetHubCache", hubKey);
 
-                    var hubCache = JsonConvert.DeserializeObject<ReturnValue<DexihHub>>(response);
+                    var hubCache = JsonExtensions.Deserialize<ReturnValue<DexihHub>>(response);
 
                     if (!hubCache.Success)
                     {

@@ -6,7 +6,7 @@
                 <i class="fa fa-file-o"></i> New (Source)</a>
         </li>
         <li *ngIf="hubCache.canWrite">
-            <a class="dropdown-item" [routerLink]="['connection-new', eConnectionPurposeManaged]" title="Create a new datalink.">
+            <a class="dropdown-item" [routerLink]="['connection-new', eConnectionPurpose.Managed]" title="Create a new datalink.">
                 <i class="fa fa-file-o"></i> New (Managed)</a>
         </li>
         <li *ngIf="hubCache.canWrite">

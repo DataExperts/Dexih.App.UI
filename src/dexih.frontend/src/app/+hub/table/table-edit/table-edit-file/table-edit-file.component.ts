@@ -8,6 +8,7 @@ import { FormArray } from '@angular/forms';
 import { HubFormsService } from '../../../hub.forms.service';
 import { DexihConnection, DexihFileFormat, eTypeCode, DexihTable } from '../../../../shared/shared.models';
 import { HubCache, formatTypes } from '../../../hub.models';
+import { CancelToken } from '../../../../+auth/auth.models';
 
 @Component({
 
@@ -30,6 +31,8 @@ export class TableEditFileComponent implements OnInit, OnDestroy {
 
     formatTypes = formatTypes;
     eTypeCode = eTypeCode;
+
+    public cancelToken: CancelToken = new CancelToken();
 
     constructor(private authService: AuthService,
         private hubService: HubService) {
@@ -59,6 +62,7 @@ export class TableEditFileComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         if (this._subscription) { this._subscription.unsubscribe(); }
+        this.cancelToken.cancel();
     }
 
     public filesDrop(files: any) {
@@ -89,37 +93,34 @@ export class TableEditFileComponent implements OnInit, OnDestroy {
         const form: FormData = new FormData();
         form.append('file', file, file.name);
         form.append('hubKey', this.hubCache.hub.hubKey.toString());
-        form.append('table', JSON.stringify(this.formService.currentForm.value));
+        form.append('table', this.authService.JsonNoNulls(this.formService.currentForm.value));
         form.append('connectionKey', this.connection.key.toString());
-        form.append('remoteAgentId', this.hubService.getCurrentRemoteAgentId());
         form.append('save', 'false');
 
-        this.authService.postForm('/api/Hub/ImportFileFormat', form).then(result => {
-            if (result.success) {
-                let importedTable: DexihTable = result.value;
-                if (importedTable.entityStatus.lastStatus.toString() === 'Error') {
-                    this.hubService.addHubErrorMessage(importedTable.entityStatus.message);
-                }
+        let remoteAgent = this.hubService.getRemoteAgentCurrent();
 
-                // importedTable.fileFormat = this.hubCache.getFileFormat(importedTable.fileFormatKey);
+        this.authService.postFormRemoteGetKey('/api/Hub/ImportFileFormat', form, remoteAgent, this.cancelToken)
+            .then(key => {
+                this.authService.getRemoteData<DexihTable[]>(remoteAgent, key, this.cancelToken, 'download').then(importedTables => {
+                    let importedTable = importedTables[0];
+                    if (importedTable.entityStatus.lastStatus.toString() === 'Error') {
+                        this.hubService.addHubErrorMessage(importedTable.entityStatus.message);
+                    }
 
-                let tableColumnsForm = <FormArray>this.formService.currentForm.controls.dexihTableColumns;
+                    // importedTable.fileFormat = this.hubCache.getFileFormat(importedTable.fileFormatKey);
 
-                // remove existing columns.
-                const count = tableColumnsForm.controls.length;
-                for (let i = 0; i <= count; i++) {
-                    tableColumnsForm.removeAt(0);
-                }
-                importedTable.dexihTableColumns.filter(c => c.isValid).forEach(column => {
-                    tableColumnsForm.push(this.formService.tableColumn(tableColumnsForm.value, column));
+                    let tableColumnsForm = <FormArray>this.formService.currentForm.controls.dexihTableColumns;
+
+                    // remove existing columns.
+                    const count = tableColumnsForm.controls.length;
+                    for (let i = 0; i <= count; i++) {
+                        tableColumnsForm.removeAt(0);
+                    }
+                    importedTable.dexihTableColumns.filter(c => c.isValid).forEach(column => {
+                        tableColumnsForm.push(this.formService.tableColumn(tableColumnsForm.value, column));
+                    });
                 });
 
-
-                // let columnsArray = <FormArray>this.formService.currentForm.controls.dexihTableColumns;
-                // columnsArray.setValue(tableColumnsForm.value);
-            } else {
-                this.hubService.addHubMessage(result);
-            }
         }).catch(reason => {
             if (reason) {
                 this.hubService.addHubMessage(reason);

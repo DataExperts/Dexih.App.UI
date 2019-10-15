@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+
 
 namespace dexih.api.Hubs
 {
@@ -68,7 +68,7 @@ namespace dexih.api.Hubs
 		public async Task PingServer(DexihActiveAgent activeAgent, string pingKey)
 		{
 			_logger.LogTrace($"Ping from {Context.UserIdentifier}");
-			var json = JsonConvert.SerializeObject(activeAgent);
+			var json = JsonExtensions.Serialize(activeAgent);
 			await _distributedCache.SetStringAsync(pingKey, json, new DistributedCacheEntryOptions() {SlidingExpiration = TimeSpan.FromMilliseconds(5000)});
 		}
 	}

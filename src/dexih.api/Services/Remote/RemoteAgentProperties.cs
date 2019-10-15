@@ -31,5 +31,8 @@ namespace dexih.api.Services.Remote
         
         [Key(8)]
         public NamingStandards NamingStandards { get; set; }
+        
+        [Key(9)]
+        public DownloadUrl[] DownloadUrls { get; set; }
     }
 }

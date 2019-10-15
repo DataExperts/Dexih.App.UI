@@ -23,11 +23,11 @@
 			<div class="card-body">
 				<fieldset>
 					<section>
-						<form-input [disabled]="loginType != eLoginType.Password" label="E-mail" [(ngModel)]="user.email" name="email" iconClass="fa fa-user txt-color-teal" title="Please enter your email address"
+						<form-input [disabled]="loginType != eLoginProvider.Dexih" label="E-mail" [(ngModel)]="user.email" name="email" iconClass="fa fa-user txt-color-teal" title="Please enter your email address"
 						 placeholder="E-mail...">
 						</form-input>
 					</section>
-					<section *ngIf="loginType == eLoginType.Password">
+					<section *ngIf="loginType == eLoginProvider.Dexih">
 						<form-input label="Password" [(ngModel)]="user.password" name="password" type="password" iconClass="fa fa-lock txt-color-teal"
 						 placeholder="Password..." title="Please enter your password">
 						</form-input>
@@ -48,12 +48,12 @@
 
 				</fieldset>
 			</div>
-			<div *ngIf="loginType === eLoginType.Password" class="card-footer">
+			<div *ngIf="loginType === eLoginProvider.Dexih" class="card-footer">
 				<button type="submit" (onsubmit)="login($event)" (click)="login($event)" class="btn btn-success">Sign In &nbsp;
 					<i class="fa fa-sign-in"></i>
 				</button>
 			</div>
-			<div *ngIf="loginType === eLoginType.Google" class="card-footer">
+			<div *ngIf="loginType === eLoginProvider.Google" class="card-footer">
 				<button type="submit" (onsubmit)="login($event)" (click)="login($event)" class="btn btn-danger">Google Sign In &nbsp;
 					<i class="fa fa-sign-in"></i>
 				</button>
@@ -66,7 +66,7 @@
 					<i class="fa fa-google"></i>
 				</button>
 			</div>
-			<div *ngIf="loginType === eLoginType.Microsoft" class="card-footer">
+			<div *ngIf="loginType === eLoginProvider.Microsoft" class="card-footer">
 				<button type="submit" (onsubmit)="login($event)" (click)="login($event)" class="btn btn-primary">Microsoft Sign In &nbsp;
 					<i class="fa fa-sign-in"></i>
 				</button>
@@ -86,16 +86,16 @@
 			Other Sign-in Options
 		</div>
 		<div class="card-body">
-			<div *ngIf="loginType != eLoginType.Password" class="mt-2">
+			<div *ngIf="loginType != eLoginProvider.Dexih" class="mt-2">
 				<button  style="width: 100%" (click)="enablePassword()" class="btn btn-success">
 					<i class="fa fa-sign-in"></i>&nbsp;&nbsp;Change to User/Password</button>
 			</div>
 		
-			<div *ngIf="loginType != eLoginType.Google" class="mt-2">
+			<div *ngIf="loginType != eLoginProvider.Google" class="mt-2">
 				<button style="width: 100%" (click)="enableGoogle()" class="btn btn-danger">
 					<i class="fa fa-google"></i>&nbsp;&nbsp;Change to Google</button>
 			</div>
-			<div *ngIf="loginType != eLoginType.Microsoft" class="mt-2">
+			<div *ngIf="loginType != eLoginProvider.Microsoft" class="mt-2">
 				<button style="width: 100%" (click)="enableMicrosoft()" class="btn btn-primary">
 					<i class="fa fa-windows"></i>&nbsp;&nbsp;Change to Microsoft</button>
 			</div>

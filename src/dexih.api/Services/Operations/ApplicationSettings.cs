@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Runtime.InteropServices;
+using System.Text.Json;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
+using dexih.functions;
+
 
 namespace dexih.api.Services.Operations
 {
@@ -68,13 +70,13 @@ namespace dexih.api.Services.Operations
                         await httpClient.GetAsync(
                             "https://api.github.com/repos/DataExperts/Dexih.App.Remote/releases");
                     var responseText = await response.Content.ReadAsStringAsync();
-                    var releases = JArray.Parse(responseText);
+                    var releases = responseText.ToJsonDocument();
 
-                    UpdateRemoteVersionInfo(releases[0], true);
+                    UpdateRemoteVersionInfo(releases.RootElement[0], true);
 
-                    foreach (var release in releases)
+                    foreach (var release in releases.RootElement.EnumerateArray())
                     {
-                        if (!(bool) release["prerelease"])
+                        if (!release.GetProperty("prerelease").GetBoolean())
                         {
                             UpdateRemoteVersionInfo(release, false);
                             break;
@@ -87,14 +89,14 @@ namespace dexih.api.Services.Operations
            
         }
         
-        private void UpdateRemoteVersionInfo(JToken version, bool preRelease)
+        private void UpdateRemoteVersionInfo(JsonElement version, bool preRelease)
         {
-            var versionString = (string) version["tag_name"];
+            var versionString = version.GetProperty("tag_name").GetString();
 
-            foreach (var asset in version["assets"])
+            foreach (var asset in version.GetProperty("assets").EnumerateArray())
             {
-                var name = ((string) asset["name"]).ToLower();
-                var url =(string) asset["browser_download_url"];
+                var name = asset.GetProperty("name").GetString().ToLower();
+                var url =asset.GetProperty("browser_download_url").GetString();
 
                 var versionInfo = new VersionInfo() {Version = versionString, Url = url, FileName = name};
                 

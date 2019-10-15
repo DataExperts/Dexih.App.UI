@@ -3,9 +3,10 @@ import { Observable, Subscription, combineLatest} from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { AuthService } from '../../+auth/auth.service';
-import { DexihHubAuth, SharedAccess } from '../../+auth/auth.models';
+import { DexihHubAuth } from '../../+auth/auth.models';
 import { Location } from '@angular/common';
 import { DexihMessageComponent } from '../../shared/ui/dexihMessage';
+import { eSharedAccessItems } from '../../shared/shared.models';
 
 @Component({
 
@@ -23,7 +24,7 @@ export class HubEditComponent implements OnInit, OnDestroy {
 
   hub: DexihHubAuth;
 
-  sharedAccess = SharedAccess;
+  SharedAccessItems = eSharedAccessItems;
 
   generatingKey = false;
   savingHub = false;

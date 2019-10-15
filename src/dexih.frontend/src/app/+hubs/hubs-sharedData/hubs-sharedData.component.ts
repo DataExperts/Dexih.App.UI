@@ -7,7 +7,7 @@ import { debounceTime } from 'rxjs/operators';
 import { DexihHubAuth, CancelToken } from '../../+auth/auth.models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HubsService } from '../hubs.service';
-import { eDownloadFormat, SharedData } from '../../shared/shared.models';
+import { eDownloadFormat, SharedData, eSharedObjectType, eDataObjectType } from '../../shared/shared.models';
 
 @Component({
     selector: 'hubs-sharedData',
@@ -27,7 +27,7 @@ export class HubsSharedDataComponent implements OnInit, OnDestroy {
 
     columns = [
         { name: 'logicalName', title: 'Details', header: 'hubName', footer: 'description', format: 'Md' },
-        { name: 'objectType', title: 'Type'},
+        { name: 'objectType', title: 'Type', format: 'Enum', enum: eDataObjectType},
         { name: 'updateDate', title: 'Last Updated', format: 'Date' },
     ];
 

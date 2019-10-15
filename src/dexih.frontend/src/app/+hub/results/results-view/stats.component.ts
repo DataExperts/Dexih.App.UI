@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TransformWriterResult, eRunStatus } from '../../../shared/shared.models';
+import { TransformWriterResult, eRunStatus, eTriggerMethod } from '../../../shared/shared.models';
 
 @Component({
     selector: 'stats',
@@ -20,6 +20,8 @@ export class StatsComponent implements OnInit {
 
     public fail = false;
     public success = false;
+    eRunStatus = eRunStatus;
+    eTriggerMethod = eTriggerMethod;
 
 
     constructor(public route: ActivatedRoute, public router: Router

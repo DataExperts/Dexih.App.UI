@@ -2,8 +2,9 @@
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using dexih.functions;
 using Dexih.Utils.MessageHelpers;
-using Newtonsoft.Json;
+
 using Xunit;
 
 namespace dexih.websocket.tests
@@ -30,7 +31,7 @@ namespace dexih.websocket.tests
                 var response = await httpClient.PostAsync(Url + "Account/Login", content);
                 var result = await response.Content.ReadAsStringAsync();
                 Assert.False(string.IsNullOrEmpty(result), "Error Account/Login");
-                var loginResult = JsonConvert.DeserializeObject<ReturnValue<object>>(result);
+                var loginResult = JsonExtensions.Deserialize<ReturnValue<object>>(result);
                 Assert.True(loginResult.Success, "login failed: " + loginResult.Message);
             }
         }

@@ -16,8 +16,9 @@ namespace dexih.api.Services
 			IUserClaimsPrincipalFactory<ApplicationUser> claimsFactory, 
 			IOptions<IdentityOptions> optionsAccessor, 
 			ILogger<SignInManager<ApplicationUser>> logger, 
-			IAuthenticationSchemeProvider schemes)
-        : base(userManager, contextAccessor, claimsFactory, optionsAccessor, logger, schemes)
+			IAuthenticationSchemeProvider schemes,
+			IUserConfirmation<ApplicationUser> userConfirmation)
+        : base(userManager, contextAccessor, claimsFactory, optionsAccessor, logger, schemes, userConfirmation)
     	{
 		}
 

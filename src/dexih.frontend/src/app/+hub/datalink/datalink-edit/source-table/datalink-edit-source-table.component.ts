@@ -6,7 +6,7 @@ import { Observable, Subscription, BehaviorSubject , combineLatest} from 'rxjs';
 import { DatalinkEditService } from '../datalink-edit.service';
 import { eObjectUse, ColumnUsageNode, eDatalinkObjectType } from '../../../hub.lineage.models';
 import { FormGroup, FormArray } from '@angular/forms';
-import { DexihDatalinkTable, eSourceType, DexihDatalinkColumn } from '../../../../shared/shared.models';
+import { DexihDatalinkTable, eSourceType, DexihDatalinkColumn, eSecurityFlag, eDeltaType } from '../../../../shared/shared.models';
 
 @Component({
     selector: 'dexih-datalink-edit-source-table-form',
@@ -36,10 +36,10 @@ export class DatalinkEditSourceTableComponent implements OnInit, OnDestroy {
         { name: 'name', title: 'Name', format: '' },
         { name: 'logicalName', title: 'Logical', format: '' },
         { name: 'dataType', title: 'Data Type', format: '' },
-        { name: 'deltaType', title: 'Delta Type', format: '' },
+        { name: 'deltaType', title: 'Delta Type', format: 'Enum', enum: eDeltaType },
         { name: 'allowDbNull', title: 'Null?', format: 'Boolean' },
         { name: 'isIncrementalUpdate', title: 'Incremental?', format: 'Boolean' },
-        { name: 'securityFlag', title: 'Security Flag', format: '' },
+        { name: 'securityFlag', title: 'Security Flag', format: 'Enum', enum: eSecurityFlag },
         { name: 'isInput', title: 'Input?', format: 'Boolean' },
     ];
 

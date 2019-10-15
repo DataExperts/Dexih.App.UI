@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO.Compression;
+using System.Text.Json;
 using dexih.api.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -18,14 +19,14 @@ using dexih.api.Services.Message;
 using dexih.api.Services.Operations;
 using dexih.operations;
 using MessagePack.AspNetCoreMvcFormatter;
+using MessagePack.Resolvers;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Net.Http.Headers;
-using Newtonsoft.Json;
+
 using StackExchange.Redis;
-using MessagePack.Formatters;
-using MessagePack.Resolvers;
+
 
 namespace dexih.api
 {
@@ -62,6 +63,7 @@ namespace dexih.api
 //		        options.BlobName = "log.txt";
 //	        });
 
+
 	        var appSettings = Configuration.GetSection("AppSettings").Get<ApplicationSettings>();
 	        
 	        
@@ -95,8 +97,6 @@ namespace dexih.api
 			services.AddScoped<DexihSignInManager, DexihSignInManager>();
 			services.AddScoped<ErrorLogger, ErrorLogger>();
 			
-			services.AddMemoryCache();
-
 			if (!string.IsNullOrEmpty(appSettings.RedisCacheConnectionString))
 			{
 				services.AddStackExchangeRedisCache(options =>
@@ -161,21 +161,23 @@ namespace dexih.api
 
             // Add framework services.
             services.AddMvc()
+//	            .AddNewtonsoftJson();
+//	            .AddMvcOptions(option =>
+//	            {
+//		            // option.OutputFormatters.Clear();
+//		            option.OutputFormatters.Add(
+//			            new MessagePackOutputFormatter(TypelessContractlessStandardResolver.Instance));
+//		            // option.InputFormatters.Clear();
+//		            option.InputFormatters.Add(
+//			            new MessagePackInputFormatter(TypelessContractlessStandardResolver.Instance));
+//	            })
 	            .AddJsonOptions(options =>
 	            {
-		            // nulls ignored to ensure json fields such as createDate,updateDate get
-		            // default value rather than exception if not included in the api call.
-		            options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-	            })
-	            .AddMvcOptions(option =>
-	            {
-		            // option.OutputFormatters.Clear();
-		            option.OutputFormatters.Add(new MessagePackOutputFormatter(ContractlessStandardResolver.Instance));
-		            // option.InputFormatters.Clear();
-		            option.InputFormatters.Add(new MessagePackInputFormatter(ContractlessStandardResolver.Instance));
+//		            options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+//		            options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+		            options.JsonSerializerOptions.IgnoreNullValues = true;
 	            });
-
-           
+            
             // Add message services.
 	        services.AddSingleton<IEmailSender, AuthMessageSender>();
 
@@ -247,7 +249,8 @@ namespace dexih.api
 					};
 				}
 			});
-			
+
+			app.UseRouting();
 			app.UseResponseCaching();
 			
             if (env.IsDevelopment())
@@ -277,34 +280,36 @@ namespace dexih.api
 
             // enable the telemetry data.
             app.UseAuthentication();
+            app.UseAuthorization();
 
-			if (!string.IsNullOrEmpty(appSettings.SignalRConnectionString))
-			{
-				app.UseAzureSignalR(routes =>
-				{
-					routes.MapHub<RemoteAgentHub>("/remoteagent");
-					routes.MapHub<BrowserHub>("/browser");
-				});
-
-				_logger.LogInformation($"SignalR using azure service at {appSettings.SignalRConnectionString}.");
-			}
-			else
-			{
-				app.UseSignalR(routes =>
-				{
-					routes.MapHub<RemoteAgentHub>("/remoteagent", options =>
-					{
-						options.LongPolling.PollTimeout = TimeSpan.FromSeconds(60);
-					});
-				
-					routes.MapHub<BrowserHub>("/browser", options =>
-					{
-						options.LongPolling.PollTimeout = TimeSpan.FromSeconds(60);
-					});
-				});
-
-				_logger.LogInformation($"SignalR using current server.");
-			}
+            // removed for .net core 3.0
+//			if (!string.IsNullOrEmpty(appSettings.SignalRConnectionString))
+//			{
+//				app.UseAzureSignalR(routes =>
+//				{
+//					routes.MapHub<RemoteAgentHub>("/remoteagent");
+//					routes.MapHub<BrowserHub>("/browser");
+//				});
+//
+//				_logger.LogInformation($"SignalR using azure service at {appSettings.SignalRConnectionString}.");
+//			}
+//			else
+//			{
+//				app.UseSignalR(routes =>
+//				{
+//					routes.MapHub<RemoteAgentHub>("/remoteagent", options =>
+//					{
+//						options.LongPolling.PollTimeout = TimeSpan.FromSeconds(60);
+//					});
+//				
+//					routes.MapHub<BrowserHub>("/browser", options =>
+//					{
+//						options.LongPolling.PollTimeout = TimeSpan.FromSeconds(60);
+//					});
+//				});
+//
+//				_logger.LogInformation($"SignalR using current server.");
+//			}
 
             app.Use(async (context, next) =>
             {
@@ -335,15 +340,18 @@ namespace dexih.api
 
 			app.UseFileServer(false);
 
-            app.UseMvc(routes =>
+			app.UseEndpoints(endpoints =>
             {
-	            routes.MapRoute(
+	            endpoints.MapHub<RemoteAgentHub>("/remoteagent");
+	            endpoints.MapHub<BrowserHub>("/browser");
+
+	            endpoints.MapControllerRoute(
 				  name: "api",
-				  template: "api/{controller=Version}/{action=Index}/{id?}");
+				  pattern: "api/{controller=Version}/{action=Index}/{id?}");
 	            
-				routes.MapRoute(
+	            endpoints.MapControllerRoute(
 				  name: "remote",
-				  template: "{controller=Version}/{action=Index}/{id?}");
+				  pattern: "{controller=Version}/{action=Index}/{id?}");
 				
             });
 
@@ -380,7 +388,7 @@ namespace dexih.api
 	            repoDbContext.Database.EnsureCreated();
 	            repoDbContext.Database.Migrate();
 	            var seedData = new SeedData();
-	            seedData.UpdateReferenceData(repoDbContext, roleManager, userManager).GetAwaiter().GetResult();
+	            seedData.UpdateReferenceData(roleManager, userManager).GetAwaiter().GetResult();
             }
 
             _logger.LogInformation("Startup has completed.");

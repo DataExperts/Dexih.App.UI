@@ -1,6 +1,7 @@
 ﻿using System;
+using dexih.functions;
 using dexih.repository;
-using Newtonsoft.Json;
+
 using Xunit;
 using Xunit.Abstractions;
 using Dexih.Utils.MessageHelpers;
@@ -47,7 +48,7 @@ namespace dexih.api.tests
             };
             
             var message = await Configuration.Post("/api/Account/SaveHub", hub);
-            var user = JsonConvert.DeserializeObject<ReturnValue<DexihHub>>(message);
+            var user = JsonExtensions.Deserialize<ReturnValue<DexihHub>>(message);
             
             Assert.True(user.Success);
 
@@ -57,7 +58,7 @@ namespace dexih.api.tests
         public async void GetAuthorizedHubs()
         {
             var message = await Configuration.Post("/api/Account/GetAuthorizedHubs", null);
-            var user = JsonConvert.DeserializeObject<ReturnValue<DexihHub[]>>(message);
+            var user = JsonExtensions.Deserialize<ReturnValue<DexihHub[]>>(message);
             
             Assert.True(user.Success);
 
@@ -68,7 +69,7 @@ namespace dexih.api.tests
         {
             var hubKey = new {HubKey = 2};
             var message = await Configuration.Post("/api/Hub/GetHubCache", hubKey);
-            var hubResult = JsonConvert.DeserializeObject<ReturnValue<DexihHub>>(message);
+            var hubResult = JsonExtensions.Deserialize<ReturnValue<DexihHub>>(message);
             
             Assert.True(hubResult.Success);
             

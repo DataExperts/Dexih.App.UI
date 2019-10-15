@@ -51,7 +51,7 @@
 </dexih-widget-section>
 
 
-<dexih-widget-section title="Tables" [showExpandButton]="true" [padding]="false">
+<dexih-widget-section title="Tables" [showExpandButton]="true" [padding]="false" *ngIf="!datalinkForm?.controls.isQuery.value">
 <dexih-table [enableMultiSelect]="true" [enableManualSort]="true" [enableSort]="false"
     [enableFilter]="false" (onSortChanged)="targetSortChange($event)" [columns]="targetTableColumns" [data]="targets"
     (rowClick)="editTable($event)">

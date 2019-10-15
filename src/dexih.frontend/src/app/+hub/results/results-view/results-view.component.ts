@@ -44,8 +44,8 @@ export class ResultsViewComponent implements OnInit, OnDestroy {
                 this.route.data,
                 this.route.params,
                 this.route.queryParams,
-                this.hubService.getHubCacheObservable(),
-                this.hubService.getRemoteAgentObservable()
+                this.hubService.getHubCacheObservable(true),
+                this.hubService.getRemoteAgentObservable(true)
             ).subscribe(result => {
                 let data = result[0];
                 let params = result[1];
@@ -66,7 +66,7 @@ export class ResultsViewComponent implements OnInit, OnDestroy {
                     this.showPage = true;
                     this.showPageMessage = '';
                     this.hubService.getResultDetail(auditConnectionKey, auditKey, this.cancelToken).then(r => {
-                        this.auditResult = r;
+                        this.auditResult = r[0];
                     });
                 }
 

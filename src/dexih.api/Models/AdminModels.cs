@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Claims;
+using dexih.operations;
 using dexih.repository;
 using Microsoft.AspNetCore.Identity;
 
@@ -26,7 +27,7 @@ namespace dexih.api.Models
 		public string[] Emails { get; set; }
 		public int HubQuota { get; set; }
 		public int InviteQuota { get; set; }
-		public ApplicationUser.EUserRole Role { get; set; }
+		public EUserRole Role { get; set; }
 	}
 
 	public class EmailsModel
@@ -41,9 +42,9 @@ namespace dexih.api.Models
 
 	public class RemoveExternalLoginModel
 	{
-		public string Email;
-		public string Provider;
-		public string ProviderKey;
+		public string Email { get; set; }
+		public string Provider { get; set; }
+		public string ProviderKey { get; set; }
 	}
 	
 

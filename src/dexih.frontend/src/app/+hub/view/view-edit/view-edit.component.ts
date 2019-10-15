@@ -7,7 +7,7 @@ import { AuthService } from '../../../+auth/auth.service';
 import { InputOutputColumns } from '../../hub.lineage.models';
 import { CancelToken } from '../../../+auth/auth.models';
 import { HubCache, ConnectionTables, eCacheStatus } from '../../hub.models';
-import { eSourceType, eViewType, DexihDatalink, InputColumn, DexihColumnBase, SelectQuery, DexihView, DownloadObject, eDataObjectType } from '../../../shared/shared.models';
+import { eViewType, DexihDatalink, InputColumn, DexihColumnBase, SelectQuery, DexihView, DownloadObject, eDataObjectType } from '../../../shared/shared.models';
 
 @Component({
   selector: 'dexih-view-edit-form',
@@ -28,12 +28,12 @@ export class ViewEditComponent implements OnInit, OnDestroy {
   private _changesSubscription: Subscription;
 
   sourceTypes = [
-    { key: eSourceType.Datalink, name: 'Datalink' },
-    { key: eSourceType.Table, name: 'Table' }
+    { key: eDataObjectType.Datalink, name: 'Datalink' },
+    { key: eDataObjectType.Table, name: 'Table' }
   ];
 
   eViewType = eViewType;
-  eSourceType = eSourceType;
+  eDataObjectType = eDataObjectType;
 
   public connectionTables: ConnectionTables[] = [];
   public datalinks: DexihDatalink[] = [];
@@ -187,12 +187,21 @@ export class ViewEditComponent implements OnInit, OnDestroy {
     this.authService.navigateUp();
   }
 
+  toggleChart() {
+    if (this.showChart) {
+      this.showChart = false;
+      this.formsService.currentForm.controls.viewType.setValue(eViewType.Table);
+    } else {
+      this.showChart = true;
+      this.formsService.currentForm.controls.viewType.setValue(eViewType.Chart);
+    }
+  }
   getColumns() {
 
     let viewForm = this.formsService.currentForm;
     let viewInputs = <InputColumn[]>viewForm.controls.inputValues.value;
 
-    if (viewForm.controls.sourceType.value === eSourceType.Table && viewForm.controls.sourceTableKey.value > 0) {
+    if (viewForm.controls.sourceType.value === eDataObjectType.Table && viewForm.controls.sourceTableKey.value > 0) {
       let table = this.hubCache.getTable(viewForm.controls.sourceTableKey.value);
       if (table) {
         this.inputColumns = table.dexihTableColumns.filter(c => c.isInput).map(c => {
@@ -216,7 +225,7 @@ export class ViewEditComponent implements OnInit, OnDestroy {
       this.reset();
     }
 
-    if (viewForm.controls.sourceType.value === eSourceType.Datalink && viewForm.controls.sourceDatalinkKey.value > 0) {
+    if (viewForm.controls.sourceType.value === eDataObjectType.Datalink && viewForm.controls.sourceDatalinkKey.value > 0) {
       let datalink = this.datalinks.find(c => c.key === viewForm.controls.sourceDatalinkKey.value);
       if (datalink) {
         const ioColumns = new InputOutputColumns();
@@ -264,23 +273,6 @@ export class ViewEditComponent implements OnInit, OnDestroy {
     }).catch(() => {
     });
 
-    // if (viewForm.controls.sourceType.value === eSourceType.Datalink && viewForm.controls.sourceDatalinkKey.value) {
-    //   this.hubService.previewDatalinkKeyData(viewForm.controls.sourceDatalinkKey.value,
-    //     this.selectQuery, this.inputColumns, parameters).then((result) => {
-    //     this.columns = result.columns;
-    //     this.data = result.data;
-    //   }).catch(() => {
-    //   });
-
-    // }
-    // if (viewForm.controls.sourceType.value === eSourceType.Table && viewForm.controls.sourceTableKey.value) {
-    //   this.hubService.previewTableKeyData(viewForm.controls.sourceTableKey.value,
-    //       false, this.selectQuery, this.inputColumns, parameters).then((result) => {
-    //     this.columns = result.columns;
-    //     this.data = result.data;
-    //   }).catch(() => {
-    //   });
-    // }
   }
 
   download(format) {

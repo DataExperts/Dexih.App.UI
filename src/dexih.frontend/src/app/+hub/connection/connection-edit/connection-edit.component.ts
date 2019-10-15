@@ -95,7 +95,6 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
               if (!this.hubCache.hub || !this.hubCache.hub.dexihConnections) {
                 this.hubService.addHubErrorMessage('The hub cache is not loaded.');
               } else {
-
                 let connection = this.hubCache.hub.dexihConnections.find(c => c.key === this.connectionKey);
                 if (!connection) {
                   this.hubService.addHubErrorMessage('The specified connection could not be found.');
@@ -104,6 +103,9 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
                   this.updateDatabaseTypes(connection.purpose);
                   this.connectionReference = await this.hubService.GetConnectionReference(connection);
                   this.formsService.connection(connection);
+                  if (connection.defaultDatabase) {
+                    this.databases = [connection.defaultDatabase];
+                  }
                   this.logger.LogC(() => `edit connection, form loaded.`, eLogLevel.Trace);
                 }
               }
@@ -244,8 +246,10 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
     this.formsService.currentForm.controls.passwordDisplay.setValue('');
   }
 
-  refreshConnection() {
+  async refreshConnection() {
     this.logger.LogC(() => `refreshConnection.`, eLogLevel.Trace);
+
+    await this.encryptConnection();
 
     this.refreshingConnection = true;
     this.hubService.refreshConnection(this.formsService.currentForm.value, this.cancelToken)
@@ -265,8 +269,10 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
   createDatabase() {
     this.creatingDatabase = true;
 
-    this.authService.promptDialog('Create Database', 'Enter the name for the new database?').then(result => {
+    this.authService.promptDialog('Create Database', 'Enter the name for the new database?').then(async result => {
       if (result) {
+        await this.encryptConnection();
+
         let connection = Object.assign({}, this.formsService.currentForm.value);
         connection.defaultDatabase = result;
 
@@ -287,7 +293,7 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
     });
   }
 
-  async save() {
+  async encryptConnection() {
     let form = this.formsService.currentForm;
 
     let passwordRaw = form.controls.passwordRaw.value;
@@ -303,7 +309,10 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
       form.controls.connectionString.setValue(connectionString);
       form.controls.connectionStringRaw.setValue(null);
     }
+  }
 
+  async save() {
+    await this.encryptConnection();
     await this.formsService.save();
   }
 

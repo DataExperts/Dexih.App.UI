@@ -70,17 +70,19 @@ export class FilesBulkLoadComponent implements OnInit, OnDestroy {
         try {
             this._subscription = combineLatest(
                 this.route.queryParams,
-                this.hubService.getHubCacheObservable(),
+                this.hubService.getHubCacheObservable(true),
                 this.hubService.getRemoteLibrariesObservable()
             ).subscribe(result => {
                 let queryParams = result[0];
                 this.hubCache = result[1];
-
-                if (this.hubCache.status !== eCacheStatus.Loaded) { return; }
+                let remoteLibraries = result[2];
 
                 this.fileConnections = this.hubCache.hub.dexihConnections
-                    .filter(async c => {
-                        const ref = await this.hubService.GetConnectionReference(c);
+                    .filter(c => {
+                        let ref = remoteLibraries.connections.find(con =>
+                            c.connectionAssemblyName === con.connectionAssemblyName
+                            && c.connectionClassName === con.connectionClassName);
+
                         if (ref) {
                             return ref.connectionCategory === eConnectionCategory.File;
                         } else {
@@ -146,7 +148,11 @@ export class FilesBulkLoadComponent implements OnInit, OnDestroy {
                 let fileHandler = new FileHandler(file, url);
                 if (this.automaticUpload) {
                     this.authService.upload(fileHandler).then(status => {
-                        this.hubService.addHubMessage(status);
+                        if (status.success) {
+                            this.hubService.addHubSuccessMessage(file.name + ' uploaded.');
+                        } else {
+                            this.hubService.addHubMessage(status);
+                        }
                     }).catch(reason => {
                         this.hubService.addHubMessage(reason);
                     });
