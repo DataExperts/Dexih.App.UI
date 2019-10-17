@@ -159,7 +159,7 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
         if (item) {
           let data = <DataCache> item.controls.runTime.value.data;
           this.hubService.getRemoteResponse<PreviewResults>(url.dataKey, this.cancelToken).then(result => {
-            result.columns = this.hubService.constructDataTableColumns(result.columns);
+            result.columns = this.authService.constructDataTableColumns(result.columns);
             data.data.next(result);
           }).catch();
         }

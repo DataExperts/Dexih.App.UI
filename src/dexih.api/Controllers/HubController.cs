@@ -686,21 +686,32 @@ namespace dexih.api.Controllers
 				}
 
 				var view = hub.DexihViews.SingleOrDefault(c => c.Key == item.ViewKey);
-				string url = null;
-				
-				switch(view.SourceType)
+
+				if (view != null)
 				{
-					case EDataObjectType.Table:
-						url = await _remoteAgents.PreviewTable(previewDashboard.RemoteAgentId, previewDashboard.HubKey, previewDashboard.ResponseUrl, view.SourceTableKey.Value, view.SelectQuery, view.InputValues, itemParameters, false,  repositoryManager, cancellationToken);
-						break;
-					case EDataObjectType.Datalink:
-						url = await _remoteAgents.PreviewDatalink(previewDashboard.RemoteAgentId, previewDashboard.HubKey, previewDashboard.ResponseUrl, view.SourceDatalinkKey.Value, view.SelectQuery, view.InputValues, itemParameters, repositoryManager, cancellationToken);
-						break;
-					default:
-						throw new ArgumentOutOfRangeException();
+					string url = null;
+
+					switch (view.SourceType)
+					{
+
+						case EDataObjectType.Table:
+							url = await _remoteAgents.PreviewTable(previewDashboard.RemoteAgentId,
+								previewDashboard.HubKey, previewDashboard.ResponseUrl, view.SourceTableKey.Value,
+								view.SelectQuery, view.InputValues, itemParameters, false, repositoryManager,
+								cancellationToken);
+							break;
+						case EDataObjectType.Datalink:
+							url = await _remoteAgents.PreviewDatalink(previewDashboard.RemoteAgentId,
+								previewDashboard.HubKey, previewDashboard.ResponseUrl, view.SourceDatalinkKey.Value,
+								view.SelectQuery, view.InputValues, itemParameters, repositoryManager,
+								cancellationToken);
+							break;
+						default:
+							throw new ArgumentOutOfRangeException();
+					}
+
+					urls.Add(new DashboardDataKeys() {DashboardItemKey = item.Key, DataKey = url});
 				}
-				
-				urls.Add(new DashboardDataKeys() {DashboardItemKey = item.Key, DataKey = url});
 			}
 
 			return urls;

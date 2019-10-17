@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1be1a9df-0647-4351-ace4-9bafd064437b" name="Default" comment="minor">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.dexih.api/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.dexih.api/riderModule.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dexih.api.sln" beforeDir="false" afterPath="$PROJECT_DIR$/dexih.api.sln" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dexih.api/Controllers/HubController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Controllers/HubController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Models/HubModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Models/HubModels.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Services/Remote/IRemoteAgents.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Services/Remote/IRemoteAgents.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Services/Remote/RemoteAgents.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Services/Remote/RemoteAgents.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/dashboard/dashboard-edit/dashboard-edit.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/dashboard/dashboard-edit/dashboard-edit.component.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -312,11 +307,13 @@
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.ml/RecommendationAnalysis.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.ml/Prediction.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D66EA663-E803-4E1D-B9B9-92E84CCC8B9C/b4/22e586b4/MemoryCache.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/13/9cb4242a/RuntimeHelpers.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1BF4D888-4AB2-4176-8897-7D33A73E32A1/b1/66598ca6/ICacheEntry.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0C4880C9-4674-455A-AE91-4C3F449CB8D7/95/e8bfe92d/DbDataReader.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3009FF4D-9AFB-4E78-AB60-DEC1A8192077/51/6dc7581e/Socket.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C9085ED1-14B8-43D6-8D44-32FEF830F672/53/a389844e/Contracts.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1B934EB7-CB5A-4077-8EE7-655BE94EC6C7/4f/f67f4470/RedisCache.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/e3/2d00e7b9/Object.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Dexih.Utils.ManagedTasks/src/Dexih.Utils.ManagedTasks/ManagedTaskFileWatcher.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AA93D159-B2BF-4AE2-ABB8-0F3721E174C1/08/317b5e94/ConsoleLoggerExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/996DC3E1-EB54-4EE0-861C-0639083A927E/54/80cecf3d/JsonElement.cs" root0="SKIP_HIGHLIGHTING" />
@@ -404,6 +401,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4E804593-0F71-4C24-9780-929D54C74935/2a/f88c0298/EstimatorChain`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/8D506B5F-4E1A-4ACA-9C41-7C85929CCAED/55/08b17f35/MetaType.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/863B81D8-9327-499B-9618-D9BE52F0AC42/10/bccc2465/FeatureReferences`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.maths/CurveFittingFunctions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.maths/EuclidFunctions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.maths/ProbabilityDistributionFunctions.cs" root0="FORCE_HIGHLIGHTING" />
@@ -637,6 +635,7 @@
     <setting file="file://$PROJECT_DIR$/src/dexih.api/Models/RemoteModels.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/dexih.api/Models/LoggingEvents.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/Streams/IStreams.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.connections.azure/dexih.connections.azure.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3F9A6BF9-CC47-4E04-95B6-4187B8F17D2C/23/e86b73cd/MethodBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0F4D9357-BD21-4C64-A321-2AA6B1E48BC1/e1/a16a5057/ITransformer.cs" root0="SKIP_HIGHLIGHTING" />
@@ -656,17 +655,14 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/Extensions/JsonExtensions.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/LiveApis/ApiData.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Controllers/RemoteController.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Services/Remote/IRemoteAgents.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Services/Remote/RemoteAgentProperties.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Services/Remote/RemoteAgents.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/LiveApis/LiveApis.cs" />
-        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Transform.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/Extensions/Extensions.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Models/HubModels.cs" />
-        <option value="$PROJECT_DIR$/src/dexih.api/Controllers/HubController.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/Startup.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.operations/CacheManager.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Proxy/src/dexih.proxy/Startup.cs" />
@@ -685,7 +681,6 @@
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.builtIn/AggregateFunctions.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/Parameter/Parameter.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/Parameter/ParameterArray.cs" />
-        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/Table/Table.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/Table/TableColumn.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/Parameter/ParameterValue.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/Table/WebService.cs" />
@@ -707,6 +702,10 @@
         <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.operations/RepositoryManager.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.connections.azure/dexih.connections.azure.reader.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.connections.azure/dexih.connections.azure.cs" />
+        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Transform.cs" />
+        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/Table/TableCache.cs" />
+        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/Table/Table.cs" />
+        <option value="$PROJECT_DIR$/src/dexih.api/Controllers/HubController.cs" />
       </list>
     </option>
   </component>
@@ -892,7 +891,17 @@
       <serviceView>
         <option name="contentProportion" value="0.34266666" />
         <treeState>
-          <expand />
+          <expand>
+            <path>
+              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@5daf0835" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+            </path>
+            <path>
+              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@5daf0835" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@a31ded9a" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+            </path>
+          </expand>
           <select />
         </treeState>
       </serviceView>
@@ -1485,7 +1494,7 @@
       <workItem from="1570496016179" duration="9261000" />
       <workItem from="1570572346305" duration="42934000" />
       <workItem from="1571004238046" duration="74000" />
-      <workItem from="1571108977291" duration="1228000" />
+      <workItem from="1571108977291" duration="4992000" />
     </task>
     <task id="LOCAL-00001" summary="Connections to remote agents working.">
       <created>1509234944099</created>
@@ -1776,6 +1785,19 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="235" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/ConnectionSql.cs</url>
+          <line>497</line>
+          <properties documentPath="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/ConnectionSql.cs" initialLine="497">
+            <startOffsets>
+              <option value="20311" />
+            </startOffsets>
+            <endOffsets>
+              <option value="20496" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="239" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
