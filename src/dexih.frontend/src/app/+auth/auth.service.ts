@@ -409,7 +409,18 @@ export class AuthService implements OnDestroy {
 
     public JsonNoNulls(data) {
         return JSON.stringify(data, (key, value) => {
-            if (value !== null) { return value };
+            // don't bother saving the null values.
+            if (value === null) { return undefined; }
+
+            switch (key) {
+                case 'currentStatus':
+                case 'entityStatus':
+                case 'previousStatus':
+                case 'runTime':
+                    return undefined;
+            }
+
+            return value;
         });
     }
 
@@ -616,20 +627,7 @@ export class AuthService implements OnDestroy {
         let body: string;
         if (data) {
             data.clientConnectionId = this.getWebSocketConnectionId()
-            body = JSON.stringify(data, (key, value) => {
-                // don't bother saving the null values.
-                if (value === null) { return undefined; }
-
-                switch (key) {
-                    case 'currentStatus':
-                    case 'entityStatus':
-                    case 'previousStatus':
-                    case 'runTime':
-                        return undefined;
-                }
-
-                return value;
-            });
+            body = this.JsonNoNulls(data);
         } else {
             body = '{}';
         }
@@ -867,7 +865,7 @@ export class AuthService implements OnDestroy {
 
         return dtColumns;
     }
-    
+
     // this needs to be set by a top level component so the dialog has a container to load into.
     setDialogDefaultContainer(modalComponent: DexihModalComponent) {
         // this.overlay.defaultViewContainer = defaultViewContainer;
@@ -980,18 +978,16 @@ export class AuthService implements OnDestroy {
                     FileSaver.saveAs(blob, name);
                     resolve(true);
                 }, error => {
-                    this.logger.LogC(() => `downloadFile error:${error.message}`, eLogLevel.Error);
-                    reject(this.httpError(url, error));
-                    // if (error.error) {
-                    //     let reader = new FileReader();
-                    //     reader.readAsText(error.error);
-                    //     reader.onload = function () {
-                    //         let message = JSON.parse(reader.result.toString());
-                    //         reject(message);
-                    //     }
-                    // } else {
-                    //     reject(error);
-                    // }
+                    if (error.error) {
+                        let reader = new FileReader();
+                        reader.readAsText(error.error);
+                        reader.onload = function () {
+                            let message = JSON.parse(reader.result.toString());
+                            reject(message);
+                        }
+                    } else {
+                        reject(error);
+                    }
                 });
         });
     }

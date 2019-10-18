@@ -1,13 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
-import { RemoteApplicationSettings, privacyLevels, logLevels,
-  environments, eEnvironment, RemoteSettings} from './remoteAgent-download.models';
 import { AuthService } from '../../../+auth/auth.service';
-import { eLogLevel } from '../../../../logging';
 import { DexihHubAuth } from '../../../+auth/auth.models';
 import { HubsService } from '../../hubs.service';
 import { FormsService } from '../../../shared/forms/forms.service';
 import { FormBuilder, Validators } from '@angular/forms';
+import { logLevel, eEnvironment, RemoteAgentSettings, logLevelItems, RemoteAgentSettingsSubset, eEnvironmentItems } from '../../../shared/shared.models';
 
 @Component({
   selector: 'dexih-remoteAgent-download-form',
@@ -21,12 +19,11 @@ export class RemoteAgentDownloadComponent implements OnInit, OnDestroy {
   public refreshingEncryptionKey = false;
   public refreshingUserToken = false;
 
-  public privacyLevels = privacyLevels;
-  public logLevels = logLevels;
-  public environments = environments;
+  public logLevelItems = logLevelItems;
+  public eEnvironmentItems = eEnvironmentItems.filter(c => c.key > 0);
 
   public embedUserName = true;
-  public logLevel: eLogLevel = eLogLevel.Information;
+  public logLevel: logLevel = logLevel.Information;
   public environment: eEnvironment = eEnvironment.Windows;
   public hubs: DexihHubAuth[]
 
@@ -40,9 +37,9 @@ export class RemoteAgentDownloadComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
         this.hubs = this.authService.getHubs()
-        let remoteApplicationSettings = new RemoteApplicationSettings();
+        let remoteApplicationSettings = new RemoteAgentSettingsSubset();
         this.remoteAgentSettings(remoteApplicationSettings);
-        this.logLevel = eLogLevel.Information;
+        this.logLevel = logLevel.Information;
   }
 
   ngOnDestroy() {
@@ -109,7 +106,7 @@ export class RemoteAgentDownloadComponent implements OnInit, OnDestroy {
     });
   }
 
-  public remoteAgentSettings(remoteAgent: RemoteApplicationSettings) {
+  public remoteAgentSettings(remoteAgent: RemoteAgentSettingsSubset) {
     const remoteAgentForm = this.fb.group({
       'name': [remoteAgent.name, [
         Validators.required,
@@ -122,7 +119,7 @@ export class RemoteAgentDownloadComponent implements OnInit, OnDestroy {
     }
     );
 
-    this.formsService.addMissing(remoteAgent, remoteAgentForm, new RemoteApplicationSettings());
+    this.formsService.addMissing(remoteAgent, remoteAgentForm, new RemoteAgentSettingsSubset());
     this.formsService.clearFormSubscriptions();
     this.formsService.startForm(remoteAgentForm);
   }

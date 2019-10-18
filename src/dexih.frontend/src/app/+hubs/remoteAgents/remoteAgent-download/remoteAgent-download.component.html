@@ -17,7 +17,7 @@
 				</section>
 
 				<section>
-						<form-select label="Operating System" [(ngModel)]="environment" [ngModelOptions]="{standalone: true}" [items]="environments" itemKey="key" itemName="name" [enableFilter]="false"
+						<form-select label="Operating System" [(ngModel)]="environment" [ngModelOptions]="{standalone: true}" [items]="eEnvironmentItems" itemKey="key" itemName="name" [enableFilter]="false"
 							note='The operating system that remote agent will be executed on.'>
 						</form-select>
 					</section>
@@ -59,7 +59,7 @@
 				</div>
 
 				<section>
-					<form-select label="Logging Level" [(ngModel)]="logLevel" [ngModelOptions]="{standalone: true}" [items]="logLevels" itemKey="key" itemName="name" [enableFilter]="false"
+					<form-select label="Logging Level" [(ngModel)]="logLevel" [ngModelOptions]="{standalone: true}" [items]="logLevelItems" itemKey="key" itemName="name" [enableFilter]="false"
 						note='The level of detail to be included in the diagnostic logs.'>
 					</form-select>
 				</section>

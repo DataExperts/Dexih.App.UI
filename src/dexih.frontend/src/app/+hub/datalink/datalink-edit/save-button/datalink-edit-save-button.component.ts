@@ -52,7 +52,7 @@ export class DatalinkEditSaveButtonComponent implements OnInit, OnDestroy {
         this.cancelToken.cancel();
     }
 
-    async saveDatalink() {
+    async saveDatalink(saveAs = false) {
         this.savingDatalink.next(true);
 
         if (this.datalinkForm.controls.dexihDatalinkTargets.dirty) {
@@ -77,7 +77,7 @@ export class DatalinkEditSaveButtonComponent implements OnInit, OnDestroy {
                     }
                 }
 
-                this.editDatalinkService.hubFormsService.save();
+                this.editDatalinkService.hubFormsService.save(false, saveAs);
                 this.savingDatalink.next(false);
             }
 
@@ -97,7 +97,7 @@ export class DatalinkEditSaveButtonComponent implements OnInit, OnDestroy {
                 }).catch(() => this.savingDatalink.next(false))
             }
         } else {
-            this.editDatalinkService.hubFormsService.save();
+            this.editDatalinkService.hubFormsService.save(false, saveAs);
             this.savingDatalink.next(false);
         }
     }

@@ -52,23 +52,23 @@
 
 
 <dexih-widget-section title="Tables" [showExpandButton]="true" [padding]="false" *ngIf="!datalinkForm?.controls.isQuery.value">
-<dexih-table [enableMultiSelect]="true" [enableManualSort]="true" [enableSort]="false"
-    [enableFilter]="false" (onSortChanged)="targetSortChange($event)" [columns]="targetTableColumns" [data]="targets"
-    (rowClick)="editTable($event)">
+    <dexih-table [enableMultiSelect]="true" [enableManualSort]="true" [enableSort]="false"
+        [enableFilter]="false" (onSortChanged)="targetSortChange($event)" [columns]="targetTableColumns" [data]="targets"
+        (rowClick)="editTable($event)">
 
-    <ng-template #actions let-items="items">
-        <dexih-button-new (click)="addTable()"></dexih-button-new>
-    </ng-template>
+        <ng-template #actions let-items="items">
+            <dexih-button-new (click)="addTable()"></dexih-button-new>
+        </ng-template>
 
-    <ng-template #selectedItemAction select="selectedItemAction" let-item="item">
-        <dexih-button-edit (click)="editTable(item)"></dexih-button-edit>
-    </ng-template>
+        <ng-template #selectedItemAction select="selectedItemAction" let-item="item">
+            <dexih-button-edit (click)="editTable(item)"></dexih-button-edit>
+        </ng-template>
 
-    <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-        <dexih-button-delete (click)="deleteTables(items)"></dexih-button-delete>
-    </ng-template>
+        <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+            <dexih-button-delete (click)="deleteTables(items)"></dexih-button-delete>
+        </ng-template>
 
-</dexih-table>
+    </dexih-table>
 </dexih-widget-section>
 
 <router-outlet></router-outlet>

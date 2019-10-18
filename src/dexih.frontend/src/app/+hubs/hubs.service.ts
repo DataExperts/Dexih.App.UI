@@ -2,10 +2,9 @@ import { ManagedTask, Message, CancelToken } from '../+auth/auth.models';
 import { eLogLevel, LogFactory } from '../../logging';
 import { Injectable, OnDestroy } from '@angular/core';
 import { AuthService } from '../+auth/auth.service';
-import { BehaviorSubject, Observable, Subscription} from 'rxjs';
-import { eEnvironment, RemoteApplicationSettings } from './remoteAgents/remoteAgent-download/remoteAgent-download.models';
+import { BehaviorSubject, Observable} from 'rxjs';
 import { eDownloadFormat, DexihActiveAgent, InputColumn, SelectQuery,
-    eTypeCode, DexihRemoteAgent, SharedData, eDataObjectType, DataPack } from '../shared/shared.models';
+    DexihRemoteAgent, SharedData, eDataObjectType, logLevel, eEnvironment, RemoteAgentSettings, RemoteAgentSettingsSubset } from '../shared/shared.models';
 import { PreviewResults } from '../+hub/hub.models';
 
 @Injectable()
@@ -173,13 +172,19 @@ export class HubsService implements OnDestroy {
         return this.authService.post<boolean>('/api/Account/RestartAgents', { instanceIds, force}, 'Restarting agent(s)...');
     }
 
-    public downloadRemoteAgent(embedUserName: boolean, environment: eEnvironment, logLevel: eLogLevel, settings: RemoteApplicationSettings):
+    public downloadRemoteAgent(embedUserName: boolean, environment: eEnvironment, ll: logLevel, settings: RemoteAgentSettingsSubset):
     Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
+            let remoteAgentSettings = new RemoteAgentSettings();
+            remoteAgentSettings.embedUserName = embedUserName;
+            remoteAgentSettings.environment = environment;
+            remoteAgentSettings.logLevel = ll;
+            remoteAgentSettings.remoteApplicationSettings = settings;
+
             this.authService.downloadFile('/api/Remote/DownloadZip', {
                 embedUserName,
                 environment,
-                logLevel,
+                ll,
                 RemoteApplicationSettings: settings
             }, 'dexih.remote.zip', 'application/zip').then(() => {
                 resolve(true);
@@ -191,13 +196,19 @@ export class HubsService implements OnDestroy {
         });
     }
 
-    public downloadRemoteSettings(embedUserName: boolean, environment: eEnvironment, logLevel: eLogLevel,
-        settings: RemoteApplicationSettings): Promise<boolean> {
+    public downloadRemoteSettings(embedUserName: boolean, environment: eEnvironment, ll: logLevel,
+        settings: RemoteAgentSettingsSubset): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
+            let remoteAgentSettings = new RemoteAgentSettings();
+            remoteAgentSettings.embedUserName = embedUserName;
+            remoteAgentSettings.environment = environment;
+            remoteAgentSettings.logLevel = ll;
+            remoteAgentSettings.remoteApplicationSettings = settings;
+
             this.authService.downloadFile('/api/Remote/DownloadAppSettings', {
                 embedUserName,
                 environment,
-                logLevel,
+                ll,
                 RemoteApplicationSettings: settings
             }, 'appsettings.json', 'application/json').then(() => {
                     resolve(true);

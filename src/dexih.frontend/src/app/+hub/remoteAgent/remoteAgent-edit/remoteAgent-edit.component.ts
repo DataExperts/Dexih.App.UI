@@ -115,6 +115,15 @@ export class RemoteAgentEditComponent implements OnInit, OnDestroy {
                 ipAddressesControl.setValue(ipAddresses);
             }
         }
+    }
 
+    save() {
+        let form = this.formsService.currentForm;
+        let remoteAgentHub = form.value;
+        this.hubService.saveRemoteAgent(remoteAgentHub).then((success) => {
+            if (success) {
+                this.hubService.addHubSuccessMessage('The remote agent updated successfully.')
+            }
+        });
     }
 }

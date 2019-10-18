@@ -195,7 +195,7 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
         let nodeItem = <FormGroup> items.controls.find(d => d.value.transformItemType === this.nodeType);
         if (allowNode) {
             if (!this.nodeName) {
-                this.nodeName = this.nodeType.toString();
+                this.nodeName = eTransformItemType[this.nodeType];
             }
 
             if (nodeItem) {

@@ -780,6 +780,7 @@ chmod a+x dexih.remote.run.{os}.sh
 
         [HttpPost("[action]")]
         [ValidateAntiForgeryToken]
+        [ApiFilter]
         public async Task<IActionResult> DownloadAppSettings([FromBody] RemoteAgentSettings settings, CancellationToken cancellationToken)
         {
             var appsettingsStream = await CreateAppSettingsFile(settings, cancellationToken);
@@ -788,6 +789,7 @@ chmod a+x dexih.remote.run.{os}.sh
 
         [HttpPost("[action]")]
         [ValidateAntiForgeryToken]
+        [ApiFilter]
         public async Task<IActionResult> DownloadZip([FromBody] RemoteAgentSettings settings, CancellationToken cancellationToken)
         {
             var appSettingsStream = await CreateAppSettingsFile(settings, cancellationToken);

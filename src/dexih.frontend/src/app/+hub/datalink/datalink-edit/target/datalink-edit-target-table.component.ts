@@ -338,7 +338,7 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
 
                     Object.assign(newColumn, missingColumn);
 
-                    newColumn.key = this.hubCache.getNextSequence();
+                    this.resetColumnKeys(newColumn);
                     let positions = tableColumns.controls.map<number>(c => <number>c.value.position);
                     let position = positions.length === 0 ? 0 : Math.max(...positions) + 1; // add the the last position
                     newColumn.position = position;
@@ -351,6 +351,14 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
             this.updateData();
         }
         this.logger.LogC(() => `addMissing completed`, eLogLevel.Trace);
+    }
+
+    resetColumnKeys(column: DexihTableColumn) {
+        column.key = this.hubCache.getNextSequence();
+
+        if (column.childColumns) {
+            column.childColumns.forEach(childColumn => this.resetColumnKeys(childColumn));
+        }
     }
 
     toggleNewTable() {

@@ -1,5 +1,6 @@
 import {HubCache, eMappingStatus } from './hub.models'
-import { DexihDatalinkColumn, eTypeCode, DexihDatalink, DexihDatalinkTable, eTransformItemType, eTransformType, DexihTableColumn, DexihDatalinkTransform, DexihDatalinkTransformItem, DexihFunctionParameter, eDeltaType } from '../shared/shared.models';
+import { DexihDatalinkColumn, eTypeCode, DexihDatalink, DexihDatalinkTable, eTransformItemType,
+    eTransformType, DexihTableColumn, DexihDatalinkTransform, DexihDatalinkTransformItem, DexihFunctionParameter, eDeltaType } from '../shared/shared.models';
 
 export enum eDatalinkObjectType {
     SourceTable,
@@ -980,8 +981,8 @@ export class ColumnUsageNode {
             case eDeltaType.Version:
             case eDeltaType.ValidFromDate:
             case eDeltaType.ValidToDate:
-            case eDeltaType.AzurePartitionKey:
-            case eDeltaType.AzureRowKey:
+            case eDeltaType.PartitionKey:
+            case eDeltaType.RowKey:
             case eDeltaType.CreateAuditKey:
             case eDeltaType.CreateDate:
             case eDeltaType.FileName:

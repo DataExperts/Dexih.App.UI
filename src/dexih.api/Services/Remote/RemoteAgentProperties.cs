@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using dexih.functions;
 using dexih.repository;
 using MessagePack;
 

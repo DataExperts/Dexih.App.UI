@@ -243,7 +243,7 @@ namespace dexih.api.Models
         public string TargetTableName { get; set; }
         public long? AuditConnectionKey { get; set; }
         public bool AddSourceColumns { get; set; }
-        public TableColumn.EDeltaType[] AuditColumns { get; set; }
+        public EDeltaType[] AuditColumns { get; set; }
     }
     
     public class DownloadTableDataModel: PreviewBase

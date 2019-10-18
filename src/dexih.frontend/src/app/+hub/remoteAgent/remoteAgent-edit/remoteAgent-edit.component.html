@@ -10,7 +10,7 @@
     >
         <ng-template #header>
             <dexih-button-edit [routerLink]="['/hubs', 'index', 'agents', 'edit', remoteAgentKey]"></dexih-button-edit>
-            <save-button [formsService]="formsService" class="pl-1"></save-button>
+            <dexih-button-save [disabled]="!formsService.hasChanged" (click)="save()" class="pl-1"></dexih-button-save>
             <cancel-button [formsService]="formsService" class="pl-1"></cancel-button>
         </ng-template>
 

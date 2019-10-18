@@ -1420,6 +1420,41 @@ export class ApiData{
 	public downloadUrls: DownloadUrl[] = [];
   }
   
+  export class RemoteAgentSettings{
+	public embedUserName: boolean = false;
+	public environment: eEnvironment = null;
+	public logLevel: logLevel = logLevel.Trace;
+	public remoteApplicationSettings: RemoteAgentSettingsSubset = null;
+  }
+  
+  export class RemoteAgentSettingsSubset{
+	public allowedHubs: number[] = [];
+	public allowedPaths: string[] = [];
+	public allowAllHubs: boolean = false;
+	public allowAllPaths: boolean = false;
+	public allowDownload: boolean = false;
+	public allowExternalAccess: boolean = false;
+	public allowLanAccess: boolean = false;
+	public allowLocalFiles: boolean = false;
+	public allowProxy: boolean = false;
+	public allowUpload: boolean = false;
+	public autoGenerateCertificate: boolean = false;
+	public autoSchedule: boolean = false;
+	public autoUpgrade: boolean = false;
+	public downloadPort: number = 0;
+	public enableUPnP: boolean = false;
+	public encryptionKey: string = null;
+	public enforceHttps: boolean = false;
+	public externalDownloadUrl: string = null;
+	public firstRun: boolean = false;
+	public name: string = null;
+	public preRelease: boolean = false;
+	public remoteAgentId: string = null;
+	public user: string = null;
+	public userToken: string = null;
+	public webServer: string = null;
+  }
+  
   export class RemoteAgentStatus{
 	public activeApis: ApiData[] = [];
 	public activeDatajobs: ManagedTask[] = [];
@@ -1483,6 +1518,7 @@ export class ApiData{
 	public exceptionDetails: string = null;
   }
   
+
   
   export class ReturnValueMultiple{
 	public returnValues: ReturnValue[] = [];
@@ -2095,8 +2131,8 @@ export class ApiData{
 	  RejectedReason = 17,
 	  FileName = 18,
 	  FileRowNumber = 19,
-	  AzureRowKey = 20,
-	  AzurePartitionKey = 21,
+	  RowKey = 20,
+	  PartitionKey = 21,
 	  TimeStamp = 22,
 	  DatabaseOperation = 23,
 	  ResponseSuccess = 24,
@@ -2128,8 +2164,8 @@ export class ApiData{
 	  {key: eDeltaType.RejectedReason, name: 'RejectedReason', description: ''},
 	  {key: eDeltaType.FileName, name: 'FileName', description: ''},
 	  {key: eDeltaType.FileRowNumber, name: 'FileRowNumber', description: ''},
-	  {key: eDeltaType.AzureRowKey, name: 'AzureRowKey', description: ''},
-	  {key: eDeltaType.AzurePartitionKey, name: 'AzurePartitionKey', description: ''},
+	  {key: eDeltaType.RowKey, name: 'RowKey', description: ''},
+	  {key: eDeltaType.PartitionKey, name: 'PartitionKey', description: ''},
 	  {key: eDeltaType.TimeStamp, name: 'TimeStamp', description: ''},
 	  {key: eDeltaType.DatabaseOperation, name: 'DatabaseOperation', description: ''},
 	  {key: eDeltaType.ResponseSuccess, name: 'ResponseSuccess', description: ''},
@@ -2187,6 +2223,19 @@ export class ApiData{
 	  {key: eDuplicateStrategy.First, name: 'First', description: ''},
 	  {key: eDuplicateStrategy.Last, name: 'Last', description: ''},
 	  {key: eDuplicateStrategy.All, name: 'All', description: ''},
+  ]
+  
+  export enum eEnvironment{
+	  Windows = 1,
+	  Osx = 2,
+	  Linux = 3,
+  }
+  
+  export const eEnvironmentItems = [
+	  {key: 0, name: 'Unknown', description: 'Unknown'},
+	  {key: eEnvironment.Windows, name: 'Windows', description: 'Windows 7/8/8.1/10'},
+	  {key: eEnvironment.Osx, name: 'Osx', description: 'Mac OSX'},
+	  {key: eEnvironment.Linux, name: 'Linux', description: 'Linux'},
   ]
   
   export enum eErrorAction{
@@ -2878,3 +2927,4 @@ export class ApiData{
 	  {key: logLevel.Critical, name: 'Critical', description: ''},
 	  {key: logLevel.None, name: 'None', description: ''},
   ]
+  
