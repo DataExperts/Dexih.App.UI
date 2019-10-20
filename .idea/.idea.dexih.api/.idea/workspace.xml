@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1be1a9df-0647-4351-ace4-9bafd064437b" name="Default" comment="minor">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.dexih.api/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.dexih.api/riderModule.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dexih.api.sln" beforeDir="false" afterPath="$PROJECT_DIR$/dexih.api.sln" afterDir="false" />
-    </list>
+    <list default="true" id="1be1a9df-0647-4351-ace4-9bafd064437b" name="Default" comment="minor" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1493,6 +1488,7 @@
       <workItem from="1571352854508" duration="9047000" />
       <workItem from="1571554396051" duration="586000" />
       <workItem from="1571558362485" duration="44000" />
+      <workItem from="1571602366603" duration="236000" />
     </task>
     <task id="LOCAL-00001" summary="Connections to remote agents working.">
       <created>1509234944099</created>

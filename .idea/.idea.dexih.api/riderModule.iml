@@ -33,7 +33,6 @@
     <content url="file://$MODULE_DIR$/../../../dexih.transforms/src/dexih.functions.maths" />
     <content url="file://$MODULE_DIR$/../../../dexih.transforms/src/dexih.functions.ml" />
     <content url="file://$MODULE_DIR$/../../../dexih.transforms/src/dexih.transforms" />
-    <content url="file://$MODULE_DIR$/../../../dexih.utils.datatype/src/Dexih.Utils.DataType" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
