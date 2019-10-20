@@ -69,8 +69,7 @@ namespace dexih.api.Services.Operations
                     var response =
                         await httpClient.GetAsync(
                             "https://api.github.com/repos/DataExperts/Dexih.App.Remote/releases");
-                    var responseText = await response.Content.ReadAsStringAsync();
-                    var releases = responseText.ToJsonDocument();
+                    var releases = await JsonDocument.ParseAsync(await response.Content.ReadAsStreamAsync());
 
                     UpdateRemoteVersionInfo(releases.RootElement[0], true);
 
