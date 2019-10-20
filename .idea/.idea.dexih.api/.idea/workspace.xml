@@ -894,17 +894,7 @@
       <serviceView>
         <option name="contentProportion" value="0.25275657" />
         <treeState>
-          <expand>
-            <path>
-              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@c700b40" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-            </path>
-            <path>
-              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@c700b40" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@2b483391" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-            </path>
-          </expand>
+          <expand />
           <select />
         </treeState>
       </serviceView>
@@ -1501,7 +1491,8 @@
       <workItem from="1571295323762" duration="728000" />
       <workItem from="1571340204779" duration="5284000" />
       <workItem from="1571352854508" duration="9047000" />
-      <workItem from="1571554396051" duration="316000" />
+      <workItem from="1571554396051" duration="586000" />
+      <workItem from="1571558362485" duration="44000" />
     </task>
     <task id="LOCAL-00001" summary="Connections to remote agents working.">
       <created>1509234944099</created>
