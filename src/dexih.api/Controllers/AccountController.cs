@@ -922,7 +922,8 @@ namespace dexih.api.Controllers
 	    [HttpPost("[action]")]
 	    [ValidateAntiForgeryToken]
 	    public async Task SaveRemoteAgent([FromBody] DexihRemoteAgent hubRemoteAgent, CancellationToken cancellationToken)
-	    {   var user = await GetApplicationUser(cancellationToken);
+	    {   
+		    var user = await GetApplicationUser(cancellationToken);
 
 		    if (user == null)
 		    {

@@ -123,6 +123,9 @@ export class HubVariableEditComponent implements OnInit, OnDestroy {
           form.controls.value.setValue(value);
           form.controls.valueRaw.setValue(null);
         }
+      } else {
+        let valueRaw = form.controls.valueRaw.value;
+        form.controls.value.setValue(valueRaw);
       }
 
     await this.formsService.save();

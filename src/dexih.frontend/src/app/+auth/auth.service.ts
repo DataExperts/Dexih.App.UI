@@ -1578,9 +1578,7 @@ export class AuthService implements OnDestroy {
     }
 
     saveRemoteAgent(remoteAgent: DexihRemoteAgent): Promise<boolean> {
-        return this.post<boolean>('/api/Account/SaveRemoteAgent', {
-            remoteAgent
-        }, 'Saving remote agent details...');
+        return this.post<boolean>('/api/Account/SaveRemoteAgent', remoteAgent, 'Saving remote agent details...');
     }
 
     // scans each available download url in order, to find one this client can access.

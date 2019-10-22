@@ -59,8 +59,6 @@ export class RemoteAgentEditComponent implements OnInit, OnDestroy {
                     remoteAgentForm.controls.remoteAgentId.disable();
                     this.formsService.clearFormSubscriptions();
                     this.formsService.startForm(remoteAgentForm);
-                }).catch(reason => {
-
                 });
             });
         } catch (e) {
@@ -78,7 +76,14 @@ export class RemoteAgentEditComponent implements OnInit, OnDestroy {
     }
 
     save() {
-        this.authService.saveRemoteAgent(this.formsService.currentForm.value);
+        let form = this.formsService.currentForm;
+        let remoteAgent = form.value;
+        remoteAgent.name = form.controls.name.value;
+        remoteAgent.remoteAgentId = form.controls.remoteAgentId.value;
+        this.authService.saveRemoteAgent(this.formsService.currentForm.value).then(result => {
+            this.hubsService.addHubSuccessMessage('The remote agent was updated successfully.');
+            this.authService.pingRemoteAgents();
+        });
     }
 
     addCurrentIp() {

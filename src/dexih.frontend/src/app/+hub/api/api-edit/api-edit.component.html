@@ -83,7 +83,7 @@
 			</form>
 		</dexih-widget-section>
 
-		<dexih-widget-section *ngIf="formsService.currentForm"  title="Parameters" [showExpandButton]="true" [padding]="false" [padding]="true">
+		<dexih-widget-section *ngIf="formsService.currentForm"  title="Parameters" [showExpandButton]="true" [padding]="true">
 			<input-parameters [showEdit]="true" [parameters]="formsService.currentForm.controls.parameters"
 				[formsService]="formsService">
 			</input-parameters>
