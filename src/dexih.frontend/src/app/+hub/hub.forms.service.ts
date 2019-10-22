@@ -1103,7 +1103,7 @@ export class HubFormsService implements OnDestroy {
     const parameterForm = this.fb.group({
       'name': [parameter.name, [
         Validators.required,
-        Validators.minLength(3),
+        Validators.minLength(1),
         Validators.maxLength(50),
       ]],
     });

@@ -22,7 +22,7 @@ export class ResultsIndexComponent implements OnInit, OnDestroy {
     private datalinkStatus: Map<number, TransformWriterResult>;
 
     private cancelToken = new CancelToken();
-    
+
     showPage = false;
     showPageMessage = 'Loading...';
 
@@ -154,7 +154,8 @@ export class ResultsIndexComponent implements OnInit, OnDestroy {
     watchChanges() {
         // watch the current connection in case it is changed in another session.
         if (this._transformWriterResultChangeSubscription) { this._transformWriterResultChangeSubscription.unsubscribe(); }
-        this._transformWriterResultChangeSubscription = this.hubService.getTransformWriterResultChangeObservable().subscribe(writerResult => {
+        this._transformWriterResultChangeSubscription =
+            this.hubService.getTransformWriterResultChangeObservable().subscribe(writerResult => {
                 let results: TransformWriterResult[] = this._tableData.value;
 
                 if (this.datalinks && this.datalinks.findIndex(c => c === writerResult.referenceKey) >= 0) {

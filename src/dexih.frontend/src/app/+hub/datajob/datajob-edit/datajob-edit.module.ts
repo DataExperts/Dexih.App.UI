@@ -10,6 +10,7 @@ import { DatajobEditTriggerComponent } from './trigger-edit/datajob-edit-trigger
 import { DatajobEditStepComponent } from './step-edit/datajob-edit-step.component';
 import { DatajobAddStepsComponent } from './steps-add/datajob-add-steps.component';
 
+import { DexihFormDaysOfWeekComponent } from './trigger-edit/dexih-form-daysofweek.component';
 import { HubFormsService } from '../../hub.forms.service';
 import { DatajobEditGuard } from './datajob-edit-guard';
 import { HubSharedModule } from '../../hub.shared.module';
@@ -28,7 +29,8 @@ import { HubSharedModule } from '../../hub.shared.module';
         DatajobEditPropertiesComponent,
         DatajobEditTriggerComponent,
         DatajobEditStepComponent,
-        DatajobAddStepsComponent
+        DatajobAddStepsComponent,
+        DexihFormDaysOfWeekComponent
     ],
     providers: [ HubFormsService, DatajobEditGuard ],
     exports: []

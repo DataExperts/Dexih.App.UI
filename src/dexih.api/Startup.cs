@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO.Compression;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using dexih.api.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -17,6 +18,7 @@ using Microsoft.AspNetCore.Identity;
 using dexih.api.Services.Remote;
 using dexih.api.Services.Message;
 using dexih.api.Services.Operations;
+using dexih.functions;
 using dexih.operations;
 using MessagePack.AspNetCoreMvcFormatter;
 using MessagePack.Resolvers;
@@ -161,21 +163,13 @@ namespace dexih.api
 
             // Add framework services.
             services.AddMvc()
-//	            .AddNewtonsoftJson();
-//	            .AddMvcOptions(option =>
-//	            {
-//		            // option.OutputFormatters.Clear();
-//		            option.OutputFormatters.Add(
-//			            new MessagePackOutputFormatter(TypelessContractlessStandardResolver.Instance));
-//		            // option.InputFormatters.Clear();
-//		            option.InputFormatters.Add(
-//			            new MessagePackInputFormatter(TypelessContractlessStandardResolver.Instance));
-//	            })
 	            .AddJsonOptions(options =>
 	            {
 //		            options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
 //		            options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
 		            options.JsonSerializerOptions.IgnoreNullValues = true;
+		            options.JsonSerializerOptions.Converters.Add(new JsonObjectConverter());
+		            options.JsonSerializerOptions.Converters.Add(new JsonTimeSpanConverter());
 	            });
             
             // Add message services.
@@ -198,7 +192,11 @@ namespace dexih.api
 	        services.AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>();
 
 	        // use the signalr service if specified.
-	        var builder = services.AddSignalR();
+	        var builder = services.AddSignalR().AddJsonProtocol(options =>
+	        {
+		        options.PayloadSerializerOptions.Converters.Add(new JsonObjectConverter());
+		        options.PayloadSerializerOptions.Converters.Add(new JsonTimeSpanConverter());
+	        });
 	        
 	        if (!string.IsNullOrEmpty(appSettings.SignalRConnectionString))
 	        {

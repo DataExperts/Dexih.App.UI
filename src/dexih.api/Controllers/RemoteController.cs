@@ -151,7 +151,7 @@ namespace dexih.api.Controllers
                             {
                                 UserId =  user.Id,
                                 RestrictIp = true,
-                                IpAddresses = new List<string> {remoteIp},
+                                IpAddresses = new [] {remoteIp},
                                 Name = remoteSettings.AppSettings.Name,
                                 RemoteAgentId = remoteSettings.AppSettings.RemoteAgentId,
                             };
@@ -169,11 +169,11 @@ namespace dexih.api.Controllers
                             {
                                 if (dbRemoteAgent.IpAddresses == null)
                                 {
-                                    dbRemoteAgent.IpAddresses = new List<string> {remoteIp};
+                                    dbRemoteAgent.IpAddresses = new [] {remoteIp};
                                 }
                                 else
                                 {
-                                    dbRemoteAgent.IpAddresses = dbRemoteAgent.IpAddresses.Append(remoteIp).ToList();
+                                    dbRemoteAgent.IpAddresses = dbRemoteAgent.IpAddresses.Append(remoteIp).ToArray();
                                 }
                             }
                         }

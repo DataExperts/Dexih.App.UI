@@ -21,7 +21,7 @@ export class SharedDataIndexComponent implements OnInit, OnDestroy {
     private cancelToken: CancelToken = new CancelToken();
 
     columns = [
-        { name: 'objectType', title: 'Type', format: '' },
+        { name: 'objectTypeName', title: 'Type', format: '' },
         { name: 'name', title: 'Name', format: '' },
         { name: 'description', title: 'Description', format: 'Md' },
         { name: 'updateDate', title: 'Last Updated', format: 'Date' },
@@ -84,7 +84,8 @@ export class SharedDataIndexComponent implements OnInit, OnDestroy {
                     this.hubCache.hub.dexihDatalinks.filter(d => d.isShared).forEach(datalink => {
                         objects.push({
                             objectKey: datalink.key,
-                            objectType: eSourceType[eSourceType.Datalink],
+                            objectTypeName: eDataObjectType[eDataObjectType.Datalink],
+                            objectType: eDataObjectType.Datalink,
                             name: datalink.name,
                             description: datalink.description,
                             updateDate: datalink.updateDate
@@ -96,7 +97,8 @@ export class SharedDataIndexComponent implements OnInit, OnDestroy {
                     this.hubCache.hub.dexihTables.filter(c => c.isShared).forEach(table => {
                         objects.push({
                             objectKey: table.key,
-                            objectType: eSourceType[eSourceType.Table],
+                            objectTypeName: eDataObjectType[eDataObjectType.Table],
+                            objectType: eDataObjectType.Table,
                             name: table.logicalName + ' (' + table.name + ')',
                             description: table.description,
                             updateDate: table.updateDate

@@ -1246,6 +1246,7 @@
         <e p="TransformFunction.cs" t="Include" />
       </e>
       <e p="JsonObjectConverter.cs" t="Include" />
+      <e p="JsonTimeSpanConverter.cs" t="Include" />
       <e p="NamingStandards.cs" t="Include" />
       <e p="obj" t="ExcludeRecursive">
         <e p="Debug" t="Include">

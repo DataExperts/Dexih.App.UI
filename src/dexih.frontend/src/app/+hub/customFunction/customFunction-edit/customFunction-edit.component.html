@@ -8,6 +8,7 @@
 		(close)="close()"
 	>
 		<ng-template #header>
+			<dexih-invalid-form-details [control]="formsService.currentForm" (click)="formsService.showErrors()" class="mr-1"></dexih-invalid-form-details>
 			<save-button *ngIf="hubCache.canWrite" [formsService]="formsService" class="mr-1"></save-button>
 			<cancel-button [formsService]="formsService"></cancel-button>
 		</ng-template>
@@ -83,10 +84,10 @@
 						</div>
 
 						<br>
-						Function Code
-						<textarea class='form-control' rows="20" width="100%" spellcheck="false" formControlName="methodCode"></textarea>
 					</div>
-				</ng-template>
+					Function Code
+					<textarea class='form-control' rows="20" width="100%" spellcheck="false" formControlName="methodCode"></textarea>
+			</ng-template>
 			</fieldset>
 		</form>
 		</dexih-widget>

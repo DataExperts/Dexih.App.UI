@@ -7,7 +7,7 @@ import { DexihHubVariable, DexihHub, DexihFunctionParameter, DexihConnection, De
     eSourceType, eImportAction, eSecurityFlag, eDatalinkType, eUpdateStrategy, eFailAction, eInvalidAction,
     eFunctionCaching, eCleanAction, eDuplicateStrategy, eRunStatus, ePermission, eTypeCode,
     eTransformWriterMethod, eTransformItemType, eFunctionType, InputColumn, SelectQuery, DexihColumnBase,
-    eDataObjectType, eSharedObjectType, eDirection, eSeriesGrain } from '../shared/shared.models';
+    eDataObjectType, eSharedObjectType, eDirection, eSeriesGrain, eDayOfWeek } from '../shared/shared.models';
 
 // export class RemoteMessage {
 //     public messageId: string;
@@ -809,7 +809,7 @@ export class HubCache {
             details += 'Ends after: ' + trigger.endTime + '<br/>';
         }
         if (trigger.daysOfWeek && trigger.daysOfWeek.length > 0 && trigger.daysOfWeek.length < 7 ) {
-            details += 'Only on: ' + trigger.daysOfWeek.map(c => c.toString()) .join() + '<br/>';
+            details += 'Only on: ' + trigger.daysOfWeek.map(c => eDayOfWeek[c]).join() + '<br/>';
         }
         if (trigger.intervalTime) {
             details += 'Run at interval: ' +  trigger.intervalTime + '<br/>';
