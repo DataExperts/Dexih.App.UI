@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO.Compression;
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using dexih.api.Hubs;
@@ -25,6 +26,7 @@ using MessagePack.Resolvers;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Net.Http.Headers;
 
 using StackExchange.Redis;
@@ -389,8 +391,32 @@ namespace dexih.api
 	            seedData.UpdateReferenceData(roleManager, userManager).GetAwaiter().GetResult();
             }
 
+            LoadCache(app.ApplicationServices);
+
             _logger.LogInformation("Startup has completed.");
 
+        }
+
+        void LoadCache(IServiceProvider services)
+        {
+	        var cache = services.GetService<ICacheService>();
+	        var operations = services.GetService<IDexihOperations>();
+
+	        cache.MemoryCache.GetOrCreate($"GLOBAL_CACHE", entry =>
+	        {
+		        _logger.LogInformation("Loading global cache.");
+
+		        var version = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
+		        var buildDate = System.IO.File.GetLastWriteTime(Assembly.GetExecutingAssembly().Location);
+                    
+		        var cache = new CacheManager(0, "");
+		        cache.LoadGlobal(version, buildDate);
+		        cache.GoogleClientId = operations.Config.GoogleClientId;
+		        cache.MicrosoftClientId = operations.Config.MicrosoftClientId;
+		        cache.GoogleMapsAPIKey = operations.Config.GoogleMapsAPIKey;
+
+		        return cache;
+	        });
         }
     }
 }

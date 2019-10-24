@@ -11,6 +11,9 @@
 				<a class="dropdown-item" [class.active]="typeFilter=='All'" routerLink='.' [queryParams]="{typeFilter: 'All'}" title="All Items">All</a>
 				<a class="dropdown-item" [class.active]="typeFilter=='Datalink'" routerLink='.' [queryParams]="{typeFilter: 'Datalink'}" title="Datalinks">Datalinks</a>
 				<a class="dropdown-item" [class.active]="typeFilter=='Table'" routerLink='.' [queryParams]="{typeFilter: 'Table'}" title="Tables">Tables</a>
+				<a class="dropdown-item" [class.active]="typeFilter=='View'" routerLink='.' [queryParams]="{typeFilter: 'View'}" title="Views">Views</a>
+				<a class="dropdown-item" [class.active]="typeFilter=='Dashboard'" routerLink='.' [queryParams]="{typeFilter: 'Dashboard'}" title="Dashboards">Dashboards</a>
+				<a class="dropdown-item" [class.active]="typeFilter=='Api'" routerLink='.' [queryParams]="{typeFilter: 'Api'}" title="Apis">Apis</a>
 			</dexih-button-dropdown>
 		</ng-template>
 

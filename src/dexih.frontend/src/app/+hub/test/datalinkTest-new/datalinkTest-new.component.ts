@@ -87,7 +87,7 @@ export class DatalinkTestNewComponent implements OnInit, OnDestroy {
         this.managedConnections = this.hubCache.hub.dexihConnections
           .filter(c => c.purpose === eConnectionPurpose.Managed)
 
-        if (this.hubCache.status = eCacheStatus.Loaded) {
+        if (this.hubCache.status === eCacheStatus.Loaded) {
           let datalinkKeys: string = params['datalinkKeys'];
           this.sourceDatalinkKeys = new Array<number>();
           this.sourceDatalinks = new Array<DexihDatalink>();

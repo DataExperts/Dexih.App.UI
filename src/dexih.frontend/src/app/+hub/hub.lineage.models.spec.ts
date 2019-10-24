@@ -1,6 +1,8 @@
 import { ColumnUsageNode, eDatalinkObjectType, eObjectUse, InputOutputColumns } from './hub.lineage.models';
 import { HubCache, eCacheStatus, eMappingStatus } from './hub.models';
-import { DexihHub, DexihDatalinkTable, DexihDatalinkColumn, DexihConnection, DexihTable, DexihTableColumn, DexihDatalink, eTransformWriterMethod, eTransformType, DexihDatalinkTransform, DexihDatalinkTransformItem, eTransformItemType, RemoteLibraries } from '../shared/shared.models';
+import { DexihHub, DexihDatalinkTable, DexihDatalinkColumn, DexihConnection, DexihTable,
+    DexihTableColumn, DexihDatalink, eTransformWriterMethod, eTransformType, DexihDatalinkTransform,
+    DexihDatalinkTransformItem, eTransformItemType, RemoteLibraries } from '../shared/shared.models';
 
 class LineageTests {
 

@@ -5,15 +5,15 @@ import { Subscription, combineLatest} from 'rxjs';
 import { AuthService } from '../../../+auth/auth.service';
 import { HubCache } from '../../hub.models';
 import { HubService } from '../../hub.service';
-import { DexihView, eDataObjectType } from '../../../shared/shared.models';
+import { DexihView, eDataObjectType, DexihDashboard } from '../../../shared/shared.models';
 
 @Component({
-    selector: 'actions-view-button',
-    templateUrl: './actions-view-button.component.html'
+    selector: 'actions-dashboard-button',
+    templateUrl: './actions-dashboard-button.component.html'
 })
 
-export class ActionsViewButtonComponent implements OnInit, OnDestroy {
-    @Input() public views: DexihView[];
+export class ActionsDashboardButtonComponent implements OnInit, OnDestroy {
+    @Input() public dashboards: DexihDashboard[];
     @Input() public pullRight = false;
 
     private _hubCacheSubscription: Subscription;
@@ -39,20 +39,21 @@ export class ActionsViewButtonComponent implements OnInit, OnDestroy {
          }
 
          delete() {
-            this.hubService.deleteViews(this.views);
+            this.hubService.deleteDashboards(this.dashboards);
         }
 
         shareItems(isShared: boolean) {
-            this.hubService.shareItems(this.views.map(c => c.key), eDataObjectType.View, isShared);
+            this.hubService.shareItems(this.dashboards.map(c => c.key), eDataObjectType.Dashboard, isShared);
         }
 
         export() {
             const hub = this.hubService.createHub(this.hubCache.hub.hubKey, '');
-            this.views.forEach(view => { this.hubCache.cacheAddView(view.key, hub); });
+            this.dashboards.forEach(dashboard => { this.hubCache.cacheAddDashboard(dashboard.key, hub); });
 
-            let filename = this.views.length === 1 ? 'View - ' + this.views[0].name + '.json' : 'views.json';
+            let filename = this.dashboards.length === 1 ? 'Dashboard - ' + this.dashboards[0].name + '.json' : 'dashboards.json';
 
             this.hubService.exportHub(hub, filename);
         }
+
 
 }

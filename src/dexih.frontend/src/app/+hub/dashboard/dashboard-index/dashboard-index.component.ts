@@ -54,7 +54,7 @@ export class DashboardIndexComponent implements OnInit, OnDestroy {
                 this.updateDashboards();
             });
         } catch (e) {
-            this.hubService.addHubClientErrorMessage(e, 'View Index');
+            this.hubService.addHubClientErrorMessage(e, 'Dashboard Index');
         }
     }
 
@@ -110,7 +110,7 @@ export class DashboardIndexComponent implements OnInit, OnDestroy {
     watchChanges() {
         // watch the current validation in case it is changed in another session.
         this._hubCacheChangeSubscription = this.hubService.getHubCacheChangeObservable().subscribe(hubCacheChange => {
-            if (hubCacheChange.changeClass === eSharedObjectType.View) {
+            if (hubCacheChange.changeClass === eSharedObjectType.Dashboard) {
                 this.updateDashboards();
             }
         });

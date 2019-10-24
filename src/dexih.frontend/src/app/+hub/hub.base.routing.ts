@@ -29,6 +29,7 @@ import { DatalinkRunComponent } from './datalink/datalink-run/datalink-run.compo
 import { SearchComponent } from './search';
 import { DashboardEditComponent, DashboardIndexComponent } from './dashboard';
 import { DatajobRunComponent } from './datajob/datajob-run/datajob-run.component';
+import { DexihDashboard, DexihView, DexihApi } from '../shared/shared.models';
 
 const tableRoutes: Routes = [
     { path: 'table-edit/:tableKey', data: { pageTitle: 'Edit Table', action: 'edit'},
@@ -113,7 +114,11 @@ const sharedDataRoute: Route = { path: 'sharedData', data: { pageTitle: 'Shared 
     {path: '', pathMatch: 'full', component: SharedDataIndexComponent},
     {path: '', children: [
         { path: 'table-preview/:tableKey', component: TablePreviewDataComponent, data: { pageTitle: 'Preview Table' } },
-        { path: 'datalink-preview/:datalinkKey', component: DatalinkPreviewDataComponent, data: { pageTitle: 'Preview Datalink' } }
+        { path: 'datalink-preview/:datalinkKey', component: DatalinkPreviewDataComponent, data: { pageTitle: 'Preview Datalink' } },
+        { path: 'dashboard-preview/:dashboardKey', data: { pageTitle: 'Preview Dashboard', action: 'edit'},
+        loadChildren: () => import('./dashboard/dashboard-edit/dashboard-edit.module').then(m => m.DashboardEditModule)},
+        { path: 'view-preview/:viewKey', component: ViewEditComponent, data: { pageTitle: 'Preview View', action: 'edit' } },
+        { path: 'api-preview/:apiKey', component: ApiEditComponent, data: { pageTitle: 'Preview Api', action: 'edit' } }
     ]}])
 };
 

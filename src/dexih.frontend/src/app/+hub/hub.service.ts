@@ -23,13 +23,13 @@ import { DexihDatajob, DexihTable, DexihHub, DexihRemoteAgentHub, DexihConnectio
     eSharedObjectType, RemoteLibraries, ConnectionReference, TransformReference,
     FunctionReference, eFunctionType, ClientMessage, eClientCommand, HubUser, eDownloadUrlType } from '../shared/shared.models';
 import { debounce, filter, first, take } from 'rxjs/operators';
-import { fileURLToPath } from 'url';
 
 @Injectable()
 export class HubService implements OnInit, OnDestroy {
     private _subscription: Subscription;
     private _webSocketSubscription: Subscription;
 
+    private _hubKey = 0;
     private _hubCache = new BehaviorSubject<HubCache>(new HubCache(eCacheStatus.NoHub, null));
     private _hubMessages = new BehaviorSubject<Array<Message>>([]);
 
@@ -218,8 +218,9 @@ export class HubService implements OnInit, OnDestroy {
 
         this._hubMessages.next([]);
 
-        if (!hubKey || hubKey === 0) {
+        if (hubKey === null || hubKey === 0) {
             let hubCache = new HubCache(eCacheStatus.NoHub, this.createHub(0, name));
+            this._hubKey = 0;
             this._hubCache.next(hubCache);
         } else if (!this._hubCache.getValue().hub || this._hubCache.getValue().hub.hubKey !== hubKey) {
             this.refreshHubCache(hubKey, name);
@@ -233,6 +234,7 @@ export class HubService implements OnInit, OnDestroy {
 
             this.logger.LogC(() => `refreshHubCache, hubKey: ${hubKey}, name: ${name}.`, eLogLevel.Debug);
 
+            this._hubKey = hubKey;
             this._hubCache.next(new HubCache(eCacheStatus.Loading, this.createHub(hubKey, name)));
 
             this.hubPost<{permission: ePermission, hub: DexihHub}>('/api/Hub/GetHubCache', {}, 'Loading the hub cache...').then(result => {
@@ -283,6 +285,7 @@ export class HubService implements OnInit, OnDestroy {
     }
 
     resetHubCache(): void {
+        this._hubKey = 0;
         this._hubCache.next(new HubCache(eCacheStatus.NoHub, null));
     }
 
@@ -729,7 +732,7 @@ export class HubService implements OnInit, OnDestroy {
     }
 
     public hubPostConfirm<T>(url: string, data: any, waitMessage: string, confirmMessage: string) {
-        data.hubKey = this._hubCache.value.hub.hubKey;
+        data.hubKey = this._hubKey;
         return new Promise<T>((resolve, reject) => {
             this.authService.postConfirm<T>(url, data, waitMessage, confirmMessage).then(result => {
                 resolve(result);
@@ -742,20 +745,20 @@ export class HubService implements OnInit, OnDestroy {
     }
 
     public hubPost<T>(url: string, data: any, waitMessage: string): Promise<T> {
-        data.hubKey = this._hubCache.value.hub.hubKey;
+        data.hubKey = this._hubKey;
         return new Promise<T>((resolve, reject) => {
             this.authService.post<T>(url, data, waitMessage).then(result => {
                 resolve(result);
             }).catch(reason => {
                 this.logger.LogMessage(reason);
-                this.addHubMessage(reason);
+               // this.addHubMessage(reason);
                 reject(reason);
             });
         });
     }
 
     public hubPostRemote<T>(url: string, data: any, waitMessage: string, cancelToken: CancelToken): PromiseWithCancel<T> {
-        data.hubKey = this._hubCache.value.hub.hubKey;
+        data.hubKey = this._hubKey;
         return new PromiseWithCancel<T>((resolve, reject) => {
             this.authService.postRemote<T>(url, data, this.getRemoteAgentCurrent(), waitMessage, cancelToken).then(result => {
                 resolve(result);
@@ -769,7 +772,7 @@ export class HubService implements OnInit, OnDestroy {
 
     public hubPostRemoteConfirm<T>(url: string, data: any, waitMessage: string,
         confirmMessage: string, cancelToken: CancelToken): PromiseWithCancel<T> {
-        data.hubKey = this._hubCache.value.hub.hubKey;
+        data.hubKey = this._hubKey;
         return new PromiseWithCancel<T>((resolve, reject) => {
             this.authService.confirmDialog('Please confirm...', confirmMessage).then(confirm => {
                 if (confirm) {
@@ -798,7 +801,7 @@ export class HubService implements OnInit, OnDestroy {
 
     saveRemoteAgent(remoteAgentHub: DexihRemoteAgentHub): Promise<boolean> {
         return this.hubPost('/api/Hub/SaveRemoteAgent', {
-            hubKey: this._hubCache.value.hub.hubKey,
+            hubKey: this._hubKey,
             value: remoteAgentHub
         }, 'Saving the hub remote agent...')
     }
@@ -969,7 +972,7 @@ export class HubService implements OnInit, OnDestroy {
 
     // decrypted a value in the hub.
     async encrypt(value: string, cancelToken: CancelToken): Promise<string> {
-        let key = await this.authService.postRemoteGetKey('/api/Hub/Encrypt', {hubKey: this._hubCache.value.hub.hubKey},
+        let key = await this.authService.postRemoteGetKey('/api/Hub/Encrypt', {hubKey: this._hubKey},
             this.getRemoteAgentCurrent(), cancelToken);
         await this.getRemoteResponse<string>(key, cancelToken, 'setRaw', value);
         let result = await this.getRemoteResponse<string>(key, cancelToken, 'download');
@@ -1091,7 +1094,7 @@ export class HubService implements OnInit, OnDestroy {
         const names = tables.map(c => c.name).join('<br>');
 
         return this.hubPostConfirm('/api/Hub/DeleteTables', {
-            hubKey: this._hubCache.value.hub.hubKey,
+            hubKey: this._hubKey,
             remoteAgentId: this.getCurrentRemoteAgentId(false),
             itemKeys: tables.map(t => t.key)
         }, 'Deleting tables...',
@@ -1113,7 +1116,7 @@ export class HubService implements OnInit, OnDestroy {
         targetTableName: string, auditConnectionKey: number,
         addSourceColumns: boolean, auditColumns: Array<eDeltaType>): Promise<Array<DexihDatalink>> {
             return this.hubPost<Array<DexihDatalink>>('/api/Hub/CreateDatalinks', {
-                hubKey: this._hubCache.value.hub.hubKey,
+                hubKey: this._hubKey,
                 remoteAgentId: this.getCurrentRemoteAgentId(),
                 sourceTableKeys: sourceTableKeys,
                 datalinkName: name,
@@ -1186,7 +1189,7 @@ export class HubService implements OnInit, OnDestroy {
 
     cancelDatalinks(datalinkKeys: Array<number>, cancelToken: CancelToken): Promise<boolean> {
         return this.hubPostRemote<boolean>('/api/Hub/CancelDatalinks', {
-            hubKey: this._hubCache.value.hub.hubKey,
+            hubKey: this._hubKey,
             remoteAgentId: this.getCurrentRemoteAgentId(),
             itemKeys: datalinkKeys
         }, 'Cancelling datalinks...', cancelToken)
@@ -1218,7 +1221,7 @@ export class HubService implements OnInit, OnDestroy {
 
         return this.hubPostConfirm<boolean>(
             '/api/Hub/DeleteDatajobs', {
-                hubKey: this._hubCache.value.hub.hubKey,
+                hubKey: this._hubKey,
                 itemKeys: datajobs.map(t => t.key)
             }, 'Deleting datajob(s)...',
             'This action will delete the following data jobs, and any schedules and dependencies ' +
@@ -1325,7 +1328,7 @@ export class HubService implements OnInit, OnDestroy {
 
     previewTableData(table: DexihTable, showRejectedData, selectQuery: SelectQuery, inputColumns: InputColumn[],
         parameters: DexihInputParameter[], cancelToken: CancelToken): PromiseWithCancel<PreviewResults> {
-        let hub = this.createHub(this._hubCache.value.hub.hubKey, 'cache');
+        let hub = this.createHub(this._hubKey, 'cache');
         this._hubCache.value.cacheAddConnection(table.connectionKey, hub);
 
         return this.previewTableDataQuery(table, showRejectedData, selectQuery, inputColumns, parameters, cancelToken);
@@ -1356,7 +1359,7 @@ export class HubService implements OnInit, OnDestroy {
         inputParameters: DexihInputParameter[], cancelToken: CancelToken):
         PromiseWithCancel<PreviewResults> {
             return this.getData('/api/Hub/PreviewTableQuery', {
-                hubKey: this._hubCache.value.hub.hubKey,
+                hubKey: this._hubKey,
                 remoteAgentId: this.getCurrentRemoteAgentId(),
                 table: table,
                 showRejectedData: showRejectedData,
@@ -1411,7 +1414,7 @@ export class HubService implements OnInit, OnDestroy {
             inputParameters: DexihInputParameter[], cancelToken: CancelToken): PromiseWithCancel<PreviewResults> {
 
         return this.getData('/api/Hub/PreviewView', {
-            hubKey: this._hubCache.value.hub.hubKey,
+            hubKey: this._hubKey,
             remoteAgentId: this.getCurrentRemoteAgentId(),
             view: view,
             inputColumns: inputColumns,
@@ -1433,7 +1436,7 @@ export class HubService implements OnInit, OnDestroy {
         return new PromiseWithCancel<{dashboardItemKey: string, dataKey: string}[]>((resolve, reject) => {
             this.authService.getBestDownloadUrl(remoteAgent, 0).then(url => {
                 this.hubPost<{dashboardItemKey: string, dataKey: string}[]>('/api/Hub/PreviewDashboard', {
-                    hubKey: this._hubCache.value.hub.hubKey,
+                    hubKey: this._hubKey,
                     remoteAgentId: this.getCurrentRemoteAgentId(),
                     responseUrl: url.downloadUrlType === eDownloadUrlType.Proxy ? url.url : '',
                     dashboard: dashboard,
@@ -1476,7 +1479,7 @@ export class HubService implements OnInit, OnDestroy {
     datalinkProperties(datalinkKey: number, selectQuery: SelectQuery, inputColumns: InputColumn[], cancelToken: CancelToken):
     Promise<TransformProperties> {
         return this.hubPostRemote<TransformProperties>('/api/Hub/DatalinkProperties', {
-            hubKey: this._hubCache.value.hub.hubKey,
+            hubKey: this._hubKey,
             remoteAgentId: this.getCurrentRemoteAgentId(),
             datalinkKey: datalinkKey,
             selectQuery: selectQuery,
@@ -1498,7 +1501,7 @@ export class HubService implements OnInit, OnDestroy {
         let connection = hub.dexihConnections.find(c => c.key === writerResult.auditConnectionKey);
 
         return this.getData('/api/Hub/PreviewProfile', {
-            hubKey: this._hubCache.value.hub.hubKey,
+            hubKey: this._hubKey,
             remoteAgentId: this.getCurrentRemoteAgentId(),
             auditKey: writerResult.auditKey,
             profileTableName: writerResult.profileTableName,
@@ -1528,7 +1531,7 @@ export class HubService implements OnInit, OnDestroy {
     Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             this.hubPostRemote<ManagedTask>('/api/Hub/DownloadTableData', {
-                hubKey: this._hubCache.value.hub.hubKey,
+                hubKey: this._hubKey,
                 remoteAgentId: this.getCurrentRemoteAgentId(),
                 connectionId: this.authService.getWebSocketConnectionId(),
                 table: table,
@@ -1549,7 +1552,7 @@ export class HubService implements OnInit, OnDestroy {
     Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             this.hubPostRemote<ManagedTask>('/api/Hub/DownloadDatalinkData', {
-                hubKey: this._hubCache.value.hub.hubKey,
+                hubKey: this._hubKey,
                 remoteAgentId: this.getCurrentRemoteAgentId(),
                 connectionId: this.authService.getWebSocketConnectionId(),
                 datalink: datalink,
@@ -1574,7 +1577,7 @@ export class HubService implements OnInit, OnDestroy {
         let validationNames = validations.map(c => c.name).join('<br>');
 
         return this.hubPostConfirm<boolean>('/api/Hub/DeleteColumnValidations', {
-            hubKey: this._hubCache.value.hub.hubKey,
+            hubKey: this._hubKey,
             itemKeys: validations.map(c => c.key)
         }, 'Deleting column validation...', 'This action will delete the following validations, from the hub and cannot be reversed.<p></p>'
         + validationNames + '<p></p> Are you sure?');
@@ -1583,7 +1586,7 @@ export class HubService implements OnInit, OnDestroy {
     // saves the current validation.
     saveColumnValidation(validation: DexihColumnValidation): Promise<DexihColumnValidation> {
         return this.hubPost<DexihColumnValidation>('/api/Hub/SaveColumnValidation', {
-            hubKey: this._hubCache.value.hub.hubKey,
+            hubKey: this._hubKey,
             remoteAgentId: this.getCurrentRemoteAgentId(),
             validation: validation
         }, 'Saving column validation...');
@@ -1593,7 +1596,7 @@ export class HubService implements OnInit, OnDestroy {
         let functionNames = customFunctions.map(c => c.name).join('<br>');
 
         return this.hubPostConfirm<boolean>('/api/Hub/DeleteCustomFunctions', {
-            hubKey: this._hubCache.value.hub.hubKey,
+            hubKey: this._hubKey,
             itemKeys: customFunctions.map(c => c.key)
         }, 'Deleting custom function(s)...',
         'This action will delete the following custom functions, from the hub and cannot be reversed.<p></p>'
@@ -1627,7 +1630,7 @@ export class HubService implements OnInit, OnDestroy {
         let fileFormatNames = validations.map(c => c.name).join('<br>>');
 
         return this.hubPostConfirm<boolean>('/api/Hub/DeleteFileFormats', {
-            hubKey: this._hubCache.value.hub.hubKey,
+            hubKey: this._hubKey,
             itemKeys: validations.map(c => c.key)
         }, 'Deleting file format(s)...',
         'This action will delete the following file formats, from the hub and cannot be reversed.<p></p>' +
@@ -1647,7 +1650,7 @@ export class HubService implements OnInit, OnDestroy {
         let variableNames = variables.map(c => c.name).join('<br>');
 
         return this.hubPostConfirm<boolean>('/api/Hub/DeleteHubVariables', {
-            hubKey: this._hubCache.value.hub.hubKey,
+            hubKey: this._hubKey,
             itemKeys: variables.map(c => c.key)
         }, 'Deleting hub variable(s)...',
         'This action will delete the following variables, from the hub and cannot be reversed.<p></p>' +
@@ -1658,7 +1661,7 @@ export class HubService implements OnInit, OnDestroy {
         let itemNames = items.map(c => c.name).join('<br>');
 
         return this.hubPostConfirm<boolean>('/api/Hub/DeleteDatalinkTests', {
-            hubKey: this._hubCache.value.hub.hubKey,
+            hubKey: this._hubKey,
             itemKeys: items.map(c => c.key)
         }, 'Deleting datalink test(s)...',
         'This action will delete the following datalink tests, from the hub and cannot be reversed.<p></p>' +
@@ -1669,7 +1672,7 @@ export class HubService implements OnInit, OnDestroy {
         sourceConnectionKey: number): Promise<DexihDatalinkTest> {
 
             return this.hubPost<DexihDatalinkTest>('/api/Hub/NewDatalinkTest', {
-                hubKey: this._hubCache.value.hub.hubKey,
+                hubKey: this._hubKey,
                 remoteAgentId: this.getCurrentRemoteAgentId(),
                 connectionId: this.authService.getWebSocketConnectionId(),
                 name,
@@ -1684,7 +1687,7 @@ export class HubService implements OnInit, OnDestroy {
         let itemNames = items.map(c => c.name).join('<br>');
 
         return this.hubPostRemoteConfirm('/api/Hub/RunDatalinkTestSnapshot', {
-            hubKey: this._hubCache.value.hub.hubKey,
+            hubKey: this._hubKey,
             remoteAgentId: this.getCurrentRemoteAgentId(),
             connectionId: this.authService.getWebSocketConnectionId(),
             datalinkTestKeys: items.map(c => c.key)
@@ -1798,7 +1801,7 @@ export class HubService implements OnInit, OnDestroy {
 
         return new Promise<boolean>((resolve, reject) => {
             this.hubPostRemote<ManagedTask>('/api/Hub/DownloadFiles', {
-                hubKey: this._hubCache.value.hub.hubKey,
+                hubKey: this._hubKey,
                 connectionId: this.authService.getWebSocketConnectionId(),
                 remoteAgentId: this.getCurrentRemoteAgentId(),
                 tableKey: table.key,
@@ -1816,7 +1819,7 @@ export class HubService implements OnInit, OnDestroy {
         return new Promise<string>((resolve, reject) => {
             let remoteAgent = this.getRemoteAgentCurrent();
             this.authService.postRemoteUpload('/api/Hub/UploadFile', {
-                hubKey: this._hubCache.value.hub.hubKey,
+                hubKey: this._hubKey,
                 remoteAgentId: remoteAgent.instanceId,
                 connectionId: this.authService.getWebSocketConnectionId(),
                 tableKey: table.key,
@@ -1833,7 +1836,7 @@ export class HubService implements OnInit, OnDestroy {
         return new Promise<{url: string, reference: string}>((resolve, reject) => {
             let remoteAgent = this.getRemoteAgentCurrent();
             this.authService.postRemoteUpload('/api/Hub/BulkUploadFile', {
-                hubKey: this._hubCache.value.hub.hubKey,
+                hubKey: this._hubKey,
                 remoteAgentId: remoteAgent.instanceId,
                 connectionId: this.authService.getWebSocketConnectionId(),
                 connectionKey: connectionKey,

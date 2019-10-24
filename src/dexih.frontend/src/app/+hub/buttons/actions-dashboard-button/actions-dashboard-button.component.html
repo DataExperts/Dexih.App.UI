@@ -1,10 +1,10 @@
-<ng-template [ngIf]="views">
-    <dexih-button-dropdown buttonClass="btn-primary" iconClass="fa fa-bar-chart" [text]="views.length > 1 ? 'Views' : 'View'" [pullRight]="pullRight">
+<ng-template [ngIf]="dashboards">
+    <dexih-button-dropdown buttonClass="btn-primary" iconClass="fa fa-pie-chart" [text]="dashboards.length > 1 ? 'Dashboards' : 'Dashboard'" [pullRight]="pullRight">
         <li class="list-group-item list-group-item-heading list-group-item-info">Metadata</li>
-        <li *ngIf="hubCache.canWrite"><a class="dropdown-item" [routerLink]="['view-new']" title="Create a new view."><i class="fa fa-file-o"></i> New</a></li>
-        <ng-template [ngIf]="views.length > 0">
-            <li *ngIf="views.length == 1">
-                <a class="dropdown-item" [routerLink]="['view-edit', views[0].key]" queryParamsHandling="merge"><i class="fa fa-edit"></i> Edit</a>
+        <li *ngIf="hubCache.canWrite"><a class="dropdown-item" [routerLink]="['dashboard-new']" title="Create a new dashboard."><i class="fa fa-file-o"></i> New</a></li>
+        <ng-template [ngIf]="dashboards.length > 0">
+            <li *ngIf="dashboards.length == 1">
+                <a class="dropdown-item" [routerLink]="['dashboard-edit', dashboards[0].key]" queryParamsHandling="merge"><i class="fa fa-edit"></i> Edit</a>
             </li>
 
             <li *ngIf="hubCache.canWrite"><a class="dropdown-item" (click)="shareItems(true)" title="Select the selected items as shared."><i class="fa fa-group"></i> Share</a></li>

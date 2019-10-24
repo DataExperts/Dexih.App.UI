@@ -101,7 +101,7 @@ export class HubFormsService implements OnDestroy {
   clearFormSubscriptions() {
     this.logger.LogC(() => `clearFormSubscriptions started`, eLogLevel.Trace);
     if (this._valueChangesSubscription) { this._valueChangesSubscription.unsubscribe(); }
-    if (this._hubCacheSubscription) { this._hubCacheSubscription.unsubscribe(); }
+    // if (this._hubCacheSubscription) { this._hubCacheSubscription.unsubscribe(); }
     if (this._hubCacheChangeSubscription) { this._hubCacheChangeSubscription.unsubscribe(); }
     if (this._connectionChangesSubscription1) { this._connectionChangesSubscription1.unsubscribe(); }
     if (this._connectionChangesSubscription2) { this._connectionChangesSubscription2.unsubscribe(); }
@@ -279,7 +279,7 @@ export class HubFormsService implements OnDestroy {
 
   watchChanges(changeClass: eSharedObjectType, keyField: string, description: string, formGroupFunc: (item) => void) {
     if (this._hubCacheChangeSubscription) { this._hubCacheChangeSubscription.unsubscribe(); }
-    if (this._hubCacheSubscription) { this._hubCacheSubscription.unsubscribe(); }
+    // if (this._hubCacheSubscription) { this._hubCacheSubscription.unsubscribe(); }
 
     if (this.formSaving) {
       return;
@@ -327,32 +327,32 @@ export class HubFormsService implements OnDestroy {
       }
     });
 
-    this._hubCacheSubscription = this.hubService.getHubCacheObservable().subscribe(hubCache => {
-      if (!this.currentForm) { return; }
+    // this._hubCacheSubscription = this.hubService.getHubCacheObservable().subscribe(hubCache => {
+    //   if (!this.currentForm) { return; }
 
-      this.hubCache = hubCache;
+    //   this.hubCache = hubCache;
 
-      let item = hubCache.getCacheItem(changeClass, this.currentForm.value[keyField]);
+    //   let item = hubCache.getCacheItem(changeClass, this.currentForm.value[keyField]);
 
-      if (item) {
-        // if the version from the cache was updated more recently than current version, prompt user.
-        if (this.updateDate && this.updateDate < item.updateDate) {
-          this.authService.confirmDialog('The ' + description + ' has changed',
-            'This is likely due to a another session changing the ' +
-            description + ' whilst this session was disconnected.  ' +
-            'Would you like to discard the changes and reload the newer version from the server (otherwise this will be created a a copy)?')
-            .then(confirm => {
-              if (confirm) {
-                let newItem = Object.assign({}, item);
-                this.ngOnDestroy() // clear old subscriptions
-                formGroupFunc.call(this, newItem);
-              }
-            }).catch(reason => {
-              this.currentForm.controls[keyField].setValue(0);
-            });
-        }
-      }
-    });
+    //   if (item) {
+    //     // if the version from the cache was updated more recently than current version, prompt user.
+    //     if (this.updateDate && this.updateDate < item.updateDate) {
+    //       this.authService.confirmDialog('The ' + description + ' has changed',
+    //         'This is likely due to a another session changing the ' +
+    //         description + ' whilst this session was disconnected.  ' +
+//         'Would you like to discard the changes and reload the newer version from the server (otherwise this will be created a a copy)?')
+    //         .then(confirm => {
+    //           if (confirm) {
+    //             let newItem = Object.assign({}, item);
+    //             this.ngOnDestroy() // clear old subscriptions
+    //             formGroupFunc.call(this, newItem);
+    //           }
+    //         }).catch(reason => {
+    //           this.currentForm.controls[keyField].setValue(0);
+    //         });
+    //     }
+    //   }
+    // });
   }
 
   public async save(navigateUp = false, saveAs = false) {

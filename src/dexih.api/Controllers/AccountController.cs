@@ -1078,27 +1078,27 @@ namespace dexih.api.Controllers
 
         [HttpGet("[action]")]
         [AllowAnonymous]
-        // [ResponseCache(Duration = 3600)]
-        public Task<CacheManager> GetGlobalCache()
+        [ResponseCache(Duration = 3600)]
+        public CacheManager GetGlobalCache()
         {
             try
             {
-	            return _cache.MemoryCache.GetOrCreateAsync<CacheManager>($"GLOBAL_CACHE", entry =>
-                {
-                    _logger.LogInformation("Loading global cache.");
-
-                    var version = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
-                    var buildDate = System.IO.File.GetLastWriteTime(Assembly.GetExecutingAssembly().Location);
-                    
-                    var cache = new CacheManager(0, "");
-                    var repositoryManager = _operations.RepositoryManager;
-                    cache.LoadGlobal(version, buildDate);
-                    cache.GoogleClientId = _operations.Config.GoogleClientId;
-                    cache.MicrosoftClientId = _operations.Config.MicrosoftClientId;
-                    cache.GoogleMapsAPIKey = _operations.Config.GoogleMapsAPIKey;
-
-                    return Task.FromResult(cache);
-                });
+	            return _cache.MemoryCache.Get<CacheManager>("GLOBAL_CACHE");
+//	            return _cache.MemoryCache.GetOrCreate($"GLOBAL_CACHE", entry =>
+//                {
+//                    _logger.LogInformation("Loading global cache.");
+//
+//                    var version = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
+//                    var buildDate = System.IO.File.GetLastWriteTime(Assembly.GetExecutingAssembly().Location);
+//                    
+//                    var cache = new CacheManager(0, "");
+//                    cache.LoadGlobal(version, buildDate);
+//                    cache.GoogleClientId = _operations.Config.GoogleClientId;
+//                    cache.MicrosoftClientId = _operations.Config.MicrosoftClientId;
+//                    cache.GoogleMapsAPIKey = _operations.Config.GoogleMapsAPIKey;
+//
+//                    return cache;
+//                });
             }
             catch (Exception ex)
             {

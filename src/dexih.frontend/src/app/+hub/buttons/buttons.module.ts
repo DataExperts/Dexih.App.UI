@@ -13,6 +13,8 @@ import { ActionsColumnValidationButtonComponent } from './actions-columnValidati
 import { ActionsDatalinkTestButtonComponent } from './actions-datalinkTest-button/actions-datalinkTest-button.component';
 import { ActionsViewButtonComponent } from './actions-view-button/actions-view-button.component';
 import { ActionsApiButtonComponent } from './actions-api-button/actions-api-button.component';
+import { ActionsDashboardButtonComponent } from './actions-dashboard-button/actions-dashboard-button.component';
+
 @NgModule({
     imports: [
         SharedModule
@@ -31,7 +33,8 @@ import { ActionsApiButtonComponent } from './actions-api-button/actions-api-butt
         ActionsColumnValidationButtonComponent,
         ActionsDatalinkTestButtonComponent,
         ActionsViewButtonComponent,
-        ActionsApiButtonComponent
+        ActionsApiButtonComponent,
+        ActionsDashboardButtonComponent
     ],
     declarations: [
         CancelButtonComponent,
@@ -47,7 +50,8 @@ import { ActionsApiButtonComponent } from './actions-api-button/actions-api-butt
         ActionsColumnValidationButtonComponent,
         ActionsDatalinkTestButtonComponent,
         ActionsViewButtonComponent,
-        ActionsApiButtonComponent
+        ActionsApiButtonComponent,
+        ActionsDashboardButtonComponent
     ],
     providers: [],
 })

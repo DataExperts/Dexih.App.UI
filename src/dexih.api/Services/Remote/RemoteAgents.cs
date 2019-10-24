@@ -338,7 +338,7 @@ namespace dexih.api.Services.Remote
 		            .GetProperties(BindingFlags.Instance | BindingFlags.Public)
 		            .ToDictionary(prop => prop.Name.Substring(0,1).ToLower() + prop.Name.Substring(1), prop => prop.GetValue(value, null));
 
-	            var messageId = Guid.NewGuid().ToString();
+	            var messageId = EncryptString.GenerateRandomKey(20); // Guid.NewGuid().ToString();
 	            
 	            var remoteMessage = new RemoteMessage()
 	            {

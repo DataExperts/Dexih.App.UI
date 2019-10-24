@@ -60,7 +60,7 @@ export class ActionsApiButtonComponent implements OnInit, OnDestroy {
     }
 
     shareItems(isShared: boolean) {
-        this.hubService.shareItems(this.apis.map(c => c.key), eDataObjectType.Datalink, isShared);
+        this.hubService.shareItems(this.apis.map(c => c.key), eDataObjectType.Api, isShared);
     }
 
     activateApis() {

@@ -80,12 +80,6 @@ export class ImportComponent implements OnInit, OnDestroy {
         this.authService.postForm('/api/Hub/ImportPlan', form).then(result => {
             this.import = result;
             this.refreshImport();
-        }).catch(reason => {
-            if (reason) {
-                this.hubService.addHubMessage(reason);
-            } else {
-                this.hubService.addHubErrorMessage('The import failed.')
-            }
         });
     }
 
@@ -130,13 +124,13 @@ export class ImportComponent implements OnInit, OnDestroy {
 
         this.hubService.importPackage(newImport).then(() => {
             this.authService.navigateUp();
-        }).catch();
+        });
     }
 
     public importAll() {
         this.hubService.importPackage(this.import).then(() => {
             this.authService.navigateUp();
-        }).catch();
+        });
     }
 
 }

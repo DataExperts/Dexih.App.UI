@@ -106,6 +106,45 @@ export class SharedDataIndexComponent implements OnInit, OnDestroy {
                     });
                 }
 
+                if (this.typeFilter === 'All' || this.typeFilter === 'View') {
+                    this.hubCache.hub.dexihViews.filter(c => c.isShared).forEach(view => {
+                        objects.push({
+                            objectKey: view.key,
+                            objectTypeName: eDataObjectType[eDataObjectType.View],
+                            objectType: eDataObjectType.View,
+                            name: view.name,
+                            description: view.description,
+                            updateDate: view.updateDate
+                        });
+                    });
+                }
+
+                if (this.typeFilter === 'All' || this.typeFilter === 'Dashboard') {
+                    this.hubCache.hub.dexihDashboards.filter(c => c.isShared).forEach(dashboard => {
+                        objects.push({
+                            objectKey: dashboard.key,
+                            objectTypeName: eDataObjectType[eDataObjectType.Dashboard],
+                            objectType: eDataObjectType.Dashboard,
+                            name: dashboard.name,
+                            description: dashboard.description,
+                            updateDate: dashboard.updateDate
+                        });
+                    });
+                }
+
+                if (this.typeFilter === 'All' || this.typeFilter === 'Api') {
+                    this.hubCache.hub.dexihApis.filter(c => c.isShared).forEach(api => {
+                        objects.push({
+                            objectKey: api.key,
+                            objectTypeName: eDataObjectType[eDataObjectType.Api],
+                            objectType: eDataObjectType.Api,
+                            name: api.name,
+                            description: api.description,
+                            updateDate: api.updateDate
+                        });
+                    });
+                }
+
                 this._tableData.next(objects);
             }
         }
@@ -126,6 +165,15 @@ export class SharedDataIndexComponent implements OnInit, OnDestroy {
         }
         if (dataObject.objectType === eDataObjectType.Datalink) {
             this.router.navigate(['datalink-preview', dataObject.objectKey], { relativeTo: this.route });
+        }
+        if (dataObject.objectType === eDataObjectType.View) {
+            this.router.navigate(['view-preview', dataObject.objectKey], { relativeTo: this.route });
+        }
+        if (dataObject.objectType === eDataObjectType.Dashboard) {
+            this.router.navigate(['dashboard-preview', dataObject.objectKey], { relativeTo: this.route });
+        }
+        if (dataObject.objectType === eDataObjectType.Api) {
+            this.router.navigate(['api-preview', dataObject.objectKey], { relativeTo: this.route });
         }
     }
 

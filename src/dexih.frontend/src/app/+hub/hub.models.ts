@@ -57,7 +57,7 @@ export class HubCache {
 
     public hubPermission: ePermission;
 
-    public status: eCacheStatus;
+    public readonly status: eCacheStatus;
 
     private _sequenceGenerator = 0;
 
@@ -119,6 +119,8 @@ export class HubCache {
     }
 
     public getCacheItem(itemType: eSharedObjectType, key: number) {
+        if (!this.hub) { return; }
+
         switch (itemType) {
             case eSharedObjectType.Api:
                 return this.hub.dexihApis.find(c => c.key === key && c.isValid);

@@ -40,12 +40,17 @@ export class HubComponent implements OnInit, OnDestroy {
                 this.authService.getWebSocketStatusObservable(),
                 this.hubService.getRemoteAgentObservable(),
                 this.route.params,
+                this.authService.getUserObservable()
             ).subscribe(result => {
                 this.hubCache = result[0];
                 this.webSocketStatus = result[1];
                 this.remoteAgent = result[2];
                 let params = result[3];
+                let user = result[4];
 
+                if (!user) {
+                    return;
+                }
                 this.hubKey = + params['hubKey'];
                 if (this.hubKey > 0) {
                     this.hubService.updateHub(this.hubKey, 'Loading...');

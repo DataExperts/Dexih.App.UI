@@ -111,7 +111,7 @@ export class DatalinkNewComponent implements OnInit, OnDestroy {
         let tableKeys: string = params['sourceTableKeys'];
         this.tableKeys = tableKeys.split('|').map(c => +c);
 
-        if (this.hubCache.status = eCacheStatus.Loaded) {
+        if (this.hubCache.status === eCacheStatus.Loaded) {
           this.updateTables();
 
           this.targetConnectionKey = +params['targetConnectionKey'];
