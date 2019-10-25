@@ -71,6 +71,7 @@ export class HubService implements OnInit, OnDestroy {
             }
         });
 
+
         this._subscription = combineLatest(
             authService.getGlobalCacheObservable(),
             this.authService.getHubsObservable(),
@@ -94,17 +95,17 @@ export class HubService implements OnInit, OnDestroy {
                     }
                 }
 
-                // if the hub is not available, reset.
-                if (hubs) {
-                    if (hubCache && hubCache.hub) {
-                        let hubFound = hubs.find(h => h.hubKey === hubCache.hub.hubKey);
-                        if (!hubFound) {
-                            this.resetHubCache();
-                        }
-                    }
-                } else {
-                    this.resetHubCache();
-                }
+                // // if the hub is not available, reset.
+                // if (hubs) {
+                //     if (hubCache && hubCache.hub) {
+                //         let hubFound = hubs.find(h => h.hubKey === hubCache.hub.hubKey);
+                //         if (!hubFound) {
+                //             this.resetHubCache();
+                //         }
+                //     }
+                // } else {
+                //     this.resetHubCache();
+                // }
 
                 this.resetRemoteAgent(hubCache);
             }
@@ -365,7 +366,7 @@ export class HubService implements OnInit, OnDestroy {
 
             this.setNoRemoteAgent(hubCache);
         } catch (reason) {
-
+            this.addHubMessage(reason);
         } finally {
             this.isResettingRemoteAgent = false;
         }
@@ -716,15 +717,21 @@ export class HubService implements OnInit, OnDestroy {
     private addDatajobProgress(task: ManagedTask) {
         if (!this.isHubCacheLoaded()) { return; }
         let writerResult: TransformWriterResult = task.data;
-        if (!writerResult || !writerResult.auditKey) {return; }
+        if (!writerResult) {return; }
         const datajob = this._hubCache.value.hub.dexihDatajobs.find(c => c.key === writerResult.referenceKey);
         if (datajob) {
             if (writerResult.runStatus === eRunStatus.Abended ||
+                writerResult.runStatus === eRunStatus.Cancelled ||
                 writerResult.runStatus === eRunStatus.Finished ||
                 writerResult.runStatus === eRunStatus.FinishedErrors ) {
+                    let currentStatus: TransformWriterResult = datajob['currentStatus'].value;
+                    if (currentStatus !== null) {
+                        if (currentStatus.auditKey === writerResult.auditKey) {
+                            datajob['currentStatus'].next(null);
+                        }
+                    }
                     datajob['previousStatus'].next(writerResult);
-                    datajob['currentStatus'].next(null);
-            } else {
+                } else {
                 datajob['currentStatus'].next(writerResult);
             }
             this._transformWriterResultChange.next(writerResult);

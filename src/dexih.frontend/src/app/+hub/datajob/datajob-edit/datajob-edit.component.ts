@@ -36,7 +36,7 @@ export class DatajobEditComponent implements OnInit, OnDestroy {
       this._subscription = combineLatest(
         this.route.data,
         this.route.params,
-        this.hubService.getHubCacheObservable(),
+        this.hubService.getHubCacheObservable(true),
       ).subscribe(result => {
         let data = result[0];
         let params = result[1];
@@ -45,7 +45,7 @@ export class DatajobEditComponent implements OnInit, OnDestroy {
         this.action = data['action'];
         this.pageTitle = data['pageTitle'];
 
-        if (!this.hubCache.isLoaded() || this.isLoaded) { return; }
+        // if (!this.hubCache.isLoaded() || this.isLoaded) { return; }
 
         this.isLoaded = true;
 

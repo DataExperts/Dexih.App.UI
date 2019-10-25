@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { HubService } from '../../hub.service';
 import { Subscription} from 'rxjs';
-import { eTaskStatus, CancelToken } from '../../../+auth/auth.models';
+import { CancelToken } from '../../../+auth/auth.models';
 import { Functions } from '../../../shared/utils/functions';
 import { AuthService } from '../../../+auth/auth.service';
 import { TransformWriterResult, eRunStatus } from '../../../shared/shared.models';
@@ -27,7 +27,7 @@ export class DatalinkStatusComponent implements OnInit, OnDestroy {
 
     private dataObject: any;
 
-    eTaskStatus = eTaskStatus;
+    eRunStatus = eRunStatus;
     runStatus = runStatus;
 
     public currentWriterResult: TransformWriterResult;
