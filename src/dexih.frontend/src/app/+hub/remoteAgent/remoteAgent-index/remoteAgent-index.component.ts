@@ -4,7 +4,7 @@ import { HubCache } from '../../hub.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
 import { AuthService } from '../../../+auth/auth.service';
-import { DexihRemoteAgent, DexihRemoteAgentHub, eSharedObjectType } from '../../../shared/shared.models';
+import { DexihRemoteAgent, DexihRemoteAgentHub, eSharedObjectType, eDataPrivacyStatus } from '../../../shared/shared.models';
 
 @Component({
     selector: 'remoteagents',
@@ -27,7 +27,7 @@ export class RemoteAgentIndexComponent implements OnInit, OnDestroy {
         { name: 'isAuthorized', title: 'Authorized?', format: 'Boolean' },
         { name: 'name', title: 'Name', format: '' },
         { name: 'user', title: 'User', format: ''},
-        { name: 'dataPrivacyStatus', title: 'Data Privacy', format: '' },
+        { name: 'dataPrivacyStatus', title: 'Data Privacy', format: 'Enum', enum: eDataPrivacyStatus },
         { name: 'isEncrypted', title: 'Encrypted?', format: 'Boolean' },
         { name: 'ipAddress', title: 'Current IP Address', format: '' },
         { name: 'remoteAgentId', title: 'Id', format: '' },

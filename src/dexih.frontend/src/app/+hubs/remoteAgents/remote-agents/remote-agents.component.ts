@@ -80,7 +80,8 @@ export class RemoteAgentsComponent implements OnInit, OnDestroy {
                     remoteAgentId: remoteAgent.remoteAgentId,
                     downloadUrls: activeAgent.downloadUrls,
                     instanceId: activeAgent.instanceId,
-                    version: 'Current: ' + activeAgent.version + '<br> Latest: ' + activeAgent.latestVersion +
+                    version: 'Current: ' + activeAgent.version +
+                        '<br> Latest: ' + activeAgent.latestVersion +
                         (activeAgent.upgradeAvailable ? '<br>Upgrade Required!' : ''),
                     versionClass: (activeAgent.upgradeAvailable ? 'dexih-error-text' : ''),
                 });

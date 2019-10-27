@@ -3,13 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="1be1a9df-0647-4351-ace4-9bafd064437b" name="Default" comment="minor">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Controllers/DevController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Controllers/DevController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Models/RemoteAgentModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Models/RemoteAgentModels.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dexih.frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dexih.frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/login/login.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/datajob/datajob-edit/datajob-edit.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/datajob/datajob-edit/datajob-edit.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/hub.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/hub.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/widgets/datalink-status/datalink-status.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/widgets/datalink-status/datalink-status.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/widgets/datalink-status/datalink-status.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/widgets/datalink-status/datalink-status.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/remoteAgent/remoteAgent-index/remoteAgent-index.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/remoteAgent/remoteAgent-index/remoteAgent-index.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/widgets/preview-data/preview-data.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/widgets/preview-data/preview-data.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/remoteAgents/remote-agents/remote-agents.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/remoteAgents/remote-agents/remote-agents.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/shared.models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/shared.models.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/ui/icons/download-button/download-button.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/ui/icons/download-button/download-button.component.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -306,7 +308,6 @@
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.ml/DynamicType.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.ml/SentimentAnalysis.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.ml/RegressionPredictor.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.ml/RegressionMetrics.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.ml/DynamicList.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/dexih.api/MessagePackInputFormatter.cs" root0="FORCE_HIGHLIGHTING" />
@@ -612,7 +613,6 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/38/1fd98ef1/Int16.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3F9A6BF9-CC47-4E04-95B6-4187B8F17D2C/2c/9e0d3af2/Stream.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A17E1E26-FEDA-44AE-95FD-68D5ECA36B68/51/6315a504/ConsoleLoggerOptionsSetup.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/298B1E10-86F0-4686-9486-E3DC04D2ECEF/02/236b4aec/StringValues.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A17E1E26-FEDA-44AE-95FD-68D5ECA36B68/00/54f079e9/ConsoleLoggerExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/70CD0A8A-B244-429A-94DD-8B81DBBC03E5/cc/e6859b6e/MatrixFactorizationTrainer.cs" root0="SKIP_HIGHLIGHTING" />
@@ -677,8 +677,6 @@
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/TransformWriterTaskBulk.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Connection.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.connections.mongo/dexih.connections.mongo.cs" />
-        <option value="$PROJECT_DIR$/src/dexih.api/Models/RemoteAgentModels.cs" />
-        <option value="$PROJECT_DIR$/src/dexih.api/Controllers/DevController.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Services/Operations/ApplicationSettings.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/JsonObjectConverter.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/Extensions/JsonExtensions.cs" />
@@ -721,6 +719,8 @@
         <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihDatajob.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/Query/SelectQuery.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihTrigger.cs" />
+        <option value="$PROJECT_DIR$/src/dexih.api/Controllers/DevController.cs" />
+        <option value="$PROJECT_DIR$/src/dexih.api/Models/RemoteAgentModels.cs" />
       </list>
     </option>
   </component>
@@ -909,12 +909,12 @@
           <expand>
             <path>
               <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@28df2ed" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@b04393ff" type="7427dc5b:ServiceModel$ServiceGroupNode" />
             </path>
             <path>
               <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@28df2ed" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@cc6b1834" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@b04393ff" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@15acdbc" type="7427dc5b:ServiceModel$ServiceGroupNode" />
             </path>
           </expand>
           <select />
@@ -1520,7 +1520,9 @@
       <workItem from="1571629955604" duration="5080000" />
       <workItem from="1571702457981" duration="34622000" />
       <workItem from="1571952108186" duration="260000" />
-      <workItem from="1571954457891" duration="3156000" />
+      <workItem from="1571954457891" duration="3301000" />
+      <workItem from="1571974179848" duration="2368000" />
+      <workItem from="1572036509319" duration="1511000" />
     </task>
     <task id="LOCAL-00001" summary="Connections to remote agents working.">
       <created>1509234944099</created>

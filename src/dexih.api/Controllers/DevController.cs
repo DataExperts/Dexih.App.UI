@@ -19,6 +19,7 @@ namespace dexih.api.Controllers
     [Route("api/[controller]")]
     public class DevController : Controller
     {
+
 //        public ProtoController(ISerializer serializer)
 //        {
 //            _serializer = serializer;
@@ -38,11 +39,17 @@ namespace dexih.api.Controllers
         [HttpGet("[action]")]
         public ActionResult JSModels()
         {
+            var skipFiles = new[]
+            {
+                "ReturnValue", "ReturnValueMultiple"
+            };
+            
             var js = new StringBuilder();
 
             js.AppendLine("// Auto generated shared classes.");
             js.AppendLine("// Regenerate at http://localhost:5000/api/Dev/JSModels.");
             js.AppendLine();
+            js.AppendLine("// tslint:disable: no-inferrable-types no-use-before-declare");
             js.AppendLine();
 
             var currentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -123,7 +130,12 @@ namespace dexih.api.Controllers
                             typeName = type.Name;
                         }
 
-                        js.AppendLine($"export class {typeName}{generic}{{");
+                        if (skipFiles.Contains(typeName))
+                        {
+                            continue;
+                        }
+
+                        js.AppendLine($"export class {typeName}{generic} {{");
                         foreach (var property in type.GetProperties())
                         {
                             var propAttribute = property.GetCustomAttribute<MessagePack.KeyAttribute>();
@@ -155,7 +167,7 @@ namespace dexih.api.Controllers
                                     typeLookup, enums);
 
                                 js.AppendLine(
-                                    $"  public {LowerFirst(property.Name)}: {propertyDetails.type} = {propertyDetails.defaultValue};");
+                                    $" public {LowerFirst(property.Name)}: {propertyDetails.type} = {propertyDetails.defaultValue};");
                             }
                         }
 
@@ -174,10 +186,10 @@ namespace dexih.api.Controllers
             foreach (var type in enums.Values.OrderBy(c => c.Name))
             {
                 var enumName = LowerFirst(type.Name);
-                js.AppendLine("export enum " + enumName + "{");
+                js.AppendLine("export enum " + enumName + " {");
                 foreach (var field in type.GetFields(BindingFlags.Public | BindingFlags.Static))
                 {
-                    js.AppendLine($"\t{field.Name} = {field.GetRawConstantValue()},");
+                    js.AppendLine($" {field.Name} = {field.GetRawConstantValue()},");
                 }
 
                 js.AppendLine("}");
@@ -186,19 +198,17 @@ namespace dexih.api.Controllers
                 js.AppendLine("export const " + LowerFirst(type.Name) + "Items = [");
                 if ( Convert.ToInt32(type.GetEnumValues().GetValue(0)) == 1)
                 {
-                    js.AppendLine($"\t{{key: 0, name: 'Unknown', description: 'Unknown'}},");
+                    js.AppendLine($" {{key: 0, name: 'Unknown', description: 'Unknown'}},");
                    
                 }
                 foreach (var field in type.GetFields(BindingFlags.Public | BindingFlags.Static))
                 {
                     var desc = field.GetCustomAttribute<DescriptionAttribute>();
-                    js.AppendLine($"\t{{key: {enumName}.{field.Name}, name: '{field.Name}', description: '{desc?.Description}'}},");
+                    js.AppendLine($" {{key: {enumName}.{field.Name}, name: '{field.Name}', description: '{desc?.Description}'}},");
                 }
 
                 js.AppendLine("]");
                 js.AppendLine();
-
-
             }
 
             return Content(js.ToString());

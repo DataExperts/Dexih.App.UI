@@ -5,16 +5,18 @@
         <dexih-button-refresh class="mr-1" (click)="refresh()" text="Reload"></dexih-button-refresh>
         <download-button class="ml-1" (download)="download($event)"></download-button>
 
-        <div class="btn-group btn-group-toggle ml-1" data-toggle="buttons">
+        <div class="btn-group btn-group-toggle ml-1" data-toggle="buttons" title="Table">
             <label class="btn btn-primary" [ngClass]="{active: view==='table'}">
-                <input type="radio" name="options" value="table" autocomplete="off" [(ngModel)]="view"> Table
+                <input type="radio" name="options" value="table" autocomplete="off" [(ngModel)]="view">
+                <i class="fa fa-table"></i>
             </label>
-            <label class="btn btn-primary" [ngClass]="{active: view==='chart'}">
-                <input type="radio" name="options" value="chart" autocomplete="off" [(ngModel)]="view"> Chart
+            <label class="btn btn-primary" [ngClass]="{active: view==='chart'}" title="Chart">
+                <input type="radio" name="options" value="chart" autocomplete="off" [(ngModel)]="view">
+                <i class="fa fa-bar-chart"></i>
             </label>
-            <label class="btn btn-primary" [ngClass]="{active: view==='properties'}">
+            <label class="btn btn-primary" [ngClass]="{active: view==='properties'}" title="Query plan details">
                 <input type="radio" name="options" value="properties" autocomplete="off" [(ngModel)]="view">
-                Query Plan
+                <i class="fa fa-info"></i>
             </label>
         </div>
 
