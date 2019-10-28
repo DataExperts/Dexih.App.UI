@@ -89,7 +89,7 @@ export class MappingEditComponent implements OnInit, OnDestroy {
 
         this.datalinkTransformItemKey = +params['datalinkTransformItemKey'];
         this.datalinkTransformKey = +params['datalinkTransformKey'];
-        this.transformItemType = params['type'];
+        this.transformItemType = +params['type'];
 
         if (this.datalinkForm) {
           this.datalinkTransformForm = this.editDatalinkService.getDatalinkTransform(this.datalinkTransformKey);

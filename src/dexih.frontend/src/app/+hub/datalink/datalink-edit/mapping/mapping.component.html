@@ -1,62 +1,74 @@
 <dexih-widget [title]="title" [scrollable]="true" [showExpandButton]="true">
 
-<dexih-table
-    [enableMultiSelect]="true" 
-    [enableManualSort]="true" 
-    [columns]="columns" 
-    [dataObservable]="tableData" 
-    (rowClick)="editMapping($event)"
-    (onSortChanged)="datalinkItemSortChange($event)"
-    tableClass="table table-striped table-hover m-0"
-    #mappingTable
-    dropZone (dropData)="newOutputDrop($event)" zone="input-column" dropAllowedClass="drop-zone-green"
-    actionHeading="Mappings"
-    >
+    <dexih-table [enableMultiSelect]="true" [enableManualSort]="true" [columns]="columns" [dataObservable]="tableData"
+        (rowClick)="editMapping($event)" (onSortChanged)="datalinkItemSortChange($event)"
+        tableClass="table table-striped table-hover m-0" #mappingTable dropZone (dropData)="newOutputDrop($event)"
+        zone="input-column" dropAllowedClass="drop-zone-green" actionHeading="Mappings">
 
-    <ng-template #selectedItemAction select="selectedItemAction" let-datalinkTransformItem="item">
-        <dexih-button-edit class="mr-1 mt-1" (click)="editMapping(datalinkTransformItem)" title="Edit this mapping"></dexih-button-edit>
-    </ng-template>
+        <ng-template #selectedItemAction select="selectedItemAction" let-datalinkTransformItem="item">
+            <dexih-button-edit class="mr-1 " (click)="editMapping(datalinkTransformItem)" title="Edit this mapping">
+            </dexih-button-edit>
+        </ng-template>
 
-    <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-        <dexih-button-delete class="mr-1 mt-1" (click)="deleteSelected(items)" title="Delete selected mapping functions"></dexih-button-delete>
-    </ng-template>
+        <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+            <dexih-button-delete class="mr-1 " (click)="deleteSelected(items)"
+                title="Delete selected mapping functions"></dexih-button-delete>
+        </ng-template>
 
-    <ng-template #rowAction let-item="item">
-        <mapping-item (click)="editMapping(item)" [transform]="datalinkTransformForm.value" [transformItem]="item.datalinkTransformItem" [allowCondition]="allowCondition"></mapping-item>
-    </ng-template>
+        <ng-template #rowAction let-item="item">
+            <mapping-item (click)="editMapping(item)" [transform]="datalinkTransformForm.value"
+                [transformItem]="item.datalinkTransformItem" [allowCondition]="allowCondition"></mapping-item>
+        </ng-template>
 
-    <ng-template #actions let-items="items">
-        <ng-template [ngIf]="allowMapping">
-            <dexih-button 
-            routerLink='mapping-edit/ColumnPair' buttonClass="btn-primary mr-1 mt-1" iconClass="fa fa-map" title="Create a new mapping, or drop a column to create new mapping.">Mapping</dexih-button>
+        <ng-template #actions let-items="items">
+            <ng-template [ngIf]="allowMapping">
+                <dexih-button routerLink='mapping-edit/{{eTransformItemType.ColumnPair}}'
+                    buttonClass="btn-primary mr-1 " iconClass="fa fa-map"
+                    title="Create a new mapping, or drop a column to create new mapping.">Mapping</dexih-button>
+            </ng-template>
+            <ng-template [ngIf]="allowCondition && !allowValidation">
+                <dexih-button routerLink='mapping-edit/{{eTransformItemType.FilterPair}}'
+                    buttonClass="btn-primary mr-1 " iconClass="fa fa-filter" title="Create a simple filter">Filter
+                </dexih-button>
+            </ng-template>
+            <ng-template [ngIf]="allowAggregate">
+                <dexih-button routerLink='mapping-edit/{{eTransformItemType.AggregatePair}}'
+                    buttonClass="btn-primary mr-1 " iconClass="fa fa-cubes" title="Create a simple aggregate">
+                    Aggregate</dexih-button>
+            </ng-template>
+            <ng-template [ngIf]="allowStandard || allowAggregate || allowCondition || allowRow || allowValidation">
+                <dexih-button [routerLink]="['standard-function-edit', functionType]"
+                    buttonClass="btn-primary mr-1 " iconClass="fa fa-dollar" title="Create a new standard function">
+                    Standard</dexih-button>
+                <dexih-button [routerLink]="['custom-function-edit', functionType]" buttonClass="btn-primary mr-1 "
+                    iconClass="fa fa-code" title="Create a new custom function">Custom</dexih-button>
+            </ng-template>
+            <ng-template [ngIf]="allowRow">
+                <dexih-button routerLink='unGroup-edit' buttonClass="btn-primary mr-1 " iconClass="fa fa-map"
+                    title="Un-Group a Node">Un-Group</dexih-button>
+            </ng-template>
+            <ng-template [ngIf]="allowJoin">
+                <dexih-button routerLink='mapping-edit/{{eTransformItemType.JoinPair}}'
+                    buttonClass="btn-primary mr-1 " iconClass="fa fa-link" title="Create a new join">Join
+                </dexih-button>
+                <dexih-button [routerLink]="['standard-function-edit', functionType]"
+                    buttonClass="btn-primary mr-1 " iconClass="fa fa-dollar" title="Create a new standard filter">
+                    Filter</dexih-button>
+                <dexih-button [routerLink]="['custom-function-edit', functionType]" buttonClass="btn-primary mr-1 "
+                    iconClass="fa fa-code" title="Create a new custom filter">Custom Filter</dexih-button>
+            </ng-template>
+            <ng-template [ngIf]="allowSort">
+                <dexih-button routerLink='mapping-edit/{{eTransformItemType.Sort}}' buttonClass="btn-primary mr-1 "
+                    iconClass="fa fa-sort-alpha-asc" title="New Sort">Sort</dexih-button>
+            </ng-template>
+            <ng-template [ngIf]="allowGroup">
+                <dexih-button routerLink='mapping-edit/{{eTransformItemType.Column}}'
+                    buttonClass="btn-primary mr-1 " iconClass="fa fa-list" title="New Group">Group</dexih-button>
+            </ng-template>
+            <ng-template [ngIf]="allowJoinNode">
+                <dexih-button (click)="createJoinNode()" buttonClass="btn-primary mr-1 " iconClass="fa fa-list"
+                    title="Join Node">Node</dexih-button>
+            </ng-template>
         </ng-template>
-        <ng-template [ngIf]="allowCondition && !allowValidation">
-            <dexih-button routerLink='mapping-edit/FilterPair' buttonClass="btn-primary mr-1 mt-1" iconClass="fa fa-map" title="Create a simple filter">Filter</dexih-button>
-        </ng-template>
-        <ng-template [ngIf]="allowAggregate">
-            <dexih-button routerLink='mapping-edit/AggregatePair' buttonClass="btn-primary mr-1 mt-1" iconClass="fa fa-map" title="Create a simple aggregate">Aggregate</dexih-button>
-        </ng-template>
-        <ng-template [ngIf]="allowStandard || allowAggregate || allowCondition || allowRow || allowValidation">
-            <dexih-button [routerLink]="['standard-function-edit', functionType]" buttonClass="btn-primary mr-1 mt-1" iconClass="fa fa-dollar" title="Create a new standard function">Standard</dexih-button>
-            <dexih-button  [routerLink]="['custom-function-edit', functionType]" buttonClass="btn-primary mr-1 mt-1" iconClass="fa fa-code" title="Create a new custom function">Custom</dexih-button>
-        </ng-template>
-        <ng-template [ngIf]="allowRow">
-            <dexih-button routerLink='unGroup-edit' buttonClass="btn-primary mr-1 mt-1" iconClass="fa fa-map" title="Un-Group a Node">Un-Group</dexih-button>
-        </ng-template>
-        <ng-template [ngIf]="allowJoin">
-            <dexih-button routerLink='mapping-edit/JoinPair' buttonClass="btn-primary mr-1 mt-1" iconClass="fa fa-link" title="Create a new join">Join</dexih-button>
-            <dexih-button [routerLink]="['standard-function-edit', functionType]" buttonClass="btn-primary mr-1 mt-1" iconClass="fa fa-dollar" title="Create a new standard filter">Filter</dexih-button>
-            <dexih-button [routerLink]="['custom-function-edit', functionType]" buttonClass="btn-primary mr-1 mt-1" iconClass="fa fa-code" title="Create a new custom filter">Custom Filter</dexih-button>
-        </ng-template>
-        <ng-template [ngIf]="allowSort">
-            <dexih-button routerLink='mapping-edit/Sort' buttonClass="btn-primary mr-1 mt-1" iconClass="fa fa-sort-alpha-asc" title="New Sort">Sort</dexih-button>
-        </ng-template>
-        <ng-template [ngIf]="allowGroup">
-            <dexih-button routerLink='mapping-edit/Column' buttonClass="btn-primary mr-1 mt-1" iconClass="fa fa-list" title="New Group">Group</dexih-button>
-        </ng-template>
-        <ng-template [ngIf]="allowJoinNode">
-            <dexih-button (click)="createJoinNode()" buttonClass="btn-primary mr-1 mt-1" iconClass="fa fa-list" title="Join Node">Node</dexih-button>
-        </ng-template>
-    </ng-template>
-</dexih-table>
+    </dexih-table>
 </dexih-widget>

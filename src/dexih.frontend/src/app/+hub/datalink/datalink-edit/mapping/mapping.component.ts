@@ -41,7 +41,6 @@ export class MappingComponent implements OnInit, OnDestroy, OnChanges {
     private _subscription: Subscription;
     private _changesSubscription: Subscription;
 
-
     columns: Array<any>;
 
     private _tableData = new BehaviorSubject<Array<any>>(null);
@@ -50,6 +49,7 @@ export class MappingComponent implements OnInit, OnDestroy, OnChanges {
     public functionType: eFunctionType;
     public transformType: eTransformType;
     public eTransformType = eTransformType;
+    public eTransformItemType = eTransformItemType;
 
     constructor(
         private authService: AuthService,
@@ -267,7 +267,7 @@ export class MappingComponent implements OnInit, OnDestroy, OnChanges {
         return functionType;
     }
 
-    // if a sort event has triggered from the table, then reset the positions of the datalinktransform items.
+    // if a sort event has triggered from the table, then reset the positions of the datalink transform items.
     datalinkItemSortChange(items: Array<DexihDatalinkTransformItem>) {
         items.forEach((item, index) => {
             let existingItems = <FormArray>this.datalinkTransformForm.controls.dexihDatalinkTransformItems;

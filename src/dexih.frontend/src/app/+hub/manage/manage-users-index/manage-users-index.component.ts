@@ -26,8 +26,6 @@ export class ManageUsersIndexComponent implements OnInit, OnDestroy {
     tableData: Observable<Array<any>> = this._tableData.asObservable();
 
     ePermission = ePermission;
-    Permissions = Permissions;
-
     permission = ePermission.PublishReader;
     emails: string[] = [];
     sendInvites = true;

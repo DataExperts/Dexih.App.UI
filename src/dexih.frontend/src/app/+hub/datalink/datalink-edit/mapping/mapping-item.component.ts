@@ -8,7 +8,7 @@ import { InputOutputColumns } from '../../../hub.lineage.models';
 import { compare } from '../../../hub.query.models';
 import { filter } from 'rxjs/operators';
 import { DexihDatalinkTransform, DexihDatalinkTransformItem, eTransformItemType, eCompare,
-    DexihDatalinkColumn, FunctionReference, eParameterDirection } from '../../../../shared/shared.models';
+    DexihDatalinkColumn, FunctionReference, eParameterDirection, eAggregate, eDirection } from '../../../../shared/shared.models';
 
 export class ValidValue {
     public valid: boolean;
@@ -102,10 +102,10 @@ export class MappingItemComponent implements OnInit {
                 this.addCustomFunctionParameters();
                 break;
             case eTransformItemType.AggregatePair:
-                this.label = item.aggregate.toString();
+                this.label = eAggregate[item.aggregate];
                 break;
             case eTransformItemType.Sort:
-                this.label = item.sortDirection.toString();
+                this.label = eDirection[item.sortDirection];
                 break;
             default:
                 this.label = itemType.name;
