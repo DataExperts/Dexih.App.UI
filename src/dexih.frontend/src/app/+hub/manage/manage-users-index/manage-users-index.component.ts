@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
 import { DexihMessageComponent } from  '../../../shared/ui/dexihMessage/dexih-message.component';
 import { UserAuthorization } from '../../../+admin/admin.models';
-import { ePermission } from '../../../shared/shared.models';
+import { ePermission, ePermissionItems } from '../../../shared/shared.models';
 
 @Component({
   selector: 'users',
@@ -26,6 +26,7 @@ export class ManageUsersIndexComponent implements OnInit, OnDestroy {
     tableData: Observable<Array<any>> = this._tableData.asObservable();
 
     ePermission = ePermission;
+    ePermissionItems = ePermissionItems;
     permission = ePermission.PublishReader;
     emails: string[] = [];
     sendInvites = true;

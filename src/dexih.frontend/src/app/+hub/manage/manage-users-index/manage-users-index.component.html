@@ -33,7 +33,7 @@
 			<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
 				<dexih-button-delete class="mr-1" (click)="deleteUsers(items)"></dexih-button-delete>
 				<dexih-button-dropdown buttonClass="btn-primary" iconClass="fa fa-lock" text="Set Permission">
-					<a *ngFor="let permission of Permissions" class="dropdown-item" (click)="setPermission(permission.key, items)">{{permission.name}}</a>
+					<a *ngFor="let permission of ePermissionItems" class="dropdown-item" (click)="setPermission(permission.key, items)">{{permission.name}}</a>
 				</dexih-button-dropdown>
 			</ng-template>
 		</dexih-table>
