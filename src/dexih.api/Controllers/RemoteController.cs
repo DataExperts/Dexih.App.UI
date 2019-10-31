@@ -807,6 +807,7 @@ chmod a+x dexih.remote.run.{os}.sh
                 }
 
                 var remoteRunEntry = archive.CreateEntry(remoteRunStream.fileName);
+                remoteRunEntry.ExternalAttributes = -2113994752;  // set unix permissions to 777.
                 using (var remoteRunSettings = remoteRunEntry.Open())
                 {
                     await remoteRunStream.stream.CopyToAsync(remoteRunSettings, cancellationToken);

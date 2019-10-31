@@ -18,7 +18,7 @@ install()
 
 if [ -z "$1" ]
 then
-      SERVER='https://dexih.com'
+      SERVER='{{SERVER}}'
 else
       SERVER=$1
 fi
@@ -26,7 +26,7 @@ echo "***** Using dexih at $SERVER *****"
 
 DIRECTORY='dexih.remote'
 OS='linux'
-PRE='stable'
+PRE='{{PRE}}'
 
 SCRIPT=`basename "$0"`
 

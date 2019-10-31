@@ -1,7 +1,7 @@
 <dexih-widget-section *ngIf="columns && showEdit" title="Chart Properties" [showExpandButton]="true">
     <div class="d-flex flex-wrap">
         <div class="flex-fill">
-            <form-select [(ngModel)]="config.chartType" (ngModelChange)="changeChart($event)" labelLeft="Chart"
+            <form-select [(ngModel)]="config.chartType" (ngModelChange)="updateChart($event)" labelLeft="Chart"
                 [items]="chartTypes" parentName='name' childItems='charts' itemKey='key' itemName='name'>
             </form-select>
         </div>

@@ -4,8 +4,8 @@
 		(close)="cancel()"
 		[padding]="true" >
         <ng-template #header>
-			<dexih-button-download class="mr-1" [busy]="downloading" (click)="!downloading && download()" text="Download Agent"></dexih-button-download>
-			<dexih-button-download class="mr-1" [busy]="downloading" (click)="!downloading && downloadRemoteSettings()" text="Download Settings"></dexih-button-download>
+			<dexih-button-download class="mr-1" [busy]="downloading" (click)="!downloading && download()" text="Download"></dexih-button-download>
+			<dexih-button iconClass="fa fa-wrench" class="mr-1" [busy]="downloading" (click)="!downloading && downloadRemoteSettings()" text="Settings File"></dexih-button>
 			<dexih-button-cancel (click)="!downloading && cancel()"></dexih-button-cancel>
         </ng-template>
 

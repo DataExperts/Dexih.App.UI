@@ -145,6 +145,12 @@ namespace dexih.api.Models
 		public long[] HubKeys { get; set; }
 	}
 
+    public class RemoveRemoteAgents {
+        public long[] RemoteAgentKeys { get; set; }
+        public string ClientConnectionId { get; set; }
+    }
+
+    
     public class UserTokenModel
     {
         public string RemoteAgentId { get; set; }

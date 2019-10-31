@@ -555,10 +555,35 @@
           </e>
           <e p="web.config" t="Include" />
           <e p="wwwroot" t="Include">
-            <e p="admin-admin-module-es2015.js" t="Include" />
-            <e p="admin-admin-module-es2015.js.map" t="Include" />
-            <e p="admin-admin-module-es5.js" t="Include" />
-            <e p="admin-admin-module-es5.js.map" t="Include" />
+            <e p="0-es2015.f48b4f615ba764ba08ed.js" t="Include" />
+            <e p="0-es5.f48b4f615ba764ba08ed.js" t="Include" />
+            <e p="1-es2015.106ad9c50ef07786207e.js" t="Include" />
+            <e p="1-es5.106ad9c50ef07786207e.js" t="Include" />
+            <e p="13-es2015.0ff75e84732725f10f84.js" t="Include" />
+            <e p="13-es5.0ff75e84732725f10f84.js" t="Include" />
+            <e p="14-es2015.bb2eb24decb29e2c9c60.js" t="Include" />
+            <e p="14-es5.bb2eb24decb29e2c9c60.js" t="Include" />
+            <e p="15-es2015.65834c112c7576a9d97b.js" t="Include" />
+            <e p="15-es5.65834c112c7576a9d97b.js" t="Include" />
+            <e p="16-es2015.3139e0d03b5bac6a6bc2.js" t="Include" />
+            <e p="16-es5.3139e0d03b5bac6a6bc2.js" t="Include" />
+            <e p="17-es2015.54a8a08e873645c9a650.js" t="Include" />
+            <e p="17-es5.54a8a08e873645c9a650.js" t="Include" />
+            <e p="18-es2015.26536bcaafb0e6b137bd.js" t="Include" />
+            <e p="18-es5.26536bcaafb0e6b137bd.js" t="Include" />
+            <e p="3rdpartylicenses.txt" t="Include" />
+            <e p="4-es2015.7a2ea25d683e717847f1.js" t="Include" />
+            <e p="4-es5.7a2ea25d683e717847f1.js" t="Include" />
+            <e p="5-es2015.85b153720561e7a030d2.js" t="Include" />
+            <e p="5-es5.85b153720561e7a030d2.js" t="Include" />
+            <e p="6-es2015.9c940df101cef0d65901.js" t="Include" />
+            <e p="6-es5.9c940df101cef0d65901.js" t="Include" />
+            <e p="7-es2015.6883f594858308935b4a.js" t="Include" />
+            <e p="7-es5.6883f594858308935b4a.js" t="Include" />
+            <e p="8-es2015.aeadcf9c99016f4bc9c4.js" t="Include" />
+            <e p="8-es5.aeadcf9c99016f4bc9c4.js" t="Include" />
+            <e p="9-es2015.c2f7eafd23b9dcb9a5fd.js" t="Include" />
+            <e p="9-es5.c2f7eafd23b9dcb9a5fd.js" t="Include" />
             <e p="assets" t="Include">
               <e p="css" t="Include">
                 <e p="_custom.scss" t="Include" />
@@ -743,79 +768,22 @@
               </e>
               <e p="js" t="Include">
                 <e p="google-api.js" t="Include" />
-                <e p="msal.min.js" t="Include" />
               </e>
             </e>
-            <e p="common-es2015.js" t="Include" />
-            <e p="common-es2015.js.map" t="Include" />
-            <e p="common-es5.js" t="Include" />
-            <e p="common-es5.js.map" t="Include" />
-            <e p="dashboard-dashboard-edit-dashboard-edit-module-es2015.js" t="Include" />
-            <e p="dashboard-dashboard-edit-dashboard-edit-module-es2015.js.map" t="Include" />
-            <e p="dashboard-dashboard-edit-dashboard-edit-module-es5.js" t="Include" />
-            <e p="dashboard-dashboard-edit-dashboard-edit-module-es5.js.map" t="Include" />
-            <e p="datajob-datajob-edit-datajob-edit-module-es2015.js" t="Include" />
-            <e p="datajob-datajob-edit-datajob-edit-module-es2015.js.map" t="Include" />
-            <e p="datajob-datajob-edit-datajob-edit-module-es5.js" t="Include" />
-            <e p="datajob-datajob-edit-datajob-edit-module-es5.js.map" t="Include" />
-            <e p="datalink-datalink-edit-datalink-edit-module-es2015.js" t="Include" />
-            <e p="datalink-datalink-edit-datalink-edit-module-es2015.js.map" t="Include" />
-            <e p="datalink-datalink-edit-datalink-edit-module-es5.js" t="Include" />
-            <e p="datalink-datalink-edit-datalink-edit-module-es5.js.map" t="Include" />
-            <e p="default~datalink-datalink-edit-datalink-edit-module~files-files-bulk-load-files-bulk-load-module~tab~ec9ca56b-es2015.js" t="Include" />
-            <e p="default~datalink-datalink-edit-datalink-edit-module~files-files-bulk-load-files-bulk-load-module~tab~ec9ca56b-es2015.js.map" t="Include" />
-            <e p="default~datalink-datalink-edit-datalink-edit-module~files-files-bulk-load-files-bulk-load-module~tab~ec9ca56b-es5.js" t="Include" />
-            <e p="default~datalink-datalink-edit-datalink-edit-module~files-files-bulk-load-files-bulk-load-module~tab~ec9ca56b-es5.js.map" t="Include" />
-            <e p="default~hub-hub-module~hubs-hubs-module-es2015.js" t="Include" />
-            <e p="default~hub-hub-module~hubs-hubs-module-es2015.js.map" t="Include" />
-            <e p="default~hub-hub-module~hubs-hubs-module-es5.js" t="Include" />
-            <e p="default~hub-hub-module~hubs-hubs-module-es5.js.map" t="Include" />
-            <e p="files-files-bulk-load-files-bulk-load-module-es2015.js" t="Include" />
-            <e p="files-files-bulk-load-files-bulk-load-module-es2015.js.map" t="Include" />
-            <e p="files-files-bulk-load-files-bulk-load-module-es5.js" t="Include" />
-            <e p="files-files-bulk-load-files-bulk-load-module-es5.js.map" t="Include" />
-            <e p="fontawesome-webfont.eot" t="Include" />
-            <e p="fontawesome-webfont.svg" t="Include" />
-            <e p="fontawesome-webfont.ttf" t="Include" />
-            <e p="fontawesome-webfont.woff" t="Include" />
-            <e p="fontawesome-webfont.woff2" t="Include" />
-            <e p="hub-base-module-es2015.js" t="Include" />
-            <e p="hub-base-module-es2015.js.map" t="Include" />
-            <e p="hub-base-module-es5.js" t="Include" />
-            <e p="hub-base-module-es5.js.map" t="Include" />
-            <e p="hubs-hubs-module-es2015.js" t="Include" />
-            <e p="hubs-hubs-module-es2015.js.map" t="Include" />
-            <e p="hubs-hubs-module-es5.js" t="Include" />
-            <e p="hubs-hubs-module-es5.js.map" t="Include" />
+            <e p="common-es2015.24f72312372a9467303a.js" t="Include" />
+            <e p="common-es5.24f72312372a9467303a.js" t="Include" />
+            <e p="fontawesome-webfont.674f50d287a8c48dc19b.eot" t="Include" />
+            <e p="fontawesome-webfont.912ec66d7572ff821749.svg" t="Include" />
+            <e p="fontawesome-webfont.af7ae505a9eed503f8b8.woff2" t="Include" />
+            <e p="fontawesome-webfont.b06871f281fee6b241d6.ttf" t="Include" />
+            <e p="fontawesome-webfont.fee66e712a8a08eef580.woff" t="Include" />
             <e p="index.html" t="Include" />
-            <e p="main-es2015.js" t="Include" />
-            <e p="main-es2015.js.map" t="Include" />
-            <e p="main-es5.js" t="Include" />
-            <e p="main-es5.js.map" t="Include" />
-            <e p="polyfills-es2015.js" t="Include" />
-            <e p="polyfills-es2015.js.map" t="Include" />
-            <e p="polyfills-es5.js" t="Include" />
-            <e p="polyfills-es5.js.map" t="Include" />
-            <e p="runtime-es2015.js" t="Include" />
-            <e p="runtime-es2015.js.map" t="Include" />
-            <e p="runtime-es5.js" t="Include" />
-            <e p="runtime-es5.js.map" t="Include" />
-            <e p="styles-es2015.js" t="Include" />
-            <e p="styles-es2015.js.map" t="Include" />
-            <e p="styles-es5.js" t="Include" />
-            <e p="styles-es5.js.map" t="Include" />
-            <e p="table-table-edit-table-edit-module-es2015.js" t="Include" />
-            <e p="table-table-edit-table-edit-module-es2015.js.map" t="Include" />
-            <e p="table-table-edit-table-edit-module-es5.js" t="Include" />
-            <e p="table-table-edit-table-edit-module-es5.js.map" t="Include" />
-            <e p="test-datalinkTest-edit-datalinkTest-edit-module-es2015.js" t="Include" />
-            <e p="test-datalinkTest-edit-datalinkTest-edit-module-es2015.js.map" t="Include" />
-            <e p="test-datalinkTest-edit-datalinkTest-edit-module-es5.js" t="Include" />
-            <e p="test-datalinkTest-edit-datalinkTest-edit-module-es5.js.map" t="Include" />
-            <e p="vendor-es2015.js" t="Include" />
-            <e p="vendor-es2015.js.map" t="Include" />
-            <e p="vendor-es5.js" t="Include" />
-            <e p="vendor-es5.js.map" t="Include" />
+            <e p="main-es2015.28d50dc1de9dd6010abf.js" t="Include" />
+            <e p="main-es5.28d50dc1de9dd6010abf.js" t="Include" />
+            <e p="polyfills-es5.a602d1856f2cfb17e06b.js" t="Include" />
+            <e p="runtime-es2015.098c964e9387debf81de.js" t="Include" />
+            <e p="runtime-es5.098c964e9387debf81de.js" t="Include" />
+            <e p="styles.0eeb42384e84fae3f877.css" t="Include" />
           </e>
         </e>
         <e p="dexih.frontend/node_modules/@angular/animations" t="IncludeRecursive" />

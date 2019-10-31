@@ -1006,7 +1006,7 @@ namespace dexih.api.Controllers
 	    // POST: /Account/RevokeUserToken
 	    [HttpPost("[action]")]
 	    [ValidateAntiForgeryToken]
-	    public async Task RemoveRemoteAgents([FromBody] IEnumerable<long> remoteAgentKeys, CancellationToken cancellationToken)
+	    public async Task RemoveRemoteAgents([FromBody] RemoveRemoteAgents removeRemoteAgents, CancellationToken cancellationToken)
 	    {
 		    var user = await GetApplicationUser(cancellationToken);
 		    if (user == null)
@@ -1016,7 +1016,7 @@ namespace dexih.api.Controllers
 
 		    var exceptions = new ConcurrentQueue<Exception>();
 
-		    foreach(var remoteAgentKey in remoteAgentKeys)
+		    foreach(var remoteAgentKey in removeRemoteAgents.RemoteAgentKeys)
 		    {
 			    try
 			    {

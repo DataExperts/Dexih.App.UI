@@ -168,7 +168,7 @@ export class HubsService implements OnDestroy {
         return this.authService.post<boolean>('/api/Account/CancelTasks', tasks, 'Cancelling task(s)...');
     }
 
-    restartAgents(instanceIds: string[], force: boolean): Promise<boolean> {
+    restartAgents(instanceIds: [], force: boolean): Promise<boolean> {
         return this.authService.post<boolean>('/api/Account/RestartAgents', { instanceIds, force}, 'Restarting agent(s)...');
     }
 

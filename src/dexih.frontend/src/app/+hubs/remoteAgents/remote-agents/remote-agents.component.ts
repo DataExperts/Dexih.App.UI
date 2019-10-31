@@ -144,17 +144,16 @@ export class RemoteAgentsComponent implements OnInit, OnDestroy {
 
     restartAgents(items) {
         let instanceIds = items.filter(c => c.instanceId).map(c => c.instanceId);
+
+        if ( instanceIds.length === 0) {
+            this.hubService.addHubErrorMessage('No active agents were selected.')
+            return;
+        }
+
         this.hubsService.restartAgents(instanceIds, false);
     }
 
-    edit(item) {
-        this.router.navigate(['edit', item.remoteAgentKey], { relativeTo: this.route });
-    }
 
-    createToken() {
-        this.router.navigate(['token-new'], {relativeTo: this.route});
-        // this.authService.createRemoteAgent().then( result => this.refreshData());
-    }
 
     refresh() {
         this.authService.pingRemoteAgents();

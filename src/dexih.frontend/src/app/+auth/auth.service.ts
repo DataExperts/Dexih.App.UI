@@ -1649,13 +1649,13 @@ export class AuthService implements OnDestroy {
     }
 
     removeUserTokens(remoteAgentKeys: Array<number>): Promise<boolean> {
-        return this.postConfirm<boolean>('/api/Account/RemoveRemoteAgents', remoteAgentKeys, 'Removing remote agents...',
+        return this.postConfirm<boolean>('/api/Account/RemoveRemoteAgents', { remoteAgentKeys }, 'Removing remote agents...',
         'This action will revoke the selected tokens.  Remote Agents using these tokens will be immediately logged off.<p></p>' +
                 '<p></p>Are you sure?');
     }
 
     refreshRemoteAgentToken(remoteAgentKey: number): Promise<RemoteToken> {
-        return this.postConfirm<RemoteToken>('/api/Account/RefreshRemoteAgentToken', remoteAgentKey,
+        return this.postConfirm<RemoteToken>('/api/Account/RefreshRemoteAgentToken', { remoteAgentKey },
         'Refreshing remote agent token...',
          // tslint:disable-next-line:max-line-length
          'This action will revoke the selected token, and create a new one.  Remote agents using these tokens will be immediately logged off.<p></p>' +
