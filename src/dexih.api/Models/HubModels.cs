@@ -30,7 +30,7 @@ namespace dexih.api.Models
     {
         public long HubKey { get; set; }
         public string RemoteAgentId { get; set; }
-        public string ResponseUrl { get; set; }
+        public DownloadUrl DownloadUrl { get; set; }
     }
     
 
@@ -272,7 +272,7 @@ namespace dexih.api.Models
         public EDownloadFormat DownloadFormat { get; set; }
         public bool ZipFiles { get; set; }
         public DownloadObject[] DownloadObjects { get; set; }
-        public DownloadUrl DownloadUrl { get; set; }
+        
     }
     
     

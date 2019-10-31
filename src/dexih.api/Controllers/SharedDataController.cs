@@ -70,11 +70,11 @@ namespace dexih.api.Controllers
 
             if (previewData.ObjectType == EDataObjectType.Table)
             {
-                data = await _remoteAgents.PreviewTable(previewData.RemoteAgentId, previewData.HubKey, previewData.ResponseUrl, previewData.ObjectKey, previewData.SelectQuery, previewData.InputColumns, previewData.Parameters, false, repositoryManager, cancellationToken);
+                data = await _remoteAgents.PreviewTable(previewData.RemoteAgentId, previewData.HubKey, previewData.DownloadUrl, previewData.ObjectKey, previewData.SelectQuery, previewData.InputColumns, previewData.Parameters, false, repositoryManager, cancellationToken);
             }
             else
             {
-                data = await _remoteAgents.PreviewDatalink(previewData.RemoteAgentId, previewData.HubKey, previewData.ResponseUrl, previewData.ObjectKey, previewData.SelectQuery, previewData.InputColumns, previewData.Parameters, repositoryManager, cancellationToken);
+                data = await _remoteAgents.PreviewDatalink(previewData.RemoteAgentId, previewData.HubKey, previewData.DownloadUrl, previewData.ObjectKey, previewData.SelectQuery, previewData.InputColumns, previewData.Parameters, repositoryManager, cancellationToken);
             }
 
             _logger.LogTrace(LoggingEvents.HubPreviewTable, "SharedDataController.PreviewData: HubKey: {updateBrowserHub}, ObjectKey: {objectKey}", previewData.HubKey, previewData.ObjectKey);
@@ -115,7 +115,7 @@ namespace dexih.api.Controllers
 
             foreach (var item in downloadData)
             {
-                var managedTask = await _remoteAgents.DownloadData(downloadSharedData.RemoteAgentId, item.Key, downloadSharedData.ResponseUrl, downloadSharedData.ClientId, item.Value.ToArray(), downloadSharedData.DownloadFormat, downloadSharedData.ZipFiles, repositoryManager, cancellationToken);
+                var managedTask = await _remoteAgents.DownloadData(downloadSharedData.RemoteAgentId, item.Key, downloadSharedData.DownloadUrl, downloadSharedData.ClientId, item.Value.ToArray(), downloadSharedData.DownloadFormat, downloadSharedData.ZipFiles, repositoryManager, cancellationToken);
                 managedTasks.Add(managedTask);
             }
             

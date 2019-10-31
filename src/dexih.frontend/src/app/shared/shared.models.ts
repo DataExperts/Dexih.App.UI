@@ -1,7 +1,7 @@
 // Auto generated shared classes.
 // Regenerate at http://localhost:5000/api/Dev/JSModels.
 
-// tslint:disable: no-inferrable-types no-use-before-declare no-trailing-whitespace
+// tslint:disable: no-inferrable-types no-use-before-declare
 
 // auto generated classes
 
@@ -1483,7 +1483,7 @@ export class ApiData {
     public timeOut: number = null;
     public hubVariables: DexihHubVariable[] = [];
     public clientConnectionId: string = null;
-    public responseUrl: string = null;
+    public downloadUrl: DownloadUrl = null;
     public value: any[] = [];
     public success: boolean = true;
     public message: string = null;
@@ -2916,5 +2916,4 @@ export class ApiData {
     {key: logLevel.Critical, name: 'Critical', description: ''},
     {key: logLevel.None, name: 'None', description: ''},
    ]
-   
    

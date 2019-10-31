@@ -471,9 +471,11 @@ export class AuthService implements OnDestroy {
 
         let promise = new PromiseWithCancel<any>((resolve, reject) => {
             this.getBestDownloadUrl(remoteAgent, 0).then(downloadUrl => {
-                if (downloadUrl && downloadUrl.downloadUrlType === eDownloadUrlType.Proxy) {
-                    data.responseUrl = downloadUrl.url;
-                }
+                // if (downloadUrl && downloadUrl.downloadUrlType === eDownloadUrlType.Proxy) {
+                //     data.responseUrl = downloadUrl.url;
+                // }
+
+                data.downloadUrl = downloadUrl;
 
                 this.http.post(url, this.JsonNoNulls(data), { withCredentials: true, headers: headers, responseType: 'text' })
                 .toPromise().then(key => {

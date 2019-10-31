@@ -141,7 +141,7 @@ namespace dexih.api.Services.Remote
 
 	    public Task<string> Run<In>(HubValue<In> hubValue, string method, RepositoryManager repositoryManager, CancellationToken cancellationToken = default)
 	    {
-		    return SendRemoteCommand(hubValue.RemoteAgentId, hubValue.HubKey, hubValue.ResponseUrl, method, new {value = hubValue.Value}, 
+		    return SendRemoteCommand(hubValue.RemoteAgentId, hubValue.HubKey, hubValue.DownloadUrl, method, new {value = hubValue.Value}, 
 			    repositoryManager, cancellationToken);
 	    }
 //
@@ -307,7 +307,7 @@ namespace dexih.api.Services.Remote
 //		    }
 //	    }
 	    
-	    public async Task<string> SendRemoteCommand(string instanceId, long hubKey, string responseUrl, string method, object value, RepositoryManager repositoryManager, CancellationToken cancellationToken = default)
+	    public async Task<string> SendRemoteCommand(string instanceId, long hubKey, DownloadUrl downloadUrl, string method, object value, RepositoryManager repositoryManager, CancellationToken cancellationToken = default)
         {
 	        var remoteAgentProperties = await GetRemoteAgentProperties(instanceId, cancellationToken);
 
@@ -349,7 +349,7 @@ namespace dexih.api.Services.Remote
 		            HubKey = hubKey,
 		            HubVariables = await repositoryManager.GetHubVariables(hubKey, cancellationToken),
 		            TimeOut = int.MaxValue,
-		            ResponseUrl = responseUrl
+		            DownloadUrl = downloadUrl
 		            // ClientConnectionId = clientConnectionId
 	            };
 	            
@@ -483,12 +483,12 @@ namespace dexih.api.Services.Remote
 	    #region Remote Operations
 
     
-        public async Task<string> Encrypt(string id, long hubKey, string responseUrl, string value, RepositoryManager database, CancellationToken cancellationToken)
+        public async Task<string> Encrypt(string id, long hubKey, DownloadUrl downloadUrl, string value, RepositoryManager database, CancellationToken cancellationToken)
         {
             try
             {
                 _remoteLogger.LogTrace(LoggingEvents.RemoteEncrypt, "Encrypt - Id: {Id}, HubKey: {hubKey}.", id, hubKey);
-                var result = await SendRemoteCommand(id, hubKey, responseUrl, nameof(RemoteOperations.Encrypt), new { value}, database, cancellationToken);
+                var result = await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.Encrypt), new { value}, database, cancellationToken);
 	            return result;
             }
             catch(Exception ex)
@@ -497,12 +497,12 @@ namespace dexih.api.Services.Remote
             }
         }
 
-		public async Task<string> Decrypt(string id, long hubKey, string responseUrl, string value, RepositoryManager database, CancellationToken cancellationToken)
+		public async Task<string> Decrypt(string id, long hubKey, DownloadUrl downloadUrl, string value, RepositoryManager database, CancellationToken cancellationToken)
 		{
             try
             {
                 _remoteLogger.LogTrace(LoggingEvents.RemoteDecrypt, "Decrypt - Id: {Id}, HubKey: {hubKey}.", id, hubKey);
-                var result = await SendRemoteCommand(id, hubKey, responseUrl, nameof(RemoteOperations.Decrypt), new { value}, database, cancellationToken);
+                var result = await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.Decrypt), new { value}, database, cancellationToken);
                 return result;
             }
             catch (Exception ex)
@@ -521,7 +521,7 @@ namespace dexih.api.Services.Remote
 	    /// <param name="database"></param>
 	    /// <returns>Reference Url for the upload</returns>
 	    /// <exception cref="RemoteAgentException"></exception>
-	    public async Task<string> UploadFile(string id, long hubKey, string responseUrl, long tableKey, EFlatFilePath path, string fileName, RepositoryManager database, CancellationToken cancellationToken)
+	    public async Task<string> UploadFile(string id, long hubKey, DownloadUrl downloadUrl, long tableKey, EFlatFilePath path, string fileName, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    try
 		    {
@@ -539,7 +539,7 @@ namespace dexih.api.Services.Remote
 				    fileName
 			    };
 
-			    var result = await SendRemoteCommand(id, hubKey, responseUrl, nameof(RemoteOperations.UploadFile), value, database, cancellationToken);
+			    var result = await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.UploadFile), value, database, cancellationToken);
 			    return result;
 		    }
 		    catch(Exception ex)
@@ -551,7 +551,7 @@ namespace dexih.api.Services.Remote
 	    public async Task<string> BulkUploadFiles(
 		    string id, 
 		    long hubKey, 
-		    string responseUrl,
+		    DownloadUrl downloadUrl,
 		    string connectionId, 
 		    long connectionKey, 
 		    long fileFormatKey, 
@@ -580,7 +580,7 @@ namespace dexih.api.Services.Remote
 				    fileName 
 			    };
 
-			    var result = await SendRemoteCommand(id, hubKey, responseUrl, nameof(RemoteOperations.BulkUploadFiles), value, database, cancellationToken);
+			    var result = await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.BulkUploadFiles), value, database, cancellationToken);
 			    return result;
 		    }
 		    catch(Exception ex)
@@ -590,7 +590,7 @@ namespace dexih.api.Services.Remote
 	    }
 
 
-	    public async Task<string> ImportTables(string instanceId, long hubKey, string responseUrl, DexihTable[] hubTables, RepositoryManager repositoryManager, CancellationToken cancellationToken)
+	    public async Task<string> ImportTables(string instanceId, long hubKey, DownloadUrl downloadUrl, DexihTable[] hubTables, RepositoryManager repositoryManager, CancellationToken cancellationToken)
 	    {
 		    var hub = await repositoryManager.GetHub(hubKey, cancellationToken);
 		    var cache = new CacheManager(hubKey, hub.EncryptionKey);
@@ -602,10 +602,10 @@ namespace dexih.api.Services.Remote
 			    tables = hubTables
 		    };
 	        
-		    return await SendRemoteCommand(instanceId, hubKey, responseUrl, nameof(RemoteOperations.ImportDatabaseTables), value, repositoryManager, cancellationToken);
+		    return await SendRemoteCommand(instanceId, hubKey, downloadUrl, nameof(RemoteOperations.ImportDatabaseTables), value, repositoryManager, cancellationToken);
 	    }
 	    
-	    public async Task<string> CreateTables(string instanceId, long hubKey, string responseUrl, DexihTable[] tables, bool dropTables, RepositoryManager repositoryManager, CancellationToken cancellationToken)
+	    public async Task<string> CreateTables(string instanceId, long hubKey, DownloadUrl downloadUrl, DexihTable[] tables, bool dropTables, RepositoryManager repositoryManager, CancellationToken cancellationToken)
 	    {
 		    var hub = await repositoryManager.GetHub(hubKey, cancellationToken);
 		    var cache = new CacheManager(hubKey, hub.EncryptionKey);
@@ -618,11 +618,11 @@ namespace dexih.api.Services.Remote
 			    dropTables = dropTables
 		    };
 	        
-		    var result = await SendRemoteCommand(instanceId, hubKey,  responseUrl, nameof(RemoteOperations.CreateDatabaseTables), value, repositoryManager, cancellationToken);
+		    var result = await SendRemoteCommand(instanceId, hubKey,  downloadUrl, nameof(RemoteOperations.CreateDatabaseTables), value, repositoryManager, cancellationToken);
 		    return result;
 	    }
 	    
-	    public async Task<string> ClearTables(string instanceId, long hubKey, string responseUrl, DexihTable[] tables, RepositoryManager repositoryManager, CancellationToken cancellationToken)
+	    public async Task<string> ClearTables(string instanceId, long hubKey, DownloadUrl downloadUrl, DexihTable[] tables, RepositoryManager repositoryManager, CancellationToken cancellationToken)
 	    {
 		    var hub = await repositoryManager.GetHub(hubKey, cancellationToken);
 		    var cache = new CacheManager(hubKey, hub.EncryptionKey);
@@ -634,11 +634,11 @@ namespace dexih.api.Services.Remote
 			    tables = tables
 		    };
 	        
-		    var result = await SendRemoteCommand(instanceId, hubKey,  responseUrl, nameof(RemoteOperations.ClearDatabaseTables), value, repositoryManager, cancellationToken);
+		    var result = await SendRemoteCommand(instanceId, hubKey,  downloadUrl, nameof(RemoteOperations.ClearDatabaseTables), value, repositoryManager, cancellationToken);
 		    return result;
 	    }
 	    
-	    public async Task<string> PreviewTable(string id, long hubKey, string responseUrl, DexihTable table, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, RepositoryManager database, CancellationToken cancellationToken)
+	    public async Task<string> PreviewTable(string id, long hubKey, DownloadUrl downloadUrl, DexihTable table, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    try
 		    {
@@ -659,7 +659,7 @@ namespace dexih.api.Services.Remote
 				    inputParameters
 			    };
 
-			    var result = await SendRemoteCommand(id, hubKey, responseUrl, nameof(RemoteOperations.PreviewTable),  value, database, cancellationToken);
+			    var result = await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.PreviewTable),  value, database, cancellationToken);
 			    return result;
 		    }
 		    catch (Exception ex)
@@ -668,14 +668,14 @@ namespace dexih.api.Services.Remote
 		    }
 	    }
 	    
-		public async Task<string> PreviewTable(string id, long hubKey, string responseUrl, long tableKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, RepositoryManager database, CancellationToken cancellationToken)
+		public async Task<string> PreviewTable(string id, long hubKey, DownloadUrl downloadUrl, long tableKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, RepositoryManager database, CancellationToken cancellationToken)
 		{
 			var table = await database.GetTable(hubKey, tableKey, true, cancellationToken);
-			return await PreviewTable(id, hubKey, responseUrl, table, selectQuery, inputColumns, inputParameters, showRejectedData, database, cancellationToken);
+			return await PreviewTable(id, hubKey, downloadUrl, table, selectQuery, inputColumns, inputParameters, showRejectedData, database, cancellationToken);
         }
 
 	    
-	    public async Task<string> DownloadTableData(string id, long hubKey, string responseUrl, string connectionId, DexihTable hubTable, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters,  bool showRejectedData, EDownloadFormat downloadFormat, bool zipFiles, RepositoryManager database, CancellationToken cancellationToken)
+	    public async Task<string> DownloadTableData(string id, long hubKey, DownloadUrl downloadUrl, string connectionId, DexihTable hubTable, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters,  bool showRejectedData, EDownloadFormat downloadFormat, bool zipFiles, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    try
 		    {
@@ -705,7 +705,7 @@ namespace dexih.api.Services.Remote
 				    zipFiles,
 			    };
 
-			    var result = await SendRemoteCommand(id, hubKey, responseUrl, nameof(RemoteOperations.DownloadData), value, database, cancellationToken);
+			    var result = await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.DownloadData), value, database, cancellationToken);
 			    return result;
 		    }
 		    catch (Exception ex)
@@ -714,7 +714,7 @@ namespace dexih.api.Services.Remote
 		    }
 	    }
 	    
-	    public async Task<string> DownloadDatalinkData(string id, long hubKey, string responseUrl, string connectionId, DexihDatalink hubDatalink, long datalinkTransformKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, EDownloadFormat downloadFormat, bool zipFiles, RepositoryManager database, CancellationToken cancellationToken)
+	    public async Task<string> DownloadDatalinkData(string id, long hubKey, DownloadUrl downloadUrl, string connectionId, DexihDatalink hubDatalink, long datalinkTransformKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, EDownloadFormat downloadFormat, bool zipFiles, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    try
 		    {
@@ -745,7 +745,7 @@ namespace dexih.api.Services.Remote
 				    zipFiles,
 			    };
 			    
-			    var result = await SendRemoteCommand(id, hubKey, responseUrl, nameof(RemoteOperations.DownloadData), value,  database, cancellationToken);
+			    var result = await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.DownloadData), value,  database, cancellationToken);
 			    return result;
 		    }
 		    catch (Exception ex)
@@ -754,7 +754,7 @@ namespace dexih.api.Services.Remote
 		    }
 	    }
 	    
-        public async Task<string> PreviewDatalink(string id, long hubKey, string responseUrl, long datalinkKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken)
+        public async Task<string> PreviewDatalink(string id, long hubKey, DownloadUrl downloadUrl, long datalinkKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken)
         {
             try
             {
@@ -774,7 +774,7 @@ namespace dexih.api.Services.Remote
 	                inputParameters
                 };
 
-                var result = await SendRemoteCommand(id, hubKey, responseUrl, nameof(RemoteOperations.PreviewDatalink), value,  database, cancellationToken);
+                var result = await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.PreviewDatalink), value,  database, cancellationToken);
 	            return result;
             }
             catch (Exception ex)
@@ -783,7 +783,7 @@ namespace dexih.api.Services.Remote
             }
         }
         
-        public async Task<string> DatalinkProperties(string id, long hubKey, string responseUrl, long datalinkKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken)
+        public async Task<string> DatalinkProperties(string id, long hubKey, DownloadUrl downloadUrl, long datalinkKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken)
         {
 	        try
 	        {
@@ -803,7 +803,7 @@ namespace dexih.api.Services.Remote
 			        inputParameters
 		        };
 
-		        var result = await SendRemoteCommand(id, hubKey, responseUrl, nameof(RemoteOperations.DatalinkProperties), value,  database, cancellationToken);
+		        var result = await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.DatalinkProperties), value,  database, cancellationToken);
 		        return result;
 	        }
 	        catch (Exception ex)
@@ -812,7 +812,7 @@ namespace dexih.api.Services.Remote
 	        }
         }
 	    
-	    public async Task<string> PreviewTransform(string id, long hubKey, string responseUrl, DexihDatalink hubDatalink, long datalinkTransformKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken)
+	    public async Task<string> PreviewTransform(string id, long hubKey, DownloadUrl downloadUrl, DexihDatalink hubDatalink, long datalinkTransformKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    try
 		    {
@@ -834,7 +834,7 @@ namespace dexih.api.Services.Remote
 				    inputParameters,
 			    };
 
-			    var result = await SendRemoteCommand(id, hubKey, responseUrl, nameof(RemoteOperations.PreviewTransform), value, database, cancellationToken);
+			    var result = await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.PreviewTransform), value, database, cancellationToken);
 			    return result;
 		    }
 		    catch (Exception ex)
@@ -869,7 +869,7 @@ namespace dexih.api.Services.Remote
 				    auditResults.ChildItems,
 			    };
 
-			    var result = await SendRemoteCommand(auditResults.RemoteAgentId, auditResults.HubKey,  auditResults.ResponseUrl, nameof(RemoteOperations.GetAuditResults), value, database, cancellationToken);
+			    var result = await SendRemoteCommand(auditResults.RemoteAgentId, auditResults.HubKey,  auditResults.DownloadUrl, nameof(RemoteOperations.GetAuditResults), value, database, cancellationToken);
 			    return result;
 		    }
 		    catch (Exception ex)
@@ -878,7 +878,7 @@ namespace dexih.api.Services.Remote
 		    }
 	    }
 	    
-		public async Task<string> ImportFunctionMappings(string id, long hubKey, string responseUrl, DexihDatalink hubDatalink, long datalinkTransformKey, DexihDatalinkTransformItem datalinkTransformItem, RepositoryManager database, CancellationToken cancellationToken)
+		public async Task<string> ImportFunctionMappings(string id, long hubKey, DownloadUrl downloadUrl, DexihDatalink hubDatalink, long datalinkTransformKey, DexihDatalinkTransformItem datalinkTransformItem, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    try
 		    {
@@ -937,7 +937,7 @@ namespace dexih.api.Services.Remote
 				    datalinkTransformItem = datalinkTransformItem
 			    };
 
-			    var result = await SendRemoteCommand(id, hubKey, responseUrl, nameof(RemoteOperations.ImportFunctionMappings), value, database, cancellationToken);
+			    var result = await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.ImportFunctionMappings), value, database, cancellationToken);
 			    return result;
 		    }
 		    catch (Exception ex)
@@ -946,7 +946,7 @@ namespace dexih.api.Services.Remote
 		    }
 	    }
 	    
-        public async Task<string> DownloadFiles(string id, long hubKey, string responseUrl, string connectionId, long tableKey, EFlatFilePath path, string[] files, RepositoryManager database, CancellationToken cancellationToken)
+        public async Task<string> DownloadFiles(string id, long hubKey, DownloadUrl downloadUrl, string connectionId, long tableKey, EFlatFilePath path, string[] files, RepositoryManager database, CancellationToken cancellationToken)
         {
             try
             {
@@ -969,7 +969,7 @@ namespace dexih.api.Services.Remote
 	                files,
                 };
 
-                var result = await SendRemoteCommand(id, hubKey, responseUrl, nameof(RemoteOperations.DownloadFiles), value, database, cancellationToken);
+                var result = await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.DownloadFiles), value, database, cancellationToken);
                 return result;
             }
             catch (Exception ex)
@@ -978,7 +978,7 @@ namespace dexih.api.Services.Remote
             }
         }
 
-        public async Task<string> DownloadData(string id, long hubKey, string responseUrl, string connectionId, DownloadObject[] downloadObjects, EDownloadFormat downloadFormat, bool zipFiles, RepositoryManager database, CancellationToken cancellationToken)
+        public async Task<string> DownloadData(string id, long hubKey, DownloadUrl downloadUrl, string connectionId, DownloadObject[] downloadObjects, EDownloadFormat downloadFormat, bool zipFiles, RepositoryManager database, CancellationToken cancellationToken)
         {
             try
             {
@@ -1007,7 +1007,7 @@ namespace dexih.api.Services.Remote
 	                zipFiles,
                 };
 
-                var result = await SendRemoteCommand(id, hubKey, responseUrl, nameof(RemoteOperations.DownloadData), value,  database, cancellationToken);
+                var result = await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.DownloadData), value,  database, cancellationToken);
                 return result;
             }
             catch (Exception ex)
@@ -1018,7 +1018,7 @@ namespace dexih.api.Services.Remote
 	    
 		
 	    
-		public async Task<string> RunDatalinks(string id, long hubKey, string responseUrl, string connectionId, long[] datalinkKeys, bool truncateTarget, bool resetIncremental, string resetIncrementalValue, InputColumn[] inputColumns, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken)
+		public async Task<string> RunDatalinks(string id, long hubKey, DownloadUrl downloadUrl, string connectionId, long[] datalinkKeys, bool truncateTarget, bool resetIncremental, string resetIncrementalValue, InputColumn[] inputColumns, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken)
         {
             try
             {
@@ -1042,7 +1042,7 @@ namespace dexih.api.Services.Remote
 	                inputParameters
                 };
                 
-                return await SendRemoteCommand(id, hubKey, responseUrl, nameof(RemoteOperations.RunDatalinks), value, database, cancellationToken);
+                return await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.RunDatalinks), value, database, cancellationToken);
             }
             catch (Exception ex)
             {
@@ -1050,7 +1050,7 @@ namespace dexih.api.Services.Remote
             }
         }
 	    
-	    public async Task<string> RunDatalinkTests(string id, long hubKey, string responseUrl, string connectionId, long[] datalinkTestKeys, RepositoryManager database, CancellationToken cancellationToken)
+	    public async Task<string> RunDatalinkTests(string id, long hubKey, DownloadUrl downloadUrl, string connectionId, long[] datalinkTestKeys, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    try
 		    {
@@ -1074,7 +1074,7 @@ namespace dexih.api.Services.Remote
 				    connectionId,
 			    };
 
-			    return await SendRemoteCommand(id, hubKey, responseUrl, nameof(RemoteOperations.RunDatalinkTests), value,  database, cancellationToken);
+			    return await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.RunDatalinkTests), value,  database, cancellationToken);
 		    }
 		    catch (Exception ex)
 		    {
@@ -1082,7 +1082,7 @@ namespace dexih.api.Services.Remote
 		    }
 	    }
 	    
-	    public async Task<string> RunDatalinkTestSnapshot(string id, long hubKey, string responseUrl, string connectionId, long[] datalinkTestKeys, RepositoryManager database, CancellationToken cancellationToken)
+	    public async Task<string> RunDatalinkTestSnapshot(string id, long hubKey, DownloadUrl downloadUrl, string connectionId, long[] datalinkTestKeys, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    try
 		    {
@@ -1106,7 +1106,7 @@ namespace dexih.api.Services.Remote
 				    connectionId,
 			    };
 
-			    return await SendRemoteCommand(id, hubKey, responseUrl, nameof(RemoteOperations.RunDatalinkTestSnapshots), value, database, cancellationToken);
+			    return await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.RunDatalinkTestSnapshots), value, database, cancellationToken);
 		    }
 		    catch (Exception ex)
 		    {
@@ -1114,7 +1114,7 @@ namespace dexih.api.Services.Remote
 		    }
 	    }
 	    
-		public async Task<string> RunDatajobs(string id, long hubKey, string responseUrl, string connectionId, long[] datajobKeys, bool truncateTarget, bool resetIncremental, string resetIncrementalValue, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken)
+		public async Task<string> RunDatajobs(string id, long hubKey, DownloadUrl downloadUrl, string connectionId, long[] datajobKeys, bool truncateTarget, bool resetIncremental, string resetIncrementalValue, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken)
         {
             try
             {
@@ -1137,7 +1137,7 @@ namespace dexih.api.Services.Remote
 	                inputParameters
                 };
 
-                return await SendRemoteCommand(id, hubKey, responseUrl, nameof(RemoteOperations.RunDatajobs), value, database, cancellationToken);
+                return await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.RunDatajobs), value, database, cancellationToken);
             }
             catch (Exception ex)
             {
@@ -1145,7 +1145,7 @@ namespace dexih.api.Services.Remote
             }
         }
 
-        public async Task<string> CancelDatalinks(string id, long hubKey, string responseUrl, long[] datalinkKeys, RepositoryManager database, CancellationToken cancellationToken)
+        public async Task<string> CancelDatalinks(string id, long hubKey, DownloadUrl downloadUrl, long[] datalinkKeys, RepositoryManager database, CancellationToken cancellationToken)
         {
             try
             {
@@ -1157,7 +1157,7 @@ namespace dexih.api.Services.Remote
 	                datalinkKeys
                 };
 
-                return await SendRemoteCommand(id, hubKey, responseUrl, nameof(RemoteOperations.CancelDatalinks), value,  database, cancellationToken);
+                return await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.CancelDatalinks), value,  database, cancellationToken);
             }
             catch (Exception ex)
             {
@@ -1165,7 +1165,7 @@ namespace dexih.api.Services.Remote
             }
         }
 	    
-	    public async Task<string> CancelDatalinkTests(string id, long hubKey, string responseUrl, long[] datalinkTestKeys, RepositoryManager database, CancellationToken cancellationToken)
+	    public async Task<string> CancelDatalinkTests(string id, long hubKey, DownloadUrl downloadUrl, long[] datalinkTestKeys, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    try
 		    {
@@ -1177,7 +1177,7 @@ namespace dexih.api.Services.Remote
 				    datalinkTestKeys
 			    };
 
-			    return await SendRemoteCommand(id, hubKey, responseUrl, nameof(RemoteOperations.CancelDatalinkTests), value, database, cancellationToken);
+			    return await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.CancelDatalinkTests), value, database, cancellationToken);
 		    }
 		    catch (Exception ex)
 		    {
@@ -1185,7 +1185,7 @@ namespace dexih.api.Services.Remote
 		    }
 	    }
 
-        public async Task<string> ActivateDatajobs(string id, long hubKey, string responseUrl, string connectionId, long[] datajobKeys, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken)
+        public async Task<string> ActivateDatajobs(string id, long hubKey, DownloadUrl downloadUrl, string connectionId, long[] datajobKeys, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken)
         {
             try
             {
@@ -1204,7 +1204,7 @@ namespace dexih.api.Services.Remote
 	                datajobKeys,
 	                inputParameters
                 };
-                return await SendRemoteCommand(id, hubKey, responseUrl, nameof(RemoteOperations.ActivateDatajobs), value, database, cancellationToken);
+                return await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.ActivateDatajobs), value, database, cancellationToken);
             }
             catch (Exception ex)
             {
@@ -1212,7 +1212,7 @@ namespace dexih.api.Services.Remote
             }
         }
 	    
-		public async Task<string> DeactivateDatajobs(string id, long hubKey, string responseUrl, long[] datajobKeys, RepositoryManager database, CancellationToken cancellationToken)
+		public async Task<string> DeactivateDatajobs(string id, long hubKey, DownloadUrl downloadUrl, long[] datajobKeys, RepositoryManager database, CancellationToken cancellationToken)
         {
             try
             {
@@ -1224,7 +1224,7 @@ namespace dexih.api.Services.Remote
 	                datajobKeys,
                 };
 
-                return await SendRemoteCommand(id, hubKey, responseUrl, nameof(RemoteOperations.DeactivateDatajobs), value, database, cancellationToken);
+                return await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.DeactivateDatajobs), value, database, cancellationToken);
             }
             catch (Exception ex)
             {
@@ -1232,7 +1232,7 @@ namespace dexih.api.Services.Remote
             }
         }
 		
-		public async Task<string> ActivateApis(string id, long hubKey, string responseUrl, string connectionId, long[] apiKeys, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken)
+		public async Task<string> ActivateApis(string id, long hubKey, DownloadUrl downloadUrl, string connectionId, long[] apiKeys, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken)
         {
             try
             {
@@ -1252,7 +1252,7 @@ namespace dexih.api.Services.Remote
 	                inputParameters
                 };
 
-                return await SendRemoteCommand(id, hubKey, responseUrl, nameof(RemoteOperations.ActivateApis), value, database, cancellationToken);
+                return await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.ActivateApis), value, database, cancellationToken);
             }
             catch (Exception ex)
             {
@@ -1260,7 +1260,7 @@ namespace dexih.api.Services.Remote
             }
         }
 	    
-		public async Task<string> DeactivateApis(string id, long hubKey, string responseUrl, long[] apiKeys, RepositoryManager database, CancellationToken cancellationToken)
+		public async Task<string> DeactivateApis(string id, long hubKey, DownloadUrl downloadUrl, long[] apiKeys, RepositoryManager database, CancellationToken cancellationToken)
         {
             try
             {
@@ -1272,7 +1272,7 @@ namespace dexih.api.Services.Remote
 	                apiKeys = apiKeys,
                 };
 
-                return await SendRemoteCommand(id, hubKey, responseUrl, nameof(RemoteOperations.DeactivateApis), value, database, cancellationToken);
+                return await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.DeactivateApis), value, database, cancellationToken);
             }
             catch (Exception ex)
             {
@@ -1297,8 +1297,7 @@ namespace dexih.api.Services.Remote
 					ipAddress,
 				};
 
-				var responseUrl = url.DownloadUrlType == EDownloadUrlType.Proxy ? url.Url : "";
-				var result = await SendRemoteCommand(id, 0, responseUrl, nameof(RemoteOperations.CallApi), value,  repositoryManager, cancellationToken);
+				var result = await SendRemoteCommand(id, 0, url, nameof(RemoteOperations.CallApi), value,  repositoryManager, cancellationToken);
 				return remoteAgent.DownloadUrls[0].Url + "/download/" + result;
 			}
 			catch (Exception ex)

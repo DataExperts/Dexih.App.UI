@@ -2,21 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1be1a9df-0647-4351-ace4-9bafd064437b" name="Default" comment="minor">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Controllers/AccountController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Controllers/AccountController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Controllers/RemoteController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Controllers/RemoteController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Models/AccountModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Models/AccountModels.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Resources/RemoteAgents/dexih.remote.run.alpine.sh" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Resources/RemoteAgents/dexih.remote.run.alpine.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Resources/RemoteAgents/dexih.remote.run.linux.sh" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Resources/RemoteAgents/dexih.remote.run.linux.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Resources/RemoteAgents/dexih.remote.run.osx.sh" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Resources/RemoteAgents/dexih.remote.run.osx.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Controllers/HubController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Controllers/HubController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Controllers/ReaderController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Controllers/ReaderController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Controllers/SharedDataController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Controllers/SharedDataController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Models/HubModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Models/HubModels.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Services/Remote/IRemoteAgents.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Services/Remote/IRemoteAgents.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Services/Remote/RemoteAgents.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Services/Remote/RemoteAgents.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+admin/users/user-edit/user-edit.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+admin/users/user-edit/user-edit.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/auth.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs-summary/hubs-summary.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs-summary/hubs-summary.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/remoteAgents/remote-agents/remote-agents.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/remoteAgents/remote-agents/remote-agents.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/remoteAgents/remote-agents/remote-agents.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/remoteAgents/remote-agents/remote-agents.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/remoteAgents/remoteAgent-download/remoteAgent-download.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/remoteAgents/remoteAgent-download/remoteAgent-download.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/ui/chartBuilder/chart-builder.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/ui/chartBuilder/chart-builder.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/table/table-edit/table-edit-columns/table-edit-columns.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/table/table-edit/table-edit-columns/table-edit-columns.component.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -680,16 +675,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/StreamAsyncAction.cs" />
-        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/JsonEnumArrayConverter.cs" />
-        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/JsonTimeSpanConverter.cs" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihColumnValidation.cs" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/ColumnValidationRun.cs" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/RemoteOperations/PostDataTask.cs" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/RemoteOperations/DownloadDataTask.cs" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/RemoteOperations/DownloadFilesTask.cs" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihFunctionParameterBase.cs" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihRemoteAgent.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihTable.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/Parameter/Parameter.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/Functions/FunctionAttribute.cs" />
@@ -719,18 +704,28 @@
         <option value="$PROJECT_DIR$/src/dexih.api/Resources/RemoteAgents/dexih.remote.run.osx.sh" />
         <option value="$PROJECT_DIR$/src/dexih.api/Resources/RemoteAgents/dexih.remote.run.alpine.sh" />
         <option value="$PROJECT_DIR$/src/dexih.api/Controllers/RemoteController.cs" />
-        <option value="$PROJECT_DIR$/src/dexih.api/Services/Remote/RemoteAgents.cs" />
-        <option value="$PROJECT_DIR$/src/dexih.api/Services/Remote/IRemoteAgents.cs" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/ListenerService.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/Enums.cs" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/SharedSettings.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/UpgradeService.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/Models.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote/Program.cs" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/RemoteOperations/RemoteOperations.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/RemoteOperations/IRemoteOperations.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Models/AccountModels.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Controllers/AccountController.cs" />
+        <option value="$PROJECT_DIR$/src/dexih.api/Models/HubModels.cs" />
+        <option value="$PROJECT_DIR$/src/dexih.api/Services/Remote/IRemoteAgents.cs" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.operations/RemoteMessage.cs" />
+        <option value="$PROJECT_DIR$/src/dexih.api/Services/Remote/RemoteAgents.cs" />
+        <option value="$PROJECT_DIR$/src/dexih.api/Controllers/HubController.cs" />
+        <option value="$PROJECT_DIR$/src/dexih.api/Controllers/ReaderController.cs" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/SharedSettings.cs" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/ListenerService.cs" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/RemoteOperations/DownloadFilesTask.cs" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/RemoteOperations/RemoteOperations.cs" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/RemoteOperations/DownloadDataTask.cs" />
+        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/StreamJsonCompact.cs" />
+        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/StreamJson.cs" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihDatalinkTable.cs" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihDatalink.cs" />
       </list>
     </option>
   </component>
@@ -1532,7 +1527,7 @@
       <workItem from="1571952108186" duration="260000" />
       <workItem from="1571954457891" duration="3301000" />
       <workItem from="1571974179848" duration="2368000" />
-      <workItem from="1572036509319" duration="15171000" />
+      <workItem from="1572036509319" duration="21176000" />
     </task>
     <task id="LOCAL-00001" summary="Connections to remote agents working.">
       <created>1509234944099</created>
@@ -1785,10 +1780,10 @@
           <line>1918</line>
           <properties documentPath="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/RemoteOperations/RemoteOperations.cs" initialLine="1919">
             <startOffsets>
-              <option value="87469" />
+              <option value="87513" />
             </startOffsets>
             <endOffsets>
-              <option value="87545" />
+              <option value="87589" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="97" />
@@ -1808,7 +1803,7 @@
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
-        <breakpoint enabled="true" type="DotNet Exception Breakpoints">
+        <breakpoint type="DotNet Exception Breakpoints">
           <properties justMyCode="true" />
         </breakpoint>
       </default-breakpoints>

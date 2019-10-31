@@ -77,7 +77,7 @@ namespace dexih.api.Controllers
 		{
 			_logger.LogTrace(LoggingEvents.HubEncrypt, "HubController.Encrypt: HubKey: {updateBrowserHub}, Value: {value}.", encryptValue.HubKey, encryptValue.Value);
 			var repositoryManager = _operations.RepositoryManager;
-			var result = _remoteAgents.Encrypt(encryptValue.RemoteAgentId, encryptValue.HubKey, encryptValue.ResponseUrl, encryptValue.Value, repositoryManager, cancellationToken);
+			var result = _remoteAgents.Encrypt(encryptValue.RemoteAgentId, encryptValue.HubKey, encryptValue.DownloadUrl, encryptValue.Value, repositoryManager, cancellationToken);
 			return result;
 		}
 
@@ -87,7 +87,7 @@ namespace dexih.api.Controllers
 		{
 			_logger.LogTrace(LoggingEvents.HubDecrypt, "HubController.Decrypt: HubKey: {updateBrowserHub}, Value: {value}.", decryptValue.HubKey, decryptValue.Value);
 			var repositoryManager = _operations.RepositoryManager;
-			var result = _remoteAgents.Decrypt(decryptValue.RemoteAgentId, decryptValue.HubKey, decryptValue.ResponseUrl, decryptValue.Value, repositoryManager, cancellationToken);
+			var result = _remoteAgents.Decrypt(decryptValue.RemoteAgentId, decryptValue.HubKey, decryptValue.DownloadUrl, decryptValue.Value, repositoryManager, cancellationToken);
 			return result;
 		}
 
@@ -305,7 +305,7 @@ namespace dexih.api.Controllers
 			var result = await _remoteAgents.SendRemoteCommand(
 				remoteAgentStatus.RemoteAgentId, 
 				remoteAgentStatus.HubKey,
-				remoteAgentStatus.ResponseUrl,
+				remoteAgentStatus.DownloadUrl,
 				nameof(RemoteOperations.GetRemoteAgentStatus), 
 				null, 
 				repositoryManager, 
@@ -470,7 +470,7 @@ namespace dexih.api.Controllers
 
 				//attached the filesample to the file to be imported.
 				table.FileSample = fileSample.ToString();
-				var importedTableResult = await ImportTables(importFileFormat.HubKey, importFileFormat.RemoteAgentId, importFileFormat.ResponseUrl,
+				var importedTableResult = await ImportTables(importFileFormat.HubKey, importFileFormat.RemoteAgentId, importFileFormat.DownloadUrl,
 					new[] {table}, cancellationToken);
 				return importedTableResult;
 			}
@@ -488,18 +488,18 @@ namespace dexih.api.Controllers
 			_logger.LogTrace(LoggingEvents.HubImportTables, "HubController.ImportTables: HubKey: {updateBrowserHub}.",
 				importTables.HubKey);
 
-			var importedTableResult = ImportTables(importTables.HubKey, importTables.RemoteAgentId, importTables.ResponseUrl, importTables.Tables, cancellationToken);
+			var importedTableResult = ImportTables(importTables.HubKey, importTables.RemoteAgentId, importTables.DownloadUrl, importTables.Tables, cancellationToken);
 			return importedTableResult;
 		}
 
-		private async Task<string> ImportTables(long hubKey, string remoteAgentId, string responseUrl, DexihTable[] hubTables,
+		private async Task<string> ImportTables(long hubKey, string remoteAgentId, DownloadUrl downloadUrl, DexihTable[] hubTables,
 			 CancellationToken cancellationToken)
 		{
 			_logger.LogTrace(LoggingEvents.HubImportTables, "HubController.ImportTables: HubKey: {updateBrowserHub}.",
 				hubKey);
 
 			var repositoryManager = _operations.RepositoryManager;
-			var importedTables = await _remoteAgents.ImportTables(remoteAgentId, hubKey, responseUrl, hubTables, repositoryManager, cancellationToken);
+			var importedTables = await _remoteAgents.ImportTables(remoteAgentId, hubKey, downloadUrl, hubTables, repositoryManager, cancellationToken);
 
 			return importedTables;
 			
@@ -558,7 +558,7 @@ namespace dexih.api.Controllers
 				createTables.HubKey);
 
 			var repositoryManager = _operations.RepositoryManager;
-			var result = await _remoteAgents.CreateTables(createTables.RemoteAgentId, createTables.HubKey, createTables.ResponseUrl,
+			var result = await _remoteAgents.CreateTables(createTables.RemoteAgentId, createTables.HubKey, createTables.DownloadUrl,
 				createTables.Tables, createTables.dropTables, repositoryManager, cancellationToken);
 			return result;
 		}
@@ -571,7 +571,7 @@ namespace dexih.api.Controllers
 				clearTables.HubKey);
 
 			var repositoryManager = _operations.RepositoryManager;
-			var result = await _remoteAgents.ClearTables(clearTables.RemoteAgentId, clearTables.HubKey, clearTables.ResponseUrl,
+			var result = await _remoteAgents.ClearTables(clearTables.RemoteAgentId, clearTables.HubKey, clearTables.DownloadUrl,
 				clearTables.Tables, repositoryManager, cancellationToken);
 
 			return result;
@@ -622,7 +622,7 @@ namespace dexih.api.Controllers
 				"HubController.PreviewTable: HubKey: {updateBrowserHub}, TableKey: {tableKey}", previewTable.HubKey,
 				previewTable.TableKey);
 			var repositoryManager = _operations.RepositoryManager;
-			var remoteServerResult = _remoteAgents.PreviewTable(previewTable.RemoteAgentId, previewTable.HubKey, previewTable.ResponseUrl,
+			var remoteServerResult = _remoteAgents.PreviewTable(previewTable.RemoteAgentId, previewTable.HubKey, previewTable.DownloadUrl,
 				previewTable.TableKey, previewTable.SelectQuery, previewTable.InputColumns, previewTable.InputParameters,
 				previewTable.ShowRejectedData, repositoryManager, cancellationToken);
 			return remoteServerResult;
@@ -636,7 +636,7 @@ namespace dexih.api.Controllers
 				"HubController.PreviewTable: HubKey: {updateBrowserHub}, TableKey: {tableKey}",
 				previewTableQuery.HubKey, previewTableQuery.Table.Key);
 			var repositoryManager = _operations.RepositoryManager;
-			var remoteServerResult = _remoteAgents.PreviewTable(previewTableQuery.RemoteAgentId, previewTableQuery.HubKey, previewTableQuery.ResponseUrl,
+			var remoteServerResult = _remoteAgents.PreviewTable(previewTableQuery.RemoteAgentId, previewTableQuery.HubKey, previewTableQuery.DownloadUrl,
 				previewTableQuery.Table, previewTableQuery.SelectQuery,
 				previewTableQuery.InputColumns, previewTableQuery.InputParameters, previewTableQuery.ShowRejectedData,
 				repositoryManager, cancellationToken);
@@ -651,7 +651,7 @@ namespace dexih.api.Controllers
 				"HubController.PreviewDatalink: HubKey: {updateBrowserHub}, DatalinkKey: {DatalinkKey}",
 				previewDatalink.HubKey, previewDatalink.DatalinkKey);
 			var repositoryManager = _operations.RepositoryManager;
-			var remoteServerResult = _remoteAgents.PreviewDatalink(previewDatalink.RemoteAgentId, previewDatalink.HubKey, previewDatalink.ResponseUrl, 
+			var remoteServerResult = _remoteAgents.PreviewDatalink(previewDatalink.RemoteAgentId, previewDatalink.HubKey, previewDatalink.DownloadUrl, 
 				previewDatalink.DatalinkKey, previewDatalink.SelectQuery,
 				previewDatalink.InputColumns, previewDatalink.InputParameters, 
 				repositoryManager, cancellationToken);
@@ -662,7 +662,7 @@ namespace dexih.api.Controllers
 		[ValidateHub(EPermission.PublishReader)]
 		public Task<string> PreviewProfile([FromBody] PreviewProfile previewProfile, CancellationToken cancellationToken)
 		{
-			return _remoteAgents.SendRemoteCommand(previewProfile.RemoteAgentId, previewProfile.HubKey, previewProfile.ResponseUrl,
+			return _remoteAgents.SendRemoteCommand(previewProfile.RemoteAgentId, previewProfile.HubKey, previewProfile.DownloadUrl,
 				nameof(RemoteOperations.PreviewProfile), previewProfile, _operations.RepositoryManager, cancellationToken);
 		}
 
@@ -696,13 +696,13 @@ namespace dexih.api.Controllers
 
 						case EDataObjectType.Table:
 							url = await _remoteAgents.PreviewTable(previewDashboard.RemoteAgentId,
-								previewDashboard.HubKey, previewDashboard.ResponseUrl, view.SourceTableKey.Value,
+								previewDashboard.HubKey, previewDashboard.DownloadUrl, view.SourceTableKey.Value,
 								view.SelectQuery, view.InputValues, itemParameters, false, repositoryManager,
 								cancellationToken);
 							break;
 						case EDataObjectType.Datalink:
 							url = await _remoteAgents.PreviewDatalink(previewDashboard.RemoteAgentId,
-								previewDashboard.HubKey, previewDashboard.ResponseUrl, view.SourceDatalinkKey.Value,
+								previewDashboard.HubKey, previewDashboard.DownloadUrl, view.SourceDatalinkKey.Value,
 								view.SelectQuery, view.InputValues, itemParameters, repositoryManager,
 								cancellationToken);
 							break;
@@ -724,7 +724,7 @@ namespace dexih.api.Controllers
 	    {
 		    _logger.LogTrace(LoggingEvents.HubPreviewDatalink, "HubController.PreviewDatalink: HubKey: {updateBrowserHub}, DatalinkKey: {DatalinkKey}", previewDatalink.HubKey, previewDatalink.DatalinkKey);
 		    var repositoryManager = _operations.RepositoryManager;
-		    var remoteServerResult = _remoteAgents.DatalinkProperties(previewDatalink.RemoteAgentId, previewDatalink.HubKey, previewDatalink.ResponseUrl, previewDatalink.DatalinkKey, previewDatalink.SelectQuery, previewDatalink.InputColumns, previewDatalink.InputParameters, repositoryManager, cancellationToken);
+		    var remoteServerResult = _remoteAgents.DatalinkProperties(previewDatalink.RemoteAgentId, previewDatalink.HubKey, previewDatalink.DownloadUrl, previewDatalink.DatalinkKey, previewDatalink.SelectQuery, previewDatalink.InputColumns, previewDatalink.InputParameters, repositoryManager, cancellationToken);
 		    return remoteServerResult;
 	    }
 	    
@@ -734,7 +734,7 @@ namespace dexih.api.Controllers
 	    {
 		    _logger.LogTrace(LoggingEvents.HubPreviewDatalink, "HubController.PreviewTransform: HubKey: {updateBrowserHub}, DatalinkKey: {DatalinkKey}", previewTransform.HubKey, previewTransform.Datalink.Key);
 		    var repositoryManager = _operations.RepositoryManager;
-		    var remoteServerResult = _remoteAgents.PreviewTransform(previewTransform.RemoteAgentId, previewTransform.HubKey, previewTransform.ResponseUrl, previewTransform.Datalink, previewTransform.DatalinkTransformKey, previewTransform.SelectQuery, previewTransform.InputColumns, previewTransform.InputParameters, repositoryManager, cancellationToken);
+		    var remoteServerResult = _remoteAgents.PreviewTransform(previewTransform.RemoteAgentId, previewTransform.HubKey, previewTransform.DownloadUrl, previewTransform.Datalink, previewTransform.DatalinkTransformKey, previewTransform.SelectQuery, previewTransform.InputColumns, previewTransform.InputParameters, repositoryManager, cancellationToken);
 		    return remoteServerResult;
 	    } 
 	    
@@ -759,9 +759,9 @@ namespace dexih.api.Controllers
 		    switch(previewView.View.SourceType)
 		    {
 			    case EDataObjectType.Table:
-				    return _remoteAgents.PreviewTable(previewView.RemoteAgentId, previewView.HubKey, previewView.ResponseUrl, previewView.View.SourceTableKey.Value, previewView.View.SelectQuery, previewView.InputColumns, itemParameters, false, repositoryManager, cancellationToken);
+				    return _remoteAgents.PreviewTable(previewView.RemoteAgentId, previewView.HubKey, previewView.DownloadUrl, previewView.View.SourceTableKey.Value, previewView.View.SelectQuery, previewView.InputColumns, itemParameters, false, repositoryManager, cancellationToken);
 			    case EDataObjectType.Datalink:
-				    return _remoteAgents.PreviewDatalink(previewView.RemoteAgentId, previewView.HubKey, previewView.ResponseUrl, previewView.View.SourceDatalinkKey.Value, previewView.View.SelectQuery, previewView.InputColumns, itemParameters, repositoryManager, cancellationToken);
+				    return _remoteAgents.PreviewDatalink(previewView.RemoteAgentId, previewView.HubKey, previewView.DownloadUrl, previewView.View.SourceDatalinkKey.Value, previewView.View.SelectQuery, previewView.InputColumns, itemParameters, repositoryManager, cancellationToken);
 			    default:
 				    throw new ArgumentOutOfRangeException();
 		    }
@@ -783,7 +783,7 @@ namespace dexih.api.Controllers
 	    {
 		    _logger.LogTrace(LoggingEvents.HubImportFunctionMappings, "HubController.ImportFunctionMappings: HubKey: {updateBrowserHub}, DatalinkKey: {DatalinkKey}", importFunctionMappings.HubKey, importFunctionMappings.Datalink.Key);
 		    var repositoryManager = _operations.RepositoryManager;
-		    var remoteServerResult = _remoteAgents.ImportFunctionMappings(importFunctionMappings.RemoteAgentId, importFunctionMappings.HubKey, importFunctionMappings.ResponseUrl, importFunctionMappings.Datalink, importFunctionMappings.DatalinkTransformKey, importFunctionMappings.DatalinkTransformItem, repositoryManager, cancellationToken);
+		    var remoteServerResult = _remoteAgents.ImportFunctionMappings(importFunctionMappings.RemoteAgentId, importFunctionMappings.HubKey, importFunctionMappings.DownloadUrl, importFunctionMappings.Datalink, importFunctionMappings.DatalinkTransformKey, importFunctionMappings.DatalinkTransformItem, repositoryManager, cancellationToken);
 		    return remoteServerResult;
 	    }
 	    
@@ -898,7 +898,7 @@ namespace dexih.api.Controllers
 	        var cache = new CacheManager(validation.HubKey, hub.EncryptionKey);
 	        await cache.LoadColumnValidationDependencies(validation.Value, _operations.RepositoryManager.DbContext);
 	        
-	        return await _remoteAgents.SendRemoteCommand(validation.RemoteAgentId, validation.HubKey, validation.ResponseUrl, nameof(RemoteOperations.TestColumnValidation),
+	        return await _remoteAgents.SendRemoteCommand(validation.RemoteAgentId, validation.HubKey, validation.DownloadUrl, nameof(RemoteOperations.TestColumnValidation),
 	        new {cache, columnValidation = validation.Value, testValue = validation.TestValue}, _operations.RepositoryManager, cancellationToken);
         }
 	    
@@ -931,7 +931,7 @@ namespace dexih.api.Controllers
 	    {
 		    var hub = await _operations.RepositoryManager.GetHub(customFunction.HubKey, cancellationToken);
 	        
-		    return await _remoteAgents.SendRemoteCommand(customFunction.RemoteAgentId, customFunction.HubKey, customFunction.ResponseUrl, nameof(RemoteOperations.TestCustomFunction),
+		    return await _remoteAgents.SendRemoteCommand(customFunction.RemoteAgentId, customFunction.HubKey, customFunction.DownloadUrl, nameof(RemoteOperations.TestCustomFunction),
 			    new {datalinkTransformItem = customFunction.Value, testValues = customFunction.TestValues}, _operations.RepositoryManager, cancellationToken);
 	    }
 
@@ -1062,7 +1062,7 @@ namespace dexih.api.Controllers
 		    _logger.LogTrace(LoggingEvents.HubActivateApis, "HubController.HubActivateApis: HubKey: {hubKey}, ApiKeys: {apiKeys}", apis.HubKey, string.Join(",", apis.ApiKeys));
 
 		    var repositoryManager = _operations.RepositoryManager;
-		    return _remoteAgents.ActivateApis(apis.RemoteAgentId, apis.HubKey, apis.ResponseUrl, apis.ConnectionId, apis.ApiKeys, apis.InputParameters, repositoryManager, cancellationToken);
+		    return _remoteAgents.ActivateApis(apis.RemoteAgentId, apis.HubKey, apis.DownloadUrl, apis.ConnectionId, apis.ApiKeys, apis.InputParameters, repositoryManager, cancellationToken);
 	    }
 	    
 	    [HttpPost("[action]")]
@@ -1072,7 +1072,7 @@ namespace dexih.api.Controllers
 		    _logger.LogTrace(LoggingEvents.HubDeactivateApis, "HubController.DeactivateApis: HubKey: {hubKey}, ApiKeys: {apiKeys}", apis.HubKey, string.Join(",", apis.ApiKeys));
 
 		    var repositoryManager = _operations.RepositoryManager;
-		    return _remoteAgents.DeactivateApis(apis.RemoteAgentId, apis.HubKey, apis.ResponseUrl, apis.ApiKeys, repositoryManager, cancellationToken);
+		    return _remoteAgents.DeactivateApis(apis.RemoteAgentId, apis.HubKey, apis.DownloadUrl, apis.ApiKeys, repositoryManager, cancellationToken);
 	    }
 	    
 	    
@@ -1090,7 +1090,7 @@ namespace dexih.api.Controllers
 			    throw new HubControllerException($"The table with the key {uploadFiles.TableKey} could not be found.");
 		    }
 		    
-		    return await _remoteAgents.UploadFile(uploadFiles.RemoteAgentId, uploadFiles.HubKey, uploadFiles.ResponseUrl, uploadFiles.TableKey, uploadFiles.Path, uploadFiles.FileName, _operations.RepositoryManager, cancellationToken);
+		    return await _remoteAgents.UploadFile(uploadFiles.RemoteAgentId, uploadFiles.HubKey, uploadFiles.DownloadUrl, uploadFiles.TableKey, uploadFiles.Path, uploadFiles.FileName, _operations.RepositoryManager, cancellationToken);
 	    }
 	    
 	    [HttpPost("[action]")]
@@ -1101,7 +1101,7 @@ namespace dexih.api.Controllers
 		    var cache = new CacheManager(table.HubKey, hub.EncryptionKey);
 		    await cache.LoadTableDependencies(table.Value, _operations.RepositoryManager.DbContext);
 		    
-		    return await _remoteAgents.SendRemoteCommand(table.RemoteAgentId, table.HubKey, table.ResponseUrl, nameof(RemoteOperations.CreateFilePaths),
+		    return await _remoteAgents.SendRemoteCommand(table.RemoteAgentId, table.HubKey, table.DownloadUrl, nameof(RemoteOperations.CreateFilePaths),
 			    new {cache, table = table.Value}, _operations.RepositoryManager, cancellationToken);
 	    }
 	    
@@ -1113,7 +1113,7 @@ namespace dexih.api.Controllers
 		    var cache = new CacheManager(table.HubKey, hub.EncryptionKey);
 		    await cache.LoadTableDependencies(table.Value, _operations.RepositoryManager.DbContext);
 	        
-		    return await _remoteAgents.SendRemoteCommand(table.RemoteAgentId, table.HubKey, table.ResponseUrl, nameof(RemoteOperations.MoveFiles),
+		    return await _remoteAgents.SendRemoteCommand(table.RemoteAgentId, table.HubKey, table.DownloadUrl, nameof(RemoteOperations.MoveFiles),
 			    new {cache, table = table.Value, fromPath = table.FromPath, toPath = table.ToPath, files = table.Files}, _operations.RepositoryManager, cancellationToken);
 	    }
 	    
@@ -1125,7 +1125,7 @@ namespace dexih.api.Controllers
 		    var cache = new CacheManager(table.HubKey, hub.EncryptionKey);
 		    await cache.LoadTableDependencies(table.Value, _operations.RepositoryManager.DbContext);
 	        
-		    return await _remoteAgents.SendRemoteCommand(table.RemoteAgentId, table.HubKey, table.ResponseUrl, nameof(RemoteOperations.DeleteFiles),
+		    return await _remoteAgents.SendRemoteCommand(table.RemoteAgentId, table.HubKey, table.DownloadUrl, nameof(RemoteOperations.DeleteFiles),
 			    new {cache, table = table.Value, path = table.Path, files = table.Files}, _operations.RepositoryManager, cancellationToken);
 	    }
 
@@ -1137,7 +1137,7 @@ namespace dexih.api.Controllers
 		    var cache = new CacheManager(table.HubKey, hub.EncryptionKey);
 		    await cache.LoadTableDependencies(table.Value, _operations.RepositoryManager.DbContext);
 	        
-		    return await _remoteAgents.SendRemoteCommand(table.RemoteAgentId, table.HubKey, table.ResponseUrl, nameof(RemoteOperations.GetFileList),
+		    return await _remoteAgents.SendRemoteCommand(table.RemoteAgentId, table.HubKey, table.DownloadUrl, nameof(RemoteOperations.GetFileList),
 			    new {cache, table = table.Value, path = table.Path}, _operations.RepositoryManager, cancellationToken);
 	    }
 
@@ -1148,7 +1148,7 @@ namespace dexih.api.Controllers
 	    {
 		    _logger.LogTrace(LoggingEvents.HubBulkUploadFiles, "HubController.HubBulkUploadFiles: HubKey: {updateBrowserHub}, ConnectionKey: {ConnectionKey}.", bulkUploadFile.HubKey, bulkUploadFile.ConnectionKey);
 
-		    var result = await _remoteAgents.BulkUploadFiles(bulkUploadFile.RemoteAgentId, bulkUploadFile.HubKey, bulkUploadFile.ResponseUrl, bulkUploadFile.ConnectionId, bulkUploadFile.ConnectionKey, bulkUploadFile.FileFormatKey, bulkUploadFile.FormatType, bulkUploadFile.FileName, _operations.RepositoryManager, cancellationToken);
+		    var result = await _remoteAgents.BulkUploadFiles(bulkUploadFile.RemoteAgentId, bulkUploadFile.HubKey, bulkUploadFile.DownloadUrl, bulkUploadFile.ConnectionId, bulkUploadFile.ConnectionKey, bulkUploadFile.FileFormatKey, bulkUploadFile.FormatType, bulkUploadFile.FileName, _operations.RepositoryManager, cancellationToken);
 		    return result;
 	    }
 	    
@@ -1160,7 +1160,7 @@ namespace dexih.api.Controllers
 
             var repositoryManager = _operations.RepositoryManager;
 
-            var result = _remoteAgents.DownloadFiles(downloadFiles.RemoteAgentId, downloadFiles.HubKey, downloadFiles.ResponseUrl, downloadFiles.ConnectionId, downloadFiles.TableKey, downloadFiles.Path, downloadFiles.Files, repositoryManager, cancellationToken);
+            var result = _remoteAgents.DownloadFiles(downloadFiles.RemoteAgentId, downloadFiles.HubKey, downloadFiles.DownloadUrl, downloadFiles.ConnectionId, downloadFiles.TableKey, downloadFiles.Path, downloadFiles.Files, repositoryManager, cancellationToken);
 	        return result;
         }
 
@@ -1171,7 +1171,7 @@ namespace dexih.api.Controllers
             _logger.LogTrace(LoggingEvents.HubUploadFiles, "HubController.DownloadData: HubKey: {updateBrowserHub}", downloadData.HubKey);
 
             var repositoryManager = _operations.RepositoryManager;
-            var downloadDataReturn = _remoteAgents.DownloadData(downloadData.RemoteAgentId, downloadData.HubKey, downloadData.ResponseUrl,  downloadData.ConnectionId, downloadData.DownloadObjects, downloadData.DownloadFormat, downloadData.ZipFiles, repositoryManager, cancellationToken);
+            var downloadDataReturn = _remoteAgents.DownloadData(downloadData.RemoteAgentId, downloadData.HubKey, downloadData.DownloadUrl,  downloadData.ConnectionId, downloadData.DownloadObjects, downloadData.DownloadFormat, downloadData.ZipFiles, repositoryManager, cancellationToken);
             return downloadDataReturn;
         }
 
@@ -1182,7 +1182,7 @@ namespace dexih.api.Controllers
 		    _logger.LogTrace(LoggingEvents.HubUploadFiles, "HubController.DownloadData: HubKey: {updateBrowserHub}", downloadData.HubKey);
 
 		    var repositoryManager = _operations.RepositoryManager;
-		    var downloadDataReturn = _remoteAgents.DownloadTableData(downloadData.RemoteAgentId, downloadData.HubKey, downloadData.ResponseUrl, downloadData.ConnectionId, downloadData.Table, downloadData.SelectQuery, downloadData.InputTableColumns, downloadData.InputParameters, downloadData.RejectedTable, downloadData.DownloadFormat, downloadData.ZipFiles, repositoryManager, cancellationToken);
+		    var downloadDataReturn = _remoteAgents.DownloadTableData(downloadData.RemoteAgentId, downloadData.HubKey, downloadData.DownloadUrl, downloadData.ConnectionId, downloadData.Table, downloadData.SelectQuery, downloadData.InputTableColumns, downloadData.InputParameters, downloadData.RejectedTable, downloadData.DownloadFormat, downloadData.ZipFiles, repositoryManager, cancellationToken);
 		    return downloadDataReturn;
 	    }
 	    
@@ -1193,7 +1193,7 @@ namespace dexih.api.Controllers
 		    _logger.LogTrace(LoggingEvents.HubUploadFiles, "HubController.DownloadData: HubKey: {updateBrowserHub}", downloadData.HubKey);
 
 		    var repositoryManager = _operations.RepositoryManager;
-		    var downloadDataReturn = _remoteAgents.DownloadDatalinkData(downloadData.RemoteAgentId, downloadData.HubKey, downloadData.ResponseUrl, downloadData.ConnectionId, downloadData.Datalink, downloadData.DatalinkTransformKey, downloadData.SelectQuery, downloadData.InputTableColumns, downloadData.InputParameters, downloadData.DownloadFormat, downloadData.ZipFiles, repositoryManager, cancellationToken);
+		    var downloadDataReturn = _remoteAgents.DownloadDatalinkData(downloadData.RemoteAgentId, downloadData.HubKey, downloadData.DownloadUrl, downloadData.ConnectionId, downloadData.Datalink, downloadData.DatalinkTransformKey, downloadData.SelectQuery, downloadData.InputTableColumns, downloadData.InputParameters, downloadData.DownloadFormat, downloadData.ZipFiles, repositoryManager, cancellationToken);
 		    return downloadDataReturn;
 	    }
 	    
@@ -1204,7 +1204,7 @@ namespace dexih.api.Controllers
 		    _logger.LogTrace(LoggingEvents.HubRunDatalinks, "HubController.RunDatalinks: HubKey: {hubKey}, DatalinkKeys: {datalinkKeys}", datalinks.HubKey, string.Join(",", datalinks.DatalinkKeys));
 
 		    var repositoryManager = _operations.RepositoryManager;
-		    return _remoteAgents.RunDatalinks(datalinks.RemoteAgentId, datalinks.HubKey, datalinks.ResponseUrl, datalinks.ConnectionId, datalinks.DatalinkKeys, datalinks.TruncateTarget, datalinks.ResetIncremental, datalinks.ResetIncrementalValue, datalinks.InputColumns, datalinks.InputParameters, repositoryManager, cancellationToken);
+		    return _remoteAgents.RunDatalinks(datalinks.RemoteAgentId, datalinks.HubKey, datalinks.DownloadUrl, datalinks.ConnectionId, datalinks.DatalinkKeys, datalinks.TruncateTarget, datalinks.ResetIncremental, datalinks.ResetIncrementalValue, datalinks.InputColumns, datalinks.InputParameters, repositoryManager, cancellationToken);
 	    }
 	    
 	    [HttpPost("[action]")]
@@ -1247,7 +1247,7 @@ namespace dexih.api.Controllers
 		    _logger.LogTrace(LoggingEvents.HubRunDatalinks, "HubController.RunDatalinks: HubKey: {hubKey}, DatalinkKeys: {datalinkKeys}", datalinkTests.HubKey, string.Join(",", datalinkTests.DatalinkTestKeys));
 
 		    var repositoryManager = _operations.RepositoryManager;
-		    return _remoteAgents.RunDatalinkTests(datalinkTests.RemoteAgentId, datalinkTests.HubKey, datalinkTests.ResponseUrl, datalinkTests.ConnectionId, datalinkTests.DatalinkTestKeys, repositoryManager, cancellationToken);
+		    return _remoteAgents.RunDatalinkTests(datalinkTests.RemoteAgentId, datalinkTests.HubKey, datalinkTests.DownloadUrl, datalinkTests.ConnectionId, datalinkTests.DatalinkTestKeys, repositoryManager, cancellationToken);
 	    }
 	    
 	    /// <summary>
@@ -1261,7 +1261,7 @@ namespace dexih.api.Controllers
 		    _logger.LogTrace(LoggingEvents.HubCancelDatalinkTests, "HubController.CancelDatalinkTests: HubKey: {hubKey}, AuditKeys: {auditKeys}", cancelDatalinkTests.HubKey, string.Join(",", cancelDatalinkTests.ItemKeys));
 
 		    var repositoryManager = _operations.RepositoryManager;
-		    return _remoteAgents.CancelDatalinkTests(cancelDatalinkTests.RemoteAgentId, cancelDatalinkTests.HubKey, cancelDatalinkTests.ResponseUrl, cancelDatalinkTests.ItemKeys, repositoryManager, cancellationToken);
+		    return _remoteAgents.CancelDatalinkTests(cancelDatalinkTests.RemoteAgentId, cancelDatalinkTests.HubKey, cancelDatalinkTests.DownloadUrl, cancelDatalinkTests.ItemKeys, repositoryManager, cancellationToken);
 	    }
 
 	    [HttpPost("[action]")]
@@ -1271,7 +1271,7 @@ namespace dexih.api.Controllers
 		    _logger.LogTrace(LoggingEvents.HubSnapshotDatalinkTests, "HubController.SnapshotDatalinkTests: HubKey: {hubKey}, DatalinkKeys: {datalinkKeys}", datalinkTests.HubKey, string.Join(",", datalinkTests.DatalinkTestKeys));
 
 		    var repositoryManager = _operations.RepositoryManager;
-		    return _remoteAgents.RunDatalinkTestSnapshot(datalinkTests.RemoteAgentId, datalinkTests.HubKey, datalinkTests.ResponseUrl, datalinkTests.ConnectionId, datalinkTests.DatalinkTestKeys, repositoryManager, cancellationToken);
+		    return _remoteAgents.RunDatalinkTestSnapshot(datalinkTests.RemoteAgentId, datalinkTests.HubKey, datalinkTests.DownloadUrl, datalinkTests.ConnectionId, datalinkTests.DatalinkTestKeys, repositoryManager, cancellationToken);
 	    }
 
 	    [HttpPost("[action]")]
@@ -1281,7 +1281,7 @@ namespace dexih.api.Controllers
 		    _logger.LogTrace(LoggingEvents.HubRunDatajobs, "HubController.RunDatajobs: HubKey: {hubKey}, DatalinkKeys: {datajobKeys}", datajobs.HubKey, string.Join(",", datajobs.DatajobKeys));
 
 		    var repositoryManager = _operations.RepositoryManager;
-		    return _remoteAgents.RunDatajobs(datajobs.RemoteAgentId, datajobs.HubKey, datajobs.ResponseUrl, datajobs.ConnectionId, datajobs.DatajobKeys, datajobs.TruncateTarget, datajobs.ResetIncremental, datajobs.ResetIncrementalValue, datajobs.InputParameters, repositoryManager, cancellationToken);
+		    return _remoteAgents.RunDatajobs(datajobs.RemoteAgentId, datajobs.HubKey, datajobs.DownloadUrl, datajobs.ConnectionId, datajobs.DatajobKeys, datajobs.TruncateTarget, datajobs.ResetIncremental, datajobs.ResetIncrementalValue, datajobs.InputParameters, repositoryManager, cancellationToken);
 	    }
 
         /// <summary>
@@ -1295,7 +1295,7 @@ namespace dexih.api.Controllers
             _logger.LogTrace(LoggingEvents.HubRunDatalinks, "HubController.CancelDatalinks: HubKey: {hubKey}, AuditKeys: {auditKeys}", cancelDatalinkKeys.HubKey, string.Join(",", cancelDatalinkKeys.ItemKeys));
 
             var repositoryManager = _operations.RepositoryManager;
-            return _remoteAgents.CancelDatalinks(cancelDatalinkKeys.RemoteAgentId, cancelDatalinkKeys.HubKey, cancelDatalinkKeys.ResponseUrl, cancelDatalinkKeys.ItemKeys, repositoryManager, cancellationToken);
+            return _remoteAgents.CancelDatalinks(cancelDatalinkKeys.RemoteAgentId, cancelDatalinkKeys.HubKey, cancelDatalinkKeys.DownloadUrl, cancelDatalinkKeys.ItemKeys, repositoryManager, cancellationToken);
         }
 
         [HttpPost("[action]")]
@@ -1305,7 +1305,7 @@ namespace dexih.api.Controllers
 		    _logger.LogTrace(LoggingEvents.HubActivateDatajobs, "HubController.ActivateDatajobs: HubKey: {hubKey}, DatalinkKeys: {datajobKeys}", datajobs.HubKey, string.Join(",", datajobs.DatajobKeys));
 
 		    var repositoryManager = _operations.RepositoryManager;
-		    return _remoteAgents.ActivateDatajobs(datajobs.RemoteAgentId, datajobs.HubKey, datajobs.ResponseUrl, datajobs.ConnectionId, datajobs.DatajobKeys, datajobs.InputParameters, repositoryManager, cancellationToken);
+		    return _remoteAgents.ActivateDatajobs(datajobs.RemoteAgentId, datajobs.HubKey, datajobs.DownloadUrl, datajobs.ConnectionId, datajobs.DatajobKeys, datajobs.InputParameters, repositoryManager, cancellationToken);
 	    }
 	    
 	    [HttpPost("[action]")]
@@ -1315,7 +1315,7 @@ namespace dexih.api.Controllers
 		    _logger.LogTrace(LoggingEvents.HubDeactivateDatajobs, "HubController.DeactivateDatajobs: HubKey: {hubKey}, DatalinkKeys: {datajobKeys}", datajobs.HubKey, string.Join(",", datajobs.DatajobKeys));
 
 		    var repositoryManager = _operations.RepositoryManager;
-		    return _remoteAgents.DeactivateDatajobs(datajobs.RemoteAgentId, datajobs.HubKey, datajobs.ResponseUrl, datajobs.DatajobKeys, repositoryManager, cancellationToken);
+		    return _remoteAgents.DeactivateDatajobs(datajobs.RemoteAgentId, datajobs.HubKey, datajobs.DownloadUrl, datajobs.DatajobKeys, repositoryManager, cancellationToken);
 	    }
 	    
 	    [HttpPost("[action]")]
