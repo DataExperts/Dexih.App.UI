@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpRequest, HttpEventType, HttpResponse } fro
 import { Injectable, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as FileSaver from 'file-saver';
-import { BehaviorSubject, Observable, Subscription, Subject, from, forkJoin } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, Subject, from, forkJoin, ReplaySubject } from 'rxjs';
 import { timeout, filter, first, shareReplay, take } from 'rxjs/operators'
 import { eLogLevel, LogFactory } from '../../logging';
 import {
@@ -39,7 +39,7 @@ export class AuthService implements OnDestroy {
     private _waitMessages = new Map<string, string>();
     private _waitMessagesObserve = new BehaviorSubject<Map<string, string>>(this._waitMessages);
 
-    private _globalCache: Observable<CacheManager>;
+    private _globalCache = new ReplaySubject<CacheManager>();
 
     private _remoteAgents = new BehaviorSubject<Array<DexihRemoteAgent>>(null);
 
@@ -69,7 +69,7 @@ export class AuthService implements OnDestroy {
     ) {
         this.logger.LogC(() => 'Initializing AuthService', eLogLevel.Information);
 
-        // this.refreshGlobalCache();
+        this.refreshGlobalCache();
         this.refreshUser();
 
         this._webSocket = new AuthWebSocket(this.location);
@@ -1836,13 +1836,24 @@ export class AuthService implements OnDestroy {
         });
     }
 
+    public refreshGlobalCache() {
+        let promise = this.get<CacheManager>('/api/Account/GetGlobalCache?cache=' + this.sessionId,
+            'Getting global cache...', false, null);
+        promise.then(cache => {
+            this._globalCache.next(cache);
+        }).catch(reason => {
+            let message = new Message(false, 'Update global cache failed: ' + reason, reason, null);
+            this.addUpdateNotification(message, false);
+
+            // If cache load error, try again to refresh.
+            setTimeout(() => {
+                this.refreshGlobalCache();
+            }, 5000);
+        });
+    }
+
     public getGlobalCacheObservable(): Observable<CacheManager> {
-        if (!this._globalCache) {
-            let promise = this.get<CacheManager>('/api/Account/GetGlobalCache?cache=' + this.sessionId,
-                 'Getting global cache...', false, null);
-            this._globalCache = from(promise).pipe(shareReplay(1));
-        }
-        return this._globalCache;
+        return this._globalCache.asObservable();
     }
 
     public getGlobalCachePromise(): Promise<CacheManager> {
