@@ -17,7 +17,6 @@ using System;
 using System.Collections.Concurrent;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Reflection;
 using System.Threading;
 using System.Web;
 using dexih.api.Services.Message;
@@ -78,7 +77,7 @@ namespace dexih.api.Controllers
 	        }
 	        else
 	        {
-		        return _operations.RepositoryManager.GetUser(User, cancellationToken);
+		        return _operations.RepositoryManager.GetUserAsync(User, cancellationToken);
 	        }
         }
 
@@ -88,7 +87,7 @@ namespace dexih.api.Controllers
         [AllowAnonymous]
         public async Task<ReturnUser> Login([FromBody] LoginModel login, CancellationToken cancellationToken)
         {
-            var user = await _operations.RepositoryManager.GetUserFromEmail(login.Email, cancellationToken);
+            var user = await _operations.RepositoryManager.GetUserFromEmailAsync(login.Email, cancellationToken);
 
             if (user == null)
             {
@@ -178,7 +177,7 @@ namespace dexih.api.Controllers
 	            var externalLoginResult =
 		            await GetExternalLogin(externalProvider.Provider, externalProvider.AuthenticationToken);
 	            
-	            var user = await _operations.RepositoryManager.GetUserFromLogin(externalLoginResult.Provider.ToString(), externalLoginResult.ProviderKey, cancellationToken);
+	            var user = await _operations.RepositoryManager.GetUserFromLoginAsync(externalLoginResult.Provider.ToString(), externalLoginResult.ProviderKey, cancellationToken);
                 
 	            if (user == null)
                 {
@@ -260,7 +259,7 @@ namespace dexih.api.Controllers
 
 	            }
 	            
-	            var existingUser = await _operations.RepositoryManager.GetUserFromEmail(register.Email, cancellationToken);
+	            var existingUser = await _operations.RepositoryManager.GetUserFromEmailAsync(register.Email, cancellationToken);
 
                 if(existingUser == null)
 				{
@@ -458,7 +457,7 @@ namespace dexih.api.Controllers
                 throw new AccountControllerException("The email and verification code were not completed.");
             }
 
-	        var user = await _operations.RepositoryManager.GetUserFromEmail(email.Email, cancellationToken);
+	        var user = await _operations.RepositoryManager.GetUserFromEmailAsync(email.Email, cancellationToken);
 
 	        if (user == null)
             {
@@ -484,7 +483,7 @@ namespace dexih.api.Controllers
             }
             else
             {
-	            var user = await  _operations.RepositoryManager.GetUser(User, cancellationToken);
+	            var user = await  _operations.RepositoryManager.GetUserAsync(User, cancellationToken);
 	            
 	            return new ReturnUser(user);
             }
@@ -509,7 +508,7 @@ namespace dexih.api.Controllers
                 throw new AccountControllerException("Cannot get authorized hubs as there is no user logged in.");
             }
 
-	        var applicationUser = await _operations.RepositoryManager.GetUser(User, cancellationToken);
+	        var applicationUser = await _operations.RepositoryManager.GetUserAsync(User, cancellationToken);
 
             if (applicationUser == null)
             {
@@ -641,7 +640,7 @@ namespace dexih.api.Controllers
 	            // if the provider is the same as the one being added, then continue.
 	            if (info.Provider == externalLoginModel.Provider)
 	            {
-		            var user = await _operations.RepositoryManager.GetUser(User, cancellationToken);
+		            var user = await _operations.RepositoryManager.GetUserAsync(User, cancellationToken);
 
 		            if (user == null || !user.IsRegistered)
 		            {
@@ -714,7 +713,7 @@ namespace dexih.api.Controllers
         [AllowAnonymous]
         public async Task ResendConfirmationEmail([FromBody] EmailModel email, CancellationToken cancellationToken)
         {
-	        var user = await _operations.RepositoryManager.GetUserFromEmail(email.Email, cancellationToken);
+	        var user = await _operations.RepositoryManager.GetUserFromEmailAsync(email.Email, cancellationToken);
             await SendConfirmationEmail(user, cancellationToken);
         }
 
@@ -727,7 +726,7 @@ namespace dexih.api.Controllers
         {
             if (ModelState.IsValid)
             {
-	            var user = await _operations.RepositoryManager.GetUserFromEmail(login.Email, cancellationToken);
+	            var user = await _operations.RepositoryManager.GetUserFromEmailAsync(login.Email, cancellationToken);
 	            
                 if (user == null || !user.EmailConfirmed)
                 {
@@ -766,7 +765,7 @@ namespace dexih.api.Controllers
                 throw new AccountControllerException("The reset password failed.");
             }
             
-	        var user = await _operations.RepositoryManager.GetUserFromEmail(resetPassword.Email, cancellationToken);
+	        var user = await _operations.RepositoryManager.GetUserFromEmailAsync(resetPassword.Email, cancellationToken);
             await _operations.RepositoryManager.ResetPasswordAsync(user, resetPassword.Code, resetPassword.Password, cancellationToken);
         }
 
@@ -946,7 +945,7 @@ namespace dexih.api.Controllers
 		    }
 
 		    var remoteAgentId = Guid.NewGuid().ToString();
-		    var token = await _operations.RepositoryManager.GenerateRemoteUserToken(user, remoteAgentId, cancellationToken);
+		    var token = await _operations.RepositoryManager.GenerateRemoteUserTokenAsync(user, remoteAgentId, cancellationToken);
 
 		    var dbRemoteAgent = new DexihRemoteAgent()
 		    {
@@ -983,7 +982,7 @@ namespace dexih.api.Controllers
 
 		    var dbRemoteAgent = await _operations.RepositoryManager.GetRemoteAgent(remoteAgentKey, cancellationToken);
 
-		    var userToken = await _operations.RepositoryManager.GenerateRemoteUserToken(user, dbRemoteAgent.RemoteAgentId, cancellationToken);
+		    var userToken = await _operations.RepositoryManager.GenerateRemoteUserTokenAsync(user, dbRemoteAgent.RemoteAgentId, cancellationToken);
 			
 		    // hash the token so that it's not stored in plain text.
 		    var hashedToken = HashString.CreateHash(userToken);

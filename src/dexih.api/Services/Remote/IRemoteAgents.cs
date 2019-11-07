@@ -8,8 +8,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using dexih.api.Models;
 using dexih.api.Services.Operations;
-using dexih.remote.operations;
-using dexih.transforms;
 using Dexih.Utils.DataType;
 using static dexih.operations.DownloadData;
 
@@ -56,9 +54,10 @@ namespace dexih.api.Services.Remote
 
 	    Task<string> ClearTables(string instanceId, long hubKey, DownloadUrl downloadUrl, DexihTable[] tables,
 		    RepositoryManager repositoryManager, CancellationToken cancellationToken);
-	    Task<string> PreviewTable(string instanceId, long hubKey, DownloadUrl downloadUrl, long tableKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, RepositoryManager database, CancellationToken cancellationToken);
-	    Task<string> PreviewTable(string instanceId, long hubKey, DownloadUrl downloadUrl, DexihTable hubTable, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, RepositoryManager database, CancellationToken cancellationToken);
-	    Task<string> PreviewDatalink(string instanceId, long hubKey, DownloadUrl downloadUrl, long datalinkKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters parameters, RepositoryManager database, CancellationToken cancellationToken);
+	    Task<string> PreviewTable(string instanceId, long hubKey, DownloadUrl downloadUrl, long tableKey, SelectQuery selectQuery, ChartConfig chartConfig, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, RepositoryManager database, CancellationToken cancellationToken);
+	    Task<string> PreviewTable(string instanceId, long hubKey, DownloadUrl downloadUrl, DexihTable hubTable, SelectQuery selectQuery, ChartConfig chartConfig, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, RepositoryManager database, CancellationToken cancellationToken);
+	    Task<string> PreviewDatalink(string instanceId, long hubKey, DownloadUrl downloadUrl, long datalinkKey, SelectQuery selectQuery, ChartConfig chartConfig, InputColumn[] inputColumns, InputParameters parameters, RepositoryManager database, CancellationToken cancellationToken);
+	    
 	    Task<string> PreviewAuditResults(AuditResults auditResults, RepositoryManager database, CancellationToken cancellationToken);
 
 	    Task<string> DatalinkProperties(string instanceId, long hubKey, DownloadUrl downloadUrl, long datalinkKey, SelectQuery selectQuery,
@@ -66,7 +65,7 @@ namespace dexih.api.Services.Remote
 
 	    Task<string> CallApi(string id, string apiKey, string action, string parameters, string ipAddress, RepositoryManager database, CancellationToken cancellationToken);
 
-	    Task<string> PreviewTransform(string instanceId, long hubKey, DownloadUrl downloadUrl, DexihDatalink hubDatalink, long datalinkTransformKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters parameters, RepositoryManager database, CancellationToken cancellationToken);
+	    Task<string> PreviewTransform(string instanceId, long hubKey, DownloadUrl downloadUrl, DexihDatalink hubDatalink, long datalinkTransformKey, SelectQuery selectQuery, ChartConfig chartConfig, InputColumn[] inputColumns, InputParameters parameters, RepositoryManager database, CancellationToken cancellationToken);
 	    Task<string> ImportFunctionMappings(string instanceId, long hubKey, DownloadUrl downloadUrl, DexihDatalink hubDatalink, long datalinkTransformKey, DexihDatalinkTransformItem datalinkTransformItem, RepositoryManager database, CancellationToken cancellationToken);
         
 	    Task<string> DownloadFiles(string instanceId, long hubKey, DownloadUrl downloadUrl, string connectionId, long tableKey, EFlatFilePath path, string[] files, RepositoryManager database, CancellationToken cancellationToken);

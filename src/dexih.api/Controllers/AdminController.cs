@@ -16,7 +16,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Dexih.Utils.CopyProperties;
 
 namespace dexih.api
 {
@@ -83,7 +82,7 @@ namespace dexih.api
 		{
 			try
 			{
-				return await _operations.RepositoryManager.GetUserModel(getUser.Email, cancellationToken);
+				return await _operations.RepositoryManager.GetUserModelAsync(getUser.Email, cancellationToken);
 			}
 			catch (Exception ex)
 			{
@@ -102,7 +101,7 @@ namespace dexih.api
 
 				foreach (var email in inviteUsers.Emails)
 				{
-					var user = await _operations.RepositoryManager.GetUserFromEmail(email, cancellationToken);
+					var user = await _operations.RepositoryManager.GetUserFromEmailAsync(email, cancellationToken);
 
 					if(user != null && user.IsInvited) {
 						emailsNotInvited.Add(email);
@@ -189,7 +188,7 @@ namespace dexih.api
 
 				foreach (var user in addUsers.Users)
 				{
-					var appUser = await _operations.RepositoryManager.GetUserFromEmail(user.Email, cancellationToken);
+					var appUser = await _operations.RepositoryManager.GetUserFromEmailAsync(user.Email, cancellationToken);
 					if (appUser != null)
 					{
                         throw new AdminControllerException($"The email address {user.Email} already exists and cannot be added.", null);
@@ -222,7 +221,7 @@ namespace dexih.api
 			{
 				foreach (var user in saveUsers.Users)
 				{
-					var appUser = await _operations.RepositoryManager.GetUserFromEmail(user.Email, cancellationToken);
+					var appUser = await _operations.RepositoryManager.GetUserFromEmailAsync(user.Email, cancellationToken);
 					if (appUser == null)
 					{
                         throw new AdminControllerException($"The email address {user.Email} does not exist and cannot be updated.", null);
@@ -260,7 +259,7 @@ namespace dexih.api
 			{
 				foreach (var email in users.Emails)
 				{
-					var appUser = await _operations.RepositoryManager.GetUserFromEmail(email, cancellationToken);
+					var appUser = await _operations.RepositoryManager.GetUserFromEmailAsync(email, cancellationToken);
 					if (appUser == null)
 					{
                         throw new AdminControllerException($"The email address {email} does not exist and cannot be revoked.", null);
@@ -284,7 +283,7 @@ namespace dexih.api
 		{
             try
             {
-	            var user = await _operations.RepositoryManager.GetUserFromEmail(externalProvider.Email, cancellationToken);
+	            var user = await _operations.RepositoryManager.GetUserFromEmailAsync(externalProvider.Email, cancellationToken);
 
                 if (user == null)
                 {
@@ -306,7 +305,7 @@ namespace dexih.api
 			{
 				foreach (var email in users.Emails)
 				{
-					var appUser = await _operations.RepositoryManager.GetUserFromEmail(email, cancellationToken);
+					var appUser = await _operations.RepositoryManager.GetUserFromEmailAsync(email, cancellationToken);
 					if (appUser == null)
 					{
                         throw new AdminControllerException($"The email address {email} does not exist and cannot be enabled.", null);
@@ -332,7 +331,7 @@ namespace dexih.api
 			{
 				foreach (var email in users.Emails)
 				{
-					var user = await _operations.RepositoryManager.GetUserFromEmail(email, cancellationToken);
+					var user = await _operations.RepositoryManager.GetUserFromEmailAsync(email, cancellationToken);
 					if(user != null)
 					{
 						await _operations.RepositoryManager.DeleteUserAsync(user, cancellationToken);
@@ -354,7 +353,7 @@ namespace dexih.api
 
 				foreach (var email in users.Emails)
 				{
-					var dbUser = await _operations.RepositoryManager.GetUserFromEmail(email, cancellationToken);
+					var dbUser = await _operations.RepositoryManager.GetUserFromEmailAsync(email, cancellationToken);
 					if (dbUser == null)
 					{
                         throw new AdminControllerException($"The email address {email} has not been created.", null);

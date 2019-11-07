@@ -7,7 +7,7 @@ import { DexihHubVariable, DexihHub, DexihFunctionParameter, DexihConnection, De
     eSourceType, eImportAction, eSecurityFlag, eDatalinkType, eUpdateStrategy, eFailAction, eInvalidAction,
     eFunctionCaching, eCleanAction, eDuplicateStrategy, eRunStatus, ePermission, eTypeCode,
     eTransformWriterMethod, eTransformItemType, eFunctionType, InputColumn, SelectQuery, DexihColumnBase,
-    eDataObjectType, eSharedObjectType, eDirection, eSeriesGrain, eDayOfWeek } from '../shared/shared.models';
+    eDataObjectType, eSharedObjectType, eDirection, eSeriesGrain, eDayOfWeek, ChartConfig } from '../shared/shared.models';
 
 // export class RemoteMessage {
 //     public messageId: string;
@@ -2629,6 +2629,7 @@ export class ConnectionTables extends DexihConnection {
 export class PreviewResults {
     public name: string;
     public columns: Array<any>;
+    public chartConfig: ChartConfig;
     public data: Array<any>;
     public transformProperties: TransformProperties;
     public status: Message;

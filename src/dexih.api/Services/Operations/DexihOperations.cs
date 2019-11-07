@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using dexih.api.Services.BackgroundTasks;
 using dexih.operations;
 using dexih.repository;
-using Dexih.Utils.Crypto;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;

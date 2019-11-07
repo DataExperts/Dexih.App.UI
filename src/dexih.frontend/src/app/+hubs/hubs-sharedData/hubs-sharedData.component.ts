@@ -84,7 +84,11 @@ export class HubsSharedDataComponent implements OnInit, OnDestroy {
     }
 
     previewData(item: SharedData) {
-        this.router.navigate(['preview', item.hubKey, item.objectType, item.objectKey], { relativeTo: this.route.parent });
+        if (item.objectType === eDataObjectType.Dashboard) {
+            this.router.navigate(['previewDashboard', item.hubKey, item.objectKey], { relativeTo: this.route.parent });
+        } else {
+            this.router.navigate(['preview', item.hubKey, item.objectType, item.objectKey], { relativeTo: this.route.parent });
+        }
     }
 
     downloadData(sharedItems: Array<SharedData>, zipFiles: boolean, downloadFormat: eDownloadFormat) {
@@ -94,6 +98,5 @@ export class HubsSharedDataComponent implements OnInit, OnDestroy {
             this.dexihMessage.addMessage(reason);
         });
     }
-
 }
 

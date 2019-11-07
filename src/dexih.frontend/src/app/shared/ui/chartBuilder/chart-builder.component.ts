@@ -86,6 +86,9 @@ export class ChartBuilderComponent implements OnInit, OnChanges {
 
     export() {
         const chart = document.getElementById('chart');
+        if (chart == null) {
+            return;
+        }
         html2canvas.default(chart, <html2canvas.Options> {
             // height: 700,
             // width: 1000,

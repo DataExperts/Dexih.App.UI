@@ -1,8 +1,6 @@
 ﻿using System;
 using System.IO.Compression;
 using System.Reflection;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using dexih.api.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,8 +19,6 @@ using dexih.api.Services.Message;
 using dexih.api.Services.Operations;
 using dexih.functions;
 using dexih.operations;
-using MessagePack.AspNetCoreMvcFormatter;
-using MessagePack.Resolvers;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.ResponseCompression;

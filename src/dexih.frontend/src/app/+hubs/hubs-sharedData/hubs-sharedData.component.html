@@ -4,29 +4,31 @@
 
 <div class="container-fluid">
     <dexih-widget title="Shared Data Index" iconClass="fa fa-lg fa-fw fa-life-saver">
-        <form [formGroup]="searchForm" class="p-3">
-            <fieldset>
-                <div class="form-row">
-                    <section class="col">
-                        <form-input label="Search Term" formControlName="searchString" placeholder="Search..."
-                            iconClass="fa fa-search">
-                        </form-input>
-                    </section>
-                    <section class="col">
-                        <form-tags-dropdown label="Hubs to filter by" formControlName="hubKeys" [items]="hubs"
-                            itemKey="hubKey" itemName="name" [enableAddAll]="true">
-                        </form-tags-dropdown>
-                    </section>
-                </div>
-            </fieldset>
-        </form>
 
-        <dexih-table [enableMultiSelect]="true" [enableFilter]="false" [columns]="columns" [data]="dataIndex">
+
+        <dexih-table [enableMultiSelect]="true" [enableFilter]="false" [columns]="columns" [data]="dataIndex" (rowClick)="previewData($event)">
             <ng-template #selectedItemAction select="selectedItemAction" let-item="item">
                 <dexih-button-preview [routerLink]="['preview', item.hubKey, item.objectType, item.objectKey]">
                 </dexih-button-preview>
             </ng-template>
 
+            <ng-template #actions  let-items="items">
+                    <form [formGroup]="searchForm">
+                            <fieldset>
+                                <div class="form-row">
+                                    <section class="col">
+                                        <form-input formControlName="searchString" placeholder="Search..." iconClass="fa fa-search">
+                                        </form-input>
+                                    </section>
+                                    <section class="col">
+                                        <form-tags-dropdown labelLeft="Hubs" formControlName="hubKeys" [items]="hubs"                                            itemKey="hubKey" itemName="name" [enableAddAll]="true">
+                                        </form-tags-dropdown>
+                                    </section>
+                                </div>
+                            </fieldset>
+                        </form>                
+                    </ng-template>
+    
             <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
                 <download-button class="ml-1" (download)="downloadData(items, true, $event)"></download-button>
             </ng-template>
@@ -42,8 +44,7 @@
                         [(ngModel)]="column.defaultValue" [border]="false"></form-input>
                 </div>
                 <div class="input-group mt-1 pull-right">
-                    <dexih-button-preview (click)="previewData(item)"></dexih-button-preview>
-                    <download-button class="ml-1" (download)="downloadData([item], true, $event)"></download-button>
+                    <download-button class="ml-1" [autoCompact]="false" (download)="downloadData([item], true, $event)"></download-button>
                 </div>
             </ng-template>
 

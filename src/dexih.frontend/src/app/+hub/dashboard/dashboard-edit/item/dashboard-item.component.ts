@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter,
-    ViewChild, ViewChildren, QueryList, ElementRef, OnChanges, SimpleChanges, AfterViewChecked, AfterContentChecked } from '@angular/core';
+    ViewChild, ViewChildren, QueryList, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
 import { HubService } from '../../..';
 import { Subscription, combineLatest } from 'rxjs';
@@ -28,8 +28,6 @@ export class DashboardItemComponent implements OnInit, OnChanges, OnDestroy {
 
     @ViewChildren('view') public viewControls: QueryList<PreviewViewComponent>;
     @ViewChild('widget', {static: true}) public widget: DexihWidgetComponent;
-
-    private _resizeSubscription: Subscription;
 
     private _subscription: Subscription;
     private _viewKeySubscription: Subscription;
@@ -63,7 +61,6 @@ export class DashboardItemComponent implements OnInit, OnChanges, OnDestroy {
 
     ngOnDestroy() {
         if (this._subscription) { this._subscription.unsubscribe(); }
-        if (this._resizeSubscription) { this._resizeSubscription.unsubscribe(); }
         if (this._viewKeySubscription) { this._viewKeySubscription.unsubscribe(); }
         this.cancelToken.cancel();
     }

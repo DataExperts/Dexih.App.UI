@@ -21,7 +21,7 @@ import { DexihDatajob, DexihTable, DexihHub, DexihRemoteAgentHub, DexihConnectio
     TransformProperties, Import, eImportAction, eRunStatus, eDatalinkType, eDeltaType, eConnectionPurpose, eFlatFilePath,
     ApiData, DownloadObject, eDownloadFormat, DexihActiveAgent, ImportObject, ePermission, eTypeCode, eDataObjectType,
     eSharedObjectType, RemoteLibraries, ConnectionReference, TransformReference,
-    FunctionReference, eFunctionType, ClientMessage, eClientCommand, HubUser, eDownloadUrlType } from '../shared/shared.models';
+    FunctionReference, eFunctionType, ClientMessage, eClientCommand, HubUser, eDownloadUrlType, ChartConfig } from '../shared/shared.models';
 import { debounce, filter, first, take } from 'rxjs/operators';
 
 @Injectable()
@@ -1352,7 +1352,8 @@ export class HubService implements OnInit, OnDestroy {
                     columns: columns,
                     data: previewData.data,
                     transformProperties: previewData.transformProperties,
-                    status: previewData.status
+                    status: previewData.status,
+                    chartConfig: previewData.chartConfig
                 });
             }).catch(reason => {
                 this.addHubMessage(reason, true, 'Preview Data');
@@ -1445,7 +1446,7 @@ export class HubService implements OnInit, OnDestroy {
                 this.hubPost<{dashboardItemKey: string, dataKey: string}[]>('/api/Hub/PreviewDashboard', {
                     hubKey: this._hubKey,
                     remoteAgentId: this.getCurrentRemoteAgentId(),
-                    responseUrl: url.downloadUrlType === eDownloadUrlType.Proxy ? url.url : '',
+                    downloadUrl: url,
                     dashboard: dashboard,
                     inputParameters: inputParameters,
                 }, 'Getting dashboard download locations...').then(urls => {
@@ -1470,7 +1471,8 @@ export class HubService implements OnInit, OnDestroy {
                             columns: columns,
                             data: data.data,
                             transformProperties: data.transformProperties,
-                            status: data.status
+                            status: data.status,
+                            chartConfig: data.chartConfig
                         });
                         return;
                     }

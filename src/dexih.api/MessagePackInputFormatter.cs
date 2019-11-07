@@ -1,8 +1,6 @@
 using System.Threading.Tasks;
 using MessagePack;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.AspNetCore.WebUtilities;
 
 namespace dexih.api
 {

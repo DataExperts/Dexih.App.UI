@@ -7,7 +7,7 @@ import { AuthService } from '../../../+auth/auth.service';
 import { InputOutputColumns } from '../../hub.lineage.models';
 import { CancelToken } from '../../../+auth/auth.models';
 import { HubCache, ConnectionTables, eCacheStatus } from '../../hub.models';
-import { eViewType, DexihDatalink, InputColumn, DexihColumnBase, SelectQuery, DexihView, DownloadObject, eDataObjectType } from '../../../shared/shared.models';
+import { eViewType, DexihDatalink, InputColumn, DexihColumnBase, SelectQuery, DexihView, DownloadObject, eDataObjectType, eSourceType, ChartConfig } from '../../../shared/shared.models';
 
 @Component({
   selector: 'dexih-view-edit-form',
@@ -151,7 +151,6 @@ export class ViewEditComponent implements OnInit, OnDestroy {
               if (this.formsService.currentForm.controls.autoRefresh.value) {
                 this.refresh();
               }
-
             }
           }
         }
@@ -193,6 +192,9 @@ export class ViewEditComponent implements OnInit, OnDestroy {
       this.formsService.currentForm.controls.viewType.setValue(eViewType.Table);
     } else {
       this.showChart = true;
+      if (this.formsService.currentForm.controls.chartConfig.value == null) {
+        this.formsService.currentForm.controls.chartConfig.setValue(new ChartConfig());
+      }
       this.formsService.currentForm.controls.viewType.setValue(eViewType.Chart);
     }
   }
@@ -264,14 +266,18 @@ export class ViewEditComponent implements OnInit, OnDestroy {
     let viewForm = this.formsService.currentForm;
     let parameters = this.formsService.currentForm.controls.parameters.value;
 
-    let view = viewForm.value;
+    let view = <DexihView> viewForm.value;
     view.selectQuery = this.selectQuery;
+
+    if ((view.sourceType === eDataObjectType.Table && view.sourceTableKey > 0) ||
+    (view.sourceType === eDataObjectType.Datalink && view.sourceDatalinkKey > 0)) {
 
     this.hubService.previewView(viewForm.value, this.inputColumns, parameters, this.cancelToken).then((result) => {
       this.columns = result.columns;
       this.data = result.data;
     }).catch(() => {
     });
+  }
 
   }
 

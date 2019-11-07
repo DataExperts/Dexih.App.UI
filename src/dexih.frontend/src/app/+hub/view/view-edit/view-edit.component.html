@@ -5,7 +5,18 @@
 			<dexih-invalid-form-details [control]="formsService.currentForm" (click)="formsService.showErrors()" class="mr-1"></dexih-invalid-form-details>
 			<dexih-button-refresh class="mr-1" (click)="refresh()" text="Reload"></dexih-button-refresh>
 			<download-button class="mr-1" (download)="download($event)"></download-button>
-			<dexih-button class="mr-1" iconClass="fa fa-line-chart" (click)="toggleChart()" [text]="showChart ? 'Show Data' : 'Show Chart'"></dexih-button>
+			
+			<div class="btn-group btn-group-toggle mr-1" data-toggle="buttons" title="Table">
+				<label class="btn btn-primary" [ngClass]="{active: showChart===false}">
+					<input type="radio" name="options" value="table" autocomplete="off" (click)="toggleChart()">
+					<i class="fa fa-table"></i>
+				</label>
+				<label class="btn btn-primary" [ngClass]="{active: showChart===true}" title="Chart">
+					<input type="radio" name="options" value="chart" autocomplete="off" (click)="toggleChart()">
+					<i class="fa fa-bar-chart"></i>
+				</label>
+			</div>
+
 			<save-button *ngIf="hubCache.canWrite" [formsService]="formsService" class="mr-1"></save-button>
 			<dexih-button-edit class="mr-1" (click)="showEdit = !showEdit" [text]="showEdit ? 'Hide Edit' : 'Edit'"></dexih-button-edit>
 			<cancel-button [formsService]="formsService"></cancel-button>

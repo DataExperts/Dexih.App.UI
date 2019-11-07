@@ -1,5 +1,4 @@
 using Microsoft.Extensions.Logging;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 
 namespace dexih.api.Services
 {

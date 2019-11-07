@@ -8,7 +8,7 @@ import { TasksIndexComponent } from './tasks/tasks-index';
 import { TaskViewComponent } from './tasks/task-view';
 import { NotificationsIndexComponent } from './notifications/notification-index';
 import { NotificationViewComponent } from './notifications/notification-view';
-import { HubsSharedDataComponent, PreviewDataComponent} from './hubs-sharedData';
+import { HubsSharedDataComponent, PreviewComponent, PreviewDashboardItemComponent, PreviewDataComponent, PreviewDashboardComponent} from './hubs-sharedData';
 import { RemoteAgentsComponent} from './remoteAgents/remote-agents/remote-agents.component';
 import { HelpComponent } from './help';
 import { RemoteAgentDownloadComponent } from './remoteAgents/remoteAgent-download';
@@ -26,7 +26,8 @@ const baseRoutes: Routes = [
     { path: 'manage', component: ManageComponent, data: { pageTitle: 'Manage' } },
     { path: 'sharedData', data: { pageTitle: 'Shared Data' }, children: [
         { path: '', component: HubsSharedDataComponent, data: { pageTitle: 'Shared Data' } },
-        { path: 'preview/:hubKey/:objectType/:objectKey', component: PreviewDataComponent, data: { pageTitle: 'Task' } },
+        { path: 'preview/:hubKey/:objectType/:objectKey', component: PreviewComponent, data: { pageTitle: 'Preview' } },
+        { path: 'previewDashboard/:hubKey/:dashboardKey', component: PreviewDashboardComponent, data: { pageTitle: 'Preview Dashboard' } },
     ] },
     { path: 'tasks', data: { pageTitle: 'Tasks' }, children: [
         { path: '', component: TasksIndexComponent, data: { pageTitle: 'Tasks' } },

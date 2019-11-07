@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { downloadFormats } from '../../../../+hub/hub.query.models';
 import { eDownloadFormat } from '../../../shared.models';
 
@@ -8,6 +8,7 @@ import { eDownloadFormat } from '../../../shared.models';
 })
 
 export class DownloadButtonComponent implements OnInit, OnDestroy {
+    @Input() autoCompact = true;
     @Output() download = new EventEmitter<eDownloadFormat>();
 
     eDownloadFormat = eDownloadFormat;

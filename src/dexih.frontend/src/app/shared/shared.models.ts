@@ -359,6 +359,7 @@ export class ApiData {
     public createDate: Date = null;
     public updateDate: Date = null;
     public isValid: boolean = true;
+    public downloadKey: string;
    }
    
    export class DexihDashboardItemParameter {

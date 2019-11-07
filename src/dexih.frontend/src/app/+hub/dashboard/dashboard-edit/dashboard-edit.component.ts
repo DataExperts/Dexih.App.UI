@@ -194,8 +194,8 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
 
     // look for an empty cell
     found:
-    for (let col = 0; col < form.controls.maxCols.value; col++) {
-      for (let row = 0; row < form.controls.maxRows.value; row++) {
+    for (let row = 0; row < form.controls.maxRows.value; row++) {
+      for (let col = 0; col < form.controls.maxCols.value; col++) {
         let occupied = false;
         for (let i = 0; i < items.controls.length; i++) {
           let currentItem = <DexihDashboardItem> items.controls[i].value;

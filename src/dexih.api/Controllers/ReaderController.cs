@@ -55,7 +55,7 @@ namespace dexih.api.Controllers
 		{
 			if (applicationUser == null)
 			{
-				applicationUser = await _operations.RepositoryManager.GetUser(HttpContext.User, cancellationToken);
+				applicationUser = await _operations.RepositoryManager.GetUserAsync(HttpContext.User, cancellationToken);
 			}
 
 			if (applicationUser == null)
@@ -98,7 +98,7 @@ namespace dexih.api.Controllers
 			{
 				if (ModelState.IsValid)
 				{
-					var applicationUser = await _operations.RepositoryManager.GetUserFromEmail(user, cancellationToken);
+					var applicationUser = await _operations.RepositoryManager.GetUserFromEmailAsync(user, cancellationToken);
 					if (applicationUser == null)
 					{
 						_logger.LogWarning("Invalid remote login attempt using Email: " + User);
@@ -147,7 +147,7 @@ namespace dexih.api.Controllers
 		{
 			try
 			{
-				var applicationUser = await _operations.RepositoryManager.GetUser(User, cancellationToken);
+				var applicationUser = await _operations.RepositoryManager.GetUserAsync(User, cancellationToken);
 
                 if (applicationUser == null)
                 {

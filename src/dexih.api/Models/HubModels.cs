@@ -3,11 +3,8 @@ using dexih.operations;
 using dexih.repository;
 using dexih.functions;
 using dexih.functions.Query;
-using dexih.remote.operations;
 using dexih.transforms;
-using Dexih.Utils.Crypto;
 using Dexih.Utils.DataType;
-using Microsoft.AspNetCore.SignalR;
 using static dexih.operations.DownloadData;
 
 namespace dexih.api.Models
@@ -165,6 +162,8 @@ namespace dexih.api.Models
         public DownloadUrl DownloadUrl { get; set; }
         public InputColumn[] InputColumns { get; set; }
         public InputParameters InputParameters { get; set; }
+        
+        public ChartConfig ChartConfig { get; set; }
     }
     
     public class PreviewTable: PreviewBase

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security.Claims;
-using dexih.operations;
-using dexih.repository;
-using Microsoft.AspNetCore.Identity;
+﻿using dexih.repository;
 
 namespace dexih.api.Models
 {
@@ -12,9 +7,6 @@ namespace dexih.api.Models
 		public string SearchString { get; set; }
 		public int MaxResults { get; set; }
 	}
-
-
-	
 
 	public class AddUsers
 	{
@@ -47,6 +39,4 @@ namespace dexih.api.Models
 		public string ProviderKey { get; set; }
 	}
 	
-
-
 }

@@ -1,8 +1,6 @@
 ﻿using dexih.api.Services;
 using dexih.api.Services.Remote;
-using dexih.operations;
 using dexih.repository;
-using Dexih.Utils.ManagedTasks;
 using Dexih.Utils.MessageHelpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -27,7 +25,6 @@ using dexih.api.Services.Remote.Exceptions;
 using dexih.functions;
 using dexih.remote.operations;
 using Dexih.Utils.CopyProperties;
-using MessagePack;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Hosting;
@@ -79,7 +76,7 @@ namespace dexih.api.Controllers
                 {
 					_logger.LogInformation(LoggingEvents.RemoteLogin, "Login - Remote Agent Login {user}, {servername}, remoteAgentId {remoteAgentId}, version {version}", User, remoteSettings.AppSettings.User, remoteSettings.AppSettings.Name, remoteSettings.Runtime.Version);
 
-					var user = await _operations.RepositoryManager.GetUserFromEmail(remoteSettings.AppSettings.User, cancellationToken);
+					var user = await _operations.RepositoryManager.GetUserFromEmailAsync(remoteSettings.AppSettings.User, cancellationToken);
                     if (user == null)
                     {
                         _logger.LogWarning(LoggingEvents.RemoteLogin, "Login - Invalid remote login attempt using Email: " + User);
@@ -178,7 +175,7 @@ namespace dexih.api.Controllers
                             }
                         }
                         
-                        newUserToken = await _operations.RepositoryManager.GenerateRemoteUserToken(user, remoteSettings.AppSettings.RemoteAgentId, cancellationToken);
+                        newUserToken = await _operations.RepositoryManager.GenerateRemoteUserTokenAsync(user, remoteSettings.AppSettings.RemoteAgentId, cancellationToken);
                         
                         // hash the token so that it's not stored in plain text.
                         var hashedToken = HashString.CreateHash(newUserToken);
@@ -426,7 +423,7 @@ namespace dexih.api.Controllers
         [HttpPost("[action]")]
         public async Task<ActionResult> GenerateCertificate([FromBody] GenerateCertificateModel data, CancellationToken cancellationToken)
         {
-            var appUser = await _operations.RepositoryManager.GetUser(User, cancellationToken);
+            var appUser = await _operations.RepositoryManager.GetUserAsync(User, cancellationToken);
             _logger.LogInformation($"Generating ssl certificate for user {appUser.Email}, stored certificate expires: {appUser.CertificateExpiry}.");
 
             CertificateChain cert;
@@ -743,7 +740,7 @@ chmod a+x dexih.remote.run.{os}.sh
 	                                               HttpContext.Request.Host + HttpContext.Request.PathBase.Value;
 	        remoteSettings.AppSettings.RemoteAgentId = Guid.NewGuid().ToString();
 
-            var user = await _operations.RepositoryManager.GetUser(User, cancellationToken);
+            var user = await _operations.RepositoryManager.GetUserAsync(User, cancellationToken);
             
             var dbRemoteAgent = new DexihRemoteAgent()
             {
@@ -755,7 +752,7 @@ chmod a+x dexih.remote.run.{os}.sh
 
 	        if (settings.EmbedUserName)
 	        {
-		        remoteSettings.AppSettings.UserToken = await _operations.RepositoryManager.GenerateRemoteUserToken(user, remoteSettings.AppSettings.RemoteAgentId, cancellationToken);
+		        remoteSettings.AppSettings.UserToken = await _operations.RepositoryManager.GenerateRemoteUserTokenAsync(user, remoteSettings.AppSettings.RemoteAgentId, cancellationToken);
 		        
 		        var hashedToken = HashString.CreateHash(remoteSettings.AppSettings.UserToken);
 	            dbRemoteAgent.HashedToken = hashedToken;	        

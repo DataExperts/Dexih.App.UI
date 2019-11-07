@@ -1,0 +1,9 @@
+<div *ngIf="item.header" class="p-3 bg-secondary text-white">
+    <b>{{item.name}}</b>
+</div>
+
+<div *ngIf="item.description" class="p-3">
+    <ngx-md [data]="item.description"></ngx-md>
+</div>
+<dexih-message #DexihMessage></dexih-message>
+<preview-data [hubKey]="hubKey" [objectType]="eDataObjectType.View" [objectKey]="item.viewKey" [showToolbar]="true"></preview-data>

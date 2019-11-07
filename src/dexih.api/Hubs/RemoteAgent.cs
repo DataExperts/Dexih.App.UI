@@ -4,8 +4,6 @@ using System.Threading.Tasks;
 using dexih.api.Services.Operations;
 using dexih.api.Services.Remote;
 using dexih.functions;
-using dexih.operations;
-using dexih.repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Caching.Distributed;

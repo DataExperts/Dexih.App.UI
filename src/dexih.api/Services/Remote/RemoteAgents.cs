@@ -10,7 +10,6 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using System.Runtime.Serialization.Formatters.Binary;
 using dexih.api.Hubs;
 using dexih.api.Models;
 using dexih.api.Services.Operations;
@@ -19,7 +18,6 @@ using dexih.operations;
 using Dexih.Utils.Crypto;
 using dexih.functions.Query;
 using dexih.remote.operations;
-using dexih.transforms;
 using Dexih.Utils.DataType;
 using Dexih.Utils.ManagedTasks;
 using static dexih.operations.DownloadData;
@@ -28,9 +26,6 @@ using Microsoft.Extensions.Caching.Distributed;
 
 
 using MessagePack;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
-using SendGrid;
-using SharedData = dexih.operations.SharedData;
 
 namespace dexih.api.Services.Remote
 {
@@ -460,7 +455,7 @@ namespace dexih.api.Services.Remote
 //				throw new RemoteAgentGetHubReaderRemoteAgentException("The remote agent is not authorized.  This could be due to a change in the remote agents ip agress or unique identifier.", null, hubKey);
 //			}
 
-	        var user = await database.GetUser(remoteAgent.UserId, cancellationToken);
+	        var user = await database.GetUserAsync(remoteAgent.UserId, cancellationToken);
 	
 			if (user.IsAdmin)
 			{
@@ -638,7 +633,7 @@ namespace dexih.api.Services.Remote
 		    return result;
 	    }
 	    
-	    public async Task<string> PreviewTable(string id, long hubKey, DownloadUrl downloadUrl, DexihTable table, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, RepositoryManager database, CancellationToken cancellationToken)
+	    public async Task<string> PreviewTable(string id, long hubKey, DownloadUrl downloadUrl, DexihTable table, SelectQuery selectQuery, ChartConfig chartConfig, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    try
 		    {
@@ -656,7 +651,8 @@ namespace dexih.api.Services.Remote
 				    showRejectedData,
 				    selectQuery,
 				    inputColumns,
-				    inputParameters
+				    inputParameters,
+				    chartConfig
 			    };
 
 			    var result = await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.PreviewTable),  value, database, cancellationToken);
@@ -668,10 +664,10 @@ namespace dexih.api.Services.Remote
 		    }
 	    }
 	    
-		public async Task<string> PreviewTable(string id, long hubKey, DownloadUrl downloadUrl, long tableKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, RepositoryManager database, CancellationToken cancellationToken)
+		public async Task<string> PreviewTable(string id, long hubKey, DownloadUrl downloadUrl, long tableKey, SelectQuery selectQuery, ChartConfig chartConfig, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, RepositoryManager database, CancellationToken cancellationToken)
 		{
 			var table = await database.GetTable(hubKey, tableKey, true, cancellationToken);
-			return await PreviewTable(id, hubKey, downloadUrl, table, selectQuery, inputColumns, inputParameters, showRejectedData, database, cancellationToken);
+			return await PreviewTable(id, hubKey, downloadUrl, table, selectQuery, chartConfig, inputColumns, inputParameters, showRejectedData, database, cancellationToken);
         }
 
 	    
@@ -731,7 +727,7 @@ namespace dexih.api.Services.Remote
 				    ObjectKey = hubDatalink.Key,
 				    DatalinkTransformKey = datalinkTransformKey,
 				    ObjectType = EDataObjectType.Datalink,
-				    Query = selectQuery
+				    Query = selectQuery,
 			    };
 
 			    var downloadObjects = new[] {downloadObject};
@@ -754,7 +750,7 @@ namespace dexih.api.Services.Remote
 		    }
 	    }
 	    
-        public async Task<string> PreviewDatalink(string id, long hubKey, DownloadUrl downloadUrl, long datalinkKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken)
+        public async Task<string> PreviewDatalink(string id, long hubKey, DownloadUrl downloadUrl, long datalinkKey, SelectQuery selectQuery, ChartConfig chartConfig, InputColumn[] inputColumns, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken)
         {
             try
             {
@@ -771,7 +767,8 @@ namespace dexih.api.Services.Remote
 	                datalinkKey,
 	                selectQuery,
 	                inputColumns,
-	                inputParameters
+	                inputParameters,
+	                chartConfig
                 };
 
                 var result = await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.PreviewDatalink), value,  database, cancellationToken);
@@ -812,7 +809,7 @@ namespace dexih.api.Services.Remote
 	        }
         }
 	    
-	    public async Task<string> PreviewTransform(string id, long hubKey, DownloadUrl downloadUrl, DexihDatalink hubDatalink, long datalinkTransformKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken)
+	    public async Task<string> PreviewTransform(string id, long hubKey, DownloadUrl downloadUrl, DexihDatalink hubDatalink, long datalinkTransformKey, SelectQuery selectQuery, ChartConfig chartConfig, InputColumn[] inputColumns, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    try
 		    {
@@ -832,6 +829,7 @@ namespace dexih.api.Services.Remote
 				    selectQuery,
 				    inputColumns,
 				    inputParameters,
+				    chartConfig,
 			    };
 
 			    var result = await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.PreviewTransform), value, database, cancellationToken);
@@ -993,11 +991,16 @@ namespace dexih.api.Services.Remote
 
                 // populate the table/datalink cache to be send to the remote agent.
                 var cache = new CacheManager(hubKey, hub.EncryptionKey);
+                
                 var tableKeys = downloadObjects.Where(c => c.ObjectType == EDataObjectType.Table).Select(c => c.ObjectKey).ToArray();
                 cache.AddTables(tableKeys, hub);
+
                 var datalinkKeys = downloadObjects.Where(c => c.ObjectType == EDataObjectType.Datalink).Select(c => c.ObjectKey).ToArray();
                 cache.AddDatalinks(datalinkKeys, hub);
 
+                var viewKeys = downloadObjects.Where(c => c.ObjectType == EDataObjectType.View).Select(c => c.ObjectKey).ToArray();
+                cache.AddViews(viewKeys, hub);
+                
                 var value = new
                 {
 	                cache,

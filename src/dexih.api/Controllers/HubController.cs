@@ -13,18 +13,15 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.IO.Compression;
 using System.Text;
-using System.Text.Json;
 using System.Threading;
 using dexih.api.Services.Message;
 using dexih.api.Services.Operations;
 using Microsoft.Extensions.Logging;
-using Dexih.Utils.ManagedTasks;
 using dexih.api.Services.Remote;
 using dexih.functions;
 using dexih.functions.Parameter;
 using dexih.functions.Query;
 using dexih.remote.operations;
-using dexih.transforms;
 using Dexih.Utils.DataType;
 
 
@@ -125,7 +122,7 @@ namespace dexih.api.Controllers
 		{
 			var database = _operations.RepositoryManager;
 			var userIds = new List<ApplicationUser>();
-			var appUser = await database.GetUser(User, cancellationToken);
+			var appUser = await database.GetUserAsync(User, cancellationToken);
 
 			var updateUsers = new List<ApplicationUser>();
 			var newUsers = new List<ApplicationUser>();
@@ -134,7 +131,7 @@ namespace dexih.api.Controllers
 
 			foreach (var email in userPermissions.Emails)
 			{
-				var user = await _operations.RepositoryManager.GetUserFromEmail(email, cancellationToken);
+				var user = await _operations.RepositoryManager.GetUserFromEmailAsync(email, cancellationToken);
 				var newUser = false;
 
 				// if the user doesn't exist, create a dummy user entry.
@@ -265,7 +262,7 @@ namespace dexih.api.Controllers
 
 			foreach (var email in userPermissions.Emails)
 			{
-				var user = await _operations.RepositoryManager.GetUserFromEmail(email, cancellationToken);
+				var user = await _operations.RepositoryManager.GetUserFromEmailAsync(email, cancellationToken);
 
 				// if the user doesn't exist, create a dummy user entry.
 				if (user != null)
@@ -320,7 +317,7 @@ namespace dexih.api.Controllers
 		public async Task<DexihRemoteAgentHub> SaveRemoteAgent([FromBody] RemoteAgentUpdate remoteAgentUpdate, CancellationToken cancellationToken)
 		{
 			var operations = _operations.RepositoryManager;
-			var appUser = await operations.GetUser(User, cancellationToken);
+			var appUser = await operations.GetUserAsync(User, cancellationToken);
 			var dbRemoteAgent = remoteAgentUpdate.Value;
 
 			var remoteAgent = await operations.SaveRemoteAgentHub(appUser.Id, remoteAgentUpdate.HubKey, dbRemoteAgent, cancellationToken);
@@ -623,7 +620,7 @@ namespace dexih.api.Controllers
 				previewTable.TableKey);
 			var repositoryManager = _operations.RepositoryManager;
 			var remoteServerResult = _remoteAgents.PreviewTable(previewTable.RemoteAgentId, previewTable.HubKey, previewTable.DownloadUrl,
-				previewTable.TableKey, previewTable.SelectQuery, previewTable.InputColumns, previewTable.InputParameters,
+				previewTable.TableKey, previewTable.SelectQuery, previewTable.ChartConfig, previewTable.InputColumns, previewTable.InputParameters,
 				previewTable.ShowRejectedData, repositoryManager, cancellationToken);
 			return remoteServerResult;
 		}
@@ -637,7 +634,7 @@ namespace dexih.api.Controllers
 				previewTableQuery.HubKey, previewTableQuery.Table.Key);
 			var repositoryManager = _operations.RepositoryManager;
 			var remoteServerResult = _remoteAgents.PreviewTable(previewTableQuery.RemoteAgentId, previewTableQuery.HubKey, previewTableQuery.DownloadUrl,
-				previewTableQuery.Table, previewTableQuery.SelectQuery,
+				previewTableQuery.Table, previewTableQuery.SelectQuery, previewTableQuery.ChartConfig,
 				previewTableQuery.InputColumns, previewTableQuery.InputParameters, previewTableQuery.ShowRejectedData,
 				repositoryManager, cancellationToken);
 			return remoteServerResult;
@@ -652,7 +649,7 @@ namespace dexih.api.Controllers
 				previewDatalink.HubKey, previewDatalink.DatalinkKey);
 			var repositoryManager = _operations.RepositoryManager;
 			var remoteServerResult = _remoteAgents.PreviewDatalink(previewDatalink.RemoteAgentId, previewDatalink.HubKey, previewDatalink.DownloadUrl, 
-				previewDatalink.DatalinkKey, previewDatalink.SelectQuery,
+				previewDatalink.DatalinkKey, previewDatalink.SelectQuery, previewDatalink.ChartConfig,
 				previewDatalink.InputColumns, previewDatalink.InputParameters, 
 				repositoryManager, cancellationToken);
 			return remoteServerResult;
@@ -697,13 +694,13 @@ namespace dexih.api.Controllers
 						case EDataObjectType.Table:
 							url = await _remoteAgents.PreviewTable(previewDashboard.RemoteAgentId,
 								previewDashboard.HubKey, previewDashboard.DownloadUrl, view.SourceTableKey.Value,
-								view.SelectQuery, view.InputValues, itemParameters, false, repositoryManager,
+								view.SelectQuery, view.ChartConfig, view.InputValues, itemParameters, false, repositoryManager,
 								cancellationToken);
 							break;
 						case EDataObjectType.Datalink:
 							url = await _remoteAgents.PreviewDatalink(previewDashboard.RemoteAgentId,
 								previewDashboard.HubKey, previewDashboard.DownloadUrl, view.SourceDatalinkKey.Value,
-								view.SelectQuery, view.InputValues, itemParameters, repositoryManager,
+								view.SelectQuery, view.ChartConfig, view.InputValues, itemParameters, repositoryManager,
 								cancellationToken);
 							break;
 						default:
@@ -734,7 +731,7 @@ namespace dexih.api.Controllers
 	    {
 		    _logger.LogTrace(LoggingEvents.HubPreviewDatalink, "HubController.PreviewTransform: HubKey: {updateBrowserHub}, DatalinkKey: {DatalinkKey}", previewTransform.HubKey, previewTransform.Datalink.Key);
 		    var repositoryManager = _operations.RepositoryManager;
-		    var remoteServerResult = _remoteAgents.PreviewTransform(previewTransform.RemoteAgentId, previewTransform.HubKey, previewTransform.DownloadUrl, previewTransform.Datalink, previewTransform.DatalinkTransformKey, previewTransform.SelectQuery, previewTransform.InputColumns, previewTransform.InputParameters, repositoryManager, cancellationToken);
+		    var remoteServerResult = _remoteAgents.PreviewTransform(previewTransform.RemoteAgentId, previewTransform.HubKey, previewTransform.DownloadUrl, previewTransform.Datalink, previewTransform.DatalinkTransformKey, previewTransform.SelectQuery, previewTransform.ChartConfig, previewTransform.InputColumns, previewTransform.InputParameters, repositoryManager, cancellationToken);
 		    return remoteServerResult;
 	    } 
 	    
@@ -759,9 +756,9 @@ namespace dexih.api.Controllers
 		    switch(previewView.View.SourceType)
 		    {
 			    case EDataObjectType.Table:
-				    return _remoteAgents.PreviewTable(previewView.RemoteAgentId, previewView.HubKey, previewView.DownloadUrl, previewView.View.SourceTableKey.Value, previewView.View.SelectQuery, previewView.InputColumns, itemParameters, false, repositoryManager, cancellationToken);
+				    return _remoteAgents.PreviewTable(previewView.RemoteAgentId, previewView.HubKey, previewView.DownloadUrl, previewView.View.SourceTableKey.Value, previewView.View.SelectQuery, previewView.View.ChartConfig, previewView.InputColumns, itemParameters, false, repositoryManager, cancellationToken);
 			    case EDataObjectType.Datalink:
-				    return _remoteAgents.PreviewDatalink(previewView.RemoteAgentId, previewView.HubKey, previewView.DownloadUrl, previewView.View.SourceDatalinkKey.Value, previewView.View.SelectQuery, previewView.InputColumns, itemParameters, repositoryManager, cancellationToken);
+				    return _remoteAgents.PreviewDatalink(previewView.RemoteAgentId, previewView.HubKey, previewView.DownloadUrl, previewView.View.SourceDatalinkKey.Value, previewView.View.SelectQuery, previewView.View.ChartConfig, previewView.InputColumns, itemParameters, repositoryManager, cancellationToken);
 			    default:
 				    throw new ArgumentOutOfRangeException();
 		    }

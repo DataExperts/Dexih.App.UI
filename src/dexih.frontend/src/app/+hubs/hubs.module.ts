@@ -8,7 +8,7 @@ import { HubsComponent } from './hubs.component';
 import { HubIndexComponent } from './hub-index/hub-index.component';
 import { HubEditComponent } from './hub-edit/hub-edit.component';
 import { HubsSummaryComponent} from './hubs-summary/hubs-summary.component';
-import { HubsSharedDataComponent, PreviewDataComponent} from './hubs-sharedData';
+import { HubsSharedDataComponent, PreviewDataComponent, PreviewDashboardComponent, PreviewDashboardItemComponent, PreviewComponent} from './hubs-sharedData';
 import { ManageComponent } from './manage/manage.component';
 import { TasksIndexComponent } from './tasks/tasks-index';
 import { TaskStatusComponent } from './tasks/task-status';
@@ -32,7 +32,7 @@ import { RemoteAgentTokenComponent} from './remoteAgents/remote-agent-token/remo
         HubIndexComponent,
         HubEditComponent,
         HubsSummaryComponent,
-        HubsSharedDataComponent, PreviewDataComponent,
+        HubsSharedDataComponent, PreviewDataComponent, PreviewDashboardComponent, PreviewDashboardItemComponent, PreviewComponent,
         ManageComponent,
         TasksIndexComponent,
         TaskStatusComponent,

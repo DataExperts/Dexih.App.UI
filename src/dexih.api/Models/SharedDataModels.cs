@@ -1,7 +1,5 @@
-﻿using dexih.functions;
-using dexih.functions.Query;
+﻿using dexih.functions.Query;
 using dexih.operations;
-using dexih.remote.operations;
 using dexih.repository;
 
 namespace dexih.api.Models
@@ -24,6 +22,12 @@ namespace dexih.api.Models
         public EDataObjectType ObjectType { get; set; }
         public SelectQuery SelectQuery { get; set; }
         public InputColumn[] InputColumns { get; set; }
+        public InputParameters Parameters { get; set; }
+    }
+
+    public class PreviewSharedDashboard : HubModelBase
+    {
+        public long DashboardKey { get; set; }
         public InputParameters Parameters { get; set; }
     }
     

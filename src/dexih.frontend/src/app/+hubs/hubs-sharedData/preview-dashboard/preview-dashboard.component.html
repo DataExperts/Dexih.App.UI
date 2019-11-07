@@ -1,0 +1,32 @@
+<div class="container-fluid">
+    <dexih-message #DexihMessage></dexih-message>
+
+    <dexih-widget [title]="'Preview ' + name" iconClass="fa fa-lg fa-fw fa-table" [showCloseButton]="true"
+        (close)="close()">
+
+        <ng-template #header>
+            <dexih-button-refresh class="mr-1" (click)="refresh()" text="Reload"></dexih-button-refresh>
+            <download-button class="ml-1" (download)="downloadData($event)"></download-button>
+        </ng-template>
+
+        <div [ngClass]="{ 'd-none': maximizedItem }">
+            <div style="height:800px">
+                <ng-template [ngIf]="dashboard">
+                    <gridster [options]="options" #gridster>
+                        <gridster-item [item]="{x: item.x, y: item.y, cols: item.cols, rows: item.rows, control: item}"
+                            *ngFor="let item of dashboard.dexihDashboardItems; let i = index;">
+                            <preview-dashboard-item [hubKey]="hubKey" [item]="item" (onMaximize)="maximize($event)">
+                            </preview-dashboard-item>
+                        </gridster-item>
+                    </gridster>
+                </ng-template>
+            </div>
+        </div>
+        
+        <div *ngIf="maximizedItem" style="height:800px;">
+            <preview-dashboard-item [item]="maximizedItem" (onMaximize)="maximize($event)" [isMaximized]="true">
+            </preview-dashboard-item>
+        </div>
+
+    </dexih-widget>
+</div>

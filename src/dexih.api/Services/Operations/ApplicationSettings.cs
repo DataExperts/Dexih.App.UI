@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Threading.Tasks;
-using dexih.functions;
 
 
 namespace dexih.api.Services.Operations

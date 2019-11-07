@@ -1,11 +1,12 @@
-import { ManagedTask, Message, CancelToken } from '../+auth/auth.models';
+import { ManagedTask, Message, CancelToken, PromiseWithCancel } from '../+auth/auth.models';
 import { eLogLevel, LogFactory } from '../../logging';
 import { Injectable, OnDestroy } from '@angular/core';
 import { AuthService } from '../+auth/auth.service';
 import { BehaviorSubject, Observable} from 'rxjs';
 import { eDownloadFormat, DexihActiveAgent, InputColumn, SelectQuery,
-    DexihRemoteAgent, SharedData, eDataObjectType, logLevel, eEnvironment, RemoteAgentSettings, RemoteAgentSettingsSubset } from '../shared/shared.models';
-import { PreviewResults } from '../+hub/hub.models';
+    DexihRemoteAgent, SharedData, eDataObjectType, logLevel, eEnvironment, RemoteAgentSettings,
+    RemoteAgentSettingsSubset, DexihDashboard } from '../shared/shared.models';
+import { PreviewResults, DexihInputParameter } from '../+hub/hub.models';
 
 @Injectable()
 export class HubsService implements OnDestroy {
@@ -82,17 +83,16 @@ export class HubsService implements OnDestroy {
                 this.authService.post<DexihActiveAgent>('/api/SharedData/GetActiveAgent', { hubKey: hubKey}, 'Getting active remote agent...')
                 .then(activeAgent => {
 
-                    this.authService.postRemote<ManagedTask[]>('/api/SharedData/DownloadData', {
+                    this.authService.postRemote<ManagedTask>('/api/SharedData/DownloadData', {
+                        hubKey: hubKey,
                         clientId: this.authService.getWebSocketConnectionId(),
                         downloadFormat: downloadFormat,
                         zipFiles: zipFiles,
                         sharedItems: sharedItems.filter(c => c.hubKey === hubKey),
                         remoteAgentId: activeAgent.instanceId,
                     }, activeAgent, 'Downloading data...', cancelToken)
-                        .then(tasks => {
-                        tasks.forEach(task => {
-                            this.authService.addUpdateTask(task);
-                        })
+                        .then(task => {
+                        this.authService.addUpdateTask(task);
                         resolve(true);
                     }).catch(reason => {
                         this.logger.LogC(() => `downloadData, error: ${reason.message}.`, eLogLevel.Error);
@@ -107,6 +107,7 @@ export class HubsService implements OnDestroy {
     previewData(hubKey: number, objectKey: number, objectType: eDataObjectType,
         inputColumns: InputColumn[], selectQuery: SelectQuery, cancelToken: CancelToken):
         Promise<PreviewResults> {
+
         return new Promise<PreviewResults>((resolve, reject) => {
             this.authService.post<DexihActiveAgent>('/api/SharedData/GetActiveAgent', { hubKey: hubKey }, 'Getting active remote agent...')
             .then(activeAgent => {
@@ -129,36 +130,17 @@ export class HubsService implements OnDestroy {
         });
     }
 
-    // // gets preview data from a download stream.
-    // previewData(url: string, cancelToken: CancelToken):
-    //     Promise<{name: string, columns: Array<any>, data: Array<any> }> {
-    //         return new Promise<{name: string, columns: Array<any>, data: Array<any> }>((resolve, reject) => {
+    getDashboard(hubKey: number, dashboardKey: number): Promise<DexihDashboard> {
 
-    //             this.authService.get<PreviewResults>(url, 'Getting preview results...', false, cancelToken).then(data => {
-    //                 let tableResult: DataPack = data;
-    //                 let columns = [];
-
-    //                 tableResult.columns.forEach((c, index) => {
-    //                     let name = c.logicalName ? c.logicalName : c.name;
-    //                     switch (c.dataType) {
-    //                         case eTypeCode.DateTime:
-    //                             columns.push({ name: index, title: name, format: 'Date'});
-    //                             break;
-    //                             case eTypeCode.Json:
-    //                             case eTypeCode.Xml:
-    //                             columns.push({ name: index, title: name, format: 'Code'});
-    //                             break;
-    //                         default:
-    //                             columns.push({ name: index, title: name, format: ''});
-    //                     }
-    //                 });
-    //                 resolve({name: tableResult.name, columns: columns, data: tableResult.data});
-    //             }).catch(reason => {
-    //                 // this.addHubMessage(reason);
-    //                 reject(reason);
-    //             });
-    //     });
-    // }
+        return new Promise<DexihDashboard>((resolve, reject) => {
+            this.authService.post<DexihDashboard>('/api/SharedData/PreviewDashboard', {
+                hubKey: hubKey,
+                dashboardKey: dashboardKey,
+            }, 'Getting dashboard download locations...').then(dashboard => {
+                resolve(dashboard);
+            }).catch(reason => reject(reason));
+        });
+    }
 
     remoteAgents(): Promise<Array<DexihRemoteAgent>> {
         return this.authService.post<Array<DexihRemoteAgent>>('/api/Account/GetUserRemoteAgents', { }, 'Getting user remote agents...');

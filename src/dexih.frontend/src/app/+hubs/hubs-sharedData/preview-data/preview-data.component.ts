@@ -1,11 +1,11 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { DexihMessageComponent } from '../../../shared/ui/dexihMessage/index';
 import { HubsService} from '../../hubs.service';
 import { CancelToken } from '../../../+auth/auth.models';
-import { InputColumn, DexihColumnBase, SelectQuery, eDownloadFormat, SharedData, eDataObjectType } from '../../../shared/shared.models';
+import { InputColumn, DexihColumnBase, SelectQuery, eDownloadFormat, SharedData, eDataObjectType, ChartConfig } from '../../../shared/shared.models';
 
 @Component({
 
@@ -13,7 +13,13 @@ import { InputColumn, DexihColumnBase, SelectQuery, eDownloadFormat, SharedData,
     templateUrl: './preview-data.component.html'
 })
 export class PreviewDataComponent implements OnInit, OnDestroy {
+    @Input() public objectType: eDataObjectType;
+    @Input() public objectKey: number;
+    @Input() public hubKey: number;
+    @Input() public showToolbar = false;
+
     @ViewChild('DexihMessage', { static: true }) public dexihMessage: DexihMessageComponent;
+
 
     private _subscription: Subscription;
 
@@ -27,15 +33,12 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
 
     public name = 'loading...';
 
-
-    objectKey: number;
-    objectType: eDataObjectType;
-    hubKey: number;
-
     columns: Array<any>;
     selectQuery: SelectQuery = new SelectQuery();
 
     public data: Array<any>;
+    public chartConfig: ChartConfig;
+    public showChart = false;
 
     private cancelToken = new CancelToken();
 
@@ -48,15 +51,9 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
     ngOnInit() {
         try {
             this._subscription = combineLatest(
-                this.route.params,
                 this.hubsService.getSharedDataIndex('', [], 50, false)
             ).subscribe(result => {
-                let params = result[0];
-                let items = result[1];
-
-                this.hubKey = +params['hubKey'];
-                this.objectType = +params['objectType'];
-                this.objectKey = +params['objectKey'];
+                let items = result[0];
 
                 this.selectQuery.rows = 100;
 
@@ -90,6 +87,12 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
                 this.columns = result.columns;
                 this.data = result.data;
                 this.name = result.name;
+                this.chartConfig = result.chartConfig;
+                if (this.chartConfig) {
+                    this.showChart = true;
+                } else {
+                    this.showChart = false;
+                }
             }).catch(reason => {
                 this.dexihMessage.addMessage(reason);
                 this.data = [];

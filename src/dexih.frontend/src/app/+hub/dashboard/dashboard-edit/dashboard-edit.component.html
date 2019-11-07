@@ -6,7 +6,7 @@
 			<dexih-button-edit class="mr-1" (click)="toggleEdit()" [text]="formsService.currentForm?.controls.runTime.value.showEdit ? 'Hide Edit' : 'Edit'"></dexih-button-edit>
 			<dexih-button iconClass="fa fa-lock" class="mr-1" (click)="toggleLock()" [text]="formsService.currentForm?.controls.runTime.value.lock ? 'Unlock' : 'Lock'"></dexih-button>
 			<dexih-button-refresh class="mr-1"  (click)="refresh()"></dexih-button-refresh>
-			<dexih-button-dropdown class="mr-1" text="Add">
+			<dexih-button-dropdown class="mr-1" iconClass="fa fa-plus" text="Add">
 				<li *ngFor="let view of views"><a class="dropdown-item" (click)="add(view.key)">{{view.name}}</a></li>
 			</dexih-button-dropdown>
 			<download-button class="mr-1" (download)="download($event)"></download-button>
