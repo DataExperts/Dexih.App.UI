@@ -3,56 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1be1a9df-0647-4351-ace4-9bafd064437b" name="Default" comment="minor">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Controllers/AccountController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Controllers/AccountController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Controllers/AdminController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Controllers/AdminController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Controllers/DevController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Controllers/DevController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Controllers/HubController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Controllers/HubController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Controllers/ReaderController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Controllers/ReaderController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Controllers/RemoteController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Controllers/RemoteController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Controllers/SharedDataController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Controllers/SharedDataController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Hubs/Browser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Hubs/Browser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Hubs/RemoteAgent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Hubs/RemoteAgent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/MessagePackInputFormatter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/MessagePackInputFormatter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Models/AccountModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Models/AccountModels.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Models/AdminModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Models/AdminModels.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Models/HubModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Models/HubModels.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Models/RemoteModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Models/RemoteModels.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Models/SharedDataModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Models/SharedDataModels.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Services/BackgroundTaskQueue/BackgroundTaskQueue.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Services/BackgroundTaskQueue/BackgroundTaskQueue.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Services/ErrorLogger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Services/ErrorLogger.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Services/Message/MessageServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Services/Message/MessageServices.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Services/Operations/ApplicationSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Services/Operations/ApplicationSettings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Services/Operations/ClientMessage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Services/Operations/ClientMessage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Services/Operations/DexihOperations.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Services/Operations/DexihOperations.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Services/Remote/IRemoteAgents.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Services/Remote/IRemoteAgents.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Services/Remote/RemoteAgentProperties.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Services/Remote/RemoteAgentProperties.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Services/Remote/RemoteAgents.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Services/Remote/RemoteAgents.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Services/ValidateSubscriptionAttribute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Services/ValidateSubscriptionAttribute.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/dashboard/dashboard-edit/dashboard-edit.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/dashboard/dashboard-edit/dashboard-edit.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/dashboard/dashboard-edit/dashboard-edit.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/dashboard/dashboard-edit/dashboard-edit.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/dashboard/dashboard-edit/item/dashboard-item.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/dashboard/dashboard-edit/item/dashboard-item.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/hub.models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/hub.models.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/hub.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/hub.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/view/view-edit/view-edit.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/view/view-edit/view-edit.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/view/view-edit/view-edit.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/view/view-edit/view-edit.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs-sharedData/hubs-sharedData.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs-sharedData/hubs-sharedData.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs-sharedData/hubs-sharedData.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs-sharedData/hubs-sharedData.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs-sharedData/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs-sharedData/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs-sharedData/preview-data/preview-data.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs-sharedData/preview-data/preview-data.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs-sharedData/preview-data/preview-data.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs-sharedData/preview-data/preview-data.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs.routing.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs.routing.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/shared.models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/shared.models.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/ui/chartBuilder/chart-builder.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/ui/chartBuilder/chart-builder.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/ui/chartBuilder/chart-view.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/ui/chartBuilder/chart-view.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/ui/icons/download-button/download-button.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/ui/icons/download-button/download-button.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/ui/icons/download-button/download-button.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/ui/icons/download-button/download-button.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/ui/queryBuilder/query-builder.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/ui/queryBuilder/query-builder.component.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -572,7 +522,6 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5C44427D-0C55-4503-8458-C9D10FEB7503/47/0f069627/GenericCollectionFormatter`2.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2D506C52-CF4B-4BDB-B896-80B6E2C92982/f2/9ed38463/ChangeTracker.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/AFEF21B5-7AD6-402F-8DF4-C5299BA699E2/0/IIListProvider.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2D506C52-CF4B-4BDB-B896-80B6E2C92982/11/cfe6be22/IStateManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.builtIn/GeometryFunctions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/dexih.api/Controllers/DevController.cs" root0="FORCE_HIGHLIGHTING" />
@@ -657,7 +606,6 @@
     <setting file="file://$PROJECT_DIR$/src/dexih.api/Startup.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/38/1fd98ef1/Int16.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3F9A6BF9-CC47-4E04-95B6-4187B8F17D2C/2c/9e0d3af2/Stream.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A17E1E26-FEDA-44AE-95FD-68D5ECA36B68/51/6315a504/ConsoleLoggerOptionsSetup.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/298B1E10-86F0-4686-9486-E3DC04D2ECEF/02/236b4aec/StringValues.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A17E1E26-FEDA-44AE-95FD-68D5ECA36B68/00/54f079e9/ConsoleLoggerExtensions.cs" root0="SKIP_HIGHLIGHTING" />
@@ -716,8 +664,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/Extensions/JsonExtensions.cs" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihRemoteAgent.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Transform.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihFunctionParameterBase.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/dexih_repositoryContext.cs" />
@@ -761,12 +707,14 @@
         <option value="$PROJECT_DIR$/src/dexih.api/Services/Remote/RemoteAgents.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Models/HubModels.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Controllers/HubController.cs" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/RemoteOperations/RemoteOperations.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/StreamJsonCompact.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Models/SharedDataModels.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihDashboard.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihDashboardItem.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Controllers/SharedDataController.cs" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/RemoteOperations/IRemoteOperations.cs" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/RemoteOperations/RemoteOperations.cs" />
+        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.connections.azure/dexih.connections.azure.cs" />
       </list>
     </option>
   </component>
@@ -952,17 +900,7 @@
       <serviceView>
         <option name="contentProportion" value="0.25275657" />
         <treeState>
-          <expand>
-            <path>
-              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@894fad1b" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-            </path>
-            <path>
-              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@894fad1b" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@98359695" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-            </path>
-          </expand>
+          <expand />
           <select />
         </treeState>
       </serviceView>
@@ -1572,7 +1510,9 @@
       <workItem from="1572569115897" duration="90000" />
       <workItem from="1572569343947" duration="869000" />
       <workItem from="1572821703896" duration="10560000" />
-      <workItem from="1572992238525" duration="15859000" />
+      <workItem from="1572992238525" duration="18660000" />
+      <workItem from="1573167429808" duration="1187000" />
+      <workItem from="1573168954504" duration="1963000" />
     </task>
     <task id="LOCAL-00001" summary="Connections to remote agents working.">
       <created>1509234944099</created>
@@ -1832,6 +1772,19 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="108" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/RemoteOperations/RemoteOperations.cs</url>
+          <line>912</line>
+          <properties documentPath="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/RemoteOperations/RemoteOperations.cs" initialLine="912">
+            <startOffsets>
+              <option value="40626" />
+            </startOffsets>
+            <endOffsets>
+              <option value="40814" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="149" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
