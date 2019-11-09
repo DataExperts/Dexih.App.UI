@@ -6,7 +6,7 @@ import { FormGroup, FormArray } from '@angular/forms';
 import { HubFormsService } from '../../../hub.forms.service';
 import { HubCache, deltaTypes, securityFlags } from '../../../hub.models';
 import { eTableType, DexihConnection, ConnectionReference,
-    eConnectionCategory, DexihTableColumn, eConnectionPurpose, DexihTable } from '../../../../shared/shared.models';
+    eConnectionCategory, DexihTableColumn, eConnectionPurpose, DexihTable, eTableTypeItems } from '../../../../shared/shared.models';
 import { TypeCodes } from '../../../hub.remote.models';
 import { CancelToken } from '../../../../+auth/auth.models';
 
@@ -39,7 +39,7 @@ export class TableEditPropertiesComponent implements OnInit, OnDestroy {
     deltaTypes = deltaTypes;
     securityFlags = securityFlags;
     eTableType = eTableType;
-    tableTypes = Object.keys(eTableType);
+    eTableTypeItems = eTableTypeItems;
 
     public connections: DexihConnection[];
     public connection: DexihConnection;

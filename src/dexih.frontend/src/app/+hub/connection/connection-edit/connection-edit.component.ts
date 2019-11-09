@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { HubCache, connectionPurposes, eCacheStatus } from '../../hub.models';
+import { HubCache, eCacheStatus } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { AuthService } from '../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { HubFormsService } from '../../hub.forms.service';
 import { LogFactory, eLogLevel } from '../../../../logging';
-import { eConnectionPurpose, eConnectionCategory, ConnectionReference, DexihConnection, RemoteLibraries } from '../../../shared/shared.models';
+import { eConnectionPurpose, eConnectionCategory, ConnectionReference, DexihConnection, RemoteLibraries, eConnectionPurposeItems } from '../../../shared/shared.models';
 import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
@@ -35,7 +35,7 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
 
   public databases: Array<string> = [];
 
-  public connectionPurposes = connectionPurposes;
+  public eConnectionPurposeItems = eConnectionPurposeItems.filter( c => c.key > 0);
   public eConnectionPurpose = eConnectionPurpose;
   public eConnectionCategory = eConnectionCategory;
 

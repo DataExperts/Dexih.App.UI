@@ -359,7 +359,6 @@ export class ApiData {
     public createDate: Date = null;
     public updateDate: Date = null;
     public isValid: boolean = true;
-    public downloadKey: string;
    }
    
    export class DexihDashboardItemParameter {
@@ -419,10 +418,10 @@ export class ApiData {
     public sourceDatalinkTableKey: number = 0;
     public auditConnectionKey: number = null;
     public updateStrategy: eUpdateStrategy = eUpdateStrategy.Reload;
-    public loadStrategy: eTransformWriterMethod = null;
+    public loadStrategy: eTransformWriterMethod = eTransformWriterMethod.Bulk;
     public datalinkType: eDatalinkType = null;
-    public rowsPerCommit: number = 0;
-    public rowsPerProgress: number = 0;
+    public rowsPerCommit: number = 1000;
+    public rowsPerProgress: number = 1000;
     public rollbackOnFail: boolean = false;
     public isQuery: boolean = false;
     public maxRows: number = 0;
@@ -570,10 +569,10 @@ export class ApiData {
    export class DexihDatalinkTable {
     public sourceTableKey: number = null;
     public sourceDatalinkKey: number = null;
-    public rowsStartAt: number = null;
-    public rowsEndAt: number = null;
-    public rowsIncrement: number = null;
-    public sourceType: eSourceType = null;
+    public rowsStartAt: number = 1;
+    public rowsEndAt: number = 1;
+    public rowsIncrement: number = 1;
+    public sourceType: eSourceType = eSourceType.Table;
     public dexihDatalinkColumns: DexihDatalinkColumn[] = [];
     public key: number = 0;
     public name: string = null;
@@ -848,16 +847,6 @@ export class ApiData {
     public isValid: boolean = true;
    }
    
-   export class DexihHubNamedEntity {
-    public key: number = 0;
-    public name: string = null;
-    public description: string = null;
-    public hubKey: number = 0;
-    public createDate: Date = null;
-    public updateDate: Date = null;
-    public isValid: boolean = true;
-   }
-   
    export class DexihHubUser {
     public hubKey: number = 0;
     public userId: string = null;
@@ -1012,7 +1001,7 @@ export class ApiData {
    }
    
    export class DexihView {
-    public viewType: eViewType = null;
+    public viewType: eViewType = eViewType.Table;
     public sourceTableKey: number = null;
     public sourceDatalinkKey: number = null;
     public sourceType: eDataObjectType = null;
@@ -2014,7 +2003,6 @@ export class ApiData {
     Source = 1,
     Managed = 2,
     Target = 3,
-    Internal = 4,
    }
    
    export const eConnectionPurposeItems = [
@@ -2022,7 +2010,6 @@ export class ApiData {
     {key: eConnectionPurpose.Source, name: 'Source', description: ''},
     {key: eConnectionPurpose.Managed, name: 'Managed', description: ''},
     {key: eConnectionPurpose.Target, name: 'Target', description: ''},
-    {key: eConnectionPurpose.Internal, name: 'Internal', description: ''},
    ]
    
    export enum eDatalinkType {

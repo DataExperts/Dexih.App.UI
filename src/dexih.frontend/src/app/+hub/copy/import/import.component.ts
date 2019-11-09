@@ -86,7 +86,7 @@ export class ImportComponent implements OnInit, OnDestroy {
     public uploadFile(event) {
         let files = event.srcElement.files;
         this.doImport(files[0]);
-        this.fileInput.nativeElement.value = '';
+        // this.fileInput.nativeElement.value = '';
     }
 
     public filesDrop(files: any) {
@@ -110,6 +110,10 @@ export class ImportComponent implements OnInit, OnDestroy {
         });
 
         this._tableData.next(objects);
+    }
+
+    public reset() {
+        this._tableData.next(null);
     }
 
     public importSelected(items) {

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { HubService } from '../../hub.service';
-import { HubCache, connectionPurposes } from '../../hub.models';
+import { HubCache } from '../../hub.models';
 import { AuthService } from '../../../+auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
@@ -20,8 +20,9 @@ export class ConnectionIndexComponent implements OnInit, OnDestroy {
     pageTitle: string;
 
     hubCache: HubCache;
-    purposeFilter: string;
-    connectionPurposes = connectionPurposes;
+    purposeFilter: eConnectionPurpose;
+    eConnectionPurpose = eConnectionPurpose;
+    eConnectionPurposeItems = eConnectionPurposeItems;
 
     connections: Array<DexihConnection>;
 
@@ -58,11 +59,10 @@ export class ConnectionIndexComponent implements OnInit, OnDestroy {
                 let queryParams = result[2];
                 this.hubCache = result[3];
 
-                this.purposeFilter = queryParams['purposeFilter'];
-                if (!this.purposeFilter) { this.purposeFilter = 'All'; }
+                this.purposeFilter = + queryParams['purposeFilter'];
+                if (!this.purposeFilter) { this.purposeFilter = 0; }
 
-
-                this.pageTitle = this.purposeFilter + ' Connections';
+                this.pageTitle = eConnectionPurpose[this.purposeFilter] + ' Connections';
                 this.updateConnections();
 
             });
@@ -97,11 +97,11 @@ export class ConnectionIndexComponent implements OnInit, OnDestroy {
     async updateConnections() {
         if (this.hubCache && this.hubCache.isLoaded()) {
             let connections: Array<DexihConnection>;
-            if (this.purposeFilter === 'All' || !this.purposeFilter) {
+            if (this.purposeFilter === 0 || !this.purposeFilter) {
                 connections = this.hubCache.hub.dexihConnections;
             } else {
                 connections = this.hubCache.hub.dexihConnections
-                    .filter(c => c.purpose === eConnectionPurpose[this.purposeFilter]);
+                    .filter(c => c.purpose === this.purposeFilter);
             }
 
             let tableData = []

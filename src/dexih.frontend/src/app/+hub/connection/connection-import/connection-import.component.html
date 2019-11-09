@@ -8,13 +8,13 @@
 		[padding]="false"
 	>
 		<ng-template #header>
-				<dexih-button-dropdown buttonClass="btn-sm btn-outline-primary" iconClass="fa fa-filter" [text]="tableFilter" title="Filter by import status" [pullRight]="true">
+				<dexih-button-dropdown [autoCompact]="false" buttonClass="btn-sm btn-primary" iconClass="fa fa-filter" [text]="tableFilter" title="Filter by import status" [pullRight]="true">
 					<a class="dropdown-item" [class.active]="tableFilter=='All'" (click)="setTableFilter('All')">All</a>
 					<a class="dropdown-item" [class.active]="tableFilter=='Imported'" (click)="setTableFilter('Imported')">Imported</a>
 					<a class="dropdown-item" [class.active]="tableFilter=='NonImported'" (click)="setTableFilter('NonImported')">Non Imported</a>
 				</dexih-button-dropdown>
 
-				<dexih-button-dropdown class="ml-1" buttonClass="btn-sm btn-outline-primary" iconClass="fa fa-filter" [text]="viewFilter" title="Filter by tables/views" [pullRight]="true">
+				<dexih-button-dropdown class="ml-1" [autoCompact]="false" buttonClass="btn-sm btn-primary" iconClass="fa fa-filter" [text]="viewFilter" title="Filter by tables/views" [pullRight]="true">
 					<a class="dropdown-item" [class.active]="viewFilter=='All'" (click)="setViewFilter('All')">All</a>
 					<a class="dropdown-item" [class.active]="viewFilter=='Imported'" (click)="setViewFilter('Tables')">Tables</a>
 					<a class="dropdown-item" [class.active]="viewFilter=='NonImported'" (click)="setViewFilter('Views')">Views</a>

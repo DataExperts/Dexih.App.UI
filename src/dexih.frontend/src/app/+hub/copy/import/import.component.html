@@ -1,5 +1,5 @@
 <div class="container">
-    <dexih-widget title="Import Objects"          iconClass="fa fa-lg fa-fw fa-level-down"          [showCloseButton]="true"
+    <dexih-widget *ngIf="!(tableData | async)?.length" title="Import Objects"  iconClass="fa fa-lg fa-fw fa-level-down"  [showCloseButton]="true"
         (close)="close()"     >
         <ul class="list-group">
             <li class="list-group-item list-group-item-info rounded-0">
@@ -38,8 +38,8 @@
 
     </dexih-widget>
 
-    <dexih-widget *ngIf="(tableData | async)?.length > 0" title="Import Package" iconClass="fa fa-lg fa-fw fa-level-down">
-        <div *ngIf="import?.warnings?.length > 0" class="alert alert-warning">
+    <dexih-widget *ngIf="(tableData | async)?.length > 0" title="Import Package" iconClass="fa fa-lg fa-fw fa-level-down" [showCloseButton]="true" (close)="reset()">
+        <div *ngIf="import?.warnings?.length > 0" class="alert alert-warning" >
             <ul *ngFor="let warning of import.warnings" class="list-item">
                 Warning: {{warning}}
             </ul>
@@ -47,11 +47,12 @@
 
         <dexih-table [enableMultiSelect]="true" [columns]="columns" [dataObservable]="tableData">
             <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-                <dexih-button iconClass="fa fa-level-down" buttonClass="btn-primary" (click)="importSelected(items)" text="Import Selected"></dexih-button>
+                <dexih-button iconClass="fa fa-upload" buttonClass="btn-primary" (click)="importSelected(items)" text="Import Selected"></dexih-button>
             </ng-template>
             
             <ng-template #actions let-items="items">
-                    <dexih-button iconClass="fa fa-level-down" buttonClass="btn-primary" (click)="importAll()" text="Import All"></dexih-button>
+                    <dexih-button iconClass="fa fa-cloud-upload" buttonClass="btn-primary" (click)="importAll()" text="Import All"></dexih-button>
+                    <dexih-button-close class="ml-1" (click)="reset()"></dexih-button-close>
                 </ng-template>
             </dexih-table>
 

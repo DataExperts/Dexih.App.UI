@@ -150,8 +150,8 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
   // }
 
   refresh() {
-    this.hubService.previewDashboard(this.formsService.currentForm.value, this.formsService.currentForm.value.parameters,
-        this.cancelToken).then(keys => {
+    this.hubService.previewDashboard(this.formsService.currentForm.value,
+      this.formsService.currentForm.value.parameters, this.cancelToken).then(keys => {
       let items = <FormArray> this.formsService.currentForm.controls.dexihDashboardItems;
 
       keys.forEach(url => {

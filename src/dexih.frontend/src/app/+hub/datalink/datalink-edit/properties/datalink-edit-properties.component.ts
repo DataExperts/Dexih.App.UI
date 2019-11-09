@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { HubService } from '../../../hub.service';
-import { AuthService } from '../../../../+auth/auth.service';
 import { DatalinkEditService } from '../datalink-edit.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { FormGroup } from '@angular/forms';
@@ -20,7 +19,7 @@ export class DatalinkEditPropertiesComponent implements OnInit, OnDestroy {
     private _subscription: Subscription;
 
     public eConnectionPurpose = eConnectionPurpose;
-    eDatalinkTypeItems = eDatalinkTypeItems;
+    eDatalinkTypeItems = eDatalinkTypeItems.filter(c => c.key > 0);
 
     constructor(
         private hubService: HubService,

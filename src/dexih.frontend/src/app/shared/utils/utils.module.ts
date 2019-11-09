@@ -1,7 +1,8 @@
 import {NgModule} from '@angular/core';
 import {TimeDirective} from './time.directive';
 import { FieldFilterPipe } from './field-filter.pipe';
-import { BooleanFilterPipe } from './boolean-filter.pipe';
+import { EqualFilterPipe } from './equal-filter.pipe';
+import { GtFilterPipe } from './gt-filter.pipe';
 import { IsValidFilterPipe } from './isValid-filter.pipe';
 import { AllFilterPipe } from './all-filter.pipe';
 import { SortPipe } from './sort.pipe';
@@ -14,7 +15,8 @@ import { DragZoneDirective } from './dragzone';
   declarations: [
     TimeDirective,
     FieldFilterPipe,
-    BooleanFilterPipe,
+    EqualFilterPipe,
+    GtFilterPipe,
     IsValidFilterPipe,
     AllFilterPipe,
     SortPipe,
@@ -29,7 +31,8 @@ import { DragZoneDirective } from './dragzone';
   exports: [
     TimeDirective,
     FieldFilterPipe,
-    BooleanFilterPipe,
+    EqualFilterPipe,
+    GtFilterPipe,
     IsValidFilterPipe,
     AllFilterPipe,
     SortPipe,

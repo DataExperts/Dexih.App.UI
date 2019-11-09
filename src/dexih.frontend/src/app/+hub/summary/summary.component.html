@@ -127,7 +127,7 @@
                                 {{sharedObject.displayName}}
                             </div>
                             <span
-                                class="badge badge-primary badge-pill">{{(hubCache.hub[sharedObject.cacheProperty] | booleanFilter :'isValid':true ).length}}
+                                class="badge badge-primary badge-pill">{{(hubCache.hub[sharedObject.cacheProperty] | equalFilter :'isValid':true ).length}}
                             </span>
                         </div>
                         <div class="small">{{sharedObject.description}}</div>

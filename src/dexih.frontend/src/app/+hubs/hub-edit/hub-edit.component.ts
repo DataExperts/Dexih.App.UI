@@ -24,7 +24,7 @@ export class HubEditComponent implements OnInit, OnDestroy {
 
   hub: DexihHubAuth;
 
-  SharedAccessItems = eSharedAccessItems;
+  SharedAccessItems = eSharedAccessItems.filter(c => c.key > 0);
 
   generatingKey = false;
   savingHub = false;

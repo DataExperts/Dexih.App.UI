@@ -2092,11 +2092,11 @@ export const updateStrategies = [
 //     Internal = <any>'Internal'
 // }
 
-export const connectionPurposes = [
-    {key: eConnectionPurpose.Source, name: 'Source Database/Service'},
-    {key: eConnectionPurpose.Managed, name: 'Managed (by Information Hub) Database'},
-    {key: eConnectionPurpose.Target, name: 'Target Database'},
-]
+// export const connectionPurposes = [
+//     {key: eConnectionPurpose.Source, name: 'Source Database/Service'},
+//     {key: eConnectionPurpose.Managed, name: 'Managed (by Information Hub) Database'},
+//     {key: eConnectionPurpose.Target, name: 'Target Database'},
+// ]
 
 // export enum eParameterDirection {
 //     Input = <any>'Input',

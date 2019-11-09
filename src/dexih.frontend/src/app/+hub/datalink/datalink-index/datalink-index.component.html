@@ -5,9 +5,9 @@
 		(close)="close()"
 	>
 		<ng-template #header>
-			<dexih-button-dropdown buttonClass="btn-sm btn-outline-secondary" iconClass="fa fa-filter" [text]="typeFilter" title="Filter by a purpose" [pullRight]="true">
+			<dexih-button-dropdown [autoCompact]="false" buttonClass="btn btn-sm btn-primary" iconClass="fa fa-filter" [text]="eDatalinkType[typeFilter]" title="Filter by a purpose" [pullRight]="true">
 				<a class="dropdown-item" [class.active]="typeFilter=='All'" routerLink='.' [queryParams]="{typeFilter: 'All'}" title="All Datalinks">All</a>
-				<a *ngFor="let datalinkType of datalinkTypes" [class.active]="typeFilter==datalinkType.key" class="dropdown-item" routerLink='.' [queryParams]="{typeFilter: datalinkType.key}" [title]="datalinkType.name">{{datalinkType.key}}</a>
+				<a *ngFor="let datalinkType of eDatalinkTypeItems | gtFilter: 'key': 0" [class.active]="typeFilter==datalinkType.key" class="dropdown-item" routerLink='.' [queryParams]="{typeFilter: datalinkType.key}" [title]="datalinkType.name">{{datalinkType.name}}</a>
 			</dexih-button-dropdown>
 		</ng-template>
 
@@ -20,6 +20,7 @@
 			>
 				<ng-template #actions let-items="items">
 					<actions-datalink-button [datalinks]="items" ></actions-datalink-button>
+
 				</ng-template>
 
 				<ng-template #rowStatus select="rowStatus" let-item="item">

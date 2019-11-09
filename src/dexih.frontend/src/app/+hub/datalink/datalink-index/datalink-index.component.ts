@@ -13,7 +13,7 @@ import { eDatalinkType, DexihDatalink, eSourceType, eSharedObjectType, eDatalink
 })
 export class DatalinkIndexComponent implements OnInit, OnDestroy {
     hubCache: HubCache;
-    typeFilter: string;
+    typeFilter: number;
 
     private _subscription: Subscription;
     private _hubCacheChangeSubscription: Subscription;
@@ -51,9 +51,9 @@ export class DatalinkIndexComponent implements OnInit, OnDestroy {
 
                 if (!this.hubCache.isLoaded()) { return; }
 
-                this.typeFilter = queryParams['typeFilter'];
+                this.typeFilter = + queryParams['typeFilter'];
                 if (!this.typeFilter) {
-                    this.typeFilter = 'All'
+                    this.typeFilter = 0;
                 }
                 this.updateDatalinks();
             });
@@ -79,10 +79,10 @@ export class DatalinkIndexComponent implements OnInit, OnDestroy {
                 this._tableData.next(new Array<DexihDatalink>());
             } else {
 
-                if (this.typeFilter === 'All' || !this.typeFilter) {
+                if (this.typeFilter === 0 || !this.typeFilter) {
                     newDatalinks = this.hubCache.hub.dexihDatalinks;
                 } else {
-                    newDatalinks = this.hubCache.hub.dexihDatalinks.filter(d => d.datalinkType === eDatalinkType[this.typeFilter]);
+                    newDatalinks = this.hubCache.hub.dexihDatalinks.filter(d => d.datalinkType === this.typeFilter);
                 }
 
                 let datalinkData = new Array<any>();

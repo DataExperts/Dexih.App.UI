@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'booleanFilter',
+  name: 'equalFilter',
 })
-export class BooleanFilterPipe implements PipeTransform {
+export class EqualFilterPipe implements PipeTransform {
 
   transform(items: any[], field: string, value = true): any[] {
     if (!items) {

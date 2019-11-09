@@ -3,8 +3,8 @@ import { HubService } from '../../hub.service';
 import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../+auth/auth.service';
-import { HubCache, connectionPurposes } from '../../hub.models';
-import { DexihTable, eConnectionCategory, eSharedObjectType, eConnectionPurposeItems, eConnectionPurpose } from '../../../shared/shared.models';
+import { HubCache } from '../../hub.models';
+import { DexihTable, eConnectionCategory, eSharedObjectType, eConnectionPurposeItems, eConnectionPurpose, eTableType } from '../../../shared/shared.models';
 
 @Component({
     selector: 'table-index',
@@ -19,16 +19,18 @@ export class TableIndexComponent implements OnInit, OnDestroy {
     purposeFilter: string;
     connectionKey: number;
     connectionName: string;
-    connectionPurposes = connectionPurposes;
+    eConnectionPurposeItems = eConnectionPurposeItems;
+    eConnectionPurpose = eConnectionPurpose;
 
     title: string;
 
     columns = [
         { iconClass: 'sharedIcon', tooltip: 'sharedToolTip', width: '1%', align: 'center' },
         { name: 'logicalName', title: 'Logical Name', format: 'Md', footer: 'description' },
-        { name: 'tableType', title: 'Table Type', format: '' },
-        { name: 'connectionName', title: 'Connection', format: '' },
         { name: 'name', title: 'Table Name'  },
+        { name: 'connectionType', title: 'Connection Type', format: '' },
+        { name: 'connectionName', title: 'Connection', format: '' },
+        { name: 'tableType', title: 'Table Type', format: 'Enum', enum: eTableType },
         { name: 'updateDate', title: 'Last Updated', format: 'Date' },
     ];
 
@@ -117,9 +119,10 @@ export class TableIndexComponent implements OnInit, OnDestroy {
 
                     tableData.push({
                         key: table.key,
-                        tableType: connection ? eConnectionPurpose[connection.purpose] : 'undefined',
+                        connectionType: connection ? eConnectionPurpose[connection.purpose] : 'undefined',
                         connectionName: connection ? connection.name : 'undefined',
                         description: table.description,
+                        tableType: table.tableType,
                         name: name,
                         logicalName: table.logicalName,
                         updateDate: table.updateDate,

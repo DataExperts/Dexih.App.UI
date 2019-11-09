@@ -10,9 +10,7 @@ import {
     eCacheStatus,
     PreviewResults,
     FlatFilesReady,
-    DashboardUrl,
-    DexihInputParameter,
-    eMappingStatus
+    DexihInputParameter
 } from './hub.models';
 import { RemoteAgentStatus, transformTypes } from './hub.remote.models';
 import { DexihDatajob, DexihTable, DexihHub, DexihRemoteAgentHub, DexihConnection, DexihDatalink, InputColumn,
@@ -21,8 +19,8 @@ import { DexihDatajob, DexihTable, DexihHub, DexihRemoteAgentHub, DexihConnectio
     TransformProperties, Import, eImportAction, eRunStatus, eDatalinkType, eDeltaType, eConnectionPurpose, eFlatFilePath,
     ApiData, DownloadObject, eDownloadFormat, DexihActiveAgent, ImportObject, ePermission, eTypeCode, eDataObjectType,
     eSharedObjectType, RemoteLibraries, ConnectionReference, TransformReference,
-    FunctionReference, eFunctionType, ClientMessage, eClientCommand, HubUser, eDownloadUrlType, ChartConfig } from '../shared/shared.models';
-import { debounce, filter, first, take } from 'rxjs/operators';
+    FunctionReference, eFunctionType, ClientMessage, eClientCommand, HubUser } from '../shared/shared.models';
+import { filter, take, first } from 'rxjs/operators';
 
 @Injectable()
 export class HubService implements OnInit, OnDestroy {
@@ -149,7 +147,7 @@ export class HubService implements OnInit, OnDestroy {
     }
 
     getHubCachePromise(): Promise<HubCache> {
-        return this._hubCache.pipe(filter(c => c !== null && c.status === eCacheStatus.Loaded), take(1)).toPromise();
+        return this._hubCache.asObservable().pipe(first()).toPromise();
     }
 
     // gets the hub cache
@@ -814,13 +812,12 @@ export class HubService implements OnInit, OnDestroy {
     }
 
     // updates all the information on the remoteAgent.
-    getRemoteAgentStatus(hubCache: HubCache): Promise<boolean> {
+    private getRemoteAgentStatus(hubCache: HubCache): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             let remoteAgent = this.getRemoteAgentCurrent();
             if (remoteAgent) {
                 let remoteAgentPromise = this.hubPostRemote<RemoteAgentStatus>('/api/Hub/GetRemoteAgentStatus', {
-                    hubKey: hubCache.hub.hubKey,
-                    }, 'Getting the remote agent status...', null);
+                    hubKey: hubCache.hub.hubKey }, 'Getting the remote agent status...', null);
                 let globalCachePromise = this.authService.getGlobalCachePromise();
                 let hubPromise = this.getHubCachePromise();
 

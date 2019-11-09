@@ -1857,7 +1857,7 @@ export class AuthService implements OnDestroy {
     }
 
     public getGlobalCachePromise(): Promise<CacheManager> {
-        return this.getGlobalCacheObservable().toPromise();
+        return this.getGlobalCacheObservable().pipe(first()).toPromise();
     }
 }
 

@@ -14,7 +14,7 @@
 				<ng-template #selectedItemAction select="selectedItemAction" let-hub="item">
 					<dexih-button-edit class="mr-1" [routerLink]="['hub-edit', hub.hubKey]" queryParamsHandling preserveFragment class="mr-1"></dexih-button-edit>
 					<dexih-button-open class="mr-1" [routerLink]="['/hub', hub.hubKey]" queryParamsHandling preserveFragment></dexih-button-open>
-					<dexih-button [routerLink]="['/hub', hub.hubKey, 'manage', 'manage-users']" queryParamsHandling preserveFragment text="Permissions"></dexih-button>
+					<dexih-button [routerLink]="['/hub', hub.hubKey, 'manage', 'manage-users']" iconClass="fa fa-lock" queryParamsHandling preserveFragment text="Permissions"></dexih-button>
 				</ng-template>
 
 				<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">

@@ -45,7 +45,7 @@
                 </div>
 
                 <section *ngIf="connectionReference?.connectionCategory == eConnectionCategory.SqlDatabase">
-                    <form-select label="Table Type" formControlName="tableType" [errors]="formsService.formErrors.tableType" [items]="tableTypes">
+                    <form-select label="Table Type" formControlName="tableType" [errors]="formsService.formErrors.tableType" [items]="eTableTypeItems" itemKey="key" itemName="name">
                     </form-select>
                 </section>
 

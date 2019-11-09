@@ -189,7 +189,7 @@
 
 <dexih-widget-section [title]="title" [showExpandButton]="true" [padding]="false">
     <ng-template #header>
-        <dexih-button buttonClass="btn-sm btn-outline-primary m-1" (click)="export()" text="export"></dexih-button>
+        <dexih-button buttonClass="btn-sm btn-primary m-1" iconClass="fa fa-download" (click)="export()" text="export"></dexih-button>
     </ng-template>
 
     <chart-view [responsive]="false" #chartView [config]="config" [columns]="columns" [data]="data" [updateChartEvent]="updateChartSubject">
