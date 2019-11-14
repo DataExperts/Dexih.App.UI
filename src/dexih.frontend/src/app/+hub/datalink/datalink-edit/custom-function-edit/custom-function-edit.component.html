@@ -14,12 +14,12 @@
 				<div class="form-row">
 					<section *ngIf="functionType != eFunctionType.Validate && functionType != eFunctionType.condition"
 						class="col col-xs-4" [ngStyle]="{'z-index': 305, 'position': 'relative'}">
-						<form-select label="Action when null" formControlName="onNull" [items]="onNullActions"
+						<form-select label="Action when null" formControlName="onNull" [items]="eErrorActionItems"
 							itemKey="key" itemName="name" iconClass="fa fa-database" [enableFilter]="false">
 						</form-select>
 					</section>
 					<section class="col col-xs-4" [ngStyle]="{'z-index': 304, 'position': 'relative'}">
-						<form-select label="Action when error" formControlName="onError" [items]="onErrorActions"
+						<form-select label="Action when error" formControlName="onError" [items]="eErrorActionItems"
 							itemKey="key" itemName="name" iconClass="fa fa-database" [enableFilter]="false">
 						</form-select>
 					</section>
@@ -30,7 +30,7 @@
 					</section>
 					<div *ngIf="functionType == eFunctionType.Validate" class="col col-xs-4"
 						[ngStyle]="{'z-index': 302, 'position': 'relative'}">
-						<form-select label="Action when false" formControlName="invalidAction" [items]="invalidActions"
+						<form-select label="Action when false" formControlName="invalidAction" [items]="eInvalidActionItems"
 							itemKey="key" itemName="name" iconClass="fa fa-database" [enableFilter]="false">
 						</form-select>
 					</div>

@@ -168,6 +168,34 @@ export class DatalinkEditService implements OnInit, OnDestroy {
         return variables;
     }
 
+    public getColumnGroups(columns: DexihDatalinkColumn[]): Array<{ group: string, columns: Array<DexihDatalinkColumn> }> {
+        let previousGroup: string = null;
+
+        let columnGroups: Array<{ group: string, columns: Array<DexihDatalinkColumn> }> = [];
+        let cols: Array<DexihDatalinkColumn> = null;
+
+        columns
+            .filter(c => c.isValid)
+            .sort((a, b) => a.position - b.position)
+            .forEach(column => {
+                let group = column.columnGroup ? column.columnGroup : '(un-grouped)';
+                if (group !== previousGroup) {
+                    if (cols) {
+                        columnGroups.push({ group: previousGroup, columns: cols });
+                    }
+                    previousGroup = group;
+                    cols = [];
+                }
+                cols.push(column);
+            });
+
+        if (cols && cols.length > 0) {
+            columnGroups.push({ group: previousGroup, columns: cols });
+        }
+
+        return columnGroups;
+    }
+
     insertDatalinkTransformItem(datalinkTransformForm: FormGroup, datalinkTransformItemForm: FormGroup): DexihDatalinkTransformItem {
         this.logger.LogC(() => `insertDatalinkTransformItem`, eLogLevel.Trace);
 

@@ -169,7 +169,7 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
 
     resetSubscription() {
         if (this._tableFormSubscription) { this._tableFormSubscription.unsubscribe(); }
-        this._tableFormSubscription = this.targetTableForm.valueChanges.subscribe(() => {
+        this._tableFormSubscription = this.targetTableForm.controls.tableKey.valueChanges.subscribe(() => {
             this.updateData();
         });
     }
@@ -369,6 +369,7 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
             this.targetTableForm.setControl('table', this.editDatalinkService.hubFormsService.tableForm(newTable));
             this.targetTableForm.controls.tableKey.setValue(0);
             this.resetSubscription();
+            this.addMissing(this._missingColumnsData.value);
 
             this.showTableProperties = true;
         }

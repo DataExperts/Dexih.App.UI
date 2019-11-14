@@ -51,6 +51,8 @@ export class MappingComponent implements OnInit, OnDestroy, OnChanges {
     public eTransformType = eTransformType;
     public eTransformItemType = eTransformItemType;
 
+    columnGroups: Array<{group: string, columns: Array<DexihDatalinkColumn>}> = [];
+
     constructor(
         private authService: AuthService,
         private hubService: HubService,
@@ -109,6 +111,10 @@ export class MappingComponent implements OnInit, OnDestroy, OnChanges {
     updateTableData() {
         try {
             if (this.datalinkTransformForm) {
+                let runTime = this.datalinkTransformForm.controls['runTime'].value;
+                let inputColumns = <DexihDatalinkColumn[]> runTime.inputColumns;
+                this.columnGroups = this.editDatalinkService.getColumnGroups(inputColumns);
+
                 let data = [];
                 let items = <FormArray>this.datalinkTransformForm.controls.dexihDatalinkTransformItems;
                 let filteredItems: Array<any> = [];
@@ -344,6 +350,53 @@ export class MappingComponent implements OnInit, OnDestroy, OnChanges {
         item.transformItemType = eTransformItemType.GroupNode;
 
         let itemForm = this.editDatalinkService.hubFormsService.datalinkDatalinkTransformItemFormGroup(this.datalinkTransformForm, item);
+        this.editDatalinkService.insertDatalinkTransformItem(this.datalinkTransformForm, itemForm);
+    }
+
+    newMapping(itemType: eTransformItemType) {
+        this.router.navigate(['mapping-edit', itemType], { relativeTo: this.route });
+    }
+
+    addAll() {
+        let runTime = this.datalinkTransformForm.controls['runTime'].value;
+        let inputColumns = <DexihDatalinkColumn[]> runTime.inputColumns;
+
+        inputColumns.forEach(inputColumn => {
+            this.createMapping(inputColumn);
+        });
+    }
+
+    addGroup(group: {group: string, columns: Array<DexihDatalinkColumn>}) {
+        group.columns.forEach(inputColumn => {
+            this.createMapping(inputColumn);
+        });
+    }
+
+    private createMapping(inputColumn: DexihDatalinkColumn) {
+        let runTime = this.datalinkTransformForm.controls['runTime'].value;
+        let outputColumns = <DexihDatalinkColumn[]> runTime.outputColumns;
+
+        if ( outputColumns.findIndex(c => c.name === inputColumn.name) >= 0) {
+            return;
+        }
+
+        let item = new DexihDatalinkTransformItem();
+        let io = new InputOutputColumns();
+        let outputColumn = io.copyDatalinkColumn(inputColumn, 0, 'mapping');
+        outputColumn.key = this.hubService.getHubCache().getNextSequence();
+        if (outputColumn.childColumns) {
+            outputColumn.childColumns.forEach(col => {
+                col.key = this.hubService.getHubCache().getNextSequence();
+            });
+        }
+        outputColumn.datalinkTableKey = null;
+        item.datalinkTransformKey = this.datalinkTransformForm.value.key;
+        item.sourceDatalinkColumn = inputColumn;
+        item.targetDatalinkColumn = outputColumn;
+        item.transformItemType = eTransformItemType.ColumnPair;
+        item.isValid = true;
+        let itemForm = this.editDatalinkService.hubFormsService
+            .datalinkDatalinkTransformItemFormGroup(this.datalinkTransformForm, item);
         this.editDatalinkService.insertDatalinkTransformItem(this.datalinkTransformForm, itemForm);
     }
 }

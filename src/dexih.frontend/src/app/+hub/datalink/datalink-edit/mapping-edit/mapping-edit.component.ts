@@ -218,7 +218,7 @@ export class MappingEditComponent implements OnInit, OnDestroy {
 
       if (sourceColumn) {
         let io = new InputOutputColumns();
-        this.newColumn = io.copyDatalinkColumn(sourceColumn, 1000 - key, 'mappings');
+        this.newColumn = io.copyDatalinkColumn(sourceColumn, 1000 - key, 'mapping');
       } else {
         this.newColumn = new DexihDatalinkColumn();
         this.newColumn.position = 1000 - key;
@@ -233,7 +233,7 @@ export class MappingEditComponent implements OnInit, OnDestroy {
 
       this.newColumn.name = value;
       this.newColumn.logicalName = value;
-      this.newColumn.columnGroup = 'mappings';
+      this.newColumn.columnGroup = 'mapping';
       this.newColumn.key = key;
 
       this.newDatalinkTransformItemForm.controls.targetDatalinkColumn.setValue(this.newColumn);

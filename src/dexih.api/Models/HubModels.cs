@@ -330,4 +330,8 @@ namespace dexih.api.Models
         public object[] TestValues { get; set; }
     }
 
+    public class DbmlTables: HubModelBase
+    {
+        public DexihTable[] Tables { get; set; }
+    }
 }

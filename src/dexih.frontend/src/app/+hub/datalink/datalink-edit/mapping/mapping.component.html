@@ -22,9 +22,12 @@
 
         <ng-template #actions let-items="items">
             <ng-template [ngIf]="allowMapping">
-                <dexih-button routerLink='mapping-edit/{{eTransformItemType.ColumnPair}}'
-                    buttonClass="btn-primary mr-1 " iconClass="fa fa-map"
-                    title="Create a new mapping, or drop a column to create new mapping.">Mapping</dexih-button>
+                <dexih-button-splitdropdown class="mr-1" (buttonClick)="newMapping(eTransformItemType.ColumnPair)"
+                    buttonClass="btn-primary" iconClass="fa fa-map"
+                    title="Create a new mapping, or drop a column to create new mapping." text='Mapping'>
+                    <li><a class="dropdown-item"  title="Add all" (click)="addAll()">Add all input columns</a></li>
+                    <li *ngFor="let columnGroup of columnGroups"><a class="dropdown-item"  [title]="'Add all ' + columnGroup.group" (click)="addGroup(columnGroup)">Add all {{columnGroup.group}}</a></li>
+                </dexih-button-splitdropdown>
             </ng-template>
             <ng-template [ngIf]="allowCondition && !allowValidation">
                 <dexih-button routerLink='mapping-edit/{{eTransformItemType.FilterPair}}'

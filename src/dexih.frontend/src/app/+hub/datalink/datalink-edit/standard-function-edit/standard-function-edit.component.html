@@ -41,18 +41,18 @@
 				<div *ngIf="selectedFunction || selectedCustomFunction" class="form-row">
 					<section *ngIf="transformFunctionType != eFunctionType.Validate && transformFunctionType != eFunctionType.condition"
 					 class="col col-xs-4" [ngStyle]="{'z-index': 405, 'position': 'relative'}">
-						<form-select label="Action when null" formControlName="onNull" [items]="onNullActions" itemKey="key" itemName="name"
+						<form-select label="Action when null" formControlName="onNull" [items]="eErrorActionItems" itemKey="key" itemName="name"
 						 iconClass="fa fa-database" [enableFilter]="false">
 						</form-select>
 					</section>
 					<section class="col col-xs-4" [ngStyle]="{'z-index': 404, 'position': 'relative'}">
-						<form-select label="Action when error" formControlName="onError" [items]="onErrorActions" itemKey="key" itemName="name"
+						<form-select label="Action when error" formControlName="onError" [items]="eErrorActionItems" itemKey="key" itemName="name"
 						 iconClass="fa fa-database" [enableFilter]="false">
 						</form-select>
 					</section>
 					
 					<div *ngIf="transformFunctionType == eFunctionType.Validate" class="col col-xs-4" [ngStyle]="{'z-index': 402, 'position': 'relative'}">
-						<form-select label="Action when false" formControlName="invalidAction" [items]="invalidActions" itemKey="key"
+						<form-select label="Action when false" formControlName="invalidAction" [items]="eInvalidActionItems" itemKey="key"
 						 itemName="name" [enableFilter]="false" iconClass="fa fa-database">
 						</form-select>
 					</div>
@@ -98,12 +98,15 @@
 							 [inputColumns]="inputColumns" [allowAdd]="false" [allowRemove]="false" [updateParameterName]="false" [rank]="inputParameter.value.rank"
 							 [variables]="variables">
 							</input-parameter>
-							<div *ngFor="let arrayParameter of inputParameter.controls.arrayParameters.controls; let j = index" class="pl-2"
+							<div *ngFor="let arrayParameter of inputParameter.controls.arrayParameters.controls; let j = index, let last = last" class="pl-2"
 							 [ngStyle]="{'z-index': 300-j, 'position': 'relative'}">
 								<input-parameter [inputParameterForms]="[arrayParameter]" [inputColumns]="inputColumns" [allowAdd]="true" [nodeDatalinkColumnKey]="datalinkTransformForm.controls.nodeDatalinkColumn.value?.key"
 								 [allowRemove]="true" [updateParameterName]="false" (addParameter)="addParameter(inputParameter, eParameterDirection.Input, j)"
 								 (removeParameter)="removeParameter(inputParameter, j)" [variables]="variables">
 								</input-parameter>
+								<small *ngIf="last && arrayParameter.value.runTime?.functionParameter?.description" class="form-text text-muted">
+									<markdown [data]="arrayParameter.value.runTime.functionParameter.description"></markdown>
+								</small>
 							</div>
 						</div>
 						<input-parameter *ngIf="inputParameter.value.rank == 0 && !inputParameter.value.runTime.functionParameter.linkedName" [inputParameterForms]="[inputParameter]" [inputColumns]="inputColumns" [nodeDatalinkColumnKey]="datalinkTransformForm.controls.nodeDatalinkColumn.value?.key"

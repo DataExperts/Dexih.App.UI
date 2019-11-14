@@ -31,14 +31,17 @@
 				</section>
 
 				<div class="mt-1">
-					<div class="d-flex flex-row mb-1">
-						Un-Group Columns
-					</div>
-					<div *ngFor="let parameter of newDatalinkTransformItemForm.controls.dexihFunctionParameters.controls; let i = index" [ngStyle]="{'z-index': 300-i, 'position': 'relative'}">
-							<output-parameter [outputParameterForm]="parameter" [outputColumns]="outputColumns"
-							[allowAdd]="false" [allowRemove]="false">
-						   </output-parameter>
-					</div>
+
+
+					<div class="row">
+							<div class="col border bg-primary text-white font-weight-bold text-truncate">UnGroup Column</div>
+						</div>
+			
+						<div *ngFor="let parameter of newDatalinkTransformItemForm.controls.dexihFunctionParameters.controls; let i = index;" class="row">
+							<div class="col border bg-secondary text-white text-truncate">
+								<div>{{parameter.controls.name.value}}</div>
+							</div>
+						</div>
 				</div>
 			</fieldset>
 		</form>

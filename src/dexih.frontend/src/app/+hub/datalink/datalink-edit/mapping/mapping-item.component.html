@@ -1,30 +1,45 @@
 <div class="container">
-    <div *ngIf="source" class="row justify-content-start">
-        <div class="col-auto"><h5>{{label}}</h5></div>
-        <div *ngIf="source" class="col-auto"><i *ngIf="!source.valid" class="fa fa-exclamation-circle text-danger"></i>{{source.text}}</div>
+    <div *ngIf="!outputParameters" class="row justify-content-start">
+        <div class="col-auto">
+            <h5>{{label}}</h5>
+        </div>
+        <div *ngIf="source" class="col-auto"><i *ngIf="!source.valid"
+                class="fa fa-exclamation-circle text-danger"></i>{{source.text}}</div>
         <div *ngIf="target" class="col-auto">
-            <i  *ngIf="source && !compare" class="fa fa-arrow-right mr-2"></i>
+            <i *ngIf="source && !compare" class="fa fa-arrow-right mr-2"></i>
             <i *ngIf="!target.valid" class="fa fa-exclamation-circle text-danger"></i>
             <span class="mr-2" *ngIf="compare">{{compare}}</span>
             {{target.text}}
         </div>
     </div>
 
-    <ng-template [ngIf]="!source">
+    <ng-template [ngIf]="outputParameters">
         <div class="row">
-            <div class="col"><h5>{{label}}</h5></div>
+            <div class="col">
+                <h5>{{label}}</h5>
+            </div>
+        </div>
+
+        <div *ngIf="source"><i *ngIf="!source.valid"
+            class="fa fa-exclamation-circle text-danger"></i>Source = {{source.text}}
         </div>
 
         <ng-template [ngIf]="inputParameters?.length > 0">
-            <div class="row pt-2"><div class="col"><h5>Inputs</h5></div></div>
+            <div class="row pt-2">
+                <div class="col">
+                    <h5>Inputs</h5>
+                </div>
+            </div>
             <div class="row">
                 <div class="col border bg-primary text-white font-weight-bold text-truncate">Parameter</div>
                 <div class="col border bg-primary text-white font-weight-bold text-truncate">Column / Value</div>
             </div>
             <ng-template ngFor let-parameter [ngForOf]="inputParameters">
                 <div *ngFor="let value of parameter.values; let i = index;" class="row">
-                    <div class="col border bg-secondary text-white text-truncate"><div *ngIf="i == 0">{{ parameter.name}}</div></div>
-                    <div  class="col border border text-white bg-secondary text-truncate"  >
+                    <div class="col border bg-secondary text-white text-truncate">
+                        <div *ngIf="i == 0">{{ parameter.name}}</div>
+                    </div>
+                    <div class="col border border text-white bg-secondary text-truncate">
                         <i *ngIf="!value.valid" class="fa fa-exclamation-circle text-danger"></i>
                         {{(parameter.values.length > 1 ? '[' + i + '] ' : '') + value.text}}
                     </div>
@@ -33,46 +48,49 @@
         </ng-template>
 
         <ng-template [ngIf]="mapParameters">
-            <div *ngFor="let mapParameter of mapParameters" >
-                    <div class="row pt-2"><div class="col text-truncate"><h5>{{mapParameter.name}}</h5></div></div>
-                
-                    <div class="row">
-                        <div *ngFor="let parameter of mapParameter.parameters" class="col border bg-primary text-white font-weight-bold text-truncate">{{parameter.name}}</div>
-                    </div>
-                
-                    <div *ngFor="let pValues of mapParameter.parameters[0].values; let i = index;" class="row">
-                        <div *ngFor="let parameter of mapParameter.parameters" class="col border bg-secondary text-white text-truncate"  >
-                            <i *ngIf="!parameter.values[i].valid" class="fa fa-exclamation-circle text-danger"></i>
-                            {{parameter.values[i].text}}
-                        </div>
+            <div *ngFor="let mapParameter of mapParameters">
+                <div class="row pt-2">
+                    <div class="col text-truncate">
+                        <h5>{{mapParameter.name}}</h5>
                     </div>
                 </div>
-            </ng-template>   
-            <ng-template [ngIf]="outputParameters?.length > 0 && !allowCondition">
 
-                <div class="row  pt-2">
-                    <div class="col">
-                        <h5>Outputs</h5>
-                    </div>
-                </div>
                 <div class="row">
-                    <div class="col border bg-primary text-white font-weight-bold text-truncate">Parameter</div>
-                    <div class="col border bg-primary text-white font-weight-bold text-truncate">Column / Value</div>
+                    <div *ngFor="let parameter of mapParameter.parameters"
+                        class="col border bg-primary text-white font-weight-bold text-truncate">{{parameter.name}}</div>
                 </div>
 
-                <ng-template ngFor let-parameter [ngForOf]="outputParameters">
-                    <div *ngFor="let value of parameter.values; let i = index;" class="row">
-                        <div class="col border bg-secondary text-white text-truncate">
-                            <div *ngIf="i == 0">{{parameter.name}}</div>
-                        </div>
-                        <div class="col border border bg-secondary text-white text-truncate">
-                            <i *ngIf="!value.valid" class="fa fa-exclamation-circle text-danger"></i>
-                            {{(parameter.values.length > 1 ? '[' + i + '] ' : '') + value.text}}
-                        </div>
+                <div *ngFor="let pValues of mapParameter.parameters[0].values; let i = index;" class="row">
+                    <div *ngFor="let parameter of mapParameter.parameters"
+                        class="col border bg-secondary text-white text-truncate">
+                        <i *ngIf="!parameter.values[i].valid" class="fa fa-exclamation-circle text-danger"></i>
+                        {{parameter.values[i].text}}
                     </div>
-                </ng-template>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template [ngIf]="outputParameters?.length > 0">
+            <div class="row  pt-2">
+                <div class="col">
+                    <h5>Outputs</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col border bg-primary text-white font-weight-bold text-truncate">Parameter</div>
+                <div class="col border bg-primary text-white font-weight-bold text-truncate">Column / Value</div>
+            </div>
+
+            <ng-template ngFor let-parameter [ngForOf]="outputParameters">
+                <div *ngFor="let value of parameter.values; let i = index;" class="row">
+                    <div class="col border bg-secondary text-white text-truncate">
+                        <div *ngIf="i == 0">{{parameter.name}}</div>
+                    </div>
+                    <div class="col border border bg-secondary text-white text-truncate">
+                        <i *ngIf="!value.valid" class="fa fa-exclamation-circle text-danger"></i>
+                        {{(parameter.values.length > 1 ? '[' + i + '] ' : '') + value.text}}
+                    </div>
+                </div>
             </ng-template>
-
-
+        </ng-template>
     </ng-template>
 </div>

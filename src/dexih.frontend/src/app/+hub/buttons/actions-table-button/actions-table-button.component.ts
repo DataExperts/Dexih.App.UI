@@ -135,6 +135,10 @@ export class ActionsTableButtonComponent implements OnInit, OnChanges, OnDestroy
         this.hubService.deleteTables(this.getTables());
     }
 
+    dbml() {
+        this.hubService.getDbml(this.getTables());
+    }
+
     shareItems(isShared: boolean) {
         this.hubService.shareItems(this.getTableKeys(), eDataObjectType.Table, isShared);
     }

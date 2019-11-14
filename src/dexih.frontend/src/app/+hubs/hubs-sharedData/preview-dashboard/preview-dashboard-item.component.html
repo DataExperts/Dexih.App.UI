@@ -6,4 +6,4 @@
     <ngx-md [data]="item.description"></ngx-md>
 </div>
 <dexih-message #DexihMessage></dexih-message>
-<preview-data [hubKey]="hubKey" [objectType]="eDataObjectType.View" [objectKey]="item.viewKey" [showToolbar]="true"></preview-data>
+<preview-data [hubKey]="hubKey" [objectType]="eDataObjectType.View" [objectKey]="item.viewKey" [showToolbar]="true" (onMaximize)="maximize($event)"></preview-data>

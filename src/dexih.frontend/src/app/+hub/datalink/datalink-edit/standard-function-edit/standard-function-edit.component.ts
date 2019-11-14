@@ -11,7 +11,8 @@ import { TypeCodes } from '../../../hub.remote.models';
 import { InputOutputColumns } from '../../../hub.lineage.models';
 import { FunctionParameter, eFunctionType, eParameterDirection, eGenericType, DexihDatalinkColumn, FunctionReference,
   DexihCustomFunction, eTransformType, DexihDatalinkTable, DexihDatalinkTransformItem, eTransformItemType,
-  DexihFunctionParameter, eTypeCode, DexihCustomFunctionParameter, DexihFunctionArrayParameter, RemoteLibraries } from '../../../../shared/shared.models';
+  DexihFunctionParameter, eTypeCode, DexihCustomFunctionParameter,
+  DexihFunctionArrayParameter, RemoteLibraries, eInvalidActionItems, eErrorActionItems } from '../../../../shared/shared.models';
 import { CancelToken } from '../../../../+auth/auth.models';
 
 export class ArrayParameter {
@@ -105,7 +106,10 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
   inputParameterControls: Array<FormGroup>;
   outputParameterControls: Array<FormGroup>;
 
-  arrayParameters: ArrayParameter[] = []
+  arrayParameters: ArrayParameter[] = [];
+
+  eInvalidActionItems = eInvalidActionItems.filter(c => c.key > 0);
+  eErrorActionItems = eErrorActionItems.filter(c => c.key > 0);
 
   logger = new LogFactory('standard-function-edit');
 
@@ -447,7 +451,7 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
       }
 
       if (this.selectedFunction.returnParameters) {
-        if (this.allowReturn || this.selectedFunction.returnParameters.length > 1) {
+        if (this.allowReturn && this.selectedFunction.returnParameters.length > 0) {
           this.selectedFunction.returnParameters.forEach((parameter: FunctionParameter, index: number) => {
             parameters.push(this.newParameter(existingParameters, parameter, index + 400,
               eParameterDirection.ReturnValue, this.selectedFunction.genericTypeDefault ));
@@ -456,7 +460,7 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
       }
 
       if (this.selectedFunction.resultReturnParameters) {
-        if (this.allowReturn || this.selectedFunction.resultReturnParameters.length > 1) {
+        if (this.allowReturn && this.selectedFunction.resultReturnParameters.length > 0) {
             this.selectedFunction.resultReturnParameters.forEach(parameter => {
             parameters.push(this.newParameter(existingParameters, parameter, 0,
                 eParameterDirection.ResultReturnValue, this.selectedFunction.genericTypeDefault));
@@ -582,7 +586,7 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
     let newParameterForm = this.editDatalinkService.hubFormsService.datalinkFunctionArrayParametersFormGroup(newParameter);
     let arrayForm = <FormArray>parentParameterForm.controls.arrayParameters;
     if (position !== null) {
-      arrayForm.insert(position, newParameterForm);
+      arrayForm.insert(position + 1, newParameterForm);
     } else {
       arrayForm.push(newParameterForm);
     }

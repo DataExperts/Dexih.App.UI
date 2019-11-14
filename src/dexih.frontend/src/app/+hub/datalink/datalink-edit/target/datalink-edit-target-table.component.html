@@ -10,11 +10,6 @@
             Drop & Create
         </dexih-button>
 
-        <dexih-button *ngIf="!newTable" class="mr-1" (click)="showTableProperties = !showTableProperties">
-            <span *ngIf="!showTableProperties">(Show Details) </span>
-            <span *ngIf="showTableProperties">(Hide Details) </span>
-        </dexih-button>
-
         <dexih-button-apply class="mr-1" (click)="apply()" [disabled]="!this.targetTableForm?.dirty"></dexih-button-apply>
         <cancel-button [formsService]="tableFormService"></cancel-button>
     </ng-template>
@@ -22,7 +17,7 @@
     <form *ngIf="targetTableForm"  [formGroup]="targetTableForm">
         <fieldset>
             <section>
-                    <form-checkbox label="Create a new table" [ngModelOptions]="{standalone: true}" [(ngModel)]="newTable" (ngModelChange)="toggleNewTable($event)"></form-checkbox>
+                <form-checkbox label="Create a new table" [ngModelOptions]="{standalone: true}" [(ngModel)]="newTable" (ngModelChange)="toggleNewTable($event)"></form-checkbox>
             </section>
             <section *ngIf="!newTable">
                 <form-select label="Target Table" formControlName="tableKey" [items]="connectionTables" parentName="name" childItems="dexihTables"
@@ -37,7 +32,7 @@
     </form>
 </dexih-widget-section>
 
-<dexih-table-edit-properties *ngIf="newTable || showTableProperties" [formsService]="tableFormService"></dexih-table-edit-properties>
+<dexih-table-edit-properties *ngIf="newTable" [formsService]="tableFormService"></dexih-table-edit-properties>
 
 <ng-template [ngIf]="targetTableForm?.controls.table.value">
         <dexih-widget-section title="Columns" [showExpandButton]="true" [padding]="false">

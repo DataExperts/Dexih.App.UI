@@ -9,7 +9,7 @@
             </div>
         </dexih-widget-section>
     </span>
-    <dexih-widget-section *ngFor="let columnGroup of columnGroups" [title]="columnGroup.group" [padding]="false"  [showExpandButton]="true">
+    <dexih-widget-section *ngFor="let columnGroup of columnGroups" [title]="columnGroup.group" [padding]="false"  [showExpandButton]="true" >
         <div *ngFor="let column of columnGroup.columns | fieldSort : 'position' | isValidFilter; let i = index">
             <input-column [datalinkTransformForm]='datalinkTransformForm' [column]='column'>
             </input-column>

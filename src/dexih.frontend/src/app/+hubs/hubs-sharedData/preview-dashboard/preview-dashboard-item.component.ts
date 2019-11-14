@@ -1,7 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { DexihDashboardItem, eDataObjectType } from '../../../shared/shared.models';
-import { DataCache } from '../../../+hub/hub.models';
-import { FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'preview-dashboard-item',
@@ -12,7 +10,7 @@ export class PreviewDashboardItemComponent implements OnInit {
     @Input() hubKey: number;
     @Input() item: DexihDashboardItem;
     @Input() refreshData: EventEmitter<string>;
-    @Output() onMaximize = new EventEmitter<DexihDashboardItem>();
+    @Output() onMaximize = new EventEmitter<boolean>();
     @Input() isMaximized = false;
 
     eDataObjectType = eDataObjectType;
@@ -34,7 +32,7 @@ export class PreviewDashboardItemComponent implements OnInit {
     //     }
     // }
 
-    public maximise() {
-        this.onMaximize.emit(this.item);
+    public maximize($event) {
+        this.onMaximize.emit($event);
     }
 }

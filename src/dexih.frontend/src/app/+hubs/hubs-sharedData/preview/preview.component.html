@@ -1,10 +1,11 @@
 <div class="container">
-    <dexih-widget [title]="'Preview '" iconClass="fa fa-lg fa-fw fa-table" [showCloseButton]="true"
+    <dexih-widget [title]="'Preview ' + previewData.name" iconClass="fa fa-lg fa-fw fa-table" [showCloseButton]="true"
     (close)="close()">
 
     <ng-template #header>
-        <dexih-button-refresh class="mr-1" (click)="refresh()" text="Reload"></dexih-button-refresh>
-        <download-button class="ml-1" (download)="downloadData($event)"></download-button>
+        <dexih-button-refresh class="mr-1" (click)="previewData.refresh()" text="Reload"></dexih-button-refresh>
+        <download-button class="ml-1" (download)="previewData.downloadData($event)"></download-button>
+        <dexih-button-edit class="ml-1"  (click)="edit()"></dexih-button-edit>
 
         <div *ngIf="chartConfig" class="btn-group btn-group-toggle mr-1" data-toggle="buttons" title="Table">
             <label class="btn btn-primary" [ngClass]="{active: showChart===false}">
@@ -20,7 +21,7 @@
 
     <dexih-message #DexihMessage></dexih-message>
 
-    <preview-data [hubKey]="hubKey" [objectType]="objectType" [objectKey]="objectKey"></preview-data>
+    <preview-data #PreviewData [hubKey]="hubKey" [objectType]="objectType" [objectKey]="objectKey"></preview-data>
 
 </dexih-widget>
 </div>

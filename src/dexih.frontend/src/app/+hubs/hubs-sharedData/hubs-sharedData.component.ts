@@ -98,5 +98,22 @@ export class HubsSharedDataComponent implements OnInit, OnDestroy {
             this.dexihMessage.addMessage(reason);
         });
     }
+
+    edit(item: SharedData) {
+        switch (item.objectType) {
+            case eDataObjectType.Datalink:
+                this.router.navigate(['hub', item.hubKey, 'datalinks', 'datalink-edit', 'edit', item.objectKey]);
+                break;
+            case eDataObjectType.Table:
+                this.router.navigate(['hub', item.hubKey, 'tables', 'table-edit', item.objectKey]);
+                break;
+            case eDataObjectType.View:
+                this.router.navigate(['hub', item.hubKey, 'views', 'view-edit', item.objectKey]);
+                break;
+            case eDataObjectType.Dashboard:
+                this.router.navigate(['hub', item.hubKey, 'dashboards', 'dashboard-edit', item.objectKey]);
+                break;
+            }
+    }
 }
 

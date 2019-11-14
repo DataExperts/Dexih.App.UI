@@ -50,7 +50,7 @@
     "@types/jasmine": "^3.4.6",
     "@types/node": "12.7.2",
     "codelyzer": "^5.2.0",
-    "core-js": "^3.4.0",
+    "core-js": "^3.4.1",
     "expose-loader": "^0.7.5",
     "imports-loader": "^0.8.0",
     "jasmine-core": "3.4.0",
@@ -67,7 +67,7 @@
     "npm-check-updates": "^3.2.1",
     "protractor": "5.4.2",
     "script-loader": "^0.7.2",
-    "ts-node": "^8.4.1",
+    "ts-node": "^8.5.0",
     "tslint": "^5.20.1",
     "typescript": "~3.4.5"
   }

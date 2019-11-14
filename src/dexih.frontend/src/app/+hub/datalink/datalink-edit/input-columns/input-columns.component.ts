@@ -2,6 +2,7 @@ import { Component, Input, OnInit, OnDestroy, OnChanges } from '@angular/core';
 import { Subscription} from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { DexihDatalinkColumn } from '../../../../shared/shared.models';
+import { DatalinkEditService } from '../datalink-edit.service';
 
 @Component({
 
@@ -15,7 +16,7 @@ export class InputColumnsComponent implements OnInit, OnChanges, OnDestroy {
     columns: Array<DexihDatalinkColumn> = [];
     columnGroups: Array<{group: string, columns: Array<DexihDatalinkColumn>}> = [];
 
-    constructor() {
+    constructor(private editDatalinkService: DatalinkEditService) {
     }
 
     ngOnInit() {
@@ -24,42 +25,14 @@ export class InputColumnsComponent implements OnInit, OnChanges, OnDestroy {
     ngOnChanges() {
         if (this._inputColumnsSubscribe) { this._inputColumnsSubscribe.unsubscribe(); }
 
-        this.refreshColumns(this.datalinkTransformForm.controls.runTime.value.inputColumns);
+        this.columnGroups = this.editDatalinkService.getColumnGroups(this.datalinkTransformForm.controls.runTime.value.inputColumns);
 
         this._inputColumnsSubscribe =  this.datalinkTransformForm.controls.runTime.valueChanges.subscribe(() => {
-            this.refreshColumns(this.datalinkTransformForm.controls.runTime.value.inputColumns);
+            this.columnGroups = this.editDatalinkService.getColumnGroups(this.datalinkTransformForm.controls.runTime.value.inputColumns);
         });
     }
 
     ngOnDestroy() {
         if (this._inputColumnsSubscribe) { this._inputColumnsSubscribe.unsubscribe(); }
-    }
-
-    refreshColumns(columns: DexihDatalinkColumn[]) {
-        let previousGroup: string = null;
-
-        let columnGroups: Array<{group: string, columns: Array<DexihDatalinkColumn>}> = [];
-        let cols: Array<DexihDatalinkColumn> = null;
-
-        columns
-            .filter(c => c.isValid)
-            .sort((a, b) => a.position - b.position)
-            .forEach(column => {
-            let group = column.columnGroup ? column.columnGroup : '(un-grouped)';
-            if (group !== previousGroup) {
-                if (cols) {
-                    columnGroups.push({group: previousGroup, columns: cols});
-                }
-                previousGroup = group;
-                cols = [];
-            }
-            cols.push(column);
-        });
-
-        if (cols && cols.length > 0) {
-            columnGroups.push({group: previousGroup, columns: cols});
-        }
-
-        this.columnGroups = columnGroups;
     }
 }

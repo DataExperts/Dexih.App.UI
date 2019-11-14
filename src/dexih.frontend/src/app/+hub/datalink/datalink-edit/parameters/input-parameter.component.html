@@ -17,9 +17,10 @@
                     <div *ngIf="!inputParameterForm.value.runTime?.functionParameter?.isLabel" class="form-control p-0">
                         <form-select formControlName="datalinkColumn" [border]="false"
                             [items]="inputColumns" itemKey="key" itemName="logicalName" [(textValue)]="inputs[i].staticValue"
-                            [enableKeySelect]="false" [enableTextEntry]="true" [enableTextEntryMatch]="false"
+                            [enableKeySelect]="false" [enableTextEntry]="rank === 0" [enableTextEntryMatch]="false"
                             (textValueChange)="updateStatic($event, i)"
-                            textEntryNote="Enter a static value or select a column." [textEntryItems]="inputs[i].textItems" textEntryItemsTitle="Variables">
+                            [textEntryNote]="rank > 0 ? 'Select an array type source (otherwise select add to build an array)' : 'Select a column or enter a static value.'" 
+                            [textEntryItems]="inputs[i].textItems" textEntryItemsTitle="Variables">
                         </form-select>
                     </div>
 
@@ -59,7 +60,7 @@
                 </button>
             </div>
         </div>
-        <small *ngIf="inputParameterForms[0].value.runTime?.functionParameter?.description" class="form-text text-muted">
+        <small *ngIf="!allowAdd && inputParameterForms[0].value.runTime?.functionParameter?.description" class="form-text text-muted">
             <markdown [data]="inputParameterForms[0].value.runTime.functionParameter.description"></markdown>
         </small>
     </section>

@@ -103,7 +103,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
         } else {
             this.view = [event.newWidth, event.newHeight];
         }
-      }
+    }
 
     getChartType() {
         this.chartType = null;

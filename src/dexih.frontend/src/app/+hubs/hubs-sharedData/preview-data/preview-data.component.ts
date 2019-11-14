@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
@@ -17,12 +17,12 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
     @Input() public objectKey: number;
     @Input() public hubKey: number;
     @Input() public showToolbar = false;
+    @Input() isMaximized = false;
+    @Output() onMaximize = new EventEmitter<boolean>();
 
     @ViewChild('DexihMessage', { static: true }) public dexihMessage: DexihMessageComponent;
 
-
     private _subscription: Subscription;
-
 
     public action: string; // new or edit
     public pageTitle: string;
@@ -81,7 +81,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
         this.authService.navigateUp();
     }
 
-    refresh() {
+    public refresh() {
         this.hubsService.previewData(this.hubKey, this.objectKey, this.objectType, this.inputColumns, this.selectQuery,
             this.cancelToken).then((result) => {
                 this.columns = result.columns;
@@ -100,7 +100,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
             });
     }
 
-    downloadData(format: eDownloadFormat) {
+    public downloadData(format: eDownloadFormat) {
         let sharedData = new SharedData();
         sharedData.objectKey = this.objectKey;
         sharedData.objectType = this.objectType;
@@ -114,4 +114,15 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
             this.dexihMessage.addMessage(reason);
         });
     }
+
+    public maximize() {
+        this.isMaximized = true;
+        this.onMaximize.emit(true);
+    }
+
+    public minimize() {
+        this.isMaximized = false;
+        this.onMaximize.emit(false);
+    }
+
 }

@@ -9,7 +9,7 @@ import { FormGroup, FormArray } from '@angular/forms';
 import { LogFactory, eLogLevel } from '../../../../../logging';
 import { TypeCodes } from '../../../hub.remote.models';
 import { InputOutputColumns } from '../../../hub.lineage.models';
-import { eFunctionType, eParameterDirection, DexihDatalinkColumn, DexihDatalinkTransformItem, eTransformItemType, DexihFunctionParameter, FunctionParameter } from '../../../../shared/shared.models';
+import { eFunctionType, eParameterDirection, DexihDatalinkColumn, DexihDatalinkTransformItem, eTransformItemType, DexihFunctionParameter, FunctionParameter, eTypeCode } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -90,6 +90,8 @@ export class UnGroupEditComponent implements OnInit, OnDestroy {
               this.outputColumns = this.datalinkTransformForm.controls.runTime.value.transformColumns;
             }
 
+            this.inputColumns = this.inputColumns.filter(c => c.dataType === eTypeCode.Node);
+
             if (this.datalinkTransformItemKey) {
             this.datalinkTransformItemForm = this.editDatalinkService
               .getDatalinkTransformItem(this.datalinkTransformForm, this.datalinkTransformItemKey);
@@ -103,10 +105,21 @@ export class UnGroupEditComponent implements OnInit, OnDestroy {
             this.newDatalinkTransformItemForm = this.editDatalinkService.hubFormsService
               .datalinkDatalinkTransformItemFormGroup(this.datalinkTransformForm, this.datalinkTransformItemForm.value);
 
+              let parameters = <FormArray>this.newDatalinkTransformItemForm.controls.dexihFunctionParameters;
+              parameters.controls.forEach((control: FormGroup) => {
+                let runTime = {};
+                runTime['functionParameter'] = new FunctionParameter();
+                if (control.value.datalinkColumn) {
+                  runTime['functionParameter'].name = control.value.datalinkColumn.name;
+                }
+                control.controls['runTime'].setValue(runTime);
+              });
+
           } else {
             let newItem = new DexihDatalinkTransformItem();
             newItem.datalinkTransformKey = this.datalinkTransformKey;
             newItem.transformItemType = eTransformItemType.UnGroup;
+            this.datalinkTransformItemKey = 0;
 
             this.newDatalinkTransformItemForm = this.editDatalinkService.hubFormsService
               .datalinkDatalinkTransformItemFormGroup(this.datalinkTransformForm, newItem);
@@ -128,13 +141,14 @@ export class UnGroupEditComponent implements OnInit, OnDestroy {
                   let newParameter = new DexihFunctionParameter();
                   newParameter.datalinkTransformItemKey = this.datalinkTransformItemKey;
                   newParameter.name = childColumn.name;
-                  newParameter.rank = 0;
+                  newParameter.rank = childColumn.rank;
                   newParameter.direction = eParameterDirection.Output;
                   newParameter.dataType = childColumn.dataType;
                   newParameter.position = index;
                   newParameter.key = this.hubCache.getNextSequence();
                   newParameter.datalinkColumn = outputColumn
                   newParameter.isValid = true;
+                  newParameter['runTime'] = {};
                   newParameter['runTime'].functionParameter = new FunctionParameter();
                   newParameter['runTime'].functionParameter.name = childColumn.name;
 

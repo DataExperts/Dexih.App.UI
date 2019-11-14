@@ -703,10 +703,10 @@ export class ApiData {
     public seriesFinish: string = null;
     public functionCode: string = null;
     public functionResultCode: string = null;
-    public onError: eErrorAction = null;
-    public onNull: eErrorAction = null;
+    public onError: eErrorAction = eErrorAction.Abend;
+    public onNull: eErrorAction = eErrorAction.Abend;
     public notCondition: boolean = false;
-    public invalidAction: eInvalidAction = null;
+    public invalidAction: eInvalidAction = eInvalidAction.Abend;
     public entityStatus: EntityStatus = null;
     public dexihFunctionParameters: DexihFunctionParameter[] = [];
     public sourceDatalinkColumn: DexihDatalinkColumn = null;
@@ -918,7 +918,7 @@ export class ApiData {
     public schema: string = null;
     public baseTableName: string = null;
     public logicalName: string = null;
-    public tableType: eTableType = null;
+    public tableType: eTableType = eTableType.Table;
     public sourceConnectionName: string = null;
     public fileFormatKey: number = null;
     public rejectedTableName: string = null;

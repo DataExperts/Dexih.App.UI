@@ -45,6 +45,7 @@
                 </div>
                 <div class="input-group mt-1 pull-right">
                     <download-button class="ml-1" [autoCompact]="false" (download)="downloadData([item], true, $event)"></download-button>
+                    <dexih-button-edit class="ml-1" [autoCompact]="false" (click)="edit(item)"></dexih-button-edit>
                 </div>
             </ng-template>
 

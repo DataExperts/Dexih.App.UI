@@ -86,7 +86,7 @@ export class OutputParameterComponent implements OnInit, OnDestroy {
             this.newColumn.name = value;
             this.newColumn.logicalName = value;
             this.newColumn.rank = this.rank;
-            this.newColumn.columnGroup = 'mappings';
+            this.newColumn.columnGroup = 'mapping';
 
             this.outputParameterForm.controls.datalinkColumn.setValue(this.newColumn);
 

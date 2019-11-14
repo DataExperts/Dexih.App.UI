@@ -99,7 +99,7 @@ export class DatalinkTableComponent implements OnInit, OnDestroy {
                 tableColumnsForm.removeAt(0);
             }
 
-            datalinkTable.dexihDatalinkColumns.filter(c => c.isValid).forEach(column => {
+            datalinkTable.dexihDatalinkColumns.sort((a, b) => a.position - b.position).filter(c => c.isValid).forEach(column => {
                 tableColumnsForm.push(this.datalinkEditService.hubFormsService.datalinkTableColumn(tableColumnsForm.value, column));
             });
 

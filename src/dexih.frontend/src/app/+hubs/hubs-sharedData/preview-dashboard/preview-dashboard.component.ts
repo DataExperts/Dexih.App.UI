@@ -1,19 +1,18 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { DexihMessageComponent } from '../../../shared/ui/dexihMessage/index';
 import { HubsService} from '../../hubs.service';
 import { CancelToken } from '../../../+auth/auth.models';
-import { InputColumn, DexihColumnBase, eDownloadFormat, SharedData, DexihDashboard, DexihActiveAgent, DexihDashboardItem } from '../../../shared/shared.models';
-import { GridsterConfig, GridType, CompactType, DisplayGrid, GridsterItemComponentInterface, GridsterItem } from 'angular-gridster2';
-import { PreviewResults } from '../../../+hub/hub.models';
-import { AbstractControl } from '@angular/forms';
+import { InputColumn, DexihColumnBase, DexihDashboard, DexihActiveAgent } from '../../../shared/shared.models';
+import { GridsterConfig, GridType, CompactType, DisplayGrid, GridsterItemComponentInterface, GridsterItem, GridsterItemComponent } from 'angular-gridster2';
 
 @Component({
 
     selector: 'preview-dashboard',
-    templateUrl: './preview-dashboard.component.html'
+    templateUrl: './preview-dashboard.component.html',
+    styleUrls: ['./preview-dashboard.component.scss']
 })
 export class PreviewDashboardComponent implements OnInit, OnDestroy {
     @ViewChild('DexihMessage', { static: true }) public dexihMessage: DexihMessageComponent;
@@ -28,13 +27,12 @@ export class PreviewDashboardComponent implements OnInit, OnDestroy {
 
     public name = 'loading...';
 
-
     dashboardKey: number;
     hubKey: number;
 
     dashboard: DexihDashboard = null;
     activeAgent: DexihActiveAgent;
-    maximizedItem: DexihDashboardItem;
+    maximizedIndex: number;
 
     public options: GridsterConfig;
 
@@ -44,6 +42,7 @@ export class PreviewDashboardComponent implements OnInit, OnDestroy {
     constructor(
         private authService: AuthService,
         private hubsService: HubsService,
+        private router: Router,
         private route: ActivatedRoute) {
     }
 
@@ -140,44 +139,29 @@ export class PreviewDashboardComponent implements OnInit, OnDestroy {
             disableWindowResize: false,
             disableWarnings: false,
             scrollToNewItems: false,
-            itemChangeCallback: (item, itemComponent: GridsterItemComponentInterface) => {
+            itemChangeCallback: (item, itemComponent: GridsterItemComponent) => {
             this.itemResize(item, itemComponent);
             },
-            itemResizeCallback: (item, itemComponent: GridsterItemComponentInterface) => {
+            itemResizeCallback: (item, itemComponent: GridsterItemComponent) => {
             this.itemResize(item, itemComponent);
             },
-            itemInitCallback: (item, itemComponent: GridsterItemComponentInterface) => {
+            itemInitCallback: (item, itemComponent: GridsterItemComponent) => {
             this.itemResize(item, itemComponent);
             },
           };
     }
 
-    maximize(item) {
-        if (this.maximizedItem) {
-          this.maximizedItem = null;
+    maximize(isMaximized: boolean, index: number) {
+        if (isMaximized) {
+            this.maximizedIndex = index;
         } else {
-          this.maximizedItem = item;
+            this.maximizedIndex = -1;
         }
       }
 
-      public itemResize(item: GridsterItem, itemComponent: GridsterItemComponentInterface) {
-        // function setWhenChanged(c: AbstractControl, value: Number) {
-        //     if (c.value !== value) {
-        //       c.setValue(value);
-        //     }
-        // }
-  
-        // let control = <FormGroup>item.control;
-  
-        // setWhenChanged(control.controls.x, item.x);
-        // setWhenChanged(control.controls.y, item.y);
-        // setWhenChanged(control.controls.cols, item.cols);
-        // setWhenChanged(control.controls.rows, item.rows);
-  
-        // let resizeEvent = item.control.controls.runTime.value.resizeEvent;
-        // if (itemComponent.width) {
-        //   resizeEvent.emit([itemComponent.width, itemComponent.height]);
-        // }
+      public itemResize(item: GridsterItem, itemComponent: GridsterItemComponent) {
+        // console.debug(`top: ${itemComponent.el.clientTop}, left: ${itemComponent.el.clientLeft},
+        // width: ${itemComponent.el.clientWidth}, height: ${itemComponent.el.clientHeight}`)
       }
 
     // downloadData(format: eDownloadFormat) {
@@ -194,4 +178,8 @@ export class PreviewDashboardComponent implements OnInit, OnDestroy {
     //         this.dexihMessage.addMessage(reason);
     //     });
     // }
+
+    edit() {
+        this.router.navigate(['hub', this.hubKey, 'dashboards', 'dashboard-edit', this.dashboardKey]);
+    }
 }

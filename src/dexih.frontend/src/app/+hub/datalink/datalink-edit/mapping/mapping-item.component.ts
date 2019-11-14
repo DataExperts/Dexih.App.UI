@@ -93,7 +93,6 @@ export class MappingItemComponent implements OnInit {
                     } else {
                         this.error = 'Error, function not found.';
                     }
-
                 } else {
                     this.error = 'Error, function not found';
                 }
@@ -106,6 +105,10 @@ export class MappingItemComponent implements OnInit {
                 break;
             case eTransformItemType.Sort:
                 this.label = eDirection[item.sortDirection];
+                break;
+            case eTransformItemType.UnGroup:
+                this.label = 'UnGroup'
+                this.addUnGroupParameters();
                 break;
             default:
                 this.label = itemType.name;
@@ -134,7 +137,7 @@ export class MappingItemComponent implements OnInit {
         }
     }
 
-        // concatenates the arrays together.
+    // concatenates the arrays together.
     // node: .concat will append null arrays, where this ignores null arrays.
     private concat<T>(...args: T[][]): T[] {
         let array: T[] = [];
@@ -148,7 +151,8 @@ export class MappingItemComponent implements OnInit {
 
     private addBuiltInFunctionParameters(func: FunctionReference) {
         let functionInputs = this.concat(func.inputParameters, func.resultInputParameters);
-        let functionOutputs = this.concat(func.returnParameters, func.resultOutputParameters, func.resultReturnParameters);
+        let functionOutputs = this.concat(func.outputParameters, func.returnParameters, func.resultOutputParameters,
+            func.resultReturnParameters);
 
         let inputParams = this.transformItem.dexihFunctionParameters
             .filter(c =>
@@ -184,6 +188,10 @@ export class MappingItemComponent implements OnInit {
         this.outputParameters = functionOutputs.filter(c => c &&  !c.linkedName).map<ValidParameter>(param => {
             let p = outputParams.find(c => c.name === param.parameterName);
             if (p) {
+                if (this.allowCondition &&
+                    (p.direction === eParameterDirection.ReturnValue || p.direction === eParameterDirection.ResultReturnValue)) {
+                    return null;
+                }
                 if (p.rank === 0) {
                     let value = this.describeDatalinkColumn(p.datalinkColumn);
                     return {name: param.name, values: [{valid: value.valid, text: value.text}]};
@@ -195,9 +203,10 @@ export class MappingItemComponent implements OnInit {
                     return {name: param.name, values: values};
                 }
             } else {
-                return {name: param.name, values: [{valid: false, text: 'Not mapped'}]  };
+                // return {name: param.name, values: [{valid: false, text: 'Not mapped'}]  };
+                return null;
             }
-        });
+        }).filter(c => c !== null);
 
         let linkedNames = Array.from(new Set(this.concat(functionInputs, functionOutputs).map(c => c &&  c.linkedName).filter(c => c)));
         this.mapParameters = linkedNames.map(name => {
@@ -261,6 +270,30 @@ export class MappingItemComponent implements OnInit {
                 return {name: p.name, values: values};
             }
         });
+    }
+
+    private addUnGroupParameters() {
+
+        let parameters = this.transformItem.dexihFunctionParameters;
+
+        let runTime = this.transform['runTime'];
+        let inputColumns = runTime.inputColumns;
+
+        let sourceColumn = <DexihDatalinkColumn> inputColumns.find(c => c.key === this.transformItem.sourceDatalinkColumn.key);
+
+        if (sourceColumn) {
+            this.outputParameters = parameters.map<ValidParameter>(p => {
+                if (p.datalinkColumn) {
+                    let find = sourceColumn.childColumns.find(c => c.key === p.datalinkColumn.key);
+                    if (find) {
+                        return {name: p.name, values: [{valid: true, text: p.datalinkColumn.name}]};
+                    }
+                    return {name: p.name, values: [{valid: false, text: '(Invalid column) ' + p.datalinkColumn.name}]};
+                } else {
+                    return {name: p.name, values: [{valid: false, text: '(No column)'}]};
+                }
+            });
+        }
     }
 
     private describeDatalinkColumn(value: DexihDatalinkColumn): ValidValue {

@@ -552,35 +552,35 @@
           </e>
           <e p="web.config" t="Include" />
           <e p="wwwroot" t="Include">
-            <e p="0-es2015.f48b4f615ba764ba08ed.js" t="Include" />
-            <e p="0-es5.f48b4f615ba764ba08ed.js" t="Include" />
-            <e p="1-es2015.106ad9c50ef07786207e.js" t="Include" />
-            <e p="1-es5.106ad9c50ef07786207e.js" t="Include" />
-            <e p="13-es2015.0ff75e84732725f10f84.js" t="Include" />
-            <e p="13-es5.0ff75e84732725f10f84.js" t="Include" />
-            <e p="14-es2015.bb2eb24decb29e2c9c60.js" t="Include" />
-            <e p="14-es5.bb2eb24decb29e2c9c60.js" t="Include" />
-            <e p="15-es2015.65834c112c7576a9d97b.js" t="Include" />
-            <e p="15-es5.65834c112c7576a9d97b.js" t="Include" />
-            <e p="16-es2015.3139e0d03b5bac6a6bc2.js" t="Include" />
-            <e p="16-es5.3139e0d03b5bac6a6bc2.js" t="Include" />
-            <e p="17-es2015.54a8a08e873645c9a650.js" t="Include" />
-            <e p="17-es5.54a8a08e873645c9a650.js" t="Include" />
-            <e p="18-es2015.26536bcaafb0e6b137bd.js" t="Include" />
-            <e p="18-es5.26536bcaafb0e6b137bd.js" t="Include" />
+            <e p="0-es2015.2c8cddb0662e840b5ee9.js" t="Include" />
+            <e p="0-es5.2c8cddb0662e840b5ee9.js" t="Include" />
+            <e p="1-es2015.9ec0bffd8d633ff09b7c.js" t="Include" />
+            <e p="1-es5.9ec0bffd8d633ff09b7c.js" t="Include" />
+            <e p="13-es2015.e02fab1bb5ba1f20bbca.js" t="Include" />
+            <e p="13-es5.e02fab1bb5ba1f20bbca.js" t="Include" />
+            <e p="14-es2015.8d2f511606c1cdbd8a14.js" t="Include" />
+            <e p="14-es5.8d2f511606c1cdbd8a14.js" t="Include" />
+            <e p="15-es2015.5f502c6ca03966699e13.js" t="Include" />
+            <e p="15-es5.5f502c6ca03966699e13.js" t="Include" />
+            <e p="16-es2015.54c860cfae624369d0ca.js" t="Include" />
+            <e p="16-es5.54c860cfae624369d0ca.js" t="Include" />
+            <e p="17-es2015.27dd503c680924a5c297.js" t="Include" />
+            <e p="17-es5.27dd503c680924a5c297.js" t="Include" />
+            <e p="18-es2015.c878a5cc2a04d0484e83.js" t="Include" />
+            <e p="18-es5.c878a5cc2a04d0484e83.js" t="Include" />
             <e p="3rdpartylicenses.txt" t="Include" />
-            <e p="4-es2015.7a2ea25d683e717847f1.js" t="Include" />
-            <e p="4-es5.7a2ea25d683e717847f1.js" t="Include" />
-            <e p="5-es2015.85b153720561e7a030d2.js" t="Include" />
-            <e p="5-es5.85b153720561e7a030d2.js" t="Include" />
-            <e p="6-es2015.9c940df101cef0d65901.js" t="Include" />
-            <e p="6-es5.9c940df101cef0d65901.js" t="Include" />
-            <e p="7-es2015.6883f594858308935b4a.js" t="Include" />
-            <e p="7-es5.6883f594858308935b4a.js" t="Include" />
-            <e p="8-es2015.aeadcf9c99016f4bc9c4.js" t="Include" />
-            <e p="8-es5.aeadcf9c99016f4bc9c4.js" t="Include" />
-            <e p="9-es2015.c2f7eafd23b9dcb9a5fd.js" t="Include" />
-            <e p="9-es5.c2f7eafd23b9dcb9a5fd.js" t="Include" />
+            <e p="4-es2015.5d6d65af4f21a1243816.js" t="Include" />
+            <e p="4-es5.5d6d65af4f21a1243816.js" t="Include" />
+            <e p="5-es2015.b39d3d6bc973174f66b8.js" t="Include" />
+            <e p="5-es5.b39d3d6bc973174f66b8.js" t="Include" />
+            <e p="6-es2015.0dcc8cb6735c55f6760e.js" t="Include" />
+            <e p="6-es5.0dcc8cb6735c55f6760e.js" t="Include" />
+            <e p="7-es2015.8ebef8caa0df6323ec1d.js" t="Include" />
+            <e p="7-es5.8ebef8caa0df6323ec1d.js" t="Include" />
+            <e p="8-es2015.5fb22f9ab6fd96ffc06f.js" t="Include" />
+            <e p="8-es5.5fb22f9ab6fd96ffc06f.js" t="Include" />
+            <e p="9-es2015.ddf1ee100192dd83a30a.js" t="Include" />
+            <e p="9-es5.ddf1ee100192dd83a30a.js" t="Include" />
             <e p="assets" t="Include">
               <e p="css" t="Include">
                 <e p="_custom.scss" t="Include" />
@@ -767,19 +767,19 @@
                 <e p="google-api.js" t="Include" />
               </e>
             </e>
-            <e p="common-es2015.24f72312372a9467303a.js" t="Include" />
-            <e p="common-es5.24f72312372a9467303a.js" t="Include" />
+            <e p="common-es2015.cdaa6f3543e8e6b04821.js" t="Include" />
+            <e p="common-es5.cdaa6f3543e8e6b04821.js" t="Include" />
             <e p="fontawesome-webfont.674f50d287a8c48dc19b.eot" t="Include" />
             <e p="fontawesome-webfont.912ec66d7572ff821749.svg" t="Include" />
             <e p="fontawesome-webfont.af7ae505a9eed503f8b8.woff2" t="Include" />
             <e p="fontawesome-webfont.b06871f281fee6b241d6.ttf" t="Include" />
             <e p="fontawesome-webfont.fee66e712a8a08eef580.woff" t="Include" />
             <e p="index.html" t="Include" />
-            <e p="main-es2015.28d50dc1de9dd6010abf.js" t="Include" />
-            <e p="main-es5.28d50dc1de9dd6010abf.js" t="Include" />
-            <e p="polyfills-es5.a602d1856f2cfb17e06b.js" t="Include" />
-            <e p="runtime-es2015.098c964e9387debf81de.js" t="Include" />
-            <e p="runtime-es5.098c964e9387debf81de.js" t="Include" />
+            <e p="main-es2015.083d4eb972b30e935c83.js" t="Include" />
+            <e p="main-es5.083d4eb972b30e935c83.js" t="Include" />
+            <e p="polyfills-es5.6e8409c7116790edda13.js" t="Include" />
+            <e p="runtime-es2015.15021bc7d593228eb993.js" t="Include" />
+            <e p="runtime-es5.15021bc7d593228eb993.js" t="Include" />
             <e p="styles.0eeb42384e84fae3f877.css" t="Include" />
           </e>
         </e>
@@ -1270,6 +1270,7 @@
       <e p="CategorizeFunctions.cs" t="Include" />
       <e p="ConditionFunctions.cs" t="Include" />
       <e p="ConversionFunctions.cs" t="Include" />
+      <e p="DateFunctions.cs" t="Include" />
       <e p="dexih.functions.builtIn.csproj" t="IncludeRecursive" />
       <e p="GeometryFunctions.cs" t="Include" />
       <e p="HierarchyFunctions.cs" t="Include" />
@@ -1292,6 +1293,7 @@
         <e p="dexih.functions.pdb" t="Include" />
       </e>
       <e p="RowFunctions.cs" t="Include" />
+      <e p="SecurityFunctions.cs" t="Include" />
       <e p="SeriesFunctions.cs" t="Include" />
       <e p="ThrottleFunctions.cs" t="Include" />
       <e p="ValidationFunctions.cs" t="Include" />

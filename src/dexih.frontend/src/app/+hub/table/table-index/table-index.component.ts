@@ -26,12 +26,11 @@ export class TableIndexComponent implements OnInit, OnDestroy {
 
     columns = [
         { iconClass: 'sharedIcon', tooltip: 'sharedToolTip', width: '1%', align: 'center' },
+        { name: 'tableType', title: 'Table Type', format: 'Enum', enum: eTableType },
         { name: 'logicalName', title: 'Logical Name', format: 'Md', footer: 'description' },
-        { name: 'name', title: 'Table Name'  },
         { name: 'connectionType', title: 'Connection Type', format: '' },
         { name: 'connectionName', title: 'Connection', format: '' },
-        { name: 'tableType', title: 'Table Type', format: 'Enum', enum: eTableType },
-        { name: 'updateDate', title: 'Last Updated', format: 'Date' },
+        { name: 'updateDate', title: 'Last Updated', format: 'DateTime' },
     ];
 
     private _tableData = new BehaviorSubject<Array<DexihTable>>(null);

@@ -1114,6 +1114,15 @@ export class HubService implements OnInit, OnDestroy {
         return this.hubPost('/api/Hub/SaveTables', {value: tables}, 'Saving tables..');
     }
 
+    // get dbml string
+    getDbml(tables: Array<DexihTable>) {
+        this.authService.downloadFile('/api/Hub/DBML', {
+            hubKey: this._hubKey,
+            remoteAgentId: this.getCurrentRemoteAgentId(false),
+            itemKeys: tables.map(t => t.key)
+        }, 'Getting DBML...', 'text/plain');
+    }
+
     // create datalinks
     createDatalinks(sourceTableKeys: Array<number>, name: string, datalinkType: eDatalinkType,
         targetConnectionKey: number, targetTableKey: number,

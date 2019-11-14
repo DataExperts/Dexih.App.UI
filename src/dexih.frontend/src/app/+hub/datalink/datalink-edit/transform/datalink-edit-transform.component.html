@@ -111,7 +111,7 @@
 
         <div class="w-100 mr-1 ml-1">
             <div *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Join || this.datalinkTransformForm.value.transformType == eTransformType.Lookup">
-                <mapping [datalinkTransformForm]="datalinkTransformForm" [allowJoin]="true" title="{{this.datalinkTransformForm.value.transformType}} Table"  >
+                <mapping [datalinkTransformForm]="datalinkTransformForm" [allowJoin]="true" title="{{eTransformType[this.datalinkTransformForm.value.transformType]}} Table"  >
                 </mapping>
             </div>
 
@@ -159,7 +159,7 @@
             </div>
 
             <div *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Rows">
-                <mapping [datalinkTransformForm]="datalinkTransformForm" [allowRow]="true" [allowStandard]="true" [allowJoinNode]="true" [allowOutput]="true" title="Row Functions">
+                <mapping [datalinkTransformForm]="datalinkTransformForm" [allowRow]="true" [allowStandard]="true" [allowJoinNode]="false" [allowOutput]="true" [allowCondition]="true" title="Row Functions">
                 </mapping>
             </div>
         </div>

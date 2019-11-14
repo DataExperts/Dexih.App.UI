@@ -11,6 +11,7 @@
 
         <li *ngIf="hubCache.canWrite"><a class="dropdown-item" (click)="reImport()" title="Re-Import the select tables from the source database"><i class="fa fa-share-square-o"></i> Re-Import Metadata</a></li>
         <li><a class="dropdown-item" (click)="export()" title="Export the metadata for the selected tables to a local file."><i class="fa fa-save"></i> Save Locally</a></li>
+        <li><a class="dropdown-item" (click)="dbml()" title="Create a dbml file from the selected tables."><i class="fa fa-comments"></i> Export DBML</a></li>
         <li *ngIf="hubCache.canWrite"><a class="dropdown-item" (click)="delete()" title="Delete the metadata for the selected tables."><span class="text-danger"><i class="fa fa-trash-o text-danger"></i> Delete</span></a></li>
 
         <li class="list-group-item list-group-item-heading list-group-item-info">Operations</li>

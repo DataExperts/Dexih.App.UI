@@ -9,7 +9,7 @@ import { AuthService } from '../../../../+auth/auth.service';
 import { FormGroup, FormArray, AbstractControl } from '@angular/forms';
 import { InputOutputColumns } from '../../../hub.lineage.models';
 import { eFunctionType, eParameterDirection, DexihDatalinkColumn, DexihDatalinkTransformItem,
-  eTransformItemType, eTypeCode, DexihFunctionParameter } from '../../../../shared/shared.models';
+  eTransformItemType, eTypeCode, DexihFunctionParameter, eErrorActionItems, eInvalidActionItems, FunctionParameter } from '../../../../shared/shared.models';
 import { CancelToken } from '../../../../+auth/auth.models';
 
 @Component({
@@ -32,7 +32,8 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
   eParameterDirection = eParameterDirection;
   functionType: eFunctionType;
 
-  invalidActions = InvalidActions;
+  eInvalidActionItems = eInvalidActionItems.filter(c => c.key > 0);
+  eErrorActionItems = eErrorActionItems.filter(c => c.key > 0);
 
   datalinkTransformItemKey: number;
   datalinkKey: number;
@@ -56,6 +57,7 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
 
   inputColumns: Array<DexihDatalinkColumn>;
   outputColumns: Array<DexihDatalinkColumn>;
+
 
   constructor(
     private hubService: HubService,
@@ -151,6 +153,10 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
             returnParameter.position = -1;
             returnParameter.datalinkColumn = null;
             returnParameter.isValid = true;
+
+            let funcParam = new FunctionParameter();
+            funcParam.name = 'Return';
+            returnParameter['runTime'] = {functionParameter: funcParam};
 
             newItem.dexihFunctionParameters = new Array<DexihFunctionParameter>();
             newItem.dexihFunctionParameters.push(returnParameter);

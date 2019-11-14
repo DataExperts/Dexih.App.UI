@@ -369,6 +369,7 @@ export class InputOutputColumns {
                     case eTransformItemType.BuiltInFunction:
                     case eTransformItemType.ColumnPair:
                     case eTransformItemType.CustomFunction:
+                    case eTransformItemType.UnGroup:
                         if (item.targetDatalinkColumn) {
                             transformColumns.push(item.targetDatalinkColumn);
                         }

@@ -1,11 +1,10 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { DexihMessageComponent } from '../../../shared/ui/dexihMessage/index';
-import { HubsService} from '../../hubs.service';
-import { CancelToken } from '../../../+auth/auth.models';
-import { InputColumn, DexihColumnBase, SelectQuery, eDownloadFormat, SharedData, eDataObjectType, ChartConfig } from '../../../shared/shared.models';
+import { eDataObjectType } from '../../../shared/shared.models';
+import { PreviewDataComponent} from '../preview-data/preview-data.component';
 
 @Component({
 
@@ -14,6 +13,7 @@ import { InputColumn, DexihColumnBase, SelectQuery, eDownloadFormat, SharedData,
 })
 export class PreviewComponent implements OnInit, OnDestroy {
     @ViewChild('DexihMessage', { static: true }) public dexihMessage: DexihMessageComponent;
+    @ViewChild('PreviewData', { static: true }) public previewData: PreviewDataComponent;
 
     private _subscription: Subscription;
 
@@ -25,7 +25,8 @@ export class PreviewComponent implements OnInit, OnDestroy {
 
     constructor(
         private authService: AuthService,
-        private route: ActivatedRoute) {
+        private route: ActivatedRoute,
+        private router: Router) {
     }
 
     ngOnInit() {
@@ -51,6 +52,20 @@ export class PreviewComponent implements OnInit, OnDestroy {
 
     close() {
         this.authService.navigateUp();
+    }
+
+    edit() {
+        switch (this.objectType) {
+            case eDataObjectType.Datalink:
+                this.router.navigate(['hub', this.hubKey, 'datalinks', 'datalink-edit', 'edit', this.objectKey]);
+                break;
+            case eDataObjectType.Table:
+                this.router.navigate(['hub', this.hubKey, 'tables', 'table-edit', this.objectKey]);
+                break;
+            case eDataObjectType.View:
+                this.router.navigate(['hub', this.hubKey, 'views', 'view-edit', this.objectKey]);
+                break;
+        }
     }
 
 }

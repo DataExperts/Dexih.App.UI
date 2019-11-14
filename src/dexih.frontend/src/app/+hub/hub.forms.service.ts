@@ -147,6 +147,7 @@ export class HubFormsService implements OnDestroy {
     this._currentFormObservable.next(form);
 
     if (this.currentForm) {
+      if(this._valueChangesSubscription) { this._valueChangesSubscription.unsubscribe(); }
       this._valueChangesSubscription = this.currentForm.valueChanges
         .subscribe(data => this.onValueChanged(data));
       this.onValueChanged(); // (re)set validation messages now
@@ -1597,7 +1598,8 @@ export class HubFormsService implements OnDestroy {
     const parameterForm = this.fb.group({
       // 'name': [, [ // used for adding new columns
       // ]],
-      'datalinkColumn': parameter.datalinkColumn
+      'datalinkColumn': parameter.datalinkColumn,
+      'runTime': parameter['runTime'],
     });
 
     this.addMissing(parameter, parameterForm, new DexihFunctionArrayParameter());
@@ -1676,7 +1678,7 @@ export class HubFormsService implements OnDestroy {
       sourceTableKey.setErrors(null);
       sourceDatalinkKey.setErrors(null);
 
-      if (sourceType === eDataObjectType.Table) {
+      if (sourceType === eSourceType.Table) {
         if (!sourceTableKey.value) {
           return sourceTableKey.setErrors({ required: true });
         }

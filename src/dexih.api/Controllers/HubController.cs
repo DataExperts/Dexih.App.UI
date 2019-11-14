@@ -682,7 +682,7 @@ namespace dexih.api.Controllers
 					itemParameters.Add( parameter.Name, parameters.SetParameters(parameter.Value));
 				}
 
-				var view = hub.DexihViews.SingleOrDefault(c => c.Key == item.ViewKey);
+				var view = hub.DexihViews.SingleOrDefault(c => c.IsValid &&  c.Key == item.ViewKey);
 
 				if (view != null)
 				{
@@ -1383,7 +1383,7 @@ namespace dexih.api.Controllers
 
 			    var returnParam =
 				    downloadFunctionCode.DatalinkTransformItem.DexihFunctionParameters.SingleOrDefault(c =>
-					    c.Direction == EParameterDirection.ReturnValue);
+					    c.IsValid && c.Direction == EParameterDirection.ReturnValue);
 
 			    if (returnParam != null)
 			    {
@@ -1429,6 +1429,24 @@ namespace dexih.api.Controllers
 
 		    var response = File(zipStream, "application/octet-stream", "dexih.custom.function.zip");
 		    return response;
+	    }
+
+	    [HttpPost("[action]")]
+	    [ValidateHub(EPermission.PublishReader)]
+	    public async Task<string> DBML([FromBody] HubKeyItems tables, CancellationToken cancellationToken)
+	    {
+		    var repositoryManager = _operations.RepositoryManager;
+		    var hub = await repositoryManager.GetHub(tables.HubKey, cancellationToken);
+		    
+		    var dbml = new StringBuilder();
+		    foreach (var key in tables.ItemKeys)
+		    {
+			    var table = hub.DexihTables.Single(c => c.Key == key);
+			    dbml.AppendLine(table.GetTable(hub, null, null).DBML());
+			    dbml.AppendLine();
+		    }
+
+		    return dbml.ToString();
 	    }
     }
 }
