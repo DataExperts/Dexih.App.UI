@@ -1048,8 +1048,8 @@ export class AuthService implements OnDestroy {
     googleLoadScript(): Promise<boolean> {
         // node: safari seems to require script local
         // original script at https://apis.google.com/js/api.js
-        return this.loadScript('GOOGLE', '/assets/js/google-api.js');
-        // return this.loadScript('GOOGLE', 'https://apis.google.com/js/platform.js', true);
+        // return this.loadScript('GOOGLE', '/assets/js/google-api.js');
+        return this.loadScript('GOOGLE', 'https://apis.google.com/js/api.js', true);
     }
 
     googleLogin(clientId: string, forceLogin: boolean): Promise<User> {
@@ -1523,10 +1523,12 @@ export class AuthService implements OnDestroy {
                     this._hubs.next(null);
                     this.router.navigate(['/auth/login']);
                 }).catch(reason => {
-                    this.logger.LogC(() => `logout error:${reason.message}`, eLogLevel.Error);
+                    if (reason) {
+                        this.logger.LogC(() => `logout error:${reason.message}`, eLogLevel.Error);
 
-                    this._hubErrors.next(reason);
-                    reject(reason);
+                        this._hubErrors.next(reason);
+                        reject(reason);
+                    }
                 });
         });
     }

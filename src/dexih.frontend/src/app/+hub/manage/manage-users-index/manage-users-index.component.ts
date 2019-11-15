@@ -19,7 +19,7 @@ export class ManageUsersIndexComponent implements OnInit, OnDestroy {
         { name: 'email', title: 'Email', format: ''},
         { name: 'firstName', title: 'First Name', format: ''},
         { name: 'lastName', title: 'Last Name', format: ''},
-        { name: 'permission', title: 'Permission', format: ''}
+        { name: 'permission', title: 'Permission', enum: ePermission, format: 'Enum'}
     ];
 
     private _tableData = new BehaviorSubject<Array<any>>(null);
