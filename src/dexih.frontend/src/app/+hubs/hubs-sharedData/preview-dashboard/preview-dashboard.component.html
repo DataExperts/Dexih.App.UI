@@ -9,7 +9,7 @@
             <dexih-button-edit class="ml-1"  (click)="edit()"></dexih-button-edit>
         </ng-template>
 
-        <div [ngClass]="{ 'd-none': maximizedItem }">
+        <div>
             <div style="height:800px">
                 <ng-template [ngIf]="dashboard">
                     <gridster [options]="options" #gridster>
@@ -23,11 +23,5 @@
                 </ng-template>
             </div>
         </div>
-        
-        <div *ngIf="maximizedItem" style="height:800px;">
-            <preview-dashboard-item [item]="maximizedItem" (onMaximize)="maximize($event)" [isMaximized]="true">
-            </preview-dashboard-item>
-        </div>
-
     </dexih-widget>
 </div>
