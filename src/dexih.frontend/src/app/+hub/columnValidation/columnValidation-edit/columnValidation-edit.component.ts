@@ -1,10 +1,9 @@
-import { Component, OnInit, OnDestroy, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HubCache, InvalidActions, CleanActions, eCacheStatus } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { AuthService } from '../../../+auth/auth.service';
-import { Observable ,  Subscription, combineLatest} from 'rxjs';
-import { Location } from '@angular/common';
+import { Subscription, combineLatest} from 'rxjs';
 import { HubFormsService } from '../../hub.forms.service';
 import { TypeCodes } from '../../hub.remote.models';
 import { eInvalidAction, eCleanAction, eTypeCode, DexihConnection, DexihColumnValidation } from '../../../shared/shared.models';
@@ -53,8 +52,7 @@ export class ColumnValidationEditComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     public formsService: HubFormsService,
     private route: ActivatedRoute,
-    private router: Router,
-    private location: Location) {
+    private router: Router) {
   }
 
   ngOnInit() {

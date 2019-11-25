@@ -76,12 +76,16 @@ namespace dexih.api.Services
                 hubPermission = EPermission.None;
                 var result = new ReturnValue(false, "No hub has been specified, please select a hub from the menu or contact support for assistance.", null);
                 context.Result = new JsonResult(result);
+                context.HttpContext.Response.ContentType = "application/json";
+                context.HttpContext.Response.StatusCode = 400;
             }
 
             if (hubPermission > _minimumPermission)
             {
                 var result = new ReturnValue(false, "The current user does not have the necessary permissions to access this resource", null);
                 context.Result = new JsonResult(result);
+                context.HttpContext.Response.ContentType = "application/json";
+                context.HttpContext.Response.StatusCode = 400;
             }
             
             context.Controller.GetType().GetProperty("HubPermission").SetValue(context.Controller, hubPermission);

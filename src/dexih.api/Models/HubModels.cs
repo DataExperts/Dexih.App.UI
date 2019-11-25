@@ -89,6 +89,11 @@ namespace dexih.api.Models
         public long[] ItemKeys {get;set;}
     }
 
+    public class HubKeyItem : HubModelBase
+    {
+        public long Key { get; set; }
+    }
+
 
     public class ShareItems: HubModelBase
     {
@@ -183,6 +188,17 @@ namespace dexih.api.Models
         public long DatalinkKey { get; set; }
     }
 
+    public class PreviewListOfValuesKey: PreviewBase
+    {
+        public long ListOfValuesKey { get; set; }
+    }
+
+    public class PreviewListOfValues: PreviewBase
+    {
+        public DexihListOfValues ListOfValues { get; set; }
+    }
+
+    
     public class PreviewDashboard: PreviewBase
     {
         public DexihDashboard Dashboard { get; set; }
@@ -194,10 +210,14 @@ namespace dexih.api.Models
         public string DataKey { get; set; }
     }
 
+    public class PreviewViewKey: PreviewBase
+    {
+        public long ViewKey { get; set; }
+    }
+    
     public class PreviewView: PreviewBase
     {
         public DexihView View { get; set; }
-
     }
     
     public class AuditResults: HubModelBase

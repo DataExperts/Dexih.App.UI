@@ -199,6 +199,7 @@ export class ApiData {
     public apiKey: number = 0;
     public api: DexihApi = null;
     public value: string = null;
+    public listOfValuesKey: number = null;
     public key: number = 0;
     public name: string = null;
     public description: string = null;
@@ -313,6 +314,7 @@ export class ApiData {
     public position: number = 0;
     public direction: eParameterDirection = null;
     public dataType: eTypeCode = eTypeCode.Unknown;
+    public allowNull: boolean = false;
     public isGeneric: boolean = false;
     public rank: number = 0;
     public key: number = 0;
@@ -364,6 +366,7 @@ export class ApiData {
    export class DexihDashboardItemParameter {
     public dashboardItemKey: number = 0;
     public value: string = null;
+    public listOfValuesKey: number = null;
     public key: number = 0;
     public name: string = null;
     public description: string = null;
@@ -376,6 +379,7 @@ export class ApiData {
    export class DexihDashboardParameter {
     public dashboardKey: number = 0;
     public value: string = null;
+    public listOfValuesKey: number = null;
     public key: number = 0;
     public name: string = null;
     public description: string = null;
@@ -405,6 +409,7 @@ export class ApiData {
    export class DexihDatajobParameter {
     public datajobKey: number = 0;
     public value: string = null;
+    public listOfValuesKey: number = null;
     public key: number = 0;
     public name: string = null;
     public description: string = null;
@@ -487,6 +492,7 @@ export class ApiData {
    export class DexihDatalinkParameter {
     public datalinkKey: number = 0;
     public value: string = null;
+    public listOfValuesKey: number = null;
     public key: number = 0;
     public name: string = null;
     public description: string = null;
@@ -557,6 +563,7 @@ export class ApiData {
    export class DexihDatalinkStepParameter {
     public datalinkStepKey: number = 0;
     public value: string = null;
+    public listOfValuesKey: number = null;
     public key: number = 0;
     public name: string = null;
     public description: string = null;
@@ -762,6 +769,7 @@ export class ApiData {
     public position: number = 0;
     public direction: eParameterDirection = null;
     public dataType: eTypeCode = eTypeCode.Unknown;
+    public allowNull: boolean = false;
     public isGeneric: boolean = false;
     public rank: number = 0;
     public key: number = 0;
@@ -784,6 +792,7 @@ export class ApiData {
     public position: number = 0;
     public direction: eParameterDirection = null;
     public dataType: eTypeCode = eTypeCode.Unknown;
+    public allowNull: boolean = false;
     public isGeneric: boolean = false;
     public rank: number = 0;
     public key: number = 0;
@@ -804,6 +813,7 @@ export class ApiData {
     public position: number = 0;
     public direction: eParameterDirection = null;
     public dataType: eTypeCode = eTypeCode.Unknown;
+    public allowNull: boolean = false;
     public isGeneric: boolean = false;
     public rank: number = 0;
     public key: number = 0;
@@ -835,6 +845,7 @@ export class ApiData {
     public dexihColumnValidations: DexihColumnValidation[] = [];
     public dexihCustomFunctions: DexihCustomFunction[] = [];
     public dexihRemoteAgentHubs: DexihRemoteAgentHub[] = [];
+    public dexihListOfValues: DexihListOfValues[] = [];
     public createDate: Date = null;
     public updateDate: Date = null;
     public isValid: boolean = true;
@@ -870,10 +881,31 @@ export class ApiData {
     public isValid: boolean = true;
    }
    
+   export class DexihListOfValues {
+    public sourceType: eLOVObjectType = null;
+    public sourceTableKey: number = null;
+    public sourceDatalinkKey: number = null;
+    public selectQuery: SelectQuery = null;
+    public keyColumnKey: number = null;
+    public nameColumnKey: number = null;
+    public descriptionColumnKey: number = null;
+    public staticData: string = null;
+    public cache: boolean = false;
+    public cacheSeconds: number = 0;
+    public key: number = 0;
+    public name: string = null;
+    public description: string = null;
+    public hubKey: number = 0;
+    public createDate: Date = null;
+    public updateDate: Date = null;
+    public isValid: boolean = true;
+   }
+   
    export class DexihParameterBase {
     public position: number = 0;
     public direction: eParameterDirection = null;
     public dataType: eTypeCode = eTypeCode.Unknown;
+    public allowNull: boolean = false;
     public isGeneric: boolean = false;
     public rank: number = 0;
     public key: number = 0;
@@ -1023,6 +1055,7 @@ export class ApiData {
    export class DexihViewParameter {
     public viewKey: number = 0;
     public value: string = null;
+    public listOfValuesKey: number = null;
     public key: number = 0;
     public name: string = null;
     public description: string = null;
@@ -1194,6 +1227,7 @@ export class ApiData {
     public views: ImportObject<DexihView>[] = [];
     public apis: ImportObject<DexihApi>[] = [];
     public dashboards: ImportObject<DexihDashboard>[] = [];
+    public listOfValues: ImportObject<DexihListOfValues>[] = [];
     public warnings: string[] = [];
    }
    
@@ -1225,6 +1259,7 @@ export class ApiData {
    
    export class InputParameterBase {
     public value: string = null;
+    public listOfValuesKey: number = null;
     public key: number = 0;
     public name: string = null;
     public description: string = null;
@@ -2376,6 +2411,21 @@ export class ApiData {
     {key: eLoginProvider.Microsoft, name: 'Microsoft', description: ''},
    ]
    
+   export enum eLOVObjectType {
+    Table = 1,
+    Datalink = 2,
+    View = 3,
+    Static = 4,
+   }
+   
+   export const eLOVObjectTypeItems = [
+    {key: 0, name: 'Unknown', description: 'Unknown'},
+    {key: eLOVObjectType.Table, name: 'Table', description: ''},
+    {key: eLOVObjectType.Datalink, name: 'Datalink', description: ''},
+    {key: eLOVObjectType.View, name: 'View', description: ''},
+    {key: eLOVObjectType.Static, name: 'Static', description: ''},
+   ]
+   
    export enum eManagedTaskStatus {
     Created = 1,
     FileWatching = 2,
@@ -2597,6 +2647,7 @@ export class ApiData {
     View = 11,
     Api = 12,
     Dashboard = 13,
+    ListOfValues = 14,
    }
    
    export const eSharedObjectTypeItems = [
@@ -2614,6 +2665,7 @@ export class ApiData {
     {key: eSharedObjectType.View, name: 'View', description: ''},
     {key: eSharedObjectType.Api, name: 'Api', description: ''},
     {key: eSharedObjectType.Dashboard, name: 'Dashboard', description: ''},
+    {key: eSharedObjectType.ListOfValues, name: 'ListOfValues', description: ''},
    ]
    
    export enum eSourceType {
@@ -2904,4 +2956,5 @@ export class ApiData {
     {key: logLevel.Critical, name: 'Critical', description: ''},
     {key: logLevel.None, name: 'None', description: ''},
    ]
+   
    

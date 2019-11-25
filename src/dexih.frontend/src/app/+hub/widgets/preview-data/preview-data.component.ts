@@ -92,7 +92,12 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
                             // get the outputs from the last transform in the datalink
                             const ioColumns = new InputOutputColumns();
                             ioColumns.buildInputOutput(this.hubCache, datalink);
-                            this.tableColumns = ioColumns.getDatalinkOutputColumns(datalink);
+                            if (this.datalinkTransformKey) {
+                                let transform = datalink.dexihDatalinkTransforms.find(c => c.key === this.datalinkTransformKey);
+                                this.tableColumns = transform['runTime']['outputColumns'];
+                            } else {
+                                this.tableColumns = ioColumns.getDatalinkOutputColumns(datalink);
+                            }
 
                             this.inputColumns = datalink.sourceDatalinkTable.dexihDatalinkColumns.filter(c => c.isInput).map(c => {
                                 return  {datalinkKey: this.key, datalinkName: datalink.name,
@@ -159,6 +164,10 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
 
     close() {
         this.authService.navigateUp();
+    }
+
+    parameterChange() {
+        
     }
 
     refresh() {

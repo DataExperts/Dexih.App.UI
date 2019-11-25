@@ -137,7 +137,7 @@ namespace dexih.api.Controllers
 				}
 			}
 
-            throw new AccountControllerException("Unkonwn error logging in.");
+            throw new AccountControllerException("Unknown error logging in.");
         }
 
 	    private async  Task<ExternalLoginResult> GetExternalLogin(ELoginProvider provider, string authenticationToken)

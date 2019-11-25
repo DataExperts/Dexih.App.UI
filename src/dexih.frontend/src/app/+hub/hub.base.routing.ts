@@ -30,6 +30,8 @@ import { SearchComponent } from './search';
 import { DashboardEditComponent, DashboardIndexComponent } from './dashboard';
 import { DatajobRunComponent } from './datajob/datajob-run/datajob-run.component';
 import { DexihDashboard, DexihView, DexihApi } from '../shared/shared.models';
+import { ListOfValuesEditComponent } from './listOfValues/listOfValues-edit';
+import { ListOfValuesIndexComponent } from './listOfValues/listOfValues-index';
 
 const tableRoutes: Routes = [
     { path: 'table-edit/:tableKey', data: { pageTitle: 'Edit Table', action: 'edit'},
@@ -183,6 +185,18 @@ const dashboardRoute: Route = { path: 'dashboards', data: { pageTitle: 'Dashboar
     ])
 };
 
+const lovRoutes: Routes = [
+    { path: 'listOfValues-edit/:listOfValuesKey', component: ListOfValuesEditComponent, canDeactivate: [ItemEditGuard],
+        data: { action: 'edit', pageTitle: 'Edit List Of Values'}},
+    { path: 'listOfValues-new', component: ListOfValuesEditComponent, data: { action: 'new', pageTitle: 'New List of Values'}},
+];
+
+const lovRoute: Route = { path: 'listOfValues', data: { pageTitle: 'List of Values' }, children: (<Routes>[
+    {path: '', pathMatch: 'full', component: ListOfValuesIndexComponent},
+    {path: '', children: (<Routes>lovRoutes)}
+    ])
+};
+
 const apiRoutes: Routes = [
     { path: 'api-edit/:apiKey', component: ApiEditComponent, canDeactivate: [ItemEditGuard],
         data: { action: 'edit', pageTitle: 'Edit Api'}},
@@ -278,7 +292,7 @@ const datajobsRoute: Route = { path: 'datajobs', data: { pageTitle: 'Data Jobs' 
 };
 
 const searchRoute: Route =  { path: 'search',  data: {pageTitle: 'Search'}, children: (<Routes> [
-    { path: '', pathMatch: 'full', redirectTo: 'All/' },
+    { path: '', pathMatch: 'full', redirectTo: '0/' },
 
     // { path: '', loadChildren: './hub.base.module#HubBaseModule' },
      { path: ':searchObject/:search', pathMatch: 'full', component: SearchComponent, },
@@ -299,6 +313,7 @@ const routes: Routes = (<Routes>[
     fileFormatsRoute,
     viewRoute,
     dashboardRoute,
+    lovRoute,
     apiRoute,
     hubVariablesRoute,
     manageRoute,
@@ -318,6 +333,7 @@ const routes: Routes = (<Routes>[
     { path: '', children : fileFormatRoutes},
     { path: '', children : viewRoutes},
     { path: '', children : dashboardRoutes},
+    { path: '', children : lovRoutes},
     { path: '', children : apiRoutes},
     { path: '', children : hubVariableRoutes},
     { path: '', children : filesRoutes},

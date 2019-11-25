@@ -23,6 +23,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     searchObjectTypes = SearchObjectTypes;
     eSearchObjectType = eSearchObjectType;
 
+    private isFirst = false;
+
     searchResults: Array<SearchResult>;
 
     constructor(public hubService: HubService,
@@ -35,32 +37,32 @@ export class SearchComponent implements OnInit, OnDestroy {
     ngOnInit() {
         try {
             this._subscription = combineLatest(
-                this.route.data,
                 this.route.params,
-                this.route.queryParams,
                 this.hubService.getHubCacheObservable(),
             ).subscribe(result => {
-                let data = result[0];
-                let params = result[1];
-                let queryParams = result[2];
-                this.hubCache = result[3];
+                let params = result[0];
+                this.hubCache = result[1];
 
-                this.searchForm = this.fb.group({
-                    'searchString': [params['search'], [
-                    ]],
-                    'searchObject': [params['searchObject'], [
-                    ]],
-                });
-
-                this.updateSearch();
-
-                if (this._searchSubscription) { this._searchSubscription.unsubscribe(); }
-                this._searchSubscription = this.searchForm.valueChanges
-                    .pipe(debounceTime(500))
-                    .subscribe(newValue => {
-                        this.updateSearch();
-
+                if (!this.isFirst) {
+                    this.isFirst = false;
+                    this.searchForm = this.fb.group({
+                        'searchString': [params['search'], [
+                        ]],
+                        'searchObject': [+params['searchObject'], [
+                        ]],
                     });
+
+                    this.updateSearch();
+
+                    if (this._searchSubscription) { this._searchSubscription.unsubscribe(); }
+                    this._searchSubscription = this.searchForm.valueChanges
+                        .pipe(debounceTime(500))
+                        .subscribe(newValue => {
+                            this.updateSearch();
+                        });
+                }
+
+
             });
         } catch (e) {
             this.hubService.addHubClientErrorMessage(e, 'Search');

@@ -35,11 +35,11 @@
 
 				<div class="form-row">
 					<section class="form-group col-md-6">
-						<form-input label="Buffer Size" formControlName="bufferSize" placeholder="Enter buffer size" iconClass="fa fa-list" [errors]="formsService.formErrors['bufferSize']" note="The size of the internal buffer that is used when reader or writing data." >
+						<form-input type="number" label="Buffer Size" formControlName="bufferSize" placeholder="Enter buffer size" iconClass="fa fa-list" [errors]="formsService.formErrors['bufferSize']" note="The size of the internal buffer that is used when reader or writing data." >
 						</form-input>
 					</section>
 					<section class="form-group col-md-6">
-						<form-input label="Skip Header Rows Count" formControlName="skipHeaderRows" placeholder="Enter row count" iconClass="fa fa-list" [errors]="formsService.formErrors['skipHeaderRows']" note="The number of rows at the start of the file that will be ignored." >
+						<form-input type="number" label="Skip Header Rows Count" formControlName="skipHeaderRows" placeholder="Enter row count" iconClass="fa fa-list" [errors]="formsService.formErrors['skipHeaderRows']" note="The number of rows at the start of the file that will be ignored." >
 						</form-input>
 					</section>
 				</div>

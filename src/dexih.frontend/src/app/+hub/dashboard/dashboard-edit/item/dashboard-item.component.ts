@@ -8,7 +8,7 @@ import { PreviewViewComponent } from '../../../widgets/preview-view/preview-view
 import { HubFormsService } from '../../../hub.forms.service';
 import { DexihWidgetComponent } from 'dexih-ngx-components';
 import { CancelToken } from '../../../../+auth/auth.models';
-import { DexihView } from '../../../../shared/shared.models';
+import { DexihView, DexihDashboardItem, InputParameterBase } from '../../../../shared/shared.models';
 
 @Component({
     selector: 'dashboard-item',
@@ -85,7 +85,7 @@ export class DashboardItemComponent implements OnInit, OnChanges, OnDestroy {
 
                         view.parameters.forEach(parameter => {
                             let currentParameter = currentParameters.find( c => c.name === parameter.name);
-                            let newParameter = new DexihInputParameter();
+                            let newParameter = new InputParameterBase();
                             if (currentParameter) {
                                 newParameter.name = currentParameter.name;
                                 newParameter.value = currentParameter.value;
@@ -97,6 +97,7 @@ export class DashboardItemComponent implements OnInit, OnChanges, OnDestroy {
                             formParameters.push(newFormParameter);
 
                         });
+                        
                     }
                 }
             });
@@ -104,15 +105,20 @@ export class DashboardItemComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     public refresh() {
+        // let data = <DataCache> this.item.controls.runTime.value.data;
+        // let view = this.hubCache.hub.dexihViews.find(c => c.key === this.item.controls.viewKey.value);
+        // view = Object.assign({}, view);
+        // view.parameters = this.item.controls.parameters.value;
+        // if (view) {
+        //     let preview = this.hubService.previewView(view, view.inputValues,
+        //             this.formsService.currentForm.controls.parameters.value, this.cancelToken);
+        //     data.refresh(preview);
+        // }
+
+        let preview = this.hubService.previewViewKey(this.item.controls.viewKey.value, null,
+        this.formsService.currentForm.controls.parameters.value, this.cancelToken);
         let data = <DataCache> this.item.controls.runTime.value.data;
-        let view = this.hubCache.hub.dexihViews.find(c => c.key === this.item.controls.viewKey.value);
-        view = Object.assign({}, view);
-        view.parameters = this.item.controls.parameters.value;
-        if (view) {
-            let preview = this.hubService.previewView(view, view.inputValues,
-                    this.formsService.currentForm.controls.parameters.value, this.cancelToken);
-            data.refresh(preview);
-        }
+        data.refresh(preview);
     }
 
     public toggleEdit() {

@@ -38,6 +38,7 @@
 		public const int DeactivateApis = 1033;
 		public const int DatalinkProperties = 1034;
 		public const int PreviewAuditResults = 1035;
+		public const int PreviewListOfValues = 1036;
 
         public const int SocketRemoteAgentNew = 2000;
 		public const int SocketRemoteAgentStart = 2001;
@@ -115,6 +116,9 @@
 		public const int HubSaveDashboards = 4056;
 		public const int HubImportFunctionMappings = 4057;
 		public const int HubEncrypt = 4058;
+		public const int HubDeleteListOfValues = 4055;
+		public const int HubSaveListOfValues = 4056;
+		public const int HubPreviewListOfValues = 4057;
 	
 
         public const int RemoteLogin = 5000;

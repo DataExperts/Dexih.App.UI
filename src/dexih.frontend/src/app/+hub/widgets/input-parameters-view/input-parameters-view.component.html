@@ -1,0 +1,19 @@
+<div *ngIf="parameters">
+    <span *ngFor="let parameter of parameters; let i = index" class="input-group">
+            <div class="input-group">
+                <form-input [disabled]="true" labelLeft="Name" [border]="false" class="form-control p-0"
+                [(ngModel)]="parameter.name">
+                </form-input>
+                <form-select labelLeft="Value" [border]="false" class="form-control p-0" [(ngModel)]="parameter.value"
+                    itemKey="key"
+                    itemName="name"
+                    [items]="parameter.runTime" [enableTextEntry]="true"
+                    [textEntryItems]="parentParams"
+                    textEntryItemsTitle="Linked Parameters"
+                    (onShown)="refresh(parameter)"
+                    (ngModelChange)="change($event)"
+                    >
+                </form-select>
+            </div>
+    </span>
+</div>

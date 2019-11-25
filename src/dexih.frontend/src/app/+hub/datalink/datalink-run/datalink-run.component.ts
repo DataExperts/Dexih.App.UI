@@ -4,7 +4,7 @@ import { HubService } from '../../hub.service';
 import { AuthService } from '../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { DexihDatalink, InputColumn, InputParameter } from '../../../shared/shared.models';
+import { DexihDatalink, InputColumn, InputParameter, InputParameterBase } from '../../../shared/shared.models';
 import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
@@ -24,7 +24,7 @@ export class DatalinkRunComponent implements OnInit, OnDestroy {
     public message: string;
 
     public inputColumns: InputColumn[];
-    public parameters: InputParameter[];
+    public parameters: InputParameterBase[];
 
     public truncateTable = false;
     public resetIncremental = false;
@@ -72,7 +72,7 @@ export class DatalinkRunComponent implements OnInit, OnDestroy {
                             });
                             datalink.parameters.forEach( c => {
                                 if (this.parameters.findIndex( p => p.name === c.name ) < 0) {
-                                    this.parameters.push({name: c.name, value: c.value});
+                                    this.parameters.push(c);
                                 }
                             });
                         });

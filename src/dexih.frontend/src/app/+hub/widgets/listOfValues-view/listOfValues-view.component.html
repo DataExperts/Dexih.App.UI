@@ -1,0 +1,8 @@
+<div class="float-right">
+    <actions-listOfValues-button [listOfValues]="listOfValues" [pullRight]="true"></actions-listOfValues-button>
+</div>
+<h5>{{listOfValues.name}}</h5>
+<div *ngIf="listOfValues.description">
+    <markdown [data]="listOfValues.description"></markdown>
+</div>
+<div class="note">Updated: {{listOfValues.updateDate | date : 'short' }} </div>

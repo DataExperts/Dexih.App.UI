@@ -45,14 +45,7 @@
                             Input Parameters
                         </div>
                 
-                        <span *ngFor="let parameter of parameters; let i = index" class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    {{parameter.name}}
-                                </div>
-                            </div>
-                            <form-input name="parameter{{i}}" class="form-control p-0" [placeholder]="parameter.name" [(ngModel)]="parameter.value"></form-input>
-                        </span>
+                        <input-parameters-view [parameters]="parameters"></input-parameters-view>
                     </div>
 				</section>
 			</fieldset>

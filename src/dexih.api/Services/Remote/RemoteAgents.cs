@@ -1454,6 +1454,58 @@ namespace dexih.api.Services.Remote
 			return remoteAgent.NamingStandards;
 		}
 
+		public async Task<string> PreviewListOfValues(string id, long hubKey, DownloadUrl downloadUrl, long listOfValuesKey, RepositoryManager database, CancellationToken cancellationToken)
+		{
+			try
+			{
+				_remoteLogger.LogTrace(LoggingEvents.PreviewListOfValues, "Preview List of Values - Id: {Id}, HubKey: {hubKey}, DatalinkKey: {datalinkKey}.", id, hubKey, listOfValuesKey);
+
+				var hub = await database.GetHub(hubKey, cancellationToken);
+
+				var cache = new CacheManager(hubKey, hub.EncryptionKey);
+				cache.AddListOfValues(new[] { listOfValuesKey }, hub);
+
+				var value = new
+				{
+					cache,
+					listOfValuesKey
+				};
+
+				var result = await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.PreviewListOfValues), value,  database, cancellationToken);
+				return result;
+			}
+			catch (Exception ex)
+			{
+				throw new RemoteAgentException($"Error previewing list of values.\n{ex.Message}", ex);
+			}
+		}
+		
+		public async Task<string> PreviewListOfValues(string id, long hubKey, DownloadUrl downloadUrl, DexihListOfValues listOfValues, RepositoryManager database, CancellationToken cancellationToken)
+		{
+			try
+			{
+				_remoteLogger.LogTrace(LoggingEvents.PreviewListOfValues, "Preview List of Values - Id: {Id}, HubKey: {hubKey}, DatalinkKey: {datalinkKey}.", id, hubKey, listOfValues.Key);
+
+				var hub = await database.GetHub(hubKey, cancellationToken);
+
+				var cache = new CacheManager(hubKey, hub.EncryptionKey);
+				cache.Hub.DexihListOfValues.Add(listOfValues);
+				cache.LoadListOfValuesDependencies(listOfValues, hub);
+
+				var value = new
+				{
+					cache,
+					listOfValuesKey = listOfValues.Key
+				};
+
+				var result = await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.PreviewListOfValues), value,  database, cancellationToken);
+				return result;
+			}
+			catch (Exception ex)
+			{
+				throw new RemoteAgentException($"Error previewing list of values.\n{ex.Message}", ex);
+			}
+		}
 		
 	    #endregion
 

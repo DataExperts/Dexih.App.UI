@@ -83,7 +83,7 @@ export class InputParameterComponent implements OnInit, OnDestroy {
                 this.inputs[i].staticValue = this.inputs[i].staticValue.toString();
             }
 
-            if (inputParameter['runTime'].functionParameter.listOfValues) {
+            if (inputParameter['runTime'] && inputParameter['runTime'].functionParameter.listOfValues) {
                 this.inputs[i].textItems = this.inputs[i].textItems.concat(inputParameter['runTime'].functionParameter.listOfValues);
             }
 
@@ -93,8 +93,8 @@ export class InputParameterComponent implements OnInit, OnDestroy {
         this.updateItems();
 
         for ( let i = 0; i < this.inputParameterForms.length; i++) {
-            if (!this.inputParameterForms[i].value.runTime.functionParameter
-                || !this.inputParameterForms[i].value.runTime.functionParameter.listOfValues) {
+            let runTime = this.inputParameterForms[i].value.runTime;
+            if (!runTime || !runTime.functionParameter || !runTime.functionParameter.listOfValues) {
                 this.inputs[i].inputParameterSubscription = this.inputParameterForms[i].valueChanges.subscribe(() => {
                     if (!this.ignoreChanges) {
                         this.updateItems();

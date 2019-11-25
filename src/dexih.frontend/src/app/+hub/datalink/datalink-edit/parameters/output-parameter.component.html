@@ -2,9 +2,10 @@
     <section>
         <div class="input-group">
 
-            <div *ngIf="allowDataTypeSelect == false && allowNameSelect == false" class="input-group-prepend" >
+            <div *ngIf="allowDataTypeSelect == false && allowNameSelect == false" class="input-group-prepend">
                 <div class="input-group-text">
-                    {{outputParameterForm.value.runTime?.functionParameter?.name + "(" + eTypeCode[type.dataType] + ")"}} {{rank > 0 ? "[]" : ""}}
+                    {{outputParameterForm.value.runTime?.functionParameter?.name + "(" + eTypeCode[type.dataType] + ")"}}
+                    {{rank > 0 ? "[]" : ""}}
                 </div>
             </div>
 
@@ -14,47 +15,35 @@
                 </div>
             </div>
 
-            <div *ngIf="allowNameSelect" class="form-control p-0" >
-                <form-input
-                    formControlName="name"  
-                    [border]="false"
-                    type="text"  
-                    name="name" 
+            <div *ngIf="allowNameSelect" class="form-control p-0">
+                <form-input formControlName="name" [border]="false" type="text" name="name"
                     placeholder="Enter a name for the parameter">
                 </form-input>
                 <span class="input-group-btn" style="width:0px;"></span>
             </div>
 
-            <div *ngIf="allowDataTypeSelect == false && allowNameSelect == true" class="input-group-text" >
+            <div *ngIf="allowDataTypeSelect == false && allowNameSelect == true" class="input-group-text">
                 {{"(" + eTypeCode[type.dataType] + ")"}}
             </div>
 
-            <div class="form-control p-0" >
-                <form-select
-                    [border]="false"
-                    formControlName="datalinkColumn" 
-                    [items]="outputColumns" 
-                    itemKey="key"
-                    itemName="logicalName"
-                    [enableKeySelect]="false"
-                    [enableTextEntry]="true"
+            <div class="form-control p-0">
+                <form-select [border]="false" formControlName="datalinkColumn" [items]="outputColumns" itemKey="key"
+                    itemName="logicalName" [enableKeySelect]="false" [enableTextEntry]="true"
                     textEntryNote="Enter new column name, or select existing"
-                    (textValueChange)="updateNewColumn($event)"
-                    >
+                    (textValueChange)="updateNewColumn($event)">
                 </form-select>
             </div>
 
-                <div *ngIf="allowDataTypeSelect == true" class="form-control p-0" >
-                        <form-select
-                            formControlName="dataType" 
-                            [border]="false"
-                            [items]="typeCodes" 
-                            itemKey="key" 
-                            itemName="name"
-                            >
-                        </form-select>
-                    </div>
-            
+            <div *ngIf="allowDataTypeSelect == true" class="form-control p-0">
+                <form-select formControlName="dataType" [border]="false" [items]="typeCodes" itemKey="key"
+                    itemName="name">
+                </form-select>
+            </div>
+            <div *ngIf="allowDataTypeSelect == true" class="form-control">
+                <form-checkbox label="Allow Null" [border]="false" formControlName="allowNull"></form-checkbox>
+            </div>
+
+
             <div class="input-group-append">
                 <button class="btn btn-light" type="button" (click)="add()" [disabled]="!allowAdd" value="Add">
                     <i class="fa fa-plus-square-o"></i>
@@ -71,4 +60,3 @@
 
     </section>
 </form>
-

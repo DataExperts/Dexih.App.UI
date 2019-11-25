@@ -22,7 +22,7 @@
 			<cancel-button [formsService]="formsService"></cancel-button>
 		</ng-template>
 
-		<dexih-widget-section *ngIf="formsService.currentForm && (showEdit || formsService.currentForm?.controls.parameters.length > 0)" title="Properties" [showExpandButton]="true">
+		<dexih-widget-section *ngIf="formsService.currentForm && (showEdit || formsService.currentForm?.controls.parameters.length > 0 || datalinkParameters?.length > 0)" title="Properties" [showExpandButton]="true">
 		<form *ngIf="showEdit" [formGroup]="formsService.currentForm">
 			<fieldset>
 				<section>
@@ -62,7 +62,16 @@
 			</fieldset>
 		</form>
 
-		<input-parameters [showEdit]="showEdit" [parameters]="formsService.currentForm?.controls.parameters" [formsService]="formsService"></input-parameters>
+		<input-parameters [showEdit]="showEdit" [parameters]="formsService.currentForm?.controls.parameters" [formsService]="formsService" (onChange)="parameterChange()"></input-parameters>
+
+		<div *ngIf="datalinkParameters?.length > 0">
+			Datalink Parameters
+			<input-parameters-view [parameters]="datalinkParameters" (onChange)="parameterChange()"></input-parameters-view>
+		</div>
+
+		<div class="mt-3"  *ngIf="!data || data.length === 0">
+			<dexih-button-refresh  class="mr-1" (click)="refresh()" text="Reload" [autoCompact]="false"></dexih-button-refresh>
+		</div>
 
 		</dexih-widget-section>
 
@@ -84,9 +93,9 @@
 
 		<ng-template [ngIf]="columns?.length > 0 && data?.length > 0">
 			<dexih-table *ngIf="!showChart" [enableMultiSelect]="false" [enableSaveCsv]="true" [columns]="columns" [data]="data" [hideTable]="showChart">
-				<!-- <ng-template #actions let-items="items">
+				<ng-template #actions let-items="items">
 					<dexih-button-refresh class="mr-1" (click)="refresh()" text="Reload"></dexih-button-refresh>
-				</ng-template> -->
+				</ng-template>
 			</dexih-table>
 
 			<div *ngIf="showChart">
@@ -100,6 +109,7 @@
 			</chart-builder>
 		</div>
 		</ng-template>
+
 
 	</dexih-widget>
 </div>

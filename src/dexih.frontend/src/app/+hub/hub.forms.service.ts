@@ -20,7 +20,8 @@ import { eImportAction, Import, DexihConnection, DexihTable, DexihTableColumn, e
    DexihDatalinkTestStep, DexihDatalinkTestTable, DexihTrigger, DexihDatalinkStep, DexihDatalinkDependency,
    DexihDatalinkStepColumn, DexihDatajob, DexihRemoteAgentHub, DexihDatalink, DexihDatalinkColumn,
    DexihDatalinkTransform, DexihDatalinkTransformItem, DexihFunctionParameter, DexihFunctionArrayParameter,
-   DexihDatalinkProfile, DexihDatalinkTarget, DexihDatalinkTable, eSourceType, eSharedObjectType, eDataObjectType } from '../shared/shared.models';
+   DexihDatalinkProfile, DexihDatalinkTarget, DexihDatalinkTable,
+   eSourceType, eSharedObjectType, DexihListOfValues, InputParameterBase, eDataObjectType } from '../shared/shared.models';
 
 @Injectable()
 export class HubFormsService implements OnDestroy {
@@ -519,17 +520,18 @@ export class HubFormsService implements OnDestroy {
     return value1.trim().toLowerCase() === value2.trim().toLowerCase();
   }
 
-  public parameter(parameter: DexihInputParameter): FormGroup {
+  public parameter(parameter: InputParameterBase): FormGroup {
     const form = this.fb.group({
       'name': [parameter.name, [
         Validators.required,
         Validators.minLength(1),
         Validators.maxLength(50),
       ]],
+      'runTime': [[{key: -9999999, name: 'refreshing...'}]]
     }
     );
 
-    this.addMissing(parameter, form, new DexihInputParameter());
+    this.addMissing(parameter, form, new InputParameterBase());
     return form;
   }
 
@@ -915,7 +917,7 @@ export class HubFormsService implements OnDestroy {
       'sourceDatalinkKey': [view.sourceDatalinkKey],
       'sourceTableKey': [view.sourceTableKey],
       'parameters': this.fb.array(parameters),
-    }, { validator: this.validateDatalinkTable() }
+    }, { validator: this.validateViewSource() }
     );
 
     this.formGroupFunc = this.view;
@@ -938,6 +940,26 @@ export class HubFormsService implements OnDestroy {
     };
   }
 
+  private validateViewSource() {
+    return (group: FormGroup) => {
+      let sourceType = group.get('sourceType').value;
+      let sourceTableKey = group.get('sourceTableKey');
+      let sourceDatalinkKey = group.get('sourceDatalinkKey');
+
+      sourceTableKey.setErrors(null);
+      sourceDatalinkKey.setErrors(null);
+
+      if (sourceType === eDataObjectType.Table) {
+        if (!sourceTableKey.value) {
+          return sourceTableKey.setErrors({ required: true });
+        }
+      } else if (sourceType === eDataObjectType.Datalink) {
+        if (!sourceDatalinkKey.value) {
+          return sourceDatalinkKey.setErrors({ required: true });
+        }
+      }
+    };
+  }
 
   public dashboard(dashboard: DexihDashboard) {
 
@@ -1003,6 +1025,44 @@ export class HubFormsService implements OnDestroy {
     this.addMissing(dashboardItem, form, new DexihDashboardItem());
 
     return form;
+  }
+
+  public listOfValues(listOfValues: DexihListOfValues) {
+
+
+    const lovForm = this.fb.group({
+      'name': [listOfValues.name, [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+        this.duplicateViewNameValidator()
+      ]],
+      'sourceType': [listOfValues.sourceType, [
+        Validators.required,
+      ]],
+      'sourceDatalinkKey': [listOfValues.sourceDatalinkKey],
+      'sourceTableKey': [listOfValues.sourceTableKey],
+    }, { validator: this.validateViewSource() }
+    );
+
+    this.formGroupFunc = this.listOfValues;
+    this.property = sharedObjectProperties.find(c => c.type === eSharedObjectType.ListOfValues);
+    this.saveMethod = 'SaveListOfValues';
+    this.addMissing(listOfValues, lovForm, new DexihListOfValues());
+    this.clearFormSubscriptions();
+    this.watchChanges(eSharedObjectType.ListOfValues, 'listOfValuesKey', 'listOfValues', this.listOfValues);
+    this.startForm(lovForm);
+  }
+
+  duplicateLovNameValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } => {
+      if (this.currentForm) {
+        const name = control.value;
+        const no = this.hubCache.hub.dexihListOfValues.findIndex(c =>
+          c.key !== this.currentForm.controls.key.value && c.isValid && this.stringCompare(c.name, name)) >= 0;
+        return no ? { 'duplicateName': { name } } : null;
+      }
+    };
   }
 
   public api(api: DexihApi) {

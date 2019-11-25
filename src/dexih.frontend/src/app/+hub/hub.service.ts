@@ -10,7 +10,8 @@ import {
     eCacheStatus,
     PreviewResults,
     FlatFilesReady,
-    DexihInputParameter
+    DexihInputParameter,
+    LOVItem
 } from './hub.models';
 import { RemoteAgentStatus, transformTypes } from './hub.remote.models';
 import { DexihDatajob, DexihTable, DexihHub, DexihRemoteAgentHub, DexihConnection, DexihDatalink, InputColumn,
@@ -19,7 +20,7 @@ import { DexihDatajob, DexihTable, DexihHub, DexihRemoteAgentHub, DexihConnectio
     TransformProperties, Import, eImportAction, eRunStatus, eDatalinkType, eDeltaType, eConnectionPurpose, eFlatFilePath,
     ApiData, DownloadObject, eDownloadFormat, DexihActiveAgent, ImportObject, ePermission, eTypeCode, eDataObjectType,
     eSharedObjectType, RemoteLibraries, ConnectionReference, TransformReference,
-    FunctionReference, eFunctionType, ClientMessage, eClientCommand, HubUser } from '../shared/shared.models';
+    FunctionReference, eFunctionType, ClientMessage, eClientCommand, HubUser, DexihListOfValues } from '../shared/shared.models';
 import { filter, take, first } from 'rxjs/operators';
 
 @Injectable()
@@ -570,6 +571,7 @@ export class HubService implements OnInit, OnDestroy {
         this.mergeChange(hubChange.apis, hubCache.hub.dexihApis, 'key', eSharedObjectType.Api);
         this.mergeChange(hubChange.tables, hubCache.hub.dexihTables, 'key', eSharedObjectType.Table);
         this.mergeChange(hubChange.dashboards, hubCache.hub.dexihDashboards, 'key', eSharedObjectType.Dashboard);
+        this.mergeChange(hubChange.listOfValues, hubCache.hub.dexihListOfValues, 'key', eSharedObjectType.ListOfValues);
 
         if (hubChange.remoteAgentHubs && hubChange.remoteAgentHubs.length > 0) {
             this.resetRemoteAgent(hubCache);
@@ -1304,6 +1306,21 @@ export class HubService implements OnInit, OnDestroy {
                 names + '<p></p>Are you sure?');
     }
 
+    saveListOfValues(lov: DexihListOfValues): Promise<DexihListOfValues> {
+        return this.hubPost<DexihListOfValues>('/api/Hub/SaveListOfValues', {
+            value: lov
+        }, 'Saving list of values...');
+    }
+
+    deleteListOfValues(lov: Array<DexihListOfValues>): Promise<boolean> {
+        let names = lov.map(c => c.name).join('<br>');
+
+        return this.hubPostConfirm<boolean>('/api/Hub/DeleteListOfValues', {
+            itemKeys: lov.map(c => c.key)
+        }, 'Deleting list of value(s)...',
+        'This action will delete the following list of values, from the hub and cannot be reversed.<p></p>' +
+        names + '<p></p>Are you sure?');
+    }
 
     saveApi(api: DexihApi): Promise<DexihApi> {
         return this.hubPost<DexihApi>('/api/Hub/SaveApi', {
@@ -1425,12 +1442,24 @@ export class HubService implements OnInit, OnDestroy {
     }
 
     previewView(view: DexihView, inputColumns: InputColumn[],
-            inputParameters: DexihInputParameter[], cancelToken: CancelToken): PromiseWithCancel<PreviewResults> {
+        inputParameters: DexihInputParameter[], cancelToken: CancelToken): PromiseWithCancel<PreviewResults> {
 
         return this.getData('/api/Hub/PreviewView', {
             hubKey: this._hubKey,
             remoteAgentId: this.getCurrentRemoteAgentId(),
             view: view,
+            inputColumns: inputColumns,
+            inputParameters: inputParameters,
+        }, 'Getting dashboard download locations...', cancelToken);
+    }
+
+    previewViewKey(viewKey: number, inputColumns: InputColumn[],
+        inputParameters: DexihInputParameter[], cancelToken: CancelToken): PromiseWithCancel<PreviewResults> {
+
+        return this.getData('/api/Hub/PreviewViewKey', {
+            hubKey: this._hubKey,
+            remoteAgentId: this.getCurrentRemoteAgentId(),
+            viewKey: viewKey,
             inputColumns: inputColumns,
             inputParameters: inputParameters,
         }, 'Getting dashboard download locations...', cancelToken);
@@ -1460,6 +1489,22 @@ export class HubService implements OnInit, OnDestroy {
                 }).catch(reason => reject(reason));
             }).catch(reason => reject(reason));
         });
+    }
+
+    previewListOfValues(listOfValues: DexihListOfValues, cancelToken: CancelToken): PromiseWithCancel<LOVItem[]> {
+        return this.hubPostRemote<LOVItem[]>('/api/Hub/PreviewListOfValues', {
+            hubKey: this._hubKey,
+            remoteAgentId: this.getCurrentRemoteAgentId(),
+            listOfValues: listOfValues,
+        }, 'Getting list of values...', cancelToken);
+    }
+
+    previewListOfValuesKey(listOfValuesKey: number, cancelToken: CancelToken): PromiseWithCancel<LOVItem[]> {
+        return this.hubPostRemote<LOVItem[]>('/api/Hub/PreviewListOfValuesKey', {
+            hubKey: this._hubKey,
+            remoteAgentId: this.getCurrentRemoteAgentId(),
+            listOfValuesKey: listOfValuesKey,
+        }, 'Getting list of values...', cancelToken);
     }
 
     // downloads a dataset from the provided url

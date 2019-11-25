@@ -7,7 +7,8 @@ import { AuthService } from '../../../+auth/auth.service';
 import { InputOutputColumns } from '../../hub.lineage.models';
 import { CancelToken } from '../../../+auth/auth.models';
 import { HubCache, ConnectionTables, eCacheStatus } from '../../hub.models';
-import { eViewType, DexihDatalink, InputColumn, DexihColumnBase, SelectQuery, DexihView, DownloadObject, eDataObjectType, eSourceType, ChartConfig } from '../../../shared/shared.models';
+import { eViewType, DexihDatalink, InputColumn, DexihColumnBase, SelectQuery,
+  DexihView, DownloadObject, eDataObjectType, eSourceType, ChartConfig, InputParameterBase } from '../../../shared/shared.models';
 
 @Component({
   selector: 'dexih-view-edit-form',
@@ -42,6 +43,9 @@ export class ViewEditComponent implements OnInit, OnDestroy {
   public inputColumns: InputColumn[];
   public tableColumns: DexihColumnBase[];
   selectQuery: SelectQuery = new SelectQuery();
+
+  datalinkParameters: InputParameterBase[];
+
   private isLoaded = false;
 
   private firstLoad = true;
@@ -103,6 +107,9 @@ export class ViewEditComponent implements OnInit, OnDestroy {
 
                   // create a copy of the view to avoid changes to the hub cache.
                   view = JSON.parse(JSON.stringify(view));
+                  if (view.selectQuery == null) {
+                    view.selectQuery = new SelectQuery();
+                  }
                   this.selectQuery = view.selectQuery;
                   this.inputColumns = view.inputValues;
                   this.showChart = view.viewType === eViewType.Chart;
@@ -117,6 +124,7 @@ export class ViewEditComponent implements OnInit, OnDestroy {
 
             if (this.action === 'new') {
               let view = new DexihView();
+              view.selectQuery = new SelectQuery();
               this.formsService.view(view);
               this.watchChanges();
               this.showEdit = true;
@@ -198,6 +206,7 @@ export class ViewEditComponent implements OnInit, OnDestroy {
       this.formsService.currentForm.controls.viewType.setValue(eViewType.Chart);
     }
   }
+  
   getColumns() {
 
     let viewForm = this.formsService.currentForm;
@@ -247,6 +256,9 @@ export class ViewEditComponent implements OnInit, OnDestroy {
             name: c.name, logicalName: c.logicalName, dataType: c.dataType, rank: c.rank, value: value, defaultValue: c.defaultValue
           };
         });
+
+        this.datalinkParameters = datalink.parameters;
+
       } else {
         this.reset();
       }
@@ -264,21 +276,30 @@ export class ViewEditComponent implements OnInit, OnDestroy {
 
   refresh() {
     let viewForm = this.formsService.currentForm;
-    let parameters = this.formsService.currentForm.controls.parameters.value;
+    let parameters: InputParameterBase[] = [];
 
-    let view = <DexihView> viewForm.value;
-    view.selectQuery = this.selectQuery;
+    let viewParameters =  this.formsService.currentForm.controls.parameters.value;
+
+    if (viewParameters) {
+      parameters = parameters.concat(viewParameters);
+    }
+    if (this.datalinkParameters) {
+      parameters = parameters.concat(this.datalinkParameters);
+    }
+
+
+    let view = <DexihView>viewForm.value;
+    view.selectQuery = viewForm.controls.selectQuery.value;
 
     if ((view.sourceType === eDataObjectType.Table && view.sourceTableKey > 0) ||
-    (view.sourceType === eDataObjectType.Datalink && view.sourceDatalinkKey > 0)) {
+      (view.sourceType === eDataObjectType.Datalink && view.sourceDatalinkKey > 0)) {
 
-    this.hubService.previewView(viewForm.value, this.inputColumns, parameters, this.cancelToken).then((result) => {
-      this.columns = result.columns;
-      this.data = result.data;
-    }).catch(() => {
-    });
-  }
-
+      this.hubService.previewView(viewForm.value, this.inputColumns, parameters, this.cancelToken).then((result) => {
+        this.columns = result.columns;
+        this.data = result.data;
+      }).catch(() => {
+      });
+    }
   }
 
   download(format) {
@@ -299,6 +320,12 @@ export class ViewEditComponent implements OnInit, OnDestroy {
 
   hasChanged() {
     this.formsService.markAsChanged();
+  }
+
+  parameterChange() {
+    if (this.formsService.currentForm.controls.autoRefresh.value) {
+      this.refresh();
+    }
   }
 
   public canDeactivate(): Promise<boolean> {

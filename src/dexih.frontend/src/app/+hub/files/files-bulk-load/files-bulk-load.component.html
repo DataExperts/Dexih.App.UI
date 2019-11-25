@@ -80,9 +80,9 @@
                 <dexih-table [enableMultiSelect]="true" [columns]="tableColumns" [data]="tables" (rowClick)="editTable($event)">
 
                     <ng-template select="selectedItemsAction" #selectedItemsAction let-items="items">
-                        <dexih-button-save class="ml-1"  (click)="saveTables(items)" title="Save the selected tables."></dexih-button-save>
+                        <dexih-button class="ml-1" (click)="saveTables(items)" iconClass="fa fa-table" title="Save the selected tables.">Create Tables</dexih-button>
+                        <dexih-button class="ml-1" (click)="createDatalinks(items)" iconClass="fa fa-exchange" title="Save the selected tables, and create datalinks to load them into a staging area.">Create Datalinks</dexih-button>
                         <dexih-button-delete class="ml-1"  (click)="discardTables(items)" title="Discard the selected tables." text="Discard"></dexih-button-delete>
-                        <dexih-button class="ml-1" (click)="createDatalinks(items)" title="Save the selected tables, and create datalinks to load them into a staging area.">Create Datalinks</dexih-button>
                     </ng-template>
     
                 </dexih-table>

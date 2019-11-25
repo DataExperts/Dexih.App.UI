@@ -9,7 +9,7 @@
     
         <div class="flex-fill ml-1" *ngIf="sortColumns">
             <form-tags-dropdown labelLeft="Sort Columns" [(ngModel)]="selectQuery.sorts"  (ngModelChange)="onChanged()" [items]="sortColumns" 
-            itemKey="column.name" itemName="details" textEntryNote="Specify the columns to sort." [enableAddAll]="false" [returnKeys]="false">
+            itemKey="column.runTime" itemName="column.details" textEntryNote="Specify the columns to sort." [enableAddAll]="false" [returnKeys]="false">
             </form-tags-dropdown>
         </div>
     </div>

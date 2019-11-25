@@ -88,7 +88,7 @@ namespace dexih.api
 				case "postgre":
 				case "postgresql":
 					services.AddEntityFrameworkNpgsql().AddDbContext<DexihRepositoryContext>(options =>
-  						options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+  						options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"), options => options.SetPostgresVersion(9,6)));
 					break;
 				default:
 					throw new Exception("The repository type " + appSettings.RepositoryType + " was not recognised.  Use SqlServer, MySql, Npgsql or Sqlite");

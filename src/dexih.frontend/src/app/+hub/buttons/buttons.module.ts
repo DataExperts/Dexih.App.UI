@@ -14,6 +14,7 @@ import { ActionsDatalinkTestButtonComponent } from './actions-datalinkTest-butto
 import { ActionsViewButtonComponent } from './actions-view-button/actions-view-button.component';
 import { ActionsApiButtonComponent } from './actions-api-button/actions-api-button.component';
 import { ActionsDashboardButtonComponent } from './actions-dashboard-button/actions-dashboard-button.component';
+import { ActionsListOfValuesButtonComponent } from './actions-listOfValues-button/actions-listOfValues-button.component';
 
 @NgModule({
     imports: [
@@ -34,7 +35,8 @@ import { ActionsDashboardButtonComponent } from './actions-dashboard-button/acti
         ActionsDatalinkTestButtonComponent,
         ActionsViewButtonComponent,
         ActionsApiButtonComponent,
-        ActionsDashboardButtonComponent
+        ActionsDashboardButtonComponent,
+        ActionsListOfValuesButtonComponent
     ],
     declarations: [
         CancelButtonComponent,
@@ -51,7 +53,8 @@ import { ActionsDashboardButtonComponent } from './actions-dashboard-button/acti
         ActionsDatalinkTestButtonComponent,
         ActionsViewButtonComponent,
         ActionsApiButtonComponent,
-        ActionsDashboardButtonComponent
+        ActionsDashboardButtonComponent,
+        ActionsListOfValuesButtonComponent
     ],
     providers: [],
 })

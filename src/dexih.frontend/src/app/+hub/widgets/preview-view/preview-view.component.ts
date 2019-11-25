@@ -154,7 +154,7 @@ export class PreviewViewComponent implements OnInit, OnChanges, OnDestroy {
             if (url) {
                 previewQuery = this.hubService.downloadUrlData(url, this.cancelToken);
             } else {
-                previewQuery = this.hubService.previewView(this.view, this.inputColumns, this.parameters, this.cancelToken)
+                previewQuery = this.hubService.previewViewKey(this.viewKey, this.inputColumns, this.parameters, this.cancelToken)
             }
 
             if (previewQuery) {

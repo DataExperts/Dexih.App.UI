@@ -6,7 +6,7 @@ import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { AuthService } from '../../../../+auth/auth.service';
 import { HubFormsService } from '../../../hub.forms.service';
 import { HubCache, DexihInputParameter } from '../../../hub.models';
-import { InputColumn, DexihDatalinkStep, DexihDatalinkStepColumn, DexihDatalinkDependency } from '../../../../shared/shared.models';
+import { InputColumn, DexihDatalinkStep, DexihDatalinkStepColumn, DexihDatalinkDependency, InputParameterBase } from '../../../../shared/shared.models';
 
 @Component({
     selector: 'datajob-edit-step',
@@ -138,7 +138,7 @@ export class DatajobEditStepComponent implements OnInit, OnDestroy {
 
         datalink.parameters.forEach(parameter => {
             let currentParameter = currentParameters.find( c => c.name === parameter.name);
-            let newParameter = new DexihInputParameter();
+            let newParameter = new InputParameterBase();
             if (currentParameter) {
                 newParameter.name = currentParameter.name;
                 newParameter.value = currentParameter.value;

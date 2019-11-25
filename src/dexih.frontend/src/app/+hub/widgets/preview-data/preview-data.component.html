@@ -1,3 +1,4 @@
+
 <dexih-table [enableMultiSelect]="false" [enableSaveCsv]="true" [csvFileName]="csvFileName" [columns]="columns"
     [data]="data" [hideTable]="view !== 'table'">
 
@@ -24,6 +25,11 @@
     </ng-template>
 
     <ng-template #tableHeader>
+        <div *ngIf="parameters?.length > 0" class="mb-3">
+            Parameters
+            <input-parameters-view [parameters]="parameters" (onChange)="parameterChange()"></input-parameters-view>
+        </div>
+                
         <query-builder [selectQuery]="selectQuery" [columns]="tableColumns" [inputColumns]="inputColumns" [parameters]="parameters">
         </query-builder>
     </ng-template>

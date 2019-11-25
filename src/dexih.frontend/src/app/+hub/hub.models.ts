@@ -7,7 +7,7 @@ import { DexihHubVariable, DexihHub, DexihFunctionParameter, DexihConnection, De
     eSourceType, eImportAction, eSecurityFlag, eDatalinkType, eUpdateStrategy, eFailAction, eInvalidAction,
     eFunctionCaching, eCleanAction, eDuplicateStrategy, eRunStatus, ePermission, eTypeCode,
     eTransformWriterMethod, eTransformItemType, eFunctionType, InputColumn, SelectQuery, DexihColumnBase,
-    eDataObjectType, eSharedObjectType, eDirection, eSeriesGrain, eDayOfWeek, ChartConfig } from '../shared/shared.models';
+    eDataObjectType, eSharedObjectType, eDirection, eSeriesGrain, eDayOfWeek, ChartConfig, eLOVObjectType, DexihListOfValues } from '../shared/shared.models';
 
 // export class RemoteMessage {
 //     public messageId: string;
@@ -50,6 +50,171 @@ export class Parameter {
     public key: string;
     public value;
 }
+
+export enum eSearchObjectType {
+    All,
+    Connection,
+    Table,
+    TableColumn,
+    FileFormat,
+    Datalink,
+    Datajob,
+    ColumnValidation,
+    View,
+    Api,
+    Dashboard,
+    ListOfValues,
+}
+
+export const SearchObjectTypes = [
+    {key: eSearchObjectType.All, name: 'All'},
+    {key: eSearchObjectType.Connection, name: 'Connection'},
+    {key: eSearchObjectType.Table, name: 'Table'},
+    {key: eSearchObjectType.TableColumn, name: 'Table Column'},
+    {key: eSearchObjectType.FileFormat, name: 'File Format'},
+    {key: eSearchObjectType.Datalink, name: 'Datalink'},
+    {key: eSearchObjectType.Datajob, name: 'Datajob'},
+    {key: eSearchObjectType.ColumnValidation, name: 'Column Validation'},
+    {key: eSearchObjectType.View, name: 'View'},
+    {key: eSearchObjectType.Api, name: 'Api'},
+    {key: eSearchObjectType.Dashboard, name: 'Dashboard'},
+    {key: eSearchObjectType.ListOfValues, name: 'List of Values'},
+];
+
+export class SearchResult {
+    public object: any;
+    public objectParent: any;
+    public objectType: eSearchObjectType;
+
+    constructor(object: any, objectParent, objectType: eSearchObjectType) {
+        this.object = object;
+        this.objectType = objectType;
+        this.objectParent = objectParent;
+    }
+}
+
+
+export class SharedObjectProperty {
+    public type: eSharedObjectType;
+    public parentType: eSharedObjectType;
+    public name: string;
+    public parentKey: string;
+    public property: string;
+    public cacheProperty: string;
+    public cacheAddMethod: string;
+    public cacheGetMethod: string;
+    public icon: string;
+    public routerLink: string;
+    public displayName: string;
+    public description: string;
+}
+
+export const sharedObjectProperties: SharedObjectProperty[] = [
+    {
+        type: eSharedObjectType.Connection, name: 'Connection', cacheProperty: 'dexihConnections', property: 'connections',
+        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddConnection', cacheGetMethod: '',
+        icon: 'fa-database', routerLink: 'connections',
+        displayName: 'Connections', description: 'Connections to data sources such as databases, flat files and web services.'
+    },
+    {
+        type: eSharedObjectType.Table, name: 'Table', cacheProperty: 'dexihTables', property: 'tables',
+        parentKey: 'connectionKey', parentType: eSharedObjectType.Connection, cacheAddMethod: 'cacheAddTable',
+        cacheGetMethod: 'getTableCache', icon: 'fa-table', routerLink: 'tables',
+        displayName: 'Tables', description: 'References to structured and unstructured datasets.'
+    },
+    {
+        type: eSharedObjectType.Datalink, name: 'Datalink', cacheProperty: 'dexihDatalinks', property: 'datalinks',
+        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddDatalink', cacheGetMethod: 'getDatalinkCache',
+        icon: 'fa-exchange', routerLink: 'datalinks',
+        displayName: 'Datalinks', description: 'Runnable or queryable data sets of data transformations.'
+    },
+    {
+        type: eSharedObjectType.Datajob, name: 'Datajob', cacheProperty: 'dexihDatajobs', property: 'datajobs',
+        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddDatajob',
+        cacheGetMethod: 'getDatajobCache', icon: 'fa-calendar', routerLink: 'datajobs',
+        displayName: 'Jobs and Schedules',
+        description: 'Job which can be scheduled or run on demand, which contains a sequence of datalinks'
+    },
+    {
+        type: eSharedObjectType.View, name: 'View', cacheProperty: 'dexihViews', property: 'views',
+        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddView',
+        cacheGetMethod: 'getViewCache', icon: 'fa-bar-chart', routerLink: 'views',
+        displayName: 'Views', description: 'Charts and tabular views of table or datalinks outputs.'
+    },
+    {
+        type: eSharedObjectType.Dashboard, name: 'Dashboard', cacheProperty: 'dexihDashboards', property: 'dashboards',
+        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddDashboard',
+        cacheGetMethod: 'getDashboardCache', icon: 'fa-pie-chart', routerLink: 'dashboards',
+        displayName: 'Dashboards', description: 'A collection of views gathered into a single dashboard.'
+    },
+    {
+        type: eSharedObjectType.Api, name: 'Api', cacheProperty: 'dexihApis', property: 'apis',
+        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddApi',
+        cacheGetMethod: 'getApiCache', icon: 'fa-feed', routerLink: 'apis',
+        displayName: 'Api\'s', description: 'Published Rest based Api\'s which can be used to access data using third party tools'
+    },
+    {
+        type: eSharedObjectType.FileFormat, name: 'FileFormat', cacheProperty: 'dexihFileFormats', property: 'fileFormats',
+        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddFileFormat',
+        cacheGetMethod: '', icon: 'fa-file-text-o', routerLink: 'fileFormats',
+        displayName: 'File Formats', description: 'Definitions for delimited flat files'
+    },
+    {
+        type: eSharedObjectType.ColumnValidation, name: 'ColumnValidation', cacheProperty: 'dexihColumnValidations',
+        property: 'columnValidations',
+        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddColumnValidation',
+        cacheGetMethod: 'getColumnValidationCache', icon: 'fa-check-square-o',
+        routerLink: 'columnValidations',
+        displayName: 'Column Validations', description: 'Validation rule that can be applied to columns within a table.'
+    },
+    {
+        type: eSharedObjectType.HubVariable, name: 'HubVariable', cacheProperty: 'dexihHubVariables', property: 'hubVariables',
+        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddHubVariable',
+        cacheGetMethod: '', icon: 'fa-fw fa-at', routerLink: 'hubVariables',
+        displayName: 'Variables', description: 'Variables which can be used as global configuration throughout the hub.'
+    },
+    {
+        type: eSharedObjectType.ListOfValues, name: 'List Of Values', cacheProperty: 'dexihListOfValues', property: 'listOfValues',
+        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddListOfValues',
+        cacheGetMethod: 'getListOfValuesCache', icon: 'fa-list-alt', routerLink: 'listOfValues',
+        displayName: 'List Of Values',
+        description: 'List of values which can be used for parameter drop downs and validations.'
+    },
+    {
+        type: eSharedObjectType.CustomFunction, name: 'CustomFunction', cacheProperty: 'dexihCustomFunctions', property: 'customFunctions',
+        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddCustomFunction',
+        cacheGetMethod: '', icon: 'fa-code', routerLink: 'customFunctions',
+        displayName: 'Functions', description: 'Custom c# functions which can be used in datalinks.'
+    },
+    {
+        type: eSharedObjectType.DatalinkTest, name: 'DatalinkTest', cacheProperty: 'dexihDatalinkTests', property: 'datalinkTests',
+        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddDatalinkTest',
+        cacheGetMethod: 'getDatalinkTestCache', icon: 'fa-flag-checkered', routerLink: 'datalinkTests',
+        displayName: 'Datalink Tests',
+        description: 'Regression tests which can be used to ensure datalinks function after upgrades or modification.'
+    },
+    
+];
+
+export class SharedObject {
+    public type: eSharedObjectType;
+    public item: any;
+    public parentItem: any;
+    public key: number;
+    public name: string;
+    public label: string;
+    public updateDate: Date;
+    public description: string;
+}
+
+export class HubCacheChange {
+    constructor(
+        public changeClass: eSharedObjectType,
+        public changeType: eImportAction,
+        public data: any
+    ) {}
+}
+
 
 export class HubCache {
 
@@ -370,6 +535,11 @@ export class HubCache {
                 this.searchItem(search, d, null, eSearchObjectType.Dashboard, results);
             });
         }
+        if (searchAll || searchObject === eSearchObjectType.ListOfValues) {
+            this.hub.dexihListOfValues.forEach(d => {
+                this.searchItem(search, d, null, eSearchObjectType.ListOfValues, results);
+            });
+        }
         return results;
     }
 
@@ -531,6 +701,13 @@ export class HubCache {
         dashboard.dexihDashboardItems.forEach(item => {
             this.cacheAddView(item.viewKey, hub);
         });
+
+        return hub;
+    }
+
+    public getListOfValuesCache(lov: DexihListOfValues, hub: DexihHub): DexihHub {
+        this.cacheAddDatalink(lov.sourceDatalinkKey, hub);
+        this.cacheAddTable(lov.sourceTableKey, hub);
 
         return hub;
     }
@@ -764,6 +941,26 @@ export class HubCache {
         }
     }
 
+    public cacheAddListOfValues(listOfValuesKey: number, hub: DexihHub): DexihListOfValues {
+        if (listOfValuesKey > 0) {
+            const dup = hub.dexihListOfValues.find(c => c.key === listOfValuesKey);
+            if (!dup) {
+                let lov = this.hub.dexihListOfValues
+                    .find(c => c.key === listOfValuesKey && c.isValid);
+                if (lov) {
+                    hub.dexihListOfValues.push(lov);
+                    if (lov.sourceType === eLOVObjectType.Table) {
+                        this.cacheAddTable(lov.sourceTableKey, hub);
+                    }
+                    if (lov.sourceType === eLOVObjectType.Datalink) {
+                        this.cacheAddDatalink(lov.sourceDatalinkKey, hub);
+                    }
+                    return lov;
+                }
+            }
+        }
+    }
+
     public cacheAddApi(apiKey: number, hub: DexihHub): DexihApi {
         if (apiKey > 0) {
             const dup = hub.dexihApis.find(c => c.key === apiKey);
@@ -931,159 +1128,7 @@ export class DataCache {
 //     ApiStatus = <any>'ApiStatus',
 // }
 
-export class SharedObjectProperty {
-    public type: eSharedObjectType;
-    public parentType: eSharedObjectType;
-    public name: string;
-    public parentKey: string;
-    public property: string;
-    public cacheProperty: string;
-    public cacheAddMethod: string;
-    public cacheGetMethod: string;
-    public icon: string;
-    public routerLink: string;
-    public displayName: string;
-    public description: string;
-}
 
-export const sharedObjectProperties: SharedObjectProperty[] = [
-    {
-        type: eSharedObjectType.Connection, name: 'Connection', cacheProperty: 'dexihConnections', property: 'connections',
-        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddConnection', cacheGetMethod: '',
-        icon: 'fa-database', routerLink: 'connections',
-        displayName: 'Connections', description: 'Connections to data sources such as databases, flat files and web services.'
-    },
-    {
-        type: eSharedObjectType.Table, name: 'Table', cacheProperty: 'dexihTables', property: 'tables',
-        parentKey: 'connectionKey', parentType: eSharedObjectType.Connection, cacheAddMethod: 'cacheAddTable',
-        cacheGetMethod: 'getTableCache', icon: 'fa-table', routerLink: 'tables',
-        displayName: 'Tables', description: 'References to structured and unstructured datasets.'
-    },
-    {
-        type: eSharedObjectType.Datalink, name: 'Datalink', cacheProperty: 'dexihDatalinks', property: 'datalinks',
-        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddDatalink', cacheGetMethod: 'getDatalinkCache',
-        icon: 'fa-exchange', routerLink: 'datalinks',
-        displayName: 'Datalinks', description: 'Runnable or queryable data sets of data transformations.'
-    },
-    {
-        type: eSharedObjectType.Datajob, name: 'Datajob', cacheProperty: 'dexihDatajobs', property: 'datajobs',
-        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddDatajob',
-        cacheGetMethod: 'getDatajobCache', icon: 'fa-calendar', routerLink: 'datajobs',
-        displayName: 'Jobs and Schedules',
-        description: 'Job which can be scheduled or run on demand, which contains a sequence of datalinks'
-    },
-    {
-        type: eSharedObjectType.View, name: 'View', cacheProperty: 'dexihViews', property: 'views',
-        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddView',
-        cacheGetMethod: 'getViewCache', icon: 'fa-bar-chart', routerLink: 'views',
-        displayName: 'Views', description: 'Charts and tabular views of table or datalinks outputs.'
-    },
-    {
-        type: eSharedObjectType.Dashboard, name: 'Dashboard', cacheProperty: 'dexihDashboards', property: 'dashboards',
-        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddDashboard',
-        cacheGetMethod: 'getDashboardCache', icon: 'fa-pie-chart', routerLink: 'dashboards',
-        displayName: 'Dashboards', description: 'A collection of views gathered into a single dashboard.'
-    },
-    {
-        type: eSharedObjectType.Api, name: 'Api', cacheProperty: 'dexihApis', property: 'apis',
-        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddApi',
-        cacheGetMethod: 'getApiCache', icon: 'fa-feed', routerLink: 'apis',
-        displayName: 'Api\'s', description: 'Published Rest based Api\'s which can be used to access data using third party tools'
-    },
-    {
-        type: eSharedObjectType.FileFormat, name: 'FileFormat', cacheProperty: 'dexihFileFormats', property: 'fileFormats',
-        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddFileFormat',
-        cacheGetMethod: '', icon: 'fa-file-text-o', routerLink: 'fileFormats',
-        displayName: 'File Formats', description: 'Definitions for delimited flat files'
-    },
-    {
-        type: eSharedObjectType.ColumnValidation, name: 'ColumnValidation', cacheProperty: 'dexihColumnValidations',
-        property: 'columnValidations',
-        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddColumnValidation',
-        cacheGetMethod: 'getColumnValidationCache', icon: 'fa-check-square-o',
-        routerLink: 'columnValidations',
-        displayName: 'Column Validations', description: 'Validation rule that can be applied to columns within a table.'
-    },
-    {
-        type: eSharedObjectType.HubVariable, name: 'HubVariable', cacheProperty: 'dexihHubVariables', property: 'hubVariables',
-        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddHubVariable',
-        cacheGetMethod: '', icon: 'fa-fw fa-at', routerLink: 'hubVariables',
-        displayName: 'Variables', description: 'Variables which can be used as global configuration throughout the hub.'
-    },
-    {
-        type: eSharedObjectType.CustomFunction, name: 'CustomFunction', cacheProperty: 'dexihCustomFunctions', property: 'customFunctions',
-        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddCustomFunction',
-        cacheGetMethod: '', icon: 'fa-code', routerLink: 'customFunctions',
-        displayName: 'Functions', description: 'Custom c# functions which can be used in datalinks.'
-    },
-    {
-        type: eSharedObjectType.DatalinkTest, name: 'DatalinkTest', cacheProperty: 'dexihDatalinkTests', property: 'datalinkTests',
-        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddDatalinkTest',
-        cacheGetMethod: 'getDatalinkTestCache', icon: 'fa-flag-checkered', routerLink: 'datalinkTests',
-        displayName: 'Datalink Tests',
-        description: 'Regression tests which can be used to ensure datalinks function after upgrades or modification.'
-    },
-
-];
-
-export class SharedObject {
-    public type: eSharedObjectType;
-    public item: any;
-    public parentItem: any;
-    public key: number;
-    public name: string;
-    public label: string;
-    public updateDate: Date;
-    public description: string;
-}
-
-export class HubCacheChange {
-    constructor(
-        public changeClass: eSharedObjectType,
-        public changeType: eImportAction,
-        public data: any
-    ) {}
-}
-
-export enum eSearchObjectType {
-    All = <any>'All',
-    Connection = <any>'Connection',
-    Table = <any>'Table',
-    TableColumn = <any>'TableColumn',
-    FileFormat = <any>'FileFormat',
-    Datalink = <any>'Datalink',
-    Datajob = <any>'Datajob',
-    ColumnValidation = <any>'ColumnValidation',
-    View = <any>'View',
-    Api = <any>'Api',
-    Dashboard = <any>'Dashboard',
-}
-
-export const SearchObjectTypes = [
-    {key: eSearchObjectType.All, name: 'All'},
-    {key: eSearchObjectType.Connection, name: 'Connection'},
-    {key: eSearchObjectType.Table, name: 'Table'},
-    {key: eSearchObjectType.TableColumn, name: 'Table Column'},
-    {key: eSearchObjectType.FileFormat, name: 'File Format'},
-    {key: eSearchObjectType.Datalink, name: 'Data Link'},
-    {key: eSearchObjectType.Datajob, name: 'Data Job'},
-    {key: eSearchObjectType.ColumnValidation, name: 'Column Validation'},
-    {key: eSearchObjectType.View, name: 'View'},
-    {key: eSearchObjectType.Api, name: 'Api'},
-    {key: eSearchObjectType.Dashboard, name: 'Dashboard'},
-];
-
-export class SearchResult {
-    public object: any;
-    public objectParent: any;
-    public objectType: eSearchObjectType;
-
-    constructor(object: any, objectParent, objectType: eSearchObjectType) {
-        this.object = object;
-        this.objectType = objectType;
-        this.objectParent = objectParent;
-    }
-}
 
 // export enum eSharedDataObjectType {
 //     Table = <any>'Table',
@@ -1188,10 +1233,8 @@ export class SearchResult {
 
 export class DexihInputParameter {
     public key = 0;
-
     public name: string = null;
     public description: string = null;
-
     public value = null;
 }
 
@@ -2650,3 +2693,9 @@ export class DashboardUrl {
 //     public name: string = null;
 //     public value = null;
 // }
+
+export class LOVItem {
+    public key;
+    public name: string;
+    public description: string;
+}

@@ -7,23 +7,41 @@
                     formControlName="name">
                 </form-input>
                 <form-select labelLeft="Value" [border]="false" class="form-control p-0" formControlName="value"
-                    [items]="selectItems" [enableTextEntry]="true">
+                    itemKey="key"
+                    itemName="name"
+                    [items]="parameter.controls.runTime?.value" [enableTextEntry]="true"
+                    [textEntryItems]="parentParams"
+                    textEntryItemsTitle="Linked Parameters"
+                    (onShown)="refresh(parameter)"
+                    (ngModelChange)="change($event)"
+                    >
                 </form-select>
 
-                <div *ngIf="showEdit" class="input-group-append">
-                    <div class="input-group-text p-0">
-                        <button type="button" (click)="add(i)" class="btn btn-sm border-0 rounded-0 bg-transparent"
-                            value="Add">
-                            <i class="fa fa-plus-square-o"></i>
-                        </button>
+                <ng-template [ngIf]="showEdit">
+                    <form-select labelLeft="List of Values" [border]="false" class="form-control p-0" formControlName="listOfValuesKey"
+                        [items]="listOfValues" 
+                        itemKey="key"
+                        itemName="name"
+                        [allowNullSelect]="true"
+                       >
+                    </form-select>
+
+                    <div *ngIf="showEdit" class="input-group-append">
+        
+                        <div class="input-group-text p-0">
+                            <button type="button" (click)="add(i)" class="btn btn-sm border-0 rounded-0 bg-transparent"
+                                value="Add">
+                                <i class="fa fa-plus-square-o"></i>
+                            </button>
+                        </div>
+                        <div class="input-group-text p-0">
+                            <button type="button" (click)="delete(i)" class="btn btn-sm border-0 rounded-0 bg-transparent"
+                                value="Remove">
+                                <i class="fa fa-minus-square-o"></i>
+                            </button>
+                        </div>
                     </div>
-                    <div class="input-group-text p-0">
-                        <button type="button" (click)="delete(i)" class="btn btn-sm border-0 rounded-0 bg-transparent"
-                            value="Remove">
-                            <i class="fa fa-minus-square-o"></i>
-                        </button>
-                    </div>
-                </div>
+                </ng-template>
             </div>
         </form>
     </span>

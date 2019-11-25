@@ -57,6 +57,8 @@ namespace dexih.api.Services.Remote
 	    Task<string> PreviewTable(string instanceId, long hubKey, DownloadUrl downloadUrl, long tableKey, SelectQuery selectQuery, ChartConfig chartConfig, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, RepositoryManager database, CancellationToken cancellationToken);
 	    Task<string> PreviewTable(string instanceId, long hubKey, DownloadUrl downloadUrl, DexihTable hubTable, SelectQuery selectQuery, ChartConfig chartConfig, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, RepositoryManager database, CancellationToken cancellationToken);
 	    Task<string> PreviewDatalink(string instanceId, long hubKey, DownloadUrl downloadUrl, long datalinkKey, SelectQuery selectQuery, ChartConfig chartConfig, InputColumn[] inputColumns, InputParameters parameters, RepositoryManager database, CancellationToken cancellationToken);
+	    Task<string> PreviewListOfValues(string instanceId, long hubKey, DownloadUrl downloadUrl, long listOfValuesKey, RepositoryManager database, CancellationToken cancellationToken);
+	    Task<string> PreviewListOfValues(string instanceId, long hubKey, DownloadUrl downloadUrl, DexihListOfValues listOfValues, RepositoryManager database, CancellationToken cancellationToken);
 	    
 	    Task<string> PreviewAuditResults(AuditResults auditResults, RepositoryManager database, CancellationToken cancellationToken);
 

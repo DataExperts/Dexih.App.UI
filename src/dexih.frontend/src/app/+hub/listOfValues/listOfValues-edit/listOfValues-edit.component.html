@@ -1,0 +1,86 @@
+<div class="container" *ngIf="formsService.currentForm">
+	<dexih-widget title="Edit List of Values" iconClass="fa fa-lg fa-list-alt" [showCloseButton]="true" [padding]="false"
+		(close)="close()">
+		<ng-template #header>
+			<save-button *ngIf="hubCache.canWrite" [formsService]="formsService" class="mr-1"></save-button>
+			<cancel-button [formsService]="formsService"></cancel-button>
+		</ng-template>
+
+		<form [formGroup]="formsService.currentForm" class="m-3">
+			<fieldset>
+				<section>
+					<form-input label="List of Values" formControlName="name"
+						placeholder="Enter the list of values name." [autocapitalize]="on" iconClass="fa fa-list"
+						[errors]="formsService.formErrors['name']">
+					</form-input>
+				</section>
+				<section>
+					<form-textarea label="Description" [showMarkdown]="true" formControlName="description"
+						placeholder="Enter the description.">
+					</form-textarea>
+				</section>
+				<section>
+					<div class="form-row">
+						<section class="form-group col-md-6">
+							<form-select label="Data Source Type" formControlName="sourceType" [items]="sourceTypes"
+								itemKey="key" itemName="name" iconClass="fa fa-database"
+								note='Specify the source type for this view' [enableFilter]="false">
+							</form-select>
+						</section>
+						<section class="form-group col-md-6"
+							*ngIf="formsService.currentForm.value.sourceType == eLOVObjectType.Table">
+							<form-select label="Source Table" formControlName="sourceTableKey"
+								[errors]="errors?.sourceTableKey" [items]="connectionTables" parentName="name"
+								childItems="dexihTables" itemKey="key" itemName="logicalName"
+								note="Select the source table">
+							</form-select>
+						</section>
+						<section class="form-group col-md-6"
+							*ngIf="formsService.currentForm.value.sourceType == eLOVObjectType.Datalink">
+							<form-select label="Source Datalink" formControlName="sourceDatalinkKey"
+								[errors]="errors?.sourceDatalinkKey" [items]="datalinks" itemKey="key" itemName="name"
+								note='Select the source datalink'>
+							</form-select>
+						</section>
+					</div>
+					<div class="form-row" *ngIf="tableColumns">
+						<section class="form-group col-md-4">
+							<form-select label="Key Column" formControlName="keyColumnKey" [items]="tableColumns"
+								itemKey="key" itemName="name" iconClass="fa fa-key" [allowNullSelect]="true" [enableFilter]="false">
+							</form-select>
+						</section>
+						<section class="form-group col-md-4">
+							<form-select label="Name Column" formControlName="nameColumnKey" [items]="tableColumns"
+								itemKey="key" itemName="name" iconClass="fa fa-circle-o" [allowNullSelect]="true" [enableFilter]="false">
+							</form-select>
+						</section>
+						<section class="form-group col-md-4">
+							<form-select label="Description Column" formControlName="descriptionColumnKey"
+								[items]="tableColumns" itemKey="key" itemName="name" [allowNullSelect]="true" iconClass="fa fa-comment-o"
+								[enableFilter]="false">
+							</form-select>
+						</section>
+					</div>
+					<div class="form-row" *ngIf="tableColumns">
+						<section class="form-group col-md-12">
+							<form-checkbox label="Cache Lookup" formControlName="cache"></form-checkbox>
+							<form-input *ngIf="formsService.currentForm.controls.cache.value" label="Seconds to cache"
+								formControlName="cacheSeconds"></form-input>
+						</section>
+					</div>
+				</section>
+			</fieldset>
+		</form>
+
+		<dexih-widget-section title="Query Configuration" [showExpandButton]="true">
+			<query-builder  [selectQuery]="formsService.currentForm.controls.selectQuery.value" [columns]="tableColumns" [inputColumns]="inputColumns" [parameters]="null" (hasChanged)="hasChanged()"></query-builder>
+		</dexih-widget-section>
+
+		<dexih-table [enableMultiSelect]="false" [enableSaveCsv]="true" [columns]="columns" [data]="data">
+			<ng-template #actions let-items="items">
+				<dexih-button-refresh class="mr-1" (click)="refreshData()" text="Reload"></dexih-button-refresh>
+			</ng-template>
+		</dexih-table>
+	</dexih-widget>
+
+</div>

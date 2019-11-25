@@ -31,6 +31,8 @@ import { ApiEditComponent } from './api/api-edit';
 import { DatalinkRunComponent } from './datalink/datalink-run/datalink-run.component';
 import { SearchModule} from './search';
 import { DatajobRunComponent } from './datajob/datajob-run/datajob-run.component';
+import { ListOfValuesEditComponent } from './listOfValues/listOfValues-edit';
+import { ListOfValuesIndexComponent } from './listOfValues/listOfValues-index';
 
 @NgModule({
     imports: [
@@ -66,7 +68,8 @@ import { DatajobRunComponent } from './datajob/datajob-run/datajob-run.component
         SharedDataIndexComponent,
         CustomFunctionIndexComponent, CustomFunctionEditComponent, CustomFunctionParameterComponent,
         DatalinkTestIndexComponent, DatalinkTestNewComponent,
-        DashboardIndexComponent
+        DashboardIndexComponent,
+        ListOfValuesEditComponent, ListOfValuesIndexComponent
     ],
     providers: [ ItemEditGuard ],
     exports: [ ]

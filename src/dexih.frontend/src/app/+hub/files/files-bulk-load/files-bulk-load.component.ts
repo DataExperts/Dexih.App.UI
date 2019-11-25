@@ -209,6 +209,16 @@ export class FilesBulkLoadComponent implements OnInit, OnDestroy {
             { relativeTo: this.route.root });
     }
 
+    public discardTables(items: DexihTable[]) {
+        let newTables = Object.assign([], this.tables);
+        for (let i = 0; i < items.length; i++ ) {
+            let table = items[i];
+            let index = this.tables.findIndex(t => table.key === t.key);
+            newTables.splice(index, 1);
+        };
+        this.tables = newTables;
+    }
+
 
     public uploadSelected(items: Array<FileHandler>) {
         items.forEach(item => {

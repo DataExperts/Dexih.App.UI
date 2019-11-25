@@ -19,7 +19,9 @@ import { TransformPropertiesItemComponent } from './transform-properties/transfo
 import { PreviewDataComponent } from './preview-data/preview-data.component';
 import { PreviewViewComponent } from './preview-view/preview-view.component';
 import { InputParametersComponent } from './input-parameters/input-parameters.component'
+import { InputParametersViewComponent } from './input-parameters-view/input-parameters-view.component'
 import { DashboardViewComponent } from './dashboard-view/dashboard-view.component';
+import { ListOfValuesViewComponent } from './listOfValues-view/listOfValues-view.component';
 
 @NgModule({
     imports: [
@@ -46,7 +48,9 @@ import { DashboardViewComponent } from './dashboard-view/dashboard-view.componen
         TransformPropertiesComponent, TransformPropertiesItemComponent,
         PreviewDataComponent,
         PreviewViewComponent,
-        InputParametersComponent
+        InputParametersComponent,
+        InputParametersViewComponent,
+        ListOfValuesViewComponent
     ],
     declarations: [
         DatalinkStatusComponent,
@@ -65,7 +69,9 @@ import { DashboardViewComponent } from './dashboard-view/dashboard-view.componen
         TransformPropertiesComponent, TransformPropertiesItemComponent,
         PreviewDataComponent,
         PreviewViewComponent,
-        InputParametersComponent
+        InputParametersComponent,
+        InputParametersViewComponent,
+        ListOfValuesViewComponent
     ],
     providers: [],
 })

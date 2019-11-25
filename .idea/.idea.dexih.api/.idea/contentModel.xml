@@ -256,6 +256,7 @@
       <e p="DexihHubUser.cs" t="Include" />
       <e p="DexihHubVariable.cs" t="Include" />
       <e p="DexihInputParameterBase.cs" t="Include" />
+      <e p="DexihListOfValues.cs" t="Include" />
       <e p="DexihParameterBase.cs" t="Include" />
       <e p="DexihRemoteAgent.cs" t="Include" />
       <e p="DexihRemoteAgentHub.cs" t="Include" />
@@ -268,6 +269,7 @@
       <e p="EntityStatus.cs" t="Include" />
       <e p="Enums.cs" t="Include" />
       <e p="InputColumn.cs" t="Include" />
+      <e p="ListOfValues.cs" t="Include" />
       <e p="obj" t="ExcludeRecursive">
         <e p="Debug" t="Include">
           <e p="netcoreapp3.0" t="Include">
@@ -552,35 +554,35 @@
           </e>
           <e p="web.config" t="Include" />
           <e p="wwwroot" t="Include">
-            <e p="0-es2015.2c8cddb0662e840b5ee9.js" t="Include" />
-            <e p="0-es5.2c8cddb0662e840b5ee9.js" t="Include" />
-            <e p="1-es2015.9ec0bffd8d633ff09b7c.js" t="Include" />
-            <e p="1-es5.9ec0bffd8d633ff09b7c.js" t="Include" />
-            <e p="13-es2015.e02fab1bb5ba1f20bbca.js" t="Include" />
-            <e p="13-es5.e02fab1bb5ba1f20bbca.js" t="Include" />
-            <e p="14-es2015.8d2f511606c1cdbd8a14.js" t="Include" />
-            <e p="14-es5.8d2f511606c1cdbd8a14.js" t="Include" />
+            <e p="0-es2015.8687f38551e97ba03354.js" t="Include" />
+            <e p="0-es5.8687f38551e97ba03354.js" t="Include" />
+            <e p="1-es2015.06dab3b8d77a5b15bf69.js" t="Include" />
+            <e p="1-es5.06dab3b8d77a5b15bf69.js" t="Include" />
+            <e p="13-es2015.42444dcf633cc9321bfb.js" t="Include" />
+            <e p="13-es5.42444dcf633cc9321bfb.js" t="Include" />
+            <e p="14-es2015.2a00ff0e30ed54b01c32.js" t="Include" />
+            <e p="14-es5.2a00ff0e30ed54b01c32.js" t="Include" />
             <e p="15-es2015.5f502c6ca03966699e13.js" t="Include" />
             <e p="15-es5.5f502c6ca03966699e13.js" t="Include" />
             <e p="16-es2015.54c860cfae624369d0ca.js" t="Include" />
             <e p="16-es5.54c860cfae624369d0ca.js" t="Include" />
-            <e p="17-es2015.27dd503c680924a5c297.js" t="Include" />
-            <e p="17-es5.27dd503c680924a5c297.js" t="Include" />
-            <e p="18-es2015.c878a5cc2a04d0484e83.js" t="Include" />
-            <e p="18-es5.c878a5cc2a04d0484e83.js" t="Include" />
+            <e p="17-es2015.e3c3a3ead95151246d05.js" t="Include" />
+            <e p="17-es5.e3c3a3ead95151246d05.js" t="Include" />
+            <e p="18-es2015.15ce3b5692493d9d69e8.js" t="Include" />
+            <e p="18-es5.15ce3b5692493d9d69e8.js" t="Include" />
             <e p="3rdpartylicenses.txt" t="Include" />
             <e p="4-es2015.5d6d65af4f21a1243816.js" t="Include" />
             <e p="4-es5.5d6d65af4f21a1243816.js" t="Include" />
-            <e p="5-es2015.b39d3d6bc973174f66b8.js" t="Include" />
-            <e p="5-es5.b39d3d6bc973174f66b8.js" t="Include" />
-            <e p="6-es2015.0dcc8cb6735c55f6760e.js" t="Include" />
-            <e p="6-es5.0dcc8cb6735c55f6760e.js" t="Include" />
-            <e p="7-es2015.8ebef8caa0df6323ec1d.js" t="Include" />
-            <e p="7-es5.8ebef8caa0df6323ec1d.js" t="Include" />
-            <e p="8-es2015.5fb22f9ab6fd96ffc06f.js" t="Include" />
-            <e p="8-es5.5fb22f9ab6fd96ffc06f.js" t="Include" />
-            <e p="9-es2015.ddf1ee100192dd83a30a.js" t="Include" />
-            <e p="9-es5.ddf1ee100192dd83a30a.js" t="Include" />
+            <e p="5-es2015.d0c39d7194065e4bf1b8.js" t="Include" />
+            <e p="5-es5.d0c39d7194065e4bf1b8.js" t="Include" />
+            <e p="6-es2015.d0b759c0c00618c63ce0.js" t="Include" />
+            <e p="6-es5.d0b759c0c00618c63ce0.js" t="Include" />
+            <e p="7-es2015.a79b16cc5f092f033df2.js" t="Include" />
+            <e p="7-es5.a79b16cc5f092f033df2.js" t="Include" />
+            <e p="8-es2015.d8cd793e2e5909109251.js" t="Include" />
+            <e p="8-es5.d8cd793e2e5909109251.js" t="Include" />
+            <e p="9-es2015.c5f8839a128c2b98ec84.js" t="Include" />
+            <e p="9-es5.c5f8839a128c2b98ec84.js" t="Include" />
             <e p="assets" t="Include">
               <e p="css" t="Include">
                 <e p="_custom.scss" t="Include" />
@@ -767,114 +769,22 @@
                 <e p="google-api.js" t="Include" />
               </e>
             </e>
-            <e p="common-es2015.cdaa6f3543e8e6b04821.js" t="Include" />
-            <e p="common-es5.cdaa6f3543e8e6b04821.js" t="Include" />
+            <e p="common-es2015.5b4488168acef4df51ca.js" t="Include" />
+            <e p="common-es5.5b4488168acef4df51ca.js" t="Include" />
             <e p="fontawesome-webfont.674f50d287a8c48dc19b.eot" t="Include" />
             <e p="fontawesome-webfont.912ec66d7572ff821749.svg" t="Include" />
             <e p="fontawesome-webfont.af7ae505a9eed503f8b8.woff2" t="Include" />
             <e p="fontawesome-webfont.b06871f281fee6b241d6.ttf" t="Include" />
             <e p="fontawesome-webfont.fee66e712a8a08eef580.woff" t="Include" />
             <e p="index.html" t="Include" />
-            <e p="main-es2015.083d4eb972b30e935c83.js" t="Include" />
-            <e p="main-es5.083d4eb972b30e935c83.js" t="Include" />
+            <e p="main-es2015.fffa8cf3e9f388b0cc37.js" t="Include" />
+            <e p="main-es5.fffa8cf3e9f388b0cc37.js" t="Include" />
             <e p="polyfills-es5.6e8409c7116790edda13.js" t="Include" />
-            <e p="runtime-es2015.15021bc7d593228eb993.js" t="Include" />
-            <e p="runtime-es5.15021bc7d593228eb993.js" t="Include" />
+            <e p="runtime-es2015.081b81f8412b11152707.js" t="Include" />
+            <e p="runtime-es5.081b81f8412b11152707.js" t="Include" />
             <e p="styles.0eeb42384e84fae3f877.css" t="Include" />
           </e>
         </e>
-        <e p="dexih.frontend/node_modules/@angular/animations" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/@angular/cdk" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/@angular/cli" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/@angular/common" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/@angular/compiler" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/@angular/compiler-cli" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/@angular/core" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/@angular/forms" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/@angular/platform-browser" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/@angular/platform-browser-dynamic" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/@angular/router" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/@angular-devkit/architect" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/@angular-devkit/build-angular" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/@angular-devkit/build-optimizer" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/@angular-devkit/build-webpack" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/@angular-devkit/core" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/@angular-devkit/schematics" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/@microsoft/signalr" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/@ngtools/webpack" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/@swimlane/ngx-charts" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/@types" t="IncludeRecursive">
-          <e p="events" t="IncludeRecursive" />
-          <e p="file-saver" t="IncludeRecursive" />
-          <e p="jasmine" t="IncludeRecursive" />
-          <e p="minimatch" t="IncludeRecursive" />
-          <e p="node" t="IncludeRecursive" />
-          <e p="source-list-map" t="IncludeRecursive" />
-        </e>
-        <e p="dexih.frontend/node_modules/ajv" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/angular-gridster2" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/angular-resize-event" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/arg" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/blocking-proxy" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/canonical-path" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/chalk" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/chokidar" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/codelyzer" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/commander" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/core-js" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/css-element-queries" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/css-line-break" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/dependency-graph" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/dexih-ngx-components" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/dexih-ngx-table" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/es6-promise" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/expose-loader" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/fast-deep-equal" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/file-saver" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/flatted" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/handlebars" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/html2canvas" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/imports-loader" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/jasmine-core" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/jasmine-spec-reporter" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/jest-worker" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/karma" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/karma-chrome-launcher" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/karma-cli" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/karma-firefox-launcher" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/karma-jasmine" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/karma-remap-istanbul" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/karma-typescript" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/karma-typescript-es6-transform" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/license-webpack-plugin" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/log4js" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/magic-string" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/msal" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/ngx-bootstrap" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/ngx-md" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/node-sass" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/npm" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/npm-check-updates" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/pad" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/portfinder" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/postcss" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/protractor" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/reflect-metadata" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/rxjs" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/script-loader" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/source-map" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/sourcemap-codec" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/symbol-observable" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/terser" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/tree-kill" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/ts-node" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/tslib" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/tslint" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/upath" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/uri-js" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/webdriver-js-extender" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/worker-farm" t="IncludeRecursive" />
-        <e p="dexih.frontend/node_modules/zone.js" t="IncludeRecursive" />
       </e>
       <e p="test" t="Include">
         <e p="dexih.api.tests" t="IncludeRecursive">
@@ -1303,6 +1213,7 @@
       <e p="Currency.cs" t="Include" />
       <e p="dexih.functions.external.csproj" t="IncludeRecursive" />
       <e p="dexih.functions.external.csproj.DotSettings" t="Include" />
+      <e p="IpAddress.cs" t="Include" />
       <e p="obj" t="ExcludeRecursive">
         <e p="Debug" t="Include">
           <e p="netcoreapp2.1" t="Include">
