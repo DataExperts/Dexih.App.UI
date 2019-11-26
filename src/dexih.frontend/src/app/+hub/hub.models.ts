@@ -7,7 +7,7 @@ import { DexihHubVariable, DexihHub, DexihFunctionParameter, DexihConnection, De
     eSourceType, eImportAction, eSecurityFlag, eDatalinkType, eUpdateStrategy, eFailAction, eInvalidAction,
     eFunctionCaching, eCleanAction, eDuplicateStrategy, eRunStatus, ePermission, eTypeCode,
     eTransformWriterMethod, eTransformItemType, eFunctionType, InputColumn, SelectQuery, DexihColumnBase,
-    eDataObjectType, eSharedObjectType, eDirection, eSeriesGrain, eDayOfWeek, ChartConfig, eLOVObjectType, DexihListOfValues } from '../shared/shared.models';
+    eDataObjectType, eSharedObjectType, eDirection, eSeriesGrain, eDayOfWeek, ChartConfig, eLOVObjectType, DexihListOfValues, DexihParameterBase, InputParameterBase } from '../shared/shared.models';
 
 // export class RemoteMessage {
 //     public messageId: string;
@@ -608,6 +608,7 @@ export class HubCache {
             this.cacheAddTable(datalink.sourceDatalinkTable.sourceTableKey, hub);
         }
         this.cacheAddConnection(datalink.auditConnectionKey, hub);
+        this.getParametersCache(datalink.parameters, hub);
 
         datalink.dexihDatalinkTargets.forEach(target => {
             this.cacheAddTable(target.tableKey, hub);
@@ -667,7 +668,11 @@ export class HubCache {
 
     public getDatajobCache(datajob: DexihDatajob, hub: DexihHub): DexihHub {
         this.cacheAddConnection(datajob.auditConnectionKey, hub);
+        this.getParametersCache(datajob.parameters, hub);
+
         datajob.dexihDatalinkSteps.forEach(step => {
+            this.getParametersCache(step.parameters, hub);
+
             const datalinkDup = hub.dexihDatalinks.find(c => c.key === step.datalinkKey);
             if (!datalinkDup) {
                 const datalink = this.hub.dexihDatalinks.find(c => c.key === step.datalinkKey);
@@ -693,6 +698,7 @@ export class HubCache {
     public getViewCache(view: DexihView, hub: DexihHub): DexihHub {
         this.cacheAddDatalink(view.sourceDatalinkKey, hub);
         this.cacheAddTable(view.sourceTableKey, hub);
+        this.getParametersCache(view.parameters, hub);
 
         return hub;
     }
@@ -700,6 +706,15 @@ export class HubCache {
     public getDashboardCache(dashboard: DexihDashboard, hub: DexihHub): DexihHub {
         dashboard.dexihDashboardItems.forEach(item => {
             this.cacheAddView(item.viewKey, hub);
+        });
+        this.getParametersCache(dashboard.parameters, hub);
+
+        return hub;
+    }
+
+    public getParametersCache(parameters: InputParameterBase[], hub: DexihHub): DexihHub {
+        parameters.forEach(parameter => {
+            this.cacheAddListOfValues(parameter.listOfValuesKey, hub);
         });
 
         return hub;
@@ -715,6 +730,7 @@ export class HubCache {
     public getApiCache(api: DexihApi, hub: DexihHub): DexihHub {
         this.cacheAddDatalink(api.sourceDatalinkKey, hub);
         this.cacheAddTable(api.sourceTableKey, hub);
+        this.getParametersCache(api.parameters, hub);
 
         return hub;
     }

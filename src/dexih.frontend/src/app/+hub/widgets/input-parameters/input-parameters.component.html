@@ -1,7 +1,7 @@
 <div *ngIf="parameters">
     <dexih-button-new *ngIf="parameters.controls.length === 0" (click)="add()" text="Add Parameter"></dexih-button-new>
     <span *ngFor="let parameter of parameters.controls; let i = index" class="input-group">
-        <form [formGroup]="parameter">
+        <form [formGroup]="parameter" *ngIf="parameter.controls.isValid.value">
             <div class="input-group">
                 <form-input [disabled]="!showEdit" labelLeft="Name" [border]="false" class="form-control p-0"
                     formControlName="name">

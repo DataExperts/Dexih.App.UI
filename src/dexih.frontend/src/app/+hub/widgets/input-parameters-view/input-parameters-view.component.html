@@ -1,5 +1,5 @@
 <div *ngIf="parameters">
-    <span *ngFor="let parameter of parameters; let i = index" class="input-group">
+    <span *ngFor="let parameter of parameters | isValidFilter; let i = index" class="input-group">
             <div class="input-group">
                 <form-input [disabled]="true" labelLeft="Name" [border]="false" class="form-control p-0"
                 [(ngModel)]="parameter.name">
