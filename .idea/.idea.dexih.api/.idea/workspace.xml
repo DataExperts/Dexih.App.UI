@@ -3,17 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1be1a9df-0647-4351-ace4-9bafd064437b" name="Default" comment="minor">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/confirmEmail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/confirmEmail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/forgotPassword.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/forgotPassword.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/hubAccess.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/hubAccess.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/hubAccessRemove.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/hubAccessRemove.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/invite.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/invite.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/inviteRequired.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/inviteRequired.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/supportEmail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/supportEmail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/userReady.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/userReady.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/hub.models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/hub.models.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/widgets/input-parameters-view/input-parameters-view.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/widgets/input-parameters-view/input-parameters-view.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/widgets/input-parameters/input-parameters.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/widgets/input-parameters/input-parameters.component.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -317,6 +306,7 @@
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.ml/SentimentAnalysis.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.ml/RegressionPredictor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.ml/RegressionMetrics.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.connections.oracle/dexih.connections.sql.oracle.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.ml/DynamicList.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/dexih.api/MessagePackInputFormatter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.ml/DynamicTypeProperty.cs" root0="FORCE_HIGHLIGHTING" />
@@ -567,6 +557,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/81CFEBD7-44D6-44BF-BFC3-DC54BE55887F/da/62d35f2a/IdentityDbContext`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihDatalinkTransformItem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6CE49A5F-0BE7-424B-AA97-A3321DCE7BC3/74/01d6cf4e/Json.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A0907515-DAD5-48EA-A8E6-608EDFEB982A/bb/4e1bc850/DbDataReader.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.operations/RemoteMessage.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/56C1FBAA-ADF8-426A-91DB-87B46E8C8EAF/2d/567d6af4/ValueTuple`2.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/Streams/Streams.cs" root0="FORCE_HIGHLIGHTING" />
@@ -684,10 +675,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihDatalinkStepParameter.cs" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihViewParameter.cs" />
-        <option value="$PROJECT_DIR$/src/dexih.api/appsettings.json" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/ListOfValues.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Startup.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/Enums.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.operations/Import.cs" />
@@ -735,6 +722,10 @@
         <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihFunctionParameterBase.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.operations/CacheManager.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.operations/RepositoryManager.cs" />
+        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.ml/Clustering.cs" />
+        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Mapping/Mappings.cs" />
+        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Transform.cs" />
+        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/ReaderSql.cs" />
       </list>
     </option>
   </component>
@@ -792,7 +783,7 @@
     </option>
     <option name="contentProportion" value="0.12794743" />
   </component>
-  <component name="RunManager" selected=".NET Project.API">
+  <component name="RunManager" selected="Compound.API &amp; Agent">
     <configuration name="API &amp; Agent &amp; Proxy" type="CompoundRunConfigurationType">
       <toRun name="API" type="DotNetProject" />
       <toRun name="Proxy" type="DotNetProject" />
@@ -1552,7 +1543,7 @@
       <workItem from="1574301426122" duration="71000" />
       <workItem from="1574302154663" duration="15567000" />
       <workItem from="1574640880754" duration="4075000" />
-      <workItem from="1574651787753" duration="17376000" />
+      <workItem from="1574651787753" duration="20597000" />
     </task>
     <task id="LOCAL-00001" summary="Connections to remote agents working.">
       <created>1509234944099</created>
@@ -1859,6 +1850,32 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="182" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Mapping/Mappings.cs</url>
+          <line>56</line>
+          <properties documentPath="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Mapping/Mappings.cs" initialLine="56">
+            <startOffsets>
+              <option value="1850" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1883" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="186" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Transform.cs</url>
+          <line>230</line>
+          <properties documentPath="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Transform.cs" initialLine="230">
+            <startOffsets>
+              <option value="9348" />
+            </startOffsets>
+            <endOffsets>
+              <option value="9557" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="187" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

@@ -30,8 +30,12 @@ export class InputParametersViewComponent implements OnInit, OnDestroy {
             this.listOfValues = cache.hub.dexihListOfValues;
 
             this.parameters.forEach((parameter: InputParameterBase) => {
-                if (!parameter['runTime']) {
-                    parameter['runTime'] = [{key: -9999999, name: 'refreshing...'}];
+                if (parameter.listOfValuesKey > 0) {
+                    if (!parameter['runTime']) {
+                        parameter['runTime'] = [{key: -9999999, name: 'refreshing...'}];
+                    }
+                } else {
+                    parameter['runTime'] = [];
                 }
             });
 

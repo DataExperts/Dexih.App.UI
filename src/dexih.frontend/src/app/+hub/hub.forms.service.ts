@@ -45,6 +45,7 @@ export class HubFormsService implements OnDestroy {
   private _datalinkTestChangesSubscription: Subscription;
   private _genericParameterSubscription: Subscription;
   private _datalinkTargetChanges: Subscription[] = [];
+  private _parameterChanges: Subscription[] = [];
 
   public currentForm: FormGroup;
   private _currentFormObservable = new BehaviorSubject<FormGroup>(null);
@@ -118,6 +119,7 @@ export class HubFormsService implements OnDestroy {
     if (this._datalinkTestChangesSubscription) { this._datalinkTestChangesSubscription.unsubscribe(); }
     if (this._genericParameterSubscription) { this._genericParameterSubscription.unsubscribe(); }
     this._datalinkTargetChanges.forEach(c => c.unsubscribe());
+    this._parameterChanges.forEach(c => c.unsubscribe());
   }
 
   private addMissing(item: any, form: FormGroup, itemTemplate: any, excludeKeys: string[] = []) {
@@ -521,17 +523,33 @@ export class HubFormsService implements OnDestroy {
   }
 
   public parameter(parameter: InputParameterBase): FormGroup {
+    let runTime = [];
+    if (parameter.listOfValuesKey) {
+      runTime = [{key: -9999999, name: 'refreshing...'}];
+    }
+
     const form = this.fb.group({
       'name': [parameter.name, [
         Validators.required,
         Validators.minLength(1),
         Validators.maxLength(50),
       ]],
-      'runTime': [[{key: -9999999, name: 'refreshing...'}]]
+      'runTime': [runTime]
     }
     );
 
     this.addMissing(parameter, form, new InputParameterBase());
+
+    let subscription = form.controls.listOfValuesKey.valueChanges.subscribe(value => {
+        if (value > 0) {
+          form.controls.runTime.setValue([{key: -9999999, name: 'refreshing...'}]);
+        } else {
+          form.controls.runTime.setValue([]);
+        }
+    });
+
+    this._parameterChanges.push(subscription);
+    
     return form;
   }
 

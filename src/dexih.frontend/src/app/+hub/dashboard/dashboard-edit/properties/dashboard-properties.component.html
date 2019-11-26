@@ -47,8 +47,7 @@
         </form>
     </dexih-widget-section>
 
-    <dexih-widget-section  title="Parameters"
-        [showExpandButton]="true">
+    <dexih-widget-section  title="Parameters" *ngIf="showEdit || parameters?.length > 0" [showExpandButton]="true">
         <input-parameters [showEdit]="showEdit" [parameters]="parameters"
             [formsService]="formsService"></input-parameters>
     </dexih-widget-section>
