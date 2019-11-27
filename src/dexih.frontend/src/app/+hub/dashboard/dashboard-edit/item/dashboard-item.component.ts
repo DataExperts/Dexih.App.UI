@@ -8,7 +8,7 @@ import { PreviewViewComponent } from '../../../widgets/preview-view/preview-view
 import { HubFormsService } from '../../../hub.forms.service';
 import { DexihWidgetComponent } from 'dexih-ngx-components';
 import { CancelToken } from '../../../../+auth/auth.models';
-import { DexihView, DexihDashboardItem, InputParameterBase } from '../../../../shared/shared.models';
+import { DexihView, DexihDashboardItem, InputParameterBase, InputParameter } from '../../../../shared/shared.models';
 
 @Component({
     selector: 'dashboard-item',
@@ -35,6 +35,8 @@ export class DashboardItemComponent implements OnInit, OnChanges, OnDestroy {
     hubCache: HubCache;
     views: DexihView[];
 
+    parentParameters: InputParameter[];
+
     private cancelToken = new CancelToken();
 
     constructor(private hubService: HubService, public formsService: HubFormsService) {
@@ -51,6 +53,8 @@ export class DashboardItemComponent implements OnInit, OnChanges, OnDestroy {
                 if (this.hubCache && this.hubCache.isLoaded()) {
                     this.views = this.hubCache.hub.dexihViews;
                 }
+
+                this.parentParameters = this.formsService.currentForm.controls.parameters.value;
             });
         } catch (e) {
             this.hubService.addHubClientErrorMessage(e, 'View Index');

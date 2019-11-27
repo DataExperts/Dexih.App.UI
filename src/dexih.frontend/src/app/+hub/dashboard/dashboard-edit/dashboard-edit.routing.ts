@@ -7,8 +7,8 @@ import { DashboardPropertiesComponent } from './properties/dashboard-properties.
 export const dashboardEditRoutes = [
     { path: '', redirectTo: 'properties'},
     { path: 'properties', component: DashboardPropertiesComponent,  data: { navigateSkip: true} },
-    { path: 'view-edit/:viewKey', component: DashboardPropertiesComponent,  data: { navigateSkip: true} },
-    { path: 'view-new/:viewKey', component: DashboardPropertiesComponent,  data: { navigateSkip: true} },
+    { path: 'view-edit/:viewKey', component: ViewEditComponent,  data: { action: 'edit', pageTitle: 'Edit View'} },
+    { path: 'view-new', component: ViewEditComponent, data: { action: 'new', pageTitle: 'New View'}}
 ];
 
 export const routes: Routes = [

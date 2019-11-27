@@ -3,6 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="1be1a9df-0647-4351-ace4-9bafd064437b" name="Default" comment="minor">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/hub.forms.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/hub.forms.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/listOfValues/listOfValues-edit/listOfValues-edit.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/listOfValues/listOfValues-edit/listOfValues-edit.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/listOfValues/listOfValues-index/listOfValues-index.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/listOfValues/listOfValues-index/listOfValues-index.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/shared.models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/shared.models.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -63,6 +68,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5C44427D-0C55-4503-8458-C9D10FEB7503/3e/1329df9c/MessagePackSerializer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3F9A6BF9-CC47-4E04-95B6-4187B8F17D2C/d1/6644bb64/_ThreadPoolWaitCallback.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/DataPack/DataPackColumn.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/8BE7FA8D-4585-4537-AEB3-7E20423B1F87/79/5288c263/ServiceOptions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5486B0B5-95C6-4BBE-8EDA-415056DF068B/76/916fc905/Task.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.connections.flatfile/dexih.connections.flatfile.local.cs" root0="FORCE_HIGHLIGHTING" />
@@ -90,7 +96,6 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3F9A6BF9-CC47-4E04-95B6-4187B8F17D2C/bf/44b98578/ValueTask`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.connections.mysql/dexih.connections.sql.mysql.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/22A40031-1822-408A-8BD0-5691F3CDC119/66/c720e6ff/CalibratedBinaryClassificationMetrics.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2254925F-A632-4F31-B1D5-B3D82A28CAEE/57/ad843a9b/UserManager`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F2962BE6-6CA8-4DF5-B1B5-AAE94BCA8F2D/f3/eaf07474/Operations.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4BAAB77C-2996-4356-80C9-3DC570230C04/10/e9681190/RegressionMetrics.cs" root0="SKIP_HIGHLIGHTING" />
@@ -469,7 +474,6 @@
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.external/OpenWeatherMap.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Mapping/MapSeries.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3F9A6BF9-CC47-4E04-95B6-4187B8F17D2C/ad/ef6d17bf/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Mapping/MapNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Mapping/MapUnGroup.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.external/Currency.cs" root0="FORCE_HIGHLIGHTING" />
@@ -559,6 +563,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6CE49A5F-0BE7-424B-AA97-A3321DCE7BC3/74/01d6cf4e/Json.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A0907515-DAD5-48EA-A8E6-608EDFEB982A/bb/4e1bc850/DbDataReader.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.operations/RemoteMessage.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/56C1FBAA-ADF8-426A-91DB-87B46E8C8EAF/2d/567d6af4/ValueTuple`2.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/Streams/Streams.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CB5BE0C7-4433-425A-AE2A-B70ED6C7054C/a5/93757d33/Monitor.cs" root0="SKIP_HIGHLIGHTING" />
@@ -675,10 +680,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/dexih.api/Startup.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/Enums.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.operations/Import.cs" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/dexih_repositoryContext.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Services/Remote/IRemoteAgents.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Models/LoggingEvents.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihHubs.cs" />
@@ -707,7 +710,6 @@
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.connections.dynamodb/dexih.connections.dynamodb.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/dexih.api.csproj" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/StreamJsonCompact.cs" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/RemoteOperations/RemoteOperations.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Models/HubModels.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/confirmEmail.html" />
         <option value="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/forgotPassword.html" />
@@ -717,15 +719,18 @@
         <option value="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/inviteRequired.html" />
         <option value="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/supportEmail.html" />
         <option value="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/userReady.html" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihListOfValues.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihInputParameterBase.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihFunctionParameterBase.cs" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.operations/CacheManager.cs" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.operations/RepositoryManager.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.ml/Clustering.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Mapping/Mappings.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Transform.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/ReaderSql.cs" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihListOfValues.cs" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihTableColumn.cs" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/RemoteOperations/RemoteOperations.cs" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.operations/CacheManager.cs" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/dexih_repositoryContext.cs" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.operations/RepositoryManager.cs" />
       </list>
     </option>
   </component>
@@ -1543,7 +1548,8 @@
       <workItem from="1574301426122" duration="71000" />
       <workItem from="1574302154663" duration="15567000" />
       <workItem from="1574640880754" duration="4075000" />
-      <workItem from="1574651787753" duration="20597000" />
+      <workItem from="1574651787753" duration="21043000" />
+      <workItem from="1574818896645" duration="5819000" />
     </task>
     <task id="LOCAL-00001" summary="Connections to remote agents working.">
       <created>1509234944099</created>
@@ -1840,42 +1846,16 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.operations/RepositoryManager.cs</url>
-          <line>4394</line>
-          <properties documentPath="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.operations/RepositoryManager.cs" initialLine="4394">
+          <line>621</line>
+          <properties documentPath="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.operations/RepositoryManager.cs" initialLine="621">
             <startOffsets>
-              <option value="168150" />
+              <option value="23054" />
             </startOffsets>
             <endOffsets>
-              <option value="168188" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="182" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Mapping/Mappings.cs</url>
-          <line>56</line>
-          <properties documentPath="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Mapping/Mappings.cs" initialLine="56">
-            <startOffsets>
-              <option value="1850" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1883" />
+              <option value="23086" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="186" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Transform.cs</url>
-          <line>230</line>
-          <properties documentPath="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Transform.cs" initialLine="230">
-            <startOffsets>
-              <option value="9348" />
-            </startOffsets>
-            <endOffsets>
-              <option value="9557" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="187" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

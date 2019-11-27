@@ -1,12 +1,14 @@
-import { Component, OnInit, OnDestroy, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { HubService } from '../../..';
 import { HubFormsService } from '../../../hub.forms.service';
 import { FormArray, FormGroup, AbstractControl } from '@angular/forms';
-import { HubCache } from '../../../hub.models';
+import { HubCache, PreviewResults, DataCache } from '../../../hub.models';
 import { Subscription } from 'rxjs';
 import { GridsterConfig, GridType, CompactType, DisplayGrid, GridsterItem, GridsterItemComponentInterface,
   GridsterComponent} from 'angular-gridster2';
 import { eViewType, eSourceType, InputColumn } from '../../../../shared/shared.models';
+import { AuthService } from '../../../../+auth/auth.service';
+import { CancelToken } from '../../../../+auth/auth.models';
 
 @Component({
     selector: 'dashboard-properties',
@@ -41,9 +43,12 @@ export class DashboardPropertiesComponent implements OnInit, OnDestroy {
 
     hubCache: HubCache;
 
+    private cancelToken = new CancelToken();
+
     constructor(
-        private hubService: HubService,
-        public formsService: HubFormsService) { }
+      private authService: AuthService,
+      private hubService: HubService,
+      public formsService: HubFormsService) { }
 
     ngOnInit() {
       this.options = {
@@ -146,6 +151,7 @@ export class DashboardPropertiesComponent implements OnInit, OnDestroy {
       if (this._formChangeSubscription) { this._formChangeSubscription.unsubscribe(); }
       if (this._runTimeSubscription) { this._runTimeSubscription.unsubscribe(); }
       if (this._hubCacheSubscription) { this._hubCacheSubscription.unsubscribe(); }
+      this.cancelToken.cancel();
     }
 
     public getNextPossiblePosition(): GridsterItem {
@@ -208,5 +214,29 @@ export class DashboardPropertiesComponent implements OnInit, OnDestroy {
         } else {
           this.maximizedItem = item;
         }
+      }
+
+      parameterChange() {
+        if (this.formsService.currentForm.controls.autoRefresh.value) {
+          this.refresh();
+        }
+      }
+
+      refresh() {
+        this.hubService.previewDashboard(this.formsService.currentForm.value,
+          this.formsService.currentForm.value.parameters, this.cancelToken).then(keys => {
+          let items = <FormArray> this.formsService.currentForm.controls.dexihDashboardItems;
+
+          keys.forEach(url => {
+            let item = <FormGroup> items.controls.find((form: FormGroup) => form.controls.key.value === url.dashboardItemKey);
+            if (item) {
+              let data = <DataCache> item.controls.runTime.value.data;
+              this.hubService.getRemoteResponse<PreviewResults>(url.dataKey, this.cancelToken).then(result => {
+                result.columns = this.authService.constructDataTableColumns(result.columns);
+                data.data.next(result);
+              }).catch();
+            }
+          });
+        });
       }
 }

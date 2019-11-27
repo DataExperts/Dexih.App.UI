@@ -886,9 +886,9 @@ export class ApiData {
     public sourceTableKey: number = null;
     public sourceDatalinkKey: number = null;
     public selectQuery: SelectQuery = null;
-    public keyColumnKey: number = null;
-    public nameColumnKey: number = null;
-    public descriptionColumnKey: number = null;
+    public keyColumn: string = null;
+    public nameColumn: string = null;
+    public descriptionColumn: string = null;
     public staticData: string = null;
     public cache: boolean = false;
     public cacheSeconds: number = 0;

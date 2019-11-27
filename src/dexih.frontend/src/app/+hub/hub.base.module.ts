@@ -59,7 +59,7 @@ import { ListOfValuesIndexComponent } from './listOfValues/listOfValues-index';
         DatajobIndexComponent,
         ColumnValidationIndexComponent, ColumnValidationEditComponent,
         FileFormatIndexComponent,
-        ViewIndexComponent, ViewEditComponent,
+        ViewIndexComponent,
         ApiIndexComponent, ApiEditComponent,
         HubVariableEditComponent, HubVariableIndexComponent,
         ImportComponent, ExportComponent,

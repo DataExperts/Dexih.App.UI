@@ -549,7 +549,7 @@ export class HubFormsService implements OnDestroy {
     });
 
     this._parameterChanges.push(subscription);
-    
+
     return form;
   }
 

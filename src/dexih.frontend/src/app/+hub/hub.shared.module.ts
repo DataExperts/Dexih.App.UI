@@ -5,6 +5,7 @@ import { ButtonsModule} from './buttons/buttons.module';
 import { WidgetsModule} from './widgets/widgets.module';
 import { TablePreviewDataComponent } from './table/table-preview-data/table-preview-data.component';
 import { FileFormatEditComponent } from './fileFormat';
+import { ViewEditComponent } from './view';
 
 @NgModule({
     imports: [
@@ -15,7 +16,8 @@ import { FileFormatEditComponent } from './fileFormat';
     ],
     declarations: [
         TablePreviewDataComponent,
-        FileFormatEditComponent
+        FileFormatEditComponent,
+        ViewEditComponent
     ],
     exports: [
         ButtonsModule,

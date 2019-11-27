@@ -45,27 +45,28 @@
 					</div>
 					<div class="form-row" *ngIf="tableColumns">
 						<section class="form-group col-md-4">
-							<form-select label="Key Column" formControlName="keyColumnKey" [items]="tableColumns"
-								itemKey="key" itemName="name" iconClass="fa fa-key" [allowNullSelect]="true" [enableFilter]="false">
+							<form-select label="Key Column" formControlName="keyColumn" [items]="tableColumns"
+								itemKey="name" itemName="name" iconClass="fa fa-key" [allowNullSelect]="true" [enableFilter]="false">
 							</form-select>
 						</section>
 						<section class="form-group col-md-4">
-							<form-select label="Name Column" formControlName="nameColumnKey" [items]="tableColumns"
-								itemKey="key" itemName="name" iconClass="fa fa-circle-o" [allowNullSelect]="true" [enableFilter]="false">
+							<form-select label="Name Column" formControlName="nameColumn" [items]="tableColumns"
+								itemKey="name" itemName="name" iconClass="fa fa-circle-o" [allowNullSelect]="true" [enableFilter]="false">
 							</form-select>
 						</section>
 						<section class="form-group col-md-4">
-							<form-select label="Description Column" formControlName="descriptionColumnKey"
-								[items]="tableColumns" itemKey="key" itemName="name" [allowNullSelect]="true" iconClass="fa fa-comment-o"
+							<form-select label="Description Column" formControlName="descriptionColumn"
+								[items]="tableColumns" itemKey="name" itemName="name" [allowNullSelect]="true" iconClass="fa fa-comment-o"
 								[enableFilter]="false">
 							</form-select>
 						</section>
 					</div>
 					<div class="form-row" *ngIf="tableColumns">
 						<section class="form-group col-md-12">
-							<form-checkbox label="Cache Lookup" formControlName="cache"></form-checkbox>
-							<form-input *ngIf="formsService.currentForm.controls.cache.value" label="Seconds to cache"
-								formControlName="cacheSeconds"></form-input>
+							<div class="d-flex flex-wrap pt-1">
+								<form-checkbox class="input-group-prepend" label="Cache Lookup" formControlName="cache" [border]="true"></form-checkbox>
+								<form-input type="number" class="pl-1" *ngIf="formsService.currentForm.controls.cache.value" labelLeft="Cache Seconds" placeholder="seconds" title="Specify the number of seconds to cache the lookup" formControlName="cacheSeconds"></form-input>
+							</div>								
 						</section>
 					</div>
 				</section>
@@ -76,7 +77,11 @@
 			<query-builder  [selectQuery]="formsService.currentForm.controls.selectQuery.value" [columns]="tableColumns" [inputColumns]="inputColumns" [parameters]="null" (hasChanged)="hasChanged()"></query-builder>
 		</dexih-widget-section>
 
-		<dexih-table [enableMultiSelect]="false" [enableSaveCsv]="true" [columns]="columns" [data]="data">
+		<div *ngIf="!data"  class="m-3">
+			<dexih-button-refresh (click)="refreshData()" text="Reload" [autoCompact]="false"></dexih-button-refresh>
+		</div>
+
+		<dexih-table *ngIf="data" [enableMultiSelect]="false" [enableSaveCsv]="true" [columns]="columns" [data]="data">
 			<ng-template #actions let-items="items">
 				<dexih-button-refresh class="mr-1" (click)="refreshData()" text="Reload"></dexih-button-refresh>
 			</ng-template>

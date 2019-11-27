@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routing } from './dashboard-edit.routing';
 import { HubSharedModule } from '../../hub.shared.module';
 import { DashboardPropertiesComponent } from './properties//dashboard-properties.component';
+import { ViewEditComponent } from '../../view';
 
 @NgModule({
     imports: [
@@ -24,7 +25,8 @@ import { DashboardPropertiesComponent } from './properties//dashboard-properties
     declarations: [
         DashboardEditComponent,
         DashboardItemComponent,
-        DashboardPropertiesComponent],
+        DashboardPropertiesComponent,
+        ],
     providers: [
         HubFormsService,
         ItemEditGuard

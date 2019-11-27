@@ -80,8 +80,11 @@ export class ListOfValuesIndexComponent implements OnInit, OnDestroy {
 
     export(lov: Array<DexihListOfValues>) {
         const cache = this.hubCache;
-        const hub = this.hubService.createHub(this.hubCache.hub.hubKey, '');
+        const hub = this.hubService.createHub(cache.hub.hubKey, '');
         hub.dexihListOfValues = lov;
+        lov.forEach(lovItem => {
+            cache.getListOfValuesCache(lovItem, hub);
+        });
         let filename = 'list_of_values.json';
 
         this.hubService.exportHub(hub, filename);

@@ -1300,8 +1300,9 @@ export class AuthService implements OnDestroy {
                         } else {
                             resolve(this.microsoftAuthResponseToLogin(authResponse));
                         }
+                    } else {
+                        reject(new Message(false, 'Microsoft login failed.', null, null));
                     }
-                    reject(new Message(false, 'Microsoft login failed.', null, null));
                 }).catch(reason => {
                     this.removeWaitMessage(messageKey);
                     reject(reason);

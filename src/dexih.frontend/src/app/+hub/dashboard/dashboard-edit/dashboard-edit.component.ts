@@ -220,6 +220,10 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
     items.push(control);
   }
 
+  public newView() {
+    this.router.navigate(['view-new'], { relativeTo: this.route } )
+  }
+
   public canDeactivate(): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
       if (this.formsService.hasChanged) {
