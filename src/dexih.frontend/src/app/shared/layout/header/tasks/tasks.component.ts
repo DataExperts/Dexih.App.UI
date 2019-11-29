@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../../../+auth/auth.service';
-import { ManagedTask, eTaskStatus, Message } from '../../../../+auth/auth.models';
 import { Observable, Subscription} from 'rxjs';
 import { Router } from '@angular/router';
+import { ManagedTask, eManagedTaskStatus, eManagedTaskStatusItems } from '../../../shared.models';
 
 @Component({
     selector: 'dexih-tasks',
@@ -19,7 +19,8 @@ export class TasksComponent implements OnInit, OnDestroy {
     loading: boolean;
     tasksRunning = false;
 
-    eTaskStatus = eTaskStatus;
+    eManagedTaskStatus = eManagedTaskStatus;
+    eManagedTaskStatusItems = eManagedTaskStatusItems
 
     tasks: Observable<Array<ManagedTask>>;
 
@@ -39,9 +40,9 @@ export class TasksComponent implements OnInit, OnDestroy {
 
         this._tasksSubscription = this.tasks.subscribe(tasks => {
             this.count = tasks.length;
-            this.tasksRunning = tasks.findIndex(c => c.status === eTaskStatus.Created
-                || c.status === eTaskStatus.Queued
-                || c.status === eTaskStatus.Running) >= 0;
+            this.tasksRunning = tasks.findIndex(c => c.status === eManagedTaskStatus.Created
+                || c.status === eManagedTaskStatus.Queued
+                || c.status === eManagedTaskStatus.Running) >= 0;
         });
     }
 

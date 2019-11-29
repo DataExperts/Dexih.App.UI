@@ -66,11 +66,13 @@ export class InputParametersComponent implements OnInit, OnChanges, OnDestroy {
     refresh(parameterForm: FormGroup) {
         let parameter = <InputParameterBase>parameterForm.value;
         if (!parameter.listOfValuesKey) { return; }
-        if (parameter['runTime'][0].key === -9999999) {
-            this.hubService.previewListOfValuesKey(parameter.listOfValuesKey, this.cancelToken).then(result => {
-                parameterForm.controls['runTime'].setValue(result);
-            });
-        }
+        this.hubService.previewListOfValuesKey(parameter.listOfValuesKey, this.cancelToken).then(result => {
+            parameterForm.controls['runTime'].setValue(result);
+        });
+    }
+
+    textValueChange(parameterForm: FormGroup, $event) {
+        parameterForm.controls.valueDesc.setValue($event);
     }
 
     change($event) {

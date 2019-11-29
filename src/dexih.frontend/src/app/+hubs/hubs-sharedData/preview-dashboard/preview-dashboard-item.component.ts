@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { DexihDashboardItem, eDataObjectType } from '../../../shared/shared.models';
+import { DexihDashboardItem, eDataObjectType, InputParameter, InputParameterBase } from '../../../shared/shared.models';
 
 @Component({
     selector: 'preview-dashboard-item',
@@ -10,8 +10,9 @@ export class PreviewDashboardItemComponent implements OnInit {
     @Input() hubKey: number;
     @Input() item: DexihDashboardItem;
     @Input() refreshData: EventEmitter<string>;
-    @Output() onMaximize = new EventEmitter<boolean>();
     @Input() isMaximized = false;
+    @Input() parentParameters: InputParameterBase[];
+    @Output() onMaximize = new EventEmitter<boolean>();
 
     eDataObjectType = eDataObjectType;
     constructor() { }

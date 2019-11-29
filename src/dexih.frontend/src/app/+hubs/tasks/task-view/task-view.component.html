@@ -2,7 +2,7 @@
 	<dexih-widget *ngIf="task" [title]="'Task - ' + task?.name" iconClass="fa fa-lg fa-fw fa-trophy" [showCloseButton]="true" (close)="close()">
 		<div class="content" [ngSwitch]="view">
 			<ul class="list-group">
-				<li class="list-group-item list-group-item-danger" *ngIf="task?.status == eTaskStatus.Error">
+				<li class="list-group-item list-group-item-danger" *ngIf="task?.status == eManagedTaskStatus.Error">
 					<h5>Error encountered!</h5>
 					<h6>{{task.message}}
 					<div class="float-right">

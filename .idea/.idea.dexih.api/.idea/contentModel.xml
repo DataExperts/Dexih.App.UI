@@ -255,7 +255,6 @@
       <e p="DexihHubs.cs" t="Include" />
       <e p="DexihHubUser.cs" t="Include" />
       <e p="DexihHubVariable.cs" t="Include" />
-      <e p="DexihInputParameterBase.cs" t="Include" />
       <e p="DexihListOfValues.cs" t="Include" />
       <e p="DexihParameterBase.cs" t="Include" />
       <e p="DexihRemoteAgent.cs" t="Include" />
@@ -269,6 +268,7 @@
       <e p="EntityStatus.cs" t="Include" />
       <e p="Enums.cs" t="Include" />
       <e p="InputColumn.cs" t="Include" />
+      <e p="InputParameterBase.cs" t="Include" />
       <e p="ListOfValues.cs" t="Include" />
       <e p="obj" t="ExcludeRecursive">
         <e p="Debug" t="Include">

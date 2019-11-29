@@ -6,14 +6,15 @@ import { BehaviorSubject, Observable, Subscription, Subject, from, forkJoin, Rep
 import { timeout, filter, first, shareReplay, take } from 'rxjs/operators'
 import { eLogLevel, LogFactory } from '../../logging';
 import {
-    DexihHubAuth, ExternalLoginResult, Message, ManagedTask,
-    User, UserLoginInfo, ExternalLogin, FileHandler, eFileStatus, RemoteToken, PromiseWithCancel, CancelToken, eTaskStatus
+    DexihHubAuth, ExternalLoginResult, Message,
+    User, UserLoginInfo, ExternalLogin, FileHandler, eFileStatus, RemoteToken, PromiseWithCancel, CancelToken
 } from './auth.models';
 import { AuthWebSocket } from './auth.websocket';
 import { UserAgentApplication, AuthResponse, CacheLocation } from 'msal';
 import { DexihModalComponent } from 'dexih-ngx-components';
 import { Location } from '@angular/common';
-import { DexihRemoteAgent, DexihActiveAgent, DownloadUrl, CacheManager, eClientCommand, eDownloadUrlType, eLoginProvider, eTypeCode } from '../shared/shared.models';
+import { DexihRemoteAgent, DexihActiveAgent, DownloadUrl, CacheManager, eClientCommand, eDownloadUrlType, eLoginProvider,
+    eTypeCode, ManagedTask, eManagedTaskStatus } from '../shared/shared.models';
 
 declare var gapi: any;
 
@@ -208,12 +209,12 @@ export class AuthService implements OnDestroy {
                                     formBody, downloadData.fileName, downloadData.contentType).then(() => {
                                         // if (currentTask) {
                                         //     currentTask.percentage = 100;
-                                        //     currentTask.status = eTaskStatus.Success;
+                                        //     currentTask.status = eManagedTaskStatus.Success;
                                         //     this.addUpdateTask(currentTask);
                                         // }
                                     }).catch(reason => {
                                         // currentTask.percentage = 0;
-                                        // currentTask.status = eTaskStatus.Error;
+                                        // currentTask.status = eManagedTaskStatus.Error;
                                         // currentTask.message = reason;
                                         // this.addUpdateTask(currentTask);
                                         this._hubErrors.next(reason);
@@ -1771,7 +1772,7 @@ export class AuthService implements OnDestroy {
     }
 
     addUpdateTask(task: ManagedTask) {
-        if (task.status === eTaskStatus.Error) {
+        if (task.status === eManagedTaskStatus.Error) {
             const message = new Message(false, `The task ${task.name} failed.  Message: ${task.message}`,
                 task.exceptionDetails, null);
             this.addUpdateNotification(message, false);

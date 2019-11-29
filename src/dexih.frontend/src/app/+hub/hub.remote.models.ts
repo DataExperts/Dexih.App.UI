@@ -1,5 +1,4 @@
-import { ManagedTask } from '../+auth/auth.models';
-import { eTypeCode, eFunctionType, eTransformType, ApiData, RemoteLibraries } from '../shared/shared.models';
+import { eTypeCode, eFunctionType, eTransformType, ApiData, RemoteLibraries, ManagedTask } from '../shared/shared.models';
 
 
 export class RemoteAgentStatus {

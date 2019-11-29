@@ -12,8 +12,9 @@
                     textEntryItemsTitle="Linked Parameters"
                     (ngModelChange)="change($event)"
                     >
+
                     <ng-template #startItems>
-                        <li class="scrollable-item" *ngIf="parameter.listOfValuesKey > 0">
+                        <li class="scrollable-item" *ngIf="parameter.listOfValuesKey > 0" >
                              <a (click)="refresh(parameter)" class="dropdown-item"><i class="fa fa-refresh"></i> Refresh ...</a>
                         </li>
                     </ng-template>

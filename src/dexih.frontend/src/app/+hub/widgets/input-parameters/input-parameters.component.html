@@ -13,9 +13,15 @@
                     [enableTextEntry]="true"
                     [textEntryItems]="parentParams"
                     textEntryItemsTitle="Linked Parameters"
-                    (onShown)="refresh(parameter)"
                     (ngModelChange)="change($event)"
+                    (textValueChange)="textValueChange(parameter, $event)"
                     >
+
+                    <ng-template #startItems>
+                        <li class="scrollable-item" *ngIf="parameter.controls.listOfValuesKey.value > 0" >
+                             <a (click)="refresh(parameter)" class="dropdown-item"><i class="fa fa-refresh"></i> Refresh ...</a>
+                        </li>
+                    </ng-template>
                 </form-select>
 
                 <ng-template [ngIf]="showEdit">
@@ -24,8 +30,10 @@
                         itemKey="key"
                         itemName="name"
                         [allowNullSelect]="true"
-                       >
+                    >
                     </form-select>
+
+                    <form-checkbox [border]="true" formControlName="allowUserSelect">User Selectable</form-checkbox>
 
                     <div *ngIf="showEdit" class="input-group-append">
         

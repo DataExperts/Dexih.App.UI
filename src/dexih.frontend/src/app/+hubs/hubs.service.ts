@@ -1,12 +1,12 @@
-import { ManagedTask, Message, CancelToken, PromiseWithCancel } from '../+auth/auth.models';
+import { Message, CancelToken, PromiseWithCancel } from '../+auth/auth.models';
 import { eLogLevel, LogFactory } from '../../logging';
 import { Injectable, OnDestroy } from '@angular/core';
 import { AuthService } from '../+auth/auth.service';
 import { BehaviorSubject, Observable} from 'rxjs';
 import { eDownloadFormat, DexihActiveAgent, InputColumn, SelectQuery,
     DexihRemoteAgent, SharedData, eDataObjectType, logLevel, eEnvironment, RemoteAgentSettings,
-    RemoteAgentSettingsSubset, DexihDashboard } from '../shared/shared.models';
-import { PreviewResults, DexihInputParameter } from '../+hub/hub.models';
+    RemoteAgentSettingsSubset, DexihDashboard, InputParameterBase, ManagedTask } from '../shared/shared.models';
+import { PreviewResults, DexihInputParameter, LOVItem } from '../+hub/hub.models';
 
 @Injectable()
 export class HubsService implements OnDestroy {
@@ -105,7 +105,7 @@ export class HubsService implements OnDestroy {
 
     // starts a preview, and returns the url to get the download stream.
     previewData(hubKey: number, objectKey: number, objectType: eDataObjectType,
-        inputColumns: InputColumn[], selectQuery: SelectQuery, cancelToken: CancelToken):
+        inputColumns: InputColumn[], selectQuery: SelectQuery, parameters: InputParameterBase[], cancelToken: CancelToken):
         Promise<PreviewResults> {
 
         return new Promise<PreviewResults>((resolve, reject) => {
@@ -117,9 +117,34 @@ export class HubsService implements OnDestroy {
                     objectKey: objectKey,
                     selectQuery: selectQuery,
                     remoteAgentId: activeAgent.instanceId,
-                    inputColumns: inputColumns
+                    inputColumns: inputColumns,
+                    parameters: parameters
                 }, activeAgent, 'Previewing data...', cancelToken).then(result => {
                     result.columns = this.authService.constructDataTableColumns(result.columns);
+                    resolve(result);
+                }).catch(reason => {
+                    reject(reason);
+                })
+            }).catch(reason => {
+                reject(reason);
+            });
+        });
+    }
+
+      // starts a preview, and returns the url to get the download stream.
+      previewListOfValues(hubKey: number, objectKey: number, objectType: eDataObjectType, parameterName, cancelToken: CancelToken):
+        Promise<LOVItem[]> {
+
+        return new Promise<LOVItem[]>((resolve, reject) => {
+            this.authService.post<DexihActiveAgent>('/api/SharedData/GetActiveAgent', { hubKey: hubKey }, 'Getting active remote agent...')
+            .then(activeAgent => {
+                this.authService.postRemote<LOVItem[]>('/api/SharedData/PreviewListOfValues', {
+                    hubKey: hubKey,
+                    objectType: objectType,
+                    objectKey: objectKey,
+                    parameterName: parameterName,
+                    remoteAgentId: activeAgent.instanceId,
+                }, activeAgent, 'Previewing list of values...', cancelToken).then(result => {
                     resolve(result);
                 }).catch(reason => {
                     reject(reason);

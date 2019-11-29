@@ -17,6 +17,7 @@ using dexih.api.Services.Remote.Exceptions;
 using dexih.operations;
 using Dexih.Utils.Crypto;
 using dexih.functions.Query;
+using dexih.remote;
 using dexih.remote.operations;
 using Dexih.Utils.DataType;
 using Dexih.Utils.ManagedTasks;
@@ -664,9 +665,13 @@ namespace dexih.api.Services.Remote
 		    }
 	    }
 	    
-		public async Task<string> PreviewTable(string id, long hubKey, DownloadUrl downloadUrl, long tableKey, SelectQuery selectQuery, ChartConfig chartConfig, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, RepositoryManager database, CancellationToken cancellationToken)
+		public async Task<string> PreviewTable(string id, long hubKey, DownloadUrl downloadUrl, long tableKey, SelectQuery selectQuery, ChartConfig chartConfig, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, bool isShared, RepositoryManager database, CancellationToken cancellationToken)
 		{
 			var table = await database.GetTable(hubKey, tableKey, true, cancellationToken);
+			if (isShared && !table.IsShared)
+			{
+				throw new RemoteException($"The table {table.Name} is not shared.");
+			}
 			return await PreviewTable(id, hubKey, downloadUrl, table, selectQuery, chartConfig, inputColumns, inputParameters, showRejectedData, database, cancellationToken);
         }
 
@@ -749,8 +754,43 @@ namespace dexih.api.Services.Remote
 			    throw new RemoteAgentException($"Error downloading table {hubDatalink.Name}.\n{ex.Message}", ex);
 		    }
 	    }
+
+	    public async Task<string> DownloadTableKeyData(string instanceId, long hubKey, DownloadUrl downloadUrl,
+		    string connectionId, long tableKey, SelectQuery selectQuery, InputColumn[] inputColumns,
+		    InputParameters inputParameters, bool showRejectedData, bool isShared, EDownloadFormat downloadFormat,
+		    bool zipFiles, RepositoryManager database, CancellationToken cancellationToken)
+	    {
+		    var hub = await database.GetHub(hubKey, cancellationToken);
+		    var table = hub.GetTableFromKey(tableKey);
+
+		    if (isShared && !table.IsShared)
+		    {
+			    throw new RemoteAgentException($"The table {table.Name} is not shared.");
+		    }
+
+		    return await DownloadTableData(instanceId, hubKey, downloadUrl, connectionId, table, selectQuery, inputColumns,
+			    inputParameters, showRejectedData, downloadFormat, zipFiles, database, cancellationToken);
+	    }
+
+	    public async Task<string> DownloadDatalinkKeyData(string instanceId, long hubKey, DownloadUrl downloadUrl,
+		    string connectionId, long datalinkKey, long datalinkTransformKey, SelectQuery selectQuery,
+		    InputColumn[] inputColumns, InputParameters parameters, bool isShared, EDownloadFormat downloadFormat,
+		    bool zipFiles, RepositoryManager database, CancellationToken cancellationToken)
+	    {
+		    var hub = await database.GetHub(hubKey, cancellationToken);
+		    var datalink = hub.DexihDatalinks.Single(c => c.Key == datalinkKey);
+
+		    if (isShared && !datalink.IsShared)
+		    {
+			    throw new RemoteAgentException($"The datalink {datalink.Name} is not shared.");
+		    }
+
+		    return await DownloadDatalinkData(instanceId, hubKey, downloadUrl, connectionId, datalink, datalinkTransformKey, selectQuery, inputColumns,
+			    parameters, downloadFormat, zipFiles, database, cancellationToken);
+	    }
+
 	    
-        public async Task<string> PreviewDatalink(string id, long hubKey, DownloadUrl downloadUrl, long datalinkKey, SelectQuery selectQuery, ChartConfig chartConfig, InputColumn[] inputColumns, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken)
+        public async Task<string> PreviewDatalink(string id, long hubKey, DownloadUrl downloadUrl, long datalinkKey, SelectQuery selectQuery, ChartConfig chartConfig, InputColumn[] inputColumns, InputParameters inputParameters, bool isShared, RepositoryManager database, CancellationToken cancellationToken)
         {
             try
             {
@@ -760,6 +800,12 @@ namespace dexih.api.Services.Remote
 
                 var cache = new CacheManager(hubKey, hub.EncryptionKey);
                 cache.AddDatalinks(new[] { datalinkKey }, hub);
+
+                var datalink = cache.Hub.DexihDatalinks.First();
+                if (isShared && !datalink.IsShared)
+                {
+	                throw new RemoteAgentException($"The datalink {datalink.Name} is not shared.");
+                }
 
                 var value = new
                 {
@@ -976,7 +1022,7 @@ namespace dexih.api.Services.Remote
             }
         }
 
-        public async Task<string> DownloadData(string id, long hubKey, DownloadUrl downloadUrl, string connectionId, DownloadObject[] downloadObjects, EDownloadFormat downloadFormat, bool zipFiles, RepositoryManager database, CancellationToken cancellationToken)
+        public async Task<string> DownloadData(string id, long hubKey, DownloadUrl downloadUrl, string connectionId, DownloadObject[] downloadObjects, EDownloadFormat downloadFormat, bool isShared, bool zipFiles, RepositoryManager database, CancellationToken cancellationToken)
         {
             try
             {
@@ -1000,6 +1046,25 @@ namespace dexih.api.Services.Remote
 
                 var viewKeys = downloadObjects.Where(c => c.ObjectType == EDataObjectType.View).Select(c => c.ObjectKey).ToArray();
                 cache.AddViews(viewKeys, hub);
+
+                if (isShared)
+                {
+	                var tables = cache.Hub.DexihTables.Where(c => tableKeys.Contains(c.Key) && !c.IsShared);
+	                if (tables.Any())
+	                {
+		                throw new RemoteAgentException($"The tables {string.Join(",", tables.Select(c => c.Name))} are not shared.");
+	                }
+	                var datalinks = cache.Hub.DexihDatalinks.Where(c => datalinkKeys.Contains(c.Key) &&!c.IsShared);
+	                if (datalinks.Any())
+	                {
+		                throw new RemoteAgentException($"The datalinks {string.Join(",", datalinks.Select(c => c.Name))} are not shared.");
+	                }
+	                var views = cache.Hub.DexihTables.Where(c => viewKeys.Contains(c.Key) &&!c.IsShared);
+	                if (views.Any())
+	                {
+		                throw new RemoteAgentException($"The views {string.Join(",", views.Select(c => c.Name))} are not shared.");
+	                }
+                }
                 
                 var value = new
                 {

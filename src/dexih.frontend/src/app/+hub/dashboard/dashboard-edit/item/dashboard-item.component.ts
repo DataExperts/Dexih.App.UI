@@ -8,7 +8,7 @@ import { PreviewViewComponent } from '../../../widgets/preview-view/preview-view
 import { HubFormsService } from '../../../hub.forms.service';
 import { DexihWidgetComponent } from 'dexih-ngx-components';
 import { CancelToken } from '../../../../+auth/auth.models';
-import { DexihView, DexihDashboardItem, InputParameterBase, InputParameter } from '../../../../shared/shared.models';
+import { DexihView, DexihDashboardItem, InputParameterBase, InputParameter, eDataObjectType } from '../../../../shared/shared.models';
 
 @Component({
     selector: 'dashboard-item',
@@ -59,8 +59,6 @@ export class DashboardItemComponent implements OnInit, OnChanges, OnDestroy {
         } catch (e) {
             this.hubService.addHubClientErrorMessage(e, 'View Index');
         }
-
-
     }
 
     ngOnDestroy() {
@@ -87,7 +85,15 @@ export class DashboardItemComponent implements OnInit, OnChanges, OnDestroy {
 
                         formParameters.clear();
 
-                        view.parameters.forEach(parameter => {
+                        let parameters = <InputParameterBase[]> view.parameters;
+                        if (view.sourceType === eDataObjectType.Datalink) {
+                            let datalink = this.hubCache.hub.dexihDatalinks.find(c => c.key === view.sourceDatalinkKey);
+                            if (datalink && datalink.parameters) {
+                                parameters = parameters.concat(datalink.parameters);
+                            }
+                        }
+
+                        parameters.forEach(parameter => {
                             let currentParameter = currentParameters.find( c => c.name === parameter.name);
                             let newParameter = new InputParameterBase();
                             if (currentParameter) {
@@ -99,8 +105,8 @@ export class DashboardItemComponent implements OnInit, OnChanges, OnDestroy {
                             }
                             let newFormParameter = this.formsService.parameter(newParameter);
                             formParameters.push(newFormParameter);
-
                         });
+
                         
                     }
                 }

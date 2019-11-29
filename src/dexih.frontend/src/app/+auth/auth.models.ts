@@ -95,39 +95,39 @@ export class Message {
     }
 }
 
-export class ManagedTask {
-    public reference: string;
-    public remoteAgentId: string;
-    public referenceKey: number;
-    public referenceId: string;
-    public status: eTaskStatus;
-    public name: string;
-    public description: string;
-    public category: string;
-    public data: any;
-    public percentage: number;
-    public stepName: string;
-    public isCompleted: boolean;
-    public lastUpdate: string;
-    public success: boolean;
-    public message: string;
-    public exceptionDetails: string;
+// export class ManagedTask {
+//     public reference: string;
+//     public remoteAgentId: string;
+//     public referenceKey: number;
+//     public referenceId: string;
+//     public status: eManagedTaskStatus;
+//     public name: string;
+//     public description: string;
+//     public category: string;
+//     public data: any;
+//     public percentage: number;
+//     public stepName: string;
+//     public isCompleted: boolean;
+//     public lastUpdate: string;
+//     public success: boolean;
+//     public message: string;
+//     public exceptionDetails: string;
 
-    constructor() {
-        this.status = eTaskStatus.Created;
-    }
-}
+//     constructor() {
+//         this.status = eManagedTaskStatus.Created;
+//     }
+// }
 
-export enum eTaskStatus {
-    Created = <any>'Created',
-    Scheduled = <any>'Scheduled',
-    Queued = <any>'Queued',
-    Running = <any>'Running',
-    Cancelled = <any>'Cancelled',
-    Error = <any>'Error',
-    Completed = <any>'Completed',
-    FileWatching = <any>'FileWatching'
-}
+// export enum eManagedTaskStatus {
+//     Created = <any>'Created',
+//     Scheduled = <any>'Scheduled',
+//     Queued = <any>'Queued',
+//     Running = <any>'Running',
+//     Cancelled = <any>'Cancelled',
+//     Error = <any>'Error',
+//     Completed = <any>'Completed',
+//     FileWatching = <any>'FileWatching'
+// }
 
 // export class DexihRemoteAgent extends EntityBase {
 //     public remoteAgentKey = 0;

@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { LOVItem } from '../../hub.models';
-import { DexihListOfValues, InputParameterBase } from '../../../shared/shared.models';
-import { HubService } from '../../hub.service';
+import { DexihListOfValues, InputParameterBase, eDataObjectType } from '../../../shared/shared.models';
 import { Subscription } from 'rxjs';
 import { CancelToken } from '../../../+auth/auth.models';
+import { HubsService } from '../../hubs.service';
+import { LOVItem } from '../../../+hub/hub.models';
+import { logging } from 'selenium-webdriver';
 
 @Component({
     selector: 'input-parameters-view',
@@ -11,7 +12,11 @@ import { CancelToken } from '../../../+auth/auth.models';
 })
 
 export class InputParametersViewComponent implements OnInit, OnDestroy {
-    @Input() parameters: InputParameterBase[]
+    @Input() hubKey: number;
+    @Input() objectType: eDataObjectType;
+    @Input() objectKey: number;
+    @Input() parameters: InputParameterBase[];
+
     @Output() onChange = new EventEmitter();
 
     private _hubSubscription: Subscription;
@@ -20,23 +25,17 @@ export class InputParametersViewComponent implements OnInit, OnDestroy {
     public values: LOVItem[] = [];
     public listOfValues: Array<DexihListOfValues>;
 
-    public userParameters: InputParameterBase[];
-
     public cancelToken: CancelToken = new CancelToken();
 
-    constructor(private hubService: HubService) { }
+    public userParameters: InputParameterBase[];
+
+    constructor(private hubsService: HubsService) { }
 
     ngOnInit() {
-        this._hubSubscription = this.hubService.getHubCacheObservable(true).subscribe(cache => {
-            this.listOfValues = cache.hub.dexihListOfValues;
-
-            this.userParameters = [];
-
-            this.parameters.filter(c => c.isValid && c.allowUserSelect).forEach((parameter: InputParameterBase) => {
-                parameter['runTime'] = [];
-                this.userParameters.push(parameter);
-            });
-
+        this.userParameters = [];
+        this.parameters.filter(c => c.isValid && c.allowUserSelect).forEach((parameter: InputParameterBase) => {
+            parameter['runTime'] = [];
+            this.userParameters.push(parameter);
         });
     }
 
@@ -46,7 +45,8 @@ export class InputParametersViewComponent implements OnInit, OnDestroy {
 
     refresh(parameter: InputParameterBase) {
         if (!parameter.listOfValuesKey) { return; }
-        this.hubService.previewListOfValuesKey(parameter.listOfValuesKey, this.cancelToken).then(result => {
+        this.hubsService.previewListOfValues(this.hubKey, this.objectKey, this.objectType,
+            parameter.name, this.cancelToken).then(result => {
             parameter['runTime'] = result;
         });
     }

@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../../+auth/auth.service';
-import { ManagedTask, eTaskStatus } from '../../../+auth/auth.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, BehaviorSubject, Subscription, combineLatest} from 'rxjs';
+import { ManagedTask } from '../../../shared/shared.models';
 
 @Component({
   selector: 'tasks-index',

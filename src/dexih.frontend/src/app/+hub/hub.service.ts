@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription, combineLatest, Subject} from 'rxjs';
-import { Message, ManagedTask, PromiseWithCancel, CancelToken } from '../+auth/auth.models';
+import { Message, PromiseWithCancel, CancelToken } from '../+auth/auth.models';
 import { AuthService } from '../+auth/auth.service';
 import { eLogLevel, LogFactory } from '../../logging';
 import {
@@ -20,7 +20,7 @@ import { DexihDatajob, DexihTable, DexihHub, DexihRemoteAgentHub, DexihConnectio
     TransformProperties, Import, eImportAction, eRunStatus, eDatalinkType, eDeltaType, eConnectionPurpose, eFlatFilePath,
     ApiData, DownloadObject, eDownloadFormat, DexihActiveAgent, ImportObject, ePermission, eTypeCode, eDataObjectType,
     eSharedObjectType, RemoteLibraries, ConnectionReference, TransformReference,
-    FunctionReference, eFunctionType, ClientMessage, eClientCommand, HubUser, DexihListOfValues } from '../shared/shared.models';
+    FunctionReference, eFunctionType, ClientMessage, eClientCommand, HubUser, DexihListOfValues, ManagedTask } from '../shared/shared.models';
 import { filter, take, first } from 'rxjs/operators';
 
 @Injectable()

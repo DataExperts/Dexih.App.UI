@@ -5,7 +5,7 @@ import { Subscription, combineLatest} from 'rxjs';
 import { DexihMessageComponent } from '../../../shared/ui/dexihMessage/index';
 import { HubsService} from '../../hubs.service';
 import { CancelToken } from '../../../+auth/auth.models';
-import { InputColumn, DexihColumnBase, DexihDashboard, DexihActiveAgent } from '../../../shared/shared.models';
+import { InputColumn, DexihColumnBase, DexihDashboard, DexihActiveAgent, InputParameterBase, eDataObjectType } from '../../../shared/shared.models';
 import { GridsterConfig, GridType, CompactType, DisplayGrid, GridsterItemComponentInterface, GridsterItem, GridsterItemComponent } from 'angular-gridster2';
 
 @Component({
@@ -29,13 +29,14 @@ export class PreviewDashboardComponent implements OnInit, OnDestroy {
 
     dashboardKey: number;
     hubKey: number;
+    eDataObjectType = eDataObjectType;
 
     dashboard: DexihDashboard = null;
     activeAgent: DexihActiveAgent;
     maximizedIndex: number;
 
     public options: GridsterConfig;
-
+    public parameters: InputParameterBase[];
 
     private cancelToken = new CancelToken();
 
@@ -73,11 +74,18 @@ export class PreviewDashboardComponent implements OnInit, OnDestroy {
         this.authService.navigateUp();
     }
 
+    parameterChange() {
+        this.refresh();
+    }
+
     refresh() {
         this.hubsService.getDashboard(this.hubKey, this.dashboardKey).then((dashboard) => {
             this.setOptions(dashboard);
             this.dashboard = dashboard;
             this.name = dashboard.name;
+            if (!this.parameters) {
+                this.parameters = dashboard.parameters;
+            }
 
             }).catch(reason => {
                 this.dexihMessage.addMessage(reason);

@@ -20,7 +20,7 @@ import { HelpComponent } from './help'
 import { RemoteAgentDownloadComponent } from './remoteAgents/remoteAgent-download';
 import { RemoteAgentEditComponent } from './remoteAgents/remoteAgent-edit';
 import { RemoteAgentTokenComponent} from './remoteAgents/remote-agent-token/remote-agent-token.component';
-
+import { InputParametersViewComponent } from './hubs-sharedData/input-parameters-view/input-parameters-view.component';
 @NgModule({
     imports: [
         SharedModule,
@@ -33,6 +33,7 @@ import { RemoteAgentTokenComponent} from './remoteAgents/remote-agent-token/remo
         HubEditComponent,
         HubsSummaryComponent,
         HubsSharedDataComponent, PreviewDataComponent, PreviewDashboardComponent, PreviewDashboardItemComponent, PreviewComponent,
+        InputParametersViewComponent,
         ManageComponent,
         TasksIndexComponent,
         TaskStatusComponent,

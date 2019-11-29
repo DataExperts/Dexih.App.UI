@@ -25,12 +25,26 @@ namespace dexih.api.Models
         public InputParameters Parameters { get; set; }
     }
 
+    public class PreviewLOV : HubModelBase
+    {
+        public long ObjectKey { get; set; }
+        public EDataObjectType ObjectType { get; set; }
+        public string ParameterName { get; set; }
+    }
+    
     public class PreviewSharedDashboard : HubModelBase
     {
         public long DashboardKey { get; set; }
         public InputParameters Parameters { get; set; }
     }
-    
+
+    public class PreviewSharedDashboardItem : HubModelBase
+    {
+        public long DashboardKey { get; set; }
+        public long DashboardItemKey { get; set; }
+        public InputParameters Parameters { get; set; }
+    }
+
     public class DownloadSharedData : HubModelBase
     {
         public string ClientId { get; set; }

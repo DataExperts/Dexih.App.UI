@@ -4,8 +4,9 @@ import { AuthService } from '../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { DexihMessageComponent } from '../../../shared/ui/dexihMessage/index';
 import { HubsService} from '../../hubs.service';
-import { CancelToken } from '../../../+auth/auth.models';
-import { InputColumn, DexihColumnBase, SelectQuery, eDownloadFormat, SharedData, eDataObjectType, ChartConfig } from '../../../shared/shared.models';
+import { CancelToken, Message } from '../../../+auth/auth.models';
+import { InputColumn, DexihColumnBase, SelectQuery, eDownloadFormat, SharedData, eDataObjectType,
+    ChartConfig, InputParameterBase, InputParameter } from '../../../shared/shared.models';
 
 @Component({
 
@@ -16,6 +17,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
     @Input() public objectType: eDataObjectType;
     @Input() public objectKey: number;
     @Input() public hubKey: number;
+    @Input() parentParameters: InputParameterBase[]; // parameters passed from parent
     @Input() public showToolbar = false;
     @Input() isMaximized = false;
     @Output() onMaximize = new EventEmitter<boolean>();
@@ -30,6 +32,8 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
 
     public inputColumns: InputColumn[];
     public tableColumns: DexihColumnBase[];
+    public userParameters: InputParameterBase[]; // parameters that can be edited by user
+    public parameters: InputParameterBase[]; // combined parameters
 
     public name = 'loading...';
 
@@ -63,6 +67,14 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
                 if (object != null) {
                     this.inputColumns = object.inputColumns;
                     this.tableColumns = object.outputColumns;
+                    this.parameters = object.parameters;
+                    this.userParameters = this.parameters;
+                } else {
+                    this.parameters = [];
+                }
+
+                if (this.parentParameters) {
+                    this.parameters = this.parameters.concat(this.parentParameters);
                 }
 
                 this.refresh();
@@ -81,9 +93,13 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
         this.authService.navigateUp();
     }
 
+    public parameterChange() {
+        this.refresh();
+    }
+
     public refresh() {
         this.hubsService.previewData(this.hubKey, this.objectKey, this.objectType, this.inputColumns, this.selectQuery,
-            this.cancelToken).then((result) => {
+            this.parameters, this.cancelToken).then((result) => {
                 this.columns = result.columns;
                 this.data = result.data;
                 this.name = result.name;
@@ -106,10 +122,12 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
         sharedData.objectType = this.objectType;
         sharedData.hubKey = this.hubKey;
         sharedData.inputColumns = this.inputColumns;
+        sharedData.parameters = this.parameters;
         sharedData.query = this.selectQuery;
 
         this.hubsService.downloadData([sharedData], true, format, this.cancelToken).then(() => {
-            this.dexihMessage.addSuccessMessage('The download task has started.');
+            let message = new Message(true, 'The download task has started.', null, null);
+            this.authService.addUpdateNotification(message, false);
         }).catch(reason => {
             this.dexihMessage.addMessage(reason);
         });

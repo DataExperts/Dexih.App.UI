@@ -261,7 +261,7 @@ namespace dexih.api.Controllers
                 {
                     managedTask.ReferenceId = datalinkProgress.InstanceId;
                     
-                    await _operations.BroadcastClientMessageAsync(managedTask.OriginatorId, EClientCommand.Command, managedTask, cancellationToken);
+                    await _operations.BroadcastClientMessageAsync(managedTask.OriginatorId, EClientCommand.Task, managedTask, cancellationToken);
 
                     switch (managedTask.Category)
                     {

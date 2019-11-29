@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../../+auth/auth.service';
-import { ManagedTask, eTaskStatus } from '../../../+auth/auth.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Subscription, combineLatest} from 'rxjs';
+import { eManagedTaskStatus, ManagedTask } from '../../../shared/shared.models';
 
 @Component({
     selector: 'task-view',
@@ -19,7 +19,7 @@ export class TaskViewComponent implements OnInit, OnDestroy {
     showPageMessage = 'Loading...';
     view: string;
 
-    eTaskStatus = eTaskStatus;
+    eManagedTaskStatus = eManagedTaskStatus;
 
     public exceptionHidden = true;
 

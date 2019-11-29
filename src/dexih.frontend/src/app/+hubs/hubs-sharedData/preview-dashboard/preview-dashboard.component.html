@@ -9,6 +9,10 @@
             <dexih-button-edit class="ml-1"  (click)="edit()"></dexih-button-edit>
         </ng-template>
 
+        <div *ngIf="parameters" class="m-3">
+            <input-parameters-view [hubKey]="hubKey" [objectType]="eDataObjectType.Dashboard" [objectKey]="dashboardKey" [parameters]="parameters" (onChange)="parameterChange()"></input-parameters-view>
+        </div>
+        
         <div>
             <div style="height:800px">
                 <ng-template [ngIf]="dashboard">
@@ -16,7 +20,7 @@
                         <gridster-item [item]="{x: item.x, y: item.y, cols: item.cols, rows: item.rows, control: item}"
                             *ngFor="let item of dashboard.dexihDashboardItems; let i = index;" 
                             [ngClass]="{'maximize': i === maximizedIndex}" [hidden]="maximizedIndex >= 0 && i !== maximizedIndex">
-                            <preview-dashboard-item [hubKey]="hubKey" [item]="item" (onMaximize)="maximize($event, i)" >
+                            <preview-dashboard-item [hubKey]="hubKey" [item]="item" [parentParameters]="parameters" (onMaximize)="maximize($event, i)" >
                             </preview-dashboard-item>
                         </gridster-item>
                     </gridster>

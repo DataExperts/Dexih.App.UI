@@ -20,7 +20,11 @@
         iconClass="fa fa-window-minimize text-white" (click)="minimize()" tooltip="Minimize window"></dexih-button>
 </div>
 
-<div *ngIf="!data">
+<div *ngIf="userParameters" class="m-3">
+    <input-parameters-view [hubKey]="hubKey" [objectType]="objectType" [objectKey]="objectKey" [parameters]="userParameters" (onChange)="parameterChange()"></input-parameters-view>
+</div>
+
+<div *ngIf="!data" class="m-3">
     <div class="dexih-loader"></div> &nbsp; &nbsp; Loading ...
 </div>
 

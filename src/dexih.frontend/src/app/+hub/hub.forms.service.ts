@@ -524,9 +524,6 @@ export class HubFormsService implements OnDestroy {
 
   public parameter(parameter: InputParameterBase): FormGroup {
     let runTime = [];
-    if (parameter.listOfValuesKey) {
-      runTime = [{key: -9999999, name: 'refreshing...'}];
-    }
 
     const form = this.fb.group({
       'name': [parameter.name, [
@@ -541,11 +538,7 @@ export class HubFormsService implements OnDestroy {
     this.addMissing(parameter, form, new InputParameterBase());
 
     let subscription = form.controls.listOfValuesKey.valueChanges.subscribe(value => {
-        if (value > 0) {
-          form.controls.runTime.setValue([{key: -9999999, name: 'refreshing...'}]);
-        } else {
-          form.controls.runTime.setValue([]);
-        }
+        form.controls.runTime.setValue([]);
     });
 
     this._parameterChanges.push(subscription);

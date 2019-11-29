@@ -621,7 +621,7 @@ namespace dexih.api.Controllers
 			var repositoryManager = _operations.RepositoryManager;
 			var remoteServerResult = _remoteAgents.PreviewTable(previewTable.RemoteAgentId, previewTable.HubKey, previewTable.DownloadUrl,
 				previewTable.TableKey, previewTable.SelectQuery, previewTable.ChartConfig, previewTable.InputColumns, previewTable.InputParameters,
-				previewTable.ShowRejectedData, repositoryManager, cancellationToken);
+				previewTable.ShowRejectedData, false, repositoryManager, cancellationToken);
 			return remoteServerResult;
 		}
 
@@ -650,7 +650,7 @@ namespace dexih.api.Controllers
 			var repositoryManager = _operations.RepositoryManager;
 			var remoteServerResult = _remoteAgents.PreviewDatalink(previewDatalink.RemoteAgentId, previewDatalink.HubKey, previewDatalink.DownloadUrl, 
 				previewDatalink.DatalinkKey, previewDatalink.SelectQuery, previewDatalink.ChartConfig,
-				previewDatalink.InputColumns, previewDatalink.InputParameters, 
+				previewDatalink.InputColumns, previewDatalink.InputParameters, false,
 				repositoryManager, cancellationToken);
 			return remoteServerResult;
 		}
@@ -694,13 +694,13 @@ namespace dexih.api.Controllers
 						case EDataObjectType.Table:
 							url = await _remoteAgents.PreviewTable(previewDashboard.RemoteAgentId,
 								previewDashboard.HubKey, previewDashboard.DownloadUrl, view.SourceTableKey.Value,
-								view.SelectQuery, view.ChartConfig, view.InputValues, itemParameters, false, repositoryManager,
+								view.SelectQuery, view.ChartConfig, view.InputValues, itemParameters, false, false, repositoryManager,
 								cancellationToken);
 							break;
 						case EDataObjectType.Datalink:
 							url = await _remoteAgents.PreviewDatalink(previewDashboard.RemoteAgentId,
 								previewDashboard.HubKey, previewDashboard.DownloadUrl, view.SourceDatalinkKey.Value,
-								view.SelectQuery, view.ChartConfig, view.InputValues, itemParameters, repositoryManager,
+								view.SelectQuery, view.ChartConfig, view.InputValues, itemParameters, false, repositoryManager,
 								cancellationToken);
 							break;
 						default:
@@ -780,9 +780,9 @@ namespace dexih.api.Controllers
 		    switch(previewView.View.SourceType)
 		    {
 			    case EDataObjectType.Table:
-				    return _remoteAgents.PreviewTable(previewView.RemoteAgentId, previewView.HubKey, previewView.DownloadUrl, previewView.View.SourceTableKey.Value, previewView.View.SelectQuery, previewView.View.ChartConfig, previewView.InputColumns, previewView.InputParameters, false, repositoryManager, cancellationToken);
+				    return _remoteAgents.PreviewTable(previewView.RemoteAgentId, previewView.HubKey, previewView.DownloadUrl, previewView.View.SourceTableKey.Value, previewView.View.SelectQuery, previewView.View.ChartConfig, previewView.InputColumns, previewView.InputParameters, false, false, repositoryManager, cancellationToken);
 			    case EDataObjectType.Datalink:
-				    return _remoteAgents.PreviewDatalink(previewView.RemoteAgentId, previewView.HubKey, previewView.DownloadUrl, previewView.View.SourceDatalinkKey.Value, previewView.View.SelectQuery, previewView.View.ChartConfig, previewView.InputColumns, previewView.InputParameters, repositoryManager, cancellationToken);
+				    return _remoteAgents.PreviewDatalink(previewView.RemoteAgentId, previewView.HubKey, previewView.DownloadUrl, previewView.View.SourceDatalinkKey.Value, previewView.View.SelectQuery, previewView.View.ChartConfig, previewView.InputColumns, previewView.InputParameters, false, repositoryManager, cancellationToken);
 			    default:
 				    throw new ArgumentOutOfRangeException();
 		    }
@@ -1239,7 +1239,7 @@ namespace dexih.api.Controllers
             _logger.LogTrace(LoggingEvents.HubUploadFiles, "HubController.DownloadData: HubKey: {updateBrowserHub}", downloadData.HubKey);
 
             var repositoryManager = _operations.RepositoryManager;
-            var downloadDataReturn = _remoteAgents.DownloadData(downloadData.RemoteAgentId, downloadData.HubKey, downloadData.DownloadUrl,  downloadData.ConnectionId, downloadData.DownloadObjects, downloadData.DownloadFormat, downloadData.ZipFiles, repositoryManager, cancellationToken);
+            var downloadDataReturn = _remoteAgents.DownloadData(downloadData.RemoteAgentId, downloadData.HubKey, downloadData.DownloadUrl,  downloadData.ConnectionId, downloadData.DownloadObjects, downloadData.DownloadFormat, false, downloadData.ZipFiles, repositoryManager, cancellationToken);
             return downloadDataReturn;
         }
 
