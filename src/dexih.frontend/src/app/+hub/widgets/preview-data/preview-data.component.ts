@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { HubCache, PreviewResults, DexihInputParameter } from '../../hub.models';
-import { combineLatest, Subscription } from 'rxjs';
+import { combineLatest, Subscription, Subject } from 'rxjs';
 import { AuthService } from '../../../+auth/auth.service';
 import { HubService } from '../../hub.service';
 import { InputOutputColumns } from '../../hub.lineage.models';
@@ -24,6 +24,8 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
 
     private hubCache: HubCache;
 
+    private refreshDataSubject: Subject<void> = new Subject<void>();
+    
     public action: string; // new or edit
     public pageTitle: string;
     public message: string;
@@ -206,6 +208,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
 
             if (previewQuery) {
                 previewQuery.then((result) => {
+                    this.refreshDataSubject.next();
                     this.columns = result.columns;
                     this.data = result.data;
                     this.transformProperties = result.transformProperties;

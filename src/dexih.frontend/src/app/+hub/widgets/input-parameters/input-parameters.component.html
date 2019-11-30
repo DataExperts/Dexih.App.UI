@@ -1,7 +1,7 @@
 <div *ngIf="parameters">
-    <dexih-button-new *ngIf="parameters.controls.length === 0" (click)="add()" text="Add Parameter"></dexih-button-new>
+    <dexih-button-new *ngIf="showEdit && parameters.controls.length === 0" (click)="add()" text="Add Parameter"></dexih-button-new>
     <span *ngFor="let parameter of parameters.controls; let i = index" class="input-group">
-        <form [formGroup]="parameter" *ngIf="parameter.controls.isValid.value">
+        <form [formGroup]="parameter" *ngIf="parameter.controls.isValid.value && (showEdit || parameter.controls.allowUserSelect.value)">
             <div class="input-group">
                 <form-input [disabled]="!showEdit" labelLeft="Name" [border]="false" class="form-control p-0"
                     formControlName="name">
@@ -9,19 +9,16 @@
                 <form-select labelLeft="Value" [border]="false" class="form-control p-0" formControlName="value"
                     itemKey="key"
                     itemName="name"
-                    [items]="parameter.controls.runTime?.value" 
-                    [enableTextEntry]="true"
+                    [items]="parameter.controls.runTime?.value?.items" 
+                    [enableTextEntry]="! (parameter.controls.listOfValuesKey.value > 0)"
                     [textEntryItems]="parentParams"
                     textEntryItemsTitle="Linked Parameters"
-                    (ngModelChange)="change($event)"
+                    (ngModelChange)="change(parameter, $event)"
                     (textValueChange)="textValueChange(parameter, $event)"
+                    [showRefresh]="parameter.controls.runTime?.value?.showRefresh"
+                    [isRefreshing]="parameter.controls.runTime?.value?.isRefreshing"
+                    (onRefresh)="refreshLOV(parameter)"
                     >
-
-                    <ng-template #startItems>
-                        <li class="scrollable-item" *ngIf="parameter.controls.listOfValuesKey.value > 0" >
-                             <a (click)="refresh(parameter)" class="dropdown-item"><i class="fa fa-refresh"></i> Refresh ...</a>
-                        </li>
-                    </ng-template>
                 </form-select>
 
                 <ng-template [ngIf]="showEdit">
@@ -54,4 +51,8 @@
             </div>
         </form>
     </span>
+
+    <div *ngIf="requiresRefresh" class="alert alert-warning mt-2">
+        <a href="javascript:void(0)" class="alert-link" (click)="refreshData()">The parameters have changed.  Click to refresh.</a>
+    </div>
 </div>

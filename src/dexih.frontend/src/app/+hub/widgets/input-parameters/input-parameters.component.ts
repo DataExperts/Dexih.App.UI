@@ -4,7 +4,7 @@ import { HubFormsService } from '../../hub.forms.service';
 import { DexihInputParameter, LOVItem } from '../../hub.models';
 import { DexihConnection, DexihListOfValues, InputParameterBase } from '../../../shared/shared.models';
 import { HubService } from '../../hub.service';
-import { Subscription, merge } from 'rxjs';
+import { Subscription, merge, Subject, Observable } from 'rxjs';
 import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
@@ -17,10 +17,13 @@ export class InputParametersComponent implements OnInit, OnChanges, OnDestroy {
     @Input() parameters: FormArray
     @Input() showEdit = false;
     @Input() parentParameters: InputParameterBase[];
+    @Input() refreshEvent: Observable<void>;
 
     @Output() onChange = new EventEmitter();
+    @Output() onRefreshData = new EventEmitter();
 
     private _hubSubscription: Subscription;
+    private _refreshSubscription: Subscription;
 
     public parentParams: string[] = [];
     public values: LOVItem[] = [];
@@ -28,18 +31,28 @@ export class InputParametersComponent implements OnInit, OnChanges, OnDestroy {
 
     public cancelToken: CancelToken = new CancelToken();
 
+    public showRefresh = false;
+    public isRefreshing = false;
+
+    public requiresRefresh = false;
+
     constructor(private hubService: HubService) { }
 
     ngOnInit() {
         this._hubSubscription = this.hubService.getHubCacheObservable(true).subscribe(cache => {
             this.listOfValues = cache.hub.dexihListOfValues;
 
-            this.parameters.controls.forEach((parameterForm: FormGroup) => {
-                if (!parameterForm.controls.runTime) {
-                    parameterForm.controls['runTime'].setValue([]);
-                }
-            });
+            // this.parameters.controls.forEach((parameterForm: FormGroup) => {
+            //     if (!parameterForm.controls.runTime) {
+            //         parameterForm.controls['runTime']
+            //             .setValue({showRefresh: parameterForm.controls.listOfValuesKey.value > 0, isRefreshing: false, items: []});
+            //     }
+            // });
 
+        });
+
+        this._refreshSubscription = this.refreshEvent.subscribe(() => {
+            this.requiresRefresh = false;
         });
     }
 
@@ -51,6 +64,7 @@ export class InputParametersComponent implements OnInit, OnChanges, OnDestroy {
 
     ngOnDestroy() {
         if (this._hubSubscription) { this._hubSubscription.unsubscribe(); }
+        if (this._refreshSubscription) { this._refreshSubscription.unsubscribe(); }
     }
 
     add(index) {
@@ -63,19 +77,32 @@ export class InputParametersComponent implements OnInit, OnChanges, OnDestroy {
         this.parameters.removeAt(index);
     }
 
-    refresh(parameterForm: FormGroup) {
+    refreshLOV(parameterForm: FormGroup) {
         let parameter = <InputParameterBase>parameterForm.value;
         if (!parameter.listOfValuesKey) { return; }
+
+        let runTime = parameterForm.controls.runTime.value;
+        runTime.isRefreshing = true;
         this.hubService.previewListOfValuesKey(parameter.listOfValuesKey, this.cancelToken).then(result => {
-            parameterForm.controls['runTime'].setValue(result);
+            runTime.items = result;
+            runTime.showRefresh = false;
+        }).finally(() => {
+            runTime.isRefreshing = false;
         });
+    }
+
+    refreshData() {
+        this.onRefreshData.emit();
     }
 
     textValueChange(parameterForm: FormGroup, $event) {
         parameterForm.controls.valueDesc.setValue($event);
     }
 
-    change($event) {
-        this.onChange.emit();
+    change(parameterForm: FormGroup, $event) {
+        this.requiresRefresh = true;
+        if (parameterForm.controls.listOfValuesKey.value > 0) {
+            this.onChange.emit();
+        }
     }
 }

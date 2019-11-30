@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../+auth/auth.service';
-import { Subscription, combineLatest} from 'rxjs';
+import { Subscription, combineLatest, Subject} from 'rxjs';
 import { DexihMessageComponent } from '../../../shared/ui/dexihMessage/index';
 import { HubsService} from '../../hubs.service';
 import { CancelToken } from '../../../+auth/auth.models';
@@ -22,6 +22,8 @@ export class PreviewDashboardComponent implements OnInit, OnDestroy {
     public pageTitle: string;
     public message: string;
 
+    private refreshDataSubject: Subject<void> = new Subject<void>();
+    
     public inputColumns: InputColumn[];
     public tableColumns: DexihColumnBase[];
 
@@ -80,6 +82,8 @@ export class PreviewDashboardComponent implements OnInit, OnDestroy {
 
     refresh() {
         this.hubsService.getDashboard(this.hubKey, this.dashboardKey).then((dashboard) => {
+            this.refreshDataSubject.next();
+            
             this.setOptions(dashboard);
             this.dashboard = dashboard;
             this.name = dashboard.name;

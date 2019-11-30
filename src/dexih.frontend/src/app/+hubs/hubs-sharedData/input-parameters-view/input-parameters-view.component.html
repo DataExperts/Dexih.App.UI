@@ -7,18 +7,20 @@
                 <form-select labelLeft="Value" [border]="false" class="form-control p-0" [(ngModel)]="parameter.value"
                     itemKey="key"
                     itemName="name"
-                    [items]="parameter.runTime" [enableTextEntry]="true"
+                    [items]="parameter.runTime.items"
+                    [enableTextEntry]="! (parameter.listOfValuesKey > 0)"
                     [textEntryItems]="parentParams"
                     textEntryItemsTitle="Linked Parameters"
-                    (ngModelChange)="change($event)"
+                    (ngModelChange)="change(parameter)"
+                    [showRefresh]="parameter.runTime.showRefresh"
+                    [isRefreshing]="parameter.runTime.isRefreshing"
+                    (onRefresh)="refresh(parameter)"
                     >
-
-                    <ng-template #startItems>
-                        <li class="scrollable-item" *ngIf="parameter.listOfValuesKey > 0" >
-                             <a (click)="refresh(parameter)" class="dropdown-item"><i class="fa fa-refresh"></i> Refresh ...</a>
-                        </li>
-                    </ng-template>
                 </form-select>
             </div>
     </span>
+    <div *ngIf="requiresRefresh" class="alert alert-warning mt-2">
+        <a href="javascript:void(0)" class="alert-link" (click)="refreshData()">The parameters have changed.  Click to refresh.</a>
+    </div>
+
 </div>

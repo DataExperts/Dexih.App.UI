@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../+auth/auth.service';
-import { Subscription, combineLatest} from 'rxjs';
+import { Subscription, combineLatest, Subject} from 'rxjs';
 import { DexihMessageComponent } from '../../../shared/ui/dexihMessage/index';
 import { HubsService} from '../../hubs.service';
 import { CancelToken, Message } from '../../../+auth/auth.models';
@@ -26,6 +26,8 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
 
     private _subscription: Subscription;
 
+    private refreshDataSubject: Subject<void> = new Subject<void>();
+    
     public action: string; // new or edit
     public pageTitle: string;
     public message: string;
@@ -100,6 +102,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
     public refresh() {
         this.hubsService.previewData(this.hubKey, this.objectKey, this.objectType, this.inputColumns, this.selectQuery,
             this.parameters, this.cancelToken).then((result) => {
+                this.refreshDataSubject.next();
                 this.columns = result.columns;
                 this.data = result.data;
                 this.name = result.name;

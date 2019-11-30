@@ -200,7 +200,7 @@ export class ApiData {
     public api: DexihApi = null;
     public value: string = null;
     public listOfValuesKey: number = null;
-    public allowUserSelect: boolean = false;
+    public allowUserSelect: boolean = true;
     public valueDesc: string = null;
     public key: number = 0;
     public name: string = null;
@@ -369,7 +369,7 @@ export class ApiData {
     public dashboardItemKey: number = 0;
     public value: string = null;
     public listOfValuesKey: number = null;
-    public allowUserSelect: boolean = false;
+    public allowUserSelect: boolean = true;
     public valueDesc: string = null;
     public key: number = 0;
     public name: string = null;
@@ -384,7 +384,7 @@ export class ApiData {
     public dashboardKey: number = 0;
     public value: string = null;
     public listOfValuesKey: number = null;
-    public allowUserSelect: boolean = false;
+    public allowUserSelect: boolean = true;
     public valueDesc: string = null;
     public key: number = 0;
     public name: string = null;
@@ -416,7 +416,7 @@ export class ApiData {
     public datajobKey: number = 0;
     public value: string = null;
     public listOfValuesKey: number = null;
-    public allowUserSelect: boolean = false;
+    public allowUserSelect: boolean = true;
     public valueDesc: string = null;
     public key: number = 0;
     public name: string = null;
@@ -501,7 +501,7 @@ export class ApiData {
     public datalinkKey: number = 0;
     public value: string = null;
     public listOfValuesKey: number = null;
-    public allowUserSelect: boolean = false;
+    public allowUserSelect: boolean = true;
     public valueDesc: string = null;
     public key: number = 0;
     public name: string = null;
@@ -574,7 +574,7 @@ export class ApiData {
     public datalinkStepKey: number = 0;
     public value: string = null;
     public listOfValuesKey: number = null;
-    public allowUserSelect: boolean = false;
+    public allowUserSelect: boolean = true;
     public valueDesc: string = null;
     public key: number = 0;
     public name: string = null;
@@ -1068,7 +1068,7 @@ export class ApiData {
     public viewKey: number = 0;
     public value: string = null;
     public listOfValuesKey: number = null;
-    public allowUserSelect: boolean = false;
+    public allowUserSelect: boolean = true;
     public valueDesc: string = null;
     public key: number = 0;
     public name: string = null;
@@ -1274,7 +1274,7 @@ export class ApiData {
    export class InputParameterBase {
     public value: string = null;
     public listOfValuesKey: number = null;
-    public allowUserSelect: boolean = false;
+    public allowUserSelect: boolean = true;
     public valueDesc: string = null;
     public key: number = 0;
     public name: string = null;

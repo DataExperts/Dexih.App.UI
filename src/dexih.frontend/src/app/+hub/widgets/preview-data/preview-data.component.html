@@ -27,7 +27,7 @@
     <ng-template #tableHeader>
         <div *ngIf="parameters?.length > 0" class="mb-3">
             Parameters
-            <input-parameters-view [parameters]="parameters" (onChange)="parameterChange()"></input-parameters-view>
+            <input-parameters-view [parameters]="parameters" [refreshEvent]="refreshDataSubject.asObservable()" (onRefreshData)="refresh()" (onChange)="parameterChange()"></input-parameters-view>
         </div>
                 
         <query-builder [selectQuery]="selectQuery" [columns]="tableColumns" [inputColumns]="inputColumns" [parameters]="parameters">

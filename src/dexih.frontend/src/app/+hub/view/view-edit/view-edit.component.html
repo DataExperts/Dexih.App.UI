@@ -62,11 +62,11 @@
 			</fieldset>
 		</form>
 
-		<input-parameters [showEdit]="showEdit" [parameters]="formsService.currentForm?.controls.parameters" [formsService]="formsService" (onChange)="parameterChange()"></input-parameters>
+		<input-parameters [showEdit]="showEdit" [parameters]="formsService.currentForm?.controls.parameters" [formsService]="formsService" [refreshEvent]="refreshDataSubject.asObservable()" (onRefreshData)="refresh()" (onChange)="parameterChange()"></input-parameters>
 
 		<div *ngIf="datalinkParameters?.length > 0">
 			Datalink Parameters
-			<input-parameters-view [parameters]="datalinkParameters" (onChange)="parameterChange()"></input-parameters-view>
+			<input-parameters-view [parameters]="datalinkParameters" [refreshEvent]="refreshDataSubject.asObservable()" (onRefreshData)="refresh()" (onChange)="parameterChange()"></input-parameters-view>
 		</div>
 
 		<div class="mt-3"  *ngIf="!data || data.length === 0">

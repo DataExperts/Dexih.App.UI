@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HubService } from '../../hub.service';
-import { Subscription, combineLatest, merge } from 'rxjs';
+import { Subscription, combineLatest, merge, Subject } from 'rxjs';
 import { HubFormsService } from '../../hub.forms.service';
 import { AuthService } from '../../../+auth/auth.service';
 import { InputOutputColumns } from '../../hub.lineage.models';
@@ -27,6 +27,8 @@ export class ViewEditComponent implements OnInit, OnDestroy {
   private _subscription: Subscription;
   private _formChangeSubscription: Subscription;
   private _changesSubscription: Subscription;
+
+  private refreshDataSubject: Subject<void> = new Subject<void>();
 
   sourceTypes = [
     { key: eDataObjectType.Datalink, name: 'Datalink' },
@@ -206,7 +208,7 @@ export class ViewEditComponent implements OnInit, OnDestroy {
       this.formsService.currentForm.controls.viewType.setValue(eViewType.Chart);
     }
   }
-  
+
   getColumns() {
 
     let viewForm = this.formsService.currentForm;
@@ -295,6 +297,7 @@ export class ViewEditComponent implements OnInit, OnDestroy {
       (view.sourceType === eDataObjectType.Datalink && view.sourceDatalinkKey > 0)) {
 
       this.hubService.previewView(viewForm.value, this.inputColumns, parameters, this.cancelToken).then((result) => {
+        this.refreshDataSubject.next();
         this.columns = result.columns;
         this.data = result.data;
       }).catch(() => {

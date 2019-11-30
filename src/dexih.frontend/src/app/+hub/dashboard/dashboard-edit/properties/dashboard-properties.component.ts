@@ -3,7 +3,7 @@ import { HubService } from '../../..';
 import { HubFormsService } from '../../../hub.forms.service';
 import { FormArray, FormGroup, AbstractControl } from '@angular/forms';
 import { HubCache, PreviewResults, DataCache } from '../../../hub.models';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
 import { GridsterConfig, GridType, CompactType, DisplayGrid, GridsterItem, GridsterItemComponentInterface,
   GridsterComponent} from 'angular-gridster2';
 import { eViewType, eSourceType, InputColumn } from '../../../../shared/shared.models';
@@ -24,6 +24,8 @@ export class DashboardPropertiesComponent implements OnInit, OnDestroy {
     private _formChangeSubscription: Subscription;
     private _runTimeSubscription: Subscription;
     private _hubCacheSubscription: Subscription;
+
+    private refreshDataSubject: Subject<void> = new Subject<void>();
 
     eViewType = eViewType;
     eSourceType = eSourceType;
@@ -225,6 +227,7 @@ export class DashboardPropertiesComponent implements OnInit, OnDestroy {
       refresh() {
         this.hubService.previewDashboard(this.formsService.currentForm.value,
           this.formsService.currentForm.value.parameters, this.cancelToken).then(keys => {
+            this.refreshDataSubject.next();
           let items = <FormArray> this.formsService.currentForm.controls.dexihDashboardItems;
 
           keys.forEach(url => {

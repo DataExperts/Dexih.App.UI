@@ -10,7 +10,7 @@
         </ng-template>
 
         <div *ngIf="parameters" class="m-3">
-            <input-parameters-view [hubKey]="hubKey" [objectType]="eDataObjectType.Dashboard" [objectKey]="dashboardKey" [parameters]="parameters" (onChange)="parameterChange()"></input-parameters-view>
+            <input-parameters-view [hubKey]="hubKey" [objectType]="eDataObjectType.Dashboard" [objectKey]="dashboardKey" [parameters]="parameters" [refreshEvent]="refreshDataSubject.asObservable()" (onRefreshData)="refresh()" (onChange)="parameterChange()"></input-parameters-view>
         </div>
         
         <div>

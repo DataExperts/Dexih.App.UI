@@ -49,7 +49,7 @@
 
     <dexih-widget-section  title="Parameters" *ngIf="showEdit || parameters?.length > 0" [showExpandButton]="true" (onChange)="parameterChange()">
         <input-parameters [showEdit]="showEdit" [parameters]="parameters"
-            [formsService]="formsService" (onChange)="parameterChange()"></input-parameters>
+            [formsService]="formsService" (onChange)="parameterChange()" (onRefreshData)="refresh()" [refreshEvent]="refreshDataSubject.asObservable()" ></input-parameters>
     </dexih-widget-section>
 
     <dexih-widget-section *ngIf="inputColumns && inputColumns.length > 0" title="InputColumns"
