@@ -256,6 +256,7 @@ export class InputOutputColumns {
             // if this is the first transform, then the inputs columns will come from the source.
             if (index === 0) {
                 inputColumns = datalink.sourceDatalinkTable.dexihDatalinkColumns
+                    .filter(c => c.deltaType !== eDeltaType.IgnoreField)
                     .sort((a, b) => a.position - b.position)
                     .map((c, i) => this.copyDatalinkColumn(c, i, c.columnGroup));
 
@@ -266,6 +267,7 @@ export class InputOutputColumns {
             } else {
                 // get outputs from the previous transform
                 inputColumns = transforms[index - 1]['runTime'].outputColumns
+                    .filter(c => c.deltaType !== eDeltaType.IgnoreField)
                     .sort((a, b) => a.position - b.position)
                     .map((c, i) => this.copyDatalinkColumn(c, i, c.columnGroup));
             }

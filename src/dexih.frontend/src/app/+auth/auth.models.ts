@@ -184,6 +184,16 @@ export class Message {
 //     public testMessage: string;
 // }
 
+
+export enum eFileStatus {
+    Waiting = <any>'Waiting',
+    Uploading = <any>'Uploading',
+    Downloading = <any>'Downloading',
+    Complete = <any>'Complete',
+    Error = <any>'Error',
+    Cancelled = <any>'Cancelled'
+}
+
 export class FileHandler {
     public id = Math.random().toString(36).substr(2, 9);
     public progress: number;
@@ -215,15 +225,6 @@ export class FileHandler {
             this.httpSubscription.unsubscribe();
         }
     }
-}
-
-export enum eFileStatus {
-    Waiting = <any>'Waiting',
-    Uploading = <any>'Uploading',
-    Downloading = <any>'Downloading',
-    Complete = <any>'Complete',
-    Error = <any>'Error',
-    Cancelled = <any>'Cancelled'
 }
 
 export class RemoteToken {
@@ -266,6 +267,17 @@ export class RemoteToken {
 //     }
 // }
 
+export class CancelToken {
+    public cancelMethod: () => void;
+
+    // cancel the operation
+    public cancel() {
+        if (this.cancelMethod) {
+            this.cancelMethod();
+        }
+    }
+}
+
 export class PromiseWithCancel<T> extends Promise<T> {
 
     private _cancel: CancelToken;
@@ -283,14 +295,5 @@ export class PromiseWithCancel<T> extends Promise<T> {
     }
 }
 
-export class CancelToken {
-    public cancelMethod: () => void;
 
-    // cancel the operation
-    public cancel() {
-        if (this.cancelMethod) {
-            this.cancelMethod();
-        }
-    }
-}
 

@@ -42,18 +42,18 @@ export class DatalinkNewComponent implements OnInit, OnDestroy {
   public eConnectionPurpose = eConnectionPurpose;
 
   public auditColumnTypes = [
-    { key: eDeltaType.AutoIncrement, name: 'Auto Incrementing Key', value: true },
-    { key: eDeltaType.IsCurrentField, name: 'Is Current Flag', value: true },
-    { key: eDeltaType.Version, name: 'Record Version', value: true },
-    { key: eDeltaType.ValidFromDate, name: 'Valid From Date', value: true },
-    { key: eDeltaType.ValidToDate, name: 'Valid To Date', value: true },
-    { key: eDeltaType.CreateDate, name: 'Created Date', value: true },
-    { key: eDeltaType.UpdateDate, name: 'Updated Date', value: true },
-    { key: eDeltaType.CreateAuditKey, name: 'Created by AuditKey Reference', value: true },
-    { key: eDeltaType.UpdateAuditKey, name: 'Updated by AuditKey Reference', value: true }
+    { key: eDeltaType.AutoIncrement, name: 'Auto Incrementing Key', value: false },
+    { key: eDeltaType.IsCurrentField, name: 'Is Current Flag', value: false },
+    { key: eDeltaType.Version, name: 'Record Version', value: false },
+    { key: eDeltaType.ValidFromDate, name: 'Valid From Date', value: false },
+    { key: eDeltaType.ValidToDate, name: 'Valid To Date', value: false },
+    { key: eDeltaType.CreateDate, name: 'Created Date', value: false },
+    { key: eDeltaType.UpdateDate, name: 'Updated Date', value: false },
+    { key: eDeltaType.CreateAuditKey, name: 'Created by AuditKey Reference', value: false },
+    { key: eDeltaType.UpdateAuditKey, name: 'Updated by AuditKey Reference', value: false }
   ];
 
-  public allAuditColumns = true;
+  public allAuditColumns = false;
 
   eDatalinkTypeItems = eDatalinkTypeItems;
 

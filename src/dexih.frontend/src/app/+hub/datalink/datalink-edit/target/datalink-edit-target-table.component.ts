@@ -10,7 +10,7 @@ import { HubFormsService } from '../../../hub.forms.service';
 import { LogFactory, eLogLevel } from '../../../../../logging';
 import { HubCache, eMappingStatus, updateStrategies, loadStrategies, ConnectionTables, lineageMappingStatuses, deltaTypes } from '../../../hub.models';
 import { eDeltaType, eUpdateStrategy, eTransformWriterMethod, DexihConnection,
-    DexihDatalinkColumn, DexihDatalinkTarget, DexihTable, DexihTableColumn, DexihDatalinkTable, eTypeCode } from '../../../../shared/shared.models';
+    DexihDatalinkColumn, DexihDatalinkTarget, DexihTable, DexihTableColumn, DexihDatalinkTable, eTypeCode, eSecurityFlag } from '../../../../shared/shared.models';
 import { CancelToken } from '../../../../+auth/auth.models';
 
 @Component({
@@ -74,7 +74,7 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
         { name: 'deltaType', title: 'Delta Type', format: '' },
         { name: 'allowDbNull', title: 'Null?', format: 'Boolean' },
         { name: 'defaultValue', title: 'Default Value', format: '' },
-        { name: 'securityFlag', title: 'Security Flag', format: '' },
+        { name: 'securityFlag', title: 'Security Flag', format: 'Enum', enum: eSecurityFlag },
         { name: 'columnValidation', title: 'Validation', format: '', class: 'columnValidationClass', tooltip: 'columnValidationTooltip' }
     ];
 
@@ -465,6 +465,7 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
 
     columnUpdated() {
         this.showColumn = false;
+        this.updateData();
     }
 
     saveTable() {

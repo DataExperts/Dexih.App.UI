@@ -468,9 +468,16 @@ export class AuthService implements OnDestroy {
             'Content-Type': 'application/json'
         });
 
-        data.remoteAgentId = remoteAgent.instanceId;
+
 
         let promise = new PromiseWithCancel<any>((resolve, reject) => {
+            if (!remoteAgent) {
+                reject(new Message(false, 'The request failed, as there are no available remote agents.', null, null));
+                return;
+            }
+
+            data.remoteAgentId = remoteAgent.instanceId;
+
             this.getBestDownloadUrl(remoteAgent, 0).then(downloadUrl => {
                 // if (downloadUrl && downloadUrl.downloadUrlType === eDownloadUrlType.Proxy) {
                 //     data.responseUrl = downloadUrl.url;

@@ -1,5 +1,5 @@
 <dexih-widget-section title='Source Type' [showExpandButton]="true">
-    <ng-template #heading>
+    <ng-template #header>
         <dexih-button-edit class="mr-1"
             *ngIf="datalinkForm.controls.sourceDatalinkTable.value.sourceType == eSourceType.Table && datalinkForm.controls.sourceDatalinkTable.value.sourceTableKey"
             [routerLink]="['table-edit', datalinkForm.controls.sourceDatalinkTable.value.sourceTableKey]"> Table

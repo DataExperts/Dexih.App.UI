@@ -51,9 +51,11 @@ export class InputParametersComponent implements OnInit, OnChanges, OnDestroy {
 
         });
 
-        this._refreshSubscription = this.refreshEvent.subscribe(() => {
-            this.requiresRefresh = false;
-        });
+        if (this.refreshEvent) {
+            this._refreshSubscription = this.refreshEvent.subscribe(() => {
+                this.requiresRefresh = false;
+            });
+        }
     }
 
     ngOnChanges(changes: SimpleChanges): void {
