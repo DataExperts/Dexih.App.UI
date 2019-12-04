@@ -41,7 +41,7 @@
             [dataObservable]="tableData" (rowClick)="editColumn($event)">
     
             <ng-template #actions let-items="items">
-                <dexih-button-splitdropdown text="Add Column" title="Create a new column" iconClass="fa fa-plus-o" buttonClass="btn-primary"
+                <dexih-button-splitdropdown text="Add Column" title="Create a new column" iconClass="fa fa-plus-square" buttonClass="btn-primary"
                     (buttonClick)="newColumn(null)">
                     <li>
                         <a class="dropdown-item" (click)="newColumn(eDeltaType.AutoIncrement)">Add Auto Incrementing Key Column</a>

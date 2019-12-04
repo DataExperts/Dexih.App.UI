@@ -530,6 +530,7 @@ export class ApiData {
    export class DexihDatalinkStep {
     public datajobKey: number = 0;
     public datalinkKey: number = null;
+    public position: number = 0;
     public dexihDatalinkStepColumns: DexihDatalinkStepColumn[] = [];
     public dexihDatalinkDependencies: DexihDatalinkDependency[] = [];
     public parameters: DexihDatalinkStepParameter[] = [];
@@ -1030,6 +1031,7 @@ export class ApiData {
     public datajobKey: number = 0;
     public startDate: Date = null;
     public intervalTime: any = null;
+    public position: number = 0;
     public daysOfWeek: eDayOfWeek[] = [];
     public startTime: any = null;
     public endTime: any = null;
@@ -1574,7 +1576,8 @@ export class ApiData {
    
    export class SelectColumn {
     public column: TableColumn = null;
-    public aggregate: eAggregate = null;
+    public aggregate: eAggregate = eAggregate.None;
+    public outputColumn: TableColumn = null;
    }
    
    export class SelectQuery {
@@ -1820,6 +1823,7 @@ export class ApiData {
    // auto generated enums
    
    export enum eAggregate {
+    None = 0,
     Sum = 1,
     Average = 2,
     Min = 3,
@@ -1830,7 +1834,7 @@ export class ApiData {
    }
    
    export const eAggregateItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
+    {key: eAggregate.None, name: 'None', description: ''},
     {key: eAggregate.Sum, name: 'Sum', description: ''},
     {key: eAggregate.Average, name: 'Average', description: ''},
     {key: eAggregate.Min, name: 'Min', description: ''},
@@ -2972,4 +2976,5 @@ export class ApiData {
     {key: logLevel.Critical, name: 'Critical', description: ''},
     {key: logLevel.None, name: 'None', description: ''},
    ]
+   
    

@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HubService } from '../../../hub.service';
 import { HubFormsService } from '../../../hub.forms.service';
 import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
-import { FormGroup, FormArray } from '@angular/forms';
+import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import { HubCache } from '../../../hub.models';
 import { DexihConnection, eFailAction, DexihDatalinkStep, DexihDatalinkDependency, DexihDatalinkStepColumn, DexihTrigger } from '../../../../shared/shared.models';
 
@@ -112,7 +112,8 @@ export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
     let stepData = [];
     if (this.mainForm) {
       let steps = (<FormArray>this.mainForm.controls['dexihDatalinkSteps']);
-      steps.controls.forEach(stepControl => {
+      steps.controls.sort((a: FormGroup, b: FormGroup) => a.controls.position.value - b.controls.position.value)
+        .forEach(stepControl => {
         let step = <DexihDatalinkStep> stepControl.value;
         let datalink = this.hubCache.hub.dexihDatalinks.find(c => c.key === step.datalinkKey);
         stepData.push({
@@ -129,6 +130,17 @@ export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
 
     this._stepTableData.next(stepData);
   }
+
+  stepSortChanged(items: Array<DexihDatalinkStep>) {
+    let steps = (<FormArray>this.mainForm.controls['dexihDatalinkSteps']);
+    items.forEach((item, index) => {
+        let step = <FormGroup>steps.controls
+            .find(c => c.value.key === item.key);
+        if (step) {
+          step.controls.position.setValue(index);
+        }
+    });
+}
 
   getDependencies(dependencies: Array<DexihDatalinkDependency>) {
     let depString = '';

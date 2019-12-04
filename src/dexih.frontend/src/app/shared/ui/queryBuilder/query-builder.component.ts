@@ -53,7 +53,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
             this.sortColumns = new Array(this.columns.length * 2);
 
             for (let i = 0; i < this.columns.length; i++) {
-                this.selectColumns[i] = { column: this.columns[i], aggregate: null };
+                this.selectColumns[i] = { column: this.columns[i], aggregate: null, outputColumn: null };
 
                 let column1 = Object.assign({}, this.columns[i]);
                 column1['details'] = column1.logicalName + ' asc';

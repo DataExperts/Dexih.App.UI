@@ -412,6 +412,8 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
                 tableForm.markAsDirty();
             }
         });
+
+        this.updateData();
     }
 
     importTable() {
