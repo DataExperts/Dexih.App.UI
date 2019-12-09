@@ -61,12 +61,11 @@
     </li>
     <li *ngIf="auditResult.childResults?.length > 0" class="list-group-item ">
         <div *ngFor="let result of auditResult.childResults">
-            <result-progress *ngIf="result.auditType ==='Table'" (click)="openResult(result.auditKey)" 
-                [value]="result.rowsTotal"
-                [total]="result.rowsTotal" [caption]="result.targetTableName" color="bg-color-blueDark"></result-progress>
-            <result-progress *ngIf="result.auditType ==='DatalinkStep'" (click)="openResults(result.auditKey)" 
-                [value]="result.rowsTotal"
-                [total]="result.rowsTotal" [caption]="result.referenceName" color="bg-color-blueDark"></result-progress>
+            <div class="">
+                <span class="text">  {{result.auditType ==='Table' ? result.targetTableName : result.referenceName}}
+                </span>
+                <datalink-status [writerResult]="result"></datalink-status>
+            </div>
         </div>
     </li>
     <li class="list-group-item list-group-item-info">
@@ -89,7 +88,11 @@
                 caption="Preserved" color="bg-color-pinkDark"></result-progress>
             <result-progress *ngIf="auditResult.rowsIgnored > 0" [value]="auditResult.rowsIgnored" [total]="auditResult.rowsTotal" caption="Ignored"
                 color="bg-color-grayDark"></result-progress>
-    </li>
+            <result-progress *ngIf="auditResult.passed > 0" [value]="auditResult.passed" [total]="auditResult.rowsTotal" caption="Passed"
+                color="bg-color-greenDark"></result-progress>
+            <result-progress *ngIf="auditResult.failed > 0" [value]="auditResult.failed" [total]="auditResult.rowsTotal" caption="Failed"
+                color="bg-color-magenta"></result-progress>
+        </li>
     <li class="list-group-item list-group-item-info">
         <h5>Performance Estimates (rows/second)</h5>
     </li>

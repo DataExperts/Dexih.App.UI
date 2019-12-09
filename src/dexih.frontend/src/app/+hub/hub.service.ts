@@ -1385,7 +1385,6 @@ export class HubService implements OnInit, OnDestroy {
         });
     }
 
-
     previewTableDataQuery(table: DexihTable, showRejectedData, selectQuery: SelectQuery, inputColumns: InputColumn[],
         inputParameters: DexihInputParameter[], cancelToken: CancelToken):
         PromiseWithCancel<PreviewResults> {

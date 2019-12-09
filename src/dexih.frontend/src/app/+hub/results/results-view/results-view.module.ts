@@ -6,9 +6,11 @@ import { StatsComponent } from './stats.component';
 import { ProgressComponent } from './progress.component';
 import { ProfileResultsComponent } from './profile-results.component';
 import { PreviewResultsComponent } from './preview-results.component';
+import { HubSharedModule } from '../../hub.shared.module';
+
 
 @NgModule({
-    imports: [SharedModule],
+    imports: [SharedModule, HubSharedModule],
     exports: [
         ResultsViewComponent
     ],

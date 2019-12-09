@@ -18,7 +18,7 @@ Complete the source connection form, use the "Test" function to ensure connectiv
 > **Tip Defining the Url**
 > * Most RESTFul services have an API End point, an authentication key, and then parameters to define the function being called.
 > * In the connection, the best practice is to use the API End Point + authentication key, and then include the other parameters in the table definition.
-> * The authentication key can be defined as a [Hub Variable](/reference/hub_variables.md), and then included in the URL using `{variable name}`.
+> * The authentication key can be defined as a [Hub Variable](/reference/hubVariables.md), and then included in the URL using `{variable name}`.
 > * For example the google maps code API can be defined in the connection as:
 > `https://maps.googleapis.com/maps/api/geocode/json?key={GOOGLE_API_KEY}&`
 > and then in the table URI as:

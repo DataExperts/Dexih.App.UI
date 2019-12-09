@@ -4,7 +4,7 @@ import { HubService } from '../../../hub.service';
 import { DatalinkEditService } from '../datalink-edit.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { FormGroup } from '@angular/forms';
-import { DexihDatalinkColumn } from '../../../../shared/shared.models';
+import { DexihDatalinkColumn, eTransformType } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -20,8 +20,9 @@ export class JoinColumnsComponent implements OnInit, OnChanges, OnDestroy {
     private _subscription: Subscription;
     private _changesSubscription: Subscription;
 
-
     public joinTable;
+
+    public eTransformType = eTransformType;
 
     public datalinkForm: FormGroup;
 

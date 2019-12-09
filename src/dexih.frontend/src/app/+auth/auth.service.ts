@@ -485,7 +485,9 @@ export class AuthService implements OnDestroy {
 
                 data.downloadUrl = downloadUrl;
 
-                this.http.post(url, this.JsonNoNulls(data), { withCredentials: true, headers: headers, responseType: 'text' })
+                let json = this.JsonNoNulls(data);
+
+                this.http.post(url, json, { withCredentials: true, headers: headers, responseType: 'text' })
                 .toPromise().then(key => {
                     resolve(key);
                 }).catch(reason => {

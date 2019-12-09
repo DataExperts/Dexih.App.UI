@@ -5,6 +5,7 @@ import { TypeCodes, eBasicType, TypeFunctions } from '../../../hub.remote.models
 import { HubService } from '../../../hub.service';
 import { InputOutputColumns } from '../../../hub.lineage.models';
 import { DexihDatalinkColumn, DexihTableColumn, DexihFunctionParameter, eTypeCode } from '../../../../shared/shared.models';
+import { DatalinkEditService } from '../datalink-edit.service';
 
 export class InputValues {
     public staticValue: string;
@@ -44,6 +45,7 @@ export class InputParameterComponent implements OnInit, OnDestroy {
     eTypeCode = eTypeCode;
 
     public columns: Array<DexihTableColumn>;
+    inputColumnGroups: Array<{group: string, columns: Array<DexihDatalinkColumn>}> = [];
 
     public inputs: InputValues[] = [];
 
@@ -51,7 +53,7 @@ export class InputParameterComponent implements OnInit, OnDestroy {
 
     newColumn: DexihDatalinkColumn;
 
-    constructor(public hubService: HubService) {
+    constructor(public hubService: HubService, public editDatalinkService: DatalinkEditService) {
     }
 
     ngOnInit() {
@@ -65,6 +67,12 @@ export class InputParameterComponent implements OnInit, OnDestroy {
         if (this.rank > 0 && this.inputColumns) {
             let tables = [];
             this.inputColumns = this.inputColumns.filter(c => c.rank > 0);
+        }
+
+        if (this.inputColumns) {
+            this.inputColumnGroups = this.editDatalinkService.getColumnGroups(this.inputColumns);
+        } else {
+            this.inputColumnGroups = [];
         }
 
         for ( let i = 0; i < this.inputParameterForms.length; i++) {

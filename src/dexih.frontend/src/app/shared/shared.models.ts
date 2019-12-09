@@ -640,6 +640,9 @@ export class ApiData {
     public expectedConnectionKey: number = 0;
     public expectedTableName: string = null;
     public expectedSchema: string = null;
+    public errorConnectionKey: number = 0;
+    public errorTableName: string = null;
+    public errorSchema: string = null;
     public dexihDatalinkTestTables: DexihDatalinkTestTable[] = [];
     public key: number = 0;
     public name: string = null;
@@ -1651,8 +1654,6 @@ export class ApiData {
     public maxLength: number = null;
     public columnGroup: string = null;
     public rank: number = 0;
-    public baseDataType: eTypeCode = eTypeCode.Unknown;
-    public baseMaxLength: number = null;
     public precision: number = null;
     public scale: number = null;
     public allowDbNull: boolean = false;

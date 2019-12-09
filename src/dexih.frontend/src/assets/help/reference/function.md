@@ -1,4 +1,4 @@
-### Custom Functions
+### Functions
 
 Custom functions are snippets of c# code which can be used to filter and map data fields.
 
@@ -6,6 +6,22 @@ Here is a simple example of a custom function that concatenates the first_name/l
 
 ```csharp
 return first_name + " " + last_name;
+```
+
+
+#### Caching within a function
+
+Data can be cached within a custom function, and then recalled in a future row.  This can be used for tasks such as running total, or values of previous rows.
+
+In order to cache a value use the `SetValue(<name>, <value>)` function.  For example:
+
+```csharp
+SetValue("previous_row", value);
+```
+Then to receive the value back use the `GetValue(<name>)` function.  For example:
+
+```csharp
+return GetValue("previous_row");
 ```
 
 #### Specifying Parameters

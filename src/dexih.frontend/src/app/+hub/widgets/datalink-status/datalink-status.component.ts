@@ -7,6 +7,15 @@ import { AuthService } from '../../../+auth/auth.service';
 import { TransformWriterResult, eRunStatus } from '../../../shared/shared.models';
 import { runStatus } from '../../hub.models';
 
+class StatusInfo {
+    public writerResult: TransformWriterResult;
+    public percentage;
+    public message;
+    public statusType;
+    public error;
+    public iconClass;
+}
+
 @Component({
     selector: 'datalink-status',
     templateUrl: './datalink-status.component.html'
@@ -208,11 +217,13 @@ export class DatalinkStatusComponent implements OnInit, OnDestroy {
             this.hubService.cancelDatalinks([this.datalinkKey], this.cancelToken);
         } else if (this.datajobKey) {
             this.hubService.deactivateDatajobs([this.datajobKey], this.cancelToken);
+        } else if (this.datalinkTestKey) {
+            this.hubService.cancelDatalinkTests([this.datalinkTestKey], this.cancelToken);
         }
 }
 
     onProgressClick($event: any) {
-        if (!this.writerResult.auditConnectionKey) {
+        if (this.writerResult && !this.writerResult.auditConnectionKey) {
             this.authService.informationDialog('No audit connection',
             'The selected audit item is attached to a datalink/datajob that does not have an Audit Connection specified. ' +
             'To view detailed results, specify a audit connection.')
@@ -222,11 +233,4 @@ export class DatalinkStatusComponent implements OnInit, OnDestroy {
 
 }
 
-class StatusInfo {
-    public writerResult: TransformWriterResult;
-    public percentage;
-    public message;
-    public statusType;
-    public error;
-    public iconClass;
-}
+

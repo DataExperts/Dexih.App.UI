@@ -1005,15 +1005,6 @@
           </e>
         </e>
       </e>
-      <e p="releases" t="Include">
-        <e p="dexih.connections.postgressql.deps.json" t="Include" />
-        <e p="dexih.connections.postgressql.dll" t="Include" />
-        <e p="dexih.connections.postgressql.pdb" t="Include" />
-        <e p="dexih.functions.dll" t="Include" />
-        <e p="dexih.functions.pdb" t="Include" />
-        <e p="dexih.transforms.dll" t="Include" />
-        <e p="dexih.transforms.pdb" t="Include" />
-      </e>
     </e>
     <e p="$PROJECT_DIR$/../dexih.transforms/src/dexih.connections.sftp" t="IncludeRecursive">
       <e p="bin" t="ExcludeRecursive" />

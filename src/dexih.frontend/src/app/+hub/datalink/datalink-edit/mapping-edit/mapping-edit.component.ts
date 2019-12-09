@@ -41,7 +41,7 @@ export class MappingEditComponent implements OnInit, OnDestroy {
   filterValue: any;
   sourceValue: any;
 
-  inputColumns: Array<DexihDatalinkColumn>;
+  inputColumns: Array<{group: string, columns: Array<DexihDatalinkColumn>}> = [];
   outputColumns: Array<DexihDatalinkColumn>;
   joinColumns: Array<DexihDatalinkColumn>;
 
@@ -141,10 +141,11 @@ export class MappingEditComponent implements OnInit, OnDestroy {
           let io = new InputOutputColumns();
           if (nodeDatalinkColumnKey) {
             let inputColumns = <DexihDatalinkColumn[]> this.datalinkTransformForm.controls.runTime.value.inputColumns;
-            this.inputColumns = io.getAvailableColumns(inputColumns, nodeDatalinkColumnKey, 0);
+            let nodeColumns = io.getAvailableColumns(inputColumns, nodeDatalinkColumnKey, 0);
+            this.inputColumns = this.editDatalinkService.getColumnGroups(nodeColumns);
             this.outputColumns = this.datalinkTransformForm.controls.runTime.value.transformColumns;
           } else {
-            this.inputColumns = this.datalinkTransformForm.controls.runTime.value.inputColumns;
+            this.inputColumns = this.editDatalinkService.getColumnGroups(this.datalinkTransformForm.controls.runTime.value.inputColumns);
             this.outputColumns = this.datalinkTransformForm.controls.runTime.value.transformColumns;
           }
           if (this.datalinkTransformForm.value.joinDatalinkTable) {

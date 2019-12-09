@@ -12,7 +12,7 @@
 					<a class="nav-link" [class.active]="view=='Profile'" routerLink="." [queryParams]="{view: 'Profile'}"><i class="fa fa-tachometer" ></i> <span class="ml-1 d-none d-md-inline">Profile Data</span></a>
 				</li>
 
-				<li class="nav-item" *ngIf="auditResult?.auditType == 'DatalinkStep' || auditResult?.auditType == 'Datalink' || auditResult?.auditType == 'Table'" >
+				<li class="nav-item" *ngIf="auditResult?.auditType == 'DatalinkStep' || auditResult?.auditType == 'Datalink' || auditResult?.auditType == 'Table' || auditResult?.auditType == 'DatalinkTestStep'" >
 					<a class="nav-link" [class.active]="view=='Preview'" routerLink="." [queryParams]="{view: 'Preview'}"><i class="fa fa-table" ></i> <span class="ml-1 d-none d-md-inline">Preview</span></a>
 				</li>
 			</ul>

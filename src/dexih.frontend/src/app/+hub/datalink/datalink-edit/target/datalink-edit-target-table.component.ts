@@ -240,13 +240,14 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
                     .filter(c => c.isValid)
                     .sort((a, b) => a.position - b.position)
                     .forEach(column => {
+                        let deltaType = deltaTypes.find(c => c.key === column.deltaType);
                         let newColumn = {
                             key: column.key,
                             position: column.position,
                             columnStatus: this.columnStatus(table, column),
                             name: column.name,
                             dataType: this.hubCache.dataTypeToString(column),
-                            deltaType: column.deltaType ? deltaTypes.find(c => c.key === column.deltaType).name : 'Not specified',
+                            deltaType: deltaType ? deltaType.name : 'Not specified',
                             allowDbNull: column.allowDbNull,
                             logicalName: column.logicalName,
                             isIncrementalUpdate: column.isIncrementalUpdate,
@@ -273,6 +274,7 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
                     validColumns.forEach(column => {
                         if (table.dexihTableColumns.findIndex(c => c.name === column.name) < 0 &&
                             missingColumnData.findIndex(c => c.name === column.name) < 0) {
+                            let deltaType = deltaTypes.find(c => c.key === column.deltaType);
                             let newColumn = {
                                 key: column.key,
                                 position: column.position + position,
@@ -280,7 +282,7 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
                                 name: column.name,
                                 dataType: this.hubCache
                                     .dataTypeToString(column),
-                                deltaType: column.deltaType ? deltaTypes.find(c => c.key === column.deltaType).name : 'Not specified',
+                                deltaType: deltaType ? deltaType.name : 'Not specified',
                                 allowDbNull: column.allowDbNull,
                                 logicalName: column.logicalName,
                                 isIncrementalUpdate: column.isIncrementalUpdate,

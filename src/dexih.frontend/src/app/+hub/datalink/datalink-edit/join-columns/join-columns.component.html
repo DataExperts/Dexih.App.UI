@@ -1,5 +1,5 @@
 <div *ngIf="joinColumns">
-    <dexih-widget-section [title]="joinTable?.name + '(' + this.datalinkTransformForm.value.transformType + ')'" [padding]="false" [showExpandButton]="true">
+    <dexih-widget-section [title]="joinTable?.name + '(' + eTransformType[this.datalinkTransformForm.value.transformType] + ')'" [padding]="false" [showExpandButton]="true">
         <join-column *ngFor="let column of joinColumns | fieldSort : 'position' | isValidFilter"
             [datalinkForm]='datalinkForm' [datalinkTransformForm]='datalinkTransformForm' [column]='column' dropZone
             (dropData)="newInputJoinDrop($event, column)" zone="input-column" dropAllowedClass="drop-zone-green">

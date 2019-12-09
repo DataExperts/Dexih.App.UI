@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { TransformWriterResult } from '../../../shared/shared.models';
 
 @Component({
     selector: 'result-progress',

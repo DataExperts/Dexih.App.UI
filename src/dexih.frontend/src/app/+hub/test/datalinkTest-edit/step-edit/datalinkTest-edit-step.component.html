@@ -46,13 +46,13 @@
 			<section>
 				<form-select label="Target Connection" formControlName="targetConnectionKey" [items]="hubCache.hub.dexihConnections"
 				 itemKey="key" itemName="name" [errors]="stepFormService.formErrors.targetConnectionKey" iconClass="fa fa-database"
-				 note="Connection where the datalink load data into the target table.">
+				 note="Connection for the datalink target table">
 				</form-select>
 			</section>
 			<div class="form-row">
 				<section class="form-group col-md-6">
 					<form-input label="Target Table Name" formControlName="targetTableName" placeholder="Enter the name." iconClass="fa fa-list"
-					 [errors]="stepFormService.formErrors['targetTableName']" note="Target table name for the datalink test to send data to.">
+					 [errors]="stepFormService.formErrors['targetTableName']" note="Name of target table">
 					</form-input>
 				</section>
 				<section class="form-group col-md-6">
@@ -76,6 +76,24 @@
 				<section class="form-group col-md-6">
 					<form-input label="Expected Table Schema" formControlName="expectedSchema" placeholder="Enter the name." iconClass="fa fa-list"
 					 [errors]="stepFormService.formErrors['expectedSchema']">
+					</form-input>
+				</section>
+			</div>
+			<section>
+				<form-select label="Error Connection" formControlName="errorConnectionKey" [items]="hubCache.hub.dexihConnections"
+				 itemKey="key" itemName="name" [errors]="stepFormService.formErrors.errorConnectionKey" iconClass="fa fa-database"
+				 note="Connection where the error data should be sent.">
+				</form-select>
+			</section>
+			<div class="form-row">
+				<section class="form-group col-md-6">
+					<form-input label="Error Table Name" formControlName="errorTableName" placeholder="Enter the name."
+					 iconClass="fa fa-list" [errors]="stepFormService.formErrors['errorTableName']">
+					</form-input>
+				</section>
+				<section class="form-group col-md-6">
+					<form-input label="Error Table Schema" formControlName="errorSchema" placeholder="Enter the name." iconClass="fa fa-list"
+					 [errors]="stepFormService.formErrors['errorSchema']">
 					</form-input>
 				</section>
 			</div>

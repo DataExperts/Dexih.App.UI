@@ -7,7 +7,7 @@ import { DexihHubVariable, DexihHub, DexihFunctionParameter, DexihConnection, De
     eSourceType, eImportAction, eSecurityFlag, eDatalinkType, eUpdateStrategy, eFailAction, eInvalidAction,
     eFunctionCaching, eCleanAction, eDuplicateStrategy, eRunStatus, ePermission, eTypeCode,
     eTransformWriterMethod, eTransformItemType, eFunctionType, InputColumn, SelectQuery, DexihColumnBase,
-    eDataObjectType, eSharedObjectType, eDirection, eSeriesGrain, eDayOfWeek, ChartConfig, eLOVObjectType, DexihListOfValues, DexihParameterBase, InputParameterBase } from '../shared/shared.models';
+    eDataObjectType, eSharedObjectType, eDirection, eSeriesGrain, eDayOfWeek, ChartConfig, eLOVObjectType, DexihListOfValues, DexihParameterBase, InputParameterBase, DexihDatalinkTestStep } from '../shared/shared.models';
 
 // export class RemoteMessage {
 //     public messageId: string;
@@ -349,6 +349,18 @@ export class HubCache {
         }
         return null;
     }
+
+    public getDatalinkTestStep(datalinkTestStepKey: number): DexihDatalinkTestStep {
+        let hub = this.hub;
+        for (let test of hub.dexihDatalinkTests) {
+            let testStep = test.dexihDatalinkTestSteps.find(c => c.key === datalinkTestStepKey);
+            if (testStep) {
+                return testStep;
+            }
+        }
+        return null;
+    }
+
 
     public newColumn(table: DexihTable, deltaType: eDeltaType): DexihTableColumn {
         let column = new DexihTableColumn();
@@ -2061,6 +2073,7 @@ export const deltaTypes = [
     {key: eDeltaType.ResponseData, name: 'Response Data', dataType: eTypeCode.String, defaultName: 'ResponseData', unique: false},
     {key: eDeltaType.ResponseStatus, name: 'Response Status', dataType: eTypeCode.String, defaultName: 'ResponseStatus', unique: true},
     {key: eDeltaType.ResponseSegment, name: 'Response Segment', dataType: eTypeCode.String, defaultName: null, unique: false},
+    {key: eDeltaType.DatabaseOperation, name: 'Database Operation', dataType: eTypeCode.String, defaultName: null, unique: false},
     {key: eDeltaType.Error, name: 'Error', dataType: eTypeCode.String, defaultName: null, unique: false},
     {key: eDeltaType.Url, name: 'Url', dataType: eTypeCode.String, defaultName: null, unique: false},
     {key: eDeltaType.ValidationStatus, name: 'Validation Status',

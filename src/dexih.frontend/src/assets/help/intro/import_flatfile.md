@@ -23,7 +23,7 @@ Complete the source connection form, use the "Test" function to ensure connectiv
 
 * Create a new flat file table by selecting Connections &rarr; (select connection) &rarr; Connection &rarr; New File
 * Specify *Auto Manage files* if you want files automatically moved from an `Incoming` directory to a `Processed` directory when the datalink is run.  If this is not selected, files will be left and reloaded upon each run.
-* If the file is a regular csv file (i.e. comma separated with header names on the first line), then a file format does not need to be specified.  If it is not standard file then configure a [file format](reference/file_format.md)
+* If the file is a regular csv file (i.e. comma separated with header names on the first line), then a file format does not need to be specified.  If it is not standard file then configure a [file format](reference/fileFormat.md)
 * Use a sample csv file to import the columns, or manually add the columns for the file.  The columns must be specified in the same order, however the names to not need to match the names in the csv file.
 * Save the new flat file table.
 

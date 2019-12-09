@@ -10,16 +10,17 @@ There are three primary connection types:
 ### SQL Databases
 
 The following **SQL** databases are available and can be used as source, managed and target connections:
-* [MySql](https://dev.mysql.com/downloads/mysql/) - Open source database from Oracle with cloud options available
-* [PostgreSql](https://www.postgresql.org) - Open source database
+* [DB2](https://www.ibm.com/au-en/analytics/db2) - Enterprise class database platform from IBM.
 * [Microsoft Sql Server](https://www.microsoft.com/en-us/sql-server/sql-server-2017) - Popular Microsoft SQL database platform.
-* [SQLite](https://www.sqlite.org/whentouse.html) - File based database (no download required) for use development and small scale data management.
+* [MySql](https://dev.mysql.com/downloads/mysql/) - Open source database from Oracle with cloud options available
 * [Oracle](https://www.oracle.com/database/index.html) - Enterprise class database platform from Oracle.
+* [PostgreSql](https://www.postgresql.org) - Open source database
+* [SQLite](https://www.sqlite.org/whentouse.html) - File based database (no download required) for development/test use and small scale data management.
 
 ### NoSQL Databases
 The following **NoSql** databases are available:
 * [Microsoft Azure Table Storage](https://azure.microsoft.com/en-us/services/storage/tables/) - Cloud hosted data storage platform useful for long term storage of high volume data.
-* (more planned)
+* [MongoDB](https://www.mongodb.com/) - MongoDB is a general purpose, document-based, distributed database built for modern application developers and for the cloud era.
 
 ### File based data
 

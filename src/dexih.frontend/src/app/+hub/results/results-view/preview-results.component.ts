@@ -19,7 +19,6 @@ export class PreviewResultsComponent implements OnInit, OnDestroy {
 
     private cache: HubCache;
 
-    public datalink: DexihDatalink;
     public targetTable: DexihTable;
     public columns: Array<any>;
     public data: Array<any>;
@@ -44,24 +43,64 @@ export class PreviewResultsComponent implements OnInit, OnDestroy {
                     break;
                 case 'Datalink':
                 case 'DatalinkStep':
-                    this.datalink = this.cache.hub.dexihDatalinks.find(c => c.key === this.auditResult.referenceKey);
+                    let datalink = this.cache.hub.dexihDatalinks.find(c => c.key === this.auditResult.referenceKey);
 
-                    if (!this.datalink) {
+                    if (!datalink) {
                         this.hubService.addHubErrorMessage(`The datalink with the key ${this.auditResult.referenceKey} cannot be found.`)
                         return;
                     }
 
-                    if (this.datalink.dexihDatalinkTargets.length >= 1) {
-                        this.targetTable = this.cache.getTable(this.datalink.dexihDatalinkTargets[0].tableKey);
+                    if (datalink.dexihDatalinkTargets.length >= 1) {
+                        this.targetTable = this.cache.getTable(datalink.dexihDatalinkTargets[0].tableKey);
                     } else {
                         this.hubService.addHubErrorMessage(`There is no target table for this datalink.`)
                         return;
                     }
                     this.refresh();
                     break;
+                case 'DatalinkTestStep':
+                    let testStep = this.cache.getDatalinkTestStep(this.auditResult.referenceKey);
 
-                case 'datajob':
+                    if (!testStep) {
+                        this.hubService.addHubErrorMessage(`The test step with the key ${this.auditResult.referenceKey} cannot be found.`)
+                        return;
+                    }
+
+                    let testDatalink = this.cache.hub.dexihDatalinks.find(c => c.key === testStep.datalinkKey);
+
+                    if (testDatalink.dexihDatalinkTargets.length >= 1) {
+                        let table = this.cache.getTable(testDatalink.dexihDatalinkTargets[0].tableKey);
+                        let testTable = JSON.parse(JSON.stringify(table));
+                        testTable.name = testStep.errorTableName;
+                        testTable.schema = testStep.errorSchema;
+                        testTable.connectionKey = testStep.errorConnectionKey;
+
+                        for (let column of testTable.dexihTableColumns) {
+                            column.deltaType = eDeltaType.NonTrackingField;
+                        }
+                        let auditCol = new DexihTableColumn();
+                        auditCol.name = 'error_audit_key';
+                        auditCol.dataType = eTypeCode.Int64;
+                        auditCol.deltaType = eDeltaType.CreateAuditKey;
+
+                        let opCol = new DexihTableColumn();
+                        opCol.name = 'error_operation';
+                        opCol.dataType = eTypeCode.CharArray;
+                        opCol.maxLength = 1;
+                        opCol.deltaType = eDeltaType.DatabaseOperation;
+
+                        testTable.dexihTableColumns.push(auditCol);
+                        testTable.dexihTableColumns.push(opCol);
+
+                        this.targetTable = testTable;
+                    } else {
+                        this.hubService.addHubErrorMessage(`There is no target table for this datalink.`)
+                        return;
+                    }
+                    this.refresh();
                     break;
+                case 'datajob':
+                break;
             }
 
         });

@@ -33,6 +33,19 @@ import { DexihDashboard, DexihView, DexihApi } from '../shared/shared.models';
 import { ListOfValuesEditComponent } from './listOfValues/listOfValues-edit';
 import { ListOfValuesIndexComponent } from './listOfValues/listOfValues-index';
 
+const resultViewRoute: Route = { path: 'result-view/:auditConnectionKey/:auditKey', children: [
+        {path: '', pathMatch: 'full', component: ResultsViewComponent, data: { pageTitle: 'Detailed Result' }},
+        { path: 'result-view/:auditConnectionKey/:auditKey', children: [
+            {path: '', pathMatch: 'full', component: ResultsViewComponent, data: { pageTitle: 'Child Result' }},
+            { path: 'result-view/:auditConnectionKey/:auditKey', children: [
+                {path: '', pathMatch: 'full', component: ResultsViewComponent, data: { pageTitle: 'GrandChild Result' }},
+            ]
+        }
+        ]
+    }
+    ]
+};
+
 const tableRoutes: Routes = [
     { path: 'table-edit/:tableKey', data: { pageTitle: 'Edit Table', action: 'edit'},
         loadChildren: () => import('./table/table-edit/table-edit.module').then(m => m.TableEditModule)},
@@ -50,7 +63,7 @@ const datalinkRoutes: Routes = [
     { path: 'datalink-preview/:datalinkKey', component: DatalinkPreviewDataComponent, data: { pageTitle: 'Preview Datalink' } },
     { path: 'table-preview/:tableKey', component: TablePreviewDataComponent, data: { pageTitle: 'Preview Table' } },
     { path: 'datalink-run/:datalinkKeys', component: DatalinkRunComponent, data: { pageTitle: 'Run Datalink' } },
-    { path: 'result-view/:auditConnectionKey/:auditKey', component: ResultsViewComponent, data: { pageTitle: 'Detailed Result' } }
+    resultViewRoute
 ];
 
 const tablesRoute: Route = { path: 'tables', data: { pageTitle: 'Tables' }, children: (<Routes>[
@@ -92,9 +105,9 @@ const agentsRoute: Route = { path: 'agents', data: { pageTitle: 'Remote Agents' 
 const resultRoutes: Routes = [
     { path: 'results', data: { pageTitle: 'Execution Results' }, children: [
         {path: '', pathMatch: 'full', component: ResultsIndexComponent, data: { pageTitle: 'Execution Results' } },
-        {path: 'result-view/:auditConnectionKey/:auditKey', component: ResultsViewComponent, data: { pageTitle: 'Detailed Result' } }
+        resultViewRoute
     ] },
-    { path: 'result-view/:auditConnectionKey/:auditKey', component: ResultsViewComponent, data: { pageTitle: 'Detailed Result' } }
+    resultViewRoute
 ];
 
 const manageRoute: Route = { path: 'manage', children: (<Routes>[
@@ -227,7 +240,7 @@ const datalinkTestRoutes: Routes = [
             loadChildren: () => import('./test/datalinkTest-edit/datalinkTest-edit.module').then(m => m.DatalinkTestEditModule)},
     { path: 'datalinkTest-new/:datalinkKeys', component: DatalinkTestNewComponent,
         data: {  pageTitle: 'New Datalink Test', action: 'new'}},
-    { path: 'result-view/:auditConnectionKey/:auditKey', component: ResultsViewComponent, data: { pageTitle: 'Detailed Result' } }
+    resultViewRoute
 ];
 
 const datalinkTestsRoute: Route = { path: 'datalinkTests', data: { pageTitle: 'Datalink Tests' }, children: (<Routes>[

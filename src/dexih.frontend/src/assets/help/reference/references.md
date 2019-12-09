@@ -12,14 +12,16 @@ Hub Components
 
 * [Api's](reference/api.md)
 * [Connections](reference/connection.md)
-* [Tables](reference/table.md)
+* [Dashboards](reference/dashboard.md)
 * [Datalinks](reference/datalink.md)
+* [File Formats](reference/fileFormat.md)
+* [Functions](reference/function.md)
+* [Hub Variables](reference/hubVariable.md)
 * [Jobs and Schedules](reference/datajob.md)
+* [List of Values](reference/listOfValue.md)
 * [Tables](reference/table.md)
-* [File Formats](reference/file_format.md)
-* [Hub Variables](reference/hub_variable.md)
-* [Custom Functions](reference/custom_function.md)
-* [Validations](reference/validations.md)
+* [Validations](reference/validation.md)
+* [Views](reference/view.md)
 
 Hub Architecture
 

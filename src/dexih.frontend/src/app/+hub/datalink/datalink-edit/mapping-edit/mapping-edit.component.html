@@ -17,6 +17,7 @@
 
 					<section *ngIf="showInput" class="form-group col-md-4">
 						<form-select label="Input Column" formControlName="sourceDatalinkColumn" [items]="inputColumns"
+							parentName="group" childItems="columns"
 							[(textValue)]="sourceValue" (textValueChange)="updateSourceValue($event)"
 							[enableKeySelect]="false"
 							[enableTextEntry]="true" [enableTextEntryMatch]="false" itemName="logicalName" itemKey="key"
@@ -30,7 +31,8 @@
 					</section>
 					<section *ngIf="transformItemType == eTransformItemType.FilterPair && newDatalinkTransformItemForm.controls.filterCompare.value != eCompare.IsNotNull && newDatalinkTransformItemForm.controls.filterCompare.value != eCompare.IsNull" class="form-group col-md-4">
 						<form-select
-							label="Compare Column/Value" formControlName="filterDatalinkColumn" [items]="inputColumns"
+							label="Compare Column/Value" formControlName="filterDatalinkColumn"  [items]="inputColumns"
+							parentName="group" childItems="columns"
 							[enableTextEntry]="true" [(textValue)]="filterValue"
 							(textValueChange)="updateFilterValue($event)" [enableTextEntryMatch]="false" [enableKeySelect]="false"
 							itemKey="key" itemName="logicalName" [errors]="filterValueErrors"

@@ -45,7 +45,7 @@ export const mappingEditRoutes: Routes = [
 export const datalinkEditRoutes: Routes = [
     { path: '', redirectTo: 'properties'},
 
-    { path: 'properties', component: DatalinkEditPropertiesComponent, data: { pageTitle: 'Properties' } },
+    { path: 'properties', component: DatalinkEditPropertiesComponent, data: { pageTitle: 'Properties', help: 'datalink.md' } },
 
     { path: 'source-table', data: { pageTitle: 'Source Table' }, children: [
         { path: '', pathMatch: 'full', component: DatalinkEditSourceTableComponent},
@@ -85,12 +85,12 @@ export const datalinkEditRoutes: Routes = [
                 canDeactivate: [DatalinkEditGuard], component: StandardFunctionEditComponent },
             { path: 'standard-function-edit/:functionType/:datalinkTransformItemKey', data: { pageTitle: 'Standard Function' },
                 canDeactivate: [DatalinkEditGuard], component: StandardFunctionEditComponent },
-            { path: 'custom-function-edit', data: { pageTitle: 'Custom Function', help: 'custom_function.md' },
+            { path: 'custom-function-edit', data: { pageTitle: 'Custom Function', help: 'function.md' },
                 canDeactivate: [DatalinkEditGuard], component: CustomFunctionEditComponent },
-            { path: 'custom-function-edit/:functionType', data: { pageTitle: 'Custom Function', help: 'custom_function.md' },
+            { path: 'custom-function-edit/:functionType', data: { pageTitle: 'Custom Function', help: 'function.md' },
                 canDeactivate: [DatalinkEditGuard], component: CustomFunctionEditComponent },
             { path: 'custom-function-edit/:functionType/:datalinkTransformItemKey',
-                data: { pageTitle: 'Custom Function', help: 'custom_function.md' },
+                data: { pageTitle: 'Custom Function', help: 'function.md' },
                 canDeactivate: [DatalinkEditGuard], component: CustomFunctionEditComponent },
             { path: 'mapping-edit/:type', data: { pageTitle: 'Mapping Edit' },
                 component: MappingEditComponent },

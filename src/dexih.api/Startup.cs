@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO.Compression;
 using System.Reflection;
+using System.Text.Json;
 using dexih.api.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -163,7 +164,7 @@ namespace dexih.api
             services.AddMvc()
 	            .AddJsonOptions(options =>
 	            {
-//		            options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+		            options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
 //		            options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
 		            options.JsonSerializerOptions.IgnoreNullValues = true;
 		            options.JsonSerializerOptions.Converters.Add(new JsonObjectConverter());
