@@ -269,7 +269,7 @@
       <e p="Enums.cs" t="Include" />
       <e p="InputColumn.cs" t="Include" />
       <e p="InputParameterBase.cs" t="Include" />
-      <e p="ListOfValues.cs" t="Include" />
+      <e p="ListOfValuesItem.cs" t="Include" />
       <e p="obj" t="ExcludeRecursive">
         <e p="Debug" t="Include">
           <e p="netstandard2.1" t="Include">

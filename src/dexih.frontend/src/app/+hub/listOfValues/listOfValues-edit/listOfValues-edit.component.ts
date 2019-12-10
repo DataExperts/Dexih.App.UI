@@ -6,9 +6,10 @@ import { AuthService } from '../../../+auth/auth.service';
 import { Subscription, combineLatest, merge} from 'rxjs';
 import { HubFormsService } from '../../hub.forms.service';
 import { DexihListOfValues, DexihDatalink, eLOVObjectType,
-  DexihColumnBase, eLOVObjectTypeItems, SelectQuery } from '../../../shared/shared.models';
+  DexihColumnBase, eLOVObjectTypeItems, SelectQuery, ListOfValuesItem } from '../../../shared/shared.models';
 import { CancelToken } from '../../../+auth/auth.models';
 import { InputOutputColumns } from '../../hub.lineage.models';
+import { FormGroup, FormArray } from '@angular/forms';
 
 @Component({
 
@@ -185,6 +186,27 @@ export class ListOfValuesEditComponent implements OnInit, OnDestroy {
 
   hasChanged() {
 
+  }
+
+  add(index: number) {
+    let currentForm = <FormGroup> this.formsService.currentForm;
+    let item = this.formsService.listOfValuesItem(new ListOfValuesItem());
+    let staticData = <FormArray> currentForm.controls.staticData;
+    staticData.insert(index + 1, item);
+  }
+
+  remove(index: number) {
+    let currentForm = <FormGroup> this.formsService.currentForm;
+    let staticData = <FormArray> currentForm.controls.staticData;
+    staticData.removeAt(index);
+  }
+
+  clear() {
+    let currentForm = <FormGroup> this.formsService.currentForm;
+    let staticData = <FormArray> currentForm.controls.staticData;
+    while(staticData.controls.length > 0) {
+      staticData.removeAt(0);
+    }
   }
 
   close() {

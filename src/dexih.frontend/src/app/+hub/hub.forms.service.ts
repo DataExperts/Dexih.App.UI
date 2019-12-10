@@ -21,7 +21,7 @@ import { eImportAction, Import, DexihConnection, DexihTable, DexihTableColumn, e
    DexihDatalinkStepColumn, DexihDatajob, DexihRemoteAgentHub, DexihDatalink, DexihDatalinkColumn,
    DexihDatalinkTransform, DexihDatalinkTransformItem, DexihFunctionParameter, DexihFunctionArrayParameter,
    DexihDatalinkProfile, DexihDatalinkTarget, DexihDatalinkTable,
-   eSourceType, eSharedObjectType, DexihListOfValues, InputParameterBase, eDataObjectType } from '../shared/shared.models';
+   eSourceType, eSharedObjectType, DexihListOfValues, InputParameterBase, eDataObjectType, ListOfValuesItem } from '../shared/shared.models';
 
 @Injectable()
 export class HubFormsService implements OnDestroy {
@@ -1041,8 +1041,25 @@ export class HubFormsService implements OnDestroy {
     return form;
   }
 
-  public listOfValues(listOfValues: DexihListOfValues) {
+  public listOfValuesItem(item: ListOfValuesItem) {
+    const form = this.fb.group({
+      'key': [item.key, [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(50),
+      ]],
+    }
+    );
 
+    this.addMissing(item, form, new ListOfValuesItem());
+
+    return form;
+  }
+
+  public listOfValues(listOfValues: DexihListOfValues) {
+    let staticData = listOfValues.staticData.map(item => {
+      return this.listOfValuesItem(item);
+    });
 
     const lovForm = this.fb.group({
       'name': [listOfValues.name, [
@@ -1056,6 +1073,7 @@ export class HubFormsService implements OnDestroy {
       ]],
       'sourceDatalinkKey': [listOfValues.sourceDatalinkKey],
       'sourceTableKey': [listOfValues.sourceTableKey],
+      'staticData': this.fb.array(staticData),
     }, { validator: this.validateViewSource() }
     );
 

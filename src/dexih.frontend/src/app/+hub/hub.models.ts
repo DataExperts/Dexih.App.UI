@@ -2723,8 +2723,8 @@ export class DashboardUrl {
 //     public value = null;
 // }
 
-export class LOVItem {
-    public key;
-    public name: string;
-    public description: string;
-}
+// export class LOVItem {
+//     public key;
+//     public name: string;
+//     public description: string;
+// }

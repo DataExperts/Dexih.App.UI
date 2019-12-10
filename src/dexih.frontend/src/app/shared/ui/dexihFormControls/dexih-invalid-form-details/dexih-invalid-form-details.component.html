@@ -1,7 +1,7 @@
 <dexih-button-dropdown 
 [iconClass]="valid ? 'fa fa-check' : 'fa fa-ban'"
 [buttonClass]="valid ? 'btn btn-success' : 'btn btn-danger'"
-    [text]= "valid ? 'Valid' : 'Errors'"
+    [text]= "valid ? 'Valid' : 'Errors'" [pullRight]="true"
 >
 <ng-template [ngIf]="valid">
     <h5 class="dropdown-header">The current form is valid.</h5>

@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { LOVItem } from '../../hub.models';
-import { DexihListOfValues, InputParameterBase } from '../../../shared/shared.models';
+import { DexihListOfValues, InputParameterBase, ListOfValuesItem } from '../../../shared/shared.models';
 import { HubService } from '../../hub.service';
 import { Subscription, Observable } from 'rxjs';
 import { CancelToken } from '../../../+auth/auth.models';
@@ -21,7 +20,7 @@ export class InputParametersViewComponent implements OnInit, OnDestroy {
     private _refreshSubscription: Subscription;
 
     public parentParams: string[] = [];
-    public values: LOVItem[] = [];
+    public values: ListOfValuesItem[] = [];
     public listOfValues: Array<DexihListOfValues>;
 
     public userParameters: InputParameterBase[];

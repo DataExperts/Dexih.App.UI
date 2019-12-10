@@ -24,7 +24,7 @@ export class DashboardIndexComponent implements OnInit, OnDestroy {
     columns = [
         { iconClass: 'sharedIcon', tooltip: 'sharedToolTip', width: '1%', align: 'center' },
         { name: 'name', title: 'Name', footer: 'description', format: 'Md' },
-        { name: 'updateDate', title: 'Last Updated', format: 'Date' },
+        { name: 'updateDate', title: 'Last Updated', format: 'DateTime' },
     ];
 
     private _tableData = new BehaviorSubject<Array<any>>(null);

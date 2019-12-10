@@ -37,7 +37,7 @@ export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
 
   triggerColumns = [
     { name: 'details', title: 'Details', format: 'Html' },
-    { name: 'updateDate', title: 'Last Updated', format: 'Date' },
+    { name: 'updateDate', title: 'Last Updated', format: 'DateTime' },
     { name: 'errors', title: 'Errors', format: '' },
   ];
 
@@ -49,7 +49,7 @@ export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
     { name: 'datalink', title: 'Datalink', format: '' },
     { name: 'dependencies', title: 'Dependencies', format: 'Html' },
     { name: 'inputs', title: 'Inputs', format: 'Html'},
-    { name: 'updateDate', title: 'Last Updated', format: 'Date' },
+    { name: 'updateDate', title: 'Last Updated', format: 'DateTime' },
     { name: 'errors', title: 'Errors', format: '' },
   ];
 

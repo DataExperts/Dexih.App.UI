@@ -24,6 +24,7 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Net.Http.Headers;
 
 using StackExchange.Redis;
@@ -211,7 +212,7 @@ namespace dexih.api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IAntiforgery antiforgery)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IAntiforgery antiforgery)
 		{
 //			var ll = Configuration.GetSection("Logging:LogLevel").GetValue<LogLevel>("Default");
 //            // loggerFactory.AddConsole();

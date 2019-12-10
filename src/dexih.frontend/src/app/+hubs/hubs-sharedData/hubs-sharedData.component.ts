@@ -28,7 +28,7 @@ export class HubsSharedDataComponent implements OnInit, OnDestroy {
     columns = [
         { name: 'logicalName', title: 'Details', header: 'hubName', footer: 'description', format: 'Md' },
         { name: 'objectType', title: 'Type', format: 'Enum', enum: eDataObjectType},
-        { name: 'updateDate', title: 'Last Updated', format: 'Date' },
+        { name: 'updateDate', title: 'Last Updated', format: 'DateTime' },
     ];
 
     public dataIndex: SharedData[] = null;

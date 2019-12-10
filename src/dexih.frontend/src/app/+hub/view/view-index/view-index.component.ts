@@ -26,7 +26,7 @@ export class ViewIndexComponent implements OnInit, OnDestroy {
         { name: 'name', title: 'Name', footer: 'description', format: 'Md' },
         { name: 'viewType', title: 'Chart/Table' },
         { name: 'sourceType', title: 'Source Type'},
-        { name: 'updateDate', title: 'Last Updated', format: 'Date' },
+        { name: 'updateDate', title: 'Last Updated', format: 'DateTime' },
     ];
 
     private _tableData = new BehaviorSubject<Array<any>>(null);

@@ -905,7 +905,7 @@ export class ApiData {
     public keyColumn: string = null;
     public nameColumn: string = null;
     public descriptionColumn: string = null;
-    public staticData: string = null;
+    public staticData: ListOfValuesItem[] = [];
     public cache: boolean = false;
     public cacheSeconds: number = 0;
     public key: number = 0;
@@ -1295,6 +1295,12 @@ export class ApiData {
    
    export class InsertQuery {
     public insertColumns: QueryColumn[] = [];
+   }
+   
+   export class ListOfValuesItem {
+    public key: string = null;
+    public name: string = null;
+    public description: string = null;
    }
    
    export class LoggingSection {

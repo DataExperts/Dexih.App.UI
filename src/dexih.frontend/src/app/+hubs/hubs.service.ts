@@ -5,8 +5,8 @@ import { AuthService } from '../+auth/auth.service';
 import { BehaviorSubject, Observable} from 'rxjs';
 import { eDownloadFormat, DexihActiveAgent, InputColumn, SelectQuery,
     DexihRemoteAgent, SharedData, eDataObjectType, logLevel, eEnvironment, RemoteAgentSettings,
-    RemoteAgentSettingsSubset, DexihDashboard, InputParameterBase, ManagedTask } from '../shared/shared.models';
-import { PreviewResults, DexihInputParameter, LOVItem } from '../+hub/hub.models';
+    RemoteAgentSettingsSubset, DexihDashboard, InputParameterBase, ManagedTask, ListOfValuesItem } from '../shared/shared.models';
+import { PreviewResults } from '../+hub/hub.models';
 
 @Injectable()
 export class HubsService implements OnDestroy {
@@ -133,12 +133,12 @@ export class HubsService implements OnDestroy {
 
       // starts a preview, and returns the url to get the download stream.
       previewListOfValues(hubKey: number, objectKey: number, objectType: eDataObjectType, parameterName, cancelToken: CancelToken):
-        Promise<LOVItem[]> {
+        Promise<ListOfValuesItem[]> {
 
-        return new Promise<LOVItem[]>((resolve, reject) => {
+        return new Promise<ListOfValuesItem[]>((resolve, reject) => {
             this.authService.post<DexihActiveAgent>('/api/SharedData/GetActiveAgent', { hubKey: hubKey }, 'Getting active remote agent...')
             .then(activeAgent => {
-                this.authService.postRemote<LOVItem[]>('/api/SharedData/PreviewListOfValues', {
+                this.authService.postRemote<ListOfValuesItem[]>('/api/SharedData/PreviewListOfValues', {
                     hubKey: hubKey,
                     objectType: objectType,
                     objectKey: objectKey,

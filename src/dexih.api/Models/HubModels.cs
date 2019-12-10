@@ -121,7 +121,6 @@ namespace dexih.api.Models
 		public long TableKey { get; set; }
 	    public string FileName { get; set; }
         public EFlatFilePath Path { get; set; }
-	    public DownloadUrl DownloadUrl { get; set; }
 	}
 
     public class BulkUploadFile: HubModelBase
@@ -130,7 +129,6 @@ namespace dexih.api.Models
         public long FileFormatKey { get; set; }
         public ETypeCode FormatType { get; set; }
         public string FileName { get; set; }
-        public DownloadUrl DownloadUrl { get; set; }
         public string ConnectionId { get; set; }
     }
 
@@ -140,7 +138,6 @@ namespace dexih.api.Models
         public long TableKey { get; set; }
         public EFlatFilePath Path { get; set; }
         public string[] Files { get; set; }
-        public DownloadUrl DownloadUrl { get; set; }
     }
 
     public class ImportFileFormat: HubModelBase
@@ -156,7 +153,6 @@ namespace dexih.api.Models
         public string ProfileTableName { get; set; }
         public DexihConnection Connection { get; set; }
         public bool SummaryOnly { get; set; }
-        public DownloadUrl DownloadUrl { get; set; }
         
     }
 
@@ -164,7 +160,6 @@ namespace dexih.api.Models
     public class PreviewBase: HubModelBase
     {
         public SelectQuery SelectQuery { get; set; }
-        public DownloadUrl DownloadUrl { get; set; }
         public InputColumn[] InputColumns { get; set; }
         public InputParameters InputParameters { get; set; }
         

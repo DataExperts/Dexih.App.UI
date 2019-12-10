@@ -282,6 +282,7 @@ export class PromiseWithCancel<T> extends Promise<T> {
 
     private _cancel: CancelToken;
 
+
     constructor(executor: (resolve: (value?: T | PromiseLike<T>) => void, reject: (reason?: any) => void) => void,
         cancel: CancelToken = new CancelToken()) {
         super(executor);
@@ -293,6 +294,7 @@ export class PromiseWithCancel<T> extends Promise<T> {
             this._cancel.cancel();
         }
     }
+
 }
 
 

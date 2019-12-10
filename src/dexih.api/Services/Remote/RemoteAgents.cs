@@ -1426,7 +1426,7 @@ namespace dexih.api.Services.Remote
 					{
 						if (remoteAgentProperties.UserId == userId)
 						{ 
-							SendRemoteCommand(instanceId, 0, null,  nameof(RemoteOperations.ReStart), value, database, cancellationToken);	
+							await SendRemoteCommand(instanceId, 0, null,  nameof(RemoteOperations.ReStart), value, database, cancellationToken);	
 						}
 						else
 						{

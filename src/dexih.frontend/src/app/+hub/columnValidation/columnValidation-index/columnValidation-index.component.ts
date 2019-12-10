@@ -23,7 +23,7 @@ export class ColumnValidationIndexComponent implements OnInit, OnDestroy {
 
     columns = [
         { name: 'name', title: 'Name', footer: 'description', format: 'Md' },
-        { name: 'updateDate', title: 'Last Updated', format: 'Date'},
+        { name: 'updateDate', title: 'Last Updated', format: 'DateTime'},
     ];
 
     private _tableData = new BehaviorSubject<Array<any>>(null);

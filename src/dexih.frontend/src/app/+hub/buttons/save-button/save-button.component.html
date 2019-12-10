@@ -1,4 +1,4 @@
-<dexih-button-splitdropdown *ngIf="hubCache.canWrite" [disabled]="!formsService.hasChanged" buttonClass="btn-primary" iconClass="fa fa-save" text="Save" (buttonClick)="formsService.save()">
+<dexih-button-splitdropdown *ngIf="hubCache.canWrite" [disabled]="!formsService.hasChanged" buttonClass="btn-primary" iconClass="fa fa-save" text="Save" (buttonClick)="formsService.save()" [pullRight]="true">
         <li><a class="dropdown-item" (click)="formsService.save(false, false)" title="Save in the hub"><i class="fa fa-cloud"></i> Save</a></li>
         <li><a class="dropdown-item" (click)="formsService.saveLocal()" title="Export as a local file"><i class="fa fa-floppy-o"></i> Save as file</a></li>
         <li><a class="dropdown-item" (click)="formsService.save(false, true)" title="Save another version"><i class="fa fa-plus-circle"></i> Save As...</a></li>

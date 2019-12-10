@@ -251,13 +251,11 @@ namespace dexih.api.Controllers
                         previewDashboard.HubKey, previewDashboard.DownloadUrl, view.SourceTableKey.Value,
                         view.SelectQuery, view.ChartConfig, view.InputValues, itemParameters, false, false, repositoryManager,
                         cancellationToken);
-                    break;
                 case EDataObjectType.Datalink:
                     return await _remoteAgents.PreviewDatalink(previewDashboard.RemoteAgentId,
                         previewDashboard.HubKey, previewDashboard.DownloadUrl, view.SourceDatalinkKey.Value,
                         view.SelectQuery, view.ChartConfig, view.InputValues, itemParameters, false, repositoryManager,
                         cancellationToken);
-                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }

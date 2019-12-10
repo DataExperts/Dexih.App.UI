@@ -2,6 +2,7 @@
 	<dexih-widget title="Edit List of Values" iconClass="fa fa-lg fa-list-alt" [showCloseButton]="true" [padding]="false"
 		(close)="close()">
 		<ng-template #header>
+			<dexih-invalid-form-details [control]="formsService.currentForm" (click)="formsService.showErrors()" class="mr-1"></dexih-invalid-form-details>
 			<save-button *ngIf="hubCache.canWrite" [formsService]="formsService" class="mr-1"></save-button>
 			<cancel-button [formsService]="formsService"></cancel-button>
 		</ng-template>
@@ -61,6 +62,7 @@
 							</form-select>
 						</section>
 					</div>
+					
 					<div class="form-row" *ngIf="tableColumns">
 						<section class="form-group col-md-12">
 							<div class="d-flex flex-wrap pt-1">
@@ -73,19 +75,58 @@
 			</fieldset>
 		</form>
 
-		<dexih-widget-section title="Query Configuration" [showExpandButton]="true">
-			<query-builder  [selectQuery]="formsService.currentForm.controls.selectQuery.value" [columns]="tableColumns" [inputColumns]="inputColumns" [parameters]="null" (hasChanged)="hasChanged()"></query-builder>
-		</dexih-widget-section>
-
-		<div *ngIf="!data"  class="m-3">
-			<dexih-button-refresh (click)="refreshData()" text="Reload" [autoCompact]="false"></dexih-button-refresh>
-		</div>
-
-		<dexih-table *ngIf="data" [enableMultiSelect]="false" [enableSaveCsv]="true" [columns]="columns" [data]="data">
-			<ng-template #actions let-items="items">
-				<dexih-button-refresh class="mr-1" (click)="refreshData()" text="Reload"></dexih-button-refresh>
+		<dexih-widget-section *ngIf="formsService.currentForm.value.sourceType == eLOVObjectType.Static" title="Static Values"
+			[showExpandButton]="true">
+			<ng-template #header>
+				<dexih-button class="mr-1" (click)="add(-1)" iconClass="fa fa-plus">Insert Item</dexih-button>
+				<dexih-button-delete (click)="clear()" text="Clear All"></dexih-button-delete>
 			</ng-template>
-		</dexih-table>
+		
+			<form *ngFor="let itemForm of formsService.currentForm.controls.staticData.controls; let i = index;"
+				[formGroup]="itemForm" class="flex-fill">
+				<div class="input-group">		
+					<div class="form-control p-0">
+						<form-input [border]="false" formControlName="key" type="text" placeholder="Key Value">
+						</form-input>
+					</div>
+					<div class="form-control p-0">
+						<form-input [border]="false" formControlName="name" type="text" placeholder="Item name">
+						</form-input>
+					</div>
+					<div class="form-control p-0">
+						<form-input [border]="false" formControlName="key" type="text" placeholder="Description">
+						</form-input>
+					</div>
+
+					<div class="input-group-append flex-shrink-1 ml-1 ">
+						<button class="btn btn-light" type="button" (click)="add(i)"  value="Add">
+							<i class="fa fa-plus-square-o"></i>
+						</button>
+						<button class="btn btn-light" type="button" (click)="remove(i)"  value="Remove">
+							<i class="fa fa-minus-square-o"></i>
+						</button>
+					</div>
+				</div>
+			</form>
+
+		</dexih-widget-section>
+		
+		<ng-template [ngIf]="formsService.currentForm.value.sourceType !== eLOVObjectType.Static">
+			<dexih-widget-section title="Query Configuration" [showExpandButton]="true">
+				<query-builder [selectQuery]="formsService.currentForm.controls.selectQuery.value" [columns]="tableColumns"
+					[inputColumns]="inputColumns" [parameters]="null" (hasChanged)="hasChanged()"></query-builder>
+			</dexih-widget-section>
+		
+			<div *ngIf="!data" class="m-3">
+				<dexih-button-refresh (click)="refreshData()" text="Reload" [autoCompact]="false"></dexih-button-refresh>
+			</div>
+		
+			<dexih-table *ngIf="data" [enableMultiSelect]="false" [enableSaveCsv]="true" [columns]="columns" [data]="data">
+				<ng-template #actions let-items="items">
+					<dexih-button-refresh class="mr-1" (click)="refreshData()" text="Reload"></dexih-button-refresh>
+				</ng-template>
+			</dexih-table>
+		</ng-template>
 	</dexih-widget>
 
 </div>

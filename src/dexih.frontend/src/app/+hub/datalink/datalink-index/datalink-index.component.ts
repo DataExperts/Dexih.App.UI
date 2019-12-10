@@ -27,7 +27,7 @@ export class DatalinkIndexComponent implements OnInit, OnDestroy {
         { name: 'name', title: 'Name', format: 'Md', footer: 'description' },
         { name: 'sourceName', title: 'Source', format: '' },
         { name: 'targetName', title: 'Target', format: '' },
-        { name: 'updateDate', title: 'Last Updated', format: 'Date' },
+        { name: 'updateDate', title: 'Last Updated', format: 'DateTime' },
     ];
 
     private _tableData = new BehaviorSubject<Array<DexihDatalink>>(null);

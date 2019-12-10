@@ -1,8 +1,7 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { HubFormsService } from '../../hub.forms.service';
-import { DexihInputParameter, LOVItem } from '../../hub.models';
-import { DexihConnection, DexihListOfValues, InputParameterBase } from '../../../shared/shared.models';
+import { DexihConnection, DexihListOfValues, InputParameterBase, ListOfValuesItem, eLOVObjectType } from '../../../shared/shared.models';
 import { HubService } from '../../hub.service';
 import { Subscription, merge, Subject, Observable } from 'rxjs';
 import { CancelToken } from '../../../+auth/auth.models';
@@ -26,7 +25,6 @@ export class InputParametersComponent implements OnInit, OnChanges, OnDestroy {
     private _refreshSubscription: Subscription;
 
     public parentParams: string[] = [];
-    public values: LOVItem[] = [];
     public listOfValues: Array<DexihListOfValues>;
 
     public cancelToken: CancelToken = new CancelToken();
@@ -42,12 +40,15 @@ export class InputParametersComponent implements OnInit, OnChanges, OnDestroy {
         this._hubSubscription = this.hubService.getHubCacheObservable(true).subscribe(cache => {
             this.listOfValues = cache.hub.dexihListOfValues;
 
-            // this.parameters.controls.forEach((parameterForm: FormGroup) => {
-            //     if (!parameterForm.controls.runTime) {
-            //         parameterForm.controls['runTime']
-            //             .setValue({showRefresh: parameterForm.controls.listOfValuesKey.value > 0, isRefreshing: false, items: []});
-            //     }
-            // });
+            this.parameters.controls.forEach((parameterForm: FormGroup) => {
+                let parameter = <InputParameterBase>parameterForm.value;
+                if (parameter.listOfValuesKey > 0) {
+                    let lov = this.listOfValues.find(c => c.key === parameter.listOfValuesKey && c.isValid);
+                    if (lov && lov.sourceType === eLOVObjectType.Static) {
+                        this.refreshLOV(parameterForm);
+                    }
+                }
+            });
 
         });
 

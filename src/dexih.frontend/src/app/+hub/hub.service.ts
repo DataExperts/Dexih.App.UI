@@ -10,8 +10,7 @@ import {
     eCacheStatus,
     PreviewResults,
     FlatFilesReady,
-    DexihInputParameter,
-    LOVItem
+    DexihInputParameter
 } from './hub.models';
 import { RemoteAgentStatus, transformTypes } from './hub.remote.models';
 import { DexihDatajob, DexihTable, DexihHub, DexihRemoteAgentHub, DexihConnection, DexihDatalink, InputColumn,
@@ -20,7 +19,7 @@ import { DexihDatajob, DexihTable, DexihHub, DexihRemoteAgentHub, DexihConnectio
     TransformProperties, Import, eImportAction, eRunStatus, eDatalinkType, eDeltaType, eConnectionPurpose, eFlatFilePath,
     ApiData, DownloadObject, eDownloadFormat, DexihActiveAgent, ImportObject, ePermission, eTypeCode, eDataObjectType,
     eSharedObjectType, RemoteLibraries, ConnectionReference, TransformReference,
-    FunctionReference, eFunctionType, ClientMessage, eClientCommand, HubUser, DexihListOfValues, ManagedTask } from '../shared/shared.models';
+    FunctionReference, eFunctionType, ClientMessage, eClientCommand, HubUser, DexihListOfValues, ManagedTask, eLOVObjectType, ListOfValuesItem } from '../shared/shared.models';
 import { filter, take, first } from 'rxjs/operators';
 
 @Injectable()
@@ -1490,16 +1489,31 @@ export class HubService implements OnInit, OnDestroy {
         });
     }
 
-    previewListOfValues(listOfValues: DexihListOfValues, cancelToken: CancelToken): PromiseWithCancel<LOVItem[]> {
-        return this.hubPostRemote<LOVItem[]>('/api/Hub/PreviewListOfValues', {
+    previewListOfValues(listOfValues: DexihListOfValues, cancelToken: CancelToken): PromiseWithCancel<ListOfValuesItem[]> {
+        if (listOfValues.sourceType === eLOVObjectType.Static) {
+            return new PromiseWithCancel<ListOfValuesItem[]>((resolve) => {
+                resolve(listOfValues.staticData);
+            });
+        }
+
+        return this.hubPostRemote<ListOfValuesItem[]>('/api/Hub/PreviewListOfValues', {
             hubKey: this._hubKey,
             remoteAgentId: this.getCurrentRemoteAgentId(),
             listOfValues: listOfValues,
         }, 'Getting list of values...', cancelToken);
     }
 
-    previewListOfValuesKey(listOfValuesKey: number, cancelToken: CancelToken): PromiseWithCancel<LOVItem[]> {
-        return this.hubPostRemote<LOVItem[]>('/api/Hub/PreviewListOfValuesKey', {
+    previewListOfValuesKey(listOfValuesKey: number, cancelToken: CancelToken): PromiseWithCancel<ListOfValuesItem[]> {
+        let hub: DexihHub = this._hubCache.value.hub;
+        let listOfValues = hub.dexihListOfValues.find(c => c.key === listOfValuesKey);
+
+        if (listOfValues.sourceType === eLOVObjectType.Static) {
+            return new PromiseWithCancel<ListOfValuesItem[]>((resolve) => {
+                resolve(listOfValues.staticData);
+            });
+        }
+
+        return this.hubPostRemote<ListOfValuesItem[]>('/api/Hub/PreviewListOfValuesKey', {
             hubKey: this._hubKey,
             remoteAgentId: this.getCurrentRemoteAgentId(),
             listOfValuesKey: listOfValuesKey,
@@ -1548,7 +1562,7 @@ export class HubService implements OnInit, OnDestroy {
     }
 
     previewProfileData(writerResult: TransformWriterResult, summaryOnly: boolean, cancelToken: CancelToken):
-            PromiseWithCancel<{ columns: Array<any>, data: Array<any> }> {
+        PromiseWithCancel<{ columns: Array<any>, data: Array<any> }> {
 
         if (!writerResult.profileTableName) {
             let message = new Message(false, 'This result does not contain profile data.', null, null);
@@ -1587,7 +1601,7 @@ export class HubService implements OnInit, OnDestroy {
 
     downloadTableData(table: DexihTable, showRejectedData, selectQuery: SelectQuery, inputColumns: InputColumn[],
         zipFiles: boolean, downloadFormat: eDownloadFormat, cancelToken: CancelToken):
-    Promise<boolean> {
+        Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             this.hubPostRemote<ManagedTask>('/api/Hub/DownloadTableData', {
                 hubKey: this._hubKey,
