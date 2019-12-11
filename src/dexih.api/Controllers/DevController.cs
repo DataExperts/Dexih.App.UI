@@ -323,7 +323,7 @@ namespace dexih.api.Controllers
                         javaType = "number";
                         if (value != null)
                         {
-                            defaultValue = $"{value.ToString()}";
+                            defaultValue = $"{value}";
                         }
 
                         break;

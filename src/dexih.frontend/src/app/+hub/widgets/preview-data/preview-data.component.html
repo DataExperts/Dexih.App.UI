@@ -31,7 +31,7 @@
             <input-parameters-view [parameters]="parameters" [refreshEvent]="refreshDataSubject.asObservable()" (onRefreshData)="refresh()" (onChange)="parameterChange()"></input-parameters-view>
         </div>
                 
-        <query-builder [selectQuery]="selectQuery" [columns]="tableColumns" [inputColumns]="inputColumns" [parameters]="parameters">
+        <query-builder [selectQuery]="selectQuery" [columns]="tableColumns" [inputColumns]="inputColumns" [parameters]="parameters" [refreshEvent]="refreshDataSubject.asObservable()" (onRefreshData)="refresh()">
         </query-builder>
     </div>
     </ng-template>

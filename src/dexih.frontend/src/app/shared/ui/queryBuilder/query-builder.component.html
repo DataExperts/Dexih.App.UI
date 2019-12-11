@@ -74,4 +74,8 @@
             </div>
         </div>
     </div>
+
+    <div *ngIf="requiresRefresh" class="alert alert-warning mt-2">
+        <a href="javascript:void(0)" class="alert-link" (click)="refreshData()">The query has changed.  Click to refresh.</a>
+    </div>
 </div>

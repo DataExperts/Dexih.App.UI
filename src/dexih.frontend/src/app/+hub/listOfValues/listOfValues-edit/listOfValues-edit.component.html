@@ -114,7 +114,7 @@
 		<ng-template [ngIf]="formsService.currentForm.value.sourceType !== eLOVObjectType.Static">
 			<dexih-widget-section title="Query Configuration" [showExpandButton]="true">
 				<query-builder [selectQuery]="formsService.currentForm.controls.selectQuery.value" [columns]="tableColumns"
-					[inputColumns]="inputColumns" [parameters]="null" (hasChanged)="hasChanged()"></query-builder>
+					[inputColumns]="inputColumns" [parameters]="null" (hasChanged)="hasChanged()" [refreshEvent]="refreshDataSubject.asObservable()" (onRefreshData)="refreshData()"></query-builder>
 			</dexih-widget-section>
 		
 			<div *ngIf="!data" class="m-3">

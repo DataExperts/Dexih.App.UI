@@ -60,7 +60,7 @@ export class InputParametersViewComponent implements OnInit, OnDestroy {
     refreshLOV(parameter: InputParameterBase) {
         if (!parameter.listOfValuesKey) { return; }
         parameter['runTime'].isRefreshing = true;
-        this.hubService.previewListOfValuesKey(parameter.listOfValuesKey, this.cancelToken).then(result => {
+        this.hubService.previewListOfValuesKey(parameter.listOfValuesKey, false, this.cancelToken).then(result => {
             parameter['runTime'].items = result;
             parameter['runTime'].showRefresh = false;
         }).finally(() => {

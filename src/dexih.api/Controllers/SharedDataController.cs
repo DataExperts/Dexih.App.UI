@@ -68,7 +68,7 @@ namespace dexih.api.Controllers
 
             var listOfValuesKey = await repositoryManager.GetSharedListOfValueKey(previewLov.ObjectType, previewLov.ObjectKey, previewLov.ParameterName, cancellationToken);
             return await _remoteAgents.PreviewListOfValues(previewLov.RemoteAgentId, previewLov.HubKey,
-                previewLov.DownloadUrl, listOfValuesKey, repositoryManager, cancellationToken);
+                previewLov.DownloadUrl, listOfValuesKey, previewLov.ResetCache, repositoryManager, cancellationToken);
         }
         
         [HttpPost("[action]")]

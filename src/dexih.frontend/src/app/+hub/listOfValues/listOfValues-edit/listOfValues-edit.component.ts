@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HubCache, eCacheStatus, ConnectionTables } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { AuthService } from '../../../+auth/auth.service';
-import { Subscription, combineLatest, merge} from 'rxjs';
+import { Subscription, combineLatest, merge, Subject} from 'rxjs';
 import { HubFormsService } from '../../hub.forms.service';
 import { DexihListOfValues, DexihDatalink, eLOVObjectType,
   DexihColumnBase, eLOVObjectTypeItems, SelectQuery, ListOfValuesItem } from '../../../shared/shared.models';
@@ -29,6 +29,8 @@ export class ListOfValuesEditComponent implements OnInit, OnDestroy {
   private _formChangeSubscription: Subscription;
   private _sourceChangeSubscription: Subscription;
   private isLoaded = false;
+
+  private refreshDataSubject: Subject<void> = new Subject<void>();
 
   private cancelToken = new CancelToken();
 
@@ -178,8 +180,9 @@ export class ListOfValuesEditComponent implements OnInit, OnDestroy {
 
     let listOfValues = <DexihListOfValues>form.value;
 
-    this.hubService.previewListOfValues(listOfValues, this.cancelToken).then((data) => {
+    this.hubService.previewListOfValues(listOfValues, true, this.cancelToken).then((data) => {
       this.data = data;
+      this.refreshDataSubject.next();
     }).catch(() => {
     });
   }

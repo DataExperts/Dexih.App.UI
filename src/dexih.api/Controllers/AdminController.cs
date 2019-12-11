@@ -37,7 +37,7 @@ namespace dexih.api
 			DbContext = dbContext;
 			_emailSender = emailSender;
 			_operations = operations;
-			_logger = loggerFactory.CreateLogger("HubController");
+			_logger = loggerFactory.CreateLogger("AdminController");
 		}
 
 		private DexihRepositoryContext DbContext { get; }
@@ -64,10 +64,10 @@ namespace dexih.api
 					var searchString = getUsers.SearchString.Normalize();
 
 					var users = await DbContext.Users.Where(c =>
-						  c.Email.Normalize().Contains(getUsers.SearchString) ||
-						  c.FirstName.Normalize().Contains(getUsers.SearchString) ||
-						c.LastName.Normalize().Contains(getUsers.SearchString))
-					  .Take(getUsers.MaxResults).ToArrayAsync();
+						  c.Email.Normalize().Contains(searchString) ||
+						  c.FirstName.Normalize().Contains(searchString) ||
+						c.LastName.Normalize().Contains(searchString))
+					  .Take(maxResults).ToArrayAsync();
 
                     return users;
 				}

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { PreviewResults, HubCache } from '../../hub.models';
 import { HubService } from '../../hub.service';
-import { Subscription} from 'rxjs';
+import { Subscription, Subject} from 'rxjs';
 import { PromiseWithCancel, CancelToken } from '../../../+auth/auth.models';
 import { TransformWriterResult, DexihDatalink, DexihTable, SelectQuery, eDeltaType, Filter, eCompare,
     eAndOr, eTypeCode, DownloadObject, eSourceType, eDownloadFormat, DexihDatalinkColumn,
@@ -23,6 +23,8 @@ export class PreviewResultsComponent implements OnInit, OnDestroy {
     public columns: Array<any>;
     public data: Array<any>;
     public selectQuery = new SelectQuery();
+
+    private refreshDataSubject: Subject<void> = new Subject<void>();
 
     private runningQuery: PromiseWithCancel<PreviewResults>;
     private cancelToken = new CancelToken();
@@ -157,6 +159,7 @@ export class PreviewResultsComponent implements OnInit, OnDestroy {
         let query = this.hubService.previewTableDataQuery(this.targetTable, false, selectQuery, null, null, this.cancelToken);
 
         query.then(result => {
+            this.refreshDataSubject.next();
             this.columns = result.columns;
             this.data = result.data;
         }).catch(() => {

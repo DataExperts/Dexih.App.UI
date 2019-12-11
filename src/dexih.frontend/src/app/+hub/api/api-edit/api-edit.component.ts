@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HubCache, eCacheStatus, ConnectionTables } from '../../hub.models';
 import { HubService } from '../../hub.service';
-import { Subscription, combineLatest, merge} from 'rxjs';
+import { Subscription, combineLatest, merge, Subject} from 'rxjs';
 import { HubFormsService } from '../../hub.forms.service';
 import { AuthService } from '../../../+auth/auth.service';
 import { InputOutputColumns } from '../../hub.lineage.models';
@@ -24,6 +24,8 @@ export class ApiEditComponent implements OnInit, OnDestroy {
   private _subscription: Subscription;
   private _formChangeSubscription: Subscription;
   private _changesSubscription: Subscription;
+
+  private refreshDataSubject: Subject<void> = new Subject<void>();
 
   sourceTypes = [
     { key: eSourceType.Datalink, name: 'Datalink' },
@@ -202,6 +204,7 @@ export class ApiEditComponent implements OnInit, OnDestroy {
     if (apiForm.controls.sourceType.value === eSourceType.Datalink) {
       this.hubService.previewDatalinkKeyData(apiForm.controls.sourceDatalinkKey.value,
         this.selectQuery, this.inputColumns, apiForm.controls.parameters.value, this.cancelToken).then((result) => {
+        this.refreshDataSubject.next();
         this.columns = result.columns;
         this.data = result.data;
       }).catch(() => {

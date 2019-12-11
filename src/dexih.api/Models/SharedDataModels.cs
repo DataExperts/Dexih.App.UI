@@ -30,6 +30,7 @@ namespace dexih.api.Models
         public long ObjectKey { get; set; }
         public EDataObjectType ObjectType { get; set; }
         public string ParameterName { get; set; }
+        public bool ResetCache { get; set; }
     }
     
     public class PreviewSharedDashboard : HubModelBase

@@ -1,21 +1,27 @@
-import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { SelectQuery, InputColumn, TableColumn, SelectColumn, eDirection, Filter, eTypeCode } from '../../shared.models';
 import { DexihInputParameter } from '../../../+hub/hub.models';
 import { compare } from '../../../+hub/hub.query.models';
 import { TypeCodes } from '../../../+hub/hub.remote.models';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
     selector: 'query-builder',
     templateUrl: 'query-builder.component.html'
 })
 
-export class QueryBuilderComponent implements OnInit, OnChanges {
+export class QueryBuilderComponent implements OnInit, OnChanges, OnDestroy {
     @Input() selectQuery: SelectQuery;
     @Input() columns: TableColumn[];
     @Input() inputColumns: InputColumn[];
     @Input() parameters: DexihInputParameter[];
-    @Output() hasChanged = new EventEmitter();
+    @Input() refreshEvent: Observable<void>;
 
+    @Output() hasChanged = new EventEmitter();
+    @Output() onRefreshData = new EventEmitter();
+
+    private _refreshSubscription: Subscription;
+    
     selectColumns: SelectColumn[];
     sortColumns: any[];
 
@@ -26,6 +32,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
     typeCodes = TypeCodes;
 
     variables: string[];
+
+    requiresRefresh = false;
 
     constructor() { }
 
@@ -41,7 +49,15 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
             });
         }
 
+        this._refreshSubscription = this.refreshEvent.subscribe(() => {
+            this.requiresRefresh = false;
+        });
+
         this.allRows = this.selectQuery.rows < 0 ? true : false;
+    }
+
+    ngOnDestroy() {
+        if (this._refreshSubscription) { this._refreshSubscription.unsubscribe(); }
     }
 
     ngOnChanges() {
@@ -72,10 +88,12 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
         let filter = new Filter();
         filter.compareDataType = eTypeCode.String;
         this.selectQuery.filters.splice(index, 0, filter);
+        this.onChanged();
     }
 
     removeFilter(index: number) {
         this.selectQuery.filters.splice(index, 1);
+        this.onChanged();
     }
 
     selectAllRows() {
@@ -85,10 +103,15 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
             this.savedRowCount = this.selectQuery.rows;
             this.selectQuery.rows = -1;
         }
+        this.onChanged();
     }
 
+    refreshData() {
+        this.onRefreshData.emit();
+    }
 
     onChanged() {
         this.hasChanged.emit();
+        this.requiresRefresh = true;
     }
 }

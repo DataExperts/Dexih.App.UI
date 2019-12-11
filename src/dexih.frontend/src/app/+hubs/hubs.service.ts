@@ -132,7 +132,8 @@ export class HubsService implements OnDestroy {
     }
 
       // starts a preview, and returns the url to get the download stream.
-      previewListOfValues(hubKey: number, objectKey: number, objectType: eDataObjectType, parameterName, cancelToken: CancelToken):
+      previewListOfValues(hubKey: number, objectKey: number, objectType: eDataObjectType, parameterName,
+        resetCache: boolean, cancelToken: CancelToken):
         Promise<ListOfValuesItem[]> {
 
         return new Promise<ListOfValuesItem[]>((resolve, reject) => {
@@ -143,6 +144,7 @@ export class HubsService implements OnDestroy {
                     objectType: objectType,
                     objectKey: objectKey,
                     parameterName: parameterName,
+                    resetCache: resetCache,
                     remoteAgentId: activeAgent.instanceId,
                 }, activeAgent, 'Previewing list of values...', cancelToken).then(result => {
                     resolve(result);

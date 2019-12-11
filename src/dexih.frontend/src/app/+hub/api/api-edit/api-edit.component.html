@@ -105,7 +105,7 @@
 
 			<section>
 				<h5>Data Configuration</h5>
-				<query-builder [selectQuery]="selectQuery" [columns]="tableColumns" [inputColumns]="inputColumns" [parameters]="formsService?.currentForm?.controls.parameters.value">
+				<query-builder [selectQuery]="selectQuery" [columns]="tableColumns" [inputColumns]="inputColumns" [parameters]="formsService?.currentForm?.controls.parameters.value" [refreshEvent]="refreshDataSubject.asObservable()" (onRefreshData)="refresh()">
 				</query-builder>
 			</section>
 

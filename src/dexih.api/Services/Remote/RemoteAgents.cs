@@ -1519,7 +1519,7 @@ namespace dexih.api.Services.Remote
 			return remoteAgent.NamingStandards;
 		}
 
-		public async Task<string> PreviewListOfValues(string id, long hubKey, DownloadUrl downloadUrl, long listOfValuesKey, RepositoryManager database, CancellationToken cancellationToken)
+		public async Task<string> PreviewListOfValues(string id, long hubKey, DownloadUrl downloadUrl, long listOfValuesKey, bool resetCache, RepositoryManager database, CancellationToken cancellationToken)
 		{
 			try
 			{
@@ -1533,7 +1533,8 @@ namespace dexih.api.Services.Remote
 				var value = new
 				{
 					cache,
-					listOfValuesKey
+					listOfValuesKey,
+					resetCache
 				};
 
 				var result = await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.PreviewListOfValues), value,  database, cancellationToken);
@@ -1545,7 +1546,7 @@ namespace dexih.api.Services.Remote
 			}
 		}
 		
-		public async Task<string> PreviewListOfValues(string id, long hubKey, DownloadUrl downloadUrl, DexihListOfValues listOfValues, RepositoryManager database, CancellationToken cancellationToken)
+		public async Task<string> PreviewListOfValues(string id, long hubKey, DownloadUrl downloadUrl, DexihListOfValues listOfValues, bool resetCache, RepositoryManager database, CancellationToken cancellationToken)
 		{
 			try
 			{
@@ -1560,7 +1561,8 @@ namespace dexih.api.Services.Remote
 				var value = new
 				{
 					cache,
-					listOfValuesKey = listOfValues.Key
+					listOfValuesKey = listOfValues.Key,
+					resetCache
 				};
 
 				var result = await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.PreviewListOfValues), value,  database, cancellationToken);

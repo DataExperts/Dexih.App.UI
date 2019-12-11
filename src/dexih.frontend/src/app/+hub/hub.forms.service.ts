@@ -1057,16 +1057,22 @@ export class HubFormsService implements OnDestroy {
   }
 
   public listOfValues(listOfValues: DexihListOfValues) {
-    let staticData = listOfValues.staticData.map(item => {
-      return this.listOfValuesItem(item);
-    });
+
+    let staticData: FormGroup[]
+    if (listOfValues.staticData) {
+      staticData = listOfValues.staticData.map(item => {
+        return this.listOfValuesItem(item);
+      });
+    } else {
+      staticData = [];
+    }
 
     const lovForm = this.fb.group({
       'name': [listOfValues.name, [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(50),
-        this.duplicateViewNameValidator()
+        this.duplicateLovNameValidator()
       ]],
       'sourceType': [listOfValues.sourceType, [
         Validators.required,

@@ -186,11 +186,13 @@ namespace dexih.api.Models
     public class PreviewListOfValuesKey: PreviewBase
     {
         public long ListOfValuesKey { get; set; }
+        public bool ResetCache { get; set; }
     }
 
     public class PreviewListOfValues: PreviewBase
     {
         public DexihListOfValues ListOfValues { get; set; }
+        public bool ResetCache { get; set; }
     }
 
     

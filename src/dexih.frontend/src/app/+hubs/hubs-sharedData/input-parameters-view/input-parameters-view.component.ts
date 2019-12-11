@@ -1,10 +1,8 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { DexihListOfValues, InputParameterBase, eDataObjectType } from '../../../shared/shared.models';
+import { DexihListOfValues, InputParameterBase, eDataObjectType, ListOfValuesItem } from '../../../shared/shared.models';
 import { Subscription, Observable } from 'rxjs';
 import { CancelToken } from '../../../+auth/auth.models';
 import { HubsService } from '../../hubs.service';
-import { LOVItem } from '../../../+hub/hub.models';
-import { logging } from 'selenium-webdriver';
 
 @Component({
     selector: 'input-parameters-view',
@@ -25,7 +23,7 @@ export class InputParametersViewComponent implements OnInit, OnDestroy {
     private _refreshSubscription: Subscription;
 
     public parentParams: string[] = [];
-    public values: LOVItem[] = [];
+    public values: ListOfValuesItem[] = [];
     public listOfValues: Array<DexihListOfValues>;
 
     public cancelToken: CancelToken = new CancelToken();
@@ -64,7 +62,7 @@ export class InputParametersViewComponent implements OnInit, OnDestroy {
         if (!parameter.listOfValuesKey) { return; }
         parameter['runTime'].isRefreshing = true;
         this.hubsService.previewListOfValues(this.hubKey, this.objectKey, this.objectType,
-            parameter.name, this.cancelToken).then(result => {
+            parameter.name, false, this.cancelToken).then(result => {
             parameter['runTime'].items = result;
             parameter['runTime'].showRefresh = false;
         }).finally(() => {

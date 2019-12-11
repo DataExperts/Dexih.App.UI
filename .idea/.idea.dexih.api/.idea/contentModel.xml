@@ -264,7 +264,6 @@
       <e p="DexihTrigger.cs" t="Include" />
       <e p="DexihView.cs" t="Include" />
       <e p="DexihViewParameter.cs" t="Include" />
-      <e p="DownloadUrl.cs" t="Include" />
       <e p="EntityStatus.cs" t="Include" />
       <e p="Enums.cs" t="Include" />
       <e p="InputColumn.cs" t="Include" />
@@ -346,6 +345,7 @@
       <e p="AutoStart.cs" t="Include" />
       <e p="AutoStartService.cs" t="Include" />
       <e p="bin" t="ExcludeRecursive" />
+      <e p="CacheStream.cs" t="Include" />
       <e p="dexih.remote.operations.csproj" t="IncludeRecursive" />
       <e p="DownloadStream.cs" t="Include" />
       <e p="Enums.cs" t="Include" />

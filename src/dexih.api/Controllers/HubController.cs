@@ -431,7 +431,7 @@ namespace dexih.api.Controllers
 		[ValidateHub(EPermission.Owner)]
 		public Task<string> CreateDatabase([FromBody] HubValue<DexihConnection> connection, CancellationToken cancellationToken)
 		{
-			return _remoteAgents.Run<DexihConnection>(connection, nameof(RemoteOperations.CreateDatabase), _operations.RepositoryManager, cancellationToken);
+			return _remoteAgents.Run(connection, nameof(RemoteOperations.CreateDatabase), _operations.RepositoryManager, cancellationToken);
 		}
 
 		[HttpPost("[action]")]
@@ -797,7 +797,7 @@ namespace dexih.api.Controllers
 			    previewListOfValues.HubKey, previewListOfValues.ListOfValues.Key);
 		    var repositoryManager = _operations.RepositoryManager;
 		    var remoteServerResult = _remoteAgents.PreviewListOfValues(previewListOfValues.RemoteAgentId, previewListOfValues.HubKey, previewListOfValues.DownloadUrl, 
-			    previewListOfValues.ListOfValues, repositoryManager, cancellationToken);
+			    previewListOfValues.ListOfValues, previewListOfValues.ResetCache, repositoryManager, cancellationToken);
 		    return remoteServerResult;
 	    }
 	    
@@ -810,7 +810,7 @@ namespace dexih.api.Controllers
 			    previewListOfValues.HubKey, previewListOfValues.ListOfValuesKey);
 		    var repositoryManager = _operations.RepositoryManager;
 		    var remoteServerResult = _remoteAgents.PreviewListOfValues(previewListOfValues.RemoteAgentId, previewListOfValues.HubKey, previewListOfValues.DownloadUrl, 
-			    previewListOfValues.ListOfValuesKey, repositoryManager, cancellationToken);
+			    previewListOfValues.ListOfValuesKey, previewListOfValues.ResetCache, repositoryManager, cancellationToken);
 		    return remoteServerResult;
 	    }
 	    
@@ -976,8 +976,6 @@ namespace dexih.api.Controllers
 	    [ValidateHub(EPermission.Owner)]
 	    public async Task<string> TestCustomFunction([FromBody] CustomFunctionTest customFunction, CancellationToken cancellationToken)
 	    {
-		    var hub = await _operations.RepositoryManager.GetHub(customFunction.HubKey, cancellationToken);
-	        
 		    return await _remoteAgents.SendRemoteCommand(customFunction.RemoteAgentId, customFunction.HubKey, customFunction.DownloadUrl, nameof(RemoteOperations.TestCustomFunction),
 			    new {datalinkTransformItem = customFunction.Value, testValues = customFunction.TestValues}, _operations.RepositoryManager, cancellationToken);
 	    }

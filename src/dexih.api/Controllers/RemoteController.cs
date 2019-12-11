@@ -242,13 +242,13 @@ namespace dexih.api.Controllers
                 return Json(new ReturnValue(false, "An unexpected error occurred logging in: message: " + ex.Message, ex));
             }
         }
-        
 
 
         /// <summary>
         /// This tracks task progress
         /// </summary>
         /// <param name="datalinkProgress"></param>
+        /// <param name="cancellationToken"></param>
         [HttpPost("[action]")]
         public async Task<ReturnValue> UpdateTasks([FromBody] DatalinkProgress datalinkProgress, CancellationToken cancellationToken)
         {
@@ -287,12 +287,12 @@ namespace dexih.api.Controllers
                 return new ReturnValue(false, "Error occurred in UpdateTasks. " + ex.Message, ex);
             }
         }
-        
+
         /// <summary>
         /// This tracks task progress
         /// </summary>
-        /// <param name="datalinkProgress"></param>
         /// <param name="apiData"></param>
+        /// <param name="cancellationToken"></param>
         [HttpPost("[action]")]
         public async Task<ReturnValue> UpdateApi([FromBody] PostApiStatus apiData, CancellationToken cancellationToken)
         {
@@ -320,7 +320,7 @@ namespace dexih.api.Controllers
         /// <summary>
         /// This tracks task progress
         /// </summary>
-        /// <param name="datalinkProgress"></param>
+        /// <param name="apiQuery"></param>
         /// <param name="cancellationToken"></param>
         [HttpPost("[action]")]
         public async Task<ReturnValue> ApiQuery([FromBody] PostApiQuery apiQuery, CancellationToken cancellationToken)

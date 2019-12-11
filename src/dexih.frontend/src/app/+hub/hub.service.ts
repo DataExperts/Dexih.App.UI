@@ -19,7 +19,8 @@ import { DexihDatajob, DexihTable, DexihHub, DexihRemoteAgentHub, DexihConnectio
     TransformProperties, Import, eImportAction, eRunStatus, eDatalinkType, eDeltaType, eConnectionPurpose, eFlatFilePath,
     ApiData, DownloadObject, eDownloadFormat, DexihActiveAgent, ImportObject, ePermission, eTypeCode, eDataObjectType,
     eSharedObjectType, RemoteLibraries, ConnectionReference, TransformReference,
-    FunctionReference, eFunctionType, ClientMessage, eClientCommand, HubUser, DexihListOfValues, ManagedTask, eLOVObjectType, ListOfValuesItem } from '../shared/shared.models';
+    FunctionReference, eFunctionType, ClientMessage, eClientCommand, HubUser, DexihListOfValues, ManagedTask,
+    eLOVObjectType, ListOfValuesItem } from '../shared/shared.models';
 import { filter, take, first } from 'rxjs/operators';
 
 @Injectable()
@@ -1489,7 +1490,8 @@ export class HubService implements OnInit, OnDestroy {
         });
     }
 
-    previewListOfValues(listOfValues: DexihListOfValues, cancelToken: CancelToken): PromiseWithCancel<ListOfValuesItem[]> {
+    previewListOfValues(listOfValues: DexihListOfValues, resetCache: boolean, cancelToken: CancelToken):
+        PromiseWithCancel<ListOfValuesItem[]> {
         if (listOfValues.sourceType === eLOVObjectType.Static) {
             return new PromiseWithCancel<ListOfValuesItem[]>((resolve) => {
                 resolve(listOfValues.staticData);
@@ -1500,10 +1502,11 @@ export class HubService implements OnInit, OnDestroy {
             hubKey: this._hubKey,
             remoteAgentId: this.getCurrentRemoteAgentId(),
             listOfValues: listOfValues,
+            resetCache: resetCache
         }, 'Getting list of values...', cancelToken);
     }
 
-    previewListOfValuesKey(listOfValuesKey: number, cancelToken: CancelToken): PromiseWithCancel<ListOfValuesItem[]> {
+    previewListOfValuesKey(listOfValuesKey: number, resetCache: boolean, cancelToken: CancelToken): PromiseWithCancel<ListOfValuesItem[]> {
         let hub: DexihHub = this._hubCache.value.hub;
         let listOfValues = hub.dexihListOfValues.find(c => c.key === listOfValuesKey);
 
@@ -1517,6 +1520,7 @@ export class HubService implements OnInit, OnDestroy {
             hubKey: this._hubKey,
             remoteAgentId: this.getCurrentRemoteAgentId(),
             listOfValuesKey: listOfValuesKey,
+            resetCache: resetCache
         }, 'Getting list of values...', cancelToken);
     }
 

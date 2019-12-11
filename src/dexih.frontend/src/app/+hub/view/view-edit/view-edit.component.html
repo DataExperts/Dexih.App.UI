@@ -88,7 +88,7 @@
 
 
 		<dexih-widget-section  *ngIf="showEdit" title="Query Configuration" [showExpandButton]="true">
-			<query-builder  [selectQuery]="formsService.currentForm.controls.selectQuery.value" [columns]="tableColumns" [inputColumns]="inputColumns" [parameters]="formsService.currentForm.controls.parameters.value" (hasChanged)="hasChanged()"></query-builder>
+			<query-builder  [selectQuery]="formsService.currentForm.controls.selectQuery.value" [columns]="tableColumns" [inputColumns]="inputColumns" [parameters]="formsService.currentForm.controls.parameters.value" (hasChanged)="hasChanged()" [refreshEvent]="refreshDataSubject.asObservable()" (onRefreshData)="refresh()"></query-builder>
 		</dexih-widget-section>
 
 		<ng-template [ngIf]="columns?.length > 0 && data?.length > 0">
