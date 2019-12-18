@@ -25,7 +25,7 @@ export class ApiEditComponent implements OnInit, OnDestroy {
   private _formChangeSubscription: Subscription;
   private _changesSubscription: Subscription;
 
-  private refreshDataSubject: Subject<void> = new Subject<void>();
+  public refreshDataSubject: Subject<void> = new Subject<void>();
 
   sourceTypes = [
     { key: eSourceType.Datalink, name: 'Datalink' },
