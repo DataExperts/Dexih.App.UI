@@ -115,7 +115,7 @@ namespace dexih.api.Controllers
 
                         // validate the login token.
                         var storedUserToken = dbRemoteAgent.HashedToken;
-                        var passed = HashString.ValidateHash(remoteSettings.AppSettings.UserToken, storedUserToken);
+                        var passed = SecureHash.ValidateHash(remoteSettings.AppSettings.UserToken, storedUserToken);
 
                         if(!passed)
                         {
@@ -178,7 +178,7 @@ namespace dexih.api.Controllers
                         newUserToken = await _operations.RepositoryManager.GenerateRemoteUserTokenAsync(user, remoteSettings.AppSettings.RemoteAgentId, cancellationToken);
                         
                         // hash the token so that it's not stored in plain text.
-                        var hashedToken = HashString.CreateHash(newUserToken);
+                        var hashedToken = SecureHash.CreateHash(newUserToken);
 
                         dbRemoteAgent.HashedToken = hashedToken;
 
@@ -754,7 +754,7 @@ chmod a+x dexih.remote.run.{os}.sh
 	        {
 		        remoteSettings.AppSettings.UserToken = await _operations.RepositoryManager.GenerateRemoteUserTokenAsync(user, remoteSettings.AppSettings.RemoteAgentId, cancellationToken);
 		        
-		        var hashedToken = HashString.CreateHash(remoteSettings.AppSettings.UserToken);
+		        var hashedToken = SecureHash.CreateHash(remoteSettings.AppSettings.UserToken);
 	            dbRemoteAgent.HashedToken = hashedToken;	        
 		        remoteSettings.AppSettings.User = user.UserName;
 	        }

@@ -7,11 +7,11 @@ namespace dexih.api
     public class MessagePackInputFormatter : IInputFormatter
     {
         private const string ContentType = "application/x-msgpack";
-        private readonly IFormatterResolver resolver;
+        private readonly MessagePackSerializerOptions options;
 
-        public MessagePackInputFormatter(IFormatterResolver resolver)
+        public MessagePackInputFormatter(MessagePackSerializerOptions resolver)
         {
-            this.resolver = resolver ?? MessagePackSerializer.DefaultResolver;
+            this.options = resolver ?? MessagePackSerializer.DefaultOptions;
         }
 
         public bool CanRead(InputFormatterContext context)
@@ -24,7 +24,7 @@ namespace dexih.api
         {
             var request = context.HttpContext.Request;
             return InputFormatterResult.SuccessAsync(
-                MessagePackSerializer.NonGeneric.Deserialize(context.ModelType, request.Body, this.resolver));
+                MessagePackSerializer.Deserialize(context.ModelType, request.Body, this.options));
         }
     }
 }

@@ -953,7 +953,7 @@ namespace dexih.api.Controllers
 			    RestrictIp = false,
 			    Name = "Unnamed",
 			    UserId = user.Id,
-			    HashedToken = HashString.CreateHash(token)
+			    HashedToken = SecureHash.CreateHash(token)
 		    };
 		    
 		    await _operations.RepositoryManager.SaveRemoteAgent(user.Id, dbRemoteAgent, cancellationToken);
@@ -985,7 +985,7 @@ namespace dexih.api.Controllers
 		    var userToken = await _operations.RepositoryManager.GenerateRemoteUserTokenAsync(user, dbRemoteAgent.RemoteAgentId, cancellationToken);
 			
 		    // hash the token so that it's not stored in plain text.
-		    var hashedToken = HashString.CreateHash(userToken);
+		    var hashedToken = SecureHash.CreateHash(userToken);
 
 		    dbRemoteAgent.HashedToken = hashedToken;
 		    await _operations.RepositoryManager.SaveRemoteAgent(user.Id, dbRemoteAgent, cancellationToken);
@@ -1120,7 +1120,7 @@ namespace dexih.api.Controllers
 	    //[ValidateHub(EPermission.User)]
 	    public async Task CancelTasks([FromBody] ManagedTask[] tasks, CancellationToken cancellationToken)
 	    {
-		    _logger.LogTrace(LoggingEvents.HubRunDatalinks, "HubController.CancelTasks {references}", string.Join(",", tasks.Select(c=>c.Reference)));
+		    _logger.LogTrace(LoggingEvents.HubRunDatalinks, "HubController.CancelTasks {references}", string.Join(",", tasks.Select(c=>c.TaskId)));
 
 		    var repositoryManager = _operations.RepositoryManager;
 		    await _remoteAgents.CancelTasks(tasks, repositoryManager, cancellationToken);

@@ -59,8 +59,8 @@ export class TasksComponent implements OnInit, OnDestroy {
         }, 1000)
     }
 
-    showTask(item) {
-        this.router.navigate(['/hubs/tasks/view', item.reference])
+    showTask(item: ManagedTask) {
+        this.router.navigate(['/hubs/tasks/view', item.taskId])
       }
 
     cancelTask() {

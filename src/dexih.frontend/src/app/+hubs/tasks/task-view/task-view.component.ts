@@ -49,7 +49,7 @@ export class TaskViewComponent implements OnInit, OnDestroy {
                 this.showPage = false;
                 this.showPageMessage = 'Loading...';
 
-                this.task = tasks.find(c => c.reference === reference);
+                this.task = tasks.find(c => c.taskId === reference);
 
                 if (!this.task) {
                     this.authService.navigateUp();

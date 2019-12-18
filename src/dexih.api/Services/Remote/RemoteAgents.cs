@@ -1384,10 +1384,10 @@ namespace dexih.api.Services.Remote
 	            {
 		            _remoteLogger.LogTrace(LoggingEvents.CancelTasks,
 			            "CancelTasks - Id: {Id}, references: {references}.", remoteAgentId.RemoteAgentId,
-			            string.Join(",", tasks.Select(c=>c.Reference)));
+			            string.Join(",", tasks.Select(c=>c.TaskId)));
 
 		            var references = tasks.Where(c=>c.ReferenceId == remoteAgentId.RemoteAgentId && c.ReferenceKey == remoteAgentId.HubKey)
-			            .Select(c => c.Reference).ToArray();
+			            .Select(c => c.TaskId).ToArray();
 		            
 		            var remoteMessage = new RemoteMessage()
 		            {

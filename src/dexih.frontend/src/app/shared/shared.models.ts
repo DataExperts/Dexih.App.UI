@@ -1321,7 +1321,7 @@ export class ApiData {
    export class ManagedTask {
     public success: boolean = false;
     public message: string = null;
-    public reference: string = null;
+    public taskId: string = null;
     public originatorId: string = null;
     public name: string = null;
     public description: string = null;
@@ -1337,11 +1337,11 @@ export class ApiData {
     public stepName: string = null;
     public startTime: Date = null;
     public endTime: Date = null;
-    public triggers: ManagedTaskSchedule[] = [];
+    public triggers: ManagedTaskTrigger[] = [];
     public fileWatchers: ManagedTaskFileWatcher[] = [];
     public nextTriggerTime: Date = null;
     public runCount: number = 0;
-    public dependentReferences: string[] = [];
+    public dependentTaskIds: string[] = [];
     public dependenciesMet: boolean = true;
     public data: any = null;
     public exceptionDetails: string = '';
@@ -1359,7 +1359,7 @@ export class ApiData {
     public counter: number = 0;
    }
    
-   export class ManagedTaskSchedule {
+   export class ManagedTaskTrigger {
     public startDate: Date = null;
     public endDate: Date = null;
     public intervalType: eIntervalType = eIntervalType.Interval;
@@ -1370,7 +1370,7 @@ export class ApiData {
     public skipDates: Date[] = [];
     public startTime: any = null;
     public endTime: any = null;
-    public maxRecurs: number = null;
+    public maxRecurs: number = 1;
     public details: string = 'Error: Interval specified, however no interval time set.\n';
    }
    

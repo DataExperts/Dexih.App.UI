@@ -1788,7 +1788,7 @@ export class AuthService implements OnDestroy {
         }
 
         const tasks = this._tasks.value;
-        const originalTask = tasks.find(c => c.reference === task.reference);
+        const originalTask = tasks.find(c => c.taskId === task.taskId);
         if (originalTask) {
             Object.assign(originalTask, task);
         } else {
@@ -1799,7 +1799,7 @@ export class AuthService implements OnDestroy {
 
     getTask(reference: string): ManagedTask {
         const tasks = this._tasks.value;
-        const task = tasks.find(c => c.reference === reference);
+        const task = tasks.find(c => c.taskId === reference);
         return task;
     }
 

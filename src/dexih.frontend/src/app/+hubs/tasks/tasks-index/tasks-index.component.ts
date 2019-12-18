@@ -62,7 +62,7 @@ export class TasksIndexComponent implements OnInit, OnDestroy {
 
 
     showTask(task: ManagedTask) {
-        this.router.navigate(['view', task.reference], {relativeTo: this.route})
+        this.router.navigate(['view', task.taskId], {relativeTo: this.route})
     }
 
     close() {
