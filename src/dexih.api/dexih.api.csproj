@@ -6,7 +6,7 @@
     <OutputType>Exe</OutputType>
     <PackageId>dexih.api</PackageId>
     <UserSecretsId>aspnet-dexih.api-20161103030146</UserSecretsId>
-    <VersionPrefix>0.4.0-beta</VersionPrefix>
+    <VersionPrefix>1.0-rc.0</VersionPrefix>
     <VersionSuffix>00001</VersionSuffix>
     <AssemblyVersion>0.0.1.1</AssemblyVersion>
     <Authors>Data Experts Group</Authors>
@@ -14,6 +14,7 @@
     <Product>Information Hub</Product>
     <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
     <LangVersion>8</LangVersion>
+    <PackageVersion>1.0-rc.0</PackageVersion>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Dexih.App.Remote\src\dexih.remote.operations\dexih.remote.operations.csproj">

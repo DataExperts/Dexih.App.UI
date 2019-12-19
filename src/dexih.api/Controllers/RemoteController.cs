@@ -71,7 +71,6 @@ namespace dexih.api.Controllers
         {
             try
             {
-
                 if (ModelState.IsValid)
                 {
 					_logger.LogInformation(LoggingEvents.RemoteLogin, "Login - Remote Agent Login {user}, {servername}, remoteAgentId {remoteAgentId}, version {version}", User, remoteSettings.AppSettings.User, remoteSettings.AppSettings.Name, remoteSettings.Runtime.Version);
@@ -82,8 +81,8 @@ namespace dexih.api.Controllers
                         _logger.LogWarning(LoggingEvents.RemoteLogin, "Login - Invalid remote login attempt using Email: " + User);
                         return Json(new { Success = false, Message = "Invalid login attempt." });
                     }
-
-                    if (remoteSettings.Runtime.Version.Substring(0, 4) != "0.5.")
+                    
+                    if (remoteSettings.Runtime.Version.Substring(0, 7) != "1.0-rc.")
                     {
                         _logger.LogWarning(LoggingEvents.RemoteLogin, "Login - Invalid remote login attempt incorrect version: " + remoteSettings.Runtime.Version + " from login: " + User);
                         return Json(new { Success = false, Message = "The remote agent version number is not compatible with the current integration hub web site.  Please update." });
