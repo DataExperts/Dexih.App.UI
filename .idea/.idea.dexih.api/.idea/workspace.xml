@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1be1a9df-0647-4351-ace4-9bafd064437b" name="Default" comment="minor">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/api/api-edit/api-edit.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/api/api-edit/api-edit.component.ts" afterDir="false" />
-    </list>
+    <list default="true" id="1be1a9df-0647-4351-ace4-9bafd064437b" name="Default" comment="minor" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -1563,7 +1557,7 @@
       <workItem from="1576629029671" duration="3927000" />
       <workItem from="1576647758175" duration="1066000" />
       <workItem from="1576696803553" duration="829000" />
-      <workItem from="1576711571156" duration="933000" />
+      <workItem from="1576711571156" duration="1119000" />
     </task>
     <task id="LOCAL-00001" summary="Connections to remote agents working.">
       <created>1509234944099</created>
