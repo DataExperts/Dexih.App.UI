@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1be1a9df-0647-4351-ace4-9bafd064437b" name="Default" comment="minor">
+    <list default="true" id="1be1a9df-0647-4351-ace4-9bafd064437b" name="Default" comment="messagepack issue with signalr">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/MessagePackInputFormatter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/MessagePackInputFormatter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/dexih.api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/dexih.api.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -919,7 +917,7 @@
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name=".NET Project" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="Failed" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="Finished" type="7427dc5b:ServiceModel$ServiceGroupNode" />
               </path>
             </expand>
             <select />
@@ -1563,7 +1561,7 @@
       <workItem from="1576629029671" duration="3927000" />
       <workItem from="1576647758175" duration="1066000" />
       <workItem from="1576696803553" duration="829000" />
-      <workItem from="1576711571156" duration="3897000" />
+      <workItem from="1576711571156" duration="4320000" />
     </task>
     <task id="LOCAL-00001" summary="Connections to remote agents working.">
       <created>1509234944099</created>
@@ -1677,7 +1675,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573171294975</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="messagepack issue with signalr">
+      <created>1576720421101</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1576720421102</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1714,7 +1719,8 @@
     <MESSAGE value="multiple fixes" />
     <MESSAGE value="fixed GetLatestVersion issue" />
     <MESSAGE value="fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixes" />
+    <MESSAGE value="messagepack issue with signalr" />
+    <option name="LAST_COMMIT_MESSAGE" value="messagepack issue with signalr" />
   </component>
   <component name="WindowStateProjectService">
     <state x="3064" y="93" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1576213672477" />
@@ -1728,37 +1734,37 @@
     <state width="1969" height="705" key="DebuggerActiveHint/3840.2160/3360.2100" timestamp="1576213672477" />
     <state x="3354" y="208" key="EnvironmentVariablesDialog" timestamp="1576213672477" />
     <state x="3354" y="208" key="EnvironmentVariablesDialog/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="1277" height="392" key="GridCell.Tab.0.bottom" timestamp="1576720393838">
+    <state width="1277" height="392" key="GridCell.Tab.0.bottom" timestamp="1576721207076">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1277" height="392" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1576720393838" />
+    <state width="1277" height="392" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1576721207076" />
     <state width="1277" height="501" key="GridCell.Tab.0.bottom/0.23.1680.965@0.23.1680.965" timestamp="1576719841823" />
     <state width="2302" height="481" key="GridCell.Tab.0.bottom/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1576646389839" />
     <state width="2302" height="481" key="GridCell.Tab.0.bottom/1680.0.3360.1890/0.23.1680.1027@1680.0.3360.1890" timestamp="1576647571717" />
     <state width="606" height="167" key="GridCell.Tab.0.bottom/3360.2100" timestamp="1576213672477" />
     <state width="1431" height="148" key="GridCell.Tab.0.bottom/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="1277" height="392" key="GridCell.Tab.0.center" timestamp="1576720393837">
+    <state width="1277" height="392" key="GridCell.Tab.0.center" timestamp="1576721207075">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1277" height="392" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1576720393837" />
+    <state width="1277" height="392" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1576721207075" />
     <state width="1277" height="501" key="GridCell.Tab.0.center/0.23.1680.965@0.23.1680.965" timestamp="1576719841818" />
     <state width="2302" height="481" key="GridCell.Tab.0.center/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1576646389837" />
     <state width="2302" height="481" key="GridCell.Tab.0.center/1680.0.3360.1890/0.23.1680.1027@1680.0.3360.1890" timestamp="1576647571716" />
     <state width="606" height="167" key="GridCell.Tab.0.center/3360.2100" timestamp="1576213672477" />
     <state width="1431" height="148" key="GridCell.Tab.0.center/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="1277" height="392" key="GridCell.Tab.0.left" timestamp="1576720393836">
+    <state width="1277" height="392" key="GridCell.Tab.0.left" timestamp="1576721207073">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1277" height="392" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1576720393836" />
+    <state width="1277" height="392" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1576721207073" />
     <state width="1277" height="501" key="GridCell.Tab.0.left/0.23.1680.965@0.23.1680.965" timestamp="1576719841817" />
     <state width="2302" height="481" key="GridCell.Tab.0.left/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1576646389835" />
     <state width="2302" height="481" key="GridCell.Tab.0.left/1680.0.3360.1890/0.23.1680.1027@1680.0.3360.1890" timestamp="1576647571715" />
     <state width="606" height="167" key="GridCell.Tab.0.left/3360.2100" timestamp="1576213672477" />
     <state width="1431" height="148" key="GridCell.Tab.0.left/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="1277" height="392" key="GridCell.Tab.0.right" timestamp="1576720393837">
+    <state width="1277" height="392" key="GridCell.Tab.0.right" timestamp="1576721207076">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1277" height="392" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1576720393837" />
+    <state width="1277" height="392" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1576721207076" />
     <state width="1277" height="501" key="GridCell.Tab.0.right/0.23.1680.965@0.23.1680.965" timestamp="1576719841819" />
     <state width="2302" height="481" key="GridCell.Tab.0.right/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1576646389838" />
     <state width="2302" height="481" key="GridCell.Tab.0.right/1680.0.3360.1890/0.23.1680.1027@1680.0.3360.1890" timestamp="1576647571716" />
