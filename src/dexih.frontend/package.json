@@ -28,7 +28,7 @@
     "@angular/platform-browser-dynamic": "^8.2.14",
     "@angular/router": "^8.2.14",
     "@microsoft/signalr": "^3.1.0",
-    "@swimlane/ngx-charts": "^13.0.0",
+    "@swimlane/ngx-charts": "^12.1.0",
     "@types/file-saver": "2.0.1",
     "angular-gridster2": "^8.2.0",
     "angular-resize-event": "^1.1.1",
