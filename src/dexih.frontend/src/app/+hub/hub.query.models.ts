@@ -65,7 +65,7 @@ export class UpdateQueries {
 
 // export class Sort {
 //     public column: TableColumn;
-//     public direction: eDirection;
+//     public direction: eSortDirection;
 
 //     get details(): string {
 //         return this.column + ' ' + this.direction;
@@ -144,7 +144,7 @@ export const compare = [
 // }
 
 
-// export enum eDirection {
+// export enum eSortDirection {
 //     Ascending = <any>'Ascending',
 //     Descending = <any>'Descending',
 // }

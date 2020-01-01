@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { SelectQuery, InputColumn, TableColumn, SelectColumn, eDirection, Filter, eTypeCode } from '../../shared.models';
+import { SelectQuery, InputColumn, TableColumn, SelectColumn, eSortDirection, Filter, eTypeCode } from '../../shared.models';
 import { DexihInputParameter } from '../../../+hub/hub.models';
 import { compare } from '../../../+hub/hub.query.models';
 import { TypeCodes } from '../../../+hub/hub.remote.models';
@@ -73,13 +73,13 @@ export class QueryBuilderComponent implements OnInit, OnChanges, OnDestroy {
 
                 let column1 = Object.assign({}, this.columns[i]);
                 column1['details'] = column1.logicalName + ' asc';
-                column1['runTime'] = column1.name + eDirection.Ascending;
-                this.sortColumns[i * 2] = { key: column1['details'], column: column1, direction: eDirection.Ascending };
+                column1['runTime'] = column1.name + eSortDirection.Ascending;
+                this.sortColumns[i * 2] = { key: column1['details'], column: column1, direction: eSortDirection.Ascending };
 
                 let column2 = Object.assign({}, this.columns[i]);
                 column2['details'] = column2.logicalName + ' desc';
-                column2['runTime'] = column2.name + eDirection.Descending;
-                this.sortColumns[i * 2 + 1] = { key: column2['details'], column: column2, direction: eDirection.Descending };
+                column2['runTime'] = column2.name + eSortDirection.Descending;
+                this.sortColumns[i * 2 + 1] = { key: column2['details'], column: column2, direction: eSortDirection.Descending };
             }
         }
     }

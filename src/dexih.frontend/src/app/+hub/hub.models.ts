@@ -7,7 +7,7 @@ import { DexihHubVariable, DexihHub, DexihFunctionParameter, DexihConnection, De
     eSourceType, eImportAction, eSecurityFlag, eDatalinkType, eUpdateStrategy, eFailAction, eInvalidAction,
     eFunctionCaching, eCleanAction, eDuplicateStrategy, eRunStatus, ePermission, eTypeCode,
     eTransformWriterMethod, eTransformItemType, eFunctionType, InputColumn, SelectQuery, DexihColumnBase,
-    eDataObjectType, eSharedObjectType, eDirection, eSeriesGrain, eDayOfWeek, ChartConfig, eLOVObjectType, DexihListOfValues, DexihParameterBase, InputParameterBase, DexihDatalinkTestStep } from '../shared/shared.models';
+    eDataObjectType, eSharedObjectType, eSortDirection, eSeriesGrain, eDayOfWeek, ChartConfig, eLOVObjectType, DexihListOfValues, DexihParameterBase, InputParameterBase, DexihDatalinkTestStep } from '../shared/shared.models';
 
 // export class RemoteMessage {
 //     public messageId: string;
@@ -1962,8 +1962,8 @@ export class DexihInputParameter {
 // }
 
 export const sortDirections = [
-    {key: eDirection.Ascending, name: 'Ascending'},
-    {key: eDirection.Descending, name: 'Descending'},
+    {key: eSortDirection.Ascending, name: 'Ascending'},
+    {key: eSortDirection.Descending, name: 'Descending'},
 ];
 
 // export enum eSeriesGrain {

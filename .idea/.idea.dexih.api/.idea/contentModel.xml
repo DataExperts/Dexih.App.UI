@@ -555,35 +555,35 @@
           </e>
           <e p="web.config" t="Include" />
           <e p="wwwroot" t="Include">
-            <e p="0-es2015.348027b7d96df22e5c77.js" t="Include" />
-            <e p="0-es5.348027b7d96df22e5c77.js" t="Include" />
-            <e p="1-es2015.c9938413af84010f237b.js" t="Include" />
-            <e p="1-es5.c9938413af84010f237b.js" t="Include" />
-            <e p="13-es2015.3ccf6a23bf5ed333e264.js" t="Include" />
-            <e p="13-es5.3ccf6a23bf5ed333e264.js" t="Include" />
-            <e p="14-es2015.56c1540d01f909a7a9e5.js" t="Include" />
-            <e p="14-es5.56c1540d01f909a7a9e5.js" t="Include" />
+            <e p="0-es2015.94c853f842cc7fb97b39.js" t="Include" />
+            <e p="0-es5.94c853f842cc7fb97b39.js" t="Include" />
+            <e p="1-es2015.496a9596e92e0c18bf3e.js" t="Include" />
+            <e p="1-es5.496a9596e92e0c18bf3e.js" t="Include" />
+            <e p="13-es2015.dbebc3930c03a3046ffb.js" t="Include" />
+            <e p="13-es5.dbebc3930c03a3046ffb.js" t="Include" />
+            <e p="14-es2015.fc613907de1a433ff2fa.js" t="Include" />
+            <e p="14-es5.fc613907de1a433ff2fa.js" t="Include" />
             <e p="15-es2015.a11c0f91e4cf5dc22c80.js" t="Include" />
             <e p="15-es5.a11c0f91e4cf5dc22c80.js" t="Include" />
             <e p="16-es2015.54c860cfae624369d0ca.js" t="Include" />
             <e p="16-es5.54c860cfae624369d0ca.js" t="Include" />
-            <e p="17-es2015.cfc18eb13b0ba17a74c0.js" t="Include" />
-            <e p="17-es5.cfc18eb13b0ba17a74c0.js" t="Include" />
-            <e p="18-es2015.d1cb75d9de657ca9bbaa.js" t="Include" />
-            <e p="18-es5.d1cb75d9de657ca9bbaa.js" t="Include" />
+            <e p="17-es2015.75ec4272ebd31ddcccdb.js" t="Include" />
+            <e p="17-es5.75ec4272ebd31ddcccdb.js" t="Include" />
+            <e p="18-es2015.3f2ca29e312d16050db7.js" t="Include" />
+            <e p="18-es5.3f2ca29e312d16050db7.js" t="Include" />
             <e p="3rdpartylicenses.txt" t="Include" />
             <e p="4-es2015.76a60b4f6042485ddee1.js" t="Include" />
             <e p="4-es5.76a60b4f6042485ddee1.js" t="Include" />
-            <e p="5-es2015.08541c67c2eed31f72ad.js" t="Include" />
-            <e p="5-es5.08541c67c2eed31f72ad.js" t="Include" />
-            <e p="6-es2015.06efda10c6f26d1f9e63.js" t="Include" />
-            <e p="6-es5.06efda10c6f26d1f9e63.js" t="Include" />
-            <e p="7-es2015.184cb4015523c966151a.js" t="Include" />
-            <e p="7-es5.184cb4015523c966151a.js" t="Include" />
-            <e p="8-es2015.8898397df7ea441ad2bc.js" t="Include" />
-            <e p="8-es5.8898397df7ea441ad2bc.js" t="Include" />
-            <e p="9-es2015.7ff3bbdae656cf7f5aba.js" t="Include" />
-            <e p="9-es5.7ff3bbdae656cf7f5aba.js" t="Include" />
+            <e p="5-es2015.8d1942f070f3aab82c6c.js" t="Include" />
+            <e p="5-es5.8d1942f070f3aab82c6c.js" t="Include" />
+            <e p="6-es2015.61a301e736bf85f2fea1.js" t="Include" />
+            <e p="6-es5.61a301e736bf85f2fea1.js" t="Include" />
+            <e p="7-es2015.5f4a65135d332bc1262c.js" t="Include" />
+            <e p="7-es5.5f4a65135d332bc1262c.js" t="Include" />
+            <e p="8-es2015.da43735ddf35f5d834cc.js" t="Include" />
+            <e p="8-es5.da43735ddf35f5d834cc.js" t="Include" />
+            <e p="9-es2015.8ec589c7796549abed70.js" t="Include" />
+            <e p="9-es5.8ec589c7796549abed70.js" t="Include" />
             <e p="assets" t="Include">
               <e p="css" t="Include">
                 <e p="_custom.scss" t="Include" />
@@ -773,19 +773,19 @@
                 <e p="google-api.js" t="Include" />
               </e>
             </e>
-            <e p="common-es2015.9f8cd9e93a362520bb08.js" t="Include" />
-            <e p="common-es5.9f8cd9e93a362520bb08.js" t="Include" />
+            <e p="common-es2015.8ce0a66dc240a493d0ea.js" t="Include" />
+            <e p="common-es5.8ce0a66dc240a493d0ea.js" t="Include" />
             <e p="fontawesome-webfont.674f50d287a8c48dc19b.eot" t="Include" />
             <e p="fontawesome-webfont.912ec66d7572ff821749.svg" t="Include" />
             <e p="fontawesome-webfont.af7ae505a9eed503f8b8.woff2" t="Include" />
             <e p="fontawesome-webfont.b06871f281fee6b241d6.ttf" t="Include" />
             <e p="fontawesome-webfont.fee66e712a8a08eef580.woff" t="Include" />
             <e p="index.html" t="Include" />
-            <e p="main-es2015.2ca61d59afc7ccd19f8e.js" t="Include" />
-            <e p="main-es5.2ca61d59afc7ccd19f8e.js" t="Include" />
+            <e p="main-es2015.9423a94fe01bcc02f3d7.js" t="Include" />
+            <e p="main-es5.9423a94fe01bcc02f3d7.js" t="Include" />
             <e p="polyfills-es5.6e8409c7116790edda13.js" t="Include" />
-            <e p="runtime-es2015.72165ad55ecba024d4d2.js" t="Include" />
-            <e p="runtime-es5.72165ad55ecba024d4d2.js" t="Include" />
+            <e p="runtime-es2015.0980093fb3dff5582895.js" t="Include" />
+            <e p="runtime-es5.0980093fb3dff5582895.js" t="Include" />
             <e p="styles.0eeb42384e84fae3f877.css" t="Include" />
           </e>
         </e>
@@ -1143,10 +1143,15 @@
         <e p="InputParameter.cs" t="Include" />
         <e p="InputParameters.cs" t="Include" />
         <e p="InsertQuery.cs" t="Include" />
+        <e p="Join.cs" t="Include" />
+        <e p="JoinFilter.cs" t="Include" />
+        <e p="JoinFilters.cs" t="Include" />
+        <e p="Joins.cs" t="Include" />
         <e p="QueryColumn.cs" t="Include" />
         <e p="QueryColumns.cs" t="Include" />
         <e p="QueryExceptions.cs" t="Include" />
         <e p="SelectColumn.cs" t="Include" />
+        <e p="SelectColumns.cs" t="Include" />
         <e p="SelectQuery.cs" t="Include" />
         <e p="Sort.cs" t="Include" />
         <e p="Sorts.cs" t="Include" />

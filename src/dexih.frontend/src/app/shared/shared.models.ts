@@ -717,7 +717,7 @@ export class ApiData {
     public genericTypeCode: eTypeCode = null;
     public functionCaching: eFunctionCaching = eFunctionCaching.NoCache;
     public customFunctionKey: number = null;
-    public sortDirection: eDirection = null;
+    public sortDirection: eSortDirection = null;
     public filterCompare: eCompare = null;
     public aggregate: eAggregate = null;
     public seriesGrain: eSeriesGrain = null;
@@ -1591,10 +1591,11 @@ export class ApiData {
    
    export class SelectQuery {
     public columns: SelectColumn[] = [];
-    public table: string = null;
+    public tableName: string = null;
     public filters: Filter[] = [];
     public sorts: Sort[] = [];
     public groups: TableColumn[] = [];
+    public groupFilters: Filter[] = [];
     public rows: number = -1;
     public inputColumns: TableColumn[] = [];
     public fileName: string = null;
@@ -1618,7 +1619,7 @@ export class ApiData {
    
    export class Sort {
     public column: TableColumn = null;
-    public direction: eDirection = null;
+    public direction: eSortDirection = null;
    }
    
    export class Sorts {
@@ -2215,17 +2216,6 @@ export class ApiData {
     {key: eDeltaType.Url, name: 'Url', description: ''},
    ]
    
-   export enum eDirection {
-    Ascending = 1,
-    Descending = 2,
-   }
-   
-   export const eDirectionItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eDirection.Ascending, name: 'Ascending', description: ''},
-    {key: eDirection.Descending, name: 'Descending', description: ''},
-   ]
-   
    export enum eDownloadFormat {
     Csv = 1,
     Json = 2,
@@ -2693,6 +2683,17 @@ export class ApiData {
     {key: eSharedObjectType.Api, name: 'Api', description: ''},
     {key: eSharedObjectType.Dashboard, name: 'Dashboard', description: ''},
     {key: eSharedObjectType.ListOfValues, name: 'ListOfValues', description: ''},
+   ]
+   
+   export enum eSortDirection {
+    Ascending = 1,
+    Descending = 2,
+   }
+   
+   export const eSortDirectionItems = [
+    {key: 0, name: 'Unknown', description: 'Unknown'},
+    {key: eSortDirection.Ascending, name: 'Ascending', description: ''},
+    {key: eSortDirection.Descending, name: 'Descending', description: ''},
    ]
    
    export enum eSourceType {
