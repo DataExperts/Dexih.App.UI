@@ -593,6 +593,7 @@ export class ApiData {
     public rowsEndAt: number = 1;
     public rowsIncrement: number = 1;
     public sourceType: eSourceType = eSourceType.Table;
+    public disablePushDown: boolean = false;
     public dexihDatalinkColumns: DexihDatalinkColumn[] = [];
     public key: number = 0;
     public name: string = null;
