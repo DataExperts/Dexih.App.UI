@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges, EventEmitter, Output, ContentChild } from '@angular/core';
 import { ChartTypes, eInputFormat } from './chart-groups';
-import { colorSets } from '@swimlane/ngx-charts/release/utils';
+import { colorSets } from '@swimlane/ngx-charts';
 import * as html2canvas from 'html2canvas';
 import { Subject } from 'rxjs';
 import { ChartConfig, eChartType } from '../../shared.models';
