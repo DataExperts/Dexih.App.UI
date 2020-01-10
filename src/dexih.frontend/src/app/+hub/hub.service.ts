@@ -365,7 +365,7 @@ export class HubService implements OnInit, OnDestroy {
 
             this.setNoRemoteAgent(hubCache);
         } catch (reason) {
-            this.addHubMessage(reason);
+            this.addHubMessage(reason, true, 'Resetting remote agent' );
         } finally {
             this.isResettingRemoteAgent = false;
         }
@@ -745,7 +745,7 @@ export class HubService implements OnInit, OnDestroy {
                 resolve(result);
             }).catch(reason => {
                 this.logger.LogMessage(reason);
-                this.addHubMessage(reason);
+                // this.addHubMessage(reason);
                 reject(reason);
             });
         });
@@ -771,7 +771,7 @@ export class HubService implements OnInit, OnDestroy {
                 resolve(result);
             }).catch(reason => {
                 this.logger.LogMessage(reason);
-                this.addHubMessage(reason);
+                // this.addHubMessage(reason);
                 reject(reason);
             });
         });
@@ -869,7 +869,7 @@ export class HubService implements OnInit, OnDestroy {
                     resolve(true);
 
                 }).catch(reason => {
-                    this.addHubMessage(reason, true, 'Refreshing Remote Agent');
+                    // this.addHubMessage(reason, true, 'Refreshing Remote Agent');
                     reject(reason);
                 });
             }
