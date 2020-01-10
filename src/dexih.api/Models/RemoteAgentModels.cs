@@ -1,11 +1,12 @@
 using System.ComponentModel;
+using System.Runtime.Serialization;
 using dexih.repository;
-using MessagePack;
+
 using Microsoft.Extensions.Logging;
 
 namespace dexih.api.Models
 {
-    [MessagePackObject]
+    [DataContract]
     public class RemoteAgentSettings
     {
         public enum EEnvironment
@@ -20,93 +21,93 @@ namespace dexih.api.Models
             Linux
         }
 
-        [Key(0)]
+        [DataMember(Order = 0)]
         public bool EmbedUserName { get; set; }
         
-        [Key(1)]
+        [DataMember(Order = 1)]
         public EEnvironment Environment { get; set; }
         
-        [Key(2)]
+        [DataMember(Order = 2)]
         public LogLevel LogLevel { get; set; }
-        [Key(3)]
+        [DataMember(Order = 3)]
         public RemoteAgentSettingsSubset RemoteApplicationSettings { get; set; }
     }
 
-    [MessagePackObject]
+    [DataContract]
     public class RemoteAgentSettingsSubset
     {
-        [Key(0)]
+        [DataMember(Order = 0)]
         public long[] AllowedHubs { get; set; }
         
-        [Key(1)]
+        [DataMember(Order = 1)]
         public string[] AllowedPaths { get; set; }
 
-        [Key(2)] 
+        [DataMember(Order = 2)] 
         public bool AllowAllHubs { get; set; } = true;
         
-        [Key(3)]
+        [DataMember(Order = 3)]
         public bool AllowAllPaths { get; set; } = true;
         
-        [Key(4)]
+        [DataMember(Order = 4)]
         public bool AllowDownload { get; set; } = true;
         
-        [Key(5)]
+        [DataMember(Order = 5)]
         public bool AllowExternalAccess { get; set; } = true;
         
-        [Key(6)]
+        [DataMember(Order = 6)]
         public bool AllowLanAccess { get; set; } = true;
         
-        [Key(7)]
+        [DataMember(Order = 7)]
         public bool AllowLocalFiles { get; set; } = true;
         
-        [Key(8)]
+        [DataMember(Order = 8)]
         public bool AllowProxy { get; set; } = true;
         
-        [Key(9)]
+        [DataMember(Order = 9)]
         public bool AllowUpload { get; set; } = true;
 
-        [Key(10)]
+        [DataMember(Order = 10)]
         public bool AutoGenerateCertificate { get; set; } = true;
         
-        [Key(11)]
+        [DataMember(Order = 11)]
         public bool AutoSchedule { get; set; } = true;
-        [Key(12)]
+        [DataMember(Order = 12)]
         public bool AutoUpgrade { get; set; } = true;
 
-        [Key(13)] 
+        [DataMember(Order = 13)] 
         public int DownloadPort { get; set; } = 33944;
         
-        [Key(14)]
+        [DataMember(Order = 14)]
         public bool EnableUPnP { get; set; } = true;
         
-        [Key(15)]
+        [DataMember(Order = 15)]
         public string EncryptionKey { get; set; }
         
-        [Key(16)]
+        [DataMember(Order = 16)]
         public bool EnforceHttps { get; set; } = true;
         
-        [Key(17)]
+        [DataMember(Order = 17)]
         public string ExternalDownloadUrl { get; set; }
 
-        [Key(18)] 
+        [DataMember(Order = 18)] 
         public bool FirstRun { get; set; } = false;
         
-        [Key(19)]
+        [DataMember(Order = 19)]
         public string Name { get; set; } 
         
-        [Key(20)]
+        [DataMember(Order = 20)]
         public bool PreRelease { get; set; }
         
-        [Key(21)]
+        [DataMember(Order = 21)]
         public string RemoteAgentId { get; set; }
 
-        [Key(22)]
+        [DataMember(Order = 22)]
         public string User { get; set; }
         
-        [Key(23)]
+        [DataMember(Order = 23)]
         public string UserToken { get; set; }
         
-        [Key(24)]
+        [DataMember(Order = 24)]
         public string WebServer { get; set; }
     }
 

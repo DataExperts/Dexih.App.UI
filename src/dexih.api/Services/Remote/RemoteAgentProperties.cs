@@ -1,36 +1,37 @@
-﻿using dexih.functions;
-using MessagePack;
+﻿using System.Runtime.Serialization;
+using dexih.functions;
+
 
 namespace dexih.api.Services.Remote
 {
-    [MessagePackObject]
+    [DataContract]
     public class RemoteAgentProperties
     {
-        [Key(1)]
+        [DataMember(Order = 1)]
         public string Name { get; set; }
 
-        [Key(2)]
+        [DataMember(Order = 2)]
         public string IpAddress { get; set; }
 
-        [Key(3)]
+        [DataMember(Order = 3)]
         public string SecurityToken { get; set; }
 
-        [Key(4)]
+        [DataMember(Order = 4)]
         public long RemoteAgentKey { get; set; }
 
-        [Key(5)]
+        [DataMember(Order = 5)]
         public string EncryptionKey { get; set; }
 
-        [Key(6)]
+        [DataMember(Order = 6)]
         public string UserId { get; set; }
 
-        [Key(7)]
+        [DataMember(Order = 7)]
         public string ConnectionId { get; set; }
         
-        [Key(8)]
+        [DataMember(Order = 8)]
         public NamingStandards NamingStandards { get; set; }
         
-        [Key(9)]
+        [DataMember(Order = 9)]
         public DownloadUrl[] DownloadUrls { get; set; }
     }
 }

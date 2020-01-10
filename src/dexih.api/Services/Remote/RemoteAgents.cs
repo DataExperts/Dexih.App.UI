@@ -10,6 +10,7 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Text.Json;
 using dexih.api.Hubs;
 using dexih.api.Models;
 using dexih.api.Services.Operations;
@@ -26,7 +27,7 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Caching.Distributed;
 
 
-using MessagePack;
+
 
 namespace dexih.api.Services.Remote
 {
@@ -122,7 +123,8 @@ namespace dexih.api.Services.Remote
 
             using (var stream = new MemoryStream(properties))
             {
-                return await MessagePackSerializer.DeserializeAsync<RemoteAgentProperties>(stream);
+	            return await stream.DeserializeAsync<RemoteAgentProperties>(cancellationToken);
+                // return await MessagePackSerializer.DeserializeAsync<RemoteAgentProperties>(stream);
             }
         }
 
@@ -130,7 +132,8 @@ namespace dexih.api.Services.Remote
 	    {
             using (var stream = new MemoryStream())
             {
-	            MessagePackSerializer.Serialize(stream, remoteAgentProperties);
+	            await stream.SerializeAsync(remoteAgentProperties, cancellationToken);
+//	            MessagePackSerializer.Serialize(stream, remoteAgentProperties);
                 await _distributedCache.SetAsync(instanceId, stream.ToArray(), cancellationToken);
             }
 	    }

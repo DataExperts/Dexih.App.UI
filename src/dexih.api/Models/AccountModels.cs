@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 using dexih.repository;
-using MessagePack;
+
 
 namespace dexih.api.Models
 {
 
-    [MessagePackObject]
+    [DataContract]
     public class LoginModel { 
         public string Email { get; set; }
         public string Password { get; set; } 
@@ -16,34 +17,34 @@ namespace dexih.api.Models
         public string Email{get; set; }
     }
 
-    [MessagePackObject]
+    [DataContract]
     public class RegisterModel
     {
-        [Key(0)]
+        [DataMember(Order = 0)]
         public ELoginProvider Provider { get; set; } = ELoginProvider.Dexih;
 
-        [Key(1)]
+        [DataMember(Order = 1)]
         public string Email{get; set; }
 		
-        [Key(2)]
+        [DataMember(Order = 2)]
         public string Code{get; set; }
         
-        [Key(3)]
+        [DataMember(Order = 3)]
         public string Password{get; set; }
         
-        [Key(4)]
+        [DataMember(Order = 4)]
         public string Firstname{get; set; }
         
-        [Key(5)]
+        [DataMember(Order = 5)]
         public string Lastname{get; set; }
         
-        [Key(6)]
+        [DataMember(Order = 6)]
         public bool Subscription{get; set; }
         
-        [Key(7)]
+        [DataMember(Order = 7)]
         public bool Terms{get; set; }
         
-        [Key(8)]
+        [DataMember(Order = 8)]
         public string AuthenticationToken {get; set; }
 
     }

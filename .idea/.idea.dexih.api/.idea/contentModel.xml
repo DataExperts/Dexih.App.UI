@@ -349,7 +349,7 @@
       <e p="dexih.remote.operations.csproj" t="IncludeRecursive" />
       <e p="DownloadStream.cs" t="Include" />
       <e p="Enums.cs" t="Include" />
-      <e p="HTTPService.cs" t="Include" />
+      <e p="HttpService.cs" t="Include" />
       <e p="ListenerService.cs" t="Include" />
       <e p="LiveApis" t="Include">
         <e p="ApiData.cs" t="Include" />
@@ -527,7 +527,7 @@
             <e p="Operations" t="Include">
               <e p="ApplicationSettings.cs" t="Include" />
               <e p="ClientMessage.cs" t="Include" />
-              <e p="dexihOperations.cs" t="Include" />
+              <e p="DexihOperations.cs" t="Include" />
               <e p="DexihOperationsConfig.cs" t="Include" />
               <e p="EClientCommand.cs" t="Include" />
               <e p="IDexihOperations.cs" t="Include" />
@@ -1163,7 +1163,7 @@
       <e p="SortedRowsDictionary.cs" t="Include" />
       <e p="Table" t="Include">
         <e p="FileConfiguration.cs" t="Include" />
-        <e p="Flatfile.cs" t="Include" />
+        <e p="FlatFile.cs" t="Include" />
         <e p="Table.cs" t="Include" />
         <e p="TableCache.cs" t="Include" />
         <e p="TableColumn.cs" t="Include" />
