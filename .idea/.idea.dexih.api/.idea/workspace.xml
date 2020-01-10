@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1be1a9df-0647-4351-ace4-9bafd064437b" name="Default" comment="refactor with better pushdown">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/MessagePackInputFormatter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/MessagePackInputFormatter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Models/AccountModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Models/AccountModels.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Models/RemoteAgentModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Models/RemoteAgentModels.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Services/Remote/RemoteAgentProperties.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Services/Remote/RemoteAgentProperties.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Services/Remote/RemoteAgents.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Services/Remote/RemoteAgents.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/dexih.api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/dexih.api.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/package.json" afterDir="false" />
-    </list>
+    <list default="true" id="1be1a9df-0647-4351-ace4-9bafd064437b" name="Default" comment="refactor with better pushdown" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -698,7 +688,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Connection.cs" />
-        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Transform.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.connections.mongo/dexih.connections.mongo.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.connections.azure/dexih.connections.azure.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihTable.cs" />
@@ -748,6 +737,7 @@
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/EncryptedObject.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Services/Remote/RemoteAgents.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/SharedSettings.cs" />
+        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Transform.cs" />
       </list>
     </option>
   </component>
@@ -937,7 +927,7 @@
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name=".NET Project" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="Running" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="Finished" type="7427dc5b:ServiceModel$ServiceGroupNode" />
               </path>
             </expand>
             <select />
@@ -1590,7 +1580,7 @@
       <workItem from="1578627294197" duration="47000" />
       <workItem from="1578627422126" duration="328000" />
       <workItem from="1578629131009" duration="1076000" />
-      <workItem from="1578630451217" duration="2771000" />
+      <workItem from="1578630451217" duration="2962000" />
     </task>
     <task id="LOCAL-00001" summary="Connections to remote agents working.">
       <created>1509234944099</created>
@@ -1777,10 +1767,10 @@
     <state width="1969" height="705" key="DebuggerActiveHint/3840.2160/3360.2100" timestamp="1576213672477" />
     <state x="3354" y="208" key="EnvironmentVariablesDialog" timestamp="1576213672477" />
     <state x="3354" y="208" key="EnvironmentVariablesDialog/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="1277" height="486" key="GridCell.Tab.0.bottom" timestamp="1578633502241">
+    <state width="1277" height="486" key="GridCell.Tab.0.bottom" timestamp="1578633866187">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1277" height="486" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1578633502241" />
+    <state width="1277" height="486" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1578633866187" />
     <state width="1277" height="486" key="GridCell.Tab.0.bottom/0.23.1680.963@0.23.1680.963" timestamp="1578633368170" />
     <state width="1277" height="224" key="GridCell.Tab.0.bottom/0.23.1680.965@0.23.1680.965" timestamp="1577836945298" />
     <state width="1277" height="392" key="GridCell.Tab.0.bottom/0.23.1680.966@0.23.1680.966" timestamp="1576822179040" />
@@ -1788,10 +1778,10 @@
     <state width="2302" height="481" key="GridCell.Tab.0.bottom/1680.0.3360.1890/0.23.1680.1027@1680.0.3360.1890" timestamp="1576647571717" />
     <state width="606" height="167" key="GridCell.Tab.0.bottom/3360.2100" timestamp="1576213672477" />
     <state width="1431" height="148" key="GridCell.Tab.0.bottom/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="1277" height="486" key="GridCell.Tab.0.center" timestamp="1578633502239">
+    <state width="1277" height="486" key="GridCell.Tab.0.center" timestamp="1578633866186">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1277" height="486" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1578633502239" />
+    <state width="1277" height="486" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1578633866186" />
     <state width="1277" height="486" key="GridCell.Tab.0.center/0.23.1680.963@0.23.1680.963" timestamp="1578633368169" />
     <state width="1277" height="224" key="GridCell.Tab.0.center/0.23.1680.965@0.23.1680.965" timestamp="1577836945297" />
     <state width="1277" height="392" key="GridCell.Tab.0.center/0.23.1680.966@0.23.1680.966" timestamp="1576822179038" />
@@ -1799,10 +1789,10 @@
     <state width="2302" height="481" key="GridCell.Tab.0.center/1680.0.3360.1890/0.23.1680.1027@1680.0.3360.1890" timestamp="1576647571716" />
     <state width="606" height="167" key="GridCell.Tab.0.center/3360.2100" timestamp="1576213672477" />
     <state width="1431" height="148" key="GridCell.Tab.0.center/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="1277" height="486" key="GridCell.Tab.0.left" timestamp="1578633502239">
+    <state width="1277" height="486" key="GridCell.Tab.0.left" timestamp="1578633866185">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1277" height="486" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1578633502239" />
+    <state width="1277" height="486" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1578633866185" />
     <state width="1277" height="486" key="GridCell.Tab.0.left/0.23.1680.963@0.23.1680.963" timestamp="1578633368169" />
     <state width="1277" height="224" key="GridCell.Tab.0.left/0.23.1680.965@0.23.1680.965" timestamp="1577836945296" />
     <state width="1277" height="392" key="GridCell.Tab.0.left/0.23.1680.966@0.23.1680.966" timestamp="1576822179038" />
@@ -1810,10 +1800,10 @@
     <state width="2302" height="481" key="GridCell.Tab.0.left/1680.0.3360.1890/0.23.1680.1027@1680.0.3360.1890" timestamp="1576647571715" />
     <state width="606" height="167" key="GridCell.Tab.0.left/3360.2100" timestamp="1576213672477" />
     <state width="1431" height="148" key="GridCell.Tab.0.left/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="1277" height="486" key="GridCell.Tab.0.right" timestamp="1578633502240">
+    <state width="1277" height="486" key="GridCell.Tab.0.right" timestamp="1578633866187">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1277" height="486" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1578633502240" />
+    <state width="1277" height="486" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1578633866187" />
     <state width="1277" height="486" key="GridCell.Tab.0.right/0.23.1680.963@0.23.1680.963" timestamp="1578633368170" />
     <state width="1277" height="224" key="GridCell.Tab.0.right/0.23.1680.965@0.23.1680.965" timestamp="1577836945298" />
     <state width="1277" height="392" key="GridCell.Tab.0.right/0.23.1680.966@0.23.1680.966" timestamp="1576822179039" />
