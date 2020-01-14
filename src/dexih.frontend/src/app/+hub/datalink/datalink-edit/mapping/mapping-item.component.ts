@@ -192,7 +192,7 @@ export class MappingItemComponent implements OnInit {
                     (p.direction === eParameterDirection.ReturnValue || p.direction === eParameterDirection.ResultReturnValue)) {
                     return null;
                 }
-                if (p.rank === 0) {
+                if (p.rank === 0 || p.datalinkColumn !== null) {
                     let value = this.describeDatalinkColumn(p.datalinkColumn);
                     return {name: param.name, values: [{valid: value.valid, text: value.text}]};
                 } else {

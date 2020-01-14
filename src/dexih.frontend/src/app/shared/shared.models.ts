@@ -1175,15 +1175,6 @@ export class ApiData {
     public maxImportLevels: number = 10;
    }
    
-   export class FlatFilesReadyMessage {
-    public tables: DexihTable[] = [];
-    public instanceId: string = null;
-    public securityToken: string = null;
-    public connectionId: string = null;
-    public reference: string = null;
-    public hubKey: number = 0;
-   }
-   
    export class FunctionParameter {
     public parameterName: string = null;
     public name: string = null;
@@ -1393,7 +1384,6 @@ export class ApiData {
    }
    
    export class ParameterArray {
-    public value: any = null;
     public name: string = null;
     public dataType: eTypeCode = eTypeCode.Unknown;
     public rank: number = 0;
@@ -2182,6 +2172,7 @@ export class ApiData {
     ResponseSegment = 27,
     Error = 28,
     Url = 29,
+    UpdateReason = 30,
    }
    
    export const eDeltaTypeItems = [
@@ -2215,6 +2206,7 @@ export class ApiData {
     {key: eDeltaType.ResponseSegment, name: 'ResponseSegment', description: ''},
     {key: eDeltaType.Error, name: 'Error', description: ''},
     {key: eDeltaType.Url, name: 'Url', description: ''},
+    {key: eDeltaType.UpdateReason, name: 'UpdateReason', description: ''},
    ]
    
    export enum eDownloadFormat {

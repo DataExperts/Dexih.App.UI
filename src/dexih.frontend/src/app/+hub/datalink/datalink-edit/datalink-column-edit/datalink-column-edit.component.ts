@@ -106,7 +106,7 @@ export class DatalinkColumnEditComponent implements OnInit, OnChanges, OnDestroy
                     if (!column) {
                         columnsArray = <FormArray> itemForm.controls.dexihFunctionParameters;
                         let parameter = <FormGroup> columnsArray.controls.find(c =>
-                            c.value.direction = eParameterDirection.Output &&
+                            c.value.direction === eParameterDirection.Output &&
                             c.value.datalinkColumn &&
                             c.value.datalinkColumn.key === this.datalinkColumnKey
                         );
@@ -118,7 +118,7 @@ export class DatalinkColumnEditComponent implements OnInit, OnChanges, OnDestroy
                                 let arrayParameters = <FormArray> (<FormGroup> c).controls.arrayParameters;
                                 if (arrayParameters) {
                                     parameter = <FormGroup> arrayParameters.controls.find(p =>
-                                        p.value.direction = eParameterDirection.Output &&
+                                        p.value.direction === eParameterDirection.Output &&
                                         p.value.datalinkColumn &&
                                         p.value.datalinkColumn.key === this.datalinkColumnKey
                                     );

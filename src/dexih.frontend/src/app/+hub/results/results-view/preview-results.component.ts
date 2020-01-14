@@ -91,8 +91,15 @@ export class PreviewResultsComponent implements OnInit, OnDestroy {
                         opCol.maxLength = 1;
                         opCol.deltaType = eDeltaType.DatabaseOperation;
 
+
+                        let reasonCol = new DexihTableColumn();
+                        reasonCol.name = 'mismatch_reason';
+                        reasonCol.dataType = eTypeCode.String;
+                        reasonCol.deltaType = eDeltaType.UpdateReason;
+
                         testTable.dexihTableColumns.push(auditCol);
                         testTable.dexihTableColumns.push(opCol);
+                        testTable.dexihTableColumns.push(reasonCol);
 
                         this.targetTable = testTable;
                     } else {
