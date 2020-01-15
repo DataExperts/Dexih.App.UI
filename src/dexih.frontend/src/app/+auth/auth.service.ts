@@ -162,10 +162,12 @@ export class AuthService implements OnDestroy {
                                     let previousHub = hubs.find(c => c.hubKey === hub.hubKey);
                                     if (previousHub) {
                                         Object.assign(previousHub, hub);
-                                        this._hubs.next(hubs);
+                                        this._hubs
+                                            .next(hubs.sort((a, b) => a.name.toLocaleLowerCase() > b.name.toLocaleLowerCase() ? 1 : -1));
                                     } else {
                                         hubs.push(hub);
-                                        this._hubs.next(hubs);
+                                        this._hubs
+                                            .next(hubs.sort((a, b) => a.name.toLocaleLowerCase() > b.name.toLocaleLowerCase() ? 1 : -1));
                                     }
                                 }
                             }
@@ -1627,7 +1629,7 @@ export class AuthService implements OnDestroy {
 
     refreshHubs(): void {
         this.post<DexihHubAuth[]>('/api/Account/GetAuthorizedHubs', null, 'Getting authorized hubs...').then(result => {
-            this._hubs.next(result);
+            this._hubs.next(result.sort((a, b) => a.name.toLocaleLowerCase() > b.name.toLocaleLowerCase() ? 1 : -1));
         }).catch(reason => {
             this.logger.LogC(() => `refreshHubs error:${reason.message}`, eLogLevel.Error);
 
