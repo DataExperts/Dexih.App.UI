@@ -157,6 +157,8 @@ export class PreviewResultsComponent implements OnInit, OnDestroy {
             selectQuery.filters.push(filter);
         }
 
+        selectQuery.rows = 100;
+
         return selectQuery;
     }
 

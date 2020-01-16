@@ -1,26 +1,28 @@
 <dexih-widget-section title='Properties' [showExpandButton]="true" >
         <form *ngIf="mainForm" [formGroup]="mainForm">
             <fieldset>
-                <section>
-                    <form-select label="Connection" formControlName="connectionKey" [items]="connections" itemKey="key" itemName="name"
-                        [errors]="formsService.formErrors.connectionKey" iconClass="fa fa-database" note='The connection for this table.'>
-                    </form-select>
-                </section>
+                <div class="form-row">
+                    <section class="form-group col-md-4">
+                        <form-select label="Connection" formControlName="connectionKey" [items]="connections" itemKey="key" itemName="name"
+                            [errors]="formsService.formErrors.connectionKey" iconClass="fa fa-database" note='The connection for this table.'>
+                        </form-select>
+                    </section>
 
-                <section>
-                    <form-input [label]="entityType + ' Name'" formControlName="name" placeholder="Enter the physical name." iconClass="fa fa-list"
-                        [errors]="formsService.formErrors.name" note="The physical name of the underlying entity">
-                    </form-input>
-                </section>
+                    <section class="form-group col-md-4">
+                        <form-input [label]="entityType + ' Name'" formControlName="name" placeholder="Enter the physical name." iconClass="fa fa-list"
+                            [errors]="formsService.formErrors.name" note="The physical name of the underlying entity">
+                        </form-input>
+                    </section>
 
-                <section *ngIf="connectionReference?.connectionCategory == eConnectionCategory.SqlDatabase">
-                    <form-input [label]="entityType + ' Schema'" formControlName="schema" placeholder="Enter the (database) schema name" iconClass="fa fa-list"
-                        [errors]="formsService.formErrors.schema" note="The physical name of the database schema (if applicable).">
-                    </form-input>
-                </section>
-
+                    <section class="form-group col-md-4" *ngIf="connectionReference?.connectionCategory == eConnectionCategory.SqlDatabase">
+                        <form-input [label]="entityType + ' Schema'" formControlName="schema" placeholder="Enter the (database) schema name" iconClass="fa fa-list"
+                            [errors]="formsService.formErrors.schema" note="The physical name of the database schema (if applicable).">
+                        </form-input>
+                    </section>
+                </div>
+                
                 <section>
-                    <form-checkbox label="Specify a logical name" formControlName="useLogical">
+                    <form-checkbox label="Specify a different logical name" formControlName="useLogical">
                     </form-checkbox>
                 </section>
 
@@ -49,12 +51,7 @@
                     </form-select>
                 </section>
 
-                <section *ngIf="connectionReference?.connectionCategory == eConnectionCategory.SqlDatabase">
-                    <form-checkbox label="Use Sql to pull data from the database" formControlName="useQuery">
-                    </form-checkbox>
-                </section>
-
-                <section *ngIf="formsService.currentForm.controls.useQuery.value">
+                <section *ngIf="formsService.currentForm.controls.tableType.value === eTableType.Query">
                     <form-textarea label="Specify the sql query" rows="15" formControlName="queryString" [hideToggle]="true" placeholder="Sql Query"
                         [showPreview]="false">
                         <a *ngIf="runningSql == false" href="javascript:void(0)" (click)="test()"> (
@@ -63,6 +60,7 @@
                             <i class="fa fa-refresh"></i> Reload Columns) </a>
                         <span *ngIf="runningSql == true">
                             <i class="fa fa-spin fa-refresh"></i> (Busy... please wait) </span>
+                        <dexih-message [message]="sqlMessage"></dexih-message>
                     </form-textarea>
                 </section>
 

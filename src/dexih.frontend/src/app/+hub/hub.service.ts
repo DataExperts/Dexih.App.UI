@@ -1019,9 +1019,13 @@ export class HubService implements OnInit, OnDestroy {
     public doImport(tables: Array<DexihTable>, save: boolean, cancelToken: CancelToken): Promise<Array<DexihTable>> {
         return new Promise<Array<DexihTable>>((resolve, reject) => {
             this.hubPostRemote<DexihTable[]>('/api/Hub/ImportTables', {
-            tables: tables
+            tables: tables,
         }, 'Importing tables...', cancelToken).then(importedTables => {
-            resolve(this.saveTables(importedTables));
+            if (save) {
+                resolve(this.saveTables(importedTables));
+            } else {
+                resolve(importedTables);
+            }
         }).catch(reason => reject(reason));
     });
     }

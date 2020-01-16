@@ -7,7 +7,7 @@
         </div>
 
         <div class="flex-fill pl-1">
-            <form-select [(ngModel)]="config.colorScheme" labelLeft="Color" [items]="colorSets" itemName='name'
+            <form-select [(ngModel)]="config.colorScheme" (ngModelChange)="updateChart($event)" labelLeft="Color" [items]="colorSets" itemName='name'
                 itemKey='name'>
             </form-select>
         </div>

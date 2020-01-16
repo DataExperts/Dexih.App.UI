@@ -116,6 +116,13 @@ export class TableIndexComponent implements OnInit, OnDestroy {
                         }
                     }
 
+                    let tableName;
+                    if (table.name === table.logicalName) {
+                        tableName = table.logicalName
+                    } else {
+                        tableName = `${table.logicalName} (${table.name})`
+                    }
+
                     tableData.push({
                         key: table.key,
                         connectionType: connection ? eConnectionPurpose[connection.purpose] : 'undefined',
@@ -123,7 +130,7 @@ export class TableIndexComponent implements OnInit, OnDestroy {
                         description: table.description,
                         tableType: table.tableType,
                         name: name,
-                        logicalName: table.logicalName,
+                        logicalName: tableName,
                         updateDate: table.updateDate,
                         connectionKey: connection ? connection.key : '',
                         isFile: connectionReference ? connectionReference.connectionCategory === eConnectionCategory.File : false,

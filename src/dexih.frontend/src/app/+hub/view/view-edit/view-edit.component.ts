@@ -23,6 +23,7 @@ export class ViewEditComponent implements OnInit, OnDestroy {
   public pageTitle: string;
 
   public showEdit = false;
+  public hasEdited = false;
 
   private _subscription: Subscription;
   private _formChangeSubscription: Subscription;
@@ -331,9 +332,14 @@ export class ViewEditComponent implements OnInit, OnDestroy {
     }
   }
 
+  toggleEdit() {
+    this.showEdit = !this.showEdit;
+    this.hasEdited = true;
+  }
+
   public canDeactivate(): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
-      if (this.formsService.hasChanged) {
+      if (this.hasEdited && this.formsService.hasChanged) {
         this.authService.confirmDialog('The view has not been saved',
           'The view changes have not been saved.  Do you want to discard the changes and exit?')
           .then((confirm) => {
@@ -350,7 +356,7 @@ export class ViewEditComponent implements OnInit, OnDestroy {
   // @HostListener allows is to guard against browser refresh, close, etc.
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
-    if (this.formsService.hasChanged) {
+    if (this.hasEdited && this.formsService.hasChanged) {
       $event.returnValue = 'The view changes have not been saved.  Do you want to discard the changes and exit?';
     }
   }

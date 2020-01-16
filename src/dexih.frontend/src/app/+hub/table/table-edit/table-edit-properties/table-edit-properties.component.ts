@@ -8,7 +8,7 @@ import { HubCache, deltaTypes, securityFlags } from '../../../hub.models';
 import { eTableType, DexihConnection, ConnectionReference,
     eConnectionCategory, DexihTableColumn, eConnectionPurpose, DexihTable, eTableTypeItems } from '../../../../shared/shared.models';
 import { TypeCodes } from '../../../hub.remote.models';
-import { CancelToken } from '../../../../+auth/auth.models';
+import { CancelToken, Message } from '../../../../+auth/auth.models';
 
 @Component({
 
@@ -40,6 +40,8 @@ export class TableEditPropertiesComponent implements OnInit, OnDestroy {
     securityFlags = securityFlags;
     eTableType = eTableType;
     eTableTypeItems = eTableTypeItems;
+
+    public sqlMessage: Message;
 
     public connections: DexihConnection[];
     public connection: DexihConnection;
@@ -120,6 +122,10 @@ export class TableEditPropertiesComponent implements OnInit, OnDestroy {
             let columns = tables[0].dexihTableColumns.map(c => c.name);
             this.hubService.addHubSuccessMessage('The query was successful, and returned the following columns.  ' + columns.join(', '));
             this.runningSql = false;
-        }).catch(() => this.runningSql = false);
+        }).catch((reason) => {
+            this.runningSql = false;
+            this.sqlMessage = reason;
+            this.hubService.addHubMessage(reason);
+        });
     }
 }

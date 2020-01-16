@@ -31,11 +31,6 @@
             </div>
         </section>
 
-        <div class="m-3">
-            <!-- <dexih-message #DexihMessage></dexih-message> -->
-        </div>
-
-
         <div *ngIf="hubCache && hubCache.status == eCacheStatus.Loaded">
             <section *ngIf="!(openDelay && webSocketStatus != 'Connected') && !remoteAgent">
                 <div class="alert alert-danger m-3">

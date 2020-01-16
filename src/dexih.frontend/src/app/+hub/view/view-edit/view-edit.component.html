@@ -18,7 +18,7 @@
 			</div>
 
 			<save-button *ngIf="hubCache.canWrite" [formsService]="formsService" class="mr-1"></save-button>
-			<dexih-button-edit class="mr-1" (click)="showEdit = !showEdit" [text]="showEdit ? 'Hide Edit' : 'Edit'"></dexih-button-edit>
+			<dexih-button-edit class="mr-1" (click)="toggleEdit()" [text]="showEdit ? 'Hide Edit' : 'Edit'"></dexih-button-edit>
 			<cancel-button [formsService]="formsService"></cancel-button>
 		</ng-template>
 

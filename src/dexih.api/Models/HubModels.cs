@@ -106,6 +106,7 @@ namespace dexih.api.Models
     public class ImportTables: HubModelBase
     {
         public DexihTable[] Tables { get; set; }
+        public bool Save { get; set; }
     }
 
     public class CreateTables: HubModelBase

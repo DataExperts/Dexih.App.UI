@@ -19,8 +19,8 @@ These properties are available when the table points to a Sql Database connectio
 
 * **Reject Table Name** - This is the name of the table that will be used to deliver rows that are rejected from the primary table, via invalid validation rules.
 * **Table is shared in the catalog** - If this is selected the table data will be shared to other users based on the `share` settings for the hub.
-* **Use Sql** - This allows a Sql command to be specified for the table data.
-* **Sql Query** - (when Use Sql is selected) This is the Sql Command used to retrieve table data.
+* **Table Type** - The type of underlying Sql table.  Either table, view, or query.
+* **Sql Query** - (when table type = query is selected) The Sql Command used to retrieve table data.
 
 > ### Using Sql Queries
 > * Sql queries are database specific, and hence less portable when moving to other database platforms.
