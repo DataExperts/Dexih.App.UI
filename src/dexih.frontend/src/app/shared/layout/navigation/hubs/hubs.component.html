@@ -1,6 +1,10 @@
 <menu-parent [name]="hubStatusMessage" title="Available Hubs" iconClass="fa fa-lg fa-fw fa-life-saver" [textClass]="textClass">
     <li *ngFor="let hub of hubs | async" class="nav-item" >
-        <a class="nav-link" (click)="openHub(hub)">{{hub.name}}</a>
+        <a class="nav-link" (click)="openHub(hub)">
+            <i *ngIf="hub.hubAccess == eHubAccess.User" class="fa fa-user-secret" title="Full Access"></i>
+            <i *ngIf="hub.hubAccess == eHubAccess.ReadOnly" class="fa fa-book"  title="Read only Access"></i>
+            <i *ngIf="hub.hubAccess == eHubAccess.Public" class="fa fa-users"  title="Public Hub"></i>
+            {{hub.name}}</a>
     </li>
     <div class="dropdown-divider"></div>
     <li class="nav-item" >

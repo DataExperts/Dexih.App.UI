@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../../+auth/auth.service';
 import { HubService } from '../../../../+hub/hub.service';
-import { DexihHubAuth, User } from '../../../../+auth/auth.models';
+import { DexihHubAuth, User, eHubAccess } from '../../../../+auth/auth.models';
 import { Observable, Subscription, combineLatest} from 'rxjs';
 import { eCacheStatus } from '../../../../+hub/hub.models';
 import { HubsService } from '../../../../+hubs/hubs.service';
@@ -17,6 +17,8 @@ export class HubsComponent implements OnInit, OnDestroy {
     hubCacheStatusSubscription: Subscription;
     hubStatusMessage: string;
     user: User;
+
+    eHubAccess = eHubAccess;
 
     textClass = '';
 

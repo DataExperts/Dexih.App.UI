@@ -744,6 +744,12 @@ export class HubService implements OnInit, OnDestroy {
             this.authService.postConfirm<T>(url, data, waitMessage, confirmMessage).then(result => {
                 resolve(result);
             }).catch(reason => {
+                // reason = null is for cancel.
+                if (reason == null || typeof reason === undefined) {
+                    resolve(null);
+                    return;
+                }
+
                 this.logger.LogMessage(reason);
                 // this.addHubMessage(reason);
                 reject(reason);
@@ -757,7 +763,7 @@ export class HubService implements OnInit, OnDestroy {
             this.authService.post<T>(url, data, waitMessage).then(result => {
                 resolve(result);
             }).catch(reason => {
-                this.logger.LogMessage(reason);
+                if (reason) { this.logger.LogMessage(reason); }
                // this.addHubMessage(reason);
                 reject(reason);
             });
@@ -770,7 +776,7 @@ export class HubService implements OnInit, OnDestroy {
             this.authService.postRemote<T>(url, data, this.getRemoteAgentCurrent(), waitMessage, cancelToken).then(result => {
                 resolve(result);
             }).catch(reason => {
-                this.logger.LogMessage(reason);
+                if (reason) { this.logger.LogMessage(reason); }
                 // this.addHubMessage(reason);
                 reject(reason);
             });
@@ -940,7 +946,7 @@ export class HubService implements OnInit, OnDestroy {
             navigator.msSaveBlob(blob, filename);
         } else {
             let link = document.createElement('a');
-            if (link.download !== undefined) { // feature detection
+            if (typeof link.download !== undefined) { // feature detection
                 // Browsers that support HTML5 download attribute
                 let url = URL.createObjectURL(blob);
                 link.setAttribute('href', url);
@@ -1024,6 +1030,14 @@ export class HubService implements OnInit, OnDestroy {
             if (save) {
                 resolve(this.saveTables(importedTables));
             } else {
+                let hub = this.getHubCache();
+                importedTables.forEach(t => {
+                    t.dexihTableColumns.forEach(c => {
+                        if (c.key === 0) {
+                            c.key = hub.getNextSequence();
+                        }
+                    });
+                });
                 resolve(importedTables);
             }
         }).catch(reason => reject(reason));
@@ -1112,7 +1126,7 @@ export class HubService implements OnInit, OnDestroy {
         '(note, this action \"does not\" delete tables from the underlying database).<p></p>' +
         names +
         ' <p></p><p></p>Are you sure you want to continue?'
-        )
+        );
     }
 
     // save an updated table

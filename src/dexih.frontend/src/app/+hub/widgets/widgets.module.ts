@@ -22,6 +22,7 @@ import { InputParametersComponent } from './input-parameters/input-parameters.co
 import { InputParametersViewComponent } from './input-parameters-view/input-parameters-view.component'
 import { DashboardViewComponent } from './dashboard-view/dashboard-view.component';
 import { ListOfValuesViewComponent } from './listOfValues-view/listOfValues-view.component';
+import { DatalinkTestViewComponent } from './datalinkTest-view/datalinkTest-view.component';
 
 @NgModule({
     imports: [
@@ -50,7 +51,8 @@ import { ListOfValuesViewComponent } from './listOfValues-view/listOfValues-view
         PreviewViewComponent,
         InputParametersComponent,
         InputParametersViewComponent,
-        ListOfValuesViewComponent
+        ListOfValuesViewComponent,
+        DatalinkTestViewComponent,
     ],
     declarations: [
         DatalinkStatusComponent,
@@ -71,7 +73,8 @@ import { ListOfValuesViewComponent } from './listOfValues-view/listOfValues-view
         PreviewViewComponent,
         InputParametersComponent,
         InputParametersViewComponent,
-        ListOfValuesViewComponent
+        ListOfValuesViewComponent,
+        DatalinkTestViewComponent,
     ],
     providers: [],
 })

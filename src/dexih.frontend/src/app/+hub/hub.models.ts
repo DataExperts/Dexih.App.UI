@@ -64,6 +64,7 @@ export enum eSearchObjectType {
     Api,
     Dashboard,
     ListOfValues,
+    DatalinkTest
 }
 
 export const SearchObjectTypes = [
@@ -79,6 +80,7 @@ export const SearchObjectTypes = [
     {key: eSearchObjectType.Api, name: 'Api'},
     {key: eSearchObjectType.Dashboard, name: 'Dashboard'},
     {key: eSearchObjectType.ListOfValues, name: 'List of Values'},
+    {key: eSearchObjectType.DatalinkTest, name: 'Datalink Test'},
 ];
 
 export class SearchResult {
@@ -550,6 +552,11 @@ export class HubCache {
         if (searchAll || searchObject === eSearchObjectType.ListOfValues) {
             this.hub.dexihListOfValues.forEach(d => {
                 this.searchItem(search, d, null, eSearchObjectType.ListOfValues, results);
+            });
+        }
+        if (searchAll || searchObject === eSearchObjectType.DatalinkTest) {
+            this.hub.dexihDatalinkTests.forEach(d => {
+                this.searchItem(search, d, null, eSearchObjectType.DatalinkTest, results);
             });
         }
         return results;

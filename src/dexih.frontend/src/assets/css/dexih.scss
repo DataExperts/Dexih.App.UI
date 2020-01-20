@@ -1,5 +1,10 @@
 @import "_variables";
 
+/* override existing bootstrap nav-link with a pointer (hand) */
+.nav-link {
+    cursor: pointer;
+}
+
 .btn-group-xs > .btn, .btn-xs {
     padding  : .25rem .4rem;
     font-size  : .875rem;

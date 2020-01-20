@@ -51,7 +51,7 @@ export class DexihHubAuth {
     public sharedAccess: eSharedAccess = eSharedAccess.Registered;
     public expiryDate: Date;
 
-    public dexihHubUser: Array<DexihHubUser>;
+    public dexihHubUsers: Array<DexihHubUser>;
 
     public createDate: string;
     public updateDate: string;
@@ -184,6 +184,9 @@ export class Message {
 //     public testMessage: string;
 // }
 
+export enum eHubAccess {
+    All, User, ReadOnly, Public
+}
 
 export enum eFileStatus {
     Waiting = <any>'Waiting',

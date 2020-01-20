@@ -39,6 +39,7 @@
 							<api-view *ngSwitchCase="eSearchObjectType.Api" [api]="searchResult.object"></api-view>
 							<dashboard-view *ngSwitchCase="eSearchObjectType.Dashboard" [dashboard]="searchResult.object"></dashboard-view>
 							<listOfValues-view *ngSwitchCase="eSearchObjectType.ListOfValues" [listOfValues]="searchResult.object"></listOfValues-view>
+							<datalinkTest-view *ngSwitchCase="eSearchObjectType.DatalinkTest" [datalinkTest]="searchResult.object"></datalinkTest-view>
 						</div>
 					</li>
 				</ul>

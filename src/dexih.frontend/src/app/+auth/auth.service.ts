@@ -7,14 +7,14 @@ import { timeout, filter, first, shareReplay, take } from 'rxjs/operators'
 import { eLogLevel, LogFactory } from '../../logging';
 import {
     DexihHubAuth, ExternalLoginResult, Message,
-    User, UserLoginInfo, ExternalLogin, FileHandler, eFileStatus, RemoteToken, PromiseWithCancel, CancelToken
+    User, UserLoginInfo, ExternalLogin, FileHandler, eFileStatus, RemoteToken, PromiseWithCancel, CancelToken, eHubAccess
 } from './auth.models';
 import { AuthWebSocket } from './auth.websocket';
 import { UserAgentApplication, AuthResponse, CacheLocation } from 'msal';
 import { DexihModalComponent } from 'dexih-ngx-components';
 import { Location } from '@angular/common';
 import { DexihRemoteAgent, DexihActiveAgent, DownloadUrl, CacheManager, eClientCommand, eDownloadUrlType, eLoginProvider,
-    eTypeCode, ManagedTask, eManagedTaskStatus } from '../shared/shared.models';
+    eTypeCode, ManagedTask, eManagedTaskStatus, ePermission, eSharedAccess } from '../shared/shared.models';
 
 declare var gapi: any;
 
@@ -157,6 +157,7 @@ export class AuthService implements OnDestroy {
                                 this.logger.LogC(() => `hub-update: ${data.value}`, eLogLevel.Debug);
 
                                 let hub: DexihHubAuth = data.value;
+                                this.setHubAccess(hub);
                                 let hubs = this._hubs.getValue();
                                 if (hubs) {
                                     let previousHub = hubs.find(c => c.hubKey === hub.hubKey);
@@ -328,6 +329,16 @@ export class AuthService implements OnDestroy {
     //     }
     //     return type;
     // }
+
+    setHubAccess(hub: DexihHubAuth) {
+        if (hub.dexihHubUsers.findIndex(c => c.permission === ePermission.Owner || c.permission === ePermission.User) >= 0) {
+            hub['hubAccess'] = eHubAccess.User;
+          } else if (hub.dexihHubUsers.findIndex(c => c.permission === ePermission.FullReader) >= 0) {
+            hub['hubAccess'] = eHubAccess.ReadOnly;
+          } else if (hub.sharedAccess === eSharedAccess.Public || hub.sharedAccess === eSharedAccess.Registered) {
+            hub['hubAccess'] = eHubAccess.Public;
+          }
+    }
 
     // set available remoteAgents
     getRemoteAgentsObservable(): Observable<DexihRemoteAgent[]> {
@@ -1629,7 +1640,11 @@ export class AuthService implements OnDestroy {
 
     refreshHubs(): void {
         this.post<DexihHubAuth[]>('/api/Account/GetAuthorizedHubs', null, 'Getting authorized hubs...').then(result => {
-            this._hubs.next(result.sort((a, b) => a.name.toLocaleLowerCase() > b.name.toLocaleLowerCase() ? 1 : -1));
+            let hubs = result.sort((a, b) => a.name.toLocaleLowerCase() > b.name.toLocaleLowerCase() ? 1 : -1);
+            hubs.forEach(hub => {
+                this.setHubAccess(hub);
+            });
+            this._hubs.next(hubs);
         }).catch(reason => {
             this.logger.LogC(() => `refreshHubs error:${reason.message}`, eLogLevel.Error);
 
