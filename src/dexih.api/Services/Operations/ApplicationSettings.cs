@@ -43,6 +43,7 @@ namespace dexih.api.Services.Operations
 
         public bool CreateRepository { get; set; } = false;
 
+        public bool EmailErrors { get; set; } = false;
         public bool UseResponseCompression { get; set; } = true;
 
         private DateTime _lastApiCall = DateTime.MinValue;

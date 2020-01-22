@@ -44,6 +44,7 @@ namespace dexih.api.Controllers
             IWebHostEnvironment webHostEnvironment,
             IRemoteAgents remoteServers,
             ILoggerFactory loggerFactory,
+            ErrorLogger errorLogger,
             ApplicationSettings applicationSettings)
         {
             _operations = operations;
@@ -53,6 +54,7 @@ namespace dexih.api.Controllers
             _distributedCache = distributedCache;
             _applicationSettings = applicationSettings;
             _webHostEnvironment = webHostEnvironment;
+            _errorLogger = errorLogger;
         }
 
         private readonly IDexihOperations _operations;
@@ -62,6 +64,7 @@ namespace dexih.api.Controllers
         private readonly IDistributedCache _distributedCache;
         private readonly ApplicationSettings _applicationSettings;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly ErrorLogger _errorLogger;
 
         // POST: /Account/RemoteLogin
         // Used by the job server to retrieve a Remote Communication guid.
@@ -509,7 +512,7 @@ namespace dexih.api.Controllers
                     if (challenge.Error != null)
                     {
                         var message = $"Error running letsEncrypt challenge.  {challenge.Error.Detail}";
-                        _logger.LogError(message);
+                        _errorLogger.LogEvent(message);
                         throw new RemoteAgentException(message);
                     }
 
@@ -519,9 +522,22 @@ namespace dexih.api.Controllers
                         var a = await authz.Resource();
                         if (AuthorizationStatus.Invalid == a.Status)
                         {
-                            var message = $"The authorization status is invalid.  Details:{challenge.Error?.Detail??"none"}";
-                            _logger.LogError(message);
-                            throw new RemoteAgentException(message);
+                            if (a.Challenges != null)
+                            {
+                                foreach (var c in a.Challenges)
+                                {
+                                    var message =
+                                        $"Error running letsEncrypt challenge.  The authorization status is invalid.  Details:{c.Error?.Detail ?? "none"}";
+                                    _errorLogger.LogEvent(message);
+                                    throw new RemoteAgentException(message);
+                                }
+                            }
+                            else
+                            {
+                                var message = $"Error running letsEncrypt challenge.  Details:{challenge.Error?.Detail??"none"}";
+                                _errorLogger.LogEvent(message);
+                                throw new RemoteAgentException(message);
+                            }
                         }
 
                         var status = a.Status ?? AuthorizationStatus.Pending;

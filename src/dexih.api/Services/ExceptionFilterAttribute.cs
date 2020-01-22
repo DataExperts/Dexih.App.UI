@@ -1,6 +1,7 @@
 using Dexih.Utils.MessageHelpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Logging;
 
 namespace dexih.api.Services
 {
@@ -17,6 +18,10 @@ namespace dexih.api.Services
             var returnValue = new ReturnValue(false, msg, context.Exception);
 #endif
 
+            var errorLogger = (ErrorLogger)context.HttpContext.RequestServices.GetService(typeof(ErrorLogger));
+            var message = $"There was an error at {context.ActionDescriptor.DisplayName}.  {returnValue.Message} ";
+            errorLogger.LogEvent(context.Exception, message);
+            
             // always return a JSON result
             context.HttpContext.Response.ContentType = "application/json";
             context.HttpContext.Response.StatusCode = 400;
