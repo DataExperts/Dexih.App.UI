@@ -459,7 +459,7 @@ export class AuthService implements OnDestroy {
                     resolve(result);
                 }).catch(reason => {
                     this.removeWaitMessage(messageKey);
-                    reject(reason);
+                    reject(`The request failed to the remote agent at ${url} for reason: ${reason}`);
                 });
             }).catch(reason => {
                 this.removeWaitMessage(messageKey);
