@@ -21,6 +21,7 @@ import { ChartBuilderModule } from './ui/chartBuilder/chart-builder.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { GridsterModule} from 'angular-gridster2';
 import { AngularResizedEventModule } from 'angular-resize-event';
+import { DexihSupportOptionsModule } from './ui/supportOptions/support-options.module'
 
 @NgModule({
   imports: [
@@ -42,7 +43,8 @@ import { AngularResizedEventModule } from 'angular-resize-event';
     ChartBuilderModule,
     NgxChartsModule,
     GridsterModule,
-    AngularResizedEventModule
+    AngularResizedEventModule,
+    DexihSupportOptionsModule
   ],
   declarations: [
   ],
@@ -64,7 +66,8 @@ import { AngularResizedEventModule } from 'angular-resize-event';
     ChartBuilderModule,
     NgxChartsModule,
     GridsterModule,
-    AngularResizedEventModule
+    AngularResizedEventModule,
+    DexihSupportOptionsModule
   ],
   providers: [
     LayoutService

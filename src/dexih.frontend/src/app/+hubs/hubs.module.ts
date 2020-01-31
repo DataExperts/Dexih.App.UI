@@ -21,6 +21,9 @@ import { RemoteAgentDownloadComponent } from './remoteAgents/remoteAgent-downloa
 import { RemoteAgentEditComponent } from './remoteAgents/remoteAgent-edit';
 import { RemoteAgentTokenComponent} from './remoteAgents/remote-agent-token/remote-agent-token.component';
 import { InputParametersViewComponent } from './hubs-sharedData/input-parameters-view/input-parameters-view.component';
+import { IssueEditComponent, IssueIndexComponent } from './support'
+
+
 @NgModule({
     imports: [
         SharedModule,
@@ -44,7 +47,8 @@ import { InputParametersViewComponent } from './hubs-sharedData/input-parameters
         RemoteAgentDownloadComponent,
         RemoteAgentEditComponent,
         HelpComponent,
-        RemoteAgentTokenComponent
+        RemoteAgentTokenComponent,
+        IssueEditComponent, IssueIndexComponent
     ],
     providers: [HubsService],
     exports: []

@@ -55,6 +55,7 @@ export class DexihHelpComponent implements OnInit, OnChanges, OnDestroy {
                             return this.hubKey;
                     }
                 });
+
                 // data = this.replaceAll(data, '{{HUBKEY}}', this.hubKey)
                 // this.data = data;
             });

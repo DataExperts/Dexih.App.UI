@@ -1,5 +1,5 @@
 
-<div class="container-fluid">
+<div class="container">
 	<dexih-message #DexihMessage></dexih-message>
 
 	<dexih-widget-vertical>
@@ -11,10 +11,17 @@
 
 		<form *ngIf="formsService.currentForm"  [formGroup]="formsService.currentForm">
 			<fieldset>
-				<section>
-					<form-input label="Email Address" formControlName="email" placeholder="Enter the email." iconClass="fa fa-list" >
-					</form-input>
-				</section>
+				<div class="form-row">
+					<section class="col-md-6">
+						<form-input label="User Name" formControlName="userName" placeholder="Enter the user name." iconClass="fa fa-list" >
+						</form-input>
+					</section>
+					<section class="col-md-6">
+						<form-input label="Email Address" formControlName="email" placeholder="Enter the email." iconClass="fa fa-list" >
+						</form-input>
+					</section>
+		
+				</div>
 
 				<div class="form-row">
 					<section class="form-group col-md-6">
@@ -29,6 +36,16 @@
 
 				<section>
 					<form-checkbox label="I want to receive news and special offers" formControlName="subscription" >
+					</form-checkbox>
+				</section>
+
+				<section>
+					<form-checkbox label="I want to receive private notifications from other users." formControlName="notifyPrivateMessage" >
+					</form-checkbox>
+				</section>
+
+				<section>
+					<form-checkbox label="I want to receive critical support and issue updates." formControlName="notifySupportMessage" >
 					</form-checkbox>
 				</section>
 

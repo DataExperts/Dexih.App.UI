@@ -20,7 +20,7 @@
                                         <form-input formControlName="searchString" placeholder="Search..." iconClass="fa fa-search">
                                         </form-input>
                                     </section>
-                                    <section class="col">
+                                    <section *ngIf="hubs" class="col">
                                         <form-tags-dropdown labelLeft="Hubs" formControlName="hubKeys" [items]="hubs"                                            itemKey="hubKey" itemName="name" [enableAddAll]="true">
                                         </form-tags-dropdown>
                                     </section>
@@ -45,7 +45,7 @@
                 </div>
                 <div class="input-group mt-1 pull-right">
                     <download-button class="ml-1" [autoCompact]="false" (download)="downloadData([item], true, $event)"></download-button>
-                    <dexih-button-edit class="ml-1" [autoCompact]="false" (click)="edit(item)"></dexih-button-edit>
+                    <dexih-button-edit *ngIf="hubKeys?.indexOf(item.hubKey)>=0" class="ml-1" [autoCompact]="false" (click)="edit(item)"></dexih-button-edit>
                 </div>
             </ng-template>
 

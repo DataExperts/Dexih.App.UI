@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DexihDatalink } from '../../../shared/shared.models';
+import { DexihDatalink, eDatalinkType } from '../../../shared/shared.models';
 
 @Component({
     selector: 'datalink-view',
@@ -8,6 +8,8 @@ import { DexihDatalink } from '../../../shared/shared.models';
 
 export class DatalinkViewComponent implements OnInit {
     @Input() datalink: DexihDatalink;
+
+    eDatalinkType = eDatalinkType;
 
     constructor() { }
 

@@ -4,7 +4,7 @@
         <li *ngIf="hubCache.canWrite"><a class="dropdown-item" [routerLink]="['datalinkTest-new']" title="Create a new datalink test."><i class="fa fa-file-o"></i> New</a></li>
         <ng-template [ngIf]="datalinkTests.length > 0">
             <li *ngIf="showEdit && datalinkTests.length == 1">
-                <a class="dropdown-item" [routerLink]="['datalinkTest-edit', 'edit', datalinkTests[0].key]" queryParamsHandling="merge"><i class="fa fa-edit"></i> Edit</a>
+                <a class="dropdown-item" [routerLink]="['datalinkTest-edit', datalinkTests[0].key]" queryParamsHandling="merge"><i class="fa fa-edit"></i> Edit</a>
             </li>
             <li *ngIf="hubCache.canWrite">
                 <a class="dropdown-item" [routerLink]="['datalinkTest-edit', 'copy', datalinkTests[0].key]" queryParamsHandling="merge" title="Copy the datalink test.">

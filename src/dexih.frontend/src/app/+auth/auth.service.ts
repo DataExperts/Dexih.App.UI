@@ -14,7 +14,7 @@ import { UserAgentApplication, AuthResponse, CacheLocation } from 'msal';
 import { DexihModalComponent } from 'dexih-ngx-components';
 import { Location } from '@angular/common';
 import { DexihRemoteAgent, DexihActiveAgent, DownloadUrl, CacheManager, eClientCommand, eDownloadUrlType, eLoginProvider,
-    eTypeCode, ManagedTask, eManagedTaskStatus, ePermission, eSharedAccess } from '../shared/shared.models';
+    eTypeCode, ManagedTask, eManagedTaskStatus, ePermission, eSharedAccess, DexihIssue } from '../shared/shared.models';
 
 declare var gapi: any;
 
@@ -1520,14 +1520,17 @@ export class AuthService implements OnDestroy {
         });
     }
 
-    updateUserDetails(firstName: string, lastName: string, subscription: boolean): Promise<boolean> {
+    updateUserDetails(user: User): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             // call the login service to reset the password.
             this.post('/api/Account/UpdateDetails',
                 {
-                    firstName: firstName,
-                    lastName: lastName,
-                    subscription: subscription
+                    userName: user.userName,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    subscription: user.subscription,
+                    notifyPrivateMessage: user.notifyPrivateMessage,
+                    notifySupportMessage: user.notifySupportMessage
                 }, 'Updating user details...').then(() => {
                     this.refreshUser();
                     resolve(true);
@@ -1663,6 +1666,22 @@ export class AuthService implements OnDestroy {
 
     saveHub(hub: DexihHubAuth): Promise<DexihHubAuth> {
         return this.post<DexihHubAuth>('/api/Account/SaveHub', hub, 'Saving hub details...');
+    }
+
+    saveIssue(issue: DexihIssue): Promise<DexihIssue> {
+        return this.post<DexihIssue>('/api/Account/SaveIssue', issue, 'Creating issue ... ');
+    }
+
+    getIssue(issueKey: number, cancelToken: CancelToken): Promise<DexihIssue> {
+        return this.post<DexihIssue>('/api/Account/GetIssue', {issueKey: issueKey}, 'Getting issues ... ');
+    }
+
+    getIssues(cancelToken: CancelToken): Promise<DexihIssue[]> {
+        return this.get<DexihIssue[]>('/api/Account/GetIssues', 'Getting issues ... ', false, cancelToken);
+    }
+
+    addIssueComment(issueKey: number, comment: string) {
+        return this.post<DexihIssue>('/api/Account/AddIssueComment', {issueKey: issueKey, comment: comment}, 'Getting issues ... ');
     }
 
     hubNameExists(hubKey: number, hubName: string): boolean {

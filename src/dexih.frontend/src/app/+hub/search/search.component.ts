@@ -45,10 +45,15 @@ export class SearchComponent implements OnInit, OnDestroy {
 
                 if (!this.isFirst) {
                     this.isFirst = false;
+                    let searchObject = +params['searchObject'];
+                    if (!searchObject) {
+                        searchObject = 0;
+                    }
+
                     this.searchForm = this.fb.group({
                         'searchString': [params['search'], [
                         ]],
-                        'searchObject': [+params['searchObject'], [
+                        'searchObject': [searchObject, [
                         ]],
                     });
 

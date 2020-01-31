@@ -19,10 +19,12 @@ using dexih.api.Services.Operations;
 using Microsoft.Extensions.Logging;
 using dexih.api.Services.Remote;
 using dexih.functions;
+using dexih.functions.BuiltIn;
 using dexih.functions.Parameter;
 using dexih.functions.Query;
 using dexih.remote.operations;
 using Dexih.Utils.DataType;
+using OfficeOpenXml.FormulaParsing.Excel.Functions;
 
 
 namespace dexih.api.Controllers
@@ -128,19 +130,27 @@ namespace dexih.api.Controllers
 			var newUsers = new List<ApplicationUser>();
 			var inviteUsers = new List<ApplicationUser>();
 			var inviteQuota = appUser.InviteQuota;
+			
+			var funcs = new ValidationFunctions();
 
 			foreach (var email in userPermissions.Emails)
 			{
-				var user = await _operations.RepositoryManager.GetUserFromEmailAsync(email, cancellationToken);
+				var user = await _operations.RepositoryManager.GetUserFromLoginAsync(email, cancellationToken);
 				var newUser = false;
 
 				// if the user doesn't exist, create a dummy user entry.
 				if (user == null)
 				{
+					if (!funcs.IsValidEmail(email))
+					{
+						throw new HubControllerException(
+							$"The email {email} is not a valid email.");
+					}
+					
 					user = new ApplicationUser()
 					{
 						Email = email,
-						UserName = email,
+						UserName = "",
 						IsInvited = false,
 						HubQuota = 0,
 						InviteQuota = 0
@@ -262,7 +272,7 @@ namespace dexih.api.Controllers
 
 			foreach (var email in userPermissions.Emails)
 			{
-				var user = await _operations.RepositoryManager.GetUserFromEmailAsync(email, cancellationToken);
+				var user = await _operations.RepositoryManager.GetUserFromLoginAsync(email, cancellationToken);
 
 				// if the user doesn't exist, create a dummy user entry.
 				if (user != null)

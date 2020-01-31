@@ -50,6 +50,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
       const registerForm = this.fb.group({
         'provider': [{value: '', disabled: true}, []],
+        'userName': ['', [
+          Validators.required,
+        ]],
         'email': [email, [
           Validators.required,
           Validators.email

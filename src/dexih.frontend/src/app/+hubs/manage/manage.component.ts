@@ -44,6 +44,7 @@ export class ManageComponent implements OnInit, OnDestroy {
       this.formsService.createDefault(user, new User());
       this.updateLogins();
       this.formsService.currentForm.controls.email.disable();
+      // this.formsService.currentForm.controls.userName.disable();
 
       this.passwordForm = this.fb.group({
         'password': ['', [
@@ -102,7 +103,7 @@ export class ManageComponent implements OnInit, OnDestroy {
   save() {
     const user: User = this.formsService.currentForm.value;
 
-    this.authService.updateUserDetails(user.firstName, user.lastName, user.subscription).then(c => {
+    this.authService.updateUserDetails(user).then(c => {
       if (c) {
         this.dexihMessage.addSuccessMessage('Details updated successfully');
       } else {

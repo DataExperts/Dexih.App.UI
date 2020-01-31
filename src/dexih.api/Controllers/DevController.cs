@@ -71,10 +71,9 @@ namespace dexih.api.Controllers
 
                     foreach (var type in types)
                     {
-                        var attribute = type.GetCustomAttribute<MessagePack.MessagePackObjectAttribute>();
-                        var attribute2 = type.GetCustomAttribute<DataContractAttribute>();
+                        var attribute = type.GetCustomAttribute<DataContractAttribute>();
 
-                        if ((attribute != null || attribute2 != null) && !type.IsAbstract)
+                        if (attribute != null && !type.IsAbstract)
                         {
                             try
                             {
@@ -195,13 +194,14 @@ namespace dexih.api.Controllers
                 js.AppendLine("export const " + LowerFirst(type.Name) + "Items = [");
                 if ( Convert.ToInt32(type.GetEnumValues().GetValue(0)) == 1)
                 {
-                    js.AppendLine($" {{key: 0, name: 'Unknown', description: 'Unknown'}},");
-                   
+                    js.AppendLine($" {{key: 0, name: 'Unknown'}},");
                 }
+                
                 foreach (var field in type.GetFields(BindingFlags.Public | BindingFlags.Static))
                 {
                     var desc = field.GetCustomAttribute<DescriptionAttribute>();
-                    js.AppendLine($" {{key: {enumName}.{field.Name}, name: '{field.Name}', description: '{desc?.Description}'}},");
+                    var descString = desc == null ? "" : $", description: '{desc?.Description}'";
+                    js.AppendLine($" {{key: {enumName}.{field.Name}, name: '{field.Name}'{descString}}},");
                 }
 
                 js.AppendLine("]");

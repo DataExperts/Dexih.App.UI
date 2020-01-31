@@ -17,6 +17,8 @@ export class User {
         public emailConfirmed = false;
         public isInvited = false;
         public inviteQuota = 0;
+        public notifyPrivateMessage = true;
+        public notifySupportMessage = true;
 
         // used when resetting passwords.
         public newPassword = '';

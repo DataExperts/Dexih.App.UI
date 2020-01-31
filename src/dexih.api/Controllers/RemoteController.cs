@@ -78,7 +78,7 @@ namespace dexih.api.Controllers
                 {
 					_logger.LogInformation(LoggingEvents.RemoteLogin, "Login - Remote Agent Login {user}, {servername}, remoteAgentId {remoteAgentId}, version {version}", User, remoteSettings.AppSettings.User, remoteSettings.AppSettings.Name, remoteSettings.Runtime.Version);
 
-					var user = await _operations.RepositoryManager.GetUserFromEmailAsync(remoteSettings.AppSettings.User, cancellationToken);
+					var user = await _operations.RepositoryManager.GetUserFromLoginAsync(remoteSettings.AppSettings.User, cancellationToken);
                     if (user == null)
                     {
                         _logger.LogWarning(LoggingEvents.RemoteLogin, "Login - Invalid remote login attempt using Email: " + User);

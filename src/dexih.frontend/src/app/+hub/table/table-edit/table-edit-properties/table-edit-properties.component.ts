@@ -17,6 +17,7 @@ import { CancelToken, Message } from '../../../../+auth/auth.models';
 })
 export class TableEditPropertiesComponent implements OnInit, OnDestroy {
     @Input() public formsService: HubFormsService;
+    @Input() public isExpanded = true;
 
     // private connection: DexihConnection;
 

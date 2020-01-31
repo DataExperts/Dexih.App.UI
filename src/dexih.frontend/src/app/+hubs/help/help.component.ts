@@ -31,7 +31,7 @@ export class HelpComponent implements OnInit, OnDestroy {
             if (path) {
                 this.path = '/assets/help/' + path;
             } else {
-                this.path = '/assets/help/intro/getting _started.md'
+                this.path = '/assets/help/intro/getting_started.md'
             }
         });
 

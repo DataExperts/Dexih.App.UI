@@ -32,7 +32,7 @@ ngOnInit() {
       if (path) {
           this.path = '/assets/help/' + path;
       } else {
-          this.path = '/assets/help/intro/getting _started.md'
+          this.path = '/assets/help/intro/getting_started.md'
       }
 
       this.getData(this.path);

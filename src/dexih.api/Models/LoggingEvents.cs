@@ -119,9 +119,12 @@
 		public const int HubDeleteListOfValues = 4055;
 		public const int HubSaveListOfValues = 4056;
 		public const int HubPreviewListOfValues = 4057;
-	
 
         public const int RemoteLogin = 5000;
+        public const int SaveIssue = 5001;
+        public const int GetIssues = 5002;
+        public const int GetIssue = 5003;
+        public const int AddIssueComment = 5004;
 
 	}
 }

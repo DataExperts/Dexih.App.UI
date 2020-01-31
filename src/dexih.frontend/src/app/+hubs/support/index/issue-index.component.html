@@ -1,0 +1,32 @@
+<div class="container-fluid">
+    <dexih-widget title="Raised Issues" 
+        iconClass="fa fa-lg fa-fw fa-life-saver" 
+		[showCloseButton]="true"
+		(close)="close()"
+    >
+<support-options [isExpanded]="true"></support-options>
+
+
+<dexih-widget-section title="Current Support Issues">
+		<dexih-table 
+			[enableMultiSelect]="true"
+			[columns]="columns"
+			[dataObservable]="tableData"
+			(rowClick)="edit($event)"
+			>
+				<ng-template #selectedItemAction select="selectedItemAction" let-item="item">
+					<dexih-button-edit class="mr-1" [routerLink]="['edit', item.key]" queryParamsHandling preserveFragment class="mr-1"></dexih-button-edit>
+				</ng-template>
+
+				<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+					<dexih-button-delete (click)="delete(items)"></dexih-button-delete>
+				</ng-template>
+
+				<ng-template #actions let-items="items">
+					<dexih-button-new [routerLink]="['new']"></dexih-button-new>
+				</ng-template>
+		</dexih-table>
+	</dexih-widget-section>
+    </dexih-widget>
+</div>
+

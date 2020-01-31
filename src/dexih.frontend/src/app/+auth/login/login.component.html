@@ -23,8 +23,8 @@
 			<div class="card-body">
 				<fieldset>
 					<section>
-						<form-input [disabled]="loginType != eLoginProvider.Dexih" label="E-mail" [(ngModel)]="user.email" name="email" iconClass="fa fa-user txt-color-teal" title="Please enter your email address"
-						 placeholder="E-mail...">
+						<form-input [disabled]="loginType != eLoginProvider.Dexih" label="Login" [(ngModel)]="user.email" name="email" iconClass="fa fa-user txt-color-teal" title="Please enter your user name or email address"
+						 placeholder="Login">
 						</form-input>
 					</section>
 					<section *ngIf="loginType == eLoginProvider.Dexih">

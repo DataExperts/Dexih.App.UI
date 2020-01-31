@@ -12,6 +12,8 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'terms', component: TermsComponent },
+  { path: 'privacy', redirectTo: '/help?path=policies%2Fprivacy.md', pathMatch: 'full'},
+  { path: 'unsubscribe', redirectTo: '/hubs/index/manage', pathMatch: 'full' },
   { path: 'forgot-password', component: ForgotComponent },
   { path: 'locked', component: LockedComponent },
   { path: 'notInvited', component: NotInvitedComponent },

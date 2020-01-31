@@ -32,6 +32,11 @@
             </section>
 
           <section>
+            <form-input label="User Name" formControlName="userName" placeholder="User Name" note="The user name that can be seen by other users." iconClass="fa fa-user-o" [errors]="formsService.formErrors.userName">
+            </form-input>
+          </section>
+
+          <section>
             <form-input label="Email Address" formControlName="email" placeholder="Email address" iconClass="fa fa-envelope" [errors]="formsService.formErrors.email">
             </form-input>
           </section>

@@ -10,7 +10,7 @@ export interface CanComponentDeactivate {
 export class ItemEditGuard implements CanDeactivate<CanComponentDeactivate> {
 
   canDeactivate(component: CanComponentDeactivate) {
-    return component.canDeactivate ? component.canDeactivate() : true;
+    return component && component.canDeactivate ? component.canDeactivate() : true;
   }
 
 }

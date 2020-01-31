@@ -106,7 +106,7 @@ export class TableIndexComponent implements OnInit, OnDestroy {
                     (!this.connectionKey || table.connectionKey === this.connectionKey)
                 ) {
                     let name: string;
-                    if (table.useQuery) {
+                    if (table.tableType === eTableType.Query) {
                         name = '(Sql Query)';
                     } else {
                         if (table.schema) {
@@ -117,7 +117,7 @@ export class TableIndexComponent implements OnInit, OnDestroy {
                     }
 
                     let tableName;
-                    if (table.name === table.logicalName) {
+                    if (this.hubCache.defaultTableLogicalName(table.schema, table.name) === table.logicalName) {
                         tableName = table.logicalName
                     } else {
                         tableName = `${table.logicalName} (${table.name})`

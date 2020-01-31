@@ -14,6 +14,7 @@ import { HelpComponent } from './help';
 import { RemoteAgentDownloadComponent } from './remoteAgents/remoteAgent-download';
 import { RemoteAgentEditComponent } from './remoteAgents/remoteAgent-edit';
 import { RemoteAgentTokenComponent } from './remoteAgents/remote-agent-token/remote-agent-token.component';
+import {IssueEditComponent, IssueIndexComponent } from './support'
 
 const hubsView: Routes = [
     { path: '', component: HubIndexComponent, data: { pageTitle: 'Hubs View' } },
@@ -37,6 +38,11 @@ const baseRoutes: Routes = [
         { path: '', component: NotificationsIndexComponent, data: { pageTitle: 'Notifications' } },
         { path: 'view/:reference', component: NotificationViewComponent, data: { pageTitle: 'Notification' } },
     ] },
+    { path: 'support', data: { pageTitle: 'Issues' }, children: [
+        { path: '', component: IssueIndexComponent, data: { pageTitle: 'Issues' } },
+        { path: 'new', component: IssueEditComponent, data: { action: 'new', pageTitle: 'Create' } },
+        { path: 'edit/:issueKey', component: IssueEditComponent, data: { action: 'edit', pageTitle: 'Edit' } },
+    ] },
     { path: 'agents', data: { pageTitle: 'Remote Agents' }, children: [
         { path: '', component: RemoteAgentsComponent, data: { pageTitle: 'Remote Agents' } },
         { path: 'edit/:remoteAgentKey', component: RemoteAgentEditComponent, data: { pageTitle: 'Remote Edit' } },
@@ -44,7 +50,7 @@ const baseRoutes: Routes = [
         { path: 'token-new', component: RemoteAgentTokenComponent, data: {action: 'New', pageTitle: 'New Token'}},
         { path: 'token-renew/:remoteAgentKey', component: RemoteAgentTokenComponent, data: {action: 'Renew', pageTitle: 'Renew Token'}}
     ] } ,
-    { path: 'help', component: HelpComponent, data: { pageTitle: 'Getting Started' } },
+    { path: 'help', component: HelpComponent, data: { pageTitle: 'Help' } },
     { path: '', children: hubsView}
 ];
 

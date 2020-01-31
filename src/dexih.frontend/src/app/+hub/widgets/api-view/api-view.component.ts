@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DexihApi } from '../../../shared/shared.models';
+import { DexihApi, eSourceType } from '../../../shared/shared.models';
 
 @Component({
     selector: 'api-view',
@@ -9,6 +9,8 @@ import { DexihApi } from '../../../shared/shared.models';
 export class ApiViewComponent implements OnInit {
     @Input() api: DexihApi;
 
+    eSourceType = eSourceType;
+    
     constructor() { }
 
     ngOnInit() { }

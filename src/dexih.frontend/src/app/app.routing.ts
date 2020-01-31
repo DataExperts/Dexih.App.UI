@@ -13,6 +13,10 @@ export const routes: Routes = [
         component: MainLayoutComponent, loadChildren: () => import('./+hub/hub.module').then(m => m.HubModule), data: { pageTitle: 'Hub' } },
     { path: 'auth', component: AuthLayoutComponent, loadChildren: () => import('./+auth/auth.module').then(m => m.AuthModule) },
 
+    { path: 'terms', redirectTo: '/auth/terms', pathMatch: 'full'},
+    { path: 'privacy', redirectTo: '/help?path=policies%2Fprivacy.md', pathMatch: 'full'},
+    { path: 'unsubscribe', redirectTo: '/hubs/index/manage', pathMatch: 'full' },
+
     { path: '**', redirectTo: 'hubs' }
     //
 ];

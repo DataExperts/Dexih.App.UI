@@ -27,11 +27,12 @@ The Api "Status" column will show the available Url's for accessing the API.  De
 The Api has the following format:
 
 ```
-https://{url}/{ApiKey}?i={json}&q={json}&t={timeout}&r={max rows}
+https://{url}/{ApiKey}?i={json}&i={json}&q={json}&t={timeout}&r={max rows}
 ```
 
 * ApiKey - The Api Key is reset if the Api is deactivated/reactivated. 
-* i - Input Column values.  Input columns are columns specified as input on a datalink, and are fed into the data link as an input parameter.
+* i - Input Column values.  Input columns are columns specified as input on a datalink, and are fed into the datalink as an input parameter.
+* p - Input parameters are fed into the datalink.
 * q - Query/Filter Columns.  The filter columns are applied to the final output of the datalink or table data.
 * t - Timeout in seconds.
 * r - Maximum rows to return.

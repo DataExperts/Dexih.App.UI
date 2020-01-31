@@ -16,7 +16,7 @@ export class ManageUsersIndexComponent implements OnInit, OnDestroy {
   @ViewChild('DexihMessage', { static: true }) public dexihMessage: DexihMessageComponent;
 
     columns = [
-        { name: 'email', title: 'Email', format: ''},
+        { name: 'userName', title: 'User Name', format: ''},
         { name: 'firstName', title: 'First Name', format: ''},
         { name: 'lastName', title: 'Last Name', format: ''},
         { name: 'permission', title: 'Permission', enum: ePermission, format: 'Enum'}
@@ -52,12 +52,12 @@ export class ManageUsersIndexComponent implements OnInit, OnDestroy {
     }
 
     setPermission(permission: ePermission, users: Array<UserAuthorization>) {
-        const emails = users.map(c => c.email);
+        const userNames = users.map(c => c.userName);
 
         this.authService.confirmDialog('Confirm Permission Change',
-            `This action will change the selected user(s) hub permission to ${permission}.  Proceed?`).then(confirm => {
+            `This action will change the selected user(s) hub permission to ${ePermission[this.permission]}.  Proceed?`).then(confirm => {
                 if (confirm) {
-                    this.hubService.setUserPermissions(emails, permission, false).then(result => {
+                    this.hubService.setUserPermissions(userNames, permission, false).then(result => {
                         this.dexihMessage.addSuccessMessage('The specified user(s) permission have been updated.');
                         this.refreshUsers();
                     });
@@ -83,7 +83,7 @@ export class ManageUsersIndexComponent implements OnInit, OnDestroy {
         if (this.emails.length > 0 && this.permission) {
             this.authService.confirmDialog('Add Users',
             // tslint:disable-next-line:max-line-length
-            `This action will added users with the specified emails to this hub with permission ${this.permission}.  Proceed?`).then(confirm => {
+            `This action will added users with the specified emails to this hub with permission ${ePermission[this.permission]}.  Proceed?`).then(confirm => {
                 if (confirm) {
                     this.hubService.setUserPermissions(this.emails, this.permission, this.sendInvites).then(result => {
                         this.emails = [];

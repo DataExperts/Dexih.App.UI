@@ -16,6 +16,21 @@ export class ApiData {
    }
    
    export class ApplicationUser {
+    public id: string = '0d9f2394-cb3d-4a3e-92e2-907ce940b811';
+    public email: string = null;
+    public concurrencyStamp: string = null;
+    public emailConfirmed: boolean = false;
+    public lockoutEnabled: boolean = false;
+    public lockoutEnd: any = null;
+    public normalizedEmail: string = null;
+    public passwordHash: string = null;
+    public phoneNumber: string = null;
+    public securityStamp: string = '555832bc-ad2f-48e8-af40-8e5379074bdd';
+    public userName: string = null;
+    public accessFailedCount: number = 0;
+    public normalizedUserName: string = null;
+    public phoneNumberConfirmed: boolean = false;
+    public twoFactorEnabled: boolean = false;
     public isInvited: boolean = false;
     public isRegistered: boolean = false;
     public isEnabled: boolean = false;
@@ -28,6 +43,8 @@ export class ApiData {
     public privateKey: string = null;
     public certificateChain: string = null;
     public certificateExpiry: Date = null;
+    public notifyPrivateMessage: boolean = false;
+    public notifySupportMessage: boolean = false;
    }
    
    export class AppSettingsSection {
@@ -898,6 +915,38 @@ export class ApiData {
     public isValid: boolean = true;
    }
    
+   export class DexihIssue {
+    public type: eIssueType = eIssueType.Other;
+    public category: eIssueCategory = eIssueCategory.Other;
+    public severity: eIssueSeverity = eIssueSeverity.Critical;
+    public link: string = null;
+    public data: string = null;
+    public gitHubLink: string = null;
+    public isPrivate: boolean = true;
+    public hubKey: number = 0;
+    public userId: string = null;
+    public issueStatus: eIssueStatus = eIssueStatus.Open;
+    public dexihIssueComments: DexihIssueComment[] = [];
+    public userName: string = null;
+    public key: number = 0;
+    public name: string = null;
+    public description: string = null;
+    public createDate: Date = null;
+    public updateDate: Date = null;
+    public isValid: boolean = true;
+   }
+   
+   export class DexihIssueComment {
+    public issueKey: number = 0;
+    public key: number = 0;
+    public comment: string = null;
+    public userId: string = null;
+    public userName: string = null;
+    public createDate: Date = null;
+    public updateDate: Date = null;
+    public isValid: boolean = true;
+   }
+   
    export class DexihListOfValues {
     public sourceType: eLOVObjectType = null;
     public sourceTableKey: number = null;
@@ -971,7 +1020,6 @@ export class ApiData {
     public sourceConnectionName: string = null;
     public fileFormatKey: number = null;
     public rejectedTableName: string = null;
-    public useQuery: boolean = false;
     public queryString: string = null;
     public rowPath: string = null;
     public formatType: eTypeCode = eTypeCode.Json;
@@ -1168,7 +1216,6 @@ export class ApiData {
     public baseTableName: string = null;
     public tableType: eTableType = eTableType.Table;
     public isVersioned: boolean = false;
-    public useQuery: boolean = false;
     public queryString: string = null;
     public outputSortFields: Sort[] = [];
     public columns: TableColumn[] = [];
@@ -1218,7 +1265,7 @@ export class ApiData {
    export class HubUser {
     public firstName: string = null;
     public lastName: string = null;
-    public email: string = null;
+    public userName: string = null;
     public id: string = null;
     public permission: ePermission = ePermission.None;
    }
@@ -1443,6 +1490,7 @@ export class ApiData {
    
    export class RegisterModel {
     public provider: eLoginProvider = eLoginProvider.Dexih;
+    public userName: string = null;
     public email: string = null;
     public code: string = null;
     public password: string = null;
@@ -1636,7 +1684,6 @@ export class ApiData {
     public baseTableName: string = null;
     public tableType: eTableType = eTableType.Table;
     public isVersioned: boolean = false;
-    public useQuery: boolean = false;
     public queryString: string = null;
     public outputSortFields: Sort[] = [];
     public columns: TableColumn[] = [];
@@ -1812,7 +1859,6 @@ export class ApiData {
     public baseTableName: string = null;
     public tableType: eTableType = eTableType.Table;
     public isVersioned: boolean = false;
-    public useQuery: boolean = false;
     public queryString: string = null;
     public outputSortFields: Sort[] = [];
     public columns: TableColumn[] = [];
@@ -1833,14 +1879,14 @@ export class ApiData {
    }
    
    export const eAggregateItems = [
-    {key: eAggregate.None, name: 'None', description: ''},
-    {key: eAggregate.Sum, name: 'Sum', description: ''},
-    {key: eAggregate.Average, name: 'Average', description: ''},
-    {key: eAggregate.Min, name: 'Min', description: ''},
-    {key: eAggregate.Max, name: 'Max', description: ''},
-    {key: eAggregate.Count, name: 'Count', description: ''},
-    {key: eAggregate.First, name: 'First', description: ''},
-    {key: eAggregate.Last, name: 'Last', description: ''},
+    {key: eAggregate.None, name: 'None'},
+    {key: eAggregate.Sum, name: 'Sum'},
+    {key: eAggregate.Average, name: 'Average'},
+    {key: eAggregate.Min, name: 'Min'},
+    {key: eAggregate.Max, name: 'Max'},
+    {key: eAggregate.Count, name: 'Count'},
+    {key: eAggregate.First, name: 'First'},
+    {key: eAggregate.Last, name: 'Last'},
    ]
    
    export enum eAndOr {
@@ -1849,9 +1895,9 @@ export class ApiData {
    }
    
    export const eAndOrItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eAndOr.And, name: 'And', description: ''},
-    {key: eAndOr.Or, name: 'Or', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eAndOr.And, name: 'And'},
+    {key: eAndOr.Or, name: 'Or'},
    ]
    
    export enum eApiStatus {
@@ -1860,9 +1906,9 @@ export class ApiData {
    }
    
    export const eApiStatusItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eApiStatus.Activated, name: 'Activated', description: ''},
-    {key: eApiStatus.Deactivated, name: 'Deactivated', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eApiStatus.Activated, name: 'Activated'},
+    {key: eApiStatus.Deactivated, name: 'Deactivated'},
    ]
    
    export enum eChartType {
@@ -1895,33 +1941,33 @@ export class ApiData {
    }
    
    export const eChartTypeItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eChartType.BarVertical, name: 'BarVertical', description: ''},
-    {key: eChartType.BarHorizontal, name: 'BarHorizontal', description: ''},
-    {key: eChartType.BarVertical2D, name: 'BarVertical2D', description: ''},
-    {key: eChartType.BarHorizontal2D, name: 'BarHorizontal2D', description: ''},
-    {key: eChartType.BarVerticalStacked, name: 'BarVerticalStacked', description: ''},
-    {key: eChartType.BarHorizontalStacked, name: 'BarHorizontalStacked', description: ''},
-    {key: eChartType.BarVerticalNormalized, name: 'BarVerticalNormalized', description: ''},
-    {key: eChartType.BarHorizontalNormalized, name: 'BarHorizontalNormalized', description: ''},
-    {key: eChartType.Pie, name: 'Pie', description: ''},
-    {key: eChartType.PieAdvanced, name: 'PieAdvanced', description: ''},
-    {key: eChartType.PieGrid, name: 'PieGrid', description: ''},
-    {key: eChartType.Line, name: 'Line', description: ''},
-    {key: eChartType.Area, name: 'Area', description: ''},
-    {key: eChartType.Polar, name: 'Polar', description: ''},
-    {key: eChartType.AreaStacked, name: 'AreaStacked', description: ''},
-    {key: eChartType.AreaNormalized, name: 'AreaNormalized', description: ''},
-    {key: eChartType.Scatter, name: 'Scatter', description: ''},
-    {key: eChartType.Error, name: 'Error', description: ''},
-    {key: eChartType.Bubble, name: 'Bubble', description: ''},
-    {key: eChartType.ForceDirected, name: 'ForceDirected', description: ''},
-    {key: eChartType.HeatMap, name: 'HeatMap', description: ''},
-    {key: eChartType.TreeMap, name: 'TreeMap', description: ''},
-    {key: eChartType.Cards, name: 'Cards', description: ''},
-    {key: eChartType.Gauge, name: 'Gauge', description: ''},
-    {key: eChartType.LinearGauge, name: 'LinearGauge', description: ''},
-    {key: eChartType.Map, name: 'Map', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eChartType.BarVertical, name: 'BarVertical'},
+    {key: eChartType.BarHorizontal, name: 'BarHorizontal'},
+    {key: eChartType.BarVertical2D, name: 'BarVertical2D'},
+    {key: eChartType.BarHorizontal2D, name: 'BarHorizontal2D'},
+    {key: eChartType.BarVerticalStacked, name: 'BarVerticalStacked'},
+    {key: eChartType.BarHorizontalStacked, name: 'BarHorizontalStacked'},
+    {key: eChartType.BarVerticalNormalized, name: 'BarVerticalNormalized'},
+    {key: eChartType.BarHorizontalNormalized, name: 'BarHorizontalNormalized'},
+    {key: eChartType.Pie, name: 'Pie'},
+    {key: eChartType.PieAdvanced, name: 'PieAdvanced'},
+    {key: eChartType.PieGrid, name: 'PieGrid'},
+    {key: eChartType.Line, name: 'Line'},
+    {key: eChartType.Area, name: 'Area'},
+    {key: eChartType.Polar, name: 'Polar'},
+    {key: eChartType.AreaStacked, name: 'AreaStacked'},
+    {key: eChartType.AreaNormalized, name: 'AreaNormalized'},
+    {key: eChartType.Scatter, name: 'Scatter'},
+    {key: eChartType.Error, name: 'Error'},
+    {key: eChartType.Bubble, name: 'Bubble'},
+    {key: eChartType.ForceDirected, name: 'ForceDirected'},
+    {key: eChartType.HeatMap, name: 'HeatMap'},
+    {key: eChartType.TreeMap, name: 'TreeMap'},
+    {key: eChartType.Cards, name: 'Cards'},
+    {key: eChartType.Gauge, name: 'Gauge'},
+    {key: eChartType.LinearGauge, name: 'LinearGauge'},
+    {key: eChartType.Map, name: 'Map'},
    ]
    
    export enum eCleanAction {
@@ -1934,13 +1980,13 @@ export class ApiData {
    }
    
    export const eCleanActionItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eCleanAction.DefaultValue, name: 'DefaultValue', description: ''},
-    {key: eCleanAction.Truncate, name: 'Truncate', description: ''},
-    {key: eCleanAction.Blank, name: 'Blank', description: ''},
-    {key: eCleanAction.Null, name: 'Null', description: ''},
-    {key: eCleanAction.OriginalValue, name: 'OriginalValue', description: ''},
-    {key: eCleanAction.CleanValue, name: 'CleanValue', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eCleanAction.DefaultValue, name: 'DefaultValue'},
+    {key: eCleanAction.Truncate, name: 'Truncate'},
+    {key: eCleanAction.Blank, name: 'Blank'},
+    {key: eCleanAction.Null, name: 'Null'},
+    {key: eCleanAction.OriginalValue, name: 'OriginalValue'},
+    {key: eCleanAction.CleanValue, name: 'CleanValue'},
    ]
    
    export enum eClientCommand {
@@ -1970,29 +2016,29 @@ export class ApiData {
    }
    
    export const eClientCommandItems = [
-    {key: eClientCommand.Connect, name: 'Connect', description: ''},
-    {key: eClientCommand.Disconnect, name: 'Disconnect', description: ''},
-    {key: eClientCommand.Message, name: 'Message', description: ''},
-    {key: eClientCommand.RemoteAgentUpdate, name: 'RemoteAgentUpdate', description: ''},
-    {key: eClientCommand.RemoteAgentDelete, name: 'RemoteAgentDelete', description: ''},
-    {key: eClientCommand.RemoteAgentDeleteKey, name: 'RemoteAgentDeleteKey', description: ''},
-    {key: eClientCommand.HubUpdate, name: 'HubUpdate', description: ''},
-    {key: eClientCommand.HubDelete, name: 'HubDelete', description: ''},
-    {key: eClientCommand.Task, name: 'Task', description: ''},
-    {key: eClientCommand.FileDownload, name: 'FileDownload', description: ''},
-    {key: eClientCommand.DownloadReady, name: 'DownloadReady', description: ''},
-    {key: eClientCommand.HubChange, name: 'HubChange', description: ''},
-    {key: eClientCommand.HubError, name: 'HubError', description: ''},
-    {key: eClientCommand.DatalinkProgress, name: 'DatalinkProgress', description: ''},
-    {key: eClientCommand.DatalinkStatus, name: 'DatalinkStatus', description: ''},
-    {key: eClientCommand.DatajobProgress, name: 'DatajobProgress', description: ''},
-    {key: eClientCommand.DatajobStatus, name: 'DatajobStatus', description: ''},
-    {key: eClientCommand.DatalinkTestProgress, name: 'DatalinkTestProgress', description: ''},
-    {key: eClientCommand.TableProgress, name: 'TableProgress', description: ''},
-    {key: eClientCommand.ApiStatus, name: 'ApiStatus', description: ''},
-    {key: eClientCommand.ApiQuery, name: 'ApiQuery', description: ''},
-    {key: eClientCommand.FlatFilesReady, name: 'FlatFilesReady', description: ''},
-    {key: eClientCommand.Command, name: 'Command', description: ''},
+    {key: eClientCommand.Connect, name: 'Connect'},
+    {key: eClientCommand.Disconnect, name: 'Disconnect'},
+    {key: eClientCommand.Message, name: 'Message'},
+    {key: eClientCommand.RemoteAgentUpdate, name: 'RemoteAgentUpdate'},
+    {key: eClientCommand.RemoteAgentDelete, name: 'RemoteAgentDelete'},
+    {key: eClientCommand.RemoteAgentDeleteKey, name: 'RemoteAgentDeleteKey'},
+    {key: eClientCommand.HubUpdate, name: 'HubUpdate'},
+    {key: eClientCommand.HubDelete, name: 'HubDelete'},
+    {key: eClientCommand.Task, name: 'Task'},
+    {key: eClientCommand.FileDownload, name: 'FileDownload'},
+    {key: eClientCommand.DownloadReady, name: 'DownloadReady'},
+    {key: eClientCommand.HubChange, name: 'HubChange'},
+    {key: eClientCommand.HubError, name: 'HubError'},
+    {key: eClientCommand.DatalinkProgress, name: 'DatalinkProgress'},
+    {key: eClientCommand.DatalinkStatus, name: 'DatalinkStatus'},
+    {key: eClientCommand.DatajobProgress, name: 'DatajobProgress'},
+    {key: eClientCommand.DatajobStatus, name: 'DatajobStatus'},
+    {key: eClientCommand.DatalinkTestProgress, name: 'DatalinkTestProgress'},
+    {key: eClientCommand.TableProgress, name: 'TableProgress'},
+    {key: eClientCommand.ApiStatus, name: 'ApiStatus'},
+    {key: eClientCommand.ApiQuery, name: 'ApiQuery'},
+    {key: eClientCommand.FlatFilesReady, name: 'FlatFilesReady'},
+    {key: eClientCommand.Command, name: 'Command'},
    ]
    
    export enum eCompare {
@@ -2009,16 +2055,16 @@ export class ApiData {
    }
    
    export const eCompareItems = [
-    {key: eCompare.IsEqual, name: 'IsEqual', description: ''},
-    {key: eCompare.GreaterThan, name: 'GreaterThan', description: ''},
-    {key: eCompare.GreaterThanEqual, name: 'GreaterThanEqual', description: ''},
-    {key: eCompare.LessThan, name: 'LessThan', description: ''},
-    {key: eCompare.LessThanEqual, name: 'LessThanEqual', description: ''},
-    {key: eCompare.NotEqual, name: 'NotEqual', description: ''},
-    {key: eCompare.IsIn, name: 'IsIn', description: ''},
-    {key: eCompare.IsNull, name: 'IsNull', description: ''},
-    {key: eCompare.IsNotNull, name: 'IsNotNull', description: ''},
-    {key: eCompare.Like, name: 'Like', description: ''},
+    {key: eCompare.IsEqual, name: 'IsEqual'},
+    {key: eCompare.GreaterThan, name: 'GreaterThan'},
+    {key: eCompare.GreaterThanEqual, name: 'GreaterThanEqual'},
+    {key: eCompare.LessThan, name: 'LessThan'},
+    {key: eCompare.LessThanEqual, name: 'LessThanEqual'},
+    {key: eCompare.NotEqual, name: 'NotEqual'},
+    {key: eCompare.IsIn, name: 'IsIn'},
+    {key: eCompare.IsNull, name: 'IsNull'},
+    {key: eCompare.IsNotNull, name: 'IsNotNull'},
+    {key: eCompare.Like, name: 'Like'},
    ]
    
    export enum eConcurrentTaskAction {
@@ -2028,10 +2074,10 @@ export class ApiData {
    }
    
    export const eConcurrentTaskActionItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eConcurrentTaskAction.Parallel, name: 'Parallel', description: ''},
-    {key: eConcurrentTaskAction.Abend, name: 'Abend', description: ''},
-    {key: eConcurrentTaskAction.Sequence, name: 'Sequence', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eConcurrentTaskAction.Parallel, name: 'Parallel'},
+    {key: eConcurrentTaskAction.Abend, name: 'Abend'},
+    {key: eConcurrentTaskAction.Sequence, name: 'Sequence'},
    ]
    
    export enum eConnectionCategory {
@@ -2044,13 +2090,13 @@ export class ApiData {
    }
    
    export const eConnectionCategoryItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eConnectionCategory.SqlDatabase, name: 'SqlDatabase', description: ''},
-    {key: eConnectionCategory.NoSqlDatabase, name: 'NoSqlDatabase', description: ''},
-    {key: eConnectionCategory.DatabaseFile, name: 'DatabaseFile', description: ''},
-    {key: eConnectionCategory.File, name: 'File', description: ''},
-    {key: eConnectionCategory.WebService, name: 'WebService', description: ''},
-    {key: eConnectionCategory.Hub, name: 'Hub', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eConnectionCategory.SqlDatabase, name: 'SqlDatabase'},
+    {key: eConnectionCategory.NoSqlDatabase, name: 'NoSqlDatabase'},
+    {key: eConnectionCategory.DatabaseFile, name: 'DatabaseFile'},
+    {key: eConnectionCategory.File, name: 'File'},
+    {key: eConnectionCategory.WebService, name: 'WebService'},
+    {key: eConnectionCategory.Hub, name: 'Hub'},
    ]
    
    export enum eConnectionPurpose {
@@ -2060,10 +2106,10 @@ export class ApiData {
    }
    
    export const eConnectionPurposeItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eConnectionPurpose.Source, name: 'Source', description: ''},
-    {key: eConnectionPurpose.Managed, name: 'Managed', description: ''},
-    {key: eConnectionPurpose.Target, name: 'Target', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eConnectionPurpose.Source, name: 'Source'},
+    {key: eConnectionPurpose.Managed, name: 'Managed'},
+    {key: eConnectionPurpose.Target, name: 'Target'},
    ]
    
    export enum eDatalinkType {
@@ -2078,7 +2124,7 @@ export class ApiData {
    }
    
    export const eDatalinkTypeItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
+    {key: 0, name: 'Unknown'},
     {key: eDatalinkType.General, name: 'General', description: 'Non-categorized general purpose datalink'},
     {key: eDatalinkType.Stage, name: 'Stage', description: 'Staging - loads data into a central/interim database'},
     {key: eDatalinkType.Validate, name: 'Validate', description: 'Validate - performs data validation and cleaning'},
@@ -2098,12 +2144,12 @@ export class ApiData {
    }
    
    export const eDataObjectTypeItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eDataObjectType.Table, name: 'Table', description: ''},
-    {key: eDataObjectType.Datalink, name: 'Datalink', description: ''},
-    {key: eDataObjectType.View, name: 'View', description: ''},
-    {key: eDataObjectType.Dashboard, name: 'Dashboard', description: ''},
-    {key: eDataObjectType.Api, name: 'Api', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eDataObjectType.Table, name: 'Table'},
+    {key: eDataObjectType.Datalink, name: 'Datalink'},
+    {key: eDataObjectType.View, name: 'View'},
+    {key: eDataObjectType.Dashboard, name: 'Dashboard'},
+    {key: eDataObjectType.Api, name: 'Api'},
    ]
    
    export enum eDataPrivacyStatus {
@@ -2114,11 +2160,11 @@ export class ApiData {
    }
    
    export const eDataPrivacyStatusItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eDataPrivacyStatus.NotAllowed, name: 'NotAllowed', description: ''},
-    {key: eDataPrivacyStatus.Proxy, name: 'Proxy', description: ''},
-    {key: eDataPrivacyStatus.Lan, name: 'Lan', description: ''},
-    {key: eDataPrivacyStatus.Internet, name: 'Internet', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eDataPrivacyStatus.NotAllowed, name: 'NotAllowed'},
+    {key: eDataPrivacyStatus.Proxy, name: 'Proxy'},
+    {key: eDataPrivacyStatus.Lan, name: 'Lan'},
+    {key: eDataPrivacyStatus.Internet, name: 'Internet'},
    ]
    
    export enum eDayOfWeek {
@@ -2132,14 +2178,14 @@ export class ApiData {
    }
    
    export const eDayOfWeekItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eDayOfWeek.Sunday, name: 'Sunday', description: ''},
-    {key: eDayOfWeek.Monday, name: 'Monday', description: ''},
-    {key: eDayOfWeek.Tuesday, name: 'Tuesday', description: ''},
-    {key: eDayOfWeek.Wednesday, name: 'Wednesday', description: ''},
-    {key: eDayOfWeek.Thursday, name: 'Thursday', description: ''},
-    {key: eDayOfWeek.Friday, name: 'Friday', description: ''},
-    {key: eDayOfWeek.Saturday, name: 'Saturday', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eDayOfWeek.Sunday, name: 'Sunday'},
+    {key: eDayOfWeek.Monday, name: 'Monday'},
+    {key: eDayOfWeek.Tuesday, name: 'Tuesday'},
+    {key: eDayOfWeek.Wednesday, name: 'Wednesday'},
+    {key: eDayOfWeek.Thursday, name: 'Thursday'},
+    {key: eDayOfWeek.Friday, name: 'Friday'},
+    {key: eDayOfWeek.Saturday, name: 'Saturday'},
    ]
    
    export enum eDeltaType {
@@ -2176,37 +2222,37 @@ export class ApiData {
    }
    
    export const eDeltaTypeItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eDeltaType.AutoIncrement, name: 'AutoIncrement', description: ''},
-    {key: eDeltaType.DbAutoIncrement, name: 'DbAutoIncrement', description: ''},
-    {key: eDeltaType.SourceSurrogateKey, name: 'SourceSurrogateKey', description: ''},
-    {key: eDeltaType.ValidFromDate, name: 'ValidFromDate', description: ''},
-    {key: eDeltaType.ValidToDate, name: 'ValidToDate', description: ''},
-    {key: eDeltaType.CreateDate, name: 'CreateDate', description: ''},
-    {key: eDeltaType.UpdateDate, name: 'UpdateDate', description: ''},
-    {key: eDeltaType.CreateAuditKey, name: 'CreateAuditKey', description: ''},
-    {key: eDeltaType.UpdateAuditKey, name: 'UpdateAuditKey', description: ''},
-    {key: eDeltaType.IsCurrentField, name: 'IsCurrentField', description: ''},
-    {key: eDeltaType.Version, name: 'Version', description: ''},
-    {key: eDeltaType.NaturalKey, name: 'NaturalKey', description: ''},
-    {key: eDeltaType.TrackingField, name: 'TrackingField', description: ''},
-    {key: eDeltaType.NonTrackingField, name: 'NonTrackingField', description: ''},
-    {key: eDeltaType.IgnoreField, name: 'IgnoreField', description: ''},
-    {key: eDeltaType.ValidationStatus, name: 'ValidationStatus', description: ''},
-    {key: eDeltaType.RejectedReason, name: 'RejectedReason', description: ''},
-    {key: eDeltaType.FileName, name: 'FileName', description: ''},
-    {key: eDeltaType.FileRowNumber, name: 'FileRowNumber', description: ''},
-    {key: eDeltaType.RowKey, name: 'RowKey', description: ''},
-    {key: eDeltaType.PartitionKey, name: 'PartitionKey', description: ''},
-    {key: eDeltaType.TimeStamp, name: 'TimeStamp', description: ''},
-    {key: eDeltaType.DatabaseOperation, name: 'DatabaseOperation', description: ''},
-    {key: eDeltaType.ResponseSuccess, name: 'ResponseSuccess', description: ''},
-    {key: eDeltaType.ResponseData, name: 'ResponseData', description: ''},
-    {key: eDeltaType.ResponseStatus, name: 'ResponseStatus', description: ''},
-    {key: eDeltaType.ResponseSegment, name: 'ResponseSegment', description: ''},
-    {key: eDeltaType.Error, name: 'Error', description: ''},
-    {key: eDeltaType.Url, name: 'Url', description: ''},
-    {key: eDeltaType.UpdateReason, name: 'UpdateReason', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eDeltaType.AutoIncrement, name: 'AutoIncrement'},
+    {key: eDeltaType.DbAutoIncrement, name: 'DbAutoIncrement'},
+    {key: eDeltaType.SourceSurrogateKey, name: 'SourceSurrogateKey'},
+    {key: eDeltaType.ValidFromDate, name: 'ValidFromDate'},
+    {key: eDeltaType.ValidToDate, name: 'ValidToDate'},
+    {key: eDeltaType.CreateDate, name: 'CreateDate'},
+    {key: eDeltaType.UpdateDate, name: 'UpdateDate'},
+    {key: eDeltaType.CreateAuditKey, name: 'CreateAuditKey'},
+    {key: eDeltaType.UpdateAuditKey, name: 'UpdateAuditKey'},
+    {key: eDeltaType.IsCurrentField, name: 'IsCurrentField'},
+    {key: eDeltaType.Version, name: 'Version'},
+    {key: eDeltaType.NaturalKey, name: 'NaturalKey'},
+    {key: eDeltaType.TrackingField, name: 'TrackingField'},
+    {key: eDeltaType.NonTrackingField, name: 'NonTrackingField'},
+    {key: eDeltaType.IgnoreField, name: 'IgnoreField'},
+    {key: eDeltaType.ValidationStatus, name: 'ValidationStatus'},
+    {key: eDeltaType.RejectedReason, name: 'RejectedReason'},
+    {key: eDeltaType.FileName, name: 'FileName'},
+    {key: eDeltaType.FileRowNumber, name: 'FileRowNumber'},
+    {key: eDeltaType.RowKey, name: 'RowKey'},
+    {key: eDeltaType.PartitionKey, name: 'PartitionKey'},
+    {key: eDeltaType.TimeStamp, name: 'TimeStamp'},
+    {key: eDeltaType.DatabaseOperation, name: 'DatabaseOperation'},
+    {key: eDeltaType.ResponseSuccess, name: 'ResponseSuccess'},
+    {key: eDeltaType.ResponseData, name: 'ResponseData'},
+    {key: eDeltaType.ResponseStatus, name: 'ResponseStatus'},
+    {key: eDeltaType.ResponseSegment, name: 'ResponseSegment'},
+    {key: eDeltaType.Error, name: 'Error'},
+    {key: eDeltaType.Url, name: 'Url'},
+    {key: eDeltaType.UpdateReason, name: 'UpdateReason'},
    ]
    
    export enum eDownloadFormat {
@@ -2216,10 +2262,10 @@ export class ApiData {
    }
    
    export const eDownloadFormatItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eDownloadFormat.Csv, name: 'Csv', description: ''},
-    {key: eDownloadFormat.Json, name: 'Json', description: ''},
-    {key: eDownloadFormat.JsonCompact, name: 'JsonCompact', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eDownloadFormat.Csv, name: 'Csv'},
+    {key: eDownloadFormat.Json, name: 'Json'},
+    {key: eDownloadFormat.JsonCompact, name: 'JsonCompact'},
    ]
    
    export enum eDownloadUrlType {
@@ -2228,9 +2274,9 @@ export class ApiData {
    }
    
    export const eDownloadUrlTypeItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eDownloadUrlType.Proxy, name: 'Proxy', description: ''},
-    {key: eDownloadUrlType.Direct, name: 'Direct', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eDownloadUrlType.Proxy, name: 'Proxy'},
+    {key: eDownloadUrlType.Direct, name: 'Direct'},
    ]
    
    export enum eDuplicateStrategy {
@@ -2241,10 +2287,10 @@ export class ApiData {
    }
    
    export const eDuplicateStrategyItems = [
-    {key: eDuplicateStrategy.Abend, name: 'Abend', description: ''},
-    {key: eDuplicateStrategy.First, name: 'First', description: ''},
-    {key: eDuplicateStrategy.Last, name: 'Last', description: ''},
-    {key: eDuplicateStrategy.All, name: 'All', description: ''},
+    {key: eDuplicateStrategy.Abend, name: 'Abend'},
+    {key: eDuplicateStrategy.First, name: 'First'},
+    {key: eDuplicateStrategy.Last, name: 'Last'},
+    {key: eDuplicateStrategy.All, name: 'All'},
    ]
    
    export enum eEnvironment {
@@ -2254,7 +2300,7 @@ export class ApiData {
    }
    
    export const eEnvironmentItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
+    {key: 0, name: 'Unknown'},
     {key: eEnvironment.Windows, name: 'Windows', description: 'Windows 7/8/8.1/10'},
     {key: eEnvironment.Osx, name: 'Osx', description: 'Mac OSX'},
     {key: eEnvironment.Linux, name: 'Linux', description: 'Linux'},
@@ -2268,11 +2314,11 @@ export class ApiData {
    }
    
    export const eErrorActionItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eErrorAction.Abend, name: 'Abend', description: ''},
-    {key: eErrorAction.Null, name: 'Null', description: ''},
-    {key: eErrorAction.Ignore, name: 'Ignore', description: ''},
-    {key: eErrorAction.Execute, name: 'Execute', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eErrorAction.Abend, name: 'Abend'},
+    {key: eErrorAction.Null, name: 'Null'},
+    {key: eErrorAction.Ignore, name: 'Ignore'},
+    {key: eErrorAction.Execute, name: 'Execute'},
    ]
    
    export enum eFailAction {
@@ -2282,10 +2328,10 @@ export class ApiData {
    }
    
    export const eFailActionItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eFailAction.Continue, name: 'Continue', description: ''},
-    {key: eFailAction.ContinueNonDependent, name: 'ContinueNonDependent', description: ''},
-    {key: eFailAction.Abend, name: 'Abend', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eFailAction.Continue, name: 'Continue'},
+    {key: eFailAction.ContinueNonDependent, name: 'ContinueNonDependent'},
+    {key: eFailAction.Abend, name: 'Abend'},
    ]
    
    export enum eFlatFilePath {
@@ -2297,11 +2343,11 @@ export class ApiData {
    }
    
    export const eFlatFilePathItems = [
-    {key: eFlatFilePath.None, name: 'None', description: ''},
-    {key: eFlatFilePath.Incoming, name: 'Incoming', description: ''},
-    {key: eFlatFilePath.Outgoing, name: 'Outgoing', description: ''},
-    {key: eFlatFilePath.Processed, name: 'Processed', description: ''},
-    {key: eFlatFilePath.Rejected, name: 'Rejected', description: ''},
+    {key: eFlatFilePath.None, name: 'None'},
+    {key: eFlatFilePath.Incoming, name: 'Incoming'},
+    {key: eFlatFilePath.Outgoing, name: 'Outgoing'},
+    {key: eFlatFilePath.Processed, name: 'Processed'},
+    {key: eFlatFilePath.Rejected, name: 'Rejected'},
    ]
    
    export enum eFunctionCaching {
@@ -2311,9 +2357,9 @@ export class ApiData {
    }
    
    export const eFunctionCachingItems = [
-    {key: eFunctionCaching.NoCache, name: 'NoCache', description: ''},
-    {key: eFunctionCaching.EnableCache, name: 'EnableCache', description: ''},
-    {key: eFunctionCaching.CallOnce, name: 'CallOnce', description: ''},
+    {key: eFunctionCaching.NoCache, name: 'NoCache'},
+    {key: eFunctionCaching.EnableCache, name: 'EnableCache'},
+    {key: eFunctionCaching.CallOnce, name: 'CallOnce'},
    ]
    
    export enum eFunctionType {
@@ -2329,16 +2375,16 @@ export class ApiData {
    }
    
    export const eFunctionTypeItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eFunctionType.Map, name: 'Map', description: ''},
-    {key: eFunctionType.Condition, name: 'Condition', description: ''},
-    {key: eFunctionType.Aggregate, name: 'Aggregate', description: ''},
-    {key: eFunctionType.Series, name: 'Series', description: ''},
-    {key: eFunctionType.Rows, name: 'Rows', description: ''},
-    {key: eFunctionType.Validate, name: 'Validate', description: ''},
-    {key: eFunctionType.Profile, name: 'Profile', description: ''},
-    {key: eFunctionType.Sort, name: 'Sort', description: ''},
-    {key: eFunctionType.JoinCondition, name: 'JoinCondition', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eFunctionType.Map, name: 'Map'},
+    {key: eFunctionType.Condition, name: 'Condition'},
+    {key: eFunctionType.Aggregate, name: 'Aggregate'},
+    {key: eFunctionType.Series, name: 'Series'},
+    {key: eFunctionType.Rows, name: 'Rows'},
+    {key: eFunctionType.Validate, name: 'Validate'},
+    {key: eFunctionType.Profile, name: 'Profile'},
+    {key: eFunctionType.Sort, name: 'Sort'},
+    {key: eFunctionType.JoinCondition, name: 'JoinCondition'},
    ]
    
    export enum eGenericType {
@@ -2349,11 +2395,11 @@ export class ApiData {
    }
    
    export const eGenericTypeItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eGenericType.None, name: 'None', description: ''},
-    {key: eGenericType.Numeric, name: 'Numeric', description: ''},
-    {key: eGenericType.All, name: 'All', description: ''},
-    {key: eGenericType.String, name: 'String', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eGenericType.None, name: 'None'},
+    {key: eGenericType.Numeric, name: 'Numeric'},
+    {key: eGenericType.All, name: 'All'},
+    {key: eGenericType.String, name: 'String'},
    ]
    
    export enum eImportAction {
@@ -2365,12 +2411,12 @@ export class ApiData {
    }
    
    export const eImportActionItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eImportAction.Replace, name: 'Replace', description: ''},
-    {key: eImportAction.New, name: 'New', description: ''},
-    {key: eImportAction.Leave, name: 'Leave', description: ''},
-    {key: eImportAction.Skip, name: 'Skip', description: ''},
-    {key: eImportAction.Delete, name: 'Delete', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eImportAction.Replace, name: 'Replace'},
+    {key: eImportAction.New, name: 'New'},
+    {key: eImportAction.Leave, name: 'Leave'},
+    {key: eImportAction.Skip, name: 'Skip'},
+    {key: eImportAction.Delete, name: 'Delete'},
    ]
    
    export enum eIntervalType {
@@ -2382,11 +2428,11 @@ export class ApiData {
    }
    
    export const eIntervalTypeItems = [
-    {key: eIntervalType.None, name: 'None', description: ''},
-    {key: eIntervalType.Once, name: 'Once', description: ''},
-    {key: eIntervalType.Interval, name: 'Interval', description: ''},
-    {key: eIntervalType.Daily, name: 'Daily', description: ''},
-    {key: eIntervalType.Monthly, name: 'Monthly', description: ''},
+    {key: eIntervalType.None, name: 'None'},
+    {key: eIntervalType.Once, name: 'Once'},
+    {key: eIntervalType.Interval, name: 'Interval'},
+    {key: eIntervalType.Daily, name: 'Daily'},
+    {key: eIntervalType.Monthly, name: 'Monthly'},
    ]
    
    export enum eInvalidAction {
@@ -2399,13 +2445,85 @@ export class ApiData {
    }
    
    export const eInvalidActionItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eInvalidAction.Pass, name: 'Pass', description: ''},
-    {key: eInvalidAction.Clean, name: 'Clean', description: ''},
-    {key: eInvalidAction.RejectClean, name: 'RejectClean', description: ''},
-    {key: eInvalidAction.Reject, name: 'Reject', description: ''},
-    {key: eInvalidAction.Discard, name: 'Discard', description: ''},
-    {key: eInvalidAction.Abend, name: 'Abend', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eInvalidAction.Pass, name: 'Pass'},
+    {key: eInvalidAction.Clean, name: 'Clean'},
+    {key: eInvalidAction.RejectClean, name: 'RejectClean'},
+    {key: eInvalidAction.Reject, name: 'Reject'},
+    {key: eInvalidAction.Discard, name: 'Discard'},
+    {key: eInvalidAction.Abend, name: 'Abend'},
+   ]
+   
+   export enum eIssueCategory {
+    Other = 0,
+    Web = 1,
+    Saving = 2,
+    RemoteAgent = 3,
+    Datalink = 4,
+    Datajob = 5,
+    Api = 6,
+    View = 7,
+    Dashboard = 8,
+    Security = 9,
+   }
+   
+   export const eIssueCategoryItems = [
+    {key: eIssueCategory.Other, name: 'Other', description: 'Other'},
+    {key: eIssueCategory.Web, name: 'Web', description: 'Web Interface'},
+    {key: eIssueCategory.Saving, name: 'Saving', description: 'Saving / loading / importing / exporting items'},
+    {key: eIssueCategory.RemoteAgent, name: 'RemoteAgent', description: 'Remote Agent Configuration / Connections'},
+    {key: eIssueCategory.Datalink, name: 'Datalink', description: 'Running / previewing datalink'},
+    {key: eIssueCategory.Datajob, name: 'Datajob', description: 'Scheduling / running datajob'},
+    {key: eIssueCategory.Api, name: 'Api', description: 'Using the API'},
+    {key: eIssueCategory.View, name: 'View', description: 'Using a View'},
+    {key: eIssueCategory.Dashboard, name: 'Dashboard', description: 'Using a Dashboard'},
+    {key: eIssueCategory.Security, name: 'Security', description: 'Login, permissions, and other security issues'},
+   ]
+   
+   export enum eIssueSeverity {
+    Critical = 0,
+    Major = 1,
+    Minor = 2,
+    Trivial = 3,
+   }
+   
+   export const eIssueSeverityItems = [
+    {key: eIssueSeverity.Critical, name: 'Critical', description: 'Critical (currently unusable)'},
+    {key: eIssueSeverity.Major, name: 'Major', description: 'Major (temporary workarounds exist)'},
+    {key: eIssueSeverity.Minor, name: 'Minor', description: 'Minor (productivity imporovments)'},
+    {key: eIssueSeverity.Trivial, name: 'Trivial', description: 'Trivial (Nice to Have)'},
+   ]
+   
+   export enum eIssueStatus {
+    Open = 0,
+    UnderReview = 1,
+    InProgress = 2,
+    Complete = 3,
+    Closed = 4,
+   }
+   
+   export const eIssueStatusItems = [
+    {key: eIssueStatus.Open, name: 'Open', description: 'Open - Issue has been opened.'},
+    {key: eIssueStatus.UnderReview, name: 'UnderReview', description: 'Under Review - Issue is under review by support team.'},
+    {key: eIssueStatus.InProgress, name: 'InProgress', description: 'In Progress - Issue is currently being worked on.'},
+    {key: eIssueStatus.Complete, name: 'Complete', description: 'Complete - Issue has been completed.'},
+    {key: eIssueStatus.Closed, name: 'Closed', description: 'Closed'},
+   ]
+   
+   export enum eIssueType {
+    Other = 0,
+    Bug = 1,
+    Request = 2,
+    Question = 3,
+    Feedback = 4,
+   }
+   
+   export const eIssueTypeItems = [
+    {key: eIssueType.Other, name: 'Other', description: 'Other'},
+    {key: eIssueType.Bug, name: 'Bug', description: 'Bug'},
+    {key: eIssueType.Request, name: 'Request', description: 'Feature Request'},
+    {key: eIssueType.Question, name: 'Question', description: 'Question'},
+    {key: eIssueType.Feedback, name: 'Feedback', description: 'General Feedback'},
    ]
    
    export enum eLoginProvider {
@@ -2415,10 +2533,10 @@ export class ApiData {
    }
    
    export const eLoginProviderItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eLoginProvider.Dexih, name: 'Dexih', description: ''},
-    {key: eLoginProvider.Google, name: 'Google', description: ''},
-    {key: eLoginProvider.Microsoft, name: 'Microsoft', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eLoginProvider.Dexih, name: 'Dexih'},
+    {key: eLoginProvider.Google, name: 'Google'},
+    {key: eLoginProvider.Microsoft, name: 'Microsoft'},
    ]
    
    export enum eLOVObjectType {
@@ -2429,11 +2547,11 @@ export class ApiData {
    }
    
    export const eLOVObjectTypeItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eLOVObjectType.Table, name: 'Table', description: ''},
-    {key: eLOVObjectType.Datalink, name: 'Datalink', description: ''},
-    {key: eLOVObjectType.View, name: 'View', description: ''},
-    {key: eLOVObjectType.Static, name: 'Static', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eLOVObjectType.Table, name: 'Table'},
+    {key: eLOVObjectType.Datalink, name: 'Datalink'},
+    {key: eLOVObjectType.View, name: 'View'},
+    {key: eLOVObjectType.Static, name: 'Static'},
    ]
    
    export enum eManagedTaskStatus {
@@ -2448,15 +2566,15 @@ export class ApiData {
    }
    
    export const eManagedTaskStatusItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eManagedTaskStatus.Created, name: 'Created', description: ''},
-    {key: eManagedTaskStatus.FileWatching, name: 'FileWatching', description: ''},
-    {key: eManagedTaskStatus.Scheduled, name: 'Scheduled', description: ''},
-    {key: eManagedTaskStatus.Queued, name: 'Queued', description: ''},
-    {key: eManagedTaskStatus.Running, name: 'Running', description: ''},
-    {key: eManagedTaskStatus.Cancelled, name: 'Cancelled', description: ''},
-    {key: eManagedTaskStatus.Error, name: 'Error', description: ''},
-    {key: eManagedTaskStatus.Completed, name: 'Completed', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eManagedTaskStatus.Created, name: 'Created'},
+    {key: eManagedTaskStatus.FileWatching, name: 'FileWatching'},
+    {key: eManagedTaskStatus.Scheduled, name: 'Scheduled'},
+    {key: eManagedTaskStatus.Queued, name: 'Queued'},
+    {key: eManagedTaskStatus.Running, name: 'Running'},
+    {key: eManagedTaskStatus.Cancelled, name: 'Cancelled'},
+    {key: eManagedTaskStatus.Error, name: 'Error'},
+    {key: eManagedTaskStatus.Completed, name: 'Completed'},
    ]
    
    export enum eMessageCommand {
@@ -2486,29 +2604,29 @@ export class ApiData {
    }
    
    export const eMessageCommandItems = [
-    {key: eMessageCommand.Connect, name: 'Connect', description: ''},
-    {key: eMessageCommand.Disconnect, name: 'Disconnect', description: ''},
-    {key: eMessageCommand.MessageResponse, name: 'MessageResponse', description: ''},
-    {key: eMessageCommand.RemoteAgentUpdate, name: 'RemoteAgentUpdate', description: ''},
-    {key: eMessageCommand.RemoteAgentDelete, name: 'RemoteAgentDelete', description: ''},
-    {key: eMessageCommand.RemoteAgentDeleteKey, name: 'RemoteAgentDeleteKey', description: ''},
-    {key: eMessageCommand.HubUpdate, name: 'HubUpdate', description: ''},
-    {key: eMessageCommand.HubDelete, name: 'HubDelete', description: ''},
-    {key: eMessageCommand.Task, name: 'Task', description: ''},
-    {key: eMessageCommand.FileDownload, name: 'FileDownload', description: ''},
-    {key: eMessageCommand.DownloadReady, name: 'DownloadReady', description: ''},
-    {key: eMessageCommand.HubChange, name: 'HubChange', description: ''},
-    {key: eMessageCommand.HubError, name: 'HubError', description: ''},
-    {key: eMessageCommand.DatalinkProgress, name: 'DatalinkProgress', description: ''},
-    {key: eMessageCommand.DatalinkStatus, name: 'DatalinkStatus', description: ''},
-    {key: eMessageCommand.DatajobProgress, name: 'DatajobProgress', description: ''},
-    {key: eMessageCommand.DatajobStatus, name: 'DatajobStatus', description: ''},
-    {key: eMessageCommand.DatalinkTestProgress, name: 'DatalinkTestProgress', description: ''},
-    {key: eMessageCommand.TableProgress, name: 'TableProgress', description: ''},
-    {key: eMessageCommand.ApiStatus, name: 'ApiStatus', description: ''},
-    {key: eMessageCommand.ApiQuery, name: 'ApiQuery', description: ''},
-    {key: eMessageCommand.FlatFilesReady, name: 'FlatFilesReady', description: ''},
-    {key: eMessageCommand.RemoteMethod, name: 'RemoteMethod', description: ''},
+    {key: eMessageCommand.Connect, name: 'Connect'},
+    {key: eMessageCommand.Disconnect, name: 'Disconnect'},
+    {key: eMessageCommand.MessageResponse, name: 'MessageResponse'},
+    {key: eMessageCommand.RemoteAgentUpdate, name: 'RemoteAgentUpdate'},
+    {key: eMessageCommand.RemoteAgentDelete, name: 'RemoteAgentDelete'},
+    {key: eMessageCommand.RemoteAgentDeleteKey, name: 'RemoteAgentDeleteKey'},
+    {key: eMessageCommand.HubUpdate, name: 'HubUpdate'},
+    {key: eMessageCommand.HubDelete, name: 'HubDelete'},
+    {key: eMessageCommand.Task, name: 'Task'},
+    {key: eMessageCommand.FileDownload, name: 'FileDownload'},
+    {key: eMessageCommand.DownloadReady, name: 'DownloadReady'},
+    {key: eMessageCommand.HubChange, name: 'HubChange'},
+    {key: eMessageCommand.HubError, name: 'HubError'},
+    {key: eMessageCommand.DatalinkProgress, name: 'DatalinkProgress'},
+    {key: eMessageCommand.DatalinkStatus, name: 'DatalinkStatus'},
+    {key: eMessageCommand.DatajobProgress, name: 'DatajobProgress'},
+    {key: eMessageCommand.DatajobStatus, name: 'DatajobStatus'},
+    {key: eMessageCommand.DatalinkTestProgress, name: 'DatalinkTestProgress'},
+    {key: eMessageCommand.TableProgress, name: 'TableProgress'},
+    {key: eMessageCommand.ApiStatus, name: 'ApiStatus'},
+    {key: eMessageCommand.ApiQuery, name: 'ApiQuery'},
+    {key: eMessageCommand.FlatFilesReady, name: 'FlatFilesReady'},
+    {key: eMessageCommand.RemoteMethod, name: 'RemoteMethod'},
    ]
    
    export enum eParameterDirection {
@@ -2522,32 +2640,32 @@ export class ApiData {
    }
    
    export const eParameterDirectionItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eParameterDirection.Input, name: 'Input', description: ''},
-    {key: eParameterDirection.Output, name: 'Output', description: ''},
-    {key: eParameterDirection.ResultInput, name: 'ResultInput', description: ''},
-    {key: eParameterDirection.ResultOutput, name: 'ResultOutput', description: ''},
-    {key: eParameterDirection.ReturnValue, name: 'ReturnValue', description: ''},
-    {key: eParameterDirection.ResultReturnValue, name: 'ResultReturnValue', description: ''},
-    {key: eParameterDirection.Join, name: 'Join', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eParameterDirection.Input, name: 'Input'},
+    {key: eParameterDirection.Output, name: 'Output'},
+    {key: eParameterDirection.ResultInput, name: 'ResultInput'},
+    {key: eParameterDirection.ResultOutput, name: 'ResultOutput'},
+    {key: eParameterDirection.ReturnValue, name: 'ReturnValue'},
+    {key: eParameterDirection.ResultReturnValue, name: 'ResultReturnValue'},
+    {key: eParameterDirection.Join, name: 'Join'},
    ]
    
    export enum ePermission {
     None = 0,
-    Owner = 1,
-    User = 2,
+    Suspended = 1,
+    PublishReader = 2,
     FullReader = 3,
-    PublishReader = 4,
-    Suspended = 5,
+    User = 4,
+    Owner = 5,
    }
    
    export const ePermissionItems = [
     {key: ePermission.None, name: 'None', description: 'No access.'},
-    {key: ePermission.Owner, name: 'Owner', description: 'Owner (full permissions)'},
-    {key: ePermission.User, name: 'User', description: 'User (add/modify permission)'},
-    {key: ePermission.FullReader, name: 'FullReader', description: 'Reader (read only access)'},
-    {key: ePermission.PublishReader, name: 'PublishReader', description: 'Publish Reader (only access shared)'},
     {key: ePermission.Suspended, name: 'Suspended', description: 'Suspended (banned from hub)'},
+    {key: ePermission.PublishReader, name: 'PublishReader', description: 'Publish Reader (only access shared)'},
+    {key: ePermission.FullReader, name: 'FullReader', description: 'Reader (read only access)'},
+    {key: ePermission.User, name: 'User', description: 'User (add/modify permission)'},
+    {key: ePermission.Owner, name: 'Owner', description: 'Owner (full permissions)'},
    ]
    
    export enum eRunStatus {
@@ -2566,19 +2684,19 @@ export class ApiData {
    }
    
    export const eRunStatusItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eRunStatus.Initialised, name: 'Initialised', description: ''},
-    {key: eRunStatus.Scheduled, name: 'Scheduled', description: ''},
-    {key: eRunStatus.Started, name: 'Started', description: ''},
-    {key: eRunStatus.Running, name: 'Running', description: ''},
-    {key: eRunStatus.RunningErrors, name: 'RunningErrors', description: ''},
-    {key: eRunStatus.Finished, name: 'Finished', description: ''},
-    {key: eRunStatus.FinishedErrors, name: 'FinishedErrors', description: ''},
-    {key: eRunStatus.Abended, name: 'Abended', description: ''},
-    {key: eRunStatus.Cancelled, name: 'Cancelled', description: ''},
-    {key: eRunStatus.NotRunning, name: 'NotRunning', description: ''},
-    {key: eRunStatus.Passed, name: 'Passed', description: ''},
-    {key: eRunStatus.Failed, name: 'Failed', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eRunStatus.Initialised, name: 'Initialised'},
+    {key: eRunStatus.Scheduled, name: 'Scheduled'},
+    {key: eRunStatus.Started, name: 'Started'},
+    {key: eRunStatus.Running, name: 'Running'},
+    {key: eRunStatus.RunningErrors, name: 'RunningErrors'},
+    {key: eRunStatus.Finished, name: 'Finished'},
+    {key: eRunStatus.FinishedErrors, name: 'FinishedErrors'},
+    {key: eRunStatus.Abended, name: 'Abended'},
+    {key: eRunStatus.Cancelled, name: 'Cancelled'},
+    {key: eRunStatus.NotRunning, name: 'NotRunning'},
+    {key: eRunStatus.Passed, name: 'Passed'},
+    {key: eRunStatus.Failed, name: 'Failed'},
    ]
    
    export enum eSecurityFlag {
@@ -2595,16 +2713,16 @@ export class ApiData {
    }
    
    export const eSecurityFlagItems = [
-    {key: eSecurityFlag.None, name: 'None', description: ''},
-    {key: eSecurityFlag.FastEncrypt, name: 'FastEncrypt', description: ''},
-    {key: eSecurityFlag.FastDecrypt, name: 'FastDecrypt', description: ''},
-    {key: eSecurityFlag.FastEncrypted, name: 'FastEncrypted', description: ''},
-    {key: eSecurityFlag.StrongEncrypt, name: 'StrongEncrypt', description: ''},
-    {key: eSecurityFlag.StrongDecrypt, name: 'StrongDecrypt', description: ''},
-    {key: eSecurityFlag.StrongEncrypted, name: 'StrongEncrypted', description: ''},
-    {key: eSecurityFlag.OneWayHash, name: 'OneWayHash', description: ''},
-    {key: eSecurityFlag.OneWayHashed, name: 'OneWayHashed', description: ''},
-    {key: eSecurityFlag.Hide, name: 'Hide', description: ''},
+    {key: eSecurityFlag.None, name: 'None'},
+    {key: eSecurityFlag.FastEncrypt, name: 'FastEncrypt'},
+    {key: eSecurityFlag.FastDecrypt, name: 'FastDecrypt'},
+    {key: eSecurityFlag.FastEncrypted, name: 'FastEncrypted'},
+    {key: eSecurityFlag.StrongEncrypt, name: 'StrongEncrypt'},
+    {key: eSecurityFlag.StrongDecrypt, name: 'StrongDecrypt'},
+    {key: eSecurityFlag.StrongEncrypted, name: 'StrongEncrypted'},
+    {key: eSecurityFlag.OneWayHash, name: 'OneWayHash'},
+    {key: eSecurityFlag.OneWayHashed, name: 'OneWayHashed'},
+    {key: eSecurityFlag.Hide, name: 'Hide'},
    ]
    
    export enum eSeriesGrain {
@@ -2619,15 +2737,15 @@ export class ApiData {
    }
    
    export const eSeriesGrainItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eSeriesGrain.Second, name: 'Second', description: ''},
-    {key: eSeriesGrain.Minute, name: 'Minute', description: ''},
-    {key: eSeriesGrain.Hour, name: 'Hour', description: ''},
-    {key: eSeriesGrain.Day, name: 'Day', description: ''},
-    {key: eSeriesGrain.Week, name: 'Week', description: ''},
-    {key: eSeriesGrain.Month, name: 'Month', description: ''},
-    {key: eSeriesGrain.Year, name: 'Year', description: ''},
-    {key: eSeriesGrain.Number, name: 'Number', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eSeriesGrain.Second, name: 'Second'},
+    {key: eSeriesGrain.Minute, name: 'Minute'},
+    {key: eSeriesGrain.Hour, name: 'Hour'},
+    {key: eSeriesGrain.Day, name: 'Day'},
+    {key: eSeriesGrain.Week, name: 'Week'},
+    {key: eSeriesGrain.Month, name: 'Month'},
+    {key: eSeriesGrain.Year, name: 'Year'},
+    {key: eSeriesGrain.Number, name: 'Number'},
    ]
    
    export enum eSharedAccess {
@@ -2637,7 +2755,7 @@ export class ApiData {
    }
    
    export const eSharedAccessItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
+    {key: 0, name: 'Unknown'},
     {key: eSharedAccess.Public, name: 'Public', description: 'Shared data can be accessed by the public.'},
     {key: eSharedAccess.Registered, name: 'Registered', description: 'Shared data can be accessed any registered user.'},
     {key: eSharedAccess.Reader, name: 'Reader', description: 'Shared data can be accessed only by users with "PublishReader" permission.'},
@@ -2661,21 +2779,21 @@ export class ApiData {
    }
    
    export const eSharedObjectTypeItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eSharedObjectType.Connection, name: 'Connection', description: ''},
-    {key: eSharedObjectType.Table, name: 'Table', description: ''},
-    {key: eSharedObjectType.FileFormat, name: 'FileFormat', description: ''},
-    {key: eSharedObjectType.Datalink, name: 'Datalink', description: ''},
-    {key: eSharedObjectType.Datajob, name: 'Datajob', description: ''},
-    {key: eSharedObjectType.RemoteAgent, name: 'RemoteAgent', description: ''},
-    {key: eSharedObjectType.ColumnValidation, name: 'ColumnValidation', description: ''},
-    {key: eSharedObjectType.HubVariable, name: 'HubVariable', description: ''},
-    {key: eSharedObjectType.CustomFunction, name: 'CustomFunction', description: ''},
-    {key: eSharedObjectType.DatalinkTest, name: 'DatalinkTest', description: ''},
-    {key: eSharedObjectType.View, name: 'View', description: ''},
-    {key: eSharedObjectType.Api, name: 'Api', description: ''},
-    {key: eSharedObjectType.Dashboard, name: 'Dashboard', description: ''},
-    {key: eSharedObjectType.ListOfValues, name: 'ListOfValues', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eSharedObjectType.Connection, name: 'Connection'},
+    {key: eSharedObjectType.Table, name: 'Table'},
+    {key: eSharedObjectType.FileFormat, name: 'FileFormat'},
+    {key: eSharedObjectType.Datalink, name: 'Datalink'},
+    {key: eSharedObjectType.Datajob, name: 'Datajob'},
+    {key: eSharedObjectType.RemoteAgent, name: 'RemoteAgent'},
+    {key: eSharedObjectType.ColumnValidation, name: 'ColumnValidation'},
+    {key: eSharedObjectType.HubVariable, name: 'HubVariable'},
+    {key: eSharedObjectType.CustomFunction, name: 'CustomFunction'},
+    {key: eSharedObjectType.DatalinkTest, name: 'DatalinkTest'},
+    {key: eSharedObjectType.View, name: 'View'},
+    {key: eSharedObjectType.Api, name: 'Api'},
+    {key: eSharedObjectType.Dashboard, name: 'Dashboard'},
+    {key: eSharedObjectType.ListOfValues, name: 'ListOfValues'},
    ]
    
    export enum eSortDirection {
@@ -2684,9 +2802,9 @@ export class ApiData {
    }
    
    export const eSortDirectionItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eSortDirection.Ascending, name: 'Ascending', description: ''},
-    {key: eSortDirection.Descending, name: 'Descending', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eSortDirection.Ascending, name: 'Ascending'},
+    {key: eSortDirection.Descending, name: 'Descending'},
    ]
    
    export enum eSourceType {
@@ -2697,11 +2815,11 @@ export class ApiData {
    }
    
    export const eSourceTypeItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eSourceType.Datalink, name: 'Datalink', description: ''},
-    {key: eSourceType.Table, name: 'Table', description: ''},
-    {key: eSourceType.Rows, name: 'Rows', description: ''},
-    {key: eSourceType.Function, name: 'Function', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eSourceType.Datalink, name: 'Datalink'},
+    {key: eSourceType.Table, name: 'Table'},
+    {key: eSourceType.Rows, name: 'Rows'},
+    {key: eSourceType.Function, name: 'Function'},
    ]
    
    export enum eStatus {
@@ -2714,13 +2832,13 @@ export class ApiData {
    }
    
    export const eStatusItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eStatus.None, name: 'None', description: ''},
-    {key: eStatus.Ready, name: 'Ready', description: ''},
-    {key: eStatus.Imported, name: 'Imported', description: ''},
-    {key: eStatus.Updated, name: 'Updated', description: ''},
-    {key: eStatus.Added, name: 'Added', description: ''},
-    {key: eStatus.Error, name: 'Error', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eStatus.None, name: 'None'},
+    {key: eStatus.Ready, name: 'Ready'},
+    {key: eStatus.Imported, name: 'Imported'},
+    {key: eStatus.Updated, name: 'Updated'},
+    {key: eStatus.Added, name: 'Added'},
+    {key: eStatus.Error, name: 'Error'},
    ]
    
    export enum eTableType {
@@ -2730,10 +2848,10 @@ export class ApiData {
    }
    
    export const eTableTypeItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eTableType.Table, name: 'Table', description: ''},
-    {key: eTableType.View, name: 'View', description: ''},
-    {key: eTableType.Query, name: 'Query', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eTableType.Table, name: 'Table'},
+    {key: eTableType.View, name: 'View'},
+    {key: eTableType.Query, name: 'Query'},
    ]
    
    export enum eTestTableAction {
@@ -2745,12 +2863,12 @@ export class ApiData {
    }
    
    export const eTestTableActionItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eTestTableAction.None, name: 'None', description: ''},
-    {key: eTestTableAction.Truncate, name: 'Truncate', description: ''},
-    {key: eTestTableAction.DropCreate, name: 'DropCreate', description: ''},
-    {key: eTestTableAction.TruncateCopy, name: 'TruncateCopy', description: ''},
-    {key: eTestTableAction.DropCreateCopy, name: 'DropCreateCopy', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eTestTableAction.None, name: 'None'},
+    {key: eTestTableAction.Truncate, name: 'Truncate'},
+    {key: eTestTableAction.DropCreate, name: 'DropCreate'},
+    {key: eTestTableAction.TruncateCopy, name: 'TruncateCopy'},
+    {key: eTestTableAction.DropCreateCopy, name: 'DropCreateCopy'},
    ]
    
    export enum eTransformItemType {
@@ -2770,20 +2888,20 @@ export class ApiData {
    }
    
    export const eTransformItemTypeItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eTransformItemType.BuiltInFunction, name: 'BuiltInFunction', description: ''},
-    {key: eTransformItemType.CustomFunction, name: 'CustomFunction', description: ''},
-    {key: eTransformItemType.ColumnPair, name: 'ColumnPair', description: ''},
-    {key: eTransformItemType.JoinPair, name: 'JoinPair', description: ''},
-    {key: eTransformItemType.Sort, name: 'Sort', description: ''},
-    {key: eTransformItemType.Column, name: 'Column', description: ''},
-    {key: eTransformItemType.FilterPair, name: 'FilterPair', description: ''},
-    {key: eTransformItemType.AggregatePair, name: 'AggregatePair', description: ''},
-    {key: eTransformItemType.Series, name: 'Series', description: ''},
-    {key: eTransformItemType.JoinNode, name: 'JoinNode', description: ''},
-    {key: eTransformItemType.GroupNode, name: 'GroupNode', description: ''},
-    {key: eTransformItemType.Node, name: 'Node', description: ''},
-    {key: eTransformItemType.UnGroup, name: 'UnGroup', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eTransformItemType.BuiltInFunction, name: 'BuiltInFunction'},
+    {key: eTransformItemType.CustomFunction, name: 'CustomFunction'},
+    {key: eTransformItemType.ColumnPair, name: 'ColumnPair'},
+    {key: eTransformItemType.JoinPair, name: 'JoinPair'},
+    {key: eTransformItemType.Sort, name: 'Sort'},
+    {key: eTransformItemType.Column, name: 'Column'},
+    {key: eTransformItemType.FilterPair, name: 'FilterPair'},
+    {key: eTransformItemType.AggregatePair, name: 'AggregatePair'},
+    {key: eTransformItemType.Series, name: 'Series'},
+    {key: eTransformItemType.JoinNode, name: 'JoinNode'},
+    {key: eTransformItemType.GroupNode, name: 'GroupNode'},
+    {key: eTransformItemType.Node, name: 'Node'},
+    {key: eTransformItemType.UnGroup, name: 'UnGroup'},
    ]
    
    export enum eTransformType {
@@ -2804,21 +2922,21 @@ export class ApiData {
    }
    
    export const eTransformTypeItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eTransformType.Mapping, name: 'Mapping', description: ''},
-    {key: eTransformType.Filter, name: 'Filter', description: ''},
-    {key: eTransformType.Sort, name: 'Sort', description: ''},
-    {key: eTransformType.Group, name: 'Group', description: ''},
-    {key: eTransformType.Aggregate, name: 'Aggregate', description: ''},
-    {key: eTransformType.Series, name: 'Series', description: ''},
-    {key: eTransformType.Join, name: 'Join', description: ''},
-    {key: eTransformType.Rows, name: 'Rows', description: ''},
-    {key: eTransformType.Lookup, name: 'Lookup', description: ''},
-    {key: eTransformType.Validation, name: 'Validation', description: ''},
-    {key: eTransformType.Delta, name: 'Delta', description: ''},
-    {key: eTransformType.Concatenate, name: 'Concatenate', description: ''},
-    {key: eTransformType.Profile, name: 'Profile', description: ''},
-    {key: eTransformType.Internal, name: 'Internal', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eTransformType.Mapping, name: 'Mapping'},
+    {key: eTransformType.Filter, name: 'Filter'},
+    {key: eTransformType.Sort, name: 'Sort'},
+    {key: eTransformType.Group, name: 'Group'},
+    {key: eTransformType.Aggregate, name: 'Aggregate'},
+    {key: eTransformType.Series, name: 'Series'},
+    {key: eTransformType.Join, name: 'Join'},
+    {key: eTransformType.Rows, name: 'Rows'},
+    {key: eTransformType.Lookup, name: 'Lookup'},
+    {key: eTransformType.Validation, name: 'Validation'},
+    {key: eTransformType.Delta, name: 'Delta'},
+    {key: eTransformType.Concatenate, name: 'Concatenate'},
+    {key: eTransformType.Profile, name: 'Profile'},
+    {key: eTransformType.Internal, name: 'Internal'},
    ]
    
    export enum eTransformWriterMethod {
@@ -2827,9 +2945,9 @@ export class ApiData {
    }
    
    export const eTransformWriterMethodItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eTransformWriterMethod.Bulk, name: 'Bulk', description: ''},
-    {key: eTransformWriterMethod.Transaction, name: 'Transaction', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eTransformWriterMethod.Bulk, name: 'Bulk'},
+    {key: eTransformWriterMethod.Transaction, name: 'Transaction'},
    ]
    
    export enum eTriggerMethod {
@@ -2842,13 +2960,13 @@ export class ApiData {
    }
    
    export const eTriggerMethodItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eTriggerMethod.NotTriggered, name: 'NotTriggered', description: ''},
-    {key: eTriggerMethod.Manual, name: 'Manual', description: ''},
-    {key: eTriggerMethod.Schedule, name: 'Schedule', description: ''},
-    {key: eTriggerMethod.FileWatcher, name: 'FileWatcher', description: ''},
-    {key: eTriggerMethod.External, name: 'External', description: ''},
-    {key: eTriggerMethod.Datajob, name: 'Datajob', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eTriggerMethod.NotTriggered, name: 'NotTriggered'},
+    {key: eTriggerMethod.Manual, name: 'Manual'},
+    {key: eTriggerMethod.Schedule, name: 'Schedule'},
+    {key: eTriggerMethod.FileWatcher, name: 'FileWatcher'},
+    {key: eTriggerMethod.External, name: 'External'},
+    {key: eTriggerMethod.Datajob, name: 'Datajob'},
    ]
    
    export enum eTypeCode {
@@ -2882,33 +3000,33 @@ export class ApiData {
    }
    
    export const eTypeCodeItems = [
-    {key: eTypeCode.Unknown, name: 'Unknown', description: ''},
-    {key: eTypeCode.Binary, name: 'Binary', description: ''},
-    {key: eTypeCode.Byte, name: 'Byte', description: ''},
-    {key: eTypeCode.Char, name: 'Char', description: ''},
-    {key: eTypeCode.SByte, name: 'SByte', description: ''},
-    {key: eTypeCode.UInt16, name: 'UInt16', description: ''},
-    {key: eTypeCode.UInt32, name: 'UInt32', description: ''},
-    {key: eTypeCode.UInt64, name: 'UInt64', description: ''},
-    {key: eTypeCode.Int16, name: 'Int16', description: ''},
-    {key: eTypeCode.Int32, name: 'Int32', description: ''},
-    {key: eTypeCode.Int64, name: 'Int64', description: ''},
-    {key: eTypeCode.Decimal, name: 'Decimal', description: ''},
-    {key: eTypeCode.Double, name: 'Double', description: ''},
-    {key: eTypeCode.Single, name: 'Single', description: ''},
-    {key: eTypeCode.String, name: 'String', description: ''},
-    {key: eTypeCode.Text, name: 'Text', description: ''},
-    {key: eTypeCode.Boolean, name: 'Boolean', description: ''},
-    {key: eTypeCode.DateTime, name: 'DateTime', description: ''},
-    {key: eTypeCode.Time, name: 'Time', description: ''},
-    {key: eTypeCode.Guid, name: 'Guid', description: ''},
-    {key: eTypeCode.Json, name: 'Json', description: ''},
-    {key: eTypeCode.Xml, name: 'Xml', description: ''},
-    {key: eTypeCode.Enum, name: 'Enum', description: ''},
-    {key: eTypeCode.CharArray, name: 'CharArray', description: ''},
-    {key: eTypeCode.Object, name: 'Object', description: ''},
-    {key: eTypeCode.Node, name: 'Node', description: ''},
-    {key: eTypeCode.Geometry, name: 'Geometry', description: ''},
+    {key: eTypeCode.Unknown, name: 'Unknown'},
+    {key: eTypeCode.Binary, name: 'Binary'},
+    {key: eTypeCode.Byte, name: 'Byte'},
+    {key: eTypeCode.Char, name: 'Char'},
+    {key: eTypeCode.SByte, name: 'SByte'},
+    {key: eTypeCode.UInt16, name: 'UInt16'},
+    {key: eTypeCode.UInt32, name: 'UInt32'},
+    {key: eTypeCode.UInt64, name: 'UInt64'},
+    {key: eTypeCode.Int16, name: 'Int16'},
+    {key: eTypeCode.Int32, name: 'Int32'},
+    {key: eTypeCode.Int64, name: 'Int64'},
+    {key: eTypeCode.Decimal, name: 'Decimal'},
+    {key: eTypeCode.Double, name: 'Double'},
+    {key: eTypeCode.Single, name: 'Single'},
+    {key: eTypeCode.String, name: 'String'},
+    {key: eTypeCode.Text, name: 'Text'},
+    {key: eTypeCode.Boolean, name: 'Boolean'},
+    {key: eTypeCode.DateTime, name: 'DateTime'},
+    {key: eTypeCode.Time, name: 'Time'},
+    {key: eTypeCode.Guid, name: 'Guid'},
+    {key: eTypeCode.Json, name: 'Json'},
+    {key: eTypeCode.Xml, name: 'Xml'},
+    {key: eTypeCode.Enum, name: 'Enum'},
+    {key: eTypeCode.CharArray, name: 'CharArray'},
+    {key: eTypeCode.Object, name: 'Object'},
+    {key: eTypeCode.Node, name: 'Node'},
+    {key: eTypeCode.Geometry, name: 'Geometry'},
    ]
    
    export enum eUpdateStrategy {
@@ -2921,13 +3039,13 @@ export class ApiData {
    }
    
    export const eUpdateStrategyItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eUpdateStrategy.Reload, name: 'Reload', description: ''},
-    {key: eUpdateStrategy.Append, name: 'Append', description: ''},
-    {key: eUpdateStrategy.AppendUpdate, name: 'AppendUpdate', description: ''},
-    {key: eUpdateStrategy.AppendUpdateDelete, name: 'AppendUpdateDelete', description: ''},
-    {key: eUpdateStrategy.AppendUpdatePreserve, name: 'AppendUpdatePreserve', description: ''},
-    {key: eUpdateStrategy.AppendUpdateDeletePreserve, name: 'AppendUpdateDeletePreserve', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eUpdateStrategy.Reload, name: 'Reload'},
+    {key: eUpdateStrategy.Append, name: 'Append'},
+    {key: eUpdateStrategy.AppendUpdate, name: 'AppendUpdate'},
+    {key: eUpdateStrategy.AppendUpdateDelete, name: 'AppendUpdateDelete'},
+    {key: eUpdateStrategy.AppendUpdatePreserve, name: 'AppendUpdatePreserve'},
+    {key: eUpdateStrategy.AppendUpdateDeletePreserve, name: 'AppendUpdateDeletePreserve'},
    ]
    
    export enum eViewType {
@@ -2936,9 +3054,9 @@ export class ApiData {
    }
    
    export const eViewTypeItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eViewType.Table, name: 'Table', description: ''},
-    {key: eViewType.Chart, name: 'Chart', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eViewType.Table, name: 'Table'},
+    {key: eViewType.Chart, name: 'Chart'},
    ]
    
    export enum eWeekOfMonth {
@@ -2950,12 +3068,12 @@ export class ApiData {
    }
    
    export const eWeekOfMonthItems = [
-    {key: 0, name: 'Unknown', description: 'Unknown'},
-    {key: eWeekOfMonth.First, name: 'First', description: ''},
-    {key: eWeekOfMonth.Second, name: 'Second', description: ''},
-    {key: eWeekOfMonth.Third, name: 'Third', description: ''},
-    {key: eWeekOfMonth.Fourth, name: 'Fourth', description: ''},
-    {key: eWeekOfMonth.Last, name: 'Last', description: ''},
+    {key: 0, name: 'Unknown'},
+    {key: eWeekOfMonth.First, name: 'First'},
+    {key: eWeekOfMonth.Second, name: 'Second'},
+    {key: eWeekOfMonth.Third, name: 'Third'},
+    {key: eWeekOfMonth.Fourth, name: 'Fourth'},
+    {key: eWeekOfMonth.Last, name: 'Last'},
    ]
    
    export enum logLevel {
@@ -2969,13 +3087,13 @@ export class ApiData {
    }
    
    export const logLevelItems = [
-    {key: logLevel.Trace, name: 'Trace', description: ''},
-    {key: logLevel.Debug, name: 'Debug', description: ''},
-    {key: logLevel.Information, name: 'Information', description: ''},
-    {key: logLevel.Warning, name: 'Warning', description: ''},
-    {key: logLevel.Error, name: 'Error', description: ''},
-    {key: logLevel.Critical, name: 'Critical', description: ''},
-    {key: logLevel.None, name: 'None', description: ''},
+    {key: logLevel.Trace, name: 'Trace'},
+    {key: logLevel.Debug, name: 'Debug'},
+    {key: logLevel.Information, name: 'Information'},
+    {key: logLevel.Warning, name: 'Warning'},
+    {key: logLevel.Error, name: 'Error'},
+    {key: logLevel.Critical, name: 'Critical'},
+    {key: logLevel.None, name: 'None'},
    ]
    
    

@@ -14,6 +14,7 @@ using Dexih.Utils.Crypto;
 using dexih.api.Services.Remote;
 using dexih.operations;
 using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -87,7 +88,7 @@ namespace dexih.api.Controllers
         [AllowAnonymous]
         public async Task<ReturnUser> Login([FromBody] LoginModel login, CancellationToken cancellationToken)
         {
-            var user = await _operations.RepositoryManager.GetUserFromEmailAsync(login.Email, cancellationToken);
+            var user = await _operations.RepositoryManager.GetUserFromLoginAsync(login.Email, cancellationToken);
 
             if (user == null)
             {
@@ -259,13 +260,18 @@ namespace dexih.api.Controllers
 
 	            }
 	            
-	            var existingUser = await _operations.RepositoryManager.GetUserFromEmailAsync(register.Email, cancellationToken);
+	            var existingUser = await _operations.RepositoryManager.GetUserFromLoginAsync(register.Email, cancellationToken);
+
+	            if (existingUser == null)
+	            {
+		            existingUser = await _operations.RepositoryManager.GetUserFromLoginAsync(register.UserName, cancellationToken);
+	            }
 
                 if(existingUser == null)
 				{
 					var user = new ApplicationUser
 					{
-						UserName = register.Email,
+						UserName = register.UserName,
 						Email = register.Email,
 						FirstName = register.Firstname,
 						LastName = register.Lastname,
@@ -296,7 +302,7 @@ namespace dexih.api.Controllers
 						if (register.Provider != ELoginProvider.Dexih)
 						{
 							await _operations.RepositoryManager.AddLoginAsync(user, register.Provider, externalLoginResult.ProviderKey, cancellationToken);
-							await _signInManager.SignInAsync(user, false);
+							_signInManager.SignInAsync(user, false);
 							SendRegisteredEmail(user);
 							return new ReturnUser(user);
 						}
@@ -313,7 +319,7 @@ namespace dexih.api.Controllers
 								await SendConfirmationEmail(user, cancellationToken);
 							}
 
-							await SendSupportMessage($"User registration succeeded for {user.Email}.",
+							SendSupportMessage($"User registration succeeded for {user.Email}.",
 								$"The user user {user.Email} is not registered.  Invitation status is {user.IsInvited}.");
 
 							return new ReturnUser(user);
@@ -321,7 +327,7 @@ namespace dexih.api.Controllers
 					}
 					catch (Exception ex)
 					{
-						await SendSupportMessage($"User registration failed for {user.Email}.", ex.Message);
+						SendSupportMessage($"User registration failed for {user.Email}.", ex.Message);
 						throw;
 					}
 				}
@@ -329,11 +335,11 @@ namespace dexih.api.Controllers
                 {
 					if(existingUser.IsRegistered) 
 					{
-                        throw new AccountControllerException("The specified email address is already registered.");
+                        throw new AccountControllerException("The specified username / email address is already registered.");
 					}
 					else 
 					{
-						existingUser.UserName = register.Email;
+						existingUser.UserName = register.UserName;
 						existingUser.Email = register.Email;
 						existingUser.FirstName = register.Firstname;
 						existingUser.LastName = register.Lastname;
@@ -367,7 +373,7 @@ namespace dexih.api.Controllers
 						}
 
 						await _operations.RepositoryManager.UpdateUserAsync(existingUser, cancellationToken);
-						await SendSupportMessage($"User registration completed for {existingUser.Email}.", $"The user user {existingUser.Email} is has registered.  Invitation status is {existingUser.IsInvited}.");
+						SendSupportMessage($"User registration completed for {existingUser.Email}.", $"The user user {existingUser.Email} is has registered.  Invitation status is {existingUser.IsInvited}.");
 
 						return new ReturnUser(existingUser);
 					}
@@ -376,7 +382,7 @@ namespace dexih.api.Controllers
             }
 
             // If we got this far, something failed in the model.
-	        await SendSupportMessage($"User registration failed for {register.Email}.", "Unknown error");
+	        SendSupportMessage($"User registration failed for {register.Email}.", "Unknown error");
             throw new AccountControllerException("Registration failed.");
         }
 	    
@@ -386,7 +392,6 @@ namespace dexih.api.Controllers
             // Send an email with this link
 	        var code = await _operations.RepositoryManager.GenerateEmailConfirmationTokenAsync(user, cancellationToken);
 			var url = (Request.IsHttps ? "https://" : "http://") + Request.Host.ToUriComponent();
-
 	        var verifyUrl = $"{url}/auth/verifyemail?email={user.Email}&code={HttpUtility.UrlEncode(code)}";
 	        
 	        var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates", "confirmEmail.html");
@@ -423,7 +428,7 @@ namespace dexih.api.Controllers
 		    _emailSender.SendEmail(user.Email, subject, null, body.ToString());
 	    }
 
-	    public Task SendSupportMessage(string subject, string message)
+	    public void SendSupportMessage(string subject, string message)
 	    {
 		    if (!string.IsNullOrEmpty(_operations.Config.SupportEmailAccount))
 		    {
@@ -444,8 +449,8 @@ namespace dexih.api.Controllers
 				    _logger.LogError(ex, $"Error sending support message.  subject: {subject}, message: {message}");
 			    }
 		    }
-		    return Task.CompletedTask;
 	    }
+	    
 
         // GET: /Account/ConfirmEmail
         [HttpPost("[action]")]
@@ -457,7 +462,7 @@ namespace dexih.api.Controllers
                 throw new AccountControllerException("The email and verification code were not completed.");
             }
 
-	        var user = await _operations.RepositoryManager.GetUserFromEmailAsync(email.Email, cancellationToken);
+	        var user = await _operations.RepositoryManager.GetUserFromLoginAsync(email.Email, cancellationToken);
 
 	        if (user == null)
             {
@@ -522,7 +527,7 @@ namespace dexih.api.Controllers
 
 	    private async Task<ExternalLoginResult> GoogleTokenVerification(string idToken)
 	    {
-		    var client = new HttpClient();
+		    using var client = new HttpClient();
 
 		    var apiResult = await client.GetAsync("https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + idToken);
 		    if (!apiResult.IsSuccessStatusCode)
@@ -571,7 +576,7 @@ namespace dexih.api.Controllers
 	    
 	    private async Task<ExternalLoginResult> MicrosoftTokenVerification(string authenticationToken)
 	    {
-		    var client = new HttpClient();
+		    using var client = new HttpClient();
 		    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authenticationToken);
 		    var apiResult = await client.GetAsync("https://graph.microsoft.com/v1.0/me");
 		    if (!apiResult.IsSuccessStatusCode)
@@ -713,7 +718,7 @@ namespace dexih.api.Controllers
         [AllowAnonymous]
         public async Task ResendConfirmationEmail([FromBody] EmailModel email, CancellationToken cancellationToken)
         {
-	        var user = await _operations.RepositoryManager.GetUserFromEmailAsync(email.Email, cancellationToken);
+	        var user = await _operations.RepositoryManager.GetUserFromLoginAsync(email.Email, cancellationToken);
             await SendConfirmationEmail(user, cancellationToken);
         }
 
@@ -726,7 +731,7 @@ namespace dexih.api.Controllers
         {
             if (ModelState.IsValid)
             {
-	            var user = await _operations.RepositoryManager.GetUserFromEmailAsync(login.Email, cancellationToken);
+	            var user = await _operations.RepositoryManager.GetUserFromLoginAsync(login.Email, cancellationToken);
 	            
                 if (user == null || !user.EmailConfirmed)
                 {
@@ -765,7 +770,7 @@ namespace dexih.api.Controllers
                 throw new AccountControllerException("The reset password failed.");
             }
             
-	        var user = await _operations.RepositoryManager.GetUserFromEmailAsync(resetPassword.Email, cancellationToken);
+	        var user = await _operations.RepositoryManager.GetUserFromLoginAsync(resetPassword.Email, cancellationToken);
             await _operations.RepositoryManager.ResetPasswordAsync(user, resetPassword.Code, resetPassword.Password, cancellationToken);
         }
 
@@ -788,9 +793,12 @@ namespace dexih.api.Controllers
                 throw new AccountControllerException("The update details failed as the user could not be found.");
             }
 
+			currentUser.UserName = updateDetails.UserName;
             currentUser.FirstName = updateDetails.FirstName;
 			currentUser.LastName = updateDetails.LastName;
 			currentUser.Subscription = updateDetails.Subscription;
+			currentUser.NotifySupportMessage = updateDetails.NotifySupportMessage;
+			currentUser.NotifyPrivateMessage = updateDetails.NotifyPrivateMessage;
 
 			await _operations.RepositoryManager.UpdateUserAsync(currentUser, cancellationToken);
         }
@@ -1120,7 +1128,7 @@ namespace dexih.api.Controllers
 	    //[ValidateHub(EPermission.User)]
 	    public async Task CancelTasks([FromBody] ManagedTask[] tasks, CancellationToken cancellationToken)
 	    {
-		    _logger.LogTrace(LoggingEvents.HubRunDatalinks, "HubController.CancelTasks {references}", string.Join(",", tasks.Select(c=>c.TaskId)));
+		    _logger.LogTrace(LoggingEvents.HubRunDatalinks, "AccountController.CancelTasks {references}", string.Join(",", tasks.Select(c=>c.TaskId)));
 
 		    var repositoryManager = _operations.RepositoryManager;
 		    await _remoteAgents.CancelTasks(tasks, repositoryManager, cancellationToken);
@@ -1139,14 +1147,132 @@ namespace dexih.api.Controllers
 		    var user = await GetApplicationUser(cancellationToken);
 		    if (user == null)
 		    {
-			    throw new AccountControllerException("The remove user token failed.");
+			    throw new AccountControllerException("Could not find the current user.");
 		    }
 		    
-		    _logger.LogTrace(LoggingEvents.HubRestartAgent, "HubController.HubRestartAgent {references}", string.Join(",", restartAgents.InstanceIds));
+		    _logger.LogTrace(LoggingEvents.HubRestartAgent, "AccountController.HubRestartAgent {references}", string.Join(",", restartAgents.InstanceIds));
 
 		    var repositoryManager = _operations.RepositoryManager;
 		    await _remoteAgents.RestartAgents(user.Id, restartAgents.InstanceIds, restartAgents.Force, repositoryManager, cancellationToken);
 	    }
 	    
+	    /// <summary>
+	    /// Cancels any running tasks 
+	    /// </summary>
+	    /// <returns></returns>
+	    [HttpPost("[action]")]
+	    //[ValidateHub(EPermission.User)]
+	    public async Task<DexihIssue> SaveIssue([FromBody] DexihIssue issue, CancellationToken cancellationToken)
+	    {
+		    var user = await GetApplicationUser(cancellationToken);
+		    if (user == null)
+		    {
+			    throw new AccountControllerException("Could not find the current user.");
+		    }
+		    
+		    _logger.LogTrace(LoggingEvents.SaveIssue, "AccountController.SaveIssue {references}", issue.Name);
+		    
+		    var newIssue = await _operations.RepositoryManager.SaveIssueAsync(issue, _operations.Config.GitHubAccessToken, user, cancellationToken);
+		    
+		    await SendIssueMessages(newIssue, "A new issue was created",
+			    "A new issue was created, please review the link or log into the information hub for more information", cancellationToken);
+		    return newIssue;
+	    }
+	    
+	    /// <summary>
+	    /// Cancels any running tasks 
+	    /// </summary>
+	    /// <returns></returns>
+	    [HttpGet("[action]")]
+	    public async Task<DexihIssue[]> GetIssues(CancellationToken cancellationToken)
+	    {
+		    var user = await GetApplicationUser(cancellationToken);
+		    if (user == null)
+		    {
+			    throw new AccountControllerException("Could not find the current user.");
+		    }
+		    
+		    _logger.LogTrace(LoggingEvents.GetIssues, "AccountController.GetIssues");
+		    return await _operations.RepositoryManager.GetUserIssues(user, cancellationToken);
+	    }
+	    
+	    /// <returns></returns>
+	    [HttpPost("[action]")]
+	    //[ValidateHub(EPermission.User)]
+	    public async Task<DexihIssue> GetIssue([FromBody] GetIssue getIssue, CancellationToken cancellationToken)
+	    {
+		    var user = await GetApplicationUser(cancellationToken);
+		    if (user == null)
+		    {
+			    throw new AccountControllerException("Could not find the current user.");
+		    }
+		    
+		    _logger.LogTrace(LoggingEvents.GetIssue, "AccountController.GetIssue {references}", getIssue.IssueKey);
+		    return await _operations.RepositoryManager.GetIssue(user, getIssue.IssueKey, cancellationToken);
+	    }
+	    
+	    /// <returns></returns>
+	    [HttpPost("[action]")]
+	    //[ValidateHub(EPermission.User)]
+	    public async Task<DexihIssue> AddIssueComment([FromBody] IssueComment issueComment, CancellationToken cancellationToken)
+	    {
+		    var user = await GetApplicationUser(cancellationToken);
+		    if (user == null)
+		    {
+			    throw new AccountControllerException("Could not find the current user.");
+		    }
+
+		    var newIssueComment = new DexihIssueComment()
+		    {
+			    IssueKey = issueComment.IssueKey,
+			    Comment = issueComment.Comment,
+			    UserId = user.Id,
+		    };
+		    
+		    _logger.LogTrace(LoggingEvents.AddIssueComment, "AccountController.AddIssueComment {references}", issueComment.IssueKey);
+		    await _operations.RepositoryManager.AddIssueComment(user, newIssueComment, cancellationToken);
+		    var newIssue = await _operations.RepositoryManager.GetIssue(user, issueComment.IssueKey, cancellationToken);
+
+		    await SendIssueMessages(newIssue, "A comment was added to an issue",
+			    "A comment was added to an existing issue, please review the link or log into the information hub for more information", cancellationToken);
+		    
+		    return newIssue;
+	    }
+	    
+	    public async Task SendIssueMessages(DexihIssue issue, string subject, string message, CancellationToken cancellationToken)
+	    {
+		    try
+		    {
+			    var users = await _operations.RepositoryManager.GetIssueUsers(issue, cancellationToken);
+			    
+			    var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates", "issueEmail.html");
+			    var body = new StringBuilder(System.IO.File.ReadAllText(path));
+			    var url = (Request.IsHttps ? "https://" : "http://") + Request.Host.ToUriComponent();
+			    body.Replace("{{url}}", url);
+			    body.Replace("{{message}}", message);
+			    
+			    var issueUrl = $"{url}/hubs/index/support/edit/{issue.Key}";
+			    body.Replace("{{link}}", issueUrl);
+
+			    var newSubject = $"{subject}: issue: {issue.Name}";
+
+			    foreach (var user in users.Where(c => c.NotifySupportMessage))
+			    {
+				    var bodyString = body.ToString().Replace("{{user}}", user.UserName);
+				    _emailSender.SendEmail(user.Email, newSubject, null,bodyString);
+			    }
+
+			    if (_operations.Config.SupportEmailAccount != null)
+			    {
+				    var bodyString = body.ToString().Replace("{{user}}", "support");
+				    _emailSender.SendEmail(_operations.Config.SupportEmailAccount, newSubject, null,
+					    bodyString);
+			    }
+		    }
+		    catch (Exception ex)
+		    {
+			    _logger.LogError(ex, $"Error sending support message.  subject: {subject}, message: {message}");
+		    }
+	    }
     }
 }

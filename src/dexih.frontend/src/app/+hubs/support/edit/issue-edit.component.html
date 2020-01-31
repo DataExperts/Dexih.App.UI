@@ -1,0 +1,110 @@
+<div class="container">
+	<dexih-message #DexihMessage></dexih-message>
+
+	<dexih-widget *ngIf="mainForm" iconClass="fa fa-ticket" title="Integration Hub Support">
+		<support-options [isExpanded]="true"></support-options>
+
+		<dexih-widget-section 
+			title="Raise an issue or feature requests" 
+			subTitle="Create by {{mainForm.controls.userName.value}} on {{mainForm.controls.updateDate.value | date: 'short' }}"
+			[showExpandButton]="true"
+			iconClass="fa fa-lg fa-fw fa-comments" [padding]="true">
+			<ng-template #header>
+				<dexih-button-save class="mr-1" (click)="!saving && !mainForm.pristine && save()"
+					[disabled]="saving || mainForm.pristine" [busy]="saving"></dexih-button-save>
+				<dexih-button-cancel (click)="!saving && cancel()" [disabled]="saving"></dexih-button-cancel>
+			</ng-template>
+
+			<form id="edit-form" [formGroup]="mainForm">
+				<fieldset>
+					
+					<section>
+						<form-input label="Title" formControlName="name" placeholder="Title" iconClass="fa fa-life-ring"
+							[errors]="formErrors.name">
+						</form-input>
+					</section>
+
+					<div class="form-row">
+						<section class="form-group col-md-6">
+							<form-select label="Type" formControlName="type" iconClass="fa fa-life-ring"
+								[items]="eIssueTypeItems" itemKey="key" itemName="description">
+							</form-select>
+						</section>
+						<section class="form-group col-md-6">
+							<form-select label="Severity" formControlName="severity" iconClass="fa fa-life-ring"
+								[items]="eIssueSeverityItems" itemKey="key" itemName="description">
+							</form-select>
+						</section>
+					</div>
+
+					<div class="form-row">
+						<section class="form-group col-md-6">
+							<form-select label="Category" formControlName="category" iconClass="fa fa-life-ring"
+								[items]="eIssueCategoryItems" itemKey="key" itemName="description">
+							</form-select>
+						</section>
+						<section class="form-group col-md-6">
+							<form-select label="Status" formControlName="issueStatus" iconClass="fa fa-circle-notch"
+								[items]="eIssueStatusItems" itemKey="key" itemName="description">
+							</form-select>
+						</section>
+					</div>
+
+					<section >
+						<form-checkbox c label="Is Private (will not be published to public github issue)" formControlName="isPrivate">
+						</form-checkbox>
+					</section>
+
+					<section>
+						<form-textarea label="Description" formControlName="description"
+							placeholder="Details of the issue of feature request" rows="20" [hideToggle]="isNew">
+						</form-textarea>
+					</section>
+
+				</fieldset>
+			</form>
+		</dexih-widget-section>
+
+		<dexih-widget-section *ngIf="mainForm.controls.dexihIssueComments.controls.length > 0"
+			title="Commentary" [showExpandButton]="true" iconClass="fa fa-lg fa-fw fa-comments" [padding]="true">
+
+			<form id="comment-form" *ngFor="let comment of mainForm.controls.dexihIssueComments.controls"
+				[formGroup]="comment">
+				<fieldset>
+					<section>
+						<form-textarea label="{{comment.controls.userName.value}} on {{comment.controls.updateDate.value | date: 'short' }}" formControlName="comment" placeholder="Comment" [disabled]="true"
+							iconClass="fa fa-comment">
+						</form-textarea>
+					</section>
+				</fieldset>
+			</form>
+		</dexih-widget-section>
+
+		<dexih-widget-section *ngIf="mainForm.controls.key.value > 0 && mainForm.controls.isPrivate.value" title="Add new comment" [showExpandButton]="true"
+			iconClass="fa fa-lg fa-fw fa-comments" [padding]="true">
+			<ng-template #header>
+				<dexih-button-save class="mr-1" (click)="!saving && newComment && saveComment()"
+					[disabled]="saving || !newComment" [busy]="saving"></dexih-button-save>
+				<dexih-button-cancel (click)="!saving && cancel()" [disabled]="saving"></dexih-button-cancel>
+			</ng-template>
+
+			<form>
+				<fieldset>
+					<section>
+						<form-textarea [(ngModel)]="newComment" [ngModelOptions]="{standalone: true}"
+							placeholder="Enter a new comment" iconClass="fa fa-comment" rows="20" [hideToggle]="true">
+						</form-textarea>
+					</section>
+				</fieldset>
+			</form>
+		</dexih-widget-section>
+
+		<dexih-widget-section *ngIf="mainForm.controls.key.value > 0 && !mainForm.controls.isPrivate.value" title="Add new comment" [showExpandButton]="true"
+			iconClass="fa fa-lg fa-fw fa-comments" [padding]="true">
+
+			<p>This is a public issue and is managed through the GitHub issue below.</p>
+			<a class="btn btn-primary" [href]="mainForm.controls.gitHubLink?.value" target="_blank" ><i class="fa fa-github"></i>GitHub Issue</a>
+		</dexih-widget-section>
+		
+	</dexih-widget>
+</div>

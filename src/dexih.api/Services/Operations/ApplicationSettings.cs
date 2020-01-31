@@ -46,6 +46,8 @@ namespace dexih.api.Services.Operations
         public bool EmailErrors { get; set; } = false;
         public bool UseResponseCompression { get; set; } = true;
 
+        public string GitHubAccessToken { get; set; }
+
         private DateTime _lastApiCall = DateTime.MinValue;
         private Dictionary<(string os, bool preRelease), VersionInfo> _latestVersions = new Dictionary<(string, bool), VersionInfo>();
         

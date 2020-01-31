@@ -1,0 +1,24 @@
+<dexih-widget-section iconClass="fa fa-question-circle" title="Support Channels" [padding]="true"
+	[showExpandButton]="true" [isExpanded]="isExpanded">
+	<div class="card-deck">
+		<div *ngFor="let supportOption of supportOptions" class="card">
+			<div class="card-header">
+				<div class="d-flex flex-row p-0">
+					<div>
+						<i [class]="supportOption.icon"></i>
+						{{supportOption.name}}
+					</div>
+				</div>
+			</div>
+			<div class="card-body">
+				<p class="card-text">{{supportOption.description}}</p>
+			</div>
+			<div class="card-footer">
+				<a [href]="supportOption.link" target="_blank" class="btn btn-button btn-info">
+					<i class="fa fa-folder-open"></i>
+					Open
+				</a>
+			</div>
+		</div>
+	</div>
+</dexih-widget-section>

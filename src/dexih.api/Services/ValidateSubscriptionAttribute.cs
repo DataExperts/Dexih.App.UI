@@ -80,7 +80,7 @@ namespace dexih.api.Services
                 context.HttpContext.Response.StatusCode = 400;
             }
 
-            if (hubPermission > _minimumPermission)
+            if (hubPermission < _minimumPermission)
             {
                 var result = new ReturnValue(false, "The current user does not have the necessary permissions to access this resource", null);
                 context.Result = new JsonResult(result);

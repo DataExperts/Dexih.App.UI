@@ -24,27 +24,30 @@ namespace dexih.api.Models
         public ELoginProvider Provider { get; set; } = ELoginProvider.Dexih;
 
         [DataMember(Order = 1)]
+        public string UserName{get; set; }
+        
+        [DataMember(Order = 2)]
         public string Email{get; set; }
 		
-        [DataMember(Order = 2)]
+        [DataMember(Order = 3)]
         public string Code{get; set; }
         
-        [DataMember(Order = 3)]
+        [DataMember(Order = 4)]
         public string Password{get; set; }
         
-        [DataMember(Order = 4)]
+        [DataMember(Order = 5)]
         public string Firstname{get; set; }
         
-        [DataMember(Order = 5)]
+        [DataMember(Order = 6)]
         public string Lastname{get; set; }
         
-        [DataMember(Order = 6)]
+        [DataMember(Order = 7)]
         public bool Subscription{get; set; }
         
-        [DataMember(Order = 7)]
+        [DataMember(Order = 8)]
         public bool Terms{get; set; }
         
-        [DataMember(Order = 8)]
+        [DataMember(Order = 9)]
         public string AuthenticationToken {get; set; }
 
     }
@@ -70,10 +73,13 @@ namespace dexih.api.Models
     }
     
 	public class UpdateDetails {
+        public string UserName {get; set; }
 		public string FirstName{get; set; }
 		public string LastName{get; set; }
 		public bool Subscription{get; set; }
-	}
+        public bool NotifyPrivateMessage { get; set; }
+        public bool NotifySupportMessage { get; set; }
+    }
 
     public class ExternalLoginModel {
         public ELoginProvider Provider{get; set; }
@@ -195,6 +201,8 @@ namespace dexih.api.Models
             EmailConfirmed = user.EmailConfirmed;
             UserName = user.UserName;
             IsInvited = user.IsInvited;
+            NotifySupportMessage = user.NotifySupportMessage;
+            NotifyPrivateMessage = user.NotifyPrivateMessage;
 
         }
         public string Email { get; set; }
@@ -211,7 +219,31 @@ namespace dexih.api.Models
         public bool EmailConfirmed { get; set; }
         public string UserName { get; set; }
         public bool IsInvited { get; set; }
+        public bool NotifyPrivateMessage { get; set; }
+        public bool NotifySupportMessage { get; set; }
     }
 
+    public class SaveIssue
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public EIssueType Type { get; set; }
+        public EIssueCategory Category { get; set; }
+        public EIssueSeverity Severity { get; set; }
+        public string Link { get; set; }
+        public string Data { get; set; }
+        public bool IsPrivate { get; set; }
+        public long HubKey { get; set; }
+    }
 
+    public class GetIssue
+    {
+        public long IssueKey { get; set; }
+    }
+
+    public class IssueComment
+    {
+        public long IssueKey { get; set; }
+        public string Comment { get; set; }
+    }
 }

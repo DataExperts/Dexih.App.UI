@@ -24,6 +24,7 @@ export class HubsSharedDataComponent implements OnInit, OnDestroy {
     eDownloadFormat = eDownloadFormat;
 
     hubs: DexihHubAuth[];
+    hubKeys: number[];
 
     columns = [
         { name: 'logicalName', title: 'Details', header: 'hubName', footer: 'description', format: 'Md' },
@@ -47,6 +48,10 @@ export class HubsSharedDataComponent implements OnInit, OnDestroy {
             ).subscribe(result => {
                 let params = result[0];
                 this.hubs = result[1];
+
+                if (this.hubs) {
+                    this.hubKeys = this.hubs.map(c => c.hubKey);
+                }
 
                 this.searchForm = this.fb.group({
                     'searchString': ['', [

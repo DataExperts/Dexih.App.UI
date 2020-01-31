@@ -170,6 +170,7 @@ namespace dexih.api
 		            options.JsonSerializerOptions.IgnoreNullValues = true;
 		            options.JsonSerializerOptions.Converters.Add(new JsonObjectConverter());
 		            options.JsonSerializerOptions.Converters.Add(new JsonTimeSpanConverter());
+		            options.JsonSerializerOptions.Converters.Add(new JsonDateTimeConverter());
 	            });
             
             // Add message services.
@@ -196,6 +197,7 @@ namespace dexih.api
 	        {
 		        options.PayloadSerializerOptions.Converters.Add(new JsonObjectConverter());
 		        options.PayloadSerializerOptions.Converters.Add(new JsonTimeSpanConverter());
+		        options.PayloadSerializerOptions.Converters.Add(new JsonDateTimeConverter());
 	        });
 	        
 	        if (!string.IsNullOrEmpty(appSettings.SignalRConnectionString))

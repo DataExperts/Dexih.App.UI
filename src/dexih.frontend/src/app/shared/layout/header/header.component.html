@@ -10,7 +10,7 @@
     <div class="ml-auto"></div>
 
     <!-- input: search field -->
-    <form #searchForm="ngForm" (ngSubmit)="onSubmit()" class="d-none d-md-inline form-inline">
+    <form *ngIf="this.hubCache" #searchForm="ngForm" (ngSubmit)="onSubmit()" class="d-none d-md-inline form-inline">
         <div class="input-group">
             <input [(ngModel)]="searchString" class="form-control" type="text" name="param" required placeholder="Search...">
             <div class="input-group-append">

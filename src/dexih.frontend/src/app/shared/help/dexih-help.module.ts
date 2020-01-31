@@ -5,12 +5,14 @@ import { DexihHelpComponent } from './dexih-help.component';
 import { DexihComponentsModule} from 'dexih-ngx-components';
 // import { DexihWidgetModule, DexihWidgetComponent } from '../ui/dexihWidget';
 import { NgxMdModule } from 'ngx-md';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    RouterModule,
     // DexihWidgetModule,
     DexihComponentsModule,
     NgxMdModule

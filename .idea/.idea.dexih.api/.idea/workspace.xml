@@ -1,14 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1be1a9df-0647-4351-ace4-9bafd064437b" name="Default" comment="refactor with better pushdown">
+    <list default="true" id="1be1a9df-0647-4351-ace4-9bafd064437b" name="Default" comment="added logging via email.">
+      <change afterPath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/issueEmail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.dexih.api/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/7za.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Controllers/AccountController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Controllers/AccountController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Controllers/AdminController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Controllers/AdminController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Controllers/DevController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Controllers/DevController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Controllers/HubController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Controllers/HubController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Controllers/ReaderController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Controllers/ReaderController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dexih.api/Controllers/RemoteController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Controllers/RemoteController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Services/ActionFilterAttribute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Services/ActionFilterAttribute.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Services/ErrorLogger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Services/ErrorLogger.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dexih.api/Services/ExceptionFilterAttribute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Services/ExceptionFilterAttribute.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Models/AccountModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Models/AccountModels.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Models/LoggingEvents.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Models/LoggingEvents.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/confirmEmail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/confirmEmail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/forgotPassword.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/forgotPassword.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/hubAccess.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/hubAccess.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/hubAccessRemove.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/hubAccessRemove.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/invite.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/invite.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/inviteRequired.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/inviteRequired.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/supportEmail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/supportEmail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/userReady.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/userReady.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dexih.api/Services/Operations/ApplicationSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Services/Operations/ApplicationSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Services/ValidateSubscriptionAttribute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Services/ValidateSubscriptionAttribute.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/Startup.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dexih.api/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.api/dexih.api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.api/dexih.api.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+admin/users/user-edit/user-edit.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+admin/users/user-edit/user-edit.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/auth.models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/auth.models.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/auth.routing.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/auth.routing.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/help/help.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/help/help.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/login/login.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/register/register.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/register/register.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/register/register.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+auth/register/register.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/datajob/datajob-edit/datajob-edit-guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/datajob/datajob-edit/datajob-edit-guard.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/datalink/datalink-edit/datalink-edit-guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/datalink/datalink-edit/datalink-edit-guard.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/datalink/datalink-edit/target/datalink-edit-target-table.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/datalink/datalink-edit/target/datalink-edit-target-table.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/item-edit.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/item-edit.guard.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/manage/manage-users-index/manage-users-index.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/manage/manage-users-index/manage-users-index.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/manage/manage-users-index/manage-users-index.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/manage/manage-users-index/manage-users-index.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/search/search.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/search/search.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/table/table-edit/table-edit-properties/table-edit-properties.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/table/table-edit/table-edit-properties/table-edit-properties.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/table/table-edit/table-edit-properties/table-edit-properties.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/table/table-edit/table-edit-properties/table-edit-properties.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/table/table-index/table-index.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/table/table-index/table-index.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/test/datalinkTest-edit/datalinkTest-edit-guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/test/datalinkTest-edit/datalinkTest-edit-guard.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/widgets/api-view/api-view.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/widgets/api-view/api-view.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/widgets/api-view/api-view.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/widgets/api-view/api-view.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/widgets/datalink-view/datalink-view.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/widgets/datalink-view/datalink-view.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/widgets/datalink-view/datalink-view.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hub/widgets/datalink-view/datalink-view.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/help/help.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/help/help.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/help/help.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/help/help.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs-sharedData/hubs-sharedData.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs-sharedData/hubs-sharedData.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs-sharedData/hubs-sharedData.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs-sharedData/hubs-sharedData.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs.routing.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/hubs.routing.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/manage/manage.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/manage/manage.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/manage/manage.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/+hubs/manage/manage.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/app.routing.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/app.routing.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/help/dexih-help.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/help/dexih-help.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/help/dexih-help.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/help/dexih-help.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/help/dexih-help.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/help/dexih-help.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/layout/header/header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/layout/header/header.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/layout/navigation/navigation.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/layout/navigation/navigation.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/shared.models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/shared.models.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/shared.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/app/shared/shared.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/assets/help/intro/getting _started.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/assets/help/reference/api.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/assets/help/reference/api.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dexih.frontend/src/assets/help/reference/references.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/dexih.frontend/src/assets/help/reference/references.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +105,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3F9A6BF9-CC47-4E04-95B6-4187B8F17D2C/bf/44b98578/ValueTask`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.ml/RecommendationAnalysis.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.ml/Prediction.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihIssue.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.connections.mysql/dexih.connections.sql.mysql.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/78A2747C-D93D-4E53-8CEF-F0B5D03FBCD8/17/09bfa24e/StreamContent.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/22A40031-1822-408A-8BD0-5691F3CDC119/66/c720e6ff/CalibratedBinaryClassificationMetrics.cs" root0="SKIP_HIGHLIGHTING" />
@@ -73,7 +136,6 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C9085ED1-14B8-43D6-8D44-32FEF830F672/53/a389844e/Contracts.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D66EA663-E803-4E1D-B9B9-92E84CCC8B9C/f6/995f69f2/MemoryCacheOptions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F2962BE6-6CA8-4DF5-B1B5-AAE94BCA8F2D/c9/091f94eb/DataType.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1B934EB7-CB5A-4077-8EE7-655BE94EC6C7/4f/f67f4470/RedisCache.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/e3/2d00e7b9/Object.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AA93D159-B2BF-4AE2-ABB8-0F3721E174C1/08/317b5e94/ConsoleLoggerExtensions.cs" root0="SKIP_HIGHLIGHTING" />
@@ -91,6 +153,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A17E1E26-FEDA-44AE-95FD-68D5ECA36B68/d8/0d55a705/ConsoleLoggerProvider.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Dexih.Utils.ManagedTasks/src/Dexih.Utils.ManagedTasks/ManagedTask.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/TransformProfile.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ADDAC454-BECF-4B85-8998-D029F0E200A0/d8/c252d12d/ProtectedPersonalDataAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Dexih.Utils.ManagedTasks/src/Dexih.Utils.ManagedTasks/ManagedTasks.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/Functions/TransformFunction.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Dexih.Utils.ManagedTasks/src/Dexih.Utils.ManagedTasks/ManagedTaskExceptions.cs" root0="FORCE_HIGHLIGHTING" />
@@ -103,6 +166,7 @@
     <setting file="file://$PROJECT_DIR$/../Dexih.Utils.ManagedTasks/src/Dexih.Utils.ManagedTasks/ManagedTaskProgress.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Dexih.Utils.ManagedTasks/src/Dexih.Utils.ManagedTasks/ManagedTaskFileWatcher.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AA12512C-E5DF-4FD1-95A2-D5FD9D4E2E0B/cb/c086e793/ManagedTask.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/064AA4A9-A3B4-47AE-B4CB-8418C055989A/3/IdentityUser.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/TransformPerformance.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CF55FC6C-CE60-45B1-ABC7-6679FEC0B70B/9e/d73f5b0c/CommandLineConfigurationExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/TransformWriterTaskTransaction.cs" root0="FORCE_HIGHLIGHTING" />
@@ -170,6 +234,7 @@
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/StreamCsv.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.connections.mongo/dexih.connections.mongo.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/TransformWriterOptions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5C44427D-0C55-4503-8458-C9D10FEB7503/ec/8ab9680e/MessagePackObjectAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/TransformMapping.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/ReaderMemory.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/ReaderDbDataReader.cs" root0="FORCE_HIGHLIGHTING" />
@@ -180,11 +245,13 @@
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/ReaderFileHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/Parameter/ParameterOutputColumn.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.operations/DatalinkTestRun.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3115BF55-B891-4EAB-92E9-9AA3A4218A6E/4/CategoryAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.operations/CacheManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C920CA20-B2C9-4BAA-8252-DA24034DC984/a3/7d1d888c/ClientProxyExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2050C92A-D081-4D01-836E-66C4768FC8A5/133/Thread.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C14CE778-03F9-4A8B-91AF-F420D22E7494/11/1f959871/ConcurrentDictionary`2.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/B74EB27A-C427-4F05-8562-24673D8BA2C0/8/ConsoleLoggerProcessor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3115BF55-B891-4EAB-92E9-9AA3A4218A6E/7/DescriptionAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/FA963E3C-2928-46E6-9152-058BA1EBB525/56/04d879c2/Enumerable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/InputColumn.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/Parameter/ParameterArray.cs" root0="FORCE_HIGHLIGHTING" />
@@ -346,6 +413,7 @@
     <setting file="file://$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/Properties/AssemblyInfo.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/test/dexih.api.tests/LoadTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Mapping/MapInputColumn.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Mapping/MapFunction.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/308319D5-31DB-401D-8248-B04560FA2EFD/29/SequenceEqual.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AA93D159-B2BF-4AE2-ABB8-0F3721E174C1/d6/851b684f/ConsoleLoggerProvider.cs" root0="SKIP_HIGHLIGHTING" />
@@ -400,8 +468,10 @@
     <setting file="file://$PROJECT_DIR$/../Dexih.App.Proxy/src/dexih.proxy/ReadWriteStream.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3F9A6BF9-CC47-4E04-95B6-4187B8F17D2C/b9/2419e0cf/TaskAwaiter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4BAAB77C-2996-4356-80C9-3DC570230C04/46/1dfa8cfb/TrainerInputBaseWithWeight.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AACD7803-6E11-42CC-AACB-241A66CB7540/5e/95659207/StandardTrainersCatalog.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/AutoStart.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihIssueComment.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4BAAB77C-2996-4356-80C9-3DC570230C04/a2/01a4b4ee/ColumnCopyingEstimator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5C44427D-0C55-4503-8458-C9D10FEB7503/47/0f069627/GenericCollectionFormatter`2.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2D506C52-CF4B-4BDB-B896-80B6E2C92982/f2/9ed38463/ChangeTracker.cs" root0="SKIP_HIGHLIGHTING" />
@@ -437,7 +507,6 @@
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/TaskTimer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/dexih.api/Services/ExceptionFilterAttribute.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/Extensions/SymbolExtensions.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/dexih.api/Services/Remote/Exceptions/SocketRemoteAgentExceptions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/DexihActiveAgent.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/dexih.api/Services/Remote/Exceptions/SocketBrowserExceptions.cs" root0="FORCE_HIGHLIGHTING" />
@@ -546,6 +615,7 @@
     <setting file="file://$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/LiveApis/ApiData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/LiveApis/LiveApis.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/RemoteOperations/RemoteOperationException.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/19C2CCA0-B8C1-473C-8397-D1E41F304E2A/40/JsonOptions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/863B81D8-9327-499B-9618-D9BE52F0AC42/33/d3bb5e89/IFeatureCollection.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/LiveApis/LiveDataItem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F44CF032-D8A2-4959-9CBB-A82BFF9B2253/56/7a44790a/DebugLoggerProvider.cs" root0="SKIP_HIGHLIGHTING" />
@@ -586,6 +656,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E3964A88-BCBA-47B7-91F9-9CA4829FCB19/68/6cde9544/CollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.utils.datatype/src/Dexih.Utils.DataType/DataType.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C1970516-6C7C-4A60-8E18-2E859C4DE6D2/b8/0298a9c7/JToken.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/8D506B5F-4E1A-4ACA-9C41-7C85929CCAED/68/2fd68ffa/Serializer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C1970516-6C7C-4A60-8E18-2E859C4DE6D2/e6/5a78ae14/JPath.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihDatalinkTable.cs" root0="FORCE_HIGHLIGHTING" />
@@ -612,9 +683,11 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5C44427D-0C55-4503-8458-C9D10FEB7503/3e/1329df9c/MessagePackSerializer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihParameterBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/Query/SelectColumns.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3F9A6BF9-CC47-4E04-95B6-4187B8F17D2C/d1/6644bb64/_ThreadPoolWaitCallback.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/Downloads/EntityFrameworkCore-release-2.2/src/EFCore/Internal/LazyLoader.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/51800021-AA38-44BD-9844-DD5256D6126A/07/504e8fcc/ManagedTaskFileWatcher.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/DataPack/DataPackColumn.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3F9A6BF9-CC47-4E04-95B6-4187B8F17D2C/71/eaee3cbe/CancellationTokenSource.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C3F34A33-6693-4A41-943C-6D559FBA8BBD/ac/ef2dde40/NameValueCollection.cs" root0="SKIP_HIGHLIGHTING" />
@@ -675,6 +748,7 @@
     <setting file="file://$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihDatalinkStepColumn.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/AsyncHelper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3F9A6BF9-CC47-4E04-95B6-4187B8F17D2C/93/0623a8b4/ThreadPoolWorkQueue.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/Extensions/JsonDateTimeConverter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/16775451-A13F-4DE6-9B27-54395A39BA7C/07/feffbccd/TypeConverterCache.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4771499C-B934-4F23-BF4A-59746894EBBB/93/12191553/ManagedTask.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../dexih.transforms/src/dexih.connections.postgressql/dexih.connections.sql.postgresql.cs" root0="FORCE_HIGHLIGHTING" />
@@ -703,33 +777,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/TransformSort.cs" />
-        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/EncryptedObject.cs" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/SharedSettings.cs" />
-        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/Extensions/Dictionary.cs" />
-        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/Extensions/DictionaryExtensions.cs" />
-        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/TransformMapping.cs" />
-        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/TransformJoin.cs" />
-        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Mapping/MapColumn.cs" />
-        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.builtIn/ConditionFunctions.cs" />
-        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/TransformFilter.cs" />
-        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Mapping/MapFilter.cs" />
-        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/dexih.functions.csproj" />
-        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Transform.cs" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote.operations/RemoteOperations/RemoteOperations.cs" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihDatalinkColumn.cs" />
-        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/Enums.cs" />
-        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/TransformWriterTarget.cs" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.operations/DatalinkTestRun.cs" />
-        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/TransformDelta.cs" />
-        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.builtIn/AggregateFunctions.cs" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.operations/DatalinkRun.cs" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihDatalinkTransform.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/ColumnValidationRun.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/Mapping/MapValidation.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/TransformValidation.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihTable.cs" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/dexih_repositoryContext.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/Table/Table.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.connections.db2/dexih.connections.sql.db2.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.connections.mysql/dexih.connections.sql.mysql.cs" />
@@ -742,18 +793,41 @@
         <option value="$PROJECT_DIR$/src/dexih.api/Services/Remote/RemoteAgents.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Services/Remote/IRemoteAgents.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihDatalinkTransformItem.cs" />
-        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.operations/RepositoryManager.cs" />
         <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.transforms/TransformWriterTaskBulk.cs" />
         <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote/appsettings.json" />
         <option value="$PROJECT_DIR$/src/dexih.api/Program.cs" />
-        <option value="$PROJECT_DIR$/src/dexih.api/Controllers/AccountController.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Controllers/RemoteController.cs" />
-        <option value="$PROJECT_DIR$/src/dexih.api/Controllers/HubController.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Services/ActionFilterAttribute.cs" />
-        <option value="$PROJECT_DIR$/src/dexih.api/Services/Operations/ApplicationSettings.cs" />
-        <option value="$PROJECT_DIR$/src/dexih.api/appsettings.json" />
         <option value="$PROJECT_DIR$/src/dexih.api/Services/ExceptionFilterAttribute.cs" />
         <option value="$PROJECT_DIR$/src/dexih.api/Services/ErrorLogger.cs" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/issue.cs" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/Issue.cs" />
+        <option value="$PROJECT_DIR$/src/dexih.api/Services/Operations/ApplicationSettings.cs" />
+        <option value="$PROJECT_DIR$/src/dexih.api/appsettings.json" />
+        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.connections.dexih/dexih.connections.dexih.cs" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Remote/src/dexih.remote/Program.cs" />
+        <option value="$PROJECT_DIR$/src/dexih.api/Models/LoggingEvents.cs" />
+        <option value="$PROJECT_DIR$/src/dexih.api/Controllers/DevController.cs" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihIssueComment.cs" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihUserName.cs" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/SeedData.cs" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/DexihIssue.cs" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/ApplicationUser.cs" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/dexih_repositoryContext.cs" />
+        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/Extensions/JsonDateTimeConverter.cs" />
+        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions/Extensions/JsonExtensions.cs" />
+        <option value="$PROJECT_DIR$/src/dexih.api/Startup.cs" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.repository/Enums.cs" />
+        <option value="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/issueEmail.html" />
+        <option value="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/supportEmail.html" />
+        <option value="$PROJECT_DIR$/src/dexih.api/Resources/EmailTemplates/confirmEmail.html" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.operations/Models.cs" />
+        <option value="$PROJECT_DIR$/../Dexih.App.Operations/src/dexih.operations/RepositoryManager.cs" />
+        <option value="$PROJECT_DIR$/src/dexih.api/Services/ValidateSubscriptionAttribute.cs" />
+        <option value="$PROJECT_DIR$/../dexih.transforms/src/dexih.functions.builtIn/ValidationFunctions.cs" />
+        <option value="$PROJECT_DIR$/src/dexih.api/Controllers/HubController.cs" />
+        <option value="$PROJECT_DIR$/src/dexih.api/Controllers/AccountController.cs" />
+        <option value="$PROJECT_DIR$/src/dexih.api/Models/AccountModels.cs" />
       </list>
     </option>
   </component>
@@ -781,6 +855,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
@@ -1603,7 +1678,8 @@
       <workItem from="1578970048778" duration="14667000" />
       <workItem from="1579212879584" duration="5109000" />
       <workItem from="1579643342005" duration="4583000" />
-      <workItem from="1579656331898" duration="3236000" />
+      <workItem from="1579656331898" duration="3512000" />
+      <workItem from="1579667986731" duration="55689000" />
     </task>
     <task id="LOCAL-00001" summary="Connections to remote agents working.">
       <created>1509234944099</created>
@@ -1731,7 +1807,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577841529121</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="added logging via email.">
+      <created>1579659666092</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1579659666092</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1770,318 +1853,352 @@
     <MESSAGE value="fixes" />
     <MESSAGE value="messagepack issue with signalr" />
     <MESSAGE value="refactor with better pushdown" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor with better pushdown" />
+    <MESSAGE value="added logging via email." />
+    <option name="LAST_COMMIT_MESSAGE" value="added logging via email." />
   </component>
   <component name="WindowStateProjectService">
     <state x="3064" y="93" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1576213672477" />
     <state x="3064" y="93" key="#com.intellij.execution.impl.EditConfigurationsDialog/3840.2160/3360.2100" timestamp="1576213672477" />
     <state x="3288" y="174" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1576213672477" />
     <state x="3288" y="174" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state x="1206" y="0" key="#xdebugger.evaluate" timestamp="1578271395689">
+    <state x="1206" y="0" key="#xdebugger.evaluate" timestamp="1580353929986">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="1206" y="0" key="#xdebugger.evaluate/0.0.1680.1050@0.0.1680.1050" timestamp="1578271395689" />
+    <state x="1206" y="0" key="#xdebugger.evaluate/0.0.1680.1050@0.0.1680.1050" timestamp="1580353929986" />
+    <state x="4092" y="0" key="#xdebugger.evaluate/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1579840148736" />
     <state x="2863" y="-207" key="#xdebugger.evaluate/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="1680" height="705" key="DebuggerActiveHint" timestamp="1579299855059">
+    <state width="1680" height="705" key="DebuggerActiveHint" timestamp="1580431762546">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1680" height="705" key="DebuggerActiveHint/0.0.1680.1050@0.0.1680.1050" timestamp="1579299855059" />
-    <state width="3360" height="1269" key="DebuggerActiveHint/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1579146509171" />
+    <state width="1680" height="705" key="DebuggerActiveHint/0.0.1680.1050@0.0.1680.1050" timestamp="1580431762546" />
+    <state width="3360" height="1269" key="DebuggerActiveHint/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1580360710682" />
     <state width="3360" height="1269" key="DebuggerActiveHint/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1578886631888" />
     <state width="1153" height="436" key="DebuggerActiveHint/3360.2100" timestamp="1576213672477" />
     <state width="1969" height="705" key="DebuggerActiveHint/3840.2160/3360.2100" timestamp="1576213672477" />
     <state x="3354" y="208" key="EnvironmentVariablesDialog" timestamp="1576213672477" />
     <state x="3354" y="208" key="EnvironmentVariablesDialog/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="2612" height="297" key="GridCell.Tab.0.bottom" timestamp="1579659513128">
-      <screen x="1680" y="0" width="3360" height="1890" />
+    <state width="1277" height="210" key="GridCell.Tab.0.bottom" timestamp="1580432459636">
+      <screen x="0" y="23" width="1680" height="965" />
     </state>
-    <state width="1277" height="298" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1579474921632" />
-    <state width="1277" height="249" key="GridCell.Tab.0.bottom/0.23.1680.963@0.23.1680.963" timestamp="1579037849933" />
-    <state width="1277" height="224" key="GridCell.Tab.0.bottom/0.23.1680.965@0.23.1680.965" timestamp="1577836945298" />
+    <state width="1277" height="210" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1580432434473" />
+    <state width="1277" height="210" key="GridCell.Tab.0.bottom/0.23.1680.963@0.23.1680.963" timestamp="1580355392561" />
+    <state width="1277" height="210" key="GridCell.Tab.0.bottom/0.23.1680.965@0.23.1680.965" timestamp="1580432459636" />
     <state width="1277" height="298" key="GridCell.Tab.0.bottom/0.23.1680.966@0.23.1680.966" timestamp="1579310377596" />
-    <state width="2612" height="297" key="GridCell.Tab.0.bottom/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1579659513128" />
+    <state width="2612" height="210" key="GridCell.Tab.0.bottom/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1580362690324" />
     <state width="2612" height="228" key="GridCell.Tab.0.bottom/1680.0.3360.1890/0.23.1680.1027@1680.0.3360.1890" timestamp="1578880347065" />
-    <state width="2612" height="422" key="GridCell.Tab.0.bottom/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1578978552984" />
+    <state width="2612" height="210" key="GridCell.Tab.0.bottom/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1580360672829" />
     <state width="2612" height="301" key="GridCell.Tab.0.bottom/1680.0.3360.1890/0.23.1680.966@1680.0.3360.1890" timestamp="1579143736728" />
     <state width="2612" height="577" key="GridCell.Tab.0.bottom/1680.23.3360.1773/0.23.1680.1027@1680.23.3360.1773" timestamp="1579643539392" />
     <state width="2612" height="297" key="GridCell.Tab.0.bottom/1680.23.3360.1867/0.23.1680.963@1680.23.3360.1867" timestamp="1579658908151" />
+    <state width="2612" height="575" key="GridCell.Tab.0.bottom/1680.23.3360.1867/0.23.1680.965@1680.23.3360.1867" timestamp="1579756810477" />
     <state width="2612" height="437" key="GridCell.Tab.0.bottom/1680.23.3360.1867/0.23.1680.966@1680.23.3360.1867" timestamp="1579143762914" />
     <state width="606" height="167" key="GridCell.Tab.0.bottom/3360.2100" timestamp="1576213672477" />
     <state width="1431" height="148" key="GridCell.Tab.0.bottom/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="2612" height="297" key="GridCell.Tab.0.center" timestamp="1579659513125">
-      <screen x="1680" y="0" width="3360" height="1890" />
+    <state width="1277" height="210" key="GridCell.Tab.0.center" timestamp="1580432459635">
+      <screen x="0" y="23" width="1680" height="965" />
     </state>
-    <state width="1277" height="298" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1579474921631" />
-    <state width="1277" height="249" key="GridCell.Tab.0.center/0.23.1680.963@0.23.1680.963" timestamp="1579037849931" />
-    <state width="1277" height="224" key="GridCell.Tab.0.center/0.23.1680.965@0.23.1680.965" timestamp="1577836945297" />
+    <state width="1277" height="210" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1580432434472" />
+    <state width="1277" height="210" key="GridCell.Tab.0.center/0.23.1680.963@0.23.1680.963" timestamp="1580355392559" />
+    <state width="1277" height="210" key="GridCell.Tab.0.center/0.23.1680.965@0.23.1680.965" timestamp="1580432459635" />
     <state width="1277" height="298" key="GridCell.Tab.0.center/0.23.1680.966@0.23.1680.966" timestamp="1579310377595" />
-    <state width="2612" height="297" key="GridCell.Tab.0.center/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1579659513125" />
+    <state width="2612" height="210" key="GridCell.Tab.0.center/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1580362690321" />
     <state width="2612" height="228" key="GridCell.Tab.0.center/1680.0.3360.1890/0.23.1680.1027@1680.0.3360.1890" timestamp="1578880347002" />
-    <state width="2612" height="422" key="GridCell.Tab.0.center/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1578978552982" />
+    <state width="2612" height="210" key="GridCell.Tab.0.center/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1580360672826" />
     <state width="2612" height="301" key="GridCell.Tab.0.center/1680.0.3360.1890/0.23.1680.966@1680.0.3360.1890" timestamp="1579143736721" />
     <state width="2612" height="577" key="GridCell.Tab.0.center/1680.23.3360.1773/0.23.1680.1027@1680.23.3360.1773" timestamp="1579643539390" />
     <state width="2612" height="297" key="GridCell.Tab.0.center/1680.23.3360.1867/0.23.1680.963@1680.23.3360.1867" timestamp="1579658908150" />
+    <state width="2612" height="575" key="GridCell.Tab.0.center/1680.23.3360.1867/0.23.1680.965@1680.23.3360.1867" timestamp="1579756810475" />
     <state width="2612" height="437" key="GridCell.Tab.0.center/1680.23.3360.1867/0.23.1680.966@1680.23.3360.1867" timestamp="1579143762913" />
     <state width="606" height="167" key="GridCell.Tab.0.center/3360.2100" timestamp="1576213672477" />
     <state width="1431" height="148" key="GridCell.Tab.0.center/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="2612" height="297" key="GridCell.Tab.0.left" timestamp="1579659513124">
-      <screen x="1680" y="0" width="3360" height="1890" />
+    <state width="1277" height="210" key="GridCell.Tab.0.left" timestamp="1580432459634">
+      <screen x="0" y="23" width="1680" height="965" />
     </state>
-    <state width="1277" height="298" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1579474921631" />
-    <state width="1277" height="249" key="GridCell.Tab.0.left/0.23.1680.963@0.23.1680.963" timestamp="1579037849929" />
-    <state width="1277" height="224" key="GridCell.Tab.0.left/0.23.1680.965@0.23.1680.965" timestamp="1577836945296" />
+    <state width="1277" height="210" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1580432434471" />
+    <state width="1277" height="210" key="GridCell.Tab.0.left/0.23.1680.963@0.23.1680.963" timestamp="1580355392558" />
+    <state width="1277" height="210" key="GridCell.Tab.0.left/0.23.1680.965@0.23.1680.965" timestamp="1580432459634" />
     <state width="1277" height="298" key="GridCell.Tab.0.left/0.23.1680.966@0.23.1680.966" timestamp="1579310377594" />
-    <state width="2612" height="297" key="GridCell.Tab.0.left/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1579659513124" />
+    <state width="2612" height="210" key="GridCell.Tab.0.left/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1580362690320" />
     <state width="2612" height="228" key="GridCell.Tab.0.left/1680.0.3360.1890/0.23.1680.1027@1680.0.3360.1890" timestamp="1578880346998" />
-    <state width="2612" height="422" key="GridCell.Tab.0.left/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1578978552981" />
+    <state width="2612" height="210" key="GridCell.Tab.0.left/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1580360672825" />
     <state width="2612" height="301" key="GridCell.Tab.0.left/1680.0.3360.1890/0.23.1680.966@1680.0.3360.1890" timestamp="1579143736713" />
     <state width="2612" height="577" key="GridCell.Tab.0.left/1680.23.3360.1773/0.23.1680.1027@1680.23.3360.1773" timestamp="1579643539388" />
     <state width="2612" height="297" key="GridCell.Tab.0.left/1680.23.3360.1867/0.23.1680.963@1680.23.3360.1867" timestamp="1579658908149" />
+    <state width="2612" height="575" key="GridCell.Tab.0.left/1680.23.3360.1867/0.23.1680.965@1680.23.3360.1867" timestamp="1579756810474" />
     <state width="2612" height="437" key="GridCell.Tab.0.left/1680.23.3360.1867/0.23.1680.966@1680.23.3360.1867" timestamp="1579143762912" />
     <state width="606" height="167" key="GridCell.Tab.0.left/3360.2100" timestamp="1576213672477" />
     <state width="1431" height="148" key="GridCell.Tab.0.left/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="2612" height="297" key="GridCell.Tab.0.right" timestamp="1579659513126">
-      <screen x="1680" y="0" width="3360" height="1890" />
+    <state width="1277" height="210" key="GridCell.Tab.0.right" timestamp="1580432459635">
+      <screen x="0" y="23" width="1680" height="965" />
     </state>
-    <state width="1277" height="298" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1579474921632" />
-    <state width="1277" height="249" key="GridCell.Tab.0.right/0.23.1680.963@0.23.1680.963" timestamp="1579037849932" />
-    <state width="1277" height="224" key="GridCell.Tab.0.right/0.23.1680.965@0.23.1680.965" timestamp="1577836945298" />
+    <state width="1277" height="210" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1580432434472" />
+    <state width="1277" height="210" key="GridCell.Tab.0.right/0.23.1680.963@0.23.1680.963" timestamp="1580355392560" />
+    <state width="1277" height="210" key="GridCell.Tab.0.right/0.23.1680.965@0.23.1680.965" timestamp="1580432459635" />
     <state width="1277" height="298" key="GridCell.Tab.0.right/0.23.1680.966@0.23.1680.966" timestamp="1579310377596" />
-    <state width="2612" height="297" key="GridCell.Tab.0.right/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1579659513126" />
+    <state width="2612" height="210" key="GridCell.Tab.0.right/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1580362690322" />
     <state width="2612" height="228" key="GridCell.Tab.0.right/1680.0.3360.1890/0.23.1680.1027@1680.0.3360.1890" timestamp="1578880347064" />
-    <state width="2612" height="422" key="GridCell.Tab.0.right/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1578978552983" />
+    <state width="2612" height="210" key="GridCell.Tab.0.right/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1580360672828" />
     <state width="2612" height="301" key="GridCell.Tab.0.right/1680.0.3360.1890/0.23.1680.966@1680.0.3360.1890" timestamp="1579143736722" />
     <state width="2612" height="577" key="GridCell.Tab.0.right/1680.23.3360.1773/0.23.1680.1027@1680.23.3360.1773" timestamp="1579643539391" />
     <state width="2612" height="297" key="GridCell.Tab.0.right/1680.23.3360.1867/0.23.1680.963@1680.23.3360.1867" timestamp="1579658908150" />
+    <state width="2612" height="575" key="GridCell.Tab.0.right/1680.23.3360.1867/0.23.1680.965@1680.23.3360.1867" timestamp="1579756810476" />
     <state width="2612" height="437" key="GridCell.Tab.0.right/1680.23.3360.1867/0.23.1680.966@1680.23.3360.1867" timestamp="1579143762913" />
     <state width="606" height="167" key="GridCell.Tab.0.right/3360.2100" timestamp="1576213672477" />
     <state width="1431" height="148" key="GridCell.Tab.0.right/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="2612" height="297" key="GridCell.Tab.1.bottom" timestamp="1579659513132">
-      <screen x="1680" y="0" width="3360" height="1890" />
+    <state width="1277" height="210" key="GridCell.Tab.1.bottom" timestamp="1580432459637">
+      <screen x="0" y="23" width="1680" height="965" />
     </state>
-    <state width="1277" height="298" key="GridCell.Tab.1.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1579310373756" />
-    <state width="1277" height="249" key="GridCell.Tab.1.bottom/0.23.1680.963@0.23.1680.963" timestamp="1579037849975" />
-    <state width="1277" height="224" key="GridCell.Tab.1.bottom/0.23.1680.965@0.23.1680.965" timestamp="1577907607546" />
+    <state width="1277" height="210" key="GridCell.Tab.1.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1580432434475" />
+    <state width="1277" height="210" key="GridCell.Tab.1.bottom/0.23.1680.963@0.23.1680.963" timestamp="1580355392317" />
+    <state width="1277" height="210" key="GridCell.Tab.1.bottom/0.23.1680.965@0.23.1680.965" timestamp="1580432459637" />
     <state width="1277" height="298" key="GridCell.Tab.1.bottom/0.23.1680.966@0.23.1680.966" timestamp="1579310377598" />
-    <state width="2612" height="297" key="GridCell.Tab.1.bottom/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1579659513132" />
+    <state width="2612" height="210" key="GridCell.Tab.1.bottom/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1580362640535" />
     <state width="2612" height="228" key="GridCell.Tab.1.bottom/1680.0.3360.1890/0.23.1680.1027@1680.0.3360.1890" timestamp="1578880346701" />
-    <state width="2612" height="422" key="GridCell.Tab.1.bottom/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1578978552986" />
+    <state width="2612" height="210" key="GridCell.Tab.1.bottom/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1580360672879" />
     <state width="2612" height="437" key="GridCell.Tab.1.bottom/1680.0.3360.1890/0.23.1680.966@1680.0.3360.1890" timestamp="1579146470582" />
     <state width="2612" height="297" key="GridCell.Tab.1.bottom/1680.23.3360.1867/0.23.1680.963@1680.23.3360.1867" timestamp="1579658908154" />
+    <state width="2612" height="575" key="GridCell.Tab.1.bottom/1680.23.3360.1867/0.23.1680.965@1680.23.3360.1867" timestamp="1579756806021" />
     <state width="2612" height="437" key="GridCell.Tab.1.bottom/1680.23.3360.1867/0.23.1680.966@1680.23.3360.1867" timestamp="1579143762931" />
     <state width="606" height="167" key="GridCell.Tab.1.bottom/3360.2100" timestamp="1576213672477" />
     <state width="1442" height="498" key="GridCell.Tab.1.bottom/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="2612" height="297" key="GridCell.Tab.1.center" timestamp="1579659513130">
-      <screen x="1680" y="0" width="3360" height="1890" />
+    <state width="1277" height="210" key="GridCell.Tab.1.center" timestamp="1580432459636">
+      <screen x="0" y="23" width="1680" height="965" />
     </state>
-    <state width="1277" height="298" key="GridCell.Tab.1.center/0.0.1680.1050@0.0.1680.1050" timestamp="1579310373755" />
-    <state width="1277" height="249" key="GridCell.Tab.1.center/0.23.1680.963@0.23.1680.963" timestamp="1579037849972" />
-    <state width="1277" height="224" key="GridCell.Tab.1.center/0.23.1680.965@0.23.1680.965" timestamp="1577907607545" />
+    <state width="1277" height="210" key="GridCell.Tab.1.center/0.0.1680.1050@0.0.1680.1050" timestamp="1580432434474" />
+    <state width="1277" height="210" key="GridCell.Tab.1.center/0.23.1680.963@0.23.1680.963" timestamp="1580355392315" />
+    <state width="1277" height="210" key="GridCell.Tab.1.center/0.23.1680.965@0.23.1680.965" timestamp="1580432459636" />
     <state width="1277" height="298" key="GridCell.Tab.1.center/0.23.1680.966@0.23.1680.966" timestamp="1579310377597" />
-    <state width="2612" height="297" key="GridCell.Tab.1.center/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1579659513130" />
+    <state width="2612" height="210" key="GridCell.Tab.1.center/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1580362640534" />
     <state width="2612" height="228" key="GridCell.Tab.1.center/1680.0.3360.1890/0.23.1680.1027@1680.0.3360.1890" timestamp="1578880346699" />
-    <state width="2612" height="422" key="GridCell.Tab.1.center/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1578978552985" />
+    <state width="2612" height="210" key="GridCell.Tab.1.center/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1580360672876" />
     <state width="2612" height="437" key="GridCell.Tab.1.center/1680.0.3360.1890/0.23.1680.966@1680.0.3360.1890" timestamp="1579146470580" />
     <state width="2612" height="297" key="GridCell.Tab.1.center/1680.23.3360.1867/0.23.1680.963@1680.23.3360.1867" timestamp="1579658908152" />
+    <state width="2612" height="575" key="GridCell.Tab.1.center/1680.23.3360.1867/0.23.1680.965@1680.23.3360.1867" timestamp="1579756806019" />
     <state width="2612" height="437" key="GridCell.Tab.1.center/1680.23.3360.1867/0.23.1680.966@1680.23.3360.1867" timestamp="1579143762929" />
     <state width="606" height="167" key="GridCell.Tab.1.center/3360.2100" timestamp="1576213672477" />
     <state width="1442" height="498" key="GridCell.Tab.1.center/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="2612" height="297" key="GridCell.Tab.1.left" timestamp="1579659513129">
-      <screen x="1680" y="0" width="3360" height="1890" />
+    <state width="1277" height="210" key="GridCell.Tab.1.left" timestamp="1580432459636">
+      <screen x="0" y="23" width="1680" height="965" />
     </state>
-    <state width="1277" height="298" key="GridCell.Tab.1.left/0.0.1680.1050@0.0.1680.1050" timestamp="1579310373755" />
-    <state width="1277" height="249" key="GridCell.Tab.1.left/0.23.1680.963@0.23.1680.963" timestamp="1579037849935" />
-    <state width="1277" height="224" key="GridCell.Tab.1.left/0.23.1680.965@0.23.1680.965" timestamp="1577907607545" />
+    <state width="1277" height="210" key="GridCell.Tab.1.left/0.0.1680.1050@0.0.1680.1050" timestamp="1580432434473" />
+    <state width="1277" height="210" key="GridCell.Tab.1.left/0.23.1680.963@0.23.1680.963" timestamp="1580355392315" />
+    <state width="1277" height="210" key="GridCell.Tab.1.left/0.23.1680.965@0.23.1680.965" timestamp="1580432459636" />
     <state width="1277" height="298" key="GridCell.Tab.1.left/0.23.1680.966@0.23.1680.966" timestamp="1579310377597" />
-    <state width="2612" height="297" key="GridCell.Tab.1.left/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1579659513129" />
+    <state width="2612" height="210" key="GridCell.Tab.1.left/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1580362640533" />
     <state width="2612" height="228" key="GridCell.Tab.1.left/1680.0.3360.1890/0.23.1680.1027@1680.0.3360.1890" timestamp="1578880346697" />
-    <state width="2612" height="422" key="GridCell.Tab.1.left/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1578978552985" />
+    <state width="2612" height="210" key="GridCell.Tab.1.left/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1580360672875" />
     <state width="2612" height="437" key="GridCell.Tab.1.left/1680.0.3360.1890/0.23.1680.966@1680.0.3360.1890" timestamp="1579146470579" />
     <state width="2612" height="297" key="GridCell.Tab.1.left/1680.23.3360.1867/0.23.1680.963@1680.23.3360.1867" timestamp="1579658908152" />
+    <state width="2612" height="575" key="GridCell.Tab.1.left/1680.23.3360.1867/0.23.1680.965@1680.23.3360.1867" timestamp="1579756806018" />
     <state width="2612" height="437" key="GridCell.Tab.1.left/1680.23.3360.1867/0.23.1680.966@1680.23.3360.1867" timestamp="1579143762929" />
     <state width="606" height="167" key="GridCell.Tab.1.left/3360.2100" timestamp="1576213672477" />
     <state width="1442" height="498" key="GridCell.Tab.1.left/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="2612" height="297" key="GridCell.Tab.1.right" timestamp="1579659513131">
-      <screen x="1680" y="0" width="3360" height="1890" />
+    <state width="1277" height="210" key="GridCell.Tab.1.right" timestamp="1580432459637">
+      <screen x="0" y="23" width="1680" height="965" />
     </state>
-    <state width="1277" height="298" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1579310373756" />
-    <state width="1277" height="249" key="GridCell.Tab.1.right/0.23.1680.963@0.23.1680.963" timestamp="1579037849973" />
-    <state width="1277" height="224" key="GridCell.Tab.1.right/0.23.1680.965@0.23.1680.965" timestamp="1577907607546" />
+    <state width="1277" height="210" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1580432434474" />
+    <state width="1277" height="210" key="GridCell.Tab.1.right/0.23.1680.963@0.23.1680.963" timestamp="1580355392316" />
+    <state width="1277" height="210" key="GridCell.Tab.1.right/0.23.1680.965@0.23.1680.965" timestamp="1580432459637" />
     <state width="1277" height="298" key="GridCell.Tab.1.right/0.23.1680.966@0.23.1680.966" timestamp="1579310377598" />
-    <state width="2612" height="297" key="GridCell.Tab.1.right/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1579659513131" />
+    <state width="2612" height="210" key="GridCell.Tab.1.right/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1580362640535" />
     <state width="2612" height="228" key="GridCell.Tab.1.right/1680.0.3360.1890/0.23.1680.1027@1680.0.3360.1890" timestamp="1578880346700" />
-    <state width="2612" height="422" key="GridCell.Tab.1.right/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1578978552986" />
+    <state width="2612" height="210" key="GridCell.Tab.1.right/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1580360672878" />
     <state width="2612" height="437" key="GridCell.Tab.1.right/1680.0.3360.1890/0.23.1680.966@1680.0.3360.1890" timestamp="1579146470581" />
     <state width="2612" height="297" key="GridCell.Tab.1.right/1680.23.3360.1867/0.23.1680.963@1680.23.3360.1867" timestamp="1579658908153" />
+    <state width="2612" height="575" key="GridCell.Tab.1.right/1680.23.3360.1867/0.23.1680.965@1680.23.3360.1867" timestamp="1579756806020" />
     <state width="2612" height="437" key="GridCell.Tab.1.right/1680.23.3360.1867/0.23.1680.966@1680.23.3360.1867" timestamp="1579143762930" />
     <state width="606" height="167" key="GridCell.Tab.1.right/3360.2100" timestamp="1576213672477" />
     <state width="1442" height="498" key="GridCell.Tab.1.right/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="2612" height="297" key="GridCell.Tab.2.bottom" timestamp="1579659513134">
-      <screen x="1680" y="0" width="3360" height="1890" />
+    <state width="1277" height="210" key="GridCell.Tab.2.bottom" timestamp="1580432459639">
+      <screen x="0" y="23" width="1680" height="965" />
     </state>
-    <state width="1277" height="298" key="GridCell.Tab.2.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1579310373758" />
-    <state width="1277" height="249" key="GridCell.Tab.2.bottom/0.23.1680.963@0.23.1680.963" timestamp="1579037849980" />
+    <state width="1277" height="210" key="GridCell.Tab.2.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1580432434485" />
+    <state width="1277" height="210" key="GridCell.Tab.2.bottom/0.23.1680.963@0.23.1680.963" timestamp="1580355392322" />
+    <state width="1277" height="210" key="GridCell.Tab.2.bottom/0.23.1680.965@0.23.1680.965" timestamp="1580432459639" />
     <state width="1277" height="298" key="GridCell.Tab.2.bottom/0.23.1680.966@0.23.1680.966" timestamp="1579310377602" />
-    <state width="2612" height="297" key="GridCell.Tab.2.bottom/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1579659513134" />
+    <state width="2612" height="210" key="GridCell.Tab.2.bottom/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1580362640538" />
     <state width="2612" height="228" key="GridCell.Tab.2.bottom/1680.0.3360.1890/0.23.1680.1027@1680.0.3360.1890" timestamp="1578880346707" />
-    <state width="2612" height="422" key="GridCell.Tab.2.bottom/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1578978552989" />
+    <state width="2612" height="210" key="GridCell.Tab.2.bottom/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1580360672833" />
     <state width="2612" height="301" key="GridCell.Tab.2.bottom/1680.0.3360.1890/0.23.1680.966@1680.0.3360.1890" timestamp="1579143736436" />
     <state width="2612" height="297" key="GridCell.Tab.2.bottom/1680.23.3360.1867/0.23.1680.963@1680.23.3360.1867" timestamp="1579658908156" />
+    <state width="2612" height="575" key="GridCell.Tab.2.bottom/1680.23.3360.1867/0.23.1680.965@1680.23.3360.1867" timestamp="1579756806024" />
     <state width="2612" height="437" key="GridCell.Tab.2.bottom/1680.23.3360.1867/0.23.1680.966@1680.23.3360.1867" timestamp="1579143762923" />
     <state width="606" height="167" key="GridCell.Tab.2.bottom/3360.2100" timestamp="1576213672477" />
     <state width="1442" height="498" key="GridCell.Tab.2.bottom/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="2612" height="297" key="GridCell.Tab.2.center" timestamp="1579659513133">
-      <screen x="1680" y="0" width="3360" height="1890" />
+    <state width="1277" height="210" key="GridCell.Tab.2.center" timestamp="1580432459638">
+      <screen x="0" y="23" width="1680" height="965" />
     </state>
-    <state width="1277" height="298" key="GridCell.Tab.2.center/0.0.1680.1050@0.0.1680.1050" timestamp="1579310373757" />
-    <state width="1277" height="249" key="GridCell.Tab.2.center/0.23.1680.963@0.23.1680.963" timestamp="1579037849979" />
+    <state width="1277" height="210" key="GridCell.Tab.2.center/0.0.1680.1050@0.0.1680.1050" timestamp="1580432434484" />
+    <state width="1277" height="210" key="GridCell.Tab.2.center/0.23.1680.963@0.23.1680.963" timestamp="1580355392319" />
+    <state width="1277" height="210" key="GridCell.Tab.2.center/0.23.1680.965@0.23.1680.965" timestamp="1580432459638" />
     <state width="1277" height="298" key="GridCell.Tab.2.center/0.23.1680.966@0.23.1680.966" timestamp="1579310377601" />
-    <state width="2612" height="297" key="GridCell.Tab.2.center/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1579659513133" />
+    <state width="2612" height="210" key="GridCell.Tab.2.center/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1580362640537" />
     <state width="2612" height="228" key="GridCell.Tab.2.center/1680.0.3360.1890/0.23.1680.1027@1680.0.3360.1890" timestamp="1578880346704" />
-    <state width="2612" height="422" key="GridCell.Tab.2.center/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1578978552988" />
+    <state width="2612" height="210" key="GridCell.Tab.2.center/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1580360672832" />
     <state width="2612" height="301" key="GridCell.Tab.2.center/1680.0.3360.1890/0.23.1680.966@1680.0.3360.1890" timestamp="1579143736434" />
     <state width="2612" height="297" key="GridCell.Tab.2.center/1680.23.3360.1867/0.23.1680.963@1680.23.3360.1867" timestamp="1579658908155" />
+    <state width="2612" height="575" key="GridCell.Tab.2.center/1680.23.3360.1867/0.23.1680.965@1680.23.3360.1867" timestamp="1579756806023" />
     <state width="2612" height="437" key="GridCell.Tab.2.center/1680.23.3360.1867/0.23.1680.966@1680.23.3360.1867" timestamp="1579143762921" />
     <state width="606" height="167" key="GridCell.Tab.2.center/3360.2100" timestamp="1576213672477" />
     <state width="1442" height="498" key="GridCell.Tab.2.center/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="2612" height="297" key="GridCell.Tab.2.left" timestamp="1579659513132">
-      <screen x="1680" y="0" width="3360" height="1890" />
+    <state width="1277" height="210" key="GridCell.Tab.2.left" timestamp="1580432459638">
+      <screen x="0" y="23" width="1680" height="965" />
     </state>
-    <state width="1277" height="298" key="GridCell.Tab.2.left/0.0.1680.1050@0.0.1680.1050" timestamp="1579310373757" />
-    <state width="1277" height="249" key="GridCell.Tab.2.left/0.23.1680.963@0.23.1680.963" timestamp="1579037849978" />
+    <state width="1277" height="210" key="GridCell.Tab.2.left/0.0.1680.1050@0.0.1680.1050" timestamp="1580432434475" />
+    <state width="1277" height="210" key="GridCell.Tab.2.left/0.23.1680.963@0.23.1680.963" timestamp="1580355392319" />
+    <state width="1277" height="210" key="GridCell.Tab.2.left/0.23.1680.965@0.23.1680.965" timestamp="1580432459638" />
     <state width="1277" height="298" key="GridCell.Tab.2.left/0.23.1680.966@0.23.1680.966" timestamp="1579310377599" />
-    <state width="2612" height="297" key="GridCell.Tab.2.left/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1579659513132" />
+    <state width="2612" height="210" key="GridCell.Tab.2.left/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1580362640536" />
     <state width="2612" height="228" key="GridCell.Tab.2.left/1680.0.3360.1890/0.23.1680.1027@1680.0.3360.1890" timestamp="1578880346702" />
-    <state width="2612" height="422" key="GridCell.Tab.2.left/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1578978552987" />
+    <state width="2612" height="210" key="GridCell.Tab.2.left/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1580360672832" />
     <state width="2612" height="301" key="GridCell.Tab.2.left/1680.0.3360.1890/0.23.1680.966@1680.0.3360.1890" timestamp="1579143736433" />
     <state width="2612" height="297" key="GridCell.Tab.2.left/1680.23.3360.1867/0.23.1680.963@1680.23.3360.1867" timestamp="1579658908154" />
+    <state width="2612" height="575" key="GridCell.Tab.2.left/1680.23.3360.1867/0.23.1680.965@1680.23.3360.1867" timestamp="1579756806022" />
     <state width="2612" height="437" key="GridCell.Tab.2.left/1680.23.3360.1867/0.23.1680.966@1680.23.3360.1867" timestamp="1579143762921" />
     <state width="606" height="167" key="GridCell.Tab.2.left/3360.2100" timestamp="1576213672477" />
     <state width="1442" height="498" key="GridCell.Tab.2.left/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="2612" height="297" key="GridCell.Tab.2.right" timestamp="1579659513134">
-      <screen x="1680" y="0" width="3360" height="1890" />
+    <state width="1277" height="210" key="GridCell.Tab.2.right" timestamp="1580432459639">
+      <screen x="0" y="23" width="1680" height="965" />
     </state>
-    <state width="1277" height="298" key="GridCell.Tab.2.right/0.0.1680.1050@0.0.1680.1050" timestamp="1579310373758" />
+    <state width="1277" height="210" key="GridCell.Tab.2.right/0.0.1680.1050@0.0.1680.1050" timestamp="1580432434485" />
     <state width="1277" height="228" key="GridCell.Tab.2.right/0.0.1680.1050@0.23.1680.963" timestamp="1578870512852" />
-    <state width="1277" height="249" key="GridCell.Tab.2.right/0.23.1680.963@0.23.1680.963" timestamp="1579037849980" />
+    <state width="1277" height="210" key="GridCell.Tab.2.right/0.23.1680.963@0.23.1680.963" timestamp="1580355392321" />
+    <state width="1277" height="210" key="GridCell.Tab.2.right/0.23.1680.965@0.23.1680.965" timestamp="1580432459639" />
     <state width="1277" height="298" key="GridCell.Tab.2.right/0.23.1680.966@0.23.1680.966" timestamp="1579310377601" />
-    <state width="2612" height="297" key="GridCell.Tab.2.right/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1579659513134" />
+    <state width="2612" height="210" key="GridCell.Tab.2.right/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1580362640538" />
     <state width="2612" height="228" key="GridCell.Tab.2.right/1680.0.3360.1890/0.23.1680.1027@1680.0.3360.1890" timestamp="1578880346705" />
-    <state width="2612" height="422" key="GridCell.Tab.2.right/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1578978552988" />
+    <state width="2612" height="210" key="GridCell.Tab.2.right/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1580360672833" />
     <state width="2612" height="301" key="GridCell.Tab.2.right/1680.0.3360.1890/0.23.1680.966@1680.0.3360.1890" timestamp="1579143736435" />
     <state width="2612" height="297" key="GridCell.Tab.2.right/1680.23.3360.1867/0.23.1680.963@1680.23.3360.1867" timestamp="1579658908156" />
+    <state width="2612" height="575" key="GridCell.Tab.2.right/1680.23.3360.1867/0.23.1680.965@1680.23.3360.1867" timestamp="1579756806023" />
     <state width="2612" height="437" key="GridCell.Tab.2.right/1680.23.3360.1867/0.23.1680.966@1680.23.3360.1867" timestamp="1579143762922" />
     <state width="606" height="167" key="GridCell.Tab.2.right/3360.2100" timestamp="1576213672477" />
     <state width="1442" height="498" key="GridCell.Tab.2.right/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="2612" height="297" key="GridCell.Tab.3.bottom" timestamp="1579659513138">
-      <screen x="1680" y="0" width="3360" height="1890" />
+    <state width="1277" height="210" key="GridCell.Tab.3.bottom" timestamp="1580432459642">
+      <screen x="0" y="23" width="1680" height="965" />
     </state>
-    <state width="1277" height="298" key="GridCell.Tab.3.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1579310373760" />
-    <state width="1277" height="249" key="GridCell.Tab.3.bottom/0.23.1680.963@0.23.1680.963" timestamp="1579037849991" />
+    <state width="1277" height="210" key="GridCell.Tab.3.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1580432434487" />
+    <state width="1277" height="210" key="GridCell.Tab.3.bottom/0.23.1680.963@0.23.1680.963" timestamp="1580355392324" />
+    <state width="1277" height="210" key="GridCell.Tab.3.bottom/0.23.1680.965@0.23.1680.965" timestamp="1580432459642" />
     <state width="1277" height="298" key="GridCell.Tab.3.bottom/0.23.1680.966@0.23.1680.966" timestamp="1579310377604" />
-    <state width="2612" height="297" key="GridCell.Tab.3.bottom/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1579659513138" />
+    <state width="2612" height="210" key="GridCell.Tab.3.bottom/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1580362640541" />
     <state width="2612" height="228" key="GridCell.Tab.3.bottom/1680.0.3360.1890/0.23.1680.1027@1680.0.3360.1890" timestamp="1578880346711" />
-    <state width="2612" height="422" key="GridCell.Tab.3.bottom/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1578978552991" />
+    <state width="2612" height="210" key="GridCell.Tab.3.bottom/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1580360672835" />
     <state width="2612" height="301" key="GridCell.Tab.3.bottom/1680.0.3360.1890/0.23.1680.966@1680.0.3360.1890" timestamp="1579143736439" />
     <state width="2612" height="297" key="GridCell.Tab.3.bottom/1680.23.3360.1867/0.23.1680.963@1680.23.3360.1867" timestamp="1579658908160" />
+    <state width="2612" height="575" key="GridCell.Tab.3.bottom/1680.23.3360.1867/0.23.1680.965@1680.23.3360.1867" timestamp="1579756806027" />
     <state width="2612" height="437" key="GridCell.Tab.3.bottom/1680.23.3360.1867/0.23.1680.966@1680.23.3360.1867" timestamp="1579143762926" />
     <state width="606" height="167" key="GridCell.Tab.3.bottom/3360.2100" timestamp="1576213672477" />
     <state width="1442" height="498" key="GridCell.Tab.3.bottom/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="2612" height="297" key="GridCell.Tab.3.center" timestamp="1579659513136">
-      <screen x="1680" y="0" width="3360" height="1890" />
+    <state width="1277" height="210" key="GridCell.Tab.3.center" timestamp="1580432459641">
+      <screen x="0" y="23" width="1680" height="965" />
     </state>
-    <state width="1277" height="298" key="GridCell.Tab.3.center/0.0.1680.1050@0.0.1680.1050" timestamp="1579310373759" />
-    <state width="1277" height="249" key="GridCell.Tab.3.center/0.23.1680.963@0.23.1680.963" timestamp="1579037849986" />
+    <state width="1277" height="210" key="GridCell.Tab.3.center/0.0.1680.1050@0.0.1680.1050" timestamp="1580432434486" />
+    <state width="1277" height="210" key="GridCell.Tab.3.center/0.23.1680.963@0.23.1680.963" timestamp="1580355392323" />
+    <state width="1277" height="210" key="GridCell.Tab.3.center/0.23.1680.965@0.23.1680.965" timestamp="1580432459641" />
     <state width="1277" height="298" key="GridCell.Tab.3.center/0.23.1680.966@0.23.1680.966" timestamp="1579310377603" />
-    <state width="2612" height="297" key="GridCell.Tab.3.center/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1579659513136" />
+    <state width="2612" height="210" key="GridCell.Tab.3.center/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1580362640540" />
     <state width="2612" height="228" key="GridCell.Tab.3.center/1680.0.3360.1890/0.23.1680.1027@1680.0.3360.1890" timestamp="1578880346709" />
-    <state width="2612" height="422" key="GridCell.Tab.3.center/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1578978552990" />
+    <state width="2612" height="210" key="GridCell.Tab.3.center/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1580360672834" />
     <state width="2612" height="301" key="GridCell.Tab.3.center/1680.0.3360.1890/0.23.1680.966@1680.0.3360.1890" timestamp="1579143736438" />
     <state width="2612" height="297" key="GridCell.Tab.3.center/1680.23.3360.1867/0.23.1680.963@1680.23.3360.1867" timestamp="1579658908158" />
+    <state width="2612" height="575" key="GridCell.Tab.3.center/1680.23.3360.1867/0.23.1680.965@1680.23.3360.1867" timestamp="1579756806026" />
     <state width="2612" height="437" key="GridCell.Tab.3.center/1680.23.3360.1867/0.23.1680.966@1680.23.3360.1867" timestamp="1579143762925" />
     <state width="606" height="167" key="GridCell.Tab.3.center/3360.2100" timestamp="1576213672477" />
     <state width="1442" height="498" key="GridCell.Tab.3.center/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="2612" height="297" key="GridCell.Tab.3.left" timestamp="1579659513135">
-      <screen x="1680" y="0" width="3360" height="1890" />
+    <state width="1277" height="210" key="GridCell.Tab.3.left" timestamp="1580432459640">
+      <screen x="0" y="23" width="1680" height="965" />
     </state>
-    <state width="1277" height="298" key="GridCell.Tab.3.left/0.0.1680.1050@0.0.1680.1050" timestamp="1579310373759" />
-    <state width="1277" height="249" key="GridCell.Tab.3.left/0.23.1680.963@0.23.1680.963" timestamp="1579037849982" />
+    <state width="1277" height="210" key="GridCell.Tab.3.left/0.0.1680.1050@0.0.1680.1050" timestamp="1580432434486" />
+    <state width="1277" height="210" key="GridCell.Tab.3.left/0.23.1680.963@0.23.1680.963" timestamp="1580355392322" />
+    <state width="1277" height="210" key="GridCell.Tab.3.left/0.23.1680.965@0.23.1680.965" timestamp="1580432459640" />
     <state width="1277" height="298" key="GridCell.Tab.3.left/0.23.1680.966@0.23.1680.966" timestamp="1579310377602" />
-    <state width="2612" height="297" key="GridCell.Tab.3.left/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1579659513135" />
+    <state width="2612" height="210" key="GridCell.Tab.3.left/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1580362640539" />
     <state width="2612" height="228" key="GridCell.Tab.3.left/1680.0.3360.1890/0.23.1680.1027@1680.0.3360.1890" timestamp="1578880346708" />
-    <state width="2612" height="422" key="GridCell.Tab.3.left/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1578978552990" />
+    <state width="2612" height="210" key="GridCell.Tab.3.left/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1580360672834" />
     <state width="2612" height="301" key="GridCell.Tab.3.left/1680.0.3360.1890/0.23.1680.966@1680.0.3360.1890" timestamp="1579143736437" />
     <state width="2612" height="297" key="GridCell.Tab.3.left/1680.23.3360.1867/0.23.1680.963@1680.23.3360.1867" timestamp="1579658908157" />
+    <state width="2612" height="575" key="GridCell.Tab.3.left/1680.23.3360.1867/0.23.1680.965@1680.23.3360.1867" timestamp="1579756806025" />
     <state width="2612" height="437" key="GridCell.Tab.3.left/1680.23.3360.1867/0.23.1680.966@1680.23.3360.1867" timestamp="1579143762923" />
     <state width="606" height="167" key="GridCell.Tab.3.left/3360.2100" timestamp="1576213672477" />
     <state width="1442" height="498" key="GridCell.Tab.3.left/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="2612" height="297" key="GridCell.Tab.3.right" timestamp="1579659513137">
-      <screen x="1680" y="0" width="3360" height="1890" />
+    <state width="1277" height="210" key="GridCell.Tab.3.right" timestamp="1580432459641">
+      <screen x="0" y="23" width="1680" height="965" />
     </state>
-    <state width="1277" height="298" key="GridCell.Tab.3.right/0.0.1680.1050@0.0.1680.1050" timestamp="1579310373759" />
-    <state width="1277" height="249" key="GridCell.Tab.3.right/0.23.1680.963@0.23.1680.963" timestamp="1579037849990" />
+    <state width="1277" height="210" key="GridCell.Tab.3.right/0.0.1680.1050@0.0.1680.1050" timestamp="1580432434487" />
+    <state width="1277" height="210" key="GridCell.Tab.3.right/0.23.1680.963@0.23.1680.963" timestamp="1580355392324" />
+    <state width="1277" height="210" key="GridCell.Tab.3.right/0.23.1680.965@0.23.1680.965" timestamp="1580432459641" />
     <state width="1277" height="298" key="GridCell.Tab.3.right/0.23.1680.966@0.23.1680.966" timestamp="1579310377603" />
-    <state width="2612" height="297" key="GridCell.Tab.3.right/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1579659513137" />
+    <state width="2612" height="210" key="GridCell.Tab.3.right/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1580362640540" />
     <state width="2612" height="228" key="GridCell.Tab.3.right/1680.0.3360.1890/0.23.1680.1027@1680.0.3360.1890" timestamp="1578880346710" />
-    <state width="2612" height="422" key="GridCell.Tab.3.right/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1578978552990" />
+    <state width="2612" height="210" key="GridCell.Tab.3.right/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1580360672835" />
     <state width="2612" height="301" key="GridCell.Tab.3.right/1680.0.3360.1890/0.23.1680.966@1680.0.3360.1890" timestamp="1579143736439" />
     <state width="2612" height="297" key="GridCell.Tab.3.right/1680.23.3360.1867/0.23.1680.963@1680.23.3360.1867" timestamp="1579658908159" />
+    <state width="2612" height="575" key="GridCell.Tab.3.right/1680.23.3360.1867/0.23.1680.965@1680.23.3360.1867" timestamp="1579756806026" />
     <state width="2612" height="437" key="GridCell.Tab.3.right/1680.23.3360.1867/0.23.1680.966@1680.23.3360.1867" timestamp="1579143762926" />
     <state width="606" height="167" key="GridCell.Tab.3.right/3360.2100" timestamp="1576213672477" />
     <state width="1442" height="498" key="GridCell.Tab.3.right/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="2612" height="297" key="GridCell.Tab.4.bottom" timestamp="1579659513140">
-      <screen x="1680" y="0" width="3360" height="1890" />
+    <state width="1277" height="210" key="GridCell.Tab.4.bottom" timestamp="1580432459644">
+      <screen x="0" y="23" width="1680" height="965" />
     </state>
-    <state width="1277" height="298" key="GridCell.Tab.4.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1579310373761" />
-    <state width="1277" height="249" key="GridCell.Tab.4.bottom/0.23.1680.963@0.23.1680.963" timestamp="1579037849994" />
+    <state width="1277" height="210" key="GridCell.Tab.4.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1580432434489" />
+    <state width="1277" height="210" key="GridCell.Tab.4.bottom/0.23.1680.963@0.23.1680.963" timestamp="1580355392327" />
+    <state width="1277" height="210" key="GridCell.Tab.4.bottom/0.23.1680.965@0.23.1680.965" timestamp="1580432459644" />
     <state width="1277" height="298" key="GridCell.Tab.4.bottom/0.23.1680.966@0.23.1680.966" timestamp="1579310377605" />
-    <state width="2612" height="297" key="GridCell.Tab.4.bottom/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1579659513140" />
+    <state width="2612" height="210" key="GridCell.Tab.4.bottom/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1580362640544" />
     <state width="2612" height="228" key="GridCell.Tab.4.bottom/1680.0.3360.1890/0.23.1680.1027@1680.0.3360.1890" timestamp="1578880346715" />
-    <state width="2612" height="422" key="GridCell.Tab.4.bottom/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1578978552993" />
+    <state width="2612" height="210" key="GridCell.Tab.4.bottom/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1580360672837" />
     <state width="2612" height="301" key="GridCell.Tab.4.bottom/1680.0.3360.1890/0.23.1680.966@1680.0.3360.1890" timestamp="1579143736445" />
     <state width="2612" height="297" key="GridCell.Tab.4.bottom/1680.23.3360.1867/0.23.1680.963@1680.23.3360.1867" timestamp="1579658908162" />
+    <state width="2612" height="575" key="GridCell.Tab.4.bottom/1680.23.3360.1867/0.23.1680.965@1680.23.3360.1867" timestamp="1579756806031" />
     <state width="2612" height="437" key="GridCell.Tab.4.bottom/1680.23.3360.1867/0.23.1680.966@1680.23.3360.1867" timestamp="1579143762928" />
     <state width="606" height="167" key="GridCell.Tab.4.bottom/3360.2100" timestamp="1576213672477" />
     <state width="1442" height="498" key="GridCell.Tab.4.bottom/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="2612" height="297" key="GridCell.Tab.4.center" timestamp="1579659513139">
-      <screen x="1680" y="0" width="3360" height="1890" />
+    <state width="1277" height="210" key="GridCell.Tab.4.center" timestamp="1580432459643">
+      <screen x="0" y="23" width="1680" height="965" />
     </state>
-    <state width="1277" height="298" key="GridCell.Tab.4.center/0.0.1680.1050@0.0.1680.1050" timestamp="1579310373761" />
-    <state width="1277" height="249" key="GridCell.Tab.4.center/0.23.1680.963@0.23.1680.963" timestamp="1579037849993" />
+    <state width="1277" height="210" key="GridCell.Tab.4.center/0.0.1680.1050@0.0.1680.1050" timestamp="1580432434488" />
+    <state width="1277" height="210" key="GridCell.Tab.4.center/0.23.1680.963@0.23.1680.963" timestamp="1580355392326" />
+    <state width="1277" height="210" key="GridCell.Tab.4.center/0.23.1680.965@0.23.1680.965" timestamp="1580432459643" />
     <state width="1277" height="298" key="GridCell.Tab.4.center/0.23.1680.966@0.23.1680.966" timestamp="1579310377604" />
-    <state width="2612" height="297" key="GridCell.Tab.4.center/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1579659513139" />
+    <state width="2612" height="210" key="GridCell.Tab.4.center/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1580362640543" />
     <state width="2612" height="228" key="GridCell.Tab.4.center/1680.0.3360.1890/0.23.1680.1027@1680.0.3360.1890" timestamp="1578880346713" />
-    <state width="2612" height="422" key="GridCell.Tab.4.center/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1578978552992" />
+    <state width="2612" height="210" key="GridCell.Tab.4.center/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1580360672836" />
     <state width="2612" height="301" key="GridCell.Tab.4.center/1680.0.3360.1890/0.23.1680.966@1680.0.3360.1890" timestamp="1579143736443" />
     <state width="2612" height="297" key="GridCell.Tab.4.center/1680.23.3360.1867/0.23.1680.963@1680.23.3360.1867" timestamp="1579658908161" />
+    <state width="2612" height="575" key="GridCell.Tab.4.center/1680.23.3360.1867/0.23.1680.965@1680.23.3360.1867" timestamp="1579756806029" />
     <state width="2612" height="437" key="GridCell.Tab.4.center/1680.23.3360.1867/0.23.1680.966@1680.23.3360.1867" timestamp="1579143762927" />
     <state width="606" height="167" key="GridCell.Tab.4.center/3360.2100" timestamp="1576213672477" />
     <state width="1442" height="498" key="GridCell.Tab.4.center/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="2612" height="297" key="GridCell.Tab.4.left" timestamp="1579659513138">
-      <screen x="1680" y="0" width="3360" height="1890" />
+    <state width="1277" height="210" key="GridCell.Tab.4.left" timestamp="1580432459642">
+      <screen x="0" y="23" width="1680" height="965" />
     </state>
-    <state width="1277" height="298" key="GridCell.Tab.4.left/0.0.1680.1050@0.0.1680.1050" timestamp="1579310373760" />
-    <state width="1277" height="249" key="GridCell.Tab.4.left/0.23.1680.963@0.23.1680.963" timestamp="1579037849992" />
+    <state width="1277" height="210" key="GridCell.Tab.4.left/0.0.1680.1050@0.0.1680.1050" timestamp="1580432434487" />
+    <state width="1277" height="210" key="GridCell.Tab.4.left/0.23.1680.963@0.23.1680.963" timestamp="1580355392325" />
+    <state width="1277" height="210" key="GridCell.Tab.4.left/0.23.1680.965@0.23.1680.965" timestamp="1580432459642" />
     <state width="1277" height="298" key="GridCell.Tab.4.left/0.23.1680.966@0.23.1680.966" timestamp="1579310377604" />
-    <state width="2612" height="297" key="GridCell.Tab.4.left/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1579659513138" />
+    <state width="2612" height="210" key="GridCell.Tab.4.left/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1580362640542" />
     <state width="2612" height="228" key="GridCell.Tab.4.left/1680.0.3360.1890/0.23.1680.1027@1680.0.3360.1890" timestamp="1578880346712" />
-    <state width="2612" height="422" key="GridCell.Tab.4.left/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1578978552991" />
+    <state width="2612" height="210" key="GridCell.Tab.4.left/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1580360672835" />
     <state width="2612" height="301" key="GridCell.Tab.4.left/1680.0.3360.1890/0.23.1680.966@1680.0.3360.1890" timestamp="1579143736442" />
     <state width="2612" height="297" key="GridCell.Tab.4.left/1680.23.3360.1867/0.23.1680.963@1680.23.3360.1867" timestamp="1579658908160" />
+    <state width="2612" height="575" key="GridCell.Tab.4.left/1680.23.3360.1867/0.23.1680.965@1680.23.3360.1867" timestamp="1579756806028" />
     <state width="2612" height="437" key="GridCell.Tab.4.left/1680.23.3360.1867/0.23.1680.966@1680.23.3360.1867" timestamp="1579143762927" />
     <state width="606" height="167" key="GridCell.Tab.4.left/3360.2100" timestamp="1576213672477" />
     <state width="1442" height="498" key="GridCell.Tab.4.left/3840.2160/3360.2100" timestamp="1576213672477" />
-    <state width="2612" height="297" key="GridCell.Tab.4.right" timestamp="1579659513140">
-      <screen x="1680" y="0" width="3360" height="1890" />
+    <state width="1277" height="210" key="GridCell.Tab.4.right" timestamp="1580432459643">
+      <screen x="0" y="23" width="1680" height="965" />
     </state>
-    <state width="1277" height="298" key="GridCell.Tab.4.right/0.0.1680.1050@0.0.1680.1050" timestamp="1579310373761" />
-    <state width="1277" height="249" key="GridCell.Tab.4.right/0.23.1680.963@0.23.1680.963" timestamp="1579037849993" />
+    <state width="1277" height="210" key="GridCell.Tab.4.right/0.0.1680.1050@0.0.1680.1050" timestamp="1580432434488" />
+    <state width="1277" height="210" key="GridCell.Tab.4.right/0.23.1680.963@0.23.1680.963" timestamp="1580355392326" />
+    <state width="1277" height="210" key="GridCell.Tab.4.right/0.23.1680.965@0.23.1680.965" timestamp="1580432459643" />
     <state width="1277" height="298" key="GridCell.Tab.4.right/0.23.1680.966@0.23.1680.966" timestamp="1579310377605" />
-    <state width="2612" height="297" key="GridCell.Tab.4.right/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1579659513140" />
+    <state width="2612" height="210" key="GridCell.Tab.4.right/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1580362640544" />
     <state width="2612" height="228" key="GridCell.Tab.4.right/1680.0.3360.1890/0.23.1680.1027@1680.0.3360.1890" timestamp="1578880346714" />
-    <state width="2612" height="422" key="GridCell.Tab.4.right/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1578978552992" />
+    <state width="2612" height="210" key="GridCell.Tab.4.right/1680.0.3360.1890/0.23.1680.963@1680.0.3360.1890" timestamp="1580360672836" />
     <state width="2612" height="301" key="GridCell.Tab.4.right/1680.0.3360.1890/0.23.1680.966@1680.0.3360.1890" timestamp="1579143736445" />
     <state width="2612" height="297" key="GridCell.Tab.4.right/1680.23.3360.1867/0.23.1680.963@1680.23.3360.1867" timestamp="1579658908161" />
+    <state width="2612" height="575" key="GridCell.Tab.4.right/1680.23.3360.1867/0.23.1680.965@1680.23.3360.1867" timestamp="1579756806029" />
     <state width="2612" height="437" key="GridCell.Tab.4.right/1680.23.3360.1867/0.23.1680.966@1680.23.3360.1867" timestamp="1579143762928" />
     <state width="606" height="167" key="GridCell.Tab.4.right/3360.2100" timestamp="1576213672477" />
     <state width="1442" height="498" key="GridCell.Tab.4.right/3840.2160/3360.2100" timestamp="1576213672477" />
@@ -2099,21 +2216,21 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="440" y="253" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1577841530743" />
-    <state width="840" height="525" key="XDebugger.FullValuePopup" timestamp="1579299855037">
+    <state width="840" height="525" key="XDebugger.FullValuePopup" timestamp="1580256007964">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="840" height="525" key="XDebugger.FullValuePopup/0.0.1680.1050@0.0.1680.1050" timestamp="1579299855037" />
-    <state width="1680" height="945" key="XDebugger.FullValuePopup/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1578970550763" />
+    <state width="840" height="525" key="XDebugger.FullValuePopup/0.0.1680.1050@0.0.1680.1050" timestamp="1580256007964" />
+    <state width="1680" height="945" key="XDebugger.FullValuePopup/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1579839250189" />
     <state width="840" height="525" key="XDebugger.FullValuePopup/3360.2100" timestamp="1576213672477" />
     <state width="840" height="525" key="XDebugger.FullValuePopup/3840.2160/3360.2100" timestamp="1576213672477" />
     <state x="100" y="100" width="1480" height="850" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1576720317313">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="100" y="100" width="1480" height="850" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1576720317313" />
-    <state x="2388" y="41" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1579658940891">
-      <screen x="1680" y="0" width="3360" height="1890" />
+    <state x="354" y="23" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1580347158514">
+      <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="354" y="23" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1680.1050@0.0.1680.1050" timestamp="1579299762440" />
+    <state x="354" y="23" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1680.1050@0.0.1680.1050" timestamp="1580347158514" />
     <state x="2388" y="41" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1579658940891" />
     <state x="341" y="270" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/3360.2100" timestamp="1576213672477" />
     <state x="354" y="23" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/3840.2160/3360.2100" timestamp="1576213672477" />
@@ -2121,11 +2238,11 @@
       <screen x="0" y="23" width="1680" height="963" />
     </state>
     <state x="203" y="80" width="1083" height="680" key="dock-window-1/0.23.1680.963@0.23.1680.963" timestamp="1578265250874" />
-    <state x="1680" y="12" width="3360" height="1878" key="find.popup" timestamp="1579657598193">
-      <screen x="1680" y="0" width="3360" height="1890" />
+    <state x="0" y="7" width="1680" height="1043" key="find.popup" timestamp="1580427182793">
+      <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="0" y="7" width="1680" height="1043" key="find.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1579300090613" />
-    <state x="1680" y="12" width="3360" height="1878" key="find.popup/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1579657598193" />
+    <state x="0" y="7" width="1680" height="1043" key="find.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1580427182793" />
+    <state x="1680" y="12" width="3360" height="1878" key="find.popup/1680.0.3360.1890/0.0.1680.1050@1680.0.3360.1890" timestamp="1579754942910" />
     <state x="440" y="68" width="799" height="764" key="find.popup/3360.2100" timestamp="1576213672477" />
     <state x="3246" y="-481" width="1951" height="1679" key="find.popup/3840.2160/3360.2100" timestamp="1576213672477" />
     <state x="3265" y="-139" width="670" height="676" key="search.everywhere.popup" timestamp="1576213672477" />
@@ -2149,16 +2266,29 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/src/dexih.api/Controllers/HubController.cs</url>
-          <line>355</line>
+          <line>365</line>
           <properties documentPath="$PROJECT_DIR$/src/dexih.api/Controllers/HubController.cs" initialLine="355">
             <startOffsets>
-              <option value="12523" />
+              <option value="12798" />
             </startOffsets>
             <endOffsets>
-              <option value="12562" />
+              <option value="12837" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/src/dexih.api/Services/ValidateSubscriptionAttribute.cs</url>
+          <line>71</line>
+          <properties documentPath="$PROJECT_DIR$/src/dexih.api/Services/ValidateSubscriptionAttribute.cs" initialLine="71">
+            <startOffsets>
+              <option value="3276" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3277" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="27" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -5060,6 +5190,136 @@
         </breakpoint>
         <breakpoint type="DotNet Exception Breakpoints">
           <properties exception="MongoDB.Driver.MongoDuplicateKeyException" isInternal="false" displayValue="MongoDuplicateKeyException" namespaceName="MongoDB.Driver">
+            <option name="internal" value="false" />
+          </properties>
+        </breakpoint>
+        <breakpoint type="DotNet Exception Breakpoints">
+          <properties exception="System.Linq.SystemCore_EnumerableDebugViewEmptyException" isInternal="false" displayValue="SystemCore_EnumerableDebugViewEmptyException" namespaceName="System.Linq">
+            <option name="internal" value="false" />
+          </properties>
+        </breakpoint>
+        <breakpoint type="DotNet Exception Breakpoints">
+          <properties exception="System.Net.InternalException" isInternal="false" displayValue="InternalException" namespaceName="System.Net">
+            <option name="internal" value="false" />
+          </properties>
+        </breakpoint>
+        <breakpoint type="DotNet Exception Breakpoints">
+          <properties exception="Interop.NetSecurityNative.GssApiException" isInternal="false" displayValue="Interop+NetSecurityNative+GssApiException">
+            <option name="internal" value="false" />
+          </properties>
+        </breakpoint>
+        <breakpoint type="DotNet Exception Breakpoints">
+          <properties exception="System.Reflection.MetadataException" isInternal="false" displayValue="MetadataException" namespaceName="System.Reflection">
+            <option name="internal" value="false" />
+          </properties>
+        </breakpoint>
+        <breakpoint type="DotNet Exception Breakpoints">
+          <properties exception="System.Diagnostics.DebugProvider.DebugAssertException" isInternal="false" displayValue="DebugProvider+DebugAssertException" namespaceName="System.Diagnostics">
+            <option name="internal" value="false" />
+          </properties>
+        </breakpoint>
+        <breakpoint type="DotNet Exception Breakpoints">
+          <properties exception="System.Diagnostics.Contracts.ContractException" isInternal="false" displayValue="ContractException" namespaceName="System.Diagnostics.Contracts">
+            <option name="internal" value="false" />
+          </properties>
+        </breakpoint>
+        <breakpoint type="DotNet Exception Breakpoints">
+          <properties exception="Interop.AppleCrypto.SslException" isInternal="false" displayValue="Interop+AppleCrypto+SslException">
+            <option name="internal" value="false" />
+          </properties>
+        </breakpoint>
+        <breakpoint type="DotNet Exception Breakpoints">
+          <properties exception="System.Linq.Expressions.Interpreter.RethrowException" isInternal="false" displayValue="RethrowException" namespaceName="System.Linq.Expressions.Interpreter">
+            <option name="internal" value="false" />
+          </properties>
+        </breakpoint>
+        <breakpoint type="DotNet Exception Breakpoints">
+          <properties exception="System.Net.Http.CurlException" isInternal="false" displayValue="CurlException" namespaceName="System.Net.Http">
+            <option name="internal" value="false" />
+          </properties>
+        </breakpoint>
+        <breakpoint type="DotNet Exception Breakpoints">
+          <properties exception="System.Net.Http.HPack.HPackDecodingException" isInternal="false" displayValue="HPackDecodingException" namespaceName="System.Net.Http.HPack">
+            <option name="internal" value="false" />
+          </properties>
+        </breakpoint>
+        <breakpoint type="DotNet Exception Breakpoints">
+          <properties exception="System.Net.Http.Http2ProtocolException" isInternal="false" displayValue="Http2ProtocolException" namespaceName="System.Net.Http">
+            <option name="internal" value="false" />
+          </properties>
+        </breakpoint>
+        <breakpoint type="DotNet Exception Breakpoints">
+          <properties exception="System.Net.Http.HPack.HuffmanDecodingException" isInternal="false" displayValue="HuffmanDecodingException" namespaceName="System.Net.Http.HPack">
+            <option name="internal" value="false" />
+          </properties>
+        </breakpoint>
+        <breakpoint type="DotNet Exception Breakpoints">
+          <properties exception="System.Xml.Serialization.CodeGeneratorConversionException" isInternal="false" displayValue="CodeGeneratorConversionException" namespaceName="System.Xml.Serialization">
+            <option name="internal" value="false" />
+          </properties>
+        </breakpoint>
+        <breakpoint type="DotNet Exception Breakpoints">
+          <properties exception="System.Xml.Schema.UpaException" isInternal="false" displayValue="UpaException" namespaceName="System.Xml.Schema">
+            <option name="internal" value="false" />
+          </properties>
+        </breakpoint>
+        <breakpoint type="DotNet Exception Breakpoints">
+          <properties exception="System.Threading.ReaderWriterLock.ReaderWriterLockApplicationException" isInternal="false" displayValue="ReaderWriterLock+ReaderWriterLockApplicationException" namespaceName="System.Threading">
+            <option name="internal" value="false" />
+          </properties>
+        </breakpoint>
+        <breakpoint type="DotNet Exception Breakpoints">
+          <properties exception="System.Net.Http.Http2StreamException" isInternal="false" displayValue="Http2StreamException" namespaceName="System.Net.Http">
+            <option name="internal" value="false" />
+          </properties>
+        </breakpoint>
+        <breakpoint type="DotNet Exception Breakpoints">
+          <properties exception="System.Net.Http.Http2ConnectionException" isInternal="false" displayValue="Http2ConnectionException" namespaceName="System.Net.Http">
+            <option name="internal" value="false" />
+          </properties>
+        </breakpoint>
+        <breakpoint type="DotNet Exception Breakpoints">
+          <properties exception="System.Text.RegularExpressions.RegexParseException" isInternal="false" displayValue="RegexParseException" namespaceName="System.Text.RegularExpressions">
+            <option name="internal" value="false" />
+          </properties>
+        </breakpoint>
+        <breakpoint type="DotNet Exception Breakpoints">
+          <properties exception="System.Xml.Xsl.XslTransformException" isInternal="false" displayValue="XslTransformException" namespaceName="System.Xml.Xsl">
+            <option name="internal" value="false" />
+          </properties>
+        </breakpoint>
+        <breakpoint type="DotNet Exception Breakpoints">
+          <properties exception="Interop.AppleCrypto.AppleCFErrorCryptographicException" isInternal="false" displayValue="Interop+AppleCrypto+AppleCFErrorCryptographicException">
+            <option name="internal" value="false" />
+          </properties>
+        </breakpoint>
+        <breakpoint type="DotNet Exception Breakpoints">
+          <properties exception="Interop.AppleCrypto.AppleCommonCryptoCryptographicException" isInternal="false" displayValue="Interop+AppleCrypto+AppleCommonCryptoCryptographicException">
+            <option name="internal" value="false" />
+          </properties>
+        </breakpoint>
+        <breakpoint type="DotNet Exception Breakpoints">
+          <properties exception="Interop.Crypto.OpenSslCryptographicException" isInternal="false" displayValue="Interop+Crypto+OpenSslCryptographicException">
+            <option name="internal" value="false" />
+          </properties>
+        </breakpoint>
+        <breakpoint type="DotNet Exception Breakpoints">
+          <properties exception="System.IO.Compression.ZLibException" isInternal="false" displayValue="ZLibException" namespaceName="System.IO.Compression">
+            <option name="internal" value="false" />
+          </properties>
+        </breakpoint>
+        <breakpoint type="DotNet Exception Breakpoints">
+          <properties exception="System.Xml.Xsl.XslLoadException" isInternal="false" displayValue="XslLoadException" namespaceName="System.Xml.Xsl">
+            <option name="internal" value="false" />
+          </properties>
+        </breakpoint>
+        <breakpoint type="DotNet Exception Breakpoints">
+          <properties exception="System.Net.Internals.SocketExceptionFactory.ExtendedSocketException" isInternal="false" displayValue="SocketExceptionFactory+ExtendedSocketException" namespaceName="System.Net.Internals">
+            <option name="internal" value="false" />
+          </properties>
+        </breakpoint>
+        <breakpoint type="DotNet Exception Breakpoints">
+          <properties exception="System.Xml.Xsl.XPath.XPathCompileException" isInternal="false" displayValue="XPathCompileException" namespaceName="System.Xml.Xsl.XPath">
             <option name="internal" value="false" />
           </properties>
         </breakpoint>

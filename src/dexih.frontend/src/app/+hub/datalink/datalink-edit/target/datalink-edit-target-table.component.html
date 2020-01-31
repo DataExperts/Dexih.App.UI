@@ -32,7 +32,7 @@
     </form>
 </dexih-widget-section>
 
-<dexih-table-edit-properties *ngIf="newTable" [formsService]="tableFormService"></dexih-table-edit-properties>
+<dexih-table-edit-properties [formsService]="tableFormService" [isExpanded]="newTable"></dexih-table-edit-properties>
 
 <ng-template [ngIf]="targetTableForm?.controls.table.value">
         <dexih-widget-section title="Columns" [showExpandButton]="true" [padding]="false">
