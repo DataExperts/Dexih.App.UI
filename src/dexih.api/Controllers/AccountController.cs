@@ -20,6 +20,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Web;
+using dexih.api.Extensions;
 using dexih.api.Services.Message;
 using dexih.api.Services.Operations;
 using dexih.functions;
@@ -391,41 +392,67 @@ namespace dexih.api.Controllers
             // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
             // Send an email with this link
 	        var code = await _operations.RepositoryManager.GenerateEmailConfirmationTokenAsync(user, cancellationToken);
-			var url = (Request.IsHttps ? "https://" : "http://") + Request.Host.ToUriComponent();
+	        var url = Request.BaseUrl();
 	        var verifyUrl = $"{url}/auth/verifyemail?email={user.Email}&code={HttpUtility.UrlEncode(code)}";
+
+	        var parameters = new Dictionary<string, string>()
+	        {
+		        {"name", user.FirstName},
+		        {"email", user.Email},
+		        {"verifyUrl", verifyUrl},
+		        {"code", code},
+		        {"url", url},
+	        };
 	        
-	        var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates", "confirmEmail.html");
-			var body = new StringBuilder(System.IO.File.ReadAllText(path));
-			body.Replace("{{url}}", url);
-			body.Replace("{{name}}", user.FirstName);
-	        body.Replace("{{email}}", user.Email);
-	        body.Replace("{{verifyUrl}}", verifyUrl);
-			body.Replace("{{code}}", code);
-			_emailSender.SendEmail(user.Email, "Confirm Email", null, body.ToString());
+	        _emailSender.SendEmailTemplate("confirmEmail.html", "Confirm Email", parameters, new [] {user} );
+	        
+	  //       var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates", "confirmEmail.html");
+			// var body = new StringBuilder(System.IO.File.ReadAllText(path));
+			// body.Replace("{{url}}", url);
+			// body.Replace("{{name}}", user.FirstName);
+	  //       body.Replace("{{email}}", user.Email);
+	  //       body.Replace("{{verifyUrl}}", verifyUrl);
+			// body.Replace("{{code}}", code);
+			// _emailSender.SendEmail(user.Email, "Confirm Email", null, body.ToString());
         }
+
+
 	    
 	    public void SendRegisteredEmail([FromBody] ApplicationUser user)
 	    {
 		    string path;
 		    string subject;
+		    var parameters = new Dictionary<string, string>()
+		    {
+			    {"url", Request.BaseUrl()}
+		    };
 		    if (user.IsInvited)
 		    {
-			    path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates", "userReady.html");
-			    subject = "Information Hub Registration is Completed.";
+			    _emailSender.SendEmailTemplate("userReady.html", "Information Hub Registration is Completed.", parameters, new [] {user});
 		    }
 		    else
 		    {
-			    path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates", "inviteRequired.html");
-			    subject = "Information Hub Invite Pending";
+			    _emailSender.SendEmailTemplate("inviteRequired.html", "Information Hub Invite Pending", parameters, new [] {user});
 		    }
 
-		    var body = new StringBuilder(System.IO.File.ReadAllText(path));
-		    var url = (Request.IsHttps ? "https://" : "http://") + Request.Host.ToUriComponent();
-		    body.Replace("{{url}}", url);
-		    body.Replace("{{name}}", user.FirstName);
-		    body.Replace("{{email}}", user.Email);
-
-		    _emailSender.SendEmail(user.Email, subject, null, body.ToString());
+		    // if (user.IsInvited)
+		    // {
+			   //  path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates", "userReady.html");
+			   //  subject = "Information Hub Registration is Completed.";
+		    // }
+		    // else
+		    // {
+			   //  path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates", "inviteRequired.html");
+			   //  subject = "Information Hub Invite Pending";
+		    // }
+		    //
+		    // var body = new StringBuilder(System.IO.File.ReadAllText(path));
+		    // var url = (Request.IsHttps ? "https://" : "http://") + Request.Host.ToUriComponent();
+		    // body.Replace("{{url}}", url);
+		    // body.Replace("{{name}}", user.FirstName);
+		    // body.Replace("{{email}}", user.Email);
+		    //
+		    // _emailSender.SendEmail(user.Email, subject, null, body.ToString());
 	    }
 
 	    public void SendSupportMessage(string subject, string message)
@@ -434,14 +461,27 @@ namespace dexih.api.Controllers
 		    {
 			    try
 			    {
+				    var user = new ApplicationUser()
+				    {
+					    Email = _operations.Config.SupportEmailAccount,
+					    FirstName = "Support"
+				    };
 
-				    string path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates",
-					    "supportEmail.html");
-				    var body = new StringBuilder(System.IO.File.ReadAllText(path));
-				    body.Replace("{{message}}", message);
+				    var parameters = new Dictionary<string, string>()
+				    {
+					    {"message", message},
+					    {"url", Request.BaseUrl()},
+				    };
+				    
+				    _emailSender.SendEmailTemplate("supportEmail.html", "Information Hub Invite Pending", parameters, new [] {user});
 
-				    _emailSender.SendEmail(_operations.Config.SupportEmailAccount, subject, null,
-					    body.ToString());
+				    // string path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates",
+					   //  "supportEmail.html");
+				    // var body = new StringBuilder(System.IO.File.ReadAllText(path));
+				    // body.Replace("{{message}}", message);
+				    //
+				    // _emailSender.SendEmail(_operations.Config.SupportEmailAccount, subject, null,
+					   //  body.ToString());
 
 			    }
 			    catch (Exception ex)
@@ -741,15 +781,26 @@ namespace dexih.api.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.    crosoft.com/fwlink/?LinkID=532713
                 // Send an email with this link
+                var url = Request.BaseUrl();
                 var code = await _operations.RepositoryManager.GeneratePasswordResetTokenAsync(user, cancellationToken);
-				var url = (Request.IsHttps ? "https://" : "http://") + Request.Host.ToUriComponent();
-	            var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates", "forgotPassword.html");
-				var body = new StringBuilder(System.IO.File.ReadAllText(path));
-				body.Replace("{{url}}", url);
-	            body.Replace("{{email}}", user.Email);
-				body.Replace("{{name}}", user.FirstName);
-				body.Replace("{{code}}", code);
-				_emailSender.SendEmail(user.Email, "Reset Password", null, body.ToString());
+                var forgotUrl = $"{url}/auth/forgot-password?email={user.Email}&code={HttpUtility.UrlEncode(code)}";
+                var parameters = new Dictionary<string, string>()
+                {
+	                {"code", code},
+	                {"forgotUrl", forgotUrl},
+	                {"url", url}
+                };
+                
+                _emailSender.SendEmailTemplate("forgotPassword.html", "Reset Password", parameters, new [] {user});
+                
+				// var url = (Request.IsHttps ? "https://" : "http://") + Request.Host.ToUriComponent();
+	   //          var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates", "forgotPassword.html");
+				// var body = new StringBuilder(System.IO.File.ReadAllText(path));
+				// body.Replace("{{url}}", url);
+	   //          body.Replace("{{email}}", user.Email);
+				// body.Replace("{{name}}", user.FirstName);
+				// body.Replace("{{code}}", code);
+				// _emailSender.SendEmail(user.Email, "Reset Password", null, body.ToString());
 
 				return;
             }
@@ -1243,31 +1294,43 @@ namespace dexih.api.Controllers
 	    {
 		    try
 		    {
-			    var users = await _operations.RepositoryManager.GetIssueUsers(issue, cancellationToken);
+			    var users = (await _operations.RepositoryManager.GetIssueUsers(issue, cancellationToken)).ToList();
+			    users.Add(new ApplicationUser() {Email = _operations.Config.SupportEmailAccount, FirstName = "support"});
+
+			    var url = Request.BaseUrl();
 			    
-			    var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates", "issueEmail.html");
-			    var body = new StringBuilder(System.IO.File.ReadAllText(path));
-			    var url = (Request.IsHttps ? "https://" : "http://") + Request.Host.ToUriComponent();
-			    body.Replace("{{url}}", url);
-			    body.Replace("{{message}}", message);
+			    var parameters = new Dictionary<string, string>()
+			    {
+				    {"message", message},
+				    {"link", $"{url}/hubs/index/support/edit/" + issue.Key},
+				    {"url", url},
+			    };
 			    
-			    var issueUrl = $"{url}/hubs/index/support/edit/{issue.Key}";
-			    body.Replace("{{link}}", issueUrl);
-
-			    var newSubject = $"{subject}: issue: {issue.Name}";
-
-			    foreach (var user in users.Where(c => c.NotifySupportMessage))
-			    {
-				    var bodyString = body.ToString().Replace("{{user}}", user.UserName);
-				    _emailSender.SendEmail(user.Email, newSubject, null,bodyString);
-			    }
-
-			    if (_operations.Config.SupportEmailAccount != null)
-			    {
-				    var bodyString = body.ToString().Replace("{{user}}", "support");
-				    _emailSender.SendEmail(_operations.Config.SupportEmailAccount, newSubject, null,
-					    bodyString);
-			    }
+			    _emailSender.SendEmailTemplate("issueEmail.html", $"{subject}: {issue.Name}", parameters, users);
+			    
+			    // var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates", "issueEmail.html");
+			    // var body = new StringBuilder(System.IO.File.ReadAllText(path));
+			    // var url = (Request.IsHttps ? "https://" : "http://") + Request.Host.ToUriComponent();
+			    // body.Replace("{{url}}", url);
+			    // body.Replace("{{message}}", message);
+			    //
+			    // var issueUrl = $"{url}/hubs/index/support/edit/{issue.Key}";
+			    // body.Replace("{{link}}", issueUrl);
+			    //
+			    // var newSubject = $"{subject}: issue: {issue.Name}";
+			    //
+			    // foreach (var user in users.Where(c => c.NotifySupportMessage))
+			    // {
+				   //  var bodyString = body.ToString().Replace("{{user}}", user.UserName);
+				   //  _emailSender.SendEmail(user.Email, newSubject, null,bodyString);
+			    // }
+			    //
+			    // if (_operations.Config.SupportEmailAccount != null)
+			    // {
+				   //  var bodyString = body.ToString().Replace("{{user}}", "support");
+				   //  _emailSender.SendEmail(_operations.Config.SupportEmailAccount, newSubject, null,
+					  //   bodyString);
+			    // }
 		    }
 		    catch (Exception ex)
 		    {

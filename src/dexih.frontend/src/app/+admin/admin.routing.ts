@@ -8,7 +8,7 @@ export const routes: Routes = [
     { path: '', component: AdminMainComponent, children: [
     { path: 'users', data: { pageTitle: 'Users' }, children : [
         { path: '', component: UsersIndexComponent, data: { pageTitle: 'Users Summary' } },
-        { path: 'edit-user/:email', component: UserEditComponent, data: { action: 'edit', pageTitle: 'Edit User' } },
+        { path: 'edit-user/:userName', component: UserEditComponent, data: { action: 'edit', pageTitle: 'Edit User' } },
         { path: 'new-user', component: UserEditComponent, data: { action: 'new', pageTitle: 'New User' } },
         { path: 'invite-users', component: UsersInviteComponent, data: { pageTitle: 'Invite Users' } },
     ] },

@@ -18,7 +18,7 @@ export class UserAuthorization {
 
     public id: string = null;
 
-    public lockoutEnabled = true;
+    public lockoutEnabled = false;
     public lockoutEnd: Date = null;
 
     public logins: UserLogin[];
@@ -55,11 +55,11 @@ export class Invites {
 }
 
 export enum eRole {
-    Administrator = <any>'Administrator',
-    Viewer = <any>'Viewer',
-    Manager = <any>'Manager',
-    User = <any>'User',
-    None = <any>'None'
+    Administrator = 1,
+    Manager = 2,
+    User = 3,
+    Viewer = 4,
+    None = 5
 }
 export const roles = [
     {key: eRole.Administrator, name: 'Administrator'},

@@ -47,7 +47,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
           const user = new UserAuthorization();
           this.formsService.createDefault(user, user);
         } else {
-          this.email = params['email'];
+          this.email = params['userName'];
 
           if (!this.email) {
             this.authService.navigateUp();

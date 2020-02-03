@@ -57,7 +57,7 @@ export class UsersIndexComponent implements OnInit, OnDestroy {
     }
 
     deleteUsers(users: Array<UserAuthorization>) {
-        const emails = users.map(c => c.email);
+        const emails = users.map(c => c.userName);
 
         this.authService.confirmDialog('Delete users?', 'This action will delete users with the following emails: <p>' +
             emails.join('</p><p>') + '</p>  <p></p>Are you sure?').then(confirm => {
@@ -74,14 +74,14 @@ export class UsersIndexComponent implements OnInit, OnDestroy {
     }
 
     revokeUsers(users: Array<UserAuthorization>) {
-        const emails = users.map(c => c.email);
+        const emails = users.map(c => c.userName);
 
         this.authService.confirmDialog('Revoke users?', 'This action will revoke users with the following emails: <p>' +
             emails.join('</p><p>') + '</p>  <p></p>Are you sure?').then(confirm => {
                 if (confirm) {
 
                     this.authService.post('/api/Admin/RevokeUsers', {
-                        emails: users.map(c => c.email)
+                        emails: users.map(c => c.userName)
                     }, 'Revoking users...').then(result => {
                         this.refreshUsers();
                     }).catch(reason => {
@@ -92,14 +92,14 @@ export class UsersIndexComponent implements OnInit, OnDestroy {
     }
 
     enableUsers(users: Array<UserAuthorization>) {
-        const emails = users.map(c => c.email);
+        const emails = users.map(c => c.userName);
 
         this.authService.confirmDialog('Enable users?', 'This action will re-enable logins for users with the following emails: <p>' +
             emails.join('</p><p>') + '</p>  <p></p>Are you sure?').then(confirm => {
                 if (confirm) {
 
                     this.authService.post('/api/Admin/EnableUsers', {
-                        emails: users.map(c => c.email)
+                        emails: users.map(c => c.userName)
                     }, 'Enabling users...').then(result => {
                         this.refreshUsers();
                     }).catch(reason => {
@@ -111,7 +111,7 @@ export class UsersIndexComponent implements OnInit, OnDestroy {
 
     reinviteUsers(users: Array<UserAuthorization>) {
         this.authService.post('/api/Admin/ReInviteUsers', {
-            emails: users.map(c => c.email)
+            emails: users.map(c => c.userName)
         }, 'Inviting users...').then(result => {
             this.dexihMessage.addSuccessMessage('Emails have been sent to the selected users.');
         }).catch(reason => {
@@ -120,7 +120,7 @@ export class UsersIndexComponent implements OnInit, OnDestroy {
     }
 
     editUser(user: UserAuthorization) {
-        this.router.navigate(['edit-user', user.email], { queryParamsHandling: 'merge', relativeTo: this.route.parent });
+        this.router.navigate(['edit-user', user.userName], { queryParamsHandling: 'merge', relativeTo: this.route.parent });
     }
 
 }

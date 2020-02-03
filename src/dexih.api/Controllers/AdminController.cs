@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 using dexih.api.Controllers;
 using dexih.api.Models;
 using dexih.api.Services;
@@ -150,32 +151,41 @@ namespace dexih.api
 			foreach (var user in users)
 			{
 				string template;
-				string code;
+				string registerUrl = "";
 				string subject;
 				
 				if (user.EmailConfirmed)
 				{
 					template = "userReady.html";
 					subject = "Information Hub Access Granted!";
-					code = "";
 				}
 				else
 				{
 					template = "invite.html";
-					code = await _operations.RepositoryManager.GenerateEmailConfirmationTokenAsync(user, cancellationToken);
+					var code = await _operations.RepositoryManager.GenerateEmailConfirmationTokenAsync(user, cancellationToken);
+					registerUrl = $"{url}/auth/register?email={user.Email}&code={HttpUtility.UrlEncode(code)}";
 					subject = "Information Hub Invitation!";
 				}
+				
+				var parameters = new Dictionary<string, string>()
+				{
+					{"registerUrl", registerUrl},
+					{"url", url},
+				};
+	        
+				_emailSender.SendEmailTemplate(template, subject, parameters, new [] {user} );
 
-				var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates", template);
-				var bodyOriginal = System.IO.File.ReadAllText(path);
-				var body = new StringBuilder(bodyOriginal.Replace("{{url}}", url));
 
-				body.Replace("{{code}}", code);
-				var name = string.IsNullOrEmpty(user.FirstName) ? "there" : user.FirstName;
-				body.Replace("{{name}}", name);
-				body.Replace("{{email}}", user.Email);
-
-				_emailSender.SendEmail(user.Email, subject, null, body.ToString());
+				// var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates", template);
+				// var bodyOriginal = System.IO.File.ReadAllText(path);
+				// var body = new StringBuilder(bodyOriginal.Replace("{{url}}", url));
+				//
+				// body.Replace("{{registerUrl}}", registerUrl);
+				// var name = string.IsNullOrEmpty(user.FirstName) ? "there" : user.FirstName;
+				// body.Replace("{{name}}", name);
+				// body.Replace("{{email}}", user.Email);
+				//
+				// _emailSender.SendEmail(user.Email, subject, null, body.ToString());
 			}
 		}
 

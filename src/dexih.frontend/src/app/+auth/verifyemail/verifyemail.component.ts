@@ -53,17 +53,22 @@ export class VerifyEmailComponent implements OnInit, OnDestroy {
                 if (user.isInvited) {
                     if (!this.userService.redirectUrl) {
                         this.router.navigate(['/']);
+                        return;
                     } else {
                       this.router.navigateByUrl(this.userService.redirectUrl);
+                      return;
                     }
                 } else {
                     this.router.navigate(['notInvited'], { queryParams: { email: user.email}, relativeTo: this.route.parent });
+                    return;
                 }
             } else {
               this.submittingVerification = false;
             }
-                this.message = 'Confirm email failed.  Please contact support to proceed.';
-                this.successMessage = '';
+
+            this.message = 'Confirm email failed.  Please contact support to proceed.';
+            this.successMessage = '';
+
         }).catch(
         reason => {
           this.submittingVerification = false;
@@ -75,15 +80,9 @@ export class VerifyEmailComponent implements OnInit, OnDestroy {
 
   resendVerification() {
     this.resendingCode = true;
-      this.userService.resendConfirmationEmail(this.email).then(
-        result => {
-            if (result) {
-                this.message = '';
-                this.successMessage = 'The confirmation email has been resent to the email above.';
-            } else {
-                this.message = 'Confirm email failed.  Please contact support to proceed.';
-                this.successMessage = '';
-            }
+      this.userService.resendConfirmationEmail(this.email).then( () => {
+          this.message = '';
+          this.successMessage = 'The confirmation email has been resent to the email above.';
           this.resendingCode = false;
         }).catch(
         reason => {

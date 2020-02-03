@@ -66,7 +66,7 @@ export class ManageUsersIndexComponent implements OnInit, OnDestroy {
     }
 
     deleteUsers(users: Array<UserAuthorization>) {
-        const emails = users.map(c => c.email);
+        const emails = users.map(c => c.userName);
 
         this.authService.confirmDialog('Confirm Delete Users',
         `This action will delete the selected user(s) from using this hub.  Proceed?`).then(confirm => {

@@ -14,6 +14,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Text;
 using System.Threading;
+using dexih.api.Extensions;
 using dexih.api.Services.Message;
 using dexih.api.Services.Operations;
 using Microsoft.Extensions.Logging;
@@ -207,28 +208,45 @@ namespace dexih.api.Controllers
 				userPermissions.Permission, cancellationToken);
 
 			// send a notification email to invited users.
-			var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates", "hubAccess.html");
-			var bodyOriginal = System.IO.File.ReadAllText(path);
-			var url = (Request.IsHttps ? "https://" : "http://") + Request.Host.ToUriComponent();
+			
+			var url = Request.BaseUrl();
 			var hub = await _operations.RepositoryManager.GetHub(userPermissions.HubKey, cancellationToken);
-
-			foreach (var user in userIds.Where(c => c.IsEnabled && c.IsInvited && c.IsRegistered))
+			
+			var parameters = new Dictionary<string, string>()
 			{
-				var body = new StringBuilder(bodyOriginal.Replace("{{url}}", url));
-				body.Replace("{{hubKey}}", userPermissions.HubKey.ToString());
-				body.Replace("{{hubName}}", hub.Name);
-				body.Replace("{{permission}}", userPermissions.Permission.ToString());
-				var name = string.IsNullOrEmpty(user.FirstName) ? "there" : user.FirstName;
-				body.Replace("{{name}}", name);
-				body.Replace("{{email}}", user.Email);
+				{"url", url},
+				{"hubKey", userPermissions.HubKey.ToString()},
+				{"hubName", hub.Name},
+				{"permission", userPermissions.Permission.ToString()},
+			};
 
-				_emailSender.SendEmail(user.Email, "Hub Access Granted", null, body.ToString());
-			}
+			var users = userIds.Where(c => c.IsEnabled && c.IsInvited && c.IsRegistered).ToArray();
+			
+			_emailSender.SendEmailTemplate("hubAccessRemove.html", "Hub Access Removed", parameters, users);
+
+			
+			// var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates", "hubAccess.html");
+			// var bodyOriginal = System.IO.File.ReadAllText(path);
+			// var url = (Request.IsHttps ? "https://" : "http://") + Request.Host.ToUriComponent();
+			// var hub = await _operations.RepositoryManager.GetHub(userPermissions.HubKey, cancellationToken);
+			//
+			// foreach (var user in userIds.Where(c => c.IsEnabled && c.IsInvited && c.IsRegistered))
+			// {
+			// 	var body = new StringBuilder(bodyOriginal.Replace("{{url}}", url));
+			// 	body.Replace("{{hubKey}}", userPermissions.HubKey.ToString());
+			// 	body.Replace("{{hubName}}", hub.Name);
+			// 	body.Replace("{{permission}}", userPermissions.Permission.ToString());
+			// 	var name = string.IsNullOrEmpty(user.FirstName) ? "there" : user.FirstName;
+			// 	body.Replace("{{name}}", name);
+			// 	body.Replace("{{email}}", user.Email);
+			//
+			// 	_emailSender.SendEmail(user.Email, "Hub Access Granted", null, body.ToString());
+			// }
 		}
 
 		private async Task SendInvites(IEnumerable<ApplicationUser> users, CancellationToken cancellationToken)
 		{
-			var url = (Request.IsHttps ? "https://" : "http://") + Request.Host.ToUriComponent();
+			var url = Request.BaseUrl();
 
 			foreach (var user in users)
 			{
@@ -248,17 +266,26 @@ namespace dexih.api.Controllers
 					code = await _operations.RepositoryManager.GenerateEmailConfirmationTokenAsync(user, cancellationToken);
 					subject = "Information Hub Invitation Ready!";
 				}
+				
+				var parameters = new Dictionary<string, string>()
+				{
+					{"code", code},
+					{"url", url},
+				};
+				
+				_emailSender.SendEmailTemplate(template, subject, parameters, new [] {user});
 
-				var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates", template);
-				var bodyOriginal = System.IO.File.ReadAllText(path);
-				var body = new StringBuilder(bodyOriginal.Replace("{{url}}", url));
 
-				body.Replace("{{code}}", code);
-				var name = string.IsNullOrEmpty(user.FirstName) ? "there" : user.FirstName;
-				body.Replace("{{name}}", name);
-				body.Replace("{{email}}", user.Email);
-
-				_emailSender.SendEmail(user.Email, subject, null, body.ToString());
+				// var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates", template);
+				// var bodyOriginal = System.IO.File.ReadAllText(path);
+				// var body = new StringBuilder(bodyOriginal.Replace("{{url}}", url));
+				//
+				// body.Replace("{{code}}", code);
+				// var name = string.IsNullOrEmpty(user.FirstName) ? "there" : user.FirstName;
+				// body.Replace("{{name}}", name);
+				// body.Replace("{{email}}", user.Email);
+				//
+				// _emailSender.SendEmail(user.Email, subject, null, body.ToString());
 			}
 		}
 
@@ -283,24 +310,38 @@ namespace dexih.api.Controllers
 
 			await database.HubDeleteUsers(userPermissions.HubKey, userIds.Select(c => c.Id), cancellationToken);
 
-			// send a notification email to invited users.
-			var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates",
-				"hubAccessRemove.html");
-			var bodyOriginal = System.IO.File.ReadAllText(path);
-			var url = (Request.IsHttps ? "https://" : "http://") + Request.Host.ToUriComponent();
+			var url = Request.BaseUrl();
 			var hub = await _operations.RepositoryManager.GetHub(userPermissions.HubKey, cancellationToken);
-
-			foreach (var user in userIds.Where(c => c.IsEnabled && c.IsInvited && c.IsRegistered))
+			
+			var parameters = new Dictionary<string, string>()
 			{
-				var body = new StringBuilder(bodyOriginal.Replace("{{url}}", url));
-				body.Replace("{{hubKey}}", userPermissions.HubKey.ToString());
-				body.Replace("{{hubName}}", hub.Name);
-				var name = string.IsNullOrEmpty(user.FirstName) ? "there" : user.FirstName;
-				body.Replace("{{name}}", name);
-				body.Replace("{{email}}", user.Email);
+				{"url", url},
+				{"hubKey", userPermissions.HubKey.ToString()},
+				{"hubName", hub.Name},
+			};
 
-				_emailSender.SendEmail(user.Email, "Hub Access Removed", null, body.ToString());
-			}
+			var users = userIds.Where(c => c.IsEnabled && c.IsInvited && c.IsRegistered).ToArray();
+			
+			_emailSender.SendEmailTemplate("hubAccessRemove.html", "Hub Access Removed", parameters, users);
+
+			// // send a notification email to invited users.
+			// var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates",
+			// 	"hubAccessRemove.html");
+			// var bodyOriginal = System.IO.File.ReadAllText(path);
+			// var url = (Request.IsHttps ? "https://" : "http://") + Request.Host.ToUriComponent();
+			// var hub = await _operations.RepositoryManager.GetHub(userPermissions.HubKey, cancellationToken);
+			//
+			// foreach (var user in userIds.Where(c => c.IsEnabled && c.IsInvited && c.IsRegistered))
+			// {
+			// 	var body = new StringBuilder(bodyOriginal.Replace("{{url}}", url));
+			// 	body.Replace("{{hubKey}}", userPermissions.HubKey.ToString());
+			// 	body.Replace("{{hubName}}", hub.Name);
+			// 	var name = string.IsNullOrEmpty(user.FirstName) ? "there" : user.FirstName;
+			// 	body.Replace("{{name}}", name);
+			// 	body.Replace("{{email}}", user.Email);
+			//
+			// 	_emailSender.SendEmail(user.Email, "Hub Access Removed", null, body.ToString());
+			// }
 		}
 
 		[HttpPost("[action]")]
