@@ -36,8 +36,8 @@ Example (this will use prerelease versions of the remote agents):
 Welcome to Dexih - The Data Experts Information Hub
 ");
                 Console.WriteLine("This will launch an instance of a remote agent.");
-                var server = args.Length >= 1 ? args[0] : "https://dexih.com";
-                const string directory = "dexih.remote";
+                var server = args.Length >= 1 ? args[0] : "https://dexih.dataexpertsgroup.com";
+                string directory = Path.GetFullPath("dexih.remote");
                 const string os = "windows";
                 var pre = args.Length >=2 ? args[1] : "stable";
 
@@ -63,6 +63,7 @@ Welcome to Dexih - The Data Experts Information Hub
                         if(string.IsNullOrEmpty(result))
                         {
                             Console.Error.WriteLine($"Error:  There was no response from the Information Hub at {server}.");
+                            Console.ReadKey();
                             return;
                         }
 
@@ -71,6 +72,7 @@ Welcome to Dexih - The Data Experts Information Hub
                         if (versionInfo.Length != 3)
                         {
                             Console.Error.WriteLine($"Error:  Incorrect version information received from {server}.  The result was {versionInfo}");
+                            Console.ReadKey();
                             return;
                         }
 
@@ -97,50 +99,57 @@ Welcome to Dexih - The Data Experts Information Hub
                         throw new Exception("Exiting");
                     }
 
-                    if (latestVersion != localVersion || ! Directory.Exists(directory))
+                    if (latestVersion != localVersion || !Directory.Exists(directory))
                     {
-                        Console.Write($"Downloading latest version from {latestUrl}");
-
-                        using (var progress = new ProgressBar())
+                        if (File.Exists(latestBinary))
                         {
-                            var completeEvent = new ManualResetEvent(false);
+                            Console.Write($"Using local file {latestBinary}.");
+                        }
+                        else
+                        {
+                            Console.Write($"Downloading latest version from {latestUrl}");
 
-                            //web client call back procedures
-                            void DownloadProgressCallback(object sender, DownloadProgressChangedEventArgs e)
+                            using (var progress = new ProgressBar())
                             {
-                                progress.Report(e.ProgressPercentage / 100.0);
-                            }
+                                var completeEvent = new ManualResetEvent(false);
 
-                            //web client call back procedures
-                            void DownloadProgressComplete(object sender, AsyncCompletedEventArgs e)
-                            {
-                                if (e.Cancelled)
+                                //web client call back procedures
+                                void DownloadProgressCallback(object sender, DownloadProgressChangedEventArgs e)
                                 {
-                                    throw new Exception("The download was cancelled");
+                                    progress.Report(e.ProgressPercentage / 100.0);
                                 }
-                                if (e.Error != null)
-                                {
-                                    throw e.Error;
-                                }
-                                completeEvent.Set();
-                            }
 
-                            using (var client = new WebClient())
-                            {
-                                try
+                                //web client call back procedures
+                                void DownloadProgressComplete(object sender, AsyncCompletedEventArgs e)
                                 {
-                                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-                                    // Specify a progress notification handler.
-                                    client.DownloadProgressChanged += DownloadProgressCallback;
-                                    client.DownloadFileCompleted += DownloadProgressComplete;
-                                    client.DownloadFileAsync(new Uri(latestUrl), latestBinary);
-                                    completeEvent.WaitOne();
+                                    if (e.Cancelled)
+                                    {
+                                        throw new Exception("The download was cancelled");
+                                    }
+                                    if (e.Error != null)
+                                    {
+                                        throw e.Error;
+                                    }
+                                    completeEvent.Set();
                                 }
-                                catch (Exception ex)
+
+                                using (var client = new WebClient())
                                 {
-                                    Console.Error.WriteLine("Could not retrieve binaries at: " + latestUrl + ".  Error message: " + ex.Message);
-                                    throw;
+                                    try
+                                    {
+                                        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+                                        // Specify a progress notification handler.
+                                        client.DownloadProgressChanged += DownloadProgressCallback;
+                                        client.DownloadFileCompleted += DownloadProgressComplete;
+                                        client.DownloadFileAsync(new Uri(latestUrl), latestBinary);
+                                        completeEvent.WaitOne();
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Console.Error.WriteLine("Could not retrieve binaries at: " + latestUrl + ".  Error message: " + ex.Message);
+                                        throw;
+                                    }
                                 }
                             }
                         }
@@ -151,20 +160,17 @@ Welcome to Dexih - The Data Experts Information Hub
                         Console.WriteLine();
                         Console.WriteLine("Extracting files to temp directory at " + tempDirectory);
 
-                        Directory.CreateDirectory(tempDirectory);
-                        ZipFile.ExtractToDirectory(latestBinary, tempDirectory);
-
                         // remove the old directory
-                        if (Directory.Exists(directory))
+                        if (Directory.GetFiles(directory).Length > 0)
                         {
                             Directory.Move(directory, backupDirectory);
                             Console.WriteLine();
                             Console.WriteLine("Previous version backed up to " + backupDirectory);
                         }
 
-                        Directory.Move(tempDirectory, directory);
+                        // Directory.CreateDirectory(tempDirectory);
+                        ZipFile.ExtractToDirectory(latestBinary, directory);
                         File.Delete(latestBinary);
-
                         File.WriteAllText(Path.Combine(directory, "dexih.remote.version"), latestVersion);
 
                         previousVersion = latestVersion;
@@ -176,6 +182,7 @@ Welcome to Dexih - The Data Experts Information Hub
                     if (process == null)
                     {
                         Console.Error.WriteLine($"Error launching the remote agent at {path}.");
+                        Console.ReadKey();
                         return;
                     }
 
@@ -183,12 +190,15 @@ Welcome to Dexih - The Data Experts Information Hub
 
                     process.WaitForExit();
                     upgrade = process.ExitCode;
+                    Console.ReadKey();
                 }
             }
             catch(Exception ex)
             {
                 Console.Error.WriteLine($"The following error was encountered:  {ex.Message}.  This could be an issue connecting to the download site.  If this continues the latest release can be downloaded manually from https://github.com/DataExperts/Dexih.App.Remote/releases/latest.");
+                Console.ReadKey();
             }
         }
+
     }
 }
