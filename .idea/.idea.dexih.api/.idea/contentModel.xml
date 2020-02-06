@@ -322,6 +322,48 @@
           </e>
         </e>
       </e>
+      <e p="plugins" t="Include">
+        <e p="dexih.connections.oracle1.1.711.zip" t="Include" />
+        <e p="standard" t="Include">
+          <e p="CsvHelper.dll" t="Include" />
+          <e p="dexih.connections.oracle.deps.json" t="Include" />
+          <e p="dexih.connections.oracle.dll" t="Include" />
+          <e p="dexih.connections.oracle.pdb" t="Include" />
+          <e p="dexih.functions.dll" t="Include" />
+          <e p="dexih.functions.pdb" t="Include" />
+          <e p="dexih.transforms.dll" t="Include" />
+          <e p="dexih.transforms.pdb" t="Include" />
+          <e p="Dexih.Utils.CopyProperties.dll" t="Include" />
+          <e p="Dexih.Utils.Crypto.dll" t="Include" />
+          <e p="Dexih.Utils.DataType.dll" t="Include" />
+          <e p="Dexih.Utils.MessageHelpers.dll" t="Include" />
+          <e p="Microsoft.AspNetCore.Cryptography.Internal.dll" t="Include" />
+          <e p="Microsoft.AspNetCore.Cryptography.KeyDerivation.dll" t="Include" />
+          <e p="Microsoft.Bcl.AsyncInterfaces.dll" t="Include" />
+          <e p="Microsoft.CSharp.dll" t="Include" />
+          <e p="NetTopologySuite.dll" t="Include" />
+          <e p="Newtonsoft.Json.dll" t="Include" />
+          <e p="Oracle.ManagedDataAccess.dll" t="Include" />
+          <e p="System.Buffers.dll" t="Include" />
+          <e p="System.Collections.NonGeneric.dll" t="Include" />
+          <e p="System.Data.Common.dll" t="Include" />
+          <e p="System.IO.FileSystem.Primitives.dll" t="Include" />
+          <e p="System.Linq.dll" t="Include" />
+          <e p="System.Memory.dll" t="Include" />
+          <e p="System.Numerics.Vectors.dll" t="Include" />
+          <e p="System.Reflection.TypeExtensions.dll" t="Include" />
+          <e p="System.Runtime.CompilerServices.Unsafe.dll" t="Include" />
+          <e p="System.Text.Encodings.Web.dll" t="Include" />
+          <e p="System.Text.Json.dll" t="Include" />
+          <e p="System.Text.RegularExpressions.dll" t="Include" />
+          <e p="System.Threading.dll" t="Include" />
+          <e p="System.Threading.Tasks.Extensions.dll" t="Include" />
+          <e p="System.Xml.ReaderWriter.dll" t="Include" />
+          <e p="System.Xml.XDocument.dll" t="Include" />
+          <e p="System.Xml.XPath.dll" t="Include" />
+          <e p="System.Xml.XPath.XDocument.dll" t="Include" />
+        </e>
+      </e>
       <e p="Program.cs" t="Include" />
       <e p="Properties" t="Include">
         <e p="AssemblyInfo.cs" t="Include" />

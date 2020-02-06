@@ -16,7 +16,7 @@ export class ApiData {
    }
    
    export class ApplicationUser {
-    public id: string = '0d9f2394-cb3d-4a3e-92e2-907ce940b811';
+    public id: string = '2689664c-962b-424c-8d60-7315f502914a';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -25,7 +25,7 @@ export class ApiData {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = '555832bc-ad2f-48e8-af40-8e5379074bdd';
+    public securityStamp: string = '94e5b8c4-44fd-4038-917f-d88ba736a2c4';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -1475,6 +1475,14 @@ export class ApiData {
     public allowedHubs: number[] = [];
    }
    
+   export class PluginsSection {
+    public mLNet: boolean = false;
+    public excel: boolean = false;
+    public oracle: boolean = false;
+    public dB2: boolean = false;
+    public mongo: boolean = false;
+   }
+   
    export class PrivacySection {
     public allowDataDownload: boolean = true;
     public allowDataUpload: boolean = true;
@@ -1546,6 +1554,11 @@ export class ApiData {
     public user: string = null;
     public userToken: string = null;
     public webServer: string = null;
+    public mLNet: boolean = false;
+    public excel: boolean = false;
+    public oracle: boolean = false;
+    public dB2: boolean = false;
+    public mongo: boolean = false;
    }
    
    export class RemoteAgentStatus {
@@ -1590,6 +1603,7 @@ export class ApiData {
     public privacy: PrivacySection = new PrivacySection();
     public permissions: PermissionsSection = new PermissionsSection();
     public namingStandards: string[] = [];
+    public plugins: PluginsSection = new PluginsSection();
    }
    
    export class RenewSslCertificateModel {

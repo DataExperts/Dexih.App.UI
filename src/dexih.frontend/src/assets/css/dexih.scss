@@ -75,6 +75,13 @@
         background: $gray-300;
     }
 
+    ul {
+        display: -webkit-box, flex;
+        padding-left: 0;
+        margin-bottom: 0;
+        list-style: none;
+    }
+
     li.open ul {
         list-style-type: disc;
         margin: .5rem;

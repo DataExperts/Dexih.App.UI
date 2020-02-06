@@ -109,6 +109,21 @@ namespace dexih.api.Models
         
         [DataMember(Order = 24)]
         public string WebServer { get; set; }
+        
+        [DataMember(Order = 25)]
+        public bool MLNet { get; set; } = false;
+
+        [DataMember(Order = 26)]
+        public bool Excel { get; set; } = false;
+
+        [DataMember(Order = 27)]
+        public bool Oracle { get; set; } = false;
+
+        [DataMember(Order = 28)]
+        public bool DB2 { get; set; } = false;
+
+        [DataMember(Order = 29)]
+        public bool Mongo { get; set; } = false;
     }
 
     public class RemoteAgentAuthorizationToken

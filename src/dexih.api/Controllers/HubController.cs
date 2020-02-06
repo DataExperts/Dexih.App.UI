@@ -25,8 +25,6 @@ using dexih.functions.Parameter;
 using dexih.functions.Query;
 using dexih.remote.operations;
 using Dexih.Utils.DataType;
-using OfficeOpenXml.FormulaParsing.Excel.Functions;
-
 
 namespace dexih.api.Controllers
 {

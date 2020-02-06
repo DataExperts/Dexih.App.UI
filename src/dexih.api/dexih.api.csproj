@@ -21,11 +21,9 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\dexih.transforms\src\dexih.connections.azure\dexih.connections.azure.csproj" />
     <ProjectReference Include="..\..\..\dexih.transforms\src\dexih.connections.dexih\dexih.connections.dexih.csproj" />
-    <ProjectReference Include="..\..\..\dexih.transforms\src\dexih.connections.excel\dexih.connections.excel.csproj" />
     <ProjectReference Include="..\..\..\dexih.transforms\src\dexih.connections.flatfile\dexih.connections.flatfile.csproj" />
     <ProjectReference Include="..\..\..\dexih.transforms\src\dexih.connections.ftp\dexih.connections.ftp.csproj" />
     <ProjectReference Include="..\..\..\dexih.transforms\src\dexih.connections.mysql\dexih.connections.mysql.csproj" />
-    <ProjectReference Include="..\..\..\dexih.transforms\src\dexih.connections.oracle\dexih.connections.oracle.csproj" />
     <ProjectReference Include="..\..\..\dexih.transforms\src\dexih.connections.postgressql\dexih.connections.postgressql.csproj" />
     <ProjectReference Include="..\..\..\dexih.transforms\src\dexih.connections.sftp\dexih.connections.sftp.csproj" />
     <ProjectReference Include="..\..\..\dexih.transforms\src\dexih.connections.sqlite\dexih.connections.sqlite.csproj" />
@@ -39,36 +37,36 @@
     <ProjectReference Include="..\..\..\Dexih.App.Operations\src\dexih.operations\dexih.operations.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="3.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="3.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="3.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" Version="3.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="3.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="3.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.0" />
-    <PackageReference Include="Sendgrid" Version="9.12.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.1" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.1" />
+    <PackageReference Include="Sendgrid" Version="9.12.6" />
     <PackageReference Include="Certes" Version="2.3.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
     <PackageReference Include="Microsoft.Azure.SignalR" Version="1.2.3" />
-    <PackageReference Include="Microsoft.Extensions.Logging.AzureAppServices" Version="3.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.0">
+    <PackageReference Include="Microsoft.Extensions.Logging.AzureAppServices" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.0" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.1" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.1.1" />
     <PackageReference Include="Amazon.Lambda.AspNetCoreServer" Version="4.1.0" />
   </ItemGroup>
   <ItemGroup>

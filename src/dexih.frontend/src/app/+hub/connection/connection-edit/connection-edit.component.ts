@@ -227,7 +227,8 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
       .then(result => {
         this.formsService.currentForm.controls.connectionStringDisplay.setValue(result);
         this.revealingConnectionString = false;
-      }).catch(() => {
+      }).catch(reason => {
+        this.hubService.addHubMessage(reason);
         this.revealingConnectionString = false;
       });
   }
@@ -257,7 +258,8 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
         this.hubService.addHubSuccessMessage('The connection was successful.');
         this.databases = result;
         this.refreshingConnection = false;
-      }).catch(() => {
+      }).catch(reason => {
+        this.hubService.addHubMessage(reason);
         this.refreshingConnection = false;
       });
   }
@@ -282,7 +284,8 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
             this.databases = [result];
             this.formsService.currentForm.controls.defaultDatabase.setValue(result);
             this.creatingDatabase = false;
-          }).catch(() => {
+          }).catch(reason => {
+            this.hubService.addHubMessage(reason);
             this.creatingDatabase = false;
           });
       } else {

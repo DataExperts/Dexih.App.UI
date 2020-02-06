@@ -303,7 +303,7 @@ namespace dexih.api.Controllers
 						if (register.Provider != ELoginProvider.Dexih)
 						{
 							await _operations.RepositoryManager.AddLoginAsync(user, register.Provider, externalLoginResult.ProviderKey, cancellationToken);
-							_signInManager.SignInAsync(user, false);
+							await _signInManager.SignInAsync(user, false);
 							SendRegisteredEmail(user);
 							return new ReturnUser(user);
 						}
@@ -420,8 +420,6 @@ namespace dexih.api.Controllers
 	    
 	    public void SendRegisteredEmail([FromBody] ApplicationUser user)
 	    {
-		    string path;
-		    string subject;
 		    var parameters = new Dictionary<string, string>()
 		    {
 			    {"url", Request.BaseUrl()}
