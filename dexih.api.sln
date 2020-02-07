@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{65B49900-8264-4D61-AB25-7E7F280BFE86}"
 EndProject
@@ -44,35 +44,35 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dexih.repository", "..\Dexi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dexih.remote.operations", "..\Dexih.App.Remote\src\dexih.remote.operations\dexih.remote.operations.csproj", "{E9E11A40-96F2-4A7D-9CA0-A8C199C6E2E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dexih.connections.sqlserver", "..\dexih.transforms\src\dexih.connections.sqlserver\dexih.connections.sqlserver.csproj", "{7437D8A1-2F24-427A-BB7C-D0A06AF9B40D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dexih.connections.sqlserver", "..\dexih.transforms\src\dexih.connections.sqlserver\dexih.connections.sqlserver.csproj", "{7437D8A1-2F24-427A-BB7C-D0A06AF9B40D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dexih.connections.sqlite", "..\dexih.transforms\src\dexih.connections.sqlite\dexih.connections.sqlite.csproj", "{484F4486-B8EA-4234-9028-3EE195D9EA87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dexih.connections.sqlite", "..\dexih.transforms\src\dexih.connections.sqlite\dexih.connections.sqlite.csproj", "{484F4486-B8EA-4234-9028-3EE195D9EA87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dexih.connections.postgressql", "..\dexih.transforms\src\dexih.connections.postgressql\dexih.connections.postgressql.csproj", "{87DB14FD-1152-4290-A0EB-79C1A3C23331}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dexih.connections.postgressql", "..\dexih.transforms\src\dexih.connections.postgressql\dexih.connections.postgressql.csproj", "{87DB14FD-1152-4290-A0EB-79C1A3C23331}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dexih.connections.oracle", "..\dexih.transforms\src\dexih.connections.oracle\dexih.connections.oracle.csproj", "{114DD640-F7BB-425F-8CF2-02E02E49CA6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dexih.connections.oracle", "..\dexih.transforms\src\dexih.connections.oracle\dexih.connections.oracle.csproj", "{114DD640-F7BB-425F-8CF2-02E02E49CA6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dexih.connections.mysql", "..\dexih.transforms\src\dexih.connections.mysql\dexih.connections.mysql.csproj", "{C95B09FC-BD90-4D1A-9D3F-627A89CC9AF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dexih.connections.mysql", "..\dexih.transforms\src\dexih.connections.mysql\dexih.connections.mysql.csproj", "{C95B09FC-BD90-4D1A-9D3F-627A89CC9AF6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "connections", "connections", "{7F056AB5-76B5-43A8-8668-A3C2C3302776}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{D66BF762-1BD9-4138-AB83-E8E1DE91DCB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dexih.api.tests", "test\dexih.api.tests\dexih.api.tests.csproj", "{EDBDCFDC-5735-4A54-AE86-DD801B5FE31F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dexih.api.tests", "test\dexih.api.tests\dexih.api.tests.csproj", "{EDBDCFDC-5735-4A54-AE86-DD801B5FE31F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dexih.functions.builtIn", "..\dexih.transforms\src\dexih.functions.builtIn\dexih.functions.builtIn.csproj", "{6E897881-691B-4BC7-A8E9-8CA1B560E366}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dexih.functions.builtIn", "..\dexih.transforms\src\dexih.functions.builtIn\dexih.functions.builtIn.csproj", "{6E897881-691B-4BC7-A8E9-8CA1B560E366}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dexih.functions.external", "..\dexih.transforms\src\dexih.functions.external\dexih.functions.external.csproj", "{2F9523D8-0A8A-4F42-A87B-A3C5DCB92F9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dexih.functions.external", "..\dexih.transforms\src\dexih.functions.external\dexih.functions.external.csproj", "{2F9523D8-0A8A-4F42-A87B-A3C5DCB92F9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dexih.functions.financial", "..\dexih.transforms\src\dexih.functions.financial\dexih.functions.financial.csproj", "{C467BB5A-D51E-4C8C-8C8E-F3BC19AA1BBF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dexih.functions.financial", "..\dexih.transforms\src\dexih.functions.financial\dexih.functions.financial.csproj", "{C467BB5A-D51E-4C8C-8C8E-F3BC19AA1BBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dexih.functions.ml", "..\dexih.transforms\src\dexih.functions.ml\dexih.functions.ml.csproj", "{D86CC0FD-C394-4837-BB15-192F6B0EEADB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dexih.functions.ml", "..\dexih.transforms\src\dexih.functions.ml\dexih.functions.ml.csproj", "{D86CC0FD-C394-4837-BB15-192F6B0EEADB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dexih.functions.maths", "..\dexih.transforms\src\dexih.functions.maths\dexih.functions.maths.csproj", "{7114D2F2-3346-428D-9F14-F0468FF92258}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dexih.functions.maths", "..\dexih.transforms\src\dexih.functions.maths\dexih.functions.maths.csproj", "{7114D2F2-3346-428D-9F14-F0468FF92258}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dexih.connections.mongo", "..\dexih.transforms\src\dexih.connections.mongo\dexih.connections.mongo.csproj", "{3227ED80-A6B5-4F47-94C3-779AA70763DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dexih.connections.mongo", "..\dexih.transforms\src\dexih.connections.mongo\dexih.connections.mongo.csproj", "{3227ED80-A6B5-4F47-94C3-779AA70763DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dexih.connections.db2", "..\dexih.transforms\src\dexih.connections.db2\dexih.connections.db2.csproj", "{65CCD70D-ADAA-47AD-BA3C-E836E30D4B79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dexih.connections.db2", "..\dexih.transforms\src\dexih.connections.db2\dexih.connections.db2.csproj", "{65CCD70D-ADAA-47AD-BA3C-E836E30D4B79}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -426,25 +426,25 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D6A6A91B-6B9C-4D79-8F6E-C602A3A90949} = {65B49900-8264-4D61-AB25-7E7F280BFE86}
+		{967BB71E-1A71-46BD-A8D5-6177E497A5CF} = {7F056AB5-76B5-43A8-8668-A3C2C3302776}
+		{AA85EE23-D05D-4A98-9140-D18E13C1ECFF} = {7F056AB5-76B5-43A8-8668-A3C2C3302776}
+		{548EA10D-160E-4A7C-B52D-F0125666434F} = {7F056AB5-76B5-43A8-8668-A3C2C3302776}
 		{2AF509D1-E623-43BC-9E1C-1ED142DDB1B6} = {E8D336AC-9BF4-4F7A-9F5C-BD19B87C9AA9}
 		{2361E841-8BAB-4863-8737-9EEA3A721490} = {E8D336AC-9BF4-4F7A-9F5C-BD19B87C9AA9}
+		{16D384D8-36D6-4A5E-AC87-DEA30F4E6082} = {7F056AB5-76B5-43A8-8668-A3C2C3302776}
+		{158D2869-29BC-4B99-9AEB-20CBF1A30042} = {7F056AB5-76B5-43A8-8668-A3C2C3302776}
 		{833AD92B-8764-4BA2-8347-5E0032650556} = {D70D0688-6E98-4EFE-94CA-911793A28467}
+		{190EFD31-CFE9-4FC0-B770-EAB522AA9A82} = {7F056AB5-76B5-43A8-8668-A3C2C3302776}
+		{D99EA67D-6F7E-416C-A159-17C9E6A14575} = {7F056AB5-76B5-43A8-8668-A3C2C3302776}
 		{25CA3B7B-C156-4D30-99FC-8BFB64D1B172} = {E8D336AC-9BF4-4F7A-9F5C-BD19B87C9AA9}
 		{86AFD478-6671-4109-91D7-B966BF43CA2B} = {E8D336AC-9BF4-4F7A-9F5C-BD19B87C9AA9}
 		{C0127EA5-5350-48A8-95DB-2A2F5439C8A6} = {E8D336AC-9BF4-4F7A-9F5C-BD19B87C9AA9}
 		{E9E11A40-96F2-4A7D-9CA0-A8C199C6E2E6} = {E8D336AC-9BF4-4F7A-9F5C-BD19B87C9AA9}
-		{16D384D8-36D6-4A5E-AC87-DEA30F4E6082} = {7F056AB5-76B5-43A8-8668-A3C2C3302776}
-		{967BB71E-1A71-46BD-A8D5-6177E497A5CF} = {7F056AB5-76B5-43A8-8668-A3C2C3302776}
-		{158D2869-29BC-4B99-9AEB-20CBF1A30042} = {7F056AB5-76B5-43A8-8668-A3C2C3302776}
-		{AA85EE23-D05D-4A98-9140-D18E13C1ECFF} = {7F056AB5-76B5-43A8-8668-A3C2C3302776}
-		{D99EA67D-6F7E-416C-A159-17C9E6A14575} = {7F056AB5-76B5-43A8-8668-A3C2C3302776}
-		{C95B09FC-BD90-4D1A-9D3F-627A89CC9AF6} = {7F056AB5-76B5-43A8-8668-A3C2C3302776}
-		{114DD640-F7BB-425F-8CF2-02E02E49CA6B} = {7F056AB5-76B5-43A8-8668-A3C2C3302776}
-		{87DB14FD-1152-4290-A0EB-79C1A3C23331} = {7F056AB5-76B5-43A8-8668-A3C2C3302776}
-		{190EFD31-CFE9-4FC0-B770-EAB522AA9A82} = {7F056AB5-76B5-43A8-8668-A3C2C3302776}
-		{484F4486-B8EA-4234-9028-3EE195D9EA87} = {7F056AB5-76B5-43A8-8668-A3C2C3302776}
 		{7437D8A1-2F24-427A-BB7C-D0A06AF9B40D} = {7F056AB5-76B5-43A8-8668-A3C2C3302776}
-		{548EA10D-160E-4A7C-B52D-F0125666434F} = {7F056AB5-76B5-43A8-8668-A3C2C3302776}
+		{484F4486-B8EA-4234-9028-3EE195D9EA87} = {7F056AB5-76B5-43A8-8668-A3C2C3302776}
+		{87DB14FD-1152-4290-A0EB-79C1A3C23331} = {7F056AB5-76B5-43A8-8668-A3C2C3302776}
+		{114DD640-F7BB-425F-8CF2-02E02E49CA6B} = {7F056AB5-76B5-43A8-8668-A3C2C3302776}
+		{C95B09FC-BD90-4D1A-9D3F-627A89CC9AF6} = {7F056AB5-76B5-43A8-8668-A3C2C3302776}
 		{EDBDCFDC-5735-4A54-AE86-DD801B5FE31F} = {D70D0688-6E98-4EFE-94CA-911793A28467}
 		{6E897881-691B-4BC7-A8E9-8CA1B560E366} = {E8D336AC-9BF4-4F7A-9F5C-BD19B87C9AA9}
 		{2F9523D8-0A8A-4F42-A87B-A3C5DCB92F9F} = {E8D336AC-9BF4-4F7A-9F5C-BD19B87C9AA9}
