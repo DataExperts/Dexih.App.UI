@@ -37,11 +37,13 @@
 					</form-input>
 				</section>
 
-				<section>
-					<form-checkbox label="Auto-login using current user." [(ngModel)]="embedUserName"
-						[ngModelOptions]="{standalone: true}">
-					</form-checkbox>
-				</section>
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-checkbox label="Auto-login using current user." [(ngModel)]="embedUserName"
+							[ngModelOptions]="{standalone: true}">
+						</form-checkbox>
+					</section>
+				</div>
 
 				<div class="form-row">
 					<section class="form-group col-md-6">
@@ -87,6 +89,37 @@
 						<form-input label="External Upload/Download Url" formControlName="externalDownloadUrl"
 							note='The url which can be used to access the upload/download operations on the remote agent.  e.g. https://10.10.10.10:33944.'>
 						</form-input>
+					</section>
+				</div>
+
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-checkbox label="Include plugin for Oracle databases (~4MB download)" formControlName="oracle">
+						</form-checkbox>
+					</section>
+					<section class="form-group col-md-6">
+						<form-checkbox label="Include plugin for DB2 databases (~30MB download)" formControlName="dB2">
+						</form-checkbox>
+					</section>
+				</div>
+
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-checkbox label="Include plugin for Mongo databases  (~4MB download)" formControlName="mongo">
+						</form-checkbox>
+					</section>
+					<section class="form-group col-md-6">
+						<form-checkbox label="Include plugin for Excel files (~3MB download)" formControlName="excel">
+						</form-checkbox>
+					</section>
+				</div>
+
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-checkbox label="Include plugin for Machine Learning Functions (~32-40MB download)" formControlName="mLNet">
+						</form-checkbox>
+						</section>
+					<section class="form-group col-md-6">
 					</section>
 				</div>
 
@@ -158,36 +191,6 @@
 					</form-tags-dropdown>
 				</section>
 
-				<div class="form-row">
-					<section class="form-group col-md-6">
-						<form-checkbox label="Include driver for Oracle databases (4MB download)" formControlName="oracle">
-						</form-checkbox>
-					</section>
-					<section class="form-group col-md-6">
-						<form-checkbox label="Include driver for DB2 databases (30MB download)" formControlName="dB2">
-						</form-checkbox>
-					</section>
-				</div>
-
-				<div class="form-row">
-					<section class="form-group col-md-6">
-						<form-checkbox label="Include driver for Mongo databases  (30MB download)" formControlName="mongo">
-						</form-checkbox>
-					</section>
-					<section class="form-group col-md-6">
-						<form-checkbox label="Include driver for Excel files (3MB download)" formControlName="excel">
-						</form-checkbox>
-					</section>
-				</div>
-
-				<div class="form-row">
-					<section class="form-group col-md-6">
-						<form-checkbox label="Include driver for Machine Learning Functions (32-40MB download)" formControlName="mLNet">
-						</form-checkbox>
-						</section>
-					<section class="form-group col-md-6">
-					</section>
-				</div>
 
 			</fieldset>
 		</form>
