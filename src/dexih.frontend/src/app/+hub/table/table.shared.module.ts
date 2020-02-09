@@ -42,7 +42,7 @@ import { ColumnEditBulkComponent } from './table-edit/column-edit-bulk/column-ed
     ]
 })
 export class TableSharedModule {
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<TableSharedModule> {
         return {
             ngModule: TableSharedModule,
         };

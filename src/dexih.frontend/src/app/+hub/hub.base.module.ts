@@ -76,7 +76,7 @@ import { ListOfValuesIndexComponent } from './listOfValues/listOfValues-index';
 })
 export class HubBaseModule {
 
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<HubBaseModule> {
         return {
             ngModule: HubBaseModule,
             providers: [HubService, ItemEditGuard]

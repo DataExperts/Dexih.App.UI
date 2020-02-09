@@ -31,7 +31,7 @@ import { TableEditComponent } from './table-edit.component';
     ],
 })
 export class FilesBulkLoadModule {
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<FilesBulkLoadModule> {
         return {
             ngModule: FilesBulkLoadModule,
             providers: [ HubFormsService ]

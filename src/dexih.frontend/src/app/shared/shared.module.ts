@@ -76,7 +76,7 @@ import { DexihSupportOptionsModule } from './ui/supportOptions/support-options.m
 })
 export class SharedModule {
 
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<SharedModule> {
     return {
       ngModule: SharedModule,
       providers: [

@@ -33,7 +33,7 @@ import { ViewEditComponent } from '../../view';
     ],
 })
 export class DashboardEditModule {
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<DashboardEditModule> {
         return {
             ngModule: DashboardEditModule,
             providers: [ HubFormsService ]

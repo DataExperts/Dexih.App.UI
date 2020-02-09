@@ -34,7 +34,7 @@ import { TableSharedModule } from '../table.shared.module';
     ]
 })
 export class TableEditModule {
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<TableEditModule> {
         return {
             ngModule: TableEditModule,
             providers: [ HubFormsService ]

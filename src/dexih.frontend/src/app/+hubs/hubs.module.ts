@@ -55,7 +55,7 @@ import { IssueEditComponent, IssueIndexComponent } from './support'
 })
 export class HubsModule {
 
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<HubsModule> {
         return {
             ngModule: HubsModule,
             providers: [HubsService]

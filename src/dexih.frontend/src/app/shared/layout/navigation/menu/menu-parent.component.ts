@@ -21,7 +21,7 @@ export class MenuParentComponent implements OnInit {
     @Input() iconClass: string;
     @Input() textClass: string;
 
-    @ContentChild('item', {static: false}) itemTemplate: TemplateRef<any>;
+    @ContentChild('item') itemTemplate: TemplateRef<any>;
 
     public expanded = false;
     public state = 'collapsed';

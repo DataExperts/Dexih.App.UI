@@ -25,7 +25,7 @@ import { ItemEditGuard } from './item-edit.guard';
 })
 export class HubModule {
 
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<HubModule> {
         return {
             ngModule: HubModule,
             providers: [HubService, ItemEditGuard]

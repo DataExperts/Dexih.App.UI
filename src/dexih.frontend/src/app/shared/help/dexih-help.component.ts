@@ -19,7 +19,7 @@ export class DexihHelpComponent implements OnInit, OnChanges, OnDestroy {
 
     @Output() linkClick: EventEmitter<string> = new EventEmitter();
 
-    @ViewChild('scrollTo', { static: false }) scrollTo: ElementRef;
+    @ViewChild('scrollTo') scrollTo: ElementRef;
 
     public data: string;
 

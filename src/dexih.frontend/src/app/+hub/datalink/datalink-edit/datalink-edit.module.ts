@@ -86,7 +86,7 @@ import { TargetColumnsComponent, TargetColumnComponent} from './target-columns';
 })
 export class DatalinkEditModule {
 
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<DatalinkEditModule> {
         return {
             ngModule: DatalinkEditModule,
             providers: [ DatalinkEditService, HubFormsService ]

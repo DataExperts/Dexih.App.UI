@@ -37,7 +37,7 @@ import { HubSharedModule } from '../../hub.shared.module';
 })
 export class DatajobEditModule {
 
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<DatajobEditModule> {
         return {
             ngModule: DatajobEditModule,
             providers: [ HubFormsService ]

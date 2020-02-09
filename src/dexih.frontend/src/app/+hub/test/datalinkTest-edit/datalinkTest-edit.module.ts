@@ -31,7 +31,7 @@ import { HubSharedModule } from '../../hub.shared.module';
 })
 export class DatalinkTestEditModule {
 
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<DatalinkTestEditModule> {
         return {
             ngModule: DatalinkTestEditModule,
             providers: [ HubFormsService ]
