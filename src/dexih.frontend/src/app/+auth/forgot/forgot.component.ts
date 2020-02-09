@@ -84,6 +84,9 @@ export class ForgotComponent implements OnInit, OnDestroy {
     let email = this.formsService.currentForm.controls.email.value;
     this.userService.forgotPassword(email).then(result =>  {
         this.codeSent = true;
+        this.message = 'Email has been sent with instructions for resetting password.';
+    }).catch(reason => {
+      this.message = reason.message;
     });
   }
 

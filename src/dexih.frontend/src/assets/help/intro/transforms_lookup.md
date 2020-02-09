@@ -1,6 +1,6 @@
 ### Lookup Transform
 
-The lookup transform allows you perform a row by row query on a table, web service or other function
+The lookup transform allows you perform a row by row query on a table, web service or other function.  
 
 #### Adding a Lookup Transform
 

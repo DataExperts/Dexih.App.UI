@@ -6,7 +6,7 @@ Welcome to the Information Hub.  Here you will find powerful tools which enable 
 
 Refer to the [reference](/reference/references.md) section for complete documentation on the Information Hub.
 
-For help and support click [here](/support.md).
+For help and support click [here](route:/hubs/index/support).
 
 #### Getting Started
 
@@ -39,6 +39,3 @@ Datalinks allow data to be extract from a source table, then mapped, transformed
 #### Loading Data
 1. [Handling Changing Data](intro/change_data_capture.md)
 2. [Securing Data](intro/securing_data.md)
-
-
-

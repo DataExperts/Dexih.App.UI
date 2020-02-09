@@ -2,7 +2,9 @@
 
 The Series transform creates an even sequence, and allows analytical calculations to be applied to this.
 
-The series transform is used where a completed series is required.  This could when creating trends, or running analytical calculations (such as std deviation) which require complete series to be accurate.
+The series transform is used where a completed series is required.  For example if the incoming data is daily sales, and some rows are missing where the day has no sales, this transform will fill in the gaps with 'zero' rows, and allow functions such as moving average to calculate correctly.  
+
+This transform is important when creating trends, or running analytical calculations (such as std deviation) which require complete series to be accurate.
 
 #### Adding a Series Transform
 

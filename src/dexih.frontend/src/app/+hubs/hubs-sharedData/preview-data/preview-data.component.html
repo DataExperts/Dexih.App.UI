@@ -28,8 +28,8 @@
     <div class="dexih-loader"></div> &nbsp; &nbsp; Loading ...
 </div>
 
-<div *ngIf="data">
-    <dexih-table *ngIf="!showChart" [enableMultiSelect]="false" [enableSaveCsv]="true" [csvFileName]="name"
+<div class="h-100" *ngIf="data">
+    <dexih-table *ngIf="!showChart" [enableMultiSelect]="false" [enableSaveCsv]="true" [csvFileName]="name" [enableFilter]="false"
         [columns]="columns" [data]="data">
 
         <ng-template #actions let-items="items">
@@ -40,8 +40,6 @@
 
     </dexih-table>
 
-    <div *ngIf="showChart">
-        <chart-view [responsive]="true" [columns]="columns" [data]="data" [config]="chartConfig">
-        </chart-view>
-    </div>
+    <chart-view [responsive]="true" *ngIf="showChart" [columns]="columns" [data]="data" [config]="chartConfig">
+    </chart-view>
 </div>

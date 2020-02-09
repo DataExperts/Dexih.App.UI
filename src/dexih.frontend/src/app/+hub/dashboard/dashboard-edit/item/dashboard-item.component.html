@@ -39,17 +39,14 @@
 </div>
 
 <ng-template [ngIf]="!showEdit">
-        
-        <div *ngIf="item.controls.header.value" class="p-3 bg-secondary text-white">
-            <b>{{item.controls.name.value}}</b>
-        </div>
-        
-        <div *ngIf="item.controls.description.value" class="p-3">
+
+    <div *ngIf="item.controls.header.value" class="p-3 bg-secondary text-white">
+        <b>{{item.controls.name.value}}</b>
+    </div>
+
+    <div *ngIf="item.controls.description.value" class="p-3">
         <ngx-md [data]="item.controls.description.value"></ngx-md>
     </div>
-    <preview-view 
-        *ngIf="!showPreview && item.controls.viewKey.value" #view 
-        [viewKey]="item.controls.viewKey.value" 
-        [data]="item.controls.runTime.value.data"
-        ></preview-view>
+    <preview-view *ngIf="!showPreview && item.controls.viewKey.value" #view [viewKey]="item.controls.viewKey.value"
+        [data]="item.controls.runTime.value.data"></preview-view>
 </ng-template>

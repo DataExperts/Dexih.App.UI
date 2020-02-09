@@ -1,9 +1,8 @@
 ### Row Transform
 
-The Row transform allows rows to be generated based on a function.
+The Row transform allows rows to be generated based on the result of a function.
 
-The row transform has many purposes such as:
-
+The row transform can be used for transforms such as:
 * Pivoting column names into values.  For example when dates or categories are listed as individual columns, the row transform can be used to pivot them into a single column with the column name as the values.
 * Generating sequences - For example a row transform could be used to generate 24 rows for each date.
 * Splitting xml/json/text data into separate rows.

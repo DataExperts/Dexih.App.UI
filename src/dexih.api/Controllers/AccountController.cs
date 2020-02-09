@@ -516,7 +516,6 @@ namespace dexih.api.Controllers
         // POST: /Account/GetUser
         [HttpPost("[action]")]
         [AllowAnonymous]
-        //[ValidateAntiForgeryToken]
         public async Task<ReturnUser> GetUser(CancellationToken cancellationToken)
         {
             if(!_signInManager.IsSignedIn(User)) 
@@ -665,7 +664,7 @@ namespace dexih.api.Controllers
 
 		 // POST: /Account/ExternalLoginConfirmation
         [HttpPost("[action]")]
-        [AllowAnonymous]
+        // [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ReturnUser> AddExternalLogin([FromBody] ExternalLoginModel externalLoginModel, CancellationToken cancellationToken)
         {
@@ -704,7 +703,7 @@ namespace dexih.api.Controllers
 	    
         // POST: /Account/ExternalLogins
         [HttpPost("[action]")]
-		[AllowAnonymous]
+		// [AllowAnonymous]
 		[ValidateAntiForgeryToken]
 		public async Task<IEnumerable<UserLoginInfo>> ExternalLogins(CancellationToken cancellationToken)
 		{
@@ -728,7 +727,7 @@ namespace dexih.api.Controllers
 
 		// POST: /Account/RemoveExternalLogin
 		[HttpPost("[action]")]
-		[AllowAnonymous]
+		// [AllowAnonymous]
 		[ValidateAntiForgeryToken]
 		public async Task RemoveExternalLogin([FromBody] RemoveExternalLoginModel externalProvider, CancellationToken cancellationToken)
 		{
@@ -764,7 +763,7 @@ namespace dexih.api.Controllers
         // POST: /Account/ForgotPassword
         [HttpPost("[action]")]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        // [ValidateAntiForgeryToken]
         public async Task ForgotPassword([FromBody] LoginModel login, CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
@@ -811,7 +810,7 @@ namespace dexih.api.Controllers
         // POST: /Account/ResetPassword
         [HttpPost("[action]")]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        // [ValidateAntiForgeryToken]
         public async Task ResetPassword([FromBody] ResetPasswordModel resetPassword, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
@@ -825,7 +824,7 @@ namespace dexih.api.Controllers
 
         // POST: /Account/UpdateDetails
         [HttpPost("[action]")]
-		[AllowAnonymous]
+		// [AllowAnonymous]
 		[ValidateAntiForgeryToken]
 		public async Task UpdateDetails([FromBody] UpdateDetails updateDetails, CancellationToken cancellationToken)
 		{

@@ -1,6 +1,6 @@
 ### Remote Agent
 
-A remote agent connects the Information Hub to your data and performs data processing and scheduling.  The agent should be run in a location that has access to the required data.  The application can be run on Windows, OSX, and many Linux systems (a full list of supported systems is [here](https://github.com/dotnet/core/blob/master/release-notes/2.0/2.0-supported-os.md)).
+A remote agent connects the Information Hub to your data and performs data processing and scheduling.  The agent should be run in a location that has access to the required data.  The remote agent can be run on Windows, OSX, and Linux systems (a full list of supported systems is [here](https://github.com/dotnet/core/blob/master/release-notes/2.0/2.0-supported-os.md)).
 
 ### Contents
 
@@ -20,6 +20,13 @@ Open a command, prompt and navigate to the download directory, and run:
 dexih.remote.run.exe -w {{SERVER}}
 ```
 
+##### OSX (Mac)
+
+Open a terminal, create and navigate to an empty directory, and enter the following commands:
+```
+bash <(curl -s {{SERVER}}/api/Remote/Install/osx)
+```
+
 ##### Linux (Ubuntu)
 
 Open a terminal, create and navigate to an empty directory, and enter the following commands:
@@ -32,13 +39,6 @@ bash <(curl -s {{SERVER}}/api/Remote/Install/linux)
 Open a terminal, create and navigate to an empty directory, and enter the following commands:
 ```
 bash <(curl -s {{SERVER}}/api/Remote/Install/alpine)
-```
-
-##### OSX (Mac)
-
-Open a terminal, create and navigate to an empty directory, and enter the following commands:
-```
-bash <(curl -s {{SERVER}}/api/Remote/Install/osx)
 ```
 
 #### Configure from Browser
@@ -54,16 +54,10 @@ After completing the download form, and select either:
 ### Configuration
 
 To connect a remote agent to a hub:
-* Ensure the remote agent is running on the machine, and shows the message **Authenticated** on output log.
-* In the Information Hub, open the required hub.
+* Ensure the remote agent is running on the machine, and shows the message **Authenticated** in the output log.
+* Log into the Information Hub through your browser and open the required hub.
 * Navigate to the remote agent configuration by selecting: Configure &rarr; Hub Agents &rarr, or [direct link](route:/hub/{{HUBKEY}}/summary/agents)
 * Select the remote(s) from the list, and click the **Authorize** button.  The agent should now be connected to the hub.
-
-
-### Demonstration
-
-<iframe width="560" height="400" src="https://www.youtube.com/embed/o_wWfNqbdZI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
 
 ### Tips
 

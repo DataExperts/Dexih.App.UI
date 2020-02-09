@@ -55,7 +55,8 @@
     </dexih-widget>
     <dexih-widget title="Reset Password" iconClass="fa fa-lg fa-fw fa-lock" [padding]="true" >
         <ng-template #header>
-			<dexih-button btnClass="btn btn-primary" [disabled]="!passwordForm.valid" (click)="updatePassword()" [busy]="updatingPassword">Update Password</dexih-button>
+			<dexih-button class="mr-1" btnClass="btn btn-danger" routerLink='/auth/forgot-password'>Forgot Password</dexih-button>
+			<dexih-button-save [disabled]="!passwordForm.valid" (click)="updatePassword()" [busy]="updatingPassword">Update Password</dexih-button-save>
         </ng-template>
 
 		<form *ngIf="passwordForm"  [formGroup]="passwordForm">

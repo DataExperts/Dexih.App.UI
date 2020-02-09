@@ -1,6 +1,6 @@
 ### Datalink Staging
 
-Staging data (or moving data to a *staging* area) is the process of pulling data from a source location and moving it to an intermediate area.  The information hub has a built in function to allow for the rapid building of a staging area by automatically creating staging [datalinks](reference/data).
+Staging data (or moving data to a *staging* area) is the process of pulling data from a source database and moving it to an intermediate area.  Staging areas have many purposes, however they are generally used to consolidate data from multiple locations into a central area prior to processing, linking and transforming the data.  The information hub has a built in function to allow for the rapid building of a staging area by automatically creating staging [datalinks](reference/data).
 
 #### Creating Staging Datalink
 
@@ -8,9 +8,9 @@ First ensure that you have configured a managed connection, and a source connect
 
 Before creating the datalink, review the column metadata for the source table, and adjust them as follows:
 
-* Delta Type - Use the Natural Key, Tracking Field, Non-Tracking Field, Ignored Field to determine how the datalink should deal with [changing data](/intro/change_data_capture.md).
-* Security Flag - Use to [secure sensitive data](/intro/securing_data.md).
-* Is always incrementing flag - Use where the source table has a field (such as `last updated`) that can be used to get the latest changes for each rerun.
+* **Delta Type** - Use the Natural Key, Tracking Field, Non-Tracking Field, Ignored Field to determine how the datalink should deal with [changing data](/intro/change_data_capture.md).
+* **Security Flag** - Use to [secure sensitive data](/intro/securing_data.md).
+* **Is always incrementing flag** - Use where the source table has a field (such as `last updated`) that can be used to get the latest changes for each rerun.
 
 See [table](reference/table.md) for more information.
 
