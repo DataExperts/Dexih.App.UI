@@ -189,6 +189,8 @@ Welcome to Dexih - The Data Experts Information Hub
                     Console.WriteLine("Launching remote agent...");
 
                     process.WaitForExit();
+
+                    Console.WriteLine("Remote Agent has closed.  Press any key to exit.");
                     upgrade = process.ExitCode;
                     Console.ReadKey();
                 }
