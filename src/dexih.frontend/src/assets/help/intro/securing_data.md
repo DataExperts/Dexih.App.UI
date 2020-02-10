@@ -1,6 +1,6 @@
 ### Securing Data
 
-This section provides information on securing data within a table and datalink.  Details of securing the information hub cna be found [here](/reference/security).
+This section provides information on securing data within a table and datalink.  Details of securing the integration hub cna be found [here](/reference/security).
 
 > The library for the encryption and hashing is open source and available for review on [github](https://github.com/DataExperts/Dexih.Utils.Crypto).
 

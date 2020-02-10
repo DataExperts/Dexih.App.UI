@@ -760,7 +760,7 @@ export class AuthService implements OnDestroy {
             this.logger.LogC(() =>
                 `post warning error:${error}`, eLogLevel.Error);
             if (error.status === 504) {
-                message.message = 'The Information Hub API could not be reached.';
+                message.message = 'The Integration Hub API could not be reached.';
             }
             message.message = error.message;
         }

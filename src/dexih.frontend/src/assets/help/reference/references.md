@@ -2,7 +2,7 @@
 
 ### Introduction
 
-Welcome to the Information Hub.  Here you will find powerful tools which enable you manage, share, transform, and augment your data.
+Welcome to the Integration Hub.  Here you will find powerful tools which enable you manage, share, transform, and augment your data.
 
 For help and support click [here](route:/hubs/index/support).
 

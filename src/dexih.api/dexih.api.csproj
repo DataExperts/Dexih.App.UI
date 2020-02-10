@@ -11,7 +11,7 @@
     <AssemblyVersion>0.0.1.1</AssemblyVersion>
     <Authors>Data Experts Group</Authors>
     <Company>Data Experts Group</Company>
-    <Product>Information Hub</Product>
+    <Product>Integration Hub</Product>
     <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
     <LangVersion>8</LangVersion>
     <PackageVersion>1.0-rc.0</PackageVersion>

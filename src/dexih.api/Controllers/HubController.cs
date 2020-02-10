@@ -255,14 +255,14 @@ namespace dexih.api.Controllers
 				if (user.EmailConfirmed)
 				{
 					template = "userReady.html";
-					subject = "Information Hub Access Granted!";
+					subject = "Integration Hub Access Granted!";
 					code = "";
 				}
 				else
 				{
 					template = "invite.html";
 					code = await _operations.RepositoryManager.GenerateEmailConfirmationTokenAsync(user, cancellationToken);
-					subject = "Information Hub Invitation Ready!";
+					subject = "Integration Hub Invitation Ready!";
 				}
 				
 				var parameters = new Dictionary<string, string>()

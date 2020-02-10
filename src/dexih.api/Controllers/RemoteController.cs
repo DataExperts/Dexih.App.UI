@@ -560,7 +560,7 @@ namespace dexih.api.Controllers
                     State = "Victoria",
                     Locality = "Melbourne",
                     Organization = "Data Experts Group",
-                    OrganizationUnit = "Information Hub",
+                    OrganizationUnit = "Integration Hub",
                     CommonName = $"*.{domain}",
 
                 }, privateKey);
@@ -574,7 +574,7 @@ namespace dexih.api.Controllers
 
             // build the pfx file
             var pfxBuilder = cert.ToPfx(privateKey);
-            var pfx = pfxBuilder.Build("Data Experts Information Hub Certificate", data.password);
+            var pfx = pfxBuilder.Build("Data Experts Integration Hub Certificate", data.password);
 
             return File(pfx, "application/octet-stream", "dexih.pfx");
         }

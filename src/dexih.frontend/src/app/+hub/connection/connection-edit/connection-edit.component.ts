@@ -191,7 +191,7 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
     this.formsService.currentForm.controls.connectionClassName.setValue(connectionReference.connectionClassName);
     this.formsService.currentForm.controls.connectionAssemblyName.setValue(connectionReference.connectionAssemblyName);
 
-    // For information hub connections, pre-fill some information.
+    // For integration hub connections, pre-fill some information.
     if (this.connectionReference.connectionCategory === eConnectionCategory.Hub) {
       if (!this.formsService.currentForm.controls.server.value) {
         const uri = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '');

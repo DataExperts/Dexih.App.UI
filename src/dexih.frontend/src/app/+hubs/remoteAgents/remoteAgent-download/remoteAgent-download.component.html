@@ -28,7 +28,7 @@
 					<form-input label="Encryption Key" formControlName="encryptionKey"
 						placeholder="Enter an encryption key" [autocapitalize]="on" iconClass="fa fa-key"
 						[errors]="formsService.formErrors.encryptionKey"
-						note="Encryption key is used to encrypt secure fields and connection passwords.  Note: this key is not retained by the information hub, and if lost encrypted data can not be restored.">
+						note="Encryption key is used to encrypt secure fields and connection passwords.  Note: this key is not retained by the integration hub, and if lost encrypted data can not be restored.">
 						( <a href="javascript:void(0)" *ngIf="refreshingEncryptionKey == false"
 							(click)="generateEncryptionKey()"> <i class="fa fa-refresh"></i> Generate Random Key </a>
 						<span *ngIf="refreshingEncryptionKey == true"> <i class="fa fa-spin fa-refresh"></i>

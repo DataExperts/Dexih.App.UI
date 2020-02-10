@@ -57,7 +57,7 @@ namespace dexih.api
 |  '--'  ||  |____  /  .  \  |  | |  |  |  | 
 |_______/ |_______|/__/ \__\ |__| |__|  |__| 
 
-Welcome to Dexih - The Data Experts Information Hub
+Welcome to Dexih - The Data Experts Integration Hub
 ");
             
             // introduction message, with file version

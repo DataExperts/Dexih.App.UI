@@ -1,11 +1,11 @@
 ### Connections
 
-The *Information Hub* supports SQL databases, NoSQL databases, data files and web services.
+The *Integration Hub* supports SQL databases, NoSQL databases, data files and web services.
 
 There are three primary connection types:
 * **Source** - Source connections are read-only and can only be used as a source in datalinks.
-* **Managed** - Managed connections point to databases that are **managed** by the *Information Hub*.  They are used by the *Information Hub*, to create tables, and store auditing and profile information.  At least one managed connection is required per hub.
-* **Target** - Target connections point to databases that data can be published and written to by the *Information Hub*.
+* **Managed** - Managed connections point to databases that are **managed** by the *Integration Hub*.  They are used by the *Integration Hub*, to create tables, and store auditing and profile information.  At least one managed connection is required per hub.
+* **Target** - Target connections point to databases that data can be published and written to by the *Integration Hub*.
 
 ### SQL Databases
 
@@ -36,9 +36,9 @@ Flat files can be managed on the following storage areas which must be assessabl
 * [Azure Flat File](https://azure.microsoft.com/en-us/services/storage/files/) - Azure Files Storage is a useful cloud hosted file management platform for long term, secure file storage and retrieval.
 * [RESTFul Web Service](https://en.m.wikipedia.org/wiki/Representational_state_transfer) - RESTFul web services are the entry point to accessing virtually [any data content](https://www.programmableweb.com/category/all/apis?data_format=21190) across the internet.  
 
-### Information Hub Instance
+### Integration Hub Instance
 
-When tables and datalinks are *shared* in a hub, other hubs connect to these using a connection type **Information Hub**.  This allows data to be virtualized and easily queried and shared across different networks.
+When tables and datalinks are *shared* in a hub, other hubs connect to these using a connection type **Integration Hub**.  This allows data to be virtualized and easily queried and shared across different networks.
 
 ### Connection Properties
 

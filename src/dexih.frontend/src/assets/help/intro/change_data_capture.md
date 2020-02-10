@@ -1,6 +1,6 @@
 ### Change Data Capture
 
-Change Data Capture (CDC) is the process applying changes to a target table.  There are two key mechanisms in the information hub to detect data changes; source based or target based.
+Change Data Capture (CDC) is the process applying changes to a target table.  There are two key mechanisms in the integration hub to detect data changes; source based or target based.
 
 <img src="{{SERVER}}/assets/img/dexih/cdc_process.png" width="100%" />
 

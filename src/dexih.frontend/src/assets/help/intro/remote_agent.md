@@ -1,6 +1,6 @@
 ### Remote Agent
 
-A remote agent connects the Information Hub to your data and performs data processing and scheduling.  The agent should be run in a location that has access to the required data.  The remote agent can be run on Windows, OSX, and Linux systems (a full list of supported systems is [here](https://github.com/dotnet/core/blob/master/release-notes/2.0/2.0-supported-os.md)).
+A remote agent connects the Integration Hub to your data and performs data processing and scheduling.  The agent should be run in a location that has access to the required data.  The remote agent can be run on Windows, OSX, and Linux systems (a full list of supported systems is [here](https://github.com/dotnet/core/blob/master/release-notes/2.0/2.0-supported-os.md)).
 
 ### Contents
 
@@ -55,7 +55,7 @@ After completing the download form, and select either:
 
 To connect a remote agent to a hub:
 * Ensure the remote agent is running on the machine, and shows the message **Authenticated** in the output log.
-* Log into the Information Hub through your browser and open the required hub.
+* Log into the Integration Hub through your browser and open the required hub.
 * Navigate to the remote agent configuration by selecting: Configure &rarr; Hub Agents &rarr, or [direct link](route:/hub/{{HUBKEY}}/summary/agents)
 * Select the remote(s) from the list, and click the **Authorize** button.  The agent should now be connected to the hub.
 

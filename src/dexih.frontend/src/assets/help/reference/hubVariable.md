@@ -17,6 +17,6 @@
 
 > ### Is encrypted data secure?
 > * Sensitive values (such as database passwords) are encrypted two times using a an AES based algorithm, and are never stored in plain text.  The first encryption uses the *Encryption Key* set for the hub, the second encryption uses the *Encryption Key* set for the remote agent.
-> * Encrypted values stored in the information hub **can not be accessed by Dexih administrators** without direct access to machine running the remote agent.  (Also noting, the remote agent **never** sends the encryption key to the information hub).
+> * Encrypted values stored in the integration hub **can not be accessed by Dexih administrators** without direct access to machine running the remote agent.  (Also noting, the remote agent **never** sends the encryption key to the integration hub).
 > * To keep sensitive data isolated to the remote agent (i.e. data is not stored), use environment variables on the remote agent, and specify these as hub variables.
 

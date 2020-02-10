@@ -426,22 +426,22 @@ namespace dexih.api.Controllers
 		    };
 		    if (user.IsInvited)
 		    {
-			    _emailSender.SendEmailTemplate("userReady.html", "Information Hub Registration is Completed.", parameters, new [] {user});
+			    _emailSender.SendEmailTemplate("userReady.html", "Integration Hub Registration is Completed.", parameters, new [] {user});
 		    }
 		    else
 		    {
-			    _emailSender.SendEmailTemplate("inviteRequired.html", "Information Hub Invite Pending", parameters, new [] {user});
+			    _emailSender.SendEmailTemplate("inviteRequired.html", "Integration Hub Invite Pending", parameters, new [] {user});
 		    }
 
 		    // if (user.IsInvited)
 		    // {
 			   //  path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates", "userReady.html");
-			   //  subject = "Information Hub Registration is Completed.";
+			   //  subject = "Integration Hub Registration is Completed.";
 		    // }
 		    // else
 		    // {
 			   //  path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates", "inviteRequired.html");
-			   //  subject = "Information Hub Invite Pending";
+			   //  subject = "Integration Hub Invite Pending";
 		    // }
 		    //
 		    // var body = new StringBuilder(System.IO.File.ReadAllText(path));
@@ -471,7 +471,7 @@ namespace dexih.api.Controllers
 					    {"url", Request.BaseUrl()},
 				    };
 				    
-				    _emailSender.SendEmailTemplate("supportEmail.html", "Information Hub Invite Pending", parameters, new [] {user});
+				    _emailSender.SendEmailTemplate("supportEmail.html", "Integration Hub Invite Pending", parameters, new [] {user});
 
 				    // string path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates",
 					   //  "supportEmail.html");
@@ -1223,7 +1223,7 @@ namespace dexih.api.Controllers
 		    var newIssue = await _operations.RepositoryManager.SaveIssueAsync(issue, _operations.Config.GitHubAccessToken, user, cancellationToken);
 		    
 		    await SendIssueMessages(newIssue, "A new issue was created",
-			    "A new issue was created, please review the link or log into the information hub for more information", cancellationToken);
+			    "A new issue was created, please review the link or log into the integration hub for more information", cancellationToken);
 		    return newIssue;
 	    }
 	    
@@ -1282,7 +1282,7 @@ namespace dexih.api.Controllers
 		    var newIssue = await _operations.RepositoryManager.GetIssue(user, issueComment.IssueKey, cancellationToken);
 
 		    await SendIssueMessages(newIssue, "A comment was added to an issue",
-			    "A comment was added to an existing issue, please review the link or log into the information hub for more information", cancellationToken);
+			    "A comment was added to an existing issue, please review the link or log into the integration hub for more information", cancellationToken);
 		    
 		    return newIssue;
 	    }

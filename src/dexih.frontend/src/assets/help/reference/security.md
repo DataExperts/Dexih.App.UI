@@ -1,16 +1,16 @@
-### Information Hub Security
+### Integration Hub Security
 
-Data security is a complex and important topic.  Every organization should have a data security strategy that works within there needs.  The scope of this section is not to cover data security as a complete topic, but rather to highlight the various security features within the Information Hub platform, and how to implement them.
+Data security is a complex and important topic.  Every organization should have a data security strategy that works within there needs.  The scope of this section is not to cover data security as a complete topic, but rather to highlight the various security features within the Integration Hub platform, and how to implement them.
 
 #### Basic Security Principals
 
 * Encrypt transmissions - All transmissions, whether on local networks, or through the internet should be transmitted securely through SSL connections.
 * Keep data local - When data is accecced, it should only go through the shorted path possible.  For example if a user is on a local network, and previews data contained on the local network, the data should never leave the local network during transmission.
-* No Data breaches when one component is compromised - Whilst any breach of a system should be avoided, the information hub follows the principal that if one component is breached, there should be no breach of 'data'.   This is accomplished by separating encryption keys from encrypted data, and separating systems that have access to data from systems and contain login information.
+* No Data breaches when one component is compromised - Whilst any breach of a system should be avoided, the integration hub follows the principal that if one component is breached, there should be no breach of 'data'.   This is accomplished by separating encryption keys from encrypted data, and separating systems that have access to data from systems and contain login information.
 
 #### Definitions
 
-To explain how data is stored and transmitted within the information hub the following terms are used:
+To explain how data is stored and transmitted within the integration hub the following terms are used:
 
 * Metadata - The data describing the data.  This includes table/column information, connection information, datalinks, datajob etc contained within a Hub.
 * Data - Refers to the data stored within database tables, flatfile, web services etc.
@@ -19,21 +19,21 @@ To explain how data is stored and transmitted within the information hub the fol
 * Salted - A salt, is extra piece of random data added to hashes and encryptions primarily to defend against dictionary attacks. 
 
 
-#### Information Hub Architecture
+#### Integration Hub Architecture
 
-The following section covers that main components of the information hub, and the type of data processed and stored.
+The following section covers that main components of the integration hub, and the type of data processed and stored.
 
-##### Information Hub (Web Server)
+##### Integration Hub (Web Server)
 
 This is the main website application.  Information stored here is limited to:
 
 * Logs containing diagnostic information, user logins, and other auditing information.
-* Configuration settings containing various keys, and login detail for the information hub repository.
-* Metadata contained within the information hub repository, will often be cached in memory on the web server to improve performance.
+* Configuration settings containing various keys, and login detail for the integration hub repository.
+* Metadata contained within the integration hub repository, will often be cached in memory on the web server to improve performance.
 
-> No 'data' is stored or transmitted through the information hub web server.
+> No 'data' is stored or transmitted through the integration hub web server.
 
-#### Information Hub Repository
+#### Integration Hub Repository
 
 The main database repository used to store application information to run the website.  This database is secured with both password, and firewall protections.
 
@@ -59,9 +59,9 @@ Remote Agents contain the following information (stored within the appsettings.j
 
 > The remote agent does not store any metadata associated with running datalinks and connecting to databases, although this data will be cached in memory as various points.
 
-#### Information Hub Proxy
+#### Integration Hub Proxy
 
-The Information Hub Proxy is an optional component used to send/receive data from the remote agent to allow for data preview, download and sharing.
+The Integration Hub Proxy is an optional component used to send/receive data from the remote agent to allow for data preview, download and sharing.
 
 The Hub Proxy 
 * does receive and send sensitive data, which is encrypted via a trusted SSL key.

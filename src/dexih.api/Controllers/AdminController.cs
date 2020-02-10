@@ -157,14 +157,14 @@ namespace dexih.api
 				if (user.EmailConfirmed)
 				{
 					template = "userReady.html";
-					subject = "Information Hub Access Granted!";
+					subject = "Integration Hub Access Granted!";
 				}
 				else
 				{
 					template = "invite.html";
 					var code = await _operations.RepositoryManager.GenerateEmailConfirmationTokenAsync(user, cancellationToken);
 					registerUrl = $"{url}/auth/register?email={user.Email}&code={HttpUtility.UrlEncode(code)}";
-					subject = "Information Hub Invitation!";
+					subject = "Integration Hub Invitation!";
 				}
 				
 				var parameters = new Dictionary<string, string>()

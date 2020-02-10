@@ -1,6 +1,6 @@
 ### Datalink Staging
 
-Staging data (or moving data to a *staging* area) is the process of pulling data from a source database and moving it to an intermediate area.  Staging areas have many purposes, however they are generally used to consolidate data from multiple locations into a central area prior to processing, linking and transforming the data.  The information hub has a built in function to allow for the rapid building of a staging area by automatically creating staging [datalinks](reference/data).
+Staging data (or moving data to a *staging* area) is the process of pulling data from a source database and moving it to an intermediate area.  Staging areas have many purposes, however they are generally used to consolidate data from multiple locations into a central area prior to processing, linking and transforming the data.  The integration hub has a built in function to allow for the rapid building of a staging area by automatically creating staging [datalinks](reference/data).
 
 #### Creating Staging Datalink
 

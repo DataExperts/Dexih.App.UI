@@ -18,7 +18,7 @@ namespace dexih.remote.run
                 if(args.Length > 0 && (args[0] == "?" || args[0] == "-?" || args[0] == "--?" || args[0] == "-help" || args[0] == "--help"))
                 {
                     Console.WriteLine(@"
-To run use the syntax: dexih.remote.run {Information Hub Url} {pre/stable}.
+To run use the syntax: dexih.remote.run {Integration Hub Url} {pre/stable}.
 The default options are: https://dexih.dataexpertsgroup.com stable
 Example (this will use prerelease versions of the remote agents):
     dexih.remote.run https://dexih.dataexpertsgroup.com pre
@@ -33,7 +33,7 @@ Example (this will use prerelease versions of the remote agents):
 |  '--'  ||  |____  /  .  \  |  | |  |  |  | 
 |_______/ |_______|/__/ \__\ |__| |__|  |__| 
 
-Welcome to Dexih - The Data Experts Information Hub
+Welcome to Dexih - The Data Experts Integration Hub
 ");
                 Console.WriteLine("This will launch an instance of a remote agent.");
                 var server = args.Length >= 1 ? args[0] : "https://dexih.dataexpertsgroup.com";
@@ -78,7 +78,7 @@ Welcome to Dexih - The Data Experts Information Hub
 
                             if (string.IsNullOrEmpty(result))
                             {
-                                Console.Error.WriteLine($"Error:  There was no response from the Information Hub at {server}.");
+                                Console.Error.WriteLine($"Error:  There was no response from the Integration Hub at {server}.");
                                 Console.ReadKey();
                                 return;
                             }

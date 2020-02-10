@@ -21,7 +21,7 @@ A datalink source can be specified as one of the following:
 
 #### Transforms
 
-The *Information Hub* providers a number of built in transforms, each with a specific purpose that move your data from one form to another.  The transforms can be sequenced as needed to move data into the required target data form.
+The *Integration Hub* providers a number of built in transforms, each with a specific purpose that move your data from one form to another.  The transforms can be sequenced as needed to move data into the required target data form.
 
 The transforms provided are as follows:
 

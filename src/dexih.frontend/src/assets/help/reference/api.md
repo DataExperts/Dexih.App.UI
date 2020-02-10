@@ -1,6 +1,6 @@
 ### API's
 
-The *Information Hub* allows tables and datalinks to be published as Api's which can be easily access by third parties.
+The *Integration Hub* allows tables and datalinks to be published as Api's which can be easily access by third parties.
 
 ### General Properties
 

@@ -1,4 +1,4 @@
-## Data Experts Information Hub - Privacy Policy
+## Data Experts Integration Hub - Privacy Policy
 
 ### Personal Data
 
@@ -21,9 +21,9 @@ When your Personal Information is no longer needed for the purpose for which it 
 
 We will upon request completely destroy any personal data.  This request can be made via email to support@dataexpertsgroup.com.
 
-### Data used by the Information Hub
+### Data used by the Integration Hub
 
-The Information Hub is a central platform to manage and analyze data.  Our policy is that the data used within the platform is owned by and the responsibility of the user.  In doing this, we only collect data, where necessary to provide this service, including the following:
+The Integration Hub is a central platform to manage and analyze data.  Our policy is that the data used within the platform is owned by and the responsibility of the user.  In doing this, we only collect data, where necessary to provide this service, including the following:
 * Metadata, such as table definitions, data processing rules, and scheduling rules.  
 * Database connections containing passwords, are stored encrypted on our servers, with the decryption key being owned by the user.  Data Experts Group staff cannot access passwords, unless provided with the encryption key by the user.
 

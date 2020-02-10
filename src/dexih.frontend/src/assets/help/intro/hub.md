@@ -1,6 +1,6 @@
 ### Hub
 
-A **hub** is a container within the information hub which is used to build and store your data processing rules and related metadata.
+A **hub** is a container within the integration hub which is used to build and store your data processing rules and related metadata.
 
 #### Creating a new hub
 
@@ -13,7 +13,7 @@ A **hub** is a container within the information hub which is used to build and s
 * **Description** - A longer description that can be formatted using [markdown](https://guides.github.com/features/mastering-markdown/).
 * **Encryption Key** - An encryption key, used to encrypt secure data processed through the hub.
 * **Shared Data Access** - Specifies who is allowed to access items marked as shared.  The options are:
-    * Public - Anyone who can access the information hub can access shared data.
+    * Public - Anyone who can access the integration hub can access shared data.
     * Registered User - Anyone who has registered and email verified, can access shared data.
     * PublishReader User - Only users who have been give the `PublishReader` role or higher can access shared data.
 

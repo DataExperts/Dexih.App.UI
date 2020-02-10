@@ -2,7 +2,7 @@
 
 Tables contain metadata which represents the properties of an underlying structure (such as a database table).  Each table points to a single connection, which in turn links to the underlying data.
 
-Table in the `Information Hub` contain basic metadata such as table and column names, as well as additional information for validation, encryption and change detection.
+Table in the `Integration Hub` contain basic metadata such as table and column names, as well as additional information for validation, encryption and change detection.
 
 ### General Properties
 
@@ -24,7 +24,7 @@ These properties are available when the table points to a Sql Database connectio
 
 > ### Using Sql Queries
 > * Sql queries are database specific, and hence less portable when moving to other database platforms.
-> * Sql queries can not be further optimised by the information hub.  For example if a datalink uses a `Filter` transform, it will generally translate the filters into the Sql executed by the database, whereas if Sql is hard coded these optimizations are not possible.
+> * Sql queries can not be further optimised by the integration hub.  For example if a datalink uses a `Filter` transform, it will generally translate the filters into the Sql executed by the database, whereas if Sql is hard coded these optimizations are not possible.
 > * Sql queries can hide data impact and lineage analysis.
 
 ### Flat File Table Properties
