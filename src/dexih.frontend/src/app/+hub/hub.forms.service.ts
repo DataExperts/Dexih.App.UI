@@ -21,7 +21,8 @@ import { eImportAction, Import, DexihConnection, DexihTable, DexihTableColumn, e
    DexihDatalinkStepColumn, DexihDatajob, DexihRemoteAgentHub, DexihDatalink, DexihDatalinkColumn,
    DexihDatalinkTransform, DexihDatalinkTransformItem, DexihFunctionParameter, DexihFunctionArrayParameter,
    DexihDatalinkProfile, DexihDatalinkTarget, DexihDatalinkTable,
-   eSourceType, eSharedObjectType, DexihListOfValues, InputParameterBase, eDataObjectType, ListOfValuesItem } from '../shared/shared.models';
+   eSourceType, eSharedObjectType, DexihListOfValues, InputParameterBase,
+   eDataObjectType, ListOfValuesItem } from '../shared/shared.models';
 
 @Injectable()
 export class HubFormsService implements OnDestroy {
@@ -150,7 +151,7 @@ export class HubFormsService implements OnDestroy {
     this._currentFormObservable.next(form);
 
     if (this.currentForm) {
-      if(this._valueChangesSubscription) { this._valueChangesSubscription.unsubscribe(); }
+      if (this._valueChangesSubscription) { this._valueChangesSubscription.unsubscribe(); }
       this._valueChangesSubscription = this.currentForm.valueChanges
         .subscribe(data => this.onValueChanged(data));
       this.onValueChanged(); // (re)set validation messages now

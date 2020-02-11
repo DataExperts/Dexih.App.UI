@@ -520,6 +520,7 @@
         <e p="launchSettings.json" t="Include" />
         <e p="PublishProfiles" t="Include">
           <e p="dev-publish.ps1" t="Include" />
+          <e p="FolderProfile.pubxml" t="Include" />
           <e p="net46-publish.ps1" t="Include" />
           <e p="net46.pubxml" t="Include" />
           <e p="portable-publish.ps1" t="Include" />
