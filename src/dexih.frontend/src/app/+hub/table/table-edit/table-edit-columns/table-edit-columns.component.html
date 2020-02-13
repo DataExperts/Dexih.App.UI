@@ -9,7 +9,7 @@
 
         <ng-template #tableHeader let-items="items">
             <column-edit-bulk *ngIf="formsService.currentForm && showBulkEdit && items.length > 0" [columns]="items"
-                [columnsFormArray]="formsService.currentForm.controls.dexihTableColumns"></column-edit-bulk>
+                [columnsFormArray]="formsService.currentForm.controls.dexihTableColumns" (updated)="showBulkEdit = false"></column-edit-bulk>
         </ng-template>
 
         <ng-template #actions select="actionsTemplate" let-items="items">

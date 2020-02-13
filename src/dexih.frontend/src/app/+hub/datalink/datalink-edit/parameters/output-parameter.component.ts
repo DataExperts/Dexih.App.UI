@@ -1,16 +1,16 @@
-import { Component, Input, Output, ViewChild, OnInit, OnDestroy, EventEmitter } from '@angular/core';
+import { Component, Input, Output, ViewChild, OnInit, OnDestroy, EventEmitter, OnChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { HubService } from '../../../hub.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { TypeFunctions, TypeCodes, eBasicType } from '../../../hub.remote.models';
-import { DexihTableColumn, DexihDatalinkColumn, eTypeCode } from '../../../../shared/shared.models';
+import { DexihTableColumn, DexihDatalinkColumn, eTypeCode, DexihDatalinkTarget, DexihDatalinkTable, DexihTable } from '../../../../shared/shared.models';
 
 @Component({
 
     selector: 'output-parameter',
     templateUrl: './output-parameter.component.html'
 })
-export class OutputParameterComponent implements OnInit, OnDestroy {
+export class OutputParameterComponent implements OnInit, OnChanges, OnDestroy {
 
     @Input() public allowDataTypeSelect = false;
     @Input() public allowNameSelect = false;
@@ -18,6 +18,7 @@ export class OutputParameterComponent implements OnInit, OnDestroy {
     @Input() public allowRemove = false;
     @Input() public outputParameterForm: FormGroup = null;
     @Input() public outputColumns: Array<DexihTableColumn> = null;
+    @Input() public datalinkTargets: Array<DexihDatalinkTarget> = null;
     @Input() public updateParameterName = false;
     @Input() public rank = 0;
 
@@ -30,6 +31,8 @@ export class OutputParameterComponent implements OnInit, OnDestroy {
 
     newColumn: DexihDatalinkColumn;
     tmpColumnKey: number;
+
+    outputTables: Array<DexihTable>;
 
     type: TypeFunctions;
     eBasicType = eBasicType;
@@ -55,7 +58,21 @@ export class OutputParameterComponent implements OnInit, OnDestroy {
         this._parameterSubscription = this.outputParameterForm.valueChanges.subscribe(param => {
             this.updateItems();
         });
-}
+    }
+
+    ngOnChanges() {
+        let table = new DexihTable() 
+        table.name = "Output Columns";
+        table.dexihTableColumns = this.outputColumns;
+
+        this.outputTables = [table];
+
+        if(this.datalinkTargets) {
+            this.datalinkTargets.forEach(target => {
+                this.outputTables.push(target['table']);
+            });
+        }
+    }
 
     ngOnDestroy() {
         if (this._datalinkColumnSubscription) { this._datalinkColumnSubscription.unsubscribe(); }

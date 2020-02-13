@@ -62,12 +62,12 @@ export const datalinkEditRoutes: Routes = [
     { path: 'target', data: { breadCrumb: true, pageTitle: 'Targets' }, children: [
         { path: '', pathMatch: 'full', component: DatalinkEditTargetComponent},
         { path: 'table-edit/:targetKey', data: { pageTitle: 'Edit Target Table', action: 'edit'}, children: [
-            { path: '', pathMatch: 'full', component: DatalinkEditTargetTableComponent },
+            { path: '', pathMatch: 'full', canDeactivate: [DatalinkEditGuard], component: DatalinkEditTargetTableComponent },
             { path: 'preview-table-data/:tableKey', component: PreviewTableComponent,
                 data: { pageTitle: 'Preview Table', action: 'preview'} },
             ]},
         { path: 'table-new', data: { pageTitle: 'New Target Table', action: 'new'}, children: [
-            { path: '', pathMatch: 'full', component: DatalinkEditTargetTableComponent },
+            { path: '', pathMatch: 'full', canDeactivate: [DatalinkEditGuard], component: DatalinkEditTargetTableComponent },
             { path: 'preview-table-data/:tableKey', component: PreviewTableComponent,
                 data: { pageTitle: 'Preview Table', action: 'preview'} },
             ]},

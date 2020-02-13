@@ -12,7 +12,7 @@ import { InputOutputColumns } from '../../../hub.lineage.models';
 import { FunctionParameter, eFunctionType, eParameterDirection, eGenericType, DexihDatalinkColumn, FunctionReference,
   DexihCustomFunction, eTransformType, DexihDatalinkTable, DexihDatalinkTransformItem, eTransformItemType,
   DexihFunctionParameter, eTypeCode, DexihCustomFunctionParameter,
-  DexihFunctionArrayParameter, RemoteLibraries, eInvalidActionItems, eErrorActionItems } from '../../../../shared/shared.models';
+  DexihFunctionArrayParameter, RemoteLibraries, eInvalidActionItems, eErrorActionItems, DexihDatalinkTarget } from '../../../../shared/shared.models';
 import { CancelToken } from '../../../../+auth/auth.models';
 
 export class ArrayParameter {
@@ -89,6 +89,7 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
 
   inputColumns: Array<DexihDatalinkColumn>;
   outputColumns: Array<DexihDatalinkColumn>;
+  datalinkTargets: Array<DexihDatalinkTarget>;
 
   functionCategory: string;
   functionCategories: Array<string>;
@@ -169,7 +170,6 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
             }
 
             this.inputColumns = table.dexihDatalinkColumns;
-            this.outputColumns = this.datalinkTransformForm.controls.runTime.value.transformColumns;
           } else {
             let nodeDatalinkColumn = <DexihDatalinkColumn> this.datalinkTransformForm.controls.nodeDatalinkColumn.value;
             let nodeDatalinkColumnKey = nodeDatalinkColumn ? nodeDatalinkColumn.key : null;
@@ -177,12 +177,13 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
             if (nodeDatalinkColumnKey) {
               let inputColumns = <DexihDatalinkColumn[]> this.datalinkTransformForm.controls.runTime.value.inputColumns;
               this.inputColumns = io.getAvailableColumns(inputColumns, nodeDatalinkColumnKey, 0);
-              this.outputColumns = this.datalinkTransformForm.controls.runTime.value.transformColumns;
             } else {
               this.inputColumns = this.datalinkTransformForm.controls.runTime.value.inputColumns;
-              this.outputColumns = this.datalinkTransformForm.controls.runTime.value.transformColumns;
             }
           }
+
+          this.outputColumns = this.datalinkTransformForm.controls.runTime.value.transformColumns;
+          this.datalinkTargets = this.datalinkForm.controls.dexihDatalinkTargets.value;
 
           if (this.datalinkTransformItemKey) {
             this.datalinkTransformItemForm = this.editDatalinkService

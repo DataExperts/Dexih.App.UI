@@ -71,7 +71,7 @@
             </ng-template>
     
             <ng-template #tableHeader let-items="items">
-                <column-edit-bulk *ngIf="   showBulkEdit && items.length > 0" [columns]="items" [columnsFormArray]="targetTableForm.controls.table.controls.dexihTableColumns" ></column-edit-bulk>
+                <column-edit-bulk *ngIf="showBulkEdit && items.length > 0" [columns]="items" [columnsFormArray]="targetTableForm.controls.table.controls.dexihTableColumns" (updated)="updateData()" ></column-edit-bulk>
             </ng-template>
 
             <ng-template #selectedItemAction select="selectedItemAction" let-column="item">
@@ -80,7 +80,7 @@
     
             <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
                 <dexih-button-delete (click)="deleteColumns(items)"></dexih-button-delete>
-                <dexih-button class="ml-1" (click)="showBulkEdit=!showBulkEdit">{{showBulkEdit ? 'Hide Bulk Edit' : 'Show Bulk Edit'}} </dexih-button>
+                <dexih-button iconClass="fa fa-th-list" class="ml-1" (click)="showBulkEdit=!showBulkEdit">{{showBulkEdit ? 'Hide Bulk Edit' : 'Show Bulk Edit'}} </dexih-button>
             </ng-template>
     
     

@@ -568,7 +568,7 @@ export class HubFormsService implements OnDestroy {
       ]],
       'passwordRaw': ['', [
       ]],
-    }, { Validators: [this.requiredConnectionFields()] }
+    }, { validators: [this.requiredConnectionFields()] }
     );
 
     this.property = sharedObjectProperties.find(c => c.type === eSharedObjectType.Connection);

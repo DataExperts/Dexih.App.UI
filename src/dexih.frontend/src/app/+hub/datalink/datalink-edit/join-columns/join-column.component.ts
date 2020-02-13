@@ -4,7 +4,7 @@ import { HubService } from '../../../hub.service';
 import { eObjectUse, ColumnUsageNode, eDatalinkObjectType } from '../../../hub.lineage.models';
 import { Subscription, combineLatest} from 'rxjs';
 import { FormGroup } from '@angular/forms';
-import { DexihDatalinkColumn, DexihTable } from '../../../../shared/shared.models';
+import { DexihDatalinkColumn, DexihTable, eTypeCode } from '../../../../shared/shared.models';
 
 
 @Component({
@@ -25,6 +25,7 @@ export class JoinColumnComponent implements OnInit, OnDestroy {
     private hubCache: HubCache;
 
     eMappingStatus = eMappingStatus;
+    eTypeCode = eTypeCode;
 
     columnLineageStatusIcon: string;
     columnLineageStatusColor: string;

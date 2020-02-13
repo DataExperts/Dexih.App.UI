@@ -89,6 +89,10 @@ export class ColumnEditBulkComponent implements OnInit {
         this.updated.emit();
       }
 
+      cancel() {
+          this.updated.emit();
+      }
+
       setAllowDbNull(value: boolean) {
         this.columns.forEach(column => {
             let columnForm = this.getColumnForm(column);

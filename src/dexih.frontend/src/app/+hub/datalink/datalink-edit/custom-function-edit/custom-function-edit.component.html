@@ -61,7 +61,7 @@
 					</div>
 					<div [ngStyle]="{'z-index': 101, 'position': 'relative'}">
 						<output-parameter [allowNameSelect]="false" [allowDataTypeSelect]="true"
-							[outputParameterForm]="returnParameterForm" [outputColumns]="outputColumns"
+							[outputParameterForm]="returnParameterForm" [outputColumns]="outputColumns"  [datalinkTargets]="datalinkTargets" 
 							(addParameter)="addParameter($event, eParameterDirection.Output)"></output-parameter>
 					</div>
 					<div *ngIf="outputParameters.length === 0">
@@ -72,7 +72,7 @@
 					<div *ngFor="let parameter of outputParameters; let i = index"
 						[ngStyle]="{'z-index': 100-i, 'position': 'relative'}">
 						<output-parameter [allowNameSelect]="true" [allowDataTypeSelect]="true"
-							[outputParameterForm]="parameter" [outputColumns]="outputColumns"
+							[outputParameterForm]="parameter" [outputColumns]="outputColumns"  [datalinkTargets]="datalinkTargets" 
 							[updateParameterName]="true"
 							(addParameter)="addParameter($event, eParameterDirection.Output)"
 							(removeParameter)="removeParameter($event)" [allowAdd]="true" [allowRemove]="true">

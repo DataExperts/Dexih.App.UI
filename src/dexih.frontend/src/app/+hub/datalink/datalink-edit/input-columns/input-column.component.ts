@@ -6,7 +6,7 @@ import { HubCache, eMappingStatus,
 import { eObjectUse, ColumnUsageNode, InputOutputColumns, eDatalinkObjectType } from '../../../hub.lineage.models';
 import { Subscription, combineLatest} from 'rxjs';
 import { FormGroup } from '@angular/forms';
-import { DexihDatalinkColumn } from '../../../../shared/shared.models';
+import { DexihDatalinkColumn, eTypeCode } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -23,6 +23,7 @@ export class InputColumnComponent implements OnInit, OnDestroy {
     private datalinkForm: FormGroup;
 
     eMappingStatus = eMappingStatus;
+    eTypeCode = eTypeCode;
 
     mappingStatusInfoImpact: MappingStatusInfo;
     mappingStatusInfoLineage: MappingStatusInfo;

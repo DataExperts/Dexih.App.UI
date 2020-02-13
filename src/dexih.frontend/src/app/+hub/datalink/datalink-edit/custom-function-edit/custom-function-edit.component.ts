@@ -9,7 +9,8 @@ import { AuthService } from '../../../../+auth/auth.service';
 import { FormGroup, FormArray, AbstractControl } from '@angular/forms';
 import { InputOutputColumns } from '../../../hub.lineage.models';
 import { eFunctionType, eParameterDirection, DexihDatalinkColumn, DexihDatalinkTransformItem,
-  eTransformItemType, eTypeCode, DexihFunctionParameter, eErrorActionItems, eInvalidActionItems, FunctionParameter } from '../../../../shared/shared.models';
+  eTransformItemType, eTypeCode, DexihFunctionParameter, eErrorActionItems, eInvalidActionItems, FunctionParameter,
+  DexihDatalinkTarget } from '../../../../shared/shared.models';
 import { CancelToken } from '../../../../+auth/auth.models';
 
 @Component({
@@ -57,6 +58,7 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
 
   inputColumns: Array<DexihDatalinkColumn>;
   outputColumns: Array<DexihDatalinkColumn>;
+  datalinkTargets: Array<DexihDatalinkTarget>;
 
 
   constructor(
@@ -115,11 +117,12 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
           if (nodeDatalinkColumnKey) {
             let inputColumns = <DexihDatalinkColumn[]> this.datalinkTransformForm.controls.runTime.value.inputColumns;
             this.inputColumns = io.getAvailableColumns(inputColumns, nodeDatalinkColumnKey, 0);
-            this.outputColumns = this.datalinkTransformForm.controls.runTime.value.transformColumns;
           } else {
             this.inputColumns = this.datalinkTransformForm.controls.runTime.value.inputColumns;
-            this.outputColumns = this.datalinkTransformForm.controls.runTime.value.transformColumns;
           }
+
+          this.outputColumns = this.datalinkTransformForm.controls.runTime.value.transformColumns;
+          this.datalinkTargets = this.datalinkForm.controls.dexihDatalinkTargets.value;
 
           if (this.datalinkTransformItemKey) {
             this.datalinkTransformItemForm = this.editDatalinkService

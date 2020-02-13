@@ -7,7 +7,7 @@
         </span>
     </div>
 </div>
-<div class="list-group-item p-0 rounded-0" *ngIf="mappingStatusInfoLineage.key == eMappingStatus.Mapped" [title]="column.logicalName + ' ' + column.dataType"
+<div class="list-group-item p-0 rounded-0" *ngIf="mappingStatusInfoLineage.key == eMappingStatus.Mapped" [title]="column.logicalName + ' ' + eTypeCode[column.dataType]"
     (click)="editColumn()">
     <div class="d-flex flex-row">
 

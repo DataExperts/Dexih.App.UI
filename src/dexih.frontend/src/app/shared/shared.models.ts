@@ -745,7 +745,7 @@ export class ApiData {
     public functionCode: string = null;
     public functionResultCode: string = null;
     public onError: eErrorAction = eErrorAction.Abend;
-    public onNull: eErrorAction = eErrorAction.Abend;
+    public onNull: eErrorAction = eErrorAction.Execute;
     public notCondition: boolean = false;
     public invalidAction: eInvalidAction = eInvalidAction.Abend;
     public entityStatus: EntityStatus = null;

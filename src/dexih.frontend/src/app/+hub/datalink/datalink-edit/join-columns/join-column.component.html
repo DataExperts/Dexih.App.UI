@@ -4,11 +4,11 @@
 
         <a *ngIf="mappingStatusInfoLineage.key != eMappingStatus.Joined" class="flex-fill input-group-text ellipsis-overflow rounded-0 border-0"
             style="overflow:hidden; text-overflow :ellipsis;" 
-            [title]="column.logicalName + ' ' + column.dataType">
+            [title]="column.logicalName + ' ' + eTypeCode[column.dataType]">
             {{column.logicalName}}
         </a>
         <a *ngIf="mappingStatusInfoLineage.key == eMappingStatus.Joined" class="flex-fill input-group-text ellipsis-overflow rounded-0 border-0"
-            style="overflow:hidden; text-overflow :ellipsis;" [title]="column.logicalName + ' ' + column.dataType">
+            style="overflow:hidden; text-overflow :ellipsis;" [title]="column.logicalName + ' ' + eTypeCode[column.dataType]">
             {{column.logicalName}}
         </a>
         <i class="input-group-text rounded-0  border-0 border-l1" [ngClass]="mappingStatusInfoImpact.statusClass" [title]="mappingStatusInfoImpact.name"></i>

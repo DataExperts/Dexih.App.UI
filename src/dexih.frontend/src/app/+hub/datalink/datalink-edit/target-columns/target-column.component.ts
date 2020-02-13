@@ -8,7 +8,7 @@ import { FormGroup } from '@angular/forms';
 import { LogFactory, eLogLevel } from '../../../../../logging';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../../+auth/auth.service';
-import { DexihTableColumn, DexihTable, DexihDatalinkColumn } from '../../../../shared/shared.models';
+import { DexihTableColumn, DexihTable, DexihDatalinkColumn, eTypeCode } from '../../../../shared/shared.models';
 
 
 @Component({
@@ -29,6 +29,8 @@ export class TargetColumnComponent implements OnInit, OnDestroy, OnChanges {
     private datalinkForm: FormGroup;
 
     eMappingStatus = eMappingStatus;
+
+    eTypeCode = eTypeCode;
 
     public mappingStatusInfoLineage: MappingStatusInfo;
     public mappingStatusInfoImpact: MappingStatusInfo;

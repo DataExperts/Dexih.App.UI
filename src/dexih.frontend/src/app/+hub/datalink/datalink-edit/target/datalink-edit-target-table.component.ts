@@ -63,6 +63,8 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
 
     public showBulkEdit = false;
 
+    private canExit = false;
+
     public logger = new LogFactory('datalink-edit-target-table');
 
     columns = [
@@ -129,6 +131,7 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
 
                     // if the table is not found, then navigate back to the parent.
                     if (originalTargetTableForm === undefined) {
+                        this.canExit = true;
                         this.authService.navigateUp();
                         return;
                     }
@@ -166,6 +169,22 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
         if (this._loadStrategySubscription) { this._loadStrategySubscription.unsubscribe(); }
         if (this._tableFormSubscription) { this._tableFormSubscription.unsubscribe(); }
     }
+
+    canDeactivate(): Promise<boolean> {
+        return new Promise<boolean>(resolve => {
+          if (!this.canExit && this.targetTableForm?.dirty) {
+            this.authService.confirmDialog('Target Table Changed',
+            'The table has changed.  Would you like to discard the changes and return to the previous screen?  Otherwise, use the apply button to save the changes.'
+            ).then(confirm => {
+              resolve(confirm);
+            }).catch(reason => {
+              resolve(false);
+            });
+          } else {
+            resolve(true);
+          }
+        });
+      }
 
     resetSubscription() {
         if (this._tableFormSubscription) { this._tableFormSubscription.unsubscribe(); }
@@ -222,6 +241,7 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
         }
 
         this.logger.LogC(() => `updateData started`, eLogLevel.Trace);
+        this.showBulkEdit = false;
 
         let validation = this.editDatalinkService.getValidationTransform()
 
@@ -493,6 +513,7 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
             }
             targets.insert(index, this.targetTableForm);
             targets.markAsDirty();
+            this.canExit = true;
             this.authService.navigateUp();
         }
     }

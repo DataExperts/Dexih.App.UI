@@ -165,18 +165,18 @@
 								</div>
 							</div>
 							<output-parameter *ngIf="outputParameter.controls.arrayParameters.controls.length === 0" [outputParameterForm]="outputParameter"
-							 [outputColumns]="outputColumns" [allowAdd]="false" [allowRemove]="false" [rank]="outputParameter.value.rank">
+							 [outputColumns]="outputColumns" [datalinkTargets]="datalinkTargets" [allowAdd]="false" [allowRemove]="false" [rank]="outputParameter.value.rank">
 							</output-parameter>
 							<div *ngFor="let arrayParameter of outputParameter.controls.arrayParameters.controls; let j = index" class="pl-2"
 							 [ngStyle]="{'z-index': 200-j, 'position': 'relative'}">
-								<output-parameter [outputParameterForm]="arrayParameter" [outputColumns]="outputColumns" [allowAdd]="true"
+								<output-parameter [outputParameterForm]="arrayParameter" [outputColumns]="outputColumns" [datalinkTargets]="datalinkTargets" [allowAdd]="true"
 								 [allowRemove]="true" (addParameter)="addParameter(outputParameter, eParameterDirection.Output, j)"
 								 (removeParameter)="removeParameter(outputParameter, j)">
 								</output-parameter>
 							</div>
 						</div>
 
-						<output-parameter *ngIf="outputParameter.value.rank == 0" [outputParameterForm]="outputParameter" [outputColumns]="outputColumns"
+						<output-parameter *ngIf="outputParameter.value.rank == 0" [outputParameterForm]="outputParameter" [outputColumns]="outputColumns" [datalinkTargets]="datalinkTargets" 
 						 [allowAdd]="false" [allowRemove]="false">
 						</output-parameter>
 					</div>
