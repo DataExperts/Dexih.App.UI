@@ -1429,12 +1429,13 @@ export class HubService implements OnInit, OnDestroy {
             }, 'Previewing table...', cancelToken);
     }
 
-    previewDatalinkKeyData(datalinkKey: number, selectQuery: SelectQuery, inputColumns: InputColumn[],
+    previewDatalinkKeyData(datalinkKey: number, previewUpdates: boolean, selectQuery: SelectQuery, inputColumns: InputColumn[],
         inputParameters: DexihInputParameter[], cancelToken: CancelToken):
     PromiseWithCancel<PreviewResults> {
 
         return this.getData('/api/Hub/PreviewDatalink', {
             datalinkKey: datalinkKey,
+            previewUpdates: previewUpdates,
             selectQuery: selectQuery,
             inputColumns: inputColumns,
             inputParameters: inputParameters,

@@ -793,7 +793,7 @@ namespace dexih.api.Services.Remote
 	    }
 
 	    
-        public async Task<string> PreviewDatalink(string id, long hubKey, DownloadUrl downloadUrl, long datalinkKey, SelectQuery selectQuery, ChartConfig chartConfig, InputColumn[] inputColumns, InputParameters inputParameters, bool isShared, RepositoryManager database, CancellationToken cancellationToken)
+        public async Task<string> PreviewDatalink(string id, long hubKey, DownloadUrl downloadUrl, long datalinkKey, bool previewUpdates, SelectQuery selectQuery, ChartConfig chartConfig, InputColumn[] inputColumns, InputParameters inputParameters, bool isShared, RepositoryManager database, CancellationToken cancellationToken)
         {
             try
             {
@@ -817,7 +817,8 @@ namespace dexih.api.Services.Remote
 	                selectQuery,
 	                inputColumns,
 	                inputParameters,
-	                chartConfig
+	                chartConfig,
+					previewUpdates
                 };
 
                 var result = await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.PreviewDatalink), value,  database, cancellationToken);

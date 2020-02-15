@@ -28,6 +28,7 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
   private _subscription: Subscription;
   private _returnParameterSubscription: Subscription;
   private _parametersSubscription: Subscription;
+  private _saveSubscription: Subscription;
 
   eFunctionType = eFunctionType;
   eParameterDirection = eParameterDirection;
@@ -186,6 +187,14 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
             this.setParameters(p);
           });
         }
+
+        if (this._saveSubscription) { this._saveSubscription.unsubscribe(); }
+        this._saveSubscription = this.editDatalinkService.savingDatalink.subscribe(value => {
+            if(value) {
+                this.apply();
+            }
+        });
+
       });
     } catch (e) {
       this.hubService.addHubClientErrorMessage(e, 'Edit Custom Function');
@@ -196,6 +205,7 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
     if (this._subscription) { this._subscription.unsubscribe(); }
     if (this._returnParameterSubscription) { this._returnParameterSubscription.unsubscribe(); }
     if (this._parametersSubscription) { this._parametersSubscription.unsubscribe(); }
+    if (this._saveSubscription) { this._saveSubscription.unsubscribe(); }
     this.cancelToken.cancel();
   }
 

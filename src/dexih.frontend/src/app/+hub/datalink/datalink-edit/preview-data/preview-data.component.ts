@@ -61,7 +61,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
                 }
             });
         } catch (e) {
-            this.hubService.addHubClientErrorMessage(e, 'Preview Transform DAta');
+            this.hubService.addHubClientErrorMessage(e, 'Preview Transform Data');
         }
     }
 

@@ -93,7 +93,7 @@ namespace dexih.api.Controllers
                     data = await _remoteAgents.PreviewTable(previewData.RemoteAgentId, previewData.HubKey, previewData.DownloadUrl, previewData.ObjectKey, previewData.SelectQuery, null, previewData.InputColumns, previewData.Parameters, false, true, repositoryManager, cancellationToken);
                     break;
                 case EDataObjectType.Datalink:
-                    data = await _remoteAgents.PreviewDatalink(previewData.RemoteAgentId, previewData.HubKey, previewData.DownloadUrl, previewData.ObjectKey, previewData.SelectQuery, null, previewData.InputColumns, previewData.Parameters, true, repositoryManager, cancellationToken);
+                    data = await _remoteAgents.PreviewDatalink(previewData.RemoteAgentId, previewData.HubKey, previewData.DownloadUrl, previewData.ObjectKey, false, previewData.SelectQuery, null, previewData.InputColumns, previewData.Parameters, true, repositoryManager, cancellationToken);
                     break;
                 case EDataObjectType.View:
                 case EDataObjectType.Dashboard:
@@ -125,7 +125,7 @@ namespace dexih.api.Controllers
                             data = await _remoteAgents.PreviewTable(previewData.RemoteAgentId, previewData.HubKey, previewData.DownloadUrl, view.SourceTableKey.Value, selectQuery, view.ChartConfig, previewData.InputColumns, previewData.Parameters, false, false, repositoryManager, cancellationToken);
                             break;
                         case EDataObjectType.Datalink:
-                            data = await _remoteAgents.PreviewDatalink(previewData.RemoteAgentId, previewData.HubKey, previewData.DownloadUrl, view.SourceDatalinkKey.Value, selectQuery, view.ChartConfig, previewData.InputColumns, previewData.Parameters, false, repositoryManager, cancellationToken);
+                            data = await _remoteAgents.PreviewDatalink(previewData.RemoteAgentId, previewData.HubKey, previewData.DownloadUrl, view.SourceDatalinkKey.Value, false, selectQuery, view.ChartConfig, previewData.InputColumns, previewData.Parameters, false, repositoryManager, cancellationToken);
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
@@ -253,7 +253,7 @@ namespace dexih.api.Controllers
                         cancellationToken);
                 case EDataObjectType.Datalink:
                     return await _remoteAgents.PreviewDatalink(previewDashboard.RemoteAgentId,
-                        previewDashboard.HubKey, previewDashboard.DownloadUrl, view.SourceDatalinkKey.Value,
+                        previewDashboard.HubKey, previewDashboard.DownloadUrl, view.SourceDatalinkKey.Value, false,
                         view.SelectQuery, view.ChartConfig, view.InputValues, itemParameters, false, repositoryManager,
                         cancellationToken);
                 default:

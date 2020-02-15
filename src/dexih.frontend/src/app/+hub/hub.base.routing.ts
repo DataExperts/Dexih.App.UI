@@ -60,7 +60,7 @@ const tableRoutes: Routes = [
 
 const datalinkRoutes: Routes = [
     { path: 'datalink-edit', loadChildren: () => import('./datalink/datalink-edit/datalink-edit.module').then(m => m.DatalinkEditModule)},
-    { path: 'datalink-preview/:datalinkKey', component: DatalinkPreviewDataComponent, data: { pageTitle: 'Preview Datalink' } },
+    { path: 'datalink-preview/:datalinkKey/:previewUpdates', component: DatalinkPreviewDataComponent, data: { pageTitle: 'Preview Datalink' } },
     { path: 'table-preview/:tableKey', component: TablePreviewDataComponent, data: { pageTitle: 'Preview Table' } },
     { path: 'datalink-run/:datalinkKeys', component: DatalinkRunComponent, data: { pageTitle: 'Run Datalink' } },
     resultViewRoute

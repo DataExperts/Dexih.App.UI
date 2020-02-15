@@ -14,6 +14,7 @@ export class DatalinkPreviewDataComponent implements OnInit, OnDestroy {
     private _subscription: Subscription;
 
     public key: number;
+    public previewUpdates: boolean;
 
     public action: string; // new or edit
     public pageTitle: string;
@@ -40,6 +41,7 @@ export class DatalinkPreviewDataComponent implements OnInit, OnDestroy {
                 this.action = data['action'];
                 this.pageTitle = data['pageTitle'];
                 this.key = +params['datalinkKey'];
+                this.previewUpdates = params['previewUpdates'] === 'true';
             });
         } catch (e) {
             this.hubService.addHubClientErrorMessage(e, 'Datalink Preview');

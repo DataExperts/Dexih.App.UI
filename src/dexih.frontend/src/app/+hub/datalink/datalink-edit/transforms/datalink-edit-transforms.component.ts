@@ -68,7 +68,6 @@ export class DatalinkEditTransformsComponent implements OnInit, OnDestroy {
                     if (this._transformsChange) { this._transformsChange.unsubscribe(); }
                     this._transformsChange = this.datalinkForm.controls.dexihDatalinkTransforms.valueChanges
                         .subscribe(() => this.refreshTransforms());
-
                 }
 
 
@@ -99,7 +98,8 @@ export class DatalinkEditTransformsComponent implements OnInit, OnDestroy {
             if (type) {
                 icon = type.icon
             }
-            datalinkTransforms.push({transform: transform, icon: icon});
+            let name = this.hubCache.getTransformName(transform.value);
+            datalinkTransforms.push({transform: transform, icon: icon, name: name});
         });
 
         this.datalinkTransforms = datalinkTransforms;

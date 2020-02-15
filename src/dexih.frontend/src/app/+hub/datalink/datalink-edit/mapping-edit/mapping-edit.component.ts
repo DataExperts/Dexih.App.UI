@@ -8,7 +8,7 @@ import { AuthService } from '../../../../+auth/auth.service';
 import { FormGroup } from '@angular/forms';
 import { compare, aggregates } from '../../../hub.query.models';
 import { InputOutputColumns } from '../../../hub.lineage.models';
-import { eTransformItemType, DexihDatalinkColumn, eAggregate, eCompare, DexihDatalinkTransformItem, eTypeCode } from '../../../../shared/shared.models';
+import { eTransformItemType, DexihDatalinkColumn, eAggregate, eCompare, DexihDatalinkTransformItem, eTypeCode, DexihDatalinkTarget, DexihTable, DexihTableColumn } from '../../../../shared/shared.models';
 
 @Component({
   selector: 'mapping-edit',
@@ -21,6 +21,7 @@ export class MappingEditComponent implements OnInit, OnDestroy {
 
   private _subscription: Subscription;
   private _formChangesObserve: Subscription;
+  private _saveSubscription: Subscription;
 
   datalinkTransformItemKey: number;
   datalinkKey: number;
@@ -44,7 +45,8 @@ export class MappingEditComponent implements OnInit, OnDestroy {
   inputColumns: Array<{group: string, columns: Array<DexihDatalinkColumn>}> = [];
   outputColumns: Array<DexihDatalinkColumn>;
   joinColumns: Array<DexihDatalinkColumn>;
-
+  datalinkTargets: Array<DexihDatalinkTarget>;
+  outputTables: Array<DexihTable>;
   showInput = true;
   showOutput = true;
 
@@ -152,6 +154,19 @@ export class MappingEditComponent implements OnInit, OnDestroy {
             this.joinColumns = this.datalinkTransformForm.value.joinDatalinkTable.dexihDatalinkColumns;
           }
 
+          this.datalinkTargets = this.datalinkForm.controls.dexihDatalinkTargets.value;
+          let table = new DexihTable() 
+          table.name = "Output Columns";
+          table.dexihTableColumns = this.datalinkTransformForm.controls.runTime.value.transformColumns;
+          this.outputTables = [table];
+
+          if(this.datalinkTargets) {
+              this.datalinkTargets.forEach(target => {
+                  this.outputTables.push(target['table']);
+              });
+          }
+
+
           if (this.datalinkTransformItemKey) {
             this.datalinkTransformItemForm = this.editDatalinkService
               .getDatalinkTransformItem(this.datalinkTransformForm, this.datalinkTransformItemKey);
@@ -177,6 +192,13 @@ export class MappingEditComponent implements OnInit, OnDestroy {
             this.getErrors();
           })
         }
+
+        if (this._saveSubscription) { this._saveSubscription.unsubscribe(); }
+        this._saveSubscription = this.editDatalinkService.savingDatalink.subscribe(value => {
+            if(value) {
+                this.apply();
+            }
+        });
       });
     } catch (e) {
       this.hubService.addHubClientErrorMessage(e, 'Edit Mapping Function');
@@ -186,6 +208,7 @@ export class MappingEditComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this._formChangesObserve) { this._formChangesObserve.unsubscribe(); }
     if (this._subscription) { this._subscription.unsubscribe(); }
+    if (this._saveSubscription) { this._saveSubscription.unsubscribe(); }
   }
 
   cancel() {

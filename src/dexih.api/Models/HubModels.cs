@@ -182,6 +182,7 @@ namespace dexih.api.Models
     public class PreviewDatalink: PreviewBase
     {
         public long DatalinkKey { get; set; }
+        public bool PreviewUpdates { get; set; }
     }
 
     public class PreviewListOfValuesKey: PreviewBase

@@ -19,7 +19,7 @@ export class DatalinkEditSaveButtonComponent implements OnInit, OnDestroy {
     private cancelToken: CancelToken = new CancelToken();
 
     datalinkForm: FormGroup;
-    savingDatalink = new BehaviorSubject(false);
+    
 
     hubCache: HubCache;
     eUpdateStrategy = eUpdateStrategy;
@@ -53,7 +53,7 @@ export class DatalinkEditSaveButtonComponent implements OnInit, OnDestroy {
     }
 
     async saveDatalink(saveAs = false) {
-        this.savingDatalink.next(true);
+        this.editDatalinkService.savingDatalink.next(true);
 
         if (this.datalinkForm.controls.dexihDatalinkTargets.dirty) {
             let targets = <FormArray>this.datalinkForm.controls.dexihDatalinkTargets;
@@ -78,7 +78,7 @@ export class DatalinkEditSaveButtonComponent implements OnInit, OnDestroy {
                 }
 
                 this.editDatalinkService.hubFormsService.save(false, saveAs);
-                this.savingDatalink.next(false);
+                this.editDatalinkService.savingDatalink.next(false);
             }
 
             // if no tables with key > 0 they are all new, so no need to prompt.
@@ -94,11 +94,11 @@ export class DatalinkEditSaveButtonComponent implements OnInit, OnDestroy {
                     if (confirm) {
                         await doSave();
                     }
-                }).catch(() => this.savingDatalink.next(false))
+                }).catch(() => this.editDatalinkService.savingDatalink.next(false))
             }
         } else {
             this.editDatalinkService.hubFormsService.save(false, saveAs);
-            this.savingDatalink.next(false);
+            this.editDatalinkService.savingDatalink.next(false);
         }
     }
 
@@ -149,13 +149,13 @@ export class DatalinkEditSaveButtonComponent implements OnInit, OnDestroy {
                 .then(confirm => {
                     if (confirm) {
                         this.saveDatalink();
-                        this.savingDatalink.toPromise().then(value => {
+                        this.editDatalinkService.savingDatalink.toPromise().then(value => {
                             if (value) {
                                 this.hubService
                                     .runDatalinks([this.datalinkForm.controls.key.value], truncateTarget, resetIncremental
                                         , null, null, null, this.cancelToken);
                             }
-                        })
+                        });
                     }
                 });
         } else {

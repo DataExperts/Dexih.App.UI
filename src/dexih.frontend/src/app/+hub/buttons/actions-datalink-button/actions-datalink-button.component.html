@@ -21,7 +21,8 @@
     
             <li class="list-group-item list-group-item-heading list-group-item-info">Operations</li>
             <li *ngIf="datalink">
-                <a class="dropdown-item" [routerLink]="['datalink-preview', datalinks[0].key]" queryParamsHandling="merge"  title="Preview the data output when the datalink is run."><i class="fa fa-table"></i> Preview Datalink</a>
+                <a class="dropdown-item" [routerLink]="['datalink-preview', datalinks[0].key, false]" queryParamsHandling="merge"  title="Preview the data output from the datalink."><i class="fa fa-table"></i> Preview Datalink</a>
+                <a class="dropdown-item" [routerLink]="['datalink-preview', datalinks[0].key, true]" queryParamsHandling="merge"  title="Preview the data changes when the datalink is run."><i class="fa fa-table"></i> Preview Datalink (changes)</a>
                 <a class="dropdown-item" *ngFor="let table of targetTables" [routerLink]="['table-preview', table.key]" queryParamsHandling="merge" [title]="'Preview the target table ' + table.name"><i class="fa fa-table"></i> Preview {{table.name}}</a>
             </li>
             <li><a class="dropdown-item" *ngIf="datalinks.length == 1" [routerLink]="['results']" [queryParams]="{datalinkKeys: [datalinks[0].key]}" title="Show the execution history "><i class="fa fa-history"></i> Execution History</a></li>

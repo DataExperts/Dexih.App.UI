@@ -28,6 +28,8 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
     private _subscription: Subscription;
     private _loadStrategySubscription: Subscription;
     private _tableFormSubscription: Subscription;
+    private _saveSubscription: Subscription;
+
     private cancelToken: CancelToken = new CancelToken();
 
     public eMappingStatus = eMappingStatus;
@@ -158,6 +160,13 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
 
                     this.logger.LogC(() => `ngOnInit - completed`, eLogLevel.Trace);
                 }
+
+                if (this._saveSubscription) { this._saveSubscription.unsubscribe(); }
+                this._saveSubscription = this.editDatalinkService.savingDatalink.subscribe(value => {
+                    if(value) {
+                        this.apply();
+                    }
+                });
             });
         } catch (e) {
             this.hubService.addHubClientErrorMessage(e, 'Edit Target Table');
@@ -168,6 +177,7 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
         if (this._subscription) { this._subscription.unsubscribe(); }
         if (this._loadStrategySubscription) { this._loadStrategySubscription.unsubscribe(); }
         if (this._tableFormSubscription) { this._tableFormSubscription.unsubscribe(); }
+        if (this._saveSubscription) { this._saveSubscription.unsubscribe(); }
     }
 
     canDeactivate(): Promise<boolean> {

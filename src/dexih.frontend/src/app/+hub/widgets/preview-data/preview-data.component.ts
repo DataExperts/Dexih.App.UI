@@ -19,6 +19,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
     @Input() table: DexihTable;
     @Input() datalink: DexihDatalink;
     @Input() datalinkTransformKey: number;
+    @Input() previewUpdates = false;
 
     private _subscription: Subscription;
 
@@ -184,7 +185,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
             switch (this.viewSource) {
                 case eDataObjectType.Datalink:
                     if (this.key) {
-                        previewQuery = this.hubService.previewDatalinkKeyData(this.key, this.selectQuery,
+                        previewQuery = this.hubService.previewDatalinkKeyData(this.key, this.previewUpdates, this.selectQuery,
                             this.inputColumns, this.parameters, this.cancelToken);
                     } else {
                         if (this.datalink) {

@@ -10,6 +10,7 @@ import { Message, CancelToken } from '../../../+auth/auth.models';
 import { HubCache } from '../../hub.models';
 import { eTransformType, DexihDatalinkColumn, eParameterDirection, eTypeCode, DexihDatalinkTransformItem,
     DexihDatalinkTransform, DexihDatalinkTable, eTransformItemType, eSourceType } from '../../../shared/shared.models';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 // contains shared objects used to edit the datalink.
 
@@ -23,6 +24,9 @@ export class DatalinkEditService implements OnInit, OnDestroy {
     public datalinkKey: number;
 
     public logger = new LogFactory('datalink-edit.service');
+
+    // used to stop save occuring when changing functions and target ables.
+    savingDatalink = new BehaviorSubject(false);
 
     constructor(
         private hubService: HubService,
@@ -39,6 +43,10 @@ export class DatalinkEditService implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.hubFormsService.ngOnDestroy();
+    }
+
+    savingDataLinkObservable(): Observable<boolean> {
+        return this.savingDatalink.asObservable();
     }
 
     getValidationTransform(): FormGroup {
@@ -271,8 +279,8 @@ export class DatalinkEditService implements OnInit, OnDestroy {
         newDatalinkTransform.transformType = transform.transformType;
         newDatalinkTransform.transformAssemblyName = transform.transformAssemblyName;
         newDatalinkTransform.transformClassName = transform.transformClassName;
-        newDatalinkTransform.name = transform.name;
-        newDatalinkTransform.description = transform.description;
+        // newDatalinkTransform.name = transform.name;
+        // newDatalinkTransform.description = transform.description;
         newDatalinkTransform.dexihDatalinkTransformItems = new Array<DexihDatalinkTransformItem>();
         newDatalinkTransform.isValid = true;
 

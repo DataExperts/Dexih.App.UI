@@ -41,7 +41,7 @@
 						</form-select>
 					</section>
 					<section *ngIf="showOutput" class="form-group col-md-4">
-						<form-select label="Output Column" formControlName="targetDatalinkColumn" [items]="outputColumns"
+						<form-select label="Output Column" formControlName="targetDatalinkColumn" [items]="outputTables" parentName="name" childItems="dexihTableColumns"
 							itemKey="key" itemName="logicalName" note="Enter new column, or select existing"
 							[enableKeySelect]="false" (textValueChange)="updateNewColumn($event)" [enableTextEntry]="true"
 							textEntryNote="Enter new column name, or select existing" [errors]="targetErrors">

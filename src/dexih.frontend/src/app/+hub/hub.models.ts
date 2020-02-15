@@ -4,10 +4,9 @@ import { DexihHubVariable, DexihHub, DexihFunctionParameter, DexihConnection, De
     DexihTableColumn, DexihDatalinkTransform, DexihColumnValidation, DexihFileFormat, DexihDatalink,
     DexihDatalinkTest, DexihDatajob, DexihView, DexihDashboard, DexihApi, DexihCustomFunction,
     DexihTrigger, TransformProperties, eStatus, eParameterDirection, eConnectionPurpose, eDeltaType,
-    eSourceType, eImportAction, eSecurityFlag, eDatalinkType, eUpdateStrategy, eFailAction, eInvalidAction,
+    eSourceType, eImportAction, eSecurityFlag, eUpdateStrategy, eFailAction, eInvalidAction,
     eFunctionCaching, eCleanAction, eDuplicateStrategy, eRunStatus, ePermission, eTypeCode,
-    eTransformWriterMethod, eTransformItemType, eFunctionType, InputColumn, SelectQuery, DexihColumnBase,
-    eDataObjectType, eSharedObjectType, eSortDirection, eSeriesGrain, eDayOfWeek, ChartConfig, eLOVObjectType, DexihListOfValues, DexihParameterBase, InputParameterBase, DexihDatalinkTestStep } from '../shared/shared.models';
+    eTransformWriterMethod, eTransformItemType, eFunctionType, eDataObjectType, eSharedObjectType, eSortDirection, eSeriesGrain, eDayOfWeek, ChartConfig, eLOVObjectType, DexihListOfValues, InputParameterBase, DexihDatalinkTestStep, eTransformTypeItems, eTransformType } from '../shared/shared.models';
 
 // export class RemoteMessage {
 //     public messageId: string;
@@ -340,6 +339,26 @@ export class HubCache {
         let hub = this.hub;
         let table = hub.dexihTables.find(c => c.key === tableKey);
         return table;
+    }
+
+    public getTransformName(transform: DexihDatalinkTransform): string {
+        if (transform.name) {
+            return transform.name;
+        }
+
+        let name = eTransformTypeItems[transform.transformType].name;
+
+        switch(transform.transformType) {
+            case eTransformType.Join:
+            case eTransformType.Lookup:
+                name = name + ' ' + transform.joinDatalinkTable.name;
+        }
+
+        if(transform.nodeDatalinkColumn) {
+            name = name + ' at ' + transform.nodeDatalinkColumn.name
+        }
+
+        return name;
     }
 
     public getColumn(columnKey: number) {

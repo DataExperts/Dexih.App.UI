@@ -202,7 +202,7 @@ export class ApiEditComponent implements OnInit, OnDestroy {
   refresh() {
     let apiForm = this.formsService.currentForm;
     if (apiForm.controls.sourceType.value === eSourceType.Datalink) {
-      this.hubService.previewDatalinkKeyData(apiForm.controls.sourceDatalinkKey.value,
+      this.hubService.previewDatalinkKeyData(apiForm.controls.sourceDatalinkKey.value, false,
         this.selectQuery, this.inputColumns, apiForm.controls.parameters.value, this.cancelToken).then((result) => {
         this.refreshDataSubject.next();
         this.columns = result.columns;

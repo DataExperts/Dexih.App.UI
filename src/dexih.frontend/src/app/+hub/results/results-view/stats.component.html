@@ -100,7 +100,6 @@
             <div class="row rounded text-white bg-secondary">
                 <ng-template ngFor let-item [ngForOf]="auditResult.performanceSummary">
                         <div class="col border border-white">{{item.transformName}}</div>
-                        <div class="col border border-white">{{item.action}}</div>
                         <div class="col border border-white">{{item.seconds == 0 ? 'N/A' : ((item.rows / item.seconds) | number: '1.2-2')}} rows/second</div>
                         <div class="w-100"></div>
                 </ng-template>                    

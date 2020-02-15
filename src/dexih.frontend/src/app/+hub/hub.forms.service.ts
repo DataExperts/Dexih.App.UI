@@ -1586,9 +1586,9 @@ export class HubFormsService implements OnDestroy {
       'datalinkTransformKey': [transform.key, [
       ]],
       'name': [transform.name, [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(50),
+        // Validators.required,
+        // Validators.minLength(3),
+        // Validators.maxLength(50),
       ]],
       'datalinkKey': [transform.datalinkKey, [
         Validators.required

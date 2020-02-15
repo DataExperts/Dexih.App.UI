@@ -16,6 +16,7 @@ import { eTypeCode, eParameterDirection, DexihDatalinkColumn } from '../../../..
 })
 export class DatalinkColumnEditComponent implements OnInit, OnChanges, OnDestroy {
     private _subscription: Subscription;
+    private _saveSubscription: Subscription;
 
     private hubCache: HubCache;
     public pageTitle: string;
@@ -66,6 +67,13 @@ export class DatalinkColumnEditComponent implements OnInit, OnChanges, OnDestroy
 
                 this.initializeForm();
             });
+
+            if (this._saveSubscription) { this._saveSubscription.unsubscribe(); }
+            this._saveSubscription = this.editDatalinkService.savingDatalink.subscribe(value => {
+                if(value) {
+                    this.applyExit();
+                }
+            });
         } catch (e) {
             this.hubService.addHubClientErrorMessage(e, 'Datalink column edit');
         }
@@ -79,6 +87,7 @@ export class DatalinkColumnEditComponent implements OnInit, OnChanges, OnDestroy
 
     ngOnDestroy() {
         if (this._subscription) { this._subscription.unsubscribe(); }
+        if (this._saveSubscription) { this._saveSubscription.unsubscribe(); }
     }
 
     // searches the datalink and transforms for a column

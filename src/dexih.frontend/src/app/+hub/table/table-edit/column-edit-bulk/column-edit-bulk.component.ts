@@ -1,21 +1,25 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
-import {  deltaTypes, securityFlags } from '../../../hub.models';
+import {  deltaTypes, securityFlags, HubCache } from '../../../hub.models';
 import { FormsService } from '../../../../shared/forms/forms.service';
 import { HubFormsService } from '../../../hub.forms.service';
 import { TypeCodes } from '../../../hub.remote.models';
 import { DexihTableColumn } from '../../../../shared/shared.models';
+import { HubService } from '../../../hub.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'column-edit-bulk',
     templateUrl: 'column-edit-bulk.component.html'
 })
 
-export class ColumnEditBulkComponent implements OnInit {
+export class ColumnEditBulkComponent implements OnInit, OnDestroy {
     @Input() columns: DexihTableColumn[];
     @Input() columnsFormArray: FormArray;
 
     @Output() updated = new EventEmitter();
+
+    subscription: Subscription;
 
     public properties = [
         {name: 'Group Name', property: 'group'},
@@ -29,16 +33,26 @@ export class ColumnEditBulkComponent implements OnInit {
         {name: 'Is Unicode', property: 'isUnicode'},
     ];
 
+    hubCache: HubCache;
     property: string;
     bulkColumn: FormGroup;
     typeCodes = TypeCodes;
     deltaTypes = deltaTypes;
     securityFlags = securityFlags;
 
-    constructor(private formsService: HubFormsService) { }
+    constructor(private hubService: HubService,
+        private formsService: HubFormsService) { }
 
     ngOnInit() {
         this.bulkColumn = this.formsService.tableColumn([], new DexihTableColumn());
+
+        this.subscription = this.hubService.getHubCacheObservable().subscribe(hubCache => {
+            this.hubCache = hubCache;
+        });
+    }
+
+    ngOnDestroy() {
+        if (this.subscription) {this.subscription.unsubscribe(); }
     }
 
     getColumnForm(column: DexihTableColumn): FormGroup {
