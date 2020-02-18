@@ -72,6 +72,7 @@
         [dataObservable]="stepTableData" (rowClick)='editDatalinkStep($event)'>
         <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
             <dexih-button-delete (click)="deleteDatalinkSteps(items)"></dexih-button-delete>
+            <dexih-button class="ml-1" (click)="updateDependencies(items)" text="Reset Dependencies"></dexih-button>
         </ng-template>
 
         <ng-template #selectedItemAction select="selectedItemAction" let-item="item">

@@ -6,7 +6,7 @@ import { AuthService } from '../../../../+auth/auth.service';
 import { HubFormsService } from '../../../hub.forms.service';
 import { FormGroup, FormArray } from '@angular/forms';
 import { HubCache } from '../../../hub.models';
-import { DexihDatalink, eSharedObjectType, DexihDatalinkStep } from '../../../../shared/shared.models';
+import { DexihDatalink, eSharedObjectType, DexihDatalinkStep, eDatalinkType } from '../../../../shared/shared.models';
 
 @Component({
     selector: 'datajob-add-steps',
@@ -21,8 +21,8 @@ export class DatajobAddStepsComponent implements OnInit, OnDestroy {
     hasChanged = false;
 
     columns = [
-        { name: 'datalinkType', title: 'Datalink Type', format: '' },
         { name: 'name', title: 'Name', format: '' },
+        { name: 'datalinkType', title: 'Datalink Type', enum: eDatalinkType, format: 'Enum' },
         { name: 'sourceTableName', title: 'Source Table', format: '' },
         { name: 'targetTableName', title: 'Target Table', format: '' },
         { name: 'updateDate', title: 'Last Updated', format: 'DateTime' },
@@ -79,7 +79,7 @@ export class DatajobAddStepsComponent implements OnInit, OnDestroy {
                 newDatalinks = this.hubCache.hub.dexihDatalinks;
                 newDatalinks.forEach(d => {
                     let sourceTable = this.hubCache.getTable(d.sourceDatalinkTable.sourceTableKey);
-                    d['sourceTableName'] = sourceTable ? sourceTable.name : 'Error, not found';
+                    d['sourceTableName'] = sourceTable ? sourceTable.name : 'No source table';
                     d['targetTableName'] = d.dexihDatalinkTargets.map(target => {
                         let table = this.hubCache.getTable(target.tableKey);
                         if (table) {

@@ -511,6 +511,8 @@ export class HubCache {
             return results;
         }
 
+        search = search.toLowerCase();
+
         let searchAll = searchObject === eSearchObjectType.All;
 
         this.hub.dexihConnections.forEach(connection => {
@@ -1858,7 +1860,7 @@ export class DexihInputParameter {
 
 //     public fileFormat: DexihFileFormat = null;
 
-//     public entityStatus: EntityStatus;
+//     public entityStatus: EntityStatus; 
 
 //     public dexihTableColumns: Array<DexihTableColumn>;
 

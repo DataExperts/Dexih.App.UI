@@ -5,7 +5,7 @@ import { HubFormsService } from '../../../hub.forms.service';
 import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
 import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import { HubCache } from '../../../hub.models';
-import { DexihConnection, eFailAction, DexihDatalinkStep, DexihDatalinkDependency, DexihDatalinkStepColumn, DexihTrigger } from '../../../../shared/shared.models';
+import { DexihConnection, eFailAction, DexihDatalinkStep, DexihDatalinkDependency, DexihDatalinkStepColumn, DexihTrigger, DexihDatalinkTarget, DexihDatalinkTable, eSourceType, DexihDatalink } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -119,6 +119,7 @@ export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
         stepData.push({
           key: step.key,
           name: step.name,
+          datalinkKey: datalink.key,
           datalink: datalink ? datalink.name : 'Not specified',
           dependencies: this.getDependencies(step.dexihDatalinkDependencies),
           inputs: this.getInputs(step.dexihDatalinkStepColumns),
@@ -212,5 +213,86 @@ export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
   }
 
 
+  updateDependencies(steps: Array<DexihDatalinkStep>) {
+    let stepsArray = <FormArray>this.mainForm.controls.dexihDatalinkSteps;
+    let allSteps = stepsArray.value;
+
+    let stepTargets: Array<{key: number, tables: Array<number>}> = [];
+    let minKey = -1;
+
+    allSteps.forEach(step => {
+      stepTargets.push( {key: step.key, tables:this.getDatalinkTargetTables(step.datalinkKey)});
+    });
+
+    steps.forEach(step => {
+      let stepControl = <FormGroup> stepsArray.controls.find(c => c.value.key === step.key);
+      let dependencies = <FormArray> stepControl.controls['dexihDatalinkDependencies'];
+      dependencies.clear();
+
+      let sourceTables = this.getDatalinkSourceTables(step.datalinkKey);
+
+      stepTargets.forEach(stepTarget => {
+        for( let t of stepTarget.tables) {
+          if (sourceTables.indexOf(t) >= 0) {
+            let dep = new DexihDatalinkDependency();
+            dep.key = minKey;
+            dep.datalinkStepKey =step.key;
+            dep.dependentDatalinkStepKey = stepTarget.key;
+            dependencies.push(this.formService.datalinkDependencyFormGroup(dep));
+            minKey--;
+            break;
+          }
+        }
+      });
+
+    });
+
+    this.updateSteps();
+  }
+
+  getDatalinkTargetTables(datalinkKey: number): Array<number> {
+    let datalink = this.hubCache.hub.dexihDatalinks.find(c => c.key === datalinkKey);
+    if (!datalink) { return []; }
+
+    return datalink.dexihDatalinkTargets.map(c => c.tableKey);
+  }
+
+  // gets any dependent source tables from the given datalink key.
+  getDatalinkSourceTables(datalinkKey: number): Array<number> {
+    let datalink = this.hubCache.hub.dexihDatalinks.find(c => c.key === datalinkKey);
+    if (!datalink) { return []; }
+
+    let tables = this.getDatalinkTable(datalink.sourceDatalinkTable);
+
+    datalink.dexihDatalinkTransforms.forEach(transform => {
+      if (transform.joinDatalinkTable) {
+        let joinTables = this.getDatalinkTable(transform.joinDatalinkTable);
+        joinTables.forEach(t => {
+          if (tables.indexOf(t) < 0) {
+            tables.push(t);
+          }
+        });
+      }
+    });
+    
+    return tables;
+  }
+
+  getDatalinkTable(datalinkTable: DexihDatalinkTable) : Array<number> {
+    if (!datalinkTable) {
+      return [];
+    }
+
+    switch(datalinkTable.sourceType) {
+      case eSourceType.Table: {
+        return [datalinkTable.sourceTableKey];
+      }
+      case eSourceType.Datalink: {
+        return this.getDatalinkSourceTables(datalinkTable.sourceDatalinkKey);
+      }
+    }
+
+    return [];
+  }
 
 }
