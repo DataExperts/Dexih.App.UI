@@ -91,7 +91,7 @@ export class ResultsViewComponent implements OnInit, OnDestroy {
         if (this._transformWriterResultChangeSubscription) { this._transformWriterResultChangeSubscription.unsubscribe(); }
         this._transformWriterResultChangeSubscription = this.hubService.getTransformWriterResultChangeObservable()
         .subscribe(writerResult => {
-            if (writerResult.auditConnectionKey === this.auditResult.auditConnectionKey &&
+            if (this.auditResult && writerResult.auditConnectionKey === this.auditResult.auditConnectionKey &&
                     writerResult.auditKey === this.auditResult.auditKey) {
                 this.auditResult = writerResult;
             }

@@ -1266,14 +1266,22 @@ export class HubService implements OnInit, OnDestroy {
         resetIncremental: boolean, resetIncrementalValue: string, inputParameters: InputParameter[],
         cancelToken: CancelToken): Promise<boolean> {
 
-            return this.hubPostRemote<boolean>('/api/Hub/RunDatajobs', {
+            var data = {
                 connectionId: this.authService.getWebSocketConnectionId(),
                 datajobKeys: datajobs.map(d => d.key),
                 truncateTarget: truncateTarget,
                 resetIncremental: resetIncremental,
                 resetIncrementalValue: resetIncrementalValue,
                 inputParameters: inputParameters
-            }, 'Running datajob(s)...', cancelToken);
+            };
+
+            if (truncateTarget) {
+                return this.hubPostRemoteConfirm('/api/Hub/RunDatajobs', data, 'Running datahibs...',
+                'This action will truncate all data in the target tables for datalinks in this job.  ' +
+                '<p></p><p></p>Are you sure you want to continue?', cancelToken);
+            } else {
+                return this.hubPostRemote('/api/Hub/RunDatajobs', data, 'Running datajobs...', cancelToken);
+            }
     }
 
     deactivateDatajobs(datajobKeys: Array<number>, cancelToken: CancelToken): Promise<boolean> {

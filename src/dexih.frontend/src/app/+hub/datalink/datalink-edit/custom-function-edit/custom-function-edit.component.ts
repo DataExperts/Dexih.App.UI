@@ -256,6 +256,7 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
       newParameter.name = '';
       newParameter.datalinkColumn = null;
       newParameter.value = null;
+      newParameter.dataType = eTypeCode.String;
       newParameter.direction = direction;
       newParameter.rank = 0;
       newParameter.isValid = true;
@@ -336,9 +337,10 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
         this.returnParameterValue = null;
         this.outputParameterValues.forEach(c => c = null );
       }
-    }).catch(() => {
+    }).catch(reason => {
       this.returnParameterValue = null;
       this.outputParameterValues.forEach(c => c = null );
+      this.hubService.addHubMessage(reason);
     });
   }
 }

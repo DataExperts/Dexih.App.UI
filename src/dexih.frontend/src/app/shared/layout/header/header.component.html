@@ -12,7 +12,7 @@
     <!-- input: search field -->
     <form *ngIf="this.hubCache" #searchForm="ngForm" (ngSubmit)="onSubmit()" class="d-none d-md-inline form-inline">
         <div class="input-group">
-            <input [(ngModel)]="searchString" class="form-control" type="text" name="param" required placeholder="Search...">
+            <input [(ngModel)]="searchString" class="form-control" type="text" name="param" required placeholder="Search metadata...">
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary text-white" type="submit">
                     <i class="fa fa-search"></i>

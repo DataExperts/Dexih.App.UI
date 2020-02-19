@@ -8,6 +8,20 @@ Here is a simple example of a custom function that concatenates the first_name/l
 return first_name + " " + last_name;
 ```
 
+### Syntax
+
+There are two syntaxes which can be used for a custom function.
+
+For simple one-line calculations, an `=` followed by the formula can be used.
+```csharp
+=amount * quantity
+```
+
+For more advanced functions, multiple c# lines seperated with `;` and finishing with a `return` can be used.
+```csharp
+var total = amount * quantity;
+return total;
+```
 
 #### Caching within a function
 
