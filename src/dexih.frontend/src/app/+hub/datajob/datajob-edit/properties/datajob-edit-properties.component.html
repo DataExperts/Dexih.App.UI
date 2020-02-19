@@ -71,8 +71,9 @@
     <dexih-table [enableMultiSelect]="true" [enableManualSort]="true" (onSortChanged)="stepSortChanged($event)" sortColumn="position" [columns]="stepColumns"
         [dataObservable]="stepTableData" (rowClick)='editDatalinkStep($event)'>
         <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-            <dexih-button-delete (click)="deleteDatalinkSteps(items)"></dexih-button-delete>
-            <dexih-button class="ml-1" (click)="updateDependencies(items)" text="Reset Dependencies"></dexih-button>
+            <dexih-button  iconClass="fa fa-magic" (click)="updateDependencies(items)" text="AutoSet Dependencies"></dexih-button>
+            <dexih-button class="ml-1" iconClass="fa fa-eraser" (click)="clearDependencies(items)" text="Clear Dependencies"></dexih-button>
+            <dexih-button-delete class="ml-1" (click)="deleteDatalinkSteps(items)"></dexih-button-delete>
         </ng-template>
 
         <ng-template #selectedItemAction select="selectedItemAction" let-item="item">

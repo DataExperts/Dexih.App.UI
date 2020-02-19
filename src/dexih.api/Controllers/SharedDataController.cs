@@ -63,7 +63,7 @@ namespace dexih.api.Controllers
             var canAccess = await repositoryManager.CanAccessSharedObjects(user, previewLov.HubKey, cancellationToken);
             if (!canAccess)
             {
-                throw new Exception($"Can not access shared objects in the hub with the key ${previewLov.HubKey}.");
+                throw new Exception($"Can not access shared objects in the hub with the key {previewLov.HubKey}.");
             }
 
             var listOfValuesKey = await repositoryManager.GetSharedListOfValueKey(previewLov.ObjectType, previewLov.ObjectKey, previewLov.ParameterName, cancellationToken);
@@ -81,7 +81,7 @@ namespace dexih.api.Controllers
             var canAccess = await repositoryManager.CanAccessSharedObjects(user, previewData.HubKey, cancellationToken);
             if (!canAccess)
             {
-                throw new Exception($"Can not access shared objects in the hub with the key ${previewData.HubKey}.");
+                throw new Exception($"Can not access shared objects in the hub with the key {previewData.HubKey}.");
             }
             
             string data;
@@ -184,7 +184,7 @@ namespace dexih.api.Controllers
             var canAccess = await repositoryManager.CanAccessSharedObjects(user, previewDashboard.HubKey, cancellationToken);
             if (!canAccess)
             {
-                throw new Exception($"Can not access shared objects in the hub with the key ${previewDashboard.HubKey}.");
+                throw new Exception($"Can not access shared objects in the hub with the key {previewDashboard.HubKey}.");
             }
 
             var dashboard = await repositoryManager.GetDashboard(previewDashboard.HubKey, previewDashboard.DashboardKey, cancellationToken);
@@ -231,7 +231,7 @@ namespace dexih.api.Controllers
             var canAccess = await repositoryManager.CanAccessSharedObjects(user, previewDashboard.HubKey, cancellationToken);
             if (!canAccess)
             {
-                throw new Exception($"Can not access shared objects in the hub with the key ${previewDashboard.HubKey}.");
+                throw new Exception($"Can not access shared objects in the hub with the key {previewDashboard.HubKey}.");
             }
 
             var dashboard = await repositoryManager.GetDashboard(previewDashboard.HubKey, previewDashboard.DashboardKey, cancellationToken);

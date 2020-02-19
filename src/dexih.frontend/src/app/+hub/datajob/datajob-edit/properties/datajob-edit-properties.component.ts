@@ -14,8 +14,6 @@ import { DexihConnection, eFailAction, DexihDatalinkStep, DexihDatalinkDependenc
 })
 export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
   private hubCache: HubCache;
-  public action: string; // new or edit
-  public pageTitle: string;
 
   private _subscription: Subscription;
 
@@ -63,21 +61,29 @@ export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    let isFirst = true;
+
     try {
       this._subscription = combineLatest(
-        this.route.data,
-        this.route.params,
         this.hubService.getHubCacheObservable(),
         this.formService.getCurrentFormObservable(),
       ).subscribe(result => {
-        this.hubCache = result[2];
-        this.mainForm = result[3];
+        this.hubCache = result[0];
+        this.mainForm = result[1];
 
         if (!this.hubCache.isLoaded()) { return; }
 
         this.managedConnections = this.hubCache.getManagedConnections();
         this.updateTriggers();
         this.updateSteps();
+
+        
+        // if this is first load of new form, then reset the dependencies.
+        if (this.mainForm.controls['key'].value <= 0 && isFirst) {
+          isFirst = false;
+          let steps = this.mainForm.controls['dexihDatalinkSteps'].value;
+          this.updateDependencies(steps);
+        }
 
       });
     } catch (e) {
@@ -212,6 +218,16 @@ export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
     this.updateSteps();
   }
 
+  clearDependencies(steps: Array<DexihDatalinkStep>) {
+    let stepsArray = <FormArray>this.mainForm.controls.dexihDatalinkSteps;
+    steps.forEach(step => {
+      let stepControl = <FormGroup> stepsArray.controls.find(c => c.value.key === step.key);
+      let dependencies = <FormArray> stepControl.controls['dexihDatalinkDependencies'];
+      dependencies.clear();
+    });
+
+    this.updateSteps();
+  }
 
   updateDependencies(steps: Array<DexihDatalinkStep>) {
     let stepsArray = <FormArray>this.mainForm.controls.dexihDatalinkSteps;
