@@ -49,44 +49,39 @@ namespace dexih.api.Services.Operations
         public string GitHubAccessToken { get; set; }
 
         private DateTime _lastApiCall = DateTime.MinValue;
-        private Dictionary<(string os, bool preRelease), VersionInfo> _latestVersions = new Dictionary<(string, bool), VersionInfo>();
+        private readonly Dictionary<(string os, bool preRelease), VersionInfo> _latestVersions = new Dictionary<(string, bool), VersionInfo>();
         
-        
-        public async Task<VersionInfo> RemoteAgentVersion(string os, bool preRelease)
+        public async Task<VersionInfo> RemoteAgentVersion(string os, bool preRelease, IHttpClientFactory httpClientFactory)
         {
-            await RefreshRemoteAgentVersions();
+            await RefreshRemoteAgentVersions(httpClientFactory);
             
             return _latestVersions[(os, preRelease)];
         }
 
-        private async Task RefreshRemoteAgentVersions()
+        private async Task RefreshRemoteAgentVersions(IHttpClientFactory httpClientFactory)
         {
             // limit the api calls to the github api to 10 minute to avoid rate limits
             if (DateTime.Now > _lastApiCall.AddMinutes(10))
             {
-                using (var httpClient = new HttpClient())
+                var request = new HttpRequestMessage(HttpMethod.Get, "https://api.github.com/repos/DataExperts/Dexih.App.Remote/releases");
+                request.Headers.Add("User-Agent", "Dexih Remote Agent");
+                var httpClient = httpClientFactory.CreateClient();
+                var response = await httpClient.SendAsync(request);
+                var releases = await JsonDocument.ParseAsync(await response.Content.ReadAsStreamAsync());
+
+                UpdateRemoteVersionInfo(releases.RootElement[0], true);
+
+                foreach (var release in releases.RootElement.EnumerateArray())
                 {
-                    httpClient.DefaultRequestHeaders.Add("User-Agent", "Dexih Remote Agent");
-                    var response =
-                        await httpClient.GetAsync(
-                            "https://api.github.com/repos/DataExperts/Dexih.App.Remote/releases");
-                    var releases = await JsonDocument.ParseAsync(await response.Content.ReadAsStreamAsync());
-
-                    UpdateRemoteVersionInfo(releases.RootElement[0], true);
-
-                    foreach (var release in releases.RootElement.EnumerateArray())
+                    if (!release.GetProperty("prerelease").GetBoolean())
                     {
-                        if (!release.GetProperty("prerelease").GetBoolean())
-                        {
-                            UpdateRemoteVersionInfo(release, false);
-                            break;
-                        }
+                        UpdateRemoteVersionInfo(release, false);
+                        break;
                     }
-                    
-                    _lastApiCall = DateTime.Now;
                 }
+                
+                _lastApiCall = DateTime.Now;
             }
-           
         }
         
         private void UpdateRemoteVersionInfo(JsonElement version, bool preRelease)
@@ -123,9 +118,9 @@ namespace dexih.api.Services.Operations
             }
         }
 
-        public async Task<IEnumerable<VersionInfo>> RemoteAgentVersions(bool preRelease)
+        public async Task<IEnumerable<VersionInfo>> RemoteAgentVersions(bool preRelease, IHttpClientFactory clientFactory)
         {
-            await RefreshRemoteAgentVersions();
+            await RefreshRemoteAgentVersions(clientFactory);
 
             var versionInfo = new List<VersionInfo>();
 

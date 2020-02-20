@@ -191,6 +191,8 @@ namespace dexih.api
 	        // A service that queue and processes background tasks.
 	        services.AddHostedService<QueuedHostedService>();
 	        services.AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>();
+	        
+	        services.AddHttpClient();
 
 	        // use the signalr service if specified.
 	        var builder = services.AddSignalR().AddJsonProtocol(options =>

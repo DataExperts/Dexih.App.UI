@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
@@ -45,7 +46,8 @@ namespace dexih.api.Controllers
             IRemoteAgents remoteServers,
             ILoggerFactory loggerFactory,
             ErrorLogger errorLogger,
-            ApplicationSettings applicationSettings)
+            ApplicationSettings applicationSettings,
+            IHttpClientFactory clientFactory)
         {
             _operations = operations;
             _signInManager = signInManager;
@@ -55,6 +57,7 @@ namespace dexih.api.Controllers
             _applicationSettings = applicationSettings;
             _webHostEnvironment = webHostEnvironment;
             _errorLogger = errorLogger;
+            _clientFactory = clientFactory;
         }
 
         private readonly IDexihOperations _operations;
@@ -65,6 +68,7 @@ namespace dexih.api.Controllers
         private readonly ApplicationSettings _applicationSettings;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly ErrorLogger _errorLogger;
+        private readonly IHttpClientFactory _clientFactory;
 
         // POST: /Account/RemoteLogin
         // Used by the job server to retrieve a Remote Communication guid.
@@ -678,7 +682,7 @@ chmod a+x dexih.remote.run.{os}.sh
         {
             try
             {
-                var versionInfo = await _applicationSettings.RemoteAgentVersion(os, preRelease.ToUpper() == "PRE");
+                var versionInfo = await _applicationSettings.RemoteAgentVersion(os, preRelease.ToUpper() == "PRE", _clientFactory);
                 return versionInfo.Version + '\n' + versionInfo.FileName + '\n' + versionInfo.Url;
             }
             catch (Exception e)
@@ -698,7 +702,7 @@ chmod a+x dexih.remote.run.{os}.sh
         [AllowAnonymous]
         public async Task<ActionResult> DownloadLatest(string os, string preRelease)
         {
-            var versionInfo = await _applicationSettings.RemoteAgentVersion(os, preRelease.ToUpper() == "PRE");
+            var versionInfo = await _applicationSettings.RemoteAgentVersion(os, preRelease.ToUpper() == "PRE", _clientFactory);
             if (versionInfo != null)
             {
                 return Redirect(versionInfo.Url);

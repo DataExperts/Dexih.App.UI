@@ -88,11 +88,16 @@ namespace dexih.api.Controllers
 			}
 		}
 
+		public class LoginResult
+		{
+			public bool Success { get; set; }
+			public DexihActiveAgent ActiveAgent { get; set; }
+		}
 
 		// POST: /Reader/Login
 		///[HttpPost]
 		[AllowAnonymous]
-		public async Task<DexihActiveAgent> Login(string user, string password, string hubName, CancellationToken cancellationToken)
+		public async Task<LoginResult> Login(string user, string password, string hubName, CancellationToken cancellationToken)
 		{
 			try
 			{
@@ -106,21 +111,20 @@ namespace dexih.api.Controllers
 							"Login failed due to invalid user/password or an an invalid account.");
 					}
 
-					var result = await _signInManager.PasswordSignInAsync(applicationUser, password, false,
-						lockoutOnFailure: false);
+					var result = await _signInManager.PasswordSignInAsync(applicationUser, password, false, lockoutOnFailure: false);
 
 					if (result.Succeeded)
 					{
 						if (string.IsNullOrEmpty(hubName))
 						{
-							return null;
+							return new LoginResult() {Success = true};
 						}
 						else
 						{
 							var hub = await IsAuthorizedHub(hubName, applicationUser, cancellationToken);
 							var remoteAgent =
 								await _remoteAgents.GetHubReaderRemoteAgent(hub.HubKey, _operations.RepositoryManager, cancellationToken);
-							return remoteAgent;
+							return new LoginResult() {Success = true, ActiveAgent = remoteAgent};
 						}
 					}
 

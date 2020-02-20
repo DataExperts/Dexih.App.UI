@@ -46,6 +46,7 @@ namespace dexih.api.Controllers
 	    private readonly IUserClaimsPrincipalFactory<ApplicationUser> _principalFactory;
         private readonly ICacheService _cache;
         private readonly ErrorLogger _errorLogger;
+        private readonly IHttpClientFactory _clientFactory;
 
         public AccountController(
             DexihSignInManager signInManager,
@@ -56,7 +57,8 @@ namespace dexih.api.Controllers
             IRemoteAgents remoteAgents,
             IUserClaimsPrincipalFactory<ApplicationUser> principalFactory,
             ICacheService cache,
-            ErrorLogger errorLogger
+            ErrorLogger errorLogger,
+            IHttpClientFactory clientFactory
             )
         {
             _signInManager = signInManager;
@@ -68,6 +70,7 @@ namespace dexih.api.Controllers
 	        _principalFactory = principalFactory;
             _cache = cache;
             _errorLogger = errorLogger;
+            _clientFactory = clientFactory;
         }
 
         private Task<ApplicationUser> GetApplicationUser(CancellationToken cancellationToken)
@@ -564,7 +567,7 @@ namespace dexih.api.Controllers
 
 	    private async Task<ExternalLoginResult> GoogleTokenVerification(string idToken)
 	    {
-		    using var client = new HttpClient();
+		    var client = _clientFactory.CreateClient();
 
 		    var apiResult = await client.GetAsync("https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + idToken);
 		    if (!apiResult.IsSuccessStatusCode)
@@ -613,9 +616,10 @@ namespace dexih.api.Controllers
 	    
 	    private async Task<ExternalLoginResult> MicrosoftTokenVerification(string authenticationToken)
 	    {
-		    using var client = new HttpClient();
-		    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authenticationToken);
-		    var apiResult = await client.GetAsync("https://graph.microsoft.com/v1.0/me");
+		    var client = _clientFactory.CreateClient();
+		    var request = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/me");
+		    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authenticationToken);
+		    var apiResult = await client.SendAsync(request);
 		    if (!apiResult.IsSuccessStatusCode)
 		    {
 			    throw new AccountControllerException("The microsoft authentication API could not be contacted for authentication.  Error: " + apiResult.ReasonPhrase);
@@ -625,7 +629,6 @@ namespace dexih.api.Controllers
 		    try
 		    {
 			    microsoftAuthModel = (await apiResult.Content.ReadAsStringAsync()).Deserialize<MicrosoftAuthModel>();
-
 		    }
 		    catch (Exception ex)
 		    {

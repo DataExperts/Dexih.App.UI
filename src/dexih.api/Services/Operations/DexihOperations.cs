@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using dexih.api.Services.BackgroundTasks;
@@ -22,11 +23,12 @@ namespace dexih.api.Services.Operations
 			ILoggerFactory loggerFactory,
 			ICacheService cacheService,
 			IHubContext<BrowserHub> browserContext,
-            IBackgroundTaskQueue backgroundTaskQueue
+            IBackgroundTaskQueue backgroundTaskQueue,
+            IHttpClientFactory clientFactory
 			)
         {
             Config = config;
-            RepositoryManager = new RepositoryManager(dbContext, userManager, cacheService, loggerFactory );
+            RepositoryManager = new RepositoryManager(dbContext, userManager, cacheService, loggerFactory, clientFactory );
             RepositoryManager.OnHubChange += SendHubChange;
 
             _browserContext = browserContext;
