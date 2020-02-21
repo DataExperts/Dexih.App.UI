@@ -16,7 +16,7 @@ export class ApiData {
    }
    
    export class ApplicationUser {
-    public id: string = '2689664c-962b-424c-8d60-7315f502914a';
+    public id: string = '932beb04-f497-4e13-b250-62488a119c4e';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -25,7 +25,7 @@ export class ApiData {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = '94e5b8c4-44fd-4038-917f-d88ba736a2c4';
+    public securityStamp: string = 'f35f5cf9-91ce-4738-b772-070523dbeea3';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -610,6 +610,7 @@ export class ApiData {
     public rowsEndAt: number = 1;
     public rowsIncrement: number = 1;
     public sourceType: eSourceType = eSourceType.Table;
+    public disableVersioning: boolean = true;
     public disablePushDown: boolean = false;
     public dexihDatalinkColumns: DexihDatalinkColumn[] = [];
     public key: number = 0;
@@ -701,6 +702,7 @@ export class ApiData {
     public transformClassName: string = null;
     public transformAssemblyName: string = null;
     public joinDuplicateStrategy: eDuplicateStrategy = eDuplicateStrategy.Abend;
+    public joinNotFoundStrategy: eJoinNotFoundStrategy = eJoinNotFoundStrategy.Abend;
     public entityStatus: EntityStatus = null;
     public dexihDatalinkTransformItems: DexihDatalinkTransformItem[] = [];
     public joinDatalinkTable: DexihDatalinkTable = null;
@@ -923,7 +925,6 @@ export class ApiData {
     public data: string = null;
     public gitHubLink: string = null;
     public isPrivate: boolean = true;
-    public hubKey: number = 0;
     public userId: string = null;
     public issueStatus: eIssueStatus = eIssueStatus.Open;
     public dexihIssueComments: DexihIssueComment[] = [];
@@ -931,6 +932,7 @@ export class ApiData {
     public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
     public isValid: boolean = true;
@@ -2540,6 +2542,18 @@ export class ApiData {
     {key: eIssueType.Feedback, name: 'Feedback', description: 'General Feedback'},
    ]
    
+   export enum eJoinNotFoundStrategy {
+    Abend = 0,
+    NullJoin = 1,
+    Filter = 2,
+   }
+   
+   export const eJoinNotFoundStrategyItems = [
+    {key: eJoinNotFoundStrategy.Abend, name: 'Abend', description: 'Abend Datalink'},
+    {key: eJoinNotFoundStrategy.NullJoin, name: 'NullJoin', description: 'Add Null Join'},
+    {key: eJoinNotFoundStrategy.Filter, name: 'Filter', description: 'Filter Row'},
+   ]
+   
    export enum eLoginProvider {
     Dexih = 1,
     Google = 2,
@@ -3109,5 +3123,4 @@ export class ApiData {
     {key: logLevel.Critical, name: 'Critical'},
     {key: logLevel.None, name: 'None'},
    ]
-   
    

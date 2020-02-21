@@ -9,7 +9,7 @@ import { FormGroup, FormArray } from '@angular/forms';
 import { LogFactory, eLogLevel } from '../../../../../logging';
 import { InputOutputColumns } from '../../../hub.lineage.models';
 import { eTransformType, eTransformItemType, DexihDatalinkColumn, DexihDatalinkTransform,
-    eTypeCode, DexihDatalinkTransformItem, eAggregate, eSortDirection } from '../../../../shared/shared.models';
+    eTypeCode, DexihDatalinkTransformItem, eAggregate, eSortDirection, eJoinNotFoundStrategyItems } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -36,6 +36,7 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
     eTransformType = eTransformType;
     eTransformItemType = eTransformItemType;
     duplicateStrategies = duplicateStrategies;
+    eJoinNotFoundStrategyItems = eJoinNotFoundStrategyItems;
 
     public allowMappingOutputs: boolean;
     inputColumns: Array<DexihDatalinkColumn>;

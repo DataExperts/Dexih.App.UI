@@ -24,7 +24,7 @@
 							[errors]="sourceErrors">
 						</form-select>
 					</section>
-					<section *ngIf="transformItemType == eTransformItemType.FilterPair" class="form-group col-md-4">
+					<section *ngIf="transformItemType == eTransformItemType.FilterPair || transformItemType == eTransformItemType.JoinPair" class="form-group col-md-4">
 						<form-select label="Compare" formControlName="filterCompare" [items]="compare" itemKey="key"
 							itemName="name">
 						</form-select>

@@ -6,7 +6,6 @@ import { DatalinkEditService } from '../datalink-edit.service';
 import { Subscription, combineLatest } from 'rxjs';
 import { InputOutputColumns } from '../../../hub.lineage.models';
 import { compare } from '../../../hub.query.models';
-import { filter } from 'rxjs/operators';
 import { DexihDatalinkTransform, DexihDatalinkTransformItem, eTransformItemType, eCompare,
     DexihDatalinkColumn, FunctionReference, eParameterDirection, eAggregate, eSortDirection } from '../../../../shared/shared.models';
 
@@ -120,7 +119,7 @@ export class MappingItemComponent implements OnInit {
         if (itemType.useJoin) { this.target = this.describeDatalinkColumn(item.joinDatalinkColumn); }
         if (itemType.useFilter) { this.target = this.columnOrValue(item.filterDatalinkColumn, item.filterValue)};
 
-        if (itemType.useFilter) {
+        if (itemType.useFilter || itemType.useJoin) {
             let filterCompare = item.filterCompare;
             if (filterCompare === null) { filterCompare = eCompare.IsEqual };
             this.compare = compare.find(c => c.key === filterCompare).name;

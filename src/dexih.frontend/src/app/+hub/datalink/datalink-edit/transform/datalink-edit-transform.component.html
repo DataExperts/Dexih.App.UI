@@ -40,12 +40,20 @@
     <form [formGroup]="datalinkTransformForm">
         <fieldset>
             <datalink-table [datalinkTableForm]="datalinkTransformForm.controls.joinDatalinkTable"></datalink-table>
-                
-            <section>
-                <form-select [label]="'Strategy when ' + eTransformType[this.datalinkTransformForm.value.transformType] + ' produces duplicate matches'" formControlName="joinDuplicateStrategy" [items]="duplicateStrategies"
-                    itemKey="key" itemName="name">
-                </form-select>
-            </section>
+
+            <div class="form-row">
+                <section class="form-group col-md-6">
+                    <form-select [label]="'Strategy when ' + eTransformType[this.datalinkTransformForm.value.transformType] + ' produces duplicate matches'" formControlName="joinDuplicateStrategy" [items]="duplicateStrategies"
+                        itemKey="key" itemName="name">
+                    </form-select>
+                </section>
+
+                <section class="form-group col-md-6">
+                    <form-select [label]="'Strategy when ' + eTransformType[this.datalinkTransformForm.value.transformType] + ' produces no match '" formControlName="joinNotFoundStrategy" [items]="eJoinNotFoundStrategyItems"
+                        itemKey="key" itemName="description">
+                    </form-select>
+                </section>
+            </div>
         </fieldset>
     </form>
 </dexih-widget-section>

@@ -28,6 +28,8 @@ export class DatalinkTableComponent implements OnInit, OnDestroy {
     public connectionTables: ConnectionTables[] = [];
     public datalinks: DexihDatalink[] = [];
 
+    public isVersioned = false;
+
     constructor(
         private hubService: HubService,
         public datalinkEditService: DatalinkEditService) {
@@ -47,11 +49,21 @@ export class DatalinkTableComponent implements OnInit, OnDestroy {
                 if (this.hubCache && this.hubCache.isLoaded() && this.datalinkTableForm) {
                     this.connectionTables = this.hubCache.getConnectionTables();
                     this.datalinks = this.hubCache.hub.dexihDatalinks;
+                    this.updateIsVersioned();
                 }
             });
 
         } catch (e) {
             this.hubService.addHubClientErrorMessage(e, 'Selected datalink table');
+        }
+    }
+
+    updateIsVersioned() {
+        if (this.datalinkTableForm.controls.sourceType.value === eSourceType.Table) {
+            var table = this.hubCache.getTable(this.datalinkTableForm.controls.sourceTableKey.value);
+            if (table) {
+                this.isVersioned = table.isVersioned
+            }
         }
     }
 
@@ -85,14 +97,14 @@ export class DatalinkTableComponent implements OnInit, OnDestroy {
             this.datalinkEditService.reBuildDatalinkTable(datalinkTable);
 
             this.datalinkEditService.fixMappings(this.datalinkEditService.hubFormsService.currentForm);
-            // let columns = datalinkTable.dexihDatalinkColumns;
-            // datalinkTable.dexihDatalinkColumns = [];
 
             this.datalinkTableForm.controls.name.setValue(datalinkTable.name);
             this.datalinkTableForm.controls.rowsEndAt.setValue(datalinkTable.rowsEndAt);
             this.datalinkTableForm.controls.rowsStartAt.setValue(datalinkTable.rowsStartAt);
             this.datalinkTableForm.controls.rowsIncrement.setValue(datalinkTable.rowsIncrement);
             this.datalinkTableForm.controls.sourceType.setValue(datalinkTable.sourceType);
+
+            this.updateIsVersioned();
 
             let tableColumnsForm = <FormArray>this.datalinkTableForm.controls.dexihDatalinkColumns;
             while (tableColumnsForm.length > 0) {
