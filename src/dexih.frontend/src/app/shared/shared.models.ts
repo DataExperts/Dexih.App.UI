@@ -16,7 +16,7 @@ export class ApiData {
    }
    
    export class ApplicationUser {
-    public id: string = '932beb04-f497-4e13-b250-62488a119c4e';
+    public id: string = 'b8fa1d52-938e-4deb-aab1-e72faa9961c4';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -25,7 +25,7 @@ export class ApiData {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = 'f35f5cf9-91ce-4738-b772-070523dbeea3';
+    public securityStamp: string = 'a44bc654-52d6-4536-bd9c-4f1552ef89b5';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -2300,13 +2300,15 @@ export class ApiData {
     First = 1,
     Last = 2,
     All = 3,
+    MergeValidDates = 4,
    }
    
    export const eDuplicateStrategyItems = [
-    {key: eDuplicateStrategy.Abend, name: 'Abend'},
-    {key: eDuplicateStrategy.First, name: 'First'},
-    {key: eDuplicateStrategy.Last, name: 'Last'},
-    {key: eDuplicateStrategy.All, name: 'All'},
+    {key: eDuplicateStrategy.Abend, name: 'Abend', description: 'Abend Datalink'},
+    {key: eDuplicateStrategy.First, name: 'First', description: 'First Row'},
+    {key: eDuplicateStrategy.Last, name: 'Last', description: 'Last Row'},
+    {key: eDuplicateStrategy.All, name: 'All', description: 'All Rows'},
+    {key: eDuplicateStrategy.MergeValidDates, name: 'MergeValidDates', description: 'Merge Valid To/From'},
    ]
    
    export enum eEnvironment {

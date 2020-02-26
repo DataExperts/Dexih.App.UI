@@ -1480,7 +1480,7 @@ namespace dexih.api.Controllers
 			    foreach (var functionParam in downloadFunctionCode.DatalinkTransformItem.DexihFunctionParameters
 				    .Where(
 					    c =>
-						    c.Direction == EParameterDirection.Input).OrderBy(c => c.Position))
+						    c.Direction == EParameterDirection.Input).OrderBy(c => c.Position).Where(c => c.IsValid))
 			    {
 				    if (index > downloadFunctionCode.TestValues.Length)
 				    {

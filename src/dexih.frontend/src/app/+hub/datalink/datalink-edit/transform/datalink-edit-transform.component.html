@@ -43,7 +43,7 @@
 
             <div class="form-row">
                 <section class="form-group col-md-6">
-                    <form-select [label]="'Strategy when ' + eTransformType[this.datalinkTransformForm.value.transformType] + ' produces duplicate matches'" formControlName="joinDuplicateStrategy" [items]="duplicateStrategies"
+                    <form-select [label]="'Strategy when ' + eTransformType[this.datalinkTransformForm.value.transformType] + ' produces duplicate matches'" formControlName="joinDuplicateStrategy" [items]="eDuplicateStrategyItems"
                         itemKey="key" itemName="name">
                     </form-select>
                 </section>

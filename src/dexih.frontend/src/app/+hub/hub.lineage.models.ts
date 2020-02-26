@@ -1,6 +1,6 @@
 import {HubCache, eMappingStatus } from './hub.models'
 import { DexihDatalinkColumn, eTypeCode, DexihDatalink, DexihDatalinkTable, eTransformItemType,
-    eTransformType, DexihTableColumn, DexihDatalinkTransform, DexihDatalinkTransformItem, DexihFunctionParameter, eDeltaType } from '../shared/shared.models';
+    eTransformType, DexihTableColumn, DexihDatalinkTransform, DexihDatalinkTransformItem, DexihFunctionParameter, eDeltaType, eDuplicateStrategy } from '../shared/shared.models';
 
 export enum eDatalinkObjectType {
     SourceTable,
@@ -342,11 +342,15 @@ export class InputOutputColumns {
                     joinColumns = transformColumns;
                 }
 
+
                 // set join position to high number so join columns are positioned after other columns.
                 let joinPos = 10000;
-                transform.joinDatalinkTable.dexihDatalinkColumns.forEach(c => {
-                    let jc = this.copyDatalinkColumn(c, joinPos++, transform.joinDatalinkTable.name);
-                    joinColumns.push(jc);
+                transform.joinDatalinkTable.dexihDatalinkColumns.sort((a, b) => a.position - b.position).forEach(c => {
+                    if(transform.joinDuplicateStrategy !== eDuplicateStrategy.MergeValidDates || (c.deltaType !== eDeltaType.ValidFromDate && c.deltaType !== eDeltaType.ValidToDate)) {
+                        
+                        let jc = this.copyDatalinkColumn(c, joinPos++, transform.joinDatalinkTable.name);
+                        joinColumns.push(jc);
+                    }
                 });
             }
 
@@ -356,7 +360,7 @@ export class InputOutputColumns {
                 let joinTable = transform.joinDatalinkTable;
 
                 // add any missing columns in the join table to the main table.
-                joinTable.dexihDatalinkColumns.forEach(concat => {
+                joinTable.dexihDatalinkColumns.sort((a, b) => a.position - b.position).forEach(concat => {
                     if (!transformColumns.find(c => c.name === concat.name)) {
                         transformColumns.push(this.copyDatalinkColumn(concat, pos++, 'Concatenate'));
                     }
@@ -403,6 +407,12 @@ export class InputOutputColumns {
                 columns.forEach(column => {
                     if (transformColumns.findIndex(c => c.name === column.name && c.columnGroup === column.columnGroup  ) < 0) {
                         let newColumn = this.copyDatalinkColumn(column, pos++, column.columnGroup)
+
+                        if(transform.joinDuplicateStrategy === eDuplicateStrategy.MergeValidDates && (newColumn.deltaType === eDeltaType.ValidFromDate || newColumn.deltaType === eDeltaType.ValidToDate)) {
+                            newColumn.columnGroup = 'merged';
+                            newColumn.position = 20000 + pos;
+                        }
+
                         transformColumns.push(newColumn);
                     }
                 });

@@ -2395,12 +2395,12 @@ export const CleanActions = [
 //     All = <any>'All',
 // }
 
-export const duplicateStrategies = [
-    {key: eDuplicateStrategy.Abend, name: 'Abend Datalink'},
-    {key: eDuplicateStrategy.First, name: 'First Match'},
-    {key: eDuplicateStrategy.Last, name: 'Last Match'},
-    {key: eDuplicateStrategy.All, name: 'All matches (duplicate rows)'},
-];
+// export const duplicateStrategies = [
+//     {key: eDuplicateStrategy.Abend, name: 'Abend Datalink'},
+//     {key: eDuplicateStrategy.First, name: 'First Match'},
+//     {key: eDuplicateStrategy.Last, name: 'Last Match'},
+//     {key: eDuplicateStrategy.All, name: 'All matches (duplicate rows)'},
+// ];
 
 // export enum eSourceType {
 //     Datalink = <any>'Datalink',

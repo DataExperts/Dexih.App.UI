@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { HubCache, duplicateStrategies, seriesGrains } from '../../../hub.models';
+import { seriesGrains } from '../../../hub.models';
 import { HubService } from '../../../hub.service';
 import { DatalinkEditService } from '../datalink-edit.service';
 import { Observable, Subscription, combineLatest } from 'rxjs';
@@ -9,7 +9,7 @@ import { FormGroup, FormArray } from '@angular/forms';
 import { LogFactory, eLogLevel } from '../../../../../logging';
 import { InputOutputColumns } from '../../../hub.lineage.models';
 import { eTransformType, eTransformItemType, DexihDatalinkColumn, DexihDatalinkTransform,
-    eTypeCode, DexihDatalinkTransformItem, eAggregate, eSortDirection, eJoinNotFoundStrategyItems } from '../../../../shared/shared.models';
+    eTypeCode, DexihDatalinkTransformItem, eAggregate, eSortDirection, eJoinNotFoundStrategyItems, eDuplicateStrategyItems } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -35,7 +35,7 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
 
     eTransformType = eTransformType;
     eTransformItemType = eTransformItemType;
-    duplicateStrategies = duplicateStrategies;
+    eDuplicateStrategyItems = eDuplicateStrategyItems;
     eJoinNotFoundStrategyItems = eJoinNotFoundStrategyItems;
 
     public allowMappingOutputs: boolean;

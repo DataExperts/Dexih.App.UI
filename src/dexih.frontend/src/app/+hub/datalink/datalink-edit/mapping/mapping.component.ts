@@ -7,7 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormArray } from '@angular/forms';
 import { InputOutputColumns } from '../../../hub.lineage.models';
 import { eFunctionType, eTransformType, eTransformItemType, DexihDatalinkTransformItem,
-    DexihDatalinkTransform, DexihDatalinkColumn, eTypeCode } from '../../../../shared/shared.models';
+    DexihDatalinkTransform, DexihDatalinkColumn, eTypeCode, DexihDatalinkTable, eDeltaType, eCleanActionItems, eCompare } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -52,6 +52,7 @@ export class MappingComponent implements OnInit, OnDestroy, OnChanges {
     public eTransformItemType = eTransformItemType;
 
     columnGroups: Array<{group: string, columns: Array<DexihDatalinkColumn>}> = [];
+    inputDateColumns: DexihDatalinkColumn[];
 
     constructor(
         private authService: AuthService,
@@ -113,6 +114,7 @@ export class MappingComponent implements OnInit, OnDestroy, OnChanges {
             if (this.datalinkTransformForm) {
                 let runTime = this.datalinkTransformForm.controls['runTime'].value;
                 let inputColumns = <DexihDatalinkColumn[]> runTime.inputColumns;
+                this.inputDateColumns = inputColumns.filter(c => c.dataType === eTypeCode.DateTime);
                 this.columnGroups = this.editDatalinkService.getColumnGroups(inputColumns);
 
                 let data = [];
@@ -398,5 +400,33 @@ export class MappingComponent implements OnInit, OnDestroy, OnChanges {
         let itemForm = this.editDatalinkService.hubFormsService
             .datalinkDatalinkTransformItemFormGroup(this.datalinkTransformForm, item);
         this.editDatalinkService.insertDatalinkTransformItem(this.datalinkTransformForm, itemForm);
+    }
+
+    // joins the column to the valid from/to columns
+    addValidFromTo(column: DexihDatalinkColumn) {
+        let joinTable = <DexihDatalinkTable> this.datalinkTransformForm.value.joinDatalinkTable;
+        let validFrom = joinTable.dexihDatalinkColumns.find(c => c.deltaType === eDeltaType.ValidFromDate);
+        let validTo = joinTable.dexihDatalinkColumns.find(c => c.deltaType === eDeltaType.ValidToDate);
+        if( !validFrom || !validTo ) {
+            this.authService.informationDialog('No valid from',  'The join table does not contain a columns with a valid from/to delta type.');
+            return;
+        }
+            
+        let item = new DexihDatalinkTransformItem();
+        item.sourceDatalinkColumn = column;
+        item.joinDatalinkColumn = validFrom;
+        item.transformItemType = eTransformItemType.JoinPair;
+        item.filterCompare = eCompare.GreaterThanEqual;
+        let itemForm = this.editDatalinkService.hubFormsService.datalinkDatalinkTransformItemFormGroup(this.datalinkTransformForm, item);
+        this.editDatalinkService.insertDatalinkTransformItem(this.datalinkTransformForm, itemForm);
+
+        item = new DexihDatalinkTransformItem();
+        item.sourceDatalinkColumn = column;
+        item.joinDatalinkColumn = validTo;
+        item.transformItemType = eTransformItemType.JoinPair;
+        item.filterCompare = eCompare.LessThan;
+        itemForm = this.editDatalinkService.hubFormsService.datalinkDatalinkTransformItemFormGroup(this.datalinkTransformForm, item);
+        this.editDatalinkService.insertDatalinkTransformItem(this.datalinkTransformForm, itemForm);
+
     }
 }
