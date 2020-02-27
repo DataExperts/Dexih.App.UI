@@ -61,7 +61,7 @@ export class ExportComponent implements OnInit, OnDestroy {
             this.hubCache.cacheAddObject(item.type, item.item, hub);
         });
 
-        let filename = items.length === 1 ? `${items[0].label}-${items[0].type}.json` : `hub-${hub.name}.json`;
+        let filename = items.length === 1 ? `${items[0].label}-${items[0].type}.json` : `hub-${this.hubCache.hub.name}.json`;
 
         this.hubService.exportHub(hub, filename);
     }
