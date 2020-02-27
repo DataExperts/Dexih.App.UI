@@ -655,6 +655,7 @@
               <e p="dexih-preview1 - Web Deploy.pubxml" t="Include" />
             </e>
           </e>
+          <e p="Resource.resx" t="Include" />
           <e p="Resources" t="Include">
             <e p="EmailTemplates" t="Include">
               <e p="confirmEmail.html" t="Include" />
@@ -1286,6 +1287,7 @@
       <e p="Exceptions" t="Include">
         <e p="ConnectionExceptions.cs" t="Include" />
         <e p="DuplicateJoinKeyException.cs" t="Include" />
+        <e p="JoinNotFoundException.cs" t="Include" />
         <e p="TransformExceptions.cs" t="Include" />
         <e p="TransformWriterExceptions.cs" t="Include" />
       </e>

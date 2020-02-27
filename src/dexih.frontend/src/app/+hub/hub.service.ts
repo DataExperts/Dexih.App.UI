@@ -929,7 +929,7 @@ export class HubService implements OnInit, OnDestroy {
     exportHub(hub: DexihHub, filename: string) {
         const content = JSON.stringify(hub, (key, value) => {
             // don't bother saving the null values.
-            if (!value) { return undefined; }
+            if (value === null ) { return undefined; }
 
             switch (key) {
                 case 'currentStatus':
@@ -1276,7 +1276,7 @@ export class HubService implements OnInit, OnDestroy {
             };
 
             if (truncateTarget) {
-                return this.hubPostRemoteConfirm('/api/Hub/RunDatajobs', data, 'Running datahibs...',
+                return this.hubPostRemoteConfirm('/api/Hub/RunDatajobs', data, 'Running datajobs...',
                 'This action will truncate all data in the target tables for datalinks in this job.  ' +
                 '<p></p><p></p>Are you sure you want to continue?', cancelToken);
             } else {
