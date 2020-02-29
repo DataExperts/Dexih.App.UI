@@ -907,8 +907,8 @@ export class AuthService implements OnDestroy {
         return this.modalComponent.prompt(title, body, inputPrompt, inputValue);
     }
 
-    informationDialog(title: string, body: any): Promise<boolean> {
-        return this.modalComponent.information(title, body);
+    informationDialog(title: string, body: any, details: string = null): Promise<boolean> {
+        return this.modalComponent.information(title, body, 'Close', details);
     }
 
     // waitDialogOpen(message: string, title = 'Please wait...') {
