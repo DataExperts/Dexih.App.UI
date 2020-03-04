@@ -1625,6 +1625,7 @@ export class HubService implements OnInit, OnDestroy {
                 downloadObjects: downloadObjects,
             }, 'Downloading shared data...', cancelToken).then(task => {
                 this.authService.addUpdateTask(task);
+                this.addHubSuccessMessage('The download task has started.');
                 resolve(true);
             });
         });
@@ -1646,6 +1647,7 @@ export class HubService implements OnInit, OnDestroy {
                 zipFiles: zipFiles,
                 }, 'Downloading table data...', cancelToken).then(task => {
                     this.authService.addUpdateTask(task);
+                    this.addHubSuccessMessage('The download task has started.');
                     resolve(true);
                 });
             });
@@ -1667,6 +1669,7 @@ export class HubService implements OnInit, OnDestroy {
                 zipFiles: zipFiles,
                 }, 'Downloading table data...', cancelToken).then(task => {
                     this.authService.addUpdateTask(task);
+                    this.addHubSuccessMessage('The download task has started.');
                     resolve(true);
                 });
             });
