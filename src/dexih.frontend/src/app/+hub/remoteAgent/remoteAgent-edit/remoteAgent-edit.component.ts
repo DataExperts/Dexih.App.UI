@@ -122,7 +122,8 @@ export class RemoteAgentEditComponent implements OnInit, OnDestroy {
         let remoteAgentHub = form.value;
         this.hubService.saveRemoteAgent(remoteAgentHub).then((success) => {
             if (success) {
-                this.hubService.addHubSuccessMessage('The remote agent updated successfully.')
+                this.hubService.addHubSuccessMessage('The remote agent updated successfully.');
+                this.authService.navigateUp();
             }
         });
     }

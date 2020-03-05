@@ -117,7 +117,7 @@ export class RemoteAgentsComponent implements OnInit, OnDestroy {
                 let url = downloadUrl.url + '/ping';
 
                 this.authService.get<any>(url, 'Testing remote agent connectivity...', false, cancelToken).then(result => {
-                    if (result && result.Status === 'Alive') {
+                    if (result && result.status === 'alive') {
                         downloadUrl['testStatus'] = 'success';
                     } else {
                         downloadUrl['testStatus'] = 'error';

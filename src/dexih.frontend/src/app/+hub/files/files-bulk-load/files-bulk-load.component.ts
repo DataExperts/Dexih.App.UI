@@ -146,6 +146,9 @@ export class FilesBulkLoadComponent implements OnInit, OnDestroy {
                 this.reference = result.reference;
 
                 let fileHandler = new FileHandler(file, url);
+                this.uploadedFiles = this.uploadedFiles.concat(fileHandler);
+                // this.uploadedFiles.push(fileHandler);
+
                 if (this.automaticUpload) {
                     this.authService.upload(fileHandler).then(status => {
                         if (status.success) {
@@ -157,7 +160,6 @@ export class FilesBulkLoadComponent implements OnInit, OnDestroy {
                         this.hubService.addHubMessage(reason);
                     });
                 }
-                this.uploadedFiles.push(fileHandler);
             }).catch(reason => {
                 this.hubService.addHubMessage(reason);
             });

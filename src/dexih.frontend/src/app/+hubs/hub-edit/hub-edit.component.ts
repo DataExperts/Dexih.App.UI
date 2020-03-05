@@ -6,7 +6,7 @@ import { AuthService } from '../../+auth/auth.service';
 import { DexihHubAuth } from '../../+auth/auth.models';
 import { Location } from '@angular/common';
 import { DexihMessageComponent } from '../../shared/ui/dexihMessage';
-import { eSharedAccessItems } from '../../shared/shared.models';
+import { eSharedAccessItems, DexihRemoteAgent } from '../../shared/shared.models';
 
 @Component({
 
@@ -75,7 +75,8 @@ export class HubEditComponent implements OnInit, OnDestroy {
       this._subscription = combineLatest(
         this.route.data,
         this.route.params,
-        this.authService.getHubsObservable()
+        this.authService.getHubsObservable(),
+        this.authService.getRemoteAgentsObservable(),
       ).subscribe(result => {
         let data = result[0];
         let params = result[1];
@@ -148,6 +149,10 @@ export class HubEditComponent implements OnInit, OnDestroy {
       .then(result => {
         this.savingHub = false;
         this.cancel();
+
+        this.router.navigate(['/hub', result.hubKey, 'summary', 'agents']);
+        return;
+
       }).catch(reason => {
         this.dexihMessage.addMessage(reason);
         this.savingHub = false;
