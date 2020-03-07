@@ -11,7 +11,7 @@
 			(rowClick)="edit($event)"
 			>
 				<ng-template #selectedItemAction select="selectedItemAction" let-item="item">
-					<dexih-button-edit [routerLink]="['hubListOfValues-edit', item.key]" queryParamsHandling preserveFragment></dexih-button-edit>
+					<dexih-button-edit [routerLink]="['listOfValues-edit', item.key]" queryParamsHandling preserveFragment></dexih-button-edit>
 				</ng-template>
 
 				<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">

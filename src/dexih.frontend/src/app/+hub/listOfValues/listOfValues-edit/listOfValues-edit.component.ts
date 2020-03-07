@@ -183,7 +183,8 @@ export class ListOfValuesEditComponent implements OnInit, OnDestroy {
     this.hubService.previewListOfValues(listOfValues, true, this.cancelToken).then((data) => {
       this.data = data;
       this.refreshDataSubject.next();
-    }).catch(() => {
+    }).catch((reason) => {
+      this.hubService.addHubMessage(reason);
     });
   }
 
