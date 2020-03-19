@@ -161,6 +161,17 @@
 					</section>
 				</span>
 
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-input  type="number" label="Connection Timeout" formControlName="connectionTimeout" iconClass="fa fa-clock-o"	[errors]="formsService.formErrors.connectionTimeout">
+						</form-input>
+					</section>
+					<section class="form-group col-md-6">
+						<form-input type="number" label="Command Timeout" formControlName="commandTimeout" iconClass="fa fa-clock-o"	[errors]="formsService.formErrors.commandTimeout">
+						</form-input>
+					</section>
+				</div>
+
 				<section *ngIf="formsService.currentForm.controls.purpose.value == 'Managed'">
 					<form-checkbox label="Multi-use Managed Database (table keys will be added to table names to allow multiple hubs to use same database)"
 						formControlName="embedTableKey" [errors]="formsService.formErrors.embedTableKey">

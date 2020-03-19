@@ -236,6 +236,12 @@ namespace dexih.api.Controllers
 
             var dashboard = await repositoryManager.GetDashboard(previewDashboard.HubKey, previewDashboard.DashboardKey, cancellationToken);
             var item = dashboard.DexihDashboardItems.SingleOrDefault(c => c.Key == previewDashboard.DashboardItemKey);
+
+            if (item == null)
+            {
+                throw new Exception($"The dashboard with the key {previewDashboard.DashboardItemKey} could not be found.");
+            }
+            
             var view = await repositoryManager.GetView(dashboard.HubKey, item.ViewKey, cancellationToken);
 
             var itemParameters = new InputParameters();

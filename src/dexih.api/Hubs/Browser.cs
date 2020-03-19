@@ -22,7 +22,7 @@ namespace dexih.api
 
 		public override async Task OnConnectedAsync()
 		{
-			_logger.LogDebug($"New connection from {Context.UserIdentifier}");
+			_logger.LogDebug($"New browser connection from {Context.UserIdentifier}");
 			await base.OnConnectedAsync();
 		}
 

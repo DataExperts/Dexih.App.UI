@@ -16,7 +16,7 @@ export class ApiData {
    }
    
    export class ApplicationUser {
-    public id: string = 'b8fa1d52-938e-4deb-aab1-e72faa9961c4';
+    public id: string = '07941794-f597-46f6-999f-36e0fac47232';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -25,7 +25,7 @@ export class ApiData {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = 'a44bc654-52d6-4536-bd9c-4f1552ef89b5';
+    public securityStamp: string = '58e9d99f-e2f6-43b4-82d3-3a60ca0cf49c';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -302,6 +302,8 @@ export class ApiData {
     public connectionString: string = null;
     public useConnectionStringVariable: boolean = false;
     public embedTableKey: boolean = false;
+    public connectionTimeout: number = 30;
+    public commandTimeout: number = 60;
     public key: number = 0;
     public name: string = null;
     public description: string = null;
@@ -3125,4 +3127,5 @@ export class ApiData {
     {key: logLevel.Critical, name: 'Critical'},
     {key: logLevel.None, name: 'None'},
    ]
+   
    

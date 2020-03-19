@@ -22,17 +22,32 @@ namespace dexih.api.Hubs
 		public RemoteAgentHub(IServiceProvider serviceProvider, ILoggerFactory loggerFactory, IDistributedCache distributedCache)
 		{
 			_serviceProvider = serviceProvider;
-			_logger = loggerFactory.CreateLogger("Browser");
+			_logger = loggerFactory.CreateLogger("RemoteAgent");
 			_distributedCache = distributedCache;
+		}
+		
+		public override async Task OnConnectedAsync()
+		{
+			_logger.LogDebug($"New remoteAgent connection from {Context.UserIdentifier}");
+			await base.OnConnectedAsync();
 		}
 
 		public override async Task OnDisconnectedAsync(Exception exception)
 		{
 			_logger.LogDebug($"Disconnect from {Context.UserIdentifier}");
+
+			var instanceId = (string) Context.Items["InstanceId"];
+			if (string.IsNullOrEmpty(instanceId))
+			{
+				_logger.LogError($"The remote agent disconnected, however no instanceId was found.");
+			}
+			else
+			{
+				var remoteAgents = (IRemoteAgents)_serviceProvider.GetService(typeof(IRemoteAgents));
+				var operations = (IDexihOperations)_serviceProvider.GetService(typeof(IDexihOperations));
+				await remoteAgents.DisconnectRemoteAgent(instanceId, operations, CancellationToken.None);
+			}
 			
-			var remoteAgents = (IRemoteAgents)_serviceProvider.GetService(typeof(IRemoteAgents));
-			var operations = (IDexihOperations)_serviceProvider.GetService(typeof(IDexihOperations));
-			await remoteAgents.DisconnectRemoteAgent((string)Context.Items["InstanceId"], operations, CancellationToken.None);
 			await base.OnDisconnectedAsync(exception);
 		}
 		
@@ -50,7 +65,7 @@ namespace dexih.api.Hubs
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e);
+				_logger.LogError(e,$"RemoteAgent connect error {e.Message}");
 				throw;
 			}
 		}

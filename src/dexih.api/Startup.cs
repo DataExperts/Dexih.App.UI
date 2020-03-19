@@ -89,7 +89,7 @@ namespace dexih.api
 				case "npgsql":
 				case "postgre":
 				case "postgresql":
-					services.AddEntityFrameworkNpgsql().AddDbContext<DexihRepositoryContext>(options =>
+					services.AddDbContext<DexihRepositoryContext>(options =>
   						options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"), options => options.SetPostgresVersion(9,6)));
 					break;
 				default:

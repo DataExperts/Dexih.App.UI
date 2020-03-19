@@ -793,6 +793,11 @@ namespace dexih.api.Controllers
 
 		    var view = hub.DexihViews.SingleOrDefault(c => c.Key == previewViewKey.ViewKey && c.IsValid);
 
+		    if (view == null)
+		    {
+			    throw new HubControllerException($"The view with the key {previewViewKey.ViewKey} could not be found.");
+		    }
+		    
 		    var previewView = new PreviewView()
 		    {
 			    View = view,

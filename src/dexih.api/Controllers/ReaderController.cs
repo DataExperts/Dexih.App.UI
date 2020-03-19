@@ -227,6 +227,11 @@ namespace dexih.api.Controllers
                             c.IsShared &&
                             c.Name == tableName, cancellationToken: cancellationToken);
 
+                    if (dbDatalink == null)
+                    {
+	                    throw new ReaderControllerException($"A datalink with the name {tableName} was not found or is not shared.");    
+                    }
+                    
 	                var dbCache = new CacheManager(hub.HubKey, "");
                     var dbDatalink2 = await dbCache.GetDatalink(dbDatalink.Key, DbContext);
                     var dbTable = dbDatalink2.GetOutputTable();
@@ -253,6 +258,11 @@ namespace dexih.api.Controllers
 	                        c.Schema == tableSchema &&
                             c.Connection.Name == sourceConnectionName &&
                             c.Connection.IsValid, cancellationToken: cancellationToken);
+
+                    if (dbTable == null)
+                    {
+	                    throw new ReaderControllerException($"A table with the name {tableName} and connection name {sourceConnectionName} was not found or is not shared.");    
+                    }
 
 	                var table =dbTable.GetTable(hub, null, new TransformSettings());
 	                table.SourceConnectionName = sourceConnectionName;
@@ -298,6 +308,11 @@ namespace dexih.api.Controllers
                         && c.HubKey == hub.HubKey
                         && c.Name == parameters.TableName
                         && c.IsShared, cancellationToken: cancellationToken);
+                    
+                    if (dbDatalinkObject == null)
+                    {
+	                    throw new ReaderControllerException($"A datalink with the name {parameters.TableName} was not found.");    
+                    }
 
                     dbDatalink = await cache.GetDatalink(dbDatalinkObject.Key, DbContext);
                     await cache.LoadDatalinkDependencies(dbDatalink, true, DbContext);
@@ -309,7 +324,12 @@ namespace dexih.api.Controllers
                         c.IsValid &&
                         c.Name == parameters.SourceConnectionName &&
                         c.HubKey == hub.HubKey, cancellationToken: cancellationToken);
-	                
+
+                    if (dbSourceConnection == null)
+                    {
+						throw new ReaderControllerException($"A connection with the name {parameters.SourceConnectionName} was not found.");    
+                    }
+                    
                     var dbTable = await DbContext.DexihTables.SingleOrDefaultAsync(c =>
                         c.IsValid
                         && c.HubKey == hub.HubKey
@@ -318,6 +338,11 @@ namespace dexih.api.Controllers
                         && c.ConnectionKey == dbSourceConnection.Key
                         && c.IsShared, cancellationToken: cancellationToken);
 
+                    if (dbTable == null)
+                    {
+	                    throw new ReaderControllerException($"A table with the name {parameters.TableName} for connection {parameters.SourceConnectionName} was not found or is not shared.");    
+                    }
+                    
 	                var dbColumns = await DbContext.DexihTableColumns
 		                .Where(c => c.TableKey == dbTable.Key && c.IsValid).ToArrayAsync(cancellationToken: cancellationToken);
 
