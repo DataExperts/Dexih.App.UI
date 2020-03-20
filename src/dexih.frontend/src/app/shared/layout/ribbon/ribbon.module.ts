@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {RouteBreadcrumbsComponent} from './route-breadcrumbs/route-breadcrumbs.component'
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
+import {RibbonComponent} from './ribbon.component';
 
 @NgModule({
     imports: [
@@ -11,9 +12,11 @@ import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
         BsDropdownModule
     ],
     exports: [
+        RibbonComponent,
         RouteBreadcrumbsComponent,
     ],
     declarations: [
+        RibbonComponent,
         RouteBreadcrumbsComponent,
         ],
     providers: [],

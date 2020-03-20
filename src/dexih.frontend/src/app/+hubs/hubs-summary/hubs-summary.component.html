@@ -67,19 +67,19 @@
     >
         <ng-template #header>
             <div class="btn-group btn-group-toggle ml-1" data-toggle="buttons" title="All Hubs the user has access to.">
-                <label class="btn btn-sm btn-primary" [ngClass]="{active: view === eHubAccess.All}">
+                <label class="btn btn-primary" [ngClass]="{active: view === eHubAccess.All}">
                     <input type="radio" name="options" [value]="eHubAccess.All" autocomplete="off" [(ngModel)]="view">
                     <i class="fa fa-globe"></i>
                 </label>
-                <label class="btn btn-sm btn-primary" [ngClass]="{active: view === eHubAccess.User}">
+                <label class="btn btn-primary" [ngClass]="{active: view === eHubAccess.User}">
                     <input type="radio" name="options" [value]="eHubAccess.User" autocomplete="off" [(ngModel)]="view">
                     <i class="fa fa-user-secret"></i>
                 </label>
-                <label class="btn btn-sm btn-primary" [ngClass]="{active: view === eHubAccess.ReadOnly}" title="Hubs which are readonly to the current user">
+                <label class="btn btn-primary" [ngClass]="{active: view === eHubAccess.ReadOnly}" title="Hubs which are readonly to the current user">
                     <input type="radio" name="options" [value]="eHubAccess.ReadOnly"  autocomplete="off" [(ngModel)]="view">
                     <i class="fa fa-book"></i>
                 </label>
-                <label class="btn btn-sm btn-primary" [ngClass]="{active: view === eHubAccess.Public}" title="Public Hubs">
+                <label class="btn btn-primary" [ngClass]="{active: view === eHubAccess.Public}" title="Public Hubs">
                     <input type="radio" name="options" [value]="eHubAccess.Public"  autocomplete="off" [(ngModel)]="view">
                     <i class="fa fa-users"></i>
                 </label>

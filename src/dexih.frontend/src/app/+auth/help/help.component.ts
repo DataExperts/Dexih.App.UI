@@ -19,7 +19,6 @@ export class HelpComponent implements OnInit {
   logoUrl = logoUrl;
 
   constructor(
-    private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute,
     private http: HttpClient,
@@ -65,8 +64,8 @@ getData(path) {
       <html>
         <head>
           <title>Print tab</title>
+          <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
           <style>
-          //........Customized style.......
           </style>
         </head>
     <body onload="window.print();window.close()">${printContents}</body>

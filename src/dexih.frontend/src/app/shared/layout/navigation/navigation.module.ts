@@ -14,7 +14,7 @@ import { DexihIconsModule} from '../../ui/icons/icons.module'
   imports: [
     CommonModule,
     RouterModule,
-    AuthModule,
+//     AuthModule,
     BsDropdownModule,
     DexihComponentsModule,
     DexihIconsModule,

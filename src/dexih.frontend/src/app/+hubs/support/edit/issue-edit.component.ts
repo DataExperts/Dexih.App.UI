@@ -40,6 +40,7 @@ export class IssueEditComponent implements OnInit, OnDestroy {
 
   mainForm: FormGroup;
   newComment: string;
+  subTitle: string;
 
   isNew = true;
 
@@ -101,6 +102,7 @@ export class IssueEditComponent implements OnInit, OnDestroy {
           this.isNew = false;
           this.authService.getIssue(key, this.cancelToken).then(issue => {
             this.issue = issue;
+            this.subTitle = 'Updated by ' + issue.userName + ' on ' + new Date(issue.updateDate).toLocaleDateString();
             this.buildForm();
 
             if (this.authService.getUser().isAdmin) {

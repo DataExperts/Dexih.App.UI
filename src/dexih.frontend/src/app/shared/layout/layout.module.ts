@@ -1,30 +1,31 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import { RouterModule} from '@angular/router';
+import { RibbonModule } from './ribbon';
+import { SharedModule} from '../shared.module';
 
 import {HeaderModule} from './header/header.module';
+
 import {FooterComponent} from './footer/footer.component';
 import {NavigationModule} from './navigation/navigation.module';
-import {RibbonComponent} from './ribbon/ribbon.component';
 import { MainLayoutComponent } from './app-layouts/main-layout.component';
 import { EmptyLayoutComponent } from './app-layouts/empty-layout.component';
-import { RouterModule} from '@angular/router';
 import { AuthLayoutComponent } from './app-layouts/auth-layout.component';
-import { RibbonModule } from './ribbon';
 
 @NgModule({
   imports: [
     CommonModule,
-    HeaderModule,
-    NavigationModule,
     FormsModule,
     RouterModule,
+
+    SharedModule,
+    HeaderModule,
+    NavigationModule,
     RibbonModule,
-//    BsDropdownModule,
   ],
   declarations: [
     FooterComponent,
-    RibbonComponent,
     MainLayoutComponent,
     EmptyLayoutComponent,
     AuthLayoutComponent,

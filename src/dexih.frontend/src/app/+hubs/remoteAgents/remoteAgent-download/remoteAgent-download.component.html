@@ -1,5 +1,5 @@
 <div class="container">
-	<dexih-widget title="Download a new remote agent" iconClass="fa fa-lg fa-fw fa-download" [showCloseButton]="true"
+	<dexih-widget title="Download Agent" iconClass="fa fa-lg fa-fw fa-download" [showCloseButton]="true"
 		(close)="cancel()" [padding]="true">
 		<ng-template #header>
 			<dexih-button-download class="mr-1" [busy]="downloading" (click)="!downloading && download()"

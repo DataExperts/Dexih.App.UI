@@ -1,4 +1,4 @@
-<img src="{{SERVER}}/assets/img/dexih/dex_logo_wide_raw.png" class="col-4 mx-auto d-block"/>
+<img src="{{SERVER}}/assets/img/dexih/dex_logo_wide_raw.png" class="col-sm-8 col-xs-12 col-md-4 mx-auto d-block"/>
 
 ### Introduction
 

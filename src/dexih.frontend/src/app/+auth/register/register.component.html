@@ -1,26 +1,10 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <div id="logo-group">
-    <span id="logo">
-      <img [src]='logoUrl' alt="Data Experts Group"> </span>
-  </div>
-
-  <div class="collapse navbar-collapse mr-sm-2">
-  </div>
-  <form class="form-inline">
-    <span class="d-none d-md-inline text-white m-1">Already registered?</span>
-    <a routerLink="/auth/login" class="btn btn-primary mr-1">Sign In</a>
-    <a routerLink="/auth/verifyemail" class="btn btn-primary">Verify Email</a>
-		<a routerLink="/auth/help" class="btn btn-secondary ml-1">Help</a>
-  </form>
-
-</nav>
-
+<auth-header [showSignIn]="true"></auth-header>
 
 <div class="login-container">
   <div class="card">
     <form *ngIf="formsService.currentForm" [formGroup]="formsService.currentForm" >
       <div class="card-header">
-        Integration Hub - Complete your Registration
+        Complete your Registration
       </div>
       <div class="card-body">
 

@@ -10,7 +10,7 @@
 </section>
 
 <div *ngIf="connectionTables && connectionTables.length > 0" class="container">
-    <dexih-widget [title]="'Manage Files for: ' + table?.name" iconClass="fa fa-lg fa-fw fa-table" [showCloseButton]="true"
+    <dexih-widget [title]="'Manage Files: ' + table?.name" iconClass="fa fa-lg fa-fw fa-table" [showCloseButton]="true"
         (close)="close()"     >
         <ng-template #header>
             <dexih-button-dropdown buttonClass="btn-sm btn-outline-primary mr-1" iconClass="fa fa-notepad" text="New File">

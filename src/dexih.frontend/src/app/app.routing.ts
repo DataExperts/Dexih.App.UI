@@ -18,7 +18,6 @@ export const routes: Routes = [
     { path: 'unsubscribe', redirectTo: '/hubs/index/manage', pathMatch: 'full' },
 
     { path: '**', redirectTo: 'hubs' }
-    //
 ];
 
 export const routing = RouterModule.forRoot(routes);

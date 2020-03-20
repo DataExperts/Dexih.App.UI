@@ -9,7 +9,7 @@
 </section>
 
 <div *ngIf="fileConnections && fileConnections.length > 0" class="container">
-    <dexih-widget *ngIf="!currentTable" [title]="'Bulk load files for: ' + connection?.name" iconClass="fa fa-lg fa-fw fa-files-o" [showCloseButton]="true" (close)="close()">
+    <dexih-widget *ngIf="!currentTable" [title]="'Bulk Load: ' + connection?.name" iconClass="fa fa-lg fa-fw fa-files-o" [showCloseButton]="true" (close)="close()">
         <ng-template #header>
             <a class="btn btn-sm btn-primary mr-1" routerLink="/hub/{{hubCache.hub.hubKey}}/connections/connection-new/Source" [title]="">New Connection</a>
         </ng-template>

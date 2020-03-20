@@ -12,6 +12,7 @@ import {AuthService} from './+auth/auth.service';
 import {LayoutGuard} from './shared/layout/layout.guard';
 import {HubsService } from './+hubs/hubs.service';
 import { GlobalErrorHandler } from './global.error.handler';
+import { LayoutModule } from './shared/layout/layout.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { GlobalErrorHandler } from './global.error.handler';
     BrowserModule,
     FormsModule,
     routing,
+    LayoutModule,
     SharedModule,
     BrowserAnimationsModule,
   ],

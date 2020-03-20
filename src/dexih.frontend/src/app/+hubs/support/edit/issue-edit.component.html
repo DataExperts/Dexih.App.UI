@@ -1,12 +1,12 @@
 <div class="container">
 	<dexih-message #DexihMessage></dexih-message>
 
-	<dexih-widget *ngIf="mainForm" iconClass="fa fa-ticket" title="Integration Hub Support">
-		<support-options [isExpanded]="true"></support-options>
+	<dexih-widget *ngIf="mainForm" iconClass="fa fa-ticket" title="Support">
+		<support-options [isExpanded]="false"></support-options>
 
 		<dexih-widget-section 
-			title="Raise an issue or feature requests" 
-			subTitle="Create by {{mainForm.controls.userName.value}} on {{mainForm.controls.updateDate.value | date: 'short' }}"
+			title="Raise Issue" 
+			[subTitle]="subTitle"
 			[showExpandButton]="true"
 			iconClass="fa fa-lg fa-fw fa-comments" [padding]="true">
 			<ng-template #header>

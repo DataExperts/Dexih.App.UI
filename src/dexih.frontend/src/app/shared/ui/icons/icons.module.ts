@@ -5,6 +5,7 @@ import { EncryptionStatusIconComponent } from './encryption-status/encryption-st
 import { PrivacyStatusButtonComponent } from './privacy-status/privacy-status.component';
 import { DownloadButtonComponent } from './download-button/download-button.component';
 import { DexihComponentsModule } from 'dexih-ngx-components';
+import { PrintButtonComponent} from './print/print-button.component';
 
 @NgModule({
   imports: [
@@ -15,12 +16,14 @@ import { DexihComponentsModule } from 'dexih-ngx-components';
   declarations: [
     EncryptionStatusIconComponent,
     PrivacyStatusButtonComponent,
-    DownloadButtonComponent
+    DownloadButtonComponent,
+    PrintButtonComponent
   ],
   exports: [
     EncryptionStatusIconComponent,
     PrivacyStatusButtonComponent,
-    DownloadButtonComponent
+    DownloadButtonComponent,
+    PrintButtonComponent
   ],
 })
 export class DexihIconsModule {

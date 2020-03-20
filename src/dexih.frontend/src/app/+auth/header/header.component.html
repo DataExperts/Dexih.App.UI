@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+	<div id="logo-group">
+		<span id="logo">
+			<img [src]='logoUrl' alt="Data Experts Group"> </span>
+	</div>
+
+	<div class="collapse navbar-collapse mr-sm-2">
+	</div>
+	<form class="form-inline">
+		<div *ngIf="showSignUp">
+			<span class="d-none d-md-inline text-white m-1" >
+				Need an account?
+			</span>
+			<a routerLink="/auth/register" class="btn btn-success mr-1">Sign Up</a>
+		</div>
+
+		<div *ngIf="showSignIn">
+			<span class="d-none d-md-inline text-white m-1" >
+				Already Registered?
+			</span>
+			<a routerLink="/auth/login" class="btn btn-success mr-1">Sign In</a>
+		</div>
+
+		<a routerLink="/auth/help" class="d-none d-md-inline btn btn-secondary text-white mr-1">Help</a>
+
+		<dexih-button-dropdown [pullRight]="true" [hideCarrot]="true" buttonClass="btn-primary" iconClass="fa fa-navicon">
+			<a class="dropdown-item" routerLink="/auth/register">Sign Up</a>
+			<a class="dropdown-item" routerLink="/auth/login">Sign In</a>
+			<a class="dropdown-item" routerLink="/auth/forgot-password">Forgot password</a>
+			<a class="dropdown-item" routerLink="/auth/verifyemail">Verify password</a>
+			<a class="dropdown-item" routerLink="/auth/privacy">Privacy Policy</a>
+			<a class="dropdown-item" routerLink="/auth/terms">Terms and Conditions</a>
+			<a class="dropdown-item" routerLink="/auth/help">Help</a>
+		</dexih-button-dropdown>
+	</form>
+</nav>

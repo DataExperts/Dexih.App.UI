@@ -3,11 +3,11 @@ import { CommonModule} from '@angular/common';
 import { FormsModule} from '@angular/forms';
 import { RouterModule} from '@angular/router';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { HttpClientModule } from '@angular/common/http';
 
 import { BsDropdownModule, ModalModule } from 'ngx-bootstrap';
 
 import { LayoutService} from './layout/layout.service';
-import { LayoutModule } from './layout';
 import { UtilsModule} from './utils/utils.module';
 import { DexihTableModule} from 'dexih-ngx-table';
 import { DexihMessageModule } from './ui/dexihMessage';
@@ -25,7 +25,7 @@ import { DexihSupportOptionsModule } from './ui/supportOptions/support-options.m
 
 @NgModule({
   imports: [
-    CommonModule, FormsModule, RouterModule,
+    CommonModule, FormsModule, RouterModule, HttpClientModule,
 
     DragDropModule,
 
@@ -52,7 +52,6 @@ import { DexihSupportOptionsModule } from './ui/supportOptions/support-options.m
     CommonModule, FormsModule, RouterModule, DragDropModule,
 
     BsDropdownModule,
-    LayoutModule,
     UtilsModule,
     NgxMdModule,
 
@@ -70,7 +69,8 @@ import { DexihSupportOptionsModule } from './ui/supportOptions/support-options.m
     DexihSupportOptionsModule
   ],
   providers: [
-    LayoutService
+    LayoutService,
+    HttpClientModule
   ]
 
 })

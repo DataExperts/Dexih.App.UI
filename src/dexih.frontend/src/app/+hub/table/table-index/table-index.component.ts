@@ -91,8 +91,8 @@ export class TableIndexComponent implements OnInit, OnDestroy {
         this.title = 'Tables ';
         this.connectionName = 'All';
 
-        if (this.purposeFilter) {
-            this.title += ': ' + this.purposeFilter;
+        if (this.purposeFilter && this.purposeFilter !== 'All') {
+            this.title += ': ' + eConnectionPurpose[this.purposeFilter];
         }
         if (this.hubCache && this.hubCache.isLoaded()) {
             let tableData = [];
