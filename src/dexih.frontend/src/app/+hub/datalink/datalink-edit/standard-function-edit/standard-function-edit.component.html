@@ -40,34 +40,34 @@
 				</ng-template>
 				<div *ngIf="selectedFunction || selectedCustomFunction" class="form-row">
 					<section *ngIf="transformFunctionType != eFunctionType.Validate && transformFunctionType != eFunctionType.condition"
-					 class="col col-xs-4" [ngStyle]="{'z-index': 405, 'position': 'relative'}">
+					 class="col-xs-12 col-sm-6 col-md-3" [ngStyle]="{'z-index': 405, 'position': 'relative'}">
 						<form-select label="Action when null" formControlName="onNull" [items]="eErrorActionItems" itemKey="key" itemName="name"
 						 iconClass="fa fa-database" [enableFilter]="false">
 						</form-select>
 					</section>
-					<section class="col col-xs-4" [ngStyle]="{'z-index': 404, 'position': 'relative'}">
+					<section class="col-xs-12 col-sm-6 col-md-3" [ngStyle]="{'z-index': 404, 'position': 'relative'}">
 						<form-select label="Action when error" formControlName="onError" [items]="eErrorActionItems" itemKey="key" itemName="name"
 						 iconClass="fa fa-database" [enableFilter]="false">
 						</form-select>
 					</section>
 					
-					<div *ngIf="transformFunctionType == eFunctionType.Validate" class="col col-xs-4" [ngStyle]="{'z-index': 402, 'position': 'relative'}">
+					<div *ngIf="transformFunctionType == eFunctionType.Validate" class="col-xs-12 col-sm-6 col-md-3" [ngStyle]="{'z-index': 402, 'position': 'relative'}">
 						<form-select label="Action when false" formControlName="invalidAction" [items]="eInvalidActionItems" itemKey="key"
 						 itemName="name" [enableFilter]="false" iconClass="fa fa-database">
 						</form-select>
 					</div>
 
-					<section *ngIf="(selectedFunction?.returnType == 'Boolean') || (selectedCustomFunction && selectedCustomFunction?.returnType == 'Boolean')" class="col col-xs-4">
+					<section *ngIf="(selectedFunction?.returnType == 'Boolean') || (selectedCustomFunction && selectedCustomFunction?.returnType == 'Boolean')" class="col-xs-12 col-sm-6 col-md-4">
 						<form-checkbox label="Return 'NOT' result" formControlName="notCondition">
 						</form-checkbox>
 					</section>
 	
-					<section *ngIf="selectedFunction?.genericType !== eGenericType.None" class="col col-xs-4">
+					<section *ngIf="selectedFunction?.genericType !== eGenericType.None" class="col-xs-12 col-sm-6 col-md-3">
 						<form-select label="Data Type" formControlName="genericTypeCode" [items]="typeCodes" itemKey="key" itemName="name">
 						</form-select>
 					</section>
 
-					<section  class="col col-xs-4">
+					<section  class="col-xs-12 col-sm-6 col-md-3">
 						<form-select label="Cache Options" formControlName="functionCaching" [items]="functionCache" itemKey="key" itemName="name">
 						</form-select>
 					</section>
@@ -78,27 +78,27 @@
 					<div class="d-flex flex-row mb-1">
 						Input Parameters
 					</div>
-					<div *ngFor="let inputParameter of inputParameterControls; let i = index" [ngStyle]="{'z-index': 300-i, 'position': 'relative'}">
+					<div *ngFor="let inputParameter of inputParameterControls; let i = index" [ngStyle]="{'z-index': 300-i, 'position': 'relative'}" class="mb-1">
 						<div *ngIf="inputParameter.value.rank > 0 && !inputParameter.value.runTime.functionParameter.linkedName">
 							<div class="d-flex flex-row mb-1">
 								<div class="input-group-text">
 									Array - {{inputParameter.value.name}}
 								</div>
 								<div class="ml-auto">
-									<dexih-button *ngIf="selectedFunction.importMethodName" text="Import Mappings" (click)="importMappings(inputParameter)"
+									<dexih-button *ngIf="selectedFunction.importMethodName" iconClass="fa fa-import" text="Import Mappings" (click)="importMappings(inputParameter)"
 									 title="Attempt to import the mappings from the source data" class="mr-1"></dexih-button>
-									<dexih-button text="Add Parameter" (click)="addParameter(inputParameter, eParameterDirection.Input)" title="Add a parameter to the array"
+									<dexih-button iconClass="fa fa-plus" text="Add Parameter" (click)="addParameter(inputParameter, eParameterDirection.Input)" title="Add a parameter to the array"
 									 class="mr-1"></dexih-button>
-									<dexih-button text="Add All Inputs" (click)="addAllColumns(inputParameter)" title="Add all the input columns to the array"
+									<dexih-button iconClass="fa fa-columns" text="Add All Inputs" (click)="addAllColumns(inputParameter)" title="Add all the input columns to the array"
 									 class="mr-1"></dexih-button>
-									<dexih-button text="Clear" (click)="clearArray(inputParameter)"></dexih-button>
+									<dexih-button iconClass="fa fa-eraser" text="Clear" (click)="clearArray(inputParameter)"></dexih-button>
 								</div>
 							</div>
 							<input-parameter *ngIf="inputParameter.controls.arrayParameters.controls.length === 0" [inputParameterForms]="[inputParameter]" [nodeDatalinkColumnKey]="datalinkTransformForm.controls.nodeDatalinkColumn.value?.key"
 							 [inputColumns]="inputColumns" [allowAdd]="false" [allowRemove]="false" [updateParameterName]="false" [rank]="inputParameter.value.rank"
 							 [variables]="variables">
 							</input-parameter>
-							<div *ngFor="let arrayParameter of inputParameter.controls.arrayParameters.controls; let j = index, let last = last" class="pl-2"
+							<div *ngFor="let arrayParameter of inputParameter.controls.arrayParameters.controls; let j = index, let last = last" class="pl-2 mb-1"
 							 [ngStyle]="{'z-index': 300-j, 'position': 'relative'}">
 								<input-parameter [inputParameterForms]="[arrayParameter]" [inputColumns]="inputColumns" [allowAdd]="true" [nodeDatalinkColumnKey]="datalinkTransformForm.controls.nodeDatalinkColumn.value?.key"
 								 [allowRemove]="true" [updateParameterName]="false" (addParameter)="addParameter(inputParameter, eParameterDirection.Input, j)"
@@ -120,13 +120,13 @@
 					<div class="d-flex flex-row mb-1">
 						{{arrayParameter.name}}
 						<div class="ml-auto">
-							<dexih-button *ngIf="selectedFunction.importMethodName" text="Import Mappings" (click)="importInputOutputMappings(arrayParameter)"
+							<dexih-button *ngIf="selectedFunction.importMethodName" iconClass="fa fa-import" text="Import Mappings" (click)="importInputOutputMappings(arrayParameter)"
 							 title="Attempt to import the mappings from the source data" class="mr-1"></dexih-button>
-							<dexih-button text="Add Mapping" (click)="addInputOutputParameter(arrayParameter)"
+							<dexih-button iconClass="fa fa-plus" text="Add Mapping" (click)="addInputOutputParameter(arrayParameter)"
 							 title="Add a parameter to the array" class="mr-1"></dexih-button>
-							<dexih-button text="Add All Inputs" (click)="addAllInputOutputColumns(arrayParameter)"
+							<dexih-button iconClass="fa fa-columns" text="Add All Inputs" (click)="addAllInputOutputColumns(arrayParameter)"
 							 title="Add all the input columns to the array" class="mr-1"></dexih-button>
-							<dexih-button text="Clear" (click)="clearInputOutputArray(arrayParameter)"></dexih-button>
+							<dexih-button iconClass="fa fa-eraser" text="Clear" (click)="clearInputOutputArray(arrayParameter)"></dexih-button>
 						</div>
 					</div>
 					<div *ngFor="let parameterItem of arrayParameter.parameterItems; let j = index" class="pl-2"
@@ -159,9 +159,9 @@
 									Array - {{outputParameter.value.name}}
 								</div>
 								<div class="ml-auto">
-									<dexih-button text="Add Parameter" (click)="addParameter(outputParameter, eParameterDirection.Output)" title="Add a parameter to the array"
+									<dexih-button iconClass="fa fa-plus"  text="Add Parameter" (click)="addParameter(outputParameter, eParameterDirection.Output)" title="Add a parameter to the array"
 									 class="mr-1"></dexih-button>
-									<dexih-button text="Clear" (click)="clearArray(outputParameter)"></dexih-button>
+									<dexih-button iconClass="fa fa-eraser"  text="Clear" (click)="clearArray(outputParameter)"></dexih-button>
 								</div>
 							</div>
 							<output-parameter *ngIf="outputParameter.controls.arrayParameters.controls.length === 0" [outputParameterForm]="outputParameter"
