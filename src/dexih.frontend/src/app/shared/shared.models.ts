@@ -2237,6 +2237,7 @@ export class ApiData {
     Error = 28,
     Url = 29,
     UpdateReason = 30,
+    FileDate = 31
    }
    
    export const eDeltaTypeItems = [
@@ -2260,6 +2261,7 @@ export class ApiData {
     {key: eDeltaType.RejectedReason, name: 'RejectedReason'},
     {key: eDeltaType.FileName, name: 'FileName'},
     {key: eDeltaType.FileRowNumber, name: 'FileRowNumber'},
+    {key: eDeltaType.FileDate, name: 'FileDate'},
     {key: eDeltaType.RowKey, name: 'RowKey'},
     {key: eDeltaType.PartitionKey, name: 'PartitionKey'},
     {key: eDeltaType.TimeStamp, name: 'TimeStamp'},

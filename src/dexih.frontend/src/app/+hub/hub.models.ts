@@ -2092,6 +2092,7 @@ export const deltaTypes = [
     {key: eDeltaType.RejectedReason, name: 'Reject Reason', dataType: eTypeCode.String, defaultName: 'RejectReason', unique: true},
     {key: eDeltaType.FileName, name: 'File Name', dataType: eTypeCode.String, defaultName: 'FileName', unique: true},
     {key: eDeltaType.FileRowNumber, name: 'File Row Number', dataType: eTypeCode.Int64, defaultName: 'FileRowNumber', unique: true},
+    {key: eDeltaType.FileDate, name: 'File Modified Date', dataType: eTypeCode.Int64, defaultName: 'FileDate', unique: true},
     {key: eDeltaType.RowKey, name: 'RowKey (Azure/Mongo)', dataType: null, defaultName: null, unique: true},
     {key: eDeltaType.PartitionKey, name: 'PartitionKey (Azure only)', dataType: null, defaultName: null, unique: true},
     {key: eDeltaType.TimeStamp, name: 'Auto TimeStamp', dataType: null, defaultName: null, unique: true},

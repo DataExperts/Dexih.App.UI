@@ -27,7 +27,7 @@ namespace dexih.api.Models
     {
         public long HubKey { get; set; }
         public string RemoteAgentId { get; set; }
-        public DownloadUrl DownloadUrl { get; set; }
+        public virtual DownloadUrl DownloadUrl { get; set; }
     }
     
 
@@ -144,7 +144,12 @@ namespace dexih.api.Models
     public class ImportFileFormat: HubModelBase
     {
         public string Table { get; set; }
-        public DexihTable TableObj => string.IsNullOrEmpty(Table) ? null : JsonExtensions.Deserialize<DexihTable>(Table);
+        
+        public string DownloadUrlJson { get; set; }
+        public DexihTable TableObj => string.IsNullOrEmpty(Table) ? null : Table.Deserialize<DexihTable>();
+
+        public override DownloadUrl DownloadUrl => string.IsNullOrEmpty(DownloadUrlJson) ? null : DownloadUrlJson.Deserialize<DownloadUrl>();
+
         public bool Save { get; set; }
     }
     
