@@ -6,9 +6,10 @@ import { DatalinkEditService } from '../datalink-edit.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { AuthService } from '../../../../+auth/auth.service';
 import { FormGroup } from '@angular/forms';
-import { compare, aggregates } from '../../../hub.query.models';
+import { compare } from '../../../hub.query.models';
 import { InputOutputColumns } from '../../../hub.lineage.models';
-import { eTransformItemType, DexihDatalinkColumn, eAggregate, eCompare, DexihDatalinkTransformItem, eTypeCode, DexihDatalinkTarget, DexihTable, DexihTableColumn } from '../../../../shared/shared.models';
+import { eTransformItemType, DexihDatalinkColumn, eAggregate, eCompare, 
+  DexihDatalinkTransformItem, eTypeCode, DexihDatalinkTarget, DexihTable, DexihTableColumn, eAggregateItems } from '../../../../shared/shared.models';
 
 @Component({
   selector: 'mapping-edit',
@@ -51,7 +52,7 @@ export class MappingEditComponent implements OnInit, OnDestroy {
   showOutput = true;
 
   eAggregate = eAggregate;
-  aggregates = aggregates;
+  eAggregateItems = eAggregateItems.filter(c => c.key > 0);
   compare = compare;
   eCompare = eCompare;
 

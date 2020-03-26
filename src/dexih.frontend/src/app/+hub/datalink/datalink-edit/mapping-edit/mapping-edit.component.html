@@ -10,7 +10,7 @@
 			<fieldset>
 				<div class="form-row">
 					<section *ngIf="transformItemType == eTransformItemType.AggregatePair" class="form-group col-md-4">
-						<form-select label="Aggregate" formControlName="aggregate" [items]="aggregates" itemKey="key"
+						<form-select label="Aggregate" formControlName="aggregate" [items]="eAggregateItems" itemKey="key"
 							itemName="name">
 						</form-select>
 					</section>

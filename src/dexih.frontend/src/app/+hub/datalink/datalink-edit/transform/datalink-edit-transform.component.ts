@@ -275,7 +275,7 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
                     });
                 }
                 outputColumn.datalinkTableKey = null;
-                outputColumn.name = 'Sum ' + outputColumn.name;
+                // outputColumn.name = 'Sum ' + outputColumn.name;
                 item.aggregate = eAggregate.Sum;
                 break;
         }

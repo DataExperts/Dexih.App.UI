@@ -102,15 +102,15 @@ export const downloadFormats = [
 //     Last = <any>'Last'
 // }
 
-export const aggregates = [
-    {key: eAggregate.Sum, name: 'Sum'},
-    {key: eAggregate.Average, name: 'Average'},
-    {key: eAggregate.Min, name: 'Minimum'},
-    {key: eAggregate.Max, name: 'Maximum'},
-    {key: eAggregate.Count, name: 'Count'},
-    {key: eAggregate.First, name: 'Last'},
-    {key: eAggregate.Last, name: 'First'},
-];
+// export const aggregates = [
+//     {key: eAggregate.Sum, name: 'Sum'},
+//     {key: eAggregate.Average, name: 'Average'},
+//     {key: eAggregate.Min, name: 'Minimum'},
+//     {key: eAggregate.Max, name: 'Maximum'},
+//     {key: eAggregate.Count, name: 'Count'},
+//     {key: eAggregate.First, name: 'Last'},
+//     {key: eAggregate.Last, name: 'First'},
+// ];
 
 // export enum eCompare {
 //     IsEqual = <any>'IsEqual',
