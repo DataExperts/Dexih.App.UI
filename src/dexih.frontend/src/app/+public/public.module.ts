@@ -5,7 +5,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { PublicService } from './public.service';
 import { PublicComponent } from './public.component';
-import { PublicIndexComponent} from './public-index';
 import { RibbonModule } from '../shared/layout/ribbon';
 
 @NgModule({

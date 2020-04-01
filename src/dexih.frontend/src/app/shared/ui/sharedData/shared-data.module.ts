@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SharedDataComponent, PreviewDataComponent, PreviewDashboardComponent, PreviewDashboardItemComponent, PreviewComponent} from './';
+import { SharedDataComponent, PreviewDataComponent, PreviewDashboardComponent, PreviewDashboardItemComponent,
+  PreviewComponent, InputParametersViewComponent} from './';
 import { DexihComponentsModule } from 'dexih-ngx-components';
 import { DexihTableModule} from 'dexih-ngx-table';
-import { InputParametersViewComponent } from '../../../+hub/widgets/input-parameters-view/input-parameters-view.component';
 import { ChartBuilderModule } from '../chartBuilder/chart-builder.module';
 import { GridsterModule} from 'angular-gridster2';
 import { DexihMessageModule } from '../dexihMessage';

@@ -1,6 +1,5 @@
 ﻿import { Routes, RouterModule } from '@angular/router';
 import { PublicComponent } from './public.component';
-import { PublicIndexComponent } from './public-index';
 import { SharedDataComponent, PreviewComponent, PreviewDashboardComponent } from '../shared/ui/sharedData';
 
 // insert the "hubs" routes once for the base, and once under the summary section to ensure the
