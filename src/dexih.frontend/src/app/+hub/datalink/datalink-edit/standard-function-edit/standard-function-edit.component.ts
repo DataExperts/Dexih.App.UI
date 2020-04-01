@@ -341,7 +341,7 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
     // convoluted sort below allows sorting by the direction then the position
     this.outputParameterControls = <FormGroup[]>parametersArray.controls
       .sort((a, b) => a.value.position - b.value.position)
-      .filter(c => !c.value.runTime.functionParameter.linkedName && HubCache.parameterIsOutput(c.value));
+      .filter(c => HubCache.parameterIsOutput(c.value));
 
     // don't include return value (which will determine pass/fail) for validation transforms.
     if (this.transformFunctionType === eFunctionType.Validate) {
@@ -352,35 +352,48 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
 
     if (this.selectedFunction) {
 
-      this.selectedFunction.inputParameters.filter(c => c.linkedName).forEach(parameter => {
-        let arrayParameter = this.arrayParameters.find(c => c.name === parameter.linkedName);
-        if (!arrayParameter) {
-          arrayParameter = new ArrayParameter();
-          arrayParameter.name = parameter.linkedName;
-          arrayParameter.functionParameter = parameter;
-          this.arrayParameters.push(arrayParameter);
-        }
-
-        let controls = this.inputParameterControls.find(c => c.controls.name.value === parameter.name);
-        arrayParameter.inputParameterForms.push(controls);
+      this.selectedFunction.inputParameters?.filter(c => c.linkedName).forEach(parameter => {
+        this.addArrayParameter(parameter, true);
       });
 
-      this.selectedFunction.outputParameters.filter(c => c.linkedName).forEach(parameter => {
-        let arrayParameter = this.arrayParameters.find(c => c.name === parameter.linkedName);
-        if (!arrayParameter) {
-          arrayParameter = new ArrayParameter();
-          arrayParameter.name = parameter.linkedName;
-          arrayParameter.functionParameter = parameter;
-          this.arrayParameters.push(arrayParameter);
-        }
-
-        let controls = this.outputParameterControls.find(c => c.controls.name.value === parameter.name);
-        arrayParameter.outputParameterForms.push(controls);
-
+      this.selectedFunction.outputParameters?.filter(c => c.linkedName).forEach(parameter => {
+        this.addArrayParameter(parameter, false);
       });
+
+      this.selectedFunction.resultInputParameters?.filter(c => c.linkedName).forEach(parameter => {
+        this.addArrayParameter(parameter, true);
+      });
+
+      this.selectedFunction.resultOutputParameters?.filter(c => c.linkedName).forEach(parameter => {
+        this.addArrayParameter(parameter, false);
+      });
+
+      this.selectedFunction.resultReturnParameters?.filter(c => c.linkedName).forEach(parameter => {
+        this.addArrayParameter(parameter, false);
+      });
+
     }
 
     this.arrayParameters.forEach(arrayParameter => arrayParameter.resetItems());
+  }
+
+  private addArrayParameter(parameter: FunctionParameter, isInput: boolean) {
+    let arrayParameter = this.arrayParameters.find(c => c.name === parameter.linkedName);
+    if (!arrayParameter) {
+      arrayParameter = new ArrayParameter();
+      arrayParameter.name = parameter.linkedName;
+      arrayParameter.functionParameter = parameter;
+      this.arrayParameters.push(arrayParameter);
+    }
+
+    if (isInput) {
+      let controls = this.inputParameterControls.find(c => c.controls.name.value === parameter.name);
+      arrayParameter.inputParameterForms.push(controls);
+    } else {
+      let controls = this.outputParameterControls.find(c => c.controls.name.value === parameter.name);
+      arrayParameter.outputParameterForms.push(controls);
+    }
+
   }
 
   // when a new standard function is selected

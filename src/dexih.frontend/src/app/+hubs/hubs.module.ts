@@ -8,7 +8,7 @@ import { HubsComponent } from './hubs.component';
 import { HubIndexComponent } from './hub-index/hub-index.component';
 import { HubEditComponent } from './hub-edit/hub-edit.component';
 import { HubsSummaryComponent} from './hubs-summary/hubs-summary.component';
-import { HubsSharedDataComponent, PreviewDataComponent, PreviewDashboardComponent, PreviewDashboardItemComponent, PreviewComponent} from './hubs-sharedData';
+// import { HubsSharedDataComponent, PreviewDataComponent, PreviewDashboardComponent, PreviewDashboardItemComponent, PreviewComponent} from './hubs-sharedData';
 import { ManageComponent } from './manage/manage.component';
 import { TasksIndexComponent } from './tasks/tasks-index';
 import { TaskStatusComponent } from './tasks/task-status';
@@ -20,7 +20,7 @@ import { HelpComponent } from './help'
 import { RemoteAgentDownloadComponent } from './remoteAgents/remoteAgent-download';
 import { RemoteAgentEditComponent } from './remoteAgents/remoteAgent-edit';
 import { RemoteAgentTokenComponent} from './remoteAgents/remote-agent-token/remote-agent-token.component';
-import { InputParametersViewComponent } from './hubs-sharedData/input-parameters-view/input-parameters-view.component';
+// import { InputParametersViewComponent } from './hubs-sharedData/input-parameters-view/input-parameters-view.component';
 import { IssueEditComponent, IssueIndexComponent } from './support'
 
 
@@ -35,8 +35,8 @@ import { IssueEditComponent, IssueIndexComponent } from './support'
         HubIndexComponent,
         HubEditComponent,
         HubsSummaryComponent,
-        HubsSharedDataComponent, PreviewDataComponent, PreviewDashboardComponent, PreviewDashboardItemComponent, PreviewComponent,
-        InputParametersViewComponent,
+        // HubsSharedDataComponent, PreviewDataComponent, PreviewDashboardComponent, PreviewDashboardItemComponent, PreviewComponent,
+        // InputParametersViewComponent,
         ManageComponent,
         TasksIndexComponent,
         TaskStatusComponent,

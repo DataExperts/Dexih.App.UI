@@ -225,6 +225,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                                     value: this.formatValue(this.seriesColumnsIndex[i].name, j)
                                 };
                             }
+                            series = series.filter(c => c.value !== '');
                             chartData[i] = { name: this.seriesColumnsIndex[i].title, series: series };
                         }
                         this.setSeriesLabel(this.seriesColumnsIndex.map(c => c.title).join(' / '));

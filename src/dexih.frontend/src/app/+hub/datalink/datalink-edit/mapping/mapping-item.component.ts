@@ -179,10 +179,7 @@ export class MappingItemComponent implements OnInit {
 
         let outputParams = this.transformItem.dexihFunctionParameters
             .filter(
-                c => c.direction === eParameterDirection.Output ||
-                c.direction === eParameterDirection.ResultOutput ||
-                c.direction === eParameterDirection.ResultReturnValue ||
-                c.direction === eParameterDirection.ReturnValue );
+                c => HubCache.parameterIsOutput(c));
 
         this.outputParameters = functionOutputs.filter(c => c &&  !c.linkedName).map<ValidParameter>(param => {
             let p = outputParams.find(c => c.name === param.parameterName);
@@ -251,11 +248,7 @@ export class MappingItemComponent implements OnInit {
         });
 
         let outputParams = this.transformItem.dexihFunctionParameters
-            .filter(
-                c => c.direction === eParameterDirection.Output ||
-                c.direction === eParameterDirection.ResultOutput ||
-                c.direction === eParameterDirection.ResultReturnValue ||
-                c.direction === eParameterDirection.ReturnValue);
+            .filter(c => HubCache.parameterIsOutput(c));
 
         this.outputParameters = outputParams.map<ValidParameter>(p => {
             if (p.rank === 0) {

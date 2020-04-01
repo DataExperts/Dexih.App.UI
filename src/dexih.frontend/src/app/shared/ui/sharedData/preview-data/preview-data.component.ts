@@ -1,12 +1,11 @@
 import { Component, OnDestroy, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AuthService } from '../../../+auth/auth.service';
+import { AuthService } from '../../../../+auth/auth.service';
 import { Subscription, combineLatest, Subject} from 'rxjs';
-import { DexihMessageComponent } from '../../../shared/ui/dexihMessage/index';
-import { HubsService} from '../../hubs.service';
-import { CancelToken, Message } from '../../../+auth/auth.models';
+import { DexihMessageComponent } from '../../../../shared/ui/dexihMessage/index';
+import { CancelToken, Message } from '../../../../+auth/auth.models';
 import { InputColumn, DexihColumnBase, SelectQuery, eDownloadFormat, SharedData, eDataObjectType,
-    ChartConfig, InputParameterBase, InputParameter } from '../../../shared/shared.models';
+    ChartConfig, InputParameterBase, InputParameter } from '../../../shared.models';
 
 @Component({
 
@@ -50,14 +49,13 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
 
     constructor(
         private authService: AuthService,
-        private hubsService: HubsService,
         private route: ActivatedRoute) {
     }
 
     ngOnInit() {
         try {
             this._subscription = combineLatest(
-                this.hubsService.getSharedDataIndex('', [], 50, false)
+                this.authService.getSharedDataIndex('', [], 50, false)
             ).subscribe(result => {
                 let items = result[0];
 
@@ -100,7 +98,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
     }
 
     public refresh() {
-        this.hubsService.previewData(this.hubKey, this.objectKey, this.objectType, this.inputColumns, this.selectQuery,
+        this.authService.previewData(this.hubKey, this.objectKey, this.objectType, this.inputColumns, this.selectQuery,
             this.parameters, this.cancelToken).then((result) => {
                 this.refreshDataSubject.next();
                 this.columns = result.columns;
@@ -128,7 +126,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
         sharedData.parameters = this.parameters;
         sharedData.query = this.selectQuery;
 
-        this.hubsService.downloadData([sharedData], true, format, this.cancelToken).then(() => {
+        this.authService.downloadData([sharedData], true, format, this.cancelToken).then(() => {
             let message = new Message(true, 'The download task has started.', null, null);
             this.authService.addUpdateNotification(message, false);
         }).catch(reason => {

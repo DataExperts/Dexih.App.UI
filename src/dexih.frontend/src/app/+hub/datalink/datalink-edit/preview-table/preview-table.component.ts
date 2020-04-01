@@ -7,7 +7,7 @@ import { Subscription, combineLatest} from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormGroup } from '@angular/forms';
-import { eDataObjectType } from '../../../../shared/shared.models';
+import { eDataObjectType, DexihTable } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -30,6 +30,9 @@ export class PreviewTableComponent implements OnInit, OnDestroy {
     public error: string;
 
     tableKey: number;
+    datalinkKey: number;
+    
+    name: string;
 
     constructor(
         private hubService: HubService,
@@ -54,7 +57,19 @@ export class PreviewTableComponent implements OnInit, OnDestroy {
                 // load the cache first
                 if (this.hubCache.isLoaded()) {
                     // get the hub key from the route data, and update the service.
-                    this.tableKey = + params['tableKey'];
+                    if (params['tableKey']) {
+                        this.tableKey = +params['tableKey'];
+                        let table = this.hubCache.getTable(this.tableKey);
+                        if (table) {
+                            this.name = table.name;
+                        }
+                    } else {
+                        this.datalinkKey = +params['datalinkKey'];
+                        let datalink = this.hubCache.hub.dexihDatalinks.find(c => c.key == this.datalinkKey);
+                        if (datalink) {
+                            this.name = datalink.name;
+                        }
+                    }
                 }
             });
         } catch (e) {

@@ -13,8 +13,10 @@ import { AuthWebSocket } from './auth.websocket';
 import { UserAgentApplication, AuthResponse, CacheLocation } from 'msal';
 import { DexihModalComponent } from 'dexih-ngx-components';
 import { Location } from '@angular/common';
-import { DexihRemoteAgent, DexihActiveAgent, DownloadUrl, CacheManager, eClientCommand, eDownloadUrlType, eLoginProvider,
-    eTypeCode, ManagedTask, eManagedTaskStatus, ePermission, eSharedAccess, DexihIssue } from '../shared/shared.models';
+import { DexihRemoteAgent, DexihActiveAgent, DownloadUrl, CacheManager, eClientCommand, eLoginProvider,
+    eTypeCode, ManagedTask, eManagedTaskStatus, ePermission, eSharedAccess, DexihIssue,
+    DexihDashboard, ListOfValuesItem, SharedData, eDownloadFormat, eDataObjectType, InputColumn, SelectQuery, InputParameterBase } from '../shared/shared.models';
+import { PreviewResults } from '../+hub/hub.models';
 
 declare var gapi: any;
 
@@ -60,6 +62,8 @@ export class AuthService implements OnDestroy {
 
     // unique session id, used to refresh global cache when page refresh occurs.
     private sessionId = this.newGuid();
+
+    private sharedItemsIndex: SharedData[];
 
     constructor(
         private http: HttpClient,
@@ -1911,6 +1915,119 @@ export class AuthService implements OnDestroy {
 
     public getGlobalCachePromise(): Promise<CacheManager> {
         return this.getGlobalCacheObservable().pipe(first()).toPromise();
+    }
+
+    // gets all shared data items
+    getSharedDataIndex(searchString: string, hubKeys: number[], maxResults: number, reload: boolean): Promise<SharedData[]> {
+        if (reload || !this.sharedItemsIndex) {
+            return this.post<SharedData[]>('/api/SharedData/SharedDataIndex', {
+                searchString, hubKeys, maxResults
+            }, 'Getting shared data index...');
+        } else {
+            Promise.resolve(this.sharedItemsIndex);
+        }
+    }
+
+    downloadData(sharedItems: Array<SharedData>, zipFiles: boolean, downloadFormat: eDownloadFormat, cancelToken: CancelToken):
+        Promise<boolean> {
+        return new Promise<boolean>((resolve, reject) => {
+
+            // get distinct list of hubKeys
+            let flags = [], hubKeys = []
+            for (let i = 0; i < sharedItems.length; i++) {
+                if (flags[sharedItems[i].hubKey]) { continue };
+                flags[sharedItems[i].hubKey] = true;
+                hubKeys.push(sharedItems[i].hubKey);
+            }
+
+            hubKeys.forEach(hubKey => {
+                this.post<DexihActiveAgent>('/api/SharedData/GetActiveAgent', { hubKey: hubKey}, 'Getting active remote agent...')
+                .then(activeAgent => {
+
+                    this.postRemote<ManagedTask>('/api/SharedData/DownloadData', {
+                        hubKey: hubKey,
+                        clientId: this.getWebSocketConnectionId(),
+                        downloadFormat: downloadFormat,
+                        zipFiles: zipFiles,
+                        sharedItems: sharedItems.filter(c => c.hubKey === hubKey),
+                        remoteAgentId: activeAgent.instanceId,
+                    }, activeAgent, 'Downloading data...', cancelToken)
+                        .then(task => {
+                        this.addUpdateTask(task);
+                        resolve(true);
+                    }).catch(reason => {
+                        this.logger.LogC(() => `downloadData, error: ${reason.message}.`, eLogLevel.Error);
+                        reject(reason);
+                    });
+                });
+            });
+        });
+    }
+
+    // starts a preview, and returns the url to get the download stream.
+    previewData(hubKey: number, objectKey: number, objectType: eDataObjectType,
+        inputColumns: InputColumn[], selectQuery: SelectQuery, parameters: InputParameterBase[], cancelToken: CancelToken):
+        Promise<PreviewResults> {
+
+        return new Promise<PreviewResults>((resolve, reject) => {
+            this.post<DexihActiveAgent>('/api/SharedData/GetActiveAgent', { hubKey: hubKey }, 'Getting active remote agent...')
+            .then(activeAgent => {
+                this.postRemote<PreviewResults>('/api/SharedData/PreviewData', {
+                    hubKey: hubKey,
+                    objectType: objectType,
+                    objectKey: objectKey,
+                    selectQuery: selectQuery,
+                    remoteAgentId: activeAgent.instanceId,
+                    inputColumns: inputColumns,
+                    parameters: parameters
+                }, activeAgent, 'Previewing data...', cancelToken).then(result => {
+                    result.columns = this.constructDataTableColumns(result.columns);
+                    resolve(result);
+                }).catch(reason => {
+                    reject(reason);
+                })
+            }).catch(reason => {
+                reject(reason);
+            });
+        });
+    }
+
+      // starts a preview, and returns the url to get the download stream.
+      previewListOfValues(hubKey: number, objectKey: number, objectType: eDataObjectType, parameterName,
+        resetCache: boolean, cancelToken: CancelToken):
+        Promise<ListOfValuesItem[]> {
+
+        return new Promise<ListOfValuesItem[]>((resolve, reject) => {
+            this.post<DexihActiveAgent>('/api/SharedData/GetActiveAgent', { hubKey: hubKey }, 'Getting active remote agent...')
+            .then(activeAgent => {
+                this.postRemote<ListOfValuesItem[]>('/api/SharedData/PreviewListOfValues', {
+                    hubKey: hubKey,
+                    objectType: objectType,
+                    objectKey: objectKey,
+                    parameterName: parameterName,
+                    resetCache: resetCache,
+                    remoteAgentId: activeAgent.instanceId,
+                }, activeAgent, 'Previewing list of values...', cancelToken).then(result => {
+                    resolve(result);
+                }).catch(reason => {
+                    reject(reason);
+                })
+            }).catch(reason => {
+                reject(reason);
+            });
+        });
+    }
+
+    getDashboard(hubKey: number, dashboardKey: number): Promise<DexihDashboard> {
+
+        return new Promise<DexihDashboard>((resolve, reject) => {
+            this.post<DexihDashboard>('/api/SharedData/PreviewDashboard', {
+                hubKey: hubKey,
+                dashboardKey: dashboardKey,
+            }, 'Getting dashboard download locations...').then(dashboard => {
+                resolve(dashboard);
+            }).catch(reason => reject(reason));
+        });
     }
 }
 

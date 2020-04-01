@@ -594,6 +594,7 @@ namespace dexih.api.Services.Remote
 		    var hub = await repositoryManager.GetHub(hubKey, cancellationToken);
 		    var cache = new CacheManager(hubKey, hub.EncryptionKey);
 		    cache.AddConnections(hubTables.Select(c => c.ConnectionKey).Distinct(), false, hub);
+		    cache.AddFileFormats(hubTables.Where(c => c.FileFormatKey != null).Select(c => (long) c.FileFormatKey).Distinct(), hub);
 
 		    var value = new
 		    {

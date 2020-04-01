@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { DexihDashboardItem, eDataObjectType, InputParameter, InputParameterBase } from '../../../shared/shared.models';
+import { DexihDashboardItem, eDataObjectType, InputParameter, InputParameterBase } from '../../../shared.models';
 
 @Component({
     selector: 'preview-dashboard-item',

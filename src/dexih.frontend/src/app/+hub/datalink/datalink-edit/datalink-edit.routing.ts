@@ -49,8 +49,10 @@ export const datalinkEditRoutes: Routes = [
 
     { path: 'source-table', data: { pageTitle: 'Source Table' }, children: [
         { path: '', pathMatch: 'full', component: DatalinkEditSourceTableComponent},
-        { path: 'preview-table-data/:tableKey', component: PreviewTableComponent,
+        { path: 'preview-table-data/table/:tableKey', component: PreviewTableComponent,
             data: { pageTitle: 'Preview Table', action: 'preview'} },
+        { path: 'preview-table-data/datalink/:datalinkKey', component: PreviewTableComponent,
+            data: { pageTitle: 'Preview Datalink', action: 'preview'} },
         { path: 'column/:datalinkColumnKey', component: DatalinkColumnEditComponent,
             data: { pageTitle: 'Edit Column', action: 'edit'} },
         { path: 'newcolumn', component: DatalinkColumnEditComponent,

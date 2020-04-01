@@ -1,19 +1,18 @@
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { DexihMessageComponent } from '../../shared/ui/dexihMessage';
+import { DexihMessageComponent } from '../dexihMessage';
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { AuthService } from '../../+auth/auth.service';
+import { AuthService } from '../../../+auth/auth.service';
 import { Subscription, combineLatest } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { DexihHubAuth, CancelToken } from '../../+auth/auth.models';
+import { DexihHubAuth, CancelToken } from '../../../+auth/auth.models';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HubsService } from '../hubs.service';
-import { eDownloadFormat, SharedData, eSharedObjectType, eDataObjectType } from '../../shared/shared.models';
+import { eDownloadFormat, SharedData, eSharedObjectType, eDataObjectType } from '../../shared.models';
 
 @Component({
-    selector: 'hubs-sharedData',
-    templateUrl: './hubs-sharedData.component.html',
+    selector: 'sharedData',
+    templateUrl: './sharedData.component.html',
 })
-export class HubsSharedDataComponent implements OnInit, OnDestroy {
+export class SharedDataComponent implements OnInit, OnDestroy {
     @ViewChild('DexihMessage', { static: true }) public dexihMessage: DexihMessageComponent;
 
     public _subscription: Subscription;
@@ -35,7 +34,6 @@ export class HubsSharedDataComponent implements OnInit, OnDestroy {
     public dataIndex: SharedData[] = null;
 
     constructor(private authService: AuthService,
-        private hubsService: HubsService,
         private route: ActivatedRoute,
         private router: Router,
         private fb: FormBuilder) { }
@@ -81,7 +79,7 @@ export class HubsSharedDataComponent implements OnInit, OnDestroy {
 
     updateSearch() {
         let hubKeys = <number[]>this.searchForm.value.hubKeys;
-        this.hubsService.getSharedDataIndex(this.searchForm.value.searchString, hubKeys, 50, true).then(result => {
+        this.authService.getSharedDataIndex(this.searchForm.value.searchString, hubKeys, 50, true).then(result => {
 
             this.dataIndex = result;
 
@@ -97,7 +95,7 @@ export class HubsSharedDataComponent implements OnInit, OnDestroy {
     }
 
     downloadData(sharedItems: Array<SharedData>, zipFiles: boolean, downloadFormat: eDownloadFormat) {
-        this.hubsService.downloadData(sharedItems, zipFiles, downloadFormat, this.cancelToken).then(() => {
+        this.authService.downloadData(sharedItems, zipFiles, downloadFormat, this.cancelToken).then(() => {
             this.dexihMessage.addSuccessMessage('The download task has started.');
         }).catch(reason => {
             this.dexihMessage.addMessage(reason);

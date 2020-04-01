@@ -22,6 +22,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { GridsterModule} from 'angular-gridster2';
 import { AngularResizedEventModule } from 'angular-resize-event';
 import { DexihSupportOptionsModule } from './ui/supportOptions/support-options.module'
+import { SharedDataModule} from './ui/sharedData/shared-data.module';
 
 @NgModule({
   imports: [
@@ -44,7 +45,8 @@ import { DexihSupportOptionsModule } from './ui/supportOptions/support-options.m
     NgxChartsModule,
     GridsterModule,
     AngularResizedEventModule,
-    DexihSupportOptionsModule
+    DexihSupportOptionsModule,
+    SharedDataModule
   ],
   declarations: [
   ],

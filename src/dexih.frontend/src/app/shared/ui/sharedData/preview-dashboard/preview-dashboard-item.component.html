@@ -5,5 +5,7 @@
 <div *ngIf="item.description" class="p-3">
     <ngx-md [data]="item.description"></ngx-md>
 </div>
+
 <dexih-message #DexihMessage></dexih-message>
+
 <preview-data [hubKey]="hubKey" [parentParameters]="parentParameters" [objectType]="eDataObjectType.Dashboard" [objectKey]="item.key" [showToolbar]="true" (onMaximize)="maximize($event)"></preview-data>

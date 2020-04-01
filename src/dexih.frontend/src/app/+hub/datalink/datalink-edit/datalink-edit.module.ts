@@ -39,6 +39,7 @@ import { DatalinkColumnEditComponent } from './datalink-column-edit/datalink-col
 import { ResultsViewModule } from '../../results/results-view/results-view.module';
 import { InputParameterComponent, OutputParameterComponent} from './parameters'
 import { TargetColumnsComponent, TargetColumnComponent} from './target-columns';
+import { DatalinkPreviewDataComponent } from '../datalink-preview-data';
 
 @NgModule({
     imports: [
@@ -71,6 +72,7 @@ import { TargetColumnsComponent, TargetColumnComponent} from './target-columns';
         MappingComponent, MappingItemComponent,
         PreviewDataComponent,
         PreviewTableComponent,
+        // DatalinkPreviewDataComponent,
         TransformTableEditComponent,
         DatalinkEditTransformsComponent,
         DatalinkEditSaveButtonComponent,

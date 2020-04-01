@@ -61,7 +61,7 @@ export class OutputParameterComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnChanges() {
-        let table = new DexihTable() 
+        let table = new DexihTable();
         table.name = "Output Columns";
         table.dexihTableColumns = this.outputColumns;
 

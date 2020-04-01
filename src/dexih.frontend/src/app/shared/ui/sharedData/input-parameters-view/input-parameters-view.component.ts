@@ -1,21 +1,19 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { DexihListOfValues, InputParameterBase, eDataObjectType, ListOfValuesItem } from '../../../shared/shared.models';
+import { DexihListOfValues, InputParameterBase, eDataObjectType, ListOfValuesItem } from '../../../shared.models';
 import { Subscription, Observable } from 'rxjs';
-import { CancelToken } from '../../../+auth/auth.models';
-import { HubsService } from '../../hubs.service';
+import { CancelToken } from '../../../../+auth/auth.models';
+import { AuthService } from '../../../../+auth/auth.service';
 
 @Component({
     selector: 'input-parameters-view',
     templateUrl: 'input-parameters-view.component.html'
 })
-
 export class InputParametersViewComponent implements OnInit, OnDestroy {
     @Input() hubKey: number;
     @Input() objectType: eDataObjectType;
     @Input() objectKey: number;
     @Input() parameters: InputParameterBase[];
     @Input() refreshEvent: Observable<void>;
-
     @Output() onChange = new EventEmitter();
     @Output() onRefreshData = new EventEmitter();
 
@@ -35,7 +33,7 @@ export class InputParametersViewComponent implements OnInit, OnDestroy {
     public showRefresh = false;
     public isRefreshing = false;
 
-    constructor(private hubsService: HubsService) { }
+    constructor(private authService: AuthService) { }
 
     ngOnInit() {
         this.userParameters = [];
@@ -61,7 +59,7 @@ export class InputParametersViewComponent implements OnInit, OnDestroy {
     refresh(parameter: InputParameterBase) {
         if (!parameter.listOfValuesKey) { return; }
         parameter['runTime'].isRefreshing = true;
-        this.hubsService.previewListOfValues(this.hubKey, this.objectKey, this.objectType,
+        this.authService.previewListOfValues(this.hubKey, this.objectKey, this.objectType,
             parameter.name, false, this.cancelToken).then(result => {
             parameter['runTime'].items = result;
             parameter['runTime'].showRefresh = false;

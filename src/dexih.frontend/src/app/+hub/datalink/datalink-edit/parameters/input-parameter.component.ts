@@ -4,7 +4,7 @@ import { Subscription} from 'rxjs';
 import { TypeCodes, eBasicType, TypeFunctions } from '../../../hub.remote.models';
 import { HubService } from '../../../hub.service';
 import { InputOutputColumns } from '../../../hub.lineage.models';
-import { DexihDatalinkColumn, DexihTableColumn, DexihFunctionParameter, eTypeCode } from '../../../../shared/shared.models';
+import { DexihDatalinkColumn, DexihTableColumn, DexihFunctionParameter, eTypeCode, DexihTable, DexihDatalinkTarget } from '../../../../shared/shared.models';
 import { DatalinkEditService } from '../datalink-edit.service';
 
 export class InputValues {
@@ -31,9 +31,10 @@ export class InputParameterComponent implements OnInit, OnDestroy {
     @Input() public updateParameterName = false;
     @Input() public rank = 0;
     @Input() public nodeDatalinkColumnKey = null;
-
+    
     @Input() public outputParameterForms: FormGroup[] = null;
     @Input() public outputColumns: Array<DexihTableColumn> = null;
+    @Input() public datalinkTargets: Array<DexihDatalinkTarget> = null;
     @Input() public variables = [];
 
     @Output() public addParameter: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
@@ -46,6 +47,8 @@ export class InputParameterComponent implements OnInit, OnDestroy {
 
     public columns: Array<DexihTableColumn>;
     inputColumnGroups: Array<{group: string, columns: Array<DexihDatalinkColumn>}> = [];
+
+    outputTables: Array<DexihTable>;
 
     public inputs: InputValues[] = [];
 
@@ -144,7 +147,20 @@ export class InputParameterComponent implements OnInit, OnDestroy {
             });
         }
     }
+    ngOnChanges() {
+        let table = new DexihTable();
+        table.name = "Output Columns";
+        table.dexihTableColumns = this.outputColumns;
 
+        this.outputTables = [table];
+
+        if(this.datalinkTargets) {
+            this.datalinkTargets.forEach(target => {
+                this.outputTables.push(target['table']);
+            });
+        }
+    }
+    
     updateItems() {
         for ( let i = 0; i < this.inputParameterForms.length; i++) {
             let inputParameter: DexihFunctionParameter = this.inputParameterForms[i].value;

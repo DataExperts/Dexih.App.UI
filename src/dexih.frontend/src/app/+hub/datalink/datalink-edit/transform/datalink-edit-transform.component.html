@@ -83,12 +83,21 @@
 
             <form-checkbox label="Fill empty series values" formControlName="seriesFill"></form-checkbox>
 
-            <div class="form-row" *ngIf="seriesForm.controls.seriesFill.value">
+            <div class="form-row" *ngIf="seriesForm.controls.seriesFill.value && seriesForm.controls.seriesGrain.value !== eSeriesGrain.Number">
                 <section class="form-group col-md-6">
                     <form-input type="date" formControlName="seriesStart" label="Series Start Date (empty to use first value)"></form-input>
                 </section>
                 <section class="form-group col-md-6">
                     <form-input type="date" formControlName="seriesFinish" label="Series Finish Date (empty to use last value)"></form-input>
+                </section>
+            </div>
+
+            <div class="form-row" *ngIf="seriesForm.controls.seriesFill.value && seriesForm.controls.seriesGrain.value === eSeriesGrain.Number">
+                <section class="form-group col-md-6">
+                    <form-input formControlName="seriesStart" label="Series Start Number (empty to use first value)"></form-input>
+                </section>
+                <section class="form-group col-md-6">
+                    <form-input formControlName="seriesFinish" label="Series Finish Number (empty to use last value)"></form-input>
                 </section>
             </div>
         </fieldset>

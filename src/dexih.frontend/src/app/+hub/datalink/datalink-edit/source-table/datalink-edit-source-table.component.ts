@@ -7,6 +7,7 @@ import { DatalinkEditService } from '../datalink-edit.service';
 import { eObjectUse, ColumnUsageNode, eDatalinkObjectType } from '../../../hub.lineage.models';
 import { FormGroup, FormArray } from '@angular/forms';
 import { DexihDatalinkTable, eSourceType, DexihDatalinkColumn, eSecurityFlag, eDeltaType } from '../../../../shared/shared.models';
+import { AuthService } from '../../../../+auth/auth.service';
 
 @Component({
     selector: 'dexih-datalink-edit-source-table-form',
@@ -47,6 +48,7 @@ export class DatalinkEditSourceTableComponent implements OnInit, OnDestroy {
     tableData: Observable<Array<any>> = this._tableData.asObservable();
 
     constructor(
+        private authService: AuthService,
         private hubService: HubService,
         private editDatalinkService: DatalinkEditService,
         private route: ActivatedRoute,
@@ -87,8 +89,21 @@ export class DatalinkEditSourceTableComponent implements OnInit, OnDestroy {
     }
 
     previewData() {
-        let sourceTableKey = this.datalinkForm.controls.sourceDatalinkTable.value.sourceTableKey;
-        this.router.navigate(['preview-table-data', sourceTableKey], { relativeTo: this.route });
+        let sourceDatalinkTable = <DexihDatalinkTable> this.datalinkForm.controls.sourceDatalinkTable.value;
+
+        switch (sourceDatalinkTable.sourceType) {
+            case eSourceType.Table:
+                let sourceTableKey = sourceDatalinkTable.sourceTableKey;
+                this.router.navigate(['preview-table-data', 'table', sourceTableKey], { relativeTo: this.route });
+                break;
+            case eSourceType.Datalink:
+                let datalinkKey = sourceDatalinkTable.sourceDatalinkKey;
+                this.router.navigate(['preview-table-data', 'datalink', datalinkKey], { relativeTo: this.route });
+                break;
+            default:
+                this.authService.informationDialog('Cannot Preview', 'Previews are only available for tables and datalinks.');
+                break;
+        }
     }
 
     columnStatus(column: DexihDatalinkColumn): string {

@@ -115,7 +115,7 @@ export class DatalinkColumnEditComponent implements OnInit, OnChanges, OnDestroy
                     if (!column) {
                         columnsArray = <FormArray> itemForm.controls.dexihFunctionParameters;
                         let parameter = <FormGroup> columnsArray.controls.find(c =>
-                            c.value.direction === eParameterDirection.Output &&
+                            HubCache.parameterIsOutput(c.value) &&
                             c.value.datalinkColumn &&
                             c.value.datalinkColumn.key === this.datalinkColumnKey
                         );
@@ -127,7 +127,7 @@ export class DatalinkColumnEditComponent implements OnInit, OnChanges, OnDestroy
                                 let arrayParameters = <FormArray> (<FormGroup> c).controls.arrayParameters;
                                 if (arrayParameters) {
                                     parameter = <FormGroup> arrayParameters.controls.find(p =>
-                                        p.value.direction === eParameterDirection.Output &&
+                                        HubCache.parameterIsOutput(p.value) &&
                                         p.value.datalinkColumn &&
                                         p.value.datalinkColumn.key === this.datalinkColumnKey
                                     );
@@ -151,7 +151,10 @@ export class DatalinkColumnEditComponent implements OnInit, OnChanges, OnDestroy
         if (this.datalinkColumnKey) {
             this.originalColumnForm = this.findColumn();
             if (!this.originalColumnForm) {
-                this.authService.navigateUp();
+                this.authService.informationDialog('Cannot Edit', 'The selected column could not be edited.').then(() => {
+                    this.authService.navigateUp();
+                });
+
                 return;
             }
             columnForm = this.columnFormService.datalinkTableColumn(null, this.originalColumnForm.value);

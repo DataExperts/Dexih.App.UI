@@ -1,6 +1,7 @@
-<dexih-widget-section title="Preview Transform Data" [showExpandButton]="false" [padding]="false">
+<dexih-widget-section [title]="'Preview ' + name" [showExpandButton]="false" [padding]="false">
     <ng-template #header>
         <dexih-button-close (click)="close()"></dexih-button-close>
     </ng-template>
-    <preview-data [key]='tableKey' [viewSource]='eDataObjectType.Table'></preview-data>
+    <preview-data *ngIf="tableKey" [key]='tableKey' [viewSource]='eDataObjectType.Table'></preview-data>
+    <preview-data *ngIf="datalinkKey" [key]='datalinkKey' [viewSource]='eDataObjectType.Datalink'></preview-data>
 </dexih-widget-section>

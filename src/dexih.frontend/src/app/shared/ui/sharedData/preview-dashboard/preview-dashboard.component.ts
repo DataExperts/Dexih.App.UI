@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../../../+auth/auth.service';
+import { AuthService } from '../../../../+auth/auth.service';
 import { Subscription, combineLatest, Subject} from 'rxjs';
-import { DexihMessageComponent } from '../../../shared/ui/dexihMessage/index';
-import { HubsService} from '../../hubs.service';
-import { CancelToken } from '../../../+auth/auth.models';
-import { InputColumn, DexihColumnBase, DexihDashboard, DexihActiveAgent, InputParameterBase, eDataObjectType } from '../../../shared/shared.models';
-import { GridsterConfig, GridType, CompactType, DisplayGrid, GridsterItemComponentInterface, GridsterItem, GridsterItemComponent } from 'angular-gridster2';
+import { DexihMessageComponent } from '../../../../shared/ui/dexihMessage/index';
+import { CancelToken } from '../../../../+auth/auth.models';
+import { InputColumn, DexihColumnBase, DexihDashboard, 
+    DexihActiveAgent, InputParameterBase, eDataObjectType } from '../../../shared.models';
+import { GridsterConfig, GridType, CompactType, DisplayGrid, GridsterItem, GridsterItemComponent } from 'angular-gridster2';
 
 @Component({
 
@@ -44,7 +44,6 @@ export class PreviewDashboardComponent implements OnInit, OnDestroy {
 
     constructor(
         private authService: AuthService,
-        private hubsService: HubsService,
         private router: Router,
         private route: ActivatedRoute) {
     }
@@ -53,7 +52,7 @@ export class PreviewDashboardComponent implements OnInit, OnDestroy {
         try {
             this._subscription = combineLatest(
                 this.route.params,
-                this.hubsService.getSharedDataIndex('', [], 50, false)
+                this.authService.getSharedDataIndex('', [], 50, false)
             ).subscribe(result => {
                 let params = result[0];
 
@@ -81,7 +80,7 @@ export class PreviewDashboardComponent implements OnInit, OnDestroy {
     }
 
     refresh() {
-        this.hubsService.getDashboard(this.hubKey, this.dashboardKey).then((dashboard) => {
+        this.authService.getDashboard(this.hubKey, this.dashboardKey).then((dashboard) => {
             this.refreshDataSubject.next();
             
             this.setOptions(dashboard);

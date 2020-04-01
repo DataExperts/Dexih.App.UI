@@ -48,7 +48,7 @@ namespace dexih.api.Controllers
         [HttpPost("[action]")]
         public async Task<IEnumerable<SharedData>> SharedDataIndex([FromBody] SharedDataIndex sharedDataIndex, CancellationToken cancellationToken)
         {
-            var user = await _operations.RepositoryManager.GetUserAsync(User, cancellationToken);
+            var user = await _operations.RepositoryManager.GetUserAsync(User, cancellationToken, false);
             var sharedData = await _operations.RepositoryManager.GetSharedDataIndex(user, sharedDataIndex.SearchString, sharedDataIndex.HubKeys, sharedDataIndex.MaxResults, cancellationToken);
             return sharedData;
         }
@@ -56,7 +56,7 @@ namespace dexih.api.Controllers
         [HttpPost("[action]")]
         public async Task<string> PreviewListOfValues([FromBody] PreviewLOV previewLov, CancellationToken cancellationToken)
         {
-            var user = await _operations.RepositoryManager.GetUserAsync(User, cancellationToken);
+            var user = await _operations.RepositoryManager.GetUserAsync(User, cancellationToken, false);
             var repositoryManager = _operations.RepositoryManager;
 
             //check user can access the hub.
@@ -74,7 +74,7 @@ namespace dexih.api.Controllers
         [HttpPost("[action]")]
         public async Task<string> PreviewData([FromBody] PreviewData previewData, CancellationToken cancellationToken)
         {
-            var user = await _operations.RepositoryManager.GetUserAsync(User, cancellationToken);
+            var user = await _operations.RepositoryManager.GetUserAsync(User, cancellationToken, false);
             var repositoryManager = _operations.RepositoryManager;
 
             //check user can access the hub.
@@ -177,7 +177,7 @@ namespace dexih.api.Controllers
         [HttpPost("[action]")]
         public async Task<DexihDashboard> PreviewDashboard([FromBody] PreviewSharedDashboard previewDashboard, CancellationToken cancellationToken)
         {
-            var user = await _operations.RepositoryManager.GetUserAsync(User, cancellationToken);
+            var user = await _operations.RepositoryManager.GetUserAsync(User, cancellationToken, false);
             var repositoryManager = _operations.RepositoryManager;
 
             //check user can access the hub.
@@ -224,7 +224,7 @@ namespace dexih.api.Controllers
         [HttpPost("[action]")]
         public async Task<string> PreviewDashboardItem([FromBody] PreviewSharedDashboardItem previewDashboard, CancellationToken cancellationToken)
         {
-            var user = await _operations.RepositoryManager.GetUserAsync(User, cancellationToken);
+            var user = await _operations.RepositoryManager.GetUserAsync(User, cancellationToken, false);
             var repositoryManager = _operations.RepositoryManager;
 
             //check user can access the hub.

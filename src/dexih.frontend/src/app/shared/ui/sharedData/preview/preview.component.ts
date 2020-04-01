@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../../../+auth/auth.service';
+import { AuthService } from '../../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
-import { DexihMessageComponent } from '../../../shared/ui/dexihMessage/index';
-import { eDataObjectType } from '../../../shared/shared.models';
+import { DexihMessageComponent } from '../../../ui/dexihMessage/index';
+import { eDataObjectType } from '../../../shared.models';
 import { PreviewDataComponent} from '../preview-data/preview-data.component';
 
 @Component({
