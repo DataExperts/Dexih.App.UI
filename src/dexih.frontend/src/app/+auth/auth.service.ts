@@ -1940,6 +1940,13 @@ export class AuthService implements OnDestroy {
                 hubKeys.push(sharedItems[i].hubKey);
             }
 
+            let clientId = this.getWebSocketConnectionId();
+            if (!clientId) {
+                let message = new Message(false, 'Data downloads are only available for registered users.', null, null);
+                reject(message);
+                return;
+            }
+
             hubKeys.forEach(hubKey => {
                 this.post<DexihActiveAgent>('/api/SharedData/GetActiveAgent', { hubKey: hubKey}, 'Getting active remote agent...')
                 .then(activeAgent => {
