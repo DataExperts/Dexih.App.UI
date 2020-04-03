@@ -408,13 +408,15 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
     this.newDatalinkTransformItemForm.controls.functionMethodName.setValue(this.selectedFunction.functionMethodName);
     this.newDatalinkTransformItemForm.controls.targetDatalinkColumn.setValue(null);
 
-    if(this.selectedFunction.genericTypeDefault) {
-      this.newDatalinkTransformItemForm.controls.genericTypeCode.setValue(this.selectedFunction.genericTypeDefault);
-    } else {
-      if (this.selectedFunction.genericType === eGenericType.Numeric) {
-        this.newDatalinkTransformItemForm.controls.genericTypeCode.setValue(eTypeCode.Decimal);
+    if (!this.newDatalinkTransformItemForm.controls.genericTypeCode.value) {
+      if (this.selectedFunction.genericTypeDefault) {
+        this.newDatalinkTransformItemForm.controls.genericTypeCode.setValue(this.selectedFunction.genericTypeDefault);
       } else {
-        this.newDatalinkTransformItemForm.controls.genericTypeCode.setValue(eTypeCode.String);
+        if (this.selectedFunction.genericType === eGenericType.Numeric) {
+          this.newDatalinkTransformItemForm.controls.genericTypeCode.setValue(eTypeCode.Decimal);
+        } else {
+          this.newDatalinkTransformItemForm.controls.genericTypeCode.setValue(eTypeCode.String);
+        }
       }
     }
 
