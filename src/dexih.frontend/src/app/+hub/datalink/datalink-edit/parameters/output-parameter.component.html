@@ -30,7 +30,8 @@
                 <form-select [border]="false" formControlName="datalinkColumn" [items]="outputTables" parentName="name" childItems="dexihTableColumns" itemKey="key"
                     itemName="logicalName" [enableKeySelect]="false" [enableTextEntry]="true"
                     textEntryNote="Enter new column name, or select existing"
-                    (textValueChange)="updateNewColumn($event)">
+                    (textValueChange)="updateNewColumn($event)"
+                    [errors]="errors.datalinkColumn">
                 </form-select>
             </div>
 
@@ -44,6 +45,9 @@
             </div>
 
             <div class="input-group-append">
+                <button *ngIf="outputParameterForm.controls.datalinkColumn?.value && outputParameterForm.controls.dataType.value !== outputParameterForm.controls.datalinkColumn?.value?.dataType" class="btn btn-danger" type="button" (click)="fixDataType()" title="fix target column datatype">
+                    <i class="fa fa-medkit"></i>
+                </button>
                 <button class="btn btn-light" type="button" (click)="add()" [disabled]="!allowAdd" value="Add">
                     <i class="fa fa-plus-square-o"></i>
                 </button>

@@ -3,8 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { HubService } from '../../../hub.service';
 import { DatalinkEditService } from '../datalink-edit.service';
-import { Observable, Subscription, combineLatest} from 'rxjs';
-import { AuthService } from '../../../../+auth/auth.service';
+import { Subscription, combineLatest} from 'rxjs';
 import { FormGroup, FormArray, AbstractControl } from '@angular/forms';
 import { LogFactory, eLogLevel } from '../../../../../logging';
 import { transformTypes } from '../../../hub.remote.models';
@@ -12,7 +11,6 @@ import { HubCache } from '../../../hub.models';
 import { DexihDatalinkTransform, eTransformType } from '../../../../shared/shared.models';
 
 @Component({
-
     selector: 'dexih-datalink-edit-transforms-form',
     templateUrl: './datalink-edit-transforms.component.html',
     styleUrls: ['./transforms.scss']
@@ -28,14 +26,12 @@ export class DatalinkEditTransformsComponent implements OnInit, OnDestroy {
     public pageTitle = 'Transform';
     public message: string;
 
-    public datalinkTransforms: {transform: DexihDatalinkTransform, icon: string}[];
+    public datalinkTransforms: {transform: AbstractControl, name: string, icon: string, invalid: boolean}[] = null;
 
     public logger = new LogFactory('datalink-edit-transforms');
 
-
     constructor(
         private hubService: HubService,
-        private authService: AuthService,
         private editDatalinkService: DatalinkEditService,
         private route: ActivatedRoute,
         private router: Router
@@ -50,7 +46,6 @@ export class DatalinkEditTransformsComponent implements OnInit, OnDestroy {
                 this.route.params,
                 this.hubService.getHubCacheObservable(),
                 this.editDatalinkService.hubFormsService.getCurrentFormObservable(),
-                this.hubService.getRemoteLibrariesObservable()
             ).subscribe(result => {
                 this.action = result[0]['action'];
                 this.pageTitle = result[0]['pageTitle'];
@@ -63,20 +58,18 @@ export class DatalinkEditTransformsComponent implements OnInit, OnDestroy {
 
                     this.logger.LogC(() => `loading transform with key ${datalinkTransformKey}`, eLogLevel.Trace);
 
+                    this.datalinkForm.updateValueAndValidity({emitEvent: true});
+
                     this.refreshTransforms();
 
                     if (this._transformsChange) { this._transformsChange.unsubscribe(); }
                     this._transformsChange = this.datalinkForm.controls.dexihDatalinkTransforms.valueChanges
                         .subscribe(() => this.refreshTransforms());
                 }
-
-
             });
         } catch (e) {
             this.hubService.addHubClientErrorMessage(e, 'Datalink Edit Transform');
         }
-
-
     }
 
     ngOnDestroy() {
@@ -85,21 +78,22 @@ export class DatalinkEditTransformsComponent implements OnInit, OnDestroy {
     }
 
     refreshTransforms() {
+        this.logger.LogC(() => `refreshing transforms list`, eLogLevel.Trace);
+
         const transformsArray = <FormArray> this.datalinkForm.controls.dexihDatalinkTransforms;
-        let transforms =  transformsArray.controls
+        const transforms =  transformsArray.controls
             .filter(c => c.value.transformType !== eTransformType.Validation &&
                 c.value.transformType !== eTransformType.Profile)
             .sort((a, b) => a.value.position - b.value.position);
 
-        let datalinkTransforms = [];
-        transforms.forEach(transform => {
-            let type = transformTypes.find(c => c.key === transform.value.transformType);
+        const datalinkTransforms = transforms.map(transform => {
+            const type = transformTypes.find(c => c.key === transform.value.transformType);
             let icon = '';
             if (type) {
                 icon = type.icon
             }
-            let name = this.hubCache.getTransformName(transform.value);
-            datalinkTransforms.push({transform: transform, icon: icon, name: name});
+            const name = this.hubCache.getTransformName(transform.value);
+            return {transform: transform, icon: icon, name: name, invalid: transform.invalid};
         });
 
         this.datalinkTransforms = datalinkTransforms;
@@ -107,13 +101,12 @@ export class DatalinkEditTransformsComponent implements OnInit, OnDestroy {
 
     deleteTransform(datalinkTransform: DexihDatalinkTransform) {
         this.logger.LogC(() => `deleteTransform`, eLogLevel.Trace);
-        this.editDatalinkService.deleteDatalinkTransform(datalinkTransform).then(result => {
+        this.editDatalinkService.deleteDatalinkTransform(datalinkTransform).then(() => {
             this.refreshTransforms();
         });
     }
 
     previewData(datalinkTransform: DexihDatalinkTransform) {
-        this.router.navigate(['transform', datalinkTransform.key,
-            'preview-transform-data'], { relativeTo: this.route });
+        this.router.navigate(['transform', datalinkTransform.key, 'preview-transform-data'], { relativeTo: this.route });
     }
 }

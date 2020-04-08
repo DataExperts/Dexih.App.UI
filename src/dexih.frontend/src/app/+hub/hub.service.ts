@@ -213,7 +213,7 @@ export class HubService implements OnInit, OnDestroy {
 
 
     // update the hubKey and refresh the cache.
-    updateHub(hubKey: number, name: string ): void {
+    async updateHub(hubKey: number, name: string ): Promise<void> {
         this.logger.LogC(() => `updateHub, hubKey: ${hubKey}, name: ${name}.`, eLogLevel.Debug);
 
         this._hubMessages.next([]);
@@ -223,12 +223,12 @@ export class HubService implements OnInit, OnDestroy {
             this._hubKey = 0;
             this._hubCache.next(hubCache);
         } else if (!this._hubCache.getValue().hub || this._hubCache.getValue().hub.hubKey !== hubKey) {
-            this.refreshHubCache(hubKey, name);
+            await this.refreshHubCache(hubKey, name);
         }
     }
 
     // refresh the hubCache.
-    refreshHubCache(hubKey: number, name: string): void {
+    async refreshHubCache(hubKey: number, name: string): Promise<void> {
         if (!this._refreshHubRunning) {
             this._refreshHubRunning = true;
 
@@ -237,7 +237,9 @@ export class HubService implements OnInit, OnDestroy {
             this._hubKey = hubKey;
             this._hubCache.next(new HubCache(eCacheStatus.Loading, this.createHub(hubKey, name)));
 
-            this.hubPost<{permission: ePermission, hub: DexihHub}>('/api/Hub/GetHubCache', {}, 'Loading the hub cache...').then(result => {
+            try {
+                let result = await this.hubPost<{permission: ePermission, hub: DexihHub}>
+                ('/api/Hub/GetHubCache', {}, 'Loading the hub cache...')
                 let hub: DexihHub = result.hub;
                 let permission = result.permission;
 
@@ -274,13 +276,13 @@ export class HubService implements OnInit, OnDestroy {
                 this._hubCache.next(hubCache);
 
                 this._refreshHubRunning = false;
-            }).catch(reason => {
+            } catch(reason) {
                 this.logger.LogC(() => `refreshHubCache, hub load error: ${reason.message}.`, eLogLevel.Error);
                 this._hubCache.next(new HubCache(eCacheStatus.Error, null));
                 this.addHubMessage(reason);
 
                 this._refreshHubRunning = false;
-            });
+            }
         }
     }
 

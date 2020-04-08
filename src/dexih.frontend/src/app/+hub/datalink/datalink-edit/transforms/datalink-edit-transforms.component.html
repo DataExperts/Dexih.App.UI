@@ -1,37 +1,35 @@
 <dexih-widget-section title='Transforms' [padding]="false">
     <div *ngIf="datalinkTransforms" class="transform-container border bg-light">
         <div class="transform">
-            <div class="transform-step" *ngIf="datalinkTransforms.length == 0; else showTransforms">
+            <div class="transform-step" *ngIf="datalinkTransforms.length === 0">
                 <a [routerLink]="['new', 1]" class="btn btn-xs btn-success" title="Insert a transform before this"><i
                         class="fa fa-plus"></i></a>
                 <p>Add a transform</p>
             </div>
-            <ng-template #showTransforms>
-                <div class="transform-step" *ngFor="let datalinkTransform of datalinkTransforms"
-                    routerLinkActive="active">
-                    <a [routerLink]="['new', datalinkTransform.transform.value.position-1]"
-                        class="btn btn-sm btn-success mr-1" title="Insert a transform before this"><i
-                            class="fa fa-plus"></i></a>
 
-                    <a [routerLink]="['transform', datalinkTransform.transform.value.key]" class="btn btn-success  mr-1"
-                        [title]="'Select the ' + datalinkTransform.transform.value.name + ' transform.'">
-                        <span [ngClass]="datalinkTransform.icon"></span>
-                        <dexih-invalid-form-icon [control]="datalinkTransform.transform"></dexih-invalid-form-icon>
-                    </a>
+            <div class="transform-step" *ngFor="let datalinkTransform of datalinkTransforms" routerLinkActive="active">
+                <a [routerLink]="['new', datalinkTransform.transform.value.position-1]"
+                    class="btn btn-sm btn-success mr-1" title="Insert a transform before this"><i
+                        class="fa fa-plus"></i></a>
 
-                    <a class="btn btn-sm btn-success  mr-1"
-                        [routerLink]="['transform', datalinkTransform.transform.value.key, 'preview-transform-data']"
-                        title="Preview transform data"><i class="fa fa-search"></i></a>
-                    <a class="btn btn-sm btn-success  mr-1" href="javascript:void(0)"
-                        (click)="deleteTransform(datalinkTransform.transform.value)" title="Delete this transform"><i
-                            class="fa fa-minus"></i></a>
-                    <a [routerLink]="['new', datalinkTransform.transform.value.position+1]"
-                        class="btn btn-sm btn-success" title="Insert a transform after this"><i
-                            class="fa fa-plus"></i></a>
+                <a [routerLink]="['transform', datalinkTransform.transform.value.key]" class="btn btn-success  mr-1"
+                    [title]="'Select the ' + datalinkTransform.transform.value.name + ' transform.'">
+                    <span [ngClass]="datalinkTransform.icon"></span>
+                    <dexih-invalid-form-icon [control]="datalinkTransform.transform"></dexih-invalid-form-icon>
+                </a>
 
-                    <p>{{datalinkTransform.name}}</p>
-                </div>
-            </ng-template>
+                <a class="btn btn-sm btn-success  mr-1"
+                    [routerLink]="['transform', datalinkTransform.transform.value.key, 'preview-transform-data']"
+                    title="Preview transform data"><i class="fa fa-search"></i></a>
+                <a class="btn btn-sm btn-success  mr-1" href="javascript:void(0)"
+                    (click)="deleteTransform(datalinkTransform.transform.value)" title="Delete this transform"><i
+                        class="fa fa-minus"></i></a>
+                <a [routerLink]="['new', datalinkTransform.transform.value.position+1]" class="btn btn-sm btn-success"
+                    title="Insert a transform after this"><i class="fa fa-plus"></i></a>
+
+                <p>{{datalinkTransform.name}}</p>
+            </div>
+
         </div>
     </div>
 </dexih-widget-section>

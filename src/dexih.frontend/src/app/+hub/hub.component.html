@@ -32,7 +32,7 @@
         </section>
 
         <div *ngIf="hubCache && hubCache.status == eCacheStatus.Loaded">
-            <section *ngIf="!(openDelay && webSocketStatus != 'Connected') && !remoteAgent">
+            <section *ngIf="(openDelay && webSocketStatus != 'Connected') && !remoteAgent">
                 <div class="alert alert-danger m-3">
                     Warning: There is no remote agent connected.  A remote agent is required for any data access and processing.
                     <hr>

@@ -36,7 +36,7 @@ export class DatalinkTableComponent implements OnInit, OnDestroy {
         }
 
     ngOnInit() {
-        this.errors = this.datalinkEditService.hubFormsService.getFormErrorMessages(this.datalinkTableForm);
+        this.errors = this.datalinkEditService.hubFormsService.getFormErrorMessages(this.datalinkTableForm, true);
 
         try {
             this._subscription = combineLatest(
@@ -74,7 +74,7 @@ export class DatalinkTableComponent implements OnInit, OnDestroy {
             this.datalinkTableForm.controls.sourceTableKey.valueChanges,
             this.datalinkTableForm.controls.sourceDatalinkKey.valueChanges,
         ).subscribe(() => {
-            this.errors = this.datalinkEditService.hubFormsService.getFormErrorMessages(this.datalinkTableForm);
+            this.errors = this.datalinkEditService.hubFormsService.getFormErrorMessages(this.datalinkTableForm, true);
             this.refreshColumns();
         });
     }

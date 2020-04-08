@@ -110,6 +110,7 @@ export class DatalinkEditComponent implements OnInit, OnDestroy {
                             this.showPageMessage = 'Edit failed...';
                         }
                     }
+
                 } else if (!this.isLoaded && this.action === 'new') {
                     let datalink = new DexihDatalink();
                     datalink.sourceDatalinkTable = new DexihDatalinkTable();

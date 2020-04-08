@@ -32,7 +32,7 @@
 
 
 					<section [ngStyle]="{'z-index': 499, 'position': 'relative'}">
-						<form-select label="Select a standard function" (ngModelChange)="selectFunction($event)" [(ngModel)]="selectedFunction"
+						<form-select label="Select a standard function" (ngModelChange)="selectFunction($event, true)" [(ngModel)]="selectedFunction"
 						 [ngModelOptions]="{standalone: true}" [items]="filteredFunctions" [enableKeySelect]="false" itemKey="name" itemName="name" itemTitle="description" [note]="selectedFunction?.description"
 						 [sortItems]="true">
 						</form-select>

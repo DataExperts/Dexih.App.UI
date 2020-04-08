@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy, OnInit, EventEmitter } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators, AsyncValidatorFn, ValidationErrors } from '@angular/forms';
 import { BehaviorSubject, Observable, Subscription, combineLatest} from 'rxjs';
 
 import { AuthService } from '../+auth/auth.service';
@@ -22,7 +22,8 @@ import { eImportAction, Import, DexihConnection, DexihTable, DexihTableColumn, e
    DexihDatalinkTransform, DexihDatalinkTransformItem, DexihFunctionParameter, DexihFunctionArrayParameter,
    DexihDatalinkProfile, DexihDatalinkTarget, DexihDatalinkTable,
    eSourceType, eSharedObjectType, DexihListOfValues, InputParameterBase,
-   eDataObjectType, ListOfValuesItem } from '../shared/shared.models';
+   eDataObjectType, ListOfValuesItem, eTransformItemType } from '../shared/shared.models';
+import { filter } from 'rxjs/operators';
 
 @Injectable()
 export class HubFormsService implements OnDestroy {
@@ -69,7 +70,9 @@ export class HubFormsService implements OnDestroy {
 
   validationMessages = {
     'required': 'A value is required.',
-    'duplicateName': 'The value is already being used.'
+    'duplicateName': 'The value is already being used.',
+    'dataType': 'The data types are inconsistent.',
+    'invalidClass': 'The function method could not be found'
   };
 
   validationFieldMessages = {
@@ -147,17 +150,18 @@ export class HubFormsService implements OnDestroy {
   public startForm(form: FormGroup) {
     this.logger.LogC(() => `startForm started`, eLogLevel.Trace);
 
-    this.currentForm = form;
-    this._currentFormObservable.next(form);
-
-    if (this.currentForm) {
+    if (form) {
       if (this._valueChangesSubscription) { this._valueChangesSubscription.unsubscribe(); }
-      this._valueChangesSubscription = this.currentForm.valueChanges
+      this._valueChangesSubscription = form.valueChanges
         .subscribe(data => this.onValueChanged(data));
       this.onValueChanged(); // (re)set validation messages now
     }
 
+    this.currentForm = form;
+    this._currentFormObservable.next(form);
+
     this.hasChanged = false;
+
     this.logger.LogC(() => `startForm finished`, eLogLevel.Trace);
   }
 
@@ -175,7 +179,7 @@ export class HubFormsService implements OnDestroy {
       const form = this.currentForm;
 
       this.hasChanged = true;
-      this.formErrors = this.getFormErrorMessages(form);
+      this.formErrors = this.getFormErrorMessages(form, this.showAllErrors);
 
       this.logger.LogC(() => `onValueChanged completed`, eLogLevel.Trace);
     }
@@ -194,7 +198,7 @@ export class HubFormsService implements OnDestroy {
   }
 
   // returns an object containing any error message for controls contained within the specified form.
-  public getFormErrorMessages(form: FormGroup): {} {
+  public getFormErrorMessages(form: FormGroup, showAllErrors: boolean): {} {
     let formErrors = {};
 
     if (!form.controls) { return ''; }
@@ -205,7 +209,7 @@ export class HubFormsService implements OnDestroy {
       const control = form.get(field);
 
       // if the control is dirty or flag is set to show all errors.
-      if (control && (control.dirty || this.showAllErrors)) {
+      if (control && (control.dirty || showAllErrors)) {
         if (!control.valid) {
           if (control instanceof FormArray) {
 
@@ -1637,28 +1641,31 @@ export class HubFormsService implements OnDestroy {
       'targetDatalinkColumn': [item.targetDatalinkColumn, [
         this.duplicateOutputColumn(datalinkTransformForm)
       ]],
+      'functionClassName': [item.functionClassName],
+      'functionMethodName': [item.functionMethodName],
       'isValid': true
-    });
+    }, {asyncValidators: [this.invalidClassName()]});
 
     this.addMissing(item, itemForm, new DexihDatalinkTransformItem());
 
-//    if (item.genericTypeCode) {
-      // when ever generic parameter changes, change all underlying types.
-      if (this._genericParameterSubscription) { this._genericParameterSubscription.unsubscribe(); }
-      this._genericParameterSubscription = itemForm.controls.genericTypeCode.valueChanges.subscribe(() => {
-        let typeCode = itemForm.controls.genericTypeCode.value;
-        let parameters = <FormArray> itemForm.controls.dexihFunctionParameters;
-        parameters.controls.filter(c => c.value.isGeneric).forEach(p => {
-          let param = <FormGroup>p;
-          param.controls.dataType.setValue(typeCode);
-          let arrayParams = <FormArray> param.controls.arrayParameters;
-          arrayParams.controls.forEach(ap => {
-            let aParam = <FormGroup>ap;
-            aParam.controls.dataType.setValue(typeCode);
-          });
-        })
+    // itemForm.controls.functionMethodName.setAsyncValidators(this.invalidClassName(itemForm));
+
+    // when ever generic parameter changes, change all underlying types.
+    if (this._genericParameterSubscription) { this._genericParameterSubscription.unsubscribe(); }
+    this._genericParameterSubscription = itemForm.controls.genericTypeCode.valueChanges.subscribe(() => {
+      let typeCode = itemForm.controls.genericTypeCode.value;
+      let parameters = <FormArray> itemForm.controls.dexihFunctionParameters;
+      parameters.controls.filter(c => c.value.isGeneric).forEach(p => {
+        let param = <FormGroup>p;
+        param.controls.dataType.setValue(typeCode);
+        let arrayParams = <FormArray> param.controls.arrayParameters;
+        arrayParams.controls.forEach(ap => {
+          let aParam = <FormGroup>ap;
+          aParam.controls.dataType.setValue(typeCode);
+        });
       });
-//    }
+    });
+
 
     return itemForm;
   }
@@ -1678,6 +1685,32 @@ export class HubFormsService implements OnDestroy {
     };
   }
 
+  invalidClassName(): AsyncValidatorFn {
+    return (control: AbstractControl): Promise<ValidationErrors | null> => {
+      const datalinkTransformItemForm = <FormGroup>control;
+      datalinkTransformItemForm.controls.functionMethodName.setErrors(null);
+      if (this.currentForm && datalinkTransformItemForm.controls.transformItemType
+        && datalinkTransformItemForm.controls.transformItemType.value === eTransformItemType.BuiltInFunction ) {
+        return new Promise((resolve, reject) => {
+          this.hubService.GetFunctionReference(datalinkTransformItemForm.value).then(func => {
+          if (func) {
+            resolve(null);
+          } else {
+            const value = datalinkTransformItemForm.controls.functionClassName.value + '.' +
+              datalinkTransformItemForm.controls.functionMethodName.value;
+              datalinkTransformItemForm.controls.functionMethodName.setErrors({ 'invalidClass': { value } });
+            resolve({ 'invalidClass': { value } });
+          }
+        }).catch(reason => {
+          reject(reason);
+        });
+      });
+      } else {
+        return Promise.resolve(null);
+      }
+    };
+  }
+
   public datalinkFunctionParametersFormGroup(parameter: DexihFunctionParameter): FormGroup {
     const parameterForm = this.fb.group({
       // 'name': [, [ // used for adding new columns
@@ -1687,9 +1720,10 @@ export class HubFormsService implements OnDestroy {
       'arrayParameters': this.fb.array(parameter.arrayParameters.filter(c => c.isValid).map(p => {
         return this.datalinkFunctionArrayParametersFormGroup(p);
       })),
-    });
+    }, { validator: this.inconsistentDataType()});
 
     this.addMissing(parameter, parameterForm, new DexihFunctionParameter());
+
     return parameterForm;
   }
 
@@ -1699,10 +1733,30 @@ export class HubFormsService implements OnDestroy {
       // ]],
       'datalinkColumn': parameter.datalinkColumn,
       'runTime': parameter['runTime'],
-    });
+    }, { validator: this.inconsistentDataType()});
 
     this.addMissing(parameter, parameterForm, new DexihFunctionArrayParameter());
+
     return parameterForm;
+  }
+
+  inconsistentDataType(): ValidatorFn {
+    return (group: FormGroup): { [key: string]: any } => {
+      if (this.currentForm) {
+        const datalinkColumn = group.controls.datalinkColumn;
+        if (datalinkColumn && datalinkColumn.value) {
+          const dataType = datalinkColumn.value.dataType;
+          const parameterDataType = group.controls.dataType?.value;
+          if (dataType !== parameterDataType) {
+            datalinkColumn.setErrors({'dataType': { dataType }});
+            return { 'dataType': { dataType }};
+          } else {
+            datalinkColumn.setErrors(null);
+          }
+        }
+      }
+      return null;
+    };
   }
 
   public datalinkProfileFormGroup(profile: DexihDatalinkProfile): FormGroup {

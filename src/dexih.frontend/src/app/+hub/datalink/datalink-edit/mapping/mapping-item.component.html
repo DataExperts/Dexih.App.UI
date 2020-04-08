@@ -2,12 +2,16 @@
     <div *ngIf="!outputParameters" class="row justify-content-start">
         <div class="col-auto">
             <h5>{{label}}</h5>
+            <div *ngIf="error" class="text-danger">
+                <i class="fa fa-exclamation-circle text-danger" ></i>
+                {{error}}
+            </div>
         </div>
         <div *ngIf="source" class="col-auto"><i *ngIf="!source.valid"
-                class="fa fa-exclamation-circle text-danger"></i>{{source.text}}</div>
+                class="fa fa-exclamation-circle text-danger" [title]="source.error"></i>{{source.text}}</div>
         <div *ngIf="target" class="col-auto">
             <i *ngIf="source && !compare" class="fa fa-arrow-right mr-2"></i>
-            <i *ngIf="!target.valid" class="fa fa-exclamation-circle text-danger"></i>
+            <i *ngIf="!target.valid" class="fa fa-exclamation-circle text-danger" [title]="target.error"></i>
             <span class="mr-2" *ngIf="compare">{{compare}}</span>
             {{target.text}}
         </div>
@@ -21,7 +25,7 @@
         </div>
 
         <div *ngIf="source"><i *ngIf="!source.valid"
-            class="fa fa-exclamation-circle text-danger"></i>Source = {{source.text}}
+            class="fa fa-exclamation-circle text-danger" [title]="source.error"></i>Source = {{source.text}}
         </div>
 
         <ng-template [ngIf]="inputParameters?.length > 0">
@@ -39,8 +43,8 @@
                     <div class="col border bg-secondary text-white text-truncate">
                         <div *ngIf="i == 0">{{ parameter.name}}</div>
                     </div>
-                    <div class="col border border text-white bg-secondary text-truncate">
-                        <i *ngIf="!value.valid" class="fa fa-exclamation-circle text-danger"></i>
+                    <div class="col border border text-white bg-secondary text-truncate" [title]="value.error">
+                        <i *ngIf="!value.valid" class="fa fa-exclamation-circle text-danger" ></i>
                         {{(parameter.values.length > 1 ? '[' + i + '] ' : '') + value.text}}
                     </div>
                 </div>
@@ -62,8 +66,8 @@
 
                 <div *ngFor="let pValues of mapParameter.parameters[0].values; let i = index;" class="row">
                     <div *ngFor="let parameter of mapParameter.parameters"
-                        class="col border bg-secondary text-white text-truncate">
-                        <i *ngIf="!parameter.values[i].valid" class="fa fa-exclamation-circle text-danger"></i>
+                        class="col border bg-secondary text-white text-truncate" [title]="parameter.values[i].error">
+                        <i *ngIf="!parameter.values[i].valid" class="fa fa-exclamation-circle text-danger" ></i>
                         {{parameter.values[i].text}}
                     </div>
                 </div>
@@ -85,8 +89,8 @@
                     <div class="col border bg-secondary text-white text-truncate">
                         <div *ngIf="i == 0">{{parameter.name}}</div>
                     </div>
-                    <div class="col border border bg-secondary text-white text-truncate">
-                        <i *ngIf="!value.valid" class="fa fa-exclamation-circle text-danger"></i>
+                    <div class="col border border bg-secondary text-white text-truncate" [title]="value.error">
+                        <i *ngIf="!value.valid" class="fa fa-exclamation-circle text-danger" ></i>
                         {{(parameter.values.length > 1 ? '[' + i + '] ' : '') + value.text}}
                     </div>
                 </div>

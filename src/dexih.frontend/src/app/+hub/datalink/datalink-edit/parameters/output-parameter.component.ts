@@ -4,6 +4,7 @@ import { HubService } from '../../../hub.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { TypeFunctions, TypeCodes, eBasicType } from '../../../hub.remote.models';
 import { DexihTableColumn, DexihDatalinkColumn, eTypeCode, DexihDatalinkTarget, DexihDatalinkTable, DexihTable } from '../../../../shared/shared.models';
+import { DatalinkEditService } from '../datalink-edit.service';
 
 @Component({
 
@@ -28,6 +29,7 @@ export class OutputParameterComponent implements OnInit, OnChanges, OnDestroy {
 
     private _datalinkColumnSubscription: Subscription;
     private _parameterSubscription: Subscription;
+    private _dataTypeSubscription: Subscription;
 
     newColumn: DexihDatalinkColumn;
     tmpColumnKey: number;
@@ -40,34 +42,43 @@ export class OutputParameterComponent implements OnInit, OnChanges, OnDestroy {
 
     typeCodes = TypeCodes;
 
+    public errors;
+
     ignoreChanges = false;
 
-    constructor(public hubService: HubService) {
+    constructor(public hubService: HubService, public editDatalinkService: DatalinkEditService) {
     }
 
     ngOnInit() {
         this.updateItems();
+        this.errors = this.editDatalinkService.hubFormsService.getFormErrorMessages(this.outputParameterForm, true);
 
         if (this.updateParameterName) {
             this._datalinkColumnSubscription = this.outputParameterForm.controls.datalinkColumn.valueChanges.subscribe(value => {
                 this.outputParameterForm.controls.dataType.setValue(value.dataType);
                 this.outputParameterForm.controls.name.setValue(value.name);
             });
-
         }
         this._parameterSubscription = this.outputParameterForm.valueChanges.subscribe(param => {
+            this.errors = this.editDatalinkService.hubFormsService.getFormErrorMessages(this.outputParameterForm, true);
             this.updateItems();
+        });
+
+        this._dataTypeSubscription = this.outputParameterForm.controls.dataType.valueChanges.subscribe(dataType => {
+            if (this.newColumn) {
+                this.newColumn.dataType = dataType;
+            }
         });
     }
 
     ngOnChanges() {
         let table = new DexihTable();
-        table.name = "Output Columns";
+        table.name = 'Output Columns';
         table.dexihTableColumns = this.outputColumns;
 
         this.outputTables = [table];
 
-        if(this.datalinkTargets) {
+        if (this.datalinkTargets) {
             this.datalinkTargets.forEach(target => {
                 this.outputTables.push(target['table']);
             });
@@ -77,7 +88,9 @@ export class OutputParameterComponent implements OnInit, OnChanges, OnDestroy {
     ngOnDestroy() {
         if (this._datalinkColumnSubscription) { this._datalinkColumnSubscription.unsubscribe(); }
         if (this._parameterSubscription) { this._parameterSubscription.unsubscribe(); }
+        if (this._dataTypeSubscription) { this._dataTypeSubscription.unsubscribe(); }
     }
+
     updateItems() {
         this.type = new TypeFunctions(this.outputParameterForm.value.dataType, null, null, null);
     }
@@ -88,6 +101,11 @@ export class OutputParameterComponent implements OnInit, OnChanges, OnDestroy {
 
     remove() {
         this.removeParameter.emit(this.outputParameterForm);
+    }
+
+    fixDataType() {
+        const column = this.outputParameterForm.controls.datalinkColumn.value;
+        column.dataType = this.outputParameterForm.controls.dataType.value;
     }
 
     updateNewColumn(value: string) {

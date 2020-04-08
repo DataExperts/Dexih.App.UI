@@ -1,12 +1,17 @@
 import { Component, OnInit, OnChanges, OnDestroy, Input } from '@angular/core';
 import { Subscription, combineLatest} from 'rxjs';
 import { AbstractControl, FormGroup, FormArray, FormControl } from '@angular/forms';
+import { map } from 'rxjs/operators';
+import { Router, ActivatedRoute } from '@angular/router';
+import { DexihDatalinkTransformItem, eTransformItemType, DexihDatalinkTransform, eFunctionType, eTransformType } from '../../../shared.models';
+import { DexihFormErrorsModule} from '../dexih-form-errors.module';
 
 class ControlError {
     public field: string;
     public name: string;
     public position: number;
     public errors: string[];
+    public link: string[];
 
     public childControlErrors: ControlError[];
 
@@ -22,6 +27,7 @@ class ControlError {
 })
 export class DexihInvalidFormDetailsComponent implements OnInit, OnChanges, OnDestroy {
     @Input() control: AbstractControl;
+    @Input() baseLink: string;
 
     public showErrors = false;
 
@@ -31,7 +37,7 @@ export class DexihInvalidFormDetailsComponent implements OnInit, OnChanges, OnDe
     valid = true;
     public controlErrors = [];
 
-    constructor() { }
+    constructor(public router: Router, public route: ActivatedRoute) { }
 
     ngOnInit() { }
 
@@ -45,7 +51,6 @@ export class DexihInvalidFormDetailsComponent implements OnInit, OnChanges, OnDe
         this.refresh();
 
         if (this._changesSubscription) { this._changesSubscription.unsubscribe(); }
-
         this._changesSubscription = this.control.statusChanges.subscribe(() => {
             this.refresh();
         });
@@ -56,7 +61,7 @@ export class DexihInvalidFormDetailsComponent implements OnInit, OnChanges, OnDe
     }
 
     refresh() {
-        if (this.control && !this.control.valid) {
+        if (this.control && this.control.invalid) {
             this.valid = false;
             this.controlErrors = this.getFormErrors();
         } else {
@@ -66,33 +71,41 @@ export class DexihInvalidFormDetailsComponent implements OnInit, OnChanges, OnDe
     }
 
     public getFormErrors(): ControlError[] {
-        return this.getFormErrorsRecursive(<FormGroup>this.control, 0, 0);
+        return this.getFormErrorsRecursive(<FormGroup>this.control, 0, null);
     }
 
-    private getFormErrorsRecursive(form: FormGroup, depth: number, index: number): ControlError[] {
+
+    private getFormErrorsRecursive(form: FormGroup, depth: number, parentControlError: ControlError): ControlError[] {
         let controlErrors = [];
 
-        if (form && !form.valid) {
-            const parentControl = new ControlError();
+        if (form && form.invalid && form.controls) {
             for (const field of Object.keys(form.controls)) {
                 const control = form.get(field);
 
                 // if the control is dirty or flag is set to show all errors.
-                if (control && !control.valid) {
+                if (control && control.invalid) {
 
                     if (control instanceof FormArray) {
                         const formArray = <FormArray>control;
-                        formArray.controls.forEach((cont, formIndex) => {
-                            if (!cont.valid) {
+                        let controls = formArray.controls.sort((a: FormGroup, b: FormGroup) => {
+                            if (a.controls.position) {
+                                return a.controls.position.value - b.controls.position.value;
+                            }
+                            return 1;
+                        });
+
+                        controls.forEach((cont, formIndex) => {
+                            if (cont.invalid) {
                             let controlError = new ControlError();
 
                             if (cont.value && cont.value.name) {
                                 controlError.name = cont.value.name;
                             }
 
-                            controlError.field = field;
-                            controlError.position = formIndex;
-                            controlError.childControlErrors = this.getFormErrorsRecursive(<FormGroup>cont, depth + 1, formIndex);
+                            this.setError(field, cont, controlError, form, parentControlError);
+                            controlError.position = formIndex + 1;
+                            controlError.childControlErrors = this.getFormErrorsRecursive(<FormGroup>cont, depth + 1,
+                                    controlError);
                             controlErrors.push(controlError);
                         }
                         });
@@ -103,17 +116,17 @@ export class DexihInvalidFormDetailsComponent implements OnInit, OnChanges, OnDe
                             controlError.name = control.value.name;
                         }
 
-                        controlError.field = field;
-                        controlError.position = 0;
-                        controlError.childControlErrors = this.getFormErrorsRecursive(<FormGroup>control, depth + 1, 0);
+                        this.setError(field, control, controlError, form, parentControlError);
+                        controlError.position = null;
+                        controlError.childControlErrors = this.getFormErrorsRecursive(<FormGroup>control, depth + 1, controlError);
                         controlErrors.push(controlError);
 
                     } else {
                         let controlError = new ControlError();
-                        controlError.field = field;
-                        controlError.position = 0;
+                        this.setError(field, control, controlError, form, parentControlError);
+                        controlError.position = null;
                         for (const key of Object.keys(control.errors)) {
-                                let message = this.createErrorMessage(key, control);
+                                let message = DexihFormErrorsModule.createErrorMessage(key, control);
                                 controlError.errors.push(message);
                             }
                             controlErrors.push(controlError);
@@ -125,39 +138,118 @@ export class DexihInvalidFormDetailsComponent implements OnInit, OnChanges, OnDe
         return controlErrors;
     }
 
-    private createErrorMessage(key: string, control: AbstractControl): string {
-        let message = '';
-        switch (key) {
-            case 'minlength':
-                message = 'Value is ' +
-                    control.errors.minlength.actualLength +
-                    ' characters long, required minimum length is '
-                    + control.errors.minlength.requiredLength + ' characters.';
+    private setError(field: string, control: AbstractControl, controlError: ControlError,
+            parentControl: AbstractControl, parentControlError: ControlError) {
+        let link: any[];
+
+        switch (field) {
+            case 'dexihDatalinkTransforms':
+                let transform = <DexihDatalinkTransform>control.value;
+                if (transform.name) {
+                    controlError.field = 'Transform ' + transform.name;
+                } else {
+                    controlError.field = 'Transform ' + eTransformType[transform.transformType];
+                }
+
+                link = ['transforms', 'transform', control.value.key];
                 break;
-            case 'maxlength':
-                message = 'Value is ' +
-                    control.errors.maxlength.actualLength +
-                    ' characters long, required maximum length is '
-                    + control.errors.maxlength.requiredLength + ' characters.';
+            case 'dexihDatalinkTransformItems':
+                let item = <DexihDatalinkTransformItem>control.value;
+                const functionType = this.getFunctionType(parentControl.value);
+
+                switch (item.transformItemType) {
+                    case eTransformItemType.BuiltInFunction:
+                        controlError.field = item.functionMethodName;
+                        link = ['standard-function-edit', functionType, item.key];
+                        break;
+                    case eTransformItemType.CustomFunction:
+                        controlError.field = 'Custom Function';
+                        link = ['custom-function-edit', functionType, item.key];
+                        break;
+                    case eTransformItemType.Column:
+                    case eTransformItemType.JoinNode:
+                    case eTransformItemType.GroupNode:
+                    case eTransformItemType.ColumnPair:
+                    case eTransformItemType.Sort:
+                    case eTransformItemType.JoinPair:
+                    case eTransformItemType.FilterPair:
+                    case eTransformItemType.AggregatePair:
+                    case eTransformItemType.Series:
+                        controlError.field = eTransformItemType[item.transformItemType] + ' mapping';
+                        link = ['mapping-edit', item.transformItemType, item.key];
+                        break;
+                    case eTransformItemType.UnGroup:
+                        controlError.field = 'UnGroup';
+                        link = ['unGroup-edit', item.key];
+                        break;
+                }
+                controlError.link = [];
                 break;
-            case 'maxvalue':
-                message = 'Value is ' +
-                    control.value +
-                    ' required maximum is '
-                    + control.errors.maxvalue.requiredValue + '.';
+            case 'dexihFunctionParameters':
+                controlError.field = 'Parameter';
+                controlError.link = [];
                 break;
-            case 'minvalue':
-                message = 'Value is ' +
-                    control.value +
-                    ' required minimum is '
-                    + control.errors.minvalue.requiredValue + '.';
+            case 'arrayParameters':
+                controlError.field = 'Array Item';
+                controlError.link = [];
                 break;
-            case 'required':
-                message = 'A value is required.';
+            case 'functionMethodName':
+                controlError.field = 'Standard Function';
+                controlError.link = [];
                 break;
             default:
-                message = 'Field error: ' + key;
+                controlError.field = field;
+                controlError.link = [];
         }
-        return message;
+
+        if (link) {
+            if (parentControlError && parentControlError.link) {
+                controlError.link = parentControlError.link.concat(link);
+            } else {
+                controlError.link = link;
+            }
+        } else {
+            if (parentControlError && parentControlError.link) {
+                controlError.link = parentControlError.link
+            }
+        }
+    }
+
+    public getFunctionType(datalinkTransform: DexihDatalinkTransform): eFunctionType {
+        let functionType: eFunctionType;
+        switch (datalinkTransform.transformType) {
+            case eTransformType.Filter:
+                functionType = eFunctionType.Condition;
+                break;
+            case eTransformType.Mapping:
+                functionType = eFunctionType.Map;
+                break;
+            case eTransformType.Join:
+                functionType = eFunctionType.JoinCondition;
+                break;
+            case eTransformType.Group:
+            case eTransformType.Aggregate:
+                functionType = eFunctionType.Aggregate;
+                break;
+            case eTransformType.Series:
+                functionType = eFunctionType.Series;
+                break;
+            case eTransformType.Sort:
+                functionType = eFunctionType.Sort;
+                break;
+            case eTransformType.Validation:
+                functionType = eFunctionType.Validate;
+                break;
+            case eTransformType.Rows:
+                functionType = eFunctionType.Rows;
+                break;
+            case eTransformType.Lookup:
+                functionType = eFunctionType.JoinCondition;
+                break;
+            case eTransformType.Delta:
+                break;
+        }
+
+        return functionType;
     }
 }

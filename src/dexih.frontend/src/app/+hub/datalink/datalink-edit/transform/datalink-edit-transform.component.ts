@@ -9,7 +9,8 @@ import { FormGroup, FormArray } from '@angular/forms';
 import { LogFactory, eLogLevel } from '../../../../../logging';
 import { InputOutputColumns } from '../../../hub.lineage.models';
 import { eTransformType, eTransformItemType, DexihDatalinkColumn, DexihDatalinkTransform,
-    eTypeCode, DexihDatalinkTransformItem, eAggregate, eSortDirection, eJoinNotFoundStrategyItems, eDuplicateStrategyItems, eSeriesGrain } from '../../../../shared/shared.models';
+    eTypeCode, DexihDatalinkTransformItem, eAggregate, eSortDirection, eJoinNotFoundStrategyItems,
+    eDuplicateStrategyItems, eSeriesGrain } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -40,7 +41,7 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
 
     public allowMappingOutputs: boolean;
     inputColumns: Array<DexihDatalinkColumn>;
-    
+
     eSeriesGrain = eSeriesGrain;
     seriesGrains = seriesGrains;
 
@@ -147,7 +148,7 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
 
                     if (this._datalinkFormSubscription) { this._datalinkFormSubscription.unsubscribe(); }
                     this._datalinkFormSubscription = this.datalinkForm.valueChanges.subscribe(value => {
-                        this.formErrors = this.editDatalinkService.hubFormsService.getFormErrorMessages(this.datalinkForm);
+                        this.formErrors = this.editDatalinkService.hubFormsService.getFormErrorMessages(this.datalinkForm, true);
                     });
 
                     if (!this.datalinkTransformForm) {

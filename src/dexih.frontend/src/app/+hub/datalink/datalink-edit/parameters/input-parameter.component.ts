@@ -31,7 +31,7 @@ export class InputParameterComponent implements OnInit, OnDestroy {
     @Input() public updateParameterName = false;
     @Input() public rank = 0;
     @Input() public nodeDatalinkColumnKey = null;
-    
+
     @Input() public outputParameterForms: FormGroup[] = null;
     @Input() public outputColumns: Array<DexihTableColumn> = null;
     @Input() public datalinkTargets: Array<DexihDatalinkTarget> = null;
@@ -56,11 +56,14 @@ export class InputParameterComponent implements OnInit, OnDestroy {
 
     newColumn: DexihDatalinkColumn;
 
+    public errors;
+
     constructor(public hubService: HubService, public editDatalinkService: DatalinkEditService) {
     }
 
     ngOnInit() {
         this.inputs = this.inputParameterForms.map(param => new InputValues());
+        this.errors = this.inputParameterForms.map(a => this.editDatalinkService.hubFormsService.getFormErrorMessages(a, true));
 
         let io = new InputOutputColumns();
         if (this.nodeDatalinkColumnKey) {
@@ -117,6 +120,7 @@ export class InputParameterComponent implements OnInit, OnDestroy {
                         }
                         this.ignoreChanges = false;
                     }
+                    this.errors[i] = this.editDatalinkService.hubFormsService.getFormErrorMessages(this.inputParameterForms[i], true);
                 });
             }
 
@@ -130,6 +134,7 @@ export class InputParameterComponent implements OnInit, OnDestroy {
                         this.inputParameterForms[i].controls.dataType.setValue(eTypeCode.String);
                         this.inputParameterForms[i].controls.name.setValue('');
                     }
+                    this.errors[i] = this.editDatalinkService.hubFormsService.getFormErrorMessages(this.inputParameterForms[i], true);
                 });
             }
         }
@@ -147,20 +152,21 @@ export class InputParameterComponent implements OnInit, OnDestroy {
             });
         }
     }
-    ngOnChanges() {
-        let table = new DexihTable();
-        table.name = "Output Columns";
-        table.dexihTableColumns = this.outputColumns;
 
-        this.outputTables = [table];
+    // ngOnChanges() {
+    //     let table = new DexihTable();
+    //     table.name = 'Output Columns';
+    //     table.dexihTableColumns = this.outputColumns;
 
-        if(this.datalinkTargets) {
-            this.datalinkTargets.forEach(target => {
-                this.outputTables.push(target['table']);
-            });
-        }
-    }
-    
+    //     this.outputTables = [table];
+
+    //     if (this.datalinkTargets) {
+    //         this.datalinkTargets.forEach(target => {
+    //             this.outputTables.push(target['table']);
+    //         });
+    //     }
+    // }
+
     updateItems() {
         for ( let i = 0; i < this.inputParameterForms.length; i++) {
             let inputParameter: DexihFunctionParameter = this.inputParameterForms[i].value;

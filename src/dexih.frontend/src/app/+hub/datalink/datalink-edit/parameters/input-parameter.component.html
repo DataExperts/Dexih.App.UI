@@ -20,7 +20,9 @@
                             [enableKeySelect]="false" [enableTextEntry]="rank === 0" [enableTextEntryMatch]="false"
                             (textValueChange)="updateStatic($event, i)"
                             [textEntryNote]="rank > 0 ? 'Select an array type source (otherwise select add to build an array)' : 'Select a column or enter a static value.'" 
-                            [textEntryItems]="inputs[i].textItems" textEntryItemsTitle="Variables">
+                            [textEntryItems]="inputs[i].textItems" textEntryItemsTitle="Variables"
+                            [errors]="errors[i].datalinkColumn"
+                            >
                         </form-select>
                     </div>
 
@@ -36,7 +38,7 @@
 
                     <div *ngIf="allowDataTypeSelect == true" class="form-control p-0">
                         <form-select [border]="false" formControlName="dataType" [items]="typeCodes" itemKey="key"
-                            itemName="name">
+                            itemName="name" >
                         </form-select>
                     </div>
                     <div *ngIf="allowDataTypeSelect == true" class="form-control">

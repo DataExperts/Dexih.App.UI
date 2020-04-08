@@ -6,10 +6,10 @@ import { HubFormsService } from '../../hub.forms.service';
 import { InputOutputColumns } from '../../hub.lineage.models';
 import { HubService } from '../../hub.service';
 import { TransformReference } from '../../hub.remote.models';
-import { Message, CancelToken } from '../../../+auth/auth.models';
+import { CancelToken } from '../../../+auth/auth.models';
 import { HubCache } from '../../hub.models';
 import { eTransformType, DexihDatalinkColumn, eParameterDirection, eTypeCode, DexihDatalinkTransformItem,
-    DexihDatalinkTransform, DexihDatalinkTable, eTransformItemType, eSourceType } from '../../../shared/shared.models';
+    DexihDatalinkTransform, DexihDatalinkTable, eTransformItemType, eSourceType, eFunctionType } from '../../../shared/shared.models';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 // contains shared objects used to edit the datalink.
@@ -25,7 +25,7 @@ export class DatalinkEditService implements OnInit, OnDestroy {
 
     public logger = new LogFactory('datalink-edit.service');
 
-    // used to stop save occuring when changing functions and target ables.
+    // used to stop save occurring when changing functions and target ables.
     savingDatalink = new BehaviorSubject(false);
 
     constructor(
@@ -167,6 +167,44 @@ export class DatalinkEditService implements OnInit, OnDestroy {
                 columnForm.setValue(inputColumn);
             }
         }
+    }
+
+    public getFunctionType(datalinkTransform: DexihDatalinkTransform): eFunctionType {
+        let functionType: eFunctionType;
+        switch (datalinkTransform.transformType) {
+            case eTransformType.Filter:
+                functionType = eFunctionType.Condition;
+                break;
+            case eTransformType.Mapping:
+                functionType = eFunctionType.Map;
+                break;
+            case eTransformType.Join:
+                functionType = eFunctionType.JoinCondition;
+                break;
+            case eTransformType.Group:
+            case eTransformType.Aggregate:
+                functionType = eFunctionType.Aggregate;
+                break;
+            case eTransformType.Series:
+                functionType = eFunctionType.Series;
+                break;
+            case eTransformType.Sort:
+                functionType = eFunctionType.Sort;
+                break;
+            case eTransformType.Validation:
+                functionType = eFunctionType.Validate;
+                break;
+            case eTransformType.Rows:
+                functionType = eFunctionType.Rows;
+                break;
+            case eTransformType.Lookup:
+                functionType = eFunctionType.JoinCondition;
+                break;
+            case eTransformType.Delta:
+                break;
+        }
+
+        return functionType;
     }
 
     public getVariables(): string[] {

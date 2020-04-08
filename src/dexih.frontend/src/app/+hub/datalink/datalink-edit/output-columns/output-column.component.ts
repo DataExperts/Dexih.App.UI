@@ -8,7 +8,7 @@ import { FormGroup } from '@angular/forms';
 import { LogFactory, eLogLevel } from '../../../../../logging';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../../+auth/auth.service';
-import { DexihDatalinkColumn, DexihTable } from '../../../../shared/shared.models';
+import { DexihDatalinkColumn, DexihTable, eTypeCode } from '../../../../shared/shared.models';
 
 
 @Component({
@@ -39,6 +39,8 @@ export class OutputColumnComponent implements OnInit, OnDestroy, OnChanges {
 
     public logger = new LogFactory('output-column.component');
     public logCount = 0;
+
+    public eTypeCode = eTypeCode;
 
     constructor(
         private authService: AuthService,

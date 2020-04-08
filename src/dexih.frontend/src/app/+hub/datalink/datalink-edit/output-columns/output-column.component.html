@@ -8,7 +8,7 @@
         <i class="input-group-text rounded-0  border-0 border-r1" [ngClass]="mappingStatusInfoImpact.statusClass" [title]="mappingStatusInfoImpact.name"></i>
     </div>
 </div>
-<div class="list-group-item p-0 rounded-0" *ngIf="mappingStatusInfoLineage.key == eMappingStatus.Mapped" [title]="column.logicalName + ' ' + column.dataType"
+<div class="list-group-item p-0 rounded-0" *ngIf="mappingStatusInfoLineage.key == eMappingStatus.Mapped" [title]="column.logicalName + ' ' + eTypeCode[column.dataType]"
     (click)="editColumn()">
     <div class="d-flex flex-row">
 

@@ -201,7 +201,7 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
               .datalinkDatalinkTransformItemFormGroup(this.datalinkTransformForm, this.datalinkTransformItemForm.value);
 
             if (this.datalinkTransformItemForm.controls.customFunctionKey.value) {
-                this.selectCustomFunction(this.datalinkTransformItemForm.value.customFunctionKey);
+                this.selectCustomFunction(this.datalinkTransformItemForm.value.customFunctionKey, false);
             } else {
             let selectedFunction = this.remoteLibraries.functions.find(c =>
               c.functionClassName === this.datalinkTransformItemForm.value.functionClassName &&
@@ -210,7 +210,7 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
             );
 
             // this.selectedFunction = selectedFunction;
-              this.selectFunction(selectedFunction);
+              this.selectFunction(selectedFunction, false);
             // this.refreshParameters();
             }
 
@@ -276,7 +276,7 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
           if (this._functionSubscription) { this._functionSubscription.unsubscribe(); }
           this._functionSubscription = this.newDatalinkTransformItemForm.controls.customFunctionKey.valueChanges
             .subscribe(customFunctionKey => {
-              this.selectCustomFunction(customFunctionKey);
+              this.selectCustomFunction(customFunctionKey, false);
             });
         }
 
@@ -398,7 +398,7 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
 
   // when a new standard function is selected
   // reset all the parameters
-  selectFunction(value: FunctionReference) {
+  selectFunction(value: FunctionReference, markAsDirty: boolean) {
     this.selectedFunction = value;
 
     if (value === null || value === undefined) { return; }
@@ -504,7 +504,11 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
         }
       }
 
-      this.refreshParameters()
+      this.refreshParameters();
+
+      if (markAsDirty) {
+        this.newDatalinkTransformItemForm.markAsDirty();
+      }
     } else {
       this.selectedFunction = null;
     }
@@ -547,7 +551,7 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
 
   // when a new standard function is selected
   // reset all the parameters
-  selectCustomFunction(customFunctionKey: number) {
+  selectCustomFunction(customFunctionKey: number, markAsDirty: boolean) {
     this.selectedCustomFunction = this.hubCache.hub.dexihCustomFunctions.find(c => c.key === customFunctionKey);
 
     if (this.selectedCustomFunction) {
@@ -591,7 +595,11 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
           this.selectedCustomFunction.genericTypeDefault);
         parameters.push(newParameterForm2);
 
-      this.refreshParameters()
+      this.refreshParameters();
+
+      if (markAsDirty) {
+        this.newDatalinkTransformItemForm.markAsDirty();
+      }
     }
   }
 

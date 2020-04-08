@@ -13,8 +13,9 @@ import { DexihHub, DexihActiveAgent, ePermission } from '../shared/shared.models
 })
 export class HubComponent implements OnInit, OnDestroy {
     private _subscription: Subscription;
-    private _routeSubscription: Subscription;
-    private _hubMessageSubscription: Subscription;
+    private _hubCacheSubscription: Subscription;
+    private _remoteAgentSubscription: Subscription;
+    private _webSocketSubscription: Subscription;
 
     public hubCache: HubCache;
 
@@ -34,26 +35,33 @@ export class HubComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute) { }
 
     ngOnInit() {
+        this._hubCacheSubscription = this.hubService.getHubCacheObservable().subscribe(hubCache => {
+            this.hubCache = hubCache;
+        });
+
+        this._webSocketSubscription = this.authService.getWebSocketStatusObservable().subscribe(webSocketStatus => {
+            this.webSocketStatus = webSocketStatus;
+        });
+
+        this._remoteAgentSubscription = this.hubService.getRemoteAgentObservable().subscribe(remoteAgent => {
+            this.remoteAgent = remoteAgent;
+        })
+
         try {
             this._subscription = combineLatest(
-                this.hubService.getHubCacheObservable(),
-                this.authService.getWebSocketStatusObservable(),
-                this.hubService.getRemoteAgentObservable(),
                 this.route.params,
                 this.authService.getUserObservable()
-            ).subscribe(result => {
-                this.hubCache = result[0];
-                this.webSocketStatus = result[1];
-                this.remoteAgent = result[2];
-                let params = result[3];
-                let user = result[4];
+            ).subscribe(async result => {
+                let params = result[0];
+                let user = result[1];
 
                 if (!user) {
                     return;
                 }
+
                 this.hubKey = + params['hubKey'];
                 if (this.hubKey > 0) {
-                    this.hubService.updateHub(this.hubKey, 'Loading...');
+                    await this.hubService.updateHub(this.hubKey, 'Loading...');
                 } else {
                     this.router.navigate(['/hubs']);
                 }
@@ -62,10 +70,7 @@ export class HubComponent implements OnInit, OnDestroy {
                     this.hubKey = this.hubCache.hub.hubKey;
                     this.hub = this.hubCache.hub;
                 }
-
             });
-
-
         } catch (e) {
             this.hubService.addHubClientErrorMessage(e, 'Hub Component');
         }
@@ -77,8 +82,9 @@ export class HubComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        if (this._hubMessageSubscription) { this._hubMessageSubscription.unsubscribe(); }
-        if (this._routeSubscription) { this._routeSubscription.unsubscribe(); }
+        if (this._hubCacheSubscription) { this._hubCacheSubscription.unsubscribe(); }
+        if (this._remoteAgentSubscription) { this._remoteAgentSubscription.unsubscribe(); }
+        if (this._webSocketSubscription) { this._webSocketSubscription.unsubscribe(); }
         if (this._subscription) { this._subscription.unsubscribe(); }
     }
 

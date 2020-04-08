@@ -96,7 +96,7 @@ export class MappingComponent implements OnInit, OnDestroy, OnChanges {
                 this.hubService.getRemoteLibrariesObservable()
             ).subscribe(() => {
 
-                this.functionType = this.getFunctionType(this.datalinkTransformForm.value);
+                this.functionType = this.editDatalinkService.getFunctionType(this.datalinkTransformForm.value);
                 this.transformType = this.datalinkTransformForm.value.transformType;
 
                 this.updateTableData();
@@ -237,44 +237,6 @@ export class MappingComponent implements OnInit, OnDestroy, OnChanges {
         });
     }
 
-    private getFunctionType(datalinkTransform: DexihDatalinkTransform): eFunctionType {
-        let functionType: eFunctionType;
-        switch (datalinkTransform.transformType) {
-            case eTransformType.Filter:
-                functionType = eFunctionType.Condition;
-                break;
-            case eTransformType.Mapping:
-                functionType = eFunctionType.Map;
-                break;
-            case eTransformType.Join:
-                functionType = eFunctionType.JoinCondition;
-                break;
-            case eTransformType.Group:
-            case eTransformType.Aggregate:
-                functionType = eFunctionType.Aggregate;
-                break;
-            case eTransformType.Series:
-                functionType = eFunctionType.Series;
-                break;
-            case eTransformType.Sort:
-                functionType = eFunctionType.Sort;
-                break;
-            case eTransformType.Validation:
-                functionType = eFunctionType.Validate;
-                break;
-            case eTransformType.Rows:
-                functionType = eFunctionType.Rows;
-                break;
-            case eTransformType.Lookup:
-                functionType = eFunctionType.JoinCondition;
-                break;
-            case eTransformType.Delta:
-                break;
-        }
-
-        return functionType;
-    }
-
     // if a sort event has triggered from the table, then reset the positions of the datalink transform items.
     datalinkItemSortChange(items: Array<DexihDatalinkTransformItem>) {
         items.forEach((item, index) => {
@@ -407,11 +369,11 @@ export class MappingComponent implements OnInit, OnDestroy, OnChanges {
         let joinTable = <DexihDatalinkTable> this.datalinkTransformForm.value.joinDatalinkTable;
         let validFrom = joinTable.dexihDatalinkColumns.find(c => c.deltaType === eDeltaType.ValidFromDate);
         let validTo = joinTable.dexihDatalinkColumns.find(c => c.deltaType === eDeltaType.ValidToDate);
-        if( !validFrom || !validTo ) {
+        if ( !validFrom || !validTo ) {
             this.authService.informationDialog('No valid from',  'The join table does not contain a columns with a valid from/to delta type.');
             return;
         }
-            
+
         let item = new DexihDatalinkTransformItem();
         item.sourceDatalinkColumn = column;
         item.joinDatalinkColumn = validFrom;

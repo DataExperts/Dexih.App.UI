@@ -1,17 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {HubCache, transformItemTypes } from '../../../hub.models';
-import { AuthService } from '../../../../+auth/auth.service';
 import { HubService } from '../../..';
-import { DatalinkEditService } from '../datalink-edit.service';
 import { Subscription, combineLatest } from 'rxjs';
 import { InputOutputColumns } from '../../../hub.lineage.models';
 import { compare } from '../../../hub.query.models';
 import { DexihDatalinkTransform, DexihDatalinkTransformItem, eTransformItemType, eCompare,
-    DexihDatalinkColumn, FunctionReference, eParameterDirection, eAggregate, eSortDirection } from '../../../../shared/shared.models';
+    DexihDatalinkColumn, FunctionReference, eParameterDirection, eAggregate, eSortDirection, eTypeCode } from '../../../../shared/shared.models';
 
 export class ValidValue {
     public valid: boolean;
     public text: string;
+    public error: string;
 }
 
 export class ValidParameter {
@@ -50,9 +49,7 @@ export class MappingItemComponent implements OnInit {
     public mapParameters: ValidMapping[];
 
     constructor(
-        private authService: AuthService,
-        private hubService: HubService,
-        private editDatalinkService: DatalinkEditService) { }
+        private hubService: HubService) { }
 
     ngOnInit() {
         try {
@@ -82,7 +79,7 @@ export class MappingItemComponent implements OnInit {
                         this.label = func.name;
                         this.addBuiltInFunctionParameters(func);
                     } else {
-                        this.error = `Error, function ${item.functionMethodName} not found.`;
+                        this.error = `Error, function ${item.functionClassName}.${item.functionMethodName} not found.`;
                     }
                 } else if (item.customFunctionKey) {
                     let func = this.hubCache.hub.dexihCustomFunctions.find(c => c.key === item.customFunctionKey);
@@ -114,10 +111,10 @@ export class MappingItemComponent implements OnInit {
                 break;
         }
 
-        if (itemType.useSource) { this.source = this.columnOrValue(item.sourceDatalinkColumn, item.sourceValue); }
-        if (itemType.useTarget) { this.target = this.describeDatalinkColumn(item.targetDatalinkColumn); }
-        if (itemType.useJoin) { this.target = this.describeDatalinkColumn(item.joinDatalinkColumn); }
-        if (itemType.useFilter) { this.target = this.columnOrValue(item.filterDatalinkColumn, item.filterValue)};
+        if (itemType.useSource) { this.source = this.columnOrValue(null, item.sourceDatalinkColumn, item.sourceValue); }
+        if (itemType.useTarget) { this.target = this.describeDatalinkColumn(null, item.targetDatalinkColumn); }
+        if (itemType.useJoin) { this.target = this.describeDatalinkColumn(null, item.joinDatalinkColumn); }
+        if (itemType.useFilter) { this.target = this.columnOrValue(null, item.filterDatalinkColumn, item.filterValue)};
 
         if (itemType.useFilter || itemType.useJoin) {
             let filterCompare = item.filterCompare;
@@ -128,11 +125,11 @@ export class MappingItemComponent implements OnInit {
         }
     }
 
-    private columnOrValue(column: DexihDatalinkColumn, value: string): ValidValue {
+    private columnOrValue(expectedDataType: eTypeCode, column: DexihDatalinkColumn, value: string): ValidValue {
         if (column) {
-            return this.describeDatalinkColumn(column);
+            return this.describeDatalinkColumn(expectedDataType, column);
         } else {
-            return {text: this.describeStaticValue(value), valid: true};
+            return {text: this.describeStaticValue(value), valid: true, error: ''};
         }
     }
 
@@ -163,17 +160,16 @@ export class MappingItemComponent implements OnInit {
             let p = inputParams.find(c => c.name === param.parameterName);
             if (p) {
                 if (p.rank === 0) {
-                    let value = this.columnOrValue(p.datalinkColumn, p.value);
-                    return {name: param.name, values: [{valid: value.valid, text: value.text}] };
+                    let value = this.columnOrValue(p.dataType, p.datalinkColumn, p.value);
+                    return {name: this.describeParameterName(p), values: [value] };
                 } else {
                     let values = p.arrayParameters.sort( (a, b) => a.position - b.position).map(ap => {
-                        let value = this.columnOrValue(ap.datalinkColumn, ap.value);
-                        return {valid: value.valid, text: value.text};
+                        return this.columnOrValue(ap.dataType, ap.datalinkColumn, ap.value);
                     });
-                    return {name: param.name, values: values};
+                    return {name: this.describeParameterName(p), values: values};
                 }
             } else {
-                return {name: param.name, values: [{valid: false, text: 'Not mapped'}]  };
+                return {name: this.describeParameterName(p), values: [{valid: false, error: 'Not Mapped', text: ''}]  };
             }
         });
 
@@ -189,14 +185,13 @@ export class MappingItemComponent implements OnInit {
                     return null;
                 }
                 if (p.rank === 0 || p.datalinkColumn !== null) {
-                    let value = this.describeDatalinkColumn(p.datalinkColumn);
-                    return {name: param.name, values: [{valid: value.valid, text: value.text}]};
+                    let value = this.describeDatalinkColumn(p.dataType, p.datalinkColumn);
+                    return {name: this.describeParameterName(p), values: [value]};
                 } else {
                     let values = p.arrayParameters.sort( (a, b) => a.position - b.position).map(ap => {
-                        let value = this.describeDatalinkColumn(ap.datalinkColumn);
-                        return {valid: value.valid, text: value.text};
+                        return this.describeDatalinkColumn(ap.dataType, ap.datalinkColumn);
                     });
-                    return {name: param.name, values: values};
+                    return {name: this.describeParameterName(p), values: values};
                 }
             } else {
                 // return {name: param.name, values: [{valid: false, text: 'Not mapped'}]  };
@@ -209,17 +204,17 @@ export class MappingItemComponent implements OnInit {
             let parameters: ValidParameter[] = functionInputs.filter(c => c.linkedName === name).map(param => {
                 let p = inputParams.find(c => c.name === param.parameterName);
                 let values = p.arrayParameters.sort( (a, b) => a.position - b.position).map(ap => {
-                    return this.columnOrValue(ap.datalinkColumn, ap.value);
+                    return this.columnOrValue(ap.dataType, ap.datalinkColumn, ap.value);
                 });
-                return {name: param.name, values: values};
+                return {name: this.describeParameterName(param), values: values};
             });
 
             let parameters2: ValidParameter[] = functionOutputs.filter(c => c.linkedName === name).map(param => {
                 let p = outputParams.find(c => c.name === param.parameterName);
                 let values = p.arrayParameters.sort( (a, b) => a.position - b.position).map(ap => {
-                    return this.describeDatalinkColumn(ap.datalinkColumn);
+                    return this.describeDatalinkColumn(ap.dataType, ap.datalinkColumn);
                 });
-                return {name: param.name, values: values};
+                return {name: this.describeParameterName(param), values: values};
             });
 
             return {name: name, parameters: this.concat(parameters, parameters2)};
@@ -236,14 +231,13 @@ export class MappingItemComponent implements OnInit {
 
         this.inputParameters = inputParams.map<ValidParameter>(p => {
             if (p.rank === 0) {
-                let value = this.columnOrValue(p.datalinkColumn, p.value);
-                return {name: p.name, values: [{valid: value.valid, text: value.text}] };
+                let value = this.columnOrValue(p.dataType, p.datalinkColumn, p.value);
+                return { name: this.describeParameterName(p), values: [value] };
             } else {
-                let values = p.arrayParameters.sort( (a, b) => a.position - b.position).map(ap => {
-                    let value = this.columnOrValue(ap.datalinkColumn, ap.value);
-                    return {valid: value.valid, text: value.text};
+                let values = p.arrayParameters.sort((a, b) => a.position - b.position).map(ap => {
+                    return this.columnOrValue(ap.dataType, ap.datalinkColumn, ap.value);
                 });
-                return {name: p.name, values: values};
+                return { name: this.describeParameterName(p), values: values };
             }
         });
 
@@ -252,14 +246,13 @@ export class MappingItemComponent implements OnInit {
 
         this.outputParameters = outputParams.map<ValidParameter>(p => {
             if (p.rank === 0) {
-                let value = this.describeDatalinkColumn(p.datalinkColumn);
-                return {name: p.name, values: [{valid: value.valid, text: value.text}]};
+                let value = this.describeDatalinkColumn(p.dataType, p.datalinkColumn);
+                return { name: this.describeParameterName(p), values: [value] };
             } else {
-                let values = p.arrayParameters.sort( (a, b) => a.position - b.position).map(ap => {
-                    let value = this.describeDatalinkColumn(ap.datalinkColumn);
-                    return {valid: value.valid, text: value.text};
+                let values = p.arrayParameters.sort((a, b) => a.position - b.position).map(ap => {
+                    return this.describeDatalinkColumn(ap.dataType, ap.datalinkColumn);
                 });
-                return {name: p.name, values: values};
+                return { name: this.describeParameterName(p), values: values };
             }
         });
     }
@@ -278,19 +271,24 @@ export class MappingItemComponent implements OnInit {
                 if (p.datalinkColumn) {
                     let find = sourceColumn.childColumns.find(c => c.key === p.datalinkColumn.key);
                     if (find) {
-                        return {name: p.name, values: [{valid: true, text: p.datalinkColumn.name}]};
+                        return {name: this.describeParameterName(p), values: [{valid: true, error: '', text: p.datalinkColumn.name}]};
                     }
-                    return {name: p.name, values: [{valid: false, text: '(Invalid column) ' + p.datalinkColumn.name}]};
+                    return {name: this.describeParameterName(p),
+                        values: [{valid: false, error: '(Invalid column) ', text: p.datalinkColumn.name}]};
                 } else {
-                    return {name: p.name, values: [{valid: false, text: '(No column)'}]};
+                    return {name: this.describeParameterName(p), values: [{valid: false, error: '(No column)', text: ''}]};
                 }
             });
         }
     }
 
-    private describeDatalinkColumn(value: DexihDatalinkColumn): ValidValue {
+    private describeParameterName(param): string {
+        return param.name + ' (' + eTypeCode[param.dataType] + ')';
+    }
+
+    private describeDatalinkColumn(expectedDataType: eTypeCode, value: DexihDatalinkColumn): ValidValue {
         if (!value) {
-            return { text: '(not mapped)', valid: false };
+            return { error: '(not mapped)', text: '', valid: false };
         }
 
         let runTime = this.transform['runTime'];
@@ -323,7 +321,15 @@ export class MappingItemComponent implements OnInit {
             });
         }
 
-        return returnValue ? { text: returnValue, valid: true } : { text: '(Invalid) ' + value.logicalName, valid: false };
+        if (returnValue) {
+            if (expectedDataType == null || value.dataType === expectedDataType) {
+                return { text: returnValue, valid: true, error: '' }
+            } else {
+                return { text: returnValue, error: '(inconsistent datatype ' + eTypeCode[value.dataType] + ')', valid: false }
+            }
+        } else {
+            return { text: value.logicalName, error: '(Invalid column) ', valid: false }
+        }
     }
 
     private describeStaticValue(value: string): string {
