@@ -366,3 +366,9 @@ markdown {
     opacity: 1;
 }
 
+// ensures text can be seen against different backgrounds.
+.blend-text {
+    color: rgb(0, 255, 255); 
+    mix-blend-mode: difference;
+}
+

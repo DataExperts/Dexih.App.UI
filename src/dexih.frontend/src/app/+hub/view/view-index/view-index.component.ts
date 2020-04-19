@@ -20,13 +20,14 @@ export class ViewIndexComponent implements OnInit, OnDestroy {
     hubCache: HubCache;
 
     views: Array<DexihView>;
+    public eSharedObjectType = eSharedObjectType;
 
     columns = [
         { iconClass: 'sharedIcon', tooltip: 'sharedToolTip', width: '1%', align: 'center' },
-        { name: 'name', title: 'Name', footer: 'description', format: 'Md' },
+        { name: 'name', title: 'Name', footer: 'description', format: 'Md', tags: 'tags' },
         { name: 'viewType', title: 'Chart/Table' },
         { name: 'sourceType', title: 'Source Type'},
-        { name: 'updateDate', title: 'Last Updated', format: 'DateTime' },
+        { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },
     ];
 
     private _tableData = new BehaviorSubject<Array<any>>(null);
@@ -83,6 +84,7 @@ export class ViewIndexComponent implements OnInit, OnDestroy {
                 return {
                     key: view.key,
                     name: view.name,
+                    tags: this.hubCache.getObjectTags(eSharedObjectType.View, view.key),
                     viewType: eViewType[view.viewType],
                     sourceType: eDataObjectType[view.sourceType],
                     updateDate: view.updateDate,
@@ -113,7 +115,7 @@ export class ViewIndexComponent implements OnInit, OnDestroy {
     watchChanges() {
         // watch the current validation in case it is changed in another session.
         this._hubCacheChangeSubscription = this.hubService.getHubCacheChangeObservable().subscribe(hubCacheChange => {
-            if (hubCacheChange.changeClass === eSharedObjectType.View) {
+            if (hubCacheChange.changeClass === eSharedObjectType.View || hubCacheChange.changeClass === eSharedObjectType.TagObjects) {
                 this.updateViews();
             }
         });

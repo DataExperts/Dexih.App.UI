@@ -4,7 +4,7 @@ import { HubCache } from '../../hub.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, BehaviorSubject, Subscription, combineLatest} from 'rxjs';
 import { AuthService } from '../../../+auth/auth.service';
-import { eDatalinkType, DexihDatalink, eSourceType, eSharedObjectType, eDatalinkTypeItems } from '../../../shared/shared.models';
+import { eDatalinkType, DexihDatalink, eSourceType, eSharedObjectType, eDatalinkTypeItems, DexihTag } from '../../../shared/shared.models';
 
 @Component({
     selector: 'datalink-index',
@@ -18,16 +18,17 @@ export class DatalinkIndexComponent implements OnInit, OnDestroy {
     private _subscription: Subscription;
     private _hubCacheChangeSubscription: Subscription;
 
+    public eSharedObjectType = eSharedObjectType;
     public eDatalinkType = eDatalinkType;
     public eDatalinkTypeItems = eDatalinkTypeItems;
 
     columns = [
         { iconClass: 'sharedIcon', tooltip: 'sharedToolTip', width: '1%', align: 'center' },
         { name: 'datalinkType', title: 'Datalink Type', format: '' },
-        { name: 'name', title: 'Name', format: 'Md', footer: 'description' },
+        { name: 'name', title: 'Name', format: 'Md', footer: 'description', tags: 'tags' },
         { name: 'sourceName', title: 'Source', format: '' },
         { name: 'targetName', title: 'Target', format: '' },
-        { name: 'updateDate', title: 'Last Updated', format: 'DateTime' },
+        { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },
     ];
 
     private _tableData = new BehaviorSubject<Array<DexihDatalink>>(null);
@@ -119,6 +120,7 @@ export class DatalinkIndexComponent implements OnInit, OnDestroy {
                         key: d.key,
                         datalinkType: this.eDatalinkType[d.datalinkType],
                         name: d.name,
+                        tags: this.hubCache.getObjectTags(eSharedObjectType.Datalink, d.key),
                         description: d.description,
                         sourceName: sourceName,
                         targetName: targetName,
@@ -148,7 +150,7 @@ export class DatalinkIndexComponent implements OnInit, OnDestroy {
 
         // watch the current connection in case it is changed in another session.
         this._hubCacheChangeSubscription = this.hubService.getHubCacheChangeObservable().subscribe(hubCacheChange => {
-            if (hubCacheChange.changeClass === eSharedObjectType.Datalink) {
+            if (hubCacheChange.changeClass === eSharedObjectType.Datalink || hubCacheChange.changeClass === eSharedObjectType.TagObjects) {
                 this.updateDatalinks();
             }
         });

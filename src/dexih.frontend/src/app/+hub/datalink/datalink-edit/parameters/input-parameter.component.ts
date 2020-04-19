@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnInit, OnDestroy, EventEmitter } from '@angular/core';
+import { Component, Input, Output, OnInit, OnDestroy, EventEmitter, OnChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Subscription} from 'rxjs';
 import { TypeCodes, eBasicType, TypeFunctions } from '../../../hub.remote.models';
@@ -20,7 +20,7 @@ export class InputValues {
     selector: 'input-parameter',
     templateUrl: './input-parameter.component.html'
 })
-export class InputParameterComponent implements OnInit, OnDestroy {
+export class InputParameterComponent implements OnInit, OnDestroy, OnChanges {
 
     @Input() public allowDataTypeSelect = false;
     @Input() public allowNameSelect = false;
@@ -153,19 +153,19 @@ export class InputParameterComponent implements OnInit, OnDestroy {
         }
     }
 
-    // ngOnChanges() {
-    //     let table = new DexihTable();
-    //     table.name = 'Output Columns';
-    //     table.dexihTableColumns = this.outputColumns;
+    ngOnChanges() {
+        let table = new DexihTable();
+        table.name = 'Output Columns';
+        table.dexihTableColumns = this.outputColumns;
 
-    //     this.outputTables = [table];
+        this.outputTables = [table];
 
-    //     if (this.datalinkTargets) {
-    //         this.datalinkTargets.forEach(target => {
-    //             this.outputTables.push(target['table']);
-    //         });
-    //     }
-    // }
+        if (this.datalinkTargets) {
+            this.datalinkTargets.forEach(target => {
+                this.outputTables.push(target['table']);
+            });
+        }
+    }
 
     updateItems() {
         for ( let i = 0; i < this.inputParameterForms.length; i++) {

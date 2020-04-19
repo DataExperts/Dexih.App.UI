@@ -18,11 +18,12 @@ export class ListOfValuesIndexComponent implements OnInit, OnDestroy {
     hubCache: HubCache;
 
     listOfValues: Array<DexihListOfValues>;
+    public eSharedObjectType = eSharedObjectType;
 
     columns = [
-        { name: 'name', title: 'Name', format: ''},
+        { name: 'name', title: 'Name', format: '', tags: 'tags'},
         { name: 'sourceType', title: 'Source Type', format: 'Enum', enum: eLOVObjectType},
-        { name: 'updateDate', title: 'Last Updated', format: 'DateTime'},
+        { name: 'updateDate', title: 'Last Modified', format: 'DateTime'},
     ];
 
     private _tableData = new BehaviorSubject<Array<any>>(null);
@@ -66,8 +67,15 @@ export class ListOfValuesIndexComponent implements OnInit, OnDestroy {
 
     update() {
         if (this.hubCache && this.hubCache.isLoaded()) {
-            let listOfValues: Array<DexihListOfValues>;
-            listOfValues = this.hubCache.hub.dexihListOfValues.filter(c => c.isValid);
+            let listOfValues = this.hubCache.hub.dexihListOfValues.filter(c => c.isValid).map(c => {
+                return {
+                    key: c.key,
+                    name: c.name,
+                    description: c.description,
+                    updateDate: c.updateDate,
+                    tags: this.hubCache.getObjectTags(eSharedObjectType.ListOfValues, c.key)
+                }
+            });
             this._tableData.next(listOfValues);
         } else {
             this._tableData.next(null);
@@ -94,7 +102,7 @@ export class ListOfValuesIndexComponent implements OnInit, OnDestroy {
     watchChanges() {
       // watch the current validation in case it is changed in another session.
       this._hubCacheChangeSubscription = this.hubService.getHubCacheChangeObservable().subscribe(hubCacheChange => {
-          if (hubCacheChange.changeClass === eSharedObjectType.ListOfValues) {
+          if (hubCacheChange.changeClass === eSharedObjectType.ListOfValues || hubCacheChange.changeClass === eSharedObjectType.TagObjects) {
             this.update();
           }
       });

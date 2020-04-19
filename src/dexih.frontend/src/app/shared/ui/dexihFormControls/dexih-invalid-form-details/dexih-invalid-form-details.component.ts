@@ -31,7 +31,6 @@ export class DexihInvalidFormDetailsComponent implements OnInit, OnChanges, OnDe
 
     public showErrors = false;
 
-
     private _changesSubscription: Subscription;
 
     valid = true;

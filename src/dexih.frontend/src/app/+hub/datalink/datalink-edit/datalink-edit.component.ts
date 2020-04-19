@@ -19,7 +19,7 @@ export class DatalinkEditComponent implements OnInit, OnDestroy {
 
     private _subscription: Subscription;
     private _datalinkFormSubscription: Subscription;
-    private _datalinkTransformsSubscription: Subscription;
+    // private _datalinkTransformsSubscription: Subscription;
 
     private hubCache: HubCache;
 
@@ -33,9 +33,9 @@ export class DatalinkEditComponent implements OnInit, OnDestroy {
 
     public help: string;
 
-    private _datalinkTransforms = new BehaviorSubject<Array<DexihDatalinkTransform>>(null);
-    datalinkTransforms: Observable<Array<DexihDatalinkTransform>> = this._datalinkTransforms.asObservable();
-    updatingTransforms = false;
+    // private _datalinkTransforms = new BehaviorSubject<Array<DexihDatalinkTransform>>(null);
+    // datalinkTransforms: Observable<Array<DexihDatalinkTransform>> = this._datalinkTransforms.asObservable();
+    // updatingTransforms = false;
 
     eTransformWriterMethod = eTransformWriterMethod;
 
@@ -166,16 +166,16 @@ export class DatalinkEditComponent implements OnInit, OnDestroy {
                         if (!datalinkForm) { return; }
                         this.datalinkForm = datalinkForm;
 
-                        let datalinkTransforms = <FormArray>this.datalinkForm.controls.dexihDatalinkTransforms;
-                        this.updateTransforms(datalinkTransforms.value);
+                        // let datalinkTransforms = <FormArray>this.datalinkForm.controls.dexihDatalinkTransforms;
+                        // this.updateTransforms(datalinkTransforms.value);
 
-                        // monitor any add/remove transforms to update the tabs.
-                        if (this._datalinkTransformsSubscription) { this._datalinkTransformsSubscription.unsubscribe(); }
-                        this._datalinkTransformsSubscription = datalinkTransforms.valueChanges.subscribe(dt => {
-                            if (!this.updatingTransforms) {
-                                this.updateTransforms(dt);
-                            }
-                        });
+                        // // monitor any add/remove transforms to update the tabs.
+                        // if (this._datalinkTransformsSubscription) { this._datalinkTransformsSubscription.unsubscribe(); }
+                        // this._datalinkTransformsSubscription = datalinkTransforms.valueChanges.subscribe(dt => {
+                        //     if (!this.updatingTransforms) {
+                        //         this.updateTransforms(dt);
+                        //     }
+                        // });
 
                         let key = datalinkForm.controls.key.value;
                         if (key) {
@@ -200,26 +200,26 @@ export class DatalinkEditComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         if (this._subscription) { this._subscription.unsubscribe(); }
         if (this._datalinkFormSubscription) { this._datalinkFormSubscription.unsubscribe(); }
-        if (this._datalinkTransformsSubscription) { this._datalinkTransformsSubscription.unsubscribe(); }
+//        if (this._datalinkTransformsSubscription) { this._datalinkTransformsSubscription.unsubscribe(); }
 
         // shut down service
         this.editDatalinkService.ngOnDestroy();
     }
 
-    updateTransforms(datalinkTransforms: Array<any>) {
-        this.updatingTransforms = true;
-        this.logger.LogC(() => `updateTransforms`, eLogLevel.Trace);
+    // updateTransforms(datalinkTransforms: Array<any>) {
+    //     this.updatingTransforms = true;
+    //     this.logger.LogC(() => `updateTransforms`, eLogLevel.Trace);
 
-        // update the transform names
-        if (datalinkTransforms) {
-            let transforms = datalinkTransforms
-                .filter(c => c.transformType !== eTransformType.Delta && c.transformType !== eTransformType.Validation);
-            this._datalinkTransforms.next(transforms.sort((a, b) => a.position - b.position));
-        } else {
-            this._datalinkTransforms.next(null);
-        }
-        this.updatingTransforms = true;
-    }
+    //     // update the transform names
+    //     if (datalinkTransforms) {
+    //         let transforms = datalinkTransforms
+    //             .filter(c => c.transformType !== eTransformType.Delta && c.transformType !== eTransformType.Validation);
+    //         this._datalinkTransforms.next(transforms.sort((a, b) => a.position - b.position));
+    //     } else {
+    //         this._datalinkTransforms.next(null);
+    //     }
+    //     this.updatingTransforms = true;
+    // }
 
     public canDeactivate(): Promise<boolean> {
         return new Promise<boolean>((resolve) => {

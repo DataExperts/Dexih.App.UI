@@ -6,7 +6,7 @@ import { DexihHubVariable, DexihHub, DexihFunctionParameter, DexihConnection, De
     DexihTrigger, TransformProperties, eStatus, eParameterDirection, eConnectionPurpose, eDeltaType,
     eSourceType, eImportAction, eSecurityFlag, eUpdateStrategy, eFailAction, eInvalidAction,
     eFunctionCaching, eCleanAction, eDuplicateStrategy, eRunStatus, ePermission, eTypeCode,
-    eTransformWriterMethod, eTransformItemType, eFunctionType, eDataObjectType, eSharedObjectType, eSortDirection, eSeriesGrain, eDayOfWeek, ChartConfig, eLOVObjectType, DexihListOfValues, InputParameterBase, DexihDatalinkTestStep, eTransformTypeItems, eTransformType } from '../shared/shared.models';
+    eTransformWriterMethod, eTransformItemType, eFunctionType, eDataObjectType, eSharedObjectType, eSortDirection, eSeriesGrain, eDayOfWeek, ChartConfig, eLOVObjectType, DexihListOfValues, InputParameterBase, DexihDatalinkTestStep, eTransformTypeItems, eTransformType, DexihTag } from '../shared/shared.models';
 
 // export class RemoteMessage {
 //     public messageId: string;
@@ -194,7 +194,13 @@ export const sharedObjectProperties: SharedObjectProperty[] = [
         displayName: 'Datalink Tests',
         description: 'Regression tests which can be used to ensure datalinks function after upgrades or modification.'
     },
-    
+    {
+        type: eSharedObjectType.Tags, name: 'Tag', cacheProperty: 'dexihTags', property: 'tags',
+        parentKey: '', parentType: null, cacheAddMethod: 'cacheAddTag',
+        cacheGetMethod: 'getTagCache', icon: 'fa-tags', routerLink: 'tags',
+        displayName: 'Tags',
+        description: 'Tags can be used to group and categorize objects as needed.'
+    },
 ];
 
 export class SharedObject {
@@ -323,6 +329,12 @@ export class HubCache {
         return '/hub/' + this.hub.hubKey;
     }
 
+    public getObjectTags(objectType: eSharedObjectType, key: number): DexihTag[] {
+        let tags = this.hub.dexihTagObjects
+                        .filter(to => to.objectType === objectType && to.objectKey === key)
+                        .map(to => this.hub.dexihTags.find(e => e.key === to.tagKey));
+        return tags;
+    }
 
     public getConnection(connectionKey): DexihConnection {
         let connection = this.hub.dexihConnections.find(c => c.key === connectionKey);
@@ -1046,6 +1058,19 @@ export class HubCache {
                 if (variable) {
                     hub.dexihHubVariables.push(variable);
                     return variable;
+                }
+            }
+        }
+    }
+
+    public cacheAddTag(key: number, hub: DexihHub): DexihTag {
+        if (key > 0) {
+            const dup = hub.dexihTags.find(c => c.key === key);
+            if (!dup) {
+                let tag = this.hub.dexihTags.find(c => c.key === key && c.isValid);
+                if (tag) {
+                    hub.dexihTags.push(tag);
+                    return tag;
                 }
             }
         }

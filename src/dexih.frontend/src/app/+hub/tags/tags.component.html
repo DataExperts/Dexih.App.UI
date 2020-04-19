@@ -1,0 +1,76 @@
+<div class="container-fluid">
+    <dexih-widget title="Tags" 
+		iconClass="fa fa-lg fa-fw fa-tags" 
+		[showCloseButton]="true"
+		(close)="close()"
+	>
+			<dexih-table 
+				[enableMultiSelect]="true"
+				[columns]="columns"
+				[dataObservable]="tableData"
+                (rowClick)="edit($event)"
+                rowStatusHeading="Color"
+				>
+				<ng-template #selectedItemAction select="selectedItemAction" let-hubVariable="item">
+					<dexih-button-edit class="mr-1" (click)="edit(item)"></dexih-button-edit>
+				</ng-template>
+
+                    <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+                        <dexih-button-save-local class="mr-1" (click)="export(items)"></dexih-button-save-local>
+                        <dexih-button-delete class="mr-1" *ngIf="hubCache.canWrite" (click)="delete(items)"></dexih-button-delete>
+                    </ng-template>
+    
+                    <ng-template #actions let-items="items">
+                        <dexih-button-new class="mr-1" *ngIf="hubCache.canWrite" (click)="new()"></dexih-button-new>
+                    </ng-template>
+
+                    <ng-template #rowStatus select="rowStatus" let-item="item">
+						<div class="alert" [ngStyle]="{'background-color': item.color, 'margin-bottom': '0' }"></div>
+					</ng-template>
+    
+                    <ng-template #tableHeader>
+                        <div [@slideDown]='state' class="card mt-2" style="width: 100%;">
+                            <div class="card-header text-white bg-primary">
+                                <b>Add/Edit Tag</b>
+                            </div>
+                            <div class="card-body">
+                                <form *ngIf="formsService.currentForm" [formGroup]="formsService.currentForm">
+                                    <div class="form-row">
+                                        <section class="form-group col-md-6">
+                                            <form-input label="Tag Name" formControlName="name" placeholder="Enter the name."
+                                                [autocapitalize]="true" iconClass="fa fa-list" [errors]="formsService.formErrors['name']">
+                                            </form-input>
+                                        </section>
+                                        <section class="form-group col-md-6">
+                                            <div>
+                                                <label class="mt-1">Color</label>
+                        
+                                                <div class="input-group m-0">
+                                                    <label class="btn mr-3" style="height: '38px'; width: '76px'" [style.background-color]="formsService.currentForm.controls.color.value"><input formControlName="color" hidden type="color"></label>
+                                                    <div class="btn-group-toggle" data-toggle="buttons">
+                                                        <button *ngFor="let color of colors" class="btn mr-1" (click)="selectColor(color)" [style.background-color]="color.color" style="height: '38px'; width: '38px'"></button>
+                                                    </div>
+                                                </div>
+                        
+                                            </div>
+                                        </section>
+                                    </div>
+                        
+                                </form>
+                            </div>
+                            <div class="card-footer">
+                                <dexih-button-save class="mr-1" (click)="save()"></dexih-button-save>
+                                <dexih-button-cancel class="mr-1" (click)="cancel()"></dexih-button-cancel>
+                            </div>
+                        </div>
+                    </ng-template>
+    
+			</dexih-table>
+
+	</dexih-widget>
+	
+	<dexih-help class="m-3" title="Views" path="/assets/help/reference/tag.md"></dexih-help>
+
+</div>
+
+

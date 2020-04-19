@@ -31,7 +31,7 @@ export class RemoteAgentIndexComponent implements OnInit, OnDestroy {
         { name: 'isEncrypted', title: 'Encrypted?', format: 'Boolean' },
         { name: 'ipAddress', title: 'Current IP Address', format: '' },
         { name: 'remoteAgentId', title: 'Id', format: '' },
-        { name: 'updateDate', title: 'Last Updated', format: 'DateTime' },
+        { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },
         { name: 'lastLoginDateTime', title: 'Last Login', format: 'DateTime' },
         { name: 'lastLoginIpAddress', title: 'Last IP Address', format: '' },
     ];

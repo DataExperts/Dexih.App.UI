@@ -22,7 +22,7 @@ export class HubIndexComponent implements OnInit, OnDestroy {
     columns = [
         { name: 'name', title: 'Name', format: ''},
         { name: 'description', title: 'Description', format: ''},
-        { name: 'updateDate', title: 'Last Updated', format: 'DateTime'},
+        { name: 'updateDate', title: 'Last Modified', format: 'DateTime'},
     ];
 
     private _tableData = new BehaviorSubject<Array<any>>(null);

@@ -9,12 +9,11 @@
 				[columns]="columns"
 				[dataObservable]="tableData"
 				(rowClick)="edit($event)"
+				[tags]="this.hubCache.hub.dexihTags"
 				>
 					<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+						<tags-update-button class="ml-1" [objectType]="eSharedObjectType.Dashboard" [objects]="items" ></tags-update-button>
 					</ng-template>
-
-					<ng-template #selectedItemAction select="selectedItemAction" let-view="item">
-						</ng-template>
 
 					<ng-template #actions let-items="items">
 						<actions-dashboard-button [dashboards]="items"></actions-dashboard-button>

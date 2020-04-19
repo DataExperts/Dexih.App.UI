@@ -24,7 +24,7 @@ export class SharedDataIndexComponent implements OnInit, OnDestroy {
         { name: 'objectTypeName', title: 'Type', format: '' },
         { name: 'name', title: 'Name', format: '' },
         { name: 'description', title: 'Description', format: 'Md' },
-        { name: 'updateDate', title: 'Last Updated', format: 'DateTime' },
+        { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },
     ];
 
     typeFilter: string;

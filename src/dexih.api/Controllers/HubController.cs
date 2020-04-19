@@ -1137,7 +1137,7 @@ namespace dexih.api.Controllers
 	    [ValidateHub(EPermission.User)]
 	    public Task<DexihListOfValues[]> DeleteListOfValues([FromBody] HubKeyItems listOfValues, CancellationToken cancellationToken)
 	    {
-		    _logger.LogTrace(LoggingEvents.HubDeleteListOfValues, "HubController.DeleteListOfValues: HubKey: {updateBrowserHub}, ViewKeys {dataValidationKeys}.", listOfValues.HubKey, string.Join(",", listOfValues.ItemKeys.Select(c => c.ToString())));
+		    _logger.LogTrace(LoggingEvents.HubDeleteListOfValues, "HubController.DeleteListOfValues: HubKey: {updateBrowserHub}, Keys {dataValidationKeys}.", listOfValues.HubKey, string.Join(",", listOfValues.ItemKeys.Select(c => c.ToString())));
 
 		    var deleteResult = _operations.RepositoryManager.DeleteListOfValues(listOfValues.HubKey, listOfValues.ItemKeys, cancellationToken);
 		    return deleteResult;
@@ -1151,6 +1151,60 @@ namespace dexih.api.Controllers
 
 		    var repositoryManager = _operations.RepositoryManager;
 		    var saveResult = repositoryManager.SaveListOfValues(saveListOfValues.HubKey, saveListOfValues.Value, cancellationToken);
+		    return saveResult;
+	    }
+	    
+	    [HttpPost("[action]")]
+	    [ValidateHub(EPermission.User)]
+	    public Task<DexihTag[]> DeleteTags([FromBody] HubKeyItems tags, CancellationToken cancellationToken)
+	    {
+		    _logger.LogTrace(LoggingEvents.HubDeleteTags, "HubController.DeleteTags: HubKey: {updateBrowserHub}, TagKeys {keys}.", tags.HubKey, string.Join(",", tags.ItemKeys.Select(c => c.ToString())));
+
+		    var deleteResult = _operations.RepositoryManager.DeleteTags(tags.HubKey, tags.ItemKeys, cancellationToken);
+		    return deleteResult;
+	    }
+
+	    [HttpPost("[action]")]
+	    [ValidateHub(EPermission.User)]
+	    public Task<DexihTag> SaveTag([FromBody] HubValue<DexihTag> tagValue, CancellationToken cancellationToken)
+	    {
+		    _logger.LogTrace(LoggingEvents.HubSaveTags, "HubController.SaveTags: HubKey: {updateBrowserHub}", tagValue.HubKey);
+
+		    var repositoryManager = _operations.RepositoryManager;
+		    var saveResult = repositoryManager.SaveTag(tagValue.HubKey, tagValue.Value, cancellationToken);
+		    return saveResult;
+	    }
+	    
+	    [HttpPost("[action]")]
+	    [ValidateHub(EPermission.User)]
+	    public Task SaveObjectTags([FromBody] ObjectTags objectTags, CancellationToken cancellationToken)
+	    {
+		    _logger.LogTrace(LoggingEvents.HubSaveObjectTags, "HubController.HubSaveObjectTags: HubKey: {updateBrowserHub}", objectTags.HubKey);
+
+		    var repositoryManager = _operations.RepositoryManager;
+		    var saveResult = repositoryManager.SaveObjectTags(objectTags.HubKey, objectTags.ObjectKey, objectTags.ObjectType, objectTags.TagKeys , cancellationToken);
+		    return saveResult;
+	    }
+	    
+	    [HttpPost("[action]")]
+	    [ValidateHub(EPermission.User)]
+	    public Task SaveTagObjects([FromBody] TagObjects tagObjects, CancellationToken cancellationToken)
+	    {
+		    _logger.LogTrace(LoggingEvents.HubSaveTagObjects, "HubController.HubSaveTagObjects: HubKey: {updateBrowserHub}", tagObjects.HubKey);
+
+		    var repositoryManager = _operations.RepositoryManager;
+		    var saveResult = repositoryManager.SaveTagObjects(tagObjects.HubKey, tagObjects.TagKey, tagObjects.IsChecked, tagObjects.ObjectKeys, cancellationToken);
+		    return saveResult;
+	    }
+	    
+	    [HttpPost("[action]")]
+	    [ValidateHub(EPermission.User)]
+	    public Task DeleteTagObjects([FromBody] TagObjects tagObjects, CancellationToken cancellationToken)
+	    {
+		    _logger.LogTrace(LoggingEvents.HubDeleteTagObjects, "HubController.HubDeleteTagObjects: HubKey: {updateBrowserHub}", tagObjects.HubKey);
+
+		    var repositoryManager = _operations.RepositoryManager;
+		    var saveResult = repositoryManager.DeleteTagObjects(tagObjects.HubKey, tagObjects.ObjectKeys, cancellationToken);
 		    return saveResult;
 	    }
 	    

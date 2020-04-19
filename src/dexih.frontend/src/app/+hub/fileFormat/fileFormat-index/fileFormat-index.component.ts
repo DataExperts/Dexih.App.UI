@@ -20,10 +20,11 @@ export class FileFormatIndexComponent implements OnInit, OnDestroy {
     hubCache: HubCache;
 
     fileFormats: Array<DexihFileFormat>;
+    public eSharedObjectType = eSharedObjectType;
 
     columns = [
-        { name: 'name', title: 'Name', footer: 'description', format: 'Md' },
-        { name: 'updateDate', title: 'Last Updated', format: 'DateTime' },
+        { name: 'name', title: 'Name', footer: 'description', format: 'Md', tags: 'tags' },
+        { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },
     ];
 
     private _tableData = new BehaviorSubject<Array<any>>(null);
@@ -74,8 +75,15 @@ export class FileFormatIndexComponent implements OnInit, OnDestroy {
 
     updateFileFormats() {
         if (this.hubCache && this.hubCache.isLoaded()) {
-            let fileFormats: Array<DexihFileFormat>;
-            fileFormats = this.hubCache.hub.dexihFileFormats.filter(c => c.isValid);
+            let fileFormats = this.hubCache.hub.dexihFileFormats.filter(c => c.isValid).map(c => {
+                return {
+                    key: c.key,
+                    name: c.name,
+                    description: c.description,
+                    updateDate: c.updateDate,
+                    tags: this.hubCache.getObjectTags(eSharedObjectType.FileFormat, c.key)
+                }
+            });
             this._tableData.next(fileFormats);
         } else {
             this._tableData.next(null);
@@ -99,7 +107,8 @@ export class FileFormatIndexComponent implements OnInit, OnDestroy {
     watchChanges() {
         // watch the current validation in case it is changed in another session.
         this._hubCacheChangeSubscription = this.hubService.getHubCacheChangeObservable().subscribe(hubCacheChange => {
-            if (hubCacheChange.changeClass === eSharedObjectType.FileFormat) {
+            if (hubCacheChange.changeClass === eSharedObjectType.FileFormat ||
+                hubCacheChange.changeClass === eSharedObjectType.TagObjects) {
                 this.updateFileFormats();
             }
         });

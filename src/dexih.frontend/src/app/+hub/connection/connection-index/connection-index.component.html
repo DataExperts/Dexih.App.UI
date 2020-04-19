@@ -9,10 +9,21 @@
 			</dexih-button-dropdown>
 		</ng-template>
 
-		<dexih-table [enableMultiSelect]="true" [columns]="columns" [dataObservable]="tableData" (rowClick)="editConnection($event)">
+		<dexih-table 
+			[enableMultiSelect]="true" 
+			[columns]="columns" 
+			[dataObservable]="tableData" 
+			(rowClick)="editConnection($event)" 			
+			[tags]="this.hubCache.hub.dexihTags"
+		>
 			<ng-template #actions let-items="items">
 				<actions-connection-button [connections]="items"></actions-connection-button>
 			</ng-template>
+
+			<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+				<tags-update-button class="ml-1" [objectType]="eSharedObjectType.Connection" [objects]="items" ></tags-update-button>
+			</ng-template>
+
 		</dexih-table>
 
 	</dexih-widget>

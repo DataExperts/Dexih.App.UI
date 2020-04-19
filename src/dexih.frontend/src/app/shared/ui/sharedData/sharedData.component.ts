@@ -28,7 +28,7 @@ export class SharedDataComponent implements OnInit, OnDestroy {
     columns = [
         { name: 'logicalName', title: 'Details', header: 'hubName', footer: 'description', format: 'Md' },
         { name: 'objectType', title: 'Type', format: 'Enum', enum: eDataObjectType},
-        { name: 'updateDate', title: 'Last Updated', format: 'DateTime' },
+        { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },
     ];
 
     public dataIndex: SharedData[] = null;

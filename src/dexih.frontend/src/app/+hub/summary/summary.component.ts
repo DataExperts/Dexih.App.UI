@@ -9,14 +9,6 @@ import { DexihActiveAgent, eConnectionPurpose } from '../../shared/shared.models
 @Component({
   selector: 'dexih-summary',
   templateUrl: './summary.component.html',
-  animations: [
-    // trigger name for attaching this animation to an element using the [@triggerName] syntax
-    trigger('slideDown', [
-        state('hide', style({ height: 0, overflow: 'hidden' })),
-        state('show', style({ height: '*', overflow: 'unset' })),
-        transition('hide <=> show', animate('200ms ease-in')),
-    ])
-    ]
 })
 export class SummaryComponent implements OnInit, OnDestroy {
   private _subscription: Subscription;

@@ -25,7 +25,7 @@ export class DatajobAddStepsComponent implements OnInit, OnDestroy {
         { name: 'datalinkType', title: 'Datalink Type', enum: eDatalinkType, format: 'Enum' },
         { name: 'sourceTableName', title: 'Source Table', format: '' },
         { name: 'targetTableName', title: 'Target Table', format: '' },
-        { name: 'updateDate', title: 'Last Updated', format: 'DateTime' },
+        { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },
     ];
 
     private _tableData = new BehaviorSubject<Array<DexihDatalink>>(null);

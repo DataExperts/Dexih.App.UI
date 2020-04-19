@@ -16,7 +16,7 @@ export class ApiData {
    }
    
    export class ApplicationUser {
-    public id: string = '07941794-f597-46f6-999f-36e0fac47232';
+    public id: string = 'f48591ef-3ae2-447c-9185-73f83bd0f15e';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -25,7 +25,7 @@ export class ApiData {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = '58e9d99f-e2f6-43b4-82d3-3a60ca0cf49c';
+    public securityStamp: string = 'ae8b665b-6541-454e-ae10-528c1582a0da';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -884,12 +884,24 @@ export class ApiData {
     public dexihCustomFunctions: DexihCustomFunction[] = [];
     public dexihRemoteAgentHubs: DexihRemoteAgentHub[] = [];
     public dexihListOfValues: DexihListOfValues[] = [];
+    public dexihTags: DexihTag[] = [];
+    public dexihTagObjects: DexihTagObject[] = [];
     public createDate: Date = null;
     public updateDate: Date = null;
     public isValid: boolean = true;
    }
    
    export class DexihHubEntity {
+    public hubKey: number = 0;
+    public createDate: Date = null;
+    public updateDate: Date = null;
+    public isValid: boolean = true;
+   }
+   
+   export class DexihHubNamedEntity {
+    public key: number = 0;
+    public name: string = null;
+    public description: string = null;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -1077,6 +1089,27 @@ export class ApiData {
     public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public hubKey: number = 0;
+    public createDate: Date = null;
+    public updateDate: Date = null;
+    public isValid: boolean = true;
+   }
+   
+   export class DexihTag {
+    public color: string = null;
+    public key: number = 0;
+    public name: string = null;
+    public description: string = null;
+    public hubKey: number = 0;
+    public createDate: Date = null;
+    public updateDate: Date = null;
+    public isValid: boolean = true;
+   }
+   
+   export class DexihTagObject {
+    public tagKey: number = 0;
+    public objectKey: number = 0;
+    public objectType: eSharedObjectType = null;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -1290,6 +1323,8 @@ export class ApiData {
     public apis: ImportObject<DexihApi>[] = [];
     public dashboards: ImportObject<DexihDashboard>[] = [];
     public listOfValues: ImportObject<DexihListOfValues>[] = [];
+    public tags: ImportObject<DexihTag>[] = [];
+    public tagObjects: ImportObject<DexihTagObject>[] = [];
     public warnings: string[] = [];
    }
    
@@ -2237,7 +2272,7 @@ export class ApiData {
     Error = 28,
     Url = 29,
     UpdateReason = 30,
-    FileDate = 31
+    FileDate = 31,
    }
    
    export const eDeltaTypeItems = [
@@ -2261,7 +2296,6 @@ export class ApiData {
     {key: eDeltaType.RejectedReason, name: 'RejectedReason'},
     {key: eDeltaType.FileName, name: 'FileName'},
     {key: eDeltaType.FileRowNumber, name: 'FileRowNumber'},
-    {key: eDeltaType.FileDate, name: 'FileDate'},
     {key: eDeltaType.RowKey, name: 'RowKey'},
     {key: eDeltaType.PartitionKey, name: 'PartitionKey'},
     {key: eDeltaType.TimeStamp, name: 'TimeStamp'},
@@ -2273,6 +2307,7 @@ export class ApiData {
     {key: eDeltaType.Error, name: 'Error'},
     {key: eDeltaType.Url, name: 'Url'},
     {key: eDeltaType.UpdateReason, name: 'UpdateReason'},
+    {key: eDeltaType.FileDate, name: 'FileDate'},
    ]
    
    export enum eDownloadFormat {
@@ -2810,6 +2845,8 @@ export class ApiData {
     Api = 12,
     Dashboard = 13,
     ListOfValues = 14,
+    Tags = 15,
+    TagObjects = 16
    }
    
    export const eSharedObjectTypeItems = [
@@ -2828,6 +2865,7 @@ export class ApiData {
     {key: eSharedObjectType.Api, name: 'Api'},
     {key: eSharedObjectType.Dashboard, name: 'Dashboard'},
     {key: eSharedObjectType.ListOfValues, name: 'ListOfValues'},
+    {key: eSharedObjectType.Tags, name: 'Tags'},
    ]
    
    export enum eSortDirection {

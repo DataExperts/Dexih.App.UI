@@ -20,7 +20,7 @@ import { DexihDatajob, DexihTable, DexihHub, DexihRemoteAgentHub, DexihConnectio
     ApiData, DownloadObject, eDownloadFormat, DexihActiveAgent, ImportObject, ePermission, eTypeCode, eDataObjectType,
     eSharedObjectType, RemoteLibraries, ConnectionReference, TransformReference,
     FunctionReference, eFunctionType, ClientMessage, eClientCommand, HubUser, DexihListOfValues, ManagedTask,
-    eLOVObjectType, ListOfValuesItem } from '../shared/shared.models';
+    eLOVObjectType, ListOfValuesItem, DexihTag, DexihTagObject } from '../shared/shared.models';
 import { filter, take, first } from 'rxjs/operators';
 
 @Injectable()
@@ -574,6 +574,11 @@ export class HubService implements OnInit, OnDestroy {
         this.mergeChange(hubChange.tables, hubCache.hub.dexihTables, 'key', eSharedObjectType.Table);
         this.mergeChange(hubChange.dashboards, hubCache.hub.dexihDashboards, 'key', eSharedObjectType.Dashboard);
         this.mergeChange(hubChange.listOfValues, hubCache.hub.dexihListOfValues, 'key', eSharedObjectType.ListOfValues);
+        this.mergeChange(hubChange.tags, hubCache.hub.dexihTags, 'key', eSharedObjectType.Tags);
+
+        if (hubChange.tagObjects && hubChange.tagObjects.length > 0) {
+            this.mergeChangeTagObjects(hubChange.tagObjects, hubCache.hub.dexihTagObjects);
+        }
 
         if (hubChange.remoteAgentHubs && hubChange.remoteAgentHubs.length > 0) {
             this.resetRemoteAgent(hubCache);
@@ -634,6 +639,41 @@ export class HubService implements OnInit, OnDestroy {
                 }
 
                 this._hubCacheChange.next(new HubCacheChange(changeClass, item.importAction, current));
+            });
+        }
+    }
+
+    private mergeChangeTagObjects(source: ImportObject<DexihTagObject>[], target: DexihTagObject[]) {
+        if (source && source.length > 0) {
+            source.forEach(item => {
+                let current = target
+                    .find(c => c.tagKey === item.item.tagKey
+                        && c.objectKey === item.item.objectKey && c.objectType === item.item.objectType);
+
+                if (current && current.updateDate === item.item.updateDate) {
+                    return;
+                }
+
+                switch (item.importAction) {
+                    case eImportAction.New:
+                    case eImportAction.Replace:
+                        if (current) {
+                            Object.assign(current, item.item);
+                        } else {
+                            current = item.item;
+                            target.push(item.item);
+                        }
+                        break;
+                    case eImportAction.Delete:
+                        if (current) {
+                            let index = target
+                            .findIndex(c => c.tagKey === item.item.tagKey
+                                && c.objectKey === item.item.objectKey && c.objectType === item.item.objectType);
+                            target.splice(index, 1);
+                        }
+                }
+
+                this._hubCacheChange.next(new HubCacheChange(eSharedObjectType.TagObjects, item.importAction, current));
             });
         }
     }
@@ -1349,6 +1389,37 @@ export class HubService implements OnInit, OnDestroy {
         'This action will delete the following list of values, from the hub and cannot be reversed.<p></p>' +
         names + '<p></p>Are you sure?');
     }
+
+    saveTag(tag: DexihTag): Promise<DexihTag> {
+        return this.hubPost<DexihTag>('/api/Hub/SaveTags', {
+            value: tag
+        }, 'Saving tag...');
+    }
+
+    deleteTags(tags: Array<DexihTag>): Promise<boolean> {
+        let names = tags.map(c => c.name).join('<br>');
+
+        return this.hubPostConfirm<boolean>('/api/Hub/DeleteTags', {
+            itemKeys: tags.map(c => c.key)
+        }, 'Deleting tags(s)...',
+        'This action will delete the following tags, from the hub and cannot be reversed.<p></p>' +
+        names + '<p></p>Are you sure?');
+    }
+
+    saveTagObjects(tagKey: number, isChecked: boolean, objectKeys: Array<{objectType: eSharedObjectType, objectKey: number}>) {
+        return this.hubPost('/api/Hub/SaveTagObjects', {
+            tagKey,
+            isChecked,
+            objectKeys
+        }, 'Saving tags...');
+    }
+
+    deleteTagObjects(objectKeys: Array<{objectType: eSharedObjectType, objectKey: number}>) {
+        return this.hubPost('/api/Hub/DeleteTagObjects', {
+            objectKeys
+        }, 'Deleting tags...');
+    }
+
 
     saveApi(api: DexihApi): Promise<DexihApi> {
         return this.hubPost<DexihApi>('/api/Hub/SaveApi', {

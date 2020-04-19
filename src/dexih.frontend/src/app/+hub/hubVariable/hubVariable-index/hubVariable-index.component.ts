@@ -18,12 +18,13 @@ export class HubVariableIndexComponent implements OnInit, OnDestroy {
     hubCache: HubCache;
 
     hubVariables: Array<DexihHubVariable>;
+    public eSharedObjectType = eSharedObjectType;
 
     columns = [
-        { name: 'name', title: 'Name', format: ''},
+        { name: 'name', title: 'Name', format: '', tags: 'tags'},
         { name: 'value', title: 'Value', format: ''},
         { name: 'isEncrypted', title: 'Encrypted?', format: 'Boolean'},
-        { name: 'updateDate', title: 'Last Updated', format: 'DateTime'},
+        { name: 'updateDate', title: 'Last Modified', format: 'DateTime'},
     ];
 
     private _tableData = new BehaviorSubject<Array<any>>(null);
@@ -67,8 +68,15 @@ export class HubVariableIndexComponent implements OnInit, OnDestroy {
 
     updateVariables() {
         if (this.hubCache && this.hubCache.isLoaded()) {
-            let variables: Array<DexihHubVariable>;
-            variables = this.hubCache.hub.dexihHubVariables.filter(c => c.isValid);
+            let variables = this.hubCache.hub.dexihHubVariables.filter(c => c.isValid).map(c => {
+                return {
+                    key: c.key,
+                    name: c.name,
+                    description: c.description,
+                    updateDate: c.updateDate,
+                    tags: this.hubCache.getObjectTags(eSharedObjectType.HubVariable, c.key)
+                }
+            });
             this._tableData.next(variables);
         } else {
             this._tableData.next(null);
@@ -92,7 +100,7 @@ export class HubVariableIndexComponent implements OnInit, OnDestroy {
     watchChanges() {
       // watch the current validation in case it is changed in another session.
       this._hubCacheChangeSubscription = this.hubService.getHubCacheChangeObservable().subscribe(hubCacheChange => {
-          if (hubCacheChange.changeClass === eSharedObjectType.HubVariable) {
+          if (hubCacheChange.changeClass === eSharedObjectType.HubVariable || hubCacheChange.changeClass === eSharedObjectType.TagObjects) {
             this.updateVariables();
           }
       });

@@ -22,7 +22,7 @@ import { eImportAction, Import, DexihConnection, DexihTable, DexihTableColumn, e
    DexihDatalinkTransform, DexihDatalinkTransformItem, DexihFunctionParameter, DexihFunctionArrayParameter,
    DexihDatalinkProfile, DexihDatalinkTarget, DexihDatalinkTable,
    eSourceType, eSharedObjectType, DexihListOfValues, InputParameterBase,
-   eDataObjectType, ListOfValuesItem, eTransformItemType } from '../shared/shared.models';
+   eDataObjectType, ListOfValuesItem, eTransformItemType, DexihTag } from '../shared/shared.models';
 import { filter } from 'rxjs/operators';
 
 @Injectable()
@@ -152,8 +152,7 @@ export class HubFormsService implements OnDestroy {
 
     if (form) {
       if (this._valueChangesSubscription) { this._valueChangesSubscription.unsubscribe(); }
-      this._valueChangesSubscription = form.valueChanges
-        .subscribe(data => this.onValueChanged(data));
+      this._valueChangesSubscription = form.valueChanges.subscribe(data => this.onValueChanged(data));
       this.onValueChanged(); // (re)set validation messages now
     }
 
@@ -370,16 +369,16 @@ export class HubFormsService implements OnDestroy {
         return;
       }
 
-      if (!this.currentForm.valid) {
-        this.showAllErrors = true;
-        this.onValueChanged();
+      // if (!this.currentForm.valid) {
+      //   this.showAllErrors = true;
+      //   this.onValueChanged();
 
-        let confirm = await this.authService.confirmDialog('There are errors!',
-          'There are errors in the current form.  Confirm that would like to save the changes anyhow?');
-        if (!confirm) {
-          return;
-        }
-      }
+      //   let confirm = await this.authService.confirmDialog('There are errors!',
+      //     'There are errors in the current form.  Confirm that would like to save the changes anyhow?');
+      //   if (!confirm) {
+      //     return;
+      //   }
+      // }
 
       this.formSaving = true;
 
@@ -1248,6 +1247,36 @@ export class HubFormsService implements OnDestroy {
     };
   }
 
+  public tag(tag: DexihTag) {
+    const form = this.fb.group({
+      'name': [tag.name, [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+        this.duplicateTagNameValidator()
+      ]],
+    }
+    );
+
+    this.formGroupFunc = this.tag;
+    this.saveMethod = 'SaveTag';
+    this.property = sharedObjectProperties.find(c => c.type === eSharedObjectType.Tags);
+    this.addMissing(tag, form, new DexihTag());
+    this.watchChanges(eSharedObjectType.Tags, 'tag', 'hub variable', this.tag);
+    this.startForm(form);
+  }
+
+  duplicateTagNameValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } => {
+      if (this.currentForm) {
+        const name = control.value;
+        const no = this.hubCache.hub.dexihTags.findIndex(c =>
+          c.key !== this.currentForm.controls.key.value && c.isValid
+          && this.stringCompare(c.name, name)) >= 0;
+        return no ? { 'duplicateName': { name } } : null;
+      }
+    };
+  }
 
   public datalinkTest(datalinkTest: DexihDatalinkTest) {
     const form = this.fb.group({
@@ -1463,8 +1492,8 @@ export class HubFormsService implements OnDestroy {
     );
 
     // this.formGroupFunc = this.remoteAgentSettings;
-    this.saveMethod = 'SaveRemoteAgent';
-    this.property = sharedObjectProperties.find(c => c.type === eSharedObjectType.RemoteAgent);
+    // this.saveMethod = 'SaveRemoteAgent';
+    // this.property = sharedObjectProperties.find(c => c.type === eSharedObjectType.RemoteAgent);
     this.clearFormSubscriptions();
     this.addMissing(remoteAgent, remoteAgentForm, new DexihRemoteAgentHub());
     this.startForm(remoteAgentForm);

@@ -32,6 +32,7 @@ import { DatajobRunComponent } from './datajob/datajob-run/datajob-run.component
 import { DexihDashboard, DexihView, DexihApi } from '../shared/shared.models';
 import { ListOfValuesEditComponent } from './listOfValues/listOfValues-edit';
 import { ListOfValuesIndexComponent } from './listOfValues/listOfValues-index';
+import { TagsComponent } from './tags/tags.component';
 
 const resultViewRoute: Route = { path: 'result-view/:auditConnectionKey/:auditKey', children: [
         {path: '', pathMatch: 'full', component: ResultsViewComponent, data: { pageTitle: 'Detailed Result' }},
@@ -60,7 +61,8 @@ const tableRoutes: Routes = [
 
 const datalinkRoutes: Routes = [
     { path: 'datalink-edit', loadChildren: () => import('./datalink/datalink-edit/datalink-edit.module').then(m => m.DatalinkEditModule)},
-    { path: 'datalink-preview/:datalinkKey/:previewUpdates', component: DatalinkPreviewDataComponent, data: { pageTitle: 'Preview Datalink' } },
+    { path: 'datalink-preview/:datalinkKey/:previewUpdates', component: DatalinkPreviewDataComponent,
+        data: { pageTitle: 'Preview Datalink' } },
     { path: 'table-preview/:tableKey', component: TablePreviewDataComponent, data: { pageTitle: 'Preview Table' } },
     { path: 'datalink-run/:datalinkKeys', component: DatalinkRunComponent, data: { pageTitle: 'Run Datalink' } },
     resultViewRoute
@@ -233,6 +235,8 @@ const hubVariablesRoute: Route = { path: 'hubVariables', data: { pageTitle: 'Hub
     ])
 };
 
+const tagsRoute: Route = { path: 'tags', component: TagsComponent}
+
 const datalinkTestRoutes: Routes = [
     { path: 'datalinkTest-edit/:datalinkTestKey', data: { pageTitle: 'Edit Datalink Test', action: 'edit'},
             loadChildren: () => import('./test/datalinkTest-edit/datalinkTest-edit.module').then(m => m.DatalinkTestEditModule)},
@@ -335,6 +339,7 @@ const routes: Routes = (<Routes>[
     sharedDataRoute,
     filesRoute,
     datalinkTestsRoute,
+    tagsRoute,
     searchRoute,
     { path: '', children : connectionRoutes},
     { path: '', children : datalinkRoutes},
@@ -352,6 +357,6 @@ const routes: Routes = (<Routes>[
     { path: '', children : filesRoutes},
     { path: '', children : agentRoutes},
     { path: '', children : datalinkTestRoutes},
-])
+]);
 
 export const BaseRouting = RouterModule.forChild(routes);

@@ -15,6 +15,8 @@ import { ActionsViewButtonComponent } from './actions-view-button/actions-view-b
 import { ActionsApiButtonComponent } from './actions-api-button/actions-api-button.component';
 import { ActionsDashboardButtonComponent } from './actions-dashboard-button/actions-dashboard-button.component';
 import { ActionsListOfValuesButtonComponent } from './actions-listOfValues-button/actions-listOfValues-button.component';
+import { TagsUpdateButtonComponent } from './tags-update-button/tags-update-button.component';
+import { TagsFilterButtonComponent } from './tags-filter-button/tags-filter-button.component';
 
 @NgModule({
     imports: [
@@ -36,7 +38,9 @@ import { ActionsListOfValuesButtonComponent } from './actions-listOfValues-butto
         ActionsViewButtonComponent,
         ActionsApiButtonComponent,
         ActionsDashboardButtonComponent,
-        ActionsListOfValuesButtonComponent
+        ActionsListOfValuesButtonComponent,
+        TagsUpdateButtonComponent,
+        TagsFilterButtonComponent
     ],
     declarations: [
         CancelButtonComponent,
@@ -54,7 +58,9 @@ import { ActionsListOfValuesButtonComponent } from './actions-listOfValues-butto
         ActionsViewButtonComponent,
         ActionsApiButtonComponent,
         ActionsDashboardButtonComponent,
-        ActionsListOfValuesButtonComponent
+        ActionsListOfValuesButtonComponent,
+        TagsUpdateButtonComponent,
+        TagsFilterButtonComponent
     ],
     providers: [],
 })

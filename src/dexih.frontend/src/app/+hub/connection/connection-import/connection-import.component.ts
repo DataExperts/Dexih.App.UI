@@ -37,7 +37,7 @@ export class ConnectionImportComponent implements OnInit, OnDestroy {
         { name: 'name', title: 'Name', format: '' },
         { name: 'tableType', title: 'Type', enum: eTableType, format: 'Enum' },
         { name: 'entityStatus.message', title: 'Latest Status' },
-        { name: 'updateDate', title: 'Last Updated', format: 'DateTime' },
+        { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },
     ];
 
     private _tableData = new BehaviorSubject<Array<any>>(null);

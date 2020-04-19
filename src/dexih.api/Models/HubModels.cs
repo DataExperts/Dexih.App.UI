@@ -43,6 +43,26 @@ namespace dexih.api.Models
         public T Value { get; set; }    
     }
 
+    public class ObjectTags
+    {
+        public long HubKey {get;set;}
+        public long ObjectKey {get;set;}
+        public ESharedObjectType ObjectType {get;set;}
+        
+        public bool IsChecked { get; set; }
+        public long[] TagKeys {get;set;}
+    }
+
+
+
+    public class TagObjects
+    {
+        public long HubKey {get;set;}
+        public long TagKey {get;set;}
+        public bool IsChecked { get; set; }
+        public ObjectTypeKey[] ObjectKeys {get;set;}
+    }
+
     public class ColumnValidationTest : HubValue<DexihColumnValidation>
     {
         public object TestValue { get; set; }

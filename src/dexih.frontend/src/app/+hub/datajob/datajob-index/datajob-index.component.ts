@@ -20,10 +20,11 @@ export class DatajobIndexComponent implements OnInit, OnDestroy {
     hubCache: HubCache;
 
     datajobs: Array<DexihDatajob>;
+    public eSharedObjectType = eSharedObjectType;
 
     columns = [
-        { name: 'name', title: 'Name', footer: 'description', format: 'Md' },
-        { name: 'updateDate', title: 'Last Updated', format: 'DateTime' },
+        { name: 'name', title: 'Name', footer: 'description', format: 'Md', tags: 'tags' },
+        { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },
     ];
 
     private _tableData = new BehaviorSubject<Array<any>>(null);
@@ -78,7 +79,18 @@ export class DatajobIndexComponent implements OnInit, OnDestroy {
 
     updateDatajobs() {
         if (this.hubCache && this.hubCache.isLoaded()) {
-            this._tableData.next(this.hubCache.hub.dexihDatajobs);
+            let datajobs = this.hubCache.hub.dexihDatajobs
+            .filter(c => c.isValid)
+            .map(c => {
+                return {
+                    key: c.key,
+                    name: c.name,
+                    description: c.description,
+                    updateDate: c.updateDate,
+                    tags: this.hubCache.getObjectTags(eSharedObjectType.Datajob, c.key)
+                }
+            });
+            this._tableData.next(datajobs);
         } else {
             this._tableData.next(null);
         }
@@ -113,7 +125,7 @@ export class DatajobIndexComponent implements OnInit, OnDestroy {
     watchChanges() {
         // watch the current datajob in case it is changed in another session.
         this._hubCacheChangeSubscription = this.hubService.getHubCacheChangeObservable().subscribe(hubCacheChange => {
-            if (hubCacheChange.changeClass === eSharedObjectType.Datajob) {
+            if (hubCacheChange.changeClass === eSharedObjectType.Datajob || hubCacheChange.changeClass === eSharedObjectType.TagObjects) {
                 this.updateDatajobs();
             }
         });

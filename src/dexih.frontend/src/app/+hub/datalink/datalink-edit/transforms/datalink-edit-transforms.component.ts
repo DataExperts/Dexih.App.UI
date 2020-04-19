@@ -58,7 +58,7 @@ export class DatalinkEditTransformsComponent implements OnInit, OnDestroy {
 
                     this.logger.LogC(() => `loading transform with key ${datalinkTransformKey}`, eLogLevel.Trace);
 
-                    this.datalinkForm.updateValueAndValidity({emitEvent: true});
+                    // this.datalinkForm.updateValueAndValidity({emitEvent: true, onlySelf: true});
 
                     this.refreshTransforms();
 

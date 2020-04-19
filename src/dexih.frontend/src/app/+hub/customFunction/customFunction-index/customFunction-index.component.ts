@@ -20,10 +20,11 @@ export class CustomFunctionIndexComponent implements OnInit, OnDestroy {
     hubCache: HubCache;
 
     customFunctions: Array<DexihCustomFunction>;
+    public eSharedObjectType = eSharedObjectType;
 
     columns = [
-        { name: 'name', title: 'Name', footer: 'description', format: 'Md' },
-        { name: 'updateDate', title: 'Last Updated', format: 'DateTime'},
+        { name: 'name', title: 'Name', footer: 'description', format: 'Md', tags: 'tags'},
+        { name: 'updateDate', title: 'Last Modified', format: 'DateTime'},
     ];
 
     private _tableData = new BehaviorSubject<Array<any>>(null);
@@ -67,8 +68,16 @@ export class CustomFunctionIndexComponent implements OnInit, OnDestroy {
 
     updateCustomFunctions() {
         if (this.hubCache && this.hubCache.isLoaded()) {
-            let functions: Array<DexihCustomFunction>;
-            functions = this.hubCache.hub.dexihCustomFunctions.filter(c => c.isValid);
+            let functions = this.hubCache.hub.dexihCustomFunctions.filter(c => c.isValid)
+                .map(c => {
+                    return {
+                        key: c.key,
+                        name: c.name,
+                        description: c.description,
+                        updateDate: c.updateDate,
+                        tags: this.hubCache.getObjectTags(eSharedObjectType.CustomFunction, c.key)
+                    }
+                });
             this._tableData.next(functions);
         } else {
             this._tableData.next(null);
@@ -92,7 +101,8 @@ export class CustomFunctionIndexComponent implements OnInit, OnDestroy {
     watchChanges() {
       // watch the current validation in case it is changed in another session.
       this._hubCacheChangeSubscription = this.hubService.getHubCacheChangeObservable().subscribe(hubCacheChange => {
-          if (hubCacheChange.changeClass === eSharedObjectType.CustomFunction) {
+          if (hubCacheChange.changeClass === eSharedObjectType.CustomFunction ||
+            hubCacheChange.changeClass === eSharedObjectType.TagObjects) {
             this.updateCustomFunctions();
           }
       });

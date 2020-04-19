@@ -21,16 +21,17 @@ export class TableIndexComponent implements OnInit, OnDestroy {
     connectionName: string;
     eConnectionPurposeItems = eConnectionPurposeItems;
     eConnectionPurpose = eConnectionPurpose;
+    eSharedObjectType = eSharedObjectType;
 
     title: string;
 
     columns = [
         { iconClass: 'sharedIcon', tooltip: 'sharedToolTip', width: '1%', align: 'center' },
         { name: 'tableType', title: 'Table Type', format: 'Enum', enum: eTableType },
-        { name: 'logicalName', title: 'Logical Name', format: 'Md', footer: 'description' },
+        { name: 'logicalName', title: 'Logical Name', format: 'Md', footer: 'description', tags: 'tags' },
         { name: 'connectionType', title: 'Connection Type', format: '' },
         { name: 'connectionName', title: 'Connection', format: '' },
-        { name: 'updateDate', title: 'Last Updated', format: 'DateTime' },
+        { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },
     ];
 
     private _tableData = new BehaviorSubject<Array<DexihTable>>(null);
@@ -131,6 +132,7 @@ export class TableIndexComponent implements OnInit, OnDestroy {
                         tableType: table.tableType,
                         name: name,
                         logicalName: tableName,
+                        tags: this.hubCache.getObjectTags(eSharedObjectType.Table, table.key),
                         updateDate: table.updateDate,
                         connectionKey: connection ? connection.key : '',
                         isFile: connectionReference ? connectionReference.connectionCategory === eConnectionCategory.File : false,
@@ -171,7 +173,7 @@ export class TableIndexComponent implements OnInit, OnDestroy {
     watchChanges() {
         // watch the current connection in case it is changed in another session.
         this._hubCacheChangeSubscription = this.hubService.getHubCacheChangeObservable().subscribe(hubCacheChange => {
-            if (hubCacheChange.changeClass === eSharedObjectType.Table) {
+            if (hubCacheChange.changeClass === eSharedObjectType.Table || hubCacheChange.changeClass === eSharedObjectType.TagObjects) {
                 this.updateTableData();
             }
         });

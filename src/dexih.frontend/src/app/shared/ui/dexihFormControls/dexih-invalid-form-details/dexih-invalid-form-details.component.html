@@ -1,7 +1,9 @@
 <dexih-button-dropdown 
-[iconClass]="valid ? 'fa fa-check' : 'fa fa-ban'"
-[buttonClass]="valid ? 'btn btn-success' : 'btn btn-danger'"
-    [text]= "valid ? 'Valid' : 'Errors'" [pullRight]="true"
+[iconClass]="valid ? 'fa fa-check' : 'fa fa-exclamation-circle'"
+[buttonClass]="valid ? 'btn btn-success' : 'btn btn-warning'"
+[text]= "valid ? 'Valid' : 'Warnings'" 
+title="Potential errors and warnings."
+[pullRight]="true"
 >
 
 <ng-template [ngIf]="valid">

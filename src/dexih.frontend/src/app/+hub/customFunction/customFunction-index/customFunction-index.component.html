@@ -10,14 +10,12 @@
 			[columns]="columns"
 			[dataObservable]="tableData"
 			(rowClick)="edit($event)"
+			[tags]="this.hubCache.hub.dexihTags"
 			>
-				<ng-template #selectedItemAction select="selectedItemAction" let-validation="item">
-					<actions-columnValidation-button [columnValidation]="validation"></actions-columnValidation-button>
-				</ng-template>
-
 				<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
 					<dexih-button-save-local class="mr-1" (click)="export(items)"></dexih-button-save-local>
 					<dexih-button-delete class="mr-1" *ngIf="hubCache.canWrite" (click)="deleteCustomFunctions(items)"></dexih-button-delete>
+					<tags-update-button class="ml-1" [objectType]="eSharedObjectType.CustomFunction" [objects]="items" ></tags-update-button>
 				</ng-template>
 
 				<ng-template #actions let-items="items">

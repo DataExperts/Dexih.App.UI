@@ -45,7 +45,7 @@ export class TransformTableEditComponent implements OnInit, OnDestroy {
         { name: 'dataType', title: 'Data Type', format: ''},
         { name: 'allowDbNull', title: 'Null?', format: 'Boolean'},
         { name: 'logicalName', title: 'Logical Name', format: ''},
-        { name: 'updateDate', title: 'Last Updated', format: 'DateTime'},
+        { name: 'updateDate', title: 'Last Modified', format: 'DateTime'},
     ];
 
     private _columnData = new BehaviorSubject<Array<DexihTableColumn>>(null);

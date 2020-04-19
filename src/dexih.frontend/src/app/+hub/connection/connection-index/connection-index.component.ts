@@ -23,14 +23,14 @@ export class ConnectionIndexComponent implements OnInit, OnDestroy {
     purposeFilter: eConnectionPurpose;
     eConnectionPurpose = eConnectionPurpose;
     eConnectionPurposeItems = eConnectionPurposeItems;
-
+    public eSharedObjectType = eSharedObjectType;
     connections: Array<DexihConnection>;
 
     columns = [
-        { name: 'name', title: 'Name', format: 'Md', footer: 'description' },
+        { name: 'name', title: 'Name', format: 'Md', footer: 'description', tags: 'tags' },
         { name: 'purpose', title: 'Purpose', format: '' },
         { name: 'type', title: 'Type', format: '' },
-        { name: 'updateDate', title: 'Last Updated', format: 'DateTime' },
+        { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },
     ];
 
     private _tableData = new BehaviorSubject<Array<any>>(null);
@@ -114,6 +114,7 @@ export class ConnectionIndexComponent implements OnInit, OnDestroy {
                     purpose: eConnectionPurpose[connection.purpose],
                     type: connectionReference ? connectionReference.name : 'Unknown (' + connection.connectionClassName + ')',
                     name: connection.name,
+                    tags: this.hubCache.getObjectTags(eSharedObjectType.Connection, connection.key),
                     description: connection.description,
                     updateDate: connection.updateDate
                 });
@@ -137,7 +138,8 @@ export class ConnectionIndexComponent implements OnInit, OnDestroy {
     watchChanges() {
         // watch the current connection in case it is changed in another session.
         this._hubCacheChangeSubscription = this.hubService.getHubCacheChangeObservable().subscribe(hubCacheChange => {
-            if (hubCacheChange.changeClass === eSharedObjectType.Connection) {
+            if (hubCacheChange.changeClass === eSharedObjectType.Connection
+                || hubCacheChange.changeClass === eSharedObjectType.TagObjects) {
                 this.updateConnections();
             }
         });

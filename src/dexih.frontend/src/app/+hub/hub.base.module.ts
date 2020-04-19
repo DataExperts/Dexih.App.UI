@@ -33,6 +33,7 @@ import { SearchModule} from './search';
 import { DatajobRunComponent } from './datajob/datajob-run/datajob-run.component';
 import { ListOfValuesEditComponent } from './listOfValues/listOfValues-edit';
 import { ListOfValuesIndexComponent } from './listOfValues/listOfValues-index';
+import { TagsComponent } from './tags/tags.component';
 
 @NgModule({
     imports: [
@@ -69,7 +70,8 @@ import { ListOfValuesIndexComponent } from './listOfValues/listOfValues-index';
         CustomFunctionIndexComponent, CustomFunctionEditComponent, CustomFunctionParameterComponent,
         DatalinkTestIndexComponent, DatalinkTestNewComponent,
         DashboardIndexComponent,
-        ListOfValuesEditComponent, ListOfValuesIndexComponent
+        ListOfValuesEditComponent, ListOfValuesIndexComponent,
+        TagsComponent
     ],
     providers: [ ItemEditGuard ],
     exports: [ ]

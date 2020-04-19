@@ -309,7 +309,7 @@ export class ViewEditComponent implements OnInit, OnDestroy {
   download(format) {
     let view = <DexihView>this.formsService.currentForm.value;
     let downloadObject = new DownloadObject();
-    if (view.sourceType === eDataObjectType.Table) {
+    if (view.sourceType === eDataObjectType.Datalink) {
       downloadObject.objectKey = view.sourceDatalinkKey;
       downloadObject.objectType = eDataObjectType.Datalink;
     }

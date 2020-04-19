@@ -10,10 +10,12 @@
 				[columns]="columns"
 				[dataObservable]="tableData"
 				(rowClick)="editFileFormat($event)"
+				[tags]="this.hubCache.hub.dexihTags"
 				>
 					<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
 						<dexih-button-save-local class="mr-1" (click)="export(items)"></dexih-button-save-local>
 						<dexih-button-delete *ngIf="hubCache.canWrite" (click)="deleteFileFormats(items)" title="Delete selected file formats"></dexih-button-delete>
+						<tags-update-button class="ml-1" [objectType]="eSharedObjectType.FileFormat" [objects]="items" ></tags-update-button>
 					</ng-template>
 
 					<ng-template #selectedItemAction select="selectedItemAction" let-fileFormat="item">

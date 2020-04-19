@@ -20,10 +20,11 @@ export class ColumnValidationIndexComponent implements OnInit, OnDestroy {
     hubCache: HubCache;
 
     validations: Array<DexihColumnValidation>;
+    public eSharedObjectType = eSharedObjectType;
 
     columns = [
-        { name: 'name', title: 'Name', footer: 'description', format: 'Md' },
-        { name: 'updateDate', title: 'Last Updated', format: 'DateTime'},
+        { name: 'name', title: 'Name', footer: 'description', format: 'Md', tags: 'tags' },
+        { name: 'updateDate', title: 'Last Modified', format: 'DateTime'},
     ];
 
     private _tableData = new BehaviorSubject<Array<any>>(null);
@@ -67,8 +68,16 @@ export class ColumnValidationIndexComponent implements OnInit, OnDestroy {
 
     updateValidations() {
         if (this.hubCache && this.hubCache.isLoaded()) {
-            let validations: Array<DexihColumnValidation>;
-            validations = this.hubCache.hub.dexihColumnValidations.filter(c => c.isValid);
+            let validations = this.hubCache.hub.dexihColumnValidations.filter(c => c.isValid)
+                .map(c => {
+                    return {
+                        key: c.key,
+                        name: c.name,
+                        description: c.description,
+                        updateDate: c.updateDate,
+                        tags: this.hubCache.getObjectTags(eSharedObjectType.ColumnValidation, c.key)
+                    }
+                });
             this._tableData.next(validations);
         } else {
             this._tableData.next(null);
@@ -92,7 +101,8 @@ export class ColumnValidationIndexComponent implements OnInit, OnDestroy {
     watchChanges() {
       // watch the current validation in case it is changed in another session.
       this._hubCacheChangeSubscription = this.hubService.getHubCacheChangeObservable().subscribe(hubCacheChange => {
-          if (hubCacheChange.changeClass === eSharedObjectType.ColumnValidation) {
+          if (hubCacheChange.changeClass === eSharedObjectType.ColumnValidation
+            || hubCacheChange.changeClass === eSharedObjectType.TagObjects) {
             this.updateValidations();
           }
       });

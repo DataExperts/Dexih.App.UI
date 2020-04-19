@@ -11,11 +11,13 @@
 			[columns]="columns"
 			[dataObservable]="tableData"
 			(rowClick)="edit($event)"
+			[tags]="this.hubCache.hub.dexihTags"
 			>
 				<ng-template #selectedItemAction select="selectedItemAction" let-item="item">
 				</ng-template>
 
 				<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+					<tags-update-button class="ml-1" [objectType]="eSharedObjectType.DatalinkTest" [objects]="items" ></tags-update-button>
 				</ng-template>
 
 				<ng-template #actions let-items="items">

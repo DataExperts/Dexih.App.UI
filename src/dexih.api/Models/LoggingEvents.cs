@@ -119,6 +119,11 @@
 		public const int HubDeleteListOfValues = 4055;
 		public const int HubSaveListOfValues = 4056;
 		public const int HubPreviewListOfValues = 4057;
+		public const int HubDeleteTags = 4058;
+		public const int HubSaveTags = 4059;
+		public const int HubSaveObjectTags = 4060;
+		public const int HubSaveTagObjects = 4061;
+		public const int HubDeleteTagObjects = 4062;
 
         public const int RemoteLogin = 5000;
         public const int SaveIssue = 5001;
