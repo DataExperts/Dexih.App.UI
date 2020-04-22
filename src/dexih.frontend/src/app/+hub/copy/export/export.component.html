@@ -8,6 +8,7 @@
 				[enableMultiSelect]="true"
 				[columns]="columns"
 				[data]="data"
+				[tags]="this.hubCache.hub.dexihTags"
 				>
 					<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
 							<dexih-button-save-local class="mr-1" text="Export Selected" (click)="export(items)"></dexih-button-save-local>

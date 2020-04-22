@@ -25,7 +25,9 @@
                     </ng-template>
 
                     <ng-template #rowStatus select="rowStatus" let-item="item">
-						<div class="alert" [ngStyle]="{'background-color': item.color, 'margin-bottom': '0' }"></div>
+						<div (click)="edit(item)" class="alert p-1 text-center" [ngStyle]="{'background-color': item.color, 'margin-bottom': '0' }">
+                            <span class="blend-text  font-weight-bold">{{item.name}}</span>
+                        </div>
 					</ng-template>
     
                     <ng-template #tableHeader>
@@ -36,23 +38,32 @@
                             <div class="card-body">
                                 <form *ngIf="formsService.currentForm" [formGroup]="formsService.currentForm">
                                     <div class="form-row">
-                                        <section class="form-group col-md-6">
+                                        <section class="form-group col-md-3">
                                             <form-input label="Tag Name" formControlName="name" placeholder="Enter the name."
                                                 [autocapitalize]="true" iconClass="fa fa-list" [errors]="formsService.formErrors['name']">
                                             </form-input>
                                         </section>
-                                        <section class="form-group col-md-6">
+                                        <section class="form-group col-md-9">
                                             <div>
                                                 <label class="mt-1">Color</label>
                         
                                                 <div class="input-group m-0">
-                                                    <label class="btn mr-3" style="height: '38px'; width: '76px'" [style.background-color]="formsService.currentForm.controls.color.value"><input formControlName="color" hidden type="color"></label>
+                                                    <label class="btn mr-1" style="height: '38px'; width: '76px'" [style.background-color]="formsService.currentForm.controls.color.value">
+                                                        <input formControlName="color" hidden type="color">
+                                                    </label>
+                                                    <form-input class="mr-3" style="height: '38px'; width: '90px'" formControlName="color" placeholder="color"></form-input>
                                                     <div class="btn-group-toggle" data-toggle="buttons">
                                                         <button *ngFor="let color of colors" class="btn mr-1" (click)="selectColor(color)" [style.background-color]="color.color" style="height: '38px'; width: '38px'"></button>
                                                     </div>
                                                 </div>
                         
                                             </div>
+                                        </section>
+                                    </div>
+                                    <div class="form-row">
+                                        <section class="col-md-12">
+                                            <form-textarea label="Description" [showMarkdown]="true" formControlName="description" placeholder="Enter the description." >
+                                            </form-textarea>
                                         </section>
                                     </div>
                         

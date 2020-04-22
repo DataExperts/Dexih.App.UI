@@ -22,6 +22,7 @@
 		[columns]="columns"
 		[dataObservable]="tableData"
 		(rowClick)="preview($event)"
+		[tags]="this.hubCache.hub.dexihTags"
 		>
 
 			<ng-template #selectedItemAction select="selectedItemAction" let-item="item">

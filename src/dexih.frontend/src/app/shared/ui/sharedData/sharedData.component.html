@@ -6,25 +6,34 @@
     <dexih-widget title="Shared Data" iconClass="fa fa-lg fa-fw fa-life-saver">
 
 
-        <dexih-table [enableMultiSelect]="true" [enableFilter]="false" [columns]="columns" [data]="dataIndex"
-            (rowClick)="previewData($event)">
+        <dexih-table 
+            [enableMultiSelect]="true" 
+            [enableFilter]="false" 
+            [columns]="columns" 
+            [data]="dataIndex"
+            (rowClick)="previewData($event)" 
+            [tags]="tags">
+
             <ng-template #selectedItemAction select="selectedItemAction" let-item="item">
                 <dexih-button-preview [routerLink]="['preview', item.hubKey, item.objectType, item.objectKey]">
                 </dexih-button-preview>
             </ng-template>
 
-            <ng-template #actions let-items="items">
+            <ng-template #filter select="filter" let-items="items">
                 <form [formGroup]="searchForm" class="row">
                     <div class="col-xs-12 col-sm">
                         <form-input formControlName="searchString" placeholder="Search..." iconClass="fa fa-search">
                         </form-input>
                     </div>
-                    <div *ngIf="hubs" class="col-xs-12 col-sm">
+                    <div *ngIf="hubs" class="col-xs-12 col-sm mr-1">
                         <form-tags-dropdown labelLeft="Hubs" formControlName="hubKeys" [items]="hubs" itemKey="hubKey"
                             itemName="name" [enableAddAll]="true">
                         </form-tags-dropdown>
                     </div>
                 </form>
+            </ng-template>
+
+            <ng-template #actions let-items="items">
             </ng-template>
 
             <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">

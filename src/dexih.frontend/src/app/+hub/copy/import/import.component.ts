@@ -34,8 +34,8 @@ export class ImportComponent implements OnInit, OnDestroy {
     eSharedObjectType = eSharedObjectType;
 
     columns = [
+        { name: 'name', title: 'Name', format: 'Md', description: 'description' },
         { name: 'objectType', title: 'Type', format: '' },
-        { name: 'name', title: 'Name', format: '' },
         { name: 'importAction', title: 'Action', format: 'Enum', enum: eImportAction },
     ];
 
@@ -104,7 +104,7 @@ export class ImportComponent implements OnInit, OnDestroy {
                     objectType: o.property,
                     name: item.item.name,
                     importAction: item.importAction,
-                    item: item
+                    item: item,
                 })
             });
         });

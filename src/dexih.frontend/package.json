@@ -32,8 +32,8 @@
     "@types/file-saver": "2.0.1",
     "angular-gridster2": "^9.1.0",
     "angular-resize-event": "^1.2.1",
-    "dexih-ngx-components": "^0.3.62",
-    "dexih-ngx-table": "^0.5.28",
+    "dexih-ngx-components": "^0.3.64",
+    "dexih-ngx-table": "^0.5.33",
     "file-saver": "^2.0.2",
     "html2canvas": "^1.0.0-rc.5",
     "msal": "^1.2.2",
@@ -46,10 +46,10 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.900.7",
-    "@angular/cli": "^9.1.1",
+    "@angular/cli": "^9.1.2",
     "@angular/compiler-cli": "^9.1.2",
     "@types/jasmine": "^3.5.10",
-    "@types/node": "^13.13.0",
+    "@types/node": "^13.13.2",
     "codelyzer": "^5.2.2",
     "core-js": "^3.6.5",
     "expose-loader": "^0.7.5",
@@ -68,7 +68,7 @@
     "npm-check-updates": "^4.1.2",
     "protractor": "5.4.3",
     "script-loader": "^0.7.2",
-    "ts-node": "^8.8.2",
+    "ts-node": "^8.9.0",
     "tslint": "^6.1.1",
     "typescript": "~3.7.5"
   }

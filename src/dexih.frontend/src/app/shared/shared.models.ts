@@ -16,7 +16,7 @@ export class ApiData {
    }
    
    export class ApplicationUser {
-    public id: string = 'f48591ef-3ae2-447c-9185-73f83bd0f15e';
+    public id: string = '5269c1b4-f9f8-433f-b781-b26a5b1380e7';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -25,7 +25,7 @@ export class ApiData {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = 'ae8b665b-6541-454e-ae10-528c1582a0da';
+    public securityStamp: string = 'c5fcfb70-cd15-4595-8b81-99563fe1fae1';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -1707,6 +1707,7 @@ export class ApiData {
     public parameters: InputParameterBase[] = [];
     public query: SelectQuery = null;
     public outputColumns: DexihColumnBase[] = [];
+    public tags: DexihTag[] = [];
    }
    
    export class Sort {
@@ -2846,7 +2847,7 @@ export class ApiData {
     Dashboard = 13,
     ListOfValues = 14,
     Tags = 15,
-    TagObjects = 16
+    TagObjects = 16,
    }
    
    export const eSharedObjectTypeItems = [
@@ -2866,6 +2867,7 @@ export class ApiData {
     {key: eSharedObjectType.Dashboard, name: 'Dashboard'},
     {key: eSharedObjectType.ListOfValues, name: 'ListOfValues'},
     {key: eSharedObjectType.Tags, name: 'Tags'},
+    {key: eSharedObjectType.TagObjects, name: 'TagObjects'},
    ]
    
    export enum eSortDirection {

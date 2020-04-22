@@ -212,6 +212,7 @@ export class SharedObject {
     public label: string;
     public updateDate: Date;
     public description: string;
+    public tags: DexihTag[];
 }
 
 export class HubCacheChange {
@@ -811,7 +812,8 @@ export class HubCache {
                     key: item.key,
                     name: (parentItem ? `(${parentItem.name}) ` : '' ) + item.name,
                     description: item.description,
-                    updateDate: item.updateDate
+                    updateDate: item.updateDate,
+                    tags: this.getObjectTags(o.type, item.key)
                 };
 
                 return obj;

@@ -19,11 +19,13 @@ export class ApiIndexComponent implements OnInit, OnDestroy {
 
     hubCache: HubCache;
 
-    views: Array<DexihApi>;
+    apis: Array<DexihApi>;
+
+    public eSharedObjectType = eSharedObjectType;
 
     columns = [
         { iconClass: 'sharedIcon', tooltip: 'sharedToolTip', width: '1%', align: 'center' },
-        { name: 'name', title: 'Name', footer: 'description', format: 'Md' },
+        { name: 'name', title: 'Name', footer: 'description', format: 'Md', tags: 'tags' },
         { name: 'apiSource', title: 'Api Source' },
         { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },
     ];
@@ -86,7 +88,8 @@ export class ApiIndexComponent implements OnInit, OnDestroy {
                     apiSource: this.getSourceDetails(api),
                     updateDate: api.updateDate,
                     sharedIcon: api.isShared ? 'fa fa-group' : 'fa fa-user-secret',
-                    sharedToolTip: api.isShared ? 'Table is shared' : 'Table is private'
+                    sharedToolTip: api.isShared ? 'Table is shared' : 'Table is private',
+                    tags: this.hubCache.getObjectTags(eSharedObjectType.ColumnValidation, api.key)
                 };
             });
             this._tableData.next(tableData);
@@ -120,7 +123,7 @@ export class ApiIndexComponent implements OnInit, OnDestroy {
     watchChanges() {
         // watch the current validation in case it is changed in another session.
         this._hubCacheChangeSubscription = this.hubService.getHubCacheChangeObservable().subscribe(hubCacheChange => {
-            if (hubCacheChange.changeClass === eSharedObjectType.Api) {
+            if (hubCacheChange.changeClass === eSharedObjectType.Api || hubCacheChange.changeClass === eSharedObjectType.TagObjects) {
                 this.updateApis();
             }
         });

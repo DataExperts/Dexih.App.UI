@@ -9,8 +9,10 @@
 				[columns]="columns"
 				[dataObservable]="tableData"
 				(rowClick)="editApi($event)"
+				[tags]="this.hubCache.hub.dexihTags"
 				>
 					<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+						<tags-update-button class="ml-1" [objectType]="eSharedObjectType.ColumnValidation" [objects]="items" ></tags-update-button>
 					</ng-template>
 
 					<ng-template #selectedItemAction select="selectedItemAction" let-api="item">

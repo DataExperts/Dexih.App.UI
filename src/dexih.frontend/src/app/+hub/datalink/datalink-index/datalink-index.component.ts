@@ -24,8 +24,8 @@ export class DatalinkIndexComponent implements OnInit, OnDestroy {
 
     columns = [
         { iconClass: 'sharedIcon', tooltip: 'sharedToolTip', width: '1%', align: 'center' },
-        { name: 'datalinkType', title: 'Datalink Type', format: '' },
         { name: 'name', title: 'Name', format: 'Md', footer: 'description', tags: 'tags' },
+        { name: 'datalinkType', title: 'Datalink Type', format: '' },
         { name: 'sourceName', title: 'Source', format: '' },
         { name: 'targetName', title: 'Target', format: '' },
         { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },

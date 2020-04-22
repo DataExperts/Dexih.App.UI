@@ -20,9 +20,11 @@ export class SharedDataIndexComponent implements OnInit, OnDestroy {
     private _hubCacheChangeSubscription: Subscription;
     private cancelToken: CancelToken = new CancelToken();
 
+    public eSharedObjectType = eSharedObjectType;
+
     columns = [
         { name: 'objectTypeName', title: 'Type', format: '' },
-        { name: 'name', title: 'Name', format: '' },
+        { name: 'name', title: 'Name', format: '', tags: 'tags' },
         { name: 'description', title: 'Description', format: 'Md' },
         { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },
     ];
@@ -88,7 +90,8 @@ export class SharedDataIndexComponent implements OnInit, OnDestroy {
                             objectType: eDataObjectType.Datalink,
                             name: datalink.name,
                             description: datalink.description,
-                            updateDate: datalink.updateDate
+                            updateDate: datalink.updateDate,
+                            tags: this.hubCache.getObjectTags(eSharedObjectType.Datalink, datalink.key)
                         });
                     });
                 }
@@ -101,7 +104,8 @@ export class SharedDataIndexComponent implements OnInit, OnDestroy {
                             objectType: eDataObjectType.Table,
                             name: table.logicalName + ' (' + table.name + ')',
                             description: table.description,
-                            updateDate: table.updateDate
+                            updateDate: table.updateDate,
+                            tags: this.hubCache.getObjectTags(eSharedObjectType.TagObjects, table.key)
                         });
                     });
                 }
@@ -114,7 +118,8 @@ export class SharedDataIndexComponent implements OnInit, OnDestroy {
                             objectType: eDataObjectType.View,
                             name: view.name,
                             description: view.description,
-                            updateDate: view.updateDate
+                            updateDate: view.updateDate,
+                            tags: this.hubCache.getObjectTags(eSharedObjectType.View, view.key)
                         });
                     });
                 }
@@ -127,7 +132,8 @@ export class SharedDataIndexComponent implements OnInit, OnDestroy {
                             objectType: eDataObjectType.Dashboard,
                             name: dashboard.name,
                             description: dashboard.description,
-                            updateDate: dashboard.updateDate
+                            updateDate: dashboard.updateDate,
+                            tags: this.hubCache.getObjectTags(eSharedObjectType.Dashboard, dashboard.key)
                         });
                     });
                 }
@@ -140,7 +146,8 @@ export class SharedDataIndexComponent implements OnInit, OnDestroy {
                             objectType: eDataObjectType.Api,
                             name: api.name,
                             description: api.description,
-                            updateDate: api.updateDate
+                            updateDate: api.updateDate,
+                            tags: this.hubCache.getObjectTags(eSharedObjectType.Api, api.key)
                         });
                     });
                 }

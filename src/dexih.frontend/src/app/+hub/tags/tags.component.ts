@@ -63,13 +63,20 @@ export class TagsComponent implements OnInit, OnDestroy {
 
         try {
             this._subscription = combineLatest(
-                this.route.data,
-                this.route.params,
+                this.route.queryParams,
                 this.hubService.getHubCacheObservable(),
             ).subscribe(result => {
-                let data = result[0];
-                let params = result[1];
-                this.hubCache = result[2];
+                let params = result[0];
+                this.hubCache = result[1];
+
+                if (params['key']) {
+                    let tag = this.hubCache.hub.dexihTags.find(c => c.key === +params['key']);
+                    if (tag) {
+                        let editTag = this.hubCache.hub.dexihTags.find(c => c.key === tag.key);
+                        this.formsService.tag(editTag);
+                        this.state = 'show';
+                    }
+                }
 
                 this.update();
             });
@@ -119,6 +126,9 @@ export class TagsComponent implements OnInit, OnDestroy {
         let editTag = this.hubCache.hub.dexihTags.find(c => c.key === tag.key);
         this.formsService.tag(editTag);
         this.state = 'show';
+        if (history.pushState) {
+            this.router.navigateByUrl(window.location.pathname + `?key=${tag.key}`);
+        }
     }
 
     delete(tags: DexihTag[]) {
@@ -127,12 +137,21 @@ export class TagsComponent implements OnInit, OnDestroy {
 
     save() {
         this.formsService.save(false).then(() => {
-            this.state = 'hide';
+            this.hide();
         }).catch();
     }
 
     cancel() {
+        this.hide();
+    }
+
+    hide() {
         this.state = 'hide';
+        if (history.pushState) {
+            if (window.location.search) {
+                this.router.navigateByUrl(window.location.pathname);
+            }
+          }
     }
 
     selectColor(color) {
@@ -152,7 +171,7 @@ export class TagsComponent implements OnInit, OnDestroy {
     watchChanges() {
         // watch the current validation in case it is changed in another session.
         this._hubCacheChangeSubscription = this.hubService.getHubCacheChangeObservable().subscribe(hubCacheChange => {
-            if (hubCacheChange.changeClass === eSharedObjectType.TagObjects) {
+            if (hubCacheChange.changeClass === eSharedObjectType.Tags) {
                 this.update();
             }
         });

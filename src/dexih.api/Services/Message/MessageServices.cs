@@ -8,7 +8,6 @@ using dexih.api.Services.BackgroundTasks;
 using dexih.api.Services.Operations;
 using dexih.repository;
 using Microsoft.Extensions.Logging;
-using Org.BouncyCastle.Asn1.Ocsp;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 

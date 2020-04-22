@@ -27,8 +27,8 @@ export class TableIndexComponent implements OnInit, OnDestroy {
 
     columns = [
         { iconClass: 'sharedIcon', tooltip: 'sharedToolTip', width: '1%', align: 'center' },
-        { name: 'tableType', title: 'Table Type', format: 'Enum', enum: eTableType },
         { name: 'logicalName', title: 'Logical Name', format: 'Md', footer: 'description', tags: 'tags' },
+        { name: 'tableType', title: 'Table Type', format: 'Enum', enum: eTableType },
         { name: 'connectionType', title: 'Connection Type', format: '' },
         { name: 'connectionName', title: 'Connection', format: '' },
         { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },

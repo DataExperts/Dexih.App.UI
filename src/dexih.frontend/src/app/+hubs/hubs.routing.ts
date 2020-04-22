@@ -8,14 +8,13 @@ import { TasksIndexComponent } from './tasks/tasks-index';
 import { TaskViewComponent } from './tasks/task-view';
 import { NotificationsIndexComponent } from './notifications/notification-index';
 import { NotificationViewComponent } from './notifications/notification-view';
-// import { HubsSharedDataComponent, PreviewComponent, PreviewDashboardItemComponent, PreviewDataComponent, PreviewDashboardComponent} from './hubs-sharedData';
-import { SharedDataComponent, PreviewComponent, PreviewDashboardItemComponent, PreviewDataComponent, PreviewDashboardComponent} from '../shared/ui/sharedData';
+import { SharedDataComponent, PreviewComponent, PreviewDashboardComponent} from '../shared/ui/sharedData';
 import { RemoteAgentsComponent} from './remoteAgents/remote-agents/remote-agents.component';
 import { HelpComponent } from './help';
 import { RemoteAgentDownloadComponent } from './remoteAgents/remoteAgent-download';
 import { RemoteAgentEditComponent } from './remoteAgents/remoteAgent-edit';
 import { RemoteAgentTokenComponent } from './remoteAgents/remote-agent-token/remote-agent-token.component';
-import {IssueEditComponent, IssueIndexComponent } from './support'
+import { IssueEditComponent, IssueIndexComponent } from './support'
 
 const hubsView: Routes = [
     { path: '', component: HubIndexComponent, data: { pageTitle: 'Hubs View' } },

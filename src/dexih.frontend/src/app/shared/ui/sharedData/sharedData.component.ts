@@ -6,7 +6,7 @@ import { Subscription, combineLatest } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { DexihHubAuth, CancelToken } from '../../../+auth/auth.models';
 import { ActivatedRoute, Router } from '@angular/router';
-import { eDownloadFormat, SharedData, eSharedObjectType, eDataObjectType } from '../../shared.models';
+import { eDownloadFormat, SharedData, eSharedObjectType, eDataObjectType, DexihTag } from '../../shared.models';
 
 @Component({
     selector: 'sharedData',
@@ -24,9 +24,10 @@ export class SharedDataComponent implements OnInit, OnDestroy {
 
     hubs: DexihHubAuth[];
     hubKeys: number[];
+    tags: DexihTag[];
 
     columns = [
-        { name: 'logicalName', title: 'Details', header: 'hubName', footer: 'description', format: 'Md' },
+        { name: 'logicalName', title: 'Details', header: 'hubName', footer: 'description', format: 'Md', tags: 'tags' },
         { name: 'objectType', title: 'Type', format: 'Enum', enum: eDataObjectType},
         { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },
     ];
@@ -82,6 +83,17 @@ export class SharedDataComponent implements OnInit, OnDestroy {
         this.authService.getSharedDataIndex(this.searchForm.value.searchString, hubKeys, 50, true).then(result => {
 
             this.dataIndex = result;
+
+            this.tags = [];
+            this.dataIndex.forEach(item => {
+                if (item.tags && item.tags.length > 0) {
+                    item.tags.forEach(tag => {
+                        if (this.tags.findIndex(c => c.name === tag.name) < 0) {
+                            this.tags.push(tag);
+                        }
+                    });
+                }
+            });
 
         }).catch(reason => this.dexihMessage.addMessage(reason));
     }

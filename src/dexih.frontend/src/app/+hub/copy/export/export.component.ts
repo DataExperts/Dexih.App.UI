@@ -18,11 +18,9 @@ export class ExportComponent implements OnInit, OnDestroy {
 
     hubCache: HubCache;
 
-    views: Array<DexihApi>;
-
     columns = [
+        { name: 'name', title: 'Name', footer: 'description', format: 'Md', tags: 'tags' },
         { name: 'label', title: 'Item Type'},
-        { name: 'name', title: 'Name', footer: 'description', format: 'Md' },
         { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },
     ];
 
