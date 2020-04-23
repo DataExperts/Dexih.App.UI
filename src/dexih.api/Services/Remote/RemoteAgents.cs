@@ -613,8 +613,8 @@ namespace dexih.api.Services.Remote
 		    var value = new
 		    {
 			    cache,
-			    tables = tables,
-			    dropTables = dropTables
+			    tables,
+			    dropTables
 		    };
 	        
 		    var result = await SendRemoteCommand(instanceId, hubKey,  downloadUrl, nameof(RemoteOperations.CreateDatabaseTables), value, repositoryManager, cancellationToken);
@@ -629,8 +629,7 @@ namespace dexih.api.Services.Remote
 
 		    var value = new
 		    {
-			    cache,
-			    tables = tables
+			    cache, tables
 		    };
 	        
 		    var result = await SendRemoteCommand(instanceId, hubKey,  downloadUrl, nameof(RemoteOperations.ClearDatabaseTables), value, repositoryManager, cancellationToken);
@@ -946,7 +945,7 @@ namespace dexih.api.Services.Remote
 
 			    foreach(var target in hubDatalink.DexihDatalinkTargets)
 			    {
-				    cache.AddTables(new[] {(long)target.TableKey}, hub);
+				    cache.AddTables(new[] {target.TableKey}, hub);
 			    }
 
 			    if (hubDatalink.AuditConnectionKey != null)
@@ -982,7 +981,7 @@ namespace dexih.api.Services.Remote
 				    cache,
 				    datalink = hubDatalink,
 				    datalinkTransformKey,
-				    datalinkTransformItem = datalinkTransformItem
+				    datalinkTransformItem
 			    };
 
 			    var result = await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.ImportFunctionMappings), value, database, cancellationToken);
@@ -1320,7 +1319,7 @@ namespace dexih.api.Services.Remote
                 {
 	                cache,
 	                connectionId,
-	                apiKeys = apiKeys,
+	                apiKeys,
 	                inputParameters
                 };
 
@@ -1340,8 +1339,7 @@ namespace dexih.api.Services.Remote
 
                 var value = new
                 {
-	                hubKey,
-	                apiKeys = apiKeys,
+	                hubKey, apiKeys,
                 };
 
                 return await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.DeactivateApis), value, database, cancellationToken);
@@ -1378,7 +1376,7 @@ namespace dexih.api.Services.Remote
 			}
 		}
 
-		public async Task  CancelTasks(ManagedTask[] tasks, RepositoryManager database, CancellationToken cancellationToken)
+		public async Task CancelTasks(ManagedTask[] tasks, RepositoryManager database, CancellationToken cancellationToken)
 		{
             try
             {
@@ -1411,81 +1409,48 @@ namespace dexih.api.Services.Remote
             }
         }
 
-		public async Task RestartAgents(string userId, IEnumerable<string> instanceIds, bool force, RepositoryManager database, CancellationToken cancellationToken)
+		public async Task<string> RestartAgent(string userId, DownloadUrl downloadUrl, string instanceId, bool force, RepositoryManager database, CancellationToken cancellationToken)
 		{
 			var value = new
 			{
 				force,
 			};
 			
-			var exceptions = new ConcurrentQueue<Exception>();
+
+			var remoteAgentProperties = await GetRemoteAgentProperties(instanceId, cancellationToken);
+
+			if (remoteAgentProperties != null)
+			{
+				if (remoteAgentProperties.UserId == userId)
+				{ 
+					return await SendRemoteCommand(instanceId, 0, downloadUrl,  nameof(RemoteOperations.ReStart), value, database, cancellationToken);	
+				}
+				else
+				{
+					throw new RemoteAgentException("The remote agent could not be restarted as the current user must be the same as the remote agent user.");							
+				}
+			}
 			
-			foreach(var instanceId in instanceIds)
-			{
-				try
-				{
-					var remoteAgentProperties = await GetRemoteAgentProperties(instanceId, cancellationToken);
-
-					if (remoteAgentProperties != null)
-					{
-						if (remoteAgentProperties.UserId == userId)
-						{ 
-							await SendRemoteCommand(instanceId, 0, null,  nameof(RemoteOperations.ReStart), value, database, cancellationToken);	
-						}
-						else
-						{
-							exceptions.Enqueue(new RemoteAgentException("The remote agent could not be restarted as the current user must be the same as the remote agent user."));							
-						}
-					}
-
-				}
-				catch (Exception e)
-				{
-					exceptions.Enqueue(e);
-				}
-			}
-
-			if (exceptions.Count > 0)
-			{
-				throw new AggregateException("There were some issues restarting the agents.", exceptions);
-			}
+			throw new RemoteAgentException($"The remote agent with the id {instanceId} could not be found.");
 		}
 		
-		public async Task RestartAgents(string userId, IEnumerable<long> remoteAgentKeys, bool force, RepositoryManager database, CancellationToken cancellationToken)
+		public async Task RestartAgent(string userId, long remoteAgentKey, bool force, RepositoryManager database, CancellationToken cancellationToken)
 		{
-			var exceptions = new ConcurrentQueue<Exception>();
-			
-			await Task.WhenAll(remoteAgentKeys.Select(async remoteAgentKey =>
+			var remoteAgent = await database.GetRemoteAgent(remoteAgentKey, cancellationToken);
 
+			if (remoteAgent != null)
 			{
-				try
+				if (remoteAgent.UserId == userId)
 				{
-					var remoteAgent = await database.GetRemoteAgent(remoteAgentKey, cancellationToken);
-
-					if (remoteAgent != null)
-					{
-						if (remoteAgent.UserId == userId)
-						{
-							await _remoteAgentContext.Clients.Groups(RemoteAgentIdentity(remoteAgent.RemoteAgentKey))
-								.SendAsync("Restart", cancellationToken: cancellationToken);
-							return;
-						}
-
-						exceptions.Enqueue(new RemoteAgentException(
-							"The remote agent could not be restarted as the current user must be the same as the remote agent user."));
-					}
-				}
-				catch (Exception e)
-				{
-					exceptions.Enqueue(e);
+					await _remoteAgentContext.Clients.Groups(RemoteAgentIdentity(remoteAgent.RemoteAgentKey))
+						.SendAsync("Restart", cancellationToken: cancellationToken);
+					return;
 				}
 
-			}).ToArray());
-			
-			if (exceptions.Count > 0)
-			{
-				throw new AggregateException("There were some issues restarting the agents.", exceptions);
+				throw new RemoteAgentException(
+					"The remote agent could not be restarted as the current user must be the same as the remote agent user.");
 			}
+			throw new RemoteAgentException($"The remote agent with the key {remoteAgentKey} could not be found.");
 		}
 
 		public async Task<DexihRemoteAgent[]> PingAgents(ApplicationUser user, string connectionId, RepositoryManager repositoryManager, CancellationToken cancellationToken)

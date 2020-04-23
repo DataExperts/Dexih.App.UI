@@ -100,8 +100,8 @@ namespace dexih.api.Services.Remote
 	    Task<string> ActivateApis(string instanceId, long hubKey, DownloadUrl downloadUrl, string connectionId, long[] apiKeys, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken);
 	    Task<string> DeactivateApis(string instanceId, long hubKey, DownloadUrl downloadUrl, long[] apiKeys, RepositoryManager database, CancellationToken cancellationToken);
 	    
-	    Task RestartAgents(string userId, IEnumerable<string> instanceIds, bool force, RepositoryManager database, CancellationToken cancellationToken);
-	    Task RestartAgents(string userId, IEnumerable<long> remoteAgentKeys, bool force, RepositoryManager database, CancellationToken cancellationToken);
+	    Task<string> RestartAgent(string userId, DownloadUrl downloadUrl, string instanceId, bool force, RepositoryManager database, CancellationToken cancellationToken);
+	    Task RestartAgent(string userId, long remoteAgentKeys, bool force, RepositoryManager database, CancellationToken cancellationToken);
 	    Task<DexihRemoteAgent[]> PingAgents(ApplicationUser user, string connectionId, RepositoryManager repositoryManager, CancellationToken cancellationToken);
 	    Task<NamingStandards> NamingStandards(string instanceId, CancellationToken cancellationToken);
 

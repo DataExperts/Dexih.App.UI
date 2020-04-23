@@ -53,8 +53,6 @@ export class HubsService implements OnDestroy {
         this.addHubMessage(newMessage);
     }
 
-  
-
     remoteAgents(): Promise<Array<DexihRemoteAgent>> {
         return this.authService.post<Array<DexihRemoteAgent>>('/api/Account/GetUserRemoteAgents', { }, 'Getting user remote agents...');
     }
@@ -63,8 +61,9 @@ export class HubsService implements OnDestroy {
         return this.authService.post<boolean>('/api/Account/CancelTasks', tasks, 'Cancelling task(s)...');
     }
 
-    restartAgents(instanceIds: [], force: boolean): Promise<boolean> {
-        return this.authService.post<boolean>('/api/Account/RestartAgents', { instanceIds, force}, 'Restarting agent(s)...');
+    restartAgent(activeAgent: DexihActiveAgent, force: boolean, cancelToken: CancelToken): Promise<boolean> {
+        return this.authService.postRemote<boolean>('/api/Account/RestartAgent',
+        { instanceId: activeAgent.instanceId, force}, activeAgent, 'Restarting agent...', cancelToken);
     }
 
     public downloadRemoteAgent(embedUserName: boolean, environment: eEnvironment, ll: logLevel, settings: RemoteAgentSettingsSubset):

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using dexih.functions;
 using dexih.repository;
 
 
@@ -153,7 +154,10 @@ namespace dexih.api.Models
 
     public class RemoveRemoteAgents {
         public long[] RemoteAgentKeys { get; set; }
-        public string ClientConnectionId { get; set; }
+    }
+
+    public class RefreshRemoteAgentId {
+        public long RemoteAgentKey { get; set; }
     }
 
     
@@ -172,8 +176,9 @@ namespace dexih.api.Models
 
     public class RestartAgentsParameter
     {
-        public IEnumerable<string> InstanceIds { get; set; }
+        public string InstanceId { get; set; }
         public bool Force { get; set; }
+        public DownloadUrl DownloadUrl { get; set; }
     }
     
     public class RemoteAgentUserToken

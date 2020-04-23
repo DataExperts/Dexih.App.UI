@@ -45,10 +45,10 @@ namespace dexih.api.Services
 
             if (exception != null)
             {
-                msg.AppendLine("<p></p>Exception Details: " + string.Join("\n", ((IEnumerable<PropertyInfo>) exception.GetType().GetProperties()).Select(property => new
+                msg.AppendLine("<p></p>Exception Details: " + string.Join("\n", exception.GetType().GetProperties().Select(property => new
                 {
                     Name = property.Name,
-                    Value = property.GetValue((object) exception, (object[]) null)
+                    Value = property.GetValue(exception, null)
                 }).Select(x => $"{(object) x.Name} = {(x.Value != null ? (object) x.Value.ToString() : (object) string.Empty)}")));
             }
             

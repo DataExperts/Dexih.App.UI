@@ -1027,7 +1027,7 @@ namespace dexih.api.Controllers
 	    // POST: /Account/GetUserToken
 	    [HttpPost("[action]")]
 	    [ValidateAntiForgeryToken]
-	    public async Task<RemoteAgentUserToken> RefreshRemoteAgentToken([FromBody] long remoteAgentKey, CancellationToken cancellationToken)
+	    public async Task<RemoteAgentUserToken> RefreshRemoteAgentToken([FromBody] RefreshRemoteAgentId refreshRemoteAgentId, CancellationToken cancellationToken)
 	    {
 		    var user = await GetApplicationUser(cancellationToken);
 
@@ -1036,7 +1036,7 @@ namespace dexih.api.Controllers
 			    throw new AccountControllerException("The create user token failed.");
 		    }
 
-		    var dbRemoteAgent = await _operations.RepositoryManager.GetRemoteAgent(remoteAgentKey, cancellationToken);
+		    var dbRemoteAgent = await _operations.RepositoryManager.GetRemoteAgent(refreshRemoteAgentId.RemoteAgentKey, cancellationToken);
 
 		    var userToken = await _operations.RepositoryManager.GenerateRemoteUserTokenAsync(user, dbRemoteAgent.RemoteAgentId, cancellationToken);
 			
@@ -1048,7 +1048,7 @@ namespace dexih.api.Controllers
 		    
 	    
 		    // disconnect any running agents with this id
-		    await _remoteAgents.RestartAgents(user.Id, new [] {remoteAgentKey}, true, _operations.RepositoryManager, cancellationToken);
+		    await _remoteAgents.RestartAgent(user.Id, refreshRemoteAgentId.RemoteAgentKey, true, _operations.RepositoryManager, cancellationToken);
 
 		    return new RemoteAgentUserToken
 		    {
@@ -1078,7 +1078,7 @@ namespace dexih.api.Controllers
 				    await _operations.RepositoryManager.DeleteRemoteAgent(user, remoteAgentKey, cancellationToken);
 		    
 				    // disconnect any running agents.
-				    await _remoteAgents.RestartAgents(user.Id, new [] {remoteAgentKey}, true, _operations.RepositoryManager, cancellationToken);
+				    await _remoteAgents.RestartAgent(user.Id, remoteAgentKey, true, _operations.RepositoryManager, cancellationToken);
 				    await _operations.BroadcastUsersMessageAsync(new [] { user.Id}, EClientCommand.RemoteAgentDeleteKey, remoteAgentKey, cancellationToken);
 			    }
 			    catch (Exception ex)
@@ -1139,21 +1139,6 @@ namespace dexih.api.Controllers
             try
             {
 	            return _cache.MemoryCache.Get<CacheManager>("GLOBAL_CACHE");
-//	            return _cache.MemoryCache.GetOrCreate($"GLOBAL_CACHE", entry =>
-//                {
-//                    _logger.LogInformation("Loading global cache.");
-//
-//                    var version = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
-//                    var buildDate = System.IO.File.GetLastWriteTime(Assembly.GetExecutingAssembly().Location);
-//                    
-//                    var cache = new CacheManager(0, "");
-//                    cache.LoadGlobal(version, buildDate);
-//                    cache.GoogleClientId = _operations.Config.GoogleClientId;
-//                    cache.MicrosoftClientId = _operations.Config.MicrosoftClientId;
-//                    cache.GoogleMapsAPIKey = _operations.Config.GoogleMapsAPIKey;
-//
-//                    return cache;
-//                });
             }
             catch (Exception ex)
             {
@@ -1181,8 +1166,6 @@ namespace dexih.api.Controllers
 		    var repositoryManager = _operations.RepositoryManager;
 		    await _remoteAgents.CancelTasks(tasks, repositoryManager, cancellationToken);
 	    }
-
-
 	    
 	    /// <summary>
 	    /// Cancels any running tasks 
@@ -1190,7 +1173,7 @@ namespace dexih.api.Controllers
 	    /// <returns></returns>
 	    [HttpPost("[action]")]
 	    //[ValidateHub(EPermission.User)]
-	    public async Task RestartAgents([FromBody] RestartAgentsParameter restartAgents, CancellationToken cancellationToken)
+	    public async Task<string> RestartAgent([FromBody] RestartAgentsParameter restartAgents, CancellationToken cancellationToken)
 	    {
 		    var user = await GetApplicationUser(cancellationToken);
 		    if (user == null)
@@ -1198,10 +1181,10 @@ namespace dexih.api.Controllers
 			    throw new AccountControllerException("Could not find the current user.");
 		    }
 		    
-		    _logger.LogTrace(LoggingEvents.HubRestartAgent, "AccountController.HubRestartAgent {references}", string.Join(",", restartAgents.InstanceIds));
+		    _logger.LogTrace(LoggingEvents.HubRestartAgent, "AccountController.HubRestartAgent {references}", string.Join(",", restartAgents.InstanceId));
 
 		    var repositoryManager = _operations.RepositoryManager;
-		    await _remoteAgents.RestartAgents(user.Id, restartAgents.InstanceIds, restartAgents.Force, repositoryManager, cancellationToken);
+		    return await _remoteAgents.RestartAgent(user.Id, restartAgents.DownloadUrl, restartAgents.InstanceId,  restartAgents.Force, repositoryManager, cancellationToken);
 	    }
 	    
 	    /// <summary>

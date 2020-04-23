@@ -32,6 +32,8 @@ export class RemoteAgentsComponent implements OnInit, OnDestroy {
 
     remoteAgents: DexihRemoteAgent[];
 
+    public cancelToken: CancelToken = new CancelToken();
+
     private _subscription: Subscription;
 
     constructor(
@@ -53,6 +55,7 @@ export class RemoteAgentsComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         if (this._subscription) {this._subscription.unsubscribe(); }
+        this.cancelToken.cancel();
     }
 
     close() {
@@ -84,6 +87,7 @@ export class RemoteAgentsComponent implements OnInit, OnDestroy {
                         '<br> Latest: ' + activeAgent.latestVersion +
                         (activeAgent.upgradeAvailable ? '<br>Upgrade Required!' : ''),
                     versionClass: (activeAgent.upgradeAvailable ? 'dexih-error-text' : ''),
+                    activeAgent: activeAgent
                 });
             } else {
                 data.push({
@@ -102,7 +106,8 @@ export class RemoteAgentsComponent implements OnInit, OnDestroy {
                     downloadUrls: [],
                     instanceId: null,
                     version: '',
-                    versionClass: ''
+                    versionClass: '',
+                    activeAgent: null
                 });
             }
         });
@@ -143,17 +148,17 @@ export class RemoteAgentsComponent implements OnInit, OnDestroy {
     }
 
     restartAgents(items) {
-        let instanceIds = items.filter(c => c.instanceId).map(c => c.instanceId);
+        let activeAgents = items.filter(c => c.activeAgent).map(c => c.activeAgent);
 
-        if ( instanceIds.length === 0) {
+        if ( activeAgents.length === 0) {
             this.hubService.addHubErrorMessage('No active agents were selected.')
             return;
         }
 
-        this.hubsService.restartAgents(instanceIds, false);
+        activeAgents.forEach(activeAgent => {
+            this.hubsService.restartAgent(activeAgent, false, this.cancelToken);
+        });
     }
-
-
 
     refresh() {
         this.authService.pingRemoteAgents();
