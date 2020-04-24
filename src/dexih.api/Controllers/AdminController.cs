@@ -149,7 +149,7 @@ namespace dexih.api
 			foreach (var user in users)
 			{
 				string template;
-				string registerUrl = "";
+				var registerUrl = "";
 				string subject;
 				
 				if (user.EmailConfirmed)

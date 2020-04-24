@@ -120,7 +120,7 @@ namespace dexih.api.Services.Remote
 
             // var remoteAgentProperties = JsonExtensions.Deserialize<RemoteAgentProperties>(properties);
 
-            using (var stream = new MemoryStream(properties))
+            await using (var stream = new MemoryStream(properties))
             {
 	            return await stream.DeserializeAsync<RemoteAgentProperties>(cancellationToken);
                 // return await MessagePackSerializer.DeserializeAsync<RemoteAgentProperties>(stream);
@@ -129,7 +129,7 @@ namespace dexih.api.Services.Remote
 
 	    public async Task SetRemoteAgentProperties(string instanceId, RemoteAgentProperties remoteAgentProperties, CancellationToken cancellationToken =  default)
 	    {
-            using (var stream = new MemoryStream())
+		    await using (var stream = new MemoryStream())
             {
 	            await stream.SerializeAsync(remoteAgentProperties, cancellationToken);
 //	            MessagePackSerializer.Serialize(stream, remoteAgentProperties);
@@ -398,14 +398,14 @@ namespace dexih.api.Services.Remote
 
 		    while (timer.ElapsedMilliseconds < 5000)
 		    {
-			    var remoteAgentJson = await _distributedCache.GetStringAsync(pingKey);
+			    var remoteAgentJson = await _distributedCache.GetStringAsync(pingKey, token: cancellationToken);
 			    if (remoteAgentJson != null)
 			    {
-				    var activeAgent = JsonExtensions.Deserialize<DexihActiveAgent>(remoteAgentJson);
+				    var activeAgent = remoteAgentJson.Deserialize<DexihActiveAgent>();
 				    return activeAgent;
 			    }
 
-			    await Task.Delay(500);
+			    await Task.Delay(500, cancellationToken);
 		    }
 
 		    return null;
@@ -466,7 +466,7 @@ namespace dexih.api.Services.Remote
 				return activeAgent;
 			}
 
-			if ((await database.GetUserHub(hubKey, user, cancellationToken)) != null)
+			if (await database.GetUserHub(hubKey, user, cancellationToken) != null)
 			{
 				_remoteLogger.LogDebug(LoggingEvents.GetHubReaderRemoteAgent, "GetHubReaderRemoteAgent - remote agent is authorized user {user}, HubKey {hubKey}, remoteAgentname: {name}.", user.Email, hubKey, activeAgent.Name);
 				return activeAgent;

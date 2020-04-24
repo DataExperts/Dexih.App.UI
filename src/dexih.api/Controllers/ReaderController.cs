@@ -76,7 +76,7 @@ namespace dexih.api.Controllers
 			
 			var hubUser = await DbContext.DexihHubUser.Where(c => c.IsValid && c.HubKey == hub.HubKey 
 				  && c.UserId == applicationUser.Id 
-				  && ( c.Permission == EPermission.FullReader || c.Permission == EPermission.Owner || c.Permission == EPermission.PublishReader)).ToArrayAsync();
+				  && ( c.Permission == EPermission.FullReader || c.Permission == EPermission.Owner || c.Permission == EPermission.PublishReader)).ToArrayAsync(cancellationToken: cancellationToken);
 
 			if(hubUser.Any())
 			{

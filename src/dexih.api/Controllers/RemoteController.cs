@@ -110,7 +110,7 @@ namespace dexih.api.Controllers
 
             if (_httpContextAccessor.HttpContext?.Request?.Headers?.TryGetValue(headerName, out values) ?? false)
             {
-                string rawValues = values.ToString();   // writes out as Csv when there are multiple.
+                var rawValues = values.ToString();   // writes out as Csv when there are multiple.
 
                 if (!string.IsNullOrWhiteSpace(rawValues))
                     return (T)Convert.ChangeType(values.ToString(), typeof(T));
@@ -527,7 +527,7 @@ namespace dexih.api.Controllers
                 if (System.IO.File.Exists("letsencrypt.pem"))
                 {
                     _logger.LogDebug($"Using existing letsencrypt account.");
-                    var pemKey = System.IO.File.ReadAllText("letsencrypt.pem");
+                    var pemKey = await System.IO.File.ReadAllTextAsync("letsencrypt.pem", cancellationToken);
                     var accountKey = KeyFactory.FromPem(pemKey);
                     acme = new AcmeContext(server, accountKey);
                 }
@@ -543,7 +543,7 @@ namespace dexih.api.Controllers
 
                     // Save the account key for later use
                     var pemKey = acme.AccountKey.ToPem();
-                    System.IO.File.WriteAllText("letsencrypt.pem", pemKey);
+                    await System.IO.File.WriteAllTextAsync("letsencrypt.pem", pemKey, cancellationToken);
                 }
 
                 // place order for new certificate
@@ -670,7 +670,7 @@ namespace dexih.api.Controllers
                 txtItems = txtItemsJson.Deserialize<List<KeyValuePair<string, string>>>();
             }
 
-            txtItems.Add(new KeyValuePair<string, string>("test" + txtItems.Count.ToString(), "sample value"));
+            txtItems.Add(new KeyValuePair<string, string>("test" + txtItems.Count, "sample value"));
             txtItemsJson = txtItems.Serialize();
             var txtItemsByte = Encoding.ASCII.GetBytes(txtItemsJson);
             var options = new DistributedCacheEntryOptions() {SlidingExpiration = TimeSpan.FromSeconds(60)};
@@ -884,14 +884,14 @@ chmod a+x dexih.remote.run.{os}.sh
             using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
             {
                 var appSettingsEntry = archive.CreateEntry("appsettings.json");
-                using (var appSettings = appSettingsEntry.Open())
+                await using (var appSettings = appSettingsEntry.Open())
                 {
                     await appSettingsStream.CopyToAsync(appSettings, cancellationToken);
                 }
 
                 var remoteRunEntry = archive.CreateEntry(remoteRunStream.fileName);
                 remoteRunEntry.ExternalAttributes = -2113994752;  // set unix permissions to 777.
-                using (var remoteRunSettings = remoteRunEntry.Open())
+                await using (var remoteRunSettings = remoteRunEntry.Open())
                 {
                     await remoteRunStream.stream.CopyToAsync(remoteRunSettings, cancellationToken);
                 }

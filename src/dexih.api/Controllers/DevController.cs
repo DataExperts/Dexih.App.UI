@@ -222,7 +222,7 @@ namespace dexih.api.Controllers
             }
             
             if (propertyType.GetInterface(nameof(System.Collections.IEnumerable)) != null
-                && propertyType != typeof(Object)
+                && propertyType != typeof(object)
                 && propertyType != typeof(JsonDocument)
                 && propertyType != typeof(string)
                 )
@@ -247,7 +247,7 @@ namespace dexih.api.Controllers
                 }
             }
 
-            string javaType = "";
+            var javaType = "";
 
             if (typeLookup.ContainsKey(propertyType.Name))
             {
