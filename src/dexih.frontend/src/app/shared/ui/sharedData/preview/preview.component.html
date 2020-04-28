@@ -1,5 +1,8 @@
 <div class="container-fluid">
-    <dexih-widget [title]="'Preview ' + previewData.name" iconClass="fa fa-lg fa-fw fa-table" [showCloseButton]="true"
+    <dexih-widget [title]="'Preview ' + previewData.name" 
+    iconClass="fa fa-lg fa-fw fa-table" 
+    [showCloseButton]="true"
+    [padding]="false"
     (close)="close()">
 
     <ng-template #header>

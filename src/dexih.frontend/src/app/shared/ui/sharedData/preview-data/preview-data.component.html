@@ -42,6 +42,10 @@
 
     </dexih-table>
 
-    <chart-view [responsive]="true" *ngIf="showChart" [columns]="columns" [data]="data" [config]="chartConfig">
+    <chart-view 
+        *ngIf="showChart"
+        [columns]="columns" 
+        [data]="data" 
+        [config]="chartConfig">
     </chart-view>
 </div>

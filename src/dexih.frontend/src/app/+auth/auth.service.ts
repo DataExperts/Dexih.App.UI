@@ -1556,7 +1556,12 @@ export class AuthService implements OnDestroy {
             'Proceed to logout?  You can improve your security further after logging out by closing this opened browser').then(() => {
                     this._currentUser.next(null);
                     this._hubs.next(null);
-                    this.router.navigate(['/auth/login']);
+
+                    // this refresh is just to reset the XSRF token
+                    // now that the user is logged out.
+                    this.refreshUser().then(user => {
+                        this.router.navigate(['/auth/login']);
+                    });
                 }).catch(reason => {
                     if (reason) {
                         this.logger.LogC(() => `logout error:${reason.message}`, eLogLevel.Error);
