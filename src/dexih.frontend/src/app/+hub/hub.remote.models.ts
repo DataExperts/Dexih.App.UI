@@ -256,6 +256,7 @@ export const TypeCodes = [
     {key: eTypeCode.Binary, name: 'Binary', isNumeric: false, isString: false},
     {key: eTypeCode.Boolean, name: 'Boolean', isNumeric: false, isString: false},
     {key: eTypeCode.DateTime, name: 'Date & Time', isNumeric: false, isString: false},
+    {key: eTypeCode.Date, name: 'Date', isNumeric: false, isString: false},
     {key: eTypeCode.Decimal, name: 'Decimal', isNumeric: true, isString: false},
     {key: eTypeCode.Double, name: 'Double', isNumeric: true, isString: false},
     {key: eTypeCode.Int16, name: 'Short Integer', isNumeric: true, isString: false},
@@ -315,6 +316,7 @@ export class TypeFunctions {
             case eTypeCode.String: return eBasicType.String;
             case eTypeCode.Boolean: return eBasicType.Boolean;
             case eTypeCode.DateTime: return eBasicType.Date;
+            case eTypeCode.Date: return eBasicType.Date;
             case eTypeCode.Time: return eBasicType.Time;
             case eTypeCode.Binary: return eBasicType.Binary;
             default: return eBasicType.Any;

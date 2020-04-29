@@ -23,7 +23,7 @@ export class ListOfValuesIndexComponent implements OnInit, OnDestroy {
     columns = [
         { name: 'name', title: 'Name', format: '', tags: 'tags'},
         { name: 'sourceType', title: 'Source Type', format: 'Enum', enum: eLOVObjectType},
-        { name: 'updateDate', title: 'Last Modified', format: 'DateTime'},
+        { name: 'updateDate', title: 'Last Modified', format: 'Calendar'},
     ];
 
     private _tableData = new BehaviorSubject<Array<any>>(null);

@@ -24,7 +24,7 @@ export class HubVariableIndexComponent implements OnInit, OnDestroy {
         { name: 'name', title: 'Name', format: '', tags: 'tags'},
         { name: 'value', title: 'Value', format: ''},
         { name: 'isEncrypted', title: 'Encrypted?', format: 'Boolean'},
-        { name: 'updateDate', title: 'Last Modified', format: 'DateTime'},
+        { name: 'updateDate', title: 'Last Modified', format: 'Calendar'},
     ];
 
     private _tableData = new BehaviorSubject<Array<any>>(null);

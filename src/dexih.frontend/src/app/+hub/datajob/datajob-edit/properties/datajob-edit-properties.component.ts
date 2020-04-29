@@ -5,7 +5,7 @@ import { HubFormsService } from '../../../hub.forms.service';
 import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
 import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import { HubCache } from '../../../hub.models';
-import { DexihConnection, eFailAction, DexihDatalinkStep, DexihDatalinkDependency, DexihDatalinkStepColumn, DexihTrigger, DexihDatalinkTarget, DexihDatalinkTable, eSourceType, DexihDatalink } from '../../../../shared/shared.models';
+import { DexihConnection, eFailAction, DexihDatalinkStep, DexihDatalinkDependency, DexihDatalinkStepColumn, DexihTrigger, DexihDatalinkTarget, DexihDatalinkTable, eSourceType, DexihDatalink, eSharedObjectType } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -35,7 +35,7 @@ export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
 
   triggerColumns = [
     { name: 'details', title: 'Details', format: 'Html' },
-    { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },
+    { name: 'updateDate', title: 'Last Modified', format: 'Calendar' },
     { name: 'errors', title: 'Errors', format: '' },
   ];
 
@@ -44,10 +44,10 @@ export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
 
   stepColumns = [
     { name: 'name', title: 'Name', format: '' },
-    { name: 'datalink', title: 'Datalink', format: '' },
+    { name: 'datalink', title: 'Datalink', format: '', tags: 'tags' },
     { name: 'dependencies', title: 'Dependencies', format: 'Html' },
     { name: 'inputs', title: 'Inputs', format: 'Html'},
-    { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },
+    { name: 'updateDate', title: 'Last Modified', format: 'Calendar' },
     { name: 'errors', title: 'Errors', format: '' },
   ];
 
@@ -127,6 +127,7 @@ export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
           name: step.name,
           datalinkKey: datalink.key,
           datalink: datalink ? datalink.name : 'Not specified',
+          tags: this.hubCache.getObjectTags(eSharedObjectType.Datalink, datalink.key),
           dependencies: this.getDependencies(step.dexihDatalinkDependencies),
           inputs: this.getInputs(step.dexihDatalinkStepColumns),
           updateDate: step.updateDate,

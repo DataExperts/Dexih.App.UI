@@ -31,7 +31,7 @@ export class ResultsIndexComponent implements OnInit, OnDestroy {
         { name: 'auditType', title: 'Type', format: '' },
         { name: 'referenceName', title: 'Name', format: '' },
         { name: 'rowsTotal', title: 'Rows Total', format: '' },
-        { name: 'startTime', title: 'Start Date', format: 'DateTime' },
+        { name: 'startTime', title: 'Start Date', format: 'Calendar' },
         { name: 'startTime', title: 'Time', format: 'Time' },
         { name: 'endTime', title: 'Finished At', format: 'Time' },
         { name: 'message', title: 'Message', format: '' },

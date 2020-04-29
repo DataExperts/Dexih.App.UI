@@ -68,7 +68,7 @@
 </dexih-widget-section>
 
 <dexih-widget-section title="Steps" [showExpandButton]="true" [padding]="false">
-    <dexih-table [enableMultiSelect]="true" [enableManualSort]="true" (onSortChanged)="stepSortChanged($event)" sortColumn="position" [columns]="stepColumns"
+    <dexih-table [enableMultiSelect]="true" [enableManualSort]="true" (onSortChanged)="stepSortChanged($event)" sortColumn="position" [columns]="stepColumns" [tags]="this.hubCache.hub.dexihTags"
         [dataObservable]="stepTableData" (rowClick)='editDatalinkStep($event)'>
         <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
             <dexih-button  iconClass="fa fa-magic" (click)="updateDependencies(items)" text="AutoSet Dependencies"></dexih-button>
@@ -77,7 +77,7 @@
         </ng-template>
 
         <ng-template #selectedItemAction select="selectedItemAction" let-item="item">
-            <dexih-button-edit (click)="editDatalinkStep(item)"></dexih-button-edit>
+            <dexih-button-edit class="mr-1" (click)="editDatalinkStep(item)"></dexih-button-edit>
         </ng-template>
 
         <ng-template #actions select="actionsTemplate" let-items="items">

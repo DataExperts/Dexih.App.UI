@@ -23,9 +23,9 @@ export class DashboardIndexComponent implements OnInit, OnDestroy {
     public eSharedObjectType = eSharedObjectType;
 
     columns = [
-        { iconClass: 'sharedIcon', tooltip: 'sharedToolTip', width: '1%', align: 'center' },
         { name: 'name', title: 'Name', footer: 'description', format: 'Md', tags: 'tags' },
-        { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },
+        { iconClass: 'sharedIcon', tooltip: 'sharedToolTip', width: '1%', align: 'center' },
+        { name: 'updateDate', title: 'Last Modified', format: 'Calendar' },
     ];
 
     private _tableData = new BehaviorSubject<Array<any>>(null);

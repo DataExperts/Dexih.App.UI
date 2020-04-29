@@ -1549,7 +1549,7 @@ export class HubService implements OnInit, OnDestroy {
             view: view,
             inputColumns: inputColumns,
             inputParameters: inputParameters,
-        }, 'Getting dashboard download locations...', cancelToken);
+        }, 'Getting view locations...', cancelToken);
     }
 
     previewViewKey(viewKey: number, inputColumns: InputColumn[],
@@ -1561,7 +1561,7 @@ export class HubService implements OnInit, OnDestroy {
             viewKey: viewKey,
             inputColumns: inputColumns,
             inputParameters: inputParameters,
-        }, 'Getting dashboard download locations...', cancelToken);
+        }, 'Getting view locations...', cancelToken);
     }
 
     previewDashboard(dashboard: DexihDashboard, inputParameters: DexihInputParameter[], cancelToken: CancelToken):

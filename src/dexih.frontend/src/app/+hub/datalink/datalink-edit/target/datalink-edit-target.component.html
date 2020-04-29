@@ -57,15 +57,15 @@
         (rowClick)="editTable($event)">
 
         <ng-template #actions let-items="items">
-            <dexih-button-new (click)="addTable()"></dexih-button-new>
+            <dexih-button-new class="mr-1" (click)="addTable()"></dexih-button-new>
         </ng-template>
 
         <ng-template #selectedItemAction select="selectedItemAction" let-item="item">
-            <dexih-button-edit (click)="editTable(item)"></dexih-button-edit>
+            <dexih-button-edit class="mr-1" (click)="editTable(item)"></dexih-button-edit>
         </ng-template>
 
         <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-            <dexih-button-delete (click)="deleteTables(items)"></dexih-button-delete>
+            <dexih-button-delete class="mr-1" (click)="deleteTables(items)"></dexih-button-delete>
         </ng-template>
 
     </dexih-table>

@@ -114,7 +114,7 @@ export class MappingComponent implements OnInit, OnDestroy, OnChanges {
             if (this.datalinkTransformForm) {
                 let runTime = this.datalinkTransformForm.controls['runTime'].value;
                 let inputColumns = <DexihDatalinkColumn[]> runTime.inputColumns;
-                this.inputDateColumns = inputColumns.filter(c => c.dataType === eTypeCode.DateTime);
+                this.inputDateColumns = inputColumns.filter(c => c.dataType === eTypeCode.DateTime || c.dataType === eTypeCode.Date);
                 this.columnGroups = this.editDatalinkService.getColumnGroups(inputColumns);
 
                 let data = [];

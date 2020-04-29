@@ -29,7 +29,7 @@ export class DatalinkTestPropertiesComponent implements OnInit, OnDestroy {
   stepColumns = [
     { name: 'name', title: 'Name', format: '' },
     { name: 'datalink', title: 'Datalink', format: '' },
-    { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },
+    { name: 'updateDate', title: 'Last Modified', format: 'Calendar' },
     { name: 'errors', title: 'Errors', format: '' },
   ];
 

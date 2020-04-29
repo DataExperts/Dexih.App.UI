@@ -9,6 +9,7 @@
 			[columns]="columns"
 			[dataObservable]="tableData"
 			rowStatusHeading="Direct Data Connections"
+			(rowClick)="edit($event)"
 			>
 				<ng-template #selectedItemAction select="selectedItemAction" let-item="item">
 				</ng-template>

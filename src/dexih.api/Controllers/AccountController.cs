@@ -1014,7 +1014,7 @@ namespace dexih.api.Controllers
 		    
 		    await _operations.RepositoryManager.SaveRemoteAgent(user.Id, dbRemoteAgent, cancellationToken);
 
-		    await _operations.BroadcastUsersMessageAsync(new [] { user.Id}, EClientCommand.RemoteAgentUpdate, dbRemoteAgent, cancellationToken);
+		    await _operations.BroadcastUsersMessageAsync(new [] { user.Id}, EClientCommand.RemoteAgentUpdateKey, dbRemoteAgent, cancellationToken);
 
 		    return new RemoteAgentUserToken
 		    {

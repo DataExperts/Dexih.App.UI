@@ -14,14 +14,13 @@ import { CancelToken } from '../../../+auth/auth.models';
 export class RemoteAgentsComponent implements OnInit, OnDestroy {
 
     columns = [
-        { name: 'connected', title: 'Connected', format: 'Boolean'},
         { name: 'name', title: 'Name', format: '' },
-        { name: 'remoteAgentId', title: 'Remote Agent Id', format: ''},
+        { name: 'connected', title: 'Status', format: 'Text', footer: 'ipAddress'},
+        // { name: 'remoteAgentId', title: 'Remote Agent Id', format: ''},
         { name: 'user', title: 'Owner', format: ''},
-        { name: 'ipAddress', title: 'Current IP', format: '' },
-        { name: 'version', title: 'Version', format: 'Md', class: 'versionClass'},
-        { name: 'lastLoginIpAddress', title: 'Last Ip', format: ''},
-        { name: 'lastLoginDateTime', title: 'Last Login', format: 'DateTime'},
+        { name: 'version', footer: 'latestVersion', title: 'Version', format: 'Md', class: 'versionClass', tooltip: 'versionTooltip'},
+        // { name: 'lastLoginIpAddress', title: 'Last Ip', format: ''},
+        { name: 'lastLoginDateTime', title: 'Last Login', format: 'Calendar'},
     ];
 
     private activeAgents: DexihActiveAgent[];
@@ -70,7 +69,7 @@ export class RemoteAgentsComponent implements OnInit, OnDestroy {
             if (activeAgent) {
                 data.push({
                     remoteAgentKey: remoteAgent.remoteAgentKey,
-                    connected: true,
+                    connected: 'active',
                     name: activeAgent ? activeAgent.name : ( remoteAgent ? remoteAgent.name : 'Unknown') ,
                     user: activeAgent.user,
                     dataPrivacyStatus: activeAgent.dataPrivacyStatus,
@@ -83,16 +82,16 @@ export class RemoteAgentsComponent implements OnInit, OnDestroy {
                     remoteAgentId: remoteAgent.remoteAgentId,
                     downloadUrls: activeAgent.downloadUrls,
                     instanceId: activeAgent.instanceId,
-                    version: 'Current: ' + activeAgent.version +
-                        '<br> Latest: ' + activeAgent.latestVersion +
-                        (activeAgent.upgradeAvailable ? '<br>Upgrade Required!' : ''),
+                    version: activeAgent.version,
+                    latestVersion: 'Latest(' + activeAgent.latestVersion + ')',
+                    versionTooltip: (activeAgent.upgradeAvailable ? 'Upgrade is available.' : 'Agent is up to date.'),
                     versionClass: (activeAgent.upgradeAvailable ? 'dexih-error-text' : ''),
                     activeAgent: activeAgent
                 });
             } else {
                 data.push({
                     remoteAgentKey: remoteAgent.remoteAgentKey,
-                    connected: false,
+                    connected: 'not connected',
                     name: remoteAgent.name,
                     user: '',
                     dataPrivacyStatus: '',
@@ -106,6 +105,8 @@ export class RemoteAgentsComponent implements OnInit, OnDestroy {
                     downloadUrls: [],
                     instanceId: null,
                     version: '',
+                    latestVersion: '',
+                    versionTooltip: '',
                     versionClass: '',
                     activeAgent: null
                 });
@@ -145,6 +146,10 @@ export class RemoteAgentsComponent implements OnInit, OnDestroy {
     refreshUserToken(item) {
         // this.authService.refreshRemoteAgentToken(item.remoteAgentKey).then( result => this.refreshData());
         this.router.navigate(['token-renew', item.remoteAgentKey], {relativeTo: this.route});
+    }
+
+    edit(item) {
+        this.router.navigate(['edit', item.remoteAgentKey], {relativeTo: this.route});
     }
 
     restartAgents(items) {

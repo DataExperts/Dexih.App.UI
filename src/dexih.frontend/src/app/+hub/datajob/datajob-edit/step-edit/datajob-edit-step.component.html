@@ -50,6 +50,6 @@
 	[padding]="false">
 	<dexih-table *ngIf="stepFormService.currentForm" [enableMultiSelect]="true" [columns]="stepColumns"
 		[dataObservable]="stepTableData" [(selectedItems)]="stepFormService.currentForm.value.dexihDatalinkDependencies"
-		(onSelectedChange)="dependentStepsChange($event)" keyColumn="key" selectedKeyColumn="dependentDatalinkStepKey">
+		(onSelectedChange)="dependentStepsChange($event)" keyColumn="key" selectedKeyColumn="dependentDatalinkStepKey" [tags]="this.hubCache.hub.dexihTags">
 	</dexih-table>
 </dexih-widget-section>

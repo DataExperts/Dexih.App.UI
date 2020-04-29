@@ -50,7 +50,7 @@ export class TableEditColumnsComponent implements OnInit, OnChanges, OnDestroy {
         { name: 'columnValidation', title: 'Column Validation', format: ''},
         { name: 'isIncrementalUpdate', title: 'Is Incremental', format: 'Boolean'},
         { name: 'securityFlag', title: 'Security Flag', format: ''},
-        { name: 'updateDate', title: 'Last Modified', format: 'DateTime'},
+        { name: 'updateDate', title: 'Last Modified', format: 'Calendar'},
     ];
 
     private _columnData = new BehaviorSubject<Array<DexihTableColumn>>(null);

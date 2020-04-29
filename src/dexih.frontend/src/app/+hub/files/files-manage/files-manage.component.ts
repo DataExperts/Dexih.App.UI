@@ -43,7 +43,7 @@ export class FilesManageComponent implements OnInit, OnDestroy {
     columns = [
         { name: 'fileName', title: 'File Name', format: '' },
         { name: 'length', title: 'Size', format: '' },
-        { name: 'lastModified', title: 'Last Modified', format: 'DateTime' },
+        { name: 'lastModified', title: 'Last Modified', format: 'Calendar' },
     ];
 
     private _tableData = new BehaviorSubject<Array<FileProperties>>(null);

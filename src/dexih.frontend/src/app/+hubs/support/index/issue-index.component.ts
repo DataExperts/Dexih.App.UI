@@ -23,7 +23,7 @@ export class IssueIndexComponent implements OnInit, OnDestroy {
         { name: 'severity', title: 'Severity', format: 'Enum', enum: eIssueSeverity},
         { name: 'issueStatus', title: 'Status', format: 'Enum', enum: eIssueStatus},
         { name: 'gitHubLink', title: 'Github Issue', format: 'Md'},
-        { name: 'updateDate', title: 'Last Modified', format: 'DateTime'},
+        { name: 'updateDate', title: 'Last Modified', format: 'Calendar'},
     ];
 
     private _tableData = new BehaviorSubject<Array<any>>(null);

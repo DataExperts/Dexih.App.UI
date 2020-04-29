@@ -30,7 +30,7 @@ export class ConnectionIndexComponent implements OnInit, OnDestroy {
         { name: 'name', title: 'Name', format: 'Md', footer: 'description', tags: 'tags' },
         { name: 'purpose', title: 'Purpose', format: '' },
         { name: 'type', title: 'Type', format: '' },
-        { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },
+        { name: 'updateDate', title: 'Last Modified', format: 'Calendar' },
     ];
 
     private _tableData = new BehaviorSubject<Array<any>>(null);

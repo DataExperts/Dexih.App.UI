@@ -1,11 +1,9 @@
-<div class="m-1">
-    <dexih-message #DexihMessage></dexih-message>
-</div>
+<div class="container">
+    <div class="m-1">
+        <dexih-message #DexihMessage></dexih-message>
+    </div>
 
-<div class="container-fluid">
     <dexih-widget title="Shared Data" iconClass="fa fa-lg fa-fw fa-life-saver">
-
-
         <dexih-table 
             [enableMultiSelect]="true" 
             [enableFilter]="false" 
@@ -26,7 +24,7 @@
                             itemName="name" [enableAddAll]="true">
                         </form-tags-dropdown>
                     </div>
-                    <div class="col-xs-12 col-sm">
+                    <div class="col-xs-12 col-sm mr-1 input-expand">
                         <form-input formControlName="searchString" placeholder="Search..." iconClass="fa fa-search">
                         </form-input>
                     </div>
@@ -51,9 +49,9 @@
                         [(ngModel)]="column.defaultValue" [border]="false"></form-input>
                 </div>
                 <div class="input-group mt-1 pull-right">
-                    <download-button class="ml-1" [autoCompact]="false" (download)="downloadData([item], true, $event)">
+                    <download-button class="ml-1" (download)="downloadData([item], true, $event)">
                     </download-button>
-                    <dexih-button-edit *ngIf="hubKeys?.indexOf(item.hubKey)>=0" class="ml-1" [autoCompact]="false"
+                    <dexih-button-edit *ngIf="hubKeys?.indexOf(item.hubKey)>=0" class="ml-1" 
                         (click)="edit(item)"></dexih-button-edit>
                 </div>
             </ng-template>

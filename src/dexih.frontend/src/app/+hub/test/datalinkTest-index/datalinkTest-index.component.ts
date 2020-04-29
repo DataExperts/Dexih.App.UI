@@ -25,7 +25,7 @@ export class DatalinkTestIndexComponent implements OnInit, OnDestroy {
     columns = [
         { name: 'name', title: 'Name', format: '', tags: 'tags'},
         { name: 'description', title: 'Description', format: ''},
-        { name: 'updateDate', title: 'Last Modified', format: 'DateTime'},
+        { name: 'updateDate', title: 'Last Modified', format: 'Calendar'},
     ];
 
     private _tableData = new BehaviorSubject<Array<any>>(null);

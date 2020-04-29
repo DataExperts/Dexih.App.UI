@@ -23,11 +23,11 @@ export class ViewIndexComponent implements OnInit, OnDestroy {
     public eSharedObjectType = eSharedObjectType;
 
     columns = [
-        { iconClass: 'sharedIcon', tooltip: 'sharedToolTip', width: '1%', align: 'center' },
         { name: 'name', title: 'Name', footer: 'description', format: 'Md', tags: 'tags' },
+        { iconClass: 'sharedIcon', tooltip: 'sharedToolTip', width: '1%', align: 'center' },
         { name: 'viewType', title: 'Chart/Table' },
         { name: 'sourceType', title: 'Source Type'},
-        { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },
+        { name: 'updateDate', title: 'Last Modified', format: 'Calendar' },
     ];
 
     private _tableData = new BehaviorSubject<Array<any>>(null);

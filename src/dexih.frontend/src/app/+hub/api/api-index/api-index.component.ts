@@ -27,7 +27,7 @@ export class ApiIndexComponent implements OnInit, OnDestroy {
         { iconClass: 'sharedIcon', tooltip: 'sharedToolTip', width: '1%', align: 'center' },
         { name: 'name', title: 'Name', footer: 'description', format: 'Md', tags: 'tags' },
         { name: 'apiSource', title: 'Api Source' },
-        { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },
+        { name: 'updateDate', title: 'Last Modified', format: 'Calendar' },
     ];
 
     private _tableData = new BehaviorSubject<Array<any>>(null);

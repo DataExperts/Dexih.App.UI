@@ -2,7 +2,6 @@ import { Component, Input, OnDestroy, OnInit, OnChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { AuthService } from '../../../+auth/auth.service';
 import { HubCache } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { DexihDatalinkTest, DexihDatalink } from '../../../shared/shared.models';
@@ -27,7 +26,6 @@ export class ActionsDatalinkTestButtonComponent implements OnInit, OnDestroy, On
     private _hubCacheSubscription: Subscription;
 
     constructor(
-        private authService: AuthService,
         private hubService: HubService,
         private router: Router,
         private route: ActivatedRoute) { }
@@ -39,7 +37,7 @@ export class ActionsDatalinkTestButtonComponent implements OnInit, OnDestroy, On
     }
 
     ngOnChanges() {
-        if (this.datalinkTests && this.datalinkTests.length === 1) {
+        if (this.datalinkTests && this.datalinkTests.length === 1 && this.datalinkTests[0].dexihDatalinkTestSteps) {
             let datalinkKeys = this.datalinkTests[0].dexihDatalinkTestSteps.map(c => c.datalinkKey);
             this.hubCache.hub.dexihDatalinks.forEach(datalink => {
                 if (datalinkKeys.findIndex(c => c === datalink.key) >= 0) {

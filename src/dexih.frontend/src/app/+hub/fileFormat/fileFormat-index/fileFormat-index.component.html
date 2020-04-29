@@ -1,36 +1,32 @@
 <div class="container-fluid">
-    <dexih-widget title="File Formats" 
-		iconClass="fa fa-lg fa-fw fa-file-text-o" 
-		[showCloseButton]="true"
-		(close)="close()"
-	>
+	<dexih-widget title="File Formats" iconClass="fa fa-lg fa-fw fa-file-text-o" [showCloseButton]="true"
+		(close)="close()">
 
-			<dexih-table 
-				[enableMultiSelect]="true"
-				[columns]="columns"
-				[dataObservable]="tableData"
-				(rowClick)="editFileFormat($event)"
-				[tags]="this.hubCache.hub.dexihTags"
-				>
-					<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-						<dexih-button-save-local class="mr-1" (click)="export(items)"></dexih-button-save-local>
-						<dexih-button-delete *ngIf="hubCache.canWrite" (click)="deleteFileFormats(items)" title="Delete selected file formats"></dexih-button-delete>
-						<tags-update-button class="ml-1" [objectType]="eSharedObjectType.FileFormat" [objects]="items" ></tags-update-button>
-					</ng-template>
+		<dexih-table [enableMultiSelect]="true" [columns]="columns" [dataObservable]="tableData"
+			(rowClick)="editFileFormat($event)" [tags]="this.hubCache.hub.dexihTags">
+			
+			<ng-template #actions let-items="items">
+				<dexih-button-new *ngIf="hubCache.canWrite" class="mr-1" [routerLink]="['fileFormat-new']"
+					title="Create a new file format"></dexih-button-new>
+			</ng-template>
 
-					<ng-template #selectedItemAction select="selectedItemAction" let-fileFormat="item">
-						<actions-fileFormat-button [fileFormat]="fileFormat"></actions-fileFormat-button>
-					</ng-template>
+			<ng-template #selectedItemAction select="selectedItemAction" let-fileFormat="item">
+				<actions-fileFormat-button [fileFormat]="fileFormat" class="mr-1"></actions-fileFormat-button>
+			</ng-template>
 
-					<ng-template #actions let-items="items">
-						<dexih-button-new *ngIf="hubCache.canWrite" [routerLink]="['fileFormat-new']" title="Create a new file format"></dexih-button-new>
-					</ng-template>
-			</dexih-table>
+			<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+				<dexih-button-save-local class="mr-1" (click)="export(items)"></dexih-button-save-local>
+				<dexih-button-delete *ngIf="hubCache.canWrite" (click)="deleteFileFormats(items)"
+					title="Delete selected file formats"></dexih-button-delete>
+				<tags-update-button class="ml-1" [objectType]="eSharedObjectType.FileFormat" [objects]="items">
+				</tags-update-button>
+			</ng-template>
+
+
+		</dexih-table>
 
 	</dexih-widget>
-	
+
 	<dexih-help class="m-3" title="File Formats" path="/assets/help/reference/fileFormat.md"></dexih-help>
 
 </div>
-
-

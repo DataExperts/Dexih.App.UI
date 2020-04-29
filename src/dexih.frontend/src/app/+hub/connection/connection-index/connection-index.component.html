@@ -1,14 +1,5 @@
 <div class="container-fluid">
 	<dexih-widget title="Connections" iconClass="fa fa-lg fa-fw fa-database" [showCloseButton]="true" (close)="close()">
-		<ng-template #header>
-			<dexih-button-dropdown [autoCompact]="false" buttonClass="btn-sm btn-primary" iconClass="fa fa-filter" [text]="eConnectionPurpose[purposeFilter]" title="Filter by a purpose"
-			 [pullRight]="true">
-				<a class="dropdown-item" [class.active]="purposeFilter=='All'" routerLink='.' [queryParams]="{purposeFilter: 'All'}" title="All Connections">All</a>
-				<a *ngFor="let purpose of eConnectionPurposeItems | gtFilter:'key':0" [class.active]="purposeFilter==purpose.key" class="dropdown-item" routerLink='.'
-				 [queryParams]="{purposeFilter: purpose.key}" [title]="purpose.name">{{purpose.name}}</a>
-			</dexih-button-dropdown>
-		</ng-template>
-
 		<dexih-table 
 			[enableMultiSelect]="true" 
 			[columns]="columns" 
@@ -23,6 +14,14 @@
 			<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
 				<tags-update-button class="ml-1" [objectType]="eSharedObjectType.Connection" [objects]="items" ></tags-update-button>
 			</ng-template>
+
+			<ng-template #filter select="filter" let-items="items">
+				<dexih-button-dropdown class="mr-1" [autoCompact]="false" buttonClass="btn-primary" iconClass="fa fa-filter" [text]="eConnectionPurpose[purposeFilter]" title="Filter by a purpose"
+				[pullRight]="true">
+				   <a class="dropdown-item" [class.active]="purposeFilter=='All'" routerLink='.' [queryParams]="{purposeFilter: 'All'}" title="All Connections">All</a>
+				   <a *ngFor="let purpose of eConnectionPurposeItems | gtFilter:'key':0" [class.active]="purposeFilter==purpose.key" class="dropdown-item" routerLink='.'
+					[queryParams]="{purposeFilter: purpose.key}" [title]="purpose.name">{{purpose.name}}</a>
+			   </dexih-button-dropdown>			</ng-template>
 
 		</dexih-table>
 

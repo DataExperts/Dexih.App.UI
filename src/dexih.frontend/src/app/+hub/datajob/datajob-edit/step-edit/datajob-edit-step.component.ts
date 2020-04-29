@@ -6,7 +6,7 @@ import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { AuthService } from '../../../../+auth/auth.service';
 import { HubFormsService } from '../../../hub.forms.service';
 import { HubCache, DexihInputParameter } from '../../../hub.models';
-import { InputColumn, DexihDatalinkStep, DexihDatalinkStepColumn, DexihDatalinkDependency, InputParameterBase } from '../../../../shared/shared.models';
+import { InputColumn, DexihDatalinkStep, DexihDatalinkStepColumn, DexihDatalinkDependency, InputParameterBase, eSharedObjectType } from '../../../../shared/shared.models';
 
 @Component({
     selector: 'datajob-edit-step',
@@ -29,10 +29,10 @@ export class DatajobEditStepComponent implements OnInit, OnDestroy {
     public inputColumns: InputColumn[];
 
     stepColumns = [
-        { name: 'name', title: 'Name', format: '' },
+        { name: 'name', title: 'Name', format: '', tags: 'tags' },
         { name: 'datalink', title: 'Datalink', format: '' },
         { name: 'dependencies', title: 'Dependencies', format: '' },
-        { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },
+        { name: 'updateDate', title: 'Last Modified', format: 'Calendar' },
     ];
 
     private _stepTableData = new BehaviorSubject<Array<any>>(null);
@@ -117,6 +117,7 @@ export class DatajobEditStepComponent implements OnInit, OnDestroy {
                         key: step.key,
                         name: step.name,
                         datalink: datalink ? datalink.name : 'Not specified',
+                        tags: this.hubCache.getObjectTags(eSharedObjectType.Datalink, datalink.key),
                         dependencies: '',
                         updateDate: step.updateDate
                     });

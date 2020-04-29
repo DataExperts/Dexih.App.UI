@@ -33,7 +33,7 @@ export class DatalinkTestEditStepComponent implements OnInit, OnDestroy {
         { name: 'name', title: 'Name', format: '' },
         { name: 'datalink', title: 'Datalink', format: '' },
         { name: 'dependencies', title: 'Dependencies', format: '' },
-        { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },
+        { name: 'updateDate', title: 'Last Modified', format: 'Calendar' },
     ];
 
     private _stepTableData = new BehaviorSubject<Array<any>>(null);

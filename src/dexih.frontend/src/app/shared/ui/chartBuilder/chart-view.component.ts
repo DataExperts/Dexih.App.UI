@@ -4,6 +4,9 @@ import { colorSets } from '@swimlane/ngx-charts';
 import { Subscription, Observable } from 'rxjs';
 import { ResizedEvent } from 'angular-resize-event';
 import { ChartConfig, eChartType } from '../../shared.models';
+import * as moment_ from "moment";
+
+const moment = moment_;
 
 @Component({
     selector: 'chart-view',
@@ -311,7 +314,20 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
 
     }
 
+    getLanguage() {
+        let language;
+        if (window.navigator.languages) {
+            language = window.navigator.languages[0];
+        } else {
+            language = window.navigator.language;
+        }
+
+        return language;
+    }
+
     formatValue(columnIndex: number, row: number) {
+        moment.locale(this.getLanguage());
+
         if (columnIndex === null) {
             return row;
         }
@@ -325,12 +341,16 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
             return '(null)';
         } else {
             switch (column.format) {
+                case 'Calendar':
+                    return moment(value).calendar();
                 case 'Date':
-                    return (new Date(value).toLocaleDateString());
+                    return moment(value).format('L');
                 case 'Time':
-                    return (new Date(value).toLocaleTimeString());
+                    return moment(value).format('LTS');
                 case 'DateTime':
-                    return (new Date(value).toLocaleDateString()) + ' ' + (new Date(value).toLocaleTimeString());
+                    return moment(value).format('L') + ' ' + moment(value).format('LTS');
+                case 'CharArray':
+                    return [].concat(value).join('');
                 case 'CharArray':
                     return [].concat(value).join('');
                 default:

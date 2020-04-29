@@ -96,7 +96,7 @@ namespace dexih.api.Services.Remote
 		    var hubs = await operations.RepositoryManager.AuthorizedRemoteAgentHubs(remoteAgentProperties.RemoteAgentKey, cancellationToken);
 		    foreach (var hub in hubs)
 		    {
-			    await operations.BroadcastHubMessageAsync(hub.HubKey, EClientCommand.RemoteAgentUpdate, activeAgent, cancellationToken);
+			    await operations.BroadcastHubMessageAsync(hub.HubKey, EClientCommand.ActiveAgentUpdate, activeAgent, cancellationToken);
 		    }
 	    }
 
@@ -1450,7 +1450,8 @@ namespace dexih.api.Services.Remote
 				throw new RemoteAgentException(
 					"The remote agent could not be restarted as the current user must be the same as the remote agent user.");
 			}
-			throw new RemoteAgentException($"The remote agent with the key {remoteAgentKey} could not be found.");
+			
+			// throw new RemoteAgentException($"The remote agent with the key {remoteAgentKey} could not be found.");
 		}
 
 		public async Task<DexihRemoteAgent[]> PingAgents(ApplicationUser user, string connectionId, RepositoryManager repositoryManager, CancellationToken cancellationToken)

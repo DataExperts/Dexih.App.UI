@@ -21,7 +21,7 @@ export class ExportComponent implements OnInit, OnDestroy {
     columns = [
         { name: 'name', title: 'Name', footer: 'description', format: 'Md', tags: 'tags' },
         { name: 'label', title: 'Item Type'},
-        { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },
+        { name: 'updateDate', title: 'Last Modified', format: 'Calendar' },
     ];
 
     public data: Array<SharedObject>;

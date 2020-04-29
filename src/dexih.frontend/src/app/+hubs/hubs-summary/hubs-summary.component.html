@@ -66,16 +66,16 @@
         (filterString)="filterString = $event"
     >
         <ng-template #header>
-            <div class="btn-group btn-group-toggle ml-1" data-toggle="buttons" title="All Hubs the user has access to.">
-                <label class="btn btn-primary" [ngClass]="{active: view === eHubAccess.All}">
+            <div class="btn-group btn-group-toggle ml-1" data-toggle="buttons" >
+                <label class="btn btn-primary" [ngClass]="{active: view === eHubAccess.All}" title="All Hubs.">
                     <input type="radio" name="options" [value]="eHubAccess.All" autocomplete="off" [(ngModel)]="view">
                     <i class="fa fa-globe"></i>
                 </label>
-                <label class="btn btn-primary" [ngClass]="{active: view === eHubAccess.User}">
+                <label class="btn btn-primary" [ngClass]="{active: view === eHubAccess.User}" title="User owned hubs">
                     <input type="radio" name="options" [value]="eHubAccess.User" autocomplete="off" [(ngModel)]="view">
                     <i class="fa fa-user-secret"></i>
                 </label>
-                <label class="btn btn-primary" [ngClass]="{active: view === eHubAccess.ReadOnly}" title="Hubs which are readonly to the current user">
+                <label class="btn btn-primary" [ngClass]="{active: view === eHubAccess.ReadOnly}" title="Readonly hubs">
                     <input type="radio" name="options" [value]="eHubAccess.ReadOnly"  autocomplete="off" [(ngModel)]="view">
                     <i class="fa fa-book"></i>
                 </label>

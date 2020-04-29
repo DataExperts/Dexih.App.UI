@@ -21,15 +21,15 @@ export class DatajobAddStepsComponent implements OnInit, OnDestroy {
     hasChanged = false;
 
     columns = [
-        { name: 'name', title: 'Name', format: '' },
+        { name: 'name', title: 'Name', format: '', tags: 'tags' },
         { name: 'datalinkType', title: 'Datalink Type', enum: eDatalinkType, format: 'Enum' },
         { name: 'sourceTableName', title: 'Source Table', format: '' },
         { name: 'targetTableName', title: 'Target Table', format: '' },
-        { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },
+        { name: 'updateDate', title: 'Last Modified', format: 'Calendar' },
     ];
 
-    private _tableData = new BehaviorSubject<Array<DexihDatalink>>(null);
-    tableData: Observable<Array<DexihDatalink>> = this._tableData.asObservable();
+    private _tableData = new BehaviorSubject<Array<any>>(null);
+    tableData: Observable<Array<any>> = this._tableData.asObservable();
 
   public mainForm: FormGroup;
 
@@ -76,19 +76,25 @@ export class DatajobAddStepsComponent implements OnInit, OnDestroy {
             if (!this.hubCache.hub.dexihDatalinks) {
                 this._tableData.next(new Array<DexihDatalink>());
             } else {
-                newDatalinks = this.hubCache.hub.dexihDatalinks;
-                newDatalinks.forEach(d => {
+                let datalinks = this.hubCache.hub.dexihDatalinks.map(d => {
                     let sourceTable = this.hubCache.getTable(d.sourceDatalinkTable.sourceTableKey);
-                    d['sourceTableName'] = sourceTable ? sourceTable.name : 'No source table';
-                    d['targetTableName'] = d.dexihDatalinkTargets.map(target => {
-                        let table = this.hubCache.getTable(target.tableKey);
-                        if (table) {
-                            return table.name;
-                        }
-                    }).join(', ');
+                    return {
+                        key: d.key,
+                        name: d.name,
+                        datalinkType: d.datalinkType,
+                        sourceTableName: sourceTable ? sourceTable.name : 'No source table',
+                        targetTableName:  d.dexihDatalinkTargets.map(target => {
+                            let table = this.hubCache.getTable(target.tableKey);
+                            if (table) {
+                                return table.name;
+                            }
+                        }).join(', '),
+                        updateDate: d.updateDate,
+                        tags: this.hubCache.getObjectTags(eSharedObjectType.Datalink, d.key),
+                    };
                 });
 
-                this._tableData.next(newDatalinks);
+                this._tableData.next(datalinks);
             }
         }
 

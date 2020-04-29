@@ -75,7 +75,7 @@ namespace dexih.api.Hubs
 			_logger.LogTrace($"Ping from {Context.UserIdentifier}");
 
 			var operations = (IDexihOperations)_serviceProvider.GetService(typeof(IDexihOperations));
-			await operations.BroadcastClientMessageAsync(connectionId, EClientCommand.RemoteAgentUpdate, activeAgent, CancellationToken.None);
+			await operations.BroadcastClientMessageAsync(connectionId, EClientCommand.ActiveAgentUpdate, activeAgent, CancellationToken.None);
 		}
 		
 		public async Task PingServer(DexihActiveAgent activeAgent, string pingKey)

@@ -24,7 +24,7 @@ export class DatajobIndexComponent implements OnInit, OnDestroy {
 
     columns = [
         { name: 'name', title: 'Name', footer: 'description', format: 'Md', tags: 'tags' },
-        { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },
+        { name: 'updateDate', title: 'Last Modified', format: 'Calendar' },
     ];
 
     private _tableData = new BehaviorSubject<Array<any>>(null);

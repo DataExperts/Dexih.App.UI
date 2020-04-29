@@ -32,9 +32,16 @@ export class TablePreviewDataComponent implements OnInit, OnDestroy {
         try {
             this._subscription = combineLatest(
                 this.route.params,
+                this.hubService.getHubCacheObservable(true),
             ).subscribe(result => {
                 let params = result[0];
+                let hubCache = result[1];
                 this.key = +params['tableKey'];
+
+                let table = hubCache.getTable(this.key);
+                if (table) {
+                    this.title = 'Preview Table - ' + table.logicalName;
+                }
             });
         } catch (e) {
             this.hubService.addHubClientErrorMessage(e, 'Table Preview Data');

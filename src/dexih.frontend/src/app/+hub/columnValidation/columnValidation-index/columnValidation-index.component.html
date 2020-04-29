@@ -12,7 +12,7 @@
 			[tags]="this.hubCache.hub.dexihTags"
 			>
 				<ng-template #selectedItemAction select="selectedItemAction" let-validation="item">
-					<actions-columnValidation-button [columnValidation]="validation"></actions-columnValidation-button>
+					<actions-columnValidation-button [columnValidation]="validation" class="mr-1"></actions-columnValidation-button>
 				</ng-template>
 
 				<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
@@ -23,7 +23,7 @@
 				
 
 				<ng-template #actions let-items="items">
-					<dexih-button-new *ngIf="hubCache.canWrite" [routerLink]="['columnValidation-new']"></dexih-button-new>
+					<dexih-button-new *ngIf="hubCache.canWrite" [routerLink]="['columnValidation-new']" class="mr-1"></dexih-button-new>
 				</ng-template>
 		</dexih-table>
 

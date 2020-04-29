@@ -16,7 +16,7 @@ export class ApiData {
    }
    
    export class ApplicationUser {
-    public id: string = '5269c1b4-f9f8-433f-b781-b26a5b1380e7';
+    public id: string = '92496248-a66c-44e8-ba62-28c167e9bcbe';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -25,7 +25,7 @@ export class ApiData {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = 'c5fcfb70-cd15-4595-8b81-99563fe1fae1';
+    public securityStamp: string = 'ad86a39e-aeaf-496d-809e-a60209af1674';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -2047,33 +2047,35 @@ export class ApiData {
     Connect = 0,
     Disconnect = 1,
     Message = 2,
-    RemoteAgentUpdate = 3,
-    RemoteAgentDelete = 4,
-    RemoteAgentDeleteKey = 5,
-    HubUpdate = 6,
-    HubDelete = 7,
-    Task = 8,
-    FileDownload = 9,
-    DownloadReady = 10,
-    HubChange = 11,
-    HubError = 12,
-    DatalinkProgress = 13,
-    DatalinkStatus = 14,
-    DatajobProgress = 15,
-    DatajobStatus = 16,
-    DatalinkTestProgress = 17,
-    TableProgress = 18,
-    ApiStatus = 19,
-    ApiQuery = 20,
-    FlatFilesReady = 21,
-    Command = 22,
+    ActiveAgentUpdate = 3,
+    RemoteAgentUpdateKey = 4,
+    RemoteAgentDelete = 5,
+    RemoteAgentDeleteKey = 6,
+    HubUpdate = 7,
+    HubDelete = 8,
+    Task = 9,
+    FileDownload = 10,
+    DownloadReady = 11,
+    HubChange = 12,
+    HubError = 13,
+    DatalinkProgress = 14,
+    DatalinkStatus = 15,
+    DatajobProgress = 16,
+    DatajobStatus = 17,
+    DatalinkTestProgress = 18,
+    TableProgress = 19,
+    ApiStatus = 20,
+    ApiQuery = 21,
+    FlatFilesReady = 22,
+    Command = 23,
    }
    
    export const eClientCommandItems = [
     {key: eClientCommand.Connect, name: 'Connect'},
     {key: eClientCommand.Disconnect, name: 'Disconnect'},
     {key: eClientCommand.Message, name: 'Message'},
-    {key: eClientCommand.RemoteAgentUpdate, name: 'RemoteAgentUpdate'},
+    {key: eClientCommand.ActiveAgentUpdate, name: 'ActiveAgentUpdate'},
+    {key: eClientCommand.RemoteAgentUpdateKey, name: 'RemoteAgentUpdateKey'},
     {key: eClientCommand.RemoteAgentDelete, name: 'RemoteAgentDelete'},
     {key: eClientCommand.RemoteAgentDeleteKey, name: 'RemoteAgentDeleteKey'},
     {key: eClientCommand.HubUpdate, name: 'HubUpdate'},
@@ -3071,6 +3073,7 @@ export class ApiData {
     Object = 24,
     Node = 25,
     Geometry = 26,
+    Date = 27,
    }
    
    export const eTypeCodeItems = [
@@ -3101,6 +3104,7 @@ export class ApiData {
     {key: eTypeCode.Object, name: 'Object'},
     {key: eTypeCode.Node, name: 'Node'},
     {key: eTypeCode.Geometry, name: 'Geometry'},
+    {key: eTypeCode.Date, name: 'Date'},
    ]
    
    export enum eUpdateStrategy {
@@ -3169,5 +3173,4 @@ export class ApiData {
     {key: logLevel.Critical, name: 'Critical'},
     {key: logLevel.None, name: 'None'},
    ]
-   
    

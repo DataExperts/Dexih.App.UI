@@ -101,7 +101,7 @@ export class AuthService implements OnDestroy {
                                 // this.refreshUser();
                                 this.pingRemoteAgents();
                                 break;
-                            case eClientCommand.RemoteAgentUpdate: {
+                            case eClientCommand.ActiveAgentUpdate: {
                                 let remoteAgents = <DexihRemoteAgent[]>this._remoteAgents.value;
                                 if (remoteAgents) {
                                     let activeAgent = <DexihActiveAgent>data.value;
@@ -144,6 +144,18 @@ export class AuthService implements OnDestroy {
                                     });
                                     this._remoteAgents.next(remoteAgents);
                                 }
+                                break;
+                            }
+
+                            case eClientCommand.RemoteAgentUpdateKey: {
+                                let remoteAgents = <DexihRemoteAgent[]>this._remoteAgents.value;
+                                let index = remoteAgents.findIndex(c => c.remoteAgentKey === data.value);
+                                if (index >= 0) {
+                                    remoteAgents[index] = data.value;
+                                } else {
+                                    remoteAgents.push(data.value);
+                                }
+                                this._remoteAgents.next(remoteAgents);
                                 break;
                             }
 
@@ -873,6 +885,9 @@ export class AuthService implements OnDestroy {
                 switch (c.dataType) {
                     case eTypeCode.DateTime:
                         dtColumns.push({ name: index, title: name, format: 'DateTime'});
+                        break;
+                    case eTypeCode.Date:
+                        dtColumns.push({ name: index, title: name, format: 'Date'});
                         break;
                     case eTypeCode.Boolean:
                         dtColumns.push({ name: index, title: name, format: 'Boolean'});

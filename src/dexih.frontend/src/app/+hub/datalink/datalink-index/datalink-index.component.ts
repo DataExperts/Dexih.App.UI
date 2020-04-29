@@ -23,12 +23,12 @@ export class DatalinkIndexComponent implements OnInit, OnDestroy {
     public eDatalinkTypeItems = eDatalinkTypeItems;
 
     columns = [
-        { iconClass: 'sharedIcon', tooltip: 'sharedToolTip', width: '1%', align: 'center' },
         { name: 'name', title: 'Name', format: 'Md', footer: 'description', tags: 'tags' },
+        { iconClass: 'sharedIcon', tooltip: 'sharedToolTip', width: '1%', align: 'center' },
         { name: 'datalinkType', title: 'Datalink Type', format: '' },
         { name: 'sourceName', title: 'Source', format: '' },
         { name: 'targetName', title: 'Target', format: '' },
-        { name: 'updateDate', title: 'Last Modified', format: 'DateTime' },
+        { name: 'updateDate', title: 'Last Modified', format: 'Calendar' },
     ];
 
     private _tableData = new BehaviorSubject<Array<DexihDatalink>>(null);

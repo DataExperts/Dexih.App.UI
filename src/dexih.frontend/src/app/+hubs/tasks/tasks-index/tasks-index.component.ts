@@ -22,7 +22,7 @@ export class TasksIndexComponent implements OnInit, OnDestroy {
         { name: 'task.status', title: 'Status', format: ''},
         { name: 'task.stepName', title: 'Current Step', format: ''},
         { name: 'task.name', title: 'Name', format: ''},
-        { name: 'task.lastUpdate', title: 'Last Modified', format: 'DateTime'},
+        { name: 'task.lastUpdate', title: 'Last Modified', format: 'Calendar'},
     ];
 
     private _tableData = new BehaviorSubject<Array<any>>(null);
