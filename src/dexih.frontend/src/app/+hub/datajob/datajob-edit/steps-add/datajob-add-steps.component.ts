@@ -16,7 +16,7 @@ export class DatajobAddStepsComponent implements OnInit, OnDestroy {
     private _subscription: Subscription;
     private _hubCacheChangeSubscription: Subscription;
 
-    private hubCache: HubCache;
+    public hubCache: HubCache;
 
     hasChanged = false;
 

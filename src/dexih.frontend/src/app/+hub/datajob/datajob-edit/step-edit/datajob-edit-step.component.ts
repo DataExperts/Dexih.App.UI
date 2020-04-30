@@ -16,7 +16,7 @@ export class DatajobEditStepComponent implements OnInit, OnDestroy {
     private _subscription: Subscription;
     private _datalinkSubscription: Subscription;
 
-    private hubCache: HubCache;
+    public hubCache: HubCache;
 
     private datalinkStepKey: number;
     datajobKey: number;
