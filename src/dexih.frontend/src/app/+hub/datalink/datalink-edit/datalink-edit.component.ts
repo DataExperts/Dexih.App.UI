@@ -1,5 +1,5 @@
 import { HostListener, Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd, Params } from '@angular/router';
 import { HubService } from '../../hub.service';
 import { DatalinkEditService } from './datalink-edit.service';
 import { Subscription, Observable, BehaviorSubject, combineLatest } from 'rxjs';
@@ -27,6 +27,7 @@ export class DatalinkEditComponent implements OnInit, OnDestroy {
 
     public action: string; // new or edit
     public pageTitle: string;
+    public params: Params;
 
     public logger = new LogFactory('datalink-edit.component');
     public logCount = 0;
@@ -77,117 +78,28 @@ export class DatalinkEditComponent implements OnInit, OnDestroy {
             ).subscribe(result => {
                 this.action = result[0]['action'];
                 this.pageTitle = result[0]['pageTitle'];
-                let params = result[1];
+                this.params = result[1];
                 this.hubCache = result[2];
 
-                if (!this.hubCache || this.hubCache.status !== eCacheStatus.Loaded || this.isLoaded) { return; }
+                if (!this.hubCache || this.hubCache.status !== eCacheStatus.Loaded ) { return; }
 
                 this.editDatalinkService.init(this.hubCache);
 
-                this.logger.LogC(() => `Subscription count: ${this.logCount++}`, eLogLevel.Trace);
+                if (this.isLoaded && this.action === 'new') { return; }
 
-                if (this.action === 'edit') {
-
-                    // get the hub key from the route data, and update the service.
-                    let datalinkKey: number = + params['datalinkKey'];
-                    if (!datalinkKey) {
-                        this.logger.LogC(() => `no datalink found.`, eLogLevel.Warning);
-
-                        this.hubService.addHubErrorMessage('There was no datalink specified to edit.');
-                        this.showPageMessage = 'Edit failed...';
-                        this.editDatalinkService.hubFormsService.datalink(null);
-                    } else {
-                        let originalDatalink = this.hubCache.hub.dexihDatalinks.find(d => d.key === datalinkKey);
-
-                        if (originalDatalink) {
-                            this.editDatalinkService.hubFormsService.datalink(originalDatalink);
-                            this.route.snapshot.data['pageTitle'] = 'Datalink (' + originalDatalink.name + ')';
-
-                        } else {
-                            this.logger.LogC(() => `no datalink found. key: ${datalinkKey}`, eLogLevel.Warning);
-                            this.hubService.addHubErrorMessage('A datalink with the key ' +
-                                datalinkKey + ' could not be found in the repository.');
-                            this.showPageMessage = 'Edit failed...';
+                if (this.isLoaded && this.editDatalinkService.hubFormsService.hasChanged) {
+                    this.authService.confirmDialog('Datalink synchronization warning',
+                    'The hub was disconnected, meaning the datalink could have been changed by another session.  Would you like to discard the current changes, and reload the latest version of the datalink?')
+                    .then(confirm => {
+                        if (confirm) {
+                            this.load();
                         }
-                    }
-
-                } else if (!this.isLoaded && this.action === 'new') {
-                    let datalink = new DexihDatalink();
-                    datalink.sourceDatalinkTable = new DexihDatalinkTable();
-                    this.editDatalinkService.hubFormsService.datalink(datalink);
-                    this.logger.LogC(() => `new datalink set.`, eLogLevel.Warning);
-                } else if (!this.isLoaded && this.action === 'copy') {
-                    // get the hub key from the route data, and update the service.
-                    let datalinkKey: number = + params['datalinkKey'];
-                    if (!datalinkKey) {
-                        this.logger.LogC(() => `no datalink found.`, eLogLevel.Warning);
-
-                        this.hubService.addHubErrorMessage('There was no datalink specified to copy.');
-                        this.showPageMessage = 'Copy failed...';
-                        this.editDatalinkService.hubFormsService.datalink(null);
-                    } else {
-                        let originalDatalink = this.hubCache.hub.dexihDatalinks.find(d => d.key === datalinkKey);
-
-                        if (originalDatalink) {
-                            let copyDatalink = this.hubCache.CopyDatalink(originalDatalink);
-                            this.editDatalinkService.hubFormsService.datalink(copyDatalink);
-                            this.editDatalinkService.hubFormsService.hasChanged = true;
-                            this.route.snapshot.data['pageTitle'] = 'Datalink (' + copyDatalink.name + ')';
-
-                        } else {
-                            this.logger.LogC(() => `no datalink found. key: ${datalinkKey}`, eLogLevel.Warning);
-                            this.hubService.addHubErrorMessage('A datalink with the key ' +
-                                datalinkKey + ' could not be found in the repository.');
-                            this.showPageMessage = 'Copy failed...';
-                        }
-                    }
-                } else if (this.action === 'sourceTable') {
-                    let datalink = new DexihDatalink();
-                    datalink.datalinkType = eDatalinkType.Query;
-                    datalink.sourceDatalinkTable = new DexihDatalinkTable();
-                    datalink.sourceDatalinkTable.sourceType = eSourceType.Table;
-                    datalink.sourceDatalinkTable.sourceTableKey = +params['sourceTableKey'];
-                    this.editDatalinkService.reBuildDatalinkTable(datalink.sourceDatalinkTable);
-                    datalink.name = 'Datalink query for ' + datalink.sourceDatalinkTable.name;
-
-                    this.editDatalinkService.hubFormsService.datalink(datalink);
-                    this.editDatalinkService.hubFormsService.currentForm.markAsDirty();
-                    this.editDatalinkService.hubFormsService.hasChanged = true;
-
-                    this.logger.LogC(() => `new source table datalink set.`, eLogLevel.Warning);
-                }
-
-                this.isLoaded = true;
-
-                // monitor for any changes to the datalink
-                if (this._datalinkFormSubscription) { this._datalinkFormSubscription.unsubscribe(); }
-                this._datalinkFormSubscription =
-                    this.editDatalinkService.hubFormsService.getCurrentFormObservable().subscribe(datalinkForm => {
-                        if (!datalinkForm) { return; }
-                        this.datalinkForm = datalinkForm;
-
-                        // let datalinkTransforms = <FormArray>this.datalinkForm.controls.dexihDatalinkTransforms;
-                        // this.updateTransforms(datalinkTransforms.value);
-
-                        // // monitor any add/remove transforms to update the tabs.
-                        // if (this._datalinkTransformsSubscription) { this._datalinkTransformsSubscription.unsubscribe(); }
-                        // this._datalinkTransformsSubscription = datalinkTransforms.valueChanges.subscribe(dt => {
-                        //     if (!this.updatingTransforms) {
-                        //         this.updateTransforms(dt);
-                        //     }
-                        // });
-
-                        let key = datalinkForm.controls.key.value;
-                        if (key) {
-                            if (history.pushState) {
-                                let newUrl = window.location.pathname.replace('/new', `/edit/${key}`)
-                                this.router.navigateByUrl(newUrl);
-                            }
-                        }
+                    }).catch(reason => {
+                        return;
                     });
-
-                this.showPage = true;
-                this.showPageMessage = '';
+                } else {
+                    this.load();
+                }
             });
 
             this.editDatalinkService.ngOnInit();
@@ -204,6 +116,113 @@ export class DatalinkEditComponent implements OnInit, OnDestroy {
 
         // shut down service
         this.editDatalinkService.ngOnDestroy();
+    }
+
+    private load() {
+        this.logger.LogC(() => `Subscription count: ${this.logCount++}`, eLogLevel.Trace);
+
+        if (this.action === 'edit') {
+
+            // get the hub key from the route data, and update the service.
+            let datalinkKey: number = +this.params['datalinkKey'];
+            if (!datalinkKey) {
+                this.logger.LogC(() => `no datalink found.`, eLogLevel.Warning);
+
+                this.hubService.addHubErrorMessage('There was no datalink specified to edit.');
+                this.showPageMessage = 'Edit failed...';
+                this.editDatalinkService.hubFormsService.datalink(null);
+            } else {
+                let originalDatalink = this.hubCache.hub.dexihDatalinks.find(d => d.key === datalinkKey);
+
+                if (originalDatalink) {
+                    this.editDatalinkService.hubFormsService.datalink(originalDatalink);
+                    this.route.snapshot.data['pageTitle'] = 'Datalink (' + originalDatalink.name + ')';
+
+                } else {
+                    this.logger.LogC(() => `no datalink found. key: ${datalinkKey}`, eLogLevel.Warning);
+                    this.hubService.addHubErrorMessage('A datalink with the key ' +
+                        datalinkKey + ' could not be found in the repository.');
+                    this.showPageMessage = 'Edit failed...';
+                }
+            }
+
+        } else if (!this.isLoaded && this.action === 'new') {
+            let datalink = new DexihDatalink();
+            datalink.sourceDatalinkTable = new DexihDatalinkTable();
+            this.editDatalinkService.hubFormsService.datalink(datalink);
+            this.logger.LogC(() => `new datalink set.`, eLogLevel.Warning);
+        } else if (!this.isLoaded && this.action === 'copy') {
+            // get the hub key from the route data, and update the service.
+            let datalinkKey: number = +this.params['datalinkKey'];
+            if (!datalinkKey) {
+                this.logger.LogC(() => `no datalink found.`, eLogLevel.Warning);
+
+                this.hubService.addHubErrorMessage('There was no datalink specified to copy.');
+                this.showPageMessage = 'Copy failed...';
+                this.editDatalinkService.hubFormsService.datalink(null);
+            } else {
+                let originalDatalink = this.hubCache.hub.dexihDatalinks.find(d => d.key === datalinkKey);
+
+                if (originalDatalink) {
+                    let copyDatalink = this.hubCache.CopyDatalink(originalDatalink);
+                    this.editDatalinkService.hubFormsService.datalink(copyDatalink);
+                    this.editDatalinkService.hubFormsService.hasChanged = true;
+                    this.route.snapshot.data['pageTitle'] = 'Datalink (' + copyDatalink.name + ')';
+
+                } else {
+                    this.logger.LogC(() => `no datalink found. key: ${datalinkKey}`, eLogLevel.Warning);
+                    this.hubService.addHubErrorMessage('A datalink with the key ' +
+                        datalinkKey + ' could not be found in the repository.');
+                    this.showPageMessage = 'Copy failed...';
+                }
+            }
+        } else if (this.action === 'sourceTable') {
+            let datalink = new DexihDatalink();
+            datalink.datalinkType = eDatalinkType.Query;
+            datalink.sourceDatalinkTable = new DexihDatalinkTable();
+            datalink.sourceDatalinkTable.sourceType = eSourceType.Table;
+            datalink.sourceDatalinkTable.sourceTableKey = +this.params['sourceTableKey'];
+            this.editDatalinkService.reBuildDatalinkTable(datalink.sourceDatalinkTable);
+            datalink.name = 'Datalink query for ' + datalink.sourceDatalinkTable.name;
+
+            this.editDatalinkService.hubFormsService.datalink(datalink);
+            this.editDatalinkService.hubFormsService.currentForm.markAsDirty();
+            this.editDatalinkService.hubFormsService.hasChanged = true;
+
+            this.logger.LogC(() => `new source table datalink set.`, eLogLevel.Warning);
+        }
+
+        this.isLoaded = true;
+
+        // monitor for any changes to the datalink
+        if (this._datalinkFormSubscription) { this._datalinkFormSubscription.unsubscribe(); }
+        this._datalinkFormSubscription =
+            this.editDatalinkService.hubFormsService.getCurrentFormObservable().subscribe(datalinkForm => {
+                if (!datalinkForm) { return; }
+                this.datalinkForm = datalinkForm;
+
+                // let datalinkTransforms = <FormArray>this.datalinkForm.controls.dexihDatalinkTransforms;
+                // this.updateTransforms(datalinkTransforms.value);
+
+                // // monitor any add/remove transforms to update the tabs.
+                // if (this._datalinkTransformsSubscription) { this._datalinkTransformsSubscription.unsubscribe(); }
+                // this._datalinkTransformsSubscription = datalinkTransforms.valueChanges.subscribe(dt => {
+                //     if (!this.updatingTransforms) {
+                //         this.updateTransforms(dt);
+                //     }
+                // });
+
+                let key = datalinkForm.controls.key.value;
+                if (key) {
+                    if (history.pushState) {
+                        let newUrl = window.location.pathname.replace('/new', `/edit/${key}`)
+                        this.router.navigateByUrl(newUrl);
+                    }
+                }
+            });
+
+        this.showPage = true;
+        this.showPageMessage = '';
     }
 
     // updateTransforms(datalinkTransforms: Array<any>) {

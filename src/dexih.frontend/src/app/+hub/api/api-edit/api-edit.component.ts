@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { HubCache, eCacheStatus, ConnectionTables } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { Subscription, combineLatest, merge, Subject} from 'rxjs';
@@ -20,6 +20,7 @@ export class ApiEditComponent implements OnInit, OnDestroy {
   private hubCache: HubCache;
   public action: string; // new or edit
   public pageTitle: string;
+  public params: Params;
 
   private _subscription: Subscription;
   private _formChangeSubscription: Subscription;
@@ -64,67 +65,87 @@ export class ApiEditComponent implements OnInit, OnDestroy {
         this.hubService.getHubCacheObservable(),
       ).subscribe(result => {
         let data = result[0];
-        let params = result[1];
+        this.params = result[1];
         this.hubCache = result[2];
 
         this.action = data['action'];
         this.pageTitle = data['pageTitle'];
 
+        if (!this.hubCache || this.hubCache.status !== eCacheStatus.Loaded ) { return; }
+
+        if (this.hubCache && this.hubCache.isLoaded()) {
+          this.connectionTables = this.hubCache.getConnectionTables();
+          this.datalinks = this.hubCache.hub.dexihDatalinks;
+        }
+
+        if (this.isLoaded && this.action === 'new') { return; }
+
+        if (this.isLoaded && this.formsService.hasChanged) {
+            this.authService.confirmDialog('Synchronization warning',
+            'The hub was disconnected, meaning this edit could have been changed by another session.  Would you like to discard the current changes, and reload the latest version?')
+            .then(confirm => {
+                if (confirm) {
+                    this.load();
+                }
+            }).catch(reason => {
+                return;
+            });
+        } else {
+            this.load();
+        }
+
         if (this.hubCache.isLoaded()) {
           if (!this.hubCache || this.hubCache.status !== eCacheStatus.Loaded || this.isLoaded) { return; }
           this.isLoaded = true;
-
-          if (this.hubCache && this.hubCache.isLoaded()) {
-            this.connectionTables = this.hubCache.getConnectionTables();
-            this.datalinks = this.hubCache.hub.dexihDatalinks;
-          }
-
-          if (this.action === 'edit') {
-            // get the hub key from the route data, and update the service.
-            this.apiKey = + params['apiKey'];
-
-            if (!this.apiKey) {
-              this.hubService.addHubErrorMessage('There was no api specified to edit.');
-            } else {
-              if (!this.hubCache.hub || !this.hubCache.hub.dexihApis) {
-                this.hubService.addHubErrorMessage('The hub cache is not loaded.');
-              } else {
-
-                let api = this.hubCache.hub.dexihApis.find(c => c.key === this.apiKey);
-
-                this.selectQuery = api.selectQuery;
-                if (!this.selectQuery) { this.selectQuery = new SelectQuery(); }
-
-                this.formsService.api(api);
-                this.watchChanges();
-
-                this.getColumns();
-                // this.refresh();
-              }
-            }
-          }
-
-          if (this.action === 'new') {
-            let api = new DexihApi();
-            this.formsService.api(api);
-            this.watchChanges();
-
-            // update the url with the saved key
-            this._formChangeSubscription = this.formsService.getCurrentFormObservable().subscribe(form => {
-              let key = form.controls.key.value;
-              if (key) {
-                if (history.pushState) {
-                  let newUrl = window.location.pathname.replace('/api-new', `/api-edit/${key}`)
-                  this.router.navigateByUrl(newUrl);
-                  this._formChangeSubscription.unsubscribe();
-                }
-              }
-            });
-          }
         }
       });
     } catch (e) {
       this.hubService.addHubClientErrorMessage(e, 'Api Edit');
+    }
+  }
+
+  load() {
+    if (this.action === 'edit') {
+      // get the hub key from the route data, and update the service.
+      this.apiKey = + this.params['apiKey'];
+
+      if (!this.apiKey) {
+        this.hubService.addHubErrorMessage('There was no api specified to edit.');
+      } else {
+        if (!this.hubCache.hub || !this.hubCache.hub.dexihApis) {
+          this.hubService.addHubErrorMessage('The hub cache is not loaded.');
+        } else {
+
+          let api = this.hubCache.hub.dexihApis.find(c => c.key === this.apiKey);
+
+          this.selectQuery = api.selectQuery;
+          if (!this.selectQuery) { this.selectQuery = new SelectQuery(); }
+
+          this.formsService.api(api);
+          this.watchChanges();
+
+          this.getColumns();
+          // this.refresh();
+        }
+      }
+    }
+
+    if (this.action === 'new') {
+      let api = new DexihApi();
+      this.formsService.api(api);
+      this.watchChanges();
+
+      // update the url with the saved key
+      this._formChangeSubscription = this.formsService.getCurrentFormObservable().subscribe(form => {
+        let key = form.controls.key.value;
+        if (key) {
+          if (history.pushState) {
+            let newUrl = window.location.pathname.replace('/api-new', `/api-edit/${key}`)
+            this.router.navigateByUrl(newUrl);
+            this._formChangeSubscription.unsubscribe();
+          }
+        }
+      });
     }
   }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { HubCache, eCacheStatus } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { AuthService } from '../../../+auth/auth.service';
@@ -23,6 +23,7 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
   private remoteLibraries: RemoteLibraries;
   public action: string; // new or edit
   public pageTitle: string;
+  public params: Params
 
   private _subscription: Subscription;
   private _formChangeSubscription: Subscription;
@@ -67,88 +68,32 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
         this.hubService.getRemoteLibrariesObservable()
       ).subscribe(async result => {
         let data = result[0];
-        let params = result[1];
+        this.params = result[1];
         this.hubCache = result[2];
         this.remoteLibraries = result[3];
 
         this.action = data['action'];
         this.pageTitle = data['pageTitle'];
 
-        if (!this.hubCache.isLoaded()) {
-          return;
-        }
-
         this.variables = this.hubCache.hub.dexihHubVariables.map(c => '{' + c.name + '}');
 
-          if (!this.remoteLibraries || !this.hubCache || this.hubCache.status !== eCacheStatus.Loaded || this.isLoaded) { return; }
-          this.isLoaded = true;
+        if (!this.hubCache || this.hubCache.status !== eCacheStatus.Loaded ) { return; }
 
-          if (this.action === 'edit') {
-            // get the hub key from the route data, and update the service.
-            this.connectionKey = + params['connectionKey'];
+        if (this.isLoaded && this.action === 'new') { return; }
 
-            this.logger.LogC(() => `edit connection key ${this.connectionKey}.`, eLogLevel.Trace);
-
-            if (!this.connectionKey) {
-              this.hubService.addHubErrorMessage('There was no connection specified to edit.');
-            } else {
-              if (!this.hubCache.hub || !this.hubCache.hub.dexihConnections) {
-                this.hubService.addHubErrorMessage('The hub cache is not loaded.');
-              } else {
-                let connection = this.hubCache.hub.dexihConnections.find(c => c.key === this.connectionKey);
-                if (!connection) {
-                  this.hubService.addHubErrorMessage('The specified connection could not be found.');
-                  this.logger.LogC(() => `edit connection with key ${this.connectionKey} not found.`, eLogLevel.Warning);
-                } else {
-                  this.updateDatabaseTypes(connection.purpose);
-                  this.connectionReference = await this.hubService.GetConnectionReference(connection);
-                  this.formsService.connection(connection);
-                  if (connection.defaultDatabase) {
-                    this.databases = [connection.defaultDatabase];
-                  }
-                  this.logger.LogC(() => `edit connection, form loaded.`, eLogLevel.Trace);
+        if (this.isLoaded && this.formsService.hasChanged) {
+            this.authService.confirmDialog('Synchronization warning',
+            'The hub was disconnected, meaning this edit could have been changed by another session.  Would you like to discard the current changes, and reload the latest version?')
+            .then(async confirm => {
+                if (confirm) {
+                    await this.load();
                 }
-              }
-            }
-          }
-
-          if (this.action === 'new') {
-            let connection = new DexihConnection();
-            connection.purpose = +params['purpose'];
-
-            this.logger.LogC(() => `new connection, purpose ${connection.purpose}.`, eLogLevel.Trace);
-
-            this.updateDatabaseTypes(connection.purpose);
-            this.formsService.connection(connection);
-
-            this.updateUrl();
-
-            this.logger.LogC(() => `new connection, form loaded.`, eLogLevel.Trace);
-          }
-
-          if (this.action === 'copy') {
-
-            let connection = new DexihConnection();
-
-            let previousConnectionKey = + params['connectionKey'];
-            let previousConnection = this.hubCache.hub.dexihConnections.find(c => c.key === previousConnectionKey);
-            Object.assign(connection, previousConnection);
-            connection.name += ' (copy)';
-            connection.key = null;
-            this.connectionReference = await this.hubService.GetConnectionReference(connection);
-
-            this.logger.LogC(() => `copy connection, connectionKey ${previousConnectionKey}.`, eLogLevel.Trace);
-            this.updateDatabaseTypes(connection.purpose);
-            this.formsService.connection(connection);
-
-            this.updateUrl();
-
-            this.logger.LogC(() => `new connection, form loaded.`, eLogLevel.Trace);
-          }
-
-          this._purposeSubscription = this.formsService.currentForm.controls.purpose.valueChanges.subscribe(purpose => {
-              this.updateDatabaseTypes(purpose);
-          });
+            }).catch(reason => {
+                return;
+            });
+        } else {
+            await this.load();
+        }
       });
     } catch (e) {
       this.hubService.addHubClientErrorMessage(e, 'Connection Edit');
@@ -160,6 +105,78 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
     if (this._formChangeSubscription) { this._formChangeSubscription.unsubscribe(); }
     if (this._purposeSubscription) { this._purposeSubscription.unsubscribe(); }
     this.cancelToken.cancel();
+  }
+
+  private async load() {
+    this.isLoaded = true;
+
+    if (this.action === 'edit') {
+      // get the hub key from the route data, and update the service.
+      this.connectionKey = + this.params['connectionKey'];
+
+      this.logger.LogC(() => `edit connection key ${this.connectionKey}.`, eLogLevel.Trace);
+
+      if (!this.connectionKey) {
+        this.hubService.addHubErrorMessage('There was no connection specified to edit.');
+      } else {
+        if (!this.hubCache.hub || !this.hubCache.hub.dexihConnections) {
+          this.hubService.addHubErrorMessage('The hub cache is not loaded.');
+        } else {
+          let connection = this.hubCache.hub.dexihConnections.find(c => c.key === this.connectionKey);
+          if (!connection) {
+            this.hubService.addHubErrorMessage('The specified connection could not be found.');
+            this.logger.LogC(() => `edit connection with key ${this.connectionKey} not found.`, eLogLevel.Warning);
+          } else {
+            this.updateDatabaseTypes(connection.purpose);
+            this.connectionReference = await this.hubService.GetConnectionReference(connection);
+            this.formsService.connection(connection);
+            if (connection.defaultDatabase) {
+              this.databases = [connection.defaultDatabase];
+            }
+            this.logger.LogC(() => `edit connection, form loaded.`, eLogLevel.Trace);
+          }
+        }
+      }
+    }
+
+    if (this.action === 'new') {
+      let connection = new DexihConnection();
+      connection.purpose = +this.params['purpose'];
+
+      this.logger.LogC(() => `new connection, purpose ${connection.purpose}.`, eLogLevel.Trace);
+
+      this.updateDatabaseTypes(connection.purpose);
+      this.formsService.connection(connection);
+
+      this.updateUrl();
+
+      this.logger.LogC(() => `new connection, form loaded.`, eLogLevel.Trace);
+    }
+
+    if (this.action === 'copy') {
+
+      let connection = new DexihConnection();
+
+      let previousConnectionKey = + this.params['connectionKey'];
+      let previousConnection = this.hubCache.hub.dexihConnections.find(c => c.key === previousConnectionKey);
+      Object.assign(connection, previousConnection);
+      connection.name += ' (copy)';
+      connection.key = null;
+      this.connectionReference = await this.hubService.GetConnectionReference(connection);
+
+      this.logger.LogC(() => `copy connection, connectionKey ${previousConnectionKey}.`, eLogLevel.Trace);
+      this.updateDatabaseTypes(connection.purpose);
+      this.formsService.connection(connection);
+
+      this.updateUrl();
+
+      this.logger.LogC(() => `new connection, form loaded.`, eLogLevel.Trace);
+    }
+
+    if (this._purposeSubscription) { this._purposeSubscription.unsubscribe(); }
+    this._purposeSubscription = this.formsService.currentForm.controls.purpose.valueChanges.subscribe(purpose => {
+        this.updateDatabaseTypes(purpose);
+    });
   }
 
   private updateUrl() {

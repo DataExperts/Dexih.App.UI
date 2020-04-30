@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { HubCache} from '../../hub.models';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { HubCache, eCacheStatus} from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { AuthService } from '../../../+auth/auth.service';
 import { Observable ,  Subscription, combineLatest} from 'rxjs';
@@ -25,6 +25,7 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
   private hubCache: HubCache;
   public action: string; // new or edit
   public pageTitle: string;
+  public params: Params;
 
   typeCodes = TypeCodes;
   eParameterDirection = eParameterDirection;
@@ -71,65 +72,30 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
         this.hubService.getHubCacheObservable(),
       ).subscribe(result => {
         let data = result[0];
-        let params = result[1];
+        this.params = result[1];
         this.hubCache = result[2];
 
         this.action = data['action'];
         this.pageTitle = data['pageTitle'];
 
-        if (this.hubCache.isLoaded()) {
-          if (!this.hubCache.isLoaded() || this.isLoaded) { return; }
-          this.isLoaded = true;
+        if (!this.hubCache || this.hubCache.status !== eCacheStatus.Loaded ) { return; }
 
-          if (this.action === 'edit') {
-            // get the hub key from the route data, and update the service.
-            this.customFunctionKey = + params['customFunctionKey'];
+        if (this.isLoaded && this.action === 'new') { return; }
 
-            if (!this.customFunctionKey) {
-              this.hubService.addHubErrorMessage('There was no custom function specified to edit.');
-              // this.errorMessage = 'There was no validation specified to edit.';
-            } else {
-              if (!this.hubCache.hub || !this.hubCache.hub.dexihCustomFunctions) {
-                this.hubService.addHubErrorMessage('The hub cache is not loaded.');
-              } else {
-                let customFunction = this.hubCache.hub.dexihCustomFunctions.find(c => c.key === this.customFunctionKey);
-                this.formsService.customFunction(customFunction);
-                this.functionType = this.formsService.currentForm.controls.functionType.value;
-              }
-            }
-          }
-
-          if (this.action === 'new') {
-            let customFunction = new DexihCustomFunction();
-            customFunction.key = this.hubCache.getNextSequence();
-            this.formsService.customFunction(customFunction);
-
-            // update the url with the saved key
-            this._formChangeSubscription = this.formsService.getCurrentFormObservable().subscribe(form => {
-              let key = form.controls.key.value;
-              if (key >= 0) {
-                if (history.pushState) {
-                  let newUrl = window.location.pathname.replace('/customFunction-new', `/customFunction-edit/${key}`)
-                  this.router.navigateByUrl(newUrl);
-                  this._formChangeSubscription.unsubscribe();
+        if (this.isLoaded && this.formsService.hasChanged) {
+            this.authService.confirmDialog('Synchronization warning',
+            'The hub was disconnected, meaning this edit could have been changed by another session.  Would you like to discard the current changes, and reload the latest version?')
+            .then(confirm => {
+                if (confirm) {
+                    this.load();
                 }
-              }
+            }).catch(reason => {
+                return;
             });
-
-            this.functionType = this.formsService.currentForm.controls.functionType.value;
-          }
-
-          this._functionTypeSubscription = this.formsService.currentForm.controls.functionType.valueChanges.subscribe(functionType => {
-            this.functionType = functionType;
-            if (this.functionType === eFunctionType.Condition
-              || this.functionType === eFunctionType.JoinCondition || this.functionType === eFunctionType.Validate) {
-              this.formsService.currentForm.controls.returnType.setValue(eTypeCode.Boolean);
-              this.updateParameters();
-            }
-          });
-
-          this.updateParameters();
+        } else {
+            this.load();
         }
+
       });
     } catch (e) {
       this.hubService.addHubClientErrorMessage(e, 'Column Validation');
@@ -142,6 +108,59 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
     if (this._formChangeSubscription) { this._formChangeSubscription.unsubscribe(); }
     if (this._functionTypeSubscription) { this._functionTypeSubscription.unsubscribe(); }
     this.cancelToken.cancel();
+  }
+
+  private load() {
+    this.isLoaded = true;
+
+    if (this.action === 'edit') {
+      // get the hub key from the route data, and update the service.
+      this.customFunctionKey = + this.params['customFunctionKey'];
+
+      if (!this.customFunctionKey) {
+        this.hubService.addHubErrorMessage('There was no custom function specified to edit.');
+        // this.errorMessage = 'There was no validation specified to edit.';
+      } else {
+        if (!this.hubCache.hub || !this.hubCache.hub.dexihCustomFunctions) {
+          this.hubService.addHubErrorMessage('The hub cache is not loaded.');
+        } else {
+          let customFunction = this.hubCache.hub.dexihCustomFunctions.find(c => c.key === this.customFunctionKey);
+          this.formsService.customFunction(customFunction);
+          this.functionType = this.formsService.currentForm.controls.functionType.value;
+        }
+      }
+    }
+
+    if (this.action === 'new') {
+      let customFunction = new DexihCustomFunction();
+      customFunction.key = this.hubCache.getNextSequence();
+      this.formsService.customFunction(customFunction);
+
+      // update the url with the saved key
+      this._formChangeSubscription = this.formsService.getCurrentFormObservable().subscribe(form => {
+        let key = form.controls.key.value;
+        if (key >= 0) {
+          if (history.pushState) {
+            let newUrl = window.location.pathname.replace('/customFunction-new', `/customFunction-edit/${key}`)
+            this.router.navigateByUrl(newUrl);
+            this._formChangeSubscription.unsubscribe();
+          }
+        }
+      });
+
+      this.functionType = this.formsService.currentForm.controls.functionType.value;
+    }
+
+    this._functionTypeSubscription = this.formsService.currentForm.controls.functionType.valueChanges.subscribe(functionType => {
+      this.functionType = functionType;
+      if (this.functionType === eFunctionType.Condition
+        || this.functionType === eFunctionType.JoinCondition || this.functionType === eFunctionType.Validate) {
+        this.formsService.currentForm.controls.returnType.setValue(eTypeCode.Boolean);
+        this.updateParameters();
+      }
+    });
+
+    this.updateParameters();
   }
 
   canDeactivate(): Promise<boolean> {

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, HostListener, QueryList, ViewChildren } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { HubService } from '../../hub.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { HubFormsService } from '../../hub.forms.service';
@@ -9,7 +9,7 @@ import { DashboardItemComponent } from './item/dashboard-item.component';
 import { EventEmitter } from 'selenium-webdriver';
 import { CancelToken } from '../../../+auth/auth.models';
 import { HubCache, eCacheStatus, DataCache, PreviewResults } from '../../hub.models';
-import { DexihView, DexihDashboard, DexihDashboardItem } from '../../../shared/shared.models';
+import { DexihView, DexihDashboard, DexihDashboardItem, DexihActiveAgent } from '../../../shared/shared.models';
 
 @Component({
   selector: 'dexih-dashboard-edit-form',
@@ -24,6 +24,8 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
   private hubCache: HubCache;
   public action: string; // new or edit
   public pageTitle: string;
+  public params: Params;
+  public remoteAgent: DexihActiveAgent;
 
   private _subscription: Subscription;
   private _formChangeSubscription: Subscription;
@@ -53,73 +55,32 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
         this.hubService.getRemoteAgentObservable()
       ).subscribe(result => {
         let data = result[0];
-        let params = result[1];
+        this.params = result[1];
         this.hubCache = result[2];
-        let remoteAgent = result[3];
+        this.remoteAgent = result[3];
 
         this.action = data['action'];
         this.pageTitle = data['pageTitle'];
 
-        if (!this.hubCache || this.hubCache.status !== eCacheStatus.Loaded) { return; }
+        if (!this.hubCache || this.hubCache.status !== eCacheStatus.Loaded ) { return; }
 
-        if (!this.isLoaded) {
-          this.isLoaded = true;
+        if (this.isLoaded && this.action === 'new') { return; }
 
-          this.views = this.hubCache.hub.dexihViews;
+        this.views = this.hubCache.hub.dexihViews;
 
-          if (this.action === 'edit') {
-            // get the hub key from the route data, and update the service.
-            this.dashboardKey = + params['dashboardKey'];
-
-            if (!this.dashboardKey) {
-              this.hubService.addHubErrorMessage('There was no dashboard specified to edit.');
-            } else {
-              if (!this.hubCache.hub || !this.hubCache.hub.dexihColumnValidations) {
-                this.hubService.addHubErrorMessage('The hub cache is not loaded.');
-              } else {
-                let dashboard = this.hubCache.hub.dexihDashboards.find(c => c.key === this.dashboardKey);
-
-                // create a copy of the dashboard to avoid changes to the hub cache.
-                dashboard = JSON.parse(JSON.stringify(dashboard));
-                this.formsService.dashboard(dashboard);
-              }
-            }
-          }
-
-          if (this.action === 'new') {
-            this.refreshComplete = true;
-            let dashboard = new DexihDashboard();
-            dashboard.minCols = 4;
-            dashboard.maxCols = 100;
-            dashboard.minRows = 4;
-            dashboard.maxRows = 100;
-            dashboard.autoRefresh = true;
-
-            this.formsService.dashboard(dashboard);
-            let runTime = this.formsService.currentForm.controls.runTime.value;
-            runTime.showEdit = true;
-            this.formsService.currentForm.controls.runTime.setValue(runTime);
-            // this.add();
-
-            // update the url with the saved key
-            this._formChangeSubscription = this.formsService.getCurrentFormObservable().subscribe(form => {
-              let key = form.controls.key.value;
-              if (key) {
-                if (history.pushState) {
-                  let newUrl = window.location.pathname.replace('/dashboard-new', `/dashboard-edit/${key}`)
-                  this.router.navigateByUrl(newUrl);
-                  this._formChangeSubscription.unsubscribe();
+        if (this.isLoaded && this.formsService.hasChanged) {
+            this.authService.confirmDialog('Synchronization warning',
+            'The hub was disconnected, meaning this edit could have been changed by another session.  Would you like to discard the current changes, and reload the latest version?')
+            .then(confirm => {
+                if (confirm) {
+                    this.load();
                 }
-              }
+            }).catch(reason => {
+                return;
             });
-          }
+        } else {
+            this.load();
         }
-
-        if (this.formsService.currentForm.controls.autoRefresh.value && remoteAgent && !this.refreshComplete) {
-            this.refreshComplete = true;
-            this.refresh();
-        }
-
       });
     } catch (e) {
       this.hubService.addHubClientErrorMessage(e, 'Dashboard Edit');
@@ -136,6 +97,62 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
     this.authService.navigateUp();
   }
 
+  load() {
+    this.isLoaded = true;
+
+
+    if (this.action === 'edit') {
+      // get the hub key from the route data, and update the service.
+      this.dashboardKey = +this.params['dashboardKey'];
+
+      if (!this.dashboardKey) {
+        this.hubService.addHubErrorMessage('There was no dashboard specified to edit.');
+      } else {
+        if (!this.hubCache.hub || !this.hubCache.hub.dexihColumnValidations) {
+          this.hubService.addHubErrorMessage('The hub cache is not loaded.');
+        } else {
+          let dashboard = this.hubCache.hub.dexihDashboards.find(c => c.key === this.dashboardKey);
+
+          // create a copy of the dashboard to avoid changes to the hub cache.
+          dashboard = JSON.parse(JSON.stringify(dashboard));
+          this.formsService.dashboard(dashboard);
+        }
+      }
+    }
+
+    if (this.action === 'new') {
+      this.refreshComplete = true;
+      let dashboard = new DexihDashboard();
+      dashboard.minCols = 4;
+      dashboard.maxCols = 100;
+      dashboard.minRows = 4;
+      dashboard.maxRows = 100;
+      dashboard.autoRefresh = true;
+
+      this.formsService.dashboard(dashboard);
+      let runTime = this.formsService.currentForm.controls.runTime.value;
+      runTime.showEdit = true;
+      this.formsService.currentForm.controls.runTime.setValue(runTime);
+      // this.add();
+
+      // update the url with the saved key
+      this._formChangeSubscription = this.formsService.getCurrentFormObservable().subscribe(form => {
+        let key = form.controls.key.value;
+        if (key) {
+          if (history.pushState) {
+            let newUrl = window.location.pathname.replace('/dashboard-new', `/dashboard-edit/${key}`)
+            this.router.navigateByUrl(newUrl);
+            this._formChangeSubscription.unsubscribe();
+          }
+        }
+      });
+    }
+
+    if (this.formsService.currentForm.controls.autoRefresh.value && this.remoteAgent && !this.refreshComplete) {
+      this.refreshComplete = true;
+      this.refresh();
+    }
+  }
 
   // add() {
   //   let form = this.formsService.currentForm;

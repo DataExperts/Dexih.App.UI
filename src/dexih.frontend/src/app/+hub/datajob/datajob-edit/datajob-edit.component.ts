@@ -1,6 +1,6 @@
 import { HostListener, Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Route, Router } from '@angular/router';
-import { HubCache } from '../../hub.models';
+import { ActivatedRoute, Route, Router, Params } from '@angular/router';
+import { HubCache, eCacheStatus } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { AuthService } from '../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
@@ -17,6 +17,7 @@ export class DatajobEditComponent implements OnInit, OnDestroy {
   public hubCache: HubCache;
   public action: string; // new or edit
   public pageTitle: string;
+  public params: Params;
 
   private _subscription: Subscription;
   private _formChangeSubscription: Subscription;
@@ -39,61 +40,31 @@ export class DatajobEditComponent implements OnInit, OnDestroy {
         this.hubService.getHubCacheObservable(true),
       ).subscribe(result => {
         let data = result[0];
-        let params = result[1];
+        this.params = result[1];
         this.hubCache = result[2];
 
         this.action = data['action'];
         this.pageTitle = data['pageTitle'];
 
-        // if (!this.hubCache.isLoaded() || this.isLoaded) { return; }
+        if (!this.hubCache || this.hubCache.status !== eCacheStatus.Loaded ) { return; }
 
-        this.isLoaded = true;
+        if (this.isLoaded && this.action === 'new') { return; }
 
-        if (this.action === 'edit') {
-          // get the hub key from the route data, and update the service.
-          this.datajobKey = + params['datajobKey'];
-
-          if (!this.datajobKey) {
-            this.hubService.addHubErrorMessage('There was no datajob specified to edit.');
-          } else {
-            if (!this.hubCache.hub || !this.hubCache.hub.dexihDatajobs) {
-              this.hubService.addHubErrorMessage('The hub cache is not loaded.');
-            } else {
-
-              let datajob = this.hubCache.hub.dexihDatajobs.find(c => c.key === this.datajobKey);
-              if (!datajob) {
-                this.hubService.addHubErrorMessage('The specified datajob could not be found.');
-              } else {
-                this.formsService.datajob(datajob);
-              }
-            }
-          }
+        if (this.isLoaded && this.formsService.hasChanged) {
+            this.authService.confirmDialog('Synchronization warning',
+            'The hub was disconnected, meaning this edit could have been changed by another session.  Would you like to discard the current changes, and reload the latest version?')
+            .then(confirm => {
+                if (confirm) {
+                    this.load();
+                }
+            }).catch(reason => {
+                return;
+            });
+        } else {
+            this.load();
         }
 
-        if (this.action === 'new') {
-          let datajob: DexihDatajob;
-          if (this.hubService.newDatajob) {
-            datajob = this.hubService.newDatajob;
-            this.hubService.newDatajob = null;
-          } else {
-            datajob = this.hubService.createDefaultDatajob();
-            datajob.key = 0;
-          }
 
-          this.formsService.datajob(datajob);
-
-          // update the url with the saved key
-          this._formChangeSubscription = this.formsService.getCurrentFormObservable().subscribe(form => {
-            let key = form.controls.key.value;
-            if (key) {
-              if (history.pushState) {
-                let newUrl = window.location.pathname.replace('/datajob-new', `/datajob-edit/${key}`)
-                this.router.navigateByUrl(newUrl);
-                this._formChangeSubscription.unsubscribe();
-              }
-            }
-          });
-        }
       });
     } catch (e) {
       this.hubService.addHubClientErrorMessage(e, 'Datajob Edit');
@@ -108,6 +79,56 @@ export class DatajobEditComponent implements OnInit, OnDestroy {
     if (this._formChangeSubscription) { this._formChangeSubscription.unsubscribe(); }
 
     this.formsService.ngOnDestroy();
+  }
+
+  load() {
+    this.isLoaded = true;
+
+    if (this.action === 'edit') {
+      // get the hub key from the route data, and update the service.
+      this.datajobKey = + this.params['datajobKey'];
+
+      if (!this.datajobKey) {
+        this.hubService.addHubErrorMessage('There was no datajob specified to edit.');
+      } else {
+        if (!this.hubCache.hub || !this.hubCache.hub.dexihDatajobs) {
+          this.hubService.addHubErrorMessage('The hub cache is not loaded.');
+        } else {
+
+          let datajob = this.hubCache.hub.dexihDatajobs.find(c => c.key === this.datajobKey);
+          if (!datajob) {
+            this.hubService.addHubErrorMessage('The specified datajob could not be found.');
+          } else {
+            this.formsService.datajob(datajob);
+          }
+        }
+      }
+    }
+
+    if (this.action === 'new') {
+      let datajob: DexihDatajob;
+      if (this.hubService.newDatajob) {
+        datajob = this.hubService.newDatajob;
+        this.hubService.newDatajob = null;
+      } else {
+        datajob = this.hubService.createDefaultDatajob();
+        datajob.key = 0;
+      }
+
+      this.formsService.datajob(datajob);
+
+      // update the url with the saved key
+      this._formChangeSubscription = this.formsService.getCurrentFormObservable().subscribe(form => {
+        let key = form.controls.key.value;
+        if (key) {
+          if (history.pushState) {
+            let newUrl = window.location.pathname.replace('/datajob-new', `/datajob-edit/${key}`)
+            this.router.navigateByUrl(newUrl);
+            this._formChangeSubscription.unsubscribe();
+          }
+        }
+      });
+    }
   }
 
   public canDeactivate(): Promise<boolean> {

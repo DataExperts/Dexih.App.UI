@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { HubCache, InvalidActions, CleanActions, eCacheStatus } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { AuthService } from '../../../+auth/auth.service';
@@ -21,6 +21,7 @@ export class ColumnValidationEditComponent implements OnInit, OnDestroy {
 
   private hubCache: HubCache;
   public action: string; // new or edit
+  public params: Params;
   public pageTitle: string;
 
   eInvalidAction = eInvalidAction;
@@ -47,6 +48,7 @@ export class ColumnValidationEditComponent implements OnInit, OnDestroy {
   private _subscription: Subscription;
   private _formChangeSubscription: Subscription;
   private _hubCacheChangeSubscription: Subscription;
+  private _lookupColumnSubscription: Subscription;
 
   constructor(private hubService: HubService,
     private authService: AuthService,
@@ -63,56 +65,28 @@ export class ColumnValidationEditComponent implements OnInit, OnDestroy {
         this.hubService.getHubCacheObservable(),
       ).subscribe(result => {
         let data = result[0];
-        let params = result[1];
+        this.params = result[1];
         this.hubCache = result[2];
 
         this.action = data['action'];
         this.pageTitle = data['pageTitle'];
 
-        if (this.hubCache.isLoaded()) {
-          if (!this.hubCache || this.hubCache.status !== eCacheStatus.Loaded || this.isLoaded) { return; }
-          this.isLoaded = true;
+        if (!this.hubCache || this.hubCache.status !== eCacheStatus.Loaded ) { return; }
 
-          this.connections = this.hubCache.getConnectionTables();
+        if (this.isLoaded && this.action === 'new') { return; }
 
-          if (this.action === 'edit') {
-            // get the hub key from the route data, and update the service.
-            this.columnValidationKey = + params['validationKey'];
-
-            if (!this.columnValidationKey) {
-              this.hubService.addHubErrorMessage('There was no validation specified to edit.');
-              // this.errorMessage = 'There was no validation specified to edit.';
-            } else {
-              if (!this.hubCache.hub || !this.hubCache.hub.dexihColumnValidations) {
-                this.hubService.addHubErrorMessage('The hub cache is not loaded.');
-              } else {
-                let validation = this.hubCache.hub.dexihColumnValidations.find(c => c.key === this.columnValidationKey);
-                this.formsService.validation(validation);
-              }
-            }
-          }
-
-          if (this.action === 'new') {
-            let validation = new DexihColumnValidation();
-            this.formsService.validation(validation);
-
-            // update the url with the saved key
-            this._formChangeSubscription = this.formsService.getCurrentFormObservable().subscribe(form => {
-              let key = form.controls.key.value;
-              if (key) {
-                if (history.pushState) {
-                  let newUrl = window.location.pathname.replace('/columnValidation-new', `/columnValidation-edit/${key}`)
-                  this.router.navigateByUrl(newUrl);
-                  this._formChangeSubscription.unsubscribe();
+        if (this.isLoaded && this.formsService.hasChanged) {
+            this.authService.confirmDialog('Synchronization warning',
+            'The hub was disconnected, meaning this edit could have been changed by another session.  Would you like to discard the current changes, and reload the latest version?')
+            .then(confirm => {
+                if (confirm) {
+                    this.load();
                 }
-              }
+            }).catch(reason => {
+                return;
             });
-          }
-
-          this.getValidationLookupColumn();
-          this.formsService.currentForm.controls.lookupColumnKey.valueChanges.subscribe(() => {
-            this.getValidationLookupColumn();
-          });
+        } else {
+            this.load();
         }
       });
     } catch (e) {
@@ -124,7 +98,54 @@ export class ColumnValidationEditComponent implements OnInit, OnDestroy {
     if (this._hubCacheChangeSubscription) { this._hubCacheChangeSubscription.unsubscribe(); }
     if (this._subscription) { this._subscription.unsubscribe(); }
     if (this._formChangeSubscription) { this._formChangeSubscription.unsubscribe(); }
+    if (this._lookupColumnSubscription) { this._lookupColumnSubscription.unsubscribe(); }
     this.cancelToken.cancel();
+  }
+
+  private load() {
+    this.connections = this.hubCache.getConnectionTables();
+
+    if (this.action === 'edit') {
+      // get the hub key from the route data, and update the service.
+      this.columnValidationKey = +this.params['validationKey'];
+
+      if (!this.columnValidationKey) {
+        this.hubService.addHubErrorMessage('There was no validation specified to edit.');
+        // this.errorMessage = 'There was no validation specified to edit.';
+      } else {
+        if (!this.hubCache.hub || !this.hubCache.hub.dexihColumnValidations) {
+          this.hubService.addHubErrorMessage('The hub cache is not loaded.');
+        } else {
+          let validation = this.hubCache.hub.dexihColumnValidations.find(c => c.key === this.columnValidationKey);
+          this.formsService.validation(validation);
+        }
+      }
+    }
+
+    if (this.action === 'new') {
+      let validation = new DexihColumnValidation();
+      this.formsService.validation(validation);
+
+      // update the url with the saved key
+      this._formChangeSubscription = this.formsService.getCurrentFormObservable().subscribe(form => {
+        let key = form.controls.key.value;
+        if (key) {
+          if (history.pushState) {
+            let newUrl = window.location.pathname.replace('/columnValidation-new', `/columnValidation-edit/${key}`)
+            this.router.navigateByUrl(newUrl);
+            this._formChangeSubscription.unsubscribe();
+          }
+        }
+      });
+    }
+
+    this.isLoaded = true;
+
+    this.getValidationLookupColumn();
+    if (this._lookupColumnSubscription) { this._lookupColumnSubscription.unsubscribe(); }
+    this._lookupColumnSubscription = this.formsService.currentForm.controls.lookupColumnKey.valueChanges.subscribe(() => {
+      this.getValidationLookupColumn();
+    });
   }
 
   getValidationLookupColumn() {

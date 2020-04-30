@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { HubService } from '../../hub.service';
 import { Subscription, combineLatest, merge, Subject } from 'rxjs';
 import { HubFormsService } from '../../hub.forms.service';
@@ -8,7 +8,7 @@ import { InputOutputColumns } from '../../hub.lineage.models';
 import { CancelToken } from '../../../+auth/auth.models';
 import { HubCache, ConnectionTables, eCacheStatus } from '../../hub.models';
 import { eViewType, DexihDatalink, InputColumn, DexihColumnBase, SelectQuery,
-  DexihView, DownloadObject, eDataObjectType, eSourceType, ChartConfig, InputParameterBase } from '../../../shared/shared.models';
+  DexihView, DownloadObject, eDataObjectType, eSourceType, ChartConfig, InputParameterBase, DexihActiveAgent } from '../../../shared/shared.models';
 
 @Component({
   selector: 'dexih-view-edit-form',
@@ -21,6 +21,8 @@ export class ViewEditComponent implements OnInit, OnDestroy {
   private hubCache: HubCache;
   public action: string; // new or edit
   public pageTitle: string;
+  public params: Params;
+  public remoteAgent: DexihActiveAgent;
 
   public showEdit = false;
   public hasEdited = false;
@@ -77,100 +79,113 @@ export class ViewEditComponent implements OnInit, OnDestroy {
         this.hubService.getRemoteAgentObservable()
       ).subscribe(result => {
         let data = result[0];
-        let params = result[1];
+        this.params = result[1];
         this.hubCache = result[2];
-        let remoteAgent = result[3];
+        this.remoteAgent = result[3];
 
         this.action = data['action'];
         this.pageTitle = data['pageTitle'];
 
-        if (this.hubCache.isLoaded()) {
-          if (!this.hubCache || this.hubCache.status !== eCacheStatus.Loaded) { return; }
+        if (!this.hubCache || this.hubCache.status !== eCacheStatus.Loaded ) { return; }
 
-          if (!this.isLoaded) {
-            this.isLoaded = true;
+        if (this.isLoaded && this.action === 'new') { return; }
 
-            if (this.hubCache && this.hubCache.isLoaded()) {
-              this.connectionTables = this.hubCache.getConnectionTables();
-              this.datalinks = this.hubCache.hub.dexihDatalinks;
-            }
-
-            if (this.action === 'edit') {
-              // get the hub key from the route data, and update the service.
-              this.viewKey = + params['viewKey'];
-
-              if (!this.viewKey) {
-                this.hubService.addHubErrorMessage('There was no view specified to edit.');
-              } else {
-                if (!this.hubCache.hub || !this.hubCache.hub.dexihColumnValidations) {
-                  this.hubService.addHubErrorMessage('The hub cache is not loaded.');
-                } else {
-
-                  let view = this.hubCache.hub.dexihViews.find(c => c.key === this.viewKey);
-
-                  // create a copy of the view to avoid changes to the hub cache.
-                  view = JSON.parse(JSON.stringify(view));
-                  if (view.selectQuery == null) {
-                    view.selectQuery = new SelectQuery();
-                  }
-                  this.selectQuery = view.selectQuery;
-                  this.inputColumns = view.inputValues;
-                  this.showChart = view.viewType === eViewType.Chart;
-
-                  this.formsService.view(view);
-                  this.watchChanges();
-
-                  this.getColumns();
+        if (this.isLoaded && this.formsService.hasChanged) {
+            this.authService.confirmDialog('Synchronization warning',
+            'The hub was disconnected, meaning this edit could have been changed by another session.  Would you like to discard the current changes, and reload the latest version?')
+            .then(confirm => {
+                if (confirm) {
+                    this.load();
                 }
-              }
-            }
-
-            if (this.action === 'new') {
-              let view = new DexihView();
-              view.selectQuery = new SelectQuery();
-              this.formsService.view(view);
-              this.watchChanges();
-              this.showEdit = true;
-
-              // update the url with the saved key
-              this._formChangeSubscription = this.formsService.getCurrentFormObservable().subscribe(form => {
-                let key = form.controls.key.value;
-                if (key) {
-                  if (history.pushState) {
-                    let newUrl = window.location.pathname.replace('/view-new', `/view-edit/${key}`)
-                    this.router.navigateByUrl(newUrl);
-                    this._formChangeSubscription.unsubscribe();
-                  }
-                }
-              });
-            }
-          }
-
-          if (remoteAgent) {
-            if (!this.firstLoad) {
-              if (!this.dialogOpen) {
-                this.dialogOpen = true;
-                this.authService.confirmDialog('Remote Agent Available',
-                  'A remote agent is available, would you like to refresh the data?').then(confirm => {
-                    if (confirm) {
-                      this.refresh();
-                    }
-                    this.dialogOpen = false;
-                  });
-              }
-            } else {
-              if (this.formsService.currentForm.controls.autoRefresh.value) {
-                this.refresh();
-              }
-            }
-          }
+            }).catch(reason => {
+                return;
+            });
+        } else {
+            this.load();
         }
-
 
       });
     } catch (e) {
       this.hubService.addHubClientErrorMessage(e, 'View Edit');
     }
+  }
+
+  load() {
+    this.isLoaded = true;
+
+    if (this.hubCache && this.hubCache.isLoaded()) {
+      this.connectionTables = this.hubCache.getConnectionTables();
+      this.datalinks = this.hubCache.hub.dexihDatalinks;
+    }
+
+    if (this.action === 'edit') {
+      // get the hub key from the route data, and update the service.
+      this.viewKey = + this.params['viewKey'];
+
+      if (!this.viewKey) {
+        this.hubService.addHubErrorMessage('There was no view specified to edit.');
+      } else {
+        if (!this.hubCache.hub || !this.hubCache.hub.dexihColumnValidations) {
+          this.hubService.addHubErrorMessage('The hub cache is not loaded.');
+        } else {
+
+          let view = this.hubCache.hub.dexihViews.find(c => c.key === this.viewKey);
+
+          // create a copy of the view to avoid changes to the hub cache.
+          view = JSON.parse(JSON.stringify(view));
+          if (view.selectQuery == null) {
+            view.selectQuery = new SelectQuery();
+          }
+          this.selectQuery = view.selectQuery;
+          this.inputColumns = view.inputValues;
+          this.showChart = view.viewType === eViewType.Chart;
+
+          this.formsService.view(view);
+          this.watchChanges();
+
+          this.getColumns();
+        }
+      }
+    }
+
+    if (this.action === 'new') {
+      let view = new DexihView();
+      view.selectQuery = new SelectQuery();
+      this.formsService.view(view);
+      this.watchChanges();
+      this.showEdit = true;
+
+      // update the url with the saved key
+      this._formChangeSubscription = this.formsService.getCurrentFormObservable().subscribe(form => {
+        let key = form.controls.key.value;
+        if (key) {
+          if (history.pushState) {
+            let newUrl = window.location.pathname.replace('/view-new', `/view-edit/${key}`)
+            this.router.navigateByUrl(newUrl);
+            this._formChangeSubscription.unsubscribe();
+          }
+        }
+      });
+    }
+
+  if (this.remoteAgent) {
+    if (!this.firstLoad) {
+      if (!this.dialogOpen) {
+        this.dialogOpen = true;
+        this.authService.confirmDialog('Remote Agent Available',
+          'A remote agent is available, would you like to refresh the data?').then(confirm => {
+            if (confirm) {
+              this.refresh();
+            }
+            this.dialogOpen = false;
+          });
+      }
+    } else {
+      if (this.formsService.currentForm.controls.autoRefresh.value) {
+        this.refresh();
+      }
+    }
+  }
   }
 
   watchChanges() {
