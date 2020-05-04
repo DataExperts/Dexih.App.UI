@@ -9,6 +9,7 @@ import { ChartBuilderModule } from '../chartBuilder/chart-builder.module';
 import { GridsterModule} from 'angular-gridster2';
 import { DexihMessageModule } from '../dexihMessage';
 import { DexihIconsModule } from '../icons';
+import { SeriesAnimateModule} from '../seriesAnimate/series-animate.module';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { DexihIconsModule } from '../icons';
     ChartBuilderModule,
     GridsterModule,
     DexihMessageModule,
-    DexihIconsModule
+    DexihIconsModule,
+    SeriesAnimateModule
   ],
   declarations: [
     SharedDataComponent, PreviewDataComponent, PreviewDashboardComponent, PreviewDashboardItemComponent, PreviewComponent,

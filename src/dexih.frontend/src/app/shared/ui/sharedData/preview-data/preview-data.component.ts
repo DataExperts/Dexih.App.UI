@@ -5,7 +5,7 @@ import { Subscription, combineLatest, Subject} from 'rxjs';
 import { DexihMessageComponent } from '../../../../shared/ui/dexihMessage/index';
 import { CancelToken, Message } from '../../../../+auth/auth.models';
 import { InputColumn, DexihColumnBase, SelectQuery, eDownloadFormat, SharedData, eDataObjectType,
-    ChartConfig, InputParameterBase, InputParameter } from '../../../shared.models';
+    ViewConfig, InputParameterBase, eViewType } from '../../../shared.models';
 
 @Component({
 
@@ -41,9 +41,12 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
     columns: Array<any>;
     selectQuery: SelectQuery = new SelectQuery();
 
+    public baseData: Array<any>;
     public data: Array<any>;
-    public chartConfig: ChartConfig;
+    public viewConfig: ViewConfig;
     public showChart = false;
+
+    public eViewType = eViewType;
 
     private cancelToken = new CancelToken();
 
@@ -102,17 +105,17 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
             this.parameters, this.cancelToken).then((result) => {
                 this.refreshDataSubject.next();
                 this.columns = result.columns;
-                this.data = result.data;
+                this.baseData = result.data;
                 this.name = result.name;
-                this.chartConfig = result.chartConfig;
-                if (this.chartConfig) {
+                this.viewConfig = result.viewConfig;
+                if (this.viewConfig && this.viewConfig.viewType === eViewType.Chart) {
                     this.showChart = true;
                 } else {
                     this.showChart = false;
                 }
             }).catch(reason => {
                 this.dexihMessage.addMessage(reason);
-                this.data = [];
+                this.baseData = [];
                 this.name = 'failed';
             });
     }

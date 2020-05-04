@@ -5,8 +5,10 @@ import { DexihHubVariable, DexihHub, DexihFunctionParameter, DexihConnection, De
     DexihDatalinkTest, DexihDatajob, DexihView, DexihDashboard, DexihApi, DexihCustomFunction,
     DexihTrigger, TransformProperties, eStatus, eParameterDirection, eConnectionPurpose, eDeltaType,
     eSourceType, eImportAction, eSecurityFlag, eUpdateStrategy, eFailAction, eInvalidAction,
-    eFunctionCaching, eCleanAction, eDuplicateStrategy, eRunStatus, ePermission, eTypeCode,
-    eTransformWriterMethod, eTransformItemType, eFunctionType, eDataObjectType, eSharedObjectType, eSortDirection, eSeriesGrain, eDayOfWeek, ChartConfig, eLOVObjectType, DexihListOfValues, InputParameterBase, DexihDatalinkTestStep, eTransformTypeItems, eTransformType, DexihTag } from '../shared/shared.models';
+    eFunctionCaching, eCleanAction, eRunStatus, ePermission, eTypeCode,
+    eTransformWriterMethod, eTransformItemType, eFunctionType, eDataObjectType, eSharedObjectType,
+    eSortDirection, eSeriesGrain, eDayOfWeek, ChartConfig, eLOVObjectType, DexihListOfValues, InputParameterBase,
+    DexihDatalinkTestStep, eTransformTypeItems, eTransformType, DexihTag, ViewConfig } from '../shared/shared.models';
 
 // export class RemoteMessage {
 //     public messageId: string;
@@ -2757,7 +2759,7 @@ export class ConnectionTables extends DexihConnection {
 export class PreviewResults {
     public name: string;
     public columns: Array<any>;
-    public chartConfig: ChartConfig;
+    public viewConfig: ViewConfig;
     public data: Array<any>;
     public transformProperties: TransformProperties;
     public status: Message;

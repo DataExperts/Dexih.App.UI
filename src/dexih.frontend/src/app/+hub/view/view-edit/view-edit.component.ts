@@ -8,7 +8,8 @@ import { InputOutputColumns } from '../../hub.lineage.models';
 import { CancelToken } from '../../../+auth/auth.models';
 import { HubCache, ConnectionTables, eCacheStatus } from '../../hub.models';
 import { eViewType, DexihDatalink, InputColumn, DexihColumnBase, SelectQuery,
-  DexihView, DownloadObject, eDataObjectType, eSourceType, ChartConfig, InputParameterBase, DexihActiveAgent } from '../../../shared/shared.models';
+  DexihView, DownloadObject, eDataObjectType, ChartConfig, InputParameterBase, DexihActiveAgent, AnimateConfig } from '../../../shared/shared.models';
+import { Functions } from '../../../shared/utils/functions';
 
 @Component({
   selector: 'dexih-view-edit-form',
@@ -47,7 +48,6 @@ export class ViewEditComponent implements OnInit, OnDestroy {
   public showChart = false;
   public inputColumns: InputColumn[];
   public tableColumns: DexihColumnBase[];
-  selectQuery: SelectQuery = new SelectQuery();
 
   datalinkParameters: InputParameterBase[];
 
@@ -57,9 +57,31 @@ export class ViewEditComponent implements OnInit, OnDestroy {
   private dialogOpen = false;
 
   columns: Array<any>;
+  public baseData: Array<any>;
   public data: Array<any>;
 
+  public animationValues = [];
+  public animationValue;
+  public animationTimer;
+  public animationColumnIndex: number;
+  public animationRowIndex: number;
+  public animationPaused = false;
+
   private cancelToken = new CancelToken();
+
+  get animateConfig(): AnimateConfig {
+    return this.formsService?.currentForm?.controls.animateConfig.value;
+  }
+  set animateConfig(value: AnimateConfig) {
+    this.formsService?.currentForm?.controls.animateConfig.setValue(value);
+  }
+
+  get selectQuery(): SelectQuery {
+    return this.formsService?.currentForm?.controls.selectQuery.value;
+  }
+  set selectQuery(value: SelectQuery) {
+    this.formsService?.currentForm?.controls.selectQuery.setValue(value);
+  }
 
   constructor(
     private hubService: HubService,
@@ -97,7 +119,7 @@ export class ViewEditComponent implements OnInit, OnDestroy {
                 if (confirm) {
                     this.load();
                 }
-            }).catch(reason => {
+            }).catch(() => {
                 return;
             });
         } else {
@@ -136,11 +158,15 @@ export class ViewEditComponent implements OnInit, OnDestroy {
           if (view.selectQuery == null) {
             view.selectQuery = new SelectQuery();
           }
-          this.selectQuery = view.selectQuery;
+
+          if (view.animateConfig == null) {
+            view.animateConfig = new AnimateConfig()
+          }
           this.inputColumns = view.inputValues;
           this.showChart = view.viewType === eViewType.Chart;
 
           this.formsService.view(view);
+
           this.watchChanges();
 
           this.getColumns();
@@ -151,6 +177,7 @@ export class ViewEditComponent implements OnInit, OnDestroy {
     if (this.action === 'new') {
       let view = new DexihView();
       view.selectQuery = new SelectQuery();
+      view.animateConfig = new AnimateConfig();
       this.formsService.view(view);
       this.watchChanges();
       this.showEdit = true;
@@ -196,6 +223,7 @@ export class ViewEditComponent implements OnInit, OnDestroy {
     ).subscribe(() => {
       this.reset();
       this.selectQuery = new SelectQuery();
+      this.animateConfig = new AnimateConfig();
       this.getColumns();
       this.refresh();
     });
@@ -290,6 +318,7 @@ export class ViewEditComponent implements OnInit, OnDestroy {
     this.inputColumns = [];
     this.columns = null;
     this.data = null;
+    this.baseData = null;
   }
 
   refresh() {
@@ -305,9 +334,9 @@ export class ViewEditComponent implements OnInit, OnDestroy {
       parameters = parameters.concat(this.datalinkParameters);
     }
 
-
     let view = <DexihView>viewForm.value;
     view.selectQuery = viewForm.controls.selectQuery.value;
+    view.animateConfig = viewForm.controls.animateConfig.value;
 
     if ((view.sourceType === eDataObjectType.Table && view.sourceTableKey > 0) ||
       (view.sourceType === eDataObjectType.Datalink && view.sourceDatalinkKey > 0)) {
@@ -315,7 +344,13 @@ export class ViewEditComponent implements OnInit, OnDestroy {
       this.hubService.previewView(viewForm.value, this.inputColumns, parameters, this.cancelToken).then((result) => {
         this.refreshDataSubject.next();
         this.columns = result.columns;
-        this.data = result.data;
+        this.baseData = result.data;
+
+        if (!this.animateConfig.seriesColumn) {
+        //   this.initializeAnimation();
+        // } else {
+          this.data = this.baseData;
+        }
       }).catch(() => {
       });
     }
@@ -351,6 +386,111 @@ export class ViewEditComponent implements OnInit, OnDestroy {
     this.showEdit = !this.showEdit;
     this.hasEdited = true;
   }
+
+  // initializeAnimation() {
+  //   this.animationStop();
+  //   this.animationSeriesValues();
+  //   this.animationRowIndex = 0;
+
+  //   if (this.animateConfig.automatic) {
+  //     this.animationPlay();
+  //   } else {
+
+  //   }
+  // }
+
+//   animationSeriesValues() {
+//     this.animationColumnIndex = this.columns.findIndex(c => c.title === this.animateConfig.seriesColumn);
+//     const format = this.columns[this.animationColumnIndex].format;
+//     const values = Array.from(new Set(this.baseData.map(c => c[this.animationColumnIndex]))).sort((a, b) => a - b);
+//     this.animationValues = values.map(c => {
+//       return {
+//         name: Functions.formatValue(c, format),
+//         value: c
+//       }
+//     });
+//   }
+
+//   animationFilter() {
+//     const value = this.animationValues[this.animationRowIndex].value;
+//     this.animationValue = value;
+//     this.data = this.baseData.filter(c => c[this.animationColumnIndex] === value );
+// }
+
+//   animationPlay() {
+
+//     if (this.animationColumnIndex >= 0) {
+//         if(!this.animationPaused) {
+//           this.animationRowIndex = 0;
+//         }
+//         this.animationStop();
+
+//         this.animationTimer = setInterval(() => {
+//           if (this.animationRowIndex + 1 >= this.animationValues.length) {
+//             clearInterval(this.animationTimer);
+//           } else {
+//             this.animationFilter();
+
+//             // at last item, then stop.
+//             if (this.animationRowIndex + 1 >= this.animationValues.length) {
+//               clearInterval();
+//             } else {
+//               this.animationRowIndex++;
+//             }
+//         }
+//         }, this.animateConfig.delay);
+
+//     } else {
+//       this.hubService.addHubErrorMessage('The animation did not start as a series column is not set.');
+//     }
+//   }
+
+//   animationPause() {
+//     if (this.animationTimer) {
+//       this.animationPaused = true;
+//       clearInterval(this.animationTimer);
+//     }
+//   }
+
+//   animationStepForward() {
+//     if (this.animationRowIndex + 1 < this.animationValues.length) {
+//       this.animationRowIndex++;
+//       this.animationFilter();
+//     }
+//   }
+
+//   animationStepBackward() {
+//     if (this.animationRowIndex > 0) {
+//       this.animationRowIndex--;
+//       this.animationFilter();
+//     }
+//   }
+
+//   animationLast() {
+//     if (this.animationRowIndex + 1 < this.animationValues.length) {
+//       this.animationRowIndex = this.animationValues.length - 1;
+//       this.animationFilter();
+//     }
+//   }
+
+//   animationFirst() {
+//     if (this.animationRowIndex > 0) {
+//       this.animationRowIndex = 0;
+//       this.animationFilter();
+//     }
+//   }
+
+//   animationChange($event) {
+//     this.animationRowIndex = this.animationValues.indexOf($event.value);
+//     this.animationFilter();
+//   }
+
+//   animationStop() {
+//     this.animationPaused = false;
+//     if (this.animationTimer) {
+//       clearInterval(this.animationTimer);
+//     }
+//   }
 
   public canDeactivate(): Promise<boolean> {
     return new Promise<boolean>((resolve) => {

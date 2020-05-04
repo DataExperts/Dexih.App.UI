@@ -111,21 +111,17 @@ namespace dexih.api.Controllers
                             throw new Exception($"The view {view.Name} is not shared.");
                         }                    
                     }
-
-                    if (view.ViewType == EViewType.Chart)
-                    {
-                        chartConfig = view.ChartConfig;
-                    }
+                    
                     var selectQuery = view.SelectQuery ?? new SelectQuery();
                     selectQuery.Rows = previewData.SelectQuery.Rows;
 
                     switch (view.SourceType)
                     {
                         case EDataObjectType.Table:
-                            data = await _remoteAgents.PreviewTable(previewData.RemoteAgentId, previewData.HubKey, previewData.DownloadUrl, view.SourceTableKey.Value, selectQuery, view.ChartConfig, previewData.InputColumns, previewData.Parameters, false, false, repositoryManager, cancellationToken);
+                            data = await _remoteAgents.PreviewTable(previewData.RemoteAgentId, previewData.HubKey, previewData.DownloadUrl, view.SourceTableKey.Value, selectQuery, view.GetViewConfig(), previewData.InputColumns, previewData.Parameters, false, false, repositoryManager, cancellationToken);
                             break;
                         case EDataObjectType.Datalink:
-                            data = await _remoteAgents.PreviewDatalink(previewData.RemoteAgentId, previewData.HubKey, previewData.DownloadUrl, view.SourceDatalinkKey.Value, false, selectQuery, view.ChartConfig, previewData.InputColumns, previewData.Parameters, false, repositoryManager, cancellationToken);
+                            data = await _remoteAgents.PreviewDatalink(previewData.RemoteAgentId, previewData.HubKey, previewData.DownloadUrl, view.SourceDatalinkKey.Value, false, selectQuery, view.GetViewConfig(), previewData.InputColumns, previewData.Parameters, false, repositoryManager, cancellationToken);
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
@@ -255,12 +251,12 @@ namespace dexih.api.Controllers
                 case EDataObjectType.Table:
                     return await _remoteAgents.PreviewTable(previewDashboard.RemoteAgentId,
                         previewDashboard.HubKey, previewDashboard.DownloadUrl, view.SourceTableKey.Value,
-                        view.SelectQuery, view.ChartConfig, view.InputValues, itemParameters, false, false, repositoryManager,
+                        view.SelectQuery, view.GetViewConfig(), view.InputValues, itemParameters, false, false, repositoryManager,
                         cancellationToken);
                 case EDataObjectType.Datalink:
                     return await _remoteAgents.PreviewDatalink(previewDashboard.RemoteAgentId,
                         previewDashboard.HubKey, previewDashboard.DownloadUrl, view.SourceDatalinkKey.Value, false,
-                        view.SelectQuery, view.ChartConfig, view.InputValues, itemParameters, false, repositoryManager,
+                        view.SelectQuery, view.GetViewConfig(), view.InputValues, itemParameters, false, repositoryManager,
                         cancellationToken);
                 default:
                     throw new ArgumentOutOfRangeException();

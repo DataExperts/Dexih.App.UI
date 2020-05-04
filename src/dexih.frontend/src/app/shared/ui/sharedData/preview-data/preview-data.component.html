@@ -5,7 +5,7 @@
 <div *ngIf="showToolbar" class="floating-toolbar">
     <download-button class="ml-1" (download)="downloadData($event)"></download-button>
 
-    <div *ngIf="chartConfig" class="btn-group btn-group-toggle ml-1" data-toggle="buttons" title="Table">
+    <div *ngIf="viewConfig?.viewType === eViewType.Chart" class="btn-group btn-group-toggle ml-1" data-toggle="buttons" title="Table">
         <label class="btn btn-primary" [ngClass]="{active: showChart===false}">
             <input type="radio" name="options" value="table" autocomplete="off" (click)="showChart = false">
             <i class="fa fa-table"></i>
@@ -30,7 +30,10 @@
     <div class="dexih-loader"></div> &nbsp; &nbsp; Loading ...
 </div>
 
+<series-animate *ngIf="baseData" [showEdit]="false" [animateConfig]="viewConfig.animateConfig" [columns]="columns" (hasChanged)="hasChanged()" [baseData]="baseData" [(data)]="data"></series-animate>
+
 <div class="h-100" *ngIf="data">
+
     <dexih-table *ngIf="!showChart" [enableMultiSelect]="false" [enableSaveCsv]="true" [csvFileName]="name" [enableFilter]="false"
         [columns]="columns" [data]="data">
 
@@ -46,6 +49,6 @@
         *ngIf="showChart"
         [columns]="columns" 
         [data]="data" 
-        [config]="chartConfig">
+        [config]="viewConfig.chartConfig">
     </chart-view>
 </div>

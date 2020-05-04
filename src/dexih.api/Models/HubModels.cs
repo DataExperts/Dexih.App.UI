@@ -4,6 +4,7 @@ using dexih.repository;
 using dexih.functions;
 using dexih.functions.Query;
 using dexih.transforms;
+using dexih.transforms.View;
 using Dexih.Utils.DataType;
 using static dexih.operations.DownloadData;
 
@@ -189,7 +190,7 @@ namespace dexih.api.Models
         public InputColumn[] InputColumns { get; set; }
         public InputParameters InputParameters { get; set; }
         
-        public ChartConfig ChartConfig { get; set; }
+        public ViewConfig ViewConfig { get; set; }
     }
     
     public class PreviewTable: PreviewBase

@@ -1475,7 +1475,7 @@ export class HubService implements OnInit, OnDestroy {
                     data: previewData.data,
                     transformProperties: previewData.transformProperties,
                     status: previewData.status,
-                    chartConfig: previewData.chartConfig
+                    viewConfig: previewData.viewConfig
                 });
             }).catch(reason => {
                 this.addHubMessage(reason, true, 'Preview Data');
@@ -1495,7 +1495,7 @@ export class HubService implements OnInit, OnDestroy {
                 selectQuery: selectQuery,
                 inputColumns: inputColumns,
                 inputParameters: inputParameters,
-            }, 'Previewing table...', cancelToken);
+            }, 'Retrieving table data...', cancelToken);
     }
 
     previewTableKeyData(tableKey: number, showRejectedData, selectQuery: SelectQuery, inputColumns: InputColumn[],
@@ -1507,7 +1507,7 @@ export class HubService implements OnInit, OnDestroy {
                 selectQuery: selectQuery,
                 inputColumns: inputColumns,
                 inputParameters: inputParameters,
-            }, 'Previewing table...', cancelToken);
+            }, 'Retrieving table data...', cancelToken);
     }
 
     previewDatalinkKeyData(datalinkKey: number, previewUpdates: boolean, selectQuery: SelectQuery, inputColumns: InputColumn[],
@@ -1520,7 +1520,7 @@ export class HubService implements OnInit, OnDestroy {
             selectQuery: selectQuery,
             inputColumns: inputColumns,
             inputParameters: inputParameters,
-        }, 'Previewing datalink...', cancelToken);
+        }, 'Retrieving datalink data..', cancelToken);
     }
 
     previewTransformData(datalink: DexihDatalink, datalinkTransformKey: number, selectQuery: SelectQuery, inputColumns: InputColumn[],
@@ -1537,7 +1537,7 @@ export class HubService implements OnInit, OnDestroy {
                 inputColumns,
                 inputParameters: inputParameters,
                 datalinkTransformKey: datalinkTransformKey,
-            }, 'Getting download location...', cancelToken)
+            }, 'Retrieving transform data...', cancelToken)
     }
 
     previewView(view: DexihView, inputColumns: InputColumn[],
@@ -1549,7 +1549,7 @@ export class HubService implements OnInit, OnDestroy {
             view: view,
             inputColumns: inputColumns,
             inputParameters: inputParameters,
-        }, 'Getting view locations...', cancelToken);
+        }, 'Retrieving view data...', cancelToken);
     }
 
     previewViewKey(viewKey: number, inputColumns: InputColumn[],
@@ -1561,7 +1561,7 @@ export class HubService implements OnInit, OnDestroy {
             viewKey: viewKey,
             inputColumns: inputColumns,
             inputParameters: inputParameters,
-        }, 'Getting view locations...', cancelToken);
+        }, 'Retrieving view data...', cancelToken);
     }
 
     previewDashboard(dashboard: DexihDashboard, inputParameters: DexihInputParameter[], cancelToken: CancelToken):
@@ -1583,7 +1583,7 @@ export class HubService implements OnInit, OnDestroy {
                     downloadUrl: url,
                     dashboard: dashboard,
                     inputParameters: inputParameters,
-                }, 'Getting dashboard download locations...').then(urls => {
+                }, 'Retrieving dashboard data...').then(urls => {
                     resolve(urls);
                 }).catch(reason => reject(reason));
             }).catch(reason => reject(reason));
@@ -1640,7 +1640,7 @@ export class HubService implements OnInit, OnDestroy {
                             data: data.data,
                             transformProperties: data.transformProperties,
                             status: data.status,
-                            chartConfig: data.chartConfig
+                            viewConfig: data.viewConfig
                         });
                         return;
                     }

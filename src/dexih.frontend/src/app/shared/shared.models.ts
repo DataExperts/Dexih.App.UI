@@ -5,7 +5,13 @@
 
 // auto generated classes
 
-export class ApiData {
+export class AnimateConfig {
+    public seriesColumn: string = null;
+    public automatic: boolean = true;
+    public delay: number = 500;
+   }
+   
+   export class ApiData {
     public apiStatus: eApiStatus = null;
     public hubKey: number = 0;
     public apiKey: number = 0;
@@ -16,7 +22,7 @@ export class ApiData {
    }
    
    export class ApplicationUser {
-    public id: string = '92496248-a66c-44e8-ba62-28c167e9bcbe';
+    public id: string = 'a6f15c94-8e1e-4128-b870-d58bc18f3396';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -25,7 +31,7 @@ export class ApiData {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = 'ad86a39e-aeaf-496d-809e-a60209af1674';
+    public securityStamp: string = '463c4471-206d-4fce-9366-719525a7d8c2';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -1144,6 +1150,7 @@ export class ApiData {
     public inputValues: InputColumn[] = [];
     public selectQuery: SelectQuery = null;
     public chartConfig: ChartConfig = null;
+    public animateConfig: AnimateConfig = null;
     public isShared: boolean = false;
     public parameters: DexihViewParameter[] = [];
     public key: number = 0;
@@ -1898,6 +1905,12 @@ export class ApiData {
     public isRegistered: boolean = false;
     public isInvited: boolean = false;
     public isEnabled: boolean = false;
+   }
+   
+   export class ViewConfig {
+    public viewType: eViewType = null;
+    public chartConfig: ChartConfig = null;
+    public animateConfig: AnimateConfig = null;
    }
    
    export class WebService {
@@ -3173,4 +3186,5 @@ export class ApiData {
     {key: logLevel.Critical, name: 'Critical'},
     {key: logLevel.None, name: 'None'},
    ]
+   
    

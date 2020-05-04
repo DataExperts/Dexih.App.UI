@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
@@ -22,6 +22,8 @@ export class PreviewComponent implements OnInit, OnDestroy {
     objectType: eDataObjectType;
     hubKey: number;
 
+    embedded = false;
+
 
     constructor(
         private authService: AuthService,
@@ -33,12 +35,18 @@ export class PreviewComponent implements OnInit, OnDestroy {
         try {
             this._subscription = combineLatest(
                 this.route.params,
+                this.route.queryParams
             ).subscribe(result => {
                 let params = result[0];
+                let queryParams = result[1];
 
                 this.hubKey = +params['hubKey'];
                 this.objectType = +params['objectType'];
                 this.objectKey = +params['objectKey'];
+
+                if (queryParams['embed'] === 'true') {
+                    this.embedded = true;
+                }
 
             });
         } catch (e) {

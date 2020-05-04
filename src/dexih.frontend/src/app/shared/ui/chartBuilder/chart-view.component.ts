@@ -4,9 +4,7 @@ import { colorSets } from '@swimlane/ngx-charts';
 import { Subscription, Observable } from 'rxjs';
 import { ResizedEvent } from 'angular-resize-event';
 import { ChartConfig, eChartType } from '../../shared.models';
-import * as moment_ from "moment";
-
-const moment = moment_;
+import { Functions } from '../../utils/functions';
 
 @Component({
     selector: 'chart-view',
@@ -314,20 +312,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
 
     }
 
-    getLanguage() {
-        let language;
-        if (window.navigator.languages) {
-            language = window.navigator.languages[0];
-        } else {
-            language = window.navigator.language;
-        }
-
-        return language;
-    }
-
     formatValue(columnIndex: number, row: number) {
-        moment.locale(this.getLanguage());
-
         if (columnIndex === null) {
             return row;
         }
@@ -335,27 +320,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
         let value = this.data[row][columnIndex];
         let column = this.columns[columnIndex];
 
-        if (!value && value !== false && value !== 0) {
-            return '';
-        } else if (Object.keys(value).length === 0 && value.constructor === Object) {
-            return '(null)';
-        } else {
-            switch (column.format) {
-                case 'Calendar':
-                    return moment(value).calendar();
-                case 'Date':
-                    return moment(value).format('L');
-                case 'Time':
-                    return moment(value).format('LTS');
-                case 'DateTime':
-                    return moment(value).format('L') + ' ' + moment(value).format('LTS');
-                case 'CharArray':
-                    return [].concat(value).join('');
-                case 'CharArray':
-                    return [].concat(value).join('');
-                default:
-                    return value;
-            }
-        }
+        return Functions.formatValue(value, column.format);
+
     }
 }

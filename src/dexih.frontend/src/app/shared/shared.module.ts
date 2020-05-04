@@ -23,6 +23,7 @@ import { GridsterModule} from 'angular-gridster2';
 import { AngularResizedEventModule } from 'angular-resize-event';
 import { DexihSupportOptionsModule } from './ui/supportOptions/support-options.module'
 import { SharedDataModule} from './ui/sharedData/shared-data.module';
+import { SeriesAnimateModule } from './ui/seriesAnimate/series-animate.module';
 
 @NgModule({
   imports: [
@@ -46,7 +47,8 @@ import { SharedDataModule} from './ui/sharedData/shared-data.module';
     GridsterModule,
     AngularResizedEventModule,
     DexihSupportOptionsModule,
-    SharedDataModule
+    SharedDataModule,
+    SeriesAnimateModule
   ],
   declarations: [
   ],
@@ -68,7 +70,8 @@ import { SharedDataModule} from './ui/sharedData/shared-data.module';
     NgxChartsModule,
     GridsterModule,
     AngularResizedEventModule,
-    DexihSupportOptionsModule
+    DexihSupportOptionsModule,
+    SeriesAnimateModule
   ],
   providers: [
     LayoutService,

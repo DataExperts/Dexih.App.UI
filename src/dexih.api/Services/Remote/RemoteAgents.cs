@@ -19,6 +19,7 @@ using Dexih.Utils.Crypto;
 using dexih.functions.Query;
 using dexih.remote;
 using dexih.remote.operations;
+using dexih.transforms.View;
 using Dexih.Utils.DataType;
 using Dexih.Utils.ManagedTasks;
 using static dexih.operations.DownloadData;
@@ -636,7 +637,7 @@ namespace dexih.api.Services.Remote
 		    return result;
 	    }
 	    
-	    public async Task<string> PreviewTable(string id, long hubKey, DownloadUrl downloadUrl, DexihTable table, SelectQuery selectQuery, ChartConfig chartConfig, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, RepositoryManager database, CancellationToken cancellationToken)
+	    public async Task<string> PreviewTable(string id, long hubKey, DownloadUrl downloadUrl, DexihTable table, SelectQuery selectQuery, ViewConfig viewConfig, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    try
 		    {
@@ -655,7 +656,7 @@ namespace dexih.api.Services.Remote
 				    selectQuery,
 				    inputColumns,
 				    inputParameters,
-				    chartConfig
+				    viewConfig
 			    };
 
 			    var result = await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.PreviewTable),  value, database, cancellationToken);
@@ -667,14 +668,14 @@ namespace dexih.api.Services.Remote
 		    }
 	    }
 	    
-		public async Task<string> PreviewTable(string id, long hubKey, DownloadUrl downloadUrl, long tableKey, SelectQuery selectQuery, ChartConfig chartConfig, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, bool isShared, RepositoryManager database, CancellationToken cancellationToken)
+		public async Task<string> PreviewTable(string id, long hubKey, DownloadUrl downloadUrl, long tableKey, SelectQuery selectQuery, ViewConfig viewConfig, InputColumn[] inputColumns, InputParameters inputParameters, bool showRejectedData, bool isShared, RepositoryManager database, CancellationToken cancellationToken)
 		{
 			var table = await database.GetTable(hubKey, tableKey, true, cancellationToken);
 			if (isShared && !table.IsShared)
 			{
 				throw new RemoteException($"The table {table.Name} is not shared.");
 			}
-			return await PreviewTable(id, hubKey, downloadUrl, table, selectQuery, chartConfig, inputColumns, inputParameters, showRejectedData, database, cancellationToken);
+			return await PreviewTable(id, hubKey, downloadUrl, table, selectQuery, viewConfig, inputColumns, inputParameters, showRejectedData, database, cancellationToken);
         }
 
 	    
@@ -792,7 +793,7 @@ namespace dexih.api.Services.Remote
 	    }
 
 	    
-        public async Task<string> PreviewDatalink(string id, long hubKey, DownloadUrl downloadUrl, long datalinkKey, bool previewUpdates, SelectQuery selectQuery, ChartConfig chartConfig, InputColumn[] inputColumns, InputParameters inputParameters, bool isShared, RepositoryManager database, CancellationToken cancellationToken)
+        public async Task<string> PreviewDatalink(string id, long hubKey, DownloadUrl downloadUrl, long datalinkKey, bool previewUpdates, SelectQuery selectQuery, ViewConfig viewConfig, InputColumn[] inputColumns, InputParameters inputParameters, bool isShared, RepositoryManager database, CancellationToken cancellationToken)
         {
             try
             {
@@ -816,7 +817,7 @@ namespace dexih.api.Services.Remote
 	                selectQuery,
 	                inputColumns,
 	                inputParameters,
-	                chartConfig,
+	                viewConfig,
 					previewUpdates
                 };
 
@@ -858,7 +859,7 @@ namespace dexih.api.Services.Remote
 	        }
         }
 	    
-	    public async Task<string> PreviewTransform(string id, long hubKey, DownloadUrl downloadUrl, DexihDatalink hubDatalink, long datalinkTransformKey, SelectQuery selectQuery, ChartConfig chartConfig, InputColumn[] inputColumns, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken)
+	    public async Task<string> PreviewTransform(string id, long hubKey, DownloadUrl downloadUrl, DexihDatalink hubDatalink, long datalinkTransformKey, SelectQuery selectQuery, ViewConfig viewConfig, InputColumn[] inputColumns, InputParameters inputParameters, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    try
 		    {
@@ -878,7 +879,7 @@ namespace dexih.api.Services.Remote
 				    selectQuery,
 				    inputColumns,
 				    inputParameters,
-				    chartConfig,
+				    viewConfig,
 			    };
 
 			    var result = await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.PreviewTransform), value, database, cancellationToken);
