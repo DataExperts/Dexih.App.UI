@@ -236,6 +236,9 @@ export class DashboardPropertiesComponent implements OnInit, OnDestroy {
               let data = <DataCache> item.controls.runTime.value.data;
               this.hubService.getRemoteResponse<PreviewResults>(url.dataKey, this.cancelToken).then(result => {
                 result.columns = this.authService.constructDataTableColumns(result.columns);
+                if (result.status) {
+                  this.hubService.addHubMessage(result.status, false, result.name);
+                }
                 data.data.next(result);
               }).catch();
             }

@@ -39,8 +39,8 @@ export class AuthService implements OnDestroy {
 
     private _logErrors = new BehaviorSubject<Message>(null);
 
-    private _waitMessages = new Map<string, string>();
-    private _waitMessagesObserve = new BehaviorSubject<Map<string, string>>(this._waitMessages);
+    private _waitMessages = new Map<string, any>();
+    private _waitMessagesObserve = new BehaviorSubject<any>(this._waitMessages);
 
     private _globalCache = new ReplaySubject<CacheManager>();
 
@@ -466,7 +466,7 @@ export class AuthService implements OnDestroy {
 
     public postRemote<T>(url: string, data, remoteAgent: DexihActiveAgent,
         waitMessage = 'Please wait while the operation completes.', cancelToken: CancelToken): PromiseWithCancel<T> {
-        let messageKey = this.addWaitMessage(waitMessage);
+        let messageKey = this.addWaitMessage(waitMessage, null, cancelToken);
 
         let promise = new PromiseWithCancel<any>((resolve, reject) => {
             this.postRemoteGetKey(url, data, remoteAgent, cancelToken).then(key => {
@@ -725,10 +725,13 @@ export class AuthService implements OnDestroy {
             }, error => {
                 this.removeWaitMessage(messageKey);
                 reject(this.httpError(url, error));
+            }, () => {
+                cancelToken.cancelMethod = null;
             });
 
             cancelToken.cancelMethod = () => {
                 subscription.unsubscribe();
+                reject(new Message(false, 'Cancelled', null, null));
             }
         }, cancelToken);
 
@@ -1818,9 +1821,9 @@ export class AuthService implements OnDestroy {
         return this._waitMessagesObserve.asObservable();
     }
 
-    addWaitMessage(message: string, maxTime = 10000): string {
+    addWaitMessage(message: string, maxTime = 10000, cancelToken: CancelToken = null): string {
         let key = this.newGuid();
-        this._waitMessages.set(key, message);
+        this._waitMessages.set(key, {message: message, cancelToken: cancelToken});
         this._waitMessagesObserve.next(this._waitMessages);
 
         if (maxTime > 0) {

@@ -4,7 +4,8 @@
             <div class="dexih-loader"></div> &nbsp; &nbsp; Please wait ...
         </li>
         <li class="list-group-item" *ngFor="let waitMessage of waitMessages">
-            {{waitMessage}}
+            {{waitMessage.message}}
+            <dexih-button-cancel [autoCompat]="false" *ngIf="waitMessage.cancelToken" (click)="waitMessage.cancelToken.cancel()" class="float-right" text=""></dexih-button-cancel>
         </li>
     </div>
 </div>

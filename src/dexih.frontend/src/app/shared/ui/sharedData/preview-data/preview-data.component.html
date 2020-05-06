@@ -30,7 +30,7 @@
     <div class="dexih-loader"></div> &nbsp; &nbsp; Loading ...
 </div>
 
-<series-animate *ngIf="baseData" [showEdit]="false" [animateConfig]="viewConfig.animateConfig" [columns]="columns" (hasChanged)="hasChanged()" [baseData]="baseData" [(data)]="data"></series-animate>
+<series-animate *ngIf="viewConfig && baseData" [showEdit]="false" [animateConfig]="viewConfig.animateConfig" [columns]="columns" (hasChanged)="hasChanged()" [baseData]="baseData" [(data)]="data"></series-animate>
 
 <div class="h-100" *ngIf="data">
 

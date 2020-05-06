@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../../+auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, BehaviorSubject, Subscription, combineLatest} from 'rxjs';
-import { ManagedTask } from '../../../shared/shared.models';
+import { ManagedTask, eManagedTaskStatus } from '../../../shared/shared.models';
 
 @Component({
   selector: 'tasks-index',
@@ -19,7 +19,7 @@ export class TasksIndexComponent implements OnInit, OnDestroy {
     columns = [
         { name: 'hub', title: 'Hub', format: ''},
         { name: 'task.category', title: 'Category', format: ''},
-        { name: 'task.status', title: 'Status', format: ''},
+        { name: 'task.status', title: 'Status', format: 'Enum', enum: eManagedTaskStatus},
         { name: 'task.stepName', title: 'Current Step', format: ''},
         { name: 'task.name', title: 'Name', format: ''},
         { name: 'task.lastUpdate', title: 'Last Modified', format: 'Calendar'},

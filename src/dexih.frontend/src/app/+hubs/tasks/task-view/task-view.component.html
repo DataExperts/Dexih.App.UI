@@ -17,18 +17,31 @@
 					<h5>Details</h5>
 				</li>
 				<li class="list-group-item ">
-					<h6>Last updated: {{task.lastUpdate | date : 'long'}}</h6>
-					<h6>Task Id: {{task.taskId }}</h6>
-					<h6>Name: {{task.name }}</h6>
-					<h6>Category: {{task.category }}</h6>
-					<h6>Description: {{task.description }}</h6>
-					<h6>Status: {{task.status }}</h6>
-					<h6 *ngIf="task.category === 'Datalink'">
-						<dexih-button-view [routerLink]="['/hub', task.referenceKey, 'summary', 'datalinks', 'result-view', task.data.auditConnectionKey, task.data.auditKey]" text="Datalink Result"></dexih-button-view>
-					</h6>
-					<h6 *ngIf="task.category === 'Datajob'">
-						<dexih-button-view [routerLink]="['/hub', task.referenceKey, 'summary', 'datalinks', 'result-view', task.data.auditConnectionKey, task.data.auditKey]" text="Datajob Result"></dexih-button-view>
-					</h6>
+					<div class="container">
+						<div class="row rounded text-white bg-secondary">
+							<div class="col border border-white">Status</div>
+							<div class="col border border-white">{{eManagedTaskStatus[task.status]}}</div>
+							<div class="w-100"></div>                    
+							<div class="col border border-white">Last Updated</div>
+							<div class="col border border-white">{{task.lastUpdate | date : 'long'}}</div>
+							<div class="w-100"></div>
+							<div class="col border border-white">Name</div>
+							<div class="col border border-white">{{task.name }}</div>
+							<div class="w-100"></div>
+							<div class="col border border-white">Category</div>
+							<div class="col border border-white">{{task.category }}</div>
+							<div class="w-100"></div>
+							<div class="col border border-white">Description</div>
+							<div class="col border border-white">{{task.description }}</div>
+							<div class="w-100"></div>
+						</div>
+						<h6 *ngIf="task.category === 'Datalink'">
+							<dexih-button-view [routerLink]="['/hub', task.referenceKey, 'summary', 'datalinks', 'result-view', task.data.auditConnectionKey, task.data.auditKey]" text="Datalink Result"></dexih-button-view>
+						</h6>
+						<h6 *ngIf="task.category === 'Datajob'">
+							<dexih-button-view [routerLink]="['/hub', task.referenceKey, 'summary', 'datalinks', 'result-view', task.data.auditConnectionKey, task.data.auditKey]" text="Datajob Result"></dexih-button-view>
+						</h6>
+					</div>
 				</li>
 			</ul>
 		</div>

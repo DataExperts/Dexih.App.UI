@@ -1,4 +1,4 @@
-<div *ngIf="!embedded" class="container-fluid">
+<div class="container-fluid">
     <dexih-widget [title]="'Preview ' + previewData?.name" 
     iconClass="fa fa-lg fa-fw fa-table" 
     [showCloseButton]="true"
@@ -30,4 +30,3 @@
 
 </dexih-widget>
 </div>
-<preview-data *ngIf="embedded && previewData" #PreviewData [hubKey]="hubKey" [objectType]="objectType" [objectKey]="objectKey"></preview-data>

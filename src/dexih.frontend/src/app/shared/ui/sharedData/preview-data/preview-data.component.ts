@@ -83,6 +83,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
                 this.refresh();
             });
         } catch (e) {
+            this.authService.addUpdateNotification(e, false);
             this.dexihMessage.addMessage(e);
         }
     }
@@ -108,14 +109,24 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
                 this.baseData = result.data;
                 this.name = result.name;
                 this.viewConfig = result.viewConfig;
+                if (!this.viewConfig) {
+                    this.data = this.baseData;
+                }
                 if (this.viewConfig && this.viewConfig.viewType === eViewType.Chart) {
                     this.showChart = true;
                 } else {
                     this.showChart = false;
                 }
+
+                if (result.status) {
+                    // this.dexihMessage.addMessage(result.status);
+                    this.authService.addUpdateNotification(result.status, false);
+                }
             }).catch(reason => {
+                this.authService.addUpdateNotification(reason, false);
                 this.dexihMessage.addMessage(reason);
                 this.baseData = [];
+                this.data = [];
                 this.name = 'failed';
             });
     }
@@ -133,6 +144,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
             let message = new Message(true, 'The download task has started.', null, null);
             this.authService.addUpdateNotification(message, false);
         }).catch(reason => {
+            this.authService.addUpdateNotification(reason, false);
             this.dexihMessage.addMessage(reason);
         });
     }

@@ -77,6 +77,10 @@ export class PreviewViewComponent implements OnInit, OnChanges, OnDestroy {
                         if (this.data) {
                             this._refreshDataSubscription = this.data.data.subscribe(dataResult => {
                                 this.dataResult = dataResult;
+
+                                if (dataResult.status) {
+                                    this.hubService.addHubMessage(dataResult.status, false, this.view.name);
+                                }
                             });
                         } else if (this.remoteAgent) {
                             if (!this.firstLoad) {
@@ -112,6 +116,10 @@ export class PreviewViewComponent implements OnInit, OnChanges, OnDestroy {
             if (this._refreshDataSubscription) { this._refreshDataSubscription.unsubscribe(); }
             this._refreshDataSubscription = this.data.data.subscribe(dataResult => {
                 this.dataResult = dataResult;
+
+                if (dataResult.status) {
+                    this.hubService.addHubMessage(dataResult.status);
+                }
             });
         }
 

@@ -214,6 +214,10 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
                     this.data = result.data;
                     this.transformProperties = result.transformProperties;
                     this.isRefreshing = false;
+
+                    if (result.status) {
+                        this.hubService.addHubMessage(result.status, false, 'Preview Data');
+                    }
                 }).catch(() => {
                     this.data = [];
                     this.isRefreshing = false;
