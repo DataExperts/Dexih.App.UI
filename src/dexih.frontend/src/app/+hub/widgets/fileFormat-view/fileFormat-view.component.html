@@ -6,5 +6,5 @@
     <div *ngIf="fileFormat.description">
         <markdown [data]="fileFormat.description"></markdown>
     </div>
-    <div class="note">Updated: {{fileFormat.updateDate | date : 'short' }} </div>
+    <div class="note">Updated: {{fileFormat.updateDate | calendar }} </div>
 </div>

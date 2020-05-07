@@ -53,9 +53,7 @@
 						<button *ngIf="item.downloadUrls?.length > 0" class="btn btn-primary btn-sm" (click)="test([item])">test</button>
 						<div class="list-group mt-1">
 								<div class="list-group-item" *ngFor="let url of item.downloadUrls">
-									{{eDownloadUrlType[url.downloadUrlType]}}: <a [href]="url.url + '/ping'" target="_blank">{{url.url}}</a>
-										<br>
-
+									{{eDownloadUrlType[url.downloadUrlType]}}: <a [href]="url.url + '/ping'" target="_blank">Open</a>
 									<button *ngIf="url.testStatus == 'error'" class="btn btn-danger btn-sm float-right" [title]="url.testMessage">Failed</button>
 									<button *ngIf="url.testStatus == 'success'" class="btn btn-success btn-sm float-right" [title]="url.testMessage">Success</button>
 								</div>

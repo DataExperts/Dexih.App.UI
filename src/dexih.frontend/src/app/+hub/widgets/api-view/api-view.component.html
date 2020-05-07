@@ -3,7 +3,7 @@
     <div *ngIf="api.description">
         <markdown [data]="api.description"></markdown>
     </div>
-    <div class="note">{{eSourceType[api.sourceType]}} / Updated: {{api.updateDate | date : 'short' }} </div>
+    <div class="note">{{eSourceType[api.sourceType]}} / Updated: {{api.updateDate | calendar }} </div>
 </div>
 
 <api-status [apiKey]='api?.key'></api-status>

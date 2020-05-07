@@ -25,7 +25,6 @@
 					<li *ngFor="let searchResult of searchResults" class="list-group-item">
 						<div>
 							<h5>{{searchResult.objectType | objectTypeName }}</h5>
-							<!-- <h6>Last updated: {{searchResult.object.updateDate | date : 'short'}}</h6> -->
 						</div>
 						<div class="col-xs-9" [ngSwitch]="searchResult.objectType">
 							<datajob-view *ngSwitchCase="eSearchObjectType.Datajob" [datajob]="searchResult.object"></datajob-view>

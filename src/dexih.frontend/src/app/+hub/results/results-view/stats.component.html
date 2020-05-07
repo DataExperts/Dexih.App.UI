@@ -31,22 +31,22 @@
                     <div class="col border border-white">{{eRunStatus[auditResult.runStatus]}}</div>
                     <div class="w-100"></div>                    
                     <div class="col border border-white">Start Date</div>
-                    <div class="col border border-white">{{auditResult.initializeTime | date : 'short'}}</div>
+                    <div class="col border border-white">{{auditResult.initializeTime | calendar}}</div>
                     <div class="w-100"></div>
                     <ng-template [ngIf]="auditResult.scheduledTime">
                         <div class="col border border-white">Scheduled Time</div>
-                        <div class="col border border-white">{{auditResult.scheduledTime | date : 'mediumTime'}}</div>
+                        <div class="col border border-white">{{auditResult.scheduledTime | calendar}}</div>
                         <div class="w-100"></div>
                     </ng-template>
 
                     <div class="col border border-white">Initialized</div>
-                    <div class="col border border-white">{{auditResult.initializeTime | date : 'mediumTime'}}</div>
+                    <div class="col border border-white">{{auditResult.initializeTime | calendar}}</div>
                     <div class="w-100"></div>
                     <div class="col border border-white">Started</div>
-                    <div class="col border border-white">{{auditResult.startTime | date : 'mediumTime'}}</div>
+                    <div class="col border border-white">{{auditResult.startTime | calendar}}</div>
                     <div class="w-100"></div>
                     <div class="col border border-white">Finished</div>
-                    <div class="col border border-white">{{auditResult.endTime | date : 'mediumTime'}}</div>
+                    <div class="col border border-white">{{auditResult.endTime | calendar}}</div>
                     <div class="w-100"></div>
                     <div class="col border border-white">Run Time</div>
                     <div class="col border border-white">{{runTime | number: '1.2-2'}} seconds</div>

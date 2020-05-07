@@ -11,6 +11,7 @@ import { CountdownComponent } from './countdown.component';
 import { MaxItemsFilterPipe } from './max-items-filter';
 import { DropZoneDirective } from './dropzone';
 import { DragZoneDirective } from './dragzone';
+import { CalendarPipe } from './calendar.pipe'
 @NgModule({
   declarations: [
     TimeDirective,
@@ -24,7 +25,8 @@ import { DragZoneDirective } from './dragzone';
     CountdownComponent,
     MaxItemsFilterPipe,
     DropZoneDirective,
-    DragZoneDirective
+    DragZoneDirective,
+    CalendarPipe
     ],
   imports: [
     ],
@@ -40,7 +42,8 @@ import { DragZoneDirective } from './dragzone';
     CountdownComponent,
     MaxItemsFilterPipe,
     DropZoneDirective,
-    DragZoneDirective
+    DragZoneDirective,
+    CalendarPipe
     ]
 })
 export class UtilsModule {

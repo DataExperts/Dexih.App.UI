@@ -7,7 +7,17 @@ export class SortDescPipe implements PipeTransform {
 
   transform(items: any[], field: string): any[] {
     if (!items) { return []; }
-    return items.sort((a, b) => b[field] - a[field]);
+    return items.sort((b, a) => {
+      if (a[field] > b[field]) {
+        return 1;
+    }
+
+    if (a[field] < b[field]) {
+        return -1;
+    }
+
+    return 0;
+    });
   }
 }
 

@@ -3,5 +3,5 @@
     <div *ngIf="view.description">
         <markdown [data]="view.description"></markdown>
     </div>
-    <div class="note">{{view.viewType}} / Updated: {{view.updateDate | date : 'short' }} </div>
+    <div class="note">{{view.viewType}} / Updated: {{view.updateDate | calendar }} </div>
 </div>

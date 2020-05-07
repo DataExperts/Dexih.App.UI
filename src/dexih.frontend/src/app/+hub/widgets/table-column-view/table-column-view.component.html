@@ -7,5 +7,5 @@
     <div *ngIf="column.description">
         <markdown [data]="column.description"></markdown>
     </div>
-    <div class="note">Table: {{table.name}}, Updated: {{column.updateDate | date : 'short' }} </div>
+    <div class="note">Table: {{table.name}}, Updated: {{column.updateDate | calendar }} </div>
 </div>

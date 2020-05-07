@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <dexih-button-cancel *ngIf="!item.isCompleted" [compact]="true" (click)="cancel(item)"></dexih-button-cancel>
-                <small>Updated at {{item.lastUpdate | date : 'long' }}</small>
+                <small>Updated: {{item.lastUpdate | calendar }}</small>
             </a>
 
         </ng-template>

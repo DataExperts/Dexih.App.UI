@@ -3,6 +3,6 @@
     <div *ngIf="datalinkTest.description">
         <markdown [data]="datalinkTest.description"></markdown>
     </div>
-    <div class="note">Updated: {{datalinkTest.updateDate | date : 'short' }} </div>
+    <div class="note">Updated: {{datalinkTest.updateDate | calendar }} </div>
     <datalink-status [datalinkTestKey]="datalinkTest.key"></datalink-status>
 </div>

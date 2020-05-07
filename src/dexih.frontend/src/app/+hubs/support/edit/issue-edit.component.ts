@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { Observable, Subscription, combineLatest} from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { Subscription, combineLatest} from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../+auth/auth.service';
-import { DexihHubAuth, CancelToken } from '../../../+auth/auth.models';
-import { Location } from '@angular/common';
+import { CancelToken } from '../../../+auth/auth.models';
 import { DexihMessageComponent } from '../../../shared/ui/dexihMessage';
 import { eSharedAccessItems, DexihIssue, eIssueTypeItems, eIssueSeverityItems, eIssueStatusItems, eIssueCategoryItems } from '../../../shared/shared.models';
+import * as moment_ from 'moment';
+const moment = moment_;
 
 @Component({
 
@@ -72,9 +73,7 @@ export class IssueEditComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private router: Router,
     private route: ActivatedRoute,
-    private location: Location,
     private fb: FormBuilder
   ) {
   }
@@ -102,7 +101,7 @@ export class IssueEditComponent implements OnInit, OnDestroy {
           this.isNew = false;
           this.authService.getIssue(key, this.cancelToken).then(issue => {
             this.issue = issue;
-            this.subTitle = 'Updated by ' + issue.userName + ' on ' + new Date(issue.updateDate).toLocaleDateString();
+            this.subTitle = 'Updated by ' + issue.userName + ' - ' + moment(issue.updateDate).calendar();
             this.buildForm();
 
             if (this.authService.getUser().isAdmin) {
@@ -129,7 +128,7 @@ export class IssueEditComponent implements OnInit, OnDestroy {
     this.saving = true;
     Object.assign(this.issue, this.mainForm.value);
     this.authService.saveIssue(this.issue)
-      .then(result => {
+      .then(() => {
         this.saving = false;
         this.dexihMessage.addSuccessMessage('Issue created successfully.');
         this.cancel();
@@ -143,7 +142,7 @@ export class IssueEditComponent implements OnInit, OnDestroy {
     this.dexihMessage.reset();
     this.saving = true;
     this.authService.addIssueComment(this.issue.key, this.newComment)
-      .then(result => {
+      .then(() => {
         this.saving = false;
         this.dexihMessage.addSuccessMessage('Issue comment added successfully.');
         this.cancel();
@@ -187,13 +186,13 @@ export class IssueEditComponent implements OnInit, OnDestroy {
     });
 
     if (this._valueChangesSubscription) { this._valueChangesSubscription.unsubscribe(); }
-    this._valueChangesSubscription = this.mainForm.valueChanges.subscribe(data => this.onValueChanged(data));
+    this._valueChangesSubscription = this.mainForm.valueChanges.subscribe(() => this.onValueChanged());
     this.onValueChanged(); // (re)set validation messages now
 
     this.hasChanged = false;
   }
 
-  onValueChanged(data?: any) {
+  onValueChanged() {
     if (!this.mainForm) { return; }
     const form = this.mainForm;
 

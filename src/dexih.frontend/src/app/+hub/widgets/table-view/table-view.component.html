@@ -6,5 +6,5 @@
     <div *ngIf="table.description">
         <markdown [data]="table.description"></markdown>
     </div>
-    <div class="note">Connection: {{connection.name}} / Updated: {{connection.updateDate | date : 'short' }} </div>
+    <div class="note">Connection: {{connection.name}} / Updated: {{connection.updateDate | calendar }} </div>
 </div>

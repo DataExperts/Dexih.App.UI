@@ -5,4 +5,4 @@
 <div *ngIf="columnValidation.description">
     <markdown [data]="columnValidation.description"></markdown>
 </div>
-<div class="note">Updated: {{columnValidation.updateDate | date : 'short' }} </div>
+<div class="note">Updated: {{columnValidation.updateDate | calendar }} </div>

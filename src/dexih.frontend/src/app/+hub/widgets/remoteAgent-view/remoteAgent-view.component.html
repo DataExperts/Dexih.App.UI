@@ -4,5 +4,5 @@
         <encryption-status-icon class="mr-1" [isEncrypted]="isEncrypted"></encryption-status-icon>
         {{name}} {{isSelected ? '(selected)' : ''}}
     </h5>
-    <div class="note">{{isAuthorized ? 'Authorized' : 'Not Authorized'}} / Last Login: {{isConnected ? 'Current' : ( lastLoginDateTime | date : 'short' ) }} </div>
+    <div class="note">{{isAuthorized ? 'Authorized' : 'Not Authorized'}} / Last Login: {{isConnected ? 'Current' : ( lastLoginDateTime | calendar ) }} </div>
 </div>

@@ -70,7 +70,15 @@ export class SeriesAnimateComponent implements OnInit, OnChanges, OnDestroy {
     animationSeriesValues() {
         this.animationColumnIndex = this.columns.findIndex(c => c.title === this.animateConfig.seriesColumn);
         const format = this.columns[this.animationColumnIndex].format;
-        const values = Array.from(new Set(this.baseData.map(c => c[this.animationColumnIndex]))).sort((a, b) => a - b);
+        const values = Array.from(new Set(this.baseData.map(c => c[this.animationColumnIndex]))).sort((a, b) => {
+            if (a > b) {
+                return 1;
+            }
+            if (a < b) {
+                return -1;
+            }
+            return 0;
+        });
         this.animationValues = values.map(c => {
             return {
                 name: Functions.formatValue(c, format),

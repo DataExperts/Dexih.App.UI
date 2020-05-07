@@ -72,7 +72,7 @@
 				[formGroup]="comment">
 				<fieldset>
 					<section>
-						<form-textarea label="{{comment.controls.userName.value}} on {{comment.controls.updateDate.value | date: 'short' }}" formControlName="comment" placeholder="Comment" [disabled]="true"
+						<form-textarea label="{{comment.controls.userName.value}} - {{comment.controls.updateDate.value | calendar }}" formControlName="comment" placeholder="Comment" [disabled]="true"
 							iconClass="fa fa-comment">
 						</form-textarea>
 					</section>

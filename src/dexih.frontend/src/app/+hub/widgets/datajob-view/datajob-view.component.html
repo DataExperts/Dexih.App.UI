@@ -4,5 +4,5 @@
         <markdown [data]="datajob.description"></markdown>
     </div>
     <datalink-status [datajobKey]="datajob.key"></datalink-status>
-    <div class="note">Updated: {{datajob.updateDate | date : 'short' }} </div>
+    <div class="note">Updated: {{datajob.updateDate | calendar }} </div>
 </div>

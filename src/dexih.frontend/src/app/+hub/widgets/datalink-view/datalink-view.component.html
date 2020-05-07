@@ -3,6 +3,6 @@
     <div *ngIf="datalink.description">
         <markdown [data]="datalink.description"></markdown>
     </div>
-    <div class="note">{{eDatalinkType[datalink.datalinkType]}} / Updated: {{datalink.updateDate | date : 'short' }} </div>
+    <div class="note">{{eDatalinkType[datalink.datalinkType]}} / Updated: {{datalink.updateDate | calendar }} </div>
     <datalink-status [datalinkKey]="datalink.key"></datalink-status>
 </div>
