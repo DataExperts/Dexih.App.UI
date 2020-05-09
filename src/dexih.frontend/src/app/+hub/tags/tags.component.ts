@@ -129,6 +129,8 @@ export class TagsComponent implements OnInit, OnDestroy {
         if (history.pushState) {
             this.router.navigateByUrl(window.location.pathname + `?key=${tag.key}`);
         }
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     }
 
     delete(tags: DexihTag[]) {

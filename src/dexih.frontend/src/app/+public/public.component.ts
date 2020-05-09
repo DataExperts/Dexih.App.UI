@@ -1,8 +1,5 @@
-import { Component, OnInit, ViewChild, OnDestroy, HostListener } from '@angular/core';
-import { PublicService } from './public.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription} from 'rxjs';
-import { DexihMessageComponent } from '../shared/ui/dexihMessage';
-import { AuthService } from '../+auth/auth.service';
 import { logoUrl } from '../+auth/auth.models';
 import { ActivatedRoute } from '@angular/router';
 

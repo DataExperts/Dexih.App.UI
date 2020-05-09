@@ -22,7 +22,7 @@ export class PreviewComponent implements OnInit, OnDestroy {
     objectType: eDataObjectType;
     hubKey: number;
 
-    embedded = false;
+    embed = false;
 
 
     constructor(
@@ -45,7 +45,7 @@ export class PreviewComponent implements OnInit, OnDestroy {
                 this.objectKey = +params['objectKey'];
 
                 if (queryParams['embed'] === 'true') {
-                    this.embedded = true;
+                    this.embed = true;
                 }
 
             });

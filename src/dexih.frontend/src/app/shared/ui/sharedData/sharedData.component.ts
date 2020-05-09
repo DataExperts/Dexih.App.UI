@@ -22,6 +22,9 @@ export class SharedDataComponent implements OnInit, OnDestroy {
 
     eDownloadFormat = eDownloadFormat;
 
+    embedLink: string;
+    embedFrame: string;
+
     hubs: DexihHubAuth[];
     hubKeys: number[];
     tags: DexihTag[];
@@ -104,6 +107,22 @@ export class SharedDataComponent implements OnInit, OnDestroy {
         } else {
             this.router.navigate(['preview', item.hubKey, item.objectType, item.objectKey], { relativeTo: this.route.parent });
         }
+    }
+
+    embed(item: SharedData) {
+        let embed: string;
+        if (item.objectType === eDataObjectType.Dashboard) {
+            this.embedLink = 
+            `${window.location.origin}/public/index/previewDashboard/${item.hubKey}/${item.objectType}/${item.objectKey}?embed=true`;
+        } else {
+            this.embedLink = 
+            `${window.location.origin}/public/index/preview/${item.hubKey}/${item.objectType}/${item.objectKey}?embed=true`;
+        }
+
+        this.embedFrame = `<iframe width="560" height="315" src="${this.embedLink}" frameborder="0" ></iframe>`
+
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     }
 
     downloadData(sharedItems: Array<SharedData>, zipFiles: boolean, downloadFormat: eDownloadFormat) {

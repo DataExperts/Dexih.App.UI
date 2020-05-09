@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div *ngIf="!embed" class="container-fluid">
     <dexih-widget [title]="'Preview ' + previewData?.name" 
     iconClass="fa fa-lg fa-fw fa-table" 
     [showCloseButton]="true"
@@ -26,7 +26,15 @@
         <dexih-message #DexihMessage></dexih-message>
     </div>
 
-    <preview-data #PreviewData [hubKey]="hubKey" [objectType]="objectType" [objectKey]="objectKey"></preview-data>
+    <ng-template [ngTemplateOutlet]="previewTemplate"></ng-template>
 
 </dexih-widget>
 </div>
+
+<div *ngIf="embed">
+<ng-template [ngTemplateOutlet]="previewTemplate"></ng-template>
+</div>
+
+<ng-template #previewTemplate>
+    <preview-data #PreviewData [hubKey]="hubKey" [objectType]="objectType" [objectKey]="objectKey"></preview-data>
+</ng-template>

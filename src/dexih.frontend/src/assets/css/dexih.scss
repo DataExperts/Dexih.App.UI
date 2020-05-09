@@ -1,5 +1,9 @@
 @import "_variables";
 
+html {
+    scroll-behavior: smooth;
+  }
+  
 /* override existing bootstrap nav-link with a pointer (hand) */
 .nav-link {
     cursor: pointer;

@@ -12,7 +12,7 @@ export class DatalinkEditButtonComponent implements OnInit {
 
     constructor(private hubService: HubService) { }
 
-    ngOnInit() { 
+    ngOnInit() {
         this.hubPath = this.hubService.getHubUrl();
     }
 }

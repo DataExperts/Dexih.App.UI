@@ -4,6 +4,24 @@
     </div>
 
     <dexih-widget title="Shared Data" iconClass="fa fa-lg fa-fw fa-life-saver">
+        <dexih-widget-section *ngIf="embedLink" title="Embedded html" [showExpandButton]="false">
+            <ng-template #header>
+                <button type="button" class="close ml-2" (click)="embedLink = null" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </ng-template>
+            <section>
+                <form-textarea label="Link" [showCopy]="true" [showPreview]="false" [hideToggle]="true" [disabled]="true"
+                    rows="1" [(ngModel)]="embedLink">
+                    <a [href]="embedLink" target="_blank" class="ml-1">(Open)</a>
+                </form-textarea>
+            </section>
+            <section>
+                <form-textarea label="Embedded IFrame" [showCopy]="true" [showPreview]="false" [hideToggle]="true"
+                    [disabled]="true" rows="1" [(ngModel)]="embedFrame"></form-textarea>
+            </section>
+        </dexih-widget-section>
+
         <dexih-table 
             [enableMultiSelect]="true" 
             [enableFilter]="false" 
@@ -53,7 +71,9 @@
                     </download-button>
                     <dexih-button-edit *ngIf="hubKeys?.indexOf(item.hubKey)>=0" class="ml-1" 
                         (click)="edit(item)"></dexih-button-edit>
-                </div>
+                    <dexih-button class="ml-1" iconClass="fa fa-code" title="Get embedded version" (click)="embed(item)" text="Embedded"></dexih-button>
+                    </div>
+                
             </ng-template>
 
         </dexih-table>

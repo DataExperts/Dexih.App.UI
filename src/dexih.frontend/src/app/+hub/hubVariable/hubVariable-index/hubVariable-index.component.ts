@@ -74,6 +74,8 @@ export class HubVariableIndexComponent implements OnInit, OnDestroy {
                     name: c.name,
                     description: c.description,
                     updateDate: c.updateDate,
+                    value: c.isEncrypted ? '(Encrypted)' : c.value,
+                    isEncrypted: c.isEncrypted,
                     tags: this.hubCache.getObjectTags(eSharedObjectType.HubVariable, c.key)
                 }
             });
