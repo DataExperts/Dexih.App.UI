@@ -41,6 +41,10 @@
 					<tags-update-button class="ml-1" [objectType]="eSharedObjectType.Table" [objects]="items" ></tags-update-button>
 				</ng-template>
 
+				<ng-template #selectedItemAction select="selectedItemAction" let-item="item">
+					<dependent-items-button class="ml-1" [key]=item.key [objectType]='eSharedObjectType.Table'></dependent-items-button>
+				</ng-template>
+
 
 
 		</dexih-table>

@@ -13,6 +13,7 @@
 			>
 				<ng-template #selectedItemAction select="selectedItemAction" let-validation="item">
 					<actions-columnValidation-button [columnValidation]="validation" class="mr-1"></actions-columnValidation-button>
+					<dependent-items-button class="ml-1" [key]=item.key [objectType]='eSharedObjectType.ColumnValidation'></dependent-items-button>
 				</ng-template>
 
 				<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">

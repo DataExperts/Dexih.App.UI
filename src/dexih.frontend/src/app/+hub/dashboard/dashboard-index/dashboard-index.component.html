@@ -11,6 +11,10 @@
 				(rowClick)="edit($event)"
 				[tags]="this.hubCache.hub.dexihTags"
 				>
+				<ng-template #selectedItemAction select="selectedItemAction" let-item="item">
+					<dependent-items-button class="ml-1" [key]=item.key [objectType]='eSharedObjectType.Dashboard'></dependent-items-button>
+				</ng-template>
+
 					<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
 						<tags-update-button class="ml-1" [objectType]="eSharedObjectType.Dashboard" [objects]="items" ></tags-update-button>
 					</ng-template>

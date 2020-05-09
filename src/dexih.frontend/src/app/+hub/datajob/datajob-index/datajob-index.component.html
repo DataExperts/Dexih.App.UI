@@ -12,8 +12,9 @@
 			(rowClick)="editDatajob($event)"
 			[tags]="this.hubCache.hub.dexihTags"
 		>
-			<ng-template #selectedItemAction select="selectedItemAction" let-datajob="item">
-			</ng-template>
+		<ng-template #selectedItemAction select="selectedItemAction" let-item="item">
+			<dependent-items-button class="ml-1" [key]=item.key [objectType]='eSharedObjectType.Datajob'></dependent-items-button>
+		</ng-template>
 
 			<ng-template #rowStatus select="rowStatus" let-datajob="item">
 				<datalink-status [datajobKey]='datajob?.key'></datalink-status>

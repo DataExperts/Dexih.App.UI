@@ -1,17 +1,17 @@
 import { Component, Input, OnDestroy, OnInit, OnChanges } from '@angular/core';
 import { Subscription ,  combineLatest} from 'rxjs';
 
-import {HubCache } from '../../hub.models';
+import {HubCache, sharedObjectProperties } from '../../hub.models';
 import { HubService } from '../../hub.service';
 import { ConnectionReference, eConnectionCategory, eSharedObjectType, DexihHub } from '../../../shared/shared.models';
 
 
 @Component({
-    selector: 'related-items-button',
-    templateUrl: './related-items-button.component.html'
+    selector: 'dependent-items-button',
+    templateUrl: './dependent-items-button.component.html'
 })
 
-export class RelatedItemsButtonComponent implements OnInit, OnDestroy, OnChanges {
+export class DependentItemsButtonComponent implements OnInit, OnDestroy, OnChanges {
     @Input() public objectType: eSharedObjectType
     @Input() public key: number;
     @Input() public pullRight = false;
@@ -21,7 +21,8 @@ export class RelatedItemsButtonComponent implements OnInit, OnDestroy, OnChanges
     public hubCache: HubCache;
     public hubPath: string;
 
-    public related: DexihHub;
+    public dependent: DexihHub;
+    public sharedObjectProperties = sharedObjectProperties;
 
     constructor(
         private hubService: HubService) { }
@@ -38,8 +39,8 @@ export class RelatedItemsButtonComponent implements OnInit, OnDestroy, OnChanges
 
             this.hubPath = this.hubCache.getHubUrl();
 
-            this.related = new DexihHub();
-            this.hubCache.cacheAddObjectFromKey(this.objectType, this.key, this.related)
+            this.dependent = new DexihHub();
+            this.hubCache.cacheAddObjectFromKey(this.objectType, this.key, this.dependent)
 
         });
     }

@@ -13,6 +13,7 @@
 			>
 				<ng-template #selectedItemAction select="selectedItemAction" let-item="item">
 					<dexih-button-edit class="mr-1" [routerLink]="['listOfValues-edit', item.key]" queryParamsHandling preserveFragment></dexih-button-edit>
+					<dependent-items-button class="ml-1" [key]=item.key [objectType]='eSharedObjectType.ListOfValues'></dependent-items-button>
 				</ng-template>
 
 				<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">

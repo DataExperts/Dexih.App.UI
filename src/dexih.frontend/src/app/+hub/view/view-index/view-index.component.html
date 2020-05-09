@@ -15,12 +15,14 @@
 						<tags-update-button class="ml-1" [objectType]="eSharedObjectType.View" [objects]="items" ></tags-update-button>
 					</ng-template>
 
-					<ng-template #selectedItemAction select="selectedItemAction" let-view="item">
+					<ng-template #selectedItemAction select="selectedItemAction" let-item="item">
+						<dependent-items-button class="ml-1" [key]=item.key [objectType]='eSharedObjectType.View'></dependent-items-button>
 					</ng-template>
-
+	
 					<ng-template #actions let-items="items">
 						<actions-view-button [views]="items"></actions-view-button>
 					</ng-template>
+
 			</dexih-table>
 
 	</dexih-widget>

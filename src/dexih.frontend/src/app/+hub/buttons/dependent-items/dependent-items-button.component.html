@@ -1,0 +1,58 @@
+<dexih-button-dropdown buttonClass="btn-primary" iconClass="fa fa-sitemap" text="Dependencies" [pullRight]="pullRight">
+    
+    <li *ngIf="dependent.dexihDatalinks.length > 0" class="list-group-item list-group-item-heading list-group-item-info">Datalinks</li>
+    <li *ngFor="let item of dependent.dexihDatalinks">
+        <a class="dropdown-item" [routerLink]="[hubPath, 'datalinks', 'datalink-edit', 'edit', item.key]">
+            {{item.name}}
+        </a>
+    </li>
+    
+    <li *ngIf="dependent.dexihTables.length > 0" class="list-group-item list-group-item-heading list-group-item-info">Tables</li>
+    <li *ngFor="let item of dependent.dexihTables">
+        <a class="dropdown-item" [routerLink]="[hubPath, 'tables', 'table-edit', item.key]">
+            {{item.logicalName}}
+        </a>
+    </li>
+
+    <li *ngIf="dependent.dexihConnections.length > 0" class="list-group-item list-group-item-heading list-group-item-info">Connections</li>
+    <li *ngFor="let item of dependent.dexihConnections">
+        <a class="dropdown-item" [routerLink]="[hubPath, 'connections', 'connection-edit', item.key]">
+            {{item.name}}
+        </a>
+    </li>
+
+    <li *ngIf="dependent.dexihViews.length > 0" class="list-group-item list-group-item-heading list-group-item-info">Views</li>
+    <li *ngFor="let item of dependent.dexihViews">
+        <a class="dropdown-item" [routerLink]="[hubPath, 'views', 'view-edit', item.key]">
+            {{item.name}}
+        </a>
+    </li>
+
+    <li *ngIf="dependent.dexihListOfValues.length > 0" class="list-group-item list-group-item-heading list-group-item-info">List of Values</li>
+    <li *ngFor="let item of dependent.dexihListOfValues">
+        <a class="dropdown-item" [routerLink]="[hubPath, 'listOfValues', 'listOfValue-edit', item.key]">
+            {{item.name}}
+        </a>
+    </li>
+
+    <li *ngIf="dependent.dexihCustomFunctions.length > 0" class="list-group-item list-group-item-heading list-group-item-info">Custom Functions</li>
+    <li *ngFor="let item of dependent.dexihCustomFunctions">
+        <a class="dropdown-item" [routerLink]="[hubPath, 'customFunctions', 'customFunction-edit', item.key]">
+            {{item.name}}
+        </a>
+    </li>
+
+    <li *ngIf="dependent.dexihHubVariables.length > 0" class="list-group-item list-group-item-heading list-group-item-info">Variables</li>
+    <li *ngFor="let item of dependent.dexihHubVariables">
+        <a class="dropdown-item" [routerLink]="[hubPath, 'hubVariables', 'hubVariable-edit', item.key]">
+            {{item.name}}
+        </a>
+    </li>
+
+    <li *ngIf="dependent.dexihFileFormats.length > 0" class="list-group-item list-group-item-heading list-group-item-info">File Formats</li>
+    <li *ngFor="let item of dependent.dexihFileFormats">
+        <a class="dropdown-item" [routerLink]="[hubPath, 'fileFormats', 'fileFormat-edit', item.key]">
+            {{item.name}}
+        </a>
+    </li>
+</dexih-button-dropdown>
