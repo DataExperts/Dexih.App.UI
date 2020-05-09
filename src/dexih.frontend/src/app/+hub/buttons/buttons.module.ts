@@ -17,6 +17,13 @@ import { ActionsDashboardButtonComponent } from './actions-dashboard-button/acti
 import { ActionsListOfValuesButtonComponent } from './actions-listOfValues-button/actions-listOfValues-button.component';
 import { TagsUpdateButtonComponent } from './tags-update-button/tags-update-button.component';
 import { TagsFilterButtonComponent } from './tags-filter-button/tags-filter-button.component';
+import { RelatedItemsButtonComponent } from './related-items/related-items-button.component';
+import { ConnectionEditButtonComponent } from './connection-edit-button/connection-edit-button.component';
+import { DatalinkEditButtonComponent } from './datalink-edit-button/datalink-edit-button.component';
+import { TableEditButtonComponent } from './table-edit-button/table-edit-button.component';
+import { ViewEditButtonComponent } from './view-edit-button/view-edit-button.component';
+import { CustomFunctionEditButtonComponent } from './customFunction-edit-button/customFunction-edit-button.component';
+import { ColumnValidationEditButtonComponent } from './columnValidation-edit-button/columnValidation-edit-button.component';
 
 @NgModule({
     imports: [
@@ -40,7 +47,14 @@ import { TagsFilterButtonComponent } from './tags-filter-button/tags-filter-butt
         ActionsDashboardButtonComponent,
         ActionsListOfValuesButtonComponent,
         TagsUpdateButtonComponent,
-        TagsFilterButtonComponent
+        TagsFilterButtonComponent,
+        RelatedItemsButtonComponent,
+        ConnectionEditButtonComponent,
+        TableEditButtonComponent,
+        DatalinkEditButtonComponent,
+        ViewEditButtonComponent,
+        CustomFunctionEditButtonComponent,
+        ColumnValidationEditButtonComponent
     ],
     declarations: [
         CancelButtonComponent,
@@ -60,7 +74,14 @@ import { TagsFilterButtonComponent } from './tags-filter-button/tags-filter-butt
         ActionsDashboardButtonComponent,
         ActionsListOfValuesButtonComponent,
         TagsUpdateButtonComponent,
-        TagsFilterButtonComponent
+        TagsFilterButtonComponent,
+        RelatedItemsButtonComponent,
+        ConnectionEditButtonComponent,
+        TableEditButtonComponent,
+        DatalinkEditButtonComponent,
+        ViewEditButtonComponent,
+        CustomFunctionEditButtonComponent,
+        ColumnValidationEditButtonComponent
     ],
     providers: [],
 })

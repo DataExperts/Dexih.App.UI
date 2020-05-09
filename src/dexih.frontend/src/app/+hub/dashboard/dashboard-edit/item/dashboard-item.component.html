@@ -18,6 +18,7 @@
         </section>
         <section>
             <form-select label="Select View" formControlName="viewKey" [items]="views" itemKey="key" itemName="name">
+                <view-edit-button [key]="item.controls.viewKey.value"></view-edit-button>
             </form-select>
         </section>
         <section>

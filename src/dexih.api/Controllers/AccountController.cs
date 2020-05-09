@@ -661,7 +661,7 @@ namespace dexih.api.Controllers
 		    var client = _operations.Config.MicrosoftClientId;
 		    return View("MicrosoftRedirect", client);
 	    }
-
+	   
 		 // POST: /Account/ExternalLoginConfirmation
         [HttpPost("[action]")]
         // [AllowAnonymous]

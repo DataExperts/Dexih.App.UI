@@ -39,7 +39,21 @@ export class IssueIndexComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.authService.getIssues(this.cancelToken).then(i => {
-            this._tableData.next(i);
+            const issues = i.map( issue => {
+                return {
+                    key: issue.key,
+                    name: issue.name,
+                    description: issue.description,
+                    type: issue.type,
+                    category: issue.category,
+                    severity: issue.severity,
+                    issueStatus: issue.issueStatus,
+                    gitHubLink: issue.gitHubLink ? `[github](${issue.gitHubLink})` : null,
+                    updateDate: issue.updateDate,
+
+                }
+            });
+            this._tableData.next(issues);
         });
     }
 

@@ -24,6 +24,7 @@
                     <form-select label="Audit Connection" formControlName="auditConnectionKey" [items]="this.managedConnections"
                         itemKey="key" itemName="name" iconClass="fa fa-database" [errors]="editDatalinkService.hubFormsService.formErrors.auditConnectionKey"
                         note='Specify the connection where audit data (such as job results) should be written to.'>
+                        <connection-edit-button [key]="datalinkForm.controls.auditConnectionKey.value"></connection-edit-button>
                     </form-select>
                 </section>
 

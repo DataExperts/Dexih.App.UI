@@ -31,6 +31,9 @@
 					<datalink-status [datalinkKey]='item?.key'></datalink-status>
 				</ng-template>
 
+				<ng-template #selectedItemAction select="selectedItemAction" let-item="item">
+					<related-items-button [key]=item.key [objectType]='eSharedObjectType.Datalink'></related-items-button>
+				</ng-template>
 		</dexih-table>
 
 	</dexih-widget>

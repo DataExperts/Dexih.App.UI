@@ -26,7 +26,7 @@ export class ViewIndexComponent implements OnInit, OnDestroy {
         { name: 'name', title: 'Name', footer: 'description', format: 'Md', tags: 'tags' },
         { iconClass: 'sharedIcon', tooltip: 'sharedToolTip', width: '1%', align: 'center' },
         { name: 'viewType', title: 'Chart/Table' },
-        { name: 'sourceType', title: 'Source Type'},
+        { name: 'sourceName', title: 'Source'},
         { name: 'updateDate', title: 'Last Modified', format: 'Calendar' },
     ];
 
@@ -81,12 +81,26 @@ export class ViewIndexComponent implements OnInit, OnDestroy {
             let views: Array<DexihView>;
             views = this.hubCache.hub.dexihViews.filter(c => c.isValid);
             let tableData = views.map(view => {
+                let sourceName = '';
+
+                switch (view.sourceType) {
+                    case eDataObjectType.Table:
+                        let sourceTable = this.hubCache.getTable(view.sourceTableKey);
+                        sourceName = sourceTable ? sourceTable.logicalName : 'Error, not found';
+                        break;
+                    case eDataObjectType.Datalink:
+                        let sourceDatalink = this.hubCache.hub.dexihDatalinks
+                            .find(c => c.key === view.sourceDatalinkKey);
+                        sourceName = sourceDatalink ? 'Datalink: ' + sourceDatalink.name : 'Error, not found';
+                        break;
+                }
+
                 return {
                     key: view.key,
                     name: view.name,
                     tags: this.hubCache.getObjectTags(eSharedObjectType.View, view.key),
                     viewType: eViewType[view.viewType],
-                    sourceType: eDataObjectType[view.sourceType],
+                    sourceName: sourceName,
                     updateDate: view.updateDate,
                     sharedIcon: view.isShared ? 'fa fa-group' : 'fa fa-user-secret',
                     sharedToolTip: view.isShared ? 'Table is shared' : 'Table is private'

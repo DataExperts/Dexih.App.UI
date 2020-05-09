@@ -22,7 +22,7 @@ export class AnimateConfig {
    }
    
    export class ApplicationUser {
-    public id: string = 'a6f15c94-8e1e-4128-b870-d58bc18f3396';
+    public id: string = '7d794454-7996-41e5-be9d-0606ecacb9a0';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -31,7 +31,7 @@ export class AnimateConfig {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = '463c4471-206d-4fce-9366-719525a7d8c2';
+    public securityStamp: string = '79eb8546-41a7-4958-91ae-f0901f727a1d';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -1734,6 +1734,8 @@ export class AnimateConfig {
     public maxConcurrentTasks: number = 50;
     public maxUploadSize: number = 1000000000;
     public socketTransportType: string = 'WebSockets';
+    public defaultPreviewRows: number = 100;
+    public maxPreviewRows: number = 5000;
    }
    
    export class Table {
@@ -2627,15 +2629,13 @@ export class AnimateConfig {
    export enum eLOVObjectType {
     Table = 1,
     Datalink = 2,
-    View = 3,
-    Static = 4,
+    Static = 3,
    }
    
    export const eLOVObjectTypeItems = [
     {key: 0, name: 'Unknown'},
     {key: eLOVObjectType.Table, name: 'Table'},
     {key: eLOVObjectType.Datalink, name: 'Datalink'},
-    {key: eLOVObjectType.View, name: 'View'},
     {key: eLOVObjectType.Static, name: 'Static'},
    ]
    

@@ -19,6 +19,7 @@
 					<section [ngStyle]="{'z-index': 499, 'position': 'relative'}">
 						<form-select label="Select a hub function" formControlName="customFunctionKey" [items]="customFunctions" itemKey="key"
 						 itemName="name" itemTitle="description">
+						 	<customFunction-edit-button [key]="newDatalinkTransformItemForm.controls.customFunctionKey.value"></customFunction-edit-button>
 						</form-select>
 					</section>
 				</ng-template>

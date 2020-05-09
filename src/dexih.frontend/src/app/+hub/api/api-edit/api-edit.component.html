@@ -68,6 +68,7 @@
 									[errors]="errors?.sourceTableKey" [items]="connectionTables" parentName="name"
 									childItems="dexihTables" itemKey="key" itemName="logicalName"
 									note="Select the source table">
+									<table-edit-button [key]="formsService.currentForm.controls.sourceTableKey.value"></table-edit-button>
 								</form-select>
 							</section>
 							<section class="form-group col-md-6"
@@ -75,6 +76,7 @@
 								<form-select label="Source Datalink" formControlName="sourceDatalinkKey"
 									[errors]="errors?.sourceDatalinkKey" [items]="datalinks" itemKey="key"
 									itemName="name" note='Select the source datalink'>
+									<datalink-edit-button [key]="formsService.currentForm.controls.sourceDatalinkKey.value"></datalink-edit-button>
 								</form-select>
 							</section>
 						</div>

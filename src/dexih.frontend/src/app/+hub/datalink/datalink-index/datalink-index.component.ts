@@ -95,7 +95,7 @@ export class DatalinkIndexComponent implements OnInit, OnDestroy {
                     switch (d.sourceDatalinkTable.sourceType) {
                         case eSourceType.Table:
                             let sourceTable = this.hubCache.getTable(d.sourceDatalinkTable.sourceTableKey);
-                            sourceName = sourceTable ? sourceTable.name : 'Error, not found';
+                            sourceName = sourceTable ? sourceTable.logicalName : 'Error, not found';
                             break;
                         case eSourceType.Datalink:
                             let sourceDatalink = this.hubCache.hub.dexihDatalinks
@@ -112,7 +112,7 @@ export class DatalinkIndexComponent implements OnInit, OnDestroy {
                     } else {
                         targetName = d.dexihDatalinkTargets.filter(t => t.isValid).map(c => {
                             let table = this.hubCache.getTable(c.tableKey);
-                            return table && table.name || 'Error, not found';
+                            return table && table.logicalName || 'Error, not found';
                         }).join(', ');
                     }
 

@@ -136,6 +136,10 @@ export class HubService implements OnInit, OnDestroy {
         return this.getHubCache().status === eCacheStatus.Loaded;
     }
 
+    getHubUrl(): string {
+        return '/hub/' + this._hubKey;
+    }
+
     // gets the hub cache
     getHubCacheObservable(filterLoaded = false): Observable<HubCache> {
         let observable = this._hubCache.asObservable();

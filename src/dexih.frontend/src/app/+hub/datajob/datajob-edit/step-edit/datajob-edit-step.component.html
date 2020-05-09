@@ -16,6 +16,7 @@
 				<form-select label="Data Link" formControlName="datalinkKey" [items]="hubCache.hub.dexihDatalinks"
 					itemKey="key" itemName="name" [errors]="stepFormService.formErrors.datalinkKey"
 					iconClass="fa fa-database">
+					<datalink-edit-button [key]="stepFormService.currentForm.controls.datalinkKey.value"></datalink-edit-button>
 				</form-select>
 			</section>
 		</fieldset>

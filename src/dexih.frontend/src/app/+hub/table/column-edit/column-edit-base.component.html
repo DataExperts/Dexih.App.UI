@@ -93,6 +93,7 @@
                 <section class="form-group col-md-6" *ngIf="columnFormService.currentForm.controls.columnValidationKey">
                     <form-select label="Validation Rule" formControlName="columnValidationKey" [allowNullSelect]="true" [items]="hubCache?.hub.dexihColumnValidations"
                         itemKey="key" itemName="name" note="Validation rule to apply.">
+                        <columnValidation-edit-button [key]="columnFormService.currentForm.controls.columnValidationKey.value"></columnValidation-edit-button>
                     </form-select>
                 </section>
             </div>

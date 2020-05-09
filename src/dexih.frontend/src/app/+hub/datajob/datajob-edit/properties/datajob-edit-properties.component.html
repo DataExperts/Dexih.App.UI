@@ -27,6 +27,7 @@
                     [errors]="formService.formErrors.auditConnectionKey"
                     note='Specify the connection where audit data (such as job results) should be written to.'
                     [errors]="formService.formErrors.auditConnectionKey">
+                    <connection-edit-button [key]="mainForm.controls.auditConnectionKey.value"></connection-edit-button>
                 </form-select>
             </section>
 
@@ -45,7 +46,7 @@
 </dexih-widget-section>
 
 <dexih-widget-section title="Parameters" [showExpandButton]="true" [padding]="true" [padding]="true">
-    <input-parameters [showEdit]="true" [parameters]="mainForm?.controls.parameters" [formsService]="formService">
+    <input-parameters *ngIf="mainForm" [showEdit]="true" [parameters]="mainForm?.controls.parameters" [formsService]="formService">
     </input-parameters>
 </dexih-widget-section>
 

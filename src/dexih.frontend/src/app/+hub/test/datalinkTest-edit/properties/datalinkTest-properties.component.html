@@ -24,6 +24,7 @@
 				<form-select label="Audit Connection" formControlName="auditConnectionKey" [items]="hubCache.hub.dexihConnections"
 					itemKey="key" itemName="name" [errors]="formsService.formErrors.auditConnectionKey" iconClass="fa fa-database"
 					note="Connection where test results are stored.">
+					<connection-edit-button [key]="mainForm.controls.auditConnectionKey.value"></connection-edit-button>
 				</form-select>
 			</section>
 		</fieldset>

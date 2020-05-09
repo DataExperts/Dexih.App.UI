@@ -66,6 +66,7 @@
             <form-select label="Validation Rule" formControlName="columnValidationKey"
                 [allowNullSelect]="true" [items]="hubCache?.hub.dexihColumnValidations" itemKey="key"
                 itemName="name" note="Validation rule to apply.">
+                <columnValidation-edit-button [key]="bulkColumn.controls.columnValidationKey.value"></columnValidation-edit-button>
             </form-select>
         </section>
     </div>

@@ -5,6 +5,7 @@
                     <section class="form-group col-md-4">
                         <form-select label="Connection" formControlName="connectionKey" [items]="connections" itemKey="key" itemName="name"
                             [errors]="formsService.formErrors.connectionKey" iconClass="fa fa-database" note='The connection for this table.'>
+                            <connection-edit-button [key]="mainForm.controls.connectionKey.value"></connection-edit-button>
                         </form-select>
                     </section>
 

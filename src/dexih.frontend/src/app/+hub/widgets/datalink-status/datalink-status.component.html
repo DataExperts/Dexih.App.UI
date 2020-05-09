@@ -1,4 +1,4 @@
-<div *ngIf="previousStatus?.writerResult" style="width:300px" >
+<div *ngIf="previousStatus?.writerResult" class="w-100 mb-1" style="min-width:300px" >
     <dexih-progressbar  
     [showCancel]="false" 
     [value]="previousStatus.percentage" 
@@ -8,7 +8,7 @@
     </dexih-progressbar>
 </div>
 
-<div *ngIf="currentStatus?.writerResult" style="width:300px"  >
+<div *ngIf="currentStatus?.writerResult" class="w-100 mb-1" style="min-width:300px" >
     <dexih-progressbar *ngIf="currentStatus.writerResult.runStatus == eRunStatus.Scheduled"  
         [showCancel]="true" 
         (cancelled)="cancelled()" 
@@ -16,8 +16,10 @@
         [type]="currentStatus.statusType">
         <i class="fa fa-clock-o"></i>Next - {{currentStatus.writerResult.scheduledTime | calendar}} (in <countdown [end]="currentStatus.writerResult.scheduledTime" ></countdown>)     
     </dexih-progressbar>    
-    
-    <dexih-progressbar *ngIf="currentStatus.writerResult.runStatus != eRunStatus.Scheduled"  
+</div>
+
+<div *ngIf="currentStatus?.writerResult && currentStatus.writerResult.runStatus != eRunStatus.Scheduled"   class="w-100" style="min-width:300px" >
+    <dexih-progressbar 
         [showCancel]="showCancel" 
         (cancelled)="cancelled()" 
         (progressClick)="onProgressClick()"

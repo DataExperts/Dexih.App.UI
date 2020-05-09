@@ -613,6 +613,7 @@ export class HubCache {
         });
     }
 
+
     public dataTypeToString(column: any): string {
         let value = eTypeCode[column.dataType];
 
@@ -831,6 +832,11 @@ export class HubCache {
 
         this[sharedObject.cacheAddMethod](key, hub);
 
+    }
+
+    public cacheAddObjectFromKey(sharedType: eSharedObjectType, key: number, hub: DexihHub) {
+        let sharedObject = sharedObjectProperties.find(c => c.type === sharedType);
+        this[sharedObject.cacheAddMethod](key, hub);
     }
 
     public cacheAddDatajob(datajobKey: number, hub: DexihHub): DexihDatajob {

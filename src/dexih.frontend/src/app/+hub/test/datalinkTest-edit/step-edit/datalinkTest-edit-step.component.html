@@ -25,6 +25,7 @@
 			<section>
 				<form-select label="Data Link" formControlName="datalinkKey" [items]="hubCache.hub.dexihDatalinks" itemKey="key"
 				 itemName="name" [errors]="stepFormService.formErrors.datalinkKey" iconClass="fa fa-database">
+				 <datalink-edit-button [key]="stepFormService.currentForm.controls.datalinkKey?.value"></datalink-edit-button>
 				</form-select>
 			</section>
 		</fieldset>
@@ -47,6 +48,7 @@
 				<form-select label="Target Connection" formControlName="targetConnectionKey" [items]="hubCache.hub.dexihConnections"
 				 itemKey="key" itemName="name" [errors]="stepFormService.formErrors.targetConnectionKey" iconClass="fa fa-database"
 				 note="Connection for the datalink target table">
+				 <connection-edit-button [key]="stepFormService.currentForm.controls.targetConnectionKey?.value"></connection-edit-button>
 				</form-select>
 			</section>
 			<div class="form-row">
@@ -65,6 +67,7 @@
 				<form-select label="Expected Connection" formControlName="expectedConnectionKey" [items]="hubCache.hub.dexihConnections"
 				 itemKey="key" itemName="name" [errors]="stepFormService.formErrors.expectedConnectionKey" iconClass="fa fa-database"
 				 note="Connection where the expected target data is.">
+				 <connection-edit-button [key]="stepFormService.currentForm.controls.expectedConnectionKey?.value"></connection-edit-button>
 				</form-select>
 			</section>
 			<div class="form-row">
@@ -83,6 +86,7 @@
 				<form-select label="Error Connection" formControlName="errorConnectionKey" [items]="hubCache.hub.dexihConnections"
 				 itemKey="key" itemName="name" [errors]="stepFormService.formErrors.errorConnectionKey" iconClass="fa fa-database"
 				 note="Connection where the error data should be sent.">
+				 <connection-edit-button [key]="stepFormService.currentForm.controls.errorConnectionKey?.value"></connection-edit-button>
 				</form-select>
 			</section>
 			<div class="form-row">
@@ -118,6 +122,7 @@
 					<form-select label="Source Connection" formControlName="sourceConnectionKey" [items]="hubCache.hub.dexihConnections"
 					 itemKey="key" itemName="name" [errors]="stepFormService.formErrors.sourceConnectionKey" iconClass="fa fa-database"
 					 note="Connection where the source test data is.">
+					 <connection-edit-button [key]="stepFormService.currentForm.controls.sourceConnectionKey?.value"></connection-edit-button>
 					</form-select>
 				</section>
 				<div class="form-row">
@@ -136,6 +141,7 @@
 					<form-select label="Test Connection" formControlName="testConnectionKey" [items]="hubCache.hub.dexihConnections"
 					 itemKey="key" itemName="name" [errors]="stepFormService.formErrors.testConnectionKey" iconClass="fa fa-database"
 					 note="Connection where the test data is.">
+					 <connection-edit-button [key]="stepFormService.currentForm.controls.testConnectionKey?.value"></connection-edit-button>
 					</form-select>
 				</section>
 				<div class="form-row">

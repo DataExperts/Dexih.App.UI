@@ -123,14 +123,19 @@ export class TableIndexComponent implements OnInit, OnDestroy {
                         tableName = `${table.logicalName} (${table.name})`
                     }
 
+                    let description = '';
+                    if ( table.logicalName !== table.name) { description = `Name: ${table.name}`}
+                    if (description) { description += '<br>' }
+                    if (table.description ) { description += table.description; }
+
                     tableData.push({
                         key: table.key,
                         connectionType: connection ? eConnectionPurpose[connection.purpose] : 'undefined',
                         connectionName: connection ? connection.name : 'undefined',
-                        description: table.description,
+                        description: description,
                         tableType: table.tableType,
                         name: name,
-                        logicalName: tableName,
+                        logicalName: table.logicalName,
                         tags: this.hubCache.getObjectTags(eSharedObjectType.Table, table.key),
                         updateDate: table.updateDate,
                         connectionKey: connection ? connection.key : '',

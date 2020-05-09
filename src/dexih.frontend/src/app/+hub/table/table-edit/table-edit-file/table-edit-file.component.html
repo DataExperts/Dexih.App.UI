@@ -63,7 +63,7 @@
             <form-select label="File Format" formControlName="fileFormatKey" placeholder="File Format" [errors]="formService.formErrors.fileFormatKey"
                 [items]="hubCache.hub.dexihFileFormats" itemKey="key" itemName="name" [enableFilter]="false" note="Specify the file format to use, if not specified, a csv (command separated) format will be used."
                 [allowNullSelect]="true" selectNullMessage="Use default (csv) format">
-                <a routerLink="fileFormat-new">(<i class="fa fa-sticky-note-o"></i> Create New Format )</a>
+                <a routerLink="../fileFormat-new">(<i class="fa fa-sticky-note-o"></i> New Format )</a>
             </form-select>
         </section>
 

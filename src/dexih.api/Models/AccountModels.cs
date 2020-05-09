@@ -147,8 +147,8 @@ namespace dexih.api.Models
         public string officeLocation { get; set; }
         public string preferredLanguage { get; set; }
     }
-
-	public class DeleteHubs {
+    
+    public class DeleteHubs {
 		public long[] HubKeys { get; set; }
 	}
 

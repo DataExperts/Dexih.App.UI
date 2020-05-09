@@ -1,0 +1,15 @@
+<dexih-button-dropdown buttonClass="btn-primary" iconClass="fa fa-sitemap" [text]="Related" [pullRight]="pullRight">
+    <li *ngIf="related.dexihDatalinks.length > 0" class="list-group-item list-group-item-heading list-group-item-info">Datalinks</li>
+    <li *ngFor="let item of related.dexihDatalinks">
+        <a class="dropdown-item" [routerLink]="[hubPath, 'datalinks', 'datalink-edit', 'edit', item.key]">
+            <i class="fa fa-file-o"></i>
+            {{item.name}}
+        </a>
+    </li>
+    <li *ngFor="let item of related.dexihTables">
+        <a class="dropdown-item" [routerLink]="[hubPath, 'tables', 'table-edit', item.key]">
+            <i class="fa fa-file-o"></i>
+            {{item.logicalName}}
+        </a>
+    </li>
+</dexih-button-dropdown>
