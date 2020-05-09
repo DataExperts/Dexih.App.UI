@@ -113,7 +113,7 @@ namespace dexih.api.Controllers
                     }
                     
                     var selectQuery = view.SelectQuery ?? new SelectQuery();
-                    selectQuery.Rows = previewData.SelectQuery.Rows;
+                    // selectQuery.Rows = previewData.SelectQuery.Rows;
 
                     switch (view.SourceType)
                     {
