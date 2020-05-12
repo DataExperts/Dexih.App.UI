@@ -2,14 +2,13 @@ import { HttpClient, HttpHeaders, HttpRequest, HttpEventType, HttpResponse } fro
 import { Injectable, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as FileSaver from 'file-saver';
-import { BehaviorSubject, Observable, Subscription, Subject, from, forkJoin, ReplaySubject } from 'rxjs';
-import { timeout, filter, first, shareReplay, take } from 'rxjs/operators'
+import { BehaviorSubject, Observable, Subscription, Subject, ReplaySubject } from 'rxjs';
+import { timeout, first, take } from 'rxjs/operators'
 import { eLogLevel, LogFactory } from '../../logging';
 import {
     DexihHubAuth, ExternalLoginResult, Message,
     User, UserLoginInfo, ExternalLogin, FileHandler, eFileStatus, RemoteToken, PromiseWithCancel, CancelToken, eHubAccess
 } from './auth.models';
-import { AuthWebSocket } from './auth.websocket';
 import { UserAgentApplication, AuthResponse, CacheLocation } from 'msal';
 import { DexihModalComponent } from 'dexih-ngx-components';
 import { Location } from '@angular/common';
@@ -17,6 +16,7 @@ import { DexihRemoteAgent, DexihActiveAgent, DownloadUrl, CacheManager, eClientC
     eTypeCode, ManagedTask, eManagedTaskStatus, ePermission, eSharedAccess, DexihIssue,
     DexihDashboard, ListOfValuesItem, SharedData, eDownloadFormat, eDataObjectType, InputColumn, SelectQuery, InputParameterBase } from '../shared/shared.models';
 import { PreviewResults } from '../+hub/hub.models';
+import { WebSocketService} from './websocket.service';
 
 declare var gapi: any;
 
@@ -29,8 +29,6 @@ export class AuthService implements OnDestroy {
     private _hubErrors = new BehaviorSubject<Array<Message>>([]);
 
     private _displayHelp = new BehaviorSubject<boolean>(false);
-
-    private _webSocket: AuthWebSocket;
 
     private _tasks = new BehaviorSubject<Array<ManagedTask>>([]);
 
@@ -53,31 +51,47 @@ export class AuthService implements OnDestroy {
     private _webSocketSubscribe: Subscription;
     private _logErrorsSubscribe: Subscription;
 
-
     private modalComponent: DexihModalComponent;
 
     private logger = new LogFactory('auth.service');
 
     private updateRemoteAgentsFlag = false;
 
-    // unique session id, used to refresh global cache when page refresh occurs.
-    private sessionId = this.newGuid();
-
     private sharedItemsIndex: SharedData[];
+
+    private webSocketService: WebSocketService;
+
+    private isInitialized = false;
 
     constructor(
         private http: HttpClient,
         private router: Router,
         private route: ActivatedRoute,
-        private location: Location
+        private location: Location,
         // private modal: Modal,
     ) {
+    }
+
+    ngOnDestroy() {
+        this.logger.LogC(() => `ngOnDestroy.`, eLogLevel.Debug);
+
+        if (this._userSubscribe) { this._userSubscribe.unsubscribe(); }
+        if (this._webSocketSubscribe) { this._webSocketSubscribe.unsubscribe(); }
+        if (this._remoteAgents) { this._remoteAgents.unsubscribe(); }
+        if (this._logErrorsSubscribe) { this._logErrorsSubscribe.unsubscribe(); }
+    }
+
+    initialize() {
+        // only initialize once
+        if (this.isInitialized) { return; }
+        this.isInitialized = true;
+
         this.logger.LogC(() => 'Initializing AuthService', eLogLevel.Information);
+
+        this.webSocketService = new WebSocketService(this.location);
 
         this.refreshGlobalCache();
         this.refreshUser();
-
-        this._webSocket = new AuthWebSocket(this.location);
 
         // whenever user login changes, update the list of hubs, and establish a websocket connection.
         if (this._userSubscribe) { this._userSubscribe.unsubscribe(); }
@@ -86,10 +100,10 @@ export class AuthService implements OnDestroy {
                 this.logger.LogC(() => `New authorized user ${user.email}`, eLogLevel.Information);
                 this.refreshHubs();
 
-                await this._webSocket.initializeWebSocket();
+                await this.webSocketService.initializeWebSocket();
 
                 if (this._webSocketSubscribe) { this._webSocketSubscribe.unsubscribe(); }
-                this._webSocketSubscribe = this._webSocket.getWebSocketObservable().subscribe(data => {
+                this._webSocketSubscribe = this.webSocketService.getWebSocketObservable().subscribe(data => {
                     if (data) {
                         switch (data.command) {
                             case eClientCommand.Disconnect: {
@@ -312,15 +326,6 @@ export class AuthService implements OnDestroy {
         });
     }
 
-    ngOnDestroy() {
-        this.logger.LogC(() => `ngOnDestroy.`, eLogLevel.Debug);
-
-        if (this._userSubscribe) { this._userSubscribe.unsubscribe(); }
-        if (this._webSocketSubscribe) { this._webSocketSubscribe.unsubscribe(); }
-        if (this._remoteAgents) { this._remoteAgents.unsubscribe(); }
-        if (this._logErrorsSubscribe) { this._logErrorsSubscribe.unsubscribe(); }
-    }
-
     // // converts a string from underscore notation to camel case
     // toCamelCase(str): string {
     //     return str.substring(0, 1).toLowerCase() +
@@ -426,15 +431,15 @@ export class AuthService implements OnDestroy {
     }
 
     public getWebSocketObservable() {
-        return this._webSocket.getWebSocketObservable();
+        return this.webSocketService?.getWebSocketObservable();
     }
 
     public getWebSocketStatusObservable() {
-        return this._webSocket.getWebSocketStatusObservable();
+        return this.webSocketService?.getWebSocketStatusObservable();
     }
 
     public getWebSocketConnectionId() {
-        return this._webSocket.getWebSocketConnectionId();
+        return this.webSocketService?.getWebSocketConnectionId();
     }
 
     public JsonNoNulls(data) {
@@ -455,21 +460,30 @@ export class AuthService implements OnDestroy {
     }
 
     // post form data
-    public postForm(url, data, waitMessage = 'Please wait while the operation completes.'): Promise<any> {
+    public postForm(url, data, waitMessage = 'Please wait while the operation completes.', cancelToken = null): Promise<any> {
         let headers = new HttpHeaders({
             // 'Authorization': `Bearer ${authToken}`,
             // 'Content-Type': 'multipart/form-data'
         });
 
-        return this.postBody(url, data, headers, waitMessage);
+        return this.postBody(url, data, headers, waitMessage, cancelToken);
     }
 
+    // posts a command that will be collected from a remoteAgent
     public postRemote<T>(url: string, data, remoteAgent: DexihActiveAgent,
-        waitMessage = 'Please wait while the operation completes.', cancelToken: CancelToken): PromiseWithCancel<T> {
+        waitMessage = 'Please wait while the operation completes.', cancelToken: CancelToken = null): PromiseWithCancel<T> {
         let messageKey = this.addWaitMessage(waitMessage, null, cancelToken);
 
+        if (!cancelToken) {
+            cancelToken = new CancelToken();
+        }
+
         let promise = new PromiseWithCancel<any>((resolve, reject) => {
+
+            // post the command to the web server, and receive unique id that can call the remote agent.
             this.postRemoteGetKey(url, data, remoteAgent, cancelToken).then(key => {
+
+                // call the remote agent with the unique id.
                 this.getRemoteData<T>(remoteAgent, key, cancelToken, 'download').then(result => {
                     this.removeWaitMessage(messageKey);
                     resolve(result);
@@ -498,7 +512,9 @@ export class AuthService implements OnDestroy {
             'Content-Type': 'application/json'
         });
 
-
+       if (!cancelToken) {
+           cancelToken = new CancelToken();
+       }
 
         let promise = new PromiseWithCancel<any>((resolve, reject) => {
             if (!remoteAgent) {
@@ -508,20 +524,39 @@ export class AuthService implements OnDestroy {
 
             data.remoteAgentId = remoteAgent.instanceId;
 
+            // get the best download route
             this.getBestDownloadUrl(remoteAgent, 0).then(downloadUrl => {
-                // if (downloadUrl && downloadUrl.downloadUrlType === eDownloadUrlType.Proxy) {
-                //     data.responseUrl = downloadUrl.url;
-                // }
-
                 data.downloadUrl = downloadUrl;
 
                 let json = this.JsonNoNulls(data);
 
+                // post command to web server, and return the unique key which can be
+                // used to collect the results form the remote agent.
                 this.http.post(url, json, { withCredentials: true, headers: headers, responseType: 'text' })
                 .toPromise().then(key => {
                     resolve(key);
                 }).catch(reason => {
-                    reject(this.httpError(url, reason));
+
+                    // special return code, which means the remote agent has changed.
+                    if (reason.status === 426) {
+
+                        // the new agent is returned as part of the error.
+                        remoteAgent = JSON.parse(reason.error);
+
+                        // run the query again with the new remote agent.
+                        this.getBestDownloadUrl(remoteAgent, 0).then(downloadUrl2 => {
+                            this.setCookie(`hub-remote-agent-${data.hubKey}`, JSON.stringify(remoteAgent));
+                            data.downloadUrl = downloadUrl2;
+                            data.remoteAgentId = remoteAgent.instanceId;
+                            json = this.JsonNoNulls(data);
+                            this.http.post(url, json, { withCredentials: true, headers: headers, responseType: 'text' })
+                            .toPromise().then(key => {
+                                resolve(key);
+                            }).catch(reason2 => reject(reason2));
+                        }).catch(reason2 => reject(reason2));
+                    } else {
+                        reject(this.httpError(url, reason));
+                    }
                 });
             }).catch(reason => {
                 reject(reason);
@@ -663,7 +698,8 @@ export class AuthService implements OnDestroy {
     }
 
     // post an object which is converted to json.
-    public post<T>(url, data, waitMessage = 'Please wait while the operation completes.'): Promise<T> {
+    public post<T>(url, data, waitMessage = 'Please wait while the operation completes.',
+        cancelToken: CancelToken = null): PromiseWithCancel<T> {
         let headers = new HttpHeaders({
             // 'Authorization': `Bearer ${authToken}`,
             'content-type': 'application/json'
@@ -677,18 +713,24 @@ export class AuthService implements OnDestroy {
             body = '{}';
         }
 
-        return this.postBody(url, body, headers, waitMessage);
+        return this.postBody(url, body, headers, waitMessage, cancelToken);
     }
 
     // posts data to the api.
-    private postBody<T>(url, body, headers, waitMessage = 'Please wait while the operation completes.'): Promise<any> {
-        return new Promise<T>((resolve, reject) => {
+    private postBody<T>(url, body, headers, waitMessage = 'Please wait while the operation completes.',
+        cancelToken: CancelToken): PromiseWithCancel<any> {
+
+        if (!cancelToken) {
+            cancelToken = new CancelToken();
+        }
+
+        let promise = new PromiseWithCancel<T>((resolve, reject) => {
             let messageKey = this.addWaitMessage(waitMessage);
             this.logger.LogC(() => `post url: ${url}, data: ${body}.`, eLogLevel.Debug);
 
             const baseUrl = this.location.prepareExternalUrl(url);
 
-            this.http.post<T>(baseUrl, body, { withCredentials: true, headers: headers }).subscribe(
+            let subscription = this.http.post<T>(baseUrl, body, { withCredentials: true, headers: headers }).subscribe(
                 result => {
                     this.removeWaitMessage(messageKey);
                     resolve(result);
@@ -698,7 +740,14 @@ export class AuthService implements OnDestroy {
                 }, () => {
                     this.removeWaitMessage(messageKey);
                 });
-        });
+
+            cancelToken.cancelMethod = () => {
+                subscription.unsubscribe();
+                reject(new Message(false, 'Cancelled', null, null));
+            }
+        }, cancelToken);
+
+        return promise;
     }
 
     public get<T>(url, waitMessage = 'Please wait while the operation completes.', updateUrl = true, cancelToken: CancelToken):
@@ -790,16 +839,16 @@ export class AuthService implements OnDestroy {
     }
 
     public postConfirm<T>(url, data, waitMessage = 'Please wait while the operation completes.',
-        confirmMessage = 'Please confirm action?'): Promise<T> {
+        confirmMessage = 'Please confirm action?', cancelToken = null): Promise<T> {
         return new Promise<T>((resolve, reject) => {
             this.confirmDialog('Please confirm?', confirmMessage)
             .then(result => {
                 if (result) {
-                    resolve(this.post<T>(url, data, waitMessage));
+                    resolve(this.post<T>(url, data, waitMessage, cancelToken));
                 } else {
                     reject();
                 }
-            }).catch(reason => { reject(); });
+            }).catch(() => { reject(); });
         });
     }
 
@@ -1101,27 +1150,30 @@ export class AuthService implements OnDestroy {
         return this.loadScript('GOOGLE', 'https://apis.google.com/js/api.js', true);
     }
 
-    googleLogin(clientId: string, forceLogin: boolean): Promise<User> {
+    googleLogin(forceLogin: boolean): Promise<User> {
         return new Promise<User>((resolve, reject) => {
-            this.googleSignIn(clientId, forceLogin).then(externalLogin => {
+            this.getGlobalCachePromise().then(() => {
+            this.googleSignIn(forceLogin).then(externalLogin => {
                 let loginResult = this.identityLogin(eLoginProvider.Google, externalLogin.providerKey, externalLogin.authenticationToken);
                 resolve(loginResult);
             }).catch(() => {
                 reject('Error with google login.');
             });
+        }).catch(reason => { reject(reason); });
         });
     }
 
-    googleEnable(clientId: string): Promise<ExternalLogin> {
+    googleEnable(): Promise<ExternalLogin> {
         let messageKey: string = null;
         return new Promise<ExternalLogin>((resolve, reject) => {
             try {
+                this.getGlobalCachePromise().then(cache => {
                 messageKey = this.addWaitMessage('Loading google sign-in scripts...');
                 this.googleLoadScript().then(() => {
                     gapi.load('auth2', () => {
                         gapi.auth2.init({
                             ...{ scope: 'email', prompt: 'select_account' },
-                            client_id: clientId
+                            client_id: cache.googleClientId
                         }).then((auth2) => {
                             let login: ExternalLogin = null;
                             if (auth2.isSignedIn.get()) {
@@ -1140,6 +1192,8 @@ export class AuthService implements OnDestroy {
                         });
                     });
                 });
+            }).catch(reason => { reject(reason); });
+
             } catch (e) {
                 this.logger.LogC(() => `login error:${e.message}`, eLogLevel.Error);
                 this._hubErrors.next(e);
@@ -1150,14 +1204,15 @@ export class AuthService implements OnDestroy {
         });
     }
 
-    googleSignIn(clientId: string, forceLogin: boolean): Promise<ExternalLogin> {
+    googleSignIn(forceLogin: boolean): Promise<ExternalLogin> {
         return new Promise<ExternalLogin>((resolve, reject) => {
             try {
+                this.getGlobalCachePromise().then(cache => {
                 this.googleLoadScript().then(() => {
                     gapi.load('auth2', () => {
                         gapi.auth2.init({
                             ...{ scope: 'email', prompt: 'select_account' },
-                            client_id: clientId
+                            client_id: cache.googleClientId
                         }).then((auth2) => {
                             function getLoginDetails(): ExternalLogin {
                                 let login = new ExternalLogin();
@@ -1186,6 +1241,8 @@ export class AuthService implements OnDestroy {
                 }).catch(reason => {
                     reject(reason);
                 });
+            }).catch(reason => { reject(reason); });
+
             } catch (e) {
                 this.logger.LogC(() => `login error:${e.message}`, eLogLevel.Error);
                 this._currentUser.next(null);
@@ -1240,13 +1297,15 @@ export class AuthService implements OnDestroy {
     }
 
 
-    microsoftEnable(clientId: string): Promise<ExternalLogin> {
+    microsoftEnable(): Promise<ExternalLogin> {
         let messageKey: string = null;
         return new Promise<ExternalLogin>(async (resolve, reject) => {
             try {
+                this.getGlobalCachePromise().then(cache => {
+
                 messageKey = this.addWaitMessage('Loading microsoft sign-in...');
 
-                let userAgentApplication = this.microsoftApp(clientId);
+                let userAgentApplication = this.microsoftApp(cache.microsoftClientId);
                 let user = userAgentApplication.getAccount();
 
                 if (user) {
@@ -1276,6 +1335,8 @@ export class AuthService implements OnDestroy {
                     resolve(null);
                     this.removeWaitMessage(messageKey);
                 }
+            }).catch(reason => { reject(reason); });
+
 
             } catch (e) {
                 if (messageKey) { this.removeWaitMessage(messageKey); }
@@ -1288,9 +1349,9 @@ export class AuthService implements OnDestroy {
         });
     }
 
-    microsoftLogin(clientId: string, forceLogin: boolean): Promise<User> {
+    microsoftLogin(forceLogin: boolean): Promise<User> {
         return new Promise<User>((resolve, reject) => {
-            this.microsoftSignIn(clientId, forceLogin).then(externalLogin => {
+            this.microsoftSignIn(forceLogin).then(externalLogin => {
                 let loginResult = this.identityLogin(eLoginProvider.Microsoft,
                     externalLogin.providerKey, externalLogin.authenticationToken);
                 resolve(loginResult);
@@ -1301,13 +1362,15 @@ export class AuthService implements OnDestroy {
         });
     }
 
-    microsoftSignIn(clientId: string, forceLogin: boolean): Promise<ExternalLogin> {
+    microsoftSignIn(forceLogin: boolean): Promise<ExternalLogin> {
         let messageKey: string = null;
         return new Promise<ExternalLogin>(async (resolve, reject) => {
             try {
                 messageKey = this.addWaitMessage('Loading microsoft sign-in...');
 
-                let userAgentApplication = this.microsoftApp(clientId);
+                this.getGlobalCachePromise().then(cache => {
+
+                let userAgentApplication = this.microsoftApp(cache.microsoftClientId);
                 let tokenPromise: Promise<AuthResponse>;
                 // let user = userAgentApplication.getUser();
 
@@ -1354,7 +1417,8 @@ export class AuthService implements OnDestroy {
                 }).catch(reason => {
                     this.removeWaitMessage(messageKey);
                     reject(reason);
-                });
+                }).catch(reason => { reject(reason); });
+            });
 
             } catch (e) {
                 if (messageKey) { this.removeWaitMessage(messageKey); }
@@ -1381,12 +1445,14 @@ export class AuthService implements OnDestroy {
     }
 
 
-    microsoftSignOut(clientId: string): Promise<boolean> {
+    microsoftSignOut(): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             try {
-                let userAgentApplication = this.microsoftApp(clientId)
+                this.getGlobalCachePromise().then(cache => {
+                let userAgentApplication = this.microsoftApp(cache.microsoftClientId)
                 userAgentApplication.logout();
                 resolve(true);
+                }).catch(reason => { reject(reason); });
             } catch (e) {
                 this.logger.LogC(() => `microsoft sign out error:${e.message}`, eLogLevel.Error);
                 reject(e);
@@ -1577,7 +1643,7 @@ export class AuthService implements OnDestroy {
 
                     // this refresh is just to reset the XSRF token
                     // now that the user is logged out.
-                    this.refreshUser().then(user => {
+                    this.refreshUser().then(() => {
                         this.router.navigate(['/auth/login']);
                     });
                 }).catch(reason => {
@@ -1601,7 +1667,7 @@ export class AuthService implements OnDestroy {
                 return;
             }
 
-            this.post('/api/Account/PingRemoteAgents', { connectionId: connectionId }, 'Pinging active remote agents...')
+            this.post('/api/Account/PingRemoteAgents', { connectionId: connectionId }, null)
                 .then(result => {
                     let currentAgents = this._remoteAgents.getValue();
 
@@ -1649,6 +1715,17 @@ export class AuthService implements OnDestroy {
             if (position >= activeAgent.downloadUrls.length) {
                 let message = new Message(false, 'The client cannot connect to any of the data download/upload endpoints.', null, null);
                 reject(message);
+                return;
+            }
+
+            // if there is only one location, then save a ping test.
+            if (activeAgent.downloadUrls.length === 1) {
+                resolve(activeAgent.downloadUrls[0]);
+                return;
+            }
+
+            if (activeAgent['currentDownloadUrl']) {
+                resolve(activeAgent['currentDownloadUrl']);
                 return;
             }
 
@@ -1703,7 +1780,7 @@ export class AuthService implements OnDestroy {
     }
 
     getIssue(issueKey: number, cancelToken: CancelToken): Promise<DexihIssue> {
-        return this.post<DexihIssue>('/api/Account/GetIssue', {issueKey: issueKey}, 'Getting issues ... ');
+        return this.post<DexihIssue>('/api/Account/GetIssue', {issueKey: issueKey}, 'Getting issues ... ', cancelToken);
     }
 
     getIssues(cancelToken: CancelToken): Promise<DexihIssue[]> {
@@ -1921,8 +1998,7 @@ export class AuthService implements OnDestroy {
     }
 
     public refreshGlobalCache() {
-        let promise = this.get<CacheManager>('/api/Account/GetGlobalCache?cache=' + this.sessionId,
-            'Getting global cache...', false, null);
+        let promise = this.get<CacheManager>('/api/Account/GetGlobalCache', null, false, null);
         promise.then(cache => {
             this._globalCache.next(cache);
         }).catch(reason => {
@@ -1955,6 +2031,33 @@ export class AuthService implements OnDestroy {
         }
     }
 
+    getSharedDataObject(hubKey: number, objectType: eDataObjectType, objectKey: number): Promise<SharedData> {
+        return this.post<SharedData>('/api/SharedData/SharedDataObject', {
+            hubKey, objectType, objectKey
+        }, 'Getting shared item...');
+    }
+
+    getActiveAgent(hubKey: number): Promise<DexihActiveAgent> {
+        // the activeAgent is cached in a cookie to save an extra roundtrip.
+        let agent = this.getCookie(`hub-remote-agent-${hubKey}`);
+
+        if (agent) {
+            let remoteAgent = <DexihActiveAgent>JSON.parse(agent);
+            return Promise.resolve(remoteAgent);
+        }
+
+        return new Promise<DexihActiveAgent>((resolve, reject) => {
+
+            this.post<DexihActiveAgent>('/api/SharedData/GetActiveAgent', { hubKey: hubKey }, 'Getting active remote agent...')
+                .then(activeAgent => {
+                    this.getBestDownloadUrl(activeAgent, 0).then(downloadUrl => {
+                        this.setCookie(`hub-remote-agent-${hubKey}`, JSON.stringify(activeAgent));
+                        resolve(activeAgent);
+                    });
+                }).catch(reason => reject(reason));
+        });
+    }
+
     downloadData(sharedItems: Array<SharedData>, zipFiles: boolean, downloadFormat: eDownloadFormat, cancelToken: CancelToken):
         Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
@@ -1975,9 +2078,7 @@ export class AuthService implements OnDestroy {
             }
 
             hubKeys.forEach(hubKey => {
-                this.post<DexihActiveAgent>('/api/SharedData/GetActiveAgent', { hubKey: hubKey}, 'Getting active remote agent...')
-                .then(activeAgent => {
-
+                this.getActiveAgent(hubKey).then(activeAgent => {
                     this.postRemote<ManagedTask>('/api/SharedData/DownloadData', {
                         hubKey: hubKey,
                         clientId: this.getWebSocketConnectionId(),
@@ -2004,8 +2105,7 @@ export class AuthService implements OnDestroy {
         Promise<PreviewResults> {
 
         return new Promise<PreviewResults>((resolve, reject) => {
-            this.post<DexihActiveAgent>('/api/SharedData/GetActiveAgent', { hubKey: hubKey }, 'Getting active remote agent...')
-            .then(activeAgent => {
+            this.getActiveAgent(hubKey).then(activeAgent => {
                 this.postRemote<PreviewResults>('/api/SharedData/PreviewData', {
                     hubKey: hubKey,
                     objectType: objectType,
@@ -2019,7 +2119,7 @@ export class AuthService implements OnDestroy {
                     resolve(result);
                 }).catch(reason => {
                     reject(reason);
-                })
+                });
             }).catch(reason => {
                 reject(reason);
             });
@@ -2032,8 +2132,7 @@ export class AuthService implements OnDestroy {
         Promise<ListOfValuesItem[]> {
 
         return new Promise<ListOfValuesItem[]>((resolve, reject) => {
-            this.post<DexihActiveAgent>('/api/SharedData/GetActiveAgent', { hubKey: hubKey }, 'Getting active remote agent...')
-            .then(activeAgent => {
+            this.getActiveAgent(hubKey).then(activeAgent => {
                 this.postRemote<ListOfValuesItem[]>('/api/SharedData/PreviewListOfValues', {
                     hubKey: hubKey,
                     objectType: objectType,
@@ -2045,7 +2144,7 @@ export class AuthService implements OnDestroy {
                     resolve(result);
                 }).catch(reason => {
                     reject(reason);
-                })
+                });
             }).catch(reason => {
                 reject(reason);
             });

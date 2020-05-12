@@ -121,15 +121,7 @@ export class ManageComponent implements OnInit, OnDestroy {
   googleLogin(forceLogin: boolean) {
     this.dexihMessage.reset();
 
-    this.authService.getGlobalCachePromise().then(cache => {
-      let clientId = cache.googleClientId;
-
-      if (!clientId) {
-        this.dexihMessage.addErrorMessage('There was an issue using the google authentication provider.  Contact support.');
-        return;
-      }
-
-      this.authService.googleSignIn(clientId, forceLogin).then(result => {
+      this.authService.googleSignIn(forceLogin).then(result => {
           this.authService.addExternalLogin(eLoginProvider.Google, result.providerKey, result.authenticationToken).then(
             loginResult => {
               this.updateLogins();
@@ -142,21 +134,12 @@ export class ManageComponent implements OnInit, OnDestroy {
             this.googleMessage = reason;
             this.dexihMessage.addErrorMessage(reason);
           });
-    });
   }
 
   microsoftLogin(forceLogin: boolean)  {
     this.dexihMessage.reset();
 
-    this.authService.getGlobalCachePromise().then(cache => {
-      let clientId = cache.microsoftClientId;
-
-      if (!clientId) {
-        this.dexihMessage.addErrorMessage('There was an issue using the microsoft authentication provider.  Contact support.');
-        return;
-      }
-
-      this.authService.microsoftSignIn(clientId, forceLogin).then(result => {
+      this.authService.microsoftSignIn(forceLogin).then(result => {
           this.authService.addExternalLogin(eLoginProvider.Microsoft, result.providerKey, result.authenticationToken).then(
             loginResult => {
               this.updateLogins();
@@ -169,7 +152,6 @@ export class ManageComponent implements OnInit, OnDestroy {
             this.microsoftMessage = reason;
             this.dexihMessage.addErrorMessage(reason);
           });
-    });
   }
 
   deleteLogin(login: UserLoginInfo) {

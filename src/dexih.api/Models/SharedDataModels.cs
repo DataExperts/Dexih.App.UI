@@ -11,6 +11,13 @@ namespace dexih.api.Models
         public int MaxResults { get; set; }
     }
 
+    public class SharedDataObject
+    {
+        public long HubKey { get; set; }
+        public EDataObjectType ObjectType { get; set; }
+        public long ObjectKey { get; set; }
+    }
+
     public class HubKeyOnly
     {
         public long HubKey { get; set; }

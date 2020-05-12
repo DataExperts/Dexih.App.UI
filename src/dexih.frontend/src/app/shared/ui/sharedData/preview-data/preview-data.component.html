@@ -1,7 +1,3 @@
-<div class="m-1">
-    <dexih-message #DexihMessage></dexih-message>
-</div>
-
 <div *ngIf="showToolbar" class="floating-toolbar">
     <download-button class="ml-1" (download)="downloadData($event)"></download-button>
 
@@ -22,7 +18,7 @@
         iconClass="fa fa-window-minimize text-white" (click)="minimize()" tooltip="Minimize window"></dexih-button>
 </div>
 
-<div *ngIf="userParameters" class="m-3">
+<div *ngIf="userParameters && userParameters.length > 0" class="m-3">
     <input-parameters-view [hubKey]="hubKey" [objectType]="objectType" [objectKey]="objectKey" [parameters]="userParameters" [refreshEvent]="refreshDataSubject.asObservable()" (onRefreshData)="refresh()" (onChange)="parameterChange()"></input-parameters-view>
 </div>
 

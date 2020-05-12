@@ -17,7 +17,7 @@ export class HubsComponent implements OnInit, OnDestroy {
     openDelay = false; // used to pause the websocket error message displaying whilst a connect attempt occurs.
 
     constructor(private authService: AuthService, private hubsService: HubsService) {
-        // this.hubService.updateHub(0, 'unknown');
+        authService.initialize();
     }
 
     ngOnInit() {

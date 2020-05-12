@@ -58,8 +58,7 @@ const baseRoutes: Routes = [
 // breadcrumbs are accurate.
 export const routes: Routes = [
     {
-        path: '',
-        component: HubsComponent,
+        path: '', component: HubsComponent,
         children: [
             { path: '', redirectTo: 'index' },
             { path: 'index', data: { pageTitle: 'Hubs' }, children : [

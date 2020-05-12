@@ -7,7 +7,9 @@ import { HubService } from '../../+hub/hub.service';
 
 @Injectable()
 export class LayoutGuard implements CanActivate {
-    constructor(private authService: AuthService, private hubService: HubService, private router: Router, private route: ActivatedRoute) { }
+    constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) { 
+        this.authService.initialize();
+    }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {

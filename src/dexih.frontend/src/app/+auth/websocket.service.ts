@@ -3,10 +3,9 @@ import { Observable, Subscription, BehaviorSubject} from 'rxjs';
 import { LogFactory, eLogLevel } from '../../logging';
 import { HubConnection, HubConnectionBuilder, LogLevel, HubConnectionState } from '@microsoft/signalr';
 import { Location } from '@angular/common';
-import { ClientMessage, RemoteMessage, eClientCommand } from '../shared/shared.models';
+import { ClientMessage, eClientCommand } from '../shared/shared.models';
 
-export class AuthWebSocket implements OnDestroy {
-    // private webSocket: WebSocket;
+export class WebSocketService implements OnDestroy {
     private _webSocketStatus = new BehaviorSubject<string>('Disconnected');
     private _connectHubSubscription: Subscription;
 
@@ -15,12 +14,12 @@ export class AuthWebSocket implements OnDestroy {
 
     private startingWebSocket = false;
 
-    private logger = new LogFactory('Auth.Websocket');
+    private logger = new LogFactory('WebsocketService');
 
     private hubConnection: HubConnection;
     private hubConnected = new BehaviorSubject<boolean>(false);
 
-    constructor(public location: Location
+    constructor(private location: Location
     ) {
         this._webSocketStatus.next('Disconnected');
     }

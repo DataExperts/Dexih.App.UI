@@ -1,11 +1,10 @@
-import { Message, CancelToken, PromiseWithCancel } from '../+auth/auth.models';
+import { Message, CancelToken } from '../+auth/auth.models';
 import { eLogLevel, LogFactory } from '../../logging';
 import { Injectable, OnDestroy } from '@angular/core';
 import { AuthService } from '../+auth/auth.service';
 import { BehaviorSubject, Observable} from 'rxjs';
 import { eDownloadFormat, DexihActiveAgent, InputColumn, SelectQuery,
-    DexihRemoteAgent, SharedData, eDataObjectType, logLevel, eEnvironment, RemoteAgentSettings,
-    RemoteAgentSettingsSubset, DexihDashboard, InputParameterBase, ManagedTask, ListOfValuesItem } from '../shared/shared.models';
+    SharedData, eDataObjectType, DexihDashboard, InputParameterBase, ManagedTask, ListOfValuesItem } from '../shared/shared.models';
 import { PreviewResults } from '../+hub/hub.models';
 
 @Injectable()

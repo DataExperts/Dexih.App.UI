@@ -13,7 +13,7 @@ import { PreviewDataComponent} from '../preview-data/preview-data.component';
 })
 export class PreviewComponent implements OnInit, OnDestroy {
     @ViewChild('DexihMessage', { static: true }) public dexihMessage: DexihMessageComponent;
-    @ViewChild('PreviewData', { static: true }) public previewData: PreviewDataComponent;
+    @ViewChild('PreviewData', { static: false }) public previewData: PreviewDataComponent;
 
     private _subscription: Subscription;
 

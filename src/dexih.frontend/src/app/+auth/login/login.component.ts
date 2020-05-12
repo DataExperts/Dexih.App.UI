@@ -27,14 +27,14 @@ export class LoginComponent implements OnInit, OnDestroy {
         private router: Router,
         private route: ActivatedRoute,
         private authService: AuthService,
-        ) { }
+    ) { }
 
     ngOnInit() {
         this.user = new User('', '', '', false);
 
         // this.authService.refreshGlobalCache();
 
-        let loginType =  +this.authService.getCookie('LoginType');
+        let loginType = +this.authService.getCookie('LoginType');
         switch (loginType) {
             case eLoginProvider.Google:
                 this.enableGoogle();
@@ -58,10 +58,10 @@ export class LoginComponent implements OnInit, OnDestroy {
                     result => {
                         this.doLogin(result);
                     }).catch(
-                    reason => {
-                        this.message = reason.message;
-                    }
-                );
+                        reason => {
+                            this.message = reason.message;
+                        }
+                    );
                 break;
             case eLoginProvider.Google:
                 this.googleLogin(false);
@@ -84,21 +84,18 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.message = '';
         this.authService.setCookie('LoginType', eLoginProvider.Google.toString());
         this.loginType = eLoginProvider.Google;
-        this.authService.getGlobalCachePromise().then(cache => {
-            let clientId = cache.googleClientId;
-            this.authService.googleEnable(clientId).then(
-                externalLogin => {
-                    this.externalLogin = externalLogin;
-                    if (externalLogin) {
-                        this.user.email = externalLogin.email;
-                    } else {
-                        this.user.email = '(no current google login)';
-                    }
-                }).catch(
+        this.authService.googleEnable().then(
+            externalLogin => {
+                this.externalLogin = externalLogin;
+                if (externalLogin) {
+                    this.user.email = externalLogin.email;
+                } else {
+                    this.user.email = '(no current google login)';
+                }
+            }).catch(
                 reason => {
                     this.message = reason.message;
                 });
-        });
     }
 
     enableMicrosoft() {
@@ -106,61 +103,46 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.message = '';
         this.loginType = eLoginProvider.Microsoft;
         this.authService.setCookie('LoginType', eLoginProvider.Microsoft.toString());
-        this.authService.getGlobalCachePromise().then(cache => {
-            let clientId = cache.microsoftClientId;
-            this.logger.LogC(() => `microsoft clientId: ${clientId} `, eLogLevel.Information);
-            this.authService.microsoftEnable(clientId).then(
-                externalLogin => {
-                    this.externalLogin = externalLogin;
-                    if (externalLogin) {
-                        this.user.email = externalLogin.email;
-                    } else {
-                        this.user.email = '(no current microsoft login)';
-                    }
-                }).catch(
+        this.authService.microsoftEnable().then(
+            externalLogin => {
+                this.externalLogin = externalLogin;
+                if (externalLogin) {
+                    this.user.email = externalLogin.email;
+                } else {
+                    this.user.email = '(no current microsoft login)';
+                }
+            }).catch(
                 reason => {
                     this.message = reason.message;
                 });
-        });
     }
 
     googleLogin(forceLogin: boolean) {
-        this.authService.getGlobalCachePromise().then(cache => {
-            let clientId = cache.googleClientId;
-            this.authService.googleLogin(clientId, forceLogin).then(
-                result => {
-                    this.doLogin(result);
-                }).catch(
+        this.authService.googleLogin(forceLogin).then(
+            result => {
+                this.doLogin(result);
+            }).catch(
                 reason => {
                     this.message = reason.message;
                 });
-        }).catch(reason => {
-            this.message = reason.message;
-        });
     }
 
     async googleLogout() {
-        let cache = await this.authService.getGlobalCachePromise();
         await this.authService.googleSignOut();
     }
 
     microsoftLogin(forceLogin: boolean) {
-        this.authService.getGlobalCachePromise().then(cache => {
-            let clientId = cache.microsoftClientId;
-            this.logger.LogC(() => `microsoft clientId: ${clientId} `, eLogLevel.Information);
-            this.authService.microsoftLogin(clientId, forceLogin).then(
-                result => {
-                    this.doLogin(result);
-                }).catch(
+        this.authService.microsoftLogin(forceLogin).then(
+            result => {
+                this.doLogin(result);
+            }).catch(
                 reason => {
                     this.message = reason.message;
                 });
-        });
     }
 
     async microsoftLogout() {
-        let cache = await this.authService.getGlobalCachePromise();
-        await this.authService.microsoftSignOut(cache.microsoftClientId);
+        await this.authService.microsoftSignOut();
     }
 
     doLogin(user: User) {

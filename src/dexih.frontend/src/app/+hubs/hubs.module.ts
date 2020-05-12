@@ -20,6 +20,7 @@ import { RemoteAgentDownloadComponent } from './remoteAgents/remoteAgent-downloa
 import { RemoteAgentEditComponent } from './remoteAgents/remoteAgent-edit';
 import { RemoteAgentTokenComponent} from './remoteAgents/remote-agent-token/remote-agent-token.component';
 import { IssueEditComponent, IssueIndexComponent } from './support'
+import { HubService } from '../+hub/hub.service';
 
 
 @NgModule({
@@ -33,8 +34,6 @@ import { IssueEditComponent, IssueIndexComponent } from './support'
         HubIndexComponent,
         HubEditComponent,
         HubsSummaryComponent,
-        // HubsSharedDataComponent, PreviewDataComponent, PreviewDashboardComponent, PreviewDashboardItemComponent, PreviewComponent,
-        // InputParametersViewComponent,
         ManageComponent,
         TasksIndexComponent,
         TaskStatusComponent,
@@ -48,7 +47,7 @@ import { IssueEditComponent, IssueIndexComponent } from './support'
         RemoteAgentTokenComponent,
         IssueEditComponent, IssueIndexComponent
     ],
-    providers: [HubsService],
+    providers: [HubsService, HubService],
     exports: []
 })
 export class HubsModule {
@@ -56,7 +55,7 @@ export class HubsModule {
     static forRoot(): ModuleWithProviders<HubsModule> {
         return {
             ngModule: HubsModule,
-            providers: [HubsService]
+            providers: [HubsService, HubService]
         };
     }
 }

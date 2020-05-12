@@ -1133,7 +1133,7 @@ namespace dexih.api.Controllers
 
         [HttpGet("[action]")]
         [AllowAnonymous]
-        [ResponseCache(Duration = 3600)]
+        [ResponseCache(Duration = 60)]
         public CacheManager GetGlobalCache()
         {
             try

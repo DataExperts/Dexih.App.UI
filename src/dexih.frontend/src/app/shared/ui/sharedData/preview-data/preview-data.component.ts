@@ -21,8 +21,6 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
     @Input() isMaximized = false;
     @Output() onMaximize = new EventEmitter<boolean>();
 
-    @ViewChild('DexihMessage', { static: true }) public dexihMessage: DexihMessageComponent;
-
     private _subscription: Subscription;
 
     private refreshDataSubject: Subject<void> = new Subject<void>();
@@ -51,21 +49,15 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
     private cancelToken = new CancelToken();
 
     constructor(
-        private authService: AuthService,
-        private route: ActivatedRoute) {
+        private authService: AuthService) {
     }
 
     ngOnInit() {
         try {
             this._subscription = combineLatest(
-                this.authService.getSharedDataIndex('', [], 50, false)
+                this.authService.getSharedDataObject(this.hubKey, this.objectType, this.objectKey)
             ).subscribe(result => {
-                let items = result[0];
-
-                this.selectQuery.rows = 100;
-
-                let object = items.find(c => c.hubKey === this.hubKey
-                        && c.objectKey === this.objectKey && c.objectType === this.objectType );
+                let object = result[0];
 
                 if (object != null) {
                     this.inputColumns = object.inputColumns;
@@ -84,7 +76,6 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
             });
         } catch (e) {
             this.authService.addUpdateNotification(e, false);
-            this.dexihMessage.addMessage(e);
         }
     }
 
@@ -124,7 +115,6 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
                 }
             }).catch(reason => {
                 this.authService.addUpdateNotification(reason, false);
-                this.dexihMessage.addMessage(reason);
                 this.baseData = [];
                 this.data = [];
                 this.name = 'failed';
@@ -145,7 +135,6 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
             this.authService.addUpdateNotification(message, false);
         }).catch(reason => {
             this.authService.addUpdateNotification(reason, false);
-            this.dexihMessage.addMessage(reason);
         });
     }
 

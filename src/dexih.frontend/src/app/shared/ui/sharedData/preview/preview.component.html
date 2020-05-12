@@ -22,19 +22,11 @@
         </div>
     </ng-template>
 
-    <div class="m-1">
-        <dexih-message #DexihMessage></dexih-message>
-    </div>
-
-    <ng-template [ngTemplateOutlet]="previewTemplate"></ng-template>
-
+    <preview-data #PreviewData [hubKey]="hubKey" [objectType]="objectType" [objectKey]="objectKey"></preview-data>
 </dexih-widget>
 </div>
 
 <div *ngIf="embed">
-<ng-template [ngTemplateOutlet]="previewTemplate"></ng-template>
+    <preview-data [hubKey]="hubKey" [objectType]="objectType" [objectKey]="objectKey"></preview-data>
 </div>
 
-<ng-template #previewTemplate>
-    <preview-data #PreviewData [hubKey]="hubKey" [objectType]="objectType" [objectKey]="objectKey"></preview-data>
-</ng-template>

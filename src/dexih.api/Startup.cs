@@ -36,6 +36,8 @@ namespace dexih.api
     {
 	    
 	    private readonly ILogger _logger;
+	    private readonly string sessionId = Guid.NewGuid().ToString();
+
 
 	    public Startup(IConfiguration configuration, ILogger<Startup> logger)
 	    {
@@ -65,9 +67,8 @@ namespace dexih.api
 //		        options.BlobName = "log.txt";
 //	        });
 
-
 	        var appSettings = Configuration.GetSection("AppSettings").Get<ApplicationSettings>();
-	        
+        
 	        
             // Add framework services.
             //services.AddApplicationInsightsTelemetry(Configuration);
@@ -108,9 +109,7 @@ namespace dexih.api
 				});
 				
 				var redis = ConnectionMultiplexer.Connect(appSettings.RedisCacheConnectionString);
-				services.AddDataProtection()
-					.PersistKeysToStackExchangeRedis(redis, "dexih-keys");
-
+				services.AddDataProtection().PersistKeysToStackExchangeRedis(redis, "dexih-keys");
 			}
 			else
 			{

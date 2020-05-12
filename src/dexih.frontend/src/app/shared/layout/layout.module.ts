@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {NgModule, ModuleWithProviders} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import { RouterModule} from '@angular/router';
@@ -12,6 +12,7 @@ import {NavigationModule} from './navigation/navigation.module';
 import { MainLayoutComponent } from './app-layouts/main-layout.component';
 import { EmptyLayoutComponent } from './app-layouts/empty-layout.component';
 import { AuthLayoutComponent } from './app-layouts/auth-layout.component';
+import { HubService } from '../../+hub';
 
 @NgModule({
   imports: [
@@ -35,8 +36,16 @@ import { AuthLayoutComponent } from './app-layouts/auth-layout.component';
     // NavigationModule,
     // FooterComponent,
     // RibbonComponent,
+  ],
+  providers: [
+    HubService
   ]
 })
 export class LayoutModule {
-
+  static forRoot(): ModuleWithProviders<LayoutModule> {
+    return {
+        ngModule: LayoutModule,
+        providers: [HubService]
+    };
+}
 }

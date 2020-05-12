@@ -1,8 +1,4 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { HubService } from '../../../+hub/hub.service';
-import { AuthService } from '../../../+auth/auth.service';
-import { Observable, BehaviorSubject, Subscription, combineLatest} from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
 import { HubsService } from '../../hubs.service';
 import { ManagedTask, eManagedTaskStatus } from '../../../shared/shared.models';
 
@@ -13,11 +9,9 @@ import { ManagedTask, eManagedTaskStatus } from '../../../shared/shared.models';
 export class TaskStatusComponent implements OnInit, OnDestroy {
     @Input() public task: ManagedTask;
 
-    private dataObject: any;
     public currentStatus: StatusInfo;
 
-    constructor(private hubService: HubService, private hubsService: HubsService,
-        private router: Router) {
+    constructor(private hubsService: HubsService) {
     }
 
     ngOnInit() {

@@ -7,7 +7,7 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {routing} from './app.routing';
-import {HubService} from './+hub/hub.service';
+// import {HubService} from './+hub/hub.service';
 import {AuthService} from './+auth/auth.service';
 import {LayoutGuard} from './shared/layout/layout.guard';
 import {HubsService } from './+hubs/hubs.service';
@@ -28,7 +28,7 @@ import { LayoutModule } from './shared/layout/layout.module';
   ],
   providers: [
     {provide: ErrorHandler, useClass: GlobalErrorHandler},
-    HubService,
+    // HubService,
       HubsService,
       AuthService,
       LayoutGuard,

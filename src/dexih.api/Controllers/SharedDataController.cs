@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using dexih.api.Models;
@@ -52,6 +53,14 @@ namespace dexih.api.Controllers
             var sharedData = await _operations.RepositoryManager.GetSharedDataIndex(user, sharedDataIndex.SearchString, sharedDataIndex.HubKeys, sharedDataIndex.MaxResults, cancellationToken);
             return sharedData;
         }
+
+        [HttpPost("[action]")]
+        public async Task<SharedData> SharedDataObject([FromBody] SharedDataObject sharedDataObject, CancellationToken cancellationToken)
+        {
+            var user = await _operations.RepositoryManager.GetUserAsync(User, cancellationToken, false);
+            var sharedData = await _operations.RepositoryManager.GetSharedDataObject(user, sharedDataObject.HubKey, sharedDataObject.ObjectType, sharedDataObject.ObjectKey, cancellationToken);
+            return sharedData;
+        }
         
         [HttpPost("[action]")]
         public async Task<string> PreviewListOfValues([FromBody] PreviewLOV previewLov, CancellationToken cancellationToken)
@@ -72,8 +81,16 @@ namespace dexih.api.Controllers
         }
         
         [HttpPost("[action]")]
-        public async Task<string> PreviewData([FromBody] PreviewData previewData, CancellationToken cancellationToken)
+        public async Task<IActionResult> PreviewData([FromBody] PreviewData previewData, CancellationToken cancellationToken)
         {
+            var remoteAgent = await _remoteAgents.GetHubReaderRemoteAgent(previewData.HubKey, _operations.RepositoryManager, cancellationToken);
+
+            if (previewData.RemoteAgentId != remoteAgent.InstanceId)
+            {
+                return StatusCode(426, remoteAgent);
+                // throw new Exception("The remote agent did not match the current agent.");
+            }
+            
             var user = await _operations.RepositoryManager.GetUserAsync(User, cancellationToken, false);
             var repositoryManager = _operations.RepositoryManager;
 
@@ -133,13 +150,21 @@ namespace dexih.api.Controllers
             }
     
             _logger.LogTrace(LoggingEvents.HubPreviewTable, "SharedDataController.PreviewData: HubKey: {updateBrowserHub}, ObjectKey: {objectKey}", previewData.HubKey, previewData.ObjectKey);
-            return data;
+            return Ok(data);
         }
         
         [HttpPost("[action]")]
-        public async Task<string> DownloadData([FromBody] DownloadSharedData downloadSharedData, CancellationToken cancellationToken)
+        public async Task<IActionResult> DownloadData([FromBody] DownloadSharedData downloadSharedData, CancellationToken cancellationToken)
         {
             _logger.LogTrace(LoggingEvents.HubUploadFiles, "SharedDataController.DownloadData");
+            
+            var remoteAgent = await _remoteAgents.GetHubReaderRemoteAgent(downloadSharedData.HubKey, _operations.RepositoryManager, cancellationToken);
+
+            if (downloadSharedData.RemoteAgentId != remoteAgent.InstanceId)
+            {
+                return StatusCode(426, remoteAgent);
+                // throw new Exception("The remote agent did not match the current agent.");
+            }
             
             // use a dictionary to group the download requests by hub.
             var downloadData = new List<DownloadData.DownloadObject>();
@@ -167,15 +192,15 @@ namespace dexih.api.Controllers
             var repositoryManager = _operations.RepositoryManager;
 
             var responseKey = await _remoteAgents.DownloadData(downloadSharedData.RemoteAgentId, downloadSharedData.HubKey, downloadSharedData.DownloadUrl, downloadSharedData.ClientId, downloadData.ToArray(), downloadSharedData.DownloadFormat, true, downloadSharedData.ZipFiles, repositoryManager, cancellationToken);
-            return responseKey;
+            return Ok(responseKey);
         }
         
         [HttpPost("[action]")]
-        public async Task<DexihDashboard> PreviewDashboard([FromBody] PreviewSharedDashboard previewDashboard, CancellationToken cancellationToken)
+        public async Task<IActionResult> PreviewDashboard([FromBody] PreviewSharedDashboard previewDashboard, CancellationToken cancellationToken)
         {
             var user = await _operations.RepositoryManager.GetUserAsync(User, cancellationToken, false);
             var repositoryManager = _operations.RepositoryManager;
-
+            
             //check user can access the hub.
             var canAccess = await repositoryManager.CanAccessSharedObjects(user, previewDashboard.HubKey, cancellationToken);
             if (!canAccess)
@@ -214,12 +239,20 @@ namespace dexih.api.Controllers
 //                }
 //            }
     
-            return dashboard;
+            return Ok(dashboard);
         }
         
         [HttpPost("[action]")]
-        public async Task<string> PreviewDashboardItem([FromBody] PreviewSharedDashboardItem previewDashboard, CancellationToken cancellationToken)
+        public async Task<IActionResult> PreviewDashboardItem([FromBody] PreviewSharedDashboardItem previewDashboard, CancellationToken cancellationToken)
         {
+            var remoteAgent = await _remoteAgents.GetHubReaderRemoteAgent(previewDashboard.HubKey, _operations.RepositoryManager, cancellationToken);
+
+            if (previewDashboard.RemoteAgentId != remoteAgent.InstanceId)
+            {
+                return StatusCode(426, remoteAgent);
+                // throw new Exception("The remote agent did not match the current agent.");
+            }
+            
             var user = await _operations.RepositoryManager.GetUserAsync(User, cancellationToken, false);
             var repositoryManager = _operations.RepositoryManager;
 
@@ -249,15 +282,15 @@ namespace dexih.api.Controllers
             switch (view.SourceType)
             {
                 case EDataObjectType.Table:
-                    return await _remoteAgents.PreviewTable(previewDashboard.RemoteAgentId,
+                    return Ok(await _remoteAgents.PreviewTable(previewDashboard.RemoteAgentId,
                         previewDashboard.HubKey, previewDashboard.DownloadUrl, view.SourceTableKey.Value,
                         view.SelectQuery, view.GetViewConfig(), view.InputValues, itemParameters, false, false, repositoryManager,
-                        cancellationToken);
+                        cancellationToken));
                 case EDataObjectType.Datalink:
-                    return await _remoteAgents.PreviewDatalink(previewDashboard.RemoteAgentId,
+                    return Ok(await _remoteAgents.PreviewDatalink(previewDashboard.RemoteAgentId,
                         previewDashboard.HubKey, previewDashboard.DownloadUrl, view.SourceDatalinkKey.Value, false,
                         view.SelectQuery, view.GetViewConfig(), view.InputValues, itemParameters, false, repositoryManager,
-                        cancellationToken);
+                        cancellationToken));
                 default:
                     throw new ArgumentOutOfRangeException();
             }
