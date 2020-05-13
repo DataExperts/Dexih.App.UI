@@ -331,7 +331,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
 
                             let labels = Object.keys(pivotData);
                             chartData = new Array(labels.length);
-                            let seriesColumn = this.columns[this.seriesColumnIndex];
+                            let seriesColumn = this.columns[this.seriesPivotIndex];
 
                             for (let i  = 0; i < labels.length; i++) {
                                 chartData[i] = {
