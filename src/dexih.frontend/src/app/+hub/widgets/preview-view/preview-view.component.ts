@@ -4,7 +4,7 @@ import { AuthService } from '../../../+auth/auth.service';
 import { HubService } from '../../hub.service';
 import { DexihInputParameter, DataCache, HubCache, PreviewResults } from '../../hub.models';
 import { DexihActiveAgent, InputColumn, DexihColumnBase, DexihView, eViewType,
-    eDownloadFormat, DownloadObject, eSourceType, eDataObjectType } from '../../../shared/shared.models';
+    eDownloadFormat, DownloadObject, eDataObjectType } from '../../../shared/shared.models';
 import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
@@ -51,7 +51,6 @@ export class PreviewViewComponent implements OnInit, OnChanges, OnDestroy {
         private hubService: HubService,
         private authService: AuthService,
         ) {
-
     }
 
     ngOnInit() {

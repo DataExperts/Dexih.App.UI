@@ -5,28 +5,28 @@
 </div>
 <div class="chart-parent" >
 <div (resized)="onResized($event)" *ngIf="results && chartType" id="chart" [ngClass]="{'responsive-chart' : responsive, 'fixed-chart': !responsive}" >
-    <ngx-charts-bar-vertical *ngIf="chartType.key === eChartType.BarVertical" [view]="view" [scheme]="config.colorScheme"
+    <ngx-charts-bar-vertical *ngIf="chartType.key === eChartType.BarVertical" [view]="view" 
         [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"
         [legend]="config.showLegend" [legendPosition]="config.legendPosition" [showGridLines]="config.showGridLines" [showXAxisLabel]="config.showXAxisLabel"
         [showYAxisLabel]="config.showYAxisLabel" [xAxisLabel]="config.xAxisLabel" [yScaleMin]="config.yScaleMin" 
-        [yScaleMax]="config.yScaleMax" [yAxisLabel]="config.yAxisLabel">
+        [yScaleMax]="config.yScaleMax" [yAxisLabel]="config.yAxisLabel" [customColors]="customColors">
     </ngx-charts-bar-vertical>
 
-    <ngx-charts-bar-horizontal *ngIf="chartType.key === eChartType.BarHorizontal" [view]="view" [scheme]="config.colorScheme"
+    <ngx-charts-bar-horizontal *ngIf="chartType.key === eChartType.BarHorizontal" [view]="view" 
         [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"
         [legend]="config.showLegend" [legendPosition]="config.legendPosition" [showGridLines]="config.showGridLines" [showXAxisLabel]="config.showXAxisLabel"
         [showYAxisLabel]="config.showYAxisLabel" [xAxisLabel]="config.xAxisLabel" [xScaleMin]="config.xScaleMin"
-        [xScaleMax]="config.xScaleMax" [yAxisLabel]="config.yAxisLabel">
+        [xScaleMax]="config.xScaleMax" [yAxisLabel]="config.yAxisLabel" [customColors]="customColors">
     </ngx-charts-bar-horizontal>
 
-    <ngx-charts-bar-vertical-2d *ngIf="chartType.key === eChartType.BarVertical2D" [view]="view" [scheme]="config.colorScheme"
+    <ngx-charts-bar-vertical-2d *ngIf="chartType.key === eChartType.BarVertical2D" [view]="view" [customColors]="customColors"
         [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"
         [legend]="config.showLegend" [legendPosition]="config.legendPosition" [showGridLines]="config.showGridLines" [showXAxisLabel]="config.showXAxisLabel"
         [showYAxisLabel]="config.showYAxisLabel" [xAxisLabel]="config.xAxisLabel" [yScaleMax]="config.yScaleMax"
         [yAxisLabel]="config.yAxisLabel">
     </ngx-charts-bar-vertical-2d>
 
-    <ngx-charts-bar-horizontal-2d *ngIf="chartType.key === eChartType.BarHorizontal2D" [view]="view" [scheme]="config.colorScheme"
+    <ngx-charts-bar-horizontal-2d *ngIf="chartType.key === eChartType.BarHorizontal2D" [view]="view" [customColors]="customColors"
         [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"
         [legend]="config.showLegend" [legendPosition]="config.legendPosition" [showGridLines]="config.showGridLines" [showXAxisLabel]="config.showXAxisLabel"
         [showYAxisLabel]="config.showYAxisLabel" [xAxisLabel]="config.xAxisLabel" [xScaleMax]="config.xScaleMax"
@@ -34,73 +34,73 @@
     </ngx-charts-bar-horizontal-2d>
 
     <ngx-charts-bar-vertical-stacked *ngIf="chartType.key === eChartType.BarVerticalStacked"
-        [view]="view" [scheme]="config.colorScheme" [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis"
+        [view]="view" [customColors]="customColors" [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis"
         [yAxis]="config.showYAxis" [legend]="config.showLegend" [legendPosition]="config.legendPosition" [showGridLines]="config.showGridLines"
         [showXAxisLabel]="config.showXAxisLabel" [showYAxisLabel]="config.showYAxisLabel"
         [xAxisLabel]="config.xAxisLabel" [yScaleMax]="config.yScaleMax" [yAxisLabel]="config.yAxisLabel">
     </ngx-charts-bar-vertical-stacked>
 
     <ngx-charts-bar-horizontal-stacked *ngIf="chartType.key === eChartType.BarHorizontalStacked"
-        [view]="view" [scheme]="config.colorScheme" [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis"
+        [view]="view" [customColors]="customColors" [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis"
         [yAxis]="config.showYAxis" [legend]="config.showLegend" [legendPosition]="config.legendPosition" [showGridLines]="config.showGridLines"
         [showXAxisLabel]="config.showXAxisLabel" [showYAxisLabel]="config.showYAxisLabel"
         [xAxisLabel]="config.xAxisLabel" [xScaleMax]="config.xScaleMax" [yAxisLabel]="config.yAxisLabel">
     </ngx-charts-bar-horizontal-stacked>
 
     <ngx-charts-bar-vertical-normalized *ngIf="chartType.key === eChartType.BarVerticalNormalized"
-        [view]="view" [scheme]="config.colorScheme" [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis"
+        [view]="view" [customColors]="customColors" [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis"
         [yAxis]="config.showYAxis" [legend]="config.showLegend" [legendPosition]="config.legendPosition" [showGridLines]="config.showGridLines"
         [showXAxisLabel]="config.showXAxisLabel" [showYAxisLabel]="config.showYAxisLabel"
         [xAxisLabel]="config.xAxisLabel" [yAxisLabel]="config.yAxisLabel">
     </ngx-charts-bar-vertical-normalized>
 
     <ngx-charts-bar-horizontal-normalized *ngIf="chartType.key === eChartType.BarHorizontalNormalized"
-        [view]="view" [scheme]="config.colorScheme" [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis"
+        [view]="view" [customColors]="customColors" [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis"
         [yAxis]="config.showYAxis" [legend]="config.showLegend" [legendPosition]="config.legendPosition" [showGridLines]="config.showGridLines"
         [showXAxisLabel]="config.showXAxisLabel" [showYAxisLabel]="config.showYAxisLabel"
         [xAxisLabel]="config.xAxisLabel" [yAxisLabel]="config.yAxisLabel">
     </ngx-charts-bar-horizontal-normalized>
 
-    <ngx-charts-pie-chart *ngIf="chartType.key === eChartType.Pie" [view]="view" [scheme]="config.colorScheme" [results]="results"
+    <ngx-charts-pie-chart *ngIf="chartType.key === eChartType.Pie" [view]="view" [customColors]="customColors" [results]="results"
         [legend]="config.showLegend" [legendPosition]="config.legendPosition" [labels]="config.showXAxis" [explodeSlices]="config.explodeSlices"
         [doughnut]="config.doughnut" [gradient]="config.showGradient" [legend]="false" [labels]="true" >
     </ngx-charts-pie-chart>
 
-    <ngx-charts-advanced-pie-chart *ngIf="chartType.key === eChartType.PieAdvanced" [view]="view" [scheme]="config.colorScheme"
+    <ngx-charts-advanced-pie-chart *ngIf="chartType.key === eChartType.PieAdvanced" [view]="view" [customColors]="customColors"
         [results]="results" [gradient]="config.showGradient">
     </ngx-charts-advanced-pie-chart>
 
-    <ngx-charts-pie-grid *ngIf="chartType.key === eChartType.PieGrid" [view]="view" [scheme]="config.colorScheme" [results]="results">
+    <ngx-charts-pie-grid *ngIf="chartType.key === eChartType.PieGrid" [view]="view" [customColors]="customColors" [results]="results">
     </ngx-charts-pie-grid>
 
-    <ngx-charts-line-chart *ngIf="chartType.key === eChartType.Line" [view]="view" [scheme]="config.colorScheme" [results]="results"
+    <ngx-charts-line-chart *ngIf="chartType.key === eChartType.Line" [view]="view" [customColors]="customColors" [results]="results"
         [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"
         [legend]="config.showLegend" [legendPosition]="config.legendPosition" [showGridLines]="config.showGridLines" [showXAxisLabel]="config.showXAxisLabel"
         [showYAxisLabel]="config.showYAxisLabel" [xAxisLabel]="config.xAxisLabel" [autoScale]="config.autoScale" [yScaleMin]="config.yScaleMin"
         [yScaleMax]="config.yScaleMax" [yAxisLabel]="config.yAxisLabel">
     </ngx-charts-line-chart>
 
-    <ngx-charts-polar-chart *ngIf="chartType.key === eChartType.Polar" [view]="view" [scheme]="config.colorScheme" [results]="results"
+    <ngx-charts-polar-chart *ngIf="chartType.key === eChartType.Polar" [view]="view" [customColors]="customColors" [results]="results"
         [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"
         [legend]="config.showLegend" [legendPosition]="config.legendPosition" [showGridLines]="config.showGridLines" [showXAxisLabel]="config.showXAxisLabel"
         [showYAxisLabel]="config.showYAxisLabel" [xAxisLabel]="config.xAxisLabel" [yAxisLabel]="config.yAxisLabel">
     </ngx-charts-polar-chart>
 
-    <ngx-charts-area-chart *ngIf="chartType.key === eChartType.Area" [view]="view" [scheme]="config.colorScheme" [results]="results"
+    <ngx-charts-area-chart *ngIf="chartType.key === eChartType.Area" [view]="view" [customColors]="customColors" [results]="results"
         [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"
         [legend]="config.showLegend" [legendPosition]="config.legendPosition" [showGridLines]="config.showGridLines" [showXAxisLabel]="config.showXAxisLabel"
         [showYAxisLabel]="config.showYAxisLabel" [xAxisLabel]="config.xAxisLabel" [yScaleMax]="config.yScaleMax"
         [yAxisLabel]="config.yAxisLabel">
     </ngx-charts-area-chart>
 
-    <ngx-charts-area-chart-stacked *ngIf="chartType.key === eChartType.AreaStacked" [view]="view" [scheme]="config.colorScheme"
+    <ngx-charts-area-chart-stacked *ngIf="chartType.key === eChartType.AreaStacked" [view]="view" [customColors]="customColors"
         [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"
         [legend]="config.showLegend" [legendPosition]="config.legendPosition" [showGridLines]="config.showGridLines" [showXAxisLabel]="config.showXAxisLabel"
         [showYAxisLabel]="config.showYAxisLabel" [xAxisLabel]="config.xAxisLabel" [yScaleMin]="config.yScaleMin"
         [yScaleMax]="config.yScaleMax" [yAxisLabel]="config.yAxisLabel">
     </ngx-charts-area-chart-stacked>
 
-    <ngx-charts-area-chart-normalized *ngIf="chartType.key === eChartType.AreaNormalized" [view]="view" [scheme]="config.colorScheme"
+    <ngx-charts-area-chart-normalized *ngIf="chartType.key === eChartType.AreaNormalized" [view]="view" [customColors]="customColors"
         [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"
         [legend]="config.showLegend" [legendPosition]="config.legendPosition" [showGridLines]="config.showGridLines" [showXAxisLabel]="config.showXAxisLabel"
         [showYAxisLabel]="config.showYAxisLabel" [xAxisLabel]="config.xAxisLabel" [yAxisLabel]="config.yAxisLabel">
@@ -108,34 +108,34 @@
 
     <ngx-charts-bubble-chart
         *ngIf="chartType.key === eChartType.Bubble || chartType.key === eChartType.Error || chartType.key === eChartType.Scatter"
-        [view]="view" [scheme]="config.colorScheme" [results]="results" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"
+        [view]="view" [customColors]="customColors" [results]="results" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"
         [legend]="config.showLegend" [legendPosition]="config.legendPosition" [showGridLines]="config.showGridLines" [showXAxisLabel]="config.showXAxisLabel"
         [showYAxisLabel]="config.showYAxisLabel" [xAxisLabel]="config.xAxisLabel" [autoScale]="config.autoScale" [xScaleMin]="config.xScaleMin"
         [xScaleMax]="config.xScaleMax" [yScaleMin]="config.yScaleMin" [yScaleMax]="config.yScaleMax"
         [yAxisLabel]="config.yAxisLabel">
     </ngx-charts-bubble-chart>
 
-    <ngx-charts-heat-map *ngIf="chartType.key === eChartType.HeatMap" [view]="view" [scheme]="config.colorScheme"
+    <ngx-charts-heat-map *ngIf="chartType.key === eChartType.HeatMap" [view]="view" [customColors]="customColors"
         [gradient]="config.showGradient" [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis"
         [yAxis]="config.showYAxis" [legend]="config.showLegend" [legendPosition]="config.legendPosition" [showXAxisLabel]="config.showXAxisLabel"
         [showYAxisLabel]="config.showYAxisLabel" [xAxisLabel]="config.xAxisLabel" [max]="config.xScaleMax"
         [min]="config.xScaleMin" [yAxisLabel]="config.yAxisLabel">
     </ngx-charts-heat-map>
 
-    <ngx-charts-tree-map *ngIf="chartType.key === eChartType.TreeMap" [view]="view" [scheme]="config.colorScheme"
+    <ngx-charts-tree-map *ngIf="chartType.key === eChartType.TreeMap" [view]="view" [customColors]="customColors"
         [gradient]="config.showGradient" [results]="results" [gradient]="config.showGradient">
     </ngx-charts-tree-map>
 
-    <ngx-charts-number-card *ngIf="chartType.key === eChartType.Cards" [view]="view" [scheme]="config.colorScheme"
+    <ngx-charts-number-card *ngIf="chartType.key === eChartType.Cards" [view]="view" [customColors]="customColors"
         [results]="results">
     </ngx-charts-number-card>
 
-    <ngx-charts-gauge *ngIf="chartType.key === eChartType.Gauge" [view]="view" [scheme]="config.colorScheme" [results]="results"
+    <ngx-charts-gauge *ngIf="chartType.key === eChartType.Gauge" [view]="view" [customColors]="customColors" [results]="results"
         [showAxis]="config.showXAxis" [legend]="config.showLegend" [legendPosition]="config.legendPosition" [showAxis]="config.showXAxisLabel"
         [textValue]="config.xAxisLabel" [min]="config.xScaleMin" [max]="config.xScaleMax" [units]="config.yAxisLabel">
     </ngx-charts-gauge>
 
-    <ngx-charts-linear-gauge *ngIf="chartType.key === eChartType.LinearGauge" [view]="view" [scheme]="config.colorScheme"
+    <ngx-charts-linear-gauge *ngIf="chartType.key === eChartType.LinearGauge" [view]="view" [customColors]="customColors"
         [results]="results" [min]="config.xScaleMin" [max]="config.xScaleMax" [units]="config.yAxisLabel">
     </ngx-charts-linear-gauge>
 

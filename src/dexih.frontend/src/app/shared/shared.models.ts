@@ -22,7 +22,7 @@ export class AnimateConfig {
    }
    
    export class ApplicationUser {
-    public id: string = '7d794454-7996-41e5-be9d-0606ecacb9a0';
+    public id: string = '603057b6-72d5-4bf7-b42b-9b7f30584b8b';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -31,7 +31,7 @@ export class AnimateConfig {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = '79eb8546-41a7-4958-91ae-f0901f727a1d';
+    public securityStamp: string = 'ffd8d69d-997d-4f64-8c0a-8ccfe4c836fe';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -81,6 +81,7 @@ export class AnimateConfig {
    export class ChartConfig {
     public labelColumn: string = null;
     public seriesColumn: string = null;
+    public pivotColumn: string = null;
     public seriesColumns: string[] = [];
     public xColumn: string = null;
     public yColumn: string = null;

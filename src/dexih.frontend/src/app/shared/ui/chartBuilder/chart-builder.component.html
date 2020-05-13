@@ -55,6 +55,12 @@
             </form-select>
         </div>
         <div class="flex-fill pl-1">
+            <form-select [(ngModel)]="config.pivotColumn" (ngModelChange)="updateChart($event)"
+            [allowNullSelect]="true" selectNullMessage="(No pivot column)"
+            labelLeft="Series Pivot" [items]="columns" itemKey="title" itemName="title">
+            </form-select>
+        </div>
+        <div class="flex-fill pl-1">
             <form-tags-dropdown [(ngModel)]="config.seriesColumns" (ngModelChange)="updateChart($event)"
                 labelLeft="Series Columns" [items]="columns" itemKey="title" itemName="title" [enableAddAll]="true">
             </form-tags-dropdown>
