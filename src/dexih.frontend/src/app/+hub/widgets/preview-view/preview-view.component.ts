@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
-import { combineLatest, Subscription } from 'rxjs';
+import { combineLatest, Subscription, Subject } from 'rxjs';
 import { AuthService } from '../../../+auth/auth.service';
 import { HubService } from '../../hub.service';
 import { DexihInputParameter, DataCache, HubCache, PreviewResults } from '../../hub.models';
@@ -20,7 +20,6 @@ export class PreviewViewComponent implements OnInit, OnChanges, OnDestroy {
     @Output() dataChange = new EventEmitter<DataCache>();
 
     private _subscription: Subscription;
-    private _resizeSubscription: Subscription;
     private _refreshDataSubscription: Subscription;
 
     private hubCache: HubCache;
@@ -47,6 +46,10 @@ export class PreviewViewComponent implements OnInit, OnChanges, OnDestroy {
     public dataResult: PreviewResults;
     private cancelToken = new CancelToken();
 
+    public dataRows = [];
+
+    private refreshDataSubject: Subject<void> = new Subject<void>();
+    
     constructor(
         private hubService: HubService,
         private authService: AuthService,
@@ -75,12 +78,21 @@ export class PreviewViewComponent implements OnInit, OnChanges, OnDestroy {
 
                         if (this.data) {
                             this._refreshDataSubscription = this.data.data.subscribe(dataResult => {
+                                if (!dataResult) {
+                                    return;
+                                }
+
                                 this.dataResult = dataResult;
+
+                                if (!dataResult.viewConfig.animateConfig) {
+                                    this.dataRows = this.dataResult.data;
+                                }
 
                                 if (dataResult.status) {
                                     this.hubService.addHubMessage(dataResult.status, false, this.view.name);
                                 }
                             });
+
                         } else if (this.remoteAgent) {
                             if (!this.firstLoad) {
                                 if (!this.dialogOpen) {
@@ -134,9 +146,12 @@ export class PreviewViewComponent implements OnInit, OnChanges, OnDestroy {
 
     ngOnDestroy(): void {
         if (this._subscription) { this._subscription.unsubscribe(); }
-        if (this._resizeSubscription) { this._resizeSubscription.unsubscribe(); }
         if (this._refreshDataSubscription) { this._refreshDataSubscription.unsubscribe(); }
         this.cancelToken.cancel();
+    }
+
+    parameterChange() {
+        this.refresh();
     }
 
     close() {

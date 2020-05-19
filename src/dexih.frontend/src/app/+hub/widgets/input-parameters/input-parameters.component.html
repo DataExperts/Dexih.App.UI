@@ -1,5 +1,5 @@
 <div *ngIf="parameters">
-    <dexih-button-new *ngIf="showEdit && parameters.controls.length === 0" (click)="add()" text="Add Parameter"></dexih-button-new>
+    <dexih-button-new *ngIf="showEdit && allowAddRemove && parameters.controls.length === 0" (click)="add()" text="Add Parameter"></dexih-button-new>
     <span *ngFor="let parameter of parameters.controls; let i = index" class="input-group mb-1">
         <form [formGroup]="parameter" *ngIf="parameter.controls.isValid.value && (showEdit || parameter.controls.allowUserSelect.value)">
             <div class="d-md-inline-flex">
@@ -32,7 +32,7 @@
 
                     <form-checkbox [border]="true" formControlName="allowUserSelect">Selectable</form-checkbox>
 
-                    <div *ngIf="showEdit" class="input-group-append">
+                    <div *ngIf="showEdit && allowAddRemove" class="input-group-append">
         
                         <div class="input-group-text p-0">
                             <button type="button" (click)="add(i)" class="btn btn-sm border-0 rounded-0 bg-transparent"

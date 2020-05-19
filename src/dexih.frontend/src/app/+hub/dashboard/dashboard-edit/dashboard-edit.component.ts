@@ -9,7 +9,7 @@ import { DashboardItemComponent } from './item/dashboard-item.component';
 import { EventEmitter } from 'selenium-webdriver';
 import { CancelToken } from '../../../+auth/auth.models';
 import { HubCache, eCacheStatus, DataCache, PreviewResults } from '../../hub.models';
-import { DexihView, DexihDashboard, DexihDashboardItem, DexihActiveAgent } from '../../../shared/shared.models';
+import { DexihView, DexihDashboard, DexihDashboardItem, DexihActiveAgent, DownloadObject, eDataObjectType } from '../../../shared/shared.models';
 
 @Component({
   selector: 'dexih-dashboard-edit-form',
@@ -132,7 +132,7 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
       this.formsService.dashboard(dashboard);
       let runTime = this.formsService.currentForm.controls.runTime.value;
       runTime.showEdit = true;
-      this.formsService.currentForm.controls.runTime.setValue(runTime);
+      // this.formsService.currentForm.controls.runTime.setValue(runTime);
       // this.add();
 
       // update the url with the saved key
@@ -175,9 +175,11 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
         let item = <FormGroup> items.controls.find((form: FormGroup) => form.controls.key.value === url.dashboardItemKey);
         if (item) {
           let data = <DataCache> item.controls.runTime.value.data;
+          data.isRefreshing = true;
           this.hubService.getRemoteResponse<PreviewResults>(url.dataKey, this.cancelToken).then(result => {
             result.columns = this.authService.constructDataTableColumns(result.columns);
             data.data.next(result);
+            data.isRefreshing = false;
           }).catch();
         }
       });
@@ -233,12 +235,36 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
     }
     item.viewKey = viewKey;
     item.name = view.name;
-    let control = this.formsService.dashboardItem(item);
-    items.push(control);
+    let formGroup = this.formsService.dashboardItem(item);
+    this.formsService.updateDashboardItemView(formGroup);
+    items.push(formGroup);
   }
 
   public newView() {
     this.router.navigate(['view-new'], { relativeTo: this.route } )
+  }
+
+  download(format) {
+    let items = <DexihDashboardItem[]> this.formsService.currentForm.controls.dexihDashboardItems.value;
+
+    let downloadObjects = items.filter(c => c.viewKey).map(item => {
+      let view = this.hubCache.hub.dexihViews.find(c => c.key === item.viewKey);
+
+      let downloadObject = new DownloadObject();
+      if (view.sourceType === eDataObjectType.Datalink) {
+        downloadObject.objectKey = view.sourceDatalinkKey;
+        downloadObject.objectType = eDataObjectType.Datalink;
+      }
+      if (view.sourceType === eDataObjectType.Table) {
+        downloadObject.objectKey = view.sourceTableKey;
+        downloadObject.objectType = eDataObjectType.Table;
+      }
+      downloadObject.query = view.selectQuery;
+
+      return downloadObject;
+    })
+
+    this.hubService.downloadData(downloadObjects, false, format, this.cancelToken)
   }
 
   public canDeactivate(): Promise<boolean> {

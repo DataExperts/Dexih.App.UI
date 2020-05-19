@@ -3,7 +3,7 @@
         Chart not displayed.  Check the chart type, labels and series have been set.
     </div>
 </div>
-<div class="chart-parent" >
+<div #wrapper class="chart-parent" >   
 <div (resized)="onResized($event)" *ngIf="results && chartType" id="chart" [ngClass]="{'responsive-chart' : responsive, 'fixed-chart': !responsive}" >
     <ngx-charts-bar-vertical *ngIf="chartType.key === eChartType.BarVertical" [view]="view" 
         [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"

@@ -22,7 +22,7 @@ export class AnimateConfig {
    }
    
    export class ApplicationUser {
-    public id: string = '603057b6-72d5-4bf7-b42b-9b7f30584b8b';
+    public id: string = '6be590e6-cab0-452a-893b-831adee52c0f';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -31,7 +31,7 @@ export class AnimateConfig {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = 'ffd8d69d-997d-4f64-8c0a-8ccfe4c836fe';
+    public securityStamp: string = 'edc70adb-c8ff-44d2-a3de-e7c35e57bf18';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -96,7 +96,7 @@ export class AnimateConfig {
     public showXAxis: boolean = true;
     public showYAxis: boolean = true;
     public showLegend: boolean = false;
-    public legendPosition: string = null;
+    public legendPosition: string = 'below';
     public showXAxisLabel: boolean = true;
     public showYAxisLabel: boolean = true;
     public showGridLines: boolean = false;
@@ -2212,7 +2212,8 @@ export class AnimateConfig {
     Datalink = 2,
     View = 3,
     Dashboard = 4,
-    Api = 5,
+    DashboardItem = 5,
+    Api = 6,
    }
    
    export const eDataObjectTypeItems = [
@@ -2221,6 +2222,7 @@ export class AnimateConfig {
     {key: eDataObjectType.Datalink, name: 'Datalink'},
     {key: eDataObjectType.View, name: 'View'},
     {key: eDataObjectType.Dashboard, name: 'Dashboard'},
+    {key: eDataObjectType.DashboardItem, name: 'DashboardItem'},
     {key: eDataObjectType.Api, name: 'Api'},
    ]
    

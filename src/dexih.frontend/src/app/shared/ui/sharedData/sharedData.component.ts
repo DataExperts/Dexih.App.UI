@@ -85,7 +85,7 @@ export class SharedDataComponent implements OnInit, OnDestroy {
         let hubKeys = <number[]>this.searchForm.value.hubKeys;
         this.authService.getSharedDataIndex(this.searchForm.value.searchString, hubKeys, 50, true).then(result => {
 
-            this.dataIndex = result;
+            this.dataIndex = result.filter(c => c.objectType !== eDataObjectType.DashboardItem);
 
             this.tags = [];
             this.dataIndex.forEach(item => {

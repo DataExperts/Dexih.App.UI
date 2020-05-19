@@ -87,6 +87,7 @@ namespace dexih.api.Controllers
 
             if (previewData.RemoteAgentId != remoteAgent.InstanceId)
             {
+                // this status code is used by the client to attempt to look for a refreshed remote agent.
                 return StatusCode(426, remoteAgent);
                 // throw new Exception("The remote agent did not match the current agent.");
             }
@@ -113,9 +114,9 @@ namespace dexih.api.Controllers
                     data = await _remoteAgents.PreviewDatalink(previewData.RemoteAgentId, previewData.HubKey, previewData.DownloadUrl, previewData.ObjectKey, false, previewData.SelectQuery, null, previewData.InputColumns, previewData.Parameters, true, repositoryManager, cancellationToken);
                     break;
                 case EDataObjectType.View:
-                case EDataObjectType.Dashboard:
+                case EDataObjectType.DashboardItem:
                     DexihView view;
-                    if (previewData.ObjectType == EDataObjectType.Dashboard)
+                    if (previewData.ObjectType == EDataObjectType.DashboardItem)
                     {
                         view = await repositoryManager.GetDashboardItemView(previewData.HubKey, previewData.ObjectKey,
                             true, cancellationToken);
@@ -152,6 +153,8 @@ namespace dexih.api.Controllers
             _logger.LogTrace(LoggingEvents.HubPreviewTable, "SharedDataController.PreviewData: HubKey: {updateBrowserHub}, ObjectKey: {objectKey}", previewData.HubKey, previewData.ObjectKey);
             return Ok(data);
         }
+        
+      
         
         [HttpPost("[action]")]
         public async Task<IActionResult> DownloadData([FromBody] DownloadSharedData downloadSharedData, CancellationToken cancellationToken)

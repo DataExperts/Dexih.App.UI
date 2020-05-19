@@ -3,7 +3,9 @@ import { DexihDashboardItem, eDataObjectType, InputParameter, InputParameterBase
 
 @Component({
     selector: 'preview-dashboard-item',
-    templateUrl: 'preview-dashboard-item.component.html'
+    templateUrl: 'preview-dashboard-item.component.html',
+    styleUrls: ['./preview-dashboard-item.component.scss']
+
 })
 
 export class PreviewDashboardItemComponent implements OnInit {

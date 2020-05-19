@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, OnDestroy, AfterViewInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, OnDestroy, AfterViewInit, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
 import { eInputFormat, ChartTypes } from './chart-groups';
 import { colorSets } from './chart-colors';
 import { Subscription, Observable } from 'rxjs';
@@ -18,6 +18,8 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
     @Input() data: Array<any>;
     @Input() updateChartEvent: Observable<void>;
     @Input() responsive = false;
+
+    @ViewChild('wrapper', { static: true }) public wrapper: ElementRef;
 
     private _updateChartSubscription: Subscription;
 
@@ -104,7 +106,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
 
             this.getChartType();
             this.updateChart();
-            // this.view = [this.width, this.height];
+            this.view = [this.wrapper.nativeElement.clientWidth, this.wrapper.nativeElement.clientHeight];
         }
     }
 
@@ -272,6 +274,8 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                                     series: pivotData[labels[i]].filter(c => c)
                                 }
                             }
+
+                            this.setSeriesLabel(this.seriesColumnsIndex.map(c => c.title).join(' / '));
                         } else {
                             chartData = new Array(this.data.length);
                             for (let i = 0; i < this.data.length; i++) {
@@ -308,7 +312,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                                 for (let i = 0; i < data.length; i++) {
                                     for (let j = 0; j < this.seriesColumnsIndex.length; j++) {
                                         let pivotItem = data[i][this.seriesPivotIndex];
-                                        if (this.seriesColumnsIndex.length > 0 ) {
+                                        if (this.seriesColumnsIndex.length > 1 ) {
                                             pivotItem += ' / ' + this.seriesColumnsIndex[j].title;
                                         }
 

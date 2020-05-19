@@ -79,7 +79,7 @@
         </gridster>
     </div>
 </div>
-<div *ngIf="maximizedItem" style="height:800px;">
+<div *ngIf="maximizedItem" class="position-relative" style="height:800px; overflow: hidden;">
     <dashboard-item [item]="maximizedItem" [showEdit]="showEdit" (onRemove)="removeItem(i)"
         (onMaximize)="maximize($event)" [refreshData]="maximizedItem.controls.runTime.value.refreshData"
         [isMaximized]="true">

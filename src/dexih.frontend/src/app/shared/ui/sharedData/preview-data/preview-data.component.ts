@@ -10,7 +10,7 @@ import { InputColumn, DexihColumnBase, SelectQuery, eDownloadFormat, SharedData,
 @Component({
 
     selector: 'preview-data',
-    templateUrl: './preview-data.component.html'
+    templateUrl: './preview-data.component.html',
 })
 export class PreviewDataComponent implements OnInit, OnDestroy {
     @Input() public objectType: eDataObjectType;

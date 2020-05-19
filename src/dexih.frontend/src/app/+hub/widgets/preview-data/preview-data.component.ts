@@ -231,7 +231,10 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
         if (this.key) {
             let downloadObject = new DownloadObject();
             downloadObject.objectKey = this.key;
-            downloadObject.objectType = this.viewSource
+            downloadObject.objectType = this.viewSource;
+            let query = Object.assign({}, this.selectQuery);
+            query.rows = null;
+            downloadObject.query = query;
             this.hubService.downloadData([downloadObject], false, format, this.cancelToken)
         } else {
             switch (this.viewSource) {

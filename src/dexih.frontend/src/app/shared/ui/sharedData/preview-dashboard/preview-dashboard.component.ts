@@ -23,7 +23,7 @@ export class PreviewDashboardComponent implements OnInit, OnDestroy {
     public message: string;
 
     private refreshDataSubject: Subject<void> = new Subject<void>();
-    
+
     public inputColumns: InputColumn[];
     public tableColumns: DexihColumnBase[];
 
@@ -82,7 +82,7 @@ export class PreviewDashboardComponent implements OnInit, OnDestroy {
     refresh() {
         this.authService.getDashboard(this.hubKey, this.dashboardKey).then((dashboard) => {
             this.refreshDataSubject.next();
-            
+
             this.setOptions(dashboard);
             this.dashboard = dashboard;
             this.name = dashboard.name;

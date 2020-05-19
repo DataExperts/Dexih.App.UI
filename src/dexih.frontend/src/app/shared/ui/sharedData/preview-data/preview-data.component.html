@@ -1,37 +1,62 @@
-<div *ngIf="showToolbar" class="floating-toolbar">
-    <download-button class="ml-1" (download)="downloadData($event)"></download-button>
+<div *ngIf="showToolbar" class="side-menu">
+    <div class="side-menu-content">
+        <div class="spin-icon">
+            <i class="fa fa-cog fa-spin"></i>
+        </div>
+        <div class="side-menu-box">
+            <div class="bg-light rounded p-1">
 
-    <div *ngIf="viewConfig?.viewType === eViewType.Chart" class="btn-group btn-group-toggle ml-1" data-toggle="buttons" title="Table">
-        <label class="btn btn-primary" [ngClass]="{active: showChart===false}">
-            <input type="radio" name="options" value="table" autocomplete="off" (click)="showChart = false">
-            <i class="fa fa-table"></i>
-        </label>
-        <label class="btn btn-primary" [ngClass]="{active: showChart===true}" title="Chart">
-            <input type="radio" name="options" value="chart" autocomplete="off" (click)="showChart = true">
-            <i class="fa fa-bar-chart"></i>
-        </label>
+                <div>
+                    <download-button (download)="downloadData($event)"></download-button>
+
+                    <div *ngIf="viewConfig?.viewType === eViewType.Chart" class="btn-group btn-group-toggle ml-1"
+                        data-toggle="buttons" title="Table">
+                        <label class="btn btn-primary" [ngClass]="{active: showChart===false}">
+                            <input type="radio" name="options" value="table" autocomplete="off"
+                                (click)="showChart = false">
+                            <i class="fa fa-table"></i>
+                        </label>
+                        <label class="btn btn-primary" [ngClass]="{active: showChart===true}" title="Chart">
+                            <input type="radio" name="options" value="chart" autocomplete="off"
+                                (click)="showChart = true">
+                            <i class="fa fa-bar-chart"></i>
+                        </label>
+                    </div>
+                    <dexih-button-refresh class="ml-1" [compact]="true" (click)="refresh()"></dexih-button-refresh>
+                    <dexih-button *ngIf="!isMaximized" class="ml-1" buttonClass="btn btn-primary"
+                        iconClass="fa fa-window-maximize text-white" (click)="maximize()" tooltip="Maximize window">
+                    </dexih-button>
+                    <dexih-button *ngIf="isMaximized" class="ml-1" buttonClass="btn btn-primary"
+                        iconClass="fa fa-window-minimize text-white" (click)="minimize()" tooltip="Minimize window">
+                    </dexih-button>
+                </div>
+
+                <div *ngIf="userParameters && userParameters.length > 0" class="m-1">
+                    <input-parameters-view [hubKey]="hubKey" [objectType]="objectType" [objectKey]="objectKey"
+                        [parameters]="userParameters" [refreshEvent]="refreshDataSubject.asObservable()"
+                        (onRefreshData)="refresh()" (onChange)="parameterChange()"></input-parameters-view>
+                </div>
+
+                <div *ngIf="viewConfig && baseData" class="m-1">
+                    <series-animate [showEdit]="false" [showFrame]="false" [animateConfig]="viewConfig.animateConfig"
+                        [columns]="columns" (hasChanged)="hasChanged()" [baseData]="baseData" [(data)]="data">
+                    </series-animate>
+                </div>
+            </div>
+        </div>
     </div>
-    <dexih-button-refresh class="ml-1" [compact]="true" (click)="refresh()"></dexih-button-refresh>
-    <dexih-button *ngIf="!isMaximized" class="ml-1" buttonClass="btn btn-primary"
-        iconClass="fa fa-window-maximize text-white" (click)="maximize()" tooltip="Maximize window"></dexih-button>
-    <dexih-button *ngIf="isMaximized" class="ml-1" buttonClass="btn btn-primary"
-        iconClass="fa fa-window-minimize text-white" (click)="minimize()" tooltip="Minimize window"></dexih-button>
 </div>
 
-<div *ngIf="userParameters && userParameters.length > 0" class="m-3">
-    <input-parameters-view [hubKey]="hubKey" [objectType]="objectType" [objectKey]="objectKey" [parameters]="userParameters" [refreshEvent]="refreshDataSubject.asObservable()" (onRefreshData)="refresh()" (onChange)="parameterChange()"></input-parameters-view>
-</div>
 
 <div *ngIf="!data" class="m-3">
     <div class="dexih-loader"></div> &nbsp; &nbsp; Loading ...
 </div>
 
-<series-animate *ngIf="viewConfig && baseData" [showEdit]="false" [animateConfig]="viewConfig.animateConfig" [columns]="columns" (hasChanged)="hasChanged()" [baseData]="baseData" [(data)]="data"></series-animate>
 
 <div class="h-100" *ngIf="data">
 
-    <dexih-table *ngIf="!showChart" [enableMultiSelect]="false" [enableSaveCsv]="true" [csvFileName]="name" [enableFilter]="false"
-        [columns]="columns" [data]="data">
+    <dexih-table *ngIf="!showChart" [enableMultiSelect]="false" [enableSaveCsv]="true" [csvFileName]="name"
+        [enableFilter]="false" [columns]="columns" [data]="data">
 
         <ng-template #actions let-items="items">
         </ng-template>
@@ -41,10 +66,6 @@
 
     </dexih-table>
 
-    <chart-view 
-        *ngIf="showChart"
-        [columns]="columns" 
-        [data]="data" 
-        [config]="viewConfig.chartConfig">
+    <chart-view *ngIf="showChart" [responsive]="true" [columns]="columns" [data]="data" [config]="viewConfig.chartConfig">
     </chart-view>
 </div>

@@ -12,6 +12,7 @@ export class SeriesAnimateComponent implements OnInit, OnChanges, OnDestroy {
     @Input() animateConfig: AnimateConfig;
     @Input() columns: Array<any>;
     @Input() baseData: Array<any>;
+    @Input() showFrame = true;
 
     @Input() data: Array<any>;
     @Output() dataChange = new EventEmitter<Array<any>>();
@@ -29,7 +30,6 @@ export class SeriesAnimateComponent implements OnInit, OnChanges, OnDestroy {
     constructor() { }
 
     ngOnInit() {
-
     }
 
     ngOnDestroy() {
@@ -37,7 +37,10 @@ export class SeriesAnimateComponent implements OnInit, OnChanges, OnDestroy {
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes.baseData || changes.columns || changes.animateConfig) {
-            this.initializeAnimation();
+            setTimeout(() => {
+                this.initializeAnimation();
+            });
+
         }
     }
 

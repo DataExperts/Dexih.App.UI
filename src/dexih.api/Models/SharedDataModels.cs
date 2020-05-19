@@ -31,6 +31,7 @@ namespace dexih.api.Models
         public InputColumn[] InputColumns { get; set; }
         public InputParameters Parameters { get; set; }
     }
+    
 
     public class PreviewLOV : HubModelBase
     {

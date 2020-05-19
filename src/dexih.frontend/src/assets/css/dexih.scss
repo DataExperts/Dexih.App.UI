@@ -357,18 +357,45 @@ markdown {
     }
 }
 
-.floating-toolbar {
-    position: fixed;
-    right: 8px;
-    padding: 8px;
-    opacity: .1;
-    transition: 0.3s;
-    z-index: 99999;
+.side-menu {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    z-index: 2100;
+ //   overflow: hidden;
 }
 
-.floating-toolbar:hover {
-    opacity: 1;
+.spin-icon {
+    background: $primary;
+    position: absolute;
+    padding: 7px 10px 7px 13px;
+    border-radius: 20px 0 0 20px;
+    font-size: 16px;
+    top: 0;
+    left: 0;
+    width: 40px;
+    color: #fff;
+    cursor: pointer;
 }
+
+.side-menu-content { 
+    position: relative;
+    opacity: .2;
+    left: calc(100% - 40px);
+    transition-duration: 0.8s;
+    z-index: 2101;
+}
+
+.side-menu-content:hover , .side-menu-content:active {
+    opacity: 1;
+    left: 0;
+}
+
+.side-menu-box {
+    margin-left: 40px;
+    // overflow: hidden;
+}
+
 
 // ensures text can be seen against different backgrounds.
 .blend-text {

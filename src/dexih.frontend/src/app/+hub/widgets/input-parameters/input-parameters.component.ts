@@ -17,6 +17,7 @@ export class InputParametersComponent implements OnInit, OnChanges, OnDestroy {
     @Input() showEdit = false;
     @Input() parentParameters: InputParameterBase[];
     @Input() refreshEvent: Observable<void>;
+    @Input() allowAddRemove = true;
 
     @Output() onChange = new EventEmitter();
     @Output() onRefreshData = new EventEmitter();
@@ -105,6 +106,7 @@ export class InputParametersComponent implements OnInit, OnChanges, OnDestroy {
     change(parameterForm: FormGroup, $event) {
         this.requiresRefresh = true;
         if (parameterForm.controls.listOfValuesKey.value > 0) {
+            parameterForm.controls.valueDesc.setValue($event);
             this.onChange.emit();
         }
     }

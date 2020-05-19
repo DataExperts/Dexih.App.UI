@@ -1,19 +1,70 @@
-<div class="floating-toolbar">
-    <dexih-button-refresh class="ml-1" [compact]="true" (click)="refresh()"></dexih-button-refresh>
-    <dexih-button-edit class="ml-1" [compact]="true" (click)="toggleEdit()"></dexih-button-edit>
-    <dexih-button *ngIf="!isMaximized" class="ml-1" buttonClass="btn btn-primary" iconClass="fa fa-window-maximize text-white" (click)="maximise()" tooltip="Maximize window"></dexih-button>
-    <dexih-button *ngIf="isMaximized" class="ml-1" buttonClass="btn btn-primary" iconClass="fa fa-window-minimize text-white" (click)="maximise()" tooltip="Minimize window"></dexih-button>
-    <dexih-button-delete class="ml-1"  (click)="removeItem($event)" [compact]="true"></dexih-button-delete>
+<div class="side-menu">
+    <div class="side-menu-content">
+        <div class="spin-icon">
+            <i class="fa fa-cog fa-spin"></i>
+        </div>
+        <div class="side-menu-box">
+            <div class="bg-light rounded p-1">
+                <div>
+                    <dexih-button-refresh [compact]="true" (click)="refresh()"></dexih-button-refresh>
+                    <dexih-button-edit *ngIf="!this.showEdit" class="ml-1" [compact]="true" (click)="toggleEdit()">
+                    </dexih-button-edit>
+                    <dexih-button-preview *ngIf="this.showEdit" class="ml-1" [compact]="true" (click)="toggleEdit()">
+                    </dexih-button-preview>
+                    <dexih-button *ngIf="!isMaximized" class="ml-1" buttonClass="btn btn-primary"
+                        iconClass="fa fa-window-maximize text-white" (click)="maximise()" tooltip="Maximize window">
+                    </dexih-button>
+                    <dexih-button *ngIf="isMaximized" class="ml-1" buttonClass="btn btn-primary"
+                        iconClass="fa fa-window-minimize text-white" (click)="maximise()" tooltip="Minimize window">
+                    </dexih-button>
+                    <dexih-button-delete class="ml-1" (click)="removeItem($event)" [compact]="true">
+                    </dexih-button-delete>
+                </div>
+
+                <div *ngIf="!showEdit && !showPreview && view">
+
+                    <div class="m-1" *ngIf="inputColumns && inputColumns.length > 0">
+                        <span *ngFor="let column of inputColumns; let i = index" class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    {{column.logicalName}}
+                                </div>
+                            </div>
+                            <form-input name="column{{i}}" class="form-control p-0"
+                                [placeholder]="'Enter ' + column.logicalName" [(ngModel)]="column.value"></form-input>
+                        </span>
+                    </div>
+
+                    <div class="m-1" *ngIf="item.controls.parameters.length > 0">
+                        <input-parameters [showEdit]="false" [parameters]="item.controls.parameters"
+                            [formsService]="formsService" [parentParameters]="parentParameters"
+                            (onRefreshData)="refresh()" [refreshEvent]="refreshDataSubject.asObservable()">
+                        </input-parameters>
+                    </div>
+
+                    <div *ngIf="!data?.isRefreshing && dataResult?.columns?.length > 0 && dataResult?.viewConfig && dataResult?.data"
+                        class="m-1" style="z-index: 99999;">
+                        <series-animate [showEdit]="false" [showFrame]="false"
+                            [animateConfig]="dataResult?.viewConfig.animateConfig" [columns]="dataResult?.columns"
+                            (hasChanged)="hasChanged()" [baseData]="dataResult?.data" [(data)]="dataRows">
+                        </series-animate>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div *ngIf="showEdit" class="p-3 gridster-item-content">
     <form [formGroup]="item">
         <section>
-            <form-input label="Item Name" formControlName="name" placeholder="Enter the dashboard item name." [autocapitalize]="on" iconClass="fa fa-list">
+            <form-input label="Item Name" formControlName="name" placeholder="Enter the dashboard item name."
+                [autocapitalize]="on" iconClass="fa fa-list">
             </form-input>
         </section>
         <section>
-            <form-textarea label="Description" [showMarkdown]="true" formControlName="description" placeholder="Enter the description.">
+            <form-textarea label="Description" [showMarkdown]="true" formControlName="description"
+                placeholder="Enter the description.">
             </form-textarea>
         </section>
         <section>
@@ -29,25 +80,57 @@
         </section>
     </form>
 
-    <input-parameters 
-        [showEdit]="showEdit" 
-        [parameters]="item.controls.parameters" 
-        [formsService]="formsService" 
-        [parentParameters]="parentParameters"
-        >
+    <input-parameters [showEdit]="showEdit" [allowAddRemove]="false" [parameters]="item.controls.parameters" [formsService]="formsService"
+        [parentParameters]="parentParameters" (onRefreshData)="refresh()" [refreshEvent]="refreshDataSubject.asObservable()">
     </input-parameters>
 
 </div>
 
 <ng-template [ngIf]="!showEdit">
 
-    <div *ngIf="item.controls.header.value" class="p-3 bg-secondary text-white">
-        <b>{{item.controls.name.value}}</b>
-    </div>
 
-    <div *ngIf="item.controls.description.value" class="p-3">
-        <ngx-md [data]="item.controls.description.value"></ngx-md>
+    <!-- <preview-view *ngIf="!showPreview && item.controls.viewKey.value" [viewKey]="item.controls.viewKey.value"
+        [parameters]="item.controls.parameters.value" 
+        [data]="item.controls.runTime.value.data"></preview-view> -->
+    <div *ngIf="!showPreview && view" class="box" [ngStyle]="{'overflow': item.controls.scrollable.value ? 'scroll' : 'hidden'}">
+        <div *ngIf="data?.isRefreshing; else notRefreshing">
+            <div class="dexih-loader"></div> Refreshing, please wait...
+        </div>
+        
+        <ng-template #notRefreshing>
+
+            <div *ngIf="item.controls.header.value" class="box-header bg-secondary text-white">
+                <div class="m-3">
+                    <b>{{item.controls.name.value}}</b>
+                </div>
+            </div>
+        
+            <div *ngIf="item.controls.description.value" class="box-header">
+                <div class="m-1">
+                    <ngx-md [data]="item.controls.description.value"></ngx-md>
+                </div>
+            </div>
+    
+
+            <div class="box-content"
+                *ngIf="!data?.isRefreshing && dataResult?.columns?.length > 0 && dataResult?.data?.length > 0; else elseBlock">
+
+                <dexih-table *ngIf="view.viewType == eViewType.Table" [enableMultiSelect]="false" [enableResponsive]="false"
+                    [enableSaveCsv]="false" [enableFilter]="false" [columns]="dataResult.columns" [data]="dataRows">
+                </dexih-table>
+
+                <div class="h-100">
+                <chart-view [responsive]="true" *ngIf="view.viewType == eViewType.Chart" [columns]="dataResult.columns"
+                    [data]="dataRows" [config]="view.chartConfig">
+                </chart-view>
+            </div>
+            </div>
+            <ng-template #elseBlock>
+                <div class="alert alert-info">
+                    <i class="fa fa-warning"></i>
+                    Select refresh to display the view.
+                </div>
+            </ng-template>
+        </ng-template>
     </div>
-    <preview-view *ngIf="!showPreview && item.controls.viewKey.value" #view [viewKey]="item.controls.viewKey.value"
-        [data]="item.controls.runTime.value.data"></preview-view>
 </ng-template>

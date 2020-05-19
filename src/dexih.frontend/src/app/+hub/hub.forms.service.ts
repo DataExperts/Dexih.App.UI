@@ -152,7 +152,10 @@ export class HubFormsService implements OnDestroy {
 
     if (form) {
       if (this._valueChangesSubscription) { this._valueChangesSubscription.unsubscribe(); }
-      this._valueChangesSubscription = form.valueChanges.subscribe(data => this.onValueChanged(data));
+      this._valueChangesSubscription = form.valueChanges.subscribe(data => {
+        this.onValueChanged(data)
+      });
+
       this.onValueChanged(); // (re)set validation messages now
     }
 
@@ -1044,6 +1047,47 @@ export class HubFormsService implements OnDestroy {
 
     return form;
   }
+
+  // updates the parameters when a new dashboard item is created.
+  public updateDashboardItemView(item: FormGroup) {
+    let views = this.hubCache.hub.dexihViews;
+    if (views && item.controls.viewKey.value) {
+        let view = this.hubCache.hub.dexihViews.find(c => c.key === item.controls.viewKey.value);
+        if (this.view) {
+            item.controls.name.setValue(this.view.name);
+            item.controls.runTime.value.data = new DataCache();
+
+            // reset parameters.
+            let formParameters = <FormArray> item.controls.parameters;
+            let currentParameters = <DexihInputParameter[]> formParameters.value;
+
+            formParameters.clear();
+
+            let parameters = <InputParameterBase[]> view.parameters;
+            if (view.sourceType === eDataObjectType.Datalink) {
+                let datalink = this.hubCache.hub.dexihDatalinks.find(c => c.key === view.sourceDatalinkKey);
+                if (datalink && datalink.parameters) {
+                    parameters = parameters.concat(datalink.parameters);
+                }
+            }
+
+            parameters.forEach(parameter => {
+                let currentParameter = currentParameters.find( c => c.name === parameter.name);
+                let newParameter = new InputParameterBase();
+                if (currentParameter) {
+                    newParameter.name = currentParameter.name;
+                    newParameter.value = currentParameter.value;
+                } else {
+                    newParameter.name = parameter.name;
+                    newParameter.value = parameter.value;
+                    newParameter.listOfValuesKey = parameter.listOfValuesKey;
+                }
+                let newFormParameter = this.parameter(newParameter);
+                formParameters.push(newFormParameter);
+            });
+        }
+    }
+}
 
   public listOfValuesItem(item: ListOfValuesItem) {
     const form = this.fb.group({

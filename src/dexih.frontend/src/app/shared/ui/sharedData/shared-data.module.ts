@@ -10,6 +10,7 @@ import { GridsterModule} from 'angular-gridster2';
 import { DexihMessageModule } from '../dexihMessage';
 import { DexihIconsModule } from '../icons';
 import { SeriesAnimateModule} from '../seriesAnimate/series-animate.module';
+import { NgxMdModule } from 'ngx-md';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { SeriesAnimateModule} from '../seriesAnimate/series-animate.module';
     GridsterModule,
     DexihMessageModule,
     DexihIconsModule,
-    SeriesAnimateModule
+    SeriesAnimateModule,
+    NgxMdModule.forRoot()
   ],
   declarations: [
     SharedDataComponent, PreviewDataComponent, PreviewDashboardComponent, PreviewDashboardItemComponent, PreviewComponent,

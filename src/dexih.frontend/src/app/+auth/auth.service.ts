@@ -2162,6 +2162,7 @@ export class AuthService implements OnDestroy {
             }).catch(reason => reject(reason));
         });
     }
+    
 }
 
 
