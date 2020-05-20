@@ -726,6 +726,7 @@ namespace dexih.api.Controllers
 
 			foreach (var item in previewDashboard.Dashboard.DexihDashboardItems)
 			{
+				// merge dashboard parameters into the item parameters.
 				var itemParameters = new InputParameters();
 				foreach(var parameter in item.Parameters)
 				{
@@ -807,6 +808,7 @@ namespace dexih.api.Controllers
 			    HubKey = previewViewKey.HubKey,
 			    InputColumns = previewViewKey.InputColumns,
 			    InputParameters = previewViewKey.InputParameters,
+			    ParentParameters = previewViewKey.ParentParameters,
 			    SelectQuery = previewViewKey.SelectQuery,
 			    RemoteAgentId = previewViewKey.RemoteAgentId
 		    };
@@ -826,18 +828,26 @@ namespace dexih.api.Controllers
 		    _logger.LogTrace(LoggingEvents.HubPreviewView, "HubController.PreviewView: HubKey: {updateBrowserHub}, DatalinkKey: {DatalinkKey}", previewView.HubKey, previewView.View?.Key);
 		    var repositoryManager = _operations.RepositoryManager;
 
-//		    var itemParameters = new InputParameters();
-//		    foreach(var parameter in previewView.View.Parameters)
-//		    {
-//			    itemParameters.Add( parameter.Name, previewView.InputParameters.SetParameters(parameter.Value));
-//		    }
+		    InputParameters itemParameters; 
+		    if (previewView.ParentParameters == null)
+		    {
+			    itemParameters = previewView.InputParameters;
+		    }
+		    else
+		    {
+			    itemParameters = new InputParameters();
+			    foreach(var parameter in previewView.InputParameters)
+			    {
+				    itemParameters.Add( parameter.Name, previewView.ParentParameters.SetParameters(parameter.Value));
+			    }
+		    }
 		    
 		    switch(previewView.View.SourceType)
 		    {
 			    case EDataObjectType.Table:
-				    return _remoteAgents.PreviewTable(previewView.RemoteAgentId, previewView.HubKey, previewView.DownloadUrl, previewView.View.SourceTableKey.Value, previewView.View.SelectQuery, previewView.View.GetViewConfig(), previewView.InputColumns, previewView.InputParameters, false, false, repositoryManager, cancellationToken);
+				    return _remoteAgents.PreviewTable(previewView.RemoteAgentId, previewView.HubKey, previewView.DownloadUrl, previewView.View.SourceTableKey.Value, previewView.View.SelectQuery, previewView.View.GetViewConfig(), previewView.InputColumns, itemParameters, false, false, repositoryManager, cancellationToken);
 			    case EDataObjectType.Datalink:
-				    return _remoteAgents.PreviewDatalink(previewView.RemoteAgentId, previewView.HubKey, previewView.DownloadUrl, previewView.View.SourceDatalinkKey.Value, false, previewView.View.SelectQuery, previewView.View.GetViewConfig(), previewView.InputColumns, previewView.InputParameters, false, repositoryManager, cancellationToken);
+				    return _remoteAgents.PreviewDatalink(previewView.RemoteAgentId, previewView.HubKey, previewView.DownloadUrl, previewView.View.SourceDatalinkKey.Value, false, previewView.View.SelectQuery, previewView.View.GetViewConfig(), previewView.InputColumns, itemParameters, false, repositoryManager, cancellationToken);
 			    default:
 				    throw new ArgumentOutOfRangeException();
 		    }

@@ -4,7 +4,7 @@ import { AuthService } from '../../../../+auth/auth.service';
 import { Subscription, combineLatest, Subject} from 'rxjs';
 import { DexihMessageComponent } from '../../../../shared/ui/dexihMessage/index';
 import { CancelToken } from '../../../../+auth/auth.models';
-import { InputColumn, DexihColumnBase, DexihDashboard, 
+import { InputColumn, DexihColumnBase, DexihDashboard,
     DexihActiveAgent, InputParameterBase, eDataObjectType } from '../../../shared.models';
 import { GridsterConfig, GridType, CompactType, DisplayGrid, GridsterItem, GridsterItemComponent } from 'angular-gridster2';
 
@@ -90,10 +90,10 @@ export class PreviewDashboardComponent implements OnInit, OnDestroy {
                 this.parameters = dashboard.parameters;
             }
 
-            }).catch(reason => {
-                this.dexihMessage.addMessage(reason);
-                this.dashboard = null;
-            });
+        }).catch(reason => {
+            this.dexihMessage.addMessage(reason);
+            this.dashboard = null;
+        });
     }
 
     private setOptions(dashboard: DexihDashboard) {

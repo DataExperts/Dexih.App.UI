@@ -63,6 +63,8 @@ export class InputParametersViewComponent implements OnInit, OnDestroy {
             parameter.name, false, this.cancelToken).then(result => {
             parameter['runTime'].items = result;
             parameter['runTime'].showRefresh = false;
+        }).catch(reason => {
+            this.authService.addUpdateNotification(reason, false);
         }).finally(() => {
             parameter['runTime'].isRefreshing = false;
         });

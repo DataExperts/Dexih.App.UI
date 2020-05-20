@@ -190,6 +190,8 @@ namespace dexih.api.Models
         public InputColumn[] InputColumns { get; set; }
         public InputParameters InputParameters { get; set; }
         
+        public InputParameters ParentParameters { get; set; }
+        
         public ViewConfig ViewConfig { get; set; }
     }
     

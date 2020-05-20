@@ -1556,7 +1556,7 @@ export class HubService implements OnInit, OnDestroy {
         }, 'Retrieving view data...', cancelToken);
     }
 
-    previewViewKey(viewKey: number, inputColumns: InputColumn[],
+    previewViewKey(viewKey: number, inputColumns: InputColumn[], parentParameters: InputParameter[],
         inputParameters: DexihInputParameter[], cancelToken: CancelToken): PromiseWithCancel<PreviewResults> {
 
         return this.getData('/api/Hub/PreviewViewKey', {
@@ -1565,6 +1565,7 @@ export class HubService implements OnInit, OnDestroy {
             viewKey: viewKey,
             inputColumns: inputColumns,
             inputParameters: inputParameters,
+            parentParameters: parentParameters
         }, 'Retrieving view data...', cancelToken);
     }
 

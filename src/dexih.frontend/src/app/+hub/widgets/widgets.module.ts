@@ -17,7 +17,6 @@ import { RemoteAgentViewComponent } from './remoteAgent-view/remoteAgent-view.co
 import { TransformPropertiesComponent } from './transform-properties/transform-properties.component';
 import { TransformPropertiesItemComponent } from './transform-properties/transform-properties-item.component';
 import { PreviewDataComponent } from './preview-data/preview-data.component';
-import { PreviewViewComponent } from './preview-view/preview-view.component';
 import { InputParametersComponent } from './input-parameters/input-parameters.component'
 import { InputParametersViewComponent } from './input-parameters-view/input-parameters-view.component'
 import { DashboardViewComponent } from './dashboard-view/dashboard-view.component';
@@ -48,7 +47,6 @@ import { DatalinkTestViewComponent } from './datalinkTest-view/datalinkTest-view
         RemoteAgentViewComponent,
         TransformPropertiesComponent, TransformPropertiesItemComponent,
         PreviewDataComponent,
-        PreviewViewComponent,
         InputParametersComponent,
         InputParametersViewComponent,
         ListOfValuesViewComponent,
@@ -70,7 +68,6 @@ import { DatalinkTestViewComponent } from './datalinkTest-view/datalinkTest-view
         RemoteAgentViewComponent,
         TransformPropertiesComponent, TransformPropertiesItemComponent,
         PreviewDataComponent,
-        PreviewViewComponent,
         InputParametersComponent,
         InputParametersViewComponent,
         ListOfValuesViewComponent,

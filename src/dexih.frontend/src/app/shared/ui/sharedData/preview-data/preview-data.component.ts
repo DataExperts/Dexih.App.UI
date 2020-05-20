@@ -24,7 +24,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
     private _subscription: Subscription;
 
     private refreshDataSubject: Subject<void> = new Subject<void>();
-    
+
     public action: string; // new or edit
     public pageTitle: string;
     public message: string;
@@ -68,10 +68,6 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
                     this.parameters = [];
                 }
 
-                if (this.parentParameters) {
-                    this.parameters = this.parameters.concat(this.parentParameters);
-                }
-
                 this.refresh();
             });
         } catch (e) {
@@ -94,7 +90,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
 
     public refresh() {
         this.authService.previewData(this.hubKey, this.objectKey, this.objectType, this.inputColumns, this.selectQuery,
-            this.parameters, this.cancelToken).then((result) => {
+            this.parameters, this.parentParameters, this.cancelToken).then((result) => {
                 this.refreshDataSubject.next();
                 this.columns = result.columns;
                 this.baseData = result.data;
@@ -128,6 +124,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
         sharedData.hubKey = this.hubKey;
         sharedData.inputColumns = this.inputColumns;
         sharedData.parameters = this.parameters;
+        sharedData.parentParameters = this.parentParameters;
         sharedData.query = this.selectQuery;
 
         this.authService.downloadData([sharedData], true, format, this.cancelToken).then(() => {

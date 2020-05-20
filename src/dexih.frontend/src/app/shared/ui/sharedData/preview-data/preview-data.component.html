@@ -52,6 +52,19 @@
     <div class="dexih-loader"></div> &nbsp; &nbsp; Loading ...
 </div>
 
+<div *ngIf="!showToolbar && baseData">
+    <div *ngIf="userParameters && userParameters.length > 0" class="m-1">
+        <input-parameters-view [hubKey]="hubKey" [objectType]="objectType" [objectKey]="objectKey"
+            [parameters]="userParameters" [refreshEvent]="refreshDataSubject.asObservable()"
+            (onRefreshData)="refresh()" (onChange)="parameterChange()"></input-parameters-view>
+    </div>
+
+    <div *ngIf="viewConfig && baseData" class="m-1">
+        <series-animate [showEdit]="false" [showFrame]="false" [animateConfig]="viewConfig.animateConfig"
+            [columns]="columns" (hasChanged)="hasChanged()" [baseData]="baseData" [(data)]="data">
+        </series-animate>
+    </div>
+</div>
 
 <div class="h-100" *ngIf="data">
 
@@ -66,6 +79,7 @@
 
     </dexih-table>
 
-    <chart-view *ngIf="showChart" [responsive]="true" [columns]="columns" [data]="data" [config]="viewConfig.chartConfig">
+    <chart-view *ngIf="showChart" [responsive]="true" [columns]="columns" [data]="data"
+        [config]="viewConfig.chartConfig">
     </chart-view>
 </div>

@@ -39,7 +39,6 @@ export class DashboardItemComponent implements OnInit, OnChanges, OnDestroy {
 
     views: DexihView[];
     view: DexihView;
-    parentParameters: InputParameter[];
     parameters: DexihInputParameter[];
 
     private firstLoad = true;
@@ -67,7 +66,6 @@ export class DashboardItemComponent implements OnInit, OnChanges, OnDestroy {
             ).subscribe(result => {
                 this.hubCache = result[0];
                 this.remoteAgent = result[1];
-                this.parentParameters = this.formsService.currentForm.controls.parameters.value;
 
                 if (this.hubService.isHubCacheLoaded) {
                     this.views = this.hubCache.hub.dexihViews;
@@ -181,6 +179,7 @@ export class DashboardItemComponent implements OnInit, OnChanges, OnDestroy {
 
     public refresh() {
         let preview = this.hubService.previewViewKey(this.item.controls.viewKey.value, null,
+            this.formsService.currentForm.controls.parameters.value,
         this.item.controls.parameters.value, this.cancelToken);
         this.data = <DataCache> this.item.controls.runTime.value.data;
         this.data.refresh(preview);

@@ -90,43 +90,6 @@
 
 		<series-animate [showEdit]="showEdit" [animateConfig]="animateConfig" [columns]="columns" (hasChanged)="hasChanged()" [baseData]="baseData" [(data)]="data"></series-animate>
 
-		<!-- <dexih-widget-section  *ngIf="animateConfig && (showEdit || animateConfig.seriesColumn)" title="Series Animation" [showExpandButton]="true">
-			<div  *ngIf="showEdit" class="d-flex flex-wrap">
-				<div class="flex-fill">
-					<form-select [(ngModel)]="animateConfig.seriesColumn" labelLeft="Series" [allowNullSelect]="true" selectNullMessage="Turn off animation"
-						[items]="columns" itemKey="title" itemName="title" (ngModelChange)="hasChanged()">
-					</form-select>
-				</div>
-
-				<div class="flex-fill pl-1">
-					<form-checkbox label="Automatic Start" [(ngModel)]="animateConfig.automatic" [border]="true" (ngModelChange)="hasChanged()"></form-checkbox>
-				</div>
-
-				<div class="flex-fill pl-1" >
-					<form-input type="number" [(ngModel)]="animateConfig.delay" (ngModelChange)="hasChanged()" labelLeft="Delay (ms)"></form-input>
-				</div>
-			</div>
-		
-			<div *ngIf="animateConfig.seriesColumn" class="d-flex flex-wrap mt-1">
-				<div class="flex-fill">
-					<dexih-button class="mr-1" iconClass="fa fa-fast-backward" (click)="animationFirst()"></dexih-button>
-					<dexih-button class="mr-1" iconClass="fa fa-step-backward" (click)="animationStepBackward()"></dexih-button>
-					<dexih-button class="mr-1" iconClass="fa fa-pause" (click)="animationPause()"></dexih-button>
-					<dexih-button class="mr-1" iconClass="fa fa-stop" (click)="animationStop()"></dexih-button>
-					<dexih-button class="mr-1" iconClass="fa fa-play" (click)="animationPlay()"></dexih-button>
-					<dexih-button class="mr-1" iconClass="fa fa-step-forward" (click)="animationStepForward()"></dexih-button>
-					<dexih-button class="mr-1" iconClass="fa fa-fast-forward" (click)="animationLast()"></dexih-button>
-				</div>
-
-				<div class="flex-fill">
-					<form-select labelLeft="Current" [items]="animationValues" [(ngModel)]="animationValue" (ngModelChange)="animationChange($event)" itemKey="value" itemName="name" >
-					</form-select>
-				</div>
-
-			</div>
-
-		</dexih-widget-section> -->
-
 		<dexih-widget-section  *ngIf="showEdit" title="Query Configuration" [showExpandButton]="true">
 			<query-builder  [selectQuery]="formsService.currentForm.controls.selectQuery.value" [columns]="tableColumns" [inputColumns]="inputColumns" [parameters]="formsService.currentForm.controls.parameters.value" (hasChanged)="hasChanged()" [refreshEvent]="refreshDataSubject.asObservable()" (onRefreshData)="refresh()"></query-builder>
 		</dexih-widget-section>

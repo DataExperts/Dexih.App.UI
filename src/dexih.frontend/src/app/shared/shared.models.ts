@@ -1713,6 +1713,7 @@ export class AnimateConfig {
     public updateDate: Date = null;
     public inputColumns: InputColumn[] = [];
     public parameters: InputParameterBase[] = [];
+    public parentParameters: InputParameterBase[] = [];
     public query: SelectQuery = null;
     public outputColumns: DexihColumnBase[] = [];
     public tags: DexihTag[] = [];

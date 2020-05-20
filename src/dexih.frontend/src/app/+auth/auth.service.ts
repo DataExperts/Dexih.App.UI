@@ -545,7 +545,7 @@ export class AuthService implements OnDestroy {
 
                         // run the query again with the new remote agent.
                         this.getBestDownloadUrl(remoteAgent, 0).then(downloadUrl2 => {
-                            this.setCookie(`hub-remote-agent-${data.hubKey}`, JSON.stringify(remoteAgent));
+                            localStorage.setItem(`hub-remote-agent-${data.hubKey}`, JSON.stringify(remoteAgent));
                             data.downloadUrl = downloadUrl2;
                             data.remoteAgentId = remoteAgent.instanceId;
                             json = this.JsonNoNulls(data);
@@ -2038,8 +2038,8 @@ export class AuthService implements OnDestroy {
     }
 
     getActiveAgent(hubKey: number): Promise<DexihActiveAgent> {
-        // the activeAgent is cached in a cookie to save an extra roundtrip.
-        let agent = this.getCookie(`hub-remote-agent-${hubKey}`);
+        // the activeAgent is cached in a localstorage to save an extra roundtrip.
+        let agent = localStorage.getItem(`hub-remote-agent-${hubKey}`);
 
         if (agent) {
             let remoteAgent = <DexihActiveAgent>JSON.parse(agent);
@@ -2051,7 +2051,7 @@ export class AuthService implements OnDestroy {
             this.post<DexihActiveAgent>('/api/SharedData/GetActiveAgent', { hubKey: hubKey }, 'Getting active remote agent...')
                 .then(activeAgent => {
                     this.getBestDownloadUrl(activeAgent, 0).then(downloadUrl => {
-                        this.setCookie(`hub-remote-agent-${hubKey}`, JSON.stringify(activeAgent));
+                        localStorage.setItem(`hub-remote-agent-${hubKey}`, JSON.stringify(activeAgent));
                         resolve(activeAgent);
                     });
                 }).catch(reason => reject(reason));
@@ -2101,7 +2101,8 @@ export class AuthService implements OnDestroy {
 
     // starts a preview, and returns the url to get the download stream.
     previewData(hubKey: number, objectKey: number, objectType: eDataObjectType,
-        inputColumns: InputColumn[], selectQuery: SelectQuery, parameters: InputParameterBase[], cancelToken: CancelToken):
+        inputColumns: InputColumn[], selectQuery: SelectQuery, parameters: InputParameterBase[],
+        parentParameters: InputParameterBase[], cancelToken: CancelToken):
         Promise<PreviewResults> {
 
         return new Promise<PreviewResults>((resolve, reject) => {
@@ -2113,7 +2114,8 @@ export class AuthService implements OnDestroy {
                     selectQuery: selectQuery,
                     remoteAgentId: activeAgent.instanceId,
                     inputColumns: inputColumns,
-                    parameters: parameters
+                    parameters: parameters,
+                    parentParameters: parentParameters
                 }, activeAgent, 'Previewing data...', cancelToken).then(result => {
                     result.columns = this.constructDataTableColumns(result.columns);
                     resolve(result);
@@ -2162,7 +2164,7 @@ export class AuthService implements OnDestroy {
             }).catch(reason => reject(reason));
         });
     }
-    
+
 }
 
 

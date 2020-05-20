@@ -37,7 +37,7 @@
 
                     <div class="m-1" *ngIf="item.controls.parameters.length > 0">
                         <input-parameters [showEdit]="false" [parameters]="item.controls.parameters"
-                            [formsService]="formsService" [parentParameters]="parentParameters"
+                            [formsService]="formsService" [parentParameters]="formsService?.currentForm.controls.parameters?.value"
                             (onRefreshData)="refresh()" [refreshEvent]="refreshDataSubject.asObservable()">
                         </input-parameters>
                     </div>
@@ -88,12 +88,8 @@
 
 <ng-template [ngIf]="!showEdit">
 
-
-    <!-- <preview-view *ngIf="!showPreview && item.controls.viewKey.value" [viewKey]="item.controls.viewKey.value"
-        [parameters]="item.controls.parameters.value" 
-        [data]="item.controls.runTime.value.data"></preview-view> -->
     <div *ngIf="!showPreview && view" class="box" [ngStyle]="{'overflow': item.controls.scrollable.value ? 'scroll' : 'hidden'}">
-        <div *ngIf="data?.isRefreshing; else notRefreshing">
+        <div *ngIf="data?.isRefreshing; else notRefreshing" class="p-3">
             <div class="dexih-loader"></div> Refreshing, please wait...
         </div>
         
@@ -126,9 +122,9 @@
             </div>
             </div>
             <ng-template #elseBlock>
-                <div class="alert alert-info">
+                <div class="alert alert-info" (click)="refresh()">
                     <i class="fa fa-warning"></i>
-                    Select refresh to display the view.
+                    Select to refresh the view.
                 </div>
             </ng-template>
         </ng-template>

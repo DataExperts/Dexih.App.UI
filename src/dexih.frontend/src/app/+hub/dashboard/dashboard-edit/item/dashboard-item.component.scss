@@ -6,19 +6,3 @@
     right: 0;
     overflow: auto;
   }
-
-
-  .box {
-    display: flex;
-    flex-flow: column;
-    height: 100%;
-  }
-    
-  .box .box-header {
-    flex: 0 1 auto;
-  }
-  
-  .box .box-content {
-    flex: 1 1 auto;
-  }
-  

@@ -397,6 +397,25 @@ markdown {
 }
 
 
+// creates a box that fills 100% height.
+
+// put in the surrounding div
+.box {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+  }
+    
+  // put in any div's that have static heights.
+  .box .box-header {
+    flex: 0 1 auto;
+  }
+  
+  // put in the div that needs to be stretched to fill the remaining space
+  .box .box-content {
+    flex: 1 1 auto;
+  }
+
 // ensures text can be seen against different backgrounds.
 .blend-text {
     background: inherit;

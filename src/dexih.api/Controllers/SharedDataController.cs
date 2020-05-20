@@ -63,8 +63,17 @@ namespace dexih.api.Controllers
         }
         
         [HttpPost("[action]")]
-        public async Task<string> PreviewListOfValues([FromBody] PreviewLOV previewLov, CancellationToken cancellationToken)
+        public async Task<IActionResult> PreviewListOfValues([FromBody] PreviewLOV previewLov, CancellationToken cancellationToken)
         {
+            var remoteAgent = await _remoteAgents.GetHubReaderRemoteAgent(previewLov.HubKey, _operations.RepositoryManager, cancellationToken);
+
+            if (previewLov.RemoteAgentId != remoteAgent.InstanceId)
+            {
+                // this status code is used by the client to attempt to look for a refreshed remote agent.
+                return StatusCode(426, remoteAgent);
+                // throw new Exception("The remote agent did not match the current agent.");
+            }
+            
             var user = await _operations.RepositoryManager.GetUserAsync(User, cancellationToken, false);
             var repositoryManager = _operations.RepositoryManager;
 
@@ -76,8 +85,10 @@ namespace dexih.api.Controllers
             }
 
             var listOfValuesKey = await repositoryManager.GetSharedListOfValueKey(previewLov.ObjectType, previewLov.ObjectKey, previewLov.ParameterName, cancellationToken);
-            return await _remoteAgents.PreviewListOfValues(previewLov.RemoteAgentId, previewLov.HubKey,
+            var data = await _remoteAgents.PreviewListOfValues(previewLov.RemoteAgentId, previewLov.HubKey,
                 previewLov.DownloadUrl, listOfValuesKey, previewLov.ResetCache, repositoryManager, cancellationToken);
+
+            return Ok(data);
         }
         
         [HttpPost("[action]")]
@@ -102,16 +113,30 @@ namespace dexih.api.Controllers
                 throw new Exception($"Can not access shared objects in the hub with the key {previewData.HubKey}.");
             }
             
+            InputParameters itemParameters; 
+            if (previewData.ParentParameters == null)
+            {
+                itemParameters = previewData.Parameters;
+            }
+            else
+            {
+                itemParameters = new InputParameters();
+                foreach(var parameter in previewData.Parameters)
+                {
+                    itemParameters.Add( parameter.Name, previewData.ParentParameters.SetParameters(parameter.Value));
+                }
+            }
+            
             string data;
             ChartConfig chartConfig = null;
 
             switch (previewData.ObjectType)
             {
                 case EDataObjectType.Table:
-                    data = await _remoteAgents.PreviewTable(previewData.RemoteAgentId, previewData.HubKey, previewData.DownloadUrl, previewData.ObjectKey, previewData.SelectQuery, null, previewData.InputColumns, previewData.Parameters, false, true, repositoryManager, cancellationToken);
+                    data = await _remoteAgents.PreviewTable(previewData.RemoteAgentId, previewData.HubKey, previewData.DownloadUrl, previewData.ObjectKey, previewData.SelectQuery, null, previewData.InputColumns, itemParameters, false, true, repositoryManager, cancellationToken);
                     break;
                 case EDataObjectType.Datalink:
-                    data = await _remoteAgents.PreviewDatalink(previewData.RemoteAgentId, previewData.HubKey, previewData.DownloadUrl, previewData.ObjectKey, false, previewData.SelectQuery, null, previewData.InputColumns, previewData.Parameters, true, repositoryManager, cancellationToken);
+                    data = await _remoteAgents.PreviewDatalink(previewData.RemoteAgentId, previewData.HubKey, previewData.DownloadUrl, previewData.ObjectKey, false, previewData.SelectQuery, null, previewData.InputColumns, itemParameters, true, repositoryManager, cancellationToken);
                     break;
                 case EDataObjectType.View:
                 case EDataObjectType.DashboardItem:
@@ -136,10 +161,10 @@ namespace dexih.api.Controllers
                     switch (view.SourceType)
                     {
                         case EDataObjectType.Table:
-                            data = await _remoteAgents.PreviewTable(previewData.RemoteAgentId, previewData.HubKey, previewData.DownloadUrl, view.SourceTableKey.Value, selectQuery, view.GetViewConfig(), previewData.InputColumns, previewData.Parameters, false, false, repositoryManager, cancellationToken);
+                            data = await _remoteAgents.PreviewTable(previewData.RemoteAgentId, previewData.HubKey, previewData.DownloadUrl, view.SourceTableKey.Value, selectQuery, view.GetViewConfig(), previewData.InputColumns, itemParameters, false, false, repositoryManager, cancellationToken);
                             break;
                         case EDataObjectType.Datalink:
-                            data = await _remoteAgents.PreviewDatalink(previewData.RemoteAgentId, previewData.HubKey, previewData.DownloadUrl, view.SourceDatalinkKey.Value, false, selectQuery, view.GetViewConfig(), previewData.InputColumns, previewData.Parameters, false, repositoryManager, cancellationToken);
+                            data = await _remoteAgents.PreviewDatalink(previewData.RemoteAgentId, previewData.HubKey, previewData.DownloadUrl, view.SourceDatalinkKey.Value, false, selectQuery, view.GetViewConfig(), previewData.InputColumns, itemParameters, false, repositoryManager, cancellationToken);
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
@@ -177,7 +202,7 @@ namespace dexih.api.Controllers
                 var inputParameters = new InputParameters();
                 foreach (var parameter in item.Parameters)
                 {
-                    inputParameters.Add(new InputParameter() {Name = parameter.Name, Value =  parameter.Value});
+                    inputParameters.Add(new InputParameter() {Name = parameter.Name, Value = item.ParentParameters == null ? parameter.Value : item.ParentParameters.SetParameters(parameter.Value)});
                 }
                 
                 var downloadObject = new DownloadData.DownloadObject()

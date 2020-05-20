@@ -30,6 +30,7 @@ namespace dexih.api.Models
         public SelectQuery SelectQuery { get; set; }
         public InputColumn[] InputColumns { get; set; }
         public InputParameters Parameters { get; set; }
+        public InputParameters ParentParameters { get; set; }
     }
     
 
