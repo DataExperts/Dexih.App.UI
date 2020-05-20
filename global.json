@@ -1,6 +1,6 @@
 {
   "projects": [ "src", "test", "../dexih.transforms/src" ],
   "sdk": {
-    "version": "3.1.201"
+    "version": "3.1.300"
   }
 }
