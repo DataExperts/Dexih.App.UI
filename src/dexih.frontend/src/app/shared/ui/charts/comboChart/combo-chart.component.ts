@@ -128,16 +128,17 @@ import {
       this.xScale = this.getXScale();
       this.yScale = this.getYScale();
   
-      // line chart
-      this.xDomainLine = this.getXDomainLine();
-      if (this.filteredDomain) {
-        this.xDomainLine = this.filteredDomain;
-      }
-  
-      this.yDomainLine = this.getYDomainLine();
-      this.seriesDomain = this.getSeriesDomain();
-  
-      this.scaleLines();
+      if (this.lineChart) {
+        // line chart
+        this.xDomainLine = this.getXDomainLine();
+        if (this.filteredDomain) {
+          this.xDomainLine = this.filteredDomain;
+        }
+    
+        this.yDomainLine = this.getYDomainLine();
+        this.seriesDomain = this.getSeriesDomain();
+        this.scaleLines();
+      }  
   
       this.setColors();
       this.legendOptions = this.getLegendOptions();
@@ -171,11 +172,13 @@ import {
     }
   
     scaleLines() {
+      if (!this.lineChart) { return; }
       this.xScaleLine = this.getXScaleLine(this.xDomainLine, this.dims.width);
       this.yScaleLine = this.getYScaleLine(this.yDomainLine, this.dims.height);
     }
   
     getSeriesDomain(): any[] {
+
       this.combinedSeries = this.lineChart.slice(0);
       this.combinedSeries.push({
         name: this.yAxisLabel,
@@ -213,7 +216,7 @@ import {
   
     getXDomainLine(): any[] {
       let values = [];
-  
+
       for (const results of this.lineChart) {
         for (const d of results.series) {
           if (!values.includes(d.name)) {
@@ -344,7 +347,10 @@ import {
         domain = this.yDomain;
       }
       this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
-      this.colorsLine = new ColorHelper(this.colorSchemeLine, this.schemeType, this.seriesDomain, this.customColors);
+
+      if (this.seriesDomain) {
+        this.colorsLine = new ColorHelper(this.colorSchemeLine, this.schemeType, this.seriesDomain, this.customColors);
+      }
     }
   
     getLegendOptions() {

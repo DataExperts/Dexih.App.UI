@@ -162,21 +162,23 @@ export class ComboSeriesVerticalComponent implements OnChanges {
         tooltipLabel = `${this.seriesName} • ${formattedLabel}`;
       }
 
-      this.getSeriesTooltips(this.seriesLine, index);
-      const lineValue = this.seriesLine[0].series[index].value;
-      bar.tooltipText = `
+      if (this.seriesLine) {
+        // this.getSeriesTooltips(this.seriesLine, index);
+        const lineValue = this.seriesLine[0].series[index].value;
+        bar.tooltipText = `
         <span class="tooltip-label">${tooltipLabel}</span>
         <span class="tooltip-val"> Y1 - ${value.toLocaleString()} • Y2 - ${lineValue.toLocaleString()}%</span>
       `;
+      }
 
       return bar;
     });
   }
-  getSeriesTooltips(seriesLine, index) {
-    return seriesLine.map(d => {
-      return d.series[index];
-    });
-  }
+  // getSeriesTooltips(seriesLine, index) {
+  //   return seriesLine.map(d => {
+  //     return d.series[index];
+  //   });
+  // }
   isActive(entry): boolean {
     if (!this.activeEntries) return false;
     const item = this.activeEntries.find(d => {
