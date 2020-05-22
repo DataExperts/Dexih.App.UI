@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, OnChanges, EventEmitter, Output, ContentChild } from '@angular/core';
-import { ChartTypes, eInputFormat } from './chart-groups';
-import { colorSets } from './chart-colors';
+import { ChartTypes, eInputFormat } from '../chart-groups';
+import { colorSets } from '../chart-colors';
 import * as html2canvas from 'html2canvas';
 import { Subject } from 'rxjs';
-import { ChartConfig, eChartType } from '../../shared.models';
+import { ChartConfig, eChartType } from '../../../shared.models';
 
 @Component({
     selector: 'chart-builder',

@@ -6,6 +6,7 @@ import { AuthService } from '../+auth/auth.service';
 import { HubCache, eCacheStatus } from './hub.models';
 import { HubService } from './hub.service';
 import { DexihHub, DexihActiveAgent, ePermission } from '../shared/shared.models';
+import { first, filter, take } from 'rxjs/operators';
 
 @Component({
     selector: 'dexih-hub',
@@ -60,6 +61,7 @@ export class HubComponent implements OnInit, OnDestroy {
                 }
 
                 this.hubKey = + params['hubKey'];
+
                 if (this.hubKey > 0) {
                     await this.hubService.updateHub(this.hubKey, 'Loading...');
                 } else {

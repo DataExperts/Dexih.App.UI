@@ -23,7 +23,8 @@ namespace dexih.api.Services.Operations
         public string GoogleClientSecret { get; set; }
         public string MicrosoftClientId { get; set; }
         public string MicrosoftClientSecret { get; set; }
-        
+
+        public string RedisCacheInstanceId { get; set; } = "dexih-cache";
         public string RedisCacheConnectionString { get; set; }
 
         public string EncryptionKey { get; set; }

@@ -104,17 +104,17 @@ namespace dexih.api
 			{
 				services.AddStackExchangeRedisCache(options =>
 				{
-					options.InstanceName = "dexih-cache";
+					options.InstanceName = appSettings.RedisCacheInstanceId;
 					options.Configuration = appSettings.RedisCacheConnectionString;
 				});
 				
 				var redis = ConnectionMultiplexer.Connect(appSettings.RedisCacheConnectionString);
 				services.AddDataProtection().PersistKeysToStackExchangeRedis(redis, "dexih-keys");
 			}
-			else
-			{
-				services.AddDistributedMemoryCache();
-			}
+			// else
+			// {
+			// 	services.AddDistributedMemoryCache();
+			// }
 
 			services.AddSingleton<ICacheService, CacheService>();
 			

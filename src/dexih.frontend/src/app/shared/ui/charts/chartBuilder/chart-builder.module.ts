@@ -4,8 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { ChartBuilderComponent } from './chart-builder.component';
 import { DexihComponentsModule } from 'dexih-ngx-components';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { GoogleMapComponent } from './google-map.component';
+import { GoogleMapComponent } from '../googleMap/google-map.component';
 import { ChartViewComponent } from './chart-view.component';
+import { ComboChartComponent } from '../comboChart';
 import { AngularResizedEventModule } from 'angular-resize-event';
 
 @NgModule({
@@ -14,7 +15,8 @@ import { AngularResizedEventModule } from 'angular-resize-event';
     FormsModule,
     DexihComponentsModule,
     NgxChartsModule,
-    AngularResizedEventModule
+    AngularResizedEventModule,
+    ComboChartComponent
   ],
   declarations: [
     ChartBuilderComponent,

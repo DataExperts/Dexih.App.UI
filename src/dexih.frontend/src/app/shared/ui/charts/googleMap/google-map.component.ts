@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { AuthService } from '../../../+auth/auth.service';
-import { ResultsIndexComponent } from '../../../+hub/results';
+import { AuthService } from '../../../../+auth/auth.service';
+import { ResultsIndexComponent } from '../../../../+hub/results';
 
 declare var google: any;
 

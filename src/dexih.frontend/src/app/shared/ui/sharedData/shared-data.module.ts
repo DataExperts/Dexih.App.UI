@@ -5,7 +5,7 @@ import { SharedDataComponent, PreviewDataComponent, PreviewDashboardComponent, P
   PreviewComponent, InputParametersViewComponent} from './';
 import { DexihComponentsModule } from 'dexih-ngx-components';
 import { DexihTableModule} from 'dexih-ngx-table';
-import { ChartBuilderModule } from '../chartBuilder/chart-builder.module';
+import { ChartBuilderModule } from '../charts/charts.module';
 import { GridsterModule} from 'angular-gridster2';
 import { DexihMessageModule } from '../dexihMessage';
 import { DexihIconsModule } from '../icons';

@@ -57,8 +57,8 @@ export class DexihHubAuth {
 
     public remoteAgentId: string;
 
-    public createDate: string;
-    public updateDate: string;
+    public createDate: Date;
+    public updateDate: Date;
     public isValid = true;
 
 }

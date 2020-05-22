@@ -60,6 +60,12 @@ namespace dexih.api.Controllers
 		private readonly IDexihOperations _operations;
 		private readonly ILogger _logger;
 
+		/// <summary>
+		/// This is cached using the last update date to make the call unique.
+		/// </summary>
+		/// <param name="hubKey"></param>
+		/// <param name="cancellationToken"></param>
+		/// <returns></returns>
 		[HttpPost("[action]")]
 		[ValidateHub(EPermission.FullReader)]
 		public async Task<GetHubCacheResult> GetHubCache([FromBody] HubModelBase hubKey, CancellationToken cancellationToken)

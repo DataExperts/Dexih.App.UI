@@ -17,7 +17,7 @@ import { DexihHelpModule } from './help/dexih-help.module';
 import { NgxMdModule } from 'ngx-md';
 import { DexihIconsModule } from './ui/icons'
 import { QueryBuilderModule } from './ui/queryBuilder/query-builder.module';
-import { ChartBuilderModule } from './ui/chartBuilder/chart-builder.module';
+import { ChartBuilderModule } from './ui/charts/charts.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { GridsterModule} from 'angular-gridster2';
 import { AngularResizedEventModule } from 'angular-resize-event';

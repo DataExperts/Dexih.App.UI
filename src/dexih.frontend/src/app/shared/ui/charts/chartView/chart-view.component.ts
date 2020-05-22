@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, OnChanges, OnDestroy, AfterViewInit, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
-import { eInputFormat, ChartTypes } from './chart-groups';
-import { colorSets } from './chart-colors';
+import { eInputFormat, ChartTypes } from '../chart-groups';
+import { colorSets } from '../chart-colors';
 import { Subscription, Observable } from 'rxjs';
 import { ResizedEvent } from 'angular-resize-event';
-import { ChartConfig, eChartType } from '../../shared.models';
-import { Functions } from '../../utils/functions';
+import { ChartConfig, eChartType } from '../../../shared.models';
+import { Functions } from '../../../utils/functions';
 
 @Component({
     selector: 'chart-view',
@@ -41,6 +41,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
     chartTypes = ChartTypes;
 
     results: any[];
+    lineChartSeries: any[];
 
     chartType: any;
     colorSets = colorSets;
@@ -221,147 +222,21 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
 
             switch (this.chartType.inputFormat) {
                 case eInputFormat.SingleSeries:
-                    if (this.labelColumnIndex !== null && this.seriesColumnIndex != null) {
-                        chartData = new Array(this.data.length);
-                        for (let i = 0; i < this.data.length; i++) {
-                            chartData[i] = {
-                                name: this.formatValue(this.labelColumnIndex, i),
-                                value: this.formatValue(this.seriesColumnIndex, i)
-                            };
-                        }
-                        this.setSeriesLabel(this.columns[this.seriesColumnIndex].title);
-                    }
+                    chartData = this.singleSeries();
                     break;
 
                 case eInputFormat.MultiSeries:
-                    if (this.labelColumnIndex != null && this.seriesColumnsIndex.length > 0) {
-                        if (this.seriesPivotIndex != null) {
-                            let pivotValues: any[] = this.uniqueValues(this.seriesPivotIndex);
-                            let seriesCount = pivotValues.length * this.seriesColumnsIndex.length;
-                            let pivotData = {};
-
-                            for (let pivotIndex = 0; pivotIndex < pivotValues.length; pivotIndex++) {
-                                let pivotValue = pivotValues[pivotIndex];
-                                let data = this.data.filter(c => c[this.seriesPivotIndex] === pivotValue.value);
-
-                                for (let i = 0; i < data.length; i++) {
-
-                                    const label = data[i][this.labelColumnIndex];
-                                    let row = pivotData[label];
-                                    if (!row) {
-                                        row = new Array(seriesCount);
-                                        pivotData[label] = row;
-                                    }
-
-                                    for (let j = 0; j < this.seriesColumnsIndex.length; j++) {
-                                        if (this.seriesColumnsIndex[j]) {
-                                            row[((j + 1) * (pivotIndex + 1)) - 1 ] = {
-                                                name: pivotValue.name + '/' + this.seriesColumnsIndex[j].title,
-                                                value: this.formatValue2(data, this.seriesColumnsIndex[j].name, i)
-                                            };
-                                        }
-                                    }
-                                }
-                            }
-
-                            let labels = Object.keys(pivotData);
-                            chartData = new Array(labels.length);
-                            let labelColumn = this.columns[this.labelColumnIndex];
-
-                            for (let i  = 0; i < labels.length; i++) {
-                                chartData[i] = {
-                                    name: Functions.formatValue(labels[i], labelColumn.format),
-                                    series: pivotData[labels[i]].filter(c => c)
-                                }
-                            }
-
-                            this.setSeriesLabel(this.seriesColumnsIndex.map(c => c.title).join(' / '));
-                        } else {
-                            chartData = new Array(this.data.length);
-                            for (let i = 0; i < this.data.length; i++) {
-                                let series = new Array(this.seriesColumnsIndex.length);
-                                for (let j = 0; j < this.seriesColumnsIndex.length; j++) {
-                                    if (this.seriesColumnsIndex[j]) {
-                                        series[j] = {
-                                            name: this.seriesColumnsIndex[j].title,
-                                            value: this.formatValue(this.seriesColumnsIndex[j].name, i)
-                                        };
-                                    }
-                                }
-                                chartData[i] = {
-                                    name: this.formatValue(this.labelColumnIndex, i),
-                                    series: series
-                                };
-                            }
-                            this.setSeriesLabel(this.seriesColumnsIndex.map(c => c.title).join(' / '));
-                        }
-                    }
+                    chartData = this.multiSeries();
                     break;
 
                 case eInputFormat.InverseSeries:
-                    if (this.labelColumnIndex != null && this.seriesColumnsIndex.length > 0) {
-                        if (this.seriesPivotIndex != null) {
-                            let labelValues: any[] = this.uniqueValues(this.labelColumnIndex);
-                            let seriesCount = labelValues.length * this.seriesColumnsIndex.length;
-                            let pivotData = {};
-
-                            for (let seriesIndex = 0; seriesIndex < labelValues.length; seriesIndex++) {
-                                let seriesValue = labelValues[seriesIndex];
-                                let data = this.data.filter(c => c[this.labelColumnIndex] === seriesValue.value);
-
-                                for (let i = 0; i < data.length; i++) {
-                                    for (let j = 0; j < this.seriesColumnsIndex.length; j++) {
-                                        let pivotItem = data[i][this.seriesPivotIndex];
-                                        if (this.seriesColumnsIndex.length > 1 ) {
-                                            pivotItem += ' / ' + this.seriesColumnsIndex[j].title;
-                                        }
-
-                                        let row = pivotData[pivotItem];
-                                        if (!row) {
-                                            row = new Array(seriesCount);
-                                            pivotData[pivotItem] = row;
-                                        }
-
-                                        if (this.seriesColumnsIndex[j]) {
-                                            let name = this.formatValue2(data, this.labelColumnIndex, j);
-                                            row[((j + 1) * (seriesIndex + 1)) - 1 ] = {
-                                                name: name,
-                                                value: this.formatValue2(data, this.seriesColumnsIndex[j].name, i)
-                                            };
-                                        }
-                                    }
-                                }
-                            }
-
-                            let labels = Object.keys(pivotData);
-                            chartData = new Array(labels.length);
-                            let seriesColumn = this.columns[this.seriesPivotIndex];
-
-                            for (let i  = 0; i < labels.length; i++) {
-                                chartData[i] = {
-                                    name: Functions.formatValue(labels[i], seriesColumn.format),
-                                    series: pivotData[labels[i]].filter(c => c)
-                                }
-                            }
-                            this.setSeriesLabel(this.seriesColumnsIndex.map(c => c.title).join(' / '));
-                        } else {
-                            chartData = new Array(this.seriesColumnsIndex.length);
-                            for (let i = 0; i < this.seriesColumnsIndex.length; i++) {
-                                let series = new Array(this.data.length);
-                                for (let j = 0; j < this.data.length; j++) {
-                                    series[j] = {
-                                        name: this.formatValue(this.labelColumnIndex, j),
-                                        value: this.formatValue(this.seriesColumnsIndex[i].name, j)
-                                    };
-                                }
-                                series = series.filter(c => c.value !== '');
-                                chartData[i] = { name: this.seriesColumnsIndex[i].title, series: series };
-                            }
-                            this.setSeriesLabel(this.seriesColumnsIndex.map(c => c.title).join(' / '));
-                        }
-                    }
+                    chartData = this.inverseSeries();
                     break;
 
+                case eInputFormat.ComboSeries:
+                    this.lineChartSeries = this.inverseSeries();
+                    chartData = this.singleSeries();
+                    break;
                 case eInputFormat.Xy:
                     if (this.yColumnIndex != null && this.xColumnIndex != null) {
                         chartData = new Array(this.data.length);
@@ -443,9 +318,169 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                 });
             }
 
+            if (this.lineChartSeries) {
+                this.lineChartSeries.forEach(item => {
+                    this.addCustomColor(item.name);
+                })
+            }
+
             this.results = chartData;
         }
 
+    }
+
+    singleSeries(): Array<any> {
+        let chartData: Array<any>;
+
+        if (this.labelColumnIndex !== null && this.seriesColumnIndex != null) {
+            chartData = new Array(this.data.length);
+            for (let i = 0; i < this.data.length; i++) {
+                chartData[i] = {
+                    name: this.formatValue(this.labelColumnIndex, i),
+                    value: this.formatValue(this.seriesColumnIndex, i)
+                };
+            }
+            this.setSeriesLabel(this.columns[this.seriesColumnIndex].title);
+        }
+
+        return chartData;
+    }
+
+    multiSeries(): Array<any> {
+        let chartData: Array<any>;
+
+        if (this.labelColumnIndex != null && this.seriesColumnsIndex.length > 0) {
+            if (this.seriesPivotIndex != null) {
+                let pivotValues: any[] = this.uniqueValues(this.seriesPivotIndex);
+                let seriesCount = pivotValues.length * this.seriesColumnsIndex.length;
+                let pivotData = {};
+
+                for (let pivotIndex = 0; pivotIndex < pivotValues.length; pivotIndex++) {
+                    let pivotValue = pivotValues[pivotIndex];
+                    let data = this.data.filter(c => c[this.seriesPivotIndex] === pivotValue.value);
+
+                    for (let i = 0; i < data.length; i++) {
+
+                        const label = data[i][this.labelColumnIndex];
+                        let row = pivotData[label];
+                        if (!row) {
+                            row = new Array(seriesCount);
+                            pivotData[label] = row;
+                        }
+
+                        for (let j = 0; j < this.seriesColumnsIndex.length; j++) {
+                            if (this.seriesColumnsIndex[j]) {
+                                row[((j + 1) * (pivotIndex + 1)) - 1 ] = {
+                                    name: pivotValue.name + '/' + this.seriesColumnsIndex[j].title,
+                                    value: this.formatValue2(data, this.seriesColumnsIndex[j].name, i)
+                                };
+                            }
+                        }
+                    }
+                }
+
+                let labels = Object.keys(pivotData);
+                chartData = new Array(labels.length);
+                let labelColumn = this.columns[this.labelColumnIndex];
+
+                for (let i  = 0; i < labels.length; i++) {
+                    chartData[i] = {
+                        name: Functions.formatValue(labels[i], labelColumn.format),
+                        series: pivotData[labels[i]].filter(c => c)
+                    }
+                }
+
+                this.setSeriesLabel(this.seriesColumnsIndex.map(c => c.title).join(' / '));
+            } else {
+                chartData = new Array(this.data.length);
+                for (let i = 0; i < this.data.length; i++) {
+                    let series = new Array(this.seriesColumnsIndex.length);
+                    for (let j = 0; j < this.seriesColumnsIndex.length; j++) {
+                        if (this.seriesColumnsIndex[j]) {
+                            series[j] = {
+                                name: this.seriesColumnsIndex[j].title,
+                                value: this.formatValue(this.seriesColumnsIndex[j].name, i)
+                            };
+                        }
+                    }
+                    chartData[i] = {
+                        name: this.formatValue(this.labelColumnIndex, i),
+                        series: series
+                    };
+                }
+                this.setSeriesLabel(this.seriesColumnsIndex.map(c => c.title).join(' / '));
+            }
+        }
+
+        return chartData;
+    }
+
+    inverseSeries(): Array<any> {
+        let chartData: Array<any>;
+
+        if (this.labelColumnIndex != null && this.seriesColumnsIndex.length > 0) {
+            if (this.seriesPivotIndex != null) {
+                let labelValues: any[] = this.uniqueValues(this.labelColumnIndex);
+                let seriesCount = labelValues.length * this.seriesColumnsIndex.length;
+                let pivotData = {};
+
+                for (let seriesIndex = 0; seriesIndex < labelValues.length; seriesIndex++) {
+                    let seriesValue = labelValues[seriesIndex];
+                    let data = this.data.filter(c => c[this.labelColumnIndex] === seriesValue.value);
+
+                    for (let i = 0; i < data.length; i++) {
+                        for (let j = 0; j < this.seriesColumnsIndex.length; j++) {
+                            let pivotItem = data[i][this.seriesPivotIndex];
+                            if (this.seriesColumnsIndex.length > 1 ) {
+                                pivotItem += ' / ' + this.seriesColumnsIndex[j].title;
+                            }
+
+                            let row = pivotData[pivotItem];
+                            if (!row) {
+                                row = new Array(seriesCount);
+                                pivotData[pivotItem] = row;
+                            }
+
+                            if (this.seriesColumnsIndex[j]) {
+                                let name = this.formatValue2(data, this.labelColumnIndex, j);
+                                row[((j + 1) * (seriesIndex + 1)) - 1 ] = {
+                                    name: name,
+                                    value: this.formatValue2(data, this.seriesColumnsIndex[j].name, i)
+                                };
+                            }
+                        }
+                    }
+                }
+
+                let labels = Object.keys(pivotData);
+                chartData = new Array(labels.length);
+                let seriesColumn = this.columns[this.seriesPivotIndex];
+
+                for (let i  = 0; i < labels.length; i++) {
+                    chartData[i] = {
+                        name: Functions.formatValue(labels[i], seriesColumn.format),
+                        series: pivotData[labels[i]].filter(c => c)
+                    }
+                }
+                this.setSeriesLabel(this.seriesColumnsIndex.map(c => c.title).join(' / '));
+            } else {
+                chartData = new Array(this.seriesColumnsIndex.length);
+                for (let i = 0; i < this.seriesColumnsIndex.length; i++) {
+                    let series = new Array(this.data.length);
+                    for (let j = 0; j < this.data.length; j++) {
+                        series[j] = {
+                            name: this.formatValue(this.labelColumnIndex, j),
+                            value: this.formatValue(this.seriesColumnsIndex[i].name, j)
+                        };
+                    }
+                    series = series.filter(c => c.value !== '');
+                    chartData[i] = { name: this.seriesColumnsIndex[i].title, series: series };
+                }
+                this.setSeriesLabel(this.seriesColumnsIndex.map(c => c.title).join(' / '));
+            }
+        }
+
+        return chartData;
     }
 
     uniqueValues(index: number): any[] {

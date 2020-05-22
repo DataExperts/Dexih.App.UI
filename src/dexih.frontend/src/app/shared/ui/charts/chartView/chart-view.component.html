@@ -106,6 +106,13 @@
         [showYAxisLabel]="config.showYAxisLabel" [xAxisLabel]="config.xAxisLabel" [yAxisLabel]="config.yAxisLabel">
     </ngx-charts-area-chart-normalized>
 
+    <combo-chart-component *ngIf="chartType.key === eChartType.BarLineCombo" [view]="view" [customColors]="customColors"
+        [results]="results" [lineChart]="lineChartSeries" [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"
+        [legend]="config.showLegend" [legendPosition]="config.legendPosition" [showGridLines]="config.showGridLines" [showXAxisLabel]="config.showXAxisLabel"
+        [showYAxisLabel]="config.showYAxisLabel" [xAxisLabel]="config.xAxisLabel" [yScaleMax]="config.yScaleMax"
+        [yAxisLabel]="config.yAxisLabel">
+    </combo-chart-component>
+
     <ngx-charts-bubble-chart
         *ngIf="chartType.key === eChartType.Bubble || chartType.key === eChartType.Error || chartType.key === eChartType.Scatter"
         [view]="view" [customColors]="customColors" [results]="results" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"

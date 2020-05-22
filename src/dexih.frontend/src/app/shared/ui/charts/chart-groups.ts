@@ -1,8 +1,9 @@
-import { eChartType } from "../../shared.models"
+import { eChartType } from '../../shared.models';
 
 export enum eInputFormat {
     SingleSeries,
     MultiSeries,
+    ComboSeries,
     InverseSeries,
     Xy,
     XyMinMax,
@@ -14,6 +15,8 @@ export const inputFormats = [
 {key: eInputFormat.SingleSeries, allowLabel: true, maxSeries: 1, allowYSeries: false,
     allowMinMax: false, allowBubble: false, inverse: false },
 {key: eInputFormat.MultiSeries, allowLabel: true, maxSeries: 10, allowYSeries: false,
+    allowMinMax: false, allowBubble: false, inverse: false },
+{key: eInputFormat.ComboSeries, allowLabel: true, maxSeries: 10, allowYSeries: false,
     allowMinMax: false, allowBubble: false, inverse: false },
 {key: eInputFormat.InverseSeries, allowLabel: true, maxSeries: 10, allowYSeries: false,
     allowMinMax: false, allowBubble: false, inverse: true },
@@ -505,6 +508,30 @@ export const ChartTypes = [
     {
         name: 'Other Charts',
         charts: [
+            {
+                key: eChartType.BarLineCombo, name: 'Bar/Line Combo Chart',
+                inputFormat: eInputFormat.ComboSeries,
+                isHorizontal: false,
+                allowGradient: true,
+                allowLegend: true,
+                allowXAxis: true,
+                allowYAxis: true,
+                allowXScaleMin: false,
+                allowXScaleMax: false,
+                allowYScaleMin: false,
+                allowYScaleMax: false,
+                allowLabels: false,
+                allowExplodeSlices: false,
+                allowDoughnut: false,
+                allowGridLines: true,
+                defaultShowXAxisLabel: true,
+                defaultShowYAxisLabel: true,
+                defaultShowXAxis: true,
+                defaultShowYAxis: true,
+                defaultShowGridLines: true,
+                defaultColorScheme: 'natural',
+                defaultShowLegend: false
+            },
             {
                 key: eChartType.HeatMap, name: 'Heat Map',
                 inputFormat: eInputFormat.MultiSeries,

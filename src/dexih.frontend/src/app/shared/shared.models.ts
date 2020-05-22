@@ -22,7 +22,7 @@ export class AnimateConfig {
    }
    
    export class ApplicationUser {
-    public id: string = '6be590e6-cab0-452a-893b-831adee52c0f';
+    public id: string = '2bf957fd-f405-41b7-ad3b-9a4484782a09';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -31,7 +31,7 @@ export class AnimateConfig {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = 'edc70adb-c8ff-44d2-a3de-e7c35e57bf18';
+    public securityStamp: string = '9cf7f6e0-8a9c-4ab7-8315-0bcbaf01b8db';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -1713,7 +1713,7 @@ export class AnimateConfig {
     public updateDate: Date = null;
     public inputColumns: InputColumn[] = [];
     public parameters: InputParameterBase[] = [];
-    public parentParameters: InputParameterBase[] = [];
+    public parentParameters: InputParameter[] = [];
     public query: SelectQuery = null;
     public outputColumns: DexihColumnBase[] = [];
     public tags: DexihTag[] = [];
@@ -2009,6 +2009,7 @@ export class AnimateConfig {
     Gauge = 24,
     LinearGauge = 25,
     Map = 26,
+    BarLineCombo = 27,
    }
    
    export const eChartTypeItems = [
@@ -2039,6 +2040,7 @@ export class AnimateConfig {
     {key: eChartType.Gauge, name: 'Gauge'},
     {key: eChartType.LinearGauge, name: 'LinearGauge'},
     {key: eChartType.Map, name: 'Map'},
+    {key: eChartType.BarLineCombo, name: 'BarLineCombo'},
    ]
    
    export enum eCleanAction {
