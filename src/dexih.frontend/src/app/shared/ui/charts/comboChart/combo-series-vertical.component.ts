@@ -162,7 +162,7 @@ export class ComboSeriesVerticalComponent implements OnChanges {
         tooltipLabel = `${this.seriesName} • ${formattedLabel}`;
       }
 
-      if (this.seriesLine) {
+      if (this.seriesLine && this.seriesLine.length > 0) {
         // this.getSeriesTooltips(this.seriesLine, index);
         const lineValue = this.seriesLine[0].series[index].value;
         bar.tooltipText = `
