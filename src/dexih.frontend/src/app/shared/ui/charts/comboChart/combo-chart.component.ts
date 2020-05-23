@@ -60,6 +60,7 @@ import {
     @Input() roundEdges: boolean = false;
     @Input() barPadding = 3;
     @Input() separateAxis = false; // seprate axis for bar/series
+    @Input() showDataLabel = false;
   
     @Output() activate: EventEmitter<any> = new EventEmitter();
     @Output() deactivate: EventEmitter<any> = new EventEmitter();
