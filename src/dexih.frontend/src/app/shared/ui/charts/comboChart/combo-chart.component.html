@@ -31,7 +31,7 @@
       [tickFormatting]="yAxisTickFormatting"
       (dimensionsChanged)="updateYAxisWidth($event)"
     ></svg:g>
-    <svg:g *ngIf="lineChart && yAxis"
+    <svg:g *ngIf="lineChart && yAxis && separateAxis"
       ngx-charts-y-axis
       [yScale]="yScaleLine"
       [dims]="dims"
@@ -55,6 +55,9 @@
       [activeEntries]="activeEntries"
       [animations]="animations"
       [noBarWhenZero]="noBarWhenZero"
+      [roundEdges]="roundEdges"
+      [barPadding]="barPadding"
+      [showDataLabel]="showDataLabel"
       (activate)="onActivate($event)"
       (deactivate)="onDeactivate($event)"
       (bandwidth)="updateLineWidth($event)"

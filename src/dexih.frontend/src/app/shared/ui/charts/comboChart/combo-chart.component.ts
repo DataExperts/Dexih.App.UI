@@ -57,6 +57,9 @@ import {
     @Input() rangeFillOpacity: number;
     @Input() animations: boolean = true;
     @Input() noBarWhenZero: boolean = true;
+    @Input() roundEdges: boolean = false;
+    @Input() barPadding = 3;
+    @Input() separateAxis = false; // seprate axis for bar/series
   
     @Output() activate: EventEmitter<any> = new EventEmitter();
     @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -93,7 +96,7 @@ import {
     yOrientRight = 'right';
     legendSpacing = 0;
     bandwidth;
-    barPadding = 8;
+    // barPadding = 8;
   
     trackBy(index, item): string {
       return item.name;
@@ -118,7 +121,7 @@ import {
   
       if (!this.yAxis) {
         // this.legendSpacing = 0;
-      } else if (this.showYAxisLabel && this.yAxis) {
+      } else if (this.showYAxisLabel && this.separateAxis && this.yAxis) {
         // this.legendSpacing = 100;
         this.dims.width -= 70;
       } else {
@@ -136,10 +139,11 @@ import {
         }
     
         this.yDomainLine = this.getYDomainLine();
-        this.seriesDomain = this.getSeriesDomain();
         this.scaleLines();
-      }  
-  
+      }
+
+      this.seriesDomain = this.getSeriesDomain();
+
       this.setColors();
       this.legendOptions = this.getLegendOptions();
   
@@ -173,13 +177,23 @@ import {
   
     scaleLines() {
       if (!this.lineChart) { return; }
-      this.xScaleLine = this.getXScaleLine(this.xDomainLine, this.dims.width);
-      this.yScaleLine = this.getYScaleLine(this.yDomainLine, this.dims.height);
+
+      if (this.separateAxis) {
+        this.xScaleLine = this.getXScaleLine(this.xDomainLine, this.dims.width);
+        this.yScaleLine = this.getYScaleLine(this.yDomainLine, this.dims.height);
+      } else {
+        this.xScaleLine = this.xScale;
+        this.yScaleLine = this.yScale;
+      }
     }
   
     getSeriesDomain(): any[] {
-
-      this.combinedSeries = this.lineChart.slice(0);
+      if (this.lineChart) {
+        this.combinedSeries = this.lineChart.slice(0);
+      } else {
+        this.combinedSeries = [];
+      }
+      
       this.combinedSeries.push({
         name: this.yAxisLabel,
         series: this.results
@@ -325,8 +339,16 @@ import {
   
     getYDomain() {
       const values = this.results.map(d => d.value);
-      const min = Math.min(0, ...values);
-      const max = Math.max(...values);
+      let min = Math.min(0, ...values);
+      let max = Math.max(...values);
+
+      // if we are not using a separate axis for series, check the series values for min/max
+      if (!this.separateAxis && this.lineChart) {
+        let yDomainLine = this.getYDomainLine();
+        if (min > yDomainLine[0]) { min = yDomainLine[0]; }
+        if (max < yDomainLine[1]) { max = yDomainLine[1]; }
+      }
+
       if (this.yLeftAxisScaleFactor) {
         const minMax = this.yLeftAxisScaleFactor(min, max);
         return [Math.min(0, minMax.min), minMax.max];

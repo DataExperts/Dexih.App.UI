@@ -22,7 +22,7 @@ export class AnimateConfig {
    }
    
    export class ApplicationUser {
-    public id: string = '2bf957fd-f405-41b7-ad3b-9a4484782a09';
+    public id: string = '2b23a146-7d10-4b12-a015-fd9b6a718983';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -31,7 +31,7 @@ export class AnimateConfig {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = '9cf7f6e0-8a9c-4ab7-8315-0bcbaf01b8db';
+    public securityStamp: string = 'fad0419f-c9c4-457c-8f52-f0b528a63606';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -109,6 +109,11 @@ export class AnimateConfig {
     public autoScale: boolean = true;
     public explodeSlices: boolean = false;
     public doughnut: boolean = false;
+    public separateAxis: boolean = false;
+    public barPadding: number = 3;
+    public roundEdges: boolean = false;
+    public showDataLabel: boolean = false;
+    public singleBarColor: boolean = true;
    }
    
    export class ClientMessage {

@@ -169,7 +169,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
         }
     }
 
-    addCustomColor(label: string) {
+    addCustomColor(label: string, changeColor = true) {
         if ( this.customColors.findIndex(c => c.name === label) < 0) {
             let colorSet;
 
@@ -187,7 +187,10 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
             }
 
             this.customColors.push({name: label, value: colors[this.colorIndex] });
-            this.colorIndex++;
+
+            if (changeColor) {
+                this.colorIndex++;
+            }
         }
     }
 
@@ -314,13 +317,18 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
 
             if (chartData) {
                 chartData.forEach(item => {
-                    this.addCustomColor(item.name);
+                    this.addCustomColor(item.name, !this.config.singleBarColor);
                 });
+
+                if (this.config.singleBarColor) {
+                    this.addCustomColor(this.columns[this.seriesColumnIndex].title, false);
+                    this.colorIndex++;
+                }
             }
 
             if (this.lineChartSeries) {
                 this.lineChartSeries.forEach(item => {
-                    this.addCustomColor(item.name);
+                    this.addCustomColor(item.name, true);
                 })
             }
 

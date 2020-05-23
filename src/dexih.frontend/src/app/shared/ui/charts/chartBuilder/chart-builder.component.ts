@@ -89,41 +89,48 @@ export class ChartBuilderComponent implements OnInit, OnChanges {
         if (chart == null) {
             return;
         }
+
+        let svgElem = chart.getElementsByTagName('svg');
+        for (const node of Array.from(svgElem)) {
+            node.setAttribute('font-family', window.getComputedStyle(node, null).getPropertyValue('font-family'));
+            node.replaceWith(node);
+        }
+
         html2canvas.default(chart, <html2canvas.Options> {
-            // height: 700,
-            // width: 1000,
+            height: chart.clientHeight,
+            width: chart.clientWidth,
             scale: 3,
             // backgroundColor: null,
             logging: false,
-            onclone: (document) => {
-                document.getElementById('chart').style.visibility = 'visible';
-            }
+            // onclone: (document) => {
+            //     document.getElementById('chart').style.visibility = 'visible';
+            // }
         }).then((canvas) => {
-            // Get chart data so we can append to the pdf
-            const chartData = canvas.toDataURL();
-            // Prepare pdf structure
-            const docDefinition = {
-                content: [],
-                styles: {
-                    subheader: {
-                        fontSize: 16,
-                        bold: true,
-                        margin: [0, 10, 0, 5],
-                        alignment: 'left'
-                    },
-                    subsubheader: {
-                        fontSize: 12,
-                        italics: true,
-                        margin: [0, 10, 0, 25],
-                        alignment: 'left'
-                    }
-                },
-                defaultStyle: {
-                    // alignment: 'justify'
-                }
-            };
+            // // Get chart data so we can append to the pdf
+            // const chartData = canvas.toDataURL();
+            // // Prepare pdf structure
+            // const docDefinition = {
+            //     content: [],
+            //     styles: {
+            //         subheader: {
+            //             fontSize: 16,
+            //             bold: true,
+            //             margin: [0, 10, 0, 5],
+            //             alignment: 'left'
+            //         },
+            //         subsubheader: {
+            //             fontSize: 12,
+            //             italics: true,
+            //             margin: [0, 10, 0, 25],
+            //             alignment: 'left'
+            //         }
+            //     },
+            //     defaultStyle: {
+            //         // alignment: 'justify'
+            //     }
+            // };
 
-            canvas.toBlob(function (blob) {
+            canvas.toBlob((blob) => {
                 saveAs(blob, 'chart.png');
             }, 'image/png');
         });

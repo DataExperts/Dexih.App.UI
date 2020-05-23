@@ -25,6 +25,7 @@ export class AuthService implements OnDestroy {
     // Create an observable user, so consuming components can update when credentials change.
     private _currentUser = new BehaviorSubject<User>(null);
     private _refreshUserAttempted = false;
+    private _refreshUserPromise;
     public _hubs = new BehaviorSubject<Array<DexihHubAuth>>(null);
     private _hubErrors = new BehaviorSubject<Array<Message>>([]);
 
@@ -424,7 +425,7 @@ export class AuthService implements OnDestroy {
     // if logged in returns the user, otherwise returns null.
     public isLoggedIn(): Promise<User> {
         if (!this._refreshUserAttempted) {
-            return new Promise<User>((resolve) => resolve(this._currentUser.value));
+            return Promise.resolve(this._currentUser.value);
         } else {
             return this.refreshUser();
         }
@@ -1093,9 +1094,17 @@ export class AuthService implements OnDestroy {
     }
 
 
-    refreshUser(): Promise<User> {
+    refreshUser(force = false): Promise<User> {
+        if (!force && this._currentUser.value) {
+            return Promise.resolve(this._currentUser.value);
+        }
+
+        if (this._refreshUserPromise) {
+            return this._refreshUserPromise;
+        }
+
         this._refreshUserAttempted = true;
-        return new Promise<User>((resolve) => {
+        this._refreshUserPromise = new Promise<User>((resolve) => {
             this.post<User>('/api/Account/GetUser', null, 'Refreshing user details...').then(result => {
                 let previousUser = this._currentUser.value;
                 if (!previousUser || (
@@ -1111,17 +1120,21 @@ export class AuthService implements OnDestroy {
                     this._currentUser.next(result);
                 }
                 resolve(result);
-                this._refreshUserAttempted = false;
+                this._refreshUserPromise = null;
+                // this._refreshUserAttempted = false;
             }).catch(reason => {
                 this.logger.LogC(() => `refreshUser error:${reason.message}`, eLogLevel.Error);
 
                 this._currentUser.next(null);
                 this._hubErrors.next(reason);
                 resolve(null);
-                this._refreshUserAttempted = false;
+                this._refreshUserPromise = null;
+                // this._refreshUserAttempted = false;
                 // reject(reason);
             });
         });
+
+        return this._refreshUserPromise;
     }
 
     login(user: User): Promise<User> {

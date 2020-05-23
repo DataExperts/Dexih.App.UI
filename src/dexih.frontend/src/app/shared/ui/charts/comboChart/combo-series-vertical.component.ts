@@ -23,6 +23,7 @@ import { formatLabel } from '@swimlane/ngx-charts';
       [isActive]="isActive(bar.data)"
       [animations]="animations"
       [noBarWhenZero]="noBarWhenZero"
+      [barPadding]="barPadding"
       (select)="onClick($event)"
       (activate)="activate.emit($event)"
       (deactivate)="deactivate.emit($event)"
@@ -60,6 +61,9 @@ export class ComboSeriesVerticalComponent implements OnChanges {
   @Input() seriesName: string;
   @Input() animations: boolean = true;
   @Input() noBarWhenZero: boolean = true;
+  @Input() showDataLabel: boolean = false;
+  @Input() roundEdges: boolean = false;
+  @Input() barPadding = 8;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
@@ -91,7 +95,7 @@ export class ComboSeriesVerticalComponent implements OnChanges {
       let value = d.value;
       const label = d.name;
       const formattedLabel = formatLabel(label);
-      const roundEdges = this.type === 'standard';
+      const roundEdges = this.type === 'standard' && this.roundEdges;
 
       const bar: any = {
         value,
@@ -102,7 +106,7 @@ export class ComboSeriesVerticalComponent implements OnChanges {
         formattedLabel,
         height: 0,
         x: 0,
-        y: 0
+        y: 0,
       };
 
       if (this.type === 'standard') {
