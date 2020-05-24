@@ -179,6 +179,24 @@
             </form-select>
         </div>
 
+        <ng-template [ngIf]="chartType.isBar">
+            <div class="flex-fill pl-1" >
+                <form-checkbox label="Single Color" [(ngModel)]="config.singleBarColor" (ngModelChange)="updateChart($event)"
+                    [border]="true"></form-checkbox>
+            </div>
+            <div class="flex-fill  pl-1">
+                <form-input labelLeft="Bar Padding" [(ngModel)]="config.barPadding" (ngModelChange)="onChanged()"></form-input>
+            </div>
+            <div class="flex-fill pl-1" >
+                <form-checkbox label="Round Edges" [(ngModel)]="config.roundEdges" (ngModelChange)="updateChart($event)"
+                    [border]="true"></form-checkbox>
+            </div>
+            <div class="flex-fill pl-1" >
+                <form-checkbox label="Data Label" [(ngModel)]="config.showDataLabel" (ngModelChange)="updateChart($event)"
+                    [border]="true"></form-checkbox>
+            </div>
+        </ng-template>
+
         <div class="flex-fill pl-1" *ngIf="chartType.allowExplodeSlices">
             <form-checkbox label="Explode Slices" [(ngModel)]="config.explodeSlices" (ngModelChange)="onChanged()"
                 [border]="true"></form-checkbox>

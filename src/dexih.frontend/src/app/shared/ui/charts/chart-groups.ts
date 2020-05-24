@@ -54,7 +54,8 @@ export const ChartTypes = [
                 defaultShowYAxis: true,
                 defaultShowGridLines: true,
                 defaultColorScheme: 'natural',
-                defaultShowLegend: false
+                defaultShowLegend: false,
+                isBar: true
             },
             {
                 key: eChartType.BarHorizontal, name: 'Horizontal Bar Chart',
@@ -78,7 +79,8 @@ export const ChartTypes = [
                 defaultShowYAxis: true,
                 defaultShowGridLines: true,
                 defaultColorScheme: 'natural',
-                defaultShowLegend: false
+                defaultShowLegend: false,
+                isBar: true
             },
             {
                 key: eChartType.BarVertical2D, name: 'Vertical Bar Chart (MultiSeries)',
@@ -102,7 +104,8 @@ export const ChartTypes = [
                 defaultShowYAxis: true,
                 defaultShowGridLines: true,
                 defaultColorScheme: 'natural',
-                defaultShowLegend: false
+                defaultShowLegend: false,
+                isBar: true
             },
             {
                 key: eChartType.BarHorizontal2D, name: 'Horizontal Bar Chart (MultiSeries)',
@@ -126,7 +129,8 @@ export const ChartTypes = [
                 defaultShowYAxis: true,
                 defaultShowGridLines: true,
                 defaultColorScheme: 'natural',
-                defaultShowLegend: false
+                defaultShowLegend: false,
+                isBar: true
             },
             {
                 key: eChartType.BarVerticalStacked, name: 'Vertical Stacked Bar Chart',
@@ -150,7 +154,8 @@ export const ChartTypes = [
                 defaultShowYAxis: true,
                 defaultShowGridLines: true,
                 defaultColorScheme: 'natural',
-                defaultShowLegend: false
+                defaultShowLegend: false,
+                isBar: true
             },
             {
                 key: eChartType.BarHorizontalStacked, name: 'Horizontal Stacked Bar Chart',
@@ -174,7 +179,8 @@ export const ChartTypes = [
                 defaultShowYAxis: true,
                 defaultShowGridLines: true,
                 defaultColorScheme: 'natural',
-                defaultShowLegend: false
+                defaultShowLegend: false,
+                isBar: true
             },
             {
                 key: eChartType.BarVerticalNormalized, name: 'Vertical Normalized Bar Chart',
@@ -198,7 +204,8 @@ export const ChartTypes = [
                 defaultShowYAxis: true,
                 defaultShowGridLines: true,
                 defaultColorScheme: 'natural',
-                defaultShowLegend: false
+                defaultShowLegend: false,
+                isBar: true
             },
             {
                 key: eChartType.BarHorizontalNormalized, name: 'Horizontal Normalized Bar Chart',
@@ -222,7 +229,8 @@ export const ChartTypes = [
                 defaultShowYAxis: true,
                 defaultShowGridLines: true,
                 defaultColorScheme: 'natural',
-                defaultShowLegend: false
+                defaultShowLegend: false,
+                isBar: true
             },
         ]
     },
@@ -251,7 +259,8 @@ export const ChartTypes = [
                 defaultShowYAxis: true,
                 defaultShowGridLines: true,
                 defaultColorScheme: 'natural',
-                defaultShowLegend: false
+                defaultShowLegend: false,
+                isBar: false
             },
             {
                 key: eChartType.PieAdvanced, name: 'Pie Chart (Advanced)',
@@ -275,7 +284,8 @@ export const ChartTypes = [
                 defaultShowYAxis: true,
                 defaultShowGridLines: true,
                 defaultColorScheme: 'natural',
-                defaultShowLegend: false
+                defaultShowLegend: false,
+                isBar: false
             },
             {
                 key: eChartType.PieGrid, name: 'Pie Chart (Grid)',
@@ -299,7 +309,8 @@ export const ChartTypes = [
                 defaultShowYAxis: true,
                 defaultShowGridLines: true,
                 defaultColorScheme: 'natural',
-                defaultShowLegend: false
+                defaultShowLegend: false,
+                isBar: false
             },
         ]
     },
@@ -328,7 +339,8 @@ export const ChartTypes = [
                 defaultShowYAxis: true,
                 defaultShowGridLines: true,
                 defaultColorScheme: 'natural',
-                defaultShowLegend: false
+                defaultShowLegend: false,
+                isBar: false
             },
             {
                 key: eChartType.Area, name: 'Area Chart',
@@ -352,7 +364,8 @@ export const ChartTypes = [
                 defaultShowYAxis: true,
                 defaultShowGridLines: true,
                 defaultColorScheme: 'natural',
-                defaultShowLegend: false
+                defaultShowLegend: false,
+                isBar: false
             },
             {
                 key: eChartType.Polar, name: 'Polar Chart',
@@ -376,7 +389,8 @@ export const ChartTypes = [
                 defaultShowYAxis: true,
                 defaultShowGridLines: true,
                 defaultColorScheme: 'natural',
-                defaultShowLegend: false
+                defaultShowLegend: false,
+                isBar: false
             },
             {
                 key: eChartType.AreaStacked, name: 'Area Stacked Chart',
@@ -400,7 +414,8 @@ export const ChartTypes = [
                 defaultShowYAxis: true,
                 defaultShowGridLines: true,
                 defaultColorScheme: 'natural',
-                defaultShowLegend: false
+                defaultShowLegend: false,
+                isBar: false
             },
             {
                 key: eChartType.AreaNormalized, name: 'Area Normalized Chart',
@@ -424,7 +439,8 @@ export const ChartTypes = [
                 defaultShowYAxis: true,
                 defaultShowGridLines: true,
                 defaultColorScheme: 'natural',
-                defaultShowLegend: false
+                defaultShowLegend: false,
+                isBar: false
             },
         ]
     },
@@ -453,7 +469,8 @@ export const ChartTypes = [
                 defaultShowYAxis: true,
                 defaultShowGridLines: true,
                 defaultColorScheme: 'natural',
-                defaultShowLegend: false
+                defaultShowLegend: false,
+                isBar: false
             },
             {
                 key: eChartType.Error, name: 'X-Y Error Chart',
@@ -477,7 +494,8 @@ export const ChartTypes = [
                 defaultShowYAxis: true,
                 defaultShowGridLines: true,
                 defaultColorScheme: 'natural',
-                defaultShowLegend: false
+                defaultShowLegend: false,
+                isBar: false
             },
             {
                 key: eChartType.Bubble, name: 'X-Y Bubble Chart',
@@ -501,7 +519,8 @@ export const ChartTypes = [
                 defaultShowYAxis: true,
                 defaultShowGridLines: true,
                 defaultColorScheme: 'natural',
-                defaultShowLegend: false
+                defaultShowLegend: false,
+                isBar: false
             },
         ]
     },
@@ -530,7 +549,8 @@ export const ChartTypes = [
                 defaultShowYAxis: true,
                 defaultShowGridLines: true,
                 defaultColorScheme: 'natural',
-                defaultShowLegend: false
+                defaultShowLegend: false,
+                isBar: true
             },
             {
                 key: eChartType.HeatMap, name: 'Heat Map',
@@ -554,7 +574,8 @@ export const ChartTypes = [
                 defaultShowYAxis: true,
                 defaultShowGridLines: true,
                 defaultColorScheme: 'flame',
-                defaultShowLegend: true
+                defaultShowLegend: true,
+                isBar: false
             },
             {
                 key: eChartType.TreeMap, name: 'Tree Map',
@@ -578,7 +599,8 @@ export const ChartTypes = [
                 defaultShowYAxis: true,
                 defaultShowGridLines: true,
                 defaultColorScheme: 'natural',
-                defaultShowLegend: false
+                defaultShowLegend: false,
+                isBar: false
             },
             {
                 key: eChartType.Cards, name: 'Number Cards',
@@ -602,7 +624,8 @@ export const ChartTypes = [
                 defaultShowYAxis: true,
                 defaultShowGridLines: true,
                 defaultColorScheme: 'natural',
-                defaultShowLegend: false
+                defaultShowLegend: false,
+                isBar: false
             },
             {
                 key: eChartType.Gauge, name: 'Gauge',
@@ -626,7 +649,8 @@ export const ChartTypes = [
                 defaultShowYAxis: true,
                 defaultShowGridLines: true,
                 defaultColorScheme: 'natural',
-                defaultShowLegend: true
+                defaultShowLegend: true,
+                isBar: false
             },
             {
                 key: eChartType.LinearGauge, name: 'Linear Gauge',
@@ -650,7 +674,8 @@ export const ChartTypes = [
                 defaultShowYAxis: true,
                 defaultShowGridLines: true,
                 defaultColorScheme: 'natural',
-                defaultShowLegend: true
+                defaultShowLegend: true,
+                isBar: false
             },
             {
                 key: eChartType.Map, name: 'Google Map',
@@ -674,7 +699,8 @@ export const ChartTypes = [
                 defaultShowYAxis: false,
                 defaultShowGridLines: false,
                 defaultColorScheme: 'natural',
-                defaultShowLegend: false
+                defaultShowLegend: false,
+                isBar: false
             },
 
         ]

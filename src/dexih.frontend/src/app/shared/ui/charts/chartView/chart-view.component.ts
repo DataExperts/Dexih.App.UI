@@ -315,18 +315,20 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                     break;
             }
 
+            let singleColor = this.chartType.isBar && this.config.singleBarColor ? true : false;
+
             if (chartData) {
                 chartData.forEach(item => {
-                    this.addCustomColor(item.name, !this.config.singleBarColor);
+                    this.addCustomColor(item.name, !singleColor);
                 });
-
-                if (this.config.singleBarColor) {
-                    this.addCustomColor(this.columns[this.seriesColumnIndex].title, false);
-                    this.colorIndex++;
-                }
             }
 
             if (this.lineChartSeries) {
+                if (singleColor) {
+                    this.addCustomColor(this.columns[this.seriesColumnIndex].title, false);
+                    this.colorIndex++;
+                }
+                
                 this.lineChartSeries.forEach(item => {
                     this.addCustomColor(item.name, true);
                 })
