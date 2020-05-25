@@ -185,7 +185,7 @@
                     [border]="true"></form-checkbox>
             </div>
             <div class="flex-fill  pl-1">
-                <form-input labelLeft="Bar Padding" [(ngModel)]="config.barPadding" (ngModelChange)="onChanged()"></form-input>
+                <form-input type="number" labelLeft="Bar Padding" [(ngModel)]="config.barPadding" (ngModelChange)="onChanged()"></form-input>
             </div>
             <div class="flex-fill pl-1" >
                 <form-checkbox label="Round Edges" [(ngModel)]="config.roundEdges" (ngModelChange)="updateChart($event)"

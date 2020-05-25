@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { formatLabel } from '@swimlane/ngx-charts';
+import { formatLabel, escapeLabel } from '@swimlane/ngx-charts';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -23,7 +23,6 @@ import { formatLabel } from '@swimlane/ngx-charts';
       [isActive]="isActive(bar.data)"
       [animations]="animations"
       [noBarWhenZero]="noBarWhenZero"
-      [barPadding]="barPadding"
       (select)="onClick($event)"
       (activate)="activate.emit($event)"
       (deactivate)="deactivate.emit($event)"
@@ -33,6 +32,19 @@ import { formatLabel } from '@swimlane/ngx-charts';
       [tooltipType]="'tooltip'"
       [tooltipTitle]="bar.tooltipText"
     ></svg:g>
+    <svg:g *ngIf="showDataLabel">
+    <svg:g
+        ngx-charts-bar-label
+        *ngFor="let b of barsForDataLabels; let i = index; trackBy: trackDataLabelBy"
+        [barX]="b.x"
+        [barY]="b.y"
+        [barWidth]="b.width"
+        [barHeight]="b.height"
+        [value]="b.total"
+        [valueFormatting]="dataLabelFormatting"
+        [orientation]="'vertical'"
+      />
+    </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
@@ -62,15 +74,18 @@ export class ComboSeriesVerticalComponent implements OnChanges {
   @Input() animations: boolean = true;
   @Input() noBarWhenZero: boolean = true;
   @Input() showDataLabel: boolean = false;
+  @Input() dataLabelFormatting: any;
   @Input() roundEdges: boolean = false;
-  @Input() barPadding = 8;
+  @Input() barPadding = 3;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
   @Output() bandwidth = new EventEmitter();
+  @Output() dataLabelHeightChanged = new EventEmitter();
 
   bars: any;
+  barsForDataLabels: Array<{ x: number; y: number; width: number; height: number; total: number; series: string }> = [];
   x: any;
   y: any;
 
@@ -161,28 +176,60 @@ export class ComboSeriesVerticalComponent implements OnChanges {
         }
       }
 
-      let tooltipLabel = formattedLabel;
+     let tooltipLabel = formattedLabel;
+      bar.ariaLabel = formattedLabel + ' ' + value.toLocaleString();
       if (this.seriesName) {
         tooltipLabel = `${this.seriesName} • ${formattedLabel}`;
+        bar.data.series = this.seriesName;
+        bar.ariaLabel = this.seriesName + ' ' + bar.ariaLabel;
       }
 
-      if (this.seriesLine && this.seriesLine.length > 0) {
-        // this.getSeriesTooltips(this.seriesLine, index);
-        const lineValue = this.seriesLine[0].series[index].value;
-        bar.tooltipText = `
-        <span class="tooltip-label">${tooltipLabel}</span>
-        <span class="tooltip-val"> Y1 - ${value.toLocaleString()} • Y2 - ${lineValue.toLocaleString()}%</span>
+      bar.tooltipText = this.tooltipDisabled
+        ? undefined
+        : `
+        <span class="tooltip-label">${escapeLabel(tooltipLabel)}</span>
+        <span class="tooltip-val">${
+          this.dataLabelFormatting ? this.dataLabelFormatting(value) : value.toLocaleString()
+        }</span>
       `;
-      }
 
       return bar;
     });
+
+    this.updateDataLabels();
   }
-  // getSeriesTooltips(seriesLine, index) {
-  //   return seriesLine.map(d => {
-  //     return d.series[index];
-  //   });
-  // }
+
+  updateDataLabels() {
+    if (this.type === 'stacked') {
+      this.barsForDataLabels = [];
+      const section: any = {};
+      section.series = this.seriesName;
+      const totalPositive = this.series.map(d => d.value).reduce((sum, d) => (d > 0 ? sum + d : sum), 0);
+      const totalNegative = this.series.map(d => d.value).reduce((sum, d) => (d < 0 ? sum + d : sum), 0);
+      section.total = totalPositive + totalNegative;
+      section.x = 0;
+      section.y = 0;
+      if (section.total > 0) {
+        section.height = this.yScale(totalPositive);
+      } else {
+        section.height = this.yScale(totalNegative);
+      }
+      section.width = this.xScale.bandwidth();
+      this.barsForDataLabels.push(section);
+    } else {
+      this.barsForDataLabels = this.series.map(d => {
+        const section: any = {};
+        section.series = this.seriesName ? this.seriesName : d.name;
+        section.total = d.value;
+        section.x = this.xScale(d.name);
+        section.y = this.yScale(0);
+        section.height = this.yScale(section.total) - this.yScale(0);
+        section.width = this.xScale.bandwidth();
+        return section;
+      });
+    }
+  }
+  
   isActive(entry): boolean {
     if (!this.activeEntries) return false;
     const item = this.activeEntries.find(d => {

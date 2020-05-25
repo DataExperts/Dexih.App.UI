@@ -52,6 +52,7 @@
 							 [items]="datalinks" itemKey="key" itemName="name" note='Select the source datalink'>
 							 <datalink-edit-button [key]="formsService.currentForm.controls.sourceDatalinkKey.value"></datalink-edit-button>
 							</form-select>
+							<dexih-button-refresh (click)="refreshDatalink()" text="Refresh Parameters"></dexih-button-refresh>
 						</section>
 					</div>
 
@@ -65,11 +66,6 @@
 		</form>
 
 		<input-parameters [showEdit]="showEdit" [parameters]="formsService.currentForm?.controls.parameters" [formsService]="formsService" [refreshEvent]="refreshDataSubject.asObservable()" (onRefreshData)="refresh()" (onChange)="parameterChange()"></input-parameters>
-
-		<div *ngIf="datalinkParameters?.length > 0">
-			Datalink Parameters
-			<input-parameters-view [parameters]="datalinkParameters" [refreshEvent]="refreshDataSubject.asObservable()" (onRefreshData)="refresh()" (onChange)="parameterChange()"></input-parameters-view>
-		</div>
 
 		<div class="mt-3"  *ngIf="!data || data.length === 0">
 			<dexih-button-refresh  class="mr-1" (click)="refresh()" text="Reload" [autoCompact]="false"></dexih-button-refresh>

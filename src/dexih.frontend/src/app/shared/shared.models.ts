@@ -22,7 +22,7 @@ export class AnimateConfig {
    }
    
    export class ApplicationUser {
-    public id: string = '2b23a146-7d10-4b12-a015-fd9b6a718983';
+    public id: string = '14a35cfa-db1c-4a92-b31b-ae73c2e70f67';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -31,7 +31,7 @@ export class AnimateConfig {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = 'fad0419f-c9c4-457c-8f52-f0b528a63606';
+    public securityStamp: string = 'd4ec3e5c-48a1-4569-8e69-2a2794e1c007';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -1170,6 +1170,7 @@ export class AnimateConfig {
    
    export class DexihViewParameter {
     public viewKey: number = 0;
+    public datalinkParameterKey: number = null;
     public value: string = null;
     public listOfValuesKey: number = null;
     public allowUserSelect: boolean = true;

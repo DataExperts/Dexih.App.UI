@@ -5,7 +5,8 @@ import { RouterModule} from '@angular/router';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HttpClientModule } from '@angular/common/http';
 
-import { BsDropdownModule, ModalModule } from 'ngx-bootstrap';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { LayoutService} from './layout/layout.service';
 import { UtilsModule} from './utils/utils.module';

@@ -22,7 +22,7 @@ import { eImportAction, Import, DexihConnection, DexihTable, DexihTableColumn, e
    DexihDatalinkTransform, DexihDatalinkTransformItem, DexihFunctionParameter, DexihFunctionArrayParameter,
    DexihDatalinkProfile, DexihDatalinkTarget, DexihDatalinkTable,
    eSourceType, eSharedObjectType, DexihListOfValues, InputParameterBase,
-   eDataObjectType, ListOfValuesItem, eTransformItemType, DexihTag } from '../shared/shared.models';
+   eDataObjectType, ListOfValuesItem, eTransformItemType, DexihTag, DexihViewParameter } from '../shared/shared.models';
 import { filter } from 'rxjs/operators';
 
 @Injectable()
@@ -536,12 +536,13 @@ export class HubFormsService implements OnDestroy {
     }
 
     const form = this.fb.group({
-      'name': [parameter.name, [
+      'name': [{value: parameter.name, disabled: parameter['datalinkParameterKey'] > 0 }, [
         Validators.required,
         Validators.minLength(1),
         Validators.maxLength(50),
       ]],
-      'runTime': [runTime]
+      'runTime': [runTime],
+      'datalinkParameterKey': parameter['datalinkParameterKey'] // used specifically for view
     }
     );
 

@@ -88,8 +88,16 @@ export class InputParametersComponent implements OnInit, OnChanges, OnDestroy {
         let runTime = parameterForm.controls.runTime.value;
         runTime.isRefreshing = true;
         this.hubService.previewListOfValuesKey(parameter.listOfValuesKey, false, this.cancelToken).then(result => {
-            runTime.items = result;
-            runTime.showRefresh = false;
+            // runTime.items = result;
+            // runTime.showRefresh = false;
+
+            // update any other parameters with same list of values.
+            for (let p of this.parameters.controls
+                .filter( (c: FormGroup) => c.controls.listOfValuesKey.value === parameter.listOfValuesKey)) {
+                runTime = (<FormGroup>p).controls.runTime.value;
+                runTime.items = result;
+                runTime.showRefresh = false;
+            }
         }).finally(() => {
             runTime.isRefreshing = false;
         });

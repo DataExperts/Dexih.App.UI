@@ -10,6 +10,8 @@ import { HubCache, ConnectionTables, eCacheStatus } from '../../hub.models';
 import { eViewType, DexihDatalink, InputColumn, DexihColumnBase, SelectQuery,
   DexihView, DownloadObject, eDataObjectType, ChartConfig, InputParameterBase, DexihActiveAgent, AnimateConfig } from '../../../shared/shared.models';
 import { Functions } from '../../../shared/utils/functions';
+import { FormArray, FormGroup } from '@angular/forms';
+import { parseStackingContexts } from 'html2canvas/dist/types/render/stacking-context';
 
 @Component({
   selector: 'dexih-view-edit-form',
@@ -48,8 +50,6 @@ export class ViewEditComponent implements OnInit, OnDestroy {
   public showChart = false;
   public inputColumns: InputColumn[];
   public tableColumns: DexihColumnBase[];
-
-  datalinkParameters: InputParameterBase[];
 
   private isLoaded = false;
 
@@ -225,6 +225,7 @@ export class ViewEditComponent implements OnInit, OnDestroy {
       this.selectQuery = new SelectQuery();
       this.animateConfig = new AnimateConfig();
       this.getColumns();
+      this.refreshDatalink();
       this.refresh();
     });
   }
@@ -303,8 +304,6 @@ export class ViewEditComponent implements OnInit, OnDestroy {
           };
         });
 
-        this.datalinkParameters = datalink.parameters;
-
       } else {
         this.reset();
       }
@@ -321,6 +320,34 @@ export class ViewEditComponent implements OnInit, OnDestroy {
     this.baseData = null;
   }
 
+  refreshDatalink() {
+    let viewForm = this.formsService.currentForm;
+
+    // clear current datalink parameters.
+    let viewParameters =  <FormArray> this.formsService.currentForm.controls.parameters;
+    for (let i = viewParameters.controls.length - 1; i >= 0; i--) {
+      if (viewParameters.controls[i].value.datalinkParameterKey) {
+        viewParameters.removeAt(i);
+      }
+    }
+
+    if (viewForm.controls.sourceType.value === eDataObjectType.Datalink && viewForm.controls.sourceDatalinkKey.value > 0) {
+      let datalink = this.datalinks.find(c => c.key === viewForm.controls.sourceDatalinkKey.value);
+      if (datalink) {
+        let datalinkParameters = datalink.parameters;
+
+        // add the datalink parameter back again.
+        for (let datalinkParameter of datalinkParameters) {
+          let parameter = Object.assign({}, datalinkParameter);
+          parameter['datalinkParameterKey'] = datalinkParameter.key;
+          parameter.key = this.hubCache.getNextSequence();
+          let parameterForm = this.formsService.parameter(parameter);
+          viewParameters.push(parameterForm);
+        }
+      }
+    }
+  }
+
   refresh() {
     let viewForm = this.formsService.currentForm;
     let parameters: InputParameterBase[] = [];
@@ -329,9 +356,6 @@ export class ViewEditComponent implements OnInit, OnDestroy {
 
     if (viewParameters) {
       parameters = parameters.concat(viewParameters);
-    }
-    if (this.datalinkParameters) {
-      parameters = parameters.concat(this.datalinkParameters);
     }
 
     let view = <DexihView>viewForm.value;

@@ -40,6 +40,7 @@ import {
     @Input() xAxisLabel;
     @Input() yAxisLabel;
     @Input() yAxisLabelRight;
+    @Input() yScaleMax;
     @Input() tooltipDisabled: boolean = false;
     @Input() gradient: boolean;
     @Input() showGridLines: boolean = true;
@@ -61,6 +62,7 @@ import {
     @Input() barPadding = 3;
     @Input() separateAxis = false; // seprate axis for bar/series
     @Input() showDataLabel = false;
+    @Input() dataLabelFormatting;
   
     @Output() activate: EventEmitter<any> = new EventEmitter();
     @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -330,6 +332,9 @@ import {
   
     getYScale(): any {
       this.yDomain = this.getYDomain();
+      if ( this.yScaleMax ) {
+        this.yDomain[1] = this.yScaleMax;
+      }
       const scale = scaleLinear().range([this.dims.height, 0]).domain(this.yDomain);
       return this.roundDomains ? scale.nice() : scale;
     }
