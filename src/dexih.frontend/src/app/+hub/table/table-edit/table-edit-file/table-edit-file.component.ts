@@ -6,7 +6,7 @@ import { Subscription} from 'rxjs';
 import { Location } from '@angular/common';
 import { FormArray } from '@angular/forms';
 import { HubFormsService } from '../../../hub.forms.service';
-import { DexihConnection, DexihFileFormat, eTypeCode, DexihTable } from '../../../../shared/shared.models';
+import { DexihConnection, DexihFileFormat, eTypeCode, DexihTable, DexihTableColumn } from '../../../../shared/shared.models';
 import { HubCache, formatTypes } from '../../../hub.models';
 import { CancelToken } from '../../../../+auth/auth.models';
 
@@ -107,18 +107,7 @@ export class TableEditFileComponent implements OnInit, OnDestroy {
                         this.hubService.addHubErrorMessage(importedTable.entityStatus.message);
                     }
 
-                    // importedTable.fileFormat = this.hubCache.getFileFormat(importedTable.fileFormatKey);
-
-                    let tableColumnsForm = <FormArray>this.formService.currentForm.controls.dexihTableColumns;
-
-                    // remove existing columns.
-                    const count = tableColumnsForm.controls.length;
-                    for (let i = 0; i <= count; i++) {
-                        tableColumnsForm.removeAt(0);
-                    }
-                    importedTable.dexihTableColumns.filter(c => c.isValid).forEach(column => {
-                        tableColumnsForm.push(this.formService.tableColumn(tableColumnsForm.value, column));
-                    });
+                    this.updateColumns(importedTable.dexihTableColumns);
                 });
 
         }).catch(reason => {
@@ -128,6 +117,34 @@ export class TableEditFileComponent implements OnInit, OnDestroy {
                 // tslint:disable-next-line:max-line-length
                 this.hubService.addHubErrorMessage('The file upload failed.  This may be due to the file being too large, try making the sample file smaller (headings only) and upload again.')
             }
+        });
+    }
+
+    import() {
+        this.hubService.importTables([this.formService.currentForm.value], false, this.cancelToken).then(tables => {
+            if (tables && tables.length > 0) {
+                this.updateColumns(tables[0].dexihTableColumns);
+            }
+        }).catch(reason => {
+            if (reason) {
+                this.hubService.addHubMessage(reason);
+            } else {
+                // tslint:disable-next-line:max-line-length
+                this.hubService.addHubErrorMessage('The file upload failed.  This may be due to the file being too large, try making the sample file smaller (headings only) and upload again.')
+            }
+        });
+    }
+
+    updateColumns(columns: DexihTableColumn[]) {
+        let tableColumnsForm = <FormArray>this.formService.currentForm.controls.dexihTableColumns;
+
+        // remove existing columns.
+        const count = tableColumnsForm.controls.length;
+        for (let i = 0; i <= count; i++) {
+            tableColumnsForm.removeAt(0);
+        }
+        columns.filter(c => c.isValid).forEach(column => {
+            tableColumnsForm.push(this.formService.tableColumn(tableColumnsForm.value, column));
         });
     }
 }

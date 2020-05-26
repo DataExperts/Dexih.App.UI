@@ -13,10 +13,10 @@
         </ng-template>
 
         <ng-template #actions select="actionsTemplate" let-items="items">
-            <dexih-button-new (click)="newColumn()" title="Create a new column"></dexih-button-new>
+            <dexih-button-new (click)="newColumn()" title="Create a new column" class="mr-1"></dexih-button-new>
         </ng-template>
 
-        <ng-template #selectedItemAction select="selectedItemAction" let-item="item">
+        <ng-template #selectedItemAction select="selectedItemAction" let-item="item" class="mr-1">
             <dexih-button-edit (click)="editColumn(item)" title="Edit selected column"></dexih-button-edit>
         </ng-template>
 

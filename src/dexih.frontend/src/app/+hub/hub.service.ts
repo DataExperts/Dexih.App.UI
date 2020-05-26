@@ -1050,22 +1050,30 @@ export class HubService implements OnInit, OnDestroy {
 
     // import a list of specified tables in a remote database
     importTables(tables: Array<DexihTable>, save: boolean, cancelToken: CancelToken): Promise<Array<DexihTable>> {
-            // if there are any table that are already imported, then warn the over of an overwrite.
-            let importedTables = tables.filter(c => c.key > 0);
+        // if there are any table that are already imported, then warn the over of an overwrite.
+        let importedTables = tables.filter(c => c.key > 0);
 
-            if (importedTables.length > 0) {
-                this.authService.confirmDialog('Re-Import Tables',
-                'This action will re-import the following tables, which will reset column customizations ' +
-                ' (such as descriptions, column validations, delta types etc.) and may invalidate some datalink mappings. <p></p>' +
-                        importedTables.map(c => c.name).join(',') +
-                        '  <p></p><p></p>Are you sure you want to continue?').then(() => {
-                            return this.doImport(tables, save, cancelToken);
-                        }).catch(() => {
-                            return Promise.resolve(null);
-                        });
-            } else {
-                return this.doImport(tables, save, cancelToken);
-            }
+        if (importedTables.length > 0) {
+            return new Promise<Array<DexihTable>>((resolve, reject) => {
+            this.authService.confirmDialog('Re-Import Tables',
+            'This action will re-import the following tables, which will reset column customizations ' +
+            ' (such as descriptions, column validations, delta types etc.) and may invalidate some datalink mappings. <p></p>' +
+                    importedTables.map(c => c.name).join(',') +
+                    '  <p></p><p></p>Are you sure you want to continue?').then(confirm => {
+                        if (confirm) {
+                            this.doImport(tables, save, cancelToken).then(result => {
+                                resolve(result);
+                            }).catch(reason => reject(reason));
+                        } else {
+                            resolve(null);
+                        }
+                    }).catch(reason => {
+                        reject(reason);
+                    });
+                });
+        } else {
+            return this.doImport(tables, save, cancelToken);
+        }
     }
 
     public doImport(tables: Array<DexihTable>, save: boolean, cancelToken: CancelToken): Promise<Array<DexihTable>> {
@@ -1111,14 +1119,18 @@ export class HubService implements OnInit, OnDestroy {
             'This action will re-import the following tables, which will reset column customizations ' +
             ' (such as descriptions, column validations, delta types etc.) and may invalidate some datalink mappings. <p></p>' +
                     tables.map(c => c.name).join(',') +
-                    '  <p></p><p></p>Are you sure you want to continue?').then(() => {
+                    '  <p></p><p></p>Are you sure you want to continue?').then(confirm => {
 
+                        if (confirm) {
                         this.doImport(tables, save, cancelToken)
                             .then(result => {
                                 resolve(result);
                             }).catch(reason => {
                                 reject(reason);
                             });
+                        } else {
+                            resolve(null);
+                        }
                     }).catch(() => {
                         resolve(null);
                     });

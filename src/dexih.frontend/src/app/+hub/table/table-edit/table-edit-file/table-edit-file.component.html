@@ -74,7 +74,9 @@
         </section>
 
         <section>
-            <label class="label">Add a sample file which will be used to determine column names.</label>
+            <label class="label">Add a sample file which will be used to determine column names.
+                <a  href="javascript:void(0)" (click)="import()">(<i class="fa fa-download"></i> Import directly from source )</a>
+            </label>
 
             <div class="well my-drop-zone" dropZone [requireFiles]="true" (dropFiles)="filesDrop($event)" dropAllowedClass="nv-file-over">
                 Drop Sample File Here

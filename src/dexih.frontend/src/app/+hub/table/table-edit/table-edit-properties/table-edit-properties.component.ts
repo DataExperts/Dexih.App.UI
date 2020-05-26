@@ -70,6 +70,7 @@ export class TableEditPropertiesComponent implements OnInit, OnDestroy {
                 this.route.params,
                 this.hubService.getHubCacheObservable(),
                 this.formsService.getCurrentFormObservable(),
+                this.hubService.getRemoteLibrariesObservable(), // included to ensure correct connection reference when refreshing page.
             ).subscribe(async result => {
                 let data = result[0];
                 this.hubCache = result[2];
