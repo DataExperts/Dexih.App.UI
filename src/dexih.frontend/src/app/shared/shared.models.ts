@@ -22,7 +22,7 @@ export class AnimateConfig {
    }
    
    export class ApplicationUser {
-    public id: string = '14a35cfa-db1c-4a92-b31b-ae73c2e70f67';
+    public id: string = 'b19cfb87-a179-452e-8bb1-af4c933dd914';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -31,7 +31,7 @@ export class AnimateConfig {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = 'd4ec3e5c-48a1-4569-8e69-2a2794e1c007';
+    public securityStamp: string = '3f3093ff-f4b2-4539-949f-64d1382e9f7d';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -215,9 +215,9 @@ export class AnimateConfig {
     public selectQuery: SelectQuery = null;
     public parameters: DexihApiParameter[] = [];
     public isShared: boolean = false;
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -231,9 +231,10 @@ export class AnimateConfig {
     public listOfValuesKey: number = null;
     public allowUserSelect: boolean = true;
     public valueDesc: string = null;
-    public key: number = 0;
+    public rank: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -264,9 +265,9 @@ export class AnimateConfig {
     public isInput: boolean = false;
     public rank: number = 0;
     public securityFlag: eSecurityFlag = eSecurityFlag.None;
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -290,9 +291,9 @@ export class AnimateConfig {
     public invalidAction: eInvalidAction = null;
     public cleanAction: eCleanAction = null;
     public cleanValue: string = null;
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -316,9 +317,9 @@ export class AnimateConfig {
     public embedTableKey: boolean = false;
     public connectionTimeout: number = 30;
     public commandTimeout: number = 60;
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -333,9 +334,9 @@ export class AnimateConfig {
     public isGeneric: boolean = false;
     public genericTypeDefault: eTypeCode = eTypeCode.Unknown;
     public dexihCustomFunctionParameters: DexihCustomFunctionParameter[] = [];
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -350,9 +351,9 @@ export class AnimateConfig {
     public allowNull: boolean = false;
     public isGeneric: boolean = false;
     public rank: number = 0;
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -368,9 +369,9 @@ export class AnimateConfig {
     public autoRefresh: boolean = false;
     public dexihDashboardItems: DexihDashboardItem[] = [];
     public parameters: DexihDashboardParameter[] = [];
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -387,9 +388,9 @@ export class AnimateConfig {
     public viewKey: number = 0;
     public dashboardKey: number = 0;
     public parameters: DexihDashboardItemParameter[] = [];
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -402,9 +403,10 @@ export class AnimateConfig {
     public listOfValuesKey: number = null;
     public allowUserSelect: boolean = true;
     public valueDesc: string = null;
-    public key: number = 0;
+    public rank: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -417,9 +419,10 @@ export class AnimateConfig {
     public listOfValuesKey: number = null;
     public allowUserSelect: boolean = true;
     public valueDesc: string = null;
-    public key: number = 0;
+    public rank: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -434,9 +437,9 @@ export class AnimateConfig {
     public dexihDatalinkSteps: DexihDatalinkStep[] = [];
     public dexihTriggers: DexihTrigger[] = [];
     public parameters: DexihDatajobParameter[] = [];
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -449,9 +452,10 @@ export class AnimateConfig {
     public listOfValuesKey: number = null;
     public allowUserSelect: boolean = true;
     public valueDesc: string = null;
-    public key: number = 0;
+    public rank: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -478,9 +482,9 @@ export class AnimateConfig {
     public dexihDatalinkTargets: DexihDatalinkTarget[] = [];
     public parameters: DexihDatalinkParameter[] = [];
     public sourceDatalinkTable: DexihDatalinkTable = null;
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -520,8 +524,6 @@ export class AnimateConfig {
     public datalinkStepKey: number = 0;
     public dependentDatalinkStepKey: number = 0;
     public key: number = 0;
-    public name: string = null;
-    public description: string = null;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -534,9 +536,10 @@ export class AnimateConfig {
     public listOfValuesKey: number = null;
     public allowUserSelect: boolean = true;
     public valueDesc: string = null;
-    public key: number = 0;
+    public rank: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -550,8 +553,6 @@ export class AnimateConfig {
     public functionMethodName: string = null;
     public detailedResults: boolean = false;
     public key: number = 0;
-    public name: string = null;
-    public description: string = null;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -565,9 +566,9 @@ export class AnimateConfig {
     public dexihDatalinkStepColumns: DexihDatalinkStepColumn[] = [];
     public dexihDatalinkDependencies: DexihDatalinkDependency[] = [];
     public parameters: DexihDatalinkStepParameter[] = [];
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -593,9 +594,9 @@ export class AnimateConfig {
     public isInput: boolean = false;
     public rank: number = 0;
     public securityFlag: eSecurityFlag = eSecurityFlag.None;
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -608,9 +609,10 @@ export class AnimateConfig {
     public listOfValuesKey: number = null;
     public allowUserSelect: boolean = true;
     public valueDesc: string = null;
-    public key: number = 0;
+    public rank: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -627,9 +629,9 @@ export class AnimateConfig {
     public disableVersioning: boolean = true;
     public disablePushDown: boolean = false;
     public dexihDatalinkColumns: DexihDatalinkColumn[] = [];
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -643,8 +645,6 @@ export class AnimateConfig {
     public position: number = 0;
     public tableKey: number = 0;
     public key: number = 0;
-    public name: string = null;
-    public description: string = null;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -654,9 +654,9 @@ export class AnimateConfig {
    export class DexihDatalinkTest {
     public auditConnectionKey: number = null;
     public dexihDatalinkTestSteps: DexihDatalinkTestStep[] = [];
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -677,9 +677,9 @@ export class AnimateConfig {
     public errorTableName: string = null;
     public errorSchema: string = null;
     public dexihDatalinkTestTables: DexihDatalinkTestTable[] = [];
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -697,8 +697,6 @@ export class AnimateConfig {
     public testSchema: string = null;
     public testTableName: string = null;
     public key: number = 0;
-    public name: string = null;
-    public description: string = null;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -724,9 +722,9 @@ export class AnimateConfig {
     public nodeDatalinkColumn: DexihDatalinkColumn = null;
     public maxInputRows: number = 0;
     public maxOutputRows: number = 0;
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -770,9 +768,9 @@ export class AnimateConfig {
     public targetDatalinkColumn: DexihDatalinkColumn = null;
     public joinDatalinkColumn: DexihDatalinkColumn = null;
     public filterDatalinkColumn: DexihDatalinkColumn = null;
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -800,9 +798,9 @@ export class AnimateConfig {
     public trimHeaders: boolean = false;
     public willThrowOnMissingField: boolean = true;
     public setWhiteSpaceCellsToNull: boolean = true;
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -822,9 +820,9 @@ export class AnimateConfig {
     public allowNull: boolean = false;
     public isGeneric: boolean = false;
     public rank: number = 0;
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -845,9 +843,9 @@ export class AnimateConfig {
     public allowNull: boolean = false;
     public isGeneric: boolean = false;
     public rank: number = 0;
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -866,9 +864,9 @@ export class AnimateConfig {
     public allowNull: boolean = false;
     public isGeneric: boolean = false;
     public rank: number = 0;
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -910,10 +908,18 @@ export class AnimateConfig {
     public isValid: boolean = true;
    }
    
-   export class DexihHubNamedEntity {
+   export class DexihHubKeyEntity {
     public key: number = 0;
+    public hubKey: number = 0;
+    public createDate: Date = null;
+    public updateDate: Date = null;
+    public isValid: boolean = true;
+   }
+   
+   export class DexihHubNamedEntity {
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -934,9 +940,9 @@ export class AnimateConfig {
     public value: string = null;
     public isEncrypted: boolean = false;
     public isEnvironmentVariable: boolean = false;
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -955,9 +961,9 @@ export class AnimateConfig {
     public issueStatus: eIssueStatus = eIssueStatus.Open;
     public dexihIssueComments: DexihIssueComment[] = [];
     public userName: string = null;
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -986,9 +992,9 @@ export class AnimateConfig {
     public staticData: ListOfValuesItem[] = [];
     public cache: boolean = false;
     public cacheSeconds: number = 0;
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -1002,9 +1008,9 @@ export class AnimateConfig {
     public allowNull: boolean = false;
     public isGeneric: boolean = false;
     public rank: number = 0;
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -1067,9 +1073,9 @@ export class AnimateConfig {
     public entityStatus: EntityStatus = new EntityStatus();
     public fileSample: string = null;
     public dexihTableColumns: DexihTableColumn[] = [];
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -1098,9 +1104,9 @@ export class AnimateConfig {
     public isInput: boolean = false;
     public rank: number = 0;
     public securityFlag: eSecurityFlag = eSecurityFlag.None;
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -1109,9 +1115,9 @@ export class AnimateConfig {
    
    export class DexihTag {
     public color: string = null;
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -1139,8 +1145,6 @@ export class AnimateConfig {
     public cronExpression: string = null;
     public maxRecurs: number = null;
     public key: number = 0;
-    public name: string = null;
-    public description: string = null;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -1159,9 +1163,9 @@ export class AnimateConfig {
     public animateConfig: AnimateConfig = null;
     public isShared: boolean = false;
     public parameters: DexihViewParameter[] = [];
-    public key: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -1170,14 +1174,15 @@ export class AnimateConfig {
    
    export class DexihViewParameter {
     public viewKey: number = 0;
-    public datalinkParameterKey: number = null;
+    public datalinkParameterKey: number = 0;
     public value: string = null;
     public listOfValuesKey: number = null;
     public allowUserSelect: boolean = true;
     public valueDesc: string = null;
-    public key: number = 0;
+    public rank: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -1369,13 +1374,14 @@ export class AnimateConfig {
    }
    
    export class InputParameterBase {
-    public value: string = null;
+    public value: any = null;
     public listOfValuesKey: number = null;
     public allowUserSelect: boolean = true;
     public valueDesc: string = null;
-    public key: number = 0;
+    public rank: number = 0;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
     public updateDate: Date = null;
@@ -2133,6 +2139,7 @@ export class AnimateConfig {
     IsNull = 7,
     IsNotNull = 8,
     Like = 9,
+    IsNotIn = 10
    }
    
    export const eCompareItems = [
@@ -2146,6 +2153,7 @@ export class AnimateConfig {
     {key: eCompare.IsNull, name: 'IsNull'},
     {key: eCompare.IsNotNull, name: 'IsNotNull'},
     {key: eCompare.Like, name: 'Like'},
+    {key: eCompare.IsNotIn, name: 'IsNotIn'},
    ]
    
    export enum eConcurrentTaskAction {

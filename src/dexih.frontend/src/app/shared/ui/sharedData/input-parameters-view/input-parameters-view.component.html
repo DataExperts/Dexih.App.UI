@@ -4,7 +4,7 @@
                 <form-input [disabled]="true" labelLeft="Name" [border]="false" class="form-control p-0"
                 [(ngModel)]="parameter.name">
                 </form-input>
-                <form-select labelLeft="Value" [border]="false" class="form-control p-0" [(ngModel)]="parameter.value"
+                <form-select *ngIf="parameter.listOfValuesKey > 0" labelLeft="Value" [border]="false" class="form-control p-0" [(ngModel)]="parameter.value"
                     itemKey="key"
                     itemName="name"
                     [items]="parameter.runTime.items"
@@ -17,6 +17,10 @@
                     (onRefresh)="refresh(parameter)"
                     >
                 </form-select>
+                <form-input *ngIf="!( parameter.listOfValuesKey > 0)" labelLeft="Value" [border]="false" class="form-control p-0" [(ngModel)]="parameter.value"
+                (ngModelChange)="change(parameter)"
+                >
+            </form-input>
             </div>
     </span>
     <div *ngIf="requiresRefresh" class="alert alert-warning mt-2">

@@ -736,7 +736,7 @@ namespace dexih.api.Controllers
 				var itemParameters = new InputParameters();
 				foreach(var parameter in item.Parameters)
 				{
-					itemParameters.Add( parameter.Name, parameters.SetParameters(parameter.Value));
+					itemParameters.Add( parameter.Name, parameters.SetParameters(parameter.Value, parameter.Rank), parameter.Rank);
 				}
 
 				var view = hub.DexihViews.SingleOrDefault(c => c.IsValid &&  c.Key == item.ViewKey);
@@ -844,7 +844,7 @@ namespace dexih.api.Controllers
 			    itemParameters = new InputParameters();
 			    foreach(var parameter in previewView.InputParameters)
 			    {
-				    itemParameters.Add( parameter.Name, previewView.ParentParameters.SetParameters(parameter.Value));
+				    itemParameters.Add( parameter.Name, previewView.ParentParameters.SetParameters(parameter.Value, parameter.Rank), parameter.Rank);
 			    }
 		    }
 		    

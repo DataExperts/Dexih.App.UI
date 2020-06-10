@@ -133,6 +133,7 @@ export const compare = [
     {key: eCompare.LessThanEqual, name: '<=', showFilter: false},
     {key: eCompare.NotEqual, name: '!=', showFilter: false},
     {key: eCompare.IsIn, name: 'IN', showFilter: false},
+    {key: eCompare.IsNotIn, name: 'NOT IN', showFilter: false},
     {key: eCompare.IsNull, name: 'Is Null', showFilter: true},
     {key: eCompare.IsNotNull, name: 'Is Not Null', showFilter: true},
     {key: eCompare.Like, name: 'like', showFilter: false},

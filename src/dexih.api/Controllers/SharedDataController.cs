@@ -123,12 +123,11 @@ namespace dexih.api.Controllers
                 itemParameters = new InputParameters();
                 foreach(var parameter in previewData.Parameters)
                 {
-                    itemParameters.Add( parameter.Name, previewData.ParentParameters.SetParameters(parameter.Value));
+                    itemParameters.Add( parameter.Name, previewData.ParentParameters.SetParameters(parameter.Value, parameter.Rank), parameter.Rank);
                 }
             }
             
             string data;
-            ChartConfig chartConfig = null;
 
             switch (previewData.ObjectType)
             {
@@ -202,7 +201,7 @@ namespace dexih.api.Controllers
                 var inputParameters = new InputParameters();
                 foreach (var parameter in item.Parameters)
                 {
-                    inputParameters.Add(new InputParameter() {Name = parameter.Name, Value = item.ParentParameters == null ? parameter.Value : item.ParentParameters.SetParameters(parameter.Value)});
+                    inputParameters.Add(new InputParameter() {Name = parameter.Name, Value = item.ParentParameters == null ? parameter.Value : item.ParentParameters.SetParameters(parameter.Value, parameter.Rank), Rank = parameter.Rank});
                 }
                 
                 var downloadObject = new DownloadData.DownloadObject()
@@ -304,7 +303,7 @@ namespace dexih.api.Controllers
             var itemParameters = new InputParameters();
             foreach(var parameter in item.Parameters)
             {
-                itemParameters.Add( parameter.Name, previewDashboard.Parameters.SetParameters(parameter.Value));
+                itemParameters.Add( parameter.Name, previewDashboard.Parameters.SetParameters(parameter.Value, parameter.Rank), parameter.Rank);
             }
             
             switch (view.SourceType)

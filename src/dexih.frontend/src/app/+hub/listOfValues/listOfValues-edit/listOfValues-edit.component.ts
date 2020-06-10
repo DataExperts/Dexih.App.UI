@@ -138,7 +138,7 @@ export class ListOfValuesEditComponent implements OnInit, OnDestroy {
         let key = form.controls.key.value;
         if (key) {
           if (history.pushState) {
-            let newUrl = window.location.pathname.replace('/listOfValues-new', `/listOfValues-edit/${key}`)
+            let newUrl = window.location.pathname.replace('/listOfValues-new', `/listOfValues-edit/${key}`);
             this.router.navigateByUrl(newUrl);
             this._formChangeSubscription.unsubscribe();
           }

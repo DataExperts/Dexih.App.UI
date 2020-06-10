@@ -217,6 +217,7 @@ export class ConnectionImportComponent implements OnInit, OnDestroy {
     }
 
     mergeTables(tables: Array<DexihTable>) {
+        if (!tables) { return; }
         tables.forEach(table => {
             let index = this.tables.findIndex(t => t.name === table.name && t.schema === table.schema);
 

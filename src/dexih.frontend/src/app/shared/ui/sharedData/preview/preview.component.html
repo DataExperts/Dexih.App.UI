@@ -1,5 +1,5 @@
 <div *ngIf="!embed" class="container-fluid">
-    <dexih-widget [title]="'Preview ' + previewData?.name" iconClass="fa fa-lg fa-fw fa-table" [showCloseButton]="true"
+    <dexih-widget [title]="'Preview ' + title" iconClass="fa fa-lg fa-fw fa-table" [showCloseButton]="true"
         [padding]="false" (close)="close()">
 
         <ng-template #header>
@@ -7,27 +7,14 @@
             <download-button class="ml-1" (download)="previewData.downloadData($event)"></download-button>
             <dexih-button-edit class="ml-1" (click)="edit()"></dexih-button-edit>
 
-            <div *ngIf="chartConfig" class="btn-group btn-group-toggle mr-1" data-toggle="buttons" title="Table">
-                <label class="btn btn-primary" [ngClass]="{active: showChart===false}">
-                    <input type="radio" name="options" value="table" autocomplete="off" (click)="showChart = false">
-                    <i class="fa fa-table"></i>
-                </label>
-                <label class="btn btn-primary" [ngClass]="{active: showChart===true}" title="Chart">
-                    <input type="radio" name="options" value="chart" autocomplete="off" (click)="showChart = true">
-                    <i class="fa fa-bar-chart"></i>
-                </label>
-            </div>
+
         </ng-template>
 
-        <div class="box">
-            <div class="box-content" style="height: 90vh;">
-            <preview-data #PreviewData [hubKey]="hubKey" [objectType]="objectType" [objectKey]="objectKey">
+            <preview-data #PreviewData [hubKey]="hubKey" [objectType]="objectType" [objectKey]="objectKey" [parameters]="parameters" [updateQueryParameters]="true">
             </preview-data>
-        </div>
-        </div>
     </dexih-widget>
 </div>
 
 <div *ngIf="embed">
-    <preview-data [hubKey]="hubKey" [objectType]="objectType" [objectKey]="objectKey"></preview-data>
+    <preview-data [hubKey]="hubKey" [objectType]="objectType" [objectKey]="objectKey" [parameters]="parameters" [updateQueryParameters]="false"></preview-data>
 </div>

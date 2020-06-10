@@ -235,7 +235,7 @@ export class MappingEditComponent implements OnInit, OnDestroy {
       let key: number;
       if (this.newColumn) {
         key = this.newColumn.key;
-      } else {
+      } else {5
         key = this.hubService.getHubCache().getNextSequence();
       }
 

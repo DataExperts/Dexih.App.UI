@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, Input, AfterViewChecked, OnChanges, AfterContentChecked } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
@@ -11,7 +11,7 @@ import { PreviewDataComponent} from '../preview-data/preview-data.component';
     selector: 'preview',
     templateUrl: './preview.component.html'
 })
-export class PreviewComponent implements OnInit, OnDestroy {
+export class PreviewComponent implements OnInit, OnDestroy, AfterContentChecked {
     @ViewChild('DexihMessage', { static: true }) public dexihMessage: DexihMessageComponent;
     @ViewChild('PreviewData', { static: false }) public previewData: PreviewDataComponent;
 
@@ -21,9 +21,9 @@ export class PreviewComponent implements OnInit, OnDestroy {
     objectKey: number;
     objectType: eDataObjectType;
     hubKey: number;
+    embed = false; // removes frames from data.
 
-    embed = false;
-
+    title = '';
 
     constructor(
         private authService: AuthService,
@@ -47,7 +47,6 @@ export class PreviewComponent implements OnInit, OnDestroy {
                 if (queryParams['embed'] === 'true') {
                     this.embed = true;
                 }
-
             });
         } catch (e) {
             this.dexihMessage.addMessage(e);
@@ -56,6 +55,13 @@ export class PreviewComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         if (this._subscription) { this._subscription.unsubscribe(); }
+    }
+
+    // use aftercontentchecked to stop
+    ngAfterContentChecked(): void {
+        if (this.previewData) {
+            this.title = this.previewData.name;
+        }
     }
 
     close() {

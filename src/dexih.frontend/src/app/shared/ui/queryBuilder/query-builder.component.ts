@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { SelectQuery, InputColumn, TableColumn, SelectColumn, eSortDirection, Filter, eTypeCode } from '../../shared.models';
+import { SelectQuery, InputColumn, TableColumn, SelectColumn, eSortDirection, Filter, eTypeCode, eCompare } from '../../shared.models';
 import { DexihInputParameter } from '../../../+hub/hub.models';
 import { compare } from '../../../+hub/hub.query.models';
 import { TypeCodes } from '../../../+hub/hub.remote.models';
@@ -7,7 +7,8 @@ import { Observable, Subscription } from 'rxjs';
 
 @Component({
     selector: 'query-builder',
-    templateUrl: 'query-builder.component.html'
+    templateUrl: 'query-builder.component.html',
+    styleUrls: ['./query-builder.component.scss']
 })
 
 export class QueryBuilderComponent implements OnInit, OnChanges, OnDestroy {
@@ -21,7 +22,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, OnDestroy {
     @Output() onRefreshData = new EventEmitter();
 
     private _refreshSubscription: Subscription;
-    
+
     selectColumns: SelectColumn[];
     sortColumns: any[];
 
@@ -30,6 +31,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, OnDestroy {
     allRows = false;
     savedRowCount: number;
     typeCodes = TypeCodes;
+    eCompare = eCompare;
 
     variables: string[];
 

@@ -5,6 +5,8 @@ import { DexihConnection, DexihListOfValues, InputParameterBase, ListOfValuesIte
 import { HubService } from '../../hub.service';
 import { Subscription, merge, Subject, Observable } from 'rxjs';
 import { CancelToken } from '../../../+auth/auth.models';
+import { ILogger } from '@microsoft/signalr';
+import { eLogLevel, LogFactory } from '../../../../logging';
 
 @Component({
     selector: 'input-parameters',
@@ -50,7 +52,6 @@ export class InputParametersComponent implements OnInit, OnChanges, OnDestroy {
                     }
                 }
             });
-
         });
 
         if (this.refreshEvent) {
@@ -108,6 +109,7 @@ export class InputParametersComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     textValueChange(parameterForm: FormGroup, $event) {
+        parameterForm.controls.value.setValue($event);
         parameterForm.controls.valueDesc.setValue($event);
     }
 

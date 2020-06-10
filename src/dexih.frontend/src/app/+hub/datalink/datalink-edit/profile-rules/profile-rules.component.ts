@@ -61,8 +61,6 @@ export class DatalinkEditProfileRulesComponent implements OnInit, OnDestroy {
                                     && c.functionMethodName === profile.functionMethodName);
 
                                 return <DexihDatalinkProfile> {
-                                    name: profile.name,
-                                    description: profile.description,
                                     functionAssemblyName: profile.functionAssemblyName,
                                     functionClassName: profile.functionClassName,
                                     functionMethodName: profile.functionMethodName,

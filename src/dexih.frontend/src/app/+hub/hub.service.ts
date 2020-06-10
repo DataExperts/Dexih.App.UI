@@ -560,6 +560,8 @@ export class HubService implements OnInit, OnDestroy {
     }
 
     public updateHubChange(hubChange: Import) {
+        if (!hubChange) { return; }
+
         let hubCache = this.getHubCache();
 
         this.mergeChange(hubChange.hubVariables, hubCache.hub.dexihHubVariables, 'key', eSharedObjectType.HubVariable);

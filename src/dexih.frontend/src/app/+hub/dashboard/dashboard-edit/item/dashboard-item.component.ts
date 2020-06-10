@@ -31,6 +31,7 @@ export class DashboardItemComponent implements OnInit, OnChanges, OnDestroy {
     private _subscription: Subscription;
     private _viewKeySubscription: Subscription;
     private _refreshDataSubscription: Subscription;
+    private _parametersSubscription: Subscription;
 
     hubCache: HubCache;
     remoteAgent: DexihActiveAgent;
@@ -51,6 +52,8 @@ export class DashboardItemComponent implements OnInit, OnChanges, OnDestroy {
     private refreshDataSubject: Subject<void> = new Subject<void>();
 
     private cancelToken = new CancelToken();
+
+    public parentParameters;
 
     constructor(
         private authService: AuthService,
@@ -110,8 +113,15 @@ export class DashboardItemComponent implements OnInit, OnChanges, OnDestroy {
                             this.firstLoad = false;
                         }
                     }
+
+                    this.parentParameters = this.formsService.currentForm.controls.parameters.value;
+                    if (this._parametersSubscription) { this._parametersSubscription.unsubscribe(); }
+                    this._parametersSubscription = this.formsService.currentForm.controls.parameters.valueChanges.subscribe(value => {
+                        this.parentParameters = value;
+                    });
                 }
             });
+
         } catch (e) {
             this.hubService.addHubClientErrorMessage(e, 'View Index');
         }
@@ -121,6 +131,7 @@ export class DashboardItemComponent implements OnInit, OnChanges, OnDestroy {
         if (this._subscription) { this._subscription.unsubscribe(); }
         if (this._viewKeySubscription) { this._viewKeySubscription.unsubscribe(); }
         if (this._refreshDataSubscription) { this._refreshDataSubscription.unsubscribe(); }
+        if (this._parametersSubscription) { this._parametersSubscription.unsubscribe(); }
         this.cancelToken.cancel();
     }
 

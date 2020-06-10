@@ -5,7 +5,6 @@
         </div>
         <div class="side-menu-box">
             <div class="bg-light rounded p-1">
-
                 <div>
                     <download-button (download)="downloadData($event)"></download-button>
 
@@ -52,34 +51,48 @@
     <div class="dexih-loader"></div> &nbsp; &nbsp; Loading ...
 </div>
 
-<div *ngIf="!showToolbar && baseData">
-    <div *ngIf="userParameters && userParameters.length > 0" class="m-1">
-        <input-parameters-view [hubKey]="hubKey" [objectType]="objectType" [objectKey]="objectKey"
-            [parameters]="userParameters" [refreshEvent]="refreshDataSubject.asObservable()"
-            (onRefreshData)="refresh()" (onChange)="parameterChange()"></input-parameters-view>
+<div *ngIf="!showToolbar && baseData" class="d-flex">
+    <div *ngIf="viewConfig?.chartConfig" class="btn-group btn-sm btn-group-toggle" data-toggle="buttons" title="Table">
+        <label class="btn btn-primary" [ngClass]="{active: showChart===false}">
+            <input type="radio" name="options" value="table" autocomplete="off" (click)="showChart = false">
+            <i class="fa fa-table"></i>
+        </label>
+        <label class="btn btn-primary" [ngClass]="{active: showChart===true}" title="Chart">
+            <input type="radio" name="options" value="chart" autocomplete="off" (click)="showChart = true">
+            <i class="fa fa-bar-chart"></i>
+        </label>
     </div>
 
-    <div *ngIf="viewConfig && baseData" class="m-1">
+    <div *ngIf="userParameters && userParameters.length > 0" class="mt-1">
+        <input-parameters-view [hubKey]="hubKey" [objectType]="objectType" [objectKey]="objectKey"
+            [parameters]="userParameters" [refreshEvent]="refreshDataSubject.asObservable()" (onRefreshData)="refresh()"
+            (onChange)="parameterChange()">
+        </input-parameters-view>
+    </div>
+
+    <div *ngIf="viewConfig && baseData">
         <series-animate [showEdit]="false" [showFrame]="false" [animateConfig]="viewConfig.animateConfig"
             [columns]="columns" (hasChanged)="hasChanged()" [baseData]="baseData" [(data)]="data">
         </series-animate>
     </div>
 </div>
 
-<div class="h-100" *ngIf="data">
+<div class="h-100 box" *ngIf="data">
+    <div class="box-content" style="height: 90vh;">
 
-    <dexih-table *ngIf="!showChart" [enableMultiSelect]="false" [enableSaveCsv]="true" [csvFileName]="name"
-        [enableFilter]="false" [columns]="columns" [data]="data">
+        <dexih-table *ngIf="!showChart" [enableMultiSelect]="false" [enableSaveCsv]="true" [csvFileName]="name"
+            [enableFilter]="false" [columns]="columns" [data]="data">
 
-        <ng-template #actions let-items="items">
-        </ng-template>
+            <ng-template #actions let-items="items">
+            </ng-template>
 
-        <ng-template #tableHeader>
-        </ng-template>
+            <ng-template #tableHeader>
+            </ng-template>
 
-    </dexih-table>
+        </dexih-table>
 
-    <chart-view *ngIf="showChart" [responsive]="true" [columns]="columns" [data]="data"
-        [config]="viewConfig.chartConfig">
-    </chart-view>
+        <chart-view *ngIf="showChart" [responsive]="true" [columns]="columns" [data]="data"
+            [config]="viewConfig.chartConfig">
+        </chart-view>
+    </div>
 </div>

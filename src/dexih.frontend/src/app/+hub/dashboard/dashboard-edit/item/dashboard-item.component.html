@@ -37,7 +37,7 @@
 
                     <div class="m-1" *ngIf="item.controls.parameters.length > 0">
                         <input-parameters [showEdit]="false" [parameters]="item.controls.parameters"
-                            [formsService]="formsService" [parentParameters]="formsService?.currentForm.controls.parameters?.value"
+                            [formsService]="formsService" [parentParameters]="parentParameters"
                             (onRefreshData)="refresh()" [refreshEvent]="refreshDataSubject.asObservable()">
                         </input-parameters>
                     </div>

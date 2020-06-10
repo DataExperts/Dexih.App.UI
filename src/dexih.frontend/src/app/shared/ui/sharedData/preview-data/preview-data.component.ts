@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../../+auth/auth.service';
 import { Subscription, combineLatest, Subject} from 'rxjs';
 import { DexihMessageComponent } from '../../../../shared/ui/dexihMessage/index';
@@ -18,6 +18,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
     @Input() public hubKey: number;
     @Input() parentParameters: InputParameterBase[]; // parameters passed from parent
     @Input() public showToolbar = false;
+    @Input() public updateQueryParameters = true;
     @Input() isMaximized = false;
     @Output() onMaximize = new EventEmitter<boolean>();
 
@@ -49,21 +50,37 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
     private cancelToken = new CancelToken();
 
     constructor(
-        private authService: AuthService) {
+        private authService: AuthService,
+        private route: ActivatedRoute ) {
     }
 
     ngOnInit() {
         try {
             this._subscription = combineLatest(
-                this.authService.getSharedDataObject(this.hubKey, this.objectType, this.objectKey)
+                this.authService.getSharedDataObject(this.hubKey, this.objectType, this.objectKey),
+                this.route.queryParams
             ).subscribe(result => {
                 let object = result[0];
+                let queryParams = result[1];
 
                 if (object != null) {
                     this.inputColumns = object.inputColumns;
                     this.tableColumns = object.outputColumns;
                     this.parameters = object.parameters;
                     this.userParameters = this.parameters;
+
+                    let p = queryParams['p'];
+                    if (p) {
+                        let paramValues = JSON.parse(p);
+
+                        for (let parameter of this.userParameters) {
+                            let value = paramValues[parameter.name];
+                            if (value !== undefined) {
+                                parameter.value = value;
+                                parameter.valueDesc = value;
+                            }
+                        }
+                    }
                 } else {
                     this.parameters = [];
                 }
@@ -85,6 +102,21 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
     }
 
     public parameterChange() {
+            // update the query parameters so page refresh will be the same.
+        if (this.updateQueryParameters && this.userParameters.length > 0) {
+            let parameters = {};
+            for (let parameter of this.userParameters) {
+                parameters[parameter.name] = parameter.value;
+            }
+
+            if ('URLSearchParams' in window) {
+                let searchParams = new URLSearchParams(window.location.search)
+                searchParams.set('p', JSON.stringify(parameters));
+                let newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
+                history.pushState(null, '', newRelativePathQuery);
+            }
+        }
+
         this.refresh();
     }
 

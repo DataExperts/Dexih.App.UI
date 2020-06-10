@@ -453,6 +453,7 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
         const connection = this.hubCache.getConnection(table.connectionKey)
         this.hubService.importTables([table], false, this.cancelToken)
             .then(tables => {
+                if (!tables || tables.length === 0) { return; }
                 const returnTable: any = tables[0];
                 returnTable.useLogical =
                     this.hubCache.defaultTableLogicalName(returnTable.schema, returnTable.name) !== returnTable.logicalName;

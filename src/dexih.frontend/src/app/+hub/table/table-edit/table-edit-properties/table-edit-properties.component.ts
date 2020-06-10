@@ -106,6 +106,8 @@ export class TableEditPropertiesComponent implements OnInit, OnDestroy {
     reloadColumns() {
         this.runningSql = true;
         this.hubService.importTables([this.mainForm.value], false, this.cancelToken).then(tables => {
+            if (!tables || tables.length === 0) { return; }
+
             const table: DexihTable = tables[0];
             const tableColumnsForm = <FormArray>this.formsService.currentForm.controls.dexihTableColumns;
             while (tableColumnsForm.controls.length > 0) {
