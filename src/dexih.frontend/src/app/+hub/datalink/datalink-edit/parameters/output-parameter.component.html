@@ -28,7 +28,7 @@
 
             <div class="form-control p-0">
                 <form-select [border]="false" formControlName="datalinkColumn" [items]="outputTables" parentName="name" childItems="dexihTableColumns" itemKey="key"
-                    itemName="logicalName" [enableKeySelect]="false" [enableTextEntry]="true"
+                    itemName="logicalName" [enableKeySelect]="false" [enableTextEntry]="true" [setTextEntryToValue]="false"
                     textEntryNote="Enter new column name, or select existing"
                     (textValueChange)="updateNewColumn($event)"
                     [errors]="errors.datalinkColumn">

@@ -10,7 +10,7 @@ import { HubCache, ConnectionTables, eCacheStatus } from '../../hub.models';
 import { eViewType, DexihDatalink, InputColumn, DexihColumnBase, SelectQuery,
   DexihView, DownloadObject, eDataObjectType, ChartConfig, InputParameterBase, DexihActiveAgent, AnimateConfig } from '../../../shared/shared.models';
 import { Functions } from '../../../shared/utils/functions';
-import { FormArray, FormGroup } from '@angular/forms';
+import { FormArray, FormGroup, FormControl } from '@angular/forms';
 import { parseStackingContexts } from 'html2canvas/dist/types/render/stacking-context';
 
 @Component({
@@ -352,7 +352,7 @@ export class ViewEditComponent implements OnInit, OnDestroy {
     let viewForm = this.formsService.currentForm;
     let parameters: InputParameterBase[] = [];
 
-    let viewParameters =  this.formsService.currentForm.controls.parameters.value;
+    let viewParameters =  (<FormGroup> this.formsService.currentForm.controls.parameters).getRawValue();
 
     if (viewParameters) {
       parameters = parameters.concat(viewParameters);
@@ -365,7 +365,7 @@ export class ViewEditComponent implements OnInit, OnDestroy {
     if ((view.sourceType === eDataObjectType.Table && view.sourceTableKey > 0) ||
       (view.sourceType === eDataObjectType.Datalink && view.sourceDatalinkKey > 0)) {
 
-      this.hubService.previewView(viewForm.value, this.inputColumns, parameters, this.cancelToken).then((result) => {
+      this.hubService.previewView(view, this.inputColumns, parameters, this.cancelToken).then((result) => {
         this.refreshDataSubject.next();
         this.columns = result.columns;
         this.baseData = result.data;

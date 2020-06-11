@@ -17,7 +17,7 @@
                     <div *ngIf="!inputParameterForm.value.runTime?.functionParameter?.isLabel" class="form-control p-0">
                         <form-select formControlName="datalinkColumn" [border]="false"
                             [items]="inputColumnGroups" parentName="group" childItems="columns" itemKey="key" itemName="logicalName" [(textValue)]="inputs[i].staticValue"
-                            [enableKeySelect]="false" [enableTextEntry]="rank === 0" [enableTextEntryMatch]="false"
+                            [enableKeySelect]="false" [enableTextEntry]="rank === 0" [enableTextEntryMatch]="false" [setTextEntryToValue]="false"
                             (textValueChange)="updateStatic($event, i)"
                             [textEntryNote]="rank > 0 ? 'Select an array type source (otherwise select add to build an array)' : 'Select a column or enter a static value.'" 
                             [textEntryItems]="inputs[i].textItems" textEntryItemsTitle="Variables"
@@ -56,7 +56,7 @@
                 </form-select> -->
                 <form-select class="flex-grow-1" [border]="false" class="form-control p-0" 
                     formControlName="datalinkColumn" [items]="outputTables" parentName="name" childItems="dexihTableColumns" itemKey="key"
-                    itemName="logicalName" [enableKeySelect]="false" [enableTextEntry]="true"
+                    itemName="logicalName" [enableKeySelect]="false" [enableTextEntry]="true" [setTextEntryToValue]="false"
                     textEntryNote="Enter new column name, or select existing"
                     (textValueChange)="updateNewColumn($event, i)">
                 </form-select>

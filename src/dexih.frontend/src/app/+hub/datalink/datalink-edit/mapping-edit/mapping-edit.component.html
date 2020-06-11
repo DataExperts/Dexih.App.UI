@@ -36,14 +36,14 @@
 							[enableTextEntry]="true" [(textValue)]="filterValue"
 							(textValueChange)="updateFilterValue($event)" [enableTextEntryMatch]="false" [enableKeySelect]="false"
 							itemKey="key" itemName="logicalName" [errors]="filterValueErrors"
-							[textEntryItems]="variables" textEntryItemsTitle="Variables"
+							[textEntryItems]="variables" textEntryItemsTitle="Variables" [setTextEntryToValue]="false"
 							note="Note: For static date values use format YYYY-MM-DD (e.g. 2018-01-30)">
 						</form-select>
 					</section>
 					<section *ngIf="showOutput" class="form-group col-md-4">
 						<form-select label="Output Column" formControlName="targetDatalinkColumn" [items]="outputTables" parentName="name" childItems="dexihTableColumns"
 							itemKey="key" itemName="logicalName" note="Enter new column, or select existing"
-							[enableKeySelect]="false" (textValueChange)="updateNewColumn($event)" [enableTextEntry]="true"
+							[enableKeySelect]="false" (textValueChange)="updateNewColumn($event)" [enableTextEntry]="true" [setTextEntryToValue]="false"
 							textEntryNote="Enter new column name, or select existing" [errors]="targetErrors">
 						</form-select>
 					</section>
