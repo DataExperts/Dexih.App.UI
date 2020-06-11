@@ -3,9 +3,12 @@
     <span *ngFor="let parameter of parameters.controls; let i = index" class="input-group mb-1">
         <form [formGroup]="parameter" *ngIf="parameter.controls.isValid.value && (showEdit || parameter.controls.allowUserSelect.value)">
             <div class="input-group">
-                <form-input [disabled]="!showEdit" labelLeft="Name" [border]="false" class="form-control p-0"
+                <form-input *ngIf="showEdit" labelLeft="Name" [border]="false" class="form-control p-0"
                     formControlName="name">
                 </form-input>
+                <div *ngIf="!showEdit" class="form-control">
+                    {{parameter.controls.name.value}}
+                </div>
                 <form-select labelLeft="Value" class="form-control p-0" formControlName="value" [border]="false"
                     itemKey="key"
                     itemName="name"
