@@ -1,10 +1,6 @@
 <div *ngIf="parameters">
-    <span *ngFor="let parameter of userParameters; let i = index" class="input-group">
-            <div class="input-group">
-                <form-input [disabled]="true" labelLeft="Name" [border]="false" class="form-control p-0"
-                [(ngModel)]="parameter.name">
-                </form-input>
-                <form-select *ngIf="parameter.listOfValuesKey > 0" labelLeft="Value" [border]="false" class="form-control p-0" [(ngModel)]="parameter.value"
+    <span *ngFor="let parameter of userParameters; let i = index">
+                <form-select *ngIf="parameter.listOfValuesKey > 0" [labelLeft]="parameter.name" [(ngModel)]="parameter.value"
                     itemKey="key"
                     itemName="name"
                     [items]="parameter.runTime.items"
@@ -15,13 +11,13 @@
                     [showRefresh]="parameter.runTime.showRefresh"
                     [isRefreshing]="parameter.runTime.isRefreshing"
                     (onRefresh)="refresh(parameter)"
+                    [multiSelect]="parameter.rank === 1"
                     >
                 </form-select>
-                <form-input *ngIf="!( parameter.listOfValuesKey > 0)" labelLeft="Value" [border]="false" class="form-control p-0" [(ngModel)]="parameter.value"
+                <form-input *ngIf="!( parameter.listOfValuesKey > 0)" [labelLeft]="parameter.name" [(ngModel)]="parameter.value"
                 (ngModelChange)="change(parameter)"
                 >
             </form-input>
-            </div>
     </span>
     <div *ngIf="requiresRefresh" class="alert alert-warning mt-2">
         <a href="javascript:void(0)" class="alert-link" (click)="refreshData()">The parameters have changed.  Click to refresh.</a>

@@ -66,7 +66,7 @@ export class DatajobRunComponent implements OnInit, OnDestroy {
                             this.datajobs.push(datajob);
                             datajob.parameters.forEach(c => {
                                 if (this.parameters.findIndex(p => c.name === p.name) < 0) {
-                                    this.parameters.push({name: c.name, value: c.value});
+                                    this.parameters.push({name: c.name, value: c.value, rank: c.rank});
                                 }
                             });
                         });

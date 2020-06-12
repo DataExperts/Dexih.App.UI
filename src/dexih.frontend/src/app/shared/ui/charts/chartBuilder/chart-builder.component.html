@@ -16,6 +16,12 @@
             <form-checkbox label="Color Gradient" [(ngModel)]="config.showGradient" (ngModelChange)="onChanged()"
                 [border]="true"></form-checkbox>
         </div>
+
+        <div class="flex-fill">
+            <form-select [(ngModel)]="config.multiGridColumn" (ngModelChange)="updateChart($event)" labelLeft="Grid Column"
+                [items]="columns" itemKey="title" itemName="title">
+            </form-select>
+        </div>
     </div>
 
     <div class="d-flex flex-wrap pt-1"

@@ -39,7 +39,7 @@ export class InputParametersViewComponent implements OnInit, OnDestroy {
         this.userParameters = [];
         this.parameters.filter(c => c.isValid && c.allowUserSelect).forEach((parameter: InputParameterBase) => {
             parameter['runTime'] = {showRefresh: parameter.listOfValuesKey > 0, isRefreshing: false, items: []};
-            if (parameter.value && parameter.listOfValuesKey) {
+            if (parameter.value && parameter.listOfValuesKey && parameter.rank === 0) {
                 parameter['runTime'].items = [{key: parameter.value, name: parameter.valueDesc}];
             }
 

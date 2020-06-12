@@ -52,7 +52,7 @@
 </div>
 
 <div *ngIf="!showToolbar && baseData" class="d-flex">
-    <div *ngIf="viewConfig?.chartConfig" class="btn-group btn-sm btn-group-toggle" data-toggle="buttons" title="Table">
+    <div *ngIf="viewConfig?.chartConfig" class="align-self-start btn-group btn-sm btn-group-toggle" data-toggle="buttons" title="Table">
         <label class="btn btn-primary" [ngClass]="{active: showChart===false}">
             <input type="radio" name="options" value="table" autocomplete="off" (click)="showChart = false">
             <i class="fa fa-table"></i>
@@ -91,7 +91,7 @@
 
         </dexih-table>
 
-        <chart-view *ngIf="showChart" [responsive]="true" [columns]="columns" [data]="data"
+        <chart-view *ngIf="showChart" [responsive]="false" [columns]="columns" [data]="data"
             [config]="viewConfig.chartConfig">
         </chart-view>
     </div>

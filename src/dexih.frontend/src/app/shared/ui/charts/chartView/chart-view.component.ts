@@ -19,10 +19,11 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
     @Input() updateChartEvent: Observable<void>;
     @Input() responsive = false;
 
-    @ViewChild('wrapper', { static: true }) public wrapper: ElementRef;
+    // @ViewChild('wrapper', { static: true }) public wrapper: ElementRef;
 
     private _updateChartSubscription: Subscription;
 
+    public gridColumnIndex: any = null;
     public labelColumnIndex: any = null;
     public seriesColumnIndex: any = null;
     public seriesPivotIndex: any = null;
@@ -40,8 +41,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
     eInputFormat = eInputFormat;
     chartTypes = ChartTypes;
 
-    results: any[];
-    lineChartSeries: any[];
+    resultArray: any[];
 
     chartType: any;
     colorSets = colorSets;
@@ -73,6 +73,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
 
     ngOnChanges(simpleChanges: SimpleChanges) {
         if (this.columns) {
+            this.gridColumnIndex = this.getColumnIndex(this.config.multiGridColumn);
             this.labelColumnIndex = this.getColumnIndex(this.config.labelColumn);
             this.seriesColumnIndex = this.getColumnIndex(this.config.seriesColumn);
             this.seriesPivotIndex = this.getColumnIndex(this.config.pivotColumn);
@@ -107,9 +108,13 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
 
             this.getChartType();
             this.updateChart();
-            this.view = [this.wrapper.nativeElement.clientWidth, this.wrapper.nativeElement.clientHeight];
+            // this.view = [this.wrapper.nativeElement.clientWidth, this.wrapper.nativeElement.clientHeight];
         }
     }
+
+    trackChartChange(index: number, data: any) {
+        return data[index].name;
+      }
 
     // onResize() {
     //     this.createView();
@@ -199,17 +204,6 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
 
             this.getChartType();
 
-
-            // this.config.labelColumn = this.getColumnTitle(this.labelColumnIndex);
-            // this.config.seriesColumn = this.getColumnTitle(this.seriesColumnIndex);
-            // this.config.xColumn = this.getColumnTitle(this.xColumnIndex);
-            // this.config.yColumn = this.getColumnTitle(this.yColumnIndex);
-            // this.config.minColumn = this.getColumnTitle(this.minColumnIndex);
-            // this.config.maxColumn = this.getColumnTitle(this.maxColumnIndex);
-            // this.config.radiusColumn = this.getColumnTitle(this.radiusColumnIndex);
-            // this.config.latitudeColumn = this.getColumnTitle(this.latitudeColumnIndex);
-            // this.config.longitudeColumn = this.getColumnTitle(this.longitudeColumnIndex);
-
             if (this.seriesColumnsIndex) {
                 this.config.seriesColumns = new Array(this.seriesColumnsIndex.length);
                 for (let i = 0; i < this.seriesColumnsIndex.length; i++) {
@@ -221,133 +215,178 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                 this.setLabel(this.columns[this.labelColumnIndex].title);
             }
 
-            let chartData: Array<any>;
+            let values: Array<any>;
+            let chartItems: Array<any> = [];
 
-            switch (this.chartType.inputFormat) {
-                case eInputFormat.SingleSeries:
-                    chartData = this.singleSeries();
-                    break;
-
-                case eInputFormat.MultiSeries:
-                    chartData = this.multiSeries();
-                    break;
-
-                case eInputFormat.InverseSeries:
-                    chartData = this.inverseSeries();
-                    break;
-
-                case eInputFormat.ComboSeries:
-                    this.lineChartSeries = this.inverseSeries();
-                    chartData = this.singleSeries();
-                    break;
-                case eInputFormat.Xy:
-                    if (this.yColumnIndex != null && this.xColumnIndex != null) {
-                        chartData = new Array(this.data.length);
-                        for (let i = 0; i < this.data.length; i++) {
-                            chartData[i] = {
-                                name: this.formatValue(this.labelColumnIndex, i),
-                                series: [{
-                                    name: this.formatValue(this.labelColumnIndex, i),
-                                    x: this.formatValue(this.xColumnIndex, i),
-                                    y: this.formatValue(this.yColumnIndex, i),
-                                    r: 10
-                                }]
-                            };
-                        }
-                        this.config.yAxisLabel = this.columns[this.yColumnIndex].title;
-                        this.config.xAxisLabel = this.columns[this.xColumnIndex].title;
-                    }
-                    break;
-
-                case eInputFormat.XyMinMax:
-                    if (this.yColumnIndex != null && this.xColumnIndex != null) {
-                        chartData = new Array(this.data.length);
-                        for (let i = 0; i < this.data.length; i++) {
-                            chartData[i] = {
-                                name: this.formatValue(this.labelColumnIndex, i),
-                                series: [{
-                                    name: this.formatValue(this.labelColumnIndex, i),
-                                    x: this.formatValue(this.xColumnIndex, i),
-                                    y: this.formatValue(this.yColumnIndex, i),
-                                    min: this.formatValue(this.minColumnIndex, i),
-                                    max: this.formatValue(this.maxColumnIndex, i)
-                                }]
-                            };
-                        }
-                        this.config.yAxisLabel = this.columns[this.yColumnIndex].title;
-                        this.config.xAxisLabel = this.columns[this.xColumnIndex].title;
-                    }
-                    break;
-
-
-                case eInputFormat.XyBubble:
-                    if (this.yColumnIndex != null && this.xColumnIndex != null) {
-
-                        chartData = new Array(this.data.length);
-                        for (let i = 0; i < this.data.length; i++) {
-                            chartData[i] = {
-                                name: this.formatValue(this.labelColumnIndex, i),
-                                series: [{
-                                    name: this.formatValue(this.labelColumnIndex, i),
-                                    x: this.formatValue(this.xColumnIndex, i),
-                                    y: this.formatValue(this.yColumnIndex, i),
-                                    r: this.formatValue(this.radiusColumnIndex, i)
-                                }]
-                            };
-                        }
-                        this.config.yAxisLabel = this.columns[this.yColumnIndex].title;
-                        this.config.xAxisLabel = this.columns[this.xColumnIndex].title;
-                    }
-                    break;
-
-                case eInputFormat.GeoCoordinates:
-                    if (this.latitudeColumnIndex != null && this.longitudeColumnIndex != null) {
-                        chartData = new Array(this.data.length);
-                        for (let i = 0; i < this.data.length; i++) {
-                            chartData[i] = {
-                                name: this.formatValue(this.labelColumnIndex, i),
-                                value: this.formatValue(this.seriesColumnIndex, i),
-                                latitude: this.formatValue(this.latitudeColumnIndex, i),
-                                longitude: this.formatValue(this.longitudeColumnIndex, i),
-                            };
-                        }
-                    }
-                    break;
+            if (this.gridColumnIndex != null && this.gridColumnIndex >= 0) {
+                values = this.gridSeriesValues(this.data);
+            } else {
+                values = [null];
             }
 
             let singleColor = this.chartType.isBar && this.config.singleBarColor ? true : false;
 
-            if (chartData) {
-                chartData.forEach(item => {
-                    this.addCustomColor(item.name, !singleColor);
-                });
-            }
 
-            if (this.lineChartSeries) {
-                if (singleColor) {
-                    this.addCustomColor(this.columns[this.seriesColumnIndex].title, false);
-                    this.colorIndex++;
+            for (let value of values) {
+                let chartItem: Array<any>;
+                let data;
+                if (this.gridColumnIndex != null && this.gridColumnIndex >= 0 ) {
+                    data = this.data.filter(c => c[this.gridColumnIndex] === value.value);
+                } else {
+                    data = this.data;
                 }
-                
-                this.lineChartSeries.forEach(item => {
-                    this.addCustomColor(item.name, true);
-                })
+
+                switch (this.chartType.inputFormat) {
+                    case eInputFormat.SingleSeries:
+                        chartItem = this.singleSeries(data);
+                        break;
+
+                    case eInputFormat.MultiSeries:
+                        chartItem = this.multiSeries(data);
+                        break;
+
+                    case eInputFormat.InverseSeries:
+                        chartItem = this.inverseSeries(data);
+                        break;
+
+                    case eInputFormat.ComboSeries:
+                        chartItem = this.singleSeries(data);
+                        chartItem['lineChartSeries'] = this.inverseSeries(data);
+                        break;
+                    case eInputFormat.Xy:
+                        if (this.yColumnIndex != null && this.xColumnIndex != null) {
+                            chartItem = new Array(data.length);
+                            for (let i = 0; i < data.length; i++) {
+                                chartItem[i] = {
+                                    name: this.formatValue(data, this.labelColumnIndex, i),
+                                    series: [{
+                                        name: this.formatValue(data, this.labelColumnIndex, i),
+                                        x: this.formatValue(data, this.xColumnIndex, i),
+                                        y: this.formatValue(data, this.yColumnIndex, i),
+                                        r: 10
+                                    }]
+                                };
+                            }
+                            this.config.yAxisLabel = this.columns[this.yColumnIndex].title;
+                            this.config.xAxisLabel = this.columns[this.xColumnIndex].title;
+                        }
+                        break;
+
+                    case eInputFormat.XyMinMax:
+                        if (this.yColumnIndex != null && this.xColumnIndex != null) {
+                            chartItem = new Array(data.length);
+                            for (let i = 0; i < data.length; i++) {
+                                chartItem[i] = {
+                                    name: this.formatValue(data, this.labelColumnIndex, i),
+                                    series: [{
+                                        name: this.formatValue(data, this.labelColumnIndex, i),
+                                        x: this.formatValue(data, this.xColumnIndex, i),
+                                        y: this.formatValue(data, this.yColumnIndex, i),
+                                        min: this.formatValue(data, this.minColumnIndex, i),
+                                        max: this.formatValue(data, this.maxColumnIndex, i)
+                                    }]
+                                };
+                            }
+                            this.config.yAxisLabel = this.columns[this.yColumnIndex].title;
+                            this.config.xAxisLabel = this.columns[this.xColumnIndex].title;
+                        }
+                        break;
+
+
+                    case eInputFormat.XyBubble:
+                        if (this.yColumnIndex != null && this.xColumnIndex != null) {
+
+                            chartItem = new Array(data.length);
+                            for (let i = 0; i < data.length; i++) {
+                                chartItem[i] = {
+                                    name: this.formatValue(data, this.labelColumnIndex, i),
+                                    series: [{
+                                        name: this.formatValue(data, this.labelColumnIndex, i),
+                                        x: this.formatValue(data, this.xColumnIndex, i),
+                                        y: this.formatValue(data, this.yColumnIndex, i),
+                                        r: this.formatValue(data, this.radiusColumnIndex, i)
+                                    }]
+                                };
+                            }
+                            this.config.yAxisLabel = this.columns[this.yColumnIndex].title;
+                            this.config.xAxisLabel = this.columns[this.xColumnIndex].title;
+                        }
+                        break;
+
+                    case eInputFormat.GeoCoordinates:
+                        if (this.latitudeColumnIndex != null && this.longitudeColumnIndex != null) {
+                            chartItem = new Array(data.length);
+                            for (let i = 0; i < data.length; i++) {
+                                chartItem[i] = {
+                                    name: this.formatValue(data, this.labelColumnIndex, i),
+                                    value: this.formatValue(data, this.seriesColumnIndex, i),
+                                    latitude: this.formatValue(data, this.latitudeColumnIndex, i),
+                                    longitude: this.formatValue(data, this.longitudeColumnIndex, i),
+                                };
+                            }
+                        }
+                        break;
+                }
+
+                if (chartItem) {
+                    if (value) {
+                        chartItem['name'] = value.name;
+                    }
+                    chartItem.forEach(item => {
+                        this.addCustomColor(item.name, !singleColor);
+                    });
+                }
+
+                if (chartItem['lineChartSeries']) {
+                    if (singleColor) {
+                        this.addCustomColor(this.columns[this.seriesColumnIndex].title, false);
+                        this.colorIndex++;
+                    }
+
+                    chartItem['lineChartSeries'].forEach(item => {
+                        this.addCustomColor(item.name, true);
+                    });
+                }
+
+                chartItems.push(chartItem);
             }
 
-            this.results = chartData;
+            this.resultArray = chartItems;
+
         }
 
     }
 
-    singleSeries(): Array<any> {
+    gridSeriesValues(data: any[]): any {
+        const format = this.columns[this.gridColumnIndex].format;
+        const values = Array.from(new Set(data.map(c => c[this.gridColumnIndex]))).sort((a, b) => {
+            if (a > b) {
+                return 1;
+            }
+            if (a < b) {
+                return -1;
+            }
+            return 0;
+        });
+        let gridValues = values.map(c => {
+            return {
+                name: Functions.formatValue(c, format),
+                value: c
+            }
+        });
+
+        return gridValues;
+    }
+
+    singleSeries(data): Array<any> {
         let chartData: Array<any>;
 
         if (this.labelColumnIndex !== null && this.seriesColumnIndex != null) {
-            chartData = new Array(this.data.length);
-            for (let i = 0; i < this.data.length; i++) {
+            chartData = new Array(data.length);
+            for (let i = 0; i < data.length; i++) {
                 chartData[i] = {
-                    name: this.formatValue(this.labelColumnIndex, i),
-                    value: this.formatValue(this.seriesColumnIndex, i)
+                    name: this.formatValue(data, this.labelColumnIndex, i),
+                    value: this.formatValue(data, this.seriesColumnIndex, i)
                 };
             }
             this.setSeriesLabel(this.columns[this.seriesColumnIndex].title);
@@ -356,22 +395,22 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
         return chartData;
     }
 
-    multiSeries(): Array<any> {
+    multiSeries(data): Array<any> {
         let chartData: Array<any>;
 
         if (this.labelColumnIndex != null && this.seriesColumnsIndex.length > 0) {
             if (this.seriesPivotIndex != null) {
-                let pivotValues: any[] = this.uniqueValues(this.seriesPivotIndex);
+                let pivotValues: any[] = this.uniqueValues(data, this.seriesPivotIndex);
                 let seriesCount = pivotValues.length * this.seriesColumnsIndex.length;
                 let pivotData = {};
 
                 for (let pivotIndex = 0; pivotIndex < pivotValues.length; pivotIndex++) {
                     let pivotValue = pivotValues[pivotIndex];
-                    let data = this.data.filter(c => c[this.seriesPivotIndex] === pivotValue.value);
+                    let seriesData = data.filter(c => c[this.seriesPivotIndex] === pivotValue.value);
 
-                    for (let i = 0; i < data.length; i++) {
+                    for (let i = 0; i < seriesData.length; i++) {
 
-                        const label = data[i][this.labelColumnIndex];
+                        const label = seriesData[i][this.labelColumnIndex];
                         let row = pivotData[label];
                         if (!row) {
                             row = new Array(seriesCount);
@@ -382,7 +421,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                             if (this.seriesColumnsIndex[j]) {
                                 row[((j + 1) * (pivotIndex + 1)) - 1 ] = {
                                     name: pivotValue.name + '/' + this.seriesColumnsIndex[j].title,
-                                    value: this.formatValue2(data, this.seriesColumnsIndex[j].name, i)
+                                    value: this.formatValue(seriesData, this.seriesColumnsIndex[j].name, i)
                                 };
                             }
                         }
@@ -402,19 +441,19 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
 
                 this.setSeriesLabel(this.seriesColumnsIndex.map(c => c.title).join(' / '));
             } else {
-                chartData = new Array(this.data.length);
-                for (let i = 0; i < this.data.length; i++) {
+                chartData = new Array(data.length);
+                for (let i = 0; i < data.length; i++) {
                     let series = new Array(this.seriesColumnsIndex.length);
                     for (let j = 0; j < this.seriesColumnsIndex.length; j++) {
                         if (this.seriesColumnsIndex[j]) {
                             series[j] = {
                                 name: this.seriesColumnsIndex[j].title,
-                                value: this.formatValue(this.seriesColumnsIndex[j].name, i)
+                                value: this.formatValue(data, this.seriesColumnsIndex[j].name, i)
                             };
                         }
                     }
                     chartData[i] = {
-                        name: this.formatValue(this.labelColumnIndex, i),
+                        name: this.formatValue(data, this.labelColumnIndex, i),
                         series: series
                     };
                 }
@@ -425,22 +464,22 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
         return chartData;
     }
 
-    inverseSeries(): Array<any> {
+    inverseSeries(data): Array<any> {
         let chartData: Array<any>;
 
         if (this.labelColumnIndex != null && this.seriesColumnsIndex.length > 0) {
             if (this.seriesPivotIndex != null) {
-                let labelValues: any[] = this.uniqueValues(this.labelColumnIndex);
+                let labelValues: any[] = this.uniqueValues(data, this.labelColumnIndex);
                 let seriesCount = labelValues.length * this.seriesColumnsIndex.length;
                 let pivotData = {};
 
                 for (let seriesIndex = 0; seriesIndex < labelValues.length; seriesIndex++) {
                     let seriesValue = labelValues[seriesIndex];
-                    let data = this.data.filter(c => c[this.labelColumnIndex] === seriesValue.value);
+                    let seriesData = data.filter(c => c[this.labelColumnIndex] === seriesValue.value);
 
-                    for (let i = 0; i < data.length; i++) {
+                    for (let i = 0; i < seriesData.length; i++) {
                         for (let j = 0; j < this.seriesColumnsIndex.length; j++) {
-                            let pivotItem = data[i][this.seriesPivotIndex];
+                            let pivotItem = seriesData[i][this.seriesPivotIndex];
                             if (this.seriesColumnsIndex.length > 1 ) {
                                 pivotItem += ' / ' + this.seriesColumnsIndex[j].title;
                             }
@@ -452,10 +491,10 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                             }
 
                             if (this.seriesColumnsIndex[j]) {
-                                let name = this.formatValue2(data, this.labelColumnIndex, j);
+                                let name = this.formatValue(seriesData, this.labelColumnIndex, j);
                                 row[((j + 1) * (seriesIndex + 1)) - 1 ] = {
                                     name: name,
-                                    value: this.formatValue2(data, this.seriesColumnsIndex[j].name, i)
+                                    value: this.formatValue(seriesData, this.seriesColumnsIndex[j].name, i)
                                 };
                             }
                         }
@@ -476,11 +515,11 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
             } else {
                 chartData = new Array(this.seriesColumnsIndex.length);
                 for (let i = 0; i < this.seriesColumnsIndex.length; i++) {
-                    let series = new Array(this.data.length);
-                    for (let j = 0; j < this.data.length; j++) {
+                    let series = new Array(data.length);
+                    for (let j = 0; j < data.length; j++) {
                         series[j] = {
-                            name: this.formatValue(this.labelColumnIndex, j),
-                            value: this.formatValue(this.seriesColumnsIndex[i].name, j)
+                            name: this.formatValue(data, this.labelColumnIndex, j),
+                            value: this.formatValue(data, this.seriesColumnsIndex[i].name, j)
                         };
                     }
                     series = series.filter(c => c.value !== '');
@@ -493,9 +532,9 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
         return chartData;
     }
 
-    uniqueValues(index: number): any[] {
+    uniqueValues(data, index: number): any[] {
         const format = this.columns[index].format;
-        const values = Array.from(new Set(this.data.map(c => c[index]))).sort((a, b) => {
+        const values = Array.from(new Set(data.map(c => c[index]))).sort((a, b) => {
             if (a > b) {
                 return 1;
             }
@@ -514,18 +553,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
         return valuesSet;
     }
 
-    formatValue(columnIndex: number, row: number) {
-        if (columnIndex === null) {
-            return row;
-        }
-
-        let value = this.data[row][columnIndex];
-        let column = this.columns[columnIndex];
-
-        return Functions.formatValue(value, column.format);
-    }
-
-    formatValue2(data: any[], columnIndex: number, row: number) {
+    formatValue(data, columnIndex: number, row: number) {
         if (columnIndex === null) {
             return row;
         }
@@ -535,4 +563,5 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
 
         return Functions.formatValue(value, column.format);
     }
+
 }

@@ -22,7 +22,7 @@ export class AnimateConfig {
    }
    
    export class ApplicationUser {
-    public id: string = 'b19cfb87-a179-452e-8bb1-af4c933dd914';
+    public id: string = 'd996f7c0-9765-47b4-9e8d-f8fc5d0551f7';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -31,7 +31,7 @@ export class AnimateConfig {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = '3f3093ff-f4b2-4539-949f-64d1382e9f7d';
+    public securityStamp: string = '1c081c3d-a4e9-416c-a127-b8e2a113b469';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -114,6 +114,7 @@ export class AnimateConfig {
     public roundEdges: boolean = false;
     public showDataLabel: boolean = false;
     public singleBarColor: boolean = true;
+    public multiGridColumn: string = null;
    }
    
    export class ClientMessage {
@@ -227,10 +228,10 @@ export class AnimateConfig {
    export class DexihApiParameter {
     public apiKey: number = 0;
     public api: DexihApi = null;
-    public value: string = null;
+    public value: any = null;
     public listOfValuesKey: number = null;
     public allowUserSelect: boolean = true;
-    public valueDesc: string = null;
+    public valueDesc: any = null;
     public rank: number = 0;
     public name: string = null;
     public description: string = null;
@@ -399,10 +400,10 @@ export class AnimateConfig {
    
    export class DexihDashboardItemParameter {
     public dashboardItemKey: number = 0;
-    public value: string = null;
+    public value: any = null;
     public listOfValuesKey: number = null;
     public allowUserSelect: boolean = true;
-    public valueDesc: string = null;
+    public valueDesc: any = null;
     public rank: number = 0;
     public name: string = null;
     public description: string = null;
@@ -415,10 +416,10 @@ export class AnimateConfig {
    
    export class DexihDashboardParameter {
     public dashboardKey: number = 0;
-    public value: string = null;
+    public value: any = null;
     public listOfValuesKey: number = null;
     public allowUserSelect: boolean = true;
-    public valueDesc: string = null;
+    public valueDesc: any = null;
     public rank: number = 0;
     public name: string = null;
     public description: string = null;
@@ -448,10 +449,10 @@ export class AnimateConfig {
    
    export class DexihDatajobParameter {
     public datajobKey: number = 0;
-    public value: string = null;
+    public value: any = null;
     public listOfValuesKey: number = null;
     public allowUserSelect: boolean = true;
-    public valueDesc: string = null;
+    public valueDesc: any = null;
     public rank: number = 0;
     public name: string = null;
     public description: string = null;
@@ -532,10 +533,10 @@ export class AnimateConfig {
    
    export class DexihDatalinkParameter {
     public datalinkKey: number = 0;
-    public value: string = null;
+    public value: any = null;
     public listOfValuesKey: number = null;
     public allowUserSelect: boolean = true;
-    public valueDesc: string = null;
+    public valueDesc: any = null;
     public rank: number = 0;
     public name: string = null;
     public description: string = null;
@@ -605,10 +606,10 @@ export class AnimateConfig {
    
    export class DexihDatalinkStepParameter {
     public datalinkStepKey: number = 0;
-    public value: string = null;
+    public value: any = null;
     public listOfValuesKey: number = null;
     public allowUserSelect: boolean = true;
-    public valueDesc: string = null;
+    public valueDesc: any = null;
     public rank: number = 0;
     public name: string = null;
     public description: string = null;
@@ -1175,10 +1176,10 @@ export class AnimateConfig {
    export class DexihViewParameter {
     public viewKey: number = 0;
     public datalinkParameterKey: number = 0;
-    public value: string = null;
+    public value: any = null;
     public listOfValuesKey: number = null;
     public allowUserSelect: boolean = true;
-    public valueDesc: string = null;
+    public valueDesc: any = null;
     public rank: number = 0;
     public name: string = null;
     public description: string = null;
@@ -1370,14 +1371,15 @@ export class AnimateConfig {
    
    export class InputParameter {
     public name: string = null;
-    public value: string = null;
+    public value: any = null;
+    public rank: number = 0;
    }
    
    export class InputParameterBase {
     public value: any = null;
     public listOfValuesKey: number = null;
     public allowUserSelect: boolean = true;
-    public valueDesc: string = null;
+    public valueDesc: any = null;
     public rank: number = 0;
     public name: string = null;
     public description: string = null;
@@ -2139,7 +2141,7 @@ export class AnimateConfig {
     IsNull = 7,
     IsNotNull = 8,
     Like = 9,
-    IsNotIn = 10
+    IsNotIn = 10,
    }
    
    export const eCompareItems = [

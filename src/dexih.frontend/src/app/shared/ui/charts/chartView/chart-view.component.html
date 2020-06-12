@@ -1,9 +1,10 @@
-<div class="m-3" *ngIf="!results || !chartType">
+<div class="m-3" *ngIf="!resultArray || resultArray?.length === 0 || !chartType">
     <div class="alert alert-warning">
         Chart not displayed.  Check the chart type, labels and series have been set.
     </div>
 </div>
-<div #wrapper class="chart-parent" >   
+<div #wrapper class="chart-parent border" *ngFor="let results of resultArray; trackBy:trackChartChange" >
+   <div class="w-100 text-center ">{{results.name}}</div> 
 <div (resized)="onResized($event)" *ngIf="results && chartType" id="chart" [ngClass]="{'responsive-chart' : responsive, 'fixed-chart': !responsive}" >
     <ngx-charts-bar-vertical *ngIf="chartType.key === eChartType.BarVertical" [view]="view" 
         [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"
@@ -113,7 +114,7 @@
     </ngx-charts-area-chart-normalized>
 
     <combo-chart-component *ngIf="chartType.key === eChartType.BarLineCombo" [view]="view" [customColors]="customColors"
-        [results]="results" [lineChart]="lineChartSeries" [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"
+        [results]="results" [lineChart]="results.lineChartSeries" [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"
         [legend]="config.showLegend" [legendPosition]="config.legendPosition" [showGridLines]="config.showGridLines" [showXAxisLabel]="config.showXAxisLabel"
         [showYAxisLabel]="config.showYAxisLabel" [xAxisLabel]="config.xAxisLabel" [yScaleMax]="config.yScaleMax"
         [yAxisLabel]="config.yAxisLabel" [separateAxis]="config.separateAxis"

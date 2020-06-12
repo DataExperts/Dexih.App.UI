@@ -9,7 +9,7 @@
                 <div *ngIf="!showEdit" class="form-control">
                     {{parameter.controls.name.value}}
                 </div>
-                <form-select labelLeft="Value" class="form-control p-0" formControlName="value" [border]="false"
+                <form-select class="form-control p-0" formControlName="value" [border]="false"
                     itemKey="key"
                     itemName="name"
                     [items]="parameter.controls.runTime?.value?.items" 
