@@ -77,7 +77,9 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
                             let value = paramValues[parameter.name];
                             if (value !== undefined) {
                                 parameter.value = value;
-                                parameter.valueDesc = value;
+                                if (parameter.rank === 0) {
+                                    parameter.valueDesc = value;
+                                }
                             }
                         }
                     }

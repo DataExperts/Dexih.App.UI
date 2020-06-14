@@ -4,7 +4,7 @@
     </div>
 </div>
 <div #wrapper class="chart-parent border" *ngFor="let results of resultArray; trackBy:trackChartChange" >
-   <div class="w-100 text-center ">{{results.name}}</div> 
+   <div class="w-100 text-center "><div class="badge badge-secondary">{{results.name}}</div></div> 
 <div (resized)="onResized($event)" *ngIf="results && chartType" id="chart" [ngClass]="{'responsive-chart' : responsive, 'fixed-chart': !responsive}" >
     <ngx-charts-bar-vertical *ngIf="chartType.key === eChartType.BarVertical" [view]="view" 
         [results]="results" [gradient]="config.showGradient" [xAxis]="config.showXAxis" [yAxis]="config.showYAxis"
