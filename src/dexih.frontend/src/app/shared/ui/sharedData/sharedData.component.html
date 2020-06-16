@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
     <div class="m-1">
         <dexih-message #DexihMessage></dexih-message>
     </div>
@@ -24,6 +24,7 @@
 
         <dexih-table 
             [enableMultiSelect]="true" 
+            [enableStickyToolbar]="true"
             [enableFilter]="false" 
             [columns]="columns" 
             [data]="dataIndex"
@@ -33,6 +34,10 @@
             <ng-template #selectedItemAction select="selectedItemAction" let-item="item">
                 <dexih-button-preview [routerLink]="['preview', item.hubKey, item.objectType, item.objectKey]">
                 </dexih-button-preview>
+                <dexih-button-edit *ngIf="hubKeys?.indexOf(item.hubKey)>=0" class="ml-1" 
+                    (click)="edit(item)"></dexih-button-edit>
+                <dexih-button class="ml-1" iconClass="fa fa-code" title="Get embedded version" (click)="embed(item)" text="Embedded"></dexih-button>
+
             </ng-template>
 
             <ng-template #filter select="filter" let-items="items">
@@ -56,7 +61,7 @@
                 <download-button class="ml-1" (download)="downloadData(items, true, $event)"></download-button>
             </ng-template>
 
-            <ng-template #rowAction let-item="item">
+            <!-- <ng-template #rowAction let-item="item">
                 <div *ngFor="let column of item.inputColumns; let i = index" class="input-group">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
@@ -66,15 +71,7 @@
                     <form-input name="column{{i}}" class="form-control p-0" [placeholder]="column.logicalName"
                         [(ngModel)]="column.defaultValue" [border]="false"></form-input>
                 </div>
-                <div class="input-group mt-1 pull-right">
-                    <download-button class="ml-1" (download)="downloadData([item], true, $event)">
-                    </download-button>
-                    <dexih-button-edit *ngIf="hubKeys?.indexOf(item.hubKey)>=0" class="ml-1" 
-                        (click)="edit(item)"></dexih-button-edit>
-                    <dexih-button class="ml-1" iconClass="fa fa-code" title="Get embedded version" (click)="embed(item)" text="Embedded"></dexih-button>
-                    </div>
-                
-            </ng-template>
+            </ng-template> -->
 
         </dexih-table>
     </dexih-widget>

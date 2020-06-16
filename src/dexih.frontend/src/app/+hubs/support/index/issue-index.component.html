@@ -7,9 +7,10 @@
 <support-options [isExpanded]="true"></support-options>
 
 
-<dexih-widget-section title="Current Support Issues">
+<dexih-widget-section title="Current Support Issues" [padding]="false">
 		<dexih-table 
 			[enableMultiSelect]="true"
+			[enableStickyToolbar]="true"
 			[columns]="columns"
 			[dataObservable]="tableData"
 			(rowClick)="edit($event)"

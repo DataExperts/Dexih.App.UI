@@ -2,8 +2,13 @@
 	<dexih-widget title="File Formats" iconClass="fa fa-lg fa-fw fa-file-text-o" [showCloseButton]="true"
 		(close)="close()">
 
-		<dexih-table [enableMultiSelect]="true" [columns]="columns" [dataObservable]="tableData"
-			(rowClick)="editFileFormat($event)" [tags]="this.hubCache.hub.dexihTags">
+		<dexih-table 
+		[enableMultiSelect]="true" 
+		[enableStickyToolbar]="true"
+		[columns]="columns" 
+		[dataObservable]="tableData"
+		(rowClick)="editFileFormat($event)" 
+		[tags]="this.hubCache.hub.dexihTags">
 			
 			<ng-template #actions let-items="items">
 				<dexih-button-new *ngIf="hubCache.canWrite" class="mr-1" [routerLink]="['fileFormat-new']"

@@ -1,63 +1,54 @@
 <div *ngIf="parameters">
-    <dexih-button-new *ngIf="showEdit && allowAddRemove && parameters.controls.length === 0" (click)="add()" text="Add Parameter"></dexih-button-new>
-    <span *ngFor="let parameter of parameters.controls; let i = index" class="input-group mb-1">
-        <form [formGroup]="parameter" *ngIf="parameter.controls.isValid.value && (showEdit || parameter.controls.allowUserSelect.value)">
-            <div class="input-group">
-                <form-input *ngIf="showEdit" labelLeft="Name" [border]="false" class="form-control p-0"
-                    formControlName="name">
+    <dexih-button-new *ngIf="showEdit && allowAddRemove && parameters.controls.length === 0" (click)="add()"
+        text="Add Parameter"></dexih-button-new>
+    <div *ngFor="let parameter of parameters.controls; let i = index" class="pb-1">
+        <form [formGroup]="parameter"
+            *ngIf="parameter.controls.isValid.value && (showEdit || parameter.controls.allowUserSelect.value)">
+
+            <div class="d-flex align-items-stretch flex-wrap" *ngIf="showEdit">
+                <form-input labelLeft="Name"  class=" p-0" formControlName="name">
                 </form-input>
-                <div *ngIf="!showEdit" class="form-control">
-                    {{parameter.controls.name.value}}
-                </div>
-                <form-select class="form-control p-0" formControlName="value" [border]="false"
-                    itemKey="key"
-                    itemName="name"
-                    [items]="parameter.controls.runTime?.value?.items" 
-                    [enableTextEntry]="! (parameter.controls.listOfValuesKey.value > 0)"
-                    [textEntryItems]="(parameter.controls.listOfValuesKey.value > 0) ? null : parentParams"
-                    textEntryItemsTitle="Linked Parameters"
-                    (ngModelChange)="change(parameter, $event)"
-                    (textValueChange)="textValueChange(parameter, $event)"
-                    [showRefresh]="parameter.controls.runTime?.value?.showRefresh"
-                    [isRefreshing]="parameter.controls.runTime?.value?.isRefreshing"
-                    (onRefresh)="refreshLOV(parameter)"
-                    [multiSelect]="parameter.controls.rank.value === 1"
-                    >
+                <form-select labelLeft="LOV" class="p-0 flex-grow-1"  formControlName="listOfValuesKey"
+                    [items]="listOfValues" itemKey="key" itemName="name" [allowNullSelect]="true">
                 </form-select>
 
-                <ng-template [ngIf]="showEdit">
-                    <form-select labelLeft="LOV"  class="form-control p-0" [border]="false" formControlName="listOfValuesKey"
-                        [items]="listOfValues" 
-                        itemKey="key"
-                        itemName="name"
-                        [allowNullSelect]="true"
-                    >
-                    </form-select>
+                <form-checkbox [border]="true" formControlName="allowUserSelect">Selectable</form-checkbox>
+                <form-checkbox [border]="true" formControlName="rank" [checkedValue]="1" [unCheckedValue]="0">Array
+                </form-checkbox>
 
-                    <form-checkbox [border]="true" formControlName="allowUserSelect">Selectable</form-checkbox>
-                    <form-checkbox [border]="true" formControlName="rank" [checkedValue]="1" [unCheckedValue]="0">Array</form-checkbox>
+                <div *ngIf="allowAddRemove" class="input-group-append">
 
-                    <div *ngIf="showEdit && allowAddRemove" class="input-group-append">
-        
-                        <div class="input-group-text p-0">
-                            <button type="button" (click)="add(i)" class="btn btn-sm border-0 rounded-0 bg-transparent"
-                                value="Add">
-                                <i class="fa fa-plus-square-o"></i>
-                            </button>
-                        </div>
-                        <div class="input-group-text p-0">
-                            <button type="button" (click)="delete(i)" class="btn btn-sm border-0 rounded-0 bg-transparent"
-                                value="Remove">
-                                <i class="fa fa-minus-square-o"></i>
-                            </button>
-                        </div>
+                    <div class="input-group-text p-0">
+                        <button type="button" (click)="add(i)" class="btn btn-sm border-0 rounded-0 bg-transparent"
+                            value="Add">
+                            <i class="fa fa-plus-square-o"></i>
+                        </button>
                     </div>
-                </ng-template>
+                    <div class="input-group-text p-0">
+                        <button type="button" (click)="delete(i)" class="btn btn-sm border-0 rounded-0 bg-transparent"
+                            value="Remove">
+                            <i class="fa fa-minus-square-o"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
+
+            <form-select class="p-0" formControlName="value" 
+                [labelLeft]="showEdit ? null : parameter.controls.name.value" itemKey="key" itemName="name"
+                [items]="parameter.controls.runTime?.value?.items"
+                [enableTextEntry]="! (parameter.controls.listOfValuesKey.value > 0)"
+                [textEntryItems]="(parameter.controls.listOfValuesKey.value > 0) ? null : parentParams"
+                textEntryItemsTitle="Linked Parameters" (ngModelChange)="change(parameter, $event)"
+                (textValueChange)="textValueChange(parameter, $event)"
+                [showRefresh]="parameter.controls.runTime?.value?.showRefresh"
+                [isRefreshing]="parameter.controls.runTime?.value?.isRefreshing" (onRefresh)="refreshLOV(parameter)"
+                [multiSelect]="parameter.controls.rank.value === 1">
+            </form-select>
         </form>
-    </span>
+    </div>
 
     <div *ngIf="requiresRefresh" class="alert alert-warning mt-2">
-        <a href="javascript:void(0)" class="alert-link" (click)="refreshData()">The parameters have changed.  Click to refresh.</a>
+        <a href="javascript:void(0)" class="alert-link" (click)="refreshData()">The parameters have changed. Click to
+            refresh.</a>
     </div>
 </div>

@@ -1,5 +1,5 @@
 $sidebar-width: 250px;
-$header-height: 50px;
+$header-height: 54px;
 $footer-height: 30px;
 
 .header {
@@ -19,9 +19,10 @@ $footer-height: 30px;
 }
 
 .footer {
-    position: fixed;
+    position: absolute;
     height: $footer-height;
     bottom: 0px;
+    width: 100%;
     left: 0px;
     right: 0px;
     margin: 0px;
@@ -32,8 +33,9 @@ $footer-height: 30px;
     position: absolute;
     margin-top: 0px;
     width: $sidebar-width;
-    margin: 0;
-    padding-bottom: $footer-height;
+    // margin: 0;
+    height: calc(100vh - (84px));
+    // margin-bottom: $footer-height;
 }
 
 .collapsed > .sidebar {
@@ -54,7 +56,7 @@ $footer-height: 30px;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */   
     -webkit-overflow-scrolling: touch; 
-    height: calc(100vh - 48px);
+    height: calc(100vh - (84px));
 }
 
 .collapsed > .main {

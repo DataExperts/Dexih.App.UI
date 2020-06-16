@@ -4,7 +4,7 @@ import { HubCache, EntityStatus } from '../../hub.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, BehaviorSubject, Subscription, combineLatest} from 'rxjs';
 import { AuthService } from '../../../+auth/auth.service';
-import { DexihConnection, DexihTable, eTableType, eStatus, eImportAction, eSharedObjectType } from '../../../shared/shared.models';
+import { DexihConnection, DexihTable, eTableType, eStatus, eImportAction, eSharedObjectType, ConnectionReference } from '../../../shared/shared.models';
 import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
@@ -21,6 +21,7 @@ export class ConnectionImportComponent implements OnInit, OnDestroy {
     hubCache: HubCache;
     connectionKey: number;
     connection: DexihConnection;
+    connectionReference: ConnectionReference;
     names: Array<string>;
     tables: Array<DexihTable>;
 
@@ -62,7 +63,7 @@ export class ConnectionImportComponent implements OnInit, OnDestroy {
                 this.route.params,
                 this.hubService.getHubCacheObservable(),
                 this.hubService.getRemoteAgentObservable()
-            ).subscribe(result => {
+            ).subscribe(async result => {
                 let data = result[0];
                 let params = result[1];
                 this.hubCache = result[2];
@@ -77,6 +78,8 @@ export class ConnectionImportComponent implements OnInit, OnDestroy {
                     if (this.hubCache.isLoaded()) {
                         this.connection = this.hubCache.hub.dexihConnections
                             .find(connection => connection.key === this.connectionKey);
+
+                        this.connectionReference = await this.hubService.GetConnectionReference(this.connection);
 
                         this.showPage = false;
 
@@ -159,6 +162,10 @@ export class ConnectionImportComponent implements OnInit, OnDestroy {
 
                     if (cacheTables) {
                         cacheTable = cacheTables.find(t => t.name === table.name && t.schema === table.schema);
+
+                        if (!cacheTable && this.connectionReference && this.connectionReference.defaultSchema === table.schema) {
+                            cacheTable = cacheTables.find(t => t.name === table.name && !t.schema)
+                        }
                     }
 
                     if (cacheTable) {

@@ -6,7 +6,8 @@
 	>
 			<dexih-table 
 				[enableMultiSelect]="true"
-				[columns]="columns"
+                [enableStickyToolbar]="true"
+                [columns]="columns"
 				[dataObservable]="tableData"
                 (rowClick)="edit($event)"
                 rowStatusHeading="Color"

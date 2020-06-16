@@ -22,7 +22,7 @@ export class AnimateConfig {
    }
    
    export class ApplicationUser {
-    public id: string = 'd996f7c0-9765-47b4-9e8d-f8fc5d0551f7';
+    public id: string = 'fbc7f27c-c5be-4d9c-aab5-b92d63204a64';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -31,7 +31,7 @@ export class AnimateConfig {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = '1c081c3d-a4e9-416c-a127-b8e2a113b469';
+    public securityStamp: string = 'e6260c56-4553-4b72-b533-fdc47ef80479';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -115,6 +115,7 @@ export class AnimateConfig {
     public showDataLabel: boolean = false;
     public singleBarColor: boolean = true;
     public multiGridColumn: string = null;
+    public yAxisLabelRight: string = null;
    }
    
    export class ClientMessage {
@@ -141,6 +142,7 @@ export class AnimateConfig {
     public allowsWindowsAuth: boolean = false;
     public requiresDatabase: boolean = false;
     public requiresLocalStorage: boolean = false;
+    public defaultSchema: string = null;
    }
    
    export class ConnectionReference {
@@ -161,6 +163,7 @@ export class AnimateConfig {
     public allowsWindowsAuth: boolean = false;
     public requiresDatabase: boolean = false;
     public requiresLocalStorage: boolean = false;
+    public defaultSchema: string = null;
    }
    
    export class DatalinkProgress {

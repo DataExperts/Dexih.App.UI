@@ -1,5 +1,5 @@
 <dexih-widget-section title='Columns' [showExpandButton]="true" [padding]="false">
-    <dexih-table [enableMultiSelect]="true" [enableManualSort]="true" (onSortChanged)="columnSortChange($event)"
+    <dexih-table [enableMultiSelect]="true" [enableStickyToolbar]="true" [enableManualSort]="true" (onSortChanged)="columnSortChange($event)"
         sortColumn="position" [columns]="columns" [dataObservable]="columnData" (rowClick)="editColumn($event)">
         <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
             <dexih-button-delete (click)="deleteSelected(items)" title="Delete selected columns" class="mr-1"></dexih-button-delete>
@@ -9,7 +9,7 @@
 
         <ng-template #tableHeader let-items="items">
             <column-edit-bulk *ngIf="formsService.currentForm && showBulkEdit && items.length > 0" [columns]="items"
-                [columnsFormArray]="formsService.currentForm.controls.dexihTableColumns" (updated)="showBulkEdit = false"></column-edit-bulk>
+                [columnsFormArray]="formsService.currentForm.controls.dexihTableColumns" (updated)="showBulkEdit = false" class="mr-1"></column-edit-bulk>
         </ng-template>
 
         <ng-template #actions select="actionsTemplate" let-items="items">
@@ -17,7 +17,7 @@
         </ng-template>
 
         <ng-template #selectedItemAction select="selectedItemAction" let-item="item" class="mr-1">
-            <dexih-button-edit (click)="editColumn(item)" title="Edit selected column"></dexih-button-edit>
+            <dexih-button-edit (click)="editColumn(item)" title="Edit selected column" class="mr-1"></dexih-button-edit>
         </ng-template>
 
     </dexih-table>

@@ -553,8 +553,29 @@ export class HubFormsService implements OnDestroy {
     let subscription = form.controls.listOfValuesKey.valueChanges.subscribe(value => {
         form.controls.runTime.setValue({showRefresh: form.controls.listOfValuesKey.value > 0, isRefreshing: false, items: []});
     });
-
     this._parameterChanges.push(subscription);
+
+    let subscription2 = form.controls.rank.valueChanges.subscribe(rank => {
+      let value = form.controls.value.value;
+        if (rank === 0) {
+          if (value && Array.isArray(value)) {
+            if (value.length === 0) {
+              form.controls.value.setValue(null);
+              form.controls.valueDesc.setValue(value[0]);
+            } else {
+              form.controls.value.setValue(value[0]);
+              form.controls.valueDesc.setValue(value[0]);
+            }
+          }
+        }
+
+        if (rank === 1) {
+          if (value && !Array.isArray(value)) {
+            form.controls.value.setValue(null);
+          }
+        }
+      });
+    this._parameterChanges.push(subscription2);
 
     return form;
   }
@@ -924,6 +945,8 @@ export class HubFormsService implements OnDestroy {
 
   public view(view: DexihView) {
 
+    this.clearFormSubscriptions();
+
     let parameters = view.parameters.filter(c => c.isValid).map(parameter => {
       return this.parameter(parameter);
     });
@@ -948,7 +971,6 @@ export class HubFormsService implements OnDestroy {
     this.property = sharedObjectProperties.find(c => c.type === eSharedObjectType.View);
     this.saveMethod = 'SaveView';
     this.addMissing(view, viewForm, new DexihView());
-    this.clearFormSubscriptions();
     this.watchChanges(eSharedObjectType.View, 'viewKey', 'view', this.view);
     this.startForm(viewForm);
   }
@@ -986,6 +1008,7 @@ export class HubFormsService implements OnDestroy {
   }
 
   public dashboard(dashboard: DexihDashboard) {
+    this.clearFormSubscriptions();
 
     let parameters = dashboard.parameters.filter(c => c.isValid).map(parameter => {
       return this.parameter(parameter);
@@ -1014,7 +1037,6 @@ export class HubFormsService implements OnDestroy {
     this.property = sharedObjectProperties.find(c => c.type === eSharedObjectType.Dashboard);
     this.saveMethod = 'SaveDashboard';
     this.addMissing(dashboard, form, new DexihDashboard());
-    this.clearFormSubscriptions();
     this.watchChanges(eSharedObjectType.Dashboard, 'dashboardKey', 'dashboard', this.dashboard);
     this.startForm(form);
   }
@@ -1155,6 +1177,8 @@ export class HubFormsService implements OnDestroy {
   }
 
   public api(api: DexihApi) {
+    this.clearFormSubscriptions();
+
     let parameters = api.parameters.filter(c => c.isValid).map(parameter => {
       return this.parameter(parameter);
     });
@@ -1178,7 +1202,6 @@ export class HubFormsService implements OnDestroy {
     this.saveMethod = 'SaveApi';
     this.property = sharedObjectProperties.find(c => c.type === eSharedObjectType.Api);
     this.addMissing(api, apiForm, new DexihApi());
-    this.clearFormSubscriptions();
     this.watchChanges(eSharedObjectType.Api, 'apiKey', 'api', this.api);
     this.startForm(apiForm);
   }
@@ -1464,6 +1487,8 @@ export class HubFormsService implements OnDestroy {
   }
 
   public datajob(datajob: DexihDatajob): void {
+    this.clearFormSubscriptions();
+
     const triggers = datajob.dexihTriggers.filter(c => c.isValid).map(trigger => {
       return this.triggerFormGroup(trigger);
     });
@@ -1502,7 +1527,6 @@ export class HubFormsService implements OnDestroy {
     this.saveMethod = 'SaveDatajob';
     this.property = sharedObjectProperties.find(c => c.type === eSharedObjectType.Datajob);
     this.addMissing(datajob, datajobForm, new DexihDatajob());
-    this.clearFormSubscriptions();
     this.watchChanges(eSharedObjectType.Datajob, 'key', 'data job', this.datajob);
     this.startForm(datajobForm);
   }
@@ -1928,6 +1952,8 @@ export class HubFormsService implements OnDestroy {
   datalink(datalink: DexihDatalink): void {
     this.logger.LogC(() => `datalink key:${datalink.key} datalink:${datalink.name}`, eLogLevel.Debug);
 
+    this.clearFormSubscriptions();
+
     let profiles = datalink.dexihDatalinkProfiles.filter(c => c.isValid).map(profile => {
       return this.datalinkProfileFormGroup(profile);
     });
@@ -1969,7 +1995,6 @@ export class HubFormsService implements OnDestroy {
     let templateDatalink = new DexihDatalink();
     templateDatalink.sourceDatalinkTable = new DexihDatalinkTable();
     this.addMissing(datalink, datalinkForm, templateDatalink);
-    this.clearFormSubscriptions();
 
     this.formGroupFunc = this.datalink;
     this.saveMethod = 'SaveDatalink';

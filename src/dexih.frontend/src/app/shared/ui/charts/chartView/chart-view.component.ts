@@ -113,7 +113,9 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     trackChartChange(index: number, data: any) {
-        return data[index].name;
+        if (data) {
+            return data[index].name;
+        }
       }
 
     // onResize() {
@@ -251,7 +253,12 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
 
                     case eInputFormat.ComboSeries:
                         chartItem = this.singleSeries(data);
-                        chartItem['lineChartSeries'] = this.inverseSeries(data);
+                        if (chartItem) {
+                            let yAxisLabel = this.config.yAxisLabel;
+                            chartItem['lineChartSeries'] = this.inverseSeries(data);
+                            this.config.yAxisLabelRight = this.config.yAxisLabel;
+                            this.config.yAxisLabel = yAxisLabel;
+                        }
                         break;
                     case eInputFormat.Xy:
                         if (this.yColumnIndex != null && this.xColumnIndex != null) {
@@ -335,18 +342,19 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                     chartItem.forEach(item => {
                         this.addCustomColor(item.name, !singleColor);
                     });
-                }
 
-                if (chartItem['lineChartSeries']) {
-                    if (singleColor) {
-                        this.addCustomColor(this.columns[this.seriesColumnIndex].title, false);
-                        this.colorIndex++;
+                    if (chartItem['lineChartSeries']) {
+                        if (singleColor) {
+                            this.addCustomColor(this.columns[this.seriesColumnIndex].title, false);
+                            this.colorIndex++;
+                        }
+    
+                        chartItem['lineChartSeries'].forEach(item => {
+                            this.addCustomColor(item.name, true);
+                        });
                     }
-
-                    chartItem['lineChartSeries'].forEach(item => {
-                        this.addCustomColor(item.name, true);
-                    });
                 }
+
 
                 chartItems.push(chartItem);
             }

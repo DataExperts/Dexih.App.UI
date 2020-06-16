@@ -7,6 +7,7 @@
 
 		<dexih-table 
 			[enableMultiSelect]="true"
+			[enableStickyToolbar]="true"
 			[columns]="columns"
 			[dataObservable]="tableData"
 			(rowClick)="edit($event)"
@@ -14,15 +15,15 @@
 				<ng-template #selectedItemAction select="selectedItemAction" let-hub="item">
 					<dexih-button-edit class="mr-1" [routerLink]="['hub-edit', hub.hubKey]" queryParamsHandling preserveFragment class="mr-1"></dexih-button-edit>
 					<dexih-button-open class="mr-1" [routerLink]="['/hub', hub.hubKey]" queryParamsHandling preserveFragment></dexih-button-open>
-					<dexih-button [routerLink]="['/hub', hub.hubKey, 'manage', 'manage-users']" iconClass="fa fa-lock" queryParamsHandling preserveFragment text="Permissions"></dexih-button>
+					<dexih-button [routerLink]="['/hub', hub.hubKey, 'manage', 'manage-users']" iconClass="fa fa-lock" queryParamsHandling preserveFragment text="Permissions" class="mr-1"></dexih-button>
 				</ng-template>
 
 				<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-					<dexih-button-delete (click)="deleteHubs(items)"></dexih-button-delete>
+					<dexih-button-delete (click)="deleteHubs(items)" class="mr-1"></dexih-button-delete>
 				</ng-template>
 
 				<ng-template #actions let-items="items">
-					<dexih-button-new [routerLink]="['hub-new']"></dexih-button-new>
+					<dexih-button-new [routerLink]="['hub-new']" class="mr-1"></dexih-button-new>
 				</ng-template>
 		</dexih-table>
     </dexih-widget>

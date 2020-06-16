@@ -2,6 +2,7 @@
 	<dexih-widget title="Connections" iconClass="fa fa-lg fa-fw fa-database" [showCloseButton]="true" (close)="close()">
 		<dexih-table 
 			[enableMultiSelect]="true" 
+			[enableStickyToolbar]="true"
 			[columns]="columns" 
 			[dataObservable]="tableData" 
 			(rowClick)="editConnection($event)" 			

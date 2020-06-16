@@ -112,10 +112,10 @@ export class SharedDataComponent implements OnInit, OnDestroy {
     embed(item: SharedData) {
         let embed: string;
         if (item.objectType === eDataObjectType.Dashboard) {
-            this.embedLink = 
+            this.embedLink =
             `${window.location.origin}/public/index/previewDashboard/${item.hubKey}/${item.objectType}/${item.objectKey}?embed=true`;
         } else {
-            this.embedLink = 
+            this.embedLink =
             `${window.location.origin}/public/index/preview/${item.hubKey}/${item.objectType}/${item.objectKey}?embed=true`;
         }
 

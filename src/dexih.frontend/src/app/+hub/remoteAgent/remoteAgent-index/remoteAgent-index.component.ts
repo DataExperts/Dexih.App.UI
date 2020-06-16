@@ -23,9 +23,9 @@ export class RemoteAgentIndexComponent implements OnInit, OnDestroy {
     statusFilter: string;
 
     columns = [
+        { name: 'name', title: 'Name', format: '' },
         { name: 'connected', title: 'Connected', format: 'Boolean' },
         { name: 'isAuthorized', title: 'Authorized?', format: 'Boolean' },
-        { name: 'name', title: 'Name', format: '' },
         { name: 'user', title: 'User', format: ''},
         { name: 'dataPrivacyStatus', title: 'Data Privacy', format: 'Enum', enum: eDataPrivacyStatus },
         { name: 'isEncrypted', title: 'Encrypted?', format: 'Boolean' },
@@ -98,7 +98,8 @@ export class RemoteAgentIndexComponent implements OnInit, OnDestroy {
                 remoteAgentKey: a.remoteAgentKey,
                 updateDate: a.updateDate,
                 lastLoginDateTime: remoteAgent ? remoteAgent.lastLoginDateTime : '',
-                lastLoginIpAddress: remoteAgent ? remoteAgent.lastLoginIpAddress : ''
+                lastLoginIpAddress: remoteAgent ? remoteAgent.lastLoginIpAddress : '',
+                remoteAgentId: remoteAgent ? remoteAgent.remoteAgentId : ''
             };
         });
 
@@ -117,6 +118,7 @@ export class RemoteAgentIndexComponent implements OnInit, OnDestroy {
                         isEncrypted: activeAgent.isEncrypted,
                         ipAddress: activeAgent.ipAddress,
                         remoteAgentKey: a.remoteAgentKey,
+                        remoteAgentId: a.remoteAgentId,
                         updateDate: '',
                         });
                 }
