@@ -1108,6 +1108,8 @@ namespace dexih.api.Services.Remote
 
                 var hub = await database.GetHub(hubKey, cancellationToken);
 
+                var alertEmails = await database.GetAlertEmails(hubKey, cancellationToken);
+                
                 // populate the table/datalink cache to be send to the remote agent.
                 var cache = new CacheManager(hubKey, hub.EncryptionKey);
                 cache.AddDatalinks(datalinkKeys, hub);
@@ -1121,7 +1123,8 @@ namespace dexih.api.Services.Remote
 	                resetIncremental,
 	                resetIncrementalValue,
 	                inputColumns,
-	                inputParameters
+	                inputParameters,
+	                alertEmails
                 };
                 
                 return await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.RunDatalinks), value, database, cancellationToken);
@@ -1141,7 +1144,8 @@ namespace dexih.api.Services.Remote
 			    var timer = Stopwatch.StartNew();
 	            
 			    var hub = await database.GetHub(hubKey, cancellationToken);
-
+			    var alertEmails = await database.GetAlertEmails(hubKey, cancellationToken);
+			    
 			    // populate the table/datalink cache to be send to the remote agent.
 			    var cache = new CacheManager(hubKey, hub.EncryptionKey);
 			    cache.AddDatalinkTests(datalinkTestKeys, hub);
@@ -1154,6 +1158,7 @@ namespace dexih.api.Services.Remote
 				    cache,
 				    datalinkTestKeys,
 				    connectionId,
+				    alertEmails
 			    };
 
 			    return await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.RunDatalinkTests), value,  database, cancellationToken);
@@ -1173,7 +1178,8 @@ namespace dexih.api.Services.Remote
 			    var timer = Stopwatch.StartNew();
 	            
 			    var hub = await database.GetHub(hubKey, cancellationToken);
-
+			    var alertEmails = await database.GetAlertEmails(hubKey, cancellationToken);
+			    
 			    // populate the table/datalink cache to be send to the remote agent.
 			    var cache = new CacheManager(hubKey, hub.EncryptionKey);
 			    cache.AddDatalinkTests(datalinkTestKeys, hub);
@@ -1186,6 +1192,7 @@ namespace dexih.api.Services.Remote
 				    cache,
 				    datalinkTestKeys,
 				    connectionId,
+				    alertEmails
 			    };
 
 			    return await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.RunDatalinkTestSnapshots), value, database, cancellationToken);
@@ -1203,7 +1210,8 @@ namespace dexih.api.Services.Remote
                 _remoteLogger.LogTrace(LoggingEvents.RunDatajobs, "RunDatajobs - Id: {Id}, HubKey: {hubKey}, DatalinkKeys: {datalinkKeys}.", id, hubKey, string.Join(",", datajobKeys));
 
                 var hub = await database.GetHub(hubKey, cancellationToken);
-
+                var alertEmails = await database.GetAlertEmails(hubKey, cancellationToken);
+                
                 // populate the table/datalink cache to be send to the remote agent.
                 var cache = new CacheManager(hubKey, hub.EncryptionKey);
                 cache.AddDatajobs(datajobKeys, hub);
@@ -1216,7 +1224,8 @@ namespace dexih.api.Services.Remote
 	                truncateTarget,
 	                resetIncremental,
 	                resetIncrementalValue,
-	                inputParameters
+	                inputParameters,
+	                alertEmails
                 };
 
                 return await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.RunDatajobs), value, database, cancellationToken);
@@ -1274,7 +1283,8 @@ namespace dexih.api.Services.Remote
                 _remoteLogger.LogTrace(LoggingEvents.ActivateDatajobs, "ActivateDatajobs - Id: {Id}, HubKey: {hubKey}, DatalinkKeys: {datalinkKeys}.", id, hubKey, string.Join(",", datajobKeys));
 
                 var hub = await database.GetHub(hubKey, cancellationToken);
-
+                var alertEmails = await database.GetAlertEmails(hubKey, cancellationToken);
+                
                 // populate the table/datalink cache to be send to the remote agent.
                 var cache = new CacheManager(hubKey, hub.EncryptionKey);
                 cache.AddDatajobs(datajobKeys, hub);
@@ -1284,7 +1294,8 @@ namespace dexih.api.Services.Remote
 	                cache,
 	                connectionId,
 	                datajobKeys,
-	                inputParameters
+	                inputParameters,
+	                alertEmails
                 };
                 return await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.ActivateDatajobs), value, database, cancellationToken);
             }

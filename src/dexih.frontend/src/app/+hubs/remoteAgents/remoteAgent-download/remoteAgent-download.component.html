@@ -191,7 +191,68 @@
 					</form-tags-dropdown>
 				</section>
 
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-input label="Alerts Smtp Server" formControlName="smtpServer"
+							placeholder="Alerts Smtp Server"
+							note='Enter the Smtp Server name to use to send alert emails.'>
+						</form-input>
+					</section>
+					<section class="form-group col-md-6">
+						<form-input type="number" label="Smtp Port Number" formControlName="smtpPort"
+							note='The port number to for tme Smtp Server'>
+						</form-input>
+					</section>
+				</div>
 
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-input label="Alerts Smtp UserName" formControlName="smtpUserName"
+							placeholder="Alerts Smtp Server"
+							note='Enter the Smtp user name to use to send alert emails.'>
+						</form-input>
+					</section>
+					<section class="form-group col-md-6">
+						<form-input label="Smtp Password" formControlName="smtpPassword"
+							note='The Smtp password'>
+						</form-input>
+					</section>
+				</div>
+
+
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-input label="Alerts From Email"
+							formControlName="fromEmail" note='Email address listed "From" when sending alerts.'>
+						</form-input>
+					</section>
+					<section class="form-group col-md-6">
+						<form-checkbox
+							label="Smpt Server Requires SSL encryption." formControlName="enableSsl">
+						</form-checkbox>
+					</section>
+				</div>
+
+				<div class="form-row">
+					<section class="form-group col-md-6">
+						<form-checkbox label="Send alert on startup and shutdown."
+							formControlName="alertOnShutdown">
+						</form-checkbox>
+					</section>
+					<section class="form-group col-md-6">
+						<form-checkbox
+							label="Send alert on critical remote agent errors." formControlName="alertOnCritical">
+						</form-checkbox>
+					</section>
+				</div>
+
+				<section>
+				<form-tags label="Email addresses to send the bcc alerts to." formControlName="adminEmails"
+					iconClass="fa fa-email" 
+					note="A set of emails that any alerts will be bcc'd to.">
+				</form-tags>
+			</section>
+				
 			</fieldset>
 		</form>
 	</dexih-widget>

@@ -19,7 +19,8 @@ export class ManageUsersIndexComponent implements OnInit, OnDestroy {
         { name: 'userName', title: 'User Name', format: ''},
         { name: 'firstName', title: 'First Name', format: ''},
         { name: 'lastName', title: 'Last Name', format: ''},
-        { name: 'permission', title: 'Permission', enum: ePermission, format: 'Enum'}
+        { name: 'permission', title: 'Permission', enum: ePermission, format: 'Enum'},
+        { name: 'receiveAlerts', title: 'Receives Alert Emails', format: 'Boolean'}
     ];
 
     private _tableData = new BehaviorSubject<Array<any>>(null);
@@ -62,7 +63,16 @@ export class ManageUsersIndexComponent implements OnInit, OnDestroy {
                         this.refreshUsers();
                     });
                 }
-            })
+            });
+    }
+
+    setUserAlert(alertEmail: boolean, users: Array<UserAuthorization>) {
+        const userIds = users.map(c => c.id);
+
+        this.hubService.setUserAlerts(userIds, alertEmail, false).then(result => {
+            this.dexihMessage.addSuccessMessage('The specified user(s) alert email status have been updated.');
+            this.refreshUsers();
+        });
     }
 
     deleteUsers(users: Array<UserAuthorization>) {

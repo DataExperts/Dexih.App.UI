@@ -22,6 +22,14 @@
             </section>
 
             <section>
+                <form-select label="Alerting Level" formControlName="alertLevel" [items]="eAlertLevelItems"
+                    itemKey="key" itemName="description" iconClass="fa fa-bell"
+                    [errors]="formService.formErrors.alertLevel" note="When alerts should be sent."
+                    [enableFilter]="false">
+                </form-select>
+            </section>
+
+            <section>
                 <form-select label="Audit Connection" formControlName="auditConnectionKey" [items]="managedConnections"
                     itemKey="key" itemName="name" iconClass="fa fa-database"
                     [errors]="formService.formErrors.auditConnectionKey"

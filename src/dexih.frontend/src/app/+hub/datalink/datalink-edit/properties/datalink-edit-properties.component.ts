@@ -4,7 +4,7 @@ import { HubService } from '../../../hub.service';
 import { DatalinkEditService } from '../datalink-edit.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { FormGroup } from '@angular/forms';
-import { eConnectionPurpose, eDatalinkTypeItems } from '../../../../shared/shared.models';
+import { eConnectionPurpose, eDatalinkTypeItems, eAlertLevelItems, eAlertLevel } from '../../../../shared/shared.models';
 
 @Component({
     selector: 'dexih-datalink-edit-properties-form',
@@ -20,6 +20,9 @@ export class DatalinkEditPropertiesComponent implements OnInit, OnDestroy {
 
     public eConnectionPurpose = eConnectionPurpose;
     eDatalinkTypeItems = eDatalinkTypeItems.filter(c => c.key > 0);
+
+    public eAlertLevelItems = eAlertLevelItems;
+    public eAlertLevel = eAlertLevel;
 
     constructor(
         private hubService: HubService,

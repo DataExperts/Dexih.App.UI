@@ -1,13 +1,12 @@
 <li class="nav-item" [ngClass]="{'active open' : expanded}">
-    <a class="nav-link d-flex justify-content-between" [title]="title" (click)="toggle()">
-        <span class="menu-item-parent {{textClass}}" >
+    <a class="nav-link" [title]="title" (click)="toggle()">
+        <span class="{{textClass}}" >
             <ng-template [ngTemplateOutlet]="itemTemplate">
             </ng-template>
-        
             <i [class]="iconClass"></i>
-            {{name}}
         </span>
-        <b class="ml_auto">
+        <span class="menu-item-parent">{{name}}</span>
+        <b class="float-right">
             <em *ngIf="expanded" class='fa fa-minus-square-o'></em>
             <em *ngIf="!expanded" class='fa fa-plus-square-o'></em>
         </b>

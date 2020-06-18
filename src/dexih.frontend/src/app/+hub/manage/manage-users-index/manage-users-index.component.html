@@ -35,6 +35,10 @@
 				<dexih-button-dropdown buttonClass="btn-primary" iconClass="fa fa-lock" text="Set Permission">
 					<a *ngFor="let permission of ePermissionItems" class="dropdown-item" (click)="setPermission(permission.key, items)">{{permission.name}}</a>
 				</dexih-button-dropdown>
+				<dexih-button-dropdown buttonClass="btn-primary" iconClass="fa fa-bell" text="Set User Alert" class="ml-1">
+					<a class="dropdown-item" (click)="setUserAlert(true, items)">Receive alert emails</a>
+					<a class="dropdown-item" (click)="setUserAlert(false, items)">Do not receive alert emails.</a>
+				</dexih-button-dropdown>
 			</ng-template>
 		</dexih-table>
 

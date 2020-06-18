@@ -6,7 +6,7 @@ import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
 import { FormGroup, FormArray } from '@angular/forms';
 import { HubCache } from '../../../hub.models';
 import { DexihConnection, eFailAction, DexihDatalinkStep, DexihDatalinkDependency, DexihDatalinkStepColumn, DexihTrigger,
-  DexihDatalinkTable, eSourceType, eSharedObjectType } from '../../../../shared/shared.models';
+  DexihDatalinkTable, eSourceType, eSharedObjectType, eAlertLevelItems, eAlertLevel } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -54,6 +54,9 @@ export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
 
   private _stepTableData = new BehaviorSubject<Array<any>>(null);
   stepTableData: Observable<Array<any>> = this._stepTableData.asObservable();
+
+  eAlertLevelItems = eAlertLevelItems;
+  eAlertLevel = eAlertLevel;
 
   constructor(private hubService: HubService,
     public formService: HubFormsService,

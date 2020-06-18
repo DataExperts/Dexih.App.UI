@@ -970,6 +970,12 @@ export class HubService implements OnInit, OnDestroy {
         }, 'Setting user permissions...');
     }
 
+    setUserAlerts(userIds: string[], alertEmails, sendInvites: boolean): Promise<any> {
+        return this.hubPost('/api/Hub/SetUsersAlerts', {
+            userIds: userIds, alertEmails: alertEmails, sendInvites: sendInvites
+        }, 'Setting user permissions...');
+    }
+
     removeUsers(emails: string[]): Promise<any> {
         return this.hubPost('/api/Hub/RemoveUsers', {emails: emails }, 'Removing hub users...');
     }

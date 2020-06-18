@@ -227,7 +227,7 @@ namespace dexih.api.Controllers
 
 			var users = userIds.Where(c => c.IsEnabled && c.IsInvited && c.IsRegistered).ToArray();
 			
-			_emailSender.SendEmailTemplate("hubAccessRemove.html", "Hub Access Removed", parameters, users);
+			_emailSender.SendEmailTemplate("hubAccess.html", "Hub Access Updated", parameters, users);
 
 			
 			// var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates", "hubAccess.html");
@@ -249,6 +249,16 @@ namespace dexih.api.Controllers
 			// }
 		}
 
+
+		[HttpPost("[action]")]
+		[ValidateHub(EPermission.Owner)]
+		public async Task SetUsersAlerts([FromBody] UserAlerts userAlerts, CancellationToken cancellationToken)
+		{
+			var database = _operations.RepositoryManager;
+			await database.HubSetUserAlerts(userAlerts.HubKey, userAlerts.UserIds,
+				userAlerts.AlertEmails, cancellationToken);
+		}
+		
 		private async Task SendInvites(IEnumerable<ApplicationUser> users, CancellationToken cancellationToken)
 		{
 			var url = Request.BaseUrl();

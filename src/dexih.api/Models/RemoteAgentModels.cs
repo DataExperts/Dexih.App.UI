@@ -124,6 +124,34 @@ namespace dexih.api.Models
 
         [DataMember(Order = 29)]
         public bool Mongo { get; set; } = false;
+        
+        [DataMember(Order = 30)]
+        public string SmtpServer { get; set; }
+
+        [DataMember(Order = 31)]
+        public string SmtpUserName { get; set; }
+
+        [DataMember(Order = 32)]
+        public string SmtpPassword { get; set; }
+
+        [DataMember(Order = 33)] 
+        public int SmtpPort { get; set; } = 25;
+
+        [DataMember(Order = 34)] 
+        public bool EnableSsl { get; set; } = true;
+
+        [DataMember(Order = 35)]
+        public string FromEmail { get; set; }
+
+        [DataMember(Order = 36)] 
+        public string[] AdminEmails { get; set; }
+
+        [DataMember(Order = 37)] 
+        public bool AlertOnShutdown { get; set; } = false;
+        
+        [DataMember(Order = 38)] 
+        public bool AlertOnCritical { get; set; } = false;
+        
     }
 
     public class RemoteAgentAuthorizationToken

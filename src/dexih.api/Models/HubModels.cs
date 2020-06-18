@@ -24,6 +24,14 @@ namespace dexih.api.Models
         public bool SendInvites { get; set; }
     }
 
+    public class UserAlerts
+    {
+        public long HubKey { get; set; }
+        public bool AlertEmails { get; set; }
+        public string[] UserIds { get; set; }
+        public bool SendInvites { get; set; }
+    }
+
     public class HubModelBase
     {
         public long HubKey { get; set; }

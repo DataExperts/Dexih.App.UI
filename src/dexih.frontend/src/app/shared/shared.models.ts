@@ -22,7 +22,7 @@ export class AnimateConfig {
    }
    
    export class ApplicationUser {
-    public id: string = 'fbc7f27c-c5be-4d9c-aab5-b92d63204a64';
+    public id: string = '8ad2d798-fc4f-47a2-9697-2b57a5db735c';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -31,7 +31,7 @@ export class AnimateConfig {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = 'e6260c56-4553-4b72-b533-fdc47ef80479';
+    public securityStamp: string = '8ec21666-2763-4827-8370-e02758434d62';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -441,6 +441,7 @@ export class AnimateConfig {
     public dexihDatalinkSteps: DexihDatalinkStep[] = [];
     public dexihTriggers: DexihTrigger[] = [];
     public parameters: DexihDatajobParameter[] = [];
+    public alertLevel: eAlertLevel = eAlertLevel.None;
     public name: string = null;
     public description: string = null;
     public key: number = 0;
@@ -486,6 +487,7 @@ export class AnimateConfig {
     public dexihDatalinkTargets: DexihDatalinkTarget[] = [];
     public parameters: DexihDatalinkParameter[] = [];
     public sourceDatalinkTable: DexihDatalinkTable = null;
+    public alertLevel: eAlertLevel = eAlertLevel.None;
     public name: string = null;
     public description: string = null;
     public key: number = 0;
@@ -934,6 +936,7 @@ export class AnimateConfig {
     public hubKey: number = 0;
     public userId: string = null;
     public permission: ePermission = ePermission.None;
+    public receiveAlerts: boolean = false;
     public createDate: Date = null;
     public updateDate: Date = null;
     public isValid: boolean = true;
@@ -1623,6 +1626,15 @@ export class AnimateConfig {
     public oracle: boolean = false;
     public dB2: boolean = false;
     public mongo: boolean = false;
+    public smtpServer: string = null;
+    public smtpUserName: string = null;
+    public smtpPassword: string = null;
+    public smtpPort: number = 25;
+    public enableSsl: boolean = true;
+    public fromEmail: string = null;
+    public adminEmails: string[] = [];
+    public alertOnShutdown: boolean = false;
+    public alertOnCritical: boolean = false;
    }
    
    export class RemoteAgentStatus {
@@ -1668,6 +1680,7 @@ export class AnimateConfig {
     public permissions: PermissionsSection = new PermissionsSection();
     public namingStandards: string[] = [];
     public plugins: PluginsSection = new PluginsSection();
+    public alerts: any = null;
    }
    
    export class RenewSslCertificateModel {
@@ -1975,6 +1988,20 @@ export class AnimateConfig {
     {key: eAggregate.Count, name: 'Count'},
     {key: eAggregate.First, name: 'First'},
     {key: eAggregate.Last, name: 'Last'},
+   ]
+   
+   export enum eAlertLevel {
+    None = 0,
+    Critical = 1,
+    Errors = 2,
+    All = 3,
+   }
+   
+   export const eAlertLevelItems = [
+    {key: eAlertLevel.None, name: 'None', description: 'No alerting.'},
+    {key: eAlertLevel.Critical, name: 'Critical', description: 'Alert on critical failures only.'},
+    {key: eAlertLevel.Errors, name: 'Errors', description: 'Alert on any errors.'},
+    {key: eAlertLevel.All, name: 'All', description: 'Alert on start/stop and errors'},
    ]
    
    export enum eAndOr {

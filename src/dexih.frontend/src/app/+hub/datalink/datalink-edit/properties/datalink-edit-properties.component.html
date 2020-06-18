@@ -19,6 +19,14 @@
             </section>
 
             <section>
+                <form-select label="Alerting Level" formControlName="alertLevel" [items]="eAlertLevelItems"
+                    itemKey="key" itemName="description" iconClass="fa fa-bell"
+                    [errors]="editDatalinkService.hubFormsService.formErrors.alertLevel" note="When alerts should be sent."
+                    [enableFilter]="false">
+                </form-select>
+            </section>
+            
+            <section>
                 <form-checkbox label="Datalink is shared in the catalog to users with read access." formControlName="isShared">
                 </form-checkbox>
             </section>

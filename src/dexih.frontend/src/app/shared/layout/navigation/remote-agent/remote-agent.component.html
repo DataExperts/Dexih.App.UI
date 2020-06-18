@@ -1,8 +1,8 @@
 <menu-parent [name]="selectedRemoteAgent ? selectedRemoteAgent.name : 'No Active Agent'">
     <ng-template #item>
-        <encryption-status-icon *ngIf="selectedRemoteAgent" class="ml-1" [isEncrypted]="selectedRemoteAgent?.isEncrypted"></encryption-status-icon>
+        <encryption-status-icon *ngIf="selectedRemoteAgent" [isEncrypted]="selectedRemoteAgent?.isEncrypted"></encryption-status-icon>
         <span *ngIf='!selectedRemoteAgent' class="text-danger">
-            <i class="fa fa-lg fa-exclamation-circle" title="No remote agent is available for this hub."></i>
+            <i class="fa fa-fw fa-lg fa-exclamation-circle" title="No remote agent is available for this hub."></i>
         </span>
     </ng-template>
     <ng-template [ngIf]="activeHubAgents">

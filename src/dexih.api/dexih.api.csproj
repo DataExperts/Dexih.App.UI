@@ -56,7 +56,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.5" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.5" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
-    <PackageReference Include="Microsoft.Azure.SignalR" Version="1.4.3" />
+    <PackageReference Include="Microsoft.Azure.SignalR" Version="1.5.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.AzureAppServices" Version="3.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.5">
       <PrivateAssets>all</PrivateAssets>
