@@ -3,17 +3,20 @@
         <img class="mr-3" [src]="logoSmallUrl" alt="" width="48" height="48">
         <div class="lh-100">
             <h3 class="mb-0 text-white lh-100">{{hubCache.hub.name}}</h3>
+            <h5 *ngIf="hubCache.hub.description" class="mb-0 text-white lh-100">
+                <markdown [data]="hubCache.hub.description" (click)="authService.getRoute(event)"></markdown>
+            </h5>
         </div>
     </div>
 
     <div class="alert alert-warning" *ngIf="noManagedConnection && hubCache.canWrite">
-        Warning: <b>No Managed connection!</b> A managed connection points to a database used to store auditing data and
+        Warning: <b>No Managed connection!</b> A managed connection for auditing data and
         staging tables. To run any datalink you must
         have a least one managed connection. Note, if you do not have access to a database use the Sqlite connection to
         create
         a local database file.
         <hr>
-        <dexih-button-new buttonClass="btn btn-sm btn-primary text-white" [routerLink]="['connection-new', 'Managed']"
+        <dexih-button-new buttonClass="btn btn-primary text-white" [routerLink]="['connection-new', '2']"
             text="New Managed Connection"></dexih-button-new>
     </div>
 

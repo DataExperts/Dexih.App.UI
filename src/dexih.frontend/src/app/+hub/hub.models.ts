@@ -920,19 +920,21 @@ export class HubCache {
             if (!table) {
                 table = this.getTable(tableKey);
 
-                hub.dexihTables.push(table);
+                if (table) {
+                    hub.dexihTables.push(table);
 
-                this.cacheAddConnection(table.connectionKey, hub);
+                    this.cacheAddConnection(table.connectionKey, hub);
 
-                if (table.fileFormatKey) {
-                    this.cacheAddFileFormat(table.fileFormatKey, hub);
-                }
-
-                table.dexihTableColumns.forEach(c => {
-                    if (c.columnValidationKey) {
-                        this.cacheAddColumnValidation(c.columnValidationKey, hub);
+                    if (table.fileFormatKey) {
+                        this.cacheAddFileFormat(table.fileFormatKey, hub);
                     }
-                });
+
+                    table.dexihTableColumns.forEach(c => {
+                        if (c.columnValidationKey) {
+                            this.cacheAddColumnValidation(c.columnValidationKey, hub);
+                        }
+                    });
+                }
             }
 
             return table;

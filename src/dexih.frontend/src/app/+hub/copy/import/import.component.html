@@ -47,7 +47,7 @@
 
         <dexih-table [enableMultiSelect]="true" [columns]="columns" [dataObservable]="tableData">
             <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-                <dexih-button iconClass="fa fa-upload" buttonClass="btn-primary" (click)="importSelected(items)" text="Import Selected"></dexih-button>
+                <dexih-button iconClass="fa fa-upload" buttonClass="btn-primary" (click)="importSelected(items)" text="Import Selected" class="ml-1"></dexih-button>
             </ng-template>
             
             <ng-template #actions let-items="items">

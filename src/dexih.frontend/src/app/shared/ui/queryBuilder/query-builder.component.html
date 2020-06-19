@@ -48,13 +48,13 @@
             </form-select>
 
             <form-select [(ngModel)]="filter.column1" (ngModelChange)="onChanged()" [border]="true" class="flex-fill flex-form  pl-1" [items]="columns" itemKey="key" itemName="logicalName" [enableKeySelect]="false"
-                [(textValue)]="filter.value1" [enableTextEntry]="true" [enableTextEntryMatch]="false" textEntryNote="Enter a static value or select a column.">
+                [(textValue)]="filter.value1" [enableTextEntry]="true"  [setTextEntryToValue]="false" [enableTextEntryMatch]="false" textEntryNote="Enter a static value or select a column.">
             </form-select>
 
             <form-select [(ngModel)]="filter.operator" (ngModelChange)="onChanged()" [items]="compare" itemKey="key" itemName="name" [border]="true" class="flex-fill  pl-1">
             </form-select>
 
-            <form-select *ngIf="filter.operator !== eCompare.IsIn && filter.operator !== eCompare.IsNotIn" [(ngModel)]="filter.column2" (ngModelChange)="onChanged()" [border]="true" class="flex-fill flex-form  pl-1" [items]="columns" itemKey="key" itemName="logicalName" [enableKeySelect]="false"
+            <form-select *ngIf="filter.operator !== eCompare.IsIn && filter.operator !== eCompare.IsNotIn" [(ngModel)]="filter.column2" [setTextEntryToValue]="false" (ngModelChange)="onChanged()" [border]="true" class="flex-fill flex-form  pl-1" [items]="columns" itemKey="key" itemName="logicalName" [enableKeySelect]="false"
                 [(textValue)]="filter.value2" [enableTextEntry]="true" [enableTextEntryMatch]="false" textEntryNote="Enter a static value or select a column."
                 [textEntryItems]="variables" textEntryItemsTitle="Variables">
             </form-select>

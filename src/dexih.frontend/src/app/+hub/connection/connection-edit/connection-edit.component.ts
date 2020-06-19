@@ -356,6 +356,10 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
     });
   }
 
+  public getRoute(event) {
+    this.authService.getRoute(event);
+  }
+
   // @HostListener allows is to guard against browser refresh, close, etc.
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {

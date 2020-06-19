@@ -60,75 +60,26 @@
                 </section>
 
 				<span *ngIf="connectionReference">
-
-				<span *ngIf="connectionReference.allowsConnectionString == true">
-					<section >
-						<form-checkbox label="Use a connection string" formControlName="useConnectionString" >
-						</form-checkbox>
-					</section>
-
-					<section *ngIf="formsService.currentForm.controls.useConnectionString.value == true">
-						<form-input *ngIf="!formsService.currentForm.controls.useConnectionStringVariable.value"
-							label="Connection String" (keydown)="connectionStringChanged()" formControlName="connectionStringDisplay" placeholder="Enter a the connection string" iconClass="fa fa-database" [errors]="formsService.formErrors.connectionStringDisplay">
-							<span *ngIf="!formsService.formErrors.connectionStringRaw"> (<a href="javascript:void(0)" *ngIf="revealingConnectionString == false" (click)="revealConnectionString()"> <i class="fa fa-refresh"></i> Reveal </a>
-							<span *ngIf="revealingConnectionString == true" > <i class="fa fa-spin fa-refresh"></i> Revealing... please wait </span>)</span>
-						</form-input>
-
-						<form-select *ngIf="formsService.currentForm.controls.useConnectionStringVariable.value"
-							label="Connection String" 
-							formControlName="connectionString" 
-							[items]="variables" 
-							iconClass="fa fa-at" 
-							[sortItems]="true" 
-							[enableTextEntry]="true"
-							textEntryNote="Enter the variable name surrounded by {}">
-						</form-select>
-
-						<form-checkbox label="Use a variable for connection string" formControlName="useConnectionStringVariable" (click)="clearConnectionString()" >
-						</form-checkbox>
-				</section>
-				</span>
-
-				<span *ngIf="formsService.currentForm.controls.useConnectionString.value == false">
 					<section>
-						<form-select 
-							[enableTextEntry]="true" 
-							[label]="connectionReference.serverDescription" 
-							formControlName="server" 
-							placeholder="Enter the details." 
-							iconClass="fa fa-server" 
-							[errors]="formsService.formErrors.server"
-							[items]="variables" 
-							[enableFilter]="true"
-							[note]="connectionReference.serverHelp"
-						></form-select> 
+						<markdown [data]="connectionReference.description" (click)="getRoute($event)"></markdown>
 					</section>
 
-					<section *ngIf="connectionReference.allowsWindowsAuth == true">
-						<form-checkbox label="Use windows authentication" formControlName="useWindowsAuth">
-						</form-checkbox>
-					</section>
-
-					<div *ngIf="connectionReference.allowsUserPassword && (formsService.currentForm.controls.useWindowsAuth.value == false || connectionReference.allowsWindowsAuth == false)" class="form-row">
-						<section class="form-group col-md-6">
-							<form-select 
-								[enableTextEntry]="true" 
-								label="User Name" 
-								formControlName="username" 
-								placeholder="Enter user name" 
-								iconClass="fa fa-user" 
-								[errors]="formsService.formErrors.username"
-								[items]="variables" 
-								[enableFilter]="true"
-							></form-select> 
+					<span *ngIf="connectionReference.allowsConnectionString == true">
+						<section >
+							<form-checkbox label="Use a connection string" formControlName="useConnectionString" >
+							</form-checkbox>
 						</section>
-						<section class="form-group col-md-6">
-							<form-input *ngIf="formsService.currentForm.controls.usePasswordVariable.value == false" label="Password" (keydown)="passwordChanged()" formControlName="passwordDisplay" type="password" placeholder="Enter a password"  iconClass="fa fa-lock" [errors]="formsService.formErrors.password">
+
+						<section *ngIf="formsService.currentForm.controls.useConnectionString.value == true">
+							<form-input *ngIf="!formsService.currentForm.controls.useConnectionStringVariable.value"
+								label="Connection String" (keydown)="connectionStringChanged()" formControlName="connectionStringDisplay" placeholder="Enter a the connection string" iconClass="fa fa-database" [errors]="formsService.formErrors.connectionStringDisplay">
+								<span *ngIf="!formsService.formErrors.connectionStringRaw"> (<a href="javascript:void(0)" *ngIf="revealingConnectionString == false" (click)="revealConnectionString()"> <i class="fa fa-refresh"></i> Reveal </a>
+								<span *ngIf="revealingConnectionString == true" > <i class="fa fa-spin fa-refresh"></i> Revealing... please wait </span>)</span>
 							</form-input>
 
-							<form-select *ngIf="formsService.currentForm.controls.usePasswordVariable.value"
-								label="Password" 
-								formControlName="password" 
+							<form-select *ngIf="formsService.currentForm.controls.useConnectionStringVariable.value"
+								label="Connection String" 
+								formControlName="connectionString" 
 								[items]="variables" 
 								iconClass="fa fa-at" 
 								[sortItems]="true" 
@@ -136,47 +87,121 @@
 								textEntryNote="Enter the variable name surrounded by {}">
 							</form-select>
 
-							<form-checkbox label="Use a variable for password" formControlName="usePasswordVariable" (click)="clearPassword()" >
+							<form-checkbox label="Use a variable for connection string" formControlName="useConnectionStringVariable" (click)="clearConnectionString()" >
 							</form-checkbox>
+					</section>
+					</span>
+
+					<span *ngIf="formsService.currentForm.controls.useConnectionString.value == false">
+						<section>
+							<form-select 
+								[enableTextEntry]="true" 
+								[label]="connectionReference.serverDescription" 
+								formControlName="server" 
+								placeholder="Enter the details." 
+								iconClass="fa fa-server" 
+								[errors]="formsService.formErrors.server"
+								[items]="variables" 
+								[enableFilter]="true"
+								[note]="connectionReference.serverHelp"
+							></form-select> 
+						</section>
+
+						<section *ngIf="connectionReference.allowsWindowsAuth == true">
+							<form-checkbox label="Use windows authentication" formControlName="useWindowsAuth">
+							</form-checkbox>
+						</section>
+
+						<div *ngIf="connectionReference.allowsUserPassword && (formsService.currentForm.controls.useWindowsAuth.value == false || connectionReference.allowsWindowsAuth == false)" class="form-row">
+							<section class="form-group col-md-6">
+								<form-select 
+									[enableTextEntry]="true" 
+									label="User Name" 
+									formControlName="username" 
+									placeholder="Enter user name" 
+									iconClass="fa fa-user" 
+									[errors]="formsService.formErrors.username"
+									[items]="variables" 
+									[enableFilter]="true"
+								></form-select> 
+							</section>
+							<section class="form-group col-md-6">
+								<form-input *ngIf="formsService.currentForm.controls.usePasswordVariable.value == false" label="Password" (keydown)="passwordChanged()" formControlName="passwordDisplay" type="password" placeholder="Enter a password"  iconClass="fa fa-lock" [errors]="formsService.formErrors.password">
+								</form-input>
+
+								<form-select *ngIf="formsService.currentForm.controls.usePasswordVariable.value"
+									label="Password" 
+									formControlName="password" 
+									[items]="variables" 
+									iconClass="fa fa-at" 
+									[sortItems]="true" 
+									[enableTextEntry]="true"
+									>
+								</form-select>
+
+								<form-checkbox label="Use a variable for password" formControlName="usePasswordVariable" (click)="clearPassword()" >
+								</form-checkbox>
+							</section>
+						</div>
+
+						<div *ngIf="connectionReference.allowsToken && (formsService.currentForm.controls.useWindowsAuth.value == false || connectionReference.allowsWindowsAuth == false)" class="form-row">
+							<section class="form-group col-md-6">
+								<form-input *ngIf="formsService.currentForm.controls.usePasswordVariable.value == false" label="Secure Token" (keydown)="passwordChanged()" formControlName="passwordDisplay" type="password" placeholder="Enter secure token"  iconClass="fa fa-lock" [errors]="formsService.formErrors.password">
+								</form-input>
+
+								<form-select *ngIf="formsService.currentForm.controls.usePasswordVariable.value"
+									label="Secure Token" 
+									formControlName="password" 
+									[items]="variables" 
+									iconClass="fa fa-at" 
+									[sortItems]="true" 
+									[enableTextEntry]="true"
+									>
+								</form-select>
+
+								<form-checkbox label="Use a variable for token" formControlName="usePasswordVariable" (click)="clearPassword()" >
+								</form-checkbox>
+							</section>
+						</div>
+
+						<section *ngIf="connectionReference.requiresDatabase" ng-disabled="refreshingConnection || creatingDatabase" >
+							<form-select 
+								[label]="connectionReference.databaseDescription" 
+								formControlName="defaultDatabase" 
+								[items]="databases" 
+								[defaultItem]="formsService.currentForm.value.defaultDatabase" 
+								iconClass="fa fa-database" 
+								[sortItems]="true" 
+								[enableTextEntry]="true"
+								textEntryNote="Enter the database name"
+								(textValueChange)="newDatabaseName($event)"
+							>
+									(<a href="javascript:void(0)" *ngIf="refreshingConnection == false" (click)="refreshConnection()"> <i class="fa fa-refresh"></i> Refresh </a>
+							<span *ngIf="refreshingConnection == true" > <i class="fa fa-spin fa-refresh"></i> Refreshing... please wait </span>) (
+								<a href="javascript:void(0)" *ngIf="creatingDatabase == false" (click)="createDatabase()"> <i class="fa fa-edit"></i> New Database </a>
+								<span *ngIf="creatingDatabase == true"> <i class="fa fa-spin fa-refresh"></i> Creating database... please wait </span>)
+							</form-select>
+						</section>
+					</span>
+
+					<div class="form-row">
+						<section class="form-group col-md-6">
+							<form-input  type="number" label="Connection Timeout" formControlName="connectionTimeout" iconClass="fa fa-clock-o"	[errors]="formsService.formErrors.connectionTimeout"
+							note="The duration in seconds the remote agent will wait to establish a connection.">
+							</form-input>
+						</section>
+						<section class="form-group col-md-6">
+							<form-input type="number" label="Command Timeout" formControlName="commandTimeout" iconClass="fa fa-clock-o"	[errors]="formsService.formErrors.commandTimeout"
+							note="The duration in seconds the remote agent will for a command to start returning a result.">
+							</form-input>
 						</section>
 					</div>
 
-					<section *ngIf="connectionReference.requiresDatabase" ng-disabled="refreshingConnection || creatingDatabase" >
-						<form-select 
-							[label]="connectionReference.databaseDescription" 
-							formControlName="defaultDatabase" 
-							[items]="databases" 
-							[defaultItem]="formsService.currentForm.value.defaultDatabase" 
-							iconClass="fa fa-database" 
-							[sortItems]="true" 
-							[enableTextEntry]="true"
-							textEntryNote="Enter the database name"
-							(textValueChange)="newDatabaseName($event)"
-						>
-								(<a href="javascript:void(0)" *ngIf="refreshingConnection == false" (click)="refreshConnection()"> <i class="fa fa-refresh"></i> Refresh </a>
-						<span *ngIf="refreshingConnection == true" > <i class="fa fa-spin fa-refresh"></i> Refreshing... please wait </span>) (
-							<a href="javascript:void(0)" *ngIf="creatingDatabase == false" (click)="createDatabase()"> <i class="fa fa-edit"></i> New Database </a>
-							<span *ngIf="creatingDatabase == true"> <i class="fa fa-spin fa-refresh"></i> Creating database... please wait </span>)
-						</form-select>
+					<section *ngIf="formsService.currentForm.controls.purpose.value == 'Managed'">
+						<form-checkbox label="Multi-use Managed Database (table keys will be added to table names to allow multiple hubs to use same database)"
+							formControlName="embedTableKey" [errors]="formsService.formErrors.embedTableKey">
+						</form-checkbox>
 					</section>
-				</span>
-
-				<div class="form-row">
-					<section class="form-group col-md-6">
-						<form-input  type="number" label="Connection Timeout" formControlName="connectionTimeout" iconClass="fa fa-clock-o"	[errors]="formsService.formErrors.connectionTimeout">
-						</form-input>
-					</section>
-					<section class="form-group col-md-6">
-						<form-input type="number" label="Command Timeout" formControlName="commandTimeout" iconClass="fa fa-clock-o"	[errors]="formsService.formErrors.commandTimeout">
-						</form-input>
-					</section>
-				</div>
-
-				<section *ngIf="formsService.currentForm.controls.purpose.value == 'Managed'">
-					<form-checkbox label="Multi-use Managed Database (table keys will be added to table names to allow multiple hubs to use same database)"
-						formControlName="embedTableKey" [errors]="formsService.formErrors.embedTableKey">
-					</form-checkbox>
-				</section>
 
 				</span>
 			</fieldset>

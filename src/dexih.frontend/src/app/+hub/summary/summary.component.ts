@@ -5,6 +5,7 @@ import { Subscription, combineLatest} from 'rxjs';
 import { logoSmallUrl } from '../../+auth/auth.models';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { DexihActiveAgent, eConnectionPurpose } from '../../shared/shared.models';
+import { AuthService } from '../../+auth/auth.service';
 
 @Component({
   selector: 'dexih-summary',
@@ -27,7 +28,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
   sharedObjectProperties = sharedObjectProperties;
 
   public noManagedConnection = false;
-  constructor(public hubService: HubService) { }
+  constructor(public hubService: HubService, public authService: AuthService) { }
 
   ngOnInit() {
     try {

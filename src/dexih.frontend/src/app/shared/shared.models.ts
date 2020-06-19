@@ -22,7 +22,7 @@ export class AnimateConfig {
    }
    
    export class ApplicationUser {
-    public id: string = '8ad2d798-fc4f-47a2-9697-2b57a5db735c';
+    public id: string = '61bc0e93-6cb6-4a3a-89d2-4ea6e82c052a';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -31,7 +31,7 @@ export class AnimateConfig {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = '8ec21666-2763-4827-8370-e02758434d62';
+    public securityStamp: string = '76a0ecb4-9dea-4c5d-8adb-0f3d3c6537bd';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -142,6 +142,8 @@ export class AnimateConfig {
     public allowsWindowsAuth: boolean = false;
     public requiresDatabase: boolean = false;
     public requiresLocalStorage: boolean = false;
+    public serverHelp: string = null;
+    public allowsToken: boolean = false;
     public defaultSchema: string = null;
    }
    
@@ -153,6 +155,7 @@ export class AnimateConfig {
     public description: string = null;
     public databaseDescription: string = null;
     public serverDescription: string = null;
+    public serverHelp: string = null;
     public allowsConnectionString: boolean = false;
     public allowsSql: boolean = false;
     public allowsFlatFiles: boolean = false;
@@ -160,6 +163,7 @@ export class AnimateConfig {
     public allowsSourceConnection: boolean = false;
     public allowsTargetConnection: boolean = false;
     public allowsUserPassword: boolean = false;
+    public allowsToken: boolean = false;
     public allowsWindowsAuth: boolean = false;
     public requiresDatabase: boolean = false;
     public requiresLocalStorage: boolean = false;
@@ -1331,6 +1335,7 @@ export class AnimateConfig {
     public userName: string = null;
     public id: string = null;
     public permission: ePermission = ePermission.None;
+    public receiveAlerts: boolean = false;
    }
    
    export class Import {

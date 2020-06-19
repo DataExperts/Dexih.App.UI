@@ -327,6 +327,33 @@ export class AuthService implements OnDestroy {
         });
     }
 
+    // redirects a link click to either a route or an external web site based on the link format
+    // the event should be from the click event (click)="getRoute(event)"
+    getRoute(event) {
+        let element = event.target;
+        while (element) {
+            let link: string = element.getAttribute('href');
+      
+            if (link) {
+                if (link.endsWith('.md') && !link.startsWith('http')) {
+                  this.router.navigate([], { relativeTo: this.route, queryParams: {'path': link} });
+                } else if (link.startsWith('route:')) {
+                  // don't allow link clicks unless logged in
+                } else if (link.startsWith('unsafe:route:')) {
+                    let route = link.substr(13);
+                    this.router.navigate([route]);
+                } else if (link.startsWith('#')) {
+                    this.router.navigate(['.', link]);
+                } else {
+                    window.open(link);
+                }
+                event.preventDefault();
+            }
+      
+            element = element.parentElement;
+        }
+      }
+
     // // converts a string from underscore notation to camel case
     // toCamelCase(str): string {
     //     return str.substring(0, 1).toLowerCase() +

@@ -90,9 +90,12 @@ export class HubVariableIndexComponent implements OnInit, OnDestroy {
     }
 
     export(variables: Array<DexihHubVariable>) {
+        let vars = this.hubCache.hub.dexihHubVariables.filter(c => {
+            return variables.findIndex(d => d.key === c.key) >= 0
+        });
         const cache = this.hubCache;
         const hub = this.hubService.createHub(this.hubCache.hub.hubKey, '');
-        hub.dexihHubVariables = variables;
+        hub.dexihHubVariables = vars;
         let filename = 'hub_variables.json';
 
         this.hubService.exportHub(hub, filename);

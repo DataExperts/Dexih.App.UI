@@ -1,5 +1,6 @@
 import { Pipe, NgModule } from '@angular/core';
 import * as moment_ from 'moment';
+import { Router } from '@angular/router';
 const moment = moment_;
 
 @NgModule()
@@ -48,6 +49,5 @@ export class Functions {
             }
         }
     }
-
 
 }
