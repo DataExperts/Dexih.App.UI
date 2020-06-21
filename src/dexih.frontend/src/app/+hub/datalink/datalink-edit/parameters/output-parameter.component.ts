@@ -109,7 +109,8 @@ export class OutputParameterComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     updateNewColumn(value: string) {
-        if (value) {
+        let current = this.outputParameterForm.controls.datalinkColumn.value;
+        if (value && (!current || current.name !== value)) {
             if (!this.newColumn) {
                 this.newColumn = new DexihDatalinkColumn();
                 this.newColumn.key = this.hubService.getHubCache().getNextSequence();

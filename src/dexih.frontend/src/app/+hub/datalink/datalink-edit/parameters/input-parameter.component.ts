@@ -189,7 +189,8 @@ export class InputParameterComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     updateNewColumn(value: string, i: number) {
-        if (value) {
+        let current = this.outputParameterForms[i].controls.targetDatalinkColumn.value;
+        if (value && (!current || value !== current.name) ) {
             if (!this.newColumn) {
                 this.newColumn = new DexihDatalinkColumn();
                 this.newColumn.position = 1000 - this.newColumn.key;

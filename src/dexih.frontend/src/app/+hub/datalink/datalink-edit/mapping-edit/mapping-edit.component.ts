@@ -231,11 +231,12 @@ export class MappingEditComponent implements OnInit, OnDestroy {
   }
 
   updateNewColumn(value: string) {
-    if (value) {
+    let current = this.newDatalinkTransformItemForm.controls.targetDatalinkColumn.value;
+    if (value && (!current || current.name !== value )) {
       let key: number;
       if (this.newColumn) {
         key = this.newColumn.key;
-      } else {5
+      } else {
         key = this.hubService.getHubCache().getNextSequence();
       }
 
