@@ -27,10 +27,9 @@
 				<ng-template [ngIf]="!useCustomFunction">
 					<section [ngStyle]="{'z-index': 500, 'position': 'relative'}">
 						<form-select label="Category" [items]="functionCategories" [allowNullSelect]="true" selectNullMessage="(All functions)"
-						 [ngModelOptions]="{standalone: true}" [(ngModel)]="functionCategory" (ngModelChange)="updateCategory($event)">
+						 [ngModelOptions]="{standalone: true}" [(ngModel)]="functionCategory" (ngModelChange)="updateCategory($event)" [sortItems]="true">
 						</form-select>
 					</section>
-
 
 					<section [ngStyle]="{'z-index': 499, 'position': 'relative'}">
 						<form-select label="Select a standard function" (ngModelChange)="selectFunction($event, true)" [(ngModel)]="selectedFunction"

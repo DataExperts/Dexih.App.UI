@@ -72,14 +72,22 @@
     
             <ng-template #tableHeader let-items="items">
                 <column-edit-bulk *ngIf="showBulkEdit && items.length > 0" [columns]="items" [columnsFormArray]="targetTableForm.controls.table.controls.dexihTableColumns" (updated)="updateData()" ></column-edit-bulk>
+                <dexih-button iconClass="fa fa-retweet" class="ml-1" (click)="resetColumns()">Reset All Columns</dexih-button>
+                <dexih-button-preview class="ml-1" (click)="previewData()"></dexih-button-preview>
+                <dexih-button class="ml-1" (click)="importTable()" buttonClass="btn-primary" iconClass="fa fa-refresh" title="Re-import table from connection.">
+                    Re-Import
+                </dexih-button>
+                <dexih-button (click)="createTable()" class="ml-1" buttonClass="btn-primary" iconClass="fa fa-bullseye" title="Drop & re-create the table on the connection.  Warning: This remove all data from the table!">
+                    Drop & Create
+                </dexih-button>
             </ng-template>
 
             <ng-template #selectedItemAction select="selectedItemAction" let-column="item">
-                <dexih-button-edit (click)="editColumn(column)"></dexih-button-edit>
+                <dexih-button-edit (click)="editColumn(column)" class="ml-1"></dexih-button-edit>
             </ng-template>
     
             <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-                <dexih-button-delete (click)="deleteColumns(items)"></dexih-button-delete>
+                <dexih-button-delete (click)="deleteColumns(items)" class="ml-1"></dexih-button-delete>
                 <dexih-button iconClass="fa fa-th-list" class="ml-1" (click)="showBulkEdit=!showBulkEdit">{{showBulkEdit ? 'Hide Bulk Edit' : 'Show Bulk Edit'}} </dexih-button>
             </ng-template>
     

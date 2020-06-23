@@ -434,6 +434,22 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
         }
     }
 
+    async resetColumns() {
+        let confirm = await this.authService.confirmDialog('Warning reset columns',
+            'This will remove and reload all the columns in this table using the last mapped outputs.  Continue?')
+
+        if (confirm) {
+            const tableForm = <FormGroup>this.targetTableForm.controls.table;
+            const tableColumns = <FormArray>tableForm.controls.dexihTableColumns;
+
+            while (tableColumns.length !== 0) {
+                tableColumns.removeAt(0)
+              }
+            }
+
+            this.addMissing(this.validColumns());
+    }
+
     deleteColumns(columns: Array<DexihTableColumn>) {
         columns.forEach(column => {
             const tableForm = <FormGroup>this.targetTableForm.controls.table;

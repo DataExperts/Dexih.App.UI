@@ -225,8 +225,7 @@ export class DatalinkNewComponent implements OnInit, OnDestroy {
         auditColumns).then(result => {
           this.savingDatalink = false;
           if (result.length === 1) {
-            this.router.navigate(['/hub', this.hubCache.hub.hubKey, 'datalinks', 'datalink-edit', 'edit', result[0].key],
-              { relativeTo: this.route.root });
+            this.openDatalink(result[0].key);
           } else {
             this.router.navigate(['/hub', this.hubCache.hub.hubKey, 'datalinks'], { relativeTo: this.route.root });
           }
@@ -241,6 +240,21 @@ export class DatalinkNewComponent implements OnInit, OnDestroy {
 
   cancel() {
     this.location.back();
+  }
+
+  // delay the open datalink until the hub cache is updated with the new datalink.
+  openDatalink(key: number, iteration = 0) {
+    if (iteration >= 10 ) {
+      this.router.navigate(['/hub', this.hubCache.hub.hubKey, 'datalinks'], { relativeTo: this.route.root });
+    }
+    setTimeout(() => {
+      if (this.hubCache.hub.dexihDatalinks.findIndex(c => c.key === key) >= 0) {
+        this.router.navigate(['/hub', this.hubCache.hub.hubKey, 'datalinks', 'datalink-edit', 'edit', key],
+        { relativeTo: this.route.root });
+      } else {
+        this.openDatalink(key, iteration++);
+      }
+    }, 500);
   }
 
   watchChanges() {
