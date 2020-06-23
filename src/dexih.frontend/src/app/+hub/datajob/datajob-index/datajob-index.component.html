@@ -14,7 +14,7 @@
 			[tags]="this.hubCache.hub.dexihTags"
 		>
 		<ng-template #selectedItemAction select="selectedItemAction" let-item="item">
-			<dependent-items-button class="ml-1" [key]=item.key [objectType]='eSharedObjectType.Datajob'></dependent-items-button>
+			<dependent-items-button class="ml-1" [key]="item.key" [objectType]='eSharedObjectType.Datajob'></dependent-items-button>
 		</ng-template>
 
 			<ng-template #rowStatus select="rowStatus" let-datajob="item">

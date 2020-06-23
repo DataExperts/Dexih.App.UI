@@ -68,13 +68,12 @@ export class FilesManageComponent implements OnInit, OnDestroy {
                 this.route.params,
                 this.route.queryParams,
                 this.hubService.getHubCacheObservable(true),
-                this.hubService.getRemoteLibrariesPromise(),
-                this.hubService.getRemoteAgentObservable(true)
+                this.hubService.getRemoteLibrariesObservable(),
             ).subscribe(result => {
                 let params = result[0];
                 let queryParams = result[1];
                 this.hubCache = result[2];
-                let remoteLibraries = result[3]
+                let remoteLibraries = result[3];
 
                 // if (this.hubCache.status !== eCacheStatus.Loaded) { return; }
 

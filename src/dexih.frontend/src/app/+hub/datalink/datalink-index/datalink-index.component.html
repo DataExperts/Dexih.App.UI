@@ -33,7 +33,7 @@
 				</ng-template>
 
 				<ng-template #selectedItemAction select="selectedItemAction" let-item="item">
-					<dependent-items-button class="ml-1" [key]=item.key [objectType]='eSharedObjectType.Datalink'></dependent-items-button>
+					<dependent-items-button class="ml-1" [key]="item.key" [objectType]='eSharedObjectType.Datalink'></dependent-items-button>
 				</ng-template>
 		</dexih-table>
 

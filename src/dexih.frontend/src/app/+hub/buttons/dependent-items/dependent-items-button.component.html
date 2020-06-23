@@ -1,5 +1,11 @@
 <dexih-button-dropdown buttonClass="btn-primary" iconClass="fa fa-sitemap" text="Dependencies" [pullRight]="pullRight">
-    
+    <li *ngIf="dependent.dexihDatalinks.length === 0 && dependent.dexihTables.length === 0 && dependent.dexihConnections.length === 0 &&
+        dependent.dexihViews.length === 0 && dependent.dexihListOfValues.length === 0 && dependent.dexihCustomFunctions.length === 0 && 
+        dependent.dexihHubVariables.length === 0 && dependent.dexihFileFormats.length === 0"
+        class="dropdown-item">
+        There are no dependencies
+    </li>
+
     <li *ngIf="dependent.dexihDatalinks.length > 0" class="list-group-item list-group-item-heading list-group-item-info">Datalinks</li>
     <li *ngFor="let item of dependent.dexihDatalinks">
         <a class="dropdown-item" [routerLink]="[hubPath, 'datalinks', 'datalink-edit', 'edit', item.key]">

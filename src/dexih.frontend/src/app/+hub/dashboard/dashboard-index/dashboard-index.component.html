@@ -13,7 +13,7 @@
 				[tags]="this.hubCache.hub.dexihTags"
 				>
 				<ng-template #selectedItemAction select="selectedItemAction" let-item="item">
-					<dependent-items-button class="ml-1" [key]=item.key [objectType]='eSharedObjectType.Dashboard'></dependent-items-button>
+					<dependent-items-button class="ml-1" [key]="item.key" [objectType]='eSharedObjectType.Dashboard'></dependent-items-button>
 				</ng-template>
 
 					<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">

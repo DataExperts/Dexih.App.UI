@@ -1,22 +1,20 @@
-<section *ngIf="hubCache?.hub && (!connectionTables || connectionTables.length === 0)">
-    <div class="alert alert-danger m-3">
-        There are no files configured.  Create a file based connection, and add at least one file definition.
-        <hr>
-        <div>
-            <a class="btn btn-sm btn-primary text-white" routerLink="/hub/{{hubCache.hub.hubKey}}/connections/connection-new/Source" [title]="">New Connection</a>
-            <a *ngFor="let connection of fileConnections" class="ml-1 btn btn-sm btn-primary text-white" routerLink="/hub/{{hubCache.hub.hubKey}}/connections/tables/table-new/{{connection.key}}" [title]="">New File ({{connection.name}})</a>
-        </div>
+<div *ngIf="!connectionTables || connectionTables.length === 0" class="alert alert-danger m-3">
+    There are no files configured.  Create a file based connection, and add at least one file definition.
+    <hr>
+    <div>
+        <dexih-button-new routerLink="/hub/{{hubCache?.hub.hubKey}}/connections/connection-new/Source" text="New Connection" [autoCompact]="false"></dexih-button-new>
+        <dexih-button *ngFor="let connection of fileConnections" routerLink="/hub/{{hubCache?.hub.hubKey}}/connections/tables/table-new/{{connection.key}}" [autoCompact]="false" [title]="">New File ({{connection.name}})</dexih-button>
     </div>
-</section>
+</div>
 
 <div *ngIf="connectionTables && connectionTables.length > 0" class="container">
     <dexih-widget [title]="'Manage Files: ' + table?.name" iconClass="fa fa-lg fa-fw fa-table" [showCloseButton]="true"
         (close)="close()"     >
         <ng-template #header>
-            <dexih-button-dropdown buttonClass="btn-sm btn-outline-primary mr-1" iconClass="fa fa-notepad" text="New File">
-                    <a *ngFor="let connection of fileConnections" class="dropdown-item" routerLink="/hub/{{hubCache.hub.hubKey}}/connections/tables/table-new/{{connection.key}}" [title]="">{{connection.name}}</a>
+            <dexih-button-dropdown class="mr-1" iconClass="fa fa-file-o" text="New File">
+                    <a *ngFor="let connection of fileConnections" class="dropdown-item" routerLink="/hub/{{hubCache?.hub.hubKey}}/connections/tables/table-new/{{connection.key}}" [title]="">{{connection.name}}</a>
             </dexih-button-dropdown>
-            <dexih-button-dropdown *ngIf="table?.autoManageFiles" buttonClass="btn-sm btn-outline-primary" iconClass="fa fa-filter" [text]="eFlatFilePath[path]" title="Select the file location" [pullRight]="true">
+            <dexih-button-dropdown *ngIf="table?.autoManageFiles" iconClass="fa fa-filter" [text]="eFlatFilePath[path]" title="Select the file location" [pullRight]="true">
                     <a *ngFor="let item of eFlatFilePathItems" class="dropdown-item" [class.active]="path=='item.name'" routerLinkActive="active" data-toggle="tab" routerLink="." [queryParams]="{tableKey: tableKey, path: item.key}">
                             <i class="fa fa-elipsis-h"></i>{{item.name}}</a>
             </dexih-button-dropdown>
@@ -88,7 +86,7 @@
                     </ng-template>
 
                     <ng-template #selectedItemAction select="selectedItemAction" let-item="item">
-                        <dexih-button-preview [routerLink]="['/hub', hubCache.hub.hubKey, 'summary', 'files', 'manage', tableKey, 'file-preview', path, item.fileName]"></dexih-button-preview>
+                        <dexih-button-preview [routerLink]="['/hub', hubCache?.hub.hubKey, 'summary', 'files', 'manage', tableKey, 'file-preview', path, item.fileName]"></dexih-button-preview>
                     </ng-template>
 
                     <ng-template #actions let-items="items">

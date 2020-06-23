@@ -68,9 +68,7 @@
                         <a class="dropdown-item" (click)="newColumn(eDeltaType.UpdateDate)">Add Update Date</a>
                     </li>
                 </dexih-button-splitdropdown>
-            </ng-template>
-    
-            <ng-template #tableHeader let-items="items">
+
                 <column-edit-bulk *ngIf="showBulkEdit && items.length > 0" [columns]="items" [columnsFormArray]="targetTableForm.controls.table.controls.dexihTableColumns" (updated)="updateData()" ></column-edit-bulk>
                 <dexih-button iconClass="fa fa-retweet" class="ml-1" (click)="resetColumns()">Reset All Columns</dexih-button>
                 <dexih-button-preview class="ml-1" (click)="previewData()"></dexih-button-preview>
@@ -81,7 +79,7 @@
                     Drop & Create
                 </dexih-button>
             </ng-template>
-
+    
             <ng-template #selectedItemAction select="selectedItemAction" let-column="item">
                 <dexih-button-edit (click)="editColumn(column)" class="ml-1"></dexih-button-edit>
             </ng-template>

@@ -12,15 +12,15 @@
 			(rowClick)="edit($event)"
 			[tags]="this.hubCache.hub.dexihTags"
 			>
-				<ng-template #selectedItemAction select="selectedItemAction" let-validation="item">
-					<actions-columnValidation-button [columnValidation]="validation" class="mr-1"></actions-columnValidation-button>
-					<dependent-items-button class="ml-1" [key]=item.key [objectType]='eSharedObjectType.ColumnValidation'></dependent-items-button>
+				<ng-template #selectedItemAction select="selectedItemAction" let-item="item">
+					<actions-columnValidation-button [columnValidation]="item" class="mr-1"></actions-columnValidation-button>
+					<dependent-items-button class="mr-1" [key]="item.key" [objectType]='eSharedObjectType.ColumnValidation'></dependent-items-button>
 				</ng-template>
 
 				<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
 					<dexih-button-save-local class="mr-1" (click)="export(items)"></dexih-button-save-local>
 					<dexih-button-delete class="mr-1" *ngIf="hubCache.canWrite" (click)="deleteValidations(items)"></dexih-button-delete>
-					<tags-update-button class="ml-1" [objectType]="eSharedObjectType.ColumnValidation" [objects]="items" ></tags-update-button>
+					<tags-update-button class="mr-1" [objectType]="eSharedObjectType.ColumnValidation" [objects]="items" ></tags-update-button>
 				</ng-template>
 				
 
