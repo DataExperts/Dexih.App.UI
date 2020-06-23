@@ -1,5 +1,5 @@
 <dexih-widget-section title='Transforms' [padding]="false">
-    <div *ngIf="datalinkTransforms" class="bg-light pt-3 pb-3 d-flex justify-content-centre">
+    <div *ngIf="datalinkTransforms" class="bg-light pt-1 pb-1 d-flex justify-content-centre">
         <ul class="transform-container">
             <li class="border border-primary rounded p-1 pt-3" *ngIf="datalinkTransforms.length === 0">
                 <a [routerLink]="['new', 1]" class="btn btn-xs btn-success" title="Insert a transform before this"><i
@@ -7,37 +7,43 @@
                 <p>Add a transform</p>
             </li>
 
-            <div class="d-flex" *ngFor="let datalinkTransform of datalinkTransforms; last as isLast">
-            <li  routerLinkActive="active" class="border border-primary rounded p-1">
-                <div class="mb-1">{{datalinkTransform.name}}</div>
-                <div class="m-1">
-                    <a [routerLink]="['transform', datalinkTransform.transform.value.key]" class="btn btn-primary  mr-1"
+            <div class="d-flex m-3 " *ngFor="let datalinkTransform of datalinkTransforms; last as isLast">
+                <li  class="d-flex align-items-stretch p-0">
+                    <a [routerLink]="['new', datalinkTransform.transform.value.position-1]" class="insert-before btn btn-sm btn-primary"
+                        title="Insert a transform before this"><i class="fa fa-plus"></i></a>
+                
+                    <a [routerLink]="['new', datalinkTransform.transform.value.position+1]" class="insert-after btn btn-sm btn-primary"
+                        title="Insert a transform after this"><i class="fa fa-plus"></i></a>
+
+                        <a class="delete btn btn-sm btn-danger  mr-1" href="javascript:void(0)"
+                        (click)="deleteTransform(datalinkTransform.transform.value)"
+                        title="Delete this transform"><i class="fa fa-remove"></i></a>
+
+
+                    <a [routerLink]="['transform', datalinkTransform.transform.value.key]" routerLinkActive="btn-outline-success" class="btn btn-outline-primary" style="width:100%"
                         [title]="'Select the ' + datalinkTransform.transform.value.name + ' transform.'">
-                        <span [ngClass]="datalinkTransform.icon"></span>
-                        <dexih-invalid-form-icon [control]="datalinkTransform.transform"></dexih-invalid-form-icon>
+                        <div class="d-block">
+                        {{datalinkTransform.name}}
+                        <div>
+                        <span class="fa-4x" [ngClass]="datalinkTransform.icon"></span>
+                        <dexih-invalid-form-icon [control]="datalinkTransform.transform">
+                        </dexih-invalid-form-icon>
+                    </div>
+                    </div>
                     </a>
-                </div>
-                <span >
-                    <a [routerLink]="['new', datalinkTransform.transform.value.position-1]"
-                        class="btn btn-sm btn-success mr-1" title="Insert a transform before this"><i
-                            class="fa fa-plus"></i></a>
-                    <a class="btn btn-sm btn-success  mr-1"
+
+                </li>
+
+                
+                <div class="arrow bg-primary">
+                    <a class="preview btn btn-sm btn-primary  mr-1"
                         [routerLink]="['transform', datalinkTransform.transform.value.key, 'preview-transform-data']"
                         title="Preview transform data"><i class="fa fa-search"></i></a>
-                    <a class="btn btn-sm btn-success  mr-1" href="javascript:void(0)"
-                        (click)="deleteTransform(datalinkTransform.transform.value)"
-                        title="Delete this transform"><i class="fa fa-minus"></i></a>
-                    <a [routerLink]="['new', datalinkTransform.transform.value.position+1]"
-                        class="btn btn-sm btn-success" title="Insert a transform after this"><i
-                            class="fa fa-plus"></i></a>
-                </span>                
-            </li>
 
-            <div *ngIf="!isLast" class="arrow bg-primary">
-                <div class="arrow-head">
+                    <div *ngIf="!isLast" class="arrow-head">
 
+                    </div>
                 </div>
-            </div>
             </div>
         </ul>
     </div>
