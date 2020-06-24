@@ -38,7 +38,7 @@
         <dexih-widget-section title="Columns" [showExpandButton]="true" [padding]="false">
         <dexih-table [enableMultiSelect]="true"
             [enableManualSort]="true" [enableSort]="false" [enableFilter]="false" (onSortChanged)="columnSortChange($event)" [columns]="columns"
-            [dataObservable]="tableData" (rowClick)="editColumn($event)">
+            [dataObservable]="tableData" (rowClick)="editColumn($event)" [enableStickyToolbar]="true"  [toolbarZIndex]="100">
     
             <ng-template #actions let-items="items">
                 <dexih-button-splitdropdown text="Add Column" title="Create a new column" iconClass="fa fa-plus-square" buttonClass="btn-primary"
@@ -95,7 +95,8 @@
 
         <dexih-widget-section title="Unused Columns" [showExpandButton]="true" [padding]="false">
         <dexih-table [enableMultiSelect]="true"
-            sortColumn="position" [enableFilter]="false" [columns]="columns" [dataObservable]="missingColumnsData">
+            sortColumn="position" [enableFilter]="false" [columns]="columns" [dataObservable]="missingColumnsData"
+            [enableStickyToolbar]="true"  [toolbarZIndex]="100">
             <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
                 <dexih-button (click)="addMissing(items)" buttonClass="btn-primary" iconClass="fa fa-plus-square" title="Add selected outputs to the target table">Add To Table</dexih-button>
             </ng-template>

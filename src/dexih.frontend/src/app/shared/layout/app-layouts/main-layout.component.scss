@@ -13,20 +13,23 @@ $footer-height: 30px;
 
 .content {
     margin-top: $header-height;
-    margin-bottom: $footer-height;
+    // margin-bottom: $footer-height;
     padding-left: 0px;
     padding-right: 0px;
 }
 
 .footer {
-    position: absolute;
+    position: sticky;
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    position: -o-sticky;
     height: $footer-height;
     bottom: 0px;
     width: 100%;
-    left: 0px;
-    right: 0px;
-    margin: 0px;
-    z-index: 1000;
+    // left: 0px;
+    // right: 0px;
+    // margin: 0px;
+    // z-index: 1000;
 }
 
 .sidebar {
@@ -51,7 +54,7 @@ $footer-height: 30px;
 .main {
     left: $sidebar-width;
     margin-top: $header-height;
-    margin-bottom: $footer-height;
+    // margin-bottom: $footer-height;
     right: 0px;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */   

@@ -59,7 +59,7 @@
 </dexih-widget-section>
 
 <dexih-widget-section title="Triggers" [showExpandButton]="true" [padding]="false">
-    <dexih-table [enableMultiSelect]="true" [enableStickyToolbar]="true" [enableManualSort]="true" sortColumn="position" [columns]="triggerColumns"
+    <dexih-table [enableMultiSelect]="true" [enableStickyToolbar]="true"  [toolbarZIndex]="100" [enableManualSort]="true" sortColumn="position" [columns]="triggerColumns"
         [dataObservable]="triggerTableData" (rowClick)='editTrigger($event)'>
         <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
             <dexih-button-delete (click)="deleteTriggers(items)"></dexih-button-delete>
@@ -77,7 +77,7 @@
 </dexih-widget-section>
 
 <dexih-widget-section title="Steps" [showExpandButton]="true" [padding]="false">
-    <dexih-table [enableMultiSelect]="true" [enableStickyToolbar]="true" [enableManualSort]="true" (onSortChanged)="stepSortChanged($event)" sortColumn="position" [columns]="stepColumns" [tags]="this.hubCache.hub.dexihTags"
+    <dexih-table [enableMultiSelect]="true" [enableStickyToolbar]="true"  [toolbarZIndex]="100" [enableManualSort]="true" (onSortChanged)="stepSortChanged($event)" sortColumn="position" [columns]="stepColumns" [tags]="this.hubCache.hub.dexihTags"
         [dataObservable]="stepTableData" (rowClick)='editDatalinkStep($event)'>
         <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
             <dexih-button  iconClass="fa fa-magic" (click)="updateDependencies(items)" text="AutoSet Dependencies"></dexih-button>

@@ -7,7 +7,7 @@
 		<dexih-table 
 			tableClass="table table-striped table-hover m-0"
 			[enableMultiSelect]="true"
-			[enableStickyToolbar]="true"
+			[enableStickyToolbar]="true" [toolbarZIndex]="100"
 			[columns]="columns"
 			[dataObservable]="tableData"
 			(rowClick)="editDatalink($event)"

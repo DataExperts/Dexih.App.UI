@@ -17,7 +17,7 @@
 			[dataObservable]="tableData"
 			(rowClick)="editTable($event)"
 			[tags]="this.hubCache.hub.dexihTags"
-			[enableStickyToolbar]="true"
+			[enableStickyToolbar]="true"  [toolbarZIndex]="100"
 			>
 				<ng-template #actions let-items="items">
 					<actions-table-button [tables]="items" [refreshTables]="true" ></actions-table-button>

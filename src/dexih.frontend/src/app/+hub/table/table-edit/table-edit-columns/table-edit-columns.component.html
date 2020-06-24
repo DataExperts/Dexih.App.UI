@@ -1,5 +1,5 @@
 <dexih-widget-section title='Columns' [showExpandButton]="true" [padding]="false">
-    <dexih-table [enableMultiSelect]="true" [enableStickyToolbar]="true" [enableManualSort]="true" (onSortChanged)="columnSortChange($event)"
+    <dexih-table [enableMultiSelect]="true" [enableStickyToolbar]="true"  [toolbarZIndex]="100" [enableManualSort]="true" (onSortChanged)="columnSortChange($event)"
         sortColumn="position" [columns]="columns" [dataObservable]="columnData" (rowClick)="editColumn($event)">
         <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
             <dexih-button-delete (click)="deleteSelected(items)" title="Delete selected columns" class="mr-1"></dexih-button-delete>

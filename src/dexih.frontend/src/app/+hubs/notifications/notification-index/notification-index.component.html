@@ -8,7 +8,7 @@
 
 		<dexih-table 
 			[enableMultiSelect]="true"
-			[enableStickyToolbar]="true"
+			[enableStickyToolbar]="true"  [toolbarZIndex]="100"
 			[columns]="columns"
 			[data]="notifications"
 			(rowClick)="showMessage($event)"

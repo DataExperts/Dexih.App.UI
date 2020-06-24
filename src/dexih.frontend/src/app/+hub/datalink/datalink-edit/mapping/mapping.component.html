@@ -1,6 +1,6 @@
 <dexih-widget [title]="title" [scrollable]="true" [showExpandButton]="true">
 
-    <dexih-table [enableMultiSelect]="true" [enableManualSort]="true" [columns]="columns" [dataObservable]="tableData" [enableStickyToolbar]="true"
+    <dexih-table [enableMultiSelect]="true" [enableManualSort]="true" [columns]="columns" [dataObservable]="tableData" [enableStickyToolbar]="true"  [toolbarZIndex]="100"
         (rowClick)="editMapping($event)" (onSortChanged)="datalinkItemSortChange($event)"
         tableClass="table table-striped table-hover m-0" #mappingTable dropZone (dropData)="newOutputDrop($event)"
         zone="input-column" dropAllowedClass="drop-zone-green" actionHeading="Mappings">
