@@ -56,7 +56,6 @@ a.active {
     top: 50%;
     left: calc(50% - 19px);
     transform: translateY(-50%);
-    z-index: 1000;
   }
 
   .insert-before {
@@ -65,7 +64,6 @@ a.active {
     top: 50%;
     left: -16px;
     transform: translateY(-50%);
-    z-index: 1000;
   }
 
   .insert-after {
@@ -74,7 +72,6 @@ a.active {
     top: 50%;
     left: calc(100% - 16px);
     transform: translateY(-50%);
-    z-index: 1000;
   }
 
   .delete {

@@ -2,24 +2,7 @@
 	<dexih-widget title="Edit Datalink" iconClass="fa fa-lg fa-fw fa-exchange" [showCloseButton]="true"
 		[padding]="false" (close)="cancel()">
 		<ng-template #header>
-			<div class="d-xl-none">
-				<dexih-button-dropdown buttonclass="btn btn-info " text="Select" [pullRight]="true">
-					<a class="dropdown-item" routerLinkActive="active" routerLink="properties"><i
-							class="fa fa-cog"></i>Properties</a>
-					<a class="dropdown-item" routerLinkActive="active" routerLink="source-table"><i
-							class="fa fa-arrow-circle-o-right"></i>Source</a>
-					<ng-template [ngIf]="datalinkForm.controls.sourceDatalinkTable.value">
-						<a class="dropdown-item" routerLinkActive="active" routerLink="transforms"><i
-								class="fa fa-share-alt"></i>Transforms</a>
-						<a class="dropdown-item" *ngIf="!datalinkForm.controls.isQuery.value" routerLink="validation"
-							routerLinkActive="active"><i class="fa fa-check-square-o"></i>Validation</a>
-						<a class="dropdown-item" *ngIf="!datalinkForm.controls.isQuery.value" routerLink="profile-rules"
-							routerLinkActive="active"><i class="fa fa-bug"></i>Profiling</a>
-						<a class="dropdown-item" routerLink="target" routerLinkActive="active"><i
-								class="fa fa-arrow-circle-right"></i>Target</a>
-					</ng-template>
-				</dexih-button-dropdown>
-			</div>
+
 			<div class="d-none d-xl-inline">
 				<ul class="nav nav-tabs card-header-tabs">
 					<li class="nav-item"><a class="nav-link" routerLink="properties" routerLinkActive="active"><i
@@ -51,6 +34,24 @@
 		<ul class="list-group">
 			<li class="list-group-item rounded-0">
 				<div class="d-flex">
+					<div class="d-xl-none">
+						<dexih-button-dropdown buttonClass="btn btn-success" text="Navigate">
+							<a class="dropdown-item" routerLinkActive="active" routerLink="properties"><i
+										class="fa fa-cog"></i>Properties</a>
+							<a class="dropdown-item" routerLinkActive="active" routerLink="source-table"><i
+										class="fa fa-arrow-circle-o-right"></i>Source</a>
+							<ng-template [ngIf]="datalinkForm.controls.sourceDatalinkTable.value">
+								<a class="dropdown-item" routerLinkActive="active" routerLink="transforms"><i
+											class="fa fa-share-alt"></i>Transforms</a>
+								<a class="dropdown-item" *ngIf="!datalinkForm.controls.isQuery.value" routerLink="validation"
+										routerLinkActive="active"><i class="fa fa-check-square-o"></i>Validation</a>
+								<a class="dropdown-item" *ngIf="!datalinkForm.controls.isQuery.value" routerLink="profile-rules"
+										routerLinkActive="active"><i class="fa fa-bug"></i>Profiling</a>
+								<a class="dropdown-item" routerLink="target" routerLinkActive="active"><i
+											class="fa fa-arrow-circle-right"></i>Target</a>
+							</ng-template>
+						</dexih-button-dropdown>
+					</div>
 					<datalink-status class="d-none d-xl-inline" [datalinkKey]='datalinkForm?.controls.key.value'>
 					</datalink-status>
 					<div class="ml-auto">

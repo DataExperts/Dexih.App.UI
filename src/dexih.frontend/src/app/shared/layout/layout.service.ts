@@ -43,7 +43,7 @@ export class LayoutService {
 
   resizeUpdate() {
     this.store.mobileViewActivated = window.innerWidth < 992;
-    this.store.menuCollapsed = window.innerWidth < 992;
+    this.store.menuCollapsed = window.innerWidth < 1200;
   }
 
   hideMenu() {

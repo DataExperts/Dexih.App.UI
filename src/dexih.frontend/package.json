@@ -33,7 +33,7 @@
     "angular-gridster2": "^9.2.0",
     "angular-resize-event": "^1.2.2",
     "dexih-ngx-components": "^0.3.104",
-    "dexih-ngx-table": "^0.5.55",
+    "dexih-ngx-table": "^0.5.56",
     "file-saver": "^2.0.2",
     "html2canvas": "^1.0.0-rc.5",
     "moment": "^2.27.0",
