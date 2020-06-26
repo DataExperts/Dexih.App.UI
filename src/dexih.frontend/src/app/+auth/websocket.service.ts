@@ -1,10 +1,11 @@
-import {  OnDestroy } from '@angular/core';
+import {  OnDestroy, Injectable } from '@angular/core';
 import { Observable, Subscription, BehaviorSubject} from 'rxjs';
 import { LogFactory, eLogLevel } from '../../logging';
 import { HubConnection, HubConnectionBuilder, LogLevel, HubConnectionState } from '@microsoft/signalr';
 import { Location } from '@angular/common';
 import { ClientMessage, eClientCommand } from '../shared/shared.models';
 
+@Injectable()
 export class WebSocketService implements OnDestroy {
     private _webSocketStatus = new BehaviorSubject<string>('Disconnected');
     private _connectHubSubscription: Subscription;
