@@ -20,7 +20,7 @@ import { DexihDatajob, DexihTable, DexihHub, DexihRemoteAgentHub, DexihConnectio
     ApiData, DownloadObject, eDownloadFormat, DexihActiveAgent, ImportObject, ePermission, eTypeCode, eDataObjectType,
     eSharedObjectType, RemoteLibraries, ConnectionReference, TransformReference,
     FunctionReference, eFunctionType, ClientMessage, eClientCommand, HubUser, DexihListOfValues, ManagedTask,
-    eLOVObjectType, ListOfValuesItem, DexihTag, DexihTagObject } from '../shared/shared.models';
+    eLOVObjectType, ListOfValuesItem, DexihTag, DexihTagObject, eUpdateStrategy } from '../shared/shared.models';
 import { filter, take, first } from 'rxjs/operators';
 
 @Injectable()
@@ -2019,7 +2019,7 @@ export class HubService implements OnInit, OnDestroy {
         });
     }
 
-    uploadFile(table: DexihTable, filePath: eFlatFilePath, fileName: string, cancelToken: CancelToken):
+    uploadFile(table: DexihTable, filePath: eFlatFilePath, updateStrategy: eUpdateStrategy, fileName: string, cancelToken: CancelToken):
     Promise<string> {
         return new Promise<string>((resolve, reject) => {
             let remoteAgent = this.getRemoteAgentCurrent();
@@ -2029,6 +2029,7 @@ export class HubService implements OnInit, OnDestroy {
                 connectionId: this.authService.getWebSocketConnectionId(),
                 tableKey: table.key,
                 path: filePath,
+                updateStrategy: updateStrategy,
                 fileName: fileName,
             }, remoteAgent, 'Uploading file...', cancelToken).then(url => {
                 resolve(url.url + '/file/' + fileName);

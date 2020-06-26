@@ -1291,7 +1291,7 @@ namespace dexih.api.Controllers
 			    throw new HubControllerException($"The table with the key {uploadFiles.TableKey} could not be found.");
 		    }
 		    
-		    return await _remoteAgents.UploadFile(uploadFiles.RemoteAgentId, uploadFiles.HubKey, uploadFiles.DownloadUrl, uploadFiles.TableKey, uploadFiles.Path, uploadFiles.FileName, _operations.RepositoryManager, cancellationToken);
+		    return await _remoteAgents.UploadFile(uploadFiles.RemoteAgentId, uploadFiles.HubKey, uploadFiles.DownloadUrl, uploadFiles.TableKey, uploadFiles.Path, uploadFiles.UpdateStrategy, uploadFiles.FileName, _operations.RepositoryManager, cancellationToken);
 	    }
 	    
 	    [HttpPost("[action]")]

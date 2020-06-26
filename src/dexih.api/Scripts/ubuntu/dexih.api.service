@@ -1,0 +1,28 @@
+[Unit]
+Description=Dexih Api Kestrel Service
+
+[Service]
+WorkingDirectory=/home/ubuntu/dexih.api
+ExecStart=/usr/bin/dotnet /home/ubuntu/dexih.api/dexih.api.dll
+Restart=always
+# Restart service after 10 seconds if the dotnet service crashes:
+RestartSec=10
+SyslogIdentifier=dexih.api
+User=ubuntu
+Environment=AppSettings__RepositoryType="Npgsql"
+Environment=ConnectionStrings__DefaultConnection="host=dexih.cnnq1hue0411.us-east-2.rds.amazonaws.com;port=5432;Username=dexih;Password=6PV{qNcQCg8Tgoc;Database=dexih_repository;pooling=true"
+Environment=AppSettings__GoogleClientId="738390327812-ebjh4ntsqba27g0e4507iq7qncb4djuq.apps.googleusercontent.com"
+Environment=AppSettings__GoogleClientSecret="ry7jU8eK_wKLIOMQ_8u9EOVd"
+Environment=AppSettings__MicrosoftClientId="3b7d6377-7b17-4011-a4da-44a32fd52c01"
+Environment=AppSettings__MicrosoftClientSecret="5RxpHueXGi57WIb:UU0-bXSqtjjr/YW:"
+Environment=AppSettings__EncryptionKey=
+Environment=AppSettings__SendGridAPI="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"
+Environment=AppSettings__DefaultProxyUrl="http://52-166-161-208.proxy.dexih.com"
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=ASPNETCORE_URLS=http://+:5000
+Environment=Logging__LoveLevel__Default="Debug"
+Environment=AppSettings__SignalrConnectionString="Endpoint=https://dexih.service.signalr.net;AccessKey=yR951gkXq1H+nUneIV8ROvNynlx9McewidYVgVUVn2Q=;Version=1.0;"
+Environment=AppSettings__EmailError=true
+
+[Install]
+WantedBy=multi-user.target

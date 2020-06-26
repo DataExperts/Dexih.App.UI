@@ -10,14 +10,11 @@
 
 <div *ngIf="fileConnections && fileConnections.length > 0" class="container">
     <dexih-widget *ngIf="!currentTable" [title]="'Bulk Load: ' + connection?.name" iconClass="fa fa-lg fa-fw fa-files-o" [showCloseButton]="true" (close)="close()">
-        <ng-template #header>
-            <a class="btn btn-sm btn-primary mr-1" routerLink="/hub/{{hubCache.hub.hubKey}}/connections/connection-new/Source" [title]="">New Connection</a>
-        </ng-template>
-
         <div class="m-3">
             <section>
-                <form-select label="File Connection" [(ngModel)]="connectionKey" [items]="fileConnections" itemKey="key"
-                    itemName="name" iconClass="fa fa-database" note='The connection to use.'>
+                <form-select label="Connection" [(ngModel)]="connectionKey" [items]="fileConnections" itemKey="key"
+                    itemName="name" iconClass="fa fa-database" note='The connection where the files will be uploaded to.'>
+                    <a routerLink="//hub/{{hubCache.hub.hubKey}}/connections/connection-new/Source">(<i class="fa fa-sticky-note-o"></i> New )</a>
                 </form-select>
             </section>
 
@@ -33,7 +30,7 @@
                         [items]="hubCache.hub.dexihFileFormats" itemKey="key" itemName="name" [enableFilter]="false"
                         note="Specify the file format to use, if not specified, a csv (command separated) format will be used."
                         [allowNullSelect]="true" selectNullMessage="Use default (csv) format">
-                        <a routerLink="/hub/{{hubCache.hub.hubKey}}/fileFormats/fileFormat-new">(<i class="fa fa-sticky-note-o"></i> Create New Format )</a>
+                        <a routerLink="/hub/{{hubCache.hub.hubKey}}/fileFormats/fileFormat-new">(<i class="fa fa-sticky-note-o"></i> New )</a>
                     </form-select>
                 </section>
             </div>

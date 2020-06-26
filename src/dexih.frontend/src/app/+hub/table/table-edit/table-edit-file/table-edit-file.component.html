@@ -1,58 +1,59 @@
 <dexih-widget-section title='File Properties' [showExpandButton]="true" [padding]="true">
 
     <form *ngIf="formService?.currentForm" [formGroup]="formService.currentForm">
-        <section>
-            <form-input label="Files Subdirectory" formControlName="fileRootPath" placeholder="Enter the file path name." iconClass="fa fa-file"
-                [errors]="formService.formErrors.fileRootPath" [note]="'Specify the subdirectory.  This will be the connection directory (' + connection.server + ') plus the path specified.'">
-            </form-input>
-        </section>
-
-        <section>
-            <form-input label="File Match Pattern" formControlName="fileMatchPattern" placeholder="Enter the file path." iconClass="fa fa-file"
-                [errors]="formService.formErrors.fileMatchPattern" note="Specify the file pattern to use to match files when bulk uploading.  Patterns can include wildcards */?, leave blank for all files.">
-            </form-input>
-        </section>
-
-        <section>
-            <form-checkbox label="Auto manage files" formControlName="autoManageFiles" note="Files loaded from the incoming directory, and moved to the processed or rejected directories when they are loaded by a datalink.  If not checked source files will be left untouched after a load.">
-            </form-checkbox>
-        </section>
-
-        <div *ngIf="formService.currentForm.value.autoManageFiles ">
+        <ng-template [ngIf]="isFile">
+            <section>
+                <form-input label="Files Subdirectory" formControlName="fileRootPath" placeholder="Enter the file path name." iconClass="fa fa-file"
+                    [errors]="formService.formErrors.fileRootPath" [note]="'Specify the subdirectory.  This will be the connection directory (' + connection.server + ') plus the path specified.'">
+                </form-input>
+            </section>
 
             <section>
-                <form-checkbox label="Specify custom file paths for auto-managed files" formControlName="useCustomFilePaths" [note]="'If custom paths are not specified files will be read/written to the directory: ' + connection.server + '/' + formService.currentForm.value.name + '/'">
+                <form-input label="File Match Pattern" formControlName="fileMatchPattern" placeholder="Enter the file path." iconClass="fa fa-file"
+                    [errors]="formService.formErrors.fileMatchPattern" note="Specify the file pattern to use to match files when bulk uploading.  Patterns can include wildcards */?, leave blank for all files.">
+                </form-input>
+            </section>
+
+            <section>
+                <form-checkbox label="Auto manage files" formControlName="autoManageFiles" note="Files loaded from the incoming directory, and moved to the processed or rejected directories when they are loaded by a datalink.  If not checked source files will be left untouched after a load.">
                 </form-checkbox>
             </section>
 
-            <div *ngIf="formService.currentForm.value.useCustomFilePaths">
+            <div *ngIf="formService.currentForm.value.autoManageFiles ">
 
                 <section>
-                    <form-input label="Incoming subdirectory" formControlName="fileIncomingPath" placeholder="Enter the file path." iconClass="fa fa-file"
-                        [errors]="formService.formErrors.fileIncomingPath" note="Specify the sub-directory for incoming files">
-                    </form-input>
+                    <form-checkbox label="Specify custom file paths for auto-managed files" formControlName="useCustomFilePaths" [note]="'If custom paths are not specified files will be read/written to the directory: ' + connection.server + '/' + formService.currentForm.value.name + '/'">
+                    </form-checkbox>
                 </section>
 
-                <section>
-                    <form-input label="Outgoing subdirectory" formControlName="fileOutgoingPath" placeholder="Enter the file path." iconClass="fa fa-file"
-                        [errors]="formService.formErrors.fileOutgoingPath" note="Specify the sub-directory for outgoing (written) files">
-                    </form-input>
-                </section>
+                <div *ngIf="formService.currentForm.value.useCustomFilePaths">
 
-                <section>
-                    <form-input label="Processed subdirectory" formControlName="fileProcessedPath" placeholder="Enter the file path." iconClass="fa fa-file"
-                        [errors]="formService.formErrors.fileProcessedPath" note="Specify the sub-directory for processed files">
-                    </form-input>
-                </section>
-                <section>
-                    <form-input label="Rejected subdirectory" formControlName="fileRejectedPath" placeholder="Enter the file path." iconClass="fa fa-file"
-                        [errors]="formService.formErrors.fileRejectedPath" note="Specify the sub-directory for rejected files">
-                    </form-input>
-                </section>
+                    <section>
+                        <form-input label="Incoming subdirectory" formControlName="fileIncomingPath" placeholder="Enter the file path." iconClass="fa fa-file"
+                            [errors]="formService.formErrors.fileIncomingPath" note="Specify the sub-directory for incoming files">
+                        </form-input>
+                    </section>
 
+                    <section>
+                        <form-input label="Outgoing subdirectory" formControlName="fileOutgoingPath" placeholder="Enter the file path." iconClass="fa fa-file"
+                            [errors]="formService.formErrors.fileOutgoingPath" note="Specify the sub-directory for outgoing (written) files">
+                        </form-input>
+                    </section>
+
+                    <section>
+                        <form-input label="Processed subdirectory" formControlName="fileProcessedPath" placeholder="Enter the file path." iconClass="fa fa-file"
+                            [errors]="formService.formErrors.fileProcessedPath" note="Specify the sub-directory for processed files">
+                        </form-input>
+                    </section>
+                    <section>
+                        <form-input label="Rejected subdirectory" formControlName="fileRejectedPath" placeholder="Enter the file path." iconClass="fa fa-file"
+                            [errors]="formService.formErrors.fileRejectedPath" note="Specify the sub-directory for rejected files">
+                        </form-input>
+                    </section>
+
+                </div>
             </div>
-        </div>
-
+        </ng-template>
         <section>
             <form-select label="Format Type" formControlName="formatType" [items]="formatTypes" itemKey="key" itemName="name" iconClass="fa fa-database"
                 note='The format of data.'>

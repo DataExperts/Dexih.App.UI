@@ -19,6 +19,7 @@ using Dexih.Utils.Crypto;
 using dexih.functions.Query;
 using dexih.remote;
 using dexih.remote.operations;
+using dexih.transforms;
 using dexih.transforms.View;
 using Dexih.Utils.DataType;
 using Dexih.Utils.ManagedTasks;
@@ -520,7 +521,7 @@ namespace dexih.api.Services.Remote
 	    /// <param name="database"></param>
 	    /// <returns>Reference Url for the upload</returns>
 	    /// <exception cref="RemoteAgentException"></exception>
-	    public async Task<string> UploadFile(string id, long hubKey, DownloadUrl downloadUrl, long tableKey, EFlatFilePath path, string fileName, RepositoryManager database, CancellationToken cancellationToken)
+	    public async Task<string> UploadFile(string id, long hubKey, DownloadUrl downloadUrl, long tableKey, EFlatFilePath path, EUpdateStrategy updateStrategy, string fileName, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    try
 		    {
@@ -535,7 +536,8 @@ namespace dexih.api.Services.Remote
 			    {
 				    cache,
 				    path,
-				    fileName
+				    fileName,
+				    updateStrategy
 			    };
 
 			    var result = await SendRemoteCommand(id, hubKey, downloadUrl, nameof(RemoteOperations.UploadFile), value, database, cancellationToken);

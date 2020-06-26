@@ -21,7 +21,6 @@ import { QueryBuilderModule } from './ui/queryBuilder/query-builder.module';
 import { ChartBuilderModule } from './ui/charts/charts.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { GridsterModule} from 'angular-gridster2';
-import { AngularResizedEventModule } from 'angular-resize-event';
 import { DexihSupportOptionsModule } from './ui/supportOptions/support-options.module'
 import { SharedDataModule} from './ui/sharedData/shared-data.module';
 import { SeriesAnimateModule } from './ui/seriesAnimate/series-animate.module';
@@ -46,7 +45,6 @@ import { SeriesAnimateModule } from './ui/seriesAnimate/series-animate.module';
     ChartBuilderModule,
     NgxChartsModule,
     GridsterModule,
-    AngularResizedEventModule,
     DexihSupportOptionsModule,
     SharedDataModule,
     SeriesAnimateModule
@@ -70,7 +68,6 @@ import { SeriesAnimateModule } from './ui/seriesAnimate/series-animate.module';
     ChartBuilderModule,
     NgxChartsModule,
     GridsterModule,
-    AngularResizedEventModule,
     DexihSupportOptionsModule,
     SeriesAnimateModule
   ],

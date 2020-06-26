@@ -151,6 +151,7 @@ namespace dexih.api.Models
 		public long TableKey { get; set; }
 	    public string FileName { get; set; }
         public EFlatFilePath Path { get; set; }
+        public EUpdateStrategy UpdateStrategy { get; set; }
 	}
 
     public class BulkUploadFile: HubModelBase

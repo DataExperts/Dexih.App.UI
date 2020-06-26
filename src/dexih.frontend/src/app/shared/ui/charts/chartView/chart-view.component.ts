@@ -122,7 +122,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
     //     this.createView();
     // }
 
-    onResized(event: ResizedEvent) {
+    onResized(event) {
         // legend needs to be padded as ngx-charts not calculating size correctly.
         // https://github.com/swimlane/ngx-charts/issues/1248
         if (this.config.showLegend && this.config.legendPosition === 'below') {
@@ -348,7 +348,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                             this.addCustomColor(this.columns[this.seriesColumnIndex].title, false);
                             this.colorIndex++;
                         }
-    
+
                         chartItem['lineChartSeries'].forEach(item => {
                             this.addCustomColor(item.name, true);
                         });

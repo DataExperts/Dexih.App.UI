@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using dexih.api.Models;
 using dexih.api.Services.Operations;
+using dexih.transforms;
 using dexih.transforms.View;
 using Dexih.Utils.DataType;
 using static dexih.operations.DownloadData;
@@ -41,7 +42,7 @@ namespace dexih.api.Services.Remote
 	    Task<string> Encrypt(string instanceId, long hubKey, DownloadUrl downloadUrl, string value, RepositoryManager database, CancellationToken cancellationToken);
 		Task<string> Decrypt(string instanceId, long hubKey, DownloadUrl downloadUrl, string value, RepositoryManager database, CancellationToken cancellationToken);
 
-		Task<string> UploadFile(string instanceId, long hubKey, DownloadUrl downloadUrl, long tableKey, EFlatFilePath path, string fileName,
+		Task<string> UploadFile(string instanceId, long hubKey, DownloadUrl downloadUrl, long tableKey, EFlatFilePath path, EUpdateStrategy updateStrategy, string fileName,
 			RepositoryManager database, CancellationToken cancellationToken);
 
 	    Task<string> BulkUploadFiles(string instanceId, long hubKey, DownloadUrl downloadUrl, string connectionId, long connectionKey, long fileFormatKey, ETypeCode formatType, string fileName,

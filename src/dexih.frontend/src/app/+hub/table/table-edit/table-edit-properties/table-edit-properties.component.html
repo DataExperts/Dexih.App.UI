@@ -84,6 +84,6 @@
     <dexih-table-edit-rest [formService]='formsService' [connection]='connection' (onTableChanged)="onTableChanged($event)"></dexih-table-edit-rest>
 </div>
 
-<div *ngIf="connectionReference?.connectionCategory == eConnectionCategory.File">
-    <dexih-table-edit-file [formService]='formsService' [connection]='connection' (onTableChanged)="onTableChanged($event)"></dexih-table-edit-file>
+<div *ngIf="connection && ( connectionReference?.connectionCategory == eConnectionCategory.File || connection?.purpose !== eConnectionPurpose.Source )">
+    <dexih-table-edit-file [formService]='formsService' [connection]='connection' [isFile]='connectionReference?.connectionCategory == eConnectionCategory.File' (onTableChanged)="onTableChanged($event)"></dexih-table-edit-file>
 </div>

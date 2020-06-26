@@ -6,7 +6,7 @@ import { Subscription} from 'rxjs';
 import { Location } from '@angular/common';
 import { FormArray } from '@angular/forms';
 import { HubFormsService } from '../../../hub.forms.service';
-import { DexihConnection, DexihFileFormat, eTypeCode, DexihTable, DexihTableColumn } from '../../../../shared/shared.models';
+import { DexihConnection, DexihFileFormat, eTypeCode, DexihTable, DexihTableColumn, ConnectionReference } from '../../../../shared/shared.models';
 import { HubCache, formatTypes } from '../../../hub.models';
 import { CancelToken } from '../../../../+auth/auth.models';
 
@@ -17,6 +17,7 @@ import { CancelToken } from '../../../../+auth/auth.models';
 })
 export class TableEditFileComponent implements OnInit, OnDestroy {
     @Input() public connection: DexihConnection;
+    @Input() public isFile = false;
     @Input() public formService: HubFormsService;
 
     public hasBaseDropZoneOver = false;

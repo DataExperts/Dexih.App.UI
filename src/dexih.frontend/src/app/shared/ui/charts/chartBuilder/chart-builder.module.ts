@@ -5,7 +5,6 @@ import { ChartBuilderComponent } from './chart-builder.component';
 import { DexihComponentsModule } from 'dexih-ngx-components';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { GoogleMapComponent } from '../googleMap/google-map.component';
-import { ChartViewComponent } from './chart-view.component';
 import { ComboChartComponent } from '../comboChart';
 import { AngularResizedEventModule } from 'angular-resize-event';
 
@@ -20,10 +19,9 @@ import { AngularResizedEventModule } from 'angular-resize-event';
   ],
   declarations: [
     ChartBuilderComponent,
-    ChartViewComponent,
     GoogleMapComponent
   ],
-  exports: [ChartBuilderComponent, ChartViewComponent, GoogleMapComponent],
+  exports: [ChartBuilderComponent, GoogleMapComponent],
 })
 export class ChartBuilderModule {
 

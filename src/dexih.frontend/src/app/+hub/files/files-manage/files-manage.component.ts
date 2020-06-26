@@ -3,9 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../+auth/auth.service';
 import { HubService } from '../../hub.service';
 import { Observable, BehaviorSubject, Subscription, combineLatest} from 'rxjs';
-import { HubCache, FileProperties, eCacheStatus, ConnectionTables } from '../../hub.models';
+import { HubCache, FileProperties, eCacheStatus, ConnectionTables, updateStrategies } from '../../hub.models';
 import { Message, FileHandler, eFileStatus, CancelToken } from '../../../+auth/auth.models';
-import { DexihTable, eFlatFilePath, DexihConnection, eConnectionCategory, eFlatFilePathItems } from '../../../shared/shared.models';
+import { DexihTable, eFlatFilePath, DexihConnection, eConnectionCategory, eFlatFilePathItems, eConnectionPurpose,
+    ConnectionReference, RemoteLibraries, eUpdateStrategy, eUpdateStrategyItems } from '../../../shared/shared.models';
 
 
 @Component({
@@ -20,6 +21,10 @@ export class FilesManageComponent implements OnInit, OnDestroy {
     public canEdit = false;
     public tableKey: number;
     public table: DexihTable;
+    public connectionReference: ConnectionReference;
+    public updateStrategy: eUpdateStrategy = eUpdateStrategy.Reload;
+
+    public updateStrategies = updateStrategies;
 
     public path = eFlatFilePath.None;
     public localPath: string;
@@ -28,6 +33,8 @@ export class FilesManageComponent implements OnInit, OnDestroy {
     public eFileStatus = eFileStatus;
 
     public connectionTables: ConnectionTables[];
+
+    public remoteLibraries: RemoteLibraries;
 
     public hubCache: HubCache;
 
@@ -73,17 +80,18 @@ export class FilesManageComponent implements OnInit, OnDestroy {
                 let params = result[0];
                 let queryParams = result[1];
                 this.hubCache = result[2];
-                let remoteLibraries = result[3];
+                this.remoteLibraries = result[3];
 
                 // if (this.hubCache.status !== eCacheStatus.Loaded) { return; }
 
+                // if the connection is a file connection or not a source connection
                 this.fileConnections = this.hubCache.hub.dexihConnections
                     .filter(c => {
-                        let ref = remoteLibraries.connections.find(con =>
+                        let ref = this.remoteLibraries.connections.find(con =>
                             c.connectionAssemblyName === con.connectionAssemblyName
                             && c.connectionClassName === con.connectionClassName);
                         if (ref) {
-                            return ref.connectionCategory === eConnectionCategory.File;
+                            return (ref.connectionCategory === eConnectionCategory.File || c.purpose !== eConnectionPurpose.Source);
                         } else {
                             return false;
                         }
@@ -124,6 +132,10 @@ export class FilesManageComponent implements OnInit, OnDestroy {
                 }
 
                 this.table = this.hubCache.getTable(this.tableKey);
+                let connection = this.hubCache.getConnection(this.table.connectionKey);
+                this.connectionReference = this.remoteLibraries.connections.find(con =>
+                    connection.connectionAssemblyName === con.connectionAssemblyName
+                    && connection.connectionClassName === con.connectionClassName);
 
                 if (!this.table && this.tableKey) {
                     this.hubService.addHubErrorMessage(`The table with the key ${this.tableKey} could not be found.`);
@@ -155,17 +167,20 @@ export class FilesManageComponent implements OnInit, OnDestroy {
     }
 
     refreshFiles() {
-        this.hubService.getFileList(this.table, this.path, this.cancelToken).then(result => {
-            this._tableData.next(result);
-        }).catch(reason => {
-            this._tableData.next([]);
-        });
+        if (this.connectionReference.allowsFlatFiles) {
+            this.hubService.getFileList(this.table, this.path, this.cancelToken).then(result => {
+                this._tableData.next(result);
+            }).catch(reason => {
+                this._tableData.next([]);
+            });
+        }
     }
 
     public uploadSelected(items: Array<FileHandler>) {
         items.forEach(item => {
             this.authService.upload(item).then(status => {
                 if (status.success) {
+                    this.hubService.addHubSuccessMessage(`File ${item.file.name} uploaded successfully.`)
                     this.refreshFiles();
                 } else {
                     this.hubService.addHubMessage(status);
@@ -234,11 +249,12 @@ export class FilesManageComponent implements OnInit, OnDestroy {
 
     public doUpload(files) {
         Array.prototype.forEach.call(files, file => {
-            this.hubService.uploadFile(this.table, this.path, file.name, this.cancelToken).then(url => {
+            this.hubService.uploadFile(this.table, this.path, this.updateStrategy, file.name, this.cancelToken).then(url => {
                 let fileHandler = new FileHandler(file, url);
                 if (this.automaticUpload) {
                     this.authService.upload(fileHandler).then(status => {
                         if (status.success) {
+                            this.hubService.addHubSuccessMessage(`File ${file.name} uploaded successfully.`)
                             this.refreshFiles();
                         } else {
                             this.hubService.addHubMessage(status);
@@ -249,6 +265,7 @@ export class FilesManageComponent implements OnInit, OnDestroy {
 
                 }
                 this.uploadedFiles.push(fileHandler);
+                this.uploadedFiles = [...this.uploadedFiles];
             }).catch(reason => {
                 this.hubService.addHubMessage(reason);
             });

@@ -6,7 +6,7 @@ import { AuthService } from '../../../+auth/auth.service';
 import { HubService } from '../..';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HubFormsService } from '../../hub.forms.service';
-import { DexihConnection, eTypeCode, DexihTable, eConnectionCategory } from '../../../shared/shared.models';
+import { DexihConnection, eTypeCode, DexihTable, eConnectionCategory, eConnectionPurpose } from '../../../shared/shared.models';
 
 @Component({
     selector: 'files-bulk-load',
@@ -84,7 +84,7 @@ export class FilesBulkLoadComponent implements OnInit, OnDestroy {
                             && c.connectionClassName === con.connectionClassName);
 
                         if (ref) {
-                            return ref.connectionCategory === eConnectionCategory.File;
+                            return (ref.connectionCategory === eConnectionCategory.File || c.purpose !== eConnectionPurpose.Source);
                         } else {
                             return false;
                         }

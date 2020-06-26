@@ -4,7 +4,7 @@ import { HubService } from '../../hub.service';
 import { HubCache } from '../../hub.models';
 import { Subscription, combineLatest} from 'rxjs';
 import { DexihTable, eConnectionCategory, DexihConnection, ConnectionReference, DexihDatalink,
-    DownloadObject, eSourceType, eDownloadFormat, DexihHub, eDataObjectType } from '../../../shared/shared.models';
+    DownloadObject, eSourceType, eDownloadFormat, DexihHub, eDataObjectType, eConnectionPurpose } from '../../../shared/shared.models';
 import { CancelToken } from '../../../+auth/auth.models';
 
 @Component({
@@ -27,6 +27,7 @@ export class ActionsTableButtonComponent implements OnInit, OnChanges, OnDestroy
 
     public connection: DexihConnection;
     public connectionReference: ConnectionReference;
+    public eConnectionPurpose = eConnectionPurpose;
 
     datalinksSource: Array<DexihDatalink> = [];
     datalinksTarget: Array<DexihDatalink> = [];

@@ -20,7 +20,7 @@
         </li>
         <li><a class="dropdown-item" (click)="download()" title="Download data from selected tables to csv files."><i class="fa fa-cloud-download"></i> Download Data</a></li>
 
-        <li *ngIf="hubCache.canWrite && connectionReference?.connectionCategory == eConnectionCategory.File">
+        <li *ngIf="hubCache.canWrite && ( connectionReference?.connectionCategory == eConnectionCategory.File || connection?.purpose !== eConnectionPurpose.Source)">
             <a class="dropdown-item" [routerLink]="[hubPath, 'files', 'manage']" [queryParams]="{'tableKey': tables[0].key}" queryParamsHandling="merge"><i class="fa fa-upload"></i> Upload/Download Files</a>
         </li>
 
