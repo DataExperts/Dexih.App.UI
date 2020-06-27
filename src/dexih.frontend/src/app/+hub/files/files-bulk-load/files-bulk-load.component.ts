@@ -7,6 +7,7 @@ import { HubService } from '../..';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HubFormsService } from '../../hub.forms.service';
 import { DexihConnection, eTypeCode, DexihTable, eConnectionCategory, eConnectionPurpose } from '../../../shared/shared.models';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'files-bulk-load',
@@ -15,19 +16,18 @@ import { DexihConnection, eTypeCode, DexihTable, eConnectionCategory, eConnectio
 
 export class FilesBulkLoadComponent implements OnInit, OnDestroy {
     private _subscription: Subscription;
+    private _connectionKeySubscription: Subscription;
     private _flatFilesSubscription: Subscription;
 
     public entityType = 'Table';
 
     public canEdit = false;
-    public connectionKey: number;
     public connection: DexihConnection;
+
+    public bulkLoadForm: FormGroup;
 
     public formatTypes = formatTypes;
     public eTypeCode = eTypeCode;
-    public formatType = eTypeCode.Text;
-    public fileFormatKey: number;
-
     public eFileStatus = eFileStatus;
 
     public hubCache: HubCache;
@@ -64,7 +64,8 @@ export class FilesBulkLoadComponent implements OnInit, OnDestroy {
         private hubService: HubService,
         private route: ActivatedRoute,
         private router: Router,
-        public formsService: HubFormsService) { }
+        public formsService: HubFormsService,
+        private fb: FormBuilder) { }
 
     ngOnInit() {
         try {
@@ -90,23 +91,31 @@ export class FilesBulkLoadComponent implements OnInit, OnDestroy {
                         }
                     });
 
-                this.connectionKey = +queryParams['connectionKey'];
-                if (!this.connectionKey) {
+                let connectionKey = +queryParams['connectionKey'];
+                if (!connectionKey) {
                     if (this.fileConnections.length > 0) {
-                        this.connectionKey = this.fileConnections[0].key;
+                        connectionKey = this.fileConnections[0].key;
                     }
                 }
 
-                this.connection = this.hubCache.getConnection(this.connectionKey);
+                this.bulkLoadForm = this.fb.group({
+                    'connectionKey': [connectionKey],
+                    'formatType': [eTypeCode.Text],
+                    'fileFormatKey': [],
+                    'includeFileName': [false],
+                    'includeFileDate': [false],
+                    'includeFileRowNumber': [false]
+                  });
 
-                if (!this.connection && this.connectionKey) {
-                    this.hubService.addHubErrorMessage(`The connection with the key ${this.connectionKey} could not be found.`);
-                } else if (this.connection) {
-                    this.pageTitle = 'Load files for ' + this.connection.name;
-                    this.showPage = true;
-                }
+                this.updateConnection(connectionKey);
+
+                if (this._connectionKeySubscription) { this._connectionKeySubscription.unsubscribe(); }
+                this._connectionKeySubscription = this.bulkLoadForm.controls.connectionKey.valueChanges.subscribe(key => {
+                    this.updateConnection(key);
+                });
             });
 
+            if (this._flatFilesSubscription) { this._flatFilesSubscription.unsubscribe(); }
             this._flatFilesSubscription = this.hubService.getFlatFilesObservable().subscribe(flatFileReady => {
                 if (flatFileReady.reference === this.reference) {
                     this.tables = flatFileReady.tables;
@@ -121,11 +130,23 @@ export class FilesBulkLoadComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         if (this._subscription) { this._subscription.unsubscribe(); }
         if (this._flatFilesSubscription) { this._flatFilesSubscription.unsubscribe(); }
+        if (this._connectionKeySubscription) { this._connectionKeySubscription.unsubscribe(); }
         this.cancelToken.cancel();
     }
 
     public close() {
         this.authService.navigateUp();
+    }
+
+    private updateConnection(connectionKey) {
+        this.connection = this.hubCache.getConnection(connectionKey);
+
+        if (!this.connection && connectionKey) {
+            this.hubService.addHubErrorMessage(`The connection with the key ${connectionKey} could not be found.`);
+        } else if (this.connection) {
+            this.pageTitle = 'Load files for ' + this.connection.name;
+            this.showPage = true;
+        }
     }
 
     public uploadFile(event) {
@@ -140,7 +161,9 @@ export class FilesBulkLoadComponent implements OnInit, OnDestroy {
 
     public doUpload(files) {
         Array.prototype.forEach.call(files, file => {
-            this.hubService.bulkUploadFiles(this.connectionKey, this.fileFormatKey, this.formatType, file.name,
+            let bulkLoad = this.bulkLoadForm.value;
+            this.hubService.bulkUploadFiles(bulkLoad.connectionKey, bulkLoad.fileFormatKey, bulkLoad.formatType,
+                bulkLoad.includeFileName, bulkLoad.includeFileDate, bulkLoad.includeFileRowNumber, file.name,
                 this.cancelToken).then(result => {
                 let url = result.url;
                 this.reference = result.reference;

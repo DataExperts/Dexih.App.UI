@@ -557,6 +557,7 @@ namespace dexih.api.Services.Remote
 		    long connectionKey, 
 		    long fileFormatKey, 
 		    ETypeCode formatType, 
+		    bool includeFileName, bool includeFileDate, bool includeFileRowNumber,
 		    string fileName, 
 		    
 		    RepositoryManager database, CancellationToken cancellationToken)
@@ -578,6 +579,9 @@ namespace dexih.api.Services.Remote
 				    connectionKey,
 				    fileFormatKey,
 				    formatType,
+				    includeFileName,
+				    includeFileDate,
+				    includeFileRowNumber,
 				    fileName 
 			    };
 

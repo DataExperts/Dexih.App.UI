@@ -2037,7 +2037,9 @@ export class HubService implements OnInit, OnDestroy {
         });
     }
 
-    bulkUploadFiles(connectionKey: number, fileFormatKey: number, formatType: eTypeCode , fileName: string, cancelToken: CancelToken):
+    bulkUploadFiles(connectionKey: number, fileFormatKey: number, formatType: eTypeCode,
+        includeFileName: boolean, includeFileDate: boolean, includeFileRowNumber: boolean,
+        fileName: string, cancelToken: CancelToken):
     Promise<{url: string, reference: string}> {
         return new Promise<{url: string, reference: string}>((resolve, reject) => {
             let remoteAgent = this.getRemoteAgentCurrent();
@@ -2048,6 +2050,9 @@ export class HubService implements OnInit, OnDestroy {
                 connectionKey: connectionKey,
                 fileFormatKey: fileFormatKey,
                 formatType: formatType,
+                includeFileName,
+                includeFileDate,
+                includeFileRowNumber,
                 fileName: fileName,
             }, remoteAgent, 'Uploading file...', cancelToken).then(url => {
                 resolve({reference: url.key, url: url.url + '/file/' + fileName});

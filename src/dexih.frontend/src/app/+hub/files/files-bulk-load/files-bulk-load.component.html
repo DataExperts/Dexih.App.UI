@@ -10,9 +10,10 @@
 
 <div *ngIf="fileConnections && fileConnections.length > 0" class="container">
     <dexih-widget *ngIf="!currentTable" [title]="'Bulk Load: ' + connection?.name" iconClass="fa fa-lg fa-fw fa-files-o" [showCloseButton]="true" (close)="close()">
+        <form *ngIf="bulkLoadForm" [formGroup]="bulkLoadForm">
         <div class="m-3">
             <section>
-                <form-select label="Connection" [(ngModel)]="connectionKey" [items]="fileConnections" itemKey="key"
+                <form-select label="Connection" formControlName="connectionKey" [items]="fileConnections" itemKey="key"
                     itemName="name" iconClass="fa fa-database" note='The connection where the files will be uploaded to.'>
                     <a routerLink="//hub/{{hubCache.hub.hubKey}}/connections/connection-new/Source">(<i class="fa fa-sticky-note-o"></i> New )</a>
                 </form-select>
@@ -20,13 +21,13 @@
 
             <div class="form-row">
                 <section class="col-md-6">
-                    <form-select label="Format Type" [(ngModel)]="formatType" [items]="formatTypes" itemKey="key"
+                    <form-select label="Format Type" formControlName="formatType" [items]="formatTypes" itemKey="key"
                         itemName="name" iconClass="fa fa-text" note='The format of data.'>
                     </form-select>
                 </section>
 
-                <section class="col-md-6" *ngIf="formatType == eTypeCode.Text">
-                    <form-select label="File Format" [(ngModel)]="fileFormatKey" placeholder="File Format"
+                <section class="col-md-6" *ngIf="bulkLoadForm.controls.formatType.value == eTypeCode.Text">
+                    <form-select label="File Format" formControlName="fileFormatKey" placeholder="File Format"
                         [items]="hubCache.hub.dexihFileFormats" itemKey="key" itemName="name" [enableFilter]="false"
                         note="Specify the file format to use, if not specified, a csv (command separated) format will be used."
                         [allowNullSelect]="true" selectNullMessage="Use default (csv) format">
@@ -34,7 +35,14 @@
                     </form-select>
                 </section>
             </div>
+
+            <section >
+                <form-checkbox label="Include file name field" formControlName="includeFileName"></form-checkbox>
+                <form-checkbox label="Include file date field" formControlName="includeFileDate"></form-checkbox>
+                <form-checkbox label="Include file row field" formControlName="includeFileRowNumber"></form-checkbox>
+            </section>
         </div>
+    </form>
 
         <ul *ngIf="connection" class="list-group">
             <dexih-widget-section title='Drop Files to Load' [showExpandButton]="true">
@@ -57,7 +65,9 @@
                     </ng-template>
 
                     <ng-template #actions let-items="items">
+                        <div class="d-flex align-items-center h-100">
                         <form-checkbox [(ngModel)]="automaticUpload" label="Automatically upload files when added to the queue."></form-checkbox>
+                        </div>
                     </ng-template>
 
                     <ng-template #rowStatus select="rowStatus" let-item="item">
@@ -89,8 +99,8 @@
 
     <dexih-widget *ngIf="currentTable" [title]="'Edit table: ' + formsService.currentForm.controls.name.value" [showCloseButton]="true" (close)="closeTable()">
         <ng-template #header>
-            <a class="btn btn-sm btn-primary mr-1" (click)="applyChanges()">Apply Changes</a>
-            <a class="btn btn-sm btn-danger mr-1" (click)="cancel()">Cancel</a>
+            <dexih-button-apply (click)="applyChanges()"></dexih-button-apply>
+            <dexih-button-cancel class="ml-1" (click)="cancel()"></dexih-button-cancel>
         </ng-template>
         <router-outlet></router-outlet>
     </dexih-widget>

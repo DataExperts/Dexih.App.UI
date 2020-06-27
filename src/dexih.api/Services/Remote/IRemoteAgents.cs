@@ -45,7 +45,7 @@ namespace dexih.api.Services.Remote
 		Task<string> UploadFile(string instanceId, long hubKey, DownloadUrl downloadUrl, long tableKey, EFlatFilePath path, EUpdateStrategy updateStrategy, string fileName,
 			RepositoryManager database, CancellationToken cancellationToken);
 
-	    Task<string> BulkUploadFiles(string instanceId, long hubKey, DownloadUrl downloadUrl, string connectionId, long connectionKey, long fileFormatKey, ETypeCode formatType, string fileName,
+	    Task<string> BulkUploadFiles(string instanceId, long hubKey, DownloadUrl downloadUrl, string connectionId, long connectionKey, long fileFormatKey, ETypeCode formatType, bool includeFileName, bool includeFileDate, bool includeFileRowNumber, string fileName,
 		    RepositoryManager database, CancellationToken cancellationToken);
 
 	    Task<string> ImportTables(string instanceId, long hubKey, DownloadUrl downloadUrl, DexihTable[] hubTables,
