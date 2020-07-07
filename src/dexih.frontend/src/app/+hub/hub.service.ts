@@ -1652,7 +1652,7 @@ export class HubService implements OnInit, OnDestroy {
     // downloads a dataset from the provided url
     downloadUrlData(url: string, cancelToken: CancelToken): PromiseWithCancel<PreviewResults> {
         let promise = new PromiseWithCancel<PreviewResults>((resolve, reject) => {
-                let httpPromise = this.authService.get<PreviewResults>(url, null, false, cancelToken);
+                let httpPromise = this.authService.getFromExternal<PreviewResults>(url, null, cancelToken);
                 httpPromise.then(data => {
                     if (data['success'] === false) {
                         this.addHubMessage(data);

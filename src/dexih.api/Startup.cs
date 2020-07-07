@@ -28,6 +28,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Net.Http.Headers;
 
 using StackExchange.Redis;
+using SameSiteMode = Microsoft.AspNetCore.Http.SameSiteMode;
 
 
 namespace dexih.api
@@ -180,10 +181,7 @@ namespace dexih.api
 
             // Add remote agent connectivity service.
             services.AddSingleton<IRemoteAgents, DexihRemoteAgents>();
-
-			// Add data reader service which is used to transmit data from remoteAgents
-//			services.AddSingleton<IDataReader, DexihDataReader>();
-
+            
 	        // Add operations which allow controllers to interact with the repository.
 	        services.AddTransient<IDexihOperations, DexihOperations>();
 	        
@@ -192,6 +190,18 @@ namespace dexih.api
 	        services.AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>();
 	        
 	        services.AddHttpClient();
+
+	        if (appSettings.Origins?.Length > 0)
+	        {
+		        services.AddCors(options =>
+		        {
+			        options.AddDefaultPolicy(builder =>
+						builder.WithOrigins(appSettings.Origins)
+					        .AllowAnyMethod()
+					        .AllowAnyHeader()
+					        .AllowCredentials());
+		        });
+	        }
 
 	        // use the signalr service if specified.
 	        var builder = services.AddSignalR().AddJsonProtocol(options =>
@@ -251,6 +261,8 @@ namespace dexih.api
 				}
 			});
 
+			app.UseCors();
+
 			app.UseRouting();
 			app.UseResponseCaching();
 			
@@ -276,41 +288,11 @@ namespace dexih.api
             {
 	            ForwardedHeaders = ForwardedHeaders.XForwardedFor |
 	                               ForwardedHeaders.XForwardedProto,
-            }); 
-            
+            });
 
             // enable the telemetry data.
             app.UseAuthentication();
             app.UseAuthorization();
-
-            // removed for .net core 3.0
-//			if (!string.IsNullOrEmpty(appSettings.SignalRConnectionString))
-//			{
-//				app.UseAzureSignalR(routes =>
-//				{
-//					routes.MapHub<RemoteAgentHub>("/remoteagent");
-//					routes.MapHub<BrowserHub>("/browser");
-//				});
-//
-//				_logger.LogInformation($"SignalR using azure service at {appSettings.SignalRConnectionString}.");
-//			}
-//			else
-//			{
-//				app.UseSignalR(routes =>
-//				{
-//					routes.MapHub<RemoteAgentHub>("/remoteagent", options =>
-//					{
-//						options.LongPolling.PollTimeout = TimeSpan.FromSeconds(60);
-//					});
-//				
-//					routes.MapHub<BrowserHub>("/browser", options =>
-//					{
-//						options.LongPolling.PollTimeout = TimeSpan.FromSeconds(60);
-//					});
-//				});
-//
-//				_logger.LogInformation($"SignalR using current server.");
-//			}
 
             app.Use(async (context, next) =>
             {
@@ -321,8 +303,8 @@ namespace dexih.api
 		            
 					// We can send the request token as a JavaScript-readable cookie, and Angular will use it by default.
 					var tokens = antiforgery.GetAndStoreTokens(context);
-					context.Response.Cookies.Append("XSRF-TOKEN", tokens.RequestToken, new CookieOptions() { HttpOnly = false });
-		            
+					context.Response.Cookies.Append("XSRF-TOKEN", tokens.RequestToken, new CookieOptions() { HttpOnly = false});	
+
 		            await next();
 
 		            if (context.Response.StatusCode == 404)

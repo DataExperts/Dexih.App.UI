@@ -360,7 +360,6 @@ namespace dexih.api.Controllers
 		}
 
 		[HttpPost("[action]")]
-		[ValidateAntiForgeryToken]
 		[ValidateHub(EPermission.PublishReader)]
 		public async Task<string> GetRemoteAgentStatus([FromBody] HubModelBase remoteAgentStatus, CancellationToken cancellationToken)
 		{
@@ -391,7 +390,6 @@ namespace dexih.api.Controllers
 		}
 
 		[HttpPost("[action]")]
-		[ValidateAntiForgeryToken]
 		[ValidateHub(EPermission.Owner)]
 		public Task DeleteRemoteAgent([FromBody] RemoteAgentDelete remoteAgentDelete, CancellationToken cancellationToken)
 		{

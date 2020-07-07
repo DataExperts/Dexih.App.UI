@@ -763,7 +763,7 @@ namespace dexih.api.Controllers
         // POST: /Account/ForgotPassword
         [HttpPost("[action]")]
         [AllowAnonymous]
-        // [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public async Task ForgotPassword([FromBody] LoginModel login, CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
@@ -810,7 +810,7 @@ namespace dexih.api.Controllers
         // POST: /Account/ResetPassword
         [HttpPost("[action]")]
         [AllowAnonymous]
-        // [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public async Task ResetPassword([FromBody] ResetPasswordModel resetPassword, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)

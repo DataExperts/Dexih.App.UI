@@ -4,6 +4,7 @@ import { LogFactory, eLogLevel } from '../../logging';
 import { HubConnection, HubConnectionBuilder, LogLevel, HubConnectionState } from '@microsoft/signalr';
 import { Location } from '@angular/common';
 import { ClientMessage, eClientCommand } from '../shared/shared.models';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class WebSocketService implements OnDestroy {
@@ -41,7 +42,7 @@ export class WebSocketService implements OnDestroy {
 
         this.hubConnection = new HubConnectionBuilder()
             .configureLogging(LogLevel.Trace)
-            .withUrl(this.location.prepareExternalUrl('/browser'))
+            .withUrl(environment.apiUrl + this.location.prepareExternalUrl('/browser'))
             .build();
 
         this.hubConnection.on('Command', (remoteMessage: ClientMessage) => {

@@ -17,6 +17,7 @@ import { DexihRemoteAgent, DexihActiveAgent, DownloadUrl, CacheManager, eClientC
     DexihDashboard, ListOfValuesItem, SharedData, eDownloadFormat, eDataObjectType, InputColumn, SelectQuery, InputParameterBase } from '../shared/shared.models';
 import { PreviewResults } from '../+hub/hub.models';
 import { WebSocketService} from './websocket.service';
+import { environment } from '../../environments/environment';
 
 declare var gapi: any;
 
@@ -320,8 +321,9 @@ export class AuthService implements OnDestroy {
 
             const body = JSON.stringify(m);
 
-            const baseUrl = this.location.prepareExternalUrl('/api/Account/LogError');
-            this.http.post<Message>(baseUrl, body, { withCredentials: true, headers: headers }).subscribe(() => {
+            this.http.post<Message>(this.getApiUrl('/api/Account/LogError'), 
+                body,
+                { withCredentials: true, headers: headers }).subscribe(() => {
                 // doesn't matter what is returned.
             });
         });
@@ -487,6 +489,10 @@ export class AuthService implements OnDestroy {
         });
     }
 
+    public getApiUrl(url) {
+        return environment.apiUrl + this.location.prepareExternalUrl(url);
+    }
+
     // post form data
     public postForm(url, data, waitMessage = 'Please wait while the operation completes.', cancelToken = null): Promise<any> {
         let headers = new HttpHeaders({
@@ -558,9 +564,10 @@ export class AuthService implements OnDestroy {
 
                 let json = this.JsonNoNulls(data);
 
-                // post command to web server, and return the unique key which can be
+                // post command to api server, and return the unique key which can be
                 // used to collect the results form the remote agent.
-                this.http.post(url, json, { withCredentials: true, headers: headers, responseType: 'text' })
+                const apiUrl = this.getApiUrl(url);
+                this.http.post(apiUrl, json, { withCredentials: true, headers: headers, responseType: 'text' })
                 .toPromise().then(key => {
                     resolve(key);
                 }).catch(reason => {
@@ -577,7 +584,7 @@ export class AuthService implements OnDestroy {
                             data.downloadUrl = downloadUrl2;
                             data.remoteAgentId = remoteAgent.instanceId;
                             json = this.JsonNoNulls(data);
-                            this.http.post(url, json, { withCredentials: true, headers: headers, responseType: 'text' })
+                            this.http.post(apiUrl, json, { withCredentials: true, headers: headers, responseType: 'text' })
                             .toPromise().then(key => {
                                 resolve(key);
                             }).catch(reason2 => reject(reason2));
@@ -610,7 +617,7 @@ export class AuthService implements OnDestroy {
 
             formData.append('downloadUrlJson', JSON.stringify(downloadUrl));
 
-               this.http.post(url, formData, { withCredentials: true, responseType: 'text' })
+               this.http.post(this.getApiUrl(url), formData, { withCredentials: true, responseType: 'text' })
                .toPromise().then(key => {
                    resolve(key);
                }).catch(reason => {
@@ -638,7 +645,7 @@ export class AuthService implements OnDestroy {
        });
 
        let promise = new PromiseWithCancel<any>((resolve, reject) => {
-            this.http.post(url, this.JsonNoNulls(data), { withCredentials: true, headers: headers, responseType: 'text' })
+            this.http.post(this.getApiUrl(url), this.JsonNoNulls(data), { withCredentials: true, headers: headers, responseType: 'text' })
             .toPromise().then(value => {
                 this.removeWaitMessage(messageKey);
                 resolve(value);
@@ -674,7 +681,8 @@ export class AuthService implements OnDestroy {
                 //     data.responseUrl = downloadUrl.url;
                 // }
 
-                this.http.post(url, this.JsonNoNulls(data), { withCredentials: true, headers: headers, responseType: 'text' })
+                this.http.post(this.getApiUrl(url), this.JsonNoNulls(data),
+                { withCredentials: true, headers: headers, responseType: 'text' })
                 .toPromise().then(key => {
                     this.removeWaitMessage(messageKey);
                     resolve({url: downloadUrl.url + '/upload/' + key, key});
@@ -722,7 +730,7 @@ export class AuthService implements OnDestroy {
     // gets the url to execute a remote command
     public async getRemoteData<T>(activeAgent: DexihActiveAgent, key: string, cancelToken: CancelToken, command: 'upload' | 'download' | 'setRaw' = 'download', extra = ''): Promise<T> {
         let downloadUrl = await this.getRemoteUrl(activeAgent, key, command, extra);
-        return this.get<T>(downloadUrl, null, false, cancelToken);
+        return this.getFromExternal<T>(downloadUrl, null, cancelToken);
     }
 
     // post an object which is converted to json.
@@ -756,9 +764,7 @@ export class AuthService implements OnDestroy {
             let messageKey = this.addWaitMessage(waitMessage);
             this.logger.LogC(() => `post url: ${url}, data: ${body}.`, eLogLevel.Debug);
 
-            const baseUrl = this.location.prepareExternalUrl(url);
-
-            let subscription = this.http.post<T>(baseUrl, body, { withCredentials: true, headers: headers }).subscribe(
+            let subscription = this.http.post<T>(this.getApiUrl(url), body, { withCredentials: true, headers: headers }).subscribe(
                 result => {
                     this.removeWaitMessage(messageKey);
                     resolve(result);
@@ -778,25 +784,21 @@ export class AuthService implements OnDestroy {
         return promise;
     }
 
-    public get<T>(url, waitMessage = 'Please wait while the operation completes.', updateUrl = true, cancelToken: CancelToken):
+    // get from the api
+    public getFromApi<T>(url, waitMessage = 'Please wait while the operation completes.', cancelToken: CancelToken):
         PromiseWithCancel<T> {
         let messageKey: string = null;
         if (waitMessage) {
             messageKey = this.addWaitMessage(waitMessage);
         }
-        let baseUrl: string;
-        if (updateUrl) {
-            baseUrl = this.location.prepareExternalUrl(url);
-        } else {
-            baseUrl = url;
-        }
+        let baseUrl = this.getApiUrl(url);
 
         if (!cancelToken) {
             cancelToken = new CancelToken();
         }
 
         let promise = new PromiseWithCancel<T>((resolve, reject) => {
-            let subscription = this.http.get<T>(baseUrl).subscribe(result => {
+            let subscription = this.http.get<T>(baseUrl, {withCredentials: true}).subscribe(result => {
                 this.removeWaitMessage(messageKey);
                 resolve(result);
             }, error => {
@@ -815,27 +817,37 @@ export class AuthService implements OnDestroy {
         return promise;
     }
 
-    // // gets raw text data from the url
-    // public getRaw(url, data, cancelToken: CancelToken): PromiseWithCancel<string> {
-    //     let headers = new HttpHeaders({
-    //         // 'Authorization': `Bearer ${authToken}`,
-    //         'Content-Type': 'application/json'
-    //     });
+    // calls an external url (mostly used for remote agent calls).
+    public getFromExternal<T>(url, waitMessage = 'Please wait while the operation completes.', cancelToken: CancelToken):
+    PromiseWithCancel<T> {
+        let messageKey: string = null;
+        if (waitMessage) {
+            messageKey = this.addWaitMessage(waitMessage);
+        }
 
-    //     return new PromiseWithCancel<string>((resolve, reject) => {
-    //         let subscription =
-    //             this.http.get(url, data, { withCredentials: true, headers: headers, responseType: 'text' }).subscribe(result => {
-    //             resolve(result);
-    //         }, error => {
-    //             reject(this.httpError(url, error));
-    //         });
+        if (!cancelToken) {
+            cancelToken = new CancelToken();
+        }
 
-    //         cancelToken.cancelMethod = () => {
-    //             subscription.unsubscribe();
-    //         }
-    //     }, cancelToken);
-    // }
+        let promise = new PromiseWithCancel<T>((resolve, reject) => {
+            let subscription = this.http.get<T>(url).subscribe(result => {
+                this.removeWaitMessage(messageKey);
+                resolve(result);
+            }, error => {
+                this.removeWaitMessage(messageKey);
+                reject(this.httpError(url, error));
+            }, () => {
+                cancelToken.cancelMethod = null;
+            });
 
+            cancelToken.cancelMethod = () => {
+                subscription.unsubscribe();
+                reject(new Message(false, 'Cancelled', null, null));
+            }
+        }, cancelToken);
+
+        return promise;
+    }
 
     private httpError(url: string, error: any): Message {
         let message = new Message(false, 'Http Error', `Error calling ${url}.`, null);
@@ -879,6 +891,8 @@ export class AuthService implements OnDestroy {
             }).catch(() => { reject(); });
         });
     }
+
+    
 
     public upload(file: FileHandler): Promise<Message> {
         return new Promise<Message>((resolve, reject) => {
@@ -1080,13 +1094,13 @@ export class AuthService implements OnDestroy {
 
     // gets the XSRF token which is required to be posted as a header 'X-XSRF-TOKEN'
     // to avoid cross-site request forgery.
-    public getXSRFToken() {
-        let value = '; ' + document.cookie;
-        let parts = value.split('; ' + 'XSRF-TOKEN' + '=');
-        if (parts.length === 2) {
-            return parts.pop().split(';').shift();
-        }
-    }
+    // public getXSRFToken() {
+    //     let value = '; ' + document.cookie;
+    //     let parts = value.split('; ' + 'XSRF-TOKEN' + '=');
+    //     if (parts.length === 2) {
+    //         return parts.pop().split(';').shift();
+    //     }
+    // }
 
     public getLoginProviders(): Promise<Array<UserLoginInfo>> {
         return this.post<Array<UserLoginInfo>>('/api/Account/ExternalLogins', null, 'Getting external login information.')
@@ -1097,8 +1111,8 @@ export class AuthService implements OnDestroy {
         return new Promise<boolean>((resolve, reject) => {
             let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
             let body = this.JsonNoNulls(data);
-            const baseUrl = this.location.prepareExternalUrl(url);
-            this.http.post(baseUrl, body, { headers: headers, responseType: 'blob' })
+
+            this.http.post(this.getApiUrl(url), body, { headers: headers, responseType: 'blob' })
                 .subscribe(returnData => {
                     // let result: any = returnData;
                     let blob = new Blob([returnData], { type: type });
@@ -1824,7 +1838,7 @@ export class AuthService implements OnDestroy {
     }
 
     getIssues(cancelToken: CancelToken): Promise<DexihIssue[]> {
-        return this.get<DexihIssue[]>('/api/Account/GetIssues', 'Getting issues ... ', false, cancelToken);
+        return this.getFromApi<DexihIssue[]>('/api/Account/GetIssues', 'Getting issues ... ', cancelToken);
     }
 
     addIssueComment(issueKey: number, comment: string) {
@@ -2038,7 +2052,7 @@ export class AuthService implements OnDestroy {
     }
 
     public refreshGlobalCache() {
-        let promise = this.get<CacheManager>('/api/Account/GetGlobalCache', null, false, null);
+        let promise = this.getFromApi<CacheManager>('/api/Account/GetGlobalCache', null, null);
         promise.then(cache => {
             this._globalCache.next(cache);
         }).catch(reason => {

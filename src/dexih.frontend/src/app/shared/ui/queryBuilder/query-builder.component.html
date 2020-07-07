@@ -1,14 +1,14 @@
 <div *ngIf="selectQuery">
     <div class="d-flex flex-wrap" *ngIf="selectColumns || sortColumns">
         <div class="flex-fill" *ngIf="selectColumns">
-            <form-tags-dropdown labelLeft="Display Columns" [(ngModel)]="selectQuery.columns" (ngModelChange)="onChanged()" [items]="selectColumns"
+            <form-tags-dropdown floatingLabel="Display Columns" [(ngModel)]="selectQuery.columns" (ngModelChange)="onChanged()" [items]="selectColumns"
                 itemKey="column.name" itemName="column.logicalName" textEntryNote="Specify the columns to select."
                 [enableAddAll]="true" [returnKeys]="false">
             </form-tags-dropdown>
         </div>
     
         <div class="flex-fill ml-1" *ngIf="sortColumns">
-            <form-tags-dropdown labelLeft="Sort Columns" [(ngModel)]="selectQuery.sorts"  (ngModelChange)="onChanged()" [items]="sortColumns" 
+            <form-tags-dropdown floatingLabel="Sort Columns" [(ngModel)]="selectQuery.sorts"  (ngModelChange)="onChanged()" [items]="sortColumns" 
             itemKey="column.runTime" itemName="column.details" textEntryNote="Specify the columns to sort." [enableAddAll]="false" [returnKeys]="false">
             </form-tags-dropdown>
         </div>

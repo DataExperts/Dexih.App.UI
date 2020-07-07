@@ -260,3 +260,5 @@ src/dexih.application/wwwroot/*
 src/dexih.api/letsencrypt.pem
 .DS_Store
 workspace.xml
+
+dist/

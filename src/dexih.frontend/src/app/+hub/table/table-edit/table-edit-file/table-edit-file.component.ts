@@ -41,15 +41,6 @@ export class TableEditFileComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        // let XSRFToken = this.authService.getXSRFToken();
-        // this.uploader = new FileUploader({
-        //     url: '/api/Hub/ImportFileFormat',
-        //     headers: [{
-        //         name: 'X-XSRF-TOKEN',
-        //         value: XSRFToken
-        //     }],
-        // });
-
         try {
             this._subscription = this.hubService.getHubCacheObservable().subscribe(result => {
                 this.hubCache = result;
@@ -57,8 +48,6 @@ export class TableEditFileComponent implements OnInit, OnDestroy {
         } catch (e) {
             this.hubService.addHubClientErrorMessage(e, 'Table Edit File');
         }
-
-
     }
 
     ngOnDestroy() {

@@ -1,7 +1,7 @@
-<div *ngIf="parameters">
+<div *ngIf="parameters" [ngClass]="{'d-flex': !showEdit}">
     <dexih-button-new *ngIf="showEdit && allowAddRemove && parameters.controls.length === 0" (click)="add()"
         text="Add Parameter"></dexih-button-new>
-    <div *ngFor="let parameter of parameters.controls; let i = index" class="pb-1">
+    <div *ngFor="let parameter of parameters.controls; let i = index" class="pb-1 pr-1">
         <form [formGroup]="parameter"
             *ngIf="parameter.controls.isValid.value && (showEdit || parameter.controls.allowUserSelect.value)">
 
