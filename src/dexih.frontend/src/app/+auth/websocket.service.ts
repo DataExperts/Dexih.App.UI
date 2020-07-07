@@ -42,7 +42,7 @@ export class WebSocketService implements OnDestroy {
 
         this.hubConnection = new HubConnectionBuilder()
             .configureLogging(LogLevel.Trace)
-            .withUrl(environment.apiUrl + this.location.prepareExternalUrl('/browser'))
+            .withUrl(environment.apiUrl ? environment.apiUrl + '/browser' : this.location.prepareExternalUrl('/browser'))
             .build();
 
         this.hubConnection.on('Command', (remoteMessage: ClientMessage) => {

@@ -490,7 +490,12 @@ export class AuthService implements OnDestroy {
     }
 
     public getApiUrl(url) {
-        return environment.apiUrl + this.location.prepareExternalUrl(url);
+        if (environment.apiUrl ) {
+            return environment.apiUrl + url;
+        } else {
+            // adds path information if the app is installed under a subfolder.
+            return this.location.prepareExternalUrl(url);
+        }
     }
 
     // post form data
