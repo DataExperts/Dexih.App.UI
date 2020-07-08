@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO.Compression;
+using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using dexih.api.Hubs;
@@ -23,6 +24,7 @@ using dexih.operations;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Net.Http.Headers;
@@ -308,7 +310,11 @@ namespace dexih.api
 		            
 					// We can send the request token as a JavaScript-readable cookie, and Angular will use it by default.
 					var tokens = antiforgery.GetAndStoreTokens(context);
-					var domain = $"{context.Request.Scheme}://{context.Request.Host}{context.Request.PathBase}";
+					//var domain = $"{context.Request.Scheme}://{context.Request.Host}{context.Request.PathBase}";
+
+					context.Request.Headers.TryGetValue("Origin", out var originValues);
+
+					var domain = originValues.FirstOrDefault();
 
 					context.Response.Cookies.Append(
 						"XSRF-TOKEN",
