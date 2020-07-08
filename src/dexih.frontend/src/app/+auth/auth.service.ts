@@ -19,6 +19,7 @@ import { PreviewResults } from '../+hub/hub.models';
 import { WebSocketService} from './websocket.service';
 import { environment } from '../../environments/environment';
 import { Functions } from '../shared/utils/functions';
+import { CookieService } from 'ngx-cookie-service';
 
 declare var gapi: any;
 
@@ -71,7 +72,7 @@ export class AuthService implements OnDestroy {
         private router: Router,
         private route: ActivatedRoute,
         private location: Location,
-        // private modal: Modal,
+        private cookieService: CookieService
     ) {
     }
 
@@ -87,7 +88,7 @@ export class AuthService implements OnDestroy {
     defaultHeaders(): HttpHeaders {
         return new HttpHeaders({
             'Content-Type': 'application/json',
-            'X-XSRF-TOKEN': `${Functions.getCookie('XSRF-TOKEN')}`
+            'X-XSRF-TOKEN': this.cookieService.get('XSRF-TOKEN')
         });
     }
 

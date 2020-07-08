@@ -8,6 +8,7 @@ import { TermsComponent } from '../terms/terms.component';
 import { Subscription, combineLatest } from 'rxjs';
 import { eLoginProvider } from '../../shared/shared.models';
 import { Functions } from '../../shared/utils/functions';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-register',
@@ -40,7 +41,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private authService: AuthService,
     public formsService: FormsService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private cookieService: CookieService) {
   }
 
 
@@ -75,7 +77,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
       this.formsService.startForm(registerForm);
 
-      let loginType = +Functions.getCookie('LoginType');
+      let loginType = +this.cookieService.get('LoginType');
       switch (loginType) {
         case eLoginProvider.Google:
           this.enableGoogle();
@@ -123,7 +125,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   enablePassword() {
     this.formsService.currentForm.controls.email.enable();
     this.formsService.currentForm.controls.provider.setValue(eLoginProvider.Dexih);
-    Functions.setCookie('LoginType', eLoginProvider.Dexih.toString());
+    this.cookieService.set('LoginType', eLoginProvider.Dexih.toString());
     this.message = '';
     this.loginType = eLoginProvider.Dexih;
     this.formsService.currentForm.controls.providerKey.setValue(null);
@@ -136,7 +138,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.formsService.currentForm.controls.provider.setValue(eLoginProvider.Google);
     // this.formsService.currentForm.controls.email.disable();
     this.message = '';
-    Functions.setCookie('LoginType', eLoginProvider.Google.toString());
+    this.cookieService.set('LoginType', eLoginProvider.Google.toString());
     this.loginType = eLoginProvider.Google;
     this.authService.googleEnable().then(
       externalLogin => {
@@ -153,7 +155,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     // this.formsService.currentForm.controls.email.disable();
     this.message = '';
     this.loginType = eLoginProvider.Microsoft;
-    Functions.setCookie('LoginType', eLoginProvider.Microsoft.toString());
+    this.cookieService.set('LoginType', eLoginProvider.Microsoft.toString());
     this.authService.microsoftEnable().then(
       externalLogin => {
         this.setExternalLogin(externalLogin);

@@ -143,8 +143,7 @@ namespace dexih.api
 
 	        // Not required as authentication handled by angular pages.
 	        services.AddAuthentication().AddCookie();
-
-
+	        
 	        if (appSettings.UseResponseCompression)
 	        {
 		        services.Configure<GzipCompressionProviderOptions>(options =>
@@ -193,6 +192,7 @@ namespace dexih.api
 
 	        if (appSettings.Origins?.Length > 0)
 	        {
+		        _logger.LogInformation("Cross site api requests allowed from following origins " + string.Join(", ", appSettings.Origins));
 		        services.AddCors(options =>
 		        {
 			        options.AddDefaultPolicy(builder =>
@@ -201,6 +201,11 @@ namespace dexih.api
 					        .AllowAnyHeader()
 					        .AllowCredentials());
 		        });
+	        }
+	        else
+	        {
+		        _logger.LogInformation("Cross site requests not allowed.");
+
 	        }
 
 	        // use the signalr service if specified.
@@ -303,23 +308,16 @@ namespace dexih.api
 		            
 					// We can send the request token as a JavaScript-readable cookie, and Angular will use it by default.
 					var tokens = antiforgery.GetAndStoreTokens(context);
+					var domain = $"{context.Request.Scheme}://{context.Request.Host}{context.Request.PathBase}";
 
-					if (context.Request.IsHttps)
-					{
-						context.Response.Cookies.Append(
-							"XSRF-TOKEN", 
-							tokens.RequestToken, 
-							new CookieOptions() { HttpOnly = false, SameSite = SameSiteMode.None, Secure = true });	
-					}
-					else
-					{
-						context.Response.Cookies.Append(
-							"XSRF-TOKEN", 
-							tokens.RequestToken, 
-							new CookieOptions() { HttpOnly = false, SameSite = SameSiteMode.Lax });	
-					}
+					context.Response.Cookies.Append(
+						"XSRF-TOKEN",
+						tokens.RequestToken,
+						context.Request.IsHttps
+							? new CookieOptions() {HttpOnly = false, SameSite = SameSiteMode.None, Secure = true, Domain = domain}
+							: new CookieOptions() {HttpOnly = false, SameSite = SameSiteMode.Lax, Domain = domain});
 
-		            await next();
+					await next();
 
 		            if (context.Response.StatusCode == 404)
 		            {
