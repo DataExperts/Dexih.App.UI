@@ -113,7 +113,21 @@ namespace dexih.api.Controllers
                     // Update the anti-forgery token following the authentication.
                     var tokens = _antiforgery.GetAndStoreTokens(HttpContext);
                     Response.Cookies.Delete("XSRF-TOKEN");
-                    Response.Cookies.Append("XSRF-TOKEN", tokens.RequestToken, new CookieOptions() {HttpOnly = false});
+                    // Response.Cookies.Append("XSRF-TOKEN", tokens.RequestToken, new CookieOptions() {HttpOnly = false});
+                    if (Request.IsHttps)
+                    {
+	                    Response.Cookies.Append(
+		                    "XSRF-TOKEN", 
+		                    tokens.RequestToken, 
+		                    new CookieOptions() { HttpOnly = false, SameSite = SameSiteMode.None, Secure = true });	
+                    }
+                    else
+                    {
+	                    Response.Cookies.Append(
+		                    "XSRF-TOKEN", 
+		                    tokens.RequestToken, 
+		                    new CookieOptions() { HttpOnly = false, SameSite = SameSiteMode.Lax });	
+                    }
 
                     return new ReturnUser(user);
                 }
