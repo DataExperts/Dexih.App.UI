@@ -330,7 +330,7 @@ export class AuthService implements OnDestroy {
 
             const body = JSON.stringify(m);
 
-            this.http.post<Message>(this.getApiUrl('/api/Account/LogError'), 
+            this.http.post<Message>(this.getApiUrl('/api/Account/LogError'),
                 body,
                 { withCredentials: true, headers: headers }).subscribe(() => {
                 // doesn't matter what is returned.
