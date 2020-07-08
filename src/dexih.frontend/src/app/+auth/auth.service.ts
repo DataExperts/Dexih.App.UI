@@ -18,6 +18,7 @@ import { DexihRemoteAgent, DexihActiveAgent, DownloadUrl, CacheManager, eClientC
 import { PreviewResults } from '../+hub/hub.models';
 import { WebSocketService} from './websocket.service';
 import { environment } from '../../environments/environment';
+import { Functions } from '../shared/utils/functions';
 
 declare var gapi: any;
 
@@ -81,6 +82,13 @@ export class AuthService implements OnDestroy {
         if (this._webSocketSubscribe) { this._webSocketSubscribe.unsubscribe(); }
         if (this._remoteAgents) { this._remoteAgents.unsubscribe(); }
         if (this._logErrorsSubscribe) { this._logErrorsSubscribe.unsubscribe(); }
+    }
+
+    defaultHeaders(): HttpHeaders {
+        return new HttpHeaders({
+            'Content-Type': 'application/json',
+            'X-XSRF-TOKEN': `${Functions.getCookie('XSRF-TOKEN')}`
+        });
     }
 
     initialize() {
@@ -303,7 +311,7 @@ export class AuthService implements OnDestroy {
         this._logErrorsSubscribe = this._logErrors.asObservable().subscribe((logMessage: Message) => {
             if (!logMessage) { return; }
 
-            let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+            let headers = this.defaultHeaders(); // new HttpHeaders({ 'Content-Type': 'application/json' });
 
             const m = {
                 message: logMessage.message,
@@ -500,10 +508,12 @@ export class AuthService implements OnDestroy {
 
     // post form data
     public postForm(url, data, waitMessage = 'Please wait while the operation completes.', cancelToken = null): Promise<any> {
-        let headers = new HttpHeaders({
-            // 'Authorization': `Bearer ${authToken}`,
-            // 'Content-Type': 'multipart/form-data'
-        });
+        // let headers = new HttpHeaders({
+        //     // 'Authorization': `Bearer ${authToken}`,
+        //     // 'Content-Type': 'multipart/form-data'
+        // });
+
+        const headers = this.defaultHeaders();
 
         return this.postBody(url, data, headers, waitMessage, cancelToken);
     }
@@ -546,12 +556,14 @@ export class AuthService implements OnDestroy {
             cancelToken = new CancelToken();
         }
 
-        let headers = new HttpHeaders({
-            // 'Authorization': `Bearer ${authToken}`,
-            'Content-Type': 'application/json'
-        });
+        // let headers = new HttpHeaders({
+        //     // 'Authorization': `Bearer ${authToken}`,
+        //     'Content-Type': 'application/json'
+        // });
 
-       if (!cancelToken) {
+        const headers = this.defaultHeaders();
+       
+        if (!cancelToken) {
            cancelToken = new CancelToken();
        }
 
@@ -644,10 +656,12 @@ export class AuthService implements OnDestroy {
            cancelToken = new CancelToken();
        }
 
-       let headers = new HttpHeaders({
-           // 'Authorization': `Bearer ${authToken}`,
-           'Content-Type': 'application/json'
-       });
+    //    let headers = new HttpHeaders({
+    //        // 'Authorization': `Bearer ${authToken}`,
+    //        'Content-Type': 'application/json'
+    //    });
+
+        const headers = this.defaultHeaders();
 
        let promise = new PromiseWithCancel<any>((resolve, reject) => {
             this.http.post(this.getApiUrl(url), this.JsonNoNulls(data), { withCredentials: true, headers: headers, responseType: 'text' })
@@ -672,10 +686,12 @@ export class AuthService implements OnDestroy {
             cancelToken = new CancelToken();
         }
 
-        let headers = new HttpHeaders({
-            // 'Authorization': `Bearer ${authToken}`,
-            'Content-Type': 'application/json'
-        });
+        // let headers = new HttpHeaders({
+        //     // 'Authorization': `Bearer ${authToken}`,
+        //     'Content-Type': 'application/json'
+        // });
+
+        const headers = this.defaultHeaders();
 
         data.remoteAgentId = remoteAgent.instanceId;
 
@@ -741,10 +757,12 @@ export class AuthService implements OnDestroy {
     // post an object which is converted to json.
     public post<T>(url, data, waitMessage = 'Please wait while the operation completes.',
         cancelToken: CancelToken = null): PromiseWithCancel<T> {
-        let headers = new HttpHeaders({
-            // 'Authorization': `Bearer ${authToken}`,
-            'content-type': 'application/json'
-        });
+        // let headers = new HttpHeaders({
+        //     // 'Authorization': `Bearer ${authToken}`,
+        //     'content-type': 'application/json'
+        // });
+
+        const headers = this.defaultHeaders();
 
         let body: string;
         if (data) {
@@ -1031,81 +1049,6 @@ export class AuthService implements OnDestroy {
         return this.modalComponent.information(title, body, 'Close', details);
     }
 
-    // waitDialogOpen(message: string, title = 'Please wait...') {
-    //     // the waitOperationCount var ensures dialog is only open one when multiple requests to open occur.
-
-    //     if (this.waitOperationCount === 0) {
-    //         if (this.viewContainerRef) {
-    //             if (!this._waitDialogReference) {
-    //                 const dialogRef = this.modal.alert()
-    //                     .title(title)
-    //                     .body(message)
-    //                     .okBtn('Cancel')
-    //                     .open(this.viewContainerRef);
-
-    //                 dialogRef.result.then().catch();
-    //                 this._waitDialogReference = dialogRef;
-    //             }
-    //         }
-    //         this.waitOperationCount++;
-    //     }
-    // }
-
-    // waitDialogClose() {
-    //     if (this.waitOperationCount > 1) {
-    //         this.waitOperationCount--;
-    //     } else {
-    //         if (this._waitDialogReference) {
-    //             this._waitDialogReference.close();
-    //             this._waitDialogReference = null;
-    //         }
-    //         this.waitOperationCount = 0;
-    //     }
-    // }
-
-
-    /*
- * General utils for managing cookies in Typescript.
- */
-    public setCookie(name: string, val: string) {
-        const date = new Date();
-        const value = val;
-
-        // Set it expire in 7 days
-        date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000));
-
-        // Set it
-        document.cookie = name + '=' + value + '; expires=' + date.toUTCString() + '; path=/';
-    }
-
-    public getCookie(name: string) {
-        const value = '; ' + document.cookie;
-        const parts = value.split('; ' + name + '=');
-
-        if (parts.length === 2) {
-            return parts.pop().split(';').shift();
-        }
-    }
-
-    public deleteCookie(name: string) {
-        const date = new Date();
-
-        // Set it expire in -1 days
-        date.setTime(date.getTime() + (-1 * 24 * 60 * 60 * 1000));
-
-        // Set it
-        document.cookie = name + '=; expires=' + date.toUTCString() + '; path=/';
-    }
-
-    // gets the XSRF token which is required to be posted as a header 'X-XSRF-TOKEN'
-    // to avoid cross-site request forgery.
-    // public getXSRFToken() {
-    //     let value = '; ' + document.cookie;
-    //     let parts = value.split('; ' + 'XSRF-TOKEN' + '=');
-    //     if (parts.length === 2) {
-    //         return parts.pop().split(';').shift();
-    //     }
-    // }
 
     public getLoginProviders(): Promise<Array<UserLoginInfo>> {
         return this.post<Array<UserLoginInfo>>('/api/Account/ExternalLogins', null, 'Getting external login information.')
@@ -1114,7 +1057,9 @@ export class AuthService implements OnDestroy {
     // download a file from the api.
     public downloadFile(url, data, name, type): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
-            let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+            // let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+            const headers = this.defaultHeaders();
+
             let body = this.JsonNoNulls(data);
 
             this.http.post(this.getApiUrl(url), body, { headers: headers, responseType: 'blob' })

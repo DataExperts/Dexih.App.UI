@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://dexih.dataexpertsgroup.com'
+  apiUrl: 'https://dexih.com'
 };

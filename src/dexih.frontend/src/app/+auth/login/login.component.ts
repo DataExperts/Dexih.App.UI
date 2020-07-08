@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User, logoUrl, ExternalLogin } from '../auth.models';
 import { AuthService } from '../auth.service';
-import { LogFactory, eLogLevel } from '../../../logging';
-import { async } from 'q';
+import { LogFactory } from '../../../logging';
 import { eLoginProvider } from '../../shared/shared.models';
+import { Functions } from '../../shared/utils/functions';
 
 @Component({
     selector: 'app-login',
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
         // this.authService.refreshGlobalCache();
 
-        let loginType = +this.authService.getCookie('LoginType');
+        let loginType = +Functions.getCookie('LoginType');
         switch (loginType) {
             case eLoginProvider.Google:
                 this.enableGoogle();
@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     }
 
-    login(event) {
+    login() {
         switch (this.loginType) {
             case eLoginProvider.Dexih:
                 this.authService.login(this.user).then(
@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     enablePassword() {
-        this.authService.setCookie('LoginType', eLoginProvider.Dexih.toString());
+        Functions.setCookie('LoginType', eLoginProvider.Dexih.toString());
         this.user.email = '';
         this.message = '';
         this.loginType = eLoginProvider.Dexih;
@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     enableGoogle() {
         this.user.email = '';
         this.message = '';
-        this.authService.setCookie('LoginType', eLoginProvider.Google.toString());
+        Functions.setCookie('LoginType', eLoginProvider.Google.toString());
         this.loginType = eLoginProvider.Google;
         this.authService.googleEnable().then(
             externalLogin => {
@@ -102,7 +102,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.user.email = '';
         this.message = '';
         this.loginType = eLoginProvider.Microsoft;
-        this.authService.setCookie('LoginType', eLoginProvider.Microsoft.toString());
+        Functions.setCookie('LoginType', eLoginProvider.Microsoft.toString());
         this.authService.microsoftEnable().then(
             externalLogin => {
                 this.externalLogin = externalLogin;

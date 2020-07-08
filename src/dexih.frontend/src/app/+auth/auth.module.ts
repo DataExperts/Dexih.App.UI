@@ -16,8 +16,6 @@ import { AuthComponent } from './auth.component';
 import { AuthService } from './auth.service';
 import { HelpComponent} from './help/help.component'
 import { HeaderComponent } from './header/header.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AddCsrfHeaderInterceptorService } from './token.interceptor.service';
 
 @NgModule({
   imports: [
