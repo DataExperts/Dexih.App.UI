@@ -870,9 +870,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _shared_utils_functions__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
-    /*! ../shared/utils/functions */
-    "./src/app/shared/utils/functions.ts");
+    var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+    /*! ngx-cookie-service */
+    "./node_modules/ngx-cookie-service/__ivy_ngcc__/fesm2015/ngx-cookie-service.js");
 
     var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
       function adopt(value) {
@@ -907,13 +907,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     };
 
     var AuthService = /*#__PURE__*/function () {
-      function AuthService(http, router, route, location) {
+      function AuthService(http, router, route, location, cookieService) {
         _classCallCheck(this, AuthService);
 
         this.http = http;
         this.router = router;
         this.route = route;
-        this.location = location; // Create an observable user, so consuming components can update when credentials change.
+        this.location = location;
+        this.cookieService = cookieService; // Create an observable user, so consuming components can update when credentials change.
 
         this._currentUser = new rxjs__WEBPACK_IMPORTED_MODULE_4__["BehaviorSubject"](null);
         this._refreshUserAttempted = false;
@@ -961,7 +962,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function defaultHeaders() {
           return new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpHeaders"]({
             'Content-Type': 'application/json',
-            'X-XSRF-TOKEN': "".concat(_shared_utils_functions__WEBPACK_IMPORTED_MODULE_13__["Functions"].getCookie('XSRF-TOKEN'))
+            'X-XSRF-TOKEN': "".concat(this.cookieService.get('XSRF-TOKEN'))
           });
         }
       }, {
@@ -3634,7 +3635,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }();
 
     AuthService.ɵfac = function AuthService_Factory(t) {
-      return new (t || AuthService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common__WEBPACK_IMPORTED_MODULE_9__["Location"]));
+      return new (t || AuthService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common__WEBPACK_IMPORTED_MODULE_9__["Location"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](ngx_cookie_service__WEBPACK_IMPORTED_MODULE_13__["CookieService"]));
     };
 
     AuthService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({
@@ -3655,6 +3656,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]
         }, {
           type: _angular_common__WEBPACK_IMPORTED_MODULE_9__["Location"]
+        }, {
+          type: ngx_cookie_service__WEBPACK_IMPORTED_MODULE_13__["CookieService"]
         }];
       }, null);
     })();
@@ -61363,47 +61366,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 return value;
             }
           }
-        }
-        /*
-        * General utils for managing cookies in Typescript.
-        */
-
-      }, {
-        key: "setCookie",
-        value: function setCookie(name, val) {
-          var date = new Date();
-          var value = val; // Set it expire in 7 days
-
-          date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000);
-
-          if (location.protocol === 'https:') {}
-
-          var sameSite = location.protocol === 'https:' ? 'SameSite=None;secure' : 'SameSite=Lax'; // Set it
-
-          document.cookie = "".concat(name, "=").concat(value, ";expires=").concat(date.toUTCString(), ";path=/;").concat(sameSite);
-        }
-      }, {
-        key: "getCookie",
-        value: function getCookie(name) {
-          var value = "; ".concat(document.cookie);
-          var parts = value.split("; ".concat(name, "="));
-
-          if (!parts) {
-            return null;
-          }
-
-          if (parts.length === 2) {
-            return parts.pop().split(';').shift();
-          }
-        }
-      }, {
-        key: "deleteCookie",
-        value: function deleteCookie(name) {
-          var date = new Date(); // Set it expire in -1 days
-
-          date.setTime(date.getTime() + -1 * 24 * 60 * 60 * 1000); // Set it
-
-          document.cookie = "".concat(name, "=;expires=").concat(date.toUTCString(), ";path=/");
         }
       }]);
 
