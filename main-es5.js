@@ -867,12 +867,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _environments_environment__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
     /*! ../../environments/environment */
     "./src/environments/environment.ts");
-    /* harmony import */
-
-
-    var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
-    /*! ngx-cookie-service */
-    "./node_modules/ngx-cookie-service/__ivy_ngcc__/fesm2015/ngx-cookie-service.js");
 
     var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
       function adopt(value) {
@@ -907,14 +901,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     };
 
     var AuthService = /*#__PURE__*/function () {
-      function AuthService(http, router, route, location, cookieService) {
+      function AuthService(http, router, route, location) {
         _classCallCheck(this, AuthService);
 
         this.http = http;
         this.router = router;
         this.route = route;
-        this.location = location;
-        this.cookieService = cookieService; // Create an observable user, so consuming components can update when credentials change.
+        this.location = location; // Create an observable user, so consuming components can update when credentials change.
 
         this._currentUser = new rxjs__WEBPACK_IMPORTED_MODULE_4__["BehaviorSubject"](null);
         this._refreshUserAttempted = false;
@@ -932,6 +925,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.logger = new _logging__WEBPACK_IMPORTED_MODULE_6__["LogFactory"]('auth.service');
         this.updateRemoteAgentsFlag = false;
         this.isInitialized = false;
+        this.xSrfToken = null;
       }
 
       _createClass(AuthService, [{
@@ -961,8 +955,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "defaultHeaders",
         value: function defaultHeaders() {
           return new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpHeaders"]({
-            'Content-Type': 'application/json',
-            'X-XSRF-TOKEN': "".concat(this.cookieService.get('XSRF-TOKEN'))
+            'Content-Type': 'application/json'
           });
         }
       }, {
@@ -3497,7 +3490,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             _this40.post('/api/SharedData/GetActiveAgent', {
               hubKey: hubKey
             }, 'Getting active remote agent...').then(function (activeAgent) {
-              _this40.getBestDownloadUrl(activeAgent, 0).then(function (downloadUrl) {
+              _this40.getBestDownloadUrl(activeAgent, 0).then(function () {
                 localStorage.setItem("hub-remote-agent-".concat(hubKey), JSON.stringify(activeAgent));
                 resolve(activeAgent);
               });
@@ -3635,7 +3628,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }();
 
     AuthService.ɵfac = function AuthService_Factory(t) {
-      return new (t || AuthService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common__WEBPACK_IMPORTED_MODULE_9__["Location"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](ngx_cookie_service__WEBPACK_IMPORTED_MODULE_13__["CookieService"]));
+      return new (t || AuthService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common__WEBPACK_IMPORTED_MODULE_9__["Location"]));
     };
 
     AuthService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({
@@ -3656,10 +3649,108 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]
         }, {
           type: _angular_common__WEBPACK_IMPORTED_MODULE_9__["Location"]
-        }, {
-          type: ngx_cookie_service__WEBPACK_IMPORTED_MODULE_13__["CookieService"]
         }];
       }, null);
+    })();
+    /***/
+
+  },
+
+  /***/
+  "./src/app/+auth/token.interceptor.service.ts":
+  /*!****************************************************!*\
+    !*** ./src/app/+auth/token.interceptor.service.ts ***!
+    \****************************************************/
+
+  /*! exports provided: AddCsrfHeaderInterceptorService */
+
+  /***/
+  function srcAppAuthTokenInterceptorServiceTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "AddCsrfHeaderInterceptorService", function () {
+      return AddCsrfHeaderInterceptorService;
+    });
+    /* harmony import */
+
+
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! @angular/common/http */
+    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _shared_utils_functions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ../shared/utils/functions */
+    "./src/app/shared/utils/functions.ts");
+    /* harmony import */
+
+
+    var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! rxjs/operators */
+    "./node_modules/rxjs/_esm2015/operators/index.js"); // intercept is used to map the XSRF-TOKEN to the X-XSRF-TOKEN which is used
+    // to present x-scripting attacks.
+    // can't use the build in interceptor as it does not support x-domain.
+
+
+    var AddCsrfHeaderInterceptorService = /*#__PURE__*/function () {
+      function AddCsrfHeaderInterceptorService() {
+        _classCallCheck(this, AddCsrfHeaderInterceptorService);
+      }
+
+      _createClass(AddCsrfHeaderInterceptorService, [{
+        key: "intercept",
+        value: function intercept(req, next) {
+          var token = _shared_utils_functions__WEBPACK_IMPORTED_MODULE_2__["Functions"].getCookie('XSRF-TOKEN');
+
+          if (token) {
+            req = req.clone({
+              headers: req.headers.set('X-XSRF-TOKEN', token)
+            });
+          }
+
+          return next.handle(req).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (event) {
+            // if the token is in the header (cross domain request, then set it to the local cookie)
+            if (event instanceof _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpResponse"]) {
+              var xsrfToken = event.headers.get('XSRF-TOKEN');
+
+              if (xsrfToken) {
+                _shared_utils_functions__WEBPACK_IMPORTED_MODULE_2__["Functions"].setCookie('XSRF-TOKEN', xsrfToken);
+              }
+
+              return event;
+            }
+          }));
+        }
+      }]);
+
+      return AddCsrfHeaderInterceptorService;
+    }();
+
+    AddCsrfHeaderInterceptorService.ɵfac = function AddCsrfHeaderInterceptorService_Factory(t) {
+      return new (t || AddCsrfHeaderInterceptorService)();
+    };
+
+    AddCsrfHeaderInterceptorService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({
+      token: AddCsrfHeaderInterceptorService,
+      factory: AddCsrfHeaderInterceptorService.ɵfac
+    });
+    /*@__PURE__*/
+
+    (function () {
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵsetClassMetadata"](AddCsrfHeaderInterceptorService, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"]
+      }], null, null);
     })();
     /***/
 
@@ -35441,10 +35532,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _angular_router__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
+    /*! @angular/common/http */
+    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+    /* harmony import */
+
+
+    var _auth_token_interceptor_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+    /*! ./+auth/token.interceptor.service */
+    "./src/app/+auth/token.interceptor.service.ts");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js"); // import {HubService} from './+hub/hub.service';
-    // import { AddCsrfHeaderInterceptorService } from './+auth/token.interceptor.service';
 
 
     var AppModule = function AppModule() {
@@ -35463,14 +35565,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         provide: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ErrorHandler"],
         useClass: _global_error_handler__WEBPACK_IMPORTED_MODULE_10__["GlobalErrorHandler"]
       }, // HubService,
-      _hubs_hubs_service__WEBPACK_IMPORTED_MODULE_9__["HubsService"], _auth_auth_service__WEBPACK_IMPORTED_MODULE_7__["AuthService"], _shared_layout_layout_guard__WEBPACK_IMPORTED_MODULE_8__["LayoutGuard"]],
+      _hubs_hubs_service__WEBPACK_IMPORTED_MODULE_9__["HubsService"], _auth_auth_service__WEBPACK_IMPORTED_MODULE_7__["AuthService"], _shared_layout_layout_guard__WEBPACK_IMPORTED_MODULE_8__["LayoutGuard"], {
+        provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_12__["HTTP_INTERCEPTORS"],
+        useClass: _auth_token_interceptor_service__WEBPACK_IMPORTED_MODULE_13__["AddCsrfHeaderInterceptorService"],
+        multi: true
+      }],
       imports: [[_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _app_routing__WEBPACK_IMPORTED_MODULE_6__["routing"], _shared_layout_layout_module__WEBPACK_IMPORTED_MODULE_11__["LayoutModule"], _shared_shared_module__WEBPACK_IMPORTED_MODULE_3__["SharedModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_5__["BrowserAnimationsModule"]]]
     });
 
     (function () {
       (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](AppModule, {
         declarations: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]],
-        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_router__WEBPACK_IMPORTED_MODULE_12__["RouterModule"], _shared_layout_layout_module__WEBPACK_IMPORTED_MODULE_11__["LayoutModule"], _shared_shared_module__WEBPACK_IMPORTED_MODULE_3__["SharedModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_5__["BrowserAnimationsModule"]]
+        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_router__WEBPACK_IMPORTED_MODULE_14__["RouterModule"], _shared_layout_layout_module__WEBPACK_IMPORTED_MODULE_11__["LayoutModule"], _shared_shared_module__WEBPACK_IMPORTED_MODULE_3__["SharedModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_5__["BrowserAnimationsModule"]]
       });
     })();
     /*@__PURE__*/
@@ -35486,7 +35592,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             provide: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ErrorHandler"],
             useClass: _global_error_handler__WEBPACK_IMPORTED_MODULE_10__["GlobalErrorHandler"]
           }, // HubService,
-          _hubs_hubs_service__WEBPACK_IMPORTED_MODULE_9__["HubsService"], _auth_auth_service__WEBPACK_IMPORTED_MODULE_7__["AuthService"], _shared_layout_layout_guard__WEBPACK_IMPORTED_MODULE_8__["LayoutGuard"]],
+          _hubs_hubs_service__WEBPACK_IMPORTED_MODULE_9__["HubsService"], _auth_auth_service__WEBPACK_IMPORTED_MODULE_7__["AuthService"], _shared_layout_layout_guard__WEBPACK_IMPORTED_MODULE_8__["LayoutGuard"], {
+            provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_12__["HTTP_INTERCEPTORS"],
+            useClass: _auth_token_interceptor_service__WEBPACK_IMPORTED_MODULE_13__["AddCsrfHeaderInterceptorService"],
+            multi: true
+          }],
           // entryComponents: [AppComponent],
           bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
         }]
@@ -37664,7 +37774,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       selectors: [["dexih-tasks"]],
       decls: 6,
       vars: 10,
-      consts: [["buttonClass", "btn btn-outline-secondary text-white", "iconClass", "fa fa-tasks", "badgeClass", "badge-light", 3, "pullRight", "badge", "hideCarrot"], [4, "ngIf"], [1, "tasks"], ["ngFor", "", 3, "ngForOf"], [1, "p-3"], [1, "list-group-item", "list-group-item-action", "flex-column", "align-items-start", 3, "click"], [1, "d-flex", "w-100", "justify-content-between"], [1, "mb-1"], [1, "progress", 2, "width", "100%"], ["role", "progressbar", "aria-valuemin", "0", "aria-valuemax", "100", 1, "progress-bar", 3, "ngClass"], [3, "compact", "click", 4, "ngIf"], [3, "compact", "click"]],
+      consts: [["buttonClass", "btn btn-outline-secondary text-white", "iconClass", "fa fa-tasks", "badgeClass", "badge-light", "title", "Tasks", 3, "pullRight", "badge", "hideCarrot"], [4, "ngIf"], [1, "tasks"], ["ngFor", "", 3, "ngForOf"], [1, "p-3"], [1, "list-group-item", "list-group-item-action", "flex-column", "align-items-start", 3, "click"], [1, "d-flex", "w-100", "justify-content-between"], [1, "mb-1"], [1, "progress", 2, "width", "100%"], ["role", "progressbar", "aria-valuemin", "0", "aria-valuemax", "100", 1, "progress-bar", 3, "ngClass"], [3, "compact", "click", 4, "ngIf"], [3, "compact", "click"]],
       template: function TasksComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "dexih-button-dropdown", 0);
@@ -38461,45 +38571,59 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _menu_menu_parent_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! ../menu/menu-parent.component */
+    "./src/app/shared/layout/navigation/menu/menu-parent.component.ts");
+    /* harmony import */
+
+
+    var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! dexih-ngx-components */
     "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
 
-    function LoginInfoComponent_dexih_button_dropdown_0_Template(rf, ctx) {
+    function LoginInfoComponent_menu_parent_0_Template(rf, ctx) {
       if (rf & 1) {
         var _r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "dexih-button-dropdown", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "menu-parent", 2);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "a", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "li", 3);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function LoginInfoComponent_dexih_button_dropdown_0_Template_a_click_1_listener() {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "a", 4);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function LoginInfoComponent_menu_parent_0_Template_a_click_2_listener() {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r3);
 
           var ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-          return ctx_r2.manageUser();
+          return ctx_r2.manageUser(ctx_r2.hub);
         });
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "i", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "i", 5);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, " Update Details");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, " Update Details");
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "a", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function LoginInfoComponent_dexih_button_dropdown_0_Template_a_click_4_listener() {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "li", 3);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "a", 4);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function LoginInfoComponent_menu_parent_0_Template_a_click_6_listener() {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r3);
 
           var ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-          return ctx_r4.logout();
+          return ctx_r4.logout(ctx_r4.hub);
         });
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](5, "i", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](7, "i", 6);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, " Logout");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8, " Logout");
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -38509,7 +38633,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       if (rf & 2) {
         var ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("text", ctx_r0.user.userName)("autoCompact", false);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("name", ctx_r0.user.userName);
       }
     }
 
@@ -38517,7 +38641,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       if (rf & 1) {
         var _r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "dexih-button", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "dexih-button", 7);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function LoginInfoComponent_dexih_button_1_Template_dexih_button_click_0_listener() {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r6);
@@ -38592,10 +38716,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       selectors: [["dexih-login-info"]],
       decls: 2,
       vars: 2,
-      consts: [["iconClass", "fa fa-lg fa-fw fa-user", "buttonClass", "nav-button text-success", 3, "text", "autoCompact", 4, "ngIf"], ["iconClass", "fa fa-lg fa-fw fa-user", "buttonClass", "nav-button text-danger", 3, "click", 4, "ngIf"], ["iconClass", "fa fa-lg fa-fw fa-user", "buttonClass", "nav-button text-success", 3, "text", "autoCompact"], [1, "dropdown-item", 3, "click"], [1, "fa", "fa-user"], [1, "fa", "fa-sign-out"], ["iconClass", "fa fa-lg fa-fw fa-user", "buttonClass", "nav-button text-danger", 3, "click"]],
+      consts: [["title", "User Options", "iconClass", "fa fa-lg fa-fw fa-user", "textClass", "text-success", 3, "name", 4, "ngIf"], ["iconClass", "fa fa-lg fa-fw fa-user", "buttonClass", "nav-button text-danger", 3, "click", 4, "ngIf"], ["title", "User Options", "iconClass", "fa fa-lg fa-fw fa-user", "textClass", "text-success", 3, "name"], [1, "nav-item"], [1, "nav-link", 3, "click"], [1, "fa", "fa-user"], [1, "fa", "fa-sign-out"], ["iconClass", "fa fa-lg fa-fw fa-user", "buttonClass", "nav-button text-danger", 3, "click"]],
       template: function LoginInfoComponent_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, LoginInfoComponent_dexih_button_dropdown_0_Template, 7, 2, "dexih-button-dropdown", 0);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, LoginInfoComponent_menu_parent_0_Template, 9, 1, "menu-parent", 0);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, LoginInfoComponent_dexih_button_1_Template, 2, 0, "dexih-button", 1);
         }
@@ -38608,7 +38732,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !ctx.user);
         }
       },
-      directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"], dexih_ngx_components__WEBPACK_IMPORTED_MODULE_4__["DexihButtonDropDownComponent"], dexih_ngx_components__WEBPACK_IMPORTED_MODULE_4__["DexihButtonComponent"]],
+      directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"], _menu_menu_parent_component__WEBPACK_IMPORTED_MODULE_4__["MenuParentComponent"], dexih_ngx_components__WEBPACK_IMPORTED_MODULE_5__["DexihButtonComponent"]],
       encapsulation: 2
     });
     /*@__PURE__*/
@@ -61366,6 +61490,47 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 return value;
             }
           }
+        }
+        /*
+        * General utils for managing cookies in Typescript.
+        */
+
+      }, {
+        key: "setCookie",
+        value: function setCookie(name, val) {
+          var date = new Date();
+          var value = val; // Set it expire in 7 days
+
+          date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000);
+
+          if (location.protocol === 'https:') {}
+
+          var sameSite = location.protocol === 'https:' ? 'SameSite=None;secure' : 'SameSite=Lax'; // Set it
+
+          document.cookie = "".concat(name, "=").concat(value, ";expires=").concat(date.toUTCString(), ";path=/;").concat(sameSite);
+        }
+      }, {
+        key: "getCookie",
+        value: function getCookie(name) {
+          var value = "; ".concat(document.cookie);
+          var parts = value.split("; ".concat(name, "="));
+
+          if (!parts) {
+            return null;
+          }
+
+          if (parts.length === 2) {
+            return parts.pop().split(';').shift();
+          }
+        }
+      }, {
+        key: "deleteCookie",
+        value: function deleteCookie(name) {
+          var date = new Date(); // Set it expire in -1 days
+
+          date.setTime(date.getTime() + -1 * 24 * 60 * 60 * 1000); // Set it
+
+          document.cookie = "".concat(name, "=;expires=").concat(date.toUTCString(), ";path=/");
         }
       }]);
 

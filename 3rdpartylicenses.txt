@@ -943,9 +943,6 @@ SOFTWARE.
 
 
 
-ngx-cookie-service
-MIT
-
 ngx-md
 MIT
 
