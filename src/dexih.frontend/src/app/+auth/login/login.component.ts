@@ -5,7 +5,6 @@ import { AuthService } from '../auth.service';
 import { LogFactory } from '../../../logging';
 import { eLoginProvider } from '../../shared/shared.models';
 import { Functions } from '../../shared/utils/functions';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
     selector: 'app-login',
@@ -28,7 +27,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         private router: Router,
         private route: ActivatedRoute,
         private authService: AuthService,
-        private cookieService: CookieService
     ) { }
 
     ngOnInit() {
@@ -36,7 +34,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
         // this.authService.refreshGlobalCache();
 
-        let loginType = +this.cookieService.get('LoginType');
+        let loginType = +Functions.getCookie('LoginType');
         switch (loginType) {
             case eLoginProvider.Google:
                 this.enableGoogle();
@@ -75,7 +73,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     enablePassword() {
-        this.cookieService.set('LoginType', eLoginProvider.Dexih.toString());
+        Functions.setCookie('LoginType', eLoginProvider.Dexih.toString());
         this.user.email = '';
         this.message = '';
         this.loginType = eLoginProvider.Dexih;
@@ -84,7 +82,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     enableGoogle() {
         this.user.email = '';
         this.message = '';
-        this.cookieService.set('LoginType', eLoginProvider.Google.toString());
+        Functions.setCookie('LoginType', eLoginProvider.Google.toString());
         this.loginType = eLoginProvider.Google;
         this.authService.googleEnable().then(
             externalLogin => {
@@ -104,7 +102,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.user.email = '';
         this.message = '';
         this.loginType = eLoginProvider.Microsoft;
-        this.cookieService.set('LoginType', eLoginProvider.Microsoft.toString());
+        Functions.setCookie('LoginType', eLoginProvider.Microsoft.toString());
         this.authService.microsoftEnable().then(
             externalLogin => {
                 this.externalLogin = externalLogin;

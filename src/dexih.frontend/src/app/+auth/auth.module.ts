@@ -16,7 +16,6 @@ import { AuthComponent } from './auth.component';
 import { AuthService } from './auth.service';
 import { HelpComponent} from './help/help.component'
 import { HeaderComponent } from './header/header.component';
-import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   imports: [
@@ -36,9 +35,6 @@ import { CookieService } from 'ngx-cookie-service';
       WelcomeComponent,
       HelpComponent,
       HeaderComponent,
-    ],
-    providers: [
-      CookieService,
     ]
 })
 export class AuthModule {

@@ -14,7 +14,7 @@ import {HubsService } from './+hubs/hubs.service';
 import { GlobalErrorHandler } from './global.error.handler';
 import { LayoutModule } from './shared/layout/layout.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-// import { AddCsrfHeaderInterceptorService } from './+auth/token.interceptor.service';
+import { AddCsrfHeaderInterceptorService } from './+auth/token.interceptor.service';
 
 @NgModule({
   declarations: [
@@ -34,10 +34,10 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
       HubsService,
       AuthService,
       LayoutGuard,
-      //   { provide: HTTP_INTERCEPTORS,
-      //     useClass: AddCsrfHeaderInterceptorService,
-      //     multi: true
-      //   }
+        { provide: HTTP_INTERCEPTORS,
+          useClass: AddCsrfHeaderInterceptorService,
+          multi: true
+        }
   ],
   // entryComponents: [AppComponent],
   bootstrap: [AppComponent],

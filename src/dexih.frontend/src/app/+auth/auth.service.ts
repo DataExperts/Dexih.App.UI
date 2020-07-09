@@ -19,7 +19,6 @@ import { PreviewResults } from '../+hub/hub.models';
 import { WebSocketService} from './websocket.service';
 import { environment } from '../../environments/environment';
 import { Functions } from '../shared/utils/functions';
-import { CookieService } from 'ngx-cookie-service';
 
 declare var gapi: any;
 
@@ -67,12 +66,13 @@ export class AuthService implements OnDestroy {
 
     private isInitialized = false;
 
+    private xSrfToken = null;
+
     constructor(
         private http: HttpClient,
         private router: Router,
         private route: ActivatedRoute,
         private location: Location,
-        private cookieService: CookieService
     ) {
     }
 
@@ -88,7 +88,7 @@ export class AuthService implements OnDestroy {
     defaultHeaders(): HttpHeaders {
         return new HttpHeaders({
             'Content-Type': 'application/json',
-            'X-XSRF-TOKEN': this.cookieService.get('XSRF-TOKEN')
+//            'X-XSRF-TOKEN': Functions.getCookie('XSRF-TOKEN')
         });
     }
 
@@ -2055,7 +2055,7 @@ export class AuthService implements OnDestroy {
 
             this.post<DexihActiveAgent>('/api/SharedData/GetActiveAgent', { hubKey: hubKey }, 'Getting active remote agent...')
                 .then(activeAgent => {
-                    this.getBestDownloadUrl(activeAgent, 0).then(downloadUrl => {
+                    this.getBestDownloadUrl(activeAgent, 0).then(() => {
                         localStorage.setItem(`hub-remote-agent-${hubKey}`, JSON.stringify(activeAgent));
                         resolve(activeAgent);
                     });

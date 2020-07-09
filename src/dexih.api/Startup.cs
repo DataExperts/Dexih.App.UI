@@ -3,6 +3,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json;
+using dexih.api.Extensions;
 using dexih.api.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -125,13 +126,7 @@ namespace dexih.api
             {
                 options.TokenLifespan = TimeSpan.FromDays(10000);
             });
-
-            // Angular's default header name for sending the XSRF token.
-            services.AddAntiforgery(options =>
-            {
-	            options.HeaderName = "X-XSRF-TOKEN";
-            });
-
+            
 			// Add Identity services to the services container
 			services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 			{
@@ -201,15 +196,21 @@ namespace dexih.api
 						builder.WithOrigins(appSettings.Origins)
 					        .AllowAnyMethod()
 					        .AllowAnyHeader()
+					        .WithExposedHeaders("XSRF-TOKEN")
 					        .AllowCredentials());
 		        });
 	        }
 	        else
 	        {
 		        _logger.LogInformation("Cross site requests not allowed.");
-
 	        }
 
+	        // Angular's default header name for sending the XSRF token.
+	        services.AddAntiforgery(options =>
+	        {
+		        options.HeaderName = "X-XSRF-TOKEN";
+	        });
+	        
 	        // use the signalr service if specified.
 	        var builder = services.AddSignalR().AddJsonProtocol(options =>
 	        {
@@ -301,6 +302,8 @@ namespace dexih.api
             app.UseAuthentication();
             app.UseAuthorization();
 
+            var isCors = appSettings.Origins?.Length > 0;
+
             app.Use(async (context, next) =>
             {
                 //force ssl connections for non-development environments.
@@ -310,13 +313,21 @@ namespace dexih.api
 		            
 					// We can send the request token as a JavaScript-readable cookie, and Angular will use it by default.
 					var tokens = antiforgery.GetAndStoreTokens(context);
-					context.Response.Cookies.Append(
-						"XSRF-TOKEN",
-						tokens.RequestToken,
-						context.Request.IsHttps
-							? new CookieOptions() {HttpOnly = false, SameSite = SameSiteMode.None, Secure = true, Path = "/"}
-							: new CookieOptions() {HttpOnly = false, SameSite = SameSiteMode.Lax, Path = "/"});
 
+					if (isCors && context.Request.Headers.TryGetValue("Origin", out var origins) && origins != context.Request.BaseUrl() )
+					{
+						context.Response.Headers.Add("XSRF-TOKEN", tokens.RequestToken);	
+					}
+					else
+					{
+						context.Response.Cookies.Append(
+							"XSRF-TOKEN",
+							tokens.RequestToken,
+							context.Request.IsHttps
+								? new CookieOptions() {HttpOnly = false, SameSite = SameSiteMode.Strict, Secure = true, Path = "/"}
+								: new CookieOptions() {HttpOnly = false, SameSite = SameSiteMode.Strict, Path = "/"});
+					}
+					
 					await next();
 
 		            if (context.Response.StatusCode == 404)

@@ -2,13 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User, logoUrl, ExternalLogin } from '../auth.models';
 import { AuthService } from '../auth.service';
-import { FormBuilder, FormGroup, FormArray, FormControl, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { FormBuilder, Validators, ValidatorFn } from '@angular/forms';
 import { FormsService } from '../../shared/forms/forms.service';
-import { TermsComponent } from '../terms/terms.component';
-import { Subscription, combineLatest } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { eLoginProvider } from '../../shared/shared.models';
 import { Functions } from '../../shared/utils/functions';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-register',
@@ -41,8 +39,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private authService: AuthService,
     public formsService: FormsService,
-    private fb: FormBuilder,
-    private cookieService: CookieService) {
+    private fb: FormBuilder) {
   }
 
 
@@ -77,7 +74,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
       this.formsService.startForm(registerForm);
 
-      let loginType = +this.cookieService.get('LoginType');
+      let loginType = +Functions.getCookie('LoginType');
       switch (loginType) {
         case eLoginProvider.Google:
           this.enableGoogle();
@@ -125,7 +122,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   enablePassword() {
     this.formsService.currentForm.controls.email.enable();
     this.formsService.currentForm.controls.provider.setValue(eLoginProvider.Dexih);
-    this.cookieService.set('LoginType', eLoginProvider.Dexih.toString());
+    Functions.setCookie('LoginType', eLoginProvider.Dexih.toString());
     this.message = '';
     this.loginType = eLoginProvider.Dexih;
     this.formsService.currentForm.controls.providerKey.setValue(null);
@@ -138,7 +135,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.formsService.currentForm.controls.provider.setValue(eLoginProvider.Google);
     // this.formsService.currentForm.controls.email.disable();
     this.message = '';
-    this.cookieService.set('LoginType', eLoginProvider.Google.toString());
+    Functions.setCookie('LoginType', eLoginProvider.Google.toString());
     this.loginType = eLoginProvider.Google;
     this.authService.googleEnable().then(
       externalLogin => {
@@ -155,7 +152,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     // this.formsService.currentForm.controls.email.disable();
     this.message = '';
     this.loginType = eLoginProvider.Microsoft;
-    this.cookieService.set('LoginType', eLoginProvider.Microsoft.toString());
+    Functions.setCookie('LoginType', eLoginProvider.Microsoft.toString());
     this.authService.microsoftEnable().then(
       externalLogin => {
         this.setExternalLogin(externalLogin);
@@ -187,7 +184,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   passwordsMatch(): ValidatorFn {
-    return (group: FormGroup): { [key: string]: any } => {
+    return (): { [key: string]: any } => {
       if (this.formsService.currentForm && this.loginType === eLoginProvider.Dexih) {
         const password = this.formsService.currentForm.controls['password'];
         const passwordConfirm = this.formsService.currentForm.controls['passwordConfirm'];
