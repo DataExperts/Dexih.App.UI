@@ -314,7 +314,7 @@ namespace dexih.api
 					// We can send the request token as a JavaScript-readable cookie, and Angular will use it by default.
 					var tokens = antiforgery.GetAndStoreTokens(context);
 
-					if (isCors && context.Request.Headers.TryGetValue("Origin", out var origins) && origins != context.Request.BaseUrl() )
+					if (isCors) // && context.Request.Headers.TryGetValue("Origin", out var origins) && origins != context.Request.BaseUrl() )
 					{
 						context.Response.Headers.Add("XSRF-TOKEN", tokens.RequestToken);	
 					}
