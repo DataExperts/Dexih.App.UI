@@ -867,6 +867,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _environments_environment__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
     /*! ../../environments/environment */
     "./src/environments/environment.ts");
+    /* harmony import */
+
+
+    var _shared_utils_functions__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+    /*! ../shared/utils/functions */
+    "./src/app/shared/utils/functions.ts");
 
     var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
       function adopt(value) {
@@ -954,8 +960,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "defaultHeaders",
         value: function defaultHeaders() {
+          var _a;
+
           return new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpHeaders"]({
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'X-XSRF-TOKEN': (_a = _shared_utils_functions__WEBPACK_IMPORTED_MODULE_13__["Functions"].getCookie('XSRF-TOKEN')) !== null && _a !== void 0 ? _a : ''
           });
         }
       }, {
@@ -3710,22 +3719,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       _createClass(AddCsrfHeaderInterceptorService, [{
         key: "intercept",
+        // private token;
         value: function intercept(req, next) {
-          var token = _shared_utils_functions__WEBPACK_IMPORTED_MODULE_2__["Functions"].getCookie('XSRF-TOKEN');
-
-          if (token) {
-            req = req.clone({
-              headers: req.headers.set('X-XSRF-TOKEN', token)
-            });
-          }
-
+          // const token = this.token ?? Functions.getCookie('XSRF-TOKEN');
+          // if (token) {
+          //     req = req.clone({
+          //         headers: req.headers.set('X-XSRF-TOKEN', token)
+          //     });
+          // }
           return next.handle(req).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (event) {
             // if the token is in the header (cross domain request, then set it to the local cookie)
             if (event instanceof _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpResponse"]) {
               var xsrfToken = event.headers.get('XSRF-TOKEN');
 
               if (xsrfToken) {
-                _shared_utils_functions__WEBPACK_IMPORTED_MODULE_2__["Functions"].setCookie('XSRF-TOKEN', xsrfToken);
+                _shared_utils_functions__WEBPACK_IMPORTED_MODULE_2__["Functions"].setCookie('XSRF-TOKEN', xsrfToken); // this.token = xsrfToken;
+
               }
 
               return event;
@@ -35335,7 +35344,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.authService.setDialogDefaultContainer(this.modal);
           var waitMessagesObservable = this.authService.getWaitMessagesObservable();
           this._waitMessagesSubscription = waitMessagesObservable.subscribe(function (waitMessages) {
-            // setTimeout forces microtask to stop ExpressionChangedAfterItHasBeenCheckedError
+            // setTimeout forces micro-task to stop ExpressionChangedAfterItHasBeenCheckedError
             setTimeout(function () {
               _this210.waitMessages = Array.from(waitMessages.values());
             });
