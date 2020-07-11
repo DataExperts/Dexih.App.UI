@@ -11,14 +11,16 @@ import { tap } from 'rxjs/operators';
 @Injectable()
 export class AddCsrfHeaderInterceptorService implements HttpInterceptor {
 
+    // private token;
+    
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-        const token = Functions.getCookie('XSRF-TOKEN');
-        if (token) {
-            req = req.clone({
-                headers: req.headers.set('X-XSRF-TOKEN', token)
-            });
-        }
+        // const token = this.token ?? Functions.getCookie('XSRF-TOKEN');
+        // if (token) {
+        //     req = req.clone({
+        //         headers: req.headers.set('X-XSRF-TOKEN', token)
+        //     });
+        // }
 
         return next.handle(req).pipe(tap((event: HttpEvent<any>) => {
             // if the token is in the header (cross domain request, then set it to the local cookie)
@@ -26,11 +28,11 @@ export class AddCsrfHeaderInterceptorService implements HttpInterceptor {
                 const xsrfToken = event.headers.get('XSRF-TOKEN');
                 if (xsrfToken) {
                     Functions.setCookie('XSRF-TOKEN', xsrfToken);
+                    // this.token = xsrfToken;
                 }
                 return event;
             }
         }));
-
     }
 
 }

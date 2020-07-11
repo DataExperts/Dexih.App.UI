@@ -18,7 +18,7 @@ using Microsoft.Extensions.Logging;
 namespace dexih.api.Controllers
 {
     [Route("api/[controller]")]
-    [ValidateAntiForgeryToken]
+    // [ValidateAntiForgeryToken]
     [ApiExceptionFilter]
     [ApiFilter]
     public class SharedDataController : Controller

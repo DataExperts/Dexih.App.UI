@@ -3,6 +3,7 @@ import { AuthService } from './+auth/auth.service';
 import { Observable, Subscription } from 'rxjs';
 import { Router, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
 import { DexihModalComponent } from 'dexih-ngx-components';
+import { Functions } from './shared/utils/functions';
 
 @Component({
   selector: 'app-root',
@@ -35,7 +36,7 @@ export class AppComponent implements OnInit, OnDestroy {
     let waitMessagesObservable = this.authService.getWaitMessagesObservable();
 
     this._waitMessagesSubscription = waitMessagesObservable.subscribe(waitMessages => {
-      // setTimeout forces microtask to stop ExpressionChangedAfterItHasBeenCheckedError
+      // setTimeout forces micro-task to stop ExpressionChangedAfterItHasBeenCheckedError
       setTimeout(() => {
         this.waitMessages = Array.from(waitMessages.values());
       });

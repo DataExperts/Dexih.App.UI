@@ -110,18 +110,25 @@ namespace dexih.api.Controllers
                     var principal = await _principalFactory.CreateAsync(user);
                     HttpContext.User = principal;
 
-                    // Update the anti-forgery token following the authentication.
+                    // Response.Cookies.Delete("XSRF-TOKEN");
+                    // var isCors = _operations.Config.Origins?.Length > 0;
+                    //
+                    // // Update the anti-forgery token following the authentication.
                     // var tokens = _antiforgery.GetAndStoreTokens(HttpContext);
-                    // Response.Headers.Add("XSRF-TOKEN", tokens.RequestToken);
-                    Response.Cookies.Delete("XSRF-TOKEN");
-                    // Response.Cookies.Append("XSRF-TOKEN", tokens.RequestToken, new CookieOptions() {HttpOnly = false});
-                    // Response.Cookies.Append(
-	                   //  "XSRF-TOKEN",
-	                   //  tokens.RequestToken,
-	                   //  Request.IsHttps
-		                  //   ? new CookieOptions() {HttpOnly = false, SameSite = SameSiteMode.None, Secure = true}
-		                  //   : new CookieOptions() {HttpOnly = false, SameSite = SameSiteMode.Lax});
-
+                    // if (isCors) // && context.Request.Headers.TryGetValue("Origin", out var origins) && origins != context.Request.BaseUrl() )
+                    // {
+	                   //  Response.Headers.Add("XSRF-TOKEN", tokens.RequestToken);	
+                    // }
+                    // else
+                    // {
+	                   //  Response.Cookies.Append(
+		                  //   "XSRF-TOKEN",
+		                  //   tokens.RequestToken,
+		                  //   Request.IsHttps
+			                 //    ? new CookieOptions() {HttpOnly = false, SameSite = SameSiteMode.Strict, Secure = true, Path = "/"}
+			                 //    : new CookieOptions() {HttpOnly = false, SameSite = SameSiteMode.Strict, Path = "/"});
+                    // }
+                    
                     return new ReturnUser(user);
                 }
                 //if (result.RequiresTwoFactor)
@@ -1154,6 +1161,7 @@ namespace dexih.api.Controllers
         }
 
         [HttpPost("[action]")]
+		[ValidateAntiForgeryToken]
         public async Task LogError([FromBody] LogError logError, CancellationToken cancellationToken)
         {
 	        var user = await GetApplicationUser(cancellationToken);
@@ -1165,6 +1173,7 @@ namespace dexih.api.Controllers
 	    /// </summary>
 	    /// <returns></returns>
 	    [HttpPost("[action]")]
+	    [ValidateAntiForgeryToken]
 	    //[ValidateHub(EPermission.User)]
 	    public async Task CancelTasks([FromBody] ManagedTask[] tasks, CancellationToken cancellationToken)
 	    {
@@ -1179,6 +1188,7 @@ namespace dexih.api.Controllers
 	    /// </summary>
 	    /// <returns></returns>
 	    [HttpPost("[action]")]
+	    [ValidateAntiForgeryToken]
 	    //[ValidateHub(EPermission.User)]
 	    public async Task<string> RestartAgent([FromBody] RestartAgentsParameter restartAgents, CancellationToken cancellationToken)
 	    {
@@ -1199,6 +1209,7 @@ namespace dexih.api.Controllers
 	    /// </summary>
 	    /// <returns></returns>
 	    [HttpPost("[action]")]
+	    [ValidateAntiForgeryToken]
 	    //[ValidateHub(EPermission.User)]
 	    public async Task<DexihIssue> SaveIssue([FromBody] DexihIssue issue, CancellationToken cancellationToken)
 	    {
@@ -1222,6 +1233,7 @@ namespace dexih.api.Controllers
 	    /// </summary>
 	    /// <returns></returns>
 	    [HttpGet("[action]")]
+	    [ValidateAntiForgeryToken]
 	    public async Task<DexihIssue[]> GetIssues(CancellationToken cancellationToken)
 	    {
 		    var user = await GetApplicationUser(cancellationToken);
@@ -1237,6 +1249,7 @@ namespace dexih.api.Controllers
 	    /// <returns></returns>
 	    [HttpPost("[action]")]
 	    //[ValidateHub(EPermission.User)]
+	    [ValidateAntiForgeryToken]
 	    public async Task<DexihIssue> GetIssue([FromBody] GetIssue getIssue, CancellationToken cancellationToken)
 	    {
 		    var user = await GetApplicationUser(cancellationToken);
@@ -1252,6 +1265,7 @@ namespace dexih.api.Controllers
 	    /// <returns></returns>
 	    [HttpPost("[action]")]
 	    //[ValidateHub(EPermission.User)]
+	    [ValidateAntiForgeryToken]
 	    public async Task<DexihIssue> AddIssueComment([FromBody] IssueComment issueComment, CancellationToken cancellationToken)
 	    {
 		    var user = await GetApplicationUser(cancellationToken);

@@ -88,7 +88,7 @@ export class AuthService implements OnDestroy {
     defaultHeaders(): HttpHeaders {
         return new HttpHeaders({
             'Content-Type': 'application/json',
-//            'X-XSRF-TOKEN': Functions.getCookie('XSRF-TOKEN')
+            'X-XSRF-TOKEN': Functions.getCookie('XSRF-TOKEN') ?? ''
         });
     }
 
@@ -899,7 +899,7 @@ export class AuthService implements OnDestroy {
             message.message = error.message;
         }
 
-        return message
+        return message;
     }
 
     public postConfirm<T>(url, data, waitMessage = 'Please wait while the operation completes.',

@@ -10,7 +10,7 @@ namespace dexih.api.Services
 {
     public class ApiFilterAttribute : ActionFilterAttribute
     {
-
+        
         public override Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             var controllerName = context.Controller.GetType().Name;

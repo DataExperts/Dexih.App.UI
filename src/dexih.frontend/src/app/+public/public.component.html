@@ -40,7 +40,7 @@
     
     <dexih-ribbon></dexih-ribbon>
 
-    <router-outlet></router-outlet>
+    <router-outlet *ngIf="display"></router-outlet>
 </div>
 
-<router-outlet *ngIf="embedded"></router-outlet>
+<router-outlet *ngIf="display && embedded"></router-outlet>

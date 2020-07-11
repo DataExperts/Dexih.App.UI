@@ -1,9 +1,7 @@
 ﻿using System;
 using System.IO.Compression;
-using System.Linq;
 using System.Reflection;
 using System.Text.Json;
-using dexih.api.Extensions;
 using dexih.api.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -22,6 +20,7 @@ using dexih.api.Services.Message;
 using dexih.api.Services.Operations;
 using dexih.functions;
 using dexih.operations;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -38,10 +37,7 @@ namespace dexih.api
 {
     public class Startup
     {
-	    
 	    private readonly ILogger _logger;
-	    private readonly string sessionId = Guid.NewGuid().ToString();
-
 
 	    public Startup(IConfiguration configuration, ILogger<Startup> logger)
 	    {
@@ -115,11 +111,7 @@ namespace dexih.api
 				var redis = ConnectionMultiplexer.Connect(appSettings.RedisCacheConnectionString);
 				services.AddDataProtection().PersistKeysToStackExchangeRedis(redis, "dexih-keys");
 			}
-			// else
-			// {
-			// 	services.AddDistributedMemoryCache();
-			// }
-
+			
 			services.AddSingleton<ICacheService, CacheService>();
 			
             services.Configure<RemoteAuthenticationProviderOptions>(options =>
@@ -130,7 +122,6 @@ namespace dexih.api
 			// Add Identity services to the services container
 			services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 			{
-				//options.Cookies.ApplicationCookie.AccessDeniedPath = "/Home/AccessDenied";
 				options.Password.RequireNonAlphanumeric = false;
 				options.Password.RequireUppercase = false;
 			})
@@ -138,9 +129,17 @@ namespace dexih.api
 			.AddDefaultTokenProviders()
 			.AddTokenProvider<RemoteAuthenticationProvider<ApplicationUser>>("dexih-remote");
 
-	        // Not required as authentication handled by angular pages.
-	        services.AddAuthentication().AddCookie();
-	        
+			services.ConfigureApplicationCookie(options =>
+			{
+				options.Cookie.Name = "Dexih.Identity";
+				options.Cookie.HttpOnly = true;
+				if (appSettings.Origins?.Length > 0)
+				{
+					options.Cookie.SameSite = SameSiteMode.None;
+					options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+				}
+			});
+			
 	        if (appSettings.UseResponseCompression)
 	        {
 		        services.Configure<GzipCompressionProviderOptions>(options =>
@@ -209,6 +208,14 @@ namespace dexih.api
 	        services.AddAntiforgery(options =>
 	        {
 		        options.HeaderName = "X-XSRF-TOKEN";
+		        // options.Cookie.Expiration = TimeSpan.Zero;
+		        // options.Cookie.Name = "XSRF-TOKEN";
+		        // options.Cookie.Path = "/";
+		        // options.Cookie.HttpOnly = false;
+		        if (appSettings.Origins?.Length > 0)
+		        {
+			        options.Cookie.SameSite = SameSiteMode.None;    
+		        }
 	        });
 	        
 	        // use the signalr service if specified.
@@ -246,6 +253,7 @@ namespace dexih.api
 //                  OutputTemplate = "{Timestamp:yyyy-MM-dd HH:mm:ss zzz} [{Level}] {RequestId}-{SourceContext}: {Message}{NewLine}{Exception}"
 //              }
 //            );
+			app.UseCookiePolicy();
 
 			var appSettings = Configuration.GetSection("AppSettings").Get<ApplicationSettings>();
 			
@@ -269,12 +277,11 @@ namespace dexih.api
 				}
 			});
 
-			app.UseCors();
-
 			app.UseRouting();
 			app.UseResponseCaching();
-			
-            if (env.IsDevelopment())
+			app.UseCors();
+
+			if (env.IsDevelopment())
             {
                 _logger.LogInformation("Application is running in development configuration, detailed exceptions and errors will be displayed.");
 
@@ -298,7 +305,6 @@ namespace dexih.api
 	                               ForwardedHeaders.XForwardedProto,
             });
 
-            // enable the telemetry data.
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -309,32 +315,37 @@ namespace dexih.api
                 //force ssl connections for non-development environments.
 	            if (context.Request.IsHttps || env.IsDevelopment())
 	            {
-		            _logger.LogInformation($"Request from path {context.Request.Path}");
-		            
-					// We can send the request token as a JavaScript-readable cookie, and Angular will use it by default.
-					var tokens = antiforgery.GetAndStoreTokens(context);
+		             _logger.LogInformation($"Request from path {context.Request.Path}");
+		   
+		   var tokens = antiforgery.GetAndStoreTokens(context);
 
-					if (isCors) // && context.Request.Headers.TryGetValue("Origin", out var origins) && origins != context.Request.BaseUrl() )
-					{
-						context.Response.Headers.Add("XSRF-TOKEN", tokens.RequestToken);	
-					}
-					else
-					{
-						context.Response.Cookies.Append(
-							"XSRF-TOKEN",
-							tokens.RequestToken,
-							context.Request.IsHttps
-								? new CookieOptions() {HttpOnly = false, SameSite = SameSiteMode.Strict, Secure = true, Path = "/"}
-								: new CookieOptions() {HttpOnly = false, SameSite = SameSiteMode.Strict, Path = "/"});
-					}
-					
-					await next();
+		   if (isCors)
+		   {
+			   context.Response.Headers.Add("XSRF-TOKEN", tokens.RequestToken);   
+		   }
+		   else
+		   {
+			   context.Response.Cookies.Append(
+			    "XSRF-TOKEN",
+			    tokens.RequestToken,
+			    context.Request.IsHttps
+			     ? new CookieOptions() {HttpOnly = false, SameSite = SameSiteMode.None, Secure = true, Path = "/"}
+			     : new CookieOptions() {HttpOnly = false, SameSite = SameSiteMode.None, Path = "/"});
+		   }
+
+
+		   await next();
 
 		            if (context.Response.StatusCode == 404)
 		            {
 			            _logger.LogTrace("passing to client");
 			            context.Request.Path = "/";
 			            await next();
+		            }
+
+		            if (context.Response.StatusCode == 400)
+		            {
+			            _logger.LogError($"{context.Request.Path} had status 400 error");
 		            }
 	            }
 	            else
@@ -424,5 +435,17 @@ namespace dexih.api
 		        return cache;
 	        });
         }
+        
+        // private void CheckSameSite(HttpContext httpContext, CookieOptions options)
+        // {
+	       //  if (options.SameSite == SameSiteMode.None)
+	       //  {
+		      //   var userAgent = httpContext.Request.Headers["User-Agent"].ToString();
+		      //   if (BrowserDetection.DisallowsSameSiteNone(userAgent))
+		      //   {
+			     //    options.SameSite = SameSiteMode.Unspecified;
+		      //   }
+	       //  }
+        // }
     }
 }
