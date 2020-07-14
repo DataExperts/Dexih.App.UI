@@ -5,9 +5,6 @@ import { RouterModule} from '@angular/router';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HttpClientModule } from '@angular/common/http';
 
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { ModalModule } from 'ngx-bootstrap/modal';
-
 import { LayoutService} from './layout/layout.service';
 import { UtilsModule} from './utils/utils.module';
 import { DexihTableModule} from 'dexih-ngx-table';
@@ -31,8 +28,6 @@ import { SeriesAnimateModule } from './ui/seriesAnimate/series-animate.module';
 
     DragDropModule,
 
-    BsDropdownModule.forRoot(),
-    ModalModule.forRoot(),
     NgxMdModule.forRoot(),
 
     DexihTableModule,
@@ -54,7 +49,6 @@ import { SeriesAnimateModule } from './ui/seriesAnimate/series-animate.module';
   exports: [
     CommonModule, FormsModule, RouterModule, DragDropModule,
 
-    BsDropdownModule,
     UtilsModule,
     NgxMdModule,
 
