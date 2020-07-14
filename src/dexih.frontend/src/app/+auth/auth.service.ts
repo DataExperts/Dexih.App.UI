@@ -1789,7 +1789,7 @@ export class AuthService implements OnDestroy {
     }
 
     getIssues(cancelToken: CancelToken): Promise<DexihIssue[]> {
-        return this.getFromApi<DexihIssue[]>('/api/Account/GetIssues', 'Getting issues ... ', cancelToken);
+        return this.post<DexihIssue[]>('/api/Account/GetIssues', { }, 'Getting issues ... ', cancelToken);
     }
 
     addIssueComment(issueKey: number, comment: string) {

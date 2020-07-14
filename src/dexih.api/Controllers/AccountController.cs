@@ -1232,7 +1232,7 @@ namespace dexih.api.Controllers
 	    /// Cancels any running tasks 
 	    /// </summary>
 	    /// <returns></returns>
-	    [HttpGet("[action]")]
+	    [HttpPost("[action]")]
 	    [ValidateAntiForgeryToken]
 	    public async Task<DexihIssue[]> GetIssues(CancellationToken cancellationToken)
 	    {
