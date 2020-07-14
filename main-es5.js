@@ -62139,7 +62139,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var environment = {
       production: true,
-      apiUrl: 'https://dexih.com'
+      apiUrl: 'https://dexih.dataexpertsgroup.com'
     };
     /***/
   },
