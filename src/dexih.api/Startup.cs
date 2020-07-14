@@ -133,11 +133,11 @@ namespace dexih.api
 			{
 				options.Cookie.Name = "Dexih.Identity";
 				options.Cookie.HttpOnly = true;
-				if (appSettings.Origins?.Length > 0)
-				{
-					options.Cookie.SameSite = SameSiteMode.None;
-					options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
-				}
+				// if (appSettings.Origins?.Length > 0)
+				// {
+				// 	options.Cookie.SameSite = SameSiteMode.None;
+				// 	options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+				// }
 			});
 			
 	        if (appSettings.UseResponseCompression)
@@ -212,10 +212,10 @@ namespace dexih.api
 		        // options.Cookie.Name = "XSRF-TOKEN";
 		        // options.Cookie.Path = "/";
 		        // options.Cookie.HttpOnly = false;
-		        if (appSettings.Origins?.Length > 0)
-		        {
-			        options.Cookie.SameSite = SameSiteMode.None;    
-		        }
+		        // if (appSettings.Origins?.Length > 0)
+		        // {
+			       //  options.Cookie.SameSite = SameSiteMode.None;    
+		        // }
 	        });
 	        
 	        // use the signalr service if specified.
@@ -329,11 +329,10 @@ namespace dexih.api
 			    "XSRF-TOKEN",
 			    tokens.RequestToken,
 			    context.Request.IsHttps
-			     ? new CookieOptions() {HttpOnly = false, SameSite = SameSiteMode.None, Secure = true, Path = "/"}
-			     : new CookieOptions() {HttpOnly = false, SameSite = SameSiteMode.None, Path = "/"});
+			     ? new CookieOptions() {HttpOnly = false, SameSite = SameSiteMode.Strict, Secure = true, Path = "/"}
+			     : new CookieOptions() {HttpOnly = false, SameSite = SameSiteMode.Strict, Path = "/"});
 		   }
-
-
+		   
 		   await next();
 
 		            if (context.Response.StatusCode == 404)
