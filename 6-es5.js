@@ -43,13 +43,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -103,13 +103,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
@@ -121,7 +121,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_table__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
     /*! dexih-ngx-table */
-    "./node_modules/dexih-ngx-table/__ivy_ngcc__/fesm2015/dexih-ngx-table.js");
+    "./node_modules/dexih-ngx-table/fesm2015/dexih-ngx-table.js");
     /* harmony import */
 
 
@@ -157,7 +157,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
@@ -1005,7 +1005,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -1023,7 +1023,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -1041,13 +1041,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var dexih_ngx_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! dexih-ngx-table */
-    "./node_modules/dexih-ngx-table/__ivy_ngcc__/fesm2015/dexih-ngx-table.js");
+    "./node_modules/dexih-ngx-table/fesm2015/dexih-ngx-table.js");
     /* harmony import */
 
 
@@ -1417,13 +1417,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -1477,13 +1477,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
@@ -1501,7 +1501,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
@@ -2249,7 +2249,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -2267,7 +2267,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -2285,13 +2285,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var dexih_ngx_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! dexih-ngx-table */
-    "./node_modules/dexih-ngx-table/__ivy_ngcc__/fesm2015/dexih-ngx-table.js");
+    "./node_modules/dexih-ngx-table/fesm2015/dexih-ngx-table.js");
     /* harmony import */
 
 
@@ -2309,7 +2309,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
@@ -2694,13 +2694,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -2754,13 +2754,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
@@ -2790,13 +2790,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
     var ngx_md__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(
     /*! ngx-md */
-    "./node_modules/ngx-md/__ivy_ngcc__/fesm2015/ngx-md.js");
+    "./node_modules/ngx-md/fesm2015/ngx-md.js");
 
     var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
       function adopt(value) {
@@ -4481,7 +4481,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -4499,7 +4499,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -4529,19 +4529,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var dexih_ngx_table__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! dexih-ngx-table */
-    "./node_modules/dexih-ngx-table/__ivy_ngcc__/fesm2015/dexih-ngx-table.js");
+    "./node_modules/dexih-ngx-table/fesm2015/dexih-ngx-table.js");
     /* harmony import */
 
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
 
     var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
       function adopt(value) {
@@ -5364,7 +5364,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -5382,7 +5382,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -5400,13 +5400,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var dexih_ngx_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! dexih-ngx-table */
-    "./node_modules/dexih-ngx-table/__ivy_ngcc__/fesm2015/dexih-ngx-table.js");
+    "./node_modules/dexih-ngx-table/fesm2015/dexih-ngx-table.js");
     /* harmony import */
 
 
@@ -5430,7 +5430,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
@@ -6033,7 +6033,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -6057,13 +6057,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var dexih_ngx_table__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! dexih-ngx-table */
-    "./node_modules/dexih-ngx-table/__ivy_ngcc__/fesm2015/dexih-ngx-table.js");
+    "./node_modules/dexih-ngx-table/fesm2015/dexih-ngx-table.js");
 
     function ExportComponent_ng_template_3_Template(rf, ctx) {
       if (rf & 1) {
@@ -6287,7 +6287,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -6329,13 +6329,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
@@ -6347,13 +6347,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
     var dexih_ngx_table__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
     /*! dexih-ngx-table */
-    "./node_modules/dexih-ngx-table/__ivy_ngcc__/fesm2015/dexih-ngx-table.js");
+    "./node_modules/dexih-ngx-table/fesm2015/dexih-ngx-table.js");
 
     var _c0 = ["fileInput"];
 
@@ -6945,13 +6945,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -6981,7 +6981,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
@@ -7011,7 +7011,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
@@ -7023,7 +7023,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
@@ -8284,13 +8284,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
@@ -8302,7 +8302,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
 
     var CustomFunctionParameterComponent = /*#__PURE__*/function () {
       function CustomFunctionParameterComponent() {
@@ -8516,7 +8516,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -8534,7 +8534,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -8552,13 +8552,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var dexih_ngx_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! dexih-ngx-table */
-    "./node_modules/dexih-ngx-table/__ivy_ngcc__/fesm2015/dexih-ngx-table.js");
+    "./node_modules/dexih-ngx-table/fesm2015/dexih-ngx-table.js");
     /* harmony import */
 
 
@@ -8570,7 +8570,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
@@ -8941,13 +8941,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -8995,7 +8995,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
@@ -9007,7 +9007,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
@@ -9652,13 +9652,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
@@ -9682,7 +9682,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
@@ -9706,7 +9706,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
@@ -9730,13 +9730,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var ngx_md__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
     /*! ngx-md */
-    "./node_modules/ngx-md/__ivy_ngcc__/fesm2015/ngx-md.js");
+    "./node_modules/ngx-md/fesm2015/ngx-md.js");
     /* harmony import */
 
 
     var dexih_ngx_table__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
     /*! dexih-ngx-table */
-    "./node_modules/dexih-ngx-table/__ivy_ngcc__/fesm2015/dexih-ngx-table.js");
+    "./node_modules/dexih-ngx-table/fesm2015/dexih-ngx-table.js");
     /* harmony import */
 
 
@@ -10702,7 +10702,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -10720,7 +10720,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -10738,13 +10738,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var dexih_ngx_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! dexih-ngx-table */
-    "./node_modules/dexih-ngx-table/__ivy_ngcc__/fesm2015/dexih-ngx-table.js");
+    "./node_modules/dexih-ngx-table/fesm2015/dexih-ngx-table.js");
     /* harmony import */
 
 
@@ -11131,13 +11131,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -11173,7 +11173,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
@@ -11185,7 +11185,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
@@ -11496,7 +11496,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -11514,7 +11514,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -11532,13 +11532,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var dexih_ngx_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! dexih-ngx-table */
-    "./node_modules/dexih-ngx-table/__ivy_ngcc__/fesm2015/dexih-ngx-table.js");
+    "./node_modules/dexih-ngx-table/fesm2015/dexih-ngx-table.js");
     /* harmony import */
 
 
@@ -11894,7 +11894,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -11918,7 +11918,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -11930,19 +11930,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
@@ -12374,7 +12374,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -12386,7 +12386,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -12410,13 +12410,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var dexih_ngx_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! dexih-ngx-table */
-    "./node_modules/dexih-ngx-table/__ivy_ngcc__/fesm2015/dexih-ngx-table.js");
+    "./node_modules/dexih-ngx-table/fesm2015/dexih-ngx-table.js");
     /* harmony import */
 
 
@@ -12434,7 +12434,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
@@ -12913,19 +12913,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
@@ -12943,7 +12943,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
@@ -12961,7 +12961,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
@@ -13684,7 +13684,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -13708,7 +13708,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -13720,7 +13720,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
@@ -13889,7 +13889,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -13913,7 +13913,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -13925,19 +13925,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
@@ -14448,7 +14448,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -14484,7 +14484,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -14502,19 +14502,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
@@ -14526,7 +14526,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_table__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
     /*! dexih-ngx-table */
-    "./node_modules/dexih-ngx-table/__ivy_ngcc__/fesm2015/dexih-ngx-table.js");
+    "./node_modules/dexih-ngx-table/fesm2015/dexih-ngx-table.js");
 
     var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
       function adopt(value) {
@@ -15609,13 +15609,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -15657,19 +15657,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
@@ -15681,7 +15681,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_table__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
     /*! dexih-ngx-table */
-    "./node_modules/dexih-ngx-table/__ivy_ngcc__/fesm2015/dexih-ngx-table.js");
+    "./node_modules/dexih-ngx-table/fesm2015/dexih-ngx-table.js");
 
     function FilesManageComponent_div_0_dexih_button_5_Template(rf, ctx) {
       if (rf & 1) {
@@ -16924,13 +16924,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
@@ -17128,7 +17128,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
 
     var HubBaseModule = /*#__PURE__*/function () {
       function HubBaseModule() {
@@ -17207,7 +17207,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -18314,13 +18314,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -18368,13 +18368,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
@@ -18392,7 +18392,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
 
     var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
       function adopt(value) {
@@ -18800,7 +18800,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -18824,7 +18824,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -18836,13 +18836,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var dexih_ngx_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! dexih-ngx-table */
-    "./node_modules/dexih-ngx-table/__ivy_ngcc__/fesm2015/dexih-ngx-table.js");
+    "./node_modules/dexih-ngx-table/fesm2015/dexih-ngx-table.js");
     /* harmony import */
 
 
@@ -18854,7 +18854,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
@@ -19268,13 +19268,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -19328,19 +19328,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
@@ -19382,7 +19382,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_table__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(
     /*! dexih-ngx-table */
-    "./node_modules/dexih-ngx-table/__ivy_ngcc__/fesm2015/dexih-ngx-table.js");
+    "./node_modules/dexih-ngx-table/fesm2015/dexih-ngx-table.js");
 
     function ListOfValuesEditComponent_div_0_ng_template_2_save_button_1_Template(rf, ctx) {
       if (rf & 1) {
@@ -20282,7 +20282,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -20306,7 +20306,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -20318,13 +20318,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var dexih_ngx_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! dexih-ngx-table */
-    "./node_modules/dexih-ngx-table/__ivy_ngcc__/fesm2015/dexih-ngx-table.js");
+    "./node_modules/dexih-ngx-table/fesm2015/dexih-ngx-table.js");
     /* harmony import */
 
 
@@ -20336,7 +20336,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
@@ -20679,7 +20679,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -20697,7 +20697,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -20721,25 +20721,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
     var dexih_ngx_table__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! dexih-ngx-table */
-    "./node_modules/dexih-ngx-table/__ivy_ngcc__/fesm2015/dexih-ngx-table.js");
+    "./node_modules/dexih-ngx-table/fesm2015/dexih-ngx-table.js");
     /* harmony import */
 
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
 
     var _c0 = ["DexihMessage"];
 
@@ -21217,7 +21217,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -21229,7 +21229,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -21259,13 +21259,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
@@ -21277,7 +21277,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
 
     var _c0 = function _c0(a4) {
       return ["/hubs", "index", "agents", "edit", a4];
@@ -21630,7 +21630,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -21642,7 +21642,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -21666,13 +21666,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var dexih_ngx_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! dexih-ngx-table */
-    "./node_modules/dexih-ngx-table/__ivy_ngcc__/fesm2015/dexih-ngx-table.js");
+    "./node_modules/dexih-ngx-table/fesm2015/dexih-ngx-table.js");
 
     var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
       function adopt(value) {
@@ -22439,7 +22439,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -22451,7 +22451,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -22475,25 +22475,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var dexih_ngx_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! dexih-ngx-table */
-    "./node_modules/dexih-ngx-table/__ivy_ngcc__/fesm2015/dexih-ngx-table.js");
+    "./node_modules/dexih-ngx-table/fesm2015/dexih-ngx-table.js");
     /* harmony import */
 
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
@@ -23098,7 +23098,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -23128,13 +23128,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_table__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! dexih-ngx-table */
-    "./node_modules/dexih-ngx-table/__ivy_ngcc__/fesm2015/dexih-ngx-table.js");
+    "./node_modules/dexih-ngx-table/fesm2015/dexih-ngx-table.js");
     /* harmony import */
 
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
@@ -23480,7 +23480,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -23510,19 +23510,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_table__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! dexih-ngx-table */
-    "./node_modules/dexih-ngx-table/__ivy_ngcc__/fesm2015/dexih-ngx-table.js");
+    "./node_modules/dexih-ngx-table/fesm2015/dexih-ngx-table.js");
     /* harmony import */
 
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
 
     function ProfileResultsComponent_ng_template_1_Template(rf, ctx) {
       if (rf & 1) {
@@ -23707,13 +23707,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
 
     var _c0 = function _c0(a1) {
       return ["progress-bar", a1];
@@ -23874,7 +23874,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -23892,7 +23892,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -23910,13 +23910,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
@@ -24333,7 +24333,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -24441,13 +24441,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -24459,19 +24459,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
     var _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @swimlane/ngx-charts */
-    "./node_modules/@swimlane/ngx-charts/__ivy_ngcc__/fesm2015/swimlane-ngx-charts.js");
+    "./node_modules/@swimlane/ngx-charts/fesm2015/swimlane-ngx-charts.js");
     /* harmony import */
 
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
@@ -25369,7 +25369,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -25441,19 +25441,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
@@ -25489,13 +25489,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
@@ -26091,13 +26091,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
@@ -26186,7 +26186,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -26198,7 +26198,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -26228,19 +26228,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var dexih_ngx_table__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! dexih-ngx-table */
-    "./node_modules/dexih-ngx-table/__ivy_ngcc__/fesm2015/dexih-ngx-table.js");
+    "./node_modules/dexih-ngx-table/fesm2015/dexih-ngx-table.js");
     /* harmony import */
 
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
 
     function SharedDataIndexComponent_ng_template_3_Template(rf, ctx) {
       if (rf & 1) {
@@ -26823,7 +26823,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -26841,7 +26841,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -26859,13 +26859,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var dexih_ngx_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! dexih-ngx-table */
-    "./node_modules/dexih-ngx-table/__ivy_ngcc__/fesm2015/dexih-ngx-table.js");
+    "./node_modules/dexih-ngx-table/fesm2015/dexih-ngx-table.js");
     /* harmony import */
 
 
@@ -26889,7 +26889,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
@@ -27639,7 +27639,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -27669,7 +27669,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -27681,19 +27681,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_animations__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! @angular/animations */
-    "./node_modules/@angular/animations/__ivy_ngcc__/fesm2015/animations.js");
+    "./node_modules/@angular/animations/fesm2015/animations.js");
     /* harmony import */
 
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var dexih_ngx_table__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! dexih-ngx-table */
-    "./node_modules/dexih-ngx-table/__ivy_ngcc__/fesm2015/dexih-ngx-table.js");
+    "./node_modules/dexih-ngx-table/fesm2015/dexih-ngx-table.js");
     /* harmony import */
 
 
@@ -27705,13 +27705,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
 
     function TagsComponent_ng_template_3_Template(rf, ctx) {
       if (rf & 1) {
@@ -28364,7 +28364,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -28388,7 +28388,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -28406,13 +28406,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
     /* harmony import */
 
 
     var dexih_ngx_table__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! dexih-ngx-table */
-    "./node_modules/dexih-ngx-table/__ivy_ngcc__/fesm2015/dexih-ngx-table.js");
+    "./node_modules/dexih-ngx-table/fesm2015/dexih-ngx-table.js");
     /* harmony import */
 
 
@@ -28739,19 +28739,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
@@ -28769,7 +28769,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
@@ -28793,7 +28793,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! dexih-ngx-components */
-    "./node_modules/dexih-ngx-components/__ivy_ngcc__/fesm2015/dexih-ngx-components.js");
+    "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
 
     var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
       function adopt(value) {
