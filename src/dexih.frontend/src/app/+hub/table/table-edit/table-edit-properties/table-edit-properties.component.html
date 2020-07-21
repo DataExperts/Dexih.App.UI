@@ -81,9 +81,9 @@
 </d-widget-section>
 
 <div *ngIf="connectionReference?.connectionCategory == eConnectionCategory.WebService">
-    <d-table-edit-rest [formService]='formsService' [connection]='connection' (onTableChanged)="onTableChanged($event)"></d-table-edit-rest>
+    <dexih-table-edit-rest [formService]='formsService' [connection]='connection' (onTableChanged)="onTableChanged($event)"></dexih-table-edit-rest>
 </div>
 
 <div *ngIf="connection && ( connectionReference?.connectionCategory == eConnectionCategory.File || connection?.purpose !== eConnectionPurpose.Source )">
-    <d-table-edit-file [formService]='formsService' [connection]='connection' [isFile]='connectionReference?.connectionCategory == eConnectionCategory.File' (onTableChanged)="onTableChanged($event)"></d-table-edit-file>
+    <dexih-table-edit-file [formService]='formsService' [connection]='connection' [isFile]='connectionReference?.connectionCategory == eConnectionCategory.File' (onTableChanged)="onTableChanged($event)"></dexih-table-edit-file>
 </div>

@@ -32,7 +32,7 @@
     </form>
 </d-widget-section>
 
-<d-table-edit-properties *ngIf="tableFormService.currentForm.value" [formsService]="tableFormService" [isExpanded]="newTable"></d-table-edit-properties>
+<datalink-table-edit-properties *ngIf="tableFormService.currentForm.value" [formsService]="tableFormService" [isExpanded]="newTable"></datalink-table-edit-properties>
 
 <ng-template [ngIf]="targetTableForm?.controls.table.value">
         <d-widget-section title="Columns" [showExpandButton]="true" [padding]="false">
