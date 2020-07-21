@@ -10,8 +10,8 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TableColumnEditComponent", function() { return TableColumnEditComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 /* harmony import */ var _auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../+auth/auth.service */ "./src/app/+auth/auth.service.ts");
 /* harmony import */ var _hub_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../hub.service */ "./src/app/+hub/hub.service.ts");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
@@ -96,7 +96,7 @@ TableColumnEditComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵ�
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TableEditMainComponent", function() { return TableEditMainComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 /* harmony import */ var _hub_forms_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../hub.forms.service */ "./src/app/+hub/hub.forms.service.ts");
 /* harmony import */ var _table_edit_properties_table_edit_properties_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./table-edit-properties/table-edit-properties.component */ "./src/app/+hub/table/table-edit/table-edit-properties/table-edit-properties.component.ts");
 /* harmony import */ var _table_edit_columns_table_edit_columns_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./table-edit-columns/table-edit-columns.component */ "./src/app/+hub/table/table-edit/table-edit-columns/table-edit-columns.component.ts");
@@ -145,8 +145,8 @@ TableEditMainComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵd
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TableEditComponent", function() { return TableEditComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 /* harmony import */ var _hub_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../hub.service */ "./src/app/+hub/hub.service.ts");
 /* harmony import */ var _auth_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../+auth/auth.service */ "./src/app/+auth/auth.service.ts");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
@@ -154,10 +154,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_shared_models__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../shared/shared.models */ "./src/app/shared/shared.models.ts");
 /* harmony import */ var _hub_models__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../hub.models */ "./src/app/+hub/hub.models.ts");
 /* harmony import */ var _auth_auth_models__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../+auth/auth.models */ "./src/app/+auth/auth.models.ts");
-/* harmony import */ var dexih_ngx_components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! dexih-ngx-components */ "./node_modules/dexih-ngx-components/fesm2015/dexih-ngx-components.js");
+/* harmony import */ var ngx_d_components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ngx-d-components */ "./node_modules/ngx-d-components/__ivy_ngcc__/fesm2015/ngx-d-components.js");
 /* harmony import */ var _shared_ui_dexihFormControls_dexih_invalid_form_details_dexih_invalid_form_details_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../shared/ui/dexihFormControls/dexih-invalid-form-details/dexih-invalid-form-details.component */ "./src/app/shared/ui/dexihFormControls/dexih-invalid-form-details/dexih-invalid-form-details.component.ts");
 /* harmony import */ var _buttons_actions_table_button_actions_table_button_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../buttons/actions-table-button/actions-table-button.component */ "./src/app/+hub/buttons/actions-table-button/actions-table-button.component.ts");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 /* harmony import */ var _buttons_cancel_button_cancel_button_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../buttons/cancel-button/cancel-button.component */ "./src/app/+hub/buttons/cancel-button/cancel-button.component.ts");
 /* harmony import */ var _buttons_save_button_save_button_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../buttons/save-button/save-button.component */ "./src/app/+hub/buttons/save-button/save-button.component.ts");
 
@@ -180,10 +180,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function TableEditComponent_ng_template_2_dexih_button_2_Template(rf, ctx) { if (rf & 1) {
+function TableEditComponent_ng_template_2_d_button_2_Template(rf, ctx) { if (rf & 1) {
     const _r5 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "dexih-button", 8);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TableEditComponent_ng_template_2_dexih_button_2_Template_dexih_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r5); const ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r4.createPaths(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-button", 8);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TableEditComponent_ng_template_2_d_button_2_Template_d_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r5); const ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r4.createPaths(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, " Create Paths ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } }
@@ -203,7 +203,7 @@ function TableEditComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "actions-table-button", 4);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("changedTables", function TableEditComponent_ng_template_2_Template_actions_table_button_changedTables_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r7); const ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r8.changedTables($event); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, TableEditComponent_ng_template_2_dexih_button_2_Template, 2, 0, "dexih-button", 5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, TableEditComponent_ng_template_2_d_button_2_Template, 2, 0, "d-button", 5);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, TableEditComponent_ng_template_2_save_button_3_Template, 1, 1, "save-button", 6);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "cancel-button", 7);
 } if (rf & 2) {
@@ -364,8 +364,8 @@ TableEditComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefin
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("beforeunload", function TableEditComponent_beforeunload_HostBindingHandler($event) { return ctx.unloadNotification($event); }, false, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵresolveWindow"]);
     } }, decls: 6, vars: 2, consts: [[1, "container-fluid"], ["iconClass", "fa fa-lg fa-fw fa-table", 3, "title", "showCloseButton", "close"], ["header", ""], [1, "mr-1", 3, "control", "click"], [1, "mr-1", 3, "showEdit", "tables", "changedTables"], ["class", "mr-1", "title", "Create the file paths (or folders).", "iconClass", "fa fa-folder-open", "buttonClass", "btn-primary", 3, "click", 4, "ngIf"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [3, "formsService"], ["title", "Create the file paths (or folders).", "iconClass", "fa fa-folder-open", "buttonClass", "btn-primary", 1, "mr-1", 3, "click"], [1, "mr-1", 3, "formsService"]], template: function TableEditComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "dexih-widget", 1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("close", function TableEditComponent_Template_dexih_widget_close_1_listener() { return ctx.close(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "d-widget", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("close", function TableEditComponent_Template_d_widget_close_1_listener() { return ctx.close(); });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, TableEditComponent_ng_template_2_Template, 5, 9, "ng-template", null, 2, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](5, "router-outlet");
@@ -375,7 +375,7 @@ TableEditComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefin
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("title", "Edit Table (" + (ctx.formsService.currentForm == null ? null : ctx.formsService.currentForm.controls == null ? null : ctx.formsService.currentForm.controls.name == null ? null : ctx.formsService.currentForm.controls.name.value) + ")")("showCloseButton", true);
-    } }, directives: [dexih_ngx_components__WEBPACK_IMPORTED_MODULE_9__["DexihWidgetComponent"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterOutlet"], _shared_ui_dexihFormControls_dexih_invalid_form_details_dexih_invalid_form_details_component__WEBPACK_IMPORTED_MODULE_10__["DexihInvalidFormDetailsComponent"], _buttons_actions_table_button_actions_table_button_component__WEBPACK_IMPORTED_MODULE_11__["ActionsTableButtonComponent"], _angular_common__WEBPACK_IMPORTED_MODULE_12__["NgIf"], _buttons_cancel_button_cancel_button_component__WEBPACK_IMPORTED_MODULE_13__["CancelButtonComponent"], dexih_ngx_components__WEBPACK_IMPORTED_MODULE_9__["DexihButtonComponent"], _buttons_save_button_save_button_component__WEBPACK_IMPORTED_MODULE_14__["SaveButtonComponent"]], encapsulation: 2 });
+    } }, directives: [ngx_d_components__WEBPACK_IMPORTED_MODULE_9__["DWidgetComponent"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterOutlet"], _shared_ui_dexihFormControls_dexih_invalid_form_details_dexih_invalid_form_details_component__WEBPACK_IMPORTED_MODULE_10__["DexihInvalidFormDetailsComponent"], _buttons_actions_table_button_actions_table_button_component__WEBPACK_IMPORTED_MODULE_11__["ActionsTableButtonComponent"], _angular_common__WEBPACK_IMPORTED_MODULE_12__["NgIf"], _buttons_cancel_button_cancel_button_component__WEBPACK_IMPORTED_MODULE_13__["CancelButtonComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_9__["DButtonComponent"], _buttons_save_button_save_button_component__WEBPACK_IMPORTED_MODULE_14__["SaveButtonComponent"]], encapsulation: 2 });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](TableEditComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
@@ -400,10 +400,10 @@ TableEditComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefin
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TableEditModule", function() { return TableEditModule; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 /* harmony import */ var _shared_shared_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../shared/shared.module */ "./src/app/shared/shared.module.ts");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 /* harmony import */ var _table_edit_routing__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./table-edit.routing */ "./src/app/+hub/table/table-edit/table-edit.routing.ts");
 /* harmony import */ var _table_edit_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./table-edit.component */ "./src/app/+hub/table/table-edit/table-edit.component.ts");
 /* harmony import */ var _table_edit_main_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./table-edit-main.component */ "./src/app/+hub/table/table-edit/table-edit-main.component.ts");
@@ -412,7 +412,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _hub_forms_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../hub.forms.service */ "./src/app/+hub/hub.forms.service.ts");
 /* harmony import */ var _table_column_edit_table_column_edit_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./table-column-edit/table-column-edit.component */ "./src/app/+hub/table/table-edit/table-column-edit/table-column-edit.component.ts");
 /* harmony import */ var _table_shared_module__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../table.shared.module */ "./src/app/+hub/table/table.shared.module.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 
 
 
@@ -495,7 +495,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tableEditRoutes", function() { return tableEditRoutes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "routes", function() { return routes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Routing", function() { return Routing; });
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 /* harmony import */ var _table_edit_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./table-edit.component */ "./src/app/+hub/table/table-edit/table-edit.component.ts");
 /* harmony import */ var _table_column_edit_table_column_edit_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./table-column-edit/table-column-edit.component */ "./src/app/+hub/table/table-edit/table-column-edit/table-column-edit.component.ts");
 /* harmony import */ var _item_edit_guard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../item-edit.guard */ "./src/app/+hub/item-edit.guard.ts");
