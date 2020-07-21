@@ -4,14 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { DexihInvalidFormIconComponent } from './dexih-invalid-form-icon/dexih-invalid-form-icon.component';
 import { DexihInvalidFormDetailsComponent } from './dexih-invalid-form-details/dexih-invalid-form-details.component';
-import { DexihComponentsModule } from 'dexih-ngx-components';
+import { DComponentsModule } from 'ngx-d-components';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     RouterModule,
-    DexihComponentsModule
+    DComponentsModule
   ],
   declarations: [
     DexihInvalidFormIconComponent,

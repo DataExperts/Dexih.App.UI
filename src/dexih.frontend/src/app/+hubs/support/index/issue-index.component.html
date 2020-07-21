@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <dexih-widget title="Raised Issues" 
+    <d-widget title="Raised Issues" 
         iconClass="fa fa-lg fa-fw fa-life-saver" 
 		[showCloseButton]="true"
 		(close)="close()"
@@ -7,8 +7,8 @@
 <support-options [isExpanded]="true"></support-options>
 
 
-<dexih-widget-section title="Current Support Issues" [padding]="false">
-		<dexih-table 
+<d-widget-section title="Current Support Issues" [padding]="false">
+		<d-table 
 			[enableMultiSelect]="true"
 			[enableStickyToolbar]="true"  [toolbarZIndex]="100"
 			[columns]="columns"
@@ -16,18 +16,18 @@
 			(rowClick)="edit($event)"
 			>
 				<ng-template #selectedItemAction select="selectedItemAction" let-item="item">
-					<dexih-button-edit class="mr-1" [routerLink]="['edit', item.key]" queryParamsHandling preserveFragment class="mr-1"></dexih-button-edit>
+					<d-button-edit class="mr-1" [routerLink]="['edit', item.key]" queryParamsHandling preserveFragment class="mr-1"></d-button-edit>
 				</ng-template>
 
 				<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-					<dexih-button-delete (click)="delete(items)"></dexih-button-delete>
+					<d-button-delete (click)="delete(items)"></d-button-delete>
 				</ng-template>
 
 				<ng-template #actions let-items="items">
-					<dexih-button-new class="mr-1" [routerLink]="['new']"></dexih-button-new>
+					<d-button-new class="mr-1" [routerLink]="['new']"></d-button-new>
 				</ng-template>
-		</dexih-table>
-	</dexih-widget-section>
-    </dexih-widget>
+		</d-table>
+	</d-widget-section>
+    </d-widget>
 </div>
 

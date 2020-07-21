@@ -1,10 +1,10 @@
-<dexih-widget-section title='Columns' [showExpandButton]="true" [padding]="false">
-    <dexih-table [enableMultiSelect]="true" [enableStickyToolbar]="true"  [toolbarZIndex]="100" [enableManualSort]="true" (onSortChanged)="columnSortChange($event)"
+<d-widget-section title='Columns' [showExpandButton]="true" [padding]="false">
+    <d-table [enableMultiSelect]="true" [enableStickyToolbar]="true"  [toolbarZIndex]="100" [enableManualSort]="true" (onSortChanged)="columnSortChange($event)"
         sortColumn="position" [columns]="columns" [dataObservable]="columnData" (rowClick)="editColumn($event)">
         <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-            <dexih-button-delete (click)="deleteSelected(items)" title="Delete selected columns" class="mr-1"></dexih-button-delete>
-            <dexih-button iconClass="fa fa-th-list" class="mr-1" (click)="showBulkEdit=!showBulkEdit">
-                {{showBulkEdit ? 'Hide Bulk Edit' : 'Show Bulk Edit'}} </dexih-button>
+            <d-button-delete (click)="deleteSelected(items)" title="Delete selected columns" class="mr-1"></d-button-delete>
+            <d-button iconClass="fa fa-th-list" class="mr-1" (click)="showBulkEdit=!showBulkEdit">
+                {{showBulkEdit ? 'Hide Bulk Edit' : 'Show Bulk Edit'}} </d-button>
         </ng-template>
 
         <ng-template #tableHeader let-items="items">
@@ -13,13 +13,13 @@
         </ng-template>
 
         <ng-template #actions select="actionsTemplate" let-items="items">
-            <dexih-button-new (click)="newColumn()" title="Create a new column" class="mr-1"></dexih-button-new>
+            <d-button-new (click)="newColumn()" title="Create a new column" class="mr-1"></d-button-new>
         </ng-template>
 
         <ng-template #selectedItemAction select="selectedItemAction" let-item="item" class="mr-1">
-            <dexih-button-edit (click)="editColumn(item)" title="Edit selected column" class="mr-1"></dexih-button-edit>
+            <d-button-edit (click)="editColumn(item)" title="Edit selected column" class="mr-1"></d-button-edit>
         </ng-template>
 
-    </dexih-table>
+    </d-table>
 
-</dexih-widget-section>
+</d-widget-section>

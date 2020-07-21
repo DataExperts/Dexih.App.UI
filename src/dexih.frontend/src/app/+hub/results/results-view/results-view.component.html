@@ -1,5 +1,5 @@
 <div class="container-fluid">
-	<dexih-widget *ngIf="auditResult" [title]="auditResult?.referenceName" iconClass="fa fa-lg fa-fw fa-trophy"
+	<d-widget *ngIf="auditResult" [title]="auditResult?.referenceName" iconClass="fa fa-lg fa-fw fa-trophy"
 	[showCloseButton]="true" (close)="close()">
 
 		<ng-template #header>
@@ -28,5 +28,5 @@
 				<preview-results [auditResult]="auditResult"></preview-results>
 			</div>
 		</div>
-	</dexih-widget>
+	</d-widget>
 </div>

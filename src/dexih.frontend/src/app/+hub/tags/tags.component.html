@@ -1,10 +1,10 @@
 <div class="container-fluid">
-    <dexih-widget title="Tags" 
+    <d-widget title="Tags" 
 		iconClass="fa fa-lg fa-fw fa-tags" 
 		[showCloseButton]="true"
 		(close)="close()"
 	>
-			<dexih-table 
+			<d-table 
 				[enableMultiSelect]="true"
                 [enableStickyToolbar]="true"  [toolbarZIndex]="100"
                 [columns]="columns"
@@ -13,16 +13,16 @@
                 rowStatusHeading="Color"
 				>
 				<ng-template #selectedItemAction select="selectedItemAction" let-hubVariable="item">
-					<dexih-button-edit class="mr-1" (click)="edit(item)"></dexih-button-edit>
+					<d-button-edit class="mr-1" (click)="edit(item)"></d-button-edit>
 				</ng-template>
 
                     <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-                        <dexih-button-save-local class="mr-1" (click)="export(items)"></dexih-button-save-local>
-                        <dexih-button-delete class="mr-1" *ngIf="hubCache.canWrite" (click)="delete(items)"></dexih-button-delete>
+                        <d-button-save-local class="mr-1" (click)="export(items)"></d-button-save-local>
+                        <d-button-delete class="mr-1" *ngIf="hubCache.canWrite" (click)="delete(items)"></d-button-delete>
                     </ng-template>
     
                     <ng-template #actions let-items="items">
-                        <dexih-button-new class="mr-1" *ngIf="hubCache.canWrite" (click)="new()"></dexih-button-new>
+                        <d-button-new class="mr-1" *ngIf="hubCache.canWrite" (click)="new()"></d-button-new>
                     </ng-template>
 
                     <ng-template #rowStatus select="rowStatus" let-item="item">
@@ -71,15 +71,15 @@
                                 </form>
                             </div>
                             <div class="card-footer">
-                                <dexih-button-save class="mr-1" (click)="save()"></dexih-button-save>
-                                <dexih-button-cancel class="mr-1" (click)="cancel()"></dexih-button-cancel>
+                                <d-button-save class="mr-1" (click)="save()"></d-button-save>
+                                <d-button-cancel class="mr-1" (click)="cancel()"></d-button-cancel>
                             </div>
                         </div>
                     </ng-template>
     
-			</dexih-table>
+			</d-table>
 
-	</dexih-widget>
+	</d-widget>
 	
 	<dexih-help class="m-3" title="Views" path="/assets/help/reference/tag.md"></dexih-help>
 

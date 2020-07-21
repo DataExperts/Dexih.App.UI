@@ -1,18 +1,18 @@
 <div class="container">
 	<dexih-message #DexihMessage></dexih-message>
 
-	<dexih-widget *ngIf="mainForm" iconClass="fa fa-ticket" title="Support">
+	<d-widget *ngIf="mainForm" iconClass="fa fa-ticket" title="Support">
 		<support-options [isExpanded]="false"></support-options>
 
-		<dexih-widget-section 
+		<d-widget-section 
 			title="Raise Issue" 
 			[subTitle]="subTitle"
 			[showExpandButton]="true"
 			iconClass="fa fa-lg fa-fw fa-comments" [padding]="true">
 			<ng-template #header>
-				<dexih-button-save class="mr-1" (click)="!saving && !mainForm.pristine && save()"
-					[disabled]="saving || mainForm.pristine" [busy]="saving"></dexih-button-save>
-				<dexih-button-cancel (click)="!saving && cancel()" [disabled]="saving"></dexih-button-cancel>
+				<d-button-save class="mr-1" (click)="!saving && !mainForm.pristine && save()"
+					[disabled]="saving || mainForm.pristine" [busy]="saving"></d-button-save>
+				<d-button-cancel (click)="!saving && cancel()" [disabled]="saving"></d-button-cancel>
 			</ng-template>
 
 			<form id="edit-form" [formGroup]="mainForm">
@@ -63,9 +63,9 @@
 
 				</fieldset>
 			</form>
-		</dexih-widget-section>
+		</d-widget-section>
 
-		<dexih-widget-section *ngIf="mainForm.controls.dexihIssueComments.controls.length > 0"
+		<d-widget-section *ngIf="mainForm.controls.dexihIssueComments.controls.length > 0"
 			title="Commentary" [showExpandButton]="true" iconClass="fa fa-lg fa-fw fa-comments" [padding]="true">
 
 			<form id="comment-form" *ngFor="let comment of mainForm.controls.dexihIssueComments.controls"
@@ -78,14 +78,14 @@
 					</section>
 				</fieldset>
 			</form>
-		</dexih-widget-section>
+		</d-widget-section>
 
-		<dexih-widget-section *ngIf="mainForm.controls.key.value > 0 && mainForm.controls.isPrivate.value" title="Add new comment" [showExpandButton]="true"
+		<d-widget-section *ngIf="mainForm.controls.key.value > 0 && mainForm.controls.isPrivate.value" title="Add new comment" [showExpandButton]="true"
 			iconClass="fa fa-lg fa-fw fa-comments" [padding]="true">
 			<ng-template #header>
-				<dexih-button-save class="mr-1" (click)="!saving && newComment && saveComment()"
-					[disabled]="saving || !newComment" [busy]="saving"></dexih-button-save>
-				<dexih-button-cancel (click)="!saving && cancel()" [disabled]="saving"></dexih-button-cancel>
+				<d-button-save class="mr-1" (click)="!saving && newComment && saveComment()"
+					[disabled]="saving || !newComment" [busy]="saving"></d-button-save>
+				<d-button-cancel (click)="!saving && cancel()" [disabled]="saving"></d-button-cancel>
 			</ng-template>
 
 			<form>
@@ -97,14 +97,14 @@
 					</section>
 				</fieldset>
 			</form>
-		</dexih-widget-section>
+		</d-widget-section>
 
-		<dexih-widget-section *ngIf="mainForm.controls.key.value > 0 && !mainForm.controls.isPrivate.value" title="Add new comment" [showExpandButton]="true"
+		<d-widget-section *ngIf="mainForm.controls.key.value > 0 && !mainForm.controls.isPrivate.value" title="Add new comment" [showExpandButton]="true"
 			iconClass="fa fa-lg fa-fw fa-comments" [padding]="true">
 
 			<p>This is a public issue and is managed through the GitHub issue below.</p>
 			<a class="btn btn-primary" [href]="mainForm.controls.gitHubLink?.value" target="_blank" ><i class="fa fa-github"></i>GitHub Issue</a>
-		</dexih-widget-section>
+		</d-widget-section>
 		
-	</dexih-widget>
+	</d-widget>
 </div>

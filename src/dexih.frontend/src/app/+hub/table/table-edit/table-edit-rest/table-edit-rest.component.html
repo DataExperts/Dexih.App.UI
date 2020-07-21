@@ -40,7 +40,7 @@
         </section>
 
         <section class="btn-toolbar">
-            <dexih-button [busy]="formService.formSaving" (click)="!formService.formSaving && importTable()">Import </dexih-button>
+            <d-button [busy]="formService.formSaving" (click)="!formService.formSaving && importTable()">Import </d-button>
 
             <div *ngIf="formService.currentForm.value.formatType == eTypeCode.Json || formService.currentForm.value.formatType == eTypeCode.Xml" class="input-group pl-1">
                 <div  class="input-group-prepend">

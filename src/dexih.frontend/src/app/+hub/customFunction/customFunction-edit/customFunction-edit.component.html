@@ -1,6 +1,6 @@
 <div class="container">
-	<dexih-widget-vertical>
-	<dexih-widget 
+	<d-widget-vertical>
+	<d-widget 
 		title="Edit Function" 
 		iconClass="fa fa-lg fa-fw fa-code" 
 		[showCloseButton]="true"
@@ -44,11 +44,11 @@
 							Input Parameters
 						</div>
 						<div *ngIf="inputParameters.length === 0" class="mb-1">
-							<dexih-button
+							<d-button
 								(click)="addParameter(null, eParameterDirection.Input)"
 								iconClass="fa fa-plus-square-o"
 								title="Click to add a parameter" >Add Parameter
-							</dexih-button>
+							</d-button>
 						</div>
 						<div *ngFor="let parameter of inputParameters; let i = index" [ngStyle]="{'z-index': 200-i, 'position': 'relative'}">
 							<customFunction-parameter [customFunctionParameterForm]="parameter" (addParameter)="addParameter($event, eParameterDirection.Input)"
@@ -71,10 +71,10 @@
 							</section>
 
 							<div *ngIf="outputParameters.length === 0">
-									<dexih-button
+									<d-button
 									(click)="addParameter(null, eParameterDirection.Output)"
 									iconClass="fa fa-plus-square-o"
-									title="Click to add a parameter" >Add Parameter</dexih-button>
+									title="Click to add a parameter" >Add Parameter</d-button>
 							</div>
 
 							<div *ngFor="let parameter of outputParameters; let i = index" [ngStyle]="{'z-index': 100-i, 'position': 'relative'}">
@@ -90,14 +90,14 @@
 			</ng-template>
 			</fieldset>
 		</form>
-		</dexih-widget>
-		<dexih-widget title="Test Function" 
+		</d-widget>
+		<d-widget title="Test Function" 
 		iconClass="fa fa-lg fa-fw fa-code" [padding]="true" >
 
 		<ng-template #header>
-			<dexih-button class="mr-1" buttonClass="btn btn-success" (click)="test()">Syntax Check</dexih-button>
-			<dexih-button class="mr-1" buttonClass="btn btn-success" (click)="test(inputParameterValues)">Run</dexih-button>
-			<dexih-button-save-local (click)="downloadCode(inputParameterValues)" text="Sample Code"></dexih-button-save-local>
+			<d-button class="mr-1" buttonClass="btn btn-success" (click)="test()">Syntax Check</d-button>
+			<d-button class="mr-1" buttonClass="btn btn-success" (click)="test(inputParameterValues)">Run</d-button>
+			<d-button-save-local (click)="downloadCode(inputParameterValues)" text="Sample Code"></d-button-save-local>
 		</ng-template>
 
 		<dexih-message [message]="syntaxMessage"></dexih-message>
@@ -111,12 +111,12 @@
 					<div *ngFor="let inputParameter of inputParameters; let i = index" [ngStyle]="{'z-index': 200-i, 'position': 'relative'}">
 						<div *ngIf="inputParameter.controls.rank.value > 0; else showValue">
 							<div>
-								<dexih-button
+								<d-button
 									(click)="addParameterValue(i)"
 									iconClass="fa fa-plus-square-o"
 									title="Click to add a parameter" >
 									Add {{inputParameter.controls.name.value}} value
-								</dexih-button>
+								</d-button>
 							</div>
 								<div *ngFor="let value of inputParameterValues[i]; let j = index">
 
@@ -156,9 +156,9 @@
 				</div>
 			</fieldset>
 		</form>
-	</dexih-widget>
+	</d-widget>
 
 	<dexih-help class="m-3" title="Custom Functions" path="/assets/help/reference/function.md"></dexih-help>
 
-</dexih-widget-vertical>
+</d-widget-vertical>
 </div>

@@ -1,10 +1,10 @@
-<dexih-table [enableMultiSelect]="false" [columns]="columns" [data]="data">
+<d-table [enableMultiSelect]="false" [columns]="columns" [data]="data">
 
     <ng-template #actions let-items="items">
-        <dexih-button-refresh (click)="refresh()" text="Reload"></dexih-button-refresh>
-        <dexih-button-download class="ml-1" (click)="download()"></dexih-button-download>
+        <d-button-refresh (click)="refresh()" text="Reload"></d-button-refresh>
+        <d-button-download class="ml-1" (click)="download()"></d-button-download>
     </ng-template>
     <ng-template #tableHeader>
         <query-builder [selectQuery]="selectQuery" [columns]="targetTable.dexihTableColumns" [inputColumns]="inputColumns" [refreshEvent]="refreshDataSubject.asObservable()" (onRefreshData)="refresh()"></query-builder>
     </ng-template>
-</dexih-table>
+</d-table>

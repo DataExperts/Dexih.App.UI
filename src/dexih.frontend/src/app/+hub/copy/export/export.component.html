@@ -1,10 +1,10 @@
 <div class="container-fluid">
-    <dexih-widget title="Export" 
+    <d-widget title="Export" 
 		iconClass="fa fa-lg fa-fw fa-feed" 
 		[showCloseButton]="true"
 		(close)="close()"
 	>
-			<dexih-table 
+			<d-table 
 				[enableMultiSelect]="true"
 				[enableStickyToolbar]="true"  [toolbarZIndex]="100"
 				[columns]="columns"
@@ -12,19 +12,19 @@
 				[tags]="this.hubCache.hub.dexihTags"
 				>
 					<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-							<dexih-button-save-local class="mr-1" text="Export Selected" (click)="export(items)"></dexih-button-save-local>
+							<d-button-save-local class="mr-1" text="Export Selected" (click)="export(items)"></d-button-save-local>
 						</ng-template>
 
 					<ng-template #selectedItemAction select="selectedItemAction" let-api="item">
 					</ng-template>
 
 					<ng-template #actions let-items="items">
-							<dexih-button-save-local class="mr-1" text="Export All" (click)="exportAll()"></dexih-button-save-local>
+							<d-button-save-local class="mr-1" text="Export All" (click)="exportAll()"></d-button-save-local>
 					</ng-template>
 
-			</dexih-table>
+			</d-table>
 
-		</dexih-widget>
+		</d-widget>
 		
 </div>
 

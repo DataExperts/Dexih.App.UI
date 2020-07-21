@@ -1,8 +1,8 @@
-<dexih-widget-section *ngIf="stepFormService.currentForm" title="Add Datalink Step" [showExpandButton]="false">
+<d-widget-section *ngIf="stepFormService.currentForm" title="Add Datalink Step" [showExpandButton]="false">
 	<ng-template #header>
-		<dexih-button-apply class="mr-1" [disabled]="!stepFormService.hasChanged" (click)="applyExit()">
-		</dexih-button-apply>
-		<dexih-button-cancel (click)="cancel()"></dexih-button-cancel>
+		<d-button-apply class="mr-1" [disabled]="!stepFormService.hasChanged" (click)="applyExit()">
+		</d-button-apply>
+		<d-button-cancel (click)="cancel()"></d-button-cancel>
 	</ng-template>
 	<form [formGroup]="stepFormService.currentForm">
 		<fieldset>
@@ -40,17 +40,17 @@
 			</span>
 		</div>
 	</form>
-</dexih-widget-section>
+</d-widget-section>
 
-<dexih-widget-section *ngIf="stepFormService.currentForm" title="Parameters" [showExpandButton]="true" [padding]="false" [padding]="true">
+<d-widget-section *ngIf="stepFormService.currentForm" title="Parameters" [showExpandButton]="true" [padding]="false" [padding]="true">
 	<input-parameters [showEdit]="true" [parameters]="stepFormService.currentForm.controls.parameters" [formsService]="formService" [parentParameters]="formService.currentForm.controls.parameters.value">
 	</input-parameters>
-</dexih-widget-section>
+</d-widget-section>
 
-<dexih-widget-section *ngIf="stepFormService.currentForm" title="Dependent Steps" [showExpandButton]="false"
+<d-widget-section *ngIf="stepFormService.currentForm" title="Dependent Steps" [showExpandButton]="false"
 	[padding]="false">
-	<dexih-table *ngIf="stepFormService.currentForm" [enableMultiSelect]="true" [columns]="stepColumns"
+	<d-table *ngIf="stepFormService.currentForm" [enableMultiSelect]="true" [columns]="stepColumns"
 		[dataObservable]="stepTableData" [(selectedItems)]="stepFormService.currentForm.value.dexihDatalinkDependencies"
 		(onSelectedChange)="dependentStepsChange($event)" keyColumn="key" selectedKeyColumn="dependentDatalinkStepKey" [tags]="this.hubCache.hub.dexihTags">
-	</dexih-table>
-</dexih-widget-section>
+	</d-table>
+</d-widget-section>

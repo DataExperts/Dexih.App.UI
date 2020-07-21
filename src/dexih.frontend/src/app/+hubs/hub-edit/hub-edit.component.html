@@ -1,7 +1,7 @@
 <div class="container">
 	<dexih-message #DexihMessage></dexih-message>
 
-    <dexih-widget *ngIf="mainForm"
+    <d-widget *ngIf="mainForm"
 		title="Edit Hub" 
 		subTitle="Complete the details to create/edit a new hub"
         iconClass="fa fa-lg fa-fw fa-life-saver" 
@@ -10,8 +10,8 @@
 		(close)="cancel()"
     >
         <ng-template #header>
-			<dexih-button-save class="mr-1" (click)="!savingHub && !mainForm.pristine && saveHub()" [disabled]="savingHub || mainForm.pristine" [busy]="savingHub"></dexih-button-save>
-			<dexih-button-cancel (click)="!savingHub && cancel()" [disabled]="savingHub"></dexih-button-cancel>
+			<d-button-save class="mr-1" (click)="!savingHub && !mainForm.pristine && saveHub()" [disabled]="savingHub || mainForm.pristine" [busy]="savingHub"></d-button-save>
+			<d-button-cancel (click)="!savingHub && cancel()" [disabled]="savingHub"></d-button-cancel>
         </ng-template>
 
 		<form  id="hub-edit-form" [formGroup]="mainForm" >
@@ -28,7 +28,7 @@
 
 				<section>
 					<form-input label="Encryption Key" formControlName="encryptionKey" placeholder="Enter an encryption key" iconClass="fa fa-key" [errors]="formErrors.encryptionKey" note="The encryption key will be used to encrypt table columns flagged as secure.  Ensure this key is kept securely as without it encrypted data will be lost." style="z-index: 10000">
-						(<dexih-button buttonClass="btn btn-link mb-1 p-0" iconClass="fa fa-refresh" [busy]="generatingKey" (click)="generateKey()">Generate a new key</dexih-button>)
+						(<d-button buttonClass="btn btn-link mb-1 p-0" iconClass="fa fa-refresh" [busy]="generatingKey" (click)="generateKey()">Generate a new key</d-button>)
 					</form-input>
 				</section>
 
@@ -40,5 +40,5 @@
 
 			</fieldset>
 		</form>
-    </dexih-widget>
+    </d-widget>
 </div>

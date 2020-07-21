@@ -1,11 +1,11 @@
 <dexih-message class="p-3" #DexihMessage></dexih-message>
 
 <div class="container-fluid">
-	<dexih-widget-vertical>
-	<dexih-widget title="Invite Users" iconClass="fa fa-lg fa-fw fa-birthday-cake" [padding]="true">
+	<d-widget-vertical>
+	<d-widget title="Invite Users" iconClass="fa fa-lg fa-fw fa-birthday-cake" [padding]="true">
 		
 		<ng-template #subHeader>
-			<dexih-button-save [disabled]="emails.length == 0" (click)="addUsers()" text="Add User(s)"></dexih-button-save>
+			<d-button-save [disabled]="emails.length == 0" (click)="addUsers()" text="Add User(s)"></d-button-save>
 		</ng-template>
 
 		<form >
@@ -25,23 +25,23 @@
 				</section>
 			</fieldset>
 		</form>
-	</dexih-widget>
+	</d-widget>
 
-	<dexih-widget title="Current Users" iconClass="fa fa-lg fa-fw fa-group">
-		<dexih-table [enableMultiSelect]="true" [columns]="columns"
+	<d-widget title="Current Users" iconClass="fa fa-lg fa-fw fa-group">
+		<d-table [enableMultiSelect]="true" [columns]="columns"
 		 [dataObservable]="tableData">
 			<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-				<dexih-button-delete class="mr-1" (click)="deleteUsers(items)"></dexih-button-delete>
-				<dexih-button-dropdown buttonClass="btn-primary" iconClass="fa fa-lock" text="Set Permission">
+				<d-button-delete class="mr-1" (click)="deleteUsers(items)"></d-button-delete>
+				<d-button-dropdown buttonClass="btn-primary" iconClass="fa fa-lock" text="Set Permission">
 					<a *ngFor="let permission of ePermissionItems" class="dropdown-item" (click)="setPermission(permission.key, items)">{{permission.name}}</a>
-				</dexih-button-dropdown>
-				<dexih-button-dropdown buttonClass="btn-primary" iconClass="fa fa-bell" text="Set User Alert" class="ml-1">
+				</d-button-dropdown>
+				<d-button-dropdown buttonClass="btn-primary" iconClass="fa fa-bell" text="Set User Alert" class="ml-1">
 					<a class="dropdown-item" (click)="setUserAlert(true, items)">Receive alert emails</a>
 					<a class="dropdown-item" (click)="setUserAlert(false, items)">Do not receive alert emails.</a>
-				</dexih-button-dropdown>
+				</d-button-dropdown>
 			</ng-template>
-		</dexih-table>
+		</d-table>
 
-	</dexih-widget>
-	</dexih-widget-vertical>
+	</d-widget>
+	</d-widget-vertical>
 </div>

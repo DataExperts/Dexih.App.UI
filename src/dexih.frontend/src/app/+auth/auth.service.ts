@@ -10,7 +10,7 @@ import {
     User, UserLoginInfo, ExternalLogin, FileHandler, eFileStatus, RemoteToken, PromiseWithCancel, CancelToken, eHubAccess
 } from './auth.models';
 import { UserAgentApplication, AuthResponse, CacheLocation } from 'msal';
-import { DexihModalComponent } from 'dexih-ngx-components';
+import { DModalComponent } from 'ngx-d-components';
 import { Location } from '@angular/common';
 import { DexihRemoteAgent, DexihActiveAgent, DownloadUrl, CacheManager, eClientCommand, eLoginProvider,
     eTypeCode, ManagedTask, eManagedTaskStatus, ePermission, eSharedAccess, DexihIssue,
@@ -54,7 +54,7 @@ export class AuthService implements OnDestroy {
     private _webSocketSubscribe: Subscription;
     private _logErrorsSubscribe: Subscription;
 
-    private modalComponent: DexihModalComponent;
+    private modalComponent: DModalComponent;
 
     private logger = new LogFactory('auth.service');
 
@@ -992,7 +992,7 @@ export class AuthService implements OnDestroy {
 
     }
 
-    // converts columns returned by preview into columns which can be displayed on <dexih-table>
+    // converts columns returned by preview into columns which can be displayed on <d-table>
     public constructDataTableColumns(columns: Array<any>): Array<any> {
         let dtColumns = [];
 
@@ -1033,7 +1033,7 @@ export class AuthService implements OnDestroy {
     }
 
     // this needs to be set by a top level component so the dialog has a container to load into.
-    setDialogDefaultContainer(modalComponent: DexihModalComponent) {
+    setDialogDefaultContainer(modalComponent: DModalComponent) {
         // this.overlay.defaultViewContainer = defaultViewContainer;
         this.modalComponent = modalComponent;
     }

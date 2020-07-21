@@ -1,11 +1,11 @@
 <div class="container-fluid">
-    <dexih-widget title="Custom Functions" 
+    <d-widget title="Custom Functions" 
 		iconClass="fa fa-lg fa-fw fa-code" 
 		[showCloseButton]="true"
 		[padding]="false"
 		(close)="close()"
 	>
-		<dexih-table 
+		<d-table 
 			[enableMultiSelect]="true"
 			[enableStickyToolbar]="true"  [toolbarZIndex]="100"
 			[columns]="columns"
@@ -14,17 +14,17 @@
 			[tags]="this.hubCache.hub.dexihTags"
 			>
 				<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-					<dexih-button-save-local class="mr-1" (click)="export(items)"></dexih-button-save-local>
-					<dexih-button-delete class="mr-1" *ngIf="hubCache.canWrite" (click)="deleteCustomFunctions(items)"></dexih-button-delete>
+					<d-button-save-local class="mr-1" (click)="export(items)"></d-button-save-local>
+					<d-button-delete class="mr-1" *ngIf="hubCache.canWrite" (click)="deleteCustomFunctions(items)"></d-button-delete>
 					<tags-update-button class="ml-1" [objectType]="eSharedObjectType.CustomFunction" [objects]="items" ></tags-update-button>
 				</ng-template>
 
 				<ng-template #actions let-items="items">
-					<dexih-button-new *ngIf="hubCache.canWrite" class="mr-1" [routerLink]="['customFunction-new']"></dexih-button-new>
+					<d-button-new *ngIf="hubCache.canWrite" class="mr-1" [routerLink]="['customFunction-new']"></d-button-new>
 				</ng-template>
-		</dexih-table>
+		</d-table>
 
-	</dexih-widget>
+	</d-widget>
 	
 	<dexih-help class="m-3" title="Custom Functions" path="/assets/help/reference/function.md"></dexih-help>
 

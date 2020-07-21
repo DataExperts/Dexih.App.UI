@@ -1,4 +1,4 @@
-<dexih-widget-section *ngIf="columns && showEdit" title="Chart Properties" [showExpandButton]="true">
+<d-widget-section *ngIf="columns && showEdit" title="Chart Properties" [showExpandButton]="true">
     <div class="d-flex flex-wrap">
         <div class="flex-fill">
             <form-select [(ngModel)]="config.chartType" (ngModelChange)="updateChart($event)" labelLeft="Chart"
@@ -242,14 +242,14 @@
         </ng-template>
     </div>
 
-</dexih-widget-section>
+</d-widget-section>
 
-<dexih-widget-section [title]="title" [showExpandButton]="true" [padding]="false">
+<d-widget-section [title]="title" [showExpandButton]="true" [padding]="false">
     <ng-template #header>
-        <dexih-button buttonClass="btn-sm btn-primary m-1" iconClass="fa fa-download" (click)="export()" text="export"></dexih-button>
+        <d-button buttonClass="btn-sm btn-primary m-1" iconClass="fa fa-download" (click)="export()" text="export"></d-button>
     </ng-template>
 
     <chart-view [responsive]="false" #chartView [config]="config" [columns]="columns" [data]="data" [updateChartEvent]="updateChartSubject">
     </chart-view>
 
-</dexih-widget-section>
+</d-widget-section>

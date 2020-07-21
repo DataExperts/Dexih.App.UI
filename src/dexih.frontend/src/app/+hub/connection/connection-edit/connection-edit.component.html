@@ -1,5 +1,5 @@
 <div class="container">
-	<dexih-widget 
+	<d-widget 
 		title="Edit Connection" 
 		iconClass="fa fa-lg fa-fw fa-database" 
 		[showCloseButton]="true"
@@ -8,18 +8,18 @@
 		>
         <ng-template #header>
 			<dexih-invalid-form-details class="mr-1" [control]="formsService.currentForm" (click)="formsService.showErrors()"></dexih-invalid-form-details>
-			<dexih-button class="mr-1" *ngIf="hubCache.canWrite" buttonClass="btn btn-success" [busy]="refreshingConnection" iconClass="fa fa-thumbs-o-up" (click)="!refreshingConnection && refreshConnection()" title="Test the connection against the source.">Test</dexih-button>
+			<d-button class="mr-1" *ngIf="hubCache.canWrite" buttonClass="btn btn-success" [busy]="refreshingConnection" iconClass="fa fa-thumbs-o-up" (click)="!refreshingConnection && refreshConnection()" title="Test the connection against the source.">Test</d-button>
 			<save-button *ngIf="hubCache.canWrite" [formsService]="formsService" class="mr-1"></save-button>
 
 			<ng-template [ngIf]="hubCache.canWrite && connectionReference">
 				<ng-template [ngIf]="connectionReference.connectionCategory == eConnectionCategory.SqlDatabase || connectionReference.connectionCategory == eConnectionCategory.DatabaseFile || connectionReference.connectionCategory == eConnectionCategory.NoSqlDatabase || connectionReference.connectionCategory == eConnectionCategory.Hub">
-					<dexih-button class="mr-1" *ngIf="formsService.currentForm.controls.key.value" [routerLink]="['../../connection-import', formsService.currentForm.controls.key.value]" iconClass="fa fa-plus">Import Tables</dexih-button>
+					<d-button class="mr-1" *ngIf="formsService.currentForm.controls.key.value" [routerLink]="['../../connection-import', formsService.currentForm.controls.key.value]" iconClass="fa fa-plus">Import Tables</d-button>
 				</ng-template>
 				<ng-template [ngIf]="connectionReference.connectionCategory == eConnectionCategory.File">
-					<dexih-button class="mr-1" *ngIf="formsService.currentForm.controls.key.value" [routerLink]="['../../../tables', 'table-new', formsService.currentForm.controls.key.value]" iconClass="fa fa-plus">New File</dexih-button>
+					<d-button class="mr-1" *ngIf="formsService.currentForm.controls.key.value" [routerLink]="['../../../tables', 'table-new', formsService.currentForm.controls.key.value]" iconClass="fa fa-plus">New File</d-button>
 				</ng-template>
 				<ng-template [ngIf]="connectionReference.connectionCategory == eConnectionCategory.WebService">
-					<dexih-button class="mr-1" *ngIf="formsService.currentForm.controls.key.value" [routerLink]="['../../../tables', 'table-new', formsService.currentForm.controls.key.value]"  iconClass="fa fa-plus">New WebService</dexih-button>
+					<d-button class="mr-1" *ngIf="formsService.currentForm.controls.key.value" [routerLink]="['../../../tables', 'table-new', formsService.currentForm.controls.key.value]"  iconClass="fa fa-plus">New WebService</d-button>
 				</ng-template>
 			</ng-template>
 
@@ -207,7 +207,7 @@
 			</fieldset>
 
 		</form>
-	</dexih-widget>
+	</d-widget>
 	
 	<dexih-help class="m-3" title="Connections" path="/assets/help/reference/connection.md"></dexih-help>
 

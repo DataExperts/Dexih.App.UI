@@ -1,4 +1,4 @@
-<dexih-widget title="Update columns" headerClass="text-white bg-primary">
+<d-widget title="Update columns" headerClass="text-white bg-primary">
 <form [formGroup]="bulkColumn">
     <section class="form-group col-md-4">
         <form-select label="Property" [(ngModel)]="property" [ngModelOptions]="{standalone: true}" [items]="properties" itemKey="property"
@@ -87,10 +87,10 @@
     </div>
 </form>
     <ng-template #footer>
-        <dexih-button-apply class="mr-1" (click)="applyBulkEdit(items)"></dexih-button-apply>
-        <dexih-button-cancel class="mr-1" (click)="cancel()"></dexih-button-cancel>
+        <d-button-apply class="mr-1" (click)="applyBulkEdit(items)"></d-button-apply>
+        <d-button-cancel class="mr-1" (click)="cancel()"></d-button-cancel>
     </ng-template>
-</dexih-widget>
+</d-widget>
 
 
 

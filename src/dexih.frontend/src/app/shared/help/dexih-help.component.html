@@ -1,9 +1,9 @@
 
-    <dexih-widget *ngIf="displayHelp || display" [title]="title" iconClass="fa fa-lg fa-fw fa-question" [showCloseButton]="true" [padding]="true" (close)="close()">
+    <d-widget *ngIf="displayHelp || display" [title]="title" iconClass="fa fa-lg fa-fw fa-question" [showCloseButton]="true" [padding]="true" (close)="close()">
         <ng-template #header>
-            <dexih-button class="mr-1" [routerLink]="['/hubs/index/help']" [queryParams]="{path: '/intro/getting_started.md'}">Getting Started</dexih-button>
-            <dexih-button [routerLink]="['/hubs/index/help']" [queryParams]="{path: '/reference/references.md'}">Reference</dexih-button>
+            <d-button class="mr-1" [routerLink]="['/hubs/index/help']" [queryParams]="{path: '/intro/getting_started.md'}">Getting Started</d-button>
+            <d-button [routerLink]="['/hubs/index/help']" [queryParams]="{path: '/reference/references.md'}">Reference</d-button>
         </ng-template>
         
         <markdown [data]="data" (click)="getRoute($event)"></markdown>
-    </dexih-widget>
+    </d-widget>

@@ -9,7 +9,7 @@
 </section>
 
 <div *ngIf="fileConnections && fileConnections.length > 0" class="container">
-    <dexih-widget *ngIf="!currentTable" [title]="'Bulk Load: ' + connection?.name" iconClass="fa fa-lg fa-fw fa-files-o" [showCloseButton]="true" (close)="close()">
+    <d-widget *ngIf="!currentTable" [title]="'Bulk Load: ' + connection?.name" iconClass="fa fa-lg fa-fw fa-files-o" [showCloseButton]="true" (close)="close()">
         <form *ngIf="bulkLoadForm" [formGroup]="bulkLoadForm">
         <div class="m-3">
             <section>
@@ -45,7 +45,7 @@
     </form>
 
         <ul *ngIf="connection" class="list-group">
-            <dexih-widget-section title='Drop Files to Load' [showExpandButton]="true">
+            <d-widget-section title='Drop Files to Load' [showExpandButton]="true">
                 <div class="well my-drop-zone" dropZone [requireFiles]="true" (dropFiles)="filesDrop($event)" dropAllowedClass="nv-file-over">
                     Drop Files to Load Here
                     <div class="custom-file w-25 float-right">
@@ -53,15 +53,15 @@
                         <label class="custom-file-label" for="inputGroupFile01">Choose files</label>
                     </div>
                 </div>
-            </dexih-widget-section>
+            </d-widget-section>
 
-            <dexih-widget-section title='Upload Queues' [showExpandButton]="true" [padding]="false">
-                <dexih-table [enableMultiSelect]="true" [columns]="uploadColumns" [data]="uploadedFiles">
+            <d-widget-section title='Upload Queues' [showExpandButton]="true" [padding]="false">
+                <d-table [enableMultiSelect]="true" [columns]="uploadColumns" [data]="uploadedFiles">
 
                     <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-                        <dexih-button class="mr-1" iconClass="fa fa-upload" buttonClass='btn-primary' (click)="uploadSelected(items)">Upload</dexih-button>
-                        <dexih-button-cancel class="mr-1" (click)="cancelSelected(items)"></dexih-button-cancel>
-                        <dexih-button-delete (click)="removeSelected(items)" text="Remove"></dexih-button-delete>
+                        <d-button class="mr-1" iconClass="fa fa-upload" buttonClass='btn-primary' (click)="uploadSelected(items)">Upload</d-button>
+                        <d-button-cancel class="mr-1" (click)="cancelSelected(items)"></d-button-cancel>
+                        <d-button-delete (click)="removeSelected(items)" text="Remove"></d-button-delete>
                     </ng-template>
 
                     <ng-template #actions let-items="items">
@@ -80,28 +80,28 @@
                                 'fa-exclamation-circle': item.status === eFileStatus.Error,
                                 'fa-ban': item.status === eFileStatus.Cancelled}"></i>{{item.status}}</span>
                     </ng-template>
-                </dexih-table>            
-            </dexih-widget-section>
+                </d-table>            
+            </d-widget-section>
     
-            <dexih-widget-section title='Tables Created' [showExpandButton]="true" [padding]="false">
-                <dexih-table [enableMultiSelect]="true" [columns]="tableColumns" [data]="tables" (rowClick)="editTable($event)">
+            <d-widget-section title='Tables Created' [showExpandButton]="true" [padding]="false">
+                <d-table [enableMultiSelect]="true" [columns]="tableColumns" [data]="tables" (rowClick)="editTable($event)">
 
                     <ng-template select="selectedItemsAction" #selectedItemsAction let-items="items">
-                        <dexih-button class="ml-1" (click)="saveTables(items)" iconClass="fa fa-table" title="Save the selected tables.">Create Tables</dexih-button>
-                        <dexih-button class="ml-1" (click)="createDatalinks(items)" iconClass="fa fa-exchange" title="Save the selected tables, and create datalinks to load them into a staging area.">Create Datalinks</dexih-button>
-                        <dexih-button-delete class="ml-1"  (click)="discardTables(items)" title="Discard the selected tables." text="Discard"></dexih-button-delete>
+                        <d-button class="ml-1" (click)="saveTables(items)" iconClass="fa fa-table" title="Save the selected tables.">Create Tables</d-button>
+                        <d-button class="ml-1" (click)="createDatalinks(items)" iconClass="fa fa-exchange" title="Save the selected tables, and create datalinks to load them into a staging area.">Create Datalinks</d-button>
+                        <d-button-delete class="ml-1"  (click)="discardTables(items)" title="Discard the selected tables." text="Discard"></d-button-delete>
                     </ng-template>
     
-                </dexih-table>
-            </dexih-widget-section>
+                </d-table>
+            </d-widget-section>
         </ul>
-    </dexih-widget>
+    </d-widget>
 
-    <dexih-widget *ngIf="currentTable" [title]="'Edit table: ' + formsService.currentForm.controls.name.value" [showCloseButton]="true" (close)="closeTable()">
+    <d-widget *ngIf="currentTable" [title]="'Edit table: ' + formsService.currentForm.controls.name.value" [showCloseButton]="true" (close)="closeTable()">
         <ng-template #header>
-            <dexih-button-apply (click)="applyChanges()"></dexih-button-apply>
-            <dexih-button-cancel class="ml-1" (click)="cancel()"></dexih-button-cancel>
+            <d-button-apply (click)="applyChanges()"></d-button-apply>
+            <d-button-cancel class="ml-1" (click)="cancel()"></d-button-cancel>
         </ng-template>
         <router-outlet></router-outlet>
-    </dexih-widget>
+    </d-widget>
 </div>

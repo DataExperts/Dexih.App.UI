@@ -1,9 +1,9 @@
 <div class="container">
-	<dexih-widget title="New Datalink Test(s)"    iconClass="fa fa-lg fa-fw fa-exchange" [showCloseButton]="true" (close)="!saving && cancel()"
+	<d-widget title="New Datalink Test(s)"    iconClass="fa fa-lg fa-fw fa-exchange" [showCloseButton]="true" (close)="!saving && cancel()"
 	 [padding]="true">
 		<ng-template #header>
-			<dexih-button-save class="mr-1" (click)="!saving && save()" [busy]="saving"></dexih-button-save>
-			<dexih-button-cancel (click)="!saving && cancel()" [busy]="saving"></dexih-button-cancel>
+			<d-button-save class="mr-1" (click)="!saving && save()" [busy]="saving"></d-button-save>
+			<d-button-cancel (click)="!saving && cancel()" [busy]="saving"></d-button-cancel>
 		</ng-template>
 
 		<ng-template #subHeader>
@@ -62,5 +62,5 @@
 			</fieldset>
 		</form>
 
-	</dexih-widget>
+	</d-widget>
 </div>

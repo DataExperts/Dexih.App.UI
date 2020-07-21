@@ -1,6 +1,6 @@
-<dexih-button-edit class="mr-1" [routerLink]="['columnValidation-edit', columnValidation.key]" queryParamsHandling="merge"></dexih-button-edit>
-<dexih-button-dropdown *ngIf="columns.length > 0 || columns.length > 0" buttonClass="btn-primary" iconClass="fa fa-info-circle" text="Used In" [pullRight]="pullRight">
+<d-button-edit class="mr-1" [routerLink]="['columnValidation-edit', columnValidation.key]" queryParamsHandling="merge"></d-button-edit>
+<d-button-dropdown *ngIf="columns.length > 0 || columns.length > 0" buttonClass="btn-primary" iconClass="fa fa-info-circle" text="Used In" [pullRight]="pullRight">
     <li *ngFor="let col of columns">
         <a class="dropdown-item" (click)="navigateToColumn(col)">{{col.name}}</a>
     </li>
-</dexih-button-dropdown>
+</d-button-dropdown>

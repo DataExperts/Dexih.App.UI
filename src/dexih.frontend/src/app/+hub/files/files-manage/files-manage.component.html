@@ -2,22 +2,22 @@
     There are no files configured.  Create a file based connection, and add at least one file definition.
     <hr>
     <div>
-        <dexih-button-new routerLink="/hub/{{hubCache?.hub.hubKey}}/connections/connection-new/Source" text="New Connection" [autoCompact]="false"></dexih-button-new>
-        <dexih-button *ngFor="let connection of fileConnections" routerLink="/hub/{{hubCache?.hub.hubKey}}/connections/tables/table-new/{{connection.key}}" [autoCompact]="false" [title]="">New Table ({{connection.name}})</dexih-button>
+        <d-button-new routerLink="/hub/{{hubCache?.hub.hubKey}}/connections/connection-new/Source" text="New Connection" [autoCompact]="false"></d-button-new>
+        <d-button *ngFor="let connection of fileConnections" routerLink="/hub/{{hubCache?.hub.hubKey}}/connections/tables/table-new/{{connection.key}}" [autoCompact]="false" [title]="">New Table ({{connection.name}})</d-button>
     </div>
 </div>
 
 <div *ngIf="connectionTables && connectionTables.length > 0" class="container">
-    <dexih-widget [title]="'Manage Files: ' + table?.name" iconClass="fa fa-lg fa-fw fa-table" [showCloseButton]="true"
+    <d-widget [title]="'Manage Files: ' + table?.name" iconClass="fa fa-lg fa-fw fa-table" [showCloseButton]="true"
         (close)="close()"     >
         <ng-template #header>
-            <dexih-button-dropdown class="mr-1" iconClass="fa fa-file-o" text="New File">
+            <d-button-dropdown class="mr-1" iconClass="fa fa-file-o" text="New File">
                     <a *ngFor="let connection of fileConnections" class="dropdown-item" routerLink="/hub/{{hubCache?.hub.hubKey}}/connections/tables/table-new/{{connection.key}}" [title]="">{{connection.name}}</a>
-            </dexih-button-dropdown>
-            <dexih-button-dropdown *ngIf="connectionReference?.allowFlatFiles && table?.autoManageFiles" iconClass="fa fa-filter" [text]="eFlatFilePath[path]" title="Select the file location" [pullRight]="true">
+            </d-button-dropdown>
+            <d-button-dropdown *ngIf="connectionReference?.allowFlatFiles && table?.autoManageFiles" iconClass="fa fa-filter" [text]="eFlatFilePath[path]" title="Select the file location" [pullRight]="true">
                     <a *ngFor="let item of eFlatFilePathItems" class="dropdown-item" [class.active]="path=='item.name'" routerLinkActive="active" data-toggle="tab" routerLink="." [queryParams]="{tableKey: tableKey, path: item.key}">
                             <i class="fa fa-elipsis-h"></i>{{item.name}}</a>
-            </dexih-button-dropdown>
+            </d-button-dropdown>
         </ng-template>
 
         <ul *ngIf="table" class="list-group">
@@ -52,12 +52,12 @@
                 <h5>Upload Queue</h5>
             </li>
             <li class="list-group-item p-0">
-                <dexih-table [enableMultiSelect]="true" [columns]="uploadColumns" [data]="uploadedFiles">
+                <d-table [enableMultiSelect]="true" [columns]="uploadColumns" [data]="uploadedFiles">
 
                     <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-                        <dexih-button class="mr-1" iconClass="fa fa-upload" buttonClass='btn-primary' (click)="uploadSelected(items)">Upload</dexih-button>
-                        <dexih-button-cancel class="mr-1" (click)="cancelSelected(items)"></dexih-button-cancel>
-                        <dexih-button-delete (click)="removeSelected(items)" text="Remove"></dexih-button-delete>
+                        <d-button class="mr-1" iconClass="fa fa-upload" buttonClass='btn-primary' (click)="uploadSelected(items)">Upload</d-button>
+                        <d-button-cancel class="mr-1" (click)="cancelSelected(items)"></d-button-cancel>
+                        <d-button-delete (click)="removeSelected(items)" text="Remove"></d-button-delete>
                     </ng-template>
 
                     <ng-template #actions let-items="items">
@@ -76,7 +76,7 @@
                                 'fa-exclamation-circle': item.status === eFileStatus.Error,
                                 'fa-ban': item.status === eFileStatus.Cancelled}"></i>{{item.status}}</span>
                     </ng-template>
-                </dexih-table>
+                </d-table>
             </li>
             <ng-template [ngIf]="connectionReference?.allowFlatFiles">
             <li class="list-group-item list-group-item-info rounded-0">
@@ -85,34 +85,34 @@
 
             </li>
             <li class="list-group-item p-0">
-                <dexih-table [enableMultiSelect]="true" [columns]="columns" [dataObservable]="tableData">
+                <d-table [enableMultiSelect]="true" [columns]="columns" [dataObservable]="tableData">
 
                     <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-                        <dexih-button-delete class="mr-1" (click)="deleteSelected(items)"></dexih-button-delete>
-                        <dexih-button-download class="mr-1" (click)="downloadSelected(items)"></dexih-button-download>
-                        <dexih-button-dropdown class="mr-1" iconClass="fa fa-mail-forward" text="Move" [pullRight]="true">
+                        <d-button-delete class="mr-1" (click)="deleteSelected(items)"></d-button-delete>
+                        <d-button-download class="mr-1" (click)="downloadSelected(items)"></d-button-download>
+                        <d-button-dropdown class="mr-1" iconClass="fa fa-mail-forward" text="Move" [pullRight]="true">
                             <a class="dropdown-item" *ngIf="path != eFlatFilePath.Incoming" (click)="moveSelected(items, eFlatFilePath.Incoming)">To Incoming</a>
                             <a class="dropdown-item" *ngIf="path != eFlatFilePath.Outgoing" (click)="moveSelected(items, eFlatFilePath.Outgoing)">To Processed</a>
                             <a class="dropdown-item" *ngIf="path != eFlatFilePath.Processed" (click)="moveSelected(items, eFlatFilePath.Processed)">To Processed</a>
                             <a class="dropdown-item" *ngIf="path != eFlatFilePath.Rejected" (click)="moveSelected(items, eFlatFilePath.Rejected)">To Rejected</a>
-                        </dexih-button-dropdown>
+                        </d-button-dropdown>
                     </ng-template>
 
                     <ng-template #selectedItemAction select="selectedItemAction" let-item="item">
-                        <dexih-button-preview [routerLink]="['/hub', hubCache?.hub.hubKey, 'summary', 'files', 'manage', tableKey, 'file-preview', path, item.fileName]"></dexih-button-preview>
+                        <d-button-preview [routerLink]="['/hub', hubCache?.hub.hubKey, 'summary', 'files', 'manage', tableKey, 'file-preview', path, item.fileName]"></d-button-preview>
                     </ng-template>
 
                     <ng-template #actions let-items="items">
-                        <dexih-button-dropdown *ngIf="table?.autoManageFiles" class="mr-1" buttonClass="btn-primary" iconClass="fa fa-filter" [text]="eFlatFilePath[path]"
+                        <d-button-dropdown *ngIf="table?.autoManageFiles" class="mr-1" buttonClass="btn-primary" iconClass="fa fa-filter" [text]="eFlatFilePath[path]"
                             title="Select the file location" [pullRight]="true">
                             <a *ngFor="let item of eFlatFilePathItems" class="dropdown-item" [class.active]="path=='item.name'" routerLinkActive="active" data-toggle="tab" routerLink="." [queryParams]="{tableKey: tableKey, path: item.key}">
                                 <i class="fa fa-elipsis-h"></i>{{item.name}}</a>
-                        </dexih-button-dropdown>
-                        <dexih-button-refresh (click)="refreshFiles()"></dexih-button-refresh>
+                        </d-button-dropdown>
+                        <d-button-refresh (click)="refreshFiles()"></d-button-refresh>
                     </ng-template>
-                </dexih-table>
+                </d-table>
             </li>
         </ng-template>
         </ul>
-    </dexih-widget>
+    </d-widget>
 </div>

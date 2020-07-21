@@ -1,12 +1,12 @@
 <div *ngIf="newDatalinkTransformItemForm && inputColumns && outputColumns">
 
-	<dexih-widget-section *ngIf="datalinkTransformForm" title="Edit Custom Function" [showExpandButton]="true">
+	<d-widget-section *ngIf="datalinkTransformForm" title="Edit Custom Function" [showExpandButton]="true">
 		<ng-template #header>
-			<dexih-button-validate class="mr-1" (click)="test()" text="Syntax Check"></dexih-button-validate>
-			<dexih-button-download class="mr-1" (click)="downloadCode()" text="Download Code"></dexih-button-download>
-			<dexih-button-apply [disabled]="newDatalinkTransformItemForm.pristine"
-				(click)="!newDatalinkTransformItemForm.pristine && applyExit()" class="mr-1"></dexih-button-apply>
-			<dexih-button-cancel (click)="cancel()"></dexih-button-cancel>
+			<d-button-validate class="mr-1" (click)="test()" text="Syntax Check"></d-button-validate>
+			<d-button-download class="mr-1" (click)="downloadCode()" text="Download Code"></d-button-download>
+			<d-button-apply [disabled]="newDatalinkTransformItemForm.pristine"
+				(click)="!newDatalinkTransformItemForm.pristine && applyExit()" class="mr-1"></d-button-apply>
+			<d-button-cancel (click)="cancel()"></d-button-cancel>
 		</ng-template>
 
 		<form *ngIf="newDatalinkTransformItemForm" [formGroup]="newDatalinkTransformItemForm">
@@ -40,9 +40,9 @@
 						Input Parameters
 					</div>
 					<div *ngIf="inputParameters.length === 0" class="mb-1">
-						<dexih-button (click)="addParameter(null, eParameterDirection.Input)"
+						<d-button (click)="addParameter(null, eParameterDirection.Input)"
 							iconClass="fa fa-plus-square-o" title="Click to add a parameter">Add Parameter
-						</dexih-button>
+						</d-button>
 					</div>
 					<div *ngFor="let inputParameter of inputParameters; let i = index" class="pl-2"
 						[ngStyle]="{'z-index': 200-i, 'position': 'relative'}">
@@ -65,9 +65,9 @@
 							(addParameter)="addParameter($event, eParameterDirection.Output)"></output-parameter>
 					</div>
 					<div *ngIf="outputParameters.length === 0">
-						<dexih-button (click)="addParameter(null, eParameterDirection.Output)"
+						<d-button (click)="addParameter(null, eParameterDirection.Output)"
 							iconClass="fa fa-plus-square-o" title="Click to add a parameter">Add Parameter
-						</dexih-button>
+						</d-button>
 					</div>
 					<div *ngFor="let parameter of outputParameters; let i = index"
 						[ngStyle]="{'z-index': 100-i, 'position': 'relative'}">
@@ -84,11 +84,11 @@
 					formControlName="functionCode"></textarea>
 			</fieldset>
 		</form>
-	</dexih-widget-section>
+	</d-widget-section>
 
 
 
-	<dexih-widget-section *ngIf="datalinkTransformForm && newDatalinkTransformItemForm" title="Test Function"
+	<d-widget-section *ngIf="datalinkTransformForm && newDatalinkTransformItemForm" title="Test Function"
 		[showExpandButton]="true">
 		<ng-template #header>
 			<button class="btn btn-success mr-1" (click)="test()">Syntax Check</button>
@@ -118,5 +118,5 @@
 				</form-input>
 			</div>
 		</form>
-	</dexih-widget-section>
+	</d-widget-section>
 </div>

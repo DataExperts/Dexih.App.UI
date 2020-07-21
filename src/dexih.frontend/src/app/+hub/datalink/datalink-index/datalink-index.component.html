@@ -1,10 +1,10 @@
 <div class="container-fluid">
-    <dexih-widget title="Datalinks" 
+    <d-widget title="Datalinks" 
 		iconClass="fa fa-lg fa-fw fa-exchange" 
 		[showCloseButton]="true"
 		(close)="close()"
 	>
-		<dexih-table 
+		<d-table 
 			tableClass="table table-striped table-hover m-0"
 			[enableMultiSelect]="true"
 			[enableStickyToolbar]="true" [toolbarZIndex]="100"
@@ -18,10 +18,10 @@
 				</ng-template>
 
 				<ng-template #filter select="filter" let-items="items">
-					<dexih-button-dropdown class="mr-1" [autoCompact]="false" buttonClass="btn btn-primary" iconClass="fa fa-filter" [text]="eDatalinkType[typeFilter]" title="Filter by a purpose" [pullRight]="true">
+					<d-button-dropdown class="mr-1" [autoCompact]="false" buttonClass="btn btn-primary" iconClass="fa fa-filter" [text]="eDatalinkType[typeFilter]" title="Filter by a purpose" [pullRight]="true">
 						<a class="dropdown-item" [class.active]="typeFilter=='All'" routerLink='.' [queryParams]="{typeFilter: 'All'}" title="All Datalinks">All</a>
 						<a *ngFor="let datalinkType of eDatalinkTypeItems | gtFilter: 'key': 0" [class.active]="typeFilter==datalinkType.key" class="dropdown-item" routerLink='.' [queryParams]="{typeFilter: datalinkType.key}" [title]="datalinkType.name">{{datalinkType.name}}</a>
-					</dexih-button-dropdown>
+					</d-button-dropdown>
 				</ng-template>
 
 				<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
@@ -35,9 +35,9 @@
 				<ng-template #selectedItemAction select="selectedItemAction" let-item="item">
 					<dependent-items-button class="ml-1" [key]="item.key" [objectType]='eSharedObjectType.Datalink'></dependent-items-button>
 				</ng-template>
-		</dexih-table>
+		</d-table>
 
-	</dexih-widget>
+	</d-widget>
 	
 	<dexih-help class="m-3" title="Datalinks" path="/assets/help/reference/datalink.md"></dexih-help>
 </div>

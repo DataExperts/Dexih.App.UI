@@ -1,5 +1,5 @@
 <ng-template [ngIf]="datajobs">
-    <dexih-button-dropdown buttonClass="btn-primary" iconClass="fa fa-table" [text]="datajobs.length > 1 ? 'Datajobs' : 'Datajob'" [pullRight]="pullRight">
+    <d-button-dropdown buttonClass="btn-primary" iconClass="fa fa-table" [text]="datajobs.length > 1 ? 'Datajobs' : 'Datajob'" [pullRight]="pullRight">
         <li class="list-group-item list-group-item-heading list-group-item-info">Metadata</li>
         <li *ngIf="hubCache.canWrite"><a class="dropdown-item" [routerLink]="['datajob-new']" title="Create a new datajob."><i class="fa fa-file-o"></i> New</a></li>
         <ng-template [ngIf]="datajobs.length > 0">
@@ -23,5 +23,5 @@
             </ng-template>
 
         </ng-template>
-    </dexih-button-dropdown>
+    </d-button-dropdown>
 </ng-template>

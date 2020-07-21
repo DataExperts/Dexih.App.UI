@@ -1,18 +1,18 @@
 <div *ngIf="!embed" class="container-fluid">
-    <dexih-widget [title]="'Preview ' + title" iconClass="fa fa-lg fa-fw fa-table" [showCloseButton]="true"
+    <d-widget [title]="'Preview ' + title" iconClass="fa fa-lg fa-fw fa-table" [showCloseButton]="true"
         [padding]="false" (close)="close()">
 
         <ng-template #header>
-            <dexih-button-refresh class="mr-1" (click)="previewData.refresh()" text="Reload"></dexih-button-refresh>
+            <d-button-refresh class="mr-1" (click)="previewData.refresh()" text="Reload"></d-button-refresh>
             <download-button class="ml-1" (download)="previewData.downloadData($event)"></download-button>
-            <dexih-button-edit class="ml-1" (click)="edit()"></dexih-button-edit>
+            <d-button-edit class="ml-1" (click)="edit()"></d-button-edit>
 
 
         </ng-template>
 
             <preview-data #PreviewData [hubKey]="hubKey" [objectType]="objectType" [objectKey]="objectKey" [parameters]="parameters" [updateQueryParameters]="true">
             </preview-data>
-    </dexih-widget>
+    </d-widget>
 </div>
 
 <div *ngIf="embed">

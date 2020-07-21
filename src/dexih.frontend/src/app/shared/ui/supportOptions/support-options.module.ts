@@ -2,13 +2,13 @@ import {NgModule, ModuleWithProviders} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SupportOptionsComponent } from './support-options.component';
-import { DexihComponentsModule } from 'dexih-ngx-components';
+import { DComponentsModule } from 'ngx-d-components';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    DexihComponentsModule,
+    DComponentsModule,
   ],
   declarations: [
     SupportOptionsComponent,

@@ -1,8 +1,8 @@
-<dexih-table [enableMultiSelect]="false" [columns]="columns" [data]="data">
+<d-table [enableMultiSelect]="false" [columns]="columns" [data]="data">
 
     <ng-template #actions let-items="items">
-        <dexih-button-refresh (click)="refresh()" text="Reload"></dexih-button-refresh>
-        <dexih-button-download class="ml-1" (click)="download()"></dexih-button-download>
+        <d-button-refresh (click)="refresh()" text="Reload"></d-button-refresh>
+        <d-button-download class="ml-1" (click)="download()"></d-button-download>
 
         <div class="d-flex flex-wrap">
             <div class="flex-fill pl-1" >
@@ -10,4 +10,4 @@
             </div>
         </div>
     </ng-template>
-</dexih-table>
+</d-table>

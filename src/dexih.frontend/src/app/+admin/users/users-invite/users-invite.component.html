@@ -1,7 +1,7 @@
 <dexih-message #DexihMessage></dexih-message>
 
 <div class="container-fluid">
-    <dexih-widget title="Invite Users" iconClass="fa fa-lg fa-fw fa-user" [padding]="true">
+    <d-widget title="Invite Users" iconClass="fa fa-lg fa-fw fa-user" [padding]="true">
         <ng-template #tools>
 				<button 
 					class="btn btn-primary mr-1" 
@@ -9,7 +9,7 @@
 					(click)="save()">
 					<i *ngIf="formsService.formSaving" class="fa fa-spin fa-cog"></i> Send Invites
 				</button>				
-				<dexih-button-cancel (click)="cancel()"></dexih-button-cancel>
+				<d-button-cancel (click)="cancel()"></d-button-cancel>
         </ng-template>
 
 		<form *ngIf="formsService.currentForm"  [formGroup]="formsService.currentForm">
@@ -39,4 +39,4 @@
 			</fieldset>
 		</form>
  
-    </dexih-widget>
+    </d-widget>

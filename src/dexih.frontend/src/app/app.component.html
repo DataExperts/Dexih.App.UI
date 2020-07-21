@@ -5,9 +5,9 @@
         </li>
         <li class="list-group-item" *ngFor="let waitMessage of waitMessages">
             {{waitMessage.message}}
-            <dexih-button-cancel [autoCompact]="false" *ngIf="waitMessage.cancelToken" (click)="waitMessage.cancelToken.cancel()" class="float-right" text=""></dexih-button-cancel>
+            <d-button-cancel [autoCompact]="false" *ngIf="waitMessage.cancelToken" (click)="waitMessage.cancelToken.cancel()" class="float-right" text=""></d-button-cancel>
         </li>
     </div>
 </div>
-<dexih-modal #modal></dexih-modal>
+<d-modal #modal></d-modal>
 <router-outlet></router-outlet>

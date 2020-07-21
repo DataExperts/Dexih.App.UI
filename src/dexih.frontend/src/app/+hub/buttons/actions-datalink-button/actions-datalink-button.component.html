@@ -1,5 +1,5 @@
 <ng-template [ngIf]="datalinks">
-    <dexih-button-dropdown buttonClass="btn-primary" iconClass="fa fa-table" [text]="datalinks.length > 1 ? 'Datalinks' : 'Datalink'" [pullRight]="pullRight">
+    <d-button-dropdown buttonClass="btn-primary" iconClass="fa fa-table" [text]="datalinks.length > 1 ? 'Datalinks' : 'Datalink'" [pullRight]="pullRight">
         <li class="list-group-item list-group-item-heading list-group-item-info">Metadata</li>
         <li *ngIf="hubCache.canWrite"><a class="dropdown-item" [routerLink]="['datalink-edit', 'new']" title="Create a new datalink."><i class="fa fa-file-o"></i> New</a></li>
         <ng-template [ngIf]="datalinks.length > 0">
@@ -45,5 +45,5 @@
                 </li>
             </ng-template>
         </ng-template>
-    </dexih-button-dropdown>
+    </d-button-dropdown>
 </ng-template>

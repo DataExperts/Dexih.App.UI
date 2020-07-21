@@ -1,4 +1,4 @@
-<dexih-button-dropdown buttonClass="btn-primary" iconClass="fa fa-sitemap" text="Dependencies" [pullRight]="pullRight">
+<d-button-dropdown buttonClass="btn-primary" iconClass="fa fa-sitemap" text="Dependencies" [pullRight]="pullRight">
     <li *ngIf="dependent.dexihDatalinks.length === 0 && dependent.dexihTables.length === 0 && dependent.dexihConnections.length === 0 &&
         dependent.dexihViews.length === 0 && dependent.dexihListOfValues.length === 0 && dependent.dexihCustomFunctions.length === 0 && 
         dependent.dexihHubVariables.length === 0 && dependent.dexihFileFormats.length === 0"
@@ -61,4 +61,4 @@
             {{item.name}}
         </a>
     </li>
-</dexih-button-dropdown>
+</d-button-dropdown>

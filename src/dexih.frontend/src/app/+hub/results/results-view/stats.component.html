@@ -9,7 +9,7 @@
         <div class="d-flex mb-2">
             {{auditResult.message}}
             <div class="ml-auto">
-                <dexih-button *ngIf="auditResult.exceptionDetails" (click)='exceptionHidden = !exceptionHidden'>Details</dexih-button>
+                <d-button *ngIf="auditResult.exceptionDetails" (click)='exceptionHidden = !exceptionHidden'>Details</d-button>
             </div>
         </div>
         <div>

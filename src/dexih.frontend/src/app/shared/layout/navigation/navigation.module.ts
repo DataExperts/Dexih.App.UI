@@ -7,13 +7,13 @@ import {LoginInfoComponent} from './login-info/login-info.component';
 import {MenuParentComponent, MenuItemComponent } from './menu';
 import {RemoteAgentComponent} from './remote-agent/remote-agent.component';
 import {HubsComponent} from './hubs/hubs.component';
-import { DexihComponentsModule } from 'dexih-ngx-components';
+import { DComponentsModule } from 'ngx-d-components';
 import { DexihIconsModule} from '../../ui/icons/icons.module'
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    DexihComponentsModule,
+    DComponentsModule,
     DexihIconsModule,
   ],
   declarations: [

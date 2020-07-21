@@ -1,7 +1,7 @@
-<dexih-widget-section [title]="'Preview ' + name" [showExpandButton]="false" [padding]="false">
+<d-widget-section [title]="'Preview ' + name" [showExpandButton]="false" [padding]="false">
     <ng-template #header>
-        <dexih-button-close (click)="close()"></dexih-button-close>
+        <d-button-close (click)="close()"></d-button-close>
     </ng-template>
     <preview-data *ngIf="tableKey" [key]='tableKey' [viewSource]='eDataObjectType.Table'></preview-data>
     <preview-data *ngIf="datalinkKey" [key]='datalinkKey' [viewSource]='eDataObjectType.Datalink'></preview-data>
-</dexih-widget-section>
+</d-widget-section>

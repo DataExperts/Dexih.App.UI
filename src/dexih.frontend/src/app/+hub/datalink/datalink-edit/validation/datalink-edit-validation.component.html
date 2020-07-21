@@ -1,8 +1,8 @@
-<dexih-widget-section title='Validation' [showExpandButton]="true">
+<d-widget-section title='Validation' [showExpandButton]="true">
 <div *ngIf="!datalinkTransformForm">
     <h4>Target column validation is not currently enabled. </h4>
-    <dexih-button *ngIf="!datalinkTransformForm" (click)="enableValidation()" buttonClass="btn btn-success" iconClass="fa fa-check"  [autoCompact]="false"
-        title="Enable the validation on the target table.">Enable Validation</dexih-button>
+    <d-button *ngIf="!datalinkTransformForm" (click)="enableValidation()" buttonClass="btn btn-success" iconClass="fa fa-check"  [autoCompact]="false"
+        title="Enable the validation on the target table.">Enable Validation</d-button>
 </div>
 
 <div *ngIf="datalinkTransformForm">
@@ -10,8 +10,8 @@
     <form *ngIf="datalinkTransformForm" [formGroup]="datalinkTransformForm">
         <fieldset>
             <section>
-                <dexih-button (click)="disableValidation()" buttonClass="btn btn-success" iconClass="fa fa-check" [autoCompact]="false"
-                    title="Enable the validation on the target table.">Disable Validation</dexih-button>
+                <d-button (click)="disableValidation()" buttonClass="btn btn-success" iconClass="fa fa-check" [autoCompact]="false"
+                    title="Enable the validation on the target table.">Disable Validation</d-button>
             </section>
             <section>
                 <form-textarea label="Description" formControlName="description" placeholder="Enter the description.">
@@ -20,7 +20,7 @@
         </fieldset>
     </form>
 </div>
-</dexih-widget-section>
+</d-widget-section>
 
 <div class="list-group-item p-1">
 

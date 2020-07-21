@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <dexih-widget [title]="'Import Tables for ' + connection?.name" 
+    <d-widget [title]="'Import Tables for ' + connection?.name" 
 		iconClass="fa fa-lg fa-fw fa-database" 
 		[showIf]="showPage"
 		[loadingMessage]="showPageMessage"
@@ -11,7 +11,7 @@
 
 		</ng-template>
 
-		<dexih-table 
+		<d-table 
 			[enableMultiSelect]="true"
 			[enableStickyToolbar]="true"  [toolbarZIndex]="100"
 			[columns]="columns"
@@ -19,31 +19,31 @@
 			(rowClick)="editTable($event)"
 			>
 				<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-					<dexih-button-splitdropdown class="mr-1" *ngIf="hubCache.canWrite" text="Import" buttonClass="btn btn-success" iconClass="fa fa-cloud-download" (buttonClick)="importSelected(items)" title="Import selected tables" >
+					<d-button-splitdropdown class="mr-1" *ngIf="hubCache.canWrite" text="Import" buttonClass="btn btn-success" iconClass="fa fa-cloud-download" (buttonClick)="importSelected(items)" title="Import selected tables" >
 						<a class="dropdown-item" (click)="newDatalinks(items)" title="Import tables and create default staging datalinks">Import &amp; Create Datalinks</a>
-					</dexih-button-splitdropdown>
+					</d-button-splitdropdown>
 							
-					<dexih-button-delete (click)="deleteSelected(items)" title="Delete selected tables"></dexih-button-delete>
+					<d-button-delete (click)="deleteSelected(items)" title="Delete selected tables"></d-button-delete>
 				</ng-template>
 
 				<ng-template #selectedItemAction select="selectedItemAction" let-table="item">
-					<dexih-button-edit class="mr-1"  *ngIf="table.key" [routerLink]="['table-edit', table.key]" queryParamsHandling preserveFragment (click)="deleteSelected(items)" title="Edit this table"></dexih-button-edit>
+					<d-button-edit class="mr-1"  *ngIf="table.key" [routerLink]="['table-edit', table.key]" queryParamsHandling preserveFragment (click)="deleteSelected(items)" title="Edit this table"></d-button-edit>
 				</ng-template>
 
 				<ng-template #filter select="filter" let-items="items">
-					<dexih-button-dropdown class="mr-1" buttonClass="btn-primary" iconClass="fa fa-download" [text]="tableFilter" title="Filter by import status" [pullRight]="true">
+					<d-button-dropdown class="mr-1" buttonClass="btn-primary" iconClass="fa fa-download" [text]="tableFilter" title="Filter by import status" [pullRight]="true">
 						<a class="dropdown-item" [class.active]="tableFilter=='All'" (click)="setTableFilter('All')">All</a>
 						<a class="dropdown-item" [class.active]="tableFilter=='Imported'" (click)="setTableFilter('Imported')">Imported</a>
 						<a class="dropdown-item" [class.active]="tableFilter=='NonImported'" (click)="setTableFilter('NonImported')">Non Imported</a>
-					</dexih-button-dropdown>
+					</d-button-dropdown>
 	
-					<dexih-button-dropdown class="mr-1" buttonClass="btn-primary" iconClass="fa fa-table" [text]="viewFilter" title="Filter by tables/views" [pullRight]="true">
+					<d-button-dropdown class="mr-1" buttonClass="btn-primary" iconClass="fa fa-table" [text]="viewFilter" title="Filter by tables/views" [pullRight]="true">
 						<a class="dropdown-item" [class.active]="viewFilter=='All'" (click)="setViewFilter('All')">All</a>
 						<a class="dropdown-item" [class.active]="viewFilter=='Imported'" (click)="setViewFilter('Tables')">Tables</a>
 						<a class="dropdown-item" [class.active]="viewFilter=='NonImported'" (click)="setViewFilter('Views')">Views</a>
-					</dexih-button-dropdown>
+					</d-button-dropdown>
 				</ng-template>
-		</dexih-table>
+		</d-table>
 
-    </dexih-widget>
+    </d-widget>
 </div>

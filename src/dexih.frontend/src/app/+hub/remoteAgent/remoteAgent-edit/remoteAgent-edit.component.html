@@ -1,7 +1,7 @@
 <dexih-message #DexihMessage></dexih-message>
 
 <div class="container">
-    <dexih-widget 
+    <d-widget 
 		title="Edit Hub Remote Agent" 
         iconClass="fa fa-lg fa-fw fa-database" 
         [padding]="true"
@@ -9,8 +9,8 @@
         (close)="close()"
     >
         <ng-template #header>
-            <dexih-button-edit [routerLink]="['/hubs', 'index', 'agents', 'edit', remoteAgentKey]"></dexih-button-edit>
-            <dexih-button-save [disabled]="!formsService.hasChanged" (click)="save()" class="pl-1"></dexih-button-save>
+            <d-button-edit [routerLink]="['/hubs', 'index', 'agents', 'edit', remoteAgentKey]"></d-button-edit>
+            <d-button-save [disabled]="!formsService.hasChanged" (click)="save()" class="pl-1"></d-button-save>
             <cancel-button [formsService]="formsService" class="pl-1"></cancel-button>
         </ng-template>
 
@@ -39,5 +39,5 @@
                 </section>
             </fieldset>
         </form>
-    </dexih-widget>
+    </d-widget>
 </div>

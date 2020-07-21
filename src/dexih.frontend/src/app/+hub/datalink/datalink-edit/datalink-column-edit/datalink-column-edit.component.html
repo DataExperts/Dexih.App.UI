@@ -5,9 +5,9 @@
             <div class="ml-auto">
                 <dexih-invalid-form-details (click)="columnFormService.showErrors()"
                     [control]="columnFormService.currentForm" class="mr-1"></dexih-invalid-form-details>
-                <dexih-button-apply [disabled]="columnFormService.currentForm.pristine"
-                    (click)="!columnFormService.currentForm.pristine && applyExit()" class="mr-1"></dexih-button-apply>
-                <dexih-button-cancel (click)="cancel()"></dexih-button-cancel>
+                <d-button-apply [disabled]="columnFormService.currentForm.pristine"
+                    (click)="!columnFormService.currentForm.pristine && applyExit()" class="mr-1"></d-button-apply>
+                <d-button-cancel (click)="cancel()"></d-button-cancel>
             </div>
         </div>
     </div>

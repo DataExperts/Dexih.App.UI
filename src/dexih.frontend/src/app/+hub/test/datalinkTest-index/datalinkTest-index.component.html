@@ -1,12 +1,12 @@
 <div class="container-fluid">
-    <dexih-widget title="Datalink Tests" 
+    <d-widget title="Datalink Tests" 
 		iconClass="fa fa-lg fa-fw fa-flag-checkered" 
 		[showCloseButton]="true"
 		(close)="close()"
 	>
  
 
-		<dexih-table 
+		<d-table 
 			[enableMultiSelect]="true"
 			[columns]="columns"
 			[dataObservable]="tableData"
@@ -30,9 +30,9 @@
 					<datalink-status [datalinkTestKey]='item?.key'></datalink-status>
 				</ng-template>
 	
-		</dexih-table>
+		</d-table>
 
-	</dexih-widget>
+	</d-widget>
 	
 	<dexih-help class="m-3" title="Datalink Test" path="/assets/help/reference/datalinkTest.md"></dexih-help>
 

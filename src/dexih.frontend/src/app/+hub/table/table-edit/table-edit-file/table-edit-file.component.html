@@ -1,4 +1,4 @@
-<dexih-widget-section title='File Properties' [showExpandButton]="true" [padding]="true">
+<d-widget-section title='File Properties' [showExpandButton]="true" [padding]="true">
 
     <form *ngIf="formService?.currentForm" [formGroup]="formService.currentForm">
         <ng-template [ngIf]="isFile">
@@ -88,7 +88,7 @@
             </div>
 
             <br/>
-            <dexih-button-refresh *ngIf="uploader?.queue?.length == 1" (click)="importTable()" text='Import Table Columns' [busy]="updatingTable"></dexih-button-refresh>
+            <d-button-refresh *ngIf="uploader?.queue?.length == 1" (click)="importTable()" text='Import Table Columns' [busy]="updatingTable"></d-button-refresh>
             <section>
                 <form-input label="Max Import Levels" formControlName="maxImportLevels" placeholder="Enter the maximum node levels to query the json structure." iconClass="fa fa-file"
                     [errors]="formService.formErrors.maxImportLevels" note="Enter the maximum levels to query the json file.">
@@ -96,4 +96,4 @@
             </section>
         </section>
     </form>
-</dexih-widget-section>
+</d-widget-section>

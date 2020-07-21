@@ -1,7 +1,7 @@
 <dexih-message #DexihMessage></dexih-message>
 
 <div class="container">
-    <dexih-widget 
+    <d-widget 
 		title="Edit Agent" 
         iconClass="fa fa-lg fa-fw fa-database" 
         [padding]="true"
@@ -9,8 +9,8 @@
         (close)="close()"
     >
         <ng-template #header>
-            <dexih-button-save class="mr-1" (click)="save()"></dexih-button-save>
-            <dexih-button-cancel (click)="close()"></dexih-button-cancel>
+            <d-button-save class="mr-1" (click)="save()"></d-button-save>
+            <d-button-cancel (click)="close()"></d-button-cancel>
         </ng-template>
 
         <form *ngIf="formsService.currentForm"  [formGroup]="formsService.currentForm">
@@ -43,5 +43,5 @@
             </fieldset>
         </form>
 
-    </dexih-widget>
+    </d-widget>
 </div>

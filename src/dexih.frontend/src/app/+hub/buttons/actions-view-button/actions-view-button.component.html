@@ -1,5 +1,5 @@
 <ng-template [ngIf]="views">
-    <dexih-button-dropdown buttonClass="btn-primary" iconClass="fa fa-bar-chart" [text]="views.length > 1 ? 'Views' : 'View'" [pullRight]="pullRight">
+    <d-button-dropdown buttonClass="btn-primary" iconClass="fa fa-bar-chart" [text]="views.length > 1 ? 'Views' : 'View'" [pullRight]="pullRight">
         <li class="list-group-item list-group-item-heading list-group-item-info">Metadata</li>
         <li *ngIf="hubCache.canWrite"><a class="dropdown-item" [routerLink]="['view-new']" title="Create a new view."><i class="fa fa-file-o"></i> New</a></li>
         <ng-template [ngIf]="views.length > 0">
@@ -14,5 +14,5 @@
             <li *ngIf="hubCache.canWrite"><a class="dropdown-item" (click)="delete()" title="Delete the metadata for the selected apis."><span class="text-danger"><i class="fa fa-trash-o text-danger"></i> Delete</span></a></li>
 
         </ng-template>
-    </dexih-button-dropdown>
+    </d-button-dropdown>
 </ng-template>

@@ -1,17 +1,17 @@
 <!--<button class="btn btn-primary" [ngClass]="{disabled : savingDatalink || datalinkForm?.pristine }" (click)="!savingDatalink && saveDatalink()"><i *ngIf="savingDatalink" class="fa fa-spin fa-cog"></i> Save Changes</button>
 <button class="btn btn-warning" [ngClass]="{disabled : savingDatalink}" (click)="!savingDatalink && cancel()">Cancel</button>-->
 <dexih-invalid-form-details class="mr-1" [control]="datalinkForm"></dexih-invalid-form-details>
-<dexih-button-splitdropdown *ngIf="hubCache.canWrite" [disabled]="!editDatalinkService.hubFormsService.hasChanged" buttonClass="btn-primary" iconClass="fa fa-save" text="Save" (buttonClick)="saveDatalink(false)" class="mr-1">
+<d-button-splitdropdown *ngIf="hubCache.canWrite" [disabled]="!editDatalinkService.hubFormsService.hasChanged" buttonClass="btn-primary" iconClass="fa fa-save" text="Save" (buttonClick)="saveDatalink(false)" class="mr-1">
     <li><a class="dropdown-item" (click)="saveDatalink(false)" title="Save in the hub"><i class="fa fa-cloud"></i> Save</a></li>
     <li><a class="dropdown-item" (click)="editDatalinkService.hubFormsService.saveLocal()" title="Export as a local file"><i class="fa fa-floppy-o"></i> Save as file</a></li>
     <li><a class="dropdown-item" (click)="saveDatalink(true)" title="Save another version"><i class="fa fa-plus-circle"></i> Save As...</a></li>
-</dexih-button-splitdropdown>
-<dexih-button-dropdown class="mr-1" *ngIf="hubCache.canWrite && datalinkForm?.controls.dexihDatalinkTargets.value.length > 0" text="Actions" iconClass="fa fa-bolt" buttonClass="btn-primary" [pullRight]="true">
+</d-button-splitdropdown>
+<d-button-dropdown class="mr-1" *ngIf="hubCache.canWrite && datalinkForm?.controls.dexihDatalinkTargets.value.length > 0" text="Actions" iconClass="fa fa-bolt" buttonClass="btn-primary" [pullRight]="true">
     <a class="dropdown-item" (click)="fixMappings()" title="Attempt to fix mappings broken when removing/inserting transforms.">Fix Mappings</a>
     <a class="dropdown-item" (click)="runDatalink(false, false)" title="Run datalink, truncating the target table for each.">Run</a>
     <a class="dropdown-item" (click)="runDatalink(true, true)" title="Run datalink, truncating the target table for each.">Run (with truncate)</a>
     <a class="dropdown-item" (click)="runDatalink(false, true)" title="Run datalink, resetting the incremental (i.e. reload all source data rows) ">Run (reset incremental)</a>
     <a class="dropdown-item" (click)="preview()" title="Preview the output of this datalink">Preview Datalink</a>
     <a class="dropdown-item" (click)="download()" title="Download the output from this datalink">Download Datalink Data</a>
-</dexih-button-dropdown>
+</d-button-dropdown>
 <cancel-button [formsService]="editDatalinkService.hubFormsService"></cancel-button>

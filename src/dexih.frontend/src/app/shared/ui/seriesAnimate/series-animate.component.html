@@ -1,7 +1,7 @@
 <div *ngIf="animateConfig && (showEdit || animateConfig.seriesColumn)">
-<dexih-widget-section *ngIf="showFrame"  title="Series Animation" [showExpandButton]="true">
+<d-widget-section *ngIf="showFrame"  title="Series Animation" [showExpandButton]="true">
     <ng-template [ngTemplateOutlet]="animate"></ng-template>
-</dexih-widget-section>
+</d-widget-section>
 
 <div *ngIf="!showFrame">
     <ng-template [ngTemplateOutlet]="animate"></ng-template>

@@ -1,15 +1,15 @@
 <div class="container-fluid" >
-	<dexih-widget title="Dashboard - {{formsService?.currentForm?.controls.name.value}}" iconClass="fa fa-lg fa-fw fa-pie-chart" [showCloseButton]="true" [padding]="false"
+	<d-widget title="Dashboard - {{formsService?.currentForm?.controls.name.value}}" iconClass="fa fa-lg fa-fw fa-pie-chart" [showCloseButton]="true" [padding]="false"
 	 (close)="close()">
 		<ng-template #header>
 			<dexih-invalid-form-details [control]="formsService.currentForm" (click)="formsService.showErrors()" class="mr-1"></dexih-invalid-form-details>
-			<dexih-button-edit class="mr-1" (click)="toggleEdit()" [text]="formsService.currentForm?.controls.runTime.value.showEdit ? 'Hide Edit' : 'Edit'"></dexih-button-edit>
-			<dexih-button [iconClass]="formsService.currentForm?.controls.runTime.value.lock ? 'fa fa-lock' : 'fa fa-unlock'" class="mr-1" (click)="toggleLock()" [text]="formsService.currentForm?.controls.runTime.value.lock ? 'Unlock' : 'Lock'"></dexih-button>
-			<dexih-button-refresh class="mr-1"  (click)="refresh()"></dexih-button-refresh>
-			<dexih-button-dropdown class="mr-1" iconClass="fa fa-plus" text="Add">
+			<d-button-edit class="mr-1" (click)="toggleEdit()" [text]="formsService.currentForm?.controls.runTime.value.showEdit ? 'Hide Edit' : 'Edit'"></d-button-edit>
+			<d-button [iconClass]="formsService.currentForm?.controls.runTime.value.lock ? 'fa fa-lock' : 'fa fa-unlock'" class="mr-1" (click)="toggleLock()" [text]="formsService.currentForm?.controls.runTime.value.lock ? 'Unlock' : 'Lock'"></d-button>
+			<d-button-refresh class="mr-1"  (click)="refresh()"></d-button-refresh>
+			<d-button-dropdown class="mr-1" iconClass="fa fa-plus" text="Add">
 				<a class="dropdown-item" (click)="newView()">(New View)</a>
 				<li *ngFor="let view of views"><a class="dropdown-item" (click)="add(view.key)">{{view.name}}</a></li>
-			</dexih-button-dropdown>
+			</d-button-dropdown>
 			<download-button class="mr-1" (download)="download($event)"></download-button>
 			<save-button *ngIf="hubCache.canWrite" [formsService]="formsService" class="mr-1"></save-button>
 			<cancel-button [formsService]="formsService"></cancel-button>
@@ -17,5 +17,5 @@
 
 		<router-outlet></router-outlet>
 
-	</dexih-widget>
+	</d-widget>
 </div>

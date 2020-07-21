@@ -1,6 +1,6 @@
 <div [ngClass]="{ 'd-none': maximizedItem}">
 
-    <dexih-widget-section *ngIf="showEdit" title="Properties" [showExpandButton]="true">
+    <d-widget-section *ngIf="showEdit" title="Properties" [showExpandButton]="true">
         <form *ngIf="formsService.currentForm " [formGroup]="formsService.currentForm">
             <fieldset>
                 <section>
@@ -31,7 +31,7 @@
                             <form-input type="number" label="Maximum Rows" formControlName="maxRows">
                             </form-input>
                         </section>
-                        <dexih-button-refresh (click)="updateGrid()" text="Update Grid"></dexih-button-refresh>
+                        <d-button-refresh (click)="updateGrid()" text="Update Grid"></d-button-refresh>
                     </div>
 
                 </section>
@@ -45,14 +45,14 @@
 
             </fieldset>
         </form>
-    </dexih-widget-section>
+    </d-widget-section>
 
-    <dexih-widget-section  title="Parameters" *ngIf="showEdit || parameters?.length > 0" [showExpandButton]="true" (onChange)="parameterChange()">
+    <d-widget-section  title="Parameters" *ngIf="showEdit || parameters?.length > 0" [showExpandButton]="true" (onChange)="parameterChange()">
         <input-parameters [showEdit]="showEdit" [parameters]="parameters"
             [formsService]="formsService" (onChange)="parameterChange()" (onRefreshData)="refresh()" [refreshEvent]="refreshDataSubject.asObservable()" ></input-parameters>
-    </dexih-widget-section>
+    </d-widget-section>
 
-    <dexih-widget-section *ngIf="inputColumns && inputColumns.length > 0" title="InputColumns"
+    <d-widget-section *ngIf="inputColumns && inputColumns.length > 0" title="InputColumns"
         [showExpandButton]="true">
         <span *ngFor="let column of inputColumns; let i = index" class="input-group">
             <div class="input-group-prepend">
@@ -63,7 +63,7 @@
             <form-input name="column{{i}}" class="form-control p-0" [placeholder]="'Enter ' + column.logicalName"
                 [(ngModel)]="column.value"></form-input>
         </span>
-    </dexih-widget-section>
+    </d-widget-section>
 
     <div style="height:800px">
         <gridster [options]="options" #gridster>

@@ -1,10 +1,10 @@
 <div class="container-fluid">
-    <dexih-widget title="Connected Agents" 
+    <d-widget title="Connected Agents" 
         iconClass="fa fa-lg fa-fw fa-life-saver" 
 		[showCloseButton]="true"
 		(close)="close()"
     >
-		<dexih-table 
+		<d-table 
 			[enableMultiSelect]="true"
 			[enableStickyToolbar]="true"  [toolbarZIndex]="100"
 			[columns]="columns"
@@ -19,7 +19,7 @@
 				</ng-template>
 
 				<ng-template #actions let-items="items">
-					<dexih-button-dropdown *ngIf="items && items.length >= 0" buttonClass="btn-primary" iconClass="fa fa-table"
+					<d-button-dropdown *ngIf="items && items.length >= 0" buttonClass="btn-primary" iconClass="fa fa-table"
 						[text]="items.length > 1 ? 'Agents' : 'Agent'" [pullRight]="pullRight">
 						<li><a class="dropdown-item" [routerLink]="['token-new']"
 								title="Create a new remote agent token."><i class="fa fa-file-o"></i> New Token</a></li>
@@ -44,10 +44,10 @@
 										class="text-danger"><i class="fa fa-ban"></i> Revoke Tokens</span></a></li>
 				
 						</ng-template>
-					</dexih-button-dropdown>
+					</d-button-dropdown>
 				
-					<dexih-button-refresh class="ml-1" (click)="refresh()" text="Refresh Agents" title="Refresh the active agents">
-					</dexih-button-refresh>
+					<d-button-refresh class="ml-1" (click)="refresh()" text="Refresh Agents" title="Refresh the active agents">
+					</d-button-refresh>
 				</ng-template>
 
 				<ng-template #rowStatus select="rowStatus" let-item="item">
@@ -60,8 +60,8 @@
 								</div>
 							</div>	
 				</ng-template>
-		</dexih-table>
-	</dexih-widget>
+		</d-table>
+	</d-widget>
 	
 	<dexih-help class="m-3" title="Remote Agent Installation" path="/assets/help/intro/remote_agent.md"></dexih-help>
 </div>

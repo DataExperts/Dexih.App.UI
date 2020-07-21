@@ -1,5 +1,5 @@
 <div class="container-fluid">
-	<dexih-widget *ngIf="message" title="Notification" iconClass="fa fa-lg fa-fw fa-bell" [showCloseButton]="true" (close)="close()" [padding]="true" >
+	<d-widget *ngIf="message" title="Notification" iconClass="fa fa-lg fa-fw fa-bell" [showCloseButton]="true" (close)="close()" [padding]="true" >
 		<section *ngIf="message">
 				<div class="alert  clearfix" [class.alert-danger]="message.success == false" [class.alert-success]="message.success == true">
 					{{message.message}}
@@ -9,5 +9,5 @@
 					</div>
 				</div>
 			</section>
-	</dexih-widget>
+	</d-widget>
 </div>

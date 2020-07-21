@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <dexih-widget [title]="title" 
+    <d-widget [title]="title" 
 		iconClass="fa fa-lg fa-fw fa-table" 
 		[showCloseButton]="true"
 		(close)="close()"
@@ -11,7 +11,7 @@
 
 		</ng-template>
 
-		<dexih-table 
+		<d-table 
 			[enableMultiSelect]="true"
 			[columns]="columns"
 			[dataObservable]="tableData"
@@ -28,14 +28,14 @@
 				</ng-template>
 
 				<ng-template #filter select="filter" let-items="items">
-					<dexih-button-dropdown *ngIf="hubCache?.hub" class="mr-1"[autoCompact]="false" buttonClass="btn btn-primary" iconClass="fa fa-database" [text]="connectionName" title="Filter by a connection" [pullRight]="true">
+					<d-button-dropdown *ngIf="hubCache?.hub" class="mr-1"[autoCompact]="false" buttonClass="btn btn-primary" iconClass="fa fa-database" [text]="connectionName" title="Filter by a connection" [pullRight]="true">
 						<a *ngFor="let connection of (hubCache.hub.dexihConnections | equalFilter :'isValid':true )" class="dropdown-item" routerLink="." [queryParams]="{connectionKey: connection.key}">{{connection.name}}</a>
-					</dexih-button-dropdown>
+					</d-button-dropdown>
 		
-					<dexih-button-dropdown class="mr-1" [autoCompact]="false" buttonClass="btn btn-primary" iconClass="fa fa-filter" [text]="eConnectionPurpose[purposeFilter]" title="Filter by a purpose" [pullRight]="true">
+					<d-button-dropdown class="mr-1" [autoCompact]="false" buttonClass="btn btn-primary" iconClass="fa fa-filter" [text]="eConnectionPurpose[purposeFilter]" title="Filter by a purpose" [pullRight]="true">
 						<a class="dropdown-item" [class.active]="purposeFilter=='0'" routerLink='.' [queryParams]="{purposeFilter: 'All'}" title="All Connections">All</a>
 						<a *ngFor="let purpose of eConnectionPurposeItems | gtFilter:'key':0" [class.active]="purposeFilter==purpose.key" class="dropdown-item" routerLink='.' [queryParams]="{purposeFilter: purpose.key}" [title]="purpose.name">{{purpose.name}}</a>
-					</dexih-button-dropdown>
+					</d-button-dropdown>
 				</ng-template>
 				
 				<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
@@ -48,9 +48,9 @@
 
 
 
-		</dexih-table>
+		</d-table>
 
-	</dexih-widget>
+	</d-widget>
 	
 	<dexih-help class="m-3" title="Datalinks" path="/assets/help/reference/table.md"></dexih-help>
 

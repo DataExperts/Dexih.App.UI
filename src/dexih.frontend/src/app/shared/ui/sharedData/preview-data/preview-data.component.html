@@ -21,13 +21,13 @@
                             <i class="fa fa-bar-chart"></i>
                         </label>
                     </div>
-                    <dexih-button-refresh class="ml-1" [compact]="true" (click)="refresh()"></dexih-button-refresh>
-                    <dexih-button *ngIf="!isMaximized" class="ml-1" buttonClass="btn btn-primary"
+                    <d-button-refresh class="ml-1" [compact]="true" (click)="refresh()"></d-button-refresh>
+                    <d-button *ngIf="!isMaximized" class="ml-1" buttonClass="btn btn-primary"
                         iconClass="fa fa-window-maximize text-white" (click)="maximize()" tooltip="Maximize window">
-                    </dexih-button>
-                    <dexih-button *ngIf="isMaximized" class="ml-1" buttonClass="btn btn-primary"
+                    </d-button>
+                    <d-button *ngIf="isMaximized" class="ml-1" buttonClass="btn btn-primary"
                         iconClass="fa fa-window-minimize text-white" (click)="minimize()" tooltip="Minimize window">
-                    </dexih-button>
+                    </d-button>
                 </div>
 
                 <div *ngIf="userParameters && userParameters.length > 0" class="m-1">
@@ -80,7 +80,7 @@
 <div class="h-100 box" *ngIf="data">
     <div class="box-content" style="height: 90vh;">
 
-        <dexih-table *ngIf="!showChart" [enableMultiSelect]="false" [enableSaveCsv]="true" [csvFileName]="name"
+        <d-table *ngIf="!showChart" [enableMultiSelect]="false" [enableSaveCsv]="true" [csvFileName]="name"
             [enableFilter]="false" [columns]="columns" [data]="data">
 
             <ng-template #actions let-items="items">
@@ -89,7 +89,7 @@
             <ng-template #tableHeader>
             </ng-template>
 
-        </dexih-table>
+        </d-table>
 
         <chart-view *ngIf="showChart" [responsive]="true" [columns]="columns" [data]="data"
             [config]="viewConfig.chartConfig">

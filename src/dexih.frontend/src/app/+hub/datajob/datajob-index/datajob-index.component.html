@@ -1,11 +1,11 @@
 <div class="container-fluid">
-	<dexih-widget title="Data Jobs" iconClass="fa fa-lg fa-fw fa-calendar"
+	<d-widget title="Data Jobs" iconClass="fa fa-lg fa-fw fa-calendar"
 	[showCloseButton]="true"
 	(close)="close()"
 	>
 
 
-		<dexih-table 
+		<d-table 
 			[enableMultiSelect]="true" 
 			[enableStickyToolbar]="true"  [toolbarZIndex]="100"
 			[columns]="columns" 
@@ -28,9 +28,9 @@
 			<ng-template #actions let-items="items">
 				<actions-datajob-button [datajobs]="items"></actions-datajob-button>
 			</ng-template>
-		</dexih-table>
+		</d-table>
 
-	</dexih-widget>
+	</d-widget>
 
 	<dexih-help class="m-3" title="Datalinks" path="/assets/help/reference/datajob.md"></dexih-help>
 

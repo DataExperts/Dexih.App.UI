@@ -1,8 +1,8 @@
 <div class="container-fluid">
-    <dexih-widget title="Execution Results" 
+    <d-widget title="Execution Results" 
         iconClass="fa fa-lg fa-fw fa-exchange" 
     >
-		<dexih-table 
+		<d-table 
 			[enableMultiSelect]="true"
 			[enableStickyToolbar]="true"  [toolbarZIndex]="100"
 			[columns]="columns"
@@ -13,7 +13,7 @@
 				<ng-template #actions let-items="items">
 					<div class="d-flex flex-wrap">
 						<div class="input-group">
-							<dexih-button-refresh class="input-group-prepend" (click)="refresh()" text="Reload"></dexih-button-refresh>
+							<d-button-refresh class="input-group-prepend" (click)="refresh()" text="Reload"></d-button-refresh>
 							<input type="number" class="form-control" placeholder="Maximum rows..."
 								title="Specify the maximum rows to return" [(ngModel)]="rows" style="width: 100%; max-width: 100px">
 						</div>
@@ -45,16 +45,16 @@
 				</ng-template>
 
 				<ng-template #selectedItemAction select="selectedItemAction" let-result="item">
-					<dexih-button-edit class="mr-1" [routerLink]="[hubPath, 'datalink-edit', 'edit', result.referenceKey]" text='Edit Datalink'></dexih-button-edit>
-					<dexih-button-view [routerLink]="['result-view', result.auditConnectionKey, result.auditKey]" queryParamsHandling="merge"></dexih-button-view>
+					<d-button-edit class="mr-1" [routerLink]="[hubPath, 'datalink-edit', 'edit', result.referenceKey]" text='Edit Datalink'></d-button-edit>
+					<d-button-view [routerLink]="['result-view', result.auditConnectionKey, result.auditKey]" queryParamsHandling="merge"></d-button-view>
 				</ng-template>
 
 				<ng-template #rowStatus select="rowStatus" let-result="item">
 					<datalink-status [writerResult]="result"></datalink-status>
 				</ng-template>
 
-		</dexih-table>
-    </dexih-widget>
+		</d-table>
+    </d-widget>
 </div>
 
 

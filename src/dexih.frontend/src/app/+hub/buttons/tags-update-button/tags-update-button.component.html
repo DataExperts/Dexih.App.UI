@@ -1,5 +1,5 @@
 <ng-template [ngIf]="tags">
-    <dexih-button-dropdown buttonClass="btn-primary" iconClass="fa fa-tags" [text]="'Tag ' + objectTypeName + 's'" [pullRight]="pullRight">
+    <d-button-dropdown buttonClass="btn-primary" iconClass="fa fa-tags" [text]="'Tag ' + objectTypeName + 's'" [pullRight]="pullRight">
         <a class="dropdown-item" (click)="delete()" title="Clear tags from selected {{objectTypeName}}s"><span class="text-danger"><i class="fa fa-trash-o text-danger"></i> Clear</span></a>
         <a *ngFor="let tag of tags" class="dropdown-item" >
             <div class="input-group">
@@ -7,5 +7,5 @@
               <h5><span class="badge" [ngStyle]="{'background-color': tag.tag.color}" ><span class="blend-text">{{tag.tag.name}}</span></span></h5>
             </div>
           </a>
-    </dexih-button-dropdown>
+    </d-button-dropdown>
 </ng-template>

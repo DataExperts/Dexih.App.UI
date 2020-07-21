@@ -1,7 +1,7 @@
 <auth-header [showSignIn]="true"></auth-header>
 
 <div id="print-section" class="container p-1">
-  <dexih-widget title="Help" iconClass="fa fa-lg fa-fw fa-question" [padding]="true">
+  <d-widget title="Help" iconClass="fa fa-lg fa-fw fa-question" [padding]="true">
     <ng-template #header>
       <print-button></print-button>
     </ng-template>
@@ -9,5 +9,5 @@
     <div class="container-fluid" id="print-body">
       <markdown [data]="data" (click)="getRoute($event)"></markdown>
     </div>
-  </dexih-widget>
+  </d-widget>
 </div>

@@ -1,5 +1,5 @@
 <div class="container" *ngIf="formsService.currentForm">
-	<dexih-widget title="Edit List of Values" iconClass="fa fa-lg fa-list-alt" [showCloseButton]="true" [padding]="false"
+	<d-widget title="Edit List of Values" iconClass="fa fa-lg fa-list-alt" [showCloseButton]="true" [padding]="false"
 		(close)="close()">
 		<ng-template #header>
 			<dexih-invalid-form-details [control]="formsService.currentForm" (click)="formsService.showErrors()" class="mr-1"></dexih-invalid-form-details>
@@ -77,11 +77,11 @@
 			</fieldset>
 		</form>
 
-		<dexih-widget-section *ngIf="formsService.currentForm.value.sourceType == eLOVObjectType.Static" title="Static Values"
+		<d-widget-section *ngIf="formsService.currentForm.value.sourceType == eLOVObjectType.Static" title="Static Values"
 			[showExpandButton]="true">
 			<ng-template #header>
-				<dexih-button class="mr-1" (click)="add(-1)" iconClass="fa fa-plus">Insert Item</dexih-button>
-				<dexih-button-delete (click)="clear()" text="Clear All"></dexih-button-delete>
+				<d-button class="mr-1" (click)="add(-1)" iconClass="fa fa-plus">Insert Item</d-button>
+				<d-button-delete (click)="clear()" text="Clear All"></d-button-delete>
 			</ng-template>
 		
 			<form *ngFor="let itemForm of formsService.currentForm.controls.staticData.controls; let i = index;"
@@ -111,24 +111,24 @@
 				</div>
 			</form>
 
-		</dexih-widget-section>
+		</d-widget-section>
 		
 		<ng-template [ngIf]="formsService.currentForm.value.sourceType !== eLOVObjectType.Static">
-			<dexih-widget-section title="Query Configuration" [showExpandButton]="true">
+			<d-widget-section title="Query Configuration" [showExpandButton]="true">
 				<query-builder [selectQuery]="formsService.currentForm.controls.selectQuery.value" [columns]="tableColumns"
 					[inputColumns]="inputColumns" [parameters]="null" (hasChanged)="hasChanged()" [refreshEvent]="refreshDataSubject.asObservable()" (onRefreshData)="refreshData()"></query-builder>
-			</dexih-widget-section>
+			</d-widget-section>
 		
 			<div *ngIf="!data" class="m-3">
-				<dexih-button-refresh (click)="refreshData()" text="Reload" [autoCompact]="false"></dexih-button-refresh>
+				<d-button-refresh (click)="refreshData()" text="Reload" [autoCompact]="false"></d-button-refresh>
 			</div>
 		
-			<dexih-table *ngIf="data" [enableMultiSelect]="false" [enableSaveCsv]="true" [columns]="columns" [data]="data">
+			<d-table *ngIf="data" [enableMultiSelect]="false" [enableSaveCsv]="true" [columns]="columns" [data]="data">
 				<ng-template #actions let-items="items">
-					<dexih-button-refresh class="mr-1" (click)="refreshData()" text="Reload"></dexih-button-refresh>
+					<d-button-refresh class="mr-1" (click)="refreshData()" text="Reload"></d-button-refresh>
 				</ng-template>
-			</dexih-table>
+			</d-table>
 		</ng-template>
-	</dexih-widget>
+	</d-widget>
 
 </div>

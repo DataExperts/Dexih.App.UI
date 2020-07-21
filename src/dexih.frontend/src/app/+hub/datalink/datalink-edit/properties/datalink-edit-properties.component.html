@@ -1,4 +1,4 @@
-<dexih-widget-section title='Properties' [showExpandButton]="true">
+<d-widget-section title='Properties' [showExpandButton]="true">
     <form *ngIf="datalinkForm" [formGroup]="datalinkForm">
         <fieldset>
             <section>
@@ -34,8 +34,8 @@
         </fieldset>
     </form>
 
-</dexih-widget-section> 
+</d-widget-section> 
 
-<dexih-widget-section title='Input Parameters' [showExpandButton]="true">
+<d-widget-section title='Input Parameters' [showExpandButton]="true">
     <input-parameters [showEdit]="true" [parameters]="datalinkForm.controls.parameters" [formsService]="editDatalinkService.hubFormsService"></input-parameters>
-</dexih-widget-section>
+</d-widget-section>

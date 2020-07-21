@@ -1,5 +1,5 @@
 <div class="container">
-	<dexih-widget 
+	<d-widget 
 	title="Edit Variable" 
 	iconClass="fa fa-lg fa-fw fa-at" 
 	[showCloseButton]="true"
@@ -7,7 +7,7 @@
 	(close)="close()"
 	>
         <ng-template #header>
-            <dexih-button-save *ngIf="hubCache.canWrite" class="mr-1" (click)="save()"></dexih-button-save>
+            <d-button-save *ngIf="hubCache.canWrite" class="mr-1" (click)="save()"></d-button-save>
             <cancel-button [formsService]="formsService"></cancel-button>
         </ng-template>
 
@@ -43,7 +43,7 @@
 			</fieldset>
 		</form>
  
-	</dexih-widget>
+	</d-widget>
 
 	<dexih-help class="m-3"  title="Hub Variables" path="/assets/help/reference/hubVariable.md"></dexih-help>
 

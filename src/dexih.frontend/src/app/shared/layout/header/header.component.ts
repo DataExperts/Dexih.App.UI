@@ -5,7 +5,7 @@ import { AuthService } from '../../../+auth/auth.service';
 import { HubCache, eCacheStatus } from '../../../+hub/hub.models';
 import { Subscription, combineLatest} from 'rxjs';
 import { LayoutService } from '../layout.service';
-import { DexihToastComponent, ToastMessage } from 'dexih-ngx-components';
+import { DToastComponent, ToastMessage } from 'ngx-d-components';
 import { Message } from '../../../+auth/auth.models';
 
 @Component({
@@ -13,7 +13,7 @@ import { Message } from '../../../+auth/auth.models';
   templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-      @ViewChild('toasts', { static: true }) public toasts: DexihToastComponent;
+      @ViewChild('toasts', { static: true }) public toasts: DToastComponent;
 
 
   _hubCacheSubscription: Subscription;

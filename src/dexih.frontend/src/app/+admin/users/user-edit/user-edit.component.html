@@ -1,11 +1,11 @@
 <dexih-message #DexihMessage></dexih-message>
 
 <div class="container pt-3">
-	<dexih-widget-vertical>
-    <dexih-widget title="User Details" iconClass="fa fa-lg fa-fw fa-user"  [padding]="true">
+	<d-widget-vertical>
+    <d-widget title="User Details" iconClass="fa fa-lg fa-fw fa-user"  [padding]="true">
         <ng-template #header>
-			<dexih-button-save class="mr-1" [busy]="formsService.formSaving" (click)="save()"></dexih-button-save>
-			<dexih-button-cancel (click)="cancel()"></dexih-button-cancel>
+			<d-button-save class="mr-1" [busy]="formsService.formSaving" (click)="save()"></d-button-save>
+			<d-button-cancel (click)="cancel()"></d-button-cancel>
         </ng-template>
 
 		<form *ngIf="formsService.currentForm"  [formGroup]="formsService.currentForm">
@@ -107,9 +107,9 @@
 			</fieldset>
 		</form>
  
-    </dexih-widget>
+    </d-widget>
 
-	<dexih-widget title="Logins" subTitle="The following login providers are available for this login" iconClass="fa fa-lg fa-fw fa-life-saver"  [padding]="true">
+	<d-widget title="Logins" subTitle="The following login providers are available for this login" iconClass="fa fa-lg fa-fw fa-life-saver"  [padding]="true">
 		<ng-template #tools>
 
 		</ng-template>
@@ -124,6 +124,6 @@
 				</div>
 			</li>
 		</ul>
-	</dexih-widget>
-</dexih-widget-vertical>
+	</d-widget>
+</d-widget-vertical>
 </div>

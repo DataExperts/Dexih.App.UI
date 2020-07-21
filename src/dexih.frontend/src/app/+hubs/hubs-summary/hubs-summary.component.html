@@ -8,7 +8,7 @@
         
     <div *ngIf="(hubs | async)?.length == 0" class="alert alert-warning">
         <div class="float-right">
-            <dexih-button-new routerLink="hub-new" title="Create a new Hub" text="New Hub"></dexih-button-new>
+            <d-button-new routerLink="hub-new" title="Create a new Hub" text="New Hub"></d-button-new>
         </div>
         <h3>Let's get started.</h3>
         <h5>You do not have any hubs currently available to you.</h5>
@@ -23,8 +23,8 @@
                     used to run, schedule and publish data.</p>
             </div>
             <div class="card-footer">
-                <dexih-button class="ml-1" iconClass="fa fa-life-saver" routerLink="hubs-view">Manage</dexih-button>
-                <dexih-button-new  class="ml-1" routerLink="hub-new" title="Create a new hub"></dexih-button-new>
+                <d-button class="ml-1" iconClass="fa fa-life-saver" routerLink="hubs-view">Manage</d-button>
+                <d-button-new  class="ml-1" routerLink="hub-new" title="Create a new hub"></d-button-new>
             </div>
         </div>
         <div class="card mb-3" style="min-width: 18rem;">
@@ -33,7 +33,7 @@
                 <p class="card-text">Edit your account details, password, and login providers.</p>
             </div>
             <div class="card-footer">
-                <dexih-button class="ml-1" iconClass="fa fa-user" routerLink="manage">Account</dexih-button>
+                <d-button class="ml-1" iconClass="fa fa-user" routerLink="manage">Account</d-button>
             </div>
         </div>
         <div class="card mb-3" style="min-width: 18rem;">
@@ -43,8 +43,8 @@
                     data.</p>
             </div>
             <div class="card-footer">
-                <dexih-button class="mr-1" iconClass="fa fa-wifi" routerLink="agents">Agents</dexih-button>
-                <dexih-button iconClass="fa fa-tasks" routerLink="tasks">Tasks</dexih-button>
+                <d-button class="mr-1" iconClass="fa fa-wifi" routerLink="agents">Agents</d-button>
+                <d-button iconClass="fa fa-tasks" routerLink="tasks">Tasks</d-button>
             </div>
         </div>
         <div class="card mb-3" style="min-width: 18rem;">
@@ -53,12 +53,12 @@
                 <p class="card-text">View all datasets which have been shared.</p>
             </div>
             <div class="card-footer">
-                <dexih-button-view routerLink="sharedData"></dexih-button-view>
+                <d-button-view routerLink="sharedData"></d-button-view>
             </div>
         </div>
     </div>
 
-    <dexih-widget title="Hubs" 
+    <d-widget title="Hubs" 
         iconClass="fa fa-lg fa-fw fa-life-saver" 
         [showCloseButton]="false"
         [padding]="true"
@@ -97,9 +97,9 @@
                                     <div class="small">({{eHubAccess[hub.hubAccess]}})</div>
                                 </div>
                                 <div class="d-flex ml-auto">
-                                    <dexih-button-open routerLink="/hub/{{hub.hubKey}}/summary"></dexih-button-open>
-                                    <dexih-button-edit class="ml-1" routerLink="hub-edit/{{hub.hubKey}}">
-                                    </dexih-button-edit>
+                                    <d-button-open routerLink="/hub/{{hub.hubKey}}/summary"></d-button-open>
+                                    <d-button-edit class="ml-1" routerLink="hub-edit/{{hub.hubKey}}">
+                                    </d-button-edit>
                                 </div>
                             </div>        
                         </div>
@@ -110,5 +110,5 @@
                 </div>
             </ng-template>
         </div>
-    </dexih-widget>
+    </d-widget>
 </div>

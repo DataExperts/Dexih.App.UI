@@ -1,9 +1,9 @@
 <div class="container">
-    <dexih-widget title="Datajob Options" iconClass="fa fa-lg fa-fw fa-exchange"  [showCloseButton]="true" (close)="close()" [padding]="true">
+    <d-widget title="Datajob Options" iconClass="fa fa-lg fa-fw fa-exchange"  [showCloseButton]="true" (close)="close()" [padding]="true">
             <ng-template #header>
-                <dexih-button-refresh class="mr-1" (click)="run()" text="Run Now"></dexih-button-refresh>
-                <dexih-button-refresh class="mr-1" (click)="activate()" text="Activate Triggers"></dexih-button-refresh>
-                <dexih-button-cancel (click)="cancel()"></dexih-button-cancel>
+                <d-button-refresh class="mr-1" (click)="run()" text="Run Now"></d-button-refresh>
+                <d-button-refresh class="mr-1" (click)="activate()" text="Activate Triggers"></d-button-refresh>
+                <d-button-cancel (click)="cancel()"></d-button-cancel>
             </ng-template>
 
         <ng-template #subHeader>
@@ -51,5 +51,5 @@
 			</fieldset>
 		</form>
 
-    </dexih-widget>
+    </d-widget>
 </div>

@@ -1,5 +1,5 @@
 
-<dexih-widget-section title="Properties" [showExpandButton]="true" [isExpanded]="false">
+<d-widget-section title="Properties" [showExpandButton]="true" [isExpanded]="false">
 <form *ngIf="datalinkTransformForm"  [formGroup]="datalinkTransformForm">
         <fieldset>
             <section>
@@ -34,9 +34,9 @@
             </div>
         </fieldset>
     </form>
-</dexih-widget-section>
+</d-widget-section>
 
-<dexih-widget-section *ngIf="datalinkTransformForm && (this.datalinkTransformForm.value.transformType == eTransformType.Join || this.datalinkTransformForm.value.transformType == eTransformType.Lookup)" title="Join Settings" [showExpandButton]="true">
+<d-widget-section *ngIf="datalinkTransformForm && (this.datalinkTransformForm.value.transformType == eTransformType.Join || this.datalinkTransformForm.value.transformType == eTransformType.Lookup)" title="Join Settings" [showExpandButton]="true">
     <form [formGroup]="datalinkTransformForm">
         <fieldset>
             <datalink-table [datalinkTableForm]="datalinkTransformForm.controls.joinDatalinkTable"></datalink-table>
@@ -56,17 +56,17 @@
             </div>
         </fieldset>
     </form>
-</dexih-widget-section>
+</d-widget-section>
 
-<dexih-widget-section *ngIf="datalinkTransformForm && this.datalinkTransformForm.value.transformType == eTransformType.Concatenate" title="Concatenate Settings" [showExpandButton]="true">
+<d-widget-section *ngIf="datalinkTransformForm && this.datalinkTransformForm.value.transformType == eTransformType.Concatenate" title="Concatenate Settings" [showExpandButton]="true">
     <form [formGroup]="datalinkTransformForm">
         <fieldset>
             <datalink-table [datalinkTableForm]="datalinkTransformForm.controls.joinDatalinkTable"></datalink-table>
         </fieldset>
     </form>
-</dexih-widget-section>
+</d-widget-section>
 
-<dexih-widget-section *ngIf="datalinkTransformForm && this.datalinkTransformForm.value.transformType == eTransformType.Series" title="Series Settings" [showExpandButton]="true">
+<d-widget-section *ngIf="datalinkTransformForm && this.datalinkTransformForm.value.transformType == eTransformType.Series" title="Series Settings" [showExpandButton]="true">
     <form [formGroup]="seriesForm">
         <fieldset>
             <div class="form-row">
@@ -102,9 +102,9 @@
             </div>
         </fieldset>
     </form>
-</dexih-widget-section>
+</d-widget-section>
 
-<dexih-widget-section *ngIf="datalinkTransformForm && this.nodeType" title="Group Node" [showExpandButton]="true">
+<d-widget-section *ngIf="datalinkTransformForm && this.nodeType" title="Group Node" [showExpandButton]="true">
     <form>
         <fieldset>
             <form-checkbox label="Group rows under a node" [ngModelOptions]="{standalone: true}" [(ngModel)]="allowNode" (ngModelChange)="toggleNode($event)"></form-checkbox>
@@ -113,18 +113,18 @@
             </section>
         </fieldset>
     </form>
-</dexih-widget-section>
+</d-widget-section>
 
 <div class="list-group-item p-1">
 
 <div *ngIf="datalinkTransformForm" class="d-flex" cdkDropListGroup>
-        <dexih-widget class="d-none d-lg-inline" title="Inputs" height="80vh" style="width:300px" [scrollable]="true">
+        <d-widget class="d-none d-lg-inline" title="Inputs" height="80vh" style="width:300px" [scrollable]="true">
             <input-columns [datalinkTransformForm]='datalinkTransformForm'></input-columns>
 
             <div class="mt-1"  *ngIf="datalinkTransformForm.controls.joinDatalinkTable.value">
                 <join-columns [datalinkTransformForm]='datalinkTransformForm' (inputJoinDrop)="newDragDropJoin($event)"></join-columns>
             </div>
-        </dexih-widget>
+        </d-widget>
 
         <div class="w-100 mr-1 ml-1">
             <div *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Join || this.datalinkTransformForm.value.transformType == eTransformType.Lookup">
@@ -181,9 +181,9 @@
             </div>
         </div>
 
-        <dexih-widget class="d-none d-lg-inline" [title]="'Outputs' + (datalinkTransformForm.controls.nodeDatalinkColumn?.value ? '(@' + datalinkTransformForm.controls.nodeDatalinkColumn.value.name + ')' : '')"  height="80vh" style="width:300px"  [scrollable]="true">
+        <d-widget class="d-none d-lg-inline" [title]="'Outputs' + (datalinkTransformForm.controls.nodeDatalinkColumn?.value ? '(@' + datalinkTransformForm.controls.nodeDatalinkColumn.value.name + ')' : '')"  height="80vh" style="width:300px"  [scrollable]="true">
             <output-columns [datalinkTransformForm]='datalinkTransformForm' [allowMappingOutputs]="allowMappingOutputs" (inputOutputDrop)="newDragDropMapping(eTransformItemType.ColumnPair, $event)"></output-columns>
             <target-columns [datalinkTransformForm]='datalinkTransformForm' [targets]="datalinkForm.controls.dexihDatalinkTargets.value" [allowMappingOutputs]="allowMappingOutputs" (inputOutputDrop)="newDragDropMapping(eTransformItemType.ColumnPair, $event)"></target-columns>
-        </dexih-widget>
+        </d-widget>
     </div>
 </div>

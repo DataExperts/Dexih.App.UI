@@ -2,9 +2,9 @@
     <li *ngIf="allowMappingOutputs" class="list-group-item p-1 dexih-overflow b-0" style="height: 40px;" title="drop to create new mapping..." dropZone (dropData)="newOutputDrop($event)" [zone]="allowMappingOutputs ? 'input-column' : ''" dropAllowedClass="drop-zone-green">
         &nbsp;(Drop&nbsp;Column)
     </li>
-    <dexih-widget-section *ngFor="let columnGroup of columnGroups" [title]="columnGroup.group" [padding]="false" [showExpandButton]="true">
+    <d-widget-section *ngFor="let columnGroup of columnGroups" [title]="columnGroup.group" [padding]="false" [showExpandButton]="true">
         <div *ngFor="let column of columnGroup.columns | fieldSort : 'position' | isValidFilter; let i = index" dropZone (dropData)="newInputOutputDrop($event, column)" [zone]="allowMappingOutputs ? 'input-column' : ''" dropAllowedClass="drop-zone-green" >
             <output-column [datalinkTransformForm]='datalinkTransformForm' [column]='column'></output-column>
         </div>
-    </dexih-widget-section>
+    </d-widget-section>
 </div>

@@ -1,19 +1,19 @@
 <div class="container-fluid">
-	<dexih-widget title="Hub Remote Agents"
+	<d-widget title="Hub Remote Agents"
 		iconClass="fa fa-lg fa-fw fa-wifi"
 		[showCloseButton]="true"
 		(close)="close()"
 		>
 		<ng-template #header>
-			<dexih-button-dropdown buttonClass="btn btn-sm btn-outline-secondary" iconClass="fa fa-filter" [text]="statusFilter" title="Filter by a status" [pullRight]="true">
+			<d-button-dropdown buttonClass="btn btn-sm btn-outline-secondary" iconClass="fa fa-filter" [text]="statusFilter" title="Filter by a status" [pullRight]="true">
 				<a class="dropdown-item" [class.active]="statusFilter=='All'" routerLink='.' [queryParams]="{statusFilter: 'All'}" title="All Items">All</a>
 				<a class="dropdown-item" [class.active]="statusFilter=='Ready'" routerLink='.' [queryParams]="{statusFilter: 'Ready'}" title="Ready">Ready</a>
 				<a class="dropdown-item" [class.active]="statusFilter=='Offline'" routerLink='.' [queryParams]="{statusFilter: 'Offline'}" title="Offline Items">Offline</a>
 				<a class="dropdown-item" [class.active]="statusFilter=='Unauthorized'" routerLink='.' [queryParams]="{statusFilter: 'Unauthorized'}" title="Unauthorized Items">Unauthorized</a>
-			</dexih-button-dropdown>
+			</d-button-dropdown>
         </ng-template>
 
-		<dexih-table 
+		<d-table 
 			[enableMultiSelect]="true"
 			[enableStickyToolbar]="true"  [toolbarZIndex]="100"
 			[columns]="columns"
@@ -21,16 +21,16 @@
 			(rowClick)="edit($event)"
 			>
 				<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-					<dexih-button-delete class="mr-1" (click)="deleteSelected(items)" title="Delete selected remote agents"></dexih-button-delete>
-					<dexih-button class="mr-1" iconClass="fa fa-check" buttonClass="btn-primary" (click)="authorize(items)" title="Authorize the selected agents for this hub">Authorize</dexih-button>
-					<dexih-button class="mr-1" iconClass="fa fa-times" buttonClass="btn-danger" (click)="deAuthorize(items)" title="De-Authorize the selected agents">De-Authorize</dexih-button>
+					<d-button-delete class="mr-1" (click)="deleteSelected(items)" title="Delete selected remote agents"></d-button-delete>
+					<d-button class="mr-1" iconClass="fa fa-check" buttonClass="btn-primary" (click)="authorize(items)" title="Authorize the selected agents for this hub">Authorize</d-button>
+					<d-button class="mr-1" iconClass="fa fa-times" buttonClass="btn-danger" (click)="deAuthorize(items)" title="De-Authorize the selected agents">De-Authorize</d-button>
 				</ng-template>
 				<ng-template #selectedItemAction select="selectedItemAction" let-remoteItem="item">
-					<dexih-button-edit [routerLink]="['agent-edit', remoteItem.remoteAgentKey, remoteItem.remoteAgentHubKey]" class="mr-1" ></dexih-button-edit>
+					<d-button-edit [routerLink]="['agent-edit', remoteItem.remoteAgentKey, remoteItem.remoteAgentHubKey]" class="mr-1" ></d-button-edit>
 				</ng-template>
 				<ng-template #actions let-items="items">
-					<dexih-button-download [routerLink]="['/hubs/index/agents/download']" iconClass="fa fa-download" text="Download Agent" class="mr-1" ></dexih-button-download>
+					<d-button-download [routerLink]="['/hubs/index/agents/download']" iconClass="fa fa-download" text="Download Agent" class="mr-1" ></d-button-download>
 				</ng-template>
-		</dexih-table>
-	</dexih-widget>
+		</d-table>
+	</d-widget>
 </div>

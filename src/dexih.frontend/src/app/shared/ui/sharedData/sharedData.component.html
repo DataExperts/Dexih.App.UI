@@ -3,8 +3,8 @@
         <dexih-message #DexihMessage></dexih-message>
     </div>
 
-    <dexih-widget title="Shared Data" iconClass="fa fa-lg fa-fw fa-life-saver">
-        <dexih-widget-section *ngIf="embedLink" title="Embedded html" [showExpandButton]="false">
+    <d-widget title="Shared Data" iconClass="fa fa-lg fa-fw fa-life-saver">
+        <d-widget-section *ngIf="embedLink" title="Embedded html" [showExpandButton]="false">
             <ng-template #header>
                 <button type="button" class="close ml-2" (click)="embedLink = null" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -20,9 +20,9 @@
                 <form-textarea label="Embedded IFrame" [showCopy]="true" [showPreview]="false" [hideToggle]="true"
                     [disabled]="true" rows="1" [(ngModel)]="embedFrame"></form-textarea>
             </section>
-        </dexih-widget-section>
+        </d-widget-section>
 
-        <dexih-table 
+        <d-table 
             [enableMultiSelect]="true" 
             [enableStickyToolbar]="true"  [toolbarZIndex]="100"
             [enableFilter]="false" 
@@ -32,11 +32,11 @@
             [tags]="tags">
 
             <ng-template #selectedItemAction select="selectedItemAction" let-item="item">
-                <dexih-button-preview [routerLink]="['preview', item.hubKey, item.objectType, item.objectKey]">
-                </dexih-button-preview>
-                <dexih-button-edit *ngIf="hubKeys?.indexOf(item.hubKey)>=0" class="ml-1" 
-                    (click)="edit(item)"></dexih-button-edit>
-                <dexih-button class="ml-1" iconClass="fa fa-code" title="Get embedded version" (click)="embed(item)" text="Embedded"></dexih-button>
+                <d-button-preview [routerLink]="['preview', item.hubKey, item.objectType, item.objectKey]">
+                </d-button-preview>
+                <d-button-edit *ngIf="hubKeys?.indexOf(item.hubKey)>=0" class="ml-1" 
+                    (click)="edit(item)"></d-button-edit>
+                <d-button class="ml-1" iconClass="fa fa-code" title="Get embedded version" (click)="embed(item)" text="Embedded"></d-button>
 
             </ng-template>
 
@@ -73,6 +73,6 @@
                 </div>
             </ng-template> -->
 
-        </dexih-table>
-    </dexih-widget>
+        </d-table>
+    </d-widget>
 </div>

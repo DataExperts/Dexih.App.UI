@@ -1,13 +1,13 @@
 <div class="container">
-	<dexih-widget title="New Datalink(s)"  
+	<d-widget title="New Datalink(s)"  
 		iconClass="fa fa-lg fa-fw fa-exchange" 
 		[showCloseButton]="true"
 		(close)="!savingDatalink && cancel()"
 		[padding]="true"
 		>
 		<ng-template #header>
-			<dexih-button-save class="mr-1" (click)="!savingDatalink && saveDatalink()" [busy]="savingDatalink"></dexih-button-save>
-			<dexih-button-cancel (click)="!savingDatalink && cancel()" [busy]="savingDatalink"></dexih-button-cancel>
+			<d-button-save class="mr-1" (click)="!savingDatalink && saveDatalink()" [busy]="savingDatalink"></d-button-save>
+			<d-button-cancel (click)="!savingDatalink && cancel()" [busy]="savingDatalink"></d-button-cancel>
 		</ng-template>
 
 		<ng-template #subHeader>
@@ -79,5 +79,5 @@
 				</section>
 			</fieldset>
 		</form>
-	</dexih-widget>
+	</d-widget>
 </div>

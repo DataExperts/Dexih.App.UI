@@ -1,29 +1,29 @@
 <div class="container-fluid">
-    <dexih-widget title="Tasks" 
+    <d-widget title="Tasks" 
         iconClass="fa fa-lg fa-fw fa-exchange" 
 		[showCloseButton]="true"
 		(close)="close()"
 
     >
 
-		<dexih-table 
+		<d-table 
 			[enableMultiSelect]="true"
 			[columns]="columns"
 			[dataObservable]="tableData"
 			(rowClick)="showTask($event.task)"
 			>
 				<ng-template #selectedItemAction select="selectedItemAction" let-item="item">
-					<dexih-button-view (click)="showTask(item.task)" text="View Task"></dexih-button-view>
-					<dexih-button-view class="ml-1" *ngIf="item.task.category=='Datalink'" [routerLink]="['/hub', item.task.referenceKey, 'summary', 'datalinks', 'result-view', item.task.data.auditConnectionKey, item.task.data.auditKey]" text="Datalink Result"></dexih-button-view>
-					<dexih-button-view class="ml-1" *ngIf="item.task.category=='Datajob'" [routerLink]="['/hub', item.task.referenceKey, 'summary', 'datalinks', 'result-view', item.task.data.auditConnectionKey, item.task.data.auditKey]" text="Datajob Result"></dexih-button-view>
+					<d-button-view (click)="showTask(item.task)" text="View Task"></d-button-view>
+					<d-button-view class="ml-1" *ngIf="item.task.category=='Datalink'" [routerLink]="['/hub', item.task.referenceKey, 'summary', 'datalinks', 'result-view', item.task.data.auditConnectionKey, item.task.data.auditKey]" text="Datalink Result"></d-button-view>
+					<d-button-view class="ml-1" *ngIf="item.task.category=='Datajob'" [routerLink]="['/hub', item.task.referenceKey, 'summary', 'datalinks', 'result-view', item.task.data.auditConnectionKey, item.task.data.auditKey]" text="Datajob Result"></d-button-view>
 				</ng-template>
 
 				<ng-template #rowStatus select="rowStatus" let-item="item">
 					<task-status [task]="item.task"></task-status>
 				</ng-template>
 
-		</dexih-table>
-    </dexih-widget>
+		</d-table>
+    </d-widget>
 </div>
 
 

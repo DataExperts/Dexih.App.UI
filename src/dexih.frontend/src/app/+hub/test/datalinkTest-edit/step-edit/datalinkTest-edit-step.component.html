@@ -3,8 +3,8 @@
 	<div class="d-flex flex-row">
 		<h5>Step Properties</h5>
 		<div class="ml-auto">
-			<dexih-button-apply class="mr-1" [disabled]="!stepFormService.hasChanged" (click)="applyExit()"></dexih-button-apply>
-			<dexih-button-cancel (click)="cancel()"></dexih-button-cancel>
+			<d-button-apply class="mr-1" [disabled]="!stepFormService.hasChanged" (click)="applyExit()"></d-button-apply>
+			<d-button-cancel (click)="cancel()"></d-button-cancel>
 		</div>
 	</div>
 </div>
@@ -36,8 +36,8 @@
 	<div class="d-flex flex-row">
 		<h5>Target Table: {{targetTableName}}</h5>
 		<div class="ml-auto">
-			<dexih-button-apply class="mr-1" [disabled]="!stepFormService.hasChanged" (click)="applyExit()"></dexih-button-apply>
-			<dexih-button-cancel (click)="cancel()"></dexih-button-cancel>
+			<d-button-apply class="mr-1" [disabled]="!stepFormService.hasChanged" (click)="applyExit()"></d-button-apply>
+			<d-button-cancel (click)="cancel()"></d-button-cancel>
 		</div>
 	</div>
 </div>
@@ -110,8 +110,8 @@
 		<div class="d-flex flex-row">
 			<h5>Source Table: {{inputTableNames[i]}}</h5>
 			<div class="ml-auto">
-				<dexih-button-apply class="mr-1" [disabled]="!stepFormService.hasChanged" (click)="applyExit()"></dexih-button-apply>
-				<dexih-button-cancel (click)="cancel()"></dexih-button-cancel>
+				<d-button-apply class="mr-1" [disabled]="!stepFormService.hasChanged" (click)="applyExit()"></d-button-apply>
+				<d-button-cancel (click)="cancel()"></d-button-cancel>
 			</div>
 		</div>
 	</div>

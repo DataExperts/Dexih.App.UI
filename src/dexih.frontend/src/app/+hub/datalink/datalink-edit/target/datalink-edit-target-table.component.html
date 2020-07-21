@@ -1,16 +1,16 @@
 <div *ngIf="!showColumn">
 
-<dexih-widget-section title="Edit Target Table" [showExpandButton]="true">
+<d-widget-section title="Edit Target Table" [showExpandButton]="true">
     <ng-template #header>
-        <dexih-button-preview class="mr-1" (click)="previewData()"></dexih-button-preview>
-        <dexih-button class="mr-1" (click)="importTable()" buttonClass="btn-primary" iconClass="fa fa-refresh" title="Re-import table from connection.">
+        <d-button-preview class="mr-1" (click)="previewData()"></d-button-preview>
+        <d-button class="mr-1" (click)="importTable()" buttonClass="btn-primary" iconClass="fa fa-refresh" title="Re-import table from connection.">
             Re-Import
-        </dexih-button>
-        <dexih-button (click)="createTable()" class="mr-1" buttonClass="btn-primary" iconClass="fa fa-bullseye" title="Drop & re-create the table on the connection.  Warning: This remove all data from the table!">
+        </d-button>
+        <d-button (click)="createTable()" class="mr-1" buttonClass="btn-primary" iconClass="fa fa-bullseye" title="Drop & re-create the table on the connection.  Warning: This remove all data from the table!">
             Drop & Create
-        </dexih-button>
+        </d-button>
 
-        <dexih-button-apply class="mr-1" (click)="apply()" [disabled]="!this.targetTableForm?.dirty"></dexih-button-apply>
+        <d-button-apply class="mr-1" (click)="apply()" [disabled]="!this.targetTableForm?.dirty"></d-button-apply>
         <cancel-button [formsService]="tableFormService"></cancel-button>
     </ng-template>
 
@@ -30,18 +30,18 @@
             </section>
         </fieldset>
     </form>
-</dexih-widget-section>
+</d-widget-section>
 
-<dexih-table-edit-properties *ngIf="tableFormService.currentForm.value" [formsService]="tableFormService" [isExpanded]="newTable"></dexih-table-edit-properties>
+<d-table-edit-properties *ngIf="tableFormService.currentForm.value" [formsService]="tableFormService" [isExpanded]="newTable"></d-table-edit-properties>
 
 <ng-template [ngIf]="targetTableForm?.controls.table.value">
-        <dexih-widget-section title="Columns" [showExpandButton]="true" [padding]="false">
-        <dexih-table [enableMultiSelect]="true"
+        <d-widget-section title="Columns" [showExpandButton]="true" [padding]="false">
+        <d-table [enableMultiSelect]="true"
             [enableManualSort]="true" [enableSort]="false" [enableFilter]="false" (onSortChanged)="columnSortChange($event)" [columns]="columns"
             [dataObservable]="tableData" (rowClick)="editColumn($event)" [enableStickyToolbar]="true"  [toolbarZIndex]="100">
     
             <ng-template #actions let-items="items">
-                <dexih-button-splitdropdown text="Add Column" title="Create a new column" iconClass="fa fa-plus-square" buttonClass="btn-primary"
+                <d-button-splitdropdown text="Add Column" title="Create a new column" iconClass="fa fa-plus-square" buttonClass="btn-primary"
                     (buttonClick)="newColumn(null)">
                     <li>
                         <a class="dropdown-item" (click)="newColumn(eDeltaType.AutoIncrement)">Add Auto Incrementing Key Column</a>
@@ -67,42 +67,42 @@
                     <li>
                         <a class="dropdown-item" (click)="newColumn(eDeltaType.UpdateDate)">Add Update Date</a>
                     </li>
-                </dexih-button-splitdropdown>
+                </d-button-splitdropdown>
 
                 <column-edit-bulk *ngIf="showBulkEdit && items.length > 0" [columns]="items" [columnsFormArray]="targetTableForm.controls.table.controls.dexihTableColumns" (updated)="updateData()" ></column-edit-bulk>
-                <dexih-button iconClass="fa fa-retweet" class="ml-1" (click)="resetColumns()">Reset All Columns</dexih-button>
-                <dexih-button-preview class="ml-1" (click)="previewData()"></dexih-button-preview>
-                <dexih-button class="ml-1" (click)="importTable()" buttonClass="btn-primary" iconClass="fa fa-refresh" title="Re-import table from connection.">
+                <d-button iconClass="fa fa-retweet" class="ml-1" (click)="resetColumns()">Reset All Columns</d-button>
+                <d-button-preview class="ml-1" (click)="previewData()"></d-button-preview>
+                <d-button class="ml-1" (click)="importTable()" buttonClass="btn-primary" iconClass="fa fa-refresh" title="Re-import table from connection.">
                     Re-Import
-                </dexih-button>
-                <dexih-button (click)="createTable()" class="ml-1" buttonClass="btn-primary" iconClass="fa fa-bullseye" title="Drop & re-create the table on the connection.  Warning: This remove all data from the table!">
+                </d-button>
+                <d-button (click)="createTable()" class="ml-1" buttonClass="btn-primary" iconClass="fa fa-bullseye" title="Drop & re-create the table on the connection.  Warning: This remove all data from the table!">
                     Drop & Create
-                </dexih-button>
+                </d-button>
             </ng-template>
     
             <ng-template #selectedItemAction select="selectedItemAction" let-column="item">
-                <dexih-button-edit (click)="editColumn(column)" class="ml-1"></dexih-button-edit>
+                <d-button-edit (click)="editColumn(column)" class="ml-1"></d-button-edit>
             </ng-template>
     
             <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-                <dexih-button-delete (click)="deleteColumns(items)" class="ml-1"></dexih-button-delete>
-                <dexih-button iconClass="fa fa-th-list" class="ml-1" (click)="showBulkEdit=!showBulkEdit">{{showBulkEdit ? 'Hide Bulk Edit' : 'Show Bulk Edit'}} </dexih-button>
+                <d-button-delete (click)="deleteColumns(items)" class="ml-1"></d-button-delete>
+                <d-button iconClass="fa fa-th-list" class="ml-1" (click)="showBulkEdit=!showBulkEdit">{{showBulkEdit ? 'Hide Bulk Edit' : 'Show Bulk Edit'}} </d-button>
             </ng-template>
     
     
-        </dexih-table>
-        </dexih-widget-section>
+        </d-table>
+        </d-widget-section>
 
-        <dexih-widget-section title="Unused Columns" [showExpandButton]="true" [padding]="false">
-        <dexih-table [enableMultiSelect]="true"
+        <d-widget-section title="Unused Columns" [showExpandButton]="true" [padding]="false">
+        <d-table [enableMultiSelect]="true"
             sortColumn="position" [enableFilter]="false" [columns]="columns" [dataObservable]="missingColumnsData"
             [enableStickyToolbar]="true"  [toolbarZIndex]="100">
             <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-                <dexih-button (click)="addMissing(items)" buttonClass="btn-primary" iconClass="fa fa-plus-square" title="Add selected outputs to the target table">Add To Table</dexih-button>
+                <d-button (click)="addMissing(items)" buttonClass="btn-primary" iconClass="fa fa-plus-square" title="Add selected outputs to the target table">Add To Table</d-button>
             </ng-template>
     
-        </dexih-table>
-        </dexih-widget-section>
+        </d-table>
+        </d-widget-section>
     </ng-template>
 </div>
 

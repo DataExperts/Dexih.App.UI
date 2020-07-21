@@ -1,10 +1,10 @@
 <div *ngIf="newDatalinkTransformItemForm && inputColumns && outputColumns">
 
-	<dexih-widget-section [title]="pageTitle" [showExpandButton]="false">
+	<d-widget-section [title]="pageTitle" [showExpandButton]="false">
 		<ng-template #header>
-			<dexih-button-apply [disabled]="newDatalinkTransformItemForm.pristine"
-				(click)="!newDatalinkTransformItemForm.pristine && applyExit()" class="mr-1"></dexih-button-apply>
-			<dexih-button-cancel (click)="cancel()"></dexih-button-cancel>
+			<d-button-apply [disabled]="newDatalinkTransformItemForm.pristine"
+				(click)="!newDatalinkTransformItemForm.pristine && applyExit()" class="mr-1"></d-button-apply>
+			<d-button-cancel (click)="cancel()"></d-button-cancel>
 		</ng-template>
 		<form [formGroup]="newDatalinkTransformItemForm">
 			<fieldset>
@@ -61,5 +61,5 @@
 				</div>
 			</fieldset>
 		</form>
-	</dexih-widget-section>
+	</d-widget-section>
 </div>

@@ -1,5 +1,5 @@
 
-<dexih-widget-section title="Target Load Rules" [showExpandButton]="true">
+<d-widget-section title="Target Load Rules" [showExpandButton]="true">
     <form *ngIf="datalinkForm" [formGroup]="datalinkForm">
         <fieldset>
             <form-checkbox label="Datalink is a query and does not populate target tables."
@@ -49,27 +49,27 @@
             </span>
         </fieldset>
     </form>
-</dexih-widget-section>
+</d-widget-section>
 
 
-<dexih-widget-section title="Tables" [showExpandButton]="true" [padding]="false" *ngIf="!datalinkForm?.controls.isQuery.value">
-    <dexih-table [enableMultiSelect]="true" [enableManualSort]="true" [enableSort]="false"
+<d-widget-section title="Tables" [showExpandButton]="true" [padding]="false" *ngIf="!datalinkForm?.controls.isQuery.value">
+    <d-table [enableMultiSelect]="true" [enableManualSort]="true" [enableSort]="false"
         [enableFilter]="false" (onSortChanged)="targetSortChange($event)" [columns]="targetTableColumns" [data]="targets"
         (rowClick)="editTable($event)">
 
         <ng-template #actions let-items="items">
-            <dexih-button-new class="mr-1" (click)="addTable()"></dexih-button-new>
+            <d-button-new class="mr-1" (click)="addTable()"></d-button-new>
         </ng-template>
 
         <ng-template #selectedItemAction select="selectedItemAction" let-item="item">
-            <dexih-button-edit class="mr-1" (click)="editTable(item)"></dexih-button-edit>
+            <d-button-edit class="mr-1" (click)="editTable(item)"></d-button-edit>
         </ng-template>
 
         <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-            <dexih-button-delete class="mr-1" (click)="deleteTables(items)"></dexih-button-delete>
+            <d-button-delete class="mr-1" (click)="deleteTables(items)"></d-button-delete>
         </ng-template>
 
-    </dexih-table>
-</dexih-widget-section>
+    </d-table>
+</d-widget-section>
 
 <router-outlet></router-outlet>

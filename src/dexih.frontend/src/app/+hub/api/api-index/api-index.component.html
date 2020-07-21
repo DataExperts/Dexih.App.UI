@@ -1,10 +1,10 @@
 <div class="container-fluid">
-    <dexih-widget title="Api's" 
+    <d-widget title="Api's" 
 		iconClass="fa fa-lg fa-fw fa-feed" 
 		[showCloseButton]="true"
 		(close)="close()"
 	>
-			<dexih-table 
+			<d-table 
 				[enableMultiSelect]="true"
 				[enableStickyToolbar]="true"  [toolbarZIndex]="100"
 				[columns]="columns"
@@ -28,9 +28,9 @@
 					<ng-template #rowStatus select="rowStatus" let-item="item">
 						<api-status [apiKey]='item?.key'></api-status>
 					</ng-template>
-			</dexih-table>
+			</d-table>
 
-		</dexih-widget>
+		</d-widget>
 		
 		<dexih-help class="m-3"  title="Connections" path="/assets/help/reference/api.md"></dexih-help>
 </div>

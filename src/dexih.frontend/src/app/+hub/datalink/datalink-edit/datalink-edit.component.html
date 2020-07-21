@@ -1,5 +1,5 @@
 <div class="container-fluid" *ngIf="datalinkForm && !datalinkForm.pending">
-	<dexih-widget title="Edit Datalink" iconClass="fa fa-lg fa-fw fa-exchange" [showCloseButton]="true"
+	<d-widget title="Edit Datalink" iconClass="fa fa-lg fa-fw fa-exchange" [showCloseButton]="true"
 		[padding]="false" (close)="cancel()">
 		<ng-template #header>
 
@@ -35,7 +35,7 @@
 			<li class="list-group-item rounded-0">
 				<div class="d-flex">
 					<div class="d-xl-none">
-						<dexih-button-dropdown buttonClass="btn btn-success" text="Navigate">
+						<d-button-dropdown buttonClass="btn btn-success" text="Navigate">
 							<a class="dropdown-item" routerLinkActive="active" routerLink="properties"><i
 										class="fa fa-cog"></i>Properties</a>
 							<a class="dropdown-item" routerLinkActive="active" routerLink="source-table"><i
@@ -50,7 +50,7 @@
 								<a class="dropdown-item" routerLink="target" routerLinkActive="active"><i
 											class="fa fa-arrow-circle-right"></i>Target</a>
 							</ng-template>
-						</dexih-button-dropdown>
+						</d-button-dropdown>
 					</div>
 					<datalink-status class="d-none d-xl-inline" [datalinkKey]='datalinkForm?.controls.key.value'>
 					</datalink-status>
@@ -62,7 +62,7 @@
 			<router-outlet></router-outlet>
 		</ul>
 
-	</dexih-widget>
+	</d-widget>
 
 	<dexih-help class="m-3" *ngIf="help" title="Datalinks" path="/assets/help/reference/{{help}}"></dexih-help>
 

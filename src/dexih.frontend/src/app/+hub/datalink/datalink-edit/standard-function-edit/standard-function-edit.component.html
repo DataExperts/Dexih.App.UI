@@ -1,10 +1,10 @@
 <div *ngIf="newDatalinkTransformItemForm && inputColumns && outputColumns">
 
-	<dexih-widget-section  title="Edit Function" [showExpandButton]="false">
+	<d-widget-section  title="Edit Function" [showExpandButton]="false">
 		<ng-template #header>
-			<dexih-button-apply [disabled]="newDatalinkTransformItemForm.pristine" (click)="!newDatalinkTransformItemForm.pristine && applyExit()"
-			class="mr-1"></dexih-button-apply>
-			<dexih-button-cancel (click)="cancel()"></dexih-button-cancel>
+			<d-button-apply [disabled]="newDatalinkTransformItemForm.pristine" (click)="!newDatalinkTransformItemForm.pristine && applyExit()"
+			class="mr-1"></d-button-apply>
+			<d-button-cancel (click)="cancel()"></d-button-cancel>
 		</ng-template>
 
 		<form *ngIf="datalinkTransformForm" [formGroup]="newDatalinkTransformItemForm">
@@ -85,13 +85,13 @@
 									Array - {{inputParameter.value.name}}
 								</div>
 								<div class="ml-auto">
-									<dexih-button *ngIf="selectedFunction.importMethodName" iconClass="fa fa-download" text="Import Mappings" (click)="importMappings(inputParameter)"
-									 title="Attempt to import the mappings from the source data" class="mr-1"></dexih-button>
-									<dexih-button iconClass="fa fa-plus" text="Add Parameter" (click)="addParameter(inputParameter, eParameterDirection.Input)" title="Add a parameter to the array"
-									 class="mr-1"></dexih-button>
-									<dexih-button iconClass="fa fa-columns" text="Add All Inputs" (click)="addAllColumns(inputParameter)" title="Add all the input columns to the array"
-									 class="mr-1"></dexih-button>
-									<dexih-button iconClass="fa fa-eraser" text="Clear" (click)="clearArray(inputParameter)"></dexih-button>
+									<d-button *ngIf="selectedFunction.importMethodName" iconClass="fa fa-download" text="Import Mappings" (click)="importMappings(inputParameter)"
+									 title="Attempt to import the mappings from the source data" class="mr-1"></d-button>
+									<d-button iconClass="fa fa-plus" text="Add Parameter" (click)="addParameter(inputParameter, eParameterDirection.Input)" title="Add a parameter to the array"
+									 class="mr-1"></d-button>
+									<d-button iconClass="fa fa-columns" text="Add All Inputs" (click)="addAllColumns(inputParameter)" title="Add all the input columns to the array"
+									 class="mr-1"></d-button>
+									<d-button iconClass="fa fa-eraser" text="Clear" (click)="clearArray(inputParameter)"></d-button>
 								</div>
 							</div>
 							<input-parameter *ngIf="inputParameter.controls.arrayParameters.controls.length === 0" [inputParameterForms]="[inputParameter]" [nodeDatalinkColumnKey]="datalinkTransformForm.controls.nodeDatalinkColumn.value?.key"
@@ -120,13 +120,13 @@
 					<div class="d-flex flex-row mb-1">
 						{{arrayParameter.name}}
 						<div class="ml-auto">
-							<dexih-button *ngIf="selectedFunction.importMethodName" iconClass="fa fa-download" text="Import Mappings" (click)="importInputOutputMappings(arrayParameter)"
-							 title="Attempt to import the mappings from the source data" class="mr-1"></dexih-button>
-							<dexih-button iconClass="fa fa-plus" text="Add Mapping" (click)="addInputOutputParameter(arrayParameter)"
-							 title="Add a parameter to the array" class="mr-1"></dexih-button>
-							<dexih-button iconClass="fa fa-columns" text="Add All Inputs" (click)="addAllInputOutputColumns(arrayParameter)"
-							 title="Add all the input columns to the array" class="mr-1"></dexih-button>
-							<dexih-button iconClass="fa fa-eraser" text="Clear" (click)="clearInputOutputArray(arrayParameter)"></dexih-button>
+							<d-button *ngIf="selectedFunction.importMethodName" iconClass="fa fa-download" text="Import Mappings" (click)="importInputOutputMappings(arrayParameter)"
+							 title="Attempt to import the mappings from the source data" class="mr-1"></d-button>
+							<d-button iconClass="fa fa-plus" text="Add Mapping" (click)="addInputOutputParameter(arrayParameter)"
+							 title="Add a parameter to the array" class="mr-1"></d-button>
+							<d-button iconClass="fa fa-columns" text="Add All Inputs" (click)="addAllInputOutputColumns(arrayParameter)"
+							 title="Add all the input columns to the array" class="mr-1"></d-button>
+							<d-button iconClass="fa fa-eraser" text="Clear" (click)="clearInputOutputArray(arrayParameter)"></d-button>
 						</div>
 					</div>
 					<div *ngFor="let parameterItem of arrayParameter.parameterItems; let j = index" class="pl-2"
@@ -149,7 +149,7 @@
 							Output Parameters
 						</div>
 						<div class="ml-auto">
-							<dexih-button text="Auto Map" buttonClass="btn-sm btn-outline-primary" (click)="autoMap(outputParameter)"></dexih-button>
+							<d-button text="Auto Map" buttonClass="btn-sm btn-outline-primary" (click)="autoMap(outputParameter)"></d-button>
 						</div>
 					</label>
 					<div *ngFor="let outputParameter of outputParameterControls; let i = index" [ngStyle]="{'z-index': 100-i, 'position': 'relative'}">
@@ -159,9 +159,9 @@
 									Array - {{outputParameter.value.name}}
 								</div>
 								<div class="ml-auto">
-									<dexih-button iconClass="fa fa-plus"  text="Add Parameter" (click)="addParameter(outputParameter, eParameterDirection.Output)" title="Add a parameter to the array"
-									 class="mr-1"></dexih-button>
-									<dexih-button iconClass="fa fa-eraser"  text="Clear" (click)="clearArray(outputParameter)"></dexih-button>
+									<d-button iconClass="fa fa-plus"  text="Add Parameter" (click)="addParameter(outputParameter, eParameterDirection.Output)" title="Add a parameter to the array"
+									 class="mr-1"></d-button>
+									<d-button iconClass="fa fa-eraser"  text="Clear" (click)="clearArray(outputParameter)"></d-button>
 								</div>
 							</div>
 							<output-parameter *ngIf="outputParameter.controls.arrayParameters.controls.length === 0" [outputParameterForm]="outputParameter"
@@ -183,5 +183,5 @@
 				</div>
 			</fieldset>
 		</form>
-	</dexih-widget-section>
+	</d-widget-section>
 </div>

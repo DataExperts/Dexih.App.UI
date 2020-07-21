@@ -5,7 +5,7 @@ import { HubService } from '../../..';
 import { Subscription, combineLatest, Subject } from 'rxjs';
 import { HubCache, DexihInputParameter, DataCache, PreviewResults } from '../../../hub.models';
 import { HubFormsService } from '../../../hub.forms.service';
-import { DexihWidgetComponent } from 'dexih-ngx-components';
+import { DWidgetComponent } from 'ngx-d-components';
 import { CancelToken } from '../../../../+auth/auth.models';
 import { DexihView, InputParameterBase, InputParameter, eDataObjectType, eViewType, DexihActiveAgent } from '../../../../shared/shared.models';
 import { AuthService } from '../../../../+auth/auth.service';
@@ -26,7 +26,7 @@ export class DashboardItemComponent implements OnInit, OnChanges, OnDestroy {
     @Output() onRemove = new EventEmitter();
     @Output() onMaximize = new EventEmitter<FormGroup>();
 
-    @ViewChild('widget', {static: true}) public widget: DexihWidgetComponent;
+    @ViewChild('widget', {static: true}) public widget: DWidgetComponent;
 
     private _subscription: Subscription;
     private _viewKeySubscription: Subscription;

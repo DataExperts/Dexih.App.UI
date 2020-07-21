@@ -2,7 +2,7 @@ import { Component, ViewContainerRef, OnInit, OnDestroy, ViewChild } from '@angu
 import { AuthService } from './+auth/auth.service';
 import { Observable, Subscription } from 'rxjs';
 import { Router, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
-import { DexihModalComponent } from 'dexih-ngx-components';
+import { DModalComponent } from 'ngx-d-components';
 import { Functions } from './shared/utils/functions';
 
 @Component({
@@ -11,7 +11,7 @@ import { Functions } from './shared/utils/functions';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  @ViewChild('modal', { static: true }) modal: DexihModalComponent;
+  @ViewChild('modal', { static: true }) modal: DModalComponent;
 
   private viewContainerRef: ViewContainerRef;
 

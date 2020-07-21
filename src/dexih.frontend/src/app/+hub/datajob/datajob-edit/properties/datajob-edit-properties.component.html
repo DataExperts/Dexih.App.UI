@@ -1,4 +1,4 @@
-<dexih-widget-section title="Properties" [showExpandButton]="true">
+<d-widget-section title="Properties" [showExpandButton]="true">
     <form *ngIf="mainForm" [formGroup]="mainForm">
         <fieldset>
             <section>
@@ -51,48 +51,48 @@
             </section>
         </fieldset>
     </form>
-</dexih-widget-section>
+</d-widget-section>
 
-<dexih-widget-section title="Parameters" [showExpandButton]="true" [padding]="true" [padding]="true">
+<d-widget-section title="Parameters" [showExpandButton]="true" [padding]="true" [padding]="true">
     <input-parameters *ngIf="mainForm" [showEdit]="true" [parameters]="mainForm?.controls.parameters" [formsService]="formService">
     </input-parameters>
-</dexih-widget-section>
+</d-widget-section>
 
-<dexih-widget-section title="Triggers" [showExpandButton]="true" [padding]="false">
-    <dexih-table [enableMultiSelect]="true" [enableStickyToolbar]="true"  [toolbarZIndex]="100" [enableManualSort]="true" sortColumn="position" [columns]="triggerColumns"
+<d-widget-section title="Triggers" [showExpandButton]="true" [padding]="false">
+    <d-table [enableMultiSelect]="true" [enableStickyToolbar]="true"  [toolbarZIndex]="100" [enableManualSort]="true" sortColumn="position" [columns]="triggerColumns"
         [dataObservable]="triggerTableData" (rowClick)='editTrigger($event)'>
         <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-            <dexih-button-delete (click)="deleteTriggers(items)"></dexih-button-delete>
+            <d-button-delete (click)="deleteTriggers(items)"></d-button-delete>
         </ng-template>
 
         <ng-template #selectedItemAction select="selectedItemAction" let-trigger="item">
-            <dexih-button-edit (click)="editTrigger(trigger)"></dexih-button-edit>
+            <d-button-edit (click)="editTrigger(trigger)"></d-button-edit>
         </ng-template>
 
         <ng-template #actions select="actionsTemplate" let-items="items">
-            <dexih-button-new (click)="newTrigger()" title="New Trigger"></dexih-button-new>
+            <d-button-new (click)="newTrigger()" title="New Trigger"></d-button-new>
         </ng-template>
 
-    </dexih-table>
-</dexih-widget-section>
+    </d-table>
+</d-widget-section>
 
-<dexih-widget-section title="Steps" [showExpandButton]="true" [padding]="false">
-    <dexih-table [enableMultiSelect]="true" [enableStickyToolbar]="true"  [toolbarZIndex]="100" [enableManualSort]="true" (onSortChanged)="stepSortChanged($event)" sortColumn="position" [columns]="stepColumns" [tags]="this.hubCache.hub.dexihTags"
+<d-widget-section title="Steps" [showExpandButton]="true" [padding]="false">
+    <d-table [enableMultiSelect]="true" [enableStickyToolbar]="true"  [toolbarZIndex]="100" [enableManualSort]="true" (onSortChanged)="stepSortChanged($event)" sortColumn="position" [columns]="stepColumns" [tags]="this.hubCache.hub.dexihTags"
         [dataObservable]="stepTableData" (rowClick)='editDatalinkStep($event)'>
         <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-            <dexih-button  iconClass="fa fa-magic" (click)="updateDependencies(items)" text="AutoSet Dependencies"></dexih-button>
-            <dexih-button class="ml-1" iconClass="fa fa-eraser" (click)="clearDependencies(items)" text="Clear Dependencies"></dexih-button>
-            <dexih-button-delete class="ml-1" (click)="deleteDatalinkSteps(items)"></dexih-button-delete>
+            <d-button  iconClass="fa fa-magic" (click)="updateDependencies(items)" text="AutoSet Dependencies"></d-button>
+            <d-button class="ml-1" iconClass="fa fa-eraser" (click)="clearDependencies(items)" text="Clear Dependencies"></d-button>
+            <d-button-delete class="ml-1" (click)="deleteDatalinkSteps(items)"></d-button-delete>
         </ng-template>
 
         <ng-template #selectedItemAction select="selectedItemAction" let-item="item">
-            <dexih-button-edit class="mr-1" (click)="editDatalinkStep(item)"></dexih-button-edit>
+            <d-button-edit class="mr-1" (click)="editDatalinkStep(item)"></d-button-edit>
         </ng-template>
 
         <ng-template #actions select="actionsTemplate" let-items="items">
-            <dexih-button-new class="mr-1" (click)="newDatalinkStep()" title="Create a new step"></dexih-button-new>
-            <dexih-button class="mr-1" (click)="addDatalinkSteps()" iconClass="fa fa-plus-square" buttonClass="btn-primary"
-                title="Select multiple datalinks to add as steps">Add</dexih-button>
+            <d-button-new class="mr-1" (click)="newDatalinkStep()" title="Create a new step"></d-button-new>
+            <d-button class="mr-1" (click)="addDatalinkSteps()" iconClass="fa fa-plus-square" buttonClass="btn-primary"
+                title="Select multiple datalinks to add as steps">Add</d-button>
         </ng-template>
-    </dexih-table>
-</dexih-widget-section>
+    </d-table>
+</d-widget-section>

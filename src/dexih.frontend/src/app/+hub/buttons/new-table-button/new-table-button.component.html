@@ -1,5 +1,5 @@
-<dexih-button-dropdown *ngIf="connections" buttonClass="btn-primary" iconClass="fa fa-file-o" text="New" [pullRight]="pullRight"> 
+<d-button-dropdown *ngIf="connections" buttonClass="btn-primary" iconClass="fa fa-file-o" text="New" [pullRight]="pullRight"> 
     <li *ngFor="let connection of connections">
         <a class="dropdown-item" [routerLink]="['table-new', connection.key]">Add to {{connection.name}}</a>
     </li>
-</dexih-button-dropdown>
+</d-button-dropdown>

@@ -1,5 +1,5 @@
 <div class="container">
-	<dexih-widget title="Edit API" iconClass="fa fa-lg fa-fw fa-feed" [showCloseButton]="true" [padding]="false"
+	<d-widget title="Edit API" iconClass="fa fa-lg fa-fw fa-feed" [showCloseButton]="true" [padding]="false"
 		(close)="close()">
 		<ng-template #header>
 			<dexih-invalid-form-details [control]="formsService.currentForm" (click)="formsService.showErrors()"
@@ -9,7 +9,7 @@
 			<cancel-button [formsService]="formsService"></cancel-button>
 		</ng-template>
 
-		<dexih-widget-section title="Properties" [showExpandButton]="true">
+		<d-widget-section title="Properties" [showExpandButton]="true">
 			<form *ngIf="formsService.currentForm" [formGroup]="formsService.currentForm">
 				<fieldset>
 					<section>
@@ -83,15 +83,15 @@
 					</section>
 				</fieldset>
 			</form>
-		</dexih-widget-section>
+		</d-widget-section>
 
-		<dexih-widget-section *ngIf="formsService.currentForm"  title="Parameters" [showExpandButton]="true" [padding]="true">
+		<d-widget-section *ngIf="formsService.currentForm"  title="Parameters" [showExpandButton]="true" [padding]="true">
 			<input-parameters [showEdit]="true" [parameters]="formsService.currentForm.controls.parameters"
 				[formsService]="formsService">
 			</input-parameters>
-		</dexih-widget-section>
+		</d-widget-section>
 
-		<dexih-widget-section title="Data" [showExpandButton]="true">
+		<d-widget-section title="Data" [showExpandButton]="true">
 
 			<div class="d-flex flex-wrap pt-1" *ngIf="inputColumns && inputColumns.length > 0">
 				<span *ngFor="let column of inputColumns; let i = index" class="input-group">
@@ -111,13 +111,13 @@
 				</query-builder>
 			</section>
 
-			<dexih-table [enableMultiSelect]="false" [enableSaveCsv]="true" [columns]="columns" [data]="data">
+			<d-table [enableMultiSelect]="false" [enableSaveCsv]="true" [columns]="columns" [data]="data">
 				<ng-template #actions let-items="items">
-					<dexih-button-refresh class="mr-1" (click)="refresh()" text="Reload"></dexih-button-refresh>
+					<d-button-refresh class="mr-1" (click)="refresh()" text="Reload"></d-button-refresh>
 				</ng-template>
-			</dexih-table>
-		</dexih-widget-section>
-	</dexih-widget>
+			</d-table>
+		</d-widget-section>
+	</d-widget>
 
 	<dexih-help class="m-3" title="Connections" path="/assets/help/reference/api.md"></dexih-help>
 </div>

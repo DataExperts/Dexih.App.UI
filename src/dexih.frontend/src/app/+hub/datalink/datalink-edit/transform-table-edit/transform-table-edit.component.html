@@ -5,12 +5,12 @@
 				<h5>Transform Output Columns</h5>
 			</div>
 			<div class="col-sm-6 text-right">
-                <dexih-button-close (click)="close()"></dexih-button-close>
+                <d-button-close (click)="close()"></d-button-close>
 			</div>
 		</div>
 	</div>
 
-    <dexih-table 
+    <d-table 
         [enableMultiSelect]="true"
         [enableManualSort]="true"
         (onSortChanged)="columnSortChange($event)"
@@ -19,16 +19,16 @@
         [dataObservable]="columnData"
         >
             <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-                <dexih-button-delete (click)="deleteSelected(items)" title="Delete selected columns"></dexih-button-delete>
+                <d-button-delete (click)="deleteSelected(items)" title="Delete selected columns"></d-button-delete>
             </ng-template>
 
             <ng-template #selectedItemAction select="selectedItemAction" let-column="item">
-                <dexih-button-edit (click)="editColumn(column)" title="Edit the column"></dexih-button-edit>
+                <d-button-edit (click)="editColumn(column)" title="Edit the column"></d-button-edit>
             </ng-template>
 
             <ng-template #actions select="actionsTemplate" let-items="items">
-                <dexih-button-new (click)="deleteSelected(items)" title="Create a new column"></dexih-button-new>
+                <d-button-new (click)="deleteSelected(items)" title="Create a new column"></d-button-new>
             </ng-template>
 
-    </dexih-table>
+    </d-table>
 </div>

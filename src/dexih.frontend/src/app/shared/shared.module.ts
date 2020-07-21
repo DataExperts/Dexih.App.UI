@@ -7,12 +7,12 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { LayoutService} from './layout/layout.service';
 import { UtilsModule} from './utils/utils.module';
-import { DexihTableModule} from 'dexih-ngx-table';
+import { DTableModule} from 'ngx-d-table';
 import { DexihMessageModule } from './ui/dexihMessage';
 import { DexihFormControlsModule } from './ui/dexihFormControls';
-import { DexihComponentsModule } from 'dexih-ngx-components';
+import { DComponentsModule } from 'ngx-d-components';
 import { DexihHelpModule } from './help/dexih-help.module';
-import { NgxMdModule } from 'ngx-md';
+import { DMarkdownModule } from 'ngx-d-markdown';
 import { DexihIconsModule } from './ui/icons'
 import { QueryBuilderModule } from './ui/queryBuilder/query-builder.module';
 import { ChartBuilderModule } from './ui/charts/charts.module';
@@ -28,12 +28,12 @@ import { SeriesAnimateModule } from './ui/seriesAnimate/series-animate.module';
 
     DragDropModule,
 
-    NgxMdModule.forRoot(),
+    DMarkdownModule,
 
-    DexihTableModule,
+    DTableModule,
     DexihMessageModule,
     DexihFormControlsModule,
-    DexihComponentsModule,
+    DComponentsModule,
     DexihHelpModule,
     DexihIconsModule,
     QueryBuilderModule,
@@ -50,12 +50,12 @@ import { SeriesAnimateModule } from './ui/seriesAnimate/series-animate.module';
     CommonModule, FormsModule, RouterModule, DragDropModule,
 
     UtilsModule,
-    NgxMdModule,
+    DMarkdownModule,
 
-    DexihTableModule,
+    DTableModule,
     DexihMessageModule,
     DexihFormControlsModule,
-    DexihComponentsModule,
+    DComponentsModule,
     DexihHelpModule,
     DexihIconsModule,
     QueryBuilderModule,

@@ -1,4 +1,4 @@
-<dexih-button-dropdown buttonClass="btn btn-outline-secondary text-white" iconClass="fa fa-tasks" [pullRight]="true" [badge]="count" badgeClass="badge-light" [hideCarrot]="true" title="Tasks">
+<d-button-dropdown buttonClass="btn btn-outline-secondary text-white" iconClass="fa fa-tasks" [pullRight]="true" [badge]="count" badgeClass="badge-light" [hideCarrot]="true" title="Tasks">
     <div *ngIf="count==0">
         <h5 class="p-3">No tasks</h5>
     </div>
@@ -19,11 +19,11 @@
                         </div>
                     </div>
                 </div>
-                <dexih-button-cancel *ngIf="!item.isCompleted" [compact]="true" (click)="cancel(item)"></dexih-button-cancel>
+                <d-button-cancel *ngIf="!item.isCompleted" [compact]="true" (click)="cancel(item)"></d-button-cancel>
                 <small>Updated: {{item.lastUpdate | calendar }}</small>
             </a>
 
         </ng-template>
     </div>
 
-</dexih-button-dropdown>
+</d-button-dropdown>

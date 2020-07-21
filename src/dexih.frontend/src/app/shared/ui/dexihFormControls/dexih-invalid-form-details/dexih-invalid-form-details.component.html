@@ -1,4 +1,4 @@
-<dexih-button-dropdown 
+<d-button-dropdown 
 [iconClass]="valid ? 'fa fa-check' : 'fa fa-exclamation-circle'"
 [buttonClass]="valid ? 'btn btn-success' : 'btn btn-warning'"
 [text]= "valid ? 'Valid' : 'Warnings'" 
@@ -29,4 +29,4 @@ title="Potential errors and warnings."
 <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: controlErrors }">
 </ng-container>
 
-</dexih-button-dropdown>
+</d-button-dropdown>

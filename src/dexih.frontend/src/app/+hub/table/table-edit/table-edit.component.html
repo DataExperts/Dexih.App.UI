@@ -1,6 +1,6 @@
 
 <div class="container-fluid">
-    <dexih-widget 
+    <d-widget 
     [title]="'Edit Table ('  + formsService.currentForm?.controls?.name?.value +')'" 
     iconClass="fa fa-lg fa-fw fa-table" 
     [showCloseButton]="true"
@@ -9,10 +9,10 @@
         <ng-template #header>
             <dexih-invalid-form-details class="mr-1" [control]="formsService.currentForm" (click)="formsService.showErrors()"></dexih-invalid-form-details>
             <actions-table-button class="mr-1" [showEdit]="false" [tables]="this.formsService?.currentForm?.value ? [this.formsService?.currentForm?.value] : []" (changedTables)="changedTables($event)"></actions-table-button>
-            <dexih-button class="mr-1" *ngIf="hubCache?.canWrite && connectionReference?.connectionCategory == eConnectionCategory.File" 
+            <d-button class="mr-1" *ngIf="hubCache?.canWrite && connectionReference?.connectionCategory == eConnectionCategory.File" 
             (click)="createPaths()" title="Create the file paths (or folders)." iconClass="fa fa-folder-open" buttonClass='btn-primary'>
                 Create Paths
-            </dexih-button>
+            </d-button>
             <save-button class="mr-1" *ngIf="hubCache?.canWrite" [formsService]="formsService"></save-button>
             <cancel-button [formsService]="formsService"></cancel-button>
         </ng-template>
@@ -20,7 +20,7 @@
         <div>
         <router-outlet></router-outlet>
     </div>
-    </dexih-widget>
+    </d-widget>
 </div>
 
 

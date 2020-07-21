@@ -1,7 +1,7 @@
-<dexih-widget-section *ngIf="triggerFormService.currentForm" title="Edit Trigger" [showExpandButton]="false" >
+<d-widget-section *ngIf="triggerFormService.currentForm" title="Edit Trigger" [showExpandButton]="false" >
 	<ng-template #header>
-			<dexih-button-apply [disabled]="!triggerFormService.hasChanged" class="mr-1" (click)="applyExit()"></dexih-button-apply>
-			<dexih-button-cancel (click)="cancel()"></dexih-button-cancel>
+			<d-button-apply [disabled]="!triggerFormService.hasChanged" class="mr-1" (click)="applyExit()"></d-button-apply>
+			<d-button-cancel (click)="cancel()"></d-button-cancel>
 	</ng-template>
 	<form  [formGroup]="triggerFormService.currentForm">
 		<fieldset>
@@ -40,4 +40,4 @@
 		</div>
 		</fieldset>
 	</form>
-</dexih-widget-section>
+</d-widget-section>

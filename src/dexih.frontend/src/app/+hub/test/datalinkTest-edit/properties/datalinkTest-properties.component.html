@@ -38,18 +38,18 @@
 	</div>
 </div>
 <div class="list-group-item p-0">
-	<dexih-table [enableMultiSelect]="true" [enableManualSort]="true" sortColumn="position" [columns]="stepColumns"
+	<d-table [enableMultiSelect]="true" [enableManualSort]="true" sortColumn="position" [columns]="stepColumns"
 	 [dataObservable]="stepTableData" (rowClick)='editStep($event)'>
 		<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-			<dexih-button-delete (click)="deleteSteps(items)"></dexih-button-delete>
+			<d-button-delete (click)="deleteSteps(items)"></d-button-delete>
 		</ng-template>
 
 		<ng-template #selectedItemAction select="selectedItemAction" let-item="item">
-			<dexih-button-edit (click)="editStep(item)"></dexih-button-edit>
+			<d-button-edit (click)="editStep(item)"></d-button-edit>
 		</ng-template>
 
 		<ng-template #actions select="actionsTemplate" let-items="items">
-			<dexih-button-new class="mr-1" (click)="newStep()" title="Create a new step"></dexih-button-new>
+			<d-button-new class="mr-1" (click)="newStep()" title="Create a new step"></d-button-new>
 		</ng-template>
-	</dexih-table>
+	</d-table>
 </div>

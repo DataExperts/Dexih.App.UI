@@ -1,18 +1,18 @@
 <div *ngIf="datalinkTransformForm" cdkDropList #cdkDropList="cdkDropList">
     <span *ngFor="let table of inputTables; let tableIndex = index">
-        <dexih-widget-section *ngIf="table.dexihDatalinkColumns.length > 0" [title]="table.name" [padding]="false" [showExpandButton]="true">
+        <d-widget-section *ngIf="table.dexihDatalinkColumns.length > 0" [title]="table.name" [padding]="false" [showExpandButton]="true">
             <div class="list-group">
                 <input-column
                     *ngFor="let column of table.dexihDatalinkColumns | fieldSort : 'position' | isValidFilter "
                     [datalinkTransformForm]='datalinkTransformForm' [column]='column'>
                 </input-column>
             </div>
-        </dexih-widget-section>
+        </d-widget-section>
     </span>
-    <dexih-widget-section *ngFor="let columnGroup of columnGroups" [title]="columnGroup.group" [padding]="false"  [showExpandButton]="true" >
+    <d-widget-section *ngFor="let columnGroup of columnGroups" [title]="columnGroup.group" [padding]="false"  [showExpandButton]="true" >
         <div *ngFor="let column of columnGroup.columns | fieldSort : 'position' | isValidFilter; let i = index">
             <input-column [datalinkTransformForm]='datalinkTransformForm' [column]='column'>
             </input-column>
         </div>
-    </dexih-widget-section>
+    </d-widget-section>
 </div>

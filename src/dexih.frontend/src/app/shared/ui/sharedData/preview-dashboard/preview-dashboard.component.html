@@ -1,12 +1,12 @@
 <div class="container-fluid">
     <dexih-message #DexihMessage></dexih-message>
 
-    <dexih-widget [title]="'Preview ' + name" iconClass="fa fa-lg fa-fw fa-table" [showCloseButton]="true"
+    <d-widget [title]="'Preview ' + name" iconClass="fa fa-lg fa-fw fa-table" [showCloseButton]="true"
         (close)="close()">
 
         <ng-template #header>
-            <dexih-button-refresh (click)="refresh()" text="Reload"></dexih-button-refresh>
-            <dexih-button-edit class="ml-1"  (click)="edit()"></dexih-button-edit>
+            <d-button-refresh (click)="refresh()" text="Reload"></d-button-refresh>
+            <d-button-edit class="ml-1"  (click)="edit()"></d-button-edit>
         </ng-template>
 
         <div *ngIf="parameters" class="m-3">
@@ -27,5 +27,5 @@
                 </ng-template>
             </div>
         </div>
-    </dexih-widget>
+    </d-widget>
 </div>

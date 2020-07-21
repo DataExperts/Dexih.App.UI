@@ -1,9 +1,9 @@
 
-<dexih-table [enableMultiSelect]="false" [enableSaveCsv]="true" [csvFileName]="csvFileName" [columns]="columns"
+<d-table [enableMultiSelect]="false" [enableSaveCsv]="true" [csvFileName]="csvFileName" [columns]="columns"
     [data]="data" [hideTable]="view !== 'table'">
 
     <ng-template #actions let-items="items">
-        <dexih-button-refresh class="mr-1" (click)="refresh()" text="Reload"></dexih-button-refresh>
+        <d-button-refresh class="mr-1" (click)="refresh()" text="Reload"></d-button-refresh>
         <download-button class="ml-1" (download)="download($event)"></download-button>
 
         <div class="btn-group btn-group-toggle ml-1" data-toggle="buttons" title="Table">
@@ -21,7 +21,7 @@
             </label>
         </div>
 
-        <dexih-button-save *ngIf="allowViewSave" class="ml-1" (click)="save()"></dexih-button-save>
+        <d-button-save *ngIf="allowViewSave" class="ml-1" (click)="save()"></d-button-save>
     </ng-template>
 
     <ng-template #tableHeader>
@@ -36,7 +36,7 @@
     </div>
     </ng-template>
 
-</dexih-table>
+</d-table>
 
 <div [ngStyle]="{'display': view === 'chart' ? 'block' : 'none' }" class="mt-1">
     <chart-builder [columns]="columns" [data]="data" [config]="chartConfig"></chart-builder>
