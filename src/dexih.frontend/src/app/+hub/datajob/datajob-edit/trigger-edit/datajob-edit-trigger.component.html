@@ -13,7 +13,7 @@
 			</div>
 			<div class="form-row">
 				<section class="form-group col-md-3">
-					<form-time label="Interval" formControlName="intervalTime" [errors]="triggerFormService.formErrors.intervalTime"
+					<form-time label="Interval" [disableNative]="true" formControlName="intervalTime" [errors]="triggerFormService.formErrors.intervalTime"
 					 note="The intra-day interval which the trigger restarts.  Leave blank for once a day jobs.">
 					</form-time>
 				</section>

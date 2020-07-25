@@ -335,16 +335,16 @@ namespace dexih.api
 		   
 		   await next();
 
-		            if (context.Response.StatusCode == 404)
+		            switch (context.Response.StatusCode)
 		            {
-			            _logger.LogTrace("passing to client");
-			            context.Request.Path = "/";
-			            await next();
-		            }
-
-		            if (context.Response.StatusCode == 400)
-		            {
-			            _logger.LogError($"{context.Request.Path} had status 400 error");
+			            case 404:
+				            _logger.LogTrace("passing to client");
+				            context.Request.Path = "/";
+				            await next();
+				            break;
+			            case 400:
+				            _logger.LogError($"{context.Request.Path} had status 400 error");
+				            break;
 		            }
 	            }
 	            else
