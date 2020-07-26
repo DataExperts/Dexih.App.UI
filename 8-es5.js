@@ -7149,6 +7149,12 @@
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
       "./node_modules/@angular/common/fesm2015/common.js");
+      /* harmony import */
+
+
+      var ngx_d_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! ngx-d-components */
+      "./node_modules/ngx-d-components/__ivy_ngcc__/fesm2015/ngx-d-components.js");
 
       function TaskStatusComponent_div_0_Template(rf, ctx) {
         if (rf & 1) {
@@ -7156,15 +7162,15 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "dexih-progressbar", 2);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "d-progressbar", 2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("cancelled", function TaskStatusComponent_div_0_Template_dexih_progressbar_cancelled_1_listener() {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("cancelled", function TaskStatusComponent_div_0_Template_d_progressbar_cancelled_1_listener() {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r2);
 
             var ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
             return ctx_r1.cancelled();
-          })("click", function TaskStatusComponent_div_0_Template_dexih_progressbar_click_1_listener() {
+          })("click", function TaskStatusComponent_div_0_Template_d_progressbar_click_1_listener() {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r2);
 
             var ctx_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
@@ -7317,7 +7323,7 @@
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.currentStatus);
           }
         },
-        directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"]],
+        directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"], ngx_d_components__WEBPACK_IMPORTED_MODULE_4__["DProgressbarComponent"]],
         encapsulation: 2
       });
       /*@__PURE__*/

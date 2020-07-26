@@ -30400,19 +30400,25 @@
       /* harmony import */
 
 
-      var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      var ngx_d_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      /*! ngx-d-components */
+      "./node_modules/ngx-d-components/__ivy_ngcc__/fesm2015/ngx-d-components.js");
+      /* harmony import */
+
+
+      var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/router */
       "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
-      var _shared_utils_countdown_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      var _shared_utils_countdown_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! ../../../shared/utils/countdown.component */
       "./src/app/shared/utils/countdown.component.ts");
       /* harmony import */
 
 
-      var _shared_utils_calendar_pipe__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+      var _shared_utils_calendar_pipe__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! ../../../shared/utils/calendar.pipe */
       "./src/app/shared/utils/calendar.pipe.ts");
 
@@ -30424,7 +30430,7 @@
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "dexih-progressbar", 3);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "d-progressbar", 3);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2);
 
@@ -30446,13 +30452,13 @@
         }
       }
 
-      function DatalinkStatusComponent_div_1_dexih_progressbar_1_Template(rf, ctx) {
+      function DatalinkStatusComponent_div_1_d_progressbar_1_Template(rf, ctx) {
         if (rf & 1) {
           var _r5 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "dexih-progressbar", 5);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-progressbar", 5);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("cancelled", function DatalinkStatusComponent_div_1_dexih_progressbar_1_Template_dexih_progressbar_cancelled_0_listener() {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("cancelled", function DatalinkStatusComponent_div_1_d_progressbar_1_Template_d_progressbar_cancelled_0_listener() {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r5);
 
             var ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
@@ -30492,7 +30498,7 @@
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, DatalinkStatusComponent_div_1_dexih_progressbar_1_Template, 6, 7, "dexih-progressbar", 4);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, DatalinkStatusComponent_div_1_d_progressbar_1_Template, 6, 7, "d-progressbar", 4);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
@@ -30512,15 +30518,15 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 8);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "dexih-progressbar", 9);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "d-progressbar", 9);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("cancelled", function DatalinkStatusComponent_div_2_Template_dexih_progressbar_cancelled_1_listener() {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("cancelled", function DatalinkStatusComponent_div_2_Template_d_progressbar_cancelled_1_listener() {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r7);
 
             var ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
             return ctx_r6.cancelled();
-          })("progressClick", function DatalinkStatusComponent_div_2_Template_dexih_progressbar_progressClick_1_listener() {
+          })("progressClick", function DatalinkStatusComponent_div_2_Template_d_progressbar_progressClick_1_listener() {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r7);
 
             var ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
@@ -30840,8 +30846,8 @@
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", (ctx.currentStatus == null ? null : ctx.currentStatus.writerResult) && ctx.currentStatus.writerResult.runStatus != ctx.eRunStatus.Scheduled);
           }
         },
-        directives: [_angular_common__WEBPACK_IMPORTED_MODULE_7__["NgIf"], _angular_router__WEBPACK_IMPORTED_MODULE_8__["RouterLink"], _shared_utils_countdown_component__WEBPACK_IMPORTED_MODULE_9__["CountdownComponent"]],
-        pipes: [_shared_utils_calendar_pipe__WEBPACK_IMPORTED_MODULE_10__["CalendarPipe"]],
+        directives: [_angular_common__WEBPACK_IMPORTED_MODULE_7__["NgIf"], ngx_d_components__WEBPACK_IMPORTED_MODULE_8__["DProgressbarComponent"], _angular_router__WEBPACK_IMPORTED_MODULE_9__["RouterLink"], _shared_utils_countdown_component__WEBPACK_IMPORTED_MODULE_10__["CountdownComponent"]],
+        pipes: [_shared_utils_calendar_pipe__WEBPACK_IMPORTED_MODULE_11__["CalendarPipe"]],
         encapsulation: 2
       });
       /*@__PURE__*/
