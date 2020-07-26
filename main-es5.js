@@ -791,19 +791,19 @@
 
       var _angular_common_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/common/http */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+      "./node_modules/@angular/common/fesm2015/http.js");
       /* harmony import */
 
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -849,7 +849,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -3690,13 +3690,13 @@
 
       var _angular_common_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/common/http */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+      "./node_modules/@angular/common/fesm2015/http.js");
       /* harmony import */
 
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -3790,7 +3790,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -3814,7 +3814,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -4094,13 +4094,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -4130,7 +4130,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -4627,13 +4627,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -4663,7 +4663,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       function ActionsColumnValidationButtonComponent_d_button_dropdown_1_li_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -4867,13 +4867,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -4903,7 +4903,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -5897,13 +5897,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -5927,7 +5927,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -6294,7 +6294,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -6306,7 +6306,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -6318,7 +6318,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -6842,13 +6842,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -6872,7 +6872,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -7834,13 +7834,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -7858,7 +7858,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -8428,13 +8428,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -8464,7 +8464,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       function ActionsFileFormatButtonComponent_d_button_dropdown_1_li_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -8668,13 +8668,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -8817,13 +8817,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -8853,7 +8853,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -9901,13 +9901,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -9931,7 +9931,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -10298,7 +10298,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -10514,7 +10514,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -10613,7 +10613,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -10625,13 +10625,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var _c0 = function _c0(a0, a2) {
         return [a0, "columnValidation-edit", a2];
@@ -10745,7 +10745,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -10757,13 +10757,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var _c0 = function _c0(a0, a2) {
         return [a0, "connection-edit", a2];
@@ -10877,7 +10877,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -10889,13 +10889,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var _c0 = function _c0(a0, a2) {
         return [a0, "customFunction-edit", a2];
@@ -11009,7 +11009,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -11021,13 +11021,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var _c0 = function _c0(a0, a3) {
         return [a0, "datalink-edit", "edit", a3];
@@ -11141,7 +11141,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -11177,13 +11177,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
         function adopt(value) {
@@ -11847,7 +11847,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -11865,7 +11865,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var _c0 = function _c0(a1) {
         return ["connection-new", a1];
@@ -12001,7 +12001,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -12013,7 +12013,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var _c0 = function _c0() {
         return ["datalink-edit", "new"];
@@ -12095,7 +12095,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -12107,7 +12107,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -12119,7 +12119,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var _c0 = function _c0(a1) {
         return ["table-new", a1];
@@ -12274,7 +12274,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -12292,7 +12292,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -12508,7 +12508,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -12520,13 +12520,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var _c0 = function _c0(a0, a2) {
         return [a0, "table-edit", a2];
@@ -12640,7 +12640,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -12658,7 +12658,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -12670,7 +12670,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
 
       var _c0 = function _c0(a0) {
         return {
@@ -12922,7 +12922,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -12946,7 +12946,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -12958,7 +12958,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
 
       var _c0 = function _c0(a0) {
         return {
@@ -13269,7 +13269,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -13281,13 +13281,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var _c0 = function _c0(a0, a2) {
         return [a0, "view-edit", a2];
@@ -13401,13 +13401,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -13455,7 +13455,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -13485,7 +13485,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
 
       function FileFormatEditComponent_ng_template_2_save_button_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -13991,7 +13991,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -14009,7 +14009,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -14045,7 +14045,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -14432,13 +14432,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -14474,7 +14474,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -14934,13 +14934,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -22417,7 +22417,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -22441,7 +22441,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -22471,7 +22471,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var HubModule = /*#__PURE__*/function () {
         function HubModule() {
@@ -23294,7 +23294,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -23370,7 +23370,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -26160,7 +26160,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -26172,7 +26172,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -26319,7 +26319,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
 
       var ItemEditGuard = /*#__PURE__*/function () {
         function ItemEditGuard() {
@@ -26408,7 +26408,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -26450,13 +26450,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -27079,7 +27079,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -27103,7 +27103,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -27299,13 +27299,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -27359,7 +27359,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -27413,7 +27413,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -28627,7 +28627,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -28645,7 +28645,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -29003,7 +29003,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -29033,7 +29033,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -29417,7 +29417,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -29429,13 +29429,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -29599,7 +29599,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -29617,7 +29617,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -29767,7 +29767,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -29785,13 +29785,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -30006,7 +30006,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -30018,13 +30018,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -30174,7 +30174,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -30186,13 +30186,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -30354,7 +30354,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -30396,13 +30396,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -30908,7 +30908,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -30920,13 +30920,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -31090,7 +31090,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -31102,13 +31102,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -31270,7 +31270,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -31288,7 +31288,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -31442,7 +31442,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -31466,7 +31466,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -31478,7 +31478,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
 
       function InputParametersViewComponent_div_0_span_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -31766,13 +31766,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -31808,7 +31808,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -32323,7 +32323,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -32341,7 +32341,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -32491,7 +32491,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -32539,7 +32539,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -32569,7 +32569,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -33215,7 +33215,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -33245,13 +33245,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -33444,7 +33444,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -33462,13 +33462,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -33640,7 +33640,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -33658,7 +33658,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -33820,7 +33820,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -34120,7 +34120,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -34132,7 +34132,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -34253,7 +34253,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -34265,13 +34265,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -34421,7 +34421,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -34487,7 +34487,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -34565,157 +34565,157 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_cdk_scrolling__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(
       /*! @angular/cdk/scrolling */
-      "./node_modules/@angular/cdk/__ivy_ngcc__/fesm2015/scrolling.js");
+      "./node_modules/@angular/cdk/fesm2015/scrolling.js");
       /* harmony import */
 
 
       var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(
       /*! @angular/cdk/drag-drop */
-      "./node_modules/@angular/cdk/__ivy_ngcc__/fesm2015/drag-drop.js");
+      "./node_modules/@angular/cdk/fesm2015/drag-drop.js");
       /* harmony import */
 
 
-      var _shared_utils_time_directive__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(
-      /*! ../../shared/utils/time.directive */
-      "./src/app/shared/utils/time.directive.ts");
-      /* harmony import */
-
-
-      var _shared_utils_countdown_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(
-      /*! ../../shared/utils/countdown.component */
-      "./src/app/shared/utils/countdown.component.ts");
-      /* harmony import */
-
-
-      var _shared_utils_dropzone__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(
-      /*! ../../shared/utils/dropzone */
-      "./src/app/shared/utils/dropzone.ts");
-      /* harmony import */
-
-
-      var _shared_utils_dragzone__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(
-      /*! ../../shared/utils/dragzone */
-      "./src/app/shared/utils/dragzone.ts");
-      /* harmony import */
-
-
-      var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(
-      /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
-      /* harmony import */
-
-
-      var ngx_d_table__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(
-      /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
-      /* harmony import */
-
-
-      var _shared_ui_dexihMessage_dexih_message_component__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(
-      /*! ../../shared/ui/dexihMessage/dexih-message.component */
-      "./src/app/shared/ui/dexihMessage/dexih-message.component.ts");
-      /* harmony import */
-
-
-      var _shared_ui_dexihFormControls_dexih_invalid_form_icon_dexih_invalid_form_icon_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(
-      /*! ../../shared/ui/dexihFormControls/dexih-invalid-form-icon/dexih-invalid-form-icon.component */
-      "./src/app/shared/ui/dexihFormControls/dexih-invalid-form-icon/dexih-invalid-form-icon.component.ts");
-      /* harmony import */
-
-
-      var _shared_ui_dexihFormControls_dexih_invalid_form_details_dexih_invalid_form_details_component__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(
-      /*! ../../shared/ui/dexihFormControls/dexih-invalid-form-details/dexih-invalid-form-details.component */
-      "./src/app/shared/ui/dexihFormControls/dexih-invalid-form-details/dexih-invalid-form-details.component.ts");
-      /* harmony import */
-
-
-      var ngx_d_components__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(
+      var ngx_d_components__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(
       /*! ngx-d-components */
       "./node_modules/ngx-d-components/__ivy_ngcc__/fesm2015/ngx-d-components.js");
       /* harmony import */
 
 
-      var _shared_help_dexih_help_component__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(
+      var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(
+      /*! ngx-d-markdown */
+      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
+      /* harmony import */
+
+
+      var ngx_d_table__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(
+      /*! ngx-d-table */
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      /* harmony import */
+
+
+      var _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(
+      /*! @swimlane/ngx-charts */
+      "./node_modules/@swimlane/ngx-charts/fesm2015/swimlane-ngx-charts.js");
+      /* harmony import */
+
+
+      var angular_gridster2__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(
+      /*! angular-gridster2 */
+      "./node_modules/angular-gridster2/fesm2015/angular-gridster2.js");
+      /* harmony import */
+
+
+      var _shared_utils_time_directive__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(
+      /*! ../../shared/utils/time.directive */
+      "./src/app/shared/utils/time.directive.ts");
+      /* harmony import */
+
+
+      var _shared_utils_countdown_component__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(
+      /*! ../../shared/utils/countdown.component */
+      "./src/app/shared/utils/countdown.component.ts");
+      /* harmony import */
+
+
+      var _shared_utils_dropzone__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(
+      /*! ../../shared/utils/dropzone */
+      "./src/app/shared/utils/dropzone.ts");
+      /* harmony import */
+
+
+      var _shared_utils_dragzone__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(
+      /*! ../../shared/utils/dragzone */
+      "./src/app/shared/utils/dragzone.ts");
+      /* harmony import */
+
+
+      var _shared_ui_dexihMessage_dexih_message_component__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(
+      /*! ../../shared/ui/dexihMessage/dexih-message.component */
+      "./src/app/shared/ui/dexihMessage/dexih-message.component.ts");
+      /* harmony import */
+
+
+      var _shared_ui_dexihFormControls_dexih_invalid_form_icon_dexih_invalid_form_icon_component__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(
+      /*! ../../shared/ui/dexihFormControls/dexih-invalid-form-icon/dexih-invalid-form-icon.component */
+      "./src/app/shared/ui/dexihFormControls/dexih-invalid-form-icon/dexih-invalid-form-icon.component.ts");
+      /* harmony import */
+
+
+      var _shared_ui_dexihFormControls_dexih_invalid_form_details_dexih_invalid_form_details_component__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(
+      /*! ../../shared/ui/dexihFormControls/dexih-invalid-form-details/dexih-invalid-form-details.component */
+      "./src/app/shared/ui/dexihFormControls/dexih-invalid-form-details/dexih-invalid-form-details.component.ts");
+      /* harmony import */
+
+
+      var _shared_help_dexih_help_component__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(
       /*! ../../shared/help/dexih-help.component */
       "./src/app/shared/help/dexih-help.component.ts");
       /* harmony import */
 
 
-      var _shared_ui_icons_encryption_status_encryption_status_component__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(
+      var _shared_ui_icons_encryption_status_encryption_status_component__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(
       /*! ../../shared/ui/icons/encryption-status/encryption-status.component */
       "./src/app/shared/ui/icons/encryption-status/encryption-status.component.ts");
       /* harmony import */
 
 
-      var _shared_ui_icons_privacy_status_privacy_status_component__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(
+      var _shared_ui_icons_privacy_status_privacy_status_component__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(
       /*! ../../shared/ui/icons/privacy-status/privacy-status.component */
       "./src/app/shared/ui/icons/privacy-status/privacy-status.component.ts");
       /* harmony import */
 
 
-      var _shared_ui_icons_download_button_download_button_component__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(
+      var _shared_ui_icons_download_button_download_button_component__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(
       /*! ../../shared/ui/icons/download-button/download-button.component */
       "./src/app/shared/ui/icons/download-button/download-button.component.ts");
       /* harmony import */
 
 
-      var _shared_ui_icons_print_print_button_component__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(
+      var _shared_ui_icons_print_print_button_component__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(
       /*! ../../shared/ui/icons/print/print-button.component */
       "./src/app/shared/ui/icons/print/print-button.component.ts");
       /* harmony import */
 
 
-      var _shared_ui_queryBuilder_query_builder_component__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(
+      var _shared_ui_queryBuilder_query_builder_component__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(
       /*! ../../shared/ui/queryBuilder/query-builder.component */
       "./src/app/shared/ui/queryBuilder/query-builder.component.ts");
       /* harmony import */
 
 
-      var _shared_ui_charts_chartBuilder_chart_builder_component__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(
+      var _shared_ui_charts_chartBuilder_chart_builder_component__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(
       /*! ../../shared/ui/charts/chartBuilder/chart-builder.component */
       "./src/app/shared/ui/charts/chartBuilder/chart-builder.component.ts");
       /* harmony import */
 
 
-      var _shared_ui_charts_chartView_chart_view_component__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(
+      var _shared_ui_charts_chartView_chart_view_component__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(
       /*! ../../shared/ui/charts/chartView/chart-view.component */
       "./src/app/shared/ui/charts/chartView/chart-view.component.ts");
       /* harmony import */
 
 
-      var _shared_ui_charts_googleMap_google_map_component__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(
+      var _shared_ui_charts_googleMap_google_map_component__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(
       /*! ../../shared/ui/charts/googleMap/google-map.component */
       "./src/app/shared/ui/charts/googleMap/google-map.component.ts");
       /* harmony import */
 
 
-      var _shared_ui_charts_comboChart_combo_chart_component__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(
+      var _shared_ui_charts_comboChart_combo_chart_component__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(
       /*! ../../shared/ui/charts/comboChart/combo-chart.component */
       "./src/app/shared/ui/charts/comboChart/combo-chart.component.ts");
-      /* harmony import */
-
-
-      var _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(
-      /*! @swimlane/ngx-charts */
-      "./node_modules/@swimlane/ngx-charts/__ivy_ngcc__/fesm2015/swimlane-ngx-charts.js");
-      /* harmony import */
-
-
-      var angular_gridster2__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(
-      /*! angular-gridster2 */
-      "./node_modules/angular-gridster2/fesm2015/angular-gridster2.js");
       /* harmony import */
 
 
@@ -34970,7 +34970,7 @@
         }], null, null);
       })();
 
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetComponentScope"](_transform_properties_transform_properties_item_component__WEBPACK_IMPORTED_MODULE_17__["TransformPropertiesItemComponent"], [_angular_common__WEBPACK_IMPORTED_MODULE_24__["NgClass"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["NgComponentOutlet"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["NgForOf"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["NgIf"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["NgTemplateOutlet"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["NgStyle"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["NgSwitch"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["NgSwitchCase"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["NgSwitchDefault"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["NgPlural"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["NgPluralCase"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["NgSelectOption"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["ɵangular_packages_forms_forms_x"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["NumberValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["RangeValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["CheckboxControlValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["SelectControlValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["SelectMultipleControlValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["RadioControlValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["RequiredValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["MinLengthValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["MaxLengthValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["PatternValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["CheckboxRequiredValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["EmailValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["NgModel"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["NgModelGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["NgForm"], _angular_router__WEBPACK_IMPORTED_MODULE_25__["RouterOutlet"], _angular_router__WEBPACK_IMPORTED_MODULE_25__["RouterLink"], _angular_router__WEBPACK_IMPORTED_MODULE_25__["RouterLinkWithHref"], _angular_router__WEBPACK_IMPORTED_MODULE_25__["RouterLinkActive"], _angular_router__WEBPACK_IMPORTED_MODULE_25__["ɵangular_packages_router_router_l"], _angular_cdk_scrolling__WEBPACK_IMPORTED_MODULE_26__["CdkScrollable"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_27__["CdkDropList"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_27__["CdkDropListGroup"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_27__["CdkDrag"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_27__["CdkDragHandle"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_27__["CdkDragPreview"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_27__["CdkDragPlaceholder"], _shared_utils_time_directive__WEBPACK_IMPORTED_MODULE_28__["TimeDirective"], _shared_utils_countdown_component__WEBPACK_IMPORTED_MODULE_29__["CountdownComponent"], _shared_utils_dropzone__WEBPACK_IMPORTED_MODULE_30__["DropZoneDirective"], _shared_utils_dragzone__WEBPACK_IMPORTED_MODULE_31__["DragZoneDirective"], ngx_d_markdown__WEBPACK_IMPORTED_MODULE_32__["DMarkdownComponent"], ngx_d_table__WEBPACK_IMPORTED_MODULE_33__["DTableComponent"], _shared_ui_dexihMessage_dexih_message_component__WEBPACK_IMPORTED_MODULE_34__["DexihMessageComponent"], _shared_ui_dexihFormControls_dexih_invalid_form_icon_dexih_invalid_form_icon_component__WEBPACK_IMPORTED_MODULE_35__["DexihInvalidFormIconComponent"], _shared_ui_dexihFormControls_dexih_invalid_form_details_dexih_invalid_form_details_component__WEBPACK_IMPORTED_MODULE_36__["DexihInvalidFormDetailsComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DWidgetComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DWidgetGroupComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DWidgetColumnsComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DWidgetDeckComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DWidgetVerticalComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["ɵa"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DButtonComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DButtonCancelComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DButtonApplyComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DButtonNewComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DButtonDeleteComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DButtonSaveComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DButtonSaveLocalComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DButtonEditComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DButtonPreviewComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DButtonViewComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DButtonExportComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DButtonDownloadComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DButtonRefreshComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DButtonDropDownComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DButtonCloseComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DButtonOpenComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DButtonShareComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DButtonPrivateComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DButtonMoreComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DButtonSplitDropDownComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DButtonValidateComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DButtonHistoryComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DButtonLinkComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DButtonChartComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DButtonCollapsibleComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["ɵb"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DFormInputComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DFormDateComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DFormTimeComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DFormTextAreaComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DFormSelectComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DFormCheckboxComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DFormDaysOfWeekComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DFormTagsComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DFormTagsDropdownComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DProgressbarComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DToastComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DToastItemComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DModalComponent"], _shared_help_dexih_help_component__WEBPACK_IMPORTED_MODULE_38__["DexihHelpComponent"], _shared_ui_icons_encryption_status_encryption_status_component__WEBPACK_IMPORTED_MODULE_39__["EncryptionStatusIconComponent"], _shared_ui_icons_privacy_status_privacy_status_component__WEBPACK_IMPORTED_MODULE_40__["PrivacyStatusButtonComponent"], _shared_ui_icons_download_button_download_button_component__WEBPACK_IMPORTED_MODULE_41__["DownloadButtonComponent"], _shared_ui_icons_print_print_button_component__WEBPACK_IMPORTED_MODULE_42__["PrintButtonComponent"], _shared_ui_queryBuilder_query_builder_component__WEBPACK_IMPORTED_MODULE_43__["QueryBuilderComponent"], _shared_ui_charts_chartBuilder_chart_builder_component__WEBPACK_IMPORTED_MODULE_44__["ChartBuilderComponent"], _shared_ui_charts_chartView_chart_view_component__WEBPACK_IMPORTED_MODULE_45__["ChartViewComponent"], _shared_ui_charts_googleMap_google_map_component__WEBPACK_IMPORTED_MODULE_46__["GoogleMapComponent"], _shared_ui_charts_comboChart_combo_chart_component__WEBPACK_IMPORTED_MODULE_47__["ComboChartComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["AxisLabelComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["XAxisComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["XAxisTicksComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["YAxisComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["YAxisTicksComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["TooltipContentComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["TooltipDirective"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["AreaComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["BaseChartComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["CountUpDirective"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["TooltipArea"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["ChartComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["LegendComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["LegendEntryComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["ScaleLegendComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["CircleComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["CircleSeriesComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["GridPanelComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["GridPanelSeriesComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["SvgLinearGradientComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["SvgRadialGradientComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["Timeline"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["AdvancedLegendComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["VisibilityObserver"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["AreaChartComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["AreaChartNormalizedComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["AreaChartStackedComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["AreaSeriesComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["BarComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["BarHorizontalComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["BarHorizontal2DComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["BarHorizontalNormalizedComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["BarHorizontalStackedComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["BarVerticalComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["BarVertical2DComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["BarVerticalNormalizedComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["BarVerticalStackedComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["BarLabelComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["SeriesHorizontal"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["SeriesVerticalComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["BubbleChartComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["BubbleSeriesComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["HeatMapCellComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["HeatCellSeriesComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["HeatMapComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["LineComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["LineChartComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["LineSeriesComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["PolarChartComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["PolarSeriesComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["CardComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["CardSeriesComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["NumberCardComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["AdvancedPieChartComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["PieLabelComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["PieArcComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["PieChartComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["PieGridComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["PieGridSeriesComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["PieSeriesComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["TreeMapCellComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["TreeMapCellSeriesComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["TreeMapComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["LinearGaugeComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["GaugeComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["GaugeArcComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_48__["GaugeAxisComponent"], angular_gridster2__WEBPACK_IMPORTED_MODULE_49__["GridsterComponent"], angular_gridster2__WEBPACK_IMPORTED_MODULE_49__["GridsterItemComponent"], _shared_ui_supportOptions_support_options_component__WEBPACK_IMPORTED_MODULE_50__["SupportOptionsComponent"], _shared_ui_seriesAnimate_series_animate_component__WEBPACK_IMPORTED_MODULE_51__["SeriesAnimateComponent"], _buttons_cancel_button_cancel_button_component__WEBPACK_IMPORTED_MODULE_52__["CancelButtonComponent"], _buttons_save_button_save_button_component__WEBPACK_IMPORTED_MODULE_53__["SaveButtonComponent"], _buttons_new_datalink_button_new_datalink_button_component__WEBPACK_IMPORTED_MODULE_54__["NewDatalinkButtonComponent"], _buttons_new_connection_button_new_connection_button_component__WEBPACK_IMPORTED_MODULE_55__["NewConnectionButtonComponent"], _buttons_new_table_button_new_table_button_component__WEBPACK_IMPORTED_MODULE_56__["NewTableButtonComponent"], _buttons_actions_datajob_button_actions_datajob_button_component__WEBPACK_IMPORTED_MODULE_57__["ActionsDatajobButtonComponent"], _buttons_actions_datalink_button_actions_datalink_button_component__WEBPACK_IMPORTED_MODULE_58__["ActionsDatalinkButtonComponent"], _buttons_actions_connection_button_actions_connection_button_component__WEBPACK_IMPORTED_MODULE_59__["ActionsConnectionButtonComponent"], _buttons_actions_table_button_actions_table_button_component__WEBPACK_IMPORTED_MODULE_60__["ActionsTableButtonComponent"], _buttons_actions_fileFormat_button_actions_fileFormat_button_component__WEBPACK_IMPORTED_MODULE_61__["ActionsFileFormatButtonComponent"], _buttons_actions_columnValidation_button_actions_columnValidation_button_component__WEBPACK_IMPORTED_MODULE_62__["ActionsColumnValidationButtonComponent"], _buttons_actions_datalinkTest_button_actions_datalinkTest_button_component__WEBPACK_IMPORTED_MODULE_63__["ActionsDatalinkTestButtonComponent"], _buttons_actions_view_button_actions_view_button_component__WEBPACK_IMPORTED_MODULE_64__["ActionsViewButtonComponent"], _buttons_actions_api_button_actions_api_button_component__WEBPACK_IMPORTED_MODULE_65__["ActionsApiButtonComponent"], _buttons_actions_dashboard_button_actions_dashboard_button_component__WEBPACK_IMPORTED_MODULE_66__["ActionsDashboardButtonComponent"], _buttons_actions_listOfValues_button_actions_listOfValues_button_component__WEBPACK_IMPORTED_MODULE_67__["ActionsListOfValuesButtonComponent"], _buttons_tags_update_button_tags_update_button_component__WEBPACK_IMPORTED_MODULE_68__["TagsUpdateButtonComponent"], _buttons_tags_filter_button_tags_filter_button_component__WEBPACK_IMPORTED_MODULE_69__["TagsFilterButtonComponent"], _buttons_dependent_items_dependent_items_button_component__WEBPACK_IMPORTED_MODULE_70__["DependentItemsButtonComponent"], _buttons_connection_edit_button_connection_edit_button_component__WEBPACK_IMPORTED_MODULE_71__["ConnectionEditButtonComponent"], _buttons_table_edit_button_table_edit_button_component__WEBPACK_IMPORTED_MODULE_72__["TableEditButtonComponent"], _buttons_datalink_edit_button_datalink_edit_button_component__WEBPACK_IMPORTED_MODULE_73__["DatalinkEditButtonComponent"], _buttons_view_edit_button_view_edit_button_component__WEBPACK_IMPORTED_MODULE_74__["ViewEditButtonComponent"], _buttons_customFunction_edit_button_customFunction_edit_button_component__WEBPACK_IMPORTED_MODULE_75__["CustomFunctionEditButtonComponent"], _buttons_columnValidation_edit_button_columnValidation_edit_button_component__WEBPACK_IMPORTED_MODULE_76__["ColumnValidationEditButtonComponent"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["FormControlDirective"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["FormGroupDirective"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["FormControlName"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["FormGroupName"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["FormArrayName"], _datalink_status_datalink_status_component__WEBPACK_IMPORTED_MODULE_3__["DatalinkStatusComponent"], _columnValidation_view_columnValidation_view_component__WEBPACK_IMPORTED_MODULE_4__["ColumnValidationViewComponent"], _connection_view_connection_view_component__WEBPACK_IMPORTED_MODULE_5__["ConnectionViewComponent"], _datalink_view_datalink_view_component__WEBPACK_IMPORTED_MODULE_7__["DatalinkViewComponent"], _datajob_view_datajob_view_component__WEBPACK_IMPORTED_MODULE_6__["DatajobViewComponent"], _fileFormat_view_fileFormat_view_component__WEBPACK_IMPORTED_MODULE_8__["FileFormatViewComponent"], _table_view_table_view_component__WEBPACK_IMPORTED_MODULE_9__["TableViewComponent"], _table_column_view_table_column_view_component__WEBPACK_IMPORTED_MODULE_10__["TableColumnViewComponent"], _view_view_view_view_component__WEBPACK_IMPORTED_MODULE_12__["ViewViewComponent"], _api_view_api_view_component__WEBPACK_IMPORTED_MODULE_13__["ApiViewComponent"], _api_status_api_status_component__WEBPACK_IMPORTED_MODULE_14__["ApiStatusComponent"], _dashboard_view_dashboard_view_component__WEBPACK_IMPORTED_MODULE_21__["DashboardViewComponent"], _remoteAgent_view_remoteAgent_view_component__WEBPACK_IMPORTED_MODULE_15__["RemoteAgentViewComponent"], _transform_properties_transform_properties_component__WEBPACK_IMPORTED_MODULE_16__["TransformPropertiesComponent"], _transform_properties_transform_properties_item_component__WEBPACK_IMPORTED_MODULE_17__["TransformPropertiesItemComponent"], _preview_data_preview_data_component__WEBPACK_IMPORTED_MODULE_18__["PreviewDataComponent"], _input_parameters_input_parameters_component__WEBPACK_IMPORTED_MODULE_19__["InputParametersComponent"], _input_parameters_view_input_parameters_view_component__WEBPACK_IMPORTED_MODULE_20__["InputParametersViewComponent"], _listOfValues_view_listOfValues_view_component__WEBPACK_IMPORTED_MODULE_22__["ListOfValuesViewComponent"], _datalinkTest_view_datalinkTest_view_component__WEBPACK_IMPORTED_MODULE_23__["DatalinkTestViewComponent"]], [_angular_common__WEBPACK_IMPORTED_MODULE_24__["AsyncPipe"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["UpperCasePipe"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["LowerCasePipe"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["JsonPipe"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["SlicePipe"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["DecimalPipe"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["PercentPipe"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["TitleCasePipe"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["CurrencyPipe"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["DatePipe"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["I18nPluralPipe"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["I18nSelectPipe"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["KeyValuePipe"], _shared_utils_field_filter_pipe__WEBPACK_IMPORTED_MODULE_77__["FieldFilterPipe"], _shared_utils_equal_filter_pipe__WEBPACK_IMPORTED_MODULE_78__["EqualFilterPipe"], _shared_utils_gt_filter_pipe__WEBPACK_IMPORTED_MODULE_79__["GtFilterPipe"], _shared_utils_isValid_filter_pipe__WEBPACK_IMPORTED_MODULE_80__["IsValidFilterPipe"], _shared_utils_all_filter_pipe__WEBPACK_IMPORTED_MODULE_81__["AllFilterPipe"], _shared_utils_sort_pipe__WEBPACK_IMPORTED_MODULE_82__["SortPipe"], _shared_utils_sort_desc_pipe__WEBPACK_IMPORTED_MODULE_83__["SortDescPipe"], _shared_utils_max_items_filter__WEBPACK_IMPORTED_MODULE_84__["MaxItemsFilterPipe"], _shared_utils_calendar_pipe__WEBPACK_IMPORTED_MODULE_85__["CalendarPipe"], ngx_d_components__WEBPACK_IMPORTED_MODULE_37__["DSelectFilterPipe"]]);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetComponentScope"](_transform_properties_transform_properties_item_component__WEBPACK_IMPORTED_MODULE_17__["TransformPropertiesItemComponent"], [_angular_common__WEBPACK_IMPORTED_MODULE_24__["NgClass"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["NgComponentOutlet"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["NgForOf"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["NgIf"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["NgTemplateOutlet"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["NgStyle"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["NgSwitch"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["NgSwitchCase"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["NgSwitchDefault"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["NgPlural"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["NgPluralCase"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["NgSelectOption"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["ɵangular_packages_forms_forms_x"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["NumberValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["RangeValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["CheckboxControlValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["SelectControlValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["SelectMultipleControlValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["RadioControlValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["RequiredValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["MinLengthValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["MaxLengthValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["PatternValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["CheckboxRequiredValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["EmailValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["NgModel"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["NgModelGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["NgForm"], _angular_router__WEBPACK_IMPORTED_MODULE_25__["RouterOutlet"], _angular_router__WEBPACK_IMPORTED_MODULE_25__["RouterLink"], _angular_router__WEBPACK_IMPORTED_MODULE_25__["RouterLinkWithHref"], _angular_router__WEBPACK_IMPORTED_MODULE_25__["RouterLinkActive"], _angular_router__WEBPACK_IMPORTED_MODULE_25__["ɵangular_packages_router_router_l"], _angular_cdk_scrolling__WEBPACK_IMPORTED_MODULE_26__["CdkScrollable"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_27__["CdkDropList"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_27__["CdkDropListGroup"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_27__["CdkDrag"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_27__["CdkDragHandle"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_27__["CdkDragPreview"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_27__["CdkDragPlaceholder"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DWidgetComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DWidgetGroupComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DWidgetColumnsComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DWidgetDeckComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DWidgetVerticalComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["ɵa"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DButtonComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DButtonCancelComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DButtonApplyComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DButtonNewComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DButtonDeleteComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DButtonSaveComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DButtonSaveLocalComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DButtonEditComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DButtonPreviewComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DButtonViewComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DButtonExportComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DButtonDownloadComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DButtonRefreshComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DButtonDropDownComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DButtonCloseComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DButtonOpenComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DButtonShareComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DButtonPrivateComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DButtonMoreComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DButtonSplitDropDownComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DButtonValidateComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DButtonHistoryComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DButtonLinkComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DButtonChartComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DButtonCollapsibleComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["ɵb"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DFormInputComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DFormDateComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DFormTimeComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DFormTextAreaComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DFormSelectComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DFormCheckboxComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DFormDaysOfWeekComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DFormTagsComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DFormTagsDropdownComponent"], ngx_d_markdown__WEBPACK_IMPORTED_MODULE_29__["DMarkdownComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DProgressbarComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DToastComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DToastItemComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DModalComponent"], ngx_d_table__WEBPACK_IMPORTED_MODULE_30__["DTableComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["AxisLabelComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["XAxisComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["XAxisTicksComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["YAxisComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["YAxisTicksComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["TooltipContentComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["TooltipDirective"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["AreaComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["BaseChartComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["CountUpDirective"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["TooltipArea"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["ChartComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["LegendComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["LegendEntryComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["ScaleLegendComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["CircleComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["CircleSeriesComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["GridPanelComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["GridPanelSeriesComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["SvgLinearGradientComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["SvgRadialGradientComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["Timeline"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["AdvancedLegendComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["VisibilityObserver"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["AreaChartComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["AreaChartNormalizedComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["AreaChartStackedComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["AreaSeriesComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["BarComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["BarHorizontalComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["BarHorizontal2DComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["BarHorizontalNormalizedComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["BarHorizontalStackedComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["BarVerticalComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["BarVertical2DComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["BarVerticalNormalizedComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["BarVerticalStackedComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["BarLabelComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["SeriesHorizontal"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["SeriesVerticalComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["BubbleChartComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["BubbleSeriesComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["HeatMapCellComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["HeatCellSeriesComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["HeatMapComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["LineComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["LineChartComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["LineSeriesComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["PolarChartComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["PolarSeriesComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["CardComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["CardSeriesComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["NumberCardComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["AdvancedPieChartComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["PieLabelComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["PieArcComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["PieChartComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["PieGridComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["PieGridSeriesComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["PieSeriesComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["TreeMapCellComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["TreeMapCellSeriesComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["TreeMapComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["LinearGaugeComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["GaugeComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["GaugeArcComponent"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__["GaugeAxisComponent"], angular_gridster2__WEBPACK_IMPORTED_MODULE_32__["GridsterComponent"], angular_gridster2__WEBPACK_IMPORTED_MODULE_32__["GridsterItemComponent"], _shared_utils_time_directive__WEBPACK_IMPORTED_MODULE_33__["TimeDirective"], _shared_utils_countdown_component__WEBPACK_IMPORTED_MODULE_34__["CountdownComponent"], _shared_utils_dropzone__WEBPACK_IMPORTED_MODULE_35__["DropZoneDirective"], _shared_utils_dragzone__WEBPACK_IMPORTED_MODULE_36__["DragZoneDirective"], _shared_ui_dexihMessage_dexih_message_component__WEBPACK_IMPORTED_MODULE_37__["DexihMessageComponent"], _shared_ui_dexihFormControls_dexih_invalid_form_icon_dexih_invalid_form_icon_component__WEBPACK_IMPORTED_MODULE_38__["DexihInvalidFormIconComponent"], _shared_ui_dexihFormControls_dexih_invalid_form_details_dexih_invalid_form_details_component__WEBPACK_IMPORTED_MODULE_39__["DexihInvalidFormDetailsComponent"], _shared_help_dexih_help_component__WEBPACK_IMPORTED_MODULE_40__["DexihHelpComponent"], _shared_ui_icons_encryption_status_encryption_status_component__WEBPACK_IMPORTED_MODULE_41__["EncryptionStatusIconComponent"], _shared_ui_icons_privacy_status_privacy_status_component__WEBPACK_IMPORTED_MODULE_42__["PrivacyStatusButtonComponent"], _shared_ui_icons_download_button_download_button_component__WEBPACK_IMPORTED_MODULE_43__["DownloadButtonComponent"], _shared_ui_icons_print_print_button_component__WEBPACK_IMPORTED_MODULE_44__["PrintButtonComponent"], _shared_ui_queryBuilder_query_builder_component__WEBPACK_IMPORTED_MODULE_45__["QueryBuilderComponent"], _shared_ui_charts_chartBuilder_chart_builder_component__WEBPACK_IMPORTED_MODULE_46__["ChartBuilderComponent"], _shared_ui_charts_chartView_chart_view_component__WEBPACK_IMPORTED_MODULE_47__["ChartViewComponent"], _shared_ui_charts_googleMap_google_map_component__WEBPACK_IMPORTED_MODULE_48__["GoogleMapComponent"], _shared_ui_charts_comboChart_combo_chart_component__WEBPACK_IMPORTED_MODULE_49__["ComboChartComponent"], _shared_ui_supportOptions_support_options_component__WEBPACK_IMPORTED_MODULE_50__["SupportOptionsComponent"], _shared_ui_seriesAnimate_series_animate_component__WEBPACK_IMPORTED_MODULE_51__["SeriesAnimateComponent"], _buttons_cancel_button_cancel_button_component__WEBPACK_IMPORTED_MODULE_52__["CancelButtonComponent"], _buttons_save_button_save_button_component__WEBPACK_IMPORTED_MODULE_53__["SaveButtonComponent"], _buttons_new_datalink_button_new_datalink_button_component__WEBPACK_IMPORTED_MODULE_54__["NewDatalinkButtonComponent"], _buttons_new_connection_button_new_connection_button_component__WEBPACK_IMPORTED_MODULE_55__["NewConnectionButtonComponent"], _buttons_new_table_button_new_table_button_component__WEBPACK_IMPORTED_MODULE_56__["NewTableButtonComponent"], _buttons_actions_datajob_button_actions_datajob_button_component__WEBPACK_IMPORTED_MODULE_57__["ActionsDatajobButtonComponent"], _buttons_actions_datalink_button_actions_datalink_button_component__WEBPACK_IMPORTED_MODULE_58__["ActionsDatalinkButtonComponent"], _buttons_actions_connection_button_actions_connection_button_component__WEBPACK_IMPORTED_MODULE_59__["ActionsConnectionButtonComponent"], _buttons_actions_table_button_actions_table_button_component__WEBPACK_IMPORTED_MODULE_60__["ActionsTableButtonComponent"], _buttons_actions_fileFormat_button_actions_fileFormat_button_component__WEBPACK_IMPORTED_MODULE_61__["ActionsFileFormatButtonComponent"], _buttons_actions_columnValidation_button_actions_columnValidation_button_component__WEBPACK_IMPORTED_MODULE_62__["ActionsColumnValidationButtonComponent"], _buttons_actions_datalinkTest_button_actions_datalinkTest_button_component__WEBPACK_IMPORTED_MODULE_63__["ActionsDatalinkTestButtonComponent"], _buttons_actions_view_button_actions_view_button_component__WEBPACK_IMPORTED_MODULE_64__["ActionsViewButtonComponent"], _buttons_actions_api_button_actions_api_button_component__WEBPACK_IMPORTED_MODULE_65__["ActionsApiButtonComponent"], _buttons_actions_dashboard_button_actions_dashboard_button_component__WEBPACK_IMPORTED_MODULE_66__["ActionsDashboardButtonComponent"], _buttons_actions_listOfValues_button_actions_listOfValues_button_component__WEBPACK_IMPORTED_MODULE_67__["ActionsListOfValuesButtonComponent"], _buttons_tags_update_button_tags_update_button_component__WEBPACK_IMPORTED_MODULE_68__["TagsUpdateButtonComponent"], _buttons_tags_filter_button_tags_filter_button_component__WEBPACK_IMPORTED_MODULE_69__["TagsFilterButtonComponent"], _buttons_dependent_items_dependent_items_button_component__WEBPACK_IMPORTED_MODULE_70__["DependentItemsButtonComponent"], _buttons_connection_edit_button_connection_edit_button_component__WEBPACK_IMPORTED_MODULE_71__["ConnectionEditButtonComponent"], _buttons_table_edit_button_table_edit_button_component__WEBPACK_IMPORTED_MODULE_72__["TableEditButtonComponent"], _buttons_datalink_edit_button_datalink_edit_button_component__WEBPACK_IMPORTED_MODULE_73__["DatalinkEditButtonComponent"], _buttons_view_edit_button_view_edit_button_component__WEBPACK_IMPORTED_MODULE_74__["ViewEditButtonComponent"], _buttons_customFunction_edit_button_customFunction_edit_button_component__WEBPACK_IMPORTED_MODULE_75__["CustomFunctionEditButtonComponent"], _buttons_columnValidation_edit_button_columnValidation_edit_button_component__WEBPACK_IMPORTED_MODULE_76__["ColumnValidationEditButtonComponent"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["FormControlDirective"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["FormGroupDirective"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["FormControlName"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["FormGroupName"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["FormArrayName"], _datalink_status_datalink_status_component__WEBPACK_IMPORTED_MODULE_3__["DatalinkStatusComponent"], _columnValidation_view_columnValidation_view_component__WEBPACK_IMPORTED_MODULE_4__["ColumnValidationViewComponent"], _connection_view_connection_view_component__WEBPACK_IMPORTED_MODULE_5__["ConnectionViewComponent"], _datalink_view_datalink_view_component__WEBPACK_IMPORTED_MODULE_7__["DatalinkViewComponent"], _datajob_view_datajob_view_component__WEBPACK_IMPORTED_MODULE_6__["DatajobViewComponent"], _fileFormat_view_fileFormat_view_component__WEBPACK_IMPORTED_MODULE_8__["FileFormatViewComponent"], _table_view_table_view_component__WEBPACK_IMPORTED_MODULE_9__["TableViewComponent"], _table_column_view_table_column_view_component__WEBPACK_IMPORTED_MODULE_10__["TableColumnViewComponent"], _view_view_view_view_component__WEBPACK_IMPORTED_MODULE_12__["ViewViewComponent"], _api_view_api_view_component__WEBPACK_IMPORTED_MODULE_13__["ApiViewComponent"], _api_status_api_status_component__WEBPACK_IMPORTED_MODULE_14__["ApiStatusComponent"], _dashboard_view_dashboard_view_component__WEBPACK_IMPORTED_MODULE_21__["DashboardViewComponent"], _remoteAgent_view_remoteAgent_view_component__WEBPACK_IMPORTED_MODULE_15__["RemoteAgentViewComponent"], _transform_properties_transform_properties_component__WEBPACK_IMPORTED_MODULE_16__["TransformPropertiesComponent"], _transform_properties_transform_properties_item_component__WEBPACK_IMPORTED_MODULE_17__["TransformPropertiesItemComponent"], _preview_data_preview_data_component__WEBPACK_IMPORTED_MODULE_18__["PreviewDataComponent"], _input_parameters_input_parameters_component__WEBPACK_IMPORTED_MODULE_19__["InputParametersComponent"], _input_parameters_view_input_parameters_view_component__WEBPACK_IMPORTED_MODULE_20__["InputParametersViewComponent"], _listOfValues_view_listOfValues_view_component__WEBPACK_IMPORTED_MODULE_22__["ListOfValuesViewComponent"], _datalinkTest_view_datalinkTest_view_component__WEBPACK_IMPORTED_MODULE_23__["DatalinkTestViewComponent"]], [_angular_common__WEBPACK_IMPORTED_MODULE_24__["AsyncPipe"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["UpperCasePipe"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["LowerCasePipe"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["JsonPipe"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["SlicePipe"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["DecimalPipe"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["PercentPipe"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["TitleCasePipe"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["CurrencyPipe"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["DatePipe"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["I18nPluralPipe"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["I18nSelectPipe"], _angular_common__WEBPACK_IMPORTED_MODULE_24__["KeyValuePipe"], ngx_d_components__WEBPACK_IMPORTED_MODULE_28__["DSelectFilterPipe"], _shared_utils_field_filter_pipe__WEBPACK_IMPORTED_MODULE_77__["FieldFilterPipe"], _shared_utils_equal_filter_pipe__WEBPACK_IMPORTED_MODULE_78__["EqualFilterPipe"], _shared_utils_gt_filter_pipe__WEBPACK_IMPORTED_MODULE_79__["GtFilterPipe"], _shared_utils_isValid_filter_pipe__WEBPACK_IMPORTED_MODULE_80__["IsValidFilterPipe"], _shared_utils_all_filter_pipe__WEBPACK_IMPORTED_MODULE_81__["AllFilterPipe"], _shared_utils_sort_pipe__WEBPACK_IMPORTED_MODULE_82__["SortPipe"], _shared_utils_sort_desc_pipe__WEBPACK_IMPORTED_MODULE_83__["SortDescPipe"], _shared_utils_max_items_filter__WEBPACK_IMPORTED_MODULE_84__["MaxItemsFilterPipe"], _shared_utils_calendar_pipe__WEBPACK_IMPORTED_MODULE_85__["CalendarPipe"]]);
       /***/
 
     },
@@ -35011,7 +35011,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -35211,7 +35211,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -35223,7 +35223,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -35235,7 +35235,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       var _c0 = ["modal"];
 
@@ -35316,13 +35316,11 @@
       }
 
       var AppComponent = /*#__PURE__*/function () {
-        function AppComponent(viewContainerRef, authService, router) {
+        function AppComponent(authService, router) {
           _classCallCheck(this, AppComponent);
 
           this.authService = authService;
-          this.router = router; // Small hack in order to catch application root view container ref
-
-          this.viewContainerRef = viewContainerRef;
+          this.router = router;
         }
 
         _createClass(AppComponent, [{
@@ -35369,7 +35367,7 @@
       }();
 
       AppComponent.ɵfac = function AppComponent_Factory(t) {
-        return new (t || AppComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewContainerRef"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_auth_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]));
+        return new (t || AppComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_auth_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]));
       };
 
       AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
@@ -35417,8 +35415,6 @@
           }]
         }], function () {
           return [{
-            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewContainerRef"]
-          }, {
             type: _auth_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]
           }, {
             type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
@@ -35460,19 +35456,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/platform-browser */
-      "./node_modules/@angular/platform-browser/__ivy_ngcc__/fesm2015/platform-browser.js");
+      "./node_modules/@angular/platform-browser/fesm2015/platform-browser.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -35490,7 +35486,7 @@
 
       var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/platform-browser/animations */
-      "./node_modules/@angular/platform-browser/__ivy_ngcc__/fesm2015/animations.js");
+      "./node_modules/@angular/platform-browser/fesm2015/animations.js");
       /* harmony import */
 
 
@@ -35532,7 +35528,7 @@
 
       var _angular_common_http__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! @angular/common/http */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+      "./node_modules/@angular/common/fesm2015/http.js");
       /* harmony import */
 
 
@@ -35544,7 +35540,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js"); // import {HubService} from './+hub/hub.service';
+      "./node_modules/@angular/router/fesm2015/router.js"); // import {HubService} from './+hub/hub.service';
 
 
       var AppModule = function AppModule() {
@@ -35634,7 +35630,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -35776,7 +35772,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -35880,7 +35876,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -35892,19 +35888,19 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common/http */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+      "./node_modules/@angular/common/fesm2015/http.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -36213,19 +36209,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -36249,7 +36245,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var DexihHelpModule = function DexihHelpModule() {
         _classCallCheck(this, DexihHelpModule);
@@ -36313,13 +36309,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var AuthLayoutComponent = /*#__PURE__*/function () {
         function AuthLayoutComponent() {
@@ -36398,13 +36394,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var EmptyLayoutComponent = /*#__PURE__*/function () {
         function EmptyLayoutComponent() {
@@ -36478,7 +36474,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -36490,7 +36486,7 @@
 
       var _angular_animations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/animations */
-      "./node_modules/@angular/animations/__ivy_ngcc__/fesm2015/animations.js");
+      "./node_modules/@angular/animations/fesm2015/animations.js");
       /* harmony import */
 
 
@@ -36514,7 +36510,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -36679,7 +36675,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -36803,13 +36799,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -36845,7 +36841,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -36857,7 +36853,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
 
       var _c0 = ["toasts"];
 
@@ -37216,25 +37212,25 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -37322,7 +37318,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -37340,7 +37336,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       function MessagesComponent_div_0_span_2_Template(rf, ctx) {
         if (rf & 1) {
@@ -37488,7 +37484,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -37500,7 +37496,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -37518,7 +37514,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -37850,13 +37846,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -37954,25 +37950,25 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -38109,7 +38105,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -38262,13 +38258,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -38304,7 +38300,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       function HubsComponent_li_1_i_2_Template(rf, ctx) {
         if (rf & 1) {
@@ -38543,7 +38539,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -38555,13 +38551,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -38815,19 +38811,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       var MenuItemComponent = /*#__PURE__*/function () {
         function MenuItemComponent() {
@@ -38948,7 +38944,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -38960,13 +38956,13 @@
 
       var _angular_animations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/animations */
-      "./node_modules/@angular/animations/__ivy_ngcc__/fesm2015/animations.js");
+      "./node_modules/@angular/animations/fesm2015/animations.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       var _c0 = ["item"];
 
@@ -39207,7 +39203,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -39255,13 +39251,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -40283,13 +40279,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -40301,7 +40297,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -40401,13 +40397,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -40443,7 +40439,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -40827,7 +40823,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -40911,19 +40907,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -41007,13 +41003,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -41025,7 +41021,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       function RouteBreadcrumbsComponent_li_6_a_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -47324,115 +47320,115 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/cdk/drag-drop */
-      "./node_modules/@angular/cdk/__ivy_ngcc__/fesm2015/drag-drop.js");
+      "./node_modules/@angular/cdk/fesm2015/drag-drop.js");
       /* harmony import */
 
 
       var _angular_common_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common/http */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+      "./node_modules/@angular/common/fesm2015/http.js");
       /* harmony import */
 
 
-      var _layout_layout_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-      /*! ./layout/layout.service */
-      "./src/app/shared/layout/layout.service.ts");
-      /* harmony import */
-
-
-      var _utils_utils_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
-      /*! ./utils/utils.module */
-      "./src/app/shared/utils/utils.module.ts");
-      /* harmony import */
-
-
-      var ngx_d_table__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      var ngx_d_table__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! ngx-d-table */
       "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
-      var _ui_dexihMessage__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
-      /*! ./ui/dexihMessage */
-      "./src/app/shared/ui/dexihMessage/index.ts");
-      /* harmony import */
-
-
-      var _ui_dexihFormControls__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
-      /*! ./ui/dexihFormControls */
-      "./src/app/shared/ui/dexihFormControls/index.ts");
-      /* harmony import */
-
-
-      var ngx_d_components__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+      var ngx_d_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-components */
       "./node_modules/ngx-d-components/__ivy_ngcc__/fesm2015/ngx-d-components.js");
       /* harmony import */
 
 
-      var _help_dexih_help_module__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
-      /*! ./help/dexih-help.module */
-      "./src/app/shared/help/dexih-help.module.ts");
-      /* harmony import */
-
-
-      var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+      var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! ngx-d-markdown */
       "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
-      var _ui_icons__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
+      var _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      /*! @swimlane/ngx-charts */
+      "./node_modules/@swimlane/ngx-charts/fesm2015/swimlane-ngx-charts.js");
+      /* harmony import */
+
+
+      var angular_gridster2__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+      /*! angular-gridster2 */
+      "./node_modules/angular-gridster2/fesm2015/angular-gridster2.js");
+      /* harmony import */
+
+
+      var _layout_layout_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+      /*! ./layout/layout.service */
+      "./src/app/shared/layout/layout.service.ts");
+      /* harmony import */
+
+
+      var _utils_utils_module__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
+      /*! ./utils/utils.module */
+      "./src/app/shared/utils/utils.module.ts");
+      /* harmony import */
+
+
+      var _ui_dexihMessage__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+      /*! ./ui/dexihMessage */
+      "./src/app/shared/ui/dexihMessage/index.ts");
+      /* harmony import */
+
+
+      var _ui_dexihFormControls__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
+      /*! ./ui/dexihFormControls */
+      "./src/app/shared/ui/dexihFormControls/index.ts");
+      /* harmony import */
+
+
+      var _help_dexih_help_module__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
+      /*! ./help/dexih-help.module */
+      "./src/app/shared/help/dexih-help.module.ts");
+      /* harmony import */
+
+
+      var _ui_icons__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
       /*! ./ui/icons */
       "./src/app/shared/ui/icons/index.ts");
       /* harmony import */
 
 
-      var _ui_queryBuilder_query_builder_module__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
+      var _ui_queryBuilder_query_builder_module__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(
       /*! ./ui/queryBuilder/query-builder.module */
       "./src/app/shared/ui/queryBuilder/query-builder.module.ts");
       /* harmony import */
 
 
-      var _ui_charts_charts_module__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
+      var _ui_charts_charts_module__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(
       /*! ./ui/charts/charts.module */
       "./src/app/shared/ui/charts/charts.module.ts");
-      /* harmony import */
-
-
-      var _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(
-      /*! @swimlane/ngx-charts */
-      "./node_modules/@swimlane/ngx-charts/__ivy_ngcc__/fesm2015/swimlane-ngx-charts.js");
-      /* harmony import */
-
-
-      var angular_gridster2__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(
-      /*! angular-gridster2 */
-      "./node_modules/angular-gridster2/fesm2015/angular-gridster2.js");
       /* harmony import */
 
 
@@ -47462,7 +47458,7 @@
           value: function forRoot() {
             return {
               ngModule: SharedModule,
-              providers: [_layout_layout_service__WEBPACK_IMPORTED_MODULE_6__["LayoutService"]]
+              providers: [_layout_layout_service__WEBPACK_IMPORTED_MODULE_11__["LayoutService"]]
             };
           }
         }]);
@@ -47477,14 +47473,16 @@
         factory: function SharedModule_Factory(t) {
           return new (t || SharedModule)();
         },
-        providers: [_layout_layout_service__WEBPACK_IMPORTED_MODULE_6__["LayoutService"], _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClientModule"]],
-        imports: [[_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClientModule"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_4__["DragDropModule"], ngx_d_markdown__WEBPACK_IMPORTED_MODULE_13__["DMarkdownModule"], ngx_d_table__WEBPACK_IMPORTED_MODULE_8__["DTableModule"], _ui_dexihMessage__WEBPACK_IMPORTED_MODULE_9__["DexihMessageModule"], _ui_dexihFormControls__WEBPACK_IMPORTED_MODULE_10__["DexihFormControlsModule"], ngx_d_components__WEBPACK_IMPORTED_MODULE_11__["DComponentsModule"], _help_dexih_help_module__WEBPACK_IMPORTED_MODULE_12__["DexihHelpModule"], _ui_icons__WEBPACK_IMPORTED_MODULE_14__["DexihIconsModule"], _ui_queryBuilder_query_builder_module__WEBPACK_IMPORTED_MODULE_15__["QueryBuilderModule"], _ui_charts_charts_module__WEBPACK_IMPORTED_MODULE_16__["ChartBuilderModule"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_17__["NgxChartsModule"], angular_gridster2__WEBPACK_IMPORTED_MODULE_18__["GridsterModule"], _ui_supportOptions_support_options_module__WEBPACK_IMPORTED_MODULE_19__["DexihSupportOptionsModule"], _ui_sharedData_shared_data_module__WEBPACK_IMPORTED_MODULE_20__["SharedDataModule"], _ui_seriesAnimate_series_animate_module__WEBPACK_IMPORTED_MODULE_21__["SeriesAnimateModule"]], _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_4__["DragDropModule"], _utils_utils_module__WEBPACK_IMPORTED_MODULE_7__["UtilsModule"], ngx_d_markdown__WEBPACK_IMPORTED_MODULE_13__["DMarkdownModule"], ngx_d_table__WEBPACK_IMPORTED_MODULE_8__["DTableModule"], _ui_dexihMessage__WEBPACK_IMPORTED_MODULE_9__["DexihMessageModule"], _ui_dexihFormControls__WEBPACK_IMPORTED_MODULE_10__["DexihFormControlsModule"], ngx_d_components__WEBPACK_IMPORTED_MODULE_11__["DComponentsModule"], _help_dexih_help_module__WEBPACK_IMPORTED_MODULE_12__["DexihHelpModule"], _ui_icons__WEBPACK_IMPORTED_MODULE_14__["DexihIconsModule"], _ui_queryBuilder_query_builder_module__WEBPACK_IMPORTED_MODULE_15__["QueryBuilderModule"], _ui_charts_charts_module__WEBPACK_IMPORTED_MODULE_16__["ChartBuilderModule"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_17__["NgxChartsModule"], angular_gridster2__WEBPACK_IMPORTED_MODULE_18__["GridsterModule"], _ui_supportOptions_support_options_module__WEBPACK_IMPORTED_MODULE_19__["DexihSupportOptionsModule"], _ui_seriesAnimate_series_animate_module__WEBPACK_IMPORTED_MODULE_21__["SeriesAnimateModule"]]
+        providers: [_layout_layout_service__WEBPACK_IMPORTED_MODULE_11__["LayoutService"], _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClientModule"]],
+        imports: [[_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClientModule"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_4__["DragDropModule"], ngx_d_markdown__WEBPACK_IMPORTED_MODULE_8__["DMarkdownModule"], ngx_d_components__WEBPACK_IMPORTED_MODULE_7__["DComponentsModule"], ngx_d_table__WEBPACK_IMPORTED_MODULE_6__["DTableModule"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_9__["NgxChartsModule"], angular_gridster2__WEBPACK_IMPORTED_MODULE_10__["GridsterModule"], _ui_dexihMessage__WEBPACK_IMPORTED_MODULE_13__["DexihMessageModule"], _ui_dexihFormControls__WEBPACK_IMPORTED_MODULE_14__["DexihFormControlsModule"], _help_dexih_help_module__WEBPACK_IMPORTED_MODULE_15__["DexihHelpModule"], _ui_icons__WEBPACK_IMPORTED_MODULE_16__["DexihIconsModule"], _ui_queryBuilder_query_builder_module__WEBPACK_IMPORTED_MODULE_17__["QueryBuilderModule"], _ui_charts_charts_module__WEBPACK_IMPORTED_MODULE_18__["ChartBuilderModule"], _ui_supportOptions_support_options_module__WEBPACK_IMPORTED_MODULE_19__["DexihSupportOptionsModule"], _ui_sharedData_shared_data_module__WEBPACK_IMPORTED_MODULE_20__["SharedDataModule"], _ui_seriesAnimate_series_animate_module__WEBPACK_IMPORTED_MODULE_21__["SeriesAnimateModule"]], _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_4__["DragDropModule"], // DMarkdownModule,
+        ngx_d_components__WEBPACK_IMPORTED_MODULE_7__["DComponentsModule"], ngx_d_table__WEBPACK_IMPORTED_MODULE_6__["DTableModule"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_9__["NgxChartsModule"], angular_gridster2__WEBPACK_IMPORTED_MODULE_10__["GridsterModule"], _utils_utils_module__WEBPACK_IMPORTED_MODULE_12__["UtilsModule"], _ui_dexihMessage__WEBPACK_IMPORTED_MODULE_13__["DexihMessageModule"], _ui_dexihFormControls__WEBPACK_IMPORTED_MODULE_14__["DexihFormControlsModule"], _help_dexih_help_module__WEBPACK_IMPORTED_MODULE_15__["DexihHelpModule"], _ui_icons__WEBPACK_IMPORTED_MODULE_16__["DexihIconsModule"], _ui_queryBuilder_query_builder_module__WEBPACK_IMPORTED_MODULE_17__["QueryBuilderModule"], _ui_charts_charts_module__WEBPACK_IMPORTED_MODULE_18__["ChartBuilderModule"], _ui_supportOptions_support_options_module__WEBPACK_IMPORTED_MODULE_19__["DexihSupportOptionsModule"], _ui_seriesAnimate_series_animate_module__WEBPACK_IMPORTED_MODULE_21__["SeriesAnimateModule"]]
       });
 
       (function () {
         (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](SharedModule, {
-          imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClientModule"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_4__["DragDropModule"], ngx_d_markdown__WEBPACK_IMPORTED_MODULE_13__["DMarkdownModule"], ngx_d_table__WEBPACK_IMPORTED_MODULE_8__["DTableModule"], _ui_dexihMessage__WEBPACK_IMPORTED_MODULE_9__["DexihMessageModule"], _ui_dexihFormControls__WEBPACK_IMPORTED_MODULE_10__["DexihFormControlsModule"], ngx_d_components__WEBPACK_IMPORTED_MODULE_11__["DComponentsModule"], _help_dexih_help_module__WEBPACK_IMPORTED_MODULE_12__["DexihHelpModule"], _ui_icons__WEBPACK_IMPORTED_MODULE_14__["DexihIconsModule"], _ui_queryBuilder_query_builder_module__WEBPACK_IMPORTED_MODULE_15__["QueryBuilderModule"], _ui_charts_charts_module__WEBPACK_IMPORTED_MODULE_16__["ChartBuilderModule"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_17__["NgxChartsModule"], angular_gridster2__WEBPACK_IMPORTED_MODULE_18__["GridsterModule"], _ui_supportOptions_support_options_module__WEBPACK_IMPORTED_MODULE_19__["DexihSupportOptionsModule"], _ui_sharedData_shared_data_module__WEBPACK_IMPORTED_MODULE_20__["SharedDataModule"], _ui_seriesAnimate_series_animate_module__WEBPACK_IMPORTED_MODULE_21__["SeriesAnimateModule"]],
-          exports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_4__["DragDropModule"], _utils_utils_module__WEBPACK_IMPORTED_MODULE_7__["UtilsModule"], ngx_d_markdown__WEBPACK_IMPORTED_MODULE_13__["DMarkdownModule"], ngx_d_table__WEBPACK_IMPORTED_MODULE_8__["DTableModule"], _ui_dexihMessage__WEBPACK_IMPORTED_MODULE_9__["DexihMessageModule"], _ui_dexihFormControls__WEBPACK_IMPORTED_MODULE_10__["DexihFormControlsModule"], ngx_d_components__WEBPACK_IMPORTED_MODULE_11__["DComponentsModule"], _help_dexih_help_module__WEBPACK_IMPORTED_MODULE_12__["DexihHelpModule"], _ui_icons__WEBPACK_IMPORTED_MODULE_14__["DexihIconsModule"], _ui_queryBuilder_query_builder_module__WEBPACK_IMPORTED_MODULE_15__["QueryBuilderModule"], _ui_charts_charts_module__WEBPACK_IMPORTED_MODULE_16__["ChartBuilderModule"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_17__["NgxChartsModule"], angular_gridster2__WEBPACK_IMPORTED_MODULE_18__["GridsterModule"], _ui_supportOptions_support_options_module__WEBPACK_IMPORTED_MODULE_19__["DexihSupportOptionsModule"], _ui_seriesAnimate_series_animate_module__WEBPACK_IMPORTED_MODULE_21__["SeriesAnimateModule"]]
+          imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClientModule"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_4__["DragDropModule"], ngx_d_markdown__WEBPACK_IMPORTED_MODULE_8__["DMarkdownModule"], ngx_d_components__WEBPACK_IMPORTED_MODULE_7__["DComponentsModule"], ngx_d_table__WEBPACK_IMPORTED_MODULE_6__["DTableModule"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_9__["NgxChartsModule"], angular_gridster2__WEBPACK_IMPORTED_MODULE_10__["GridsterModule"], _ui_dexihMessage__WEBPACK_IMPORTED_MODULE_13__["DexihMessageModule"], _ui_dexihFormControls__WEBPACK_IMPORTED_MODULE_14__["DexihFormControlsModule"], _help_dexih_help_module__WEBPACK_IMPORTED_MODULE_15__["DexihHelpModule"], _ui_icons__WEBPACK_IMPORTED_MODULE_16__["DexihIconsModule"], _ui_queryBuilder_query_builder_module__WEBPACK_IMPORTED_MODULE_17__["QueryBuilderModule"], _ui_charts_charts_module__WEBPACK_IMPORTED_MODULE_18__["ChartBuilderModule"], _ui_supportOptions_support_options_module__WEBPACK_IMPORTED_MODULE_19__["DexihSupportOptionsModule"], _ui_sharedData_shared_data_module__WEBPACK_IMPORTED_MODULE_20__["SharedDataModule"], _ui_seriesAnimate_series_animate_module__WEBPACK_IMPORTED_MODULE_21__["SeriesAnimateModule"]],
+          exports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_4__["DragDropModule"], // DMarkdownModule,
+          ngx_d_components__WEBPACK_IMPORTED_MODULE_7__["DComponentsModule"], ngx_d_table__WEBPACK_IMPORTED_MODULE_6__["DTableModule"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_9__["NgxChartsModule"], angular_gridster2__WEBPACK_IMPORTED_MODULE_10__["GridsterModule"], _utils_utils_module__WEBPACK_IMPORTED_MODULE_12__["UtilsModule"], _ui_dexihMessage__WEBPACK_IMPORTED_MODULE_13__["DexihMessageModule"], _ui_dexihFormControls__WEBPACK_IMPORTED_MODULE_14__["DexihFormControlsModule"], _help_dexih_help_module__WEBPACK_IMPORTED_MODULE_15__["DexihHelpModule"], _ui_icons__WEBPACK_IMPORTED_MODULE_16__["DexihIconsModule"], _ui_queryBuilder_query_builder_module__WEBPACK_IMPORTED_MODULE_17__["QueryBuilderModule"], _ui_charts_charts_module__WEBPACK_IMPORTED_MODULE_18__["ChartBuilderModule"], _ui_supportOptions_support_options_module__WEBPACK_IMPORTED_MODULE_19__["DexihSupportOptionsModule"], _ui_seriesAnimate_series_animate_module__WEBPACK_IMPORTED_MODULE_21__["SeriesAnimateModule"]]
         });
       })();
       /*@__PURE__*/
@@ -47494,10 +47492,11 @@
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](SharedModule, [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
           args: [{
-            imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClientModule"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_4__["DragDropModule"], ngx_d_markdown__WEBPACK_IMPORTED_MODULE_13__["DMarkdownModule"], ngx_d_table__WEBPACK_IMPORTED_MODULE_8__["DTableModule"], _ui_dexihMessage__WEBPACK_IMPORTED_MODULE_9__["DexihMessageModule"], _ui_dexihFormControls__WEBPACK_IMPORTED_MODULE_10__["DexihFormControlsModule"], ngx_d_components__WEBPACK_IMPORTED_MODULE_11__["DComponentsModule"], _help_dexih_help_module__WEBPACK_IMPORTED_MODULE_12__["DexihHelpModule"], _ui_icons__WEBPACK_IMPORTED_MODULE_14__["DexihIconsModule"], _ui_queryBuilder_query_builder_module__WEBPACK_IMPORTED_MODULE_15__["QueryBuilderModule"], _ui_charts_charts_module__WEBPACK_IMPORTED_MODULE_16__["ChartBuilderModule"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_17__["NgxChartsModule"], angular_gridster2__WEBPACK_IMPORTED_MODULE_18__["GridsterModule"], _ui_supportOptions_support_options_module__WEBPACK_IMPORTED_MODULE_19__["DexihSupportOptionsModule"], _ui_sharedData_shared_data_module__WEBPACK_IMPORTED_MODULE_20__["SharedDataModule"], _ui_seriesAnimate_series_animate_module__WEBPACK_IMPORTED_MODULE_21__["SeriesAnimateModule"]],
+            imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClientModule"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_4__["DragDropModule"], ngx_d_markdown__WEBPACK_IMPORTED_MODULE_8__["DMarkdownModule"], ngx_d_components__WEBPACK_IMPORTED_MODULE_7__["DComponentsModule"], ngx_d_table__WEBPACK_IMPORTED_MODULE_6__["DTableModule"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_9__["NgxChartsModule"], angular_gridster2__WEBPACK_IMPORTED_MODULE_10__["GridsterModule"], _ui_dexihMessage__WEBPACK_IMPORTED_MODULE_13__["DexihMessageModule"], _ui_dexihFormControls__WEBPACK_IMPORTED_MODULE_14__["DexihFormControlsModule"], _help_dexih_help_module__WEBPACK_IMPORTED_MODULE_15__["DexihHelpModule"], _ui_icons__WEBPACK_IMPORTED_MODULE_16__["DexihIconsModule"], _ui_queryBuilder_query_builder_module__WEBPACK_IMPORTED_MODULE_17__["QueryBuilderModule"], _ui_charts_charts_module__WEBPACK_IMPORTED_MODULE_18__["ChartBuilderModule"], _ui_supportOptions_support_options_module__WEBPACK_IMPORTED_MODULE_19__["DexihSupportOptionsModule"], _ui_sharedData_shared_data_module__WEBPACK_IMPORTED_MODULE_20__["SharedDataModule"], _ui_seriesAnimate_series_animate_module__WEBPACK_IMPORTED_MODULE_21__["SeriesAnimateModule"]],
             declarations: [],
-            exports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_4__["DragDropModule"], _utils_utils_module__WEBPACK_IMPORTED_MODULE_7__["UtilsModule"], ngx_d_markdown__WEBPACK_IMPORTED_MODULE_13__["DMarkdownModule"], ngx_d_table__WEBPACK_IMPORTED_MODULE_8__["DTableModule"], _ui_dexihMessage__WEBPACK_IMPORTED_MODULE_9__["DexihMessageModule"], _ui_dexihFormControls__WEBPACK_IMPORTED_MODULE_10__["DexihFormControlsModule"], ngx_d_components__WEBPACK_IMPORTED_MODULE_11__["DComponentsModule"], _help_dexih_help_module__WEBPACK_IMPORTED_MODULE_12__["DexihHelpModule"], _ui_icons__WEBPACK_IMPORTED_MODULE_14__["DexihIconsModule"], _ui_queryBuilder_query_builder_module__WEBPACK_IMPORTED_MODULE_15__["QueryBuilderModule"], _ui_charts_charts_module__WEBPACK_IMPORTED_MODULE_16__["ChartBuilderModule"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_17__["NgxChartsModule"], angular_gridster2__WEBPACK_IMPORTED_MODULE_18__["GridsterModule"], _ui_supportOptions_support_options_module__WEBPACK_IMPORTED_MODULE_19__["DexihSupportOptionsModule"], _ui_seriesAnimate_series_animate_module__WEBPACK_IMPORTED_MODULE_21__["SeriesAnimateModule"]],
-            providers: [_layout_layout_service__WEBPACK_IMPORTED_MODULE_6__["LayoutService"], _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClientModule"]]
+            exports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_4__["DragDropModule"], // DMarkdownModule,
+            ngx_d_components__WEBPACK_IMPORTED_MODULE_7__["DComponentsModule"], ngx_d_table__WEBPACK_IMPORTED_MODULE_6__["DTableModule"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_9__["NgxChartsModule"], angular_gridster2__WEBPACK_IMPORTED_MODULE_10__["GridsterModule"], _utils_utils_module__WEBPACK_IMPORTED_MODULE_12__["UtilsModule"], _ui_dexihMessage__WEBPACK_IMPORTED_MODULE_13__["DexihMessageModule"], _ui_dexihFormControls__WEBPACK_IMPORTED_MODULE_14__["DexihFormControlsModule"], _help_dexih_help_module__WEBPACK_IMPORTED_MODULE_15__["DexihHelpModule"], _ui_icons__WEBPACK_IMPORTED_MODULE_16__["DexihIconsModule"], _ui_queryBuilder_query_builder_module__WEBPACK_IMPORTED_MODULE_17__["QueryBuilderModule"], _ui_charts_charts_module__WEBPACK_IMPORTED_MODULE_18__["ChartBuilderModule"], _ui_supportOptions_support_options_module__WEBPACK_IMPORTED_MODULE_19__["DexihSupportOptionsModule"], _ui_seriesAnimate_series_animate_module__WEBPACK_IMPORTED_MODULE_21__["SeriesAnimateModule"]],
+            providers: [_layout_layout_service__WEBPACK_IMPORTED_MODULE_11__["LayoutService"], _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClientModule"]]
           }]
         }], null, null);
       })();
@@ -48381,7 +48380,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -48421,7 +48420,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -48439,7 +48438,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
 
       function ChartBuilderComponent_d_widget_section_0_div_6_Template(rf, ctx) {
         if (rf & 1) {
@@ -50234,7 +50233,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -50270,19 +50269,19 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var angular_resize_event__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! angular-resize-event */
-      "./node_modules/angular-resize-event/__ivy_ngcc__/fesm2015/angular-resize-event.js");
+      "./node_modules/angular-resize-event/fesm2015/angular-resize-event.js");
       /* harmony import */
 
 
       var _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @swimlane/ngx-charts */
-      "./node_modules/@swimlane/ngx-charts/__ivy_ngcc__/fesm2015/swimlane-ngx-charts.js");
+      "./node_modules/@swimlane/ngx-charts/fesm2015/swimlane-ngx-charts.js");
       /* harmony import */
 
 
@@ -51633,19 +51632,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -51663,7 +51662,7 @@
 
       var _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @swimlane/ngx-charts */
-      "./node_modules/@swimlane/ngx-charts/__ivy_ngcc__/fesm2015/swimlane-ngx-charts.js");
+      "./node_modules/@swimlane/ngx-charts/fesm2015/swimlane-ngx-charts.js");
       /* harmony import */
 
 
@@ -51687,7 +51686,7 @@
 
       var angular_resize_event__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! angular-resize-event */
-      "./node_modules/angular-resize-event/__ivy_ngcc__/fesm2015/angular-resize-event.js");
+      "./node_modules/angular-resize-event/fesm2015/angular-resize-event.js");
 
       var ChartBuilderModule = function ChartBuilderModule() {
         _classCallCheck(this, ChartBuilderModule);
@@ -51751,7 +51750,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -51769,13 +51768,13 @@
 
       var _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @swimlane/ngx-charts */
-      "./node_modules/@swimlane/ngx-charts/__ivy_ngcc__/fesm2015/swimlane-ngx-charts.js");
+      "./node_modules/@swimlane/ngx-charts/fesm2015/swimlane-ngx-charts.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -52842,25 +52841,25 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_animations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/animations */
-      "./node_modules/@angular/animations/__ivy_ngcc__/fesm2015/animations.js");
+      "./node_modules/@angular/animations/fesm2015/animations.js");
       /* harmony import */
 
 
       var _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @swimlane/ngx-charts */
-      "./node_modules/@swimlane/ngx-charts/__ivy_ngcc__/fesm2015/swimlane-ngx-charts.js");
+      "./node_modules/@swimlane/ngx-charts/fesm2015/swimlane-ngx-charts.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       var _c0 = ["ngx-combo-charts-series-vertical", ""];
 
@@ -53361,7 +53360,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -53521,25 +53520,25 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -53690,19 +53689,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -53726,7 +53725,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       function DexihInvalidFormDetailsComponent_ng_template_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -54233,19 +54232,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       function DexihInvalidFormIconComponent_span_0_Template(rf, ctx) {
         if (rf & 1) {
@@ -54385,7 +54384,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -54397,7 +54396,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       function DexihMessageComponent_section_0_div_7_div_4_Template(rf, ctx) {
         if (rf & 1) {
@@ -54618,19 +54617,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -54741,7 +54740,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -54765,7 +54764,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       function DownloadButtonComponent_a_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -54907,13 +54906,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       function EncryptionStatusIconComponent_span_0_Template(rf, ctx) {
         if (rf & 1) {
@@ -55038,19 +55037,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -55173,7 +55172,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -55288,7 +55287,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -55300,7 +55299,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       function PrivacyStatusButtonComponent_span_0_Template(rf, ctx) {
         if (rf & 1) {
@@ -55457,7 +55456,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -55487,7 +55486,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -55499,7 +55498,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
 
       function QueryBuilderComponent_div_0_div_1_div_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -56282,19 +56281,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -56370,7 +56369,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -56388,7 +56387,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -56400,7 +56399,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
 
       function SeriesAnimateComponent_div_0_d_widget_section_1_ng_template_1_Template(rf, ctx) {}
 
@@ -57002,19 +57001,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -57179,7 +57178,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -57209,7 +57208,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -57221,7 +57220,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
 
       function InputParametersViewComponent_div_0_div_1_form_select_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -57559,7 +57558,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -57571,7 +57570,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -57795,13 +57794,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -57855,7 +57854,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -58317,13 +58316,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -58353,7 +58352,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -59201,13 +59200,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -59243,7 +59242,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -59535,55 +59534,55 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
-      var ___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! ./ */
-      "./src/app/shared/ui/sharedData/index.ts");
-      /* harmony import */
-
-
-      var ngx_d_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      var ngx_d_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! ngx-d-components */
       "./node_modules/ngx-d-components/__ivy_ngcc__/fesm2015/ngx-d-components.js");
       /* harmony import */
 
 
-      var ngx_d_table__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var ngx_d_table__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! ngx-d-table */
       "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
-      var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-d-markdown */
       "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
-      var _charts_charts_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
-      /*! ../charts/charts.module */
-      "./src/app/shared/ui/charts/charts.module.ts");
+      var angular_gridster2__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! angular-gridster2 */
+      "./node_modules/angular-gridster2/fesm2015/angular-gridster2.js");
       /* harmony import */
 
 
-      var angular_gridster2__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
-      /*! angular-gridster2 */
-      "./node_modules/angular-gridster2/fesm2015/angular-gridster2.js");
+      var ___WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! ./ */
+      "./src/app/shared/ui/sharedData/index.ts");
+      /* harmony import */
+
+
+      var _charts_charts_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      /*! ../charts/charts.module */
+      "./src/app/shared/ui/charts/charts.module.ts");
       /* harmony import */
 
 
@@ -59614,13 +59613,13 @@
         factory: function SharedDataModule_Factory(t) {
           return new (t || SharedDataModule)();
         },
-        imports: [[_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"], ngx_d_components__WEBPACK_IMPORTED_MODULE_4__["DComponentsModule"], ngx_d_table__WEBPACK_IMPORTED_MODULE_5__["DTableModule"], _charts_charts_module__WEBPACK_IMPORTED_MODULE_7__["ChartBuilderModule"], angular_gridster2__WEBPACK_IMPORTED_MODULE_8__["GridsterModule"], _dexihMessage__WEBPACK_IMPORTED_MODULE_9__["DexihMessageModule"], _icons__WEBPACK_IMPORTED_MODULE_10__["DexihIconsModule"], _seriesAnimate_series_animate_module__WEBPACK_IMPORTED_MODULE_11__["SeriesAnimateModule"], ngx_d_markdown__WEBPACK_IMPORTED_MODULE_6__["DMarkdownModule"]]]
+        imports: [[_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"], ngx_d_components__WEBPACK_IMPORTED_MODULE_3__["DComponentsModule"], ngx_d_table__WEBPACK_IMPORTED_MODULE_4__["DTableModule"], ngx_d_markdown__WEBPACK_IMPORTED_MODULE_5__["DMarkdownModule"], _charts_charts_module__WEBPACK_IMPORTED_MODULE_8__["ChartBuilderModule"], angular_gridster2__WEBPACK_IMPORTED_MODULE_6__["GridsterModule"], _dexihMessage__WEBPACK_IMPORTED_MODULE_9__["DexihMessageModule"], _icons__WEBPACK_IMPORTED_MODULE_10__["DexihIconsModule"], _seriesAnimate_series_animate_module__WEBPACK_IMPORTED_MODULE_11__["SeriesAnimateModule"]]]
       });
 
       (function () {
         (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](SharedDataModule, {
-          declarations: [___WEBPACK_IMPORTED_MODULE_3__["SharedDataComponent"], ___WEBPACK_IMPORTED_MODULE_3__["PreviewDataComponent"], ___WEBPACK_IMPORTED_MODULE_3__["PreviewDashboardComponent"], ___WEBPACK_IMPORTED_MODULE_3__["PreviewDashboardItemComponent"], ___WEBPACK_IMPORTED_MODULE_3__["PreviewComponent"], ___WEBPACK_IMPORTED_MODULE_3__["InputParametersViewComponent"]],
-          imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"], ngx_d_components__WEBPACK_IMPORTED_MODULE_4__["DComponentsModule"], ngx_d_table__WEBPACK_IMPORTED_MODULE_5__["DTableModule"], _charts_charts_module__WEBPACK_IMPORTED_MODULE_7__["ChartBuilderModule"], angular_gridster2__WEBPACK_IMPORTED_MODULE_8__["GridsterModule"], _dexihMessage__WEBPACK_IMPORTED_MODULE_9__["DexihMessageModule"], _icons__WEBPACK_IMPORTED_MODULE_10__["DexihIconsModule"], _seriesAnimate_series_animate_module__WEBPACK_IMPORTED_MODULE_11__["SeriesAnimateModule"], ngx_d_markdown__WEBPACK_IMPORTED_MODULE_6__["DMarkdownModule"]]
+          declarations: [___WEBPACK_IMPORTED_MODULE_7__["SharedDataComponent"], ___WEBPACK_IMPORTED_MODULE_7__["PreviewDataComponent"], ___WEBPACK_IMPORTED_MODULE_7__["PreviewDashboardComponent"], ___WEBPACK_IMPORTED_MODULE_7__["PreviewDashboardItemComponent"], ___WEBPACK_IMPORTED_MODULE_7__["PreviewComponent"], ___WEBPACK_IMPORTED_MODULE_7__["InputParametersViewComponent"]],
+          imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"], ngx_d_components__WEBPACK_IMPORTED_MODULE_3__["DComponentsModule"], ngx_d_table__WEBPACK_IMPORTED_MODULE_4__["DTableModule"], ngx_d_markdown__WEBPACK_IMPORTED_MODULE_5__["DMarkdownModule"], _charts_charts_module__WEBPACK_IMPORTED_MODULE_8__["ChartBuilderModule"], angular_gridster2__WEBPACK_IMPORTED_MODULE_6__["GridsterModule"], _dexihMessage__WEBPACK_IMPORTED_MODULE_9__["DexihMessageModule"], _icons__WEBPACK_IMPORTED_MODULE_10__["DexihIconsModule"], _seriesAnimate_series_animate_module__WEBPACK_IMPORTED_MODULE_11__["SeriesAnimateModule"]]
         });
       })();
       /*@__PURE__*/
@@ -59630,8 +59629,8 @@
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](SharedDataModule, [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
           args: [{
-            imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"], ngx_d_components__WEBPACK_IMPORTED_MODULE_4__["DComponentsModule"], ngx_d_table__WEBPACK_IMPORTED_MODULE_5__["DTableModule"], _charts_charts_module__WEBPACK_IMPORTED_MODULE_7__["ChartBuilderModule"], angular_gridster2__WEBPACK_IMPORTED_MODULE_8__["GridsterModule"], _dexihMessage__WEBPACK_IMPORTED_MODULE_9__["DexihMessageModule"], _icons__WEBPACK_IMPORTED_MODULE_10__["DexihIconsModule"], _seriesAnimate_series_animate_module__WEBPACK_IMPORTED_MODULE_11__["SeriesAnimateModule"], ngx_d_markdown__WEBPACK_IMPORTED_MODULE_6__["DMarkdownModule"]],
-            declarations: [___WEBPACK_IMPORTED_MODULE_3__["SharedDataComponent"], ___WEBPACK_IMPORTED_MODULE_3__["PreviewDataComponent"], ___WEBPACK_IMPORTED_MODULE_3__["PreviewDashboardComponent"], ___WEBPACK_IMPORTED_MODULE_3__["PreviewDashboardItemComponent"], ___WEBPACK_IMPORTED_MODULE_3__["PreviewComponent"], ___WEBPACK_IMPORTED_MODULE_3__["InputParametersViewComponent"]],
+            imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"], ngx_d_components__WEBPACK_IMPORTED_MODULE_3__["DComponentsModule"], ngx_d_table__WEBPACK_IMPORTED_MODULE_4__["DTableModule"], ngx_d_markdown__WEBPACK_IMPORTED_MODULE_5__["DMarkdownModule"], _charts_charts_module__WEBPACK_IMPORTED_MODULE_8__["ChartBuilderModule"], angular_gridster2__WEBPACK_IMPORTED_MODULE_6__["GridsterModule"], _dexihMessage__WEBPACK_IMPORTED_MODULE_9__["DexihMessageModule"], _icons__WEBPACK_IMPORTED_MODULE_10__["DexihIconsModule"], _seriesAnimate_series_animate_module__WEBPACK_IMPORTED_MODULE_11__["SeriesAnimateModule"]],
+            declarations: [___WEBPACK_IMPORTED_MODULE_7__["SharedDataComponent"], ___WEBPACK_IMPORTED_MODULE_7__["PreviewDataComponent"], ___WEBPACK_IMPORTED_MODULE_7__["PreviewDashboardComponent"], ___WEBPACK_IMPORTED_MODULE_7__["PreviewDashboardItemComponent"], ___WEBPACK_IMPORTED_MODULE_7__["PreviewComponent"], ___WEBPACK_IMPORTED_MODULE_7__["InputParametersViewComponent"]],
             exports: []
           }]
         }], null, null);
@@ -59664,7 +59663,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -59676,7 +59675,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -59706,7 +59705,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -59730,7 +59729,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -60256,7 +60255,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -60268,7 +60267,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       function SupportOptionsComponent_div_2_Template(rf, ctx) {
         if (rf & 1) {
@@ -60445,19 +60444,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -60533,7 +60532,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
 
       var AllFilterPipe = /*#__PURE__*/function () {
         function AllFilterPipe() {
@@ -60619,7 +60618,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -60695,7 +60694,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
 
       var CountdownComponent = /*#__PURE__*/function () {
         function CountdownComponent(_changeDetector) {
@@ -60871,7 +60870,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
 
       var DragZoneDirective = /*#__PURE__*/function () {
         function DragZoneDirective(element) {
@@ -60987,7 +60986,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
 
       var DropZoneDirective = /*#__PURE__*/function () {
         function DropZoneDirective() {
@@ -61243,7 +61242,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
 
       var EqualFilterPipe = /*#__PURE__*/function () {
         function EqualFilterPipe() {
@@ -61315,7 +61314,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
 
       var FieldFilterPipe = /*#__PURE__*/function () {
         function FieldFilterPipe() {
@@ -61392,7 +61391,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -61553,7 +61552,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
 
       var GtFilterPipe = /*#__PURE__*/function () {
         function GtFilterPipe() {
@@ -61623,13 +61622,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
 
       var IsValidFilterPipe = /*#__PURE__*/function () {
         function IsValidFilterPipe() {
@@ -61711,7 +61710,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
 
       var MaxItemsFilterPipe = /*#__PURE__*/function () {
         function MaxItemsFilterPipe() {
@@ -61783,7 +61782,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
 
       var SortDescPipe = /*#__PURE__*/function () {
         function SortDescPipe() {
@@ -61861,7 +61860,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
 
       var SortPipe = /*#__PURE__*/function () {
         function SortPipe() {
@@ -61939,7 +61938,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
 
       var TimeDirective = function TimeDirective() {
         _classCallCheck(this, TimeDirective);
@@ -61991,7 +61990,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -62267,7 +62266,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -62285,7 +62284,7 @@
 
       var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/platform-browser */
-      "./node_modules/@angular/platform-browser/__ivy_ngcc__/fesm2015/platform-browser.js");
+      "./node_modules/@angular/platform-browser/fesm2015/platform-browser.js");
 
       if (_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].production) {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["enableProdMode"])();

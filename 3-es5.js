@@ -36,7 +36,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
 
       var DatajobEditGuard = /*#__PURE__*/function () {
         function DatajobEditGuard() {
@@ -96,13 +96,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -120,7 +120,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -180,7 +180,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var DatajobEditModule = /*#__PURE__*/function () {
         function DatajobEditModule() {
@@ -271,7 +271,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -389,13 +389,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -431,7 +431,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -443,7 +443,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -1269,13 +1269,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -1293,7 +1293,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -1317,7 +1317,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -1916,13 +1916,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -2291,13 +2291,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -2309,13 +2309,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -2467,7 +2467,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("errors", ctx_r0.triggerFormService.formErrors.intervalTime);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disableNative", true)("errors", ctx_r0.triggerFormService.formErrors.intervalTime);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
@@ -2594,10 +2594,10 @@
         selectors: [["datajob-edit-trigger"]],
         decls: 1,
         vars: 1,
-        consts: [["title", "Edit Trigger", 3, "showExpandButton", 4, "ngIf"], ["title", "Edit Trigger", 3, "showExpandButton"], ["header", ""], [3, "formGroup"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Start Date", "formControlName", "startDate", "note", "This is the date that the trigger will start.  Leave blank for immediate start.", 3, "errors"], [1, "form-group", "col-md-3"], ["label", "Interval", "formControlName", "intervalTime", "note", "The intra-day interval which the trigger restarts.  Leave blank for once a day jobs.", 3, "errors"], ["type", "number", "label", "Max Recurrences", "formControlName", "maxRecurs", "placeholder", "Enter the max recurrences", "iconClass", "fa fa-refresh", "note", " The maximum number of times job can recur in one day.", 3, "errors"], ["label", "Start Time", "formControlName", "startTime", "note", "Time of the day the job will activate.", 3, "errors"], ["label", "End Time", "formControlName", "endTime", "note", "Time of the day the triggers will deactivate.", 3, "errors"], ["label", "Days of the week", "formControlName", "daysOfWeek", "note", " The days of the week the trigger is valid."], [1, "mr-1", 3, "disabled", "click"], [3, "click"]],
+        consts: [["title", "Edit Trigger", 3, "showExpandButton", 4, "ngIf"], ["title", "Edit Trigger", 3, "showExpandButton"], ["header", ""], [3, "formGroup"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Start Date", "formControlName", "startDate", "note", "This is the date that the trigger will start.  Leave blank for immediate start.", 3, "errors"], [1, "form-group", "col-md-3"], ["label", "Interval", "formControlName", "intervalTime", "note", "The intra-day interval which the trigger restarts.  Leave blank for once a day jobs.", 3, "disableNative", "errors"], ["type", "number", "label", "Max Recurrences", "formControlName", "maxRecurs", "placeholder", "Enter the max recurrences", "iconClass", "fa fa-refresh", "note", " The maximum number of times job can recur in one day.", 3, "errors"], ["label", "Start Time", "formControlName", "startTime", "note", "Time of the day the job will activate.", 3, "errors"], ["label", "End Time", "formControlName", "endTime", "note", "Time of the day the triggers will deactivate.", 3, "errors"], ["label", "Days of the week", "formControlName", "daysOfWeek", "note", " The days of the week the trigger is valid."], [1, "mr-1", 3, "disabled", "click"], [3, "click"]],
         template: function DatajobEditTriggerComponent_Template(rf, ctx) {
           if (rf & 1) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, DatajobEditTriggerComponent_d_widget_section_0_Template, 20, 7, "d-widget-section", 0);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, DatajobEditTriggerComponent_d_widget_section_0_Template, 20, 8, "d-widget-section", 0);
           }
 
           if (rf & 2) {
@@ -2662,13 +2662,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -2680,7 +2680,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 

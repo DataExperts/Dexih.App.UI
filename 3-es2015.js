@@ -10,7 +10,7 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DatajobEditGuard", function() { return DatajobEditGuard; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 
 
 class DatajobEditGuard {
@@ -37,11 +37,11 @@ DatajobEditGuard.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefine
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DatajobEditModule", function() { return DatajobEditModule; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
 /* harmony import */ var _datajob_edit_routing__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./datajob-edit.routing */ "./src/app/+hub/datajob/datajob-edit/datajob-edit.routing.ts");
 /* harmony import */ var _shared_shared_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../shared/shared.module */ "./src/app/shared/shared.module.ts");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var _datajob_edit_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./datajob-edit.component */ "./src/app/+hub/datajob/datajob-edit/datajob-edit.component.ts");
 /* harmony import */ var _properties_datajob_edit_properties_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./properties/datajob-edit-properties.component */ "./src/app/+hub/datajob/datajob-edit/properties/datajob-edit-properties.component.ts");
 /* harmony import */ var _trigger_edit_datajob_edit_trigger_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./trigger-edit/datajob-edit-trigger.component */ "./src/app/+hub/datajob/datajob-edit/trigger-edit/datajob-edit-trigger.component.ts");
@@ -51,7 +51,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _hub_forms_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../hub.forms.service */ "./src/app/+hub/hub.forms.service.ts");
 /* harmony import */ var _datajob_edit_guard__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./datajob-edit-guard */ "./src/app/+hub/datajob/datajob-edit/datajob-edit-guard.ts");
 /* harmony import */ var _hub_shared_module__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../hub.shared.module */ "./src/app/+hub/hub.shared.module.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 
 
 
@@ -133,7 +133,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "datajobEditRoutes", function() { return datajobEditRoutes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "routes", function() { return routes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Routing", function() { return Routing; });
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _datajob_edit_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./datajob-edit.component */ "./src/app/+hub/datajob/datajob-edit/datajob-edit.component.ts");
 /* harmony import */ var _properties_datajob_edit_properties_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./properties/datajob-edit-properties.component */ "./src/app/+hub/datajob/datajob-edit/properties/datajob-edit-properties.component.ts");
 /* harmony import */ var _trigger_edit_datajob_edit_trigger_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./trigger-edit/datajob-edit-trigger.component */ "./src/app/+hub/datajob/datajob-edit/trigger-edit/datajob-edit-trigger.component.ts");
@@ -174,16 +174,16 @@ const Routing = _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].for
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DatajobEditPropertiesComponent", function() { return DatajobEditPropertiesComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _hub_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../hub.service */ "./src/app/+hub/hub.service.ts");
 /* harmony import */ var _hub_forms_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../hub.forms.service */ "./src/app/+hub/hub.forms.service.ts");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
 /* harmony import */ var _shared_shared_models__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../shared/shared.models */ "./src/app/shared/shared.models.ts");
 /* harmony import */ var ngx_d_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ngx-d-components */ "./node_modules/ngx-d-components/__ivy_ngcc__/fesm2015/ngx-d-components.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
 /* harmony import */ var ngx_d_table__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ngx-d-table */ "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var _buttons_connection_edit_button_connection_edit_button_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../buttons/connection-edit-button/connection-edit-button.component */ "./src/app/+hub/buttons/connection-edit-button/connection-edit-button.component.ts");
 /* harmony import */ var _widgets_input_parameters_input_parameters_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../widgets/input-parameters/input-parameters.component */ "./src/app/+hub/widgets/input-parameters/input-parameters.component.ts");
 
@@ -606,15 +606,15 @@ DatajobEditPropertiesComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0_
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DatajobEditStepComponent", function() { return DatajobEditStepComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _hub_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../hub.service */ "./src/app/+hub/hub.service.ts");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var _auth_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../+auth/auth.service */ "./src/app/+auth/auth.service.ts");
 /* harmony import */ var _hub_forms_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../hub.forms.service */ "./src/app/+hub/hub.forms.service.ts");
 /* harmony import */ var _shared_shared_models__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../shared/shared.models */ "./src/app/shared/shared.models.ts");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
 /* harmony import */ var ngx_d_components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ngx-d-components */ "./node_modules/ngx-d-components/__ivy_ngcc__/fesm2015/ngx-d-components.js");
 /* harmony import */ var _buttons_datalink_edit_button_datalink_edit_button_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../buttons/datalink-edit-button/datalink-edit-button.component */ "./src/app/+hub/buttons/datalink-edit-button/datalink-edit-button.component.ts");
 /* harmony import */ var _widgets_input_parameters_input_parameters_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../widgets/input-parameters/input-parameters.component */ "./src/app/+hub/widgets/input-parameters/input-parameters.component.ts");
@@ -957,8 +957,8 @@ DatajobEditStepComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵ�
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DatajobAddStepsComponent", function() { return DatajobAddStepsComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _hub_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../hub.service */ "./src/app/+hub/hub.service.ts");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
 /* harmony import */ var _auth_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../+auth/auth.service */ "./src/app/+auth/auth.service.ts");
@@ -1163,11 +1163,11 @@ DatajobAddStepsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵ�
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DatajobEditTriggerComponent", function() { return DatajobEditTriggerComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var _auth_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../+auth/auth.service */ "./src/app/+auth/auth.service.ts");
 /* harmony import */ var _hub_forms_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../hub.forms.service */ "./src/app/+hub/hub.forms.service.ts");
 /* harmony import */ var _hub_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../hub.service */ "./src/app/+hub/hub.service.ts");
@@ -1243,7 +1243,7 @@ function DatajobEditTriggerComponent_d_widget_section_0_Template(rf, ctx) { if (
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("errors", ctx_r0.triggerFormService.formErrors.startDate);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("errors", ctx_r0.triggerFormService.formErrors.intervalTime);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disableNative", true)("errors", ctx_r0.triggerFormService.formErrors.intervalTime);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("errors", ctx_r0.triggerFormService.formErrors.maxRecurs);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
@@ -1325,8 +1325,8 @@ class DatajobEditTriggerComponent {
     }
 }
 DatajobEditTriggerComponent.ɵfac = function DatajobEditTriggerComponent_Factory(t) { return new (t || DatajobEditTriggerComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_auth_auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_hub_service__WEBPACK_IMPORTED_MODULE_7__["HubService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_hub_forms_service__WEBPACK_IMPORTED_MODULE_6__["HubFormsService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_common__WEBPACK_IMPORTED_MODULE_3__["Location"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"])); };
-DatajobEditTriggerComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: DatajobEditTriggerComponent, selectors: [["datajob-edit-trigger"]], decls: 1, vars: 1, consts: [["title", "Edit Trigger", 3, "showExpandButton", 4, "ngIf"], ["title", "Edit Trigger", 3, "showExpandButton"], ["header", ""], [3, "formGroup"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Start Date", "formControlName", "startDate", "note", "This is the date that the trigger will start.  Leave blank for immediate start.", 3, "errors"], [1, "form-group", "col-md-3"], ["label", "Interval", "formControlName", "intervalTime", "note", "The intra-day interval which the trigger restarts.  Leave blank for once a day jobs.", 3, "errors"], ["type", "number", "label", "Max Recurrences", "formControlName", "maxRecurs", "placeholder", "Enter the max recurrences", "iconClass", "fa fa-refresh", "note", " The maximum number of times job can recur in one day.", 3, "errors"], ["label", "Start Time", "formControlName", "startTime", "note", "Time of the day the job will activate.", 3, "errors"], ["label", "End Time", "formControlName", "endTime", "note", "Time of the day the triggers will deactivate.", 3, "errors"], ["label", "Days of the week", "formControlName", "daysOfWeek", "note", " The days of the week the trigger is valid."], [1, "mr-1", 3, "disabled", "click"], [3, "click"]], template: function DatajobEditTriggerComponent_Template(rf, ctx) { if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, DatajobEditTriggerComponent_d_widget_section_0_Template, 20, 7, "d-widget-section", 0);
+DatajobEditTriggerComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: DatajobEditTriggerComponent, selectors: [["datajob-edit-trigger"]], decls: 1, vars: 1, consts: [["title", "Edit Trigger", 3, "showExpandButton", 4, "ngIf"], ["title", "Edit Trigger", 3, "showExpandButton"], ["header", ""], [3, "formGroup"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Start Date", "formControlName", "startDate", "note", "This is the date that the trigger will start.  Leave blank for immediate start.", 3, "errors"], [1, "form-group", "col-md-3"], ["label", "Interval", "formControlName", "intervalTime", "note", "The intra-day interval which the trigger restarts.  Leave blank for once a day jobs.", 3, "disableNative", "errors"], ["type", "number", "label", "Max Recurrences", "formControlName", "maxRecurs", "placeholder", "Enter the max recurrences", "iconClass", "fa fa-refresh", "note", " The maximum number of times job can recur in one day.", 3, "errors"], ["label", "Start Time", "formControlName", "startTime", "note", "Time of the day the job will activate.", 3, "errors"], ["label", "End Time", "formControlName", "endTime", "note", "Time of the day the triggers will deactivate.", 3, "errors"], ["label", "Days of the week", "formControlName", "daysOfWeek", "note", " The days of the week the trigger is valid."], [1, "mr-1", 3, "disabled", "click"], [3, "click"]], template: function DatajobEditTriggerComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, DatajobEditTriggerComponent_d_widget_section_0_Template, 20, 8, "d-widget-section", 0);
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.triggerFormService.currentForm);
     } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"], ngx_d_components__WEBPACK_IMPORTED_MODULE_9__["ɵa"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormGroupDirective"], ngx_d_components__WEBPACK_IMPORTED_MODULE_9__["DFormDateComponent"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormControlName"], ngx_d_components__WEBPACK_IMPORTED_MODULE_9__["DFormTimeComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_9__["DFormInputComponent"], _dexih_form_daysofweek_component__WEBPACK_IMPORTED_MODULE_10__["DexihFormDaysOfWeekComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_9__["DButtonApplyComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_9__["DButtonCancelComponent"]], encapsulation: 2 });
@@ -1351,10 +1351,10 @@ DatajobEditTriggerComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DexihFormDaysOfWeekComponent", function() { return DexihFormDaysOfWeekComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var _shared_shared_models__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../shared/shared.models */ "./src/app/shared/shared.models.ts");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
 /* harmony import */ var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ngx-d-markdown */ "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
 
 
