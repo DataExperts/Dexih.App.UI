@@ -1,13 +1,15 @@
 import {NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SharedDataComponent, PreviewDataComponent, PreviewDashboardComponent, PreviewDashboardItemComponent,
-  PreviewComponent, InputParametersViewComponent} from './';
+
 import { DComponentsModule } from 'ngx-d-components';
 import { DTableModule} from 'ngx-d-table';
 import { DMarkdownModule } from 'ngx-d-markdown';
-import { ChartBuilderModule } from '../charts/charts.module';
 import { GridsterModule} from 'angular-gridster2';
+
+import { SharedDataComponent, PreviewDataComponent, PreviewDashboardComponent, PreviewDashboardItemComponent,
+  PreviewComponent, InputParametersViewComponent} from './';
+import { ChartBuilderModule } from '../charts/charts.module';
 import { DexihMessageModule } from '../dexihMessage';
 import { DexihIconsModule } from '../icons';
 import { SeriesAnimateModule} from '../seriesAnimate/series-animate.module';
@@ -17,14 +19,14 @@ import { SeriesAnimateModule} from '../seriesAnimate/series-animate.module';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    DComponentsModule,
-    DTableModule,
+   DComponentsModule,
+   DTableModule,
+    DMarkdownModule,
     ChartBuilderModule,
     GridsterModule,
     DexihMessageModule,
     DexihIconsModule,
     SeriesAnimateModule,
-    DMarkdownModule
   ],
   declarations: [
     SharedDataComponent, PreviewDataComponent, PreviewDashboardComponent, PreviewDashboardItemComponent, PreviewComponent,

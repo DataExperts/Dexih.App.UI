@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     RouterModule,
     DComponentsModule,
-    DMarkdownModule
+   DMarkdownModule
   ],
   declarations: [DexihHelpComponent],
   exports: [DexihHelpComponent],

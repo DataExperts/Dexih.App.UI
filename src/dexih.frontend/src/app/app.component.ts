@@ -1,9 +1,8 @@
 import { Component, ViewContainerRef, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { AuthService } from './+auth/auth.service';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Router, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
 import { DModalComponent } from 'ngx-d-components';
-import { Functions } from './shared/utils/functions';
 
 @Component({
   selector: 'app-root',
@@ -13,8 +12,6 @@ import { Functions } from './shared/utils/functions';
 export class AppComponent implements OnInit, OnDestroy {
   @ViewChild('modal', { static: true }) modal: DModalComponent;
 
-  private viewContainerRef: ViewContainerRef;
-
   private _waitMessagesSubscription: Subscription;
   private _routeEventsSubscription: Subscription;
   public waitMessages: string[];
@@ -22,12 +19,9 @@ export class AppComponent implements OnInit, OnDestroy {
   private loadingRouteKey: string;
 
   public constructor(
-    viewContainerRef: ViewContainerRef,
     private authService: AuthService,
     private router: Router
   ) {
-    // Small hack in order to catch application root view container ref
-    this.viewContainerRef = viewContainerRef;
 
   }
 

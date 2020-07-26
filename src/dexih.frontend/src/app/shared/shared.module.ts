@@ -5,19 +5,20 @@ import { RouterModule} from '@angular/router';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HttpClientModule } from '@angular/common/http';
 
+import { DTableModule} from 'ngx-d-table';
+import { DComponentsModule } from 'ngx-d-components';
+import { DMarkdownModule } from 'ngx-d-markdown';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { GridsterModule} from 'angular-gridster2';
+
 import { LayoutService} from './layout/layout.service';
 import { UtilsModule} from './utils/utils.module';
-import { DTableModule} from 'ngx-d-table';
 import { DexihMessageModule } from './ui/dexihMessage';
 import { DexihFormControlsModule } from './ui/dexihFormControls';
-import { DComponentsModule } from 'ngx-d-components';
 import { DexihHelpModule } from './help/dexih-help.module';
-import { DMarkdownModule } from 'ngx-d-markdown';
 import { DexihIconsModule } from './ui/icons'
 import { QueryBuilderModule } from './ui/queryBuilder/query-builder.module';
 import { ChartBuilderModule } from './ui/charts/charts.module';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { GridsterModule} from 'angular-gridster2';
 import { DexihSupportOptionsModule } from './ui/supportOptions/support-options.module'
 import { SharedDataModule} from './ui/sharedData/shared-data.module';
 import { SeriesAnimateModule } from './ui/seriesAnimate/series-animate.module';
@@ -29,17 +30,17 @@ import { SeriesAnimateModule } from './ui/seriesAnimate/series-animate.module';
     DragDropModule,
 
     DMarkdownModule,
-
+    DComponentsModule,
     DTableModule,
+    NgxChartsModule,
+    GridsterModule,
+
     DexihMessageModule,
     DexihFormControlsModule,
-    DComponentsModule,
     DexihHelpModule,
     DexihIconsModule,
     QueryBuilderModule,
     ChartBuilderModule,
-    NgxChartsModule,
-    GridsterModule,
     DexihSupportOptionsModule,
     SharedDataModule,
     SeriesAnimateModule
@@ -49,19 +50,19 @@ import { SeriesAnimateModule } from './ui/seriesAnimate/series-animate.module';
   exports: [
     CommonModule, FormsModule, RouterModule, DragDropModule,
 
-    UtilsModule,
-    DMarkdownModule,
-
+    // DMarkdownModule,
+    DComponentsModule,
     DTableModule,
+    NgxChartsModule,
+    GridsterModule,
+
+    UtilsModule,
     DexihMessageModule,
     DexihFormControlsModule,
-    DComponentsModule,
     DexihHelpModule,
     DexihIconsModule,
     QueryBuilderModule,
     ChartBuilderModule,
-    NgxChartsModule,
-    GridsterModule,
     DexihSupportOptionsModule,
     SeriesAnimateModule
   ],
