@@ -1,5 +1,5 @@
 <div *ngIf="currentStatus" style="width:100%"  >
-    <dexih-progressbar [animate]="true" [showCancel]="currentStatus.canCancel" (cancelled)="cancelled()" (click)="clicked()" [value]="currentStatus.percentage" [type]="currentStatus.statusType">
+    <d-progressbar [animate]="true" [showCancel]="currentStatus.canCancel" (cancelled)="cancelled()" (click)="clicked()" [value]="currentStatus.percentage" [type]="currentStatus.statusType">
         {{currentStatus.message}}
-    </dexih-progressbar>    
+    </d-progressbar>    
 </div>
