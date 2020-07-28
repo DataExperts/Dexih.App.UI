@@ -11,34 +11,37 @@
                 
             </li>
 
-            <div class="d-flex align-items-center m-3 " *ngFor="let datalinkTransform of datalinkTransforms; last as isLast">
+            <div class="d-flex m-3 " *ngFor="let datalinkTransform of datalinkTransforms; last as isLast">
                 <li  class="d-flex align-items-stretch p-0">
                     <a [routerLink]="['new', datalinkTransform.transform.value.position-1]" class="insert-before btn btn-sm btn-primary"
-                        title="Insert a transform before this"><i class="fa fa-plus"></i></a>
+                        title="Insert a transform before this"><i class="fa fa-plus"></i>
+                    </a>
                 
                     <a [routerLink]="['new', datalinkTransform.transform.value.position+1]" class="insert-after btn btn-sm btn-primary"
-                        title="Insert a transform after this"><i class="fa fa-plus"></i></a>
-
-                        <a class="delete btn btn-sm btn-danger  mr-1" href="javascript:void(0)"
-                        (click)="deleteTransform(datalinkTransform.transform.value)"
-                        title="Delete this transform"><i class="fa fa-remove"></i></a>
-
-
-                    <a [routerLink]="['transform', datalinkTransform.transform.value.key]" routerLinkActive="btn-outline-success" class="btn btn-outline-primary" style="width:100%"
-                        [title]="'Select the ' + datalinkTransform.transform.value.name + ' transform.'">
-                        <div class="d-block">
-                        {{datalinkTransform.name}}
-                        <div>
-                        <span class="fa-4x" [ngClass]="datalinkTransform.icon"></span>
-                        <dexih-invalid-form-icon [control]="datalinkTransform.transform">
-                        </dexih-invalid-form-icon>
-                    </div>
-                    </div>
+                        title="Insert a transform after this"><i class="fa fa-plus"></i>
                     </a>
 
+                    <a class="delete btn btn-sm btn-danger  mr-1" href="javascript:void(0)"
+                        (click)="deleteTransform(datalinkTransform.transform.value)"
+                        title="Delete this transform"><i class="fa fa-remove"></i>
+                    </a>
+
+
+                    <a [routerLink]="['transform', datalinkTransform.transform.value.key]" routerLinkActive="btn-outline-success"
+                        class="btn btn-outline-primary" style="width:100%"
+                        [title]="'Select the ' + datalinkTransform.transform.value.name + ' transform.'">
+                        <div class="d-block">
+                            {{datalinkTransform.name}}
+                            <div>
+                                <span class="fa-4x" [ngClass]="datalinkTransform.icon"></span>
+                                <dexih-invalid-form-icon [control]="datalinkTransform.transform">
+                                </dexih-invalid-form-icon>
+                            </div>
+                        </div>
+                    </a>
                 </li>
 
-                
+                <li>
                 <div class="arrow bg-primary">
                     <a class="preview btn btn-sm btn-primary  mr-1"
                         [routerLink]="['transform', datalinkTransform.transform.value.key, 'preview-transform-data']"
@@ -48,6 +51,7 @@
 
                     </div>
                 </div>
+            </li>
             </div>
         </ul>
     </div>

@@ -17,6 +17,7 @@
             <form-checkbox label="Specify a different logical name" formControlName="useLogical">
             </form-checkbox>
         </section>
+        
         <section *ngIf="columnFormService.currentForm.value.useLogical">
             <form-input label="Logical Name" formControlName="logicalName" placeholder="Enter the logical name." iconClass="fa fa-list"
                 [errors]="columnFormService.formErrors.logicalName" note="The logical name is a short term to represent the column">
