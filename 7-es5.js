@@ -4860,7 +4860,7 @@
 
       var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/cdk/drag-drop */
-      "./node_modules/@angular/cdk/fesm2015/drag-drop.js");
+      "./node_modules/@angular/cdk/__ivy_ngcc__/fesm2015/drag-drop.js");
       /* harmony import */
 
 
@@ -9658,7 +9658,7 @@
 
       var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/cdk/drag-drop */
-      "./node_modules/@angular/cdk/fesm2015/drag-drop.js");
+      "./node_modules/@angular/cdk/__ivy_ngcc__/fesm2015/drag-drop.js");
       /* harmony import */
 
 
@@ -16546,7 +16546,7 @@
 
       var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/cdk/drag-drop */
-      "./node_modules/@angular/cdk/fesm2015/drag-drop.js");
+      "./node_modules/@angular/cdk/__ivy_ngcc__/fesm2015/drag-drop.js");
       /* harmony import */
 
 
@@ -19461,7 +19461,7 @@
 
       var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
       /*! @angular/cdk/drag-drop */
-      "./node_modules/@angular/cdk/fesm2015/drag-drop.js");
+      "./node_modules/@angular/cdk/__ivy_ngcc__/fesm2015/drag-drop.js");
       /* harmony import */
 
 
@@ -21143,7 +21143,7 @@
         selectors: [["dexih-datalink-edit-transforms-form"]],
         decls: 3,
         vars: 2,
-        consts: [["title", "Transforms", 3, "padding"], ["class", "bg-light pt-1 pb-1 d-flex \u2248", 4, "ngIf"], [1, "bg-light", "pt-1", "pb-1", "d-flex", "\u2248"], [1, "transform-container"], ["class", "d-flex align-items-stretch p-0 m-3", 4, "ngIf"], ["class", "d-flex m-3 ", 4, "ngFor", "ngForOf"], [1, "d-flex", "align-items-stretch", "p-0", "m-3"], ["title", "Insert a transform before this", 1, "btn", "btn-outline-success", 3, "routerLink"], [1, "d-block"], [1, "fa", "fa-4x", "fa-plus"], [1, "d-flex", "m-3"], [1, "d-flex", "align-items-stretch", "p-0"], ["title", "Insert a transform before this", 1, "insert-before", "btn", "btn-sm", "btn-primary", 3, "routerLink"], [1, "fa", "fa-plus"], ["title", "Insert a transform after this", 1, "insert-after", "btn", "btn-sm", "btn-primary", 3, "routerLink"], ["href", "javascript:void(0)", "title", "Delete this transform", 1, "delete", "btn", "btn-sm", "btn-danger", "mr-1", 3, "click"], [1, "fa", "fa-remove"], ["routerLinkActive", "btn-outline-success", 1, "btn", "btn-outline-primary", 2, "width", "100%", 3, "routerLink", "title"], [1, "fa-4x", 3, "ngClass"], [3, "control"], [1, "arrow", "bg-primary"], ["title", "Preview transform data", 1, "preview", "btn", "btn-sm", "btn-primary", "mr-1", 3, "routerLink"], [1, "fa", "fa-search"], ["class", "arrow-head", 4, "ngIf"], [1, "arrow-head"]],
+        consts: [["title", "Transforms", 3, "padding"], ["class", "bg-light pt-1 pb-1 d-flex \u2248", 4, "ngIf"], [1, "bg-light", "pt-1", "pb-1", "d-flex", "\u2248"], [1, "transform-container"], ["class", "d-flex align-items-stretch p-0 m-3", 4, "ngIf"], ["class", "d-flex align-items-center m-3 ", 4, "ngFor", "ngForOf"], [1, "d-flex", "align-items-stretch", "p-0", "m-3"], ["title", "Insert a transform before this", 1, "btn", "btn-outline-success", 3, "routerLink"], [1, "d-block"], [1, "fa", "fa-4x", "fa-plus"], [1, "d-flex", "align-items-center", "m-3"], [1, "d-flex", "align-items-stretch", "p-0"], ["title", "Insert a transform before this", 1, "insert-before", "btn", "btn-sm", "btn-primary", 3, "routerLink"], [1, "fa", "fa-plus"], ["title", "Insert a transform after this", 1, "insert-after", "btn", "btn-sm", "btn-primary", 3, "routerLink"], ["href", "javascript:void(0)", "title", "Delete this transform", 1, "delete", "btn", "btn-sm", "btn-danger", "mr-1", 3, "click"], [1, "fa", "fa-remove"], ["routerLinkActive", "btn-outline-success", 1, "btn", "btn-outline-primary", 2, "width", "100%", 3, "routerLink", "title"], [1, "fa-4x", 3, "ngClass"], [3, "control"], [1, "arrow", "bg-primary"], ["title", "Preview transform data", 1, "preview", "btn", "btn-sm", "btn-primary", "mr-1", 3, "routerLink"], [1, "fa", "fa-search"], ["class", "arrow-head", 4, "ngIf"], [1, "arrow-head"]],
         template: function DatalinkEditTransformsComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-widget-section", 0);

@@ -30824,7 +30824,7 @@
         },
         decls: 3,
         vars: 3,
-        consts: [["class", "w-100 mb-1", "style", "min-width:300px", 4, "ngIf"], ["class", "w-100", "style", "min-width:300px", 4, "ngIf"], [1, "w-100", "mb-1", 2, "min-width", "300px"], ["queryParamsHandling", "merge", 3, "showCancel", "value", "type", "routerLink"], [3, "showCancel", "value", "type", "cancelled", 4, "ngIf"], [3, "showCancel", "value", "type", "cancelled"], [1, "fa", "fa-clock-o"], [3, "end"], [1, "w-100", 2, "min-width", "300px"], ["queryParamsHandling", "merge", 3, "showCancel", "routerLink", "value", "type", "cancelled", "progressClick"]],
+        consts: [["class", "mb-1", "style", "width: 300px;", 4, "ngIf"], ["style", "width: 300px;", 4, "ngIf"], [1, "mb-1", 2, "width", "300px"], ["queryParamsHandling", "merge", "height", "30px", 3, "showCancel", "value", "type", "routerLink"], ["height", "30px", "style", "width: 300px;", 3, "showCancel", "value", "type", "cancelled", 4, "ngIf"], ["height", "30px", 2, "width", "300px", 3, "showCancel", "value", "type", "cancelled"], [1, "fa", "fa-clock-o"], [3, "end"], [2, "width", "300px"], ["queryParamsHandling", "merge", "height", "30px", 2, "width", "300px", 3, "showCancel", "routerLink", "value", "type", "cancelled", "progressClick"]],
         template: function DatalinkStatusComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, DatalinkStatusComponent_div_0_Template, 3, 8, "div", 0);
@@ -30835,7 +30835,7 @@
           }
 
           if (rf & 2) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.previousStatus == null ? null : ctx.previousStatus.writerResult);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.previousStatus == null ? null : ctx.previousStatus.writerResult == null ? null : ctx.previousStatus.writerResult.auditKey);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
@@ -34583,13 +34583,13 @@
 
       var _angular_cdk_scrolling__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(
       /*! @angular/cdk/scrolling */
-      "./node_modules/@angular/cdk/fesm2015/scrolling.js");
+      "./node_modules/@angular/cdk/__ivy_ngcc__/fesm2015/scrolling.js");
       /* harmony import */
 
 
       var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(
       /*! @angular/cdk/drag-drop */
-      "./node_modules/@angular/cdk/fesm2015/drag-drop.js");
+      "./node_modules/@angular/cdk/__ivy_ngcc__/fesm2015/drag-drop.js");
       /* harmony import */
 
 
@@ -47350,7 +47350,7 @@
 
       var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/cdk/drag-drop */
-      "./node_modules/@angular/cdk/fesm2015/drag-drop.js");
+      "./node_modules/@angular/cdk/__ivy_ngcc__/fesm2015/drag-drop.js");
       /* harmony import */
 
 
