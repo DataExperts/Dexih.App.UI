@@ -11,7 +11,7 @@
                 
             </li>
 
-            <div class="d-flex m-3 " *ngFor="let datalinkTransform of datalinkTransforms; last as isLast">
+            <div class="d-flex align-items-center m-3 " *ngFor="let datalinkTransform of datalinkTransforms; last as isLast">
                 <li  class="d-flex align-items-stretch p-0">
                     <a [routerLink]="['new', datalinkTransform.transform.value.position-1]" class="insert-before btn btn-sm btn-primary"
                         title="Insert a transform before this"><i class="fa fa-plus"></i></a>

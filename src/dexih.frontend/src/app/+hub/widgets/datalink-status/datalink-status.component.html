@@ -1,31 +1,34 @@
-<div *ngIf="previousStatus?.writerResult" class="w-100 mb-1" style="min-width:300px" >
+<div *ngIf="previousStatus?.writerResult?.auditKey" class="mb-1" style="width: 300px;">
     <d-progressbar  
     [showCancel]="false" 
-    [value]="previousStatus.percentage" 
+    [value]="previousStatus.percentage"
     [type]="previousStatus.statusType" 
-    [routerLink]="['result-view', previousStatus.writerResult?.auditConnectionKey, previousStatus.writerResult?.auditKey]" queryParamsHandling="merge" >
+    [routerLink]="['result-view', previousStatus.writerResult?.auditConnectionKey, previousStatus.writerResult?.auditKey]" queryParamsHandling="merge"
+    height="30px" >
         (Previous) {{previousStatus.message}}
     </d-progressbar>
 </div>
 
-<div *ngIf="currentStatus?.writerResult" class="w-100 mb-1" style="min-width:300px" >
+<div *ngIf="currentStatus?.writerResult" class="mb-1" style="width: 300px;">
     <d-progressbar *ngIf="currentStatus.writerResult.runStatus == eRunStatus.Scheduled"  
         [showCancel]="true" 
         (cancelled)="cancelled()" 
         [value]="100" 
-        [type]="currentStatus.statusType">
+        [type]="currentStatus.statusType"
+        height="30px" style="width: 300px;">
         <i class="fa fa-clock-o"></i>Next - {{currentStatus.writerResult.scheduledTime | calendar}} (in <countdown [end]="currentStatus.writerResult.scheduledTime" ></countdown>)     
     </d-progressbar>    
 </div>
 
-<div *ngIf="currentStatus?.writerResult && currentStatus.writerResult.runStatus != eRunStatus.Scheduled"   class="w-100" style="min-width:300px" >
+<div *ngIf="currentStatus?.writerResult && currentStatus.writerResult.runStatus != eRunStatus.Scheduled"   style="width: 300px;">
     <d-progressbar 
         [showCancel]="showCancel" 
         (cancelled)="cancelled()" 
         (progressClick)="onProgressClick()"
         [routerLink]="['result-view', currentStatus.writerResult?.auditConnectionKey, currentStatus.writerResult?.auditKey]" queryParamsHandling="merge" 
         [value]="currentStatus.percentage" 
-        [type]="currentStatus.statusType">
+        [type]="currentStatus.statusType"
+        height="30px" style="width: 300px;">
         {{currentStatus.message}}
     </d-progressbar>    
 </div>
