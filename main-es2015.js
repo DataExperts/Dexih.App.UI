@@ -2256,6 +2256,9 @@ class AuthService {
         return this._waitMessagesObserve.asObservable();
     }
     addWaitMessage(message, maxTime = 10000, cancelToken = null) {
+        if (!message) {
+            return;
+        }
         let key = this.newGuid();
         this._waitMessages.set(key, { message: message, cancelToken: cancelToken });
         this._waitMessagesObserve.next(this._waitMessages);
@@ -14271,7 +14274,7 @@ class HubService {
             if (remoteAgent) {
                 let remoteAgentPromise = this.hubPostRemote('/api/Hub/GetRemoteAgentStatus', {
                     hubKey: hubCache.hub.hubKey
-                }, 'Getting the remote agent status...', null);
+                }, null, null);
                 let globalCachePromise = this.authService.getGlobalCachePromise();
                 let hubPromise = this.getHubCachePromise();
                 Promise.all([remoteAgentPromise, globalCachePromise, hubPromise]).then(values => {
@@ -18064,6 +18067,8 @@ function InputParametersComponent_div_0_d_button_new_1_Template(rf, ctx) { if (r
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-button-new", 5);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function InputParametersComponent_div_0_d_button_new_1_Template_d_button_new_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r5); const ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r4.add(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("autoCompact", false);
 } }
 function InputParametersComponent_div_0_div_2_form_1_div_1_div_7_Template(rf, ctx) { if (rf & 1) {
     const _r13 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
@@ -18144,7 +18149,7 @@ function InputParametersComponent_div_0_div_3_Template(rf, ctx) { if (rf & 1) {
 const _c0 = function (a0) { return { "d-flex": a0 }; };
 function InputParametersComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, InputParametersComponent_div_0_d_button_new_1_Template, 1, 0, "d-button-new", 2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, InputParametersComponent_div_0_d_button_new_1_Template, 1, 1, "d-button-new", 2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, InputParametersComponent_div_0_div_2_Template, 2, 1, "div", 3);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, InputParametersComponent_div_0_div_3_Template, 3, 0, "div", 4);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -18258,7 +18263,7 @@ class InputParametersComponent {
     }
 }
 InputParametersComponent.ɵfac = function InputParametersComponent_Factory(t) { return new (t || InputParametersComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_hub_service__WEBPACK_IMPORTED_MODULE_4__["HubService"])); };
-InputParametersComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: InputParametersComponent, selectors: [["input-parameters"]], inputs: { formsService: "formsService", parameters: "parameters", showEdit: "showEdit", parentParameters: "parentParameters", refreshEvent: "refreshEvent", allowAddRemove: "allowAddRemove" }, outputs: { onChange: "onChange", onRefreshData: "onRefreshData" }, features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵNgOnChangesFeature"]], decls: 1, vars: 1, consts: [[3, "ngClass", 4, "ngIf"], [3, "ngClass"], ["text", "Add Parameter", 3, "click", 4, "ngIf"], ["class", "pb-1 pr-1", 4, "ngFor", "ngForOf"], ["class", "alert alert-warning mt-2", 4, "ngIf"], ["text", "Add Parameter", 3, "click"], [1, "pb-1", "pr-1"], [3, "formGroup", 4, "ngIf"], [3, "formGroup"], ["class", "d-flex align-items-stretch flex-wrap", 4, "ngIf"], ["formControlName", "value", "itemKey", "key", "itemName", "name", "textEntryItemsTitle", "Linked Parameters", 1, "p-0", 3, "labelLeft", "items", "enableTextEntry", "textEntryItems", "showRefresh", "isRefreshing", "multiSelect", "ngModelChange", "textValueChange", "onRefresh"], [1, "d-flex", "align-items-stretch", "flex-wrap"], ["labelLeft", "Name", "formControlName", "name", 1, "p-0"], ["labelLeft", "LOV", "formControlName", "listOfValuesKey", "itemKey", "key", "itemName", "name", 1, "p-0", "flex-grow-1", 3, "items", "allowNullSelect"], ["formControlName", "allowUserSelect", 3, "border"], ["formControlName", "rank", 3, "border", "checkedValue", "unCheckedValue"], ["class", "input-group-append", 4, "ngIf"], [1, "input-group-append"], [1, "input-group-text", "p-0"], ["type", "button", "value", "Add", 1, "btn", "btn-sm", "border-0", "rounded-0", "bg-transparent", 3, "click"], [1, "fa", "fa-plus-square-o"], ["type", "button", "value", "Remove", 1, "btn", "btn-sm", "border-0", "rounded-0", "bg-transparent", 3, "click"], [1, "fa", "fa-minus-square-o"], [1, "alert", "alert-warning", "mt-2"], ["href", "javascript:void(0)", 1, "alert-link", 3, "click"]], template: function InputParametersComponent_Template(rf, ctx) { if (rf & 1) {
+InputParametersComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: InputParametersComponent, selectors: [["input-parameters"]], inputs: { formsService: "formsService", parameters: "parameters", showEdit: "showEdit", parentParameters: "parentParameters", refreshEvent: "refreshEvent", allowAddRemove: "allowAddRemove" }, outputs: { onChange: "onChange", onRefreshData: "onRefreshData" }, features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵNgOnChangesFeature"]], decls: 1, vars: 1, consts: [[3, "ngClass", 4, "ngIf"], [3, "ngClass"], ["text", "Add Parameter", 3, "autoCompact", "click", 4, "ngIf"], ["class", "pb-1 pr-1", 4, "ngFor", "ngForOf"], ["class", "alert alert-warning mt-2", 4, "ngIf"], ["text", "Add Parameter", 3, "autoCompact", "click"], [1, "pb-1", "pr-1"], [3, "formGroup", 4, "ngIf"], [3, "formGroup"], ["class", "d-flex align-items-stretch flex-wrap", 4, "ngIf"], ["formControlName", "value", "itemKey", "key", "itemName", "name", "textEntryItemsTitle", "Linked Parameters", 1, "p-0", 3, "labelLeft", "items", "enableTextEntry", "textEntryItems", "showRefresh", "isRefreshing", "multiSelect", "ngModelChange", "textValueChange", "onRefresh"], [1, "d-flex", "align-items-stretch", "flex-wrap"], ["labelLeft", "Name", "formControlName", "name", 1, "p-0"], ["labelLeft", "LOV", "formControlName", "listOfValuesKey", "itemKey", "key", "itemName", "name", 1, "p-0", "flex-grow-1", 3, "items", "allowNullSelect"], ["formControlName", "allowUserSelect", 3, "border"], ["formControlName", "rank", 3, "border", "checkedValue", "unCheckedValue"], ["class", "input-group-append", 4, "ngIf"], [1, "input-group-append"], [1, "input-group-text", "p-0"], ["type", "button", "value", "Add", 1, "btn", "btn-sm", "border-0", "rounded-0", "bg-transparent", 3, "click"], [1, "fa", "fa-plus-square-o"], ["type", "button", "value", "Remove", 1, "btn", "btn-sm", "border-0", "rounded-0", "bg-transparent", 3, "click"], [1, "fa", "fa-minus-square-o"], [1, "alert", "alert-warning", "mt-2"], ["href", "javascript:void(0)", 1, "alert-link", 3, "click"]], template: function InputParametersComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, InputParametersComponent_div_0_Template, 4, 6, "div", 0);
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.parameters);

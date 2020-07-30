@@ -3307,6 +3307,11 @@
 
             var maxTime = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10000;
             var cancelToken = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+
+            if (!message) {
+              return;
+            }
+
             var key = this.newGuid();
 
             this._waitMessages.set(key, {
@@ -24721,7 +24726,7 @@
               if (remoteAgent) {
                 var remoteAgentPromise = _this172.hubPostRemote('/api/Hub/GetRemoteAgentStatus', {
                   hubKey: hubCache.hub.hubKey
-                }, 'Getting the remote agent status...', null);
+                }, null, null);
 
                 var globalCachePromise = _this172.authService.getGlobalCachePromise();
 
@@ -31838,6 +31843,10 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
+
+        if (rf & 2) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("autoCompact", false);
+        }
       }
 
       function InputParametersComponent_div_0_div_2_form_1_div_1_div_7_Template(rf, ctx) {
@@ -32048,7 +32057,7 @@
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, InputParametersComponent_div_0_d_button_new_1_Template, 1, 0, "d-button-new", 2);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, InputParametersComponent_div_0_d_button_new_1_Template, 1, 1, "d-button-new", 2);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, InputParametersComponent_div_0_div_2_Template, 2, 1, "div", 3);
 
@@ -32248,7 +32257,7 @@
         features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵNgOnChangesFeature"]],
         decls: 1,
         vars: 1,
-        consts: [[3, "ngClass", 4, "ngIf"], [3, "ngClass"], ["text", "Add Parameter", 3, "click", 4, "ngIf"], ["class", "pb-1 pr-1", 4, "ngFor", "ngForOf"], ["class", "alert alert-warning mt-2", 4, "ngIf"], ["text", "Add Parameter", 3, "click"], [1, "pb-1", "pr-1"], [3, "formGroup", 4, "ngIf"], [3, "formGroup"], ["class", "d-flex align-items-stretch flex-wrap", 4, "ngIf"], ["formControlName", "value", "itemKey", "key", "itemName", "name", "textEntryItemsTitle", "Linked Parameters", 1, "p-0", 3, "labelLeft", "items", "enableTextEntry", "textEntryItems", "showRefresh", "isRefreshing", "multiSelect", "ngModelChange", "textValueChange", "onRefresh"], [1, "d-flex", "align-items-stretch", "flex-wrap"], ["labelLeft", "Name", "formControlName", "name", 1, "p-0"], ["labelLeft", "LOV", "formControlName", "listOfValuesKey", "itemKey", "key", "itemName", "name", 1, "p-0", "flex-grow-1", 3, "items", "allowNullSelect"], ["formControlName", "allowUserSelect", 3, "border"], ["formControlName", "rank", 3, "border", "checkedValue", "unCheckedValue"], ["class", "input-group-append", 4, "ngIf"], [1, "input-group-append"], [1, "input-group-text", "p-0"], ["type", "button", "value", "Add", 1, "btn", "btn-sm", "border-0", "rounded-0", "bg-transparent", 3, "click"], [1, "fa", "fa-plus-square-o"], ["type", "button", "value", "Remove", 1, "btn", "btn-sm", "border-0", "rounded-0", "bg-transparent", 3, "click"], [1, "fa", "fa-minus-square-o"], [1, "alert", "alert-warning", "mt-2"], ["href", "javascript:void(0)", 1, "alert-link", 3, "click"]],
+        consts: [[3, "ngClass", 4, "ngIf"], [3, "ngClass"], ["text", "Add Parameter", 3, "autoCompact", "click", 4, "ngIf"], ["class", "pb-1 pr-1", 4, "ngFor", "ngForOf"], ["class", "alert alert-warning mt-2", 4, "ngIf"], ["text", "Add Parameter", 3, "autoCompact", "click"], [1, "pb-1", "pr-1"], [3, "formGroup", 4, "ngIf"], [3, "formGroup"], ["class", "d-flex align-items-stretch flex-wrap", 4, "ngIf"], ["formControlName", "value", "itemKey", "key", "itemName", "name", "textEntryItemsTitle", "Linked Parameters", 1, "p-0", 3, "labelLeft", "items", "enableTextEntry", "textEntryItems", "showRefresh", "isRefreshing", "multiSelect", "ngModelChange", "textValueChange", "onRefresh"], [1, "d-flex", "align-items-stretch", "flex-wrap"], ["labelLeft", "Name", "formControlName", "name", 1, "p-0"], ["labelLeft", "LOV", "formControlName", "listOfValuesKey", "itemKey", "key", "itemName", "name", 1, "p-0", "flex-grow-1", 3, "items", "allowNullSelect"], ["formControlName", "allowUserSelect", 3, "border"], ["formControlName", "rank", 3, "border", "checkedValue", "unCheckedValue"], ["class", "input-group-append", 4, "ngIf"], [1, "input-group-append"], [1, "input-group-text", "p-0"], ["type", "button", "value", "Add", 1, "btn", "btn-sm", "border-0", "rounded-0", "bg-transparent", 3, "click"], [1, "fa", "fa-plus-square-o"], ["type", "button", "value", "Remove", 1, "btn", "btn-sm", "border-0", "rounded-0", "bg-transparent", 3, "click"], [1, "fa", "fa-minus-square-o"], [1, "alert", "alert-warning", "mt-2"], ["href", "javascript:void(0)", 1, "alert-link", 3, "click"]],
         template: function InputParametersComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, InputParametersComponent_div_0_Template, 4, 6, "div", 0);
