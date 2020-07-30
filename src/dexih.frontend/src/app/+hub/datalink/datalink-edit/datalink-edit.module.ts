@@ -30,7 +30,6 @@ import { PreviewDataComponent } from './preview-data';
 import { PreviewTableComponent} from './preview-table';
 import { DatalinkEditGuard } from './datalink-edit-guard';
 import { TransformTableEditComponent } from './transform-table-edit/transform-table-edit.component';
-import { DatalinkEditTransformsComponent } from './transforms/datalink-edit-transforms.component';
 import { HubSharedModule } from '../../hub.shared.module';
 import { TargetTableColumnComponent } from './target-table-column/target-table-column.component';
 import { TableSharedModule } from '../../table/table.shared.module';
@@ -40,6 +39,7 @@ import { ResultsViewModule } from '../../results/results-view/results-view.modul
 import { InputParameterComponent, OutputParameterComponent} from './parameters'
 import { TargetColumnsComponent, TargetColumnComponent} from './target-columns';
 import { DatalinkPreviewDataComponent } from '../datalink-preview-data';
+import { TransformStepComponent} from './transform-step/transform-step.component';
 
 @NgModule({
     imports: [
@@ -72,16 +72,15 @@ import { DatalinkPreviewDataComponent } from '../datalink-preview-data';
         MappingComponent, MappingItemComponent,
         PreviewDataComponent,
         PreviewTableComponent,
-        // DatalinkPreviewDataComponent,
         TransformTableEditComponent,
-        DatalinkEditTransformsComponent,
         DatalinkEditSaveButtonComponent,
         DatalinkEditNewTransformComponent,
         TargetTableColumnComponent,
         DatalinkTableComponent,
         DatalinkColumnEditComponent,
         InputParameterComponent, OutputParameterComponent,
-        UnGroupEditComponent
+        UnGroupEditComponent,
+        TransformStepComponent,
     ],
     providers: [ DatalinkEditService, HubFormsService, DatalinkEditGuard ],
     exports: []

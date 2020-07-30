@@ -1,59 +1,88 @@
-<d-widget-section title='Transforms' [padding]="false">
-    <div *ngIf="datalinkTransforms" class="bg-light pt-1 pb-1 d-flex ≈">
+    <!-- <div *ngIf="datalinkTransforms" class="bg-light pt-1 pb-1 d-flex">
         <ul class="transform-container">
-            <li class="d-flex align-items-stretch p-0 m-3" *ngIf="datalinkTransforms.length === 0">
-                <a [routerLink]="['new', 1]" class="btn btn-outline-success" title="Insert a transform before this">
-                    <div class="d-block">
-                        Add Transform
-                    </div>
-                    <i class="fa fa-4x fa-plus"></i>
-                </a>
+
+            <div class="d-flex m-3">
+                <transform-step 
+                    [routerLinkCurrent]="['properties']"
+                    [name]="'Properties'"
+                    [title]="'Edit the properties.'"
+                    [icon]="'fa fa-cog'"
+                    [control]=""
+                    [showDelete]="false"
+                    [showArrow]="false" >
+                </transform-step>
                 
-            </li>
+                <transform-step 
+                    [routerLinkAfter]="['new', 1]"
+                    [routerLinkCurrent]="['source']"
+                    [routerLinkPreview]="['source-preview']"
+                    [name]="'Source'"
+                    [title]="'Select the source table.'"
+                    [icon]="'fa fa-table'"
+                    [control]=""
+                    [showDelete]="false" >
+                </transform-step>
+            
+                <ng-template ngFor let-datalinkTransform [ngForOf]="datalinkTransforms" let-isLast="last" let-isFirst="first">
 
-            <div class="d-flex m-3 " *ngFor="let datalinkTransform of datalinkTransforms; last as isLast">
-                <li  class="d-flex align-items-stretch p-0">
-                    <a [routerLink]="['new', datalinkTransform.transform.value.position-1]" class="insert-before btn btn-sm btn-primary"
-                        title="Insert a transform before this"><i class="fa fa-plus"></i>
-                    </a>
+                    <transform-step 
+                        [routerLinkBefore]="['new', datalinkTransform.transform.value.position - 1]"
+                        [routerLinkAfter]="['new', datalinkTransform.transform.value.position + 1]"
+                        [routerLinkCurrent]="['transform', datalinkTransform.transform.value.key]"
+                        [routerLinkPreview]="['transform', datalinkTransform.transform.value.key, 'preview-transform-data']"
+                        [name]="datalinkTransform.name"
+                        [title]="'Select the ' + datalinkTransform.transform.value.name + ' transform.'"
+                        [icon]="datalinkTransform.icon"
+                        [control]="datalinkTransform.transform"
+                        [showDelete]="true"
+                        (onDelete)="deleteTransform(datalinkTransform.transform.value)"
+                    ></transform-step>
+
+                </ng-template>
+
+                <transform-step *ngIf="datalinkTransforms.length === 0"
+                    [routerLinkBefore]="['new', 1]"
+                    [routerLinkAfter]="['new', 1]"
+                    [routerLinkCurrent]="['new', 1]"
+                    [name]="'Add Transform'"
+                    [title]="'Add new transform'"
+                    [icon]="'fa fa-plus'"
+                    [showDelete]="false"
+                ></transform-step>
                 
-                    <a [routerLink]="['new', datalinkTransform.transform.value.position+1]" class="insert-after btn btn-sm btn-primary"
-                        title="Insert a transform after this"><i class="fa fa-plus"></i>
-                    </a>
+                <transform-step *ngIf="validationTransform"
+                    [routerLinkBefore]="['new', datalinkTransforms.length === 0 ? 1 : datalinkTransforms[datalinkTransforms.length-1].transform.value.position+1]"
+                    [routerLinkCurrent]="['validation']"
+                    [name]="'Validation'"
+                    [title]="'Validate Data'"
+                    [icon]="'fa fa-check-square-o'"
+                    [showDelete]="true"
+                    (onDelete)="disableValidation()">
+                </transform-step>
 
-                    <a class="delete btn btn-sm btn-danger  mr-1" href="javascript:void(0)"
-                        (click)="deleteTransform(datalinkTransform.transform.value)"
-                        title="Delete this transform"><i class="fa fa-remove"></i>
-                    </a>
+                <transform-step 
+                    [routerLinkBefore]="['new', datalinkTransforms.length === 0 ? 1 : datalinkTransforms[datalinkTransforms.length-1].transform.value.position+1]"
+                    [routerLinkCurrent]="['target']"
+                    [name]="'Target'"
+                    [title]="'Target tables(s)'"
+                    [icon]="'fa fa-arrow-circle-right'"
+                    [control]=""
+                    [showArrow]="false"
+                    [showDelete]="false">
+                </transform-step>
 
-
-                    <a [routerLink]="['transform', datalinkTransform.transform.value.key]" routerLinkActive="btn-outline-success"
-                        class="btn btn-outline-primary" style="width:100%"
-                        [title]="'Select the ' + datalinkTransform.transform.value.name + ' transform.'">
-                        <div class="d-block">
-                            {{datalinkTransform.name}}
-                            <div>
-                                <span class="fa-4x" [ngClass]="datalinkTransform.icon"></span>
-                                <dexih-invalid-form-icon [control]="datalinkTransform.transform">
-                                </dexih-invalid-form-icon>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-
-                <li>
-                <div class="arrow bg-primary">
-                    <a class="preview btn btn-sm btn-primary  mr-1"
-                        [routerLink]="['transform', datalinkTransform.transform.value.key, 'preview-transform-data']"
-                        title="Preview transform data"><i class="fa fa-search"></i></a>
-
-                    <div *ngIf="!isLast" class="arrow-head">
-
-                    </div>
-                </div>
-            </li>
+                <transform-step 
+                [routerLinkCurrent]="['profiles']"
+                [name]="'Profiles'"
+                [title]="'Edit the profiles.'"
+                [icon]="'fa fa-bug'"
+                [control]=""
+                [showDelete]="false"
+                [isLast]="true" >
+            </transform-step>
             </div>
+
         </ul>
     </div>
-</d-widget-section>
-<router-outlet></router-outlet>
+
+    <router-outlet></router-outlet> -->

@@ -1,8 +1,11 @@
-<d-widget-section title='Validation' [showExpandButton]="true">
+<d-widget-section title='Validation' [showExpandButton]="false">
 <div *ngIf="!datalinkTransformForm">
-    <h4>Target column validation is not currently enabled. </h4>
-    <d-button *ngIf="!datalinkTransformForm" (click)="enableValidation()" buttonClass="btn btn-success" iconClass="fa fa-check"  [autoCompact]="false"
-        title="Enable the validation on the target table.">Enable Validation</d-button>
+    <div class="alert alert-danger m-3">
+        Target column validation is not enabled.
+        <hr>
+        <d-button *ngIf="!datalinkTransformForm" (click)="enableValidation()" buttonClass="btn btn-success" iconClass="fa fa-check"  [autoCompact]="false"
+            title="Enable the validation on the target table.">Enable</d-button>
+    </div>
 </div>
 
 <div *ngIf="datalinkTransformForm">

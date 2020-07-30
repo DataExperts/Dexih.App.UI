@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HubService } from '../../../hub.service';
 import { DatalinkEditService } from '../datalink-edit.service';
-import { Observable, Subscription, combineLatest} from 'rxjs';
+import { Subscription, combineLatest} from 'rxjs';
 import { AuthService } from '../../../../+auth/auth.service';
-import { FormGroup, FormArray } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { HubCache } from '../../../hub.models';
 import { DexihTable, DexihTableColumn, eTransformType, RemoteLibraries } from '../../../../shared/shared.models';
 
@@ -18,6 +18,7 @@ export class DatalinkEditValidationComponent implements OnInit, OnDestroy {
     public datalinkTransformForm: FormGroup;
 
     private _subscription: Subscription;
+    private _transformsChange: Subscription;
 
     private hubCache: HubCache;
     private remoteLibraries: RemoteLibraries;
@@ -33,11 +34,8 @@ export class DatalinkEditValidationComponent implements OnInit, OnDestroy {
 
     constructor(
         private hubService: HubService,
-        private authService: AuthService,
         private editDatalinkService: DatalinkEditService,
-        private route: ActivatedRoute,
-        private router: Router
-    ) { }
+        private route: ActivatedRoute    ) { }
 
     ngOnInit() {
 
@@ -55,6 +53,9 @@ export class DatalinkEditValidationComponent implements OnInit, OnDestroy {
 
                 if (this.hubCache.isLoaded() && this.datalinkForm) {
                     this.datalinkTransformForm = this.editDatalinkService.getValidationTransform();
+
+                    this._transformsChange = this.datalinkForm.controls.dexihDatalinkTransforms.valueChanges
+                    .subscribe(() => this.datalinkTransformForm = this.editDatalinkService.getValidationTransform());
                 }
 
             });
@@ -65,6 +66,7 @@ export class DatalinkEditValidationComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         if (this._subscription) { this._subscription.unsubscribe(); }
+        if (this._transformsChange) { this._transformsChange.unsubscribe(); }
     }
 
     enableValidation() {

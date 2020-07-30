@@ -9,7 +9,7 @@ import { TransformReference } from '../../hub.remote.models';
 import { CancelToken } from '../../../+auth/auth.models';
 import { HubCache } from '../../hub.models';
 import { eTransformType, DexihDatalinkColumn, eParameterDirection, eTypeCode, DexihDatalinkTransformItem,
-    DexihDatalinkTransform, DexihDatalinkTable, eTransformItemType, eSourceType, eFunctionType } from '../../../shared/shared.models';
+    DexihDatalinkTransform, DexihDatalinkTable, eTransformItemType, eSourceType, eFunctionType, RemoteLibraries } from '../../../shared/shared.models';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 // contains shared objects used to edit the datalink.
@@ -25,6 +25,8 @@ export class DatalinkEditService implements OnInit, OnDestroy {
 
     public logger = new LogFactory('datalink-edit.service');
 
+    public remoteLibraries: RemoteLibraries;
+
     // used to stop save occurring when changing functions and target ables.
     savingDatalink = new BehaviorSubject(false);
 
@@ -39,6 +41,8 @@ export class DatalinkEditService implements OnInit, OnDestroy {
 
     public init(hubCache: HubCache) {
         this._hubCache = hubCache;
+
+        this.hubService.getRemoteLibrariesPromise().then(remoteLibraries => this.remoteLibraries = remoteLibraries)
     }
 
     ngOnDestroy() {
@@ -58,6 +62,23 @@ export class DatalinkEditService implements OnInit, OnDestroy {
             .find(c => c.value.transformType === eTransformType.Validation);
 
         return datalinkTransform;
+    }
+    
+    enableValidation(): FormGroup {
+        let transform = this.getValidationTransform();
+        if (!transform) {
+            let transform = this.remoteLibraries.transforms.find(c => c.transformType === eTransformType.Validation);
+            return this.insertDatalinkTransform(1, transform);
+        }
+
+        return transform;
+    }
+
+    disableValidation() {
+        let transform = this.getValidationTransform();
+        if (transform) {
+            this.deleteDatalinkTransform(transform.value);
+        }
     }
 
     getDatalinkTransform(datalinkTransformKey: number): FormGroup {

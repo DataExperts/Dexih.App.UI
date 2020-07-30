@@ -15,7 +15,6 @@ import { DatalinkEditGuard } from './datalink-edit-guard';
 import { PreviewDataComponent } from './preview-data';
 import { PreviewTableComponent} from './preview-table';
 import { TransformTableEditComponent } from './transform-table-edit/transform-table-edit.component';
-import { DatalinkEditTransformsComponent } from './transforms/datalink-edit-transforms.component';
 import { DatalinkEditNewTransformComponent } from './new-transform/datalink-edit-new-transform.component';
 import { TargetTableColumnComponent } from './target-table-column/target-table-column.component';
 import { DatalinkColumnEditComponent } from './datalink-column-edit/datalink-column-edit.component'
@@ -42,92 +41,92 @@ export const mappingEditRoutes: Routes = [
 //    {path: 'edit-column/:columnKey', component: TableColumnEditComponent, data: { pageTitle: 'Edit Column', action: 'edit'}}
 ]
 
+export const sourceTableRoutes: Routes = [
+    { path: '', pathMatch: 'full', component: DatalinkEditSourceTableComponent},
+    { path: 'preview-table-data/table/:tableKey', component: PreviewTableComponent,
+        data: { pageTitle: 'Preview Table', action: 'preview'} },
+    { path: 'preview-table-data/datalink/:datalinkKey', component: PreviewTableComponent,
+        data: { pageTitle: 'Preview Datalink', action: 'preview'} },
+    { path: 'column/:datalinkColumnKey', component: DatalinkColumnEditComponent,
+        data: { pageTitle: 'Edit Column', action: 'edit'} },
+    { path: 'newcolumn', component: DatalinkColumnEditComponent,
+        data: { pageTitle: 'New Column', action: 'new'} },
+    { path: 'table-edit/:tableKey', data: { pageTitle: 'Edit Table', action: 'edit'},
+            loadChildren: () => import('../../table/table-edit/table-edit.module').then(m => m.TableEditModule)},
+];
+
+export const targetRoutes: Routes = [
+    { path: '', pathMatch: 'full', component: DatalinkEditTargetComponent},
+    { path: 'table-edit/:targetKey', data: { pageTitle: 'Edit Target Table', action: 'edit'}, children: [
+        { path: '', pathMatch: 'full', canDeactivate: [DatalinkEditGuard], component: DatalinkEditTargetTableComponent },
+        { path: 'preview-table-data/:tableKey', component: PreviewTableComponent,
+            data: { pageTitle: 'Preview Table', action: 'preview'} },
+        ]},
+    { path: 'table-new', data: { pageTitle: 'New Target Table', action: 'new'}, children: [
+        { path: '', pathMatch: 'full', canDeactivate: [DatalinkEditGuard], component: DatalinkEditTargetTableComponent },
+        { path: 'preview-table-data/:tableKey', component: PreviewTableComponent,
+            data: { pageTitle: 'Preview Table', action: 'preview'} },
+        ]},
+];
+
+export const validationRoutes: Routes = [
+    {path: '', pathMatch: 'full', component: DatalinkEditValidationComponent, data: { pageTitle: 'Validation' } },
+    { path: 'standard-function-edit', data: { pageTitle: 'Standard Function' },
+        canDeactivate: [DatalinkEditGuard], component: StandardFunctionEditComponent },
+    { path: 'standard-function-edit/:functionType', data: { pageTitle: 'Standard Function' },
+        canDeactivate: [DatalinkEditGuard], component: StandardFunctionEditComponent },
+    { path: 'standard-function-edit/:functionType/:datalinkTransformItemKey', data: { pageTitle: 'Standard Function' },
+        canDeactivate: [DatalinkEditGuard], component: StandardFunctionEditComponent },
+    { path: 'custom-function-edit', data: { pageTitle: 'Custom Function' },
+        canDeactivate: [DatalinkEditGuard], component: CustomFunctionEditComponent },
+    { path: 'custom-function-edit/:functionType', data: { pageTitle: 'Custom Function' },
+        canDeactivate: [DatalinkEditGuard], component: CustomFunctionEditComponent },
+    { path: 'column/:datalinkColumnKey', component: DatalinkColumnEditComponent,
+        data: { pageTitle: 'Edit Column', action: 'edit'} },
+];
+
 export const datalinkEditRoutes: Routes = [
     { path: '', redirectTo: 'properties'},
 
     { path: 'properties', component: DatalinkEditPropertiesComponent, data: { pageTitle: 'Properties', help: 'datalink.md' } },
-
-    { path: 'source-table', data: { pageTitle: 'Source Table' }, children: [
-        { path: '', pathMatch: 'full', component: DatalinkEditSourceTableComponent},
-        { path: 'preview-table-data/table/:tableKey', component: PreviewTableComponent,
-            data: { pageTitle: 'Preview Table', action: 'preview'} },
-        { path: 'preview-table-data/datalink/:datalinkKey', component: PreviewTableComponent,
-            data: { pageTitle: 'Preview Datalink', action: 'preview'} },
-        { path: 'column/:datalinkColumnKey', component: DatalinkColumnEditComponent,
-            data: { pageTitle: 'Edit Column', action: 'edit'} },
-        { path: 'newcolumn', component: DatalinkColumnEditComponent,
-            data: { pageTitle: 'New Column', action: 'new'} },
+    { path: 'source', data: { pageTitle: 'Source'}, children: sourceTableRoutes },
+    { path: 'target', data: { pageTitle: 'Target'}, children: targetRoutes },
+    { path: 'validation', data: { pageTitle: 'Validation' }, children: validationRoutes},
+    { path: 'profiles', component: DatalinkEditProfileRulesComponent, data: { pageTitle: 'Profile Rules' } },
+    { path: 'new/:position', component: DatalinkEditNewTransformComponent, data: {pageTitle: 'New Transform'}},
+    { path: 'transform/:datalinkTransformKey', data: { pageTitle: 'Transform' } , children: [
+        { path: '', pathMatch: 'full', component: DatalinkEditTransformComponent },
         { path: 'table-edit/:tableKey', data: { pageTitle: 'Edit Table', action: 'edit'},
                 loadChildren: () => import('../../table/table-edit/table-edit.module').then(m => m.TableEditModule)},
-    ] },
-
-    { path: 'target', data: { breadCrumb: true, pageTitle: 'Targets' }, children: [
-        { path: '', pathMatch: 'full', component: DatalinkEditTargetComponent},
-        { path: 'table-edit/:targetKey', data: { pageTitle: 'Edit Target Table', action: 'edit'}, children: [
-            { path: '', pathMatch: 'full', canDeactivate: [DatalinkEditGuard], component: DatalinkEditTargetTableComponent },
-            { path: 'preview-table-data/:tableKey', component: PreviewTableComponent,
-                data: { pageTitle: 'Preview Table', action: 'preview'} },
-            ]},
-        { path: 'table-new', data: { pageTitle: 'New Target Table', action: 'new'}, children: [
-            { path: '', pathMatch: 'full', canDeactivate: [DatalinkEditGuard], component: DatalinkEditTargetTableComponent },
-            { path: 'preview-table-data/:tableKey', component: PreviewTableComponent,
-                data: { pageTitle: 'Preview Table', action: 'preview'} },
-            ]},
-    ] },
-
-    { path: 'transforms', component: DatalinkEditTransformsComponent, data: { pageTitle: 'Transforms' }, children: [
-        { path: 'new/:position', component: DatalinkEditNewTransformComponent, data: {pageTitle: 'New Transform'}},
-        { path: 'transform/:datalinkTransformKey', data: { pageTitle: 'Transform' } , children: [
-            { path: '', pathMatch: 'full', component: DatalinkEditTransformComponent },
-            { path: 'table-edit/:tableKey', data: { pageTitle: 'Edit Table', action: 'edit'},
-                    loadChildren: () => import('../../table/table-edit/table-edit.module').then(m => m.TableEditModule)},
-            { path: 'standard-function-edit', data: { pageTitle: 'Standard Function' },
-                canDeactivate: [DatalinkEditGuard], component: StandardFunctionEditComponent },
-            { path: 'standard-function-edit/:functionType', data: { pageTitle: 'Standard Function' },
-                canDeactivate: [DatalinkEditGuard], component: StandardFunctionEditComponent },
-            { path: 'standard-function-edit/:functionType/:datalinkTransformItemKey', data: { pageTitle: 'Standard Function' },
-                canDeactivate: [DatalinkEditGuard], component: StandardFunctionEditComponent },
-            { path: 'custom-function-edit', data: { pageTitle: 'Custom Function', help: 'function.md' },
-                canDeactivate: [DatalinkEditGuard], component: CustomFunctionEditComponent },
-            { path: 'custom-function-edit/:functionType', data: { pageTitle: 'Custom Function', help: 'function.md' },
-                canDeactivate: [DatalinkEditGuard], component: CustomFunctionEditComponent },
-            { path: 'custom-function-edit/:functionType/:datalinkTransformItemKey',
-                data: { pageTitle: 'Custom Function', help: 'function.md' },
-                canDeactivate: [DatalinkEditGuard], component: CustomFunctionEditComponent },
-            { path: 'mapping-edit/:type', data: { pageTitle: 'Mapping Edit' },
-                component: MappingEditComponent },
-            { path: 'mapping-edit/:type/:datalinkTransformItemKey', data: { pageTitle: 'Mapping Edit' },
-                component: MappingEditComponent },
-            { path: 'unGroup-edit', data: { pageTitle: 'Un-Group Edit' },
-                component: UnGroupEditComponent },
-            { path: 'unGroup-edit/:datalinkTransformItemKey', data: { pageTitle: 'Un-Group Edit' },
-                component: UnGroupEditComponent },
-            { path: 'preview-transform-data', data: { pageTitle: 'Preview Data' },
-                component: PreviewDataComponent },
-            { path: 'transform-table-edit', data: { pageTitle: 'Transform Table Edit' },
-                component: TransformTableEditComponent },
-            { path: 'column/:datalinkColumnKey', component: DatalinkColumnEditComponent,
-                data: { pageTitle: 'Edit Column', action: 'edit'} },
-        ] },
-
-    ] },
-
-    { path: 'validation', data: { pageTitle: 'Validation' }, children: [
-        {path: '', pathMatch: 'full', component: DatalinkEditValidationComponent, data: { pageTitle: 'Validation' } },
         { path: 'standard-function-edit', data: { pageTitle: 'Standard Function' },
             canDeactivate: [DatalinkEditGuard], component: StandardFunctionEditComponent },
         { path: 'standard-function-edit/:functionType', data: { pageTitle: 'Standard Function' },
             canDeactivate: [DatalinkEditGuard], component: StandardFunctionEditComponent },
         { path: 'standard-function-edit/:functionType/:datalinkTransformItemKey', data: { pageTitle: 'Standard Function' },
             canDeactivate: [DatalinkEditGuard], component: StandardFunctionEditComponent },
-        { path: 'custom-function-edit', data: { pageTitle: 'Custom Function' },
+        { path: 'custom-function-edit', data: { pageTitle: 'Custom Function', help: 'function.md' },
             canDeactivate: [DatalinkEditGuard], component: CustomFunctionEditComponent },
-        { path: 'custom-function-edit/:functionType', data: { pageTitle: 'Custom Function' },
+        { path: 'custom-function-edit/:functionType', data: { pageTitle: 'Custom Function', help: 'function.md' },
             canDeactivate: [DatalinkEditGuard], component: CustomFunctionEditComponent },
+        { path: 'custom-function-edit/:functionType/:datalinkTransformItemKey',
+            data: { pageTitle: 'Custom Function', help: 'function.md' },
+            canDeactivate: [DatalinkEditGuard], component: CustomFunctionEditComponent },
+        { path: 'mapping-edit/:type', data: { pageTitle: 'Mapping Edit' },
+            component: MappingEditComponent },
+        { path: 'mapping-edit/:type/:datalinkTransformItemKey', data: { pageTitle: 'Mapping Edit' },
+            component: MappingEditComponent },
+        { path: 'unGroup-edit', data: { pageTitle: 'Un-Group Edit' },
+            component: UnGroupEditComponent },
+        { path: 'unGroup-edit/:datalinkTransformItemKey', data: { pageTitle: 'Un-Group Edit' },
+            component: UnGroupEditComponent },
+        { path: 'preview-transform-data', data: { pageTitle: 'Preview Data' },
+            component: PreviewDataComponent },
+        { path: 'transform-table-edit', data: { pageTitle: 'Transform Table Edit' },
+            component: TransformTableEditComponent },
         { path: 'column/:datalinkColumnKey', component: DatalinkColumnEditComponent,
             data: { pageTitle: 'Edit Column', action: 'edit'} },
-    ]},
-    { path: 'profile-rules', component: DatalinkEditProfileRulesComponent, data: { pageTitle: 'Profile Rules' } },
+    ] },
+
     { path: 'run-plan', component: DatalinkRunPlanComponent, data: { pageTitle: 'Run Plan' } },
     { path: 'result-view/:auditConnectionKey/:auditKey', component: ResultsViewComponent, data: { pageTitle: 'Detailed Result' } }
 ];

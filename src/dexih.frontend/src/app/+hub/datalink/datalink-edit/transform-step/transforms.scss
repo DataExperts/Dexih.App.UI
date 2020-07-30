@@ -1,0 +1,105 @@
+
+// allow transform list to scroll horizontal
+.transform-container {
+    overflow-x: auto;
+    margin: auto;
+    overflow-y: hidden;
+}
+
+ul {
+    display: flex;
+    list-style: none;
+    padding: 0px;
+  }
+  li {
+    // padding: 20px;
+    margin: auto;
+    position: relative;
+    text-align: center;
+    // height: 150px;
+    min-width: 120px;
+  }
+
+a.active {    
+    color: white;
+    background: lightgrey;
+}
+
+.arrow {
+    height: 1px;
+    min-width: 88px;
+    width: 88px;
+    right: -13px;
+    position: relative;
+    top: 50%;
+  }
+
+  .arrow-last {
+    height: 1px;
+    min-width: 44px;
+    width: 44px;
+    right: -13px;
+    position: relative;
+    top: 50%;
+  }
+
+  .no-arrow {
+    min-width: 44px;
+    width: 44px;
+    right: -13px;
+    position: relative;
+    top: 50%;
+  }
+
+  .arrow-head {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 50%;
+    border-style: solid;
+    border-width: 7px 0 7px 20px;
+    border-color: transparent transparent transparent  #3a5f8d;;
+    // right: -50px;
+    left: calc(100% - 15px);
+    transform: translateY(-50%);
+  }
+
+  .preview {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: calc(50% - 19px);
+    transform: translateY(-50%);
+  }
+
+  .preview-last {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: calc(100% - 19px);
+    transform: translateY(-50%);
+  }
+
+  .insert-before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -16px;
+    transform: translateY(-50%);
+  }
+
+  .insert-after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: calc(100% - 16px);
+    transform: translateY(-50%);
+  }
+
+  .delete {
+    content: '';
+    position: absolute;
+    left: calc(100% - 16px);
+    top: -16px;
+  }

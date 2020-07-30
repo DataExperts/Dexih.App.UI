@@ -88,7 +88,7 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
                             .find(c => c.datalinkTransformKey === this.datalinkTransformKey);
 
                         if (!tmpDatalinkTransformForm) {
-                            this.router.navigate(['transforms'], { relativeTo: this.route.parent.parent.parent });
+                            this.router.navigate(['properties'], { relativeTo: this.route.parent.parent });
                         }
                     });
 
@@ -98,7 +98,8 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
                     // if the transform isn't found, this is probably due to a save/reload which changes the keys.
                     // navigate up one level when this happens.
                     if (!this.datalinkTransformForm) {
-                        this.authService.navigateUp();
+                        this.router.navigate(['properties'], { relativeTo: this.route.parent.parent });
+//                        this.authService.navigateUp();
                         return;
                     }
 
@@ -152,7 +153,7 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
                     });
 
                     if (!this.datalinkTransformForm) {
-                        this.router.navigate(['properties'], { relativeTo: this.route.parent.parent.parent });
+                        this.router.navigate(['properties'], { relativeTo: this.route.parent.parent });
                     }
 
                     this.logger.LogC(() => `datalink form is loaded`, eLogLevel.Trace);
@@ -184,11 +185,11 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
         if (this._datalinkFormSubscription) { this._datalinkFormSubscription.unsubscribe(); }
     }
 
-    deleteTransform() {
-        this.logger.LogC(() => `deleteTransform`, eLogLevel.Trace);
-        this.editDatalinkService.deleteDatalinkTransform(this.datalinkTransformForm.value);
-        this.router.navigate(['properties'], { relativeTo: this.route.parent.parent });
-    }
+    // deleteTransform() {
+    //     this.logger.LogC(() => `deleteTransform`, eLogLevel.Trace);
+    //     this.editDatalinkService.deleteDatalinkTransform(this.datalinkTransformForm.value);
+    //     this.router.navigate(['properties'], { relativeTo: this.route });
+    // }
 
     previewData() {
         this.router.navigate(['preview-transform-data'], { relativeTo: this.route.parent });

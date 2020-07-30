@@ -522,6 +522,7 @@ export class AuthService implements OnDestroy {
     // posts a command that will be collected from a remoteAgent
     public postRemote<T>(url: string, data, remoteAgent: DexihActiveAgent,
         waitMessage = 'Please wait while the operation completes.', cancelToken: CancelToken = null): PromiseWithCancel<T> {
+        
         let messageKey = this.addWaitMessage(waitMessage, null, cancelToken);
 
         if (!cancelToken) {
@@ -1904,6 +1905,8 @@ export class AuthService implements OnDestroy {
     }
 
     addWaitMessage(message: string, maxTime = 10000, cancelToken: CancelToken = null): string {
+        if (!message) { return; }
+        
         let key = this.newGuid();
         this._waitMessages.set(key, {message: message, cancelToken: cancelToken});
         this._waitMessagesObserve.next(this._waitMessages);

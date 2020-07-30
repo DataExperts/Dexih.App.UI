@@ -2,65 +2,104 @@
 	<d-widget title="Edit Datalink" iconClass="fa fa-lg fa-fw fa-exchange" [showCloseButton]="true"
 		[padding]="false" (close)="cancel()">
 		<ng-template #header>
-
-			<div class="d-none d-xl-inline">
-				<ul class="nav nav-tabs card-header-tabs">
-					<li class="nav-item"><a class="nav-link" routerLink="properties" routerLinkActive="active"><i
-								class="fa fa-cog"></i>Properties</a></li>
-					<li class="nav-item"><a class="nav-link" routerLink="source-table" routerLinkActive="active"><i
-								class="fa fa-arrow-circle-o-right"></i> Source</a></li>
-					<ng-template [ngIf]="datalinkForm?.controls.sourceDatalinkTable.value">
-						<li class="nav-item">
-							<a class="nav-link" routerLink="transforms" routerLinkActive="active">
-								<i class="fa fa-share-alt"></i>
-								Transforms
-								<dexih-invalid-form-icon [control]="datalinkForm.controls.dexihDatalinkTransforms">
-								</dexih-invalid-form-icon>
-							</a>
-						</li>
-						<li *ngIf="!datalinkForm.controls.isQuery.value" class="nav-item"><a class="nav-link"
-								routerLink="validation" routerLinkActive="active"><i class="fa fa-check-square-o"></i>
-								Validation</a></li>
-						<li *ngIf="!datalinkForm.controls.isQuery.value" class="nav-item"><a class="nav-link"
-								routerLink="profile-rules" routerLinkActive="active"><i class="fa fa-bug"></i>
-								Profiling</a></li>
-						<li class="nav-item"><a class="nav-link" routerLink="target" routerLinkActive="active"><i
-									class="fa fa-arrow-circle-right"></i> Target</a></li>
-					</ng-template>
-				</ul>
+			<datalink-status class="d-none d-xl-inline" [datalinkKey]='datalinkForm?.controls.key.value'>
+			</datalink-status>
+			<div class="ml-auto">
+				<d-button-dropdown class="mr-1" iconClass="fa fa-plus" text="Options">
+					<d-dropdown-item *ngIf="!validationTransform" iconClass="fa fa-check-square-o" text="Enable target table validation" (click)="enableValidation()"></d-dropdown-item>
+					<d-dropdown-item  iconClass="fa fa-arrow-circle-right" text="Add a target table." [routerLink]="['target', 'table-new']"></d-dropdown-item>
+				</d-button-dropdown>
+				<datalink-save-button></datalink-save-button>
 			</div>
 		</ng-template>
 
-		<ul class="list-group">
-			<li class="list-group-item rounded-0">
-				<div class="d-flex">
-					<div class="d-xl-none">
-						<d-button-dropdown buttonClass="btn btn-success" text="Navigate">
-							<a class="dropdown-item" routerLinkActive="active" routerLink="properties"><i
-										class="fa fa-cog"></i>Properties</a>
-							<a class="dropdown-item" routerLinkActive="active" routerLink="source-table"><i
-										class="fa fa-arrow-circle-o-right"></i>Source</a>
-							<ng-template [ngIf]="datalinkForm.controls.sourceDatalinkTable.value">
-								<a class="dropdown-item" routerLinkActive="active" routerLink="transforms"><i
-											class="fa fa-share-alt"></i>Transforms</a>
-								<a class="dropdown-item" *ngIf="!datalinkForm.controls.isQuery.value" routerLink="validation"
-										routerLinkActive="active"><i class="fa fa-check-square-o"></i>Validation</a>
-								<a class="dropdown-item" *ngIf="!datalinkForm.controls.isQuery.value" routerLink="profile-rules"
-										routerLinkActive="active"><i class="fa fa-bug"></i>Profiling</a>
-								<a class="dropdown-item" routerLink="target" routerLinkActive="active"><i
-											class="fa fa-arrow-circle-right"></i>Target</a>
-							</ng-template>
-						</d-button-dropdown>
-					</div>
-					<datalink-status class="d-none d-xl-inline" [datalinkKey]='datalinkForm?.controls.key.value'>
-					</datalink-status>
-					<div class="ml-auto">
-						<datalink-save-button></datalink-save-button>
-					</div>
+		<div *ngIf="datalinkTransforms" class="bg-light pt-1 pb-1 d-flex">
+			<ul class="transform-container">
+				<div class="d-flex m-3">
+					<transform-step 
+						[routerLinkCurrent]="['properties']"
+						[name]="'Properties'"
+						[title]="'Edit the properties.'"
+						[icon]="'fa fa-cog'"
+						[control]=""
+						[showDelete]="false"
+						[showArrow]="false" >
+					</transform-step>
+					
+					<transform-step 
+						[routerLinkAfter]="['new', 1]"
+						[routerLinkCurrent]="['source']"
+						[routerLinkPreview]="source.link"
+						[name]="source.name"
+						[title]="source.name + ' ' + (source.description ? source.description : '')"
+						[icon]="source.icon"
+						[control]=""
+						[showDelete]="false" >
+					</transform-step>
+				
+					<ng-template ngFor let-datalinkTransform [ngForOf]="datalinkTransforms" let-isLast="last" let-isFirst="first">
+	
+						<transform-step 
+							[routerLinkBefore]="['new', datalinkTransform.transform.value.position - 1]"
+							[routerLinkAfter]="['new', datalinkTransform.transform.value.position + 1]"
+							[routerLinkCurrent]="['transform', datalinkTransform.transform.value.key]"
+							[routerLinkPreview]="['transform', datalinkTransform.transform.value.key, 'preview-transform-data']"
+							[name]="datalinkTransform.name"
+							[title]="datalinkTransform.name + ' transform.'"
+							[icon]="datalinkTransform.icon"
+							[control]="datalinkTransform.transform"
+							[showDelete]="true"
+							(onDelete)="deleteTransform(datalinkTransform.transform.value)">
+						</transform-step>
+	
+					</ng-template>
+	
+					<transform-step *ngIf="datalinkTransforms.length === 0"
+						[routerLinkBefore]="['new', 1]"
+						[routerLinkAfter]="['new', 1]"
+						[routerLinkCurrent]="['new', 1]"
+						[name]="'Add Transform'"
+						[title]="'Add new transform'"
+						[icon]="'fa fa-plus'"
+						[showDelete]="false"
+					></transform-step>
+					
+					<transform-step *ngIf="validationTransform"
+						[routerLinkBefore]="['new', datalinkTransforms.length === 0 ? 1 : datalinkTransforms[datalinkTransforms.length-1].transform.value.position+1]"
+						[routerLinkCurrent]="['validation']"
+						[name]="'Validation'"
+						[title]="'Validate Data'"
+						[icon]="'fa fa-check-square-o'"
+						[showDelete]="true"
+						(onDelete)="disableValidation()">
+					</transform-step>
+	
+					<transform-step 
+						[routerLinkBefore]="['new', datalinkTransforms.length === 0 ? 1 : datalinkTransforms[datalinkTransforms.length-1].transform.value.position+1]"
+						[routerLinkCurrent]="['target']"
+						[name]="'Target'"
+						[title]="'Target tables(s)'"
+						[icon]="'fa fa-arrow-circle-right'"
+						[control]=""
+						[showArrow]="false"
+						[showDelete]="false">
+					</transform-step>
+	
+					<transform-step 
+					[routerLinkCurrent]="['profiles']"
+					[name]="'Profiles'"
+					[title]="'Edit the profiles.'"
+					[icon]="'fa fa-bug'"
+					[control]=""
+					[showDelete]="false"
+					[isLast]="true" >
+				</transform-step>
 				</div>
-			</li>
-			<router-outlet></router-outlet>
-		</ul>
+	
+			</ul>
+		</div>
+	
+		<router-outlet></router-outlet>
 
 	</d-widget>
 

@@ -21,15 +21,24 @@
         </section>
 
         <section *ngIf="datalinkTableForm.value.sourceType == eSourceType.Rows">
-            <form-input label="Start At" type="number" formControlName="rowsStartAt" placeholder="Enter start row number" iconClass="fa fa-list">
-            </form-input>
-
-            <form-input label="End At" type="number" formControlName="rowsEndAt" placeholder="Enter end row number" iconClass="fa fa-list">
-            </form-input>
-
-            <form-input label="Increment By" type="number" formControlName="rowsIncrement" placeholder="Enter increment value" iconClass="fa fa-list">
-            </form-input>
-        
+            <div class="row">
+                <div class="col-4">
+                    <form-input label="Start At" type="number" formControlName="rowsStartAt" placeholder="Enter start row number"
+                        iconClass="fa fa-list">
+                    </form-input>
+                </div>
+                <div class="col-4">
+                    <form-input label="End At" type="number" formControlName="rowsEndAt" placeholder="Enter end row number"
+                        iconClass="fa fa-list">
+                    </form-input>
+                </div>
+                <div class="col-4">
+            
+                    <form-input label="Increment By" type="number" formControlName="rowsIncrement"
+                        placeholder="Enter increment value" iconClass="fa fa-list">
+                    </form-input>
+                </div>
+            </div>
         </section>
 
         <section >

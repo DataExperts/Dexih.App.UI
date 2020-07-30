@@ -28,7 +28,7 @@ export class DatalinkEditProfileRulesComponent implements OnInit, OnDestroy {
         { name: 'description', title: 'Description', format: '' }
     ];
 
-    private _tableData = new BehaviorSubject<Array<DexihDatalinkProfile>>(null);
+    private _tableData = new BehaviorSubject<Array<any>>(null);
     tableData: Observable<Array<DexihDatalinkProfile>> = this._tableData.asObservable();
 
     constructor(
@@ -60,7 +60,9 @@ export class DatalinkEditProfileRulesComponent implements OnInit, OnDestroy {
                                     && c.functionClassName === profile.functionClassName
                                     && c.functionMethodName === profile.functionMethodName);
 
-                                return <DexihDatalinkProfile> {
+                                return {
+                                    name: profile.name,
+                                    description: profile.description,
                                     functionAssemblyName: profile.functionAssemblyName,
                                     functionClassName: profile.functionClassName,
                                     functionMethodName: profile.functionMethodName,

@@ -95,7 +95,6 @@ export class DatalinkTableComponent implements OnInit, OnDestroy {
             datalinkTable.sourceDatalinkKey = this.datalinkTableForm.controls.sourceDatalinkKey.value;
 
             this.datalinkEditService.reBuildDatalinkTable(datalinkTable);
-
             this.datalinkEditService.fixMappings(this.datalinkEditService.hubFormsService.currentForm);
 
             this.datalinkTableForm.controls.name.setValue(datalinkTable.name);

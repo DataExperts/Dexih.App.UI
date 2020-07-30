@@ -1,0 +1,14 @@
+
+// allow transform list to scroll horizontal
+.transform-container {
+    overflow-x: auto;
+    margin: auto;
+    overflow-y: hidden;
+}
+
+ul {
+    display: flex;
+    list-style: none;
+    padding: 0px;
+  }
+ 

@@ -1,0 +1,43 @@
+<div class="d-flex">
+    <li class="d-flex align-items-stretch p-0">
+        <a *ngIf="routerLinkBefore" [routerLink]="routerLinkBefore" class="insert-before btn btn-sm btn-primary"
+            title="Insert a transform before this"><i class="fa fa-plus"></i>
+        </a>
+
+        <a *ngIf="routerLinkAfter" [routerLink]="routerLinkAfter" class="insert-after btn btn-sm btn-primary"
+            title="Insert a transform after this"><i class="fa fa-plus"></i>
+        </a>
+
+        <a *ngIf="showDelete" class="delete btn btn-sm btn-danger mr-1" href="javascript:void(0)"
+            (click)="onDelete.emit()" title="Delete"><i class="fa fa-remove"></i>
+        </a>
+
+        <a [routerLink]="routerLinkCurrent" routerLinkActive="btn-outline-success" class="btn btn-outline-primary"
+            style="width:100%" [title]="title">
+            <div class="d-block">
+                <div class="text-truncate" style="max-width: 150px;">
+                    {{name}}
+                </div>
+                <div>
+                    <span class="fa-4x" [ngClass]="icon"></span>
+                    <dexih-invalid-form-icon [control]="control">
+                    </dexih-invalid-form-icon>
+                </div>
+            </div>
+        </a>
+    </li>
+
+    <li *ngIf="!isLast && showArrow">
+        <div class="bg-primary" [ngClass]="{'arrow': !isLast, 'arrow-last': isLast }">
+            <a *ngIf="routerLinkPreview" class="btn btn-sm btn-primary  mr-1"
+                [ngClass]="{'preview': !isLast, 'preview-last': isLast}" [routerLink]="routerLinkPreview"
+                title="Preview transform data"><i class="fa fa-search"></i></a>
+
+            <div *ngIf="!isLast" class="arrow-head">
+
+            </div>
+        </div>
+    </li>
+    <li *ngIf="!showArrow" class="no-arrow">
+    </li>
+</div>

@@ -873,7 +873,7 @@ export class HubService implements OnInit, OnDestroy {
             let remoteAgent = this.getRemoteAgentCurrent();
             if (remoteAgent) {
                 let remoteAgentPromise = this.hubPostRemote<RemoteAgentStatus>('/api/Hub/GetRemoteAgentStatus', {
-                    hubKey: hubCache.hub.hubKey }, 'Getting the remote agent status...', null);
+                    hubKey: hubCache.hub.hubKey }, null, null);
                 let globalCachePromise = this.authService.getGlobalCachePromise();
                 let hubPromise = this.getHubCachePromise();
 

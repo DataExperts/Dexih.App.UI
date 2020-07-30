@@ -1,24 +1,29 @@
-import { HostListener, Component, OnInit, OnDestroy } from '@angular/core';
+import { HostListener, Component, OnInit, OnDestroy, ɵSWITCH_VIEW_CONTAINER_REF_FACTORY__POST_R3__ } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd, Params } from '@angular/router';
 import { HubService } from '../../hub.service';
 import { DatalinkEditService } from './datalink-edit.service';
-import { Subscription, Observable, BehaviorSubject, combineLatest } from 'rxjs';
+import { Subscription, combineLatest } from 'rxjs';
 import { AuthService } from '../../../+auth/auth.service';
-import { FormGroup, FormArray, FormControl } from '@angular/forms';
+import { FormGroup, FormArray, AbstractControl } from '@angular/forms';
 import { LogFactory, eLogLevel } from '../../../../logging';
 import { HubCache, eCacheStatus } from '../../hub.models';
 import { DexihDatalinkTransform, eTransformWriterMethod, DexihDatalink, eDatalinkType,
     eSourceType, eTransformType, DexihDatalinkTable } from '../../../shared/shared.models';
+import { transformTypes } from '../../hub.remote.models';
+import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
     selector: 'dexih-datalink-edit-form',
-    templateUrl: './datalink-edit.component.html'
+    templateUrl: './datalink-edit.component.html',
+    styleUrls: ['./datalink-edit.component.scss']
 })
 export class DatalinkEditComponent implements OnInit, OnDestroy {
     public datalinkForm: FormGroup;
 
     private _subscription: Subscription;
     private _datalinkFormSubscription: Subscription;
+    private _transformsChange: Subscription;
+    private _sourceChange: Subscription;
     // private _datalinkTransformsSubscription: Subscription;
 
     private hubCache: HubCache;
@@ -32,11 +37,11 @@ export class DatalinkEditComponent implements OnInit, OnDestroy {
     public logger = new LogFactory('datalink-edit.component');
     public logCount = 0;
 
+    public eSourceType = eSourceType;
+
     public help: string;
 
-    // private _datalinkTransforms = new BehaviorSubject<Array<DexihDatalinkTransform>>(null);
-    // datalinkTransforms: Observable<Array<DexihDatalinkTransform>> = this._datalinkTransforms.asObservable();
-    // updatingTransforms = false;
+    public datalinkTransforms: {transform: AbstractControl, name: string, icon: string, invalid: boolean}[] = null;
 
     eTransformWriterMethod = eTransformWriterMethod;
 
@@ -44,6 +49,9 @@ export class DatalinkEditComponent implements OnInit, OnDestroy {
 
     showPage = false;
     showPageMessage = 'Loading datalink...';
+
+    public validationTransform;
+    public source = {};
 
     constructor(
         private hubService: HubService,
@@ -94,7 +102,7 @@ export class DatalinkEditComponent implements OnInit, OnDestroy {
                         if (confirm) {
                             this.load();
                         }
-                    }).catch(reason => {
+                    }).catch(() => {
                         return;
                     });
                 } else {
@@ -112,6 +120,8 @@ export class DatalinkEditComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         if (this._subscription) { this._subscription.unsubscribe(); }
         if (this._datalinkFormSubscription) { this._datalinkFormSubscription.unsubscribe(); }
+        if (this._transformsChange) { this._transformsChange.unsubscribe(); }
+        if (this._sourceChange) { this._sourceChange.unsubscribe(); }
 //        if (this._datalinkTransformsSubscription) { this._datalinkTransformsSubscription.unsubscribe(); }
 
         // shut down service
@@ -194,6 +204,8 @@ export class DatalinkEditComponent implements OnInit, OnDestroy {
 
         this.isLoaded = true;
 
+        
+
         // monitor for any changes to the datalink
         if (this._datalinkFormSubscription) { this._datalinkFormSubscription.unsubscribe(); }
         this._datalinkFormSubscription =
@@ -201,16 +213,18 @@ export class DatalinkEditComponent implements OnInit, OnDestroy {
                 if (!datalinkForm) { return; }
                 this.datalinkForm = datalinkForm;
 
-                // let datalinkTransforms = <FormArray>this.datalinkForm.controls.dexihDatalinkTransforms;
-                // this.updateTransforms(datalinkTransforms.value);
+                this.refreshTransforms();
 
-                // // monitor any add/remove transforms to update the tabs.
-                // if (this._datalinkTransformsSubscription) { this._datalinkTransformsSubscription.unsubscribe(); }
-                // this._datalinkTransformsSubscription = datalinkTransforms.valueChanges.subscribe(dt => {
-                //     if (!this.updatingTransforms) {
-                //         this.updateTransforms(dt);
-                //     }
-                // });
+                this.refreshSource(this.datalinkForm.controls.sourceDatalinkTable.value);
+                if (this._sourceChange) { this._sourceChange.unsubscribe(); }
+                this._sourceChange = this.datalinkForm.controls.sourceDatalinkTable.valueChanges.subscribe(source => {
+                    this.refreshSource(source);
+                });
+                
+
+                if (this._transformsChange) { this._transformsChange.unsubscribe(); }
+                this._transformsChange = this.datalinkForm.controls.dexihDatalinkTransforms.valueChanges
+                    .subscribe(() => this.refreshTransforms());
 
                 let key = datalinkForm.controls.key.value;
                 if (key) {
@@ -225,21 +239,6 @@ export class DatalinkEditComponent implements OnInit, OnDestroy {
         this.showPageMessage = '';
     }
 
-    // updateTransforms(datalinkTransforms: Array<any>) {
-    //     this.updatingTransforms = true;
-    //     this.logger.LogC(() => `updateTransforms`, eLogLevel.Trace);
-
-    //     // update the transform names
-    //     if (datalinkTransforms) {
-    //         let transforms = datalinkTransforms
-    //             .filter(c => c.transformType !== eTransformType.Delta && c.transformType !== eTransformType.Validation);
-    //         this._datalinkTransforms.next(transforms.sort((a, b) => a.position - b.position));
-    //     } else {
-    //         this._datalinkTransforms.next(null);
-    //     }
-    //     this.updatingTransforms = true;
-    // }
-
     public canDeactivate(): Promise<boolean> {
         return new Promise<boolean>((resolve) => {
             if (this.editDatalinkService.hubFormsService.hasChanged) {
@@ -247,7 +246,7 @@ export class DatalinkEditComponent implements OnInit, OnDestroy {
                     'The datalink changes have not been saved.  Do you want to discard the changes and exit?')
                     .then(confirm => {
                         resolve(confirm);
-                    }).catch(reason => {
+                    }).catch(() => {
                         resolve(false);
                     });
             } else {
@@ -261,6 +260,76 @@ export class DatalinkEditComponent implements OnInit, OnDestroy {
         if (this.editDatalinkService.hubFormsService.hasChanged) {
             $event.returnValue = 'The datalink changes have not been saved.  Do you want to discard the changes and exit?';
         }
+    }
+
+    enableValidation() {
+        if (!this.validationTransform) {
+            this.validationTransform = this.editDatalinkService.enableValidation();
+        }
+
+        this.router.navigate(['validation'], { relativeTo: this.route });
+    }
+
+    disableValidation() {
+        if (this.validationTransform) {
+            this.editDatalinkService.disableValidation();
+            this.validationTransform = null;
+        }
+    }
+
+    refreshSource(sourceDatalinkTable: DexihDatalinkTable) {
+        this.source = {
+            name: sourceDatalinkTable.name,
+            description: sourceDatalinkTable.description
+        };
+
+        switch(sourceDatalinkTable.sourceType) {
+            case eSourceType.Datalink:
+                this.source['icon'] = 'fa fa-exchange';
+                this.source['link'] = ['source', 'preview-table-data', 'datalink', sourceDatalinkTable.sourceDatalinkKey];
+                break;
+            case eSourceType.Table:
+                this.source['icon'] = 'fa fa-table';
+                this.source['link'] = ['source', 'preview-table-data', 'table', sourceDatalinkTable.sourceTableKey];
+                break;
+            case eSourceType.Rows:
+                this.source['icon'] = 'fa fa-bars';
+                this.source['link'] = null;
+
+        }
+    }
+
+    refreshTransforms() {
+        this.logger.LogC(() => `refreshing transforms list`, eLogLevel.Trace);
+
+        const transformsArray = <FormArray> this.datalinkForm.controls.dexihDatalinkTransforms;
+        const transforms =  transformsArray.controls
+            .filter(c => c.value.transformType !== eTransformType.Validation &&
+                c.value.transformType !== eTransformType.Profile)
+            .sort((a, b) => a.value.position - b.value.position);
+
+        const datalinkTransforms = transforms.map(transform => {
+            const type = transformTypes.find(c => c.key === transform.value.transformType);
+            let icon = '';
+            if (type) {
+                icon = type.icon
+            }
+            const name = this.hubCache.getTransformName(transform.value);
+            return {transform: transform, icon: icon, name: name, invalid: transform.invalid};
+        });
+
+        this.datalinkTransforms = datalinkTransforms;
+    }
+
+    deleteTransform(datalinkTransform: DexihDatalinkTransform) {
+        this.logger.LogC(() => `deleteTransform`, eLogLevel.Trace);
+        this.editDatalinkService.deleteDatalinkTransform(datalinkTransform).then(() => {
+            this.refreshTransforms();
+        });
+    }
+
+    previewData(datalinkTransform: DexihDatalinkTransform) {
+        this.router.navigate(['transform', datalinkTransform.key, 'preview-transform-data'], { relativeTo: this.route });
     }
 
     saveDatalink() {
