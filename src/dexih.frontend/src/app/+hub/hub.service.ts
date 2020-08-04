@@ -2038,7 +2038,7 @@ export class HubService implements OnInit, OnDestroy {
     }
 
     bulkUploadFiles(connectionKey: number, fileFormatKey: number, formatType: eTypeCode,
-        includeFileName: boolean, includeFileDate: boolean, includeFileRowNumber: boolean,
+        loadData: boolean, includeFileName: boolean, includeFileDate: boolean, includeFileRowNumber: boolean,
         fileName: string, cancelToken: CancelToken):
     Promise<{url: string, reference: string}> {
         return new Promise<{url: string, reference: string}>((resolve, reject) => {
@@ -2050,6 +2050,7 @@ export class HubService implements OnInit, OnDestroy {
                 connectionKey: connectionKey,
                 fileFormatKey: fileFormatKey,
                 formatType: formatType,
+                loadData: loadData,
                 includeFileName,
                 includeFileDate,
                 includeFileRowNumber,

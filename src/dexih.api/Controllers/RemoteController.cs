@@ -469,7 +469,8 @@ namespace dexih.api.Controllers
                 {
                     hubKey = flatFilesReady.HubKey,
                     reference = flatFilesReady.Reference,
-                    tables = flatFilesReady.Tables
+                    tables = flatFilesReady.Tables,
+                    message = flatFilesReady.Message
                 };
 
                 //broadcast the new file to the client

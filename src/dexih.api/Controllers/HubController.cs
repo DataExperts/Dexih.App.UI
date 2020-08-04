@@ -1347,7 +1347,7 @@ namespace dexih.api.Controllers
 	    {
 		    _logger.LogTrace(LoggingEvents.HubBulkUploadFiles, "HubController.HubBulkUploadFiles: HubKey: {updateBrowserHub}, ConnectionKey: {ConnectionKey}.", bulkUploadFile.HubKey, bulkUploadFile.ConnectionKey);
 
-		    var result = await _remoteAgents.BulkUploadFiles(bulkUploadFile.RemoteAgentId, bulkUploadFile.HubKey, bulkUploadFile.DownloadUrl, bulkUploadFile.ConnectionId, bulkUploadFile.ConnectionKey, bulkUploadFile.FileFormatKey, bulkUploadFile.FormatType, bulkUploadFile.IncludeFileName, bulkUploadFile.IncludeFileDate, bulkUploadFile.IncludeFileRowNumber, bulkUploadFile.FileName, _operations.RepositoryManager, cancellationToken);
+		    var result = await _remoteAgents.BulkUploadFiles(bulkUploadFile.RemoteAgentId, bulkUploadFile.HubKey, bulkUploadFile.DownloadUrl, bulkUploadFile.ConnectionId, bulkUploadFile.ConnectionKey, bulkUploadFile.FileFormatKey, bulkUploadFile.FormatType, bulkUploadFile.LoadData, bulkUploadFile.IncludeFileName, bulkUploadFile.IncludeFileDate, bulkUploadFile.IncludeFileRowNumber, bulkUploadFile.FileName, _operations.RepositoryManager, cancellationToken);
 		    return result;
 	    }
 	    

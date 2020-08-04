@@ -102,6 +102,7 @@ export class FilesBulkLoadComponent implements OnInit, OnDestroy {
                     'connectionKey': [connectionKey],
                     'formatType': [eTypeCode.Text],
                     'fileFormatKey': [],
+                    'loadData': [true],
                     'includeFileName': [false],
                     'includeFileDate': [false],
                     'includeFileRowNumber': [false]
@@ -118,6 +119,10 @@ export class FilesBulkLoadComponent implements OnInit, OnDestroy {
             if (this._flatFilesSubscription) { this._flatFilesSubscription.unsubscribe(); }
             this._flatFilesSubscription = this.hubService.getFlatFilesObservable().subscribe(flatFileReady => {
                 if (flatFileReady.reference === this.reference) {
+                    if (!flatFileReady.message.success) {
+                        this.hubService.addHubMessage(flatFileReady.message);
+                    }
+                    
                     this.tables = flatFileReady.tables;
                 }
             });
@@ -162,7 +167,7 @@ export class FilesBulkLoadComponent implements OnInit, OnDestroy {
     public doUpload(files) {
         Array.prototype.forEach.call(files, file => {
             let bulkLoad = this.bulkLoadForm.value;
-            this.hubService.bulkUploadFiles(bulkLoad.connectionKey, bulkLoad.fileFormatKey, bulkLoad.formatType,
+            this.hubService.bulkUploadFiles(bulkLoad.connectionKey, bulkLoad.fileFormatKey, bulkLoad.formatType, bulkLoad.loadData,
                 bulkLoad.includeFileName, bulkLoad.includeFileDate, bulkLoad.includeFileRowNumber, file.name,
                 this.cancelToken).then(result => {
                 let url = result.url;

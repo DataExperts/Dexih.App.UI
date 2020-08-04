@@ -160,6 +160,8 @@ namespace dexih.api.Models
         public long FileFormatKey { get; set; }
         public ETypeCode FormatType { get; set; }
         public string FileName { get; set; }
+        
+        public bool LoadData { get; set; }
         public bool IncludeFileName { get; set; }
         public bool IncludeFileDate { get; set; }
         public bool IncludeFileRowNumber { get; set; }

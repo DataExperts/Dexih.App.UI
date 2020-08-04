@@ -556,7 +556,8 @@ namespace dexih.api.Services.Remote
 		    string connectionId, 
 		    long connectionKey, 
 		    long fileFormatKey, 
-		    ETypeCode formatType, 
+		    ETypeCode formatType,
+		    bool loadData,
 		    bool includeFileName, bool includeFileDate, bool includeFileRowNumber,
 		    string fileName, 
 		    
@@ -579,6 +580,7 @@ namespace dexih.api.Services.Remote
 				    connectionKey,
 				    fileFormatKey,
 				    formatType,
+				    loadData,
 				    includeFileName,
 				    includeFileDate,
 				    includeFileRowNumber,

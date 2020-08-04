@@ -2777,6 +2777,7 @@ export class FlatFilesReady {
     public hubKey: number;
     public reference: string;
     public tables: DexihTable[];
+    public message: Message;
 }
 
 export class DashboardUrl {

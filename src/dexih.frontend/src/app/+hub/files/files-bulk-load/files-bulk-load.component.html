@@ -37,6 +37,7 @@
             </div>
 
             <section >
+                <form-checkbox label="Create physical table and load data" formControlName="loadData"></form-checkbox>
                 <form-checkbox label="Include file name field" formControlName="includeFileName"></form-checkbox>
                 <form-checkbox label="Include file date field" formControlName="includeFileDate"></form-checkbox>
                 <form-checkbox label="Include file row field" formControlName="includeFileRowNumber"></form-checkbox>
@@ -83,11 +84,11 @@
                 </d-table>            
             </d-widget-section>
     
-            <d-widget-section title='Tables Created' [showExpandButton]="true" [padding]="false">
+            <d-widget-section title='Edit and Save Tables' [showExpandButton]="true" [padding]="false">
                 <d-table [enableMultiSelect]="true" [columns]="tableColumns" [data]="tables" (rowClick)="editTable($event)">
 
                     <ng-template select="selectedItemsAction" #selectedItemsAction let-items="items">
-                        <d-button class="ml-1" (click)="saveTables(items)" iconClass="fa fa-table" title="Save the selected tables.">Create Tables</d-button>
+                        <d-button-save class="ml-1" (click)="saveTables(items)" title="Save the selected tables."></d-button-save>
                         <d-button class="ml-1" (click)="createDatalinks(items)" iconClass="fa fa-exchange" title="Save the selected tables, and create datalinks to load them into a staging area.">Create Datalinks</d-button>
                         <d-button-delete class="ml-1"  (click)="discardTables(items)" title="Discard the selected tables." text="Discard"></d-button-delete>
                     </ng-template>
