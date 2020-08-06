@@ -25,7 +25,8 @@ export class PreviewResultsComponent implements OnInit, OnDestroy {
     public selectQuery = new SelectQuery();
 
     private refreshDataSubject: Subject<void> = new Subject<void>();
-
+    public refreshDataObservable = this.refreshDataSubject.asObservable();
+    
     private runningQuery: PromiseWithCancel<PreviewResults>;
     private cancelToken = new CancelToken();
 

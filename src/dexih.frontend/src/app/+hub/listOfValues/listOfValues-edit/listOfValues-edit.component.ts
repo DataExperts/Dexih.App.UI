@@ -32,7 +32,8 @@ export class ListOfValuesEditComponent implements OnInit, OnDestroy {
   private isLoaded = false;
 
   private refreshDataSubject: Subject<void> = new Subject<void>();
-
+  public refreshDataObservable = this.refreshDataSubject.asObservable();
+  
   private cancelToken = new CancelToken();
 
   public eLOVObjectType = eLOVObjectType;

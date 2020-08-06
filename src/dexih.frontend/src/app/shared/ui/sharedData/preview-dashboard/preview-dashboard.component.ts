@@ -23,7 +23,8 @@ export class PreviewDashboardComponent implements OnInit, OnDestroy {
     public message: string;
 
     private refreshDataSubject: Subject<void> = new Subject<void>();
-
+    public refreshDataObservable = this.refreshDataSubject.asObservable();
+    
     public inputColumns: InputColumn[];
     public tableColumns: DexihColumnBase[];
 

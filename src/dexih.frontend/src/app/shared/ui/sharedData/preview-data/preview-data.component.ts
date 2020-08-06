@@ -25,7 +25,8 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
     private _subscription: Subscription;
 
     private refreshDataSubject: Subject<void> = new Subject<void>();
-
+    public refreshDataObservable = this.refreshDataSubject.asObservable();
+    
     public action: string; // new or edit
     public pageTitle: string;
     public message: string;

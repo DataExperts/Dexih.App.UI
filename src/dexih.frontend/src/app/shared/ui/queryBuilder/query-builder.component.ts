@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter, OnDestroy, SimpleChanges } from '@angular/core';
 import { SelectQuery, InputColumn, TableColumn, SelectColumn, eSortDirection, Filter, eTypeCode, eCompare } from '../../shared.models';
 import { DexihInputParameter } from '../../../+hub/hub.models';
 import { compare } from '../../../+hub/hub.query.models';
@@ -62,7 +62,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, OnDestroy {
         if (this._refreshSubscription) { this._refreshSubscription.unsubscribe(); }
     }
 
-    ngOnChanges() {
+    ngOnChanges(changed: SimpleChanges) {
         if (this.parameters) {
             this.variables = this.parameters.map(c => '{' + c.name + '}');
         }

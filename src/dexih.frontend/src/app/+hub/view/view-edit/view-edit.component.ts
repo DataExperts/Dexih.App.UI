@@ -9,9 +9,7 @@ import { CancelToken } from '../../../+auth/auth.models';
 import { HubCache, ConnectionTables, eCacheStatus } from '../../hub.models';
 import { eViewType, DexihDatalink, InputColumn, DexihColumnBase, SelectQuery,
   DexihView, DownloadObject, eDataObjectType, ChartConfig, InputParameterBase, DexihActiveAgent, AnimateConfig } from '../../../shared/shared.models';
-import { Functions } from '../../../shared/utils/functions';
-import { FormArray, FormGroup, FormControl } from '@angular/forms';
-import { parseStackingContexts } from 'html2canvas/dist/types/render/stacking-context';
+import { FormArray, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'dexih-view-edit-form',
@@ -35,7 +33,8 @@ export class ViewEditComponent implements OnInit, OnDestroy {
   private _changesSubscription: Subscription;
 
   private refreshDataSubject: Subject<void> = new Subject<void>();
-
+  public refreshDataObservable = this.refreshDataSubject.asObservable();
+  
   sourceTypes = [
     { key: eDataObjectType.Datalink, name: 'Datalink' },
     { key: eDataObjectType.Table, name: 'Table' }

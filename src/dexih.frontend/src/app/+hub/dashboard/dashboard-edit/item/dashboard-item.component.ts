@@ -50,7 +50,8 @@ export class DashboardItemComponent implements OnInit, OnChanges, OnDestroy {
     public dataRows = [];
 
     private refreshDataSubject: Subject<void> = new Subject<void>();
-
+    public refreshDataObservable = this.refreshDataSubject.asObservable();
+    
     private cancelToken = new CancelToken();
 
     public parentParameters;

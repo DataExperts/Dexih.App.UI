@@ -9,7 +9,7 @@
                     </form-input>
                 </section>
                 <section>
-                    <form-textarea label="Description" [showMarkdown]="true" formControlName="description"
+                    <form-textarea label="Description" [showPreview]="true" formControlName="description"
                         placeholder="Enter the description.">
                     </form-textarea>
                 </section>
@@ -49,7 +49,7 @@
 
     <d-widget-section  title="Parameters" *ngIf="showEdit || parameters?.length > 0" [showExpandButton]="true" (onChange)="parameterChange()">
         <input-parameters [showEdit]="showEdit" [parameters]="parameters"
-            [formsService]="formsService" (onChange)="parameterChange()" (onRefreshData)="refresh()" [refreshEvent]="refreshDataSubject.asObservable()" ></input-parameters>
+            [formsService]="formsService" (onChange)="parameterChange()" (onRefreshData)="refresh()" [refreshEvent]="refreshDataObservable" ></input-parameters>
     </d-widget-section>
 
     <d-widget-section *ngIf="inputColumns && inputColumns.length > 0" title="InputColumns"

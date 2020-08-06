@@ -25,7 +25,7 @@
         </section>
 
         <section *ngIf="detailedView">
-            <form-textarea label="Description" formControlName="description" [showMarkdown]="true" placeholder="Enter the description."
+            <form-textarea label="Description" formControlName="description" [showPreview]="true" placeholder="Enter the description."
                 [errors]="columnFormService.formErrors.description">
             </form-textarea>
         </section>

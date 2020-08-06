@@ -16,7 +16,7 @@
 					</form-input>
 				</section>
 				<section>
-					<form-textarea label="Description" [showMarkdown]="true" formControlName="description"
+					<form-textarea label="Description" [showPreview]="true" formControlName="description"
 						placeholder="Enter the description.">
 					</form-textarea>
 				</section>
@@ -116,7 +116,7 @@
 		<ng-template [ngIf]="formsService.currentForm.value.sourceType !== eLOVObjectType.Static">
 			<d-widget-section title="Query Configuration" [showExpandButton]="true">
 				<query-builder [selectQuery]="formsService.currentForm.controls.selectQuery.value" [columns]="tableColumns"
-					[inputColumns]="inputColumns" [parameters]="null" (hasChanged)="hasChanged()" [refreshEvent]="refreshDataSubject.asObservable()" (onRefreshData)="refreshData()"></query-builder>
+					[inputColumns]="inputColumns" [parameters]="null" (hasChanged)="hasChanged()" [refreshEvent]="refreshDataObservable" (onRefreshData)="refreshData()"></query-builder>
 			</d-widget-section>
 		
 			<div *ngIf="!data" class="m-3">

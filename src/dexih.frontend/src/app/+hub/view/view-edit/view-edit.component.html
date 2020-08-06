@@ -31,7 +31,7 @@
 					</form-input>
 				</section>
 				<section>
-					<form-textarea label="Description" [showMarkdown]="true" formControlName="description" placeholder="Enter the description.">
+					<form-textarea label="Description" [showPreview]="true" formControlName="description" placeholder="Enter the description.">
 					</form-textarea>
 				</section>
 				<section>
@@ -65,7 +65,7 @@
 			</fieldset>
 		</form>
 
-		<input-parameters [showEdit]="showEdit" [parameters]="formsService.currentForm?.controls.parameters" [formsService]="formsService" [refreshEvent]="refreshDataSubject.asObservable()" (onRefreshData)="refresh()" (onChange)="parameterChange()"></input-parameters>
+		<input-parameters [showEdit]="showEdit" [parameters]="formsService.currentForm?.controls.parameters" [formsService]="formsService" [refreshEvent]="refreshDataObservable" (onRefreshData)="refresh()" (onChange)="parameterChange()"></input-parameters>
 
 		<div class="mt-3"  *ngIf="!data || data.length === 0">
 			<d-button-refresh  class="mr-1" (click)="refresh()" text="Reload" [autoCompact]="false"></d-button-refresh>
@@ -87,7 +87,7 @@
 		<series-animate [showEdit]="showEdit" [animateConfig]="animateConfig" [columns]="columns" (hasChanged)="hasChanged()" [baseData]="baseData" [(data)]="data"></series-animate>
 
 		<d-widget-section  *ngIf="showEdit" title="Query Configuration" [showExpandButton]="true">
-			<query-builder  [selectQuery]="formsService.currentForm.controls.selectQuery.value" [columns]="tableColumns" [inputColumns]="inputColumns" [parameters]="formsService.currentForm.controls.parameters.value" (hasChanged)="hasChanged()" [refreshEvent]="refreshDataSubject.asObservable()" (onRefreshData)="refresh()"></query-builder>
+			<query-builder  [selectQuery]="formsService.currentForm.controls.selectQuery.value" [columns]="tableColumns" [inputColumns]="inputColumns" [parameters]="formsService.currentForm.controls.parameters.value" (hasChanged)="hasChanged()" [refreshEvent]="refreshDataObservable" (onRefreshData)="refresh()"></query-builder>
 		</d-widget-section>
 
 		<ng-template [ngIf]="columns?.length > 0 && data?.length > 0">

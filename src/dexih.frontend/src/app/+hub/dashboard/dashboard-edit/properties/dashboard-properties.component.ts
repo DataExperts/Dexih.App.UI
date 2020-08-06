@@ -26,7 +26,8 @@ export class DashboardPropertiesComponent implements OnInit, OnDestroy {
     private _hubCacheSubscription: Subscription;
 
     private refreshDataSubject: Subject<void> = new Subject<void>();
-
+    public refreshDataObservable = this.refreshDataSubject.asObservable();
+    
     eViewType = eViewType;
     eSourceType = eSourceType;
 

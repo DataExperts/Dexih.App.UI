@@ -32,7 +32,7 @@
 
                 <div *ngIf="userParameters && userParameters.length > 0" class="m-1">
                     <input-parameters-view [hubKey]="hubKey" [objectType]="objectType" [objectKey]="objectKey"
-                        [parameters]="userParameters" [refreshEvent]="refreshDataSubject.asObservable()"
+                        [parameters]="userParameters" [refreshEvent]="refreshDataObservable"
                         (onRefreshData)="refresh()" (onChange)="parameterChange()"></input-parameters-view>
                 </div>
 
@@ -65,7 +65,7 @@
 
     <div *ngIf="userParameters && userParameters.length > 0" class="mt-1">
         <input-parameters-view [hubKey]="hubKey" [objectType]="objectType" [objectKey]="objectKey"
-            [parameters]="userParameters" [refreshEvent]="refreshDataSubject.asObservable()" (onRefreshData)="refresh()"
+            [parameters]="userParameters" [refreshEvent]="refreshDataObservable" (onRefreshData)="refresh()"
             (onChange)="parameterChange()">
         </input-parameters-view>
     </div>

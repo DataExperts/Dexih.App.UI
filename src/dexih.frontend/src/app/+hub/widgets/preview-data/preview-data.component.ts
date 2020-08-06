@@ -26,6 +26,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
     private hubCache: HubCache;
 
     private refreshDataSubject: Subject<void> = new Subject<void>();
+    public refreshDataObservable = this.refreshDataSubject.asObservable();
     
     public action: string; // new or edit
     public pageTitle: string;
