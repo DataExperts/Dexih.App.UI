@@ -13754,7 +13754,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showMarkdown", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
 
@@ -13909,7 +13909,7 @@
         features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([_hub_forms_service__WEBPACK_IMPORTED_MODULE_4__["HubFormsService"]])],
         decls: 6,
         vars: 3,
-        consts: [[1, "container"], ["title", "Edit Format", "iconClass", "fa fa-lg fa-fw fa-file-text-o", 3, "showCloseButton", "padding", "close"], ["header", ""], [3, "formGroup", 4, "ngIf"], ["title", "File Formats", "path", "/assets/help/reference/fileFormat.md", 1, "m-3"], [1, "mr-1", 3, "control", "click"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [3, "formsService"], [1, "mr-1", 3, "formsService"], [3, "formGroup"], ["label", "File Format Name", "formControlName", "name", "placeholder", "Enter the file format name.", "iconClass", "fa fa-list", 3, "errors", "autocapitalize"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showMarkdown"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Delimiter", "formControlName", "delimiter", "placeholder", "Enter the delimiter", "iconClass", "fa fa-list", "note", "The field delimiter (use \\t=tab, \\n=new line, \\r=carriage return).", 3, "errors"], ["type", "number", "label", "Buffer Size", "formControlName", "bufferSize", "placeholder", "Enter buffer size", "iconClass", "fa fa-list", "note", "The size of the internal buffer that is used when reader or writing data.", 3, "errors"], ["type", "number", "label", "Skip Header Rows Count", "formControlName", "skipHeaderRows", "placeholder", "Enter row count", "iconClass", "fa fa-list", "note", "The number of rows at the start of the file that will be ignored.", 3, "errors"], ["label", "Has Header Record", "formControlName", "hasHeaderRecord", "note", "Tells the reader/writer if there is a header row in the CSV file."], ["label", "Ignore Header White Space", "formControlName", "ignoreHeaderWhiteSpace", "note", "Tells the reader to ignore white space in the headers when matching the columns to the properties by name."], ["label", "Match to Column to Header", "formControlName", "matchHeaderRecord", "note", "Tells the reader to use the column heading name to load the data.  If unchecked, columns will be read into fields in the order specified in the table columns."], ["label", "Set White Space Cells to Null ", "formControlName", "setWhiteSpaceCellsToNull", "note", "Set empty cells or cells containing only white spaces to null."], ["label", "Allow Comments", "formControlName", "allowComments"], [4, "ngIf"], ["label", "Ignore Quotes", "formControlName", "ignoreQuotes"], ["label", "Quote All Fields", "formControlName", "quoteAllFields", "note", "Tells the writer whether all fields written should have quotes around them; regardless if the field contains anything that should be escaped."], ["label", "Quote No Fields", "formControlName", "quoteNoFields", "note", "Tells the writer whether all fields written should not have quotes around them; regardless if the field contains anything that should be escaped."], ["label", "Trim Fields", "formControlName", "trimFields", "note", "Tells the reader to trim whitespace from the beginning and ending of the field value when reading."], ["label", "Trim Headers", "formControlName", "trimHeaders", "note", "Tells the reader to ignore white space from the beginning and ending of the headers when matching the columns to the properties by name."], ["label", "Detect Column Count Changes", "formControlName", "detectColumnCountChanges", "note", "Check for changes in the number of column from row to row.  If true, the job will abend."], ["label", "Ignore Reading Exceptions", "formControlName", "ignoreReadingExceptions", "note", "Tells the reader to ignore any issues when parsing the file.  Issues mean the file is bad in some way, and the parser isn't able to recover."], ["label", "Will Abend On Missing Field", "formControlName", "willThrowOnMissingField", "note", "Indicates if the job should be abended if reading and an expected field is missing."], ["label", "Skip Empty Records", "formControlName", "skipEmptyRecords", "note", "Tells the reader a record should be skipped when reading if it's empty. A record is considered empty if all fields are empty."], ["label", "Comment", "formControlName", "comment", "placeholder", "Enter comment character", "iconClass", "fa fa-list", "note", "The value used to denote a line that is commented out.", 3, "errors"], ["label", "Quote", "formControlName", "quote", "placeholder", "Enter the quote", "iconClass", "fa fa-list", "note", "The value used to escape fields that contain a delimiter, quote, or line ending.", 3, "maxlength", "errors"]],
+        consts: [[1, "container"], ["title", "Edit Format", "iconClass", "fa fa-lg fa-fw fa-file-text-o", 3, "showCloseButton", "padding", "close"], ["header", ""], [3, "formGroup", 4, "ngIf"], ["title", "File Formats", "path", "/assets/help/reference/fileFormat.md", 1, "m-3"], [1, "mr-1", 3, "control", "click"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [3, "formsService"], [1, "mr-1", 3, "formsService"], [3, "formGroup"], ["label", "File Format Name", "formControlName", "name", "placeholder", "Enter the file format name.", "iconClass", "fa fa-list", 3, "errors", "autocapitalize"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Delimiter", "formControlName", "delimiter", "placeholder", "Enter the delimiter", "iconClass", "fa fa-list", "note", "The field delimiter (use \\t=tab, \\n=new line, \\r=carriage return).", 3, "errors"], ["type", "number", "label", "Buffer Size", "formControlName", "bufferSize", "placeholder", "Enter buffer size", "iconClass", "fa fa-list", "note", "The size of the internal buffer that is used when reader or writing data.", 3, "errors"], ["type", "number", "label", "Skip Header Rows Count", "formControlName", "skipHeaderRows", "placeholder", "Enter row count", "iconClass", "fa fa-list", "note", "The number of rows at the start of the file that will be ignored.", 3, "errors"], ["label", "Has Header Record", "formControlName", "hasHeaderRecord", "note", "Tells the reader/writer if there is a header row in the CSV file."], ["label", "Ignore Header White Space", "formControlName", "ignoreHeaderWhiteSpace", "note", "Tells the reader to ignore white space in the headers when matching the columns to the properties by name."], ["label", "Match to Column to Header", "formControlName", "matchHeaderRecord", "note", "Tells the reader to use the column heading name to load the data.  If unchecked, columns will be read into fields in the order specified in the table columns."], ["label", "Set White Space Cells to Null ", "formControlName", "setWhiteSpaceCellsToNull", "note", "Set empty cells or cells containing only white spaces to null."], ["label", "Allow Comments", "formControlName", "allowComments"], [4, "ngIf"], ["label", "Ignore Quotes", "formControlName", "ignoreQuotes"], ["label", "Quote All Fields", "formControlName", "quoteAllFields", "note", "Tells the writer whether all fields written should have quotes around them; regardless if the field contains anything that should be escaped."], ["label", "Quote No Fields", "formControlName", "quoteNoFields", "note", "Tells the writer whether all fields written should not have quotes around them; regardless if the field contains anything that should be escaped."], ["label", "Trim Fields", "formControlName", "trimFields", "note", "Tells the reader to trim whitespace from the beginning and ending of the field value when reading."], ["label", "Trim Headers", "formControlName", "trimHeaders", "note", "Tells the reader to ignore white space from the beginning and ending of the headers when matching the columns to the properties by name."], ["label", "Detect Column Count Changes", "formControlName", "detectColumnCountChanges", "note", "Check for changes in the number of column from row to row.  If true, the job will abend."], ["label", "Ignore Reading Exceptions", "formControlName", "ignoreReadingExceptions", "note", "Tells the reader to ignore any issues when parsing the file.  Issues mean the file is bad in some way, and the parser isn't able to recover."], ["label", "Will Abend On Missing Field", "formControlName", "willThrowOnMissingField", "note", "Indicates if the job should be abended if reading and an expected field is missing."], ["label", "Skip Empty Records", "formControlName", "skipEmptyRecords", "note", "Tells the reader a record should be skipped when reading if it's empty. A record is considered empty if all fields are empty."], ["label", "Comment", "formControlName", "comment", "placeholder", "Enter comment character", "iconClass", "fa fa-list", "note", "The value used to denote a line that is commented out.", 3, "errors"], ["label", "Quote", "formControlName", "quote", "placeholder", "Enter the quote", "iconClass", "fa fa-list", "note", "The value used to escape fields that contain a delimiter, quote, or line ending.", 3, "maxlength", "errors"]],
         template: function FileFormatEditComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -14038,7 +14038,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -26468,7 +26468,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -27443,7 +27443,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -27715,7 +27715,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showMarkdown", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
 
@@ -27801,7 +27801,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showEdit", ctx_r3.showEdit)("parameters", ctx_r3.formsService.currentForm == null ? null : ctx_r3.formsService.currentForm.controls.parameters)("formsService", ctx_r3.formsService)("refreshEvent", ctx_r3.refreshDataSubject.asObservable());
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showEdit", ctx_r3.showEdit)("parameters", ctx_r3.formsService.currentForm == null ? null : ctx_r3.formsService.currentForm.controls.parameters)("formsService", ctx_r3.formsService)("refreshEvent", ctx_r3.refreshDataObservable);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
@@ -27909,7 +27909,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("selectQuery", ctx_r5.formsService.currentForm.controls.selectQuery.value)("columns", ctx_r5.tableColumns)("inputColumns", ctx_r5.inputColumns)("parameters", ctx_r5.formsService.currentForm.controls.parameters.value)("refreshEvent", ctx_r5.refreshDataSubject.asObservable());
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("selectQuery", ctx_r5.formsService.currentForm.controls.selectQuery.value)("columns", ctx_r5.tableColumns)("inputColumns", ctx_r5.inputColumns)("parameters", ctx_r5.formsService.currentForm.controls.parameters.value)("refreshEvent", ctx_r5.refreshDataObservable);
         }
       }
 
@@ -28087,6 +28087,7 @@
           this.showEdit = false;
           this.hasEdited = false;
           this.refreshDataSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
+          this.refreshDataObservable = this.refreshDataSubject.asObservable();
           this.sourceTypes = [{
             key: _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eDataObjectType"].Datalink,
             name: 'Datalink'
@@ -28563,7 +28564,7 @@
         features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([_hub_forms_service__WEBPACK_IMPORTED_MODULE_4__["HubFormsService"]])],
         decls: 1,
         vars: 1,
-        consts: [["class", "container", 4, "ngIf"], [1, "container"], ["title", "Edit View", "iconClass", "fa fa-lg fa-fw fa-bar-chart", 3, "showCloseButton", "padding", "close"], ["header", ""], ["title", "Properties", 3, "showExpandButton", 4, "ngIf"], ["title", "InputColumns", 3, "showExpandButton", 4, "ngIf"], [3, "showEdit", "animateConfig", "columns", "baseData", "data", "hasChanged", "dataChange"], ["title", "Query Configuration", 3, "showExpandButton", 4, "ngIf"], [3, "ngIf"], ["title", "Views", "path", "/assets/help/reference/view.md", 1, "m-3"], [1, "mr-1", 3, "control", "click"], ["text", "Reload", 1, "mr-1", 3, "click"], [1, "mr-1", 3, "download"], ["data-toggle", "buttons", "title", "Table", 1, "btn-group", "btn-group-toggle", "mr-1"], [1, "btn", "btn-primary", 3, "ngClass"], ["type", "radio", "name", "options", "value", "table", "autocomplete", "off", 3, "click"], [1, "fa", "fa-table"], ["title", "Chart", 1, "btn", "btn-primary", 3, "ngClass"], ["type", "radio", "name", "options", "value", "chart", "autocomplete", "off", 3, "click"], [1, "fa", "fa-bar-chart"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [1, "mr-1", 3, "text", "click"], [3, "formsService"], [1, "mr-1", 3, "formsService"], ["title", "Properties", 3, "showExpandButton"], [3, "formGroup", 4, "ngIf"], [3, "showEdit", "parameters", "formsService", "refreshEvent", "onRefreshData", "onChange"], ["class", "mt-3", 4, "ngIf"], [3, "formGroup"], ["label", "View Name", "formControlName", "name", "placeholder", "Enter the view name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showMarkdown"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Data Source Type", "formControlName", "sourceType", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "Specify the source type for this view", 3, "items", "enableFilter"], ["class", "form-group col-md-6", 4, "ngIf"], ["formControlName", "autoRefresh", "label", "Automatically refresh data when view is opened"], ["label", "View is shared in the catalog to users with read access.", "formControlName", "isShared"], ["label", "Source Table", "formControlName", "sourceTableKey", "parentName", "name", "childItems", "dexihTables", "itemKey", "key", "itemName", "logicalName", "note", "Select the source table", 3, "errors", "items"], [3, "key"], ["label", "Source Datalink", "formControlName", "sourceDatalinkKey", "itemKey", "key", "itemName", "name", "note", "Select the source datalink", 3, "errors", "items"], ["text", "Refresh Parameters", 3, "click"], [1, "mt-3"], ["text", "Reload", 1, "mr-1", 3, "autoCompact", "click"], ["title", "InputColumns", 3, "showExpandButton"], ["class", "input-group", 4, "ngFor", "ngForOf"], [1, "input-group"], [1, "input-group-prepend"], [1, "input-group-text"], [1, "form-control", "p-0", 3, "name", "placeholder", "ngModel", "ngModelChange"], ["title", "Query Configuration", 3, "showExpandButton"], [3, "selectQuery", "columns", "inputColumns", "parameters", "refreshEvent", "hasChanged", "onRefreshData"], [3, "enableMultiSelect", "enableSaveCsv", "columns", "data", "hideTable", 4, "ngIf"], [4, "ngIf"], [3, "enableMultiSelect", "enableSaveCsv", "columns", "data", "hideTable"], ["actions", ""], [3, "title", "columns", "data", "config", "showEdit", "hasChanged"]],
+        consts: [["class", "container", 4, "ngIf"], [1, "container"], ["title", "Edit View", "iconClass", "fa fa-lg fa-fw fa-bar-chart", 3, "showCloseButton", "padding", "close"], ["header", ""], ["title", "Properties", 3, "showExpandButton", 4, "ngIf"], ["title", "InputColumns", 3, "showExpandButton", 4, "ngIf"], [3, "showEdit", "animateConfig", "columns", "baseData", "data", "hasChanged", "dataChange"], ["title", "Query Configuration", 3, "showExpandButton", 4, "ngIf"], [3, "ngIf"], ["title", "Views", "path", "/assets/help/reference/view.md", 1, "m-3"], [1, "mr-1", 3, "control", "click"], ["text", "Reload", 1, "mr-1", 3, "click"], [1, "mr-1", 3, "download"], ["data-toggle", "buttons", "title", "Table", 1, "btn-group", "btn-group-toggle", "mr-1"], [1, "btn", "btn-primary", 3, "ngClass"], ["type", "radio", "name", "options", "value", "table", "autocomplete", "off", 3, "click"], [1, "fa", "fa-table"], ["title", "Chart", 1, "btn", "btn-primary", 3, "ngClass"], ["type", "radio", "name", "options", "value", "chart", "autocomplete", "off", 3, "click"], [1, "fa", "fa-bar-chart"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [1, "mr-1", 3, "text", "click"], [3, "formsService"], [1, "mr-1", 3, "formsService"], ["title", "Properties", 3, "showExpandButton"], [3, "formGroup", 4, "ngIf"], [3, "showEdit", "parameters", "formsService", "refreshEvent", "onRefreshData", "onChange"], ["class", "mt-3", 4, "ngIf"], [3, "formGroup"], ["label", "View Name", "formControlName", "name", "placeholder", "Enter the view name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Data Source Type", "formControlName", "sourceType", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "Specify the source type for this view", 3, "items", "enableFilter"], ["class", "form-group col-md-6", 4, "ngIf"], ["formControlName", "autoRefresh", "label", "Automatically refresh data when view is opened"], ["label", "View is shared in the catalog to users with read access.", "formControlName", "isShared"], ["label", "Source Table", "formControlName", "sourceTableKey", "parentName", "name", "childItems", "dexihTables", "itemKey", "key", "itemName", "logicalName", "note", "Select the source table", 3, "errors", "items"], [3, "key"], ["label", "Source Datalink", "formControlName", "sourceDatalinkKey", "itemKey", "key", "itemName", "name", "note", "Select the source datalink", 3, "errors", "items"], ["text", "Refresh Parameters", 3, "click"], [1, "mt-3"], ["text", "Reload", 1, "mr-1", 3, "autoCompact", "click"], ["title", "InputColumns", 3, "showExpandButton"], ["class", "input-group", 4, "ngFor", "ngForOf"], [1, "input-group"], [1, "input-group-prepend"], [1, "input-group-text"], [1, "form-control", "p-0", 3, "name", "placeholder", "ngModel", "ngModelChange"], ["title", "Query Configuration", 3, "showExpandButton"], [3, "selectQuery", "columns", "inputColumns", "parameters", "refreshEvent", "hasChanged", "onRefreshData"], [3, "enableMultiSelect", "enableSaveCsv", "columns", "data", "hideTable", 4, "ngIf"], [4, "ngIf"], [3, "enableMultiSelect", "enableSaveCsv", "columns", "data", "hideTable"], ["actions", ""], [3, "title", "columns", "data", "config", "showEdit", "hasChanged"]],
         template: function ViewEditComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, ViewEditComponent_div_0_Template, 10, 11, "div", 0);
@@ -28675,7 +28676,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -29453,7 +29454,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -29629,7 +29630,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -29803,7 +29804,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -30036,7 +30037,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -30210,7 +30211,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -30950,7 +30951,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -31132,7 +31133,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -31306,7 +31307,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -32363,7 +32364,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -32549,7 +32550,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -32779,7 +32780,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("parameters", ctx_r14.parameters)("refreshEvent", ctx_r14.refreshDataSubject.asObservable());
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("parameters", ctx_r14.parameters)("refreshEvent", ctx_r14.refreshDataObservable);
         }
       }
 
@@ -32815,7 +32816,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("selectQuery", ctx_r3.selectQuery)("columns", ctx_r3.tableColumns)("inputColumns", ctx_r3.inputColumns)("parameters", ctx_r3.parameters)("refreshEvent", ctx_r3.refreshDataSubject.asObservable());
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("selectQuery", ctx_r3.selectQuery)("columns", ctx_r3.tableColumns)("inputColumns", ctx_r3.inputColumns)("parameters", ctx_r3.parameters)("refreshEvent", ctx_r3.refreshDataObservable);
         }
       }
 
@@ -32833,6 +32834,7 @@
           this.authService = authService;
           this.previewUpdates = false;
           this.refreshDataSubject = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
+          this.refreshDataObservable = this.refreshDataSubject.asObservable();
           this.chartConfig = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_6__["ChartConfig"]();
           this.view = 'table';
           this.transformProperties = null;
@@ -33490,7 +33492,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -33680,7 +33682,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -34293,7 +34295,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -34611,13 +34613,13 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -35928,7 +35930,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
 
       var _c0 = ["scrollTo"];
 
@@ -36255,7 +36257,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -47372,7 +47374,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -47384,7 +47386,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -52685,7 +52687,7 @@
         encapsulation: 2
       });
 
-      var ɵComboChartComponent_BaseFactory = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetInheritedFactory"](ComboChartComponent);
+      var ɵComboChartComponent_BaseFactory = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetInheritedFactory"](ComboChartComponent);
       /*@__PURE__*/
 
 
@@ -56121,7 +56123,7 @@
           }
         }, {
           key: "ngOnChanges",
-          value: function ngOnChanges() {
+          value: function ngOnChanges(changed) {
             if (this.parameters) {
               this.variables = this.parameters.map(function (c) {
                 return '{' + c.name + '}';
@@ -57604,7 +57606,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
 
       function PreviewDashboardItemComponent_div_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -57948,7 +57950,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("hubKey", ctx_r3.hubKey)("objectType", ctx_r3.eDataObjectType.Dashboard)("objectKey", ctx_r3.dashboardKey)("parameters", ctx_r3.parameters)("refreshEvent", ctx_r3.refreshDataSubject.asObservable());
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("hubKey", ctx_r3.hubKey)("objectType", ctx_r3.eDataObjectType.Dashboard)("objectKey", ctx_r3.dashboardKey)("parameters", ctx_r3.parameters)("refreshEvent", ctx_r3.refreshDataObservable);
         }
       }
 
@@ -58033,6 +58035,7 @@
           this.router = router;
           this.route = route;
           this.refreshDataSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
+          this.refreshDataObservable = this.refreshDataSubject.asObservable();
           this.name = 'loading...';
           this.eDataObjectType = _shared_models__WEBPACK_IMPORTED_MODULE_6__["eDataObjectType"];
           this.dashboard = null;
@@ -58398,7 +58401,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -58538,7 +58541,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("hubKey", ctx_r7.hubKey)("objectType", ctx_r7.objectType)("objectKey", ctx_r7.objectKey)("parameters", ctx_r7.userParameters)("refreshEvent", ctx_r7.refreshDataSubject.asObservable());
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("hubKey", ctx_r7.hubKey)("objectType", ctx_r7.objectType)("objectKey", ctx_r7.objectKey)("parameters", ctx_r7.userParameters)("refreshEvent", ctx_r7.refreshDataObservable);
         }
       }
 
@@ -58774,7 +58777,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("hubKey", ctx_r26.hubKey)("objectType", ctx_r26.objectType)("objectKey", ctx_r26.objectKey)("parameters", ctx_r26.userParameters)("refreshEvent", ctx_r26.refreshDataSubject.asObservable());
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("hubKey", ctx_r26.hubKey)("objectType", ctx_r26.objectType)("objectKey", ctx_r26.objectKey)("parameters", ctx_r26.userParameters)("refreshEvent", ctx_r26.refreshDataObservable);
         }
       }
 
@@ -58917,6 +58920,7 @@
           this.isMaximized = false;
           this.onMaximize = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
           this.refreshDataSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
+          this.refreshDataObservable = this.refreshDataSubject.asObservable();
           this.name = 'loading...';
           this.selectQuery = new _shared_models__WEBPACK_IMPORTED_MODULE_5__["SelectQuery"]();
           this.showChart = false;
@@ -59574,13 +59578,13 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -59751,7 +59755,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 

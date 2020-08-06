@@ -4099,7 +4099,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _hub_lineage_models__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../hub.lineage.models */ "./src/app/+hub/hub.lineage.models.ts");
 /* harmony import */ var _shared_shared_models__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../shared/shared.models */ "./src/app/shared/shared.models.ts");
 /* harmony import */ var ngx_d_components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ngx-d-components */ "./node_modules/ngx-d-components/__ivy_ngcc__/fesm2015/ngx-d-components.js");
-/* harmony import */ var ngx_d_table__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ngx-d-table */ "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+/* harmony import */ var ngx_d_table__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ngx-d-table */ "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
 /* harmony import */ var _shared_utils_dropzone__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../shared/utils/dropzone */ "./src/app/shared/utils/dropzone.ts");
 /* harmony import */ var _mapping_item_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./mapping-item.component */ "./src/app/+hub/datalink/datalink-edit/mapping/mapping-item.component.ts");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
@@ -5213,7 +5213,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 /* harmony import */ var ngx_d_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ngx-d-components */ "./node_modules/ngx-d-components/__ivy_ngcc__/fesm2015/ngx-d-components.js");
-/* harmony import */ var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ngx-d-markdown */ "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+/* harmony import */ var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ngx-d-markdown */ "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
 
 
 
@@ -5623,7 +5623,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _datalink_edit_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../datalink-edit.service */ "./src/app/+hub/datalink/datalink-edit/datalink-edit.service.ts");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 /* harmony import */ var ngx_d_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ngx-d-components */ "./node_modules/ngx-d-components/__ivy_ngcc__/fesm2015/ngx-d-components.js");
-/* harmony import */ var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ngx-d-markdown */ "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+/* harmony import */ var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ngx-d-markdown */ "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
 
 
 
@@ -6169,7 +6169,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_shared_models__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../shared/shared.models */ "./src/app/shared/shared.models.ts");
 /* harmony import */ var ngx_d_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ngx-d-components */ "./node_modules/ngx-d-components/__ivy_ngcc__/fesm2015/ngx-d-components.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
-/* harmony import */ var ngx_d_table__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ngx-d-table */ "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+/* harmony import */ var ngx_d_table__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ngx-d-table */ "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -6413,7 +6413,7 @@ function DatalinkEditPropertiesComponent_form_1_Template(rf, ctx) { if (rf & 1) 
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("autocapitalize", true)("errors", ctx_r0.editDatalinkService.hubFormsService.formErrors.name);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showMarkdown", true)("errors", ctx_r0.editDatalinkService.hubFormsService.formErrors.description);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true)("errors", ctx_r0.editDatalinkService.hubFormsService.formErrors.description);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("items", ctx_r0.eAlertLevelItems)("errors", ctx_r0.editDatalinkService.hubFormsService.formErrors.alertLevel)("enableFilter", false);
 } }
@@ -6445,7 +6445,7 @@ class DatalinkEditPropertiesComponent {
     }
 }
 DatalinkEditPropertiesComponent.ɵfac = function DatalinkEditPropertiesComponent_Factory(t) { return new (t || DatalinkEditPropertiesComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_hub_service__WEBPACK_IMPORTED_MODULE_2__["HubService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_datalink_edit_service__WEBPACK_IMPORTED_MODULE_3__["DatalinkEditService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"])); };
-DatalinkEditPropertiesComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: DatalinkEditPropertiesComponent, selectors: [["dexih-datalink-edit-properties-form"]], decls: 4, vars: 6, consts: [["title", "Properties", 3, "showExpandButton"], [3, "formGroup", 4, "ngIf"], ["title", "Input Parameters", 3, "showExpandButton"], [3, "showEdit", "parameters", "formsService"], [3, "formGroup"], ["label", "Datalink Type", "formControlName", "datalinkType", "itemKey", "key", "itemName", "description", "iconClass", "fa fa-database", "note", "Categorize the type of function this datalink is performing.", 3, "items", "enableFilter"], ["label", "Datalink Name", "formControlName", "name", "placeholder", "Enter the datalink name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showMarkdown", "errors"], ["label", "Alerting Level", "formControlName", "alertLevel", "itemKey", "key", "itemName", "description", "iconClass", "fa fa-bell", "note", "When alerts should be sent.", 3, "items", "errors", "enableFilter"], ["label", "Datalink is shared in the catalog to users with read access.", "formControlName", "isShared"]], template: function DatalinkEditPropertiesComponent_Template(rf, ctx) { if (rf & 1) {
+DatalinkEditPropertiesComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: DatalinkEditPropertiesComponent, selectors: [["dexih-datalink-edit-properties-form"]], decls: 4, vars: 6, consts: [["title", "Properties", 3, "showExpandButton"], [3, "formGroup", 4, "ngIf"], ["title", "Input Parameters", 3, "showExpandButton"], [3, "showEdit", "parameters", "formsService"], [3, "formGroup"], ["label", "Datalink Type", "formControlName", "datalinkType", "itemKey", "key", "itemName", "description", "iconClass", "fa fa-database", "note", "Categorize the type of function this datalink is performing.", 3, "items", "enableFilter"], ["label", "Datalink Name", "formControlName", "name", "placeholder", "Enter the datalink name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview", "errors"], ["label", "Alerting Level", "formControlName", "alertLevel", "itemKey", "key", "itemName", "description", "iconClass", "fa fa-bell", "note", "When alerts should be sent.", 3, "items", "errors", "enableFilter"], ["label", "Datalink is shared in the catalog to users with read access.", "formControlName", "isShared"]], template: function DatalinkEditPropertiesComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-widget-section", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, DatalinkEditPropertiesComponent_form_1_Template, 12, 10, "form", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -6838,7 +6838,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _auth_auth_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../+auth/auth.service */ "./src/app/+auth/auth.service.ts");
 /* harmony import */ var ngx_d_components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ngx-d-components */ "./node_modules/ngx-d-components/__ivy_ngcc__/fesm2015/ngx-d-components.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
-/* harmony import */ var ngx_d_table__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ngx-d-table */ "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+/* harmony import */ var ngx_d_table__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ngx-d-table */ "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
 /* harmony import */ var _datalink_table_datalink_table_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../datalink-table/datalink-table.component */ "./src/app/+hub/datalink/datalink-edit/datalink-table/datalink-table.component.ts");
 
 
@@ -7130,7 +7130,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 /* harmony import */ var _buttons_customFunction_edit_button_customFunction_edit_button_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../buttons/customFunction-edit-button/customFunction-edit-button.component */ "./src/app/+hub/buttons/customFunction-edit-button/customFunction-edit-button.component.ts");
 /* harmony import */ var _parameters_input_parameter_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../parameters/input-parameter.component */ "./src/app/+hub/datalink/datalink-edit/parameters/input-parameter.component.ts");
-/* harmony import */ var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ngx-d-markdown */ "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+/* harmony import */ var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ngx-d-markdown */ "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
 /* harmony import */ var _parameters_output_parameter_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../parameters/output-parameter.component */ "./src/app/+hub/datalink/datalink-edit/parameters/output-parameter.component.ts");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -8659,7 +8659,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 /* harmony import */ var ngx_d_components__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ngx-d-components */ "./node_modules/ngx-d-components/__ivy_ngcc__/fesm2015/ngx-d-components.js");
 /* harmony import */ var _buttons_cancel_button_cancel_button_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../buttons/cancel-button/cancel-button.component */ "./src/app/+hub/buttons/cancel-button/cancel-button.component.ts");
-/* harmony import */ var ngx_d_table__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ngx-d-table */ "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+/* harmony import */ var ngx_d_table__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ngx-d-table */ "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
 /* harmony import */ var _table_table_edit_column_edit_bulk_column_edit_bulk_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../../table/table-edit/column-edit-bulk/column-edit-bulk.component */ "./src/app/+hub/table/table-edit/column-edit-bulk/column-edit-bulk.component.ts");
 /* harmony import */ var _table_column_edit_column_edit_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../../table/column-edit/column-edit.component */ "./src/app/+hub/table/column-edit/column-edit.component.ts");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
@@ -9413,7 +9413,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ngx_d_components__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ngx-d-components */ "./node_modules/ngx-d-components/__ivy_ngcc__/fesm2015/ngx-d-components.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 /* harmony import */ var _buttons_connection_edit_button_connection_edit_button_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../buttons/connection-edit-button/connection-edit-button.component */ "./src/app/+hub/buttons/connection-edit-button/connection-edit-button.component.ts");
-/* harmony import */ var ngx_d_table__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ngx-d-table */ "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+/* harmony import */ var ngx_d_table__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ngx-d-table */ "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
 
 
 
@@ -9807,7 +9807,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _hub_remote_models__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../hub.remote.models */ "./src/app/+hub/hub.remote.models.ts");
 /* harmony import */ var _shared_shared_models__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../shared/shared.models */ "./src/app/shared/shared.models.ts");
 /* harmony import */ var ngx_d_components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ngx-d-components */ "./node_modules/ngx-d-components/__ivy_ngcc__/fesm2015/ngx-d-components.js");
-/* harmony import */ var ngx_d_table__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ngx-d-table */ "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+/* harmony import */ var ngx_d_table__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ngx-d-table */ "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
 
 
 

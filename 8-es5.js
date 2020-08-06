@@ -793,7 +793,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
 
       var _c0 = function _c0(a1) {
         return ["hub-edit", a1];
@@ -3166,7 +3166,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
 
       function NotificationsIndexComponent_ng_template_3_Template(rf, ctx) {
         if (rf & 1) {
@@ -4053,7 +4053,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -6841,7 +6841,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
 
       var _c0 = function _c0(a1) {
         return ["edit", a1];
@@ -7944,7 +7944,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 

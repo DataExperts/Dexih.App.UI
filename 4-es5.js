@@ -737,7 +737,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 

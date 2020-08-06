@@ -573,7 +573,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 /* harmony import */ var _header_header_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../header/header.component */ "./src/app/+auth/header/header.component.ts");
 /* harmony import */ var ngx_d_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ngx-d-components */ "./node_modules/ngx-d-components/__ivy_ngcc__/fesm2015/ngx-d-components.js");
-/* harmony import */ var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ngx-d-markdown */ "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+/* harmony import */ var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ngx-d-markdown */ "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
 /* harmony import */ var _shared_ui_icons_print_print_button_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../shared/ui/icons/print/print-button.component */ "./src/app/shared/ui/icons/print/print-button.component.ts");
 
 

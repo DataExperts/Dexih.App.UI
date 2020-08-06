@@ -437,7 +437,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showMarkdown", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true);
         }
       }
 
@@ -503,7 +503,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showEdit", ctx_r1.showEdit)("parameters", ctx_r1.parameters)("formsService", ctx_r1.formsService)("refreshEvent", ctx_r1.refreshDataSubject.asObservable());
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showEdit", ctx_r1.showEdit)("parameters", ctx_r1.parameters)("formsService", ctx_r1.formsService)("refreshEvent", ctx_r1.refreshDataObservable);
         }
       }
 
@@ -689,6 +689,7 @@
           this.showEdit = false;
           this.lock = true;
           this.refreshDataSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
+          this.refreshDataObservable = this.refreshDataSubject.asObservable();
           this.eViewType = _shared_shared_models__WEBPACK_IMPORTED_MODULE_5__["eViewType"];
           this.eSourceType = _shared_shared_models__WEBPACK_IMPORTED_MODULE_5__["eSourceType"];
           this.cancelToken = new _auth_auth_models__WEBPACK_IMPORTED_MODULE_7__["CancelToken"]();
@@ -956,7 +957,7 @@
         },
         decls: 9,
         vars: 9,
-        consts: [[3, "ngClass"], ["title", "Properties", 3, "showExpandButton", 4, "ngIf"], ["title", "Parameters", 3, "showExpandButton", "onChange", 4, "ngIf"], ["title", "InputColumns", 3, "showExpandButton", 4, "ngIf"], [2, "height", "800px"], [3, "options"], ["gridster", ""], [3, "ngIf"], ["class", "position-relative", "style", "height:800px; overflow: hidden;", 4, "ngIf"], ["title", "Properties", 3, "showExpandButton"], [3, "formGroup", 4, "ngIf"], [3, "formGroup"], ["label", "Dashboard Name", "formControlName", "name", "placeholder", "Enter the dashboard name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showMarkdown"], [1, "form-row"], [1, "form-group", "col-md-3"], ["type", "number", "label", "Minimum Columns", "formControlName", "minCols"], ["type", "number", "label", "Maximum Columns", "formControlName", "maxCols"], ["type", "number", "label", "Minimum Rows", "formControlName", "minRows"], ["type", "number", "label", "Maximum Rows", "formControlName", "maxRows"], ["text", "Update Grid", 3, "click"], ["formControlName", "autoRefresh", "label", "Automatically refresh data when view is opened"], ["label", "Table is shared in the catalog to users with read access.", "formControlName", "isShared"], ["title", "Parameters", 3, "showExpandButton", "onChange"], [3, "showEdit", "parameters", "formsService", "refreshEvent", "onChange", "onRefreshData"], ["title", "InputColumns", 3, "showExpandButton"], ["class", "input-group", 4, "ngFor", "ngForOf"], [1, "input-group"], [1, "input-group-prepend"], [1, "input-group-text"], [1, "form-control", "p-0", 3, "name", "placeholder", "ngModel", "ngModelChange"], [3, "item", 4, "ngFor", "ngForOf"], [3, "item"], [3, "item", "showEdit", "refreshData", "onRemove", "onMaximize"], [1, "position-relative", 2, "height", "800px", "overflow", "hidden"], [3, "item", "showEdit", "refreshData", "isMaximized", "onRemove", "onMaximize"]],
+        consts: [[3, "ngClass"], ["title", "Properties", 3, "showExpandButton", 4, "ngIf"], ["title", "Parameters", 3, "showExpandButton", "onChange", 4, "ngIf"], ["title", "InputColumns", 3, "showExpandButton", 4, "ngIf"], [2, "height", "800px"], [3, "options"], ["gridster", ""], [3, "ngIf"], ["class", "position-relative", "style", "height:800px; overflow: hidden;", 4, "ngIf"], ["title", "Properties", 3, "showExpandButton"], [3, "formGroup", 4, "ngIf"], [3, "formGroup"], ["label", "Dashboard Name", "formControlName", "name", "placeholder", "Enter the dashboard name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview"], [1, "form-row"], [1, "form-group", "col-md-3"], ["type", "number", "label", "Minimum Columns", "formControlName", "minCols"], ["type", "number", "label", "Maximum Columns", "formControlName", "maxCols"], ["type", "number", "label", "Minimum Rows", "formControlName", "minRows"], ["type", "number", "label", "Maximum Rows", "formControlName", "maxRows"], ["text", "Update Grid", 3, "click"], ["formControlName", "autoRefresh", "label", "Automatically refresh data when view is opened"], ["label", "Table is shared in the catalog to users with read access.", "formControlName", "isShared"], ["title", "Parameters", 3, "showExpandButton", "onChange"], [3, "showEdit", "parameters", "formsService", "refreshEvent", "onChange", "onRefreshData"], ["title", "InputColumns", 3, "showExpandButton"], ["class", "input-group", 4, "ngFor", "ngForOf"], [1, "input-group"], [1, "input-group-prepend"], [1, "input-group-text"], [1, "form-control", "p-0", 3, "name", "placeholder", "ngModel", "ngModelChange"], [3, "item", 4, "ngFor", "ngForOf"], [3, "item"], [3, "item", "showEdit", "refreshData", "onRemove", "onMaximize"], [1, "position-relative", 2, "height", "800px", "overflow", "hidden"], [3, "item", "showEdit", "refreshData", "isMaximized", "onRemove", "onMaximize"]],
         template: function DashboardPropertiesComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);

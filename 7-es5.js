@@ -7992,7 +7992,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -10222,7 +10222,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
 
       function InputParameterComponent_form_2_div_2_Template(rf, ctx) {
         if (rf & 1) {
@@ -11015,7 +11015,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
 
       function OutputParameterComponent_div_3_Template(rf, ctx) {
         if (rf & 1) {
@@ -12082,7 +12082,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -12550,7 +12550,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showMarkdown", true)("errors", ctx_r0.editDatalinkService.hubFormsService.formErrors.description);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true)("errors", ctx_r0.editDatalinkService.hubFormsService.formErrors.description);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
@@ -12608,7 +12608,7 @@
         selectors: [["dexih-datalink-edit-properties-form"]],
         decls: 4,
         vars: 6,
-        consts: [["title", "Properties", 3, "showExpandButton"], [3, "formGroup", 4, "ngIf"], ["title", "Input Parameters", 3, "showExpandButton"], [3, "showEdit", "parameters", "formsService"], [3, "formGroup"], ["label", "Datalink Type", "formControlName", "datalinkType", "itemKey", "key", "itemName", "description", "iconClass", "fa fa-database", "note", "Categorize the type of function this datalink is performing.", 3, "items", "enableFilter"], ["label", "Datalink Name", "formControlName", "name", "placeholder", "Enter the datalink name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showMarkdown", "errors"], ["label", "Alerting Level", "formControlName", "alertLevel", "itemKey", "key", "itemName", "description", "iconClass", "fa fa-bell", "note", "When alerts should be sent.", 3, "items", "errors", "enableFilter"], ["label", "Datalink is shared in the catalog to users with read access.", "formControlName", "isShared"]],
+        consts: [["title", "Properties", 3, "showExpandButton"], [3, "formGroup", 4, "ngIf"], ["title", "Input Parameters", 3, "showExpandButton"], [3, "showEdit", "parameters", "formsService"], [3, "formGroup"], ["label", "Datalink Type", "formControlName", "datalinkType", "itemKey", "key", "itemName", "description", "iconClass", "fa fa-database", "note", "Categorize the type of function this datalink is performing.", 3, "items", "enableFilter"], ["label", "Datalink Name", "formControlName", "name", "placeholder", "Enter the datalink name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview", "errors"], ["label", "Alerting Level", "formControlName", "alertLevel", "itemKey", "key", "itemName", "description", "iconClass", "fa fa-bell", "note", "When alerts should be sent.", 3, "items", "errors", "enableFilter"], ["label", "Datalink is shared in the catalog to users with read access.", "formControlName", "isShared"]],
         template: function DatalinkEditPropertiesComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-widget-section", 0);
@@ -13555,7 +13555,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -14193,7 +14193,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -17157,7 +17157,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -18688,7 +18688,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
 
       function DatalinkEditTargetComponent_form_1_span_3_Template(rf, ctx) {
         if (rf & 1) {
@@ -19532,7 +19532,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
 
       function TransformTableEditComponent_ng_template_9_Template(rf, ctx) {
         if (rf & 1) {

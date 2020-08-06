@@ -1175,7 +1175,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 

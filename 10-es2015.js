@@ -518,7 +518,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_ui_dexihMessage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../shared/ui/dexihMessage */ "./src/app/shared/ui/dexihMessage/index.ts");
 /* harmony import */ var _shared_ui_dexihMessage_dexih_message_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../shared/ui/dexihMessage/dexih-message.component */ "./src/app/shared/ui/dexihMessage/dexih-message.component.ts");
 /* harmony import */ var ngx_d_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ngx-d-components */ "./node_modules/ngx-d-components/__ivy_ngcc__/fesm2015/ngx-d-components.js");
-/* harmony import */ var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ngx-d-table */ "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+/* harmony import */ var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ngx-d-table */ "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
 
 
 

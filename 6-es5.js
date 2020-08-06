@@ -122,7 +122,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -382,7 +382,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showMarkdown", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](6);
 
@@ -518,6 +518,7 @@
           this.route = route;
           this.router = router;
           this.refreshDataSubject = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();
+          this.refreshDataObservable = this.refreshDataSubject.asObservable();
           this.sourceTypes = [{
             key: _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eSourceType"].Datalink,
             name: 'Datalink'
@@ -825,7 +826,7 @@
         features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([_hub_forms_service__WEBPACK_IMPORTED_MODULE_5__["HubFormsService"]])],
         decls: 17,
         vars: 16,
-        consts: [[1, "container"], ["title", "Edit API", "iconClass", "fa fa-lg fa-fw fa-feed", 3, "showCloseButton", "padding", "close"], ["header", ""], ["title", "Properties", 3, "showExpandButton"], [3, "formGroup", 4, "ngIf"], ["title", "Parameters", 3, "showExpandButton", "padding", 4, "ngIf"], ["title", "Data", 3, "showExpandButton"], ["class", "d-flex flex-wrap pt-1", 4, "ngIf"], [3, "selectQuery", "columns", "inputColumns", "parameters", "refreshEvent", "onRefreshData"], [3, "enableMultiSelect", "enableSaveCsv", "columns", "data"], ["actions", ""], ["title", "Connections", "path", "/assets/help/reference/api.md", 1, "m-3"], [1, "mr-1", 3, "control", "click"], [1, "mr-1", 3, "download"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [3, "formsService"], [1, "mr-1", 3, "formsService"], [3, "formGroup"], ["label", "Api Name", "formControlName", "name", "placeholder", "Enter the api name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showMarkdown"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Auto Start", "formControlName", "autoStart", "note", "Re-start the API when the remote agent is restarted."], ["label", "Log Directory", "formControlName", "logDirectory", "placeholder", "Enter a directory to log api updates.", "iconClass", "fa fa-list", "note", "Directory to create detailed logs of API calls.  Leave blank to exclude file logging.", 3, "errors"], ["label", "Cache Queries", "formControlName", "cacheQueries", "note", "Cache API called to improve performance"], ["label", "Reset Cache Interval", "formControlName", "cacheResetInterval", "note", "The interval to reset the cache (forcing a reload of new data).", 3, "errors"], ["label", "Data Source Type", "formControlName", "sourceType", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "Specify the source type for this view", 3, "items", "enableFilter"], ["class", "form-group col-md-6", 4, "ngIf"], ["label", "Source Table", "formControlName", "sourceTableKey", "parentName", "name", "childItems", "dexihTables", "itemKey", "key", "itemName", "logicalName", "note", "Select the source table", 3, "errors", "items"], [3, "key"], ["label", "Source Datalink", "formControlName", "sourceDatalinkKey", "itemKey", "key", "itemName", "name", "note", "Select the source datalink", 3, "errors", "items"], ["title", "Parameters", 3, "showExpandButton", "padding"], [3, "showEdit", "parameters", "formsService"], [1, "d-flex", "flex-wrap", "pt-1"], ["class", "input-group", 4, "ngFor", "ngForOf"], [1, "input-group"], [1, "input-group-prepend"], [1, "input-group-text"], [1, "form-control", "p-0", 3, "name", "placeholder", "ngModel", "ngModelChange"], ["text", "Reload", 1, "mr-1", 3, "click"]],
+        consts: [[1, "container"], ["title", "Edit API", "iconClass", "fa fa-lg fa-fw fa-feed", 3, "showCloseButton", "padding", "close"], ["header", ""], ["title", "Properties", 3, "showExpandButton"], [3, "formGroup", 4, "ngIf"], ["title", "Parameters", 3, "showExpandButton", "padding", 4, "ngIf"], ["title", "Data", 3, "showExpandButton"], ["class", "d-flex flex-wrap pt-1", 4, "ngIf"], [3, "selectQuery", "columns", "inputColumns", "parameters", "refreshEvent", "onRefreshData"], [3, "enableMultiSelect", "enableSaveCsv", "columns", "data"], ["actions", ""], ["title", "Connections", "path", "/assets/help/reference/api.md", 1, "m-3"], [1, "mr-1", 3, "control", "click"], [1, "mr-1", 3, "download"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [3, "formsService"], [1, "mr-1", 3, "formsService"], [3, "formGroup"], ["label", "Api Name", "formControlName", "name", "placeholder", "Enter the api name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Auto Start", "formControlName", "autoStart", "note", "Re-start the API when the remote agent is restarted."], ["label", "Log Directory", "formControlName", "logDirectory", "placeholder", "Enter a directory to log api updates.", "iconClass", "fa fa-list", "note", "Directory to create detailed logs of API calls.  Leave blank to exclude file logging.", 3, "errors"], ["label", "Cache Queries", "formControlName", "cacheQueries", "note", "Cache API called to improve performance"], ["label", "Reset Cache Interval", "formControlName", "cacheResetInterval", "note", "The interval to reset the cache (forcing a reload of new data).", 3, "errors"], ["label", "Data Source Type", "formControlName", "sourceType", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "Specify the source type for this view", 3, "items", "enableFilter"], ["class", "form-group col-md-6", 4, "ngIf"], ["label", "Source Table", "formControlName", "sourceTableKey", "parentName", "name", "childItems", "dexihTables", "itemKey", "key", "itemName", "logicalName", "note", "Select the source table", 3, "errors", "items"], [3, "key"], ["label", "Source Datalink", "formControlName", "sourceDatalinkKey", "itemKey", "key", "itemName", "name", "note", "Select the source datalink", 3, "errors", "items"], ["title", "Parameters", 3, "showExpandButton", "padding"], [3, "showEdit", "parameters", "formsService"], [1, "d-flex", "flex-wrap", "pt-1"], ["class", "input-group", 4, "ngFor", "ngForOf"], [1, "input-group"], [1, "input-group-prepend"], [1, "input-group-text"], [1, "form-control", "p-0", 3, "name", "placeholder", "ngModel", "ngModelChange"], ["text", "Reload", 1, "mr-1", 3, "click"]],
         template: function ApiEditComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -910,7 +911,7 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("selectQuery", ctx.selectQuery)("columns", ctx.tableColumns)("inputColumns", ctx.inputColumns)("parameters", ctx.formsService == null ? null : ctx.formsService.currentForm == null ? null : ctx.formsService.currentForm.controls.parameters.value)("refreshEvent", ctx.refreshDataSubject.asObservable());
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("selectQuery", ctx.selectQuery)("columns", ctx.tableColumns)("inputColumns", ctx.inputColumns)("parameters", ctx.formsService == null ? null : ctx.formsService.currentForm == null ? null : ctx.formsService.currentForm.controls.parameters.value)("refreshEvent", ctx.refreshDataObservable);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
@@ -1048,7 +1049,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -1908,7 +1909,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showMarkdown", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
 
@@ -2160,7 +2161,7 @@
         features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([_hub_forms_service__WEBPACK_IMPORTED_MODULE_6__["HubFormsService"]])],
         decls: 5,
         vars: 3,
-        consts: [[1, "container"], ["title", "Edit Validation", "iconClass", "fa fa-lg fa-fw fa-check-square-o", 3, "showCloseButton", "padding", "close"], ["header", ""], [3, "formGroup", 4, "ngIf"], [1, "d-inline-flex"], [3, "ngIf"], [1, "mr-1", 3, "formsService"], [1, "mr-1", 3, "control", "click"], [4, "ngIf"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [1, "input-group", "mr-1"], [1, "input-group-prepend"], ["type", "button", 1, "btn", "btn-primary", 3, "click"], [1, "fa", "fa-check-circle-o"], ["type", "text", "placeholder", "Test value", "aria-label", "", "aria-describedby", "basic-addon1", 1, "form-control", 2, "max-width", "100px", 3, "ngModel", "ngModelChange"], [3, "formGroup"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Column Validation Name", "formControlName", "name", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Data Type", "formControlName", "dataType", "itemKey", "key", "itemName", "name", 3, "items"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showMarkdown"], ["label", "Validation Fail Action", "formControlName", "invalidAction", "itemKey", "key", "itemName", "name", "note", "Action to take when the validation fails.", 3, "items"], ["class", "form-group col-md-6", 4, "ngIf"], ["label", "Ignore null values.", "formControlName", "allowDbNull"], ["class", "form-row", 4, "ngIf"], ["label", "Restrict to list of values", "formControlName", "listOfValues", "placeholder", "Provide a list of values which are valid."], ["label", "Excluded list of values", "formControlName", "listOfNotValues", "placeholder", "Provide a list of values which are valid."], ["label", "Restrict to values that exist in a lookup table column", "formControlName", "lookupColumnKey", "grandParentName", "name", "parentName", "name", "itemKey", "key", "itemName", "name", "childItems", "dexihTables", "grandChildItems", "dexihTableColumns", "note", "Checks the selected table column, and ensures the value contains at least one match.", 3, "items", "allowNullSelect"], ["label", "Only lookup values where the 'is current' column is true.", "formControlName", "lookupIsValid"], ["label", "Allow valid when lookup returns multiple rows.", "formControlName", "lookupMultipleRecords"], [1, "alert"], ["label", "Clean Action", "formControlName", "cleanAction", "itemKey", "key", "itemName", "name", "note", "Clean Action to apply", 3, "items"], ["label", "Clean Value", "formControlName", "cleanValue", "placeholder", "Enter the clean value.", "iconClass", "fa fa-list"], ["label", "Minimum String Length", "formControlName", "minLength", "placeholder", "Enter the minimum string length", "type", "number", "iconClass", "fa fa-list"], ["label", "Maximum String Length", "formControlName", "maxLength", "placeholder", "Enter the maximum string length", "type", "number", "iconClass", "fa fa-list"], ["label", "Simple Pattern Match", "formControlName", "patternMatch", "placeholder", "Provide a match string", "iconClass", "fa fa-list", "note", "Simple pattern match, use the format - A=Upper, a=Lower, Z=Any Character, 9=numeric.  (For example: AA999 matches AS123)"], ["label", "Regular Expression Match", "formControlName", "regexMatch", "placeholder", "Provide a regular expression", "iconClass", "fa fa-list", "note", "Use a standard regular expression to validate.  For example [A-Za-z0-9] will ensure string only contains characters and numbers."], ["label", "Minimum Value", "formControlName", "minValue", "placeholder", "Enter the minimum value", "type", "number", "iconClass", "fa fa-list"], ["label", "Maximum Value", "formControlName", "maxValue", "placeholder", "Enter the maximum value", "type", "number", "iconClass", "fa fa-list"]],
+        consts: [[1, "container"], ["title", "Edit Validation", "iconClass", "fa fa-lg fa-fw fa-check-square-o", 3, "showCloseButton", "padding", "close"], ["header", ""], [3, "formGroup", 4, "ngIf"], [1, "d-inline-flex"], [3, "ngIf"], [1, "mr-1", 3, "formsService"], [1, "mr-1", 3, "control", "click"], [4, "ngIf"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [1, "input-group", "mr-1"], [1, "input-group-prepend"], ["type", "button", 1, "btn", "btn-primary", 3, "click"], [1, "fa", "fa-check-circle-o"], ["type", "text", "placeholder", "Test value", "aria-label", "", "aria-describedby", "basic-addon1", 1, "form-control", 2, "max-width", "100px", 3, "ngModel", "ngModelChange"], [3, "formGroup"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Column Validation Name", "formControlName", "name", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Data Type", "formControlName", "dataType", "itemKey", "key", "itemName", "name", 3, "items"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview"], ["label", "Validation Fail Action", "formControlName", "invalidAction", "itemKey", "key", "itemName", "name", "note", "Action to take when the validation fails.", 3, "items"], ["class", "form-group col-md-6", 4, "ngIf"], ["label", "Ignore null values.", "formControlName", "allowDbNull"], ["class", "form-row", 4, "ngIf"], ["label", "Restrict to list of values", "formControlName", "listOfValues", "placeholder", "Provide a list of values which are valid."], ["label", "Excluded list of values", "formControlName", "listOfNotValues", "placeholder", "Provide a list of values which are valid."], ["label", "Restrict to values that exist in a lookup table column", "formControlName", "lookupColumnKey", "grandParentName", "name", "parentName", "name", "itemKey", "key", "itemName", "name", "childItems", "dexihTables", "grandChildItems", "dexihTableColumns", "note", "Checks the selected table column, and ensures the value contains at least one match.", 3, "items", "allowNullSelect"], ["label", "Only lookup values where the 'is current' column is true.", "formControlName", "lookupIsValid"], ["label", "Allow valid when lookup returns multiple rows.", "formControlName", "lookupMultipleRecords"], [1, "alert"], ["label", "Clean Action", "formControlName", "cleanAction", "itemKey", "key", "itemName", "name", "note", "Clean Action to apply", 3, "items"], ["label", "Clean Value", "formControlName", "cleanValue", "placeholder", "Enter the clean value.", "iconClass", "fa fa-list"], ["label", "Minimum String Length", "formControlName", "minLength", "placeholder", "Enter the minimum string length", "type", "number", "iconClass", "fa fa-list"], ["label", "Maximum String Length", "formControlName", "maxLength", "placeholder", "Enter the maximum string length", "type", "number", "iconClass", "fa fa-list"], ["label", "Simple Pattern Match", "formControlName", "patternMatch", "placeholder", "Provide a match string", "iconClass", "fa fa-list", "note", "Simple pattern match, use the format - A=Upper, a=Lower, Z=Any Character, 9=numeric.  (For example: AA999 matches AS123)"], ["label", "Regular Expression Match", "formControlName", "regexMatch", "placeholder", "Provide a regular expression", "iconClass", "fa fa-list", "note", "Use a standard regular expression to validate.  For example [A-Za-z0-9] will ensure string only contains characters and numbers."], ["label", "Minimum Value", "formControlName", "minValue", "placeholder", "Enter the minimum value", "type", "number", "iconClass", "fa fa-list"], ["label", "Maximum Value", "formControlName", "maxValue", "placeholder", "Enter the maximum value", "type", "number", "iconClass", "fa fa-list"]],
         template: function ColumnValidationEditComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -2292,7 +2293,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -2797,7 +2798,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
 
       var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
         function adopt(value) {
@@ -3731,7 +3732,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showMarkdown", true)("errors", ctx_r2.formsService.formErrors.description);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true)("errors", ctx_r2.formsService.formErrors.description);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
@@ -4361,7 +4362,7 @@
         features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([_hub_forms_service__WEBPACK_IMPORTED_MODULE_6__["HubFormsService"]])],
         decls: 6,
         vars: 3,
-        consts: [[1, "container"], ["title", "Edit Connection", "iconClass", "fa fa-lg fa-fw fa-database", 3, "showCloseButton", "padding", "close"], ["header", ""], [3, "formGroup", 4, "ngIf"], ["title", "Connections", "path", "/assets/help/reference/connection.md", 1, "m-3"], [1, "mr-1", 3, "control", "click"], ["class", "mr-1", "buttonClass", "btn btn-success", "iconClass", "fa fa-thumbs-o-up", "title", "Test the connection against the source.", 3, "busy", "click", 4, "ngIf"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [3, "ngIf"], [3, "formsService"], ["buttonClass", "btn btn-success", "iconClass", "fa fa-thumbs-o-up", "title", "Test the connection against the source.", 1, "mr-1", 3, "busy", "click"], [1, "mr-1", 3, "formsService"], ["class", "mr-1", "iconClass", "fa fa-plus", 3, "routerLink", 4, "ngIf"], ["iconClass", "fa fa-plus", 1, "mr-1", 3, "routerLink"], [3, "formGroup"], ["id", "fake_user_name", "name", "fake_user[name]", "type", "text", "value", "Fake Auto-fill", 2, "position", "absolute", "top", "-5000px"], ["id", "fake_password", "type", "password", "name", "fake_password[password]", "type", "text", "value", "Fake Auto-fill", 2, "position", "absolute", "top", "-5000px"], ["label", "Purpose", "formControlName", "purpose", "placeholder", "Connection purpose", "iconClass", "fa fa-database", "itemName", "name", "itemKey", "key", 3, "items", "enableFilter", "errors"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Name", "formControlName", "name", "placeholder", "Enter a name for the connection", "iconClass", "fa fa-database", 3, "autocapitalize", "errors"], ["label", "Database Type", "itemName", "name", "itemKey", "name", "iconClass", "fa fa-database", 3, "ngModel", "ngModelOptions", "items", "enableKeySelect", "sortItems", "ngModelChange"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showMarkdown", "errors"], [4, "ngIf"], [3, "data", "click"], ["type", "number", "label", "Connection Timeout", "formControlName", "connectionTimeout", "iconClass", "fa fa-clock-o", "note", "The duration in seconds the remote agent will wait to establish a connection.", 3, "errors"], ["type", "number", "label", "Command Timeout", "formControlName", "commandTimeout", "iconClass", "fa fa-clock-o", "note", "The duration in seconds the remote agent will for a command to start returning a result.", 3, "errors"], ["label", "Use a connection string", "formControlName", "useConnectionString"], ["label", "Connection String", "formControlName", "connectionStringDisplay", "placeholder", "Enter a the connection string", "iconClass", "fa fa-database", 3, "errors", "keydown", 4, "ngIf"], ["label", "Connection String", "formControlName", "connectionString", "iconClass", "fa fa-at", "textEntryNote", "Enter the variable name surrounded by {}", 3, "items", "sortItems", "enableTextEntry", 4, "ngIf"], ["label", "Use a variable for connection string", "formControlName", "useConnectionStringVariable", 3, "click"], ["label", "Connection String", "formControlName", "connectionStringDisplay", "placeholder", "Enter a the connection string", "iconClass", "fa fa-database", 3, "errors", "keydown"], ["href", "javascript:void(0)", 3, "click", 4, "ngIf"], ["href", "javascript:void(0)", 3, "click"], [1, "fa", "fa-refresh"], [1, "fa", "fa-spin", "fa-refresh"], ["label", "Connection String", "formControlName", "connectionString", "iconClass", "fa fa-at", "textEntryNote", "Enter the variable name surrounded by {}", 3, "items", "sortItems", "enableTextEntry"], ["formControlName", "server", "placeholder", "Enter the details.", "iconClass", "fa fa-server", 3, "enableTextEntry", "label", "errors", "items", "enableFilter", "note"], ["class", "form-row", 4, "ngIf"], ["ng-disabled", "refreshingConnection || creatingDatabase", 4, "ngIf"], ["label", "Use windows authentication", "formControlName", "useWindowsAuth"], ["label", "User Name", "formControlName", "username", "placeholder", "Enter user name", "iconClass", "fa fa-user", 3, "enableTextEntry", "errors", "items", "enableFilter"], ["label", "Password", "formControlName", "passwordDisplay", "type", "password", "placeholder", "Enter a password", "iconClass", "fa fa-lock", 3, "errors", "keydown", 4, "ngIf"], ["label", "Password", "formControlName", "password", "iconClass", "fa fa-at", 3, "items", "sortItems", "enableTextEntry", 4, "ngIf"], ["label", "Use a variable for password", "formControlName", "usePasswordVariable", 3, "click"], ["label", "Password", "formControlName", "passwordDisplay", "type", "password", "placeholder", "Enter a password", "iconClass", "fa fa-lock", 3, "errors", "keydown"], ["label", "Password", "formControlName", "password", "iconClass", "fa fa-at", 3, "items", "sortItems", "enableTextEntry"], ["label", "Secure Token", "formControlName", "passwordDisplay", "type", "password", "placeholder", "Enter secure token", "iconClass", "fa fa-lock", 3, "errors", "keydown", 4, "ngIf"], ["label", "Secure Token", "formControlName", "password", "iconClass", "fa fa-at", 3, "items", "sortItems", "enableTextEntry", 4, "ngIf"], ["label", "Use a variable for token", "formControlName", "usePasswordVariable", 3, "click"], ["label", "Secure Token", "formControlName", "passwordDisplay", "type", "password", "placeholder", "Enter secure token", "iconClass", "fa fa-lock", 3, "errors", "keydown"], ["label", "Secure Token", "formControlName", "password", "iconClass", "fa fa-at", 3, "items", "sortItems", "enableTextEntry"], ["ng-disabled", "refreshingConnection || creatingDatabase"], ["formControlName", "defaultDatabase", "iconClass", "fa fa-database", "textEntryNote", "Enter the database name", 3, "label", "items", "defaultItem", "sortItems", "enableTextEntry", "textValueChange"], [1, "fa", "fa-edit"], ["label", "Multi-use Managed Database (table keys will be added to table names to allow multiple hubs to use same database)", "formControlName", "embedTableKey", 3, "errors"]],
+        consts: [[1, "container"], ["title", "Edit Connection", "iconClass", "fa fa-lg fa-fw fa-database", 3, "showCloseButton", "padding", "close"], ["header", ""], [3, "formGroup", 4, "ngIf"], ["title", "Connections", "path", "/assets/help/reference/connection.md", 1, "m-3"], [1, "mr-1", 3, "control", "click"], ["class", "mr-1", "buttonClass", "btn btn-success", "iconClass", "fa fa-thumbs-o-up", "title", "Test the connection against the source.", 3, "busy", "click", 4, "ngIf"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [3, "ngIf"], [3, "formsService"], ["buttonClass", "btn btn-success", "iconClass", "fa fa-thumbs-o-up", "title", "Test the connection against the source.", 1, "mr-1", 3, "busy", "click"], [1, "mr-1", 3, "formsService"], ["class", "mr-1", "iconClass", "fa fa-plus", 3, "routerLink", 4, "ngIf"], ["iconClass", "fa fa-plus", 1, "mr-1", 3, "routerLink"], [3, "formGroup"], ["id", "fake_user_name", "name", "fake_user[name]", "type", "text", "value", "Fake Auto-fill", 2, "position", "absolute", "top", "-5000px"], ["id", "fake_password", "type", "password", "name", "fake_password[password]", "type", "text", "value", "Fake Auto-fill", 2, "position", "absolute", "top", "-5000px"], ["label", "Purpose", "formControlName", "purpose", "placeholder", "Connection purpose", "iconClass", "fa fa-database", "itemName", "name", "itemKey", "key", 3, "items", "enableFilter", "errors"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Name", "formControlName", "name", "placeholder", "Enter a name for the connection", "iconClass", "fa fa-database", 3, "autocapitalize", "errors"], ["label", "Database Type", "itemName", "name", "itemKey", "name", "iconClass", "fa fa-database", 3, "ngModel", "ngModelOptions", "items", "enableKeySelect", "sortItems", "ngModelChange"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview", "errors"], [4, "ngIf"], [3, "data", "click"], ["type", "number", "label", "Connection Timeout", "formControlName", "connectionTimeout", "iconClass", "fa fa-clock-o", "note", "The duration in seconds the remote agent will wait to establish a connection.", 3, "errors"], ["type", "number", "label", "Command Timeout", "formControlName", "commandTimeout", "iconClass", "fa fa-clock-o", "note", "The duration in seconds the remote agent will for a command to start returning a result.", 3, "errors"], ["label", "Use a connection string", "formControlName", "useConnectionString"], ["label", "Connection String", "formControlName", "connectionStringDisplay", "placeholder", "Enter a the connection string", "iconClass", "fa fa-database", 3, "errors", "keydown", 4, "ngIf"], ["label", "Connection String", "formControlName", "connectionString", "iconClass", "fa fa-at", "textEntryNote", "Enter the variable name surrounded by {}", 3, "items", "sortItems", "enableTextEntry", 4, "ngIf"], ["label", "Use a variable for connection string", "formControlName", "useConnectionStringVariable", 3, "click"], ["label", "Connection String", "formControlName", "connectionStringDisplay", "placeholder", "Enter a the connection string", "iconClass", "fa fa-database", 3, "errors", "keydown"], ["href", "javascript:void(0)", 3, "click", 4, "ngIf"], ["href", "javascript:void(0)", 3, "click"], [1, "fa", "fa-refresh"], [1, "fa", "fa-spin", "fa-refresh"], ["label", "Connection String", "formControlName", "connectionString", "iconClass", "fa fa-at", "textEntryNote", "Enter the variable name surrounded by {}", 3, "items", "sortItems", "enableTextEntry"], ["formControlName", "server", "placeholder", "Enter the details.", "iconClass", "fa fa-server", 3, "enableTextEntry", "label", "errors", "items", "enableFilter", "note"], ["class", "form-row", 4, "ngIf"], ["ng-disabled", "refreshingConnection || creatingDatabase", 4, "ngIf"], ["label", "Use windows authentication", "formControlName", "useWindowsAuth"], ["label", "User Name", "formControlName", "username", "placeholder", "Enter user name", "iconClass", "fa fa-user", 3, "enableTextEntry", "errors", "items", "enableFilter"], ["label", "Password", "formControlName", "passwordDisplay", "type", "password", "placeholder", "Enter a password", "iconClass", "fa fa-lock", 3, "errors", "keydown", 4, "ngIf"], ["label", "Password", "formControlName", "password", "iconClass", "fa fa-at", 3, "items", "sortItems", "enableTextEntry", 4, "ngIf"], ["label", "Use a variable for password", "formControlName", "usePasswordVariable", 3, "click"], ["label", "Password", "formControlName", "passwordDisplay", "type", "password", "placeholder", "Enter a password", "iconClass", "fa fa-lock", 3, "errors", "keydown"], ["label", "Password", "formControlName", "password", "iconClass", "fa fa-at", 3, "items", "sortItems", "enableTextEntry"], ["label", "Secure Token", "formControlName", "passwordDisplay", "type", "password", "placeholder", "Enter secure token", "iconClass", "fa fa-lock", 3, "errors", "keydown", 4, "ngIf"], ["label", "Secure Token", "formControlName", "password", "iconClass", "fa fa-at", 3, "items", "sortItems", "enableTextEntry", 4, "ngIf"], ["label", "Use a variable for token", "formControlName", "usePasswordVariable", 3, "click"], ["label", "Secure Token", "formControlName", "passwordDisplay", "type", "password", "placeholder", "Enter secure token", "iconClass", "fa fa-lock", 3, "errors", "keydown"], ["label", "Secure Token", "formControlName", "password", "iconClass", "fa fa-at", 3, "items", "sortItems", "enableTextEntry"], ["ng-disabled", "refreshingConnection || creatingDatabase"], ["formControlName", "defaultDatabase", "iconClass", "fa fa-database", "textEntryNote", "Enter the database name", 3, "label", "items", "defaultItem", "sortItems", "enableTextEntry", "textValueChange"], [1, "fa", "fa-edit"], ["label", "Multi-use Managed Database (table keys will be added to table names to allow multiple hubs to use same database)", "formControlName", "embedTableKey", 3, "errors"]],
         template: function ConnectionEditComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -4536,7 +4537,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -5407,7 +5408,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -6064,7 +6065,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
 
       function ExportComponent_ng_template_3_Template(rf, ctx) {
         if (rf & 1) {
@@ -6354,7 +6355,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
 
       var _c0 = ["fileInput"];
 
@@ -7466,7 +7467,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showMarkdown", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
@@ -8128,7 +8129,7 @@
         features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([_hub_forms_service__WEBPACK_IMPORTED_MODULE_7__["HubFormsService"]])],
         decls: 19,
         vars: 11,
-        consts: [[1, "container"], ["title", "Edit Function", "iconClass", "fa fa-lg fa-fw fa-code", 3, "showCloseButton", "padding", "close"], ["header", ""], [3, "formGroup", 4, "ngIf"], ["title", "Test Function", "iconClass", "fa fa-lg fa-fw fa-code", 3, "padding"], [3, "message"], ["class", "label", 4, "ngIf"], [3, "ngStyle", 4, "ngFor", "ngForOf"], ["label", "Return Value", "name", "returnParameterValue", "type", "text", 3, "disabled", "ngModel", "ngModelChange"], ["title", "Custom Functions", "path", "/assets/help/reference/function.md", 1, "m-3"], [1, "mr-1", 3, "control", "click"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [3, "formsService"], [1, "mr-1", 3, "formsService"], [3, "formGroup"], [4, "ngIf"], ["label", "Function Type", "formControlName", "functionType", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-question", 3, "items"], ["label", "Custom Function Name", "formControlName", "name", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showMarkdown"], [3, "ngIf"], [1, "alert"], [1, "label", "mb-1"], ["class", "mb-1", 4, "ngIf"], ["rows", "20", "width", "100%", "spellcheck", "false", "formControlName", "methodCode", 1, "form-control"], [1, "mb-1"], ["iconClass", "fa fa-plus-square-o", "title", "Click to add a parameter", 3, "click"], [3, "ngStyle"], [3, "customFunctionParameterForm", "addParameter", "removeParameter"], [1, "input-group", "mb-1"], ["readonly", "", "value", "Return Data Type", 1, "form-control"], ["formControlName", "returnType", "itemKey", "key", "itemName", "name", 1, "form-control", "p-0", 3, "border", "items"], ["buttonClass", "btn btn-success", 1, "mr-1", 3, "click"], ["text", "Sample Code", 3, "click"], [1, "label"], [4, "ngIf", "ngIfElse"], ["showValue", ""], [4, "ngFor", "ngForOf"], [1, "input-group"], [1, "form-control"], ["type", "text", "placeholder", "Enter a test value for the parameter", 1, "form-control", "p-0", 3, "border", "ngModel", "name", "ngModelChange"], [1, "input-group-text", "p-0"], ["type", "button", "value", "Add", 1, "btn", "btn-sm", "border-0", "bg-transparent", 3, "click"], [1, "fa", "fa-plus-square-o"], ["type", "button", "value", "Remove", 1, "btn", "btn-sm", "border-0", "bg-transparent", 3, "click"], [1, "fa", "fa-minus-square-o"], ["type", "text", "placeholder", "Enter a test value for the parameter", 3, "label", "ngModel", "name", "ngModelChange"], ["type", "text", 3, "disabled", "label", "ngModel", "name", "ngModelChange"]],
+        consts: [[1, "container"], ["title", "Edit Function", "iconClass", "fa fa-lg fa-fw fa-code", 3, "showCloseButton", "padding", "close"], ["header", ""], [3, "formGroup", 4, "ngIf"], ["title", "Test Function", "iconClass", "fa fa-lg fa-fw fa-code", 3, "padding"], [3, "message"], ["class", "label", 4, "ngIf"], [3, "ngStyle", 4, "ngFor", "ngForOf"], ["label", "Return Value", "name", "returnParameterValue", "type", "text", 3, "disabled", "ngModel", "ngModelChange"], ["title", "Custom Functions", "path", "/assets/help/reference/function.md", 1, "m-3"], [1, "mr-1", 3, "control", "click"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [3, "formsService"], [1, "mr-1", 3, "formsService"], [3, "formGroup"], [4, "ngIf"], ["label", "Function Type", "formControlName", "functionType", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-question", 3, "items"], ["label", "Custom Function Name", "formControlName", "name", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview"], [3, "ngIf"], [1, "alert"], [1, "label", "mb-1"], ["class", "mb-1", 4, "ngIf"], ["rows", "20", "width", "100%", "spellcheck", "false", "formControlName", "methodCode", 1, "form-control"], [1, "mb-1"], ["iconClass", "fa fa-plus-square-o", "title", "Click to add a parameter", 3, "click"], [3, "ngStyle"], [3, "customFunctionParameterForm", "addParameter", "removeParameter"], [1, "input-group", "mb-1"], ["readonly", "", "value", "Return Data Type", 1, "form-control"], ["formControlName", "returnType", "itemKey", "key", "itemName", "name", 1, "form-control", "p-0", 3, "border", "items"], ["buttonClass", "btn btn-success", 1, "mr-1", 3, "click"], ["text", "Sample Code", 3, "click"], [1, "label"], [4, "ngIf", "ngIfElse"], ["showValue", ""], [4, "ngFor", "ngForOf"], [1, "input-group"], [1, "form-control"], ["type", "text", "placeholder", "Enter a test value for the parameter", 1, "form-control", "p-0", 3, "border", "ngModel", "name", "ngModelChange"], [1, "input-group-text", "p-0"], ["type", "button", "value", "Add", 1, "btn", "btn-sm", "border-0", "bg-transparent", 3, "click"], [1, "fa", "fa-plus-square-o"], ["type", "button", "value", "Remove", 1, "btn", "btn-sm", "border-0", "bg-transparent", 3, "click"], [1, "fa", "fa-minus-square-o"], ["type", "text", "placeholder", "Enter a test value for the parameter", 3, "label", "ngModel", "name", "ngModelChange"], ["type", "text", 3, "disabled", "label", "ngModel", "name", "ngModelChange"]],
         template: function CustomFunctionEditComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -8559,7 +8560,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -9731,13 +9732,13 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -9917,7 +9918,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showEdit", false)("parameters", ctx_r16.item.controls.parameters)("formsService", ctx_r16.formsService)("parentParameters", ctx_r16.parentParameters)("refreshEvent", ctx_r16.refreshDataSubject.asObservable());
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showEdit", false)("parameters", ctx_r16.item.controls.parameters)("formsService", ctx_r16.formsService)("parentParameters", ctx_r16.parentParameters)("refreshEvent", ctx_r16.refreshDataObservable);
         }
       }
 
@@ -10055,7 +10056,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showMarkdown", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
@@ -10067,7 +10068,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showEdit", ctx_r5.showEdit)("allowAddRemove", false)("parameters", ctx_r5.item.controls.parameters)("formsService", ctx_r5.formsService)("parentParameters", ctx_r5.parentParameters)("refreshEvent", ctx_r5.refreshDataSubject.asObservable());
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showEdit", ctx_r5.showEdit)("allowAddRemove", false)("parameters", ctx_r5.item.controls.parameters)("formsService", ctx_r5.formsService)("parentParameters", ctx_r5.parentParameters)("refreshEvent", ctx_r5.refreshDataObservable);
         }
       }
 
@@ -10292,6 +10293,7 @@
           this.dialogOpen = false;
           this.dataRows = [];
           this.refreshDataSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
+          this.refreshDataObservable = this.refreshDataSubject.asObservable();
           this.cancelToken = new _auth_auth_models__WEBPACK_IMPORTED_MODULE_6__["CancelToken"]();
         }
 
@@ -10526,7 +10528,7 @@
         features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵNgOnChangesFeature"]],
         decls: 16,
         vars: 9,
-        consts: [[1, "side-menu"], [1, "side-menu-content"], [1, "spin-icon"], [1, "fa", "fa-cog", "fa-spin"], [1, "side-menu-box"], [1, "bg-light", "rounded", "p-1"], [3, "compact", "click"], ["class", "ml-1", 3, "compact", "click", 4, "ngIf"], ["class", "ml-1", "buttonClass", "btn btn-primary", "iconClass", "fa fa-window-maximize text-white", "tooltip", "Maximize window", 3, "click", 4, "ngIf"], ["class", "ml-1", "buttonClass", "btn btn-primary", "iconClass", "fa fa-window-minimize text-white", "tooltip", "Minimize window", 3, "click", 4, "ngIf"], [1, "ml-1", 3, "compact", "click"], [4, "ngIf"], ["class", "p-3 gridster-item-content", 4, "ngIf"], [3, "ngIf"], ["buttonClass", "btn btn-primary", "iconClass", "fa fa-window-maximize text-white", "tooltip", "Maximize window", 1, "ml-1", 3, "click"], ["buttonClass", "btn btn-primary", "iconClass", "fa fa-window-minimize text-white", "tooltip", "Minimize window", 1, "ml-1", 3, "click"], ["class", "m-1", 4, "ngIf"], ["class", "m-1", "style", "z-index: 99999;", 4, "ngIf"], [1, "m-1"], ["class", "input-group", 4, "ngFor", "ngForOf"], [1, "input-group"], [1, "input-group-prepend"], [1, "input-group-text"], [1, "form-control", "p-0", 3, "name", "placeholder", "ngModel", "ngModelChange"], [3, "showEdit", "parameters", "formsService", "parentParameters", "refreshEvent", "onRefreshData"], [1, "m-1", 2, "z-index", "99999"], [3, "showEdit", "showFrame", "animateConfig", "columns", "baseData", "data", "hasChanged", "dataChange"], [1, "p-3", "gridster-item-content"], [3, "formGroup"], ["label", "Item Name", "formControlName", "name", "placeholder", "Enter the dashboard item name.", "iconClass", "fa fa-list", 3, "autocapitalize"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showMarkdown"], ["label", "Select View", "formControlName", "viewKey", "itemKey", "key", "itemName", "name", 3, "items"], [3, "key"], ["label", "Show Header", "formControlName", "header"], ["label", "Allow Scrolling", "formControlName", "scrollable"], [3, "showEdit", "allowAddRemove", "parameters", "formsService", "parentParameters", "refreshEvent", "onRefreshData"], ["class", "box", 3, "ngStyle", 4, "ngIf"], [1, "box", 3, "ngStyle"], ["class", "p-3", 4, "ngIf", "ngIfElse"], ["notRefreshing", ""], [1, "p-3"], [1, "dexih-loader"], ["class", "box-header bg-secondary text-white", 4, "ngIf"], ["class", "box-header", 4, "ngIf"], ["class", "box-content", 4, "ngIf", "ngIfElse"], ["elseBlock", ""], [1, "box-header", "bg-secondary", "text-white"], [1, "m-3"], [1, "box-header"], [3, "data"], [1, "box-content"], [3, "enableMultiSelect", "enableResponsive", "enableSaveCsv", "enableFilter", "columns", "data", 4, "ngIf"], [1, "h-100"], [3, "responsive", "columns", "data", "config", 4, "ngIf"], [3, "enableMultiSelect", "enableResponsive", "enableSaveCsv", "enableFilter", "columns", "data"], [3, "responsive", "columns", "data", "config"], [1, "alert", "alert-info", 3, "click"], [1, "fa", "fa-warning"]],
+        consts: [[1, "side-menu"], [1, "side-menu-content"], [1, "spin-icon"], [1, "fa", "fa-cog", "fa-spin"], [1, "side-menu-box"], [1, "bg-light", "rounded", "p-1"], [3, "compact", "click"], ["class", "ml-1", 3, "compact", "click", 4, "ngIf"], ["class", "ml-1", "buttonClass", "btn btn-primary", "iconClass", "fa fa-window-maximize text-white", "tooltip", "Maximize window", 3, "click", 4, "ngIf"], ["class", "ml-1", "buttonClass", "btn btn-primary", "iconClass", "fa fa-window-minimize text-white", "tooltip", "Minimize window", 3, "click", 4, "ngIf"], [1, "ml-1", 3, "compact", "click"], [4, "ngIf"], ["class", "p-3 gridster-item-content", 4, "ngIf"], [3, "ngIf"], ["buttonClass", "btn btn-primary", "iconClass", "fa fa-window-maximize text-white", "tooltip", "Maximize window", 1, "ml-1", 3, "click"], ["buttonClass", "btn btn-primary", "iconClass", "fa fa-window-minimize text-white", "tooltip", "Minimize window", 1, "ml-1", 3, "click"], ["class", "m-1", 4, "ngIf"], ["class", "m-1", "style", "z-index: 99999;", 4, "ngIf"], [1, "m-1"], ["class", "input-group", 4, "ngFor", "ngForOf"], [1, "input-group"], [1, "input-group-prepend"], [1, "input-group-text"], [1, "form-control", "p-0", 3, "name", "placeholder", "ngModel", "ngModelChange"], [3, "showEdit", "parameters", "formsService", "parentParameters", "refreshEvent", "onRefreshData"], [1, "m-1", 2, "z-index", "99999"], [3, "showEdit", "showFrame", "animateConfig", "columns", "baseData", "data", "hasChanged", "dataChange"], [1, "p-3", "gridster-item-content"], [3, "formGroup"], ["label", "Item Name", "formControlName", "name", "placeholder", "Enter the dashboard item name.", "iconClass", "fa fa-list", 3, "autocapitalize"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview"], ["label", "Select View", "formControlName", "viewKey", "itemKey", "key", "itemName", "name", 3, "items"], [3, "key"], ["label", "Show Header", "formControlName", "header"], ["label", "Allow Scrolling", "formControlName", "scrollable"], [3, "showEdit", "allowAddRemove", "parameters", "formsService", "parentParameters", "refreshEvent", "onRefreshData"], ["class", "box", 3, "ngStyle", 4, "ngIf"], [1, "box", 3, "ngStyle"], ["class", "p-3", 4, "ngIf", "ngIfElse"], ["notRefreshing", ""], [1, "p-3"], [1, "dexih-loader"], ["class", "box-header bg-secondary text-white", 4, "ngIf"], ["class", "box-header", 4, "ngIf"], ["class", "box-content", 4, "ngIf", "ngIfElse"], ["elseBlock", ""], [1, "box-header", "bg-secondary", "text-white"], [1, "m-3"], [1, "box-header"], [3, "data"], [1, "box-content"], [3, "enableMultiSelect", "enableResponsive", "enableSaveCsv", "enableFilter", "columns", "data", 4, "ngIf"], [1, "h-100"], [3, "responsive", "columns", "data", "config", 4, "ngIf"], [3, "enableMultiSelect", "enableResponsive", "enableSaveCsv", "enableFilter", "columns", "data"], [3, "responsive", "columns", "data", "config"], [1, "alert", "alert-info", 3, "click"], [1, "fa", "fa-warning"]],
         template: function DashboardItemComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -10745,7 +10747,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -11539,7 +11541,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -12417,7 +12419,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -14527,7 +14529,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
 
       var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
         function adopt(value) {
@@ -15687,7 +15689,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
 
       function FilesManageComponent_div_0_d_button_5_Template(rf, ctx) {
         if (rf & 1) {
@@ -18848,7 +18850,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -19388,7 +19390,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
 
       function ListOfValuesEditComponent_div_0_ng_template_2_save_button_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -19810,7 +19812,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("selectQuery", ctx_r8.formsService.currentForm.controls.selectQuery.value)("columns", ctx_r8.tableColumns)("inputColumns", ctx_r8.inputColumns)("parameters", null)("refreshEvent", ctx_r8.refreshDataSubject.asObservable());
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("selectQuery", ctx_r8.formsService.currentForm.controls.selectQuery.value)("columns", ctx_r8.tableColumns)("inputColumns", ctx_r8.inputColumns)("parameters", null)("refreshEvent", ctx_r8.refreshDataObservable);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
@@ -19908,7 +19910,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showMarkdown", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
 
@@ -19951,6 +19953,7 @@
           this.router = router;
           this.isLoaded = false;
           this.refreshDataSubject = new rxjs__WEBPACK_IMPORTED_MODULE_5__["Subject"]();
+          this.refreshDataObservable = this.refreshDataSubject.asObservable();
           this.cancelToken = new _auth_auth_models__WEBPACK_IMPORTED_MODULE_8__["CancelToken"]();
           this.eLOVObjectType = _shared_shared_models__WEBPACK_IMPORTED_MODULE_7__["eLOVObjectType"];
           this.connectionTables = [];
@@ -20194,7 +20197,7 @@
         features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([_hub_forms_service__WEBPACK_IMPORTED_MODULE_6__["HubFormsService"]])],
         decls: 1,
         vars: 1,
-        consts: [["class", "container", 4, "ngIf"], [1, "container"], ["title", "Edit List of Values", "iconClass", "fa fa-lg fa-list-alt", 3, "showCloseButton", "padding", "close"], ["header", ""], [1, "m-3", 3, "formGroup"], ["label", "List of Values", "formControlName", "name", "placeholder", "Enter the list of values name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showMarkdown"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Data Source Type", "formControlName", "sourceType", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "Specify the source type for this view", 3, "items", "enableFilter"], ["class", "form-group col-md-6", 4, "ngIf"], ["class", "form-row", 4, "ngIf"], ["title", "Static Values", 3, "showExpandButton", 4, "ngIf"], [3, "ngIf"], [1, "mr-1", 3, "control", "click"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [3, "formsService"], [1, "mr-1", 3, "formsService"], ["label", "Source Table", "formControlName", "sourceTableKey", "parentName", "name", "childItems", "dexihTables", "itemKey", "key", "itemName", "logicalName", "note", "Select the source table", 3, "errors", "items"], [3, "key"], ["label", "Source Datalink", "formControlName", "sourceDatalinkKey", "itemKey", "key", "itemName", "name", "note", "Select the source datalink", 3, "errors", "items"], [1, "form-group", "col-md-4"], ["label", "Key Column", "formControlName", "keyColumn", "itemKey", "name", "itemName", "name", "iconClass", "fa fa-key", 3, "items", "allowNullSelect", "enableFilter"], ["label", "Name Column", "formControlName", "nameColumn", "itemKey", "name", "itemName", "name", "iconClass", "fa fa-circle-o", 3, "items", "allowNullSelect", "enableFilter"], ["label", "Description Column", "formControlName", "descriptionColumn", "itemKey", "name", "itemName", "name", "iconClass", "fa fa-comment-o", 3, "items", "allowNullSelect", "enableFilter"], [1, "form-group", "col-md-12"], [1, "d-flex", "flex-wrap", "pt-1"], ["label", "Cache Lookup", "formControlName", "cache", 1, "input-group-prepend", 3, "border"], ["type", "number", "class", "pl-1", "labelLeft", "Cache Seconds", "placeholder", "seconds", "title", "Specify the number of seconds to cache the lookup", "formControlName", "cacheSeconds", 4, "ngIf"], ["type", "number", "labelLeft", "Cache Seconds", "placeholder", "seconds", "title", "Specify the number of seconds to cache the lookup", "formControlName", "cacheSeconds", 1, "pl-1"], ["title", "Static Values", 3, "showExpandButton"], ["class", "flex-fill", 3, "formGroup", 4, "ngFor", "ngForOf"], ["iconClass", "fa fa-plus", 1, "mr-1", 3, "click"], ["text", "Clear All", 3, "click"], [1, "flex-fill", 3, "formGroup"], [1, "input-group"], [1, "form-control", "p-0"], ["formControlName", "key", "type", "text", "placeholder", "Key Value", 3, "border"], ["formControlName", "name", "type", "text", "placeholder", "Item name", 3, "border"], ["formControlName", "key", "type", "text", "placeholder", "Description", 3, "border"], [1, "input-group-append", "flex-shrink-1", "ml-1"], ["type", "button", "value", "Add", 1, "btn", "btn-light", 3, "click"], [1, "fa", "fa-plus-square-o"], ["type", "button", "value", "Remove", 1, "btn", "btn-light", 3, "click"], [1, "fa", "fa-minus-square-o"], ["title", "Query Configuration", 3, "showExpandButton"], [3, "selectQuery", "columns", "inputColumns", "parameters", "refreshEvent", "hasChanged", "onRefreshData"], ["class", "m-3", 4, "ngIf"], [3, "enableMultiSelect", "enableSaveCsv", "columns", "data", 4, "ngIf"], [1, "m-3"], ["text", "Reload", 3, "autoCompact", "click"], [3, "enableMultiSelect", "enableSaveCsv", "columns", "data"], ["actions", ""], ["text", "Reload", 1, "mr-1", 3, "click"]],
+        consts: [["class", "container", 4, "ngIf"], [1, "container"], ["title", "Edit List of Values", "iconClass", "fa fa-lg fa-list-alt", 3, "showCloseButton", "padding", "close"], ["header", ""], [1, "m-3", 3, "formGroup"], ["label", "List of Values", "formControlName", "name", "placeholder", "Enter the list of values name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Data Source Type", "formControlName", "sourceType", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "Specify the source type for this view", 3, "items", "enableFilter"], ["class", "form-group col-md-6", 4, "ngIf"], ["class", "form-row", 4, "ngIf"], ["title", "Static Values", 3, "showExpandButton", 4, "ngIf"], [3, "ngIf"], [1, "mr-1", 3, "control", "click"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [3, "formsService"], [1, "mr-1", 3, "formsService"], ["label", "Source Table", "formControlName", "sourceTableKey", "parentName", "name", "childItems", "dexihTables", "itemKey", "key", "itemName", "logicalName", "note", "Select the source table", 3, "errors", "items"], [3, "key"], ["label", "Source Datalink", "formControlName", "sourceDatalinkKey", "itemKey", "key", "itemName", "name", "note", "Select the source datalink", 3, "errors", "items"], [1, "form-group", "col-md-4"], ["label", "Key Column", "formControlName", "keyColumn", "itemKey", "name", "itemName", "name", "iconClass", "fa fa-key", 3, "items", "allowNullSelect", "enableFilter"], ["label", "Name Column", "formControlName", "nameColumn", "itemKey", "name", "itemName", "name", "iconClass", "fa fa-circle-o", 3, "items", "allowNullSelect", "enableFilter"], ["label", "Description Column", "formControlName", "descriptionColumn", "itemKey", "name", "itemName", "name", "iconClass", "fa fa-comment-o", 3, "items", "allowNullSelect", "enableFilter"], [1, "form-group", "col-md-12"], [1, "d-flex", "flex-wrap", "pt-1"], ["label", "Cache Lookup", "formControlName", "cache", 1, "input-group-prepend", 3, "border"], ["type", "number", "class", "pl-1", "labelLeft", "Cache Seconds", "placeholder", "seconds", "title", "Specify the number of seconds to cache the lookup", "formControlName", "cacheSeconds", 4, "ngIf"], ["type", "number", "labelLeft", "Cache Seconds", "placeholder", "seconds", "title", "Specify the number of seconds to cache the lookup", "formControlName", "cacheSeconds", 1, "pl-1"], ["title", "Static Values", 3, "showExpandButton"], ["class", "flex-fill", 3, "formGroup", 4, "ngFor", "ngForOf"], ["iconClass", "fa fa-plus", 1, "mr-1", 3, "click"], ["text", "Clear All", 3, "click"], [1, "flex-fill", 3, "formGroup"], [1, "input-group"], [1, "form-control", "p-0"], ["formControlName", "key", "type", "text", "placeholder", "Key Value", 3, "border"], ["formControlName", "name", "type", "text", "placeholder", "Item name", 3, "border"], ["formControlName", "key", "type", "text", "placeholder", "Description", 3, "border"], [1, "input-group-append", "flex-shrink-1", "ml-1"], ["type", "button", "value", "Add", 1, "btn", "btn-light", 3, "click"], [1, "fa", "fa-plus-square-o"], ["type", "button", "value", "Remove", 1, "btn", "btn-light", 3, "click"], [1, "fa", "fa-minus-square-o"], ["title", "Query Configuration", 3, "showExpandButton"], [3, "selectQuery", "columns", "inputColumns", "parameters", "refreshEvent", "hasChanged", "onRefreshData"], ["class", "m-3", 4, "ngIf"], [3, "enableMultiSelect", "enableSaveCsv", "columns", "data", 4, "ngIf"], [1, "m-3"], ["text", "Reload", 3, "autoCompact", "click"], [3, "enableMultiSelect", "enableSaveCsv", "columns", "data"], ["actions", ""], ["text", "Reload", 1, "mr-1", 3, "click"]],
         template: function ListOfValuesEditComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, ListOfValuesEditComponent_div_0_Template, 20, 14, "div", 0);
@@ -20330,7 +20333,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -20739,7 +20742,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -21678,7 +21681,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
 
       var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
         function adopt(value) {
@@ -22487,7 +22490,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -23134,7 +23137,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -23198,7 +23201,7 @@
         if (rf & 2) {
           var ctx_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("selectQuery", ctx_r3.selectQuery)("columns", ctx_r3.targetTable.dexihTableColumns)("inputColumns", ctx_r3.inputColumns)("refreshEvent", ctx_r3.refreshDataSubject.asObservable());
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("selectQuery", ctx_r3.selectQuery)("columns", ctx_r3.targetTable.dexihTableColumns)("inputColumns", ctx_r3.inputColumns)("refreshEvent", ctx_r3.refreshDataObservable);
         }
       }
 
@@ -23209,6 +23212,7 @@
           this.hubService = hubService;
           this.selectQuery = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_4__["SelectQuery"]();
           this.refreshDataSubject = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+          this.refreshDataObservable = this.refreshDataSubject.asObservable();
           this.cancelToken = new _auth_auth_models__WEBPACK_IMPORTED_MODULE_3__["CancelToken"]();
         }
 
@@ -23516,7 +23520,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -26240,7 +26244,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -26871,7 +26875,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -27699,7 +27703,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -27964,7 +27968,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showMarkdown", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true);
         }
       }
 
@@ -28251,7 +28255,7 @@
         features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([_hub_forms_service__WEBPACK_IMPORTED_MODULE_6__["HubFormsService"]])],
         decls: 14,
         vars: 6,
-        consts: [[1, "container-fluid"], ["title", "Tags", "iconClass", "fa fa-lg fa-fw fa-tags", 3, "showCloseButton", "close"], ["rowStatusHeading", "Color", 3, "enableMultiSelect", "enableStickyToolbar", "toolbarZIndex", "columns", "dataObservable", "rowClick"], ["select", "selectedItemAction"], ["selectedItemAction", ""], ["select", "selectedItemsAction"], ["selectedItemsAction", ""], ["actions", ""], ["select", "rowStatus"], ["rowStatus", ""], ["tableHeader", ""], ["title", "Views", "path", "/assets/help/reference/tag.md", 1, "m-3"], [1, "mr-1", 3, "click"], ["class", "mr-1", 3, "click", 4, "ngIf"], [1, "alert", "p-1", "text-center", 3, "ngStyle", "click"], [1, "blend-text", "font-weight-bold"], [1, "card", "mt-2", 2, "width", "100%"], [1, "card-header", "text-white", "bg-primary"], [1, "card-body"], [3, "formGroup", 4, "ngIf"], [1, "card-footer"], [3, "formGroup"], [1, "form-row"], [1, "form-group", "col-md-3"], ["label", "Tag Name", "formControlName", "name", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], [1, "form-group", "col-md-9"], [1, "mt-1"], [1, "input-group", "m-0"], [1, "btn", "mr-1", 2, "height", "38px", "width", "76px"], ["formControlName", "color", "hidden", "", "type", "color"], ["formControlName", "color", "placeholder", "color", 1, "mr-3", 2, "height", "38px", "width", "90px"], ["data-toggle", "buttons", 1, "btn-group-toggle"], ["class", "btn mr-1", "style", "height: '38px'; width: '38px'", 3, "background-color", "click", 4, "ngFor", "ngForOf"], [1, "col-md-12"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showMarkdown"], [1, "btn", "mr-1", 2, "height", "38px", "width", "38px", 3, "click"]],
+        consts: [[1, "container-fluid"], ["title", "Tags", "iconClass", "fa fa-lg fa-fw fa-tags", 3, "showCloseButton", "close"], ["rowStatusHeading", "Color", 3, "enableMultiSelect", "enableStickyToolbar", "toolbarZIndex", "columns", "dataObservable", "rowClick"], ["select", "selectedItemAction"], ["selectedItemAction", ""], ["select", "selectedItemsAction"], ["selectedItemsAction", ""], ["actions", ""], ["select", "rowStatus"], ["rowStatus", ""], ["tableHeader", ""], ["title", "Views", "path", "/assets/help/reference/tag.md", 1, "m-3"], [1, "mr-1", 3, "click"], ["class", "mr-1", 3, "click", 4, "ngIf"], [1, "alert", "p-1", "text-center", 3, "ngStyle", "click"], [1, "blend-text", "font-weight-bold"], [1, "card", "mt-2", 2, "width", "100%"], [1, "card-header", "text-white", "bg-primary"], [1, "card-body"], [3, "formGroup", 4, "ngIf"], [1, "card-footer"], [3, "formGroup"], [1, "form-row"], [1, "form-group", "col-md-3"], ["label", "Tag Name", "formControlName", "name", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], [1, "form-group", "col-md-9"], [1, "mt-1"], [1, "input-group", "m-0"], [1, "btn", "mr-1", 2, "height", "38px", "width", "76px"], ["formControlName", "color", "hidden", "", "type", "color"], ["formControlName", "color", "placeholder", "color", 1, "mr-3", 2, "height", "38px", "width", "90px"], ["data-toggle", "buttons", 1, "btn-group-toggle"], ["class", "btn mr-1", "style", "height: '38px'; width: '38px'", 3, "background-color", "click", 4, "ngFor", "ngForOf"], [1, "col-md-12"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview"], [1, "btn", "mr-1", 2, "height", "38px", "width", "38px", 3, "click"]],
         template: function TagsComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -28418,7 +28422,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 

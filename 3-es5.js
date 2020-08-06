@@ -437,7 +437,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -525,7 +525,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showMarkdown", true)("errors", ctx_r0.formService.formErrors.description);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true)("errors", ctx_r0.formService.formErrors.description);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
@@ -1131,7 +1131,7 @@
         selectors: [["dexih-datajob-edit-form"]],
         decls: 20,
         vars: 23,
-        consts: [["title", "Properties", 3, "showExpandButton"], [3, "formGroup", 4, "ngIf"], ["title", "Parameters", 3, "showExpandButton", "padding"], [3, "showEdit", "parameters", "formsService", 4, "ngIf"], ["title", "Triggers", 3, "showExpandButton", "padding"], ["sortColumn", "position", 3, "enableMultiSelect", "enableStickyToolbar", "toolbarZIndex", "enableManualSort", "columns", "dataObservable", "rowClick"], ["select", "selectedItemsAction"], ["selectedItemsAction", ""], ["select", "selectedItemAction"], ["selectedItemAction", ""], ["select", "actionsTemplate"], ["actions", ""], ["title", "Steps", 3, "showExpandButton", "padding"], ["sortColumn", "position", 3, "enableMultiSelect", "enableStickyToolbar", "toolbarZIndex", "enableManualSort", "columns", "tags", "dataObservable", "onSortChanged", "rowClick"], [3, "formGroup"], ["label", "Data Job Name", "formControlName", "name", "placeholder", "Enter the job name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showMarkdown", "errors"], ["label", "Datalink Fail Action", "formControlName", "failAction", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "Action to take when a datalink execution fails.", 3, "items", "errors", "enableFilter"], ["label", "Alerting Level", "formControlName", "alertLevel", "itemKey", "key", "itemName", "description", "iconClass", "fa fa-bell", "note", "When alerts should be sent.", 3, "items", "errors", "enableFilter"], ["label", "Audit Connection", "formControlName", "auditConnectionKey", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "Specify the connection where audit data (such as job results) should be written to.", 3, "items", "errors"], [3, "key"], [1, "col", "col-12"], ["label", "Trigger datajob when new files arrive", "formControlName", "fileWatch"], ["label", "Auto Start", "formControlName", "autoStart", "note", "Re-activate the datajob when the remote agent is restarted."], [3, "showEdit", "parameters", "formsService"], [3, "click"], ["title", "New Trigger", 3, "click"], ["iconClass", "fa fa-magic", "text", "AutoSet Dependencies", 3, "click"], ["iconClass", "fa fa-eraser", "text", "Clear Dependencies", 1, "ml-1", 3, "click"], [1, "ml-1", 3, "click"], [1, "mr-1", 3, "click"], ["title", "Create a new step", 1, "mr-1", 3, "click"], ["iconClass", "fa fa-plus-square", "buttonClass", "btn-primary", "title", "Select multiple datalinks to add as steps", 1, "mr-1", 3, "click"]],
+        consts: [["title", "Properties", 3, "showExpandButton"], [3, "formGroup", 4, "ngIf"], ["title", "Parameters", 3, "showExpandButton", "padding"], [3, "showEdit", "parameters", "formsService", 4, "ngIf"], ["title", "Triggers", 3, "showExpandButton", "padding"], ["sortColumn", "position", 3, "enableMultiSelect", "enableStickyToolbar", "toolbarZIndex", "enableManualSort", "columns", "dataObservable", "rowClick"], ["select", "selectedItemsAction"], ["selectedItemsAction", ""], ["select", "selectedItemAction"], ["selectedItemAction", ""], ["select", "actionsTemplate"], ["actions", ""], ["title", "Steps", 3, "showExpandButton", "padding"], ["sortColumn", "position", 3, "enableMultiSelect", "enableStickyToolbar", "toolbarZIndex", "enableManualSort", "columns", "tags", "dataObservable", "onSortChanged", "rowClick"], [3, "formGroup"], ["label", "Data Job Name", "formControlName", "name", "placeholder", "Enter the job name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview", "errors"], ["label", "Datalink Fail Action", "formControlName", "failAction", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "Action to take when a datalink execution fails.", 3, "items", "errors", "enableFilter"], ["label", "Alerting Level", "formControlName", "alertLevel", "itemKey", "key", "itemName", "description", "iconClass", "fa fa-bell", "note", "When alerts should be sent.", 3, "items", "errors", "enableFilter"], ["label", "Audit Connection", "formControlName", "auditConnectionKey", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "Specify the connection where audit data (such as job results) should be written to.", 3, "items", "errors"], [3, "key"], [1, "col", "col-12"], ["label", "Trigger datajob when new files arrive", "formControlName", "fileWatch"], ["label", "Auto Start", "formControlName", "autoStart", "note", "Re-activate the datajob when the remote agent is restarted."], [3, "showEdit", "parameters", "formsService"], [3, "click"], ["title", "New Trigger", 3, "click"], ["iconClass", "fa fa-magic", "text", "AutoSet Dependencies", 3, "click"], ["iconClass", "fa fa-eraser", "text", "Clear Dependencies", 1, "ml-1", 3, "click"], [1, "ml-1", 3, "click"], [1, "mr-1", 3, "click"], ["title", "Create a new step", 1, "mr-1", 3, "click"], ["iconClass", "fa fa-plus-square", "buttonClass", "btn-primary", "title", "Select multiple datalinks to add as steps", 1, "mr-1", 3, "click"]],
         template: function DatajobEditPropertiesComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-widget-section", 0);
@@ -1341,7 +1341,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
 
       function DatajobEditStepComponent_d_widget_section_0_ng_template_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -1964,7 +1964,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
 
       function DatajobAddStepsComponent_ng_template_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -2686,7 +2686,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
 
       function DexihFormDaysOfWeekComponent_div_44_Template(rf, ctx) {
         if (rf & 1) {
