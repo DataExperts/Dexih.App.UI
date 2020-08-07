@@ -59,10 +59,8 @@
                 [textEntryItems]="variables" textEntryItemsTitle="Variables">
             </form-select>
 
-            <form-select *ngIf="filter.operator === eCompare.IsIn || filter.operator === eCompare.IsNotIn" [(ngModel)]="filter.value2" [multiSelect]="true" (ngModelChange)="onChanged()" [border]="true" class="flex-fill flex-form  pl-1" [items]="[]"
-                [enableTextEntry]="true" [enableTextEntryMatch]="false" textEntryNote="Enter the values."
-                [textEntryItems]="variables" textEntryItemsTitle="Variables">
-            </form-select>
+            <form-tags *ngIf="filter.operator === eCompare.IsIn || filter.operator === eCompare.IsNotIn" [(ngModel)]="filter.value2" (ngModelChange)="onChanged()" [border]="true" class="flex-fill flex-form  pl-1" >
+            </form-tags>
 
             <div class="input-group-append">
                 <div class="input-group-text p-0">
