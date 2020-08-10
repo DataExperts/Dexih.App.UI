@@ -11,7 +11,8 @@
     <a class="dropdown-item" (click)="runDatalink(false, false)" title="Run datalink, truncating the target table for each.">Run</a>
     <a class="dropdown-item" (click)="runDatalink(true, true)" title="Run datalink, truncating the target table for each.">Run (with truncate)</a>
     <a class="dropdown-item" (click)="runDatalink(false, true)" title="Run datalink, resetting the incremental (i.e. reload all source data rows) ">Run (reset incremental)</a>
-    <a class="dropdown-item" (click)="preview()" title="Preview the output of this datalink">Preview Datalink</a>
+    <a class="dropdown-item" (click)="preview(false)" title="Preview the output of this datalink">Preview Datalink</a>
+    <a class="dropdown-item" (click)="preview(true)" title="Preview the delta changes of this datalink">Preview Datalink (changes)</a>
     <a class="dropdown-item" (click)="download()" title="Download the output from this datalink">Download Datalink Data</a>
 </d-button-dropdown>
 <cancel-button [formsService]="editDatalinkService.hubFormsService"></cancel-button>

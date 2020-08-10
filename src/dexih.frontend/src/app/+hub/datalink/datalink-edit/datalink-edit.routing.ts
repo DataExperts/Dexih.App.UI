@@ -128,7 +128,10 @@ export const datalinkEditRoutes: Routes = [
     ] },
 
     { path: 'run-plan', component: DatalinkRunPlanComponent, data: { pageTitle: 'Run Plan' } },
-    { path: 'result-view/:auditConnectionKey/:auditKey', component: ResultsViewComponent, data: { pageTitle: 'Detailed Result' } }
+    { path: 'result-view/:auditConnectionKey/:auditKey', component: ResultsViewComponent, data: { pageTitle: 'Detailed Result' } },
+    { path: 'preview-table-data/datalink/:datalinkKey', component: PreviewTableComponent,
+    data: { pageTitle: 'Preview Datalink', action: 'preview'} },
+
 ];
 
 export const routes: Routes = [

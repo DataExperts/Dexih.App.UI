@@ -432,6 +432,13 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
             this.deltaType = deltaType;
             this.showColumn = true;
         }
+
+        this.updateData();
+    }
+
+    updateDeltaColumns() {
+        this.targetTableForm.markAsDirty();
+        this.updateData();
     }
 
     async resetColumns() {

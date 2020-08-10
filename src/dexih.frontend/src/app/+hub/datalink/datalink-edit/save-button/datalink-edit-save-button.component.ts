@@ -114,6 +114,24 @@ export class DatalinkEditSaveButtonComponent implements OnInit, OnDestroy {
         }
     }
 
+    previewChanges() {
+        if (this.editDatalinkService.hubFormsService.hasChanged) {
+            this.authService.confirmDialog('Save Datalink', 'The datalink must be saved before previewing delta changes.  Would you like to save now?')
+                .then(confirm => {
+                    if (confirm) {
+                        this.saveDatalink();
+                        this.editDatalinkService.savingDatalink.toPromise().then(value => {
+                            if (value) {
+                                this.router.navigate(['datalink-preview', this.datalinkForm.controls.key.value, true]);
+                            }
+                        });
+                    }
+                });
+        } else {
+            this.router.navigate(['datalink-preview', this.datalinkForm.controls.key.value, true]);
+        }
+    }
+
     download() {
         if (this.datalinkForm.dirty) {
             this.authService.confirmDialog

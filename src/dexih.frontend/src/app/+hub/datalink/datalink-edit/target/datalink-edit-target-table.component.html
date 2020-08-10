@@ -69,7 +69,6 @@
                     </li>
                 </d-button-splitdropdown>
 
-                <column-edit-bulk *ngIf="showBulkEdit && items.length > 0" [columns]="items" [columnsFormArray]="targetTableForm.controls.table.controls.dexihTableColumns" (updated)="updateData()" ></column-edit-bulk>
                 <d-button iconClass="fa fa-retweet" class="ml-1" (click)="resetColumns()">Reset All Columns</d-button>
                 <d-button-preview class="ml-1" (click)="previewData()"></d-button-preview>
                 <d-button class="ml-1" (click)="importTable()" buttonClass="btn-primary" iconClass="fa fa-refresh" title="Re-import table from connection.">
@@ -80,6 +79,10 @@
                 </d-button>
             </ng-template>
     
+            <ng-template #tableHeader let-items="items">
+                <column-edit-bulk *ngIf="showBulkEdit && items.length > 0" [columns]="items" [columnsFormArray]="targetTableForm.controls.table.controls.dexihTableColumns" (updated)="updateDeltaColumns()" ></column-edit-bulk>
+            </ng-template>
+            
             <ng-template #selectedItemAction select="selectedItemAction" let-column="item">
                 <d-button-edit (click)="editColumn(column)" class="ml-1"></d-button-edit>
             </ng-template>

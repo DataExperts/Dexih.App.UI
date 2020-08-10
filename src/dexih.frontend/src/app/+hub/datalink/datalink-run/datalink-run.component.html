@@ -1,7 +1,7 @@
 <div class="container">
     <d-widget title="Datalink Options" iconClass="fa fa-lg fa-fw fa-exchange"  [showCloseButton]="true" (close)="close()" [padding]="true">
             <ng-template #header>
-                <d-button-refresh class="mr-1" (click)="runDatalinks()" text="Run Now"></d-button-refresh>
+                <d-button class="mr-1" iconClass="fa fa-bolt" (click)="runDatalinks()" text="Run Now"></d-button>
                 <d-button-cancel (click)="cancel()"></d-button-cancel>
             </ng-template>
 
