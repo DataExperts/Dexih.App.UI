@@ -17,7 +17,7 @@
             <li><a class="dropdown-item" *ngIf="apis.length == 1" [routerLink]="['results']" [queryParams]="{apiKeys: [apis[0].key]}" title="Show the Api Logs"><i class="fa fa-history"></i> Logs</a></li>
 
             <ng-template [ngIf]="hubCache.canWrite">
-                <li><a class="dropdown-item" (click)="activateApis()" title="Activates the api."><span class="text-success"><i class="fa fa-save"></i> Activate Api's</span> </a></li>
+                <li><a class="dropdown-item" (click)="activateApis()" title="Activates the api."><span class="text-success"><i class="fa fa-bolt"></i> Activate Api's</span> </a></li>
                 <li><a class="dropdown-item" (click)="cancelApis()" title="Cancel & deactivate the api's"><span class="text-danger"><i class="fa fa-ban"></i> Cancel/Deactivate Api's</span> </a></li>
             </ng-template>
 

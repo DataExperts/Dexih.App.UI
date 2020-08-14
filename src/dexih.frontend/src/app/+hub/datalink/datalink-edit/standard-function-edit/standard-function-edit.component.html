@@ -38,7 +38,7 @@
 						</form-select>
 					</section>
 				</ng-template>
-				<div *ngIf="selectedFunction || selectedCustomFunction" class="form-row">
+				<div *ngIf="selectedFunction || selectedCustomFunction" class="form-row ">
 					<section *ngIf="transformFunctionType != eFunctionType.Validate && transformFunctionType != eFunctionType.condition"
 					 class="col-xs-12 col-sm-6 col-md-3" [ngStyle]="{'z-index': 405, 'position': 'relative'}">
 						<form-select label="Action when null" formControlName="onNull" [items]="eErrorActionItems" itemKey="key" itemName="name"
@@ -57,7 +57,7 @@
 						</form-select>
 					</div>
 
-					<section *ngIf="(selectedFunction?.returnType == 'Boolean') || (selectedCustomFunction && selectedCustomFunction?.returnType == 'Boolean')" class="col-xs-12 col-sm-6 col-md-4">
+					<section *ngIf="(selectedFunction?.returnParameters?.length > 0 && selectedFunction?.returnParameters[0].dataType == eTypeCode.Boolean) || (selectedCustomFunction && selectedCustomFunction?.returnType == eTypeCode.Boolean)" class="col-xs-12 col-sm-6 col-md-3 align-self-end">
 						<form-checkbox label="Return 'NOT' result" formControlName="notCondition">
 						</form-checkbox>
 					</section>

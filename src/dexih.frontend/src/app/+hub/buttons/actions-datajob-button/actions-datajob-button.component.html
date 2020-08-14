@@ -14,7 +14,7 @@
             <li><a class="dropdown-item" *ngIf="datajobs.length == 1" [routerLink]="['results']" [queryParams]="{datajobKeys: [datajobs[0].key]}" title="Show the execution history "><i class="fa fa-history"></i> Execution History</a></li>
 
             <ng-template [ngIf]="hubCache.canWrite">
-                <li><a class="dropdown-item" (click)="activateDatajobs()" title="Activates the datajob schedules/triggers"><span class="text-success"><i class="fa fa-save"></i> Activate Triggers</span> </a></li>
+                <li><a class="dropdown-item" (click)="activateDatajobs()" title="Activates the datajob schedules/triggers"><span class="text-success"><i class="fa fa-bolt"></i> Activate Triggers</span> </a></li>
                 <li><a class="dropdown-item" (click)="cancelDatajobs()" title="Cancel & deactivate the datajob schedules/triggers"><span class="text-danger"><i class="fa fa-ban"></i> Cancel/Deactivate Triggers</span> </a></li>
                 <li><a class="dropdown-item"  (click)="runDatajobs(false, false)" title="Run selected datajobs now."><i class="fa fa-bolt"></i> Run</a></li>
                 <li><a class="dropdown-item" (click)="runDatajobs(true, false)" title="Run selected datajobs now (truncate target tables)."><i class="fa fa-bolt"></i> Run (truncate)</a></li>

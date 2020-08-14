@@ -59,6 +59,7 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
 
   eFunctionType = eFunctionType;
   eParameterDirection = eParameterDirection;
+  eTypeCode = eTypeCode;
   typeCodes = TypeCodes;
 
   public pageTitle: string;

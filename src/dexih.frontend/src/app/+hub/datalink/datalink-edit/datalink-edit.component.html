@@ -2,14 +2,16 @@
 	<d-widget title="Edit Datalink" iconClass="fa fa-lg fa-fw fa-exchange" [showCloseButton]="true"
 		[padding]="false" (close)="cancel()">
 		<ng-template #header>
-			<datalink-status class="d-none d-xl-inline" [datalinkKey]='datalinkForm?.controls.key.value'>
-			</datalink-status>
 			<div class="ml-auto">
+				<div class="d-flex align-items-center">
+				<datalink-status class="d-none d-xl-inline" [datalinkKey]='datalinkForm?.controls.key.value' class="mr-1">
+				</datalink-status>
 				<d-button-dropdown class="mr-1" iconClass="fa fa-plus" text="Options">
 					<d-dropdown-item *ngIf="!validationTransform" iconClass="fa fa-check-square-o" text="Enable target table validation" (click)="enableValidation()"></d-dropdown-item>
 					<d-dropdown-item  iconClass="fa fa-arrow-circle-right" text="Add a target table." [routerLink]="['target', 'table-new']"></d-dropdown-item>
 				</d-button-dropdown>
 				<datalink-save-button></datalink-save-button>
+			</div>
 			</div>
 		</ng-template>
 
