@@ -514,7 +514,10 @@ export class AuthService implements OnDestroy {
         //     // 'Content-Type': 'multipart/form-data'
         // });
 
-        const headers = this.defaultHeaders();
+        let headers = new HttpHeaders({
+            'X-XSRF-TOKEN': Functions.getCookie('XSRF-TOKEN') ?? ''
+        });
+        // const headers = this.defaultHeaders();
 
         return this.postBody(url, data, headers, waitMessage, cancelToken);
     }
@@ -649,6 +652,8 @@ export class AuthService implements OnDestroy {
 
        return promise;
    }
+
+
 
     /// posts to api, and returns raw result.
     public postGetRaw(url: string, data, waitMessage = 'Please wait while the operation completes.',

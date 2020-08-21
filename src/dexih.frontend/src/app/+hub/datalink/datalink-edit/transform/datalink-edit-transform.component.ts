@@ -10,7 +10,7 @@ import { LogFactory, eLogLevel } from '../../../../../logging';
 import { InputOutputColumns } from '../../../hub.lineage.models';
 import { eTransformType, eTransformItemType, DexihDatalinkColumn, DexihDatalinkTransform,
     eTypeCode, DexihDatalinkTransformItem, eAggregate, eSortDirection, eJoinNotFoundStrategyItems,
-    eDuplicateStrategyItems, eSeriesGrain } from '../../../../shared/shared.models';
+    eDuplicateStrategyItems, eSeriesGrain, eJoinStrategyItems } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -38,6 +38,7 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
     eTransformItemType = eTransformItemType;
     eDuplicateStrategyItems = eDuplicateStrategyItems;
     eJoinNotFoundStrategyItems = eJoinNotFoundStrategyItems;
+    eJoinStrategyItems = eJoinStrategyItems;
 
     public allowMappingOutputs: boolean;
     inputColumns: Array<DexihDatalinkColumn>;

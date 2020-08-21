@@ -22,7 +22,7 @@ export class AnimateConfig {
    }
    
    export class ApplicationUser {
-    public id: string = '61bc0e93-6cb6-4a3a-89d2-4ea6e82c052a';
+    public id: string = '2ced0c27-df80-4c6e-b90e-abf8e518c638';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -31,7 +31,7 @@ export class AnimateConfig {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = '76a0ecb4-9dea-4c5d-8adb-0f3d3c6537bd';
+    public securityStamp: string = '0be96604-8495-4604-b3d7-43b1e47a52ac';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -723,8 +723,9 @@ export class AnimateConfig {
     public transformType: eTransformType = null;
     public transformClassName: string = null;
     public transformAssemblyName: string = null;
-    public joinDuplicateStrategy: eDuplicateStrategy = eDuplicateStrategy.Abend;
-    public joinNotFoundStrategy: eJoinNotFoundStrategy = eJoinNotFoundStrategy.Abend;
+    public joinStrategy: eJoinStrategy = eJoinStrategy.Auto;
+    public joinDuplicateStrategy: eDuplicateStrategy = eDuplicateStrategy.All;
+    public joinNotFoundStrategy: eJoinNotFoundStrategy = eJoinNotFoundStrategy.Filter;
     public entityStatus: EntityStatus = null;
     public dexihDatalinkTransformItems: DexihDatalinkTransformItem[] = [];
     public joinDatalinkTable: DexihDatalinkTable = null;
@@ -1260,6 +1261,7 @@ export class AnimateConfig {
     public value2: any = null;
     public operator: eCompare = eCompare.IsEqual;
     public andOr: eAndOr = eAndOr.And;
+    public allowNull: boolean = false;
    }
    
    export class FlatFile {
@@ -1731,10 +1733,12 @@ export class AnimateConfig {
     public sorts: Sort[] = [];
     public groups: TableColumn[] = [];
     public groupFilters: Filter[] = [];
+    public joins: any[] = [];
     public rows: number = -1;
     public inputColumns: TableColumn[] = [];
     public fileName: string = null;
     public path: eFlatFilePath = eFlatFilePath.None;
+    public alias: string = null;
    }
    
    export class SharedData {
@@ -2668,6 +2672,20 @@ export class AnimateConfig {
     {key: eJoinNotFoundStrategy.Abend, name: 'Abend', description: 'Abend Datalink'},
     {key: eJoinNotFoundStrategy.NullJoin, name: 'NullJoin', description: 'Add Null Join'},
     {key: eJoinNotFoundStrategy.Filter, name: 'Filter', description: 'Filter Row'},
+   ]
+   
+   export enum eJoinStrategy {
+    Auto = 0,
+    Sorted = 1,
+    Hash = 2,
+    Database = 3,
+   }
+   
+   export const eJoinStrategyItems = [
+    {key: eJoinStrategy.Auto, name: 'Auto', description: 'Automatic'},
+    {key: eJoinStrategy.Sorted, name: 'Sorted', description: 'Pre-Sorted Join'},
+    {key: eJoinStrategy.Hash, name: 'Hash', description: 'In Memory (hash) join'},
+    {key: eJoinStrategy.Database, name: 'Database', description: 'Database Join'},
    ]
    
    export enum eLoginProvider {

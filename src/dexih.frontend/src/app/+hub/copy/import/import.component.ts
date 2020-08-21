@@ -73,8 +73,8 @@ export class ImportComponent implements OnInit, OnDestroy {
         form.append('hubKey', this.hubCache.hub.hubKey.toString());
 
         for (let i = 0; i < this.importOptions.length; i++) {
-            form.append(`ImportActions[${i}].Action`, this.importOptions[i].action.toString());
-            form.append(`ImportActions[${i}].ObjectType`, this.importOptions[i].objectType.toString());
+            form.append(`importActions[${i}].action`, this.importOptions[i].action.toString());
+            form.append(`importActions[${i}].objectType`, this.importOptions[i].objectType.toString());
         }
 
         this.authService.postForm('/api/Hub/ImportPlan', form).then(result => {
