@@ -1,6 +1,6 @@
 <div *ngIf="targets" cdkDropList #cdkDropList="cdkDropList">
-    <d-widget-section *ngFor="let target of targets" [title]="'Target (' + target.table.name + ')'" [padding]="false" [showExpandButton]="true">
-        <div *ngFor="let column of target.table.dexihTableColumns | fieldSort : 'position' | isValidFilter; let i = index" dropZone (dropData)="newInputOutputDrop($event, column)" [zone]="allowMappingOutputs ? 'input-column' : ''" dropAllowedClass="drop-zone-green" >
+    <d-widget-section *ngFor="let target of targets" [title]="'Target (' + target['table']?.name + ')'" [padding]="false" [showExpandButton]="true">
+        <div *ngFor="let column of target['table'].dexihTableColumns | fieldSort : 'position' | isValidFilter; let i = index" dropZone (dropData)="newInputOutputDrop($event, column)" [zone]="allowMappingOutputs ? 'input-column' : ''" dropAllowedClass="drop-zone-green" >
             <target-column [datalinkTransformForm]='datalinkTransformForm' [column]='column'></target-column>
         </div>
     </d-widget-section>

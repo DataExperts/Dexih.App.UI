@@ -54,7 +54,7 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
 
     public nodes = [];
 
-    public formErrors = {};
+    public formErrors: any = {};
 
     constructor(
         private hubService: HubService,

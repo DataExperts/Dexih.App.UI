@@ -23,7 +23,7 @@ import { eImportAction, Import, DexihConnection, DexihTable, DexihTableColumn, e
    DexihDatalinkProfile, DexihDatalinkTarget, DexihDatalinkTable,
    eSourceType, eSharedObjectType, DexihListOfValues, InputParameterBase,
    eDataObjectType, ListOfValuesItem, eTransformItemType, DexihTag, DexihViewParameter } from '../shared/shared.models';
-import { filter } from 'rxjs/operators';
+import { filter, debounceTime } from 'rxjs/operators';
 
 @Injectable()
 export class HubFormsService implements OnDestroy {
@@ -152,7 +152,7 @@ export class HubFormsService implements OnDestroy {
 
     if (form) {
       if (this._valueChangesSubscription) { this._valueChangesSubscription.unsubscribe(); }
-      this._valueChangesSubscription = form.valueChanges.subscribe(data => {
+      this._valueChangesSubscription = form.valueChanges.pipe(debounceTime(500)).subscribe(data => {
         this.onValueChanged(data)
       });
 

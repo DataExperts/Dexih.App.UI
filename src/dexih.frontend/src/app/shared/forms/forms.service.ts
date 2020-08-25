@@ -15,7 +15,7 @@ export class FormsService implements OnDestroy {
 
   public currentForm: FormGroup;
   private _currentFormObservable = new BehaviorSubject<FormGroup>(null);
-  public formErrors = {};
+  public formErrors: any = {};
   public hasChanged = false;
   public formSaving = false;
   public showAllErrors = false;

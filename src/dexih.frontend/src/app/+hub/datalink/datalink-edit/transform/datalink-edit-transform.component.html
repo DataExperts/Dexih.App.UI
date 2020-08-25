@@ -35,14 +35,13 @@
         </fieldset>
     </form>
 </d-widget-section>
-
 <d-widget-section *ngIf="datalinkTransformForm && (this.datalinkTransformForm.value.transformType == eTransformType.Join || this.datalinkTransformForm.value.transformType == eTransformType.Lookup)" title="Join Settings" [showExpandButton]="true">
     <form [formGroup]="datalinkTransformForm">
         <fieldset>
             <datalink-table [datalinkTableForm]="datalinkTransformForm.controls.joinDatalinkTable"></datalink-table>
 
-            <div class="form-row" *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Join">
-                <section class="form-group col-md-4">
+            <div class="form-row">
+                <section class="form-group col-md-4" *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Join">
                     <form-select label="Join strategy" formControlName="joinStrategy" [items]="eJoinStrategyItems"
                         itemKey="key" itemName="name">
                     </form-select>
@@ -81,8 +80,8 @@
                     </form-select>
                 </section>
                 <section class="form-group col-md-6">
-                    <form-select label="Input Column" formControlName="sourceDatalinkColumn" [items]="inputColumns" [(textValue)]="sourceValue"
-                    [enableKeySelect]="false" itemKey="key" itemName="name" [errors]="sourceErrors">
+                    <form-select label="Input Column" formControlName="sourceDatalinkColumn" [items]="inputColumns"
+                    [enableKeySelect]="false" itemKey="key" itemName="name">
                     </form-select>
                 </section>
             </div>

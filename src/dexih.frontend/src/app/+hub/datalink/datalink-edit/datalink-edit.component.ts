@@ -51,7 +51,7 @@ export class DatalinkEditComponent implements OnInit, OnDestroy {
     showPageMessage = 'Loading datalink...';
 
     public validationTransform;
-    public source = {};
+    public source: any = {};
 
     constructor(
         private hubService: HubService,

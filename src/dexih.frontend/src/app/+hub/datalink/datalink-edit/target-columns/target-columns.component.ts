@@ -1,8 +1,7 @@
 import { Component, Input, Output, OnInit, OnChanges, OnDestroy, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FormGroup } from '@angular/forms';
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { DexihTable, DexihDatalinkColumn } from '../../../../shared/shared.models';
+import { DexihDatalinkColumn, DexihDatalinkTarget } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -11,17 +10,14 @@ import { DexihTable, DexihDatalinkColumn } from '../../../../shared/shared.model
 })
 export class TargetColumnsComponent implements OnInit, OnChanges, OnDestroy {
     @Input() public datalinkTransformForm: FormGroup;
-    @Input() public targets: DexihTable[];
+    @Input() public targets: DexihDatalinkTarget[];
     @Input() public allowMappingOutputs = true;
 
     @Output() public inputOutputDrop: EventEmitter<{ inputColumn: DexihDatalinkColumn, outputColumn: DexihDatalinkColumn }>
         = new EventEmitter<{ inputColumn: DexihDatalinkColumn, outputColumn: DexihDatalinkColumn }>();
 
-    private _outputColumnsSubscribe: Subscription;
 
-    constructor(
-    ) {
-    }
+    constructor() { }
 
     ngOnInit() {
     }
