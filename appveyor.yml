@@ -19,8 +19,8 @@ clone_depth: 1
 install:
   - nvm install 10.16.0
   - npm install -g @angular/cli
-  - sudo apt-get update
-  - sudo apt-get install -y dotnet-sdk-3.1
+  # - sudo apt-get update
+  # - sudo apt-get install -y dotnet-sdk-3.1
   
 before_build:
   - git clone --depth 1 --single-branch --branch ${APPVEYOR_REPO_BRANCH} https://github.com/DataExperts/dexih.transforms ../dexih.transforms
