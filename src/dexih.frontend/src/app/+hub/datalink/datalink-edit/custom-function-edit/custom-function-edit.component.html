@@ -12,7 +12,7 @@
 		<form *ngIf="newDatalinkTransformItemForm" [formGroup]="newDatalinkTransformItemForm">
 			<fieldset>
 				<div class="form-row">
-					<section *ngIf="functionType != eFunctionType.Validate && functionType != eFunctionType.condition"
+					<section *ngIf="functionType != eFunctionType.Validate && functionType != eFunctionType.Condition"
 						class="col col-xs-4" [ngStyle]="{'z-index': 305, 'position': 'relative'}">
 						<form-select label="Action when null" formControlName="onNull" [items]="eErrorActionItems"
 							itemKey="key" itemName="name" iconClass="fa fa-database" [enableFilter]="false">
@@ -23,7 +23,7 @@
 							itemKey="key" itemName="name" iconClass="fa fa-database" [enableFilter]="false">
 						</form-select>
 					</section>
-					<section *ngIf="selectedFunction && selectedFunction?.returnType == 'Boolean'" class="col col-xs-4"
+					<section *ngIf="functionType === eFunctionType.Condition" class="col col-xs-4"
 						[ngStyle]="{'z-index': 303, 'position': 'relative'}">
 						<form-checkbox label="Return 'NOT' result" formControlName="notCondition">
 						</form-checkbox>
@@ -49,7 +49,7 @@
 						<input-parameter [allowNameSelect]="true" [allowDataTypeSelect]="true"
 							[inputParameterForms]="[inputParameter]" [inputColumns]="inputColumns"
 							[nodeDatalinkColumnKey]="datalinkTransformForm.controls.nodeDatalinkColumn.value?.key"
-							(hasChanged)="parameterHasChanged($event)" [updateParameterName]="true"
+							[updateParameterName]="true"
 							(addParameter)="addParameter($event, eParameterDirection.Input)"
 							(removeParameter)="removeParameter($event)" [allowAdd]="true" [allowRemove]="true">
 						</input-parameter>

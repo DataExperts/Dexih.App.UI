@@ -39,7 +39,7 @@
 					</section>
 				</ng-template>
 				<div *ngIf="selectedFunction || selectedCustomFunction" class="form-row ">
-					<section *ngIf="transformFunctionType != eFunctionType.Validate && transformFunctionType != eFunctionType.condition"
+					<section *ngIf="transformFunctionType != eFunctionType.Validate && transformFunctionType != eFunctionType.Condition"
 					 class="col-xs-12 col-sm-6 col-md-3" [ngStyle]="{'z-index': 405, 'position': 'relative'}">
 						<form-select label="Action when null" formControlName="onNull" [items]="eErrorActionItems" itemKey="key" itemName="name"
 						 iconClass="fa fa-database" [enableFilter]="false">
@@ -149,7 +149,7 @@
 							Output Parameters
 						</div>
 						<div class="ml-auto">
-							<d-button text="Auto Map" buttonClass="btn-sm btn-outline-primary" (click)="autoMap(outputParameter)"></d-button>
+							<d-button text="Auto Map" buttonClass="btn-sm btn-outline-primary" (click)="autoMap()"></d-button>
 						</div>
 					</label>
 					<div *ngFor="let outputParameter of outputParameterControls; let i = index" [ngStyle]="{'z-index': 100-i, 'position': 'relative'}">

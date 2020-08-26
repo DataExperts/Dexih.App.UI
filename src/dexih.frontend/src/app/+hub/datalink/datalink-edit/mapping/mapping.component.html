@@ -55,12 +55,14 @@
                     buttonClass="btn-primary mr-1 " iconClass="fa fa-link" title="Create a new join">Join
                 </d-button>
                 <d-button [routerLink]="['standard-function-edit', functionType]"
-                    buttonClass="btn-primary mr-1 " iconClass="fa fa-dollar" title="Create a new standard filter">
-                    Filter</d-button>
+                    buttonClass="btn-primary mr-1 " iconClass="fa fa-dollar" title="Use a function to join the table">
+                    Standard Function
+                </d-button>
                 <d-button [routerLink]="['custom-function-edit', functionType]" buttonClass="btn-primary mr-1 "
-                    iconClass="fa fa-code" title="Create a new custom filter">Custom Filter</d-button>
+                    iconClass="fa fa-code" title="Use a custom-function to join the table">Custom Function
+                </d-button>
 
-                    <d-button-dropdown class="mr-1" buttonClass="btn-primary" iconClass="fa fa-calendar"
+                <d-button-dropdown class="mr-1" buttonClass="btn-primary" iconClass="fa fa-calendar"
                     title="Add a joins between the column and the valid from/to" text='Valid From/To'>
                     <li *ngFor="let column of inputDateColumns"><a class="dropdown-item"  [title]="column.name" (click)="addValidFromTo(column)">{{column.name}}</a></li>
                 </d-button-dropdown>

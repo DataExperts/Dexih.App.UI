@@ -16,8 +16,6 @@ import { eTransformItemType, DexihDatalinkColumn, eAggregate, eCompare,
   templateUrl: './mapping-edit.component.html'
 })
 export class MappingEditComponent implements OnInit, OnDestroy {
-  // public hubCache: HubCache;
-
   public pageTitle: string;
 
   private _subscription: Subscription;
@@ -267,10 +265,16 @@ export class MappingEditComponent implements OnInit, OnDestroy {
   }
 
   updateFilterValue(value: string) {
+    if (value === this.newDatalinkTransformItemForm.controls.filterDatalinkColumn.value) {
+      this.newDatalinkTransformItemForm.controls.filterDatalinkColumn.setValue(null);
+    }
       this.newDatalinkTransformItemForm.controls.filterValue.setValue(value);
   }
 
   updateSourceValue(value: string) {
+    if (value === this.newDatalinkTransformItemForm.controls.sourceDatalinkColumn.value) {
+      this.newDatalinkTransformItemForm.controls.sourceDatalinkColumn.setValue(null);
+    }
     this.newDatalinkTransformItemForm.controls.sourceValue.setValue(value);
   }
 

@@ -152,7 +152,7 @@ export class HubFormsService implements OnDestroy {
 
     if (form) {
       if (this._valueChangesSubscription) { this._valueChangesSubscription.unsubscribe(); }
-      this._valueChangesSubscription = form.valueChanges.pipe(debounceTime(500)).subscribe(data => {
+      this._valueChangesSubscription = form.valueChanges.subscribe(data => {
         this.onValueChanged(data)
       });
 

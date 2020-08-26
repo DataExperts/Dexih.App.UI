@@ -40,7 +40,7 @@ export class InputParameterComponent implements OnInit, OnDestroy, OnChanges {
     @Output() public addParameter: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
     @Output() public removeParameter: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
-    private type: TypeFunctions;
+    public type: TypeFunctions;
     eBasicType = eBasicType;
     typeCodes = TypeCodes;
     eTypeCode = eTypeCode;
