@@ -14667,18 +14667,18 @@
     },
 
     /***/
-    "./node_modules/zone.js/dist/zone-legacy.js":
-    /*!**************************************************!*\
-      !*** ./node_modules/zone.js/dist/zone-legacy.js ***!
-      \**************************************************/
+    "./node_modules/zone.js/fesm2015/zone-legacy.js":
+    /*!******************************************************!*\
+      !*** ./node_modules/zone.js/fesm2015/zone-legacy.js ***!
+      \******************************************************/
 
     /*! no static exports found */
 
     /***/
-    function node_modulesZoneJsDistZoneLegacyJs(module, exports, __webpack_require__) {
+    function node_modulesZoneJsFesm2015ZoneLegacyJs(module, exports, __webpack_require__) {
       var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;
       /**
-      * @license Angular v9.1.0-next.4+61.sha-e552591.with-local-changes
+      * @license Angular v10.1.0-next.6+7.sha-aaa1d8e
       * (c) 2010-2020 Google LLC. https://angular.io/
       * License: MIT
       */
@@ -14690,7 +14690,7 @@
         'use strict';
         /**
          * @license
-         * Copyright Google Inc. All Rights Reserved.
+         * Copyright Google LLC All Rights Reserved.
          *
          * Use of this source code is governed by an MIT-style license that can be
          * found in the LICENSE file at https://angular.io/license
@@ -14817,7 +14817,7 @@
                   descJson = desc.toString();
                 }
 
-                console.log("Attempting to configure '" + prop + "' with descriptor '" + descJson + "' on object '" + obj + "' and got error, giving up: " + error);
+                console.log("Attempting to configure '".concat(prop, "' with descriptor '").concat(descJson, "' on object '").concat(obj, "' and got error, giving up: ").concat(error));
               }
             } else {
               throw error;
@@ -14826,7 +14826,7 @@
         }
         /**
          * @license
-         * Copyright Google Inc. All Rights Reserved.
+         * Copyright Google LLC All Rights Reserved.
          *
          * Use of this source code is governed by an MIT-style license that can be
          * found in the LICENSE file at https://angular.io/license
@@ -14834,13 +14834,13 @@
 
 
         function eventTargetLegacyPatch(_global, api) {
-          var _a = api.getGlobalObjects(),
-              eventNames = _a.eventNames,
-              globalSources = _a.globalSources,
-              zoneSymbolEventNames = _a.zoneSymbolEventNames,
-              TRUE_STR = _a.TRUE_STR,
-              FALSE_STR = _a.FALSE_STR,
-              ZONE_SYMBOL_PREFIX = _a.ZONE_SYMBOL_PREFIX;
+          var _api$getGlobalObjects = api.getGlobalObjects(),
+              eventNames = _api$getGlobalObjects.eventNames,
+              globalSources = _api$getGlobalObjects.globalSources,
+              zoneSymbolEventNames = _api$getGlobalObjects.zoneSymbolEventNames,
+              TRUE_STR = _api$getGlobalObjects.TRUE_STR,
+              FALSE_STR = _api$getGlobalObjects.FALSE_STR,
+              ZONE_SYMBOL_PREFIX = _api$getGlobalObjects.ZONE_SYMBOL_PREFIX;
 
           var WTF_ISSUE_555 = 'Anchor,Area,Audio,BR,Base,BaseFont,Body,Button,Canvas,Content,DList,Directory,Div,Embed,FieldSet,Font,Form,Frame,FrameSet,HR,Head,Heading,Html,IFrame,Image,Input,Keygen,LI,Label,Legend,Link,Map,Marquee,Media,Menu,Meta,Meter,Mod,OList,Object,OptGroup,Option,Output,Paragraph,Pre,Progress,Quote,Script,Select,Source,Span,Style,TableCaption,TableCell,TableCol,Table,TableRow,TableSection,TextArea,Title,Track,UList,Unknown,Video';
           var NO_EVENT_TARGET = 'ApplicationCache,EventSource,FileReader,InputMethodContext,MediaController,MessagePort,Node,Performance,SVGElementInstance,SharedWorker,TextTrack,TextTrackCue,TextTrackList,WebKitNamedFlow,Window,Worker,WorkerGlobalScope,XMLHttpRequest,XMLHttpRequestEventTarget,XMLHttpRequestUpload,IDBRequest,IDBOpenDBRequest,IDBDatabase,IDBTransaction,IDBCursor,DBIndex,WebSocket'.split(',');
@@ -14892,13 +14892,13 @@
           } //  predefine all task.source string
 
 
-          for (var i = 0; i < WTF_ISSUE_555_ARRAY.length; i++) {
-            var target = WTF_ISSUE_555_ARRAY[i];
+          for (var _i = 0; _i < WTF_ISSUE_555_ARRAY.length; _i++) {
+            var target = WTF_ISSUE_555_ARRAY[_i];
             var targets = globalSources[target] = {};
 
             for (var j = 0; j < eventNames.length; j++) {
-              var eventName = eventNames[j];
-              targets[eventName] = target + ADD_EVENT_LISTENER_SOURCE + eventName;
+              var _eventName = eventNames[j];
+              targets[_eventName] = target + ADD_EVENT_LISTENER_SOURCE + _eventName;
             }
           }
 
@@ -14917,9 +14917,9 @@
                   return false;
                 }
               } else {
-                var testString = delegate.toString();
+                var _testString = delegate.toString();
 
-                if (testString === FUNCTION_WRAPPER || testString == BROWSER_TOOLS) {
+                if (_testString === FUNCTION_WRAPPER || _testString == BROWSER_TOOLS) {
                   nativeDelegate.apply(target, args);
                   return false;
                 }
@@ -14938,8 +14938,8 @@
 
           var apiTypes = [];
 
-          for (var i = 0; i < apis.length; i++) {
-            var type = _global[apis[i]];
+          for (var _i2 = 0; _i2 < apis.length; _i2++) {
+            var type = _global[apis[_i2]];
             apiTypes.push(type && type.prototype);
           } // vh is validateHandler to check event handler
           // is valid or not(for security check)
@@ -14957,7 +14957,7 @@
         }
         /**
          * @license
-         * Copyright Google Inc. All Rights Reserved.
+         * Copyright Google LLC All Rights Reserved.
          *
          * Use of this source code is governed by an MIT-style license that can be
          * found in the LICENSE file at https://angular.io/license
@@ -14966,9 +14966,9 @@
 
 
         function apply(api, _global) {
-          var _a = api.getGlobalObjects(),
-              ADD_EVENT_LISTENER_STR = _a.ADD_EVENT_LISTENER_STR,
-              REMOVE_EVENT_LISTENER_STR = _a.REMOVE_EVENT_LISTENER_STR;
+          var _api$getGlobalObjects2 = api.getGlobalObjects(),
+              ADD_EVENT_LISTENER_STR = _api$getGlobalObjects2.ADD_EVENT_LISTENER_STR,
+              REMOVE_EVENT_LISTENER_STR = _api$getGlobalObjects2.REMOVE_EVENT_LISTENER_STR;
 
           var WS = _global.WebSocket; // On Safari window.EventTarget doesn't exist so need to patch WS add/removeEventListener
           // On older Chrome, no need since EventTarget was already patched
@@ -15024,7 +15024,7 @@
         }
         /**
          * @license
-         * Copyright Google Inc. All Rights Reserved.
+         * Copyright Google LLC All Rights Reserved.
          *
          * Use of this source code is governed by an MIT-style license that can be
          * found in the LICENSE file at https://angular.io/license
@@ -15032,9 +15032,9 @@
 
 
         function propertyDescriptorLegacyPatch(api, _global) {
-          var _a = api.getGlobalObjects(),
-              isNode = _a.isNode,
-              isMix = _a.isMix;
+          var _api$getGlobalObjects3 = api.getGlobalObjects(),
+              isNode = _api$getGlobalObjects3.isNode,
+              isMix = _api$getGlobalObjects3.isMix;
 
           if (isNode && !isMix) {
             return;
@@ -15055,9 +15055,9 @@
         }
 
         function canPatchViaPropertyDescriptor(api, _global) {
-          var _a = api.getGlobalObjects(),
-              isBrowser = _a.isBrowser,
-              isMix = _a.isMix;
+          var _api$getGlobalObjects4 = api.getGlobalObjects(),
+              isBrowser = _api$getGlobalObjects4.isBrowser,
+              isMix = _api$getGlobalObjects4.isMix;
 
           if ((isBrowser || isMix) && !api.ObjectGetOwnPropertyDescriptor(HTMLElement.prototype, 'onclick') && typeof Element !== 'undefined') {
             // WebKit https://bugs.webkit.org/show_bug.cgi?id=134364
@@ -15106,30 +15106,35 @@
               }
             });
             var req = new XMLHttpRequest();
-            var result = !!req.onreadystatechange; // restore original desc
+
+            var _result = !!req.onreadystatechange; // restore original desc
+
 
             api.ObjectDefineProperty(XMLHttpRequestPrototype, ON_READY_STATE_CHANGE, xhrDesc || {});
-            return result;
+            return _result;
           } else {
-            var SYMBOL_FAKE_ONREADYSTATECHANGE_1 = api.symbol('fake');
+            var SYMBOL_FAKE_ONREADYSTATECHANGE = api.symbol('fake');
             api.ObjectDefineProperty(XMLHttpRequestPrototype, ON_READY_STATE_CHANGE, {
               enumerable: true,
               configurable: true,
               get: function get() {
-                return this[SYMBOL_FAKE_ONREADYSTATECHANGE_1];
+                return this[SYMBOL_FAKE_ONREADYSTATECHANGE];
               },
               set: function set(value) {
-                this[SYMBOL_FAKE_ONREADYSTATECHANGE_1] = value;
+                this[SYMBOL_FAKE_ONREADYSTATECHANGE] = value;
               }
             });
-            var req = new XMLHttpRequest();
+
+            var _req = new XMLHttpRequest();
 
             var detectFunc = function detectFunc() {};
 
-            req.onreadystatechange = detectFunc;
-            var result = req[SYMBOL_FAKE_ONREADYSTATECHANGE_1] === detectFunc;
-            req.onreadystatechange = null;
-            return result;
+            _req.onreadystatechange = detectFunc;
+
+            var _result2 = _req[SYMBOL_FAKE_ONREADYSTATECHANGE] === detectFunc;
+
+            _req.onreadystatechange = null;
+            return _result2;
           }
         } // Whenever any eventListener fires, we check the eventListener target and all parents
         // for `onwhatever` properties and replace them with zone-bound functions
@@ -15137,10 +15142,12 @@
 
 
         function patchViaCapturingAllTheEvents(api) {
-          var eventNames = api.getGlobalObjects().eventNames;
+          var _api$getGlobalObjects5 = api.getGlobalObjects(),
+              eventNames = _api$getGlobalObjects5.eventNames;
+
           var unboundKey = api.symbol('unbound');
 
-          var _loop_1 = function _loop_1(i) {
+          var _loop = function _loop(i) {
             var property = eventNames[i];
             var onproperty = 'on' + property;
             self.addEventListener(property, function (event) {
@@ -15167,12 +15174,12 @@
           };
 
           for (var i = 0; i < eventNames.length; i++) {
-            _loop_1(i);
+            _loop(i);
           }
         }
         /**
          * @license
-         * Copyright Google Inc. All Rights Reserved.
+         * Copyright Google LLC All Rights Reserved.
          *
          * Use of this source code is governed by an MIT-style license that can be
          * found in the LICENSE file at https://angular.io/license
@@ -15180,9 +15187,9 @@
 
 
         function registerElementPatch(_global, api) {
-          var _a = api.getGlobalObjects(),
-              isBrowser = _a.isBrowser,
-              isMix = _a.isMix;
+          var _api$getGlobalObjects6 = api.getGlobalObjects(),
+              isBrowser = _api$getGlobalObjects6.isBrowser,
+              isMix = _api$getGlobalObjects6.isMix;
 
           if (!isBrowser && !isMix || !('registerElement' in _global.document)) {
             return;
@@ -15193,7 +15200,7 @@
         }
         /**
          * @license
-         * Copyright Google Inc. All Rights Reserved.
+         * Copyright Google LLC All Rights Reserved.
          *
          * Use of this source code is governed by an MIT-style license that can be
          * found in the LICENSE file at https://angular.io/license
@@ -15246,7 +15253,7 @@
 
       module.exports = __webpack_require__(
       /*! zone.js/dist/zone-legacy */
-      "./node_modules/zone.js/dist/zone-legacy.js");
+      "./node_modules/zone.js/fesm2015/zone-legacy.js");
       /***/
     }
   }, [[1, "runtime"]]]);

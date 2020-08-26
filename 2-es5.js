@@ -30,7 +30,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -66,13 +66,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -96,7 +96,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var DashboardEditModule = /*#__PURE__*/function () {
         function DashboardEditModule() {
@@ -205,7 +205,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -273,7 +273,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -297,7 +297,7 @@
 
       var angular_gridster2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! angular-gridster2 */
-      "./node_modules/angular-gridster2/__ivy_ngcc__/fesm2015/angular-gridster2.js");
+      "./node_modules/angular-gridster2/fesm2015/angular-gridster2.js");
       /* harmony import */
 
 
@@ -321,7 +321,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -333,7 +333,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 

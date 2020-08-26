@@ -791,19 +791,19 @@
 
       var _angular_common_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/common/http */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+      "./node_modules/@angular/common/fesm2015/http.js");
       /* harmony import */
 
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -849,7 +849,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -1518,11 +1518,17 @@
           value: function postForm(url, data) {
             var waitMessage = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'Please wait while the operation completes.';
             var cancelToken = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+
             // let headers = new HttpHeaders({
             //     // 'Authorization': `Bearer ${authToken}`,
             //     // 'Content-Type': 'multipart/form-data'
             // });
-            var headers = this.defaultHeaders();
+            var _a;
+
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpHeaders"]({
+              'X-XSRF-TOKEN': (_a = _shared_utils_functions__WEBPACK_IMPORTED_MODULE_13__["Functions"].getCookie('XSRF-TOKEN')) !== null && _a !== void 0 ? _a : ''
+            }); // const headers = this.defaultHeaders();
+
             return this.postBody(url, data, headers, waitMessage, cancelToken);
           } // posts a command that will be collected from a remoteAgent
 
@@ -3695,13 +3701,13 @@
 
       var _angular_common_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/common/http */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+      "./node_modules/@angular/common/fesm2015/http.js");
       /* harmony import */
 
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -3795,7 +3801,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -3819,7 +3825,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -4099,13 +4105,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -4135,7 +4141,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -4329,7 +4335,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "span", 21);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "i", 7);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "i", 22);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, " Activate Api's");
 
@@ -4341,7 +4347,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "li");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "a", 22);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "a", 23);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function ActionsApiButtonComponent_ng_template_0_ng_template_4_ng_template_12_Template_a_click_6_listener() {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r16);
@@ -4353,7 +4359,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "span", 16);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](8, "i", 23);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](8, "i", 24);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](9, " Cancel/Deactivate Api's");
 
@@ -4563,7 +4569,7 @@
         },
         decls: 1,
         vars: 1,
-        consts: [[3, "ngIf"], ["buttonClass", "btn-primary", "iconClass", "fa fa-table", 3, "text", "pullRight"], [1, "list-group-item", "list-group-item-heading", "list-group-item-info"], [4, "ngIf"], ["title", "Create a new api.", 1, "dropdown-item", 3, "routerLink"], [1, "fa", "fa-file-o"], ["title", "Export the metadata for the selected apis to a local file.", 1, "dropdown-item", 3, "click"], [1, "fa", "fa-save"], ["class", "dropdown-item", "title", "Show the Api Logs", 3, "routerLink", "queryParams", 4, "ngIf"], ["queryParamsHandling", "merge", 1, "dropdown-item", 3, "routerLink"], [1, "fa", "fa-edit"], ["title", "Select the selected items as shared.", 1, "dropdown-item", 3, "click"], [1, "fa", "fa-group"], ["title", "Select the selected items as private.", 1, "dropdown-item", 3, "click"], [1, "fa", "fa-user-secret"], ["title", "Delete the metadata for the selected apis.", 1, "dropdown-item", 3, "click"], [1, "text-danger"], [1, "fa", "fa-trash-o", "text-danger"], ["title", "Show the Api Logs", 1, "dropdown-item", 3, "routerLink", "queryParams"], [1, "fa", "fa-history"], ["title", "Activates the api.", 1, "dropdown-item", 3, "click"], [1, "text-success"], ["title", "Cancel & deactivate the api's", 1, "dropdown-item", 3, "click"], [1, "fa", "fa-ban"]],
+        consts: [[3, "ngIf"], ["buttonClass", "btn-primary", "iconClass", "fa fa-table", 3, "text", "pullRight"], [1, "list-group-item", "list-group-item-heading", "list-group-item-info"], [4, "ngIf"], ["title", "Create a new api.", 1, "dropdown-item", 3, "routerLink"], [1, "fa", "fa-file-o"], ["title", "Export the metadata for the selected apis to a local file.", 1, "dropdown-item", 3, "click"], [1, "fa", "fa-save"], ["class", "dropdown-item", "title", "Show the Api Logs", 3, "routerLink", "queryParams", 4, "ngIf"], ["queryParamsHandling", "merge", 1, "dropdown-item", 3, "routerLink"], [1, "fa", "fa-edit"], ["title", "Select the selected items as shared.", 1, "dropdown-item", 3, "click"], [1, "fa", "fa-group"], ["title", "Select the selected items as private.", 1, "dropdown-item", 3, "click"], [1, "fa", "fa-user-secret"], ["title", "Delete the metadata for the selected apis.", 1, "dropdown-item", 3, "click"], [1, "text-danger"], [1, "fa", "fa-trash-o", "text-danger"], ["title", "Show the Api Logs", 1, "dropdown-item", 3, "routerLink", "queryParams"], [1, "fa", "fa-history"], ["title", "Activates the api.", 1, "dropdown-item", 3, "click"], [1, "text-success"], [1, "fa", "fa-bolt"], ["title", "Cancel & deactivate the api's", 1, "dropdown-item", 3, "click"], [1, "fa", "fa-ban"]],
         template: function ActionsApiButtonComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, ActionsApiButtonComponent_ng_template_0_Template, 5, 4, "ng-template", 0);
@@ -4632,13 +4638,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -4668,7 +4674,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       function ActionsColumnValidationButtonComponent_d_button_dropdown_1_li_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -4872,13 +4878,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -4908,7 +4914,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -5902,13 +5908,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -5932,7 +5938,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -6299,7 +6305,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -6311,7 +6317,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -6323,7 +6329,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -6465,7 +6471,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "span", 17);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "i", 7);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "i", 18);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, " Activate Triggers");
 
@@ -6477,7 +6483,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "li");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "a", 18);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "a", 19);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function ActionsDatajobButtonComponent_ng_template_0_ng_template_4_ng_template_10_Template_a_click_6_listener() {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r10);
@@ -6489,7 +6495,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "span", 12);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](8, "i", 19);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](8, "i", 20);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](9, " Cancel/Deactivate Triggers");
 
@@ -6501,7 +6507,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "li");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "a", 20);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "a", 21);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function ActionsDatajobButtonComponent_ng_template_0_ng_template_4_ng_template_10_Template_a_click_11_listener() {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r10);
@@ -6511,7 +6517,7 @@
             return ctx_r12.runDatajobs(false, false);
           });
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](12, "i", 21);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](12, "i", 18);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](13, " Run");
 
@@ -6531,7 +6537,7 @@
             return ctx_r13.runDatajobs(true, false);
           });
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](16, "i", 21);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](16, "i", 18);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](17, " Run (truncate)");
 
@@ -6551,7 +6557,7 @@
             return ctx_r14.runDatajobs(false, true);
           });
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](20, "i", 21);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](20, "i", 18);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](21, " Run (reset delta)");
 
@@ -6571,7 +6577,7 @@
             return ctx_r15.runDatajobsOptions();
           });
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](24, "i", 21);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](24, "i", 18);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](25, " Run (options)");
 
@@ -6777,7 +6783,7 @@
         },
         decls: 1,
         vars: 1,
-        consts: [[3, "ngIf"], ["buttonClass", "btn-primary", "iconClass", "fa fa-table", 3, "text", "pullRight"], [1, "list-group-item", "list-group-item-heading", "list-group-item-info"], [4, "ngIf"], ["title", "Create a new datajob.", 1, "dropdown-item", 3, "routerLink"], [1, "fa", "fa-file-o"], ["title", "Export the metadata for the selected datajobs to a local file.", 1, "dropdown-item", 3, "click"], [1, "fa", "fa-save"], ["class", "dropdown-item", "title", "Show the execution history ", 3, "routerLink", "queryParams", 4, "ngIf"], ["queryParamsHandling", "merge", 1, "dropdown-item", 3, "routerLink"], [1, "fa", "fa-edit"], ["title", "Delete the metadata for the selected datajobs.", 1, "dropdown-item", 3, "click"], [1, "text-danger"], [1, "fa", "fa-trash-o", "text-danger"], ["title", "Show the execution history ", 1, "dropdown-item", 3, "routerLink", "queryParams"], [1, "fa", "fa-history"], ["title", "Activates the datajob schedules/triggers", 1, "dropdown-item", 3, "click"], [1, "text-success"], ["title", "Cancel & deactivate the datajob schedules/triggers", 1, "dropdown-item", 3, "click"], [1, "fa", "fa-ban"], ["title", "Run selected datajobs now.", 1, "dropdown-item", 3, "click"], [1, "fa", "fa-bolt"], ["title", "Run selected datajobs now (truncate target tables).", 1, "dropdown-item", 3, "click"], ["title", "Run selected datajobs now (reset delta counter).", 1, "dropdown-item", 3, "click"], ["title", "Run selected datajobs with options.", 1, "dropdown-item", 3, "click"]],
+        consts: [[3, "ngIf"], ["buttonClass", "btn-primary", "iconClass", "fa fa-table", 3, "text", "pullRight"], [1, "list-group-item", "list-group-item-heading", "list-group-item-info"], [4, "ngIf"], ["title", "Create a new datajob.", 1, "dropdown-item", 3, "routerLink"], [1, "fa", "fa-file-o"], ["title", "Export the metadata for the selected datajobs to a local file.", 1, "dropdown-item", 3, "click"], [1, "fa", "fa-save"], ["class", "dropdown-item", "title", "Show the execution history ", 3, "routerLink", "queryParams", 4, "ngIf"], ["queryParamsHandling", "merge", 1, "dropdown-item", 3, "routerLink"], [1, "fa", "fa-edit"], ["title", "Delete the metadata for the selected datajobs.", 1, "dropdown-item", 3, "click"], [1, "text-danger"], [1, "fa", "fa-trash-o", "text-danger"], ["title", "Show the execution history ", 1, "dropdown-item", 3, "routerLink", "queryParams"], [1, "fa", "fa-history"], ["title", "Activates the datajob schedules/triggers", 1, "dropdown-item", 3, "click"], [1, "text-success"], [1, "fa", "fa-bolt"], ["title", "Cancel & deactivate the datajob schedules/triggers", 1, "dropdown-item", 3, "click"], [1, "fa", "fa-ban"], ["title", "Run selected datajobs now.", 1, "dropdown-item", 3, "click"], ["title", "Run selected datajobs now (truncate target tables).", 1, "dropdown-item", 3, "click"], ["title", "Run selected datajobs now (reset delta counter).", 1, "dropdown-item", 3, "click"], ["title", "Run selected datajobs with options.", 1, "dropdown-item", 3, "click"]],
         template: function ActionsDatajobButtonComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, ActionsDatajobButtonComponent_ng_template_0_Template, 5, 4, "ng-template", 0);
@@ -6847,13 +6853,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -6877,7 +6883,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -7839,13 +7845,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -7863,7 +7869,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -8433,13 +8439,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -8469,7 +8475,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       function ActionsFileFormatButtonComponent_d_button_dropdown_1_li_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -8673,13 +8679,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -8822,13 +8828,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -8858,7 +8864,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -9906,13 +9912,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -9936,7 +9942,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -10303,7 +10309,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -10519,7 +10525,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -10618,7 +10624,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -10630,13 +10636,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var _c0 = function _c0(a0, a2) {
         return [a0, "columnValidation-edit", a2];
@@ -10750,7 +10756,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -10762,13 +10768,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var _c0 = function _c0(a0, a2) {
         return [a0, "connection-edit", a2];
@@ -10882,7 +10888,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -10894,13 +10900,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var _c0 = function _c0(a0, a2) {
         return [a0, "customFunction-edit", a2];
@@ -11014,7 +11020,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -11026,13 +11032,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var _c0 = function _c0(a0, a3) {
         return [a0, "datalink-edit", "edit", a3];
@@ -11146,7 +11152,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -11182,13 +11188,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
         function adopt(value) {
@@ -11852,7 +11858,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -11870,7 +11876,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var _c0 = function _c0(a1) {
         return ["connection-new", a1];
@@ -12006,7 +12012,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -12018,7 +12024,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var _c0 = function _c0() {
         return ["datalink-edit", "new"];
@@ -12100,7 +12106,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -12112,7 +12118,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -12124,7 +12130,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var _c0 = function _c0(a1) {
         return ["table-new", a1];
@@ -12279,7 +12285,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -12297,7 +12303,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -12447,7 +12453,7 @@
         },
         decls: 2,
         vars: 2,
-        consts: [["buttonClass", "btn-primary", "iconClass", "fa fa-cloud", "text", "Save", "title", "Save to the Hub", 3, "disabled", "pullRight", "buttonClick", 4, "ngIf"], ["iconClass", "fa fa-floppy-o", 3, "click", 4, "ngIf"], ["buttonClass", "btn-primary", "iconClass", "fa fa-cloud", "text", "Save", "title", "Save to the Hub", 3, "disabled", "pullRight", "buttonClick"], ["title", "Save in the hub", 1, "dropdown-item", 3, "click"], [1, "fa", "fa-cloud"], ["title", "Export as a local file", 1, "dropdown-item", 3, "click"], [1, "fa", "fa-floppy-o"], ["title", "Save another version", 1, "dropdown-item", 3, "click"], [1, "fa", "fa-plus-circle"], ["iconClass", "fa fa-floppy-o", 3, "click"]],
+        consts: [["buttonClass", "btn-primary", "iconClass", "fa fa-cloud-download", "text", "Save", "title", "Save to the Hub", 3, "disabled", "pullRight", "buttonClick", 4, "ngIf"], ["iconClass", "fa fa-floppy-o", 3, "click", 4, "ngIf"], ["buttonClass", "btn-primary", "iconClass", "fa fa-cloud-download", "text", "Save", "title", "Save to the Hub", 3, "disabled", "pullRight", "buttonClick"], ["title", "Save in the hub", 1, "dropdown-item", 3, "click"], [1, "fa", "fa-cloud-download"], ["title", "Export as a local file", 1, "dropdown-item", 3, "click"], [1, "fa", "fa-floppy-o"], ["title", "Save another version", 1, "dropdown-item", 3, "click"], [1, "fa", "fa-plus-circle"], ["iconClass", "fa fa-floppy-o", 3, "click"]],
         template: function SaveButtonComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, SaveButtonComponent_d_button_splitdropdown_0_Template, 13, 2, "d-button-splitdropdown", 0);
@@ -12513,7 +12519,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -12525,13 +12531,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var _c0 = function _c0(a0, a2) {
         return [a0, "table-edit", a2];
@@ -12645,7 +12651,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -12663,7 +12669,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -12675,7 +12681,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
 
       var _c0 = function _c0(a0) {
         return {
@@ -12927,7 +12933,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -12951,7 +12957,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -12963,7 +12969,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
 
       var _c0 = function _c0(a0) {
         return {
@@ -13274,7 +13280,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -13286,13 +13292,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var _c0 = function _c0(a0, a2) {
         return [a0, "view-edit", a2];
@@ -13406,13 +13412,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -13460,7 +13466,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -13490,7 +13496,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
 
       function FileFormatEditComponent_ng_template_2_save_button_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -13996,7 +14002,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -14014,7 +14020,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -14050,7 +14056,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -14437,13 +14443,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -14479,7 +14485,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -14939,13 +14945,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -22422,7 +22428,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -22446,7 +22452,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -22476,7 +22482,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var HubModule = /*#__PURE__*/function () {
         function HubModule() {
@@ -23299,7 +23305,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -23375,7 +23381,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -26166,7 +26172,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -26178,7 +26184,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -26325,7 +26331,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
 
       var ItemEditGuard = /*#__PURE__*/function () {
         function ItemEditGuard() {
@@ -26414,7 +26420,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -26456,13 +26462,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -27085,7 +27091,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -27109,7 +27115,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -27305,13 +27311,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -27365,7 +27371,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -27419,7 +27425,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -28634,7 +28640,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -28652,7 +28658,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -29010,7 +29016,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -29040,7 +29046,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -29424,7 +29430,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -29436,13 +29442,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -29606,7 +29612,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -29624,7 +29630,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -29774,7 +29780,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -29792,13 +29798,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -30013,7 +30019,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -30025,13 +30031,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -30181,7 +30187,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -30193,13 +30199,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -30361,7 +30367,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -30403,7 +30409,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -30415,7 +30421,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -30921,7 +30927,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -30933,13 +30939,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -31103,7 +31109,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -31115,13 +31121,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -31283,7 +31289,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -31301,7 +31307,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -31455,7 +31461,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -31479,7 +31485,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -31491,7 +31497,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
 
       function InputParametersViewComponent_div_0_span_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -31779,13 +31785,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -31821,7 +31827,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -32340,7 +32346,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -32358,7 +32364,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -32508,7 +32514,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -32556,7 +32562,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -32586,7 +32592,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -33233,7 +33239,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -33263,13 +33269,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -33462,7 +33468,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -33480,13 +33486,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -33658,7 +33664,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -33676,7 +33682,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -33838,7 +33844,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -34138,7 +34144,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -34150,7 +34156,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -34271,7 +34277,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -34283,13 +34289,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -34439,7 +34445,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -34505,7 +34511,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -34583,25 +34589,25 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_cdk_scrolling__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(
       /*! @angular/cdk/scrolling */
-      "./node_modules/@angular/cdk/__ivy_ngcc__/fesm2015/scrolling.js");
+      "./node_modules/@angular/cdk/fesm2015/scrolling.js");
       /* harmony import */
 
 
       var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(
       /*! @angular/cdk/drag-drop */
-      "./node_modules/@angular/cdk/__ivy_ngcc__/fesm2015/drag-drop.js");
+      "./node_modules/@angular/cdk/fesm2015/drag-drop.js");
       /* harmony import */
 
 
@@ -34625,13 +34631,13 @@
 
       var _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(
       /*! @swimlane/ngx-charts */
-      "./node_modules/@swimlane/ngx-charts/__ivy_ngcc__/fesm2015/swimlane-ngx-charts.js");
+      "./node_modules/@swimlane/ngx-charts/fesm2015/swimlane-ngx-charts.js");
       /* harmony import */
 
 
       var angular_gridster2__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(
       /*! angular-gridster2 */
-      "./node_modules/angular-gridster2/__ivy_ngcc__/fesm2015/angular-gridster2.js");
+      "./node_modules/angular-gridster2/fesm2015/angular-gridster2.js");
       /* harmony import */
 
 
@@ -35029,7 +35035,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -35229,7 +35235,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -35241,7 +35247,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -35253,7 +35259,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       var _c0 = ["modal"];
 
@@ -35474,19 +35480,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/platform-browser */
-      "./node_modules/@angular/platform-browser/__ivy_ngcc__/fesm2015/platform-browser.js");
+      "./node_modules/@angular/platform-browser/fesm2015/platform-browser.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -35504,7 +35510,7 @@
 
       var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/platform-browser/animations */
-      "./node_modules/@angular/platform-browser/__ivy_ngcc__/fesm2015/animations.js");
+      "./node_modules/@angular/platform-browser/fesm2015/animations.js");
       /* harmony import */
 
 
@@ -35546,7 +35552,7 @@
 
       var _angular_common_http__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! @angular/common/http */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+      "./node_modules/@angular/common/fesm2015/http.js");
       /* harmony import */
 
 
@@ -35558,7 +35564,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js"); // import {HubService} from './+hub/hub.service';
+      "./node_modules/@angular/router/fesm2015/router.js"); // import {HubService} from './+hub/hub.service';
 
 
       var AppModule = function AppModule() {
@@ -35648,7 +35654,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -35790,7 +35796,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -35894,7 +35900,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -35906,19 +35912,19 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common/http */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+      "./node_modules/@angular/common/fesm2015/http.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -36227,19 +36233,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -36263,7 +36269,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var DexihHelpModule = function DexihHelpModule() {
         _classCallCheck(this, DexihHelpModule);
@@ -36327,13 +36333,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var AuthLayoutComponent = /*#__PURE__*/function () {
         function AuthLayoutComponent() {
@@ -36412,13 +36418,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var EmptyLayoutComponent = /*#__PURE__*/function () {
         function EmptyLayoutComponent() {
@@ -36492,7 +36498,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -36504,7 +36510,7 @@
 
       var _angular_animations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/animations */
-      "./node_modules/@angular/animations/__ivy_ngcc__/fesm2015/animations.js");
+      "./node_modules/@angular/animations/fesm2015/animations.js");
       /* harmony import */
 
 
@@ -36528,7 +36534,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -36693,7 +36699,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -36817,13 +36823,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -36859,7 +36865,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -36871,7 +36877,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
 
       var _c0 = ["toasts"];
 
@@ -37230,25 +37236,25 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -37336,7 +37342,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -37354,7 +37360,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       function MessagesComponent_div_0_span_2_Template(rf, ctx) {
         if (rf & 1) {
@@ -37502,7 +37508,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -37514,7 +37520,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -37532,7 +37538,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -37864,13 +37870,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -37968,25 +37974,25 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -38123,7 +38129,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -38276,13 +38282,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -38318,7 +38324,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       function HubsComponent_li_1_i_2_Template(rf, ctx) {
         if (rf & 1) {
@@ -38557,7 +38563,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -38569,13 +38575,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -38829,19 +38835,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       var MenuItemComponent = /*#__PURE__*/function () {
         function MenuItemComponent() {
@@ -38962,7 +38968,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -38974,13 +38980,13 @@
 
       var _angular_animations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/animations */
-      "./node_modules/@angular/animations/__ivy_ngcc__/fesm2015/animations.js");
+      "./node_modules/@angular/animations/fesm2015/animations.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       var _c0 = ["item"];
 
@@ -39221,7 +39227,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -39269,13 +39275,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -40297,13 +40303,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -40315,7 +40321,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -40415,13 +40421,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -40457,7 +40463,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -40841,7 +40847,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -40925,19 +40931,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -41021,13 +41027,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -41039,7 +41045,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       function RouteBreadcrumbsComponent_li_6_a_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -41250,7 +41256,7 @@
       !*** ./src/app/shared/shared.models.ts ***!
       \*****************************************/
 
-    /*! exports provided: AnimateConfig, ApiData, ApplicationUser, AppSettingsSection, CacheManager, ChartConfig, ClientMessage, ConnectionAttribute, ConnectionReference, DatalinkProgress, DataPack, DataPackColumn, DeleteQuery, DexihActiveAgent, DexihApi, DexihApiParameter, DexihBaseEntity, DexihColumnBase, DexihColumnValidation, DexihConnection, DexihCustomFunction, DexihCustomFunctionParameter, DexihDashboard, DexihDashboardItem, DexihDashboardItemParameter, DexihDashboardParameter, DexihDatajob, DexihDatajobParameter, DexihDatalink, DexihDatalinkColumn, DexihDatalinkDependency, DexihDatalinkParameter, DexihDatalinkProfile, DexihDatalinkStep, DexihDatalinkStepColumn, DexihDatalinkStepParameter, DexihDatalinkTable, DexihDatalinkTarget, DexihDatalinkTest, DexihDatalinkTestStep, DexihDatalinkTestTable, DexihDatalinkTransform, DexihDatalinkTransformItem, DexihFileFormat, DexihFunctionArrayParameter, DexihFunctionParameter, DexihFunctionParameterBase, DexihHub, DexihHubEntity, DexihHubKeyEntity, DexihHubNamedEntity, DexihHubUser, DexihHubVariable, DexihIssue, DexihIssueComment, DexihListOfValues, DexihParameterBase, DexihRemoteAgent, DexihRemoteAgentHub, DexihTable, DexihTableColumn, DexihTag, DexihTagObject, DexihTrigger, DexihView, DexihViewParameter, DownloadData, DownloadObject, DownloadReadyBase, DownloadReadyMessage, DownloadUrl, EntityStatus, FileConfiguration, Filter, FlatFile, FunctionParameter, FunctionReference, HubUser, Import, ImportAction, ImportObject, InputColumn, InputParameter, InputParameterBase, InputParameters, InsertQuery, ListOfValuesItem, LoggingSection, LoginModel, LogLevelSection, ManagedTask, ManagedTaskFileWatcher, ManagedTaskProgressItem, ManagedTaskTrigger, NamingStandards, NetworkSection, ParameterArray, ParameterColumn, ParameterJoinColumn, ParameterOutputColumn, Parameters, ParameterValue, PermissionsSection, PluginsSection, PrivacySection, QueryColumn, RegisterModel, RemoteAgentProperties, RemoteAgentSettings, RemoteAgentSettingsSubset, RemoteAgentStatus, RemoteLibraries, RemoteMessage, RemoteSettings, RenewSslCertificateModel, ResponseMessage, RuntimeSection, SelectColumn, SelectQuery, SharedData, Sort, Sorts, SystemSettingsSection, Table, TableColumn, TableColumns, TransformAttribute, TransformPerformance, TransformProperties, TransformReference, TransformSettings, TransformWriterOptions, TransformWriterResult, UpdateQuery, UserModel, ViewConfig, WebService, eAggregate, eAggregateItems, eAlertLevel, eAlertLevelItems, eAndOr, eAndOrItems, eApiStatus, eApiStatusItems, eChartType, eChartTypeItems, eCleanAction, eCleanActionItems, eClientCommand, eClientCommandItems, eCompare, eCompareItems, eConcurrentTaskAction, eConcurrentTaskActionItems, eConnectionCategory, eConnectionCategoryItems, eConnectionPurpose, eConnectionPurposeItems, eDatalinkType, eDatalinkTypeItems, eDataObjectType, eDataObjectTypeItems, eDataPrivacyStatus, eDataPrivacyStatusItems, eDayOfWeek, eDayOfWeekItems, eDeltaType, eDeltaTypeItems, eDownloadFormat, eDownloadFormatItems, eDownloadUrlType, eDownloadUrlTypeItems, eDuplicateStrategy, eDuplicateStrategyItems, eEnvironment, eEnvironmentItems, eErrorAction, eErrorActionItems, eFailAction, eFailActionItems, eFlatFilePath, eFlatFilePathItems, eFunctionCaching, eFunctionCachingItems, eFunctionType, eFunctionTypeItems, eGenericType, eGenericTypeItems, eImportAction, eImportActionItems, eIntervalType, eIntervalTypeItems, eInvalidAction, eInvalidActionItems, eIssueCategory, eIssueCategoryItems, eIssueSeverity, eIssueSeverityItems, eIssueStatus, eIssueStatusItems, eIssueType, eIssueTypeItems, eJoinNotFoundStrategy, eJoinNotFoundStrategyItems, eLoginProvider, eLoginProviderItems, eLOVObjectType, eLOVObjectTypeItems, eManagedTaskStatus, eManagedTaskStatusItems, eMessageCommand, eMessageCommandItems, eParameterDirection, eParameterDirectionItems, ePermission, ePermissionItems, eRunStatus, eRunStatusItems, eSecurityFlag, eSecurityFlagItems, eSeriesGrain, eSeriesGrainItems, eSharedAccess, eSharedAccessItems, eSharedObjectType, eSharedObjectTypeItems, eSortDirection, eSortDirectionItems, eSourceType, eSourceTypeItems, eStatus, eStatusItems, eTableType, eTableTypeItems, eTestTableAction, eTestTableActionItems, eTransformItemType, eTransformItemTypeItems, eTransformType, eTransformTypeItems, eTransformWriterMethod, eTransformWriterMethodItems, eTriggerMethod, eTriggerMethodItems, eTypeCode, eTypeCodeItems, eUpdateStrategy, eUpdateStrategyItems, eViewType, eViewTypeItems, eWeekOfMonth, eWeekOfMonthItems, logLevel, logLevelItems */
+    /*! exports provided: AnimateConfig, ApiData, ApplicationUser, AppSettingsSection, CacheManager, ChartConfig, ClientMessage, ConnectionAttribute, ConnectionReference, DatalinkProgress, DataPack, DataPackColumn, DeleteQuery, DexihActiveAgent, DexihApi, DexihApiParameter, DexihBaseEntity, DexihColumnBase, DexihColumnValidation, DexihConnection, DexihCustomFunction, DexihCustomFunctionParameter, DexihDashboard, DexihDashboardItem, DexihDashboardItemParameter, DexihDashboardParameter, DexihDatajob, DexihDatajobParameter, DexihDatalink, DexihDatalinkColumn, DexihDatalinkDependency, DexihDatalinkParameter, DexihDatalinkProfile, DexihDatalinkStep, DexihDatalinkStepColumn, DexihDatalinkStepParameter, DexihDatalinkTable, DexihDatalinkTarget, DexihDatalinkTest, DexihDatalinkTestStep, DexihDatalinkTestTable, DexihDatalinkTransform, DexihDatalinkTransformItem, DexihFileFormat, DexihFunctionArrayParameter, DexihFunctionParameter, DexihFunctionParameterBase, DexihHub, DexihHubEntity, DexihHubKeyEntity, DexihHubNamedEntity, DexihHubUser, DexihHubVariable, DexihIssue, DexihIssueComment, DexihListOfValues, DexihParameterBase, DexihRemoteAgent, DexihRemoteAgentHub, DexihTable, DexihTableColumn, DexihTag, DexihTagObject, DexihTrigger, DexihView, DexihViewParameter, DownloadData, DownloadObject, DownloadReadyBase, DownloadReadyMessage, DownloadUrl, EntityStatus, FileConfiguration, Filter, FlatFile, FunctionParameter, FunctionReference, HubUser, Import, ImportAction, ImportObject, InputColumn, InputParameter, InputParameterBase, InputParameters, InsertQuery, ListOfValuesItem, LoggingSection, LoginModel, LogLevelSection, ManagedTask, ManagedTaskFileWatcher, ManagedTaskProgressItem, ManagedTaskTrigger, NamingStandards, NetworkSection, ParameterArray, ParameterColumn, ParameterJoinColumn, ParameterOutputColumn, Parameters, ParameterValue, PermissionsSection, PluginsSection, PrivacySection, QueryColumn, RegisterModel, RemoteAgentProperties, RemoteAgentSettings, RemoteAgentSettingsSubset, RemoteAgentStatus, RemoteLibraries, RemoteMessage, RemoteSettings, RenewSslCertificateModel, ResponseMessage, RuntimeSection, SelectColumn, SelectQuery, SharedData, Sort, Sorts, SystemSettingsSection, Table, TableColumn, TableColumns, TransformAttribute, TransformPerformance, TransformProperties, TransformReference, TransformSettings, TransformWriterOptions, TransformWriterResult, UpdateQuery, UserModel, ViewConfig, WebService, eAggregate, eAggregateItems, eAlertLevel, eAlertLevelItems, eAndOr, eAndOrItems, eApiStatus, eApiStatusItems, eChartType, eChartTypeItems, eCleanAction, eCleanActionItems, eClientCommand, eClientCommandItems, eCompare, eCompareItems, eConcurrentTaskAction, eConcurrentTaskActionItems, eConnectionCategory, eConnectionCategoryItems, eConnectionPurpose, eConnectionPurposeItems, eDatalinkType, eDatalinkTypeItems, eDataObjectType, eDataObjectTypeItems, eDataPrivacyStatus, eDataPrivacyStatusItems, eDayOfWeek, eDayOfWeekItems, eDeltaType, eDeltaTypeItems, eDownloadFormat, eDownloadFormatItems, eDownloadUrlType, eDownloadUrlTypeItems, eDuplicateStrategy, eDuplicateStrategyItems, eEnvironment, eEnvironmentItems, eErrorAction, eErrorActionItems, eFailAction, eFailActionItems, eFlatFilePath, eFlatFilePathItems, eFunctionCaching, eFunctionCachingItems, eFunctionType, eFunctionTypeItems, eGenericType, eGenericTypeItems, eImportAction, eImportActionItems, eIntervalType, eIntervalTypeItems, eInvalidAction, eInvalidActionItems, eIssueCategory, eIssueCategoryItems, eIssueSeverity, eIssueSeverityItems, eIssueStatus, eIssueStatusItems, eIssueType, eIssueTypeItems, eJoinNotFoundStrategy, eJoinNotFoundStrategyItems, eJoinStrategy, eJoinStrategyItems, eLoginProvider, eLoginProviderItems, eLOVObjectType, eLOVObjectTypeItems, eManagedTaskStatus, eManagedTaskStatusItems, eMessageCommand, eMessageCommandItems, eParameterDirection, eParameterDirectionItems, ePermission, ePermissionItems, eRunStatus, eRunStatusItems, eSecurityFlag, eSecurityFlagItems, eSeriesGrain, eSeriesGrainItems, eSharedAccess, eSharedAccessItems, eSharedObjectType, eSharedObjectTypeItems, eSortDirection, eSortDirectionItems, eSourceType, eSourceTypeItems, eStatus, eStatusItems, eTableType, eTableTypeItems, eTestTableAction, eTestTableActionItems, eTransformItemType, eTransformItemTypeItems, eTransformType, eTransformTypeItems, eTransformWriterMethod, eTransformWriterMethodItems, eTriggerMethod, eTriggerMethodItems, eTypeCode, eTypeCodeItems, eUpdateStrategy, eUpdateStrategyItems, eViewType, eViewTypeItems, eWeekOfMonth, eWeekOfMonthItems, logLevel, logLevelItems */
 
     /***/
     function srcAppSharedSharedModelsTs(module, __webpack_exports__, __webpack_require__) {
@@ -42490,6 +42496,18 @@
       /* harmony export (binding) */
 
 
+      __webpack_require__.d(__webpack_exports__, "eJoinStrategy", function () {
+        return eJoinStrategy;
+      });
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "eJoinStrategyItems", function () {
+        return eJoinStrategyItems;
+      });
+      /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "eLoginProvider", function () {
         return eLoginProvider;
       });
@@ -42815,7 +42833,7 @@
       var ApplicationUser = function ApplicationUser() {
         _classCallCheck(this, ApplicationUser);
 
-        this.id = '61bc0e93-6cb6-4a3a-89d2-4ea6e82c052a';
+        this.id = '2ced0c27-df80-4c6e-b90e-abf8e518c638';
         this.email = null;
         this.concurrencyStamp = null;
         this.emailConfirmed = false;
@@ -42824,7 +42842,7 @@
         this.normalizedEmail = null;
         this.passwordHash = null;
         this.phoneNumber = null;
-        this.securityStamp = '76a0ecb4-9dea-4c5d-8adb-0f3d3c6537bd';
+        this.securityStamp = '0be96604-8495-4604-b3d7-43b1e47a52ac';
         this.userName = null;
         this.accessFailedCount = 0;
         this.normalizedUserName = null;
@@ -43594,8 +43612,9 @@
         this.transformType = null;
         this.transformClassName = null;
         this.transformAssemblyName = null;
-        this.joinDuplicateStrategy = eDuplicateStrategy.Abend;
-        this.joinNotFoundStrategy = eJoinNotFoundStrategy.Abend;
+        this.joinStrategy = eJoinStrategy.Auto;
+        this.joinDuplicateStrategy = eDuplicateStrategy.All;
+        this.joinNotFoundStrategy = eJoinNotFoundStrategy.Filter;
         this.entityStatus = null;
         this.dexihDatalinkTransformItems = [];
         this.joinDatalinkTable = null;
@@ -44195,6 +44214,7 @@
         this.value2 = null;
         this.operator = eCompare.IsEqual;
         this.andOr = eAndOr.And;
+        this.allowNull = false;
       };
 
       var FlatFile = function FlatFile() {
@@ -44752,10 +44772,12 @@
         this.sorts = [];
         this.groups = [];
         this.groupFilters = [];
+        this.joins = [];
         this.rows = -1;
         this.inputColumns = [];
         this.fileName = null;
         this.path = eFlatFilePath.None;
+        this.alias = null;
       };
 
       var SharedData = function SharedData() {
@@ -46284,6 +46306,32 @@
         name: 'Filter',
         description: 'Filter Row'
       }];
+      var eJoinStrategy;
+
+      (function (eJoinStrategy) {
+        eJoinStrategy[eJoinStrategy["Auto"] = 0] = "Auto";
+        eJoinStrategy[eJoinStrategy["Sorted"] = 1] = "Sorted";
+        eJoinStrategy[eJoinStrategy["Hash"] = 2] = "Hash";
+        eJoinStrategy[eJoinStrategy["Database"] = 3] = "Database";
+      })(eJoinStrategy || (eJoinStrategy = {}));
+
+      var eJoinStrategyItems = [{
+        key: eJoinStrategy.Auto,
+        name: 'Auto',
+        description: 'Automatic'
+      }, {
+        key: eJoinStrategy.Sorted,
+        name: 'Sorted',
+        description: 'Pre-Sorted Join'
+      }, {
+        key: eJoinStrategy.Hash,
+        name: 'Hash',
+        description: 'In Memory (hash) join'
+      }, {
+        key: eJoinStrategy.Database,
+        name: 'Database',
+        description: 'Database Join'
+      }];
       var eLoginProvider;
 
       (function (eLoginProvider) {
@@ -47338,37 +47386,37 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/cdk/drag-drop */
-      "./node_modules/@angular/cdk/__ivy_ngcc__/fesm2015/drag-drop.js");
+      "./node_modules/@angular/cdk/fesm2015/drag-drop.js");
       /* harmony import */
 
 
       var _angular_common_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common/http */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+      "./node_modules/@angular/common/fesm2015/http.js");
       /* harmony import */
 
 
@@ -47392,13 +47440,13 @@
 
       var _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @swimlane/ngx-charts */
-      "./node_modules/@swimlane/ngx-charts/__ivy_ngcc__/fesm2015/swimlane-ngx-charts.js");
+      "./node_modules/@swimlane/ngx-charts/fesm2015/swimlane-ngx-charts.js");
       /* harmony import */
 
 
       var angular_gridster2__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! angular-gridster2 */
-      "./node_modules/angular-gridster2/__ivy_ngcc__/fesm2015/angular-gridster2.js");
+      "./node_modules/angular-gridster2/fesm2015/angular-gridster2.js");
       /* harmony import */
 
 
@@ -48398,7 +48446,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -48438,7 +48486,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -48456,7 +48504,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
 
       function ChartBuilderComponent_d_widget_section_0_div_6_Template(rf, ctx) {
         if (rf & 1) {
@@ -50251,7 +50299,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -50287,19 +50335,19 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var angular_resize_event__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! angular-resize-event */
-      "./node_modules/angular-resize-event/__ivy_ngcc__/fesm2015/angular-resize-event.js");
+      "./node_modules/angular-resize-event/fesm2015/angular-resize-event.js");
       /* harmony import */
 
 
       var _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @swimlane/ngx-charts */
-      "./node_modules/@swimlane/ngx-charts/__ivy_ngcc__/fesm2015/swimlane-ngx-charts.js");
+      "./node_modules/@swimlane/ngx-charts/fesm2015/swimlane-ngx-charts.js");
       /* harmony import */
 
 
@@ -51650,19 +51698,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -51680,7 +51728,7 @@
 
       var _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @swimlane/ngx-charts */
-      "./node_modules/@swimlane/ngx-charts/__ivy_ngcc__/fesm2015/swimlane-ngx-charts.js");
+      "./node_modules/@swimlane/ngx-charts/fesm2015/swimlane-ngx-charts.js");
       /* harmony import */
 
 
@@ -51704,7 +51752,7 @@
 
       var angular_resize_event__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! angular-resize-event */
-      "./node_modules/angular-resize-event/__ivy_ngcc__/fesm2015/angular-resize-event.js");
+      "./node_modules/angular-resize-event/fesm2015/angular-resize-event.js");
 
       var ChartBuilderModule = function ChartBuilderModule() {
         _classCallCheck(this, ChartBuilderModule);
@@ -51768,7 +51816,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -51786,13 +51834,13 @@
 
       var _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @swimlane/ngx-charts */
-      "./node_modules/@swimlane/ngx-charts/__ivy_ngcc__/fesm2015/swimlane-ngx-charts.js");
+      "./node_modules/@swimlane/ngx-charts/fesm2015/swimlane-ngx-charts.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -52859,25 +52907,25 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_animations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/animations */
-      "./node_modules/@angular/animations/__ivy_ngcc__/fesm2015/animations.js");
+      "./node_modules/@angular/animations/fesm2015/animations.js");
       /* harmony import */
 
 
       var _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @swimlane/ngx-charts */
-      "./node_modules/@swimlane/ngx-charts/__ivy_ngcc__/fesm2015/swimlane-ngx-charts.js");
+      "./node_modules/@swimlane/ngx-charts/fesm2015/swimlane-ngx-charts.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       var _c0 = ["ngx-combo-charts-series-vertical", ""];
 
@@ -53378,7 +53426,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -53538,25 +53586,25 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -53707,19 +53755,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -53743,7 +53791,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       function DexihInvalidFormDetailsComponent_ng_template_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -54250,19 +54298,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       function DexihInvalidFormIconComponent_span_0_Template(rf, ctx) {
         if (rf & 1) {
@@ -54402,7 +54450,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -54414,7 +54462,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       function DexihMessageComponent_section_0_div_7_div_4_Template(rf, ctx) {
         if (rf & 1) {
@@ -54635,19 +54683,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -54758,7 +54806,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -54782,7 +54830,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       function DownloadButtonComponent_a_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -54924,13 +54972,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       function EncryptionStatusIconComponent_span_0_Template(rf, ctx) {
         if (rf & 1) {
@@ -55055,19 +55103,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -55190,7 +55238,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -55305,7 +55353,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -55317,7 +55365,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       function PrivacyStatusButtonComponent_span_0_Template(rf, ctx) {
         if (rf & 1) {
@@ -55474,7 +55522,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -55504,7 +55552,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -55516,7 +55564,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
 
       function QueryBuilderComponent_div_0_div_1_div_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -55784,23 +55832,19 @@
         }
       }
 
-      var _c0 = function _c0() {
-        return [];
-      };
-
-      function QueryBuilderComponent_div_0_div_10_form_select_6_Template(rf, ctx) {
+      function QueryBuilderComponent_div_0_div_10_form_tags_6_Template(rf, ctx) {
         if (rf & 1) {
           var _r40 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "form-select", 36);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "form-tags", 36);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function QueryBuilderComponent_div_0_div_10_form_select_6_Template_form_select_ngModelChange_0_listener($event) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function QueryBuilderComponent_div_0_div_10_form_tags_6_Template_form_tags_ngModelChange_0_listener($event) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r40);
 
             var filter_r27 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
 
             return filter_r27.value2 = $event;
-          })("ngModelChange", function QueryBuilderComponent_div_0_div_10_form_select_6_Template_form_select_ngModelChange_0_listener() {
+          })("ngModelChange", function QueryBuilderComponent_div_0_div_10_form_tags_6_Template_form_tags_ngModelChange_0_listener() {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r40);
 
             var ctx_r41 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
@@ -55814,9 +55858,7 @@
         if (rf & 2) {
           var filter_r27 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
 
-          var ctx_r30 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", filter_r27.value2)("multiSelect", true)("border", true)("items", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](7, _c0))("enableTextEntry", true)("enableTextEntryMatch", false)("textEntryItems", ctx_r30.variables);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", filter_r27.value2)("border", true);
         }
       }
 
@@ -55886,7 +55928,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, QueryBuilderComponent_div_0_div_10_form_select_5_Template, 1, 9, "form-select", 27);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](6, QueryBuilderComponent_div_0_div_10_form_select_6_Template, 1, 8, "form-select", 28);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](6, QueryBuilderComponent_div_0_div_10_form_tags_6_Template, 1, 2, "form-tags", 28);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "div", 29);
 
@@ -56222,7 +56264,7 @@
         features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵNgOnChangesFeature"]],
         decls: 1,
         vars: 1,
-        consts: [[4, "ngIf"], ["class", "d-flex flex-wrap", 4, "ngIf"], ["class", "d-flex flex-wrap pt-1", 4, "ngIf"], [1, "d-flex", "flex-wrap", "pt-1"], [1, "input-group-prepend"], [1, "input-group-text"], ["label", "All Rows", 1, "flex-fill", "pl-1", 3, "ngModel", "border", "ngModelChange", "click"], ["type", "number", "class", "flex-fill pl-1", "labelLeft", "Max Rows", "placeholder", "Maximum rows...", "title", "Specify the maximum rows to return", 3, "ngModel", "ngModelChange", 4, "ngIf"], ["class", "flex-fill pl-1", "buttonClass", "btn-outline-primary", 3, "ngModelChange", "click", 4, "ngIf"], ["class", "d-flex flex-wrap pt-1", 4, "ngFor", "ngForOf"], ["class", "alert alert-warning mt-2", 4, "ngIf"], [1, "d-flex", "flex-wrap"], ["class", "flex-fill", 4, "ngIf"], ["class", "flex-fill ml-1", 4, "ngIf"], [1, "flex-fill"], ["floatingLabel", "Display Columns", "itemKey", "column.name", "itemName", "column.logicalName", "textEntryNote", "Specify the columns to select.", 3, "ngModel", "items", "enableAddAll", "returnKeys", "ngModelChange"], [1, "flex-fill", "ml-1"], ["floatingLabel", "Sort Columns", "itemKey", "column.runTime", "itemName", "column.details", "textEntryNote", "Specify the columns to sort.", 3, "ngModel", "items", "enableAddAll", "returnKeys", "ngModelChange"], ["class", "input-group pt-1", 4, "ngFor", "ngForOf"], [1, "input-group", "pt-1"], [1, "form-control", "p-0", 3, "name", "placeholder", "ngModel", "ngModelChange"], ["type", "number", "labelLeft", "Max Rows", "placeholder", "Maximum rows...", "title", "Specify the maximum rows to return", 1, "flex-fill", "pl-1", 3, "ngModel", "ngModelChange"], ["buttonClass", "btn-outline-primary", 1, "flex-fill", "pl-1", 3, "ngModelChange", "click"], [1, "d-flex", "w-100"], ["itemName", "name", "itemKey", "key", 1, "flex-fill", "flex-form", "pl-1", 3, "ngModel", "border", "items", "enableTextEntry", "ngModelChange"], ["itemKey", "key", "itemName", "logicalName", "textEntryNote", "Enter a static value or select a column.", 1, "flex-fill", "flex-form", "pl-1", 3, "ngModel", "border", "items", "enableKeySelect", "textValue", "enableTextEntry", "setTextEntryToValue", "enableTextEntryMatch", "ngModelChange", "textValueChange"], ["itemKey", "key", "itemName", "name", 1, "flex-fill", "pl-1", 3, "ngModel", "items", "border", "ngModelChange"], ["class", "flex-fill flex-form  pl-1", "itemKey", "key", "itemName", "logicalName", "textEntryNote", "Enter a static value or select a column.", "textEntryItemsTitle", "Variables", 3, "ngModel", "setTextEntryToValue", "border", "items", "enableKeySelect", "textValue", "enableTextEntry", "enableTextEntryMatch", "textEntryItems", "ngModelChange", "textValueChange", 4, "ngIf"], ["class", "flex-fill flex-form  pl-1", "textEntryNote", "Enter the values.", "textEntryItemsTitle", "Variables", 3, "ngModel", "multiSelect", "border", "items", "enableTextEntry", "enableTextEntryMatch", "textEntryItems", "ngModelChange", 4, "ngIf"], [1, "input-group-append"], [1, "input-group-text", "p-0"], ["type", "button", "value", "Add", 1, "btn", "btn-sm", "border-0", "rounded-0", "bg-transparent", 3, "click"], [1, "fa", "fa-plus-square-o"], ["type", "button", "value", "Remove", 1, "btn", "btn-sm", "border-0", "rounded-0", "bg-transparent", 3, "click"], [1, "fa", "fa-minus-square-o"], ["itemKey", "key", "itemName", "logicalName", "textEntryNote", "Enter a static value or select a column.", "textEntryItemsTitle", "Variables", 1, "flex-fill", "flex-form", "pl-1", 3, "ngModel", "setTextEntryToValue", "border", "items", "enableKeySelect", "textValue", "enableTextEntry", "enableTextEntryMatch", "textEntryItems", "ngModelChange", "textValueChange"], ["textEntryNote", "Enter the values.", "textEntryItemsTitle", "Variables", 1, "flex-fill", "flex-form", "pl-1", 3, "ngModel", "multiSelect", "border", "items", "enableTextEntry", "enableTextEntryMatch", "textEntryItems", "ngModelChange"], [1, "alert", "alert-warning", "mt-2"], ["href", "javascript:void(0)", 1, "alert-link", 3, "click"]],
+        consts: [[4, "ngIf"], ["class", "d-flex flex-wrap", 4, "ngIf"], ["class", "d-flex flex-wrap pt-1", 4, "ngIf"], [1, "d-flex", "flex-wrap", "pt-1"], [1, "input-group-prepend"], [1, "input-group-text"], ["label", "All Rows", 1, "flex-fill", "pl-1", 3, "ngModel", "border", "ngModelChange", "click"], ["type", "number", "class", "flex-fill pl-1", "labelLeft", "Max Rows", "placeholder", "Maximum rows...", "title", "Specify the maximum rows to return", 3, "ngModel", "ngModelChange", 4, "ngIf"], ["class", "flex-fill pl-1", "buttonClass", "btn-outline-primary", 3, "ngModelChange", "click", 4, "ngIf"], ["class", "d-flex flex-wrap pt-1", 4, "ngFor", "ngForOf"], ["class", "alert alert-warning mt-2", 4, "ngIf"], [1, "d-flex", "flex-wrap"], ["class", "flex-fill", 4, "ngIf"], ["class", "flex-fill ml-1", 4, "ngIf"], [1, "flex-fill"], ["floatingLabel", "Display Columns", "itemKey", "column.name", "itemName", "column.logicalName", "textEntryNote", "Specify the columns to select.", 3, "ngModel", "items", "enableAddAll", "returnKeys", "ngModelChange"], [1, "flex-fill", "ml-1"], ["floatingLabel", "Sort Columns", "itemKey", "column.runTime", "itemName", "column.details", "textEntryNote", "Specify the columns to sort.", 3, "ngModel", "items", "enableAddAll", "returnKeys", "ngModelChange"], ["class", "input-group pt-1", 4, "ngFor", "ngForOf"], [1, "input-group", "pt-1"], [1, "form-control", "p-0", 3, "name", "placeholder", "ngModel", "ngModelChange"], ["type", "number", "labelLeft", "Max Rows", "placeholder", "Maximum rows...", "title", "Specify the maximum rows to return", 1, "flex-fill", "pl-1", 3, "ngModel", "ngModelChange"], ["buttonClass", "btn-outline-primary", 1, "flex-fill", "pl-1", 3, "ngModelChange", "click"], [1, "d-flex", "w-100"], ["itemName", "name", "itemKey", "key", 1, "flex-fill", "flex-form", "pl-1", 3, "ngModel", "border", "items", "enableTextEntry", "ngModelChange"], ["itemKey", "key", "itemName", "logicalName", "textEntryNote", "Enter a static value or select a column.", 1, "flex-fill", "flex-form", "pl-1", 3, "ngModel", "border", "items", "enableKeySelect", "textValue", "enableTextEntry", "setTextEntryToValue", "enableTextEntryMatch", "ngModelChange", "textValueChange"], ["itemKey", "key", "itemName", "name", 1, "flex-fill", "pl-1", 3, "ngModel", "items", "border", "ngModelChange"], ["class", "flex-fill flex-form  pl-1", "itemKey", "key", "itemName", "logicalName", "textEntryNote", "Enter a static value or select a column.", "textEntryItemsTitle", "Variables", 3, "ngModel", "setTextEntryToValue", "border", "items", "enableKeySelect", "textValue", "enableTextEntry", "enableTextEntryMatch", "textEntryItems", "ngModelChange", "textValueChange", 4, "ngIf"], ["class", "flex-fill flex-form  pl-1", 3, "ngModel", "border", "ngModelChange", 4, "ngIf"], [1, "input-group-append"], [1, "input-group-text", "p-0"], ["type", "button", "value", "Add", 1, "btn", "btn-sm", "border-0", "rounded-0", "bg-transparent", 3, "click"], [1, "fa", "fa-plus-square-o"], ["type", "button", "value", "Remove", 1, "btn", "btn-sm", "border-0", "rounded-0", "bg-transparent", 3, "click"], [1, "fa", "fa-minus-square-o"], ["itemKey", "key", "itemName", "logicalName", "textEntryNote", "Enter a static value or select a column.", "textEntryItemsTitle", "Variables", 1, "flex-fill", "flex-form", "pl-1", 3, "ngModel", "setTextEntryToValue", "border", "items", "enableKeySelect", "textValue", "enableTextEntry", "enableTextEntryMatch", "textEntryItems", "ngModelChange", "textValueChange"], [1, "flex-fill", "flex-form", "pl-1", 3, "ngModel", "border", "ngModelChange"], [1, "alert", "alert-warning", "mt-2"], ["href", "javascript:void(0)", 1, "alert-link", 3, "click"]],
         template: function QueryBuilderComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, QueryBuilderComponent_div_0_Template, 12, 8, "div", 0);
@@ -56232,7 +56274,7 @@
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.selectQuery);
           }
         },
-        directives: [_angular_common__WEBPACK_IMPORTED_MODULE_5__["NgIf"], ngx_d_components__WEBPACK_IMPORTED_MODULE_6__["DFormCheckboxComponent"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgModel"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["NgForOf"], ngx_d_components__WEBPACK_IMPORTED_MODULE_6__["DFormTagsDropdownComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_6__["DFormInputComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_6__["DButtonComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_6__["DFormSelectComponent"]],
+        directives: [_angular_common__WEBPACK_IMPORTED_MODULE_5__["NgIf"], ngx_d_components__WEBPACK_IMPORTED_MODULE_6__["DFormCheckboxComponent"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgModel"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["NgForOf"], ngx_d_components__WEBPACK_IMPORTED_MODULE_6__["DFormTagsDropdownComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_6__["DFormInputComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_6__["DButtonComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_6__["DFormSelectComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_6__["DFormTagsComponent"]],
         styles: [".flex-form[_ngcontent-%COMP%] {\n  min-width: 140px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2hhcmVkL3VpL3F1ZXJ5QnVpbGRlci9xdWVyeS1idWlsZGVyLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksZ0JBQWdCO0FBQ3BCIiwiZmlsZSI6InNyYy9hcHAvc2hhcmVkL3VpL3F1ZXJ5QnVpbGRlci9xdWVyeS1idWlsZGVyLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmZsZXgtZm9ybSB7XG4gICAgbWluLXdpZHRoOiAxNDBweDtcbn0iXX0= */"]
       });
       /*@__PURE__*/
@@ -56299,19 +56341,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -56387,7 +56429,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -56405,7 +56447,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -56417,7 +56459,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
 
       function SeriesAnimateComponent_div_0_d_widget_section_1_ng_template_1_Template(rf, ctx) {}
 
@@ -57019,19 +57061,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -57196,7 +57238,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -57226,7 +57268,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -57238,7 +57280,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
 
       function InputParametersViewComponent_div_0_div_1_form_select_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -57576,7 +57618,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -57588,7 +57630,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -57812,13 +57854,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -57854,7 +57896,7 @@
 
       var angular_gridster2__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! angular-gridster2 */
-      "./node_modules/angular-gridster2/__ivy_ngcc__/fesm2015/angular-gridster2.js");
+      "./node_modules/angular-gridster2/fesm2015/angular-gridster2.js");
       /* harmony import */
 
 
@@ -57872,7 +57914,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -58335,13 +58377,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -58371,7 +58413,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -59220,13 +59262,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -59262,7 +59304,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -59554,19 +59596,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -59590,7 +59632,7 @@
 
       var angular_gridster2__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! angular-gridster2 */
-      "./node_modules/angular-gridster2/__ivy_ngcc__/fesm2015/angular-gridster2.js");
+      "./node_modules/angular-gridster2/fesm2015/angular-gridster2.js");
       /* harmony import */
 
 
@@ -59683,7 +59725,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -59695,7 +59737,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -59725,7 +59767,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -59749,7 +59791,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -60275,7 +60317,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -60287,7 +60329,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       function SupportOptionsComponent_div_2_Template(rf, ctx) {
         if (rf & 1) {
@@ -60464,19 +60506,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -60552,7 +60594,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
 
       var AllFilterPipe = /*#__PURE__*/function () {
         function AllFilterPipe() {
@@ -60638,7 +60680,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -60714,7 +60756,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
 
       var CountdownComponent = /*#__PURE__*/function () {
         function CountdownComponent(_changeDetector) {
@@ -60890,7 +60932,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
 
       var DragZoneDirective = /*#__PURE__*/function () {
         function DragZoneDirective(element) {
@@ -61006,7 +61048,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
 
       var DropZoneDirective = /*#__PURE__*/function () {
         function DropZoneDirective() {
@@ -61262,7 +61304,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
 
       var EqualFilterPipe = /*#__PURE__*/function () {
         function EqualFilterPipe() {
@@ -61334,7 +61376,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
 
       var FieldFilterPipe = /*#__PURE__*/function () {
         function FieldFilterPipe() {
@@ -61411,7 +61453,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -61572,7 +61614,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
 
       var GtFilterPipe = /*#__PURE__*/function () {
         function GtFilterPipe() {
@@ -61642,13 +61684,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
 
       var IsValidFilterPipe = /*#__PURE__*/function () {
         function IsValidFilterPipe() {
@@ -61730,7 +61772,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
 
       var MaxItemsFilterPipe = /*#__PURE__*/function () {
         function MaxItemsFilterPipe() {
@@ -61802,7 +61844,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
 
       var SortDescPipe = /*#__PURE__*/function () {
         function SortDescPipe() {
@@ -61880,7 +61922,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
 
       var SortPipe = /*#__PURE__*/function () {
         function SortPipe() {
@@ -61958,7 +62000,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
 
       var TimeDirective = function TimeDirective() {
         _classCallCheck(this, TimeDirective);
@@ -62010,7 +62052,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -62286,7 +62328,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -62304,7 +62346,7 @@
 
       var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/platform-browser */
-      "./node_modules/@angular/platform-browser/__ivy_ngcc__/fesm2015/platform-browser.js");
+      "./node_modules/@angular/platform-browser/fesm2015/platform-browser.js");
 
       if (_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].production) {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["enableProdMode"])();
@@ -62333,7 +62375,7 @@
 
       var zone_js_dist_zone__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! zone.js/dist/zone */
-      "./node_modules/zone.js/dist/zone-evergreen.js");
+      "./node_modules/zone.js/fesm2015/zone.js");
       /* harmony import */
 
 

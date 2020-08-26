@@ -44,13 +44,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -74,7 +74,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -110,7 +110,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -304,24 +304,18 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "input-parameter", 25);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("hasChanged", function CustomFunctionEditComponent_div_0_d_widget_section_1_form_3_div_12_Template_input_parameter_hasChanged_1_listener($event) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("addParameter", function CustomFunctionEditComponent_div_0_d_widget_section_1_form_3_div_12_Template_input_parameter_addParameter_1_listener($event) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r22);
 
             var ctx_r21 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](4);
 
-            return ctx_r21.parameterHasChanged($event);
-          })("addParameter", function CustomFunctionEditComponent_div_0_d_widget_section_1_form_3_div_12_Template_input_parameter_addParameter_1_listener($event) {
+            return ctx_r21.addParameter($event, ctx_r21.eParameterDirection.Input);
+          })("removeParameter", function CustomFunctionEditComponent_div_0_d_widget_section_1_form_3_div_12_Template_input_parameter_removeParameter_1_listener($event) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r22);
 
             var ctx_r23 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](4);
 
-            return ctx_r23.addParameter($event, ctx_r23.eParameterDirection.Input);
-          })("removeParameter", function CustomFunctionEditComponent_div_0_d_widget_section_1_form_3_div_12_Template_input_parameter_removeParameter_1_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r22);
-
-            var ctx_r24 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](4);
-
-            return ctx_r24.removeParameter($event);
+            return ctx_r23.removeParameter($event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -345,18 +339,18 @@
 
       function CustomFunctionEditComponent_div_0_d_widget_section_1_form_3_div_13_div_5_Template(rf, ctx) {
         if (rf & 1) {
-          var _r28 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r27 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "d-button", 23);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function CustomFunctionEditComponent_div_0_d_widget_section_1_form_3_div_13_div_5_Template_d_button_click_1_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r28);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r27);
 
-            var ctx_r27 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](5);
+            var ctx_r26 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](5);
 
-            return ctx_r27.addParameter(null, ctx_r27.eParameterDirection.Output);
+            return ctx_r26.addParameter(null, ctx_r26.eParameterDirection.Output);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "Add Parameter ");
@@ -369,24 +363,24 @@
 
       function CustomFunctionEditComponent_div_0_d_widget_section_1_form_3_div_13_div_6_Template(rf, ctx) {
         if (rf & 1) {
-          var _r32 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r31 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 27);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "output-parameter", 30);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("addParameter", function CustomFunctionEditComponent_div_0_d_widget_section_1_form_3_div_13_div_6_Template_output_parameter_addParameter_1_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r32);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r31);
 
-            var ctx_r31 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](5);
+            var ctx_r30 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](5);
 
-            return ctx_r31.addParameter($event, ctx_r31.eParameterDirection.Output);
+            return ctx_r30.addParameter($event, ctx_r30.eParameterDirection.Output);
           })("removeParameter", function CustomFunctionEditComponent_div_0_d_widget_section_1_form_3_div_13_div_6_Template_output_parameter_removeParameter_1_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r32);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r31);
 
-            var ctx_r33 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](5);
+            var ctx_r32 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](5);
 
-            return ctx_r33.removeParameter($event);
+            return ctx_r32.removeParameter($event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -395,16 +389,16 @@
         }
 
         if (rf & 2) {
-          var parameter_r29 = ctx.$implicit;
-          var i_r30 = ctx.index;
+          var parameter_r28 = ctx.$implicit;
+          var i_r29 = ctx.index;
 
-          var ctx_r26 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](5);
+          var ctx_r25 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](5);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngStyle", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](9, _c3, 100 - i_r30));
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngStyle", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](9, _c3, 100 - i_r29));
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("allowNameSelect", true)("allowDataTypeSelect", true)("outputParameterForm", parameter_r29)("outputColumns", ctx_r26.outputColumns)("datalinkTargets", ctx_r26.datalinkTargets)("updateParameterName", true)("allowAdd", true)("allowRemove", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("allowNameSelect", true)("allowDataTypeSelect", true)("outputParameterForm", parameter_r28)("outputColumns", ctx_r25.outputColumns)("datalinkTargets", ctx_r25.datalinkTargets)("updateParameterName", true)("allowAdd", true)("allowRemove", true);
         }
       }
 
@@ -417,7 +411,7 @@
 
       function CustomFunctionEditComponent_div_0_d_widget_section_1_form_3_div_13_Template(rf, ctx) {
         if (rf & 1) {
-          var _r35 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r34 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
 
@@ -432,11 +426,11 @@
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "output-parameter", 28);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("addParameter", function CustomFunctionEditComponent_div_0_d_widget_section_1_form_3_div_13_Template_output_parameter_addParameter_4_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r35);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r34);
 
-            var ctx_r34 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](4);
+            var ctx_r33 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](4);
 
-            return ctx_r34.addParameter($event, ctx_r34.eParameterDirection.Output);
+            return ctx_r33.addParameter($event, ctx_r33.eParameterDirection.Output);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -532,7 +526,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r5.functionType != ctx_r5.eFunctionType.Validate && ctx_r5.functionType != ctx_r5.eFunctionType.condition);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r5.functionType != ctx_r5.eFunctionType.Validate && ctx_r5.functionType != ctx_r5.eFunctionType.Condition);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
@@ -544,7 +538,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r5.selectedFunction && (ctx_r5.selectedFunction == null ? null : ctx_r5.selectedFunction.returnType) == "Boolean");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r5.functionType === ctx_r5.eFunctionType.Condition);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
@@ -588,16 +582,16 @@
 
       function CustomFunctionEditComponent_div_0_d_widget_section_2_ng_template_1_Template(rf, ctx) {
         if (rf & 1) {
-          var _r42 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r41 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 34);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function CustomFunctionEditComponent_div_0_d_widget_section_2_ng_template_1_Template_button_click_0_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r42);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r41);
 
-            var ctx_r41 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
+            var ctx_r40 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
-            return ctx_r41.test();
+            return ctx_r40.test();
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Syntax Check");
@@ -607,11 +601,11 @@
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "button", 34);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function CustomFunctionEditComponent_div_0_d_widget_section_2_ng_template_1_Template_button_click_2_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r42);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r41);
 
-            var ctx_r43 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
+            var ctx_r42 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
-            return ctx_r43.test(ctx_r43.inputParameterValues);
+            return ctx_r42.test(ctx_r42.inputParameterValues);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "Run");
@@ -621,11 +615,11 @@
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "button", 35);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function CustomFunctionEditComponent_div_0_d_widget_section_2_ng_template_1_Template_button_click_4_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r42);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r41);
 
-            var ctx_r44 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
+            var ctx_r43 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
-            return ctx_r44.downloadCode(ctx_r44.inputParameterValues);
+            return ctx_r43.downloadCode(ctx_r43.inputParameterValues);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5, "Download Code");
@@ -636,20 +630,20 @@
 
       function CustomFunctionEditComponent_div_0_d_widget_section_2_div_6_Template(rf, ctx) {
         if (rf & 1) {
-          var _r48 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r47 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 27);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "form-input", 36);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function CustomFunctionEditComponent_div_0_d_widget_section_2_div_6_Template_form_input_ngModelChange_1_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r48);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r47);
 
-            var i_r46 = ctx.index;
+            var i_r45 = ctx.index;
 
-            var ctx_r47 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
+            var ctx_r46 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
-            return ctx_r47.inputParameterValues[i_r46] = $event;
+            return ctx_r46.inputParameterValues[i_r45] = $event;
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -658,16 +652,16 @@
         }
 
         if (rf & 2) {
-          var inputParameter_r45 = ctx.$implicit;
-          var i_r46 = ctx.index;
+          var inputParameter_r44 = ctx.$implicit;
+          var i_r45 = ctx.index;
 
-          var ctx_r38 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
+          var ctx_r37 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngStyle", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](4, _c3, 200 - i_r46));
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngStyle", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](4, _c3, 200 - i_r45));
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("label", inputParameter_r45.controls.name.value)("ngModel", ctx_r38.inputParameterValues[i_r46])("name", "inputParameterValues" + i_r46);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("label", inputParameter_r44.controls.name.value)("ngModel", ctx_r37.inputParameterValues[i_r45])("name", "inputParameterValues" + i_r45);
         }
       }
 
@@ -683,20 +677,20 @@
 
       function CustomFunctionEditComponent_div_0_d_widget_section_2_div_9_Template(rf, ctx) {
         if (rf & 1) {
-          var _r52 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r51 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 27);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "form-input", 37);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function CustomFunctionEditComponent_div_0_d_widget_section_2_div_9_Template_form_input_ngModelChange_1_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r52);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r51);
 
-            var i_r50 = ctx.index;
+            var i_r49 = ctx.index;
 
-            var ctx_r51 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
+            var ctx_r50 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
-            return ctx_r51.outputParameterValues[i_r50] = $event;
+            return ctx_r50.outputParameterValues[i_r49] = $event;
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -705,22 +699,22 @@
         }
 
         if (rf & 2) {
-          var outputParameter_r49 = ctx.$implicit;
-          var i_r50 = ctx.index;
+          var outputParameter_r48 = ctx.$implicit;
+          var i_r49 = ctx.index;
 
-          var ctx_r40 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
+          var ctx_r39 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngStyle", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](5, _c3, 200 - i_r50));
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngStyle", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](5, _c3, 200 - i_r49));
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", true)("label", outputParameter_r49.controls.name.value)("ngModel", ctx_r40.outputParameterValues[i_r50])("name", "outputParameterValues" + i_r50);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", true)("label", outputParameter_r48.controls.name.value)("ngModel", ctx_r39.outputParameterValues[i_r49])("name", "outputParameterValues" + i_r49);
         }
       }
 
       function CustomFunctionEditComponent_div_0_d_widget_section_2_Template(rf, ctx) {
         if (rf & 1) {
-          var _r54 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r53 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-widget-section", 31);
 
@@ -739,11 +733,11 @@
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "form-input", 32);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function CustomFunctionEditComponent_div_0_d_widget_section_2_Template_form_input_ngModelChange_7_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r54);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r53);
 
-            var ctx_r53 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+            var ctx_r52 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-            return ctx_r53.returnParameterValue = $event;
+            return ctx_r52.returnParameterValue = $event;
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -1148,7 +1142,7 @@
         selectors: [["dexih-custom-function-edit"]],
         decls: 1,
         vars: 1,
-        consts: [[4, "ngIf"], ["title", "Edit Custom Function", 3, "showExpandButton", 4, "ngIf"], ["title", "Test Function", 3, "showExpandButton", 4, "ngIf"], ["title", "Edit Custom Function", 3, "showExpandButton"], ["header", ""], [3, "formGroup", 4, "ngIf"], ["text", "Syntax Check", 1, "mr-1", 3, "click"], ["text", "Download Code", 1, "mr-1", 3, "click"], [1, "mr-1", 3, "disabled", "click"], [3, "click"], [3, "formGroup"], [1, "form-row"], ["class", "col col-xs-4", 3, "ngStyle", 4, "ngIf"], [1, "col", "col-xs-4", 3, "ngStyle"], ["label", "Action when error", "formControlName", "onError", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", 3, "items", "enableFilter"], [1, "label"], ["class", "mb-1", 4, "ngIf"], ["class", "pl-2", 3, "ngStyle", 4, "ngFor", "ngForOf"], ["rows", "20", "width", "100%", "spellcheck", "false", "formControlName", "functionCode", 1, "form-control"], ["label", "Action when null", "formControlName", "onNull", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", 3, "items", "enableFilter"], ["label", "Return 'NOT' result", "formControlName", "notCondition"], ["label", "Action when false", "formControlName", "invalidAction", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", 3, "items", "enableFilter"], [1, "mb-1"], ["iconClass", "fa fa-plus-square-o", "title", "Click to add a parameter", 3, "click"], [1, "pl-2", 3, "ngStyle"], [3, "allowNameSelect", "allowDataTypeSelect", "inputParameterForms", "inputColumns", "nodeDatalinkColumnKey", "updateParameterName", "allowAdd", "allowRemove", "hasChanged", "addParameter", "removeParameter"], [1, "label", "mb-1"], [3, "ngStyle"], [3, "allowNameSelect", "allowDataTypeSelect", "outputParameterForm", "outputColumns", "datalinkTargets", "addParameter"], [3, "ngStyle", 4, "ngFor", "ngForOf"], [3, "allowNameSelect", "allowDataTypeSelect", "outputParameterForm", "outputColumns", "datalinkTargets", "updateParameterName", "allowAdd", "allowRemove", "addParameter", "removeParameter"], ["title", "Test Function", 3, "showExpandButton"], ["label", "Return Value", "name", "returnParameterValue", "type", "text", 3, "disabled", "ngModel", "ngModelChange"], ["class", "label", 4, "ngIf"], [1, "btn", "btn-success", "mr-1", 3, "click"], [1, "btn", "btn-success", 3, "click"], ["type", "text", "placeholder", "Enter a test value for the parameter", 3, "label", "ngModel", "name", "ngModelChange"], ["type", "text", 3, "disabled", "label", "ngModel", "name", "ngModelChange"]],
+        consts: [[4, "ngIf"], ["title", "Edit Custom Function", 3, "showExpandButton", 4, "ngIf"], ["title", "Test Function", 3, "showExpandButton", 4, "ngIf"], ["title", "Edit Custom Function", 3, "showExpandButton"], ["header", ""], [3, "formGroup", 4, "ngIf"], ["text", "Syntax Check", 1, "mr-1", 3, "click"], ["text", "Download Code", 1, "mr-1", 3, "click"], [1, "mr-1", 3, "disabled", "click"], [3, "click"], [3, "formGroup"], [1, "form-row"], ["class", "col col-xs-4", 3, "ngStyle", 4, "ngIf"], [1, "col", "col-xs-4", 3, "ngStyle"], ["label", "Action when error", "formControlName", "onError", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", 3, "items", "enableFilter"], [1, "label"], ["class", "mb-1", 4, "ngIf"], ["class", "pl-2", 3, "ngStyle", 4, "ngFor", "ngForOf"], ["rows", "20", "width", "100%", "spellcheck", "false", "formControlName", "functionCode", 1, "form-control"], ["label", "Action when null", "formControlName", "onNull", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", 3, "items", "enableFilter"], ["label", "Return 'NOT' result", "formControlName", "notCondition"], ["label", "Action when false", "formControlName", "invalidAction", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", 3, "items", "enableFilter"], [1, "mb-1"], ["iconClass", "fa fa-plus-square-o", "title", "Click to add a parameter", 3, "click"], [1, "pl-2", 3, "ngStyle"], [3, "allowNameSelect", "allowDataTypeSelect", "inputParameterForms", "inputColumns", "nodeDatalinkColumnKey", "updateParameterName", "allowAdd", "allowRemove", "addParameter", "removeParameter"], [1, "label", "mb-1"], [3, "ngStyle"], [3, "allowNameSelect", "allowDataTypeSelect", "outputParameterForm", "outputColumns", "datalinkTargets", "addParameter"], [3, "ngStyle", 4, "ngFor", "ngForOf"], [3, "allowNameSelect", "allowDataTypeSelect", "outputParameterForm", "outputColumns", "datalinkTargets", "updateParameterName", "allowAdd", "allowRemove", "addParameter", "removeParameter"], ["title", "Test Function", 3, "showExpandButton"], ["label", "Return Value", "name", "returnParameterValue", "type", "text", 3, "disabled", "ngModel", "ngModelChange"], ["class", "label", 4, "ngIf"], [1, "btn", "btn-success", "mr-1", 3, "click"], [1, "btn", "btn-success", 3, "click"], ["type", "text", "placeholder", "Enter a test value for the parameter", 3, "label", "ngModel", "name", "ngModelChange"], ["type", "text", 3, "disabled", "label", "ngModel", "name", "ngModelChange"]],
         template: function CustomFunctionEditComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, CustomFunctionEditComponent_div_0_Template, 3, 2, "div", 0);
@@ -1243,13 +1237,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -1273,7 +1267,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -1309,7 +1303,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -1695,7 +1689,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
 
       var DatalinkEditGuard = /*#__PURE__*/function () {
         function DatalinkEditGuard() {
@@ -1755,13 +1749,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -1815,7 +1809,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -1847,13 +1841,13 @@
       /*! ../../../shared/help/dexih-help.component */
       "./src/app/shared/help/dexih-help.component.ts");
 
-      function DatalinkEditComponent_div_0_ng_template_2_d_dropdown_item_3_Template(rf, ctx) {
+      function DatalinkEditComponent_div_0_ng_template_2_d_dropdown_item_4_Template(rf, ctx) {
         if (rf & 1) {
           var _r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-dropdown-item", 11);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-dropdown-item", 12);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DatalinkEditComponent_div_0_ng_template_2_d_dropdown_item_3_Template_d_dropdown_item_click_0_listener() {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DatalinkEditComponent_div_0_ng_template_2_d_dropdown_item_4_Template_d_dropdown_item_click_0_listener() {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r7);
 
             var ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
@@ -1871,19 +1865,23 @@
 
       function DatalinkEditComponent_div_0_ng_template_2_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "datalink-status", 6);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 6);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 7);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "d-button-dropdown", 8);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "datalink-status", 8);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, DatalinkEditComponent_div_0_ng_template_2_d_dropdown_item_3_Template, 1, 0, "d-dropdown-item", 9);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "d-button-dropdown", 9);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "d-dropdown-item", 10);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, DatalinkEditComponent_div_0_ng_template_2_d_dropdown_item_4_Template, 1, 0, "d-dropdown-item", 10);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](5, "d-dropdown-item", 11);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](5, "datalink-save-button");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](6, "datalink-save-button");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
@@ -1891,9 +1889,11 @@
         if (rf & 2) {
           var ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("datalinkKey", ctx_r2.datalinkForm == null ? null : ctx_r2.datalinkForm.controls.key.value);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !ctx_r2.validationTransform);
 
@@ -1919,7 +1919,7 @@
         if (rf & 1) {
           var _r15 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "transform-step", 22);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "transform-step", 23);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onDelete", function DatalinkEditComponent_div_0_div_4_ng_template_5_Template_transform_step_onDelete_0_listener() {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r15);
@@ -1947,7 +1947,7 @@
 
       function DatalinkEditComponent_div_0_div_4_transform_step_6_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "transform-step", 23);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "transform-step", 24);
         }
 
         if (rf & 2) {
@@ -1963,7 +1963,7 @@
         if (rf & 1) {
           var _r17 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "transform-step", 24);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "transform-step", 25);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onDelete", function DatalinkEditComponent_div_0_div_4_transform_step_7_Template_transform_step_onDelete_0_listener() {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r17);
@@ -2001,25 +2001,25 @@
 
       function DatalinkEditComponent_div_0_div_4_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 12);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 13);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "ul", 13);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "ul", 14);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 14);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 15);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "transform-step", 15);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "transform-step", 16);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "transform-step", 16);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "transform-step", 17);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, DatalinkEditComponent_div_0_div_4_ng_template_5_Template, 1, 17, "ng-template", 17);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, DatalinkEditComponent_div_0_div_4_ng_template_5_Template, 1, 17, "ng-template", 18);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](6, DatalinkEditComponent_div_0_div_4_transform_step_6_Template, 1, 10, "transform-step", 18);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](6, DatalinkEditComponent_div_0_div_4_transform_step_6_Template, 1, 10, "transform-step", 19);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](7, DatalinkEditComponent_div_0_div_4_transform_step_7_Template, 1, 9, "transform-step", 19);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](7, DatalinkEditComponent_div_0_div_4_transform_step_7_Template, 1, 9, "transform-step", 20);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](8, "transform-step", 20);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](8, "transform-step", 21);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](9, "transform-step", 21);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](9, "transform-step", 22);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -2063,7 +2063,7 @@
 
       function DatalinkEditComponent_div_0_dexih_help_6_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "dexih-help", 25);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "dexih-help", 26);
         }
 
         if (rf & 2) {
@@ -2089,7 +2089,7 @@
             return ctx_r18.cancel();
           });
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, DatalinkEditComponent_div_0_ng_template_2_Template, 6, 4, "ng-template", null, 3, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, DatalinkEditComponent_div_0_ng_template_2_Template, 7, 4, "ng-template", null, 3, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, DatalinkEditComponent_div_0_div_4_Template, 10, 36, "div", 4);
 
@@ -2511,7 +2511,7 @@
         },
         decls: 1,
         vars: 1,
-        consts: [["class", "container-fluid", 4, "ngIf"], [1, "container-fluid"], ["title", "Edit Datalink", "iconClass", "fa fa-lg fa-fw fa-exchange", 3, "showCloseButton", "padding", "close"], ["header", ""], ["class", "bg-light pt-1 pb-1 d-flex", 4, "ngIf"], ["class", "m-3", "title", "Datalinks", 3, "path", 4, "ngIf"], [1, "d-none", "d-xl-inline", 3, "datalinkKey"], [1, "ml-auto"], ["iconClass", "fa fa-plus", "text", "Options", 1, "mr-1"], ["iconClass", "fa fa-check-square-o", "text", "Enable target table validation", 3, "click", 4, "ngIf"], ["iconClass", "fa fa-arrow-circle-right", "text", "Add a target table.", 3, "routerLink"], ["iconClass", "fa fa-check-square-o", "text", "Enable target table validation", 3, "click"], [1, "bg-light", "pt-1", "pb-1", "d-flex"], [1, "transform-container"], [1, "d-flex", "m-3"], [3, "routerLinkCurrent", "name", "title", "icon", "control", "showDelete", "showArrow"], [3, "routerLinkAfter", "routerLinkCurrent", "routerLinkPreview", "name", "title", "icon", "control", "showDelete"], ["ngFor", "", 3, "ngForOf"], [3, "routerLinkBefore", "routerLinkAfter", "routerLinkCurrent", "name", "title", "icon", "showDelete", 4, "ngIf"], [3, "routerLinkBefore", "routerLinkCurrent", "name", "title", "icon", "showDelete", "onDelete", 4, "ngIf"], [3, "routerLinkBefore", "routerLinkCurrent", "name", "title", "icon", "control", "showArrow", "showDelete"], [3, "routerLinkCurrent", "name", "title", "icon", "control", "showDelete", "isLast"], [3, "routerLinkBefore", "routerLinkAfter", "routerLinkCurrent", "routerLinkPreview", "name", "title", "icon", "control", "showDelete", "onDelete"], [3, "routerLinkBefore", "routerLinkAfter", "routerLinkCurrent", "name", "title", "icon", "showDelete"], [3, "routerLinkBefore", "routerLinkCurrent", "name", "title", "icon", "showDelete", "onDelete"], ["title", "Datalinks", 1, "m-3", 3, "path"]],
+        consts: [["class", "container-fluid", 4, "ngIf"], [1, "container-fluid"], ["title", "Edit Datalink", "iconClass", "fa fa-lg fa-fw fa-exchange", 3, "showCloseButton", "padding", "close"], ["header", ""], ["class", "bg-light pt-1 pb-1 d-flex", 4, "ngIf"], ["class", "m-3", "title", "Datalinks", 3, "path", 4, "ngIf"], [1, "ml-auto"], [1, "d-flex", "align-items-center"], [1, "mr-1", 3, "datalinkKey"], ["iconClass", "fa fa-plus", "text", "Options", 1, "mr-1"], ["iconClass", "fa fa-check-square-o", "text", "Enable target table validation", 3, "click", 4, "ngIf"], ["iconClass", "fa fa-arrow-circle-right", "text", "Add a target table.", 3, "routerLink"], ["iconClass", "fa fa-check-square-o", "text", "Enable target table validation", 3, "click"], [1, "bg-light", "pt-1", "pb-1", "d-flex"], [1, "transform-container"], [1, "d-flex", "m-3"], [3, "routerLinkCurrent", "name", "title", "icon", "control", "showDelete", "showArrow"], [3, "routerLinkAfter", "routerLinkCurrent", "routerLinkPreview", "name", "title", "icon", "control", "showDelete"], ["ngFor", "", 3, "ngForOf"], [3, "routerLinkBefore", "routerLinkAfter", "routerLinkCurrent", "name", "title", "icon", "showDelete", 4, "ngIf"], [3, "routerLinkBefore", "routerLinkCurrent", "name", "title", "icon", "showDelete", "onDelete", 4, "ngIf"], [3, "routerLinkBefore", "routerLinkCurrent", "name", "title", "icon", "control", "showArrow", "showDelete"], [3, "routerLinkCurrent", "name", "title", "icon", "control", "showDelete", "isLast"], [3, "routerLinkBefore", "routerLinkAfter", "routerLinkCurrent", "routerLinkPreview", "name", "title", "icon", "control", "showDelete", "onDelete"], [3, "routerLinkBefore", "routerLinkAfter", "routerLinkCurrent", "name", "title", "icon", "showDelete"], [3, "routerLinkBefore", "routerLinkCurrent", "name", "title", "icon", "showDelete", "onDelete"], ["title", "Datalinks", 1, "m-3", 3, "path"]],
         template: function DatalinkEditComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, DatalinkEditComponent_div_0_Template, 7, 4, "div", 0);
@@ -2581,13 +2581,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -2605,7 +2605,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -2815,7 +2815,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
 
       var DatalinkEditModule = /*#__PURE__*/function () {
         function DatalinkEditModule() {
@@ -2942,7 +2942,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -3408,6 +3408,13 @@
         data: {
           pageTitle: 'Detailed Result'
         }
+      }, {
+        path: 'preview-table-data/datalink/:datalinkKey',
+        component: _preview_table__WEBPACK_IMPORTED_MODULE_14__["PreviewTableComponent"],
+        data: {
+          pageTitle: 'Preview Datalink',
+          action: 'preview'
+        }
       }];
       var routes = [{
         path: 'new',
@@ -3480,7 +3487,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -4260,7 +4267,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -4284,7 +4291,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -4302,7 +4309,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -4719,7 +4726,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -4755,7 +4762,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -4773,7 +4780,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       function InputColumnComponent_div_6_input_column_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -4975,13 +4982,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -4993,13 +5000,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/cdk/drag-drop */
-      "./node_modules/@angular/cdk/__ivy_ngcc__/fesm2015/drag-drop.js");
+      "./node_modules/@angular/cdk/fesm2015/drag-drop.js");
       /* harmony import */
 
 
@@ -5306,7 +5313,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -5330,7 +5337,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -5342,7 +5349,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       function JoinColumnComponent_a_3_Template(rf, ctx) {
         if (rf & 1) {
@@ -5546,7 +5553,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -5570,7 +5577,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -5582,7 +5589,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -5869,13 +5876,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -5929,7 +5936,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -5941,7 +5948,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
 
       function MappingEditComponent_div_0_ng_template_2_Template(rf, ctx) {
         if (rf & 1) {
@@ -6029,7 +6036,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("items", ctx_r4.inputColumns)("textValue", ctx_r4.sourceValue)("enableKeySelect", false)("enableTextEntry", true)("enableTextEntryMatch", false)("errors", ctx_r4.sourceErrors);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("items", ctx_r4.inputColumns)("textValue", ctx_r4.sourceValue)("allowNullSelect", true)("enableKeySelect", false)("enableTextEntry", true)("enableTextEntryMatch", false)("errors", ctx_r4.sourceErrors);
         }
       }
 
@@ -6083,7 +6090,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("items", ctx_r6.inputColumns)("enableTextEntry", true)("textValue", ctx_r6.filterValue)("enableTextEntryMatch", false)("enableKeySelect", false)("errors", ctx_r6.filterValueErrors)("textEntryItems", ctx_r6.variables)("setTextEntryToValue", false);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("items", ctx_r6.inputColumns)("enableTextEntry", true)("textValue", ctx_r6.filterValue)("enableTextEntryMatch", false)("enableKeySelect", false)("allowNullSelect", true)("textEntryItems", ctx_r6.variables)("setTextEntryToValue", false);
         }
       }
 
@@ -6113,7 +6120,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("items", ctx_r7.outputTables)("enableKeySelect", false)("enableTextEntry", true)("setTextEntryToValue", false)("errors", ctx_r7.targetErrors);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("items", ctx_r7.outputTables)("allowNullSelect", true)("enableKeySelect", false)("enableTextEntry", true)("setTextEntryToValue", false)("errors", ctx_r7.targetErrors);
         }
       }
 
@@ -6149,7 +6156,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("items", ctx_r9.joinColumns)("enableKeySelect", false)("errors", ctx_r9.joinErrors);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("items", ctx_r9.joinColumns)("allowNullSelect", true)("enableKeySelect", false)("errors", ctx_r9.joinErrors);
         }
       }
 
@@ -6169,17 +6176,17 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](7, MappingEditComponent_div_0_section_7_Template, 2, 1, "section", 5);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](8, MappingEditComponent_div_0_section_8_Template, 2, 6, "section", 5);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](8, MappingEditComponent_div_0_section_8_Template, 2, 7, "section", 5);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](9, MappingEditComponent_div_0_section_9_Template, 2, 1, "section", 5);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](10, MappingEditComponent_div_0_section_10_Template, 2, 8, "section", 5);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](11, MappingEditComponent_div_0_section_11_Template, 2, 5, "section", 5);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](11, MappingEditComponent_div_0_section_11_Template, 2, 6, "section", 5);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](12, MappingEditComponent_div_0_section_12_Template, 2, 1, "section", 5);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](13, MappingEditComponent_div_0_section_13_Template, 2, 3, "section", 5);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](13, MappingEditComponent_div_0_section_13_Template, 2, 4, "section", 5);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -6470,11 +6477,19 @@
         }, {
           key: "updateFilterValue",
           value: function updateFilterValue(value) {
+            if (value === this.newDatalinkTransformItemForm.controls.filterDatalinkColumn.value) {
+              this.newDatalinkTransformItemForm.controls.filterDatalinkColumn.setValue(null);
+            }
+
             this.newDatalinkTransformItemForm.controls.filterValue.setValue(value);
           }
         }, {
           key: "updateSourceValue",
           value: function updateSourceValue(value) {
+            if (value === this.newDatalinkTransformItemForm.controls.sourceDatalinkColumn.value) {
+              this.newDatalinkTransformItemForm.controls.sourceDatalinkColumn.setValue(null);
+            }
+
             this.newDatalinkTransformItemForm.controls.sourceValue.setValue(value);
           }
         }, {
@@ -6497,7 +6512,7 @@
         selectors: [["mapping-edit"]],
         decls: 1,
         vars: 1,
-        consts: [[4, "ngIf"], [3, "title", "showExpandButton"], ["header", ""], [3, "formGroup"], [1, "form-row"], ["class", "form-group col-md-4", 4, "ngIf"], [1, "mr-1", 3, "disabled", "click"], [3, "click"], [1, "form-group", "col-md-4"], ["label", "Aggregate", "formControlName", "aggregate", "itemKey", "key", "itemName", "name", 3, "items"], ["label", "Input Column", "formControlName", "sourceDatalinkColumn", "parentName", "group", "childItems", "columns", "itemName", "logicalName", "itemKey", "key", 3, "items", "textValue", "enableKeySelect", "enableTextEntry", "enableTextEntryMatch", "errors", "textValueChange"], ["label", "Compare", "formControlName", "filterCompare", "itemKey", "key", "itemName", "name", 3, "items"], ["label", "Compare Column/Value", "formControlName", "filterDatalinkColumn", "parentName", "group", "childItems", "columns", "itemKey", "key", "itemName", "logicalName", "textEntryItemsTitle", "Variables", "note", "Note: For static date values use format YYYY-MM-DD (e.g. 2018-01-30)", 3, "items", "enableTextEntry", "textValue", "enableTextEntryMatch", "enableKeySelect", "errors", "textEntryItems", "setTextEntryToValue", "textValueChange"], ["label", "Output Column", "formControlName", "targetDatalinkColumn", "parentName", "name", "childItems", "dexihTableColumns", "itemKey", "key", "itemName", "logicalName", "note", "Enter new column, or select existing", "textEntryNote", "Enter new column name, or select existing", 3, "items", "enableKeySelect", "enableTextEntry", "setTextEntryToValue", "errors", "textValueChange"], ["label", "Direction", "formControlName", "sortDirection", "itemKey", "key", "itemName", "name", 3, "items"], ["label", "Join Column", "formControlName", "joinDatalinkColumn", "itemKey", "key", "itemName", "logicalName", "note", "Select a join column", "textEntryNote", "Enter a value to add a new column", 3, "items", "enableKeySelect", "errors"]],
+        consts: [[4, "ngIf"], [3, "title", "showExpandButton"], ["header", ""], [3, "formGroup"], [1, "form-row"], ["class", "form-group col-md-4", 4, "ngIf"], [1, "mr-1", 3, "disabled", "click"], [3, "click"], [1, "form-group", "col-md-4"], ["label", "Aggregate", "formControlName", "aggregate", "itemKey", "key", "itemName", "name", 3, "items"], ["label", "Input Column", "formControlName", "sourceDatalinkColumn", "parentName", "group", "childItems", "columns", "selectNullMessage", "(no selection)", "itemName", "logicalName", "itemKey", "key", 3, "items", "textValue", "allowNullSelect", "enableKeySelect", "enableTextEntry", "enableTextEntryMatch", "errors", "textValueChange"], ["label", "Compare", "formControlName", "filterCompare", "itemKey", "key", "itemName", "name", 3, "items"], ["label", "Compare Column/Value", "formControlName", "filterDatalinkColumn", "parentName", "group", "childItems", "columns", "selectNullMessage", "(no selection)", "itemKey", "key", "itemName", "logicalName", "textEntryItemsTitle", "Variables", "note", "Note: For static date values use format YYYY-MM-DD (e.g. 2018-01-30)", 3, "items", "enableTextEntry", "textValue", "enableTextEntryMatch", "enableKeySelect", "allowNullSelect", "textEntryItems", "setTextEntryToValue", "textValueChange"], ["label", "Output Column", "formControlName", "targetDatalinkColumn", "parentName", "name", "childItems", "dexihTableColumns", "itemKey", "key", "itemName", "logicalName", "note", "Enter new column, or select existing", "selectNullMessage", "(no selection)", "textEntryNote", "Enter new column name, or select existing", 3, "items", "allowNullSelect", "enableKeySelect", "enableTextEntry", "setTextEntryToValue", "errors", "textValueChange"], ["label", "Direction", "formControlName", "sortDirection", "itemKey", "key", "itemName", "name", 3, "items"], ["label", "Join Column", "formControlName", "joinDatalinkColumn", "selectNullMessage", "(no selection)", "itemKey", "key", "itemName", "logicalName", "note", "Select a join column", "textEntryNote", "Enter a value to add a new column", 3, "items", "allowNullSelect", "enableKeySelect", "errors"]],
         template: function MappingEditComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, MappingEditComponent_div_0_Template, 14, 10, "div", 0);
@@ -6618,7 +6633,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -6660,7 +6675,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
         function adopt(value) {
@@ -7932,7 +7947,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -7962,13 +7977,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -8010,7 +8025,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       var _c0 = ["mappingTable"];
 
@@ -8290,13 +8305,13 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "d-button", 23);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, " Filter");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, " Standard Function ");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "d-button", 24);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5, "Custom Filter");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5, "Custom Function ");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -8912,7 +8927,7 @@
         features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵNgOnChangesFeature"]],
         decls: 11,
         vars: 9,
-        consts: [[3, "title", "scrollable", "showExpandButton"], ["tableClass", "table table-striped table-hover m-0", "dropZone", "", "zone", "input-column", "dropAllowedClass", "drop-zone-green", "actionHeading", "Mappings", 3, "enableMultiSelect", "enableManualSort", "columns", "dataObservable", "enableStickyToolbar", "toolbarZIndex", "rowClick", "onSortChanged", "dropData"], ["mappingTable", ""], ["select", "selectedItemAction"], ["selectedItemAction", ""], ["select", "selectedItemsAction"], ["selectedItemsAction", ""], ["rowAction", ""], ["actions", ""], ["title", "Edit this mapping", 1, "mr-1", 3, "click"], ["title", "Delete selected mapping functions", 1, "mr-1", 3, "click"], [3, "transform", "transformItem", "allowCondition", "click"], [3, "ngIf"], ["buttonClass", "btn-primary", "iconClass", "fa fa-map", "title", "Create a new mapping, or drop a column to create new mapping.", "text", "Mapping", 1, "mr-1", 3, "buttonClick"], ["title", "Add all", 1, "dropdown-item", 3, "click"], [4, "ngFor", "ngForOf"], [1, "dropdown-item", 3, "title", "click"], ["buttonClass", "btn-primary mr-1 ", "iconClass", "fa fa-filter", "title", "Create a simple filter", 3, "routerLink"], ["buttonClass", "btn-primary mr-1 ", "iconClass", "fa fa-cubes", "title", "Create a simple aggregate", 3, "routerLink"], ["buttonClass", "btn-primary mr-1 ", "iconClass", "fa fa-dollar", "title", "Create a new standard function", 3, "routerLink"], ["buttonClass", "btn-primary mr-1 ", "iconClass", "fa fa-code", "title", "Create a new custom function", 3, "routerLink"], ["routerLink", "unGroup-edit", "buttonClass", "btn-primary mr-1 ", "iconClass", "fa fa-map", "title", "Un-Group a Node"], ["buttonClass", "btn-primary mr-1 ", "iconClass", "fa fa-link", "title", "Create a new join", 3, "routerLink"], ["buttonClass", "btn-primary mr-1 ", "iconClass", "fa fa-dollar", "title", "Create a new standard filter", 3, "routerLink"], ["buttonClass", "btn-primary mr-1 ", "iconClass", "fa fa-code", "title", "Create a new custom filter", 3, "routerLink"], ["buttonClass", "btn-primary", "iconClass", "fa fa-calendar", "title", "Add a joins between the column and the valid from/to", "text", "Valid From/To", 1, "mr-1"], ["buttonClass", "btn-primary mr-1 ", "iconClass", "fa fa-sort-alpha-asc", "title", "New Sort", 3, "routerLink"], ["buttonClass", "btn-primary mr-1 ", "iconClass", "fa fa-list", "title", "New Group", 3, "routerLink"], ["buttonClass", "btn-primary mr-1 ", "iconClass", "fa fa-list", "title", "Join Node", 3, "click"]],
+        consts: [[3, "title", "scrollable", "showExpandButton"], ["tableClass", "table table-striped table-hover m-0", "dropZone", "", "zone", "input-column", "dropAllowedClass", "drop-zone-green", "actionHeading", "Mappings", 3, "enableMultiSelect", "enableManualSort", "columns", "dataObservable", "enableStickyToolbar", "toolbarZIndex", "rowClick", "onSortChanged", "dropData"], ["mappingTable", ""], ["select", "selectedItemAction"], ["selectedItemAction", ""], ["select", "selectedItemsAction"], ["selectedItemsAction", ""], ["rowAction", ""], ["actions", ""], ["title", "Edit this mapping", 1, "mr-1", 3, "click"], ["title", "Delete selected mapping functions", 1, "mr-1", 3, "click"], [3, "transform", "transformItem", "allowCondition", "click"], [3, "ngIf"], ["buttonClass", "btn-primary", "iconClass", "fa fa-map", "title", "Create a new mapping, or drop a column to create new mapping.", "text", "Mapping", 1, "mr-1", 3, "buttonClick"], ["title", "Add all", 1, "dropdown-item", 3, "click"], [4, "ngFor", "ngForOf"], [1, "dropdown-item", 3, "title", "click"], ["buttonClass", "btn-primary mr-1 ", "iconClass", "fa fa-filter", "title", "Create a simple filter", 3, "routerLink"], ["buttonClass", "btn-primary mr-1 ", "iconClass", "fa fa-cubes", "title", "Create a simple aggregate", 3, "routerLink"], ["buttonClass", "btn-primary mr-1 ", "iconClass", "fa fa-dollar", "title", "Create a new standard function", 3, "routerLink"], ["buttonClass", "btn-primary mr-1 ", "iconClass", "fa fa-code", "title", "Create a new custom function", 3, "routerLink"], ["routerLink", "unGroup-edit", "buttonClass", "btn-primary mr-1 ", "iconClass", "fa fa-map", "title", "Un-Group a Node"], ["buttonClass", "btn-primary mr-1 ", "iconClass", "fa fa-link", "title", "Create a new join", 3, "routerLink"], ["buttonClass", "btn-primary mr-1 ", "iconClass", "fa fa-dollar", "title", "Use a function to join the table", 3, "routerLink"], ["buttonClass", "btn-primary mr-1 ", "iconClass", "fa fa-code", "title", "Use a custom-function to join the table", 3, "routerLink"], ["buttonClass", "btn-primary", "iconClass", "fa fa-calendar", "title", "Add a joins between the column and the valid from/to", "text", "Valid From/To", 1, "mr-1"], ["buttonClass", "btn-primary mr-1 ", "iconClass", "fa fa-sort-alpha-asc", "title", "New Sort", 3, "routerLink"], ["buttonClass", "btn-primary mr-1 ", "iconClass", "fa fa-list", "title", "New Group", 3, "routerLink"], ["buttonClass", "btn-primary mr-1 ", "iconClass", "fa fa-list", "title", "Join Node", 3, "click"]],
         template: function MappingComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-widget", 0);
@@ -9066,13 +9081,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -9114,7 +9129,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
         function adopt(value) {
@@ -9419,7 +9434,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -9455,7 +9470,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -9467,7 +9482,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -9485,7 +9500,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       function OutputColumnComponent_div_0_Template(rf, ctx) {
         if (rf & 1) {
@@ -9779,25 +9794,25 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/cdk/drag-drop */
-      "./node_modules/@angular/cdk/__ivy_ngcc__/fesm2015/drag-drop.js");
+      "./node_modules/@angular/cdk/fesm2015/drag-drop.js");
       /* harmony import */
 
 
@@ -10168,7 +10183,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -10204,13 +10219,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -10967,13 +10982,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -11003,7 +11018,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -11555,7 +11570,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -11585,7 +11600,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -11784,7 +11799,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -11808,7 +11823,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -11826,7 +11841,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -12028,13 +12043,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -12076,7 +12091,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -12088,7 +12103,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
 
       var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
         function adopt(value) {
@@ -12438,13 +12453,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -12480,7 +12495,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -12492,7 +12507,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
 
       function DatalinkEditPropertiesComponent_form_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -12690,13 +12705,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -12844,13 +12859,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -12898,7 +12913,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -13097,7 +13112,7 @@
 
             var ctx_r12 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r12.preview();
+            return ctx_r12.preview(false);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](10, "Preview Datalink");
@@ -13111,10 +13126,24 @@
 
             var ctx_r13 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r13.download();
+            return ctx_r13.preview(true);
           });
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](12, "Download Datalink Data");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](12, "Preview Datalink (changes)");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "a", 17);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DatalinkEditSaveButtonComponent_d_button_dropdown_2_Template_a_click_13_listener() {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r8);
+
+            var ctx_r14 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+
+            return ctx_r14.download();
+          });
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](14, "Download Datalink Data");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -13336,16 +13365,37 @@
             }
           }
         }, {
+          key: "previewChanges",
+          value: function previewChanges() {
+            var _this57 = this;
+
+            if (this.editDatalinkService.hubFormsService.hasChanged) {
+              this.authService.confirmDialog('Save Datalink', 'The datalink must be saved before previewing delta changes.  Would you like to save now?').then(function (confirm) {
+                if (confirm) {
+                  _this57.saveDatalink();
+
+                  _this57.editDatalinkService.savingDatalink.toPromise().then(function (value) {
+                    if (value) {
+                      _this57.router.navigate(['datalink-preview', _this57.datalinkForm.controls.key.value, true]);
+                    }
+                  });
+                }
+              });
+            } else {
+              this.router.navigate(['datalink-preview', this.datalinkForm.controls.key.value, true]);
+            }
+          }
+        }, {
           key: "download",
           value: function download() {
-            var _this57 = this;
+            var _this58 = this;
 
             if (this.datalinkForm.dirty) {
               this.authService.confirmDialog('Save Datalink', 'The datalink must be saved before a data download task can be started.  Do you want to save the datalink?').then(function (saveDatalink) {
                 if (saveDatalink) {
-                  _this57.saveDatalink();
+                  _this58.saveDatalink();
 
-                  _this57.doDownload();
+                  _this58.doDownload();
                 }
               });
             } else {
@@ -13370,16 +13420,16 @@
         }, {
           key: "runDatalink",
           value: function runDatalink(truncateTarget, resetIncremental) {
-            var _this58 = this;
+            var _this59 = this;
 
             if (this.editDatalinkService.hubFormsService.hasChanged) {
               this.authService.confirmDialog('Save Datalink', 'The datalink must be saved before running.  Would you like to save now?').then(function (confirm) {
                 if (confirm) {
-                  _this58.saveDatalink();
+                  _this59.saveDatalink();
 
-                  _this58.editDatalinkService.savingDatalink.toPromise().then(function (value) {
+                  _this59.editDatalinkService.savingDatalink.toPromise().then(function (value) {
                     if (value) {
-                      _this58.hubService.runDatalinks([_this58.datalinkForm.controls.key.value], truncateTarget, resetIncremental, null, null, null, _this58.cancelToken);
+                      _this59.hubService.runDatalinks([_this59.datalinkForm.controls.key.value], truncateTarget, resetIncremental, null, null, null, _this59.cancelToken);
                     }
                   });
                 }
@@ -13407,14 +13457,14 @@
         selectors: [["datalink-save-button"]],
         decls: 4,
         vars: 4,
-        consts: [[1, "mr-1", 3, "control"], ["buttonClass", "btn-primary", "iconClass", "fa fa-save", "text", "Save", "class", "mr-1", 3, "disabled", "buttonClick", 4, "ngIf"], ["class", "mr-1", "text", "Actions", "iconClass", "fa fa-bolt", "buttonClass", "btn-primary", 3, "pullRight", 4, "ngIf"], [3, "formsService"], ["buttonClass", "btn-primary", "iconClass", "fa fa-save", "text", "Save", 1, "mr-1", 3, "disabled", "buttonClick"], ["title", "Save in the hub", 1, "dropdown-item", 3, "click"], [1, "fa", "fa-cloud"], ["title", "Export as a local file", 1, "dropdown-item", 3, "click"], [1, "fa", "fa-floppy-o"], ["title", "Save another version", 1, "dropdown-item", 3, "click"], [1, "fa", "fa-plus-circle"], ["text", "Actions", "iconClass", "fa fa-bolt", "buttonClass", "btn-primary", 1, "mr-1", 3, "pullRight"], ["title", "Attempt to fix mappings broken when removing/inserting transforms.", 1, "dropdown-item", 3, "click"], ["title", "Run datalink, truncating the target table for each.", 1, "dropdown-item", 3, "click"], ["title", "Run datalink, resetting the incremental (i.e. reload all source data rows) ", 1, "dropdown-item", 3, "click"], ["title", "Preview the output of this datalink", 1, "dropdown-item", 3, "click"], ["title", "Download the output from this datalink", 1, "dropdown-item", 3, "click"]],
+        consts: [[1, "mr-1", 3, "control"], ["buttonClass", "btn-primary", "iconClass", "fa fa-cloud-download", "text", "Save", "class", "mr-1", 3, "disabled", "buttonClick", 4, "ngIf"], ["class", "mr-1", "text", "Actions", "iconClass", "fa fa-bolt", "buttonClass", "btn-primary", 3, "pullRight", 4, "ngIf"], [3, "formsService"], ["buttonClass", "btn-primary", "iconClass", "fa fa-cloud-download", "text", "Save", 1, "mr-1", 3, "disabled", "buttonClick"], ["title", "Save in the hub", 1, "dropdown-item", 3, "click"], [1, "fa", "fa-cloud-download"], ["title", "Export as a local file", 1, "dropdown-item", 3, "click"], [1, "fa", "fa-floppy-o"], ["title", "Save another version", 1, "dropdown-item", 3, "click"], [1, "fa", "fa-plus-circle"], ["text", "Actions", "iconClass", "fa fa-bolt", "buttonClass", "btn-primary", 1, "mr-1", 3, "pullRight"], ["title", "Attempt to fix mappings broken when removing/inserting transforms.", 1, "dropdown-item", 3, "click"], ["title", "Run datalink, truncating the target table for each.", 1, "dropdown-item", 3, "click"], ["title", "Run datalink, resetting the incremental (i.e. reload all source data rows) ", 1, "dropdown-item", 3, "click"], ["title", "Preview the output of this datalink", 1, "dropdown-item", 3, "click"], ["title", "Preview the delta changes of this datalink", 1, "dropdown-item", 3, "click"], ["title", "Download the output from this datalink", 1, "dropdown-item", 3, "click"]],
         template: function DatalinkEditSaveButtonComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "dexih-invalid-form-details", 0);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, DatalinkEditSaveButtonComponent_d_button_splitdropdown_1_Template, 13, 1, "d-button-splitdropdown", 1);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, DatalinkEditSaveButtonComponent_d_button_dropdown_2_Template, 13, 1, "d-button-dropdown", 2);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, DatalinkEditSaveButtonComponent_d_button_dropdown_2_Template, 15, 1, "d-button-dropdown", 2);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "cancel-button", 3);
           }
@@ -13489,13 +13539,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -13549,7 +13599,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -13771,23 +13821,23 @@
         _createClass(DatalinkEditSourceTableComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this59 = this;
+            var _this60 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["combineLatest"])(this.route.data, this.route.params, this.hubService.getHubCacheObservable(), this.editDatalinkService.hubFormsService.getCurrentFormObservable()).subscribe(function (result) {
-                _this59.pageTitle = result[0]['pageTitle'];
-                _this59.hubCache = result[2];
-                _this59.datalinkForm = result[3];
+                _this60.pageTitle = result[0]['pageTitle'];
+                _this60.hubCache = result[2];
+                _this60.datalinkForm = result[3];
 
-                if (_this59.datalinkForm) {
-                  _this59.updateData();
+                if (_this60.datalinkForm) {
+                  _this60.updateData();
 
-                  if (_this59._sourceSubscription) {
-                    _this59._sourceSubscription.unsubscribe();
+                  if (_this60._sourceSubscription) {
+                    _this60._sourceSubscription.unsubscribe();
                   }
 
-                  _this59._sourceSubscription = _this59.datalinkForm.controls.sourceDatalinkTable.valueChanges.subscribe(function () {
-                    _this59.updateData();
+                  _this60._sourceSubscription = _this60.datalinkForm.controls.sourceDatalinkTable.valueChanges.subscribe(function () {
+                    _this60.updateData();
                   });
                 }
               });
@@ -13848,7 +13898,7 @@
         }, {
           key: "updateData",
           value: function updateData() {
-            var _this60 = this;
+            var _this61 = this;
 
             var sourceDatalinkTable = this.datalinkForm.controls.sourceDatalinkTable;
             var columnData = [];
@@ -13862,10 +13912,10 @@
               var newColumn = {
                 key: column.key,
                 position: column.position,
-                columnStatus: _this60.columnStatus(column),
+                columnStatus: _this61.columnStatus(column),
                 columnGroup: column.columnGroup,
                 name: column.name,
-                dataType: _this60.hubCache.dataTypeToString(column),
+                dataType: _this61.hubCache.dataTypeToString(column),
                 deltaType: column.deltaType,
                 allowDbNull: column.allowDbNull,
                 logicalName: column.logicalName,
@@ -14091,13 +14141,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -14163,7 +14213,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -14175,7 +14225,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -14536,7 +14586,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r10.transformFunctionType != ctx_r10.eFunctionType.Validate && ctx_r10.transformFunctionType != ctx_r10.eFunctionType.condition);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r10.transformFunctionType != ctx_r10.eFunctionType.Validate && ctx_r10.transformFunctionType != ctx_r10.eFunctionType.Condition);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
@@ -14552,7 +14602,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", (ctx_r10.selectedFunction == null ? null : ctx_r10.selectedFunction.returnType) == "Boolean" || ctx_r10.selectedCustomFunction && (ctx_r10.selectedCustomFunction == null ? null : ctx_r10.selectedCustomFunction.returnType) == "Boolean");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", (ctx_r10.selectedFunction == null ? null : ctx_r10.selectedFunction.returnParameters == null ? null : ctx_r10.selectedFunction.returnParameters.length) > 0 && (ctx_r10.selectedFunction == null ? null : ctx_r10.selectedFunction.returnParameters[0].dataType) == ctx_r10.eTypeCode.Boolean || ctx_r10.selectedCustomFunction && (ctx_r10.selectedCustomFunction == null ? null : ctx_r10.selectedCustomFunction.returnType) == ctx_r10.eTypeCode.Boolean);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
@@ -15194,7 +15244,7 @@
 
             var ctx_r95 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
-            return ctx_r95.autoMap(ctx_r95.outputParameter);
+            return ctx_r95.autoMap();
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -15317,24 +15367,24 @@
         _createClass(ArrayParameter, [{
           key: "resetItems",
           value: function resetItems() {
-            var _this61 = this;
+            var _this62 = this;
 
             var inputArray = this.inputParameterForms[0].controls.arrayParameters;
 
             var _loop2 = function _loop2(i) {
               var item = new ArrayParameterItem();
 
-              _this61.inputParameterForms.forEach(function (inputParameterForm) {
+              _this62.inputParameterForms.forEach(function (inputParameterForm) {
                 var array = inputParameterForm.controls.arrayParameters;
                 item.inputItems.push(array.controls[i]);
               });
 
-              _this61.outputParameterForms.forEach(function (outputParameterForm) {
+              _this62.outputParameterForms.forEach(function (outputParameterForm) {
                 var array = outputParameterForm.controls.arrayParameters;
                 item.outputItems.push(array.controls[i]);
               });
 
-              _this61.parameterItems.push(item);
+              _this62.parameterItems.push(item);
             };
 
             for (var i = 0; i < inputArray.controls.length; i++) {
@@ -15363,6 +15413,7 @@
           this.route = route;
           this.eFunctionType = _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"];
           this.eParameterDirection = _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"];
+          this.eTypeCode = _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eTypeCode"];
           this.typeCodes = _hub_remote_models__WEBPACK_IMPORTED_MODULE_8__["TypeCodes"];
           this.cancelToken = new _auth_auth_models__WEBPACK_IMPORTED_MODULE_11__["CancelToken"]();
           this.invalidActions = _hub_models__WEBPACK_IMPORTED_MODULE_2__["InvalidActions"];
@@ -15385,179 +15436,179 @@
         _createClass(StandardFunctionEditComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this62 = this;
+            var _this63 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["combineLatest"])(this.route.data, this.route.params, this.hubService.getHubCacheObservable(), this.hubService.getRemoteLibrariesObservable(), this.editDatalinkService.hubFormsService.getCurrentFormObservable()).subscribe(function (result) {
-                _this62.pageTitle = result[0]['pageTitle'];
+                _this63.pageTitle = result[0]['pageTitle'];
                 var params = result[1];
-                _this62.hubCache = result[2];
-                _this62.remoteLibraries = result[3];
-                _this62.datalinkForm = result[4];
+                _this63.hubCache = result[2];
+                _this63.remoteLibraries = result[3];
+                _this63.datalinkForm = result[4];
 
-                _this62.logger.LogC(function () {
+                _this63.logger.LogC(function () {
                   return "OnInit";
                 }, _logging__WEBPACK_IMPORTED_MODULE_7__["eLogLevel"].Trace);
 
-                if (_this62.hubCache && _this62.hubCache.isLoaded() && _this62.datalinkForm && _this62.remoteLibraries && _this62.remoteLibraries.functions.length > 0) {
-                  _this62.transformFunctionType = +params['functionType'];
+                if (_this63.hubCache && _this63.hubCache.isLoaded() && _this63.datalinkForm && _this63.remoteLibraries && _this63.remoteLibraries.functions.length > 0) {
+                  _this63.transformFunctionType = +params['functionType'];
 
-                  if (_this62.transformFunctionType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Validate) {
-                    _this62.datalinkTransformForm = _this62.editDatalinkService.getValidationTransform();
-                    _this62.datalinkTransformKey = _this62.datalinkTransformForm.value.key;
+                  if (_this63.transformFunctionType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Validate) {
+                    _this63.datalinkTransformForm = _this63.editDatalinkService.getValidationTransform();
+                    _this63.datalinkTransformKey = _this63.datalinkTransformForm.value.key;
                   } else {
-                    _this62.datalinkTransformKey = +params['datalinkTransformKey'];
-                    _this62.datalinkTransformForm = _this62.editDatalinkService.getDatalinkTransform(_this62.datalinkTransformKey);
+                    _this63.datalinkTransformKey = +params['datalinkTransformKey'];
+                    _this63.datalinkTransformForm = _this63.editDatalinkService.getDatalinkTransform(_this63.datalinkTransformKey);
                   }
 
-                  _this62.variables = _this62.editDatalinkService.getVariables();
-                  _this62.useCustomFunction = _this62.datalinkTransformForm.controls.customFunctionKey ? true : false;
-                  _this62.datalinkTransformItemKey = +params['datalinkTransformItemKey'];
-                  _this62.isJoin = _this62.datalinkTransformForm.value.transformType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eTransformType"].Join || _this62.datalinkTransformForm.value.transformType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eTransformType"].Lookup; // if this is a join transform, then the use the join columns for the input.
+                  _this63.variables = _this63.editDatalinkService.getVariables();
+                  _this63.useCustomFunction = _this63.datalinkTransformForm.controls.customFunctionKey ? true : false;
+                  _this63.datalinkTransformItemKey = +params['datalinkTransformItemKey'];
+                  _this63.isJoin = _this63.datalinkTransformForm.value.transformType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eTransformType"].Join || _this63.datalinkTransformForm.value.transformType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eTransformType"].Lookup; // if this is a join transform, then the use the join columns for the input.
 
-                  if (_this62.isJoin) {
-                    var table = _this62.datalinkTransformForm.controls.joinDatalinkTable.value;
+                  if (_this63.isJoin) {
+                    var table = _this63.datalinkTransformForm.controls.joinDatalinkTable.value;
 
                     if (!table) {
-                      _this62.hubService.addHubErrorMessage('The join table could not be found.');
+                      _this63.hubService.addHubErrorMessage('The join table could not be found.');
 
-                      _this62.authService.navigateUp();
+                      _this63.authService.navigateUp();
 
                       return;
                     }
 
-                    _this62.inputColumns = table.dexihDatalinkColumns;
+                    _this63.inputColumns = table.dexihDatalinkColumns;
                   } else {
-                    var nodeDatalinkColumn = _this62.datalinkTransformForm.controls.nodeDatalinkColumn.value;
+                    var nodeDatalinkColumn = _this63.datalinkTransformForm.controls.nodeDatalinkColumn.value;
                     var nodeDatalinkColumnKey = nodeDatalinkColumn ? nodeDatalinkColumn.key : null;
                     var io = new _hub_lineage_models__WEBPACK_IMPORTED_MODULE_9__["InputOutputColumns"]();
 
                     if (nodeDatalinkColumnKey) {
-                      var inputColumns = _this62.datalinkTransformForm.controls.runTime.value.inputColumns;
-                      _this62.inputColumns = io.getAvailableColumns(inputColumns, nodeDatalinkColumnKey, 0);
+                      var inputColumns = _this63.datalinkTransformForm.controls.runTime.value.inputColumns;
+                      _this63.inputColumns = io.getAvailableColumns(inputColumns, nodeDatalinkColumnKey, 0);
                     } else {
-                      _this62.inputColumns = _this62.datalinkTransformForm.controls.runTime.value.inputColumns;
+                      _this63.inputColumns = _this63.datalinkTransformForm.controls.runTime.value.inputColumns;
                     }
                   }
 
-                  _this62.outputColumns = _this62.datalinkTransformForm.controls.runTime.value.transformColumns;
-                  _this62.datalinkTargets = _this62.datalinkForm.controls.dexihDatalinkTargets.value;
+                  _this63.outputColumns = _this63.datalinkTransformForm.controls.runTime.value.transformColumns;
+                  _this63.datalinkTargets = _this63.datalinkForm.controls.dexihDatalinkTargets.value;
 
-                  if (_this62.datalinkTransformItemKey) {
-                    _this62.datalinkTransformItemForm = _this62.editDatalinkService.getDatalinkTransformItem(_this62.datalinkTransformForm, _this62.datalinkTransformItemKey);
+                  if (_this63.datalinkTransformItemKey) {
+                    _this63.datalinkTransformItemForm = _this63.editDatalinkService.getDatalinkTransformItem(_this63.datalinkTransformForm, _this63.datalinkTransformItemKey);
 
-                    if (!_this62.datalinkTransformItemForm) {
-                      _this62.authService.navigateUp();
+                    if (!_this63.datalinkTransformItemForm) {
+                      _this63.authService.navigateUp();
 
                       return;
                     } // create a copy of the form item to allow for cancel.
 
 
-                    _this62.newDatalinkTransformItemForm = _this62.editDatalinkService.hubFormsService.datalinkDatalinkTransformItemFormGroup(_this62.datalinkTransformForm, _this62.datalinkTransformItemForm.value);
+                    _this63.newDatalinkTransformItemForm = _this63.editDatalinkService.hubFormsService.datalinkDatalinkTransformItemFormGroup(_this63.datalinkTransformForm, _this63.datalinkTransformItemForm.value);
 
-                    if (_this62.datalinkTransformItemForm.controls.customFunctionKey.value) {
-                      _this62.selectCustomFunction(_this62.datalinkTransformItemForm.value.customFunctionKey, false);
+                    if (_this63.datalinkTransformItemForm.controls.customFunctionKey.value) {
+                      _this63.selectCustomFunction(_this63.datalinkTransformItemForm.value.customFunctionKey, false);
                     } else {
-                      var selectedFunction = _this62.remoteLibraries.functions.find(function (c) {
-                        return c.functionClassName === _this62.datalinkTransformItemForm.value.functionClassName && c.functionMethodName === _this62.datalinkTransformItemForm.value.functionMethodName && c.functionAssemblyName === _this62.datalinkTransformItemForm.value.functionAssemblyName;
+                      var selectedFunction = _this63.remoteLibraries.functions.find(function (c) {
+                        return c.functionClassName === _this63.datalinkTransformItemForm.value.functionClassName && c.functionMethodName === _this63.datalinkTransformItemForm.value.functionMethodName && c.functionAssemblyName === _this63.datalinkTransformItemForm.value.functionAssemblyName;
                       }); // this.selectedFunction = selectedFunction;
 
 
-                      _this62.selectFunction(selectedFunction, false); // this.refreshParameters();
+                      _this63.selectFunction(selectedFunction, false); // this.refreshParameters();
 
                     }
                   } else {
                     var newItem = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["DexihDatalinkTransformItem"]();
-                    newItem.datalinkTransformKey = _this62.datalinkTransformKey;
+                    newItem.datalinkTransformKey = _this63.datalinkTransformKey;
                     newItem.transformItemType = _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eTransformItemType"].BuiltInFunction;
-                    _this62.newDatalinkTransformItemForm = _this62.editDatalinkService.hubFormsService.datalinkDatalinkTransformItemFormGroup(_this62.datalinkTransformForm, newItem);
+                    _this63.newDatalinkTransformItemForm = _this63.editDatalinkService.hubFormsService.datalinkDatalinkTransformItemFormGroup(_this63.datalinkTransformForm, newItem);
                   }
 
-                  switch (_this62.transformFunctionType) {
+                  switch (_this63.transformFunctionType) {
                     case _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Condition:
                     case _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].JoinCondition:
-                      _this62.functions = _this62.remoteLibraries.functions.filter(function (c) {
+                      _this63.functions = _this63.remoteLibraries.functions.filter(function (c) {
                         return c.functionType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Condition;
                       });
-                      _this62.allowOutput = false;
+                      _this63.allowOutput = false;
                       break;
 
                     case _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Validate:
-                      _this62.functions = _this62.remoteLibraries.functions.filter(function (c) {
+                      _this63.functions = _this63.remoteLibraries.functions.filter(function (c) {
                         return c.functionType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Condition || c.functionType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Validate;
                       });
-                      _this62.allowOutput = true;
+                      _this63.allowOutput = true;
                       break;
 
                     case _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Map:
-                      _this62.functions = _this62.remoteLibraries.functions.filter(function (c) {
+                      _this63.functions = _this63.remoteLibraries.functions.filter(function (c) {
                         return c.functionType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Condition || c.functionType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Validate || c.functionType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Map;
                       });
-                      _this62.allowOutput = true;
+                      _this63.allowOutput = true;
                       break;
 
                     case _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Aggregate:
-                      _this62.functions = _this62.remoteLibraries.functions.filter(function (c) {
+                      _this63.functions = _this63.remoteLibraries.functions.filter(function (c) {
                         return c.functionType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Aggregate;
                       });
-                      _this62.allowOutput = true;
+                      _this63.allowOutput = true;
                       break;
 
                     case _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Series:
-                      _this62.functions = _this62.remoteLibraries.functions.filter(function (c) {
+                      _this63.functions = _this63.remoteLibraries.functions.filter(function (c) {
                         return c.functionType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Series || c.functionType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Aggregate;
                       });
-                      _this62.allowOutput = true;
+                      _this63.allowOutput = true;
                       break;
 
                     case _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Rows:
-                      _this62.functions = _this62.remoteLibraries.functions.filter(function (c) {
+                      _this63.functions = _this63.remoteLibraries.functions.filter(function (c) {
                         return c.functionType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Rows;
                       });
-                      _this62.allowOutput = true;
-                      _this62.allowReturn = false;
+                      _this63.allowOutput = true;
+                      _this63.allowReturn = false;
                       break;
 
                     case _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Profile:
-                      _this62.functions = _this62.remoteLibraries.functions.filter(function (c) {
+                      _this63.functions = _this63.remoteLibraries.functions.filter(function (c) {
                         return c.functionType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Profile;
                       });
-                      _this62.allowOutput = false;
+                      _this63.allowOutput = false;
                       break;
 
                     default:
-                      _this62.functions = null;
+                      _this63.functions = null;
                   }
 
-                  _this62.functionCategories = Array.from(new Set(_this62.functions.map(function (c) {
+                  _this63.functionCategories = Array.from(new Set(_this63.functions.map(function (c) {
                     return c.category;
                   })));
-                  _this62.filteredFunctions = _this62.functions;
-                  _this62.customFunctions = _this62.hubCache.hub.dexihCustomFunctions;
+                  _this63.filteredFunctions = _this63.functions;
+                  _this63.customFunctions = _this63.hubCache.hub.dexihCustomFunctions;
 
-                  if (_this62.datalinkTransformItemForm && _this62.datalinkTransformItemForm.value.customFunctionKey) {
-                    _this62.useCustomFunction = true;
-                    _this62.selectedCustomFunction = _this62.hubCache.hub.dexihCustomFunctions.find(function (c) {
-                      return c.key === _this62.datalinkTransformItemForm.value.customFunctionKey;
+                  if (_this63.datalinkTransformItemForm && _this63.datalinkTransformItemForm.value.customFunctionKey) {
+                    _this63.useCustomFunction = true;
+                    _this63.selectedCustomFunction = _this63.hubCache.hub.dexihCustomFunctions.find(function (c) {
+                      return c.key === _this63.datalinkTransformItemForm.value.customFunctionKey;
                     });
                   }
 
-                  if (_this62._functionSubscription) {
-                    _this62._functionSubscription.unsubscribe();
+                  if (_this63._functionSubscription) {
+                    _this63._functionSubscription.unsubscribe();
                   }
 
-                  _this62._functionSubscription = _this62.newDatalinkTransformItemForm.controls.customFunctionKey.valueChanges.subscribe(function (customFunctionKey) {
-                    _this62.selectCustomFunction(customFunctionKey, false);
+                  _this63._functionSubscription = _this63.newDatalinkTransformItemForm.controls.customFunctionKey.valueChanges.subscribe(function (customFunctionKey) {
+                    _this63.selectCustomFunction(customFunctionKey, false);
                   });
                 }
 
-                if (_this62._saveSubscription) {
-                  _this62._saveSubscription.unsubscribe();
+                if (_this63._saveSubscription) {
+                  _this63._saveSubscription.unsubscribe();
                 }
 
-                _this62._saveSubscription = _this62.editDatalinkService.savingDatalink.subscribe(function (value) {
+                _this63._saveSubscription = _this63.editDatalinkService.savingDatalink.subscribe(function (value) {
                   if (value) {
-                    _this62.apply();
+                    _this63.apply();
                   }
                 });
               });
@@ -15600,11 +15651,11 @@
         }, {
           key: "canDeactivate",
           value: function canDeactivate() {
-            var _this63 = this;
+            var _this64 = this;
 
             return new Promise(function (resolve) {
-              if (_this63.newDatalinkTransformItemForm && !_this63.newDatalinkTransformItemForm.pristine) {
-                _this63.authService.confirmDialog('The function has changed', 'The function has changed.  Do you want to discard the changes and continue?').then(function (confirm) {
+              if (_this64.newDatalinkTransformItemForm && !_this64.newDatalinkTransformItemForm.pristine) {
+                _this64.authService.confirmDialog('The function has changed', 'The function has changed.  Do you want to discard the changes and continue?').then(function (confirm) {
                   resolve(confirm);
                 })["catch"](function () {
                   resolve(false);
@@ -15622,7 +15673,7 @@
         }, {
           key: "refreshParameters",
           value: function refreshParameters() {
-            var _this64 = this;
+            var _this65 = this;
 
             var _a, _b, _c, _d, _e;
 
@@ -15652,27 +15703,27 @@
               (_a = this.selectedFunction.inputParameters) === null || _a === void 0 ? void 0 : _a.filter(function (c) {
                 return c.linkedName;
               }).forEach(function (parameter) {
-                _this64.addArrayParameter(parameter, true);
+                _this65.addArrayParameter(parameter, true);
               });
               (_b = this.selectedFunction.outputParameters) === null || _b === void 0 ? void 0 : _b.filter(function (c) {
                 return c.linkedName;
               }).forEach(function (parameter) {
-                _this64.addArrayParameter(parameter, false);
+                _this65.addArrayParameter(parameter, false);
               });
               (_c = this.selectedFunction.resultInputParameters) === null || _c === void 0 ? void 0 : _c.filter(function (c) {
                 return c.linkedName;
               }).forEach(function (parameter) {
-                _this64.addArrayParameter(parameter, true);
+                _this65.addArrayParameter(parameter, true);
               });
               (_d = this.selectedFunction.resultOutputParameters) === null || _d === void 0 ? void 0 : _d.filter(function (c) {
                 return c.linkedName;
               }).forEach(function (parameter) {
-                _this64.addArrayParameter(parameter, false);
+                _this65.addArrayParameter(parameter, false);
               });
               (_e = this.selectedFunction.resultReturnParameters) === null || _e === void 0 ? void 0 : _e.filter(function (c) {
                 return c.linkedName;
               }).forEach(function (parameter) {
-                _this64.addArrayParameter(parameter, false);
+                _this65.addArrayParameter(parameter, false);
               });
             }
 
@@ -15712,7 +15763,7 @@
         }, {
           key: "selectFunction",
           value: function selectFunction(value, markAsDirty) {
-            var _this65 = this;
+            var _this66 = this;
 
             this.selectedFunction = value;
 
@@ -15770,7 +15821,7 @@
               if (this.selectedFunction.inputParameters) {
                 this.selectedFunction.inputParameters.forEach(function (param, index) {
                   if (param) {
-                    parameters.push(_this65.newParameter(existingParameters, param, index, _this65.isJoin ? _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Join : _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Input, _this65.selectedFunction.genericTypeDefault));
+                    parameters.push(_this66.newParameter(existingParameters, param, index, _this66.isJoin ? _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Join : _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Input, _this66.selectedFunction.genericTypeDefault));
                   }
                 });
               }
@@ -15779,7 +15830,7 @@
                 this.selectedFunction.outputParameters.forEach(function (param, index) {
                   if (param) {
                     if (param) {
-                      parameters.push(_this65.newParameter(existingParameters, param, index + 100, _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Output, _this65.selectedFunction.genericTypeDefault));
+                      parameters.push(_this66.newParameter(existingParameters, param, index + 100, _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Output, _this66.selectedFunction.genericTypeDefault));
                     }
                   }
                 });
@@ -15788,7 +15839,7 @@
               if (this.selectedFunction.resultInputParameters) {
                 this.selectedFunction.resultInputParameters.forEach(function (param, index) {
                   if (param) {
-                    parameters.push(_this65.newParameter(existingParameters, param, index + 200, _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].ResultInput, _this65.selectedFunction.genericTypeDefault));
+                    parameters.push(_this66.newParameter(existingParameters, param, index + 200, _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].ResultInput, _this66.selectedFunction.genericTypeDefault));
                   }
                 });
               }
@@ -15797,7 +15848,7 @@
                 this.selectedFunction.resultOutputParameters.forEach(function (param, index) {
                   if (param) {
                     if (param) {
-                      parameters.push(_this65.newParameter(existingParameters, param, index + 300, _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].ResultOutput, _this65.selectedFunction.genericTypeDefault));
+                      parameters.push(_this66.newParameter(existingParameters, param, index + 300, _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].ResultOutput, _this66.selectedFunction.genericTypeDefault));
                     }
                   }
                 });
@@ -15806,7 +15857,7 @@
               if (this.selectedFunction.returnParameters) {
                 if (this.allowReturn && this.selectedFunction.returnParameters.length > 0) {
                   this.selectedFunction.returnParameters.forEach(function (parameter, index) {
-                    parameters.push(_this65.newParameter(existingParameters, parameter, index + 400, _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].ReturnValue, _this65.selectedFunction.genericTypeDefault));
+                    parameters.push(_this66.newParameter(existingParameters, parameter, index + 400, _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].ReturnValue, _this66.selectedFunction.genericTypeDefault));
                   });
                 }
               }
@@ -15814,7 +15865,7 @@
               if (this.selectedFunction.resultReturnParameters) {
                 if (this.allowReturn && this.selectedFunction.resultReturnParameters.length > 0) {
                   this.selectedFunction.resultReturnParameters.forEach(function (parameter) {
-                    parameters.push(_this65.newParameter(existingParameters, parameter, 0, _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].ResultReturnValue, _this65.selectedFunction.genericTypeDefault));
+                    parameters.push(_this66.newParameter(existingParameters, parameter, 0, _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].ResultReturnValue, _this66.selectedFunction.genericTypeDefault));
                   });
                 }
               }
@@ -15871,7 +15922,7 @@
         }, {
           key: "selectCustomFunction",
           value: function selectCustomFunction(customFunctionKey, markAsDirty) {
-            var _this66 = this;
+            var _this67 = this;
 
             this.selectedCustomFunction = this.hubCache.hub.dexihCustomFunctions.find(function (c) {
               return c.key === customFunctionKey;
@@ -15890,7 +15941,7 @@
                 return (c.direction === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Input || c.direction === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Join) && c.isValid;
               }).forEach(function (param, index) {
                 if (param) {
-                  var newParameterForm = _this66.newParameter(existingParameters, param, index, _this66.isJoin ? _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Join : _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Input, _this66.selectedCustomFunction.genericTypeDefault);
+                  var newParameterForm = _this67.newParameter(existingParameters, param, index, _this67.isJoin ? _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Join : _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Input, _this67.selectedCustomFunction.genericTypeDefault);
 
                   parameters.push(newParameterForm);
                 }
@@ -15899,7 +15950,7 @@
                 return c.direction === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Output && c.isValid;
               }).forEach(function (param, index) {
                 if (param) {
-                  var newParameterForm = _this66.newParameter(existingParameters, param, index, _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Output, _this66.selectedCustomFunction.genericTypeDefault);
+                  var newParameterForm = _this67.newParameter(existingParameters, param, index, _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Output, _this67.selectedCustomFunction.genericTypeDefault);
 
                   parameters.push(newParameterForm);
                 }
@@ -15971,17 +16022,17 @@
         }, {
           key: "addInputOutputParameter",
           value: function addInputOutputParameter(arrayParameter) {
-            var _this67 = this;
+            var _this68 = this;
 
             var position = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
             var item = new ArrayParameterItem();
             arrayParameter.inputParameterForms.forEach(function (parameterForm) {
-              var parameter = _this67.addParameter(parameterForm, _this67.isJoin ? _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Join : _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Input, position);
+              var parameter = _this68.addParameter(parameterForm, _this68.isJoin ? _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Join : _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Input, position);
 
               item.inputItems.push(parameter);
             });
             arrayParameter.outputParameterForms.forEach(function (parameterForm) {
-              var parameter = _this67.addParameter(parameterForm, _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Output, position);
+              var parameter = _this68.addParameter(parameterForm, _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Output, position);
 
               item.outputItems.push(parameter);
             });
@@ -16006,14 +16057,14 @@
         }, {
           key: "removeInputOutputParameter",
           value: function removeInputOutputParameter(arrayParameter) {
-            var _this68 = this;
+            var _this69 = this;
 
             var position = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
             arrayParameter.inputParameterForms.forEach(function (parameterForm) {
-              _this68.removeParameter(parameterForm, position);
+              _this69.removeParameter(parameterForm, position);
             });
             arrayParameter.outputParameterForms.forEach(function (parameterForm) {
-              _this68.removeParameter(parameterForm, position);
+              _this69.removeParameter(parameterForm, position);
             });
 
             if (position !== null) {
@@ -16025,7 +16076,7 @@
         }, {
           key: "addAllColumns",
           value: function addAllColumns(parentParameterForm) {
-            var _this69 = this;
+            var _this70 = this;
 
             this.clearArray(parentParameterForm);
             var isLabel = parentParameterForm.value.runTime.functionParameter.isLabel;
@@ -16033,7 +16084,7 @@
             var arrayForm = parentParameterForm.controls.arrayParameters;
             var position = 1;
             this.inputColumns.forEach(function (column) {
-              var newParameter = _this69.createArrayParameter(parentParameter, _this69.isJoin ? _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Join : _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Input, position++, _this69.selectedFunction.genericTypeDefault);
+              var newParameter = _this70.createArrayParameter(parentParameter, _this70.isJoin ? _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Join : _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Input, position++, _this70.selectedFunction.genericTypeDefault);
 
               if (isLabel) {
                 newParameter.value = column.name;
@@ -16041,7 +16092,7 @@
                 newParameter.datalinkColumn = column;
               }
 
-              var newParameterForm = _this69.editDatalinkService.hubFormsService.datalinkFunctionArrayParametersFormGroup(newParameter);
+              var newParameterForm = _this70.editDatalinkService.hubFormsService.datalinkFunctionArrayParametersFormGroup(newParameter);
 
               arrayForm.push(newParameterForm);
             });
@@ -16102,13 +16153,13 @@
         }, {
           key: "clearInputOutputArray",
           value: function clearInputOutputArray(arrayParameter) {
-            var _this70 = this;
+            var _this71 = this;
 
             arrayParameter.inputParameterForms.forEach(function (form) {
-              _this70.clearArray(form);
+              _this71.clearArray(form);
             });
             arrayParameter.outputParameterForms.forEach(function (form) {
-              _this70.clearArray(form);
+              _this71.clearArray(form);
             });
           }
         }, {
@@ -16179,11 +16230,11 @@
         }, {
           key: "autoMap",
           value: function autoMap() {
-            var _this71 = this;
+            var _this72 = this;
 
             this.outputParameterControls.forEach(function (param) {
               var newColumn = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["DexihDatalinkColumn"]();
-              newColumn.key = _this71.hubService.getHubCache().getNextSequence();
+              newColumn.key = _this72.hubService.getHubCache().getNextSequence();
               newColumn.position = 1000 - newColumn.key;
               var paramValue = param.value;
               newColumn.dataType = paramValue.dataType;
@@ -16193,7 +16244,7 @@
               newColumn.rank = paramValue.rank;
               param.controls.datalinkColumn.setValue(newColumn);
 
-              _this71.newDatalinkTransformItemForm.markAsDirty();
+              _this72.newDatalinkTransformItemForm.markAsDirty();
             });
           }
         }, {
@@ -16227,7 +16278,7 @@
         selectors: [["dexih-function-edit"]],
         decls: 1,
         vars: 1,
-        consts: [[4, "ngIf"], ["title", "Edit Function", 3, "showExpandButton"], ["header", ""], [3, "formGroup", 4, "ngIf"], [1, "mr-1", 3, "disabled", "click"], [3, "click"], [3, "formGroup"], [3, "ngIf"], ["class", "form-row", 4, "ngIf"], ["class", "mt-1", 4, "ngIf"], ["class", "mt-1", 4, "ngFor", "ngForOf"], ["label", "Use a custom function", 3, "ngModel", "ngModelOptions", "ngModelChange"], [3, "ngStyle"], ["label", "Select a hub function", "formControlName", "customFunctionKey", "itemKey", "key", "itemName", "name", "itemTitle", "description", 3, "items"], [3, "key"], ["label", "Category", "selectNullMessage", "(All functions)", 3, "items", "allowNullSelect", "ngModelOptions", "ngModel", "sortItems", "ngModelChange"], ["label", "Select a standard function", "itemKey", "name", "itemName", "name", "itemTitle", "description", 3, "ngModel", "ngModelOptions", "items", "enableKeySelect", "note", "sortItems", "ngModelChange"], [1, "form-row"], ["class", "col-xs-12 col-sm-6 col-md-3", 3, "ngStyle", 4, "ngIf"], [1, "col-xs-12", "col-sm-6", "col-md-3", 3, "ngStyle"], ["label", "Action when error", "formControlName", "onError", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", 3, "items", "enableFilter"], ["class", "col-xs-12 col-sm-6 col-md-4", 4, "ngIf"], ["class", "col-xs-12 col-sm-6 col-md-3", 4, "ngIf"], [1, "col-xs-12", "col-sm-6", "col-md-3"], ["label", "Cache Options", "formControlName", "functionCaching", "itemKey", "key", "itemName", "name", 3, "items"], ["label", "Action when null", "formControlName", "onNull", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", 3, "items", "enableFilter"], ["label", "Action when false", "formControlName", "invalidAction", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", 3, "items", "enableFilter"], [1, "col-xs-12", "col-sm-6", "col-md-4"], ["label", "Return 'NOT' result", "formControlName", "notCondition"], ["label", "Data Type", "formControlName", "genericTypeCode", "itemKey", "key", "itemName", "name", 3, "items"], [1, "mt-1"], [1, "d-flex", "flex-row", "mb-1"], ["class", "mb-1", 3, "ngStyle", 4, "ngFor", "ngForOf"], [1, "mb-1", 3, "ngStyle"], [3, "inputParameterForms", "inputColumns", "nodeDatalinkColumnKey", "allowAdd", "allowRemove", "updateParameterName", "variables", 4, "ngIf"], [1, "input-group-text"], [1, "ml-auto"], ["iconClass", "fa fa-download", "text", "Import Mappings", "title", "Attempt to import the mappings from the source data", "class", "mr-1", 3, "click", 4, "ngIf"], ["iconClass", "fa fa-plus", "text", "Add Parameter", "title", "Add a parameter to the array", 1, "mr-1", 3, "click"], ["iconClass", "fa fa-columns", "text", "Add All Inputs", "title", "Add all the input columns to the array", 1, "mr-1", 3, "click"], ["iconClass", "fa fa-eraser", "text", "Clear", 3, "click"], [3, "inputParameterForms", "nodeDatalinkColumnKey", "inputColumns", "allowAdd", "allowRemove", "updateParameterName", "rank", "variables", 4, "ngIf"], ["class", "pl-2 mb-1", 3, "ngStyle", 4, "ngFor", "ngForOf"], ["iconClass", "fa fa-download", "text", "Import Mappings", "title", "Attempt to import the mappings from the source data", 1, "mr-1", 3, "click"], [3, "inputParameterForms", "nodeDatalinkColumnKey", "inputColumns", "allowAdd", "allowRemove", "updateParameterName", "rank", "variables"], [1, "pl-2", "mb-1", 3, "ngStyle"], [3, "inputParameterForms", "inputColumns", "allowAdd", "nodeDatalinkColumnKey", "allowRemove", "updateParameterName", "variables", "addParameter", "removeParameter"], ["class", "form-text text-muted", 4, "ngIf"], [1, "form-text", "text-muted"], [3, "data"], [3, "inputParameterForms", "inputColumns", "nodeDatalinkColumnKey", "allowAdd", "allowRemove", "updateParameterName", "variables"], ["iconClass", "fa fa-plus", "text", "Add Mapping", "title", "Add a parameter to the array", 1, "mr-1", 3, "click"], ["class", "pl-2", 3, "ngStyle", 4, "ngFor", "ngForOf"], [1, "pl-2", 3, "ngStyle"], [3, "inputParameterForms", "outputParameterForms", "nodeDatalinkColumnKey", "inputColumns", "outputColumns", "datalinkTargets", "allowAdd", "allowRemove", "updateParameterName", "variables", "addParameter", "removeParameter"], [1, "d-flex", "flex-row"], ["text", "Auto Map", "buttonClass", "btn-sm btn-outline-primary", 3, "click"], [3, "ngStyle", 4, "ngFor", "ngForOf"], [3, "outputParameterForm", "outputColumns", "datalinkTargets", "allowAdd", "allowRemove", 4, "ngIf"], [3, "outputParameterForm", "outputColumns", "datalinkTargets", "allowAdd", "allowRemove", "rank", 4, "ngIf"], [3, "outputParameterForm", "outputColumns", "datalinkTargets", "allowAdd", "allowRemove", "rank"], [3, "outputParameterForm", "outputColumns", "datalinkTargets", "allowAdd", "allowRemove", "addParameter", "removeParameter"], [3, "outputParameterForm", "outputColumns", "datalinkTargets", "allowAdd", "allowRemove"]],
+        consts: [[4, "ngIf"], ["title", "Edit Function", 3, "showExpandButton"], ["header", ""], [3, "formGroup", 4, "ngIf"], [1, "mr-1", 3, "disabled", "click"], [3, "click"], [3, "formGroup"], [3, "ngIf"], ["class", "form-row ", 4, "ngIf"], ["class", "mt-1", 4, "ngIf"], ["class", "mt-1", 4, "ngFor", "ngForOf"], ["label", "Use a custom function", 3, "ngModel", "ngModelOptions", "ngModelChange"], [3, "ngStyle"], ["label", "Select a hub function", "formControlName", "customFunctionKey", "itemKey", "key", "itemName", "name", "itemTitle", "description", 3, "items"], [3, "key"], ["label", "Category", "selectNullMessage", "(All functions)", 3, "items", "allowNullSelect", "ngModelOptions", "ngModel", "sortItems", "ngModelChange"], ["label", "Select a standard function", "itemKey", "name", "itemName", "name", "itemTitle", "description", 3, "ngModel", "ngModelOptions", "items", "enableKeySelect", "note", "sortItems", "ngModelChange"], [1, "form-row"], ["class", "col-xs-12 col-sm-6 col-md-3", 3, "ngStyle", 4, "ngIf"], [1, "col-xs-12", "col-sm-6", "col-md-3", 3, "ngStyle"], ["label", "Action when error", "formControlName", "onError", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", 3, "items", "enableFilter"], ["class", "col-xs-12 col-sm-6 col-md-3 align-self-end", 4, "ngIf"], ["class", "col-xs-12 col-sm-6 col-md-3", 4, "ngIf"], [1, "col-xs-12", "col-sm-6", "col-md-3"], ["label", "Cache Options", "formControlName", "functionCaching", "itemKey", "key", "itemName", "name", 3, "items"], ["label", "Action when null", "formControlName", "onNull", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", 3, "items", "enableFilter"], ["label", "Action when false", "formControlName", "invalidAction", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", 3, "items", "enableFilter"], [1, "col-xs-12", "col-sm-6", "col-md-3", "align-self-end"], ["label", "Return 'NOT' result", "formControlName", "notCondition"], ["label", "Data Type", "formControlName", "genericTypeCode", "itemKey", "key", "itemName", "name", 3, "items"], [1, "mt-1"], [1, "d-flex", "flex-row", "mb-1"], ["class", "mb-1", 3, "ngStyle", 4, "ngFor", "ngForOf"], [1, "mb-1", 3, "ngStyle"], [3, "inputParameterForms", "inputColumns", "nodeDatalinkColumnKey", "allowAdd", "allowRemove", "updateParameterName", "variables", 4, "ngIf"], [1, "input-group-text"], [1, "ml-auto"], ["iconClass", "fa fa-download", "text", "Import Mappings", "title", "Attempt to import the mappings from the source data", "class", "mr-1", 3, "click", 4, "ngIf"], ["iconClass", "fa fa-plus", "text", "Add Parameter", "title", "Add a parameter to the array", 1, "mr-1", 3, "click"], ["iconClass", "fa fa-columns", "text", "Add All Inputs", "title", "Add all the input columns to the array", 1, "mr-1", 3, "click"], ["iconClass", "fa fa-eraser", "text", "Clear", 3, "click"], [3, "inputParameterForms", "nodeDatalinkColumnKey", "inputColumns", "allowAdd", "allowRemove", "updateParameterName", "rank", "variables", 4, "ngIf"], ["class", "pl-2 mb-1", 3, "ngStyle", 4, "ngFor", "ngForOf"], ["iconClass", "fa fa-download", "text", "Import Mappings", "title", "Attempt to import the mappings from the source data", 1, "mr-1", 3, "click"], [3, "inputParameterForms", "nodeDatalinkColumnKey", "inputColumns", "allowAdd", "allowRemove", "updateParameterName", "rank", "variables"], [1, "pl-2", "mb-1", 3, "ngStyle"], [3, "inputParameterForms", "inputColumns", "allowAdd", "nodeDatalinkColumnKey", "allowRemove", "updateParameterName", "variables", "addParameter", "removeParameter"], ["class", "form-text text-muted", 4, "ngIf"], [1, "form-text", "text-muted"], [3, "data"], [3, "inputParameterForms", "inputColumns", "nodeDatalinkColumnKey", "allowAdd", "allowRemove", "updateParameterName", "variables"], ["iconClass", "fa fa-plus", "text", "Add Mapping", "title", "Add a parameter to the array", 1, "mr-1", 3, "click"], ["class", "pl-2", 3, "ngStyle", 4, "ngFor", "ngForOf"], [1, "pl-2", 3, "ngStyle"], [3, "inputParameterForms", "outputParameterForms", "nodeDatalinkColumnKey", "inputColumns", "outputColumns", "datalinkTargets", "allowAdd", "allowRemove", "updateParameterName", "variables", "addParameter", "removeParameter"], [1, "d-flex", "flex-row"], ["text", "Auto Map", "buttonClass", "btn-sm btn-outline-primary", 3, "click"], [3, "ngStyle", 4, "ngFor", "ngForOf"], [3, "outputParameterForm", "outputColumns", "datalinkTargets", "allowAdd", "allowRemove", 4, "ngIf"], [3, "outputParameterForm", "outputColumns", "datalinkTargets", "allowAdd", "allowRemove", "rank", 4, "ngIf"], [3, "outputParameterForm", "outputColumns", "datalinkTargets", "allowAdd", "allowRemove", "rank"], [3, "outputParameterForm", "outputColumns", "datalinkTargets", "allowAdd", "allowRemove", "addParameter", "removeParameter"], [3, "outputParameterForm", "outputColumns", "datalinkTargets", "allowAdd", "allowRemove"]],
         template: function StandardFunctionEditComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, StandardFunctionEditComponent_div_0_Template, 5, 2, "div", 0);
@@ -16330,7 +16381,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
@@ -16366,7 +16417,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -16378,7 +16429,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -16396,7 +16447,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
 
       function TargetColumnComponent_div_0_Template(rf, ctx) {
         if (rf & 1) {
@@ -16507,20 +16558,20 @@
         _createClass(TargetColumnComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this72 = this;
+            var _this73 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["combineLatest"])(this.hubService.getHubCacheObservable(), this.editDatalinkService.hubFormsService.getCurrentFormObservable()).subscribe(function (result) {
-                _this72.hubCache = result[0];
-                _this72.datalinkForm = result[1];
+                _this73.hubCache = result[0];
+                _this73.datalinkForm = result[1];
 
-                _this72.logger.LogC(function () {
-                  return "Subscription count: ".concat(_this72.logCount++);
+                _this73.logger.LogC(function () {
+                  return "Subscription count: ".concat(_this73.logCount++);
                 }, _logging__WEBPACK_IMPORTED_MODULE_7__["eLogLevel"].Trace);
 
-                _this72.childColumns = _this72.column.childColumns;
+                _this73.childColumns = _this73.column.childColumns;
 
-                _this72.refreshStatus();
+                _this73.refreshStatus();
               });
             } catch (e) {
               this.hubService.addHubClientErrorMessage(e, 'Output Column');
@@ -16541,13 +16592,13 @@
         }, {
           key: "refreshStatus",
           value: function refreshStatus() {
-            var _this73 = this;
+            var _this74 = this;
 
             if (this.datalinkForm) {
               var columnUsage = new _hub_lineage_models__WEBPACK_IMPORTED_MODULE_4__["ColumnUsageNode"](_hub_lineage_models__WEBPACK_IMPORTED_MODULE_4__["eDatalinkObjectType"].TargetTable, _hub_lineage_models__WEBPACK_IMPORTED_MODULE_4__["eObjectUse"].Target, this.datalinkForm.value, null, this.column, null, null, _hub_models__WEBPACK_IMPORTED_MODULE_3__["eMappingStatus"].NotMapped, this.hubCache);
               this.mappingStatusLineage = columnUsage.createDatalinkLineage(true);
               this.mappingStatusInfoLineage = _hub_models__WEBPACK_IMPORTED_MODULE_3__["lineageMappingStatuses"].find(function (c) {
-                return c.key === _this73.mappingStatusLineage;
+                return c.key === _this74.mappingStatusLineage;
               });
             }
           }
@@ -16669,25 +16720,25 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/cdk/drag-drop */
-      "./node_modules/@angular/cdk/__ivy_ngcc__/fesm2015/drag-drop.js");
+      "./node_modules/@angular/cdk/fesm2015/drag-drop.js");
       /* harmony import */
 
 
@@ -16769,11 +16820,11 @@
         if (rf & 2) {
           var target_r3 = ctx.$implicit;
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("title", "Target (" + target_r3.table.name + ")")("padding", false)("showExpandButton", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("title", "Target (" + (target_r3["table"] == null ? null : target_r3["table"].name) + ")")("padding", false)("showExpandButton", true);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](2, 4, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind2"](3, 6, target_r3.table.dexihTableColumns, "position")));
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](2, 4, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind2"](3, 6, target_r3["table"].dexihTableColumns, "position")));
         }
       }
 
@@ -16911,13 +16962,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -16949,22 +17000,22 @@
         _createClass(TargetTableColumnComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this74 = this;
+            var _this75 = this;
 
             this._currentFormSubscription = this.route.params.subscribe(function (params) {
-              _this74.targetKey = +params['targetKey'];
-              _this74.columnKey = +params['columnKey'];
-              _this74.deltaType = params['deltaType'];
+              _this75.targetKey = +params['targetKey'];
+              _this75.columnKey = +params['columnKey'];
+              _this75.deltaType = params['deltaType'];
 
-              _this74.formsService.getCurrentFormObservable().subscribe(function (datalinkForm) {
+              _this75.formsService.getCurrentFormObservable().subscribe(function (datalinkForm) {
                 if (datalinkForm) {
                   var _targets = datalinkForm.controls.dexihDatalinkTargets;
 
                   var targetForm = _targets.controls.find(function (c) {
-                    return c.value.key === _this74.targetKey;
+                    return c.value.key === _this75.targetKey;
                   });
 
-                  _this74.tableForm = targetForm.controls.table;
+                  _this75.tableForm = targetForm.controls.table;
                 }
               });
             });
@@ -17061,13 +17112,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -17103,7 +17154,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -17139,7 +17190,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -17155,19 +17206,25 @@
       /* harmony import */
 
 
-      var ngx_d_table__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
+      var _table_table_edit_table_edit_properties_table_edit_properties_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
+      /*! ../../../table/table-edit/table-edit-properties/table-edit-properties.component */
+      "./src/app/+hub/table/table-edit/table-edit-properties/table-edit-properties.component.ts");
+      /* harmony import */
+
+
+      var ngx_d_table__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(
       /*! ngx-d-table */
       "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
-      var _table_table_edit_column_edit_bulk_column_edit_bulk_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(
+      var _table_table_edit_column_edit_bulk_column_edit_bulk_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(
       /*! ../../../table/table-edit/column-edit-bulk/column-edit-bulk.component */
       "./src/app/+hub/table/table-edit/column-edit-bulk/column-edit-bulk.component.ts");
       /* harmony import */
 
 
-      var _table_column_edit_column_edit_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(
+      var _table_column_edit_column_edit_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(
       /*! ../../../table/column-edit/column-edit.component */
       "./src/app/+hub/table/column-edit/column-edit.component.ts");
 
@@ -17375,9 +17432,9 @@
         }
       }
 
-      function DatalinkEditTargetTableComponent_div_0_datalink_table_edit_properties_5_Template(rf, ctx) {
+      function DatalinkEditTargetTableComponent_div_0_dexih_table_edit_properties_5_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "datalink-table-edit-properties", 15);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "dexih-table-edit-properties", 15);
         }
 
         if (rf & 2) {
@@ -17387,56 +17444,30 @@
         }
       }
 
-      function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_2_column_edit_bulk_25_Template(rf, ctx) {
-        if (rf & 1) {
-          var _r28 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "column-edit-bulk", 32);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("updated", function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_2_column_edit_bulk_25_Template_column_edit_bulk_updated_0_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r28);
-
-            var ctx_r27 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](4);
-
-            return ctx_r27.updateData();
-          });
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        }
-
-        if (rf & 2) {
-          var items_r25 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().items;
-
-          var ctx_r26 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("columns", items_r25)("columnsFormArray", ctx_r26.targetTableForm.controls.table.controls.dexihTableColumns);
-        }
-      }
-
       function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_2_Template(rf, ctx) {
         if (rf & 1) {
-          var _r31 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r29 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-button-splitdropdown", 25);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-button-splitdropdown", 26);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("buttonClick", function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_2_Template_d_button_splitdropdown_buttonClick_0_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r31);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r29);
 
-            var ctx_r30 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
+            var ctx_r28 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
-            return ctx_r30.newColumn(null);
+            return ctx_r28.newColumn(null);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "li");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "a", 26);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "a", 27);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_2_Template_a_click_2_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r31);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r29);
 
-            var ctx_r32 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
+            var ctx_r30 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
-            return ctx_r32.newColumn(ctx_r32.eDeltaType.AutoIncrement);
+            return ctx_r30.newColumn(ctx_r30.eDeltaType.AutoIncrement);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "Add Auto Incrementing Key Column");
@@ -17447,14 +17478,14 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "li");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "a", 26);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "a", 27);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_2_Template_a_click_5_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r31);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r29);
 
-            var ctx_r33 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
+            var ctx_r31 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
-            return ctx_r33.newColumn(ctx_r33.eDeltaType.ValidFromDate);
+            return ctx_r31.newColumn(ctx_r31.eDeltaType.ValidFromDate);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "Add Valid from Date");
@@ -17465,14 +17496,14 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "li");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "a", 26);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "a", 27);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_2_Template_a_click_8_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r31);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r29);
 
-            var ctx_r34 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
+            var ctx_r32 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
-            return ctx_r34.newColumn(ctx_r34.eDeltaType.ValidToDate);
+            return ctx_r32.newColumn(ctx_r32.eDeltaType.ValidToDate);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](9, "Add Valid to Date");
@@ -17483,14 +17514,14 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "li");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "a", 26);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "a", 27);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_2_Template_a_click_11_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r31);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r29);
 
-            var ctx_r35 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
+            var ctx_r33 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
-            return ctx_r35.newColumn(ctx_r35.eDeltaType.IsCurrentField);
+            return ctx_r33.newColumn(ctx_r33.eDeltaType.IsCurrentField);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](12, "Add Is Current Column");
@@ -17501,14 +17532,14 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "li");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "a", 26);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "a", 27);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_2_Template_a_click_14_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r31);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r29);
 
-            var ctx_r36 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
+            var ctx_r34 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
-            return ctx_r36.newColumn(ctx_r36.eDeltaType.CreateAuditKey);
+            return ctx_r34.newColumn(ctx_r34.eDeltaType.CreateAuditKey);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](15, "Add Create Audit Key");
@@ -17519,14 +17550,14 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "li");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "a", 26);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "a", 27);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_2_Template_a_click_17_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r31);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r29);
 
-            var ctx_r37 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
+            var ctx_r35 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
-            return ctx_r37.newColumn(ctx_r37.eDeltaType.UpdateAuditKey);
+            return ctx_r35.newColumn(ctx_r35.eDeltaType.UpdateAuditKey);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](18, "Add Update Audit Key");
@@ -17537,14 +17568,14 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](19, "li");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](20, "a", 26);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](20, "a", 27);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_2_Template_a_click_20_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r31);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r29);
 
-            var ctx_r38 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
+            var ctx_r36 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
-            return ctx_r38.newColumn(ctx_r38.eDeltaType.CreateDate);
+            return ctx_r36.newColumn(ctx_r36.eDeltaType.CreateDate);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](21, "Add Create Date");
@@ -17555,14 +17586,14 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](22, "li");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](23, "a", 26);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](23, "a", 27);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_2_Template_a_click_23_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r31);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r29);
 
-            var ctx_r39 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
+            var ctx_r37 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
-            return ctx_r39.newColumn(ctx_r39.eDeltaType.UpdateDate);
+            return ctx_r37.newColumn(ctx_r37.eDeltaType.UpdateDate);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](24, "Add Update Date");
@@ -17573,91 +17604,99 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](25, DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_2_column_edit_bulk_25_Template, 1, 2, "column-edit-bulk", 27);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](25, "d-button", 28);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](26, "d-button", 28);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_2_Template_d_button_click_25_listener() {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r29);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_2_Template_d_button_click_26_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r31);
+            var ctx_r38 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
+
+            return ctx_r38.resetColumns();
+          });
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](26, "Reset All Columns");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](27, "d-button-preview", 29);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_2_Template_d_button_preview_click_27_listener() {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r29);
+
+            var ctx_r39 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
+
+            return ctx_r39.previewData();
+          });
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](28, "d-button", 30);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_2_Template_d_button_click_28_listener() {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r29);
 
             var ctx_r40 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
-            return ctx_r40.resetColumns();
+            return ctx_r40.importTable();
           });
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](27, "Reset All Columns");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](29, " Re-Import ");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](28, "d-button-preview", 29);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](30, "d-button", 31);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_2_Template_d_button_preview_click_28_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r31);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_2_Template_d_button_click_30_listener() {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r29);
 
             var ctx_r41 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
-            return ctx_r41.previewData();
+            return ctx_r41.createTable();
           });
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](31, " Drop & Create ");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+      }
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](29, "d-button", 30);
+      function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_4_column_edit_bulk_0_Template(rf, ctx) {
+        if (rf & 1) {
+          var _r45 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_2_Template_d_button_click_29_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r31);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "column-edit-bulk", 33);
 
-            var ctx_r42 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("updated", function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_4_column_edit_bulk_0_Template_column_edit_bulk_updated_0_listener() {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r45);
 
-            return ctx_r42.importTable();
+            var ctx_r44 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](4);
+
+            return ctx_r44.updateDeltaColumns();
           });
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](30, " Re-Import ");
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](31, "d-button", 31);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_2_Template_d_button_click_31_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r31);
-
-            var ctx_r43 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
-
-            return ctx_r43.createTable();
-          });
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](32, " Drop & Create ");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
 
         if (rf & 2) {
-          var items_r25 = ctx.items;
+          var items_r42 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().items;
 
-          var ctx_r18 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
+          var ctx_r43 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](25);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r18.showBulkEdit && items_r25.length > 0);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("columns", items_r42)("columnsFormArray", ctx_r43.targetTableForm.controls.table.controls.dexihTableColumns);
         }
       }
 
       function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_4_Template(rf, ctx) {
         if (rf & 1) {
-          var _r46 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_4_column_edit_bulk_0_Template, 1, 2, "column-edit-bulk", 32);
+        }
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-button-edit", 29);
+        if (rf & 2) {
+          var items_r42 = ctx.items;
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_4_Template_d_button_edit_click_0_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r46);
+          var ctx_r20 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
-            var column_r44 = ctx.item;
-
-            var ctx_r45 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
-
-            return ctx_r45.editColumn(column_r44);
-          });
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r20.showBulkEdit && items_r42.length > 0);
         }
       }
 
@@ -17665,28 +17704,48 @@
         if (rf & 1) {
           var _r49 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-button-delete", 29);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-button-edit", 29);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_6_Template_d_button_delete_click_0_listener() {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_6_Template_d_button_edit_click_0_listener() {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r49);
 
-            var items_r47 = ctx.items;
+            var column_r47 = ctx.item;
 
             var ctx_r48 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
-            return ctx_r48.deleteColumns(items_r47);
+            return ctx_r48.editColumn(column_r47);
+          });
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+      }
+
+      function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_8_Template(rf, ctx) {
+        if (rf & 1) {
+          var _r52 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-button-delete", 29);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_8_Template_d_button_delete_click_0_listener() {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r52);
+
+            var items_r50 = ctx.items;
+
+            var ctx_r51 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
+
+            return ctx_r51.deleteColumns(items_r50);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "d-button", 33);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "d-button", 34);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_6_Template_d_button_click_1_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r49);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_8_Template_d_button_click_1_listener() {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r52);
 
-            var ctx_r50 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
+            var ctx_r53 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
-            return ctx_r50.showBulkEdit = !ctx_r50.showBulkEdit;
+            return ctx_r53.showBulkEdit = !ctx_r53.showBulkEdit;
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2);
@@ -17695,28 +17754,28 @@
         }
 
         if (rf & 2) {
-          var ctx_r22 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
+          var ctx_r24 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("", ctx_r22.showBulkEdit ? "Hide Bulk Edit" : "Show Bulk Edit", " ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("", ctx_r24.showBulkEdit ? "Hide Bulk Edit" : "Show Bulk Edit", " ");
         }
       }
 
-      function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_10_Template(rf, ctx) {
+      function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_12_Template(rf, ctx) {
         if (rf & 1) {
-          var _r53 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r56 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-button", 34);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-button", 35);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_10_Template_d_button_click_0_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r53);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_12_Template_d_button_click_0_listener() {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r56);
 
-            var items_r51 = ctx.items;
+            var items_r54 = ctx.items;
 
-            var ctx_r52 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
+            var ctx_r55 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
-            return ctx_r52.addMissing(items_r51);
+            return ctx_r55.addMissing(items_r54);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Add To Table");
@@ -17727,41 +17786,43 @@
 
       function DatalinkEditTargetTableComponent_div_0_ng_template_6_Template(rf, ctx) {
         if (rf & 1) {
-          var _r55 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r58 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-widget-section", 16);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "d-table", 17);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onSortChanged", function DatalinkEditTargetTableComponent_div_0_ng_template_6_Template_d_table_onSortChanged_1_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r55);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r58);
 
-            var ctx_r54 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+            var ctx_r57 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-            return ctx_r54.columnSortChange($event);
+            return ctx_r57.columnSortChange($event);
           })("rowClick", function DatalinkEditTargetTableComponent_div_0_ng_template_6_Template_d_table_rowClick_1_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r55);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r58);
 
-            var ctx_r56 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+            var ctx_r59 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-            return ctx_r56.editColumn($event);
+            return ctx_r59.editColumn($event);
           });
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_2_Template, 33, 1, "ng-template", null, 18, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_2_Template, 32, 0, "ng-template", null, 18, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_4_Template, 1, 0, "ng-template", 19, 20, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_4_Template, 1, 1, "ng-template", null, 19, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](6, DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_6_Template, 3, 1, "ng-template", 21, 22, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](6, DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_6_Template, 1, 0, "ng-template", 20, 21, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](8, DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_8_Template, 3, 1, "ng-template", 22, 23, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "d-widget-section", 23);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "d-widget-section", 24);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "d-table", 24);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "d-table", 25);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](10, DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_10_Template, 2, 0, "ng-template", 21, 22, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](12, DatalinkEditTargetTableComponent_div_0_ng_template_6_ng_template_12_Template, 2, 0, "ng-template", 22, 23, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -17777,7 +17838,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("enableMultiSelect", true)("enableManualSort", true)("enableSort", false)("enableFilter", false)("columns", ctx_r6.columns)("dataObservable", ctx_r6.tableData)("enableStickyToolbar", true)("toolbarZIndex", 100);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](7);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](9);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showExpandButton", true)("padding", false);
 
@@ -17799,9 +17860,9 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, DatalinkEditTargetTableComponent_div_0_datalink_table_edit_properties_5_Template, 1, 2, "datalink-table-edit-properties", 4);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, DatalinkEditTargetTableComponent_div_0_dexih_table_edit_properties_5_Template, 1, 2, "dexih-table-edit-properties", 4);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](6, DatalinkEditTargetTableComponent_div_0_ng_template_6_Template, 12, 18, "ng-template", 5);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](6, DatalinkEditTargetTableComponent_div_0_ng_template_6_Template, 14, 18, "ng-template", 5);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
@@ -17829,18 +17890,18 @@
 
       function DatalinkEditTargetTableComponent_div_1_Template(rf, ctx) {
         if (rf & 1) {
-          var _r58 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r61 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "column-edit", 35);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "column-edit", 36);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("isUpdated", function DatalinkEditTargetTableComponent_div_1_Template_column_edit_isUpdated_1_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r58);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r61);
 
-            var ctx_r57 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r60 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r57.columnUpdated();
+            return ctx_r60.columnUpdated();
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -17936,7 +17997,7 @@
         _createClass(DatalinkEditTargetTableComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this75 = this;
+            var _this76 = this;
 
             this.logger.LogC(function () {
               return "ngOnInit";
@@ -17946,63 +18007,63 @@
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_6__["combineLatest"])(this.route.data, this.route.params, this.hubService.getHubCacheObservable(), this.editDatalinkService.hubFormsService.getCurrentFormObservable()).subscribe(function (result) {
                 var data = result[0];
                 var params = result[1];
-                _this75.hubCache = result[2];
-                _this75.datalinkForm = result[3];
-                _this75.action = data['action'];
-                _this75.pageTitle = data['pageTitle'];
+                _this76.hubCache = result[2];
+                _this76.datalinkForm = result[3];
+                _this76.action = data['action'];
+                _this76.pageTitle = data['pageTitle'];
                 var ioColumns = new _hub_lineage_models__WEBPACK_IMPORTED_MODULE_2__["InputOutputColumns"]();
-                _this75.inputColumns = ioColumns.getDatalinkOutputColumns(_this75.datalinkForm.value);
+                _this76.inputColumns = ioColumns.getDatalinkOutputColumns(_this76.datalinkForm.value);
 
-                if (_this75.action === 'edit') {
-                  _this75.targetKey = +params['targetKey'];
-                  var _targets2 = _this75.datalinkForm.controls.dexihDatalinkTargets; // create a copy of the target form.
+                if (_this76.action === 'edit') {
+                  _this76.targetKey = +params['targetKey'];
+                  var _targets2 = _this76.datalinkForm.controls.dexihDatalinkTargets; // create a copy of the target form.
 
                   var originalTargetTableForm = _targets2.controls.find(function (c) {
-                    return c.value.key === _this75.targetKey;
+                    return c.value.key === _this76.targetKey;
                   });
 
                   if (originalTargetTableForm && originalTargetTableForm.controls.key.value <= 0) {
-                    _this75.newTable = true;
+                    _this76.newTable = true;
                   } // if the table is not found, then navigate back to the parent.
 
 
                   if (originalTargetTableForm === undefined) {
-                    _this75.canExit = true;
+                    _this76.canExit = true;
 
-                    _this75.authService.navigateUp();
+                    _this76.authService.navigateUp();
 
                     return;
                   }
 
-                  _this75.targetTableForm = _this75.editDatalinkService.hubFormsService.datalinkTargetFormGroup(originalTargetTableForm.value, originalTargetTableForm.controls.table.value);
-                } else if (_this75.action === 'new') {
+                  _this76.targetTableForm = _this76.editDatalinkService.hubFormsService.datalinkTargetFormGroup(originalTargetTableForm.value, originalTargetTableForm.controls.table.value);
+                } else if (_this76.action === 'new') {
                   var target = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_11__["DexihDatalinkTarget"]();
-                  target.key = _this75.hubCache.getNextSequence();
-                  _this75.targetTableForm = _this75.editDatalinkService.hubFormsService.datalinkTargetFormGroup(target);
+                  target.key = _this76.hubCache.getNextSequence();
+                  _this76.targetTableForm = _this76.editDatalinkService.hubFormsService.datalinkTargetFormGroup(target);
                 } else {
-                  _this75.hubService.addHubErrorMessage('Invalid action ' + _this75.action);
+                  _this76.hubService.addHubErrorMessage('Invalid action ' + _this76.action);
                 }
 
-                if (_this75.hubCache.isLoaded() && _this75.datalinkForm) {
-                  _this75.connectionTables = _this75.hubCache.getConnectionTables();
-                  _this75.managedConnections = _this75.hubCache.getManagedConnections();
+                if (_this76.hubCache.isLoaded() && _this76.datalinkForm) {
+                  _this76.connectionTables = _this76.hubCache.getConnectionTables();
+                  _this76.managedConnections = _this76.hubCache.getManagedConnections();
 
-                  _this75.updateData();
+                  _this76.updateData();
 
-                  _this75.resetSubscription();
+                  _this76.resetSubscription();
 
-                  _this75.logger.LogC(function () {
+                  _this76.logger.LogC(function () {
                     return "ngOnInit - completed";
                   }, _logging__WEBPACK_IMPORTED_MODULE_9__["eLogLevel"].Trace);
                 }
 
-                if (_this75._saveSubscription) {
-                  _this75._saveSubscription.unsubscribe();
+                if (_this76._saveSubscription) {
+                  _this76._saveSubscription.unsubscribe();
                 }
 
-                _this75._saveSubscription = _this75.editDatalinkService.savingDatalink.subscribe(function (value) {
+                _this76._saveSubscription = _this76.editDatalinkService.savingDatalink.subscribe(function (value) {
                   if (value) {
-                    _this75.apply();
+                    _this76.apply();
                   }
                 });
               });
@@ -18032,13 +18093,13 @@
         }, {
           key: "canDeactivate",
           value: function canDeactivate() {
-            var _this76 = this;
+            var _this77 = this;
 
             return new Promise(function (resolve) {
               var _a;
 
-              if (!_this76.canExit && ((_a = _this76.targetTableForm) === null || _a === void 0 ? void 0 : _a.dirty)) {
-                _this76.authService.confirmDialog('Target Table Changed', 'The table has changed.  Would you like to discard the changes and return to the previous screen?  Otherwise, use the apply button to save the changes.').then(function (confirm) {
+              if (!_this77.canExit && ((_a = _this77.targetTableForm) === null || _a === void 0 ? void 0 : _a.dirty)) {
+                _this77.authService.confirmDialog('Target Table Changed', 'The table has changed.  Would you like to discard the changes and return to the previous screen?  Otherwise, use the apply button to save the changes.').then(function (confirm) {
                   resolve(confirm);
                 })["catch"](function (reason) {
                   resolve(false);
@@ -18051,14 +18112,14 @@
         }, {
           key: "resetSubscription",
           value: function resetSubscription() {
-            var _this77 = this;
+            var _this78 = this;
 
             if (this._tableFormSubscription) {
               this._tableFormSubscription.unsubscribe();
             }
 
             this._tableFormSubscription = this.targetTableForm.controls.tableKey.valueChanges.subscribe(function () {
-              _this77.updateData();
+              _this78.updateData();
             });
           }
         }, {
@@ -18099,7 +18160,7 @@
         }, {
           key: "addNodeColumns",
           value: function addNodeColumns(columns, path) {
-            var _this78 = this;
+            var _this79 = this;
 
             if (!path) {
               this.nodes = [];
@@ -18111,13 +18172,13 @@
               }).forEach(function (col) {
                 var name = path ? path + '.' + col.logicalName : col.logicalName;
 
-                _this78.nodes.push({
+                _this79.nodes.push({
                   key: col.key,
                   name: name
                 });
 
                 if (col.childColumns && col.childColumns.length > 0) {
-                  _this78.addNodeColumns(col.childColumns, name);
+                  _this79.addNodeColumns(col.childColumns, name);
                 }
               });
             }
@@ -18125,7 +18186,7 @@
         }, {
           key: "updateData",
           value: function updateData() {
-            var _this79 = this;
+            var _this80 = this;
 
             if (this.ignoreUpdateTable) {
               return;
@@ -18163,16 +18224,16 @@
                   var newColumn = {
                     key: column.key,
                     position: column.position,
-                    columnStatus: _this79.columnStatus(table, column),
+                    columnStatus: _this80.columnStatus(table, column),
                     name: column.name,
-                    dataType: _this79.hubCache.dataTypeToString(column),
+                    dataType: _this80.hubCache.dataTypeToString(column),
                     deltaType: deltaType ? deltaType.name : 'Not specified',
                     allowDbNull: column.allowDbNull,
                     logicalName: column.logicalName,
                     isIncrementalUpdate: column.isIncrementalUpdate,
                     securityFlag: column.securityFlag,
                     defaultValue: column.defaultValue,
-                    columnValidation: _this79.hubCache.getColumnValidation(column.columnValidationKey).name,
+                    columnValidation: _this80.hubCache.getColumnValidation(column.columnValidationKey).name,
                     columnValidationClass: column.columnValidationKey && !validation ? 'dexih-error-icon' : '',
                     columnValidationTooltip: column.columnValidationKey && !validation ? 'Enabled the validation transform for this to function' : ''
                   };
@@ -18200,9 +18261,9 @@
                       var newColumn = {
                         key: column.key,
                         position: column.position + position,
-                        columnStatus: _this79.datalinkColumnStatus(table, column),
+                        columnStatus: _this80.datalinkColumnStatus(table, column),
                         name: column.name,
-                        dataType: _this79.hubCache.dataTypeToString(column),
+                        dataType: _this80.hubCache.dataTypeToString(column),
                         deltaType: deltaType ? deltaType.name : 'Not specified',
                         allowDbNull: column.allowDbNull,
                         logicalName: column.logicalName,
@@ -18243,7 +18304,7 @@
         }, {
           key: "addMissing",
           value: function addMissing(items) {
-            var _this80 = this;
+            var _this81 = this;
 
             this.logger.LogC(function () {
               return "addMissing started";
@@ -18267,7 +18328,7 @@
                   var newColumn = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_11__["DexihTableColumn"]();
                   Object.assign(newColumn, missingColumn);
 
-                  _this80.resetColumnKeys(newColumn);
+                  _this81.resetColumnKeys(newColumn);
 
                   var positions = tableColumns.controls.map(function (c) {
                     return c.value.position;
@@ -18276,12 +18337,12 @@
 
                   newColumn.position = position;
 
-                  var columnForm = _this80.editDatalinkService.hubFormsService.tableColumn(tableColumns.value, newColumn);
+                  var columnForm = _this81.editDatalinkService.hubFormsService.tableColumn(tableColumns.value, newColumn);
 
                   tableColumns.push(columnForm);
                   tableForm.markAsDirty();
 
-                  _this80.targetTableForm.markAsDirty();
+                  _this81.targetTableForm.markAsDirty();
                 }
               });
               this.updateData();
@@ -18294,13 +18355,13 @@
         }, {
           key: "resetColumnKeys",
           value: function resetColumnKeys(column) {
-            var _this81 = this;
+            var _this82 = this;
 
             column.key = this.hubCache.getNextSequence();
 
             if (column.childColumns) {
               column.childColumns.forEach(function (childColumn) {
-                return _this81.resetColumnKeys(childColumn);
+                return _this82.resetColumnKeys(childColumn);
               });
             }
           }
@@ -18352,6 +18413,14 @@
               this.deltaType = deltaType;
               this.showColumn = true;
             }
+
+            this.updateData();
+          }
+        }, {
+          key: "updateDeltaColumns",
+          value: function updateDeltaColumns() {
+            this.targetTableForm.markAsDirty();
+            this.updateData();
           }
         }, {
           key: "resetColumns",
@@ -18390,10 +18459,10 @@
         }, {
           key: "deleteColumns",
           value: function deleteColumns(columns) {
-            var _this82 = this;
+            var _this83 = this;
 
             columns.forEach(function (column) {
-              var tableForm = _this82.targetTableForm.controls.table;
+              var tableForm = _this83.targetTableForm.controls.table;
               var tableColumns = tableForm.controls.dexihTableColumns;
               var index = tableColumns.controls.findIndex(function (c) {
                 return c.value.key === column.key;
@@ -18409,7 +18478,7 @@
         }, {
           key: "importTable",
           value: function importTable() {
-            var _this83 = this;
+            var _this84 = this;
 
             var table = this.targetTableForm.controls.table.value;
             var connection = this.hubCache.getConnection(table.connectionKey);
@@ -18419,25 +18488,25 @@
               }
 
               var returnTable = tables[0];
-              returnTable.useLogical = _this83.hubCache.defaultTableLogicalName(returnTable.schema, returnTable.name) !== returnTable.logicalName;
+              returnTable.useLogical = _this84.hubCache.defaultTableLogicalName(returnTable.schema, returnTable.name) !== returnTable.logicalName;
 
-              var tableForm = _this83.editDatalinkService.hubFormsService.tableForm(returnTable);
+              var tableForm = _this84.editDatalinkService.hubFormsService.tableForm(returnTable);
 
-              _this83.targetTableForm.controls.tableKey.setValue(returnTable.key);
+              _this84.targetTableForm.controls.tableKey.setValue(returnTable.key);
 
-              _this83.targetTableForm.setControl('table', tableForm);
+              _this84.targetTableForm.setControl('table', tableForm);
             })["catch"](function (reason) {// this.hubService.addHubErrorMessage(reason);
             });
           }
         }, {
           key: "createTable",
           value: function createTable() {
-            var _this84 = this;
+            var _this85 = this;
 
             var table = this.targetTableForm.controls.table.value;
             var connection = this.hubCache.getConnection(table.connectionKey);
             this.hubService.createTables([table], this.cancelToken).then(function (tables) {
-              _this84.hubService.addHubSuccessMessage('The table was created successfully.'); // this.targetTableForm.controls.table.setValue(returnTable);
+              _this85.hubService.addHubSuccessMessage('The table was created successfully.'); // this.targetTableForm.controls.table.setValue(returnTable);
 
             })["catch"](function (reason) {// this.hubService.addHubErrorMessage(reason);
             });
@@ -18478,25 +18547,25 @@
         }, {
           key: "saveTable",
           value: function saveTable() {
-            var _this85 = this;
+            var _this86 = this;
 
             var table = this.targetTableForm.controls.table.value;
             this.hubService.saveTables([table]).then(function (savedTables) {
               var savedTable = savedTables[0];
 
-              _this85.targetTableForm.setControl('table', _this85.editDatalinkService.hubFormsService.tableForm(savedTable));
+              _this86.targetTableForm.setControl('table', _this86.editDatalinkService.hubFormsService.tableForm(savedTable));
 
-              _this85.targetTableForm.controls.tableKey.setValue(savedTable.key);
+              _this86.targetTableForm.controls.tableKey.setValue(savedTable.key);
 
-              _this85.resetSubscription();
+              _this86.resetSubscription();
 
-              _this85.editDatalinkService.hubFormsService.save(false);
+              _this86.editDatalinkService.hubFormsService.save(false);
             });
           }
         }, {
           key: "apply",
           value: function apply() {
-            var _this86 = this;
+            var _this87 = this;
 
             if (this.targetTableForm.dirty) {
               var _targets3 = this.datalinkForm.controls.dexihDatalinkTargets;
@@ -18504,7 +18573,7 @@
 
               if (this.action === 'edit') {
                 index = _targets3.controls.findIndex(function (c) {
-                  return c.value.key === _this86.targetKey;
+                  return c.value.key === _this87.targetKey;
                 });
 
                 _targets3.removeAt(index);
@@ -18532,7 +18601,7 @@
         selectors: [["dexih-datalink-edit-target-table"]],
         decls: 2,
         vars: 2,
-        consts: [[4, "ngIf"], ["title", "Edit Target Table", 3, "showExpandButton"], ["header", ""], [3, "formGroup", 4, "ngIf"], [3, "formsService", "isExpanded", 4, "ngIf"], [3, "ngIf"], [1, "mr-1", 3, "click"], ["buttonClass", "btn-primary", "iconClass", "fa fa-refresh", "title", "Re-import table from connection.", 1, "mr-1", 3, "click"], ["buttonClass", "btn-primary", "iconClass", "fa fa-bullseye", "title", "Drop & re-create the table on the connection.  Warning: This remove all data from the table!", 1, "mr-1", 3, "click"], [1, "mr-1", 3, "disabled", "click"], [3, "formsService"], [3, "formGroup"], ["label", "Create a new table", 3, "ngModelOptions", "ngModel", "ngModelChange"], ["label", "Target Table", "formControlName", "tableKey", "parentName", "name", "childItems", "dexihTables", "itemKey", "key", "itemName", "logicalName", "note", "Select the target table", 3, "items"], ["label", "Node level", "formControlName", "nodeDatalinkColumn", "itemKey", "key", "itemName", "name", "node", "Specify the node where the transform should be applied to.", "selectNullMessage", "Use top level", 3, "items", "enableKeySelect", "allowNullSelect"], [3, "formsService", "isExpanded"], ["title", "Columns", 3, "showExpandButton", "padding"], [3, "enableMultiSelect", "enableManualSort", "enableSort", "enableFilter", "columns", "dataObservable", "enableStickyToolbar", "toolbarZIndex", "onSortChanged", "rowClick"], ["actions", ""], ["select", "selectedItemAction"], ["selectedItemAction", ""], ["select", "selectedItemsAction"], ["selectedItemsAction", ""], ["title", "Unused Columns", 3, "showExpandButton", "padding"], ["sortColumn", "position", 3, "enableMultiSelect", "enableFilter", "columns", "dataObservable", "enableStickyToolbar", "toolbarZIndex"], ["text", "Add Column", "title", "Create a new column", "iconClass", "fa fa-plus-square", "buttonClass", "btn-primary", 3, "buttonClick"], [1, "dropdown-item", 3, "click"], [3, "columns", "columnsFormArray", "updated", 4, "ngIf"], ["iconClass", "fa fa-retweet", 1, "ml-1", 3, "click"], [1, "ml-1", 3, "click"], ["buttonClass", "btn-primary", "iconClass", "fa fa-refresh", "title", "Re-import table from connection.", 1, "ml-1", 3, "click"], ["buttonClass", "btn-primary", "iconClass", "fa fa-bullseye", "title", "Drop & re-create the table on the connection.  Warning: This remove all data from the table!", 1, "ml-1", 3, "click"], [3, "columns", "columnsFormArray", "updated"], ["iconClass", "fa fa-th-list", 1, "ml-1", 3, "click"], ["buttonClass", "btn-primary", "iconClass", "fa fa-plus-square", "title", "Add selected outputs to the target table", 3, "click"], [3, "columnKey", "tableForm", "deltaType", "isUpdated"]],
+        consts: [[4, "ngIf"], ["title", "Edit Target Table", 3, "showExpandButton"], ["header", ""], [3, "formGroup", 4, "ngIf"], [3, "formsService", "isExpanded", 4, "ngIf"], [3, "ngIf"], [1, "mr-1", 3, "click"], ["buttonClass", "btn-primary", "iconClass", "fa fa-refresh", "title", "Re-import table from connection.", 1, "mr-1", 3, "click"], ["buttonClass", "btn-primary", "iconClass", "fa fa-bullseye", "title", "Drop & re-create the table on the connection.  Warning: This remove all data from the table!", 1, "mr-1", 3, "click"], [1, "mr-1", 3, "disabled", "click"], [3, "formsService"], [3, "formGroup"], ["label", "Create a new table", 3, "ngModelOptions", "ngModel", "ngModelChange"], ["label", "Target Table", "formControlName", "tableKey", "parentName", "name", "childItems", "dexihTables", "itemKey", "key", "itemName", "logicalName", "note", "Select the target table", 3, "items"], ["label", "Node level", "formControlName", "nodeDatalinkColumn", "itemKey", "key", "itemName", "name", "node", "Specify the node where the transform should be applied to.", "selectNullMessage", "Use top level", 3, "items", "enableKeySelect", "allowNullSelect"], [3, "formsService", "isExpanded"], ["title", "Columns", 3, "showExpandButton", "padding"], [3, "enableMultiSelect", "enableManualSort", "enableSort", "enableFilter", "columns", "dataObservable", "enableStickyToolbar", "toolbarZIndex", "onSortChanged", "rowClick"], ["actions", ""], ["tableHeader", ""], ["select", "selectedItemAction"], ["selectedItemAction", ""], ["select", "selectedItemsAction"], ["selectedItemsAction", ""], ["title", "Unused Columns", 3, "showExpandButton", "padding"], ["sortColumn", "position", 3, "enableMultiSelect", "enableFilter", "columns", "dataObservable", "enableStickyToolbar", "toolbarZIndex"], ["text", "Add Column", "title", "Create a new column", "iconClass", "fa fa-plus-square", "buttonClass", "btn-primary", 3, "buttonClick"], [1, "dropdown-item", 3, "click"], ["iconClass", "fa fa-retweet", 1, "ml-1", 3, "click"], [1, "ml-1", 3, "click"], ["buttonClass", "btn-primary", "iconClass", "fa fa-refresh", "title", "Re-import table from connection.", 1, "ml-1", 3, "click"], ["buttonClass", "btn-primary", "iconClass", "fa fa-bullseye", "title", "Drop & re-create the table on the connection.  Warning: This remove all data from the table!", 1, "ml-1", 3, "click"], [3, "columns", "columnsFormArray", "updated", 4, "ngIf"], [3, "columns", "columnsFormArray", "updated"], ["iconClass", "fa fa-th-list", 1, "ml-1", 3, "click"], ["buttonClass", "btn-primary", "iconClass", "fa fa-plus-square", "title", "Add selected outputs to the target table", 3, "click"], [3, "columnKey", "tableForm", "deltaType", "isUpdated"]],
         template: function DatalinkEditTargetTableComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, DatalinkEditTargetTableComponent_div_0_Template, 7, 4, "div", 0);
@@ -18548,7 +18617,7 @@
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.showColumn);
           }
         },
-        directives: [_angular_common__WEBPACK_IMPORTED_MODULE_13__["NgIf"], ngx_d_components__WEBPACK_IMPORTED_MODULE_14__["ɵa"], ngx_d_components__WEBPACK_IMPORTED_MODULE_14__["DButtonPreviewComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_14__["DButtonComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_14__["DButtonApplyComponent"], _buttons_cancel_button_cancel_button_component__WEBPACK_IMPORTED_MODULE_15__["CancelButtonComponent"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormGroupDirective"], ngx_d_components__WEBPACK_IMPORTED_MODULE_14__["DFormCheckboxComponent"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgModel"], ngx_d_components__WEBPACK_IMPORTED_MODULE_14__["DFormSelectComponent"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormControlName"], ngx_d_table__WEBPACK_IMPORTED_MODULE_16__["DTableComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_14__["DButtonSplitDropDownComponent"], _table_table_edit_column_edit_bulk_column_edit_bulk_component__WEBPACK_IMPORTED_MODULE_17__["ColumnEditBulkComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_14__["DButtonEditComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_14__["DButtonDeleteComponent"], _table_column_edit_column_edit_component__WEBPACK_IMPORTED_MODULE_18__["ColumnEditComponent"]],
+        directives: [_angular_common__WEBPACK_IMPORTED_MODULE_13__["NgIf"], ngx_d_components__WEBPACK_IMPORTED_MODULE_14__["ɵa"], ngx_d_components__WEBPACK_IMPORTED_MODULE_14__["DButtonPreviewComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_14__["DButtonComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_14__["DButtonApplyComponent"], _buttons_cancel_button_cancel_button_component__WEBPACK_IMPORTED_MODULE_15__["CancelButtonComponent"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormGroupDirective"], ngx_d_components__WEBPACK_IMPORTED_MODULE_14__["DFormCheckboxComponent"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgModel"], ngx_d_components__WEBPACK_IMPORTED_MODULE_14__["DFormSelectComponent"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormControlName"], _table_table_edit_table_edit_properties_table_edit_properties_component__WEBPACK_IMPORTED_MODULE_16__["TableEditPropertiesComponent"], ngx_d_table__WEBPACK_IMPORTED_MODULE_17__["DTableComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_14__["DButtonSplitDropDownComponent"], _table_table_edit_column_edit_bulk_column_edit_bulk_component__WEBPACK_IMPORTED_MODULE_18__["ColumnEditBulkComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_14__["DButtonEditComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_14__["DButtonDeleteComponent"], _table_column_edit_column_edit_component__WEBPACK_IMPORTED_MODULE_19__["ColumnEditComponent"]],
         encapsulation: 2
       });
       /*@__PURE__*/
@@ -18604,13 +18673,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -18640,7 +18709,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -18676,7 +18745,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -18942,7 +19011,7 @@
         _createClass(DatalinkEditTargetComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this87 = this;
+            var _this88 = this;
 
             this.logger.LogC(function () {
               return "ngOnInit";
@@ -18951,21 +19020,21 @@
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["combineLatest"])(this.route.data, this.route.params, this.hubService.getHubCacheObservable(), this.editDatalinkService.hubFormsService.getCurrentFormObservable(), this.hubService.getRemoteLibrariesObservable()).subscribe(function (result) {
                 var data = result[0];
-                _this87.hubCache = result[2];
-                _this87.datalinkForm = result[3];
-                _this87.action = data['action'];
-                _this87.pageTitle = data['pageTitle'];
+                _this88.hubCache = result[2];
+                _this88.datalinkForm = result[3];
+                _this88.action = data['action'];
+                _this88.pageTitle = data['pageTitle'];
 
-                if (_this87.hubCache.isLoaded() && _this87.datalinkForm) {
-                  _this87.connectionTables = _this87.hubCache.getConnectionTables();
-                  _this87.managedConnections = _this87.hubCache.getManagedConnections();
+                if (_this88.hubCache.isLoaded() && _this88.datalinkForm) {
+                  _this88.connectionTables = _this88.hubCache.getConnectionTables();
+                  _this88.managedConnections = _this88.hubCache.getManagedConnections();
 
-                  _this87.logger.LogC(function () {
+                  _this88.logger.LogC(function () {
                     return "ngOnInit - completed";
                   }, _logging__WEBPACK_IMPORTED_MODULE_8__["eLogLevel"].Trace);
                 }
 
-                _this87.updateTargets();
+                _this88.updateTargets();
               });
             } catch (e) {
               this.hubService.addHubClientErrorMessage(e, 'Edit Target Table');
@@ -19006,12 +19075,12 @@
         }, {
           key: "deleteTables",
           value: function deleteTables(targets) {
-            var _this88 = this;
+            var _this89 = this;
 
             targets.forEach(function (target) {
-              _this88.editDatalinkService.deleteDatalinkTarget(_this88.datalinkForm, target.key);
+              _this89.editDatalinkService.deleteDatalinkTarget(_this89.datalinkForm, target.key);
 
-              _this88.updateTargets();
+              _this89.updateTargets();
             });
           }
         }, {
@@ -19119,19 +19188,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -19472,13 +19541,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -19641,18 +19710,18 @@
         _createClass(TransformTableEditComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this89 = this;
+            var _this90 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["combineLatest"])(this.route.data, this.route.params, this.hubService.getHubCacheObservable()).subscribe(function (result) {
-                _this89.pageTitle = result[0]['pageTitle'];
+                _this90.pageTitle = result[0]['pageTitle'];
                 var params = result[1];
-                _this89.hubCache = result[2];
-                _this89.datalinkTransformKey = +params['datalinkTransformKey'];
-                _this89.datalinkTransformForm = _this89.editDatalinkService.getDatalinkTransform(_this89.datalinkTransformKey);
-                _this89.transformTableForm = _this89.datalinkTransformForm.controls.transformTable;
+                _this90.hubCache = result[2];
+                _this90.datalinkTransformKey = +params['datalinkTransformKey'];
+                _this90.datalinkTransformForm = _this90.editDatalinkService.getDatalinkTransform(_this90.datalinkTransformKey);
+                _this90.transformTableForm = _this90.datalinkTransformForm.controls.transformTable;
 
-                _this89.updateColumnData();
+                _this90.updateColumnData();
               });
             } catch (e) {
               this.hubService.addHubClientErrorMessage(e, 'Transform Table Edit');
@@ -19698,7 +19767,7 @@
         }, {
           key: "deleteSelected",
           value: function deleteSelected(columns) {
-            var _this90 = this;
+            var _this91 = this;
 
             var columnsArray = this.transformTableForm.controls.dexihTableColumns;
             columns.forEach(function (column) {
@@ -19710,7 +19779,7 @@
                 columnsArray.removeAt(columnIndex);
               }
 
-              _this90.updateColumnData();
+              _this91.updateColumnData();
             });
           }
         }, {
@@ -19871,13 +19940,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -19937,13 +20006,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -19955,7 +20024,7 @@
 
       var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
       /*! @angular/cdk/drag-drop */
-      "./node_modules/@angular/cdk/__ivy_ngcc__/fesm2015/drag-drop.js");
+      "./node_modules/@angular/cdk/fesm2015/drag-drop.js");
       /* harmony import */
 
 
@@ -20085,6 +20154,24 @@
         }
       }
 
+      function DatalinkEditTransformComponent_d_widget_section_2_section_5_Template(rf, ctx) {
+        if (rf & 1) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "section", 21);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "form-select", 24);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+
+        if (rf & 2) {
+          var ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("items", ctx_r8.eJoinStrategyItems);
+        }
+      }
+
       function DatalinkEditTransformComponent_d_widget_section_2_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-widget-section", 18);
@@ -20097,15 +20184,17 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 12);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "section", 13);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, DatalinkEditTransformComponent_d_widget_section_2_section_5_Template, 2, 1, "section", 20);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](6, "form-select", 20);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "section", 21);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](7, "form-select", 22);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "section", 13);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "section", 21);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](8, "form-select", 21);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](9, "form-select", 23);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -20131,7 +20220,11 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("datalinkTableForm", ctx_r1.datalinkTransformForm.controls.joinDatalinkTable);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r1.datalinkTransformForm.value.transformType == ctx_r1.eTransformType.Join);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("label", "Strategy when " + ctx_r1.eTransformType[ctx_r1.datalinkTransformForm.value.transformType] + " produces duplicate matches")("items", ctx_r1.eDuplicateStrategyItems);
 
@@ -20143,7 +20236,7 @@
 
       function DatalinkEditTransformComponent_d_widget_section_3_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-widget-section", 22);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-widget-section", 25);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "form", 8);
 
@@ -20179,13 +20272,13 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "section", 13);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "form-input", 28);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "form-input", 31);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "section", 13);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "form-input", 29);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "form-input", 32);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -20199,13 +20292,13 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "section", 13);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "form-input", 30);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "form-input", 33);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "section", 13);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "form-input", 31);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "form-input", 34);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -20215,9 +20308,7 @@
 
       function DatalinkEditTransformComponent_d_widget_section_4_Template(rf, ctx) {
         if (rf & 1) {
-          var _r11 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-widget-section", 23);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-widget-section", 26);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "form", 8);
 
@@ -20227,33 +20318,23 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "section", 13);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](5, "form-select", 24);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](5, "form-select", 27);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "section", 13);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "form-select", 25);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("textValueChange", function DatalinkEditTransformComponent_d_widget_section_4_Template_form_select_textValueChange_7_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r11);
-
-            var ctx_r10 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
-
-            return ctx_r10.sourceValue = $event;
-          });
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](7, "form-select", 28);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](8, "form-checkbox", 29);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](8, "form-checkbox", 26);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](9, DatalinkEditTransformComponent_d_widget_section_4_div_9_Template, 5, 0, "div", 30);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](9, DatalinkEditTransformComponent_d_widget_section_4_div_9_Template, 5, 0, "div", 27);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](10, DatalinkEditTransformComponent_d_widget_section_4_div_10_Template, 5, 0, "div", 27);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](10, DatalinkEditTransformComponent_d_widget_section_4_div_10_Template, 5, 0, "div", 30);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -20277,7 +20358,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("items", ctx_r3.inputColumns)("textValue", ctx_r3.sourceValue)("enableKeySelect", false)("errors", ctx_r3.sourceErrors);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("items", ctx_r3.inputColumns)("enableKeySelect", false);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
@@ -20297,24 +20378,24 @@
 
       function DatalinkEditTransformComponent_d_widget_section_5_section_4_Template(rf, ctx) {
         if (rf & 1) {
-          var _r14 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r13 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "section", 13);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "form-input", 35);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "form-input", 38);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function DatalinkEditTransformComponent_d_widget_section_5_section_4_Template_form_input_ngModelChange_1_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r14);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r13);
 
-            var ctx_r13 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+            var ctx_r12 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-            return ctx_r13.nodeName = $event;
+            return ctx_r12.nodeName = $event;
           })("ngModelChange", function DatalinkEditTransformComponent_d_widget_section_5_section_4_Template_form_input_ngModelChange_1_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r14);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r13);
 
-            var ctx_r15 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+            var ctx_r14 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-            return ctx_r15.updateNode($event);
+            return ctx_r14.updateNode($event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -20323,43 +20404,43 @@
         }
 
         if (rf & 2) {
-          var ctx_r12 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+          var ctx_r11 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModelOptions", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](2, _c0))("ngModel", ctx_r12.nodeName);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModelOptions", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](2, _c0))("ngModel", ctx_r11.nodeName);
         }
       }
 
       function DatalinkEditTransformComponent_d_widget_section_5_Template(rf, ctx) {
         if (rf & 1) {
-          var _r17 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r16 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-widget-section", 32);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-widget-section", 35);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "form");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "fieldset");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "form-checkbox", 33);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "form-checkbox", 36);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function DatalinkEditTransformComponent_d_widget_section_5_Template_form_checkbox_ngModelChange_3_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r17);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r16);
 
-            var ctx_r16 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r15 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r16.allowNode = $event;
+            return ctx_r15.allowNode = $event;
           })("ngModelChange", function DatalinkEditTransformComponent_d_widget_section_5_Template_form_checkbox_ngModelChange_3_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r17);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r16);
 
-            var ctx_r18 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r17 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r18.toggleNode($event);
+            return ctx_r17.toggleNode($event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, DatalinkEditTransformComponent_d_widget_section_5_section_4_Template, 2, 3, "section", 34);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, DatalinkEditTransformComponent_d_widget_section_5_section_4_Template, 2, 3, "section", 37);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -20385,21 +20466,39 @@
 
       function DatalinkEditTransformComponent_div_7_div_3_Template(rf, ctx) {
         if (rf & 1) {
-          var _r30 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r29 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 44);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 47);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "join-columns", 45);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "join-columns", 48);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("inputJoinDrop", function DatalinkEditTransformComponent_div_7_div_3_Template_join_columns_inputJoinDrop_1_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r30);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r29);
 
-            var ctx_r29 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+            var ctx_r28 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-            return ctx_r29.newDragDropJoin($event);
+            return ctx_r28.newDragDropJoin($event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+
+        if (rf & 2) {
+          var ctx_r18 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("datalinkTransformForm", ctx_r18.datalinkTransformForm);
+        }
+      }
+
+      function DatalinkEditTransformComponent_div_7_div_5_Template(rf, ctx) {
+        if (rf & 1) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "mapping", 49);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
@@ -20409,15 +20508,29 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("datalinkTransformForm", ctx_r19.datalinkTransformForm);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpropertyInterpolate1"]("title", "", ctx_r19.eTransformType[ctx_r19.datalinkTransformForm.value.transformType], " Table");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("datalinkTransformForm", ctx_r19.datalinkTransformForm)("allowJoin", true);
         }
       }
 
-      function DatalinkEditTransformComponent_div_7_div_5_Template(rf, ctx) {
+      function DatalinkEditTransformComponent_div_7_div_6_Template(rf, ctx) {
         if (rf & 1) {
+          var _r31 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "mapping", 46);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "mapping", 50);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onColumnDrop", function DatalinkEditTransformComponent_div_7_div_6_Template_mapping_onColumnDrop_1_listener($event) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r31);
+
+            var ctx_r30 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+
+            return ctx_r30.newDragDropMapping(ctx_r30.eTransformItemType.ColumnPair, $event);
+          });
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
@@ -20427,26 +20540,24 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpropertyInterpolate1"]("title", "", ctx_r20.eTransformType[ctx_r20.datalinkTransformForm.value.transformType], " Table");
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("datalinkTransformForm", ctx_r20.datalinkTransformForm)("allowJoin", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("datalinkTransformForm", ctx_r20.datalinkTransformForm)("allowStandard", true)("allowMapping", true)("allowOutput", true);
         }
       }
 
-      function DatalinkEditTransformComponent_div_7_div_6_Template(rf, ctx) {
+      function DatalinkEditTransformComponent_div_7_div_7_Template(rf, ctx) {
         if (rf & 1) {
-          var _r32 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r33 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "mapping", 47);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "mapping", 51);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onColumnDrop", function DatalinkEditTransformComponent_div_7_div_6_Template_mapping_onColumnDrop_1_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r32);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onColumnDrop", function DatalinkEditTransformComponent_div_7_div_7_Template_mapping_onColumnDrop_1_listener($event) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r33);
 
-            var ctx_r31 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+            var ctx_r32 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-            return ctx_r31.newDragDropMapping(ctx_r31.eTransformItemType.ColumnPair, $event);
+            return ctx_r32.newDragDropMapping(ctx_r32.eTransformItemType.Sort, $event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -20459,24 +20570,24 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("datalinkTransformForm", ctx_r21.datalinkTransformForm)("allowStandard", true)("allowMapping", true)("allowOutput", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("datalinkTransformForm", ctx_r21.datalinkTransformForm)("allowSort", true);
         }
       }
 
-      function DatalinkEditTransformComponent_div_7_div_7_Template(rf, ctx) {
+      function DatalinkEditTransformComponent_div_7_div_8_Template(rf, ctx) {
         if (rf & 1) {
-          var _r34 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r35 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "mapping", 48);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "mapping", 52);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onColumnDrop", function DatalinkEditTransformComponent_div_7_div_7_Template_mapping_onColumnDrop_1_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r34);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onColumnDrop", function DatalinkEditTransformComponent_div_7_div_8_Template_mapping_onColumnDrop_1_listener($event) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r35);
 
-            var ctx_r33 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+            var ctx_r34 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-            return ctx_r33.newDragDropMapping(ctx_r33.eTransformItemType.Sort, $event);
+            return ctx_r34.newDragDropMapping(ctx_r34.eTransformItemType.Column, $event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -20489,24 +20600,24 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("datalinkTransformForm", ctx_r22.datalinkTransformForm)("allowSort", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("datalinkTransformForm", ctx_r22.datalinkTransformForm)("allowGroup", true)("allowSeries", ctx_r22.datalinkTransformForm.value.transformType == ctx_r22.eTransformType.Series);
         }
       }
 
-      function DatalinkEditTransformComponent_div_7_div_8_Template(rf, ctx) {
+      function DatalinkEditTransformComponent_div_7_div_9_Template(rf, ctx) {
         if (rf & 1) {
-          var _r36 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r37 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "mapping", 49);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "mapping", 53);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onColumnDrop", function DatalinkEditTransformComponent_div_7_div_8_Template_mapping_onColumnDrop_1_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r36);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onColumnDrop", function DatalinkEditTransformComponent_div_7_div_9_Template_mapping_onColumnDrop_1_listener($event) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r37);
 
-            var ctx_r35 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+            var ctx_r36 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-            return ctx_r35.newDragDropMapping(ctx_r35.eTransformItemType.Column, $event);
+            return ctx_r36.newDragDropMapping(ctx_r36.eTransformItemType.AggregatePair, $event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -20519,24 +20630,36 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("datalinkTransformForm", ctx_r23.datalinkTransformForm)("allowGroup", true)("allowSeries", ctx_r23.datalinkTransformForm.value.transformType == ctx_r23.eTransformType.Series);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("datalinkTransformForm", ctx_r23.datalinkTransformForm)("allowStandard", true)("allowAggregate", true)("allowOutput", true);
         }
       }
 
-      function DatalinkEditTransformComponent_div_7_div_9_Template(rf, ctx) {
+      function DatalinkEditTransformComponent_div_7_div_10_Template(rf, ctx) {
         if (rf & 1) {
-          var _r38 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r39 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "mapping", 50);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "mapping", 54);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onColumnDrop", function DatalinkEditTransformComponent_div_7_div_9_Template_mapping_onColumnDrop_1_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r38);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onColumnDrop", function DatalinkEditTransformComponent_div_7_div_10_Template_mapping_onColumnDrop_1_listener($event) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r39);
 
-            var ctx_r37 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+            var ctx_r38 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-            return ctx_r37.newDragDropMapping(ctx_r37.eTransformItemType.AggregatePair, $event);
+            return ctx_r38.newDragDropMapping(ctx_r38.eTransformItemType.AggregatePair, $event);
+          });
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "mapping", 55);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onColumnDrop", function DatalinkEditTransformComponent_div_7_div_10_Template_mapping_onColumnDrop_2_listener($event) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r39);
+
+            var ctx_r40 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+
+            return ctx_r40.newDragDropMapping(ctx_r40.eTransformItemType.ColumnPair, $event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -20549,36 +20672,40 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("datalinkTransformForm", ctx_r24.datalinkTransformForm)("allowStandard", true)("allowAggregate", true)("allowOutput", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("datalinkTransformForm", ctx_r24.datalinkTransformForm)("allowStandard", true)("allowAggregate", true)("allowSeries", true)("allowOutput", true);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("datalinkTransformForm", ctx_r24.datalinkTransformForm)("allowMapping", true)("allowOutput", true);
         }
       }
 
-      function DatalinkEditTransformComponent_div_7_div_10_Template(rf, ctx) {
+      function DatalinkEditTransformComponent_div_7_div_11_Template(rf, ctx) {
         if (rf & 1) {
-          var _r40 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r42 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "mapping", 51);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "mapping", 53);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onColumnDrop", function DatalinkEditTransformComponent_div_7_div_10_Template_mapping_onColumnDrop_1_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r40);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onColumnDrop", function DatalinkEditTransformComponent_div_7_div_11_Template_mapping_onColumnDrop_1_listener($event) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r42);
 
-            var ctx_r39 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+            var ctx_r41 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-            return ctx_r39.newDragDropMapping(ctx_r39.eTransformItemType.AggregatePair, $event);
+            return ctx_r41.newDragDropMapping(ctx_r41.eTransformItemType.AggregatePair, $event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "mapping", 52);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "mapping", 55);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onColumnDrop", function DatalinkEditTransformComponent_div_7_div_10_Template_mapping_onColumnDrop_2_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r40);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onColumnDrop", function DatalinkEditTransformComponent_div_7_div_11_Template_mapping_onColumnDrop_2_listener($event) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r42);
 
-            var ctx_r41 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+            var ctx_r43 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-            return ctx_r41.newDragDropMapping(ctx_r41.eTransformItemType.ColumnPair, $event);
+            return ctx_r43.newDragDropMapping(ctx_r43.eTransformItemType.ColumnPair, $event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -20591,7 +20718,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("datalinkTransformForm", ctx_r25.datalinkTransformForm)("allowStandard", true)("allowAggregate", true)("allowSeries", true)("allowOutput", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("datalinkTransformForm", ctx_r25.datalinkTransformForm)("allowStandard", true)("allowAggregate", true)("allowOutput", true);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
@@ -20599,35 +20726,11 @@
         }
       }
 
-      function DatalinkEditTransformComponent_div_7_div_11_Template(rf, ctx) {
+      function DatalinkEditTransformComponent_div_7_div_12_Template(rf, ctx) {
         if (rf & 1) {
-          var _r43 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "mapping", 50);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onColumnDrop", function DatalinkEditTransformComponent_div_7_div_11_Template_mapping_onColumnDrop_1_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r43);
-
-            var ctx_r42 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-
-            return ctx_r42.newDragDropMapping(ctx_r42.eTransformItemType.AggregatePair, $event);
-          });
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "mapping", 52);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onColumnDrop", function DatalinkEditTransformComponent_div_7_div_11_Template_mapping_onColumnDrop_2_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r43);
-
-            var ctx_r44 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-
-            return ctx_r44.newDragDropMapping(ctx_r44.eTransformItemType.ColumnPair, $event);
-          });
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "mapping", 56);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
@@ -20637,19 +20740,15 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("datalinkTransformForm", ctx_r26.datalinkTransformForm)("allowStandard", true)("allowAggregate", true)("allowOutput", true);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("datalinkTransformForm", ctx_r26.datalinkTransformForm)("allowMapping", true)("allowOutput", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("datalinkTransformForm", ctx_r26.datalinkTransformForm)("allowStandard", true)("allowCondition", true)("allowOutput", false);
         }
       }
 
-      function DatalinkEditTransformComponent_div_7_div_12_Template(rf, ctx) {
+      function DatalinkEditTransformComponent_div_7_div_13_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "mapping", 53);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "mapping", 57);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
@@ -20659,43 +20758,25 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("datalinkTransformForm", ctx_r27.datalinkTransformForm)("allowStandard", true)("allowCondition", true)("allowOutput", false);
-        }
-      }
-
-      function DatalinkEditTransformComponent_div_7_div_13_Template(rf, ctx) {
-        if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "mapping", 54);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        }
-
-        if (rf & 2) {
-          var ctx_r28 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("datalinkTransformForm", ctx_r28.datalinkTransformForm)("allowRow", true)("allowStandard", true)("allowJoinNode", false)("allowOutput", true)("allowCondition", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("datalinkTransformForm", ctx_r27.datalinkTransformForm)("allowRow", true)("allowStandard", true)("allowJoinNode", false)("allowOutput", true)("allowCondition", true);
         }
       }
 
       function DatalinkEditTransformComponent_div_7_Template(rf, ctx) {
         if (rf & 1) {
-          var _r46 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r45 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 36);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 39);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "d-widget", 37);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "d-widget", 40);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "input-columns", 38);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "input-columns", 41);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, DatalinkEditTransformComponent_div_7_div_3_Template, 2, 1, "div", 39);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, DatalinkEditTransformComponent_div_7_div_3_Template, 2, 1, "div", 42);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 40);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 43);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, DatalinkEditTransformComponent_div_7_div_5_Template, 2, 3, "div", 11);
 
@@ -20717,28 +20798,28 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "d-widget", 41);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "d-widget", 44);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "output-columns", 42);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "output-columns", 45);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("inputOutputDrop", function DatalinkEditTransformComponent_div_7_Template_output_columns_inputOutputDrop_15_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r46);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r45);
 
-            var ctx_r45 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r44 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r45.newDragDropMapping(ctx_r45.eTransformItemType.ColumnPair, $event);
+            return ctx_r44.newDragDropMapping(ctx_r44.eTransformItemType.ColumnPair, $event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "target-columns", 43);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "target-columns", 46);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("inputOutputDrop", function DatalinkEditTransformComponent_div_7_Template_target_columns_inputOutputDrop_16_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r46);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r45);
 
-            var ctx_r47 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r46 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r47.newDragDropMapping(ctx_r47.eTransformItemType.ColumnPair, $event);
+            return ctx_r46.newDragDropMapping(ctx_r46.eTransformItemType.ColumnPair, $event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -20829,6 +20910,7 @@
           this.eTransformItemType = _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformItemType"];
           this.eDuplicateStrategyItems = _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eDuplicateStrategyItems"];
           this.eJoinNotFoundStrategyItems = _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eJoinNotFoundStrategyItems"];
+          this.eJoinStrategyItems = _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eJoinStrategyItems"];
           this.eSeriesGrain = _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eSeriesGrain"];
           this.seriesGrains = _hub_models__WEBPACK_IMPORTED_MODULE_2__["seriesGrains"];
           this.allowNode = false;
@@ -20841,7 +20923,7 @@
         _createClass(DatalinkEditTransformComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this91 = this;
+            var _this92 = this;
 
             this.logger.LogC(function () {
               return "OnInit";
@@ -20849,98 +20931,98 @@
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["combineLatest"])(this.route.data, this.route.params, this.editDatalinkService.hubFormsService.getCurrentFormObservable()).subscribe(function (result) {
-                _this91.action = result[0]['action'];
-                _this91.pageTitle = result[0]['pageTitle'];
-                _this91.datalinkTransformKey = +result[1]['datalinkTransformKey'];
-                _this91.datalinkForm = result[2];
+                _this92.action = result[0]['action'];
+                _this92.pageTitle = result[0]['pageTitle'];
+                _this92.datalinkTransformKey = +result[1]['datalinkTransformKey'];
+                _this92.datalinkForm = result[2];
 
-                if (_this91.datalinkForm) {
-                  var transformsArray = _this91.datalinkForm.controls.dexihDatalinkTransforms;
+                if (_this92.datalinkForm) {
+                  var transformsArray = _this92.datalinkForm.controls.dexihDatalinkTransforms;
 
-                  if (_this91._transformsArraySubscription) {
-                    _this91._transformsArraySubscription.unsubscribe();
+                  if (_this92._transformsArraySubscription) {
+                    _this92._transformsArraySubscription.unsubscribe();
                   }
 
-                  _this91._transformsArraySubscription = transformsArray.valueChanges.subscribe(function (transforms) {
+                  _this92._transformsArraySubscription = transformsArray.valueChanges.subscribe(function (transforms) {
                     var tmpDatalinkTransformForm = transforms.find(function (c) {
-                      return c.datalinkTransformKey === _this91.datalinkTransformKey;
+                      return c.datalinkTransformKey === _this92.datalinkTransformKey;
                     });
 
                     if (!tmpDatalinkTransformForm) {
-                      _this91.router.navigate(['properties'], {
-                        relativeTo: _this91.route.parent.parent
+                      _this92.router.navigate(['properties'], {
+                        relativeTo: _this92.route.parent.parent
                       });
                     }
                   });
-                  _this91.datalinkTransformForm = transformsArray.controls.find(function (c) {
-                    return c.value.key === _this91.datalinkTransformKey;
+                  _this92.datalinkTransformForm = transformsArray.controls.find(function (c) {
+                    return c.value.key === _this92.datalinkTransformKey;
                   }); // if the transform isn't found, this is probably due to a save/reload which changes the keys.
                   // navigate up one level when this happens.
 
-                  if (!_this91.datalinkTransformForm) {
-                    _this91.router.navigate(['properties'], {
-                      relativeTo: _this91.route.parent.parent
+                  if (!_this92.datalinkTransformForm) {
+                    _this92.router.navigate(['properties'], {
+                      relativeTo: _this92.route.parent.parent
                     }); //                        this.authService.navigateUp();
 
 
                     return;
                   }
 
-                  var datalinkTransform = _this91.datalinkTransformForm.value;
-                  var items = _this91.datalinkTransformForm.controls.dexihDatalinkTransformItems;
+                  var datalinkTransform = _this92.datalinkTransformForm.value;
+                  var items = _this92.datalinkTransformForm.controls.dexihDatalinkTransformItems;
 
                   if (datalinkTransform.transformType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformType"].Series) {
-                    _this91.seriesForm = items.controls.filter(function (d) {
+                    _this92.seriesForm = items.controls.filter(function (d) {
                       return d.value.transformItemType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformItemType"].Series;
                     })[0];
                   }
 
                   if (datalinkTransform.transformType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformType"].Aggregate) {
-                    _this91.nodeType = _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformItemType"].GroupNode;
+                    _this92.nodeType = _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformItemType"].GroupNode;
                   }
 
                   if (datalinkTransform.transformType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformType"].Lookup || datalinkTransform.transformType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformType"].Join) {
-                    _this91.nodeType = _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformItemType"].JoinNode;
+                    _this92.nodeType = _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformItemType"].JoinNode;
                   }
 
-                  if (_this91.nodeType) {
+                  if (_this92.nodeType) {
                     var node = datalinkTransform.dexihDatalinkTransformItems.find(function (d) {
-                      return d.transformItemType === _this91.nodeType;
+                      return d.transformItemType === _this92.nodeType;
                     });
 
                     if (node) {
-                      _this91.allowNode = true;
-                      _this91.nodeName = node.targetDatalinkColumn.name;
+                      _this92.allowNode = true;
+                      _this92.nodeName = node.targetDatalinkColumn.name;
                     } else {
-                      _this91.allowNode = false;
+                      _this92.allowNode = false;
                     }
                   }
 
-                  _this91.inputColumns = datalinkTransform['runTime'].inputColumns;
-                  _this91.nodes = [];
+                  _this92.inputColumns = datalinkTransform['runTime'].inputColumns;
+                  _this92.nodes = [];
 
-                  _this91.addNodeColumns(_this91.inputColumns, '');
+                  _this92.addNodeColumns(_this92.inputColumns, '');
 
                   var transformType = datalinkTransform.transformType;
-                  _this91.allowMappingOutputs = // transformType === eTransformType.Group ||
+                  _this92.allowMappingOutputs = // transformType === eTransformType.Group ||
                   transformType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformType"].Series || // transformType === eTransformType.Aggregate ||
                   transformType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformType"].Rows || transformType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformType"].Mapping || transformType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformType"].Validation;
 
-                  if (_this91._datalinkFormSubscription) {
-                    _this91._datalinkFormSubscription.unsubscribe();
+                  if (_this92._datalinkFormSubscription) {
+                    _this92._datalinkFormSubscription.unsubscribe();
                   }
 
-                  _this91._datalinkFormSubscription = _this91.datalinkForm.valueChanges.subscribe(function (value) {
-                    _this91.formErrors = _this91.editDatalinkService.hubFormsService.getFormErrorMessages(_this91.datalinkForm, true);
+                  _this92._datalinkFormSubscription = _this92.datalinkForm.valueChanges.subscribe(function (value) {
+                    _this92.formErrors = _this92.editDatalinkService.hubFormsService.getFormErrorMessages(_this92.datalinkForm, true);
                   });
 
-                  if (!_this91.datalinkTransformForm) {
-                    _this91.router.navigate(['properties'], {
-                      relativeTo: _this91.route.parent.parent
+                  if (!_this92.datalinkTransformForm) {
+                    _this92.router.navigate(['properties'], {
+                      relativeTo: _this92.route.parent.parent
                     });
                   }
 
-                  _this91.logger.LogC(function () {
+                  _this92.logger.LogC(function () {
                     return "datalink form is loaded";
                   }, _logging__WEBPACK_IMPORTED_MODULE_7__["eLogLevel"].Trace);
                 }
@@ -20952,7 +21034,7 @@
         }, {
           key: "addNodeColumns",
           value: function addNodeColumns(columns, path) {
-            var _this92 = this;
+            var _this93 = this;
 
             if (columns) {
               columns.filter(function (c) {
@@ -20960,13 +21042,13 @@
               }).forEach(function (col) {
                 var name = path ? path + '.' + col.logicalName : col.logicalName;
 
-                _this92.nodes.push({
+                _this93.nodes.push({
                   key: col.key,
                   name: name
                 });
 
                 if (col.childColumns && col.childColumns.length > 0) {
-                  _this92.addNodeColumns(col.childColumns, name);
+                  _this93.addNodeColumns(col.childColumns, name);
                 }
               });
             }
@@ -21001,11 +21083,11 @@
         }, {
           key: "toggleNode",
           value: function toggleNode(allowNode) {
-            var _this93 = this;
+            var _this94 = this;
 
             var items = this.datalinkTransformForm.controls.dexihDatalinkTransformItems;
             var nodeItem = items.controls.find(function (d) {
-              return d.value.transformItemType === _this93.nodeType;
+              return d.value.transformItemType === _this94.nodeType;
             });
 
             if (allowNode) {
@@ -21039,11 +21121,11 @@
         }, {
           key: "updateNode",
           value: function updateNode(name) {
-            var _this94 = this;
+            var _this95 = this;
 
             var items = this.datalinkTransformForm.controls.dexihDatalinkTransformItems;
             var nodeItem = items.controls.find(function (d) {
-              return d.value.transformItemType === _this94.nodeType;
+              return d.value.transformItemType === _this95.nodeType;
             });
 
             if (nodeItem) {
@@ -21059,7 +21141,7 @@
         }, {
           key: "newDragDropMapping",
           value: function newDragDropMapping(itemType, $event) {
-            var _this95 = this;
+            var _this96 = this;
 
             var item = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["DexihDatalinkTransformItem"]();
             var outputColumn = $event.outputColumn;
@@ -21076,7 +21158,7 @@
 
                 if (outputColumn.childColumns) {
                   outputColumn.childColumns.forEach(function (col) {
-                    col.key = _this95.hubService.getHubCache().getNextSequence();
+                    col.key = _this96.hubService.getHubCache().getNextSequence();
                   });
                 }
 
@@ -21096,7 +21178,7 @@
 
                 if (outputColumn.childColumns) {
                   outputColumn.childColumns.forEach(function (col) {
-                    col.key = _this95.hubService.getHubCache().getNextSequence();
+                    col.key = _this96.hubService.getHubCache().getNextSequence();
                   });
                 }
 
@@ -21148,7 +21230,7 @@
         selectors: [["dexih-datalink-edit-transform-form"]],
         decls: 8,
         vars: 8,
-        consts: [["title", "Properties", 3, "showExpandButton", "isExpanded"], [3, "formGroup", 4, "ngIf"], ["title", "Join Settings", 3, "showExpandButton", 4, "ngIf"], ["title", "Concatenate Settings", 3, "showExpandButton", 4, "ngIf"], ["title", "Series Settings", 3, "showExpandButton", 4, "ngIf"], ["title", "Group Node", 3, "showExpandButton", 4, "ngIf"], [1, "list-group-item", "p-1"], ["class", "d-flex", "cdkDropListGroup", "", 4, "ngIf"], [3, "formGroup"], ["label", "Transform Name", "formControlName", "name", "placeholder", "Enter a name for the transform", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "errors"], [4, "ngIf"], [1, "form-row"], [1, "form-group", "col-md-6"], ["type", "number", "formControlName", "maxInputRows", "label", "Maximum number of rows to input into the transform (0 = unlimited)"], ["type", "number", "formControlName", "maxOutputRows", "label", "Maximum number of rows to output into the transform (0 = unlimited)"], ["label", "Allow unmapped input columns to pass through to the next transform.", "formControlName", "passThroughColumns"], ["label", "Node level", "formControlName", "nodeDatalinkColumn", "itemKey", "key", "itemName", "name", "node", "Specify the node where the transform should be applied to.", "selectNullMessage", "Use top level", 3, "items", "enableKeySelect", "allowNullSelect"], ["title", "Join Settings", 3, "showExpandButton"], [3, "datalinkTableForm"], ["formControlName", "joinDuplicateStrategy", "itemKey", "key", "itemName", "name", 3, "label", "items"], ["formControlName", "joinNotFoundStrategy", "itemKey", "key", "itemName", "description", 3, "label", "items"], ["title", "Concatenate Settings", 3, "showExpandButton"], ["title", "Series Settings", 3, "showExpandButton"], ["label", "Series Grain", "formControlName", "seriesGrain", "itemKey", "key", "itemName", "name", 3, "items"], ["label", "Input Column", "formControlName", "sourceDatalinkColumn", "itemKey", "key", "itemName", "name", 3, "items", "textValue", "enableKeySelect", "errors", "textValueChange"], ["label", "Fill empty series values", "formControlName", "seriesFill"], ["class", "form-row", 4, "ngIf"], ["type", "date", "formControlName", "seriesStart", "label", "Series Start Date (empty to use first value)"], ["type", "date", "formControlName", "seriesFinish", "label", "Series Finish Date (empty to use last value)"], ["formControlName", "seriesStart", "label", "Series Start Number (empty to use first value)"], ["formControlName", "seriesFinish", "label", "Series Finish Number (empty to use last value)"], ["title", "Group Node", 3, "showExpandButton"], ["label", "Group rows under a node", 3, "ngModelOptions", "ngModel", "ngModelChange"], ["class", "form-group col-md-6", 4, "ngIf"], ["label", "Name of the node", 3, "ngModelOptions", "ngModel", "ngModelChange"], ["cdkDropListGroup", "", 1, "d-flex"], ["title", "Inputs", "height", "80vh", 1, "d-none", "d-lg-inline", 2, "width", "300px", 3, "scrollable"], [3, "datalinkTransformForm"], ["class", "mt-1", 4, "ngIf"], [1, "w-100", "mr-1", "ml-1"], ["height", "80vh", 1, "d-none", "d-lg-inline", 2, "width", "300px", 3, "title", "scrollable"], [3, "datalinkTransformForm", "allowMappingOutputs", "inputOutputDrop"], [3, "datalinkTransformForm", "targets", "allowMappingOutputs", "inputOutputDrop"], [1, "mt-1"], [3, "datalinkTransformForm", "inputJoinDrop"], [3, "datalinkTransformForm", "allowJoin", "title"], ["title", "Mapping Functions", 3, "datalinkTransformForm", "allowStandard", "allowMapping", "allowOutput", "onColumnDrop"], ["title", "Sort Columns", 3, "datalinkTransformForm", "allowSort", "onColumnDrop"], ["title", "Group Columns", 3, "datalinkTransformForm", "allowGroup", "allowSeries", "onColumnDrop"], ["title", "Aggregate Functions", 3, "datalinkTransformForm", "allowStandard", "allowAggregate", "allowOutput", "onColumnDrop"], ["title", "Series/Aggregate Functions", 3, "datalinkTransformForm", "allowStandard", "allowAggregate", "allowSeries", "allowOutput", "onColumnDrop"], ["title", "Mappings", 3, "datalinkTransformForm", "allowMapping", "allowOutput", "onColumnDrop"], ["title", "Filters", 3, "datalinkTransformForm", "allowStandard", "allowCondition", "allowOutput"], ["title", "Row Functions", 3, "datalinkTransformForm", "allowRow", "allowStandard", "allowJoinNode", "allowOutput", "allowCondition"]],
+        consts: [["title", "Properties", 3, "showExpandButton", "isExpanded"], [3, "formGroup", 4, "ngIf"], ["title", "Join Settings", 3, "showExpandButton", 4, "ngIf"], ["title", "Concatenate Settings", 3, "showExpandButton", 4, "ngIf"], ["title", "Series Settings", 3, "showExpandButton", 4, "ngIf"], ["title", "Group Node", 3, "showExpandButton", 4, "ngIf"], [1, "list-group-item", "p-1"], ["class", "d-flex", "cdkDropListGroup", "", 4, "ngIf"], [3, "formGroup"], ["label", "Transform Name", "formControlName", "name", "placeholder", "Enter a name for the transform", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "errors"], [4, "ngIf"], [1, "form-row"], [1, "form-group", "col-md-6"], ["type", "number", "formControlName", "maxInputRows", "label", "Maximum number of rows to input into the transform (0 = unlimited)"], ["type", "number", "formControlName", "maxOutputRows", "label", "Maximum number of rows to output into the transform (0 = unlimited)"], ["label", "Allow unmapped input columns to pass through to the next transform.", "formControlName", "passThroughColumns"], ["label", "Node level", "formControlName", "nodeDatalinkColumn", "itemKey", "key", "itemName", "name", "node", "Specify the node where the transform should be applied to.", "selectNullMessage", "Use top level", 3, "items", "enableKeySelect", "allowNullSelect"], ["title", "Join Settings", 3, "showExpandButton"], [3, "datalinkTableForm"], ["class", "form-group col-md-4", 4, "ngIf"], [1, "form-group", "col-md-4"], ["formControlName", "joinDuplicateStrategy", "itemKey", "key", "itemName", "name", 3, "label", "items"], ["formControlName", "joinNotFoundStrategy", "itemKey", "key", "itemName", "description", 3, "label", "items"], ["label", "Join strategy", "formControlName", "joinStrategy", "itemKey", "key", "itemName", "name", 3, "items"], ["title", "Concatenate Settings", 3, "showExpandButton"], ["title", "Series Settings", 3, "showExpandButton"], ["label", "Series Grain", "formControlName", "seriesGrain", "itemKey", "key", "itemName", "name", 3, "items"], ["label", "Input Column", "formControlName", "sourceDatalinkColumn", "itemKey", "key", "itemName", "name", 3, "items", "enableKeySelect"], ["label", "Fill empty series values", "formControlName", "seriesFill"], ["class", "form-row", 4, "ngIf"], ["type", "date", "formControlName", "seriesStart", "label", "Series Start Date (empty to use first value)"], ["type", "date", "formControlName", "seriesFinish", "label", "Series Finish Date (empty to use last value)"], ["formControlName", "seriesStart", "label", "Series Start Number (empty to use first value)"], ["formControlName", "seriesFinish", "label", "Series Finish Number (empty to use last value)"], ["title", "Group Node", 3, "showExpandButton"], ["label", "Group rows under a node", 3, "ngModelOptions", "ngModel", "ngModelChange"], ["class", "form-group col-md-6", 4, "ngIf"], ["label", "Name of the node", 3, "ngModelOptions", "ngModel", "ngModelChange"], ["cdkDropListGroup", "", 1, "d-flex"], ["title", "Inputs", "height", "80vh", 1, "d-none", "d-lg-inline", 2, "width", "300px", 3, "scrollable"], [3, "datalinkTransformForm"], ["class", "mt-1", 4, "ngIf"], [1, "w-100", "mr-1", "ml-1"], ["height", "80vh", 1, "d-none", "d-lg-inline", 2, "width", "300px", 3, "title", "scrollable"], [3, "datalinkTransformForm", "allowMappingOutputs", "inputOutputDrop"], [3, "datalinkTransformForm", "targets", "allowMappingOutputs", "inputOutputDrop"], [1, "mt-1"], [3, "datalinkTransformForm", "inputJoinDrop"], [3, "datalinkTransformForm", "allowJoin", "title"], ["title", "Mapping Functions", 3, "datalinkTransformForm", "allowStandard", "allowMapping", "allowOutput", "onColumnDrop"], ["title", "Sort Columns", 3, "datalinkTransformForm", "allowSort", "onColumnDrop"], ["title", "Group Columns", 3, "datalinkTransformForm", "allowGroup", "allowSeries", "onColumnDrop"], ["title", "Aggregate Functions", 3, "datalinkTransformForm", "allowStandard", "allowAggregate", "allowOutput", "onColumnDrop"], ["title", "Series/Aggregate Functions", 3, "datalinkTransformForm", "allowStandard", "allowAggregate", "allowSeries", "allowOutput", "onColumnDrop"], ["title", "Mappings", 3, "datalinkTransformForm", "allowMapping", "allowOutput", "onColumnDrop"], ["title", "Filters", 3, "datalinkTransformForm", "allowStandard", "allowCondition", "allowOutput"], ["title", "Row Functions", 3, "datalinkTransformForm", "allowRow", "allowStandard", "allowJoinNode", "allowOutput", "allowCondition"]],
         template: function DatalinkEditTransformComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-widget-section", 0);
@@ -21157,11 +21239,11 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, DatalinkEditTransformComponent_d_widget_section_2_Template, 9, 7, "d-widget-section", 2);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, DatalinkEditTransformComponent_d_widget_section_2_Template, 10, 8, "d-widget-section", 2);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, DatalinkEditTransformComponent_d_widget_section_3_Template, 4, 3, "d-widget-section", 3);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, DatalinkEditTransformComponent_d_widget_section_4_Template, 11, 9, "d-widget-section", 4);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, DatalinkEditTransformComponent_d_widget_section_4_Template, 11, 7, "d-widget-section", 4);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, DatalinkEditTransformComponent_d_widget_section_5_Template, 5, 5, "d-widget-section", 5);
 
@@ -21283,13 +21365,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -21343,7 +21425,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
@@ -21355,7 +21437,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
 
       function UnGroupEditComponent_div_0_div_8_div_9_Template(rf, ctx) {
         if (rf & 1) {
@@ -21385,8 +21467,6 @@
 
       function UnGroupEditComponent_div_0_div_8_Template(rf, ctx) {
         if (rf & 1) {
-          var _r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 7);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "form", 8);
@@ -21395,17 +21475,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "section", 9);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "form-select", 10);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("textValueChange", function UnGroupEditComponent_div_0_div_8_Template_form_select_textValueChange_4_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r6);
-
-            var ctx_r5 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-
-            return ctx_r5.sourceValue = $event;
-          });
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "form-select", 10);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -21441,7 +21511,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("items", ctx_r1.inputColumns)("textValue", ctx_r1.sourceValue)("enableTextEntry", true)("enableTextEntryMatch", false)("enableKeySelect", false)("errors", ctx_r1.sourceErrors);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("items", ctx_r1.inputColumns)("enableTextEntry", true)("enableTextEntryMatch", false)("enableKeySelect", false);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
 
@@ -21451,7 +21521,7 @@
 
       function UnGroupEditComponent_div_0_Template(rf, ctx) {
         if (rf & 1) {
-          var _r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
 
@@ -21470,11 +21540,11 @@
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "d-button-apply", 4);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function UnGroupEditComponent_div_0_Template_d_button_apply_click_6_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r8);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r6);
 
-            var ctx_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r5 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return !ctx_r7.newDatalinkTransformItemForm.pristine && ctx_r7.applyExit();
+            return !ctx_r5.newDatalinkTransformItemForm.pristine && ctx_r5.applyExit();
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -21482,11 +21552,11 @@
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "d-button-cancel", 5);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function UnGroupEditComponent_div_0_Template_d_button_cancel_click_7_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r8);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r6);
 
-            var ctx_r9 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r9.cancel();
+            return ctx_r7.cancel();
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -21497,7 +21567,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](8, UnGroupEditComponent_div_0_div_8_Template, 10, 8, "div", 6);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](8, UnGroupEditComponent_div_0_div_8_Template, 10, 6, "div", 6);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
@@ -21535,53 +21605,53 @@
         _createClass(UnGroupEditComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this96 = this;
+            var _this97 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["combineLatest"])(this.route.data, this.route.params, this.hubService.getHubCacheObservable(), this.editDatalinkService.hubFormsService.getCurrentFormObservable()).subscribe(function (result) {
-                _this96.pageTitle = result[0]['pageTitle'];
+                _this97.pageTitle = result[0]['pageTitle'];
                 var params = result[1];
-                _this96.hubCache = result[2];
-                _this96.datalinkForm = result[3];
+                _this97.hubCache = result[2];
+                _this97.datalinkForm = result[3];
 
-                _this96.logger.LogC(function () {
+                _this97.logger.LogC(function () {
                   return "OnInit";
                 }, _logging__WEBPACK_IMPORTED_MODULE_6__["eLogLevel"].Trace);
 
-                if (_this96.hubCache && _this96.hubCache.isLoaded() && _this96.datalinkForm) {
-                  _this96.datalinkTransformKey = +params['datalinkTransformKey'];
-                  _this96.datalinkTransformItemKey = +params['datalinkTransformItemKey'];
-                  _this96.datalinkTransformForm = _this96.editDatalinkService.getDatalinkTransform(_this96.datalinkTransformKey);
-                  _this96.variables = _this96.editDatalinkService.getVariables();
-                  var nodeDatalinkColumn = _this96.datalinkTransformForm.controls.nodeDatalinkColumn.value;
+                if (_this97.hubCache && _this97.hubCache.isLoaded() && _this97.datalinkForm) {
+                  _this97.datalinkTransformKey = +params['datalinkTransformKey'];
+                  _this97.datalinkTransformItemKey = +params['datalinkTransformItemKey'];
+                  _this97.datalinkTransformForm = _this97.editDatalinkService.getDatalinkTransform(_this97.datalinkTransformKey);
+                  _this97.variables = _this97.editDatalinkService.getVariables();
+                  var nodeDatalinkColumn = _this97.datalinkTransformForm.controls.nodeDatalinkColumn.value;
                   var nodeDatalinkColumnKey = nodeDatalinkColumn ? nodeDatalinkColumn.key : null;
                   var io = new _hub_lineage_models__WEBPACK_IMPORTED_MODULE_8__["InputOutputColumns"]();
 
                   if (nodeDatalinkColumnKey) {
-                    var inputColumns = _this96.datalinkTransformForm.controls.runTime.value.inputColumns;
-                    _this96.inputColumns = io.getAvailableColumns(inputColumns, nodeDatalinkColumnKey, 0);
-                    _this96.outputColumns = _this96.datalinkTransformForm.controls.runTime.value.transformColumns;
+                    var inputColumns = _this97.datalinkTransformForm.controls.runTime.value.inputColumns;
+                    _this97.inputColumns = io.getAvailableColumns(inputColumns, nodeDatalinkColumnKey, 0);
+                    _this97.outputColumns = _this97.datalinkTransformForm.controls.runTime.value.transformColumns;
                   } else {
-                    _this96.inputColumns = _this96.datalinkTransformForm.controls.runTime.value.inputColumns;
-                    _this96.outputColumns = _this96.datalinkTransformForm.controls.runTime.value.transformColumns;
+                    _this97.inputColumns = _this97.datalinkTransformForm.controls.runTime.value.inputColumns;
+                    _this97.outputColumns = _this97.datalinkTransformForm.controls.runTime.value.transformColumns;
                   }
 
-                  _this96.inputColumns = _this96.inputColumns.filter(function (c) {
+                  _this97.inputColumns = _this97.inputColumns.filter(function (c) {
                     return c.dataType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTypeCode"].Node;
                   });
 
-                  if (_this96.datalinkTransformItemKey) {
-                    _this96.datalinkTransformItemForm = _this96.editDatalinkService.getDatalinkTransformItem(_this96.datalinkTransformForm, _this96.datalinkTransformItemKey);
+                  if (_this97.datalinkTransformItemKey) {
+                    _this97.datalinkTransformItemForm = _this97.editDatalinkService.getDatalinkTransformItem(_this97.datalinkTransformForm, _this97.datalinkTransformItemKey);
 
-                    if (!_this96.datalinkTransformItemForm) {
-                      _this96.authService.navigateUp();
+                    if (!_this97.datalinkTransformItemForm) {
+                      _this97.authService.navigateUp();
 
                       return;
                     } // create a copy of the form item to allow for cancel.
 
 
-                    _this96.newDatalinkTransformItemForm = _this96.editDatalinkService.hubFormsService.datalinkDatalinkTransformItemFormGroup(_this96.datalinkTransformForm, _this96.datalinkTransformItemForm.value);
-                    var parameters = _this96.newDatalinkTransformItemForm.controls.dexihFunctionParameters;
+                    _this97.newDatalinkTransformItemForm = _this97.editDatalinkService.hubFormsService.datalinkDatalinkTransformItemFormGroup(_this97.datalinkTransformForm, _this97.datalinkTransformItemForm.value);
+                    var parameters = _this97.newDatalinkTransformItemForm.controls.dexihFunctionParameters;
                     parameters.controls.forEach(function (control) {
                       var runTime = {};
                       runTime['functionParameter'] = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["FunctionParameter"]();
@@ -21594,18 +21664,18 @@
                     });
                   } else {
                     var newItem = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["DexihDatalinkTransformItem"]();
-                    newItem.datalinkTransformKey = _this96.datalinkTransformKey;
+                    newItem.datalinkTransformKey = _this97.datalinkTransformKey;
                     newItem.transformItemType = _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformItemType"].UnGroup;
-                    _this96.datalinkTransformItemKey = 0;
-                    _this96.newDatalinkTransformItemForm = _this96.editDatalinkService.hubFormsService.datalinkDatalinkTransformItemFormGroup(_this96.datalinkTransformForm, newItem);
+                    _this97.datalinkTransformItemKey = 0;
+                    _this97.newDatalinkTransformItemForm = _this97.editDatalinkService.hubFormsService.datalinkDatalinkTransformItemFormGroup(_this97.datalinkTransformForm, newItem);
                   }
 
-                  if (_this96._nodeSubscription) {
-                    _this96._nodeSubscription.unsubscribe();
+                  if (_this97._nodeSubscription) {
+                    _this97._nodeSubscription.unsubscribe();
                   }
 
-                  _this96._nodeSubscription = _this96.newDatalinkTransformItemForm.controls.sourceDatalinkColumn.valueChanges.subscribe(function (sourceDatalinkColumn) {
-                    var parameters = _this96.newDatalinkTransformItemForm.controls.dexihFunctionParameters; // clear previous parameters
+                  _this97._nodeSubscription = _this97.newDatalinkTransformItemForm.controls.sourceDatalinkColumn.valueChanges.subscribe(function (sourceDatalinkColumn) {
+                    var parameters = _this97.newDatalinkTransformItemForm.controls.dexihFunctionParameters; // clear previous parameters
 
                     while (parameters.length) {
                       parameters.removeAt(0);
@@ -21617,20 +21687,20 @@
                       column.childColumns.forEach(function (childColumn, index) {
                         var outputColumn = io.copyDatalinkColumn(childColumn, 0, 'un-group');
                         var newParameter = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["DexihFunctionParameter"]();
-                        newParameter.datalinkTransformItemKey = _this96.datalinkTransformItemKey;
+                        newParameter.datalinkTransformItemKey = _this97.datalinkTransformItemKey;
                         newParameter.name = childColumn.name;
                         newParameter.rank = childColumn.rank;
                         newParameter.direction = _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eParameterDirection"].Output;
                         newParameter.dataType = childColumn.dataType;
                         newParameter.position = index;
-                        newParameter.key = _this96.hubCache.getNextSequence();
+                        newParameter.key = _this97.hubCache.getNextSequence();
                         newParameter.datalinkColumn = outputColumn;
                         newParameter.isValid = true;
                         newParameter['runTime'] = {};
                         newParameter['runTime'].functionParameter = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["FunctionParameter"]();
                         newParameter['runTime'].functionParameter.name = childColumn.name;
 
-                        var newParameterForm = _this96.editDatalinkService.hubFormsService.datalinkFunctionParametersFormGroup(newParameter);
+                        var newParameterForm = _this97.editDatalinkService.hubFormsService.datalinkFunctionParametersFormGroup(newParameter);
 
                         parameters.push(newParameterForm);
                       });
@@ -21656,11 +21726,11 @@
         }, {
           key: "canDeactivate",
           value: function canDeactivate() {
-            var _this97 = this;
+            var _this98 = this;
 
             return new Promise(function (resolve) {
-              if (_this97.newDatalinkTransformItemForm && !_this97.newDatalinkTransformItemForm.pristine) {
-                _this97.authService.confirmDialog('The function has changed', 'The function has changed.  Do you want to discard the changes and continue?').then(function (confirm) {
+              if (_this98.newDatalinkTransformItemForm && !_this98.newDatalinkTransformItemForm.pristine) {
+                _this98.authService.confirmDialog('The function has changed', 'The function has changed.  Do you want to discard the changes and continue?').then(function (confirm) {
                   resolve(confirm);
                 })["catch"](function () {
                   resolve(false);
@@ -21701,7 +21771,7 @@
         selectors: [["dexih-unGroup-edit"]],
         decls: 1,
         vars: 1,
-        consts: [[4, "ngIf"], [1, "list-group-item", "list-group-item-info", "rounded-0"], [1, "d-flex", "flex-row"], [1, "ml-auto"], [1, "mr-1", 3, "disabled", "click"], [3, "click"], ["class", "container  mt-3 mb-3", 4, "ngIf"], [1, "container", "mt-3", "mb-3"], [3, "formGroup"], [1, "col", "col-xs-12"], ["label", "Column Node", "formControlName", "sourceDatalinkColumn", "itemKey", "key", "itemName", "logicalName", 3, "items", "textValue", "enableTextEntry", "enableTextEntryMatch", "enableKeySelect", "errors", "textValueChange"], [1, "mt-1"], [1, "row"], [1, "col", "border", "bg-primary", "text-white", "font-weight-bold", "text-truncate"], ["class", "row", 4, "ngFor", "ngForOf"], [1, "col", "border", "bg-secondary", "text-white", "text-truncate"]],
+        consts: [[4, "ngIf"], [1, "list-group-item", "list-group-item-info", "rounded-0"], [1, "d-flex", "flex-row"], [1, "ml-auto"], [1, "mr-1", 3, "disabled", "click"], [3, "click"], ["class", "container  mt-3 mb-3", 4, "ngIf"], [1, "container", "mt-3", "mb-3"], [3, "formGroup"], [1, "col", "col-xs-12"], ["label", "Column Node", "formControlName", "sourceDatalinkColumn", "itemKey", "key", "itemName", "logicalName", 3, "items", "enableTextEntry", "enableTextEntryMatch", "enableKeySelect"], [1, "mt-1"], [1, "row"], [1, "col", "border", "bg-primary", "text-white", "font-weight-bold", "text-truncate"], ["class", "row", 4, "ngFor", "ngForOf"], [1, "col", "border", "bg-secondary", "text-white", "text-truncate"]],
         template: function UnGroupEditComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, UnGroupEditComponent_div_0_Template, 9, 2, "div", 0);
@@ -21763,13 +21833,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "./node_modules/@angular/core/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "./node_modules/@angular/router/fesm2015/router.js");
       /* harmony import */
 
 
@@ -21805,13 +21875,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "./node_modules/@angular/common/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "./node_modules/@angular/forms/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -21949,8 +22019,6 @@
 
       function DatalinkEditValidationComponent_div_4_Template(rf, ctx) {
         if (rf & 1) {
-          var _r10 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 10);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 11);
@@ -21997,17 +22065,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "output-columns", 18);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("inputOutputDrop", function DatalinkEditValidationComponent_div_4_Template_output_columns_inputOutputDrop_15_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r10);
-
-            var ctx_r9 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
-
-            return ctx_r9.newDragDropMapping(ctx_r9.eTransformItemType.ColumnPair, $event);
-          });
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](15, "output-columns", 18);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -22027,7 +22085,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](6);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("datalinkTransformForm", ctx_r2.datalinkTransformForm)("allowMappingOutputs", ctx_r2.allowMappingOutputs);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("datalinkTransformForm", ctx_r2.datalinkTransformForm)("allowMappingOutputs", false);
         }
       }
 
@@ -22046,19 +22104,19 @@
         _createClass(DatalinkEditValidationComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this98 = this;
+            var _this99 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["combineLatest"])(this.route.data, this.hubService.getHubCacheObservable(), this.editDatalinkService.hubFormsService.getCurrentFormObservable(), this.hubService.getRemoteLibrariesObservable()).subscribe(function (result) {
-                _this98.pageTitle = result[0]['pageTitle'];
-                _this98.hubCache = result[1];
-                _this98.datalinkForm = result[2];
-                _this98.remoteLibraries = result[3];
+                _this99.pageTitle = result[0]['pageTitle'];
+                _this99.hubCache = result[1];
+                _this99.datalinkForm = result[2];
+                _this99.remoteLibraries = result[3];
 
-                if (_this98.hubCache.isLoaded() && _this98.datalinkForm) {
-                  _this98.datalinkTransformForm = _this98.editDatalinkService.getValidationTransform();
-                  _this98._transformsChange = _this98.datalinkForm.controls.dexihDatalinkTransforms.valueChanges.subscribe(function () {
-                    return _this98.datalinkTransformForm = _this98.editDatalinkService.getValidationTransform();
+                if (_this99.hubCache.isLoaded() && _this99.datalinkForm) {
+                  _this99.datalinkTransformForm = _this99.editDatalinkService.getValidationTransform();
+                  _this99._transformsChange = _this99.datalinkForm.controls.dexihDatalinkTransforms.valueChanges.subscribe(function () {
+                    return _this99.datalinkTransformForm = _this99.editDatalinkService.getValidationTransform();
                   });
                 }
               });
@@ -22105,7 +22163,7 @@
         selectors: [["dexih-datalink-edit-validation-form"]],
         decls: 5,
         vars: 4,
-        consts: [["title", "Validation", 3, "showExpandButton"], [4, "ngIf"], [1, "list-group-item", "p-1"], ["class", "d-flex", 4, "ngIf"], [1, "alert", "alert-danger", "m-3"], ["buttonClass", "btn btn-success", "iconClass", "fa fa-check", "title", "Enable the validation on the target table.", 3, "autoCompact", "click", 4, "ngIf"], ["buttonClass", "btn btn-success", "iconClass", "fa fa-check", "title", "Enable the validation on the target table.", 3, "autoCompact", "click"], [3, "formGroup", 4, "ngIf"], [3, "formGroup"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description."], [1, "d-flex"], [1, "mr-1", "d-none", "d-md-inline"], [1, "alert", "alert-primary", "mb-1"], [3, "datalinkTransformForm"], [1, "w-100"], ["title", "Validation", 3, "datalinkTransformForm", "allowCondition", "allowOutput", "allowStandard", "allowValidation"], [1, "ml-1", "d-none", "d-md-inline"], [1, "float-right"], [3, "datalinkTransformForm", "allowMappingOutputs", "inputOutputDrop"]],
+        consts: [["title", "Validation", 3, "showExpandButton"], [4, "ngIf"], [1, "list-group-item", "p-1"], ["class", "d-flex", 4, "ngIf"], [1, "alert", "alert-danger", "m-3"], ["buttonClass", "btn btn-success", "iconClass", "fa fa-check", "title", "Enable the validation on the target table.", 3, "autoCompact", "click", 4, "ngIf"], ["buttonClass", "btn btn-success", "iconClass", "fa fa-check", "title", "Enable the validation on the target table.", 3, "autoCompact", "click"], [3, "formGroup", 4, "ngIf"], [3, "formGroup"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description."], [1, "d-flex"], [1, "mr-1", "d-none", "d-md-inline"], [1, "alert", "alert-primary", "mb-1"], [3, "datalinkTransformForm"], [1, "w-100"], ["title", "Validation", 3, "datalinkTransformForm", "allowCondition", "allowOutput", "allowStandard", "allowValidation"], [1, "ml-1", "d-none", "d-md-inline"], [1, "float-right"], [3, "datalinkTransformForm", "allowMappingOutputs"]],
         template: function DatalinkEditValidationComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-widget-section", 0);
