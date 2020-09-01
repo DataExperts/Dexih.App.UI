@@ -17,7 +17,7 @@ export class RemoteAgentEditComponent implements OnInit, OnDestroy {
 
     private _subscription: Subscription;
 
-    private remoteAgentKey: number;
+    public remoteAgentKey: number;
     private remoteAgentHubKey: number;
 
     hubCache: HubCache;

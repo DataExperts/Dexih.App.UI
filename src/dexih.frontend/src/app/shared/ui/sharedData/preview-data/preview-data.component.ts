@@ -16,7 +16,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
     @Input() public objectType: eDataObjectType;
     @Input() public objectKey: number;
     @Input() public hubKey: number;
-    @Input() parentParameters: InputParameterBase[]; // parameters passed from parent
+    @Input() public parentParameters: InputParameterBase[]; // parameters passed from parent
     @Input() public showToolbar = false;
     @Input() public updateQueryParameters = true;
     @Input() isMaximized = false;

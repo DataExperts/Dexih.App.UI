@@ -5,11 +5,11 @@
             <fieldset>
                 <section>
                     <form-input label="Dashboard Name" formControlName="name" placeholder="Enter the dashboard name."
-                        [autocapitalize]="on" iconClass="fa fa-list" [errors]="formsService.formErrors['name']">
+                        [autocapitalize]="true" iconClass="fa fa-list" [errors]="formsService.formErrors['name']">
                     </form-input>
                 </section>
                 <section>
-                    <form-textarea label="Description" [showPreview]="true" formControlName="description"
+                    <form-textarea label="Description" [showPreview]="true"  [isHidden]="true" formControlName="description"
                         placeholder="Enter the description.">
                     </form-textarea>
                 </section>

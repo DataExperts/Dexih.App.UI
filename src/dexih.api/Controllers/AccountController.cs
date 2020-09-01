@@ -1228,10 +1228,38 @@ namespace dexih.api.Controllers
 		    return newIssue;
 	    }
 	    
-	    /// <summary>
-	    /// Cancels any running tasks 
-	    /// </summary>
-	    /// <returns></returns>
+	    [HttpPost("[action]")]
+	    [ValidateAntiForgeryToken]
+	    public async Task DeleteIssues([FromBody] DeleteIssues issues, CancellationToken cancellationToken)
+	    {
+		    var user = await GetApplicationUser(cancellationToken);
+		    if (user == null)
+		    {
+			    throw new AccountControllerException("Could not find the current user.");
+		    }
+		    
+		    _logger.LogTrace(LoggingEvents.DeleteIssue, "AccountController.DeleteIssue {references}", string.Join(',', issues.IssueKeys));
+
+		    var exceptions = new List<Exception>();
+
+		    foreach (var issueKey in issues.IssueKeys)
+		    {
+			    try
+			    {
+				    await _operations.RepositoryManager.DeleteIssueAsync(issueKey, user, cancellationToken);
+			    }
+			    catch (Exception ex)
+			    {
+				    exceptions.Add(ex);
+			    }
+		    }
+
+		    if (exceptions.Any())
+		    {
+			    throw new AggregateException("There were errors deleting some of the issues.", exceptions);
+		    }
+	    }
+	    
 	    [HttpPost("[action]")]
 	    [ValidateAntiForgeryToken]
 	    public async Task<DexihIssue[]> GetIssues(CancellationToken cancellationToken)
@@ -1289,6 +1317,38 @@ namespace dexih.api.Controllers
 			    "A comment was added to an existing issue, please review the link or log into the integration hub for more information", cancellationToken);
 		    
 		    return newIssue;
+	    }
+	    
+	    [HttpPost("[action]")]
+	    [ValidateAntiForgeryToken]
+	    public async Task DeleteIssueComments([FromBody] DeleteIssueComments issueComments, CancellationToken cancellationToken)
+	    {
+		    var user = await GetApplicationUser(cancellationToken);
+		    if (user == null)
+		    {
+			    throw new AccountControllerException("Could not find the current user.");
+		    }
+		    
+		    _logger.LogTrace(LoggingEvents.DeleteIssueComment, "AccountController.DeleteIssueComment {references}", string.Join(',', issueComments.IssueCommentKeys));
+
+		    var exceptions = new List<Exception>();
+
+		    foreach (var issueCommentKey in issueComments.IssueCommentKeys)
+		    {
+			    try
+			    {
+				    await _operations.RepositoryManager.DeleteIssueCommentAsync(issueCommentKey, user, cancellationToken);
+			    }
+			    catch (Exception ex)
+			    {
+				    exceptions.Add(ex);
+			    }
+		    }
+
+		    if (exceptions.Any())
+		    {
+			    throw new AggregateException("There were errors deleting some of the issues comments.", exceptions);
+		    }
 	    }
 	    
 	    public async Task SendIssueMessages(DexihIssue issue, string subject, string message, CancellationToken cancellationToken)

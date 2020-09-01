@@ -56,11 +56,6 @@
 						 itemName="name" [enableFilter]="false" iconClass="fa fa-database">
 						</form-select>
 					</div>
-
-					<section *ngIf="(selectedFunction?.returnParameters?.length > 0 && selectedFunction?.returnParameters[0].dataType == eTypeCode.Boolean) || (selectedCustomFunction && selectedCustomFunction?.returnType == eTypeCode.Boolean)" class="col-xs-12 col-sm-6 col-md-3 align-self-end">
-						<form-checkbox label="Return 'NOT' result" formControlName="notCondition">
-						</form-checkbox>
-					</section>
 	
 					<section *ngIf="selectedFunction?.genericType !== eGenericType.None" class="col-xs-12 col-sm-6 col-md-3">
 						<form-select label="Data Type" formControlName="genericTypeCode" [items]="typeCodes" itemKey="key" itemName="name">
@@ -72,6 +67,10 @@
 						</form-select>
 					</section>
 
+					<section *ngIf="(selectedFunction?.returnParameters?.length > 0 && selectedFunction?.returnParameters[0].dataType == eTypeCode.Boolean) || (selectedCustomFunction && selectedCustomFunction?.returnType == eTypeCode.Boolean)" class="col-xs-12 col-sm-6 col-md-3 align-self-end">
+						<form-checkbox label="Return 'NOT' result" formControlName="notCondition">
+						</form-checkbox>
+					</section>
 				</div>
 
 				<div *ngIf="(selectedFunction || selectedCustomFunction) && inputParameterControls.length > 0" class="mt-1">
@@ -85,7 +84,7 @@
 									Array - {{inputParameter.value.name}}
 								</div>
 								<div class="ml-auto">
-									<d-button *ngIf="selectedFunction.importMethodName" iconClass="fa fa-download" text="Import Mappings" (click)="importMappings(inputParameter)"
+									<d-button *ngIf="selectedFunction.importMethodName" iconClass="fa fa-download" text="Import Mappings" (click)="importInputOutputMappings(inputParameter)"
 									 title="Attempt to import the mappings from the source data" class="mr-1"></d-button>
 									<d-button iconClass="fa fa-plus" text="Add Parameter" (click)="addParameter(inputParameter, eParameterDirection.Input)" title="Add a parameter to the array"
 									 class="mr-1"></d-button>

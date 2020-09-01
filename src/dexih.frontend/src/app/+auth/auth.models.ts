@@ -304,5 +304,10 @@ export class PromiseWithCancel<T> extends Promise<T> {
 
 }
 
+export class WaitMessage {
+    public message: string;
+    public cancelToken: CancelToken;
+}
+
 
 

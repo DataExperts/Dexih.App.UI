@@ -51,7 +51,7 @@ export class HubFormsService implements OnDestroy {
 
   public currentForm: FormGroup;
   private _currentFormObservable = new BehaviorSubject<FormGroup>(null);
-  public formErrors = {};
+  public formErrors: any = {};
   public hasChanged = false;
   public formSaving = false;
   public showAllErrors = false;
@@ -2030,7 +2030,7 @@ export class HubFormsService implements OnDestroy {
       const datalink = <DexihDatalink> datalinkForm.value;
       const ioColumns = new InputOutputColumns();
 
-      ioColumns.buildInputOutput(this.hubCache, datalink);
+      ioColumns.buildInputOutput(datalink);
 
       transformsArray.controls.forEach(transformFormControl => {
         const datalinkTransformForm = <FormGroup>transformFormControl;

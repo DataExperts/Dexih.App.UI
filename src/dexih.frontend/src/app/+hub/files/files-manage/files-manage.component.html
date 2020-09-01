@@ -14,8 +14,8 @@
             <d-button-dropdown class="mr-1" iconClass="fa fa-file-o" text="New File">
                     <a *ngFor="let connection of fileConnections" class="dropdown-item" routerLink="/hub/{{hubCache?.hub.hubKey}}/connections/tables/table-new/{{connection.key}}" [title]="">{{connection.name}}</a>
             </d-button-dropdown>
-            <d-button-dropdown *ngIf="connectionReference?.allowFlatFiles && table?.autoManageFiles" iconClass="fa fa-filter" [text]="eFlatFilePath[path]" title="Select the file location" [pullRight]="true">
-                    <a *ngFor="let item of eFlatFilePathItems" class="dropdown-item" [class.active]="path=='item.name'" routerLinkActive="active" data-toggle="tab" routerLink="." [queryParams]="{tableKey: tableKey, path: item.key}">
+            <d-button-dropdown *ngIf="connectionReference?.allowsFlatFiles && table?.autoManageFiles" iconClass="fa fa-filter" [text]="eFlatFilePath[path]" title="Select the file location" [pullRight]="true">
+                    <a *ngFor="let item of eFlatFilePathItems" class="dropdown-item" [class.active]="path === item.key" routerLinkActive="active" data-toggle="tab" routerLink="." [queryParams]="{tableKey: tableKey, path: item.key}">
                             <i class="fa fa-elipsis-h"></i>{{item.name}}</a>
             </d-button-dropdown>
         </ng-template>
@@ -28,7 +28,7 @@
                         itemKey="key" itemName="logicalName" note="Select the flat file to manage">
                     </form-select>
                 </section>
-                <section *ngIf="!connectionReference?.allowFlatFiles">
+                <section *ngIf="!connectionReference?.allowsFlatFiles">
                     <form-select label="Update Strategy" [(ngModel)]="updateStrategy" [ngModelOptions]="{standalone: true}"
                         [items]="updateStrategies" itemKey="key" itemName="description" iconClass="fa fa-database"
                         note='Specify how records should be inserted/updated in the target table.'
@@ -78,7 +78,7 @@
                     </ng-template>
                 </d-table>
             </li>
-            <ng-template [ngIf]="connectionReference?.allowFlatFiles">
+            <ng-template [ngIf]="connectionReference?.allowsFlatFiles">
             <li class="list-group-item list-group-item-info rounded-0">
                 <h5>Files (Local directory:
                     <a href='file://///{{localPath}}'>{{localPath}}</a>)</h5>
@@ -105,7 +105,7 @@
                     <ng-template #actions let-items="items">
                         <d-button-dropdown *ngIf="table?.autoManageFiles" class="mr-1" buttonClass="btn-primary" iconClass="fa fa-filter" [text]="eFlatFilePath[path]"
                             title="Select the file location" [pullRight]="true">
-                            <a *ngFor="let item of eFlatFilePathItems" class="dropdown-item" [class.active]="path=='item.name'" routerLinkActive="active" data-toggle="tab" routerLink="." [queryParams]="{tableKey: tableKey, path: item.key}">
+                            <a *ngFor="let item of eFlatFilePathItems" class="dropdown-item" [class.active]="path === item.key" routerLinkActive="active" data-toggle="tab" routerLink="." [queryParams]="{tableKey: tableKey, path: item.key}">
                                 <i class="fa fa-elipsis-h"></i>{{item.name}}</a>
                         </d-button-dropdown>
                         <d-button-refresh (click)="refreshFiles()"></d-button-refresh>

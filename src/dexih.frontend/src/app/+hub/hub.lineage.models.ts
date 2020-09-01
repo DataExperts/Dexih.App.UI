@@ -243,7 +243,7 @@ export class InputOutputColumns {
         return newTable;
     }
 
-    public buildInputOutput(hubCache: HubCache, datalink: DexihDatalink) {
+    public buildInputOutput(datalink: DexihDatalink) {
 
         // get a reverse sorted list of transforms prior to the current one.
         let transforms = datalink.dexihDatalinkTransforms

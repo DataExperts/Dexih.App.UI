@@ -130,6 +130,9 @@
         public const int GetIssues = 5002;
         public const int GetIssue = 5003;
         public const int AddIssueComment = 5004;
+        public const int DeleteIssue = 5005;
+        public const int DeleteIssueComment = 5006;
+        
 
 	}
 }

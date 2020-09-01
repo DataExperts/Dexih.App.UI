@@ -57,7 +57,7 @@
 
 					<section>
 						<form-textarea label="Description" formControlName="description"
-							placeholder="Details of the issue of feature request" rows="20" [hideToggle]="isNew">
+							placeholder="Details of the issue of feature request" rows="20" [hideToggle]="isNew" [isHidden]="!isNew">
 						</form-textarea>
 					</section>
 
@@ -65,15 +65,16 @@
 			</form>
 		</d-widget-section>
 
-		<d-widget-section *ngIf="mainForm.controls.dexihIssueComments.controls.length > 0"
+		<d-widget-section *ngIf="comments.controls.length > 0"
 			title="Commentary" [showExpandButton]="true" iconClass="fa fa-lg fa-fw fa-comments" [padding]="true">
 
-			<form id="comment-form" *ngFor="let comment of mainForm.controls.dexihIssueComments.controls"
+			<form id="comment-form" *ngFor="let comment of comments.controls"
 				[formGroup]="comment">
 				<fieldset>
 					<section>
-						<form-textarea label="{{comment.controls.userName.value}} - {{comment.controls.updateDate.value | calendar }}" formControlName="comment" placeholder="Comment" [disabled]="true"
+						<form-textarea label="{{comment.value.userName}} - {{comment.value.updateDate | calendar }}" formControlName="comment" placeholder="Comment" [hideToggle]="true" [isHidden]="true"
 							iconClass="fa fa-comment">
+							<d-button-delete (click)="deleteComment(comment.value)"></d-button-delete>
 						</form-textarea>
 					</section>
 				</fieldset>
@@ -92,7 +93,7 @@
 				<fieldset>
 					<section>
 						<form-textarea [(ngModel)]="newComment" [ngModelOptions]="{standalone: true}"
-							placeholder="Enter a new comment" iconClass="fa fa-comment" rows="20" [hideToggle]="true">
+							placeholder="Enter a new comment" iconClass="fa fa-comment" rows="20" [isHidden]="false" [hideToggle]="true">
 						</form-textarea>
 					</section>
 				</fieldset>

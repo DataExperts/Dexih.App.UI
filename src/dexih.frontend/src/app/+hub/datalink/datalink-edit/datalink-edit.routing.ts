@@ -112,7 +112,7 @@ export const datalinkEditRoutes: Routes = [
             data: { pageTitle: 'Custom Function', help: 'function.md' },
             canDeactivate: [DatalinkEditGuard], component: CustomFunctionEditComponent },
         { path: 'mapping-edit/:type', data: { pageTitle: 'Mapping Edit' },
-            component: MappingEditComponent },
+            canDeactivate: [DatalinkEditGuard], component: MappingEditComponent },
         { path: 'mapping-edit/:type/:datalinkTransformItemKey', data: { pageTitle: 'Mapping Edit' },
             component: MappingEditComponent },
         { path: 'unGroup-edit', data: { pageTitle: 'Un-Group Edit' },

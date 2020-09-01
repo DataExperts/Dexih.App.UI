@@ -336,7 +336,10 @@ export class MappingItemComponent implements OnInit {
         if (value === ' ') {
             return '<space>';
         }
-        if (!value) {
+        if (value === '') {
+            return '<blank>';
+        }
+        if (value == null) {
             return '<null>';
         }
         return '"' + value + '"';

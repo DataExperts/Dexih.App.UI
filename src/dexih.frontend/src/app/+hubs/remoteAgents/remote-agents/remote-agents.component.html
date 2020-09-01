@@ -20,7 +20,7 @@
 
 				<ng-template #actions let-items="items">
 					<d-button-dropdown *ngIf="items && items.length >= 0" buttonClass="btn-primary" iconClass="fa fa-table"
-						[text]="items.length > 1 ? 'Agents' : 'Agent'" [pullRight]="pullRight">
+						[text]="items.length > 1 ? 'Agents' : 'Agent'">
 						<li><a class="dropdown-item" [routerLink]="['token-new']"
 								title="Create a new remote agent token."><i class="fa fa-file-o"></i> New Token</a></li>
 						<li><a class="dropdown-item" [routerLink]="['download']" title="Configure and download a new remote agent"><i

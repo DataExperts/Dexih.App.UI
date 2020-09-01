@@ -26,7 +26,7 @@
 
 				<section>
 					<form-input label="Encryption Key" formControlName="encryptionKey"
-						placeholder="Encryption key (blank will auto-generate)" [autocapitalize]="on" iconClass="fa fa-key"
+						placeholder="Encryption key (blank will auto-generate)" [autocapitalize]="true" iconClass="fa fa-key"
 						[errors]="formsService.formErrors.encryptionKey"
 						note="Encryption key is used to encrypt secure fields and connection passwords.  Note: this key is not retained by the integration hub, and if lost encrypted data can not be restored.">
 						( <a href="javascript:void(0)" *ngIf="refreshingEncryptionKey == false"

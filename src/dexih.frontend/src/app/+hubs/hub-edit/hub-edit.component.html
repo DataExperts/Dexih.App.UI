@@ -17,12 +17,12 @@
 		<form  id="hub-edit-form" [formGroup]="mainForm" >
 			<fieldset>
 				<section>
-					<form-input label="Hub Name" formControlName="name" placeholder="Enter a name for the hub" [autocapitalize]="on" iconClass="fa fa-life-ring" [errors]="formErrors.name">
+					<form-input label="Hub Name" formControlName="name" placeholder="Enter a name for the hub" [autocapitalize]="true" iconClass="fa fa-life-ring" [errors]="formErrors.name">
 					</form-input>
 				</section>
 
 				<section>
-					<form-textarea label="Description" formControlName="description" placeholder="Enter a description for the hub">
+					<form-textarea label="Description" formControlName="description"  [isHidden]="true" [showPreview]="true" placeholder="Enter a description for the hub">
 					</form-textarea>
 				</section>
 

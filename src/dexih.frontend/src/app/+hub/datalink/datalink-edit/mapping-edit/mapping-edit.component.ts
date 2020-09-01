@@ -210,7 +210,24 @@ export class MappingEditComponent implements OnInit, OnDestroy {
     if (this._saveSubscription) { this._saveSubscription.unsubscribe(); }
   }
 
+  canDeactivate(): Promise<boolean> {
+    return new Promise<boolean>(resolve => {
+      if (this.newDatalinkTransformItemForm && !this.newDatalinkTransformItemForm.pristine) {
+        this.authService.confirmDialog('The mapping has changed',
+          'The function has changed.  Do you want to discard the changes and continue?')
+          .then((confirm) => {
+              resolve(confirm);
+            }).catch(() => {
+              resolve(false);
+            });
+      } else {
+        resolve(true);
+      }
+    });
+  }
+
   cancel() {
+    this.newDatalinkTransformItemForm = null;
     this.authService.navigateUp();
   }
 

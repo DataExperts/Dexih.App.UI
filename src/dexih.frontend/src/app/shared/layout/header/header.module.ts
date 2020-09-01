@@ -8,7 +8,7 @@ import {FormsModule} from '@angular/forms';
 import { SharedModule } from '../../shared.module';
 
 import {HeaderComponent} from './header.component';
-import {MessagesComponent} from './messages/messages.component';
+// import {MessagesComponent} from './messages/messages.component';
 import {TasksComponent} from './tasks/tasks.component';
 
 
@@ -22,7 +22,7 @@ import {TasksComponent} from './tasks/tasks.component';
   declarations: [
     TasksComponent,
     HeaderComponent,
-    MessagesComponent
+//    MessagesComponent
   ],
   exports: [
     HeaderComponent,

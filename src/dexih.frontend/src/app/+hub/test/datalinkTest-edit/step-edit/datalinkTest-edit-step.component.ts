@@ -16,7 +16,7 @@ export class DatalinkTestEditStepComponent implements OnInit, OnDestroy {
     private _subscription: Subscription;
     private _formChanges: Subscription;
 
-    private hubCache: HubCache;
+    public hubCache: HubCache;
 
     private datalinkTestStepKey: number;
     datalinkTestKey: number;

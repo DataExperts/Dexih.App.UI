@@ -3,6 +3,7 @@ import { AuthService } from './+auth/auth.service';
 import { Subscription } from 'rxjs';
 import { Router, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
 import { DModalComponent } from 'ngx-d-components';
+import { WaitMessage } from './+auth/auth.models';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private _waitMessagesSubscription: Subscription;
   private _routeEventsSubscription: Subscription;
-  public waitMessages: string[];
+  public waitMessages: WaitMessage[];
 
   private loadingRouteKey: string;
 

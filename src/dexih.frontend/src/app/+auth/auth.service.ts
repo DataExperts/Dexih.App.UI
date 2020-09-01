@@ -7,7 +7,7 @@ import { timeout, first, take } from 'rxjs/operators'
 import { eLogLevel, LogFactory } from '../../logging';
 import {
     DexihHubAuth, ExternalLoginResult, Message,
-    User, UserLoginInfo, ExternalLogin, FileHandler, eFileStatus, RemoteToken, PromiseWithCancel, CancelToken, eHubAccess
+    User, UserLoginInfo, ExternalLogin, FileHandler, eFileStatus, RemoteToken, PromiseWithCancel, CancelToken, eHubAccess, WaitMessage
 } from './auth.models';
 import { UserAgentApplication, AuthResponse, CacheLocation } from 'msal';
 import { DModalComponent } from 'ngx-d-components';
@@ -40,8 +40,8 @@ export class AuthService implements OnDestroy {
 
     private _logErrors = new BehaviorSubject<Message>(null);
 
-    private _waitMessages = new Map<string, any>();
-    private _waitMessagesObserve = new BehaviorSubject<any>(this._waitMessages);
+    private _waitMessages = new Map<string, WaitMessage>();
+    private _waitMessagesObserve = new BehaviorSubject<Map<string, WaitMessage>>(this._waitMessages);
 
     private _globalCache = new ReplaySubject<CacheManager>();
 
@@ -1790,6 +1790,20 @@ export class AuthService implements OnDestroy {
         return this.post<DexihIssue>('/api/Account/SaveIssue', issue, 'Creating issue ... ');
     }
 
+    deleteIssues(issueKeys: number[]): Promise<boolean> {
+        return new Promise((resolve, reject) => {
+            this.confirmDialog('Delete Issues', 'Please confirm that you would like to delete the selected issues.').then(c => {
+                if(c) {
+                    resolve(this.post('/api/Account/DeleteIssues', {issueKeys: issueKeys}, 'Deleting issues ... '));
+                } else {
+                    reject();
+                }
+            }).catch(reason => {
+                reject(reason);
+            });;
+        });
+    }
+
     getIssue(issueKey: number, cancelToken: CancelToken): Promise<DexihIssue> {
         return this.post<DexihIssue>('/api/Account/GetIssue', {issueKey: issueKey}, 'Getting issues ... ', cancelToken);
     }
@@ -1800,6 +1814,20 @@ export class AuthService implements OnDestroy {
 
     addIssueComment(issueKey: number, comment: string) {
         return this.post<DexihIssue>('/api/Account/AddIssueComment', {issueKey: issueKey, comment: comment}, 'Getting issues ... ');
+    }
+
+    deleteIssueComments(issueCommentKeys: number[]): Promise<DexihIssue> {
+        return new Promise((resolve, reject) => {
+            this.confirmDialog('Delete Issues', 'Please confirm that you would like to delete the selected issue comments.').then(c => {
+                if(c) {
+                    resolve(this.post('/api/Account/DeleteIssueComments', {issueCommentKeys: issueCommentKeys}, 'Deleting issue comments... '));
+                } else {
+                    reject();
+                }
+            }).catch(reason => {
+                reject(reason);
+            });;
+        });
     }
 
     hubNameExists(hubKey: number, hubName: string): boolean {
@@ -1905,7 +1933,7 @@ export class AuthService implements OnDestroy {
         }
     }
 
-    getWaitMessagesObservable(): Observable<Map<string, string>> {
+    getWaitMessagesObservable(): Observable<Map<string, WaitMessage>> {
         return this._waitMessagesObserve.asObservable();
     }
 

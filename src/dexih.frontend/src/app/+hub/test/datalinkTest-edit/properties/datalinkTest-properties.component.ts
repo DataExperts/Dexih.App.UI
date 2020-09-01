@@ -17,7 +17,7 @@ export class DatalinkTestPropertiesComponent implements OnInit, OnDestroy {
 
   private datalinkTestKey: number;
 
-  private hubCache: HubCache;
+  public hubCache: HubCache;
   public action: string; // new or edit
   public pageTitle: string;
 

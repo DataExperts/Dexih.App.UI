@@ -194,7 +194,7 @@ export class ApiEditComponent implements OnInit, OnDestroy {
       let datalink = this.datalinks.find(c => c.key === apiForm.controls.sourceDatalinkKey.value);
       if (datalink) {
         const ioColumns = new InputOutputColumns();
-        ioColumns.buildInputOutput(this.hubCache, datalink);
+        ioColumns.buildInputOutput(datalink);
         this.tableColumns = ioColumns.getDatalinkOutputColumns(datalink);
         this.inputColumns = this.getInputColumns(datalink.sourceDatalinkTable.dexihDatalinkColumns);
       } else {

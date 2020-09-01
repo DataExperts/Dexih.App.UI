@@ -19,7 +19,7 @@ import { FormArray, FormGroup } from '@angular/forms';
 export class ViewEditComponent implements OnInit, OnDestroy {
   public viewKey: number;
 
-  private hubCache: HubCache;
+  public hubCache: HubCache;
   public action: string; // new or edit
   public pageTitle: string;
   public params: Params;
@@ -286,7 +286,7 @@ export class ViewEditComponent implements OnInit, OnDestroy {
       let datalink = this.datalinks.find(c => c.key === viewForm.controls.sourceDatalinkKey.value);
       if (datalink) {
         const ioColumns = new InputOutputColumns();
-        ioColumns.buildInputOutput(this.hubCache, datalink);
+        ioColumns.buildInputOutput(datalink);
         this.tableColumns = ioColumns.getDatalinkOutputColumns(datalink);
 
         this.inputColumns = datalink.sourceDatalinkTable.dexihDatalinkColumns.filter(c => c.isInput).map(c => {

@@ -5,6 +5,6 @@
         <d-button-download class="ml-1" (click)="download()"></d-button-download>
     </ng-template>
     <ng-template #tableHeader>
-        <query-builder [selectQuery]="selectQuery" [columns]="targetTable.dexihTableColumns" [inputColumns]="inputColumns" [refreshEvent]="refreshDataObservable" (onRefreshData)="refresh()"></query-builder>
+        <query-builder [selectQuery]="selectQuery" [columns]="targetTable.dexihTableColumns" [refreshEvent]="refreshDataObservable" (onRefreshData)="refresh()"></query-builder>
     </ng-template>
 </d-table>

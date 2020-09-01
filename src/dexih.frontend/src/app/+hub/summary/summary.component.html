@@ -4,7 +4,7 @@
         <div class="lh-100">
             <h3 class="mb-0 text-white lh-100">{{hubCache.hub.name}}</h3>
             <h5 *ngIf="hubCache.hub.description" class="mb-0 text-white lh-100">
-                <markdown [data]="hubCache.hub.description" (click)="authService.getRoute(event)"></markdown>
+                <markdown [data]="hubCache.hub.description" (click)="authService.getRoute($event)"></markdown>
             </h5>
         </div>
     </div>

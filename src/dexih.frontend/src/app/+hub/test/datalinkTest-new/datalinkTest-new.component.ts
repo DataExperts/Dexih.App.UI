@@ -19,7 +19,7 @@ export class DatalinkTestNewComponent implements OnInit, OnDestroy {
   private _valueChangesSubscription: Subscription;
   private cancelToken: CancelToken = new CancelToken();
 
-  private hubCache: HubCache;
+  public hubCache: HubCache;
 
   public pageTitle: string;
 

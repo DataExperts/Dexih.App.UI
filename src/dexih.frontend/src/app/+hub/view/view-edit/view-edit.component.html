@@ -22,16 +22,16 @@
 			<cancel-button [formsService]="formsService"></cancel-button>
 		</ng-template>
 
-		<d-widget-section *ngIf="formsService.currentForm && (showEdit || formsService.currentForm?.controls.parameters.length > 0 || datalinkParameters?.length > 0)" title="Properties" [showExpandButton]="true">
+		<d-widget-section *ngIf="formsService.currentForm && (showEdit || formsService.currentForm?.controls.parameters.length > 0)" title="Properties" [showExpandButton]="true">
 		<form *ngIf="showEdit" [formGroup]="formsService.currentForm">
 			<fieldset>
 				<section>
-					<form-input label="View Name" formControlName="name" placeholder="Enter the view name." [autocapitalize]="on" iconClass="fa fa-list"
+					<form-input label="View Name" formControlName="name" placeholder="Enter the view name." [autocapitalize]="true" iconClass="fa fa-list"
 					 [errors]="formsService.formErrors['name']">
 					</form-input>
 				</section>
 				<section>
-					<form-textarea label="Description" [showPreview]="true" formControlName="description" placeholder="Enter the description.">
+					<form-textarea label="Description" [showPreview]="true" [isHidden]="true" formControlName="description" placeholder="Enter the description.">
 					</form-textarea>
 				</section>
 				<section>
@@ -42,13 +42,13 @@
 							</form-select>
 						</section>
 						<section class="form-group col-md-6" *ngIf="formsService.currentForm.value.sourceType == eDataObjectType.Table">
-							<form-select label="Source Table" formControlName="sourceTableKey" [errors]="errors?.sourceTableKey" [items]="connectionTables"
+							<form-select label="Source Table" formControlName="sourceTableKey" [errors]="formsService.formErrors?.sourceTableKey" [items]="connectionTables"
 							 parentName="name" childItems="dexihTables" itemKey="key" itemName="logicalName" note="Select the source table">
 							 <table-edit-button [key]="formsService.currentForm.controls.sourceTableKey.value"></table-edit-button>
 							</form-select>
 						</section>
 						<section class="form-group col-md-6" *ngIf="formsService.currentForm.value.sourceType == eDataObjectType.Datalink">
-							<form-select label="Source Datalink" formControlName="sourceDatalinkKey" [errors]="errors?.sourceDatalinkKey"
+							<form-select label="Source Datalink" formControlName="sourceDatalinkKey" [errors]="formsService.formErrors?.sourceDatalinkKey"
 							 [items]="datalinks" itemKey="key" itemName="name" note='Select the source datalink'>
 							 <datalink-edit-button [key]="formsService.currentForm.controls.sourceDatalinkKey.value"></datalink-edit-button>
 							</form-select>

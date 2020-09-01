@@ -95,7 +95,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
 
                             // get the outputs from the last transform in the datalink
                             const ioColumns = new InputOutputColumns();
-                            ioColumns.buildInputOutput(this.hubCache, datalink);
+                            ioColumns.buildInputOutput(datalink);
                             if (this.datalinkTransformKey) {
                                 let transform = datalink.dexihDatalinkTransforms.find(c => c.key === this.datalinkTransformKey);
                                 this.tableColumns = transform['runTime']['outputColumns'];

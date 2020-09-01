@@ -152,6 +152,14 @@ namespace dexih.api.Models
 		public long[] HubKeys { get; set; }
 	}
 
+    public class DeleteIssues {
+        public long[] IssueKeys { get; set; }
+    }
+
+    public class DeleteIssueComments {
+        public long[] IssueCommentKeys { get; set; }
+    }
+
     public class RemoveRemoteAgents {
         public long[] RemoteAgentKeys { get; set; }
     }

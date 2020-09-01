@@ -17,7 +17,7 @@
                     title="Enable the validation on the target table.">Disable Validation</d-button>
             </section>
             <section>
-                <form-textarea label="Description" formControlName="description" placeholder="Enter the description.">
+                <form-textarea label="Description" formControlName="description" [showPreview]="true"  [isHidden]="true" placeholder="Enter the description.">
                 </form-textarea>
             </section>
         </fieldset>

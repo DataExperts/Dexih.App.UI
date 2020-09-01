@@ -15,7 +15,7 @@ import { eLogLevel, LogFactory } from '../../../../logging';
 
 export class InputParametersComponent implements OnInit, OnChanges, OnDestroy {
     @Input() formsService: HubFormsService
-    @Input() parameters: FormArray
+    @Input() parameters: FormArray;
     @Input() showEdit = false;
     @Input() parentParameters: InputParameterBase[];
     @Input() refreshEvent: Observable<void>;

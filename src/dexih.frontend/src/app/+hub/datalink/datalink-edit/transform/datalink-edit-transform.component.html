@@ -8,7 +8,7 @@
                 </form-input>
             </section>
             <section>
-                <form-textarea  label="Description" formControlName="description" placeholder="Enter the description."
+                <form-textarea  label="Description" formControlName="description"  [isHidden]="true" [showPreview]="true" placeholder="Enter the description."
                     [errors]="formErrors.description">
                 </form-textarea>
             </section>
@@ -109,7 +109,7 @@
     </form>
 </d-widget-section>
 
-<d-widget-section *ngIf="datalinkTransformForm && this.nodeType" title="Group Node" [showExpandButton]="true">
+<d-widget-section *ngIf="datalinkTransformForm && this.nodeType === eTransformType.Group" title="Group Node" [showExpandButton]="true">
     <form>
         <fieldset>
             <form-checkbox label="Group rows under a node" [ngModelOptions]="{standalone: true}" [(ngModel)]="allowNode" (ngModelChange)="toggleNode($event)"></form-checkbox>

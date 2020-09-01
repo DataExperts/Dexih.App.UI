@@ -1,10 +1,10 @@
 <div *ngIf="parameters" class="d-flex flex-wrap">
     <div *ngFor="let parameter of userParameters; let i = index" class="pr-1">
         <form-select *ngIf="parameter.listOfValuesKey > 0" [labelLeft]="parameter.name" [(ngModel)]="parameter.value"
-            itemKey="key" itemName="name" [items]="parameter.runTime.items"
+            itemKey="key" itemName="name" [items]="parameter['runTime'].items"
             [enableTextEntry]="! (parameter.listOfValuesKey > 0)" [textEntryItems]="parentParams"
             textEntryItemsTitle="Linked Parameters" (ngModelChange)="change(parameter)"
-            [showRefresh]="parameter.runTime.showRefresh" [isRefreshing]="parameter.runTime.isRefreshing"
+            [showRefresh]="parameter['runTime'].showRefresh" [isRefreshing]="parameter['runTime'].isRefreshing"
             (onRefresh)="refresh(parameter)" [multiSelect]="parameter.rank === 1">
         </form-select>
         <form-input *ngIf="!( parameter.listOfValuesKey > 0)" [labelLeft]="parameter.name" [(ngModel)]="parameter.value"

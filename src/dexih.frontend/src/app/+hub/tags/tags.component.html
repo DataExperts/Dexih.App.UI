@@ -12,7 +12,7 @@
                 (rowClick)="edit($event)"
                 rowStatusHeading="Color"
 				>
-				<ng-template #selectedItemAction select="selectedItemAction" let-hubVariable="item">
+				<ng-template #selectedItemAction select="selectedItemAction" let-item="item">
 					<d-button-edit class="mr-1" (click)="edit(item)"></d-button-edit>
 				</ng-template>
 
@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="form-row">
                                         <section class="col-md-12">
-                                            <form-textarea label="Description" [showPreview]="true" formControlName="description" placeholder="Enter the description." >
+                                            <form-textarea label="Description" [showPreview]="true" [isHidden]="true" formControlName="description" placeholder="Enter the description." >
                                             </form-textarea>
                                         </section>
                                     </div>

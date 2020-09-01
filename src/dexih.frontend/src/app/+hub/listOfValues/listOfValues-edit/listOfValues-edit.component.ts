@@ -21,7 +21,7 @@ export class ListOfValuesEditComponent implements OnInit, OnDestroy {
 
   private listOfValuesKey: number;
 
-  private hubCache: HubCache;
+  public hubCache: HubCache;
   public action: string; // new or edit
   public pageTitle: string;
   public params: Params;
@@ -171,7 +171,7 @@ export class ListOfValuesEditComponent implements OnInit, OnDestroy {
         if (datalink) {
           // get the outputs from the last transform in the datalink
           const ioColumns = new InputOutputColumns();
-          ioColumns.buildInputOutput(this.hubCache, datalink);
+          ioColumns.buildInputOutput(datalink);
           this.tableColumns = ioColumns.getDatalinkOutputColumns(datalink);
         } else {
           if (datalinkKey > 0) {

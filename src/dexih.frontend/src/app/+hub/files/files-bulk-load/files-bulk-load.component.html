@@ -98,7 +98,7 @@
         </ul>
     </d-widget>
 
-    <d-widget *ngIf="currentTable" [title]="'Edit table: ' + formsService.currentForm.controls.name.value" [showCloseButton]="true" (close)="closeTable()">
+    <d-widget *ngIf="currentTable" [title]="'Edit table: ' + formsService.currentForm.controls.name.value" [showCloseButton]="true" (close)="cancel()">
         <ng-template #header>
             <d-button-apply (click)="applyChanges()"></d-button-apply>
             <d-button-cancel class="ml-1" (click)="cancel()"></d-button-cancel>

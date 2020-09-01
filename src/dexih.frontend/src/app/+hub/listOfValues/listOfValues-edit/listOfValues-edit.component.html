@@ -11,12 +11,12 @@
 			<fieldset>
 				<section>
 					<form-input label="List of Values" formControlName="name"
-						placeholder="Enter the list of values name." [autocapitalize]="on" iconClass="fa fa-list"
+						placeholder="Enter the list of values name." [autocapitalize]="false" iconClass="fa fa-list"
 						[errors]="formsService.formErrors['name']">
 					</form-input>
 				</section>
 				<section>
-					<form-textarea label="Description" [showPreview]="true" formControlName="description"
+					<form-textarea label="Description" [showPreview]="true" [isHidden]="true" formControlName="description"
 						placeholder="Enter the description.">
 					</form-textarea>
 				</section>
@@ -31,7 +31,7 @@
 						<section class="form-group col-md-6"
 							*ngIf="formsService.currentForm.value.sourceType == eLOVObjectType.Table">
 							<form-select label="Source Table" formControlName="sourceTableKey"
-								[errors]="errors?.sourceTableKey" [items]="connectionTables" parentName="name"
+								[errors]="formsService.formErrors?.sourceTableKey" [items]="connectionTables" parentName="name"
 								childItems="dexihTables" itemKey="key" itemName="logicalName"
 								note="Select the source table">
 								<table-edit-button [key]="formsService.currentForm.controls.sourceTableKey.value"></table-edit-button>
@@ -40,7 +40,7 @@
 						<section class="form-group col-md-6"
 							*ngIf="formsService.currentForm.value.sourceType == eLOVObjectType.Datalink">
 							<form-select label="Source Datalink" formControlName="sourceDatalinkKey"
-								[errors]="errors?.sourceDatalinkKey" [items]="datalinks" itemKey="key" itemName="name"
+								[errors]="formsService.formErrors?.sourceDatalinkKey" [items]="datalinks" itemKey="key" itemName="name"
 								note='Select the source datalink'>
 								<datalink-edit-button [key]="formsService.currentForm.controls.sourceDatalinkKey.value"></datalink-edit-button>
 							</form-select>
@@ -84,7 +84,7 @@
 				<d-button-delete (click)="clear()" text="Clear All"></d-button-delete>
 			</ng-template>
 		
-			<form *ngFor="let itemForm of formsService.currentForm.controls.staticData.controls; let i = index;"
+			<form *ngFor="let itemForm of formsService.currentForm.controls.staticData['controls']; let i = index;"
 				[formGroup]="itemForm" class="flex-fill">
 				<div class="input-group">		
 					<div class="form-control p-0">
@@ -116,7 +116,7 @@
 		<ng-template [ngIf]="formsService.currentForm.value.sourceType !== eLOVObjectType.Static">
 			<d-widget-section title="Query Configuration" [showExpandButton]="true">
 				<query-builder [selectQuery]="formsService.currentForm.controls.selectQuery.value" [columns]="tableColumns"
-					[inputColumns]="inputColumns" [parameters]="null" (hasChanged)="hasChanged()" [refreshEvent]="refreshDataObservable" (onRefreshData)="refreshData()"></query-builder>
+					[parameters]="null" (hasChanged)="hasChanged()" [refreshEvent]="refreshDataObservable" (onRefreshData)="refreshData()"></query-builder>
 			</d-widget-section>
 		
 			<div *ngIf="!data" class="m-3">

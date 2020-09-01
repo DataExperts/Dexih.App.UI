@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Subscription, combineLatest} from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { AuthService } from '../../../+auth/auth.service';
 import { CancelToken } from '../../../+auth/auth.models';
 import { DexihMessageComponent } from '../../../shared/ui/dexihMessage';
-import { eSharedAccessItems, DexihIssue, eIssueTypeItems, eIssueSeverityItems, eIssueStatusItems, eIssueCategoryItems } from '../../../shared/shared.models';
+import { eSharedAccessItems, DexihIssue, eIssueTypeItems, eIssueSeverityItems, eIssueStatusItems, eIssueCategoryItems, DexihIssueComment } from '../../../shared/shared.models';
 import * as moment_ from 'moment';
 const moment = moment_;
 
@@ -40,8 +40,11 @@ export class IssueEditComponent implements OnInit, OnDestroy {
   disable = false;
 
   mainForm: FormGroup;
+  comments: FormArray;
   newComment: string;
   subTitle: string;
+
+  key: number;
 
   isNew = true;
 
@@ -97,19 +100,9 @@ export class IssueEditComponent implements OnInit, OnDestroy {
           this.isNew = true;
           this.disable = false;
         } else if (this.action === 'edit') {
-          let key = + params['issueKey'];
+          this.key = + params['issueKey'];
           this.isNew = false;
-          this.authService.getIssue(key, this.cancelToken).then(issue => {
-            this.issue = issue;
-            this.subTitle = 'Updated by ' + issue.userName + ' - ' + moment(issue.updateDate).calendar();
-            this.buildForm();
-
-            if (this.authService.getUser().isAdmin) {
-              this.disable = false;
-            } else {
-              this.disable = true;
-            }
-          });
+          this.refresh();
         }
       });
     } catch (e) {
@@ -121,6 +114,20 @@ export class IssueEditComponent implements OnInit, OnDestroy {
     if (this._subscription) { this._subscription.unsubscribe(); }
     if (this._valueChangesSubscription) { this._valueChangesSubscription.unsubscribe(); }
     this.cancelToken.cancel();
+  }
+
+  refresh() {
+    this.authService.getIssue(this.key, this.cancelToken).then(issue => {
+      this.issue = issue;
+      this.subTitle = 'Updated by ' + issue.userName + ' - ' + moment(issue.updateDate).calendar();
+      this.buildForm();
+
+      if (this.authService.getUser().isAdmin) {
+        this.disable = false;
+      } else {
+        this.disable = true;
+      }
+    });
   }
 
   save() {
@@ -152,22 +159,39 @@ export class IssueEditComponent implements OnInit, OnDestroy {
       });
   }
 
+  deleteComment(comment: DexihIssueComment) {
+    this.authService.deleteIssueComments([comment.key]).then(() => {
+        this.refresh()
+        this.dexihMessage.addSuccessMessage('Issue comment deleted.');
+    }).catch(reason => {
+      this.dexihMessage.addMessage(reason);
+    });
+  }
+
   cancel() {
     this.authService.navigateUp();
   }
 
   buildForm(): void {
+    this.comments = this.fb.array(this.issue.dexihIssueComments.map(c => {
+      return this.fb.group({
+        'key': [{value: c.key, disabled: false}, []],
+        'comment': [{value: c.comment, disabled: this.disable}, []],
+        'userName': [{value: c.userName, disabled: false}, []],
+        'updateDate': [{value: c.updateDate, disabled: false}, []],
+      });
+    }));
+
     this.mainForm = this.fb.group({
       'key': [{value: this.issue.key, disabled: this.disable}, []],
       'name': [{value: this.issue.name, disabled: this.disable}, [
         Validators.required,
         Validators.minLength(4),
         Validators.maxLength(50),
-      ]
-      ],
+      ]],
       'description': [{value: this.issue.description, disabled: this.disable}, [
         Validators.required,
-      ] ],
+      ]],
       'type': [{value: this.issue.type, disabled: this.disable}, []],
       'category': [{value: this.issue.category, disabled: this.disable}, []],
       'severity': [{value: this.issue.severity, disabled: this.disable}, []],
@@ -176,13 +200,7 @@ export class IssueEditComponent implements OnInit, OnDestroy {
       'userName': [{value: this.issue.userName, disabled: true}, []],
       'issueStatus': [{value: this.issue.issueStatus, disabled: false}, []],
       'gitHubLink': [{value: this.issue.gitHubLink, disabled: false}, []],
-      'dexihIssueComments': this.fb.array(this.issue.dexihIssueComments.map(c => {
-        return this.fb.group({
-          'comment': {value: c.comment, disabled: this.disable},
-          'userName': [{value: c.userName, disabled: true}, []],
-          'updateDate': {value: c.updateDate, disabled: true}
-        });
-      }))
+      'dexihIssueComments': this.comments
     });
 
     if (this._valueChangesSubscription) { this._valueChangesSubscription.unsubscribe(); }

@@ -38,6 +38,14 @@ export class IssueIndexComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.refresh();
+    }
+
+    ngOnDestroy() {
+       this.cancelToken.cancel();
+    }
+
+    refresh() {
         this.authService.getIssues(this.cancelToken).then(i => {
             const issues = i.map( issue => {
                 return {
@@ -57,12 +65,15 @@ export class IssueIndexComponent implements OnInit, OnDestroy {
         });
     }
 
-    ngOnDestroy() {
-       this.cancelToken.cancel();
-    }
-
     edit(issue: DexihIssue) {
         this.router.navigate(['edit', issue.key], {relativeTo: this.route});
+    }
+
+    delete(issues: DexihIssue[]) {
+        let issueKeys = issues.map(c => c.key);
+        this.authService.deleteIssues(issueKeys).then(() => {
+            this.refresh();
+        });
     }
 
     close() {

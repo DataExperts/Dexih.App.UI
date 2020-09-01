@@ -88,7 +88,6 @@
             </div>
 
             <br/>
-            <d-button-refresh *ngIf="uploader?.queue?.length == 1" (click)="importTable()" text='Import Table Columns' [busy]="updatingTable"></d-button-refresh>
             <section>
                 <form-input label="Max Import Levels" formControlName="maxImportLevels" placeholder="Enter the maximum node levels to query the json structure." iconClass="fa fa-file"
                     [errors]="formService.formErrors.maxImportLevels" note="Enter the maximum levels to query the json file.">

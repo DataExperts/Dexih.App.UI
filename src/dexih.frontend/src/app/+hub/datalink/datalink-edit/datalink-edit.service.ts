@@ -474,7 +474,7 @@ export class DatalinkEditService implements OnInit, OnDestroy {
 
                     let io = new InputOutputColumns();
                     // const datalinkColumns = io.getInputColumns(this._hubCache, datalink, null, []);
-                    io.buildInputOutput(this._hubCache, datalink);
+                    io.buildInputOutput(datalink);
 
                     let datalinkColumns: DexihDatalinkColumn[];
 

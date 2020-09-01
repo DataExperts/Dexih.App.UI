@@ -41,7 +41,7 @@
         [yAxis]="config.showYAxis" [legend]="config.showLegend" [legendPosition]="config.legendPosition" [showGridLines]="config.showGridLines"
         [showXAxisLabel]="config.showXAxisLabel" [showYAxisLabel]="config.showYAxisLabel"
         [xAxisLabel]="config.xAxisLabel" [yScaleMax]="config.yScaleMax" [yAxisLabel]="config.yAxisLabel" 
-        [barPadding]="config.barPadding ? config.barPadding : 3" [roundEdges]="config.roundEdges" [showDataLabel]="config.showDataLabel">
+        [barPadding]="config.barPadding ? config.barPadding : 3" [showDataLabel]="config.showDataLabel">
     </ngx-charts-bar-vertical-stacked>
 
     <ngx-charts-bar-horizontal-stacked *ngIf="chartType.key === eChartType.BarHorizontalStacked"
@@ -49,7 +49,7 @@
         [yAxis]="config.showYAxis" [legend]="config.showLegend" [legendPosition]="config.legendPosition" [showGridLines]="config.showGridLines"
         [showXAxisLabel]="config.showXAxisLabel" [showYAxisLabel]="config.showYAxisLabel"
         [xAxisLabel]="config.xAxisLabel" [xScaleMax]="config.xScaleMax" [yAxisLabel]="config.yAxisLabel"
-        [barPadding]="config.barPadding ? config.barPadding : 3" [roundEdges]="config.roundEdges" [showDataLabel]="config.showDataLabel">
+        [barPadding]="config.barPadding ? config.barPadding : 3" [showDataLabel]="config.showDataLabel">
     </ngx-charts-bar-horizontal-stacked>
 
     <ngx-charts-bar-vertical-normalized *ngIf="chartType.key === eChartType.BarVerticalNormalized"
@@ -57,7 +57,7 @@
         [yAxis]="config.showYAxis" [legend]="config.showLegend" [legendPosition]="config.legendPosition" [showGridLines]="config.showGridLines"
         [showXAxisLabel]="config.showXAxisLabel" [showYAxisLabel]="config.showYAxisLabel"
         [xAxisLabel]="config.xAxisLabel" [yAxisLabel]="config.yAxisLabel"
-        [barPadding]="config.barPadding ? config.barPadding : 3" [roundEdges]="config.roundEdges" [showDataLabel]="config.showDataLabel">
+        [barPadding]="config.barPadding ? config.barPadding : 3">
     </ngx-charts-bar-vertical-normalized>
 
     <ngx-charts-bar-horizontal-normalized *ngIf="chartType.key === eChartType.BarHorizontalNormalized"
@@ -65,7 +65,7 @@
         [yAxis]="config.showYAxis" [legend]="config.showLegend" [legendPosition]="config.legendPosition" [showGridLines]="config.showGridLines"
         [showXAxisLabel]="config.showXAxisLabel" [showYAxisLabel]="config.showYAxisLabel"
         [xAxisLabel]="config.xAxisLabel" [yAxisLabel]="config.yAxisLabel"
-        [barPadding]="config.barPadding ? config.barPadding : 3" [roundEdges]="config.roundEdges" [showDataLabel]="config.showDataLabel">
+        [barPadding]="config.barPadding ? config.barPadding : 3">
     </ngx-charts-bar-horizontal-normalized>
 
     <ngx-charts-pie-chart *ngIf="chartType.key === eChartType.Pie" [view]="view" [customColors]="customColors" [results]="results"
