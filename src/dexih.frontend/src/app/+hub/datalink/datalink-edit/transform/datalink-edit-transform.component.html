@@ -109,7 +109,7 @@
     </form>
 </d-widget-section>
 
-<d-widget-section *ngIf="datalinkTransformForm && this.nodeType === eTransformType.Group" title="Group Node" [showExpandButton]="true">
+<d-widget-section *ngIf="datalinkTransformForm && this.nodeType === eTransformItemType.GroupNode" title="Group Node" [showExpandButton]="true">
     <form>
         <fieldset>
             <form-checkbox label="Group rows under a node" [ngModelOptions]="{standalone: true}" [(ngModel)]="allowNode" (ngModelChange)="toggleNode($event)"></form-checkbox>
