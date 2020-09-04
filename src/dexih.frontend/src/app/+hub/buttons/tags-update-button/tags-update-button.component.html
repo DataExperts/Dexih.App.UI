@@ -1,5 +1,5 @@
-<ng-template [ngIf]="tags">
-    <d-button-dropdown buttonClass="btn-primary" iconClass="fa fa-tags" [text]="'Tag ' + objectTypeName + 's'" [pullRight]="pullRight">
+<ng-template [ngIf]="tags && tags.length > 0">
+    <d-button-dropdown buttonClass="btn-primary" iconClass="fa fa-tags" [text]="'Tag ' + objectTypeName + 's'">
         <a class="dropdown-item" (click)="delete()" title="Clear tags from selected {{objectTypeName}}s"><span class="text-danger"><i class="fa fa-trash-o text-danger"></i> Clear</span></a>
         <a *ngFor="let tag of tags" class="dropdown-item" >
             <div class="input-group">

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnDestroy, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Subscription} from 'rxjs';
 import { HubCache } from '../../hub.models';
 import { HubService } from '../../hub.service';
@@ -8,6 +8,7 @@ import { CancelToken } from '../../../+auth/auth.models';
 class TagState {
     public tag: DexihTag
     public isChecked = false;
+    
 }
 
 @Component({
@@ -15,6 +16,7 @@ class TagState {
     templateUrl: './tags-filter-button.component.html'
 })
 export class TagsFilterButtonComponent implements OnInit, OnDestroy {
+    @Input() public pullRight = false;
     @Output() public tags = new EventEmitter<DexihTag[]>();
 
     public hubCache: HubCache;
