@@ -17,7 +17,7 @@
         <fieldset>
 
           <section>
-            <form-input label="Email" formControlName="email" iconClass="fa fa-envelope">
+            <form-input label="Email" formControlName="email" iconClass="fa fa-envelope" [errors]="formsService.formErrors.email">
             </form-input>
             <div class="note">
               <a routerLink="/auth/login">I remembered my password!</a>
@@ -59,7 +59,7 @@
       <div class="card-body">
         <fieldset>
           <section>
-            <form-input label="Verification Code" formControlName="verificationCode" iconClass="fa fa-lock">
+            <form-input label="Verification Code" formControlName="verificationCode" iconClass="fa fa-lock" [errors]="formsService.formErrors.verificationCode">
             </form-input>
           </section>
 

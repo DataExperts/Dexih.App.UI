@@ -81,7 +81,7 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
 
                 if (this.datalinkForm) {
 
-                    let transformsArray = (<FormArray>this.datalinkForm.controls.dexihDatalinkTransforms);
+                    let transformsArray = <FormArray>this.datalinkForm.controls.dexihDatalinkTransforms;
 
                     if (this._transformsArraySubscription) { this._transformsArraySubscription.unsubscribe(); }
                     this._transformsArraySubscription = transformsArray.valueChanges.subscribe(transforms => {

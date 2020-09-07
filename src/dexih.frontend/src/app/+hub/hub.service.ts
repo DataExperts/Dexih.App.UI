@@ -242,8 +242,7 @@ export class HubService implements OnInit, OnDestroy {
             this._hubCache.next(new HubCache(eCacheStatus.Loading, this.createHub(hubKey, name)));
 
             try {
-                let result = await this.hubPost<{permission: ePermission, hub: DexihHub}>
-                ('/api/Hub/GetHubCache', {}, 'Loading the hub cache...')
+                let result = await this.hubPost<{permission: ePermission, hub: DexihHub}>('/api/Hub/GetHubCache', {}, 'Loading the hub cache...');
                 let hub: DexihHub = result.hub;
                 let permission = result.permission;
 

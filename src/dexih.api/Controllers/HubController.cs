@@ -24,7 +24,6 @@ using dexih.functions.BuiltIn;
 using dexih.functions.Parameter;
 using dexih.functions.Query;
 using dexih.remote.operations;
-using dexih.transforms.View;
 using Dexih.Utils.DataType;
 
 namespace dexih.api.Controllers

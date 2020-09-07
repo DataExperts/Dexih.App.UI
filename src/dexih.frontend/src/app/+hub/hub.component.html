@@ -1,6 +1,6 @@
 <div id="content">
     <section *ngIf="!hubCache || (hubCache.status != eCacheStatus.Loaded && hubCache.status != eCacheStatus.Error)">
-        <div *ngIf="!showIf" class="dexih-loader-container">
+        <div class="dexih-loader-container">
             <div class="dexih-loader"></div>
             <div class="dexih-loader-text">Loading the hub ...</div>
         </div>

@@ -1,34 +1,30 @@
-﻿using dexih.functions;
-using dexih.repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
+﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 using dexih.api.Hubs;
 using dexih.api.Models;
 using dexih.api.Services.Operations;
 using dexih.api.Services.Remote.Exceptions;
-using dexih.operations;
-using Dexih.Utils.Crypto;
+using dexih.functions;
 using dexih.functions.Query;
+using dexih.operations;
 using dexih.remote;
 using dexih.remote.operations;
+using dexih.repository;
 using dexih.transforms;
 using dexih.transforms.View;
+using Dexih.Utils.Crypto;
 using Dexih.Utils.DataType;
 using Dexih.Utils.ManagedTasks;
-using static dexih.operations.DownloadData;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Caching.Distributed;
-
-
-
+using Microsoft.Extensions.Logging;
 
 namespace dexih.api.Services.Remote
 {
@@ -687,7 +683,7 @@ namespace dexih.api.Services.Remote
         }
 
 	    
-	    public async Task<string> DownloadTableData(string id, long hubKey, DownloadUrl downloadUrl, string connectionId, DexihTable hubTable, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters,  bool showRejectedData, EDownloadFormat downloadFormat, bool zipFiles, RepositoryManager database, CancellationToken cancellationToken)
+	    public async Task<string> DownloadTableData(string id, long hubKey, DownloadUrl downloadUrl, string connectionId, DexihTable hubTable, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters,  bool showRejectedData, DownloadData.EDownloadFormat downloadFormat, bool zipFiles, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    try
 		    {
@@ -697,7 +693,7 @@ namespace dexih.api.Services.Remote
 			    var cache = new CacheManager(hubKey, hub.EncryptionKey);
 			    cache.AddTable(hubTable, hub);
 
-			    var downloadObject = new DownloadObject()
+			    var downloadObject = new DownloadData.DownloadObject()
 			    {
 				    InputColumns = inputColumns,
 				    InputParameters = inputParameters,
@@ -726,7 +722,7 @@ namespace dexih.api.Services.Remote
 		    }
 	    }
 	    
-	    public async Task<string> DownloadDatalinkData(string id, long hubKey, DownloadUrl downloadUrl, string connectionId, DexihDatalink hubDatalink, long datalinkTransformKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, EDownloadFormat downloadFormat, bool zipFiles, RepositoryManager database, CancellationToken cancellationToken)
+	    public async Task<string> DownloadDatalinkData(string id, long hubKey, DownloadUrl downloadUrl, string connectionId, DexihDatalink hubDatalink, long datalinkTransformKey, SelectQuery selectQuery, InputColumn[] inputColumns, InputParameters inputParameters, DownloadData.EDownloadFormat downloadFormat, bool zipFiles, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    try
 		    {
@@ -736,7 +732,7 @@ namespace dexih.api.Services.Remote
 			    var cache = new CacheManager(hubKey, hub.EncryptionKey);
 			    cache.AddDatalink(hubDatalink, hub);
 
-			    var downloadObject = new DownloadObject()
+			    var downloadObject = new DownloadData.DownloadObject()
 			    {
 				    InputColumns = inputColumns,
 				    InputParameters = inputParameters,
@@ -768,7 +764,7 @@ namespace dexih.api.Services.Remote
 
 	    public async Task<string> DownloadTableKeyData(string instanceId, long hubKey, DownloadUrl downloadUrl,
 		    string connectionId, long tableKey, SelectQuery selectQuery, InputColumn[] inputColumns,
-		    InputParameters inputParameters, bool showRejectedData, bool isShared, EDownloadFormat downloadFormat,
+		    InputParameters inputParameters, bool showRejectedData, bool isShared, DownloadData.EDownloadFormat downloadFormat,
 		    bool zipFiles, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    var hub = await database.GetHub(hubKey, cancellationToken);
@@ -785,7 +781,7 @@ namespace dexih.api.Services.Remote
 
 	    public async Task<string> DownloadDatalinkKeyData(string instanceId, long hubKey, DownloadUrl downloadUrl,
 		    string connectionId, long datalinkKey, long datalinkTransformKey, SelectQuery selectQuery,
-		    InputColumn[] inputColumns, InputParameters parameters, bool isShared, EDownloadFormat downloadFormat,
+		    InputColumn[] inputColumns, InputParameters parameters, bool isShared, DownloadData.EDownloadFormat downloadFormat,
 		    bool zipFiles, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    var hub = await database.GetHub(hubKey, cancellationToken);
@@ -1034,7 +1030,7 @@ namespace dexih.api.Services.Remote
             }
         }
 
-        public async Task<string> DownloadData(string id, long hubKey, DownloadUrl downloadUrl, string connectionId, DownloadObject[] downloadObjects, EDownloadFormat downloadFormat, bool isShared, bool zipFiles, RepositoryManager database, CancellationToken cancellationToken)
+        public async Task<string> DownloadData(string id, long hubKey, DownloadUrl downloadUrl, string connectionId, DownloadData.DownloadObject[] downloadObjects, DownloadData.EDownloadFormat downloadFormat, bool isShared, bool zipFiles, RepositoryManager database, CancellationToken cancellationToken)
         {
             try
             {

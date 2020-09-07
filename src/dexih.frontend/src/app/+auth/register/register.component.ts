@@ -21,6 +21,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   message: string;
   googleMessage: string;
+  microsoftMessage: string;
   verificationCode: string;
 
   public loginType = eLoginProvider.Dexih;
@@ -119,11 +120,17 @@ export class RegisterComponent implements OnInit, OnDestroy {
     if (this._queryParamSubscription) { this._queryParamSubscription.unsubscribe(); }
   }
 
+  resetMessage() {
+    this.message = '';
+    this.googleMessage = '';
+    this.microsoftMessage = '';
+  }
+
   enablePassword() {
     this.formsService.currentForm.controls.email.enable();
     this.formsService.currentForm.controls.provider.setValue(eLoginProvider.Dexih);
     Functions.setCookie('LoginType', eLoginProvider.Dexih.toString());
-    this.message = '';
+    this.resetMessage();
     this.loginType = eLoginProvider.Dexih;
     this.formsService.currentForm.controls.providerKey.setValue(null);
     this.formsService.currentForm.controls.authenticationToken.setValue(null);
@@ -134,15 +141,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.formsService.currentForm.controls.email.setValue('');
     this.formsService.currentForm.controls.provider.setValue(eLoginProvider.Google);
     // this.formsService.currentForm.controls.email.disable();
-    this.message = '';
     Functions.setCookie('LoginType', eLoginProvider.Google.toString());
+    this.resetMessage();
     this.loginType = eLoginProvider.Google;
     this.authService.googleEnable().then(
       externalLogin => {
         this.setExternalLogin(externalLogin);
       }).catch(
         reason => {
-          this.message = reason.message;
+          this.googleMessage = reason.message;
         });
   }
 
@@ -150,15 +157,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.formsService.currentForm.controls.email.setValue('');
     this.formsService.currentForm.controls.provider.setValue(eLoginProvider.Microsoft);
     // this.formsService.currentForm.controls.email.disable();
-    this.message = '';
     this.loginType = eLoginProvider.Microsoft;
     Functions.setCookie('LoginType', eLoginProvider.Microsoft.toString());
+    this.resetMessage();
     this.authService.microsoftEnable().then(
       externalLogin => {
         this.setExternalLogin(externalLogin);
       }).catch(
         reason => {
-          this.message = reason.message;
+          this.microsoftMessage = reason.message;
         });
   }
 

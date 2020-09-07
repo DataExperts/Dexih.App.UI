@@ -1,4 +1,4 @@
-import { HostListener, Component, OnInit, OnDestroy, ɵSWITCH_VIEW_CONTAINER_REF_FACTORY__POST_R3__ } from '@angular/core';
+import { HostListener, Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd, Params } from '@angular/router';
 import { HubService } from '../../hub.service';
 import { DatalinkEditService } from './datalink-edit.service';
@@ -10,7 +10,6 @@ import { HubCache, eCacheStatus } from '../../hub.models';
 import { DexihDatalinkTransform, eTransformWriterMethod, DexihDatalink, eDatalinkType,
     eSourceType, eTransformType, DexihDatalinkTable } from '../../../shared/shared.models';
 import { transformTypes } from '../../hub.remote.models';
-import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
     selector: 'dexih-datalink-edit-form',
@@ -203,8 +202,6 @@ export class DatalinkEditComponent implements OnInit, OnDestroy {
         }
 
         this.isLoaded = true;
-
-        
 
         // monitor for any changes to the datalink
         if (this._datalinkFormSubscription) { this._datalinkFormSubscription.unsubscribe(); }

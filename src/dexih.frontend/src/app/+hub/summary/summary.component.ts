@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HubCache, sharedObjectProperties } from '../hub.models';
+import { HubCache, sharedObjectProperties, eCacheStatus } from '../hub.models';
 import { HubService } from '../hub.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { logoSmallUrl } from '../../+auth/auth.models';
-import { trigger, state, style, transition, animate } from '@angular/animations';
 import { DexihActiveAgent, eConnectionPurpose } from '../../shared/shared.models';
 import { AuthService } from '../../+auth/auth.service';
 
@@ -27,6 +26,8 @@ export class SummaryComponent implements OnInit, OnDestroy {
   logoSmallUrl = logoSmallUrl;
   sharedObjectProperties = sharedObjectProperties;
 
+  eCacheStatus = eCacheStatus;
+  
   public noManagedConnection = false;
   constructor(public hubService: HubService, public authService: AuthService) { }
 

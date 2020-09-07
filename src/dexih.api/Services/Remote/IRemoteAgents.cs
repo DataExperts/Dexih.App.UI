@@ -3,7 +3,6 @@ using dexih.functions.Query;
 using dexih.operations;
 using dexih.repository;
 using Dexih.Utils.ManagedTasks;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using dexih.api.Models;

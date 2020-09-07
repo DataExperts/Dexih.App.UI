@@ -32,9 +32,11 @@
 			<div class="dropdown-divider"></div>			
 			<a class="dropdown-item" routerLink="/public">Public Data Sets</a>
 			<div class="dropdown-divider"></div>			
-			<a class="dropdown-item" routerLink="/auth/privacy">Privacy Policy</a>
+			<a class="dropdown-item" routerLink="/auth/help" [queryParams]="{'path': 'policies/privacy.md'}">Privacy Policy</a>
 			<a class="dropdown-item" routerLink="/auth/terms">Terms and Conditions</a>
 			<a class="dropdown-item" routerLink="/auth/help">Help</a>
+			<div class="dropdown-divider"></div>			
+			<a class="dropdown-item" href="https:/dataexpertsgroup.com">Visit Data Experts Home</a>
 		</d-button-dropdown>
 	</form>
 </nav>

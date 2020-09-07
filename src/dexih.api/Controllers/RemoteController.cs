@@ -1,12 +1,4 @@
-﻿using dexih.api.Services;
-using dexih.api.Services.Remote;
-using dexih.repository;
-using Dexih.Utils.MessageHelpers;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -16,20 +8,29 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Dexih.Utils.Crypto;
 using Certes;
 using Certes.Acme;
 using Certes.Acme.Resource;
 using dexih.api.Models;
+using dexih.api.Services;
 using dexih.api.Services.Operations;
+using dexih.api.Services.Remote;
 using dexih.api.Services.Remote.Exceptions;
 using dexih.functions;
+using dexih.operations;
 using dexih.remote.operations;
+using dexih.repository;
 using Dexih.Utils.CopyProperties;
+using Dexih.Utils.Crypto;
+using Dexih.Utils.MessageHelpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
 using Directory = System.IO.Directory;
 
@@ -126,7 +127,7 @@ namespace dexih.api.Controllers
             return csvList
                 .TrimEnd(',')
                 .Split(',')
-                .AsEnumerable<string>()
+                .AsEnumerable()
                 .Select(s => s.Trim())
                 .ToList();
         }
@@ -337,17 +338,17 @@ namespace dexih.api.Controllers
 
                     switch (managedTask.Category)
                     {
-                        case "Datalink":
+                        case Constants.Datalink:
                             await _operations.BroadcastHubMessageAsync(managedTask.ReferenceKey, EClientCommand.DatalinkProgress, managedTask, cancellationToken);
                             break;
-                        case "Datajob":
+                        case Constants.Datajob:
                             await _operations.BroadcastHubMessageAsync(managedTask.ReferenceKey, EClientCommand.DatajobProgress, managedTask, cancellationToken);
                             break;
-                        case "DatalinkTest":
-                        case "DatalinkTestSnapshot":
+                        case Constants.DatalinkTest:
+                        case Constants.DatalinkTestSnapshot:
                             await _operations.BroadcastHubMessageAsync(managedTask.ReferenceKey, EClientCommand.DatalinkTestProgress, managedTask, cancellationToken);
                             break;
-                        case "Table":
+                        case Constants.Table:
                             await _operations.BroadcastHubMessageAsync(managedTask.ReferenceKey, EClientCommand.TableProgress, managedTask, cancellationToken);
                             break;
                     }
@@ -372,7 +373,7 @@ namespace dexih.api.Controllers
             {
                 if (string.IsNullOrEmpty(apiData.SecurityToken))
                 {
-                    return new ReturnValue(false, $"Could not update api status as no securityToken was provided by the remote agent.", null );
+                    return new ReturnValue(false, $"Could not update api status as no security token was provided by the remote agent.", null );
                 }
 
                 //send any update to results to the clients

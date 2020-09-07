@@ -37,7 +37,8 @@ export class ForgotComponent implements OnInit, OnDestroy {
 
         const registerForm = this.fb.group({
             'email': [email, [
-              Validators.required
+              Validators.required,
+              Validators.email
             ]],
             'verificationCode': [verificationCode, [
                 Validators.required
@@ -81,13 +82,19 @@ export class ForgotComponent implements OnInit, OnDestroy {
   }
 
   submitCodeRequest() {
-    let email = this.formsService.currentForm.controls.email.value;
-    this.userService.forgotPassword(email).then(result =>  {
-        this.codeSent = true;
-        this.message = 'Email has been sent with instructions for resetting password.';
-    }).catch(reason => {
-      this.message = reason.message;
-    });
+    this.formsService.currentForm.updateValueAndValidity();
+    
+    if (this.formsService.currentForm.valid) {
+      let email = this.formsService.currentForm.controls.email.value;
+      this.userService.forgotPassword(email).then(result =>  {
+          this.codeSent = true;
+          this.message = 'Email has been sent with instructions for resetting password.';
+      }).catch(reason => {
+        this.message = reason.message;
+      });
+    } else {
+      this.formsService.showAllErrors = true;
+    }
   }
 
     submitPasswordReset() {
