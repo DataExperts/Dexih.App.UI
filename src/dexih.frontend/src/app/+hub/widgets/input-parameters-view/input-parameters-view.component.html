@@ -1,7 +1,7 @@
 <div *ngIf="parameters">
-    <span *ngFor="let parameter of parameters" class="input-group">
-        <form-input [disabled]="true" [labelLeft]="parameter.name" [(ngModel)]="parameter.name">
-        </form-input>
+    <span *ngFor="let parameter of userParameters" class="input-group">
+        <!-- <form-input [disabled]="true" [labelLeft]="parameter.name" [(ngModel)]="parameter.name">
+        </form-input> -->
         <form-select [labelLeft]="parameter.name" [(ngModel)]="parameter.value" itemKey="key" itemName="name"
             [items]="parameter['runTime'].items" [enableTextEntry]="! (parameter.listOfValuesKey > 0)"
             [textEntryItems]="parentParams" textEntryItemsTitle="Linked Parameters"

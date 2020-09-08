@@ -21,7 +21,7 @@
                 <button *ngIf="showSave" type="button" class="btn btn-default" [ngClass]="{disabled : disableSave}" (click)="buttonClick(eButton.Save)">Save</button>
                 <button *ngIf="showOk" type="button" class="btn btn-default" [ngClass]="{disabled : disableOk}" (click)="buttonClick(eButton.Ok)">Ok</button>
                 <button *ngIf="showClose" type="button" class="btn btn-default" (click)="buttonClick(eButton.Close)">Close</button>
-                <button *ngIf="showCancel" type="button" class="btn btn-warning" (click)="buttonClick(eButton.Cancel)">Cancel</button>
+                <button *ngIf="showCancel" type="button" class="btn btn-danger" (click)="buttonClick(eButton.Cancel)">Cancel</button>
             </div>
         </div>
 

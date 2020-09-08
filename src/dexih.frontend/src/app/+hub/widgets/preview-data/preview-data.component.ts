@@ -27,6 +27,9 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
 
     private refreshDataSubject: Subject<void> = new Subject<void>();
     public refreshDataObservable = this.refreshDataSubject.asObservable();
+
+    private requiresRefreshDataSubject: Subject<void> = new Subject<void>();
+    public requiresRefreshDataObservable = this.requiresRefreshDataSubject.asObservable();
     
     public action: string; // new or edit
     public pageTitle: string;
@@ -171,7 +174,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
     }
 
     parameterChange() {
-        
+        this.requiresRefreshDataSubject.next();
     }
 
     refresh() {

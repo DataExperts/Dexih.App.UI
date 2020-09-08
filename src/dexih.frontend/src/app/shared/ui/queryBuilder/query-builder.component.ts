@@ -17,12 +17,14 @@ export class QueryBuilderComponent implements OnInit, OnChanges, OnDestroy {
     @Input() inputColumns: InputColumn[];
     @Input() parameters: DexihInputParameter[];
     @Input() refreshEvent: Observable<void>;
+    @Input() requiresRefreshEvent: Observable<void>;
 
     @Output() hasChanged = new EventEmitter();
     @Output() onRefreshData = new EventEmitter();
 
     private _refreshSubscription: Subscription;
-
+    private _requiresRefreshSubscription: Subscription;
+    
     selectColumns: SelectColumn[];
     sortColumns: any[];
 
@@ -33,9 +35,9 @@ export class QueryBuilderComponent implements OnInit, OnChanges, OnDestroy {
     typeCodes = TypeCodes;
     eCompare = eCompare;
 
-    variables: string[];
-
     requiresRefresh = false;
+
+    variables: string[];
 
     constructor() { }
 
@@ -55,11 +57,16 @@ export class QueryBuilderComponent implements OnInit, OnChanges, OnDestroy {
             this.requiresRefresh = false;
         });
 
+        this._requiresRefreshSubscription = this.requiresRefreshEvent.subscribe(() => {
+            this.requiresRefresh = true;
+        });
+
         this.allRows = this.selectQuery.rows < 0 ? true : false;
     }
 
     ngOnDestroy() {
         if (this._refreshSubscription) { this._refreshSubscription.unsubscribe(); }
+        if (this._requiresRefreshSubscription) { this._requiresRefreshSubscription.unsubscribe(); }
     }
 
     ngOnChanges(changed: SimpleChanges) {

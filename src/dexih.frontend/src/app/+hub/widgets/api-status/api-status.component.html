@@ -3,7 +3,7 @@
                 <i class="fa fa-{{statusIcon}}"></i>
             <div class="d-inline">{{apiData.apiStatus}} endpoint:</div>
             <div class="d-inline">{{apiData.successCount}} success, {{apiData.errorCount}} errors.</div>
-            <a *ngIf="apiData.apiStatus === eApiStatus.Activated" class="btn btn-sm btn-warning float-right" title="Deactivate the Api" (click)="deactivate()">
+            <a *ngIf="apiData.apiStatus === eApiStatus.Activated" class="btn btn-sm btn-danger float-right" title="Deactivate the Api" (click)="deactivate()">
                 <i class="fa fa-ban"></i>
             </a>
             <a  *ngIf="apiData.apiStatus !== eApiStatus.Activated" class="btn btn-sm btn-success float-right" title="Activate the Api" (click)="activate()">

@@ -1,5 +1,3 @@
-<!--<button class="btn btn-primary" [ngClass]="{disabled : savingDatalink || datalinkForm?.pristine }" (click)="!savingDatalink && saveDatalink()"><i *ngIf="savingDatalink" class="fa fa-spin fa-cog"></i> Save Changes</button>
-<button class="btn btn-warning" [ngClass]="{disabled : savingDatalink}" (click)="!savingDatalink && cancel()">Cancel</button>-->
 <dexih-invalid-form-details class="mr-1" [control]="datalinkForm"></dexih-invalid-form-details>
 <d-button-splitdropdown *ngIf="hubCache.canWrite" [disabled]="!editDatalinkService.hubFormsService.hasChanged" buttonClass="btn-primary" iconClass="fa fa-cloud-download" text="Save" (buttonClick)="saveDatalink(false)" class="mr-1">
     <li><a class="dropdown-item" (click)="saveDatalink(false)" title="Save in the hub"><i class="fa  fa-cloud-download"></i> Save</a></li>
