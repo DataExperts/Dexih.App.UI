@@ -44,13 +44,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -110,7 +110,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -122,7 +122,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -158,7 +158,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -382,7 +382,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true)("isHidden", true);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](6);
 
@@ -703,7 +703,7 @@
 
               if (datalink) {
                 var ioColumns = new _hub_lineage_models__WEBPACK_IMPORTED_MODULE_7__["InputOutputColumns"]();
-                ioColumns.buildInputOutput(this.hubCache, datalink);
+                ioColumns.buildInputOutput(datalink);
                 this.tableColumns = ioColumns.getDatalinkOutputColumns(datalink);
                 this.inputColumns = this.getInputColumns(datalink.sourceDatalinkTable.dexihDatalinkColumns);
               } else {
@@ -826,7 +826,7 @@
         features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([_hub_forms_service__WEBPACK_IMPORTED_MODULE_5__["HubFormsService"]])],
         decls: 17,
         vars: 16,
-        consts: [[1, "container"], ["title", "Edit API", "iconClass", "fa fa-lg fa-fw fa-feed", 3, "showCloseButton", "padding", "close"], ["header", ""], ["title", "Properties", 3, "showExpandButton"], [3, "formGroup", 4, "ngIf"], ["title", "Parameters", 3, "showExpandButton", "padding", 4, "ngIf"], ["title", "Data", 3, "showExpandButton"], ["class", "d-flex flex-wrap pt-1", 4, "ngIf"], [3, "selectQuery", "columns", "inputColumns", "parameters", "refreshEvent", "onRefreshData"], [3, "enableMultiSelect", "enableSaveCsv", "columns", "data"], ["actions", ""], ["title", "Connections", "path", "/assets/help/reference/api.md", 1, "m-3"], [1, "mr-1", 3, "control", "click"], [1, "mr-1", 3, "download"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [3, "formsService"], [1, "mr-1", 3, "formsService"], [3, "formGroup"], ["label", "Api Name", "formControlName", "name", "placeholder", "Enter the api name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Auto Start", "formControlName", "autoStart", "note", "Re-start the API when the remote agent is restarted."], ["label", "Log Directory", "formControlName", "logDirectory", "placeholder", "Enter a directory to log api updates.", "iconClass", "fa fa-list", "note", "Directory to create detailed logs of API calls.  Leave blank to exclude file logging.", 3, "errors"], ["label", "Cache Queries", "formControlName", "cacheQueries", "note", "Cache API called to improve performance"], ["label", "Reset Cache Interval", "formControlName", "cacheResetInterval", "note", "The interval to reset the cache (forcing a reload of new data).", 3, "errors"], ["label", "Data Source Type", "formControlName", "sourceType", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "Specify the source type for this view", 3, "items", "enableFilter"], ["class", "form-group col-md-6", 4, "ngIf"], ["label", "Source Table", "formControlName", "sourceTableKey", "parentName", "name", "childItems", "dexihTables", "itemKey", "key", "itemName", "logicalName", "note", "Select the source table", 3, "errors", "items"], [3, "key"], ["label", "Source Datalink", "formControlName", "sourceDatalinkKey", "itemKey", "key", "itemName", "name", "note", "Select the source datalink", 3, "errors", "items"], ["title", "Parameters", 3, "showExpandButton", "padding"], [3, "showEdit", "parameters", "formsService"], [1, "d-flex", "flex-wrap", "pt-1"], ["class", "input-group", 4, "ngFor", "ngForOf"], [1, "input-group"], [1, "input-group-prepend"], [1, "input-group-text"], [1, "form-control", "p-0", 3, "name", "placeholder", "ngModel", "ngModelChange"], ["text", "Reload", 1, "mr-1", 3, "click"]],
+        consts: [[1, "container"], ["title", "Edit API", "iconClass", "fa fa-lg fa-fw fa-feed", 3, "showCloseButton", "padding", "close"], ["header", ""], ["title", "Properties", 3, "showExpandButton"], [3, "formGroup", 4, "ngIf"], ["title", "Parameters", 3, "showExpandButton", "padding", 4, "ngIf"], ["title", "Data", 3, "showExpandButton"], ["class", "d-flex flex-wrap pt-1", 4, "ngIf"], [3, "selectQuery", "columns", "inputColumns", "parameters", "refreshEvent", "onRefreshData"], [3, "enableMultiSelect", "enableSaveCsv", "columns", "data"], ["actions", ""], ["title", "Connections", "path", "/assets/help/reference/api.md", 1, "m-3"], [1, "mr-1", 3, "control", "click"], [1, "mr-1", 3, "download"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [3, "formsService"], [1, "mr-1", 3, "formsService"], [3, "formGroup"], ["label", "Api Name", "formControlName", "name", "placeholder", "Enter the api name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview", "isHidden"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Auto Start", "formControlName", "autoStart", "note", "Re-start the API when the remote agent is restarted."], ["label", "Log Directory", "formControlName", "logDirectory", "placeholder", "Enter a directory to log api updates.", "iconClass", "fa fa-list", "note", "Directory to create detailed logs of API calls.  Leave blank to exclude file logging.", 3, "errors"], ["label", "Cache Queries", "formControlName", "cacheQueries", "note", "Cache API called to improve performance"], ["label", "Reset Cache Interval", "formControlName", "cacheResetInterval", "note", "The interval to reset the cache (forcing a reload of new data).", 3, "errors"], ["label", "Data Source Type", "formControlName", "sourceType", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "Specify the source type for this view", 3, "items", "enableFilter"], ["class", "form-group col-md-6", 4, "ngIf"], ["label", "Source Table", "formControlName", "sourceTableKey", "parentName", "name", "childItems", "dexihTables", "itemKey", "key", "itemName", "logicalName", "note", "Select the source table", 3, "errors", "items"], [3, "key"], ["label", "Source Datalink", "formControlName", "sourceDatalinkKey", "itemKey", "key", "itemName", "name", "note", "Select the source datalink", 3, "errors", "items"], ["title", "Parameters", 3, "showExpandButton", "padding"], [3, "showEdit", "parameters", "formsService"], [1, "d-flex", "flex-wrap", "pt-1"], ["class", "input-group", 4, "ngFor", "ngForOf"], [1, "input-group"], [1, "input-group-prepend"], [1, "input-group-text"], [1, "form-control", "p-0", 3, "name", "placeholder", "ngModel", "ngModelChange"], ["text", "Reload", 1, "mr-1", 3, "click"]],
         template: function ApiEditComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -841,7 +841,7 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "d-widget-section", 3);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, ApiEditComponent_form_5_Template, 24, 10, "form", 4);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, ApiEditComponent_form_5_Template, 24, 11, "form", 4);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -1007,7 +1007,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -1025,7 +1025,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -1049,7 +1049,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -1419,13 +1419,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -1485,7 +1485,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -1503,7 +1503,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -1909,7 +1909,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true)("isHidden", true);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
 
@@ -2161,7 +2161,7 @@
         features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([_hub_forms_service__WEBPACK_IMPORTED_MODULE_6__["HubFormsService"]])],
         decls: 5,
         vars: 3,
-        consts: [[1, "container"], ["title", "Edit Validation", "iconClass", "fa fa-lg fa-fw fa-check-square-o", 3, "showCloseButton", "padding", "close"], ["header", ""], [3, "formGroup", 4, "ngIf"], [1, "d-inline-flex"], [3, "ngIf"], [1, "mr-1", 3, "formsService"], [1, "mr-1", 3, "control", "click"], [4, "ngIf"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [1, "input-group", "mr-1"], [1, "input-group-prepend"], ["type", "button", 1, "btn", "btn-primary", 3, "click"], [1, "fa", "fa-check-circle-o"], ["type", "text", "placeholder", "Test value", "aria-label", "", "aria-describedby", "basic-addon1", 1, "form-control", 2, "max-width", "100px", 3, "ngModel", "ngModelChange"], [3, "formGroup"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Column Validation Name", "formControlName", "name", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Data Type", "formControlName", "dataType", "itemKey", "key", "itemName", "name", 3, "items"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview"], ["label", "Validation Fail Action", "formControlName", "invalidAction", "itemKey", "key", "itemName", "name", "note", "Action to take when the validation fails.", 3, "items"], ["class", "form-group col-md-6", 4, "ngIf"], ["label", "Ignore null values.", "formControlName", "allowDbNull"], ["class", "form-row", 4, "ngIf"], ["label", "Restrict to list of values", "formControlName", "listOfValues", "placeholder", "Provide a list of values which are valid."], ["label", "Excluded list of values", "formControlName", "listOfNotValues", "placeholder", "Provide a list of values which are valid."], ["label", "Restrict to values that exist in a lookup table column", "formControlName", "lookupColumnKey", "grandParentName", "name", "parentName", "name", "itemKey", "key", "itemName", "name", "childItems", "dexihTables", "grandChildItems", "dexihTableColumns", "note", "Checks the selected table column, and ensures the value contains at least one match.", 3, "items", "allowNullSelect"], ["label", "Only lookup values where the 'is current' column is true.", "formControlName", "lookupIsValid"], ["label", "Allow valid when lookup returns multiple rows.", "formControlName", "lookupMultipleRecords"], [1, "alert"], ["label", "Clean Action", "formControlName", "cleanAction", "itemKey", "key", "itemName", "name", "note", "Clean Action to apply", 3, "items"], ["label", "Clean Value", "formControlName", "cleanValue", "placeholder", "Enter the clean value.", "iconClass", "fa fa-list"], ["label", "Minimum String Length", "formControlName", "minLength", "placeholder", "Enter the minimum string length", "type", "number", "iconClass", "fa fa-list"], ["label", "Maximum String Length", "formControlName", "maxLength", "placeholder", "Enter the maximum string length", "type", "number", "iconClass", "fa fa-list"], ["label", "Simple Pattern Match", "formControlName", "patternMatch", "placeholder", "Provide a match string", "iconClass", "fa fa-list", "note", "Simple pattern match, use the format - A=Upper, a=Lower, Z=Any Character, 9=numeric.  (For example: AA999 matches AS123)"], ["label", "Regular Expression Match", "formControlName", "regexMatch", "placeholder", "Provide a regular expression", "iconClass", "fa fa-list", "note", "Use a standard regular expression to validate.  For example [A-Za-z0-9] will ensure string only contains characters and numbers."], ["label", "Minimum Value", "formControlName", "minValue", "placeholder", "Enter the minimum value", "type", "number", "iconClass", "fa fa-list"], ["label", "Maximum Value", "formControlName", "maxValue", "placeholder", "Enter the maximum value", "type", "number", "iconClass", "fa fa-list"]],
+        consts: [[1, "container"], ["title", "Edit Validation", "iconClass", "fa fa-lg fa-fw fa-check-square-o", 3, "showCloseButton", "padding", "close"], ["header", ""], [3, "formGroup", 4, "ngIf"], [1, "d-inline-flex"], [3, "ngIf"], [1, "mr-1", 3, "formsService"], [1, "mr-1", 3, "control", "click"], [4, "ngIf"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [1, "input-group", "mr-1"], [1, "input-group-prepend"], ["type", "button", 1, "btn", "btn-primary", 3, "click"], [1, "fa", "fa-check-circle-o"], ["type", "text", "placeholder", "Test value", "aria-label", "", "aria-describedby", "basic-addon1", 1, "form-control", 2, "max-width", "100px", 3, "ngModel", "ngModelChange"], [3, "formGroup"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Column Validation Name", "formControlName", "name", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Data Type", "formControlName", "dataType", "itemKey", "key", "itemName", "name", 3, "items"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview", "isHidden"], ["label", "Validation Fail Action", "formControlName", "invalidAction", "itemKey", "key", "itemName", "name", "note", "Action to take when the validation fails.", 3, "items"], ["class", "form-group col-md-6", 4, "ngIf"], ["label", "Ignore null values.", "formControlName", "allowDbNull"], ["class", "form-row", 4, "ngIf"], ["label", "Restrict to list of values", "formControlName", "listOfValues", "placeholder", "Provide a list of values which are valid."], ["label", "Excluded list of values", "formControlName", "listOfNotValues", "placeholder", "Provide a list of values which are valid."], ["label", "Restrict to values that exist in a lookup table column", "formControlName", "lookupColumnKey", "grandParentName", "name", "parentName", "name", "itemKey", "key", "itemName", "name", "childItems", "dexihTables", "grandChildItems", "dexihTableColumns", "note", "Checks the selected table column, and ensures the value contains at least one match.", 3, "items", "allowNullSelect"], ["label", "Only lookup values where the 'is current' column is true.", "formControlName", "lookupIsValid"], ["label", "Allow valid when lookup returns multiple rows.", "formControlName", "lookupMultipleRecords"], [1, "alert"], ["label", "Clean Action", "formControlName", "cleanAction", "itemKey", "key", "itemName", "name", "note", "Clean Action to apply", 3, "items"], ["label", "Clean Value", "formControlName", "cleanValue", "placeholder", "Enter the clean value.", "iconClass", "fa fa-list"], ["label", "Minimum String Length", "formControlName", "minLength", "placeholder", "Enter the minimum string length", "type", "number", "iconClass", "fa fa-list"], ["label", "Maximum String Length", "formControlName", "maxLength", "placeholder", "Enter the maximum string length", "type", "number", "iconClass", "fa fa-list"], ["label", "Simple Pattern Match", "formControlName", "patternMatch", "placeholder", "Provide a match string", "iconClass", "fa fa-list", "note", "Simple pattern match, use the format - A=Upper, a=Lower, Z=Any Character, 9=numeric.  (For example: AA999 matches AS123)"], ["label", "Regular Expression Match", "formControlName", "regexMatch", "placeholder", "Provide a regular expression", "iconClass", "fa fa-list", "note", "Use a standard regular expression to validate.  For example [A-Za-z0-9] will ensure string only contains characters and numbers."], ["label", "Minimum Value", "formControlName", "minValue", "placeholder", "Enter the minimum value", "type", "number", "iconClass", "fa fa-list"], ["label", "Maximum Value", "formControlName", "maxValue", "placeholder", "Enter the maximum value", "type", "number", "iconClass", "fa fa-list"]],
         template: function ColumnValidationEditComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -2174,7 +2174,7 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, ColumnValidationEditComponent_ng_template_2_Template, 3, 2, "ng-template", null, 2, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, ColumnValidationEditComponent_form_4_Template, 31, 15, "form", 3);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, ColumnValidationEditComponent_form_4_Template, 31, 16, "form", 3);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -2251,7 +2251,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -2269,7 +2269,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -2293,7 +2293,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -2311,7 +2311,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -2696,13 +2696,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -2762,7 +2762,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -2792,13 +2792,13 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
 
       var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
         function adopt(value) {
@@ -3728,11 +3728,11 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx_r2.connectionReference)("ngModelOptions", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](14, _c2))("items", ctx_r2.connectionTypes)("enableKeySelect", false)("sortItems", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx_r2.connectionReference)("ngModelOptions", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](15, _c2))("items", ctx_r2.connectionTypes)("enableKeySelect", false)("sortItems", true);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true)("errors", ctx_r2.formsService.formErrors.description);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true)("isHidden", true)("errors", ctx_r2.formsService.formErrors.description);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
@@ -4362,7 +4362,7 @@
         features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([_hub_forms_service__WEBPACK_IMPORTED_MODULE_6__["HubFormsService"]])],
         decls: 6,
         vars: 3,
-        consts: [[1, "container"], ["title", "Edit Connection", "iconClass", "fa fa-lg fa-fw fa-database", 3, "showCloseButton", "padding", "close"], ["header", ""], [3, "formGroup", 4, "ngIf"], ["title", "Connections", "path", "/assets/help/reference/connection.md", 1, "m-3"], [1, "mr-1", 3, "control", "click"], ["class", "mr-1", "buttonClass", "btn btn-success", "iconClass", "fa fa-thumbs-o-up", "title", "Test the connection against the source.", 3, "busy", "click", 4, "ngIf"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [3, "ngIf"], [3, "formsService"], ["buttonClass", "btn btn-success", "iconClass", "fa fa-thumbs-o-up", "title", "Test the connection against the source.", 1, "mr-1", 3, "busy", "click"], [1, "mr-1", 3, "formsService"], ["class", "mr-1", "iconClass", "fa fa-plus", 3, "routerLink", 4, "ngIf"], ["iconClass", "fa fa-plus", 1, "mr-1", 3, "routerLink"], [3, "formGroup"], ["id", "fake_user_name", "name", "fake_user[name]", "type", "text", "value", "Fake Auto-fill", 2, "position", "absolute", "top", "-5000px"], ["id", "fake_password", "type", "password", "name", "fake_password[password]", "type", "text", "value", "Fake Auto-fill", 2, "position", "absolute", "top", "-5000px"], ["label", "Purpose", "formControlName", "purpose", "placeholder", "Connection purpose", "iconClass", "fa fa-database", "itemName", "name", "itemKey", "key", 3, "items", "enableFilter", "errors"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Name", "formControlName", "name", "placeholder", "Enter a name for the connection", "iconClass", "fa fa-database", 3, "autocapitalize", "errors"], ["label", "Database Type", "itemName", "name", "itemKey", "name", "iconClass", "fa fa-database", 3, "ngModel", "ngModelOptions", "items", "enableKeySelect", "sortItems", "ngModelChange"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview", "errors"], [4, "ngIf"], [3, "data", "click"], ["type", "number", "label", "Connection Timeout", "formControlName", "connectionTimeout", "iconClass", "fa fa-clock-o", "note", "The duration in seconds the remote agent will wait to establish a connection.", 3, "errors"], ["type", "number", "label", "Command Timeout", "formControlName", "commandTimeout", "iconClass", "fa fa-clock-o", "note", "The duration in seconds the remote agent will for a command to start returning a result.", 3, "errors"], ["label", "Use a connection string", "formControlName", "useConnectionString"], ["label", "Connection String", "formControlName", "connectionStringDisplay", "placeholder", "Enter a the connection string", "iconClass", "fa fa-database", 3, "errors", "keydown", 4, "ngIf"], ["label", "Connection String", "formControlName", "connectionString", "iconClass", "fa fa-at", "textEntryNote", "Enter the variable name surrounded by {}", 3, "items", "sortItems", "enableTextEntry", 4, "ngIf"], ["label", "Use a variable for connection string", "formControlName", "useConnectionStringVariable", 3, "click"], ["label", "Connection String", "formControlName", "connectionStringDisplay", "placeholder", "Enter a the connection string", "iconClass", "fa fa-database", 3, "errors", "keydown"], ["href", "javascript:void(0)", 3, "click", 4, "ngIf"], ["href", "javascript:void(0)", 3, "click"], [1, "fa", "fa-refresh"], [1, "fa", "fa-spin", "fa-refresh"], ["label", "Connection String", "formControlName", "connectionString", "iconClass", "fa fa-at", "textEntryNote", "Enter the variable name surrounded by {}", 3, "items", "sortItems", "enableTextEntry"], ["formControlName", "server", "placeholder", "Enter the details.", "iconClass", "fa fa-server", 3, "enableTextEntry", "label", "errors", "items", "enableFilter", "note"], ["class", "form-row", 4, "ngIf"], ["ng-disabled", "refreshingConnection || creatingDatabase", 4, "ngIf"], ["label", "Use windows authentication", "formControlName", "useWindowsAuth"], ["label", "User Name", "formControlName", "username", "placeholder", "Enter user name", "iconClass", "fa fa-user", 3, "enableTextEntry", "errors", "items", "enableFilter"], ["label", "Password", "formControlName", "passwordDisplay", "type", "password", "placeholder", "Enter a password", "iconClass", "fa fa-lock", 3, "errors", "keydown", 4, "ngIf"], ["label", "Password", "formControlName", "password", "iconClass", "fa fa-at", 3, "items", "sortItems", "enableTextEntry", 4, "ngIf"], ["label", "Use a variable for password", "formControlName", "usePasswordVariable", 3, "click"], ["label", "Password", "formControlName", "passwordDisplay", "type", "password", "placeholder", "Enter a password", "iconClass", "fa fa-lock", 3, "errors", "keydown"], ["label", "Password", "formControlName", "password", "iconClass", "fa fa-at", 3, "items", "sortItems", "enableTextEntry"], ["label", "Secure Token", "formControlName", "passwordDisplay", "type", "password", "placeholder", "Enter secure token", "iconClass", "fa fa-lock", 3, "errors", "keydown", 4, "ngIf"], ["label", "Secure Token", "formControlName", "password", "iconClass", "fa fa-at", 3, "items", "sortItems", "enableTextEntry", 4, "ngIf"], ["label", "Use a variable for token", "formControlName", "usePasswordVariable", 3, "click"], ["label", "Secure Token", "formControlName", "passwordDisplay", "type", "password", "placeholder", "Enter secure token", "iconClass", "fa fa-lock", 3, "errors", "keydown"], ["label", "Secure Token", "formControlName", "password", "iconClass", "fa fa-at", 3, "items", "sortItems", "enableTextEntry"], ["ng-disabled", "refreshingConnection || creatingDatabase"], ["formControlName", "defaultDatabase", "iconClass", "fa fa-database", "textEntryNote", "Enter the database name", 3, "label", "items", "defaultItem", "sortItems", "enableTextEntry", "textValueChange"], [1, "fa", "fa-edit"], ["label", "Multi-use Managed Database (table keys will be added to table names to allow multiple hubs to use same database)", "formControlName", "embedTableKey", 3, "errors"]],
+        consts: [[1, "container"], ["title", "Edit Connection", "iconClass", "fa fa-lg fa-fw fa-database", 3, "showCloseButton", "padding", "close"], ["header", ""], [3, "formGroup", 4, "ngIf"], ["title", "Connections", "path", "/assets/help/reference/connection.md", 1, "m-3"], [1, "mr-1", 3, "control", "click"], ["class", "mr-1", "buttonClass", "btn btn-success", "iconClass", "fa fa-thumbs-o-up", "title", "Test the connection against the source.", 3, "busy", "click", 4, "ngIf"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [3, "ngIf"], [3, "formsService"], ["buttonClass", "btn btn-success", "iconClass", "fa fa-thumbs-o-up", "title", "Test the connection against the source.", 1, "mr-1", 3, "busy", "click"], [1, "mr-1", 3, "formsService"], ["class", "mr-1", "iconClass", "fa fa-plus", 3, "routerLink", 4, "ngIf"], ["iconClass", "fa fa-plus", 1, "mr-1", 3, "routerLink"], [3, "formGroup"], ["id", "fake_user_name", "name", "fake_user[name]", "type", "text", "value", "Fake Auto-fill", 2, "position", "absolute", "top", "-5000px"], ["id", "fake_password", "type", "password", "name", "fake_password[password]", "type", "text", "value", "Fake Auto-fill", 2, "position", "absolute", "top", "-5000px"], ["label", "Purpose", "formControlName", "purpose", "placeholder", "Connection purpose", "iconClass", "fa fa-database", "itemName", "name", "itemKey", "key", 3, "items", "enableFilter", "errors"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Name", "formControlName", "name", "placeholder", "Enter a name for the connection", "iconClass", "fa fa-database", 3, "autocapitalize", "errors"], ["label", "Database Type", "itemName", "name", "itemKey", "name", "iconClass", "fa fa-database", 3, "ngModel", "ngModelOptions", "items", "enableKeySelect", "sortItems", "ngModelChange"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview", "isHidden", "errors"], [4, "ngIf"], [3, "data", "click"], ["type", "number", "label", "Connection Timeout", "formControlName", "connectionTimeout", "iconClass", "fa fa-clock-o", "note", "The duration in seconds the remote agent will wait to establish a connection.", 3, "errors"], ["type", "number", "label", "Command Timeout", "formControlName", "commandTimeout", "iconClass", "fa fa-clock-o", "note", "The duration in seconds the remote agent will for a command to start returning a result.", 3, "errors"], ["label", "Use a connection string", "formControlName", "useConnectionString"], ["label", "Connection String", "formControlName", "connectionStringDisplay", "placeholder", "Enter a the connection string", "iconClass", "fa fa-database", 3, "errors", "keydown", 4, "ngIf"], ["label", "Connection String", "formControlName", "connectionString", "iconClass", "fa fa-at", "textEntryNote", "Enter the variable name surrounded by {}", 3, "items", "sortItems", "enableTextEntry", 4, "ngIf"], ["label", "Use a variable for connection string", "formControlName", "useConnectionStringVariable", 3, "click"], ["label", "Connection String", "formControlName", "connectionStringDisplay", "placeholder", "Enter a the connection string", "iconClass", "fa fa-database", 3, "errors", "keydown"], ["href", "javascript:void(0)", 3, "click", 4, "ngIf"], ["href", "javascript:void(0)", 3, "click"], [1, "fa", "fa-refresh"], [1, "fa", "fa-spin", "fa-refresh"], ["label", "Connection String", "formControlName", "connectionString", "iconClass", "fa fa-at", "textEntryNote", "Enter the variable name surrounded by {}", 3, "items", "sortItems", "enableTextEntry"], ["formControlName", "server", "placeholder", "Enter the details.", "iconClass", "fa fa-server", 3, "enableTextEntry", "label", "errors", "items", "enableFilter", "note"], ["class", "form-row", 4, "ngIf"], ["ng-disabled", "refreshingConnection || creatingDatabase", 4, "ngIf"], ["label", "Use windows authentication", "formControlName", "useWindowsAuth"], ["label", "User Name", "formControlName", "username", "placeholder", "Enter user name", "iconClass", "fa fa-user", 3, "enableTextEntry", "errors", "items", "enableFilter"], ["label", "Password", "formControlName", "passwordDisplay", "type", "password", "placeholder", "Enter a password", "iconClass", "fa fa-lock", 3, "errors", "keydown", 4, "ngIf"], ["label", "Password", "formControlName", "password", "iconClass", "fa fa-at", 3, "items", "sortItems", "enableTextEntry", 4, "ngIf"], ["label", "Use a variable for password", "formControlName", "usePasswordVariable", 3, "click"], ["label", "Password", "formControlName", "passwordDisplay", "type", "password", "placeholder", "Enter a password", "iconClass", "fa fa-lock", 3, "errors", "keydown"], ["label", "Password", "formControlName", "password", "iconClass", "fa fa-at", 3, "items", "sortItems", "enableTextEntry"], ["label", "Secure Token", "formControlName", "passwordDisplay", "type", "password", "placeholder", "Enter secure token", "iconClass", "fa fa-lock", 3, "errors", "keydown", 4, "ngIf"], ["label", "Secure Token", "formControlName", "password", "iconClass", "fa fa-at", 3, "items", "sortItems", "enableTextEntry", 4, "ngIf"], ["label", "Use a variable for token", "formControlName", "usePasswordVariable", 3, "click"], ["label", "Secure Token", "formControlName", "passwordDisplay", "type", "password", "placeholder", "Enter secure token", "iconClass", "fa fa-lock", 3, "errors", "keydown"], ["label", "Secure Token", "formControlName", "password", "iconClass", "fa fa-at", 3, "items", "sortItems", "enableTextEntry"], ["ng-disabled", "refreshingConnection || creatingDatabase"], ["formControlName", "defaultDatabase", "iconClass", "fa fa-database", "textEntryNote", "Enter the database name", 3, "label", "items", "defaultItem", "sortItems", "enableTextEntry", "textValueChange"], [1, "fa", "fa-edit"], ["label", "Multi-use Managed Database (table keys will be added to table names to allow multiple hubs to use same database)", "formControlName", "embedTableKey", 3, "errors"]],
         template: function ConnectionEditComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -4375,7 +4375,7 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, ConnectionEditComponent_ng_template_2_Template, 5, 5, "ng-template", null, 2, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, ConnectionEditComponent_form_4_Template, 14, 15, "form", 3);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, ConnectionEditComponent_form_4_Template, 14, 16, "form", 3);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -4483,7 +4483,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -4501,7 +4501,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -4537,13 +4537,13 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
       var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
         function adopt(value) {
@@ -5366,7 +5366,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -5384,7 +5384,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -5408,7 +5408,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -5432,7 +5432,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -6035,7 +6035,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -6065,7 +6065,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
 
       function ExportComponent_ng_template_3_Template(rf, ctx) {
         if (rf & 1) {
@@ -6289,7 +6289,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -6331,7 +6331,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -6349,13 +6349,13 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
 
       var _c0 = ["fileInput"];
 
@@ -6945,13 +6945,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -6981,7 +6981,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -7023,7 +7023,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -7465,7 +7465,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true)("isHidden", true);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
@@ -8127,7 +8127,7 @@
         features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([_hub_forms_service__WEBPACK_IMPORTED_MODULE_7__["HubFormsService"]])],
         decls: 19,
         vars: 11,
-        consts: [[1, "container"], ["title", "Edit Function", "iconClass", "fa fa-lg fa-fw fa-code", 3, "showCloseButton", "padding", "close"], ["header", ""], [3, "formGroup", 4, "ngIf"], ["title", "Test Function", "iconClass", "fa fa-lg fa-fw fa-code", 3, "padding"], [3, "message"], ["class", "label", 4, "ngIf"], [3, "ngStyle", 4, "ngFor", "ngForOf"], ["label", "Return Value", "name", "returnParameterValue", "type", "text", 3, "disabled", "ngModel", "ngModelChange"], ["title", "Custom Functions", "path", "/assets/help/reference/function.md", 1, "m-3"], [1, "mr-1", 3, "control", "click"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [3, "formsService"], [1, "mr-1", 3, "formsService"], [3, "formGroup"], [4, "ngIf"], ["label", "Function Type", "formControlName", "functionType", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-question", 3, "items"], ["label", "Custom Function Name", "formControlName", "name", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview"], [3, "ngIf"], [1, "alert"], [1, "label", "mb-1"], ["class", "mb-1", 4, "ngIf"], ["rows", "20", "width", "100%", "spellcheck", "false", "formControlName", "methodCode", 1, "form-control"], [1, "mb-1"], ["iconClass", "fa fa-plus-square-o", "title", "Click to add a parameter", 3, "click"], [3, "ngStyle"], [3, "customFunctionParameterForm", "addParameter", "removeParameter"], [1, "input-group", "mb-1"], ["readonly", "", "value", "Return Data Type", 1, "form-control"], ["formControlName", "returnType", "itemKey", "key", "itemName", "name", 1, "form-control", "p-0", 3, "border", "items"], ["buttonClass", "btn btn-success", 1, "mr-1", 3, "click"], ["text", "Sample Code", 3, "click"], [1, "label"], [4, "ngIf", "ngIfElse"], ["showValue", ""], [4, "ngFor", "ngForOf"], [1, "input-group"], [1, "form-control"], ["type", "text", "placeholder", "Enter a test value for the parameter", 1, "form-control", "p-0", 3, "border", "ngModel", "name", "ngModelChange"], [1, "input-group-text", "p-0"], ["type", "button", "value", "Add", 1, "btn", "btn-sm", "border-0", "bg-transparent", 3, "click"], [1, "fa", "fa-plus-square-o"], ["type", "button", "value", "Remove", 1, "btn", "btn-sm", "border-0", "bg-transparent", 3, "click"], [1, "fa", "fa-minus-square-o"], ["type", "text", "placeholder", "Enter a test value for the parameter", 3, "label", "ngModel", "name", "ngModelChange"], ["type", "text", 3, "disabled", "label", "ngModel", "name", "ngModelChange"]],
+        consts: [[1, "container"], ["title", "Edit Function", "iconClass", "fa fa-lg fa-fw fa-code", 3, "showCloseButton", "padding", "close"], ["header", ""], [3, "formGroup", 4, "ngIf"], ["title", "Test Function", "iconClass", "fa fa-lg fa-fw fa-code", 3, "padding"], [3, "message"], ["class", "label", 4, "ngIf"], [3, "ngStyle", 4, "ngFor", "ngForOf"], ["label", "Return Value", "name", "returnParameterValue", "type", "text", 3, "disabled", "ngModel", "ngModelChange"], ["title", "Custom Functions", "path", "/assets/help/reference/function.md", 1, "m-3"], [1, "mr-1", 3, "control", "click"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [3, "formsService"], [1, "mr-1", 3, "formsService"], [3, "formGroup"], [4, "ngIf"], ["label", "Function Type", "formControlName", "functionType", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-question", 3, "items"], ["label", "Custom Function Name", "formControlName", "name", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview", "isHidden"], [3, "ngIf"], [1, "alert"], [1, "label", "mb-1"], ["class", "mb-1", 4, "ngIf"], ["rows", "20", "width", "100%", "spellcheck", "false", "formControlName", "methodCode", 1, "form-control"], [1, "mb-1"], ["iconClass", "fa fa-plus-square-o", "title", "Click to add a parameter", 3, "click"], [3, "ngStyle"], [3, "customFunctionParameterForm", "addParameter", "removeParameter"], [1, "input-group", "mb-1"], ["readonly", "", "value", "Return Data Type", 1, "form-control"], ["formControlName", "returnType", "itemKey", "key", "itemName", "name", 1, "form-control", "p-0", 3, "border", "items"], ["buttonClass", "btn btn-success", 1, "mr-1", 3, "click"], ["text", "Sample Code", 3, "click"], [1, "label"], [4, "ngIf", "ngIfElse"], ["showValue", ""], [4, "ngFor", "ngForOf"], [1, "input-group"], [1, "form-control"], ["type", "text", "placeholder", "Enter a test value for the parameter", 1, "form-control", "p-0", 3, "border", "ngModel", "name", "ngModelChange"], [1, "input-group-text", "p-0"], ["type", "button", "value", "Add", 1, "btn", "btn-sm", "border-0", "bg-transparent", 3, "click"], [1, "fa", "fa-plus-square-o"], ["type", "button", "value", "Remove", 1, "btn", "btn-sm", "border-0", "bg-transparent", 3, "click"], [1, "fa", "fa-minus-square-o"], ["type", "text", "placeholder", "Enter a test value for the parameter", 3, "label", "ngModel", "name", "ngModelChange"], ["type", "text", 3, "disabled", "label", "ngModel", "name", "ngModelChange"]],
         template: function CustomFunctionEditComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -8142,7 +8142,7 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, CustomFunctionEditComponent_ng_template_3_Template, 3, 3, "ng-template", null, 2, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, CustomFunctionEditComponent_form_5_Template, 10, 7, "form", 3);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, CustomFunctionEditComponent_form_5_Template, 10, 8, "form", 3);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -8284,13 +8284,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -8516,7 +8516,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -8534,7 +8534,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -8558,7 +8558,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -8570,7 +8570,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -8941,13 +8941,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -9007,7 +9007,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -9652,13 +9652,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -9706,7 +9706,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -9730,13 +9730,13 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -10054,7 +10054,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true)("isHidden", true);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
@@ -10526,7 +10526,7 @@
         features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵNgOnChangesFeature"]],
         decls: 16,
         vars: 9,
-        consts: [[1, "side-menu"], [1, "side-menu-content"], [1, "spin-icon"], [1, "fa", "fa-cog", "fa-spin"], [1, "side-menu-box"], [1, "bg-light", "rounded", "p-1"], [3, "compact", "click"], ["class", "ml-1", 3, "compact", "click", 4, "ngIf"], ["class", "ml-1", "buttonClass", "btn btn-primary", "iconClass", "fa fa-window-maximize text-white", "tooltip", "Maximize window", 3, "click", 4, "ngIf"], ["class", "ml-1", "buttonClass", "btn btn-primary", "iconClass", "fa fa-window-minimize text-white", "tooltip", "Minimize window", 3, "click", 4, "ngIf"], [1, "ml-1", 3, "compact", "click"], [4, "ngIf"], ["class", "p-3 gridster-item-content", 4, "ngIf"], [3, "ngIf"], ["buttonClass", "btn btn-primary", "iconClass", "fa fa-window-maximize text-white", "tooltip", "Maximize window", 1, "ml-1", 3, "click"], ["buttonClass", "btn btn-primary", "iconClass", "fa fa-window-minimize text-white", "tooltip", "Minimize window", 1, "ml-1", 3, "click"], ["class", "m-1", 4, "ngIf"], ["class", "m-1", "style", "z-index: 99999;", 4, "ngIf"], [1, "m-1"], ["class", "input-group", 4, "ngFor", "ngForOf"], [1, "input-group"], [1, "input-group-prepend"], [1, "input-group-text"], [1, "form-control", "p-0", 3, "name", "placeholder", "ngModel", "ngModelChange"], [3, "showEdit", "parameters", "formsService", "parentParameters", "refreshEvent", "onRefreshData"], [1, "m-1", 2, "z-index", "99999"], [3, "showEdit", "showFrame", "animateConfig", "columns", "baseData", "data", "hasChanged", "dataChange"], [1, "p-3", "gridster-item-content"], [3, "formGroup"], ["label", "Item Name", "formControlName", "name", "placeholder", "Enter the dashboard item name.", "iconClass", "fa fa-list", 3, "autocapitalize"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview"], ["label", "Select View", "formControlName", "viewKey", "itemKey", "key", "itemName", "name", 3, "items"], [3, "key"], ["label", "Show Header", "formControlName", "header"], ["label", "Allow Scrolling", "formControlName", "scrollable"], [3, "showEdit", "allowAddRemove", "parameters", "formsService", "parentParameters", "refreshEvent", "onRefreshData"], ["class", "box", 3, "ngStyle", 4, "ngIf"], [1, "box", 3, "ngStyle"], ["class", "p-3", 4, "ngIf", "ngIfElse"], ["notRefreshing", ""], [1, "p-3"], [1, "dexih-loader"], ["class", "box-header bg-secondary text-white", 4, "ngIf"], ["class", "box-header", 4, "ngIf"], ["class", "box-content", 4, "ngIf", "ngIfElse"], ["elseBlock", ""], [1, "box-header", "bg-secondary", "text-white"], [1, "m-3"], [1, "box-header"], [3, "data"], [1, "box-content"], [3, "enableMultiSelect", "enableResponsive", "enableSaveCsv", "enableFilter", "columns", "data", 4, "ngIf"], [1, "h-100"], [3, "responsive", "columns", "data", "config", 4, "ngIf"], [3, "enableMultiSelect", "enableResponsive", "enableSaveCsv", "enableFilter", "columns", "data"], [3, "responsive", "columns", "data", "config"], [1, "alert", "alert-info", 3, "click"], [1, "fa", "fa-warning"]],
+        consts: [[1, "side-menu"], [1, "side-menu-content"], [1, "spin-icon"], [1, "fa", "fa-cog", "fa-spin"], [1, "side-menu-box"], [1, "bg-light", "rounded", "p-1"], [3, "compact", "click"], ["class", "ml-1", 3, "compact", "click", 4, "ngIf"], ["class", "ml-1", "buttonClass", "btn btn-primary", "iconClass", "fa fa-window-maximize text-white", "tooltip", "Maximize window", 3, "click", 4, "ngIf"], ["class", "ml-1", "buttonClass", "btn btn-primary", "iconClass", "fa fa-window-minimize text-white", "tooltip", "Minimize window", 3, "click", 4, "ngIf"], [1, "ml-1", 3, "compact", "click"], [4, "ngIf"], ["class", "p-3 gridster-item-content", 4, "ngIf"], [3, "ngIf"], ["buttonClass", "btn btn-primary", "iconClass", "fa fa-window-maximize text-white", "tooltip", "Maximize window", 1, "ml-1", 3, "click"], ["buttonClass", "btn btn-primary", "iconClass", "fa fa-window-minimize text-white", "tooltip", "Minimize window", 1, "ml-1", 3, "click"], ["class", "m-1", 4, "ngIf"], ["class", "m-1", "style", "z-index: 99999;", 4, "ngIf"], [1, "m-1"], ["class", "input-group", 4, "ngFor", "ngForOf"], [1, "input-group"], [1, "input-group-prepend"], [1, "input-group-text"], [1, "form-control", "p-0", 3, "name", "placeholder", "ngModel", "ngModelChange"], [3, "showEdit", "parameters", "formsService", "parentParameters", "refreshEvent", "onRefreshData"], [1, "m-1", 2, "z-index", "99999"], [3, "showEdit", "showFrame", "animateConfig", "columns", "baseData", "data", "hasChanged", "dataChange"], [1, "p-3", "gridster-item-content"], [3, "formGroup"], ["label", "Item Name", "formControlName", "name", "placeholder", "Enter the dashboard item name.", "iconClass", "fa fa-list", 3, "autocapitalize"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview", "isHidden"], ["label", "Select View", "formControlName", "viewKey", "itemKey", "key", "itemName", "name", 3, "items"], [3, "key"], ["label", "Show Header", "formControlName", "header"], ["label", "Allow Scrolling", "formControlName", "scrollable"], [3, "showEdit", "allowAddRemove", "parameters", "formsService", "parentParameters", "refreshEvent", "onRefreshData"], ["class", "box", 3, "ngStyle", 4, "ngIf"], [1, "box", 3, "ngStyle"], ["class", "p-3", 4, "ngIf", "ngIfElse"], ["notRefreshing", ""], [1, "p-3"], [1, "dexih-loader"], ["class", "box-header bg-secondary text-white", 4, "ngIf"], ["class", "box-header", 4, "ngIf"], ["class", "box-content", 4, "ngIf", "ngIfElse"], ["elseBlock", ""], [1, "box-header", "bg-secondary", "text-white"], [1, "m-3"], [1, "box-header"], [3, "data"], [1, "box-content"], [3, "enableMultiSelect", "enableResponsive", "enableSaveCsv", "enableFilter", "columns", "data", 4, "ngIf"], [1, "h-100"], [3, "responsive", "columns", "data", "config", 4, "ngIf"], [3, "enableMultiSelect", "enableResponsive", "enableSaveCsv", "enableFilter", "columns", "data"], [3, "responsive", "columns", "data", "config"], [1, "alert", "alert-info", 3, "click"], [1, "fa", "fa-warning"]],
         template: function DashboardItemComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -10581,7 +10581,7 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](14, DashboardItemComponent_div_14_Template, 13, 11, "div", 12);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](14, DashboardItemComponent_div_14_Template, 13, 12, "div", 12);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](15, DashboardItemComponent_ng_template_15_Template, 1, 1, "ng-template", 13);
           }
@@ -10703,7 +10703,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -10721,7 +10721,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -10745,7 +10745,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -11132,13 +11132,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -11186,7 +11186,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -11497,7 +11497,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -11515,7 +11515,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -11539,7 +11539,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -11895,7 +11895,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -11919,7 +11919,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -11937,13 +11937,13 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -12375,7 +12375,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -12387,7 +12387,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -12417,7 +12417,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -12435,7 +12435,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -12914,19 +12914,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -12944,7 +12944,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -13685,7 +13685,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -13709,7 +13709,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -13890,7 +13890,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -13914,7 +13914,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -13932,13 +13932,13 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -14449,7 +14449,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -14485,7 +14485,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -14503,13 +14503,13 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -14527,7 +14527,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
 
       var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
         function adopt(value) {
@@ -15084,7 +15084,7 @@
 
             var ctx_r42 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-            return ctx_r42.closeTable();
+            return ctx_r42.cancel();
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, FilesBulkLoadComponent_div_1_d_widget_2_ng_template_1_Template, 2, 0, "ng-template", null, 52, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
@@ -15615,13 +15615,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -15663,7 +15663,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -15675,7 +15675,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -15687,7 +15687,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
 
       function FilesManageComponent_div_0_d_button_5_Template(rf, ctx) {
         if (rf & 1) {
@@ -15792,7 +15792,7 @@
 
           var ctx_r10 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](4);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵclassProp"]("active", ctx_r10.path == "item.name");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵclassProp"]("active", ctx_r10.path === item_r11.key);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("queryParams", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction2"](4, _c0, ctx_r10.tableKey, item_r11.key));
 
@@ -15842,7 +15842,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", (ctx_r5.connectionReference == null ? null : ctx_r5.connectionReference.allowFlatFiles) && (ctx_r5.table == null ? null : ctx_r5.table.autoManageFiles));
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", (ctx_r5.connectionReference == null ? null : ctx_r5.connectionReference.allowsFlatFiles) && (ctx_r5.table == null ? null : ctx_r5.table.autoManageFiles));
         }
       }
 
@@ -16216,7 +16216,7 @@
 
           var ctx_r62 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](6);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵclassProp"]("active", ctx_r62.path == "item.name");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵclassProp"]("active", ctx_r62.path === item_r63.key);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("queryParams", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction2"](4, _c0, ctx_r62.tableKey, item_r63.key));
 
@@ -16446,7 +16446,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !(ctx_r6.connectionReference == null ? null : ctx_r6.connectionReference.allowFlatFiles));
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !(ctx_r6.connectionReference == null ? null : ctx_r6.connectionReference.allowsFlatFiles));
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
 
@@ -16458,7 +16458,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](7);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r6.connectionReference == null ? null : ctx_r6.connectionReference.allowFlatFiles);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r6.connectionReference == null ? null : ctx_r6.connectionReference.allowsFlatFiles);
         }
       }
 
@@ -16930,13 +16930,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -17134,7 +17134,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 
       var HubBaseModule = /*#__PURE__*/function () {
         function HubBaseModule() {
@@ -17213,7 +17213,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -18320,13 +18320,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -18380,7 +18380,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -18398,7 +18398,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 
       var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
         function adopt(value) {
@@ -18806,7 +18806,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -18830,7 +18830,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -18848,7 +18848,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -18860,7 +18860,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -19274,13 +19274,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -19334,7 +19334,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -19346,7 +19346,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -19388,7 +19388,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
 
       function ListOfValuesEditComponent_div_0_ng_template_2_save_button_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -19456,7 +19456,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("errors", ctx_r3.errors == null ? null : ctx_r3.errors.sourceTableKey)("items", ctx_r3.connectionTables);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("errors", ctx_r3.formsService.formErrors == null ? null : ctx_r3.formsService.formErrors.sourceTableKey)("items", ctx_r3.connectionTables);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
@@ -19482,7 +19482,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("errors", ctx_r4.errors == null ? null : ctx_r4.errors.sourceDatalinkKey)("items", ctx_r4.datalinks);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("errors", ctx_r4.formsService.formErrors == null ? null : ctx_r4.formsService.formErrors.sourceDatalinkKey)("items", ctx_r4.datalinks);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
@@ -19581,7 +19581,7 @@
 
             var ctx_r16 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
-            return ctx_r16.add(0 - 1);
+            return ctx_r16.add(-1);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Insert Item");
@@ -19706,7 +19706,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx_r7.formsService.currentForm.controls.staticData.controls);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx_r7.formsService.currentForm.controls.staticData["controls"]);
         }
       }
 
@@ -19810,7 +19810,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("selectQuery", ctx_r8.formsService.currentForm.controls.selectQuery.value)("columns", ctx_r8.tableColumns)("inputColumns", ctx_r8.inputColumns)("parameters", null)("refreshEvent", ctx_r8.refreshDataObservable);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("selectQuery", ctx_r8.formsService.currentForm.controls.selectQuery.value)("columns", ctx_r8.tableColumns)("parameters", null)("refreshEvent", ctx_r8.refreshDataObservable);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
@@ -19884,7 +19884,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](18, ListOfValuesEditComponent_div_0_d_widget_section_18_Template, 4, 2, "d-widget-section", 12);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](19, ListOfValuesEditComponent_div_0_ng_template_19_Template, 4, 8, "ng-template", 13);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](19, ListOfValuesEditComponent_div_0_ng_template_19_Template, 4, 7, "ng-template", 13);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -19904,11 +19904,11 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("autocapitalize", ctx_r0.on)("errors", ctx_r0.formsService.formErrors["name"]);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("autocapitalize", false)("errors", ctx_r0.formsService.formErrors["name"]);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true)("isHidden", true);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
 
@@ -20101,7 +20101,7 @@
                 if (datalink) {
                   // get the outputs from the last transform in the datalink
                   var ioColumns = new _hub_lineage_models__WEBPACK_IMPORTED_MODULE_9__["InputOutputColumns"]();
-                  ioColumns.buildInputOutput(this.hubCache, datalink);
+                  ioColumns.buildInputOutput(datalink);
                   this.tableColumns = ioColumns.getDatalinkOutputColumns(datalink);
                 } else {
                   if (datalinkKey > 0) {
@@ -20195,10 +20195,10 @@
         features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([_hub_forms_service__WEBPACK_IMPORTED_MODULE_6__["HubFormsService"]])],
         decls: 1,
         vars: 1,
-        consts: [["class", "container", 4, "ngIf"], [1, "container"], ["title", "Edit List of Values", "iconClass", "fa fa-lg fa-list-alt", 3, "showCloseButton", "padding", "close"], ["header", ""], [1, "m-3", 3, "formGroup"], ["label", "List of Values", "formControlName", "name", "placeholder", "Enter the list of values name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Data Source Type", "formControlName", "sourceType", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "Specify the source type for this view", 3, "items", "enableFilter"], ["class", "form-group col-md-6", 4, "ngIf"], ["class", "form-row", 4, "ngIf"], ["title", "Static Values", 3, "showExpandButton", 4, "ngIf"], [3, "ngIf"], [1, "mr-1", 3, "control", "click"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [3, "formsService"], [1, "mr-1", 3, "formsService"], ["label", "Source Table", "formControlName", "sourceTableKey", "parentName", "name", "childItems", "dexihTables", "itemKey", "key", "itemName", "logicalName", "note", "Select the source table", 3, "errors", "items"], [3, "key"], ["label", "Source Datalink", "formControlName", "sourceDatalinkKey", "itemKey", "key", "itemName", "name", "note", "Select the source datalink", 3, "errors", "items"], [1, "form-group", "col-md-4"], ["label", "Key Column", "formControlName", "keyColumn", "itemKey", "name", "itemName", "name", "iconClass", "fa fa-key", 3, "items", "allowNullSelect", "enableFilter"], ["label", "Name Column", "formControlName", "nameColumn", "itemKey", "name", "itemName", "name", "iconClass", "fa fa-circle-o", 3, "items", "allowNullSelect", "enableFilter"], ["label", "Description Column", "formControlName", "descriptionColumn", "itemKey", "name", "itemName", "name", "iconClass", "fa fa-comment-o", 3, "items", "allowNullSelect", "enableFilter"], [1, "form-group", "col-md-12"], [1, "d-flex", "flex-wrap", "pt-1"], ["label", "Cache Lookup", "formControlName", "cache", 1, "input-group-prepend", 3, "border"], ["type", "number", "class", "pl-1", "labelLeft", "Cache Seconds", "placeholder", "seconds", "title", "Specify the number of seconds to cache the lookup", "formControlName", "cacheSeconds", 4, "ngIf"], ["type", "number", "labelLeft", "Cache Seconds", "placeholder", "seconds", "title", "Specify the number of seconds to cache the lookup", "formControlName", "cacheSeconds", 1, "pl-1"], ["title", "Static Values", 3, "showExpandButton"], ["class", "flex-fill", 3, "formGroup", 4, "ngFor", "ngForOf"], ["iconClass", "fa fa-plus", 1, "mr-1", 3, "click"], ["text", "Clear All", 3, "click"], [1, "flex-fill", 3, "formGroup"], [1, "input-group"], [1, "form-control", "p-0"], ["formControlName", "key", "type", "text", "placeholder", "Key Value", 3, "border"], ["formControlName", "name", "type", "text", "placeholder", "Item name", 3, "border"], ["formControlName", "key", "type", "text", "placeholder", "Description", 3, "border"], [1, "input-group-append", "flex-shrink-1", "ml-1"], ["type", "button", "value", "Add", 1, "btn", "btn-light", 3, "click"], [1, "fa", "fa-plus-square-o"], ["type", "button", "value", "Remove", 1, "btn", "btn-light", 3, "click"], [1, "fa", "fa-minus-square-o"], ["title", "Query Configuration", 3, "showExpandButton"], [3, "selectQuery", "columns", "inputColumns", "parameters", "refreshEvent", "hasChanged", "onRefreshData"], ["class", "m-3", 4, "ngIf"], [3, "enableMultiSelect", "enableSaveCsv", "columns", "data", 4, "ngIf"], [1, "m-3"], ["text", "Reload", 3, "autoCompact", "click"], [3, "enableMultiSelect", "enableSaveCsv", "columns", "data"], ["actions", ""], ["text", "Reload", 1, "mr-1", 3, "click"]],
+        consts: [["class", "container", 4, "ngIf"], [1, "container"], ["title", "Edit List of Values", "iconClass", "fa fa-lg fa-list-alt", 3, "showCloseButton", "padding", "close"], ["header", ""], [1, "m-3", 3, "formGroup"], ["label", "List of Values", "formControlName", "name", "placeholder", "Enter the list of values name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview", "isHidden"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Data Source Type", "formControlName", "sourceType", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "Specify the source type for this view", 3, "items", "enableFilter"], ["class", "form-group col-md-6", 4, "ngIf"], ["class", "form-row", 4, "ngIf"], ["title", "Static Values", 3, "showExpandButton", 4, "ngIf"], [3, "ngIf"], [1, "mr-1", 3, "control", "click"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [3, "formsService"], [1, "mr-1", 3, "formsService"], ["label", "Source Table", "formControlName", "sourceTableKey", "parentName", "name", "childItems", "dexihTables", "itemKey", "key", "itemName", "logicalName", "note", "Select the source table", 3, "errors", "items"], [3, "key"], ["label", "Source Datalink", "formControlName", "sourceDatalinkKey", "itemKey", "key", "itemName", "name", "note", "Select the source datalink", 3, "errors", "items"], [1, "form-group", "col-md-4"], ["label", "Key Column", "formControlName", "keyColumn", "itemKey", "name", "itemName", "name", "iconClass", "fa fa-key", 3, "items", "allowNullSelect", "enableFilter"], ["label", "Name Column", "formControlName", "nameColumn", "itemKey", "name", "itemName", "name", "iconClass", "fa fa-circle-o", 3, "items", "allowNullSelect", "enableFilter"], ["label", "Description Column", "formControlName", "descriptionColumn", "itemKey", "name", "itemName", "name", "iconClass", "fa fa-comment-o", 3, "items", "allowNullSelect", "enableFilter"], [1, "form-group", "col-md-12"], [1, "d-flex", "flex-wrap", "pt-1"], ["label", "Cache Lookup", "formControlName", "cache", 1, "input-group-prepend", 3, "border"], ["type", "number", "class", "pl-1", "labelLeft", "Cache Seconds", "placeholder", "seconds", "title", "Specify the number of seconds to cache the lookup", "formControlName", "cacheSeconds", 4, "ngIf"], ["type", "number", "labelLeft", "Cache Seconds", "placeholder", "seconds", "title", "Specify the number of seconds to cache the lookup", "formControlName", "cacheSeconds", 1, "pl-1"], ["title", "Static Values", 3, "showExpandButton"], ["class", "flex-fill", 3, "formGroup", 4, "ngFor", "ngForOf"], ["iconClass", "fa fa-plus", 1, "mr-1", 3, "click"], ["text", "Clear All", 3, "click"], [1, "flex-fill", 3, "formGroup"], [1, "input-group"], [1, "form-control", "p-0"], ["formControlName", "key", "type", "text", "placeholder", "Key Value", 3, "border"], ["formControlName", "name", "type", "text", "placeholder", "Item name", 3, "border"], ["formControlName", "key", "type", "text", "placeholder", "Description", 3, "border"], [1, "input-group-append", "flex-shrink-1", "ml-1"], ["type", "button", "value", "Add", 1, "btn", "btn-light", 3, "click"], [1, "fa", "fa-plus-square-o"], ["type", "button", "value", "Remove", 1, "btn", "btn-light", 3, "click"], [1, "fa", "fa-minus-square-o"], ["title", "Query Configuration", 3, "showExpandButton"], [3, "selectQuery", "columns", "parameters", "refreshEvent", "hasChanged", "onRefreshData"], ["class", "m-3", 4, "ngIf"], [3, "enableMultiSelect", "enableSaveCsv", "columns", "data", 4, "ngIf"], [1, "m-3"], ["text", "Reload", 3, "autoCompact", "click"], [3, "enableMultiSelect", "enableSaveCsv", "columns", "data"], ["actions", ""], ["text", "Reload", 1, "mr-1", 3, "click"]],
         template: function ListOfValuesEditComponent_Template(rf, ctx) {
           if (rf & 1) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, ListOfValuesEditComponent_div_0_Template, 20, 14, "div", 0);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, ListOfValuesEditComponent_div_0_Template, 20, 15, "div", 0);
           }
 
           if (rf & 2) {
@@ -20289,7 +20289,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -20313,7 +20313,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -20331,7 +20331,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -20343,7 +20343,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -20686,7 +20686,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -20704,7 +20704,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -20734,19 +20734,19 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
       var _c0 = ["DexihMessage"];
 
@@ -21224,7 +21224,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -21236,7 +21236,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -21272,7 +21272,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -21284,7 +21284,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 
       var _c0 = function _c0(a4) {
         return ["/hubs", "index", "agents", "edit", a4];
@@ -21637,7 +21637,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -21649,7 +21649,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -21679,7 +21679,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
 
       var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
         function adopt(value) {
@@ -22446,7 +22446,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -22458,7 +22458,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -22488,19 +22488,19 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -23105,7 +23105,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -23135,7 +23135,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -23199,7 +23199,7 @@
         if (rf & 2) {
           var ctx_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("selectQuery", ctx_r3.selectQuery)("columns", ctx_r3.targetTable.dexihTableColumns)("inputColumns", ctx_r3.inputColumns)("refreshEvent", ctx_r3.refreshDataObservable);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("selectQuery", ctx_r3.selectQuery)("columns", ctx_r3.targetTable.dexihTableColumns)("refreshEvent", ctx_r3.refreshDataObservable);
         }
       }
 
@@ -23422,14 +23422,14 @@
         },
         decls: 5,
         vars: 3,
-        consts: [[3, "enableMultiSelect", "columns", "data"], ["actions", ""], ["tableHeader", ""], ["text", "Reload", 3, "click"], [1, "ml-1", 3, "click"], [3, "selectQuery", "columns", "inputColumns", "refreshEvent", "onRefreshData"]],
+        consts: [[3, "enableMultiSelect", "columns", "data"], ["actions", ""], ["tableHeader", ""], ["text", "Reload", 3, "click"], [1, "ml-1", 3, "click"], [3, "selectQuery", "columns", "refreshEvent", "onRefreshData"]],
         template: function PreviewResultsComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-table", 0);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, PreviewResultsComponent_ng_template_1_Template, 2, 0, "ng-template", null, 1, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, PreviewResultsComponent_ng_template_3_Template, 1, 4, "ng-template", null, 2, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, PreviewResultsComponent_ng_template_3_Template, 1, 3, "ng-template", null, 2, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
           }
@@ -23488,7 +23488,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -23518,7 +23518,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -23530,7 +23530,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 
       function ProfileResultsComponent_ng_template_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -23715,13 +23715,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
       var _c0 = function _c0(a1) {
         return ["progress-bar", a1];
@@ -23882,7 +23882,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -23900,7 +23900,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -23918,7 +23918,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -24341,7 +24341,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -24449,13 +24449,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -24467,13 +24467,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @swimlane/ngx-charts */
-      "./node_modules/@swimlane/ngx-charts/fesm2015/swimlane-ngx-charts.js");
+      "./node_modules/@swimlane/ngx-charts/__ivy_ngcc__/fesm2015/swimlane-ngx-charts.js");
       /* harmony import */
 
 
@@ -25377,7 +25377,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -25449,19 +25449,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -25503,7 +25503,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -26099,13 +26099,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -26194,7 +26194,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -26206,7 +26206,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -26242,13 +26242,13 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
       function SharedDataIndexComponent_ng_template_3_Template(rf, ctx) {
         if (rf & 1) {
@@ -26831,7 +26831,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -26849,7 +26849,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -26873,7 +26873,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -26897,7 +26897,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -27647,7 +27647,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -27677,7 +27677,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -27689,7 +27689,7 @@
 
       var _angular_animations__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/animations */
-      "./node_modules/@angular/animations/fesm2015/animations.js");
+      "./node_modules/@angular/animations/__ivy_ngcc__/fesm2015/animations.js");
       /* harmony import */
 
 
@@ -27701,7 +27701,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -27713,13 +27713,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 
       function TagsComponent_ng_template_3_Template(rf, ctx) {
         if (rf & 1) {
@@ -27730,9 +27730,11 @@
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TagsComponent_ng_template_3_Template_d_button_edit_click_0_listener() {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r12);
 
+            var item_r10 = ctx.item;
+
             var ctx_r11 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r11.edit(ctx_r11.item);
+            return ctx_r11.edit(item_r10);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -27966,7 +27968,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true)("isHidden", true);
         }
       }
 
@@ -27988,7 +27990,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 18);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, TagsComponent_ng_template_11_form_5_Template, 17, 7, "form", 19);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, TagsComponent_ng_template_11_form_5_Template, 17, 8, "form", 19);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -28253,7 +28255,7 @@
         features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([_hub_forms_service__WEBPACK_IMPORTED_MODULE_6__["HubFormsService"]])],
         decls: 14,
         vars: 6,
-        consts: [[1, "container-fluid"], ["title", "Tags", "iconClass", "fa fa-lg fa-fw fa-tags", 3, "showCloseButton", "close"], ["rowStatusHeading", "Color", 3, "enableMultiSelect", "enableStickyToolbar", "toolbarZIndex", "columns", "dataObservable", "rowClick"], ["select", "selectedItemAction"], ["selectedItemAction", ""], ["select", "selectedItemsAction"], ["selectedItemsAction", ""], ["actions", ""], ["select", "rowStatus"], ["rowStatus", ""], ["tableHeader", ""], ["title", "Views", "path", "/assets/help/reference/tag.md", 1, "m-3"], [1, "mr-1", 3, "click"], ["class", "mr-1", 3, "click", 4, "ngIf"], [1, "alert", "p-1", "text-center", 3, "ngStyle", "click"], [1, "blend-text", "font-weight-bold"], [1, "card", "mt-2", 2, "width", "100%"], [1, "card-header", "text-white", "bg-primary"], [1, "card-body"], [3, "formGroup", 4, "ngIf"], [1, "card-footer"], [3, "formGroup"], [1, "form-row"], [1, "form-group", "col-md-3"], ["label", "Tag Name", "formControlName", "name", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], [1, "form-group", "col-md-9"], [1, "mt-1"], [1, "input-group", "m-0"], [1, "btn", "mr-1", 2, "height", "38px", "width", "76px"], ["formControlName", "color", "hidden", "", "type", "color"], ["formControlName", "color", "placeholder", "color", 1, "mr-3", 2, "height", "38px", "width", "90px"], ["data-toggle", "buttons", 1, "btn-group-toggle"], ["class", "btn mr-1", "style", "height: '38px'; width: '38px'", 3, "background-color", "click", 4, "ngFor", "ngForOf"], [1, "col-md-12"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview"], [1, "btn", "mr-1", 2, "height", "38px", "width", "38px", 3, "click"]],
+        consts: [[1, "container-fluid"], ["title", "Tags", "iconClass", "fa fa-lg fa-fw fa-tags", 3, "showCloseButton", "close"], ["rowStatusHeading", "Color", 3, "enableMultiSelect", "enableStickyToolbar", "toolbarZIndex", "columns", "dataObservable", "rowClick"], ["select", "selectedItemAction"], ["selectedItemAction", ""], ["select", "selectedItemsAction"], ["selectedItemsAction", ""], ["actions", ""], ["select", "rowStatus"], ["rowStatus", ""], ["tableHeader", ""], ["title", "Views", "path", "/assets/help/reference/tag.md", 1, "m-3"], [1, "mr-1", 3, "click"], ["class", "mr-1", 3, "click", 4, "ngIf"], [1, "alert", "p-1", "text-center", 3, "ngStyle", "click"], [1, "blend-text", "font-weight-bold"], [1, "card", "mt-2", 2, "width", "100%"], [1, "card-header", "text-white", "bg-primary"], [1, "card-body"], [3, "formGroup", 4, "ngIf"], [1, "card-footer"], [3, "formGroup"], [1, "form-row"], [1, "form-group", "col-md-3"], ["label", "Tag Name", "formControlName", "name", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], [1, "form-group", "col-md-9"], [1, "mt-1"], [1, "input-group", "m-0"], [1, "btn", "mr-1", 2, "height", "38px", "width", "76px"], ["formControlName", "color", "hidden", "", "type", "color"], ["formControlName", "color", "placeholder", "color", 1, "mr-3", 2, "height", "38px", "width", "90px"], ["data-toggle", "buttons", 1, "btn-group-toggle"], ["class", "btn mr-1", "style", "height: '38px'; width: '38px'", 3, "background-color", "click", 4, "ngFor", "ngForOf"], [1, "col-md-12"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview", "isHidden"], [1, "btn", "mr-1", 2, "height", "38px", "width", "38px", 3, "click"]],
         template: function TagsComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -28372,7 +28374,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -28396,7 +28398,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -28420,7 +28422,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -28747,19 +28749,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -28777,7 +28779,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 

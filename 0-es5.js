@@ -30,7 +30,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -60,13 +60,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -112,7 +112,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true)("errors", ctx_r2.columnFormService.formErrors.description);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true)("isHidden", true)("errors", ctx_r2.columnFormService.formErrors.description);
         }
       }
 
@@ -306,7 +306,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](9, ColumnEditBaseComponent_form_0_section_9_Template, 2, 1, "section", 7);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](10, ColumnEditBaseComponent_form_0_section_10_Template, 2, 2, "section", 7);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](10, ColumnEditBaseComponent_form_0_section_10_Template, 2, 3, "section", 7);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "div", 2);
 
@@ -429,7 +429,7 @@
         },
         decls: 1,
         vars: 1,
-        consts: [[3, "formGroup", 4, "ngIf"], [3, "formGroup"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Group", "formControlName", "columnGroup", "placeholder", "Enter a column group name", "iconClass", "fa fa-list", "note", "The group column grouping, used to distinguish duplicate column names when applying to structured data (such as json).", 3, "errors"], ["label", "Column Name", "formControlName", "name", "placeholder", "Enter the column name.", "iconClass", "fa fa-list", "note", "The physical column name in the underlying table", 3, "errors"], ["label", "Specify a different logical name", "formControlName", "useLogical"], [4, "ngIf"], [1, "form-group", "col-md-4"], ["label", "Data Type", "formControlName", "dataType", "itemKey", "key", "itemName", "name", 3, "errors", "items"], [1, "form-group", "col-md-2"], ["type", "number", "label", "Array Dimensions", "formControlName", "rank", 3, "errors"], ["class", "form-group col-md-6", 4, "ngIf"], ["class", "form-group col-md-3", 4, "ngIf"], ["label", "Logical Name", "formControlName", "logicalName", "placeholder", "Enter the logical name.", "iconClass", "fa fa-list", "note", "The logical name is a short term to represent the column", 3, "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview", "errors"], ["label", "Max Length", "formControlName", "maxLength", "placeholder", "Max Length", "type", "number", "note", "Maximum string length (blank for unlimited)", 3, "errors"], [1, "form-group", "col-md-3"], ["label", "Precision", "formControlName", "precision", "placeholder", "Precision", "type", "number", 3, "errors"], ["label", "Scale", "formControlName", "scale", "placeholder", "Scale", "type", "number", 3, "errors"], ["label", "Allow Nulls", "formControlName", "allowDbNull"], ["label", "Is Unicode", "formControlName", "isUnicode"], ["label", "Is an Input Column", "formControlName", "isInput"], ["label", "Is always incrementing column that can be used for change detection", "formControlName", "isIncrementalUpdate"], ["label", "Delta Type", "formControlName", "deltaType", "itemKey", "key", "itemName", "name", "note", "How to treat the column when used to update target table.", 3, "errors", "items"], ["label", "Security Flag", "formControlName", "securityFlag", "itemKey", "key", "itemName", "name", "note", "How to secure this column when reading data.", 3, "errors", "items"], ["label", "Default Value", "formControlName", "defaultValue", "placeholder", "Default Value", "note", "Default value if unmapped or null.", 3, "errors"], ["label", "Validation Rule", "formControlName", "columnValidationKey", "itemKey", "key", "itemName", "name", "note", "Validation rule to apply.", 3, "allowNullSelect", "items"], [3, "key"]],
+        consts: [[3, "formGroup", 4, "ngIf"], [3, "formGroup"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Group", "formControlName", "columnGroup", "placeholder", "Enter a column group name", "iconClass", "fa fa-list", "note", "The group column grouping, used to distinguish duplicate column names when applying to structured data (such as json).", 3, "errors"], ["label", "Column Name", "formControlName", "name", "placeholder", "Enter the column name.", "iconClass", "fa fa-list", "note", "The physical column name in the underlying table", 3, "errors"], ["label", "Specify a different logical name", "formControlName", "useLogical"], [4, "ngIf"], [1, "form-group", "col-md-4"], ["label", "Data Type", "formControlName", "dataType", "itemKey", "key", "itemName", "name", 3, "errors", "items"], [1, "form-group", "col-md-2"], ["type", "number", "label", "Array Dimensions", "formControlName", "rank", 3, "errors"], ["class", "form-group col-md-6", 4, "ngIf"], ["class", "form-group col-md-3", 4, "ngIf"], ["label", "Logical Name", "formControlName", "logicalName", "placeholder", "Enter the logical name.", "iconClass", "fa fa-list", "note", "The logical name is a short term to represent the column", 3, "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview", "isHidden", "errors"], ["label", "Max Length", "formControlName", "maxLength", "placeholder", "Max Length", "type", "number", "note", "Maximum string length (blank for unlimited)", 3, "errors"], [1, "form-group", "col-md-3"], ["label", "Precision", "formControlName", "precision", "placeholder", "Precision", "type", "number", 3, "errors"], ["label", "Scale", "formControlName", "scale", "placeholder", "Scale", "type", "number", 3, "errors"], ["label", "Allow Nulls", "formControlName", "allowDbNull"], ["label", "Is Unicode", "formControlName", "isUnicode"], ["label", "Is an Input Column", "formControlName", "isInput"], ["label", "Is always incrementing column that can be used for change detection", "formControlName", "isIncrementalUpdate"], ["label", "Delta Type", "formControlName", "deltaType", "itemKey", "key", "itemName", "name", "note", "How to treat the column when used to update target table.", 3, "errors", "items"], ["label", "Security Flag", "formControlName", "securityFlag", "itemKey", "key", "itemName", "name", "note", "How to secure this column when reading data.", 3, "errors", "items"], ["label", "Default Value", "formControlName", "defaultValue", "placeholder", "Default Value", "note", "Default value if unmapped or null.", 3, "errors"], ["label", "Validation Rule", "formControlName", "columnValidationKey", "itemKey", "key", "itemName", "name", "note", "Validation rule to apply.", 3, "allowNullSelect", "items"], [3, "key"]],
         template: function ColumnEditBaseComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, ColumnEditBaseComponent_form_0_Template, 20, 12, "form", 0);
@@ -492,7 +492,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -516,7 +516,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -546,7 +546,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -955,13 +955,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -1003,7 +1003,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -1242,7 +1242,7 @@
 
             var ctx_r14 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r14.applyBulkEdit(ctx_r14.items);
+            return ctx_r14.applyBulkEdit();
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -1595,13 +1595,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -1619,7 +1619,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -1649,13 +1649,13 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -2101,7 +2101,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -2149,13 +2149,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -2167,7 +2167,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 
       function TableEditFileComponent_form_1_ng_template_1_div_6_div_3_Template(rf, ctx) {
         if (rf & 1) {
@@ -2175,25 +2175,25 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "section");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "form-input", 19);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "form-input", 18);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "section");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "form-input", 20);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "form-input", 19);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "section");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](6, "form-input", 21);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](6, "form-input", 20);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "section");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](8, "form-input", 22);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](8, "form-input", 21);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -2201,23 +2201,23 @@
         }
 
         if (rf & 2) {
-          var ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](4);
+          var ctx_r5 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](4);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("errors", ctx_r6.formService.formErrors.fileIncomingPath);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("errors", ctx_r5.formService.formErrors.fileIncomingPath);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("errors", ctx_r6.formService.formErrors.fileOutgoingPath);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("errors", ctx_r5.formService.formErrors.fileOutgoingPath);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("errors", ctx_r6.formService.formErrors.fileProcessedPath);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("errors", ctx_r5.formService.formErrors.fileProcessedPath);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("errors", ctx_r6.formService.formErrors.fileRejectedPath);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("errors", ctx_r5.formService.formErrors.fileRejectedPath);
         }
       }
 
@@ -2227,7 +2227,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "section");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "form-checkbox", 18);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "form-checkbox", 17);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -2237,15 +2237,15 @@
         }
 
         if (rf & 2) {
-          var ctx_r5 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
+          var ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("note", "If custom paths are not specified files will be read/written to the directory: " + ctx_r5.connection.server + "/" + ctx_r5.formService.currentForm.value.name + "/");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("note", "If custom paths are not specified files will be read/written to the directory: " + ctx_r4.connection.server + "/" + ctx_r4.formService.currentForm.value.name + "/");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r5.formService.currentForm.value.useCustomFilePaths);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r4.formService.currentForm.value.useCustomFilePaths);
         }
       }
 
@@ -2253,19 +2253,19 @@
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "section");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "form-input", 15);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "form-input", 14);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "section");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "form-input", 16);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "form-input", 15);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "section");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](5, "form-checkbox", 17);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](5, "form-checkbox", 16);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -2293,13 +2293,13 @@
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "section");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "form-select", 23);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "form-select", 22);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "a", 24);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "a", 23);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "(");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "i", 25);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "i", 24);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5, " New Format )");
 
@@ -2323,7 +2323,7 @@
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "section");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "form-input", 26);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "form-input", 25);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
@@ -2337,33 +2337,9 @@
         }
       }
 
-      function TableEditFileComponent_form_1_d_button_refresh_20_Template(rf, ctx) {
-        if (rf & 1) {
-          var _r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-button-refresh", 27);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TableEditFileComponent_form_1_d_button_refresh_20_Template_d_button_refresh_click_0_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r8);
-
-            var ctx_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-
-            return ctx_r7.importTable();
-          });
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        }
-
-        if (rf & 2) {
-          var ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("busy", ctx_r4.updatingTable);
-        }
-      }
-
       function TableEditFileComponent_form_1_Template(rf, ctx) {
         if (rf & 1) {
-          var _r10 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "form", 2);
 
@@ -2388,11 +2364,11 @@
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "a", 7);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TableEditFileComponent_form_1_Template_a_click_9_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r10);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r7);
 
-            var ctx_r9 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r9["import"]();
+            return ctx_r6["import"]();
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](10, "(");
@@ -2408,11 +2384,11 @@
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "div", 9);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("dropFiles", function TableEditFileComponent_form_1_Template_div_dropFiles_13_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r10);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r7);
 
-            var ctx_r11 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r11.filesDrop($event);
+            return ctx_r8.filesDrop($event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](14, " Drop Sample File Here ");
@@ -2422,11 +2398,11 @@
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "input", 11);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("change", function TableEditFileComponent_form_1_Template_input_change_16_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r10);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r7);
 
-            var ctx_r12 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r9 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r12.uploadFile($event);
+            return ctx_r9.uploadFile($event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -2443,11 +2419,9 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](19, "br");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](20, TableEditFileComponent_form_1_d_button_refresh_20_Template, 1, 1, "d-button-refresh", 13);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](20, "section");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](21, "section");
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](22, "form-input", 14);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](21, "form-input", 13);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -2481,11 +2455,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("requireFiles", true);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](7);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", (ctx_r0.uploader == null ? null : ctx_r0.uploader.queue == null ? null : ctx_r0.uploader.queue.length) == 1);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](8);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("errors", ctx_r0.formService.formErrors.maxImportLevels);
         }
@@ -2639,12 +2609,12 @@
         },
         decls: 2,
         vars: 3,
-        consts: [["title", "File Properties", 3, "showExpandButton", "padding"], [3, "formGroup", 4, "ngIf"], [3, "formGroup"], [3, "ngIf"], ["label", "Format Type", "formControlName", "formatType", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "The format of data.", 3, "items"], [4, "ngIf"], [1, "label"], ["href", "javascript:void(0)", 3, "click"], [1, "fa", "fa-download"], ["dropZone", "", "dropAllowedClass", "nv-file-over", 1, "well", "my-drop-zone", 3, "requireFiles", "dropFiles"], [1, "custom-file", "w-25", "float-right"], ["type", "file", "onclick", "this.value=null", 1, "custom-file-input", 3, "change"], ["for", "inputGroupFile01", 1, "custom-file-label"], ["text", "Import Table Columns", 3, "busy", "click", 4, "ngIf"], ["label", "Max Import Levels", "formControlName", "maxImportLevels", "placeholder", "Enter the maximum node levels to query the json structure.", "iconClass", "fa fa-file", "note", "Enter the maximum levels to query the json file.", 3, "errors"], ["label", "Files Subdirectory", "formControlName", "fileRootPath", "placeholder", "Enter the file path name.", "iconClass", "fa fa-file", 3, "errors", "note"], ["label", "File Match Pattern", "formControlName", "fileMatchPattern", "placeholder", "Enter the file path.", "iconClass", "fa fa-file", "note", "Specify the file pattern to use to match files when bulk uploading.  Patterns can include wildcards */?, leave blank for all files.", 3, "errors"], ["label", "Auto manage files", "formControlName", "autoManageFiles", "note", "Files loaded from the incoming directory, and moved to the processed or rejected directories when they are loaded by a datalink.  If not checked source files will be left untouched after a load."], ["label", "Specify custom file paths for auto-managed files", "formControlName", "useCustomFilePaths", 3, "note"], ["label", "Incoming subdirectory", "formControlName", "fileIncomingPath", "placeholder", "Enter the file path.", "iconClass", "fa fa-file", "note", "Specify the sub-directory for incoming files", 3, "errors"], ["label", "Outgoing subdirectory", "formControlName", "fileOutgoingPath", "placeholder", "Enter the file path.", "iconClass", "fa fa-file", "note", "Specify the sub-directory for outgoing (written) files", 3, "errors"], ["label", "Processed subdirectory", "formControlName", "fileProcessedPath", "placeholder", "Enter the file path.", "iconClass", "fa fa-file", "note", "Specify the sub-directory for processed files", 3, "errors"], ["label", "Rejected subdirectory", "formControlName", "fileRejectedPath", "placeholder", "Enter the file path.", "iconClass", "fa fa-file", "note", "Specify the sub-directory for rejected files", 3, "errors"], ["label", "File Format", "formControlName", "fileFormatKey", "placeholder", "File Format", "itemKey", "key", "itemName", "name", "note", "Specify the file format to use, if not specified, a csv (command separated) format will be used.", "selectNullMessage", "Use default (csv) format", 3, "errors", "items", "enableFilter", "allowNullSelect"], ["routerLink", "../fileFormat-new"], [1, "fa", "fa-sticky-note-o"], ["label", "Optional: Web Service Row Path", "formControlName", "rowPath", "placeholder", "Enter the row path.", "iconClass", "fa fa-feed", "note", "Optional Json Path indicating where a row should be read from.", 3, "errors"], ["text", "Import Table Columns", 3, "busy", "click"]],
+        consts: [["title", "File Properties", 3, "showExpandButton", "padding"], [3, "formGroup", 4, "ngIf"], [3, "formGroup"], [3, "ngIf"], ["label", "Format Type", "formControlName", "formatType", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "The format of data.", 3, "items"], [4, "ngIf"], [1, "label"], ["href", "javascript:void(0)", 3, "click"], [1, "fa", "fa-download"], ["dropZone", "", "dropAllowedClass", "nv-file-over", 1, "well", "my-drop-zone", 3, "requireFiles", "dropFiles"], [1, "custom-file", "w-25", "float-right"], ["type", "file", "onclick", "this.value=null", 1, "custom-file-input", 3, "change"], ["for", "inputGroupFile01", 1, "custom-file-label"], ["label", "Max Import Levels", "formControlName", "maxImportLevels", "placeholder", "Enter the maximum node levels to query the json structure.", "iconClass", "fa fa-file", "note", "Enter the maximum levels to query the json file.", 3, "errors"], ["label", "Files Subdirectory", "formControlName", "fileRootPath", "placeholder", "Enter the file path name.", "iconClass", "fa fa-file", 3, "errors", "note"], ["label", "File Match Pattern", "formControlName", "fileMatchPattern", "placeholder", "Enter the file path.", "iconClass", "fa fa-file", "note", "Specify the file pattern to use to match files when bulk uploading.  Patterns can include wildcards */?, leave blank for all files.", 3, "errors"], ["label", "Auto manage files", "formControlName", "autoManageFiles", "note", "Files loaded from the incoming directory, and moved to the processed or rejected directories when they are loaded by a datalink.  If not checked source files will be left untouched after a load."], ["label", "Specify custom file paths for auto-managed files", "formControlName", "useCustomFilePaths", 3, "note"], ["label", "Incoming subdirectory", "formControlName", "fileIncomingPath", "placeholder", "Enter the file path.", "iconClass", "fa fa-file", "note", "Specify the sub-directory for incoming files", 3, "errors"], ["label", "Outgoing subdirectory", "formControlName", "fileOutgoingPath", "placeholder", "Enter the file path.", "iconClass", "fa fa-file", "note", "Specify the sub-directory for outgoing (written) files", 3, "errors"], ["label", "Processed subdirectory", "formControlName", "fileProcessedPath", "placeholder", "Enter the file path.", "iconClass", "fa fa-file", "note", "Specify the sub-directory for processed files", 3, "errors"], ["label", "Rejected subdirectory", "formControlName", "fileRejectedPath", "placeholder", "Enter the file path.", "iconClass", "fa fa-file", "note", "Specify the sub-directory for rejected files", 3, "errors"], ["label", "File Format", "formControlName", "fileFormatKey", "placeholder", "File Format", "itemKey", "key", "itemName", "name", "note", "Specify the file format to use, if not specified, a csv (command separated) format will be used.", "selectNullMessage", "Use default (csv) format", 3, "errors", "items", "enableFilter", "allowNullSelect"], ["routerLink", "../fileFormat-new"], [1, "fa", "fa-sticky-note-o"], ["label", "Optional: Web Service Row Path", "formControlName", "rowPath", "placeholder", "Enter the row path.", "iconClass", "fa fa-feed", "note", "Optional Json Path indicating where a row should be read from.", 3, "errors"]],
         template: function TableEditFileComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-widget-section", 0);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, TableEditFileComponent_form_1_Template, 23, 8, "form", 1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, TableEditFileComponent_form_1_Template, 22, 7, "form", 1);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
           }
@@ -2657,7 +2627,7 @@
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.formService == null ? null : ctx.formService.currentForm);
           }
         },
-        directives: [ngx_d_components__WEBPACK_IMPORTED_MODULE_7__["ɵa"], _angular_common__WEBPACK_IMPORTED_MODULE_8__["NgIf"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["FormGroupDirective"], ngx_d_components__WEBPACK_IMPORTED_MODULE_7__["DFormSelectComponent"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["FormControlName"], _shared_utils_dropzone__WEBPACK_IMPORTED_MODULE_10__["DropZoneDirective"], ngx_d_components__WEBPACK_IMPORTED_MODULE_7__["DFormInputComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_7__["DFormCheckboxComponent"], _angular_router__WEBPACK_IMPORTED_MODULE_11__["RouterLinkWithHref"], ngx_d_components__WEBPACK_IMPORTED_MODULE_7__["DButtonRefreshComponent"]],
+        directives: [ngx_d_components__WEBPACK_IMPORTED_MODULE_7__["ɵa"], _angular_common__WEBPACK_IMPORTED_MODULE_8__["NgIf"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["FormGroupDirective"], ngx_d_components__WEBPACK_IMPORTED_MODULE_7__["DFormSelectComponent"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["FormControlName"], _shared_utils_dropzone__WEBPACK_IMPORTED_MODULE_10__["DropZoneDirective"], ngx_d_components__WEBPACK_IMPORTED_MODULE_7__["DFormInputComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_7__["DFormCheckboxComponent"], _angular_router__WEBPACK_IMPORTED_MODULE_11__["RouterLinkWithHref"]],
         encapsulation: 2
       });
       /*@__PURE__*/
@@ -2744,7 +2714,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -2768,7 +2738,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -2941,13 +2911,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -3001,13 +2971,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -3343,7 +3313,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true)("errors", ctx_r0.formsService.formErrors.description);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true)("isHidden", true)("errors", ctx_r0.formsService.formErrors.description);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
@@ -3365,21 +3335,9 @@
 
       function TableEditPropertiesComponent_div_2_Template(rf, ctx) {
         if (rf & 1) {
-          var _r17 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "dexih-table-edit-rest", 27);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onTableChanged", function TableEditPropertiesComponent_div_2_Template_dexih_table_edit_rest_onTableChanged_1_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r17);
-
-            var ctx_r16 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
-
-            return ctx_r16.onTableChanged($event);
-          });
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "dexih-table-edit-rest", 27);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
@@ -3395,21 +3353,9 @@
 
       function TableEditPropertiesComponent_div_3_Template(rf, ctx) {
         if (rf & 1) {
-          var _r19 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "dexih-table-edit-file", 28);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onTableChanged", function TableEditPropertiesComponent_div_3_Template_dexih_table_edit_file_onTableChanged_1_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r19);
-
-            var ctx_r18 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
-
-            return ctx_r18.onTableChanged($event);
-          });
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "dexih-table-edit-file", 28);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
@@ -3601,12 +3547,12 @@
         },
         decls: 4,
         vars: 5,
-        consts: [["title", "Properties", 3, "showExpandButton", "isExpanded"], [3, "formGroup", 4, "ngIf"], [4, "ngIf"], [3, "formGroup"], [1, "form-row"], [1, "form-group", "col-md-4"], ["label", "Connection", "formControlName", "connectionKey", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "The connection for this table.", 3, "items", "errors"], [3, "key"], ["formControlName", "name", "placeholder", "Enter the physical name.", "iconClass", "fa fa-list", "note", "The physical name of the underlying entity", 3, "label", "errors"], ["class", "form-group col-md-4", 4, "ngIf"], ["label", "Specify a different logical name", "formControlName", "useLogical"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview", "errors"], ["class", "form-row", 4, "ngIf"], ["label", "Table is shared in the catalog to users with read access.", "formControlName", "isShared"], ["formControlName", "schema", "placeholder", "Enter the (database) schema name", "iconClass", "fa fa-list", "note", "The physical name of the database schema (if applicable).", 3, "label", "errors"], ["label", "Logical Name", "formControlName", "logicalName", "placeholder", "Enter the logical name.", "iconClass", "fa fa-list", "note", "The logical name is a short term to represent the table", 3, "errors"], [1, "form-group", "col-md-6"], ["label", "Reject Table Name", "formControlName", "rejectedTableName", "placeholder", "Enter the rejected table name.", "iconClass", "fa fa-list", "note", "The name of the table to send any records that could not be written to the primary table.", 3, "errors"], ["label", "Table Type", "formControlName", "tableType", "itemKey", "key", "itemName", "name", 3, "errors", "items"], ["label", "Specify the sql query", "rows", "15", "formControlName", "queryString", "placeholder", "Sql Query", 3, "hideToggle", "showPreview"], ["href", "javascript:void(0)", 3, "click", 4, "ngIf"], [3, "message"], ["href", "javascript:void(0)", 3, "click"], [1, "fa", "fa-check-circle-o"], [1, "fa", "fa-refresh"], [1, "fa", "fa-spin", "fa-refresh"], ["label", "Source Connection Name", "formControlName", "sourceConnectionName", "placeholder", "Name of the source connection.", "iconClass", "fa fa-list", "note", "The name of the connection for this table in the source hub."], [3, "formService", "connection", "onTableChanged"], [3, "formService", "connection", "isFile", "onTableChanged"]],
+        consts: [["title", "Properties", 3, "showExpandButton", "isExpanded"], [3, "formGroup", 4, "ngIf"], [4, "ngIf"], [3, "formGroup"], [1, "form-row"], [1, "form-group", "col-md-4"], ["label", "Connection", "formControlName", "connectionKey", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "The connection for this table.", 3, "items", "errors"], [3, "key"], ["formControlName", "name", "placeholder", "Enter the physical name.", "iconClass", "fa fa-list", "note", "The physical name of the underlying entity", 3, "label", "errors"], ["class", "form-group col-md-4", 4, "ngIf"], ["label", "Specify a different logical name", "formControlName", "useLogical"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview", "isHidden", "errors"], ["class", "form-row", 4, "ngIf"], ["label", "Table is shared in the catalog to users with read access.", "formControlName", "isShared"], ["formControlName", "schema", "placeholder", "Enter the (database) schema name", "iconClass", "fa fa-list", "note", "The physical name of the database schema (if applicable).", 3, "label", "errors"], ["label", "Logical Name", "formControlName", "logicalName", "placeholder", "Enter the logical name.", "iconClass", "fa fa-list", "note", "The logical name is a short term to represent the table", 3, "errors"], [1, "form-group", "col-md-6"], ["label", "Reject Table Name", "formControlName", "rejectedTableName", "placeholder", "Enter the rejected table name.", "iconClass", "fa fa-list", "note", "The name of the table to send any records that could not be written to the primary table.", 3, "errors"], ["label", "Table Type", "formControlName", "tableType", "itemKey", "key", "itemName", "name", 3, "errors", "items"], ["label", "Specify the sql query", "rows", "15", "formControlName", "queryString", "placeholder", "Sql Query", 3, "hideToggle", "showPreview"], ["href", "javascript:void(0)", 3, "click", 4, "ngIf"], [3, "message"], ["href", "javascript:void(0)", 3, "click"], [1, "fa", "fa-check-circle-o"], [1, "fa", "fa-refresh"], [1, "fa", "fa-spin", "fa-refresh"], ["label", "Source Connection Name", "formControlName", "sourceConnectionName", "placeholder", "Name of the source connection.", "iconClass", "fa fa-list", "note", "The name of the connection for this table in the source hub."], [3, "formService", "connection"], [3, "formService", "connection", "isFile"]],
         template: function TableEditPropertiesComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-widget-section", 0);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, TableEditPropertiesComponent_form_1_Template, 20, 14, "form", 1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, TableEditPropertiesComponent_form_1_Template, 20, 15, "form", 1);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -3686,13 +3632,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -3804,13 +3750,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -3828,7 +3774,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -3858,7 +3804,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -4304,13 +4250,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -4322,7 +4268,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 

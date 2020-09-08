@@ -44,13 +44,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -74,7 +74,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -110,7 +110,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -1237,13 +1237,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -1267,7 +1267,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -1303,7 +1303,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -1689,7 +1689,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 
       var DatalinkEditGuard = /*#__PURE__*/function () {
         function DatalinkEditGuard() {
@@ -1749,13 +1749,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -1809,7 +1809,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -2518,7 +2518,7 @@
           }
 
           if (rf & 2) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.datalinkForm && !ctx.datalinkForm.pending);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.datalinkForm);
           }
         },
         directives: [_angular_common__WEBPACK_IMPORTED_MODULE_10__["NgIf"], ngx_d_components__WEBPACK_IMPORTED_MODULE_11__["DWidgetComponent"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterOutlet"], _widgets_datalink_status_datalink_status_component__WEBPACK_IMPORTED_MODULE_12__["DatalinkStatusComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_11__["DButtonDropDownComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_11__["ɵb"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterLink"], _save_button_datalink_edit_save_button_component__WEBPACK_IMPORTED_MODULE_13__["DatalinkEditSaveButtonComponent"], _transform_step_transform_step_component__WEBPACK_IMPORTED_MODULE_14__["TransformStepComponent"], _angular_common__WEBPACK_IMPORTED_MODULE_10__["NgForOf"], _shared_help_dexih_help_component__WEBPACK_IMPORTED_MODULE_15__["DexihHelpComponent"]],
@@ -2581,13 +2581,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -2605,7 +2605,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -2815,7 +2815,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 
       var DatalinkEditModule = /*#__PURE__*/function () {
         function DatalinkEditModule() {
@@ -2942,7 +2942,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -3357,6 +3357,7 @@
           data: {
             pageTitle: 'Mapping Edit'
           },
+          canDeactivate: [_datalink_edit_guard__WEBPACK_IMPORTED_MODULE_12__["DatalinkEditGuard"]],
           component: _mapping_edit__WEBPACK_IMPORTED_MODULE_11__["MappingEditComponent"]
         }, {
           path: 'mapping-edit/:type/:datalinkTransformItemKey',
@@ -3487,7 +3488,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -4126,7 +4127,7 @@
                   datalinkTable.name = datalink.name;
                   var io = new _hub_lineage_models__WEBPACK_IMPORTED_MODULE_4__["InputOutputColumns"](); // const datalinkColumns = io.getInputColumns(this._hubCache, datalink, null, []);
 
-                  io.buildInputOutput(this._hubCache, datalink);
+                  io.buildInputOutput(datalink);
                   var datalinkColumns;
 
                   if (datalink.dexihDatalinkTransforms.length === 0) {
@@ -4267,7 +4268,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -4291,7 +4292,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -4309,7 +4310,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -4726,7 +4727,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -4762,7 +4763,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -4780,7 +4781,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
       function InputColumnComponent_div_6_input_column_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -4982,13 +4983,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -5000,13 +5001,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/cdk/drag-drop */
-      "./node_modules/@angular/cdk/fesm2015/drag-drop.js");
+      "./node_modules/@angular/cdk/__ivy_ngcc__/fesm2015/drag-drop.js");
       /* harmony import */
 
 
@@ -5313,7 +5314,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -5337,7 +5338,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -5349,7 +5350,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
       function JoinColumnComponent_a_3_Template(rf, ctx) {
         if (rf & 1) {
@@ -5553,7 +5554,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -5577,7 +5578,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -5589,7 +5590,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -5876,13 +5877,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -5936,7 +5937,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -5948,7 +5949,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 
       function MappingEditComponent_div_0_ng_template_2_Template(rf, ctx) {
         if (rf & 1) {
@@ -6036,7 +6037,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("items", ctx_r4.inputColumns)("textValue", ctx_r4.sourceValue)("allowNullSelect", true)("enableKeySelect", false)("enableTextEntry", true)("enableTextEntryMatch", false)("errors", ctx_r4.sourceErrors);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("items", ctx_r4.inputColumns)("textValue", ctx_r4.sourceValue)("allowNullSelect", true)("allowBlankSelect", true)("enableKeySelect", false)("enableTextEntry", true)("enableTextEntryMatch", false)("errors", ctx_r4.sourceErrors);
         }
       }
 
@@ -6090,7 +6091,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("items", ctx_r6.inputColumns)("enableTextEntry", true)("textValue", ctx_r6.filterValue)("enableTextEntryMatch", false)("enableKeySelect", false)("allowNullSelect", true)("textEntryItems", ctx_r6.variables)("setTextEntryToValue", false);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("items", ctx_r6.inputColumns)("enableTextEntry", true)("textValue", ctx_r6.filterValue)("enableTextEntryMatch", false)("enableKeySelect", false)("allowNullSelect", true)("allowBlankSelect", true)("textEntryItems", ctx_r6.variables)("setTextEntryToValue", false);
         }
       }
 
@@ -6120,7 +6121,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("items", ctx_r7.outputTables)("allowNullSelect", true)("enableKeySelect", false)("enableTextEntry", true)("setTextEntryToValue", false)("errors", ctx_r7.targetErrors);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("items", ctx_r7.outputTables)("allowNullSelect", true)("allowBlankSelect", true)("enableKeySelect", false)("enableTextEntry", true)("setTextEntryToValue", false)("errors", ctx_r7.targetErrors);
         }
       }
 
@@ -6156,7 +6157,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("items", ctx_r9.joinColumns)("allowNullSelect", true)("enableKeySelect", false)("errors", ctx_r9.joinErrors);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("items", ctx_r9.joinColumns)("allowNullSelect", true)("allowBlankSelect", true)("enableKeySelect", false)("errors", ctx_r9.joinErrors);
         }
       }
 
@@ -6176,17 +6177,17 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](7, MappingEditComponent_div_0_section_7_Template, 2, 1, "section", 5);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](8, MappingEditComponent_div_0_section_8_Template, 2, 7, "section", 5);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](8, MappingEditComponent_div_0_section_8_Template, 2, 8, "section", 5);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](9, MappingEditComponent_div_0_section_9_Template, 2, 1, "section", 5);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](10, MappingEditComponent_div_0_section_10_Template, 2, 8, "section", 5);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](10, MappingEditComponent_div_0_section_10_Template, 2, 9, "section", 5);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](11, MappingEditComponent_div_0_section_11_Template, 2, 6, "section", 5);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](11, MappingEditComponent_div_0_section_11_Template, 2, 7, "section", 5);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](12, MappingEditComponent_div_0_section_12_Template, 2, 1, "section", 5);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](13, MappingEditComponent_div_0_section_13_Template, 2, 4, "section", 5);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](13, MappingEditComponent_div_0_section_13_Template, 2, 5, "section", 5);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -6419,8 +6420,26 @@
             }
           }
         }, {
+          key: "canDeactivate",
+          value: function canDeactivate() {
+            var _this28 = this;
+
+            return new Promise(function (resolve) {
+              if (_this28.newDatalinkTransformItemForm && !_this28.newDatalinkTransformItemForm.pristine) {
+                _this28.authService.confirmDialog('The mapping has changed', 'The function has changed.  Do you want to discard the changes and continue?').then(function (confirm) {
+                  resolve(confirm);
+                })["catch"](function () {
+                  resolve(false);
+                });
+              } else {
+                resolve(true);
+              }
+            });
+          }
+        }, {
           key: "cancel",
           value: function cancel() {
+            this.newDatalinkTransformItemForm = null;
             this.authService.navigateUp();
           }
         }, {
@@ -6512,7 +6531,7 @@
         selectors: [["mapping-edit"]],
         decls: 1,
         vars: 1,
-        consts: [[4, "ngIf"], [3, "title", "showExpandButton"], ["header", ""], [3, "formGroup"], [1, "form-row"], ["class", "form-group col-md-4", 4, "ngIf"], [1, "mr-1", 3, "disabled", "click"], [3, "click"], [1, "form-group", "col-md-4"], ["label", "Aggregate", "formControlName", "aggregate", "itemKey", "key", "itemName", "name", 3, "items"], ["label", "Input Column", "formControlName", "sourceDatalinkColumn", "parentName", "group", "childItems", "columns", "selectNullMessage", "(no selection)", "itemName", "logicalName", "itemKey", "key", 3, "items", "textValue", "allowNullSelect", "enableKeySelect", "enableTextEntry", "enableTextEntryMatch", "errors", "textValueChange"], ["label", "Compare", "formControlName", "filterCompare", "itemKey", "key", "itemName", "name", 3, "items"], ["label", "Compare Column/Value", "formControlName", "filterDatalinkColumn", "parentName", "group", "childItems", "columns", "selectNullMessage", "(no selection)", "itemKey", "key", "itemName", "logicalName", "textEntryItemsTitle", "Variables", "note", "Note: For static date values use format YYYY-MM-DD (e.g. 2018-01-30)", 3, "items", "enableTextEntry", "textValue", "enableTextEntryMatch", "enableKeySelect", "allowNullSelect", "textEntryItems", "setTextEntryToValue", "textValueChange"], ["label", "Output Column", "formControlName", "targetDatalinkColumn", "parentName", "name", "childItems", "dexihTableColumns", "itemKey", "key", "itemName", "logicalName", "note", "Enter new column, or select existing", "selectNullMessage", "(no selection)", "textEntryNote", "Enter new column name, or select existing", 3, "items", "allowNullSelect", "enableKeySelect", "enableTextEntry", "setTextEntryToValue", "errors", "textValueChange"], ["label", "Direction", "formControlName", "sortDirection", "itemKey", "key", "itemName", "name", 3, "items"], ["label", "Join Column", "formControlName", "joinDatalinkColumn", "selectNullMessage", "(no selection)", "itemKey", "key", "itemName", "logicalName", "note", "Select a join column", "textEntryNote", "Enter a value to add a new column", 3, "items", "allowNullSelect", "enableKeySelect", "errors"]],
+        consts: [[4, "ngIf"], [3, "title", "showExpandButton"], ["header", ""], [3, "formGroup"], [1, "form-row"], ["class", "form-group col-md-4", 4, "ngIf"], [1, "mr-1", 3, "disabled", "click"], [3, "click"], [1, "form-group", "col-md-4"], ["label", "Aggregate", "formControlName", "aggregate", "itemKey", "key", "itemName", "name", 3, "items"], ["label", "Input Column", "formControlName", "sourceDatalinkColumn", "parentName", "group", "childItems", "columns", "selectNullMessage", "(select null)", "selectBlankMessage", "(select blank)", "itemName", "logicalName", "itemKey", "key", 3, "items", "textValue", "allowNullSelect", "allowBlankSelect", "enableKeySelect", "enableTextEntry", "enableTextEntryMatch", "errors", "textValueChange"], ["label", "Compare", "formControlName", "filterCompare", "itemKey", "key", "itemName", "name", 3, "items"], ["label", "Compare Column/Value", "formControlName", "filterDatalinkColumn", "parentName", "group", "childItems", "columns", "selectNullMessage", "(select null)", "selectBlankMessage", "(select blank)", "itemKey", "key", "itemName", "logicalName", "textEntryItemsTitle", "Variables", "note", "Note: For static date values use format YYYY-MM-DD (e.g. 2018-01-30)", 3, "items", "enableTextEntry", "textValue", "enableTextEntryMatch", "enableKeySelect", "allowNullSelect", "allowBlankSelect", "textEntryItems", "setTextEntryToValue", "textValueChange"], ["label", "Output Column", "formControlName", "targetDatalinkColumn", "parentName", "name", "childItems", "dexihTableColumns", "itemKey", "key", "itemName", "logicalName", "note", "Enter new column, or select existing", "selectNullMessage", "(select null)", "selectBlankMessage", "(select blank)", "textEntryNote", "Enter new column name, or select existing", 3, "items", "allowNullSelect", "allowBlankSelect", "enableKeySelect", "enableTextEntry", "setTextEntryToValue", "errors", "textValueChange"], ["label", "Direction", "formControlName", "sortDirection", "itemKey", "key", "itemName", "name", 3, "items"], ["label", "Join Column", "formControlName", "joinDatalinkColumn", "selectNullMessage", "(select null)", "selectBlankMessage", "(select blank)", "itemKey", "key", "itemName", "logicalName", "note", "Select a join column", "textEntryNote", "Enter a value to add a new column", 3, "items", "allowNullSelect", "allowBlankSelect", "enableKeySelect", "errors"]],
         template: function MappingEditComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, MappingEditComponent_div_0_Template, 14, 10, "div", 0);
@@ -6633,7 +6652,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -6675,7 +6694,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
       var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
         function adopt(value) {
@@ -7367,7 +7386,7 @@
         _createClass(MappingItemComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this28 = this;
+            var _this29 = this;
 
             try {
               if (this._subscription) {
@@ -7375,9 +7394,9 @@
               }
 
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["combineLatest"])(this.hubService.getHubCacheObservable(), this.hubService.getRemoteLibrariesObservable()).subscribe(function (result) {
-                _this28.hubCache = result[0];
+                _this29.hubCache = result[0];
 
-                _this28.updateMapping();
+                _this29.updateMapping();
               });
             } catch (e) {
               this.hubService.addHubClientErrorMessage(e, 'Mappings');
@@ -7539,7 +7558,7 @@
         }, {
           key: "addBuiltInFunctionParameters",
           value: function addBuiltInFunctionParameters(func) {
-            var _this29 = this;
+            var _this30 = this;
 
             var functionInputs = this.concat(func.inputParameters, func.resultInputParameters);
             var functionOutputs = this.concat(func.outputParameters, func.returnParameters, func.resultOutputParameters, func.resultReturnParameters);
@@ -7555,26 +7574,26 @@
 
               if (p) {
                 if (p.rank === 0) {
-                  var value = _this29.columnOrValue(p.dataType, p.datalinkColumn, p.value);
+                  var value = _this30.columnOrValue(p.dataType, p.datalinkColumn, p.value);
 
                   return {
-                    name: _this29.describeParameterName(p),
+                    name: _this30.describeParameterName(p),
                     values: [value]
                   };
                 } else {
                   var values = p.arrayParameters.sort(function (a, b) {
                     return a.position - b.position;
                   }).map(function (ap) {
-                    return _this29.columnOrValue(ap.dataType, ap.datalinkColumn, ap.value);
+                    return _this30.columnOrValue(ap.dataType, ap.datalinkColumn, ap.value);
                   });
                   return {
-                    name: _this29.describeParameterName(p),
+                    name: _this30.describeParameterName(p),
                     values: values
                   };
                 }
               } else {
                 return {
-                  name: _this29.describeParameterName(p),
+                  name: _this30.describeParameterName(p),
                   values: [{
                     valid: false,
                     error: 'Not Mapped',
@@ -7594,25 +7613,25 @@
               });
 
               if (p) {
-                if (_this29.allowCondition && (p.direction === _shared_shared_models__WEBPACK_IMPORTED_MODULE_6__["eParameterDirection"].ReturnValue || p.direction === _shared_shared_models__WEBPACK_IMPORTED_MODULE_6__["eParameterDirection"].ResultReturnValue)) {
+                if (_this30.allowCondition && (p.direction === _shared_shared_models__WEBPACK_IMPORTED_MODULE_6__["eParameterDirection"].ReturnValue || p.direction === _shared_shared_models__WEBPACK_IMPORTED_MODULE_6__["eParameterDirection"].ResultReturnValue)) {
                   return null;
                 }
 
                 if (p.rank === 0 || p.datalinkColumn !== null) {
-                  var value = _this29.describeDatalinkColumn(p.dataType, p.datalinkColumn);
+                  var value = _this30.describeDatalinkColumn(p.dataType, p.datalinkColumn);
 
                   return {
-                    name: _this29.describeParameterName(p),
+                    name: _this30.describeParameterName(p),
                     values: [value]
                   };
                 } else {
                   var values = p.arrayParameters.sort(function (a, b) {
                     return a.position - b.position;
                   }).map(function (ap) {
-                    return _this29.describeDatalinkColumn(ap.dataType, ap.datalinkColumn);
+                    return _this30.describeDatalinkColumn(ap.dataType, ap.datalinkColumn);
                   });
                   return {
-                    name: _this29.describeParameterName(p),
+                    name: _this30.describeParameterName(p),
                     values: values
                   };
                 }
@@ -7638,10 +7657,10 @@
                 var values = p.arrayParameters.sort(function (a, b) {
                   return a.position - b.position;
                 }).map(function (ap) {
-                  return _this29.columnOrValue(ap.dataType, ap.datalinkColumn, ap.value);
+                  return _this30.columnOrValue(ap.dataType, ap.datalinkColumn, ap.value);
                 });
                 return {
-                  name: _this29.describeParameterName(param),
+                  name: _this30.describeParameterName(param),
                   values: values
                 };
               });
@@ -7654,43 +7673,43 @@
                 var values = p.arrayParameters.sort(function (a, b) {
                   return a.position - b.position;
                 }).map(function (ap) {
-                  return _this29.describeDatalinkColumn(ap.dataType, ap.datalinkColumn);
+                  return _this30.describeDatalinkColumn(ap.dataType, ap.datalinkColumn);
                 });
                 return {
-                  name: _this29.describeParameterName(param),
+                  name: _this30.describeParameterName(param),
                   values: values
                 };
               });
               return {
                 name: name,
-                parameters: _this29.concat(parameters, parameters2)
+                parameters: _this30.concat(parameters, parameters2)
               };
             });
           }
         }, {
           key: "addCustomFunctionParameters",
           value: function addCustomFunctionParameters() {
-            var _this30 = this;
+            var _this31 = this;
 
             var inputParams = this.transformItem.dexihFunctionParameters.filter(function (c) {
               return c.direction === _shared_shared_models__WEBPACK_IMPORTED_MODULE_6__["eParameterDirection"].Input || c.direction === _shared_shared_models__WEBPACK_IMPORTED_MODULE_6__["eParameterDirection"].ResultInput || c.direction === _shared_shared_models__WEBPACK_IMPORTED_MODULE_6__["eParameterDirection"].Join;
             });
             this.inputParameters = inputParams.map(function (p) {
               if (p.rank === 0) {
-                var value = _this30.columnOrValue(p.dataType, p.datalinkColumn, p.value);
+                var value = _this31.columnOrValue(p.dataType, p.datalinkColumn, p.value);
 
                 return {
-                  name: _this30.describeParameterName(p),
+                  name: _this31.describeParameterName(p),
                   values: [value]
                 };
               } else {
                 var values = p.arrayParameters.sort(function (a, b) {
                   return a.position - b.position;
                 }).map(function (ap) {
-                  return _this30.columnOrValue(ap.dataType, ap.datalinkColumn, ap.value);
+                  return _this31.columnOrValue(ap.dataType, ap.datalinkColumn, ap.value);
                 });
                 return {
-                  name: _this30.describeParameterName(p),
+                  name: _this31.describeParameterName(p),
                   values: values
                 };
               }
@@ -7700,20 +7719,20 @@
             });
             this.outputParameters = outputParams.map(function (p) {
               if (p.rank === 0) {
-                var value = _this30.describeDatalinkColumn(p.dataType, p.datalinkColumn);
+                var value = _this31.describeDatalinkColumn(p.dataType, p.datalinkColumn);
 
                 return {
-                  name: _this30.describeParameterName(p),
+                  name: _this31.describeParameterName(p),
                   values: [value]
                 };
               } else {
                 var values = p.arrayParameters.sort(function (a, b) {
                   return a.position - b.position;
                 }).map(function (ap) {
-                  return _this30.describeDatalinkColumn(ap.dataType, ap.datalinkColumn);
+                  return _this31.describeDatalinkColumn(ap.dataType, ap.datalinkColumn);
                 });
                 return {
-                  name: _this30.describeParameterName(p),
+                  name: _this31.describeParameterName(p),
                   values: values
                 };
               }
@@ -7722,13 +7741,13 @@
         }, {
           key: "addUnGroupParameters",
           value: function addUnGroupParameters() {
-            var _this31 = this;
+            var _this32 = this;
 
             var parameters = this.transformItem.dexihFunctionParameters;
             var runTime = this.transform['runTime'];
             var inputColumns = runTime.inputColumns;
             var sourceColumn = inputColumns.find(function (c) {
-              return c.key === _this31.transformItem.sourceDatalinkColumn.key;
+              return c.key === _this32.transformItem.sourceDatalinkColumn.key;
             });
 
             if (sourceColumn) {
@@ -7740,7 +7759,7 @@
 
                   if (find) {
                     return {
-                      name: _this31.describeParameterName(p),
+                      name: _this32.describeParameterName(p),
                       values: [{
                         valid: true,
                         error: '',
@@ -7750,7 +7769,7 @@
                   }
 
                   return {
-                    name: _this31.describeParameterName(p),
+                    name: _this32.describeParameterName(p),
                     values: [{
                       valid: false,
                       error: '(Invalid column) ',
@@ -7759,7 +7778,7 @@
                   };
                 } else {
                   return {
-                    name: _this31.describeParameterName(p),
+                    name: _this32.describeParameterName(p),
                     values: [{
                       valid: false,
                       error: '(No column)',
@@ -7844,7 +7863,11 @@
               return '<space>';
             }
 
-            if (!value) {
+            if (value === '') {
+              return '<blank>';
+            }
+
+            if (value == null) {
               return '<null>';
             }
 
@@ -7947,7 +7970,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -7977,13 +8000,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -8007,7 +8030,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -8025,7 +8048,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
       var _c0 = ["mappingTable"];
 
@@ -8503,7 +8526,7 @@
         }, {
           key: "ngOnChanges",
           value: function ngOnChanges() {
-            var _this32 = this;
+            var _this33 = this;
 
             try {
               // this.columns = [{ name: 'function', title: 'Mapping', format: 'Md', class: 'functionClass' }];
@@ -8523,17 +8546,17 @@
               }
 
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["combineLatest"])(this.hubService.getHubCacheObservable(), this.hubService.getRemoteLibrariesObservable()).subscribe(function () {
-                _this32.functionType = _this32.editDatalinkService.getFunctionType(_this32.datalinkTransformForm.value);
-                _this32.transformType = _this32.datalinkTransformForm.value.transformType;
+                _this33.functionType = _this33.editDatalinkService.getFunctionType(_this33.datalinkTransformForm.value);
+                _this33.transformType = _this33.datalinkTransformForm.value.transformType;
 
-                _this32.updateTableData();
+                _this33.updateTableData();
 
-                if (_this32._changesSubscription) {
-                  _this32._changesSubscription.unsubscribe();
+                if (_this33._changesSubscription) {
+                  _this33._changesSubscription.unsubscribe();
                 }
 
-                _this32._changesSubscription = _this32.datalinkTransformForm.valueChanges.subscribe(function () {
-                  return _this32.updateTableData();
+                _this33._changesSubscription = _this33.datalinkTransformForm.valueChanges.subscribe(function () {
+                  return _this33.updateTableData();
                 });
               });
             } catch (e) {
@@ -8684,24 +8707,24 @@
         }, {
           key: "deleteSelected",
           value: function deleteSelected(items) {
-            var _this33 = this;
+            var _this34 = this;
 
             items.forEach(function (item) {
               var key = item.key;
 
-              var itemForm = _this33.getItemFormGroup(key);
+              var itemForm = _this34.getItemFormGroup(key);
 
-              _this33.editDatalinkService.deleteDatalinkTransformItem(_this33.datalinkTransformForm, itemForm);
+              _this34.editDatalinkService.deleteDatalinkTransformItem(_this34.datalinkTransformForm, itemForm);
             });
           } // if a sort event has triggered from the table, then reset the positions of the datalink transform items.
 
         }, {
           key: "datalinkItemSortChange",
           value: function datalinkItemSortChange(items) {
-            var _this34 = this;
+            var _this35 = this;
 
             items.forEach(function (item, index) {
-              var existingItems = _this34.datalinkTransformForm.controls.dexihDatalinkTransformItems;
+              var existingItems = _this35.datalinkTransformForm.controls.dexihDatalinkTransformItems;
               var datalinkTransformItem = existingItems.controls.find(function (c) {
                 return c.value.key === item.key;
               });
@@ -8723,7 +8746,7 @@
         }, {
           key: "createJoinNode",
           value: function createJoinNode() {
-            var _this35 = this;
+            var _this36 = this;
 
             var items = this.datalinkTransformForm.controls.dexihDatalinkTransformItems;
 
@@ -8744,7 +8767,7 @@
             var io = new _hub_lineage_models__WEBPACK_IMPORTED_MODULE_7__["InputOutputColumns"]();
             var columns = joinTable.dexihDatalinkColumns.map(function (col, index) {
               var childColumn = io.copyDatalinkColumn(col, index, 'Join Node');
-              childColumn.key = _this35.hubService.getHubCache().getNextSequence();
+              childColumn.key = _this36.hubService.getHubCache().getNextSequence();
               childColumn.datalinkTableKey = null;
               return childColumn;
             });
@@ -8795,27 +8818,27 @@
         }, {
           key: "addAll",
           value: function addAll() {
-            var _this36 = this;
+            var _this37 = this;
 
             var runTime = this.datalinkTransformForm.controls['runTime'].value;
             var inputColumns = runTime.inputColumns;
             inputColumns.forEach(function (inputColumn) {
-              _this36.createMapping(inputColumn);
+              _this37.createMapping(inputColumn);
             });
           }
         }, {
           key: "addGroup",
           value: function addGroup(group) {
-            var _this37 = this;
+            var _this38 = this;
 
             group.columns.forEach(function (inputColumn) {
-              _this37.createMapping(inputColumn);
+              _this38.createMapping(inputColumn);
             });
           }
         }, {
           key: "createMapping",
           value: function createMapping(inputColumn) {
-            var _this38 = this;
+            var _this39 = this;
 
             var runTime = this.datalinkTransformForm.controls['runTime'].value;
             var outputColumns = runTime.outputColumns;
@@ -8833,7 +8856,7 @@
 
             if (outputColumn.childColumns) {
               outputColumn.childColumns.forEach(function (col) {
-                col.key = _this38.hubService.getHubCache().getNextSequence();
+                col.key = _this39.hubService.getHubCache().getNextSequence();
               });
             }
 
@@ -9081,13 +9104,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -9129,7 +9152,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
       var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
         function adopt(value) {
@@ -9235,12 +9258,12 @@
         _createClass(DatalinkEditNewTransformComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this39 = this;
+            var _this40 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["combineLatest"])(this.route.data, this.route.params, this.editDatalinkService.hubFormsService.getCurrentFormObservable()).subscribe(function (result) {
-                return __awaiter(_this39, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-                  var _this40 = this;
+                return __awaiter(_this40, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+                  var _this41 = this;
 
                   var userConfigTransforms;
                   return regeneratorRuntime.wrap(function _callee3$(_context3) {
@@ -9264,7 +9287,7 @@
                               icon = transformType.icon;
                             }
 
-                            _this40.transforms.push({
+                            _this41.transforms.push({
                               transformReference: transform,
                               icon: icon
                             });
@@ -9434,7 +9457,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -9470,7 +9493,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -9482,7 +9505,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -9500,7 +9523,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
       function OutputColumnComponent_div_0_Template(rf, ctx) {
         if (rf & 1) {
@@ -9536,7 +9559,7 @@
         if (rf & 2) {
           var ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("title", ctx_r0.column.logicalName + " " + ctx_r0.column.dataType);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("title", ctx_r0.column.logicalName + " " + ctx_r0.eTypeCode[ctx_r0.column.dataType]);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
@@ -9623,20 +9646,20 @@
         _createClass(OutputColumnComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this41 = this;
+            var _this42 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["combineLatest"])(this.hubService.getHubCacheObservable(), this.editDatalinkService.hubFormsService.getCurrentFormObservable()).subscribe(function (result) {
-                _this41.hubCache = result[0];
-                _this41.datalinkForm = result[1];
+                _this42.hubCache = result[0];
+                _this42.datalinkForm = result[1];
 
-                _this41.logger.LogC(function () {
-                  return "Subscription count: ".concat(_this41.logCount++);
+                _this42.logger.LogC(function () {
+                  return "Subscription count: ".concat(_this42.logCount++);
                 }, _logging__WEBPACK_IMPORTED_MODULE_7__["eLogLevel"].Trace);
 
-                _this41.childColumns = _this41.column.childColumns;
+                _this42.childColumns = _this42.column.childColumns;
 
-                _this41.refreshStatus();
+                _this42.refreshStatus();
               });
             } catch (e) {
               this.hubService.addHubClientErrorMessage(e, 'Output Column');
@@ -9657,13 +9680,13 @@
         }, {
           key: "refreshStatus",
           value: function refreshStatus() {
-            var _this42 = this;
+            var _this43 = this;
 
             if (this.datalinkForm) {
               var columnUsage = new _hub_lineage_models__WEBPACK_IMPORTED_MODULE_4__["ColumnUsageNode"](_hub_lineage_models__WEBPACK_IMPORTED_MODULE_4__["eDatalinkObjectType"].Transform, _hub_lineage_models__WEBPACK_IMPORTED_MODULE_4__["eObjectUse"].Target, this.datalinkForm.value, this.column, null, this.datalinkTransformForm.value, null, _hub_models__WEBPACK_IMPORTED_MODULE_3__["eMappingStatus"].NotMapped, this.hubCache);
               this.mappingStatusLineage = columnUsage.createDatalinkLineage(false);
               this.mappingStatusInfoLineage = _hub_models__WEBPACK_IMPORTED_MODULE_3__["lineageMappingStatuses"].find(function (c) {
-                return c.key === _this42.mappingStatusLineage;
+                return c.key === _this43.mappingStatusLineage;
               });
               var mappingStatusImpact = columnUsage.createDatalinkImpact(true);
 
@@ -9794,25 +9817,25 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/cdk/drag-drop */
-      "./node_modules/@angular/cdk/fesm2015/drag-drop.js");
+      "./node_modules/@angular/cdk/__ivy_ngcc__/fesm2015/drag-drop.js");
       /* harmony import */
 
 
@@ -9968,7 +9991,7 @@
         }, {
           key: "ngOnChanges",
           value: function ngOnChanges() {
-            var _this43 = this;
+            var _this44 = this;
 
             if (this._outputColumnsSubscribe) {
               this._outputColumnsSubscribe.unsubscribe();
@@ -9976,7 +9999,7 @@
 
             this.refreshColumns(this.datalinkTransformForm.controls.runTime.value.transformColumns);
             this._outputColumnsSubscribe = this.datalinkTransformForm.controls.runTime.valueChanges.subscribe(function () {
-              _this43.refreshColumns(_this43.datalinkTransformForm.controls.runTime.value.transformColumns);
+              _this44.refreshColumns(_this44.datalinkTransformForm.controls.runTime.value.transformColumns);
             });
           }
         }, {
@@ -10183,7 +10206,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -10219,13 +10242,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -10237,7 +10260,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
 
       function InputParameterComponent_form_2_div_2_Template(rf, ctx) {
         if (rf & 1) {
@@ -10317,7 +10340,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("border", false)("items", ctx_r8.inputColumnGroups)("textValue", ctx_r8.inputs[i_r5].staticValue)("enableKeySelect", false)("enableTextEntry", ctx_r8.rank === 0)("enableTextEntryMatch", false)("setTextEntryToValue", false)("textEntryNote", ctx_r8.rank > 0 ? "Select an array type source (otherwise select add to build an array)" : "Select a column or enter a static value.")("textEntryItems", ctx_r8.inputs[i_r5].textItems)("errors", ctx_r8.errors[i_r5].datalinkColumn);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("border", false)("items", ctx_r8.inputColumnGroups)("textValue", ctx_r8.inputs[i_r5].staticValue)("enableKeySelect", false)("enableTextEntry", ctx_r8.rank === 0)("enableTextEntryMatch", false)("setTextEntryToValue", false)("allowNullSelect", true)("allowBlankSelect", true)("textEntryNote", ctx_r8.rank > 0 ? "Select an array type source (otherwise select add to build an array)" : "Select a column or enter a static value.")("textEntryItems", ctx_r8.inputs[i_r5].textItems)("errors", ctx_r8.errors[i_r5].datalinkColumn);
         }
       }
 
@@ -10423,7 +10446,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, InputParameterComponent_form_2_div_3_Template, 2, 1, "div", 8);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, InputParameterComponent_form_2_div_4_Template, 2, 10, "div", 8);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, InputParameterComponent_form_2_div_4_Template, 2, 12, "div", 8);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, InputParameterComponent_form_2_div_5_Template, 2, 4, "div", 8);
 
@@ -10507,7 +10530,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("border", false)("items", ctx_r1.outputTables)("enableKeySelect", false)("enableTextEntry", true)("setTextEntryToValue", false);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("border", false)("items", ctx_r1.outputTables)("enableKeySelect", false)("enableTextEntry", true)("setTextEntryToValue", false)("allowNullSelect", true)("allowBlankSelect", true);
         }
       }
 
@@ -10641,13 +10664,13 @@
         _createClass(InputParameterComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this44 = this;
+            var _this45 = this;
 
             this.inputs = this.inputParameterForms.map(function (param) {
               return new InputValues();
             });
             this.errors = this.inputParameterForms.map(function (a) {
-              return _this44.editDatalinkService.hubFormsService.getFormErrorMessages(a, true);
+              return _this45.editDatalinkService.hubFormsService.getFormErrorMessages(a, true);
             });
             var io = new _hub_lineage_models__WEBPACK_IMPORTED_MODULE_3__["InputOutputColumns"]();
 
@@ -10694,41 +10717,41 @@
             this.updateItems();
 
             var _loop = function _loop(_i) {
-              var runTime = _this44.inputParameterForms[_i].value.runTime;
+              var runTime = _this45.inputParameterForms[_i].value.runTime;
 
               if (!runTime || !runTime.functionParameter || !runTime.functionParameter.listOfValues) {
-                _this44.inputs[_i].inputParameterSubscription = _this44.inputParameterForms[_i].valueChanges.subscribe(function () {
-                  if (!_this44.ignoreChanges) {
-                    _this44.updateItems();
+                _this45.inputs[_i].inputParameterSubscription = _this45.inputParameterForms[_i].valueChanges.subscribe(function () {
+                  if (!_this45.ignoreChanges) {
+                    _this45.updateItems();
 
-                    _this44.ignoreChanges = true;
+                    _this45.ignoreChanges = true;
 
-                    if (_this44.inputParameterForms[_i].controls.datalinkColumn.value) {
-                      _this44.inputParameterForms[_i].controls.value.setValue(null);
+                    if (_this45.inputParameterForms[_i].controls.datalinkColumn.value) {
+                      _this45.inputParameterForms[_i].controls.value.setValue(null);
                     } else {
-                      _this44.inputParameterForms[_i].controls.value.setValue(_this44.inputs[_i].staticValue);
+                      _this45.inputParameterForms[_i].controls.value.setValue(_this45.inputs[_i].staticValue);
                     }
 
-                    _this44.ignoreChanges = false;
+                    _this45.ignoreChanges = false;
                   }
 
-                  _this44.errors[_i] = _this44.editDatalinkService.hubFormsService.getFormErrorMessages(_this44.inputParameterForms[_i], true);
+                  _this45.errors[_i] = _this45.editDatalinkService.hubFormsService.getFormErrorMessages(_this45.inputParameterForms[_i], true);
                 });
               }
 
-              if (_this44.updateParameterName) {
-                _this44.inputs[_i].datalinkColumnSubscription = _this44.inputParameterForms[_i].controls.datalinkColumn.valueChanges.subscribe(function (value) {
+              if (_this45.updateParameterName) {
+                _this45.inputs[_i].datalinkColumnSubscription = _this45.inputParameterForms[_i].controls.datalinkColumn.valueChanges.subscribe(function (value) {
                   if (value) {
-                    _this44.inputParameterForms[_i].controls.dataType.setValue(value.dataType);
+                    _this45.inputParameterForms[_i].controls.dataType.setValue(value.dataType);
 
-                    _this44.inputParameterForms[_i].controls.name.setValue(value.name);
+                    _this45.inputParameterForms[_i].controls.name.setValue(value.name);
                   } else {
-                    _this44.inputParameterForms[_i].controls.dataType.setValue(_shared_shared_models__WEBPACK_IMPORTED_MODULE_4__["eTypeCode"].String);
+                    _this45.inputParameterForms[_i].controls.dataType.setValue(_shared_shared_models__WEBPACK_IMPORTED_MODULE_4__["eTypeCode"].String);
 
-                    _this44.inputParameterForms[_i].controls.name.setValue('');
+                    _this45.inputParameterForms[_i].controls.name.setValue('');
                   }
 
-                  _this44.errors[_i] = _this44.editDatalinkService.hubFormsService.getFormErrorMessages(_this44.inputParameterForms[_i], true);
+                  _this45.errors[_i] = _this45.editDatalinkService.hubFormsService.getFormErrorMessages(_this45.inputParameterForms[_i], true);
                 });
               }
             };
@@ -10760,7 +10783,7 @@
         }, {
           key: "ngOnChanges",
           value: function ngOnChanges() {
-            var _this45 = this;
+            var _this46 = this;
 
             var table = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_4__["DexihTable"]();
             table.name = 'Output Columns';
@@ -10769,7 +10792,7 @@
 
             if (this.datalinkTargets) {
               this.datalinkTargets.forEach(function (target) {
-                _this45.outputTables.push(target['table']);
+                _this46.outputTables.push(target['table']);
               });
             }
           }
@@ -10850,7 +10873,7 @@
         features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵNgOnChangesFeature"]],
         decls: 6,
         vars: 4,
-        consts: [[1, "input-group", "d-flex"], ["class", "flex-fill", 3, "formGroup", 4, "ngFor", "ngForOf"], ["class", "ml-1  flex-fill", 3, "formGroup", 4, "ngFor", "ngForOf"], ["class", "input-group-append flex-shrink-1 ml-1 ", 4, "ngIf"], ["class", "form-text text-muted", 4, "ngIf"], [1, "flex-fill", 3, "formGroup"], [1, "input-group"], ["class", "input-group-prepend", 4, "ngIf"], ["class", "form-control p-0", 4, "ngIf"], ["class", "input-group-text", 4, "ngIf"], ["class", "form-control", 4, "ngIf"], [1, "input-group-prepend"], [1, "input-group-text"], [1, "form-control", "p-0"], ["formControlName", "name", "type", "text", "placeholder", "Enter a name for the parameter", 3, "border"], ["formControlName", "datalinkColumn", "parentName", "group", "childItems", "columns", "itemKey", "key", "itemName", "logicalName", "textEntryItemsTitle", "Variables", 3, "border", "items", "textValue", "enableKeySelect", "enableTextEntry", "enableTextEntryMatch", "setTextEntryToValue", "textEntryNote", "textEntryItems", "errors", "textValueChange"], ["type", "text", "placeholder", "Enter a static value.", 3, "border", "ngModel", "ngModelOptions", "ngModelChange"], ["formControlName", "dataType", "itemKey", "key", "itemName", "name", 3, "border", "items"], [1, "form-control"], ["label", "Allow Null", "formControlName", "allowNull", 3, "border"], [1, "ml-1", "flex-fill", 3, "formGroup"], ["formControlName", "datalinkColumn", "parentName", "name", "childItems", "dexihTableColumns", "itemKey", "key", "itemName", "logicalName", "textEntryNote", "Enter new column name, or select existing", 1, "form-control", "p-0", 3, "border", "items", "enableKeySelect", "enableTextEntry", "setTextEntryToValue", "textValueChange"], [1, "input-group-append", "flex-shrink-1", "ml-1"], ["class", "btn btn-light", "type", "button", "value", "Add", 3, "disabled", "click", 4, "ngIf"], ["class", "btn btn-light", "type", "button", "value", "Remove", 3, "disabled", "click", 4, "ngIf"], ["type", "button", "value", "Add", 1, "btn", "btn-light", 3, "disabled", "click"], [1, "fa", "fa-plus-square-o"], ["type", "button", "value", "Remove", 1, "btn", "btn-light", 3, "disabled", "click"], [1, "fa", "fa-minus-square-o"], [1, "form-text", "text-muted"], [3, "data"]],
+        consts: [[1, "input-group", "d-flex"], ["class", "flex-fill", 3, "formGroup", 4, "ngFor", "ngForOf"], ["class", "ml-1  flex-fill", 3, "formGroup", 4, "ngFor", "ngForOf"], ["class", "input-group-append flex-shrink-1 ml-1 ", 4, "ngIf"], ["class", "form-text text-muted", 4, "ngIf"], [1, "flex-fill", 3, "formGroup"], [1, "input-group"], ["class", "input-group-prepend", 4, "ngIf"], ["class", "form-control p-0", 4, "ngIf"], ["class", "input-group-text", 4, "ngIf"], ["class", "form-control", 4, "ngIf"], [1, "input-group-prepend"], [1, "input-group-text"], [1, "form-control", "p-0"], ["formControlName", "name", "type", "text", "placeholder", "Enter a name for the parameter", 3, "border"], ["formControlName", "datalinkColumn", "parentName", "group", "childItems", "columns", "itemKey", "key", "itemName", "logicalName", "selectNullMessage", "Use Null", "blankSelectMessage", "Use Blank", "textEntryItemsTitle", "Variables", 3, "border", "items", "textValue", "enableKeySelect", "enableTextEntry", "enableTextEntryMatch", "setTextEntryToValue", "allowNullSelect", "allowBlankSelect", "textEntryNote", "textEntryItems", "errors", "textValueChange"], ["type", "text", "placeholder", "Enter a static value.", 3, "border", "ngModel", "ngModelOptions", "ngModelChange"], ["formControlName", "dataType", "itemKey", "key", "itemName", "name", 3, "border", "items"], [1, "form-control"], ["label", "Allow Null", "formControlName", "allowNull", 3, "border"], [1, "ml-1", "flex-fill", 3, "formGroup"], ["formControlName", "datalinkColumn", "parentName", "name", "childItems", "dexihTableColumns", "itemKey", "key", "itemName", "logicalName", "selectNullMessage", "Use Null", "blankSelectMessage", "Use Blank", "textEntryNote", "Enter new column name, or select existing", 1, "form-control", "p-0", 3, "border", "items", "enableKeySelect", "enableTextEntry", "setTextEntryToValue", "allowNullSelect", "allowBlankSelect", "textValueChange"], [1, "input-group-append", "flex-shrink-1", "ml-1"], ["class", "btn btn-light", "type", "button", "value", "Add", 3, "disabled", "click", 4, "ngIf"], ["class", "btn btn-light", "type", "button", "value", "Remove", 3, "disabled", "click", 4, "ngIf"], ["type", "button", "value", "Add", 1, "btn", "btn-light", 3, "disabled", "click"], [1, "fa", "fa-plus-square-o"], ["type", "button", "value", "Remove", 1, "btn", "btn-light", 3, "disabled", "click"], [1, "fa", "fa-minus-square-o"], [1, "form-text", "text-muted"], [3, "data"]],
         template: function InputParameterComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "section");
@@ -10859,7 +10882,7 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, InputParameterComponent_form_2_Template, 9, 8, "form", 1);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, InputParameterComponent_form_3_Template, 2, 6, "form", 2);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, InputParameterComponent_form_3_Template, 2, 8, "form", 2);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, InputParameterComponent_div_4_Template, 3, 2, "div", 3);
 
@@ -10982,13 +11005,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -11018,7 +11041,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -11030,7 +11053,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
 
       function OutputParameterComponent_div_3_Template(rf, ctx) {
         if (rf & 1) {
@@ -11211,34 +11234,34 @@
         _createClass(OutputParameterComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this46 = this;
+            var _this47 = this;
 
             this.updateItems();
             this.errors = this.editDatalinkService.hubFormsService.getFormErrorMessages(this.outputParameterForm, true);
 
             if (this.updateParameterName) {
               this._datalinkColumnSubscription = this.outputParameterForm.controls.datalinkColumn.valueChanges.subscribe(function (value) {
-                _this46.outputParameterForm.controls.dataType.setValue(value.dataType);
+                _this47.outputParameterForm.controls.dataType.setValue(value.dataType);
 
-                _this46.outputParameterForm.controls.name.setValue(value.name);
+                _this47.outputParameterForm.controls.name.setValue(value.name);
               });
             }
 
             this._parameterSubscription = this.outputParameterForm.valueChanges.subscribe(function (param) {
-              _this46.errors = _this46.editDatalinkService.hubFormsService.getFormErrorMessages(_this46.outputParameterForm, true);
+              _this47.errors = _this47.editDatalinkService.hubFormsService.getFormErrorMessages(_this47.outputParameterForm, true);
 
-              _this46.updateItems();
+              _this47.updateItems();
             });
             this._dataTypeSubscription = this.outputParameterForm.controls.dataType.valueChanges.subscribe(function (dataType) {
-              if (_this46.newColumn) {
-                _this46.newColumn.dataType = dataType;
+              if (_this47.newColumn) {
+                _this47.newColumn.dataType = dataType;
               }
             });
           }
         }, {
           key: "ngOnChanges",
           value: function ngOnChanges() {
-            var _this47 = this;
+            var _this48 = this;
 
             var table = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_4__["DexihTable"]();
             table.name = 'Output Columns';
@@ -11247,7 +11270,7 @@
 
             if (this.datalinkTargets) {
               this.datalinkTargets.forEach(function (target) {
-                _this47.outputTables.push(target['table']);
+                _this48.outputTables.push(target['table']);
               });
             }
           }
@@ -11570,7 +11593,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -11600,7 +11623,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -11652,20 +11675,20 @@
         _createClass(PreviewDataComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this48 = this;
+            var _this49 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["combineLatest"])(this.route.data, this.route.params, this.hubService.getHubCacheObservable(), this.hubService.getRemoteAgentObservable(), this.editDatalinkService.hubFormsService.getCurrentFormObservable()).subscribe(function (result) {
                 var data = result[0];
                 var params = result[1];
-                _this48.hubCache = result[2];
-                _this48.datalinkForm = result[4];
-                _this48.action = data['action'];
-                _this48.pageTitle = data['pageTitle']; // load the cache first
+                _this49.hubCache = result[2];
+                _this49.datalinkForm = result[4];
+                _this49.action = data['action'];
+                _this49.pageTitle = data['pageTitle']; // load the cache first
 
-                if (_this48.hubCache.isLoaded()) {
+                if (_this49.hubCache.isLoaded()) {
                   // get the hub key from the route data, and update the service.
-                  _this48.datalinkTransformKey = +params['datalinkTransformKey'];
+                  _this49.datalinkTransformKey = +params['datalinkTransformKey'];
                 }
               });
             } catch (e) {
@@ -11799,7 +11822,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -11823,7 +11846,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -11841,7 +11864,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -11904,35 +11927,35 @@
         _createClass(PreviewTableComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this49 = this;
+            var _this50 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["combineLatest"])(this.route.data, this.route.params, this.hubService.getHubCacheObservable()).subscribe(function (result) {
                 var data = result[0];
                 var params = result[1];
-                _this49.hubCache = result[2];
-                _this49.action = data['action'];
-                _this49.pageTitle = data['pageTitle']; // load the cache first
+                _this50.hubCache = result[2];
+                _this50.action = data['action'];
+                _this50.pageTitle = data['pageTitle']; // load the cache first
 
-                if (_this49.hubCache.isLoaded()) {
+                if (_this50.hubCache.isLoaded()) {
                   // get the hub key from the route data, and update the service.
                   if (params['tableKey']) {
-                    _this49.tableKey = +params['tableKey'];
+                    _this50.tableKey = +params['tableKey'];
 
-                    var table = _this49.hubCache.getTable(_this49.tableKey);
+                    var table = _this50.hubCache.getTable(_this50.tableKey);
 
                     if (table) {
-                      _this49.name = table.name;
+                      _this50.name = table.name;
                     }
                   } else {
-                    _this49.datalinkKey = +params['datalinkKey'];
+                    _this50.datalinkKey = +params['datalinkKey'];
 
-                    var datalink = _this49.hubCache.hub.dexihDatalinks.find(function (c) {
-                      return c.key == _this49.datalinkKey;
+                    var datalink = _this50.hubCache.hub.dexihDatalinks.find(function (c) {
+                      return c.key == _this50.datalinkKey;
                     });
 
                     if (datalink) {
-                      _this49.name = datalink.name;
+                      _this50.name = datalink.name;
                     }
                   }
                 }
@@ -12043,13 +12066,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -12091,19 +12114,19 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 
       var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
         function adopt(value) {
@@ -12222,12 +12245,12 @@
         _createClass(DatalinkEditProfileRulesComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this50 = this;
+            var _this51 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["combineLatest"])(this.hubService.getHubCacheObservable(), this.editDatalinkService.hubFormsService.getCurrentFormObservable()).subscribe(function (result) {
-                return __awaiter(_this50, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-                  var _this51 = this;
+                return __awaiter(_this51, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+                  var _this52 = this;
 
                   var profileRules;
                   return regeneratorRuntime.wrap(function _callee4$(_context4) {
@@ -12253,7 +12276,7 @@
 
                         case 7:
                           profileRules = _context4.sent.map(function (profile) {
-                            var profileRuleForm = _this51.selectedProfileRules.find(function (c) {
+                            var profileRuleForm = _this52.selectedProfileRules.find(function (c) {
                               return c.functionAssemblyName === profile.functionAssemblyName && c.functionClassName === profile.functionClassName && c.functionMethodName === profile.functionMethodName;
                             });
 
@@ -12284,7 +12307,7 @@
         }, {
           key: "updateProfileRules",
           value: function updateProfileRules() {
-            var _this52 = this;
+            var _this53 = this;
 
             if (this.datalinkForm) {
               var profiles = this.datalinkForm.controls.dexihDatalinkProfiles; // reset existing profiles.
@@ -12301,14 +12324,14 @@
 
                 if (!profileRuleForm) {
                   var profileRule = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_6__["DexihDatalinkProfile"]();
-                  profileRule.key = _this52.hubCache.getNextSequence();
-                  profileRule.datalinkKey = _this52.datalinkForm.value.key;
+                  profileRule.key = _this53.hubCache.getNextSequence();
+                  profileRule.datalinkKey = _this53.datalinkForm.value.key;
                   profileRule.functionAssemblyName = profile.functionAssemblyName;
                   profileRule.functionClassName = profile.functionClassName;
                   profileRule.functionMethodName = profile.functionMethodName;
                   profileRule.detailedResults = profile.detailedResults;
                   profileRule.isValid = true;
-                  profileRuleForm = _this52.editDatalinkService.hubFormsService.datalinkProfileFormGroup(profileRule);
+                  profileRuleForm = _this53.editDatalinkService.hubFormsService.datalinkProfileFormGroup(profileRule);
                   profiles.push(profileRuleForm);
                 } else {
                   profileRuleForm.controls.isValid.setValue(true);
@@ -12453,13 +12476,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -12495,7 +12518,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -12507,7 +12530,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 
       function DatalinkEditPropertiesComponent_form_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -12565,7 +12588,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true)("errors", ctx_r0.editDatalinkService.hubFormsService.formErrors.description);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true)("isHidden", true)("errors", ctx_r0.editDatalinkService.hubFormsService.formErrors.description);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
@@ -12591,12 +12614,12 @@
         _createClass(DatalinkEditPropertiesComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this53 = this;
+            var _this54 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["combineLatest"])(this.route.data, this.route.params, this.hubService.getHubCacheObservable(), this.editDatalinkService.hubFormsService.getCurrentFormObservable()).subscribe(function (result) {
-                _this53.pageTitle = result[0]['pageTitle'];
-                _this53.datalinkForm = result[3];
+                _this54.pageTitle = result[0]['pageTitle'];
+                _this54.datalinkForm = result[3];
               });
             } catch (e) {
               this.hubService.addHubClientErrorMessage(e, 'Datalink Properties');
@@ -12623,12 +12646,12 @@
         selectors: [["dexih-datalink-edit-properties-form"]],
         decls: 4,
         vars: 6,
-        consts: [["title", "Properties", 3, "showExpandButton"], [3, "formGroup", 4, "ngIf"], ["title", "Input Parameters", 3, "showExpandButton"], [3, "showEdit", "parameters", "formsService"], [3, "formGroup"], ["label", "Datalink Type", "formControlName", "datalinkType", "itemKey", "key", "itemName", "description", "iconClass", "fa fa-database", "note", "Categorize the type of function this datalink is performing.", 3, "items", "enableFilter"], ["label", "Datalink Name", "formControlName", "name", "placeholder", "Enter the datalink name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview", "errors"], ["label", "Alerting Level", "formControlName", "alertLevel", "itemKey", "key", "itemName", "description", "iconClass", "fa fa-bell", "note", "When alerts should be sent.", 3, "items", "errors", "enableFilter"], ["label", "Datalink is shared in the catalog to users with read access.", "formControlName", "isShared"]],
+        consts: [["title", "Properties", 3, "showExpandButton"], [3, "formGroup", 4, "ngIf"], ["title", "Input Parameters", 3, "showExpandButton"], [3, "showEdit", "parameters", "formsService"], [3, "formGroup"], ["label", "Datalink Type", "formControlName", "datalinkType", "itemKey", "key", "itemName", "description", "iconClass", "fa fa-database", "note", "Categorize the type of function this datalink is performing.", 3, "items", "enableFilter"], ["label", "Datalink Name", "formControlName", "name", "placeholder", "Enter the datalink name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview", "isHidden", "errors"], ["label", "Alerting Level", "formControlName", "alertLevel", "itemKey", "key", "itemName", "description", "iconClass", "fa fa-bell", "note", "When alerts should be sent.", 3, "items", "errors", "enableFilter"], ["label", "Datalink is shared in the catalog to users with read access.", "formControlName", "isShared"]],
         template: function DatalinkEditPropertiesComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-widget-section", 0);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, DatalinkEditPropertiesComponent_form_1_Template, 12, 10, "form", 1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, DatalinkEditPropertiesComponent_form_1_Template, 12, 11, "form", 1);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -12705,13 +12728,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -12744,12 +12767,12 @@
         _createClass(DatalinkRunPlanComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this54 = this;
+            var _this55 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["combineLatest"])(this.route.data, this.route.params, this.hubService.getHubCacheObservable(), this.editDatalinkService.hubFormsService.getCurrentFormObservable()).subscribe(function (result) {
-                _this54.pageTitle = result[0]['pageTitle'];
-                _this54.datalinkForm = result[3];
+                _this55.pageTitle = result[0]['pageTitle'];
+                _this55.datalinkForm = result[3];
               });
             } catch (e) {
               this.hubService.addHubClientErrorMessage(e, 'Datalink Run Plan');
@@ -12859,13 +12882,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -12913,7 +12936,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -13171,12 +13194,12 @@
         _createClass(DatalinkEditSaveButtonComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this55 = this;
+            var _this56 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["combineLatest"])(this.editDatalinkService.hubFormsService.getCurrentFormObservable(), this.hubService.getHubCacheObservable()).subscribe(function (result) {
-                _this55.datalinkForm = result[0];
-                _this55.hubCache = result[1];
+                _this56.datalinkForm = result[0];
+                _this56.hubCache = result[1];
               });
             } catch (e) {
               this.hubService.addHubClientErrorMessage(e, 'datalink save button');
@@ -13196,7 +13219,7 @@
           value: function saveDatalink() {
             var saveAs = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
             return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
-              var _this56 = this;
+              var _this57 = this;
 
               var targets, tables, tableNames, doSave;
               return regeneratorRuntime.wrap(function _callee7$(_context7) {
@@ -13226,7 +13249,7 @@
                       }).join(', ');
 
                       doSave = function doSave() {
-                        return __awaiter(_this56, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+                        return __awaiter(_this57, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
                           var _iterator, _step, t, target, savedTable;
 
                           return regeneratorRuntime.wrap(function _callee5$(_context5) {
@@ -13309,7 +13332,7 @@
 
                     case 11:
                       this.authService.confirmDialog("Save Target Tables?", "The existing target table(s)\n                ".concat(tableNames, " have changed.\n                This is a shared object, and may impact other dependencies if changed.\n                Note, this will only save the metadata, use the 'Create Table' function to overwrite the physical table.")).then(function (confirm) {
-                        return __awaiter(_this56, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+                        return __awaiter(_this57, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
                           return regeneratorRuntime.wrap(function _callee6$(_context6) {
                             while (1) {
                               switch (_context6.prev = _context6.next) {
@@ -13330,7 +13353,7 @@
                           }, _callee6);
                         }));
                       })["catch"](function () {
-                        return _this56.editDatalinkService.savingDatalink.next(false);
+                        return _this57.editDatalinkService.savingDatalink.next(false);
                       });
 
                     case 12:
@@ -13367,16 +13390,16 @@
         }, {
           key: "previewChanges",
           value: function previewChanges() {
-            var _this57 = this;
+            var _this58 = this;
 
             if (this.editDatalinkService.hubFormsService.hasChanged) {
               this.authService.confirmDialog('Save Datalink', 'The datalink must be saved before previewing delta changes.  Would you like to save now?').then(function (confirm) {
                 if (confirm) {
-                  _this57.saveDatalink();
+                  _this58.saveDatalink();
 
-                  _this57.editDatalinkService.savingDatalink.toPromise().then(function (value) {
+                  _this58.editDatalinkService.savingDatalink.toPromise().then(function (value) {
                     if (value) {
-                      _this57.router.navigate(['datalink-preview', _this57.datalinkForm.controls.key.value, true]);
+                      _this58.router.navigate(['datalink-preview', _this58.datalinkForm.controls.key.value, true]);
                     }
                   });
                 }
@@ -13388,14 +13411,14 @@
         }, {
           key: "download",
           value: function download() {
-            var _this58 = this;
+            var _this59 = this;
 
             if (this.datalinkForm.dirty) {
               this.authService.confirmDialog('Save Datalink', 'The datalink must be saved before a data download task can be started.  Do you want to save the datalink?').then(function (saveDatalink) {
                 if (saveDatalink) {
-                  _this58.saveDatalink();
+                  _this59.saveDatalink();
 
-                  _this58.doDownload();
+                  _this59.doDownload();
                 }
               });
             } else {
@@ -13420,16 +13443,16 @@
         }, {
           key: "runDatalink",
           value: function runDatalink(truncateTarget, resetIncremental) {
-            var _this59 = this;
+            var _this60 = this;
 
             if (this.editDatalinkService.hubFormsService.hasChanged) {
               this.authService.confirmDialog('Save Datalink', 'The datalink must be saved before running.  Would you like to save now?').then(function (confirm) {
                 if (confirm) {
-                  _this59.saveDatalink();
+                  _this60.saveDatalink();
 
-                  _this59.editDatalinkService.savingDatalink.toPromise().then(function (value) {
+                  _this60.editDatalinkService.savingDatalink.toPromise().then(function (value) {
                     if (value) {
-                      _this59.hubService.runDatalinks([_this59.datalinkForm.controls.key.value], truncateTarget, resetIncremental, null, null, null, _this59.cancelToken);
+                      _this60.hubService.runDatalinks([_this60.datalinkForm.controls.key.value], truncateTarget, resetIncremental, null, null, null, _this60.cancelToken);
                     }
                   });
                 }
@@ -13539,13 +13562,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -13599,13 +13622,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -13821,23 +13844,23 @@
         _createClass(DatalinkEditSourceTableComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this60 = this;
+            var _this61 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["combineLatest"])(this.route.data, this.route.params, this.hubService.getHubCacheObservable(), this.editDatalinkService.hubFormsService.getCurrentFormObservable()).subscribe(function (result) {
-                _this60.pageTitle = result[0]['pageTitle'];
-                _this60.hubCache = result[2];
-                _this60.datalinkForm = result[3];
+                _this61.pageTitle = result[0]['pageTitle'];
+                _this61.hubCache = result[2];
+                _this61.datalinkForm = result[3];
 
-                if (_this60.datalinkForm) {
-                  _this60.updateData();
+                if (_this61.datalinkForm) {
+                  _this61.updateData();
 
-                  if (_this60._sourceSubscription) {
-                    _this60._sourceSubscription.unsubscribe();
+                  if (_this61._sourceSubscription) {
+                    _this61._sourceSubscription.unsubscribe();
                   }
 
-                  _this60._sourceSubscription = _this60.datalinkForm.controls.sourceDatalinkTable.valueChanges.subscribe(function () {
-                    _this60.updateData();
+                  _this61._sourceSubscription = _this61.datalinkForm.controls.sourceDatalinkTable.valueChanges.subscribe(function () {
+                    _this61.updateData();
                   });
                 }
               });
@@ -13898,7 +13921,7 @@
         }, {
           key: "updateData",
           value: function updateData() {
-            var _this61 = this;
+            var _this62 = this;
 
             var sourceDatalinkTable = this.datalinkForm.controls.sourceDatalinkTable;
             var columnData = [];
@@ -13912,10 +13935,10 @@
               var newColumn = {
                 key: column.key,
                 position: column.position,
-                columnStatus: _this61.columnStatus(column),
+                columnStatus: _this62.columnStatus(column),
                 columnGroup: column.columnGroup,
                 name: column.name,
-                dataType: _this61.hubCache.dataTypeToString(column),
+                dataType: _this62.hubCache.dataTypeToString(column),
                 deltaType: column.deltaType,
                 allowDbNull: column.allowDbNull,
                 logicalName: column.logicalName,
@@ -14141,13 +14164,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -14213,7 +14236,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -14225,7 +14248,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -14243,7 +14266,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -14521,29 +14544,29 @@
 
       function StandardFunctionEditComponent_div_0_form_4_div_5_section_5_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "section", 27);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "section", 22);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "form-checkbox", 28);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        }
-      }
-
-      function StandardFunctionEditComponent_div_0_form_4_div_5_section_6_Template(rf, ctx) {
-        if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "section", 23);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "form-select", 29);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "form-select", 27);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
 
         if (rf & 2) {
-          var ctx_r24 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](4);
+          var ctx_r23 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](4);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("items", ctx_r24.typeCodes);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("items", ctx_r23.typeCodes);
+        }
+      }
+
+      function StandardFunctionEditComponent_div_0_form_4_div_5_section_8_Template(rf, ctx) {
+        if (rf & 1) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "section", 28);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "form-checkbox", 29);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
       }
 
@@ -14568,15 +14591,15 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, StandardFunctionEditComponent_div_0_form_4_div_5_div_4_Template, 2, 4, "div", 18);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, StandardFunctionEditComponent_div_0_form_4_div_5_section_5_Template, 2, 0, "section", 21);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, StandardFunctionEditComponent_div_0_form_4_div_5_section_5_Template, 2, 1, "section", 21);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](6, StandardFunctionEditComponent_div_0_form_4_div_5_section_6_Template, 2, 1, "section", 22);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "section", 22);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "section", 23);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](8, "form-select", 24);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](7, "form-select", 23);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](8, StandardFunctionEditComponent_div_0_form_4_div_5_section_8_Template, 2, 0, "section", 24);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
@@ -14602,15 +14625,15 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", (ctx_r10.selectedFunction == null ? null : ctx_r10.selectedFunction.returnParameters == null ? null : ctx_r10.selectedFunction.returnParameters.length) > 0 && (ctx_r10.selectedFunction == null ? null : ctx_r10.selectedFunction.returnParameters[0].dataType) == ctx_r10.eTypeCode.Boolean || ctx_r10.selectedCustomFunction && (ctx_r10.selectedCustomFunction == null ? null : ctx_r10.selectedCustomFunction.returnType) == ctx_r10.eTypeCode.Boolean);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", (ctx_r10.selectedFunction == null ? null : ctx_r10.selectedFunction.genericType) !== ctx_r10.eGenericType.None);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("items", ctx_r10.functionCache);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", (ctx_r10.selectedFunction == null ? null : ctx_r10.selectedFunction.returnParameters == null ? null : ctx_r10.selectedFunction.returnParameters.length) > 0 && (ctx_r10.selectedFunction == null ? null : ctx_r10.selectedFunction.returnParameters[0].dataType) == ctx_r10.eTypeCode.Boolean || ctx_r10.selectedCustomFunction && (ctx_r10.selectedCustomFunction == null ? null : ctx_r10.selectedCustomFunction.returnType) == ctx_r10.eTypeCode.Boolean);
         }
       }
 
@@ -14627,7 +14650,7 @@
 
             var ctx_r33 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](4);
 
-            return ctx_r33.importMappings(inputParameter_r26);
+            return ctx_r33.importInputOutputMappings(inputParameter_r26);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -15367,24 +15390,24 @@
         _createClass(ArrayParameter, [{
           key: "resetItems",
           value: function resetItems() {
-            var _this62 = this;
+            var _this63 = this;
 
             var inputArray = this.inputParameterForms[0].controls.arrayParameters;
 
             var _loop2 = function _loop2(i) {
               var item = new ArrayParameterItem();
 
-              _this62.inputParameterForms.forEach(function (inputParameterForm) {
+              _this63.inputParameterForms.forEach(function (inputParameterForm) {
                 var array = inputParameterForm.controls.arrayParameters;
                 item.inputItems.push(array.controls[i]);
               });
 
-              _this62.outputParameterForms.forEach(function (outputParameterForm) {
+              _this63.outputParameterForms.forEach(function (outputParameterForm) {
                 var array = outputParameterForm.controls.arrayParameters;
                 item.outputItems.push(array.controls[i]);
               });
 
-              _this62.parameterItems.push(item);
+              _this63.parameterItems.push(item);
             };
 
             for (var i = 0; i < inputArray.controls.length; i++) {
@@ -15436,179 +15459,179 @@
         _createClass(StandardFunctionEditComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this63 = this;
+            var _this64 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["combineLatest"])(this.route.data, this.route.params, this.hubService.getHubCacheObservable(), this.hubService.getRemoteLibrariesObservable(), this.editDatalinkService.hubFormsService.getCurrentFormObservable()).subscribe(function (result) {
-                _this63.pageTitle = result[0]['pageTitle'];
+                _this64.pageTitle = result[0]['pageTitle'];
                 var params = result[1];
-                _this63.hubCache = result[2];
-                _this63.remoteLibraries = result[3];
-                _this63.datalinkForm = result[4];
+                _this64.hubCache = result[2];
+                _this64.remoteLibraries = result[3];
+                _this64.datalinkForm = result[4];
 
-                _this63.logger.LogC(function () {
+                _this64.logger.LogC(function () {
                   return "OnInit";
                 }, _logging__WEBPACK_IMPORTED_MODULE_7__["eLogLevel"].Trace);
 
-                if (_this63.hubCache && _this63.hubCache.isLoaded() && _this63.datalinkForm && _this63.remoteLibraries && _this63.remoteLibraries.functions.length > 0) {
-                  _this63.transformFunctionType = +params['functionType'];
+                if (_this64.hubCache && _this64.hubCache.isLoaded() && _this64.datalinkForm && _this64.remoteLibraries && _this64.remoteLibraries.functions.length > 0) {
+                  _this64.transformFunctionType = +params['functionType'];
 
-                  if (_this63.transformFunctionType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Validate) {
-                    _this63.datalinkTransformForm = _this63.editDatalinkService.getValidationTransform();
-                    _this63.datalinkTransformKey = _this63.datalinkTransformForm.value.key;
+                  if (_this64.transformFunctionType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Validate) {
+                    _this64.datalinkTransformForm = _this64.editDatalinkService.getValidationTransform();
+                    _this64.datalinkTransformKey = _this64.datalinkTransformForm.value.key;
                   } else {
-                    _this63.datalinkTransformKey = +params['datalinkTransformKey'];
-                    _this63.datalinkTransformForm = _this63.editDatalinkService.getDatalinkTransform(_this63.datalinkTransformKey);
+                    _this64.datalinkTransformKey = +params['datalinkTransformKey'];
+                    _this64.datalinkTransformForm = _this64.editDatalinkService.getDatalinkTransform(_this64.datalinkTransformKey);
                   }
 
-                  _this63.variables = _this63.editDatalinkService.getVariables();
-                  _this63.useCustomFunction = _this63.datalinkTransformForm.controls.customFunctionKey ? true : false;
-                  _this63.datalinkTransformItemKey = +params['datalinkTransformItemKey'];
-                  _this63.isJoin = _this63.datalinkTransformForm.value.transformType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eTransformType"].Join || _this63.datalinkTransformForm.value.transformType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eTransformType"].Lookup; // if this is a join transform, then the use the join columns for the input.
+                  _this64.variables = _this64.editDatalinkService.getVariables();
+                  _this64.useCustomFunction = _this64.datalinkTransformForm.controls.customFunctionKey ? true : false;
+                  _this64.datalinkTransformItemKey = +params['datalinkTransformItemKey'];
+                  _this64.isJoin = _this64.datalinkTransformForm.value.transformType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eTransformType"].Join || _this64.datalinkTransformForm.value.transformType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eTransformType"].Lookup; // if this is a join transform, then the use the join columns for the input.
 
-                  if (_this63.isJoin) {
-                    var table = _this63.datalinkTransformForm.controls.joinDatalinkTable.value;
+                  if (_this64.isJoin) {
+                    var table = _this64.datalinkTransformForm.controls.joinDatalinkTable.value;
 
                     if (!table) {
-                      _this63.hubService.addHubErrorMessage('The join table could not be found.');
+                      _this64.hubService.addHubErrorMessage('The join table could not be found.');
 
-                      _this63.authService.navigateUp();
+                      _this64.authService.navigateUp();
 
                       return;
                     }
 
-                    _this63.inputColumns = table.dexihDatalinkColumns;
+                    _this64.inputColumns = table.dexihDatalinkColumns;
                   } else {
-                    var nodeDatalinkColumn = _this63.datalinkTransformForm.controls.nodeDatalinkColumn.value;
+                    var nodeDatalinkColumn = _this64.datalinkTransformForm.controls.nodeDatalinkColumn.value;
                     var nodeDatalinkColumnKey = nodeDatalinkColumn ? nodeDatalinkColumn.key : null;
                     var io = new _hub_lineage_models__WEBPACK_IMPORTED_MODULE_9__["InputOutputColumns"]();
 
                     if (nodeDatalinkColumnKey) {
-                      var inputColumns = _this63.datalinkTransformForm.controls.runTime.value.inputColumns;
-                      _this63.inputColumns = io.getAvailableColumns(inputColumns, nodeDatalinkColumnKey, 0);
+                      var inputColumns = _this64.datalinkTransformForm.controls.runTime.value.inputColumns;
+                      _this64.inputColumns = io.getAvailableColumns(inputColumns, nodeDatalinkColumnKey, 0);
                     } else {
-                      _this63.inputColumns = _this63.datalinkTransformForm.controls.runTime.value.inputColumns;
+                      _this64.inputColumns = _this64.datalinkTransformForm.controls.runTime.value.inputColumns;
                     }
                   }
 
-                  _this63.outputColumns = _this63.datalinkTransformForm.controls.runTime.value.transformColumns;
-                  _this63.datalinkTargets = _this63.datalinkForm.controls.dexihDatalinkTargets.value;
+                  _this64.outputColumns = _this64.datalinkTransformForm.controls.runTime.value.transformColumns;
+                  _this64.datalinkTargets = _this64.datalinkForm.controls.dexihDatalinkTargets.value;
 
-                  if (_this63.datalinkTransformItemKey) {
-                    _this63.datalinkTransformItemForm = _this63.editDatalinkService.getDatalinkTransformItem(_this63.datalinkTransformForm, _this63.datalinkTransformItemKey);
+                  if (_this64.datalinkTransformItemKey) {
+                    _this64.datalinkTransformItemForm = _this64.editDatalinkService.getDatalinkTransformItem(_this64.datalinkTransformForm, _this64.datalinkTransformItemKey);
 
-                    if (!_this63.datalinkTransformItemForm) {
-                      _this63.authService.navigateUp();
+                    if (!_this64.datalinkTransformItemForm) {
+                      _this64.authService.navigateUp();
 
                       return;
                     } // create a copy of the form item to allow for cancel.
 
 
-                    _this63.newDatalinkTransformItemForm = _this63.editDatalinkService.hubFormsService.datalinkDatalinkTransformItemFormGroup(_this63.datalinkTransformForm, _this63.datalinkTransformItemForm.value);
+                    _this64.newDatalinkTransformItemForm = _this64.editDatalinkService.hubFormsService.datalinkDatalinkTransformItemFormGroup(_this64.datalinkTransformForm, _this64.datalinkTransformItemForm.value);
 
-                    if (_this63.datalinkTransformItemForm.controls.customFunctionKey.value) {
-                      _this63.selectCustomFunction(_this63.datalinkTransformItemForm.value.customFunctionKey, false);
+                    if (_this64.datalinkTransformItemForm.controls.customFunctionKey.value) {
+                      _this64.selectCustomFunction(_this64.datalinkTransformItemForm.value.customFunctionKey, false);
                     } else {
-                      var selectedFunction = _this63.remoteLibraries.functions.find(function (c) {
-                        return c.functionClassName === _this63.datalinkTransformItemForm.value.functionClassName && c.functionMethodName === _this63.datalinkTransformItemForm.value.functionMethodName && c.functionAssemblyName === _this63.datalinkTransformItemForm.value.functionAssemblyName;
+                      var selectedFunction = _this64.remoteLibraries.functions.find(function (c) {
+                        return c.functionClassName === _this64.datalinkTransformItemForm.value.functionClassName && c.functionMethodName === _this64.datalinkTransformItemForm.value.functionMethodName && c.functionAssemblyName === _this64.datalinkTransformItemForm.value.functionAssemblyName;
                       }); // this.selectedFunction = selectedFunction;
 
 
-                      _this63.selectFunction(selectedFunction, false); // this.refreshParameters();
+                      _this64.selectFunction(selectedFunction, false); // this.refreshParameters();
 
                     }
                   } else {
                     var newItem = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["DexihDatalinkTransformItem"]();
-                    newItem.datalinkTransformKey = _this63.datalinkTransformKey;
+                    newItem.datalinkTransformKey = _this64.datalinkTransformKey;
                     newItem.transformItemType = _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eTransformItemType"].BuiltInFunction;
-                    _this63.newDatalinkTransformItemForm = _this63.editDatalinkService.hubFormsService.datalinkDatalinkTransformItemFormGroup(_this63.datalinkTransformForm, newItem);
+                    _this64.newDatalinkTransformItemForm = _this64.editDatalinkService.hubFormsService.datalinkDatalinkTransformItemFormGroup(_this64.datalinkTransformForm, newItem);
                   }
 
-                  switch (_this63.transformFunctionType) {
+                  switch (_this64.transformFunctionType) {
                     case _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Condition:
                     case _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].JoinCondition:
-                      _this63.functions = _this63.remoteLibraries.functions.filter(function (c) {
+                      _this64.functions = _this64.remoteLibraries.functions.filter(function (c) {
                         return c.functionType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Condition;
                       });
-                      _this63.allowOutput = false;
+                      _this64.allowOutput = false;
                       break;
 
                     case _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Validate:
-                      _this63.functions = _this63.remoteLibraries.functions.filter(function (c) {
+                      _this64.functions = _this64.remoteLibraries.functions.filter(function (c) {
                         return c.functionType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Condition || c.functionType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Validate;
                       });
-                      _this63.allowOutput = true;
+                      _this64.allowOutput = true;
                       break;
 
                     case _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Map:
-                      _this63.functions = _this63.remoteLibraries.functions.filter(function (c) {
+                      _this64.functions = _this64.remoteLibraries.functions.filter(function (c) {
                         return c.functionType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Condition || c.functionType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Validate || c.functionType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Map;
                       });
-                      _this63.allowOutput = true;
+                      _this64.allowOutput = true;
                       break;
 
                     case _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Aggregate:
-                      _this63.functions = _this63.remoteLibraries.functions.filter(function (c) {
+                      _this64.functions = _this64.remoteLibraries.functions.filter(function (c) {
                         return c.functionType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Aggregate;
                       });
-                      _this63.allowOutput = true;
+                      _this64.allowOutput = true;
                       break;
 
                     case _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Series:
-                      _this63.functions = _this63.remoteLibraries.functions.filter(function (c) {
+                      _this64.functions = _this64.remoteLibraries.functions.filter(function (c) {
                         return c.functionType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Series || c.functionType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Aggregate;
                       });
-                      _this63.allowOutput = true;
+                      _this64.allowOutput = true;
                       break;
 
                     case _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Rows:
-                      _this63.functions = _this63.remoteLibraries.functions.filter(function (c) {
+                      _this64.functions = _this64.remoteLibraries.functions.filter(function (c) {
                         return c.functionType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Rows;
                       });
-                      _this63.allowOutput = true;
-                      _this63.allowReturn = false;
+                      _this64.allowOutput = true;
+                      _this64.allowReturn = false;
                       break;
 
                     case _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Profile:
-                      _this63.functions = _this63.remoteLibraries.functions.filter(function (c) {
+                      _this64.functions = _this64.remoteLibraries.functions.filter(function (c) {
                         return c.functionType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eFunctionType"].Profile;
                       });
-                      _this63.allowOutput = false;
+                      _this64.allowOutput = false;
                       break;
 
                     default:
-                      _this63.functions = null;
+                      _this64.functions = null;
                   }
 
-                  _this63.functionCategories = Array.from(new Set(_this63.functions.map(function (c) {
+                  _this64.functionCategories = Array.from(new Set(_this64.functions.map(function (c) {
                     return c.category;
                   })));
-                  _this63.filteredFunctions = _this63.functions;
-                  _this63.customFunctions = _this63.hubCache.hub.dexihCustomFunctions;
+                  _this64.filteredFunctions = _this64.functions;
+                  _this64.customFunctions = _this64.hubCache.hub.dexihCustomFunctions;
 
-                  if (_this63.datalinkTransformItemForm && _this63.datalinkTransformItemForm.value.customFunctionKey) {
-                    _this63.useCustomFunction = true;
-                    _this63.selectedCustomFunction = _this63.hubCache.hub.dexihCustomFunctions.find(function (c) {
-                      return c.key === _this63.datalinkTransformItemForm.value.customFunctionKey;
+                  if (_this64.datalinkTransformItemForm && _this64.datalinkTransformItemForm.value.customFunctionKey) {
+                    _this64.useCustomFunction = true;
+                    _this64.selectedCustomFunction = _this64.hubCache.hub.dexihCustomFunctions.find(function (c) {
+                      return c.key === _this64.datalinkTransformItemForm.value.customFunctionKey;
                     });
                   }
 
-                  if (_this63._functionSubscription) {
-                    _this63._functionSubscription.unsubscribe();
+                  if (_this64._functionSubscription) {
+                    _this64._functionSubscription.unsubscribe();
                   }
 
-                  _this63._functionSubscription = _this63.newDatalinkTransformItemForm.controls.customFunctionKey.valueChanges.subscribe(function (customFunctionKey) {
-                    _this63.selectCustomFunction(customFunctionKey, false);
+                  _this64._functionSubscription = _this64.newDatalinkTransformItemForm.controls.customFunctionKey.valueChanges.subscribe(function (customFunctionKey) {
+                    _this64.selectCustomFunction(customFunctionKey, false);
                   });
                 }
 
-                if (_this63._saveSubscription) {
-                  _this63._saveSubscription.unsubscribe();
+                if (_this64._saveSubscription) {
+                  _this64._saveSubscription.unsubscribe();
                 }
 
-                _this63._saveSubscription = _this63.editDatalinkService.savingDatalink.subscribe(function (value) {
+                _this64._saveSubscription = _this64.editDatalinkService.savingDatalink.subscribe(function (value) {
                   if (value) {
-                    _this63.apply();
+                    _this64.apply();
                   }
                 });
               });
@@ -15651,11 +15674,11 @@
         }, {
           key: "canDeactivate",
           value: function canDeactivate() {
-            var _this64 = this;
+            var _this65 = this;
 
             return new Promise(function (resolve) {
-              if (_this64.newDatalinkTransformItemForm && !_this64.newDatalinkTransformItemForm.pristine) {
-                _this64.authService.confirmDialog('The function has changed', 'The function has changed.  Do you want to discard the changes and continue?').then(function (confirm) {
+              if (_this65.newDatalinkTransformItemForm && !_this65.newDatalinkTransformItemForm.pristine) {
+                _this65.authService.confirmDialog('The function has changed', 'The function has changed.  Do you want to discard the changes and continue?').then(function (confirm) {
                   resolve(confirm);
                 })["catch"](function () {
                   resolve(false);
@@ -15673,7 +15696,7 @@
         }, {
           key: "refreshParameters",
           value: function refreshParameters() {
-            var _this65 = this;
+            var _this66 = this;
 
             var _a, _b, _c, _d, _e;
 
@@ -15703,27 +15726,27 @@
               (_a = this.selectedFunction.inputParameters) === null || _a === void 0 ? void 0 : _a.filter(function (c) {
                 return c.linkedName;
               }).forEach(function (parameter) {
-                _this65.addArrayParameter(parameter, true);
+                _this66.addArrayParameter(parameter, true);
               });
               (_b = this.selectedFunction.outputParameters) === null || _b === void 0 ? void 0 : _b.filter(function (c) {
                 return c.linkedName;
               }).forEach(function (parameter) {
-                _this65.addArrayParameter(parameter, false);
+                _this66.addArrayParameter(parameter, false);
               });
               (_c = this.selectedFunction.resultInputParameters) === null || _c === void 0 ? void 0 : _c.filter(function (c) {
                 return c.linkedName;
               }).forEach(function (parameter) {
-                _this65.addArrayParameter(parameter, true);
+                _this66.addArrayParameter(parameter, true);
               });
               (_d = this.selectedFunction.resultOutputParameters) === null || _d === void 0 ? void 0 : _d.filter(function (c) {
                 return c.linkedName;
               }).forEach(function (parameter) {
-                _this65.addArrayParameter(parameter, false);
+                _this66.addArrayParameter(parameter, false);
               });
               (_e = this.selectedFunction.resultReturnParameters) === null || _e === void 0 ? void 0 : _e.filter(function (c) {
                 return c.linkedName;
               }).forEach(function (parameter) {
-                _this65.addArrayParameter(parameter, false);
+                _this66.addArrayParameter(parameter, false);
               });
             }
 
@@ -15763,7 +15786,7 @@
         }, {
           key: "selectFunction",
           value: function selectFunction(value, markAsDirty) {
-            var _this66 = this;
+            var _this67 = this;
 
             this.selectedFunction = value;
 
@@ -15821,7 +15844,7 @@
               if (this.selectedFunction.inputParameters) {
                 this.selectedFunction.inputParameters.forEach(function (param, index) {
                   if (param) {
-                    parameters.push(_this66.newParameter(existingParameters, param, index, _this66.isJoin ? _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Join : _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Input, _this66.selectedFunction.genericTypeDefault));
+                    parameters.push(_this67.newParameter(existingParameters, param, index, _this67.isJoin ? _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Join : _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Input, _this67.selectedFunction.genericTypeDefault));
                   }
                 });
               }
@@ -15830,7 +15853,7 @@
                 this.selectedFunction.outputParameters.forEach(function (param, index) {
                   if (param) {
                     if (param) {
-                      parameters.push(_this66.newParameter(existingParameters, param, index + 100, _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Output, _this66.selectedFunction.genericTypeDefault));
+                      parameters.push(_this67.newParameter(existingParameters, param, index + 100, _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Output, _this67.selectedFunction.genericTypeDefault));
                     }
                   }
                 });
@@ -15839,7 +15862,7 @@
               if (this.selectedFunction.resultInputParameters) {
                 this.selectedFunction.resultInputParameters.forEach(function (param, index) {
                   if (param) {
-                    parameters.push(_this66.newParameter(existingParameters, param, index + 200, _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].ResultInput, _this66.selectedFunction.genericTypeDefault));
+                    parameters.push(_this67.newParameter(existingParameters, param, index + 200, _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].ResultInput, _this67.selectedFunction.genericTypeDefault));
                   }
                 });
               }
@@ -15848,7 +15871,7 @@
                 this.selectedFunction.resultOutputParameters.forEach(function (param, index) {
                   if (param) {
                     if (param) {
-                      parameters.push(_this66.newParameter(existingParameters, param, index + 300, _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].ResultOutput, _this66.selectedFunction.genericTypeDefault));
+                      parameters.push(_this67.newParameter(existingParameters, param, index + 300, _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].ResultOutput, _this67.selectedFunction.genericTypeDefault));
                     }
                   }
                 });
@@ -15857,7 +15880,7 @@
               if (this.selectedFunction.returnParameters) {
                 if (this.allowReturn && this.selectedFunction.returnParameters.length > 0) {
                   this.selectedFunction.returnParameters.forEach(function (parameter, index) {
-                    parameters.push(_this66.newParameter(existingParameters, parameter, index + 400, _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].ReturnValue, _this66.selectedFunction.genericTypeDefault));
+                    parameters.push(_this67.newParameter(existingParameters, parameter, index + 400, _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].ReturnValue, _this67.selectedFunction.genericTypeDefault));
                   });
                 }
               }
@@ -15865,7 +15888,7 @@
               if (this.selectedFunction.resultReturnParameters) {
                 if (this.allowReturn && this.selectedFunction.resultReturnParameters.length > 0) {
                   this.selectedFunction.resultReturnParameters.forEach(function (parameter) {
-                    parameters.push(_this66.newParameter(existingParameters, parameter, 0, _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].ResultReturnValue, _this66.selectedFunction.genericTypeDefault));
+                    parameters.push(_this67.newParameter(existingParameters, parameter, 0, _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].ResultReturnValue, _this67.selectedFunction.genericTypeDefault));
                   });
                 }
               }
@@ -15922,7 +15945,7 @@
         }, {
           key: "selectCustomFunction",
           value: function selectCustomFunction(customFunctionKey, markAsDirty) {
-            var _this67 = this;
+            var _this68 = this;
 
             this.selectedCustomFunction = this.hubCache.hub.dexihCustomFunctions.find(function (c) {
               return c.key === customFunctionKey;
@@ -15941,7 +15964,7 @@
                 return (c.direction === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Input || c.direction === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Join) && c.isValid;
               }).forEach(function (param, index) {
                 if (param) {
-                  var newParameterForm = _this67.newParameter(existingParameters, param, index, _this67.isJoin ? _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Join : _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Input, _this67.selectedCustomFunction.genericTypeDefault);
+                  var newParameterForm = _this68.newParameter(existingParameters, param, index, _this68.isJoin ? _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Join : _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Input, _this68.selectedCustomFunction.genericTypeDefault);
 
                   parameters.push(newParameterForm);
                 }
@@ -15950,7 +15973,7 @@
                 return c.direction === _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Output && c.isValid;
               }).forEach(function (param, index) {
                 if (param) {
-                  var newParameterForm = _this67.newParameter(existingParameters, param, index, _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Output, _this67.selectedCustomFunction.genericTypeDefault);
+                  var newParameterForm = _this68.newParameter(existingParameters, param, index, _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Output, _this68.selectedCustomFunction.genericTypeDefault);
 
                   parameters.push(newParameterForm);
                 }
@@ -16022,17 +16045,17 @@
         }, {
           key: "addInputOutputParameter",
           value: function addInputOutputParameter(arrayParameter) {
-            var _this68 = this;
+            var _this69 = this;
 
             var position = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
             var item = new ArrayParameterItem();
             arrayParameter.inputParameterForms.forEach(function (parameterForm) {
-              var parameter = _this68.addParameter(parameterForm, _this68.isJoin ? _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Join : _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Input, position);
+              var parameter = _this69.addParameter(parameterForm, _this69.isJoin ? _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Join : _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Input, position);
 
               item.inputItems.push(parameter);
             });
             arrayParameter.outputParameterForms.forEach(function (parameterForm) {
-              var parameter = _this68.addParameter(parameterForm, _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Output, position);
+              var parameter = _this69.addParameter(parameterForm, _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Output, position);
 
               item.outputItems.push(parameter);
             });
@@ -16057,14 +16080,14 @@
         }, {
           key: "removeInputOutputParameter",
           value: function removeInputOutputParameter(arrayParameter) {
-            var _this69 = this;
+            var _this70 = this;
 
             var position = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
             arrayParameter.inputParameterForms.forEach(function (parameterForm) {
-              _this69.removeParameter(parameterForm, position);
+              _this70.removeParameter(parameterForm, position);
             });
             arrayParameter.outputParameterForms.forEach(function (parameterForm) {
-              _this69.removeParameter(parameterForm, position);
+              _this70.removeParameter(parameterForm, position);
             });
 
             if (position !== null) {
@@ -16076,7 +16099,7 @@
         }, {
           key: "addAllColumns",
           value: function addAllColumns(parentParameterForm) {
-            var _this70 = this;
+            var _this71 = this;
 
             this.clearArray(parentParameterForm);
             var isLabel = parentParameterForm.value.runTime.functionParameter.isLabel;
@@ -16084,7 +16107,7 @@
             var arrayForm = parentParameterForm.controls.arrayParameters;
             var position = 1;
             this.inputColumns.forEach(function (column) {
-              var newParameter = _this70.createArrayParameter(parentParameter, _this70.isJoin ? _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Join : _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Input, position++, _this70.selectedFunction.genericTypeDefault);
+              var newParameter = _this71.createArrayParameter(parentParameter, _this71.isJoin ? _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Join : _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["eParameterDirection"].Input, position++, _this71.selectedFunction.genericTypeDefault);
 
               if (isLabel) {
                 newParameter.value = column.name;
@@ -16092,7 +16115,7 @@
                 newParameter.datalinkColumn = column;
               }
 
-              var newParameterForm = _this70.editDatalinkService.hubFormsService.datalinkFunctionArrayParametersFormGroup(newParameter);
+              var newParameterForm = _this71.editDatalinkService.hubFormsService.datalinkFunctionArrayParametersFormGroup(newParameter);
 
               arrayForm.push(newParameterForm);
             });
@@ -16153,13 +16176,13 @@
         }, {
           key: "clearInputOutputArray",
           value: function clearInputOutputArray(arrayParameter) {
-            var _this71 = this;
+            var _this72 = this;
 
             arrayParameter.inputParameterForms.forEach(function (form) {
-              _this71.clearArray(form);
+              _this72.clearArray(form);
             });
             arrayParameter.outputParameterForms.forEach(function (form) {
-              _this71.clearArray(form);
+              _this72.clearArray(form);
             });
           }
         }, {
@@ -16230,11 +16253,11 @@
         }, {
           key: "autoMap",
           value: function autoMap() {
-            var _this72 = this;
+            var _this73 = this;
 
             this.outputParameterControls.forEach(function (param) {
               var newColumn = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_10__["DexihDatalinkColumn"]();
-              newColumn.key = _this72.hubService.getHubCache().getNextSequence();
+              newColumn.key = _this73.hubService.getHubCache().getNextSequence();
               newColumn.position = 1000 - newColumn.key;
               var paramValue = param.value;
               newColumn.dataType = paramValue.dataType;
@@ -16244,7 +16267,7 @@
               newColumn.rank = paramValue.rank;
               param.controls.datalinkColumn.setValue(newColumn);
 
-              _this72.newDatalinkTransformItemForm.markAsDirty();
+              _this73.newDatalinkTransformItemForm.markAsDirty();
             });
           }
         }, {
@@ -16278,7 +16301,7 @@
         selectors: [["dexih-function-edit"]],
         decls: 1,
         vars: 1,
-        consts: [[4, "ngIf"], ["title", "Edit Function", 3, "showExpandButton"], ["header", ""], [3, "formGroup", 4, "ngIf"], [1, "mr-1", 3, "disabled", "click"], [3, "click"], [3, "formGroup"], [3, "ngIf"], ["class", "form-row ", 4, "ngIf"], ["class", "mt-1", 4, "ngIf"], ["class", "mt-1", 4, "ngFor", "ngForOf"], ["label", "Use a custom function", 3, "ngModel", "ngModelOptions", "ngModelChange"], [3, "ngStyle"], ["label", "Select a hub function", "formControlName", "customFunctionKey", "itemKey", "key", "itemName", "name", "itemTitle", "description", 3, "items"], [3, "key"], ["label", "Category", "selectNullMessage", "(All functions)", 3, "items", "allowNullSelect", "ngModelOptions", "ngModel", "sortItems", "ngModelChange"], ["label", "Select a standard function", "itemKey", "name", "itemName", "name", "itemTitle", "description", 3, "ngModel", "ngModelOptions", "items", "enableKeySelect", "note", "sortItems", "ngModelChange"], [1, "form-row"], ["class", "col-xs-12 col-sm-6 col-md-3", 3, "ngStyle", 4, "ngIf"], [1, "col-xs-12", "col-sm-6", "col-md-3", 3, "ngStyle"], ["label", "Action when error", "formControlName", "onError", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", 3, "items", "enableFilter"], ["class", "col-xs-12 col-sm-6 col-md-3 align-self-end", 4, "ngIf"], ["class", "col-xs-12 col-sm-6 col-md-3", 4, "ngIf"], [1, "col-xs-12", "col-sm-6", "col-md-3"], ["label", "Cache Options", "formControlName", "functionCaching", "itemKey", "key", "itemName", "name", 3, "items"], ["label", "Action when null", "formControlName", "onNull", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", 3, "items", "enableFilter"], ["label", "Action when false", "formControlName", "invalidAction", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", 3, "items", "enableFilter"], [1, "col-xs-12", "col-sm-6", "col-md-3", "align-self-end"], ["label", "Return 'NOT' result", "formControlName", "notCondition"], ["label", "Data Type", "formControlName", "genericTypeCode", "itemKey", "key", "itemName", "name", 3, "items"], [1, "mt-1"], [1, "d-flex", "flex-row", "mb-1"], ["class", "mb-1", 3, "ngStyle", 4, "ngFor", "ngForOf"], [1, "mb-1", 3, "ngStyle"], [3, "inputParameterForms", "inputColumns", "nodeDatalinkColumnKey", "allowAdd", "allowRemove", "updateParameterName", "variables", 4, "ngIf"], [1, "input-group-text"], [1, "ml-auto"], ["iconClass", "fa fa-download", "text", "Import Mappings", "title", "Attempt to import the mappings from the source data", "class", "mr-1", 3, "click", 4, "ngIf"], ["iconClass", "fa fa-plus", "text", "Add Parameter", "title", "Add a parameter to the array", 1, "mr-1", 3, "click"], ["iconClass", "fa fa-columns", "text", "Add All Inputs", "title", "Add all the input columns to the array", 1, "mr-1", 3, "click"], ["iconClass", "fa fa-eraser", "text", "Clear", 3, "click"], [3, "inputParameterForms", "nodeDatalinkColumnKey", "inputColumns", "allowAdd", "allowRemove", "updateParameterName", "rank", "variables", 4, "ngIf"], ["class", "pl-2 mb-1", 3, "ngStyle", 4, "ngFor", "ngForOf"], ["iconClass", "fa fa-download", "text", "Import Mappings", "title", "Attempt to import the mappings from the source data", 1, "mr-1", 3, "click"], [3, "inputParameterForms", "nodeDatalinkColumnKey", "inputColumns", "allowAdd", "allowRemove", "updateParameterName", "rank", "variables"], [1, "pl-2", "mb-1", 3, "ngStyle"], [3, "inputParameterForms", "inputColumns", "allowAdd", "nodeDatalinkColumnKey", "allowRemove", "updateParameterName", "variables", "addParameter", "removeParameter"], ["class", "form-text text-muted", 4, "ngIf"], [1, "form-text", "text-muted"], [3, "data"], [3, "inputParameterForms", "inputColumns", "nodeDatalinkColumnKey", "allowAdd", "allowRemove", "updateParameterName", "variables"], ["iconClass", "fa fa-plus", "text", "Add Mapping", "title", "Add a parameter to the array", 1, "mr-1", 3, "click"], ["class", "pl-2", 3, "ngStyle", 4, "ngFor", "ngForOf"], [1, "pl-2", 3, "ngStyle"], [3, "inputParameterForms", "outputParameterForms", "nodeDatalinkColumnKey", "inputColumns", "outputColumns", "datalinkTargets", "allowAdd", "allowRemove", "updateParameterName", "variables", "addParameter", "removeParameter"], [1, "d-flex", "flex-row"], ["text", "Auto Map", "buttonClass", "btn-sm btn-outline-primary", 3, "click"], [3, "ngStyle", 4, "ngFor", "ngForOf"], [3, "outputParameterForm", "outputColumns", "datalinkTargets", "allowAdd", "allowRemove", 4, "ngIf"], [3, "outputParameterForm", "outputColumns", "datalinkTargets", "allowAdd", "allowRemove", "rank", 4, "ngIf"], [3, "outputParameterForm", "outputColumns", "datalinkTargets", "allowAdd", "allowRemove", "rank"], [3, "outputParameterForm", "outputColumns", "datalinkTargets", "allowAdd", "allowRemove", "addParameter", "removeParameter"], [3, "outputParameterForm", "outputColumns", "datalinkTargets", "allowAdd", "allowRemove"]],
+        consts: [[4, "ngIf"], ["title", "Edit Function", 3, "showExpandButton"], ["header", ""], [3, "formGroup", 4, "ngIf"], [1, "mr-1", 3, "disabled", "click"], [3, "click"], [3, "formGroup"], [3, "ngIf"], ["class", "form-row ", 4, "ngIf"], ["class", "mt-1", 4, "ngIf"], ["class", "mt-1", 4, "ngFor", "ngForOf"], ["label", "Use a custom function", 3, "ngModel", "ngModelOptions", "ngModelChange"], [3, "ngStyle"], ["label", "Select a hub function", "formControlName", "customFunctionKey", "itemKey", "key", "itemName", "name", "itemTitle", "description", 3, "items"], [3, "key"], ["label", "Category", "selectNullMessage", "(All functions)", 3, "items", "allowNullSelect", "ngModelOptions", "ngModel", "sortItems", "ngModelChange"], ["label", "Select a standard function", "itemKey", "name", "itemName", "name", "itemTitle", "description", 3, "ngModel", "ngModelOptions", "items", "enableKeySelect", "note", "sortItems", "ngModelChange"], [1, "form-row"], ["class", "col-xs-12 col-sm-6 col-md-3", 3, "ngStyle", 4, "ngIf"], [1, "col-xs-12", "col-sm-6", "col-md-3", 3, "ngStyle"], ["label", "Action when error", "formControlName", "onError", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", 3, "items", "enableFilter"], ["class", "col-xs-12 col-sm-6 col-md-3", 4, "ngIf"], [1, "col-xs-12", "col-sm-6", "col-md-3"], ["label", "Cache Options", "formControlName", "functionCaching", "itemKey", "key", "itemName", "name", 3, "items"], ["class", "col-xs-12 col-sm-6 col-md-3 align-self-end", 4, "ngIf"], ["label", "Action when null", "formControlName", "onNull", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", 3, "items", "enableFilter"], ["label", "Action when false", "formControlName", "invalidAction", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", 3, "items", "enableFilter"], ["label", "Data Type", "formControlName", "genericTypeCode", "itemKey", "key", "itemName", "name", 3, "items"], [1, "col-xs-12", "col-sm-6", "col-md-3", "align-self-end"], ["label", "Return 'NOT' result", "formControlName", "notCondition"], [1, "mt-1"], [1, "d-flex", "flex-row", "mb-1"], ["class", "mb-1", 3, "ngStyle", 4, "ngFor", "ngForOf"], [1, "mb-1", 3, "ngStyle"], [3, "inputParameterForms", "inputColumns", "nodeDatalinkColumnKey", "allowAdd", "allowRemove", "updateParameterName", "variables", 4, "ngIf"], [1, "input-group-text"], [1, "ml-auto"], ["iconClass", "fa fa-download", "text", "Import Mappings", "title", "Attempt to import the mappings from the source data", "class", "mr-1", 3, "click", 4, "ngIf"], ["iconClass", "fa fa-plus", "text", "Add Parameter", "title", "Add a parameter to the array", 1, "mr-1", 3, "click"], ["iconClass", "fa fa-columns", "text", "Add All Inputs", "title", "Add all the input columns to the array", 1, "mr-1", 3, "click"], ["iconClass", "fa fa-eraser", "text", "Clear", 3, "click"], [3, "inputParameterForms", "nodeDatalinkColumnKey", "inputColumns", "allowAdd", "allowRemove", "updateParameterName", "rank", "variables", 4, "ngIf"], ["class", "pl-2 mb-1", 3, "ngStyle", 4, "ngFor", "ngForOf"], ["iconClass", "fa fa-download", "text", "Import Mappings", "title", "Attempt to import the mappings from the source data", 1, "mr-1", 3, "click"], [3, "inputParameterForms", "nodeDatalinkColumnKey", "inputColumns", "allowAdd", "allowRemove", "updateParameterName", "rank", "variables"], [1, "pl-2", "mb-1", 3, "ngStyle"], [3, "inputParameterForms", "inputColumns", "allowAdd", "nodeDatalinkColumnKey", "allowRemove", "updateParameterName", "variables", "addParameter", "removeParameter"], ["class", "form-text text-muted", 4, "ngIf"], [1, "form-text", "text-muted"], [3, "data"], [3, "inputParameterForms", "inputColumns", "nodeDatalinkColumnKey", "allowAdd", "allowRemove", "updateParameterName", "variables"], ["iconClass", "fa fa-plus", "text", "Add Mapping", "title", "Add a parameter to the array", 1, "mr-1", 3, "click"], ["class", "pl-2", 3, "ngStyle", 4, "ngFor", "ngForOf"], [1, "pl-2", 3, "ngStyle"], [3, "inputParameterForms", "outputParameterForms", "nodeDatalinkColumnKey", "inputColumns", "outputColumns", "datalinkTargets", "allowAdd", "allowRemove", "updateParameterName", "variables", "addParameter", "removeParameter"], [1, "d-flex", "flex-row"], ["text", "Auto Map", "buttonClass", "btn-sm btn-outline-primary", 3, "click"], [3, "ngStyle", 4, "ngFor", "ngForOf"], [3, "outputParameterForm", "outputColumns", "datalinkTargets", "allowAdd", "allowRemove", 4, "ngIf"], [3, "outputParameterForm", "outputColumns", "datalinkTargets", "allowAdd", "allowRemove", "rank", 4, "ngIf"], [3, "outputParameterForm", "outputColumns", "datalinkTargets", "allowAdd", "allowRemove", "rank"], [3, "outputParameterForm", "outputColumns", "datalinkTargets", "allowAdd", "allowRemove", "addParameter", "removeParameter"], [3, "outputParameterForm", "outputColumns", "datalinkTargets", "allowAdd", "allowRemove"]],
         template: function StandardFunctionEditComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, StandardFunctionEditComponent_div_0_Template, 5, 2, "div", 0);
@@ -16381,7 +16404,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -16417,7 +16440,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -16429,7 +16452,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -16447,7 +16470,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
       function TargetColumnComponent_div_0_Template(rf, ctx) {
         if (rf & 1) {
@@ -16558,20 +16581,20 @@
         _createClass(TargetColumnComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this73 = this;
+            var _this74 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["combineLatest"])(this.hubService.getHubCacheObservable(), this.editDatalinkService.hubFormsService.getCurrentFormObservable()).subscribe(function (result) {
-                _this73.hubCache = result[0];
-                _this73.datalinkForm = result[1];
+                _this74.hubCache = result[0];
+                _this74.datalinkForm = result[1];
 
-                _this73.logger.LogC(function () {
-                  return "Subscription count: ".concat(_this73.logCount++);
+                _this74.logger.LogC(function () {
+                  return "Subscription count: ".concat(_this74.logCount++);
                 }, _logging__WEBPACK_IMPORTED_MODULE_7__["eLogLevel"].Trace);
 
-                _this73.childColumns = _this73.column.childColumns;
+                _this74.childColumns = _this74.column.childColumns;
 
-                _this73.refreshStatus();
+                _this74.refreshStatus();
               });
             } catch (e) {
               this.hubService.addHubClientErrorMessage(e, 'Output Column');
@@ -16592,13 +16615,13 @@
         }, {
           key: "refreshStatus",
           value: function refreshStatus() {
-            var _this74 = this;
+            var _this75 = this;
 
             if (this.datalinkForm) {
               var columnUsage = new _hub_lineage_models__WEBPACK_IMPORTED_MODULE_4__["ColumnUsageNode"](_hub_lineage_models__WEBPACK_IMPORTED_MODULE_4__["eDatalinkObjectType"].TargetTable, _hub_lineage_models__WEBPACK_IMPORTED_MODULE_4__["eObjectUse"].Target, this.datalinkForm.value, null, this.column, null, null, _hub_models__WEBPACK_IMPORTED_MODULE_3__["eMappingStatus"].NotMapped, this.hubCache);
               this.mappingStatusLineage = columnUsage.createDatalinkLineage(true);
               this.mappingStatusInfoLineage = _hub_models__WEBPACK_IMPORTED_MODULE_3__["lineageMappingStatuses"].find(function (c) {
-                return c.key === _this74.mappingStatusLineage;
+                return c.key === _this75.mappingStatusLineage;
               });
             }
           }
@@ -16720,25 +16743,25 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/cdk/drag-drop */
-      "./node_modules/@angular/cdk/fesm2015/drag-drop.js");
+      "./node_modules/@angular/cdk/__ivy_ngcc__/fesm2015/drag-drop.js");
       /* harmony import */
 
 
@@ -16962,13 +16985,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -17000,22 +17023,22 @@
         _createClass(TargetTableColumnComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this75 = this;
+            var _this76 = this;
 
             this._currentFormSubscription = this.route.params.subscribe(function (params) {
-              _this75.targetKey = +params['targetKey'];
-              _this75.columnKey = +params['columnKey'];
-              _this75.deltaType = params['deltaType'];
+              _this76.targetKey = +params['targetKey'];
+              _this76.columnKey = +params['columnKey'];
+              _this76.deltaType = params['deltaType'];
 
-              _this75.formsService.getCurrentFormObservable().subscribe(function (datalinkForm) {
+              _this76.formsService.getCurrentFormObservable().subscribe(function (datalinkForm) {
                 if (datalinkForm) {
                   var _targets = datalinkForm.controls.dexihDatalinkTargets;
 
                   var targetForm = _targets.controls.find(function (c) {
-                    return c.value.key === _this75.targetKey;
+                    return c.value.key === _this76.targetKey;
                   });
 
-                  _this75.tableForm = targetForm.controls.table;
+                  _this76.tableForm = targetForm.controls.table;
                 }
               });
             });
@@ -17112,13 +17135,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -17154,7 +17177,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -17190,7 +17213,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -17214,7 +17237,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -17997,7 +18020,7 @@
         _createClass(DatalinkEditTargetTableComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this76 = this;
+            var _this77 = this;
 
             this.logger.LogC(function () {
               return "ngOnInit";
@@ -18007,63 +18030,63 @@
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_6__["combineLatest"])(this.route.data, this.route.params, this.hubService.getHubCacheObservable(), this.editDatalinkService.hubFormsService.getCurrentFormObservable()).subscribe(function (result) {
                 var data = result[0];
                 var params = result[1];
-                _this76.hubCache = result[2];
-                _this76.datalinkForm = result[3];
-                _this76.action = data['action'];
-                _this76.pageTitle = data['pageTitle'];
+                _this77.hubCache = result[2];
+                _this77.datalinkForm = result[3];
+                _this77.action = data['action'];
+                _this77.pageTitle = data['pageTitle'];
                 var ioColumns = new _hub_lineage_models__WEBPACK_IMPORTED_MODULE_2__["InputOutputColumns"]();
-                _this76.inputColumns = ioColumns.getDatalinkOutputColumns(_this76.datalinkForm.value);
+                _this77.inputColumns = ioColumns.getDatalinkOutputColumns(_this77.datalinkForm.value);
 
-                if (_this76.action === 'edit') {
-                  _this76.targetKey = +params['targetKey'];
-                  var _targets2 = _this76.datalinkForm.controls.dexihDatalinkTargets; // create a copy of the target form.
+                if (_this77.action === 'edit') {
+                  _this77.targetKey = +params['targetKey'];
+                  var _targets2 = _this77.datalinkForm.controls.dexihDatalinkTargets; // create a copy of the target form.
 
                   var originalTargetTableForm = _targets2.controls.find(function (c) {
-                    return c.value.key === _this76.targetKey;
+                    return c.value.key === _this77.targetKey;
                   });
 
                   if (originalTargetTableForm && originalTargetTableForm.controls.key.value <= 0) {
-                    _this76.newTable = true;
+                    _this77.newTable = true;
                   } // if the table is not found, then navigate back to the parent.
 
 
                   if (originalTargetTableForm === undefined) {
-                    _this76.canExit = true;
+                    _this77.canExit = true;
 
-                    _this76.authService.navigateUp();
+                    _this77.authService.navigateUp();
 
                     return;
                   }
 
-                  _this76.targetTableForm = _this76.editDatalinkService.hubFormsService.datalinkTargetFormGroup(originalTargetTableForm.value, originalTargetTableForm.controls.table.value);
-                } else if (_this76.action === 'new') {
+                  _this77.targetTableForm = _this77.editDatalinkService.hubFormsService.datalinkTargetFormGroup(originalTargetTableForm.value, originalTargetTableForm.controls.table.value);
+                } else if (_this77.action === 'new') {
                   var target = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_11__["DexihDatalinkTarget"]();
-                  target.key = _this76.hubCache.getNextSequence();
-                  _this76.targetTableForm = _this76.editDatalinkService.hubFormsService.datalinkTargetFormGroup(target);
+                  target.key = _this77.hubCache.getNextSequence();
+                  _this77.targetTableForm = _this77.editDatalinkService.hubFormsService.datalinkTargetFormGroup(target);
                 } else {
-                  _this76.hubService.addHubErrorMessage('Invalid action ' + _this76.action);
+                  _this77.hubService.addHubErrorMessage('Invalid action ' + _this77.action);
                 }
 
-                if (_this76.hubCache.isLoaded() && _this76.datalinkForm) {
-                  _this76.connectionTables = _this76.hubCache.getConnectionTables();
-                  _this76.managedConnections = _this76.hubCache.getManagedConnections();
+                if (_this77.hubCache.isLoaded() && _this77.datalinkForm) {
+                  _this77.connectionTables = _this77.hubCache.getConnectionTables();
+                  _this77.managedConnections = _this77.hubCache.getManagedConnections();
 
-                  _this76.updateData();
+                  _this77.updateData();
 
-                  _this76.resetSubscription();
+                  _this77.resetSubscription();
 
-                  _this76.logger.LogC(function () {
+                  _this77.logger.LogC(function () {
                     return "ngOnInit - completed";
                   }, _logging__WEBPACK_IMPORTED_MODULE_9__["eLogLevel"].Trace);
                 }
 
-                if (_this76._saveSubscription) {
-                  _this76._saveSubscription.unsubscribe();
+                if (_this77._saveSubscription) {
+                  _this77._saveSubscription.unsubscribe();
                 }
 
-                _this76._saveSubscription = _this76.editDatalinkService.savingDatalink.subscribe(function (value) {
+                _this77._saveSubscription = _this77.editDatalinkService.savingDatalink.subscribe(function (value) {
                   if (value) {
-                    _this76.apply();
+                    _this77.apply();
                   }
                 });
               });
@@ -18093,13 +18116,13 @@
         }, {
           key: "canDeactivate",
           value: function canDeactivate() {
-            var _this77 = this;
+            var _this78 = this;
 
             return new Promise(function (resolve) {
               var _a;
 
-              if (!_this77.canExit && ((_a = _this77.targetTableForm) === null || _a === void 0 ? void 0 : _a.dirty)) {
-                _this77.authService.confirmDialog('Target Table Changed', 'The table has changed.  Would you like to discard the changes and return to the previous screen?  Otherwise, use the apply button to save the changes.').then(function (confirm) {
+              if (!_this78.canExit && ((_a = _this78.targetTableForm) === null || _a === void 0 ? void 0 : _a.dirty)) {
+                _this78.authService.confirmDialog('Target Table Changed', 'The table has changed.  Would you like to discard the changes and return to the previous screen?  Otherwise, use the apply button to save the changes.').then(function (confirm) {
                   resolve(confirm);
                 })["catch"](function (reason) {
                   resolve(false);
@@ -18112,14 +18135,14 @@
         }, {
           key: "resetSubscription",
           value: function resetSubscription() {
-            var _this78 = this;
+            var _this79 = this;
 
             if (this._tableFormSubscription) {
               this._tableFormSubscription.unsubscribe();
             }
 
             this._tableFormSubscription = this.targetTableForm.controls.tableKey.valueChanges.subscribe(function () {
-              _this78.updateData();
+              _this79.updateData();
             });
           }
         }, {
@@ -18160,7 +18183,7 @@
         }, {
           key: "addNodeColumns",
           value: function addNodeColumns(columns, path) {
-            var _this79 = this;
+            var _this80 = this;
 
             if (!path) {
               this.nodes = [];
@@ -18172,13 +18195,13 @@
               }).forEach(function (col) {
                 var name = path ? path + '.' + col.logicalName : col.logicalName;
 
-                _this79.nodes.push({
+                _this80.nodes.push({
                   key: col.key,
                   name: name
                 });
 
                 if (col.childColumns && col.childColumns.length > 0) {
-                  _this79.addNodeColumns(col.childColumns, name);
+                  _this80.addNodeColumns(col.childColumns, name);
                 }
               });
             }
@@ -18186,7 +18209,7 @@
         }, {
           key: "updateData",
           value: function updateData() {
-            var _this80 = this;
+            var _this81 = this;
 
             if (this.ignoreUpdateTable) {
               return;
@@ -18224,16 +18247,16 @@
                   var newColumn = {
                     key: column.key,
                     position: column.position,
-                    columnStatus: _this80.columnStatus(table, column),
+                    columnStatus: _this81.columnStatus(table, column),
                     name: column.name,
-                    dataType: _this80.hubCache.dataTypeToString(column),
+                    dataType: _this81.hubCache.dataTypeToString(column),
                     deltaType: deltaType ? deltaType.name : 'Not specified',
                     allowDbNull: column.allowDbNull,
                     logicalName: column.logicalName,
                     isIncrementalUpdate: column.isIncrementalUpdate,
                     securityFlag: column.securityFlag,
                     defaultValue: column.defaultValue,
-                    columnValidation: _this80.hubCache.getColumnValidation(column.columnValidationKey).name,
+                    columnValidation: _this81.hubCache.getColumnValidation(column.columnValidationKey).name,
                     columnValidationClass: column.columnValidationKey && !validation ? 'dexih-error-icon' : '',
                     columnValidationTooltip: column.columnValidationKey && !validation ? 'Enabled the validation transform for this to function' : ''
                   };
@@ -18261,9 +18284,9 @@
                       var newColumn = {
                         key: column.key,
                         position: column.position + position,
-                        columnStatus: _this80.datalinkColumnStatus(table, column),
+                        columnStatus: _this81.datalinkColumnStatus(table, column),
                         name: column.name,
-                        dataType: _this80.hubCache.dataTypeToString(column),
+                        dataType: _this81.hubCache.dataTypeToString(column),
                         deltaType: deltaType ? deltaType.name : 'Not specified',
                         allowDbNull: column.allowDbNull,
                         logicalName: column.logicalName,
@@ -18304,7 +18327,7 @@
         }, {
           key: "addMissing",
           value: function addMissing(items) {
-            var _this81 = this;
+            var _this82 = this;
 
             this.logger.LogC(function () {
               return "addMissing started";
@@ -18328,7 +18351,7 @@
                   var newColumn = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_11__["DexihTableColumn"]();
                   Object.assign(newColumn, missingColumn);
 
-                  _this81.resetColumnKeys(newColumn);
+                  _this82.resetColumnKeys(newColumn);
 
                   var positions = tableColumns.controls.map(function (c) {
                     return c.value.position;
@@ -18337,12 +18360,12 @@
 
                   newColumn.position = position;
 
-                  var columnForm = _this81.editDatalinkService.hubFormsService.tableColumn(tableColumns.value, newColumn);
+                  var columnForm = _this82.editDatalinkService.hubFormsService.tableColumn(tableColumns.value, newColumn);
 
                   tableColumns.push(columnForm);
                   tableForm.markAsDirty();
 
-                  _this81.targetTableForm.markAsDirty();
+                  _this82.targetTableForm.markAsDirty();
                 }
               });
               this.updateData();
@@ -18355,13 +18378,13 @@
         }, {
           key: "resetColumnKeys",
           value: function resetColumnKeys(column) {
-            var _this82 = this;
+            var _this83 = this;
 
             column.key = this.hubCache.getNextSequence();
 
             if (column.childColumns) {
               column.childColumns.forEach(function (childColumn) {
-                return _this82.resetColumnKeys(childColumn);
+                return _this83.resetColumnKeys(childColumn);
               });
             }
           }
@@ -18459,10 +18482,10 @@
         }, {
           key: "deleteColumns",
           value: function deleteColumns(columns) {
-            var _this83 = this;
+            var _this84 = this;
 
             columns.forEach(function (column) {
-              var tableForm = _this83.targetTableForm.controls.table;
+              var tableForm = _this84.targetTableForm.controls.table;
               var tableColumns = tableForm.controls.dexihTableColumns;
               var index = tableColumns.controls.findIndex(function (c) {
                 return c.value.key === column.key;
@@ -18478,7 +18501,7 @@
         }, {
           key: "importTable",
           value: function importTable() {
-            var _this84 = this;
+            var _this85 = this;
 
             var table = this.targetTableForm.controls.table.value;
             var connection = this.hubCache.getConnection(table.connectionKey);
@@ -18488,25 +18511,25 @@
               }
 
               var returnTable = tables[0];
-              returnTable.useLogical = _this84.hubCache.defaultTableLogicalName(returnTable.schema, returnTable.name) !== returnTable.logicalName;
+              returnTable.useLogical = _this85.hubCache.defaultTableLogicalName(returnTable.schema, returnTable.name) !== returnTable.logicalName;
 
-              var tableForm = _this84.editDatalinkService.hubFormsService.tableForm(returnTable);
+              var tableForm = _this85.editDatalinkService.hubFormsService.tableForm(returnTable);
 
-              _this84.targetTableForm.controls.tableKey.setValue(returnTable.key);
+              _this85.targetTableForm.controls.tableKey.setValue(returnTable.key);
 
-              _this84.targetTableForm.setControl('table', tableForm);
+              _this85.targetTableForm.setControl('table', tableForm);
             })["catch"](function (reason) {// this.hubService.addHubErrorMessage(reason);
             });
           }
         }, {
           key: "createTable",
           value: function createTable() {
-            var _this85 = this;
+            var _this86 = this;
 
             var table = this.targetTableForm.controls.table.value;
             var connection = this.hubCache.getConnection(table.connectionKey);
             this.hubService.createTables([table], this.cancelToken).then(function (tables) {
-              _this85.hubService.addHubSuccessMessage('The table was created successfully.'); // this.targetTableForm.controls.table.setValue(returnTable);
+              _this86.hubService.addHubSuccessMessage('The table was created successfully.'); // this.targetTableForm.controls.table.setValue(returnTable);
 
             })["catch"](function (reason) {// this.hubService.addHubErrorMessage(reason);
             });
@@ -18547,25 +18570,25 @@
         }, {
           key: "saveTable",
           value: function saveTable() {
-            var _this86 = this;
+            var _this87 = this;
 
             var table = this.targetTableForm.controls.table.value;
             this.hubService.saveTables([table]).then(function (savedTables) {
               var savedTable = savedTables[0];
 
-              _this86.targetTableForm.setControl('table', _this86.editDatalinkService.hubFormsService.tableForm(savedTable));
+              _this87.targetTableForm.setControl('table', _this87.editDatalinkService.hubFormsService.tableForm(savedTable));
 
-              _this86.targetTableForm.controls.tableKey.setValue(savedTable.key);
+              _this87.targetTableForm.controls.tableKey.setValue(savedTable.key);
 
-              _this86.resetSubscription();
+              _this87.resetSubscription();
 
-              _this86.editDatalinkService.hubFormsService.save(false);
+              _this87.editDatalinkService.hubFormsService.save(false);
             });
           }
         }, {
           key: "apply",
           value: function apply() {
-            var _this87 = this;
+            var _this88 = this;
 
             if (this.targetTableForm.dirty) {
               var _targets3 = this.datalinkForm.controls.dexihDatalinkTargets;
@@ -18573,7 +18596,7 @@
 
               if (this.action === 'edit') {
                 index = _targets3.controls.findIndex(function (c) {
-                  return c.value.key === _this87.targetKey;
+                  return c.value.key === _this88.targetKey;
                 });
 
                 _targets3.removeAt(index);
@@ -18673,13 +18696,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -18709,7 +18732,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -18745,7 +18768,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -18757,7 +18780,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
 
       function DatalinkEditTargetComponent_form_1_span_3_Template(rf, ctx) {
         if (rf & 1) {
@@ -19011,7 +19034,7 @@
         _createClass(DatalinkEditTargetComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this88 = this;
+            var _this89 = this;
 
             this.logger.LogC(function () {
               return "ngOnInit";
@@ -19020,21 +19043,21 @@
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["combineLatest"])(this.route.data, this.route.params, this.hubService.getHubCacheObservable(), this.editDatalinkService.hubFormsService.getCurrentFormObservable(), this.hubService.getRemoteLibrariesObservable()).subscribe(function (result) {
                 var data = result[0];
-                _this88.hubCache = result[2];
-                _this88.datalinkForm = result[3];
-                _this88.action = data['action'];
-                _this88.pageTitle = data['pageTitle'];
+                _this89.hubCache = result[2];
+                _this89.datalinkForm = result[3];
+                _this89.action = data['action'];
+                _this89.pageTitle = data['pageTitle'];
 
-                if (_this88.hubCache.isLoaded() && _this88.datalinkForm) {
-                  _this88.connectionTables = _this88.hubCache.getConnectionTables();
-                  _this88.managedConnections = _this88.hubCache.getManagedConnections();
+                if (_this89.hubCache.isLoaded() && _this89.datalinkForm) {
+                  _this89.connectionTables = _this89.hubCache.getConnectionTables();
+                  _this89.managedConnections = _this89.hubCache.getManagedConnections();
 
-                  _this88.logger.LogC(function () {
+                  _this89.logger.LogC(function () {
                     return "ngOnInit - completed";
                   }, _logging__WEBPACK_IMPORTED_MODULE_8__["eLogLevel"].Trace);
                 }
 
-                _this88.updateTargets();
+                _this89.updateTargets();
               });
             } catch (e) {
               this.hubService.addHubClientErrorMessage(e, 'Edit Target Table');
@@ -19075,12 +19098,12 @@
         }, {
           key: "deleteTables",
           value: function deleteTables(targets) {
-            var _this89 = this;
+            var _this90 = this;
 
             targets.forEach(function (target) {
-              _this89.editDatalinkService.deleteDatalinkTarget(_this89.datalinkForm, target.key);
+              _this90.editDatalinkService.deleteDatalinkTarget(_this90.datalinkForm, target.key);
 
-              _this89.updateTargets();
+              _this90.updateTargets();
             });
           }
         }, {
@@ -19188,19 +19211,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -19541,13 +19564,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -19601,7 +19624,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
 
       function TransformTableEditComponent_ng_template_9_Template(rf, ctx) {
         if (rf & 1) {
@@ -19710,18 +19733,18 @@
         _createClass(TransformTableEditComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this90 = this;
+            var _this91 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["combineLatest"])(this.route.data, this.route.params, this.hubService.getHubCacheObservable()).subscribe(function (result) {
-                _this90.pageTitle = result[0]['pageTitle'];
+                _this91.pageTitle = result[0]['pageTitle'];
                 var params = result[1];
-                _this90.hubCache = result[2];
-                _this90.datalinkTransformKey = +params['datalinkTransformKey'];
-                _this90.datalinkTransformForm = _this90.editDatalinkService.getDatalinkTransform(_this90.datalinkTransformKey);
-                _this90.transformTableForm = _this90.datalinkTransformForm.controls.transformTable;
+                _this91.hubCache = result[2];
+                _this91.datalinkTransformKey = +params['datalinkTransformKey'];
+                _this91.datalinkTransformForm = _this91.editDatalinkService.getDatalinkTransform(_this91.datalinkTransformKey);
+                _this91.transformTableForm = _this91.datalinkTransformForm.controls.transformTable;
 
-                _this90.updateColumnData();
+                _this91.updateColumnData();
               });
             } catch (e) {
               this.hubService.addHubClientErrorMessage(e, 'Transform Table Edit');
@@ -19767,7 +19790,7 @@
         }, {
           key: "deleteSelected",
           value: function deleteSelected(columns) {
-            var _this91 = this;
+            var _this92 = this;
 
             var columnsArray = this.transformTableForm.controls.dexihTableColumns;
             columns.forEach(function (column) {
@@ -19779,7 +19802,7 @@
                 columnsArray.removeAt(columnIndex);
               }
 
-              _this91.updateColumnData();
+              _this92.updateColumnData();
             });
           }
         }, {
@@ -19940,13 +19963,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -20006,13 +20029,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -20024,7 +20047,7 @@
 
       var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
       /*! @angular/cdk/drag-drop */
-      "./node_modules/@angular/cdk/fesm2015/drag-drop.js");
+      "./node_modules/@angular/cdk/__ivy_ngcc__/fesm2015/drag-drop.js");
       /* harmony import */
 
 
@@ -20142,7 +20165,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("errors", ctx_r0.formErrors.description);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("isHidden", true)("showPreview", true)("errors", ctx_r0.formErrors.description);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
@@ -20923,7 +20946,7 @@
         _createClass(DatalinkEditTransformComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this92 = this;
+            var _this93 = this;
 
             this.logger.LogC(function () {
               return "OnInit";
@@ -20931,98 +20954,98 @@
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["combineLatest"])(this.route.data, this.route.params, this.editDatalinkService.hubFormsService.getCurrentFormObservable()).subscribe(function (result) {
-                _this92.action = result[0]['action'];
-                _this92.pageTitle = result[0]['pageTitle'];
-                _this92.datalinkTransformKey = +result[1]['datalinkTransformKey'];
-                _this92.datalinkForm = result[2];
+                _this93.action = result[0]['action'];
+                _this93.pageTitle = result[0]['pageTitle'];
+                _this93.datalinkTransformKey = +result[1]['datalinkTransformKey'];
+                _this93.datalinkForm = result[2];
 
-                if (_this92.datalinkForm) {
-                  var transformsArray = _this92.datalinkForm.controls.dexihDatalinkTransforms;
+                if (_this93.datalinkForm) {
+                  var transformsArray = _this93.datalinkForm.controls.dexihDatalinkTransforms;
 
-                  if (_this92._transformsArraySubscription) {
-                    _this92._transformsArraySubscription.unsubscribe();
+                  if (_this93._transformsArraySubscription) {
+                    _this93._transformsArraySubscription.unsubscribe();
                   }
 
-                  _this92._transformsArraySubscription = transformsArray.valueChanges.subscribe(function (transforms) {
+                  _this93._transformsArraySubscription = transformsArray.valueChanges.subscribe(function (transforms) {
                     var tmpDatalinkTransformForm = transforms.find(function (c) {
-                      return c.datalinkTransformKey === _this92.datalinkTransformKey;
+                      return c.datalinkTransformKey === _this93.datalinkTransformKey;
                     });
 
                     if (!tmpDatalinkTransformForm) {
-                      _this92.router.navigate(['properties'], {
-                        relativeTo: _this92.route.parent.parent
+                      _this93.router.navigate(['properties'], {
+                        relativeTo: _this93.route.parent.parent
                       });
                     }
                   });
-                  _this92.datalinkTransformForm = transformsArray.controls.find(function (c) {
-                    return c.value.key === _this92.datalinkTransformKey;
+                  _this93.datalinkTransformForm = transformsArray.controls.find(function (c) {
+                    return c.value.key === _this93.datalinkTransformKey;
                   }); // if the transform isn't found, this is probably due to a save/reload which changes the keys.
                   // navigate up one level when this happens.
 
-                  if (!_this92.datalinkTransformForm) {
-                    _this92.router.navigate(['properties'], {
-                      relativeTo: _this92.route.parent.parent
+                  if (!_this93.datalinkTransformForm) {
+                    _this93.router.navigate(['properties'], {
+                      relativeTo: _this93.route.parent.parent
                     }); //                        this.authService.navigateUp();
 
 
                     return;
                   }
 
-                  var datalinkTransform = _this92.datalinkTransformForm.value;
-                  var items = _this92.datalinkTransformForm.controls.dexihDatalinkTransformItems;
+                  var datalinkTransform = _this93.datalinkTransformForm.value;
+                  var items = _this93.datalinkTransformForm.controls.dexihDatalinkTransformItems;
 
                   if (datalinkTransform.transformType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformType"].Series) {
-                    _this92.seriesForm = items.controls.filter(function (d) {
+                    _this93.seriesForm = items.controls.filter(function (d) {
                       return d.value.transformItemType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformItemType"].Series;
                     })[0];
                   }
 
                   if (datalinkTransform.transformType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformType"].Aggregate) {
-                    _this92.nodeType = _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformItemType"].GroupNode;
+                    _this93.nodeType = _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformItemType"].GroupNode;
                   }
 
                   if (datalinkTransform.transformType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformType"].Lookup || datalinkTransform.transformType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformType"].Join) {
-                    _this92.nodeType = _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformItemType"].JoinNode;
+                    _this93.nodeType = _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformItemType"].JoinNode;
                   }
 
-                  if (_this92.nodeType) {
+                  if (_this93.nodeType) {
                     var node = datalinkTransform.dexihDatalinkTransformItems.find(function (d) {
-                      return d.transformItemType === _this92.nodeType;
+                      return d.transformItemType === _this93.nodeType;
                     });
 
                     if (node) {
-                      _this92.allowNode = true;
-                      _this92.nodeName = node.targetDatalinkColumn.name;
+                      _this93.allowNode = true;
+                      _this93.nodeName = node.targetDatalinkColumn.name;
                     } else {
-                      _this92.allowNode = false;
+                      _this93.allowNode = false;
                     }
                   }
 
-                  _this92.inputColumns = datalinkTransform['runTime'].inputColumns;
-                  _this92.nodes = [];
+                  _this93.inputColumns = datalinkTransform['runTime'].inputColumns;
+                  _this93.nodes = [];
 
-                  _this92.addNodeColumns(_this92.inputColumns, '');
+                  _this93.addNodeColumns(_this93.inputColumns, '');
 
                   var transformType = datalinkTransform.transformType;
-                  _this92.allowMappingOutputs = // transformType === eTransformType.Group ||
+                  _this93.allowMappingOutputs = // transformType === eTransformType.Group ||
                   transformType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformType"].Series || // transformType === eTransformType.Aggregate ||
                   transformType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformType"].Rows || transformType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformType"].Mapping || transformType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformType"].Validation;
 
-                  if (_this92._datalinkFormSubscription) {
-                    _this92._datalinkFormSubscription.unsubscribe();
+                  if (_this93._datalinkFormSubscription) {
+                    _this93._datalinkFormSubscription.unsubscribe();
                   }
 
-                  _this92._datalinkFormSubscription = _this92.datalinkForm.valueChanges.subscribe(function (value) {
-                    _this92.formErrors = _this92.editDatalinkService.hubFormsService.getFormErrorMessages(_this92.datalinkForm, true);
+                  _this93._datalinkFormSubscription = _this93.datalinkForm.valueChanges.subscribe(function (value) {
+                    _this93.formErrors = _this93.editDatalinkService.hubFormsService.getFormErrorMessages(_this93.datalinkForm, true);
                   });
 
-                  if (!_this92.datalinkTransformForm) {
-                    _this92.router.navigate(['properties'], {
-                      relativeTo: _this92.route.parent.parent
+                  if (!_this93.datalinkTransformForm) {
+                    _this93.router.navigate(['properties'], {
+                      relativeTo: _this93.route.parent.parent
                     });
                   }
 
-                  _this92.logger.LogC(function () {
+                  _this93.logger.LogC(function () {
                     return "datalink form is loaded";
                   }, _logging__WEBPACK_IMPORTED_MODULE_7__["eLogLevel"].Trace);
                 }
@@ -21034,7 +21057,7 @@
         }, {
           key: "addNodeColumns",
           value: function addNodeColumns(columns, path) {
-            var _this93 = this;
+            var _this94 = this;
 
             if (columns) {
               columns.filter(function (c) {
@@ -21042,13 +21065,13 @@
               }).forEach(function (col) {
                 var name = path ? path + '.' + col.logicalName : col.logicalName;
 
-                _this93.nodes.push({
+                _this94.nodes.push({
                   key: col.key,
                   name: name
                 });
 
                 if (col.childColumns && col.childColumns.length > 0) {
-                  _this93.addNodeColumns(col.childColumns, name);
+                  _this94.addNodeColumns(col.childColumns, name);
                 }
               });
             }
@@ -21083,11 +21106,11 @@
         }, {
           key: "toggleNode",
           value: function toggleNode(allowNode) {
-            var _this94 = this;
+            var _this95 = this;
 
             var items = this.datalinkTransformForm.controls.dexihDatalinkTransformItems;
             var nodeItem = items.controls.find(function (d) {
-              return d.value.transformItemType === _this94.nodeType;
+              return d.value.transformItemType === _this95.nodeType;
             });
 
             if (allowNode) {
@@ -21121,11 +21144,11 @@
         }, {
           key: "updateNode",
           value: function updateNode(name) {
-            var _this95 = this;
+            var _this96 = this;
 
             var items = this.datalinkTransformForm.controls.dexihDatalinkTransformItems;
             var nodeItem = items.controls.find(function (d) {
-              return d.value.transformItemType === _this95.nodeType;
+              return d.value.transformItemType === _this96.nodeType;
             });
 
             if (nodeItem) {
@@ -21141,7 +21164,7 @@
         }, {
           key: "newDragDropMapping",
           value: function newDragDropMapping(itemType, $event) {
-            var _this96 = this;
+            var _this97 = this;
 
             var item = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["DexihDatalinkTransformItem"]();
             var outputColumn = $event.outputColumn;
@@ -21158,7 +21181,7 @@
 
                 if (outputColumn.childColumns) {
                   outputColumn.childColumns.forEach(function (col) {
-                    col.key = _this96.hubService.getHubCache().getNextSequence();
+                    col.key = _this97.hubService.getHubCache().getNextSequence();
                   });
                 }
 
@@ -21178,7 +21201,7 @@
 
                 if (outputColumn.childColumns) {
                   outputColumn.childColumns.forEach(function (col) {
-                    col.key = _this96.hubService.getHubCache().getNextSequence();
+                    col.key = _this97.hubService.getHubCache().getNextSequence();
                   });
                 }
 
@@ -21230,12 +21253,12 @@
         selectors: [["dexih-datalink-edit-transform-form"]],
         decls: 8,
         vars: 8,
-        consts: [["title", "Properties", 3, "showExpandButton", "isExpanded"], [3, "formGroup", 4, "ngIf"], ["title", "Join Settings", 3, "showExpandButton", 4, "ngIf"], ["title", "Concatenate Settings", 3, "showExpandButton", 4, "ngIf"], ["title", "Series Settings", 3, "showExpandButton", 4, "ngIf"], ["title", "Group Node", 3, "showExpandButton", 4, "ngIf"], [1, "list-group-item", "p-1"], ["class", "d-flex", "cdkDropListGroup", "", 4, "ngIf"], [3, "formGroup"], ["label", "Transform Name", "formControlName", "name", "placeholder", "Enter a name for the transform", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "errors"], [4, "ngIf"], [1, "form-row"], [1, "form-group", "col-md-6"], ["type", "number", "formControlName", "maxInputRows", "label", "Maximum number of rows to input into the transform (0 = unlimited)"], ["type", "number", "formControlName", "maxOutputRows", "label", "Maximum number of rows to output into the transform (0 = unlimited)"], ["label", "Allow unmapped input columns to pass through to the next transform.", "formControlName", "passThroughColumns"], ["label", "Node level", "formControlName", "nodeDatalinkColumn", "itemKey", "key", "itemName", "name", "node", "Specify the node where the transform should be applied to.", "selectNullMessage", "Use top level", 3, "items", "enableKeySelect", "allowNullSelect"], ["title", "Join Settings", 3, "showExpandButton"], [3, "datalinkTableForm"], ["class", "form-group col-md-4", 4, "ngIf"], [1, "form-group", "col-md-4"], ["formControlName", "joinDuplicateStrategy", "itemKey", "key", "itemName", "name", 3, "label", "items"], ["formControlName", "joinNotFoundStrategy", "itemKey", "key", "itemName", "description", 3, "label", "items"], ["label", "Join strategy", "formControlName", "joinStrategy", "itemKey", "key", "itemName", "name", 3, "items"], ["title", "Concatenate Settings", 3, "showExpandButton"], ["title", "Series Settings", 3, "showExpandButton"], ["label", "Series Grain", "formControlName", "seriesGrain", "itemKey", "key", "itemName", "name", 3, "items"], ["label", "Input Column", "formControlName", "sourceDatalinkColumn", "itemKey", "key", "itemName", "name", 3, "items", "enableKeySelect"], ["label", "Fill empty series values", "formControlName", "seriesFill"], ["class", "form-row", 4, "ngIf"], ["type", "date", "formControlName", "seriesStart", "label", "Series Start Date (empty to use first value)"], ["type", "date", "formControlName", "seriesFinish", "label", "Series Finish Date (empty to use last value)"], ["formControlName", "seriesStart", "label", "Series Start Number (empty to use first value)"], ["formControlName", "seriesFinish", "label", "Series Finish Number (empty to use last value)"], ["title", "Group Node", 3, "showExpandButton"], ["label", "Group rows under a node", 3, "ngModelOptions", "ngModel", "ngModelChange"], ["class", "form-group col-md-6", 4, "ngIf"], ["label", "Name of the node", 3, "ngModelOptions", "ngModel", "ngModelChange"], ["cdkDropListGroup", "", 1, "d-flex"], ["title", "Inputs", "height", "80vh", 1, "d-none", "d-lg-inline", 2, "width", "300px", 3, "scrollable"], [3, "datalinkTransformForm"], ["class", "mt-1", 4, "ngIf"], [1, "w-100", "mr-1", "ml-1"], ["height", "80vh", 1, "d-none", "d-lg-inline", 2, "width", "300px", 3, "title", "scrollable"], [3, "datalinkTransformForm", "allowMappingOutputs", "inputOutputDrop"], [3, "datalinkTransformForm", "targets", "allowMappingOutputs", "inputOutputDrop"], [1, "mt-1"], [3, "datalinkTransformForm", "inputJoinDrop"], [3, "datalinkTransformForm", "allowJoin", "title"], ["title", "Mapping Functions", 3, "datalinkTransformForm", "allowStandard", "allowMapping", "allowOutput", "onColumnDrop"], ["title", "Sort Columns", 3, "datalinkTransformForm", "allowSort", "onColumnDrop"], ["title", "Group Columns", 3, "datalinkTransformForm", "allowGroup", "allowSeries", "onColumnDrop"], ["title", "Aggregate Functions", 3, "datalinkTransformForm", "allowStandard", "allowAggregate", "allowOutput", "onColumnDrop"], ["title", "Series/Aggregate Functions", 3, "datalinkTransformForm", "allowStandard", "allowAggregate", "allowSeries", "allowOutput", "onColumnDrop"], ["title", "Mappings", 3, "datalinkTransformForm", "allowMapping", "allowOutput", "onColumnDrop"], ["title", "Filters", 3, "datalinkTransformForm", "allowStandard", "allowCondition", "allowOutput"], ["title", "Row Functions", 3, "datalinkTransformForm", "allowRow", "allowStandard", "allowJoinNode", "allowOutput", "allowCondition"]],
+        consts: [["title", "Properties", 3, "showExpandButton", "isExpanded"], [3, "formGroup", 4, "ngIf"], ["title", "Join Settings", 3, "showExpandButton", 4, "ngIf"], ["title", "Concatenate Settings", 3, "showExpandButton", 4, "ngIf"], ["title", "Series Settings", 3, "showExpandButton", 4, "ngIf"], ["title", "Group Node", 3, "showExpandButton", 4, "ngIf"], [1, "list-group-item", "p-1"], ["class", "d-flex", "cdkDropListGroup", "", 4, "ngIf"], [3, "formGroup"], ["label", "Transform Name", "formControlName", "name", "placeholder", "Enter a name for the transform", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "isHidden", "showPreview", "errors"], [4, "ngIf"], [1, "form-row"], [1, "form-group", "col-md-6"], ["type", "number", "formControlName", "maxInputRows", "label", "Maximum number of rows to input into the transform (0 = unlimited)"], ["type", "number", "formControlName", "maxOutputRows", "label", "Maximum number of rows to output into the transform (0 = unlimited)"], ["label", "Allow unmapped input columns to pass through to the next transform.", "formControlName", "passThroughColumns"], ["label", "Node level", "formControlName", "nodeDatalinkColumn", "itemKey", "key", "itemName", "name", "node", "Specify the node where the transform should be applied to.", "selectNullMessage", "Use top level", 3, "items", "enableKeySelect", "allowNullSelect"], ["title", "Join Settings", 3, "showExpandButton"], [3, "datalinkTableForm"], ["class", "form-group col-md-4", 4, "ngIf"], [1, "form-group", "col-md-4"], ["formControlName", "joinDuplicateStrategy", "itemKey", "key", "itemName", "name", 3, "label", "items"], ["formControlName", "joinNotFoundStrategy", "itemKey", "key", "itemName", "description", 3, "label", "items"], ["label", "Join strategy", "formControlName", "joinStrategy", "itemKey", "key", "itemName", "name", 3, "items"], ["title", "Concatenate Settings", 3, "showExpandButton"], ["title", "Series Settings", 3, "showExpandButton"], ["label", "Series Grain", "formControlName", "seriesGrain", "itemKey", "key", "itemName", "name", 3, "items"], ["label", "Input Column", "formControlName", "sourceDatalinkColumn", "itemKey", "key", "itemName", "name", 3, "items", "enableKeySelect"], ["label", "Fill empty series values", "formControlName", "seriesFill"], ["class", "form-row", 4, "ngIf"], ["type", "date", "formControlName", "seriesStart", "label", "Series Start Date (empty to use first value)"], ["type", "date", "formControlName", "seriesFinish", "label", "Series Finish Date (empty to use last value)"], ["formControlName", "seriesStart", "label", "Series Start Number (empty to use first value)"], ["formControlName", "seriesFinish", "label", "Series Finish Number (empty to use last value)"], ["title", "Group Node", 3, "showExpandButton"], ["label", "Group rows under a node", 3, "ngModelOptions", "ngModel", "ngModelChange"], ["class", "form-group col-md-6", 4, "ngIf"], ["label", "Name of the node", 3, "ngModelOptions", "ngModel", "ngModelChange"], ["cdkDropListGroup", "", 1, "d-flex"], ["title", "Inputs", "height", "80vh", 1, "d-none", "d-lg-inline", 2, "width", "300px", 3, "scrollable"], [3, "datalinkTransformForm"], ["class", "mt-1", 4, "ngIf"], [1, "w-100", "mr-1", "ml-1"], ["height", "80vh", 1, "d-none", "d-lg-inline", 2, "width", "300px", 3, "title", "scrollable"], [3, "datalinkTransformForm", "allowMappingOutputs", "inputOutputDrop"], [3, "datalinkTransformForm", "targets", "allowMappingOutputs", "inputOutputDrop"], [1, "mt-1"], [3, "datalinkTransformForm", "inputJoinDrop"], [3, "datalinkTransformForm", "allowJoin", "title"], ["title", "Mapping Functions", 3, "datalinkTransformForm", "allowStandard", "allowMapping", "allowOutput", "onColumnDrop"], ["title", "Sort Columns", 3, "datalinkTransformForm", "allowSort", "onColumnDrop"], ["title", "Group Columns", 3, "datalinkTransformForm", "allowGroup", "allowSeries", "onColumnDrop"], ["title", "Aggregate Functions", 3, "datalinkTransformForm", "allowStandard", "allowAggregate", "allowOutput", "onColumnDrop"], ["title", "Series/Aggregate Functions", 3, "datalinkTransformForm", "allowStandard", "allowAggregate", "allowSeries", "allowOutput", "onColumnDrop"], ["title", "Mappings", 3, "datalinkTransformForm", "allowMapping", "allowOutput", "onColumnDrop"], ["title", "Filters", 3, "datalinkTransformForm", "allowStandard", "allowCondition", "allowOutput"], ["title", "Row Functions", 3, "datalinkTransformForm", "allowRow", "allowStandard", "allowJoinNode", "allowOutput", "allowCondition"]],
         template: function DatalinkEditTransformComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-widget-section", 0);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, DatalinkEditTransformComponent_form_1_Template, 13, 6, "form", 1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, DatalinkEditTransformComponent_form_1_Template, 13, 8, "form", 1);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -21275,7 +21298,7 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.datalinkTransformForm && ctx.nodeType);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.datalinkTransformForm && ctx.nodeType === ctx.eTransformItemType.GroupNode);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
@@ -21365,13 +21388,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -21425,7 +21448,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -21437,7 +21460,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 
       function UnGroupEditComponent_div_0_div_8_div_9_Template(rf, ctx) {
         if (rf & 1) {
@@ -21605,53 +21628,53 @@
         _createClass(UnGroupEditComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this97 = this;
+            var _this98 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["combineLatest"])(this.route.data, this.route.params, this.hubService.getHubCacheObservable(), this.editDatalinkService.hubFormsService.getCurrentFormObservable()).subscribe(function (result) {
-                _this97.pageTitle = result[0]['pageTitle'];
+                _this98.pageTitle = result[0]['pageTitle'];
                 var params = result[1];
-                _this97.hubCache = result[2];
-                _this97.datalinkForm = result[3];
+                _this98.hubCache = result[2];
+                _this98.datalinkForm = result[3];
 
-                _this97.logger.LogC(function () {
+                _this98.logger.LogC(function () {
                   return "OnInit";
                 }, _logging__WEBPACK_IMPORTED_MODULE_6__["eLogLevel"].Trace);
 
-                if (_this97.hubCache && _this97.hubCache.isLoaded() && _this97.datalinkForm) {
-                  _this97.datalinkTransformKey = +params['datalinkTransformKey'];
-                  _this97.datalinkTransformItemKey = +params['datalinkTransformItemKey'];
-                  _this97.datalinkTransformForm = _this97.editDatalinkService.getDatalinkTransform(_this97.datalinkTransformKey);
-                  _this97.variables = _this97.editDatalinkService.getVariables();
-                  var nodeDatalinkColumn = _this97.datalinkTransformForm.controls.nodeDatalinkColumn.value;
+                if (_this98.hubCache && _this98.hubCache.isLoaded() && _this98.datalinkForm) {
+                  _this98.datalinkTransformKey = +params['datalinkTransformKey'];
+                  _this98.datalinkTransformItemKey = +params['datalinkTransformItemKey'];
+                  _this98.datalinkTransformForm = _this98.editDatalinkService.getDatalinkTransform(_this98.datalinkTransformKey);
+                  _this98.variables = _this98.editDatalinkService.getVariables();
+                  var nodeDatalinkColumn = _this98.datalinkTransformForm.controls.nodeDatalinkColumn.value;
                   var nodeDatalinkColumnKey = nodeDatalinkColumn ? nodeDatalinkColumn.key : null;
                   var io = new _hub_lineage_models__WEBPACK_IMPORTED_MODULE_8__["InputOutputColumns"]();
 
                   if (nodeDatalinkColumnKey) {
-                    var inputColumns = _this97.datalinkTransformForm.controls.runTime.value.inputColumns;
-                    _this97.inputColumns = io.getAvailableColumns(inputColumns, nodeDatalinkColumnKey, 0);
-                    _this97.outputColumns = _this97.datalinkTransformForm.controls.runTime.value.transformColumns;
+                    var inputColumns = _this98.datalinkTransformForm.controls.runTime.value.inputColumns;
+                    _this98.inputColumns = io.getAvailableColumns(inputColumns, nodeDatalinkColumnKey, 0);
+                    _this98.outputColumns = _this98.datalinkTransformForm.controls.runTime.value.transformColumns;
                   } else {
-                    _this97.inputColumns = _this97.datalinkTransformForm.controls.runTime.value.inputColumns;
-                    _this97.outputColumns = _this97.datalinkTransformForm.controls.runTime.value.transformColumns;
+                    _this98.inputColumns = _this98.datalinkTransformForm.controls.runTime.value.inputColumns;
+                    _this98.outputColumns = _this98.datalinkTransformForm.controls.runTime.value.transformColumns;
                   }
 
-                  _this97.inputColumns = _this97.inputColumns.filter(function (c) {
+                  _this98.inputColumns = _this98.inputColumns.filter(function (c) {
                     return c.dataType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTypeCode"].Node;
                   });
 
-                  if (_this97.datalinkTransformItemKey) {
-                    _this97.datalinkTransformItemForm = _this97.editDatalinkService.getDatalinkTransformItem(_this97.datalinkTransformForm, _this97.datalinkTransformItemKey);
+                  if (_this98.datalinkTransformItemKey) {
+                    _this98.datalinkTransformItemForm = _this98.editDatalinkService.getDatalinkTransformItem(_this98.datalinkTransformForm, _this98.datalinkTransformItemKey);
 
-                    if (!_this97.datalinkTransformItemForm) {
-                      _this97.authService.navigateUp();
+                    if (!_this98.datalinkTransformItemForm) {
+                      _this98.authService.navigateUp();
 
                       return;
                     } // create a copy of the form item to allow for cancel.
 
 
-                    _this97.newDatalinkTransformItemForm = _this97.editDatalinkService.hubFormsService.datalinkDatalinkTransformItemFormGroup(_this97.datalinkTransformForm, _this97.datalinkTransformItemForm.value);
-                    var parameters = _this97.newDatalinkTransformItemForm.controls.dexihFunctionParameters;
+                    _this98.newDatalinkTransformItemForm = _this98.editDatalinkService.hubFormsService.datalinkDatalinkTransformItemFormGroup(_this98.datalinkTransformForm, _this98.datalinkTransformItemForm.value);
+                    var parameters = _this98.newDatalinkTransformItemForm.controls.dexihFunctionParameters;
                     parameters.controls.forEach(function (control) {
                       var runTime = {};
                       runTime['functionParameter'] = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["FunctionParameter"]();
@@ -21664,18 +21687,18 @@
                     });
                   } else {
                     var newItem = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["DexihDatalinkTransformItem"]();
-                    newItem.datalinkTransformKey = _this97.datalinkTransformKey;
+                    newItem.datalinkTransformKey = _this98.datalinkTransformKey;
                     newItem.transformItemType = _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eTransformItemType"].UnGroup;
-                    _this97.datalinkTransformItemKey = 0;
-                    _this97.newDatalinkTransformItemForm = _this97.editDatalinkService.hubFormsService.datalinkDatalinkTransformItemFormGroup(_this97.datalinkTransformForm, newItem);
+                    _this98.datalinkTransformItemKey = 0;
+                    _this98.newDatalinkTransformItemForm = _this98.editDatalinkService.hubFormsService.datalinkDatalinkTransformItemFormGroup(_this98.datalinkTransformForm, newItem);
                   }
 
-                  if (_this97._nodeSubscription) {
-                    _this97._nodeSubscription.unsubscribe();
+                  if (_this98._nodeSubscription) {
+                    _this98._nodeSubscription.unsubscribe();
                   }
 
-                  _this97._nodeSubscription = _this97.newDatalinkTransformItemForm.controls.sourceDatalinkColumn.valueChanges.subscribe(function (sourceDatalinkColumn) {
-                    var parameters = _this97.newDatalinkTransformItemForm.controls.dexihFunctionParameters; // clear previous parameters
+                  _this98._nodeSubscription = _this98.newDatalinkTransformItemForm.controls.sourceDatalinkColumn.valueChanges.subscribe(function (sourceDatalinkColumn) {
+                    var parameters = _this98.newDatalinkTransformItemForm.controls.dexihFunctionParameters; // clear previous parameters
 
                     while (parameters.length) {
                       parameters.removeAt(0);
@@ -21687,20 +21710,20 @@
                       column.childColumns.forEach(function (childColumn, index) {
                         var outputColumn = io.copyDatalinkColumn(childColumn, 0, 'un-group');
                         var newParameter = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["DexihFunctionParameter"]();
-                        newParameter.datalinkTransformItemKey = _this97.datalinkTransformItemKey;
+                        newParameter.datalinkTransformItemKey = _this98.datalinkTransformItemKey;
                         newParameter.name = childColumn.name;
                         newParameter.rank = childColumn.rank;
                         newParameter.direction = _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eParameterDirection"].Output;
                         newParameter.dataType = childColumn.dataType;
                         newParameter.position = index;
-                        newParameter.key = _this97.hubCache.getNextSequence();
+                        newParameter.key = _this98.hubCache.getNextSequence();
                         newParameter.datalinkColumn = outputColumn;
                         newParameter.isValid = true;
                         newParameter['runTime'] = {};
                         newParameter['runTime'].functionParameter = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["FunctionParameter"]();
                         newParameter['runTime'].functionParameter.name = childColumn.name;
 
-                        var newParameterForm = _this97.editDatalinkService.hubFormsService.datalinkFunctionParametersFormGroup(newParameter);
+                        var newParameterForm = _this98.editDatalinkService.hubFormsService.datalinkFunctionParametersFormGroup(newParameter);
 
                         parameters.push(newParameterForm);
                       });
@@ -21726,11 +21749,11 @@
         }, {
           key: "canDeactivate",
           value: function canDeactivate() {
-            var _this98 = this;
+            var _this99 = this;
 
             return new Promise(function (resolve) {
-              if (_this98.newDatalinkTransformItemForm && !_this98.newDatalinkTransformItemForm.pristine) {
-                _this98.authService.confirmDialog('The function has changed', 'The function has changed.  Do you want to discard the changes and continue?').then(function (confirm) {
+              if (_this99.newDatalinkTransformItemForm && !_this99.newDatalinkTransformItemForm.pristine) {
+                _this99.authService.confirmDialog('The function has changed', 'The function has changed.  Do you want to discard the changes and continue?').then(function (confirm) {
                   resolve(confirm);
                 })["catch"](function () {
                   resolve(false);
@@ -21833,13 +21856,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -21875,13 +21898,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -21996,6 +22019,10 @@
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("autoCompact", false);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true)("isHidden", true);
         }
       }
 
@@ -22003,7 +22030,7 @@
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, DatalinkEditValidationComponent_div_2_form_1_Template, 7, 2, "form", 7);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, DatalinkEditValidationComponent_div_2_form_1_Template, 7, 4, "form", 7);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
@@ -22104,19 +22131,19 @@
         _createClass(DatalinkEditValidationComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this99 = this;
+            var _this100 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["combineLatest"])(this.route.data, this.hubService.getHubCacheObservable(), this.editDatalinkService.hubFormsService.getCurrentFormObservable(), this.hubService.getRemoteLibrariesObservable()).subscribe(function (result) {
-                _this99.pageTitle = result[0]['pageTitle'];
-                _this99.hubCache = result[1];
-                _this99.datalinkForm = result[2];
-                _this99.remoteLibraries = result[3];
+                _this100.pageTitle = result[0]['pageTitle'];
+                _this100.hubCache = result[1];
+                _this100.datalinkForm = result[2];
+                _this100.remoteLibraries = result[3];
 
-                if (_this99.hubCache.isLoaded() && _this99.datalinkForm) {
-                  _this99.datalinkTransformForm = _this99.editDatalinkService.getValidationTransform();
-                  _this99._transformsChange = _this99.datalinkForm.controls.dexihDatalinkTransforms.valueChanges.subscribe(function () {
-                    return _this99.datalinkTransformForm = _this99.editDatalinkService.getValidationTransform();
+                if (_this100.hubCache.isLoaded() && _this100.datalinkForm) {
+                  _this100.datalinkTransformForm = _this100.editDatalinkService.getValidationTransform();
+                  _this100._transformsChange = _this100.datalinkForm.controls.dexihDatalinkTransforms.valueChanges.subscribe(function () {
+                    return _this100.datalinkTransformForm = _this100.editDatalinkService.getValidationTransform();
                   });
                 }
               });
@@ -22163,7 +22190,7 @@
         selectors: [["dexih-datalink-edit-validation-form"]],
         decls: 5,
         vars: 4,
-        consts: [["title", "Validation", 3, "showExpandButton"], [4, "ngIf"], [1, "list-group-item", "p-1"], ["class", "d-flex", 4, "ngIf"], [1, "alert", "alert-danger", "m-3"], ["buttonClass", "btn btn-success", "iconClass", "fa fa-check", "title", "Enable the validation on the target table.", 3, "autoCompact", "click", 4, "ngIf"], ["buttonClass", "btn btn-success", "iconClass", "fa fa-check", "title", "Enable the validation on the target table.", 3, "autoCompact", "click"], [3, "formGroup", 4, "ngIf"], [3, "formGroup"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description."], [1, "d-flex"], [1, "mr-1", "d-none", "d-md-inline"], [1, "alert", "alert-primary", "mb-1"], [3, "datalinkTransformForm"], [1, "w-100"], ["title", "Validation", 3, "datalinkTransformForm", "allowCondition", "allowOutput", "allowStandard", "allowValidation"], [1, "ml-1", "d-none", "d-md-inline"], [1, "float-right"], [3, "datalinkTransformForm", "allowMappingOutputs"]],
+        consts: [["title", "Validation", 3, "showExpandButton"], [4, "ngIf"], [1, "list-group-item", "p-1"], ["class", "d-flex", 4, "ngIf"], [1, "alert", "alert-danger", "m-3"], ["buttonClass", "btn btn-success", "iconClass", "fa fa-check", "title", "Enable the validation on the target table.", 3, "autoCompact", "click", 4, "ngIf"], ["buttonClass", "btn btn-success", "iconClass", "fa fa-check", "title", "Enable the validation on the target table.", 3, "autoCompact", "click"], [3, "formGroup", 4, "ngIf"], [3, "formGroup"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview", "isHidden"], [1, "d-flex"], [1, "mr-1", "d-none", "d-md-inline"], [1, "alert", "alert-primary", "mb-1"], [3, "datalinkTransformForm"], [1, "w-100"], ["title", "Validation", 3, "datalinkTransformForm", "allowCondition", "allowOutput", "allowStandard", "allowValidation"], [1, "ml-1", "d-none", "d-md-inline"], [1, "float-right"], [3, "datalinkTransformForm", "allowMappingOutputs"]],
         template: function DatalinkEditValidationComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-widget-section", 0);

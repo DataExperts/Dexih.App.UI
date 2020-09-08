@@ -30,7 +30,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -66,13 +66,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -96,7 +96,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 
       var DashboardEditModule = /*#__PURE__*/function () {
         function DashboardEditModule() {
@@ -205,7 +205,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -273,7 +273,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -297,7 +297,7 @@
 
       var angular_gridster2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! angular-gridster2 */
-      "./node_modules/angular-gridster2/fesm2015/angular-gridster2.js");
+      "./node_modules/angular-gridster2/__ivy_ngcc__/fesm2015/angular-gridster2.js");
       /* harmony import */
 
 
@@ -321,7 +321,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -333,7 +333,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -433,11 +433,11 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("autocapitalize", ctx_r6.on)("errors", ctx_r6.formsService.formErrors["name"]);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("autocapitalize", true)("errors", ctx_r6.formsService.formErrors["name"]);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true)("isHidden", true);
         }
       }
 
@@ -445,7 +445,7 @@
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-widget-section", 9);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, DashboardPropertiesComponent_d_widget_section_1_form_1_Template, 20, 4, "form", 10);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, DashboardPropertiesComponent_d_widget_section_1_form_1_Template, 20, 5, "form", 10);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
@@ -957,7 +957,7 @@
         },
         decls: 9,
         vars: 9,
-        consts: [[3, "ngClass"], ["title", "Properties", 3, "showExpandButton", 4, "ngIf"], ["title", "Parameters", 3, "showExpandButton", "onChange", 4, "ngIf"], ["title", "InputColumns", 3, "showExpandButton", 4, "ngIf"], [2, "height", "800px"], [3, "options"], ["gridster", ""], [3, "ngIf"], ["class", "position-relative", "style", "height:800px; overflow: hidden;", 4, "ngIf"], ["title", "Properties", 3, "showExpandButton"], [3, "formGroup", 4, "ngIf"], [3, "formGroup"], ["label", "Dashboard Name", "formControlName", "name", "placeholder", "Enter the dashboard name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview"], [1, "form-row"], [1, "form-group", "col-md-3"], ["type", "number", "label", "Minimum Columns", "formControlName", "minCols"], ["type", "number", "label", "Maximum Columns", "formControlName", "maxCols"], ["type", "number", "label", "Minimum Rows", "formControlName", "minRows"], ["type", "number", "label", "Maximum Rows", "formControlName", "maxRows"], ["text", "Update Grid", 3, "click"], ["formControlName", "autoRefresh", "label", "Automatically refresh data when view is opened"], ["label", "Table is shared in the catalog to users with read access.", "formControlName", "isShared"], ["title", "Parameters", 3, "showExpandButton", "onChange"], [3, "showEdit", "parameters", "formsService", "refreshEvent", "onChange", "onRefreshData"], ["title", "InputColumns", 3, "showExpandButton"], ["class", "input-group", 4, "ngFor", "ngForOf"], [1, "input-group"], [1, "input-group-prepend"], [1, "input-group-text"], [1, "form-control", "p-0", 3, "name", "placeholder", "ngModel", "ngModelChange"], [3, "item", 4, "ngFor", "ngForOf"], [3, "item"], [3, "item", "showEdit", "refreshData", "onRemove", "onMaximize"], [1, "position-relative", 2, "height", "800px", "overflow", "hidden"], [3, "item", "showEdit", "refreshData", "isMaximized", "onRemove", "onMaximize"]],
+        consts: [[3, "ngClass"], ["title", "Properties", 3, "showExpandButton", 4, "ngIf"], ["title", "Parameters", 3, "showExpandButton", "onChange", 4, "ngIf"], ["title", "InputColumns", 3, "showExpandButton", 4, "ngIf"], [2, "height", "800px"], [3, "options"], ["gridster", ""], [3, "ngIf"], ["class", "position-relative", "style", "height:800px; overflow: hidden;", 4, "ngIf"], ["title", "Properties", 3, "showExpandButton"], [3, "formGroup", 4, "ngIf"], [3, "formGroup"], ["label", "Dashboard Name", "formControlName", "name", "placeholder", "Enter the dashboard name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview", "isHidden"], [1, "form-row"], [1, "form-group", "col-md-3"], ["type", "number", "label", "Minimum Columns", "formControlName", "minCols"], ["type", "number", "label", "Maximum Columns", "formControlName", "maxCols"], ["type", "number", "label", "Minimum Rows", "formControlName", "minRows"], ["type", "number", "label", "Maximum Rows", "formControlName", "maxRows"], ["text", "Update Grid", 3, "click"], ["formControlName", "autoRefresh", "label", "Automatically refresh data when view is opened"], ["label", "Table is shared in the catalog to users with read access.", "formControlName", "isShared"], ["title", "Parameters", 3, "showExpandButton", "onChange"], [3, "showEdit", "parameters", "formsService", "refreshEvent", "onChange", "onRefreshData"], ["title", "InputColumns", 3, "showExpandButton"], ["class", "input-group", 4, "ngFor", "ngForOf"], [1, "input-group"], [1, "input-group-prepend"], [1, "input-group-text"], [1, "form-control", "p-0", 3, "name", "placeholder", "ngModel", "ngModelChange"], [3, "item", 4, "ngFor", "ngForOf"], [3, "item"], [3, "item", "showEdit", "refreshData", "onRemove", "onMaximize"], [1, "position-relative", 2, "height", "800px", "overflow", "hidden"], [3, "item", "showEdit", "refreshData", "isMaximized", "onRemove", "onMaximize"]],
         template: function DashboardPropertiesComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);

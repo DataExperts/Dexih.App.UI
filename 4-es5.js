@@ -30,7 +30,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 
       var DatalinkTestEditGuard = /*#__PURE__*/function () {
         function DatalinkTestEditGuard() {
@@ -90,13 +90,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -150,7 +150,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -450,13 +450,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -474,7 +474,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -516,7 +516,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 
       var DatalinkTestEditModule = /*#__PURE__*/function () {
         function DatalinkTestEditModule() {
@@ -607,7 +607,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -695,13 +695,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -731,19 +731,19 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -1118,13 +1118,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -1142,7 +1142,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -1166,7 +1166,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -1662,11 +1662,11 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("autocapitalize", ctx_r0.on)("errors", ctx_r0.stepFormService.formErrors.name);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("autocapitalize", true)("errors", ctx_r0.stepFormService.formErrors.name);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("errors", ctx_r0.stepFormService.formErrors["description"]);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true)("isHidden", true)("errors", ctx_r0.stepFormService.formErrors["description"]);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
@@ -1858,10 +1858,10 @@
         selectors: [["datalinkTest-edit-step"]],
         decls: 1,
         vars: 1,
-        consts: [[4, "ngIf"], [1, "list-group-item", "list-group-item-info", "rounded-0"], [1, "d-flex", "flex-row"], [1, "ml-auto"], [1, "mr-1", 3, "disabled", "click"], [3, "click"], [1, "list-group-item"], [3, "formGroup"], ["label", "Data Step Name", "formControlName", "name", "placeholder", "Enter the step name.", "iconClass", "fa fa-list", "note", "Enter a name for the data step, blank will use datalink name.", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter a description", "iconClass", "fa fa-comment", 3, "errors"], ["label", "Data Link", "formControlName", "datalinkKey", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", 3, "items", "errors"], [3, "key"], ["class", "list-group-item", 4, "ngIf"], [4, "ngFor", "ngForOf"], ["label", "Target Connection", "formControlName", "targetConnectionKey", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "Connection for the datalink target table", 3, "items", "errors"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Target Table Name", "formControlName", "targetTableName", "placeholder", "Enter the name.", "iconClass", "fa fa-list", "note", "Name of target table", 3, "errors"], ["label", "Target Table Schema", "formControlName", "targetSchema", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "errors"], ["label", "Expected Connection", "formControlName", "expectedConnectionKey", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "Connection where the expected target data is.", 3, "items", "errors"], ["label", "Expected Table Name", "formControlName", "expectedTableName", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "errors"], ["label", "Expected Table Schema", "formControlName", "expectedSchema", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "errors"], ["label", "Error Connection", "formControlName", "errorConnectionKey", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "Connection where the error data should be sent.", 3, "items", "errors"], ["label", "Error Table Name", "formControlName", "errorTableName", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "errors"], ["label", "Error Table Schema", "formControlName", "errorSchema", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "errors"], ["label", "Source Connection", "formControlName", "sourceConnectionKey", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "Connection where the source test data is.", 3, "items", "errors"], ["label", "Source Table Name", "formControlName", "sourceTableName", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "errors"], ["label", "Source Table Schema", "formControlName", "sourceSchema", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "errors"], ["label", "Test Connection", "formControlName", "testConnectionKey", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "Connection where the test data is.", 3, "items", "errors"], ["label", "Test Table Name", "formControlName", "testTableName", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "errors"], ["label", "Test Table Schema", "formControlName", "testSchema", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "errors"]],
+        consts: [[4, "ngIf"], [1, "list-group-item", "list-group-item-info", "rounded-0"], [1, "d-flex", "flex-row"], [1, "ml-auto"], [1, "mr-1", 3, "disabled", "click"], [3, "click"], [1, "list-group-item"], [3, "formGroup"], ["label", "Data Step Name", "formControlName", "name", "placeholder", "Enter the step name.", "iconClass", "fa fa-list", "note", "Enter a name for the data step, blank will use datalink name.", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter a description", "iconClass", "fa fa-comment", 3, "showPreview", "isHidden", "errors"], ["label", "Data Link", "formControlName", "datalinkKey", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", 3, "items", "errors"], [3, "key"], ["class", "list-group-item", 4, "ngIf"], [4, "ngFor", "ngForOf"], ["label", "Target Connection", "formControlName", "targetConnectionKey", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "Connection for the datalink target table", 3, "items", "errors"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Target Table Name", "formControlName", "targetTableName", "placeholder", "Enter the name.", "iconClass", "fa fa-list", "note", "Name of target table", 3, "errors"], ["label", "Target Table Schema", "formControlName", "targetSchema", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "errors"], ["label", "Expected Connection", "formControlName", "expectedConnectionKey", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "Connection where the expected target data is.", 3, "items", "errors"], ["label", "Expected Table Name", "formControlName", "expectedTableName", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "errors"], ["label", "Expected Table Schema", "formControlName", "expectedSchema", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "errors"], ["label", "Error Connection", "formControlName", "errorConnectionKey", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "Connection where the error data should be sent.", 3, "items", "errors"], ["label", "Error Table Name", "formControlName", "errorTableName", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "errors"], ["label", "Error Table Schema", "formControlName", "errorSchema", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "errors"], ["label", "Source Connection", "formControlName", "sourceConnectionKey", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "Connection where the source test data is.", 3, "items", "errors"], ["label", "Source Table Name", "formControlName", "sourceTableName", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "errors"], ["label", "Source Table Schema", "formControlName", "sourceSchema", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "errors"], ["label", "Test Connection", "formControlName", "testConnectionKey", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "Connection where the test data is.", 3, "items", "errors"], ["label", "Test Table Name", "formControlName", "testTableName", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "errors"], ["label", "Test Table Schema", "formControlName", "testSchema", "placeholder", "Enter the name.", "iconClass", "fa fa-list", 3, "errors"]],
         template: function DatalinkTestEditStepComponent_Template(rf, ctx) {
           if (rf & 1) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, DatalinkTestEditStepComponent_div_0_Template, 27, 12, "div", 0);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, DatalinkTestEditStepComponent_div_0_Template, 27, 14, "div", 0);
           }
 
           if (rf & 2) {

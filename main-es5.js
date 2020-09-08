@@ -384,7 +384,7 @@
       !*** ./src/app/+auth/auth.models.ts ***!
       \**************************************/
 
-    /*! exports provided: logoUrl, logoSmallUrl, User, UserLoginInfo, DexihHubAuth, ExternalLoginResult, ExternalLogin, Parameter, Message, eHubAccess, eFileStatus, FileHandler, RemoteToken, CancelToken, PromiseWithCancel */
+    /*! exports provided: logoUrl, logoSmallUrl, User, UserLoginInfo, DexihHubAuth, ExternalLoginResult, ExternalLogin, Parameter, Message, eHubAccess, eFileStatus, FileHandler, RemoteToken, CancelToken, PromiseWithCancel, WaitMessage */
 
     /***/
     function srcAppAuthAuthModelsTs(module, __webpack_exports__, __webpack_require__) {
@@ -480,6 +480,12 @@
 
       __webpack_require__.d(__webpack_exports__, "PromiseWithCancel", function () {
         return PromiseWithCancel;
+      });
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "WaitMessage", function () {
+        return WaitMessage;
       });
       /* harmony import */
 
@@ -763,6 +769,10 @@
 
         return PromiseWithCancel;
       }( /*#__PURE__*/_wrapNativeSuper(Promise));
+
+      var WaitMessage = function WaitMessage() {
+        _classCallCheck(this, WaitMessage);
+      };
       /***/
 
     },
@@ -791,19 +801,19 @@
 
       var _angular_common_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/common/http */
-      "./node_modules/@angular/common/fesm2015/http.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
       /* harmony import */
 
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -849,7 +859,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -3156,6 +3166,27 @@
             return this.post('/api/Account/SaveIssue', issue, 'Creating issue ... ');
           }
         }, {
+          key: "deleteIssues",
+          value: function deleteIssues(issueKeys) {
+            var _this38 = this;
+
+            return new Promise(function (resolve, reject) {
+              _this38.confirmDialog('Delete Issues', 'Please confirm that you would like to delete the selected issues.').then(function (c) {
+                if (c) {
+                  resolve(_this38.post('/api/Account/DeleteIssues', {
+                    issueKeys: issueKeys
+                  }, 'Deleting issues ... '));
+                } else {
+                  reject();
+                }
+              })["catch"](function (reason) {
+                reject(reason);
+              });
+
+              ;
+            });
+          }
+        }, {
           key: "getIssue",
           value: function getIssue(issueKey, cancelToken) {
             return this.post('/api/Account/GetIssue', {
@@ -3174,6 +3205,27 @@
               issueKey: issueKey,
               comment: comment
             }, 'Getting issues ... ');
+          }
+        }, {
+          key: "deleteIssueComments",
+          value: function deleteIssueComments(issueCommentKeys) {
+            var _this39 = this;
+
+            return new Promise(function (resolve, reject) {
+              _this39.confirmDialog('Delete Issues', 'Please confirm that you would like to delete the selected issue comments.').then(function (c) {
+                if (c) {
+                  resolve(_this39.post('/api/Account/DeleteIssueComments', {
+                    issueCommentKeys: issueCommentKeys
+                  }, 'Deleting issue comments... '));
+                } else {
+                  reject();
+                }
+              })["catch"](function (reason) {
+                reject(reason);
+              });
+
+              ;
+            });
           }
         }, {
           key: "hubNameExists",
@@ -3309,7 +3361,7 @@
         }, {
           key: "addWaitMessage",
           value: function addWaitMessage(message) {
-            var _this38 = this;
+            var _this40 = this;
 
             var maxTime = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10000;
             var cancelToken = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
@@ -3329,12 +3381,12 @@
 
             if (maxTime > 0) {
               setTimeout(function () {
-                if (_this38._waitMessages.has(key)) {
-                  _this38.removeWaitMessage(key);
+                if (_this40._waitMessages.has(key)) {
+                  _this40.removeWaitMessage(key);
 
                   var errorMessage = new _auth_models__WEBPACK_IMPORTED_MODULE_7__["Message"](false, "The '".concat(message, "' will continue to run in the background."), null, null);
 
-                  _this38.addUpdateNotification(errorMessage, false);
+                  _this40.addUpdateNotification(errorMessage, false);
                 }
               }, maxTime);
             }
@@ -3445,19 +3497,19 @@
         }, {
           key: "refreshGlobalCache",
           value: function refreshGlobalCache() {
-            var _this39 = this;
+            var _this41 = this;
 
             var promise = this.getFromApi('/api/Account/GetGlobalCache', null, null);
             promise.then(function (cache) {
-              _this39._globalCache.next(cache);
+              _this41._globalCache.next(cache);
             })["catch"](function (reason) {
               var message = new _auth_models__WEBPACK_IMPORTED_MODULE_7__["Message"](false, 'Update global cache failed: ' + reason, reason, null);
 
-              _this39.addUpdateNotification(message, false); // If cache load error, try again to refresh.
+              _this41.addUpdateNotification(message, false); // If cache load error, try again to refresh.
 
 
               setTimeout(function () {
-                _this39.refreshGlobalCache();
+                _this41.refreshGlobalCache();
               }, 5000);
             });
           }
@@ -3497,7 +3549,7 @@
         }, {
           key: "getActiveAgent",
           value: function getActiveAgent(hubKey) {
-            var _this40 = this;
+            var _this42 = this;
 
             // the activeAgent is cached in a localstorage to save an extra roundtrip.
             var agent = localStorage.getItem("hub-remote-agent-".concat(hubKey));
@@ -3508,10 +3560,10 @@
             }
 
             return new Promise(function (resolve, reject) {
-              _this40.post('/api/SharedData/GetActiveAgent', {
+              _this42.post('/api/SharedData/GetActiveAgent', {
                 hubKey: hubKey
               }, 'Getting active remote agent...').then(function (activeAgent) {
-                _this40.getBestDownloadUrl(activeAgent, 0).then(function () {
+                _this42.getBestDownloadUrl(activeAgent, 0).then(function () {
                   localStorage.setItem("hub-remote-agent-".concat(hubKey), JSON.stringify(activeAgent));
                   resolve(activeAgent);
                 });
@@ -3523,7 +3575,7 @@
         }, {
           key: "downloadData",
           value: function downloadData(sharedItems, zipFiles, downloadFormat, cancelToken) {
-            var _this41 = this;
+            var _this43 = this;
 
             return new Promise(function (resolve, reject) {
               // get distinct list of hubKeys
@@ -3540,7 +3592,7 @@
                 hubKeys.push(sharedItems[i].hubKey);
               }
 
-              var clientId = _this41.getWebSocketConnectionId();
+              var clientId = _this43.getWebSocketConnectionId();
 
               if (!clientId) {
                 var message = new _auth_models__WEBPACK_IMPORTED_MODULE_7__["Message"](false, 'Data downloads are only available for registered users.', null, null);
@@ -3549,10 +3601,10 @@
               }
 
               hubKeys.forEach(function (hubKey) {
-                _this41.getActiveAgent(hubKey).then(function (activeAgent) {
-                  _this41.postRemote('/api/SharedData/DownloadData', {
+                _this43.getActiveAgent(hubKey).then(function (activeAgent) {
+                  _this43.postRemote('/api/SharedData/DownloadData', {
                     hubKey: hubKey,
-                    clientId: _this41.getWebSocketConnectionId(),
+                    clientId: _this43.getWebSocketConnectionId(),
                     downloadFormat: downloadFormat,
                     zipFiles: zipFiles,
                     sharedItems: sharedItems.filter(function (c) {
@@ -3560,11 +3612,11 @@
                     }),
                     remoteAgentId: activeAgent.instanceId
                   }, activeAgent, 'Downloading data...', cancelToken).then(function (task) {
-                    _this41.addUpdateTask(task);
+                    _this43.addUpdateTask(task);
 
                     resolve(true);
                   })["catch"](function (reason) {
-                    _this41.logger.LogC(function () {
+                    _this43.logger.LogC(function () {
                       return "downloadData, error: ".concat(reason.message, ".");
                     }, _logging__WEBPACK_IMPORTED_MODULE_6__["eLogLevel"].Error);
 
@@ -3578,11 +3630,11 @@
         }, {
           key: "previewData",
           value: function previewData(hubKey, objectKey, objectType, inputColumns, selectQuery, parameters, parentParameters, cancelToken) {
-            var _this42 = this;
+            var _this44 = this;
 
             return new Promise(function (resolve, reject) {
-              _this42.getActiveAgent(hubKey).then(function (activeAgent) {
-                _this42.postRemote('/api/SharedData/PreviewData', {
+              _this44.getActiveAgent(hubKey).then(function (activeAgent) {
+                _this44.postRemote('/api/SharedData/PreviewData', {
                   hubKey: hubKey,
                   objectType: objectType,
                   objectKey: objectKey,
@@ -3592,7 +3644,7 @@
                   parameters: parameters,
                   parentParameters: parentParameters
                 }, activeAgent, 'Previewing data...', cancelToken).then(function (result) {
-                  result.columns = _this42.constructDataTableColumns(result.columns);
+                  result.columns = _this44.constructDataTableColumns(result.columns);
                   resolve(result);
                 })["catch"](function (reason) {
                   reject(reason);
@@ -3606,11 +3658,11 @@
         }, {
           key: "previewListOfValues",
           value: function previewListOfValues(hubKey, objectKey, objectType, parameterName, resetCache, cancelToken) {
-            var _this43 = this;
+            var _this45 = this;
 
             return new Promise(function (resolve, reject) {
-              _this43.getActiveAgent(hubKey).then(function (activeAgent) {
-                _this43.postRemote('/api/SharedData/PreviewListOfValues', {
+              _this45.getActiveAgent(hubKey).then(function (activeAgent) {
+                _this45.postRemote('/api/SharedData/PreviewListOfValues', {
                   hubKey: hubKey,
                   objectType: objectType,
                   objectKey: objectKey,
@@ -3630,10 +3682,10 @@
         }, {
           key: "getDashboard",
           value: function getDashboard(hubKey, dashboardKey) {
-            var _this44 = this;
+            var _this46 = this;
 
             return new Promise(function (resolve, reject) {
-              _this44.post('/api/SharedData/PreviewDashboard', {
+              _this46.post('/api/SharedData/PreviewDashboard', {
                 hubKey: hubKey,
                 dashboardKey: dashboardKey
               }, 'Getting dashboard download locations...').then(function (dashboard) {
@@ -3701,13 +3753,13 @@
 
       var _angular_common_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/common/http */
-      "./node_modules/@angular/common/fesm2015/http.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
       /* harmony import */
 
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -3801,7 +3853,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -3825,7 +3877,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -3900,7 +3952,7 @@
           key: "initializeWebSocket",
           value: function initializeWebSocket() {
             return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
-              var _this45 = this;
+              var _this47 = this;
 
               return regeneratorRuntime.wrap(function _callee6$(_context6) {
                 while (1) {
@@ -3923,27 +3975,27 @@
                     case 5:
                       this.hubConnection = new _microsoft_signalr__WEBPACK_IMPORTED_MODULE_3__["HubConnectionBuilder"]().configureLogging(_microsoft_signalr__WEBPACK_IMPORTED_MODULE_3__["LogLevel"].Trace).withUrl(_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].apiUrl ? _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].apiUrl + '/browser' : this.location.prepareExternalUrl('/browser')).build();
                       this.hubConnection.on('Command', function (remoteMessage) {
-                        _this45.logger.LogC(function () {
+                        _this47.logger.LogC(function () {
                           return "startWebSocket: receive new message: ".concat(remoteMessage.command, ".");
                         }, _logging__WEBPACK_IMPORTED_MODULE_2__["eLogLevel"].Debug);
 
-                        _this45._webSocketMessages.next(remoteMessage);
+                        _this47._webSocketMessages.next(remoteMessage);
                       });
                       this.hubConnection.onclose(function (err) {
-                        _this45.logger.LogC(function () {
+                        _this47.logger.LogC(function () {
                           return "startWebSocket disconnected. ".concat(err, ".");
                         }, _logging__WEBPACK_IMPORTED_MODULE_2__["eLogLevel"].Error);
 
-                        _this45._webSocketStatus.next("".concat(err, ".  Check your network connection."));
+                        _this47._webSocketStatus.next("".concat(err, ".  Check your network connection."));
 
-                        _this45.hubConnected.next(false);
+                        _this47.hubConnected.next(false);
 
-                        _this45.sendDisconnect();
+                        _this47.sendDisconnect();
 
-                        _this45._connectionId = null; // wait 5 seconds, then attempt to reconnect.
+                        _this47._connectionId = null; // wait 5 seconds, then attempt to reconnect.
 
                         setTimeout(function () {
-                          return _this45.startWebSocket();
+                          return _this47.startWebSocket();
                         }, 5000);
                       });
                       _context6.next = 10;
@@ -3975,49 +4027,49 @@
         }, {
           key: "startWebSocket",
           value: function startWebSocket() {
-            var _this46 = this;
+            var _this48 = this;
 
             if (!this.startingWebSocket) {
               this.startingWebSocket = true;
               return new Promise(function (resolve, reject) {
-                if (_this46.hubConnection.state === _microsoft_signalr__WEBPACK_IMPORTED_MODULE_3__["HubConnectionState"].Connected) {
+                if (_this48.hubConnection.state === _microsoft_signalr__WEBPACK_IMPORTED_MODULE_3__["HubConnectionState"].Connected) {
                   resolve();
-                  _this46.startingWebSocket = false;
+                  _this48.startingWebSocket = false;
                   return;
                 }
 
-                _this46.hubConnection.start().then(function () {
-                  _this46._webSocketStatus.next('Connected');
+                _this48.hubConnection.start().then(function () {
+                  _this48._webSocketStatus.next('Connected');
 
-                  _this46.hubConnected.next(true);
+                  _this48.hubConnected.next(true);
 
-                  _this46.sendConnect().then(function () {
+                  _this48.sendConnect().then(function () {
                     resolve();
 
-                    _this46.logger.LogC(function () {
+                    _this48.logger.LogC(function () {
                       return "startWebSocket: Hub started.";
                     }, _logging__WEBPACK_IMPORTED_MODULE_2__["eLogLevel"].Debug);
 
-                    _this46.startingWebSocket = false;
+                    _this48.startingWebSocket = false;
                   })["catch"](function (reason) {
                     reject(reason);
-                    _this46.startingWebSocket = false;
+                    _this48.startingWebSocket = false;
                   });
                 })["catch"](function (err) {
-                  _this46._webSocketStatus.next("".concat(err, ".  Check your network connection."));
+                  _this48._webSocketStatus.next("".concat(err, ".  Check your network connection."));
 
-                  _this46.sendDisconnect();
+                  _this48.sendDisconnect();
 
-                  _this46.hubConnected.next(false);
+                  _this48.hubConnected.next(false);
 
-                  _this46.logger.LogC(function () {
+                  _this48.logger.LogC(function () {
                     return "startWebSocket: Hub start failed ".concat(err, ".");
                   }, _logging__WEBPACK_IMPORTED_MODULE_2__["eLogLevel"].Debug);
 
                   setTimeout(function () {
-                    _this46.startingWebSocket = false;
+                    _this48.startingWebSocket = false;
 
-                    _this46.startWebSocket();
+                    _this48.startWebSocket();
                   }, 5000);
                   resolve();
                 });
@@ -4035,19 +4087,19 @@
         }, {
           key: "sendConnect",
           value: function sendConnect() {
-            var _this47 = this;
+            var _this49 = this;
 
             return new Promise(function (resolve, reject) {
               var message = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_5__["ClientMessage"]();
-              return _this47.hubConnection.invoke('Connect').then(function (value) {
-                _this47._connectionId = value;
+              return _this49.hubConnection.invoke('Connect').then(function (value) {
+                _this49._connectionId = value;
                 message.command = _shared_shared_models__WEBPACK_IMPORTED_MODULE_5__["eClientCommand"].Connect;
 
-                _this47._webSocketMessages.next(message);
+                _this49._webSocketMessages.next(message);
 
                 resolve();
               })["catch"](function (reason) {
-                _this47._webSocketMessages.next(reason);
+                _this49._webSocketMessages.next(reason);
 
                 reject(reason);
               });
@@ -4105,13 +4157,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -4141,7 +4193,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -4492,10 +4544,10 @@
         _createClass(ActionsApiButtonComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this48 = this;
+            var _this50 = this;
 
             this._hubCacheSubscription = this.hubService.getHubCacheObservable().subscribe(function (cache) {
-              _this48.hubCache = cache;
+              _this50.hubCache = cache;
             });
           }
         }, {
@@ -4522,12 +4574,12 @@
         }, {
           key: "export",
           value: function _export() {
-            var _this49 = this;
+            var _this51 = this;
 
             var cache = this.hubCache;
             var hub = this.hubService.createHub(this.hubCache.hub.hubKey, '');
             this.apis.forEach(function (item) {
-              _this49.hubCache.cacheAddApi(item.key, hub);
+              _this51.hubCache.cacheAddApi(item.key, hub);
             });
             var filename = this.apis.length === 1 ? 'Api - ' + this.apis[0].name + '.json' : 'apis.json';
             this.hubService.exportHub(hub, filename);
@@ -4638,13 +4690,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -4674,7 +4726,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
       function ActionsColumnValidationButtonComponent_d_button_dropdown_1_li_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -4749,7 +4801,7 @@
         _createClass(ActionsColumnValidationButtonComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this50 = this;
+            var _this52 = this;
 
             this._hubCacheSubscription = this.hubService.getHubCacheObservable().subscribe(function (cache) {
               if (cache.isLoaded()) {
@@ -4759,8 +4811,8 @@
                     return c.key === tab.connectionKey;
                   });
                   tab.dexihTableColumns.forEach(function (col) {
-                    if (col.columnValidationKey === _this50.columnValidation.key) {
-                      _this50.columns.push({
+                    if (col.columnValidationKey === _this52.columnValidation.key) {
+                      _this52.columns.push({
                         name: "".concat(col.name, " (").concat(con.name, ".").concat(tab.name, ")"),
                         tableKey: tab.key,
                         columnKey: col.key
@@ -4878,13 +4930,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -4914,7 +4966,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -5653,11 +5705,11 @@
         _createClass(ActionsConnectionButtonComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this51 = this;
+            var _this53 = this;
 
             this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["combineLatest"])(this.hubService.getHubCacheObservable()).subscribe(function (result) {
-              return __awaiter(_this51, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
-                var _this52 = this;
+              return __awaiter(_this53, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
+                var _this54 = this;
 
                 var cache;
                 return regeneratorRuntime.wrap(function _callee7$(_context7) {
@@ -5691,16 +5743,16 @@
                         this.connectionReference = _context7.sent;
                         // search any columns for an occurrence of the columnValidation.
                         cache.hub.dexihDatajobs.forEach(function (datajob) {
-                          if (datajob.auditConnectionKey === _this52.connections[0].key) {
-                            _this52.datajobs.push({
+                          if (datajob.auditConnectionKey === _this54.connections[0].key) {
+                            _this54.datajobs.push({
                               key: datajob.key,
                               name: "".concat(datajob.name, " (datajob audit connection)")
                             });
                           }
                         });
                         cache.hub.dexihDatalinks.forEach(function (datalink) {
-                          if (datalink.auditConnectionKey === _this52.connections[0].key) {
-                            _this52.datalinks.push({
+                          if (datalink.auditConnectionKey === _this54.connections[0].key) {
+                            _this54.datalinks.push({
                               key: datalink.key,
                               name: "".concat(datalink.name, " (datalink audit connection)")
                             });
@@ -5709,8 +5761,8 @@
                           if (datalink.sourceDatalinkTable && datalink.sourceDatalinkTable.sourceTableKey) {
                             var table = cache.getTable(datalink.sourceDatalinkTable.sourceTableKey);
 
-                            if (table && table.connectionKey === _this52.connections[0].key) {
-                              _this52.datalinks.push({
+                            if (table && table.connectionKey === _this54.connections[0].key) {
+                              _this54.datalinks.push({
                                 key: datalink.key,
                                 name: "".concat(datalink.name, " (datalink source)")
                               });
@@ -5721,8 +5773,8 @@
                             if (transform.joinDatalinkTable && transform.joinDatalinkTable.sourceDatalinkKey) {
                               var _table = cache.getTable(transform.joinDatalinkTable.sourceTableKey);
 
-                              if (_table && _table.connectionKey === _this52.connections[0].key) {
-                                _this52.datalinks.push({
+                              if (_table && _table.connectionKey === _this54.connections[0].key) {
+                                _this54.datalinks.push({
                                   key: datalink.key,
                                   name: "".concat(datalink.name, " (datalink join)")
                                 });
@@ -5732,8 +5784,8 @@
                           datalink.dexihDatalinkTargets.forEach(function (target) {
                             var table = cache.getTable(target.tableKey);
 
-                            if (table && table.connectionKey === _this52.connections[0].key) {
-                              _this52.datalinks.push({
+                            if (table && table.connectionKey === _this54.connections[0].key) {
+                              _this54.datalinks.push({
                                 key: datalink.key,
                                 name: "".concat(datalink.name, " (datalink target)")
                               });
@@ -5787,12 +5839,12 @@
         }, {
           key: "export",
           value: function _export() {
-            var _this53 = this;
+            var _this55 = this;
 
             var cache = this.hubCache;
             var hub = this.hubService.createHub(this.hubCache.hub.hubKey, '');
             this.connections.forEach(function (connection) {
-              _this53.hubCache.cacheAddConnection(connection.key, hub);
+              _this55.hubCache.cacheAddConnection(connection.key, hub);
             });
             var filename = this.datalinks.length === 1 ? 'Connection - ' + this.connections[0].name + '.json' : 'connections.json';
             this.hubService.exportHub(hub, filename);
@@ -5908,13 +5960,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -5938,7 +5990,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -6181,10 +6233,10 @@
         _createClass(ActionsDashboardButtonComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this54 = this;
+            var _this56 = this;
 
             this._hubCacheSubscription = this.hubService.getHubCacheObservable().subscribe(function (cache) {
-              _this54.hubCache = cache;
+              _this56.hubCache = cache;
             });
           }
         }, {
@@ -6209,11 +6261,11 @@
         }, {
           key: "export",
           value: function _export() {
-            var _this55 = this;
+            var _this57 = this;
 
             var hub = this.hubService.createHub(this.hubCache.hub.hubKey, '');
             this.dashboards.forEach(function (dashboard) {
-              _this55.hubCache.cacheAddDashboard(dashboard.key, hub);
+              _this57.hubCache.cacheAddDashboard(dashboard.key, hub);
             });
             var filename = this.dashboards.length === 1 ? 'Dashboard - ' + this.dashboards[0].name + '.json' : 'dashboards.json';
             this.hubService.exportHub(hub, filename);
@@ -6305,7 +6357,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -6317,7 +6369,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -6329,7 +6381,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -6696,10 +6748,10 @@
         _createClass(ActionsDatajobButtonComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this56 = this;
+            var _this58 = this;
 
             this._hubCacheSubscription = this.hubService.getHubCacheObservable().subscribe(function (cache) {
-              _this56.hubCache = cache;
+              _this58.hubCache = cache;
             });
           }
         }, {
@@ -6735,12 +6787,12 @@
         }, {
           key: "export",
           value: function _export() {
-            var _this57 = this;
+            var _this59 = this;
 
             var cache = this.hubCache;
             var hub = this.hubService.createHub(this.hubCache.hub.hubKey, '');
             this.datajobs.forEach(function (datajob) {
-              _this57.hubCache.cacheAddDatajob(datajob.key, hub);
+              _this59.hubCache.cacheAddDatajob(datajob.key, hub);
             });
             var filename = this.datajobs.length === 1 ? 'Datajob - ' + this.datajobs[0].name + '.json' : 'datajobs.json';
             this.hubService.exportHub(hub, filename);
@@ -6853,13 +6905,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -6883,7 +6935,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -7585,10 +7637,10 @@
         _createClass(ActionsDatalinkButtonComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this58 = this;
+            var _this60 = this;
 
             this._hubCacheSubscription = this.hubService.getHubCacheObservable().subscribe(function (cache) {
-              _this58.hubCache = cache;
+              _this60.hubCache = cache;
             });
           }
         }, {
@@ -7603,7 +7655,7 @@
         }, {
           key: "ngOnChanges",
           value: function ngOnChanges(changes) {
-            var _this59 = this;
+            var _this61 = this;
 
             if (!this.hubCache || !this.hubCache.isLoaded()) {
               return;
@@ -7613,8 +7665,8 @@
               // search any columns for an occurrence of the datajob.
               this.hubCache.hub.dexihDatajobs.forEach(function (datajob) {
                 datajob.dexihDatalinkSteps.forEach(function (step) {
-                  if (step.datalinkKey === _this59.datalinks[0].key) {
-                    _this59.relatedDatajobs.push({
+                  if (step.datalinkKey === _this61.datalinks[0].key) {
+                    _this61.relatedDatajobs.push({
                       key: datajob.key,
                       name: "".concat(datajob.name, " (datajob step)")
                     });
@@ -7622,25 +7674,25 @@
                 });
               });
               this.hubCache.hub.dexihDatalinks.forEach(function (datalink) {
-                if (datalink.sourceDatalinkTable && datalink.sourceDatalinkTable.sourceDatalinkKey === _this59.datalinks[0].key) {
-                  _this59.relatedDatalinks.push({
+                if (datalink.sourceDatalinkTable && datalink.sourceDatalinkTable.sourceDatalinkKey === _this61.datalinks[0].key) {
+                  _this61.relatedDatalinks.push({
                     key: datalink.key,
                     name: "".concat(datalink.name, " (datalink source)")
                   });
                 }
               });
               this.datalink = this.hubCache.hub.dexihDatalinks.find(function (c) {
-                return c.key === _this59.datalinks[0].key;
+                return c.key === _this61.datalinks[0].key;
               });
 
               if (this.datalink) {
                 this.targetTables = [];
                 this.datalink.dexihDatalinkTargets.forEach(function (target) {
                   if (target.tableKey) {
-                    var table = _this59.hubCache.getTable(target.tableKey);
+                    var table = _this61.hubCache.getTable(target.tableKey);
 
                     if (table) {
-                      _this59.targetTables.push(table);
+                      _this61.targetTables.push(table);
                     }
                   }
                 });
@@ -7734,11 +7786,11 @@
         }, {
           key: "export",
           value: function _export() {
-            var _this60 = this;
+            var _this62 = this;
 
             var hub = this.hubService.createHub(this.hubCache.hub.hubKey, '');
             this.datalinks.forEach(function (datalink) {
-              _this60.hubCache.cacheAddDatalink(datalink.key, hub);
+              _this62.hubCache.cacheAddDatalink(datalink.key, hub);
             });
             var filename = this.datalinks.length === 1 ? 'Datalink - ' + this.datalinks[0].name + '.json' : 'datalinks.json';
             this.hubService.exportHub(hub, filename);
@@ -7845,13 +7897,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -7869,7 +7921,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -8267,16 +8319,16 @@
         _createClass(ActionsDatalinkTestButtonComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this61 = this;
+            var _this63 = this;
 
             this._hubCacheSubscription = this.hubService.getHubCacheObservable().subscribe(function (cache) {
-              _this61.hubCache = cache;
+              _this63.hubCache = cache;
             });
           }
         }, {
           key: "ngOnChanges",
           value: function ngOnChanges() {
-            var _this62 = this;
+            var _this64 = this;
 
             if (this.datalinkTests && this.datalinkTests.length === 1 && this.datalinkTests[0].dexihDatalinkTestSteps) {
               var datalinkKeys = this.datalinkTests[0].dexihDatalinkTestSteps.map(function (c) {
@@ -8286,7 +8338,7 @@
                 if (datalinkKeys.findIndex(function (c) {
                   return c === datalink.key;
                 }) >= 0) {
-                  _this62.relatedDatalinks.push({
+                  _this64.relatedDatalinks.push({
                     datalinkKey: datalink.key,
                     name: "".concat(datalink.name, " (datalink source)")
                   });
@@ -8339,12 +8391,12 @@
         }, {
           key: "export",
           value: function _export() {
-            var _this63 = this;
+            var _this65 = this;
 
             var cache = this.hubCache;
             var hub = this.hubService.createHub(this.hubCache.hub.hubKey, '');
             this.datalinkTests.forEach(function (datalinkTest) {
-              _this63.hubCache.cacheAddDatalink(datalinkTest.key, hub);
+              _this65.hubCache.cacheAddDatalink(datalinkTest.key, hub);
             });
             var filename = this.datalinkTests.length === 1 ? 'DatalinkTest - ' + this.datalinkTests[0].name + '.json' : 'datalinkTests.json';
             this.hubService.exportHub(hub, filename);
@@ -8439,13 +8491,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -8475,7 +8527,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
       function ActionsFileFormatButtonComponent_d_button_dropdown_1_li_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -8550,7 +8602,7 @@
         _createClass(ActionsFileFormatButtonComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this64 = this;
+            var _this66 = this;
 
             this._hubCacheSubscription = this.hubService.getHubCacheObservable().subscribe(function (cache) {
               if (!cache.isLoaded()) {
@@ -8563,8 +8615,8 @@
                   return c.key === tab.connectionKey;
                 });
 
-                if (tab.fileFormatKey === _this64.fileFormat.key) {
-                  _this64.tables.push({
+                if (tab.fileFormatKey === _this66.fileFormat.key) {
+                  _this66.tables.push({
                     name: "".concat(tab.name, " (").concat(con ? con.name : 'undefined', ")"),
                     tableKey: tab.key
                   });
@@ -8679,13 +8731,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -8828,13 +8880,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -8864,7 +8916,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -9558,10 +9610,10 @@
         _createClass(ActionsTableButtonComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this65 = this;
+            var _this67 = this;
 
             this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["combineLatest"])(this.hubService.getHubCacheObservable()).subscribe(function (result) {
-              return __awaiter(_this65, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
+              return __awaiter(_this67, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
                 return regeneratorRuntime.wrap(function _callee10$(_context10) {
                   while (1) {
                     switch (_context10.prev = _context10.next) {
@@ -9601,7 +9653,7 @@
           key: "ngOnChanges",
           value: function ngOnChanges() {
             return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee11() {
-              var _this66 = this;
+              var _this68 = this;
 
               return regeneratorRuntime.wrap(function _callee11$(_context11) {
                 while (1) {
@@ -9613,7 +9665,7 @@
                       }
 
                       this.datalinksSource = this.hubCache.hub.dexihDatalinks.filter(function (c) {
-                        return _this66.tables.find(function (t) {
+                        return _this68.tables.find(function (t) {
                           return t.key === c.sourceDatalinkTable.sourceTableKey;
                         });
                       });
@@ -9625,7 +9677,7 @@
                           var _loop2 = function _loop2() {
                             var target = _step.value;
 
-                            if (_this66.tables.find(function (t) {
+                            if (_this68.tables.find(function (t) {
                               return t.key === target.tableKey;
                             })) {
                               return {
@@ -9678,7 +9730,7 @@
         }, {
           key: "getTables",
           value: function getTables() {
-            var _this67 = this;
+            var _this69 = this;
 
             if (!this.refreshTables) {
               return this.tables;
@@ -9688,7 +9740,7 @@
               return c.key;
             });
             var tables = tableKeys.map(function (c) {
-              return _this67.hubCache.getTable(c);
+              return _this69.hubCache.getTable(c);
             });
             return tables;
           }
@@ -9708,7 +9760,7 @@
         }, {
           key: "reImport",
           value: function reImport() {
-            var _this68 = this;
+            var _this70 = this;
 
             this.hubService.reImportTables(this.getTableKeys(), true, this.cancelToken).then(function (tables) {
               if (tables) {
@@ -9716,25 +9768,25 @@
                   return c.name;
                 }).join(', ');
 
-                _this68.hubService.addHubSuccessMessage("Tables ".concat(tableNames, " imported successfully."));
+                _this70.hubService.addHubSuccessMessage("Tables ".concat(tableNames, " imported successfully."));
 
-                _this68.changedTables.emit(tables);
+                _this70.changedTables.emit(tables);
               }
             })["catch"]();
           }
         }, {
           key: "clear",
           value: function clear() {
-            var _this69 = this;
+            var _this71 = this;
 
             if (this.canWrite) {
               this.hubService.clearTables(this.getTableKeys(), this.cancelToken).then(function (tables) {
                 if (tables) {
-                  var tableNames = _this69.tables.map(function (c) {
+                  var tableNames = _this71.tables.map(function (c) {
                     return c.name;
                   }).join(', ');
 
-                  _this69.hubService.addHubSuccessMessage("Tables ".concat(tableNames, " have been truncated."));
+                  _this71.hubService.addHubSuccessMessage("Tables ".concat(tableNames, " have been truncated."));
                 }
               })["catch"]();
             }
@@ -9742,16 +9794,16 @@
         }, {
           key: "rebuild",
           value: function rebuild() {
-            var _this70 = this;
+            var _this72 = this;
 
             if (this.canWrite) {
               this.hubService.createTables(this.getTables(), this.cancelToken).then(function (tables) {
                 if (tables) {
-                  var tableNames = _this70.tables.map(function (c) {
+                  var tableNames = _this72.tables.map(function (c) {
                     return c.name;
                   }).join(', ');
 
-                  _this70.hubService.addHubSuccessMessage("Tables ".concat(tableNames, " have been dropped & recreated."));
+                  _this72.hubService.addHubSuccessMessage("Tables ".concat(tableNames, " have been dropped & recreated."));
                 }
               });
             }
@@ -9801,13 +9853,13 @@
         }, {
           key: "export",
           value: function _export() {
-            var _this71 = this;
+            var _this73 = this;
 
             var cache = this.hubCache;
             var hub = this.hubService.createHub(this.hubCache.hub.hubKey, '');
             var tables = this.getTables();
             tables.forEach(function (table) {
-              _this71.hubCache.cacheAddTable(table.key, hub);
+              _this73.hubCache.cacheAddTable(table.key, hub);
             });
             var filename = tables.length === 1 ? 'Table - ' + tables[0].name + '.json' : 'tables.json';
             this.hubService.exportHub(hub, filename);
@@ -9912,13 +9964,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -9942,7 +9994,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -10185,10 +10237,10 @@
         _createClass(ActionsViewButtonComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this72 = this;
+            var _this74 = this;
 
             this._hubCacheSubscription = this.hubService.getHubCacheObservable().subscribe(function (cache) {
-              _this72.hubCache = cache;
+              _this74.hubCache = cache;
             });
           }
         }, {
@@ -10213,11 +10265,11 @@
         }, {
           key: "export",
           value: function _export() {
-            var _this73 = this;
+            var _this75 = this;
 
             var hub = this.hubService.createHub(this.hubCache.hub.hubKey, '');
             this.views.forEach(function (view) {
-              _this73.hubCache.cacheAddView(view.key, hub);
+              _this75.hubCache.cacheAddView(view.key, hub);
             });
             var filename = this.views.length === 1 ? 'View - ' + this.views[0].name + '.json' : 'views.json';
             this.hubService.exportHub(hub, filename);
@@ -10309,7 +10361,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -10525,7 +10577,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -10624,7 +10676,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -10636,13 +10688,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 
       var _c0 = function _c0(a0, a2) {
         return [a0, "columnValidation-edit", a2];
@@ -10756,7 +10808,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -10768,13 +10820,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 
       var _c0 = function _c0(a0, a2) {
         return [a0, "connection-edit", a2];
@@ -10888,7 +10940,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -10900,13 +10952,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 
       var _c0 = function _c0(a0, a2) {
         return [a0, "customFunction-edit", a2];
@@ -11020,7 +11072,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -11032,13 +11084,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 
       var _c0 = function _c0(a0, a3) {
         return [a0, "datalink-edit", "edit", a3];
@@ -11152,7 +11204,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -11188,13 +11240,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 
       var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
         function adopt(value) {
@@ -11586,10 +11638,10 @@
         _createClass(DependentItemsButtonComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this74 = this;
+            var _this76 = this;
 
             this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["combineLatest"])(this.hubService.getHubCacheObservable()).subscribe(function (result) {
-              return __awaiter(_this74, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee12() {
+              return __awaiter(_this76, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee12() {
                 return regeneratorRuntime.wrap(function _callee12$(_context12) {
                   while (1) {
                     switch (_context12.prev = _context12.next) {
@@ -11858,7 +11910,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -11876,7 +11928,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 
       var _c0 = function _c0(a1) {
         return ["connection-new", a1];
@@ -12012,7 +12064,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -12024,7 +12076,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 
       var _c0 = function _c0() {
         return ["datalink-edit", "new"];
@@ -12106,7 +12158,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -12118,7 +12170,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -12130,7 +12182,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 
       var _c0 = function _c0(a1) {
         return ["table-new", a1];
@@ -12193,11 +12245,11 @@
         _createClass(NewTableButtonComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this75 = this;
+            var _this77 = this;
 
             this._hubCacheSubscription = this.hubService.getHubCacheObservable().subscribe(function (cache) {
               if (cache.isLoaded()) {
-                _this75.connections = cache.hub.dexihConnections;
+                _this77.connections = cache.hub.dexihConnections;
               }
             });
           }
@@ -12285,7 +12337,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -12303,7 +12355,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -12423,10 +12475,10 @@
         _createClass(SaveButtonComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this76 = this;
+            var _this78 = this;
 
             this._hubCacheSubscription = this.hubService.getHubCacheObservable().subscribe(function (cache) {
-              _this76.hubCache = cache;
+              _this78.hubCache = cache;
             });
           }
         }, {
@@ -12519,7 +12571,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -12531,13 +12583,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 
       var _c0 = function _c0(a0, a2) {
         return [a0, "table-edit", a2];
@@ -12651,7 +12703,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -12669,7 +12721,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -12681,7 +12733,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 
       var _c0 = function _c0(a0) {
         return {
@@ -12805,6 +12857,7 @@
           _classCallCheck(this, TagsFilterButtonComponent);
 
           this.hubService = hubService;
+          this.pullRight = false;
           this.tags = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
           this.cancelToken = new _auth_auth_models__WEBPACK_IMPORTED_MODULE_2__["CancelToken"]();
         }
@@ -12812,19 +12865,19 @@
         _createClass(TagsFilterButtonComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this77 = this;
+            var _this79 = this;
 
             this._hubCacheSubscription = this.hubService.getHubCacheObservable().subscribe(function (cache) {
               if (cache.isLoaded) {
-                _this77.hubCache = cache;
-                var dexihTags = _this77.hubCache.hub.dexihTags;
-                _this77.tagStates = new Array(dexihTags.length);
+                _this79.hubCache = cache;
+                var dexihTags = _this79.hubCache.hub.dexihTags;
+                _this79.tagStates = new Array(dexihTags.length);
 
-                for (var i = 0; i < _this77.tagStates.length; i++) {
+                for (var i = 0; i < _this79.tagStates.length; i++) {
                   var tag = dexihTags[i];
-                  _this77.tagStates[i] = new TagState();
-                  _this77.tagStates[i].tag = tag;
-                  _this77.tagStates[i].isChecked = false;
+                  _this79.tagStates[i] = new TagState();
+                  _this79.tagStates[i].tag = tag;
+                  _this79.tagStates[i].isChecked = false;
                 }
               }
             });
@@ -12868,6 +12921,9 @@
       TagsFilterButtonComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
         type: TagsFilterButtonComponent,
         selectors: [["tags-filter-button"]],
+        inputs: {
+          pullRight: "pullRight"
+        },
         outputs: {
           tags: "tags"
         },
@@ -12900,6 +12956,9 @@
             type: _hub_service__WEBPACK_IMPORTED_MODULE_1__["HubService"]
           }];
         }, {
+          pullRight: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+          }],
           tags: [{
             type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"]
           }]
@@ -12933,7 +12992,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -12957,7 +13016,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -12969,7 +13028,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 
       var _c0 = function _c0(a0) {
         return {
@@ -13074,7 +13133,7 @@
         if (rf & 2) {
           var ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("text", "Tag " + ctx_r0.objectTypeName + "s")("pullRight", ctx_r0.pullRight);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("text", "Tag " + ctx_r0.objectTypeName + "s");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
@@ -13104,18 +13163,18 @@
         _createClass(TagsUpdateButtonComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this78 = this;
+            var _this80 = this;
 
             var _a;
 
             this.objectTypeName = (_a = _shared_shared_models__WEBPACK_IMPORTED_MODULE_2__["eSharedObjectTypeItems"].find(function (c) {
-              return c.key === _this78.objectType;
+              return c.key === _this80.objectType;
             })) === null || _a === void 0 ? void 0 : _a.name;
             this._hubCacheSubscription = this.hubService.getHubCacheObservable().subscribe(function (cache) {
               if (cache.isLoaded) {
-                _this78.hubCache = cache;
+                _this80.hubCache = cache;
 
-                _this78.updateTags();
+                _this80.updateTags();
               }
             });
           }
@@ -13131,10 +13190,10 @@
         }, {
           key: "updateTags",
           value: function updateTags() {
-            var _this79 = this;
+            var _this81 = this;
 
             var objectTags = this.hubCache.hub.dexihTagObjects.filter(function (c) {
-              return c.objectType === _this79.objectType && _this79.objects.findIndex(function (d) {
+              return c.objectType === _this81.objectType && _this81.objects.findIndex(function (d) {
                 return d.key === c.objectKey;
               }) >= 0;
             });
@@ -13143,21 +13202,21 @@
 
             var _loop3 = function _loop3(i) {
               var tag = dexihTags[i];
-              _this79.tags[i] = new TagState();
-              _this79.tags[i].tag = tag;
+              _this81.tags[i] = new TagState();
+              _this81.tags[i].tag = tag;
               var matchingTags = objectTags.filter(function (c) {
                 return c.tagKey === tag.key;
               });
 
-              if (matchingTags.length > 0 && matchingTags.length === _this79.objects.length) {
-                _this79.tags[i].isChecked = true;
-                _this79.tags[i].isIndeterminate = false;
+              if (matchingTags.length > 0 && matchingTags.length === _this81.objects.length) {
+                _this81.tags[i].isChecked = true;
+                _this81.tags[i].isIndeterminate = false;
               } else if (matchingTags.length > 0) {
-                _this79.tags[i].isChecked = false;
-                _this79.tags[i].isIndeterminate = true;
+                _this81.tags[i].isChecked = false;
+                _this81.tags[i].isIndeterminate = true;
               } else {
-                _this79.tags[i].isChecked = false;
-                _this79.tags[i].isIndeterminate = false;
+                _this81.tags[i].isChecked = false;
+                _this81.tags[i].isIndeterminate = false;
               }
             };
 
@@ -13168,11 +13227,11 @@
         }, {
           key: "delete",
           value: function _delete() {
-            var _this80 = this;
+            var _this82 = this;
 
             this.hubService.deleteTagObjects(this.objects.map(function (c) {
               return {
-                objectType: _this80.objectType,
+                objectType: _this82.objectType,
                 objectKey: c.key
               };
             }));
@@ -13180,11 +13239,11 @@
         }, {
           key: "tagChange",
           value: function tagChange(tag) {
-            var _this81 = this;
+            var _this83 = this;
 
             this.hubService.saveTagObjects(tag.tag.key, tag.isChecked, this.objects.map(function (c) {
               return {
-                objectType: _this81.objectType,
+                objectType: _this83.objectType,
                 objectKey: c.key
               };
             }));
@@ -13217,14 +13276,14 @@
         features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵNgOnChangesFeature"]],
         decls: 1,
         vars: 1,
-        consts: [[3, "ngIf"], ["buttonClass", "btn-primary", "iconClass", "fa fa-tags", 3, "text", "pullRight"], [1, "dropdown-item", 3, "title", "click"], [1, "text-danger"], [1, "fa", "fa-trash-o", "text-danger"], ["class", "dropdown-item", 4, "ngFor", "ngForOf"], [1, "dropdown-item"], [1, "input-group"], ["type", "checkbox", 1, "form-check-input", 3, "indeterminate", "ngModel", "ngModelChange", "change"], [1, "badge", 3, "ngStyle"], [1, "blend-text"]],
+        consts: [[3, "ngIf"], ["buttonClass", "btn-primary", "iconClass", "fa fa-tags", 3, "text"], [1, "dropdown-item", 3, "title", "click"], [1, "text-danger"], [1, "fa", "fa-trash-o", "text-danger"], ["class", "dropdown-item", 4, "ngFor", "ngForOf"], [1, "dropdown-item"], [1, "input-group"], ["type", "checkbox", 1, "form-check-input", 3, "indeterminate", "ngModel", "ngModelChange", "change"], [1, "badge", 3, "ngStyle"], [1, "blend-text"]],
         template: function TagsUpdateButtonComponent_Template(rf, ctx) {
           if (rf & 1) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, TagsUpdateButtonComponent_ng_template_0_Template, 6, 4, "ng-template", 0);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, TagsUpdateButtonComponent_ng_template_0_Template, 6, 3, "ng-template", 0);
           }
 
           if (rf & 2) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.tags);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.tags && ctx.tags.length > 0);
           }
         },
         directives: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["NgIf"], ngx_d_components__WEBPACK_IMPORTED_MODULE_5__["DButtonDropDownComponent"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["NgForOf"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["CheckboxControlValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["NgModel"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["NgStyle"]],
@@ -13280,7 +13339,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -13292,13 +13351,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 
       var _c0 = function _c0(a0, a2) {
         return [a0, "view-edit", a2];
@@ -13412,13 +13471,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -13466,7 +13525,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -13496,7 +13555,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 
       function FileFormatEditComponent_ng_template_2_save_button_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -13760,7 +13819,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true)("isHidden", true);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
 
@@ -13799,34 +13858,34 @@
         _createClass(FileFormatEditComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this82 = this;
+            var _this84 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["combineLatest"])(this.route.data, this.route.params, this.hubService.getHubCacheObservable()).subscribe(function (result) {
                 var data = result[0];
-                _this82.params = result[1];
-                _this82.hubCache = result[2];
-                _this82.action = data['action'];
-                _this82.pageTitle = data['pageTitle'];
+                _this84.params = result[1];
+                _this84.hubCache = result[2];
+                _this84.action = data['action'];
+                _this84.pageTitle = data['pageTitle'];
 
-                if (!_this82.hubCache || _this82.hubCache.status !== _hub_models__WEBPACK_IMPORTED_MODULE_6__["eCacheStatus"].Loaded) {
+                if (!_this84.hubCache || _this84.hubCache.status !== _hub_models__WEBPACK_IMPORTED_MODULE_6__["eCacheStatus"].Loaded) {
                   return;
                 }
 
-                if (_this82.isLoaded && _this82.action === 'new') {
+                if (_this84.isLoaded && _this84.action === 'new') {
                   return;
                 }
 
-                if (_this82.isLoaded && _this82.formsService.hasChanged) {
-                  _this82.authService.confirmDialog('Synchronization warning', 'The hub was disconnected, meaning this edit could have been changed by another session.  Would you like to discard the current changes, and reload the latest version?').then(function (confirm) {
+                if (_this84.isLoaded && _this84.formsService.hasChanged) {
+                  _this84.authService.confirmDialog('Synchronization warning', 'The hub was disconnected, meaning this edit could have been changed by another session.  Would you like to discard the current changes, and reload the latest version?').then(function (confirm) {
                     if (confirm) {
-                      _this82.load();
+                      _this84.load();
                     }
                   })["catch"](function (reason) {
                     return;
                   });
                 } else {
-                  _this82.load();
+                  _this84.load();
                 }
               });
             } catch (e) {
@@ -13847,7 +13906,7 @@
         }, {
           key: "load",
           value: function load() {
-            var _this83 = this;
+            var _this85 = this;
 
             if (this.hubCache.isLoaded()) {
               if (!this.hubCache || this.hubCache.status !== _hub_models__WEBPACK_IMPORTED_MODULE_6__["eCacheStatus"].Loaded || this.isLoaded) {
@@ -13867,7 +13926,7 @@
                     this.hubService.addHubErrorMessage('The hub cache is not loaded.');
                   } else {
                     var fileFormat = this.hubCache.hub.dexihFileFormats.find(function (c) {
-                      return c.key === _this83.fileFormatKey;
+                      return c.key === _this85.fileFormatKey;
                     });
                     this.formsService.fileFormat(fileFormat);
                   }
@@ -13886,9 +13945,9 @@
                     if (history.pushState) {
                       var newUrl = window.location.pathname.replace('/fileFormat-new', "/fileFormat-edit/".concat(key));
 
-                      _this83.router.navigateByUrl(newUrl);
+                      _this85.router.navigateByUrl(newUrl);
 
-                      _this83._formChangeSubscription.unsubscribe();
+                      _this85._formChangeSubscription.unsubscribe();
                     }
                   }
                 });
@@ -13915,7 +13974,7 @@
         features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([_hub_forms_service__WEBPACK_IMPORTED_MODULE_4__["HubFormsService"]])],
         decls: 6,
         vars: 3,
-        consts: [[1, "container"], ["title", "Edit Format", "iconClass", "fa fa-lg fa-fw fa-file-text-o", 3, "showCloseButton", "padding", "close"], ["header", ""], [3, "formGroup", 4, "ngIf"], ["title", "File Formats", "path", "/assets/help/reference/fileFormat.md", 1, "m-3"], [1, "mr-1", 3, "control", "click"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [3, "formsService"], [1, "mr-1", 3, "formsService"], [3, "formGroup"], ["label", "File Format Name", "formControlName", "name", "placeholder", "Enter the file format name.", "iconClass", "fa fa-list", 3, "errors", "autocapitalize"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Delimiter", "formControlName", "delimiter", "placeholder", "Enter the delimiter", "iconClass", "fa fa-list", "note", "The field delimiter (use \\t=tab, \\n=new line, \\r=carriage return).", 3, "errors"], ["type", "number", "label", "Buffer Size", "formControlName", "bufferSize", "placeholder", "Enter buffer size", "iconClass", "fa fa-list", "note", "The size of the internal buffer that is used when reader or writing data.", 3, "errors"], ["type", "number", "label", "Skip Header Rows Count", "formControlName", "skipHeaderRows", "placeholder", "Enter row count", "iconClass", "fa fa-list", "note", "The number of rows at the start of the file that will be ignored.", 3, "errors"], ["label", "Has Header Record", "formControlName", "hasHeaderRecord", "note", "Tells the reader/writer if there is a header row in the CSV file."], ["label", "Ignore Header White Space", "formControlName", "ignoreHeaderWhiteSpace", "note", "Tells the reader to ignore white space in the headers when matching the columns to the properties by name."], ["label", "Match to Column to Header", "formControlName", "matchHeaderRecord", "note", "Tells the reader to use the column heading name to load the data.  If unchecked, columns will be read into fields in the order specified in the table columns."], ["label", "Set White Space Cells to Null ", "formControlName", "setWhiteSpaceCellsToNull", "note", "Set empty cells or cells containing only white spaces to null."], ["label", "Allow Comments", "formControlName", "allowComments"], [4, "ngIf"], ["label", "Ignore Quotes", "formControlName", "ignoreQuotes"], ["label", "Quote All Fields", "formControlName", "quoteAllFields", "note", "Tells the writer whether all fields written should have quotes around them; regardless if the field contains anything that should be escaped."], ["label", "Quote No Fields", "formControlName", "quoteNoFields", "note", "Tells the writer whether all fields written should not have quotes around them; regardless if the field contains anything that should be escaped."], ["label", "Trim Fields", "formControlName", "trimFields", "note", "Tells the reader to trim whitespace from the beginning and ending of the field value when reading."], ["label", "Trim Headers", "formControlName", "trimHeaders", "note", "Tells the reader to ignore white space from the beginning and ending of the headers when matching the columns to the properties by name."], ["label", "Detect Column Count Changes", "formControlName", "detectColumnCountChanges", "note", "Check for changes in the number of column from row to row.  If true, the job will abend."], ["label", "Ignore Reading Exceptions", "formControlName", "ignoreReadingExceptions", "note", "Tells the reader to ignore any issues when parsing the file.  Issues mean the file is bad in some way, and the parser isn't able to recover."], ["label", "Will Abend On Missing Field", "formControlName", "willThrowOnMissingField", "note", "Indicates if the job should be abended if reading and an expected field is missing."], ["label", "Skip Empty Records", "formControlName", "skipEmptyRecords", "note", "Tells the reader a record should be skipped when reading if it's empty. A record is considered empty if all fields are empty."], ["label", "Comment", "formControlName", "comment", "placeholder", "Enter comment character", "iconClass", "fa fa-list", "note", "The value used to denote a line that is commented out.", 3, "errors"], ["label", "Quote", "formControlName", "quote", "placeholder", "Enter the quote", "iconClass", "fa fa-list", "note", "The value used to escape fields that contain a delimiter, quote, or line ending.", 3, "maxlength", "errors"]],
+        consts: [[1, "container"], ["title", "Edit Format", "iconClass", "fa fa-lg fa-fw fa-file-text-o", 3, "showCloseButton", "padding", "close"], ["header", ""], [3, "formGroup", 4, "ngIf"], ["title", "File Formats", "path", "/assets/help/reference/fileFormat.md", 1, "m-3"], [1, "mr-1", 3, "control", "click"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [3, "formsService"], [1, "mr-1", 3, "formsService"], [3, "formGroup"], ["label", "File Format Name", "formControlName", "name", "placeholder", "Enter the file format name.", "iconClass", "fa fa-list", 3, "errors", "autocapitalize"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview", "isHidden"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Delimiter", "formControlName", "delimiter", "placeholder", "Enter the delimiter", "iconClass", "fa fa-list", "note", "The field delimiter (use \\t=tab, \\n=new line, \\r=carriage return).", 3, "errors"], ["type", "number", "label", "Buffer Size", "formControlName", "bufferSize", "placeholder", "Enter buffer size", "iconClass", "fa fa-list", "note", "The size of the internal buffer that is used when reader or writing data.", 3, "errors"], ["type", "number", "label", "Skip Header Rows Count", "formControlName", "skipHeaderRows", "placeholder", "Enter row count", "iconClass", "fa fa-list", "note", "The number of rows at the start of the file that will be ignored.", 3, "errors"], ["label", "Has Header Record", "formControlName", "hasHeaderRecord", "note", "Tells the reader/writer if there is a header row in the CSV file."], ["label", "Ignore Header White Space", "formControlName", "ignoreHeaderWhiteSpace", "note", "Tells the reader to ignore white space in the headers when matching the columns to the properties by name."], ["label", "Match to Column to Header", "formControlName", "matchHeaderRecord", "note", "Tells the reader to use the column heading name to load the data.  If unchecked, columns will be read into fields in the order specified in the table columns."], ["label", "Set White Space Cells to Null ", "formControlName", "setWhiteSpaceCellsToNull", "note", "Set empty cells or cells containing only white spaces to null."], ["label", "Allow Comments", "formControlName", "allowComments"], [4, "ngIf"], ["label", "Ignore Quotes", "formControlName", "ignoreQuotes"], ["label", "Quote All Fields", "formControlName", "quoteAllFields", "note", "Tells the writer whether all fields written should have quotes around them; regardless if the field contains anything that should be escaped."], ["label", "Quote No Fields", "formControlName", "quoteNoFields", "note", "Tells the writer whether all fields written should not have quotes around them; regardless if the field contains anything that should be escaped."], ["label", "Trim Fields", "formControlName", "trimFields", "note", "Tells the reader to trim whitespace from the beginning and ending of the field value when reading."], ["label", "Trim Headers", "formControlName", "trimHeaders", "note", "Tells the reader to ignore white space from the beginning and ending of the headers when matching the columns to the properties by name."], ["label", "Detect Column Count Changes", "formControlName", "detectColumnCountChanges", "note", "Check for changes in the number of column from row to row.  If true, the job will abend."], ["label", "Ignore Reading Exceptions", "formControlName", "ignoreReadingExceptions", "note", "Tells the reader to ignore any issues when parsing the file.  Issues mean the file is bad in some way, and the parser isn't able to recover."], ["label", "Will Abend On Missing Field", "formControlName", "willThrowOnMissingField", "note", "Indicates if the job should be abended if reading and an expected field is missing."], ["label", "Skip Empty Records", "formControlName", "skipEmptyRecords", "note", "Tells the reader a record should be skipped when reading if it's empty. A record is considered empty if all fields are empty."], ["label", "Comment", "formControlName", "comment", "placeholder", "Enter comment character", "iconClass", "fa fa-list", "note", "The value used to denote a line that is commented out.", 3, "errors"], ["label", "Quote", "formControlName", "quote", "placeholder", "Enter the quote", "iconClass", "fa fa-list", "note", "The value used to escape fields that contain a delimiter, quote, or line ending.", 3, "maxlength", "errors"]],
         template: function FileFormatEditComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -13928,7 +13987,7 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, FileFormatEditComponent_ng_template_2_Template, 3, 3, "ng-template", null, 2, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, FileFormatEditComponent_form_4_Template, 52, 9, "form", 3);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, FileFormatEditComponent_form_4_Template, 52, 10, "form", 3);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -14002,7 +14061,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -14020,7 +14079,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -14044,7 +14103,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -14056,7 +14115,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -14193,7 +14252,7 @@
         _createClass(FileFormatIndexComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this84 = this;
+            var _this86 = this;
 
             // watch for any changes in the validations.
             this.watchChanges();
@@ -14202,9 +14261,9 @@
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["combineLatest"])(this.route.data, this.route.params, this.hubService.getHubCacheObservable()).subscribe(function (result) {
                 var data = result[0];
                 var params = result[1];
-                _this84.hubCache = result[2];
+                _this86.hubCache = result[2];
 
-                _this84.updateFileFormats();
+                _this86.updateFileFormats();
               });
             } catch (e) {
               this.hubService.addHubClientErrorMessage(e, 'File Format Index');
@@ -14234,7 +14293,7 @@
         }, {
           key: "updateFileFormats",
           value: function updateFileFormats() {
-            var _this85 = this;
+            var _this87 = this;
 
             if (this.hubCache && this.hubCache.isLoaded()) {
               var fileFormats = this.hubCache.hub.dexihFileFormats.filter(function (c) {
@@ -14245,7 +14304,7 @@
                   name: c.name,
                   description: c.description,
                   updateDate: c.updateDate,
-                  tags: _this85.hubCache.getObjectTags(_shared_shared_models__WEBPACK_IMPORTED_MODULE_5__["eSharedObjectType"].FileFormat, c.key)
+                  tags: _this87.hubCache.getObjectTags(_shared_shared_models__WEBPACK_IMPORTED_MODULE_5__["eSharedObjectType"].FileFormat, c.key)
                 };
               });
 
@@ -14264,12 +14323,12 @@
         }, {
           key: "export",
           value: function _export(items) {
-            var _this86 = this;
+            var _this88 = this;
 
             var cache = this.hubCache;
             var hub = this.hubService.createHub(this.hubCache.hub.hubKey, '');
             items.forEach(function (item) {
-              _this86.hubCache.cacheAddFileFormat(item.key, hub);
+              _this88.hubCache.cacheAddFileFormat(item.key, hub);
             });
             var filename = items.length === 1 ? 'FileFormat - ' + items[0].name + '.json' : 'fileFormats.json';
             this.hubService.exportHub(hub, filename);
@@ -14277,12 +14336,12 @@
         }, {
           key: "watchChanges",
           value: function watchChanges() {
-            var _this87 = this;
+            var _this89 = this;
 
             // watch the current validation in case it is changed in another session.
             this._hubCacheChangeSubscription = this.hubService.getHubCacheChangeObservable().subscribe(function (hubCacheChange) {
               if (hubCacheChange.changeClass === _shared_shared_models__WEBPACK_IMPORTED_MODULE_5__["eSharedObjectType"].FileFormat || hubCacheChange.changeClass === _shared_shared_models__WEBPACK_IMPORTED_MODULE_5__["eSharedObjectType"].TagObjects) {
-                _this87.updateFileFormats();
+                _this89.updateFileFormats();
               }
             });
           }
@@ -14443,13 +14502,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -14485,7 +14544,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -14525,37 +14584,23 @@
         });
       };
 
-      function HubComponent_section_1_div_1_Template(rf, ctx) {
-        if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 3);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "div", 4);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 5);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "Loading the hub ...");
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        }
-      }
-
       function HubComponent_section_1_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "section");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, HubComponent_section_1_div_1_Template, 4, 0, "div", 2);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 2);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "div", 3);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "div", 4);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, "Loading the hub ...");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        }
 
-        if (rf & 2) {
-          var ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !ctx_r0.showIf);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
       }
 
@@ -14563,7 +14608,7 @@
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "section");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 6);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 5);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, " The current user has readonly access to this hub. ");
 
@@ -14577,7 +14622,7 @@
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "section");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 6);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 5);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, " The current user only has access to shared items in this hub. ");
 
@@ -14591,7 +14636,7 @@
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "section");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 7);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 6);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2);
 
@@ -14601,11 +14646,11 @@
         }
 
         if (rf & 2) {
-          var ctx_r5 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+          var ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", ctx_r5.webSocketStatus, ". ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", ctx_r4.webSocketStatus, ". ");
         }
       }
 
@@ -14613,7 +14658,7 @@
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "section");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 7);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 6);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, " There was an error encountered when loading the hub. ");
 
@@ -14625,26 +14670,26 @@
 
       function HubComponent_div_2_div_5_section_1_Template(rf, ctx) {
         if (rf & 1) {
-          var _r10 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r9 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "section");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 7);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 6);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, " Warning: There is no remote agent connected. A remote agent is required for any data access and processing. ");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "hr");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "d-button", 8);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "d-button", 7);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "d-button-refresh", 9);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "d-button-refresh", 8);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function HubComponent_div_2_div_5_section_1_Template_d_button_refresh_click_5_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r10);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r9);
 
-            var ctx_r9 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
+            var ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
-            return ctx_r9.refresh();
+            return ctx_r8.refresh();
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -14655,11 +14700,11 @@
         }
 
         if (rf & 2) {
-          var ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
+          var ctx_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpropertyInterpolate1"]("routerLink", "/hub/", ctx_r8.hubCache.hub.hubKey, "/summary/agents");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpropertyInterpolate1"]("routerLink", "/hub/", ctx_r7.hubCache.hub.hubKey, "/summary/agents");
         }
       }
 
@@ -14673,11 +14718,11 @@
         }
 
         if (rf & 2) {
-          var ctx_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+          var ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r7.openDelay && ctx_r7.webSocketStatus != "Connected" && !ctx_r7.remoteAgent);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r6.openDelay && ctx_r6.webSocketStatus != "Connected" && !ctx_r6.remoteAgent);
         }
       }
 
@@ -14739,21 +14784,21 @@
         _createClass(HubComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this88 = this;
+            var _this90 = this;
 
             this._hubCacheSubscription = this.hubService.getHubCacheObservable().subscribe(function (hubCache) {
-              _this88.hubCache = hubCache;
+              _this90.hubCache = hubCache;
             });
             this._webSocketSubscription = this.authService.getWebSocketStatusObservable().subscribe(function (webSocketStatus) {
-              _this88.webSocketStatus = webSocketStatus;
+              _this90.webSocketStatus = webSocketStatus;
             });
             this._remoteAgentSubscription = this.hubService.getRemoteAgentObservable().subscribe(function (remoteAgent) {
-              _this88.remoteAgent = remoteAgent;
+              _this90.remoteAgent = remoteAgent;
             });
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["combineLatest"])(this.route.params, this.authService.getUserObservable()).subscribe(function (result) {
-                return __awaiter(_this88, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee13() {
+                return __awaiter(_this90, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee13() {
                   var params, user;
                   return regeneratorRuntime.wrap(function _callee13$(_context13) {
                     while (1) {
@@ -14806,7 +14851,7 @@
             }
 
             setTimeout(function () {
-              _this88.openDelay = true;
+              _this90.openDelay = true;
             }, 5000);
           }
         }, {
@@ -14836,11 +14881,11 @@
         }, {
           key: "onFocus",
           value: function onFocus() {
-            var _this89 = this;
+            var _this91 = this;
 
             this.openDelay = false;
             setTimeout(function () {
-              _this89.openDelay = true;
+              _this91.openDelay = true;
             }, 5000);
           }
         }]);
@@ -14864,12 +14909,12 @@
         },
         decls: 4,
         vars: 2,
-        consts: [["id", "content"], [4, "ngIf"], ["class", "dexih-loader-container", 4, "ngIf"], [1, "dexih-loader-container"], [1, "dexih-loader"], [1, "dexih-loader-text"], [1, "alert", "alert-info", "m-3"], [1, "alert", "alert-danger", "m-3"], ["buttonClass", "btn btn-sm btn-primary text-white", "iconClass", "fa fa-wrench", "text", "Configure Agent", 3, "routerLink"], ["buttonClass", "btn btn-sm btn-primary text-white", 1, "ml-1", 3, "click"]],
+        consts: [["id", "content"], [4, "ngIf"], [1, "dexih-loader-container"], [1, "dexih-loader"], [1, "dexih-loader-text"], [1, "alert", "alert-info", "m-3"], [1, "alert", "alert-danger", "m-3"], ["buttonClass", "btn btn-sm btn-primary text-white", "iconClass", "fa fa-wrench", "text", "Configure Agent", 3, "routerLink"], ["buttonClass", "btn btn-sm btn-primary text-white", 1, "ml-1", 3, "click"]],
         template: function HubComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, HubComponent_section_1_Template, 2, 1, "section", 1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, HubComponent_section_1_Template, 5, 0, "section", 1);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, HubComponent_div_2_Template, 6, 5, "div", 1);
 
@@ -14945,13 +14990,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -15029,7 +15074,7 @@
 
       var HubFormsService = /*#__PURE__*/function () {
         function HubFormsService(fb, hubService, authService) {
-          var _this90 = this;
+          var _this92 = this;
 
           _classCallCheck(this, HubFormsService);
 
@@ -15056,7 +15101,7 @@
           };
           this.validationFieldMessages = {};
           this._hubCacheSubscription = this.hubService.getHubCacheObservable().subscribe(function (hubCache) {
-            _this90.hubCache = hubCache;
+            _this92.hubCache = hubCache;
           });
         }
 
@@ -15183,7 +15228,7 @@
         }, {
           key: "startForm",
           value: function startForm(form) {
-            var _this91 = this;
+            var _this93 = this;
 
             this.logger.LogC(function () {
               return "startForm started";
@@ -15195,7 +15240,7 @@
               }
 
               this._valueChangesSubscription = form.valueChanges.subscribe(function (data) {
-                _this91.onValueChanged(data);
+                _this93.onValueChanged(data);
               });
               this.onValueChanged(); // (re)set validation messages now
             }
@@ -15218,11 +15263,11 @@
         }, {
           key: "onValueChanged",
           value: function onValueChanged(data) {
-            var _this92 = this;
+            var _this94 = this;
 
             if (this.IgnoreFormChange === false) {
               this.logger.LogC(function () {
-                return "onValueChanged started.  Counter = ".concat(_this92.formChangeCount++);
+                return "onValueChanged started.  Counter = ".concat(_this94.formChangeCount++);
               }, _logging__WEBPACK_IMPORTED_MODULE_4__["eLogLevel"].Trace);
 
               if (!this.currentForm || !this.currentForm.value) {
@@ -15347,7 +15392,7 @@
         }, {
           key: "watchChanges",
           value: function watchChanges(changeClass, keyField, description, formGroupFunc) {
-            var _this93 = this;
+            var _this95 = this;
 
             if (this._hubCacheChangeSubscription) {
               this._hubCacheChangeSubscription.unsubscribe();
@@ -15360,24 +15405,24 @@
 
 
             this._hubCacheChangeSubscription = this.hubService.getHubCacheChangeObservable().subscribe(function (hubCacheChange) {
-              if (!_this93.ignoreHubCacheChange) {
-                _this93.ignoreHubCacheChange = true;
+              if (!_this95.ignoreHubCacheChange) {
+                _this95.ignoreHubCacheChange = true;
 
-                if (hubCacheChange.changeClass === changeClass && hubCacheChange.data && hubCacheChange.data[keyField] === _this93.currentForm.value[keyField]) {
+                if (hubCacheChange.changeClass === changeClass && hubCacheChange.data && hubCacheChange.data[keyField] === _this95.currentForm.value[keyField]) {
                   switch (hubCacheChange.changeType) {
                     case _shared_shared_models__WEBPACK_IMPORTED_MODULE_8__["eImportAction"].Replace:
-                      if (_this93.currentForm.pristine) {
+                      if (_this95.currentForm.pristine) {
                         var item = Object.assign({}, hubCacheChange.data);
-                        formGroupFunc.call(_this93, item);
+                        formGroupFunc.call(_this95, item);
                       } else {
-                        _this93.authService.confirmDialog('The ' + description + ' has changed', 'Another session has updated this ' + description + ', would you like to discard any changes in this session and update with the new version?').then(function (confirm) {
+                        _this95.authService.confirmDialog('The ' + description + ' has changed', 'Another session has updated this ' + description + ', would you like to discard any changes in this session and update with the new version?').then(function (confirm) {
                           if (confirm) {
                             var _item = Object.assign({}, hubCacheChange.data);
 
-                            _this93.ngOnDestroy(); // clear old subscriptions
+                            _this95.ngOnDestroy(); // clear old subscriptions
 
 
-                            formGroupFunc.call(_this93, _item);
+                            formGroupFunc.call(_this95, _item);
                           }
                         })["catch"](function (reason) {});
                       }
@@ -15385,16 +15430,16 @@
                       break;
 
                     case _shared_shared_models__WEBPACK_IMPORTED_MODULE_8__["eImportAction"].Delete:
-                      _this93.authService.confirmDialog('The ' + description + ' has been deleted', 'Another session has deleted this ' + description + ', would you like to discard current changes?').then(function (confirm) {
+                      _this95.authService.confirmDialog('The ' + description + ' has been deleted', 'Another session has deleted this ' + description + ', would you like to discard current changes?').then(function (confirm) {
                         if (confirm) {
-                          _this93.authService.navigateUp();
+                          _this95.authService.navigateUp();
                         }
                       })["catch"](function (reason) {});
 
                   }
                 }
 
-                _this93.ignoreHubCacheChange = false;
+                _this95.ignoreHubCacheChange = false;
               }
             }); // this._hubCacheSubscription = this.hubService.getHubCacheObservable().subscribe(hubCache => {
             //   if (!this.currentForm) { return; }
@@ -15426,7 +15471,7 @@
             var navigateUp = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
             var saveAs = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
             return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee15() {
-              var _this94 = this;
+              var _this96 = this;
 
               var value, _ret2, currentStatus, entityStatus, previousStatus, runTime, result, import1;
 
@@ -15475,7 +15520,7 @@
                                 name = value.name;
 
                               case 1:
-                                if (!_this94.hubCache.hub[_this94.property.cacheProperty].find(function (c) {
+                                if (!_this96.hubCache.hub[_this96.property.cacheProperty].find(function (c) {
                                   return c.name === name;
                                 })) {
                                   _context14.next = 9;
@@ -15483,8 +15528,8 @@
                                 }
 
                                 _context14.next = 4;
-                                return _this94.authService.promptDialog('Specify a new name', // tslint:disable-next-line:max-line-length
-                                "The name ".concat(name, " already exists.  Specify a new name for the ").concat(_this94.property.displayName, " and then select ok to save this as a copy."), '', name + ' 2');
+                                return _this96.authService.promptDialog('Specify a new name', // tslint:disable-next-line:max-line-length
+                                "The name ".concat(name, " already exists.  Specify a new name for the ").concat(_this96.property.displayName, " and then select ok to save this as a copy."), '', name + ' 2');
 
                               case 4:
                                 name = _context14.sent;
@@ -15645,7 +15690,7 @@
         }, {
           key: "getFormErrorsRecursive",
           value: function getFormErrorsRecursive(form, depth, index) {
-            var _this95 = this;
+            var _this97 = this;
 
             var message = '';
 
@@ -15659,7 +15704,7 @@
                 if (control instanceof _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormArray"]) {
                   var formArray = control;
                   formArray.controls.forEach(function (cont, formIndex) {
-                    message += _this95.getFormErrorsRecursive(cont, depth + 1, formIndex);
+                    message += _this97.getFormErrorsRecursive(cont, depth + 1, formIndex);
                   });
                 } else if (control instanceof _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]) {
                   message += this.getFormErrorsRecursive(control, depth + 1, 0);
@@ -15799,13 +15844,13 @@
         }, {
           key: "duplicateConnectionNameValidator",
           value: function duplicateConnectionNameValidator() {
-            var _this96 = this;
+            var _this98 = this;
 
             return function (control) {
-              if (_this96.currentForm) {
+              if (_this98.currentForm) {
                 var _name = control.value;
-                var no = _this96.hubCache.hub.dexihConnections.findIndex(function (c) {
-                  return c.key !== _this96.currentForm.value.key && c.isValid && _this96.stringCompare(c.name, _name);
+                var no = _this98.hubCache.hub.dexihConnections.findIndex(function (c) {
+                  return c.key !== _this98.currentForm.value.key && c.isValid && _this98.stringCompare(c.name, _name);
                 }) >= 0;
                 return no ? {
                   'duplicateName': {
@@ -15818,10 +15863,10 @@
         }, {
           key: "requiredConnectionFields",
           value: function requiredConnectionFields() {
-            var _this97 = this;
+            var _this99 = this;
 
             return function (group) {
-              if (_this97.currentForm) {
+              if (_this99.currentForm) {
                 var useConnectionString = group.controls['useConnectionString'];
                 var connectionStringDisplay = group.controls['connectionStringDisplay'];
                 var server = group.controls['server'];
@@ -15868,7 +15913,7 @@
         }, {
           key: "tableForm",
           value: function tableForm(table) {
-            var _this98 = this;
+            var _this100 = this;
 
             var tableForm = this.fb.group({
               'name': [table.name, [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].maxLength(250), this.duplicateTableNameValidator()]],
@@ -15883,7 +15928,7 @@
             table.dexihTableColumns.filter(function (c) {
               return c.isValid;
             }).forEach(function (column) {
-              tableColumnsForm.push(_this98.tableColumn(tableColumnsForm.value, column));
+              tableColumnsForm.push(_this100.tableColumn(tableColumnsForm.value, column));
             });
 
             if (this._tableChangesSubscription1) {
@@ -15892,7 +15937,7 @@
 
             this._tableChangesSubscription1 = tableForm.controls.useLogical.valueChanges.subscribe(function (value) {
               if (!tableForm.controls.useLogical.value) {
-                tableForm.controls.logicalName.setValue(_this98.hubCache.defaultTableLogicalName(tableForm.controls.schema.value, tableForm.controls.name.value));
+                tableForm.controls.logicalName.setValue(_this100.hubCache.defaultTableLogicalName(tableForm.controls.schema.value, tableForm.controls.name.value));
               }
             });
 
@@ -15902,7 +15947,7 @@
 
             this._tableChangesSubscription2 = tableForm.controls.name.valueChanges.subscribe(function (value) {
               if (!tableForm.controls.useLogical.value) {
-                tableForm.controls.logicalName.setValue(_this98.hubCache.defaultTableLogicalName(tableForm.controls.schema.value, tableForm.controls.name.value));
+                tableForm.controls.logicalName.setValue(_this100.hubCache.defaultTableLogicalName(tableForm.controls.schema.value, tableForm.controls.name.value));
               }
             });
             this.addMissing(table, tableForm, new _shared_shared_models__WEBPACK_IMPORTED_MODULE_8__["DexihTable"]());
@@ -15911,15 +15956,15 @@
         }, {
           key: "duplicateTableNameValidator",
           value: function duplicateTableNameValidator() {
-            var _this99 = this;
+            var _this101 = this;
 
             // validate no matching tables names in the same connection.
             return function (control) {
-              if (_this99.currentForm) {
+              if (_this101.currentForm) {
                 var _name2 = control.value;
 
-                var no = _this99.hubCache.hub.dexihTables.find(function (c) {
-                  return c.key !== _this99.currentForm.controls.key.value && c.isValid && _this99.stringCompare(c.name, _name2) && c.connectionKey === _this99.currentForm.value.connectionKey;
+                var no = _this101.hubCache.hub.dexihTables.find(function (c) {
+                  return c.key !== _this101.currentForm.controls.key.value && c.isValid && _this101.stringCompare(c.name, _name2) && c.connectionKey === _this101.currentForm.value.connectionKey;
                 });
 
                 return no ? {
@@ -15933,10 +15978,10 @@
         }, {
           key: "requiredTableFields",
           value: function requiredTableFields() {
-            var _this100 = this;
+            var _this102 = this;
 
             return function (group) {
-              if (_this100.currentForm) {
+              if (_this102.currentForm) {
                 var useConnectionString = group.controls['useConnectionString'];
                 var connectionStringDisplay = group.controls['connectionStringDisplay'];
                 var server = group.controls['server'];
@@ -15970,7 +16015,7 @@
         }, {
           key: "tableColumn",
           value: function tableColumn(siblingColumns, column) {
-            var _this101 = this;
+            var _this103 = this;
 
             var childColumns = column.childColumns ? column.childColumns : [];
             var columnForm = this.fb.group({
@@ -15984,7 +16029,7 @@
               'childColumns': this.fb.array(childColumns.filter(function (c) {
                 return c.isValid;
               }).map(function (col) {
-                return _this101.tableColumn(childColumns, col);
+                return _this103.tableColumn(childColumns, col);
               })),
               'runTime': {
                 impact: _hub_models__WEBPACK_IMPORTED_MODULE_6__["eMappingStatus"],
@@ -16045,7 +16090,7 @@
         }, {
           key: "duplicateTableColumnNameValidator",
           value: function duplicateTableColumnNameValidator(columnsArray) {
-            var _this102 = this;
+            var _this104 = this;
 
             if (!columnsArray) {
               return null;
@@ -16053,7 +16098,7 @@
 
 
             return function (control) {
-              if (_this102.currentForm) {
+              if (_this104.currentForm) {
                 var _name3 = control.value;
 
                 if (control.parent) {
@@ -16062,7 +16107,7 @@
 
                   if (columnsArray) {
                     var no = columnsArray.findIndex(function (c) {
-                      return c.key !== key && c.columnGroup === columnGroup && c.isValid && _this102.stringCompare(c.name, _name3);
+                      return c.key !== key && c.columnGroup === columnGroup && c.isValid && _this104.stringCompare(c.name, _name3);
                     }) >= 0;
                     return no ? {
                       'duplicateName': {
@@ -16154,13 +16199,13 @@
         }, {
           key: "duplicateFileFormatNameValidator",
           value: function duplicateFileFormatNameValidator() {
-            var _this103 = this;
+            var _this105 = this;
 
             return function (control) {
-              if (_this103.currentForm) {
+              if (_this105.currentForm) {
                 var _name4 = control.value;
-                var no = _this103.hubCache.hub.dexihFileFormats.findIndex(function (c) {
-                  return c.key !== _this103.currentForm.controls.key.value && c.isValid && _this103.stringCompare(c.name, _name4);
+                var no = _this105.hubCache.hub.dexihFileFormats.findIndex(function (c) {
+                  return c.key !== _this105.currentForm.controls.key.value && c.isValid && _this105.stringCompare(c.name, _name4);
                 }) >= 0;
                 return no ? {
                   'duplicateName': {
@@ -16173,14 +16218,14 @@
         }, {
           key: "view",
           value: function view(_view) {
-            var _this104 = this;
+            var _this106 = this;
 
             this.clearFormSubscriptions();
 
             var parameters = _view.parameters.filter(function (c) {
               return c.isValid;
             }).map(function (parameter) {
-              return _this104.parameter(parameter);
+              return _this106.parameter(parameter);
             });
 
             var viewForm = this.fb.group({
@@ -16204,13 +16249,13 @@
         }, {
           key: "duplicateViewNameValidator",
           value: function duplicateViewNameValidator() {
-            var _this105 = this;
+            var _this107 = this;
 
             return function (control) {
-              if (_this105.currentForm) {
+              if (_this107.currentForm) {
                 var _name5 = control.value;
-                var no = _this105.hubCache.hub.dexihViews.findIndex(function (c) {
-                  return c.key !== _this105.currentForm.controls.key.value && c.isValid && _this105.stringCompare(c.name, _name5);
+                var no = _this107.hubCache.hub.dexihViews.findIndex(function (c) {
+                  return c.key !== _this107.currentForm.controls.key.value && c.isValid && _this107.stringCompare(c.name, _name5);
                 }) >= 0;
                 return no ? {
                   'duplicateName': {
@@ -16248,14 +16293,14 @@
         }, {
           key: "dashboard",
           value: function dashboard(_dashboard) {
-            var _this106 = this;
+            var _this108 = this;
 
             this.clearFormSubscriptions();
 
             var parameters = _dashboard.parameters.filter(function (c) {
               return c.isValid;
             }).map(function (parameter) {
-              return _this106.parameter(parameter);
+              return _this108.parameter(parameter);
             });
 
             var form = this.fb.group({
@@ -16272,7 +16317,7 @@
             _dashboard.dexihDashboardItems.filter(function (c) {
               return c.isValid;
             }).forEach(function (item) {
-              dashboardItemsForm.push(_this106.dashboardItem(item));
+              dashboardItemsForm.push(_this108.dashboardItem(item));
             });
 
             this.formGroupFunc = this.dashboard;
@@ -16287,13 +16332,13 @@
         }, {
           key: "duplicateDashboardNameValidator",
           value: function duplicateDashboardNameValidator() {
-            var _this107 = this;
+            var _this109 = this;
 
             return function (control) {
-              if (_this107.currentForm) {
+              if (_this109.currentForm) {
                 var _name6 = control.value;
-                var no = _this107.hubCache.hub.dexihDashboards.findIndex(function (c) {
-                  return c.key !== _this107.currentForm.controls.key.value && c.isValid && _this107.stringCompare(c.name, _name6);
+                var no = _this109.hubCache.hub.dexihDashboards.findIndex(function (c) {
+                  return c.key !== _this109.currentForm.controls.key.value && c.isValid && _this109.stringCompare(c.name, _name6);
                 }) >= 0;
                 return no ? {
                   'duplicateName': {
@@ -16306,12 +16351,12 @@
         }, {
           key: "dashboardItem",
           value: function dashboardItem(_dashboardItem) {
-            var _this108 = this;
+            var _this110 = this;
 
             var parameters = _dashboardItem.parameters.filter(function (c) {
               return c.isValid;
             }).map(function (parameter) {
-              return _this108.parameter(parameter);
+              return _this110.parameter(parameter);
             });
 
             var form = this.fb.group({
@@ -16329,7 +16374,7 @@
         }, {
           key: "updateDashboardItemView",
           value: function updateDashboardItemView(item) {
-            var _this109 = this;
+            var _this111 = this;
 
             var views = this.hubCache.hub.dexihViews;
 
@@ -16372,7 +16417,7 @@
                     newParameter.listOfValuesKey = parameter.listOfValuesKey;
                   }
 
-                  var newFormParameter = _this109.parameter(newParameter);
+                  var newFormParameter = _this111.parameter(newParameter);
 
                   formParameters.push(newFormParameter);
                 });
@@ -16391,13 +16436,13 @@
         }, {
           key: "listOfValues",
           value: function listOfValues(_listOfValues) {
-            var _this110 = this;
+            var _this112 = this;
 
             var staticData;
 
             if (_listOfValues.staticData) {
               staticData = _listOfValues.staticData.map(function (item) {
-                return _this110.listOfValuesItem(item);
+                return _this112.listOfValuesItem(item);
               });
             } else {
               staticData = [];
@@ -16425,13 +16470,13 @@
         }, {
           key: "duplicateLovNameValidator",
           value: function duplicateLovNameValidator() {
-            var _this111 = this;
+            var _this113 = this;
 
             return function (control) {
-              if (_this111.currentForm) {
+              if (_this113.currentForm) {
                 var _name7 = control.value;
-                var no = _this111.hubCache.hub.dexihListOfValues.findIndex(function (c) {
-                  return c.key !== _this111.currentForm.controls.key.value && c.isValid && _this111.stringCompare(c.name, _name7);
+                var no = _this113.hubCache.hub.dexihListOfValues.findIndex(function (c) {
+                  return c.key !== _this113.currentForm.controls.key.value && c.isValid && _this113.stringCompare(c.name, _name7);
                 }) >= 0;
                 return no ? {
                   'duplicateName': {
@@ -16444,14 +16489,14 @@
         }, {
           key: "api",
           value: function api(_api) {
-            var _this112 = this;
+            var _this114 = this;
 
             this.clearFormSubscriptions();
 
             var parameters = _api.parameters.filter(function (c) {
               return c.isValid;
             }).map(function (parameter) {
-              return _this112.parameter(parameter);
+              return _this114.parameter(parameter);
             });
 
             var apiForm = this.fb.group({
@@ -16490,13 +16535,13 @@
         }, {
           key: "duplicateValidationNameValidator",
           value: function duplicateValidationNameValidator() {
-            var _this113 = this;
+            var _this115 = this;
 
             return function (control) {
-              if (_this113.currentForm) {
+              if (_this115.currentForm) {
                 var _name8 = control.value;
-                var no = _this113.hubCache.hub.dexihColumnValidations.findIndex(function (c) {
-                  return c.key !== _this113.currentForm.controls.key.value && c.isValid && _this113.stringCompare(c.name, _name8);
+                var no = _this115.hubCache.hub.dexihColumnValidations.findIndex(function (c) {
+                  return c.key !== _this115.currentForm.controls.key.value && c.isValid && _this115.stringCompare(c.name, _name8);
                 }) >= 0;
                 return no ? {
                   'duplicateName': {
@@ -16509,14 +16554,14 @@
         }, {
           key: "customFunction",
           value: function customFunction(_customFunction) {
-            var _this114 = this;
+            var _this116 = this;
 
             var customFunctionForm = this.fb.group({
               'name': [_customFunction.name, [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].minLength(3), _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].maxLength(50), this.duplicateCustomFunctionNameValidator()]],
               'dexihCustomFunctionParameters': this.fb.array(_customFunction.dexihCustomFunctionParameters.filter(function (c) {
                 return c.isValid;
               }).map(function (parameter) {
-                return _this114.customFunctionParametersFormGroup(parameter);
+                return _this116.customFunctionParametersFormGroup(parameter);
               }))
             });
             this.formGroupFunc = this.customFunction;
@@ -16531,13 +16576,13 @@
         }, {
           key: "duplicateCustomFunctionNameValidator",
           value: function duplicateCustomFunctionNameValidator() {
-            var _this115 = this;
+            var _this117 = this;
 
             return function (control) {
-              if (_this115.currentForm) {
+              if (_this117.currentForm) {
                 var _name9 = control.value;
-                var no = _this115.hubCache.hub.dexihCustomFunctions.findIndex(function (c) {
-                  return c.key !== _this115.currentForm.controls.key.value && c.isValid && _this115.stringCompare(c.name, _name9);
+                var no = _this117.hubCache.hub.dexihCustomFunctions.findIndex(function (c) {
+                  return c.key !== _this117.currentForm.controls.key.value && c.isValid && _this117.stringCompare(c.name, _name9);
                 }) >= 0;
                 return no ? {
                   'duplicateName': {
@@ -16575,13 +16620,13 @@
         }, {
           key: "duplicateHubVariableNameValidator",
           value: function duplicateHubVariableNameValidator() {
-            var _this116 = this;
+            var _this118 = this;
 
             return function (control) {
-              if (_this116.currentForm) {
+              if (_this118.currentForm) {
                 var _name10 = control.value;
-                var no = _this116.hubCache.hub.dexihHubVariables.findIndex(function (c) {
-                  return c.key !== _this116.currentForm.controls.key.value && c.isValid && _this116.stringCompare(c.name, _name10);
+                var no = _this118.hubCache.hub.dexihHubVariables.findIndex(function (c) {
+                  return c.key !== _this118.currentForm.controls.key.value && c.isValid && _this118.stringCompare(c.name, _name10);
                 }) >= 0;
                 return no ? {
                   'duplicateName': {
@@ -16609,13 +16654,13 @@
         }, {
           key: "duplicateTagNameValidator",
           value: function duplicateTagNameValidator() {
-            var _this117 = this;
+            var _this119 = this;
 
             return function (control) {
-              if (_this117.currentForm) {
+              if (_this119.currentForm) {
                 var _name11 = control.value;
-                var no = _this117.hubCache.hub.dexihTags.findIndex(function (c) {
-                  return c.key !== _this117.currentForm.controls.key.value && c.isValid && _this117.stringCompare(c.name, _name11);
+                var no = _this119.hubCache.hub.dexihTags.findIndex(function (c) {
+                  return c.key !== _this119.currentForm.controls.key.value && c.isValid && _this119.stringCompare(c.name, _name11);
                 }) >= 0;
                 return no ? {
                   'duplicateName': {
@@ -16628,7 +16673,7 @@
         }, {
           key: "datalinkTest",
           value: function datalinkTest(_datalinkTest) {
-            var _this118 = this;
+            var _this120 = this;
 
             var form = this.fb.group({
               'name': [_datalinkTest.name, [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].minLength(3), _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].maxLength(50), this.duplicateDatalinkTestNameValidator()]],
@@ -16639,7 +16684,7 @@
             _datalinkTest.dexihDatalinkTestSteps.filter(function (c) {
               return c.isValid;
             }).forEach(function (step) {
-              testStepsForm.push(_this118.datalinkTestStep(step));
+              testStepsForm.push(_this120.datalinkTestStep(step));
             });
 
             this.formGroupFunc = this.datalinkTest;
@@ -16654,13 +16699,13 @@
         }, {
           key: "duplicateDatalinkTestNameValidator",
           value: function duplicateDatalinkTestNameValidator() {
-            var _this119 = this;
+            var _this121 = this;
 
             return function (control) {
-              if (_this119.currentForm) {
+              if (_this121.currentForm) {
                 var _name12 = control.value;
-                var no = _this119.hubCache.hub.dexihDatalinkTests.findIndex(function (c) {
-                  return c.key !== _this119.currentForm.controls.key.value && c.isValid && _this119.stringCompare(c.name, _name12);
+                var no = _this121.hubCache.hub.dexihDatalinkTests.findIndex(function (c) {
+                  return c.key !== _this121.currentForm.controls.key.value && c.isValid && _this121.stringCompare(c.name, _name12);
                 }) >= 0;
                 return no ? {
                   'duplicateName': {
@@ -16673,7 +16718,7 @@
         }, {
           key: "datalinkTestStep",
           value: function datalinkTestStep(step) {
-            var _this120 = this;
+            var _this122 = this;
 
             var form = this.fb.group({
               'dexihDatalinkTestTables': this.fb.array([])
@@ -16682,7 +16727,7 @@
             step.dexihDatalinkTestTables.filter(function (c) {
               return c.isValid;
             }).forEach(function (table) {
-              testTablesForm.push(_this120.datalinkTestTable(table));
+              testTablesForm.push(_this122.datalinkTestTable(table));
             });
             this.addMissing(step, form, new _shared_shared_models__WEBPACK_IMPORTED_MODULE_8__["DexihDatalinkTestStep"]());
 
@@ -16691,7 +16736,7 @@
             }
 
             this._datalinkTestChangesSubscription = form.controls.datalinkKey.valueChanges.subscribe(function (datalinkKey) {
-              var datalink = _this120.hubCache.hub.dexihDatalinks.find(function (c) {
+              var datalink = _this122.hubCache.hub.dexihDatalinks.find(function (c) {
                 return c.key === datalinkKey;
               });
 
@@ -16703,7 +16748,7 @@
                 var testTable = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_8__["DexihDatalinkTestTable"]();
                 testTable.tableKey = datalink.sourceDatalinkTable.sourceTableKey;
                 testTable.isValid = true;
-                testTablesForm.push(_this120.datalinkTestTable(testTable));
+                testTablesForm.push(_this122.datalinkTestTable(testTable));
               }
 
               datalink.dexihDatalinkTransforms.filter(function (c) {
@@ -16712,7 +16757,7 @@
                 var testTable = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_8__["DexihDatalinkTestTable"]();
                 testTable.tableKey = transform.joinDatalinkTable.sourceTableKey;
                 testTable.isValid = true;
-                testTablesForm.push(_this120.datalinkTestTable(testTable));
+                testTablesForm.push(_this122.datalinkTestTable(testTable));
               });
             });
             return form;
@@ -16737,12 +16782,12 @@
         }, {
           key: "datalinkStepFormGroup",
           value: function datalinkStepFormGroup(datajobForm, step) {
-            var _this121 = this;
+            var _this123 = this;
 
             var parameters = step.parameters.filter(function (c) {
               return c.isValid;
             }).map(function (parameter) {
-              return _this121.parameter(parameter);
+              return _this123.parameter(parameter);
             });
             var stepForm = this.fb.group({
               'key': [step.key, []],
@@ -16751,12 +16796,12 @@
               'dexihDatalinkDependencies': this.fb.array(step.dexihDatalinkDependencies.filter(function (c) {
                 return c.isValid;
               }).map(function (dep) {
-                return _this121.datalinkDependencyFormGroup(dep);
+                return _this123.datalinkDependencyFormGroup(dep);
               })),
               'dexihDatalinkStepColumns': this.fb.array(step.dexihDatalinkStepColumns.filter(function (c) {
                 return c.isValid;
               }).map(function (col) {
-                return _this121.datalinkStepColumnFormGroup(col);
+                return _this123.datalinkStepColumnFormGroup(col);
               })),
               'parameters': this.fb.array(parameters)
             });
@@ -16780,20 +16825,20 @@
         }, {
           key: "datajob",
           value: function datajob(_datajob) {
-            var _this122 = this;
+            var _this124 = this;
 
             this.clearFormSubscriptions();
 
             var triggers = _datajob.dexihTriggers.filter(function (c) {
               return c.isValid;
             }).map(function (trigger) {
-              return _this122.triggerFormGroup(trigger);
+              return _this124.triggerFormGroup(trigger);
             });
 
             var parameters = _datajob.parameters.filter(function (c) {
               return c.isValid;
             }).map(function (parameter) {
-              return _this122.parameter(parameter);
+              return _this124.parameter(parameter);
             });
 
             var stepsArray = this.fb.array([]);
@@ -16810,7 +16855,7 @@
             _datajob.dexihDatalinkSteps.filter(function (c) {
               return c.isValid;
             }).forEach(function (step) {
-              stepsArray.push(_this122.datalinkStepFormGroup(datajobForm, step));
+              stepsArray.push(_this124.datalinkStepFormGroup(datajobForm, step));
             });
 
             this.formGroupFunc = this.datajob;
@@ -16825,13 +16870,13 @@
         }, {
           key: "duplicateDatajobNameValidator",
           value: function duplicateDatajobNameValidator() {
-            var _this123 = this;
+            var _this125 = this;
 
             return function (control) {
-              if (_this123.currentForm) {
+              if (_this125.currentForm) {
                 var _name13 = control.value;
-                var no = _this123.hubCache.hub.dexihDatajobs.findIndex(function (c) {
-                  return c.key !== _this123.currentForm.controls.key.value && c.isValid && _this123.stringCompare(c.name, _name13);
+                var no = _this125.hubCache.hub.dexihDatajobs.findIndex(function (c) {
+                  return c.key !== _this125.currentForm.controls.key.value && c.isValid && _this125.stringCompare(c.name, _name13);
                 }) >= 0;
                 return no ? {
                   'duplicateName': {
@@ -16844,10 +16889,10 @@
         }, {
           key: "duplicateStepNameValidator",
           value: function duplicateStepNameValidator(datajobForm) {
-            var _this124 = this;
+            var _this126 = this;
 
             return function (control) {
-              if (_this124.currentForm) {
+              if (_this126.currentForm) {
                 var _name14 = control.value;
 
                 if (control && control.parent) {
@@ -16896,7 +16941,7 @@
         }, {
           key: "datalinkTableColumn",
           value: function datalinkTableColumn(siblingColumns, column) {
-            var _this125 = this;
+            var _this127 = this;
 
             var childColumns = column.childColumns ? column.childColumns : [];
             var columnForm = this.fb.group({
@@ -16910,7 +16955,7 @@
               'childColumns': this.fb.array(childColumns.filter(function (c) {
                 return c.isValid;
               }).map(function (col) {
-                return _this125.datalinkTableColumn(childColumns, col);
+                return _this127.datalinkTableColumn(childColumns, col);
               })),
               'runTime': {
                 impact: _hub_models__WEBPACK_IMPORTED_MODULE_6__["eMappingStatus"],
@@ -16971,7 +17016,7 @@
         }, {
           key: "duplicateDatalinkColumnNameValidator",
           value: function duplicateDatalinkColumnNameValidator(columnsArray) {
-            var _this126 = this;
+            var _this128 = this;
 
             // validate no matching tables names in the same connection.
             return function (control) {
@@ -16979,7 +17024,7 @@
                 return null;
               }
 
-              if (_this126.currentForm) {
+              if (_this128.currentForm) {
                 var _name15 = control.value;
 
                 if (control.parent) {
@@ -16987,7 +17032,7 @@
 
                   if (columnsArray) {
                     var no = columnsArray.findIndex(function (c) {
-                      return c.key !== key && c.isValid && _this126.stringCompare(c.name, _name15);
+                      return c.key !== key && c.isValid && _this128.stringCompare(c.name, _name15);
                     }) >= 0;
                     return no ? {
                       'duplicateName': {
@@ -17002,7 +17047,7 @@
         }, {
           key: "datalinkTransformFormGroup",
           value: function datalinkTransformFormGroup(transform) {
-            var _this127 = this;
+            var _this129 = this;
 
             var transformForm = this.fb.group({
               'datalinkTransformKey': [transform.key, []],
@@ -17023,7 +17068,7 @@
             transformForm.addControl('dexihDatalinkTransformItems', this.fb.array(transform.dexihDatalinkTransformItems.filter(function (c) {
               return c.isValid;
             }).map(function (item) {
-              return _this127.datalinkDatalinkTransformItemFormGroup(transformForm, item);
+              return _this129.datalinkDatalinkTransformItemFormGroup(transformForm, item);
             })));
             this.addMissing(transform, transformForm, new _shared_shared_models__WEBPACK_IMPORTED_MODULE_8__["DexihDatalinkTransform"]());
             return transformForm;
@@ -17047,13 +17092,13 @@
         }, {
           key: "datalinkDatalinkTransformItemFormGroup",
           value: function datalinkDatalinkTransformItemFormGroup(datalinkTransformForm, item) {
-            var _this128 = this;
+            var _this130 = this;
 
             var itemForm = this.fb.group({
               'dexihFunctionParameters': this.fb.array(item.dexihFunctionParameters.filter(function (c) {
                 return c.isValid;
               }).map(function (parameter) {
-                return _this128.datalinkFunctionParametersFormGroup(parameter);
+                return _this130.datalinkFunctionParametersFormGroup(parameter);
               })),
               // 'standardFunction': item.standardFunction,
               'targetDatalinkColumn': [item.targetDatalinkColumn, [this.duplicateOutputColumn(datalinkTransformForm)]],
@@ -17090,10 +17135,10 @@
         }, {
           key: "duplicateOutputColumn",
           value: function duplicateOutputColumn(datalinkTransformForm) {
-            var _this129 = this;
+            var _this131 = this;
 
             return function (control) {
-              if (_this129.currentForm) {
+              if (_this131.currentForm) {
                 var column = control.value;
                 var transformColumns = datalinkTransformForm.controls.runTime.value.transformColumns;
 
@@ -17115,15 +17160,15 @@
         }, {
           key: "invalidClassName",
           value: function invalidClassName() {
-            var _this130 = this;
+            var _this132 = this;
 
             return function (control) {
               var datalinkTransformItemForm = control;
               datalinkTransformItemForm.controls.functionMethodName.setErrors(null);
 
-              if (_this130.currentForm && datalinkTransformItemForm.controls.transformItemType && datalinkTransformItemForm.controls.transformItemType.value === _shared_shared_models__WEBPACK_IMPORTED_MODULE_8__["eTransformItemType"].BuiltInFunction) {
+              if (_this132.currentForm && datalinkTransformItemForm.controls.transformItemType && datalinkTransformItemForm.controls.transformItemType.value === _shared_shared_models__WEBPACK_IMPORTED_MODULE_8__["eTransformItemType"].BuiltInFunction) {
                 return new Promise(function (resolve, reject) {
-                  _this130.hubService.GetFunctionReference(datalinkTransformItemForm.value).then(function (func) {
+                  _this132.hubService.GetFunctionReference(datalinkTransformItemForm.value).then(function (func) {
                     if (func) {
                       resolve(null);
                     } else {
@@ -17151,7 +17196,7 @@
         }, {
           key: "datalinkFunctionParametersFormGroup",
           value: function datalinkFunctionParametersFormGroup(parameter) {
-            var _this131 = this;
+            var _this133 = this;
 
             var parameterForm = this.fb.group({
               // 'name': [, [ // used for adding new columns
@@ -17161,7 +17206,7 @@
               'arrayParameters': this.fb.array(parameter.arrayParameters.filter(function (c) {
                 return c.isValid;
               }).map(function (p) {
-                return _this131.datalinkFunctionArrayParametersFormGroup(p);
+                return _this133.datalinkFunctionArrayParametersFormGroup(p);
               }))
             }, {
               validator: this.inconsistentDataType()
@@ -17186,12 +17231,12 @@
         }, {
           key: "inconsistentDataType",
           value: function inconsistentDataType() {
-            var _this132 = this;
+            var _this134 = this;
 
             return function (group) {
               var _a;
 
-              if (_this132.currentForm) {
+              if (_this134.currentForm) {
                 var datalinkColumn = group.controls.datalinkColumn;
 
                 if (datalinkColumn && datalinkColumn.value) {
@@ -17230,7 +17275,7 @@
         }, {
           key: "datalinkTargetFormGroup",
           value: function datalinkTargetFormGroup(target) {
-            var _this133 = this;
+            var _this135 = this;
 
             var table = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
@@ -17252,8 +17297,8 @@
             this.addMissing(target, targetForm, new _shared_shared_models__WEBPACK_IMPORTED_MODULE_8__["DexihDatalinkTarget"]());
             var subscription = targetForm.controls.tableKey.valueChanges.subscribe(function (tableKey) {
               if (tableKey > 0) {
-                table = _this133.hubCache.getTable(tableKey);
-                var tableForm = table ? _this133.tableForm(table) : null;
+                table = _this135.hubCache.getTable(tableKey);
+                var tableForm = table ? _this135.tableForm(table) : null;
                 targetForm.setControl('table', tableForm);
               }
             });
@@ -17265,7 +17310,7 @@
         }, {
           key: "sourceDatalinkTableFormGroup",
           value: function sourceDatalinkTableFormGroup(datalinkTable) {
-            var _this134 = this;
+            var _this136 = this;
 
             var form = this.fb.group({
               'sourceType': [datalinkTable.sourceType, [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]],
@@ -17280,7 +17325,7 @@
             datalinkTable.dexihDatalinkColumns.filter(function (c) {
               return c.isValid;
             }).forEach(function (column) {
-              tableColumnsForm.push(_this134.datalinkTableColumn(tableColumnsForm.value, column));
+              tableColumnsForm.push(_this136.datalinkTableColumn(tableColumnsForm.value, column));
             });
             this.addMissing(datalinkTable, form, new _shared_shared_models__WEBPACK_IMPORTED_MODULE_8__["DexihDatalinkTable"]());
             return form;
@@ -17322,7 +17367,7 @@
         }, {
           key: "datalink",
           value: function datalink(_datalink) {
-            var _this135 = this;
+            var _this137 = this;
 
             this.logger.LogC(function () {
               return "datalink key:".concat(_datalink.key, " datalink:").concat(_datalink.name);
@@ -17332,25 +17377,25 @@
             var profiles = _datalink.dexihDatalinkProfiles.filter(function (c) {
               return c.isValid;
             }).map(function (profile) {
-              return _this135.datalinkProfileFormGroup(profile);
+              return _this137.datalinkProfileFormGroup(profile);
             });
 
             var targets = _datalink.dexihDatalinkTargets.filter(function (c) {
               return c.isValid;
             }).map(function (target) {
-              return _this135.datalinkTargetFormGroup(target);
+              return _this137.datalinkTargetFormGroup(target);
             });
 
             var transforms = _datalink.dexihDatalinkTransforms.filter(function (c) {
               return c.isValid;
             }).map(function (transform) {
-              return _this135.datalinkTransformFormGroup(transform);
+              return _this137.datalinkTransformFormGroup(transform);
             });
 
             var parameters = _datalink.parameters.filter(function (c) {
               return c.isValid;
             }).map(function (parameter) {
-              return _this135.parameter(parameter);
+              return _this137.parameter(parameter);
             });
 
             var datalinkForm = this.fb.group({
@@ -17381,7 +17426,7 @@
             }
 
             this._datalinkChangesSubscription1 = datalinkForm.valueChanges.subscribe(function () {
-              _this135.updateTransformFormColumns(datalinkForm);
+              _this137.updateTransformFormColumns(datalinkForm);
             });
             this.updateTransformFormColumns(datalinkForm);
             this.watchChanges(_shared_shared_models__WEBPACK_IMPORTED_MODULE_8__["eSharedObjectType"].Datalink, 'key', 'datalink', this.datalink);
@@ -17390,13 +17435,13 @@
         }, {
           key: "duplicateDatalinkNameValidator",
           value: function duplicateDatalinkNameValidator(datalinkKey) {
-            var _this136 = this;
+            var _this138 = this;
 
             return function (control) {
-              if (_this136.currentForm) {
+              if (_this138.currentForm) {
                 var _name16 = control.value;
-                var no = _this136.hubCache.hub.dexihDatalinks.findIndex(function (c) {
-                  return c.key !== datalinkKey && c.isValid && _this136.stringCompare(c.name, _name16);
+                var no = _this138.hubCache.hub.dexihDatalinks.findIndex(function (c) {
+                  return c.key !== datalinkKey && c.isValid && _this138.stringCompare(c.name, _name16);
                 }) >= 0;
                 return no ? {
                   'duplicateName': {
@@ -17414,7 +17459,7 @@
               var transformsArray = datalinkForm.controls.dexihDatalinkTransforms;
               var datalink = datalinkForm.value;
               var ioColumns = new _hub_lineage_models__WEBPACK_IMPORTED_MODULE_5__["InputOutputColumns"]();
-              ioColumns.buildInputOutput(this.hubCache, datalink);
+              ioColumns.buildInputOutput(datalink);
               transformsArray.controls.forEach(function (transformFormControl) {
                 var datalinkTransformForm = transformFormControl;
                 var datalinkTransform = datalinkTransformForm.value; // const inputColumns = ioColumns.getInputColumns(this.hubCache, datalink, datalinkTransform, []);
@@ -17737,7 +17782,7 @@
         }, {
           key: "validColumns",
           value: function validColumns(nodeDatalinkColumnKey, columns) {
-            var _this137 = this;
+            var _this139 = this;
 
             if (!nodeDatalinkColumnKey) {
               return columns;
@@ -17751,8 +17796,8 @@
                 if (col.childColumns) {
                   validColumns = validColumns.concat(col.childColumns);
                 }
-              } else if (_this137.findColumn(col, nodeDatalinkColumnKey)) {
-                var cols = _this137.validColumns(nodeDatalinkColumnKey, col.childColumns);
+              } else if (_this139.findColumn(col, nodeDatalinkColumnKey)) {
+                var cols = _this139.validColumns(nodeDatalinkColumnKey, col.childColumns);
 
                 validColumns = validColumns.concat(cols);
               }
@@ -17796,7 +17841,7 @@
         }, {
           key: "getAvailableColumns",
           value: function getAvailableColumns(columns, nodeDatalinkColumnKey, levelCount) {
-            var _this138 = this;
+            var _this140 = this;
 
             var returnColumns = [];
             columns.forEach(function (column) {
@@ -17808,7 +17853,7 @@
                 var io = new InputOutputColumns();
 
                 if (io.findColumn(column, nodeDatalinkColumnKey)) {
-                  var childColumns = _this138.getAvailableColumns(column.childColumns, nodeDatalinkColumnKey, levelCount + 1);
+                  var childColumns = _this140.getAvailableColumns(column.childColumns, nodeDatalinkColumnKey, levelCount + 1);
 
                   returnColumns.push.apply(returnColumns, childColumns);
                 }
@@ -17832,7 +17877,7 @@
         }, {
           key: "copyDatalinkColumn",
           value: function copyDatalinkColumn(column, newPosition, newGroup) {
-            var _this139 = this;
+            var _this141 = this;
 
             if (!column) {
               return null;
@@ -17845,7 +17890,7 @@
               newColumn.childColumns = column.childColumns.sort(function (a, b) {
                 return a.position - b.position;
               }).map(function (c, index) {
-                return _this139.copyDatalinkColumn(c, index, newGroup + '.' + column.logicalName);
+                return _this141.copyDatalinkColumn(c, index, newGroup + '.' + column.logicalName);
               });
             }
 
@@ -17864,31 +17909,31 @@
         }, {
           key: "copyDatalinkColumns",
           value: function copyDatalinkColumns(columns) {
-            var _this140 = this;
+            var _this142 = this;
 
             var newColumns = [];
             columns.forEach(function (column) {
-              newColumns.push(_this140.copyDatalinkColumn(column, column.position, column.columnGroup));
+              newColumns.push(_this142.copyDatalinkColumn(column, column.position, column.columnGroup));
             });
             return newColumns;
           }
         }, {
           key: "copyDatalinkTable",
           value: function copyDatalinkTable(table) {
-            var _this141 = this;
+            var _this143 = this;
 
             var newTable = Object.assign({}, table);
             var newColumns = [];
             table.dexihDatalinkColumns.forEach(function (column) {
-              newColumns.push(_this141.copyDatalinkColumn(column, column.position, column.columnGroup));
+              newColumns.push(_this143.copyDatalinkColumn(column, column.position, column.columnGroup));
             });
             newTable.dexihDatalinkColumns = newColumns;
             return newTable;
           }
         }, {
           key: "buildInputOutput",
-          value: function buildInputOutput(hubCache, datalink) {
-            var _this142 = this;
+          value: function buildInputOutput(datalink) {
+            var _this144 = this;
 
             // get a reverse sorted list of transforms prior to the current one.
             var transforms = datalink.dexihDatalinkTransforms.filter(function (a) {
@@ -17905,7 +17950,7 @@
                 }).sort(function (a, b) {
                   return a.position - b.position;
                 }).map(function (c, i) {
-                  return _this142.copyDatalinkColumn(c, i, c.columnGroup);
+                  return _this144.copyDatalinkColumn(c, i, c.columnGroup);
                 }); // initialize all input columns to not mapped.
 
                 inputColumns.forEach(function (c) {
@@ -17921,7 +17966,7 @@
                 }).sort(function (a, b) {
                   return a.position - b.position;
                 }).map(function (c, i) {
-                  return _this142.copyDatalinkColumn(c, i, c.columnGroup);
+                  return _this144.copyDatalinkColumn(c, i, c.columnGroup);
                 });
               } // get a sorted list of the transform items.
 
@@ -17934,14 +17979,14 @@
 
               var transformColumns = outputColumns;
               var pos = 0;
-              var nodeColumn = transform.nodeDatalinkColumn ? _this142.findNodeColumn(transform.nodeDatalinkColumn, inputColumns) : null; // if the mapping uses a node level, copy parent columns, and set new node level.
+              var nodeColumn = transform.nodeDatalinkColumn ? _this144.findNodeColumn(transform.nodeDatalinkColumn, inputColumns) : null; // if the mapping uses a node level, copy parent columns, and set new node level.
 
               if (nodeColumn) {
-                outputColumns = _this142.copyDatalinkColumns(inputColumns);
-                nodeColumn = transform.nodeDatalinkColumn ? _this142.findNodeColumn(transform.nodeDatalinkColumn, outputColumns) : null; // create a copy of the inputs columns
+                outputColumns = _this144.copyDatalinkColumns(inputColumns);
+                nodeColumn = transform.nodeDatalinkColumn ? _this144.findNodeColumn(transform.nodeDatalinkColumn, outputColumns) : null; // create a copy of the inputs columns
 
                 inputColumns.forEach(function (column) {
-                  transformColumns.push(_this142.copyDatalinkColumn(column, pos++, column.columnGroup));
+                  transformColumns.push(_this144.copyDatalinkColumn(column, pos++, column.columnGroup));
                 });
                 nodeColumn.childColumns = [];
                 transformColumns = nodeColumn.childColumns;
@@ -17951,7 +17996,7 @@
               transformItems.filter(function (c) {
                 return (c.transformItemType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_1__["eTransformItemType"].Series || c.transformItemType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_1__["eTransformItemType"].Column) && c.sourceDatalinkColumn;
               }).forEach(function (item) {
-                transformColumns.push(_this142.copyDatalinkColumn(item.sourceDatalinkColumn, pos++, 'Group'));
+                transformColumns.push(_this144.copyDatalinkColumn(item.sourceDatalinkColumn, pos++, 'Group'));
               }); // if there is group node, all non-group columns should be child columns.
 
               var groupNode = transformItems.find(function (c) {
@@ -17959,7 +18004,7 @@
               });
 
               if (groupNode) {
-                var groupColumn = _this142.copyDatalinkColumn(groupNode.targetDatalinkColumn, pos++, 'Group Node');
+                var groupColumn = _this144.copyDatalinkColumn(groupNode.targetDatalinkColumn, pos++, 'Group Node');
 
                 transformColumns.push(groupColumn); // set the current node level to the group column, so transforms are mapped as it's child columns.
 
@@ -17977,7 +18022,7 @@
                   var joinColumn = joinNode.targetDatalinkColumn;
 
                   if (joinColumn) {
-                    joinColumn = _this142.copyDatalinkColumn(joinColumn, pos++, 'Join Node');
+                    joinColumn = _this144.copyDatalinkColumn(joinColumn, pos++, 'Join Node');
                     joinColumn.childColumns = [];
                     transformColumns.push(joinColumn);
                     joinColumns = joinColumn.childColumns;
@@ -17994,7 +18039,7 @@
                   return a.position - b.position;
                 }).forEach(function (c) {
                   if (transform.joinDuplicateStrategy !== _shared_shared_models__WEBPACK_IMPORTED_MODULE_1__["eDuplicateStrategy"].MergeValidDates || c.deltaType !== _shared_shared_models__WEBPACK_IMPORTED_MODULE_1__["eDeltaType"].ValidFromDate && c.deltaType !== _shared_shared_models__WEBPACK_IMPORTED_MODULE_1__["eDeltaType"].ValidToDate) {
-                    var jc = _this142.copyDatalinkColumn(c, joinPos++, transform.joinDatalinkTable.name);
+                    var jc = _this144.copyDatalinkColumn(c, joinPos++, transform.joinDatalinkTable.name);
 
                     joinColumns.push(jc);
                   }
@@ -18012,7 +18057,7 @@
                   if (!transformColumns.find(function (c) {
                     return c.name === concat.name;
                   })) {
-                    transformColumns.push(_this142.copyDatalinkColumn(concat, pos++, 'Concatenate'));
+                    transformColumns.push(_this144.copyDatalinkColumn(concat, pos++, 'Concatenate'));
                   }
                 });
               } // add other mapped columns to the current node level.
@@ -18051,7 +18096,7 @@
                 var columns = inputColumns; // get the matching node from the inputs
 
                 if (nodeColumn) {
-                  var node = _this142.findNodeColumn(nodeColumn, columns);
+                  var node = _this144.findNodeColumn(nodeColumn, columns);
 
                   if (node) {
                     columns = node.childColumns;
@@ -18062,7 +18107,7 @@
                   if (transformColumns.findIndex(function (c) {
                     return c.name === column.name && c.columnGroup === column.columnGroup;
                   }) < 0) {
-                    var newColumn = _this142.copyDatalinkColumn(column, pos++, column.columnGroup);
+                    var newColumn = _this144.copyDatalinkColumn(column, pos++, column.columnGroup);
 
                     if (transform.joinDuplicateStrategy === _shared_shared_models__WEBPACK_IMPORTED_MODULE_1__["eDuplicateStrategy"].MergeValidDates && (newColumn.deltaType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_1__["eDeltaType"].ValidFromDate || newColumn.deltaType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_1__["eDeltaType"].ValidToDate)) {
                       newColumn.columnGroup = 'merged';
@@ -18091,7 +18136,7 @@
 
             datalink.dexihDatalinkTargets.forEach(function (target) {
               if (target.nodeDatalinkColumn) {
-                var validColumns = _this142.validColumns(target.nodeDatalinkColumn.key, targetColumns);
+                var validColumns = _this144.validColumns(target.nodeDatalinkColumn.key, targetColumns);
 
                 target['runTime'] = {
                   inputColumns: validColumns
@@ -18138,7 +18183,7 @@
         }, {
           key: "createDatalinkImpact",
           value: function createDatalinkImpact(useNextTransform) {
-            var _this143 = this;
+            var _this145 = this;
 
             this.impactTree = [];
             var newMappingStatus = _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].NotMapped;
@@ -18157,7 +18202,7 @@
 
                 case eDatalinkObjectType.Transform:
                   var transforms = this.datalink.dexihDatalinkTransforms.filter(function (c) {
-                    return c.position > _this143.datalinkTransform.position;
+                    return c.position > _this145.datalinkTransform.position;
                   }).sort(function (a, b) {
                     return a.position - b.position;
                   });
@@ -18195,24 +18240,24 @@
                 switch (item.transformItemType) {
                   case _shared_shared_models__WEBPACK_IMPORTED_MODULE_1__["eTransformItemType"].Column:
                     // if this column is mapped, then add it to the impact tree.
-                    if (item.sourceDatalinkColumn && item.sourceDatalinkColumn.key === _this143.datalinkColumn.key) {
+                    if (item.sourceDatalinkColumn && item.sourceDatalinkColumn.key === _this145.datalinkColumn.key) {
                       var column = item.sourceDatalinkColumn;
 
                       if (column) {
-                        var newImpactTree = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Mapping, _this143.datalink, column, null, nextTransform, null, _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Mapped, _this143.hubCache);
+                        var newImpactTree = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Mapping, _this145.datalink, column, null, nextTransform, null, _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Mapped, _this145.hubCache);
                         var newStatus = newImpactTree.createDatalinkImpact(true);
 
                         if (newStatus < newMappingStatus) {
                           newMappingStatus = newStatus;
                         }
 
-                        _this143.impactTree.push(newImpactTree);
+                        _this145.impactTree.push(newImpactTree);
 
-                        if (column.name === _this143.datalinkColumn.name) {
+                        if (column.name === _this145.datalinkColumn.name) {
                           columnIsMapped = true;
                         }
                       } else {
-                        _this143.mappingStatus = _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Error;
+                        _this145.mappingStatus = _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Error;
                         return _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Error;
                       }
                     }
@@ -18221,11 +18266,11 @@
 
                   case _shared_shared_models__WEBPACK_IMPORTED_MODULE_1__["eTransformItemType"].ColumnPair:
                     // if this column is mapped, then add it to the impact tree.
-                    if (item.sourceDatalinkColumn && item.sourceDatalinkColumn.key === _this143.datalinkColumn.key && item.targetDatalinkColumn) {
+                    if (item.sourceDatalinkColumn && item.sourceDatalinkColumn.key === _this145.datalinkColumn.key && item.targetDatalinkColumn) {
                       var _column = item.targetDatalinkColumn;
 
                       if (_column) {
-                        var _newImpactTree = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Mapping, _this143.datalink, _column, null, nextTransform, null, _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Mapped, _this143.hubCache);
+                        var _newImpactTree = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Mapping, _this145.datalink, _column, null, nextTransform, null, _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Mapped, _this145.hubCache);
 
                         var _newStatus = _newImpactTree.createDatalinkImpact(true);
 
@@ -18233,13 +18278,13 @@
                           newMappingStatus = _newStatus;
                         }
 
-                        _this143.impactTree.push(_newImpactTree);
+                        _this145.impactTree.push(_newImpactTree);
 
-                        if (item.targetDatalinkColumn.name === _this143.datalinkColumn.name) {
+                        if (item.targetDatalinkColumn.name === _this145.datalinkColumn.name) {
                           columnIsMapped = true;
                         }
                       } else {
-                        _this143.mappingStatus = _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Error;
+                        _this145.mappingStatus = _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Error;
                         return _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Error;
                       }
                     }
@@ -18249,18 +18294,18 @@
                   case _shared_shared_models__WEBPACK_IMPORTED_MODULE_1__["eTransformItemType"].BuiltInFunction:
                   case _shared_shared_models__WEBPACK_IMPORTED_MODULE_1__["eTransformItemType"].CustomFunction:
                     // if the column is part of a function parameter, then add it to the tree.
-                    var inputParams = _this143.flattenParameters(item.dexihFunctionParameters.filter(function (p) {
+                    var inputParams = _this145.flattenParameters(item.dexihFunctionParameters.filter(function (p) {
                       return _hub_models__WEBPACK_IMPORTED_MODULE_0__["HubCache"].parameterIsInput(p);
                     }));
 
                     inputParams.forEach(function (inputParam) {
-                      if (inputParam.datalinkColumn && inputParam.datalinkColumn.key === _this143.datalinkColumn.key) {
+                      if (inputParam.datalinkColumn && inputParam.datalinkColumn.key === _this145.datalinkColumn.key) {
                         // add the target column (if mapped)
                         if (item.targetDatalinkColumn) {
                           var _column2 = item.targetDatalinkColumn;
 
                           if (_column2) {
-                            var _newImpactTree2 = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Function, _this143.datalink, _column2, null, nextTransform, item, _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Mapped, _this143.hubCache);
+                            var _newImpactTree2 = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Function, _this145.datalink, _column2, null, nextTransform, item, _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Mapped, _this145.hubCache);
 
                             var _newStatus2 = _newImpactTree2.createDatalinkImpact(true);
 
@@ -18268,18 +18313,18 @@
                               newMappingStatus = _newStatus2;
                             }
 
-                            _this143.impactTree.push(_newImpactTree2);
+                            _this145.impactTree.push(_newImpactTree2);
 
-                            if (_column2.name === _this143.datalinkColumn.name) {
+                            if (_column2.name === _this145.datalinkColumn.name) {
                               columnIsMapped = true;
                             }
                           } else {
-                            _this143.mappingStatus = _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Error;
+                            _this145.mappingStatus = _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Error;
                             return _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Error;
                           }
                         }
 
-                        var outParams = _this143.flattenParameters(item.dexihFunctionParameters.filter(function (p) {
+                        var outParams = _this145.flattenParameters(item.dexihFunctionParameters.filter(function (p) {
                           return _hub_models__WEBPACK_IMPORTED_MODULE_0__["HubCache"].parameterIsOutput(p);
                         })); // add any output parameters
 
@@ -18289,7 +18334,7 @@
                             var _column3 = outParam.datalinkColumn;
 
                             if (_column3) {
-                              var _newImpactTree3 = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Function, _this143.datalink, _column3, null, nextTransform, item, _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Mapped, _this143.hubCache);
+                              var _newImpactTree3 = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Function, _this145.datalink, _column3, null, nextTransform, item, _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Mapped, _this145.hubCache);
 
                               var _newStatus3 = _newImpactTree3.createDatalinkImpact(true);
 
@@ -18297,13 +18342,13 @@
                                 newMappingStatus = _newStatus3;
                               }
 
-                              _this143.impactTree.push(_newImpactTree3);
+                              _this145.impactTree.push(_newImpactTree3);
 
-                              if (_column3.name === _this143.datalinkColumn.name) {
+                              if (_column3.name === _this145.datalinkColumn.name) {
                                 columnIsMapped = true;
                               }
                             } else {
-                              _this143.mappingStatus = _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Error;
+                              _this145.mappingStatus = _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Error;
                               return _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Error;
                             }
                           }
@@ -18314,18 +18359,18 @@
 
                   case _shared_shared_models__WEBPACK_IMPORTED_MODULE_1__["eTransformItemType"].JoinPair:
                     // if this column part of a join add it.
-                    if (item.sourceDatalinkColumn && item.sourceDatalinkColumn.key === _this143.datalinkColumn.key) {
+                    if (item.sourceDatalinkColumn && item.sourceDatalinkColumn.key === _this145.datalinkColumn.key) {
                       var joinTable = nextTransform.joinDatalinkTable;
 
                       if (joinTable) {
                         var _column4 = item.joinDatalinkColumn;
 
                         if (_column4) {
-                          var _newImpactTree4 = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Join, _this143.datalink, _column4, null, nextTransform, item, _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Joined, _this143.hubCache);
+                          var _newImpactTree4 = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Join, _this145.datalink, _column4, null, nextTransform, item, _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Joined, _this145.hubCache);
 
-                          _this143.impactTree.push(_newImpactTree4);
+                          _this145.impactTree.push(_newImpactTree4);
                         } else {
-                          _this143.mappingStatus = _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Error;
+                          _this145.mappingStatus = _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Error;
                           return _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Error;
                         }
                       } else {
@@ -18337,10 +18382,10 @@
 
                   case _shared_shared_models__WEBPACK_IMPORTED_MODULE_1__["eTransformItemType"].Sort:
                     // if this column part of a sort, add it.
-                    if (item.sourceDatalinkColumn && item.sourceDatalinkColumn.key === _this143.datalinkColumn.key) {
-                      var _newImpactTree5 = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Sort, _this143.datalink, _this143.datalinkColumn, null, nextTransform, item, _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Sorted, _this143.hubCache);
+                    if (item.sourceDatalinkColumn && item.sourceDatalinkColumn.key === _this145.datalinkColumn.key) {
+                      var _newImpactTree5 = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Sort, _this145.datalink, _this145.datalinkColumn, null, nextTransform, item, _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Sorted, _this145.hubCache);
 
-                      _this143.impactTree.push(_newImpactTree5);
+                      _this145.impactTree.push(_newImpactTree5);
                     }
 
                     break;
@@ -18375,7 +18420,7 @@
 
                   if (table) {
                     var column = table.dexihTableColumns.find(function (c) {
-                      return c.isValid && c.name === _this143.datalinkColumn.name;
+                      return c.isValid && c.name === _this145.datalinkColumn.name;
                     });
 
                     if (column) {
@@ -18435,7 +18480,7 @@
         }, {
           key: "createDatalinkLineage",
           value: function createDatalinkLineage(usePreviousTransform) {
-            var _this144 = this;
+            var _this146 = this;
 
             this.lineageTree = [];
             var newMappingStatus = _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].NotMapped;
@@ -18455,7 +18500,7 @@
 
                 case eDatalinkObjectType.Transform:
                   var transforms = this.datalink.dexihDatalinkTransforms.filter(function (c) {
-                    return c.position < _this144.datalinkTransform.position;
+                    return c.position < _this146.datalinkTransform.position;
                   }).sort(function (a, b) {
                     return a.position - b.position;
                   }); // sort asc
@@ -18483,7 +18528,7 @@
 
                     if (this.tableColumn) {
                       var column = previousTransform['runTime'].outputColumns.find(function (c) {
-                        return c.name === _this144.tableColumn.name;
+                        return c.name === _this146.tableColumn.name;
                       });
 
                       if (column) {
@@ -18497,7 +18542,7 @@
                       var outputs = this.datalink.sourceDatalinkTable.dexihDatalinkColumns;
 
                       var _column5 = outputs.find(function (c) {
-                        return c.name === _this144.tableColumn.name;
+                        return c.name === _this146.tableColumn.name;
                       });
 
                       if (_column5) {
@@ -18535,14 +18580,14 @@
                   case _shared_shared_models__WEBPACK_IMPORTED_MODULE_1__["eTransformItemType"].Column:
                     // if this column is mapped, then add it to the impact tree.
                     if (item.sourceDatalinkColumn && item.sourceDatalinkColumn.key) {
-                      var newLineageTree = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Mapping, _this144.datalink, item.sourceDatalinkColumn, null, previousTransform, null, _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Mapped, _this144.hubCache);
+                      var newLineageTree = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Mapping, _this146.datalink, item.sourceDatalinkColumn, null, previousTransform, null, _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Mapped, _this146.hubCache);
                       var newStatus = newLineageTree.createDatalinkLineage(true);
 
                       if (newStatus < newMappingStatus) {
                         newMappingStatus = newStatus;
                       }
 
-                      _this144.lineageTree.push(newLineageTree); // if (item.sourceDatalinkColumn.name === this.datalinkColumn.name) {
+                      _this146.lineageTree.push(newLineageTree); // if (item.sourceDatalinkColumn.name === this.datalinkColumn.name) {
 
 
                       columnIsMapped = true; // }
@@ -18553,7 +18598,7 @@
                   case _shared_shared_models__WEBPACK_IMPORTED_MODULE_1__["eTransformItemType"].ColumnPair:
                     // if this column is mapped, then add it to the impact tree.
                     if (item.targetDatalinkColumn && item.targetDatalinkColumn.key === currentColumn.key && item.sourceDatalinkColumn) {
-                      var _newLineageTree = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Mapping, _this144.datalink, item.sourceDatalinkColumn, null, previousTransform, null, _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Mapped, _this144.hubCache);
+                      var _newLineageTree = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Mapping, _this146.datalink, item.sourceDatalinkColumn, null, previousTransform, null, _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Mapped, _this146.hubCache);
 
                       var _newStatus4 = _newLineageTree.createDatalinkLineage(true);
 
@@ -18561,7 +18606,7 @@
                         newMappingStatus = _newStatus4;
                       }
 
-                      _this144.lineageTree.push(_newLineageTree); // if (item.sourceDatalinkColumn.name === this.datalinkColumn.name) {
+                      _this146.lineageTree.push(_newLineageTree); // if (item.sourceDatalinkColumn.name === this.datalinkColumn.name) {
 
 
                       columnIsMapped = true; // }
@@ -18575,7 +18620,7 @@
                     if (item.targetDatalinkColumn && item.targetDatalinkColumn.key === currentColumn.key) {
                       newMappingStatus = _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Mapped;
 
-                      var inputParams = _this144.flattenParameters(item.dexihFunctionParameters.filter(function (p) {
+                      var inputParams = _this146.flattenParameters(item.dexihFunctionParameters.filter(function (p) {
                         return _hub_models__WEBPACK_IMPORTED_MODULE_0__["HubCache"].parameterIsOutput(p);
                       }));
 
@@ -18583,7 +18628,7 @@
                         return c.datalinkColumn;
                       }).forEach(function (inParam) {
                         if (inParam.datalinkColumn) {
-                          var _newLineageTree2 = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Function, _this144.datalink, inParam.datalinkColumn, null, previousTransform, item, _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Mapped, _this144.hubCache);
+                          var _newLineageTree2 = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Function, _this146.datalink, inParam.datalinkColumn, null, previousTransform, item, _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Mapped, _this146.hubCache);
 
                           var _newStatus5 = _newLineageTree2.createDatalinkLineage(true);
 
@@ -18591,7 +18636,7 @@
                             newMappingStatus = _newStatus5;
                           }
 
-                          _this144.lineageTree.push(_newLineageTree2); // if (inParam.datalinkColumn.name === this.datalinkColumn.name) {
+                          _this146.lineageTree.push(_newLineageTree2); // if (inParam.datalinkColumn.name === this.datalinkColumn.name) {
 
 
                           columnIsMapped = true; // }
@@ -18600,7 +18645,7 @@
                     } // add any output parameters
 
 
-                    var outParams = _this144.flattenParameters(item.dexihFunctionParameters.filter(function (p) {
+                    var outParams = _this146.flattenParameters(item.dexihFunctionParameters.filter(function (p) {
                       return _hub_models__WEBPACK_IMPORTED_MODULE_0__["HubCache"].parameterIsOutput(p);
                     }));
 
@@ -18613,7 +18658,7 @@
                           return _hub_models__WEBPACK_IMPORTED_MODULE_0__["HubCache"].parameterIsOutput(p) && p.datalinkColumn;
                         }).forEach(function (inParam) {
                           if (inParam.datalinkColumn) {
-                            var _newLineageTree3 = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Function, _this144.datalink, inParam.datalinkColumn, null, previousTransform, item, _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Mapped, _this144.hubCache);
+                            var _newLineageTree3 = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Function, _this146.datalink, inParam.datalinkColumn, null, previousTransform, item, _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Mapped, _this146.hubCache);
 
                             var _newStatus6 = _newLineageTree3.createDatalinkLineage(true);
 
@@ -18621,7 +18666,7 @@
                               newMappingStatus = _newStatus6;
                             }
 
-                            _this144.lineageTree.push(_newLineageTree3); // if (inParam.datalinkColumn.name === this.datalinkColumn.name) {
+                            _this146.lineageTree.push(_newLineageTree3); // if (inParam.datalinkColumn.name === this.datalinkColumn.name) {
 
 
                             columnIsMapped = true; // }
@@ -18638,9 +18683,9 @@
                       var _column6 = item.joinDatalinkColumn;
 
                       if (table && _column6) {
-                        var _newLineageTree4 = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Join, _this144.datalink, _column6, null, previousTransform, item, _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Joined, _this144.hubCache);
+                        var _newLineageTree4 = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Join, _this146.datalink, _column6, null, previousTransform, item, _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Joined, _this146.hubCache);
 
-                        _this144.lineageTree.push(_newLineageTree4);
+                        _this146.lineageTree.push(_newLineageTree4);
                       } else {
                         return _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Error;
                       }
@@ -18651,9 +18696,9 @@
                   case _shared_shared_models__WEBPACK_IMPORTED_MODULE_1__["eTransformItemType"].Sort:
                     // if this column part of a sort, add it.
                     if (item.sourceDatalinkColumn && item.sourceDatalinkColumn.key === currentColumn.key) {
-                      var _newLineageTree5 = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Sort, _this144.datalink, currentColumn, null, previousTransform, item, _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Sorted, _this144.hubCache);
+                      var _newLineageTree5 = new ColumnUsageNode(eDatalinkObjectType.Transform, eObjectUse.Sort, _this146.datalink, currentColumn, null, previousTransform, item, _hub_models__WEBPACK_IMPORTED_MODULE_0__["eMappingStatus"].Sorted, _this146.hubCache);
 
-                      _this144.lineageTree.push(_newLineageTree5);
+                      _this146.lineageTree.push(_newLineageTree5);
                     }
 
                     break;
@@ -19430,12 +19475,12 @@
         }, {
           key: "getObjectTags",
           value: function getObjectTags(objectType, key) {
-            var _this145 = this;
+            var _this147 = this;
 
             var tags = this.hub.dexihTagObjects.filter(function (to) {
               return to.objectType === objectType && to.objectKey === key;
             }).map(function (to) {
-              return _this145.hub.dexihTags.find(function (e) {
+              return _this147.hub.dexihTags.find(function (e) {
                 return e.key === to.tagKey;
               });
             });
@@ -19611,13 +19656,13 @@
         }, {
           key: "getConnectionTables",
           value: function getConnectionTables() {
-            var _this146 = this;
+            var _this148 = this;
 
             var connections = [];
             this.hub.dexihConnections.forEach(function (c) {
               var newConnection = Object.assign({}, c);
 
-              var tables = _this146.hub.dexihTables.filter(function (t) {
+              var tables = _this148.hub.dexihTables.filter(function (t) {
                 return c.key === t.connectionKey && t.isValid;
               });
 
@@ -19680,7 +19725,7 @@
         }, {
           key: "search",
           value: function search(_search, searchObject) {
-            var _this147 = this;
+            var _this149 = this;
 
             var results = Array();
 
@@ -19692,76 +19737,76 @@
             var searchAll = searchObject === eSearchObjectType.All;
             this.hub.dexihConnections.forEach(function (connection) {
               if (searchAll || searchObject === eSearchObjectType.Connection) {
-                _this147.searchItem(_search, connection, null, eSearchObjectType.Connection, results);
+                _this149.searchItem(_search, connection, null, eSearchObjectType.Connection, results);
               }
             });
             this.hub.dexihTables.forEach(function (table) {
               if (searchAll || searchObject === eSearchObjectType.Table) {
-                var connection = _this147.hub.dexihConnections.find(function (c) {
+                var connection = _this149.hub.dexihConnections.find(function (c) {
                   return c.key === table.connectionKey;
                 });
 
-                _this147.searchItem(_search, table, connection, eSearchObjectType.Table, results);
+                _this149.searchItem(_search, table, connection, eSearchObjectType.Table, results);
               }
 
               if (searchAll || searchObject === eSearchObjectType.TableColumn) {
                 table.dexihTableColumns.forEach(function (column) {
-                  _this147.searchItem(_search, column, table, eSearchObjectType.TableColumn, results);
+                  _this149.searchItem(_search, column, table, eSearchObjectType.TableColumn, results);
                 });
               }
             });
 
             if (searchAll || searchObject === eSearchObjectType.Datalink) {
               this.hub.dexihDatalinks.forEach(function (datalink) {
-                _this147.searchItem(_search, datalink, null, eSearchObjectType.Datalink, results);
+                _this149.searchItem(_search, datalink, null, eSearchObjectType.Datalink, results);
               });
             }
 
             if (searchAll || searchObject === eSearchObjectType.Datajob) {
               this.hub.dexihDatajobs.forEach(function (datajob) {
-                _this147.searchItem(_search, datajob, null, eSearchObjectType.Datajob, results);
+                _this149.searchItem(_search, datajob, null, eSearchObjectType.Datajob, results);
               });
             }
 
             if (searchAll || searchObject === eSearchObjectType.ColumnValidation) {
               this.hub.dexihColumnValidations.forEach(function (columnValidation) {
-                _this147.searchItem(_search, columnValidation, null, eSearchObjectType.ColumnValidation, results);
+                _this149.searchItem(_search, columnValidation, null, eSearchObjectType.ColumnValidation, results);
               });
             }
 
             if (searchAll || searchObject === eSearchObjectType.FileFormat) {
               this.hub.dexihFileFormats.forEach(function (fileFormat) {
-                _this147.searchItem(_search, fileFormat, null, eSearchObjectType.FileFormat, results);
+                _this149.searchItem(_search, fileFormat, null, eSearchObjectType.FileFormat, results);
               });
             }
 
             if (searchAll || searchObject === eSearchObjectType.View) {
               this.hub.dexihViews.forEach(function (view) {
-                _this147.searchItem(_search, view, null, eSearchObjectType.View, results);
+                _this149.searchItem(_search, view, null, eSearchObjectType.View, results);
               });
             }
 
             if (searchAll || searchObject === eSearchObjectType.Api) {
               this.hub.dexihApis.forEach(function (api) {
-                _this147.searchItem(_search, api, null, eSearchObjectType.Api, results);
+                _this149.searchItem(_search, api, null, eSearchObjectType.Api, results);
               });
             }
 
             if (searchAll || searchObject === eSearchObjectType.Dashboard) {
               this.hub.dexihDashboards.forEach(function (d) {
-                _this147.searchItem(_search, d, null, eSearchObjectType.Dashboard, results);
+                _this149.searchItem(_search, d, null, eSearchObjectType.Dashboard, results);
               });
             }
 
             if (searchAll || searchObject === eSearchObjectType.ListOfValues) {
               this.hub.dexihListOfValues.forEach(function (d) {
-                _this147.searchItem(_search, d, null, eSearchObjectType.ListOfValues, results);
+                _this149.searchItem(_search, d, null, eSearchObjectType.ListOfValues, results);
               });
             }
 
             if (searchAll || searchObject === eSearchObjectType.DatalinkTest) {
               this.hub.dexihDatalinkTests.forEach(function (d) {
-                _this147.searchItem(_search, d, null, eSearchObjectType.DatalinkTest, results);
+                _this149.searchItem(_search, d, null, eSearchObjectType.DatalinkTest, results);
               });
             }
 
@@ -19835,7 +19880,7 @@
         }, {
           key: "getDatalinkCache",
           value: function getDatalinkCache(datalink, hub) {
-            var _this148 = this;
+            var _this150 = this;
 
             if (datalink.sourceDatalinkTable.sourceType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_1__["eSourceType"].Datalink) {
               this.cacheAddDatalink(datalink.sourceDatalinkTable.sourceDatalinkKey, hub);
@@ -19846,20 +19891,20 @@
             this.cacheAddConnection(datalink.auditConnectionKey, hub);
             this.getParametersCache(datalink.parameters, hub);
             datalink.dexihDatalinkTargets.forEach(function (target) {
-              _this148.cacheAddTable(target.tableKey, hub);
+              _this150.cacheAddTable(target.tableKey, hub);
             });
             datalink.dexihDatalinkTransforms.forEach(function (t) {
               if (t.joinDatalinkTable) {
                 if (t.joinDatalinkTable.sourceType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_1__["eSourceType"].Datalink) {
-                  _this148.cacheAddDatalink(t.joinDatalinkTable.sourceDatalinkKey, hub);
+                  _this150.cacheAddDatalink(t.joinDatalinkTable.sourceDatalinkKey, hub);
                 } else if (t.joinDatalinkTable.sourceType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_1__["eSourceType"].Table) {
-                  _this148.cacheAddTable(t.joinDatalinkTable.sourceTableKey, hub);
+                  _this150.cacheAddTable(t.joinDatalinkTable.sourceTableKey, hub);
                 }
               }
 
               t.dexihDatalinkTransformItems.forEach(function (ti) {
                 if (ti.customFunctionKey) {
-                  _this148.cacheAddCustomFunction(ti.customFunctionKey, hub);
+                  _this150.cacheAddCustomFunction(ti.customFunctionKey, hub);
                 }
               });
             });
@@ -19875,7 +19920,7 @@
         }, {
           key: "getDatalinkTestCache",
           value: function getDatalinkTestCache(datalinkTest, hub) {
-            var _this149 = this;
+            var _this151 = this;
 
             datalinkTest.dexihDatalinkTestSteps.forEach(function (step) {
               var datalinkDup = hub.dexihDatalinks.find(function (c) {
@@ -19883,25 +19928,25 @@
               });
 
               if (!datalinkDup) {
-                var datalink = _this149.hub.dexihDatalinks.find(function (c) {
+                var datalink = _this151.hub.dexihDatalinks.find(function (c) {
                   return c.key === step.datalinkKey;
                 });
 
                 if (datalink) {
-                  _this149.getDatalinkCache(datalink, hub);
+                  _this151.getDatalinkCache(datalink, hub);
 
                   hub.dexihDatalinks.push(datalink);
                 }
               }
 
-              _this149.cacheAddConnection(step.expectedConnectionKey, hub);
+              _this151.cacheAddConnection(step.expectedConnectionKey, hub);
 
-              _this149.cacheAddConnection(step.targetConnectionKey, hub);
+              _this151.cacheAddConnection(step.targetConnectionKey, hub);
 
               step.dexihDatalinkTestTables.forEach(function (c) {
-                _this149.cacheAddConnection(c.sourceConnectionKey, hub);
+                _this151.cacheAddConnection(c.sourceConnectionKey, hub);
 
-                _this149.cacheAddConnection(c.testConnectionKey, hub);
+                _this151.cacheAddConnection(c.testConnectionKey, hub);
               });
             });
             return hub;
@@ -19915,24 +19960,24 @@
         }, {
           key: "getDatajobCache",
           value: function getDatajobCache(datajob, hub) {
-            var _this150 = this;
+            var _this152 = this;
 
             this.cacheAddConnection(datajob.auditConnectionKey, hub);
             this.getParametersCache(datajob.parameters, hub);
             datajob.dexihDatalinkSteps.forEach(function (step) {
-              _this150.getParametersCache(step.parameters, hub);
+              _this152.getParametersCache(step.parameters, hub);
 
               var datalinkDup = hub.dexihDatalinks.find(function (c) {
                 return c.key === step.datalinkKey;
               });
 
               if (!datalinkDup) {
-                var datalink = _this150.hub.dexihDatalinks.find(function (c) {
+                var datalink = _this152.hub.dexihDatalinks.find(function (c) {
                   return c.key === step.datalinkKey;
                 });
 
                 if (datalink) {
-                  _this150.getDatalinkCache(datalink, hub);
+                  _this152.getDatalinkCache(datalink, hub);
 
                   hub.dexihDatalinks.push(datalink);
                 }
@@ -19961,10 +20006,10 @@
         }, {
           key: "getDashboardCache",
           value: function getDashboardCache(dashboard, hub) {
-            var _this151 = this;
+            var _this153 = this;
 
             dashboard.dexihDashboardItems.forEach(function (item) {
-              _this151.cacheAddView(item.viewKey, hub);
+              _this153.cacheAddView(item.viewKey, hub);
             });
             this.getParametersCache(dashboard.parameters, hub);
             return hub;
@@ -19972,10 +20017,10 @@
         }, {
           key: "getParametersCache",
           value: function getParametersCache(parameters, hub) {
-            var _this152 = this;
+            var _this154 = this;
 
             parameters.forEach(function (parameter) {
-              _this152.cacheAddListOfValues(parameter.listOfValuesKey, hub);
+              _this154.cacheAddListOfValues(parameter.listOfValuesKey, hub);
             });
             return hub;
           }
@@ -19997,7 +20042,7 @@
         }, {
           key: "getSharedObjects",
           value: function getSharedObjects() {
-            var _this153 = this;
+            var _this155 = this;
 
             var data = [];
             sharedObjectProperties.forEach(function (o) {
@@ -20009,11 +20054,11 @@
                 });
               }
 
-              data = data.concat(_this153.hub[o.cacheProperty].map(function (item) {
+              data = data.concat(_this155.hub[o.cacheProperty].map(function (item) {
                 var parentItem;
 
                 if (parentObject) {
-                  parentItem = _this153.hub[parentObject.cacheProperty].find(function (c) {
+                  parentItem = _this155.hub[parentObject.cacheProperty].find(function (c) {
                     return c.key === item[o.parentKey];
                   });
                 }
@@ -20027,7 +20072,7 @@
                   name: (parentItem ? "(".concat(parentItem.name, ") ") : '') + item.name,
                   description: item.description,
                   updateDate: item.updateDate,
-                  tags: _this153.getObjectTags(o.type, item.key)
+                  tags: _this155.getObjectTags(o.type, item.key)
                 };
                 return obj;
               }));
@@ -20150,7 +20195,7 @@
         }, {
           key: "cacheAddTable",
           value: function cacheAddTable(tableKey, hub) {
-            var _this154 = this;
+            var _this156 = this;
 
             if (tableKey > 0) {
               var table = hub.dexihTables.find(function (t) {
@@ -20170,7 +20215,7 @@
 
                   table.dexihTableColumns.forEach(function (c) {
                     if (c.columnValidationKey) {
-                      _this154.cacheAddColumnValidation(c.columnValidationKey, hub);
+                      _this156.cacheAddColumnValidation(c.columnValidationKey, hub);
                     }
                   });
                 }
@@ -20272,7 +20317,7 @@
         }, {
           key: "cacheAddDashboard",
           value: function cacheAddDashboard(dashboardKey, hub) {
-            var _this155 = this;
+            var _this157 = this;
 
             if (dashboardKey > 0) {
               var dup = hub.dexihDashboards.find(function (c) {
@@ -20288,7 +20333,7 @@
                   dashboard.dexihDashboardItems.filter(function (c) {
                     return c.viewKey > 0;
                   }).forEach(function (item) {
-                    _this155.cacheAddView(item.viewKey, hub);
+                    _this157.cacheAddView(item.viewKey, hub);
                   });
                   return dashboard;
                 }
@@ -20429,7 +20474,7 @@
         }, {
           key: "CopyDatalink",
           value: function CopyDatalink(originalDatalink) {
-            var _this156 = this;
+            var _this158 = this;
 
             var copyDatalink = Object.assign({}, originalDatalink);
             copyDatalink.name = copyDatalink.name + ' (copy)';
@@ -20441,7 +20486,7 @@
               copyDatalink.sourceDatalinkTable.dexihDatalinkColumns.forEach(function (c) {
                 c.datalinkTableKey = null;
 
-                var key = _this156.getNextSequence();
+                var key = _this158.getNextSequence();
 
                 datalinkColumnKeys[c.key] = key;
                 c.key = key;
@@ -20451,14 +20496,14 @@
             copyDatalink.dexihDatalinkTransforms.sort(function (a, b) {
               return a.position - b.position;
             }).forEach(function (t) {
-              t.key = _this156.getNextSequence();
+              t.key = _this158.getNextSequence();
 
               if (t.joinDatalinkTable) {
                 t.joinDatalinkTable.key = null;
                 t.joinDatalinkTable.dexihDatalinkColumns.forEach(function (c) {
                   c.datalinkTableKey = null;
 
-                  var key = _this156.getNextSequence();
+                  var key = _this158.getNextSequence();
 
                   datalinkColumnKeys[c.key] = key;
                   c.key = key;
@@ -20467,7 +20512,7 @@
 
               t.dexihDatalinkTransformItems.forEach(function (i) {
                 i.datalinkTransformKey = t.key;
-                i.key = _this156.getNextSequence();
+                i.key = _this158.getNextSequence();
 
                 if (i.filterDatalinkColumn) {
                   i.filterDatalinkColumn.key = datalinkColumnKeys[i.filterDatalinkColumn.key];
@@ -20482,7 +20527,7 @@
                 }
 
                 if (i.targetDatalinkColumn) {
-                  var key = _this156.getNextSequence();
+                  var key = _this158.getNextSequence();
 
                   datalinkColumnKeys[i.targetDatalinkColumn.key] = key;
                   i.targetDatalinkColumn.key = key;
@@ -20490,13 +20535,13 @@
 
                 i.dexihFunctionParameters.forEach(function (p) {
                   p.datalinkTransformItemKey = i.key;
-                  p.key = _this156.getNextSequence();
+                  p.key = _this158.getNextSequence();
 
                   if (p.datalinkColumn) {
                     if (p.direction === _shared_shared_models__WEBPACK_IMPORTED_MODULE_1__["eParameterDirection"].Input) {
                       p.datalinkColumn.key = datalinkColumnKeys[p.datalinkColumn.key];
                     } else {
-                      var _key = _this156.getNextSequence();
+                      var _key = _this158.getNextSequence();
 
                       datalinkColumnKeys[p.datalinkColumn.key] = _key;
                       p.datalinkColumn.key = _key;
@@ -20560,17 +20605,17 @@
         _createClass(DataCache, [{
           key: "refresh",
           value: function refresh(previewQuery) {
-            var _this157 = this;
+            var _this159 = this;
 
             this.isRefreshing = true;
             previewQuery.then(function (result) {
-              _this157.data.next(result);
+              _this159.data.next(result);
 
-              _this157.isRefreshing = false;
+              _this159.isRefreshing = false;
             })["catch"](function () {
-              _this157.data.next(null);
+              _this159.data.next(null);
 
-              _this157.isRefreshing = false;
+              _this159.isRefreshing = false;
             });
           }
         }]);
@@ -22428,7 +22473,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -22452,7 +22497,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -22482,7 +22527,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 
       var HubModule = /*#__PURE__*/function () {
         function HubModule() {
@@ -23305,7 +23350,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -23381,7 +23426,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -23465,7 +23510,7 @@
 
       var HubService = /*#__PURE__*/function () {
         function HubService(authService) {
-          var _this158 = this;
+          var _this160 = this;
 
           _classCallCheck(this, HubService);
 
@@ -23494,7 +23539,7 @@
 
           this._webSocketSubscription = this.authService.getWebSocketObservable().subscribe(function (message) {
             if (message) {
-              _this158.processWebSocketMessage(message);
+              _this160.processWebSocketMessage(message);
             }
           });
           this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["combineLatest"])(authService.getGlobalCacheObservable(), this.authService.getHubsObservable(), this.getHubCacheObservable(), this.authService.getRemoteAgentsObservable()).subscribe(function (result) {
@@ -23504,7 +23549,7 @@
 
             if (hubCache && hubCache.hub && globalCache) {
               // if remote libraries are not loaded (from remoteAgent) then use the default.
-              if (!_this158._remoteLibraries.value) {
+              if (!_this160._remoteLibraries.value) {
                 var remoteLibraries = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_7__["RemoteLibraries"]();
 
                 if (globalCache && globalCache.defaultRemoteLibraries) {
@@ -23512,7 +23557,7 @@
                   remoteLibraries.transforms = globalCache.defaultRemoteLibraries.transforms;
                   remoteLibraries.functions = globalCache.defaultRemoteLibraries.functions;
 
-                  _this158._remoteLibraries.next(remoteLibraries);
+                  _this160._remoteLibraries.next(remoteLibraries);
                 }
               } // // if the hub is not available, reset.
               // if (hubs) {
@@ -23527,7 +23572,7 @@
               // }
 
 
-              _this158.resetRemoteAgent(hubCache);
+              _this160.resetRemoteAgent(hubCache);
             }
           });
         }
@@ -23847,7 +23892,7 @@
           key: "resetRemoteAgent",
           value: function resetRemoteAgent(hubCache) {
             return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee19() {
-              var _this159 = this;
+              var _this161 = this;
 
               var _ret3;
 
@@ -23876,17 +23921,17 @@
                                   break;
                                 }
 
-                                _this159.setNoRemoteAgent(hubCache);
+                                _this161.setNoRemoteAgent(hubCache);
 
                                 return _context20.abrupt("return", {
                                   v: void 0
                                 });
 
                               case 3:
-                                _this159.isResettingRemoteAgent = true;
-                                activeAgent = _this159._remoteAgent.value;
+                                _this161.isResettingRemoteAgent = true;
+                                activeAgent = _this161._remoteAgent.value;
                                 _context20.next = 7;
-                                return _this159.authService.getRemoteAgentsPromise();
+                                return _this161.authService.getRemoteAgentsPromise();
 
                               case 7:
                                 remoteAgents = _context20.sent;
@@ -23896,7 +23941,7 @@
                                   break;
                                 }
 
-                                _this159.setNoRemoteAgent(hubCache);
+                                _this161.setNoRemoteAgent(hubCache);
 
                                 return _context20.abrupt("return", {
                                   v: void 0
@@ -23949,10 +23994,10 @@
                                             break;
                                           }
 
-                                          _this159._remoteAgent.next(remoteAgent['activeAgents'][0]);
+                                          _this161._remoteAgent.next(remoteAgent['activeAgents'][0]);
 
                                           _context18.next = 5;
-                                          return _this159.getRemoteAgentStatus(hubCache);
+                                          return _this161.getRemoteAgentStatus(hubCache);
 
                                         case 5:
                                           return _context18.abrupt("return", {
@@ -24012,10 +24057,10 @@
                                             break;
                                           }
 
-                                          _this159._remoteAgent.next(remoteAgent['activeAgents'][0]);
+                                          _this161._remoteAgent.next(remoteAgent['activeAgents'][0]);
 
                                           _context19.next = 5;
-                                          return _this159.getRemoteAgentStatus(hubCache);
+                                          return _this161.getRemoteAgentStatus(hubCache);
 
                                         case 5:
                                           return _context19.abrupt("return", {
@@ -24057,7 +24102,7 @@
                                 break;
 
                               case 38:
-                                _this159.setNoRemoteAgent(hubCache);
+                                _this161.setNoRemoteAgent(hubCache);
 
                               case 39:
                               case "end":
@@ -24170,10 +24215,10 @@
         }, {
           key: "GetConnectionReference",
           value: function GetConnectionReference(connection) {
-            var _this160 = this;
+            var _this162 = this;
 
             return new Promise(function (resolve, reject) {
-              _this160.getRemoteLibrariesPromise().then(function (remoteLibraries) {
+              _this162.getRemoteLibrariesPromise().then(function (remoteLibraries) {
                 if (connection) {
                   var ref = remoteLibraries.connections.find(function (c) {
                     return c.connectionAssemblyName === connection.connectionAssemblyName && c.connectionClassName === connection.connectionClassName;
@@ -24191,10 +24236,10 @@
         }, {
           key: "GetUserConfigTransformReference",
           value: function GetUserConfigTransformReference() {
-            var _this161 = this;
+            var _this163 = this;
 
             return new Promise(function (resolve, reject) {
-              _this161.getRemoteLibrariesPromise().then(function (remoteLibraries) {
+              _this163.getRemoteLibrariesPromise().then(function (remoteLibraries) {
                 var userConfig = _hub_remote_models__WEBPACK_IMPORTED_MODULE_6__["transformTypes"].filter(function (c) {
                   return c.allowUserConfig;
                 });
@@ -24212,10 +24257,10 @@
         }, {
           key: "GetFunctionReference",
           value: function GetFunctionReference(item) {
-            var _this162 = this;
+            var _this164 = this;
 
             return new Promise(function (resolve, reject) {
-              _this162.getRemoteLibrariesPromise().then(function (remoteLibraries) {
+              _this164.getRemoteLibrariesPromise().then(function (remoteLibraries) {
                 if (item) {
                   var ref = remoteLibraries.functions.find(function (c) {
                     return c.functionAssemblyName === item.functionAssemblyName && c.functionClassName === item.functionClassName && c.functionMethodName === item.functionMethodName;
@@ -24232,10 +24277,10 @@
         }, {
           key: "GetFunctionsByType",
           value: function GetFunctionsByType(functionType) {
-            var _this163 = this;
+            var _this165 = this;
 
             return new Promise(function (resolve, reject) {
-              _this163.getRemoteLibrariesPromise().then(function (remoteLibraries) {
+              _this165.getRemoteLibrariesPromise().then(function (remoteLibraries) {
                 resolve(remoteLibraries.functions.filter(function (c) {
                   return c.functionType === functionType;
                 }));
@@ -24371,7 +24416,7 @@
         }, {
           key: "mergeChange",
           value: function mergeChange(source, target, keyField, changeClass) {
-            var _this164 = this;
+            var _this166 = this;
 
             if (source && source.length > 0) {
               source.forEach(function (item) {
@@ -24431,14 +24476,14 @@
 
                 }
 
-                _this164._hubCacheChange.next(new _hub_models__WEBPACK_IMPORTED_MODULE_5__["HubCacheChange"](changeClass, item.importAction, current));
+                _this166._hubCacheChange.next(new _hub_models__WEBPACK_IMPORTED_MODULE_5__["HubCacheChange"](changeClass, item.importAction, current));
               });
             }
           }
         }, {
           key: "mergeChangeTagObjects",
           value: function mergeChangeTagObjects(source, target) {
-            var _this165 = this;
+            var _this167 = this;
 
             if (source && source.length > 0) {
               source.forEach(function (item) {
@@ -24472,7 +24517,7 @@
 
                 }
 
-                _this165._hubCacheChange.next(new _hub_models__WEBPACK_IMPORTED_MODULE_5__["HubCacheChange"](_shared_shared_models__WEBPACK_IMPORTED_MODULE_7__["eSharedObjectType"].TagObjects, item.importAction, current));
+                _this167._hubCacheChange.next(new _hub_models__WEBPACK_IMPORTED_MODULE_5__["HubCacheChange"](_shared_shared_models__WEBPACK_IMPORTED_MODULE_7__["eSharedObjectType"].TagObjects, item.importAction, current));
               });
             }
           }
@@ -24493,7 +24538,7 @@
         }, {
           key: "addDatalinkProgress",
           value: function addDatalinkProgress(task) {
-            var _this166 = this;
+            var _this168 = this;
 
             if (!this.isHubCacheLoaded()) {
               return;
@@ -24523,7 +24568,7 @@
 
               if (writerResult.childResults) {
                 writerResult.childResults.forEach(function (c) {
-                  _this166.addTableProgress(c);
+                  _this168.addTableProgress(c);
                 });
               }
 
@@ -24557,7 +24602,7 @@
         }, {
           key: "addTableProgress",
           value: function addTableProgress(writerResult) {
-            var _this167 = this;
+            var _this169 = this;
 
             if (!writerResult) {
               return;
@@ -24577,7 +24622,7 @@
 
               if (writerResult.childResults) {
                 writerResult.childResults.forEach(function (c) {
-                  _this167.addTableProgress(c);
+                  _this169.addTableProgress(c);
                 });
               }
             }
@@ -24621,11 +24666,11 @@
         }, {
           key: "hubPostConfirm",
           value: function hubPostConfirm(url, data, waitMessage, confirmMessage) {
-            var _this168 = this;
+            var _this170 = this;
 
             data.hubKey = this._hubKey;
             return new Promise(function (resolve, reject) {
-              _this168.authService.postConfirm(url, data, waitMessage, confirmMessage).then(function (result) {
+              _this170.authService.postConfirm(url, data, waitMessage, confirmMessage).then(function (result) {
                 resolve(result);
               })["catch"](function (reason) {
                 // reason = null is for cancel.
@@ -24634,7 +24679,7 @@
                   return;
                 }
 
-                _this168.logger.LogMessage(reason); // this.addHubMessage(reason);
+                _this170.logger.LogMessage(reason); // this.addHubMessage(reason);
 
 
                 reject(reason);
@@ -24644,15 +24689,15 @@
         }, {
           key: "hubPost",
           value: function hubPost(url, data, waitMessage) {
-            var _this169 = this;
+            var _this171 = this;
 
             data.hubKey = this._hubKey;
             return new Promise(function (resolve, reject) {
-              _this169.authService.post(url, data, waitMessage).then(function (result) {
+              _this171.authService.post(url, data, waitMessage).then(function (result) {
                 resolve(result);
               })["catch"](function (reason) {
                 if (reason) {
-                  _this169.logger.LogMessage(reason);
+                  _this171.logger.LogMessage(reason);
                 } // this.addHubMessage(reason);
 
 
@@ -24663,15 +24708,15 @@
         }, {
           key: "hubPostRemote",
           value: function hubPostRemote(url, data, waitMessage, cancelToken) {
-            var _this170 = this;
+            var _this172 = this;
 
             data.hubKey = this._hubKey;
             return new _auth_auth_models__WEBPACK_IMPORTED_MODULE_2__["PromiseWithCancel"](function (resolve, reject) {
-              _this170.authService.postRemote(url, data, _this170.getRemoteAgentCurrent(), waitMessage, cancelToken).then(function (result) {
+              _this172.authService.postRemote(url, data, _this172.getRemoteAgentCurrent(), waitMessage, cancelToken).then(function (result) {
                 resolve(result);
               })["catch"](function (reason) {
                 if (reason) {
-                  _this170.logger.LogMessage(reason);
+                  _this172.logger.LogMessage(reason);
                 } // this.addHubMessage(reason);
 
 
@@ -24682,13 +24727,13 @@
         }, {
           key: "hubPostRemoteConfirm",
           value: function hubPostRemoteConfirm(url, data, waitMessage, confirmMessage, cancelToken) {
-            var _this171 = this;
+            var _this173 = this;
 
             data.hubKey = this._hubKey;
             return new _auth_auth_models__WEBPACK_IMPORTED_MODULE_2__["PromiseWithCancel"](function (resolve, reject) {
-              _this171.authService.confirmDialog('Please confirm...', confirmMessage).then(function (confirm) {
+              _this173.authService.confirmDialog('Please confirm...', confirmMessage).then(function (confirm) {
                 if (confirm) {
-                  resolve(_this171.hubPostRemote(url, data, waitMessage, cancelToken));
+                  resolve(_this173.hubPostRemote(url, data, waitMessage, cancelToken));
                 } else {
                   reject();
                 }
@@ -24724,19 +24769,19 @@
         }, {
           key: "getRemoteAgentStatus",
           value: function getRemoteAgentStatus(hubCache) {
-            var _this172 = this;
+            var _this174 = this;
 
             return new Promise(function (resolve, reject) {
-              var remoteAgent = _this172.getRemoteAgentCurrent();
+              var remoteAgent = _this174.getRemoteAgentCurrent();
 
               if (remoteAgent) {
-                var remoteAgentPromise = _this172.hubPostRemote('/api/Hub/GetRemoteAgentStatus', {
+                var remoteAgentPromise = _this174.hubPostRemote('/api/Hub/GetRemoteAgentStatus', {
                   hubKey: hubCache.hub.hubKey
                 }, null, null);
 
-                var globalCachePromise = _this172.authService.getGlobalCachePromise();
+                var globalCachePromise = _this174.authService.getGlobalCachePromise();
 
-                var hubPromise = _this172.getHubCachePromise();
+                var hubPromise = _this174.getHubCachePromise();
 
                 Promise.all([remoteAgentPromise, globalCachePromise, hubPromise]).then(function (values) {
                   var agentStatus = values[0];
@@ -24748,7 +24793,7 @@
                   remoteLibraries.transforms = globalCache.defaultRemoteLibraries.transforms.concat(agentStatus.remoteLibraries.transforms);
                   remoteLibraries.functions = globalCache.defaultRemoteLibraries.functions.concat(agentStatus.remoteLibraries.functions);
 
-                  _this172._remoteLibraries.next(remoteLibraries);
+                  _this174._remoteLibraries.next(remoteLibraries);
 
                   hub.dexihApis.forEach(function (api) {
                     api['currentStatus'].next(agentStatus.activeApis.find(function (c) {
@@ -24757,20 +24802,20 @@
                   }); // merge the datalink/datajob status into the cached objects.
 
                   hub.dexihDatalinks.forEach(function (datalink) {
-                    datalink['currentStatus'].next(_this172.getTransformWriterResult(datalink.key, agentStatus.activeDatalinks));
-                    datalink['previousStatus'].next(_this172.getTransformWriterResult(datalink.key, agentStatus.previousDatalinks));
+                    datalink['currentStatus'].next(_this174.getTransformWriterResult(datalink.key, agentStatus.activeDatalinks));
+                    datalink['previousStatus'].next(_this174.getTransformWriterResult(datalink.key, agentStatus.previousDatalinks));
                   });
                   hub.dexihTables.forEach(function (table) {
-                    table['currentStatus'].next(_this172.getTransformWriterTable(table.key, agentStatus.activeDatalinks));
-                    table['previousStatus'].next(_this172.getTransformWriterTable(table.key, agentStatus.previousDatalinks));
+                    table['currentStatus'].next(_this174.getTransformWriterTable(table.key, agentStatus.activeDatalinks));
+                    table['previousStatus'].next(_this174.getTransformWriterTable(table.key, agentStatus.previousDatalinks));
                   });
                   hub.dexihDatajobs.forEach(function (datajob) {
-                    datajob['currentStatus'].next(_this172.getTransformWriterResult(datajob.key, agentStatus.activeDatajobs));
-                    datajob['previousStatus'].next(_this172.getTransformWriterResult(datajob.key, agentStatus.previousDatajobs));
+                    datajob['currentStatus'].next(_this174.getTransformWriterResult(datajob.key, agentStatus.activeDatajobs));
+                    datajob['previousStatus'].next(_this174.getTransformWriterResult(datajob.key, agentStatus.previousDatajobs));
                   });
                   hub.dexihDatalinkTests.forEach(function (test) {
-                    test['currentStatus'].next(_this172.getTransformWriterResult(test.key, agentStatus.activeDatalinkTests));
-                    test['previousStatus'].next(_this172.getTransformWriterResult(test.key, agentStatus.previousDatalinkTests));
+                    test['currentStatus'].next(_this174.getTransformWriterResult(test.key, agentStatus.activeDatalinkTests));
+                    test['previousStatus'].next(_this174.getTransformWriterResult(test.key, agentStatus.previousDatalinkTests));
                   });
                   resolve(true);
                 })["catch"](function (reason) {
@@ -25009,7 +25054,7 @@
         }, {
           key: "importTables",
           value: function importTables(tables, save, cancelToken) {
-            var _this173 = this;
+            var _this175 = this;
 
             // if there are any table that are already imported, then warn the over of an overwrite.
             var importedTables = tables.filter(function (c) {
@@ -25018,11 +25063,11 @@
 
             if (importedTables.length > 0) {
               return new Promise(function (resolve, reject) {
-                _this173.authService.confirmDialog('Re-Import Tables', 'This action will re-import the following tables, which will reset column customizations ' + ' (such as descriptions, column validations, delta types etc.) and may invalidate some datalink mappings. <p></p>' + importedTables.map(function (c) {
+                _this175.authService.confirmDialog('Re-Import Tables', 'This action will re-import the following tables, which will reset column customizations ' + ' (such as descriptions, column validations, delta types etc.) and may invalidate some datalink mappings. <p></p>' + importedTables.map(function (c) {
                   return c.name;
                 }).join(',') + '  <p></p><p></p>Are you sure you want to continue?').then(function (confirm) {
                   if (confirm) {
-                    _this173.doImport(tables, save, cancelToken).then(function (result) {
+                    _this175.doImport(tables, save, cancelToken).then(function (result) {
                       resolve(result);
                     })["catch"](function (reason) {
                       return reject(reason);
@@ -25041,16 +25086,16 @@
         }, {
           key: "doImport",
           value: function doImport(tables, save, cancelToken) {
-            var _this174 = this;
+            var _this176 = this;
 
             return new Promise(function (resolve, reject) {
-              _this174.hubPostRemote('/api/Hub/ImportTables', {
+              _this176.hubPostRemote('/api/Hub/ImportTables', {
                 tables: tables
               }, 'Importing tables...', cancelToken).then(function (importedTables) {
                 if (save) {
-                  resolve(_this174.saveTables(importedTables));
+                  resolve(_this176.saveTables(importedTables));
                 } else {
-                  var hub = _this174.getHubCache();
+                  var hub = _this176.getHubCache();
 
                   importedTables.forEach(function (t) {
                     t.dexihTableColumns.forEach(function (c) {
@@ -25070,10 +25115,10 @@
         }, {
           key: "reImportTables",
           value: function reImportTables(tableKeys, save, cancelToken) {
-            var _this175 = this;
+            var _this177 = this;
 
             return new Promise(function (resolve, reject) {
-              var cache = _this175._hubCache.value;
+              var cache = _this177._hubCache.value;
               var tables = [];
               tableKeys.forEach(function (tableKey) {
                 var table = cache.getTable(tableKey);
@@ -25081,9 +25126,9 @@
                 if (!table) {
                   var message = "Error: The re-import failed, as the table with the key ".concat(tableKey, " could not be found.");
 
-                  _this175.addHubErrorMessage(message);
+                  _this177.addHubErrorMessage(message);
 
-                  _this175.logger.LogC(function () {
+                  _this177.logger.LogC(function () {
                     return message;
                   }, _logging__WEBPACK_IMPORTED_MODULE_4__["eLogLevel"].Error);
 
@@ -25093,11 +25138,11 @@
                 tables.push(table);
               });
 
-              _this175.authService.confirmDialog('Re-Import Tables', 'This action will re-import the following tables, which will reset column customizations ' + ' (such as descriptions, column validations, delta types etc.) and may invalidate some datalink mappings. <p></p>' + tables.map(function (c) {
+              _this177.authService.confirmDialog('Re-Import Tables', 'This action will re-import the following tables, which will reset column customizations ' + ' (such as descriptions, column validations, delta types etc.) and may invalidate some datalink mappings. <p></p>' + tables.map(function (c) {
                 return c.name;
               }).join(',') + '  <p></p><p></p>Are you sure you want to continue?').then(function (confirm) {
                 if (confirm) {
-                  _this175.doImport(tables, save, cancelToken).then(function (result) {
+                  _this177.doImport(tables, save, cancelToken).then(function (result) {
                     resolve(result);
                   })["catch"](function (reason) {
                     reject(reason);
@@ -25113,7 +25158,7 @@
         }, {
           key: "clearTables",
           value: function clearTables(tableKeys, cancelToken) {
-            var _this176 = this;
+            var _this178 = this;
 
             var cache = this._hubCache.value;
             var tables = [];
@@ -25123,9 +25168,9 @@
               if (!table) {
                 var message = "Error: The clear tables failed, as the table with the key ".concat(tableKey, " could not be found.");
 
-                _this176.addHubErrorMessage(message);
+                _this178.addHubErrorMessage(message);
 
-                _this176.logger.LogC(function () {
+                _this178.logger.LogC(function () {
                   return message;
                 }, _logging__WEBPACK_IMPORTED_MODULE_4__["eLogLevel"].Error);
 
@@ -25485,11 +25530,11 @@
         }, {
           key: "getData",
           value: function getData(url, data, waitMessage, cancelToken) {
-            var _this177 = this;
+            var _this179 = this;
 
             return new _auth_auth_models__WEBPACK_IMPORTED_MODULE_2__["PromiseWithCancel"](function (resolve, reject) {
-              _this177.hubPostRemote(url, data, waitMessage, cancelToken).then(function (previewData) {
-                var columns = _this177.authService.constructDataTableColumns(previewData.columns);
+              _this179.hubPostRemote(url, data, waitMessage, cancelToken).then(function (previewData) {
+                var columns = _this179.authService.constructDataTableColumns(previewData.columns);
 
                 resolve({
                   name: previewData.name,
@@ -25500,7 +25545,7 @@
                   viewConfig: previewData.viewConfig
                 });
               })["catch"](function (reason) {
-                _this177.addHubMessage(reason, true, 'Preview Data');
+                _this179.addHubMessage(reason, true, 'Preview Data');
 
                 reject(reason);
               });
@@ -25582,7 +25627,7 @@
         }, {
           key: "previewDashboard",
           value: function previewDashboard(dashboard, inputParameters, cancelToken) {
-            var _this178 = this;
+            var _this180 = this;
 
             var remoteAgent = this.getRemoteAgentCurrent();
 
@@ -25593,10 +25638,10 @@
             }
 
             return new _auth_auth_models__WEBPACK_IMPORTED_MODULE_2__["PromiseWithCancel"](function (resolve, reject) {
-              _this178.authService.getBestDownloadUrl(remoteAgent, 0).then(function (url) {
-                _this178.hubPost('/api/Hub/PreviewDashboard', {
-                  hubKey: _this178._hubKey,
-                  remoteAgentId: _this178.getCurrentRemoteAgentId(),
+              _this180.authService.getBestDownloadUrl(remoteAgent, 0).then(function (url) {
+                _this180.hubPost('/api/Hub/PreviewDashboard', {
+                  hubKey: _this180._hubKey,
+                  remoteAgentId: _this180.getCurrentRemoteAgentId(),
                   downloadUrl: url,
                   dashboard: dashboard,
                   inputParameters: inputParameters
@@ -25651,18 +25696,18 @@
         }, {
           key: "downloadUrlData",
           value: function downloadUrlData(url, cancelToken) {
-            var _this179 = this;
+            var _this181 = this;
 
             var promise = new _auth_auth_models__WEBPACK_IMPORTED_MODULE_2__["PromiseWithCancel"](function (resolve, reject) {
-              var httpPromise = _this179.authService.getFromExternal(url, null, cancelToken);
+              var httpPromise = _this181.authService.getFromExternal(url, null, cancelToken);
 
               httpPromise.then(function (data) {
                 if (data['success'] === false) {
-                  _this179.addHubMessage(data);
+                  _this181.addHubMessage(data);
 
                   reject(data['message']);
                 } else {
-                  var columns = _this179.authService.constructDataTableColumns(data.columns);
+                  var columns = _this181.authService.constructDataTableColumns(data.columns);
 
                   resolve({
                     name: data.name,
@@ -25675,7 +25720,7 @@
                   return;
                 }
               })["catch"](function (reason) {
-                _this179.addHubMessage(reason.error);
+                _this181.addHubMessage(reason.error);
 
                 reject(reason.error);
               });
@@ -25718,18 +25763,18 @@
         }, {
           key: "downloadData",
           value: function downloadData(downloadObjects, zipFiles, downloadFormat, cancelToken) {
-            var _this180 = this;
+            var _this182 = this;
 
             return new Promise(function (resolve, reject) {
-              _this180.hubPostRemote('/api/Hub/DownloadSharedData', {
-                connectionId: _this180.authService.getWebSocketConnectionId(),
+              _this182.hubPostRemote('/api/Hub/DownloadSharedData', {
+                connectionId: _this182.authService.getWebSocketConnectionId(),
                 downloadFormat: downloadFormat,
                 zipFiles: zipFiles,
                 downloadObjects: downloadObjects
               }, 'Downloading shared data...', cancelToken).then(function (task) {
-                _this180.authService.addUpdateTask(task);
+                _this182.authService.addUpdateTask(task);
 
-                _this180.addHubSuccessMessage('The download task has started.');
+                _this182.addHubSuccessMessage('The download task has started.');
 
                 resolve(true);
               });
@@ -25738,13 +25783,13 @@
         }, {
           key: "downloadTableData",
           value: function downloadTableData(table, showRejectedData, selectQuery, inputColumns, zipFiles, downloadFormat, cancelToken) {
-            var _this181 = this;
+            var _this183 = this;
 
             return new Promise(function (resolve, reject) {
-              _this181.hubPostRemote('/api/Hub/DownloadTableData', {
-                hubKey: _this181._hubKey,
-                remoteAgentId: _this181.getCurrentRemoteAgentId(),
-                connectionId: _this181.authService.getWebSocketConnectionId(),
+              _this183.hubPostRemote('/api/Hub/DownloadTableData', {
+                hubKey: _this183._hubKey,
+                remoteAgentId: _this183.getCurrentRemoteAgentId(),
+                connectionId: _this183.authService.getWebSocketConnectionId(),
                 table: table,
                 showRejectedData: showRejectedData,
                 selectQuery: selectQuery,
@@ -25752,9 +25797,9 @@
                 downloadFormat: downloadFormat,
                 zipFiles: zipFiles
               }, 'Downloading table data...', cancelToken).then(function (task) {
-                _this181.authService.addUpdateTask(task);
+                _this183.authService.addUpdateTask(task);
 
-                _this181.addHubSuccessMessage('The download task has started.');
+                _this183.addHubSuccessMessage('The download task has started.');
 
                 resolve(true);
               });
@@ -25763,13 +25808,13 @@
         }, {
           key: "downloadDatalinkData",
           value: function downloadDatalinkData(datalink, datalinkTransformKey, selectQuery, inputColumns, zipFiles, downloadFormat, cancelToken) {
-            var _this182 = this;
+            var _this184 = this;
 
             return new Promise(function (resolve, reject) {
-              _this182.hubPostRemote('/api/Hub/DownloadDatalinkData', {
-                hubKey: _this182._hubKey,
-                remoteAgentId: _this182.getCurrentRemoteAgentId(),
-                connectionId: _this182.authService.getWebSocketConnectionId(),
+              _this184.hubPostRemote('/api/Hub/DownloadDatalinkData', {
+                hubKey: _this184._hubKey,
+                remoteAgentId: _this184.getCurrentRemoteAgentId(),
+                connectionId: _this184.authService.getWebSocketConnectionId(),
                 datalink: datalink,
                 datalinkTransformKey: datalinkTransformKey,
                 selectQuery: selectQuery,
@@ -25777,9 +25822,9 @@
                 downloadFormat: downloadFormat,
                 zipFiles: zipFiles
               }, 'Downloading table data...', cancelToken).then(function (task) {
-                _this182.authService.addUpdateTask(task);
+                _this184.authService.addUpdateTask(task);
 
-                _this182.addHubSuccessMessage('The download task has started.');
+                _this184.addHubSuccessMessage('The download task has started.');
 
                 resolve(true);
               });
@@ -25841,19 +25886,19 @@
         }, {
           key: "downloadCustomFunction",
           value: function downloadCustomFunction(datalinkTransformItem, testValues) {
-            var _this183 = this;
+            var _this185 = this;
 
             return new Promise(function (resolve, reject) {
-              var cache = _this183._hubCache.value;
+              var cache = _this185._hubCache.value;
 
-              _this183.authService.downloadFile('/api/Hub/DownloadFunctionCode', {
+              _this185.authService.downloadFile('/api/Hub/DownloadFunctionCode', {
                 hubKey: cache.hub.hubKey,
                 datalinkTransformItem: datalinkTransformItem,
                 testValues: testValues
               }, 'CustomFunction.zip', 'application/zip').then(function () {
-                _this183.addHubSuccessMessage('The custom function code has been downloaded.');
+                _this185.addHubSuccessMessage('The custom function code has been downloaded.');
               })["catch"](function (reason) {
-                _this183.addHubMessage(reason);
+                _this185.addHubMessage(reason);
 
                 reject(reason);
               });
@@ -26050,18 +26095,18 @@
         }, {
           key: "downloadFiles",
           value: function downloadFiles(table, flatFilePath, files, cancelToken) {
-            var _this184 = this;
+            var _this186 = this;
 
             return new Promise(function (resolve, reject) {
-              _this184.hubPostRemote('/api/Hub/DownloadFiles', {
-                hubKey: _this184._hubKey,
-                connectionId: _this184.authService.getWebSocketConnectionId(),
-                remoteAgentId: _this184.getCurrentRemoteAgentId(),
+              _this186.hubPostRemote('/api/Hub/DownloadFiles', {
+                hubKey: _this186._hubKey,
+                connectionId: _this186.authService.getWebSocketConnectionId(),
+                remoteAgentId: _this186.getCurrentRemoteAgentId(),
                 tableKey: table.key,
                 path: flatFilePath,
                 files: files
               }, 'Downloading files...', cancelToken).then(function (task) {
-                _this184.authService.addUpdateTask(task);
+                _this186.authService.addUpdateTask(task);
 
                 resolve(true);
               })["catch"](function (reason) {
@@ -26072,15 +26117,15 @@
         }, {
           key: "uploadFile",
           value: function uploadFile(table, filePath, updateStrategy, fileName, cancelToken) {
-            var _this185 = this;
+            var _this187 = this;
 
             return new Promise(function (resolve, reject) {
-              var remoteAgent = _this185.getRemoteAgentCurrent();
+              var remoteAgent = _this187.getRemoteAgentCurrent();
 
-              _this185.authService.postRemoteUpload('/api/Hub/UploadFile', {
-                hubKey: _this185._hubKey,
+              _this187.authService.postRemoteUpload('/api/Hub/UploadFile', {
+                hubKey: _this187._hubKey,
                 remoteAgentId: remoteAgent.instanceId,
-                connectionId: _this185.authService.getWebSocketConnectionId(),
+                connectionId: _this187.authService.getWebSocketConnectionId(),
                 tableKey: table.key,
                 path: filePath,
                 updateStrategy: updateStrategy,
@@ -26093,15 +26138,15 @@
         }, {
           key: "bulkUploadFiles",
           value: function bulkUploadFiles(connectionKey, fileFormatKey, formatType, loadData, includeFileName, includeFileDate, includeFileRowNumber, fileName, cancelToken) {
-            var _this186 = this;
+            var _this188 = this;
 
             return new Promise(function (resolve, reject) {
-              var remoteAgent = _this186.getRemoteAgentCurrent();
+              var remoteAgent = _this188.getRemoteAgentCurrent();
 
-              _this186.authService.postRemoteUpload('/api/Hub/BulkUploadFile', {
-                hubKey: _this186._hubKey,
+              _this188.authService.postRemoteUpload('/api/Hub/BulkUploadFile', {
+                hubKey: _this188._hubKey,
                 remoteAgentId: remoteAgent.instanceId,
-                connectionId: _this186.authService.getWebSocketConnectionId(),
+                connectionId: _this188.authService.getWebSocketConnectionId(),
                 connectionKey: connectionKey,
                 fileFormatKey: fileFormatKey,
                 formatType: formatType,
@@ -26172,7 +26217,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -26184,7 +26229,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -26331,7 +26376,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 
       var ItemEditGuard = /*#__PURE__*/function () {
         function ItemEditGuard() {
@@ -26420,7 +26465,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -26462,19 +26507,19 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -26488,20 +26533,20 @@
       /*! ../../shared/utils/equal-filter.pipe */
       "./src/app/shared/utils/equal-filter.pipe.ts");
 
-      function SummaryComponent_div_0_h5_6_Template(rf, ctx) {
+      function SummaryComponent_div_0_h5_5_Template(rf, ctx) {
         if (rf & 1) {
           var _r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "h5", 5);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "h5", 4);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "markdown", 37);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "markdown", 36);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function SummaryComponent_div_0_h5_6_Template_markdown_click_1_listener() {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function SummaryComponent_div_0_h5_5_Template_markdown_click_1_listener($event) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r7);
 
             var ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-            return ctx_r6.authService.getRoute(ctx_r6.event);
+            return ctx_r6.authService.getRoute($event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -26522,9 +26567,9 @@
         return ["connection-new", "2"];
       };
 
-      function SummaryComponent_div_0_div_7_Template(rf, ctx) {
+      function SummaryComponent_div_0_div_6_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 38);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 37);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, " Warning: ");
 
@@ -26538,7 +26583,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](5, "hr");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](6, "d-button-new", 39);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](6, "d-button-new", 38);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
@@ -26550,15 +26595,15 @@
         }
       }
 
-      function SummaryComponent_div_0_li_36_Template(rf, ctx) {
+      function SummaryComponent_div_0_a_35_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "li", 40);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "a", 39);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 15);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 14);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "i", 41);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "i", 40);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, " Manage Hub Users ");
 
@@ -26566,7 +26611,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "div", 17);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "div", 16);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "Invite users and manage user permissions for this hub.");
 
@@ -26576,15 +26621,15 @@
         }
       }
 
-      function SummaryComponent_div_0_li_37_Template(rf, ctx) {
+      function SummaryComponent_div_0_a_36_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "li", 32);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "a", 31);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 15);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 14);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "i", 42);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "i", 41);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, " Manage Remote Agents ");
 
@@ -26592,7 +26637,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "div", 17);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "div", 16);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "Add and remove remote agents access to this hub.");
 
@@ -26602,11 +26647,11 @@
         }
       }
 
-      function SummaryComponent_div_0_li_79_Template(rf, ctx) {
+      function SummaryComponent_div_0_a_78_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "li", 43);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "a", 42);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 15);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 14);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div");
 
@@ -26616,7 +26661,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "span", 44);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "span", 43);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6);
 
@@ -26626,7 +26671,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "div", 17);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "div", 16);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](9);
 
@@ -26666,217 +26711,213 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "img", 3);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 3);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "div", 4);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "h3", 4);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "h3", 5);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](6, SummaryComponent_div_0_h5_6_Template, 2, 1, "h5", 6);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, SummaryComponent_div_0_h5_5_Template, 2, 1, "h5", 5);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](7, SummaryComponent_div_0_div_7_Template, 7, 2, "div", 7);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](6, SummaryComponent_div_0_div_6_Template, 7, 2, "div", 6);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "div", 7);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "div", 8);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "div", 9);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "div", 10);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](10, "i", 10);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](11, "i", 11);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](12, "Common Actions ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](11, "Common Actions ");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "div", 12);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "div", 11);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "ul", 13);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "ul", 12);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "li", 14);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "a", 13);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "div", 15);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "div", 14);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "div");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "div");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](18, "i", 16);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](17, "i", 15);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](19, " Search ");
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](20, "div", 17);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](21, "Search for objects within the hub.");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](18, " Search ");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](22, "li", 18);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](19, "div", 16);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](23, "div", 15);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](24, "div");
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](25, "i", 19);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](26, " Shared Data ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](20, "Search for objects within the hub.");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](27, "div", 17);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](21, "a", 17);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](28, "Tables and datalinks in the hub which have been shared.");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](22, "div", 14);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](23, "div");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](24, "i", 18);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](29, "li", 20);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](30, "div", 15);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](31, "div");
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](32, "i", 21);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](33, " Datalink/Datajob results ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](25, " Shared Data ");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](34, "div", 17);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](26, "div", 16);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](35, "Recent execution summaries from datalink and datajobs.");
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](36, SummaryComponent_div_0_li_36_Template, 7, 0, "li", 22);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](37, SummaryComponent_div_0_li_37_Template, 7, 0, "li", 23);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](38, "li", 24);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](39, "div", 15);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](40, "div");
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](41, "i", 25);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](42, " Manage Files ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](27, "Tables and datalinks in the hub which have been shared.");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](43, "div", 17);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](28, "a", 19);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](44, "Upload and download files in an existing table definition");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](29, "div", 14);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](30, "div");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](31, "i", 20);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](45, "li", 26);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](46, "div", 15);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](47, "div");
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](48, "i", 27);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](49, " Bulk Load Files ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](32, " Datalink/Datajob results ");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](50, "div", 17);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](33, "div", 16);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](51, "Upload multiple file to create automatic table definitions.");
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](52, "li", 28);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](53, "div", 15);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](54, "div");
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](55, "i", 29);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](56, " Import ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](34, "Recent execution summaries from datalink and datajobs.");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](57, "div", 17);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](35, SummaryComponent_div_0_a_35_Template, 7, 0, "a", 21);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](58, "Import items into the current hub from an export file.");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](36, SummaryComponent_div_0_a_36_Template, 7, 0, "a", 22);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](37, "a", 23);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](38, "div", 14);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](59, "li", 30);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](39, "div");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](60, "div", 15);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](40, "i", 24);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](61, "div");
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](62, "i", 31);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](63, " Export ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](41, " Manage Files ");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](64, "div", 17);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](42, "div", 16);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](65, "Export items from the current hub to an external file.");
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](66, "li", 32);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](67, "div", 15);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](68, "div");
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](69, "i", 33);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](70, " Remote Agents ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](43, "Upload and download files in an existing table definition");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](71, "div", 17);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](44, "a", 25);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](72, "Manage which remote agents are authorized to access the hub.");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](45, "div", 14);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](46, "div");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](47, "i", 26);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](48, " Bulk Load Files ");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](49, "div", 16);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](50, "Upload multiple file to create automatic table definitions.");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](51, "a", 27);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](52, "div", 14);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](53, "div");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](54, "i", 28);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](55, " Import ");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](56, "div", 16);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](57, "Import items into the current hub from an export file.");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](58, "a", 29);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](59, "div", 14);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](60, "div");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](61, "i", 30);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](62, " Export ");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](63, "div", 16);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](64, "Export items from the current hub to an external file.");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](65, "a", 31);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](66, "div", 14);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](67, "div");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](68, "i", 32);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](69, " Remote Agents ");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](70, "div", 16);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](71, "Manage which remote agents are authorized to access the hub.");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -26886,21 +26927,23 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](73, "div", 9);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](74, "div", 34);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](72, "div", 8);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](75, "i", 35);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](73, "div", 33);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](76, "Hub Objects");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](74, "i", 34);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](75, "Hub Objects");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](77, "div", 12);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](76, "div", 11);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](78, "ul", 13);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](77, "ul", 12);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](79, SummaryComponent_div_0_li_79_Template, 10, 11, "li", 36);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](78, SummaryComponent_div_0_a_78_Template, 10, 11, "a", 35);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -26916,11 +26959,7 @@
         if (rf & 2) {
           var ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("src", ctx_r0.logoSmallUrl, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsanitizeUrl"]);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx_r0.hubCache.hub.name);
 
@@ -26954,26 +26993,27 @@
           this.authService = authService;
           this.logoSmallUrl = _auth_auth_models__WEBPACK_IMPORTED_MODULE_4__["logoSmallUrl"];
           this.sharedObjectProperties = _hub_models__WEBPACK_IMPORTED_MODULE_1__["sharedObjectProperties"];
+          this.eCacheStatus = _hub_models__WEBPACK_IMPORTED_MODULE_1__["eCacheStatus"];
           this.noManagedConnection = false;
         }
 
         _createClass(SummaryComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this187 = this;
+            var _this189 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["combineLatest"])(this.hubService.getHubCacheObservable(), this.hubService.getRemoteAgentObservable()).subscribe(function (result) {
-                _this187.hubCache = result[0];
-                _this187.remoteAgent = result[1];
+                _this189.hubCache = result[0];
+                _this189.remoteAgent = result[1];
 
-                if (_this187.hubCache.isLoaded()) {
-                  if (_this187.hubCache.hub.dexihConnections.findIndex(function (c) {
+                if (_this189.hubCache.isLoaded()) {
+                  if (_this189.hubCache.hub.dexihConnections.findIndex(function (c) {
                     return c.purpose === _shared_shared_models__WEBPACK_IMPORTED_MODULE_5__["eConnectionPurpose"].Managed;
                   }) >= 0) {
-                    _this187.noManagedConnection = false;
+                    _this189.noManagedConnection = false;
                   } else {
-                    _this187.noManagedConnection = true;
+                    _this189.noManagedConnection = true;
                   }
                 }
               });
@@ -27032,17 +27072,17 @@
         selectors: [["dexih-summary"]],
         decls: 1,
         vars: 1,
-        consts: [["class", "container-fluid", 4, "ngIf"], [1, "container-fluid"], [1, "d-flex", "align-items-center", "p-3", "my-3", "text-white-50", "bg-secondary", "rounded"], ["alt", "", "width", "48", "height", "48", 1, "mr-3", 3, "src"], [1, "lh-100"], [1, "mb-0", "text-white", "lh-100"], ["class", "mb-0 text-white lh-100", 4, "ngIf"], ["class", "alert alert-warning", 4, "ngIf"], [1, "card-deck"], [1, "card", "mb-3", 2, "min-width", "18rem"], [1, "card-header", "text-white", "bg-success"], [1, "fa", "fa-lg", "fa-fw", "fa-life-saver"], [1, "card-body", "p-0"], [1, "list-group"], ["routerLink", "search", 1, "list-group-item", "rounded-0"], [1, "d-flex", "justify-content-between", "align-items-center"], [1, "fa", "fa-lg", "fa-fw", "fa-search"], [1, "small"], ["routerLink", "sharedData", 1, "list-group-item", "rounded-0"], [1, "fa", "fa-lg", "fa-fw", "fa-newspaper-o"], ["routerLink", "datalinks/results", 1, "list-group-item", "rounded-0"], [1, "fa", "fa-lg", "fa-fw", "fa-tasks"], ["routerLink", "manage/manage-users", "class", "list-group-item  rounded-0", 4, "ngIf"], ["routerLink", "agents", "class", "list-group-item  rounded-0", 4, "ngIf"], ["routerLink", "files/manage", 1, "list-group-item", "rounded-0"], [1, "fa", "fa-lg", "fa-fw", "fa-upload"], ["routerLink", "files/bulk-load", 1, "list-group-item", "rounded-0"], [1, "fa", "fa-lg", "fa-fw", "fa-files-o"], ["routerLink", "import", 1, "list-group-item", "rounded-0"], [1, "fa", "fa-lg", "fa-fw", "fa-level-down"], ["routerLink", "export", 1, "list-group-item", "rounded-0"], [1, "fa", "fa-lg", "fa-fw", "fa-level-up"], ["routerLink", "agents", 1, "list-group-item", "rounded-0"], [1, "fa", "fa-lg", "fa-fw", "fa-wrench"], [1, "card-header", "text-white", "bg-danger"], [1, "fa", "fa-lg", "fa-fw", "fa-user"], ["class", "list-group-item  rounded-0", 3, "routerLink", 4, "ngFor", "ngForOf"], [3, "data", "click"], [1, "alert", "alert-warning"], ["buttonClass", "btn btn-primary text-white", "text", "New Managed Connection", 3, "routerLink"], ["routerLink", "manage/manage-users", 1, "list-group-item", "rounded-0"], [1, "fa", "fa-lg", "fa-fw", "fa-birthday-cake"], [1, "fa", "fa-lg", "fa-fw", "fa-wifi"], [1, "list-group-item", "rounded-0", 3, "routerLink"], [1, "badge", "badge-primary", "badge-pill"]],
+        consts: [["class", "container-fluid", 4, "ngIf"], [1, "container-fluid"], [1, "d-flex", "align-items-center", "p-3", "my-3", "text-white-50", "bg-primary", "rounded"], [1, "lh-100"], [1, "mb-0", "text-white", "lh-100"], ["class", "mb-0 text-white lh-100", 4, "ngIf"], ["class", "alert alert-warning", 4, "ngIf"], [1, "card-deck"], [1, "card", "mb-3", 2, "min-width", "18rem"], [1, "card-header", "text-white", "bg-success"], [1, "fa", "fa-lg", "fa-fw", "fa-life-saver"], [1, "card-body", "p-0"], [1, "list-group"], ["routerLink", "search", 1, "list-group-item", "list-group-item-action", "rounded-0"], [1, "d-flex", "justify-content-between", "align-items-center"], [1, "fa", "fa-lg", "fa-fw", "fa-search"], [1, "small"], ["routerLink", "sharedData", 1, "list-group-item", "list-group-item-action", "rounded-0"], [1, "fa", "fa-lg", "fa-fw", "fa-newspaper-o"], ["routerLink", "datalinks/results", 1, "list-group-item", "list-group-item-action", "rounded-0"], [1, "fa", "fa-lg", "fa-fw", "fa-tasks"], ["routerLink", "manage/manage-users", "class", "list-group-item  list-group-item-action rounded-0", 4, "ngIf"], ["routerLink", "agents", "class", "list-group-item  list-group-item-action rounded-0", 4, "ngIf"], ["routerLink", "files/manage", 1, "list-group-item", "list-group-item-action", "rounded-0"], [1, "fa", "fa-lg", "fa-fw", "fa-upload"], ["routerLink", "files/bulk-load", 1, "list-group-item", "list-group-item-action", "rounded-0"], [1, "fa", "fa-lg", "fa-fw", "fa-files-o"], ["routerLink", "import", 1, "list-group-item", "list-group-item-action", "rounded-0"], [1, "fa", "fa-lg", "fa-fw", "fa-level-down"], ["routerLink", "export", 1, "list-group-item", "list-group-item-action", "rounded-0"], [1, "fa", "fa-lg", "fa-fw", "fa-level-up"], ["routerLink", "agents", 1, "list-group-item", "list-group-item-action", "rounded-0"], [1, "fa", "fa-lg", "fa-fw", "fa-wrench"], [1, "card-header", "text-white", "bg-danger"], [1, "fa", "fa-lg", "fa-fw", "fa-user"], ["class", "list-group-item  list-group-item-action rounded-0", 3, "routerLink", 4, "ngFor", "ngForOf"], [3, "data", "click"], [1, "alert", "alert-warning"], ["buttonClass", "btn btn-primary text-white", "text", "New Managed Connection", 3, "routerLink"], ["routerLink", "manage/manage-users", 1, "list-group-item", "list-group-item-action", "rounded-0"], [1, "fa", "fa-lg", "fa-fw", "fa-birthday-cake"], [1, "fa", "fa-lg", "fa-fw", "fa-wifi"], [1, "list-group-item", "list-group-item-action", "rounded-0", 3, "routerLink"], [1, "badge", "badge-primary", "badge-pill"]],
         template: function SummaryComponent_Template(rf, ctx) {
           if (rf & 1) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, SummaryComponent_div_0_Template, 80, 7, "div", 0);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, SummaryComponent_div_0_Template, 79, 6, "div", 0);
           }
 
           if (rf & 2) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.hubCache == null ? null : ctx.hubCache.hub);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", (ctx.hubCache == null ? null : ctx.hubCache.hub) && ctx.hubCache.status === ctx.eCacheStatus.Loaded);
           }
         },
-        directives: [_angular_common__WEBPACK_IMPORTED_MODULE_7__["NgIf"], _angular_router__WEBPACK_IMPORTED_MODULE_8__["RouterLink"], _angular_common__WEBPACK_IMPORTED_MODULE_7__["NgForOf"], ngx_d_markdown__WEBPACK_IMPORTED_MODULE_9__["DMarkdownComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_10__["DButtonNewComponent"]],
+        directives: [_angular_common__WEBPACK_IMPORTED_MODULE_7__["NgIf"], _angular_router__WEBPACK_IMPORTED_MODULE_8__["RouterLinkWithHref"], _angular_common__WEBPACK_IMPORTED_MODULE_7__["NgForOf"], ngx_d_markdown__WEBPACK_IMPORTED_MODULE_9__["DMarkdownComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_10__["DButtonNewComponent"], _angular_router__WEBPACK_IMPORTED_MODULE_8__["RouterLink"]],
         pipes: [_shared_utils_equal_filter_pipe__WEBPACK_IMPORTED_MODULE_11__["EqualFilterPipe"]],
         encapsulation: 2
       });
@@ -27091,7 +27131,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -27115,7 +27155,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -27149,17 +27189,17 @@
         _createClass(TablePreviewDataComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this188 = this;
+            var _this190 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["combineLatest"])(this.route.params, this.hubService.getHubCacheObservable(true)).subscribe(function (result) {
                 var params = result[0];
                 var hubCache = result[1];
-                _this188.key = +params['tableKey'];
-                var table = hubCache.getTable(_this188.key);
+                _this190.key = +params['tableKey'];
+                var table = hubCache.getTable(_this190.key);
 
                 if (table) {
-                  _this188.title = 'Preview Table - ' + table.logicalName;
+                  _this190.title = 'Preview Table - ' + table.logicalName;
                 }
               });
             } catch (e) {
@@ -27311,13 +27351,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -27371,7 +27411,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -27425,7 +27465,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -27449,7 +27489,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -27617,7 +27657,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("errors", ctx_r17.errors == null ? null : ctx_r17.errors.sourceTableKey)("items", ctx_r17.connectionTables);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("errors", ctx_r17.formsService.formErrors == null ? null : ctx_r17.formsService.formErrors.sourceTableKey)("items", ctx_r17.connectionTables);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
@@ -27657,7 +27697,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("errors", ctx_r18.errors == null ? null : ctx_r18.errors.sourceDatalinkKey)("items", ctx_r18.datalinks);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("errors", ctx_r18.formsService.formErrors == null ? null : ctx_r18.formsService.formErrors.sourceDatalinkKey)("items", ctx_r18.datalinks);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
@@ -27717,11 +27757,11 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("autocapitalize", ctx_r15.on)("errors", ctx_r15.formsService.formErrors["name"]);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("autocapitalize", true)("errors", ctx_r15.formsService.formErrors["name"]);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showPreview", true)("isHidden", true);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
 
@@ -27771,7 +27811,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-widget-section", 24);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, ViewEditComponent_div_0_d_widget_section_4_form_1_Template, 14, 8, "form", 25);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, ViewEditComponent_div_0_d_widget_section_4_form_1_Template, 14, 9, "form", 25);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "input-parameters", 26);
 
@@ -28061,7 +28101,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r0.formsService.currentForm && (ctx_r0.showEdit || (ctx_r0.formsService.currentForm == null ? null : ctx_r0.formsService.currentForm.controls.parameters.length) > 0 || (ctx_r0.datalinkParameters == null ? null : ctx_r0.datalinkParameters.length) > 0));
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r0.formsService.currentForm && (ctx_r0.showEdit || (ctx_r0.formsService.currentForm == null ? null : ctx_r0.formsService.currentForm.controls.parameters.length) > 0));
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
@@ -28117,35 +28157,35 @@
         _createClass(ViewEditComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this189 = this;
+            var _this191 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["combineLatest"])(this.route.data, this.route.params, this.hubService.getHubCacheObservable(), this.hubService.getRemoteAgentObservable()).subscribe(function (result) {
                 var data = result[0];
-                _this189.params = result[1];
-                _this189.hubCache = result[2];
-                _this189.remoteAgent = result[3];
-                _this189.action = data['action'];
-                _this189.pageTitle = data['pageTitle'];
+                _this191.params = result[1];
+                _this191.hubCache = result[2];
+                _this191.remoteAgent = result[3];
+                _this191.action = data['action'];
+                _this191.pageTitle = data['pageTitle'];
 
-                if (!_this189.hubCache || _this189.hubCache.status !== _hub_models__WEBPACK_IMPORTED_MODULE_8__["eCacheStatus"].Loaded) {
+                if (!_this191.hubCache || _this191.hubCache.status !== _hub_models__WEBPACK_IMPORTED_MODULE_8__["eCacheStatus"].Loaded) {
                   return;
                 }
 
-                if (_this189.isLoaded && _this189.action === 'new') {
+                if (_this191.isLoaded && _this191.action === 'new') {
                   return;
                 }
 
-                if (_this189.isLoaded && _this189.formsService.hasChanged) {
-                  _this189.authService.confirmDialog('Synchronization warning', 'The hub was disconnected, meaning this edit could have been changed by another session.  Would you like to discard the current changes, and reload the latest version?').then(function (confirm) {
+                if (_this191.isLoaded && _this191.formsService.hasChanged) {
+                  _this191.authService.confirmDialog('Synchronization warning', 'The hub was disconnected, meaning this edit could have been changed by another session.  Would you like to discard the current changes, and reload the latest version?').then(function (confirm) {
                     if (confirm) {
-                      _this189.load();
+                      _this191.load();
                     }
                   })["catch"](function () {
                     return;
                   });
                 } else {
-                  _this189.load();
+                  _this191.load();
                 }
               });
             } catch (e) {
@@ -28155,7 +28195,7 @@
         }, {
           key: "load",
           value: function load() {
-            var _this190 = this;
+            var _this192 = this;
 
             this.isLoaded = true;
 
@@ -28175,7 +28215,7 @@
                   this.hubService.addHubErrorMessage('The hub cache is not loaded.');
                 } else {
                   var view = this.hubCache.hub.dexihViews.find(function (c) {
-                    return c.key === _this190.viewKey;
+                    return c.key === _this192.viewKey;
                   }); // create a copy of the view to avoid changes to the hub cache.
 
                   view = JSON.parse(JSON.stringify(view));
@@ -28213,9 +28253,9 @@
                   if (history.pushState) {
                     var newUrl = window.location.pathname.replace('/view-new', "/view-edit/".concat(key));
 
-                    _this190.router.navigateByUrl(newUrl);
+                    _this192.router.navigateByUrl(newUrl);
 
-                    _this190._formChangeSubscription.unsubscribe();
+                    _this192._formChangeSubscription.unsubscribe();
                   }
                 }
               });
@@ -28227,10 +28267,10 @@
                   this.dialogOpen = true;
                   this.authService.confirmDialog('Remote Agent Available', 'A remote agent is available, would you like to refresh the data?').then(function (confirm) {
                     if (confirm) {
-                      _this190.refresh();
+                      _this192.refresh();
                     }
 
-                    _this190.dialogOpen = false;
+                    _this192.dialogOpen = false;
                   });
                 }
               } else {
@@ -28243,23 +28283,23 @@
         }, {
           key: "watchChanges",
           value: function watchChanges() {
-            var _this191 = this;
+            var _this193 = this;
 
             if (this._changesSubscription) {
               this._changesSubscription.unsubscribe();
             }
 
             this._changesSubscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["merge"])(this.formsService.currentForm.controls.sourceDatalinkKey.valueChanges, this.formsService.currentForm.controls.sourceTableKey.valueChanges).subscribe(function () {
-              _this191.reset();
+              _this193.reset();
 
-              _this191.selectQuery = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["SelectQuery"]();
-              _this191.animateConfig = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["AnimateConfig"]();
+              _this193.selectQuery = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["SelectQuery"]();
+              _this193.animateConfig = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["AnimateConfig"]();
 
-              _this191.getColumns();
+              _this193.getColumns();
 
-              _this191.refreshDatalink();
+              _this193.refreshDatalink();
 
-              _this191.refresh();
+              _this193.refresh();
             });
           }
         }, {
@@ -28346,7 +28386,7 @@
 
               if (datalink) {
                 var ioColumns = new _hub_lineage_models__WEBPACK_IMPORTED_MODULE_6__["InputOutputColumns"]();
-                ioColumns.buildInputOutput(this.hubCache, datalink);
+                ioColumns.buildInputOutput(datalink);
                 this.tableColumns = ioColumns.getDatalinkOutputColumns(datalink);
                 this.inputColumns = datalink.sourceDatalinkTable.dexihDatalinkColumns.filter(function (c) {
                   return c.isInput;
@@ -28433,7 +28473,7 @@
         }, {
           key: "refresh",
           value: function refresh() {
-            var _this192 = this;
+            var _this194 = this;
 
             var viewForm = this.formsService.currentForm;
             var parameters = [];
@@ -28449,15 +28489,15 @@
 
             if (view.sourceType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eDataObjectType"].Table && view.sourceTableKey > 0 || view.sourceType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_9__["eDataObjectType"].Datalink && view.sourceDatalinkKey > 0) {
               this.hubService.previewView(view, this.inputColumns, parameters, this.cancelToken).then(function (result) {
-                _this192.refreshDataSubject.next();
+                _this194.refreshDataSubject.next();
 
-                _this192.columns = result.columns;
-                _this192.baseData = result.data;
+                _this194.columns = result.columns;
+                _this194.baseData = result.data;
 
-                if (!_this192.animateConfig.seriesColumn) {
+                if (!_this194.animateConfig.seriesColumn) {
                   //   this.initializeAnimation();
                   // } else {
-                  _this192.data = _this192.baseData;
+                  _this194.data = _this194.baseData;
                 }
               })["catch"](function () {});
             }
@@ -28502,11 +28542,11 @@
         }, {
           key: "canDeactivate",
           value: function canDeactivate() {
-            var _this193 = this;
+            var _this195 = this;
 
             return new Promise(function (resolve) {
-              if (_this193.hasEdited && _this193.formsService.hasChanged) {
-                _this193.authService.confirmDialog('The view has not been saved', 'The view changes have not been saved.  Do you want to discard the changes and exit?').then(function (confirm) {
+              if (_this195.hasEdited && _this195.formsService.hasChanged) {
+                _this195.authService.confirmDialog('The view has not been saved', 'The view changes have not been saved.  Do you want to discard the changes and exit?').then(function (confirm) {
                   resolve(confirm);
                 })["catch"](function () {
                   resolve(false);
@@ -28570,7 +28610,7 @@
         features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([_hub_forms_service__WEBPACK_IMPORTED_MODULE_4__["HubFormsService"]])],
         decls: 1,
         vars: 1,
-        consts: [["class", "container", 4, "ngIf"], [1, "container"], ["title", "Edit View", "iconClass", "fa fa-lg fa-fw fa-bar-chart", 3, "showCloseButton", "padding", "close"], ["header", ""], ["title", "Properties", 3, "showExpandButton", 4, "ngIf"], ["title", "InputColumns", 3, "showExpandButton", 4, "ngIf"], [3, "showEdit", "animateConfig", "columns", "baseData", "data", "hasChanged", "dataChange"], ["title", "Query Configuration", 3, "showExpandButton", 4, "ngIf"], [3, "ngIf"], ["title", "Views", "path", "/assets/help/reference/view.md", 1, "m-3"], [1, "mr-1", 3, "control", "click"], ["text", "Reload", 1, "mr-1", 3, "click"], [1, "mr-1", 3, "download"], ["data-toggle", "buttons", "title", "Table", 1, "btn-group", "btn-group-toggle", "mr-1"], [1, "btn", "btn-primary", 3, "ngClass"], ["type", "radio", "name", "options", "value", "table", "autocomplete", "off", 3, "click"], [1, "fa", "fa-table"], ["title", "Chart", 1, "btn", "btn-primary", 3, "ngClass"], ["type", "radio", "name", "options", "value", "chart", "autocomplete", "off", 3, "click"], [1, "fa", "fa-bar-chart"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [1, "mr-1", 3, "text", "click"], [3, "formsService"], [1, "mr-1", 3, "formsService"], ["title", "Properties", 3, "showExpandButton"], [3, "formGroup", 4, "ngIf"], [3, "showEdit", "parameters", "formsService", "refreshEvent", "onRefreshData", "onChange"], ["class", "mt-3", 4, "ngIf"], [3, "formGroup"], ["label", "View Name", "formControlName", "name", "placeholder", "Enter the view name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Data Source Type", "formControlName", "sourceType", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "Specify the source type for this view", 3, "items", "enableFilter"], ["class", "form-group col-md-6", 4, "ngIf"], ["formControlName", "autoRefresh", "label", "Automatically refresh data when view is opened"], ["label", "View is shared in the catalog to users with read access.", "formControlName", "isShared"], ["label", "Source Table", "formControlName", "sourceTableKey", "parentName", "name", "childItems", "dexihTables", "itemKey", "key", "itemName", "logicalName", "note", "Select the source table", 3, "errors", "items"], [3, "key"], ["label", "Source Datalink", "formControlName", "sourceDatalinkKey", "itemKey", "key", "itemName", "name", "note", "Select the source datalink", 3, "errors", "items"], ["text", "Refresh Parameters", 3, "click"], [1, "mt-3"], ["text", "Reload", 1, "mr-1", 3, "autoCompact", "click"], ["title", "InputColumns", 3, "showExpandButton"], ["class", "input-group", 4, "ngFor", "ngForOf"], [1, "input-group"], [1, "input-group-prepend"], [1, "input-group-text"], [1, "form-control", "p-0", 3, "name", "placeholder", "ngModel", "ngModelChange"], ["title", "Query Configuration", 3, "showExpandButton"], [3, "selectQuery", "columns", "inputColumns", "parameters", "refreshEvent", "hasChanged", "onRefreshData"], [3, "enableMultiSelect", "enableSaveCsv", "columns", "data", "hideTable", 4, "ngIf"], [4, "ngIf"], [3, "enableMultiSelect", "enableSaveCsv", "columns", "data", "hideTable"], ["actions", ""], [3, "title", "columns", "data", "config", "showEdit", "hasChanged"]],
+        consts: [["class", "container", 4, "ngIf"], [1, "container"], ["title", "Edit View", "iconClass", "fa fa-lg fa-fw fa-bar-chart", 3, "showCloseButton", "padding", "close"], ["header", ""], ["title", "Properties", 3, "showExpandButton", 4, "ngIf"], ["title", "InputColumns", 3, "showExpandButton", 4, "ngIf"], [3, "showEdit", "animateConfig", "columns", "baseData", "data", "hasChanged", "dataChange"], ["title", "Query Configuration", 3, "showExpandButton", 4, "ngIf"], [3, "ngIf"], ["title", "Views", "path", "/assets/help/reference/view.md", 1, "m-3"], [1, "mr-1", 3, "control", "click"], ["text", "Reload", 1, "mr-1", 3, "click"], [1, "mr-1", 3, "download"], ["data-toggle", "buttons", "title", "Table", 1, "btn-group", "btn-group-toggle", "mr-1"], [1, "btn", "btn-primary", 3, "ngClass"], ["type", "radio", "name", "options", "value", "table", "autocomplete", "off", 3, "click"], [1, "fa", "fa-table"], ["title", "Chart", 1, "btn", "btn-primary", 3, "ngClass"], ["type", "radio", "name", "options", "value", "chart", "autocomplete", "off", 3, "click"], [1, "fa", "fa-bar-chart"], ["class", "mr-1", 3, "formsService", 4, "ngIf"], [1, "mr-1", 3, "text", "click"], [3, "formsService"], [1, "mr-1", 3, "formsService"], ["title", "Properties", 3, "showExpandButton"], [3, "formGroup", 4, "ngIf"], [3, "showEdit", "parameters", "formsService", "refreshEvent", "onRefreshData", "onChange"], ["class", "mt-3", 4, "ngIf"], [3, "formGroup"], ["label", "View Name", "formControlName", "name", "placeholder", "Enter the view name.", "iconClass", "fa fa-list", 3, "autocapitalize", "errors"], ["label", "Description", "formControlName", "description", "placeholder", "Enter the description.", 3, "showPreview", "isHidden"], [1, "form-row"], [1, "form-group", "col-md-6"], ["label", "Data Source Type", "formControlName", "sourceType", "itemKey", "key", "itemName", "name", "iconClass", "fa fa-database", "note", "Specify the source type for this view", 3, "items", "enableFilter"], ["class", "form-group col-md-6", 4, "ngIf"], ["formControlName", "autoRefresh", "label", "Automatically refresh data when view is opened"], ["label", "View is shared in the catalog to users with read access.", "formControlName", "isShared"], ["label", "Source Table", "formControlName", "sourceTableKey", "parentName", "name", "childItems", "dexihTables", "itemKey", "key", "itemName", "logicalName", "note", "Select the source table", 3, "errors", "items"], [3, "key"], ["label", "Source Datalink", "formControlName", "sourceDatalinkKey", "itemKey", "key", "itemName", "name", "note", "Select the source datalink", 3, "errors", "items"], ["text", "Refresh Parameters", 3, "click"], [1, "mt-3"], ["text", "Reload", 1, "mr-1", 3, "autoCompact", "click"], ["title", "InputColumns", 3, "showExpandButton"], ["class", "input-group", 4, "ngFor", "ngForOf"], [1, "input-group"], [1, "input-group-prepend"], [1, "input-group-text"], [1, "form-control", "p-0", 3, "name", "placeholder", "ngModel", "ngModelChange"], ["title", "Query Configuration", 3, "showExpandButton"], [3, "selectQuery", "columns", "inputColumns", "parameters", "refreshEvent", "hasChanged", "onRefreshData"], [3, "enableMultiSelect", "enableSaveCsv", "columns", "data", "hideTable", 4, "ngIf"], [4, "ngIf"], [3, "enableMultiSelect", "enableSaveCsv", "columns", "data", "hideTable"], ["actions", ""], [3, "title", "columns", "data", "config", "showEdit", "hasChanged"]],
         template: function ViewEditComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, ViewEditComponent_div_0_Template, 10, 11, "div", 0);
@@ -28640,7 +28680,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -28658,7 +28698,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -28682,7 +28722,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -28786,7 +28826,7 @@
         _createClass(ViewIndexComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this194 = this;
+            var _this196 = this;
 
             // watch for any changes in the validations.
             this.watchChanges();
@@ -28795,9 +28835,9 @@
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["combineLatest"])(this.route.data, this.route.params, this.hubService.getHubCacheObservable()).subscribe(function (result) {
                 var data = result[0];
                 var params = result[1];
-                _this194.hubCache = result[2];
+                _this196.hubCache = result[2];
 
-                _this194.updateViews();
+                _this196.updateViews();
               });
             } catch (e) {
               this.hubService.addHubClientErrorMessage(e, 'View Index');
@@ -28827,7 +28867,7 @@
         }, {
           key: "updateViews",
           value: function updateViews() {
-            var _this195 = this;
+            var _this197 = this;
 
             if (this.hubCache && this.hubCache.isLoaded()) {
               var views;
@@ -28839,13 +28879,13 @@
 
                 switch (view.sourceType) {
                   case _shared_shared_models__WEBPACK_IMPORTED_MODULE_5__["eDataObjectType"].Table:
-                    var sourceTable = _this195.hubCache.getTable(view.sourceTableKey);
+                    var sourceTable = _this197.hubCache.getTable(view.sourceTableKey);
 
                     sourceName = sourceTable ? sourceTable.logicalName : 'Error, not found';
                     break;
 
                   case _shared_shared_models__WEBPACK_IMPORTED_MODULE_5__["eDataObjectType"].Datalink:
-                    var sourceDatalink = _this195.hubCache.hub.dexihDatalinks.find(function (c) {
+                    var sourceDatalink = _this197.hubCache.hub.dexihDatalinks.find(function (c) {
                       return c.key === view.sourceDatalinkKey;
                     });
 
@@ -28856,7 +28896,7 @@
                 return {
                   key: view.key,
                   name: view.name,
-                  tags: _this195.hubCache.getObjectTags(_shared_shared_models__WEBPACK_IMPORTED_MODULE_5__["eSharedObjectType"].View, view.key),
+                  tags: _this197.hubCache.getObjectTags(_shared_shared_models__WEBPACK_IMPORTED_MODULE_5__["eSharedObjectType"].View, view.key),
                   viewType: _shared_shared_models__WEBPACK_IMPORTED_MODULE_5__["eViewType"][view.viewType],
                   sourceName: sourceName,
                   updateDate: view.updateDate,
@@ -28891,12 +28931,12 @@
         }, {
           key: "watchChanges",
           value: function watchChanges() {
-            var _this196 = this;
+            var _this198 = this;
 
             // watch the current validation in case it is changed in another session.
             this._hubCacheChangeSubscription = this.hubService.getHubCacheChangeObservable().subscribe(function (hubCacheChange) {
               if (hubCacheChange.changeClass === _shared_shared_models__WEBPACK_IMPORTED_MODULE_5__["eSharedObjectType"].View || hubCacheChange.changeClass === _shared_shared_models__WEBPACK_IMPORTED_MODULE_5__["eSharedObjectType"].TagObjects) {
-                _this196.updateViews();
+                _this198.updateViews();
               }
             });
           }
@@ -29016,7 +29056,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -29046,7 +29086,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -29222,24 +29262,24 @@
         _createClass(ApiStatusComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this197 = this;
+            var _this199 = this;
 
             this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["combineLatest"])(this.hubService.getHubCacheObservable(), this.hubService.getRemoteAgentObservable()).subscribe(function (result) {
               var cache = result[0];
               var remoteAgent = result[1];
 
-              if (_this197.apiKey) {
-                _this197.api = cache.hub.dexihApis.find(function (c) {
-                  return c.key === _this197.apiKey;
+              if (_this199.apiKey) {
+                _this199.api = cache.hub.dexihApis.find(function (c) {
+                  return c.key === _this199.apiKey;
                 });
 
-                if (_this197.api) {
-                  _this197._currentStatusSubscription = _this197.api['currentStatus'].subscribe(function (apiData) {
-                    _this197.apiData = apiData;
+                if (_this199.api) {
+                  _this199._currentStatusSubscription = _this199.api['currentStatus'].subscribe(function (apiData) {
+                    _this199.apiData = apiData;
 
                     if (apiData) {
                       if (apiData.apiStatus === _shared_shared_models__WEBPACK_IMPORTED_MODULE_3__["eApiStatus"].Activated && remoteAgent) {
-                        _this197.urls = remoteAgent.downloadUrls.filter(function (c) {
+                        _this199.urls = remoteAgent.downloadUrls.filter(function (c) {
                           return c.downloadUrlType !== _shared_shared_models__WEBPACK_IMPORTED_MODULE_3__["eDownloadUrlType"].Proxy;
                         }).map(function (url) {
                           return {
@@ -29253,7 +29293,7 @@
                         });
 
                         if (proxy) {
-                          _this197.urls.push({
+                          _this199.urls.push({
                             downloadType: 'Proxy',
                             downloadUrl: window.location.origin + '/api/remote/api/' + remoteAgent.instanceId + '/' + apiData.securityKey,
                             testUrl: proxy.url + '/ping'
@@ -29261,21 +29301,21 @@
                         }
 
                         if (apiData.errorCount === 0) {
-                          _this197.statusClass = 'success';
-                          _this197.statusIcon = 'bolt';
+                          _this199.statusClass = 'success';
+                          _this199.statusIcon = 'bolt';
                         } else {
-                          _this197.statusClass = 'warning';
-                          _this197.statusIcon = 'exclamation-circle';
+                          _this199.statusClass = 'warning';
+                          _this199.statusIcon = 'exclamation-circle';
                         }
                       } else {
-                        _this197.statusClass = 'danger';
-                        _this197.statusIcon = 'chain-broken';
-                        _this197.urls = [];
+                        _this199.statusClass = 'danger';
+                        _this199.statusIcon = 'chain-broken';
+                        _this199.urls = [];
                       }
                     } else {
-                      _this197.statusClass = 'danger';
-                      _this197.statusIcon = 'chain-broken';
-                      _this197.urls = [];
+                      _this199.statusClass = 'danger';
+                      _this199.statusIcon = 'chain-broken';
+                      _this199.urls = [];
                     }
                   });
                 }
@@ -29349,7 +29389,7 @@
         },
         decls: 4,
         vars: 3,
-        consts: [[1, "list-group"], [3, "class", 4, "ngIf"], ["class", "list-group-item list-group-item-danger", 4, "ngIf"], ["class", "list-group-item", 4, "ngFor", "ngForOf"], [1, "d-inline"], ["class", "btn btn-sm btn-warning float-right", "title", "Deactivate the Api", 3, "click", 4, "ngIf"], ["class", "btn btn-sm btn-success float-right", "title", "Activate the Api", 3, "click", 4, "ngIf"], ["title", "Deactivate the Api", 1, "btn", "btn-sm", "btn-warning", "float-right", 3, "click"], [1, "fa", "fa-ban"], ["title", "Activate the Api", 1, "btn", "btn-sm", "btn-success", "float-right", 3, "click"], [1, "fa", "fa-check"], [1, "list-group-item", "list-group-item-danger"], [1, "fa", "fa-chain-broken"], [1, "list-group-item"], [3, "label", "showCopy", "isHidden", "showPreview", "disabled", "rows", "value"], ["target", "_blank", 1, "btn", "btn-sm", "btn-outline-primary", "float-right", "ml-1", 3, "href"]],
+        consts: [[1, "list-group"], [3, "class", 4, "ngIf"], ["class", "list-group-item list-group-item-danger", 4, "ngIf"], ["class", "list-group-item", 4, "ngFor", "ngForOf"], [1, "d-inline"], ["class", "btn btn-sm btn-danger float-right", "title", "Deactivate the Api", 3, "click", 4, "ngIf"], ["class", "btn btn-sm btn-success float-right", "title", "Activate the Api", 3, "click", 4, "ngIf"], ["title", "Deactivate the Api", 1, "btn", "btn-sm", "btn-danger", "float-right", 3, "click"], [1, "fa", "fa-ban"], ["title", "Activate the Api", 1, "btn", "btn-sm", "btn-success", "float-right", 3, "click"], [1, "fa", "fa-check"], [1, "list-group-item", "list-group-item-danger"], [1, "fa", "fa-chain-broken"], [1, "list-group-item"], [3, "label", "showCopy", "isHidden", "showPreview", "disabled", "rows", "value"], ["target", "_blank", 1, "btn", "btn-sm", "btn-outline-primary", "float-right", "ml-1", 3, "href"]],
         template: function ApiStatusComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -29430,7 +29470,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -29442,13 +29482,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -29460,7 +29500,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -29612,7 +29652,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -29630,13 +29670,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -29780,7 +29820,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -29798,19 +29838,19 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -29883,10 +29923,10 @@
         _createClass(ConnectionViewComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this198 = this;
+            var _this200 = this;
 
             this.hubService.getRemoteLibrariesObservable().subscribe(function (remoteLibraries) {
-              return __awaiter(_this198, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee21() {
+              return __awaiter(_this200, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee21() {
                 return regeneratorRuntime.wrap(function _callee21$(_context23) {
                   while (1) {
                     switch (_context23.prev = _context23.next) {
@@ -30019,7 +30059,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -30031,19 +30071,19 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -30187,7 +30227,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -30199,13 +30239,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -30217,7 +30257,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -30367,7 +30407,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -30409,7 +30449,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -30421,7 +30461,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -30587,7 +30627,7 @@
         _createClass(DatalinkStatusComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this199 = this;
+            var _this201 = this;
 
             if (this.writerResult) {
               this.previousStatus = this.getStatus(this.writerResult);
@@ -30597,46 +30637,46 @@
                   return;
                 }
 
-                if (_this199.datalinkKey) {
-                  _this199.dataObject = cache.hub.dexihDatalinks.find(function (c) {
-                    return c.key === _this199.datalinkKey;
+                if (_this201.datalinkKey) {
+                  _this201.dataObject = cache.hub.dexihDatalinks.find(function (c) {
+                    return c.key === _this201.datalinkKey;
                   });
-                } else if (_this199.datajobKey) {
-                  _this199.dataObject = cache.hub.dexihDatajobs.find(function (c) {
-                    return c.key === _this199.datajobKey;
+                } else if (_this201.datajobKey) {
+                  _this201.dataObject = cache.hub.dexihDatajobs.find(function (c) {
+                    return c.key === _this201.datajobKey;
                   });
-                } else if (_this199.datalinkTestKey) {
-                  _this199.dataObject = cache.hub.dexihDatalinkTests.find(function (c) {
-                    return c.key === _this199.datalinkTestKey;
+                } else if (_this201.datalinkTestKey) {
+                  _this201.dataObject = cache.hub.dexihDatalinkTests.find(function (c) {
+                    return c.key === _this201.datalinkTestKey;
                   });
-                } else if (_this199.tableKey) {
-                  _this199.dataObject = cache.getTable(_this199.tableKey);
+                } else if (_this201.tableKey) {
+                  _this201.dataObject = cache.getTable(_this201.tableKey);
                 }
 
-                if (_this199.dataObject) {
-                  if (_this199._currentStatusSubscription) {
-                    _this199._currentStatusSubscription.unsubscribe();
+                if (_this201.dataObject) {
+                  if (_this201._currentStatusSubscription) {
+                    _this201._currentStatusSubscription.unsubscribe();
                   }
 
-                  _this199._currentStatusSubscription = _this199.dataObject.currentStatus.subscribe(function (writerResult) {
-                    _this199.currentWriterResult = writerResult;
+                  _this201._currentStatusSubscription = _this201.dataObject.currentStatus.subscribe(function (writerResult) {
+                    _this201.currentWriterResult = writerResult;
 
                     if (writerResult) {
-                      _this199.currentStatus = _this199.getStatus(writerResult);
+                      _this201.currentStatus = _this201.getStatus(writerResult);
                     } else {
-                      _this199.currentStatus = null;
+                      _this201.currentStatus = null;
                     }
                   });
 
-                  if (_this199._previousStatusSubscription) {
-                    _this199._previousStatusSubscription.unsubscribe();
+                  if (_this201._previousStatusSubscription) {
+                    _this201._previousStatusSubscription.unsubscribe();
                   }
 
-                  _this199._previousStatusSubscription = _this199.dataObject.previousStatus.subscribe(function (previousStatus) {
+                  _this201._previousStatusSubscription = _this201.dataObject.previousStatus.subscribe(function (previousStatus) {
                     if (previousStatus) {
-                      _this199.previousStatus = _this199.getStatus(previousStatus);
+                      _this201.previousStatus = _this201.getStatus(previousStatus);
                     } else {
-                      _this199.previousStatus = null;
+                      _this201.previousStatus = null;
                     }
                   });
                 }
@@ -30927,7 +30967,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -30939,13 +30979,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -30957,7 +30997,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -31109,7 +31149,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -31121,13 +31161,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -31139,7 +31179,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -31289,7 +31329,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -31307,13 +31347,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -31461,7 +31501,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -31485,7 +31525,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -31497,7 +31537,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 
       function InputParametersViewComponent_div_0_span_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -31505,40 +31545,29 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "span", 3);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "form-input", 4);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "form-select", 4);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function InputParametersViewComponent_div_0_span_1_Template_form_input_ngModelChange_1_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r5);
-
-            var parameter_r3 = ctx.$implicit;
-            return parameter_r3.name = $event;
-          });
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "form-select", 5);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function InputParametersViewComponent_div_0_span_1_Template_form_select_ngModelChange_2_listener($event) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function InputParametersViewComponent_div_0_span_1_Template_form_select_ngModelChange_1_listener($event) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r5);
 
             var parameter_r3 = ctx.$implicit;
             return parameter_r3.value = $event;
-          })("ngModelChange", function InputParametersViewComponent_div_0_span_1_Template_form_select_ngModelChange_2_listener($event) {
+          })("ngModelChange", function InputParametersViewComponent_div_0_span_1_Template_form_select_ngModelChange_1_listener($event) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r5);
+
+            var parameter_r3 = ctx.$implicit;
+
+            var ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+
+            return ctx_r6.change(parameter_r3, $event);
+          })("onRefresh", function InputParametersViewComponent_div_0_span_1_Template_form_select_onRefresh_1_listener() {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r5);
 
             var parameter_r3 = ctx.$implicit;
 
             var ctx_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-            return ctx_r7.change(parameter_r3, $event);
-          })("onRefresh", function InputParametersViewComponent_div_0_span_1_Template_form_select_onRefresh_2_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r5);
-
-            var parameter_r3 = ctx.$implicit;
-
-            var ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-
-            return ctx_r8.refreshLOV(parameter_r3);
+            return ctx_r7.refreshLOV(parameter_r3);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -31553,28 +31582,24 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", true)("labelLeft", parameter_r3.name)("ngModel", parameter_r3.name);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("labelLeft", parameter_r3.name)("ngModel", parameter_r3.value)("items", parameter_r3.runTime.items)("enableTextEntry", !(parameter_r3.listOfValuesKey > 0))("textEntryItems", ctx_r1.parentParams)("showRefresh", parameter_r3.runTime.showRefresh)("isRefreshing", parameter_r3.runTime.isRefreshing)("multiSelect", parameter_r3.rank === 1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("labelLeft", parameter_r3.name)("ngModel", parameter_r3.value)("items", parameter_r3["runTime"].items)("enableTextEntry", !(parameter_r3.listOfValuesKey > 0))("textEntryItems", ctx_r1.parentParams)("showRefresh", parameter_r3["runTime"].showRefresh)("isRefreshing", parameter_r3["runTime"].isRefreshing)("multiSelect", parameter_r3.rank === 1);
         }
       }
 
       function InputParametersViewComponent_div_0_div_2_Template(rf, ctx) {
         if (rf & 1) {
-          var _r10 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r9 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 6);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 5);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "a", 7);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "a", 6);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function InputParametersViewComponent_div_0_div_2_Template_a_click_1_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r10);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r9);
 
-            var ctx_r9 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+            var ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-            return ctx_r9.refreshData();
+            return ctx_r8.refreshData();
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "The parameters have changed. Click to refresh.");
@@ -31589,7 +31614,7 @@
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, InputParametersViewComponent_div_0_span_1_Template, 3, 11, "span", 1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, InputParametersViewComponent_div_0_span_1_Template, 2, 8, "span", 1);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, InputParametersViewComponent_div_0_div_2_Template, 3, 0, "div", 2);
 
@@ -31601,7 +31626,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx_r0.parameters);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx_r0.userParameters);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
@@ -31625,13 +31650,13 @@
         _createClass(InputParametersViewComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this200 = this;
+            var _this202 = this;
 
             this._hubSubscription = this.hubService.getHubCacheObservable(true).subscribe(function (cache) {
-              _this200.listOfValues = cache.hub.dexihListOfValues;
-              _this200.userParameters = [];
+              _this202.listOfValues = cache.hub.dexihListOfValues;
+              _this202.userParameters = [];
 
-              _this200.parameters.filter(function (c) {
+              _this202.parameters.filter(function (c) {
                 return c.isValid && c.allowUserSelect;
               }).forEach(function (parameter) {
                 parameter['runTime'] = {
@@ -31647,11 +31672,11 @@
                   }];
                 }
 
-                _this200.userParameters.push(parameter);
+                _this202.userParameters.push(parameter);
               });
             });
             this._refreshSubscription = this.refreshEvent.subscribe(function () {
-              _this200.requiresRefresh = false;
+              _this202.requiresRefresh = false;
             });
           }
         }, {
@@ -31716,7 +31741,7 @@
         },
         decls: 1,
         vars: 1,
-        consts: [[4, "ngIf"], ["class", "input-group", 4, "ngFor", "ngForOf"], ["class", "alert alert-warning mt-2", 4, "ngIf"], [1, "input-group"], [3, "disabled", "labelLeft", "ngModel", "ngModelChange"], ["itemKey", "key", "itemName", "name", "textEntryItemsTitle", "Linked Parameters", 3, "labelLeft", "ngModel", "items", "enableTextEntry", "textEntryItems", "showRefresh", "isRefreshing", "multiSelect", "ngModelChange", "onRefresh"], [1, "alert", "alert-warning", "mt-2"], ["href", "javascript:void(0)", 1, "alert-link", 3, "click"]],
+        consts: [[4, "ngIf"], ["class", "input-group", 4, "ngFor", "ngForOf"], ["class", "alert alert-warning mt-2", 4, "ngIf"], [1, "input-group"], ["itemKey", "key", "itemName", "name", "textEntryItemsTitle", "Linked Parameters", 3, "labelLeft", "ngModel", "items", "enableTextEntry", "textEntryItems", "showRefresh", "isRefreshing", "multiSelect", "ngModelChange", "onRefresh"], [1, "alert", "alert-warning", "mt-2"], ["href", "javascript:void(0)", 1, "alert-link", 3, "click"]],
         template: function InputParametersViewComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, InputParametersViewComponent_div_0_Template, 3, 2, "div", 0);
@@ -31726,7 +31751,7 @@
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.parameters);
           }
         },
-        directives: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["NgIf"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["NgForOf"], ngx_d_components__WEBPACK_IMPORTED_MODULE_5__["DFormInputComponent"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["NgModel"], ngx_d_components__WEBPACK_IMPORTED_MODULE_5__["DFormSelectComponent"]],
+        directives: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["NgIf"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["NgForOf"], ngx_d_components__WEBPACK_IMPORTED_MODULE_5__["DFormSelectComponent"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["NgModel"]],
         encapsulation: 2
       });
       /*@__PURE__*/
@@ -31785,13 +31810,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -31827,7 +31852,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -32112,21 +32137,21 @@
         _createClass(InputParametersComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this201 = this;
+            var _this203 = this;
 
             this._hubSubscription = this.hubService.getHubCacheObservable(true).subscribe(function (cache) {
-              _this201.listOfValues = cache.hub.dexihListOfValues;
+              _this203.listOfValues = cache.hub.dexihListOfValues;
 
-              _this201.parameters.controls.forEach(function (parameterForm) {
+              _this203.parameters.controls.forEach(function (parameterForm) {
                 var parameter = parameterForm.value;
 
                 if (parameter.listOfValuesKey > 0) {
-                  var lov = _this201.listOfValues.find(function (c) {
+                  var lov = _this203.listOfValues.find(function (c) {
                     return c.key === parameter.listOfValuesKey && c.isValid;
                   });
 
                   if (lov && lov.sourceType === _shared_shared_models__WEBPACK_IMPORTED_MODULE_3__["eLOVObjectType"].Static) {
-                    _this201.refreshLOV(parameterForm);
+                    _this203.refreshLOV(parameterForm);
                   }
                 }
               });
@@ -32134,7 +32159,7 @@
 
             if (this.refreshEvent) {
               this._refreshSubscription = this.refreshEvent.subscribe(function () {
-                _this201.requiresRefresh = false;
+                _this203.requiresRefresh = false;
               });
             }
           }
@@ -32173,7 +32198,7 @@
         }, {
           key: "refreshLOV",
           value: function refreshLOV(parameterForm) {
-            var _this202 = this;
+            var _this204 = this;
 
             var parameter = parameterForm.value;
 
@@ -32187,7 +32212,7 @@
               // runTime.items = result;
               // runTime.showRefresh = false;
               // update any other parameters with same list of values.
-              var _iterator11 = _createForOfIteratorHelper(_this202.parameters.controls.filter(function (c) {
+              var _iterator11 = _createForOfIteratorHelper(_this204.parameters.controls.filter(function (c) {
                 return c.controls.listOfValuesKey.value === parameter.listOfValuesKey;
               })),
                   _step11;
@@ -32346,7 +32371,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -32364,13 +32389,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -32514,7 +32539,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -32556,13 +32581,13 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -32592,7 +32617,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -32822,7 +32847,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("selectQuery", ctx_r3.selectQuery)("columns", ctx_r3.tableColumns)("inputColumns", ctx_r3.inputColumns)("parameters", ctx_r3.parameters)("refreshEvent", ctx_r3.refreshDataObservable);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("selectQuery", ctx_r3.selectQuery)("columns", ctx_r3.tableColumns)("inputColumns", ctx_r3.inputColumns)("parameters", ctx_r3.parameters)("refreshEvent", ctx_r3.refreshDataObservable)("requiresRefreshEvent", ctx_r3.requiresRefreshDataObservable);
         }
       }
 
@@ -32841,6 +32866,8 @@
           this.previewUpdates = false;
           this.refreshDataSubject = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
           this.refreshDataObservable = this.refreshDataSubject.asObservable();
+          this.requiresRefreshDataSubject = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
+          this.requiresRefreshDataObservable = this.requiresRefreshDataSubject.asObservable();
           this.chartConfig = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_6__["ChartConfig"]();
           this.view = 'table';
           this.transformProperties = null;
@@ -32856,25 +32883,25 @@
         _createClass(PreviewDataComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this203 = this;
+            var _this205 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["combineLatest"])(this.hubService.getHubCacheObservable(), this.hubService.getRemoteAgentObservable()).subscribe(function (result) {
-                _this203.hubCache = result[0];
+                _this205.hubCache = result[0];
                 var remoteAgent = result[1];
 
-                if (_this203.hubCache.isLoaded()) {
+                if (_this205.hubCache.isLoaded()) {
                   // get the hub key from the route data, and update the service.
-                  switch (_this203.viewSource) {
+                  switch (_this205.viewSource) {
                     case _shared_shared_models__WEBPACK_IMPORTED_MODULE_6__["eDataObjectType"].Datalink:
                       var datalink;
 
-                      if (_this203.key) {
-                        datalink = _this203.hubCache.hub.dexihDatalinks.find(function (c) {
-                          return c.key === _this203.key;
+                      if (_this205.key) {
+                        datalink = _this205.hubCache.hub.dexihDatalinks.find(function (c) {
+                          return c.key === _this205.key;
                         });
                       } else {
-                        datalink = _this203.datalink;
+                        datalink = _this205.datalink;
                       }
 
                       if (!datalink) {
@@ -32883,26 +32910,26 @@
                       // only allows view creation on saved datalink
 
 
-                      _this203.allowViewSave = datalink.key && !_this203.datalinkTransformKey ? true : false;
-                      _this203.title = 'Datalink - ' + datalink.name; // get the outputs from the last transform in the datalink
+                      _this205.allowViewSave = datalink.key && !_this205.datalinkTransformKey ? true : false;
+                      _this205.title = 'Datalink - ' + datalink.name; // get the outputs from the last transform in the datalink
 
                       var ioColumns = new _hub_lineage_models__WEBPACK_IMPORTED_MODULE_4__["InputOutputColumns"]();
-                      ioColumns.buildInputOutput(_this203.hubCache, datalink);
+                      ioColumns.buildInputOutput(datalink);
 
-                      if (_this203.datalinkTransformKey) {
+                      if (_this205.datalinkTransformKey) {
                         var transform = datalink.dexihDatalinkTransforms.find(function (c) {
-                          return c.key === _this203.datalinkTransformKey;
+                          return c.key === _this205.datalinkTransformKey;
                         });
-                        _this203.tableColumns = transform['runTime']['outputColumns'];
+                        _this205.tableColumns = transform['runTime']['outputColumns'];
                       } else {
-                        _this203.tableColumns = ioColumns.getDatalinkOutputColumns(datalink);
+                        _this205.tableColumns = ioColumns.getDatalinkOutputColumns(datalink);
                       }
 
-                      _this203.inputColumns = datalink.sourceDatalinkTable.dexihDatalinkColumns.filter(function (c) {
+                      _this205.inputColumns = datalink.sourceDatalinkTable.dexihDatalinkColumns.filter(function (c) {
                         return c.isInput;
                       }).map(function (c) {
                         return {
-                          datalinkKey: _this203.key,
+                          datalinkKey: _this205.key,
                           datalinkName: datalink.name,
                           name: c.name,
                           logicalName: c.logicalName,
@@ -32912,16 +32939,16 @@
                           defaultValue: c.defaultValue
                         };
                       });
-                      _this203.parameters = datalink.parameters;
+                      _this205.parameters = datalink.parameters;
                       break;
 
                     case _shared_shared_models__WEBPACK_IMPORTED_MODULE_6__["eDataObjectType"].Table:
                       var table;
 
-                      if (_this203.key) {
-                        table = _this203.hubCache.getTable(_this203.key);
+                      if (_this205.key) {
+                        table = _this205.hubCache.getTable(_this205.key);
                       } else {
-                        table = _this203.table;
+                        table = _this205.table;
                       }
 
                       if (!table) {
@@ -32930,10 +32957,10 @@
                       // only allows view creation on saved table
 
 
-                      _this203.allowViewSave = table.key ? true : false;
-                      _this203.title = 'Table - ' + table.name;
-                      _this203.tableColumns = table.dexihTableColumns;
-                      _this203.inputColumns = table.dexihTableColumns.filter(function (c) {
+                      _this205.allowViewSave = table.key ? true : false;
+                      _this205.title = 'Table - ' + table.name;
+                      _this205.tableColumns = table.dexihTableColumns;
+                      _this205.inputColumns = table.dexihTableColumns.filter(function (c) {
                         return c.isInput;
                       }).map(function (c) {
                         return {
@@ -32951,20 +32978,20 @@
                 }
 
                 if (remoteAgent) {
-                  if (!_this203.firstLoad) {
-                    if (!_this203.dialogOpen) {
-                      _this203.dialogOpen = true;
+                  if (!_this205.firstLoad) {
+                    if (!_this205.dialogOpen) {
+                      _this205.dialogOpen = true;
 
-                      _this203.authService.confirmDialog('Remote Agent Available', 'A remote agent is available, would you like to refresh the data?').then(function (confirm) {
+                      _this205.authService.confirmDialog('Remote Agent Available', 'A remote agent is available, would you like to refresh the data?').then(function (confirm) {
                         if (confirm) {
-                          _this203.refresh();
+                          _this205.refresh();
                         }
 
-                        _this203.dialogOpen = false;
+                        _this205.dialogOpen = false;
                       });
                     }
                   } else {
-                    _this203.refresh();
+                    _this205.refresh();
                   }
                 }
               });
@@ -32988,11 +33015,13 @@
           }
         }, {
           key: "parameterChange",
-          value: function parameterChange() {}
+          value: function parameterChange() {
+            this.requiresRefreshDataSubject.next();
+          }
         }, {
           key: "refresh",
           value: function refresh() {
-            var _this204 = this;
+            var _this206 = this;
 
             if (!this.isRefreshing) {
               this.isRefreshing = true; // cancel any existing query.
@@ -33029,19 +33058,19 @@
 
               if (previewQuery) {
                 previewQuery.then(function (result) {
-                  _this204.refreshDataSubject.next();
+                  _this206.refreshDataSubject.next();
 
-                  _this204.columns = result.columns;
-                  _this204.data = result.data;
-                  _this204.transformProperties = result.transformProperties;
-                  _this204.isRefreshing = false;
+                  _this206.columns = result.columns;
+                  _this206.data = result.data;
+                  _this206.transformProperties = result.transformProperties;
+                  _this206.isRefreshing = false;
 
                   if (result.status) {
-                    _this204.hubService.addHubMessage(result.status, false, 'Preview Data');
+                    _this206.hubService.addHubMessage(result.status, false, 'Preview Data');
                   }
                 })["catch"](function () {
-                  _this204.data = [];
-                  _this204.isRefreshing = false;
+                  _this206.data = [];
+                  _this206.isRefreshing = false;
                 });
               }
             }
@@ -33074,7 +33103,7 @@
         }, {
           key: "save",
           value: function save() {
-            var _this205 = this;
+            var _this207 = this;
 
             if (this.view === 'properties') {
               this.authService.informationDialog('Cannot save', 'Select a chart or table view to save.');
@@ -33084,25 +33113,25 @@
             this.authService.promptDialog('View Name', 'Enter a name for the view.').then(function (name) {
               var view = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_6__["DexihView"]();
               view.name = name;
-              view.sourceType = _this205.viewSource;
+              view.sourceType = _this207.viewSource;
 
-              switch (_this205.viewSource) {
+              switch (_this207.viewSource) {
                 case _shared_shared_models__WEBPACK_IMPORTED_MODULE_6__["eDataObjectType"].Datalink:
-                  view.sourceDatalinkKey = _this205.key;
+                  view.sourceDatalinkKey = _this207.key;
                   break;
 
                 case _shared_shared_models__WEBPACK_IMPORTED_MODULE_6__["eDataObjectType"].Table:
-                  view.sourceTableKey = _this205.key;
+                  view.sourceTableKey = _this207.key;
                   break;
               }
 
-              view.viewType = _this205.view === 'chart' ? _shared_shared_models__WEBPACK_IMPORTED_MODULE_6__["eViewType"].Chart : _shared_shared_models__WEBPACK_IMPORTED_MODULE_6__["eViewType"].Table;
-              view.selectQuery = _this205.selectQuery;
-              view.chartConfig = _this205.chartConfig;
-              view.inputValues = _this205.inputColumns;
+              view.viewType = _this207.view === 'chart' ? _shared_shared_models__WEBPACK_IMPORTED_MODULE_6__["eViewType"].Chart : _shared_shared_models__WEBPACK_IMPORTED_MODULE_6__["eViewType"].Table;
+              view.selectQuery = _this207.selectQuery;
+              view.chartConfig = _this207.chartConfig;
+              view.inputValues = _this207.inputColumns;
 
-              _this205.hubService.saveView(view).then(function () {})["catch"](function () {
-                _this205.data = null;
+              _this207.hubService.saveView(view).then(function () {})["catch"](function () {
+                _this207.data = null;
               });
             });
           }
@@ -33128,14 +33157,14 @@
         },
         decls: 9,
         vars: 16,
-        consts: [[3, "enableMultiSelect", "enableSaveCsv", "csvFileName", "columns", "data", "hideTable"], ["actions", ""], ["tableHeader", ""], [1, "mt-1", 3, "ngStyle"], [3, "columns", "data", "config"], [3, "transformProperties"], ["text", "Reload", 1, "mr-1", 3, "click"], [1, "ml-1", 3, "download"], ["data-toggle", "buttons", "title", "Table", 1, "btn-group", "btn-group-toggle", "ml-1"], [1, "btn", "btn-primary", 3, "ngClass"], ["type", "radio", "name", "options", "value", "table", "autocomplete", "off", 3, "ngModel", "ngModelChange"], [1, "fa", "fa-table"], ["title", "Chart", 1, "btn", "btn-primary", 3, "ngClass"], ["type", "radio", "name", "options", "value", "chart", "autocomplete", "off", 3, "ngModel", "ngModelChange"], [1, "fa", "fa-bar-chart"], ["title", "Query plan details", 1, "btn", "btn-primary", 3, "ngClass"], ["type", "radio", "name", "options", "value", "properties", "autocomplete", "off", 3, "ngModel", "ngModelChange"], [1, "fa", "fa-info"], ["class", "ml-1", 3, "click", 4, "ngIf"], [1, "ml-1", 3, "click"], [1, "mt-1"], ["class", "mb-3", 4, "ngIf"], [3, "selectQuery", "columns", "inputColumns", "parameters", "refreshEvent", "onRefreshData"], [1, "mb-3"], [3, "parameters", "refreshEvent", "onRefreshData", "onChange"]],
+        consts: [[3, "enableMultiSelect", "enableSaveCsv", "csvFileName", "columns", "data", "hideTable"], ["actions", ""], ["tableHeader", ""], [1, "mt-1", 3, "ngStyle"], [3, "columns", "data", "config"], [3, "transformProperties"], ["text", "Reload", 1, "mr-1", 3, "click"], [1, "ml-1", 3, "download"], ["data-toggle", "buttons", "title", "Table", 1, "btn-group", "btn-group-toggle", "ml-1"], [1, "btn", "btn-primary", 3, "ngClass"], ["type", "radio", "name", "options", "value", "table", "autocomplete", "off", 3, "ngModel", "ngModelChange"], [1, "fa", "fa-table"], ["title", "Chart", 1, "btn", "btn-primary", 3, "ngClass"], ["type", "radio", "name", "options", "value", "chart", "autocomplete", "off", 3, "ngModel", "ngModelChange"], [1, "fa", "fa-bar-chart"], ["title", "Query plan details", 1, "btn", "btn-primary", 3, "ngClass"], ["type", "radio", "name", "options", "value", "properties", "autocomplete", "off", 3, "ngModel", "ngModelChange"], [1, "fa", "fa-info"], ["class", "ml-1", 3, "click", 4, "ngIf"], [1, "ml-1", 3, "click"], [1, "mt-1"], ["class", "mb-3", 4, "ngIf"], [3, "selectQuery", "columns", "inputColumns", "parameters", "refreshEvent", "requiresRefreshEvent", "onRefreshData"], [1, "mb-3"], [3, "parameters", "refreshEvent", "onRefreshData", "onChange"]],
         template: function PreviewDataComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "d-table", 0);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, PreviewDataComponent_ng_template_1_Template, 13, 13, "ng-template", null, 1, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, PreviewDataComponent_ng_template_3_Template, 3, 6, "ng-template", null, 2, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, PreviewDataComponent_ng_template_3_Template, 3, 7, "ng-template", null, 2, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -33239,7 +33268,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -33269,13 +33298,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -33311,7 +33340,7 @@
         _createClass(RemoteAgentViewComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this206 = this;
+            var _this208 = this;
 
             this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["combineLatest"])(this.authService.getRemoteAgentsObservable(), this.hubService.getRemoteAgentObservable()).subscribe(function (result) {
               var remoteAgents = result[0];
@@ -33322,26 +33351,26 @@
               }
 
               var remoteAgent = remoteAgents.find(function (c) {
-                return c.remoteAgentKey === _this206.remoteAgent.remoteAgentKey;
+                return c.remoteAgentKey === _this208.remoteAgent.remoteAgentKey;
               });
               var activeAgent = remoteAgent && remoteAgent['activeAgents'] && remoteAgent['activeAgents'].length > 0 ? remoteAgent['activeAgents'][0] : null;
-              _this206.isAuthorized = _this206.remoteAgent.isAuthorized;
-              _this206.isConnected = activeAgent ? true : false;
+              _this208.isAuthorized = _this208.remoteAgent.isAuthorized;
+              _this208.isConnected = activeAgent ? true : false;
 
               if (remoteAgent) {
                 if (selectedAgent && remoteAgent.remoteAgentKey === selectedAgent.remoteAgentKey) {
-                  _this206.isSelected = true;
+                  _this208.isSelected = true;
                 } else {
-                  _this206.isSelected = false;
+                  _this208.isSelected = false;
                 }
 
-                _this206.name = activeAgent ? activeAgent.name : remoteAgent ? remoteAgent.name : 'Unknown';
-                _this206.isEncrypted = activeAgent ? activeAgent.isEncrypted : false;
-                _this206.lastLoginDateTime = remoteAgent ? remoteAgent.lastLoginDateTime : null;
+                _this208.name = activeAgent ? activeAgent.name : remoteAgent ? remoteAgent.name : 'Unknown';
+                _this208.isEncrypted = activeAgent ? activeAgent.isEncrypted : false;
+                _this208.lastLoginDateTime = remoteAgent ? remoteAgent.lastLoginDateTime : null;
               } else {
-                _this206.name = 'Unknown';
-                _this206.isEncrypted = false;
-                _this206.lastLoginDateTime = null;
+                _this208.name = 'Unknown';
+                _this208.isEncrypted = false;
+                _this208.lastLoginDateTime = null;
               }
             });
           }
@@ -33468,7 +33497,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -33486,19 +33515,19 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -33664,7 +33693,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -33682,13 +33711,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -33844,7 +33873,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -33986,7 +34015,7 @@
         }, {
           key: "refresh",
           value: function refresh() {
-            var _this207 = this;
+            var _this209 = this;
 
             this.icon = null;
             this.propertyKeys = null;
@@ -33996,7 +34025,7 @@
             }
 
             var transform = this.transformTypes.find(function (c) {
-              return c.key === _this207.transformProperties.transformType;
+              return c.key === _this209.transformProperties.transformType;
             });
 
             if (transform) {
@@ -34144,7 +34173,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -34156,7 +34185,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -34277,7 +34306,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -34289,19 +34318,19 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
@@ -34445,7 +34474,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -34511,7 +34540,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -34589,25 +34618,25 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_cdk_scrolling__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(
       /*! @angular/cdk/scrolling */
-      "./node_modules/@angular/cdk/fesm2015/scrolling.js");
+      "./node_modules/@angular/cdk/__ivy_ngcc__/fesm2015/scrolling.js");
       /* harmony import */
 
 
       var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(
       /*! @angular/cdk/drag-drop */
-      "./node_modules/@angular/cdk/fesm2015/drag-drop.js");
+      "./node_modules/@angular/cdk/__ivy_ngcc__/fesm2015/drag-drop.js");
       /* harmony import */
 
 
@@ -34619,25 +34648,25 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
       var _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(
       /*! @swimlane/ngx-charts */
-      "./node_modules/@swimlane/ngx-charts/fesm2015/swimlane-ngx-charts.js");
+      "./node_modules/@swimlane/ngx-charts/__ivy_ngcc__/fesm2015/swimlane-ngx-charts.js");
       /* harmony import */
 
 
       var angular_gridster2__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(
       /*! angular-gridster2 */
-      "./node_modules/angular-gridster2/fesm2015/angular-gridster2.js");
+      "./node_modules/angular-gridster2/__ivy_ngcc__/fesm2015/angular-gridster2.js");
       /* harmony import */
 
 
@@ -35035,7 +35064,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -35126,7 +35155,7 @@
         }, {
           key: "downloadRemoteAgent",
           value: function downloadRemoteAgent(embedUserName, environment, ll, settings) {
-            var _this208 = this;
+            var _this210 = this;
 
             return new Promise(function (resolve, reject) {
               var remoteAgentSettings = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_5__["RemoteAgentSettings"]();
@@ -35135,7 +35164,7 @@
               remoteAgentSettings.logLevel = ll;
               remoteAgentSettings.remoteApplicationSettings = settings;
 
-              _this208.authService.downloadFile('/api/Remote/DownloadZip', {
+              _this210.authService.downloadFile('/api/Remote/DownloadZip', {
                 embedUserName: embedUserName,
                 environment: environment,
                 ll: ll,
@@ -35143,11 +35172,11 @@
               }, 'dexih.remote.zip', 'application/zip').then(function () {
                 resolve(true);
               })["catch"](function (reason) {
-                _this208.logger.LogC(function () {
+                _this210.logger.LogC(function () {
                   return "downloadRemoteAgent, error: ".concat(reason.message, ".");
                 }, _logging__WEBPACK_IMPORTED_MODULE_1__["eLogLevel"].Error);
 
-                _this208.addHubMessage(reason);
+                _this210.addHubMessage(reason);
 
                 reject(reason);
               });
@@ -35156,7 +35185,7 @@
         }, {
           key: "downloadRemoteSettings",
           value: function downloadRemoteSettings(embedUserName, environment, ll, settings) {
-            var _this209 = this;
+            var _this211 = this;
 
             return new Promise(function (resolve, reject) {
               var remoteAgentSettings = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_5__["RemoteAgentSettings"]();
@@ -35165,7 +35194,7 @@
               remoteAgentSettings.logLevel = ll;
               remoteAgentSettings.remoteApplicationSettings = settings;
 
-              _this209.authService.downloadFile('/api/Remote/DownloadAppSettings', {
+              _this211.authService.downloadFile('/api/Remote/DownloadAppSettings', {
                 embedUserName: embedUserName,
                 environment: environment,
                 ll: ll,
@@ -35173,11 +35202,11 @@
               }, 'appsettings.json', 'application/json').then(function () {
                 resolve(true);
               })["catch"](function (reason) {
-                _this209.logger.LogC(function () {
+                _this211.logger.LogC(function () {
                   return "downloadRemoteSettings, error: ".concat(reason.message, ".");
                 }, _logging__WEBPACK_IMPORTED_MODULE_1__["eLogLevel"].Error);
 
-                _this209.addHubMessage(reason);
+                _this211.addHubMessage(reason);
 
                 reject(reason);
               });
@@ -35235,7 +35264,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -35247,7 +35276,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -35259,7 +35288,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
       var _c0 = ["modal"];
 
@@ -35350,27 +35379,27 @@
         _createClass(AppComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this210 = this;
+            var _this212 = this;
 
             this.authService.setDialogDefaultContainer(this.modal);
             var waitMessagesObservable = this.authService.getWaitMessagesObservable();
             this._waitMessagesSubscription = waitMessagesObservable.subscribe(function (waitMessages) {
               // setTimeout forces micro-task to stop ExpressionChangedAfterItHasBeenCheckedError
               setTimeout(function () {
-                _this210.waitMessages = Array.from(waitMessages.values());
+                _this212.waitMessages = Array.from(waitMessages.values());
               });
             });
             this._routeEventsSubscription = this.router.events.subscribe(function (event) {
               if (event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouteConfigLoadStart"]) {
-                if (_this210.loadingRouteKey) {
-                  _this210.authService.removeWaitMessage(_this210.loadingRouteKey);
+                if (_this212.loadingRouteKey) {
+                  _this212.authService.removeWaitMessage(_this212.loadingRouteKey);
                 }
 
-                _this210.loadingRouteKey = _this210.authService.addWaitMessage('Loading scripts...');
+                _this212.loadingRouteKey = _this212.authService.addWaitMessage('Loading scripts...');
               } else if (event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouteConfigLoadEnd"]) {
-                _this210.authService.removeWaitMessage(_this210.loadingRouteKey);
+                _this212.authService.removeWaitMessage(_this212.loadingRouteKey);
 
-                _this210.loadingRouteKey = null;
+                _this212.loadingRouteKey = null;
               }
             });
           }
@@ -35480,19 +35509,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/platform-browser */
-      "./node_modules/@angular/platform-browser/fesm2015/platform-browser.js");
+      "./node_modules/@angular/platform-browser/__ivy_ngcc__/fesm2015/platform-browser.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -35510,7 +35539,7 @@
 
       var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/platform-browser/animations */
-      "./node_modules/@angular/platform-browser/fesm2015/animations.js");
+      "./node_modules/@angular/platform-browser/__ivy_ngcc__/fesm2015/animations.js");
       /* harmony import */
 
 
@@ -35552,7 +35581,7 @@
 
       var _angular_common_http__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! @angular/common/http */
-      "./node_modules/@angular/common/fesm2015/http.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
       /* harmony import */
 
 
@@ -35564,7 +35593,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js"); // import {HubService} from './+hub/hub.service';
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js"); // import {HubService} from './+hub/hub.service';
 
 
       var AppModule = function AppModule() {
@@ -35654,7 +35683,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -35796,7 +35825,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -35900,7 +35929,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -35912,19 +35941,19 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common/http */
-      "./node_modules/@angular/common/fesm2015/http.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -35936,7 +35965,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
 
       var _c0 = ["scrollTo"];
 
@@ -36037,16 +36066,16 @@
         _createClass(DexihHelpComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this211 = this;
+            var _this213 = this;
 
             this._displayHelpSubscription = this.authService.getDisplayHelp().subscribe(function (displayHelp) {
-              _this211.displayHelp = displayHelp;
+              _this213.displayHelp = displayHelp;
             });
           }
         }, {
           key: "ngOnChanges",
           value: function ngOnChanges() {
-            var _this212 = this;
+            var _this214 = this;
 
             if (this.path) {
               var url = this.location.prepareExternalUrl(this.path);
@@ -36054,14 +36083,14 @@
                 responseType: 'text'
               }).subscribe(function (result) {
                 var matches = new RegExp('{{SERVER}}|{{HUBKEY}}', 'gi');
-                _this212.data = result.replace(matches, function (match) {
+                _this214.data = result.replace(matches, function (match) {
                   switch (match) {
                     case '{{SERVER}}':
                       // return this.location.prepareExternalUrl('./');
                       return window.location.origin;
 
                     case '{{HUBKEY}}':
-                      return _this212.hubKey;
+                      return _this214.hubKey;
                   }
                 }); // data = this.replaceAll(data, '{{HUBKEY}}', this.hubKey)
                 // this.data = data;
@@ -36233,19 +36262,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -36263,13 +36292,13 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 
       var DexihHelpModule = function DexihHelpModule() {
         _classCallCheck(this, DexihHelpModule);
@@ -36333,13 +36362,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 
       var AuthLayoutComponent = /*#__PURE__*/function () {
         function AuthLayoutComponent() {
@@ -36418,13 +36447,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 
       var EmptyLayoutComponent = /*#__PURE__*/function () {
         function EmptyLayoutComponent() {
@@ -36498,7 +36527,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -36510,7 +36539,7 @@
 
       var _angular_animations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/animations */
-      "./node_modules/@angular/animations/fesm2015/animations.js");
+      "./node_modules/@angular/animations/__ivy_ngcc__/fesm2015/animations.js");
       /* harmony import */
 
 
@@ -36534,7 +36563,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -36556,18 +36585,18 @@
         _createClass(MainLayoutComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this213 = this;
+            var _this215 = this;
 
             this._layoutSubscription = this.layoutService.subscribe(function (store) {
-              _this213.collapsed = store.menuCollapsed;
-              _this213.mobileViewActivated = store.mobileViewActivated;
+              _this215.collapsed = store.menuCollapsed;
+              _this215.mobileViewActivated = store.mobileViewActivated;
 
-              if (_this213.collapsed) {
-                _this213.sidebarState = 'in';
-                _this213.mainState = 'in';
+              if (_this215.collapsed) {
+                _this215.sidebarState = 'in';
+                _this215.mainState = 'in';
               } else {
-                _this213.sidebarState = 'out';
-                _this213.mainState = _this213.mobileViewActivated ? 'in' : 'out';
+                _this215.sidebarState = 'out';
+                _this215.mainState = _this215.mobileViewActivated ? 'in' : 'out';
               }
             });
           }
@@ -36699,7 +36728,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -36709,7 +36738,7 @@
 
       var FooterComponent = /*#__PURE__*/function () {
         function FooterComponent(authService) {
-          var _this214 = this;
+          var _this216 = this;
 
           _classCallCheck(this, FooterComponent);
 
@@ -36717,9 +36746,10 @@
           this._globalCacheSubscription = authService.getGlobalCacheObservable().subscribe(function (cache) {
             if (cache) {
               var date = new Date(cache.buildDate);
-              _this214.buildDate = date.toLocaleDateString(); // cache.buildDate;
+              _this216.year = date.getFullYear();
+              _this216.buildDate = date.toLocaleDateString(); // cache.buildDate;
 
-              _this214.buildVersion = cache.buildVersion;
+              _this216.buildVersion = cache.buildVersion;
             }
           });
         }
@@ -36746,22 +36776,26 @@
       FooterComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
         type: FooterComponent,
         selectors: [["dexih-footer"]],
-        decls: 5,
+        decls: 6,
         vars: 3,
-        consts: [[1, "text-white", "bg-primary", "d-flex", "flex-row", "align-middle", 2, "height", "30px"], [1, "pl-2"], [1, "d-none", "d-sm-inline", "ml-auto", "pr-2"]],
+        consts: [[1, "text-white", "bg-primary", "d-flex", "flex-row", "align-middle", 2, "height", "30px"], [1, "pl-2"], ["href", "https://dataexpertsgroup.com", 1, "text-white"], [1, "d-none", "d-sm-inline", "ml-auto", "pr-2"]],
         template: function FooterComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "a", 2);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "div", 2);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 3);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -36769,9 +36803,9 @@
           }
 
           if (rf & 2) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("Data Experts Group \xA9 ", ctx.year, "");
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" Data Experts Group \xA9 ", ctx.year, "");
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
@@ -36823,13 +36857,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -36865,7 +36899,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -36877,7 +36911,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 
       var _c0 = ["toasts"];
 
@@ -36988,19 +37022,19 @@
         _createClass(HeaderComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this215 = this;
+            var _this217 = this;
 
             this._hubCacheSubscription = this.hubService.getHubCacheObservable().subscribe(function (cache) {
               if (cache.status === _hub_hub_models__WEBPACK_IMPORTED_MODULE_4__["eCacheStatus"].Loaded) {
-                _this215.hubCache = cache;
+                _this217.hubCache = cache;
               }
             });
             this._layoutSubscription = this.layoutService.subscribe(function (store) {
-              _this215.collapsed = store.menuCollapsed;
-              _this215.mobileViewActivated = store.mobileViewActivated;
+              _this217.collapsed = store.menuCollapsed;
+              _this217.mobileViewActivated = store.mobileViewActivated;
             });
             this._displayHelpSubscription = this.authService.getDisplayHelp().subscribe(function (displayHelp) {
-              return _this215.displayHelp = displayHelp;
+              return _this217.displayHelp = displayHelp;
             });
             this._notificationSubscription = this.authService.getNotificationObservable().subscribe(function (message) {
               if (message) {
@@ -37012,11 +37046,11 @@
                   delay: 6000,
                   title: 'Message',
                   onButtonClick: function onButtonClick(m) {
-                    return _this215.toastClick(message);
+                    return _this217.toastClick(message);
                   }
                 };
 
-                _this215.toasts.add(toastMessage);
+                _this217.toasts.add(toastMessage);
               }
             });
           }
@@ -37236,25 +37270,25 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -37270,15 +37304,10 @@
       /* harmony import */
 
 
-      var _messages_messages_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-      /*! ./messages/messages.component */
-      "./src/app/shared/layout/header/messages/messages.component.ts");
-      /* harmony import */
-
-
-      var _tasks_tasks_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      var _tasks_tasks_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! ./tasks/tasks.component */
-      "./src/app/shared/layout/header/tasks/tasks.component.ts");
+      "./src/app/shared/layout/header/tasks/tasks.component.ts"); // import {MessagesComponent} from './messages/messages.component';
+
 
       var HeaderModule = function HeaderModule() {
         _classCallCheck(this, HeaderModule);
@@ -37296,7 +37325,7 @@
 
       (function () {
         (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](HeaderModule, {
-          declarations: [_tasks_tasks_component__WEBPACK_IMPORTED_MODULE_7__["TasksComponent"], _header_component__WEBPACK_IMPORTED_MODULE_5__["HeaderComponent"], _messages_messages_component__WEBPACK_IMPORTED_MODULE_6__["MessagesComponent"]],
+          declarations: [_tasks_tasks_component__WEBPACK_IMPORTED_MODULE_6__["TasksComponent"], _header_component__WEBPACK_IMPORTED_MODULE_5__["HeaderComponent"]],
           imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"], _shared_module__WEBPACK_IMPORTED_MODULE_4__["SharedModule"]],
           exports: [_header_component__WEBPACK_IMPORTED_MODULE_5__["HeaderComponent"]]
         });
@@ -37309,176 +37338,10 @@
           type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
           args: [{
             imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"], _shared_module__WEBPACK_IMPORTED_MODULE_4__["SharedModule"]],
-            declarations: [_tasks_tasks_component__WEBPACK_IMPORTED_MODULE_7__["TasksComponent"], _header_component__WEBPACK_IMPORTED_MODULE_5__["HeaderComponent"], _messages_messages_component__WEBPACK_IMPORTED_MODULE_6__["MessagesComponent"]],
+            declarations: [_tasks_tasks_component__WEBPACK_IMPORTED_MODULE_6__["TasksComponent"], _header_component__WEBPACK_IMPORTED_MODULE_5__["HeaderComponent"]],
             exports: [_header_component__WEBPACK_IMPORTED_MODULE_5__["HeaderComponent"]]
           }]
         }], null, null);
-      })();
-      /***/
-
-    },
-
-    /***/
-    "./src/app/shared/layout/header/messages/messages.component.ts":
-    /*!*********************************************************************!*\
-      !*** ./src/app/shared/layout/header/messages/messages.component.ts ***!
-      \*********************************************************************/
-
-    /*! exports provided: MessagesComponent */
-
-    /***/
-    function srcAppSharedLayoutHeaderMessagesMessagesComponentTs(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "MessagesComponent", function () {
-        return MessagesComponent;
-      });
-      /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
-      /* harmony import */
-
-
-      var _auth_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! ../../../../+auth/auth.service */
-      "./src/app/+auth/auth.service.ts");
-      /* harmony import */
-
-
-      var _layout_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! ../../layout.service */
-      "./src/app/shared/layout/layout.service.ts");
-      /* harmony import */
-
-
-      var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
-
-      function MessagesComponent_div_0_span_2_Template(rf, ctx) {
-        if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "span");
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        }
-
-        if (rf & 2) {
-          var ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx_r1.waitMessage);
-        }
-      }
-
-      function MessagesComponent_div_0_Template(rf, ctx) {
-        if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 1);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "i", 2);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, MessagesComponent_div_0_span_2_Template, 2, 1, "span", 3);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        }
-
-        if (rf & 2) {
-          var ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("title", ctx_r0.waitMessage);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !ctx_r0.mobileViewActivated);
-        }
-      }
-
-      var MessagesComponent = /*#__PURE__*/function () {
-        function MessagesComponent(authService, layoutService) {
-          _classCallCheck(this, MessagesComponent);
-
-          this.authService = authService;
-          this.layoutService = layoutService;
-        }
-
-        _createClass(MessagesComponent, [{
-          key: "ngOnInit",
-          value: function ngOnInit() {
-            var _this216 = this;
-
-            this.waitMessages = this.authService.getWaitMessagesObservable();
-            this._waitMessagesSubscription = this.waitMessages.subscribe(function (waitMessages) {
-              if (waitMessages.size === 0) {
-                _this216.waitMessage = '';
-              } else if (waitMessages.size === 1) {
-                _this216.waitMessage = waitMessages.values().next().value;
-              } else {
-                _this216.waitMessage = "Waiting for ".concat(waitMessages.size, " operations...");
-              }
-            });
-            this._layoutSubscription = this.layoutService.subscribe(function (store) {
-              _this216.mobileViewActivated = store.mobileViewActivated;
-            });
-          }
-        }, {
-          key: "ngOnDestroy",
-          value: function ngOnDestroy() {
-            if (this._waitMessagesSubscription) {
-              this._waitMessagesSubscription.unsubscribe();
-            }
-          }
-        }]);
-
-        return MessagesComponent;
-      }();
-
-      MessagesComponent.ɵfac = function MessagesComponent_Factory(t) {
-        return new (t || MessagesComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_auth_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_layout_service__WEBPACK_IMPORTED_MODULE_2__["LayoutService"]));
-      };
-
-      MessagesComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
-        type: MessagesComponent,
-        selectors: [["messages"]],
-        decls: 1,
-        vars: 1,
-        consts: [["class", "pl-2 text-white", 3, "title", 4, "ngIf"], [1, "pl-2", "text-white", 3, "title"], [1, "fa", "fa-spin", "fa-cog"], [4, "ngIf"]],
-        template: function MessagesComponent_Template(rf, ctx) {
-          if (rf & 1) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, MessagesComponent_div_0_Template, 3, 2, "div", 0);
-          }
-
-          if (rf & 2) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.waitMessage);
-          }
-        },
-        directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"]],
-        encapsulation: 2
-      });
-      /*@__PURE__*/
-
-      (function () {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](MessagesComponent, [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
-          args: [{
-            selector: 'messages',
-            templateUrl: './messages.component.html'
-          }]
-        }], function () {
-          return [{
-            type: _auth_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]
-          }, {
-            type: _layout_service__WEBPACK_IMPORTED_MODULE_2__["LayoutService"]
-          }];
-        }, null);
       })();
       /***/
 
@@ -37508,7 +37371,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -37520,7 +37383,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -37538,7 +37401,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -37731,12 +37594,12 @@
         _createClass(TasksComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this217 = this;
+            var _this218 = this;
 
             this.tasks = this.authService.getTasksObservable();
             this._tasksSubscription = this.tasks.subscribe(function (tasks) {
-              _this217.count = tasks.length;
-              _this217.tasksRunning = tasks.findIndex(function (c) {
+              _this218.count = tasks.length;
+              _this218.tasksRunning = tasks.findIndex(function (c) {
                 return c.status === _shared_models__WEBPACK_IMPORTED_MODULE_3__["eManagedTaskStatus"].Created || c.status === _shared_models__WEBPACK_IMPORTED_MODULE_3__["eManagedTaskStatus"].Queued || c.status === _shared_models__WEBPACK_IMPORTED_MODULE_3__["eManagedTaskStatus"].Running;
               }) >= 0;
             });
@@ -37755,12 +37618,12 @@
         }, {
           key: "update",
           value: function update() {
-            var _this218 = this;
+            var _this219 = this;
 
             this.loading = true;
             setTimeout(function () {
-              _this218.lastUpdate = new Date();
-              _this218.loading = false;
+              _this219.lastUpdate = new Date();
+              _this219.loading = false;
             }, 1000);
           }
         }, {
@@ -37870,13 +37733,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -37897,14 +37760,14 @@
         _createClass(LayoutGuard, [{
           key: "canActivate",
           value: function canActivate(route, state) {
-            var _this219 = this;
+            var _this220 = this;
 
             return new Promise(function (resolve, reject) {
-              _this219.authService.isLoggedIn().then(function (result) {
+              _this220.authService.isLoggedIn().then(function (result) {
                 if (!result) {
-                  _this219.authService.redirectUrl = state.url;
+                  _this220.authService.redirectUrl = state.url;
 
-                  _this219.router.navigate(['/auth/login']);
+                  _this220.router.navigate(['/auth/login']);
 
                   resolve(false);
                 } else {
@@ -37912,9 +37775,9 @@
                   resolve(true);
                 }
               })["catch"](function (reason) {
-                _this219.authService.redirectUrl = state.url;
+                _this220.authService.redirectUrl = state.url;
 
-                _this219.router.navigate(['/auth/login']);
+                _this220.router.navigate(['/auth/login']);
               });
             });
           }
@@ -37974,25 +37837,25 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -38129,7 +37992,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -38160,7 +38023,7 @@
 
       var LayoutService = /*#__PURE__*/function () {
         function LayoutService(authService) {
-          var _this220 = this;
+          var _this221 = this;
 
           _classCallCheck(this, LayoutService);
 
@@ -38169,9 +38032,9 @@
           this.store = store;
           this.resizeUpdate();
           Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["fromEvent"])(window, 'resize').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["debounceTime"])(100), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function () {
-            _this220.resizeUpdate();
+            _this221.resizeUpdate();
 
-            _this220.trigger();
+            _this221.trigger();
           })).subscribe();
         }
 
@@ -38282,13 +38145,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -38324,7 +38187,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
       function HubsComponent_li_1_i_2_Template(rf, ctx) {
         if (rf & 1) {
@@ -38384,15 +38247,15 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", hub_r1.hubAccess == ctx_r0.eHubAccess.User);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r0.user.isAdmin || hub_r1.sharedAccess == ctx_r0.eHubAccess.User);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", hub_r1.hubAccess == ctx_r0.eHubAccess.ReadOnly);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !ctx_r0.user.isAdmin && hub_r1.sharedAccess == ctx_r0.eHubAccess.ReadOnly);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", hub_r1.hubAccess == ctx_r0.eHubAccess.Public);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !ctx_r0.user.isAdmin && hub_r1.sharedAccess == ctx_r0.eHubAccess.Public);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
@@ -38414,33 +38277,33 @@
         _createClass(HubsComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this221 = this;
+            var _this222 = this;
 
             this.hubs = this.authService.getHubsObservable();
             this.authService.getUserObservable().subscribe(function (u) {
-              _this221.user = u;
+              _this222.user = u;
             });
             this.hubStatusMessage = 'No Hub Selected';
             this.hubCacheStatusSubscription = this.hubService.getHubCacheObservable().subscribe(function (hubCache) {
               switch (hubCache.status) {
                 case _hub_hub_models__WEBPACK_IMPORTED_MODULE_5__["eCacheStatus"].Loading:
-                  _this221.textClass = 'text-info';
-                  _this221.hubStatusMessage = hubCache.hub.name + '(Loading...)';
+                  _this222.textClass = 'text-info';
+                  _this222.hubStatusMessage = hubCache.hub.name + '(Loading...)';
                   break;
 
                 case _hub_hub_models__WEBPACK_IMPORTED_MODULE_5__["eCacheStatus"].Loaded:
-                  _this221.textClass = 'text-success';
-                  _this221.hubStatusMessage = hubCache.hub.name;
+                  _this222.textClass = 'text-success';
+                  _this222.hubStatusMessage = hubCache.hub.name;
                   break;
 
                 case _hub_hub_models__WEBPACK_IMPORTED_MODULE_5__["eCacheStatus"].NotLoaded:
-                  _this221.textClass = 'text-danger';
-                  _this221.hubStatusMessage = 'Cache Not loaded';
+                  _this222.textClass = 'text-danger';
+                  _this222.hubStatusMessage = 'Cache Not loaded';
                   break;
 
                 case _hub_hub_models__WEBPACK_IMPORTED_MODULE_5__["eCacheStatus"].NoHub:
-                  _this221.textClass = 'text-danger';
-                  _this221.hubStatusMessage = 'No Hub Selected';
+                  _this222.textClass = 'text-danger';
+                  _this222.hubStatusMessage = 'No Hub Selected';
                   break;
               }
             });
@@ -38563,7 +38426,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -38575,13 +38438,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -38610,7 +38473,7 @@
 
             var ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r2.manageUser(ctx_r2.hub);
+            return ctx_r2.manageUser();
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "i", 5);
@@ -38630,7 +38493,7 @@
 
             var ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r4.logout(ctx_r4.hub);
+            return ctx_r4.logout();
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](7, "i", 6);
@@ -38673,14 +38536,14 @@
 
       var LoginInfoComponent = /*#__PURE__*/function () {
         function LoginInfoComponent(authService, router) {
-          var _this222 = this;
+          var _this223 = this;
 
           _classCallCheck(this, LoginInfoComponent);
 
           this.authService = authService;
           this.router = router;
           this.userSubcription = this.authService.getUserObservable().subscribe(function (user) {
-            return _this222.user = user;
+            return _this223.user = user;
           });
         }
 
@@ -38702,11 +38565,11 @@
         }, {
           key: "logout",
           value: function logout() {
-            var _this223 = this;
+            var _this224 = this;
 
             this.authService.logout().then(function (result) {
               if (result === true) {
-                _this223.login();
+                _this224.login();
               }
             });
           }
@@ -38835,19 +38698,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
       var MenuItemComponent = /*#__PURE__*/function () {
         function MenuItemComponent() {
@@ -38968,7 +38831,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -38980,13 +38843,13 @@
 
       var _angular_animations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/animations */
-      "./node_modules/@angular/animations/fesm2015/animations.js");
+      "./node_modules/@angular/animations/__ivy_ngcc__/fesm2015/animations.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
       var _c0 = ["item"];
 
@@ -39227,7 +39090,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -39275,13 +39138,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -39850,38 +39713,38 @@
         _createClass(NavigationComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this224 = this;
+            var _this225 = this;
 
             this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_0__["combineLatest"])(this.hubService.getHubCacheObservable(), this.authService.getUserObservable(), this.authService.getHubsObservable(), this.authService.getRemoteAgentsObservable()).subscribe(function (result) {
-              _this224.hubCache = result[0];
-              _this224.user = result[1];
-              _this224.hubs = result[2];
+              _this225.hubCache = result[0];
+              _this225.user = result[1];
+              _this225.hubs = result[2];
               var activeAgents = result[3];
 
               if (activeAgents) {
-                _this224.activeAgentCount = activeAgents.length;
+                _this225.activeAgentCount = activeAgents.length;
               } else {
-                _this224.activeAgentCount = 0;
+                _this225.activeAgentCount = 0;
               }
 
-              if (_this224.hubCache && _this224.hubCache.isLoaded()) {
-                _this224.remoteAgents = _this224.hubCache.hub.dexihRemoteAgentHubs;
+              if (_this225.hubCache && _this225.hubCache.isLoaded()) {
+                _this225.remoteAgents = _this225.hubCache.hub.dexihRemoteAgentHubs;
 
-                _this224.sharedObjectProperties.forEach(function (c) {
-                  if (!_this224.hubCache.hub[c.cacheProperty]) {
-                    _this224.objectCounts[c.type] = 0;
+                _this225.sharedObjectProperties.forEach(function (c) {
+                  if (!_this225.hubCache.hub[c.cacheProperty]) {
+                    _this225.objectCounts[c.type] = 0;
                   } else {
-                    _this224.objectCounts[c.type] = _this224.hubCache.hub[c.cacheProperty].filter(function (d) {
+                    _this225.objectCounts[c.type] = _this225.hubCache.hub[c.cacheProperty].filter(function (d) {
                       return d.isValid;
                     }).length;
                   }
                 });
 
-                _this224.hubCacheLoaded = true;
+                _this225.hubCacheLoaded = true;
 
-                _this224.watchChanges();
+                _this225.watchChanges();
               } else {
-                _this224.hubCacheLoaded = false;
+                _this225.hubCacheLoaded = false;
               }
             });
 
@@ -39890,15 +39753,15 @@
             }
 
             this._layoutSubscription = this.layoutService.subscribe(function (store) {
-              _this224.mobileViewActivated = store.mobileViewActivated;
+              _this225.mobileViewActivated = store.mobileViewActivated;
 
               if (store.menuCollapsed) {
-                _this224.expanded = false;
-                _this224.state = 'collapsed';
+                _this225.expanded = false;
+                _this225.state = 'collapsed';
               } else {
-                _this224.ignoreClick = true;
-                _this224.expanded = true;
-                _this224.state = 'expanded';
+                _this225.ignoreClick = true;
+                _this225.expanded = true;
+                _this225.state = 'expanded';
               }
             });
           }
@@ -39925,7 +39788,7 @@
         }, {
           key: "watchChanges",
           value: function watchChanges() {
-            var _this225 = this;
+            var _this226 = this;
 
             // watch the current connection in case it is changed in another session.
             if (this._hubCacheObserve) {
@@ -39933,15 +39796,15 @@
             }
 
             this._hubCacheObserve = this.hubService.getHubCacheChangeObservable().subscribe(function (hubCacheChange) {
-              var hubCache = _this225.hubCache;
-              _this225.hubCache = hubCache;
+              var hubCache = _this226.hubCache;
+              _this226.hubCache = hubCache;
 
-              var property = _this225.sharedObjectProperties.find(function (c) {
+              var property = _this226.sharedObjectProperties.find(function (c) {
                 return c.type === hubCacheChange.changeClass;
               });
 
               if (property) {
-                _this225.objectCounts[hubCacheChange.changeClass] = _this225.hubCache.hub[property.cacheProperty].filter(function (d) {
+                _this226.objectCounts[hubCacheChange.changeClass] = _this226.hubCache.hub[property.cacheProperty].filter(function (d) {
                   return d.isValid;
                 }).length;
               }
@@ -40303,13 +40166,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -40321,7 +40184,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -40421,13 +40284,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -40463,7 +40326,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -40656,44 +40519,44 @@
         _createClass(RemoteAgentComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this226 = this;
+            var _this227 = this;
 
             this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["combineLatest"])(this.hubService.getHubCacheObservable(), this.hubService.getRemoteAgentObservable(), this.authService.getRemoteAgentsObservable()).subscribe(function (result) {
-              _this226.hubCache = result[0];
+              _this227.hubCache = result[0];
               var remoteAgents = result[2];
 
               if (!remoteAgents) {
-                _this226.selectedRemoteAgent = null;
-                _this226.activeHubAgents = null;
+                _this227.selectedRemoteAgent = null;
+                _this227.activeHubAgents = null;
                 return;
               }
 
-              if (_this226.hubCache.isLoaded()) {
-                _this226.hubKey = _this226.hubCache.hub.hubKey;
+              if (_this227.hubCache.isLoaded()) {
+                _this227.hubKey = _this227.hubCache.hub.hubKey;
 
-                var remoteAgentHubs = _this226.hubCache.hub.dexihRemoteAgentHubs.filter(function (c) {
+                var remoteAgentHubs = _this227.hubCache.hub.dexihRemoteAgentHubs.filter(function (c) {
                   return c.isAuthorized;
                 });
 
-                _this226.activeHubAgents = [];
+                _this227.activeHubAgents = [];
                 remoteAgentHubs.forEach(function (r) {
                   var remoteAgent = remoteAgents.find(function (c) {
                     return c.remoteAgentKey === r.remoteAgentKey;
                   });
 
                   if (remoteAgent) {
-                    _this226.activeHubAgents = _this226.activeHubAgents.concat(remoteAgent['activeAgents']);
+                    _this227.activeHubAgents = _this227.activeHubAgents.concat(remoteAgent['activeAgents']);
                   }
                 });
 
-                if (_this226.activeHubAgents.length > 0) {
-                  console.log('Remote Agents updated, count = ' + _this226.activeHubAgents.length);
-                  _this226.selectedRemoteAgent = result[1];
+                if (_this227.activeHubAgents.length > 0) {
+                  console.log('Remote Agents updated, count = ' + _this227.activeHubAgents.length);
+                  _this227.selectedRemoteAgent = result[1];
                 } else {
-                  _this226.selectedRemoteAgent = null;
+                  _this227.selectedRemoteAgent = null;
                 }
               } else {
-                _this226.hubKey = null;
+                _this227.hubKey = null;
               }
             });
           }
@@ -40847,7 +40710,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -40931,19 +40794,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -41027,13 +40890,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -41045,7 +40908,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
       function RouteBreadcrumbsComponent_li_6_a_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -41128,13 +40991,13 @@
         _createClass(RouteBreadcrumbsComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this227 = this;
+            var _this228 = this;
 
             this.router.events.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["filter"])(function (event) {
               return event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__["NavigationEnd"];
             })).subscribe(function (event) {
               var breadcrumbs = [];
-              var currentRoute = _this227.route.root,
+              var currentRoute = _this228.route.root,
                   url = '';
 
               do {
@@ -41162,7 +41025,7 @@
                 });
               } while (currentRoute);
 
-              _this227.breadcrumbs = breadcrumbs;
+              _this228.breadcrumbs = breadcrumbs;
             });
           }
         }, {
@@ -47386,43 +47249,43 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
       var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/cdk/drag-drop */
-      "./node_modules/@angular/cdk/fesm2015/drag-drop.js");
+      "./node_modules/@angular/cdk/__ivy_ngcc__/fesm2015/drag-drop.js");
       /* harmony import */
 
 
       var _angular_common_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common/http */
-      "./node_modules/@angular/common/fesm2015/http.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
       /* harmony import */
 
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -47434,19 +47297,19 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
       var _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @swimlane/ngx-charts */
-      "./node_modules/@swimlane/ngx-charts/fesm2015/swimlane-ngx-charts.js");
+      "./node_modules/@swimlane/ngx-charts/__ivy_ngcc__/fesm2015/swimlane-ngx-charts.js");
       /* harmony import */
 
 
       var angular_gridster2__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! angular-gridster2 */
-      "./node_modules/angular-gridster2/fesm2015/angular-gridster2.js");
+      "./node_modules/angular-gridster2/__ivy_ngcc__/fesm2015/angular-gridster2.js");
       /* harmony import */
 
 
@@ -48446,7 +48309,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -48486,7 +48349,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -48504,7 +48367,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 
       function ChartBuilderComponent_d_widget_section_0_div_6_Template(rf, ctx) {
         if (rf & 1) {
@@ -50092,15 +49955,15 @@
         }, {
           key: "ngOnChanges",
           value: function ngOnChanges() {
-            var _this228 = this;
+            var _this229 = this;
 
             this.chartType = null;
 
             if (this.columns) {
               _chart_groups__WEBPACK_IMPORTED_MODULE_1__["ChartTypes"].forEach(function (chartGroup) {
-                if (!_this228.chartType) {
-                  _this228.chartType = chartGroup.charts.find(function (c) {
-                    return c.key === _this228.config.chartType;
+                if (!_this229.chartType) {
+                  _this229.chartType = chartGroup.charts.find(function (c) {
+                    return c.key === _this229.config.chartType;
                   });
                 }
               });
@@ -50299,7 +50162,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -50335,19 +50198,19 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var angular_resize_event__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! angular-resize-event */
-      "./node_modules/angular-resize-event/fesm2015/angular-resize-event.js");
+      "./node_modules/angular-resize-event/__ivy_ngcc__/fesm2015/angular-resize-event.js");
       /* harmony import */
 
 
       var _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @swimlane/ngx-charts */
-      "./node_modules/@swimlane/ngx-charts/fesm2015/swimlane-ngx-charts.js");
+      "./node_modules/@swimlane/ngx-charts/__ivy_ngcc__/fesm2015/swimlane-ngx-charts.js");
       /* harmony import */
 
 
@@ -50377,7 +50240,7 @@
 
       function ChartViewComponent_div_1_div_5_ngx_charts_bar_vertical_1_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-bar-vertical", 29);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-bar-vertical", 31);
         }
 
         if (rf & 2) {
@@ -50391,7 +50254,7 @@
 
       function ChartViewComponent_div_1_div_5_ngx_charts_bar_horizontal_2_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-bar-horizontal", 30);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-bar-horizontal", 32);
         }
 
         if (rf & 2) {
@@ -50405,7 +50268,7 @@
 
       function ChartViewComponent_div_1_div_5_ngx_charts_bar_vertical_2d_3_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-bar-vertical-2d", 31);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-bar-vertical-2d", 33);
         }
 
         if (rf & 2) {
@@ -50419,7 +50282,7 @@
 
       function ChartViewComponent_div_1_div_5_ngx_charts_bar_horizontal_2d_4_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-bar-horizontal-2d", 32);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-bar-horizontal-2d", 34);
         }
 
         if (rf & 2) {
@@ -50433,7 +50296,7 @@
 
       function ChartViewComponent_div_1_div_5_ngx_charts_bar_vertical_stacked_5_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-bar-vertical-stacked", 31);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-bar-vertical-stacked", 35);
         }
 
         if (rf & 2) {
@@ -50441,13 +50304,13 @@
 
           var ctx_r9 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("view", ctx_r9.view)("customColors", ctx_r9.customColors)("results", results_r2)("gradient", ctx_r9.config.showGradient)("xAxis", ctx_r9.config.showXAxis)("yAxis", ctx_r9.config.showYAxis)("legend", ctx_r9.config.showLegend)("legendPosition", ctx_r9.config.legendPosition)("showGridLines", ctx_r9.config.showGridLines)("showXAxisLabel", ctx_r9.config.showXAxisLabel)("showYAxisLabel", ctx_r9.config.showYAxisLabel)("xAxisLabel", ctx_r9.config.xAxisLabel)("yScaleMax", ctx_r9.config.yScaleMax)("yAxisLabel", ctx_r9.config.yAxisLabel)("barPadding", ctx_r9.config.barPadding ? ctx_r9.config.barPadding : 3)("roundEdges", ctx_r9.config.roundEdges)("showDataLabel", ctx_r9.config.showDataLabel);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("view", ctx_r9.view)("customColors", ctx_r9.customColors)("results", results_r2)("gradient", ctx_r9.config.showGradient)("xAxis", ctx_r9.config.showXAxis)("yAxis", ctx_r9.config.showYAxis)("legend", ctx_r9.config.showLegend)("legendPosition", ctx_r9.config.legendPosition)("showGridLines", ctx_r9.config.showGridLines)("showXAxisLabel", ctx_r9.config.showXAxisLabel)("showYAxisLabel", ctx_r9.config.showYAxisLabel)("xAxisLabel", ctx_r9.config.xAxisLabel)("yScaleMax", ctx_r9.config.yScaleMax)("yAxisLabel", ctx_r9.config.yAxisLabel)("barPadding", ctx_r9.config.barPadding ? ctx_r9.config.barPadding : 3)("showDataLabel", ctx_r9.config.showDataLabel);
         }
       }
 
       function ChartViewComponent_div_1_div_5_ngx_charts_bar_horizontal_stacked_6_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-bar-horizontal-stacked", 32);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-bar-horizontal-stacked", 36);
         }
 
         if (rf & 2) {
@@ -50455,13 +50318,13 @@
 
           var ctx_r10 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("view", ctx_r10.view)("customColors", ctx_r10.customColors)("results", results_r2)("gradient", ctx_r10.config.showGradient)("xAxis", ctx_r10.config.showXAxis)("yAxis", ctx_r10.config.showYAxis)("legend", ctx_r10.config.showLegend)("legendPosition", ctx_r10.config.legendPosition)("showGridLines", ctx_r10.config.showGridLines)("showXAxisLabel", ctx_r10.config.showXAxisLabel)("showYAxisLabel", ctx_r10.config.showYAxisLabel)("xAxisLabel", ctx_r10.config.xAxisLabel)("xScaleMax", ctx_r10.config.xScaleMax)("yAxisLabel", ctx_r10.config.yAxisLabel)("barPadding", ctx_r10.config.barPadding ? ctx_r10.config.barPadding : 3)("roundEdges", ctx_r10.config.roundEdges)("showDataLabel", ctx_r10.config.showDataLabel);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("view", ctx_r10.view)("customColors", ctx_r10.customColors)("results", results_r2)("gradient", ctx_r10.config.showGradient)("xAxis", ctx_r10.config.showXAxis)("yAxis", ctx_r10.config.showYAxis)("legend", ctx_r10.config.showLegend)("legendPosition", ctx_r10.config.legendPosition)("showGridLines", ctx_r10.config.showGridLines)("showXAxisLabel", ctx_r10.config.showXAxisLabel)("showYAxisLabel", ctx_r10.config.showYAxisLabel)("xAxisLabel", ctx_r10.config.xAxisLabel)("xScaleMax", ctx_r10.config.xScaleMax)("yAxisLabel", ctx_r10.config.yAxisLabel)("barPadding", ctx_r10.config.barPadding ? ctx_r10.config.barPadding : 3)("showDataLabel", ctx_r10.config.showDataLabel);
         }
       }
 
       function ChartViewComponent_div_1_div_5_ngx_charts_bar_vertical_normalized_7_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-bar-vertical-normalized", 33);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-bar-vertical-normalized", 37);
         }
 
         if (rf & 2) {
@@ -50469,13 +50332,13 @@
 
           var ctx_r11 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("view", ctx_r11.view)("customColors", ctx_r11.customColors)("results", results_r2)("gradient", ctx_r11.config.showGradient)("xAxis", ctx_r11.config.showXAxis)("yAxis", ctx_r11.config.showYAxis)("legend", ctx_r11.config.showLegend)("legendPosition", ctx_r11.config.legendPosition)("showGridLines", ctx_r11.config.showGridLines)("showXAxisLabel", ctx_r11.config.showXAxisLabel)("showYAxisLabel", ctx_r11.config.showYAxisLabel)("xAxisLabel", ctx_r11.config.xAxisLabel)("yAxisLabel", ctx_r11.config.yAxisLabel)("barPadding", ctx_r11.config.barPadding ? ctx_r11.config.barPadding : 3)("roundEdges", ctx_r11.config.roundEdges)("showDataLabel", ctx_r11.config.showDataLabel);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("view", ctx_r11.view)("customColors", ctx_r11.customColors)("results", results_r2)("gradient", ctx_r11.config.showGradient)("xAxis", ctx_r11.config.showXAxis)("yAxis", ctx_r11.config.showYAxis)("legend", ctx_r11.config.showLegend)("legendPosition", ctx_r11.config.legendPosition)("showGridLines", ctx_r11.config.showGridLines)("showXAxisLabel", ctx_r11.config.showXAxisLabel)("showYAxisLabel", ctx_r11.config.showYAxisLabel)("xAxisLabel", ctx_r11.config.xAxisLabel)("yAxisLabel", ctx_r11.config.yAxisLabel)("barPadding", ctx_r11.config.barPadding ? ctx_r11.config.barPadding : 3);
         }
       }
 
       function ChartViewComponent_div_1_div_5_ngx_charts_bar_horizontal_normalized_8_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-bar-horizontal-normalized", 33);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-bar-horizontal-normalized", 37);
         }
 
         if (rf & 2) {
@@ -50483,13 +50346,13 @@
 
           var ctx_r12 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("view", ctx_r12.view)("customColors", ctx_r12.customColors)("results", results_r2)("gradient", ctx_r12.config.showGradient)("xAxis", ctx_r12.config.showXAxis)("yAxis", ctx_r12.config.showYAxis)("legend", ctx_r12.config.showLegend)("legendPosition", ctx_r12.config.legendPosition)("showGridLines", ctx_r12.config.showGridLines)("showXAxisLabel", ctx_r12.config.showXAxisLabel)("showYAxisLabel", ctx_r12.config.showYAxisLabel)("xAxisLabel", ctx_r12.config.xAxisLabel)("yAxisLabel", ctx_r12.config.yAxisLabel)("barPadding", ctx_r12.config.barPadding ? ctx_r12.config.barPadding : 3)("roundEdges", ctx_r12.config.roundEdges)("showDataLabel", ctx_r12.config.showDataLabel);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("view", ctx_r12.view)("customColors", ctx_r12.customColors)("results", results_r2)("gradient", ctx_r12.config.showGradient)("xAxis", ctx_r12.config.showXAxis)("yAxis", ctx_r12.config.showYAxis)("legend", ctx_r12.config.showLegend)("legendPosition", ctx_r12.config.legendPosition)("showGridLines", ctx_r12.config.showGridLines)("showXAxisLabel", ctx_r12.config.showXAxisLabel)("showYAxisLabel", ctx_r12.config.showYAxisLabel)("xAxisLabel", ctx_r12.config.xAxisLabel)("yAxisLabel", ctx_r12.config.yAxisLabel)("barPadding", ctx_r12.config.barPadding ? ctx_r12.config.barPadding : 3);
         }
       }
 
       function ChartViewComponent_div_1_div_5_ngx_charts_pie_chart_9_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-pie-chart", 34);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-pie-chart", 38);
         }
 
         if (rf & 2) {
@@ -50503,7 +50366,7 @@
 
       function ChartViewComponent_div_1_div_5_ngx_charts_advanced_pie_chart_10_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-advanced-pie-chart", 35);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-advanced-pie-chart", 39);
         }
 
         if (rf & 2) {
@@ -50517,7 +50380,7 @@
 
       function ChartViewComponent_div_1_div_5_ngx_charts_pie_grid_11_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-pie-grid", 36);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-pie-grid", 40);
         }
 
         if (rf & 2) {
@@ -50531,7 +50394,7 @@
 
       function ChartViewComponent_div_1_div_5_ngx_charts_line_chart_12_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-line-chart", 37);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-line-chart", 41);
         }
 
         if (rf & 2) {
@@ -50545,7 +50408,7 @@
 
       function ChartViewComponent_div_1_div_5_ngx_charts_polar_chart_13_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-polar-chart", 38);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-polar-chart", 42);
         }
 
         if (rf & 2) {
@@ -50559,7 +50422,7 @@
 
       function ChartViewComponent_div_1_div_5_ngx_charts_area_chart_14_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-area-chart", 39);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-area-chart", 43);
         }
 
         if (rf & 2) {
@@ -50573,7 +50436,7 @@
 
       function ChartViewComponent_div_1_div_5_ngx_charts_area_chart_stacked_15_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-area-chart-stacked", 40);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-area-chart-stacked", 44);
         }
 
         if (rf & 2) {
@@ -50587,7 +50450,7 @@
 
       function ChartViewComponent_div_1_div_5_ngx_charts_area_chart_normalized_16_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-area-chart-normalized", 38);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-area-chart-normalized", 42);
         }
 
         if (rf & 2) {
@@ -50601,7 +50464,7 @@
 
       function ChartViewComponent_div_1_div_5_combo_chart_component_17_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "combo-chart-component", 41);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "combo-chart-component", 45);
         }
 
         if (rf & 2) {
@@ -50615,7 +50478,7 @@
 
       function ChartViewComponent_div_1_div_5_ngx_charts_bubble_chart_18_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-bubble-chart", 42);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-bubble-chart", 46);
         }
 
         if (rf & 2) {
@@ -50629,7 +50492,7 @@
 
       function ChartViewComponent_div_1_div_5_ngx_charts_heat_map_19_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-heat-map", 43);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-heat-map", 47);
         }
 
         if (rf & 2) {
@@ -50643,7 +50506,7 @@
 
       function ChartViewComponent_div_1_div_5_ngx_charts_tree_map_20_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-tree-map", 44);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-tree-map", 48);
         }
 
         if (rf & 2) {
@@ -50657,7 +50520,7 @@
 
       function ChartViewComponent_div_1_div_5_ngx_charts_number_card_21_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-number-card", 36);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-number-card", 40);
         }
 
         if (rf & 2) {
@@ -50671,7 +50534,7 @@
 
       function ChartViewComponent_div_1_div_5_ngx_charts_gauge_22_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-gauge", 45);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-gauge", 49);
         }
 
         if (rf & 2) {
@@ -50685,7 +50548,7 @@
 
       function ChartViewComponent_div_1_div_5_ngx_charts_linear_gauge_23_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-linear-gauge", 46);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ngx-charts-linear-gauge", 50);
         }
 
         if (rf & 2) {
@@ -50699,7 +50562,7 @@
 
       function ChartViewComponent_div_1_div_5_google_map_24_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "google-map", 47);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "google-map", 51);
         }
 
         if (rf & 2) {
@@ -50738,45 +50601,45 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, ChartViewComponent_div_1_div_5_ngx_charts_bar_horizontal_2d_4_Template, 1, 17, "ngx-charts-bar-horizontal-2d", 13);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, ChartViewComponent_div_1_div_5_ngx_charts_bar_vertical_stacked_5_Template, 1, 17, "ngx-charts-bar-vertical-stacked", 12);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, ChartViewComponent_div_1_div_5_ngx_charts_bar_vertical_stacked_5_Template, 1, 16, "ngx-charts-bar-vertical-stacked", 14);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](6, ChartViewComponent_div_1_div_5_ngx_charts_bar_horizontal_stacked_6_Template, 1, 17, "ngx-charts-bar-horizontal-stacked", 13);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](6, ChartViewComponent_div_1_div_5_ngx_charts_bar_horizontal_stacked_6_Template, 1, 16, "ngx-charts-bar-horizontal-stacked", 15);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](7, ChartViewComponent_div_1_div_5_ngx_charts_bar_vertical_normalized_7_Template, 1, 16, "ngx-charts-bar-vertical-normalized", 14);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](7, ChartViewComponent_div_1_div_5_ngx_charts_bar_vertical_normalized_7_Template, 1, 14, "ngx-charts-bar-vertical-normalized", 16);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](8, ChartViewComponent_div_1_div_5_ngx_charts_bar_horizontal_normalized_8_Template, 1, 16, "ngx-charts-bar-horizontal-normalized", 14);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](8, ChartViewComponent_div_1_div_5_ngx_charts_bar_horizontal_normalized_8_Template, 1, 14, "ngx-charts-bar-horizontal-normalized", 16);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](9, ChartViewComponent_div_1_div_5_ngx_charts_pie_chart_9_Template, 1, 11, "ngx-charts-pie-chart", 15);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](9, ChartViewComponent_div_1_div_5_ngx_charts_pie_chart_9_Template, 1, 11, "ngx-charts-pie-chart", 17);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](10, ChartViewComponent_div_1_div_5_ngx_charts_advanced_pie_chart_10_Template, 1, 4, "ngx-charts-advanced-pie-chart", 16);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](10, ChartViewComponent_div_1_div_5_ngx_charts_advanced_pie_chart_10_Template, 1, 4, "ngx-charts-advanced-pie-chart", 18);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](11, ChartViewComponent_div_1_div_5_ngx_charts_pie_grid_11_Template, 1, 3, "ngx-charts-pie-grid", 17);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](11, ChartViewComponent_div_1_div_5_ngx_charts_pie_grid_11_Template, 1, 3, "ngx-charts-pie-grid", 19);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](12, ChartViewComponent_div_1_div_5_ngx_charts_line_chart_12_Template, 1, 16, "ngx-charts-line-chart", 18);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](12, ChartViewComponent_div_1_div_5_ngx_charts_line_chart_12_Template, 1, 16, "ngx-charts-line-chart", 20);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](13, ChartViewComponent_div_1_div_5_ngx_charts_polar_chart_13_Template, 1, 13, "ngx-charts-polar-chart", 19);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](13, ChartViewComponent_div_1_div_5_ngx_charts_polar_chart_13_Template, 1, 13, "ngx-charts-polar-chart", 21);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](14, ChartViewComponent_div_1_div_5_ngx_charts_area_chart_14_Template, 1, 14, "ngx-charts-area-chart", 20);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](14, ChartViewComponent_div_1_div_5_ngx_charts_area_chart_14_Template, 1, 14, "ngx-charts-area-chart", 22);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](15, ChartViewComponent_div_1_div_5_ngx_charts_area_chart_stacked_15_Template, 1, 15, "ngx-charts-area-chart-stacked", 21);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](15, ChartViewComponent_div_1_div_5_ngx_charts_area_chart_stacked_15_Template, 1, 15, "ngx-charts-area-chart-stacked", 23);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](16, ChartViewComponent_div_1_div_5_ngx_charts_area_chart_normalized_16_Template, 1, 13, "ngx-charts-area-chart-normalized", 19);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](16, ChartViewComponent_div_1_div_5_ngx_charts_area_chart_normalized_16_Template, 1, 13, "ngx-charts-area-chart-normalized", 21);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](17, ChartViewComponent_div_1_div_5_combo_chart_component_17_Template, 1, 21, "combo-chart-component", 22);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](17, ChartViewComponent_div_1_div_5_combo_chart_component_17_Template, 1, 21, "combo-chart-component", 24);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](18, ChartViewComponent_div_1_div_5_ngx_charts_bubble_chart_18_Template, 1, 16, "ngx-charts-bubble-chart", 23);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](18, ChartViewComponent_div_1_div_5_ngx_charts_bubble_chart_18_Template, 1, 16, "ngx-charts-bubble-chart", 25);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](19, ChartViewComponent_div_1_div_5_ngx_charts_heat_map_19_Template, 1, 15, "ngx-charts-heat-map", 24);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](19, ChartViewComponent_div_1_div_5_ngx_charts_heat_map_19_Template, 1, 15, "ngx-charts-heat-map", 26);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](20, ChartViewComponent_div_1_div_5_ngx_charts_tree_map_20_Template, 1, 5, "ngx-charts-tree-map", 25);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](20, ChartViewComponent_div_1_div_5_ngx_charts_tree_map_20_Template, 1, 5, "ngx-charts-tree-map", 27);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](21, ChartViewComponent_div_1_div_5_ngx_charts_number_card_21_Template, 1, 3, "ngx-charts-number-card", 17);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](21, ChartViewComponent_div_1_div_5_ngx_charts_number_card_21_Template, 1, 3, "ngx-charts-number-card", 19);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](22, ChartViewComponent_div_1_div_5_ngx_charts_gauge_22_Template, 1, 11, "ngx-charts-gauge", 26);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](22, ChartViewComponent_div_1_div_5_ngx_charts_gauge_22_Template, 1, 11, "ngx-charts-gauge", 28);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](23, ChartViewComponent_div_1_div_5_ngx_charts_linear_gauge_23_Template, 1, 6, "ngx-charts-linear-gauge", 27);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](23, ChartViewComponent_div_1_div_5_ngx_charts_linear_gauge_23_Template, 1, 6, "ngx-charts-linear-gauge", 29);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](24, ChartViewComponent_div_1_div_5_google_map_24_Template, 1, 1, "google-map", 28);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](24, ChartViewComponent_div_1_div_5_google_map_24_Template, 1, 1, "google-map", 30);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
@@ -50946,7 +50809,7 @@
         _createClass(ChartViewComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this229 = this;
+            var _this230 = this;
 
             if (!this.config) {
               this.config = new _shared_models__WEBPACK_IMPORTED_MODULE_4__["ChartConfig"]();
@@ -50956,7 +50819,7 @@
 
             if (this.updateChartEvent) {
               this._updateChartSubscription = this.updateChartEvent.subscribe(function () {
-                _this229.ngOnChanges(null);
+                _this230.ngOnChanges(null);
               });
             }
           }
@@ -50970,7 +50833,7 @@
         }, {
           key: "ngOnChanges",
           value: function ngOnChanges(simpleChanges) {
-            var _this230 = this;
+            var _this231 = this;
 
             if (this.columns) {
               this.gridColumnIndex = this.getColumnIndex(this.config.multiGridColumn);
@@ -51000,12 +50863,12 @@
                 this.seriesColumnsIndex = new Array(this.config.seriesColumns.length);
 
                 var _loop6 = function _loop6(i) {
-                  var col = _this230.columns.find(function (c) {
-                    return c.title === _this230.config.seriesColumns[i];
+                  var col = _this231.columns.find(function (c) {
+                    return c.title === _this231.config.seriesColumns[i];
                   });
 
                   if (col) {
-                    _this230.seriesColumnsIndex[i] = col;
+                    _this231.seriesColumnsIndex[i] = col;
                   }
                 };
 
@@ -51042,14 +50905,14 @@
         }, {
           key: "getChartType",
           value: function getChartType() {
-            var _this231 = this;
+            var _this232 = this;
 
             this.chartType = null;
 
             _chart_groups__WEBPACK_IMPORTED_MODULE_1__["ChartTypes"].forEach(function (chartGroup) {
-              if (!_this231.chartType) {
-                _this231.chartType = chartGroup.charts.find(function (c) {
-                  return c.key === _this231.config.chartType;
+              if (!_this232.chartType) {
+                _this232.chartType = chartGroup.charts.find(function (c) {
+                  return c.key === _this232.config.chartType;
                 });
               }
             });
@@ -51101,7 +50964,7 @@
         }, {
           key: "addCustomColor",
           value: function addCustomColor(label) {
-            var _this232 = this;
+            var _this233 = this;
 
             var changeColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
@@ -51112,7 +50975,7 @@
 
               if (this.config.colorScheme) {
                 colorSet = _chart_colors__WEBPACK_IMPORTED_MODULE_2__["colorSets"].find(function (c) {
-                  return c.name === _this232.config.colorScheme;
+                  return c.name === _this233.config.colorScheme;
                 });
               }
 
@@ -51139,34 +51002,34 @@
         }, {
           key: "updateChart",
           value: function updateChart() {
-            var _this233 = this;
+            var _this234 = this;
 
             if (this.chartType && this.data) {
               (function () {
-                _this233.getChartType();
+                _this234.getChartType();
 
-                if (_this233.seriesColumnsIndex) {
-                  _this233.config.seriesColumns = new Array(_this233.seriesColumnsIndex.length);
+                if (_this234.seriesColumnsIndex) {
+                  _this234.config.seriesColumns = new Array(_this234.seriesColumnsIndex.length);
 
-                  for (var i = 0; i < _this233.seriesColumnsIndex.length; i++) {
-                    _this233.config.seriesColumns[i] = _this233.seriesColumnsIndex[i].title;
+                  for (var i = 0; i < _this234.seriesColumnsIndex.length; i++) {
+                    _this234.config.seriesColumns[i] = _this234.seriesColumnsIndex[i].title;
                   }
                 }
 
-                if (_this233.labelColumnIndex !== null) {
-                  _this233.setLabel(_this233.columns[_this233.labelColumnIndex].title);
+                if (_this234.labelColumnIndex !== null) {
+                  _this234.setLabel(_this234.columns[_this234.labelColumnIndex].title);
                 }
 
                 var values;
                 var chartItems = [];
 
-                if (_this233.gridColumnIndex != null && _this233.gridColumnIndex >= 0) {
-                  values = _this233.gridSeriesValues(_this233.data);
+                if (_this234.gridColumnIndex != null && _this234.gridColumnIndex >= 0) {
+                  values = _this234.gridSeriesValues(_this234.data);
                 } else {
                   values = [null];
                 }
 
-                var singleColor = _this233.chartType.isBar && _this233.config.singleBarColor ? true : false;
+                var singleColor = _this234.chartType.isBar && _this234.config.singleBarColor ? true : false;
 
                 var _iterator12 = _createForOfIteratorHelper(values),
                     _step12;
@@ -51177,116 +51040,116 @@
                     var chartItem = void 0;
                     var data = void 0;
 
-                    if (_this233.gridColumnIndex != null && _this233.gridColumnIndex >= 0) {
-                      data = _this233.data.filter(function (c) {
-                        return c[_this233.gridColumnIndex] === value.value;
+                    if (_this234.gridColumnIndex != null && _this234.gridColumnIndex >= 0) {
+                      data = _this234.data.filter(function (c) {
+                        return c[_this234.gridColumnIndex] === value.value;
                       });
                     } else {
-                      data = _this233.data;
+                      data = _this234.data;
                     }
 
-                    switch (_this233.chartType.inputFormat) {
+                    switch (_this234.chartType.inputFormat) {
                       case _chart_groups__WEBPACK_IMPORTED_MODULE_1__["eInputFormat"].SingleSeries:
-                        chartItem = _this233.singleSeries(data);
+                        chartItem = _this234.singleSeries(data);
                         break;
 
                       case _chart_groups__WEBPACK_IMPORTED_MODULE_1__["eInputFormat"].MultiSeries:
-                        chartItem = _this233.multiSeries(data);
+                        chartItem = _this234.multiSeries(data);
                         break;
 
                       case _chart_groups__WEBPACK_IMPORTED_MODULE_1__["eInputFormat"].InverseSeries:
-                        chartItem = _this233.inverseSeries(data);
+                        chartItem = _this234.inverseSeries(data);
                         break;
 
                       case _chart_groups__WEBPACK_IMPORTED_MODULE_1__["eInputFormat"].ComboSeries:
-                        chartItem = _this233.singleSeries(data);
+                        chartItem = _this234.singleSeries(data);
 
                         if (chartItem) {
-                          var yAxisLabel = _this233.config.yAxisLabel;
-                          chartItem['lineChartSeries'] = _this233.inverseSeries(data);
-                          _this233.config.yAxisLabelRight = _this233.config.yAxisLabel;
-                          _this233.config.yAxisLabel = yAxisLabel;
+                          var yAxisLabel = _this234.config.yAxisLabel;
+                          chartItem['lineChartSeries'] = _this234.inverseSeries(data);
+                          _this234.config.yAxisLabelRight = _this234.config.yAxisLabel;
+                          _this234.config.yAxisLabel = yAxisLabel;
                         }
 
                         break;
 
                       case _chart_groups__WEBPACK_IMPORTED_MODULE_1__["eInputFormat"].Xy:
-                        if (_this233.yColumnIndex != null && _this233.xColumnIndex != null) {
+                        if (_this234.yColumnIndex != null && _this234.xColumnIndex != null) {
                           chartItem = new Array(data.length);
 
                           for (var _i10 = 0; _i10 < data.length; _i10++) {
                             chartItem[_i10] = {
-                              name: _this233.formatValue(data, _this233.labelColumnIndex, _i10),
+                              name: _this234.formatValue(data, _this234.labelColumnIndex, _i10),
                               series: [{
-                                name: _this233.formatValue(data, _this233.labelColumnIndex, _i10),
-                                x: _this233.formatValue(data, _this233.xColumnIndex, _i10),
-                                y: _this233.formatValue(data, _this233.yColumnIndex, _i10),
+                                name: _this234.formatValue(data, _this234.labelColumnIndex, _i10),
+                                x: _this234.formatValue(data, _this234.xColumnIndex, _i10),
+                                y: _this234.formatValue(data, _this234.yColumnIndex, _i10),
                                 r: 10
                               }]
                             };
                           }
 
-                          _this233.config.yAxisLabel = _this233.columns[_this233.yColumnIndex].title;
-                          _this233.config.xAxisLabel = _this233.columns[_this233.xColumnIndex].title;
+                          _this234.config.yAxisLabel = _this234.columns[_this234.yColumnIndex].title;
+                          _this234.config.xAxisLabel = _this234.columns[_this234.xColumnIndex].title;
                         }
 
                         break;
 
                       case _chart_groups__WEBPACK_IMPORTED_MODULE_1__["eInputFormat"].XyMinMax:
-                        if (_this233.yColumnIndex != null && _this233.xColumnIndex != null) {
+                        if (_this234.yColumnIndex != null && _this234.xColumnIndex != null) {
                           chartItem = new Array(data.length);
 
                           for (var _i11 = 0; _i11 < data.length; _i11++) {
                             chartItem[_i11] = {
-                              name: _this233.formatValue(data, _this233.labelColumnIndex, _i11),
+                              name: _this234.formatValue(data, _this234.labelColumnIndex, _i11),
                               series: [{
-                                name: _this233.formatValue(data, _this233.labelColumnIndex, _i11),
-                                x: _this233.formatValue(data, _this233.xColumnIndex, _i11),
-                                y: _this233.formatValue(data, _this233.yColumnIndex, _i11),
-                                min: _this233.formatValue(data, _this233.minColumnIndex, _i11),
-                                max: _this233.formatValue(data, _this233.maxColumnIndex, _i11)
+                                name: _this234.formatValue(data, _this234.labelColumnIndex, _i11),
+                                x: _this234.formatValue(data, _this234.xColumnIndex, _i11),
+                                y: _this234.formatValue(data, _this234.yColumnIndex, _i11),
+                                min: _this234.formatValue(data, _this234.minColumnIndex, _i11),
+                                max: _this234.formatValue(data, _this234.maxColumnIndex, _i11)
                               }]
                             };
                           }
 
-                          _this233.config.yAxisLabel = _this233.columns[_this233.yColumnIndex].title;
-                          _this233.config.xAxisLabel = _this233.columns[_this233.xColumnIndex].title;
+                          _this234.config.yAxisLabel = _this234.columns[_this234.yColumnIndex].title;
+                          _this234.config.xAxisLabel = _this234.columns[_this234.xColumnIndex].title;
                         }
 
                         break;
 
                       case _chart_groups__WEBPACK_IMPORTED_MODULE_1__["eInputFormat"].XyBubble:
-                        if (_this233.yColumnIndex != null && _this233.xColumnIndex != null) {
+                        if (_this234.yColumnIndex != null && _this234.xColumnIndex != null) {
                           chartItem = new Array(data.length);
 
                           for (var _i12 = 0; _i12 < data.length; _i12++) {
                             chartItem[_i12] = {
-                              name: _this233.formatValue(data, _this233.labelColumnIndex, _i12),
+                              name: _this234.formatValue(data, _this234.labelColumnIndex, _i12),
                               series: [{
-                                name: _this233.formatValue(data, _this233.labelColumnIndex, _i12),
-                                x: _this233.formatValue(data, _this233.xColumnIndex, _i12),
-                                y: _this233.formatValue(data, _this233.yColumnIndex, _i12),
-                                r: _this233.formatValue(data, _this233.radiusColumnIndex, _i12)
+                                name: _this234.formatValue(data, _this234.labelColumnIndex, _i12),
+                                x: _this234.formatValue(data, _this234.xColumnIndex, _i12),
+                                y: _this234.formatValue(data, _this234.yColumnIndex, _i12),
+                                r: _this234.formatValue(data, _this234.radiusColumnIndex, _i12)
                               }]
                             };
                           }
 
-                          _this233.config.yAxisLabel = _this233.columns[_this233.yColumnIndex].title;
-                          _this233.config.xAxisLabel = _this233.columns[_this233.xColumnIndex].title;
+                          _this234.config.yAxisLabel = _this234.columns[_this234.yColumnIndex].title;
+                          _this234.config.xAxisLabel = _this234.columns[_this234.xColumnIndex].title;
                         }
 
                         break;
 
                       case _chart_groups__WEBPACK_IMPORTED_MODULE_1__["eInputFormat"].GeoCoordinates:
-                        if (_this233.latitudeColumnIndex != null && _this233.longitudeColumnIndex != null) {
+                        if (_this234.latitudeColumnIndex != null && _this234.longitudeColumnIndex != null) {
                           chartItem = new Array(data.length);
 
                           for (var _i13 = 0; _i13 < data.length; _i13++) {
                             chartItem[_i13] = {
-                              name: _this233.formatValue(data, _this233.labelColumnIndex, _i13),
-                              value: _this233.formatValue(data, _this233.seriesColumnIndex, _i13),
-                              latitude: _this233.formatValue(data, _this233.latitudeColumnIndex, _i13),
-                              longitude: _this233.formatValue(data, _this233.longitudeColumnIndex, _i13)
+                              name: _this234.formatValue(data, _this234.labelColumnIndex, _i13),
+                              value: _this234.formatValue(data, _this234.seriesColumnIndex, _i13),
+                              latitude: _this234.formatValue(data, _this234.latitudeColumnIndex, _i13),
+                              longitude: _this234.formatValue(data, _this234.longitudeColumnIndex, _i13)
                             };
                           }
                         }
@@ -51300,18 +51163,18 @@
                       }
 
                       chartItem.forEach(function (item) {
-                        _this233.addCustomColor(item.name, !singleColor);
+                        _this234.addCustomColor(item.name, !singleColor);
                       });
 
                       if (chartItem['lineChartSeries']) {
                         if (singleColor) {
-                          _this233.addCustomColor(_this233.columns[_this233.seriesColumnIndex].title, false);
+                          _this234.addCustomColor(_this234.columns[_this234.seriesColumnIndex].title, false);
 
-                          _this233.colorIndex++;
+                          _this234.colorIndex++;
                         }
 
                         chartItem['lineChartSeries'].forEach(function (item) {
-                          _this233.addCustomColor(item.name, true);
+                          _this234.addCustomColor(item.name, true);
                         });
                       }
                     }
@@ -51328,18 +51191,18 @@
                   _iterator12.f();
                 }
 
-                _this233.resultArray = chartItems;
+                _this234.resultArray = chartItems;
               })();
             }
           }
         }, {
           key: "gridSeriesValues",
           value: function gridSeriesValues(data) {
-            var _this234 = this;
+            var _this235 = this;
 
             var format = this.columns[this.gridColumnIndex].format;
             var values = Array.from(new Set(data.map(function (c) {
-              return c[_this234.gridColumnIndex];
+              return c[_this235.gridColumnIndex];
             }))).sort(function (a, b) {
               if (a > b) {
                 return 1;
@@ -51382,7 +51245,7 @@
         }, {
           key: "multiSeries",
           value: function multiSeries(data) {
-            var _this235 = this;
+            var _this236 = this;
 
             var chartData;
 
@@ -51395,11 +51258,11 @@
                 var _loop8 = function _loop8(pivotIndex) {
                   var pivotValue = pivotValues[pivotIndex];
                   var seriesData = data.filter(function (c) {
-                    return c[_this235.seriesPivotIndex] === pivotValue.value;
+                    return c[_this236.seriesPivotIndex] === pivotValue.value;
                   });
 
                   for (var _i14 = 0; _i14 < seriesData.length; _i14++) {
-                    var label = seriesData[_i14][_this235.labelColumnIndex];
+                    var label = seriesData[_i14][_this236.labelColumnIndex];
                     var row = pivotData[label];
 
                     if (!row) {
@@ -51407,11 +51270,11 @@
                       pivotData[label] = row;
                     }
 
-                    for (var j = 0; j < _this235.seriesColumnsIndex.length; j++) {
-                      if (_this235.seriesColumnsIndex[j]) {
+                    for (var j = 0; j < _this236.seriesColumnsIndex.length; j++) {
+                      if (_this236.seriesColumnsIndex[j]) {
                         row[(j + 1) * (pivotIndex + 1) - 1] = {
-                          name: pivotValue.name + '/' + _this235.seriesColumnsIndex[j].title,
-                          value: _this235.formatValue(seriesData, _this235.seriesColumnsIndex[j].name, _i14)
+                          name: pivotValue.name + '/' + _this236.seriesColumnsIndex[j].title,
+                          value: _this236.formatValue(seriesData, _this236.seriesColumnsIndex[j].name, _i14)
                         };
                       }
                     }
@@ -51470,7 +51333,7 @@
         }, {
           key: "inverseSeries",
           value: function inverseSeries(data) {
-            var _this236 = this;
+            var _this237 = this;
 
             var chartData;
 
@@ -51483,15 +51346,15 @@
                 var _loop9 = function _loop9(seriesIndex) {
                   var seriesValue = labelValues[seriesIndex];
                   var seriesData = data.filter(function (c) {
-                    return c[_this236.labelColumnIndex] === seriesValue.value;
+                    return c[_this237.labelColumnIndex] === seriesValue.value;
                   });
 
                   for (var _i16 = 0; _i16 < seriesData.length; _i16++) {
-                    for (var j = 0; j < _this236.seriesColumnsIndex.length; j++) {
-                      var pivotItem = seriesData[_i16][_this236.seriesPivotIndex];
+                    for (var j = 0; j < _this237.seriesColumnsIndex.length; j++) {
+                      var pivotItem = seriesData[_i16][_this237.seriesPivotIndex];
 
-                      if (_this236.seriesColumnsIndex.length > 1) {
-                        pivotItem += ' / ' + _this236.seriesColumnsIndex[j].title;
+                      if (_this237.seriesColumnsIndex.length > 1) {
+                        pivotItem += ' / ' + _this237.seriesColumnsIndex[j].title;
                       }
 
                       var row = pivotData[pivotItem];
@@ -51501,12 +51364,12 @@
                         pivotData[pivotItem] = row;
                       }
 
-                      if (_this236.seriesColumnsIndex[j]) {
-                        var _name17 = _this236.formatValue(seriesData, _this236.labelColumnIndex, j);
+                      if (_this237.seriesColumnsIndex[j]) {
+                        var _name17 = _this237.formatValue(seriesData, _this237.labelColumnIndex, j);
 
                         row[(j + 1) * (seriesIndex + 1) - 1] = {
                           name: _name17,
-                          value: _this236.formatValue(seriesData, _this236.seriesColumnsIndex[j].name, _i16)
+                          value: _this237.formatValue(seriesData, _this237.seriesColumnsIndex[j].name, _i16)
                         };
                       }
                     }
@@ -51621,7 +51484,7 @@
         features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵNgOnChangesFeature"]],
         decls: 2,
         vars: 3,
-        consts: [["class", "m-3", 4, "ngIf"], ["class", "chart-parent border", 4, "ngFor", "ngForOf", "ngForTrackBy"], [1, "m-3"], [1, "alert", "alert-warning"], [1, "chart-parent", "border"], ["wrapper", ""], [1, "w-100", "text-center"], [1, "badge", "badge-secondary"], ["id", "chart", 3, "ngClass", "resized", 4, "ngIf"], ["id", "chart", 3, "ngClass", "resized"], [3, "view", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "yScaleMin", "yScaleMax", "yAxisLabel", "customColors", "barPadding", "roundEdges", "showDataLabel", 4, "ngIf"], [3, "view", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "xScaleMin", "xScaleMax", "yAxisLabel", "customColors", "barPadding", "roundEdges", "showDataLabel", 4, "ngIf"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "yScaleMax", "yAxisLabel", "barPadding", "roundEdges", "showDataLabel", 4, "ngIf"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "xScaleMax", "yAxisLabel", "barPadding", "roundEdges", "showDataLabel", 4, "ngIf"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "yAxisLabel", "barPadding", "roundEdges", "showDataLabel", 4, "ngIf"], [3, "view", "customColors", "results", "legend", "legendPosition", "labels", "explodeSlices", "doughnut", "gradient", 4, "ngIf"], [3, "view", "customColors", "results", "gradient", 4, "ngIf"], [3, "view", "customColors", "results", 4, "ngIf"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "autoScale", "yScaleMin", "yScaleMax", "yAxisLabel", 4, "ngIf"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "yAxisLabel", 4, "ngIf"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "yScaleMax", "yAxisLabel", 4, "ngIf"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "yScaleMin", "yScaleMax", "yAxisLabel", 4, "ngIf"], [3, "view", "customColors", "results", "lineChart", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "showRightYAxisLabel", "xAxisLabel", "yScaleMax", "yAxisLabel", "yAxisLabelRight", "separateAxis", "barPadding", "roundEdges", "showDataLabel", 4, "ngIf"], [3, "view", "customColors", "results", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "autoScale", "xScaleMin", "xScaleMax", "yScaleMin", "yAxisLabel", 4, "ngIf"], [3, "view", "customColors", "gradient", "results", "xAxis", "yAxis", "legend", "legendPosition", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "max", "min", "yAxisLabel", 4, "ngIf"], [3, "view", "customColors", "gradient", "results", 4, "ngIf"], [3, "view", "customColors", "results", "showAxis", "legend", "legendPosition", "textValue", "min", "max", "units", 4, "ngIf"], [3, "view", "customColors", "results", "min", "max", "units", 4, "ngIf"], [3, "results", 4, "ngIf"], [3, "view", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "yScaleMin", "yScaleMax", "yAxisLabel", "customColors", "barPadding", "roundEdges", "showDataLabel"], [3, "view", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "xScaleMin", "xScaleMax", "yAxisLabel", "customColors", "barPadding", "roundEdges", "showDataLabel"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "yScaleMax", "yAxisLabel", "barPadding", "roundEdges", "showDataLabel"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "xScaleMax", "yAxisLabel", "barPadding", "roundEdges", "showDataLabel"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "yAxisLabel", "barPadding", "roundEdges", "showDataLabel"], [3, "view", "customColors", "results", "legend", "legendPosition", "labels", "explodeSlices", "doughnut", "gradient"], [3, "view", "customColors", "results", "gradient"], [3, "view", "customColors", "results"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "autoScale", "yScaleMin", "yScaleMax", "yAxisLabel"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "yAxisLabel"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "yScaleMax", "yAxisLabel"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "yScaleMin", "yScaleMax", "yAxisLabel"], [3, "view", "customColors", "results", "lineChart", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "showRightYAxisLabel", "xAxisLabel", "yScaleMax", "yAxisLabel", "yAxisLabelRight", "separateAxis", "barPadding", "roundEdges", "showDataLabel"], [3, "view", "customColors", "results", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "autoScale", "xScaleMin", "xScaleMax", "yScaleMin", "yAxisLabel"], [3, "view", "customColors", "gradient", "results", "xAxis", "yAxis", "legend", "legendPosition", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "max", "min", "yAxisLabel"], [3, "view", "customColors", "gradient", "results"], [3, "view", "customColors", "results", "showAxis", "legend", "legendPosition", "textValue", "min", "max", "units"], [3, "view", "customColors", "results", "min", "max", "units"], [3, "results"]],
+        consts: [["class", "m-3", 4, "ngIf"], ["class", "chart-parent border", 4, "ngFor", "ngForOf", "ngForTrackBy"], [1, "m-3"], [1, "alert", "alert-warning"], [1, "chart-parent", "border"], ["wrapper", ""], [1, "w-100", "text-center"], [1, "badge", "badge-secondary"], ["id", "chart", 3, "ngClass", "resized", 4, "ngIf"], ["id", "chart", 3, "ngClass", "resized"], [3, "view", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "yScaleMin", "yScaleMax", "yAxisLabel", "customColors", "barPadding", "roundEdges", "showDataLabel", 4, "ngIf"], [3, "view", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "xScaleMin", "xScaleMax", "yAxisLabel", "customColors", "barPadding", "roundEdges", "showDataLabel", 4, "ngIf"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "yScaleMax", "yAxisLabel", "barPadding", "roundEdges", "showDataLabel", 4, "ngIf"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "xScaleMax", "yAxisLabel", "barPadding", "roundEdges", "showDataLabel", 4, "ngIf"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "yScaleMax", "yAxisLabel", "barPadding", "showDataLabel", 4, "ngIf"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "xScaleMax", "yAxisLabel", "barPadding", "showDataLabel", 4, "ngIf"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "yAxisLabel", "barPadding", 4, "ngIf"], [3, "view", "customColors", "results", "legend", "legendPosition", "labels", "explodeSlices", "doughnut", "gradient", 4, "ngIf"], [3, "view", "customColors", "results", "gradient", 4, "ngIf"], [3, "view", "customColors", "results", 4, "ngIf"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "autoScale", "yScaleMin", "yScaleMax", "yAxisLabel", 4, "ngIf"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "yAxisLabel", 4, "ngIf"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "yScaleMax", "yAxisLabel", 4, "ngIf"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "yScaleMin", "yScaleMax", "yAxisLabel", 4, "ngIf"], [3, "view", "customColors", "results", "lineChart", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "showRightYAxisLabel", "xAxisLabel", "yScaleMax", "yAxisLabel", "yAxisLabelRight", "separateAxis", "barPadding", "roundEdges", "showDataLabel", 4, "ngIf"], [3, "view", "customColors", "results", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "autoScale", "xScaleMin", "xScaleMax", "yScaleMin", "yAxisLabel", 4, "ngIf"], [3, "view", "customColors", "gradient", "results", "xAxis", "yAxis", "legend", "legendPosition", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "max", "min", "yAxisLabel", 4, "ngIf"], [3, "view", "customColors", "gradient", "results", 4, "ngIf"], [3, "view", "customColors", "results", "showAxis", "legend", "legendPosition", "textValue", "min", "max", "units", 4, "ngIf"], [3, "view", "customColors", "results", "min", "max", "units", 4, "ngIf"], [3, "results", 4, "ngIf"], [3, "view", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "yScaleMin", "yScaleMax", "yAxisLabel", "customColors", "barPadding", "roundEdges", "showDataLabel"], [3, "view", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "xScaleMin", "xScaleMax", "yAxisLabel", "customColors", "barPadding", "roundEdges", "showDataLabel"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "yScaleMax", "yAxisLabel", "barPadding", "roundEdges", "showDataLabel"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "xScaleMax", "yAxisLabel", "barPadding", "roundEdges", "showDataLabel"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "yScaleMax", "yAxisLabel", "barPadding", "showDataLabel"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "xScaleMax", "yAxisLabel", "barPadding", "showDataLabel"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "yAxisLabel", "barPadding"], [3, "view", "customColors", "results", "legend", "legendPosition", "labels", "explodeSlices", "doughnut", "gradient"], [3, "view", "customColors", "results", "gradient"], [3, "view", "customColors", "results"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "autoScale", "yScaleMin", "yScaleMax", "yAxisLabel"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "yAxisLabel"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "yScaleMax", "yAxisLabel"], [3, "view", "customColors", "results", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "yScaleMin", "yScaleMax", "yAxisLabel"], [3, "view", "customColors", "results", "lineChart", "gradient", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "showRightYAxisLabel", "xAxisLabel", "yScaleMax", "yAxisLabel", "yAxisLabelRight", "separateAxis", "barPadding", "roundEdges", "showDataLabel"], [3, "view", "customColors", "results", "xAxis", "yAxis", "legend", "legendPosition", "showGridLines", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "autoScale", "xScaleMin", "xScaleMax", "yScaleMin", "yAxisLabel"], [3, "view", "customColors", "gradient", "results", "xAxis", "yAxis", "legend", "legendPosition", "showXAxisLabel", "showYAxisLabel", "xAxisLabel", "max", "min", "yAxisLabel"], [3, "view", "customColors", "gradient", "results"], [3, "view", "customColors", "results", "showAxis", "legend", "legendPosition", "textValue", "min", "max", "units"], [3, "view", "customColors", "results", "min", "max", "units"], [3, "results"]],
         template: function ChartViewComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, ChartViewComponent_div_0_Template, 3, 0, "div", 0);
@@ -51698,19 +51561,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -51728,7 +51591,7 @@
 
       var _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @swimlane/ngx-charts */
-      "./node_modules/@swimlane/ngx-charts/fesm2015/swimlane-ngx-charts.js");
+      "./node_modules/@swimlane/ngx-charts/__ivy_ngcc__/fesm2015/swimlane-ngx-charts.js");
       /* harmony import */
 
 
@@ -51752,7 +51615,7 @@
 
       var angular_resize_event__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! angular-resize-event */
-      "./node_modules/angular-resize-event/fesm2015/angular-resize-event.js");
+      "./node_modules/angular-resize-event/__ivy_ngcc__/fesm2015/angular-resize-event.js");
 
       var ChartBuilderModule = function ChartBuilderModule() {
         _classCallCheck(this, ChartBuilderModule);
@@ -51816,7 +51679,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -51834,13 +51697,13 @@
 
       var _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @swimlane/ngx-charts */
-      "./node_modules/@swimlane/ngx-charts/fesm2015/swimlane-ngx-charts.js");
+      "./node_modules/@swimlane/ngx-charts/__ivy_ngcc__/fesm2015/swimlane-ngx-charts.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -52071,37 +51934,37 @@
         var _super3 = _createSuper(ComboChartComponent);
 
         function ComboChartComponent() {
-          var _this237;
+          var _this238;
 
           _classCallCheck(this, ComboChartComponent);
 
-          _this237 = _super3.apply(this, arguments);
-          _this237.curve = d3_shape__WEBPACK_IMPORTED_MODULE_1__["curveLinear"];
-          _this237.legend = false;
-          _this237.legendTitle = 'Legend';
-          _this237.legendPosition = 'right';
-          _this237.tooltipDisabled = false;
-          _this237.showGridLines = true;
-          _this237.activeEntries = [];
-          _this237.roundDomains = false;
-          _this237.colorSchemeLine = 'fire';
-          _this237.animations = true;
-          _this237.noBarWhenZero = true;
-          _this237.roundEdges = false;
-          _this237.barPadding = 3;
-          _this237.separateAxis = false; // seprate axis for bar/series
+          _this238 = _super3.apply(this, arguments);
+          _this238.curve = d3_shape__WEBPACK_IMPORTED_MODULE_1__["curveLinear"];
+          _this238.legend = false;
+          _this238.legendTitle = 'Legend';
+          _this238.legendPosition = 'right';
+          _this238.tooltipDisabled = false;
+          _this238.showGridLines = true;
+          _this238.activeEntries = [];
+          _this238.roundDomains = false;
+          _this238.colorSchemeLine = 'fire';
+          _this238.animations = true;
+          _this238.noBarWhenZero = true;
+          _this238.roundEdges = false;
+          _this238.barPadding = 3;
+          _this238.separateAxis = false; // seprate axis for bar/series
 
-          _this237.showDataLabel = false;
-          _this237.activate = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-          _this237.deactivate = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-          _this237.margin = [10, 20, 10, 20];
-          _this237.xAxisHeight = 0;
-          _this237.yAxisWidth = 0;
-          _this237.scaleType = 'linear';
-          _this237.yOrientLeft = 'left';
-          _this237.yOrientRight = 'right';
-          _this237.legendSpacing = 0;
-          return _this237;
+          _this238.showDataLabel = false;
+          _this238.activate = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+          _this238.deactivate = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+          _this238.margin = [10, 20, 10, 20];
+          _this238.xAxisHeight = 0;
+          _this238.yAxisWidth = 0;
+          _this238.scaleType = 'linear';
+          _this238.yOrientLeft = 'left';
+          _this238.yOrientRight = 'right';
+          _this238.legendSpacing = 0;
+          return _this238;
         } // barPadding = 8;
 
 
@@ -52907,25 +52770,25 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_animations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/animations */
-      "./node_modules/@angular/animations/fesm2015/animations.js");
+      "./node_modules/@angular/animations/__ivy_ngcc__/fesm2015/animations.js");
       /* harmony import */
 
 
       var _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @swimlane/ngx-charts */
-      "./node_modules/@swimlane/ngx-charts/fesm2015/swimlane-ngx-charts.js");
+      "./node_modules/@swimlane/ngx-charts/__ivy_ngcc__/fesm2015/swimlane-ngx-charts.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
       var _c0 = ["ngx-combo-charts-series-vertical", ""];
 
@@ -53032,7 +52895,7 @@
         }, {
           key: "update",
           value: function update() {
-            var _this238 = this;
+            var _this239 = this;
 
             var width;
 
@@ -53056,7 +52919,7 @@
               var value = d.value;
               var label = d.name;
               var formattedLabel = Object(_swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_2__["formatLabel"])(label);
-              var roundEdges = _this238.type === 'standard' && _this238.roundEdges;
+              var roundEdges = _this239.type === 'standard' && _this239.roundEdges;
               var bar = {
                 value: value,
                 label: label,
@@ -53069,25 +52932,25 @@
                 y: 0
               };
 
-              if (_this238.type === 'standard') {
-                bar.height = Math.abs(_this238.yScale(value) - _this238.yScale(0));
-                bar.x = _this238.xScale(label);
+              if (_this239.type === 'standard') {
+                bar.height = Math.abs(_this239.yScale(value) - _this239.yScale(0));
+                bar.x = _this239.xScale(label);
 
                 if (value < 0) {
-                  bar.y = _this238.yScale(0);
+                  bar.y = _this239.yScale(0);
                 } else {
-                  bar.y = _this238.yScale(value);
+                  bar.y = _this239.yScale(value);
                 }
-              } else if (_this238.type === 'stacked') {
+              } else if (_this239.type === 'stacked') {
                 var offset0 = d0;
                 var offset1 = offset0 + value;
                 d0 += value;
-                bar.height = _this238.yScale(offset0) - _this238.yScale(offset1);
+                bar.height = _this239.yScale(offset0) - _this239.yScale(offset1);
                 bar.x = 0;
-                bar.y = _this238.yScale(offset1);
+                bar.y = _this239.yScale(offset1);
                 bar.offset0 = offset0;
                 bar.offset1 = offset1;
-              } else if (_this238.type === 'normalized') {
+              } else if (_this239.type === 'normalized') {
                 var _offset = d0;
 
                 var _offset2 = _offset + value;
@@ -53102,36 +52965,36 @@
                   _offset2 = 0;
                 }
 
-                bar.height = _this238.yScale(_offset) - _this238.yScale(_offset2);
+                bar.height = _this239.yScale(_offset) - _this239.yScale(_offset2);
                 bar.x = 0;
-                bar.y = _this238.yScale(_offset2);
+                bar.y = _this239.yScale(_offset2);
                 bar.offset0 = _offset;
                 bar.offset1 = _offset2;
                 value = (_offset2 - _offset).toFixed(2) + '%';
               }
 
-              if (_this238.colors.scaleType === 'ordinal') {
-                bar.color = _this238.colors.getColor(label);
+              if (_this239.colors.scaleType === 'ordinal') {
+                bar.color = _this239.colors.getColor(label);
               } else {
-                if (_this238.type === 'standard') {
-                  bar.color = _this238.colors.getColor(value);
-                  bar.gradientStops = _this238.colors.getLinearGradientStops(value);
+                if (_this239.type === 'standard') {
+                  bar.color = _this239.colors.getColor(value);
+                  bar.gradientStops = _this239.colors.getLinearGradientStops(value);
                 } else {
-                  bar.color = _this238.colors.getColor(bar.offset1);
-                  bar.gradientStops = _this238.colors.getLinearGradientStops(bar.offset1, bar.offset0);
+                  bar.color = _this239.colors.getColor(bar.offset1);
+                  bar.gradientStops = _this239.colors.getLinearGradientStops(bar.offset1, bar.offset0);
                 }
               }
 
               var tooltipLabel = formattedLabel;
               bar.ariaLabel = formattedLabel + ' ' + value.toLocaleString();
 
-              if (_this238.seriesName) {
-                tooltipLabel = "".concat(_this238.seriesName, " \u2022 ").concat(formattedLabel);
-                bar.data.series = _this238.seriesName;
-                bar.ariaLabel = _this238.seriesName + ' ' + bar.ariaLabel;
+              if (_this239.seriesName) {
+                tooltipLabel = "".concat(_this239.seriesName, " \u2022 ").concat(formattedLabel);
+                bar.data.series = _this239.seriesName;
+                bar.ariaLabel = _this239.seriesName + ' ' + bar.ariaLabel;
               }
 
-              bar.tooltipText = _this238.tooltipDisabled ? undefined : "\n        <span class=\"tooltip-label\">".concat(Object(_swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_2__["escapeLabel"])(tooltipLabel), "</span>\n        <span class=\"tooltip-val\">").concat(_this238.dataLabelFormatting ? _this238.dataLabelFormatting(value) : value.toLocaleString(), "</span>\n      ");
+              bar.tooltipText = _this239.tooltipDisabled ? undefined : "\n        <span class=\"tooltip-label\">".concat(Object(_swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_2__["escapeLabel"])(tooltipLabel), "</span>\n        <span class=\"tooltip-val\">").concat(_this239.dataLabelFormatting ? _this239.dataLabelFormatting(value) : value.toLocaleString(), "</span>\n      ");
               return bar;
             });
             this.updateDataLabels();
@@ -53139,7 +53002,7 @@
         }, {
           key: "updateDataLabels",
           value: function updateDataLabels() {
-            var _this239 = this;
+            var _this240 = this;
 
             if (this.type === 'stacked') {
               this.barsForDataLabels = [];
@@ -53170,12 +53033,12 @@
             } else {
               this.barsForDataLabels = this.series.map(function (d) {
                 var section = {};
-                section.series = _this239.seriesName ? _this239.seriesName : d.name;
+                section.series = _this240.seriesName ? _this240.seriesName : d.name;
                 section.total = d.value;
-                section.x = _this239.xScale(d.name);
-                section.y = _this239.yScale(0);
-                section.height = _this239.yScale(section.total) - _this239.yScale(0);
-                section.width = _this239.xScale.bandwidth();
+                section.x = _this240.xScale(d.name);
+                section.y = _this240.yScale(0);
+                section.height = _this240.yScale(section.total) - _this240.yScale(0);
+                section.width = _this240.xScale.bandwidth();
                 return section;
               });
             }
@@ -53426,7 +53289,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -53445,12 +53308,12 @@
         _createClass(GoogleMapComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this240 = this;
+            var _this241 = this;
 
             this.authService.getGlobalCachePromise().then(function (cache) {
-              _this240.googleMapsAPIKey = cache.googleMapsAPIKey;
+              _this241.googleMapsAPIKey = cache.googleMapsAPIKey;
 
-              _this240.addMapsScript();
+              _this241.addMapsScript();
             });
           }
         }, {
@@ -53463,7 +53326,7 @@
         }, {
           key: "addMapsScript",
           value: function addMapsScript() {
-            var _this241 = this;
+            var _this242 = this;
 
             var googleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=".concat(this.googleMapsAPIKey);
 
@@ -53472,9 +53335,9 @@
                 type: 'text/javascript',
                 src: googleMapsUrl,
                 onload: function onload() {
-                  _this241.loadMapsData();
+                  _this242.loadMapsData();
 
-                  _this241.isLoaded = true;
+                  _this242.isLoaded = true;
                 }
               }));
             } else {
@@ -53586,25 +53449,25 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -53755,19 +53618,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -53791,7 +53654,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
       function DexihInvalidFormDetailsComponent_ng_template_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -53943,7 +53806,7 @@
         }, {
           key: "ngOnChanges",
           value: function ngOnChanges() {
-            var _this242 = this;
+            var _this243 = this;
 
             if (!this.control) {
               this.valid = true;
@@ -53958,7 +53821,7 @@
             }
 
             this._changesSubscription = this.control.statusChanges.subscribe(function () {
-              _this242.refresh();
+              _this243.refresh();
             });
           }
         }, {
@@ -53987,7 +53850,7 @@
         }, {
           key: "getFormErrorsRecursive",
           value: function getFormErrorsRecursive(form, depth, parentControlError) {
-            var _this243 = this;
+            var _this244 = this;
 
             var controlErrors = [];
 
@@ -54014,10 +53877,10 @@
                           controlError.name = cont.value.name;
                         }
 
-                        _this243.setError(field, cont, controlError, form, parentControlError);
+                        _this244.setError(field, cont, controlError, form, parentControlError);
 
                         controlError.position = formIndex + 1;
-                        controlError.childControlErrors = _this243.getFormErrorsRecursive(cont, depth + 1, controlError);
+                        controlError.childControlErrors = _this244.getFormErrorsRecursive(cont, depth + 1, controlError);
                         controlErrors.push(controlError);
                       }
                     });
@@ -54028,15 +53891,15 @@
                       controlError.name = control.value.name;
                     }
 
-                    _this243.setError(field, control, controlError, form, parentControlError);
+                    _this244.setError(field, control, controlError, form, parentControlError);
 
                     controlError.position = null;
-                    controlError.childControlErrors = _this243.getFormErrorsRecursive(control, depth + 1, controlError);
+                    controlError.childControlErrors = _this244.getFormErrorsRecursive(control, depth + 1, controlError);
                     controlErrors.push(controlError);
                   } else {
                     var _controlError = new ControlError();
 
-                    _this243.setError(field, control, _controlError, form, parentControlError);
+                    _this244.setError(field, control, _controlError, form, parentControlError);
 
                     _controlError.position = null;
 
@@ -54232,7 +54095,7 @@
           if (rf & 2) {
             var _r1 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](3);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("iconClass", ctx.valid ? "fa fa-check" : "fa fa-exclamation-circle")("buttonClass", ctx.valid ? "btn btn-success" : "btn btn-warning")("text", ctx.valid ? "Valid" : "Warnings")("pullRight", true);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("iconClass", ctx.valid ? "fa fa-check" : "fa fa-exclamation-circle")("buttonClass", ctx.valid ? "btn btn-success" : "btn btn-danger")("text", ctx.valid ? "Valid" : "Warnings")("pullRight", true);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
@@ -54298,19 +54161,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
       function DexihInvalidFormIconComponent_span_0_Template(rf, ctx) {
         if (rf & 1) {
@@ -54450,7 +54313,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -54462,7 +54325,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
       function DexihMessageComponent_section_0_div_7_div_4_Template(rf, ctx) {
         if (rf & 1) {
@@ -54683,19 +54546,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -54806,7 +54669,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -54830,7 +54693,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
       function DownloadButtonComponent_a_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -54972,13 +54835,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
       function EncryptionStatusIconComponent_span_0_Template(rf, ctx) {
         if (rf & 1) {
@@ -55103,19 +54966,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -55238,7 +55101,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -55353,7 +55216,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -55365,7 +55228,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
       function PrivacyStatusButtonComponent_span_0_Template(rf, ctx) {
         if (rf & 1) {
@@ -55522,7 +55385,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -55552,7 +55415,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -55564,7 +55427,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 
       function QueryBuilderComponent_div_0_div_1_div_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -56138,7 +56001,7 @@
         _createClass(QueryBuilderComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this244 = this;
+            var _this245 = this;
 
             if (!this.selectQuery) {
               this.selectQuery = new _shared_models__WEBPACK_IMPORTED_MODULE_1__["SelectQuery"]();
@@ -56152,7 +56015,10 @@
             }
 
             this._refreshSubscription = this.refreshEvent.subscribe(function () {
-              _this244.requiresRefresh = false;
+              _this245.requiresRefresh = false;
+            });
+            this._requiresRefreshSubscription = this.requiresRefreshEvent.subscribe(function () {
+              _this245.requiresRefresh = true;
             });
             this.allRows = this.selectQuery.rows < 0 ? true : false;
           }
@@ -56161,6 +56027,10 @@
           value: function ngOnDestroy() {
             if (this._refreshSubscription) {
               this._refreshSubscription.unsubscribe();
+            }
+
+            if (this._requiresRefreshSubscription) {
+              this._requiresRefreshSubscription.unsubscribe();
             }
           }
         }, {
@@ -56255,7 +56125,8 @@
           columns: "columns",
           inputColumns: "inputColumns",
           parameters: "parameters",
-          refreshEvent: "refreshEvent"
+          refreshEvent: "refreshEvent",
+          requiresRefreshEvent: "requiresRefreshEvent"
         },
         outputs: {
           hasChanged: "hasChanged",
@@ -56305,6 +56176,9 @@
           refreshEvent: [{
             type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
           }],
+          requiresRefreshEvent: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+          }],
           hasChanged: [{
             type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"]
           }],
@@ -56341,19 +56215,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -56429,7 +56303,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -56447,7 +56321,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -56459,7 +56333,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 
       function SeriesAnimateComponent_div_0_d_widget_section_1_ng_template_1_Template(rf, ctx) {}
 
@@ -56786,11 +56660,11 @@
         }, {
           key: "ngOnChanges",
           value: function ngOnChanges(changes) {
-            var _this245 = this;
+            var _this246 = this;
 
             if (changes.baseData || changes.columns || changes.animateConfig) {
               setTimeout(function () {
-                _this245.initializeAnimation();
+                _this246.initializeAnimation();
               });
             }
           }
@@ -56825,14 +56699,14 @@
         }, {
           key: "animationSeriesValues",
           value: function animationSeriesValues() {
-            var _this246 = this;
+            var _this247 = this;
 
             this.animationColumnIndex = this.columns.findIndex(function (c) {
-              return c.title === _this246.animateConfig.seriesColumn;
+              return c.title === _this247.animateConfig.seriesColumn;
             });
             var format = this.columns[this.animationColumnIndex].format;
             var values = Array.from(new Set(this.baseData.map(function (c) {
-              return c[_this246.animationColumnIndex];
+              return c[_this247.animationColumnIndex];
             }))).sort(function (a, b) {
               if (a > b) {
                 return 1;
@@ -56854,19 +56728,19 @@
         }, {
           key: "animationFilter",
           value: function animationFilter() {
-            var _this247 = this;
+            var _this248 = this;
 
             var value = this.animationValues[this.animationRowIndex].value;
             this.animationValue = value;
             var data = this.baseData.filter(function (c) {
-              return c[_this247.animationColumnIndex] === value;
+              return c[_this248.animationColumnIndex] === value;
             });
             this.dataChange.emit(data);
           }
         }, {
           key: "animationPlay",
           value: function animationPlay() {
-            var _this248 = this;
+            var _this249 = this;
 
             if (this.animationColumnIndex >= 0) {
               if (!this.animationPaused) {
@@ -56879,16 +56753,16 @@
                 if (first) {
                   first = false;
                 } else {
-                  _this248.animationRowIndex++;
+                  _this249.animationRowIndex++;
                 }
 
-                if (_this248.animationRowIndex + 1 >= _this248.animationValues.length) {
-                  clearInterval(_this248.animationTimer);
+                if (_this249.animationRowIndex + 1 >= _this249.animationValues.length) {
+                  clearInterval(_this249.animationTimer);
                 } else {
-                  _this248.animationFilter(); // at last item, then stop.
+                  _this249.animationFilter(); // at last item, then stop.
 
 
-                  if (_this248.animationRowIndex + 1 >= _this248.animationValues.length) {
+                  if (_this249.animationRowIndex + 1 >= _this249.animationValues.length) {
                     clearInterval();
                   }
                 }
@@ -57061,19 +56935,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -57238,7 +57112,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -57268,7 +57142,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -57280,7 +57154,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 
       function InputParametersViewComponent_div_0_div_1_form_select_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -57320,7 +57194,7 @@
 
           var ctx_r5 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("labelLeft", parameter_r3.name)("ngModel", parameter_r3.value)("items", parameter_r3.runTime.items)("enableTextEntry", !(parameter_r3.listOfValuesKey > 0))("textEntryItems", ctx_r5.parentParams)("showRefresh", parameter_r3.runTime.showRefresh)("isRefreshing", parameter_r3.runTime.isRefreshing)("multiSelect", parameter_r3.rank === 1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("labelLeft", parameter_r3.name)("ngModel", parameter_r3.value)("items", parameter_r3["runTime"].items)("enableTextEntry", !(parameter_r3.listOfValuesKey > 0))("textEntryItems", ctx_r5.parentParams)("showRefresh", parameter_r3["runTime"].showRefresh)("isRefreshing", parameter_r3["runTime"].isRefreshing)("multiSelect", parameter_r3.rank === 1);
         }
       }
 
@@ -57440,7 +57314,7 @@
         _createClass(InputParametersViewComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this249 = this;
+            var _this250 = this;
 
             this.userParameters = [];
             this.parameters.filter(function (c) {
@@ -57459,10 +57333,10 @@
                 }];
               }
 
-              _this249.userParameters.push(parameter);
+              _this250.userParameters.push(parameter);
             });
             this._refreshSubscription = this.refreshEvent.subscribe(function () {
-              _this249.requiresRefresh = false;
+              _this250.requiresRefresh = false;
             });
           }
         }, {
@@ -57479,7 +57353,7 @@
         }, {
           key: "refresh",
           value: function refresh(parameter) {
-            var _this250 = this;
+            var _this251 = this;
 
             if (!parameter.listOfValuesKey) {
               return;
@@ -57490,7 +57364,7 @@
               parameter['runTime'].items = result;
               parameter['runTime'].showRefresh = false;
             })["catch"](function (reason) {
-              _this250.authService.addUpdateNotification(reason, false);
+              _this251.authService.addUpdateNotification(reason, false);
             })["finally"](function () {
               parameter['runTime'].isRefreshing = false;
             });
@@ -57618,7 +57492,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -57630,7 +57504,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -57648,7 +57522,7 @@
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
 
       function PreviewDashboardItemComponent_div_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -57854,13 +57728,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -57896,7 +57770,7 @@
 
       var angular_gridster2__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! angular-gridster2 */
-      "./node_modules/angular-gridster2/fesm2015/angular-gridster2.js");
+      "./node_modules/angular-gridster2/__ivy_ngcc__/fesm2015/angular-gridster2.js");
       /* harmony import */
 
 
@@ -57914,7 +57788,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -58087,15 +57961,15 @@
         _createClass(PreviewDashboardComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this251 = this;
+            var _this252 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["combineLatest"])(this.route.params, this.authService.getSharedDataIndex('', [], 50, false)).subscribe(function (result) {
                 var params = result[0];
-                _this251.hubKey = +params['hubKey'];
-                _this251.dashboardKey = +params['dashboardKey'];
+                _this252.hubKey = +params['hubKey'];
+                _this252.dashboardKey = +params['dashboardKey'];
 
-                _this251.refresh();
+                _this252.refresh();
               });
             } catch (e) {
               this.dexihMessage.addMessage(e);
@@ -58123,29 +57997,29 @@
         }, {
           key: "refresh",
           value: function refresh() {
-            var _this252 = this;
+            var _this253 = this;
 
             this.authService.getDashboard(this.hubKey, this.dashboardKey).then(function (dashboard) {
-              _this252.refreshDataSubject.next();
+              _this253.refreshDataSubject.next();
 
-              _this252.setOptions(dashboard);
+              _this253.setOptions(dashboard);
 
-              _this252.dashboard = dashboard;
-              _this252.name = dashboard.name;
+              _this253.dashboard = dashboard;
+              _this253.name = dashboard.name;
 
-              if (!_this252.parameters) {
-                _this252.parameters = dashboard.parameters;
+              if (!_this253.parameters) {
+                _this253.parameters = dashboard.parameters;
               }
             })["catch"](function (reason) {
-              _this252.dexihMessage.addMessage(reason);
+              _this253.dexihMessage.addMessage(reason);
 
-              _this252.dashboard = null;
+              _this253.dashboard = null;
             });
           }
         }, {
           key: "setOptions",
           value: function setOptions(dashboard) {
-            var _this253 = this;
+            var _this254 = this;
 
             this.options = {
               gridType: angular_gridster2__WEBPACK_IMPORTED_MODULE_7__["GridType"].ScrollVertical,
@@ -58206,13 +58080,13 @@
               disableWarnings: false,
               scrollToNewItems: false,
               itemChangeCallback: function itemChangeCallback(item, itemComponent) {
-                _this253.itemResize(item, itemComponent);
+                _this254.itemResize(item, itemComponent);
               },
               itemResizeCallback: function itemResizeCallback(item, itemComponent) {
-                _this253.itemResize(item, itemComponent);
+                _this254.itemResize(item, itemComponent);
               },
               itemInitCallback: function itemInitCallback(item, itemComponent) {
-                _this253.itemResize(item, itemComponent);
+                _this254.itemResize(item, itemComponent);
               }
             };
           }
@@ -58377,13 +58251,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -58413,7 +58287,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -58443,7 +58317,7 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -58595,18 +58469,12 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "series-animate", 27);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("hasChanged", function PreviewDataComponent_div_0_div_13_Template_series_animate_hasChanged_1_listener() {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("dataChange", function PreviewDataComponent_div_0_div_13_Template_series_animate_dataChange_1_listener($event) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r20);
 
             var ctx_r19 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-            return ctx_r19.hasChanged();
-          })("dataChange", function PreviewDataComponent_div_0_div_13_Template_series_animate_dataChange_1_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r20);
-
-            var ctx_r21 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-
-            return ctx_r21.data = $event;
+            return ctx_r19.data = $event;
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -58625,7 +58493,7 @@
 
       function PreviewDataComponent_div_0_Template(rf, ctx) {
         if (rf & 1) {
-          var _r23 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r22 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 4);
 
@@ -58646,11 +58514,11 @@
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "download-button", 10);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("download", function PreviewDataComponent_div_0_Template_download_button_download_7_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r23);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r22);
 
-            var ctx_r22 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r21 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r22.downloadData($event);
+            return ctx_r21.downloadData($event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -58660,11 +58528,11 @@
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "d-button-refresh", 12);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function PreviewDataComponent_div_0_Template_d_button_refresh_click_9_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r23);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r22);
 
-            var ctx_r24 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r23 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r24.refresh();
+            return ctx_r23.refresh();
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -58731,7 +58599,7 @@
 
       function PreviewDataComponent_div_2_div_1_Template(rf, ctx) {
         if (rf & 1) {
-          var _r29 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r28 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 34);
 
@@ -58740,11 +58608,11 @@
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "input", 18);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function PreviewDataComponent_div_2_div_1_Template_input_click_2_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r29);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r28);
 
-            var ctx_r28 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+            var ctx_r27 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-            return ctx_r28.showChart = false;
+            return ctx_r27.showChart = false;
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -58758,11 +58626,11 @@
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "input", 21);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function PreviewDataComponent_div_2_div_1_Template_input_click_5_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r29);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r28);
 
-            var ctx_r30 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+            var ctx_r29 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-            return ctx_r30.showChart = true;
+            return ctx_r29.showChart = true;
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -58775,38 +58643,68 @@
         }
 
         if (rf & 2) {
-          var ctx_r25 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+          var ctx_r24 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](2, _c0, ctx_r25.showChart === false));
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](2, _c0, ctx_r24.showChart === false));
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](4, _c0, ctx_r25.showChart === true));
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](4, _c0, ctx_r24.showChart === true));
         }
       }
 
       function PreviewDataComponent_div_2_div_2_Template(rf, ctx) {
         if (rf & 1) {
-          var _r32 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r31 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 35);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "input-parameters-view", 26);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onRefreshData", function PreviewDataComponent_div_2_div_2_Template_input_parameters_view_onRefreshData_1_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r32);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r31);
 
-            var ctx_r31 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+            var ctx_r30 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-            return ctx_r31.refresh();
+            return ctx_r30.refresh();
           })("onChange", function PreviewDataComponent_div_2_div_2_Template_input_parameters_view_onChange_1_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r32);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r31);
+
+            var ctx_r32 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+
+            return ctx_r32.parameterChange();
+          });
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+
+        if (rf & 2) {
+          var ctx_r25 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("hubKey", ctx_r25.hubKey)("objectType", ctx_r25.objectType)("objectKey", ctx_r25.objectKey)("parameters", ctx_r25.userParameters)("refreshEvent", ctx_r25.refreshDataObservable);
+        }
+      }
+
+      function PreviewDataComponent_div_2_div_3_Template(rf, ctx) {
+        if (rf & 1) {
+          var _r34 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "series-animate", 27);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("dataChange", function PreviewDataComponent_div_2_div_3_Template_series_animate_dataChange_1_listener($event) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r34);
 
             var ctx_r33 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-            return ctx_r33.parameterChange();
+            return ctx_r33.data = $event;
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -58819,43 +58717,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("hubKey", ctx_r26.hubKey)("objectType", ctx_r26.objectType)("objectKey", ctx_r26.objectKey)("parameters", ctx_r26.userParameters)("refreshEvent", ctx_r26.refreshDataObservable);
-        }
-      }
-
-      function PreviewDataComponent_div_2_div_3_Template(rf, ctx) {
-        if (rf & 1) {
-          var _r35 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "series-animate", 27);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("hasChanged", function PreviewDataComponent_div_2_div_3_Template_series_animate_hasChanged_1_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r35);
-
-            var ctx_r34 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-
-            return ctx_r34.hasChanged();
-          })("dataChange", function PreviewDataComponent_div_2_div_3_Template_series_animate_dataChange_1_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r35);
-
-            var ctx_r36 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-
-            return ctx_r36.data = $event;
-          });
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        }
-
-        if (rf & 2) {
-          var ctx_r27 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showEdit", false)("showFrame", false)("animateConfig", ctx_r27.viewConfig.animateConfig)("columns", ctx_r27.columns)("baseData", ctx_r27.baseData)("data", ctx_r27.data);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showEdit", false)("showFrame", false)("animateConfig", ctx_r26.viewConfig.animateConfig)("columns", ctx_r26.columns)("baseData", ctx_r26.baseData)("data", ctx_r26.data);
         }
       }
 
@@ -58905,9 +58767,9 @@
         }
 
         if (rf & 2) {
-          var ctx_r37 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+          var ctx_r35 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("enableMultiSelect", false)("enableSaveCsv", true)("csvFileName", ctx_r37.name)("enableFilter", false)("columns", ctx_r37.columns)("data", ctx_r37.data);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("enableMultiSelect", false)("enableSaveCsv", true)("csvFileName", ctx_r35.name)("enableFilter", false)("columns", ctx_r35.columns)("data", ctx_r35.data);
         }
       }
 
@@ -58917,9 +58779,9 @@
         }
 
         if (rf & 2) {
-          var ctx_r38 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+          var ctx_r36 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("responsive", true)("columns", ctx_r38.columns)("data", ctx_r38.data)("config", ctx_r38.viewConfig.chartConfig);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("responsive", true)("columns", ctx_r36.columns)("data", ctx_r36.data)("config", ctx_r36.viewConfig.chartConfig);
         }
       }
 
@@ -58973,7 +58835,7 @@
         _createClass(PreviewDataComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this254 = this;
+            var _this255 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["combineLatest"])(this.authService.getSharedDataObject(this.hubKey, this.objectType, this.objectKey), this.route.queryParams).subscribe(function (result) {
@@ -58981,16 +58843,16 @@
                 var queryParams = result[1];
 
                 if (object != null) {
-                  _this254.inputColumns = object.inputColumns;
-                  _this254.tableColumns = object.outputColumns;
-                  _this254.parameters = object.parameters;
-                  _this254.userParameters = _this254.parameters;
+                  _this255.inputColumns = object.inputColumns;
+                  _this255.tableColumns = object.outputColumns;
+                  _this255.parameters = object.parameters;
+                  _this255.userParameters = _this255.parameters;
                   var p = queryParams['p'];
 
                   if (p) {
                     var paramValues = JSON.parse(p);
 
-                    var _iterator19 = _createForOfIteratorHelper(_this254.userParameters),
+                    var _iterator19 = _createForOfIteratorHelper(_this255.userParameters),
                         _step19;
 
                     try {
@@ -59013,10 +58875,10 @@
                     }
                   }
                 } else {
-                  _this254.parameters = [];
+                  _this255.parameters = [];
                 }
 
-                _this254.refresh();
+                _this255.refresh();
               });
             } catch (e) {
               this.authService.addUpdateNotification(e, false);
@@ -59070,42 +58932,42 @@
         }, {
           key: "refresh",
           value: function refresh() {
-            var _this255 = this;
+            var _this256 = this;
 
             this.authService.previewData(this.hubKey, this.objectKey, this.objectType, this.inputColumns, this.selectQuery, this.parameters, this.parentParameters, this.cancelToken).then(function (result) {
-              _this255.refreshDataSubject.next();
+              _this256.refreshDataSubject.next();
 
-              _this255.columns = result.columns;
-              _this255.baseData = result.data;
-              _this255.name = result.name;
-              _this255.viewConfig = result.viewConfig;
+              _this256.columns = result.columns;
+              _this256.baseData = result.data;
+              _this256.name = result.name;
+              _this256.viewConfig = result.viewConfig;
 
-              if (!_this255.viewConfig) {
-                _this255.data = _this255.baseData;
+              if (!_this256.viewConfig) {
+                _this256.data = _this256.baseData;
               }
 
-              if (_this255.viewConfig && _this255.viewConfig.viewType === _shared_models__WEBPACK_IMPORTED_MODULE_5__["eViewType"].Chart) {
-                _this255.showChart = true;
+              if (_this256.viewConfig && _this256.viewConfig.viewType === _shared_models__WEBPACK_IMPORTED_MODULE_5__["eViewType"].Chart) {
+                _this256.showChart = true;
               } else {
-                _this255.showChart = false;
+                _this256.showChart = false;
               }
 
               if (result.status) {
                 // this.dexihMessage.addMessage(result.status);
-                _this255.authService.addUpdateNotification(result.status, false);
+                _this256.authService.addUpdateNotification(result.status, false);
               }
             })["catch"](function (reason) {
-              _this255.authService.addUpdateNotification(reason, false);
+              _this256.authService.addUpdateNotification(reason, false);
 
-              _this255.baseData = [];
-              _this255.data = [];
-              _this255.name = 'failed';
+              _this256.baseData = [];
+              _this256.data = [];
+              _this256.name = 'failed';
             });
           }
         }, {
           key: "downloadData",
           value: function downloadData(format) {
-            var _this256 = this;
+            var _this257 = this;
 
             var sharedData = new _shared_models__WEBPACK_IMPORTED_MODULE_5__["SharedData"]();
             sharedData.objectKey = this.objectKey;
@@ -59118,9 +58980,9 @@
             this.authService.downloadData([sharedData], true, format, this.cancelToken).then(function () {
               var message = new _auth_auth_models__WEBPACK_IMPORTED_MODULE_4__["Message"](true, 'The download task has started.', null, null);
 
-              _this256.authService.addUpdateNotification(message, false);
+              _this257.authService.addUpdateNotification(message, false);
             })["catch"](function (reason) {
-              _this256.authService.addUpdateNotification(reason, false);
+              _this257.authService.addUpdateNotification(reason, false);
             });
           }
         }, {
@@ -59161,7 +59023,7 @@
         },
         decls: 4,
         vars: 4,
-        consts: [["class", "side-menu", 4, "ngIf"], ["class", "m-3", 4, "ngIf"], ["class", "d-flex", 4, "ngIf"], ["class", "h-100 box", 4, "ngIf"], [1, "side-menu"], [1, "side-menu-content"], [1, "spin-icon"], [1, "fa", "fa-cog", "fa-spin"], [1, "side-menu-box"], [1, "bg-light", "rounded", "p-1"], [3, "download"], ["class", "btn-group btn-group-toggle ml-1", "data-toggle", "buttons", "title", "Table", 4, "ngIf"], [1, "ml-1", 3, "compact", "click"], ["class", "ml-1", "buttonClass", "btn btn-primary", "iconClass", "fa fa-window-maximize text-white", "tooltip", "Maximize window", 3, "click", 4, "ngIf"], ["class", "ml-1", "buttonClass", "btn btn-primary", "iconClass", "fa fa-window-minimize text-white", "tooltip", "Minimize window", 3, "click", 4, "ngIf"], ["class", "m-1", 4, "ngIf"], ["data-toggle", "buttons", "title", "Table", 1, "btn-group", "btn-group-toggle", "ml-1"], [1, "btn", "btn-primary", 3, "ngClass"], ["type", "radio", "name", "options", "value", "table", "autocomplete", "off", 3, "click"], [1, "fa", "fa-table"], ["title", "Chart", 1, "btn", "btn-primary", 3, "ngClass"], ["type", "radio", "name", "options", "value", "chart", "autocomplete", "off", 3, "click"], [1, "fa", "fa-bar-chart"], ["buttonClass", "btn btn-primary", "iconClass", "fa fa-window-maximize text-white", "tooltip", "Maximize window", 1, "ml-1", 3, "click"], ["buttonClass", "btn btn-primary", "iconClass", "fa fa-window-minimize text-white", "tooltip", "Minimize window", 1, "ml-1", 3, "click"], [1, "m-1"], [3, "hubKey", "objectType", "objectKey", "parameters", "refreshEvent", "onRefreshData", "onChange"], [3, "showEdit", "showFrame", "animateConfig", "columns", "baseData", "data", "hasChanged", "dataChange"], [1, "m-3"], [1, "dexih-loader"], [1, "d-flex"], ["class", "align-self-start btn-group btn-sm btn-group-toggle", "data-toggle", "buttons", "title", "Table", 4, "ngIf"], ["class", "mt-1", 4, "ngIf"], [4, "ngIf"], ["data-toggle", "buttons", "title", "Table", 1, "align-self-start", "btn-group", "btn-sm", "btn-group-toggle"], [1, "mt-1"], [1, "h-100", "box"], [1, "box-content", 2, "height", "90vh"], [3, "enableMultiSelect", "enableSaveCsv", "csvFileName", "enableFilter", "columns", "data", 4, "ngIf"], [3, "responsive", "columns", "data", "config", 4, "ngIf"], [3, "enableMultiSelect", "enableSaveCsv", "csvFileName", "enableFilter", "columns", "data"], ["actions", ""], ["tableHeader", ""], [3, "responsive", "columns", "data", "config"]],
+        consts: [["class", "side-menu", 4, "ngIf"], ["class", "m-3", 4, "ngIf"], ["class", "d-flex", 4, "ngIf"], ["class", "h-100 box", 4, "ngIf"], [1, "side-menu"], [1, "side-menu-content"], [1, "spin-icon"], [1, "fa", "fa-cog", "fa-spin"], [1, "side-menu-box"], [1, "bg-light", "rounded", "p-1"], [3, "download"], ["class", "btn-group btn-group-toggle ml-1", "data-toggle", "buttons", "title", "Table", 4, "ngIf"], [1, "ml-1", 3, "compact", "click"], ["class", "ml-1", "buttonClass", "btn btn-primary", "iconClass", "fa fa-window-maximize text-white", "tooltip", "Maximize window", 3, "click", 4, "ngIf"], ["class", "ml-1", "buttonClass", "btn btn-primary", "iconClass", "fa fa-window-minimize text-white", "tooltip", "Minimize window", 3, "click", 4, "ngIf"], ["class", "m-1", 4, "ngIf"], ["data-toggle", "buttons", "title", "Table", 1, "btn-group", "btn-group-toggle", "ml-1"], [1, "btn", "btn-primary", 3, "ngClass"], ["type", "radio", "name", "options", "value", "table", "autocomplete", "off", 3, "click"], [1, "fa", "fa-table"], ["title", "Chart", 1, "btn", "btn-primary", 3, "ngClass"], ["type", "radio", "name", "options", "value", "chart", "autocomplete", "off", 3, "click"], [1, "fa", "fa-bar-chart"], ["buttonClass", "btn btn-primary", "iconClass", "fa fa-window-maximize text-white", "tooltip", "Maximize window", 1, "ml-1", 3, "click"], ["buttonClass", "btn btn-primary", "iconClass", "fa fa-window-minimize text-white", "tooltip", "Minimize window", 1, "ml-1", 3, "click"], [1, "m-1"], [3, "hubKey", "objectType", "objectKey", "parameters", "refreshEvent", "onRefreshData", "onChange"], [3, "showEdit", "showFrame", "animateConfig", "columns", "baseData", "data", "dataChange"], [1, "m-3"], [1, "dexih-loader"], [1, "d-flex"], ["class", "align-self-start btn-group btn-sm btn-group-toggle", "data-toggle", "buttons", "title", "Table", 4, "ngIf"], ["class", "mt-1", 4, "ngIf"], [4, "ngIf"], ["data-toggle", "buttons", "title", "Table", 1, "align-self-start", "btn-group", "btn-sm", "btn-group-toggle"], [1, "mt-1"], [1, "h-100", "box"], [1, "box-content", 2, "height", "90vh"], [3, "enableMultiSelect", "enableSaveCsv", "csvFileName", "enableFilter", "columns", "data", 4, "ngIf"], [3, "responsive", "columns", "data", "config", 4, "ngIf"], [3, "enableMultiSelect", "enableSaveCsv", "csvFileName", "enableFilter", "columns", "data"], ["actions", ""], ["tableHeader", ""], [3, "responsive", "columns", "data", "config"]],
         template: function PreviewDataComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, PreviewDataComponent_div_0_Template, 14, 6, "div", 0);
@@ -59262,13 +59124,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -59304,7 +59166,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
@@ -59397,7 +59259,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("hubKey", ctx_r0.hubKey)("objectType", ctx_r0.objectType)("objectKey", ctx_r0.objectKey)("parameters", ctx_r0.parameters)("updateQueryParameters", true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("hubKey", ctx_r0.hubKey)("objectType", ctx_r0.objectType)("objectKey", ctx_r0.objectKey)("updateQueryParameters", true);
         }
       }
 
@@ -59415,7 +59277,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("hubKey", ctx_r1.hubKey)("objectType", ctx_r1.objectType)("objectKey", ctx_r1.objectKey)("parameters", ctx_r1.parameters)("updateQueryParameters", false);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("hubKey", ctx_r1.hubKey)("objectType", ctx_r1.objectType)("objectKey", ctx_r1.objectKey)("updateQueryParameters", false);
         }
       }
 
@@ -59434,18 +59296,18 @@
         _createClass(PreviewComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this257 = this;
+            var _this258 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["combineLatest"])(this.route.params, this.route.queryParams).subscribe(function (result) {
                 var params = result[0];
                 var queryParams = result[1];
-                _this257.hubKey = +params['hubKey'];
-                _this257.objectType = +params['objectType'];
-                _this257.objectKey = +params['objectKey'];
+                _this258.hubKey = +params['hubKey'];
+                _this258.objectType = +params['objectType'];
+                _this258.objectKey = +params['objectKey'];
 
                 if (queryParams['embed'] === 'true') {
-                  _this257.embed = true;
+                  _this258.embed = true;
                 }
               });
             } catch (e) {
@@ -59517,12 +59379,12 @@
         },
         decls: 2,
         vars: 2,
-        consts: [["class", "container-fluid", 4, "ngIf"], [4, "ngIf"], [1, "container-fluid"], ["iconClass", "fa fa-lg fa-fw fa-table", 3, "title", "showCloseButton", "padding", "close"], ["header", ""], [3, "hubKey", "objectType", "objectKey", "parameters", "updateQueryParameters"], ["PreviewData", ""], ["text", "Reload", 1, "mr-1", 3, "click"], [1, "ml-1", 3, "download"], [1, "ml-1", 3, "click"]],
+        consts: [["class", "container-fluid", 4, "ngIf"], [4, "ngIf"], [1, "container-fluid"], ["iconClass", "fa fa-lg fa-fw fa-table", 3, "title", "showCloseButton", "padding", "close"], ["header", ""], [3, "hubKey", "objectType", "objectKey", "updateQueryParameters"], ["PreviewData", ""], ["text", "Reload", 1, "mr-1", 3, "click"], [1, "ml-1", 3, "download"], [1, "ml-1", 3, "click"]],
         template: function PreviewComponent_Template(rf, ctx) {
           if (rf & 1) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, PreviewComponent_div_0_Template, 6, 8, "div", 0);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, PreviewComponent_div_0_Template, 6, 7, "div", 0);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, PreviewComponent_div_1_Template, 2, 5, "div", 1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, PreviewComponent_div_1_Template, 2, 4, "div", 1);
           }
 
           if (rf & 2) {
@@ -59596,19 +59458,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -59620,19 +59482,19 @@
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
       var ngx_d_markdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-d-markdown */
-      "./node_modules/ngx-d-markdown/fesm2015/ngx-d-markdown.js");
+      "./node_modules/ngx-d-markdown/__ivy_ngcc__/fesm2015/ngx-d-markdown.js");
       /* harmony import */
 
 
       var angular_gridster2__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! angular-gridster2 */
-      "./node_modules/angular-gridster2/fesm2015/angular-gridster2.js");
+      "./node_modules/angular-gridster2/__ivy_ngcc__/fesm2015/angular-gridster2.js");
       /* harmony import */
 
 
@@ -59725,7 +59587,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -59737,7 +59599,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -59767,7 +59629,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/fesm2015/router.js");
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -59791,13 +59653,13 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var ngx_d_table__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! ngx-d-table */
-      "./node_modules/ngx-d-table/fesm2015/ngx-d-table.js");
+      "./node_modules/ngx-d-table/__ivy_ngcc__/fesm2015/ngx-d-table.js");
       /* harmony import */
 
 
@@ -60058,32 +59920,32 @@
         _createClass(SharedDataComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this258 = this;
+            var _this259 = this;
 
             try {
               this._subscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["combineLatest"])(this.route.params, this.authService.getHubsObservable()).subscribe(function (result) {
                 var params = result[0];
-                _this258.hubs = result[1];
+                _this259.hubs = result[1];
 
-                if (_this258.hubs) {
-                  _this258.hubKeys = _this258.hubs.map(function (c) {
+                if (_this259.hubs) {
+                  _this259.hubKeys = _this259.hubs.map(function (c) {
                     return c.hubKey;
                   });
                 }
 
-                _this258.searchForm = _this258.fb.group({
+                _this259.searchForm = _this259.fb.group({
                   'searchString': ['', []],
                   'hubKeys': [[], []]
                 });
 
-                _this258.updateSearch();
+                _this259.updateSearch();
 
-                if (_this258._searchSubscription) {
-                  _this258._searchSubscription.unsubscribe();
+                if (_this259._searchSubscription) {
+                  _this259._searchSubscription.unsubscribe();
                 }
 
-                _this258._searchSubscription = _this258.searchForm.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["debounceTime"])(500)).subscribe(function () {
-                  _this258.updateSearch();
+                _this259._searchSubscription = _this259.searchForm.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["debounceTime"])(500)).subscribe(function () {
+                  _this259.updateSearch();
                 });
               });
             } catch (e) {
@@ -60102,28 +59964,28 @@
         }, {
           key: "updateSearch",
           value: function updateSearch() {
-            var _this259 = this;
+            var _this260 = this;
 
             var hubKeys = this.searchForm.value.hubKeys;
             this.authService.getSharedDataIndex(this.searchForm.value.searchString, hubKeys, 50, true).then(function (result) {
-              _this259.dataIndex = result.filter(function (c) {
+              _this260.dataIndex = result.filter(function (c) {
                 return c.objectType !== _shared_models__WEBPACK_IMPORTED_MODULE_8__["eDataObjectType"].DashboardItem;
               });
-              _this259.tags = [];
+              _this260.tags = [];
 
-              _this259.dataIndex.forEach(function (item) {
+              _this260.dataIndex.forEach(function (item) {
                 if (item.tags && item.tags.length > 0) {
                   item.tags.forEach(function (tag) {
-                    if (_this259.tags.findIndex(function (c) {
+                    if (_this260.tags.findIndex(function (c) {
                       return c.name === tag.name;
                     }) < 0) {
-                      _this259.tags.push(tag);
+                      _this260.tags.push(tag);
                     }
                   });
                 }
               });
             })["catch"](function (reason) {
-              return _this259.dexihMessage.addMessage(reason);
+              return _this260.dexihMessage.addMessage(reason);
             });
           }
         }, {
@@ -60158,12 +60020,12 @@
         }, {
           key: "downloadData",
           value: function downloadData(sharedItems, zipFiles, downloadFormat) {
-            var _this260 = this;
+            var _this261 = this;
 
             this.authService.downloadData(sharedItems, zipFiles, downloadFormat, this.cancelToken).then(function () {
-              _this260.dexihMessage.addSuccessMessage('The download task has started.');
+              _this261.dexihMessage.addSuccessMessage('The download task has started.');
             })["catch"](function (reason) {
-              _this260.dexihMessage.addMessage(reason);
+              _this261.dexihMessage.addMessage(reason);
             });
           }
         }, {
@@ -60317,7 +60179,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -60329,7 +60191,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
       function SupportOptionsComponent_div_2_Template(rf, ctx) {
         if (rf & 1) {
@@ -60506,19 +60368,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/fesm2015/common.js");
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
@@ -60594,7 +60456,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 
       var AllFilterPipe = /*#__PURE__*/function () {
         function AllFilterPipe() {
@@ -60680,7 +60542,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -60756,7 +60618,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 
       var CountdownComponent = /*#__PURE__*/function () {
         function CountdownComponent(_changeDetector) {
@@ -60774,7 +60636,7 @@
         }, {
           key: "_startTimer",
           value: function _startTimer() {
-            var _this261 = this;
+            var _this262 = this;
 
             if (this.delta <= 0) {
               return;
@@ -60783,10 +60645,10 @@
             this._stopTimer();
 
             this._interval = setInterval(function () {
-              _this261._changeDetector.detectChanges();
+              _this262._changeDetector.detectChanges();
 
-              if (_this261.delta <= 0) {
-                _this261._stopTimer();
+              if (_this262.delta <= 0) {
+                _this262._stopTimer();
               }
             }, this._timing);
           }
@@ -60932,7 +60794,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 
       var DragZoneDirective = /*#__PURE__*/function () {
         function DragZoneDirective(element) {
@@ -61048,7 +60910,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 
       var DropZoneDirective = /*#__PURE__*/function () {
         function DropZoneDirective() {
@@ -61304,7 +61166,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 
       var EqualFilterPipe = /*#__PURE__*/function () {
         function EqualFilterPipe() {
@@ -61376,7 +61238,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 
       var FieldFilterPipe = /*#__PURE__*/function () {
         function FieldFilterPipe() {
@@ -61453,7 +61315,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -61614,7 +61476,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 
       var GtFilterPipe = /*#__PURE__*/function () {
         function GtFilterPipe() {
@@ -61684,13 +61546,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/fesm2015/forms.js");
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 
       var IsValidFilterPipe = /*#__PURE__*/function () {
         function IsValidFilterPipe() {
@@ -61772,7 +61634,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 
       var MaxItemsFilterPipe = /*#__PURE__*/function () {
         function MaxItemsFilterPipe() {
@@ -61844,7 +61706,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 
       var SortDescPipe = /*#__PURE__*/function () {
         function SortDescPipe() {
@@ -61922,7 +61784,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 
       var SortPipe = /*#__PURE__*/function () {
         function SortPipe() {
@@ -62000,7 +61862,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 
       var TimeDirective = function TimeDirective() {
         _classCallCheck(this, TimeDirective);
@@ -62052,7 +61914,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -62328,7 +62190,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/fesm2015/core.js");
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
       /* harmony import */
 
 
@@ -62346,7 +62208,7 @@
 
       var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/platform-browser */
-      "./node_modules/@angular/platform-browser/fesm2015/platform-browser.js");
+      "./node_modules/@angular/platform-browser/__ivy_ngcc__/fesm2015/platform-browser.js");
 
       if (_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].production) {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["enableProdMode"])();
