@@ -15742,7 +15742,7 @@
             };
 
             if (_parameter.value) {
-              if (_parameter.rank === 0) {
+              if (_parameter.rank === 0 && _parameter.listOfValuesKey > 0) {
                 runTime.items = [{
                   key: _parameter.value,
                   name: _parameter.valueDesc
@@ -31539,38 +31539,87 @@
       /*! @angular/forms */
       "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 
-      function InputParametersViewComponent_div_0_span_1_Template(rf, ctx) {
+      function InputParametersViewComponent_div_0_span_1_form_select_1_Template(rf, ctx) {
         if (rf & 1) {
-          var _r5 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "span", 3);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "form-select", 7);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "form-select", 4);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function InputParametersViewComponent_div_0_span_1_form_select_1_Template_form_select_ngModelChange_0_listener($event) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r8);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function InputParametersViewComponent_div_0_span_1_Template_form_select_ngModelChange_1_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r5);
+            var parameter_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
 
-            var parameter_r3 = ctx.$implicit;
             return parameter_r3.value = $event;
-          })("ngModelChange", function InputParametersViewComponent_div_0_span_1_Template_form_select_ngModelChange_1_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r5);
+          })("ngModelChange", function InputParametersViewComponent_div_0_span_1_form_select_1_Template_form_select_ngModelChange_0_listener($event) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r8);
 
-            var parameter_r3 = ctx.$implicit;
+            var parameter_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
 
-            var ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+            var ctx_r9 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-            return ctx_r6.change(parameter_r3, $event);
-          })("onRefresh", function InputParametersViewComponent_div_0_span_1_Template_form_select_onRefresh_1_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r5);
+            return ctx_r9.change(parameter_r3, $event);
+          })("onRefresh", function InputParametersViewComponent_div_0_span_1_form_select_1_Template_form_select_onRefresh_0_listener() {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r8);
 
-            var parameter_r3 = ctx.$implicit;
+            var parameter_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
 
-            var ctx_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+            var ctx_r11 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-            return ctx_r7.refreshLOV(parameter_r3);
+            return ctx_r11.refreshLOV(parameter_r3);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+
+        if (rf & 2) {
+          var parameter_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
+
+          var ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("labelLeft", parameter_r3.name)("ngModel", parameter_r3.value)("items", parameter_r3["runTime"].items)("enableTextEntry", !(parameter_r3.listOfValuesKey > 0))("textEntryItems", ctx_r4.parentParams)("showRefresh", parameter_r3["runTime"].showRefresh)("isRefreshing", parameter_r3["runTime"].isRefreshing)("multiSelect", parameter_r3.rank === 1);
+        }
+      }
+
+      function InputParametersViewComponent_div_0_span_1_form_input_2_Template(rf, ctx) {
+        if (rf & 1) {
+          var _r16 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "form-input", 8);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function InputParametersViewComponent_div_0_span_1_form_input_2_Template_form_input_ngModelChange_0_listener($event) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r16);
+
+            var parameter_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
+
+            return parameter_r3.value = $event;
+          })("ngModelChange", function InputParametersViewComponent_div_0_span_1_form_input_2_Template_form_input_ngModelChange_0_listener($event) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r16);
+
+            var parameter_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
+
+            var ctx_r17 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+
+            return ctx_r17.change(parameter_r3, $event);
+          });
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+
+        if (rf & 2) {
+          var parameter_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("labelLeft", parameter_r3.name)("ngModel", parameter_r3.value);
+        }
+      }
+
+      function InputParametersViewComponent_div_0_span_1_Template(rf, ctx) {
+        if (rf & 1) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "span", 4);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, InputParametersViewComponent_div_0_span_1_form_select_1_Template, 1, 8, "form-select", 5);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, InputParametersViewComponent_div_0_span_1_form_input_2_Template, 1, 2, "form-input", 6);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
@@ -31578,28 +31627,30 @@
         if (rf & 2) {
           var parameter_r3 = ctx.$implicit;
 
-          var ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", parameter_r3.listOfValuesKey > 0);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("labelLeft", parameter_r3.name)("ngModel", parameter_r3.value)("items", parameter_r3["runTime"].items)("enableTextEntry", !(parameter_r3.listOfValuesKey > 0))("textEntryItems", ctx_r1.parentParams)("showRefresh", parameter_r3["runTime"].showRefresh)("isRefreshing", parameter_r3["runTime"].isRefreshing)("multiSelect", parameter_r3.rank === 1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !(parameter_r3.listOfValuesKey > 0));
         }
       }
 
       function InputParametersViewComponent_div_0_div_2_Template(rf, ctx) {
         if (rf & 1) {
-          var _r9 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r21 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 5);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 9);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "a", 6);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "a", 10);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function InputParametersViewComponent_div_0_div_2_Template_a_click_1_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r9);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r21);
 
-            var ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+            var ctx_r20 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-            return ctx_r8.refreshData();
+            return ctx_r20.refreshData();
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "The parameters have changed. Click to refresh.");
@@ -31612,11 +31663,11 @@
 
       function InputParametersViewComponent_div_0_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, InputParametersViewComponent_div_0_span_1_Template, 2, 8, "span", 1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, InputParametersViewComponent_div_0_span_1_Template, 3, 2, "span", 2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, InputParametersViewComponent_div_0_div_2_Template, 3, 0, "div", 2);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, InputParametersViewComponent_div_0_div_2_Template, 3, 0, "div", 3);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
@@ -31741,7 +31792,7 @@
         },
         decls: 1,
         vars: 1,
-        consts: [[4, "ngIf"], ["class", "input-group", 4, "ngFor", "ngForOf"], ["class", "alert alert-warning mt-2", 4, "ngIf"], [1, "input-group"], ["itemKey", "key", "itemName", "name", "textEntryItemsTitle", "Linked Parameters", 3, "labelLeft", "ngModel", "items", "enableTextEntry", "textEntryItems", "showRefresh", "isRefreshing", "multiSelect", "ngModelChange", "onRefresh"], [1, "alert", "alert-warning", "mt-2"], ["href", "javascript:void(0)", 1, "alert-link", 3, "click"]],
+        consts: [["class", "d-flex", 4, "ngIf"], [1, "d-flex"], ["class", "pr-1", 4, "ngFor", "ngForOf"], ["class", "alert alert-warning mt-2", 4, "ngIf"], [1, "pr-1"], ["itemKey", "key", "itemName", "name", "textEntryItemsTitle", "Linked Parameters", 3, "labelLeft", "ngModel", "items", "enableTextEntry", "textEntryItems", "showRefresh", "isRefreshing", "multiSelect", "ngModelChange", "onRefresh", 4, "ngIf"], [3, "labelLeft", "ngModel", "ngModelChange", 4, "ngIf"], ["itemKey", "key", "itemName", "name", "textEntryItemsTitle", "Linked Parameters", 3, "labelLeft", "ngModel", "items", "enableTextEntry", "textEntryItems", "showRefresh", "isRefreshing", "multiSelect", "ngModelChange", "onRefresh"], [3, "labelLeft", "ngModel", "ngModelChange"], [1, "alert", "alert-warning", "mt-2"], ["href", "javascript:void(0)", 1, "alert-link", 3, "click"]],
         template: function InputParametersViewComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, InputParametersViewComponent_div_0_Template, 3, 2, "div", 0);
@@ -31751,7 +31802,7 @@
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.parameters);
           }
         },
-        directives: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["NgIf"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["NgForOf"], ngx_d_components__WEBPACK_IMPORTED_MODULE_5__["DFormSelectComponent"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["NgModel"]],
+        directives: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["NgIf"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["NgForOf"], ngx_d_components__WEBPACK_IMPORTED_MODULE_5__["DFormSelectComponent"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["NgModel"], ngx_d_components__WEBPACK_IMPORTED_MODULE_5__["DFormInputComponent"]],
         encapsulation: 2
       });
       /*@__PURE__*/
@@ -31884,45 +31935,45 @@
 
       function InputParametersComponent_div_0_div_2_form_1_div_1_div_7_Template(rf, ctx) {
         if (rf & 1) {
-          var _r13 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r15 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 17);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 18);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 18);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 19);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "button", 19);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "button", 20);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function InputParametersComponent_div_0_div_2_form_1_div_1_div_7_Template_button_click_2_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r13);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r15);
 
             var i_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3).index;
 
-            var ctx_r11 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+            var ctx_r13 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-            return ctx_r11.add(i_r7);
+            return ctx_r13.add(i_r7);
           });
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "i", 20);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "i", 21);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 18);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 19);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "button", 21);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "button", 22);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function InputParametersComponent_div_0_div_2_form_1_div_1_div_7_Template_button_click_5_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r13);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r15);
 
             var i_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3).index;
 
-            var ctx_r14 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+            var ctx_r16 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-            return ctx_r14["delete"](i_r7);
+            return ctx_r16["delete"](i_r7);
           });
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](6, "i", 22);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](6, "i", 23);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -31934,25 +31985,25 @@
 
       function InputParametersComponent_div_0_div_2_form_1_div_1_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 11);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 12);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "form-input", 12);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "form-input", 13);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "form-select", 13);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "form-select", 14);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "form-checkbox", 14);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "form-checkbox", 15);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, "Selectable");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "form-checkbox", 15);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "form-checkbox", 16);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "Array ");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](7, InputParametersComponent_div_0_div_2_form_1_div_1_div_7_Template, 7, 0, "div", 16);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](7, InputParametersComponent_div_0_div_2_form_1_div_1_div_7_Template, 7, 0, "div", 17);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
@@ -31978,43 +32029,73 @@
         }
       }
 
+      function InputParametersComponent_div_0_div_2_form_1_form_select_2_Template(rf, ctx) {
+        if (rf & 1) {
+          var _r20 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "form-select", 24);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function InputParametersComponent_div_0_div_2_form_1_form_select_2_Template_form_select_ngModelChange_0_listener($event) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r20);
+
+            var parameter_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2).$implicit;
+
+            var ctx_r18 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+
+            return ctx_r18.change(parameter_r6, $event);
+          })("textValueChange", function InputParametersComponent_div_0_div_2_form_1_form_select_2_Template_form_select_textValueChange_0_listener($event) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r20);
+
+            var parameter_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2).$implicit;
+
+            var ctx_r21 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+
+            return ctx_r21.textValueChange(parameter_r6, $event);
+          })("onRefresh", function InputParametersComponent_div_0_div_2_form_1_form_select_2_Template_form_select_onRefresh_0_listener() {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r20);
+
+            var parameter_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2).$implicit;
+
+            var ctx_r23 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+
+            return ctx_r23.refreshLOV(parameter_r6);
+          });
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+
+        if (rf & 2) {
+          var parameter_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2).$implicit;
+
+          var ctx_r10 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("labelLeft", ctx_r10.showEdit ? null : parameter_r6.controls.name.value)("items", parameter_r6.controls.runTime == null ? null : parameter_r6.controls.runTime.value == null ? null : parameter_r6.controls.runTime.value.items)("enableTextEntry", !(parameter_r6.controls.listOfValuesKey.value > 0))("textEntryItems", parameter_r6.controls.listOfValuesKey.value > 0 ? null : ctx_r10.parentParams)("showRefresh", parameter_r6.controls.runTime == null ? null : parameter_r6.controls.runTime.value == null ? null : parameter_r6.controls.runTime.value.showRefresh)("isRefreshing", parameter_r6.controls.runTime == null ? null : parameter_r6.controls.runTime.value == null ? null : parameter_r6.controls.runTime.value.isRefreshing)("multiSelect", parameter_r6.controls.rank.value === 1);
+        }
+      }
+
+      function InputParametersComponent_div_0_div_2_form_1_form_input_3_Template(rf, ctx) {
+        if (rf & 1) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "form-input", 25);
+        }
+
+        if (rf & 2) {
+          var parameter_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2).$implicit;
+
+          var ctx_r11 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("labelLeft", ctx_r11.showEdit ? null : parameter_r6.controls.name.value);
+        }
+      }
+
       function InputParametersComponent_div_0_div_2_form_1_Template(rf, ctx) {
         if (rf & 1) {
-          var _r18 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "form", 8);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, InputParametersComponent_div_0_div_2_form_1_div_1_Template, 8, 7, "div", 9);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "form-select", 10);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, InputParametersComponent_div_0_div_2_form_1_form_select_2_Template, 1, 7, "form-select", 10);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function InputParametersComponent_div_0_div_2_form_1_Template_form_select_ngModelChange_2_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r18);
-
-            var parameter_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
-
-            var ctx_r16 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-
-            return ctx_r16.change(parameter_r6, $event);
-          })("textValueChange", function InputParametersComponent_div_0_div_2_form_1_Template_form_select_textValueChange_2_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r18);
-
-            var parameter_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
-
-            var ctx_r19 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-
-            return ctx_r19.textValueChange(parameter_r6, $event);
-          })("onRefresh", function InputParametersComponent_div_0_div_2_form_1_Template_form_select_onRefresh_2_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r18);
-
-            var parameter_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
-
-            var ctx_r21 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-
-            return ctx_r21.refreshLOV(parameter_r6);
-          });
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, InputParametersComponent_div_0_div_2_form_1_form_input_3_Template, 1, 1, "form-input", 11);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
@@ -32032,7 +32113,11 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("labelLeft", ctx_r8.showEdit ? null : parameter_r6.controls.name.value)("items", parameter_r6.controls.runTime == null ? null : parameter_r6.controls.runTime.value == null ? null : parameter_r6.controls.runTime.value.items)("enableTextEntry", !(parameter_r6.controls.listOfValuesKey.value > 0))("textEntryItems", parameter_r6.controls.listOfValuesKey.value > 0 ? null : ctx_r8.parentParams)("showRefresh", parameter_r6.controls.runTime == null ? null : parameter_r6.controls.runTime.value == null ? null : parameter_r6.controls.runTime.value.showRefresh)("isRefreshing", parameter_r6.controls.runTime == null ? null : parameter_r6.controls.runTime.value == null ? null : parameter_r6.controls.runTime.value.isRefreshing)("multiSelect", parameter_r6.controls.rank.value === 1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", parameter_r6.controls.listOfValuesKey.value > 0);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !(parameter_r6.controls.listOfValuesKey.value > 0));
         }
       }
 
@@ -32040,7 +32125,7 @@
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 6);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, InputParametersComponent_div_0_div_2_form_1_Template, 3, 9, "form", 7);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, InputParametersComponent_div_0_div_2_form_1_Template, 4, 4, "form", 7);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
@@ -32058,18 +32143,18 @@
 
       function InputParametersComponent_div_0_div_3_Template(rf, ctx) {
         if (rf & 1) {
-          var _r25 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r29 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 23);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 26);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "a", 24);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "a", 27);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function InputParametersComponent_div_0_div_3_Template_a_click_1_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r25);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r29);
 
-            var ctx_r24 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+            var ctx_r28 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-            return ctx_r24.refreshData();
+            return ctx_r28.refreshData();
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "The parameters have changed. Click to refresh.");
@@ -32132,6 +32217,7 @@
           this.showRefresh = false;
           this.isRefreshing = false;
           this.requiresRefresh = false;
+          this.maxKey = 0;
         }
 
         _createClass(InputParametersComponent, [{
@@ -32187,6 +32273,7 @@
           key: "add",
           value: function add(index) {
             var parameter = new _shared_shared_models__WEBPACK_IMPORTED_MODULE_3__["InputParameterBase"]();
+            parameter.key = --this.maxKey;
             var parameterForm = this.formsService.parameter(parameter);
             this.parameters.insert(index + 1, parameterForm);
           }
@@ -32290,7 +32377,7 @@
         features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵNgOnChangesFeature"]],
         decls: 1,
         vars: 1,
-        consts: [[3, "ngClass", 4, "ngIf"], [3, "ngClass"], ["text", "Add Parameter", 3, "autoCompact", "click", 4, "ngIf"], ["class", "pb-1 pr-1", 4, "ngFor", "ngForOf"], ["class", "alert alert-warning mt-2", 4, "ngIf"], ["text", "Add Parameter", 3, "autoCompact", "click"], [1, "pb-1", "pr-1"], [3, "formGroup", 4, "ngIf"], [3, "formGroup"], ["class", "d-flex align-items-stretch flex-wrap", 4, "ngIf"], ["formControlName", "value", "itemKey", "key", "itemName", "name", "textEntryItemsTitle", "Linked Parameters", 1, "p-0", 3, "labelLeft", "items", "enableTextEntry", "textEntryItems", "showRefresh", "isRefreshing", "multiSelect", "ngModelChange", "textValueChange", "onRefresh"], [1, "d-flex", "align-items-stretch", "flex-wrap"], ["labelLeft", "Name", "formControlName", "name", 1, "p-0"], ["labelLeft", "LOV", "formControlName", "listOfValuesKey", "itemKey", "key", "itemName", "name", 1, "p-0", "flex-grow-1", 3, "items", "allowNullSelect"], ["formControlName", "allowUserSelect", 3, "border"], ["formControlName", "rank", 3, "border", "checkedValue", "unCheckedValue"], ["class", "input-group-append", 4, "ngIf"], [1, "input-group-append"], [1, "input-group-text", "p-0"], ["type", "button", "value", "Add", 1, "btn", "btn-sm", "border-0", "rounded-0", "bg-transparent", 3, "click"], [1, "fa", "fa-plus-square-o"], ["type", "button", "value", "Remove", 1, "btn", "btn-sm", "border-0", "rounded-0", "bg-transparent", 3, "click"], [1, "fa", "fa-minus-square-o"], [1, "alert", "alert-warning", "mt-2"], ["href", "javascript:void(0)", 1, "alert-link", 3, "click"]],
+        consts: [[3, "ngClass", 4, "ngIf"], [3, "ngClass"], ["text", "Add Parameter", 3, "autoCompact", "click", 4, "ngIf"], ["class", "pb-1 pr-1", 4, "ngFor", "ngForOf"], ["class", "alert alert-warning mt-2", 4, "ngIf"], ["text", "Add Parameter", 3, "autoCompact", "click"], [1, "pb-1", "pr-1"], [3, "formGroup", 4, "ngIf"], [3, "formGroup"], ["class", "d-flex align-items-stretch flex-wrap", 4, "ngIf"], ["class", "p-0", "formControlName", "value", "itemKey", "key", "itemName", "name", "textEntryItemsTitle", "Linked Parameters", 3, "labelLeft", "items", "enableTextEntry", "textEntryItems", "showRefresh", "isRefreshing", "multiSelect", "ngModelChange", "textValueChange", "onRefresh", 4, "ngIf"], ["class", "p-0", "formControlName", "value", 3, "labelLeft", 4, "ngIf"], [1, "d-flex", "align-items-stretch", "flex-wrap"], ["labelLeft", "Name", "formControlName", "name", 1, "p-0"], ["labelLeft", "LOV", "formControlName", "listOfValuesKey", "itemKey", "key", "itemName", "name", 1, "p-0", "flex-grow-1", 3, "items", "allowNullSelect"], ["formControlName", "allowUserSelect", 3, "border"], ["formControlName", "rank", 3, "border", "checkedValue", "unCheckedValue"], ["class", "input-group-append", 4, "ngIf"], [1, "input-group-append"], [1, "input-group-text", "p-0"], ["type", "button", "value", "Add", 1, "btn", "btn-sm", "border-0", "rounded-0", "bg-transparent", 3, "click"], [1, "fa", "fa-plus-square-o"], ["type", "button", "value", "Remove", 1, "btn", "btn-sm", "border-0", "rounded-0", "bg-transparent", 3, "click"], [1, "fa", "fa-minus-square-o"], ["formControlName", "value", "itemKey", "key", "itemName", "name", "textEntryItemsTitle", "Linked Parameters", 1, "p-0", 3, "labelLeft", "items", "enableTextEntry", "textEntryItems", "showRefresh", "isRefreshing", "multiSelect", "ngModelChange", "textValueChange", "onRefresh"], ["formControlName", "value", 1, "p-0", 3, "labelLeft"], [1, "alert", "alert-warning", "mt-2"], ["href", "javascript:void(0)", 1, "alert-link", 3, "click"]],
         template: function InputParametersComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, InputParametersComponent_div_0_Template, 4, 6, "div", 0);
@@ -32300,7 +32387,7 @@
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.parameters);
           }
         },
-        directives: [_angular_common__WEBPACK_IMPORTED_MODULE_7__["NgIf"], _angular_common__WEBPACK_IMPORTED_MODULE_7__["NgClass"], _angular_common__WEBPACK_IMPORTED_MODULE_7__["NgForOf"], ngx_d_components__WEBPACK_IMPORTED_MODULE_8__["DButtonNewComponent"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroupDirective"], ngx_d_components__WEBPACK_IMPORTED_MODULE_8__["DFormSelectComponent"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControlName"], ngx_d_components__WEBPACK_IMPORTED_MODULE_8__["DFormInputComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_8__["DFormCheckboxComponent"]],
+        directives: [_angular_common__WEBPACK_IMPORTED_MODULE_7__["NgIf"], _angular_common__WEBPACK_IMPORTED_MODULE_7__["NgClass"], _angular_common__WEBPACK_IMPORTED_MODULE_7__["NgForOf"], ngx_d_components__WEBPACK_IMPORTED_MODULE_8__["DButtonNewComponent"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroupDirective"], ngx_d_components__WEBPACK_IMPORTED_MODULE_8__["DFormInputComponent"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControlName"], ngx_d_components__WEBPACK_IMPORTED_MODULE_8__["DFormSelectComponent"], ngx_d_components__WEBPACK_IMPORTED_MODULE_8__["DFormCheckboxComponent"]],
         encapsulation: 2
       });
       /*@__PURE__*/
