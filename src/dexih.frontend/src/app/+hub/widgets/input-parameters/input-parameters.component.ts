@@ -37,6 +37,8 @@ export class InputParametersComponent implements OnInit, OnChanges, OnDestroy {
 
     public requiresRefresh = false;
 
+    public maxKey = 0;
+
     constructor(private hubService: HubService) { }
 
     ngOnInit() {
@@ -74,6 +76,7 @@ export class InputParametersComponent implements OnInit, OnChanges, OnDestroy {
 
     add(index) {
         let parameter = new InputParameterBase();
+        parameter.key = --this.maxKey;
         let parameterForm = this.formsService.parameter(parameter);
         this.parameters.insert(index + 1, parameterForm);
     }

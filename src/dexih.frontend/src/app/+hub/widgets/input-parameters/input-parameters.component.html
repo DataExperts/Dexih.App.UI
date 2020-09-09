@@ -33,7 +33,9 @@
                 </div>
             </div>
 
-            <form-select class="p-0" formControlName="value" 
+
+            <form-select *ngIf="parameter.controls.listOfValuesKey.value > 0"
+                class="p-0" formControlName="value" 
                 [labelLeft]="showEdit ? null : parameter.controls.name.value" itemKey="key" itemName="name"
                 [items]="parameter.controls.runTime?.value?.items"
                 [enableTextEntry]="! (parameter.controls.listOfValuesKey.value > 0)"
@@ -44,6 +46,12 @@
                 [isRefreshing]="parameter.controls.runTime?.value?.isRefreshing" (onRefresh)="refreshLOV(parameter)"
                 [multiSelect]="parameter.controls.rank.value === 1">
             </form-select>
+
+            <form-input *ngIf="! (parameter.controls.listOfValuesKey.value > 0)"
+                class="p-0" formControlName="value" 
+                [labelLeft]="showEdit ? null : parameter.controls.name.value"
+            >
+            </form-input>
         </form>
     </div>
 

@@ -532,7 +532,7 @@ export class HubFormsService implements OnDestroy {
   public parameter(parameter: InputParameterBase): FormGroup {
     let runTime = {showRefresh: parameter.listOfValuesKey > 0, isRefreshing: false, items: []};
     if (parameter.value) {
-      if (parameter.rank === 0) {
+      if (parameter.rank === 0 && parameter.listOfValuesKey > 0) {
         runTime.items = [{key: parameter.value, name: parameter.valueDesc}];
       }
     }
