@@ -97,11 +97,11 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
             }
 
             if (this.config.seriesColumns) {
-                this.seriesColumnsIndex = new Array(this.config.seriesColumns.length);
+                this.seriesColumnsIndex = [];
                 for (let i = 0; i < this.config.seriesColumns.length; i++) {
                     let col = this.columns.find(c => c.title === this.config.seriesColumns[i]);
                     if (col) {
-                        this.seriesColumnsIndex[i] = col;
+                        this.seriesColumnsIndex.push(col);
                     }
                 }
             }

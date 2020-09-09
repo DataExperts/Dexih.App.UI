@@ -35,7 +35,7 @@
     "file-saver": "^2.0.2",
     "html2canvas": "^1.0.0-rc.7",
     "msal": "^1.4.0",
-    "ngx-d-components": "^0.4.155",
+    "ngx-d-components": "^0.4.156",
     "ngx-d-markdown": "^0.0.16",
     "ngx-d-table": "^0.6.32",
     "rxjs": "^6.6.3",

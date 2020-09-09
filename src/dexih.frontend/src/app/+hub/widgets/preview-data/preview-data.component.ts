@@ -6,7 +6,7 @@ import { HubService } from '../../hub.service';
 import { InputOutputColumns } from '../../hub.lineage.models';
 import { PromiseWithCancel, CancelToken } from '../../../+auth/auth.models';
 import { eSourceType, DexihTable, DexihDatalink, ChartConfig, InputColumn, DexihColumnBase, SelectQuery,
-    eDownloadFormat, DownloadObject, DexihView, eViewType, eDataObjectType } from '../../../shared/shared.models';
+    eDownloadFormat, DownloadObject, DexihView, eViewType, eDataObjectType, DexihViewParameter } from '../../../shared/shared.models';
 
 @Component({
     selector: 'preview-data',
@@ -267,6 +267,12 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
             switch (this.viewSource) {
                 case eDataObjectType.Datalink:
                     view.sourceDatalinkKey = this.key;
+                    for (let datalinkParameter of this.parameters) {
+                        let parameter = <DexihViewParameter> Object.assign({}, datalinkParameter);
+                        parameter['datalinkParameterKey'] = datalinkParameter.key;
+                        parameter.key = this.hubCache.getNextSequence();
+                        view.parameters.push(parameter);
+                      }
                     break;
                 case eDataObjectType.Table:
                     view.sourceTableKey = this.key;
@@ -278,6 +284,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
             view.inputValues = this.inputColumns;
 
             this.hubService.saveView(view).then(() => {
+                this.hubService.addHubSuccessMessage(`The view ${view.name} was successfully saved.`);
             }).catch(() => {
                 this.data = null;
             });

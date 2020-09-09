@@ -6,7 +6,7 @@
             *ngIf="parameter.controls.isValid.value && (showEdit || parameter.controls.allowUserSelect.value)">
 
             <div class="d-flex align-items-stretch flex-wrap" *ngIf="showEdit">
-                <form-input labelLeft="Name"  class=" p-0" formControlName="name">
+                <form-input labelLeft="Name" class="p-0" formControlName="name">
                 </form-input>
                 <form-select labelLeft="LOV" class="p-0 flex-grow-1"  formControlName="listOfValuesKey"
                     [items]="listOfValues" itemKey="key" itemName="name" [allowNullSelect]="true">
@@ -32,13 +32,12 @@
                     </div>
                 </div>
             </div>
-
-
+            
             <form-select *ngIf="parameter.controls.listOfValuesKey.value > 0"
                 class="p-0" formControlName="value" 
                 [labelLeft]="showEdit ? null : parameter.controls.name.value" itemKey="key" itemName="name"
                 [items]="parameter.controls.runTime?.value?.items"
-                [enableTextEntry]="! (parameter.controls.listOfValuesKey.value > 0)"
+                [enableTextEntry]="false"
                 [textEntryItems]="(parameter.controls.listOfValuesKey.value > 0) ? null : parentParams"
                 textEntryItemsTitle="Linked Parameters" (ngModelChange)="change(parameter, $event)"
                 (textValueChange)="textValueChange(parameter, $event)"
@@ -47,11 +46,13 @@
                 [multiSelect]="parameter.controls.rank.value === 1">
             </form-select>
 
-            <form-input *ngIf="! (parameter.controls.listOfValuesKey.value > 0)"
+            <form-select *ngIf="! (parameter.controls.listOfValuesKey.value > 0)" [items]="[]"
                 class="p-0" formControlName="value" 
+                [enableTextEntry]="true"
                 [labelLeft]="showEdit ? null : parameter.controls.name.value"
+                [textEntryItems]="parentParams" textEntryItemsTitle="Linked Parameters" 
             >
-            </form-input>
+            </form-select>
         </form>
     </div>
 

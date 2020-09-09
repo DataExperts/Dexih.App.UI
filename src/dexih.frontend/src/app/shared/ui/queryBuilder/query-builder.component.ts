@@ -53,13 +53,17 @@ export class QueryBuilderComponent implements OnInit, OnChanges, OnDestroy {
             });
         }
 
-        this._refreshSubscription = this.refreshEvent.subscribe(() => {
-            this.requiresRefresh = false;
-        });
+        if (this.refreshEvent) {
+            this._refreshSubscription = this.refreshEvent.subscribe(() => {
+                this.requiresRefresh = false;
+            });
+        }
 
-        this._requiresRefreshSubscription = this.requiresRefreshEvent.subscribe(() => {
-            this.requiresRefresh = true;
-        });
+        if (this.requiresRefreshEvent) {
+            this._requiresRefreshSubscription = this.requiresRefreshEvent.subscribe(() => {
+                this.requiresRefresh = true;
+            });
+        }
 
         this.allRows = this.selectQuery.rows < 0 ? true : false;
     }
