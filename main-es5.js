@@ -32069,13 +32069,17 @@
 
           var ctx_r10 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("labelLeft", ctx_r10.showEdit ? null : parameter_r6.controls.name.value)("items", parameter_r6.controls.runTime == null ? null : parameter_r6.controls.runTime.value == null ? null : parameter_r6.controls.runTime.value.items)("enableTextEntry", !(parameter_r6.controls.listOfValuesKey.value > 0))("textEntryItems", parameter_r6.controls.listOfValuesKey.value > 0 ? null : ctx_r10.parentParams)("showRefresh", parameter_r6.controls.runTime == null ? null : parameter_r6.controls.runTime.value == null ? null : parameter_r6.controls.runTime.value.showRefresh)("isRefreshing", parameter_r6.controls.runTime == null ? null : parameter_r6.controls.runTime.value == null ? null : parameter_r6.controls.runTime.value.isRefreshing)("multiSelect", parameter_r6.controls.rank.value === 1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("labelLeft", ctx_r10.showEdit ? null : parameter_r6.controls.name.value)("items", parameter_r6.controls.runTime == null ? null : parameter_r6.controls.runTime.value == null ? null : parameter_r6.controls.runTime.value.items)("enableTextEntry", false)("textEntryItems", parameter_r6.controls.listOfValuesKey.value > 0 ? null : ctx_r10.parentParams)("showRefresh", parameter_r6.controls.runTime == null ? null : parameter_r6.controls.runTime.value == null ? null : parameter_r6.controls.runTime.value.showRefresh)("isRefreshing", parameter_r6.controls.runTime == null ? null : parameter_r6.controls.runTime.value == null ? null : parameter_r6.controls.runTime.value.isRefreshing)("multiSelect", parameter_r6.controls.rank.value === 1);
         }
       }
 
-      function InputParametersComponent_div_0_div_2_form_1_form_input_3_Template(rf, ctx) {
+      var _c0 = function _c0() {
+        return [];
+      };
+
+      function InputParametersComponent_div_0_div_2_form_1_form_select_3_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "form-input", 25);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "form-select", 25);
         }
 
         if (rf & 2) {
@@ -32083,7 +32087,7 @@
 
           var ctx_r11 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("labelLeft", ctx_r11.showEdit ? null : parameter_r6.controls.name.value);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("items", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](4, _c0))("enableTextEntry", true)("labelLeft", ctx_r11.showEdit ? null : parameter_r6.controls.name.value)("textEntryItems", ctx_r11.parentParams);
         }
       }
 
@@ -32095,7 +32099,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, InputParametersComponent_div_0_div_2_form_1_form_select_2_Template, 1, 7, "form-select", 10);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, InputParametersComponent_div_0_div_2_form_1_form_input_3_Template, 1, 1, "form-input", 11);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, InputParametersComponent_div_0_div_2_form_1_form_select_3_Template, 1, 5, "form-select", 11);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
@@ -32165,7 +32169,7 @@
         }
       }
 
-      var _c0 = function _c0(a0) {
+      var _c1 = function _c1(a0) {
         return {
           "d-flex": a0
         };
@@ -32187,7 +32191,7 @@
         if (rf & 2) {
           var ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](4, _c0, !ctx_r0.showEdit));
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](4, _c1, !ctx_r0.showEdit));
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
@@ -32377,7 +32381,7 @@
         features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵNgOnChangesFeature"]],
         decls: 1,
         vars: 1,
-        consts: [[3, "ngClass", 4, "ngIf"], [3, "ngClass"], ["text", "Add Parameter", 3, "autoCompact", "click", 4, "ngIf"], ["class", "pb-1 pr-1", 4, "ngFor", "ngForOf"], ["class", "alert alert-warning mt-2", 4, "ngIf"], ["text", "Add Parameter", 3, "autoCompact", "click"], [1, "pb-1", "pr-1"], [3, "formGroup", 4, "ngIf"], [3, "formGroup"], ["class", "d-flex align-items-stretch flex-wrap", 4, "ngIf"], ["class", "p-0", "formControlName", "value", "itemKey", "key", "itemName", "name", "textEntryItemsTitle", "Linked Parameters", 3, "labelLeft", "items", "enableTextEntry", "textEntryItems", "showRefresh", "isRefreshing", "multiSelect", "ngModelChange", "textValueChange", "onRefresh", 4, "ngIf"], ["class", "p-0", "formControlName", "value", 3, "labelLeft", 4, "ngIf"], [1, "d-flex", "align-items-stretch", "flex-wrap"], ["labelLeft", "Name", "formControlName", "name", 1, "p-0"], ["labelLeft", "LOV", "formControlName", "listOfValuesKey", "itemKey", "key", "itemName", "name", 1, "p-0", "flex-grow-1", 3, "items", "allowNullSelect"], ["formControlName", "allowUserSelect", 3, "border"], ["formControlName", "rank", 3, "border", "checkedValue", "unCheckedValue"], ["class", "input-group-append", 4, "ngIf"], [1, "input-group-append"], [1, "input-group-text", "p-0"], ["type", "button", "value", "Add", 1, "btn", "btn-sm", "border-0", "rounded-0", "bg-transparent", 3, "click"], [1, "fa", "fa-plus-square-o"], ["type", "button", "value", "Remove", 1, "btn", "btn-sm", "border-0", "rounded-0", "bg-transparent", 3, "click"], [1, "fa", "fa-minus-square-o"], ["formControlName", "value", "itemKey", "key", "itemName", "name", "textEntryItemsTitle", "Linked Parameters", 1, "p-0", 3, "labelLeft", "items", "enableTextEntry", "textEntryItems", "showRefresh", "isRefreshing", "multiSelect", "ngModelChange", "textValueChange", "onRefresh"], ["formControlName", "value", 1, "p-0", 3, "labelLeft"], [1, "alert", "alert-warning", "mt-2"], ["href", "javascript:void(0)", 1, "alert-link", 3, "click"]],
+        consts: [[3, "ngClass", 4, "ngIf"], [3, "ngClass"], ["text", "Add Parameter", 3, "autoCompact", "click", 4, "ngIf"], ["class", "pb-1 pr-1", 4, "ngFor", "ngForOf"], ["class", "alert alert-warning mt-2", 4, "ngIf"], ["text", "Add Parameter", 3, "autoCompact", "click"], [1, "pb-1", "pr-1"], [3, "formGroup", 4, "ngIf"], [3, "formGroup"], ["class", "d-flex align-items-stretch flex-wrap", 4, "ngIf"], ["class", "p-0", "formControlName", "value", "itemKey", "key", "itemName", "name", "textEntryItemsTitle", "Linked Parameters", 3, "labelLeft", "items", "enableTextEntry", "textEntryItems", "showRefresh", "isRefreshing", "multiSelect", "ngModelChange", "textValueChange", "onRefresh", 4, "ngIf"], ["class", "p-0", "formControlName", "value", "textEntryItemsTitle", "Linked Parameters", 3, "items", "enableTextEntry", "labelLeft", "textEntryItems", 4, "ngIf"], [1, "d-flex", "align-items-stretch", "flex-wrap"], ["labelLeft", "Name", "formControlName", "name", 1, "p-0"], ["labelLeft", "LOV", "formControlName", "listOfValuesKey", "itemKey", "key", "itemName", "name", 1, "p-0", "flex-grow-1", 3, "items", "allowNullSelect"], ["formControlName", "allowUserSelect", 3, "border"], ["formControlName", "rank", 3, "border", "checkedValue", "unCheckedValue"], ["class", "input-group-append", 4, "ngIf"], [1, "input-group-append"], [1, "input-group-text", "p-0"], ["type", "button", "value", "Add", 1, "btn", "btn-sm", "border-0", "rounded-0", "bg-transparent", 3, "click"], [1, "fa", "fa-plus-square-o"], ["type", "button", "value", "Remove", 1, "btn", "btn-sm", "border-0", "rounded-0", "bg-transparent", 3, "click"], [1, "fa", "fa-minus-square-o"], ["formControlName", "value", "itemKey", "key", "itemName", "name", "textEntryItemsTitle", "Linked Parameters", 1, "p-0", 3, "labelLeft", "items", "enableTextEntry", "textEntryItems", "showRefresh", "isRefreshing", "multiSelect", "ngModelChange", "textValueChange", "onRefresh"], ["formControlName", "value", "textEntryItemsTitle", "Linked Parameters", 1, "p-0", 3, "items", "enableTextEntry", "labelLeft", "textEntryItems"], [1, "alert", "alert-warning", "mt-2"], ["href", "javascript:void(0)", 1, "alert-link", 3, "click"]],
         template: function InputParametersComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, InputParametersComponent_div_0_Template, 4, 6, "div", 0);
@@ -33205,6 +33209,24 @@
               switch (_this207.viewSource) {
                 case _shared_shared_models__WEBPACK_IMPORTED_MODULE_6__["eDataObjectType"].Datalink:
                   view.sourceDatalinkKey = _this207.key;
+
+                  var _iterator12 = _createForOfIteratorHelper(_this207.parameters),
+                      _step12;
+
+                  try {
+                    for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
+                      var datalinkParameter = _step12.value;
+                      var parameter = Object.assign({}, datalinkParameter);
+                      parameter['datalinkParameterKey'] = datalinkParameter.key;
+                      parameter.key = _this207.hubCache.getNextSequence();
+                      view.parameters.push(parameter);
+                    }
+                  } catch (err) {
+                    _iterator12.e(err);
+                  } finally {
+                    _iterator12.f();
+                  }
+
                   break;
 
                 case _shared_shared_models__WEBPACK_IMPORTED_MODULE_6__["eDataObjectType"].Table:
@@ -33217,7 +33239,9 @@
               view.chartConfig = _this207.chartConfig;
               view.inputValues = _this207.inputColumns;
 
-              _this207.hubService.saveView(view).then(function () {})["catch"](function () {
+              _this207.hubService.saveView(view).then(function () {
+                _this207.hubService.addHubSuccessMessage("The view ".concat(view.name, " was successfully saved."));
+              })["catch"](function () {
                 _this207.data = null;
               });
             });
@@ -50947,7 +50971,7 @@
               }
 
               if (this.config.seriesColumns) {
-                this.seriesColumnsIndex = new Array(this.config.seriesColumns.length);
+                this.seriesColumnsIndex = [];
 
                 var _loop6 = function _loop6(i) {
                   var col = _this231.columns.find(function (c) {
@@ -50955,7 +50979,7 @@
                   });
 
                   if (col) {
-                    _this231.seriesColumnsIndex[i] = col;
+                    _this231.seriesColumnsIndex.push(col);
                   }
                 };
 
@@ -51118,12 +51142,12 @@
 
                 var singleColor = _this234.chartType.isBar && _this234.config.singleBarColor ? true : false;
 
-                var _iterator12 = _createForOfIteratorHelper(values),
-                    _step12;
+                var _iterator13 = _createForOfIteratorHelper(values),
+                    _step13;
 
                 try {
                   var _loop7 = function _loop7() {
-                    var value = _step12.value;
+                    var value = _step13.value;
                     var chartItem = void 0;
                     var data = void 0;
 
@@ -51269,13 +51293,13 @@
                     chartItems.push(chartItem);
                   };
 
-                  for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
+                  for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
                     _loop7();
                   }
                 } catch (err) {
-                  _iterator12.e(err);
+                  _iterator13.e(err);
                 } finally {
-                  _iterator12.f();
+                  _iterator13.f();
                 }
 
                 _this234.resultArray = chartItems;
@@ -52114,21 +52138,21 @@
           value: function deactivateAll() {
             this.activeEntries = _toConsumableArray(this.activeEntries);
 
-            var _iterator13 = _createForOfIteratorHelper(this.activeEntries),
-                _step13;
+            var _iterator14 = _createForOfIteratorHelper(this.activeEntries),
+                _step14;
 
             try {
-              for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
-                var entry = _step13.value;
+              for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
+                var entry = _step14.value;
                 this.deactivate.emit({
                   value: entry,
                   entries: []
                 });
               }
             } catch (err) {
-              _iterator13.e(err);
+              _iterator14.e(err);
             } finally {
-              _iterator13.f();
+              _iterator14.f();
             }
 
             this.activeEntries = [];
@@ -52199,12 +52223,12 @@
             var date = true;
             var num = true;
 
-            var _iterator14 = _createForOfIteratorHelper(values),
-                _step14;
+            var _iterator15 = _createForOfIteratorHelper(values),
+                _step15;
 
             try {
-              for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
-                var value = _step14.value;
+              for (_iterator15.s(); !(_step15 = _iterator15.n()).done;) {
+                var value = _step15.value;
 
                 if (!this.isDate(value)) {
                   date = false;
@@ -52215,9 +52239,9 @@
                 }
               }
             } catch (err) {
-              _iterator14.e(err);
+              _iterator15.e(err);
             } finally {
-              _iterator14.f();
+              _iterator15.f();
             }
 
             if (date) return 'time';
@@ -52229,34 +52253,34 @@
           value: function getXDomainLine() {
             var values = [];
 
-            var _iterator15 = _createForOfIteratorHelper(this.lineChart),
-                _step15;
+            var _iterator16 = _createForOfIteratorHelper(this.lineChart),
+                _step16;
 
             try {
-              for (_iterator15.s(); !(_step15 = _iterator15.n()).done;) {
-                var results = _step15.value;
+              for (_iterator16.s(); !(_step16 = _iterator16.n()).done;) {
+                var results = _step16.value;
 
-                var _iterator16 = _createForOfIteratorHelper(results.series),
-                    _step16;
+                var _iterator17 = _createForOfIteratorHelper(results.series),
+                    _step17;
 
                 try {
-                  for (_iterator16.s(); !(_step16 = _iterator16.n()).done;) {
-                    var d = _step16.value;
+                  for (_iterator17.s(); !(_step17 = _iterator17.n()).done;) {
+                    var d = _step17.value;
 
                     if (!values.includes(d.name)) {
                       values.push(d.name);
                     }
                   }
                 } catch (err) {
-                  _iterator16.e(err);
+                  _iterator17.e(err);
                 } finally {
-                  _iterator16.f();
+                  _iterator17.f();
                 }
               }
             } catch (err) {
-              _iterator15.e(err);
+              _iterator16.e(err);
             } finally {
-              _iterator15.f();
+              _iterator16.f();
             }
 
             this.scaleType = this.getScaleType(values);
@@ -52288,19 +52312,19 @@
           value: function getYDomainLine() {
             var domain = [];
 
-            var _iterator17 = _createForOfIteratorHelper(this.lineChart),
-                _step17;
+            var _iterator18 = _createForOfIteratorHelper(this.lineChart),
+                _step18;
 
             try {
-              for (_iterator17.s(); !(_step17 = _iterator17.n()).done;) {
-                var results = _step17.value;
+              for (_iterator18.s(); !(_step18 = _iterator18.n()).done;) {
+                var results = _step18.value;
 
-                var _iterator18 = _createForOfIteratorHelper(results.series),
-                    _step18;
+                var _iterator19 = _createForOfIteratorHelper(results.series),
+                    _step19;
 
                 try {
-                  for (_iterator18.s(); !(_step18 = _iterator18.n()).done;) {
-                    var d = _step18.value;
+                  for (_iterator19.s(); !(_step19 = _iterator19.n()).done;) {
+                    var d = _step19.value;
 
                     if (domain.indexOf(d.value) < 0) {
                       domain.push(d.value);
@@ -52319,15 +52343,15 @@
                     }
                   }
                 } catch (err) {
-                  _iterator18.e(err);
+                  _iterator19.e(err);
                 } finally {
-                  _iterator18.f();
+                  _iterator19.f();
                 }
               }
             } catch (err) {
-              _iterator17.e(err);
+              _iterator18.e(err);
             } finally {
-              _iterator17.f();
+              _iterator18.f();
             }
 
             var min = Math.min.apply(Math, domain);
@@ -56101,12 +56125,18 @@
               });
             }
 
-            this._refreshSubscription = this.refreshEvent.subscribe(function () {
-              _this245.requiresRefresh = false;
-            });
-            this._requiresRefreshSubscription = this.requiresRefreshEvent.subscribe(function () {
-              _this245.requiresRefresh = true;
-            });
+            if (this.refreshEvent) {
+              this._refreshSubscription = this.refreshEvent.subscribe(function () {
+                _this245.requiresRefresh = false;
+              });
+            }
+
+            if (this.requiresRefreshEvent) {
+              this._requiresRefreshSubscription = this.requiresRefreshEvent.subscribe(function () {
+                _this245.requiresRefresh = true;
+              });
+            }
+
             this.allRows = this.selectQuery.rows < 0 ? true : false;
           }
         }, {
@@ -58939,12 +58969,12 @@
                   if (p) {
                     var paramValues = JSON.parse(p);
 
-                    var _iterator19 = _createForOfIteratorHelper(_this255.userParameters),
-                        _step19;
+                    var _iterator20 = _createForOfIteratorHelper(_this255.userParameters),
+                        _step20;
 
                     try {
-                      for (_iterator19.s(); !(_step19 = _iterator19.n()).done;) {
-                        var parameter = _step19.value;
+                      for (_iterator20.s(); !(_step20 = _iterator20.n()).done;) {
+                        var parameter = _step20.value;
                         var value = paramValues[parameter.name];
 
                         if (value !== undefined) {
@@ -58956,9 +58986,9 @@
                         }
                       }
                     } catch (err) {
-                      _iterator19.e(err);
+                      _iterator20.e(err);
                     } finally {
-                      _iterator19.f();
+                      _iterator20.f();
                     }
                   }
                 } else {
@@ -58992,18 +59022,18 @@
             if (this.updateQueryParameters && this.userParameters.length > 0) {
               var parameters = {};
 
-              var _iterator20 = _createForOfIteratorHelper(this.userParameters),
-                  _step20;
+              var _iterator21 = _createForOfIteratorHelper(this.userParameters),
+                  _step21;
 
               try {
-                for (_iterator20.s(); !(_step20 = _iterator20.n()).done;) {
-                  var parameter = _step20.value;
+                for (_iterator21.s(); !(_step21 = _iterator21.n()).done;) {
+                  var parameter = _step21.value;
                   parameters[parameter.name] = parameter.value;
                 }
               } catch (err) {
-                _iterator20.e(err);
+                _iterator21.e(err);
               } finally {
-                _iterator20.f();
+                _iterator21.f();
               }
 
               if ('URLSearchParams' in window) {

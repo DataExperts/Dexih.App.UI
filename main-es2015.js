@@ -18164,20 +18164,21 @@ function InputParametersComponent_div_0_div_2_form_1_form_select_2_Template(rf, 
 } if (rf & 2) {
     const parameter_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2).$implicit;
     const ctx_r10 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("labelLeft", ctx_r10.showEdit ? null : parameter_r6.controls.name.value)("items", parameter_r6.controls.runTime == null ? null : parameter_r6.controls.runTime.value == null ? null : parameter_r6.controls.runTime.value.items)("enableTextEntry", !(parameter_r6.controls.listOfValuesKey.value > 0))("textEntryItems", parameter_r6.controls.listOfValuesKey.value > 0 ? null : ctx_r10.parentParams)("showRefresh", parameter_r6.controls.runTime == null ? null : parameter_r6.controls.runTime.value == null ? null : parameter_r6.controls.runTime.value.showRefresh)("isRefreshing", parameter_r6.controls.runTime == null ? null : parameter_r6.controls.runTime.value == null ? null : parameter_r6.controls.runTime.value.isRefreshing)("multiSelect", parameter_r6.controls.rank.value === 1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("labelLeft", ctx_r10.showEdit ? null : parameter_r6.controls.name.value)("items", parameter_r6.controls.runTime == null ? null : parameter_r6.controls.runTime.value == null ? null : parameter_r6.controls.runTime.value.items)("enableTextEntry", false)("textEntryItems", parameter_r6.controls.listOfValuesKey.value > 0 ? null : ctx_r10.parentParams)("showRefresh", parameter_r6.controls.runTime == null ? null : parameter_r6.controls.runTime.value == null ? null : parameter_r6.controls.runTime.value.showRefresh)("isRefreshing", parameter_r6.controls.runTime == null ? null : parameter_r6.controls.runTime.value == null ? null : parameter_r6.controls.runTime.value.isRefreshing)("multiSelect", parameter_r6.controls.rank.value === 1);
 } }
-function InputParametersComponent_div_0_div_2_form_1_form_input_3_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "form-input", 25);
+const _c0 = function () { return []; };
+function InputParametersComponent_div_0_div_2_form_1_form_select_3_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "form-select", 25);
 } if (rf & 2) {
     const parameter_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2).$implicit;
     const ctx_r11 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("labelLeft", ctx_r11.showEdit ? null : parameter_r6.controls.name.value);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("items", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](4, _c0))("enableTextEntry", true)("labelLeft", ctx_r11.showEdit ? null : parameter_r6.controls.name.value)("textEntryItems", ctx_r11.parentParams);
 } }
 function InputParametersComponent_div_0_div_2_form_1_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "form", 8);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, InputParametersComponent_div_0_div_2_form_1_div_1_Template, 8, 7, "div", 9);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, InputParametersComponent_div_0_div_2_form_1_form_select_2_Template, 1, 7, "form-select", 10);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, InputParametersComponent_div_0_div_2_form_1_form_input_3_Template, 1, 1, "form-input", 11);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, InputParametersComponent_div_0_div_2_form_1_form_select_3_Template, 1, 5, "form-select", 11);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const parameter_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
@@ -18209,7 +18210,7 @@ function InputParametersComponent_div_0_div_3_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } }
-const _c0 = function (a0) { return { "d-flex": a0 }; };
+const _c1 = function (a0) { return { "d-flex": a0 }; };
 function InputParametersComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, InputParametersComponent_div_0_d_button_new_1_Template, 1, 1, "d-button-new", 2);
@@ -18218,7 +18219,7 @@ function InputParametersComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](4, _c0, !ctx_r0.showEdit));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](4, _c1, !ctx_r0.showEdit));
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r0.showEdit && ctx_r0.allowAddRemove && ctx_r0.parameters.controls.length === 0);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
@@ -18328,7 +18329,7 @@ class InputParametersComponent {
     }
 }
 InputParametersComponent.ɵfac = function InputParametersComponent_Factory(t) { return new (t || InputParametersComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_hub_service__WEBPACK_IMPORTED_MODULE_4__["HubService"])); };
-InputParametersComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: InputParametersComponent, selectors: [["input-parameters"]], inputs: { formsService: "formsService", parameters: "parameters", showEdit: "showEdit", parentParameters: "parentParameters", refreshEvent: "refreshEvent", allowAddRemove: "allowAddRemove" }, outputs: { onChange: "onChange", onRefreshData: "onRefreshData" }, features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵNgOnChangesFeature"]], decls: 1, vars: 1, consts: [[3, "ngClass", 4, "ngIf"], [3, "ngClass"], ["text", "Add Parameter", 3, "autoCompact", "click", 4, "ngIf"], ["class", "pb-1 pr-1", 4, "ngFor", "ngForOf"], ["class", "alert alert-warning mt-2", 4, "ngIf"], ["text", "Add Parameter", 3, "autoCompact", "click"], [1, "pb-1", "pr-1"], [3, "formGroup", 4, "ngIf"], [3, "formGroup"], ["class", "d-flex align-items-stretch flex-wrap", 4, "ngIf"], ["class", "p-0", "formControlName", "value", "itemKey", "key", "itemName", "name", "textEntryItemsTitle", "Linked Parameters", 3, "labelLeft", "items", "enableTextEntry", "textEntryItems", "showRefresh", "isRefreshing", "multiSelect", "ngModelChange", "textValueChange", "onRefresh", 4, "ngIf"], ["class", "p-0", "formControlName", "value", 3, "labelLeft", 4, "ngIf"], [1, "d-flex", "align-items-stretch", "flex-wrap"], ["labelLeft", "Name", "formControlName", "name", 1, "p-0"], ["labelLeft", "LOV", "formControlName", "listOfValuesKey", "itemKey", "key", "itemName", "name", 1, "p-0", "flex-grow-1", 3, "items", "allowNullSelect"], ["formControlName", "allowUserSelect", 3, "border"], ["formControlName", "rank", 3, "border", "checkedValue", "unCheckedValue"], ["class", "input-group-append", 4, "ngIf"], [1, "input-group-append"], [1, "input-group-text", "p-0"], ["type", "button", "value", "Add", 1, "btn", "btn-sm", "border-0", "rounded-0", "bg-transparent", 3, "click"], [1, "fa", "fa-plus-square-o"], ["type", "button", "value", "Remove", 1, "btn", "btn-sm", "border-0", "rounded-0", "bg-transparent", 3, "click"], [1, "fa", "fa-minus-square-o"], ["formControlName", "value", "itemKey", "key", "itemName", "name", "textEntryItemsTitle", "Linked Parameters", 1, "p-0", 3, "labelLeft", "items", "enableTextEntry", "textEntryItems", "showRefresh", "isRefreshing", "multiSelect", "ngModelChange", "textValueChange", "onRefresh"], ["formControlName", "value", 1, "p-0", 3, "labelLeft"], [1, "alert", "alert-warning", "mt-2"], ["href", "javascript:void(0)", 1, "alert-link", 3, "click"]], template: function InputParametersComponent_Template(rf, ctx) { if (rf & 1) {
+InputParametersComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: InputParametersComponent, selectors: [["input-parameters"]], inputs: { formsService: "formsService", parameters: "parameters", showEdit: "showEdit", parentParameters: "parentParameters", refreshEvent: "refreshEvent", allowAddRemove: "allowAddRemove" }, outputs: { onChange: "onChange", onRefreshData: "onRefreshData" }, features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵNgOnChangesFeature"]], decls: 1, vars: 1, consts: [[3, "ngClass", 4, "ngIf"], [3, "ngClass"], ["text", "Add Parameter", 3, "autoCompact", "click", 4, "ngIf"], ["class", "pb-1 pr-1", 4, "ngFor", "ngForOf"], ["class", "alert alert-warning mt-2", 4, "ngIf"], ["text", "Add Parameter", 3, "autoCompact", "click"], [1, "pb-1", "pr-1"], [3, "formGroup", 4, "ngIf"], [3, "formGroup"], ["class", "d-flex align-items-stretch flex-wrap", 4, "ngIf"], ["class", "p-0", "formControlName", "value", "itemKey", "key", "itemName", "name", "textEntryItemsTitle", "Linked Parameters", 3, "labelLeft", "items", "enableTextEntry", "textEntryItems", "showRefresh", "isRefreshing", "multiSelect", "ngModelChange", "textValueChange", "onRefresh", 4, "ngIf"], ["class", "p-0", "formControlName", "value", "textEntryItemsTitle", "Linked Parameters", 3, "items", "enableTextEntry", "labelLeft", "textEntryItems", 4, "ngIf"], [1, "d-flex", "align-items-stretch", "flex-wrap"], ["labelLeft", "Name", "formControlName", "name", 1, "p-0"], ["labelLeft", "LOV", "formControlName", "listOfValuesKey", "itemKey", "key", "itemName", "name", 1, "p-0", "flex-grow-1", 3, "items", "allowNullSelect"], ["formControlName", "allowUserSelect", 3, "border"], ["formControlName", "rank", 3, "border", "checkedValue", "unCheckedValue"], ["class", "input-group-append", 4, "ngIf"], [1, "input-group-append"], [1, "input-group-text", "p-0"], ["type", "button", "value", "Add", 1, "btn", "btn-sm", "border-0", "rounded-0", "bg-transparent", 3, "click"], [1, "fa", "fa-plus-square-o"], ["type", "button", "value", "Remove", 1, "btn", "btn-sm", "border-0", "rounded-0", "bg-transparent", 3, "click"], [1, "fa", "fa-minus-square-o"], ["formControlName", "value", "itemKey", "key", "itemName", "name", "textEntryItemsTitle", "Linked Parameters", 1, "p-0", 3, "labelLeft", "items", "enableTextEntry", "textEntryItems", "showRefresh", "isRefreshing", "multiSelect", "ngModelChange", "textValueChange", "onRefresh"], ["formControlName", "value", "textEntryItemsTitle", "Linked Parameters", 1, "p-0", 3, "items", "enableTextEntry", "labelLeft", "textEntryItems"], [1, "alert", "alert-warning", "mt-2"], ["href", "javascript:void(0)", 1, "alert-link", 3, "click"]], template: function InputParametersComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, InputParametersComponent_div_0_Template, 4, 6, "div", 0);
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.parameters);
@@ -18756,6 +18757,12 @@ class PreviewDataComponent {
             switch (this.viewSource) {
                 case _shared_shared_models__WEBPACK_IMPORTED_MODULE_6__["eDataObjectType"].Datalink:
                     view.sourceDatalinkKey = this.key;
+                    for (let datalinkParameter of this.parameters) {
+                        let parameter = Object.assign({}, datalinkParameter);
+                        parameter['datalinkParameterKey'] = datalinkParameter.key;
+                        parameter.key = this.hubCache.getNextSequence();
+                        view.parameters.push(parameter);
+                    }
                     break;
                 case _shared_shared_models__WEBPACK_IMPORTED_MODULE_6__["eDataObjectType"].Table:
                     view.sourceTableKey = this.key;
@@ -18766,6 +18773,7 @@ class PreviewDataComponent {
             view.chartConfig = this.chartConfig;
             view.inputValues = this.inputColumns;
             this.hubService.saveView(view).then(() => {
+                this.hubService.addHubSuccessMessage(`The view ${view.name} was successfully saved.`);
             }).catch(() => {
                 this.data = null;
             });
@@ -28580,11 +28588,11 @@ class ChartViewComponent {
                 this.customColors = [];
             }
             if (this.config.seriesColumns) {
-                this.seriesColumnsIndex = new Array(this.config.seriesColumns.length);
+                this.seriesColumnsIndex = [];
                 for (let i = 0; i < this.config.seriesColumns.length; i++) {
                     let col = this.columns.find(c => c.title === this.config.seriesColumns[i]);
                     if (col) {
-                        this.seriesColumnsIndex[i] = col;
+                        this.seriesColumnsIndex.push(col);
                     }
                 }
             }
@@ -31431,12 +31439,16 @@ class QueryBuilderComponent {
                 sort.column['runTime'] = sort.column.name + sort.direction;
             });
         }
-        this._refreshSubscription = this.refreshEvent.subscribe(() => {
-            this.requiresRefresh = false;
-        });
-        this._requiresRefreshSubscription = this.requiresRefreshEvent.subscribe(() => {
-            this.requiresRefresh = true;
-        });
+        if (this.refreshEvent) {
+            this._refreshSubscription = this.refreshEvent.subscribe(() => {
+                this.requiresRefresh = false;
+            });
+        }
+        if (this.requiresRefreshEvent) {
+            this._requiresRefreshSubscription = this.requiresRefreshEvent.subscribe(() => {
+                this.requiresRefresh = true;
+            });
+        }
         this.allRows = this.selectQuery.rows < 0 ? true : false;
     }
     ngOnDestroy() {
