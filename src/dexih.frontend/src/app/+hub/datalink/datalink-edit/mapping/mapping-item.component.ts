@@ -322,7 +322,7 @@ export class MappingItemComponent implements OnInit {
         }
 
         if (returnValue) {
-            if (expectedDataType == null || value.dataType === expectedDataType) {
+            if (expectedDataType == null || expectedDataType === eTypeCode.Unknown || value.dataType === expectedDataType) {
                 return { text: returnValue, valid: true, error: '' }
             } else {
                 return { text: returnValue, error: '(inconsistent datatype ' + eTypeCode[value.dataType] + ')', valid: false }

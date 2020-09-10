@@ -1847,7 +1847,7 @@ export class HubFormsService implements OnDestroy {
         if (datalinkColumn && datalinkColumn.value) {
           const dataType = datalinkColumn.value.dataType;
           const parameterDataType = group.controls.dataType?.value;
-          if (dataType !== parameterDataType) {
+          if (dataType !== parameterDataType && parameterDataType !== eTypeCode.Unknown) {
             datalinkColumn.setErrors({'dataType': { dataType }});
             return { 'dataType': { dataType }};
           } else {

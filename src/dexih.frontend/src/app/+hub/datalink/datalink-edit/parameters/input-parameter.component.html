@@ -4,7 +4,8 @@
                 <div class="input-group">
                     <div *ngIf="!allowNameSelect" class="input-group-prepend">
                         <div class="input-group-text">
-                            {{inputParameterForm.value.runTime?.functionParameter?.name + "(" + eTypeCode[type.dataType] + ")"}} {{rank > 0 ? "[]" : ""}}
+                            {{inputParameterForm.value.runTime?.functionParameter?.name + 
+                                (type.dataType === eTypeCode.Unknown ? '' : ("(" + eTypeCode[type.dataType] + ")"))}} {{rank > 0 ? "[]" : ""}}
                         </div>
                     </div>
 
@@ -32,7 +33,7 @@
                         </form-input>
                     </div>
 
-                    <div *ngIf="allowDataTypeSelect == false && allowNameSelect == true" class="input-group-text">
+                    <div *ngIf="allowDataTypeSelect == false && allowNameSelect == true && type.dataType !== eTypeCode.Unknown" class="input-group-text">
                         {{"(" + eTypeCode[type.dataType] + ")"}}
                     </div>
 
