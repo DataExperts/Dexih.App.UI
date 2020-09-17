@@ -314,8 +314,9 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
     return new Promise<boolean>(resolve => {
       if (this.newDatalinkTransformItemForm && !this.newDatalinkTransformItemForm.pristine) {
         this.authService.confirmDialog('The function has changed',
-          'The function has changed.  Do you want to discard the changes and continue?')
+          'The function has changed.  Do you want to apply the changes and continue?')
           .then((confirm) => {
+              this.apply();
               resolve(confirm);
             }).catch(() => {
               resolve(false);

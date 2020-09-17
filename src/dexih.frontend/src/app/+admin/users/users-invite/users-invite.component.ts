@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../+auth/auth.service';
-import { Subscription, combineLatest} from 'rxjs';
+import { Subscription} from 'rxjs';
 import { Location } from '@angular/common';
 import { FormsService } from '../../../shared/forms/forms.service';
 import { Invites, roles } from '../../admin.models';
@@ -18,22 +18,18 @@ export class UsersInviteComponent implements OnInit, OnDestroy {
 
   private _routeDataSubscription: Subscription;
 
-  private action: string;
 
   roles = roles;
 
   constructor(
     private authService: AuthService,
     public formsService: FormsService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private location: Location) {
+    private route: ActivatedRoute) {
   }
 
   ngOnInit() {
 
     this._routeDataSubscription = this.route.data.subscribe(data => {
-      this.action = data['action'];
 
       const inviteUsers = new Invites();
       this.formsService.createDefault(inviteUsers, inviteUsers);
@@ -54,7 +50,7 @@ export class UsersInviteComponent implements OnInit, OnDestroy {
               hubQuota: hubQuota,
               inviteQuota: inviteQuota,
               role: role
-          }, 'Inviting users...').then(result => {
+          }, 'Inviting users...').then(() => {
             this.authService.navigateUp();
         }).catch(reason => {
           this.dexihMessage.addMessage(reason);

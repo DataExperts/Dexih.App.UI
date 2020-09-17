@@ -40,9 +40,9 @@
                 [enableTextEntry]="false"
                 [textEntryItems]="(parameter.controls.listOfValuesKey.value > 0) ? null : parentParams"
                 textEntryItemsTitle="Linked Parameters" (ngModelChange)="change(parameter, $event)"
-                (textValueChange)="textValueChange(parameter, $event)"
+                (valueChange)="textValueChange(parameter, $event)"
                 [showRefresh]="parameter.controls.runTime?.value?.showRefresh"
-                [isRefreshing]="parameter.controls.runTime?.value?.isRefreshing" (onRefresh)="refreshLOV(parameter)"
+                [isRefreshing]="parameter.controls.runTime?.value?.isRefreshing" (refreshed)="refreshLOV(parameter)"
                 [multiSelect]="parameter.controls.rank.value === 1">
             </form-select>
 

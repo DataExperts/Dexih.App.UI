@@ -174,7 +174,7 @@
 								[sortItems]="true" 
 								[enableTextEntry]="true"
 								textEntryNote="Enter the database name"
-								(textValueChange)="newDatabaseName($event)"
+								(valueChange)="newDatabaseName($event)"
 							>
 									(<a href="javascript:void(0)" *ngIf="refreshingConnection == false" (click)="refreshConnection()"> <i class="fa fa-refresh"></i> Refresh </a>
 							<span *ngIf="refreshingConnection == true" > <i class="fa fa-spin fa-refresh"></i> Refreshing... please wait </span>) (

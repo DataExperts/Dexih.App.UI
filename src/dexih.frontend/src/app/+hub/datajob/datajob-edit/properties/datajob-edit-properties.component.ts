@@ -68,9 +68,9 @@ export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
     let isFirst = true;
 
     try {
-      this._subscription = combineLatest(
+      this._subscription = combineLatest([
         this.hubService.getHubCacheObservable(),
-        this.formService.getCurrentFormObservable(),
+        this.formService.getCurrentFormObservable()]
       ).subscribe(result => {
         this.hubCache = result[0];
         this.mainForm = result[1];

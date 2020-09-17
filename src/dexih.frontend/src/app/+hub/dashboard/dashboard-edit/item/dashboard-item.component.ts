@@ -64,9 +64,9 @@ export class DashboardItemComponent implements OnInit, OnChanges, OnDestroy {
 
     ngOnInit() {
         try {
-            this._subscription = combineLatest(
+            this._subscription = combineLatest([
                 this.hubService.getHubCacheObservable(),
-                this.hubService.getRemoteAgentObservable()
+                this.hubService.getRemoteAgentObservable()]
             ).subscribe(result => {
                 this.hubCache = result[0];
                 this.remoteAgent = result[1];

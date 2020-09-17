@@ -213,8 +213,9 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
     return new Promise<boolean>(resolve => {
       if (this.newDatalinkTransformItemForm && !this.newDatalinkTransformItemForm.pristine) {
         this.authService.confirmDialog('Function has changed',
-        'The function has changed.  Would you like to discard the changes and return to the previous screen?'
+        'The function has changed.  Would you like to apply the changes and return to the previous screen?'
         ).then(confirm => {
+          this.apply();
           resolve(confirm);
         }).catch(reason => {
           resolve(false);

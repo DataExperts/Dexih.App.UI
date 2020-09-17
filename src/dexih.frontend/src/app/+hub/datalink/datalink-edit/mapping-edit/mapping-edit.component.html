@@ -18,7 +18,7 @@
 					<section *ngIf="showInput" class="form-group col-md-4">
 						<form-select label="Input Column" formControlName="sourceDatalinkColumn" [items]="inputColumns"
 							parentName="group" childItems="columns"
-							[(textValue)]="sourceValue" (textValueChange)="updateSourceValue($event)"
+							[(textValue)]="sourceValue" (valueChange)="updateSourceValue($event)"
 							[allowNullSelect]="true" selectNullMessage="(select null)"
 							[allowBlankSelect]="true" selectBlankMessage="(select blank)"
 							[enableKeySelect]="false"
@@ -36,7 +36,7 @@
 							label="Compare Column/Value" formControlName="filterDatalinkColumn"  [items]="inputColumns"
 							parentName="group" childItems="columns"
 							[enableTextEntry]="true" [(textValue)]="filterValue"
-							(textValueChange)="updateFilterValue($event)" [enableTextEntryMatch]="false" [enableKeySelect]="false"
+							(valueChange)="updateFilterValue($event)" [enableTextEntryMatch]="false" [enableKeySelect]="false"
 							[allowNullSelect]="true" selectNullMessage="(select null)"
 							[allowBlankSelect]="true" selectBlankMessage="(select blank)"
 							itemKey="key" itemName="logicalName"
@@ -49,7 +49,7 @@
 							itemKey="key" itemName="logicalName" note="Enter new column, or select existing"
 							[allowNullSelect]="true" selectNullMessage="(select null)"
 							[allowBlankSelect]="true" selectBlankMessage="(select blank)"
-							[enableKeySelect]="false" (textValueChange)="updateNewColumn($event)" [enableTextEntry]="true" [setTextEntryToValue]="false"
+							[enableKeySelect]="false" (valueChange)="updateNewColumn($event)" [enableTextEntry]="true" [setTextEntryToValue]="false"
 							textEntryNote="Enter new column name, or select existing" [errors]="targetErrors">
 						</form-select>
 					</section>

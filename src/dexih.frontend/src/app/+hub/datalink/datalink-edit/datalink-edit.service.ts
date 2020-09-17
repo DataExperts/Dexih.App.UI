@@ -241,6 +241,10 @@ export class DatalinkEditService implements OnInit, OnDestroy {
         let columnGroups: Array<{ group: string, columns: Array<DexihDatalinkColumn> }> = [];
         let cols: Array<DexihDatalinkColumn> = null;
 
+        if (columns === null) {
+            return columnGroups;
+        }
+
         columns
             .filter(c => c.isValid)
             .sort((a, b) => a.position - b.position)

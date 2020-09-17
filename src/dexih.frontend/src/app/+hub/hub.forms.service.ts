@@ -1,6 +1,6 @@
-import { Injectable, OnDestroy, OnInit, EventEmitter } from '@angular/core';
+import { Injectable, OnDestroy, EventEmitter } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators, AsyncValidatorFn, ValidationErrors } from '@angular/forms';
-import { BehaviorSubject, Observable, Subscription, combineLatest} from 'rxjs';
+import { BehaviorSubject, combineLatest, merge, Observable, pipe, Subscription} from 'rxjs';
 
 import { AuthService } from '../+auth/auth.service';
 import { eLogLevel, LogFactory } from '../../logging';
@@ -22,8 +22,8 @@ import { eImportAction, Import, DexihConnection, DexihTable, DexihTableColumn, e
    DexihDatalinkTransform, DexihDatalinkTransformItem, DexihFunctionParameter, DexihFunctionArrayParameter,
    DexihDatalinkProfile, DexihDatalinkTarget, DexihDatalinkTable,
    eSourceType, eSharedObjectType, DexihListOfValues, InputParameterBase,
-   eDataObjectType, ListOfValuesItem, eTransformItemType, DexihTag, DexihViewParameter } from '../shared/shared.models';
-import { filter, debounceTime } from 'rxjs/operators';
+   eDataObjectType, ListOfValuesItem, eTransformItemType, DexihTag } from '../shared/shared.models';
+import { debounceTime, delay, first } from 'rxjs/operators';
 
 @Injectable()
 export class HubFormsService implements OnDestroy {
@@ -144,7 +144,7 @@ export class HubFormsService implements OnDestroy {
       }
     });
 
-    this.updateDate = item['updateDate'];
+    this.updateDate = item['updateDate'];  
   }
 
   public startForm(form: FormGroup) {
@@ -153,7 +153,7 @@ export class HubFormsService implements OnDestroy {
     if (form) {
       if (this._valueChangesSubscription) { this._valueChangesSubscription.unsubscribe(); }
       this._valueChangesSubscription = form.valueChanges.subscribe(data => {
-        this.onValueChanged(data)
+        this.onValueChanged()
       });
 
       this.onValueChanged(); // (re)set validation messages now
@@ -172,7 +172,7 @@ export class HubFormsService implements OnDestroy {
   }
 
   // re-create any error messages whenever the form changes.
-  private onValueChanged(data?: any) {
+  private onValueChanged() {
     if (this.IgnoreFormChange === false) {
 
       this.logger.LogC(() => `onValueChanged started.  Counter = ${this.formChangeCount++}`, eLogLevel.Trace);
@@ -317,7 +317,7 @@ export class HubFormsService implements OnDestroy {
                       this.ngOnDestroy() // clear old subscriptions
                       formGroupFunc.call(this, item);
                     }
-                  }).catch(reason => {
+                  }).catch(() => {
 
                   });
               }
@@ -329,7 +329,7 @@ export class HubFormsService implements OnDestroy {
                   if (confirm) {
                     this.authService.navigateUp();
                   }
-                }).catch(reason => {
+                }).catch(() => {
 
               });
           }
@@ -487,7 +487,6 @@ export class HubFormsService implements OnDestroy {
   }
 
   public getFormErrors(): string {
-    const form = this.currentForm;
     return this.getFormErrorsRecursive(this.currentForm, 0, 0);
   }
 
@@ -550,7 +549,7 @@ export class HubFormsService implements OnDestroy {
 
     this.addMissing(parameter, form, new InputParameterBase());
 
-    let subscription = form.controls.listOfValuesKey.valueChanges.subscribe(value => {
+    let subscription = form.controls.listOfValuesKey.valueChanges.subscribe(() => {
         form.controls.runTime.setValue({showRefresh: form.controls.listOfValuesKey.value > 0, isRefreshing: false, items: []});
     });
     this._parameterChanges.push(subscription);
@@ -704,7 +703,7 @@ export class HubFormsService implements OnDestroy {
     });
 
     if (this._tableChangesSubscription1) { this._tableChangesSubscription1.unsubscribe(); }
-    this._tableChangesSubscription1 = tableForm.controls.useLogical.valueChanges.subscribe(value => {
+    this._tableChangesSubscription1 = tableForm.controls.useLogical.valueChanges.subscribe(() => {
       if (!tableForm.controls.useLogical.value) {
         tableForm.controls.logicalName.setValue(
           this.hubCache.defaultTableLogicalName(tableForm.controls.schema.value, tableForm.controls.name.value));
@@ -712,7 +711,7 @@ export class HubFormsService implements OnDestroy {
     });
 
     if (this._tableChangesSubscription2) { this._tableChangesSubscription2.unsubscribe(); }
-    this._tableChangesSubscription2 = tableForm.controls.name.valueChanges.subscribe(value => {
+    this._tableChangesSubscription2 = tableForm.controls.name.valueChanges.subscribe(() => {
       if (!tableForm.controls.useLogical.value) {
         tableForm.controls.logicalName.setValue(
           this.hubCache.defaultTableLogicalName(tableForm.controls.schema.value, tableForm.controls.name.value));
@@ -823,14 +822,14 @@ export class HubFormsService implements OnDestroy {
 
     // match logical name, unless the logical name is changed.
     if (this._tableColumnChangesSubscription2) { this._tableColumnChangesSubscription2.unsubscribe(); }
-    this._tableColumnChangesSubscription2 = columnForm.controls.useLogical.valueChanges.subscribe(value => {
+    this._tableColumnChangesSubscription2 = columnForm.controls.useLogical.valueChanges.subscribe(() => {
       if (!columnForm.controls.useLogical.value) {
         columnForm.controls.logicalName.setValue(columnForm.controls.name.value);
       }
     });
 
     if (this._tableColumnChangesSubscription3) { this._tableColumnChangesSubscription3.unsubscribe(); }
-    this._tableColumnChangesSubscription3 = columnForm.controls.name.valueChanges.subscribe(value => {
+    this._tableColumnChangesSubscription3 = columnForm.controls.name.valueChanges.subscribe(() => {
       if (!columnForm.controls.useLogical.value) {
         columnForm.controls.logicalName.setValue(columnForm.controls.name.value);
       }
@@ -1645,14 +1644,14 @@ export class HubFormsService implements OnDestroy {
 
     // match logical name, unless the logical name is changed.
     if (this._tableColumnChangesSubscription2) { this._tableColumnChangesSubscription2.unsubscribe(); }
-    this._tableColumnChangesSubscription2 = columnForm.controls.useLogical.valueChanges.subscribe(value => {
+    this._tableColumnChangesSubscription2 = columnForm.controls.useLogical.valueChanges.subscribe(() => {
       if (!columnForm.controls.useLogical.value) {
         columnForm.controls.logicalName.setValue(columnForm.controls.name.value);
       }
     });
 
     if (this._tableColumnChangesSubscription3) { this._tableColumnChangesSubscription3.unsubscribe(); }
-    this._tableColumnChangesSubscription3 = columnForm.controls.name.valueChanges.subscribe(value => {
+    this._tableColumnChangesSubscription3 = columnForm.controls.name.valueChanges.subscribe(() => {
       if (!columnForm.controls.useLogical.value) {
         columnForm.controls.logicalName.setValue(columnForm.controls.name.value);
       }
@@ -1686,6 +1685,7 @@ export class HubFormsService implements OnDestroy {
   }
 
   public datalinkTransformFormGroup(transform: DexihDatalinkTransform): FormGroup {
+
     const transformForm = this.fb.group({
       'datalinkTransformKey': [transform.key, [
       ]],
@@ -1713,24 +1713,6 @@ export class HubFormsService implements OnDestroy {
     return transformForm;
   }
 
-  // public datalinkTransformTableFormGroup(table: DexihTable): FormGroup {
-  //   if (table) {
-  //     const tableForm = this.fb.group({
-  //       'isInternal': true,
-  //       'dexihTableColumns': this.fb.array([]),
-  //     });
-
-  //     let tableColumnsForm = <FormArray>tableForm.controls.dexihTableColumns;
-  //     table.dexihTableColumns.filter(c => c.isValid).forEach(column => {
-  //       tableColumnsForm.push(this.tableColumn(tableForm, column));
-  //     });
-
-  //     this.addMissing(table, tableForm);
-  //     return tableForm;
-  //   } else {
-  //     return null;
-  //   }
-  // }
 
   public  datalinkDatalinkTransformItemFormGroup(datalinkTransformForm: FormGroup, item: DexihDatalinkTransformItem): FormGroup {
     const itemForm = this.fb.group({
@@ -1943,11 +1925,6 @@ export class HubFormsService implements OnDestroy {
     };
   }
 
-  private missingSourceDatalinkKey(sourceType: eSourceType): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } => {
-      return sourceType === eSourceType.Datalink && !control.value ? { 'required': 'required' } : null;
-    };
-  }
 
   datalink(datalink: DexihDatalink): void {
     this.logger.LogC(() => `datalink key:${datalink.key} datalink:${datalink.name}`, eLogLevel.Debug);
@@ -1957,6 +1934,8 @@ export class HubFormsService implements OnDestroy {
     let profiles = datalink.dexihDatalinkProfiles.filter(c => c.isValid).map(profile => {
       return this.datalinkProfileFormGroup(profile);
     });
+
+    let source = this.sourceDatalinkTableFormGroup(datalink.sourceDatalinkTable);
 
     let targets = datalink.dexihDatalinkTargets.filter(c => c.isValid).map(target => {
       return this.datalinkTargetFormGroup(target);
@@ -1978,7 +1957,7 @@ export class HubFormsService implements OnDestroy {
         Validators.maxLength(50),
         this.duplicateDatalinkNameValidator(datalink.key)
       ]],
-      'sourceDatalinkTable': this.sourceDatalinkTableFormGroup(datalink.sourceDatalinkTable),
+      'sourceDatalinkTable': source,
       'auditConnectionKey': [datalink.auditConnectionKey, [
         // Validators.required,
       ]],
@@ -2001,7 +1980,19 @@ export class HubFormsService implements OnDestroy {
     this.property = sharedObjectProperties.find(c => c.type === eSharedObjectType.Datalink);
     this.valueMethod = 'getDatalinkValue';
 
-    // whenever the datalink changes, update any transforms input/output columns.
+    // whenever a source table, transform mapping, or target table changes update the input/output columns
+    // let listenControls = new Array<Observable<any>>();
+    // listenControls.push(source.controls.dexihDatalinkColumns.valueChanges);
+
+    // transforms.forEach(transform => {
+    //   listenControls.push(transform.valueChanges);
+    // });
+
+    // targets.forEach(target => {
+    //   const table = <FormGroup> target.controls.table;
+    //   listenControls.push(table.controls.dexihTableColumns.valueChanges);
+    // });
+
     if (this._datalinkChangesSubscription1) { this._datalinkChangesSubscription1.unsubscribe(); }
     this._datalinkChangesSubscription1 = datalinkForm.valueChanges.subscribe(() => {
       this.updateTransformFormColumns(datalinkForm);
@@ -2041,7 +2032,7 @@ export class HubFormsService implements OnDestroy {
 
         const transform = datalink.dexihDatalinkTransforms.find(c => c.key === datalinkTransform.datalinkTransformKey);
 
-        datalinkTransformForm.controls.runTime.setValue(transform['runTime']);
+        datalinkTransformForm.controls.runTime.setValue(transform['runTime'] );
 
         const items = <FormArray>datalinkTransformForm.controls.dexihDatalinkTransformItems;
         items.controls.forEach(item => {

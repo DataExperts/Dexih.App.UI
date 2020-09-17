@@ -48,11 +48,11 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     try {
-      this._subscription = combineLatest(
+      this._subscription = combineLatest([
         this.route.data,
         this.route.params,
         this.hubService.getHubCacheObservable(),
-        this.hubService.getRemoteAgentObservable()
+        this.hubService.getRemoteAgentObservable()]
       ).subscribe(result => {
         let data = result[0];
         this.params = result[1];

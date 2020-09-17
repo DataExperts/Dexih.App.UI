@@ -91,9 +91,9 @@ export class MappingComponent implements OnInit, OnDestroy, OnChanges {
             // }
 
             if (this._subscription) { this._subscription.unsubscribe(); }
-            this._subscription = combineLatest(
+            this._subscription = combineLatest([
                 this.hubService.getHubCacheObservable(),
-                this.hubService.getRemoteLibrariesObservable()
+                this.hubService.getRemoteLibrariesObservable()]
             ).subscribe(() => {
 
                 this.functionType = this.editDatalinkService.getFunctionType(this.datalinkTransformForm.value);
@@ -102,7 +102,7 @@ export class MappingComponent implements OnInit, OnDestroy, OnChanges {
                 this.updateTableData();
 
                 if (this._changesSubscription) { this._changesSubscription.unsubscribe(); }
-                this._changesSubscription = this.datalinkTransformForm.valueChanges.subscribe(() => this.updateTableData());
+                this._changesSubscription = this.datalinkTransformForm.controls.dexihDatalinkTransformItems.valueChanges.subscribe(() => this.updateTableData());
             });
         } catch (e) {
             this.hubService.addHubClientErrorMessage(e, 'Mappings');
@@ -114,6 +114,11 @@ export class MappingComponent implements OnInit, OnDestroy, OnChanges {
             if (this.datalinkTransformForm) {
                 let runTime = this.datalinkTransformForm.controls['runTime'].value;
                 let inputColumns = <DexihDatalinkColumn[]> runTime.inputColumns;
+
+                if (inputColumns === null) { 
+                    return;
+                }
+                
                 this.inputDateColumns = inputColumns.filter(c => c.dataType === eTypeCode.DateTime || c.dataType === eTypeCode.Date);
                 this.columnGroups = this.editDatalinkService.getColumnGroups(inputColumns);
 

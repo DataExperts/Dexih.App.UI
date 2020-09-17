@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { AuthService } from '../../../+auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription, Observable, BehaviorSubject, combineLatest } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { UserAuthorization } from '../../admin.models';
 import { DexihMessageComponent } from '../../../shared/ui/dexihMessage';
 import { ApplicationUser } from '../../../shared/shared.models';
@@ -64,7 +64,7 @@ export class UsersIndexComponent implements OnInit, OnDestroy {
                 if (confirm) {
                     this.authService.post('/api/Admin/DeleteUsers', {
                         emails: emails
-                    }, 'Deleting users...').then(result => {
+                    }, 'Deleting users...').then(() => {
                         this.refreshUsers();
                     }).catch(reason => {
                         this.dexihMessage.addMessage(reason);
@@ -82,7 +82,7 @@ export class UsersIndexComponent implements OnInit, OnDestroy {
 
                     this.authService.post('/api/Admin/RevokeUsers', {
                         emails: users.map(c => c.userName)
-                    }, 'Revoking users...').then(result => {
+                    }, 'Revoking users...').then(() => {
                         this.refreshUsers();
                     }).catch(reason => {
                         this.dexihMessage.addMessage(reason);
@@ -100,7 +100,7 @@ export class UsersIndexComponent implements OnInit, OnDestroy {
 
                     this.authService.post('/api/Admin/EnableUsers', {
                         emails: users.map(c => c.userName)
-                    }, 'Enabling users...').then(result => {
+                    }, 'Enabling users...').then(() => {
                         this.refreshUsers();
                     }).catch(reason => {
                         this.dexihMessage.addMessage(reason);
@@ -112,7 +112,7 @@ export class UsersIndexComponent implements OnInit, OnDestroy {
     reinviteUsers(users: Array<UserAuthorization>) {
         this.authService.post('/api/Admin/ReInviteUsers', {
             emails: users.map(c => c.userName)
-        }, 'Inviting users...').then(result => {
+        }, 'Inviting users...').then(() => {
             this.dexihMessage.addSuccessMessage('Emails have been sent to the selected users.');
         }).catch(reason => {
             this.dexihMessage.addMessage(reason);

@@ -58,11 +58,11 @@ export class ConnectionImportComponent implements OnInit, OnDestroy {
         this.showPageMessage = 'Querying source database tables.  Please wait...';
 
         try {
-            this._subscription = combineLatest(
+            this._subscription = combineLatest([
                 this.route.data,
                 this.route.params,
                 this.hubService.getHubCacheObservable(),
-                this.hubService.getRemoteAgentObservable()
+                this.hubService.getRemoteAgentObservable()]
             ).subscribe(async result => {
                 let data = result[0];
                 let params = result[1];

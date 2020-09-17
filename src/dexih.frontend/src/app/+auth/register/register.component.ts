@@ -87,32 +87,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
           this.enablePassword();
       }
 
-      // this.formsService.currentForm.controls.provider.valueChanges.subscribe(provider => {
-      //   if (provider !== this.previousProvider) {
-      //     this.previousProvider = provider;
-      //     switch (provider) {
-      //       case eLoginProvider.UserPass:
-      //         this.setExternalProvider(false);
-      //         this.formsService.currentForm.controls.providerKey.setValue(null);
-      //         this.formsService.currentForm.controls.authenticationToken.setValue(null);
-      //         this.formsService.currentForm.controls.password.setValidators([
-      //           Validators.required,
-      //           Validators.minLength(3),
-      //           Validators.maxLength(20),
-      //           this.passwordsMatch()
-      //         ]);
-      //         break;
-      //       case eLoginProvider.Google:
-      //         this.googleLogin(false);
-      //         break;
-      //       case eLoginProvider.Microsoft:
-      //         this.microsoftLogin(false);
-      //         break;
-      //     }
-      //   }
-      // });
-
-    })
+    });
 
   }
 

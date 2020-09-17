@@ -38,6 +38,7 @@ export class MappingEditComponent implements OnInit, OnDestroy {
 
   newDatalinkTransformItemForm: FormGroup;
   newColumn: DexihDatalinkColumn;
+  newColumnUpdating = false;
   filterValue: any;
   sourceValue: any;
 
@@ -214,8 +215,9 @@ export class MappingEditComponent implements OnInit, OnDestroy {
     return new Promise<boolean>(resolve => {
       if (this.newDatalinkTransformItemForm && !this.newDatalinkTransformItemForm.pristine) {
         this.authService.confirmDialog('The mapping has changed',
-          'The function has changed.  Do you want to discard the changes and continue?')
+          'The function has changed.  Do you want to apply the changes and continue?')
           .then((confirm) => {
+              this.apply();
               resolve(confirm);
             }).catch(() => {
               resolve(false);
@@ -245,9 +247,9 @@ export class MappingEditComponent implements OnInit, OnDestroy {
     this.editDatalinkService.insertDatalinkTransformItem(this.datalinkTransformForm, this.newDatalinkTransformItemForm);
   }
 
-  updateNewColumn(value: string) {
-    let current = this.newDatalinkTransformItemForm.controls.targetDatalinkColumn.value;
-    if (value && (!current || current.name !== value )) {
+  updateNewColumn(value: {textValue: string, item: any}) {
+    if (value.item === null && !this.newColumnUpdating) {
+      this.newColumnUpdating = true;
       let key: number;
       if (this.newColumn) {
         key = this.newColumn.key;
@@ -272,31 +274,36 @@ export class MappingEditComponent implements OnInit, OnDestroy {
         }
       }
 
-      this.newColumn.name = value;
-      this.newColumn.logicalName = value;
+      this.newColumn.name = value.textValue;
+      this.newColumn.logicalName = value.textValue;
       this.newColumn.columnGroup = 'mapping';
       this.newColumn.key = key;
 
       this.newDatalinkTransformItemForm.controls.targetDatalinkColumn.setValue(this.newColumn);
+      this.newDatalinkTransformItemForm.markAsDirty();
+      this.newColumnUpdating = false;
     }
   }
 
-  updateFilterValue(value: string) {
-    if (value === this.newDatalinkTransformItemForm.controls.filterDatalinkColumn.value) {
-      this.newDatalinkTransformItemForm.controls.filterDatalinkColumn.setValue(null);
+  updateFilterValue(value: {textValue: string, item: any}) {
+    if (value.item === null && this.newDatalinkTransformItemForm.controls.filterDatalinkColumn.value !== null) {
+      this.newDatalinkTransformItemForm.controls.filterDatalinkColumn.setValue(null, {emitEvent: false});
     }
-      this.newDatalinkTransformItemForm.controls.filterValue.setValue(value);
+    this.newDatalinkTransformItemForm.controls.filterValue.setValue(value.textValue);
+    this.newDatalinkTransformItemForm.markAsDirty();
   }
 
-  updateSourceValue(value: string) {
-    if (value === this.newDatalinkTransformItemForm.controls.sourceDatalinkColumn.value) {
+  updateSourceValue(value: {textValue: string, item: any}) {
+    if (value.item === null && this.newDatalinkTransformItemForm.controls.sourceDatalinkColumn.value !== null) {
       this.newDatalinkTransformItemForm.controls.sourceDatalinkColumn.setValue(null);
     }
-    this.newDatalinkTransformItemForm.controls.sourceValue.setValue(value);
+    this.newDatalinkTransformItemForm.controls.sourceValue.setValue(value.textValue);
+    this.newDatalinkTransformItemForm.markAsDirty();
   }
 
   applyExit() {
     this.apply();
+    this.newDatalinkTransformItemForm = null;
     this.authService.navigateUp();
   }
 }

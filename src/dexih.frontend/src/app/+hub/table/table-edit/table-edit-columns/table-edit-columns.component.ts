@@ -76,7 +76,7 @@ export class TableEditColumnsComponent implements OnInit, OnChanges, OnDestroy {
     ngOnChanges() {
         if (this._tableFormSubscription) { this._tableFormSubscription.unsubscribe(); }
         if (this.formsService.currentForm) {
-            this._tableFormSubscription = this.formsService.currentForm.valueChanges.subscribe(() => this.updateColumnData());
+            this._tableFormSubscription = this.formsService.currentForm.controls.dexihTableColumns.valueChanges.subscribe(() => this.updateColumnData());
         }
         this.updateColumnData();
     }

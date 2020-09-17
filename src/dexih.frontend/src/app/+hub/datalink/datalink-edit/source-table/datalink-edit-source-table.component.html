@@ -20,7 +20,7 @@
         [columns]="columns" [dataObservable]="tableData" (rowClick)="editColumn($event)">
 
         <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-            <d-button-delete (click)="deleteSelected(items)" title="Delete selected columns"></d-button-delete>
+            <d-button-delete class="ml-1" (click)="deleteSelected(items)" title="Delete selected columns"></d-button-delete>
         </ng-template>
 
         <ng-template #actions select="actionsTemplate" let-items="items">
@@ -28,7 +28,7 @@
         </ng-template>
 
         <ng-template #selectedItemAction select="selectedItemAction" let-item="item">
-            <d-button-edit (click)="editColumn(item)" title="Edit selected column"></d-button-edit>
+            <d-button-edit class="ml-1" (click)="editColumn(item)" title="Edit selected column"></d-button-edit>
         </ng-template>
 
     </d-table>

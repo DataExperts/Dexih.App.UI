@@ -78,10 +78,10 @@ export class DatalinkEditComponent implements OnInit, OnDestroy {
 
             this.getHelp();
 
-            this._subscription = combineLatest(
+            this._subscription = combineLatest([
                 this.route.data,
                 this.route.params,
-                this.hubService.getHubCacheObservable(),
+                this.hubService.getHubCacheObservable()]
             ).subscribe(result => {
                 this.action = result[0]['action'];
                 this.pageTitle = result[0]['pageTitle'];

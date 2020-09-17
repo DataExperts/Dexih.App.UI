@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import { AuthService } from '../auth.service';
 import {logoUrl, User} from '../auth.models';
-import { Subscription, combineLatest} from 'rxjs';
+import { Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-verifyemail',

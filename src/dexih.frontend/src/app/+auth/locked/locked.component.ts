@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {logoUrl} from '../auth.models';
-import { Subscription, combineLatest} from 'rxjs';
+import { Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-locked',
@@ -14,7 +14,7 @@ export class LockedComponent implements OnInit, OnDestroy {
   logoUrl = logoUrl;
   email: string;
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
       this._queryParamSubscription = this.route.queryParams.subscribe((queryParams) => {
@@ -26,7 +26,7 @@ export class LockedComponent implements OnInit, OnDestroy {
     if (this._queryParamSubscription) { this._queryParamSubscription.unsubscribe(); }
   }
 
-  unlock($event) {
+  unlock() {
     alert('This function is not available.');
   }
 }

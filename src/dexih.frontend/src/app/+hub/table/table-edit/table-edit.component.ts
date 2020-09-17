@@ -4,7 +4,7 @@ import { HubService } from '../../hub.service';
 import { AuthService } from '../../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { HubFormsService } from '../../hub.forms.service';
-import { DexihConnection, eConnectionCategory, DexihTable } from '../../../shared/shared.models';
+import { DexihConnection, eConnectionCategory, DexihTable, ConnectionReference } from '../../../shared/shared.models';
 import { HubCache, eCacheStatus } from '../../hub.models';
 import { CancelToken } from '../../../+auth/auth.models';
 
@@ -30,7 +30,7 @@ export class TableEditComponent implements OnInit, OnDestroy {
   private _hubCacheChangeSubscription: Subscription;
   private _formChangeSubscription: Subscription;
   private isLoaded = false;
-
+  public connectionReference: ConnectionReference;
 
   constructor(private hubService: HubService,
     public formsService: HubFormsService,
@@ -45,7 +45,7 @@ export class TableEditComponent implements OnInit, OnDestroy {
         this.route.data,
         this.route.params,
         this.hubService.getHubCacheObservable(),
-      ).subscribe(result => {
+      ).subscribe(async result => {
         let data = result[0];
         this.params = result[1];
         this.hubCache = result[2];
@@ -56,6 +56,8 @@ export class TableEditComponent implements OnInit, OnDestroy {
         if (!this.hubCache || this.hubCache.status !== eCacheStatus.Loaded ) { return; }
 
         if (this.isLoaded && this.action === 'new') { return; }
+
+        this.connectionReference = await this.hubService.GetConnectionReference(this.connection);
 
         if (this.isLoaded && this.formsService.hasChanged) {
             this.authService.confirmDialog('Synchronization warning',

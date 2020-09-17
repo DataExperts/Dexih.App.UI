@@ -113,7 +113,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     trackChartChange(index: number, data: any) {
-        if (data) {
+        if (data && data[index]) {
             return data[index].name;
         }
       }

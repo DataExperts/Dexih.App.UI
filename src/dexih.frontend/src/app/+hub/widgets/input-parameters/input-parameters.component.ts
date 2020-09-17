@@ -111,10 +111,10 @@ export class InputParametersComponent implements OnInit, OnChanges, OnDestroy {
         this.onRefreshData.emit();
     }
 
-    textValueChange(parameterForm: FormGroup, $event) {
+    textValueChange(parameterForm: FormGroup, value: {textValue: string, item: any}) {
         // parameterForm.controls.value.setValue($event);
         if (parameterForm.controls.rank.value === 0) {
-            parameterForm.controls.valueDesc.setValue($event);
+            parameterForm.controls.valueDesc.setValue(value.textValue);
         } else {
             parameterForm.controls.valueDesc.setValue(null);
         }

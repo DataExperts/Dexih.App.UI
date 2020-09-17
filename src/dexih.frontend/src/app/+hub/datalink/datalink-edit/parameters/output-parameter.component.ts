@@ -32,6 +32,7 @@ export class OutputParameterComponent implements OnInit, OnChanges, OnDestroy {
     private _dataTypeSubscription: Subscription;
 
     newColumn: DexihDatalinkColumn;
+    newColumnUpdating = false;
     tmpColumnKey: number;
 
     outputTables: Array<DexihTable>;
@@ -108,9 +109,9 @@ export class OutputParameterComponent implements OnInit, OnChanges, OnDestroy {
         column.dataType = this.outputParameterForm.controls.dataType.value;
     }
 
-    updateNewColumn(value: string) {
-        let current = this.outputParameterForm.controls.datalinkColumn.value;
-        if (value && (!current || current.name !== value)) {
+    updateNewColumn(value: {textValue: string, item: any}) {
+        if (value.item === null && !this.newColumnUpdating) {
+            this.newColumnUpdating = true;
             if (!this.newColumn) {
                 this.newColumn = new DexihDatalinkColumn();
                 this.newColumn.key = this.hubService.getHubCache().getNextSequence();
@@ -119,13 +120,14 @@ export class OutputParameterComponent implements OnInit, OnChanges, OnDestroy {
 
             this.newColumn.dataType = this.outputParameterForm.controls.dataType.value;
             this.newColumn.allowDbNull = true;
-            this.newColumn.name = value;
-            this.newColumn.logicalName = value;
+            this.newColumn.name = value.textValue;
+            this.newColumn.logicalName = value.textValue;
             this.newColumn.rank = this.rank;
             this.newColumn.columnGroup = 'mapping';
 
             this.outputParameterForm.controls.datalinkColumn.setValue(this.newColumn);
-
+            this.outputParameterForm.markAsDirty();
+            this.newColumnUpdating = false;
             this.updateItems();
         }
     }

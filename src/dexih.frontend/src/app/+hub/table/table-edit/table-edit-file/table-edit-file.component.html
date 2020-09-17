@@ -19,7 +19,7 @@
                 </form-checkbox>
             </section>
 
-            <div *ngIf="formService.currentForm.value.autoManageFiles ">
+            <div *ngIf="formService.currentForm.value.autoManageFiles">
 
                 <section>
                     <form-checkbox label="Specify custom file paths for auto-managed files" formControlName="useCustomFilePaths" [note]="'If custom paths are not specified files will be read/written to the directory: ' + connection.server + '/' + formService.currentForm.value.name + '/'">

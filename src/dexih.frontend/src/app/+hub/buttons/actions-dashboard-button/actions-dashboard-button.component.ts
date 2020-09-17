@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription, combineLatest} from 'rxjs';
+import { Subscription} from 'rxjs';
 
 import { AuthService } from '../../../+auth/auth.service';
 import { HubCache } from '../../hub.models';

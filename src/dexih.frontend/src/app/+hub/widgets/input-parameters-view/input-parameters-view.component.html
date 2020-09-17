@@ -7,7 +7,7 @@
             [items]="parameter['runTime'].items" [enableTextEntry]="! (parameter.listOfValuesKey > 0)"
             [textEntryItems]="parentParams" textEntryItemsTitle="Linked Parameters"
             (ngModelChange)="change(parameter, $event)" [showRefresh]="parameter['runTime'].showRefresh"
-            [isRefreshing]="parameter['runTime'].isRefreshing" (onRefresh)="refreshLOV(parameter)"
+            [isRefreshing]="parameter['runTime'].isRefreshing" (refreshed)="refreshLOV(parameter)"
             [multiSelect]="parameter.rank === 1">
         </form-select>
         <form-input *ngIf="! (parameter.listOfValuesKey > 0)"

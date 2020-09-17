@@ -50,11 +50,11 @@ export class DatajobEditStepComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         try {
-            this._subscription = combineLatest(
+            this._subscription = combineLatest([
                 this.route.data,
                 this.route.params,
                 this.hubService.getHubCacheObservable(),
-                this.formService.getCurrentFormObservable(),
+                this.formService.getCurrentFormObservable()]
             ).subscribe(result => {
                 let params = result[1];
                 this.hubCache = result[2];

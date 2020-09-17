@@ -55,6 +55,8 @@ export class InputParameterComponent implements OnInit, OnDestroy, OnChanges {
     ignoreChanges = false;
 
     newColumn: DexihDatalinkColumn;
+    newColumnUpdating = false; // used to avoid recursion
+    inputUpdating = false;
 
     public errors;
 
@@ -140,8 +142,19 @@ export class InputParameterComponent implements OnInit, OnDestroy, OnChanges {
         }
     }
 
-    updateStatic(event: any, i: number) {
-        this.inputParameterForms[i].controls.value.setValue(event);
+    updateStatic(value: {textValue: string, item: any}, i: number) {
+        if (!this.inputUpdating) {
+            this.inputUpdating = true;
+            const parameter = this.inputParameterForms[i];
+            
+            if (value.item === null && parameter.controls.datalinkColumn.value !== null) {
+                parameter.controls.datalinkColumn.setValue(null);
+            }
+
+            this.inputParameterForms[i].controls.value.setValue(value.textValue);
+            this.inputParameterForms[i].markAsDirty();
+            this.inputUpdating = false;
+        }
     }
 
     ngOnDestroy() {
@@ -188,9 +201,9 @@ export class InputParameterComponent implements OnInit, OnDestroy, OnChanges {
         this.removeParameter.emit(this.inputParameterForms[0]);
     }
 
-    updateNewColumn(value: string, i: number) {
-        let current = this.outputParameterForms[i].controls.targetDatalinkColumn.value;
-        if (value && (!current || value !== current.name) ) {
+    updateNewColumn(value: {textValue: string, item: any}, i: number) {
+        if (value.item === null && this.newColumn === null && !this.newColumnUpdating) {
+            this.newColumnUpdating = true;
             if (!this.newColumn) {
                 this.newColumn = new DexihDatalinkColumn();
                 this.newColumn.position = 1000 - this.newColumn.key;
@@ -198,11 +211,12 @@ export class InputParameterComponent implements OnInit, OnDestroy, OnChanges {
             }
 
             this.newColumn.dataType = this.outputParameterForms[i].controls.dataType.value;
-            this.newColumn.name = value;
-            this.newColumn.logicalName = value;
+            this.newColumn.name = value.textValue;
+            this.newColumn.logicalName = value.textValue;
 
             this.outputParameterForms[i].controls.datalinkColumn.setValue(this.newColumn);
-
+            this.outputParameterForms[i].markAsDirty();
+            this.newColumnUpdating = false;
             this.updateItems();
         }
     }

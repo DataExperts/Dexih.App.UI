@@ -6,7 +6,6 @@ import { AuthService } from '../+auth/auth.service';
 import { HubCache, eCacheStatus } from './hub.models';
 import { HubService } from './hub.service';
 import { DexihHub, DexihActiveAgent, ePermission } from '../shared/shared.models';
-import { first, filter, take } from 'rxjs/operators';
 
 @Component({
     selector: 'dexih-hub',
@@ -49,9 +48,9 @@ export class HubComponent implements OnInit, OnDestroy {
         })
 
         try {
-            this._subscription = combineLatest(
+            this._subscription = combineLatest([
                 this.route.params,
-                this.authService.getUserObservable()
+                this.authService.getUserObservable()]
             ).subscribe(async result => {
                 let params = result[0];
                 let user = result[1];

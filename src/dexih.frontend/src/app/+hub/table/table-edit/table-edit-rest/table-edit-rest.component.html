@@ -1,9 +1,5 @@
-<div class="list-group-item list-group-item-info  rounded-0">
-    <div class="d-flex flex-row">
-        <h5>Web Service Properties</h5>
-    </div>
-</div>
-<div class="container mt-3 mb-3">
+<d-widget-section title='Web Service Properties' [showExpandButton]="true" [padding]="true">
+
     <form *ngIf="formService?.currentForm" [formGroup]="formService.currentForm">
 
         <section>
@@ -52,4 +48,4 @@
         </section>
 
     </form>
-</div>
+</d-widget-section>

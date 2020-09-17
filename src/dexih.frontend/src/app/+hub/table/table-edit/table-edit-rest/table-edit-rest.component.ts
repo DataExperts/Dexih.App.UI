@@ -23,7 +23,7 @@ export class TableEditRestComponent implements OnInit, OnDestroy {
     private _restfulUrlSubscription: Subscription;
     private cancelToken: CancelToken = new CancelToken();
 
-    private hubCache: HubCache;
+    public hubCache: HubCache;
 
     tables: ConnectionTables[];
     inputColumns: Array<FormGroup>;

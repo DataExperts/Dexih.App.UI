@@ -48,11 +48,11 @@ export class ConnectionIndexComponent implements OnInit, OnDestroy {
         this.watchChanges();
 
         try {
-            this._subscription = combineLatest(
+            this._subscription = combineLatest([
                 this.route.data,
                 this.route.params,
                 this.route.queryParams,
-                this.hubService.getHubCacheObservable(),
+                this.hubService.getHubCacheObservable()]
             ).subscribe(result => {
                 let data = result[0];
                 let params = result[1];

@@ -114,7 +114,7 @@ export const datalinkEditRoutes: Routes = [
         { path: 'mapping-edit/:type', data: { pageTitle: 'Mapping Edit' },
             canDeactivate: [DatalinkEditGuard], component: MappingEditComponent },
         { path: 'mapping-edit/:type/:datalinkTransformItemKey', data: { pageTitle: 'Mapping Edit' },
-            component: MappingEditComponent },
+            canDeactivate: [DatalinkEditGuard], component: MappingEditComponent },
         { path: 'unGroup-edit', data: { pageTitle: 'Un-Group Edit' },
             component: UnGroupEditComponent },
         { path: 'unGroup-edit/:datalinkTransformItemKey', data: { pageTitle: 'Un-Group Edit' },

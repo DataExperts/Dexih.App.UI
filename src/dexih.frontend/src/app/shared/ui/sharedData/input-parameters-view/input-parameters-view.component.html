@@ -5,7 +5,7 @@
             [enableTextEntry]="! (parameter.listOfValuesKey > 0)" [textEntryItems]="parentParams"
             textEntryItemsTitle="Linked Parameters" (ngModelChange)="change(parameter)"
             [showRefresh]="parameter['runTime'].showRefresh" [isRefreshing]="parameter['runTime'].isRefreshing"
-            (onRefresh)="refresh(parameter)" [multiSelect]="parameter.rank === 1">
+            (refreshed)="refresh(parameter)" [multiSelect]="parameter.rank === 1">
         </form-select>
         <form-input *ngIf="!( parameter.listOfValuesKey > 0)" [labelLeft]="parameter.name" [(ngModel)]="parameter.value"
             (ngModelChange)="change(parameter)">

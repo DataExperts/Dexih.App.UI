@@ -61,11 +61,11 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
     this.logger.LogC(() => `OnInit`, eLogLevel.Trace);
 
     try {
-      this._subscription = combineLatest(
+      this._subscription = combineLatest([
         this.route.data,
         this.route.params,
         this.hubService.getHubCacheObservable(),
-        this.hubService.getRemoteLibrariesObservable()
+        this.hubService.getRemoteLibrariesObservable()]
       ).subscribe(async result => {
         let data = result[0];
         this.params = result[1];
@@ -281,8 +281,8 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
       });
   }
 
-  newDatabaseName(value: string) {
-    this.formsService.currentForm.controls.defaultDatabase.setValue(value);
+  newDatabaseName(value: {textValue: string, item: any}) {
+    this.formsService.currentForm.controls.defaultDatabase.setValue(value.textValue);
   }
 
   createDatabase() {

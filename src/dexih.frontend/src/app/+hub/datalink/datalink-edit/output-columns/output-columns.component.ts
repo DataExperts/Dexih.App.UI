@@ -44,6 +44,10 @@ export class OutputColumnsComponent implements OnInit, OnChanges, OnDestroy {
         let columnGroups: Array<{group: string, columns: Array<DexihDatalinkColumn>}> = [];
         let cols: Array<DexihDatalinkColumn> = null;
 
+        if(columns === null) {
+            return;
+        }
+        
         columns
             .filter(c => c.isValid)
             .sort((a, b) => a.position - b.position)

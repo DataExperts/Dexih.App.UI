@@ -71,7 +71,8 @@ export class DatalinkEditSourceTableComponent implements OnInit, OnDestroy {
                     this.updateData();
 
                     if (this._sourceSubscription) { this._sourceSubscription.unsubscribe(); }
-                    this._sourceSubscription = this.datalinkForm.controls.sourceDatalinkTable.valueChanges.subscribe(() => {
+                    const sourceDatalinkTable = <FormGroup> this.datalinkForm.controls.sourceDatalinkTable;
+                    this._sourceSubscription = sourceDatalinkTable.controls.dexihDatalinkColumns.valueChanges.subscribe(() => {
                         this.updateData();
                     });
                 }
