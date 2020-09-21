@@ -39,6 +39,7 @@ export class DatalinkEditSourceTableComponent implements OnInit, OnDestroy {
         { name: 'dataType', title: 'Data Type', format: '' },
         { name: 'deltaType', title: 'Delta Type', format: 'Enum', enum: eDeltaType },
         { name: 'allowDbNull', title: 'Null?', format: 'Boolean' },
+        { name: 'format', title: 'Format'},
         { name: 'isIncrementalUpdate', title: 'Incremental?', format: 'Boolean' },
         { name: 'securityFlag', title: 'Security Flag', format: 'Enum', enum: eSecurityFlag },
         { name: 'isInput', title: 'Input?', format: 'Boolean' },
@@ -148,7 +149,8 @@ export class DatalinkEditSourceTableComponent implements OnInit, OnDestroy {
                     logicalName: column.logicalName,
                     isIncrementalUpdate: column.isIncrementalUpdate,
                     securityFlag: column.securityFlag,
-                    isInput: column.isInput
+                    isInput: column.isInput,
+                    format: column.format
                 };
 
             columnData.push(newColumn);

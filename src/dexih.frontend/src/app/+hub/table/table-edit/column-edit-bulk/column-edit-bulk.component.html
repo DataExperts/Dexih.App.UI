@@ -39,6 +39,13 @@
         </form-input>
             </section>
     </div>
+    <div *ngIf="property=='format'" >
+        <section class="form-group col-md-6">
+            <form-select label="Format" formControlName="format" [items]="formats"
+                itemKey="value" itemName="name" note="The display format of the column.">
+            </form-select>
+        </section>
+    </div>
     <div *ngIf="property=='securityFlag'" >
         <section class="form-group col-md-6">
             <form-select label="Security Flag" formControlName="securityFlag" [items]="securityFlags"

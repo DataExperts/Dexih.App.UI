@@ -22,7 +22,7 @@ export class AnimateConfig {
    }
    
    export class ApplicationUser {
-    public id: string = '2ced0c27-df80-4c6e-b90e-abf8e518c638';
+    public id: string = '81ac0891-5c40-4e4f-bf31-b9f5065774de';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -31,7 +31,7 @@ export class AnimateConfig {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = '0be96604-8495-4604-b3d7-43b1e47a52ac';
+    public securityStamp: string = '44c51c2c-e943-4470-b017-f4171223df9f';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -272,6 +272,7 @@ export class AnimateConfig {
     public isIncrementalUpdate: boolean = false;
     public isInput: boolean = false;
     public rank: number = 0;
+    public format: string = null;
     public securityFlag: eSecurityFlag = eSecurityFlag.None;
     public name: string = null;
     public description: string = null;
@@ -521,6 +522,7 @@ export class AnimateConfig {
     public isIncrementalUpdate: boolean = false;
     public isInput: boolean = false;
     public rank: number = 0;
+    public format: string = null;
     public securityFlag: eSecurityFlag = eSecurityFlag.None;
     public name: string = null;
     public description: string = null;
@@ -603,6 +605,7 @@ export class AnimateConfig {
     public isIncrementalUpdate: boolean = false;
     public isInput: boolean = false;
     public rank: number = 0;
+    public format: string = null;
     public securityFlag: eSecurityFlag = eSecurityFlag.None;
     public name: string = null;
     public description: string = null;
@@ -1115,6 +1118,7 @@ export class AnimateConfig {
     public isIncrementalUpdate: boolean = false;
     public isInput: boolean = false;
     public rank: number = 0;
+    public format: string = null;
     public securityFlag: eSecurityFlag = eSecurityFlag.None;
     public name: string = null;
     public description: string = null;
@@ -1816,6 +1820,7 @@ export class AnimateConfig {
     public isIncrementalUpdate: boolean = false;
     public isParent: boolean = false;
     public childColumns: TableColumn[] = [];
+    public format: string = null;
    }
    
    export class TableColumns {

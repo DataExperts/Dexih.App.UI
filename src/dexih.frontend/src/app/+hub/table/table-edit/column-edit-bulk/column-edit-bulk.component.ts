@@ -3,7 +3,7 @@ import { FormGroup, FormArray } from '@angular/forms';
 import {  deltaTypes, securityFlags, HubCache } from '../../../hub.models';
 import { FormsService } from '../../../../shared/forms/forms.service';
 import { HubFormsService } from '../../../hub.forms.service';
-import { TypeCodes } from '../../../hub.remote.models';
+import { columnDateFormats, columnNumberFormats, columnTimeFormats, TypeCodes } from '../../../hub.remote.models';
 import { DexihTableColumn } from '../../../../shared/shared.models';
 import { HubService } from '../../../hub.service';
 import { Subscription } from 'rxjs';
@@ -25,6 +25,7 @@ export class ColumnEditBulkComponent implements OnInit, OnDestroy {
         {name: 'Group Name', property: 'group'},
         {name: 'Data Type', property: 'dataType'},
         {name: 'Delta Type', property: 'deltaType'},
+        {name: 'Format', property: 'format'},
         {name: 'Security Flag', property: 'securityFlag'},
         {name: 'Default Value', property: 'defaultValue'},
         {name: 'Validation Rule', property: 'validationRule'},
@@ -39,6 +40,7 @@ export class ColumnEditBulkComponent implements OnInit, OnDestroy {
     typeCodes = TypeCodes;
     deltaTypes = deltaTypes;
     securityFlags = securityFlags;
+    formats = columnNumberFormats.concat(columnDateFormats.concat(columnTimeFormats));
 
     constructor(private hubService: HubService,
         private formsService: HubFormsService) { }
@@ -79,6 +81,9 @@ export class ColumnEditBulkComponent implements OnInit, OnDestroy {
                     break;
                 case 'deltaType':
                     columnForm.controls.deltaType.setValue(bulkColumn.deltaType);
+                    break;
+                case 'format':
+                    columnForm.controls.format.setValue(bulkColumn.format);
                     break;
                 case 'securityFlag':
                     columnForm.controls.securityFlag.setValue(bulkColumn.securityFlag);

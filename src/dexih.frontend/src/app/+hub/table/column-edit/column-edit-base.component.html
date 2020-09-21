@@ -73,12 +73,19 @@
             </section>
 
             <div class="form-row">
-                <section class="form-group col-md-6">
+                <section class="form-group col-md-4">
+                    <form-select label="Format" formControlName="format" [errors]="columnFormService.formErrors.format" [items]="formatItems"
+                        itemKey="value" itemName="name" [enableTextEntry]="true" [enableTextEntryMatch]="false"
+                        note="How to format the column when displayed.">
+                    </form-select>                
+                </section>
+
+                <section class="form-group col-md-4">
                     <form-select label="Delta Type" formControlName="deltaType" [errors]="columnFormService.formErrors.deltaType" [items]="deltaTypes"
                         itemKey="key" itemName="name" note="How to treat the column when used to update target table.">
                     </form-select>
                 </section>
-                <section class="form-group col-md-6">
+                <section class="form-group col-md-4">
                     <form-select label="Security Flag" formControlName="securityFlag" [errors]="columnFormService.formErrors.securityFlag" [items]="securityFlags"
                         itemKey="key" itemName="name" note="How to secure this column when reading data.">
                     </form-select>

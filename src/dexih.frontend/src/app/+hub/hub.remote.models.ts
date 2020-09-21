@@ -223,31 +223,6 @@ export class TransformReference {
     public description: string;
 }
 
-// export enum eTypeCode {
-//     Binary = <any>'Binary',
-//     Byte = <any>'Byte',
-//     CharArray = <any>'CharArray',
-//     SByte = <any>'SByte',
-//     UInt16 = <any>'UInt16',
-//     UInt32 = <any>'UInt32',
-//     UInt64 = <any>'UInt64',
-//     Int16 = <any>'Int16',
-//     Int32 = <any>'Int32',
-//     Int64 = <any>'Int64',
-//     Decimal = <any>'Decimal',
-//     Double = <any>'Double',
-//     Single = <any>'Single',
-//     String = <any>'String',
-//     Text = <any>'Text',
-//     Boolean = <any>'Boolean',
-//     DateTime = <any>'DateTime',
-//     Time = <any>'Time',
-//     Guid = <any>'Guid',
-//     Json = <any>'Json',
-//     Xml = <any>'Xml',
-//     Node = <any>'Node',
-//     Geometry = <any>'Geometry'
-// }
 
 export const TypeCodes = [
     {key: eTypeCode.String, name: 'String', isNumeric: false, isString: true},
@@ -345,4 +320,39 @@ export class TypeFunctions {
 
         return type;
     }
+
+    public getColumnFormats() {
+        const basicType = this.getBasicTypeCode();
+        switch(basicType) {
+            case eBasicType.Numeric:
+                return columnNumberFormats;
+            case eBasicType.Date:
+                return columnDateFormats;
+            case eBasicType.Time:
+                return columnTimeFormats;
+        }
+    }
+
+    
 }
+
+export const columnNumberFormats = [
+    {name: 'Currency', value: 'C'},
+    {name: 'Fixed 2 Decimals', value: 'F2'},
+    {name: 'Percent', value: 'P'},
+];
+
+export const columnDateFormats = [
+    {name: 'Short', value: 'd'},
+    {name: 'Long', value: 'D'},
+    {name: 'Full', value: 'F'},
+    {name: 'Month/Day', value: 'M'},
+    {name: 'Year/Month', value: 'Y'},
+    {name: 'Sortable', value: 's'},
+];
+
+export const columnTimeFormats = [
+    {name: 'Short', value: 't'},
+    {name: 'Long', value: 'T'},
+    {name: 'Sortable', value: 'u'},
+];

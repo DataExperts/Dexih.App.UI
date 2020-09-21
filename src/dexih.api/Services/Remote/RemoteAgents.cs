@@ -1045,46 +1045,53 @@ namespace dexih.api.Services.Remote
 
                 // populate the table/datalink cache to be send to the remote agent.
                 var cache = new CacheManager(hubKey, hub.EncryptionKey);
+                
+                var tableKeys = downloadObjects.Where(c => c.ObjectType == EDataObjectType.Table).Select(c => c.ObjectKey).ToArray();
+                cache.AddTables(tableKeys, hub);
+
+                var datalinkKeys = downloadObjects.Where(c => c.ObjectType == EDataObjectType.Datalink).Select(c => c.ObjectKey).ToArray();
+                cache.AddDatalinks(datalinkKeys, hub);
+
+                var viewKeys = downloadObjects.Where(c => c.ObjectType == EDataObjectType.View).Select(c => c.ObjectKey).ToArray();
+                cache.AddViews(viewKeys, hub);
+                
+                var dashboardItemKeys = downloadObjects.Where(c => c.ObjectType == EDataObjectType.DashboardItem).Select(c => c.ObjectKey).ToArray();
+                cache.AddDashboardItems(dashboardItemKeys, hub);
 
                 if (isShared)
                 {
-	                var tableKeys = downloadObjects.Where(c => c.ObjectType == EDataObjectType.Table).Select(c => c.ObjectKey).ToArray();
-	                cache.AddTables(tableKeys, hub);
-
-	                var datalinkKeys = downloadObjects.Where(c => c.ObjectType == EDataObjectType.Datalink).Select(c => c.ObjectKey).ToArray();
-	                cache.AddDatalinks(datalinkKeys, hub);
-
-	                var viewKeys = downloadObjects.Where(c => c.ObjectType == EDataObjectType.View).Select(c => c.ObjectKey).ToArray();
-	                cache.AddViews(viewKeys, hub);
-	                
-	                var dashboardItemKeys = downloadObjects.Where(c => c.ObjectType == EDataObjectType.DashboardItem).Select(c => c.ObjectKey).ToArray();
-	                cache.AddDashboardItems(dashboardItemKeys, hub);
-
 	                var tables = cache.Hub.DexihTables.Where(c => tableKeys.Contains(c.Key) && !c.IsShared);
 	                if (tables.Any())
 	                {
-		                throw new RemoteAgentException($"The tables {string.Join(",", tables.Select(c => c.Name))} are not shared.");
+		                throw new RemoteAgentException(
+			                $"The tables {string.Join(",", tables.Select(c => c.Name))} are not shared.");
 	                }
-	                var datalinks = cache.Hub.DexihDatalinks.Where(c => datalinkKeys.Contains(c.Key) &&!c.IsShared);
+
+	                var datalinks =
+		                cache.Hub.DexihDatalinks.Where(c => datalinkKeys.Contains(c.Key) && !c.IsShared);
 	                if (datalinks.Any())
 	                {
-		                throw new RemoteAgentException($"The datalinks {string.Join(",", datalinks.Select(c => c.Name))} are not shared.");
+		                throw new RemoteAgentException(
+			                $"The datalinks {string.Join(",", datalinks.Select(c => c.Name))} are not shared.");
 	                }
-	                var views = cache.Hub.DexihViews.Where(c => viewKeys.Contains(c.Key) &&!c.IsShared);
+
+	                var views = cache.Hub.DexihViews.Where(c => viewKeys.Contains(c.Key) && !c.IsShared);
 	                if (views.Any())
 	                {
-		                throw new RemoteAgentException($"The views {string.Join(",", views.Select(c => c.Name))} are not shared.");
+		                throw new RemoteAgentException(
+			                $"The views {string.Join(",", views.Select(c => c.Name))} are not shared.");
 	                }
 
 	                var dashboardItems = dashboardItemKeys.Select(c => cache.Hub.GetDashboardItemFromKey(c))
 		                .Where(c => !c.dashboard.IsShared);
 	                if (dashboardItems.Any())
 	                {
-		                throw new RemoteAgentException($"The views {string.Join(",", dashboardItems.Select(c => c.dashboard.Name))} are not shared.");
+		                throw new RemoteAgentException(
+			                $"The views {string.Join(",", dashboardItems.Select(c => c.dashboard.Name))} are not shared.");
 	                }
                 }
-                
-                var value = new
+
+	                var value = new
                 {
 	                cache,
 	                connectionId,

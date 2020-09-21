@@ -49,6 +49,7 @@ export class TableEditColumnsComponent implements OnInit, OnChanges, OnDestroy {
         { name: 'defaultValue', title: 'Default Value', format: ''},
         { name: 'columnValidation', title: 'Column Validation', format: ''},
         { name: 'isIncrementalUpdate', title: 'Is Incremental', format: 'Boolean'},
+        { name: 'format', title: 'Format'},
         { name: 'securityFlag', title: 'Security Flag', format: ''},
         { name: 'updateDate', title: 'Last Modified', format: 'Calendar'},
     ];
@@ -118,6 +119,7 @@ export class TableEditColumnsComponent implements OnInit, OnChanges, OnDestroy {
                         defaultValue: column.value.defaultValue,
                         columnValidation: this.hubCache.getColumnValidation(column.value.columnValidationKey).name,
                         isIncrementalUpdate: column.value.isIncrementalUpdate,
+                        format: column.value.format,
                         securityFlag: this.securityFlags.find(c => c.key === column.value.securityFlag).name,
                         updateDate: column.value.updateDate,
                     });
