@@ -1,7 +1,7 @@
-import { Component, Input, Output, ViewChild, OnInit, OnDestroy, EventEmitter, OnChanges } from '@angular/core';
+import { Component, Input, Output, OnInit, OnDestroy, EventEmitter, OnChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { HubService } from '../../../hub.service';
-import { Subscription, combineLatest} from 'rxjs';
+import { Subscription} from 'rxjs';
 import { TypeFunctions, TypeCodes, eBasicType } from '../../../hub.remote.models';
 import { DexihTableColumn, DexihDatalinkColumn, eTypeCode, DexihDatalinkTarget, DexihDatalinkTable, DexihTable } from '../../../../shared/shared.models';
 import { DatalinkEditService } from '../datalink-edit.service';

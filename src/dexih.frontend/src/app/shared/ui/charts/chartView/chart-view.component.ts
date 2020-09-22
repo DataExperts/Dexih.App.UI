@@ -268,8 +268,8 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                                     name: this.formatValue(data, this.labelColumnIndex, i),
                                     series: [{
                                         name: this.formatValue(data, this.labelColumnIndex, i),
-                                        x: this.formatValue(data, this.xColumnIndex, i),
-                                        y: this.formatValue(data, this.yColumnIndex, i),
+                                        x: this.rawValue(data, this.xColumnIndex, i),
+                                        y: this.rawValue(data, this.yColumnIndex, i),
                                         r: 10
                                     }]
                                 };
@@ -287,10 +287,10 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                                     name: this.formatValue(data, this.labelColumnIndex, i),
                                     series: [{
                                         name: this.formatValue(data, this.labelColumnIndex, i),
-                                        x: this.formatValue(data, this.xColumnIndex, i),
-                                        y: this.formatValue(data, this.yColumnIndex, i),
-                                        min: this.formatValue(data, this.minColumnIndex, i),
-                                        max: this.formatValue(data, this.maxColumnIndex, i)
+                                        x: this.rawValue(data, this.xColumnIndex, i),
+                                        y: this.rawValue(data, this.yColumnIndex, i),
+                                        min: this.rawValue(data, this.minColumnIndex, i),
+                                        max: this.rawValue(data, this.maxColumnIndex, i)
                                     }]
                                 };
                             }
@@ -309,9 +309,9 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                                     name: this.formatValue(data, this.labelColumnIndex, i),
                                     series: [{
                                         name: this.formatValue(data, this.labelColumnIndex, i),
-                                        x: this.formatValue(data, this.xColumnIndex, i),
-                                        y: this.formatValue(data, this.yColumnIndex, i),
-                                        r: this.formatValue(data, this.radiusColumnIndex, i)
+                                        x: this.rawValue(data, this.xColumnIndex, i),
+                                        y: this.rawValue(data, this.yColumnIndex, i),
+                                        r: this.rawValue(data, this.radiusColumnIndex, i)
                                     }]
                                 };
                             }
@@ -326,9 +326,9 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                             for (let i = 0; i < data.length; i++) {
                                 chartItem[i] = {
                                     name: this.formatValue(data, this.labelColumnIndex, i),
-                                    value: this.formatValue(data, this.seriesColumnIndex, i),
-                                    latitude: this.formatValue(data, this.latitudeColumnIndex, i),
-                                    longitude: this.formatValue(data, this.longitudeColumnIndex, i),
+                                    value: this.rawValue(data, this.seriesColumnIndex, i),
+                                    latitude: this.rawValue(data, this.latitudeColumnIndex, i),
+                                    longitude: this.rawValue(data, this.longitudeColumnIndex, i),
                                 };
                             }
                         }
@@ -379,7 +379,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
         let gridValues = values.map(c => {
             return {
                 name: Functions.formatValue(c, format),
-                value: c
+                value: Functions.rawValue(c)
             }
         });
 
@@ -394,7 +394,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
             for (let i = 0; i < data.length; i++) {
                 chartData[i] = {
                     name: this.formatValue(data, this.labelColumnIndex, i),
-                    value: this.formatValue(data, this.seriesColumnIndex, i)
+                    value: this.rawValue(data, this.seriesColumnIndex, i)
                 };
             }
             this.setSeriesLabel(this.columns[this.seriesColumnIndex].title);
@@ -429,7 +429,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                             if (this.seriesColumnsIndex[j]) {
                                 row[((j + 1) * (pivotIndex + 1)) - 1 ] = {
                                     name: pivotValue.name + '/' + this.seriesColumnsIndex[j].title,
-                                    value: this.formatValue(seriesData, this.seriesColumnsIndex[j].name, i)
+                                    value: this.rawValue(seriesData, this.seriesColumnsIndex[j].name, i)
                                 };
                             }
                         }
@@ -456,7 +456,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                         if (this.seriesColumnsIndex[j]) {
                             series[j] = {
                                 name: this.seriesColumnsIndex[j].title,
-                                value: this.formatValue(data, this.seriesColumnsIndex[j].name, i)
+                                value: this.rawValue(data, this.seriesColumnsIndex[j].name, i)
                             };
                         }
                     }
@@ -502,7 +502,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                                 let name = this.formatValue(seriesData, this.labelColumnIndex, j);
                                 row[((j + 1) * (seriesIndex + 1)) - 1 ] = {
                                     name: name,
-                                    value: this.formatValue(seriesData, this.seriesColumnsIndex[j].name, i)
+                                    value: this.rawValue(seriesData, this.seriesColumnsIndex[j].name, i)
                                 };
                             }
                         }
@@ -527,7 +527,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                     for (let j = 0; j < data.length; j++) {
                         series[j] = {
                             name: this.formatValue(data, this.labelColumnIndex, j),
-                            value: this.formatValue(data, this.seriesColumnsIndex[i].name, j)
+                            value: this.rawValue(data, this.seriesColumnsIndex[i].name, j)
                         };
                     }
                     series = series.filter(c => c.value !== '');
@@ -555,7 +555,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
         const valuesSet = values.map(c => {
             return {
                 name: Functions.formatValue(c, format),
-                value: c
+                value: Functions.rawValue(c)
             }
         });
         return valuesSet;
@@ -570,6 +570,15 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
         let column = this.columns[columnIndex];
 
         return Functions.formatValue(value, column.format);
+    }
+
+    rawValue(data, columnIndex: number, row: number) {
+        if (columnIndex === null) {
+            return row;
+        }
+
+        let value = data[row][columnIndex];
+        return Functions.rawValue(value);
     }
 
 }

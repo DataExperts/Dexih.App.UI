@@ -23,6 +23,10 @@ export class Functions {
     }
 
     static formatValue(value: any, format: string): string {
+        if(value && typeof value === 'object' && ('r' in value || 'f' in value)) {
+            return value['f'];
+        }
+
         moment.locale(this.getLanguage());
 
         if (!value && value !== false && value !== 0) {
@@ -47,6 +51,17 @@ export class Functions {
                     return value;
             }
         }
+    }
+
+    static rawValue(value: any): any {
+        if(value && typeof value === 'object' && ('r' in value || 'f' in value)) {
+            return value['r'];
+        }
+
+        if (!value && value !== false && value !== 0) {
+            return '';
+        }
+        return value;
     }
 
         /*

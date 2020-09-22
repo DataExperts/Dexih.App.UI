@@ -227,7 +227,6 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
                     this.isRefreshing = false;
                 });
             }
-
         }
     }
 
