@@ -90,66 +90,13 @@ export class DatalinkColumnEditComponent implements OnInit, OnChanges, OnDestroy
         if (this._saveSubscription) { this._saveSubscription.unsubscribe(); }
     }
 
-    // searches the datalink and transforms for a column
-    findColumn(): FormGroup {
-        // look for column in source table
-        let columnsArray = <FormArray>this.sourceDatalinkTableForm.controls.dexihDatalinkColumns;
-        let column = <FormGroup> columnsArray.controls.find(c => c.value.key === this.datalinkColumnKey);
-        if (column) { return column; }
 
-        // look for column as transform outputs
-        let transformForms = <FormArray>this.editDatalinkService.hubFormsService.currentForm
-            .controls.dexihDatalinkTransforms;
-
-        transformForms.controls.forEach(t => {
-            let datalinkTransformForm = <FormGroup>t
-            let items = <FormArray>datalinkTransformForm.controls.dexihDatalinkTransformItems;
-            items.controls.forEach(i => {
-                if (!column) {
-                    let itemForm = <FormGroup>i;
-                    if (itemForm.controls.targetDatalinkColumn.value &&
-                        itemForm.controls.targetDatalinkColumn.value.key === this.datalinkColumnKey) {
-                        column = <FormGroup> itemForm.controls.targetDatalinkColumn;
-                    }
-
-                    if (!column) {
-                        columnsArray = <FormArray> itemForm.controls.dexihFunctionParameters;
-                        let parameter = <FormGroup> columnsArray.controls.find(c =>
-                            HubCache.parameterIsOutput(c.value) &&
-                            c.value.datalinkColumn &&
-                            c.value.datalinkColumn.key === this.datalinkColumnKey
-                        );
-                        if (parameter) {
-                            column = <FormGroup> parameter.controls.datalinkColumn;
-                        }
-                        if (!column) {
-                            columnsArray.controls.forEach(c => {
-                                let arrayParameters = <FormArray> (<FormGroup> c).controls.arrayParameters;
-                                if (arrayParameters) {
-                                    parameter = <FormGroup> arrayParameters.controls.find(p =>
-                                        HubCache.parameterIsOutput(p.value) &&
-                                        p.value.datalinkColumn &&
-                                        p.value.datalinkColumn.key === this.datalinkColumnKey
-                                    );
-                                    if (parameter) {
-                                        column = <FormGroup> parameter.controls.datalinkColumn;
-                                    }
-                                }
-                            });
-                        }
-                    }
-                }
-            });
-        });
-
-        return column;
-    }
 
     initializeForm() {
         let columnForm: FormGroup;
 
         if (this.datalinkColumnKey) {
-            this.originalColumnForm = this.findColumn();
+            this.originalColumnForm = this.editDatalinkService.findColumn(this.datalinkColumnKey);
             if (!this.originalColumnForm) {
                 this.authService.informationDialog('Cannot Edit', 'The selected column could not be edited.').then(() => {
                     this.authService.navigateUp();

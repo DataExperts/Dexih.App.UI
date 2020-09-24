@@ -45,8 +45,6 @@ export class Functions {
                     return moment(value).format('L') + ' ' + moment(value).format('LTS');
                 case 'CharArray':
                     return [].concat(value).join('');
-                case 'CharArray':
-                    return [].concat(value).join('');
                 default:
                     return value;
             }

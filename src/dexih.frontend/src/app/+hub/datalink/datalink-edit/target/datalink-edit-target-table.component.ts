@@ -79,6 +79,7 @@ export class DatalinkEditTargetTableComponent implements OnInit, OnDestroy {
         { name: 'allowDbNull', title: 'Null?', format: 'Boolean' },
         { name: 'defaultValue', title: 'Default Value', format: '' },
         { name: 'securityFlag', title: 'Security Flag', format: 'Enum', enum: eSecurityFlag },
+        { name: 'format', title: 'Format'},
         { name: 'columnValidation', title: 'Validation', format: '', class: 'columnValidationClass', tooltip: 'columnValidationTooltip' }
     ];
 

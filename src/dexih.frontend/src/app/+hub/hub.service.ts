@@ -1751,7 +1751,7 @@ export class HubService implements OnInit, OnDestroy {
     }
 
     downloadDatalinkData(datalink: DexihDatalink, datalinkTransformKey: number, selectQuery: SelectQuery, inputColumns: InputColumn[],
-        zipFiles: boolean, downloadFormat: eDownloadFormat, cancelToken: CancelToken):
+        zipFiles: boolean, downloadFormat: eDownloadFormat, inputParameters: DexihInputParameter[], cancelToken: CancelToken):
     Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             this.hubPostRemote<ManagedTask>('/api/Hub/DownloadDatalinkData', {
@@ -1762,6 +1762,7 @@ export class HubService implements OnInit, OnDestroy {
                 datalinkTransformKey: datalinkTransformKey,
                 selectQuery: selectQuery,
                 inputColumns: inputColumns,
+                inputParameters: inputParameters,
                 downloadFormat: downloadFormat,
                 zipFiles: zipFiles,
                 }, 'Downloading table data...', cancelToken).then(task => {

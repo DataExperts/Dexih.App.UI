@@ -243,7 +243,7 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
             switch (this.viewSource) {
                 case eDataObjectType.Datalink:
                     this.hubService.downloadDatalinkData(this.datalink, this.datalinkTransformKey,
-                        this.selectQuery, this.inputColumns, false, format, this.cancelToken);
+                        this.selectQuery, this.inputColumns, false, format, this.parameters, this.cancelToken);
                     break;
                 case eDataObjectType.Table:
                     this.hubService.downloadTableData(this.table, false, this.selectQuery, this.inputColumns,

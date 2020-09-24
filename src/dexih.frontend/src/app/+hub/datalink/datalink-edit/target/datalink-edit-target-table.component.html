@@ -14,7 +14,7 @@
         <cancel-button [formsService]="tableFormService"></cancel-button>
     </ng-template>
 
-    <form *ngIf="targetTableForm"  [formGroup]="targetTableForm">
+    <form *ngIf="targetTableForm"  [formGroup]="targetTableForm"  class="container">
         <fieldset>
             <section>
                 <form-checkbox label="Create a new table" [ngModelOptions]="{standalone: true}" [(ngModel)]="newTable" (ngModelChange)="toggleNewTable($event)"></form-checkbox>
@@ -37,7 +37,7 @@
 <ng-template [ngIf]="targetTableForm?.controls.table.value">
         <d-widget-section title="Columns" [showExpandButton]="true" [padding]="false">
         <d-table [enableMultiSelect]="true"
-            [enableManualSort]="true" [enableSort]="false" [enableFilter]="false" (onSortChanged)="columnSortChange($event)" [columns]="columns"
+            [enableSort]="false" [enableFilter]="false" (onSortChanged)="columnSortChange($event)" [columns]="columns"
             [dataObservable]="tableData" (rowClick)="editColumn($event)" [enableStickyToolbar]="true"  [toolbarZIndex]="100">
     
             <ng-template #actions let-items="items">
@@ -91,7 +91,6 @@
                 <d-button-delete (click)="deleteColumns(items)" class="ml-1"></d-button-delete>
                 <d-button iconClass="fa fa-th-list" class="ml-1" (click)="showBulkEdit=!showBulkEdit">{{showBulkEdit ? 'Hide Bulk Edit' : 'Show Bulk Edit'}} </d-button>
             </ng-template>
-    
     
         </d-table>
         </d-widget-section>

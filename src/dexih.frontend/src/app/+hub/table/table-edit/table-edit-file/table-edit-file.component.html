@@ -1,6 +1,6 @@
 <d-widget-section title='File Properties' [showExpandButton]="true" [padding]="true">
 
-    <form *ngIf="formService?.currentForm" [formGroup]="formService.currentForm">
+    <form *ngIf="formService?.currentForm" [formGroup]="formService.currentForm" class="container">
         <ng-template [ngIf]="isFile">
             <section>
                 <form-input label="Files Subdirectory" formControlName="fileRootPath" placeholder="Enter the file path name." iconClass="fa fa-file"

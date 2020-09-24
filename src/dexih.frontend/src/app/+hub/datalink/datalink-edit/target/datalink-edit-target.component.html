@@ -1,6 +1,23 @@
+<d-widget-section title="Datalink Columns" [showExpandButton]="true" [padding]="false">
+    <div class="container-fluid">
+        <d-table [enableMultiSelect]="true" [enableManualSort]="true" [enableSort]="false" [enableFilter]="false"
+            [columns]="columns" [dataObservable]="columnsObservable"
+            (rowClick)="editColumn($event)">
+
+            <ng-template #tableHeader let-items="items">
+                <column-edit-bulk *ngIf="showBulkEdit && items.length > 0" [columns]="items" (updated)="applyBulkEdit()" ></column-edit-bulk>
+            </ng-template>
+
+            <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+                <d-button iconClass="fa fa-th-list" class="ml-1" (click)="showBulkEdit=!showBulkEdit">{{showBulkEdit ? 'Hide Bulk Edit' : 'Show Bulk Edit'}} </d-button>
+            </ng-template>
+
+        </d-table>
+    </div>
+</d-widget-section>
 
 <d-widget-section title="Target Load Rules" [showExpandButton]="true">
-    <form *ngIf="datalinkForm" [formGroup]="datalinkForm">
+    <form *ngIf="datalinkForm" [formGroup]="datalinkForm"  class="container">
         <fieldset>
             <form-checkbox label="Datalink is a query and does not populate target tables."
                 formControlName="isQuery" [errors]="editDatalinkService.hubFormsService.formErrors.isQuery">
@@ -51,25 +68,27 @@
     </form>
 </d-widget-section>
 
+<d-widget-section title="Tables" [showExpandButton]="true" [padding]="false"
+    *ngIf="!datalinkForm?.controls.isQuery.value">
+    <div class="container">
+        <d-table [enableMultiSelect]="true" [enableManualSort]="true" [enableSort]="false" [enableFilter]="false"
+            (onSortChanged)="targetSortChange($event)" [columns]="targetTableColumns" [data]="targets"
+            (rowClick)="editTable($event)">
 
-<d-widget-section title="Tables" [showExpandButton]="true" [padding]="false" *ngIf="!datalinkForm?.controls.isQuery.value">
-    <d-table [enableMultiSelect]="true" [enableManualSort]="true" [enableSort]="false"
-        [enableFilter]="false" (onSortChanged)="targetSortChange($event)" [columns]="targetTableColumns" [data]="targets"
-        (rowClick)="editTable($event)">
+            <ng-template #actions let-items="items">
+                <d-button-new class="mr-1" (click)="addTable()"></d-button-new>
+            </ng-template>
 
-        <ng-template #actions let-items="items">
-            <d-button-new class="mr-1" (click)="addTable()"></d-button-new>
-        </ng-template>
+            <ng-template #selectedItemAction select="selectedItemAction" let-item="item">
+                <d-button-edit class="mr-1" (click)="editTable(item)"></d-button-edit>
+            </ng-template>
 
-        <ng-template #selectedItemAction select="selectedItemAction" let-item="item">
-            <d-button-edit class="mr-1" (click)="editTable(item)"></d-button-edit>
-        </ng-template>
+            <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+                <d-button-delete class="mr-1" (click)="deleteTables(items)"></d-button-delete>
+            </ng-template>
 
-        <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-            <d-button-delete class="mr-1" (click)="deleteTables(items)"></d-button-delete>
-        </ng-template>
-
-    </d-table>
+        </d-table>
+    </div>
 </d-widget-section>
 
 <router-outlet></router-outlet>

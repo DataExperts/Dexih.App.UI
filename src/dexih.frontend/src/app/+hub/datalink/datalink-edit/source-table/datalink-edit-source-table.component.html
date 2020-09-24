@@ -11,8 +11,11 @@
         <d-button-preview (click)="previewData()"></d-button-preview>
     </ng-template>
 
-    <datalink-table *ngIf="datalinkForm" [datalinkTableForm]="datalinkForm.controls.sourceDatalinkTable">
-    </datalink-table>
+    <div  class="container">
+        <datalink-table *ngIf="datalinkForm" [datalinkTableForm]="datalinkForm.controls.sourceDatalinkTable">
+        </datalink-table>
+    </div>
+
 </d-widget-section>
 
 <d-widget-section title='Columns' [showExpandButton]="true" [padding]="false">

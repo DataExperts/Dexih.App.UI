@@ -13,7 +13,7 @@ import { eDatalinkType, DexihDatalink, eSourceType, eSharedObjectType, eDatalink
 })
 export class DatalinkIndexComponent implements OnInit, OnDestroy {
     hubCache: HubCache;
-    typeFilter: number;
+    typeFilter: eDatalinkType;
 
     private _subscription: Subscription;
     private _hubCacheChangeSubscription: Subscription;

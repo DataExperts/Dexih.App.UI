@@ -1,5 +1,5 @@
 <d-widget-section title='Properties' [showExpandButton]="true">
-    <form *ngIf="datalinkForm" [formGroup]="datalinkForm">
+    <form *ngIf="datalinkForm" [formGroup]="datalinkForm" class="container">
         <fieldset>
             <section>
                 <form-select label="Datalink Type" formControlName="datalinkType" [items]="eDatalinkTypeItems" itemKey="key" itemName="description" iconClass="fa fa-database"
@@ -36,5 +36,7 @@
 </d-widget-section> 
 
 <d-widget-section title='Input Parameters' [showExpandButton]="true">
-    <input-parameters [showEdit]="true" [parameters]="datalinkForm.controls.parameters" [formsService]="editDatalinkService.hubFormsService"></input-parameters>
+    <div  class="container">
+        <input-parameters [showEdit]="true" [parameters]="datalinkForm.controls.parameters" [formsService]="editDatalinkService.hubFormsService"></input-parameters>
+    </div>
 </d-widget-section>

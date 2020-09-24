@@ -7,6 +7,7 @@ import { columnDateFormats, columnNumberFormats, columnTimeFormats, TypeCodes } 
 import { DexihTableColumn } from '../../../../shared/shared.models';
 import { HubService } from '../../../hub.service';
 import { Subscription } from 'rxjs';
+import { LinearGaugeComponent } from '@swimlane/ngx-charts';
 
 @Component({
     selector: 'column-edit-bulk',
@@ -64,48 +65,92 @@ export class ColumnEditBulkComponent implements OnInit, OnDestroy {
     applyBulkEdit() {
 
         let bulkColumn = <DexihTableColumn> this.bulkColumn.value;
-        this.columns.forEach(column => {
-            let columnForm = this.getColumnForm(column);
-            if (!columnForm) { return; }
 
-            switch (this.property) {
-                case 'group':
-                    columnForm.controls.columnGroup.setValue(bulkColumn.columnGroup);
-                    break;
-                case 'dataType':
-                    columnForm.controls.dataType.setValue(bulkColumn.dataType);
-                    columnForm.controls.maxLength.setValue(bulkColumn.maxLength);
-                    columnForm.controls.rank.setValue(bulkColumn.rank);
-                    columnForm.controls.precision.setValue(bulkColumn.precision);
-                    columnForm.controls.scale.setValue(bulkColumn.scale);
-                    break;
-                case 'deltaType':
-                    columnForm.controls.deltaType.setValue(bulkColumn.deltaType);
-                    break;
-                case 'format':
-                    columnForm.controls.format.setValue(bulkColumn.format);
-                    break;
-                case 'securityFlag':
-                    columnForm.controls.securityFlag.setValue(bulkColumn.securityFlag);
-                    break;
-                case 'defaultValue':
-                    columnForm.controls.defaultValue.setValue(bulkColumn.defaultValue);
-                    break;
-                case 'validationRule':
-                    columnForm.controls.columnValidationKey.setValue(bulkColumn.columnValidationKey);
-                    break;
-                case 'allowDbNull':
-                    columnForm.controls.allowDbNull.setValue(bulkColumn.allowDbNull);
-                    break;
-                case 'isUnicode':
-                    columnForm.controls.isUnicode.setValue(bulkColumn.isUnicode);
-                    break;
-                case 'isInput':
-                    columnForm.controls.isInput.setValue(bulkColumn.isInput);
-                    break;
-            }
-        });
+        if(this.columnsFormArray) {
+            this.columns.forEach(column => {
+                let columnForm = this.getColumnForm(column);
+                if (!columnForm) { return; }
+
+                switch (this.property) {
+                    case 'group':
+                        columnForm.controls.columnGroup.setValue(bulkColumn.columnGroup);
+                        break;
+                    case 'dataType':
+                        columnForm.controls.dataType.setValue(bulkColumn.dataType);
+                        columnForm.controls.maxLength.setValue(bulkColumn.maxLength);
+                        columnForm.controls.rank.setValue(bulkColumn.rank);
+                        columnForm.controls.precision.setValue(bulkColumn.precision);
+                        columnForm.controls.scale.setValue(bulkColumn.scale);
+                        break;
+                    case 'deltaType':
+                        columnForm.controls.deltaType.setValue(bulkColumn.deltaType);
+                        break;
+                    case 'format':
+                        columnForm.controls.format.setValue(bulkColumn.format);
+                        break;
+                    case 'securityFlag':
+                        columnForm.controls.securityFlag.setValue(bulkColumn.securityFlag);
+                        break;
+                    case 'defaultValue':
+                        columnForm.controls.defaultValue.setValue(bulkColumn.defaultValue);
+                        break;
+                    case 'validationRule':
+                        columnForm.controls.columnValidationKey.setValue(bulkColumn.columnValidationKey);
+                        break;
+                    case 'allowDbNull':
+                        columnForm.controls.allowDbNull.setValue(bulkColumn.allowDbNull);
+                        break;
+                    case 'isUnicode':
+                        columnForm.controls.isUnicode.setValue(bulkColumn.isUnicode);
+                        break;
+                    case 'isInput':
+                        columnForm.controls.isInput.setValue(bulkColumn.isInput);
+                        break;
+                }
+            });
+        } else {
+            this.columns.forEach(column => {
+                switch (this.property) {
+                    case 'group':
+                        column.columnGroup = bulkColumn.columnGroup;
+                        break;
+                    case 'dataType':
+                        column.dataType = bulkColumn.dataType;
+                        column.maxLength = bulkColumn.maxLength;
+                        column.rank = bulkColumn.rank;
+                        column.precision = bulkColumn.precision;
+                        column.scale = bulkColumn.scale;
+                        break;
+                    case 'deltaType':
+                        column.deltaType = bulkColumn.deltaType;
+                        break;
+                    case 'format':
+                        column.format = bulkColumn.format;
+                        break;
+                    case 'securityFlag':
+                        column.securityFlag = bulkColumn.securityFlag;
+                        break;
+                    case 'defaultValue':
+                        column.defaultValue = bulkColumn.defaultValue;
+                        break;
+                    case 'validationRule':
+                        column.columnValidationKey = bulkColumn.columnValidationKey;
+                        break;
+                    case 'allowDbNull':
+                        column.allowDbNull = bulkColumn.allowDbNull;
+                        break;
+                    case 'isUnicode':
+                        column.isUnicode = bulkColumn.isUnicode;
+                        break;
+                    case 'isInput':
+                        column.isInput = bulkColumn.isInput;
+                        break;
+                }
+            });
+        }
+
         this.updated.emit();
+
       }
 
       cancel() {
@@ -114,22 +159,34 @@ export class ColumnEditBulkComponent implements OnInit, OnDestroy {
 
       setAllowDbNull(value: boolean) {
         this.columns.forEach(column => {
-            let columnForm = this.getColumnForm(column);
-            columnForm.controls.allowDbNull.setValue(value);
+            if (this.columnsFormArray) {
+                let columnForm = this.getColumnForm(column);
+                columnForm.controls.allowDbNull.setValue(value);
+            } else {
+                column.allowDbNull = value
+            }
         });
       }
 
       setIsInput(value: boolean) {
         this.columns.forEach(column  => {
-            let columnForm = this.getColumnForm(column);
+            if (this.columnsFormArray) {
+                let columnForm = this.getColumnForm(column);
             columnForm.controls.isInput.setValue(value);
+            } else {
+                column.isInput = value
+            }
         });
       }
 
       setIsUnicode(value: boolean) {
         this.columns.forEach(column  => {
-            let columnForm = this.getColumnForm(column);
+            if (this.columnsFormArray) {
+                let columnForm = this.getColumnForm(column);
             columnForm.controls.isUnicode.setValue(value);
+            } else {
+                column.isUnicode = value
+            }
         });
       }
 }

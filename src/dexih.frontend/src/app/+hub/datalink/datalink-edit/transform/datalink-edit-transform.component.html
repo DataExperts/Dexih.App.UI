@@ -1,6 +1,6 @@
 
 <d-widget-section title="Properties" [showExpandButton]="true" [isExpanded]="false">
-<form *ngIf="datalinkTransformForm"  [formGroup]="datalinkTransformForm">
+<form *ngIf="datalinkTransformForm"  [formGroup]="datalinkTransformForm" class="container">
         <fieldset>
             <section>
                 <form-input label="Transform Name" formControlName="name" placeholder="Enter a name for the transform" [autocapitalize]="true" iconClass="fa fa-list"
@@ -36,7 +36,7 @@
     </form>
 </d-widget-section>
 <d-widget-section *ngIf="datalinkTransformForm && (this.datalinkTransformForm.value.transformType == eTransformType.Join || this.datalinkTransformForm.value.transformType == eTransformType.Lookup)" title="Join Settings" [showExpandButton]="true">
-    <form [formGroup]="datalinkTransformForm">
+    <form [formGroup]="datalinkTransformForm"  class="container">
         <fieldset>
             <datalink-table [datalinkTableForm]="datalinkTransformForm.controls.joinDatalinkTable"></datalink-table>
 
@@ -64,7 +64,7 @@
 </d-widget-section>
 
 <d-widget-section *ngIf="datalinkTransformForm && this.datalinkTransformForm.value.transformType == eTransformType.Concatenate" title="Concatenate Settings" [showExpandButton]="true">
-    <form [formGroup]="datalinkTransformForm">
+    <form [formGroup]="datalinkTransformForm"  class="container">
         <fieldset>
             <datalink-table [datalinkTableForm]="datalinkTransformForm.controls.joinDatalinkTable"></datalink-table>
         </fieldset>
@@ -72,7 +72,7 @@
 </d-widget-section>
 
 <d-widget-section *ngIf="datalinkTransformForm && this.datalinkTransformForm.value.transformType == eTransformType.Series" title="Series Settings" [showExpandButton]="true">
-    <form [formGroup]="seriesForm">
+    <form [formGroup]="seriesForm"  class="container">
         <fieldset>
             <div class="form-row">
                 <section class="form-group col-md-6">
@@ -110,7 +110,7 @@
 </d-widget-section>
 
 <d-widget-section *ngIf="datalinkTransformForm && this.nodeType === eTransformItemType.GroupNode" title="Group Node" [showExpandButton]="true">
-    <form>
+    <form  class="container">
         <fieldset>
             <form-checkbox label="Group rows under a node" [ngModelOptions]="{standalone: true}" [(ngModel)]="allowNode" (ngModelChange)="toggleNode($event)"></form-checkbox>
             <section *ngIf="allowNode" class="form-group col-md-6">
@@ -122,7 +122,7 @@
 
 <div class="list-group-item p-1">
 
-<div *ngIf="datalinkTransformForm" class="d-flex" cdkDropListGroup>
+<div *ngIf="datalinkTransformForm" class="d-flex justify-content-center" cdkDropListGroup>
         <d-widget class="d-none d-lg-inline" title="Inputs" height="80vh" style="width:300px" [scrollable]="true">
             <input-columns [datalinkTransformForm]='datalinkTransformForm'></input-columns>
 
@@ -131,7 +131,7 @@
             </div>
         </d-widget>
 
-        <div class="w-100 mr-1 ml-1">
+        <div class="container mr-1 ml-1">
             <div *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Join || this.datalinkTransformForm.value.transformType == eTransformType.Lookup">
                 <mapping [datalinkTransformForm]="datalinkTransformForm" [allowJoin]="true" title="{{eTransformType[this.datalinkTransformForm.value.transformType]}} Table"  >
                 </mapping>

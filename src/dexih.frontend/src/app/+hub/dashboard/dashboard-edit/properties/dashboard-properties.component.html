@@ -1,7 +1,7 @@
 <div [ngClass]="{ 'd-none': maximizedItem}">
 
     <d-widget-section *ngIf="showEdit" title="Properties" [showExpandButton]="true">
-        <form *ngIf="formsService.currentForm " [formGroup]="formsService.currentForm">
+        <form *ngIf="formsService.currentForm " [formGroup]="formsService.currentForm" class="container">
             <fieldset>
                 <section>
                     <form-input label="Dashboard Name" formControlName="name" placeholder="Enter the dashboard name."
@@ -48,21 +48,24 @@
     </d-widget-section>
 
     <d-widget-section  title="Parameters" *ngIf="showEdit || parameters?.length > 0" [showExpandButton]="true" (onChange)="parameterChange()">
-        <input-parameters [showEdit]="showEdit" [parameters]="parameters"
-            [formsService]="formsService" (onChange)="parameterChange()" (onRefreshData)="refresh()" [refreshEvent]="refreshDataObservable" ></input-parameters>
+        <div class="container">
+            <input-parameters [showEdit]="showEdit" [parameters]="parameters"
+                [formsService]="formsService" (onChange)="parameterChange()" (onRefreshData)="refresh()" [refreshEvent]="refreshDataObservable" ></input-parameters>
+        </div>
     </d-widget-section>
 
-    <d-widget-section *ngIf="inputColumns && inputColumns.length > 0" title="InputColumns"
-        [showExpandButton]="true">
-        <span *ngFor="let column of inputColumns; let i = index" class="input-group">
-            <div class="input-group-prepend">
-                <div class="input-group-text">
-                    {{column.logicalName}}
+    <d-widget-section *ngIf="inputColumns && inputColumns.length > 0" title="InputColumns" [showExpandButton]="true">
+        <div class="container">
+            <span *ngFor="let column of inputColumns; let i = index" class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        {{column.logicalName}}
+                    </div>
                 </div>
-            </div>
-            <form-input name="column{{i}}" class="form-control p-0" [placeholder]="'Enter ' + column.logicalName"
-                [(ngModel)]="column.value"></form-input>
-        </span>
+                <form-input name="column{{i}}" class="form-control p-0" [placeholder]="'Enter ' + column.logicalName"
+                    [(ngModel)]="column.value"></form-input>
+            </span>
+        </div>
     </d-widget-section>
 
     <div style="height:800px">

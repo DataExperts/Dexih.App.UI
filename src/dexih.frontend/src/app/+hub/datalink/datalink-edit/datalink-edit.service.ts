@@ -404,6 +404,62 @@ export class DatalinkEditService implements OnInit, OnDestroy {
         });
     }
 
+    // searches the datalink and transforms for a column
+    public findColumn(columnKey: number): FormGroup {
+        // look for column in source table
+        let sourceDatalinkTableForm = <FormGroup>this.hubFormsService.currentForm
+                .controls.sourceDatalinkTable
+        let columnsArray = <FormArray>sourceDatalinkTableForm.controls.dexihDatalinkColumns;
+        let column = <FormGroup> columnsArray.controls.find(c => c.value.key === columnKey);
+        if (column) { return column; }
+
+        // look for column as transform outputs
+        let transformForms = <FormArray>this.hubFormsService.currentForm.controls.dexihDatalinkTransforms;
+
+        transformForms.controls.forEach(t => {
+            let datalinkTransformForm = <FormGroup>t
+            let items = <FormArray>datalinkTransformForm.controls.dexihDatalinkTransformItems;
+            items.controls.forEach(i => {
+                if (!column) {
+                    let itemForm = <FormGroup>i;
+                    if (itemForm.controls.targetDatalinkColumn.value &&
+                        itemForm.controls.targetDatalinkColumn.value.key === columnKey) {
+                        column = <FormGroup> itemForm.controls.targetDatalinkColumn;
+                    }
+
+                    if (!column) {
+                        columnsArray = <FormArray> itemForm.controls.dexihFunctionParameters;
+                        let parameter = <FormGroup> columnsArray.controls.find(c =>
+                            HubCache.parameterIsOutput(c.value) &&
+                            c.value.datalinkColumn &&
+                            c.value.datalinkColumn.key === columnKey
+                        );
+                        if (parameter) {
+                            column = <FormGroup> parameter.controls.datalinkColumn;
+                        }
+                        if (!column) {
+                            columnsArray.controls.forEach(c => {
+                                let arrayParameters = <FormArray> (<FormGroup> c).controls.arrayParameters;
+                                if (arrayParameters) {
+                                    parameter = <FormGroup> arrayParameters.controls.find(p =>
+                                        HubCache.parameterIsOutput(p.value) &&
+                                        p.value.datalinkColumn &&
+                                        p.value.datalinkColumn.key === columnKey
+                                    );
+                                    if (parameter) {
+                                        column = <FormGroup> parameter.controls.datalinkColumn;
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }
+            });
+        });
+
+        return column;
+    }
+
     async resetDatalinkTransformPositions() {
         const datalinkForm = this.hubFormsService.currentForm;
         const datalinkTransforms = <FormArray>datalinkForm.controls.dexihDatalinkTransforms;

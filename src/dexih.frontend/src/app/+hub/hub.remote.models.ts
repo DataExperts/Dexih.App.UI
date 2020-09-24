@@ -337,9 +337,13 @@ export class TypeFunctions {
 }
 
 export const columnNumberFormats = [
-    {name: 'Currency', value: 'C'},
-    {name: 'Fixed 2 Decimals', value: 'F2'},
-    {name: 'Percent', value: 'P'},
+    {name: 'Percent', value: '#,##0.00%'},
+    {name: 'Number', value: '#,##0'},
+    {name: 'Fixed 0 Decimals', value: '#,##0.'},
+    {name: 'Fixed 1 Decimals', value: '#,##0.0'},
+    {name: 'Fixed 2 Decimals', value: '#,##0.00'},
+    {name: 'Dollars', value: '$#,##0'},
+    {name: 'Dollars / Cents', value: '$#,##0.00'},
 ];
 
 export const columnDateFormats = [

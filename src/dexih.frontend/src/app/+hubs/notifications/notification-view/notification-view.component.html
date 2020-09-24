@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container">
 	<d-widget *ngIf="message" title="Notification" iconClass="fa fa-lg fa-fw fa-bell" [showCloseButton]="true" (close)="close()" [padding]="true" >
 		<section *ngIf="message">
 				<div class="alert  clearfix" [class.alert-danger]="message.success == false" [class.alert-success]="message.success == true">

@@ -16,9 +16,8 @@ import { PreviewDataComponent } from './preview-data';
 import { PreviewTableComponent} from './preview-table';
 import { TransformTableEditComponent } from './transform-table-edit/transform-table-edit.component';
 import { DatalinkEditNewTransformComponent } from './new-transform/datalink-edit-new-transform.component';
-import { TargetTableColumnComponent } from './target-table-column/target-table-column.component';
 import { DatalinkColumnEditComponent } from './datalink-column-edit/datalink-column-edit.component'
-import { ResultsIndexComponent, ResultsViewComponent } from '../../results';
+import { ResultsViewComponent } from '../../results';
 import { UnGroupEditComponent } from './unGroup-edit';
 import { DatalinkEditTargetTableComponent } from './target/datalink-edit-target-table.component';
 
@@ -67,6 +66,8 @@ export const targetRoutes: Routes = [
         { path: 'preview-table-data/:tableKey', component: PreviewTableComponent,
             data: { pageTitle: 'Preview Table', action: 'preview'} },
         ]},
+    { path: 'column/:datalinkColumnKey', component: DatalinkColumnEditComponent,
+        data: { pageTitle: 'Edit Column', action: 'edit'} },
 ];
 
 export const validationRoutes: Routes = [

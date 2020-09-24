@@ -1,26 +1,24 @@
 <d-widget-section title="Profile Rules" [showExpandButton]="true">
-        <form *ngIf="datalinkForm"  [formGroup]="datalinkForm" >
-    <fieldset>
-        <section>
-            <form-input label="Profile Table Name" formControlName="profileTableName" placeholder="Enter the profile table name." [autocapitalize]="true" iconClass="fa fa-list" 
-            note="Specify the table name in the 'Audit Connection' to send the profile results to.  If this table does not exist, it will be created on first run.">
-            </form-input>
-        </section>
-    </fieldset>
-</form>
+    <div class="container">
+        <form *ngIf="datalinkForm" [formGroup]="datalinkForm">
+            <fieldset>
+                <section>
+                    <form-input label="Profile Table Name" formControlName="profileTableName"
+                        placeholder="Enter the profile table name." [autocapitalize]="true" iconClass="fa fa-list"
+                        note="Specify the table name in the 'Audit Connection' to send the profile results to.  If this table does not exist, it will be created on first run.">
+                    </form-input>
+                </section>
+            </fieldset>
+        </form>
 
-<d-table 
-    [enableMultiSelect]="true" 
-    [enableManualSort]="false"
-    [enableFilter]="false"
-    [columns]="columns" 
-    [dataObservable]="tableData" 
-    [(selectedItems)]="selectedProfileRules" 
-    (onSelectedChange)="hasChanged($event)"
-    keyColumn="functionMethodName">
+        <d-table [enableMultiSelect]="true" [enableManualSort]="false" [enableFilter]="false" [columns]="columns"
+            [dataObservable]="tableData" [(selectedItems)]="selectedProfileRules"
+            (onSelectedChange)="hasChanged($event)" keyColumn="functionMethodName">
 
-    <ng-template #rowAction select="rowAction" let-item="item">
-        <form-checkbox label="Capture Detailed Distribution" [(ngModel)]="item.detailedResults" name="detailedResults" (change)="updateProfileRule(item)" ></form-checkbox>
-    </ng-template>
-</d-table>
+            <ng-template #rowAction select="rowAction" let-item="item">
+                <form-checkbox label="Capture Detailed Distribution" [(ngModel)]="item.detailedResults"
+                    name="detailedResults" (change)="updateProfileRule(item)"></form-checkbox>
+            </ng-template>
+        </d-table>
+    </div>
 </d-widget-section>

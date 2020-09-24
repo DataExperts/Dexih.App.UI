@@ -1,6 +1,6 @@
 <d-widget-section title='Web Service Properties' [showExpandButton]="true" [padding]="true">
 
-    <form *ngIf="formService?.currentForm" [formGroup]="formService.currentForm">
+    <form *ngIf="formService?.currentForm" [formGroup]="formService.currentForm" class="container">
 
         <section>
             <form-input label="Web Service Uri String" formControlName="restfulUri" placeholder="Enter the uri." iconClass="fa fa-feed"
