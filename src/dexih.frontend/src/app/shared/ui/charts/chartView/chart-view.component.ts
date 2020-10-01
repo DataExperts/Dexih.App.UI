@@ -122,7 +122,8 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
     //     this.createView();
     // }
 
-    onResized(event) {
+    onResized(index, event) {
+        if(index > 0) return;
         // legend needs to be padded as ngx-charts not calculating size correctly.
         // https://github.com/swimlane/ngx-charts/issues/1248
         if (this.config.showLegend && this.config.legendPosition === 'below') {

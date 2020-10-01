@@ -8,6 +8,7 @@
 			[columns]="columns"
 			[dataObservable]="tableData"
 			[enableSaveCsv]="true" 
+			csvFileName="execution_results.csv"
 			(rowClick)="showResult($event)"
 			>
 				<ng-template #actions let-items="items">

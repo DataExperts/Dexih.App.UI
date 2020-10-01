@@ -80,7 +80,7 @@
 <div class="h-100 box" *ngIf="data">
     <div class="box-content" style="height: 90vh;">
 
-        <d-table *ngIf="!showChart" [enableMultiSelect]="false" [enableSaveCsv]="true" [csvFileName]="name"
+        <d-table *ngIf="!showChart" [enableMultiSelect]="false" [enableSaveCsv]="true" [csvFileName]="name + '.csv'"
             [enableFilter]="false" [columns]="columns" [data]="data">
 
             <ng-template #actions let-items="items">

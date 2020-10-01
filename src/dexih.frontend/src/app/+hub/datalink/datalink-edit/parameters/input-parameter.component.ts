@@ -185,10 +185,11 @@ export class InputParameterComponent implements OnInit, OnDestroy, OnChanges {
             let inputParameter: DexihFunctionParameter = this.inputParameterForms[i].value;
             this.type = new TypeFunctions(inputParameter.dataType, null, null, null);
 
+            let name = this.inputParameterForms[i].value.runTime?.functionParameter?.name ?? inputParameter.name;
             if (!this.allowDataTypeSelect && !this.allowNameSelect) {
-                this.inputs[i].name = inputParameter.name + '(' + this.type.dataType + ')' + (this.rank > 0 ? '[]' : '')
+                this.inputs[i].name = name + (this.type.dataType === eTypeCode.Unknown ? '' : '(' + eTypeCode[this.type.dataType] + ')') + (this.rank > 0 ? '[]' : '')
             } else {
-                this.inputs[i].name = inputParameter.name
+                this.inputs[i].name = name;
             }
         }
     }

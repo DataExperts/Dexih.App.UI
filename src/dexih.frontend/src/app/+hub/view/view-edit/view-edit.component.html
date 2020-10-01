@@ -91,7 +91,7 @@
 		</d-widget-section>
 
 		<ng-template [ngIf]="columns?.length > 0 && data?.length > 0">
-			<d-table *ngIf="!showChart" [enableMultiSelect]="false" [enableSaveCsv]="true" [columns]="columns" [data]="data" [hideTable]="showChart">
+			<d-table *ngIf="!showChart" [enableMultiSelect]="false" [enableSaveCsv]="true" [csvFileName]="formsService.currentForm?.controls.name.value + '.csv'" [columns]="columns" [data]="data" [hideTable]="showChart">
 				<ng-template #actions let-items="items">
 					<d-button-refresh class="mr-1" (click)="refresh()" text="Reload"></d-button-refresh>
 				</ng-template>

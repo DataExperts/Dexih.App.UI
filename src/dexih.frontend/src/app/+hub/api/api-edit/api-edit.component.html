@@ -111,7 +111,7 @@
 				</query-builder>
 			</section>
 
-			<d-table [enableMultiSelect]="false" [enableSaveCsv]="true" [columns]="columns" [data]="data">
+			<d-table [enableMultiSelect]="false" [enableSaveCsv]="true" [csvFileName]="formsService.currentForm?.controls.name.value + '.csv'"  [columns]="columns" [data]="data">
 				<ng-template #actions let-items="items">
 					<d-button-refresh class="mr-1" (click)="refresh()" text="Reload"></d-button-refresh>
 				</ng-template>

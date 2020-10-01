@@ -112,7 +112,7 @@
                 *ngIf="!data?.isRefreshing && dataResult?.columns?.length > 0 && dataResult?.data?.length > 0; else elseBlock">
 
                 <d-table *ngIf="view.viewType == eViewType.Table" [enableMultiSelect]="false" [enableResponsive]="false"
-                    [enableSaveCsv]="false" [enableFilter]="false" [columns]="dataResult.columns" [data]="dataRows">
+                    [enableSaveCsv]="false" [csvFileName]="item.controls.name.value + '.csv'" [enableFilter]="false" [columns]="dataResult.columns" [data]="dataRows">
                 </d-table>
 
                 <div class="h-100">

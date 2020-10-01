@@ -4,8 +4,9 @@
                 <div class="input-group">
                     <div *ngIf="!allowNameSelect" class="input-group-prepend">
                         <div class="input-group-text">
-                            {{inputParameterForm.value.runTime?.functionParameter?.name + 
-                                (type.dataType === eTypeCode.Unknown ? '' : ("(" + eTypeCode[type.dataType] + ")"))}} {{rank > 0 ? "[]" : ""}}
+                            <!-- {{inputParameterForm.value.runTime?.functionParameter?.name + 
+                                (type.dataType === eTypeCode.Unknown ? '' : ("(" + eTypeCode[type.dataType] + ")"))}} {{rank > 0 ? "[]" : ""}} -->
+                                {{inputs[i].name}}
                         </div>
                     </div>
 
@@ -29,6 +30,7 @@
 
                     <div *ngIf="inputParameterForm.value.runTime?.functionParameter?.isLabel" class="form-control p-0">
                         <form-input [border]="false" [(ngModel)]="inputs[i].staticValue" [ngModelOptions]="{standalone: true}"
+                            (ngModelChange)="updateStatic($event, i)"
                             type="text" placeholder="Enter a static value.">
                         </form-input>
                     </div>

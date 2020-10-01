@@ -123,7 +123,7 @@
 				<d-button-refresh (click)="refreshData()" text="Reload" [autoCompact]="false"></d-button-refresh>
 			</div>
 		
-			<d-table *ngIf="data" [enableMultiSelect]="false" [enableSaveCsv]="true" [columns]="columns" [data]="data">
+			<d-table *ngIf="data" [enableMultiSelect]="false" [enableSaveCsv]="true" csvFileName="formsService.currentForm?.controls.name.value + '.csv'" [columns]="columns" [data]="data">
 				<ng-template #actions let-items="items">
 					<d-button-refresh class="mr-1" (click)="refreshData()" text="Reload"></d-button-refresh>
 				</ng-template>

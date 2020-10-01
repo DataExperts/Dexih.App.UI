@@ -155,6 +155,11 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
             this.datalinkTransformForm = this.editDatalinkService.getDatalinkTransform(this.datalinkTransformKey);
           }
 
+          if (!this.datalinkTransformForm) {
+            this.authService.navigateUp();
+            return;
+          }
+
           this.variables = this.editDatalinkService.getVariables();
 
           this.useCustomFunction = this.datalinkTransformForm.controls.customFunctionKey ? true : false;
@@ -618,6 +623,7 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
     newParameter.rank = 0;
     newParameter.key = this.hubCache.getNextSequence();
     newParameter.datalinkColumn = null;
+    newParameter.value = param.defaultValue;
     newParameter.isValid = true;
     newParameter['runTime'] = {functionParameter: param};
 

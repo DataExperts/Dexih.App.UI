@@ -46,8 +46,6 @@ export class PreviewDataComponent implements OnInit, OnDestroy {
 
     public title: string;
 
-    public csvFileName: string;
-
     columns: Array<any>;
     public data: Array<any>;
 

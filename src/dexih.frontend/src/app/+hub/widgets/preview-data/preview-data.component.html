@@ -1,5 +1,5 @@
 
-<d-table [enableMultiSelect]="false" [enableSaveCsv]="true" [csvFileName]="csvFileName" [columns]="columns"
+<d-table [enableMultiSelect]="false" [enableSaveCsv]="true" [csvFileName]="title + '.csv'" [columns]="columns"
     [data]="data" [hideTable]="view !== 'table'">
 
     <ng-template #actions let-items="items">
