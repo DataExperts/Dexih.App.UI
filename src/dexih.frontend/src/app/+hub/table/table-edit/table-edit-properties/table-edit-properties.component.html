@@ -27,7 +27,7 @@
                     </form-checkbox>
                 </section>
 
-                <section *ngIf="formsService.currentForm.value.useLogical">
+                <section *ngIf="mainForm.value.useLogical">
                     <form-input label="Logical Name" formControlName="logicalName" placeholder="Enter the logical name." iconClass="fa fa-list"
                         [errors]="formsService.formErrors.logicalName" note="The logical name is a short term to represent the table">
                     </form-input>
@@ -52,7 +52,7 @@
                     </form-select>
                 </section>
 
-                <section *ngIf="formsService.currentForm.controls.tableType.value === eTableType.Query">
+                <section *ngIf="mainForm.controls.tableType.value === eTableType.Query">
                     <form-textarea label="Specify the sql query" rows="15" formControlName="queryString" [hideToggle]="true" placeholder="Sql Query"
                         [showPreview]="false">
                         <a *ngIf="runningSql == false" href="javascript:void(0)" (click)="test()"> (
