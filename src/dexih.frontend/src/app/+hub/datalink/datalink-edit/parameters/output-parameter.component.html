@@ -31,7 +31,7 @@
                     itemName="logicalName" [enableKeySelect]="false" [enableTextEntry]="true" [setTextEntryToValue]="false"
                     textEntryNote="Enter new column name, or select existing"
                     (valueChange)="updateNewColumn($event)"
-                    [errors]="errors.datalinkColumn">
+                    [errors]="errors.datalinkColumn"  [showErrorMessage]="false">
                 </form-select>
             </div>
 

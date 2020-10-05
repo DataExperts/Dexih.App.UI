@@ -23,7 +23,7 @@
                             (valueChange)="updateStatic($event, i)" [allowNullSelect]="true" selectNullMessage="Use Null" [allowBlankSelect]="true" blankSelectMessage="Use Blank"
                             [textEntryNote]="rank > 0 ? 'Select an array type source (otherwise select add to build an array)' : 'Select a column or enter a static value.'" 
                             [textEntryItems]="inputs[i].textItems" textEntryItemsTitle="Variables"
-                            [errors]="errors[i].datalinkColumn"
+                            [errors]="errors[i].datalinkColumn" [showErrorMessage]="false"
                             >
                         </form-select>
                     </div>

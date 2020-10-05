@@ -107,6 +107,12 @@ export class OutputParameterComponent implements OnInit, OnChanges, OnDestroy {
     fixDataType() {
         const column = this.outputParameterForm.controls.datalinkColumn.value;
         column.dataType = this.outputParameterForm.controls.dataType.value;
+        let format = this.outputParameterForm.controls.runTime?.value?.functionParameter?.defaultFormat;
+        if (format) {
+            column.format = format;
+        }
+        this.outputParameterForm.updateValueAndValidity();
+        this.errors = this.editDatalinkService.hubFormsService.getFormErrorMessages(this.outputParameterForm, true);
     }
 
     updateNewColumn(value: {textValue: string, item: any}) {
@@ -123,6 +129,7 @@ export class OutputParameterComponent implements OnInit, OnChanges, OnDestroy {
             this.newColumn.name = value.textValue;
             this.newColumn.logicalName = value.textValue;
             this.newColumn.rank = this.rank;
+            this.newColumn.format = this.outputParameterForm.controls.runTime?.value?.functionParameter?.defaultFormat;
             this.newColumn.columnGroup = 'mapping';
 
             this.outputParameterForm.controls.datalinkColumn.setValue(this.newColumn);

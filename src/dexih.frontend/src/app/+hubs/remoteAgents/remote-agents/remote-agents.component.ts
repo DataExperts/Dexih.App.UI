@@ -152,6 +152,15 @@ export class RemoteAgentsComponent implements OnInit, OnDestroy {
         this.router.navigate(['edit', item.remoteAgentKey], {relativeTo: this.route});
     }
 
+    updateAgent(item: DexihActiveAgent) {
+        if (item.autoUpgrade) {
+            this.hubService.addHubSuccessMessage(`A restart command has been sent to the remote agent ${item.name}.  The remote agent will be offline for a moment whilst the upgrade is completing.`)
+            this.restartAgents([item]);
+        } else {
+            this.authService.informationDialog('Auto update not available', 'The selected remote agent "AutoUpgrade" setting is set to false and cannot be upgrade remotely.');
+        }
+    }
+
     restartAgents(items) {
         let activeAgents = items.filter(c => c.activeAgent).map(c => c.activeAgent);
 

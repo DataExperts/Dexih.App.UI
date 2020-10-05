@@ -161,15 +161,15 @@ export class MappingItemComponent implements OnInit {
             if (p) {
                 if (p.rank === 0) {
                     let value = this.columnOrValue(p.dataType, p.datalinkColumn, p.value);
-                    return {name: this.describeParameterName(p), values: [value] };
+                    return {name: this.describeParameterName(param), values: [value] };
                 } else {
                     let values = p.arrayParameters.sort( (a, b) => a.position - b.position).map(ap => {
                         return this.columnOrValue(ap.dataType, ap.datalinkColumn, ap.value);
                     });
-                    return {name: this.describeParameterName(p), values: values};
+                    return {name: this.describeParameterName(param), values: values};
                 }
             } else {
-                return {name: this.describeParameterName(p), values: [{valid: false, error: 'Not Mapped', text: ''}]  };
+                return {name: this.describeParameterName(param), values: [{valid: false, error: 'Not Mapped', text: ''}]  };
             }
         });
 
@@ -186,12 +186,12 @@ export class MappingItemComponent implements OnInit {
                 }
                 if (p.rank === 0 || p.datalinkColumn !== null) {
                     let value = this.describeDatalinkColumn(p.dataType, p.datalinkColumn);
-                    return {name: this.describeParameterName(p), values: [value]};
+                    return {name: this.describeParameterName(param), values: [value]};
                 } else {
                     let values = p.arrayParameters.sort( (a, b) => a.position - b.position).map(ap => {
                         return this.describeDatalinkColumn(ap.dataType, ap.datalinkColumn);
                     });
-                    return {name: this.describeParameterName(p), values: values};
+                    return {name: this.describeParameterName(param), values: values};
                 }
             } else {
                 // return {name: param.name, values: [{valid: false, text: 'Not mapped'}]  };

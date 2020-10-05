@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container">
     <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-primary rounded">
         <div class="lh-100">
             <h3 class="mb-0 text-white lh-100">Data Experts Integration Hub</h3>
@@ -14,8 +14,8 @@
         <h5>To get started, either create a new hub, or request another user provide access.</h5>
     </div>
 
-    <div class="card-deck">
-        <div class="card mb-3" style="min-width: 18rem;">
+    <div class="d-none d-lg-flex card-deck">
+        <div class="card mb-3" >
             <div class="card-header text-white bg-success"><i class="fa fa-lg fa-fw fa-life-saver"></i>Hub Management</div>
             <div class="card-body">
                 <p class="card-text">Hub's contain your data processing rules.</p>
@@ -25,7 +25,7 @@
                 <d-button-new  class="ml-1" routerLink="hub-new" title="Create a new hub"></d-button-new>
             </div>
         </div>
-        <div class="card mb-3" style="min-width: 18rem;">
+        <div class="card mb-3" >
             <div class="card-header text-white bg-primary"><i class="fa fa-lg fa-fw fa-user"></i>Account Management</div>
             <div class="card-body">
                 <p class="card-text">Edit your account details, password, and login providers.</p>
@@ -34,7 +34,7 @@
                 <d-button class="ml-1" iconClass="fa fa-user" routerLink="manage">Account</d-button>
             </div>
         </div>
-        <div class="card mb-3" style="min-width: 18rem;">
+        <div class="card mb-3" >
             <div class="card-header text-white bg-warning"><i class="fa fa-lg fa-fw fa-wifi"></i>Remote Agents</div>
             <div class="card-body">
                 <p class="card-text">Remote agents connect to data and are used run and publish data.</p>
@@ -44,7 +44,7 @@
                 <d-button iconClass="fa fa-tasks" routerLink="tasks">Tasks</d-button>
             </div>
         </div>
-        <div class="card mb-3" style="min-width: 18rem;">
+        <div class="card mb-3" >
             <div class="card-header text-white bg-danger"><i class="fa fa-lg fa-fw fa-newspaper-o"></i>Shared Data</div>
             <div class="card-body">
                 <p class="card-text">View all datasets which have been shared.</p>
@@ -88,12 +88,12 @@
                 <div *ngIf="(view === eHubAccess.All || hub.hubAccess === view) && (!filterString || hub.name.toUpperCase().includes(filterString.toUpperCase()))" class="card">
                     <div>
                         <div class="card-header">
-                            <div class="d-flex flex-row p-0">
+                            <div class="d-md-flex p-0">
                                 <div>
                                     {{hub.name}}
                                     <div class="small">({{eHubAccess[hub.hubAccess]}})</div>
                                 </div>
-                                <div class="d-flex ml-auto">
+                                <div class="d-flex ml-md-auto">
                                     <d-button-open routerLink="/hub/{{hub.hubKey}}/summary"></d-button-open>
                                     <d-button-edit class="ml-1" routerLink="hub-edit/{{hub.hubKey}}">
                                     </d-button-edit>

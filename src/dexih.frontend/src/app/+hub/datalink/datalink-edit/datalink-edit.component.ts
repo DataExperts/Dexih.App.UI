@@ -276,7 +276,7 @@ export class DatalinkEditComponent implements OnInit, OnDestroy {
 
     refreshSource(sourceDatalinkTable: DexihDatalinkTable) {
         this.source = {
-            name: sourceDatalinkTable.name,
+            name: sourceDatalinkTable.name ?? eSourceType[sourceDatalinkTable.sourceType] ?? '(Undefined)',
             description: sourceDatalinkTable.description
         };
 

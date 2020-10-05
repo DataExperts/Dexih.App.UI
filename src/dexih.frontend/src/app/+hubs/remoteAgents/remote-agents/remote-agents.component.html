@@ -12,54 +12,56 @@
 			rowStatusHeading="Direct Data Connections"
 			(rowClick)="edit($event)"
 			>
-				<ng-template #selectedItemAction select="selectedItemAction" let-item="item">
-				</ng-template>
+			<ng-template #selectedItemAction select="selectedItemAction" let-item="item">
+				<d-button *ngIf="item.activeAgent?.upgradeAvailable" class="ml-1" iconClass="fa fa-level-up" buttonClass="btn btn-success" (click)="updateAgent([item])" text="Upgrade"></d-button>
+			</ng-template>
 
-				<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-				</ng-template>
+			<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+			</ng-template>
 
-				<ng-template #actions let-items="items">
-					<d-button-dropdown *ngIf="items && items.length >= 0" buttonClass="btn-primary" iconClass="fa fa-table"
-						[text]="items.length > 1 ? 'Agents' : 'Agent'">
-						<li><a class="dropdown-item" [routerLink]="['token-new']"
-								title="Create a new remote agent token."><i class="fa fa-file-o"></i> New Token</a></li>
-						<li><a class="dropdown-item" [routerLink]="['download']" title="Configure and download a new remote agent"><i
-									class="fa fa-download"></i> New Agent</a></li>
-						<ng-template [ngIf]="items.length == 1">
-							<li>
-								<a class="dropdown-item" [routerLink]="['edit', items[0].remoteAgentKey]"><i class="fa fa-edit"></i>
-									Edit</a>
-							</li>
-							<li>
-								<a class="dropdown-item" [routerLink]="['token-renew', items[0].remoteAgentKey]"><i
-										class="fa fa-refresh"></i> Refresh Token</a>
-							</li>
-						</ng-template>
-						<ng-template [ngIf]="items.length > 0">
-							<li><a class="dropdown-item" (click)="test(items)" title="Test the connectivity of the remote agents."><i
-										class="fa fa-thumbs-o-up"></i> Test</a></li>
-							<li><a class="dropdown-item" (click)="restartAgents(items)" title="Restart the selected agents"><i
-										class="fa fa-refresh"></i> Restart</a></li>
-							<li><a class="dropdown-item" (click)="removeUserTokens(items)" title="Revoke the selected tokens"><span
-										class="text-danger"><i class="fa fa-ban"></i> Revoke Tokens</span></a></li>
-				
-						</ng-template>
-					</d-button-dropdown>
-				
-					<d-button-refresh class="ml-1" (click)="refresh()" text="Refresh Agents" title="Refresh the active agents">
-					</d-button-refresh>
-				</ng-template>
+			<ng-template #actions let-items="items">
+				<d-button-dropdown *ngIf="items && items.length >= 0" buttonClass="btn-primary" iconClass="fa fa-table"
+					[text]="items.length > 1 ? 'Agents' : 'Agent'">
+					<li><a class="dropdown-item" [routerLink]="['token-new']"
+							title="Create a new remote agent token."><i class="fa fa-file-o"></i> New Token</a></li>
+					<li><a class="dropdown-item" [routerLink]="['download']" title="Configure and download a new remote agent"><i
+								class="fa fa-download"></i> New Agent</a></li>
+					<ng-template [ngIf]="items.length == 1">
+						<li>
+							<a class="dropdown-item" [routerLink]="['edit', items[0].remoteAgentKey]"><i class="fa fa-edit"></i>
+								Edit</a>
+						</li>
+						<li>
+							<a class="dropdown-item" [routerLink]="['token-renew', items[0].remoteAgentKey]"><i
+									class="fa fa-refresh"></i> Refresh Token</a>
+						</li>
+					</ng-template>
+					<ng-template [ngIf]="items.length > 0">
+						<li><a class="dropdown-item" (click)="test(items)" title="Test the connectivity of the remote agents."><i
+									class="fa fa-thumbs-o-up"></i> Test</a></li>
+						<li><a class="dropdown-item" (click)="restartAgents(items)" title="Restart the selected agents"><i
+									class="fa fa-refresh"></i> Restart</a></li>
+						<li><a class="dropdown-item" (click)="removeUserTokens(items)" title="Revoke the selected tokens"><span
+									class="text-danger"><i class="fa fa-ban"></i> Revoke Tokens</span></a></li>
+					</ng-template>
+				</d-button-dropdown>
+			
+				<d-button-refresh class="ml-1" (click)="refresh()" text="Refresh Agents" title="Refresh the active agents">
+				</d-button-refresh>
+			</ng-template>
 
-				<ng-template #rowStatus select="rowStatus" let-item="item">
-						<button *ngIf="item.downloadUrls?.length > 0" class="btn btn-primary btn-sm" (click)="test([item])">test</button>
-						<div class="list-group mt-1">
-								<div class="list-group-item" *ngFor="let url of item.downloadUrls">
-									{{eDownloadUrlType[url.downloadUrlType]}}: <a [href]="url.url + '/ping'" target="_blank">Open</a>
-									<button *ngIf="url.testStatus == 'error'" class="btn btn-danger btn-sm float-right" [title]="url.testMessage">Failed</button>
-									<button *ngIf="url.testStatus == 'success'" class="btn btn-success btn-sm float-right" [title]="url.testMessage">Success</button>
-								</div>
-							</div>	
-				</ng-template>
+			<ng-template #rowStatus select="rowStatus" let-item="item">
+				<button *ngIf="item.downloadUrls?.length > 0" class="btn btn-primary btn-sm" (click)="test([item])">test</button>
+				<div class="list-group mt-1">
+					<div class="list-group-item" *ngFor="let url of item.downloadUrls">
+						{{eDownloadUrlType[url.downloadUrlType]}}: <a [href]="url.url + '/ping'" target="_blank">Open</a>
+						<button *ngIf="url.testStatus == 'error'" class="btn btn-danger btn-sm float-right"
+							[title]="url.testMessage">Failed</button>
+						<button *ngIf="url.testStatus == 'success'" class="btn btn-success btn-sm float-right"
+							[title]="url.testMessage">Success</button>
+					</div>
+				</div>
+			</ng-template>
 		</d-table>
 	</d-widget>
 	

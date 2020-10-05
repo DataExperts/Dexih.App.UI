@@ -22,7 +22,7 @@ export class AnimateConfig {
    }
    
    export class ApplicationUser {
-    public id: string = '81ac0891-5c40-4e4f-bf31-b9f5065774de';
+    public id: string = 'aa0e4ff4-4b26-404a-b1cf-0b0e896532b7';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -31,7 +31,7 @@ export class AnimateConfig {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = '44c51c2c-e943-4470-b017-f4171223df9f';
+    public securityStamp: string = '59c7e07c-2ca6-443d-b1b5-f295bb0fe4b1';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -210,6 +210,7 @@ export class AnimateConfig {
     public latestVersion: string = null;
     public latestDownloadUrl: string = null;
     public namingStandards: string[] = [];
+    public autoUpgrade: boolean = false;
    }
    
    export class DexihApi {
@@ -1310,6 +1311,7 @@ export class AnimateConfig {
     public listOfValues: string[] = [];
     public defaultValue: string = null;
     public isPassword: boolean = false;
+    public defaultFormat: string = null;
    }
    
    export class FunctionReference {
