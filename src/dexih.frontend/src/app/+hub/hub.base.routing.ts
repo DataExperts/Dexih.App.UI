@@ -85,8 +85,8 @@ const connectionRoutes: Routes = [
         { path: 'datalink-new/:sourceTableKeys/:targetConnectionKey',
         component: DatalinkNewComponent, data: { action: 'new', pageTitle: 'New Datalink' } },
     ]},
-    { path: 'connection-new/:purpose', component: ConnectionEditComponent, data: {action: 'new', pageTitle: 'New Connection' }},
-    { path: 'connection-copy/:connectionKey', component: ConnectionEditComponent, data: {action: 'copy', pageTitle: 'New Connection' }}
+    { path: 'connection-new/:purpose', component: ConnectionEditComponent, canDeactivate: [ItemEditGuard], data: {action: 'new', pageTitle: 'New Connection' }},
+    { path: 'connection-copy/:connectionKey', component: ConnectionEditComponent, canDeactivate: [ItemEditGuard], data: {action: 'copy', pageTitle: 'New Connection' }}
 ];
 
 const connectionsRoute: Route =  { path: 'connections', data: {pageTitle: 'Connections' }, children: (<Routes>[
@@ -142,7 +142,7 @@ const sharedDataRoute: Route = { path: 'sharedData', data: { pageTitle: 'Shared 
 const customFunctionRoutes: Routes = [
     { path: 'customFunction-edit/:customFunctionKey', component: CustomFunctionEditComponent, canDeactivate: [ItemEditGuard],
         data: { action: 'edit', pageTitle: 'Edit Custom Function'}},
-    { path: 'customFunction-new', component: CustomFunctionEditComponent, data: { action: 'new', pageTitle: 'New Custom Function'}},
+    { path: 'customFunction-new', component: CustomFunctionEditComponent, canDeactivate: [ItemEditGuard], data: { action: 'new', pageTitle: 'New Custom Function'}},
 ];
 
 const customFunctionRoute: Route = { path: 'customFunctions', data: { pageTitle: 'Custom Functions' }, children: (<Routes>[
@@ -154,7 +154,7 @@ const customFunctionRoute: Route = { path: 'customFunctions', data: { pageTitle:
 const columnValidationRoutes: Routes = [
     { path: 'columnValidation-edit/:validationKey', component: ColumnValidationEditComponent, canDeactivate: [ItemEditGuard],
         data: { action: 'edit', pageTitle: 'Edit Validation'}},
-    { path: 'columnValidation-new', component: ColumnValidationEditComponent, data: { action: 'new', pageTitle: 'New Validation'}},
+    { path: 'columnValidation-new', component: ColumnValidationEditComponent, canDeactivate: [ItemEditGuard], data: { action: 'new', pageTitle: 'New Validation'}},
 ];
 
 const columnValidationsRoute: Route = { path: 'columnValidations', data: { pageTitle: 'Column Validations' }, children: (<Routes>[
@@ -166,7 +166,7 @@ const columnValidationsRoute: Route = { path: 'columnValidations', data: { pageT
 const fileFormatRoutes: Routes = [
     { path: 'fileFormat-edit/:fileFormatKey', component: FileFormatEditComponent, canDeactivate: [ItemEditGuard],
         data: { action: 'edit', pageTitle: 'Edit FileFormat'}},
-    { path: 'fileFormat-new', component: FileFormatEditComponent, data: { action: 'new', pageTitle: 'New FileFormat'}},
+    { path: 'fileFormat-new', component: FileFormatEditComponent, canDeactivate: [ItemEditGuard], data: { action: 'new', pageTitle: 'New FileFormat'}},
 ];
 
 const fileFormatsRoute: Route = { path: 'fileFormats', data: { pageTitle: 'File Formats' }, children: (<Routes>[
@@ -178,7 +178,7 @@ const fileFormatsRoute: Route = { path: 'fileFormats', data: { pageTitle: 'File 
 const viewRoutes: Routes = [
     { path: 'view-edit/:viewKey', component: ViewEditComponent, canDeactivate: [ItemEditGuard],
         data: { action: 'edit', pageTitle: 'Edit View'}},
-    { path: 'view-new', component: ViewEditComponent, data: { action: 'new', pageTitle: 'New View'}},
+    { path: 'view-new', component: ViewEditComponent, canDeactivate: [ItemEditGuard], data: { action: 'new', pageTitle: 'New View'}},
 ];
 
 const viewRoute: Route = { path: 'views', data: { pageTitle: 'Views' }, children: (<Routes>[
@@ -203,7 +203,7 @@ const dashboardRoute: Route = { path: 'dashboards', data: { pageTitle: 'Dashboar
 const lovRoutes: Routes = [
     { path: 'listOfValues-edit/:listOfValuesKey', component: ListOfValuesEditComponent, canDeactivate: [ItemEditGuard],
         data: { action: 'edit', pageTitle: 'Edit List Of Values'}},
-    { path: 'listOfValues-new', component: ListOfValuesEditComponent, data: { action: 'new', pageTitle: 'New List of Values'}},
+    { path: 'listOfValues-new', component: ListOfValuesEditComponent, canDeactivate: [ItemEditGuard], data: { action: 'new', pageTitle: 'New List of Values'}},
 ];
 
 const lovRoute: Route = { path: 'listOfValues', data: { pageTitle: 'List of Values' }, children: (<Routes>[
@@ -215,7 +215,7 @@ const lovRoute: Route = { path: 'listOfValues', data: { pageTitle: 'List of Valu
 const apiRoutes: Routes = [
     { path: 'api-edit/:apiKey', component: ApiEditComponent, canDeactivate: [ItemEditGuard],
         data: { action: 'edit', pageTitle: 'Edit Api'}},
-    { path: 'api-new', component: ApiEditComponent, data: { action: 'new', pageTitle: 'New Api'}},
+    { path: 'api-new', component: ApiEditComponent, canDeactivate: [ItemEditGuard], data: { action: 'new', pageTitle: 'New Api'}},
 ];
 
 const apiRoute: Route = { path: 'apis', data: { pageTitle: 'Apis' }, children: (<Routes>[

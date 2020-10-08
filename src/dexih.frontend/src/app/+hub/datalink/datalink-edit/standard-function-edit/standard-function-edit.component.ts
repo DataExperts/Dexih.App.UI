@@ -321,7 +321,9 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
         this.authService.confirmDialog('The function has changed',
           'The function has changed.  Do you want to apply the changes and continue?')
           .then((confirm) => {
-              this.apply();
+              if(confirm) {
+                this.apply();
+              }
               resolve(confirm);
             }).catch(() => {
               resolve(false);

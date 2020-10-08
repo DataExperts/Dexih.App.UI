@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { HubCache, eCacheStatus, ConnectionTables } from '../../hub.models';
 import { HubService } from '../../hub.service';
@@ -235,6 +235,30 @@ export class ListOfValuesEditComponent implements OnInit, OnDestroy {
 
   close() {
     this.authService.navigateUp();
+  }
+
+  canDeactivate(): Promise<boolean> {
+    return new Promise<boolean>(resolve => {
+      if (this.formsService.currentForm && !this.formsService.currentForm.pristine) {
+        this.authService.confirmDialog('List of Values has changed',
+        'The list of values has changed.  Would you like to discard the changes and return to the previous screen?'
+        ).then(confirm => {
+          resolve(confirm);
+        }).catch(reason => {
+          resolve(false);
+        });
+      } else {
+        resolve(true);
+      }
+    });
+  }
+
+  // @HostListener allows is to guard against browser refresh, close, etc.
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any) {
+    if (this.formsService.hasChanged) {
+      $event.returnValue = 'The list of values changes have not been saved.  Do you want to discard the changes and exit?';
+    }
   }
 
 }

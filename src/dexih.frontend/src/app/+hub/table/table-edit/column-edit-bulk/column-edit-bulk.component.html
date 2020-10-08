@@ -41,7 +41,7 @@
     </div>
     <div *ngIf="property=='format'" >
         <section class="form-group col-md-6">
-            <form-select label="Format" formControlName="format" [items]="formats" [enableTextEntryMatch]="false" [enableTextEntry]="true"
+            <form-select label="Format" formControlName="format" [items]="formats" [enableTextEntryMatch]="false" [enableTextEntry]="true"  [allowNullSelect]="true" selectNullMessage="No Format"
                 itemKey="value" itemName="name" note="The display format of the column.">
             </form-select>
         </section>

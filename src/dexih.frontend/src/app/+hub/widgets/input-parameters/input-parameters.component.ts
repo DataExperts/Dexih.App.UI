@@ -124,7 +124,8 @@ export class InputParametersComponent implements OnInit, OnChanges, OnDestroy {
         this.requiresRefresh = true;
         if (parameterForm.controls.listOfValuesKey.value > 0) {
             if (parameterForm.controls.rank.value === 0) {
-                parameterForm.controls.valueDesc.setValue($event);
+                let desc = parameterForm.controls.runTime?.value?.items?.find(c => c.key === $event);
+                parameterForm.controls.valueDesc.setValue(desc.name);
             } else {
                 parameterForm.controls.valueDesc.setValue(null);
             }

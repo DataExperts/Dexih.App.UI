@@ -132,7 +132,8 @@ export class OutputParameterComponent implements OnInit, OnChanges, OnDestroy {
             this.newColumn.format = this.outputParameterForm.controls.runTime?.value?.functionParameter?.defaultFormat;
             this.newColumn.columnGroup = 'mapping';
 
-            this.outputParameterForm.controls.datalinkColumn.setValue(this.newColumn);
+            // emitModelToViewChange stops the event propagating to the control and causing it to revert to null.
+            this.outputParameterForm.controls.datalinkColumn.setValue(this.newColumn, { emitModelToViewChange: false });
             this.outputParameterForm.markAsDirty();
             this.newColumnUpdating = false;
             this.updateItems();

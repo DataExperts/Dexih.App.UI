@@ -10,7 +10,7 @@
 </div>
 
 <ng-template #animate>
-    <div  *ngIf="showEdit" class="d-flex flex-wrap">
+    <div  *ngIf="showEdit" class="d-flex flex-wrap container">
         <div class="flex-fill">
             <form-select [(ngModel)]="animateConfig.seriesColumn" labelLeft="Series" [allowNullSelect]="true" selectNullMessage="Turn off animation"
                 [items]="columns" itemKey="title" itemName="title" (ngModelChange)="seriesChanged()">

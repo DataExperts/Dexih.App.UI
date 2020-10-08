@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, HostListener } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { HubCache, eCacheStatus} from '../../hub.models';
 import { HubService } from '../../hub.service';
@@ -336,6 +336,14 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
 
   close() {
     this.authService.navigateUp();
+  }
+
+  // @HostListener allows is to guard against browser refresh, close, etc.
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any) {
+    if (this.formsService.hasChanged) {
+      $event.returnValue = 'The custom function changes have not been saved.  Do you want to discard the changes and exit?';
+    }
   }
 
 }

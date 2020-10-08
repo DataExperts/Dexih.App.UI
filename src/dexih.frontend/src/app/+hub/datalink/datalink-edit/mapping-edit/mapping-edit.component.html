@@ -6,7 +6,7 @@
 				(click)="!newDatalinkTransformItemForm.pristine && applyExit()" class="mr-1"></d-button-apply>
 			<d-button-cancel (click)="cancel()"></d-button-cancel>
 		</ng-template>
-		<form [formGroup]="newDatalinkTransformItemForm">
+		<form [formGroup]="newDatalinkTransformItemForm" class="container">
 			<fieldset>
 				<div class="form-row">
 					<section *ngIf="transformItemType == eTransformItemType.AggregatePair" class="form-group col-md-4">

@@ -1,4 +1,4 @@
-<div *ngIf="selectQuery">
+<div *ngIf="selectQuery" class="container">
     <div class="d-flex flex-wrap" *ngIf="selectColumns || sortColumns">
         <div class="flex-fill" *ngIf="selectColumns">
             <form-tags-dropdown floatingLabel="Display Columns" [(ngModel)]="selectQuery.columns" (ngModelChange)="onChanged()" [items]="selectColumns"

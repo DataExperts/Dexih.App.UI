@@ -1,4 +1,5 @@
 <d-widget-section *ngIf="columns && showEdit" title="Chart Properties" [showExpandButton]="true">
+    <div class="container">
     <div class="d-flex flex-wrap">
         <div class="flex-fill">
             <form-select [(ngModel)]="config.chartType" (ngModelChange)="updateChart($event)" labelLeft="Chart"
@@ -241,7 +242,7 @@
             </div>
         </ng-template>
     </div>
-
+    </div>
 </d-widget-section>
 
 <d-widget-section [title]="title" [showExpandButton]="true" [padding]="false">

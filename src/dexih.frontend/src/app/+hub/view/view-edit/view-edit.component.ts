@@ -180,6 +180,7 @@ export class ViewEditComponent implements OnInit, OnDestroy {
       this.formsService.view(view);
       this.watchChanges();
       this.showEdit = true;
+      this.hasEdited = true;
 
       // update the url with the saved key
       this._formChangeSubscription = this.formsService.getCurrentFormObservable().subscribe(form => {

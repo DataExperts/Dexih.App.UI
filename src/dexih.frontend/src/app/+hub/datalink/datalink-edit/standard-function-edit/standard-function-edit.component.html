@@ -7,7 +7,7 @@
 			<d-button-cancel (click)="cancel()"></d-button-cancel>
 		</ng-template>
 
-		<form *ngIf="datalinkTransformForm" [formGroup]="newDatalinkTransformItemForm">
+		<form *ngIf="datalinkTransformForm" [formGroup]="newDatalinkTransformItemForm" class="container">
 			<fieldset>
 
 				<section *ngIf="hubCache?.hub.dexihCustomFunctions.length > 0">

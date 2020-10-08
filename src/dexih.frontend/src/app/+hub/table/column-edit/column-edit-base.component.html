@@ -75,7 +75,7 @@
             <div class="form-row">
                 <section class="form-group col-md-4">
                     <form-select label="Format" formControlName="format" [errors]="columnFormService.formErrors.format" [items]="formatItems"
-                        itemKey="value" itemName="name" [enableTextEntry]="true" [enableTextEntryMatch]="false"
+                        itemKey="value" itemName="name" [enableTextEntry]="true" [enableTextEntryMatch]="false" [allowNullSelect]="true" selectNullMessage="No Format"
                         note="How to format the column when displayed.">
                     </form-select>                
                 </section>

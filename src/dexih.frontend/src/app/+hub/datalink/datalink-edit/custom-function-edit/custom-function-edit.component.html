@@ -9,7 +9,7 @@
 			<d-button-cancel (click)="cancel()"></d-button-cancel>
 		</ng-template>
 
-		<form *ngIf="newDatalinkTransformItemForm" [formGroup]="newDatalinkTransformItemForm">
+		<form *ngIf="newDatalinkTransformItemForm" [formGroup]="newDatalinkTransformItemForm" class="container">
 			<fieldset>
 				<div class="form-row">
 					<section *ngIf="functionType != eFunctionType.Validate && functionType != eFunctionType.Condition"
@@ -96,7 +96,7 @@
 			<button class="btn btn-success" (click)="downloadCode(inputParameterValues)">Download Code</button>
 		</ng-template>
 
-		<form>
+		<form class="container">
 			<div class="label">
 				Input Parameters
 			</div>
