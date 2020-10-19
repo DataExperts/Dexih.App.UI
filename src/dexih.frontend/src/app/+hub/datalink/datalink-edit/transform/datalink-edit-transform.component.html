@@ -24,6 +24,25 @@
                 </form-select>
             </section>
 
+            <div class="form-row" *ngIf="datalinkTransformForm.value.transformType === eTransformType.Aggregate || 
+                datalinkTransformForm.value.transformType === eTransformType.Group || 
+                datalinkTransformForm.value.transformType === eTransformType.Rows || 
+                datalinkTransformForm.value.transformType === eTransformType.Series || 
+                datalinkTransformForm.value.transformType === eTransformType.Sort ||
+                datalinkTransformForm.value.transformType === eTransformType.Join ||
+                datalinkTransformForm.value.transformType === eTransformType.Lookup">
+                <section class="form-group col-md-6">
+                    <form-checkbox label="Pre-Cache Data to Sql Database" formControlName="dataCache">
+                    </form-checkbox>
+                </section>
+                <section *ngIf="datalinkTransformForm.controls.dataCache.value" class="form-group col-md-6">
+                    <form-select label="Data Cache Connection" formControlName="dataCacheConnectionKey" [items]="this.managedConnections"
+                    itemKey="key" itemName="name" iconClass="fa fa-database" 
+                    note='Specify a Sql connection data can be cached to before processing the transform.  This can be used to improve memory usage and performance in some scenarios.'>
+                </form-select>
+                </section>
+            </div>
+
             <div class="form-row">
                 <section class="form-group col-md-6">
                     <form-input type="number" formControlName="maxInputRows" label="Maximum number of rows to input into the transform (0 = unlimited)"></form-input>

@@ -672,6 +672,7 @@ export class HubCache {
         });
 
         datalink.dexihDatalinkTransforms.forEach(t => {
+            this.cacheAddConnection(t.dataCacheConnectionKey, hub);
             if (t.joinDatalinkTable) {
                 if (t.joinDatalinkTable.sourceType === eSourceType.Datalink) {
                     this.cacheAddDatalink(t.joinDatalinkTable.sourceDatalinkKey, hub);

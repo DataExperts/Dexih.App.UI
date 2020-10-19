@@ -22,7 +22,7 @@ import { eImportAction, Import, DexihConnection, DexihTable, DexihTableColumn, e
    DexihDatalinkTransform, DexihDatalinkTransformItem, DexihFunctionParameter, DexihFunctionArrayParameter,
    DexihDatalinkProfile, DexihDatalinkTarget, DexihDatalinkTable,
    eSourceType, eSharedObjectType, DexihListOfValues, InputParameterBase,
-   eDataObjectType, ListOfValuesItem, eTransformItemType, DexihTag } from '../shared/shared.models';
+   eDataObjectType, ListOfValuesItem, eTransformItemType, DexihTag, DexihTableIndex, DexihTableIndexColumn } from '../shared/shared.models';
 import { debounceTime, delay, first } from 'rxjs/operators';
 
 @Injectable()
@@ -677,7 +677,32 @@ export class HubFormsService implements OnDestroy {
     this.startForm(tableForm);
   }
 
+  public tableIndex(table: DexihTable, index: DexihTableIndex): FormGroup {
+    return this.fb.group({
+      'name': [index.name, [
+        Validators.required,
+        Validators.maxLength(250),
+        this.duplicateIndexNameValidator(table.dexihTableIndexes)
+      ]],
+        'columns': this.fb.array(
+          index.columns.map(ic => {
+            return this.tableIndexColumn(ic);
+          })
+        )
+    });
+  }
+
+  public tableIndexColumn(ic: DexihTableIndexColumn): FormGroup {
+      return this.fb.group({
+        'columnKey': [ic.columnKey, []],
+        'direction': [ic.direction, []],
+      });
+  }
+
   public tableForm(table: DexihTable): FormGroup {
+
+    const indexes = table.dexihTableIndexes.filter(c => c.isValid).map(index => this.tableIndex(table, index));
+
     const tableForm = this.fb.group({
       'name': [table.name, [
         Validators.required,
@@ -694,6 +719,7 @@ export class HubFormsService implements OnDestroy {
       'useLogical': [this.hubCache.defaultTableLogicalName(table.schema, table.name) !== table.logicalName, [
       ]],
       'dexihTableColumns': this.fb.array([]),
+      'dexihTableIndexes': this.fb.array(indexes),
     }, { validator: this.requiredTableFields() }
     );
 
@@ -721,6 +747,20 @@ export class HubFormsService implements OnDestroy {
     this.addMissing(table, tableForm, new DexihTable());
 
     return tableForm;
+  }
+
+  private duplicateIndexNameValidator(indexes: DexihTableIndex[]): ValidatorFn {
+    // validate no matching tables names in the same connection.
+    return (control: AbstractControl): { [key: string]: any } => {
+      if (this.currentForm) {
+        const name = control.value;
+
+        const no = indexes
+        .find(c => c.key !== this.currentForm.controls.key.value &&
+            c.isValid && this.stringCompare(c.name, name));
+          return no ? { 'duplicateName': { name } } : null;
+      }
+    };
   }
 
   private duplicateTableNameValidator(): ValidatorFn {

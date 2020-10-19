@@ -10,7 +10,7 @@ import { LogFactory, eLogLevel } from '../../../../../logging';
 import { InputOutputColumns } from '../../../hub.lineage.models';
 import { eTransformType, eTransformItemType, DexihDatalinkColumn, DexihDatalinkTransform,
     eTypeCode, DexihDatalinkTransformItem, eAggregate, eSortDirection, eJoinNotFoundStrategyItems,
-    eDuplicateStrategyItems, eSeriesGrain, eJoinStrategyItems, eTransformTypeItems } from '../../../../shared/shared.models';
+    eDuplicateStrategyItems, eSeriesGrain, eJoinStrategyItems, eTransformTypeItems, DexihConnection } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -46,6 +46,8 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
     eSeriesGrain = eSeriesGrain;
     seriesGrains = seriesGrains;
 
+    public managedConnections: DexihConnection[];
+
     public allowNode = false;
     public nodeName = '';
     public nodeType: eTransformItemType;
@@ -68,17 +70,23 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
         this.logger.LogC(() => `OnInit`, eLogLevel.Trace);
 
         try {
-            this._subscription = combineLatest(
+            this._subscription = combineLatest([
                 this.route.data,
                 this.route.params,
                 this.editDatalinkService.hubFormsService.getCurrentFormObservable(),
+                this.hubService.getHubCacheObservable()]
             ).subscribe(result => {
 
                 this.action = result[0]['action'];
                 this.pageTitle = result[0]['pageTitle'];
                 this.datalinkTransformKey = + result[1]['datalinkTransformKey'];
                 this.datalinkForm = result[2];
+                let hubCache = result[3];
 
+                if (hubCache.isLoaded) {
+                    this.managedConnections = hubCache.getManagedConnections();
+                }
+                
                 if (this.datalinkForm) {
 
                     let transformsArray = <FormArray>this.datalinkForm.controls.dexihDatalinkTransforms;

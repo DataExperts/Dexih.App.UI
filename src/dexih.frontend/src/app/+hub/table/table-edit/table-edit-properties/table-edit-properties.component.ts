@@ -6,7 +6,7 @@ import { FormGroup, FormArray } from '@angular/forms';
 import { HubFormsService } from '../../../hub.forms.service';
 import { HubCache, deltaTypes, securityFlags } from '../../../hub.models';
 import { eTableType, DexihConnection, ConnectionReference,
-    eConnectionCategory, DexihTableColumn, eConnectionPurpose, DexihTable, eTableTypeItems } from '../../../../shared/shared.models';
+    eConnectionCategory, DexihTableColumn, eConnectionPurpose, DexihTable, eTableTypeItems, eSortDirection, eSortDirectionItems, DexihTableIndex, DexihTableIndexColumn } from '../../../../shared/shared.models';
 import { TypeCodes } from '../../../hub.remote.models';
 import { CancelToken, Message } from '../../../../+auth/auth.models';
 
@@ -41,6 +41,7 @@ export class TableEditPropertiesComponent implements OnInit, OnDestroy {
     securityFlags = securityFlags;
     eTableType = eTableType;
     eTableTypeItems = eTableTypeItems;
+    eSortDirectionItems = eSortDirectionItems;
 
     public sqlMessage: Message;
 
@@ -52,6 +53,7 @@ export class TableEditPropertiesComponent implements OnInit, OnDestroy {
     inputColumns: Array<DexihTableColumn>;
 
     eConnectionPurpose = eConnectionPurpose;
+    sortColumns: any[];
 
     public runningSql = false;
 
@@ -90,7 +92,6 @@ export class TableEditPropertiesComponent implements OnInit, OnDestroy {
                         this.connectionReference = await this.hubService.GetConnectionReference(this.connection);
                     });
                 }
-
             });
         } catch (e) {
             this.hubService.addHubClientErrorMessage(e, 'Table edit properties');
@@ -132,4 +133,31 @@ export class TableEditPropertiesComponent implements OnInit, OnDestroy {
             this.hubService.addHubMessage(reason);
         });
     }
+
+    addIndex(i: number) {
+        const index = new DexihTableIndex();
+        index.columns.push(new DexihTableIndexColumn());
+
+        const table = <DexihTable> this.mainForm.value;
+        const control = this.formsService.tableIndex(table, index);
+        const indexes = <FormArray> this.mainForm.controls.dexihTableIndexes;
+        indexes.insert(i, control);
+    }
+
+    removeIndex(i: number) {
+        const indexes = <FormArray> this.mainForm.controls.dexihTableIndexes;
+        indexes.removeAt(i);
+    }
+
+    addColumn(index: FormGroup, j: number) {
+        const control = this.formsService.tableIndexColumn(new DexihTableIndexColumn());
+        const columns = <FormArray> index.controls.columns;
+        columns.insert(j, control);
+    }
+
+    removeColumn(index: FormGroup, j: number) {
+        const columns = <FormArray> index.controls.columns;
+        columns.removeAt(j);
+    }
+
 }

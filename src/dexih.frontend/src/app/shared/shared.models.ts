@@ -22,7 +22,7 @@ export class AnimateConfig {
    }
    
    export class ApplicationUser {
-    public id: string = 'aa0e4ff4-4b26-404a-b1cf-0b0e896532b7';
+    public id: string = '04e6f62b-b744-417c-a622-434a3cad0aae';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -31,7 +31,7 @@ export class AnimateConfig {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = '59c7e07c-2ca6-443d-b1b5-f295bb0fe4b1';
+    public securityStamp: string = '6a4fb737-f3a4-4854-aa06-c4be4a1de969';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -737,6 +737,8 @@ export class AnimateConfig {
     public nodeDatalinkColumn: DexihDatalinkColumn = null;
     public maxInputRows: number = 0;
     public maxOutputRows: number = 0;
+    public dataCache: boolean = false;
+    public dataCacheConnectionKey: number = 0;
     public name: string = null;
     public description: string = null;
     public key: number = 0;
@@ -1089,6 +1091,7 @@ export class AnimateConfig {
     public entityStatus: EntityStatus = new EntityStatus();
     public fileSample: string = null;
     public dexihTableColumns: DexihTableColumn[] = [];
+    public dexihTableIndexes: DexihTableIndex[] = [];
     public name: string = null;
     public description: string = null;
     public key: number = 0;
@@ -1123,6 +1126,29 @@ export class AnimateConfig {
     public securityFlag: eSecurityFlag = eSecurityFlag.None;
     public name: string = null;
     public description: string = null;
+    public key: number = 0;
+    public hubKey: number = 0;
+    public createDate: Date = null;
+    public updateDate: Date = null;
+    public isValid: boolean = true;
+   }
+   
+   export class DexihTableIndex {
+    public tableKey: number = 0;
+    public columns: DexihTableIndexColumn[] = [];
+    public name: string = null;
+    public description: string = null;
+    public key: number = 0;
+    public hubKey: number = 0;
+    public createDate: Date = null;
+    public updateDate: Date = null;
+    public isValid: boolean = true;
+   }
+   
+   export class DexihTableIndexColumn {
+    public tableIndexKey: number = null;
+    public columnKey: number = 0;
+    public direction: eSortDirection = eSortDirection.Ascending;
     public key: number = 0;
     public hubKey: number = 0;
     public createDate: Date = null;
@@ -1294,6 +1320,7 @@ export class AnimateConfig {
     public outputSortFields: Sort[] = [];
     public columns: TableColumn[] = [];
     public maxImportLevels: number = 10;
+    public indexes: TableIndex[] = [];
    }
    
    export class FunctionParameter {
@@ -1694,6 +1721,7 @@ export class AnimateConfig {
     public namingStandards: string[] = [];
     public plugins: PluginsSection = new PluginsSection();
     public alerts: any = null;
+    public cache: any = null;
    }
    
    export class RenewSslCertificateModel {
@@ -1798,6 +1826,7 @@ export class AnimateConfig {
     public outputSortFields: Sort[] = [];
     public columns: TableColumn[] = [];
     public maxImportLevels: number = 10;
+    public indexes: TableIndex[] = [];
    }
    
    export class TableColumn {
@@ -1826,6 +1855,16 @@ export class AnimateConfig {
    }
    
    export class TableColumns {
+   }
+   
+   export class TableIndex {
+    public name: string = null;
+    public columns: TableIndexColumn[] = [];
+   }
+   
+   export class TableIndexColumn {
+    public columnName: string = null;
+    public direction: eSortDirection = eSortDirection.Ascending;
    }
    
    export class TransformAttribute {
@@ -1980,6 +2019,7 @@ export class AnimateConfig {
     public outputSortFields: Sort[] = [];
     public columns: TableColumn[] = [];
     public maxImportLevels: number = 10;
+    public indexes: TableIndex[] = [];
    }
    
    // auto generated enums

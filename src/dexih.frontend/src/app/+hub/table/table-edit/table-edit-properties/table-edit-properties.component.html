@@ -79,8 +79,41 @@
             </fieldset>
         </form>
 </d-widget-section>
+ 
+<d-widget-section title='Indexes' [showExpandButton]="true" [isExpanded]="false" *ngIf="mainForm">
+    <div class="container form-row w-100 mb-3" *ngFor="let index of mainForm.controls.dexihTableIndexes.controls; let i = index;">
+        <form [formGroup]="index" class="form-row w-100">
+            <div class="input-group">
+                <form-input labelLeft="Name" formControlName="name" placeholder="Index Name" iconClass="fa fa-list" ></form-input>
+                <div class="p-3">
+                    <form *ngFor="let column of index.controls.columns.controls; let j = index" class="input-group" [formGroup]="column">
+                        <div class="form-control p-0">
+                            <form-select labelLeft="Column" [border]="false" formControlName="columnKey" [items]="mainForm.controls.dexihTableColumns.value" itemKey="key" itemName="name" ></form-select>
+                        </div>
+                        <div class="form-control p-0">
+                            <form-select labelLeft="Direction" [border]="false" formControlName="direction" [items]="eSortDirectionItems" itemKey="key" itemName="name"></form-select>
+                        </div>
+                        <div class="input-group-append flex-shrink-1">
+                            <button class="btn btn-light" type="button" (click)="addColumn(index, j)" value="Add">
+                                <i class="fa fa-plus-square-o"></i>
+                            </button>
+                            <button class="btn btn-light" type="button" (click)="removeColumn(index, j)" value="Remove">
+                                <i class="fa fa-minus-square-o"></i>
+                            </button>
+                        </div>
+                    </form>
+                    <div class="input-group-append flex-shrink-1 ml-1 ">
+                        <d-button iconClass="fa fa-plus-square-o" (click)="addColumn(index, 0)">Add Column</d-button>
+                        <d-button-delete (click)="removeIndex(index)"></d-button-delete>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <d-button iconClass="fa fa-plus-square-o" (click)="addIndex(mainForm.controls.dexihTableIndexes.controls.length)" [autoCompact]="false">Add Index</d-button>
+</d-widget-section>
 
-<div *ngIf="connectionReference?.connectionCategory == eConnectionCategory.WebService">
+ <div *ngIf="connectionReference?.connectionCategory == eConnectionCategory.WebService">
     <dexih-table-edit-rest [formService]='formsService' [connection]='connection'></dexih-table-edit-rest>
 </div>
 
