@@ -260,7 +260,7 @@ export class StandardFunctionEditComponent implements OnInit, OnDestroy {
             case eFunctionType.Rows:
               this.functions = this.remoteLibraries.functions.filter(c => c.functionType === eFunctionType.Rows);
               this.allowOutput = true;
-              this.allowReturn = false;
+              this.allowReturn = true;
               break;
             case eFunctionType.Profile:
               this.functions = this.remoteLibraries.functions.filter(c => c.functionType === eFunctionType.Profile);
