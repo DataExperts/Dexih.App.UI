@@ -22,7 +22,7 @@ export class AnimateConfig {
    }
    
    export class ApplicationUser {
-    public id: string = '04e6f62b-b744-417c-a622-434a3cad0aae';
+    public id: string = '74d8e50e-2d62-48ed-9b15-6f1d93ed9f17';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -31,7 +31,7 @@ export class AnimateConfig {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = '6a4fb737-f3a4-4854-aa06-c4be4a1de969';
+    public securityStamp: string = 'eb77bce3-b32a-4ef3-a33a-512cab99b450';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -738,7 +738,7 @@ export class AnimateConfig {
     public maxInputRows: number = 0;
     public maxOutputRows: number = 0;
     public dataCache: boolean = false;
-    public dataCacheConnectionKey: number = 0;
+    public dataCacheConnectionKey: number = null;
     public name: string = null;
     public description: string = null;
     public key: number = 0;
@@ -770,9 +770,11 @@ export class AnimateConfig {
     public filterCompare: eCompare = null;
     public aggregate: eAggregate = null;
     public seriesGrain: eSeriesGrain = null;
+    public seriesStep: number = null;
     public seriesFill: boolean = false;
     public seriesStart: string = null;
     public seriesFinish: string = null;
+    public seriesProject: string = null;
     public functionCode: string = null;
     public functionResultCode: string = null;
     public onError: eErrorAction = eErrorAction.Abend;

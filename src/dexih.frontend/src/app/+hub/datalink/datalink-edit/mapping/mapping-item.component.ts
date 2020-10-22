@@ -5,7 +5,7 @@ import { Subscription, combineLatest } from 'rxjs';
 import { InputOutputColumns } from '../../../hub.lineage.models';
 import { compare } from '../../../hub.query.models';
 import { DexihDatalinkTransform, DexihDatalinkTransformItem, eTransformItemType, eCompare,
-    DexihDatalinkColumn, FunctionReference, eParameterDirection, eAggregate, eSortDirection, eTypeCode } from '../../../../shared/shared.models';
+    DexihDatalinkColumn, FunctionReference, eParameterDirection, eAggregate, eSortDirection, eTypeCode, eTransformType } from '../../../../shared/shared.models';
 
 export class ValidValue {
     public valid: boolean;
@@ -180,7 +180,7 @@ export class MappingItemComponent implements OnInit {
         this.outputParameters = functionOutputs.filter(c => c &&  !c.linkedName).map<ValidParameter>(param => {
             let p = outputParams.find(c => c.name === param.parameterName);
             if (p) {
-                if (this.allowCondition &&
+                if ((this.transform.transformType === eTransformType.Validation || this.transform.transformType === eTransformType.Filter )  &&
                     (p.direction === eParameterDirection.ReturnValue || p.direction === eParameterDirection.ResultReturnValue)) {
                     return null;
                 }

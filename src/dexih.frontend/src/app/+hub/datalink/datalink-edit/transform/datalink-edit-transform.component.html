@@ -94,11 +94,15 @@
     <form [formGroup]="seriesForm"  class="container">
         <fieldset>
             <div class="form-row">
-                <section class="form-group col-md-6">
+                <section class="form-group col-md-4">
                     <form-select label="Series Grain" formControlName="seriesGrain" [items]="seriesGrains" itemKey="key" itemName="name">
                     </form-select>
                 </section>
-                <section class="form-group col-md-6">
+                <section class="form-group col-md-4">
+                    <form-input type="number" label="Series Step" formControlName="seriesStep" >
+                    </form-input>
+                </section>
+                <section class="form-group col-md-4">
                     <form-select label="Input Column" formControlName="sourceDatalinkColumn" [items]="inputColumns"
                     [enableKeySelect]="false" itemKey="key" itemName="name">
                     </form-select>
@@ -108,20 +112,26 @@
             <form-checkbox label="Fill empty series values" formControlName="seriesFill"></form-checkbox>
 
             <div class="form-row" *ngIf="seriesForm.controls.seriesFill.value && seriesForm.controls.seriesGrain.value !== eSeriesGrain.Number">
-                <section class="form-group col-md-6">
+                <section class="form-group col-md-4">
                     <form-input type="date" formControlName="seriesStart" label="Series Start Date (empty to use first value)"></form-input>
                 </section>
-                <section class="form-group col-md-6">
+                <section class="form-group col-md-4">
                     <form-input type="date" formControlName="seriesFinish" label="Series Finish Date (empty to use last value)"></form-input>
+                </section>
+                <section class="form-group col-md-4">
+                    <form-input formControlName="seriesProject" label="Number of series projections beyond finish"></form-input>
                 </section>
             </div>
 
             <div class="form-row" *ngIf="seriesForm.controls.seriesFill.value && seriesForm.controls.seriesGrain.value === eSeriesGrain.Number">
-                <section class="form-group col-md-6">
+                <section class="form-group col-md-4">
                     <form-input formControlName="seriesStart" label="Series Start Number (empty to use first value)"></form-input>
                 </section>
-                <section class="form-group col-md-6">
+                <section class="form-group col-md-4">
                     <form-input formControlName="seriesFinish" label="Series Finish Number (empty to use last value)"></form-input>
+                </section>
+                <section class="form-group col-md-4">
+                    <form-input formControlName="seriesProject" label="Number of series projections beyond finish"></form-input>
                 </section>
             </div>
         </fieldset>
