@@ -7,7 +7,6 @@ import { columnDateFormats, columnNumberFormats, columnTimeFormats, TypeCodes } 
 import { DexihTableColumn } from '../../../../shared/shared.models';
 import { HubService } from '../../../hub.service';
 import { Subscription } from 'rxjs';
-import { LinearGaugeComponent } from '@swimlane/ngx-charts';
 
 @Component({
     selector: 'column-edit-bulk',

@@ -22,7 +22,7 @@ export class AnimateConfig {
    }
    
    export class ApplicationUser {
-    public id: string = '74d8e50e-2d62-48ed-9b15-6f1d93ed9f17';
+    public id: string = '967ea061-9c23-4bcf-8f53-c5b4e02d1557';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -31,7 +31,7 @@ export class AnimateConfig {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = 'eb77bce3-b32a-4ef3-a33a-512cab99b450';
+    public securityStamp: string = '68a3da62-37d3-4bb7-bdeb-33f8b30047d5';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -80,9 +80,8 @@ export class AnimateConfig {
    
    export class ChartConfig {
     public labelColumn: string = null;
-    public seriesColumn: string = null;
+    public seriesColumns: ChartSeries[] = [];
     public pivotColumn: string = null;
-    public seriesColumns: string[] = [];
     public xColumn: string = null;
     public yColumn: string = null;
     public minColumn: string = null;
@@ -96,7 +95,7 @@ export class AnimateConfig {
     public showXAxis: boolean = true;
     public showYAxis: boolean = true;
     public showLegend: boolean = false;
-    public legendPosition: string = 'below';
+    public legendPosition: string = 'bottom';
     public showXAxisLabel: boolean = true;
     public showYAxisLabel: boolean = true;
     public showGridLines: boolean = false;
@@ -107,15 +106,25 @@ export class AnimateConfig {
     public yScaleMax: number = null;
     public yScaleMin: number = null;
     public autoScale: boolean = true;
-    public explodeSlices: boolean = false;
-    public doughnut: boolean = false;
+    public cutOutPercentage: number = 0;
+    public fill: boolean = false;
     public separateAxis: boolean = false;
-    public barPadding: number = 3;
-    public roundEdges: boolean = false;
+    public lineCurve: eLineCurve = eLineCurve.Bezier;
+    public spanGaps: boolean = false;
     public showDataLabel: boolean = false;
+    public showDataValue: boolean = false;
+    public labelAnchor: string = 'center';
+    public labelAlign: string = 'center';
     public singleBarColor: boolean = true;
     public multiGridColumn: string = null;
     public yAxisLabelRight: string = null;
+   }
+   
+   export class ChartSeries {
+    public column: string = null;
+    public lineChart: boolean = false;
+    public color: string = null;
+    public alternateAxis: boolean = false;
    }
    
    export class ClientMessage {
@@ -770,7 +779,7 @@ export class AnimateConfig {
     public filterCompare: eCompare = null;
     public aggregate: eAggregate = null;
     public seriesGrain: eSeriesGrain = null;
-    public seriesStep: number = null;
+    public seriesStep: string = null;
     public seriesFill: boolean = false;
     public seriesStart: string = null;
     public seriesFinish: string = null;
@@ -2087,62 +2096,30 @@ export class AnimateConfig {
    export enum eChartType {
     BarVertical = 1,
     BarHorizontal = 2,
-    BarVertical2D = 3,
-    BarHorizontal2D = 4,
-    BarVerticalStacked = 5,
-    BarHorizontalStacked = 6,
-    BarVerticalNormalized = 7,
-    BarHorizontalNormalized = 8,
-    Pie = 9,
-    PieAdvanced = 10,
-    PieGrid = 11,
-    Line = 12,
-    Area = 13,
-    Polar = 14,
-    AreaStacked = 15,
-    AreaNormalized = 16,
-    Scatter = 17,
-    Error = 18,
-    Bubble = 19,
-    ForceDirected = 20,
-    HeatMap = 21,
-    TreeMap = 22,
-    Cards = 23,
-    Gauge = 24,
-    LinearGauge = 25,
-    Map = 26,
-    BarLineCombo = 27,
+    Pie = 3,
+    Line = 4,
+    Polar = 5,
+    Scatter = 6,
+    Error = 7,
+    Bubble = 8,
+    Map = 9,
+    BarLineCombo = 10,
+    Radar = 11,
    }
    
    export const eChartTypeItems = [
     {key: 0, name: 'Unknown'},
     {key: eChartType.BarVertical, name: 'BarVertical'},
     {key: eChartType.BarHorizontal, name: 'BarHorizontal'},
-    {key: eChartType.BarVertical2D, name: 'BarVertical2D'},
-    {key: eChartType.BarHorizontal2D, name: 'BarHorizontal2D'},
-    {key: eChartType.BarVerticalStacked, name: 'BarVerticalStacked'},
-    {key: eChartType.BarHorizontalStacked, name: 'BarHorizontalStacked'},
-    {key: eChartType.BarVerticalNormalized, name: 'BarVerticalNormalized'},
-    {key: eChartType.BarHorizontalNormalized, name: 'BarHorizontalNormalized'},
     {key: eChartType.Pie, name: 'Pie'},
-    {key: eChartType.PieAdvanced, name: 'PieAdvanced'},
-    {key: eChartType.PieGrid, name: 'PieGrid'},
     {key: eChartType.Line, name: 'Line'},
-    {key: eChartType.Area, name: 'Area'},
     {key: eChartType.Polar, name: 'Polar'},
-    {key: eChartType.AreaStacked, name: 'AreaStacked'},
-    {key: eChartType.AreaNormalized, name: 'AreaNormalized'},
     {key: eChartType.Scatter, name: 'Scatter'},
     {key: eChartType.Error, name: 'Error'},
     {key: eChartType.Bubble, name: 'Bubble'},
-    {key: eChartType.ForceDirected, name: 'ForceDirected'},
-    {key: eChartType.HeatMap, name: 'HeatMap'},
-    {key: eChartType.TreeMap, name: 'TreeMap'},
-    {key: eChartType.Cards, name: 'Cards'},
-    {key: eChartType.Gauge, name: 'Gauge'},
-    {key: eChartType.LinearGauge, name: 'LinearGauge'},
     {key: eChartType.Map, name: 'Map'},
     {key: eChartType.BarLineCombo, name: 'BarLineCombo'},
+    {key: eChartType.Radar, name: 'Radar'},
    ]
    
    export enum eCleanAction {
@@ -2735,6 +2712,18 @@ export class AnimateConfig {
     {key: eJoinStrategy.Sorted, name: 'Sorted', description: 'Pre-Sorted Join'},
     {key: eJoinStrategy.Hash, name: 'Hash', description: 'In Memory (hash) join'},
     {key: eJoinStrategy.Database, name: 'Database', description: 'Database Join'},
+   ]
+   
+   export enum eLineCurve {
+    Straight = 0,
+    Bezier = 1,
+    Monotone = 2,
+   }
+   
+   export const eLineCurveItems = [
+    {key: eLineCurve.Straight, name: 'Straight'},
+    {key: eLineCurve.Bezier, name: 'Bezier'},
+    {key: eLineCurve.Monotone, name: 'Monotone'},
    ]
    
    export enum eLoginProvider {

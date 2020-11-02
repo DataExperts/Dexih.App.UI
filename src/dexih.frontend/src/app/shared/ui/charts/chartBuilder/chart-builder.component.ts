@@ -1,9 +1,9 @@
-import { Component, OnInit, Input, OnChanges, EventEmitter, Output, ContentChild } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, EventEmitter, Output } from '@angular/core';
 import { ChartTypes, eInputFormat } from '../chart-groups';
 import { colorSets } from '../chart-colors';
 import * as html2canvas from 'html2canvas';
 import { Subject } from 'rxjs';
-import { ChartConfig, eChartType } from '../../../shared.models';
+import { ChartConfig, eChartType, eLineCurveItems } from '../../../shared.models';
 
 @Component({
     selector: 'chart-builder',
@@ -32,13 +32,15 @@ export class ChartBuilderComponent implements OnInit, OnChanges {
     eChartType = eChartType;
     eInputFormat = eInputFormat;
     chartTypes = ChartTypes;
+    eLineCurveItems = eLineCurveItems;
 
     results: any[];
 
     chartType: any;
     colorSets = colorSets;
 
-    public updateChartSubject: Subject<void> = new Subject<void>();
+    public updateDataSubject: Subject<void> = new Subject<void>();
+    public updateOptionsSubject: Subject<void> = new Subject<void>();
 
     constructor() { }
 
@@ -50,7 +52,7 @@ export class ChartBuilderComponent implements OnInit, OnChanges {
 
     ngOnChanges() {
         this.chartType = null;
-        if (this.columns) {
+        if (this.columns && this.config) {
             ChartTypes.forEach(chartGroup => {
                 if (!this.chartType) {
                     this.chartType = chartGroup.charts.find(c => c.key === this.config.chartType);
@@ -67,20 +69,29 @@ export class ChartBuilderComponent implements OnInit, OnChanges {
         this.config.showGridLines = this.chartType.defaultShowGridLines;
         this.config.colorScheme = this.chartType.defaultColorScheme;
         this.config.showLegend = this.chartType.defaultShowLegend;
+        this.config.showDataLabel = this.chartType.defaultShowLabels;
+        this.config.showDataValue = this.chartType.defaultShowLabels;
         this.hasChanged.emit();
         this.ngOnChanges();
     }
 
-    updateChart() {
+    updateChartType() {
+        this.updateChartLayout();
+        this.updateChartData();
+    }
+
+    updateChartData() {
         // trigger a change event in the chart
         // this.config = Object.assign({}, this.config);
         this.hasChanged.emit();
-        this.updateChartSubject.next();
+        this.updateDataSubject.next();
         this.ngOnChanges();
 
     }
 
-    onChanged() {
+    updateChartLayout() {
+        this.ngOnChanges();
+        this.updateOptionsSubject.next();
         this.hasChanged.emit();
     }
 

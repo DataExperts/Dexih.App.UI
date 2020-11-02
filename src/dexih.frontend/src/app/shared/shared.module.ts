@@ -8,7 +8,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { DTableModule} from 'ngx-d-table';
 import { DComponentsModule } from 'ngx-d-components';
 import { DMarkdownModule } from 'ngx-d-markdown';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { GridsterModule} from 'angular-gridster2';
 
 import { LayoutService} from './layout/layout.service';
@@ -32,7 +31,6 @@ import { SeriesAnimateModule } from './ui/seriesAnimate/series-animate.module';
     DMarkdownModule,
     DComponentsModule,
     DTableModule,
-    NgxChartsModule,
     GridsterModule,
 
     DexihMessageModule,
@@ -50,10 +48,8 @@ import { SeriesAnimateModule } from './ui/seriesAnimate/series-animate.module';
   exports: [
     CommonModule, FormsModule, RouterModule, DragDropModule,
 
-    // DMarkdownModule,
     DComponentsModule,
     DTableModule,
-    NgxChartsModule,
     GridsterModule,
 
     UtilsModule,

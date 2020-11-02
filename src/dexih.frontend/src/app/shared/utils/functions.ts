@@ -57,11 +57,11 @@ export class Functions {
         }
 
         if (!value && value !== false && value !== 0) {
-            return '';
+            return null;
         }
 
         if (value === 'NaN' || value === '∞') {
-            return '';
+            return null;
         }
 
         return value;

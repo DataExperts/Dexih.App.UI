@@ -99,8 +99,7 @@
                     </form-select>
                 </section>
                 <section class="form-group col-md-4">
-                    <form-input type="number" label="Series Step" formControlName="seriesStep" >
-                    </form-input>
+                    <form-select formControlName="seriesStep" label="Interval for each step" [items]="variables"  [enableTextEntry]="true"></form-select>
                 </section>
                 <section class="form-group col-md-4">
                     <form-select label="Input Column" formControlName="sourceDatalinkColumn" [items]="inputColumns"
@@ -111,29 +110,18 @@
 
             <form-checkbox label="Fill empty series values" formControlName="seriesFill"></form-checkbox>
 
-            <div class="form-row" *ngIf="seriesForm.controls.seriesFill.value && seriesForm.controls.seriesGrain.value !== eSeriesGrain.Number">
+            <div class="form-row" *ngIf="seriesForm.controls.seriesFill.value">
                 <section class="form-group col-md-4">
-                    <form-input type="date" formControlName="seriesStart" label="Series Start Date (empty to use first value)"></form-input>
+                    <form-select formControlName="seriesStart" label="Series Start (empty to use first value)" [items]="variables"  [enableTextEntry]="true"></form-select>
                 </section>
                 <section class="form-group col-md-4">
-                    <form-input type="date" formControlName="seriesFinish" label="Series Finish Date (empty to use last value)"></form-input>
+                    <form-select formControlName="seriesFinish" label="Series Finish (empty to use last value)" [items]="variables"  [enableTextEntry]="true"></form-select>
                 </section>
                 <section class="form-group col-md-4">
-                    <form-input formControlName="seriesProject" label="Number of series projections beyond finish"></form-input>
+                    <form-select formControlName="seriesProject" label="Series Intervals to project beyond finish" [items]="variables"  [enableTextEntry]="true"></form-select>
                 </section>
             </div>
 
-            <div class="form-row" *ngIf="seriesForm.controls.seriesFill.value && seriesForm.controls.seriesGrain.value === eSeriesGrain.Number">
-                <section class="form-group col-md-4">
-                    <form-input formControlName="seriesStart" label="Series Start Number (empty to use first value)"></form-input>
-                </section>
-                <section class="form-group col-md-4">
-                    <form-input formControlName="seriesFinish" label="Series Finish Number (empty to use last value)"></form-input>
-                </section>
-                <section class="form-group col-md-4">
-                    <form-input formControlName="seriesProject" label="Number of series projections beyond finish"></form-input>
-                </section>
-            </div>
         </fieldset>
     </form>
 </d-widget-section>

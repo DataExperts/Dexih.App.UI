@@ -55,6 +55,7 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
     public logger = new LogFactory('datalink-edit-transform');
 
     public nodes = [];
+    public variables = [];
 
     public formErrors: any = {};
 
@@ -85,6 +86,7 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
 
                 if (hubCache.isLoaded) {
                     this.managedConnections = hubCache.getManagedConnections();
+                    this.variables = this.editDatalinkService.getVariables();
                 }
                 
                 if (this.datalinkForm) {

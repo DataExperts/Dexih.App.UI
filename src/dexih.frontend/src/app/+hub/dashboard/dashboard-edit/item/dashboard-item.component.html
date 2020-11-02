@@ -116,10 +116,10 @@
                 </d-table>
 
                 <div class="h-100">
-                <chart-view [responsive]="true" *ngIf="view.viewType == eViewType.Chart" [columns]="dataResult.columns"
-                    [data]="dataRows" [config]="view.chartConfig">
-                </chart-view>
-            </div>
+                    <chart-view [responsive]="true" *ngIf="view.viewType == eViewType.Chart" [columns]="dataResult.columns"
+                        [data]="dataRows" [config]="view.chartConfig">
+                    </chart-view>
+                </div>
             </div>
             <ng-template #elseBlock>
                 <div class="alert alert-info" (click)="refresh()">
