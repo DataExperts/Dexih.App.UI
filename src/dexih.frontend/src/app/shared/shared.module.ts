@@ -21,6 +21,7 @@ import { ChartBuilderModule } from './ui/charts/charts.module';
 import { DexihSupportOptionsModule } from './ui/supportOptions/support-options.module'
 import { SharedDataModule} from './ui/sharedData/shared-data.module';
 import { SeriesAnimateModule } from './ui/seriesAnimate/series-animate.module';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { SeriesAnimateModule } from './ui/seriesAnimate/series-animate.module';
     ChartBuilderModule,
     DexihSupportOptionsModule,
     SharedDataModule,
-    SeriesAnimateModule
+    SeriesAnimateModule,
+    ChartsModule,
   ],
   declarations: [
   ],
@@ -60,7 +62,8 @@ import { SeriesAnimateModule } from './ui/seriesAnimate/series-animate.module';
     QueryBuilderModule,
     ChartBuilderModule,
     DexihSupportOptionsModule,
-    SeriesAnimateModule
+    SeriesAnimateModule,
+    ChartsModule,
   ],
   providers: [
     LayoutService,

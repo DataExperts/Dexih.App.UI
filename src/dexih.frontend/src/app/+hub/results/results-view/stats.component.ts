@@ -1,6 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { Label } from 'ng2-charts';
 import { TransformWriterResult, eRunStatus, eTriggerMethod } from '../../../shared/shared.models';
+import * as pluginDataLabels from 'chartjs-plugin-datalabels';
+import { formatNumber } from '@angular/common';
+import { Functions } from '../../../shared/utils/functions';
 
 @Component({
     selector: 'stats',
@@ -14,9 +19,35 @@ export class StatsComponent implements OnInit {
 
     columns: Array<any>;
 
-    public barChartData: any[];
+    public barChartOptions: ChartOptions = {
+        responsive: true,
+        // We use these empty structures as placeholders for dynamic theming.
+        scales: { xAxes: [{}], yAxes: [{
+            ticks: {
+                callback: (value) => {
+                    return Functions.numberWithCommas(value);
+                }
+            }
+        }] },
+        plugins: {
+          datalabels: {
+            anchor: 'end',
+            align: 'end',
+            formatter: (value: number, ctx) => {
+                let v = value.toFixed(2);
+                return Functions.numberWithCommas(v);
+            }
+          }
+        }
+      };
+      public barChartLabels: Label[] = ['Reading', 'Processing', 'Writing'];
+      public barChartType: ChartType = 'bar';
+      public barChartLegend = true;
+      public barChartPlugins = [pluginDataLabels];
+    
+      public barChartData: ChartDataSets[] = [];
 
-    public runTime: number;
+      public runTime: number;
 
     public fail = false;
     public success = false;
@@ -58,18 +89,11 @@ export class StatsComponent implements OnInit {
         }
 
         this.barChartData = [
-            {
-                name: 'Reading',
-                value: this.rowsPerSecond(this.auditResult.rowsReadPrimary + this.auditResult.rowsReadReference, this.auditResult.readTicks)
-            },
-            {
-                name: 'Processing',
-                value: this.rowsPerSecond(this.auditResult.rowsTotal, this.auditResult.processingTicks)
-            },
-            {
-                name: 'Writing',
-                value: this.rowsPerSecond(this.auditResult.rowsTotal, this.auditResult.writeTicks)
-            }
+            { data: [
+                this.rowsPerSecond(this.auditResult.rowsReadPrimary + this.auditResult.rowsReadReference, this.auditResult.readTicks),
+                this.rowsPerSecond(this.auditResult.rowsTotal, this.auditResult.processingTicks),
+                this.rowsPerSecond(this.auditResult.rowsTotal, this.auditResult.writeTicks)
+            ], label: 'Rows / Second', backgroundColor: 'lightblue'}
         ];
 
     }

@@ -105,19 +105,15 @@
                 </ng-template>                    
             </div>
         <div style="display: grid">
-            <ngx-charts-bar-vertical
-                scheme="natural"
-                [results]="barChartData" 
-                [gradient]="true" 
-                [xAxis]="true" 
-                [yAxis]="true"
-                [legend]="false" 
-                [showGridLines]="true" 
-                [showXAxisLabel]="true"
-                [showYAxisLabel]="true" 
-                yAxisLabel="rows/second" 
-                xAxisLabel="operation">
-            </ngx-charts-bar-vertical>
+            <canvas baseChart
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [plugins]="barChartPlugins"
+                [legend]="barChartLegend"
+                [chartType]="barChartType">
+          </canvas>
+
         </div>
     </li>
 </ul>
