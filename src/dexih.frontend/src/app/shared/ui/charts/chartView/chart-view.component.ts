@@ -361,8 +361,8 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                                 const dataSet: ChartDataSets = {};
                                 dataSet.data = new Array(data.length);
                                 dataSet.label = this.seriesColumnsIndex[i].column.title;
-                                dataSet.type = this.chartType.isBar && this.seriesColumnsIndex[i].config.lineChart ? 'line' : null;
-                                dataSet.yAxisID = this.chartType.isBar && this.seriesColumnsIndex[i].config.alternateAxis ? 'right' : null;
+                                dataSet.type = this.chartType.key === eChartType.BarVertical && this.seriesColumnsIndex[i].config.lineChart ? 'line' : null;
+                                dataSet.yAxisID = this.chartType.key === eChartType.BarVertical && this.chartType.isBar && this.seriesColumnsIndex[i].config.alternateAxis ? 'right' : null;
     
                                 for (let j = 0; j < data.length; j++) {
                                     dataSet.data[j] = this.rawValue(data, this.seriesColumnsIndex[i].column.name, j);
@@ -399,6 +399,8 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                                 this.seriesColumnsIndex[i].config.color ?? this.getColor(i) :
                                 this.getColor(i);
 
+                            this.labelColors = {};
+
                             if((this.config.singleBarColor && this.chartType.isBar)) {
                                 dataSet.hoverBackgroundColor = this.pSBC(-0.3, baseColor, null, null);
                                 dataSet.backgroundColor = baseColor;
@@ -426,18 +428,11 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                         if (chartItem.dataSets) {
                             for(let i = 0; i < dataSets.length; i++) {
                                 if(i < chartItem.dataSets.length) {
-                                    chartItem.dataSets[i].data = dataSets[i].data;
-                                    chartItem.dataSets[i].label = dataSets[i].label;
-                                    chartItem.dataSets[i].fill = dataSets[i].fill;
-                                    chartItem.dataSets[i].type = dataSets[i].type;
-                                    chartItem.dataSets[i].yAxisID = dataSets[i].yAxisID;
-                                    chartItem.dataSets[i].hoverBackgroundColor = dataSets[i].hoverBackgroundColor;
-                                    chartItem.dataSets[i].backgroundColor = dataSets[i].backgroundColor;
-                                    chartItem.dataSets[i].pointBackgroundColor = dataSets[i].pointBackgroundColor;
-                                    chartItem.dataSets[i].borderColor = dataSets[i].borderColor;
-                                    chartItem.dataSets[i].lineTension = dataSets[i].lineTension;
-                                    chartItem.dataSets[i].cubicInterpolationMode = dataSets[i].cubicInterpolationMode;
-
+                                    // copy each property to update the chart item
+                                    const dataSetKeys = Object.keys(chartItem.dataSets[i]);
+                                    dataSetKeys.forEach(key => {
+                                        chartItem.dataSets[i][key] = dataSets[i][key];
+                                    });
                                 } else {
                                     chartItem.dataSets.push(dataSets[i])
                                 }
@@ -581,8 +576,8 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                         labelString: this.config.xAxisLabel
                     },
                     ticks: {
-                        min: this.config.xScaleMin,
-                        max: this.config.xScaleMax
+                        min: this.config.autoScale ? undefined : this.config.xScaleMin,
+                        max: this.config.autoScale ? undefined : this.config.xScaleMax
                     },
                     gridLines: {
                         display: true,
@@ -598,8 +593,8 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                         labelString: this.config.yAxisLabel
                     },
                     ticks: {
-                        min: this.config.yScaleMin,
-                        max: this.config.yScaleMax
+                        min: this.config.autoScale ? undefined : this.config.yScaleMin,
+                        max: this.config.autoScale ? undefined : this.config.yScaleMax
                     },
                     gridLines: {
                         display: true,
@@ -617,8 +612,8 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                         labelString: this.config.yAxisLabelRight
                     },
                     ticks: {
-                        min: this.config.yScaleMin,
-                        max: this.config.yScaleMax
+                        min: this.config.autoScale ? undefined : this.config.yScaleMin,
+                        max: this.config.autoScale ? undefined : this.config.yScaleMax
                     },
                     gridLines: {
                         display: true,

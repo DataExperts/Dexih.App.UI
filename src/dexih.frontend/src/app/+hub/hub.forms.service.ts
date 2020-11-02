@@ -22,7 +22,7 @@ import { eImportAction, Import, DexihConnection, DexihTable, DexihTableColumn, e
    DexihDatalinkTransform, DexihDatalinkTransformItem, DexihFunctionParameter, DexihFunctionArrayParameter,
    DexihDatalinkProfile, DexihDatalinkTarget, DexihDatalinkTable,
    eSourceType, eSharedObjectType, DexihListOfValues, InputParameterBase,
-   eDataObjectType, ListOfValuesItem, eTransformItemType, DexihTag, DexihTableIndex, DexihTableIndexColumn } from '../shared/shared.models';
+   eDataObjectType, ListOfValuesItem, eTransformItemType, DexihTag, DexihTableIndex, DexihTableIndexColumn, ChartConfig, SelectQuery, AnimateConfig } from '../shared/shared.models';
 import { debounceTime, delay, first } from 'rxjs/operators';
 
 @Injectable()
@@ -1003,6 +1003,10 @@ export class HubFormsService implements OnDestroy {
       'sourceDatalinkKey': [view.sourceDatalinkKey],
       'sourceTableKey': [view.sourceTableKey],
       'parameters': this.fb.array(parameters),
+      'chartConfig': [view.chartConfig ?? new ChartConfig()],
+      'selectQuery': [view.selectQuery ?? new SelectQuery()],
+      'animateConfig': [view.animateConfig ?? new AnimateConfig()],
+
     }, { validator: this.validateViewSource() }
     );
 
