@@ -10,7 +10,7 @@ export enum eInputFormat {
     Xy,
     XyMinMax,
     XyBubble,
-    GeoCoordinates
+ //   GeoCoordinates
 }
 
 export const inputFormats = [
@@ -800,32 +800,32 @@ export const ChartTypes = [
             //     defaultShowLegend: true,
             //     isBar: false
             // },
-            {
-                key: eChartType.Map, name: 'Google Map',
-                inputFormat: eInputFormat.GeoCoordinates,
-                isHorizontal: false,
-                allowGradient: false,
-                allowLegend: false,
-                allowXAxis: false,
-                allowYAxis: false,
-                allowXScaleMin: false,
-                allowXScaleMax: false,
-                allowYScaleMin: false,
-                allowYScaleMax: false,
-                allowLabels: false,
-                allowExplodeSlices: false,
-                allowDoughnut: false,
-                allowGridLines: false,
-                defaultShowXAxisLabel: false,
-                defaultShowYAxisLabel: false,
-                defaultShowXAxis: false,
-                defaultShowYAxis: false,
-                defaultShowGridLines: false,
-                defaultColorScheme: 'natural',
-                defaultShowLegend: false,
-                isBar: false,
-                isLine: false
-            },
+            // {
+            //     key: eChartType.Map, name: 'Google Map',
+            //     inputFormat: eInputFormat.GeoCoordinates,
+            //     isHorizontal: false,
+            //     allowGradient: false,
+            //     allowLegend: false,
+            //     allowXAxis: false,
+            //     allowYAxis: false,
+            //     allowXScaleMin: false,
+            //     allowXScaleMax: false,
+            //     allowYScaleMin: false,
+            //     allowYScaleMax: false,
+            //     allowLabels: false,
+            //     allowExplodeSlices: false,
+            //     allowDoughnut: false,
+            //     allowGridLines: false,
+            //     defaultShowXAxisLabel: false,
+            //     defaultShowYAxisLabel: false,
+            //     defaultShowXAxis: false,
+            //     defaultShowYAxis: false,
+            //     defaultShowGridLines: false,
+            //     defaultColorScheme: 'natural',
+            //     defaultShowLegend: false,
+            //     isBar: false,
+            //     isLine: false
+            // },
 
         ]
     }

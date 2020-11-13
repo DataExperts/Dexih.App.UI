@@ -22,75 +22,89 @@
 			<cancel-button [formsService]="formsService"></cancel-button>
 		</ng-template>
 
-		<d-widget-section *ngIf="formsService.currentForm && (showEdit || formsService.currentForm?.controls.parameters.length > 0)" title="Properties" [showExpandButton]="true">
-			<form *ngIf="showEdit" [formGroup]="formsService.currentForm"  class="container">
-				<fieldset>
-					<section>
-						<form-input label="View Name" formControlName="name" placeholder="Enter the view name." [autocapitalize]="true" iconClass="fa fa-list"
-						[errors]="formsService.formErrors['name']">
-						</form-input>
-					</section>
-					<section>
-						<form-textarea label="Description" [showPreview]="true" [isHidden]="true" formControlName="description" placeholder="Enter the description.">
-						</form-textarea>
-					</section>
-					<section>
-						<div class="form-row">
-							<section class="form-group col-md-6">
-								<form-select label="Data Source Type" formControlName="sourceType" [items]="sourceTypes" itemKey="key" itemName="name"
-								iconClass="fa fa-database" note='Specify the source type for this view' [enableFilter]="false">
-								</form-select>
-							</section>
-							<section class="form-group col-md-6" *ngIf="formsService.currentForm.value.sourceType == eDataObjectType.Table">
-								<form-select label="Source Table" formControlName="sourceTableKey" [errors]="formsService.formErrors?.sourceTableKey" [items]="connectionTables"
-								parentName="name" childItems="dexihTables" itemKey="key" itemName="logicalName" note="Select the source table">
-								<table-edit-button [key]="formsService.currentForm.controls.sourceTableKey.value"></table-edit-button>
-								</form-select>
-							</section>
-							<section class="form-group col-md-6" *ngIf="formsService.currentForm.value.sourceType == eDataObjectType.Datalink">
-								<form-select label="Source Datalink" formControlName="sourceDatalinkKey" [errors]="formsService.formErrors?.sourceDatalinkKey"
-								[items]="datalinks" itemKey="key" itemName="name" note='Select the source datalink'>
-								<datalink-edit-button [key]="formsService.currentForm.controls.sourceDatalinkKey.value"></datalink-edit-button>
-								</form-select>
-								<d-button-refresh (click)="refreshDatalink()" text="Refresh Parameters"></d-button-refresh>
-							</section>
-						</div>
-
-						<form-checkbox formControlName="autoRefresh" label="Automatically refresh data when view is opened"></form-checkbox>
-						<form-checkbox label="View is shared in the catalog to users with read access." formControlName="isShared">
-						</form-checkbox>
-		
-					</section>
-
-				</fieldset>
-			</form>
-
-			<div class="container">
-				<input-parameters [showEdit]="showEdit" [parameters]="formsService.currentForm?.controls.parameters" [formsService]="formsService" [refreshEvent]="refreshDataObservable" (onRefreshData)="refresh()" (onChange)="parameterChange()"></input-parameters>
-				<div class="mt-3"  *ngIf="!data || data.length === 0">
-					<d-button-refresh  class="mr-1" (click)="refresh()" text="Reload" [autoCompact]="false"></d-button-refresh>
-				</div>
+		<div class="container m-3" *ngIf="!showEdit">
+			<input-parameters [showEdit]="showEdit" [parameters]="formsService.currentForm?.controls.parameters" [formsService]="formsService" [refreshEvent]="refreshDataObservable" (onRefreshData)="refresh()" (onChange)="parameterChange()"></input-parameters>
+			<series-animate [animateConfig]="animateConfig" [columns]="columns" (hasChanged)="hasChanged()" [baseData]="baseData" [(data)]="data"></series-animate>
+			<div class="mt-3"  *ngIf="!data || data.length === 0">
+				<d-button-refresh  class="mr-1" (click)="refresh()" text="Reload" [autoCompact]="false"></d-button-refresh>
 			</div>
+		</div>
 
-		</d-widget-section>
+		<d-tabs title="View Properties" *ngIf="showEdit" [showExpandButton]="true">
+			<d-tab *ngIf="formsService.currentForm && (formsService.currentForm?.controls.parameters.length > 0)" title="Properties" >
+				<form [formGroup]="formsService.currentForm"  class="container">
+					<fieldset>
+						<section>
+							<form-input label="View Name" formControlName="name" placeholder="Enter the view name." [autocapitalize]="true" iconClass="fa fa-list"
+							[errors]="formsService.formErrors['name']">
+							</form-input>
+						</section>
+						<section>
+							<form-textarea label="Description" [showPreview]="true" [isHidden]="true" formControlName="description" placeholder="Enter the description.">
+							</form-textarea>
+						</section>
+						<section>
+							<div class="form-row">
+								<section class="form-group col-md-6">
+									<form-select label="Data Source Type" formControlName="sourceType" [items]="sourceTypes" itemKey="key" itemName="name"
+									iconClass="fa fa-database" note='Specify the source type for this view' [enableFilter]="false">
+									</form-select>
+								</section>
+								<section class="form-group col-md-6" *ngIf="formsService.currentForm.value.sourceType == eDataObjectType.Table">
+									<form-select label="Source Table" formControlName="sourceTableKey" [errors]="formsService.formErrors?.sourceTableKey" [items]="connectionTables"
+									parentName="name" childItems="dexihTables" itemKey="key" itemName="logicalName" note="Select the source table">
+									<table-edit-button [key]="formsService.currentForm.controls.sourceTableKey.value"></table-edit-button>
+									</form-select>
+								</section>
+								<section class="form-group col-md-6" *ngIf="formsService.currentForm.value.sourceType == eDataObjectType.Datalink">
+									<form-select label="Source Datalink" formControlName="sourceDatalinkKey" [errors]="formsService.formErrors?.sourceDatalinkKey"
+									[items]="datalinks" itemKey="key" itemName="name" note='Select the source datalink'>
+									<datalink-edit-button [key]="formsService.currentForm.controls.sourceDatalinkKey.value"></datalink-edit-button>
+									</form-select>
+								</section>
+							</div>
 
-		<d-widget-section  *ngIf="inputColumns && inputColumns.length > 0" title="InputColumns" [showExpandButton]="true">
-			<span *ngFor="let column of inputColumns; let i = index" class="input-group" class="container">
-				<div class="input-group-prepend">
-					<div class="input-group-text">
-						{{column.logicalName}}
+							<form-checkbox formControlName="autoRefresh" label="Automatically refresh data when view is opened"></form-checkbox>
+							<form-checkbox label="View is shared in the catalog to users with read access." formControlName="isShared">
+							</form-checkbox>
+			
+						</section>
+
+					</fieldset>
+				</form>
+			</d-tab>
+
+			<d-tab title="Parameters">
+				<div class="container">
+					<div class="mb-1">
+						<d-button-refresh [autoCompact]="false" (click)="refreshDatalink()" text="Reset"></d-button-refresh>
+					</div>
+					<input-parameters [showEdit]="showEdit" [parameters]="formsService.currentForm?.controls.parameters" [formsService]="formsService" [refreshEvent]="refreshDataObservable" (onRefreshData)="refresh()" (onChange)="parameterChange()"></input-parameters>
+					<div class="mt-3"  *ngIf="!data || data.length === 0">
+						<d-button-refresh  class="mr-1" (click)="refresh()" text="Reload" [autoCompact]="false"></d-button-refresh>
 					</div>
 				</div>
-				<form-input name="column{{i}}" class="form-control p-0" [placeholder]="'Enter ' + column.logicalName" [(ngModel)]="column.value"></form-input>
-			</span>
-		</d-widget-section>
+			</d-tab>
 
-		<series-animate [showEdit]="showEdit" [animateConfig]="animateConfig" [columns]="columns" (hasChanged)="hasChanged()" [baseData]="baseData" [(data)]="data"></series-animate>
+			<d-tab  *ngIf="inputColumns && inputColumns.length > 0" title="InputColumns" >
+				<span *ngFor="let column of inputColumns; let i = index" class="input-group" class="container">
+					<div class="input-group-prepend">
+						<div class="input-group-text">
+							{{column.logicalName}}
+						</div>
+					</div>
+					<form-input name="column{{i}}" class="form-control p-0" [placeholder]="'Enter ' + column.logicalName" [(ngModel)]="column.value"></form-input>
+				</span>
+			</d-tab>
 
-		<d-widget-section  *ngIf="showEdit" title="Query Configuration" [showExpandButton]="true">
-			<query-builder  [selectQuery]="formsService.currentForm.controls.selectQuery.value" [columns]="tableColumns" [inputColumns]="inputColumns" [parameters]="formsService.currentForm.controls.parameters.value" (hasChanged)="hasChanged()" [refreshEvent]="refreshDataObservable" (onRefreshData)="refresh()"></query-builder>
-		</d-widget-section>
+			<d-tab  *ngIf="showEdit" title="Animation" >
+				<series-animate-properties [animateConfig]="animateConfig" [columns]="columns" (hasChanged)="hasChanged()"></series-animate-properties>
+			</d-tab>
 
+			<d-tab  *ngIf="showEdit" title="Query" >
+				<query-builder  [selectQuery]="formsService.currentForm.controls.selectQuery.value" [columns]="tableColumns" [inputColumns]="inputColumns" [parameters]="formsService.currentForm.controls.parameters.value" (hasChanged)="hasChanged()" [refreshEvent]="refreshDataObservable" (onRefreshData)="refresh()"></query-builder>
+			</d-tab>
+		</d-tabs>
 		<ng-template [ngIf]="columns?.length > 0 && data?.length > 0">
 			<d-table *ngIf="!showChart" [enableMultiSelect]="false" [enableSaveCsv]="true" [csvFileName]="formsService.currentForm?.controls.name.value + '.csv'" [columns]="columns" [data]="data" [hideTable]="showChart">
 				<ng-template #actions let-items="items">

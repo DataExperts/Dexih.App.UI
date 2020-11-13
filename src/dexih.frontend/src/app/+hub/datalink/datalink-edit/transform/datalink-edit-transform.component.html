@@ -148,7 +148,7 @@
             </div>
         </d-widget>
 
-        <div class="container mr-1 ml-1">
+        <d-widget class="container mr-1 ml-1" title="Transform Mappings">
             <div *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Join || this.datalinkTransformForm.value.transformType == eTransformType.Lookup">
                 <mapping [datalinkTransformForm]="datalinkTransformForm" [allowJoin]="true" title="{{eTransformType[this.datalinkTransformForm.value.transformType]}} Table"  >
                 </mapping>
@@ -201,7 +201,7 @@
                 <mapping [datalinkTransformForm]="datalinkTransformForm" [allowRow]="true" [allowStandard]="true" [allowJoinNode]="false" [allowOutput]="true" [allowCondition]="true" title="Row Functions">
                 </mapping>
             </div>
-        </div>
+        </d-widget>
 
         <d-widget class="d-none d-lg-inline" [title]="'Outputs' + (datalinkTransformForm.controls.nodeDatalinkColumn?.value ? '(@' + datalinkTransformForm.controls.nodeDatalinkColumn.value.name + ')' : '')"  height="80vh" style="width:300px"  [scrollable]="true">
             <output-columns [datalinkTransformForm]='datalinkTransformForm' [allowMappingOutputs]="allowMappingOutputs" (inputOutputDrop)="newDragDropMapping(eTransformItemType.ColumnPair, $event)"></output-columns>

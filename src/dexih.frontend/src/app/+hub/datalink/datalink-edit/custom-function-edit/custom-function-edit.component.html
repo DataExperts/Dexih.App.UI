@@ -1,7 +1,7 @@
 <div *ngIf="newDatalinkTransformItemForm && inputColumns && outputColumns">
 
 	<d-widget-section *ngIf="datalinkTransformForm" title="Edit Custom Function" [showExpandButton]="true">
-		<ng-template #header>
+		<ng-template #sectionHeader>
 			<d-button-validate class="mr-1" (click)="test()" text="Syntax Check"></d-button-validate>
 			<d-button-download class="mr-1" (click)="downloadCode()" text="Download Code"></d-button-download>
 			<d-button-apply [disabled]="newDatalinkTransformItemForm.pristine"
@@ -90,7 +90,7 @@
 
 	<d-widget-section *ngIf="datalinkTransformForm && newDatalinkTransformItemForm" title="Test Function"
 		[showExpandButton]="true">
-		<ng-template #header>
+		<ng-template #sectionHeader>
 			<button class="btn btn-success mr-1" (click)="test()">Syntax Check</button>
 			<button class="btn btn-success mr-1" (click)="test(inputParameterValues)">Run</button>
 			<button class="btn btn-success" (click)="downloadCode(inputParameterValues)">Download Code</button>

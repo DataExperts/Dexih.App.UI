@@ -41,7 +41,7 @@ export class DatajobEditStepComponent implements OnInit, OnDestroy {
     constructor(
         private hubService: HubService,
         private authService: AuthService,
-        private formService: HubFormsService,
+        public formService: HubFormsService,
         private route: ActivatedRoute,
         fb: FormBuilder) {
         // create a separate formService instance to manage the copied form
@@ -59,6 +59,8 @@ export class DatajobEditStepComponent implements OnInit, OnDestroy {
                 let params = result[1];
                 this.hubCache = result[2];
                 let mainForm = result[3];
+
+                if (!this.hubCache.isLoaded()) { return; }
 
                 this.datalinkStepKey = +params['datalinkStepKey'];
 

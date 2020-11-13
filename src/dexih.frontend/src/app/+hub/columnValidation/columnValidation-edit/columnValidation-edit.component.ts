@@ -19,7 +19,7 @@ export class ColumnValidationEditComponent implements OnInit, OnDestroy {
 
   private columnValidationKey: number;
 
-  private hubCache: HubCache;
+  public hubCache: HubCache;
   public action: string; // new or edit
   public params: Params;
   public pageTitle: string;

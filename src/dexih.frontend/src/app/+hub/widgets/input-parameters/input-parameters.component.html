@@ -1,35 +1,28 @@
 <div *ngIf="parameters" [ngClass]="{'d-flex': !showEdit}">
     <d-button-new *ngIf="showEdit && allowAddRemove && parameters.controls.length === 0" (click)="add()"
         text="Add Parameter" [autoCompact]="false"></d-button-new>
-    <div *ngFor="let parameter of parameters.controls; let i = index" class="pb-1 pr-1">
+    <div *ngFor="let parameter of parameters.controls; let i = index" class="pb-3 pr-1">
         <form [formGroup]="parameter"
             *ngIf="parameter.controls.isValid.value && (showEdit || parameter.controls.allowUserSelect.value)">
 
-            <div class="d-flex align-items-stretch flex-wrap" *ngIf="showEdit">
-                <form-input labelLeft="Name" class="p-0" formControlName="name">
+            <div class="d-flex align-items-stretch flex-wrap pb-1" *ngIf="showEdit">
+                <form-input labelLeft="Name" class="pr-1" formControlName="name">
                 </form-input>
-                <form-select labelLeft="LOV" class="p-0 flex-grow-1"  formControlName="listOfValuesKey"
+                <form-select labelLeft="LOV" class="pr-1 flex-grow-1"  formControlName="listOfValuesKey"
                     [items]="listOfValues" itemKey="key" itemName="name" [allowNullSelect]="true">
                 </form-select>
 
-                <form-checkbox [border]="true" formControlName="allowUserSelect">Selectable</form-checkbox>
-                <form-checkbox [border]="true" formControlName="rank" [checkedValue]="1" [unCheckedValue]="0">Array
+                <form-checkbox [border]="true" class="pr-1" formControlName="allowUserSelect">Selectable</form-checkbox>
+                <form-checkbox [border]="true" class="pr-1" formControlName="rank" [checkedValue]="1" [unCheckedValue]="0">Array
                 </form-checkbox>
 
-                <div *ngIf="allowAddRemove" class="input-group-append">
-
-                    <div class="input-group-text p-0">
-                        <button type="button" (click)="add(i)" class="btn btn-sm border-0 rounded-0 bg-transparent"
-                            value="Add">
-                            <i class="fa fa-plus-square-o"></i>
-                        </button>
-                    </div>
-                    <div class="input-group-text p-0">
-                        <button type="button" (click)="delete(i)" class="btn btn-sm border-0 rounded-0 bg-transparent"
-                            value="Remove">
-                            <i class="fa fa-minus-square-o"></i>
-                        </button>
-                    </div>
+                <div *ngIf="allowAddRemove" class="btn-group input-group-text p-0 m-0">
+                    <button class="btn btn-transparent border-0" type="button" (click)="add(i)" value="Add">
+                        <i class="fa fa-plus-square-o"></i>
+                    </button>
+                    <button class="btn btn-transparent border-0" type="button" (click)="delete(i)" value="Remove">
+                        <i class="fa fa-minus-square-o"></i>
+                    </button>
                 </div>
             </div>
             

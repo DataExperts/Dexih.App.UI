@@ -1,42 +1,13 @@
-<div *ngIf="animateConfig && (showEdit || animateConfig.seriesColumn)">
-<d-widget-section *ngIf="showFrame"  title="Series Animation" [showExpandButton]="true">
-    <ng-template [ngTemplateOutlet]="animate"></ng-template>
-</d-widget-section>
-
-<div *ngIf="!showFrame">
-    <ng-template [ngTemplateOutlet]="animate"></ng-template>
-</div>
-
-</div>
-
-<ng-template #animate>
-    <div  *ngIf="showEdit" class="d-flex flex-wrap container">
-        <div class="flex-fill">
-            <form-select [(ngModel)]="animateConfig.seriesColumn" labelLeft="Series" [allowNullSelect]="true" selectNullMessage="Turn off animation"
-                [items]="columns" itemKey="title" itemName="title" (ngModelChange)="seriesChanged()">
-            </form-select>
-        </div>
-
-        <div class="flex-fill pl-1">
-            <form-checkbox label="Automatic Start" [(ngModel)]="animateConfig.automatic" [border]="true" (ngModelChange)="onChanged()"></form-checkbox>
-        </div>
-
-        <div class="flex-fill pl-1" >
-            <form-input type="number" [(ngModel)]="animateConfig.delay" (ngModelChange)="onChanged()" labelLeft="Delay (ms)"></form-input>
-        </div>
+<div *ngIf="animateConfig?.seriesColumn" class="d-flex flex-wrap">
+    <div class="btn-group">
+        <button type="button" class="btn btn-secondary" (click)="animationFirst()"><i class="fa fa-fast-backward"></i></button>
+        <button type="button" class="btn btn-secondary" (click)="animationStepBackward()"><i class="fa fa-step-backward"></i></button>
+        <button type="button" class="btn btn-secondary" (click)="animationPause()"><i class="fa fa-pause"></i></button>
+        <!-- <button type="button" class="btn btn-secondary" (click)="animationStop()"><i class="fa fa-stop"></i></button> -->
+        <button type="button" class="btn btn-secondary" (click)="animationPlay()"><i class="fa fa-play"></i></button>
+        <button type="button" class="btn btn-secondary" (click)="animationStepForward()"><i class="fa fa-step-forward"></i></button>
+        <button type="button" class="btn btn-secondary" (click)="animationLast()"><i class="fa fa-fast-forward"></i></button>
+        <form-select class="ml-1" [labelLeft]="animateConfig.seriesColumn" [items]="animationValues" [(ngModel)]="animationValue" (ngModelChange)="animationChange($event)" itemKey="value" itemName="name" >
+        </form-select>
     </div>
-
-    <div *ngIf="animateConfig.seriesColumn" class="d-flex flex-wrap mt-1 container">
-        <div class="btn-group">
-            <button type="button" class="btn btn-secondary" (click)="animationFirst()"><i class="fa fa-fast-backward"></i></button>
-            <button type="button" class="btn btn-secondary" (click)="animationStepBackward()"><i class="fa fa-step-backward"></i></button>
-            <button type="button" class="btn btn-secondary" (click)="animationPause()"><i class="fa fa-pause"></i></button>
-            <!-- <button type="button" class="btn btn-secondary" (click)="animationStop()"><i class="fa fa-stop"></i></button> -->
-            <button type="button" class="btn btn-secondary" (click)="animationPlay()"><i class="fa fa-play"></i></button>
-            <button type="button" class="btn btn-secondary" (click)="animationStepForward()"><i class="fa fa-step-forward"></i></button>
-            <button type="button" class="btn btn-secondary" (click)="animationLast()"><i class="fa fa-fast-forward"></i></button>
-            <form-select class="ml-1" [items]="animationValues" [(ngModel)]="animationValue" (ngModelChange)="animationChange($event)" itemKey="value" itemName="name" >
-            </form-select>
-        </div>
-    </div>
-</ng-template>
+</div>

@@ -62,9 +62,6 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     ngOnInit() {
-        if (!this.config) {
-            this.config = new ChartConfig();
-        }
         this.getChartType();
 
         if (this.updateDataEvent) {
@@ -252,7 +249,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
 
             this.getChartType();
 
-            if (this.labelColumnIndex !== null) {
+            if (this.labelColumnIndex !== null && this.labelColumnIndex >= 0) {
                 this.setLabel(this.columns[this.labelColumnIndex].title);
             }
 
@@ -710,7 +707,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     formatValue(data, columnIndex: number, row: number): string|number {
-        if (columnIndex === null) {
+        if (columnIndex === null || columnIndex < 0) {
             return row;
         }
 

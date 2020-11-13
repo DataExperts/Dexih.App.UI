@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ChartBuilderComponent } from './chartBuilder/chart-builder.component';
 import { ChartSeriesComponent } from './chartBuilder/chart-series.component';
 import { DComponentsModule } from 'ngx-d-components';
-import { GoogleMapComponent } from './googleMap/google-map.component';
+// import { GoogleMapComponent } from './googleMap/google-map.component';
 import { ChartViewComponent } from './chartView/chart-view.component';
 import { ChartsModule } from 'ng2-charts';
 
@@ -19,9 +19,9 @@ import { ChartsModule } from 'ng2-charts';
     ChartBuilderComponent,
     ChartSeriesComponent,
     ChartViewComponent,
-    GoogleMapComponent,
+    // GoogleMapComponent,
   ],
-  exports: [ChartBuilderComponent, ChartViewComponent, GoogleMapComponent],
+  exports: [ChartBuilderComponent, ChartViewComponent],
 })
 export class ChartBuilderModule {
 

@@ -45,6 +45,10 @@ export class InputParametersComponent implements OnInit, OnChanges, OnDestroy {
         this._hubSubscription = this.hubService.getHubCacheObservable(true).subscribe(cache => {
             this.listOfValues = cache.hub.dexihListOfValues;
 
+            if (!this.parameters) {
+                return;
+            }
+            
             this.parameters.controls.forEach((parameterForm: FormGroup) => {
                 let parameter = <InputParameterBase>parameterForm.value;
                 if (parameter.listOfValuesKey > 0) {

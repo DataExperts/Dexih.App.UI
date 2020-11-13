@@ -9,6 +9,7 @@ import { DWidgetComponent } from 'ngx-d-components';
 import { CancelToken } from '../../../../+auth/auth.models';
 import { DexihView, InputParameterBase, InputParameter, eDataObjectType, eViewType, DexihActiveAgent } from '../../../../shared/shared.models';
 import { AuthService } from '../../../../+auth/auth.service';
+import { FormsService } from '../../../../shared/forms/forms.service';
 
 @Component({
     selector: 'dashboard-item',
@@ -59,7 +60,7 @@ export class DashboardItemComponent implements OnInit, OnChanges, OnDestroy {
     constructor(
         private authService: AuthService,
         private hubService: HubService,
-        private formsService: HubFormsService) {
+        public formsService: HubFormsService) {
     }
 
     ngOnInit() {

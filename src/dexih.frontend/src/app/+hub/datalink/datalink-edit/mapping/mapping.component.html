@@ -1,4 +1,4 @@
-<d-widget [title]="title" [scrollable]="true" [showExpandButton]="true">
+<d-widget-section [title]="title" [showExpandButton]="true" [padding]="false">
 
     <d-table [enableMultiSelect]="true" [enableManualSort]="true" [columns]="columns" [dataObservable]="tableData" [enableStickyToolbar]="true"  [toolbarZIndex]="100"
         (rowClick)="editMapping($event)" (onSortChanged)="datalinkItemSortChange($event)"
@@ -21,7 +21,7 @@
         </ng-template>
 
         <ng-template #actions let-items="items">
-            <ng-template [ngIf]="allowMapping && !datalinkTransformForm.controls.passThroughColumns.value">
+            <ng-template [ngIf]="allowMapping">
                 <d-button-splitdropdown class="mr-1" (buttonClick)="newMapping(eTransformItemType.ColumnPair)"
                     buttonClass="btn-primary" iconClass="fa fa-map"
                     title="Create a new mapping, or drop a column to create new mapping." text='Mapping'>
@@ -81,4 +81,4 @@
             </ng-template>
         </ng-template>
     </d-table>
-</d-widget>
+</d-widget-section>

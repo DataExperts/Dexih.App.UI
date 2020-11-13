@@ -17,7 +17,7 @@ import { eSourceType, DexihDatalink, InputColumn, DexihColumnBase, SelectQuery, 
 export class ApiEditComponent implements OnInit, OnDestroy {
   public apiKey: number;
 
-  private hubCache: HubCache;
+  public hubCache: HubCache;
   public action: string; // new or edit
   public pageTitle: string;
   public params: Params;

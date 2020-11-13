@@ -15,7 +15,7 @@ import { DexihFileFormat } from '../../../shared/shared.models';
 export class FileFormatEditComponent implements OnInit, OnDestroy {
   public fileFormatKey: number;
 
-  private hubCache: HubCache;
+  public hubCache: HubCache;
   public action: string; // new or edit
   public pageTitle: string;
   public params: Params;

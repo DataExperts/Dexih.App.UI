@@ -1,55 +1,48 @@
-<div class="list-group-item list-group-item-info  rounded-0">
-	<div class="d-flex flex-row">
-		<h5>Properties</h5>
-	</div>
-</div>
+<d-tabs title="Test Properties" [padding]="false">
+	<d-tab title="Properties">
 
-<div class="list-group-item p-3">
+		<form *ngIf="mainForm" [formGroup]="mainForm">
+			<fieldset>
 
-	<form *ngIf="mainForm" [formGroup]="mainForm">
-		<fieldset>
+				<section>
+					<form-input label="Test Name" formControlName="name" placeholder="Enter the name."
+						[autocapitalize]="true" iconClass="fa fa-list" [errors]="formsService.formErrors['name']">
+					</form-input>
+				</section>
 
-			<section>
-				<form-input label="Test Name" formControlName="name" placeholder="Enter the name." [autocapitalize]="on" iconClass="fa fa-list" [errors]="formsService.formErrors['name']">
-				</form-input>
-			</section>
+				<section>
+					<form-textarea label="Description" formControlName="description" placeholder="Enter a description"
+						iconClass="fa fa-comment" [errors]="formsService.formErrors['description']">
+					</form-textarea>
+				</section>
 
-			<section>
-				<form-textarea label="Description" formControlName="description" placeholder="Enter a description" iconClass="fa fa-comment"
-				 [errors]="formsService.formErrors['description']">
-				</form-textarea>
-			</section>
+				<section>
+					<form-select label="Audit Connection" formControlName="auditConnectionKey"
+						[items]="hubCache.hub.dexihConnections" itemKey="key" itemName="name"
+						[errors]="formsService.formErrors.auditConnectionKey" iconClass="fa fa-database"
+						note="Connection where test results are stored.">
+						<connection-edit-button [key]="mainForm.controls.auditConnectionKey.value">
+						</connection-edit-button>
+					</form-select>
+				</section>
+			</fieldset>
+		</form>
+	</d-tab>
 
-			<section>
-				<form-select label="Audit Connection" formControlName="auditConnectionKey" [items]="hubCache.hub.dexihConnections"
-					itemKey="key" itemName="name" [errors]="formsService.formErrors.auditConnectionKey" iconClass="fa fa-database"
-					note="Connection where test results are stored.">
-					<connection-edit-button [key]="mainForm.controls.auditConnectionKey.value"></connection-edit-button>
-				</form-select>
-			</section>
-		</fieldset>
-	</form>
+	<d-tab title="Steps" [padding]="false">
+		<d-table [enableMultiSelect]="true" [enableManualSort]="true" sortColumn="position" [columns]="stepColumns"
+			[dataObservable]="stepTableData" (rowClick)='editStep($event)'>
+			<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+				<d-button-delete (click)="deleteSteps(items)"></d-button-delete>
+			</ng-template>
 
-</div>
+			<ng-template #selectedItemAction select="selectedItemAction" let-item="item">
+				<d-button-edit (click)="editStep(item)"></d-button-edit>
+			</ng-template>
 
-<div class="list-group-item list-group-item-info  rounded-0">
-	<div class="d-flex flex-row">
-		<h5>Steps</h5>
-	</div>
-</div>
-<div class="list-group-item p-0">
-	<d-table [enableMultiSelect]="true" [enableManualSort]="true" sortColumn="position" [columns]="stepColumns"
-	 [dataObservable]="stepTableData" (rowClick)='editStep($event)'>
-		<ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
-			<d-button-delete (click)="deleteSteps(items)"></d-button-delete>
-		</ng-template>
-
-		<ng-template #selectedItemAction select="selectedItemAction" let-item="item">
-			<d-button-edit (click)="editStep(item)"></d-button-edit>
-		</ng-template>
-
-		<ng-template #actions select="actionsTemplate" let-items="items">
-			<d-button-new class="mr-1" (click)="newStep()" title="Create a new step"></d-button-new>
-		</ng-template>
-	</d-table>
-</div>
+			<ng-template #actions select="actionsTemplate" let-items="items">
+				<d-button-new class="mr-1" (click)="newStep()" title="Create a new step"></d-button-new>
+			</ng-template>
+		</d-table>
+	</d-tab>
+</d-tabs>

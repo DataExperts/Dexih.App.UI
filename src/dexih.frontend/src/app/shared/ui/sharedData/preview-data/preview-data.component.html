@@ -37,7 +37,7 @@
                 </div>
 
                 <div *ngIf="viewConfig && baseData" class="m-1">
-                    <series-animate [showEdit]="false" [showFrame]="false" [animateConfig]="viewConfig.animateConfig"
+                    <series-animate [animateConfig]="viewConfig.animateConfig"
                         [columns]="columns" [baseData]="baseData" [(data)]="data">
                     </series-animate>
                 </div>
@@ -71,7 +71,7 @@
     </div>
 
     <div *ngIf="viewConfig && baseData">
-        <series-animate [showEdit]="false" [showFrame]="false" [animateConfig]="viewConfig.animateConfig"
+        <series-animate [animateConfig]="viewConfig.animateConfig"
             [columns]="columns" [baseData]="baseData" [(data)]="data">
         </series-animate>
     </div>

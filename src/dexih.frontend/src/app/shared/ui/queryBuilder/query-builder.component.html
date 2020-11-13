@@ -62,18 +62,15 @@
             <form-tags *ngIf="filter.operator === eCompare.IsIn || filter.operator === eCompare.IsNotIn" [(ngModel)]="filter.value2" (ngModelChange)="onChanged()" [border]="true" class="flex-fill flex-form  pl-1" >
             </form-tags>
 
-            <div class="input-group-append">
-                <div class="input-group-text p-0">
-                    <button type="button" (click)="addFilter(i)" class="btn btn-sm border-0 rounded-0 bg-transparent" value="Add">
-                        <i class="fa fa-plus-square-o"></i>
-                    </button>
-                </div>
-                <div class="input-group-text p-0">
-                    <button type="button" (click)="removeFilter(i)" class="btn btn-sm border-0 rounded-0 bg-transparent" value="Remove">
-                        <i class="fa fa-minus-square-o"></i>
-                    </button>
-                </div>
+            <div class="btn-group input-group-text p-0 ml-1">
+                <button class="btn btn-transparent border-0" type="button" (click)="addFilter(i)" value="Add">
+                    <i class="fa fa-plus-square-o"></i>
+                </button>
+                <button class="btn btn-transparent border-0" type="button" (click)="removeFilter(i)" value="Remove">
+                    <i class="fa fa-minus-square-o"></i>
+                </button>
             </div>
+
         </div>
     </div>
 

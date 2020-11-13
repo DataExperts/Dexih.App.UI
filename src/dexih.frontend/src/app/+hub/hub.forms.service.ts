@@ -1132,12 +1132,12 @@ export class HubFormsService implements OnDestroy {
             formParameters.clear();
 
             let parameters = <InputParameterBase[]> view.parameters;
-            if (view.sourceType === eDataObjectType.Datalink) {
-                let datalink = this.hubCache.hub.dexihDatalinks.find(c => c.key === view.sourceDatalinkKey);
-                if (datalink && datalink.parameters) {
-                    parameters = parameters.concat(datalink.parameters);
-                }
-            }
+            // if (view.sourceType === eDataObjectType.Datalink) {
+            //     let datalink = this.hubCache.hub.dexihDatalinks.find(c => c.key === view.sourceDatalinkKey);
+            //     if (datalink && datalink.parameters) {
+            //         parameters = parameters.concat(datalink.parameters);
+            //     }
+            // }
 
             parameters.forEach(parameter => {
                 let currentParameter = currentParameters.find( c => c.name === parameter.name);
@@ -1145,6 +1145,7 @@ export class HubFormsService implements OnDestroy {
                 if (currentParameter) {
                     newParameter.name = currentParameter.name;
                     newParameter.value = currentParameter.value;
+                  //  newParameter.listOfValuesKey = currentParameter.listOfValuesKey;
                 } else {
                     newParameter.name = parameter.name;
                     newParameter.value = parameter.value;

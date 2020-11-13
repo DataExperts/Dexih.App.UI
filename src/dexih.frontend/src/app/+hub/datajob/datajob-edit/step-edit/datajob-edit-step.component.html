@@ -1,9 +1,11 @@
-<d-widget-section *ngIf="stepFormService.currentForm" title="Add Datalink Step" [showExpandButton]="false">
-	<ng-template #header>
+<d-tabs [padding]="false" title="Edit Job Step">
+	<ng-template #tabsHeader>
 		<d-button-apply class="mr-1" [disabled]="!stepFormService.hasChanged" (click)="applyExit()">
 		</d-button-apply>
 		<d-button-cancel (click)="cancel()"></d-button-cancel>
 	</ng-template>
+
+<d-tab *ngIf="stepFormService.currentForm" title="Properties" >
 	<form [formGroup]="stepFormService.currentForm">
 		<fieldset>
 			<section>
@@ -40,17 +42,18 @@
 			</span>
 		</div>
 	</form>
-</d-widget-section>
+</d-tab>
 
-<d-widget-section *ngIf="stepFormService.currentForm" title="Parameters" [showExpandButton]="true" [padding]="false" [padding]="true">
+<d-tab *ngIf="stepFormService.currentForm" title="Parameters"  [padding]="false" [padding]="true">
 	<input-parameters [showEdit]="true" [parameters]="stepFormService.currentForm.controls.parameters" [formsService]="formService" [parentParameters]="formService.currentForm.controls.parameters.value">
 	</input-parameters>
-</d-widget-section>
+</d-tab>
 
-<d-widget-section *ngIf="stepFormService.currentForm" title="Dependent Steps" [showExpandButton]="false"
+<d-tab *ngIf="stepFormService.currentForm" title="Dependent Steps" 
 	[padding]="false">
 	<d-table *ngIf="stepFormService.currentForm" [enableMultiSelect]="true" [columns]="stepColumns"
 		[dataObservable]="stepTableData" [(selectedItems)]="stepFormService.currentForm.value.dexihDatalinkDependencies"
 		(onSelectedChange)="dependentStepsChange($event)" keyColumn="key" selectedKeyColumn="dependentDatalinkStepKey" [tags]="this.hubCache.hub.dexihTags">
 	</d-table>
-</d-widget-section>
+</d-tab>
+</d-tabs>

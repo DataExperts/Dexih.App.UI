@@ -16,7 +16,7 @@ export class DatalinkRunComponent implements OnInit, OnDestroy {
     private _subscription: Subscription;
     private cancelToken: CancelToken = new CancelToken();
 
-    private datalinks: DexihDatalink[];
+    public datalinks: DexihDatalink[];
     private hubCache: HubCache;
 
     public action: string; // new or edit

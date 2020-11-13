@@ -79,7 +79,7 @@
 
 		<d-widget-section *ngIf="formsService.currentForm.value.sourceType == eLOVObjectType.Static" title="Static Values"
 			[showExpandButton]="true">
-			<ng-template #header>
+			<ng-template #sectionHeader>
 				<d-button class="mr-1" (click)="add(-1)" iconClass="fa fa-plus">Insert Item</d-button>
 				<d-button-delete (click)="clear()" text="Clear All"></d-button-delete>
 			</ng-template>

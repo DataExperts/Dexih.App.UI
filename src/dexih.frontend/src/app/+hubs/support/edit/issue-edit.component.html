@@ -9,7 +9,7 @@
 			[subTitle]="subTitle"
 			[showExpandButton]="true"
 			iconClass="fa fa-lg fa-fw fa-comments" [padding]="true">
-			<ng-template #header>
+			<ng-template #sectionHeader>
 				<d-button-save class="mr-1" (click)="!saving && !mainForm.pristine && save()"
 					[disabled]="saving || mainForm.pristine" [busy]="saving"></d-button-save>
 				<d-button-cancel (click)="!saving && cancel()" [disabled]="saving"></d-button-cancel>
@@ -83,7 +83,7 @@
 
 		<d-widget-section *ngIf="mainForm.controls.key.value > 0 && mainForm.controls.isPrivate.value" title="Add new comment" [showExpandButton]="true"
 			iconClass="fa fa-lg fa-fw fa-comments" [padding]="true">
-			<ng-template #header>
+			<ng-template #sectionHeader>
 				<d-button-save class="mr-1" (click)="!saving && newComment && saveComment()"
 					[disabled]="saving || !newComment" [busy]="saving"></d-button-save>
 				<d-button-cancel (click)="!saving && cancel()" [disabled]="saving"></d-button-cancel>

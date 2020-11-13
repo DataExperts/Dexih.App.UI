@@ -1,4 +1,5 @@
-<d-widget-section title="Properties" [showExpandButton]="true">
+<d-tabs title="Edit job properties" [padding]="false">
+<d-tab title="Properties">
     <form *ngIf="mainForm" [formGroup]="mainForm">
         <fieldset>
             <section>
@@ -51,14 +52,14 @@
             </section>
         </fieldset>
     </form>
-</d-widget-section>
+</d-tab>
 
-<d-widget-section title="Parameters" [showExpandButton]="true" [padding]="true" [padding]="true">
+<d-tab title="Parameters" [padding]="true">
     <input-parameters *ngIf="mainForm" [showEdit]="true" [parameters]="mainForm?.controls.parameters" [formsService]="formService">
     </input-parameters>
-</d-widget-section>
+</d-tab>
 
-<d-widget-section title="Triggers" [showExpandButton]="true" [padding]="false">
+<d-tab title="Triggers" [padding]="false">
     <d-table [enableMultiSelect]="true" [enableStickyToolbar]="true"  [toolbarZIndex]="100" [enableManualSort]="true" sortColumn="position" [columns]="triggerColumns"
         [dataObservable]="triggerTableData" (rowClick)='editTrigger($event)'>
         <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
@@ -74,9 +75,9 @@
         </ng-template>
 
     </d-table>
-</d-widget-section>
+</d-tab>
 
-<d-widget-section title="Steps" [showExpandButton]="true" [padding]="false">
+<d-tab title="Steps" [padding]="false">
     <d-table [enableMultiSelect]="true" [enableStickyToolbar]="true"  [toolbarZIndex]="100" [enableManualSort]="true" (onSortChanged)="stepSortChanged($event)" sortColumn="position" [columns]="stepColumns" [tags]="this.hubCache.hub.dexihTags"
         [dataObservable]="stepTableData" (rowClick)='editDatalinkStep($event)'>
         <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
@@ -95,4 +96,5 @@
                 title="Select multiple datalinks to add as steps">Add</d-button>
         </ng-template>
     </d-table>
-</d-widget-section>
+</d-tab>
+</d-tabs>

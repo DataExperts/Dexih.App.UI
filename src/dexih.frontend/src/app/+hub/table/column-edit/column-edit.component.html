@@ -1,5 +1,5 @@
 <d-widget-section title='Edit Column' [showExpandButton]="true">
-<ng-template #header>
+<ng-template #sectionHeader>
         <dexih-invalid-form-details class="mr-1" (click)="columnFormService.showErrors()" [control]="columnFormService.currentForm"></dexih-invalid-form-details>
         <d-button-dropdown class="mr-1" buttonClass="btn-primary" text="Column">
             <li *ngFor="let col of columns">

@@ -22,7 +22,7 @@ export class CustomFunctionEditComponent implements OnInit, OnDestroy {
 
   private customFunctionKey: number;
 
-  private hubCache: HubCache;
+  public hubCache: HubCache;
   public action: string; // new or edit
   public pageTitle: string;
   public params: Params;

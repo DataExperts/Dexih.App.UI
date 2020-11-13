@@ -16,7 +16,7 @@ export class DatajobRunComponent implements OnInit, OnDestroy {
     private _subscription: Subscription;
     private cancelToken: CancelToken = new CancelToken();
 
-    private datajobs: DexihDatajob[];
+    public datajobs: DexihDatajob[];
     private hubCache: HubCache;
 
     public action: string; // new or edit

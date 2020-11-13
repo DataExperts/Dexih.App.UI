@@ -7,9 +7,6 @@
 		(close)="close()"
 		[padding]="false"
 	>
-		<ng-template #header>
-
-		</ng-template>
 
 		<d-table 
 			[enableMultiSelect]="true"
@@ -27,7 +24,7 @@
 				</ng-template>
 
 				<ng-template #selectedItemAction select="selectedItemAction" let-table="item">
-					<d-button-edit class="mr-1"  *ngIf="table.key" [routerLink]="['table-edit', table.key]" queryParamsHandling preserveFragment (click)="deleteSelected(items)" title="Edit this table"></d-button-edit>
+					<d-button-edit class="mr-1"  *ngIf="table.key" [routerLink]="['table-edit', table.key]" queryParamsHandling preserveFragment title="Edit this table"></d-button-edit>
 				</ng-template>
 
 				<ng-template #filter select="filter" let-items="items">

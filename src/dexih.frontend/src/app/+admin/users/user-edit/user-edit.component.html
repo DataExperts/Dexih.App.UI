@@ -1,9 +1,10 @@
 <dexih-message #DexihMessage></dexih-message>
 
 <div class="container pt-3">
-	<d-widget-vertical>
-    <d-widget title="User Details" iconClass="fa fa-lg fa-fw fa-user"  [padding]="true">
-        <ng-template #header>
+	<d-widget>
+	<d-tabs title="Edit User" [padding]="false">
+    <d-tab title="User Details" iconClass="fa fa-lg fa-fw fa-user"  [padding]="true" [showHeader]="true">
+        <ng-template #tabHeader>
 			<d-button-save class="mr-1" [busy]="formsService.formSaving" (click)="save()"></d-button-save>
 			<d-button-cancel (click)="cancel()"></d-button-cancel>
         </ng-template>
@@ -107,13 +108,9 @@
 			</fieldset>
 		</form>
  
-    </d-widget>
+    </d-tab>
 
-	<d-widget title="Logins" subTitle="The following login providers are available for this login" iconClass="fa fa-lg fa-fw fa-life-saver"  [padding]="true">
-		<ng-template #tools>
-
-		</ng-template>
-
+	<d-tab title="Logins" subTitle="The following login providers are available for this login" iconClass="fa fa-lg fa-fw fa-life-saver"  [padding]="true">
 		<ul class="list-group">
 
 			<li *ngFor="let login of logins" class="list-group-item">
@@ -124,6 +121,7 @@
 				</div>
 			</li>
 		</ul>
-	</d-widget>
-</d-widget-vertical>
+	</d-tab>
+</d-tabs>
+</d-widget>
 </div>

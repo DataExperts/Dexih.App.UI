@@ -1,4 +1,5 @@
-<d-widget-section title='Properties' [showExpandButton]="true" [isExpanded]="isExpanded" >
+<d-tabs title="Edit Table Properties" [showExpandButton]="true">
+<d-tab title='Properties' >
         <form *ngIf="mainForm" [formGroup]="mainForm" class="container">
             <fieldset>
                 <div class="form-row">
@@ -78,9 +79,9 @@
 
             </fieldset>
         </form>
-</d-widget-section>
+</d-tab>
  
-<d-widget-section title='Indexes' [showExpandButton]="true" [isExpanded]="false" *ngIf="mainForm">
+<d-tab title='Indexes' *ngIf="mainForm">
     <div class="container form-row w-100 mb-3" *ngFor="let index of mainForm.controls.dexihTableIndexes.controls; let i = index;">
         <form [formGroup]="index" class="form-row w-100">
             <div class="input-group">
@@ -111,12 +112,13 @@
         </form>
     </div>
     <d-button iconClass="fa fa-plus-square-o" (click)="addIndex(mainForm.controls.dexihTableIndexes.controls.length)" [autoCompact]="false">Add Index</d-button>
-</d-widget-section>
+</d-tab>
 
- <div *ngIf="connectionReference?.connectionCategory == eConnectionCategory.WebService">
+ <d-tab *ngIf="connectionReference?.connectionCategory == eConnectionCategory.WebService" title="Web Service Properties">
     <dexih-table-edit-rest [formService]='formsService' [connection]='connection'></dexih-table-edit-rest>
-</div>
+</d-tab>
 
-<div *ngIf="connection && ( connectionReference?.connectionCategory == eConnectionCategory.File || connection?.purpose !== eConnectionPurpose.Source )">
+<d-tab *ngIf="connection && ( connectionReference?.connectionCategory == eConnectionCategory.File || connection?.purpose !== eConnectionPurpose.Source )" title="File Properties">
     <dexih-table-edit-file [formService]='formsService' [connection]='connection' [isFile]='connectionReference?.connectionCategory == eConnectionCategory.File'></dexih-table-edit-file>
-</div>
+</d-tab>
+</d-tabs>

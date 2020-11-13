@@ -19,7 +19,7 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
 
   public connectionKey: number;
   private connectionTypes: Array<ConnectionReference>;
-  private hubCache: HubCache;
+  public hubCache: HubCache;
   private remoteLibraries: RemoteLibraries;
   public action: string; // new or edit
   public pageTitle: string;

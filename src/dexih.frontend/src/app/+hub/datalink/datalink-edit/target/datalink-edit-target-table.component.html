@@ -1,7 +1,7 @@
 <div *ngIf="!showColumn">
 
 <d-widget-section title="Edit Target Table" [showExpandButton]="true">
-    <ng-template #header>
+    <ng-template #sectionHeader>
         <d-button-preview class="mr-1" (click)="previewData()"></d-button-preview>
         <d-button class="mr-1" (click)="importTable()" buttonClass="btn-primary" iconClass="fa fa-refresh" title="Re-import table from connection.">
             Re-Import

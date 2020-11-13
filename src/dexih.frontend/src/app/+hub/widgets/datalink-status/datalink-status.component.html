@@ -4,7 +4,8 @@
     [value]="previousStatus.percentage"
     [type]="previousStatus.statusType" 
     [routerLink]="['result-view', previousStatus.writerResult?.auditConnectionKey, previousStatus.writerResult?.auditKey]" queryParamsHandling="merge"
-    height="30px" >
+    height="30px"
+    title="Click to see execution details" >
         (Previous) {{previousStatus.message}}
     </d-progressbar>
 </div>
@@ -16,7 +17,9 @@
         [value]="100" 
         [type]="currentStatus.statusType"
         height="30px" style="width: 300px;">
-        <i class="fa fa-clock-o"></i>Next - {{currentStatus.writerResult.scheduledTime | calendar}} (in <countdown [end]="currentStatus.writerResult.scheduledTime" ></countdown>)     
+            <div [title]="'The job will run at ' + (currentStatus.writerResult.scheduledTime | calendar)">
+                <i class="fa fa-clock-o"></i>&nbsp;{{currentStatus.writerResult.scheduledTime | calendar}} (in&nbsp;<countdown [end]="currentStatus.writerResult.scheduledTime" ></countdown>)     
+            </div>
     </d-progressbar>    
 </div>
 

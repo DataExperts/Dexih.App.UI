@@ -8,11 +8,9 @@ import { Functions } from '../../../shared/utils/functions';
 })
 
 export class SeriesAnimateComponent implements OnInit, OnChanges, OnDestroy {
-    @Input() showEdit = false;
     @Input() animateConfig: AnimateConfig;
     @Input() columns: Array<any>;
     @Input() baseData: Array<any>;
-    @Input() showFrame = true;
 
     @Input() data: Array<any>;
     @Output() dataChange = new EventEmitter<Array<any>>();
@@ -42,10 +40,6 @@ export class SeriesAnimateComponent implements OnInit, OnChanges, OnDestroy {
             });
 
         }
-    }
-
-    onChanged() {
-        this.hasChanged.emit();
     }
 
     seriesChanged() {

@@ -1,7 +1,7 @@
 <div *ngIf="newDatalinkTransformItemForm && inputColumns && outputColumns">
 
 	<d-widget-section [title]="pageTitle" [showExpandButton]="false">
-		<ng-template #header>
+		<ng-template #sectionHeader>
 			<d-button-apply [disabled]="newDatalinkTransformItemForm.pristine"
 				(click)="!newDatalinkTransformItemForm.pristine && applyExit()" class="mr-1"></d-button-apply>
 			<d-button-cancel (click)="cancel()"></d-button-cancel>

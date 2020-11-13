@@ -1,5 +1,5 @@
 <d-widget-section title="Add Datalinks to Job" [showExpandButton]="false" [padding]="false">
-	<ng-template #header>
+	<ng-template #sectionHeader>
 		<d-button-close (click)="close()"></d-button-close>
 	</ng-template>
 	<d-table [enableMultiSelect]="true" [columns]="columns" [dataObservable]="tableData" [tags]="this.hubCache.hub.dexihTags">

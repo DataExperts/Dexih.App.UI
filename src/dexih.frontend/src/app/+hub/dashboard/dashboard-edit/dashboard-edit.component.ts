@@ -21,7 +21,7 @@ export class DashboardEditComponent implements OnInit, OnDestroy {
 
   public dashboardKey: number;
 
-  private hubCache: HubCache;
+  public hubCache: HubCache;
   public action: string; // new or edit
   public pageTitle: string;
   public params: Params;

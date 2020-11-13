@@ -1,0 +1,24 @@
+<div class="container">
+    <fieldset>
+        <div class="form-row">
+
+            <section class="form-group col-md-6">
+                <form-select [(ngModel)]="animateConfig.seriesColumn" label="Animation Series Column"
+                    [allowNullSelect]="true" selectNullMessage="Turn off animation" [items]="columns" itemKey="title"
+                    itemName="title" (ngModelChange)="seriesChanged()">
+                </form-select>
+            </section>
+
+            <section class="form-group col-md-6">
+                <form-input type="number" [(ngModel)]="animateConfig.delay" (ngModelChange)="onChanged()"
+                    label="Animation Delay (ms)"></form-input>
+            </section>
+        </div>
+
+        <section>
+            <form-checkbox label="Automatic Start" [(ngModel)]="animateConfig.automatic" (ngModelChange)="onChanged()">
+            </form-checkbox>
+        </section>
+
+    </fieldset>
+</div>
