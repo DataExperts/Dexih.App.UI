@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HubService } from '../../../hub.service';
 import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
 import { FormGroup, FormArray } from '@angular/forms';
@@ -18,6 +18,7 @@ import { CancelToken, Message } from '../../../../+auth/auth.models';
 export class TableEditPropertiesComponent implements OnInit, OnDestroy {
     @Input() public formsService: HubFormsService;
     @Input() public isExpanded = true;
+    @Input() public showColumns = true;
 
     // private connection: DexihConnection;
 
@@ -56,30 +57,40 @@ export class TableEditPropertiesComponent implements OnInit, OnDestroy {
     sortColumns: any[];
 
     public runningSql = false;
+    public option = 0;
 
     private _columnData = new BehaviorSubject<Array<DexihTableColumn>>(null);
     columnData: Observable<Array<DexihTableColumn>> = this._columnData.asObservable();
 
     constructor(
         private hubService: HubService,
-        private route: ActivatedRoute    ) {
+        private route: ActivatedRoute,
+        private router: Router  ) {
     }
 
     ngOnInit() {
         try {
-            this._subscription = combineLatest(
+            this._subscription = combineLatest([
                 this.route.data,
-                this.route.params,
+                this.route.queryParams,
                 this.hubService.getHubCacheObservable(),
                 this.formsService.getCurrentFormObservable(),
                 this.hubService.getRemoteLibrariesObservable(), // included to ensure correct connection reference when refreshing page.
+            ]
             ).subscribe(async result => {
                 let data = result[0];
+                let queryParams = result[1];
                 this.hubCache = result[2];
                 this.mainForm = result[3];
 
                 this.action = data['action'];
                 this.pageTitle = data['pageTitle'];
+
+                if (queryParams['option']) {
+                    this.option = +queryParams['option'];
+                } else {
+                    this.option = 0;
+                }
 
                 if (this.hubCache && this.hubCache.isLoaded() && this.mainForm ) {
                     this.connections = this.hubCache.hub.dexihConnections;
@@ -158,6 +169,12 @@ export class TableEditPropertiesComponent implements OnInit, OnDestroy {
     removeColumn(index: FormGroup, j: number) {
         const columns = <FormArray> index.controls.columns;
         columns.removeAt(j);
+    }
+
+    changeOption(index) {
+    if (history.pushState) {
+        this.router.navigateByUrl(window.location.pathname + `?option=${index}`);
+    }
     }
 
 }

@@ -1,4 +1,4 @@
-<d-tabs title="Edit Table Properties" [showExpandButton]="true">
+<d-tabs title="Edit Table Properties" [showExpandButton]="false" [padding]="false" (selectedIndexChange)="changeOption($event)" [selectedIndex]="option">
 <d-tab title='Properties' >
         <form *ngIf="mainForm" [formGroup]="mainForm" class="container">
             <fieldset>
@@ -120,5 +120,9 @@
 
 <d-tab *ngIf="connection && ( connectionReference?.connectionCategory == eConnectionCategory.File || connection?.purpose !== eConnectionPurpose.Source )" title="File Properties">
     <dexih-table-edit-file [formService]='formsService' [connection]='connection' [isFile]='connectionReference?.connectionCategory == eConnectionCategory.File'></dexih-table-edit-file>
+</d-tab>
+
+<d-tab *ngIf="showColumns" title="Columns" [padding]="false">
+    <table-edit-columns [tableForm]='mainForm'></table-edit-columns>
 </d-tab>
 </d-tabs>

@@ -145,11 +145,11 @@ export class TableEditColumnsComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   newColumn() {
-    this.router.navigate(['column'], { relativeTo: this.route.parent });
+    this.router.navigate(['column'], { relativeTo: this.route.parent, preserveQueryParams: true });
   }
 
   editColumn(column: DexihTableColumn) {
-    this.router.navigate(['column', column.key], { relativeTo: this.route.parent });
+    this.router.navigate(['column', column.key], { relativeTo: this.route.parent, preserveQueryParams: true });
   }
 
   columnSortChange(items: Array<any>) {

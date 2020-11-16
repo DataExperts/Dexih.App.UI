@@ -36,7 +36,7 @@
     "html2canvas": "^1.0.0-rc.7",
     "msal": "^1.4.4",
     "ng2-charts": "^2.4.2",
-    "ngx-d-components": "^0.5.179",
+    "ngx-d-components": "^0.5.182",
     "ngx-d-markdown": "^0.0.16",
     "ngx-d-table": "^0.6.37",
     "rxjs": "^6.6.3",

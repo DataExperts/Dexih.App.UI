@@ -1,4 +1,4 @@
-<d-tabs title="Edit job properties" [padding]="false">
+<d-tabs title="Edit job properties" [padding]="false" (selectedIndexChange)="changeOption($event)" [selectedIndex]="option">
 <d-tab title="Properties">
     <form *ngIf="mainForm" [formGroup]="mainForm">
         <fieldset>

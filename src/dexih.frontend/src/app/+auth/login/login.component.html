@@ -71,23 +71,23 @@
 		<div class="card-header">
 			Other Sign-In Options
 		</div>
-		<div class="card-body d-flex">
-			<div *ngIf="loginType != eLoginProvider.Dexih" class="p-2 flex-fill">
+		<div class="card-body">
+			<div *ngIf="loginType != eLoginProvider.Dexih" class="p-2 flex-fill text-nowrap">
 				<button (click)="enablePassword()" class="w-100 btn btn-success">
 					<i class="fa fa-sign-in"></i>&nbsp;&nbsp;User/Pass</button>
 			</div>
 		
-			<div *ngIf="loginType != eLoginProvider.Google" class="p-2 flex-fill">
+			<div *ngIf="loginType != eLoginProvider.Google" class="p-2 flex-fill text-nowrap">
 				<button (click)="enableGoogle()" class="w-100 btn text-white" style="background-color: #db3236;">
 					<i class="fa fa-google"></i>&nbsp;&nbsp;Google</button>
 			</div>
 
-			<div *ngIf="loginType != eLoginProvider.Microsoft" class="p-2 flex-fill">
+			<div *ngIf="loginType != eLoginProvider.Microsoft" class="p-2 flex-fill text-nowrap">
 				<button (click)="enableMicrosoft()" class="w-100 btn text-white" style="background-color: #00a2ed;">
 					<i class="fa fa-windows"></i>&nbsp;&nbsp;Microsoft</button>
 			</div>
 
-			<div class="p-2 flex-fill">
+			<div class="p-2 flex-fill text-nowrap">
 				<button routerLink="/public" class="w-100 btn btn-success">
 					<i class="fa fa-newspaper-o "></i>&nbsp;&nbsp;Public Data</button>
 			</div>
