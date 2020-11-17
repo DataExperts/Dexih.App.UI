@@ -1,39 +1,46 @@
-<form *ngIf="datalinkTableForm"  [formGroup]="datalinkTableForm">
+<form *ngIf="datalinkTableForm" [formGroup]="datalinkTableForm">
     <fieldset>
-        <section >
-            <form-select label="Data Source Type" formControlName="sourceType" [items]="sourceTypes" itemKey="key" itemName="name"
-                iconClass="fa fa-database"  note='Specify the source type for this table' [enableFilter]="false">
-            </form-select>
-        </section>
+        <div class="form-row">
+            <section class="form-group col-md-6">
+                <form-select label="Data Source Type" formControlName="sourceType" [items]="sourceTypes" itemKey="key"
+                    itemName="name" iconClass="fa fa-database" note='Specify the source type for this table'
+                    [enableFilter]="false">
+                </form-select>
+            </section>
 
-        <section *ngIf="datalinkTableForm.value.sourceType == eSourceType.Table" >
-            <form-select label="Source Table" formControlName="sourceTableKey" [errors]="errors?.sourceTableKey" [items]="connectionTables" parentName="name" childItems="dexihTables" itemKey="key" itemName="logicalName"
-                note="Select the source table" >
-                <table-edit-button [key]="datalinkTableForm.controls.sourceTableKey.value"></table-edit-button>
-            </form-select>
-        </section>
+            <section *ngIf="datalinkTableForm.value.sourceType == eSourceType.Table" class="form-group col-md-6">
+                <form-select label="Source Table" formControlName="sourceTableKey" [errors]="errors?.sourceTableKey"
+                    [items]="connectionTables" parentName="name" childItems="dexihTables" itemKey="key"
+                    itemName="logicalName" note="Select the source table">
+                    <table-edit-button [key]="datalinkTableForm.controls.sourceTableKey.value"></table-edit-button>
+                </form-select>
+            </section>
 
-        <section *ngIf="datalinkTableForm.value.sourceType == eSourceType.Datalink">
-            <form-select label="Source Datalink" formControlName="sourceDatalinkKey" [errors]="errors?.sourceDatalinkKey" [items]="datalinks" itemKey="key" itemName="name"
-                note='Select the source datalink'>
-                <datalink-edit-button [key]="datalinkTableForm.controls.sourceDatalinkKey.value"></datalink-edit-button>
-            </form-select>
-        </section>
+            <section *ngIf="datalinkTableForm.value.sourceType == eSourceType.Datalink" class="form-group col-md-6">
+                <form-select label="Source Datalink" formControlName="sourceDatalinkKey"
+                    [errors]="errors?.sourceDatalinkKey" [items]="datalinks" itemKey="key" itemName="name"
+                    note='Select the source datalink'>
+                    <datalink-edit-button [key]="datalinkTableForm.controls.sourceDatalinkKey.value">
+                    </datalink-edit-button>
+                </form-select>
+            </section>
+        </div>
+
 
         <section *ngIf="datalinkTableForm.value.sourceType == eSourceType.Rows">
             <div class="row">
                 <div class="col-4">
-                    <form-input label="Start At" type="number" formControlName="rowsStartAt" placeholder="Enter start row number"
-                        iconClass="fa fa-list">
+                    <form-input label="Start At" type="number" formControlName="rowsStartAt"
+                        placeholder="Enter start row number" iconClass="fa fa-list">
                     </form-input>
                 </div>
                 <div class="col-4">
-                    <form-input label="End At" type="number" formControlName="rowsEndAt" placeholder="Enter end row number"
-                        iconClass="fa fa-list">
+                    <form-input label="End At" type="number" formControlName="rowsEndAt"
+                        placeholder="Enter end row number" iconClass="fa fa-list">
                     </form-input>
                 </div>
                 <div class="col-4">
-            
+
                     <form-input label="Increment By" type="number" formControlName="rowsIncrement"
                         placeholder="Enter increment value" iconClass="fa fa-list">
                     </form-input>
@@ -41,15 +48,18 @@
             </div>
         </section>
 
-        <section >
-            <form-checkbox label="Disable query logic being pushed down to the database" formControlName="disablePushDown"></form-checkbox>
-            <form-checkbox *ngIf="isVersioned" label="Disable source table versions" formControlName="disableVersioning"></form-checkbox>
+        <section>
+            <form-checkbox label="Disable query logic being pushed down to the database"
+                formControlName="disablePushDown"></form-checkbox>
+            <form-checkbox *ngIf="isVersioned" label="Disable source table versions"
+                formControlName="disableVersioning"></form-checkbox>
 
-            <form-input label="Table Alias" formControlName="name" 
+            <form-input label="Table Alias" formControlName="name"
                 note='An alias that can be used to describe the table instance (this is generally used to differentiate self-joined tables).'>
             </form-input>
         </section>
 
-        <d-button-refresh (click)="refreshColumns()" tooltip="Refresh the columns from the source table." ></d-button-refresh>
+        <d-button-refresh (click)="refreshColumns()" tooltip="Refresh the columns from the source table."
+            [autoCompact]="false" text="Refresh Columns"></d-button-refresh>
     </fieldset>
 </form>

@@ -1,64 +1,14 @@
 
-<d-widget-section title="Properties" [showExpandButton]="true" [isExpanded]="false">
-<form *ngIf="datalinkTransformForm"  [formGroup]="datalinkTransformForm" class="container">
-        <fieldset>
-            <section>
-                <form-input label="Transform Name" formControlName="name" placeholder="Enter a name for the transform" [autocapitalize]="true" iconClass="fa fa-list"
-                    [errors]="formErrors.name">
-                </form-input>
-            </section>
-            <section>
-                <form-textarea  label="Description" formControlName="description"  [isHidden]="true" [showPreview]="true" placeholder="Enter the description."
-                    [errors]="formErrors.description">
-                </form-textarea>
-            </section>
-            <div *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Aggregate || this.datalinkTransformForm.value.transformType == eTransformType.Series || this.datalinkTransformForm.value.transformType == eTransformType.Rows || this.datalinkTransformForm.value.transformType == eTransformType.Mapping">
-                <section>
-                    <form-checkbox label="Allow unmapped input columns to pass through to the next transform." formControlName="passThroughColumns">
-                    </form-checkbox>
-                </section>
-            </div>
-            
-            <section *ngIf="nodes?.length > 0">
-                <form-select label="Node level" formControlName="nodeDatalinkColumn" [items]="nodes" [enableKeySelect]="false" itemKey="key" itemName="name" node='Specify the node where the transform should be applied to.' [allowNullSelect]="true" selectNullMessage='Use top level'>
-                </form-select>
-            </section>
+<d-tabs title="Properties" [showExpandButton]="true" [padding]="false">
 
-            <div class="form-row" *ngIf="datalinkTransformForm.value.transformType === eTransformType.Aggregate || 
-                datalinkTransformForm.value.transformType === eTransformType.Group || 
-                datalinkTransformForm.value.transformType === eTransformType.Rows || 
-                datalinkTransformForm.value.transformType === eTransformType.Series || 
-                datalinkTransformForm.value.transformType === eTransformType.Sort ||
-                datalinkTransformForm.value.transformType === eTransformType.Join ||
-                datalinkTransformForm.value.transformType === eTransformType.Lookup">
-                <section class="form-group col-md-6">
-                    <form-checkbox label="Pre-Cache Data to Sql Database" formControlName="dataCache">
-                    </form-checkbox>
-                </section>
-                <section *ngIf="datalinkTransformForm.controls.dataCache.value" class="form-group col-md-6">
-                    <form-select label="Data Cache Connection" formControlName="dataCacheConnectionKey" [items]="this.managedConnections"
-                    itemKey="key" itemName="name" iconClass="fa fa-database" 
-                    note='Specify a Sql connection data can be cached to before processing the transform.  This can be used to improve memory usage and performance in some scenarios.'>
-                </form-select>
-                </section>
-            </div>
-
-            <div class="form-row">
-                <section class="form-group col-md-6">
-                    <form-input type="number" formControlName="maxInputRows" label="Maximum number of rows to input into the transform (0 = unlimited)"></form-input>
-                </section>
-                <section class="form-group col-md-6">
-                    <form-input type="number" formControlName="maxOutputRows" label="Maximum number of rows to output into the transform (0 = unlimited)"></form-input>
-                </section>
-            </div>
-        </fieldset>
-    </form>
-</d-widget-section>
-<d-widget-section *ngIf="datalinkTransformForm && (this.datalinkTransformForm.value.transformType == eTransformType.Join || this.datalinkTransformForm.value.transformType == eTransformType.Lookup)" title="Join Settings" [showExpandButton]="true">
+<d-tab title="Join Table">
+    <div class="container">
+        <datalink-table [datalinkTableForm]="datalinkTransformForm.controls.joinDatalinkTable"></datalink-table>
+    </div>
+</d-tab>
+<d-tab *ngIf="datalinkTransformForm && (this.datalinkTransformForm.value.transformType == eTransformType.Join || this.datalinkTransformForm.value.transformType == eTransformType.Lookup)" title="Join Settings" >
     <form [formGroup]="datalinkTransformForm"  class="container">
         <fieldset>
-            <datalink-table [datalinkTableForm]="datalinkTransformForm.controls.joinDatalinkTable"></datalink-table>
-
             <div class="form-row">
                 <section class="form-group col-md-4" *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Join">
                     <form-select label="Join strategy" formControlName="joinStrategy" [items]="eJoinStrategyItems"
@@ -67,30 +17,30 @@
                 </section>
 
                 <section class="form-group col-md-4">
-                    <form-select [label]="'Strategy when ' + eTransformType[this.datalinkTransformForm.value.transformType] + ' produces duplicate matches'" formControlName="joinDuplicateStrategy" [items]="eDuplicateStrategyItems"
+                    <form-select [label]="'Duplicate Match Strategy'" formControlName="joinDuplicateStrategy" [items]="eDuplicateStrategyItems"
                         itemKey="key" itemName="name">
                     </form-select>
                 </section>
 
                 <section class="form-group col-md-4">
-                    <form-select [label]="'Strategy when ' + eTransformType[this.datalinkTransformForm.value.transformType] + ' produces no match '" formControlName="joinNotFoundStrategy" [items]="eJoinNotFoundStrategyItems"
+                    <form-select [label]="'No Match Strategy'" formControlName="joinNotFoundStrategy" [items]="eJoinNotFoundStrategyItems"
                         itemKey="key" itemName="description">
                     </form-select>
                 </section>
             </div>
         </fieldset>
     </form>
-</d-widget-section>
+</d-tab>
 
-<d-widget-section *ngIf="datalinkTransformForm && this.datalinkTransformForm.value.transformType == eTransformType.Concatenate" title="Concatenate Settings" [showExpandButton]="true">
+<d-tab *ngIf="datalinkTransformForm && this.datalinkTransformForm.value.transformType == eTransformType.Concatenate" title="Concatenate Settings" >
     <form [formGroup]="datalinkTransformForm"  class="container">
         <fieldset>
             <datalink-table [datalinkTableForm]="datalinkTransformForm.controls.joinDatalinkTable"></datalink-table>
         </fieldset>
     </form>
-</d-widget-section>
+</d-tab>
 
-<d-widget-section *ngIf="datalinkTransformForm && this.datalinkTransformForm.value.transformType == eTransformType.Series" title="Series Settings" [showExpandButton]="true">
+<d-tab *ngIf="datalinkTransformForm && this.datalinkTransformForm.value.transformType == eTransformType.Series" title="Series Settings" >
     <form [formGroup]="seriesForm"  class="container">
         <fieldset>
             <div class="form-row">
@@ -124,9 +74,9 @@
 
         </fieldset>
     </form>
-</d-widget-section>
+</d-tab>
 
-<d-widget-section *ngIf="datalinkTransformForm && this.nodeType === eTransformItemType.GroupNode" title="Group Node" [showExpandButton]="true">
+<d-tab *ngIf="datalinkTransformForm && this.nodeType === eTransformItemType.GroupNode" title="Group Node" >
     <form  class="container">
         <fieldset>
             <form-checkbox label="Group rows under a node" [ngModelOptions]="{standalone: true}" [(ngModel)]="allowNode" (ngModelChange)="toggleNode($event)"></form-checkbox>
@@ -135,8 +85,67 @@
             </section>
         </fieldset>
     </form>
-</d-widget-section>
+</d-tab>
 
+<d-tab title="General">
+    <form *ngIf="datalinkTransformForm"  [formGroup]="datalinkTransformForm" class="container">
+            <fieldset>
+                <section>
+                    <form-input label="Transform Name" formControlName="name" placeholder="Enter a name for the transform" [autocapitalize]="true" iconClass="fa fa-list"
+                        [errors]="formErrors.name">
+                    </form-input>
+                </section>
+                <section>
+                    <form-textarea  label="Description" formControlName="description"  [isHidden]="true" [showPreview]="true" placeholder="Enter the description."
+                        [errors]="formErrors.description">
+                    </form-textarea>
+                </section>
+                <div *ngIf="this.datalinkTransformForm.value.transformType == eTransformType.Aggregate || this.datalinkTransformForm.value.transformType == eTransformType.Series || this.datalinkTransformForm.value.transformType == eTransformType.Rows || this.datalinkTransformForm.value.transformType == eTransformType.Mapping">
+                    <section>
+                        <form-checkbox label="Allow unmapped input columns to pass through to the next transform." formControlName="passThroughColumns">
+                        </form-checkbox>
+                    </section>
+                </div>
+                
+                <section *ngIf="nodes?.length > 0">
+                    <form-select label="Node level" formControlName="nodeDatalinkColumn" [items]="nodes" [enableKeySelect]="false" itemKey="key" itemName="name" node='Specify the node where the transform should be applied to.' [allowNullSelect]="true" selectNullMessage='Use top level'>
+                    </form-select>
+                </section>
+    
+                <div class="form-row">
+                    <section class="form-group col-md-6">
+                        <form-input type="number" formControlName="maxInputRows" label="Maximum number of rows to input into the transform (0 = unlimited)"></form-input>
+                    </section>
+                    <section class="form-group col-md-6">
+                        <form-input type="number" formControlName="maxOutputRows" label="Maximum number of rows to output into the transform (0 = unlimited)"></form-input>
+                    </section>
+                </div>
+            </fieldset>
+        </form>
+    </d-tab>
+    <d-tab title="Caching" *ngIf="datalinkTransformForm.value.transformType === eTransformType.Aggregate || 
+    datalinkTransformForm.value.transformType === eTransformType.Group || 
+    datalinkTransformForm.value.transformType === eTransformType.Rows || 
+    datalinkTransformForm.value.transformType === eTransformType.Series || 
+    datalinkTransformForm.value.transformType === eTransformType.Sort ||
+    datalinkTransformForm.value.transformType === eTransformType.Join ||
+    datalinkTransformForm.value.transformType === eTransformType.Lookup">
+    <form *ngIf="datalinkTransformForm"  [formGroup]="datalinkTransformForm" class="container">
+        <fieldset>
+        <section>
+            <form-checkbox label="Pre-Cache Data to Sql Database" formControlName="dataCache">
+            </form-checkbox>
+        </section>
+        <section *ngIf="datalinkTransformForm.controls.dataCache.value">
+            <form-select label="Data Cache Connection" formControlName="dataCacheConnectionKey" [items]="this.managedConnections"
+            itemKey="key" itemName="name" iconClass="fa fa-database" 
+            note='Specify a Sql connection data can be cached to before processing the transform.  This can be used to improve memory usage and performance in some scenarios.'>
+        </form-select>
+        </section>
+    </fieldset>
+    </form>
+    </d-tab>
+</d-tabs>
 <div class="list-group-item p-1">
 
 <div *ngIf="datalinkTransformForm" class="d-flex justify-content-center" cdkDropListGroup>
