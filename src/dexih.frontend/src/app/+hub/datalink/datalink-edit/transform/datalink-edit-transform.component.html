@@ -1,8 +1,8 @@
 
 <d-tabs title="Properties" [showExpandButton]="true" [padding]="false">
 
-<d-tab title="Join Table">
-    <div class="container">
+<d-tab *ngIf="datalinkTransformForm && (this.datalinkTransformForm.value.transformType == eTransformType.Join || this.datalinkTransformForm.value.transformType == eTransformType.Lookup)" title="Join Table">
+    <div  class="container">
         <datalink-table [datalinkTableForm]="datalinkTransformForm.controls.joinDatalinkTable"></datalink-table>
     </div>
 </d-tab>

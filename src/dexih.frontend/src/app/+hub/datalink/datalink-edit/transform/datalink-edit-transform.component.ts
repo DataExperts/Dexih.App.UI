@@ -118,9 +118,13 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
 
                     let items = <FormArray>this.datalinkTransformForm.controls.dexihDatalinkTransformItems;
 
+                    // filter out the series item, which gets displayed as a separate form.
                     if (datalinkTransform.transformType === eTransformType.Series) {
                         this.seriesForm = <FormGroup>items.controls
                             .filter(d => d.value.transformItemType === eTransformItemType.Series)[0];
+                            if(!this.seriesForm.controls.seriesStep) {
+                            console.debug('series Step: ' + this.seriesForm.controls.seriesStep.value);
+                            }
                     }
 
                     if (datalinkTransform.transformType === eTransformType.Aggregate) {

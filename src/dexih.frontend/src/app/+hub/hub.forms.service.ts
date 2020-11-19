@@ -2077,23 +2077,23 @@ export class HubFormsService implements OnDestroy {
 
         const transform = datalink.dexihDatalinkTransforms.find(c => c.key === datalinkTransform.datalinkTransformKey);
 
-        datalinkTransformForm.controls.runTime.setValue(transform['runTime'] );
+        datalinkTransformForm.controls.runTime.setValue(transform['runTime'], { emitEvent: false } );
 
         const items = <FormArray>datalinkTransformForm.controls.dexihDatalinkTransformItems;
         items.controls.forEach(item => {
           const transformItemForm = <FormGroup>item;
           if (transformItemForm.controls.targetDatalinkColumn) {
-            transformItemForm.controls.targetDatalinkColumn.updateValueAndValidity();
+            transformItemForm.controls.targetDatalinkColumn.updateValueAndValidity( {emitEvent: false});
           }
           if (transformItemForm.controls.sourceDatalinkColumn) {
-            transformItemForm.controls.sourceDatalinkColumn.updateValueAndValidity();
+            transformItemForm.controls.sourceDatalinkColumn.updateValueAndValidity( {emitEvent: false});
           }
 
           const params = <FormArray>transformItemForm.controls.dexihFunctionParameters;
           params.controls.forEach(param => {
             const paramForm = <FormGroup>param;
             if (paramForm.controls.datalinkColumn) {
-              paramForm.controls.datalinkColumn.updateValueAndValidity();
+              paramForm.controls.datalinkColumn.updateValueAndValidity( {emitEvent: false} );
             }
           });
         });
@@ -2103,7 +2103,7 @@ export class HubFormsService implements OnDestroy {
       targetsArray.controls.forEach((targetForm: FormGroup) => {
         let target = datalink.dexihDatalinkTargets.find(c => c.key === targetForm.controls.key.value);
         if (target) {
-          targetForm.controls.runTime.setValue(target['runTime']);
+          targetForm.controls.runTime.setValue(target['runTime'], {emitEvent: false});
         }
       });
 
