@@ -194,15 +194,15 @@ export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
   }
 
   newTrigger() {
-    this.router.navigate(['trigger'], { relativeTo: this.route.parent, preserveQueryParams: true });
+    this.router.navigate(['trigger'], { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
   }
 
   addDatalinkSteps() {
-    this.router.navigate(['add-steps'], { relativeTo: this.route.parent, preserveQueryParams: true });
+    this.router.navigate(['add-steps'], { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
   }
 
   editTrigger(trigger: DexihTrigger) {
-    this.router.navigate(['trigger', trigger.key], { relativeTo: this.route.parent, preserveQueryParams: true });
+    this.router.navigate(['trigger', trigger.key], { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
   }
 
   deleteTriggers(triggers: Array<DexihTrigger>) {
@@ -216,11 +216,11 @@ export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
   }
 
   newDatalinkStep() {
-    this.router.navigate(['step'], { relativeTo: this.route.parent, preserveQueryParams: true });
+    this.router.navigate(['step'], { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
   }
 
   editDatalinkStep(step: DexihDatalinkStep) {
-    this.router.navigate(['step', step.key], { relativeTo: this.route.parent, preserveQueryParams: true });
+    this.router.navigate(['step', step.key], { relativeTo: this.route.parent, queryParamsHandling: 'preserve'});
   }
 
   deleteDatalinkSteps(steps: Array<DexihDatalinkStep>) {

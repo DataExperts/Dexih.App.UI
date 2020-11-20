@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -38,30 +37,21 @@ namespace dexih.api.Services.Remote
         public DexihRemoteAgents(
 
             ILoggerFactory loggerFactory,
-            IDexihOperations operations,
             IDistributedCache distributedCache,
             IHubContext<RemoteAgentHub> remoteAgentContext
             )
         {
-			_loggerFactory = loggerFactory;
-            _remoteLogger = loggerFactory.CreateLogger("RemoteAgents");
-	        _defaultProxyUrl = operations.Config.DefaultProxyUrl;
+	        _remoteLogger = loggerFactory.CreateLogger("RemoteAgents");
 	        _distributedCache = distributedCache;
 	        _remoteAgentContext = remoteAgentContext;
-	        
-	        _waitingResponses = new ConcurrentDictionary<string, TaskCompletionSource<ResponseMessage>>();
         }
 
-		private readonly ILoggerFactory _loggerFactory;
         private readonly ILogger _remoteLogger;
         private readonly IDistributedCache _distributedCache;
-	    private readonly string _defaultProxyUrl;
 
-	    private readonly IHubContext<RemoteAgentHub> _remoteAgentContext;
+        private readonly IHubContext<RemoteAgentHub> _remoteAgentContext;
 
-	    private readonly ConcurrentDictionary<string, TaskCompletionSource<ResponseMessage>> _waitingResponses;
-
-	    #region Remote Agent Messaging
+        #region Remote Agent Messaging
 
 	    public async Task<(string instanceId, string securityToken)> AuthorizeRemoteAgent(string name, long remoteAgentKey, string encryptionKey, string ipAddress, string userId, CancellationToken cancellationToken)
 	    {
@@ -361,11 +351,12 @@ namespace dexih.api.Services.Remote
         }
 
 
-		/// <summary>
-		/// Pings any agents and returns the first active one that responds.
-		/// </summary>
-		/// <param name="remoteAgentKeys"></param>
-		/// <returns></returns>
+	    /// <summary>
+	    /// Pings any agents and returns the first active one that responds.
+	    /// </summary>
+	    /// <param name="remoteAgentKeys"></param>
+	    /// <param name="cancellationToken"></param>
+	    /// <returns></returns>
 	    public async Task<DexihActiveAgent> GetActiveAgent(long[] remoteAgentKeys, CancellationToken cancellationToken)
 	    {
 		    var pingKey = Guid.NewGuid().ToString();
@@ -408,15 +399,16 @@ namespace dexih.api.Services.Remote
 
 		    return null;
 	    }
-	    
 
-		/// <summary>
-		/// Gets the hub reader remote agent, which is the remote agent that will serve requests when being used by the "Hub Reader" or shared connection.
-		/// </summary>
-		/// <returns>The hub reader remote agent.</returns>
-		/// <param name="hubKey">Hub key.</param>
-		/// <param name="database">Database.</param>
-        public async Task<DexihActiveAgent> GetHubReaderRemoteAgent(long hubKey, RepositoryManager database, CancellationToken cancellationToken)
+
+	    /// <summary>
+	    /// Gets the hub reader remote agent, which is the remote agent that will serve requests when being used by the "Hub Reader" or shared connection.
+	    /// </summary>
+	    /// <returns>The hub reader remote agent.</returns>
+	    /// <param name="hubKey">Hub key.</param>
+	    /// <param name="database">Database.</param>
+	    /// <param name="cancellationToken"></param>
+	    public async Task<DexihActiveAgent> GetHubReaderRemoteAgent(long hubKey, RepositoryManager database, CancellationToken cancellationToken)
         {
 			_remoteLogger.LogTrace(LoggingEvents.GetHubReaderRemoteAgent, "GetHubReaderRemoteAgent - HubKey {hubKey}.", hubKey);
 
@@ -506,18 +498,21 @@ namespace dexih.api.Services.Remote
                 throw new RemoteAgentException($"Decrypt failed.\n{ex.Message}", ex);
             }
         }
-		
-	    /// <summary>
-	    /// </summary>
-	    /// <param name="id"></param>
-	    /// <param name="hubKey"></param>
-	    /// <param name="tableKey"></param>
-	    /// <param name="fileName"></param>
-	    /// <param name="downloadUrl"></param>
-	    /// <param name="database"></param>
-	    /// <returns>Reference Url for the upload</returns>
-	    /// <exception cref="RemoteAgentException"></exception>
-	    public async Task<string> UploadFile(string id, long hubKey, DownloadUrl downloadUrl, long tableKey, EFlatFilePath path, EUpdateStrategy updateStrategy, string fileName, RepositoryManager database, CancellationToken cancellationToken)
+
+		/// <summary>
+		/// </summary>
+		/// <param name="id"></param>
+		/// <param name="hubKey"></param>
+		/// <param name="tableKey"></param>
+		/// <param name="updateStrategy"></param>
+		/// <param name="fileName"></param>
+		/// <param name="downloadUrl"></param>
+		/// <param name="database"></param>
+		/// <param name="path"></param>
+		/// <param name="cancellationToken"></param>
+		/// <returns>Reference Url for the upload</returns>
+		/// <exception cref="RemoteAgentException"></exception>
+		public async Task<string> UploadFile(string id, long hubKey, DownloadUrl downloadUrl, long tableKey, EFlatFilePath path, EUpdateStrategy updateStrategy, string fileName, RepositoryManager database, CancellationToken cancellationToken)
 	    {
 		    try
 		    {
@@ -1060,7 +1055,7 @@ namespace dexih.api.Services.Remote
 
                 if (isShared)
                 {
-	                var tables = cache.Hub.DexihTables.Where(c => tableKeys.Contains(c.Key) && !c.IsShared);
+	                var tables = cache.Hub.DexihTables.Where(c => tableKeys.Contains(c.Key) && !c.IsShared).ToArray();
 	                if (tables.Any())
 	                {
 		                throw new RemoteAgentException(
@@ -1068,14 +1063,14 @@ namespace dexih.api.Services.Remote
 	                }
 
 	                var datalinks =
-		                cache.Hub.DexihDatalinks.Where(c => datalinkKeys.Contains(c.Key) && !c.IsShared);
+		                cache.Hub.DexihDatalinks.Where(c => datalinkKeys.Contains(c.Key) && !c.IsShared).ToArray();
 	                if (datalinks.Any())
 	                {
 		                throw new RemoteAgentException(
 			                $"The datalinks {string.Join(",", datalinks.Select(c => c.Name))} are not shared.");
 	                }
 
-	                var views = cache.Hub.DexihViews.Where(c => viewKeys.Contains(c.Key) && !c.IsShared);
+	                var views = cache.Hub.DexihViews.Where(c => viewKeys.Contains(c.Key) && !c.IsShared).ToArray();
 	                if (views.Any())
 	                {
 		                throw new RemoteAgentException(
@@ -1083,7 +1078,7 @@ namespace dexih.api.Services.Remote
 	                }
 
 	                var dashboardItems = dashboardItemKeys.Select(c => cache.Hub.GetDashboardItemFromKey(c))
-		                .Where(c => !c.dashboard.IsShared);
+		                .Where(c => !c.dashboard.IsShared).ToArray();
 	                if (dashboardItems.Any())
 	                {
 		                throw new RemoteAgentException(
@@ -1091,7 +1086,7 @@ namespace dexih.api.Services.Remote
 	                }
                 }
 
-	                var value = new
+	            var value = new
                 {
 	                cache,
 	                connectionId,
@@ -1424,13 +1419,13 @@ namespace dexih.api.Services.Remote
 		            var references = tasks.Where(c=>c.ReferenceId == remoteAgentId.RemoteAgentId && c.ReferenceKey == remoteAgentId.HubKey)
 			            .Select(c => c.TaskId).ToArray();
 		            
-		            var remoteMessage = new RemoteMessage()
-		            {
-			            Value =  new Dictionary<string, object>() {{"references", references}},
-			            Method = nameof(RemoteOperations.CancelTasks),
-			            HubKey = remoteAgentId.HubKey,
-			            TimeOut = int.MaxValue
-		            };
+		            // var remoteMessage = new RemoteMessage()
+		            // {
+			           //  Value =  new Dictionary<string, object>() {{"references", references}},
+			           //  Method = nameof(RemoteOperations.CancelTasks),
+			           //  HubKey = remoteAgentId.HubKey,
+			           //  TimeOut = int.MaxValue
+		            // };
 
 		            //TODO Cancel Tasks need to get the instance id somehow.  Not working.
 		            await SendRemoteCommand(remoteAgentId.RemoteAgentId, remoteAgentId.HubKey, null, nameof(RemoteOperations.CancelTasks), references, database, cancellationToken);

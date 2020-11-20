@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HubsService } from '../../hubs.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
+import { Subscription, Observable, BehaviorSubject} from 'rxjs';
 import { AuthService } from '../../../+auth/auth.service';
 import { DexihActiveAgent, DexihRemoteAgent, eDownloadUrlType } from '../../../shared/shared.models';
 import { CancelToken } from '../../../+auth/auth.models';

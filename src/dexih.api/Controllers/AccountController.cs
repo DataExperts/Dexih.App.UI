@@ -22,8 +22,6 @@ using dexih.api.Services.Message;
 using dexih.api.Services.Operations;
 using dexih.functions;
 using Dexih.Utils.ManagedTasks;
-using Microsoft.AspNetCore.Antiforgery;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace dexih.api.Controllers
@@ -39,15 +37,13 @@ namespace dexih.api.Controllers
         private readonly ILogger _logger;
         private readonly IDexihOperations _operations;
         private readonly IRemoteAgents _remoteAgents;
-	    private readonly IAntiforgery _antiforgery;
-	    private readonly IUserClaimsPrincipalFactory<ApplicationUser> _principalFactory;
+        private readonly IUserClaimsPrincipalFactory<ApplicationUser> _principalFactory;
         private readonly ICacheService _cache;
         private readonly ErrorLogger _errorLogger;
         private readonly IHttpClientFactory _clientFactory;
 
         public AccountController(
             DexihSignInManager signInManager,
-            IAntiforgery antiforgery,
             IEmailSender emailSender,
             ILoggerFactory loggerFactory,
             IDexihOperations operations,
@@ -63,8 +59,7 @@ namespace dexih.api.Controllers
             _logger = loggerFactory.CreateLogger<AccountController>();
             _operations = operations;
             _remoteAgents = remoteAgents;
-	        _antiforgery = antiforgery;
-	        _principalFactory = principalFactory;
+            _principalFactory = principalFactory;
             _cache = cache;
             _errorLogger = errorLogger;
             _clientFactory = clientFactory;

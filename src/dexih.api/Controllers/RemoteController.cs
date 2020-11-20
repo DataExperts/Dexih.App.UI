@@ -484,8 +484,6 @@ namespace dexih.api.Controllers
                 return new ReturnValue(false, "Error occurred in SetFileStream: " + ex.Message, ex);
             }
         }
-        
-
 
 
         /// <summary>
@@ -493,6 +491,7 @@ namespace dexih.api.Controllers
         /// This is used in conjunction with the Dexih.Dns.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost("[action]")]
         public async Task<ActionResult> GenerateCertificate([FromBody] GenerateCertificateModel data, CancellationToken cancellationToken)
@@ -541,7 +540,7 @@ namespace dexih.api.Controllers
                     {
                         throw new RemoteAgentException("There was no LetsEncryptAccount specific in the appsettings.json file on the web server.");
                     }
-                    var account = acme.NewAccount(_operations.Config.LetsEncryptAccount, true);
+                    await acme.NewAccount(_operations.Config.LetsEncryptAccount, true);
 
                     // Save the account key for later use
                     var pemKey = acme.AccountKey.ToPem();

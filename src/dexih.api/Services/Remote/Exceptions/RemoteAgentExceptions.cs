@@ -5,10 +5,7 @@ namespace dexih.api.Services.Remote.Exceptions
 {
 	public class RemoteAgentException : Exception
 	{
-		public RemoteAgentException() : base()
-		{
-		}
-
+		
 		public RemoteAgentException(string message) : base(message)
 		{
 		}

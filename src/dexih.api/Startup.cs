@@ -89,7 +89,7 @@ namespace dexih.api
 				case "postgre":
 				case "postgresql":
 					services.AddDbContext<DexihRepositoryContext>(options =>
-  						options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"), options => options.SetPostgresVersion(9,6)));
+  						options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"), optionsBuilder => optionsBuilder.SetPostgresVersion(9,6)));
 					break;
 				default:
 					throw new Exception("The repository type " + appSettings.RepositoryType + " was not recognised.  Use SqlServer, MySql, Npgsql or Sqlite");
@@ -189,8 +189,8 @@ namespace dexih.api
 		        _logger.LogInformation("Cross site api requests allowed from following origins " + string.Join(", ", appSettings.Origins));
 		        services.AddCors(options =>
 		        {
-			        options.AddDefaultPolicy(builder =>
-						builder.WithOrigins(appSettings.Origins)
+			        options.AddDefaultPolicy(policyBuilder =>
+						policyBuilder.WithOrigins(appSettings.Origins)
 					        .AllowAnyMethod()
 					        .AllowAnyHeader()
 					        .WithExposedHeaders("XSRF-TOKEN")
@@ -423,13 +423,13 @@ namespace dexih.api
 		        var version = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
 		        var buildDate = System.IO.File.GetLastWriteTime(Assembly.GetExecutingAssembly().Location);
                     
-		        var cache = new CacheManager(0, "");
-		        cache.LoadGlobal(version, buildDate);
-		        cache.GoogleClientId = operations.Config.GoogleClientId;
-		        cache.MicrosoftClientId = operations.Config.MicrosoftClientId;
-		        cache.GoogleMapsAPIKey = operations.Config.GoogleMapsAPIKey;
+		        var cacheManager = new CacheManager(0, "");
+		        cacheManager.LoadGlobal(version, buildDate);
+		        cacheManager.GoogleClientId = operations.Config.GoogleClientId;
+		        cacheManager.MicrosoftClientId = operations.Config.MicrosoftClientId;
+		        cacheManager.GoogleMapsAPIKey = operations.Config.GoogleMapsAPIKey;
 
-		        return cache;
+		        return cacheManager;
 	        });
         }
         

@@ -32,7 +32,7 @@ namespace dexih.api.Services
                               $"Details: {details}.\n" +
                               $"Context: {context}.";
 
-            LogEvent(message);
+            LogEvent(fullMessage);
         }
 
         public void LogEvent(Exception exception, string message, params object[] args)
@@ -45,7 +45,7 @@ namespace dexih.api.Services
             {
                 msg.AppendLine("<p></p>Exception Details: " + string.Join("\n", exception.GetType().GetProperties().Select(property => new
                 {
-                    Name = property.Name,
+                    property.Name,
                     Value = property.GetValue(exception, null)
                 }).Select(x => $"{(object) x.Name} = {(x.Value != null ? (object) x.Value.ToString() : (object) string.Empty)}")));
             }

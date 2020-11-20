@@ -11,11 +11,7 @@ namespace dexih.api.tests
     [TestCaseOrderer("dexih.api.tests.PriorityOrderer", "dexih.api.tests")]
     public class UnitTests
     {
-        private readonly string _url;
-        private readonly string _email;
-        private readonly string _password;
-
-        public static string _hubName = "hub-" + Guid.NewGuid();
+        public static readonly string HubName = "hub-" + Guid.NewGuid();
 
         private readonly ITestOutputHelper _output;
 
@@ -23,10 +19,6 @@ namespace dexih.api.tests
         public UnitTests(ITestOutputHelper output)
         {
             _output = output;
-
-            _url = Configuration.AppSettings["DexihUrl"];
-            _password = Configuration.AppSettings["DexihPassword"];
-            _email = Configuration.AppSettings["DexihEmail"];
         }
 
  
@@ -42,7 +34,7 @@ namespace dexih.api.tests
         {
             var hub = new DexihHub()
             {
-                Name = _hubName,
+                Name = HubName,
                 Description = "The description",
                 EncryptionKey = "123"
             };

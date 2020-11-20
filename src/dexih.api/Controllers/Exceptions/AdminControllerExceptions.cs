@@ -4,9 +4,6 @@ namespace dexih.api.Controllers
 {
 	public class AdminControllerException : Exception
 	{
-		public AdminControllerException() : base()
-		{
-		}
 		public AdminControllerException(string message) : base(message)
 		{
 		}

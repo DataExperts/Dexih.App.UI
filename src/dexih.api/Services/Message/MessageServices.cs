@@ -1,5 +1,4 @@
-﻿using System.Collections.Concurrent;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading;
@@ -32,7 +31,6 @@ namespace dexih.api.Services.Message
             SendGridApi = configuration.Config.SendGridApi;
         }
 
-        private readonly ConcurrentQueue<EmailMessage> _emailMessages = new ConcurrentQueue<EmailMessage>();
         private readonly IBackgroundTaskQueue _backgroundTaskQueue;
         
         public void SendEmail(string email, string subject, string body, string html = null)
@@ -72,10 +70,10 @@ namespace dexih.api.Services.Message
         public void SendEmailTemplate(string templateName, string subject, Dictionary<string, string> parameters, ICollection<ApplicationUser> users)
         {
             var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates", "template.html");
-            var template = new StringBuilder(System.IO.File.ReadAllText(path));
+            var template = new StringBuilder(File.ReadAllText(path));
 
             path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "EmailTemplates", templateName);
-            var body = new StringBuilder(System.IO.File.ReadAllText(path));
+            var body = new StringBuilder(File.ReadAllText(path));
 		    
             template.Replace("{{title}}", subject);
             template.Replace("{{body}}", body.ToString());

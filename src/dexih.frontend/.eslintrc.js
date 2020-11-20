@@ -17,12 +17,17 @@ module.exports = {
         "es6": true,
         "node": true
     },
+    "extends": [
+        "prettier",
+        "prettier/@typescript-eslint"
+    ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "project": "tsconfig.json",
+        "project": "src/tsconfig.json",
         "sourceType": "module"
     },
     "plugins": [
+        "@angular-eslint/eslint-plugin",
         "@typescript-eslint",
         "@typescript-eslint/tslint"
     ],
@@ -36,7 +41,6 @@ module.exports = {
         "@angular-eslint/no-outputs-metadata-property": "error",
         "@angular-eslint/use-lifecycle-interface": "error",
         "@angular-eslint/use-pipe-transform-interface": "error",
-        "@typescript-eslint/class-name-casing": "error",
         "@typescript-eslint/dot-notation": "off",
         "@typescript-eslint/explicit-member-accessibility": [
             "off",
@@ -59,6 +63,7 @@ module.exports = {
             }
         ],
         "@typescript-eslint/member-ordering": "error",
+        "@typescript-eslint/naming-convention": "error",
         "@typescript-eslint/no-empty-function": "off",
         "@typescript-eslint/no-inferrable-types": "error",
         "@typescript-eslint/no-unused-expressions": "error",
@@ -72,12 +77,28 @@ module.exports = {
             "off",
             null
         ],
+        "@typescript-eslint/tslint/config": [
+            "error",
+            {
+                "rules": {
+                    "component-selector-name": true,
+                    "component-selector-prefix": true,
+                    "component-selector-type": true,
+                    "directive-selector-name": true,
+                    "directive-selector-prefix": true,
+                    "directive-selector-type": true,
+                    "label-undefined": true,
+                    "no-duplicate-key": true,
+                    "no-unreachable": true,
+                    "whitespace": true
+                }
+            }
+        ],
         "@typescript-eslint/type-annotation-spacing": "error",
         "brace-style": [
             "error",
             "1tbs"
         ],
-        "camelcase": "off",
         "curly": "error",
         "eol-last": "error",
         "eqeqeq": [
@@ -145,48 +166,6 @@ module.exports = {
                 "markers": [
                     "/"
                 ]
-            }
-        ],
-        "@typescript-eslint/tslint/config": [
-            "error",
-            {
-                "rules": {
-                    "component-selector-name": [
-                        true,
-                        "kebab-case"
-                    ],
-                    "component-selector-prefix": [
-                        true,
-                        "app"
-                    ],
-                    "component-selector-type": [
-                        true,
-                        "element"
-                    ],
-                    "directive-selector-name": [
-                        true,
-                        "camelCase"
-                    ],
-                    "directive-selector-prefix": [
-                        true,
-                        "app"
-                    ],
-                    "directive-selector-type": [
-                        true,
-                        "attribute"
-                    ],
-                    "label-undefined": true,
-                    "no-duplicate-key": true,
-                    "no-unreachable": true,
-                    "whitespace": [
-                        true,
-                        "check-branch",
-                        "check-decl",
-                        "check-operator",
-                        "check-separator",
-                        "check-type"
-                    ]
-                }
             }
         ]
     }

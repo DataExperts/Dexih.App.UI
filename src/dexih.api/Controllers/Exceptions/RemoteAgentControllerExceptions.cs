@@ -4,9 +4,6 @@ namespace dexih.api.Controllers
 {
 	public class RemoteAgentControllerException : Exception
 	{
-		public RemoteAgentControllerException() : base()
-		{
-		}
 		public RemoteAgentControllerException(string message) : base(message)
 		{
 		}

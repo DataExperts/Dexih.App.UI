@@ -1,4 +1,5 @@
-<d-widget-section title="Datalink Columns" [showExpandButton]="true" [padding]="false">
+<d-tabs title="Target Options" [showExpandButton]="true" [padding]="false">
+<d-tab title="Datalink Columns" [padding]="false">
     <div class="container-fluid">
         <d-table [enableMultiSelect]="true" [enableManualSort]="true" [enableSort]="false" [enableFilter]="false"
             [columns]="columns" [dataObservable]="columnsObservable"
@@ -14,9 +15,9 @@
 
         </d-table>
     </div>
-</d-widget-section>
+</d-tab>
 
-<d-widget-section title="Target Load Rules" [showExpandButton]="true">
+<d-tab title="Target Rules" >
     <form *ngIf="datalinkForm" [formGroup]="datalinkForm"  class="container">
         <fieldset>
             <form-checkbox label="Datalink is a query and does not populate target tables."
@@ -66,9 +67,9 @@
             </span>
         </fieldset>
     </form>
-</d-widget-section>
+</d-tab>
 
-<d-widget-section title="Tables" [showExpandButton]="true" [padding]="false"
+<d-tab title="Target Tables" [padding]="false"
     *ngIf="!datalinkForm?.controls.isQuery.value">
     <div class="container">
         <d-table [enableMultiSelect]="true" [enableManualSort]="true" [enableSort]="false" [enableFilter]="false"
@@ -89,6 +90,6 @@
 
         </d-table>
     </div>
-</d-widget-section>
-
+</d-tab>
+</d-tabs>
 <router-outlet></router-outlet>

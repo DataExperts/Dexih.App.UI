@@ -4,9 +4,6 @@ namespace dexih.api.Controllers
 {
 	public class ReaderControllerException : Exception
 	{
-		public ReaderControllerException() : base()
-		{
-		}
 		public ReaderControllerException(string message) : base(message)
 		{
 		}

@@ -14,19 +14,11 @@ namespace dexih.api.tests
 {
     public class LoadTests
     {
-        private readonly string _url;
-        private readonly string _email;
-        private readonly string _password;
-
         private readonly ITestOutputHelper _output;
 
         public LoadTests(ITestOutputHelper output)
         {
             _output = output;
-
-            _url = Configuration.AppSettings["DexihUrl"];
-            _password = Configuration.AppSettings["DexihPassword"];
-            _email = Configuration.AppSettings["DexihEmail"];
         }
 
        

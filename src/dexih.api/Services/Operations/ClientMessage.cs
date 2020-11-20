@@ -9,7 +9,7 @@ namespace dexih.api.Services.Operations
     /// Contains a command, and a value.
     /// </summary>
     [DataContract]
-    public class ClientMessage: ReturnValue<object>
+    public sealed class ClientMessage: ReturnValue<object>
     {
         public ClientMessage()
         {

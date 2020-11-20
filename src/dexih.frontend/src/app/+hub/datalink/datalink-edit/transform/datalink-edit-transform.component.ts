@@ -3,14 +3,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { seriesGrains } from '../../../hub.models';
 import { HubService } from '../../../hub.service';
 import { DatalinkEditService } from '../datalink-edit.service';
-import { Observable, Subscription, combineLatest } from 'rxjs';
+import { Subscription, combineLatest } from 'rxjs';
 import { AuthService } from '../../../../+auth/auth.service';
 import { FormGroup, FormArray } from '@angular/forms';
 import { LogFactory, eLogLevel } from '../../../../../logging';
 import { InputOutputColumns } from '../../../hub.lineage.models';
 import { eTransformType, eTransformItemType, DexihDatalinkColumn, DexihDatalinkTransform,
     eTypeCode, DexihDatalinkTransformItem, eAggregate, eSortDirection, eJoinNotFoundStrategyItems,
-    eDuplicateStrategyItems, eSeriesGrain, eJoinStrategyItems, eTransformTypeItems, DexihConnection } from '../../../../shared/shared.models';
+    eDuplicateStrategyItems, eSeriesGrain, eJoinStrategyItems, DexihConnection } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -122,9 +122,6 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
                     if (datalinkTransform.transformType === eTransformType.Series) {
                         this.seriesForm = <FormGroup>items.controls
                             .filter(d => d.value.transformItemType === eTransformItemType.Series)[0];
-                            if(!this.seriesForm.controls.seriesStep) {
-                            console.debug('series Step: ' + this.seriesForm.controls.seriesStep.value);
-                            }
                     }
 
                     if (datalinkTransform.transformType === eTransformType.Aggregate) {

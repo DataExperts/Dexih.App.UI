@@ -15,13 +15,11 @@ namespace dexih.api.tests
 {
  public static class Configuration
     {
-        public static int counter = 1;
-
         public static IConfigurationSection AppSettings { get; set; }
-        public static HttpClient _httpClient;
-        public static CookieContainer _CookieContainer;
+        public static HttpClient HttpClient;
+        public static CookieContainer CookieContainer;
 
-        private static readonly string _url;
+        private static readonly string Url;
 
         static Configuration()
         {
@@ -38,7 +36,7 @@ namespace dexih.api.tests
                 var configuration = builder.Build();
                 AppSettings = configuration.GetSection("AppSettings");
 
-                _url = AppSettings["DexihUrl"];
+                Url = AppSettings["DexihUrl"];
 
             }
             catch (Exception e)
@@ -63,16 +61,16 @@ namespace dexih.api.tests
                 RememberMe = true
             };
             
-            _CookieContainer = new CookieContainer();
+            CookieContainer = new CookieContainer();
 
             var handler = new HttpClientHandler()
             {
-                CookieContainer = _CookieContainer
+                CookieContainer = CookieContainer
             };
 
-            if (_httpClient == null)
+            if (HttpClient == null)
             {
-                _httpClient = new HttpClient(handler) {Timeout = TimeSpan.FromSeconds(600)};
+                HttpClient = new HttpClient(handler) {Timeout = TimeSpan.FromSeconds(600)};
             }
             
             var result = await Post("/api/Account/Login", user);
@@ -93,10 +91,10 @@ namespace dexih.api.tests
             var messagesString = JsonExtensions.Serialize(data);
             var content = new StringContent(messagesString, Encoding.UTF8, "application/json");
 
-            var cookies = _CookieContainer.GetCookies(new Uri(_url));
+            var cookies = CookieContainer.GetCookies(new Uri(Url));
             var token = cookies["XSRF-TOKEN"];
             if (token != null) content.Headers.Add("X-XSRF-TOKEN", token.Value);
-            var response = await _httpClient.PostAsync(_url + uri, content);
+            var response = await HttpClient.PostAsync(Url + uri, content);
 
             if (response.IsSuccessStatusCode)
             {

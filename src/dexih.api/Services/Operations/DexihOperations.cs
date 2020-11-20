@@ -105,6 +105,7 @@ namespace dexih.api.Services.Operations
         /// <param name="connectionId"></param>
         /// <param name="command"></param>
         /// <param name="content"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public Task BroadcastClientMessageAsync(string connectionId, EClientCommand command, object content, CancellationToken cancellationToken)
         {
