@@ -1,4 +1,4 @@
-<menu-parent [name]="hubStatusMessage" title="Available Hubs" iconClass="fa fa-lg fa-fw fa-life-saver" [textClass]="textClass">
+<menu-parent #menu [name]="hubStatusMessage" title="Available Hubs" iconClass="fa fa-lg fa-fw fa-life-saver" [textClass]="textClass">
     <li *ngFor="let hub of hubs | async" class="nav-item" [title]="hub.name" >
         <a class="nav-link" (click)="openHub(hub)">
             <i *ngIf="user.isAdmin || hub.sharedAccess == eHubAccess.User" class="fa fa-fw fa-user-secret" title="Full Access"></i>

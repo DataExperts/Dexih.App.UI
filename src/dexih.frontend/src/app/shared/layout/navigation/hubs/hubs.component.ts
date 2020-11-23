@@ -1,17 +1,18 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../../../../+auth/auth.service';
 import { HubService } from '../../../../+hub/hub.service';
 import { DexihHubAuth, User, eHubAccess } from '../../../../+auth/auth.models';
-import { Observable, Subscription, combineLatest} from 'rxjs';
+import { Observable, Subscription} from 'rxjs';
 import { eCacheStatus } from '../../../../+hub/hub.models';
-import { HubsService } from '../../../../+hubs/hubs.service';
+import { MenuParentComponent } from '../menu';
 
 @Component({
     selector: 'dexih-hubs',
     templateUrl: './hubs.component.html'
 })
 export class HubsComponent implements OnInit, OnDestroy {
+    @ViewChild('menu', { static: true }) menu: MenuParentComponent;
 
     hubs: Observable<Array<DexihHubAuth>>;
     hubCacheStatusSubscription: Subscription;
@@ -62,6 +63,7 @@ export class HubsComponent implements OnInit, OnDestroy {
 
 
     openHub(hub: DexihHubAuth) {
+        this.menu.collapse();
         this.router.navigate(['/hub/' + hub.hubKey + '/summary']);
     }
 

@@ -33,5 +33,10 @@ export class MenuParentComponent implements OnInit {
     public toggle() {
         this.expanded = !this.expanded;
         this.state = this.expanded ? 'expanded' : 'collapsed';
-  }
+    }
+
+    public collapse() {
+        this.expanded = false;
+        this.state = 'collapsed';
+    }
 }
