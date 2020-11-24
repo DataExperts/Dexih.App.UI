@@ -31,7 +31,9 @@ export class HubsComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.hubs = this.authService.getHubsObservable();
-        this.authService.getUserObservable().subscribe(u => { this.user = u; });
+        this.authService.getUserObservable().subscribe(u => {
+            this.user = u;
+        });
 
         this.hubStatusMessage = 'No Hub Selected';
 

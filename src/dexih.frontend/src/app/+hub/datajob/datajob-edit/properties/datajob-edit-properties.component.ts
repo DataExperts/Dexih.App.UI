@@ -2,25 +2,27 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HubService } from '../../../hub.service';
 import { HubFormsService } from '../../../hub.forms.service';
-import { Subscription, Observable, BehaviorSubject, combineLatest} from 'rxjs';
+import { Subscription, Observable, BehaviorSubject, combineLatest } from 'rxjs';
 import { FormGroup, FormArray } from '@angular/forms';
 import { HubCache } from '../../../hub.models';
-import { DexihConnection, eFailAction, DexihDatalinkStep, DexihDatalinkDependency, DexihDatalinkStepColumn, DexihTrigger,
-  DexihDatalinkTable, eSourceType, eSharedObjectType, eAlertLevelItems, eAlertLevel } from '../../../../shared/shared.models';
+import {
+  DexihConnection, eFailAction, DexihDatalinkStep, DexihDatalinkDependency, DexihDatalinkStepColumn, DexihTrigger,
+  DexihDatalinkTable, eSourceType, eSharedObjectType, eAlertLevelItems, eAlertLevel
+} from '../../../../shared/shared.models';
 
 @Component({
-
   selector: 'dexih-datajob-edit-form',
   templateUrl: './datajob-edit-properties.component.html'
 })
 export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
   public hubCache: HubCache;
+  public datajobChanged = false;
+  public mainForm: FormGroup;
+  public managedConnections: DexihConnection[];
 
-  private _subscription: Subscription;
 
   hasChangedObserve: Observable<boolean>;
 
-  public managedConnections: DexihConnection[];
 
   hasChanged = false;
   showAllErrors = false;
@@ -31,8 +33,6 @@ export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
     { key: eFailAction.Abend, name: 'Abend' },
   ];
 
-  public datajobChanged = false;
-  public mainForm: FormGroup;
 
   triggerColumns = [
     { name: 'details', title: 'Details', format: 'Html' },
@@ -47,7 +47,7 @@ export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
     { name: 'name', title: 'Name', format: '' },
     { name: 'datalink', title: 'Datalink', format: '', tags: 'tags' },
     { name: 'dependencies', title: 'Dependencies', format: 'Html' },
-    { name: 'inputs', title: 'Inputs', format: 'Html'},
+    { name: 'inputs', title: 'Inputs', format: 'Html' },
     { name: 'updateDate', title: 'Last Modified', format: 'Calendar' },
     { name: 'errors', title: 'Errors', format: '' },
   ];
@@ -59,6 +59,8 @@ export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
   eAlertLevel = eAlertLevel;
 
   option: number;
+
+  private _subscription: Subscription;
 
   constructor(private hubService: HubService,
     public formService: HubFormsService,
@@ -91,7 +93,7 @@ export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
         this.updateTriggers();
         this.updateSteps();
 
-        
+
         // if this is first load of new form, then reset the dependencies.
         if (this.mainForm.controls['key'].value <= 0 && isFirst) {
           isFirst = false;
@@ -134,20 +136,20 @@ export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
       let steps = (<FormArray>this.mainForm.controls['dexihDatalinkSteps']);
       steps.controls.sort((a: FormGroup, b: FormGroup) => a.controls.position.value - b.controls.position.value)
         .forEach(stepControl => {
-        let step = <DexihDatalinkStep> stepControl.value;
-        let datalink = this.hubCache.hub.dexihDatalinks.find(c => c.key === step.datalinkKey);
-        stepData.push({
-          key: step.key,
-          name: step.name,
-          datalinkKey: datalink.key,
-          datalink: datalink ? datalink.name : 'Not specified',
-          tags: this.hubCache.getObjectTags(eSharedObjectType.Datalink, datalink.key),
-          dependencies: this.getDependencies(step.dexihDatalinkDependencies),
-          inputs: this.getInputs(step.dexihDatalinkStepColumns),
-          updateDate: step.updateDate,
-          errors: stepControl.valid ? 'No errors' : 'Errors'
+          let step = <DexihDatalinkStep>stepControl.value;
+          let datalink = this.hubCache.hub.dexihDatalinks.find(c => c.key === step.datalinkKey);
+          stepData.push({
+            key: step.key,
+            name: step.name,
+            datalinkKey: datalink.key,
+            datalink: datalink ? datalink.name : 'Not specified',
+            tags: this.hubCache.getObjectTags(eSharedObjectType.Datalink, datalink.key),
+            dependencies: this.getDependencies(step.dexihDatalinkDependencies),
+            inputs: this.getInputs(step.dexihDatalinkStepColumns),
+            updateDate: step.updateDate,
+            errors: stepControl.valid ? 'No errors' : 'Errors'
+          });
         });
-      });
     }
 
     this._stepTableData.next(stepData);
@@ -156,13 +158,13 @@ export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
   stepSortChanged(items: Array<DexihDatalinkStep>) {
     let steps = (<FormArray>this.mainForm.controls['dexihDatalinkSteps']);
     items.forEach((item, index) => {
-        let step = <FormGroup>steps.controls
-            .find(c => c.value.key === item.key);
-        if (step) {
-          step.controls.position.setValue(index);
-        }
+      let step = <FormGroup>steps.controls
+        .find(c => c.value.key === item.key);
+      if (step) {
+        step.controls.position.setValue(index);
+      }
     });
-}
+  }
 
   getDependencies(dependencies: Array<DexihDatalinkDependency>) {
     let depString = '';
@@ -220,7 +222,7 @@ export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
   }
 
   editDatalinkStep(step: DexihDatalinkStep) {
-    this.router.navigate(['step', step.key], { relativeTo: this.route.parent, queryParamsHandling: 'preserve'});
+    this.router.navigate(['step', step.key], { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
   }
 
   deleteDatalinkSteps(steps: Array<DexihDatalinkStep>) {
@@ -236,8 +238,8 @@ export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
   clearDependencies(steps: Array<DexihDatalinkStep>) {
     let stepsArray = <FormArray>this.mainForm.controls.dexihDatalinkSteps;
     steps.forEach(step => {
-      let stepControl = <FormGroup> stepsArray.controls.find(c => c.value.key === step.key);
-      let dependencies = <FormArray> stepControl.controls['dexihDatalinkDependencies'];
+      let stepControl = <FormGroup>stepsArray.controls.find(c => c.value.key === step.key);
+      let dependencies = <FormArray>stepControl.controls['dexihDatalinkDependencies'];
       dependencies.clear();
     });
 
@@ -248,26 +250,26 @@ export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
     let stepsArray = <FormArray>this.mainForm.controls.dexihDatalinkSteps;
     let allSteps = stepsArray.value;
 
-    let stepTargets: Array<{key: number, tables: Array<number>}> = [];
+    let stepTargets: Array<{ key: number, tables: Array<number> }> = [];
     let minKey = -1;
 
     allSteps.forEach(step => {
-      stepTargets.push( {key: step.key, tables:this.getDatalinkTargetTables(step.datalinkKey)});
+      stepTargets.push({ key: step.key, tables: this.getDatalinkTargetTables(step.datalinkKey) });
     });
 
     steps.forEach(step => {
-      let stepControl = <FormGroup> stepsArray.controls.find(c => c.value.key === step.key);
-      let dependencies = <FormArray> stepControl.controls['dexihDatalinkDependencies'];
+      let stepControl = <FormGroup>stepsArray.controls.find(c => c.value.key === step.key);
+      let dependencies = <FormArray>stepControl.controls['dexihDatalinkDependencies'];
       dependencies.clear();
 
       let sourceTables = this.getDatalinkSourceTables(step.datalinkKey);
 
       stepTargets.forEach(stepTarget => {
-        for( let t of stepTarget.tables) {
+        for (let t of stepTarget.tables) {
           if (sourceTables.indexOf(t) >= 0) {
             let dep = new DexihDatalinkDependency();
             dep.key = minKey;
-            dep.datalinkStepKey =step.key;
+            dep.datalinkStepKey = step.key;
             dep.dependentDatalinkStepKey = stepTarget.key;
             dependencies.push(this.formService.datalinkDependencyFormGroup(dep));
             minKey--;
@@ -305,16 +307,16 @@ export class DatajobEditPropertiesComponent implements OnInit, OnDestroy {
         });
       }
     });
-    
+
     return tables;
   }
 
-  getDatalinkTable(datalinkTable: DexihDatalinkTable) : Array<number> {
+  getDatalinkTable(datalinkTable: DexihDatalinkTable): Array<number> {
     if (!datalinkTable) {
       return [];
     }
 
-    switch(datalinkTable.sourceType) {
+    switch (datalinkTable.sourceType) {
       case eSourceType.Table: {
         return [datalinkTable.sourceTableKey];
       }

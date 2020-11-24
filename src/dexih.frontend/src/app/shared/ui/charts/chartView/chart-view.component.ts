@@ -1,11 +1,12 @@
-import { Component, OnInit, Input, OnChanges, OnDestroy, AfterViewInit, SimpleChanges, ViewChild, ElementRef, ViewChildren } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, OnDestroy,
+    SimpleChanges, ViewChildren } from '@angular/core';
 import { eInputFormat, ChartTypes, ChartItem } from '../chart-groups';
 import { colorSets } from '../chart-colors';
 import { Subscription, Observable } from 'rxjs';
-import { ChartConfig, ChartSeries, eChartType, eLineCurve, TableColumn } from '../../../shared.models';
+import { ChartConfig, ChartSeries, eChartType, eLineCurve } from '../../../shared.models';
 import { Functions } from '../../../utils/functions';
 import { BaseChartDirective, Label } from 'ng2-charts';
-import { ChartDataSets, ChartLegendLabelOptions, ChartOptions, ChartPoint, ChartType, PositionType } from 'chart.js';
+import { ChartDataSets, ChartOptions, PositionType } from 'chart.js';
 import { QueryList } from '@angular/core';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { debounceTime } from 'rxjs/operators';
@@ -26,13 +27,10 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
 
     @ViewChildren(BaseChartDirective) charts: QueryList<BaseChartDirective>;
 
-    private _updateChartSubscription: Subscription;
-    private _updateOptionsSubscription: Subscription;
-
     public gridColumnIndex: any = null;
     public labelColumnIndex: any = null;
     public seriesPivotIndex: any = null;
-    public seriesColumnsIndex : {column, config: ChartSeries}[] = [];
+    public seriesColumnsIndex: {column, config: ChartSeries}[] = [];
     public xColumnIndex: any = null;
     public yColumnIndex: any = null;
     public minColumnIndex: any = null;
@@ -57,6 +55,10 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
     view: any;
 
     public chartOptions: ChartOptions;
+
+    private _updateChartSubscription: Subscription;
+    private _updateOptionsSubscription: Subscription;
+
 
     constructor() {
     }
@@ -222,7 +224,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
         return colorSet.domain;
     }
 
-    generateColorSet(labels: Label[], lightenPercent: number = 1): string[] {
+    generateColorSet(labels: Label[], lightenPercent = 1): string[] {
         let count = labels.length;
         const colors = new Array<string>(labels.length);
 
@@ -275,7 +277,6 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                 chartItems.length = values.length;
             }
 
-            let singleColor = this.chartType.isBar && this.config.singleBarColor ? true : false;
 
 
             for (let chartIndex = 0; chartIndex < values.length; chartIndex++) {
@@ -352,7 +353,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                             for (let i = 0; i < data.length; i++) {
                                 labels[i] = this.formatValue(data, this.labelColumnIndex, i).toString();
                             }
-                            
+
                             dataSets = new Array<ChartDataSets>(this.seriesColumnsIndex.length);
                             for (let i = 0; i < this.seriesColumnsIndex.length; i++) {
                                 const dataSet: ChartDataSets = {};
@@ -360,7 +361,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                                 dataSet.label = this.seriesColumnsIndex[i].column.title;
                                 dataSet.type = this.chartType.key === eChartType.BarVertical && this.seriesColumnsIndex[i].config.lineChart ? 'line' : null;
                                 dataSet.yAxisID = this.chartType.key === eChartType.BarVertical && this.chartType.isBar && this.seriesColumnsIndex[i].config.alternateAxis ? 'right' : null;
-    
+
                                 for (let j = 0; j < data.length; j++) {
                                     dataSet.data[j] = this.rawValue(data, this.seriesColumnsIndex[i].column.name, j);
                                 }
@@ -374,7 +375,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                             let dataSet = dataSets[i];
                             dataSet.fill = this.config.fill;
                             dataSet.spanGaps = this.config.spanGaps;
-                            
+
                             switch(this.config.lineCurve) {
                                 case eLineCurve.Straight:
                                     dataSet.lineTension = 0;
@@ -387,7 +388,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                                 case eLineCurve.Monotone:
                                     dataSet.lineTension = 0;
                                     dataSet.cubicInterpolationMode = 'monotone';
-                                    break;                        
+                                    break;
                             }
                             // dataSet.lineTension = 1;
 
@@ -418,7 +419,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                                 }
                             }
                         }
-                        
+
                         this.setSeriesLabel(this.seriesColumnsIndex.filter(c => !c.config.alternateAxis).map(c => c.column.title).join(' / '));
                         this.config.yAxisLabelRight = this.seriesColumnsIndex.filter(c => c.config.alternateAxis).map(c => c.column.title).join(' / ')
 
@@ -454,7 +455,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                         // } else {
                         //     chartItem.labels = labels;
                         // }
-                        
+
 
                         // chartItems.push({name: value?.name, dataSets: dataSets, data: undefined, labels: labels});
                         break;
@@ -499,7 +500,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                 }
 
                 this.updateChartOptions();
-                
+
             }
 
             // this.resultArray = chartItems;
@@ -580,9 +581,9 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                         display: true,
                         color: this.config.showGridLines ? 'LightGray' : 'transparent',
                         drawBorder: true,
-                        zeroLineColor: "black"
+                        zeroLineColor: 'black'
                     }
-                }], 
+                }],
                 yAxes: [{
                     display: this.chartType.allowYAxis && this.config.showYAxis,
                     scaleLabel: {
@@ -597,7 +598,7 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                         display: true,
                         color: this.config.showGridLines ? 'LightGray' : 'transparent',
                         drawBorder: true,
-                        zeroLineColor: "black"
+                        zeroLineColor: 'black'
                     }
                 },
                 {
@@ -616,10 +617,10 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
                         display: true,
                         color: this.config.showGridLines ? 'LightGray' : 'transparent',
                         drawBorder: true,
-                        zeroLineColor: "black"
+                        zeroLineColor: 'black'
                     }
                 }
-            ] 
+            ]
             },
             plugins: {
               datalabels: {
@@ -728,22 +729,22 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
 
     // Version 4.0
     // https://github.com/PimpTrizkit/PJs/wiki/12.-Shade,-Blend-and-Convert-a-Web-Color-(pSBC.js)
-    pSBC(p,c0,c1,l) {
-        let r,g,b,P,f,t,h,i=parseInt,m=Math.round,a;
+    pSBC(p, c0, c1, l) {
+        let r, g, b, P, f, t, h, i = parseInt, m = Math.round, a;
 
-        if( typeof(p) !== "number" || p < -1 || p > 1 || typeof(c0) !=="string" || (c0[0] !=='r' && c0[0] !=='#') ||( c1 && !a )) {
+        if ( typeof(p) !== 'number' || p < -1 || p > 1 || typeof(c0) !== 'string' || (c0[0] !== 'r' && c0[0] !== '#') || ( c1 && !a )) {
             return null;
         }
 
-        const pSBCr=(d)=>{
-            let n=d.length,x : any={};
-            if (n>9) {
-                [r,g,b,a]=d=d.split(","),n=d.length;
+        const pSBCr = (d) => {
+            let n = d.length, x: any = {};
+            if (n > 9) {
+                [r, g, b, a] = d = d.split(','), n=d.length;
                 if(n<3||n>4)return null;
-                x.r=i(r[3]=="a"?r.slice(5):r.slice(4)),x.g=i(g),x.b=i(b),x.a=a?parseFloat(a):-1
+                x.r=i(r[3]=='a'?r.slice(5):r.slice(4)),x.g=i(g),x.b=i(b),x.a=a?parseFloat(a):-1
             }else{
                 if(n==8||n==6||n<4)return null;
-                if(n<6)d="#"+d[1]+d[1]+d[2]+d[2]+d[3]+d[3]+(n>4?d[4]+d[4]:"");
+                if(n<6)d='#'+d[1]+d[1]+d[2]+d[2]+d[3]+d[3]+(n>4?d[4]+d[4]:'');
                 d=i(d.slice(1),16);
                 if(n==9||n==5)x.r=d>>24&255,x.g=d>>16&255,x.b=d>>8&255,x.a=m((d&255)/0.255)/1000;
                 else x.r=d>>16,x.g=d>>8&255,x.b=d&255,x.a=-1
@@ -751,14 +752,14 @@ export class ChartViewComponent implements OnInit, OnDestroy, OnChanges {
             return x
         };
         
-        h=c0.length>9,h=a?c1.length>9?true:c1=="c"?!h:false:h,f=pSBCr(c0),P=p<0,t=c1&&c1!="c"?pSBCr(c1):P?{r:0,g:0,b:0,a:-1}:{r:255,g:255,b:255,a:-1},p=P?p*-1:p,P=1-p;
+        h=c0.length>9,h=a?c1.length>9?true:c1=='c'?!h:false:h,f=pSBCr(c0),P=p<0,t=c1&&c1!='c'?pSBCr(c1):P?{r:0,g:0,b:0,a:-1}:{r:255,g:255,b:255,a:-1},p=P?p*-1:p,P=1-p;
         if(!f||!t)return null;
         if(l)r=m(P*f.r+p*t.r),g=m(P*f.g+p*t.g),b=m(P*f.b+p*t.b);
         else r=m((P*f.r**2+p*t.r**2)**0.5),g=m((P*f.g**2+p*t.g**2)**0.5),b=m((P*f.b**2+p*t.b**2)**0.5);
 
         a=f.a,t=t.a,f=a>=0||t>=0,a=f?a<0?t:t<0?a:a*P+t*p:0;
-        if(h)return"rgb"+(f?"a(":"(")+r+","+g+","+b+(f?","+m(a*1000)/1000:"")+")";
-        else return"#"+(4294967296+r*16777216+g*65536+b*256+(f?m(a*255):0)).toString(16).slice(1,f?undefined:-2)
+        if(h)return'rgb'+(f?'a(':'(')+r+','+g+','+b+(f?','+m(a*1000)/1000:'')+')';
+        else return'#'+(4294967296+r*16777216+g*65536+b*256+(f?m(a*255):0)).toString(16).slice(1,f?undefined:-2)
     }
 
 }
