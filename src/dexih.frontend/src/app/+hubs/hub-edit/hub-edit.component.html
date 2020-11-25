@@ -33,6 +33,12 @@
 				</section>
 
 				<section>
+					<form-select label="Time Zone" formControlName="timeZone" [items]="timeZones" itemKey="name" itemName="description"
+						iconClass="fa fa-clock-o" [errors]="formErrors.sharedAccess"  note='The time zone is used for job scheduling.' [enableFilter]="true" [enableTextEntry]="false">
+					</form-select>
+				</section>
+
+				<section>
 					<form-select label="Shared Data Access" formControlName="sharedAccess" [items]="SharedAccessItems" itemKey="key" itemName="description"
 						iconClass="fa fa-lock" [errors]="formErrors.sharedAccess"  note='The level of access required for users to access shared data in this hub.' [enableFilter]="false">
 					</form-select>

@@ -52,6 +52,7 @@ export class DexihHubAuth {
     public encryptionKey: string;
     public sharedAccess: eSharedAccess = eSharedAccess.Registered;
     public expiryDate: Date;
+    public timeZone: string;
 
     public dexihHubUsers: Array<DexihHubUser>;
 

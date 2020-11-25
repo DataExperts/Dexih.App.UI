@@ -1292,7 +1292,7 @@ namespace dexih.api.Services.Remote
                 var alertEmails = await database.GetAlertEmails(hubKey, cancellationToken);
                 
                 // populate the table/datalink cache to be send to the remote agent.
-                var cache = new CacheManager(hubKey, hub.EncryptionKey);
+                var cache = new CacheManager(hubKey, hub.EncryptionKey, hub.TimeZone);
                 cache.AddDatajobs(datajobKeys, hub);
 
                 var value = new

@@ -22,7 +22,7 @@ export class AnimateConfig {
    }
    
    export class ApplicationUser {
-    public id: string = '967ea061-9c23-4bcf-8f53-c5b4e02d1557';
+    public id: string = '768df978-7165-4e3d-9e2a-ef653bb74c5e';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -31,7 +31,7 @@ export class AnimateConfig {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = '68a3da62-37d3-4bb7-bdeb-33f8b30047d5';
+    public securityStamp: string = 'a3236882-0e0f-4014-877b-2d7cb5cc6d6c';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -91,7 +91,6 @@ export class AnimateConfig {
     public longitudeColumn: string = null;
     public chartType: eChartType = eChartType.BarVertical;
     public colorScheme: string = 'natural';
-    public showGradient: boolean = false;
     public showXAxis: boolean = true;
     public showYAxis: boolean = true;
     public showLegend: boolean = false;
@@ -907,6 +906,7 @@ export class AnimateConfig {
     public description: string = null;
     public encryptionKey: string = null;
     public sharedAccess: eSharedAccess = eSharedAccess.Public;
+    public timeZone: string = null;
     public dexihConnections: DexihConnection[] = [];
     public dexihTables: DexihTable[] = [];
     public dexihDatajobs: DexihDatajob[] = [];
@@ -1704,6 +1704,7 @@ export class AnimateConfig {
     public functions: FunctionReference[] = [];
     public connections: ConnectionReference[] = [];
     public transforms: TransformReference[] = [];
+    public timeZones: RemoteTimeZone[] = [];
    }
    
    export class RemoteMessage {
@@ -1733,6 +1734,11 @@ export class AnimateConfig {
     public plugins: PluginsSection = new PluginsSection();
     public alerts: any = null;
     public cache: any = null;
+   }
+   
+   export class RemoteTimeZone {
+    public name: string = null;
+    public description: string = null;
    }
    
    export class RenewSslCertificateModel {

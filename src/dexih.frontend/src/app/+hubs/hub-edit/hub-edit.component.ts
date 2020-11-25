@@ -6,7 +6,8 @@ import { AuthService } from '../../+auth/auth.service';
 import { DexihHubAuth } from '../../+auth/auth.models';
 import { Location } from '@angular/common';
 import { DexihMessageComponent } from '../../shared/ui/dexihMessage';
-import { eSharedAccessItems, DexihRemoteAgent } from '../../shared/shared.models';
+import { eSharedAccessItems, DexihRemoteAgent, RemoteTimeZone } from '../../shared/shared.models';
+import { HubService } from '../../+hub/hub.service';
 
 @Component({
 
@@ -23,6 +24,7 @@ export class HubEditComponent implements OnInit, OnDestroy {
   pageTitle: string;
 
   hub: DexihHubAuth;
+  public timeZones: RemoteTimeZone[];
 
   SharedAccessItems = eSharedAccessItems.filter(c => c.key > 0);
 
@@ -57,15 +59,15 @@ export class HubEditComponent implements OnInit, OnDestroy {
     },
     'expiryDate': {
       'validateDate': 'The expiry date is invalid.'
-    }
+    },
   };
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute,
-    private location: Location,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private hubService: HubService
   ) {
   }
 
@@ -76,11 +78,20 @@ export class HubEditComponent implements OnInit, OnDestroy {
         this.route.data,
         this.route.params,
         this.authService.getHubsObservable(),
-        this.authService.getRemoteAgentsObservable(),
+        this.authService.getGlobalCacheObservable(),
+        this.hubService.getRemoteLibrariesObservable()
       ).subscribe(result => {
         let data = result[0];
         let params = result[1];
         let hubs = result[2];
+        let globalCache = result[3];
+        let remoteLibraries = result[4];
+
+        if(remoteLibraries) {
+          this.timeZones = remoteLibraries.timeZones
+        } else {
+          this.timeZones = globalCache.defaultRemoteLibraries.timeZones;
+        }
 
         this.action = data['action'];
         this.pageTitle = data['pageTitle'];
@@ -179,6 +190,7 @@ export class HubEditComponent implements OnInit, OnDestroy {
         Validators.required,
       ]],
       'expiryDate': [this.hub.expiryDate, []],
+      'timeZone': [this.hub.timeZone, []],
     });
 
     if (this._valueChangesSubscription) { this._valueChangesSubscription.unsubscribe(); }
