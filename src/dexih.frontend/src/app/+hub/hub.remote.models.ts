@@ -231,6 +231,7 @@ export const TypeCodes = [
     {key: eTypeCode.Binary, name: 'Binary', isNumeric: false, isString: false},
     {key: eTypeCode.Boolean, name: 'Boolean', isNumeric: false, isString: false},
     {key: eTypeCode.DateTime, name: 'Date & Time', isNumeric: false, isString: false},
+    {key: eTypeCode.DateTimeOffset, name: 'Date & Time (with TZ)', isNumeric: false, isString: false},
     {key: eTypeCode.Date, name: 'Date', isNumeric: false, isString: false},
     {key: eTypeCode.Decimal, name: 'Decimal', isNumeric: true, isString: false},
     {key: eTypeCode.Double, name: 'Double', isNumeric: true, isString: false},

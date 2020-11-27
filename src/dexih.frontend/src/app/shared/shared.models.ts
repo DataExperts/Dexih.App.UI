@@ -22,7 +22,7 @@ export class AnimateConfig {
    }
    
    export class ApplicationUser {
-    public id: string = '768df978-7165-4e3d-9e2a-ef653bb74c5e';
+    public id: string = '57bb7c8f-83fe-4376-a6b7-22f9ea9bf646';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -31,7 +31,7 @@ export class AnimateConfig {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = 'a3236882-0e0f-4014-877b-2d7cb5cc6d6c';
+    public securityStamp: string = '563c3971-1fda-44b2-b1b9-11f7800ec9d7';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -1496,7 +1496,7 @@ export class AnimateConfig {
     public endTime: Date = null;
     public triggers: ManagedTaskTrigger[] = [];
     public fileWatchers: ManagedTaskFileWatcher[] = [];
-    public nextTriggerTime: Date = null;
+    public nextTriggerTime: any = null;
     public runCount: number = 0;
     public dependentTaskIds: string[] = [];
     public dependenciesMet: boolean = true;
@@ -1528,6 +1528,7 @@ export class AnimateConfig {
     public startTime: any = null;
     public endTime: any = null;
     public maxRecurs: number = 1;
+    public timeZone: string = null;
     public details: string = 'Error: Interval specified, however no interval time set.\n';
    }
    
@@ -1963,7 +1964,7 @@ export class AnimateConfig {
     public message: string = null;
     public exceptionDetails: string = null;
     public initializeTime: Date = null;
-    public scheduledTime: Date = null;
+    public scheduledTime: any = null;
     public startTime: Date = null;
     public endTime: Date = null;
     public lastUpdateTime: Date = null;
@@ -2558,14 +2559,16 @@ export class AnimateConfig {
    export enum eGenericType {
     None = 1,
     Numeric = 2,
-    All = 3,
-    String = 4,
+    DateTime = 3,
+    All = 4,
+    String = 5,
    }
    
    export const eGenericTypeItems = [
     {key: 0, name: 'Unknown'},
     {key: eGenericType.None, name: 'None'},
     {key: eGenericType.Numeric, name: 'Numeric'},
+    {key: eGenericType.DateTime, name: 'DateTime'},
     {key: eGenericType.All, name: 'All'},
     {key: eGenericType.String, name: 'String'},
    ]
@@ -3206,6 +3209,7 @@ export class AnimateConfig {
     Node = 25,
     Geometry = 26,
     Date = 27,
+    DateTimeOffset = 28,
    }
    
    export const eTypeCodeItems = [
@@ -3237,6 +3241,7 @@ export class AnimateConfig {
     {key: eTypeCode.Node, name: 'Node'},
     {key: eTypeCode.Geometry, name: 'Geometry'},
     {key: eTypeCode.Date, name: 'Date'},
+    {key: eTypeCode.DateTimeOffset, name: 'DateTimeOffset'},
    ]
    
    export enum eUpdateStrategy {
