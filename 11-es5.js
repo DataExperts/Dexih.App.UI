@@ -7,7 +7,128 @@
 
   (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[11], {
     /***/
-    "./src/app/+public/public.component.ts":
+    "NAU5":
+    /*!******************************************!*\
+      !*** ./src/app/+public/public.module.ts ***!
+      \******************************************/
+
+    /*! exports provided: PublicModule */
+
+    /***/
+    function NAU5(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "PublicModule", function () {
+        return PublicModule;
+      });
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! @angular/core */
+      "8Y7J");
+      /* harmony import */
+
+
+      var _public_routing__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! ./public.routing */
+      "uG3f");
+      /* harmony import */
+
+
+      var _shared_shared_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! ../shared/shared.module */
+      "PCNd");
+      /* harmony import */
+
+
+      var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! @angular/forms */
+      "s7LF");
+      /* harmony import */
+
+
+      var _public_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! ./public.service */
+      "UA2G");
+      /* harmony import */
+
+
+      var _public_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! ./public.component */
+      "TsjS");
+      /* harmony import */
+
+
+      var _shared_layout_ribbon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! ../shared/layout/ribbon */
+      "Fxci");
+      /* harmony import */
+
+
+      var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! @angular/router */
+      "iInd");
+
+      var PublicModule = /*#__PURE__*/function () {
+        function PublicModule() {
+          _classCallCheck(this, PublicModule);
+        }
+
+        _createClass(PublicModule, null, [{
+          key: "forRoot",
+          value: function forRoot() {
+            return {
+              ngModule: PublicModule,
+              providers: [_public_service__WEBPACK_IMPORTED_MODULE_4__["PublicService"]]
+            };
+          }
+        }]);
+
+        return PublicModule;
+      }();
+
+      PublicModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineNgModule"]({
+        type: PublicModule
+      });
+      PublicModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector"]({
+        factory: function PublicModule_Factory(t) {
+          return new (t || PublicModule)();
+        },
+        providers: [_public_service__WEBPACK_IMPORTED_MODULE_4__["PublicService"]],
+        imports: [[_shared_shared_module__WEBPACK_IMPORTED_MODULE_2__["SharedModule"], _public_routing__WEBPACK_IMPORTED_MODULE_1__["Routing"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"], _shared_layout_ribbon__WEBPACK_IMPORTED_MODULE_6__["RibbonModule"]]]
+      });
+
+      (function () {
+        (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](PublicModule, {
+          declarations: [_public_component__WEBPACK_IMPORTED_MODULE_5__["PublicComponent"]],
+          imports: [_shared_shared_module__WEBPACK_IMPORTED_MODULE_2__["SharedModule"], _angular_router__WEBPACK_IMPORTED_MODULE_7__["RouterModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"], _shared_layout_ribbon__WEBPACK_IMPORTED_MODULE_6__["RibbonModule"]]
+        });
+      })();
+      /*@__PURE__*/
+
+
+      (function () {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](PublicModule, [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
+          args: [{
+            imports: [_shared_shared_module__WEBPACK_IMPORTED_MODULE_2__["SharedModule"], _public_routing__WEBPACK_IMPORTED_MODULE_1__["Routing"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"], _shared_layout_ribbon__WEBPACK_IMPORTED_MODULE_6__["RibbonModule"]],
+            declarations: [_public_component__WEBPACK_IMPORTED_MODULE_5__["PublicComponent"]],
+            providers: [_public_service__WEBPACK_IMPORTED_MODULE_4__["PublicService"]],
+            exports: []
+          }]
+        }], null, null);
+      })();
+      /***/
+
+    },
+
+    /***/
+    "TsjS":
     /*!*********************************************!*\
       !*** ./src/app/+public/public.component.ts ***!
       \*********************************************/
@@ -15,7 +136,7 @@
     /*! exports provided: PublicComponent */
 
     /***/
-    function srcAppPublicPublicComponentTs(module, __webpack_exports__, __webpack_require__) {
+    function TsjS(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
@@ -30,55 +151,55 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "8Y7J");
       /* harmony import */
 
 
       var _auth_auth_models__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! ../+auth/auth.models */
-      "./src/app/+auth/auth.models.ts");
+      "3WyZ");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      "iInd");
       /* harmony import */
 
 
       var _shared_utils_functions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! ../shared/utils/functions */
-      "./src/app/shared/utils/functions.ts");
+      "VxyA");
       /* harmony import */
 
 
       var _auth_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! ../+auth/auth.service */
-      "./src/app/+auth/auth.service.ts");
+      "ElCs");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      "SVse");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "s7LF");
       /* harmony import */
 
 
       var ngx_d_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-d-components */
-      "./node_modules/ngx-d-components/__ivy_ngcc__/fesm2015/ngx-d-components.js");
+      "8V27");
       /* harmony import */
 
 
       var _shared_layout_ribbon_ribbon_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! ../shared/layout/ribbon/ribbon.component */
-      "./src/app/shared/layout/ribbon/ribbon.component.ts");
+      "ScdM");
 
       function PublicComponent_div_0_router_outlet_37_Template(rf, ctx) {
         if (rf & 1) {
@@ -321,212 +442,7 @@
     },
 
     /***/
-    "./src/app/+public/public.module.ts":
-    /*!******************************************!*\
-      !*** ./src/app/+public/public.module.ts ***!
-      \******************************************/
-
-    /*! exports provided: PublicModule */
-
-    /***/
-    function srcAppPublicPublicModuleTs(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "PublicModule", function () {
-        return PublicModule;
-      });
-      /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-      /* harmony import */
-
-
-      var _public_routing__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! ./public.routing */
-      "./src/app/+public/public.routing.ts");
-      /* harmony import */
-
-
-      var _shared_shared_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! ../shared/shared.module */
-      "./src/app/shared/shared.module.ts");
-      /* harmony import */
-
-
-      var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
-      /* harmony import */
-
-
-      var _public_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-      /*! ./public.service */
-      "./src/app/+public/public.service.ts");
-      /* harmony import */
-
-
-      var _public_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-      /*! ./public.component */
-      "./src/app/+public/public.component.ts");
-      /* harmony import */
-
-
-      var _shared_layout_ribbon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-      /*! ../shared/layout/ribbon */
-      "./src/app/shared/layout/ribbon/index.ts");
-      /* harmony import */
-
-
-      var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
-      /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
-
-      var PublicModule = /*#__PURE__*/function () {
-        function PublicModule() {
-          _classCallCheck(this, PublicModule);
-        }
-
-        _createClass(PublicModule, null, [{
-          key: "forRoot",
-          value: function forRoot() {
-            return {
-              ngModule: PublicModule,
-              providers: [_public_service__WEBPACK_IMPORTED_MODULE_4__["PublicService"]]
-            };
-          }
-        }]);
-
-        return PublicModule;
-      }();
-
-      PublicModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineNgModule"]({
-        type: PublicModule
-      });
-      PublicModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector"]({
-        factory: function PublicModule_Factory(t) {
-          return new (t || PublicModule)();
-        },
-        providers: [_public_service__WEBPACK_IMPORTED_MODULE_4__["PublicService"]],
-        imports: [[_shared_shared_module__WEBPACK_IMPORTED_MODULE_2__["SharedModule"], _public_routing__WEBPACK_IMPORTED_MODULE_1__["Routing"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"], _shared_layout_ribbon__WEBPACK_IMPORTED_MODULE_6__["RibbonModule"]]]
-      });
-
-      (function () {
-        (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](PublicModule, {
-          declarations: [_public_component__WEBPACK_IMPORTED_MODULE_5__["PublicComponent"]],
-          imports: [_shared_shared_module__WEBPACK_IMPORTED_MODULE_2__["SharedModule"], _angular_router__WEBPACK_IMPORTED_MODULE_7__["RouterModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"], _shared_layout_ribbon__WEBPACK_IMPORTED_MODULE_6__["RibbonModule"]]
-        });
-      })();
-      /*@__PURE__*/
-
-
-      (function () {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](PublicModule, [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
-          args: [{
-            imports: [_shared_shared_module__WEBPACK_IMPORTED_MODULE_2__["SharedModule"], _public_routing__WEBPACK_IMPORTED_MODULE_1__["Routing"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"], _shared_layout_ribbon__WEBPACK_IMPORTED_MODULE_6__["RibbonModule"]],
-            declarations: [_public_component__WEBPACK_IMPORTED_MODULE_5__["PublicComponent"]],
-            providers: [_public_service__WEBPACK_IMPORTED_MODULE_4__["PublicService"]],
-            exports: []
-          }]
-        }], null, null);
-      })();
-      /***/
-
-    },
-
-    /***/
-    "./src/app/+public/public.routing.ts":
-    /*!*******************************************!*\
-      !*** ./src/app/+public/public.routing.ts ***!
-      \*******************************************/
-
-    /*! exports provided: routes, Routing */
-
-    /***/
-    function srcAppPublicPublicRoutingTs(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "routes", function () {
-        return routes;
-      });
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "Routing", function () {
-        return Routing;
-      });
-      /* harmony import */
-
-
-      var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! @angular/router */
-      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
-      /* harmony import */
-
-
-      var _public_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! ./public.component */
-      "./src/app/+public/public.component.ts");
-      /* harmony import */
-
-
-      var _shared_ui_sharedData__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! ../shared/ui/sharedData */
-      "./src/app/shared/ui/sharedData/index.ts"); // insert the "hubs" routes once for the base, and once under the summary section to ensure the
-      // breadcrumbs are accurate.
-
-
-      var routes = [{
-        path: '',
-        component: _public_component__WEBPACK_IMPORTED_MODULE_1__["PublicComponent"],
-        children: [{
-          path: '',
-          redirectTo: 'index'
-        }, {
-          path: 'index',
-          data: {
-            pageTitle: 'Shared Data'
-          },
-          children: [{
-            path: '',
-            component: _shared_ui_sharedData__WEBPACK_IMPORTED_MODULE_2__["SharedDataComponent"],
-            data: {
-              pageTitle: 'Shared Data'
-            }
-          }, {
-            path: 'preview/:hubKey/:objectType/:objectKey',
-            component: _shared_ui_sharedData__WEBPACK_IMPORTED_MODULE_2__["PreviewComponent"],
-            data: {
-              pageTitle: 'Preview'
-            }
-          }, {
-            path: 'previewDashboard/:hubKey/:dashboardKey',
-            component: _shared_ui_sharedData__WEBPACK_IMPORTED_MODULE_2__["PreviewDashboardComponent"],
-            data: {
-              pageTitle: 'Preview Dashboard'
-            }
-          }]
-        }]
-      }];
-
-      var Routing = _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forChild(routes);
-      /***/
-
-    },
-
-    /***/
-    "./src/app/+public/public.service.ts":
+    "UA2G":
     /*!*******************************************!*\
       !*** ./src/app/+public/public.service.ts ***!
       \*******************************************/
@@ -534,7 +450,7 @@
     /*! exports provided: PublicService */
 
     /***/
-    function srcAppPublicPublicServiceTs(module, __webpack_exports__, __webpack_require__) {
+    function UA2G(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
@@ -549,31 +465,31 @@
 
       var _auth_auth_models__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! ../+auth/auth.models */
-      "./src/app/+auth/auth.models.ts");
+      "3WyZ");
       /* harmony import */
 
 
       var _logging__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! ../../logging */
-      "./src/logging.ts");
+      "rgmq");
       /* harmony import */
 
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "8Y7J");
       /* harmony import */
 
 
       var _auth_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! ../+auth/auth.service */
-      "./src/app/+auth/auth.service.ts");
+      "ElCs");
       /* harmony import */
 
 
       var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! rxjs */
-      "./node_modules/rxjs/_esm2015/index.js");
+      "qCKp");
 
       var PublicService = /*#__PURE__*/function () {
         function PublicService(authService) {
@@ -783,6 +699,90 @@
           }];
         }, null);
       })();
+      /***/
+
+    },
+
+    /***/
+    "uG3f":
+    /*!*******************************************!*\
+      !*** ./src/app/+public/public.routing.ts ***!
+      \*******************************************/
+
+    /*! exports provided: routes, Routing */
+
+    /***/
+    function uG3f(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "routes", function () {
+        return routes;
+      });
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "Routing", function () {
+        return Routing;
+      });
+      /* harmony import */
+
+
+      var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! @angular/router */
+      "iInd");
+      /* harmony import */
+
+
+      var _public_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! ./public.component */
+      "TsjS");
+      /* harmony import */
+
+
+      var _shared_ui_sharedData__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! ../shared/ui/sharedData */
+      "1wre"); // insert the "hubs" routes once for the base, and once under the summary section to ensure the
+      // breadcrumbs are accurate.
+
+
+      var routes = [{
+        path: '',
+        component: _public_component__WEBPACK_IMPORTED_MODULE_1__["PublicComponent"],
+        children: [{
+          path: '',
+          redirectTo: 'index'
+        }, {
+          path: 'index',
+          data: {
+            pageTitle: 'Shared Data'
+          },
+          children: [{
+            path: '',
+            component: _shared_ui_sharedData__WEBPACK_IMPORTED_MODULE_2__["SharedDataComponent"],
+            data: {
+              pageTitle: 'Shared Data'
+            }
+          }, {
+            path: 'preview/:hubKey/:objectType/:objectKey',
+            component: _shared_ui_sharedData__WEBPACK_IMPORTED_MODULE_2__["PreviewComponent"],
+            data: {
+              pageTitle: 'Preview'
+            }
+          }, {
+            path: 'previewDashboard/:hubKey/:dashboardKey',
+            component: _shared_ui_sharedData__WEBPACK_IMPORTED_MODULE_2__["PreviewDashboardComponent"],
+            data: {
+              pageTitle: 'Preview Dashboard'
+            }
+          }]
+        }]
+      }];
+
+      var Routing = _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forChild(routes);
       /***/
 
     }

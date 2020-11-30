@@ -7,7 +7,36 @@
 
   (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["common"], {
     /***/
-    "./src/app/shared/forms/forms.service.ts":
+    "M0ag":
+    /*!*********************************!*\
+      !*** ./src/app/shared/index.ts ***!
+      \*********************************/
+
+    /*! exports provided: SharedModule */
+
+    /***/
+    function M0ag(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony import */
+
+
+      var _shared_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! ./shared.module */
+      "PCNd");
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "SharedModule", function () {
+        return _shared_module__WEBPACK_IMPORTED_MODULE_0__["SharedModule"];
+      });
+      /***/
+
+    },
+
+    /***/
+    "d2yJ":
     /*!***********************************************!*\
       !*** ./src/app/shared/forms/forms.service.ts ***!
       \***********************************************/
@@ -15,7 +44,7 @@
     /*! exports provided: FormsService */
 
     /***/
-    function srcAppSharedFormsFormsServiceTs(module, __webpack_exports__, __webpack_require__) {
+    function d2yJ(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
@@ -30,25 +59,25 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      "8Y7J");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      "s7LF");
       /* harmony import */
 
 
       var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! rxjs */
-      "./node_modules/rxjs/_esm2015/index.js");
+      "qCKp");
       /* harmony import */
 
 
       var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! rxjs/operators */
-      "./node_modules/rxjs/_esm2015/operators/index.js");
+      "kU1M");
 
       var FormsService = /*#__PURE__*/function () {
         function FormsService(fb) {
@@ -251,35 +280,6 @@
           }];
         }, null);
       })();
-      /***/
-
-    },
-
-    /***/
-    "./src/app/shared/index.ts":
-    /*!*********************************!*\
-      !*** ./src/app/shared/index.ts ***!
-      \*********************************/
-
-    /*! exports provided: SharedModule */
-
-    /***/
-    function srcAppSharedIndexTs(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony import */
-
-
-      var _shared_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! ./shared.module */
-      "./src/app/shared/shared.module.ts");
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "SharedModule", function () {
-        return _shared_module__WEBPACK_IMPORTED_MODULE_0__["SharedModule"];
-      });
       /***/
 
     }
