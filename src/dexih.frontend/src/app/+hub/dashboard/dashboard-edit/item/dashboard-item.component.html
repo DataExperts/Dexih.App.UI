@@ -4,8 +4,8 @@
             <i class="fa fa-cog fa-spin"></i>
         </div>
         <div class="side-menu-box">
-            <div class="bg-light rounded p-1">
-                <div>
+            <div class="bg-light rounded">
+                <div class="d-flex">
                     <d-button-refresh [compact]="true" (click)="refresh()"></d-button-refresh>
                     <d-button-edit *ngIf="!this.showEdit" class="ml-1" [compact]="true" (click)="toggleEdit()">
                     </d-button-edit>
@@ -58,7 +58,7 @@
     <form [formGroup]="item">
         <section>
             <form-input label="Item Name" formControlName="name" placeholder="Enter the dashboard item name."
-                [autocapitalize]="on" iconClass="fa fa-list">
+                [autocapitalize]="true" iconClass="fa fa-list">
             </form-input>
         </section>
         <section>

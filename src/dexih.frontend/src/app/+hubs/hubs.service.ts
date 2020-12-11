@@ -73,12 +73,7 @@ export class HubsService implements OnDestroy {
             remoteAgentSettings.logLevel = ll;
             remoteAgentSettings.remoteApplicationSettings = settings;
 
-            this.authService.downloadFile('/api/Remote/DownloadZip', {
-                embedUserName,
-                environment,
-                ll,
-                RemoteApplicationSettings: settings
-            }, 'dexih.remote.zip', 'application/zip').then(() => {
+            this.authService.downloadFile('/api/Remote/DownloadZip', remoteAgentSettings, 'dexih.remote.zip', 'application/zip').then(() => {
                 resolve(true);
             }).catch(reason => {
                 this.logger.LogC(() => `downloadRemoteAgent, error: ${reason.message}.`, eLogLevel.Error);
@@ -97,12 +92,8 @@ export class HubsService implements OnDestroy {
             remoteAgentSettings.logLevel = ll;
             remoteAgentSettings.remoteApplicationSettings = settings;
 
-            this.authService.downloadFile('/api/Remote/DownloadAppSettings', {
-                embedUserName,
-                environment,
-                ll,
-                RemoteApplicationSettings: settings
-            }, 'appsettings.json', 'application/json').then(() => {
+            this.authService.downloadFile('/api/Remote/DownloadAppSettings', remoteAgentSettings, 
+                'appsettings.json', 'application/json').then(() => {
                     resolve(true);
             }).catch(reason => {
                 this.logger.LogC(() => `downloadRemoteSettings, error: ${reason.message}.`, eLogLevel.Error);
@@ -111,7 +102,6 @@ export class HubsService implements OnDestroy {
             });
         });
     }
-
 }
 
 

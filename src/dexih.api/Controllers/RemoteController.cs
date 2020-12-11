@@ -547,6 +547,7 @@ namespace dexih.api.Controllers
                     await System.IO.File.WriteAllTextAsync("letsencrypt.pem", pemKey, cancellationToken);
                 }
 
+                _logger.LogDebug($"Placing order for new certificate on domain *.{domain}.");
                 // place order for new certificate
                 var order = await acme.NewOrder(new[] {$"*.{domain}"});
             
