@@ -22,7 +22,7 @@ export class AnimateConfig {
    }
    
    export class ApplicationUser {
-    public id: string = '57bb7c8f-83fe-4376-a6b7-22f9ea9bf646';
+    public id: string = '1a21ab9d-12b3-4f7a-8927-68c772f5f07d';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -31,7 +31,7 @@ export class AnimateConfig {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = '563c3971-1fda-44b2-b1b9-11f7800ec9d7';
+    public securityStamp: string = '7300a3b7-028e-4554-b847-177c74f234ae';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -2289,9 +2289,9 @@ export class AnimateConfig {
    export const eDatalinkTypeItems = [
     {key: 0, name: 'Unknown'},
     {key: eDatalinkType.General, name: 'General', description: 'Non-categorized general purpose datalink'},
-    {key: eDatalinkType.Stage, name: 'Stage', description: 'Staging - loads data into a central/interim database'},
-    {key: eDatalinkType.Validate, name: 'Validate', description: 'Validate - performs data validation and cleaning'},
-    {key: eDatalinkType.Transform, name: 'Transform', description: 'Transform - reshapes, aggregates data'},
+    {key: eDatalinkType.Stage, name: 'Stage', description: 'Staging/Ingestion/Landing/Raw load - loads raw data into a central/interim database'},
+    {key: eDatalinkType.Validate, name: 'Validate', description: 'Validation/Curated/Conformed load  - performs data validation and cleaning'},
+    {key: eDatalinkType.Transform, name: 'Transform', description: 'Transform/Standardize load - reshapes, aggregates data into a standard format'},
     {key: eDatalinkType.Deliver, name: 'Deliver', description: 'Deliver - prepares data for delivering to a system/database'},
     {key: eDatalinkType.Publish, name: 'Publish', description: 'Publish - sends data to a target system/database'},
     {key: eDatalinkType.Share, name: 'Share', description: 'Share - datalink designed to be shared with other users'},

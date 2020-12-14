@@ -187,6 +187,8 @@ namespace dexih.api.Models
         public override DownloadUrl DownloadUrl => string.IsNullOrEmpty(DownloadUrlJson) ? null : DownloadUrlJson.Deserialize<DownloadUrl>();
 
         public bool Save { get; set; }
+        
+        public int SampleRows { get; set; }
     }
     
     public class PreviewProfile: HubModelBase

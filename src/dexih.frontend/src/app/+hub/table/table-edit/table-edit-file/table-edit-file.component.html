@@ -87,9 +87,21 @@
 
             <br/>
             <section>
-                <form-input label="Max Import Levels" formControlName="maxImportLevels" placeholder="Enter the maximum node levels to query the json structure." iconClass="fa fa-file"
-                    [errors]="formService.formErrors.maxImportLevels" note="Enter the maximum levels to query the json file.">
-                </form-input>
+                <div class="form-row">
+                    <section class="form-group col-md-6">
+                        <form-input label="Max Import Levels" formControlName="maxImportLevels"
+                            placeholder="Enter the maximum node levels to query the json structure." iconClass="fa fa-file"
+                            [errors]="formService.formErrors.maxImportLevels"
+                            note="Enter the maximum levels to query the json file.">
+                        </form-input>
+                    </section>
+                    <section class="form-group col-md-6">
+                        <form-input label="Max Sample Rows" type="number" [(ngModel)]="sampleRows" [ngModelOptions]="{standalone: true}"
+                            placeholder="Enter the maximum number of rows to sample." iconClass="fa fa-number"
+                            note="Rows to sample from the flat file to determine column types.">
+                        </form-input>
+                    </section>
+                </div>
             </section>
         </section>
     </form>

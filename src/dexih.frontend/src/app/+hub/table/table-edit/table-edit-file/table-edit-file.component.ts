@@ -28,6 +28,8 @@ export class TableEditFileComponent implements OnInit, OnDestroy {
     public hubCache: HubCache;
     public fileFormats: DexihFileFormat[];
 
+    public sampleRows: number = 20;
+
     filesSubdirectory: string;
 
     formatTypes = formatTypes;
@@ -86,6 +88,7 @@ export class TableEditFileComponent implements OnInit, OnDestroy {
         form.append('table', this.authService.JsonNoNulls(this.formService.currentForm.value));
         form.append('connectionKey', this.connection.key.toString());
         form.append('save', 'false');
+        form.append('sampleRows', (this.sampleRows??0).toString());
 
         let remoteAgent = this.hubService.getRemoteAgentCurrent();
 

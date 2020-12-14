@@ -509,12 +509,12 @@ namespace dexih.api.Controllers
 				var table = importFileFormat.TableObj;
 				var fileSample = new StringBuilder();
 
-				if (table.FormatType == ETypeCode.Text)
+				if (table.FormatType == ETypeCode.Text && importFileFormat.SampleRows > 0)
 				{
 					//get the first 20 lines of the file as a sample.
 					var reader = new StreamReader(file.OpenReadStream());
 
-					for (var i = 0; i < 20; i++)
+					for (var i = 0; i < importFileFormat.SampleRows; i++)
 					{
 						fileSample.AppendLine(await reader.ReadLineAsync());
 

@@ -47,11 +47,12 @@ export class RemoteAgentIndexComponent implements OnInit, OnDestroy {
         this.watchChanges();
 
         try {
-            this._subscription = combineLatest(
+            this._subscription = combineLatest([
                 this.route.queryParams,
                 this.hubService.getHubCacheObservable(),
                 this.authService.getRemoteAgentsObservable(),
                 this.hubService.getRemoteAgentObservable() // this is included to ensure refresh when active agent changes.
+            ]
             ).subscribe(result => {
                 let queryParams = result[0];
                 this.hubCache = result[1];
