@@ -53,6 +53,12 @@
                     <div class="w-100"></div>
                     <div class="col border border-white">Triggered By</div>
                     <div class="col border border-white">{{eTriggerMethod[auditResult.triggerMethod]}}</div>
+                    
+                    <ng-template [ngIf]="auditResult.maxIncrementalValue">
+                        <div class="w-100"></div>
+                        <div class="col border border-white">Max Incremental Value</div>
+                        <div class="col border border-white">{{auditResult.maxIncrementalValue}}</div>
+                    </ng-template>
                 </div>
             </div>
     </li>

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using dexih.api.Services.BackgroundTasks;
+using dexih.functions;
 using dexih.operations;
 using dexih.repository;
 using Microsoft.AspNetCore.Identity;
@@ -33,9 +35,22 @@ namespace dexih.api.Services.Operations
             _browserContext = browserContext;
             _backgroundTaskQueue = backgroundTaskQueue;
             _logger = loggerFactory.CreateLogger("DexihOperations");
-            
         }
+        
+        private readonly ILogger _logger;
 
+        private readonly IBackgroundTaskQueue _backgroundTaskQueue;
+        
+        private readonly IHubContext<BrowserHub> _browserContext;
+        public RepositoryManager RepositoryManager { get; }
+
+        public ApplicationSettings Config { get; }
+        
+        public void Dispose()
+        {
+            RepositoryManager.Dispose();
+        }
+        
         private void SendHubChange(Import import, string[] users)
         {
             try
@@ -50,19 +65,6 @@ namespace dexih.api.Services.Operations
             {
                 _logger.LogCritical($"An unexpected error occurred sending a update hub message to hub {import?.HubKey}.  {e.Message}");
             }
-        }
-
-        private readonly ILogger _logger;
-
-        private readonly IBackgroundTaskQueue _backgroundTaskQueue;
-        
-        private readonly IHubContext<BrowserHub> _browserContext;
-        public RepositoryManager RepositoryManager { get; }
-        public ApplicationSettings Config { get; }
-        
-        public void Dispose()
-        {
-            RepositoryManager.Dispose();
         }
         
         #region Broadcast Messages
@@ -97,6 +99,7 @@ namespace dexih.api.Services.Operations
             {
                 await _browserContext.Clients.User(userId).SendAsync("Command", sendMessage, cancellationToken: cancellationToken);
             }
+            
         }
 
         /// <summary>
@@ -118,6 +121,7 @@ namespace dexih.api.Services.Operations
             var sendMessage = new ClientMessage(command, content);
             return _browserContext.Clients.Client(connectionId).SendAsync("Command", sendMessage, cancellationToken: cancellationToken);
         }
+        
 	    
         #endregion
         

@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using dexih.api.Services;
 using dexih.api.Services.BackgroundTasks;
+using dexih.api.Services.BrowserConnections;
 using dexih.repository;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Http;
@@ -174,7 +175,10 @@ namespace dexih.api
 
             // Add remote agent connectivity service.
             services.AddSingleton<IRemoteAgents, DexihRemoteAgents>();
-            
+
+            // Add service to store browser connections
+            services.AddSingleton<IBrowserConnections, BrowserConnections>();
+
 	        // Add operations which allow controllers to interact with the repository.
 	        services.AddTransient<IDexihOperations, DexihOperations>();
 	        

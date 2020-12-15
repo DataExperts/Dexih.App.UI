@@ -69,7 +69,11 @@
                 <form-checkbox label="Is an Input Column" formControlName="isInput"></form-checkbox>
             </section>
             <section>
-                <form-checkbox label="Is always incrementing column that can be used for change detection" formControlName="isIncrementalUpdate"></form-checkbox>
+                <form-checkbox 
+                    label="Is always incrementing column that can be used for change detection" 
+                    formControlName="isIncrementalUpdate"
+                    note="This is only applied when the update strategy is to append new rows, and ignored when a delete strategy is selected."
+                ></form-checkbox>
             </section>
 
             <div class="form-row">

@@ -18,6 +18,7 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Web;
 using dexih.api.Extensions;
+using dexih.api.Services.BrowserConnections;
 using dexih.api.Services.Message;
 using dexih.api.Services.Operations;
 using dexih.functions;
@@ -36,6 +37,7 @@ namespace dexih.api.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
         private readonly IDexihOperations _operations;
+        private readonly IBrowserConnections _browserConnections;
         private readonly IRemoteAgents _remoteAgents;
         private readonly IUserClaimsPrincipalFactory<ApplicationUser> _principalFactory;
         private readonly ICacheService _cache;
@@ -47,6 +49,7 @@ namespace dexih.api.Controllers
             IEmailSender emailSender,
             ILoggerFactory loggerFactory,
             IDexihOperations operations,
+            IBrowserConnections browserConnections,
             IRemoteAgents remoteAgents,
             IUserClaimsPrincipalFactory<ApplicationUser> principalFactory,
             ICacheService cache,
@@ -58,6 +61,7 @@ namespace dexih.api.Controllers
             _emailSender = emailSender;
             _logger = loggerFactory.CreateLogger<AccountController>();
             _operations = operations;
+            _browserConnections = browserConnections;
             _remoteAgents = remoteAgents;
             _principalFactory = principalFactory;
             _cache = cache;
@@ -910,6 +914,8 @@ namespace dexih.api.Controllers
                 {
                     await _operations.BroadcastUsersMessageAsync(userIds, EClientCommand.HubUpdate, result, cancellationToken);
                 }
+
+                await _browserConnections.UpdateHubClients(result.HubKey, userIds.ToHashSet(), cancellationToken);
 
                 return result;
             }
