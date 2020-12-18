@@ -8,7 +8,7 @@ import { InputOutputColumns } from '../../hub.lineage.models';
 import { CancelToken } from '../../../+auth/auth.models';
 import { HubCache, ConnectionTables, eCacheStatus } from '../../hub.models';
 import { eViewType, DexihDatalink, InputColumn, DexihColumnBase, SelectQuery,
-  DexihView, DownloadObject, eDataObjectType, ChartConfig, InputParameterBase, DexihActiveAgent, AnimateConfig } from '../../../shared/shared.models';
+  DexihView, DownloadObject, eDataObjectType, ChartConfig, InputParameterBase, DexihActiveAgent, AnimateConfig, DexihTableColumn } from '../../../shared/shared.models';
 import { FormArray, FormGroup } from '@angular/forms';
 
 @Component({
@@ -32,8 +32,10 @@ export class ViewEditComponent implements OnInit, OnDestroy {
   private _formChangeSubscription: Subscription;
   private _changesSubscription: Subscription;
 
-  private refreshDataSubject: Subject<void> = new Subject<void>();
+  public refreshDataSubject: Subject<void> = new Subject<void>();
   public refreshDataObservable = this.refreshDataSubject.asObservable();
+
+  public inputColumnChange = false;
   
   sourceTypes = [
     { key: eDataObjectType.Datalink, name: 'Datalink' },
@@ -47,7 +49,7 @@ export class ViewEditComponent implements OnInit, OnDestroy {
   public datalinks: DexihDatalink[] = [];
 
   public showChart = false;
-  public inputColumns: InputColumn[];
+  // public inputColumns: InputColumn[];
   public tableColumns: DexihColumnBase[];
 
   private isLoaded = false;
@@ -161,7 +163,7 @@ export class ViewEditComponent implements OnInit, OnDestroy {
           if (view.animateConfig == null) {
             view.animateConfig = new AnimateConfig()
           }
-          this.inputColumns = view.inputValues;
+          // this.inputColumns = view.inputValues;
           this.showChart = view.viewType === eViewType.Chart;
 
           this.formsService.view(view);
@@ -257,23 +259,14 @@ export class ViewEditComponent implements OnInit, OnDestroy {
   getColumns() {
 
     let viewForm = this.formsService.currentForm;
-    let viewInputs = <InputColumn[]>viewForm.controls.inputValues.value;
+    
 
     if (viewForm.controls.sourceType.value === eDataObjectType.Table && viewForm.controls.sourceTableKey.value > 0) {
+      // merge source table columns with those already set.
       let table = this.hubCache.getTable(viewForm.controls.sourceTableKey.value);
       if (table) {
-        this.inputColumns = table.dexihTableColumns.filter(c => c.isInput).map(c => {
-          let input = viewInputs.find(i => i.name === c.name);
-          if (input) {
-          } else {
-          }
-          return {
-            datalinkKey: 0, datalinkName: '',
-            name: c.name, logicalName: c.logicalName, dataType: c.dataType, rank: c.rank,
-            value: c.defaultValue, defaultValue: c.defaultValue
-          };
-        }
-        );
+        let inputColumns = table.dexihTableColumns.filter(c => c.isInput);
+        this.updateInputValues(inputColumns);
         this.tableColumns = table.dexihTableColumns;
         return;
       } else {
@@ -289,20 +282,8 @@ export class ViewEditComponent implements OnInit, OnDestroy {
         const ioColumns = new InputOutputColumns();
         ioColumns.buildInputOutput(datalink);
         this.tableColumns = ioColumns.getDatalinkOutputColumns(datalink);
-
-        this.inputColumns = datalink.sourceDatalinkTable.dexihDatalinkColumns.filter(c => c.isInput).map(c => {
-          let input = viewInputs.find(i => i.name === c.name);
-          let value = null;
-          if (input) {
-            value = input.value;
-          } else {
-            value = c.defaultValue;
-          }
-          return {
-            datalinkKey: datalink.key, datalinkName: datalink.name,
-            name: c.name, logicalName: c.logicalName, dataType: c.dataType, rank: c.rank, value: value, defaultValue: c.defaultValue
-          };
-        });
+        let inputColumns = datalink.sourceDatalinkTable.dexihDatalinkColumns.filter(c => c.isInput);
+        this.updateInputValues(inputColumns);
 
       } else {
         this.reset();
@@ -312,9 +293,48 @@ export class ViewEditComponent implements OnInit, OnDestroy {
     }
   }
 
+  private updateInputValues(inputColumns: DexihColumnBase[]) {
+    let viewForm = this.formsService.currentForm;
+    let inputValuesForm = <FormArray>viewForm.controls.inputValues;
+
+    var isMatch = inputColumns.length == inputValuesForm.length;
+    if(isMatch) {
+      for(var i = 0; i < inputColumns.length; i++) {
+        let inputColumn = inputColumns[i];
+        let inputValue = <FormGroup>inputValuesForm.controls[i];
+        if (inputColumn.name != inputValue.controls.name.value ||
+          inputColumn.logicalName != inputValue.controls.logicalName.value ||
+          inputColumn.rank != inputValue.controls.rank.value) {
+            isMatch = false;
+            break;
+          }
+      }
+    }
+
+    if (!isMatch) {
+      let inputValues = <InputColumn[]> inputValuesForm.value;
+      while (inputValuesForm.length !== 0) {
+        inputValuesForm.removeAt(0);
+      }
+
+      let newInputValues = inputColumns.map(c => {
+        let inputValue = inputValues.find(iv => iv.name === c.name && iv.rank === c.rank);
+        return {
+          datalinkKey: 0, datalinkName: '',
+          name: c.name, logicalName: c.logicalName, dataType: c.dataType, rank: c.rank,
+          value: inputValue?.value ?? c.defaultValue, defaultValue: c.defaultValue
+        };
+      });
+
+      newInputValues.forEach(c => {
+        inputValuesForm.push(this.formsService.inputValue(c));
+      });
+    }
+  }
+
   reset() {
     this.tableColumns = [];
-    this.inputColumns = [];
+    // this.inputColumns = [];
     this.columns = null;
     this.data = null;
     this.baseData = null;
@@ -365,8 +385,9 @@ export class ViewEditComponent implements OnInit, OnDestroy {
     if ((view.sourceType === eDataObjectType.Table && view.sourceTableKey > 0) ||
       (view.sourceType === eDataObjectType.Datalink && view.sourceDatalinkKey > 0)) {
 
-      this.hubService.previewView(view, this.inputColumns, parameters, this.cancelToken).then((result) => {
+      this.hubService.previewView(view, view.inputValues, parameters, this.cancelToken).then((result) => {
         this.refreshDataSubject.next();
+        this.inputColumnChange = false;
         this.columns = result.columns;
         this.baseData = result.data;
 
@@ -398,6 +419,10 @@ export class ViewEditComponent implements OnInit, OnDestroy {
 
   hasChanged() {
     this.formsService.markAsChanged();
+  }
+
+  inputValueChange() {
+    this.inputColumnChange = true;
   }
 
   parameterChange() {

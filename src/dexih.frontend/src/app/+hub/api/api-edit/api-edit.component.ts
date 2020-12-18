@@ -60,10 +60,10 @@ export class ApiEditComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     try {
-      this._subscription = combineLatest(
+      this._subscription = combineLatest([
         this.route.data,
         this.route.params,
-        this.hubService.getHubCacheObservable(),
+        this.hubService.getHubCacheObservable()]
       ).subscribe(result => {
         let data = result[0];
         this.params = result[1];
@@ -223,6 +223,7 @@ export class ApiEditComponent implements OnInit, OnDestroy {
 
   refresh() {
     let apiForm = this.formsService.currentForm;
+    
     if (apiForm.controls.sourceType.value === eSourceType.Datalink) {
       this.hubService.previewDatalinkKeyData(apiForm.controls.sourceDatalinkKey.value, false,
         this.selectQuery, this.inputColumns, apiForm.controls.parameters.value, this.cancelToken).then((result) => {
@@ -231,8 +232,8 @@ export class ApiEditComponent implements OnInit, OnDestroy {
         this.data = result.data;
       }).catch(() => {
       });
-
     }
+
     if (apiForm.controls.sourceType.value === eSourceType.Table) {
       this.hubService.previewTableKeyData(apiForm.controls.sourceTableKey.value,
           false, this.selectQuery, this.inputColumns, apiForm.controls.parameters.value, this.cancelToken).then((result) => {
@@ -246,10 +247,12 @@ export class ApiEditComponent implements OnInit, OnDestroy {
   download(format) {
     let api = <DexihApi>this.formsService.currentForm.value;
     let downloadObject = new DownloadObject();
+
     if (api.sourceType === eSourceType.Table) {
       downloadObject.objectKey = api.sourceDatalinkKey;
       downloadObject.objectType = eDataObjectType.Datalink;
     }
+
     if (api.sourceType === eSourceType.Table) {
       downloadObject.objectKey = api.sourceTableKey;
       downloadObject.objectType = eDataObjectType.Table;

@@ -22,7 +22,7 @@ export class AnimateConfig {
    }
    
    export class ApplicationUser {
-    public id: string = '1a21ab9d-12b3-4f7a-8927-68c772f5f07d';
+    public id: string = '4826559a-a872-47e8-ae78-90e140a181b2';
     public email: string = null;
     public concurrencyStamp: string = null;
     public emailConfirmed: boolean = false;
@@ -31,7 +31,7 @@ export class AnimateConfig {
     public normalizedEmail: string = null;
     public passwordHash: string = null;
     public phoneNumber: string = null;
-    public securityStamp: string = '7300a3b7-028e-4554-b847-177c74f234ae';
+    public securityStamp: string = '25863d84-fc81-4b3b-964b-deae34c65942';
     public userName: string = null;
     public accessFailedCount: number = 0;
     public normalizedUserName: string = null;
@@ -2938,9 +2938,10 @@ export class AnimateConfig {
     Hour = 3,
     Day = 4,
     Week = 5,
-    Month = 6,
-    Year = 7,
-    Number = 8,
+    WeekDay = 6,
+    Month = 7,
+    Year = 8,
+    Number = 9,
    }
    
    export const eSeriesGrainItems = [
@@ -2950,6 +2951,7 @@ export class AnimateConfig {
     {key: eSeriesGrain.Hour, name: 'Hour'},
     {key: eSeriesGrain.Day, name: 'Day'},
     {key: eSeriesGrain.Week, name: 'Week'},
+    {key: eSeriesGrain.WeekDay, name: 'WeekDay'},
     {key: eSeriesGrain.Month, name: 'Month'},
     {key: eSeriesGrain.Year, name: 'Year'},
     {key: eSeriesGrain.Number, name: 'Number'},

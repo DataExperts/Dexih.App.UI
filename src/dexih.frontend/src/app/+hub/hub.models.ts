@@ -2043,16 +2043,16 @@ export const sortDirections = [
 //     Year = <any>'Year',
 //     Number = <any>'Number',
 // }
-export const seriesGrains = [
-    {key: eSeriesGrain.Second, name: 'Second'},
-    {key: eSeriesGrain.Minute, name: 'Minute'},
-    {key: eSeriesGrain.Hour, name: 'Hour'},
-    {key: eSeriesGrain.Day, name: 'Day'},
-    {key: eSeriesGrain.Week, name: 'Week'},
-    {key: eSeriesGrain.Month, name: 'Month'},
-    {key: eSeriesGrain.Year, name: 'Year'},
-    {key: eSeriesGrain.Number, name: 'Number'},
-];
+// export const seriesGrains = [
+//     {key: eSeriesGrain.Second, name: 'Second'},
+//     {key: eSeriesGrain.Minute, name: 'Minute'},
+//     {key: eSeriesGrain.Hour, name: 'Hour'},
+//     {key: eSeriesGrain.Day, name: 'Day'},
+//     {key: eSeriesGrain.Week, name: 'Week'},
+//     {key: eSeriesGrain.Month, name: 'Month'},
+//     {key: eSeriesGrain.Year, name: 'Year'},
+//     {key: eSeriesGrain.Number, name: 'Number'},
+// ];
 
 // export enum eDeltaType {
 //     SourceSurrogateKey = <any>'SourceSurrogateKey',

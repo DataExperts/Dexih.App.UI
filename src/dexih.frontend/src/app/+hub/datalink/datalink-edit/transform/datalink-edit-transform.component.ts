@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { seriesGrains } from '../../../hub.models';
 import { HubService } from '../../../hub.service';
 import { DatalinkEditService } from '../datalink-edit.service';
 import { Subscription, combineLatest } from 'rxjs';
@@ -10,7 +9,7 @@ import { LogFactory, eLogLevel } from '../../../../../logging';
 import { InputOutputColumns } from '../../../hub.lineage.models';
 import { eTransformType, eTransformItemType, DexihDatalinkColumn, DexihDatalinkTransform,
     eTypeCode, DexihDatalinkTransformItem, eAggregate, eSortDirection, eJoinNotFoundStrategyItems,
-    eDuplicateStrategyItems, eSeriesGrain, eJoinStrategyItems, DexihConnection } from '../../../../shared/shared.models';
+    eDuplicateStrategyItems, eSeriesGrain, eSeriesGrainItems, eJoinStrategyItems, DexihConnection } from '../../../../shared/shared.models';
 
 @Component({
 
@@ -44,7 +43,7 @@ export class DatalinkEditTransformComponent implements OnInit, OnDestroy {
     inputColumns: Array<DexihDatalinkColumn>;
 
     eSeriesGrain = eSeriesGrain;
-    seriesGrains = seriesGrains;
+    eSeriesGrainItems = eSeriesGrainItems;
 
     public managedConnections: DexihConnection[];
 

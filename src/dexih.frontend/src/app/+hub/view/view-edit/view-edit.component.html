@@ -24,6 +24,20 @@
 
 		<div class="container m-3" *ngIf="!showEdit">
 			<input-parameters [showEdit]="showEdit" [parameters]="formsService.currentForm?.controls.parameters" [formsService]="formsService" [refreshEvent]="refreshDataObservable" (onRefreshData)="refresh()" (onChange)="parameterChange()"></input-parameters>
+
+			<span *ngFor="let column of formsService.currentForm?.controls.inputValues.controls; let i = index" class="input-group">
+				<div class="input-group-prepend">
+					<div class="input-group-text">
+						{{column.value.logicalName}}
+					</div>
+				</div>
+				<form-input [border]="false" class="form-control p-0" [placeholder]="'Enter ' + column.logicalName" [formControl]="column.controls.value" (ngModelChange)="inputValueChange()"></form-input>
+			</span>
+			<div *ngIf="inputColumnChange" class="alert alert-warning mt-2">
+				<a href="javascript:void(0)" class="alert-link" (click)="refresh()">The input columns have changed. Click to
+					refresh.</a>
+			</div>
+
 			<series-animate [animateConfig]="animateConfig" [columns]="columns" (hasChanged)="hasChanged()" [baseData]="baseData" [(data)]="data"></series-animate>
 			<div class="mt-3"  *ngIf="!data || data.length === 0">
 				<d-button-refresh  class="mr-1" (click)="refresh()" text="Reload" [autoCompact]="false"></d-button-refresh>
@@ -31,7 +45,7 @@
 		</div>
 
 		<d-tabs title="View Properties" *ngIf="showEdit" [showExpandButton]="true">
-			<d-tab *ngIf="formsService.currentForm && (formsService.currentForm?.controls.parameters.length > 0)" title="Properties" >
+			<d-tab *ngIf="formsService.currentForm" title="Properties" >
 				<form [formGroup]="formsService.currentForm"  class="container">
 					<fieldset>
 						<section>
@@ -86,14 +100,21 @@
 				</div>
 			</d-tab>
 
-			<d-tab  *ngIf="inputColumns && inputColumns.length > 0" title="InputColumns" >
-				<span *ngFor="let column of inputColumns; let i = index" class="input-group" class="container">
-					<div class="input-group-prepend">
-						<div class="input-group-text">
-							{{column.logicalName}}
+			<d-tab  *ngIf="formsService.currentForm?.controls.inputValues && formsService.currentForm?.controls.inputValues.controls.length > 0" title="InputColumns" >
+				<span class="container">
+					<div *ngFor="let column of formsService.currentForm?.controls.inputValues.controls; let i = index" class="input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								{{column.value.logicalName}}
+							</div>
 						</div>
+						<form-input class="form-control p-0" [border]="false" [placeholder]="'Enter ' + column.value.logicalName" [formControl]="column.controls.value" (ngModelChange)="inputValueChange()"></form-input>
 					</div>
-					<form-input name="column{{i}}" class="form-control p-0" [placeholder]="'Enter ' + column.logicalName" [(ngModel)]="column.value"></form-input>
+
+					<div *ngIf="inputColumnChange" class="alert alert-warning mt-2">
+						<a href="javascript:void(0)" class="alert-link" (click)="refresh()">The input columns have changed. Click to
+							refresh.</a>
+					</div>
 				</span>
 			</d-tab>
 
@@ -102,26 +123,24 @@
 			</d-tab>
 
 			<d-tab  *ngIf="showEdit" title="Query" >
-				<query-builder  [selectQuery]="formsService.currentForm.controls.selectQuery.value" [columns]="tableColumns" [inputColumns]="inputColumns" [parameters]="formsService.currentForm.controls.parameters.value" (hasChanged)="hasChanged()" [refreshEvent]="refreshDataObservable" (onRefreshData)="refresh()"></query-builder>
+				<query-builder  [selectQuery]="formsService.currentForm.controls.selectQuery.value" [columns]="tableColumns" [inputColumns]="formsService.currentForm.controls.inputValues.value" [parameters]="formsService.currentForm.controls.parameters.value" (hasChanged)="hasChanged()" [refreshEvent]="refreshDataObservable" (onRefreshData)="refresh()"></query-builder>
 			</d-tab>
 		</d-tabs>
 		<ng-template [ngIf]="columns?.length > 0 && data?.length > 0">
-			<d-table *ngIf="!showChart" [enableMultiSelect]="false" [enableSaveCsv]="true" [csvFileName]="formsService.currentForm?.controls.name.value + '.csv'" [columns]="columns" [data]="data" [hideTable]="showChart">
+			<d-table *ngIf="!showChart" [enableMultiSelect]="false" [enableSaveCsv]="true"
+				[csvFileName]="formsService.currentForm?.controls.name.value + '.csv'" [columns]="columns" [data]="data"
+				[hideTable]="showChart">
 				<ng-template #actions let-items="items">
 					<d-button-refresh class="mr-1" (click)="refresh()" text="Reload"></d-button-refresh>
 				</ng-template>
 			</d-table>
-
+		
 			<div *ngIf="showChart">
-			<chart-builder 
-				[title]="formsService.currentForm.controls.name.value" 
-				[columns]="columns" 
-				[data]="data" 
-				[config]="formsService.currentForm.controls.chartConfig.value"
-				[showEdit]="showEdit"
-				(hasChanged)="hasChanged()">
-			</chart-builder>
-		</div>
+				<chart-builder [title]="formsService.currentForm.controls.name.value" [columns]="columns" [data]="data"
+					[config]="formsService.currentForm.controls.chartConfig.value" [showEdit]="showEdit"
+					(hasChanged)="hasChanged()">
+				</chart-builder>
+			</div>
 		</ng-template>
 
 

@@ -22,7 +22,7 @@ import { eImportAction, Import, DexihConnection, DexihTable, DexihTableColumn, e
    DexihDatalinkTransform, DexihDatalinkTransformItem, DexihFunctionParameter, DexihFunctionArrayParameter,
    DexihDatalinkProfile, DexihDatalinkTarget, DexihDatalinkTable,
    eSourceType, eSharedObjectType, DexihListOfValues, InputParameterBase,
-   eDataObjectType, ListOfValuesItem, eTransformItemType, DexihTag, DexihTableIndex, DexihTableIndexColumn, ChartConfig, SelectQuery, AnimateConfig } from '../shared/shared.models';
+   eDataObjectType, ListOfValuesItem, eTransformItemType, DexihTag, DexihTableIndex, DexihTableIndexColumn, ChartConfig, SelectQuery, AnimateConfig, InputColumn } from '../shared/shared.models';
 import { debounceTime, delay, first } from 'rxjs/operators';
 
 @Injectable()
@@ -123,7 +123,9 @@ export class HubFormsService implements OnDestroy {
     if (this._datalinkTestChangesSubscription) { this._datalinkTestChangesSubscription.unsubscribe(); }
     if (this._genericParameterSubscription) { this._genericParameterSubscription.unsubscribe(); }
     this._datalinkTargetChanges.forEach(c => c.unsubscribe());
+    this._datalinkTargetChanges = [];
     this._parameterChanges.forEach(c => c.unsubscribe());
+    this._parameterChanges = [];
   }
 
   private addMissing(item: any, form: FormGroup, itemTemplate: any, excludeKeys: string[] = []) {
@@ -982,6 +984,17 @@ export class HubFormsService implements OnDestroy {
     };
   }
 
+  public inputValue(inputValue: InputColumn): FormGroup {
+    return this.fb.group({
+      'name': [inputValue.name],
+      'logicalName': [inputValue.logicalName],
+      'value': [inputValue.value],
+      'rank': [inputValue.rank],
+      'dataType': [inputValue.dataType],
+      'defaultValue': [inputValue.defaultValue]
+    });
+  }
+
   public view(view: DexihView) {
 
     this.clearFormSubscriptions();
@@ -989,6 +1002,8 @@ export class HubFormsService implements OnDestroy {
     let parameters = view.parameters.filter(c => c.isValid).map(parameter => {
       return this.parameter(parameter);
     });
+
+    let inputColumns = view.inputValues.map(c => this.inputValue(c));
 
     const viewForm = this.fb.group({
       'name': [view.name, [
@@ -1003,6 +1018,7 @@ export class HubFormsService implements OnDestroy {
       'sourceDatalinkKey': [view.sourceDatalinkKey],
       'sourceTableKey': [view.sourceTableKey],
       'parameters': this.fb.array(parameters),
+      'inputValues': this.fb.array(inputColumns),
       'chartConfig': [view.chartConfig ?? new ChartConfig()],
       'selectQuery': [view.selectQuery ?? new SelectQuery()],
       'animateConfig': [view.animateConfig ?? new AnimateConfig()],
