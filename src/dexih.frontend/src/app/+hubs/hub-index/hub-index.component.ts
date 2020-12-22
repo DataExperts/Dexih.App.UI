@@ -48,7 +48,9 @@ export class HubIndexComponent implements OnInit, OnDestroy {
 
     deleteHubs(hubs: DexihHubAuth[]) {
         this.authService.deleteHubs(hubs).catch(reason => {
-            this.hubService.addHubMessage(reason);
+            if(reason) {
+                this.hubService.addHubMessage(reason);
+            }
         });
     }
 

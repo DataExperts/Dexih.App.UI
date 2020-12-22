@@ -12,6 +12,7 @@ A **hub** is a container within the integration hub which is used to build and s
 * **Hub Name** - A short name to identify the hub.
 * **Description** - A longer description that can be formatted using [markdown](https://guides.github.com/features/mastering-markdown/).
 * **Encryption Key** - An encryption key, used to encrypt secure data processed through the hub.
+* **Time Zone** - The timezone to be used when scheduling jobs.  If empty, the timezone where the remote agent is located will be used.
 * **Shared Data Access** - Specifies who is allowed to access items marked as shared.  The options are:
     * Public - Anyone who can access the integration hub can access shared data.
     * Registered User - Anyone who has registered and email verified, can access shared data.

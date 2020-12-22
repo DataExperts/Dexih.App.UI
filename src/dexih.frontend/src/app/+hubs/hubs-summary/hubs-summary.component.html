@@ -21,8 +21,8 @@
                 <p class="card-text">Hub's contain your data processing rules.</p>
             </div>
             <div class="card-footer">
-                <d-button class="ml-1" iconClass="fa fa-life-saver" routerLink="hubs-view">Manage</d-button>
-                <d-button-new  class="ml-1" routerLink="hub-new" title="Create a new hub"></d-button-new>
+                <d-button class="ml-1" iconClass="fa fa-life-saver" routerLink="hubs-view" [autoCompact]="false">Manage</d-button>
+                <d-button-new  class="ml-1" routerLink="hub-new" title="Create a new hub" [autoCompact]="false"></d-button-new>
             </div>
         </div>
         <div class="card mb-3" >
@@ -31,7 +31,7 @@
                 <p class="card-text">Edit your account details, password, and login providers.</p>
             </div>
             <div class="card-footer">
-                <d-button class="ml-1" iconClass="fa fa-user" routerLink="manage">Account</d-button>
+                <d-button class="ml-1" iconClass="fa fa-user" routerLink="manage" [autoCompact]="false">Account</d-button>
             </div>
         </div>
         <div class="card mb-3" >
@@ -40,8 +40,8 @@
                 <p class="card-text">Remote agents connect to data and are used run and publish data.</p>
             </div>
             <div class="card-footer">
-                <d-button class="mr-1" iconClass="fa fa-wifi" routerLink="agents">Agents</d-button>
-                <d-button iconClass="fa fa-tasks" routerLink="tasks">Tasks</d-button>
+                <d-button class="mr-1" iconClass="fa fa-wifi" routerLink="agents" [autoCompact]="false">Agents</d-button>
+                <d-button iconClass="fa fa-tasks" routerLink="tasks" [autoCompact]="false">Tasks</d-button>
             </div>
         </div>
         <div class="card mb-3" >
@@ -50,7 +50,7 @@
                 <p class="card-text">View all datasets which have been shared.</p>
             </div>
             <div class="card-footer">
-                <d-button-view routerLink="sharedData"></d-button-view>
+                <d-button-view routerLink="sharedData" [autoCompact]="false"></d-button-view>
             </div>
         </div>
     </div>
@@ -94,8 +94,8 @@
                                     <div class="small">({{eHubAccess[hub.hubAccess]}})</div>
                                 </div>
                                 <div class="d-flex ml-md-auto">
-                                    <d-button-open routerLink="/hub/{{hub.hubKey}}/summary"></d-button-open>
-                                    <d-button-edit class="ml-1" routerLink="hub-edit/{{hub.hubKey}}">
+                                    <d-button-open routerLink="/hub/{{hub.hubKey}}/summary" [compact]="true"></d-button-open>
+                                    <d-button-edit class="ml-1" routerLink="hub-edit/{{hub.hubKey}}" [compact]="true">
                                     </d-button-edit>
                                 </div>
                             </div>        

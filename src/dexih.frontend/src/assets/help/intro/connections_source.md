@@ -5,7 +5,7 @@ A **Source Connection** points to data in a database, flatfile or webservice.  S
 #### Creating a new source connection
 
 * Create a new connection by selecting: Connections &rarr; Connection &rarr; New(Source), or
-* [New Source Connection Link](route:/hub/{{HUBKEY}}/summary/connections/connection-new/Source)
+* [New Source Connection Link](route:/hub/{{HUBKEY}}/summary/connections/connection-new/1)
 
 #### Connection Options
 
@@ -15,7 +15,7 @@ To configure the a source connection.
 2.  Complete the connection form, and test and save the connection.  
 3.  Import required table metadata.
 
-[Connection Reference](reference/connections.md)
+[Connection Reference](reference/connection.md)
 
 ### Importing Table Metadata
 

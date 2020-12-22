@@ -1,6 +1,6 @@
 ### Managed Connection
 
-A **Managed Connection** points to a database and is used by the hub to:
+A **Managed Connection** points to a database that is used by the hub to:
 
 1.  Create and load staging tables.
 2.  Store auditing data, such as datalink execution history.
@@ -10,7 +10,7 @@ A **Managed Connection** points to a database and is used by the hub to:
 #### Creating a new managed connection
 
 * Create a new hub by selecting: Connections &rarr; Connection &rarr; New(Managed), or
-* [New Managed Connection Link](route:/hub/{{HUBKEY}}/summary/connections/connection-new/Managed)
+* [New Managed Connection Link](route:/hub/{{HUBKEY}}/summary/connections/connection-new/2)
 
 > ##### Managed Database Permissions
 > * Managed database connections must use credentials that have permission to create and truncate database tables.

@@ -11,10 +11,10 @@
                     </d-button-edit>
                     <d-button-preview *ngIf="this.showEdit" class="ml-1" [compact]="true" (click)="toggleEdit()">
                     </d-button-preview>
-                    <d-button *ngIf="!isMaximized" class="ml-1" buttonClass="btn btn-primary"
+                    <d-button *ngIf="!isMaximized" class="ml-1" buttonClass="btn btn-primary" [compact]="true"
                         iconClass="fa fa-window-maximize text-white" (click)="maximise()" tooltip="Maximize window">
                     </d-button>
-                    <d-button *ngIf="isMaximized" class="ml-1" buttonClass="btn btn-primary"
+                    <d-button *ngIf="isMaximized" class="ml-1" buttonClass="btn btn-primary" [compact]="true"
                         iconClass="fa fa-window-minimize text-white" (click)="maximise()" tooltip="Minimize window">
                     </d-button>
                     <d-button-delete class="ml-1" (click)="removeItem($event)" [compact]="true">

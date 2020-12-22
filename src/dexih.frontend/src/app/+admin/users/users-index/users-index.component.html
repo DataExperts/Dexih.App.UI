@@ -15,16 +15,16 @@
 					<d-button class="mr-1" (click)="reinviteUsers(items)" iconClass="fa fa-envelope" buttonClass="btn-primary" title="invite or resend invite to selected users.">Resend Invite</d-button>
 					<d-button-delete class="mr-1" title="Delete selected users" (click)="deleteUsers(items)"></d-button-delete>
 					<d-button class="mr-1" (click)="revokeUsers(items)" iconClass="fa fa-lock" buttonClass="btn-danger" title="Revoke selected users access.">Revoke</d-button>
-					<d-button (click)="enableUsers(items)" iconClass="fa fa-unlock" buttonClass="btn-success" title="Re-enable selected users access">Enable</d-button>
+					<d-button class="mr-1" (click)="enableUsers(items)" iconClass="fa fa-unlock" buttonClass="btn-success" title="Re-enable selected users access">Enable</d-button>
 				</ng-template>
 
 				<ng-template #selectedItemAction select="selectedItemAction" let-user="item">
-					<d-button-edit title="Edit User" [routerLink]="['edit-user', user.userName]"></d-button-edit>
+					<d-button-edit class="mr-1" title="Edit User" [routerLink]="['edit-user', user.userName]"></d-button-edit>
 				</ng-template>
 
 				<ng-template #actions let-items="items">
 					<d-button-new class="mr-1" title="Create a new user" [routerLink]="['new-user']"></d-button-new>
-					<d-button [routerLink]="['invite-users']" iconClass="fa fa-envelope" buttonClass="btn-primary" title="Invite users">Invite</d-button>
+					<d-button class="mr-1" [routerLink]="['invite-users']" iconClass="fa fa-envelope" buttonClass="btn-primary" title="Invite users">Invite</d-button>
 				</ng-template>
 		</d-table>
 

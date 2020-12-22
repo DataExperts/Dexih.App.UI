@@ -74,12 +74,12 @@ export class HubEditComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     try {
-      this._subscription = combineLatest(
+      this._subscription = combineLatest([
         this.route.data,
         this.route.params,
         this.authService.getHubsObservable(),
         this.authService.getGlobalCacheObservable(),
-        this.hubService.getRemoteLibrariesObservable()
+        this.hubService.getRemoteLibrariesObservable()]
       ).subscribe(result => {
         let data = result[0];
         let params = result[1];

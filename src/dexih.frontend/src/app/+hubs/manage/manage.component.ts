@@ -95,7 +95,9 @@ export class ManageComponent implements OnInit, OnDestroy {
         this.updatingPassword = false;
         this.dexihMessage.addSuccessMessage('The password change was successful.');
     }).catch(reason => {
-      this.dexihMessage.addMessage(reason);
+      if (reason) {
+        this.dexihMessage.addMessage(reason);
+      }
       this.updatingPassword = false;
     });
   }
@@ -131,8 +133,10 @@ export class ManageComponent implements OnInit, OnDestroy {
             });
         }).catch(
           reason => {
-            this.googleMessage = reason;
-            this.dexihMessage.addErrorMessage(reason);
+            if(reason) {
+              this.googleMessage = reason;
+              // this.dexihMessage.addErrorMessage(reason);
+            }
           });
   }
 
@@ -149,12 +153,20 @@ export class ManageComponent implements OnInit, OnDestroy {
             });
         }).catch(
           reason => {
-            this.microsoftMessage = reason;
-            this.dexihMessage.addErrorMessage(reason);
+            if (reason) {
+              this.microsoftMessage = reason;
+              // this.dexihMessage.addErrorMessage(reason);
+            }
           });
   }
 
   deleteLogin(login: UserLoginInfo) {
-    this.authService.removeExternalLogin(login.loginProvider, login.providerKey);
+    this.authService.removeExternalLogin(login.loginProvider, login.providerKey).then( result => {
+      this.updateLogins();
+    }).catch( reason => {
+      if (reason) {
+        this.dexihMessage.addErrorMessage(reason);
+      }
+    });
   }
 }

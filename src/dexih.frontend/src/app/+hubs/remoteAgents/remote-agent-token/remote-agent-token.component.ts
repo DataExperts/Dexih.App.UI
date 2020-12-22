@@ -46,8 +46,10 @@ export class RemoteAgentTokenComponent implements OnInit, OnDestroy {
                 this.remoteToken = remoteToken;
                 this.updateAppSettings();
             }).catch(reason => {
-                this.hubsService.addHubMessage(reason);
-                this.authService.navigateUp();
+                if (reason) {
+                    this.hubsService.addHubMessage(reason);
+                    this.authService.navigateUp();
+                }
             });
 
           });

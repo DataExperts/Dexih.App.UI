@@ -1996,6 +1996,10 @@ export class AuthService implements OnDestroy {
     }
 
     addUpdateNotification(message: Message, log: boolean): string {
+        if (!message) {
+            return null;
+        }
+        
         if (!message.reference) {
             message.reference = this.newGuid();
         }

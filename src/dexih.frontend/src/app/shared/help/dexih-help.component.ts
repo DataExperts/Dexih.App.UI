@@ -83,7 +83,11 @@ export class DexihHelpComponent implements OnInit, OnChanges, OnDestroy {
                     this.router.navigate([route]);
                 } else if (link.startsWith('unsafe:route:')) {
                     let route = link.substr(13);
-                    this.router.navigate([route]);
+                    if( route.startsWith('/hub/null/')) {
+                        this.authService.informationDialog('No Active Hub', 'This link requires an active hub to be selected.');
+                    } else {
+                        this.router.navigate([route]);
+                    }
                 } else if (link.startsWith('#')) {
                     this.router.navigate(['.', link]);
                 } else {

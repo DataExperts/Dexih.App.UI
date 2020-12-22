@@ -140,7 +140,11 @@ export class RemoteAgentsComponent implements OnInit, OnDestroy {
     removeUserTokens(items) {
         this.authService.removeUserTokens(items.map(c => c.remoteAgentKey))
         .then( result => this.refreshData())
-        .catch(reason => this.hubsService.addHubClientErrorMessage(reason, 'Remove tokens'));
+        .catch(reason => {
+            if (reason) {
+                this.hubsService.addHubClientErrorMessage(reason, 'Remove tokens');
+            }
+        });
     }
 
     refreshUserToken(item) {

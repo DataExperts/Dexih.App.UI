@@ -77,7 +77,8 @@
             <div class="alert alert-danger">
               Google could not automatically sign-in due to "{{googleMessage}}".  
               Click login button to open new window to login to your google account.
-              <d-button buttonClass="btn btn-danger" iconClass="fa fa-google" text="Google Login" (click)="googleLogin(true)"></d-button>
+              <hr>
+              <d-button buttonClass="btn btn-danger" iconClass="fa fa-google" text="Google Login" (click)="googleLogin(true)" [autoCompact]="false"></d-button>
             </div>
           </section>
 
@@ -85,7 +86,8 @@
               <div class="alert alert-danger">
                 Microsoft could not automatically sign-in due to "{{microsoftMessage}}".  
                 Click login button to open new window to login to your microsoft account.
-                <d-button buttonClass="btn btn-primary" iconClass="fa fa-microsoft" text="Microsoft Login" (click)="microsoftLogin(true)"></d-button>
+                <hr>
+                <d-button buttonClass="btn btn-primary" iconClass="fa fa-microsoft" text="Microsoft Login" (click)="microsoftLogin(true)" [autoCompact]="false"></d-button>
               </div>
             </section>
         </fieldset>

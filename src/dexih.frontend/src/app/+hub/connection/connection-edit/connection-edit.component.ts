@@ -75,11 +75,11 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
         this.action = data['action'];
         this.pageTitle = data['pageTitle'];
 
-        this.variables = this.hubCache.hub.dexihHubVariables.map(c => '{' + c.name + '}');
-
         if (!this.hubCache || this.hubCache.status !== eCacheStatus.Loaded ) { return; }
 
         if (this.isLoaded && this.action === 'new') { return; }
+
+        this.variables = this.hubCache.hub.dexihHubVariables.map(c => '{' + c.name + '}');
 
         if (this.isLoaded && this.formsService.hasChanged) {
             this.authService.confirmDialog('Synchronization warning',
@@ -141,7 +141,7 @@ export class ConnectionEditComponent implements OnInit, OnDestroy {
 
     if (this.action === 'new') {
       let connection = new DexihConnection();
-      connection.purpose = +this.params['purpose'];
+      connection.purpose = + this.params['purpose'];
 
       this.logger.LogC(() => `new connection, purpose ${connection.purpose}.`, eLogLevel.Trace);
 

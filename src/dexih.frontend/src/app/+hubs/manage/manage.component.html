@@ -55,8 +55,8 @@
     </d-tab>
     <d-tab title="Reset Password" iconClass="fa fa-lg fa-fw fa-lock" [padding]="true" [showHeader]="true" >
         <ng-template #tabHeader>
-			<d-button class="mr-1" iconClass="fa fa-key" btnClass="btn btn-danger" routerLink='/auth/forgot-password'>Forgot Password</d-button>
-			<d-button-save [disabled]="!passwordForm.valid" (click)="updatePassword()" [busy]="updatingPassword">Update Password</d-button-save>
+			<d-button class="mr-1" iconClass="fa fa-key" btnClass="btn btn-danger" routerLink='/auth/forgot-password' [autoCompact]="false">Forgot</d-button>
+			<d-button-save [disabled]="!passwordForm.valid" (click)="updatePassword()" [busy]="updatingPassword">Update</d-button-save>
         </ng-template>
 
 		<form *ngIf="passwordForm"  [formGroup]="passwordForm">
@@ -83,8 +83,8 @@
 	
 	<d-tab title="Logins" subTitle="The following login providers are available" iconClass="fa fa-lg fa-fw fa-life-saver"  [padding]="true" [showHeader]="true">
 		<ng-template #tabHeader>
-				<d-button class="mr-1" (click)="microsoftLogin(true)" buttonClass="btn btn-primary" iconClass="fa fa-windows">Add Microsoft</d-button>
-				<d-button (click)="googleLogin(true)" buttonClass="btn btn-danger" iconClass="fa fa-google">Add Google</d-button>
+				<d-button class="mr-1" (click)="microsoftLogin(true)" buttonClass="btn btn-primary" iconClass="fa fa-windows" [autoCompact]="false">Add Microsoft</d-button>
+				<d-button (click)="googleLogin(true)" buttonClass="btn btn-danger" iconClass="fa fa-google"  [autoCompact]="false">Add Google</d-button>
 		</ng-template>
 
 		<ul class="list-group">
@@ -97,19 +97,29 @@
 		</ul>
 
 		<section *ngIf="googleMessage">
-            <div class="alert alert-danger">
-              Google could not automatically sign-in due to "{{googleMessage}}".  
-              Click login button to open new window to login to your google account.
-              <d-button buttonClass="btn btn-danger" iconClass="fa fa-google" text="Google Login" (click)="googleLogin(true)"></d-button>
-            </div>
-          </section>
-
-          <section *ngIf="microsoftMessage">
-              <div class="alert alert-danger">
-                Microsoft could not automatically sign-in due to "{{microsoftMessage}}".  
-                Click login button to open new window to login to your microsoft account.
-                <d-button buttonClass="btn btn-primary" iconClass="fa fa-microsoft" text="Microsoft Login" (click)="microsoftLogin(true)"></d-button>
-              </div>
+			<div class="alert alert-danger">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="googleMessage = null">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				Google could not automatically sign-in due to "{{googleMessage}}".
+				Click login button to open new window to login to your google account.
+				<hr>
+				<d-button buttonClass="btn btn-danger" iconClass="fa fa-google" text="Google Login" (click)="googleLogin(true)"
+					[autoCompact]="false"></d-button>
+			</div>
+		</section>
+		
+		<section *ngIf="microsoftMessage">
+			<div class="alert alert-danger">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="microsoftMessage = null">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				Microsoft could not automatically sign-in due to "{{microsoftMessage}}".
+				Click login button to open new window to login to your microsoft account.
+				<hr>
+				<d-button buttonClass="btn btn-primary" iconClass="fa fa-microsoft" text="Microsoft Login"
+					(click)="microsoftLogin(true)" [autoCompact]="false"></d-button>
+			</div>
 		</section>
 	</d-tab>
 </d-tabs>

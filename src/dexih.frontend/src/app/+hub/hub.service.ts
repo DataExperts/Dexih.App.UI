@@ -70,12 +70,11 @@ export class HubService implements OnInit, OnDestroy {
             }
         });
 
-
-        this._subscription = combineLatest(
+        this._subscription = combineLatest([
             authService.getGlobalCacheObservable(),
             this.authService.getHubsObservable(),
             this.getHubCacheObservable(),
-            this.authService.getRemoteAgentsObservable()
+            this.authService.getRemoteAgentsObservable()]
         ).subscribe(result => {
             let globalCache = result[0];
             let hubs = result[1];

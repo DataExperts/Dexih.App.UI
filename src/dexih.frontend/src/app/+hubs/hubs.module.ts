@@ -47,7 +47,7 @@ import { HubService } from '../+hub/hub.service';
         RemoteAgentTokenComponent,
         IssueEditComponent, IssueIndexComponent
     ],
-    providers: [HubsService, HubService],
+    providers: [HubsService],
     exports: []
 })
 export class HubsModule {
@@ -55,7 +55,7 @@ export class HubsModule {
     static forRoot(): ModuleWithProviders<HubsModule> {
         return {
             ngModule: HubsModule,
-            providers: [HubsService, HubService]
+            providers: [HubsService]
         };
     }
 }
