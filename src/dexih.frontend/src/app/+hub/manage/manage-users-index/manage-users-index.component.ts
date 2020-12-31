@@ -93,7 +93,7 @@ export class ManageUsersIndexComponent implements OnInit, OnDestroy {
         if (this.emails.length > 0 && this.permission) {
             this.authService.confirmDialog('Add Users',
             // tslint:disable-next-line:max-line-length
-            `This action will added users with the specified emails to this hub with permission ${ePermission[this.permission]}.  Proceed?`).then(confirm => {
+            `This action will add users with the specified emails to this hub with permission "${ePermission[this.permission]}".  Proceed?`).then(confirm => {
                 if (confirm) {
                     this.hubService.setUserPermissions(this.emails, this.permission, this.sendInvites).then(result => {
                         this.emails = [];
@@ -104,4 +104,8 @@ export class ManageUsersIndexComponent implements OnInit, OnDestroy {
             });
         }
     }
+
+    cancel() {
+        this.authService.navigateUp();
+      }
 }

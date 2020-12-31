@@ -4,8 +4,9 @@
 	<d-widget-vertical>
 	<d-widget title="Invite Users" iconClass="fa fa-lg fa-fw fa-birthday-cake" [padding]="true">
 		
-		<ng-template #subHeader>
-			<d-button-save [disabled]="emails.length == 0" (click)="addUsers()" text="Add User(s)"></d-button-save>
+		<ng-template #header>
+			<d-button-save class="mr-1" [disabled]="emails.length == 0" (click)="addUsers()" text="Save User(s)"></d-button-save>
+			<d-button-cancel (click)="cancel()"></d-button-cancel>
 		</ng-template>
 
 		<form >
