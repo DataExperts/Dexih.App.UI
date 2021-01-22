@@ -369,7 +369,7 @@ export class HubService implements OnInit, OnDestroy {
 
             this.setNoRemoteAgent(hubCache);
         } catch (reason) {
-            this.addHubMessage(reason, true, 'Resetting remote agent' );
+            this.addHubClientErrorMessage(reason, 'Resetting remote agent' );
         } finally {
             this.isResettingRemoteAgent = false;
         }

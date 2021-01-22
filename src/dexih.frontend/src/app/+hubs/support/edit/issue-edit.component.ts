@@ -84,9 +84,9 @@ export class IssueEditComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     try {
-      this._subscription = combineLatest(
+      this._subscription = combineLatest([
         this.route.data,
-        this.route.params,
+        this.route.params]
       ).subscribe(result => {
         let data = result[0];
         let params = result[1];
@@ -106,7 +106,7 @@ export class IssueEditComponent implements OnInit, OnDestroy {
         }
       });
     } catch (e) {
-      this.dexihMessage.addErrorMessage(e.message);
+      this.dexihMessage.addErrorMessage(e, 'Edit Issue Error');
     }
   }
 

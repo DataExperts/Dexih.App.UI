@@ -109,7 +109,7 @@ export class HubEditComponent implements OnInit, OnDestroy {
 
       });
     } catch (e) {
-      this.dexihMessage.addErrorMessage(e.message);
+      this.dexihMessage.addErrorMessage(e, 'Hub Edit Error');
     }
   }
 

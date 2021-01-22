@@ -72,7 +72,7 @@ export class SharedDataComponent implements OnInit, OnDestroy {
                     });
             });
         } catch (e) {
-            this.dexihMessage.addErrorMessage(e.message);
+            this.dexihMessage.addErrorMessage(e, 'Shared Data Error');
         }
     }
 

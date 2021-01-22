@@ -18,8 +18,10 @@ export class DexihMessageComponent implements OnInit {
         this.message = message;
     }
 
-    public addErrorMessage(messageString: string) {
-        this.addMessage(new Message(false, messageString, null, null));
+    public addErrorMessage(error, context: string) {
+        let message = context + '.  The following error occurred on the client: ' + error.message;
+        let newMessage = new Message(false, message, error.stack, null);
+        this.addMessage(newMessage);
     }
 
     public addSuccessMessage(messageString: string) {

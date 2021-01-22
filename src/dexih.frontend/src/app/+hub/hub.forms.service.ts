@@ -454,7 +454,7 @@ export class HubFormsService implements OnDestroy {
       }
     } catch (error) {
       if (error) {
-        this.hubService.addHubMessage(error);
+        this.hubService.addHubClientErrorMessage(error, 'Error saving');
         this.currentForm.markAsDirty();
       }
     } finally {

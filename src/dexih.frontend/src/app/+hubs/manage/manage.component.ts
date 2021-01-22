@@ -5,7 +5,7 @@ import { AuthService } from '../../+auth/auth.service';
 import { Subscription, combineLatest} from 'rxjs';
 import { Location } from '@angular/common';
 import { FormsService } from '../../shared/forms/forms.service';
-import { User, UserLoginInfo } from '../../+auth/auth.models';
+import { Message, User, UserLoginInfo } from '../../+auth/auth.models';
 import { DexihMessageComponent } from '../../shared/ui/dexihMessage';
 import { eLoginProvider } from '../../shared/shared.models';
 
@@ -165,7 +165,7 @@ export class ManageComponent implements OnInit, OnDestroy {
       this.updateLogins();
     }).catch( reason => {
       if (reason) {
-        this.dexihMessage.addErrorMessage(reason);
+        this.dexihMessage.addMessage(new Message(false,  reason, null, null));
       }
     });
   }

@@ -34,7 +34,7 @@ export class NotificationViewComponent implements OnInit, OnDestroy {
 
         try {
             this._subscription = combineLatest(
-                this.route.params,
+                [this.route.params]
             ).subscribe(result => {
                 let params = result[0];
 
