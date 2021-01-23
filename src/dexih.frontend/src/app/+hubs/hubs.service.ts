@@ -41,8 +41,12 @@ export class HubsService implements OnDestroy {
     }
 
     addHubClientErrorMessage(error: Error, context: string) {
+        let errorStack = '';
+        if (typeof error?.message === 'object' && error?.message !== null) {
+            errorStack = 'error object details: ' + JSON.stringify(error.message) + '/n';
+        }
         let message = context + '.  The following error occurred on the client: ' + error.message;
-        let newMessage = new Message(false, message, error.stack, null);
+        let newMessage = new Message(false, message, errorStack + error.stack, null);
         this.addHubMessage(newMessage);
     }
 
