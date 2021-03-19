@@ -572,6 +572,9 @@ namespace dexih.api.Controllers
 
                 txtItems.Add(pair);
                 txtItemsJson = JsonExtensions.Serialize(txtItems);
+                
+                _logger.LogTrace($"Updating txt records: ${txtItemsJson}");
+
                 var txtItemsByte = Encoding.ASCII.GetBytes(txtItemsJson);
                 var options = new DistributedCacheEntryOptions() {SlidingExpiration = TimeSpan.FromSeconds(60)};
                 await _distributedCache.SetAsync("txtRecords", txtItemsByte, options, cancellationToken);
@@ -674,6 +677,9 @@ namespace dexih.api.Controllers
 
             txtItems.Add(new KeyValuePair<string, string>("test" + txtItems.Count, "sample value"));
             txtItemsJson = txtItems.Serialize();
+            
+            _logger.LogTrace($"Updating txt records: ${txtItemsJson}");
+            
             var txtItemsByte = Encoding.ASCII.GetBytes(txtItemsJson);
             var options = new DistributedCacheEntryOptions() {SlidingExpiration = TimeSpan.FromSeconds(60)};
             await _distributedCache.SetAsync("txtRecords", txtItemsByte, options, cancellationToken);
@@ -691,6 +697,9 @@ namespace dexih.api.Controllers
         public async Task<IActionResult> GetTxtRecords(CancellationToken cancellationToken)
         {
             var txtItemsJson = await _distributedCache.GetStringAsync("txtRecords", token: cancellationToken);
+            
+            _logger.LogTrace($"Getting txt records: ${txtItemsJson}");
+            
             if (txtItemsJson == null)
             {
                 return Content("[]");
