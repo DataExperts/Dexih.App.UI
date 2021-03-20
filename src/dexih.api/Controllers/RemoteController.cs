@@ -550,13 +550,7 @@ namespace dexih.api.Controllers
                 _logger.LogDebug($"Placing order for new certificate on domain *.{domain}.");
                 // place order for new certificate
                 var order = await acme.NewOrder(new[] {$"*.{domain}"});
-            
-                // generate the dns challenge
-                var authz = (await order.Authorizations()).First();
-                var dnsChallenge = await authz.Dns();
-                var dnxText = acme.AccountKey.DnsTxt(dnsChallenge.Token);
-                var pair = new KeyValuePair<string, string>(txtName, dnxText);
-                
+
                 // update the distributed cache with the new record.
                 var txtItemsJson = await _distributedCache.GetStringAsync("txtRecords", token: cancellationToken);
                 List<KeyValuePair<string, string>> txtItems;
@@ -569,8 +563,17 @@ namespace dexih.api.Controllers
                 {
                     txtItems = JsonExtensions.Deserialize<List<KeyValuePair<string, string>>>(txtItemsJson);
                 }
+                
+                // generate the dns challenge
+                foreach (var authz in await order.Authorizations())
+                {
+                    var dnsChallenge = await authz.Dns();
+                    var dnxText = acme.AccountKey.DnsTxt(dnsChallenge.Token);
+                    var pair = new KeyValuePair<string, string>(txtName, dnxText);
 
-                txtItems.Add(pair);
+                    txtItems.Add(pair);
+                }
+
                 txtItemsJson = JsonExtensions.Serialize(txtItems);
                 
                 _logger.LogTrace($"Updating txt records: ${txtItemsJson}");
@@ -581,45 +584,51 @@ namespace dexih.api.Controllers
 
                 try
                 {
-                    // validate certificate
-                    var challenge = await dnsChallenge.Validate();
-
-                    if (challenge.Error != null)
+                    foreach (var authz in await order.Authorizations())
                     {
-                        var message = $"Error running letsEncrypt challenge.  {challenge.Error.Detail}";
-                        _errorLogger.LogEvent(message);
-                        throw new RemoteAgentException(message);
-                    }
+                        var dnsChallenge = await authz.Dns();
+                        
+                        // validate certificate
+                        var challenge = await dnsChallenge.Validate();
 
-                    while (true)
-                    {
-                        await Task.Delay(100, cancellationToken);
-                        var a = await authz.Resource();
-                        if (AuthorizationStatus.Invalid == a.Status)
+                        if (challenge.Error != null)
                         {
-                            if (a.Challenges != null)
+                            var message = $"Error running letsEncrypt challenge.  {challenge.Error.Detail}";
+                            _errorLogger.LogEvent(message);
+                            throw new RemoteAgentException(message);
+                        }
+
+                        while (true)
+                        {
+                            await Task.Delay(100, cancellationToken);
+                            var a = await authz.Resource();
+                            if (AuthorizationStatus.Invalid == a.Status)
                             {
-                                foreach (var c in a.Challenges)
+                                if (a.Challenges != null)
+                                {
+                                    foreach (var c in a.Challenges)
+                                    {
+                                        var message =
+                                            $"Error running letsEncrypt challenge.  The authorization status is invalid.  Details:{c.Error?.Detail ?? "none"}";
+                                        _errorLogger.LogEvent(message);
+                                        throw new RemoteAgentException(message);
+                                    }
+                                }
+                                else
                                 {
                                     var message =
-                                        $"Error running letsEncrypt challenge.  The authorization status is invalid.  Details:{c.Error?.Detail ?? "none"}";
+                                        $"Error running letsEncrypt challenge.  Details:{challenge.Error?.Detail ?? "none"}";
                                     _errorLogger.LogEvent(message);
                                     throw new RemoteAgentException(message);
                                 }
                             }
-                            else
+
+                            var status = a.Status ?? AuthorizationStatus.Pending;
+
+                            if (status == AuthorizationStatus.Valid)
                             {
-                                var message = $"Error running letsEncrypt challenge.  Details:{challenge.Error?.Detail??"none"}";
-                                _errorLogger.LogEvent(message);
-                                throw new RemoteAgentException(message);
+                                break;
                             }
-                        }
-
-                        var status = a.Status ?? AuthorizationStatus.Pending;
-
-                        if (status == AuthorizationStatus.Valid)
-                        {
-                            break;
                         }
                     }
                 } finally
