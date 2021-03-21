@@ -60,7 +60,7 @@ namespace dexih.api.Services.BrowserConnections
             }
         }
         
-        public async Task UpdateHubClients(long hubKey, HashSet<string> userIds, CancellationToken cancellationToken)
+        public Task UpdateHubClients(long hubKey, HashSet<string> userIds, CancellationToken cancellationToken)
         {
             var groupName = hubKey.ToString();
 
@@ -84,6 +84,8 @@ namespace dexih.api.Services.BrowserConnections
                     }
                 }
             });
+
+            return Task.CompletedTask;
         }
     }
 }

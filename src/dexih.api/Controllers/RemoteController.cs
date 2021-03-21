@@ -107,9 +107,7 @@ namespace dexih.api.Controllers
         
         private T GetHeaderValueAs<T>(string headerName)
         {
-            StringValues values;
-
-            if (_httpContextAccessor.HttpContext?.Request?.Headers?.TryGetValue(headerName, out values) ?? false)
+            if (!(_httpContextAccessor.HttpContext?.Request?.Headers is null) && _httpContextAccessor.HttpContext.Request.Headers.TryGetValue(headerName, out var values))
             {
                 var rawValues = values.ToString();   // writes out as Csv when there are multiple.
 
@@ -696,14 +694,13 @@ namespace dexih.api.Controllers
             return Content(txtItems.Count.ToString());
         }
 
-
         /// <summary>
         /// Provides a list of Txt values that the Dexih.Dns can provide to validate the domain ownership.
         /// </summary>
         /// <returns></returns>
         [HttpGet("[action]")]
         [AllowAnonymous]
-        public async Task<IActionResult> GetTxtRecords(CancellationToken cancellationToken)
+        public async Task<IActionResult> GetTxtRecords(CancellationToken cancellationToken = default)
         {
             var txtItemsJson = await _distributedCache.GetStringAsync("txtRecords", token: cancellationToken);
             

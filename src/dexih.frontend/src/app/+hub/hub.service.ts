@@ -504,13 +504,7 @@ export class HubService implements OnInit, OnDestroy {
                         // this.resetRemoteAgent(this._hubCache.value);
                     }
                     break;
-                // case 'remoteAgent-update':
-                // case 'remoteAgent-delete':
-                // case 'remoteAgent-deleteKey':
-                // case 'disconnect': {
-                //     this.resetRemoteAgent(this._hubCache.value);
-                //     break;
-                // }
+
                 case eClientCommand.HubChange: {
                     let hubChange: Import = data.value;
                     this.updateHubChange(hubChange);

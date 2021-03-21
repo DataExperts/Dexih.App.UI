@@ -80,7 +80,7 @@ namespace dexih.api
 					break;
 			    case "mysql":
 			        services.AddDbContext<DexihRepositoryContext>(options =>
-			            options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+			            options.UseMySql(Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 0, 21))));
 			        break;
 				case "sqlserver":
 					services.AddDbContext<DexihRepositoryContext>(options =>
