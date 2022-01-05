@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <UserSecretsId>dexih.api.tests.44fc05ee-e883-4070-8840-c1d8b479a4fe</UserSecretsId>
     <LangVersion>default</LangVersion>

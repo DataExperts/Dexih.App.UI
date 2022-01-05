@@ -22,7 +22,7 @@ namespace dexih.api.Services.BrowserConnections
             _backgroundTaskQueue = backgroundTaskQueue;
         }
         
-        private readonly ILogger _logger;
+        // private readonly ILogger _logger;
 
         private readonly IBackgroundTaskQueue _backgroundTaskQueue;
         

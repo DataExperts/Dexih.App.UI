@@ -997,7 +997,8 @@ namespace dexih.api.Services.Remote
         {
             try
             {
-                _remoteLogger.LogTrace(LoggingEvents.DownloadFiles, "DownloadFiles - Id: {Id}, HubKey: {hubKey}, TableKey: {tableKey}.", id, hubKey);
+                _remoteLogger.LogTrace(LoggingEvents.DownloadFiles, 
+	                "DownloadFiles - Id: {Id}, HubKey: {hubKey}, TableKey: {tableKey}.", id, hubKey, tableKey);
 
                 var hub = await database.GetHub(hubKey, cancellationToken);
 

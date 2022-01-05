@@ -2,6 +2,7 @@
 using System.IO.Compression;
 using System.Reflection;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using dexih.api.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -161,7 +162,7 @@ namespace dexih.api
 	            {
 		            options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
 //		            options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
-		            options.JsonSerializerOptions.IgnoreNullValues = true;
+		            options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
 		            options.JsonSerializerOptions.Converters.Add(new JsonObjectConverter());
 		            options.JsonSerializerOptions.Converters.Add(new JsonTimeSpanConverter());
 		            options.JsonSerializerOptions.Converters.Add(new JsonDateTimeConverter());
