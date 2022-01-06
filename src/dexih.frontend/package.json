@@ -30,16 +30,15 @@
     "@angular/router": "^13.1.1",
     "@microsoft/signalr": "^6.0.1",
     "angular-gridster2": "^13.1.0",
-    "chart.js": "^3.7.0",
-    "chartjs-plugin-datalabels": "^2.0.0",
+    "chart.js": "^2.9.3",
+    "chartjs-plugin-datalabels": "^1.0.0",
     "file-saver": "^2.0.5",
     "html2canvas": "^1.4.0",
     "msal": "^1.4.15",
-    "ng2-charts": "^3.0.5",
-    "ngx-d-components": "^0.5.218",
-    "ngx-d-markdown": "^0.0.16",
-    "ngx-d-table": "^0.6.37",
-    "rxjs": "^7.5.1",
+    "ng2-charts": "^2.0.0",
+    "ngx-d-components": "^0.6.231",
+    "ngx-d-markdown": "^0.1.27",
+    "ngx-d-table": "^0.7.42",
     "tslib": "^2.3.1",
     "zone.js": "^0.11.4"
   },
@@ -75,6 +74,6 @@
     "protractor": "7.0.0",
     "script-loader": "^0.7.2",
     "ts-node": "^10.4.0",
-    "typescript": ">=4.4.2 <4.6"
+    "typescript": "^4.5"
   }
 }

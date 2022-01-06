@@ -4,6 +4,7 @@ import { colorSets } from '../chart-colors';
 import * as html2canvas from 'html2canvas';
 import { Subject } from 'rxjs';
 import { ChartConfig, eChartType, eLineCurveItems } from '../../../shared.models';
+import * as saveAs from 'file-saver';
 
 @Component({
     selector: 'chart-builder',

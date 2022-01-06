@@ -5,7 +5,7 @@
     <AssemblyName>dexih.api</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>dexih.api</PackageId>
-    <UserSecretsId>aspnet-dexih.api-20161103030146</UserSecretsId>
+    <UserSecretsId>dexih.api</UserSecretsId>
     <VersionPrefix>1.0-rc.0</VersionPrefix>
     <VersionSuffix>00001</VersionSuffix>
     <AssemblyVersion>0.0.1.1</AssemblyVersion>

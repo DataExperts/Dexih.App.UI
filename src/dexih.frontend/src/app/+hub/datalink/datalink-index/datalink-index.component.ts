@@ -80,10 +80,10 @@ export class DatalinkIndexComponent implements OnInit, OnDestroy {
                 this._tableData.next(new Array<DexihDatalink>());
             } else {
 
-                if (this.typeFilter === 0 || !this.typeFilter) {
-                    newDatalinks = this.hubCache.hub.dexihDatalinks;
-                } else {
+                if (Object.values(eDatalinkType).includes(this.typeFilter)) {
                     newDatalinks = this.hubCache.hub.dexihDatalinks.filter(d => d.datalinkType === this.typeFilter);
+                } else {
+                    newDatalinks = this.hubCache.hub.dexihDatalinks;
                 }
 
                 let datalinkData = new Array<any>();

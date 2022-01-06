@@ -97,11 +97,11 @@ export class ConnectionIndexComponent implements OnInit, OnDestroy {
     async updateConnections() {
         if (this.hubCache && this.hubCache.isLoaded()) {
             let connections: Array<DexihConnection>;
-            if (this.purposeFilter === 0 || !this.purposeFilter) {
-                connections = this.hubCache.hub.dexihConnections;
-            } else {
+            if (Object.values(eConnectionPurpose).includes(this.purposeFilter)) {
                 connections = this.hubCache.hub.dexihConnections
-                    .filter(c => c.purpose === this.purposeFilter);
+                .filter(c => c.purpose === this.purposeFilter);
+            } else {
+                connections = this.hubCache.hub.dexihConnections;
             }
 
             let tableData = []
